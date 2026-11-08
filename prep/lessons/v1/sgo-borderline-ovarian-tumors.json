@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "sgo-borderline-ovarian-tumors",
+ "title": "Borderline Ovarian Tumors (LMP) & Fertility Preservation: Histology, Peritoneal Implants and Fertility Surgery",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 15",
+  "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 11",
+  "ESGO Consensus Guidelines on Borderline Ovarian Tumors"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Borderline ovarian tumors, also termed tumors of low malignant potential, represent distinct epithelial neoplasms characterized by cellular proliferation without destructive stromal invasion.",
+   "tx": "Borderline ovarian tumors (**BOT / LMP**) are defined histopathologically by epithelial stratification, nuclear atypia, and mitotic activity with an unequivocal **absence of destructive stromal invasion**. They account for **15-20% of ovarian epithelial tumors**, presenting at a significantly younger reproductive age than invasive carcinomas.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-benign-ovarian-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Adnexal torsion: twisted ovary and fallopian tube on vascular pedicle. Credit: StewardMD.",
+    "alt": "Illustration of pelvic adnexa with cystic borderline architectural features."
+   }
+  },
+  {
+   "say": "Borderline ovarian tumors divide into two predominant histopathological types with divergent genetic pathways, clinical patterns, and recurrence risks.",
+   "tx": "**Serous borderline tumors (SBT)** frequently present bilaterally (in 25-30% of cases) and are driven by activating **KRAS or BRAF mutations**. Conversely, **mucinous borderline tumors (MBT)** are typically massive, strictly **unilateral MBT (>95%)**, and follow an intestinal-type or endocervical-like histological differentiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Serous Borderline Tumor (SBT)",
+     "Mucinous Borderline Tumor (MBT)"
+    ],
+    "rows": [
+     [
+      "Laterality",
+      "Bilateral in 25% to 30% of cases",
+      "Unilateral in > 95% of cases"
+     ],
+     [
+      "Molecular Driver",
+      "Activating mutations in KRAS or BRAF (V600E)",
+      "KRAS codon 12 mutations predominant"
+     ],
+     [
+      "Peritoneal Implants",
+      "Present in up to 35% (non-invasive or invasive)",
+      "Extremely rare; suspect appendiceal primary if present"
+     ],
+     [
+      "CA-125 & CEA",
+      "CA-125 frequently elevated",
+      "CEA and CA 19-9 elevated; CA-125 normal"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The nature of extra-ovarian peritoneal implants represents the single most important determinant of prognosis in advanced-stage serous borderline tumors.",
+   "tx": "Extra-ovarian peritoneal lesions in serous BOT are strictly categorized into **non-invasive implants** (epithelial cells resting on mesothelium without stromal invasion; excellent prognosis with **overall survival >95%**) and **invasive implants**, which demonstrate destructive stromal infiltration, poorer disease-free survival, and are now classified as low-grade serous carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Invasive Implants (True BOT)",
+     "points": [
+      "Desmoplastic or epithelial clusters lying on peritoneal surfaces",
+      "No destructive infiltration of underlying fat or subperitoneal stroma",
+      "10-year overall survival exceeds 95% to 98%"
+     ]
+    },
+    "right": {
+     "title": "Invasive Implants (Low-Grade Serous Carcinoma)",
+     "points": [
+      "Haphazard infiltrating micropapillary clusters or single cells",
+      "Clear destructive penetration into underlying stroma",
+      "Associated with progressive disease and late mortality"
+     ]
+    }
+   }
+  },
+  {
+   "say": "In reproductive-aged women who strongly desire future childbearing, conservative fertility-sparing surgery represents the standard of care for borderline ovarian tumors.",
+   "tx": "For reproductive-aged patients, conservative surgical management entails **fertility-sparing unilateral salpingo-oophorectomy** (**USO**) or ovarian cystectomy. While cystectomy carries a higher local **recurrence in remaining ovary (10-15%)**, repeat salvage surgery is uniformly successful, preserving childbearing with no adverse impact on overall survival.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diagnose borderline ovarian tumor in reproductive-aged woman"
+     },
+     {
+      "id": "b",
+      "label": "Perform unilateral salpingo-oophorectomy (preferred) or careful cystectomy"
+     },
+     {
+      "id": "c",
+      "label": "Achieve complete staging without injuring contralateral healthy ovary"
+     },
+     {
+      "id": "d",
+      "label": "Monitor with serial pelvic ultrasound; treat isolated ovarian recurrences conservatively"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Complete surgical staging is recommended for borderline tumors to accurately detect occult peritoneal implants and establish definitive prognosis.",
+   "tx": "Comprehensive surgical staging includes peritoneal washings, multiple peritoneal biopsies, infracolic omentectomy, and resection of macroscopic lesions. Systematic **omission of routine lymphadenectomy** is supported by extensive evidence, as nodal involvement occurs in <5% and lymphadenectomy **does not improve survival**. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Essential Staging Steps",
+     "points": [
+      "Peritoneal cytology via aspirate or washings",
+      "Infracolic omentectomy and multiple peritoneal biopsies",
+      "Complete surgical resection of all visible peritoneal implants"
+     ]
+    },
+    "right": {
+     "title": "Omitted Surgical Steps",
+     "points": [
+      "Routine pelvic and para-aortic lymphadenectomy is omitted",
+      "No routine biopsy of normal-appearing contralateral ovary",
+      "No bowel resection unless required for mechanical obstruction"
+     ]
+    }
+   }
+  },
+  {
+   "say": "In patients presenting with mucinous ovarian borderline tumors, careful inspection of the appendix is mandatory to exclude a gastrointestinal primary.",
+   "tx": "Routine **appendectomy in mucinous BOT** is mandatory whenever bilateral ovarian involvement, pseudomyxoma peritonei, or right-sided mucinous lesions are encountered. This step is essential to **exclude appendiceal primary** adenocarcinoma with secondary ovarian metastasis, which frequently mimics primary ovarian mucinous neoplasia. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Encounter large mucinous ovarian neoplasm at laparotomy or laparoscopy"
+     },
+     {
+      "id": "b",
+      "label": "Inspect entire gastrointestinal tract, especially ileocecal valve and appendix"
+     },
+     {
+      "id": "c",
+      "label": "Perform concurrent appendectomy and send for frozen section"
+     },
+     {
+      "id": "d",
+      "label": "Differentiate primary ovarian MBT from metastatic appendiceal adenocarcinoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Conventional cytotoxic chemotherapy is ineffective against borderline ovarian tumors and should not be administered even in advanced-stage disease.",
+   "tx": "Because borderline tumor cells display low mitotic activity, there is a clear **lack of benefit from cytotoxic chemo**. Prospective trials demonstrate that conventional platinum-based chemotherapy confers **no survival advantage** even in Stage II-III disease with non-invasive implants, while subjecting patients to unnecessary toxicities.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chemotherapy Inefficacy",
+     "points": [
+      "Borderline tumor cells are slow-growing with low proliferative index",
+      "Resistance to cell-cycle-specific cytotoxic agents",
+      "Zero documented overall survival benefit in randomized cohorts"
+     ]
+    },
+    "right": {
+     "title": "Recommended Management Strategy",
+     "points": [
+      "Maximal complete surgical cytoreduction of implants",
+      "Watchful observation with serial CA-125 and pelvic ultrasound",
+      "Secondary cytoreductive surgery for macroscopic recurrences"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Micropapillary serous borderline tumors represent an aggressive histological variant that bridges borderline disease with low-grade serous carcinoma.",
+   "tx": "The **micropapillary serous borderline (SBT-MP)** variant is characterized by filiform micropapillae lacking fibrovascular cores (>=5 mm continuous length). It carries a significantly **increased invasive recurrence** risk and **progression to low-grade serous carcinoma (LGSC)**, requiring vigilant long-term surveillance. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ovarian-cancer-staging-and-cytoreduction-fig1.webp",
+    "ar": 1.3333,
+    "caption": "Ovarian stages with cytoreduction framing relapse therapy. Credit: StewardMD.",
+    "alt": "Illustration of peritoneal staging and cytoreductive planes in ovarian oncology."
+   }
+  }
+ ]
+}

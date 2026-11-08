@@ -1,0 +1,277 @@
+{
+  "v": 1,
+  "module": "sgo-first-line-chemo-parp",
+  "title": "Frontline Chemotherapy, Bevacizumab & PARP Inhibitor Maintenance",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 13 (Chemotherapy)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 85 (Ovarian Cancer)",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Intravenous carboplatin and paclitaxel administered every three weeks represents the international cornerstone frontline chemotherapy regimen for advanced epithelial ovarian cancer. Paclitaxel is delivered at one hundred and seventy-five milligrams per meter squared alongside carboplatin AUC five to six.",
+      "tx": "The frontline standard regimen for advanced epithelial ovarian carcinoma is intravenous **carboplatin** (AUC 5 to 6) plus **paclitaxel** (175 mg/m2 infused over 3 hours) administered every 21 days for 6 cycles, producing initial clinical response rates exceeding 80% in high-grade serous tumors.  Evidence-based practice integrates carboplatin AUC 5-6, 6 cycles q3w, first-line standard.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "premed",
+            "label": "Administer premedication with dexamethasone and H2 blockers"
+          },
+          {
+            "id": "pacli",
+            "label": "Infuse paclitaxel 175 mg/m2 IV over 3 hours"
+          },
+          {
+            "id": "carbo",
+            "label": "Infuse carboplatin AUC 5 to 6 IV over 30 to 60 minutes"
+          },
+          {
+            "id": "cycle",
+            "label": "Repeat cycle every 21 days for a total of 6 cycles"
+          }
+        ],
+        "edges": [
+          [
+            "premed",
+            "pacli"
+          ],
+          [
+            "pacli",
+            "carbo"
+          ],
+          [
+            "carbo",
+            "cycle"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dose-dense weekly paclitaxel scheduling was evaluated across major prospective international clinical trials. While the Japanese JGOG-3016 study demonstrated remarkable progression-free and overall survival advantages, Western phase three trials failed to replicate these benefits.",
+      "tx": "**Dose-dense paclitaxel** (80 mg/m2 weekly) with 3-weekly carboplatin yielded dramatic progression-free and overall survival advantages in the Japanese JGOG-3016 trial, but subsequent large Western phase III trials (GOG-262 and ICON8) failed to confirm a survival benefit in Caucasian populations.  Evidence-based practice integrates GOG-218, ICON7, bevacizumab maintenance, anti-VEGF, high-risk survival benefit. Key numerical parameters include 218, 15, 7.5, 12.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "JGOG-3016 Trial (Japan)",
+          "points": [
+            "Weekly paclitaxel 80 mg/m2 + q3w carboplatin",
+            "Median PFS 28 vs 17 months (statistically significant)",
+            "Median overall survival 100 vs 62 months"
+          ]
+        },
+        "right": {
+          "title": "GOG-262 & ICON8 (Western)",
+          "points": [
+            "Did not demonstrate overall survival superiority",
+            "Higher incidence of severe sensory neuropathy and anemia",
+            "Every-3-week paclitaxel remains preferred global standard"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Integrating bevacizumab concurrently with frontline carboplatin and paclitaxel, followed by single-agent maintenance, improves progression-free survival in advanced ovarian cancer. In high-risk stage four and suboptimally debulked patients, bevacizumab delivers a significant overall survival benefit.",
+      "tx": "The randomized **GOG-0218** and **ICON7 trials** demonstrated that adding **bevacizumab** (15 mg/kg or 7.5 mg/kg) to frontline carboplatin-paclitaxel followed by bevacizumab maintenance significantly prolongs progression-free survival, with overall survival benefits concentrated in high-risk stage IV and suboptimally debulked disease.  Evidence-based practice integrates SOLO-1 trial, olaparib maintenance, BRCA1/2 mutated, median PFS 56.0 vs 13.8 mo, HR 0.33. Key numerical parameters include 300, 56.0, 13.8, 0.33, 67.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial Identifier",
+          "Bevacizumab Dose",
+          "Duration of Maintenance",
+          "Key Survival Outcomes"
+        ],
+        "rows": [
+          [
+            "GOG-0218",
+            "15 mg/kg q3w cycles 2-22",
+            "15 months maintenance",
+            "PFS lengthened from 10.3 to 14.1 months"
+          ],
+          [
+            "ICON7",
+            "7.5 mg/kg q3w cycles 2-18",
+            "12 months maintenance",
+            "Overall survival gain in poor-prognosis cohort"
+          ],
+          [
+            "Key toxicities",
+            "Hypertension, proteinuria, bleeding",
+            "Routine urinalysis/BP monitoring",
+            "Gastrointestinal perforation risk 1% to 2%"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark SOLO-1 trial demonstrated unprecedented progression-free survival advantages with maintenance olaparib in patients harboring germline or somatic BRCA mutations. Olaparib reduced the risk of disease progression or death by seventy percent, maintaining benefits beyond seven years.",
+      "tx": "The landmark **SOLO-1 trial** demonstrated that 2 years of maintenance **olaparib** monotherapy following platinum response reduces recurrence or death risk by 70% (HR 0.30) in patients with **BRCA1/2 mutations**, with durable progression-free survival benefits persisting at 7-year long-term follow-up.  Evidence-based practice integrates PRIMA trial, niraparib maintenance, individualized dosing, HRD positive PFS HR 0.43. Key numerical parameters include 200, 77, 150, 21.9, 10.4, 0.43.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Olaparib Maintenance (SOLO-1)",
+          "points": [
+            "300 mg orally twice daily for 2 years",
+            "Median PFS 56 months vs 13.8 months with placebo",
+            "Over 67% free from progression at 5 years"
+          ]
+        },
+        "right": {
+          "title": "Placebo Arm",
+          "points": [
+            "Median PFS 13.8 months after response to chemotherapy",
+            "High rate of early relapse within 24 months",
+            "Establishes frontline PARP maintenance as mandatory"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The PRIMA trial evaluated niraparib maintenance therapy in patients with newly diagnosed advanced ovarian cancer who responded to frontline platinum chemotherapy. Niraparib significantly extended progression-free survival across the overall study population, with the greatest benefit in homologous recombination deficient tumors.",
+      "tx": "The phase III **PRIMA trial** established **niraparib maintenance** for advanced ovarian cancer irrespective of BRCA status, showing significant PFS improvement. The greatest magnitude of benefit occurred in **homologous recombination deficiency** (HRD-positive) tumors (median PFS 21.9 vs 10.4 months; HR 0.43).  Evidence-based practice integrates PAOLA-1 trial, olaparib plus bevacizumab, HRD positive synergy, median OS 75.2 months. Key numerical parameters include 75.2, 57.3, 0.60.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resp",
+            "label": "Document clinical response to frontline platinum-taxane"
+          },
+          {
+            "id": "hrd",
+            "label": "Assess tumor for homologous recombination deficiency (HRD)"
+          },
+          {
+            "id": "nira",
+            "label": "Initiate niraparib individualised starting dose once daily"
+          },
+          {
+            "id": "maint",
+            "label": "Maintain daily oral therapy for up to 36 months"
+          }
+        ],
+        "edges": [
+          [
+            "resp",
+            "hrd"
+          ],
+          [
+            "hrd",
+            "nira"
+          ],
+          [
+            "nira",
+            "maint"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The PAOLA-1 trial investigated combination maintenance with olaparib and bevacizumab in advanced ovarian cancer. In homologous recombination deficient tumors, including both BRCA-mutated and BRCA wild-type neoplasms, dual targeted maintenance yielded extraordinary progression-free and overall survival gains.",
+      "tx": "The **PAOLA-1 trial** proved that combining **olaparib and bevacizumab** maintenance produces remarkable PFS (37.2 vs 17.7 months) and significant overall survival prolongation exclusively in **HRD-positive tumors** (including BRCA-wild-type HRD-positive tumors), whereas HRD-negative tumors derived zero additive benefit.  Evidence-based practice integrates Calvert formula, Dose = Target AUC x (GFR + 25), GFR capped at 125, max dose 750 mg. Key numerical parameters include 25, 125, 750.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Molecular Biomarker",
+          "Trial Maintenance Regimen",
+          "Progression-Free Survival",
+          "Overall Survival Impact"
+        ],
+        "rows": [
+          [
+            "BRCA-mutated HRD-positive",
+            "Olaparib + Bevacizumab",
+            "Median PFS 37.2 months",
+            "Substantial 5-year OS prolongation"
+          ],
+          [
+            "BRCA-wild-type HRD-positive",
+            "Olaparib + Bevacizumab",
+            "Median PFS 28.1 months",
+            "Clear survival benefit over bevacizumab alone"
+          ],
+          [
+            "HRD-negative / proficient",
+            "Olaparib + Bevacizumab",
+            "Median PFS 16.6 months",
+            "No benefit from adding olaparib to bevacizumab"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Homologous recombination deficiency testing evaluates loss of genomic integrity resulting from impaired double-strand DNA repair. Commercial assays combine BRCA mutation sequencing with genomic scar analysis, measuring loss of heterozygosity, telomeric allelic imbalance, and large-scale state transitions.",
+      "tx": "**Homologous recombination deficiency** (HRD) testing combines sequencing for BRCA1/BRCA2 mutations with measurement of **genomic instability scar scores** based on loss of heterozygosity (LOH), telomeric allelic imbalance (TAI), and large-scale state transitions (LST) with predefined positivity cutoffs.  Evidence-based practice integrates PARP inhibitor toxicity, MATE1/OCT2 creatinine rise, MDS/AML risk 1.5-2%. Key numerical parameters include 1.5.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Myriad myChoice CDx",
+          "points": [
+            "Evaluates genomic instability score (GIS)",
+            "Score threshold >=42 defines HRD-positive status",
+            "Includes tumor BRCA1 and BRCA2 mutation status"
+          ]
+        },
+        "right": {
+          "title": "FoundationOne CDx",
+          "points": [
+            "Quantifies genomic loss of heterozygosity (%LOH)",
+            "Threshold >=16% defines LOH-high status",
+            "Detects co-existing somatic tumor mutations"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Niraparib therapy requires an individualized starting dose based on baseline body weight and platelet count. Patients weighing under seventy-seven kilograms or with platelets below one hundred and fifty thousand receive two hundred milligrams daily to minimize severe thrombocytopenia.",
+      "tx": "To mitigate grade 3-4 **thrombocytopenia**, niraparib mandates an **individualised starting dose**: patients with baseline body weight <77 kg or platelet count <150,000/mcL receive 200 mg orally once daily, whereas patients >=77 kg with normal platelets receive the standard 300 mg daily dose.  Evidence-based practice integrates intraperitoneal chemotherapy, GOG-172, 16-month OS improvement, catheter complications. Key numerical parameters include 172, 16.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eval_pt",
+            "label": "Assess baseline body weight and pre-treatment platelet count"
+          },
+          {
+            "id": "check_criteria",
+            "label": "Check if weight <77 kg or platelets <150,000/mcL"
+          },
+          {
+            "id": "low_dose",
+            "label": "Start niraparib at 200 mg orally once daily"
+          },
+          {
+            "id": "std_dose",
+            "label": "Start niraparib at 300 mg orally once daily"
+          }
+        ],
+        "edges": [
+          [
+            "eval_pt",
+            "check_criteria"
+          ],
+          [
+            "check_criteria",
+            "low_dose"
+          ],
+          [
+            "check_criteria",
+            "std_dose"
+          ]
+        ]
+      }
+    }
+  ]
+}

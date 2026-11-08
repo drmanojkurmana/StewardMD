@@ -1,0 +1,260 @@
+{
+  "id": "srm-gonadotropins-cos-protocols",
+  "module": "srm-gonadotropins-cos-protocols",
+  "title": "Gonadotropin Stimulation Protocols in IVF",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner's Textbook of Assisted Reproductive Technologies 5e Ch 4",
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 32"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Modern ovarian stimulation relies on tailored gonadotropin preparations. Recombinant proteins offer pure single hormone activity without urinary metabolites. Purified extracts contain both active hormones.",
+      "tx": "Controlled ovarian stimulation utilizes **recombinant FSH** (follitropin alfa or beta) providing pure follicle-stimulating activity, or **hMG** supplying a balanced 1:1 ratio of FSH and **LH-like bioactivity** derived from the urinary hCG component in menotropin preparations. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recombinant FSH (rFSH)",
+          "points": [
+            "Expressed in CHO mammalian cells",
+            "Pure FSH without LH or hCG",
+            "High batch-to-batch consistency",
+            "Standard starting dose 150 to 225 IU"
+          ]
+        },
+        "right": {
+          "title": "Highly Purified hMG (HP-hMG)",
+          "points": [
+            "Extracted from postmenopausal urine",
+            "Balanced 75 IU FSH and 75 IU LH",
+            "LH activity driven by hCG content",
+            "Preferred in advanced age and hypo-responders"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Initial dosing algorithms prevent both hyperstimulation and poor yield. Starting doses reflect individual baseline biomarkers. Normal responders begin within a standardized window.",
+      "tx": "In the **GnRH antagonist protocol**, administration on fixed day 6 or flexible lead follicle >=14 mm reduces severe OHSS by >50 percent compared to agonist protocols. Effective **lead follicle 14 mm** tracking and **OHSS reduction** make antagonist cycles the standard of care.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infertility-evaluation-and-assisted-reproduction-fig1.webp",
+        "caption": "Controlled ovarian stimulation regimens and follicular monitoring pathways. Credit: StewardMD.",
+        "alt": "Controlled ovarian stimulation regimens and follicular monitoring pathways"
+      }
+    },
+    {
+      "say": "Suppression of endogenous pituitary surges is essential during multi follicular recruitment. Antagonist protocols block receptors instantaneously without any initial stimulation. Fixed and flexible timing schedules govern antagonist introduction.",
+      "tx": "To prevent premature LH surges, **Cetrorelix** or **Ganirelix** is administered at an **antagonist dose** of 0.25 mg daily subcutaneous. Competitive blockade of pituitary GnRH receptors provides immediate suppression without any initial flare, maintaining follicular coordination. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a1",
+            "label": "Start gonadotropins on cycle day 2 or 3"
+          },
+          {
+            "id": "a2",
+            "label": "Fixed: Day 6 antagonist OR Flexible: Lead follicle >=14 mm"
+          },
+          {
+            "id": "a3",
+            "label": "Daily antagonist 0.25 mg until trigger"
+          },
+          {
+            "id": "a4",
+            "label": "Final maturation trigger with agonist or hCG"
+          }
+        ],
+        "edges": [
+          [
+            "a1",
+            "a2",
+            "Follicular growth"
+          ],
+          [
+            "a2",
+            "a3",
+            "Surge prevention"
+          ],
+          [
+            "a3",
+            "a4",
+            "Follicles reach >=17 mm"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Classic agonist suppression takes advantage of complete receptor desensitization. Administration begins in the preceding luteal phase to avoid flare interference. Stimulation starts once deep down regulation is verified.",
+      "tx": "The classic **long agonist protocol** initiates **mid-luteal downregulation** on cycle day 21 for 10 to 14 days before starting exogenous gonadotropins. Verifying profound pituitary desensitization and complete **estradiol suppression** (<50 pg/mL) avoids premature surges during ovarian stimulation. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protocol Step",
+          "Cycle Day / Timing",
+          "Clinical Action",
+          "Target Milestone"
+        ],
+        "rows": [
+          [
+            "Agonist initiation",
+            "Day 21 preceding cycle",
+            "Leuprolide 0.5 to 1.0 mg SC",
+            "Prevent midcycle LH surge"
+          ],
+          [
+            "Down-regulation check",
+            "Day 2 to 3 next menses",
+            "Serum E2 and baseline TVUS",
+            "E2 <50 pg/mL, lining <5 mm"
+          ],
+          [
+            "Stimulation start",
+            "Following baseline clearance",
+            "Reduce agonist, add gonadotropins",
+            "Uniform cohort recruitment"
+          ],
+          [
+            "Oocyte trigger",
+            "3 follicles >=17 mm",
+            "hCG 250 mcg or 10,000 IU",
+            "Oocyte retrieval at 36 hours"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High responding patients require specialized surge prevention strategies. Antagonist protocols uniquely permit substituting the trigger agent. Displacing chorionic gonadotropin eliminates dangerous vascular permeability.",
+      "tx": "In high-risk antagonist cycles, substituting hCG with a **GnRH agonist trigger** (leuprolide 0.2 mg or triptorelin 0.2 mg) induces an endogenous **luteal surge** that results in complete **OHSS elimination**, making freeze-all management exceptionally safe for vulnerable patients. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recombinant hCG Trigger",
+          "points": [
+            "Half-life exceeds 24 to 36 hours",
+            "Sustained LHCGR stimulation",
+            "Drives massive ovarian VEGF release",
+            "High risk of severe early and late OHSS"
+          ]
+        },
+        "right": {
+          "title": "GnRH Agonist Trigger",
+          "points": [
+            "Induces endogenous LH surge (24 h)",
+            "Rapid clearance of LH action",
+            "Drastically curtails VEGF synthesis",
+            "Zero incidence of severe OHSS"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Patients with impaired ovarian reserve benefit from microdose flare approaches. Administering low dose agonist stimulates endogenous gonadotropin release. The added pituitary boost enhances small follicle rescue.",
+      "tx": "For expected poor responders and **low responders**, the **microdose flare** protocol utilizes an initial **endogenous flare** of pituitary FSH and LH on cycle days 2 to 4 to rescue growing cohorts before initiating high-dose exogenous gonadotropin therapy. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Oral contraceptive pill 14 to 21 days"
+          },
+          {
+            "id": "m2",
+            "label": "Discontinue OCP; start microdose leuprolide 40-50 mcg BD"
+          },
+          {
+            "id": "m3",
+            "label": "Endogenous flare release of pituitary FSH/LH"
+          },
+          {
+            "id": "m4",
+            "label": "Add exogenous gonadotropins 300 to 450 IU on Day 3"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2",
+            "Schedule synchronization"
+          ],
+          [
+            "m2",
+            "m3",
+            "Flare induction"
+          ],
+          [
+            "m3",
+            "m4",
+            "Synergistic recruitment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Elevations in late follicular progesterone impair uterine receptivity. Premature secretory transformation closes the implantation gate. Freezing the resulting blastocysts circumvents poor fresh transfer outcomes.",
+      "tx": "A final **hCG trigger** using recombinant hCG (250 mcg) or urinary hCG (5000 to 10000 IU) is timed when at least 2 to 3 follicles reach 17 to 18 mm in **follicle diameter**, driving final **oocyte maturation** and nuclear progression prior to retrieval.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-infertility-fig1.webp",
+        "caption": "Follicular cohort development and preovulatory ultrasound surveillance. Credit: StewardMD.",
+        "alt": "Follicular cohort development and preovulatory ultrasound surveillance"
+      }
+    },
+    {
+      "say": "Accurate timing of the final trigger ensures optimal oocyte maturity. Triggering is scheduled once follicles achieve preovulatory size. Oocyte aspiration follows at a precise interval.",
+      "tx": "Transvaginal ultrasound-guided **oocyte pickup** (OPU) is scheduled exactly 35 to **36 hours post-trigger**, performing transvaginal **follicular aspiration** immediately preceding natural follicular rupture to harvest mature metaphase II oocytes safely. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Transvaginal ultrasound: >=3 follicles >=17 mm"
+          },
+          {
+            "id": "t2",
+            "label": "Administer hCG or GnRH agonist trigger"
+          },
+          {
+            "id": "t3",
+            "label": "Laparoscopic or transvaginal OPU at 35 to 36 hours"
+          },
+          {
+            "id": "t4",
+            "label": "Identification of mature Metaphase II oocytes"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Criteria fulfilled"
+          ],
+          [
+            "t2",
+            "t3",
+            "34-36 hour maturation window"
+          ],
+          [
+            "t3",
+            "t4",
+            "Aspiration and denudation"
+          ]
+        ]
+      }
+    }
+  ],
+  "v": 1
+}

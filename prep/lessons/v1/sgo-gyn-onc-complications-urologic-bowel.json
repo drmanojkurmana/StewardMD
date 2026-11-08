@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgo-gyn-onc-complications-urologic-bowel",
+ "title": "Management of Surgical Complications: Ureteric Injury, Fistulae & Bowel Leak: Ureteric Repair, Martius Flap and Anastomotic Dehiscence",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 25",
+  "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 19",
+  "Rock JA, Jones HW. Te Linde's Operative Gynecology 12th Edition"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The ureter is vulnerable to iatrogenic transection, ligation, or thermal devascularization during radical pelvic gynecological oncology procedures.",
+   "tx": "The ureter is at hazard at four specific **ureteric injury sites**: crossing the iliac vessels beneath the **infundibulopelvic ligament**, within the ovarian fossa, during lateral **uterine artery crossing** in the cardinal tunnel, and at the **bladder trigone insertion** during radical bladder mobilization.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ana-female-reproductive-s3.webp",
+    "ar": 1.3333,
+    "caption": "Relation of the uterine artery to the ureter near the cervix and pelvic lymph nodes. Credit: StewardMD.",
+    "alt": "Anatomical drawing showing the ureter passing under the uterine artery water under the bridge near the supravaginal cervix."
+   }
+  },
+  {
+   "say": "When a ureteric injury occurs in the distal pelvic ureter close to the urinary bladder, ureteral reimplantation represents the treatment of choice.",
+   "tx": "For distal pelvic injuries (**distal third injury <4-5 cm** from the bladder), **ureteroneocystostomy** with anti-reflux submucosal tunnel is performed over a **double-J stent**, combined with a **psoas hitch** or **Boari flap** to eliminate all anastomotic tension. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Location of Ureteric Injury",
+     "Primary Surgical Technique",
+     "Adjunctive Tension-Relieving Maneuvers"
+    ],
+    "rows": [
+     [
+      "Distal Third (< 4-5 cm to bladder)",
+      "Ureteroneocystostomy (reimplantation)",
+      "Psoas bladder hitch or Boari tubularized flap"
+     ],
+     [
+      "Middle Third (pelvic brim to ischial spine)",
+      "Ureteroureterostomy (primary end-to-end)",
+      "Ureteral mobilization and spatulation"
+     ],
+     [
+      "Extensive Lower Half Loss",
+      "Boari bladder flap or transureteroureterostomy",
+      "Mobilization of contralateral normal ureter"
+     ],
+     [
+      "Complete Ureteral Loss",
+      "Ileal ureter substitution or autotransplantation",
+      "Nephrostomy drainage followed by delayed reconstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Primary end-to-end ureteral anastomosis is appropriate for mid-ureteric transections when adequate length permits a completely tension-free closure.",
+   "tx": "For clean **mid-ureteric transection**, end-to-end **ureteroureterostomy** is performed over a double-J stent using **spatulated tension-free** margins and interrupted **4-0/5-0 absorbable** monofilament sutures, preserving adventitial blood supply to prevent ischemic stricture formation. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify mid-ureteric transection and debride devascularized margins"
+     },
+     {
+      "id": "b",
+      "label": "Spatulate both ureteric ends 5 mm obliquely on opposite surfaces"
+     },
+     {
+      "id": "c",
+      "label": "Pass double-J ureteral stent across anastomosis into renal pelvis and bladder"
+     },
+     {
+      "id": "d",
+      "label": "Close with interrupted 4-0 or 5-0 PDS sutures in a watertight tension-free fashion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Vesicovaginal fistula following radical pelvic surgery or radiation therapy presents with pathognomonic symptoms and requires objective dye testing.",
+   "tx": "A **vesicovaginal fistula (VVF)** typically presents 7 to 14 days postoperatively with **continuous watery leakage** despite normal voiding. Clinical diagnosis is verified using the classic **double-dye test** with oral **methylene blue and phenazopyridine** to distinguish vesical from ureteric leakage. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Double-Dye Test Interpretation",
+     "points": [
+      "Oral phenazopyridine turns urine orange; intravesical methylene blue turns urine blue",
+      "Blue staining on vaginal swab confirms vesicovaginal fistula (bladder origin)",
+      "Orange staining on vaginal swab confirms ureterovaginal fistula (ureteric origin)"
+     ]
+    },
+    "right": {
+     "title": "Clinical Presentation Features",
+     "points": [
+      "Continuous, involuntary, painless watery vaginal fluid leakage",
+      "Patient may continue to void normal volumes intermittently",
+      "Onset typically delayed 7 to 14 days due to ischemic tissue necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Surgical repair of complex or post-radiation vesicovaginal fistulae requires complete excision of scarred tissue and interposition of healthy vascularized flaps.",
+   "tx": "Complex or **radiation fistula repair** mandates tension-free multilayer closure and interposition of a vascularized **Martius flap** (fibrofatty **bulbocavernosus fat pad**) or **omental interposition**, accompanied by continuous transurethral bladder decompression with **catheterization 14-21 days** postoperatively. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Excise dense fibrotic fistula tract completely back to soft pliable tissue edges"
+     },
+     {
+      "id": "b",
+      "label": "Mobilize bladder mucosa and muscularis separately from anterior vaginal wall"
+     },
+     {
+      "id": "c",
+      "label": "Harvest labial Martius bulbocavernosus fat pad flap on posterior vascular pedicle"
+     },
+     {
+      "id": "d",
+      "label": "Tunnel flap into vagina, interpose between suture lines, and maintain catheter for 14-21 days"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Gastrointestinal anastomotic dehiscence following bowel resection during cytoreduction is a life-threatening complication that requires early recognition.",
+   "tx": "Gastrointestinal **anastomotic leak** or unrecognized thermal perforation characteristically manifests between **postoperative days 4-7** with unexplained **tachycardia and acidosis**, oliguria, abdominal distension, **elevated CRP**, and feculent peritoneal drain output. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Indicator",
+     "Early Finding (POD 4 to 5)",
+     "Late / Decompensated Finding (POD 6+)"
+    ],
+    "rows": [
+     [
+      "Heart Rate & Hemodynamics",
+      "Persistent resting tachycardia (> 100-110 bpm)",
+      "Septic shock, profound hypotension, oliguria"
+     ],
+     [
+      "Inflammatory Biomarkers",
+      "CRP fail to normalize or rises > 150 mg/L",
+      "Severe leukocytosis (>20,000) or leukopenia (<4,000)"
+     ],
+     [
+      "Metabolic State",
+      "Unexplained metabolic acidosis, rising lactate",
+      "Multiorgan dysfunction, renal failure, coagulopathy"
+     ],
+     [
+      "Abdominal Drain Output",
+      "Cloudy serosanguinous or bile-tinged fluid",
+      "Frank feculent, purulent, or enteric contents"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Suspected anastomotic breakdown with peritonitis or clinical sepsis mandates immediate operative re-exploration and fecal diversion.",
+   "tx": "Septic anastomotic breakdown mandates urgent **exploratory laparotomy**, aggressive debridement, copious **peritoneal lavage**, and **exteriorization as stoma** (such as a **Hartmann procedure** for rectosigmoid disruption), strictly avoiding attempted primary re-anastomosis in a heavily contaminated peritoneal bed. Rapid source control and delayed reconstruction minimize overall septic mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mandatory Emergency Interventions",
+     "points": [
+      "Immediate aggressive fluid resuscitation and broad-spectrum IV antibiotics",
+      "Emergency exploratory laparotomy without delay",
+      "Exteriorization of compromised bowel segments with stoma creation"
+     ]
+    },
+    "right": {
+     "title": "Prohibited Surgical Practices",
+     "points": [
+      "Never attempt simple oversewing or primary re-anastomosis in sepsis",
+      "Never rely on conservative percutaneous drainage if peritonitis is present",
+      "Do not delay laparotomy for serial imaging in decompensating patients"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Rectovaginal fistulae following low anterior resection or pelvic exenteration require immediate diversion with delayed definitive anatomical reconstruction.",
+   "tx": "Development of a **rectovaginal fistula** requires immediate **proximal fecal diversion** via **loop colostomy** or loop ileostomy. Definitive tissue repair is deliberately postponed for a **delayed repair 3-6 months** to allow acute inflammation, pelvic edema, and radiation reaction to completely subside.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-gyn-procedures-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Ureter crossing beneath the uterine artery during hysterectomy. Illustration: StewardMD original.",
+    "alt": "Surgical dissection view showing mobilization of bladder flap and exposure of lower ureter."
+   }
+  }
+ ]
+}

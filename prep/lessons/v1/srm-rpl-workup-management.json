@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "srm-rpl-workup-management",
+  "title": "Recurrent Pregnancy Loss: Etiology, Investigations, and Management",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "ESHRE Guideline on Recurrent Pregnancy Loss 2023",
+    "Sydney Revised Antiphospholipid Syndrome Criteria",
+    "ASRM Practice Committee Opinion on RPL"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Recurrent pregnancy loss constitutes a deeply distressing clinical challenge in reproductive medicine. The European Society of Human Reproduction and Embryology defines recurrent pregnancy loss as the spontaneous loss of two or more pregnancies, removing the historic requirement for consecutive losses.",
+      "tx": "The modern **ESHRE definition** designates **recurrent pregnancy loss** as the spontaneous demise of **two or more losses** prior to viability. International consensus establishes that losses do not need to be consecutive, prompting comprehensive diagnostic evaluation after two pregnancy failures to identify treatable parental, anatomical, endocrine, or immunological factors.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/wh-miscarriage-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Early pregnancy failure patterns and clinical assessment in recurrent loss. Credit: StewardMD.",
+        "alt": "Ultrasound and clinical evaluation of early miscarriage and gestational sac."
+      }
+    },
+    {
+      "say": "Parental cytogenetic analysis forms an essential pillar of the initial investigation. Peripheral blood karyotyping detects balanced structural rearrangements in three to five percent of couples, guiding referrals for genetic counseling and preimplantation genetic testing.",
+      "tx": "Standard workup mandates **parental karyotyping** via peripheral blood lymphocytes, which identifies structural chromosomal anomalies in 3 to 5 percent of couples. Detection of a parental **balanced translocation** (such as reciprocal exchanges) or **Robertsonian translocation** creates high risks for unbalanced gametes, warranting preimplantation testing (PGT-SR) or donor gametes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Translocation Type",
+          "Chromosomal Mechanism",
+          "Reproductive Consequence"
+        ],
+        "rows": [
+          [
+            "Reciprocal Translocation",
+            "Exchange between non-homologous autosomes",
+            "Quadrivalent meiotic segregation yields duplications/deletions"
+          ],
+          [
+            "Robertsonian Translocation",
+            "Centromeric fusion of acrocentrics (13,14,15,21,22)",
+            "High risk of viable or lethal trisomies (e.g., trisomy 21)"
+          ],
+          [
+            "Inversion (Paracentric/Pericentric)",
+            "Intrachromosomal breakage and inverted reunion",
+            "Recombinant gametes with unbalanced terminal segments"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Antiphospholipid syndrome is the most treatable secondary etiology of recurrent pregnancy loss. Diagnostic criteria require demonstration of persistent lupus anticoagulant, high-titer anticardiolipin, or anti-beta-2-glycoprotein-1 antibodies documented at least 12 weeks apart.",
+      "tx": "Autoimmune **antiphospholipid syndrome** (APS) represents the premier treatable cause of pregnancy loss. Revised criteria mandate documented **lupus anticoagulant**, high-titer anticardiolipin IgG or IgM (> 40 GPL or MPL), or anti-beta-2-glycoprotein-1 antibodies, requiring laboratory confirmation on two distinct occasions at least **12 weeks apart** to confirm true persistence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiphospholipid-syndrome-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Clinical and laboratory criteria in antiphospholipid syndrome. Credit: StewardMD.",
+        "alt": "Diagnostic flowchart for antiphospholipid antibody screening and criteria."
+      }
+    },
+    {
+      "say": "Standard medical management for obstetric antiphospholipid syndrome combines low-dose aspirin with prophylactic low molecular weight heparin. Initiating therapy upon positive pregnancy testing substantially reduces decidual microvascular thrombosis and elevates live birth rates above seventy percent.",
+      "tx": "Validated protocols for **obstetric APS** combine daily **low-dose aspirin** (75 to 100 mg daily) with **prophylactic LMWH** (low molecular weight heparin, such as enoxaparin 40 mg daily). Therapy is initiated upon positive pregnancy confirmation and maintained throughout gestation, suppressing decidual complement activation and trophoblastic microvascular thrombosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm persistent antiphospholipid antibodies at least 12 weeks apart"
+          },
+          {
+            "id": "b",
+            "label": "Start low-dose aspirin 75 to 100 mg daily pre-conceptually or upon positive hCG"
+          },
+          {
+            "id": "c",
+            "label": "Add weight-adjusted prophylactic LMWH daily upon sonographic gestational confirmation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Uterine cavity malformations account for fifteen to twenty percent of recurrent pregnancy losses. A septate uterus is the commonest congenital anomaly, predisposing to early miscarriage and second-trimester loss due to the avascular nature of the fibrous midline septum.",
+      "tx": "Among Mullerian malformations, a **septate uterus** represents the single most prevalent **congenital anomaly** associated with recurrent pregnancy loss. Defective resorption of the midline partition leaves a relatively avascular **fibroelastic septum**; blastocyst implantation onto this poorly perfused collagenous spur precipitates early embryonic failure or mid-trimester spontaneous expulsion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Septate Uterus",
+          "points": [
+            "Convex or flat external uterine fundus (< 1 cm dip)",
+            "Avascular midline fibroelastic septum impairs decidualization",
+            "Amenable to outpatient hysteroscopic metroplasty"
+          ]
+        },
+        "right": {
+          "title": "Bicornuate Uterus",
+          "points": [
+            "Deep external fundal indentation exceeding 1 cm on 3D scan",
+            "Two distinct symmetrical muscular uterine horns",
+            "Surgical metroplasty reserved strictly for exceptional refractory loss"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Systemic endocrine disorders significantly elevate miscarriage risks if left unmanaged. Endocrine evaluation focuses on optimizing thyroid-stimulating hormone below 2.5 milli-international units per liter, checking anti-TPO antibodies, monitoring glycated hemoglobin, and assessing prolactin.",
+      "tx": "Comprehensive **endocrine screening** addresses systemic metabolic disarray predisposing to gestational loss. Essential investigations evaluate **anti-TPO antibodies**, diabetes control via HbA1c, and serum prolactin, while establishing an optimal **TSH target** < 2.5 mIU/L through preconception levothyroxine titration to avert subclinical hypothyroidism-induced loss.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocrine Parameter",
+          "Target Cut-off",
+          "Clinical Management Strategy"
+        ],
+        "rows": [
+          [
+            "Thyroid-stimulating hormone (TSH)",
+            "< 2.5 mIU/L",
+            "Initiate or adjust levothyroxine; recheck every 4 weeks in early pregnancy"
+          ],
+          [
+            "Thyroperoxidase antibodies (anti-TPO)",
+            "Negative titer",
+            "Marker of autoimmune thyroiditis; mandates close TSH surveillance"
+          ],
+          [
+            "Glycated hemoglobin (HbA1c)",
+            "< 6.5 percent",
+            "Strict glycemic control via diet, metformin, or preconception insulin"
+          ],
+          [
+            "Serum prolactin",
+            "Normal range",
+            "Treat hyperprolactinemia with dopamine agonists (cabergoline)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cytogenetic testing of products of conception reveals the definitive cause in over half of all miscarriages. Utilizing chromosomal microarray or next-generation sequencing overcomes cell culture failure and maternal cell contamination, identifying fatal embryonic aneuploidies.",
+      "tx": "Molecular analysis of **products of conception** (POC) utilizing **chromosomal microarray** or NGS reveals **embryonic aneuploidy** in >50% of sporadic and recurrent losses. Demonstrating a de novo lethal numeric aneuploidy reassures couples of normal baseline parental reproductive anatomy and guards against unnecessary, costly empirical therapies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Collect evacuated miscarriage tissue sterilely without formalin fixation"
+          },
+          {
+            "id": "b",
+            "label": "Execute chromosomal microarray or NGS to bypass tissue culture failure"
+          },
+          {
+            "id": "c",
+            "label": "Identify embryonic aneuploidy (>50%) to exclude maternal structural or immune causes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In nearly half of all recurrent pregnancy loss cases, detailed investigations yield completely normal results. In unexplained recurrent loss, compassionate supportive care in a specialized clinic delivers subsequent live birth rates of seventy to seventy-five percent without unproven empirical treatments.",
+      "tx": "When rigorous testing reveals normal anatomy, karyotypes, and thrombophilia panels, couples receive a diagnosis of **unexplained RPL**. Reassuringly, dedicated **supportive care** featuring frequent early ultrasound monitoring, emotional reassurance, and sympathetic counseling achieves a subsequent successful **live birth rate** of 70 to 75 percent without unproven empirical drugs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Evidence-Based Supportive Care",
+          "points": [
+            "Frequent early ultrasound monitoring every 1 to 2 weeks up to 12 weeks",
+            "Direct clinician access, empathetic reassurance, and sympathetic nursing",
+            "Subsequent successful live birth rate of 70 to 75 percent"
+          ]
+        },
+        "right": {
+          "title": "Unproven Empirical Therapies",
+          "points": [
+            "Intralipids, intravenous immunoglobulin (IVIG), and lymphocyte immunization",
+            "Empirical glucocorticoids or granulocyte colony-stimulating factor",
+            "Substantial financial toxicity and risk of adverse effects without proven benefit"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "sgo-gtn-figo-who-scoring",
+ "title": "Gestational Trophoblastic Neoplasia: FIGO/WHO Prognostic Scoring & Choriocarcinoma: Diagnosis, Risk Stratification and EMA-CO",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 22",
+  "FIGO Cancer Report 2021: Gestational Trophoblastic Disease",
+  "NCCN Clinical Practice Guidelines in Oncology: Gestational Trophoblastic Neoplasia (Version 1.2024)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The diagnosis of post-molar gestational trophoblastic neoplasia is established through strict biochemical criteria based on serial serum human chorionic gonadotropin measurements.",
+   "tx": "The **FIGO diagnostic criteria for GTN** establish malignancy following molar evacuation if: hCG levels demonstrate a **plateau across 4 values in 3 weeks** (Days 1, 7, 14, 21), a consecutive **rise across 3 values in 2 weeks** (Days 1, 7, 14), **histologic choriocarcinoma**, or **persistence >=6 months**.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-gtd-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Ultrasound showing a bubbly molar cavity without fetal parts plus swollen cystic ovaries, Illustration: StewardMD original.",
+    "alt": "Ultrasound scan illustrating snowstorm appearance of hydatidiform mole and theca lutein cysts."
+   }
+  },
+  {
+   "say": "Once a diagnosis of gestational trophoblastic neoplasia is established, every patient must be categorized using the modified FIGO WHO prognostic scoring system.",
+   "tx": "The **FIGO/WHO prognostic score** categorizes GTN into **low-risk 0-6** and **high-risk >=7** disease. The scoring algorithm sums points across **8 prognostic factors**: age, antecedent pregnancy, interval from index pregnancy, pre-treatment hCG, largest tumor size, site of metastases, number of metastases, and prior failed chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prognostic Factor",
+     "0 Points",
+     "1 Point",
+     "2 Points",
+     "4 Points"
+    ],
+    "rows": [
+     [
+      "Age (Years)",
+      "< 40",
+      ">= 40",
+      "--",
+      "--"
+     ],
+     [
+      "Antecedent Pregnancy",
+      "Hydatidiform mole",
+      "Abortion",
+      "Term pregnancy",
+      "--"
+     ],
+     [
+      "Interval from Index Pregnancy",
+      "< 4 months",
+      "4 to 6 months",
+      "7 to 12 months",
+      "> 12 months"
+     ],
+     [
+      "Pre-treatment hCG (mIU/mL)",
+      "< 1,000",
+      "1,000 to < 10,000",
+      "10,000 to < 100,000",
+      ">= 100,000"
+     ],
+     [
+      "Largest Tumor Size",
+      "< 3 cm",
+      "3 to < 5 cm",
+      ">= 5 cm",
+      "--"
+     ],
+     [
+      "Site of Metastases",
+      "Lung",
+      "Spleen, kidney",
+      "Gastrointestinal",
+      "Liver, brain"
+     ],
+     [
+      "Number of Metastases",
+      "0",
+      "1 to 4",
+      "5 to 8",
+      "> 8"
+     ],
+     [
+      "Previous Failed Chemotherapy",
+      "--",
+      "--",
+      "Single drug",
+      "Two or more drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Certain metastatic anatomical sites and antecedent pregnancy types carry disproportionate prognostic weight in the modified scoring system.",
+   "tx": "In the WHO scoring matrix, **brain/liver metastases 4 points** reflects profound risk of hemorrhagic fatality, whereas **lung metastases 0 points** carries minimal adverse weight. Similarly, disease following a **term pregnancy 2 points** reflects worse biology than following a **molar pregnancy 0 points**.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low Scoring Variables (0-1 Points)",
+     "points": [
+      "Antecedent molar pregnancy (0 points)",
+      "Lung metastases or absent metastases (0 points)",
+      "Pre-treatment serum hCG < 1,000 mIU/mL (0 points)"
+     ]
+    },
+    "right": {
+     "title": "High Scoring Variables (2-4 Points)",
+     "points": [
+      "Antecedent term pregnancy (2 points)",
+      "Brain or liver metastases (4 points each)",
+      "Prior failed single-agent or multi-agent chemotherapy (2-4 points)"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Patients stratified with low-risk gestational trophoblastic neoplasia are treated definitively with single-agent cytotoxic chemotherapy regimens.",
+   "tx": "For **low-risk GTN chemotherapy** (score 0 to 6), primary treatment comprises single-agent methotrexate or **actinomycin D**. The standard **methotrexate-leucovorin 8-day regimen** (methotrexate 1 mg/kg on Days 1, 3, 5, 7 with leucovorin rescue on Days 2, 4, 6, 8) achieves a primary **cure rate ~100%**.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Drug and Dosage",
+     "Schedule and Route",
+     "Complete Remission Rate"
+    ],
+    "rows": [
+     [
+      "8-Day MTX-FA",
+      "Methotrexate 1 mg/kg IM alternate days",
+      "Days 1, 3, 5, 7 with folinic acid Days 2, 4, 6, 8",
+      "Primary ~70%, overall ~100%"
+     ],
+     [
+      "5-Day MTX",
+      "Methotrexate 0.4 mg/kg IV/IM daily",
+      "Days 1 through 5, repeated every 14 days",
+      "Primary ~75%, overall ~100%"
+     ],
+     [
+      "Pulse Actinomycin D",
+      "Actinomycin D 1.25 mg/m2 IV bolus",
+      "Every 14 days (bi-weekly)",
+      "Primary ~80%, overall ~100%"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "High-risk gestational trophoblastic neoplasia requires immediate aggressive multi-agent combination systemic chemotherapy.",
+   "tx": "Patients with **high-risk GTN EMA-CO** (score >=7) receive combination chemotherapy alternating weekly: Day 1 **Etoposide Methotrexate Actinomycin D** with folinic acid, followed on Day 8 by **Cyclophosphamide Vincristine**, achieving a long-term **cure rate 85-90%** even in widely metastatic presentations. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Week 1 (Days 1-2): Administer Etoposide, Methotrexate (with FA rescue), and Actinomycin D"
+     },
+     {
+      "id": "b",
+      "label": "Week 2 (Day 8): Administer Cyclophosphamide and Vincristine (Oncovin)"
+     },
+     {
+      "id": "c",
+      "label": "Monitor serial weekly serum beta-hCG until negative (<5 mIU/mL)"
+     },
+     {
+      "id": "d",
+      "label": "Attain overall long-term complete survival in 85% to 90% of high-risk patients"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Following normalization of serum hCG concentrations, consolidation chemotherapy cycles are essential to eradicate occult microscopic trophoblastic cells.",
+   "tx": "To eradicate microscopic residual disease and prevent relapse, **consolidation chemotherapy** must continue after hCG reaches normal: **2-3 cycles low-risk** disease and **3-4 cycles high-risk** disease, which provides effective **prevention of relapse** across all international trophoblastic disease registries. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low-Risk Consolidation Protocol",
+     "points": [
+      "Continue identical single-agent chemotherapy regimen",
+      "Administer 2 to 3 consolidation cycles after first normal hCG",
+      "Reduces post-treatment disease recurrence to < 2%"
+     ]
+    },
+    "right": {
+     "title": "High-Risk Consolidation Protocol",
+     "points": [
+      "Continue multi-agent EMA-CO without dose reduction",
+      "Administer 3 to 4 consolidation cycles after first normal hCG",
+      "Essential to sterilize chemoresistant sanctuary sites in brain and liver"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Gestational choriocarcinoma is the most malignant form of gestational trophoblastic disease, displaying a characteristic histological architecture.",
+   "tx": "Gestational **choriocarcinoma** is a highly anaplastic, dimorphic malignancy displaying **biphasic syncytio- and cytotrophoblast** proliferation with complete **absence of chorionic villi**. Microscopically, it is characterized by sheets of atypical trophoblastic cells, **extensive hemorrhage and necrosis**, and early haematogenous dissemination. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydatidiform Mole Histology",
+     "points": [
+      "Presence of hydropic, edematous chorionic villi",
+      "Variable circumferential trophoblastic hyperplasia",
+      "Cistern formation within swollen villous stroma"
+     ]
+    },
+    "right": {
+     "title": "Choriocarcinoma Histology",
+     "points": [
+      "Complete absence of chorionic villous architecture",
+      "Biphasic sheets of syncytiotrophoblast and cytotrophoblast",
+      "Massive hemorrhage and extensive central coagulation necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The presence of central nervous system metastases in patients with choriocarcinoma requires multimodal therapy to prevent fatal intracranial hemorrhage.",
+   "tx": "In patients with **brain metastases in GTN**, multimodal therapy combines **whole brain RT 30 Gy** (delivered in 10 fractions) or **intrathecal methotrexate** (12.5 mg) with modified EMA-CO utilizing **high-dose MTX 1 g/m2** to achieve therapeutic central nervous system drug concentrations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-gtn-rare-gen2.webp",
+    "ar": 1.3393,
+    "caption": "Trophoblast invasion with classic staining supports hysterectomy. Illustration: StewardMD original.",
+    "alt": "Histopathological slide showing sheets of atypical multinucleated trophoblast infiltrating myometrium."
+   }
+  }
+ ]
+}

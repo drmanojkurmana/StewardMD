@@ -1,0 +1,261 @@
+{
+  "id": "srm-hpg-axis-pulsatility",
+  "module": "srm-hpg-axis-pulsatility",
+  "title": "HPG Axis and GnRH Pulsatility: Neuroendocrine Control of Reproduction",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 2 & 3",
+    "Yen & Jaffe's Reproductive Endocrinology 9e Ch 1"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Gonadotropin releasing hormone governs the entire reproductive neuroendocrine cascade. It is synthesized by specialized neurons residing in the hypothalamic arcuate nucleus. Secretion proceeds directly into the portal vasculature in an obligatory pulsatile mode.",
+      "tx": "Specialized hypothalamic arcuate nucleus neurons produce **GnRH pulsatility**, delivering pulses into the **hypophyseal portal circulation**. Secretion frequency accelerates to every 60 to 90 minutes throughout the follicular phase, slowing down to every 180 to 240 minutes under luteal progesterone influence. The **arcuate nucleus** serves as the anatomical seat for this physiological rhythm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Arcuate nucleus neurons"
+          },
+          {
+            "id": "n2",
+            "label": "Hypophyseal portal circulation"
+          },
+          {
+            "id": "n3",
+            "label": "Anterior pituitary gonadotrophs"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2",
+            "Pulsatile release"
+          ],
+          [
+            "n2",
+            "n3",
+            "Receptor binding"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A complex neuronal network within the arcuate nucleus directs this precise pacemaker activity. Kisspeptin co localizes with neurokinin B and dynorphin within these critical cells. Together they coordinate synchronized burst discharge.",
+      "tx": "Central pulse generation depends upon arcuate **KNDy neurons**, which co-express **kisspeptin**, neurokinin B, and dynorphin. Acting as the primary pacemaker and **pulse generator**, this interconnected cellular network integrates metabolic adiposity signals, gonadal feedback, and circadian rhythms to pace physiological pituitary stimulation. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "caption": "Hypothalamic-pituitary-ovarian axis signaling and endocrine feedback loops. Credit: StewardMD.",
+        "alt": "Hypothalamic-pituitary-ovarian axis signaling and endocrine feedback loops"
+      }
+    },
+    {
+      "say": "Administering gonadotropin releasing hormone in an unphysiological continuous fashion alters the receptor landscape. An immediate transient gonadotroph discharge ensues. Within one to two weeks the pituitary completely shuts down.",
+      "tx": "Non-pulsatile constant administration of GnRH or its synthetic long-acting analogues triggers an initial **flare effect** lasting several days. This temporary surge rapidly yields to extensive **receptor downregulation**, endocytic internalization, and complete **pituitary desensitization** within 7 to 14 days, establishing profound hypogonadotropic suppression. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Temporal Phase",
+          "Gonadotroph Status",
+          "FSH and LH Output",
+          "Clinical Application"
+        ],
+        "rows": [
+          [
+            "Days 1 to 3",
+            "Agonist binding",
+            "Hypersecretion flare",
+            "Short protocol trigger"
+          ],
+          [
+            "Days 4 to 6",
+            "Receptor internalization",
+            "Progressive decline",
+            "Endocytic clearing"
+          ],
+          [
+            "Days 7 to 14",
+            "Profound desensitization",
+            "Complete suppression",
+            "Long agonist protocol"
+          ],
+          [
+            "Chronic use",
+            "Unresponsive state",
+            "Castrate steroid levels",
+            "Endometriosis and fibroids"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The anterior pituitary gonadotropins belong to a conserved family of dimeric glycoprotein hormones. Each member shares an identical structural alpha chain. Distinct beta chains determine exclusive biological target binding.",
+      "tx": "An identical **alpha subunit** comprising 92 amino acids is shared among FSH, LH, TSH, and hCG. Hormonal diversity and distinct biological activity arise from each molecule possessing a unique **beta subunit**, providing precise conformation for target **receptor specificity** on the follicular apparatus. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Glycoprotein Hormone",
+          "Alpha Subunit",
+          "Beta Subunit Size",
+          "Target Receptor"
+        ],
+        "rows": [
+          [
+            "FSH",
+            "Shared 92 amino acids",
+            "111 amino acids",
+            "Granulosa FSHR"
+          ],
+          [
+            "LH",
+            "Shared 92 amino acids",
+            "121 amino acids",
+            "Theca and Luteal LHCGR"
+          ],
+          [
+            "hCG",
+            "Shared 92 amino acids",
+            "145 amino acids (C-terminal peptide)",
+            "LHCGR (prolonged half-life)"
+          ],
+          [
+            "TSH",
+            "Shared 92 amino acids",
+            "112 amino acids",
+            "Thyroid TSHR"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Follicular steroidogenesis relies entirely upon cooperation between two distinct somatic cell compartments. Luteinizing hormone acts on the outer layer to generate androgenic substrates. These intermediates diffuse inward across the basement membrane.",
+      "tx": "Within the ovarian stroma, **theca cells** respond to pulsatile LH stimulation through membrane-bound LHCGR coupled to Gs protein adenylate cyclase. Elevated intracellular cAMP transcriptionally activates **CYP17A1** (17-alpha-hydroxylase and 17,20-lyase) and CYP11A1, converting cholesterol into circulating **androstenedione** and testosterone. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "LH binds thecal LHCGR"
+          },
+          {
+            "id": "t2",
+            "label": "cAMP pathway activates CYP17A1"
+          },
+          {
+            "id": "t3",
+            "label": "Androstenedione and testosterone"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "G-protein signaling"
+          ],
+          [
+            "t2",
+            "t3",
+            "Enzymatic cleavage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The inner avascular somatic layer carries out final estrogen biosynthesis. Follicle stimulating hormone binds surface receptors to upregulate aromatase. Thecal androgens undergo immediate conversion into active estradiol.",
+      "tx": "Vascular barrier separation requires thecal androgens to diffuse into avascular **granulosa cells**. Binding of FSH to its Gs-coupled receptor stimulates transcription of **CYP19A1**, the rate-limiting **aromatase** enzyme that converts androstenedione into estrone and testosterone into 17-beta-estradiol. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-infertility-fig1.webp",
+        "caption": "Ovarian steroidogenesis pathways and coordinated theca-granulosa cell interactions. Credit: StewardMD.",
+        "alt": "Ovarian steroidogenesis pathways and coordinated theca-granulosa cell interactions"
+      }
+    },
+    {
+      "say": "Emerging small antral cohorts exert endocrine control back onto the pituitary gland. Granulosa cells actively produce dimeric inhibin proteins. Rising levels selectively curb further follicle stimulating hormone drive.",
+      "tx": "Small, recruited **antral follicles** measuring 2 to 5 mm produce dimeric **Inhibin B** under ongoing FSH stimulation. Circulating inhibin B acts at the pituitary level to provide selective **negative feedback** on FSH-beta transcription, thereby narrowing the follicular recruitment window without impeding tonic LH release. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "i1",
+            "label": "FSH recruits antral follicles"
+          },
+          {
+            "id": "i2",
+            "label": "Granulosa cells secrete Inhibin B"
+          },
+          {
+            "id": "i3",
+            "label": "Selective pituitary FSH suppression"
+          }
+        ],
+        "edges": [
+          [
+            "i1",
+            "i2",
+            "Cohort growth"
+          ],
+          [
+            "i2",
+            "i3",
+            "Endocrine feedback"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "As the dominant follicle approaches ovulatory maturity, systemic feedback undergoes a fundamental switch. Sustained peak estradiol secretion triggers the pituitary release mechanism. The resulting midcycle surge induces resumption of meiosis.",
+      "tx": "Attainment of follicular maturity induces the midcycle **LH surge**. When circulating estradiol exceeds an **estradiol threshold** of 200 pg/mL sustained continuously for 36 to 48 hours, hypothalamic feedback switches dramatically to **positive feedback**, inducing synchronous GnRH and LH burst discharge that triggers final oocyte maturation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feedback Regime",
+          "Threshold Conditions",
+          "Pituitary Response",
+          "Endocrine Consequence"
+        ],
+        "rows": [
+          [
+            "Early follicular",
+            "Estradiol <50 pg/mL",
+            "Tonic pulsatile LH and FSH",
+            "Gradual antral recruitment"
+          ],
+          [
+            "Mid follicular",
+            "Estradiol 50 to 150 pg/mL",
+            "Suppressed FSH secretion",
+            "Dominant follicle selection"
+          ],
+          [
+            "Preovulatory switch",
+            "Estradiol >200 pg/mL for 36 to 48 h",
+            "Massive LH discharge",
+            "Meiotic resumption and ovulation"
+          ],
+          [
+            "Mid luteal",
+            "Progesterone >5 ng/mL + E2",
+            "Slowed GnRH pulse frequency",
+            "Suppression of new cohort"
+          ]
+        ]
+      }
+    }
+  ],
+  "v": 1
+}
