@@ -3,11 +3,11 @@
  "module": "rad-ir-tips-selection",
  "subject": "radiology",
  "title": "TIPS selection: who benefits, who breaks",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Shunts rescue portal catastrophes selectively. **Refractory variceal bleeding** that defeats bands and drugs earns urgent **TIPS** under Baveno consensus, dropping portal pressure directly. **Refractory ascites** needing fortnightly taps suits elective shunts that return fluid to circulation. **Budd-Chiari with failed anticoagulation** opens obstructed veins through shunt restoration. **Hydrothorax from portal pressure** similarly drains back once gradients fall.",
-   "say": "Shunts rescue portal catastrophes selectively. Variceal bleeding that defeats bands earns urgent TIPS, dropping portal pressure directly. Refractory ascites needing fortnightly taps suits elective shunts. Budd-Chiari with failed drugs opens through shunts. Portal hydrothorax drains back once gradients fall.",
+   "tx": "Patient selection decides shunt success, because only refractory portal complications justify the risks of diversion. **Refractory variceal bleeding** that defeats bands and drugs earns urgent shunt placement and portal pressure falls directly. **Refractory ascites** that needs frequent large volume taps suits an elective shunt that returns fluid toward circulation. **Budd Chiari syndrome** with failed anticoagulation can open through shunt restoration of hepatic outflow in selected patients. Portal **hydrothorax** also drains back once the gradient falls after successful shunt creation in hospital.",
+   "say": "Patient selection decides shunt success because only refractory portal complications justify the risks of diversion. Variceal bleeding that defeats bands and drugs earns urgent shunt placement and pressure falls directly. Refractory ascites that needs frequent taps suits an elective shunt that returns fluid toward circulation. Hepatic outflow blockage with failed anticoagulation can open through shunt restoration in selected patients. Chest fluid from portal pressure also drains back once the gradient falls after creation.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Sick livers tolerate shunts poorly. **Bilirubin above roughly 4 mg/dL** with **MELD beyond the high teens** warns of post-shunt liver failure under AASLD and EASL guidance. **Recurrent overt encephalopathy** predicts worse confusion once ammonia bypasses livers. **Heart failure with pulmonary hypertension** decompensates when shunt flow floods right hearts. **Polycystic livers and active infection** block needle paths and seed grafts.",
-   "say": "Sick livers tolerate shunts poorly. High bilirubin with high MELD warns of liver failure after shunting. Recurrent encephalopathy predicts worse confusion once ammonia bypasses livers. Heart failure decompensates when shunt flow floods hearts. Cystic livers and active infection block needle paths.",
+   "tx": "This portogram shows a **stent graft** that connects the **portal vein** below with the **hepatic vein** and cava above. The label records a **fallen portosystemic gradient** below twelve, which marks successful decompression after shunt creation. That pressure fall explains why refractory bleeding and ascites improve when selection chooses a patient with adequate reserve. The image matters for the exam because anatomy alone never justifies a shunt without reserve assessment. Bilirubin, severity score, heart function and tumour screening all gate the decision beforehand.",
+   "say": "This portogram shows a stent graft that connects the portal vein with the hepatic vein above. The label records a fallen pressure gradient which marks successful decompression after shunt creation. That pressure fall explains why refractory bleeding and ascites improve after careful patient selection. Anatomy alone never justifies a shunt without reserve assessment in portal hypertension care. Bilirubin and severity score and heart function and tumour screening gate the decision beforehand.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-tips-selection-gen1.webp",
+    "alt": "Fluoroscopic portogram with stent graft between portal vein and hepatic vein draining to IVC.",
+    "caption": "Portogram shows stent graft joining portal and hepatic veins. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "A sick liver tolerates diversion poorly, so reserve markers warn the team before any shunt puncture. **Bilirubin above roughly 4 mg per dL** combined with a high **MELD score** warns of liver failure after shunting. **Recurrent overt encephalopathy** predicts worse confusion once ammonia bypasses the liver through a new channel. **Heart failure with pulmonary hypertension** decompensates when shunt flow floods the right heart suddenly after deployment. Polycystic livers and active infection block needle paths and risk seeding the graft with organisms.",
+   "say": "A sick liver tolerates diversion poorly so reserve markers warn the team before any shunt puncture. High bilirubin combined with a high severity score warns of liver failure after shunting. Recurrent overt confusion is a warning because it predicts worse confusion once ammonia bypasses the liver. Heart failure with lung hypertension decompensates when shunt flow floods the right heart suddenly. Cystic livers and active infection block needle paths and risk seeding the graft.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Workup precedes every puncture. **Cardiac echo** excludes pulmonary hypertension and right-heart failure that shunts would unmask. **Hepatocellular screening** with triphasic imaging clears tumours that needles could seed or bypass. **MELD and Child-Pugh scoring** quantifies reserve so consent reflects real risk. **Lactulose and rifaximin review** optimises brains before ammonia loads rise.",
-   "say": "Workup precedes every puncture. Cardiac echo excludes pulmonary hypertension that shunts unmask. Tumour screening clears cancers that needles could seed. MELD with Child-Pugh scores reserve so consent reflects risk. Brain drugs optimise minds before ammonia rises.",
+   "tx": "Workup precedes every shunt puncture, because unmasked heart or tumour disease turns benefit into harm quickly. **Cardiac echo** excludes pulmonary hypertension and right heart failure that a shunt would unmask after deployment. Triphasic imaging screens for **hepatocellular tumour** that a needle could seed or a shunt could bypass unsafely. **MELD and Child Pugh scoring** quantifies reserve so consent reflects real risk for that patient honestly. The team also reviews lactulose and rifaximin because brain preparation lowers ammonia load before diversion rises.",
+   "say": "Workup precedes every shunt puncture because unmasked heart or tumour disease turns benefit into harm. Cardiac echo excludes lung hypertension and right heart failure that a shunt would unmask. Triphasic imaging screens for liver tumour that a needle could seed or bypass unsafely. Severity scoring quantifies reserve so consent reflects real risk for that patient honestly. The team also reviews brain drugs because preparation lowers ammonia load before diversion rises.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-tips-selection-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Consent weighs months against confusion. **Survival gains** in refractory bleeding and ascites trade against **encephalopathy risk** approaching one in three under Baveno-cited cohorts. **Liver failure acceleration** in marginal reserves needs frank discussion with transplant teams. **Alternative bridges** of bands, taps and transplant listing frame the choice honestly. **Documented goals** align shunts with what patients value most.",
-   "say": "Consent weighs months against confusion. Survival gains in bleeding and ascites trade against encephalopathy risk near one in three. Failure acceleration in marginal livers needs transplant-team discussion. Bands, taps and listing frame alternatives. Documented goals align shunts with patient values.",
+   "tx": "Consent for a shunt weighs survival months against confusion, and that trade needs explicit documentation beforehand. **Survival gains** in refractory bleeding and ascites trade against **encephalopathy risk** that approaches one in three patients. Acceleration of **liver failure** in marginal reserve needs frank discussion with the transplant team before puncture. Bands, taps and transplant listing frame alternatives honestly so the patient sees every reasonable path clearly. **Documented goals** align the shunt with what the patient values most in remaining life.",
+   "say": "Consent for a shunt weighs survival months against confusion and that trade needs explicit documentation. Survival gains in refractory bleeding and ascites trade against confusion risk in many patients. Acceleration of liver failure in marginal reserve needs frank discussion with the transplant team. Bands and taps and transplant listing frame alternatives honestly so the patient sees each path. Documented goals align the shunt with what the patient values most in life.",
    "vis": {
     "kind": "flow",
     "nodes": [

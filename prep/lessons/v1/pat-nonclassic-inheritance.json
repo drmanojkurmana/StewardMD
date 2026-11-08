@@ -3,11 +3,11 @@
  "module": "pat-nonclassic-inheritance",
  "subject": "pathology",
  "title": "Non Mendelian inheritance: imprinting, repeats and mitochondria",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Genomic imprinting** silences alleles by parent of origin through methylation: **Prader-Willi syndrome** (paternal 15q11-13 deletion or maternal **uniparental disomy**, hyperphagia with obesity, short stature, intellectual disability) mirrors **Angelman syndrome** (maternal deletion or paternal UPD, severe disability with ataxia, inappropriate laughter, seizures) at the same locus. **Uniparental disomy** (both homologues from one parent) unmasks imprinting or recessive mutations; Beckwith-Wiedemann (paternal 11p15 excess, macrosomia with Wilms risk) inverts the pattern. Methylation testing with FISH sorts deletions from disomy.",
-   "say": "Same chromosome, opposite parent lost: Prader-Willi eats, Angelman laughs. Both homologues from one parent is disomy.",
+   "tx": "**Genomic imprinting** silences one parental allele through methylation, so the parent of origin decides whether disease appears. Loss of the paternal chromosome 15 region causes **Prader-Willi syndrome** with hyperphagia, obesity, short stature and intellectual disability. Loss of the maternal copy at the same locus causes **Angelman syndrome** with severe disability, ataxia, seizures and inappropriate laughter. Methylation testing therefore matters more than simply detecting a deletion at this locus.",
+   "say": "Genomic imprinting is a mechanism where methylation silences one parental allele depending on its origin in families. Prader-Willi syndrome develops because the paternal chromosome fifteen contribution is lost or silenced in the child. Angelman syndrome is different because the maternal contribution is lost at exactly the same locus.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-nonclassic-inheritance-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Trinucleotide repeats** expand across generations causing **anticipation** (earlier, severer disease): **fragile X** (CGG in FMR1, intellectual disability with macroorchidism and long face; premutations cause **primary ovarian insufficiency** and tremor ataxia syndrome), **myotonic dystrophy** (CTG in DMPK, hatchet face with cataracts, myotonia, cardiac block, congenital severe form), **Huntington disease** (CAG in HTT, chorea with dementia, paternal transmission expands most). Southern blot or PCR sizes repeats; premutation carriers need family counselling before expansion.",
-   "say": "Repeats growing each generation strike earlier: fragile X, myotonic dystrophy, Huntington. Fathers expand Huntington most.",
+   "tx": "**Trinucleotide repeat expansion** causes disease earlier and more severely across generations, a phenomenon called **anticipation** in families. Fragile X syndrome results from CGG expansion in FMR1 and causes intellectual disability with macroorchidism and a long face. **Myotonic dystrophy** results from CTG expansion and causes myotonia, cataracts, hatchet face and cardiac conduction disease. Huntington disease results from CAG expansion, and paternal transmission usually produces the largest expansions in offspring.",
+   "say": "Repeat expansion is a mechanism where unstable DNA repeats grow longer when they pass between generations in families. Anticipation occurs because larger repeats cause earlier and more severe disease in affected children over time. Fragile X syndrome is recognised because premutation carriers develop ovarian insufficiency or tremor ataxia syndromes.",
    "vis": null
   },
   {
-   "tx": "**Mitochondrial inheritance** passes only through ova (sperm mitochondria discarded), so affected mothers transmit to all children while fathers transmit to none; **heteroplasmy** (mutant load varying by tissue) explains variable severity. **MELAS** (stroke like episodes with lactic acidosis) and **MERRF** (myoclonus with ragged red fibres) strike energy hungry brain and muscle; **Leber optic neuropathy** blinds young men sequentially (covered in neuro ophthalmology wave). Muscle biopsy with respiratory chain assays and mtDNA sequencing confirms; maternal relatives counselled.",
-   "say": "Mother to all children, father to none: mitochondrial. Mixed mutant loads vary the damage: heteroplasmy.",
+   "tx": "**Mitochondrial inheritance** follows the maternal line because sperm mitochondria are discarded after fertilisation of the ovum. Affected mothers transmit mitochondrial DNA variants to all children, while affected fathers transmit them to none of their offspring. **Heteroplasmy** means mutant and normal mitochondrial DNA coexist in varying proportions, which explains variable severity between family members. **MELAS** causes stroke like episodes with lactic acidosis, while MERRF causes myoclonus with ragged red fibres.",
+   "say": "Mitochondrial inheritance is maternal because the ovum supplies almost all mitochondria to the early embryo after fertilisation. Heteroplasmy explains variable severity because different tissues carry different proportions of mutant mitochondrial DNA molecules. This pattern helps clinicians counsel families where mothers transmit disease to all children.",
    "vis": null
   },
   {
-   "tx": "**Mosaicism** (postzygotic mutation, McCune-Albright with cafe au lait and precocious puberty, segmental neurofibromatosis) and **gonadal mosaicism** (phenotypically normal parent with multiple affected children, as in osteogenesis imperfecta) explain recurrence defying Mendelian ratios. Counselling computes empiric risks: imprinting needs parent of origin testing, repeats need sizing, mitochondria need maternal pedigree, mosaicism needs gonadal sampling debates. Pedigree with molecular testing replaces risk tables.",
-   "say": "Normal parents with several affected children suggest gonadal mosaicism. Pedigree plus molecules sets recurrence.",
+   "tx": "This muscle biopsy stained with Gomori trichrome shows muscle fibres packed with coarse red material under the sarcolemma. Those fibres are **ragged red fibres**, and they appear because abnormal mitochondria proliferate beneath the muscle fibre membrane. The finding supports a **mitochondrial disorder** such as MELAS or MERRF, where heteroplasmy produces variable tissue involvement between patients. Examiners use this image because maternal inheritance plus multisystem disease should trigger mitochondrial thinking immediately.",
+   "say": "This biopsy shows ragged red fibres because abnormal mitochondria accumulate beneath the sarcolemma of affected muscle fibres. Gomori trichrome staining is useful because it makes mitochondrial proliferation appear red against blue green muscle fibres. This finding helps clinicians support mitochondrial disease when maternal inheritance is suspected.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-nonclassic-inheritance-gen1.webp",
+    "alt": "Muscle biopsy with Gomori trichrome showing red ragged fibers from mitochondrial proliferation.",
+    "caption": "Ragged red fibers showing subsarcolemmal mitochondrial proliferation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Mosaicism** arises when a mutation occurs after fertilisation, so only some cells carry the abnormal genetic change. McCune-Albright syndrome shows this pattern with cafe au lait patches and precocious puberty in affected children. **Gonadal mosaicism** explains why phenotypically normal parents have several affected children because the mutation hides in gonadal tissue. Counselling therefore combines pedigree analysis with molecular testing rather than relying only on standard Mendelian risk tables.",
+   "say": "Mosaicism is a state where a postzygotic mutation affects only some cells in the developing child after fertilisation. Gonadal mosaicism is important because normal parents carry the mutation only in gonadal tissue and transmit it repeatedly. Pedigree analysis helps clinicians choose molecular tests that match the suspected inheritance mechanism.",
    "vis": {
     "kind": "table",
     "cols": [

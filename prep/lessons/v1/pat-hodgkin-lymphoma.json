@@ -6,8 +6,8 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Hodgkin lymphoma** is a lymphoid malignancy where rare large Reed Sternberg cells hide within a rich reactive background of lymphocytes, eosinophils and plasma cells. The malignant cells are scarce, often under one percent of the tumour, yet orchestrate the mass through cytokine secretion. This scarcity distinguishes Hodgkin histology from most non Hodgkin lymphomas packed with tumour cells.",
-   "say": "Hodgkin tumours contain rare malignant Reed Sternberg cells in a sea of reactive cells. Cytokines from few tumour cells build the mass. Scarcity itself is a diagnostic clue.",
+   "tx": "**Hodgkin lymphoma** is a lymphoid malignancy where rare large **Reed Sternberg cells** hide within a rich reactive background of other cells. Lymphocytes, eosinophils and plasma cells dominate the tumour mass while malignant cells often form under one percent of the tissue. Those few malignant cells orchestrate the mass by secreting cytokines that recruit and sustain the reactive infiltrate around them. This scarcity distinguishes Hodgkin histology from most non Hodgkin lymphomas that are packed with tumour cells.",
+   "say": "Hodgkin tumours are composed of very few malignant cells hidden inside a dense reactive background of other cells. Cytokines from those rare cells recruit the surrounding infiltrate and build most of the visible tumour mass. Scarcity itself is becoming a diagnostic clue because other lymphomas usually contain sheets of malignant cells instead.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-hodgkin-lymphoma-fig1.webp",
@@ -17,8 +17,8 @@
    }
   },
   {
-   "tx": "The classic **Reed Sternberg cell** is large with two nuclei or a bilobed nucleus, prominent owl eye nucleoli and abundant cytoplasm. It derives from germinal centre B cells that lost normal B cell programme, expressing CD30 and CD15 while usually lacking CD20. Lacunar, popcorn and mummified variants characterise the Hodgkin subtypes examiners rotate through stems.",
-   "say": "Owl eye binucleate cells expressing CD30 and CD15 define classic Hodgkin disease. They are crippled germinal centre B cells. Variants mark the subtypes. CD20 is usually absent.",
+   "tx": "The classic **Reed Sternberg cell** is large with two nuclei or one bilobed nucleus, prominent owl eye nucleoli and abundant cytoplasm. It derives from germinal centre B cells that lost the normal B cell programme during malignant transformation. It expresses **CD30 and CD15** while usually lacking CD20, which separates classic Hodgkin lymphoma immunophenotype from most B cell lymphomas. Lacunar, popcorn and mummified **variant cells** characterise the subtypes that examiners rotate through pathology stems.",
+   "say": "The classic tumour cell looks large and binucleate with prominent owl eye nucleoli inside abundant cytoplasm. It expresses two characteristic markers and usually lacks the usual B cell marker in classic disease. Variant forms define the subtypes, so morphology and immunophenotype together secure the diagnosis for examination purposes.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -56,18 +56,29 @@
    }
   },
   {
-   "tx": "**B symptoms** of unexplained fever, drenching night sweats and weight loss over ten percent in six months upstage prognosis and enter Ann Arbor staging notation. Disease spreads contiguously to neighbouring node groups, unlike non Hodgkin spread, so a painless cervical node with mediastinal mass in a young adult is classic. Alcohol induced node pain is a curious historical clue.",
-   "say": "Fever, sweats and major weight loss are B symptoms worsening stage prognosis. Spread moves contiguously between node groups. Young adult neck and mediastinal nodes are classic.",
+   "tx": "**B symptoms** include unexplained fever, drenching night sweats and weight loss over ten percent within six months in an affected patient. They worsen prognosis and enter the Ann Arbor staging notation as a suffix that changes treatment intensity. Disease spreads **contiguously** to neighbouring node groups, so a painless cervical node with a mediastinal mass in a young adult is classic. Alcohol induced node pain is a curious historical clue that occasionally appears in older descriptions.",
+   "say": "Fever, drenching sweats and major weight loss worsen prognosis and change the stage notation for treatment planning. Spread moves contiguously between neighbouring node groups rather than skipping randomly through the body in this disease. A painless neck node with a chest mass in a young adult should immediately suggest this diagnosis.",
    "vis": null
   },
   {
-   "tx": "Staging uses **Ann Arbor** groups from single node region to disseminated extranodal disease, guiding chemotherapy with or without radiotherapy. Bulky mediastinal disease and B symptoms push toward systemic treatment even at low stage. ABVD based chemotherapy cures most patients, while brentuximab and checkpoint inhibitors exploit CD30 expression and immune evasion in relapse.",
-   "say": "Ann Arbor stage counts node regions and extranodal spread. Bulk and B symptoms favour systemic therapy. CD30 targeting drugs exploit the marker in relapse. Most patients are cured.",
+   "tx": "The scan shows a large lobulated **bulky anterior mediastinal mass** sitting in front of the ascending aorta and superior vena cava. Such bulky chest disease is classic for **nodular sclerosis Hodgkin lymphoma** in a young patient with neck nodes and systemic symptoms. Recognising bulky mediastinal disease matters because bulk pushes treatment toward systemic chemotherapy even when disease appears limited. In the exam, an anterior mediastinal mass with B symptoms should immediately raise Hodgkin lymphoma.",
+   "say": "This scan shows a bulky lobulated mass in the anterior mediastinum beside the aorta and vena cava. Young patients with neck nodes, systemic symptoms and this chest appearance most likely have nodular sclerosis disease. Bulk matters greatly because it pushes treatment toward systemic chemotherapy even when staging appears limited otherwise.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-hodgkin-lymphoma-gen1.webp",
+    "alt": "Axial chest CT showing bulky anterior mediastinal mass beside aorta and vena cava",
+    "caption": "Chest CT showing bulky anterior mediastinal mass. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Staging uses **Ann Arbor** groups that run from a single node region to disseminated extranodal disease in advanced presentations. The stage guides chemotherapy with or without radiotherapy, while bulky mediastinal disease and B symptoms push toward systemic treatment even at low stage. **ABVD based chemotherapy** cures most patients who complete treatment with appropriate supportive care and follow up. Brentuximab and checkpoint inhibitors exploit **CD30 expression** and immune evasion in relapsed disease after initial therapy.",
+   "say": "Ann Arbor staging counts involved node regions and extranodal spread to guide chemotherapy and radiotherapy decisions. Bulky chest disease and systemic symptoms favour systemic therapy even when the stage appears anatomically limited. Most patients achieve cure, and newer drugs target the characteristic marker when disease returns after treatment.",
    "vis": null
   },
   {
-   "tx": "**Epstein Barr virus** genomes hide in Reed Sternberg cells in many mixed cellularity and HIV associated cases, linking infection to pathogenesis. Survivors need long term surveillance for second cancers, cardiac and lung toxicity from treatment, hypothyroidism after neck radiation and infertility risks discussed before gonadotoxic therapy. Cure without follow up planning is incomplete care.",
-   "say": "Epstein Barr virus hides in many Hodgkin tumour cells. Survivors need surveillance for second cancers, heart and lung injury and infertility. Cure requires lifelong follow up planning.",
+   "tx": "**Epstein Barr virus** genomes hide inside Reed Sternberg cells in many mixed cellularity and HIV associated cases of Hodgkin lymphoma. This link supports a role for infection in pathogenesis, although most infected people never develop lymphoma during their lifetime. Survivors need long term surveillance for **second cancers**, cardiac and lung toxicity, thyroid failure after neck radiation and infertility risk. Gonadotoxic therapy requires fertility discussion before treatment, and cure without follow up planning remains incomplete care.",
+   "say": "Epstein Barr virus hides inside tumour cells in many cases, especially mixed cellularity and HIV associated disease presentations. Survivors need lifelong surveillance because treatment causes second cancers, heart injury, lung injury and infertility over time. Fertility discussion before gonadotoxic therapy and structured follow up complete good care after initial cure.",
    "vis": null
   }
  ],

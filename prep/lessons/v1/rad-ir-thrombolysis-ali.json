@@ -3,11 +3,11 @@
  "module": "rad-ir-thrombolysis-ali",
  "subject": "radiology",
  "title": "Acute limb ischaemia: lysis and rescue",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Time decides salvageability. **Acute limb ischaemia** with sudden pallor, pain and pulselessness sorts by **Rutherford categories** where viable limbs sense and move. **Symptom windows** within roughly fourteen days suit lysis while dead nerves and rigor mark irreversibility. **Embolic versus thrombotic** causes split healthy hearts with atrial fibrillation from diseased arteries. **Heparin at diagnosis** halts clot spread while plans form.",
-   "say": "Time decides salvageability. Sudden pallor with pain and lost pulses sorts by Rutherford categories where viable limbs sense and move. Recent symptoms suit lysis while dead nerves mark irreversibility. Embolic hearts differ from diseased arteries. Heparin at diagnosis halts spread while plans form.",
+   "tx": "Time decides salvage in acute limb ischaemia, so assessment starts with viability rather than with the angiogram. Sudden pallor, pain and pulselessness sort by **Rutherford categories**, where a viable limb still senses and moves. Symptoms within roughly **fourteen days** suit lysis, while dead nerves and rigor mark an irreversible limb clearly. An **embolic cause** from atrial fibrillation differs from thrombosis on diseased artery, and that difference changes the plan. **Heparin at diagnosis** halts clot spread while the team forms the definitive treatment plan urgently.",
+   "say": "Time decides salvage in acute limb ischaemia so assessment starts with viability rather than pictures. Sudden pallor and pain and pulselessness are sorted by clinical categories where a viable limb still moves. Recent symptoms are suitable for lysis while dead nerves and rigor mark an irreversible limb clearly. An embolic cause from atrial fibrillation differs from thrombosis on diseased artery during assessment. Heparin at diagnosis halts clot spread while the team forms the definitive treatment plan.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Drips dissolve from inside. **Catheter-directed thrombolysis** parks multi-sidehole catheters inside clots infusing lytic low and slow. **Lacing with pulse-spray** primes thrombus before drips continue overnight. **Angiographic checks** every several hours track lysis against bleeding. **Unmasking culprits** reveals stenoses beneath cleared clot needing balloons or stents.",
-   "say": "Drips dissolve from inside. Multi-hole catheters parked inside clots infuse lytic low and slow. Pulse-spray priming precedes overnight drips. Regular angiographic checks track lysis against bleeding. Cleared clot unmasks stenoses needing balloons or stents.",
+   "tx": "This knee angiogram shows an **embolus** that blocks the popliteal artery and ends contrast with a sharp **meniscus cutoff**. No contrast fills the calf below, so **absent distal runoff** confirms a severe acute occlusion at the knee. A few fine collaterals appear at the side, but those vessels cannot sustain the foot without urgent reperfusion. The image matters for the exam because the meniscus sign points toward embolus rather than chronic plaque disease. Rutherford viability then decides whether lysis, embolectomy or surgery saves the limb.",
+   "say": "This knee angiogram shows an embolus that blocks the popliteal artery and ends contrast sharply. No contrast fills the calf below so absent runoff confirms a severe acute occlusion. A few fine collateral vessels appear at the side but those vessels cannot sustain the foot. The curved cutoff points toward embolus rather than chronic plaque disease in acute ischaemia. Clinical viability then decides whether lysis or embolectomy or surgery saves the limb.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-thrombolysis-ali-gen1.webp",
+    "alt": "Angiogram at knee showing popliteal embolus, meniscus cutoff, absent distal runoff and collaterals.",
+    "caption": "Knee angiogram shows popliteal embolus with meniscus cutoff. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Catheter directed thrombolysis dissolves clot from inside, with the catheter parked within the thrombus itself. A **multi sidehole catheter** infuses lytic drug low and slow directly through the length of the clot. **Pulse spray lacing** primes the thrombus first, and a drip then continues overnight under close observation. **Angiographic checks** every several hours track lysis against bleeding and guide dose changes during treatment. Cleared clot unmasks the culprit stenosis beneath, and that lesion then needs a balloon or a stent.",
+   "say": "Catheter directed lysis dissolves clot from inside with the catheter parked within the thrombus itself. A multi sidehole catheter infuses lytic drug low and slow directly through the clot length. Pulse spray priming prepares the thrombus first and a drip then continues overnight under observation. Regular checks during treatment track lysis against bleeding and guide dose changes for safety. Cleared clot unmasks the culprit narrowing beneath and that lesion then needs balloon treatment.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Bleeding limits every drip. **Absolute blocks** of recent intracranial bleeds, strokes and neurosurgery forbid lysis outright. **Relative cautions** of recent surgery, punctures and ulcers weigh case by case. **Fibrinogen watches** with haemoglobin track consumption before catastrophe. **Stop triggers** of falling fibrinogen, major bleeding or neuro change halt drips at once.",
-   "say": "Bleeding limits every drip. Recent brain bleeds, strokes and neurosurgery forbid lysis outright. Recent surgery and ulcers weigh case by case. Fibrinogen with haemoglobin tracks consumption. Falling levels, major bleeding or neuro change halt drips at once.",
+   "tx": "Bleeding limits every lytic drip, so contraindications and blood monitoring frame the whole treatment period. **Absolute contraindications** include a recent intracranial bleed, a recent stroke and recent neurosurgery in that patient. Recent surgery, non compressible punctures and ulcers instead need careful case by case weighing before treatment. The team watches **fibrinogen and haemoglobin** because falling values track consumption before a catastrophe declares itself. A **stop trigger** such as major bleeding or neurological change halts the drip at once without hesitation.",
+   "say": "Bleeding limits every lytic drip so contraindications and blood monitoring frame the whole treatment period. Absolute bans include a recent brain bleed and a recent stroke and recent neurosurgery. Recent surgery and punctures and ulcers instead need careful case by case weighing before treatment. The team watches fibrinogen and haemoglobin because falling values track consumption before catastrophe declares. Major bleeding or neurological change halts the drip at once without any hesitation.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-thrombolysis-ali-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Compartments swell as flow returns. **Reperfusion swelling** after successful lysis tightens calves needing pressure checks. **Fasciotomy thresholds** open calves where pain with tense compartments and late signs threaten muscle. **Myoglobin with potassium** released from dying muscle injures kidneys needing fluids. **Completion runoff** proves durable channels with treated culprits before closure.",
-   "say": "Compartments swell as flow returns. Successful lysis tightens calves needing pressure checks. Pain with tense compartments threatens muscle needing release. Dying muscle releases toxins injuring kidneys needing fluids. Final runoff proves durable channels before closure.",
+   "tx": "Successful reperfusion swells the calf, and the team watches compartments as flow returns to ischaemic muscle. **Reperfusion swelling** tightens the calf after lysis, so pressure checks continue during early recovery in hospital. Pain with tense compartments threatens muscle and low **fasciotomy thresholds** favour early release over late observation. Dying muscle releases myoglobin and potassium, which injure the kidneys and need generous fluids for protection. A **completion runoff** image proves durable channels with treated culprits before the team closes access formally.",
+   "say": "Successful reperfusion is followed by calf swelling and the team watches compartments as flow returns. Swelling tightens the calf after lysis so pressure checks continue during early recovery in hospital. Pain with tense compartments threatens muscle and early release favours muscle survival over late observation. Dying muscle releases myoglobin and potassium which injure the kidneys and need generous fluids. A final runoff image proves durable channels with treated culprits before access closure.",
    "vis": {
     "kind": "flow",
     "nodes": [
