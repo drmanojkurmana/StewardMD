@@ -1,95 +1,106 @@
 {
- "v": 1,
- "module": "phm-thyroid",
- "subject": "pharmacology",
- "title": "Thyroid drugs: levothyroxine, antithyroids, storm and coma",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Levothyroxine** (T4 prohormone, narrow therapeutic index, **morning empty stomach** 30 to 60 minutes before food, **iron, calcium and PPI spacing** 4 hours, dose by weight with elderly and cardiac starting low) treats hypothyroidism to TSH normalisation; overreplacement fibrillates atria and thins bones. Amiodarone (iodine load, type I hyperthyroid versus type II destructive, beta blockade with steroids), lithium and TKIs disturb function requiring TSH watched. Myxoedema coma (hypothermia with bradycardia) loads IV.",
-   "say": "Empty stomach dawn thyroxine, minerals hours apart. Overreplace and atria fibrillate, bones thin.",
-   "vis": null
-  },
-  {
-   "tx": "**Antithyroids** (carbimazole or methimazole: **agranulocytosis** with sore throat warning and CBC, hepatotoxicity, teratogenic switching to **PTU first trimester**; PTU hepatotoxic second line) block synthesis (weeks to euthyroid, stores deplete slowly); **radioiodine** (definitive Graves, **pregnancy and breastfeeding banned**, ophthalmopathy worsening with steroids covered, lifelong hypothyroidism expected) and surgery (large goitre, cancer, second trimester pregnancy) complete. Beta blockers (propranolol) bridge symptoms and storm.",
-   "say": "Sore throat on carbimazole is agranulocytosis: CBC now. First trimester hyperthyroid is PTU; radioiodine never pregnant.",
-   "vis": null
-  },
-  {
-   "tx": "**Thyroid storm** (fever with agitation, tachycardia, heart failure, Burch-Wartofsky scoring) is cocktail treated: **PTU load** (blocks new synthesis plus T4 to T3 conversion), **iodine** (Lugol or SSKI an hour later blocking release), **steroids** (conversion blockade with adrenal support), **propranolol** (adrenergic storm), **cholestyramine** (enterohepatic recycling), cooling with fluids. ICU with trigger (infection, DKA, surgery) hunted; plasmapheresis refractory.",
-   "say": "Storm cooks agitated tachycardic: PTU, then iodine an hour later, steroids, propranolol. Iodine first traps hormone.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/phm-thyroid-fig1.webp",
-    "alt": "Diagram illustrating the multi-drug \"cocktail\" treatment for thyroid storm, including PTU, iodine, steroids, and propranolol.",
-    "caption": "Thyroid storm: Symptoms, triggers, and emergency cocktail treatment",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Myxoedema coma** (hypothermia, bradycardia, hypoventilation with hyponatraemia, precipitated by infection, sedatives, cold) is loaded IV thyroxine (**steroids before** covering adrenal insufficiency) with ventilation and warming (blankets, not aggressive); hyponatraemia fluids restrict. **Subclinical hypothyroidism** (TSH high, T4 normal) treats when over 10, pregnant, antibody positive or symptomatic; subclinical hyperthyroidism (low TSH) watches cardiac and bone. Amiodarone hypothyroidism replaces through.",
-   "say": "Cold slow comatose hypothyroid is myxoedema: steroids then IV thyroxine, warm gently. TSH over 10 treats.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Thyroid drug",
-     "Pearl",
-     "Watch"
+    "v": 1,
+    "module": "phm-thyroid",
+    "subject": "pharmacology",
+    "title": "Thyroid drugs: levothyroxine, antithyroids, storm and coma",
+    "minutes": 7,
+    "steps": [
+        {
+            "tx": "**Levothyroxine** replaces the T4 prohormone in hypothyroidism and needs a narrow therapeutic window for success. Patients take it on an **empty stomach** in the morning and wait before food for reliable absorption every day. Iron, calcium and acid suppression impair absorption, so patients space those medicines several hours away from the dose. Older and cardiac patients start low because rapid replacement strains the heart in early treatment weeks. Over replacement fibrillates atria and thins bones, so TSH monitoring guides every dose adjustment carefully.",
+            "say": "Levothyroxine replaces the missing prohormone in hypothyroidism and it needs careful timing for reliable absorption every day. Patients take it on an empty stomach in the morning and wait before eating food for absorption afterwards. Iron and calcium impair absorption so patients space those medicines several hours away from each dose taken daily. Older cardiac patients start low because rapid replacement strains the heart in early treatment weeks initially here. Over replacement fibrillates atria and thins bones so monitoring guides every dose adjustment carefully over time ahead.",
+            "vis": null
+        },
+        {
+            "tx": "**Antithyroid drugs** such as carbimazole block new hormone synthesis and slowly restore euthyroidism over weeks. A sore throat during treatment warns of **agranulocytosis**, so patients seek an urgent blood count immediately when it appears. Propylthiouracil suits the first trimester because carbimazole harms the developing fetus during organ formation in early pregnancy. Radioiodine definitively treats Graves disease but pregnancy and breastfeeding forbid it absolutely in every guideline. Beta blockers bridge tremor and palpitations while hormone levels fall toward normal range.",
+            "say": "Antithyroid drugs block new hormone synthesis and they slowly restore normal hormone levels over several weeks of treatment. A sore throat during treatment warns of marrow failure so patients seek an urgent blood count immediately when symptoms appear. One drug suits the first trimester because the other agent harms the developing fetus during organ formation early. Radioiodine is a definitive treatment for overactive disease but pregnancy forbids it absolutely in every clinical guideline used today worldwide. Beta blockers bridge tremor and palpitations while hormone levels fall toward the normal range in patients treated.",
+            "vis": null
+        },
+        {
+            "tx": "This composite image pairs diffuse high uptake on a thyroid scan with visible eye disease in **Graves disease**. The scan glows uniformly in both lobes because stimulating antibodies drive the whole gland without any cold nodule. The inset shows **proptosis** with lid retraction and periorbital oedema, which marks orbitopathy that radioiodine can worsen without steroid cover. The notes below stress that radioiodine is banned in pregnancy and expects lifelong replacement afterwards. Pattern recognition here separates Graves disease from nodular causes in one glance.",
+            "say": "This composite image is a paired view showing diffuse high uptake on a thyroid scan with visible eye disease in one autoimmune condition. The scan glows uniformly in both lobes because stimulating antibodies drive the whole gland without any cold nodule present. The inset shows protruding eyes with lid retraction which marks orbitopathy that definitive ablation can worsen without steroid cover given. The notes stress that ablation is banned in pregnancy and expects lifelong replacement afterwards for treated patients at home. Pattern recognition here separates diffuse autoimmune disease from nodular causes in one glance during examinations held.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-thyroid-gen1.webp",
+                "alt": "Thyroid scan with diffuse uptake plus eye photo showing proptosis and lid retraction.",
+                "caption": "Graves disease thyroid uptake with ophthalmopathy and therapy notes. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "tx": "**Thyroid storm** presents with fever, agitation, tachycardia and heart failure in a thyrotoxic patient decompensating acutely. Treatment loads propylthiouracil first because it blocks synthesis and peripheral conversion of hormone in the crisis. **Iodine** follows an hour later and blocks hormone release, while giving iodine first would trap more hormone inside the gland. Steroids block conversion and support adrenal reserve, and propranolol controls the adrenergic storm at the bedside. Cooling, fluids and a hunt for the trigger complete intensive care management.",
+            "say": "Thyroid storm presents with fever, agitation and tachycardia in a thyrotoxic patient decompensating acutely in hospital emergency care. Treatment loads one drug first because it blocks synthesis and peripheral conversion of hormone during the crisis unfolding rapidly. Iodine follows an hour later and blocks hormone release from the gland into the circulation of patients. Steroids block conversion and support adrenal reserve while beta blockade controls the adrenergic storm at the bedside safely. Cooling and fluids complete intensive care while teams hunt for the trigger behind decompensation in patients.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-thyroid-fig1.webp",
+                "alt": "Diagram illustrating the multi-drug \"cocktail\" treatment for thyroid storm, including PTU, iodine, steroids, and propranolol.",
+                "caption": "Thyroid storm: Symptoms, triggers, and emergency cocktail treatment",
+                "ar": 1.8349
+            }
+        },
+        {
+            "tx": "**Myxoedema coma** presents with hypothermia, bradycardia, hypoventilation and hyponatraemia after infection, sedatives or cold exposure precipitates collapse. Teams load intravenous thyroxine after giving **steroids** first, because replacement without steroid cover can unmask adrenal failure fatally. Gentle warming with blankets and ventilatory support accompany hormone replacement in intensive care for these patients. Mild hormone deficiency with raised TSH alone treats when levels rise markedly, during pregnancy or with positive antibodies present. Cardiac and bone risks guide treatment when only TSH falls below normal range.",
+            "say": "Myxoedema coma presents with hypothermia and bradycardia after infection or cold exposure precipitates collapse in hypothyroid patients untreated. Teams load intravenous hormone after giving steroids first because replacement alone can unmask adrenal failure fatally without cover given. Gentle warming and ventilatory support accompany hormone replacement in intensive care for these critically ill patients managed daily. Mild deficiency treats when hormone stimulating levels rise markedly or during pregnancy with antibodies present in blood tests. Cardiac and bone risks guide treatment when only stimulating hormone falls below the normal range in patients.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Thyroid drug",
+                    "Pearl",
+                    "Watch"
+                ],
+                "rows": [
+                    [
+                        "Levothyroxine",
+                        "Empty dawn",
+                        "Spacing minerals"
+                    ],
+                    [
+                        "Carbimazole",
+                        "Blocks synthesis",
+                        "Agranulocytosis"
+                    ],
+                    [
+                        "PTU",
+                        "First trimester",
+                        "Liver"
+                    ],
+                    [
+                        "Radioiodine",
+                        "Definitive Graves",
+                        "Never pregnant"
+                    ]
+                ]
+            }
+        }
     ],
-    "rows": [
-     [
-      "Levothyroxine",
-      "Empty dawn",
-      "Spacing minerals"
-     ],
-     [
-      "Carbimazole",
-      "Blocks synthesis",
-      "Agranulocytosis"
-     ],
-     [
-      "PTU",
-      "First trimester",
-      "Liver"
-     ],
-     [
-      "Radioiodine",
-      "Definitive Graves",
-      "Never pregnant"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "bk2-phm-231",
-  "bk2-phm-232",
-  "bk2-phm-233",
-  "bk2-phm-234",
-  "bk2-phm-235",
-  "bk2-phm-236",
-  "bk2-phm-237",
-  "bk2-phm-238",
-  "bk2-phm-239",
-  "bk2-phm-240"
- ],
- "src": [],
- "refs": [
-  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-pharma3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+    "quiz": [
+        "bk2-phm-231",
+        "bk2-phm-232",
+        "bk2-phm-233",
+        "bk2-phm-234",
+        "bk2-phm-235",
+        "bk2-phm-236",
+        "bk2-phm-237",
+        "bk2-phm-238",
+        "bk2-phm-239",
+        "bk2-phm-240"
+    ],
+    "src": [],
+    "refs": [
+        "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+    ],
+    "gen": "AI",
+    "run": "books2-pharma3",
+    "model": "muse-wonder (local authoring, no external API)",
+    "checks": {
+        "shape": true,
+        "numbers": true,
+        "drugs": true,
+        "verbatim": true,
+        "dashes": true,
+        "verify": true,
+        "redone": 0,
+        "dropped": 0,
+        "kbWords": 0,
+        "itemN": 10
+    }
 }

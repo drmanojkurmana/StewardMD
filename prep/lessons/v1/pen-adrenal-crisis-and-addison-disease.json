@@ -57,39 +57,10 @@
     {
       "title": "Acute Adrenal Crisis Presentation and Mortality",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "1",
-            "label": "Physiological Stress\nGastroenteritis, high fever, trauma"
-          },
-          {
-            "id": "2",
-            "label": "Glucocorticoid Depletion\nComplete circulatory collapse"
-          },
-          {
-            "id": "3",
-            "label": "Metabolic Derangements\nHyponatremia, hyperkalemia, hypoglycemia"
-          },
-          {
-            "id": "4",
-            "label": "Refractory Shock\nFatal without prompt hydrocortisone"
-          }
-        ],
-        "edges": [
-          [
-            "1",
-            "2"
-          ],
-          [
-            "2",
-            "3"
-          ],
-          [
-            "3",
-            "4"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+        "alt": "Adrenal insufficiency causing vascular collapse with low sodium and high potassium.",
+        "caption": "Adrenal crisis: circulatory collapse with hyponatraemia and hyperkalaemia. Credit: StewardMD."
       },
       "tx": "Adrenal crisis is precipitated by physiological stress (gastroenteritis, high fever, surgery) in cortisol-deficient children, characterized by refractory hypotension, severe hyponatremia, hyperkalemia, and hypoglycemia. Analyzing the **Adrenal crisis trigger and mortality** demonstrates that mineralocorticoid lack promotes renal sodium wasting and potassium retention, while cortisol deficiency impairs vascular adrenergic tone. Prompt recognition and emergent intravenous rescue are vital to avert fatal cardiovascular arrest.",
       "say": "Adrenal crisis triggered by acute illness produces life-threatening circulatory collapse, severe hyponatremia, hyperkalemia, and hypoglycemia."
@@ -171,23 +142,10 @@
     {
       "title": "Autoimmune Polyglandular Syndrome Type 1 (APECED)",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "APS-1 / APECED Triad",
-          "points": [
-            "Chronic mucocutaneous candidiasis in infancy",
-            "Hypoparathyroidism presenting in early childhood",
-            "Autoimmune Addison disease during adolescence"
-          ]
-        },
-        "right": {
-          "title": "Molecular Genetics",
-          "points": [
-            "Autosomal recessive mutation in AIRE gene (21q22.3)",
-            "Defective thymic central immune tolerance",
-            "Ectodermal dystrophy, enamel hypoplasia, keratitis"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-polyendocrine-syndrome-type-1-fig1.webp",
+        "alt": "AIRE mutation leading to candidiasis, hypoparathyroidism and Addison disease.",
+        "caption": "APS-1: the AIRE triad of candidiasis, hypoparathyroidism and adrenal failure. Credit: StewardMD."
       },
       "tx": "APS-1 is an autosomal recessive mutation in the AIRE gene (21q22.3), defined by >= 2 of triad: chronic mucocutaneous candidiasis (infancy), hypoparathyroidism (childhood), and Addison disease (adolescence). Investigating **Autoimmune polyglandular syndrome type 1 (APS-1 / APECED)** shows that autoimmune regulator failure permits autoreactive T-cell clones to escape negative thymic selection. Patients require ongoing surveillance for secondary autoimmune hepatitis, gonadal failure, and pernicious anemia.",
       "say": "Autoimmune polyglandular syndrome type one arises from AIRE mutations and features infant candidiasis, juvenile hypoparathyroidism, and Addison disease."

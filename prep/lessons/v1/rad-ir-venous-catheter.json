@@ -3,11 +3,11 @@
  "module": "rad-ir-venous-catheter",
  "subject": "radiology",
  "title": "Central venous catheters: choice and line care",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Tips belong at the cavoatrial door. **Catheter tips** rest at the **cavoatrial junction** where high flow dilutes drugs and clots least, confirmed on fluoroscopy. **Right internal jugular** offers the straightest run to the cava with lowest thrombosis. **Left-sided and femoral lines** kink and clot sooner, reserved for blocked right sides. **Tip too deep** in atria triggers arrhythmia while shallow tips in brachiocephalic veins clot fast.",
-   "say": "Tips belong at the cavoatrial door. Catheter ends rest where the cava meets the atrium, confirmed on screening. Right neck veins offer the straightest run with least clotting. Left and groin lines kink sooner, reserved for blocked right sides. Deep tips trigger rhythm while shallow tips clot.",
+   "tx": "Catheter tip position decides safety, because high caval flow dilutes drugs and discourages clot formation around the tip. The **catheter tip** should rest at the **cavoatrial junction**, where the cava meets the atrium under fluoroscopy. The **right internal jugular vein** offers the straightest run toward that junction with the lowest thrombosis risk. Left sided and femoral lines kink and clot sooner, so the team reserves those routes for a blocked right side. A tip that sits too deep triggers arrhythmia, while a shallow tip in a brachiocephalic vein clots fast.",
+   "say": "Catheter tip position decides safety because high caval flow dilutes drugs and discourages clot formation. The tip should rest where the cava meets the atrium under fluoroscopy during placement. The right neck vein offers the straightest run toward that junction with lowest clotting risk. Left sided and groin lines kink and clot sooner so the team reserves those routes. A tip that sits too deep triggers arrhythmia while a shallow tip clots fast.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Ports hide under skin for months. **Implanted ports** suit intermittent chemotherapy with needle access through skin and low infection. **Tunneled cuffed catheters** serve dialysis and daily infusions where cuffs bar germs. **PICC lines** cover weeks of antibiotics via arm veins with higher clot rates. **Choice follows duration** with ports for months, tunnels for daily needs and PICCs for weeks.",
-   "say": "Ports hide under skin for months. Implanted ports suit intermittent chemotherapy with low infection. Tunnelled cuffed lines serve dialysis where cuffs bar germs. Arm PICCs cover weeks of antibiotics with higher clots. Duration picks devices: ports for months, tunnels for daily, PICCs for weeks.",
+   "tx": "This chest fluoroscopy image shows a catheter that enters through the **right internal jugular vein** and travels down the cava. The tip rests exactly at the **cavoatrial junction**, where fast flow dilutes infused drugs and discourages clot around the tip. The label for **high flow dilution** explains why a shallow or deep tip causes trouble after placement. The image matters for the exam because tip confirmation precedes vesicant infusion in every central line case. A deep tip risks arrhythmia while a shallow tip clots and fails early.",
+   "say": "This chest image is helpful because it shows a catheter that enters through the right neck vein and travels downward. The tip rests exactly where the cava meets the atrium under fluoroscopy during placement. Fast flow there dilutes infused drugs and discourages clot around the tip after placement. Tip confirmation is essential because it precedes vesicant infusion in every central line case for safety. A deep tip risks arrhythmia while a shallow tip clots and fails early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-venous-catheter-gen1.webp",
+    "alt": "Chest fluoroscopy showing jugular venous catheter tip at the cavoatrial junction.",
+    "caption": "Chest image of jugular catheter tip position. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Device choice follows treatment duration, because infection and thrombosis risks grow differently across catheter types. An **implanted port** suits intermittent chemotherapy over months, with needle access through skin and low infection rates. A **tunnelled cuffed catheter** serves dialysis and daily infusions, where the cuff forms a barrier against skin organisms. A **PICC line** covers weeks of antibiotics through arm veins, although clot rates run higher than jugular routes. Duration therefore picks the device, with ports for months, tunnels for daily needs and arm lines for weeks.",
+   "say": "Device choice follows treatment duration because infection and thrombosis risks grow differently across catheter types. An implanted port suits intermittent chemotherapy over months with needle access through skin safely. A tunnelled cuffed catheter serves dialysis and daily infusions where the cuff bars skin organisms. An arm line covers weeks of antibiotics through arm veins although clot rates run higher. Duration therefore picks the device with ports for months and tunnels for daily needs.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Infection starts at the hub. **Aseptic hub care** with scrubbed connections and chlorhexidine dressings prevents most line infections. **Fever with line tenderness** earns paired blood cultures from line and periphery before antibiotics. **Uncomplicated infections** may clear with locks and systemic drugs while tunnels stay. **Tunnel abscess or fungaemia** demands removal since germs coat plastic permanently.",
-   "say": "Infection starts at hubs. Scrubbed connections with antiseptic dressings prevent most line infections. Fever with tender lines earns paired cultures before drugs. Simple infections may clear with locks while tunnels stay. Tunnel abscess or fungal blood demands removal since germs coat plastic.",
+   "tx": "Line infection usually starts at the hub, so daily handling matters as much as insertion technique itself. **Aseptic hub care** with scrubbed connections and antiseptic dressings prevents most infections during routine ward use. Fever with line tenderness earns **paired blood cultures** from line and periphery before antibiotics start in hospital. An uncomplicated infection may clear with locks and systemic drugs while a tunnelled line stays in place. **Tunnel abscess or fungaemia** demands removal because organisms coat plastic permanently and relapse follows retention inevitably.",
+   "say": "Line infection usually starts at the hub so daily handling matters as much as insertion technique. Aseptic hub care with scrubbed connections and antiseptic dressings prevents most infections during ward use. Fever with line tenderness earns paired cultures from line and periphery before antibiotics start. An uncomplicated infection may clear with locks and systemic drugs while the line stays. Tunnel abscess or fungal blood is serious because it demands removal as organisms coat plastic permanently.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-venous-catheter-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Blocked lines speak through pressures. **Fibrin sheaths** wrap tips allowing infusion but no withdrawal, treated with low-dose lytic dwells. **Catheter-related thrombosis** swells arms or necks with duplex-mapped clots needing anticoagulation. **Pinch-off syndrome** cracks subclavian lines at the costoclavicular angle, warning with positional flow. **Remove versus salvage** weighs infection, clot and ongoing need at every blockage.",
-   "say": "Blocked lines speak through pressures. Fibrin wraps allow flushing but no draw-back, treated with lytic dwells. Line clots swell arms needing anticoagulation. Pinch-off cracks lines at the collarbone, warning with positional flow. Every blockage weighs removal against salvage.",
+   "tx": "A blocked line speaks through pressures and flow pattern, and each pattern points toward a different remedy. A **fibrin sheath** wraps the tip and allows infusion but blocks withdrawal, so low dose lytic dwells clear it. **Catheter related thrombosis** swells the arm or neck, and duplex mapped clot needs anticoagulation with line review. **Pinch off syndrome** cracks a subclavian line at the costoclavicular angle and warns through positional flow changes. Every blockage forces a remove versus salvage judgement that weighs infection, clot and ongoing need together.",
+   "say": "A blocked line speaks through pressures and flow pattern and each pattern points toward a remedy. A fibrin sheath wraps the tip and allows infusion but blocks withdrawal from the line. Line thrombosis swells the arm or neck and mapped clot needs anticoagulation with review. Pinch off is a crack in a subclavian line near the collarbone with positional flow changes. Every blockage forces a remove versus salvage judgement that weighs infection and need together.",
    "vis": {
     "kind": "flow",
     "nodes": [

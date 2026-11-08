@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Zwitterions, pKa and isoelectric point",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "At physiological pH an amino acid is a **zwitterion**: carboxyl deprotonated negative, amino protonated positive, net zero yet doubly charged, explaining high melting points, water solubility and poor lipid membrane crossing without transporters. Lowering pH protonates carboxyl first (cation net positive, migrates to cathode), raising pH deprotonates amino (anion, to anode), with side chain groups titrating by their own pKa values in between.",
+   "say": "At body pH amino acids are zwitterions, doubly charged yet net zero. Lowering pH makes cations and raising pH makes anions, with side chains titrating by their own pKa values.",
+   "vis": {
+    "kind": "flow",
+    "title": "pH walks the charge",
+    "nodes": [
+     {
+      "id": "acid",
+      "label": "Low pH: net positive (cathode)"
+     },
+     {
+      "id": "zwit",
+      "label": "Mid pH: zwitterion (net zero)"
+     },
+     {
+      "id": "alk",
+      "label": "High pH: net negative (anode)"
+     }
+    ],
+    "edges": [
+     [
+      "acid",
+      "zwit"
+     ],
+     [
+      "zwit",
+      "alk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **isoelectric point** (pI) averages the two pKa values flanking the zwitterion (for neutral amino acids (pKa1 plus pKa2) over two, about five to six; acidic amino acids average the two carboxyl pKas lower, basic average the two amino pKas higher). At pI solubility is minimal (isoelectric precipitation, casein curdling in acidified milk at pH 4.6) and electrophoretic mobility zero, principles exploited from cheese to two dimensional gels.",
+   "say": "The isoelectric point averages the pKa values flanking the zwitterion. Solubility is minimal and mobility zero there, exploited from cheese making to two dimensional gels in proteomics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amino acid type",
+     "pI rule",
+     "Approximate pI zone"
+    ],
+    "rows": [
+     [
+      "Neutral (Gly, Ala etc.)",
+      "Average carboxyl and amino pKa",
+      "About 5 to 6.5"
+     ],
+     [
+      "Acidic (Asp, Glu)",
+      "Average two carboxyl pKas",
+      "About 3 (low)"
+     ],
+     [
+      "Basic (Lys, Arg, His)",
+      "Average two amino pKas",
+      "About 7.5 to 10.7 (high; Arg highest)"
+     ],
+     [
+      "Proteins (exam anchors)",
+      "Casein 4.6, albumin 4.7, haemoglobin 6.8",
+      "Precipitation and electrophoresis design"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Henderson-Hasselbalch** quantifies each titration (pH equals pKa plus log base over acid), buffer capacity peaking within one pH unit of pKa, flat plateaus on titration curves at each pKa and steep equivalence jumps between. Histidine side chain pKa near six makes it the only effective intracellular and haemoglobin buffer residue at body pH (imidazole), and concentrated histidine forms carnosine in muscle and imidazole drug pharmacophores in clinic.",
+   "say": "Henderson-Hasselbalch quantifies each titration, with buffering peaking near pKa. Histidine near pKa six is the only effective protein buffer at body pH, including haemoglobin Bohr histidines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Below pKa (acid side)",
+     "points": [
+      "Protonated form dominates",
+      "Carboxyl COOH, amino NH3+",
+      "Net charge more positive"
+     ]
+    },
+    "right": {
+     "title": "Above pKa (base side)",
+     "points": [
+      "Deprotonated form dominates",
+      "Carboxyl COO-, amino NH2",
+      "Net charge more negative"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Electrophoresis** applies the charge map: at pH below pI proteins run to cathode (negative electrode naming trap: cathode attracts cations), above pI to anode, stopping at pI in isoelectric focusing gels that separate haemoglobin variants and serum proteins diagnostically. Serum protein electrophoresis zones (albumin, alpha-1 antitrypsin, alpha-2, beta transferrin and complement, gamma immunoglobulins) and monoclonal spikes are pI and size logic read clinically every day.",
+   "say": "Below pI proteins run to cathode and above to anode, stopping at pI in focusing gels. Serum protein zones and monoclonal spikes are this charge logic read clinically every day.",
+   "vis": null
+  },
+  {
+   "tx": "Buffering hierarchy for examinations must stay ordered: **bicarbonate** dominates extracellular fluid (open system, lungs blow off acid), haemoglobin histidines dominate red cell and whole blood closed buffering (Bohr and carbamino linked), plasma proteins and phosphate assist, intracellular proteins and phosphate dominate inside cells, and bone carbonate buffers chronic acid at skeletal cost. Amino acid titration is the molecular root of the haemoglobin line, not a rival to bicarbonate primacy.",
+   "say": "Bicarbonate dominates extracellular fluid as an open system, while haemoglobin histidines dominate red cell buffering. Amino acid titration is the molecular root of the haemoglobin line in hierarchy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Buffer system",
+     "Arena champion",
+     "pKa or trick"
+    ],
+    "rows": [
+     [
+      "Bicarbonate",
+      "Extracellular fluid",
+      "Open: lungs adjust denominator"
+     ],
+     [
+      "Haemoglobin histidines",
+      "Red cells, whole blood",
+      "pKa near 6, Bohr linked"
+     ],
+     [
+      "Phosphate",
+      "Intracellular, urine (titratable acid)",
+      "pKa 6.8 near cell pH"
+     ],
+     [
+      "Proteins (histidine)",
+      "Plasma and cells",
+      "Albumin modest extracellular share"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Worked anchors** prevent arithmetic panic: glycine pKa values about 2.3 and 9.6 give pI about six; glutamate (extra carboxyl pKa about 4.3) gives pI about 3.2; lysine (extra amino pKa about 10.5) gives pI about 9.7; arginine guanidinium pKa about 12.5 gives the highest pI near 10.8 and stays positive throughout physiology, explaining arginine rich histone DNA binding and protamine heparin reversal charge stoichiometry.",
+   "say": "Glycine pI is about six, glutamate about three, lysine about ten, and arginine highest near eleven. Arginine stays positive throughout physiology, explaining histone binding and protamine reversal stoichiometry.",
+   "vis": {
+    "kind": "flow",
+    "title": "pI prediction in three checks",
+    "nodes": [
+     {
+      "id": "count",
+      "label": "Count ionisable groups, find zwitterion neighbours"
+     },
+     {
+      "id": "avg",
+      "label": "Average the two flanking pKa values"
+     },
+     {
+      "id": "move",
+      "label": "pH below pI: cathode; above: anode; at pI: stops"
+     }
+    ],
+    "edges": [
+     [
+      "count",
+      "avg"
+     ],
+     [
+      "avg",
+      "move"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,148 +1,159 @@
 {
- "v": 1,
- "module": "rad-ir-ablation",
- "subject": "radiology",
- "title": "Ablation and liver-directed cancer therapy",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Heat, cold and electricity all kill focal tumours. **Radiofrequency ablation** heats tissue to coagulative necrosis and suits small **hepatocellular carcinomas** within transplant criteria. **Microwave ablation** reaches higher temperatures faster with less **heat-sink** loss near vessels. **Cryoablation** freezes with visible ice balls and suits renal tumours near the collecting system. **Irreversible electroporation** uses electric pulses without heat, suiting tumours hugging bile ducts or vessels.",
-   "say": "Heat, cold and electricity kill focal tumours. Radiofrequency heats small liver cancers to necrosis. Microwave runs hotter with less heat loss near vessels. Freezing suits kidney tumours near drainage tubes, and electroporation suits tumours hugging ducts without heat.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Modality",
-     "Best for"
-    ],
-    "rows": [
-     [
-      "Radiofrequency",
-      "Small HCC"
-     ],
-     [
-      "Microwave",
-      "Near vessels"
-     ],
-     [
-      "Cryoablation",
-      "Renal tumours"
-     ],
-     [
-      "Electroporation",
-      "Near ducts"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Selection decides ablation success. **Hepatocellular carcinoma** within **Milan criteria** under AASLD and EASL guidance suits ablation or transplant pathways. **Colorectal liver metastases** limited in number and size suit ablation when surgery is refused or unfit. **Heat-sink** from adjacent vessels over 3 mm cools radiofrequency zones and invites recurrence at the vessel edge. **Subcapsular tumours** risk seeding and bleeding, needing tract ablation on withdrawal. **Biopsy first** confirms histology before destroying the evidence.",
-   "say": "Selection decides success. Liver cancers within Milan criteria suit ablation or transplant routes. Limited colorectal secondaries suit ablation when surgery is refused. Vessel cooling causes edge recurrence, subcapsular tumours need tract burning, and biopsy must precede destruction.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/rad-ir-ablation-fig1.webp",
-    "alt": "Diagram showing liver with a tumor near a large vessel, illustrating heat-sink effect, and a subcapsular tumor with seeding/bleeding risks.",
-    "caption": "Ablation challenges: heat-sink effect near vessels and risks of subcapsular tumors",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Chemoembolisation pairs ischaemia with drugs. **Conventional TACE** mixes chemotherapy with lipiodol followed by embolic particles for intermediate **hepatocellular carcinoma**. **Drug-eluting bead TACE** releases drug slowly with less systemic toxicity. **Post-embolisation syndrome** with fever and pain follows and needs supportive care. **Liver failure** threatens when portal flow is already compromised, so **portal vein patency** is confirmed first. **Bilirubin and performance status** gate every session.",
-   "say": "Chemoembolisation pairs ischaemia with drugs. Conventional TACE mixes drugs with oil then particles for intermediate liver cancer. Bead TACE releases drug slowly with less toxicity. Fever and pain after need supportive care, and portal patency with bilirubin gates every session.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Therapy",
-     "Role"
-    ],
-    "rows": [
-     [
-      "Conventional TACE",
-      "Intermediate HCC"
-     ],
-     [
-      "Bead TACE",
-      "Less systemic toxicity"
-     ],
-     [
-      "Portal patency",
-      "Required first"
-     ],
-     [
-      "Post syndrome",
-      "Supportive care"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Radioembolisation irradiates from inside. **Yttrium-90 microspheres** lodge in tumour arterioles delivering **beta radiation** over days, suiting unresectable liver tumours with good reserve. A **macroaggregated albumin scan** maps **lung shunting** and gastrointestinal reflux before dosing, and excessive shunt cancels or reduces treatment. **Radiation segmentectomy** ablates small segments with high dose, while lobar treatment needs preserved function. **Gastric ulceration** from refluxed spheres is the dreaded non-target injury.",
-   "say": "Radioembolisation irradiates from inside. Yttrium spheres lodge in tumour vessels delivering beta dose over days. An albumin scan maps lung shunt and gut reflux first, with excess shunt cancelling treatment. Segmentectomy ablates small areas, and refluxed spheres ulcerate stomach.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Map with albumin scan"
-     },
-     {
-      "id": "b",
-      "label": "Check lung shunt"
-     },
-     {
-      "id": "c",
-      "label": "Deliver Y-90 dose"
-     },
-     {
-      "id": "d",
-      "label": "Watch liver function"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
+  "v": 1,
+  "module": "rad-ir-ablation",
+  "subject": "radiology",
+  "title": "Ablation and liver-directed cancer therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Clinicians kill focal tumours with heat, cold or electricity according to tumour site, size and nearby structures. **Radiofrequency ablation** heats tissue to coagulative necrosis and suits small hepatocellular carcinoma in suitable patients. **Microwave ablation** reaches higher temperatures faster and loses less effect near vessels through heat sink. Cryoablation freezes tissue with a visible ice ball and suits renal tumours near the collecting system. **Irreversible electroporation** uses electric pulses without heat and suits tumours beside bile ducts or vessels.",
+      "say": "Clinicians kill focal tumours with heat, cold or electricity during ablation procedures. Radiofrequency ablation is used to heat tissue to necrosis and suits small liver cancers well. Microwave ablation reaches higher temperatures and loses less effect near vessels. Cryoablation is used for renal tumours while electroporation avoids heat beside delicate ducts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Modality",
+          "Best for"
+        ],
+        "rows": [
+          [
+            "Radiofrequency",
+            "Small HCC"
+          ],
+          [
+            "Microwave",
+            "Near vessels"
+          ],
+          [
+            "Cryoablation",
+            "Renal tumours"
+          ],
+          [
+            "Electroporation",
+            "Near ducts"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Careful selection decides whether ablation succeeds because tumour biology and position determine the achievable treatment margin. Hepatocellular carcinoma within **Milan criteria** may suit ablation or transplant pathways after multidisciplinary assessment by specialists. Limited **colorectal liver metastases** may suit ablation when surgery is refused or the patient remains unfit. Vessels larger than three millimetres create a **heat sink effect** that cools the ablation zone and invites recurrence. Clinicians obtain biopsy first because ablation destroys tissue that would otherwise confirm histology.",
+      "say": "Careful selection decides whether ablation succeeds for each individual liver tumour patient. Hepatocellular carcinoma within Milan criteria may suit ablation or transplant pathways afterwards. Limited colorectal liver metastases may suit ablation when surgery remains unsuitable clinically. Large nearby vessels cause cooling of ablation zones and invite recurrence at margins.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-ir-ablation-fig1.webp",
+        "alt": "Diagram showing liver with a tumor near a large vessel, illustrating heat-sink effect, and a subcapsular tumor with seeding/bleeding risks.",
+        "caption": "Ablation challenges: heat-sink effect near vessels and risks of subcapsular tumors",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "**Conventional TACE** mixes chemotherapy with lipiodol and then adds embolic particles for intermediate hepatocellular carcinoma. **Drug eluting bead TACE** releases chemotherapy slowly from beads and reduces systemic toxicity for treated patients. Fever and pain after embolisation form post embolisation syndrome and usually need supportive care in hospital. Clinicians confirm **portal vein patency** before treatment because compromised portal flow increases the risk of liver failure. Bilirubin level and performance status gate every treatment session before clinicians proceed safely.",
+      "say": "Conventional TACE is prepared by mixing chemotherapy with lipiodol and adding embolic particles afterwards. Drug eluting bead TACE releases chemotherapy slowly and reduces systemic toxicity considerably. Fever and pain after embolisation usually need supportive care in hospital afterwards. Clinicians confirm portal vein patency because compromised flow increases liver failure risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapy",
+          "Role"
+        ],
+        "rows": [
+          [
+            "Conventional TACE",
+            "Intermediate HCC"
+          ],
+          [
+            "Bead TACE",
+            "Less systemic toxicity"
+          ],
+          [
+            "Portal patency",
+            "Required first"
+          ],
+          [
+            "Post syndrome",
+            "Supportive care"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Yttrium 90 microspheres** lodge inside tumour arterioles and deliver beta radiation over several days after administration. Radioembolisation suits unresectable liver tumours when liver reserve remains adequate for safe treatment delivery. A **macroaggregated albumin scan** maps lung shunting and gastrointestinal reflux before clinicians calculate the treatment dose. Excessive lung shunt leads clinicians to cancel treatment or reduce dose to protect the lungs. **Radiation segmentectomy** delivers a high dose to a small segment while preserving remaining liver function.",
+      "say": "Yttrium microspheres are lodged inside tumour arterioles and deliver beta radiation over days. Radioembolisation suits unresectable liver tumours when liver reserve remains adequate for treatment. An albumin scan maps lung shunting and gastrointestinal reflux before dose calculation. Excessive lung shunt leads clinicians to cancel or reduce treatment promptly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map with albumin scan"
+          },
+          {
+            "id": "b",
+            "label": "Check lung shunt"
+          },
+          {
+            "id": "c",
+            "label": "Deliver Y-90 dose"
+          },
+          {
+            "id": "d",
+            "label": "Watch liver function"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "This angiogram shows a catheter delivering **Yttrium 90 microspheres** into an unresectable liver tumour with a red zone marking beta radiation. The inset shows the **macroaggregated albumin scan** that clinicians use to estimate lung shunting before treatment. Labels connect internal radiation with tumour arterioles rather than an external beam source. For examinations, excessive shunt and gastrointestinal reflux are the key reasons to stop or modify **radioembolisation** planning.",
+      "say": "This angiogram shows microspheres delivering internal radiation into an unresectable liver tumour. The inset shows an albumin scan that estimates lung shunting before treatment begins. Labels link beta radiation with tumour arterioles rather than external beam therapy. Excessive shunting remains a key reason to modify radioembolisation planning beforehand.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-ir-ablation-gen1.webp",
+        "alt": "Hepatic angiogram showing Yttrium microspheres delivering beta radiation to tumour",
+        "caption": "Angiogram of Yttrium microspheres treating liver tumour. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    }
+  ],
+  "quiz": [
+    "maikir-071",
+    "maikir-072",
+    "maikir-073",
+    "maikir-074",
+    "maikir-075",
+    "maikir-076",
+    "maikir-077",
+    "maikir-078",
+    "maikir-079",
+    "maikir-080"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "maikir-071",
-  "maikir-072",
-  "maikir-073",
-  "maikir-074",
-  "maikir-075",
-  "maikir-076",
-  "maikir-077",
-  "maikir-078",
-  "maikir-079",
-  "maikir-080"
- ],
- "src": [],
- "refs": [
-  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "ir-wave2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

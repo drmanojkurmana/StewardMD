@@ -9,33 +9,10 @@
     {
       "title": "ISPAD Biochemical Diagnostic Triad for DKA",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Diagnostic Criteria",
-          "Threshold Value",
-          "Pathological Mechanism",
-          "Clinical Significance"
-        ],
-        "rows": [
-          [
-            "Hyperglycemia",
-            "Blood glucose > 200 mg/dL (11 mmol/L)",
-            "Absolute or relative insulin lack",
-            "Osmotic diuresis, glucosuria"
-          ],
-          [
-            "Metabolic Acidosis",
-            "Venous pH < 7.30 or HCO3 < 18 mEq/L",
-            "Accumulation of ketoacids",
-            "Kussmaul breathing, acetone odor"
-          ],
-          [
-            "Ketonemia / Ketonuria",
-            "Blood beta-hydroxybutyrate >= 3.0 mmol/L",
-            "Hepatic ketogenesis from lipolysis",
-            "Hallmark of ketoacidosis"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/dka-fig1.webp",
+        "alt": "Insulin deficiency driving lipolysis and hepatic ketone production in ketoacidosis.",
+        "caption": "DKA: insulin lack drives lipolysis and ketogenesis. Credit: StewardMD."
       },
       "tx": "DKA is defined by hyperglycemia (blood glucose > 200 mg/dL / 11 mmol/L), venous pH < 7.30 or serum bicarbonate < 18 mEq/L, and ketonemia (blood beta-hydroxybutyrate >= 3.0 mmol/L) or moderate/large ketonuria. The **ISPAD biochemical diagnostic triad for DKA** establishes that absolute insulin deficiency triggers uninhibited lipolysis and hepatic oxidation of free fatty acids into acetoacetate and beta-hydroxybutyrate. Point-of-care capillary beta-hydroxybutyrate provides immediate confirmation.",
       "say": "Diabetic ketoacidosis requires blood glucose over two hundred, venous pH under seven point three or bicarbonate under eighteen, and elevated beta-hydroxybutyrate."
@@ -171,23 +148,10 @@
     {
       "title": "Potassium Repletion Protocol and Electrolyte Timing",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Total Body Depletion",
-          "points": [
-            "Osmotic diuresis wastes potassium in urine",
-            "Serum K may appear deceptively normal or high",
-            "Acidosis shifts potassium out of cells"
-          ]
-        },
-        "right": {
-          "title": "Infusion Additives",
-          "points": [
-            "Add 40 mEq/L potassium upon verified urine output",
-            "50% potassium chloride and 50% potassium phosphate",
-            "Withhold if serum potassium >= 5.5 mEq/L"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/dka-fig2.webp",
+        "alt": "Lipolysis, ketogenesis, acidosis, osmotic diuresis and potassium shifts in ketoacidosis.",
+        "caption": "DKA: acidosis, osmotic diuresis and potassium shifts. Credit: StewardMD."
       },
       "tx": "Potassium (40 mEq/L as 50% potassium chloride and 50% potassium phosphate) must be added to IV fluids immediately upon establishing urine output and verifying K < 5.5 mEq/L; insulin shifts potassium intracellularly. Observing strict **Potassium repletion timing and composition** is vital because as insulin drives potassium into hepatocytes and myocytes and rehydration dilutes plasma, rapid life-threatening hypokalemia and fatal cardiac dysrhythmias develop if replacement is neglected.",
       "say": "Potassium must be added to maintenance fluids once urine output is established, providing forty milliequivalents per liter to avert dangerous hypokalemia."

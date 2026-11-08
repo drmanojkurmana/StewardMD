@@ -3,11 +3,11 @@
  "module": "phm-immunosuppressants",
  "subject": "pharmacology",
  "title": "Immunosuppressants: calcineurin, antimetabolites, biologics and JAK",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Ciclosporin** (calcineurin IL2, **hirsutism with gum hyperplasia**, hypertension, **nephrotoxicity**, gout, **grapefruit**; levels trough) with **tacrolimus** (**tremor, diabetes**, less cosmetic, alopecia, **topical eczema** steroid sparing) anchors transplant; magnesium wasting seizes while infection and PTLD watch. CYP3A4 macrolides and azoles magnify; levels dose.",
-   "say": "Hairy gums hypertensive kidneys is ciclosporin levels trough; trembling diabetic tacrolimus topicals eczema. Grapefruit magnifies.",
+   "tx": "**Ciclosporin** inhibits calcineurin and interleukin two production but causes hirsutism, gum hyperplasia, hypertension, kidney toxicity and gout during transplant therapy. **Tacrolimus** shares nephrotoxicity with more tremor and diabetes but fewer cosmetic effects, and topical tacrolimus spares steroids in eczema. Grapefruit and CYP3A4 inhibitors such as macrolides and azoles raise levels sharply, so **trough monitoring** guides dosing and magnesium wasting needs correction.",
+   "say": "Ciclosporin suppresses interleukin two and prevents transplant rejection effectively. Hair growth, gum swelling, hypertension and kidney injury limit ciclosporin tolerability. Tacrolimus causes tremor and diabetes more often than cosmetic problems. Grapefruit and interacting antibiotics raise levels and require trough monitoring.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-immunosuppressants-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Sirolimus and everolimus** (mTOR, **mouth ulcers**, hyperlipids, **pneumonitis**, **poor wound healing** surgery held, proteinuria) with **MMF** (**teratogenic** two contraceptions, GI diarrhoea, **BK virus** nephropathy, leucopenia) and **azathioprine** (**TPMT** screened, hepatotoxic, pancreatitis, **NMSC** sun) antimetabolise; allopurinol magnifies azathioprine quartering. Vaccines live banned; skin cancers screen.",
-   "say": "Ulcers pneumonitis wounds is sirolimus held surgery; MMF teratogenic BK diarrhoeas. TPMT screens azathioprine.",
+   "tx": "**Sirolimus and everolimus** block mTOR and cause mouth ulcers, high lipids, pneumonitis, proteinuria and poor wound healing that needs withholding around surgery. **Mycophenolate** causes diarrhoea and leucopenia, carries teratogenic risk needing two contraceptions, and predisposes to BK virus nephropathy in kidney transplants. **Azathioprine** needs TPMT screening before starting, and allopurinol sharply raises its toxicity through shared metabolic pathways.",
+   "say": "Sirolimus blocks mTOR signalling and impairs wound healing after surgery significantly. Mouth ulcers, lipid rise and pneumonitis limit sirolimus and everolimus tolerability. Mycophenolate causes diarrhoea and requires strict contraception during treatment. Azathioprine requires enzyme screening because deficiency causes dangerous marrow suppression.",
    "vis": null
   },
   {
-   "tx": "**Steroids** (rejection pulses, diabetes, bones, infection) with **basiliximab** (IL2R induction, gentle) and **ATG** (**cytokine release** fevers, **serum sickness** weeks, PTLD, platelets) induct; **belatacept** (costimulation, **PTLD EBV naive banned**, nephron sparing) converts. Pretransplant EBV serology gates belatacept; rabbit premedication steroids tame.",
-   "say": "Pulsing steroids rejection; ATG fevers serum sickens weeks. EBV naive bans belatacept PTLD.",
+   "tx": "The T cell interior shows sirolimus binding FKBP12 and blocking **mTOR signalling**, while mycophenolate blocks IMPDH and stops guanosine production for DNA synthesis. Both pathways converge on blocked **T lymphocyte proliferation**, which prevents rejection but also causes mouth ulcers and BK virus problems shown in the corner insets. Seeing proliferation blocked at two points explains why **mycophenolate** and sirolimus combine with other agents.",
+   "say": "The image shows two separate blocks converging on T cell proliferation inside the cell. Sirolimus binds FKBP12 and blocks mTOR signalling for cell growth. Mycophenolate blocks IMPDH and starves DNA synthesis of guanosine building blocks. Mouth ulcers and BK virus infection are warning signs that indicate excessive immunosuppression in transplant recipients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-immunosuppressants-gen1.webp",
+    "alt": "T cell interior showing IL-2 receptor, FKBP12 sirolimus mTOR complex and IMPDH blocked DNA synthesis",
+    "caption": "T cell showing sirolimus and mycophenolate proliferation blockade. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Induction and rejection treatment combine steroid pulses with antibody therapy chosen by rejection risk and previous sensitisation history. **Basiliximab** blocks the interleukin two receptor gently, while **antithymocyte globulin** causes cytokine release fever and later serum sickness with low platelets. **Belatacept** blocks costimulation and spares kidneys but remains banned in EBV naive recipients because post transplant lymphoproliferative disorder risk rises sharply.",
+   "say": "Steroid pulses treat acute rejection while antibodies provide induction in high risk recipients. Antithymocyte globulin causes fever from cytokine release and later serum sickness. Basiliximab blocks interleukin two receptors with gentler tolerability overall. Belatacept helps spare kidneys but increases danger for recipients without previous EBV exposure before transplantation.",
    "vis": null
   },
   {
-   "tx": "**JAK** (**tofacitinib**: **clots with zoster**, lipids, diverticular perforation) with **anti-TNF** (**infliximab**: **TB reactivation screened**, infusion reactions, **demyelination with heart failure banned**, psoriasis paradoxical) and **rituximab** (**HBV reactivation screened**, **PML** rare, infusion cytokine, hypogammaglobulinaemia) biologics; **abatacept, tocilizumab** (lipids, bowel perforation) options. Chest X-ray with quantiferon precedes anti-TNF; HBV prophylaxis rituximab.",
-   "say": "Clotting shingles is tofacitinib; TB screens infliximab failing hearts demyelinated banned. HBV screens rituximab PML.",
+   "tx": "**Tofacitinib** and other JAK inhibitors increase clots and herpes zoster with lipid rise and bowel perforation in susceptible patients. **Infliximab** and other anti TNF agents reactivate tuberculosis, so screening precedes therapy, and these drugs remain banned in demyelination and worsening heart failure. **Rituximab** reactivates hepatitis B and rarely causes progressive multifocal leukoencephalopathy, so viral screening and prophylaxis precede B cell depletion.",
+   "say": "JAK inhibitors increase clots and shingles during long term treatment significantly. Anti TNF therapy reactivates tuberculosis and requires screening before starting treatment. Heart failure and demyelination forbid anti TNF agents in affected patients. Rituximab reactivates hepatitis B and requires viral screening beforehand.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "Testing strategy and interpretation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Choose tests by **lesion size** first: single nucleotides and small indels (sequencing Sanger/panels/exome), exon level deletions duplications (MLPA, array, exome CNV calling), repeat expansions (repeat primed PCR, long read/Southern), balanced rearrangements, aneuploidy (QF-PCR, karyotype, array, NIPT screening cell free DNA placenta derived (screening not diagnosis, confined placental mosaicism, CVS (ten to thirteen weeks, mosaicism) versus amniocentesis (fifteen weeks plus, culture) diagnostic hierarchy quoted in every prenatal counselling), methylation imprints (methylation MLPA/arrays), mosaicism depth (deep sequencing, affected tissue sampling (skin, buccal, tumour) when blood normal).",
+   "say": "Choose tests by lesion size first from nucleotides to balanced rearrangements and methylation imprints hierarchically. Non invasive prenatal testing screens placenta derived DNA, never diagnoses without invasive confirmation counselling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical question sketch",
+     "First test usually",
+     "Reflex if negative or unclear"
+    ],
+    "rows": [
+     [
+      "Known familial variant (cascade)",
+      "Targeted Sanger/variant assay (cheap, definitive)",
+      "No broad test needed; predictive counselling protocol"
+     ],
+     [
+      "Developmental delay plus congenital anomalies child",
+      "Chromosomal microarray (first tier)",
+      "Exome trio if array normal"
+     ],
+     [
+      "Suspected Down/Turner/Klinefelter",
+      "Karyotype (plus rapid QF-PCR if urgent)",
+      "Array if karyotype normal but anomalies persist"
+     ],
+     [
+      "Undiagnosed multisystem rare disease",
+      "Exome/genome trio",
+      "Reanalysis in 1 to 2 years, RNA studies"
+     ],
+     [
+      "Repeat expansion suspected (myotonic, fragile X, Huntington)",
+      "Repeat primed PCR (long read/Southern for sizing/methylation)",
+      "Standard PCR/NGS will miss: order correctly first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trio** sequencing (proband plus parents) instantly phases de novo (present child absent parents (recurrence low gonadal caveat), inherited, compound heterozygous cis/trans) multiplying diagnostic yield in neurodevelopmental disease, while singleton hunting drowns in VUS. Cancer germline versus somatic discipline (tumour only findings need normal tissue subtraction for germline claims (CHIP contamination in blood normals ageing), paired tumour normal gold standard, ctDNA monitoring versus germline testing separate orders never substituted), newborn screening (tandem MS biochemical (prior) versus genomic pilots (treatable conditions consent) expanding by treatability criteria historically Wilson-Jungner updated.",
+   "say": "Trio sequencing phases de novo and compound heterozygosity instantly multiplying diagnostic yield neurodevelopmentally. Tumour findings need normal subtraction for germline claims, never substituted by circulating DNA monitoring orders confusedly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic testing (affected person)",
+     "points": [
+      "Broadest test justified hunting cause",
+      "VUS counselled, reanalysis offered",
+      "Results cascade to relatives"
+     ]
+    },
+    "right": {
+     "title": "Predictive/cascade (healthy relative)",
+     "points": [
+      "Known familial variant targeted only",
+      "Pre test counselling, consent, insurance discussion",
+      "Negative is true negative only for that variant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prenatal and preimplantation ladders carry distinct consents: carrier screening couples (expanded panels ancestry agnostic modern, residual risks quoted), chorionic villus versus amniocentesis procedure losses modern (about one in three to nine hundred experienced hands counselling ranges), **PGT-M** (IVF embryo biopsy single variant plus linkage, mosaic embryo transfer dilemmas, PGT-A aneuploidy screening outcome debates), non invasive prenatal diagnosis monogenic by paternal allele exclusion or dosage haplotyping specialist centres. Huntington predictive testing protocols (neurology, psychology, staged consent, right not to know relatives) remain genetic counselling gold standard beyond laboratory mechanics.",
+   "say": "Carrier, prenatal and preimplantation ladders carry distinct consents and procedure loss counselling modernly. Huntington predictive protocols remain counselling gold standard beyond laboratory mechanics with staged psychology support mandatory.",
+   "vis": null
+  },
+  {
+   "tx": "Interpretation restraint decides safety: **VUS** reclassification (family segregation studies free in many laboratories, RNA splicing assays, functional data sharing ClinVar), secondary findings opt in/out (ACMG actionable genes medically returned if consented (BRCA, Lynch, familial hypercholesterolaemia actionable triad population screening debates genomic screening pilots)), pharmacogenomic results lifetime reusable (record once, alert prescribing systems), ancestry and kinship incidental discoveries (non paternity rates counselling preparedness). Negative reports state residual risk and technology limits (noncoding, repeats, mosaicism, CNV blind spots by platform) verbatim, a medicolegal sentence examiners reward copied exactly.",
+   "say": "Uncertain variants reclassify with segregation and RNA studies over years patiently, never directing irreversible action alone. Negative reports state residual risk and platform blind spots verbatim medicolegally in reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Result type",
+     "Safe clinical action"
+    ],
+    "rows": [
+     [
+      "Pathogenic/likely pathogenic (diagnostic context)",
+      "Manage, cascade relatives, reproductive options"
+     ],
+     [
+      "VUS",
+      "Phenotype care only; segregation and reanalysis, no surgery on VUS"
+     ],
+     [
+      "Negative (broad test)",
+      "Residual risk remains; consider other platform (array, repeats, methylation)"
+     ],
+     [
+      "Secondary actionable (consented)",
+      "Refer pathway (cardiology/genetics), confirm in diagnostic laboratory"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Newborn and population screening** ethics (treatability, test accuracy, follow up systems before expansion (genomic newborn pilots GUARDIAN/Generation programmes consent research frames), carrier frequencies guiding panel content (CFTR ancestry gradients, SMA SMN1 dosage (carrier silent two copies cis caveat), fragile X premutation women), direct to consumer limitations belong in strategy answers. Biochemical screening (MS/MS, TSH, seventeen OHP congenital adrenal hyperplasia (prior steroid lesson false positives prematurity), immunoreactive trypsinogen CF with DNA tiers) still outperforms genomic first line where metabolites integrate function.",
+   "say": "Screening ethics demand treatability and follow up systems before expansion historically and genomically. Biochemical screening still outperforms genomic first line where metabolites integrate function in newborns nationally screened universally.",
+   "vis": {
+    "kind": "flow",
+    "title": "Screen positive is not diagnosis",
+    "nodes": [
+     {
+      "id": "scr",
+      "label": "Screen flags (sensitive, false positives expected)"
+     },
+     {
+      "id": "conf",
+      "label": "Confirmatory diagnostic test (specific platform)"
+     },
+     {
+      "id": "act",
+      "label": "Treat, cascade, counsel on confirmed only"
+     }
+    ],
+    "edges": [
+     [
+      "scr",
+      "conf"
+     ],
+     [
+      "conf",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Separation science** next purifies what testing detects, but strategy synthesis fits one algorithm to quote: phenotype precisely (HPO terms), choose lesion size platform, trio when de novo hunt, confirm orthogonally when stakes irreversible (Sanger confirm NGS, second sample identity in prenatal), cascade targeted, reanalyse unsolved exomes periodically (new gene discovery solves ten to fifteen percent per reanalysis round literature). Genetics patterns lesson finalises inheritance mathematics these orders serve, Hardy-Weinberg converting variant frequencies into carrier risks at population scale.",
+   "say": "Phenotype precisely, choose lesion size platform, confirm orthogonally when stakes irreversible, and reanalyse periodically for new gene discoveries. Inheritance mathematics next converts frequencies into carrier risks populationally for counselling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broad test first wins when",
+     "points": [
+      "Heterogeneous undiagnosed phenotype",
+      "Array plus trio exome era",
+      "Reanalysis value over time"
+     ]
+    },
+    "right": {
+     "title": "Targeted test first wins when",
+     "points": [
+      "Familial variant known",
+      "Repeat expansion or imprint suspected (special platforms)",
+      "Rapid aneuploidy answer needed"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

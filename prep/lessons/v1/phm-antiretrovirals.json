@@ -3,11 +3,11 @@
  "module": "phm-antiretrovirals",
  "subject": "pharmacology",
  "title": "Antiretrovirals: ART classes, PEP, PrEP and IRIS",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**NRTI backbones** (**tenofovir**: TDF renal Fanconi with bone loss, TAF safer kidneys and lipids up; **abacavir** **HLA-B*5701** hypersensitivity screened; zidovudine anaemia with lipoatrophy legacy; **lamivudine and emtricitabine** HBV active with **flare on stopping**) chain terminate; **stavudine and didanosine** (lactic acidosis, pancreatitis, neuropathy) retired. Creatinine with phosphate and urine gates TDF years.",
-   "say": "HLA before abacavir screens fatally: hypersensitivity kills rechallenge. TAF spares kidneys; stopping lamivudine flares HBV.",
+   "tx": "The **nucleoside reverse transcriptase inhibitor** backbone remains central to therapy, and tenofovir, abacavir and lamivudine each carry a classic examination trap. **Tenofovir disoproxil** harms kidneys and bone, while tenofovir alafenamide spares kidneys but raises lipids. **Abacavir** needs HLA screening before use because hypersensitivity can prove fatal on rechallenge, and stopping lamivudine or emtricitabine flares hepatitis B infection.",
+   "say": "The nucleoside backbone supports every modern antiretroviral regimen and carries several classic safety traps. Tenofovir disoproxil damages kidneys and bone while the alafenamide form spares kidneys more effectively. Abacavir requires genetic screening because hypersensitivity becomes fatal after rechallenge. Stopping lamivudine flares hepatitis B infection in coinfected patients.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-antiretrovirals-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**NNRTIs** (**efavirenz**: vivid dreams, dizziness, **teratogenic caution** first trimester, CYP induction; **nevirapine**: **hepatotoxic rash** with lead in dosing, CD4 thresholds; **rilpivirine**: meals, **PPI banned**, depression) with **PIs** (**atazanavir**: **unconjugated jaundice** benign with stones; lopinavir and ritonavir diarrhoea with lipids; **darunavir**: sulfa rash, potent boosted) and **INSTIs** (**dolutegravir**: weight, insomnia, neural tube debate settled continue; raltegravir twice daily; bictegravir STR) anchor. Entry (**maraviroc** CCR5 **tropism tested**, enfuvirtide injection site) niches.",
-   "say": "Efavirenz dreams dizzy; atazanavir yellows benignly. Rilpivirine needs food, never PPI; maraviroc tropism tests.",
+   "tx": "**Non nucleoside reverse transcriptase inhibitors** and protease inhibitors are identified by signature effects that examiners use as clues. **Efavirenz** causes vivid dreams and dizziness, nevirapine causes rash and liver toxicity, and rilpivirine requires food and forbids proton pump inhibitors. **Atazanavir** causes benign unconjugated jaundice, while boosted protease inhibitors cause diarrhoea and lipid abnormalities and integrase inhibitors anchor most modern regimens.",
+   "say": "Older antiretroviral classes remain examinable because each drug carries a recognisable signature effect. Efavirenz causes vivid dreams and dizziness during the first weeks of treatment. Nevirapine causes rash and liver injury while rilpivirine requires food for absorption. Atazanavir causes harmless yellow discoloration of the eyes without liver failure.",
    "vis": null
   },
   {
-   "tx": "**First line** (**TAF with FTC plus dolutegravir** single tablet, high barrier, weight watched) with **monitoring** (**viral load** 6 months suppress, **CD4** rise, resistance on failure, adherence counselling) sustains; second line (boosted PI with new backbone) rescues. Pregnancy (dolutegravir continued, efavirenz avoided early) with TB (rifampicin halves dolutegravir doubling dose; efavirenz compatible) co-treats. HBV co-infection never drops tenofovir backbone.",
-   "say": "Suppressing load 6 months proves first line; rifampicin halves dolutegravir doubling. Never drop tenofovir with HBV.",
+   "tx": "Preferred first line therapy combines tenofovir alafenamide and emtricitabine with **dolutegravir** in a single tablet that suppresses virus with a high barrier to resistance. Clinicians monitor **viral load** for suppression within six months and watch **CD4 count** recovery and adherence at every visit. Rifampicin lowers dolutegravir levels during tuberculosis treatment, and tenofovir must continue when hepatitis B coinfection coexists.",
+   "say": "First line therapy provides a tenofovir backbone with dolutegravir in one daily tablet that helps suppression. The regimen suppresses viral load within six months when the patient takes treatment regularly. Clinicians monitor viral load and CD4 recovery and investigate resistance when suppression fails. Rifampicin lowers dolutegravir exposure and requires dose adjustment during tuberculosis treatment.",
    "vis": null
   },
   {
-   "tx": "**PEP** (**within 72 hours**, **28 days**: TDF with FTC plus raltegravir or dolutegravir, baseline with follow up HIV, renal and HBV) after needlestick and sex with **PrEP** (**TDF with FTC daily** or **on demand 2-1-1** MSM, **renal and STI watched**, HIV negative confirmed) prevents; **IRIS** (**paradoxical worsening** weeks after ART: TB nodes, crypto meningitis, **steroids severe**, unmasking) warns. Late presenters stage OI treatment before ART timing.",
-   "say": "PEP 72 hours 28 days; PrEP daily or 2-1-1 renal STI watched. Paradoxical worsening weeks is IRIS steroiding severe.",
+   "tx": "The image follows viral RNA inside a CD4 cell as reverse transcriptase builds viral DNA and integrase prepares insertion into host DNA. **Tenofovir with emtricitabine** blocks the reverse transcriptase step, while **dolutegravir** blocks integrase and prevents integration into the host genome. Seeing both blockade points together explains why **combination therapy** suppresses viral load and why missing doses invites resistance.",
+   "say": "The image shows viral RNA moving through reverse transcription and helps explain integration into host DNA. Tenofovir and emtricitabine block reverse transcriptase inside the infected cell. Dolutegravir blocks integrase and prevents viral DNA entering the host genome. Combination blockade suppresses viral load when patients take treatment regularly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antiretrovirals-gen1.webp",
+    "alt": "CD4 cell interior showing viral RNA, reverse transcriptase, integrase, host DNA, and drug blockade.",
+    "caption": "Cellular illustration of antiretrovirals blocking reverse transcriptase and integrase. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Post exposure prophylaxis** starts within seventy two hours after needlestick or sexual exposure and continues for twenty eight days with baseline and follow up testing. **Pre exposure prophylaxis** uses daily tenofovir with emtricitabine or an on demand schedule in selected men and requires confirmed negative HIV status before starting. **Immune reconstitution inflammatory syndrome** causes paradoxical worsening weeks after starting therapy as immunity recovers.",
+   "say": "Post exposure prophylaxis starts within seventy two hours and continues for twenty eight days. Pre exposure prophylaxis prevents infection when at risk patients take tenofovir based tablets regularly. Clinicians confirm negative HIV status before starting prophylaxis and monitor kidneys during follow up. Immune reconstitution causes paradoxical worsening weeks after treatment starts recovering.",
    "vis": {
     "kind": "table",
     "cols": [

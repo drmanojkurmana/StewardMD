@@ -3,16 +3,27 @@
  "module": "pgt-gi-nutrition",
  "subject": "paediatrics",
  "title": "GI and nutritional disorders: celiac, IBD, GERD and malnutrition",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Celiac** (**anti-tTG IgA** with total IgA, **EMA** confirm, **biopsy** Marsh villous atrophy, **HLA DQ2 DQ8**, **iron folate** deficient, **gluten free lifelong**, **oats** pure selected, **thyroid diabetes** screen) with **cow milk** (**blood streaked**, ** extensively hydrolysed**, **soy** selected, **challenge** year) and **FPIES** (profuse vomit pallor, **ondansetron**, **adrenaline** shock) allergies; **failure thrive** plots. Villous blunts.",
-   "say": "Quote tTG biopsied Marsh lifelong gluten free is celiac: milks hydrolyse challenge years FPIES vomits. Plots thrive.",
+   "tx": "Test suspected coeliac disease with **anti tissue transglutaminase IgA** plus total IgA, because IgA deficiency hides the result. Duodenal biopsy showing villous atrophy confirms disease in most pathways, and HLA typing helps only to exclude it. Iron and folate deficiency, poor growth and mouth ulcers support the diagnosis clinically. Treatment is a **lifelong gluten free diet** with dietitian support and screening for thyroid disease and diabetes. Pure oats suit selected patients after specialist advice and monitoring.",
+   "say": "Anti transglutaminase testing with total IgA screens for coeliac disease. Villous atrophy on biopsy confirms disease in most children. Iron deficiency and poor growth support the diagnosis clinically. Lifelong gluten free diet is the only effective treatment available.",
    "vis": null
   },
   {
-   "tx": "**IBD** (**Crohn skip cobble granulomas** mouth anus, **UC continuous crypt abscesses** blood mucus, **calprotectin** screens, **colonoscopy** biopsies, **EEN** exclusive enteral induces Crohn, **5-ASA** UC, **azathioprine** TPMT, **infliximab** fistulising, **surgery** UC colectomy cures) with **growth** (puberty delays, **bone** DEXA, **vaccines** pre biologics) monitors; **perianal** (tags fissures MRI) examines. Skips cobble.",
-   "say": "Skipped cobbled mouth anus is Crohn continuous bloody crypts is UC: enteral induces biologics fistulise surgery cures UC. Growth puberties.",
+   "tx": "The section shows a flat surface with **villous atrophy**, deepened crypts showing **crypt hyperplasia** and many **intraepithelial lymphocytes**, beside an inset of tall normal villi. That triad is coeliac histology, and it explains iron deficiency and growth failure through malabsorption. Examiners expect Marsh pattern recognition and the link to anti tissue transglutaminase testing. The normal inset matters because height comparison makes atrophy obvious at a glance.",
+   "say": "The section is abnormal because it presents flat mucosa with villous atrophy and crypt hyperplasia. Lymphocytes are increased because they crowd the surface epithelium in coeliac disease throughout. The inset is helpful because it presents tall normal villi for easy comparison beside disease. This histology helps explain malabsorption and growth failure in children with coeliac disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pgt-gi-nutrition-gen1.webp",
+    "alt": "H and E stained duodenal mucosa with flat surface and crypt hyperplasia beside normal villous mucosa inset.",
+    "caption": "Duodenal histology showing villous atrophy crypt hyperplasia and lymphocytes. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Crohn disease gives skip lesions with cobblestoning anywhere from mouth to anus, while **ulcerative colitis** gives continuous colonic disease with crypt abscesses. Faecal **calprotectin** screens for bowel inflammation before colonoscopy and biopsies confirm the pattern. Exclusive enteral nutrition induces remission in childhood Crohn disease without steroid harm. Perianal tags and fistulae favour Crohn disease and need magnetic resonance imaging assessment. Growth, puberty and bone health need monitoring through adolescence.",
+   "say": "Crohn disease is patchy because it gives skip lesions from mouth to anus anywhere. Ulcerative colitis is continuous because it gives colonic inflammation with bleeding from rectum upward. Calprotectin screening helps clinicians select children who need colonoscopy for confirmation. Enteral nutrition is effective because it induces remission in childhood Crohn disease without steroids.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pgt-gi-nutrition-fig1.webp",
@@ -22,13 +33,13 @@
    }
   },
   {
-   "tx": "**GERD** (**effortless vomit** thriving, **red flags** bilious blood poor weight, **thickened** feeds upright, **omeprazole** selected, **pyloric** olive projectile nonbilious, **malrotation** bilious volvulus Ladd) with **constipation** (**disimpaction** PEG, **maintenance** months, **toilet** routine, **Hirschsprung** delayed meconium biopsy) and **intussusception** (**colicky drawing knees**, **red currant**, **air enema** reduces, **lead point** pathological) abdomens; **appendicitis** (migratory McBurney Alvarado, **surgery** prompt) operates. Olives obstruct.",
-   "say": "Spitty thriving thickens upright red flags bilious olives operate: currant knees air reduces lead points resect. Routines disimpact.",
+   "tx": "Effortless vomiting in a thriving baby is reflux, while bilious vomiting is a surgical warning at any age. A palpable olive with projectile nonbilious vomiting means **pyloric stenosis**, and bilious vomiting suggests malrotation with volvulus. Colicky pain with knees drawn up and currant jelly stool means **intussusception** that air enema reduces. Constipation needs disimpaction then months of maintenance with toilet routine retraining. Migratory pain to McBurney point suggests appendicitis needing prompt surgery.",
+   "say": "Bilious vomiting is a surgical warning at any age group. Projectile vomiting with an olive suggests pyloric stenosis strongly. Currant jelly stool suggests intussusception that air enema reduces. Constipation needs disimpaction followed by months of maintenance treatment.",
    "vis": null
   },
   {
-   "tx": "**Malnutrition** (**SAM** WHZ under -3 edema, **F75 F100 RUTF** phases, **appetite** tests, **infections** treat, **hypothermia hypoglycaemia** warm sugar) with **vitamins** (**A** measles eyes, **D** rickets, **iron** anaemia, **zinc** diarrhoea) and **rehab** (catch-up, **counselling** feeds, **follow** monthly) rebuilds; **obesity** (BMI 95, **lifestyle** 5-2-1-0, **NAFLD** screens) balances. Ready feeds.",
-   "say": "Skin bones edematous ready feeds phases appetite antibiotics warm sugar is SAM: measles A rickets D zinc diarrhoea. Catch-ups counsel.",
+   "tx": "Severe acute malnutrition shows wasting or oedema with poor appetite, and treatment moves through stabilisation to rehabilitation phases. **F75 feeds** stabilise, then F100 or **ready to use therapeutic food** rebuilds weight during catch up growth. Treat infection, hypothermia and hypoglycaemia from admission because all three kill silently. Give vitamin A for measles and eye signs, and zinc during diarrhoea episodes. Obesity needs lifestyle change with nonalcoholic fatty liver screening in parallel.",
+   "say": "Wasting or oedema with poor appetite defines severe malnutrition clinically. Stabilisation feeds precede catch up feeds during rehabilitation phases. Infection and hypothermia and hypoglycaemia need treatment from admission. Vitamin A protects eyes during measles and severe malnutrition together.",
    "vis": {
     "kind": "table",
     "cols": [

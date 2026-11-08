@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Charging and initiation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aminoacyl-tRNA synthetases** (twenty, class I monomeric arginine family versus class II dimeric architecture teaching split) activate amino acids with ATP to aminoacyl-AMP (pyrophosphate hydrolysis pulling), transfer to tRNA three prime CCA adenosine, and proofread by double sieve editing (activation site rejects larger, editing site hydrolyses smaller misactivated (valine versus threonine/isoleucine classic, error about one in ten thousand overall). A mischarged tRNA would mistranslate every codon it visits, so synthetase fidelity is global proteome fidelity, synthetase mutations causing Charcot-Marie-Tooth and multisystem aminoacylation disorders, mupirocin bacterial isoleucyl synthetase target topically.",
+   "say": "Synthetases activate and proofread by double sieve editing because one mischarged tRNA mistranslates globally everywhere. Synthetase mutations cause neuropathy, and mupirocin targets bacterial isoleucyl synthetase topically in clinics.",
+   "vis": {
+    "kind": "flow",
+    "title": "Charging with proofreading",
+    "nodes": [
+     {
+      "id": "act",
+      "label": "Amino acid plus ATP to aminoacyl-AMP"
+     },
+     {
+      "id": "tr",
+      "label": "Transfer to tRNA CCA end"
+     },
+     {
+      "id": "edit",
+      "label": "Editing sieve hydrolyses mistakes"
+     },
+     {
+      "id": "rel",
+      "label": "Correct charged tRNA released"
+     }
+    ],
+    "edges": [
+     [
+      "act",
+      "tr"
+     ],
+     [
+      "tr",
+      "edit"
+     ],
+     [
+      "edit",
+      "rel"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Identity elements (anticodon in many, acceptor stem discriminator base seventy three, D/T loop geometries, alanine G3:U70 wobble pair sufficient to aminoacylate minihelices experimentally) let synthetases recognise correct tRNAs among fifty similar L shapes; suppressor and orthogonal pairs exploit reassignable identities. **Initiation** then selects special initiator tRNA (Met-tRNAi, formylated fMet in bacteria and mitochondria by formyltransferase using formyl THF, deformylated later) excluded from elongation by body geometry, binding P site directly unlike all elongator tRNAs entering A site, frame commitment in one molecular distinction.",
+   "say": "Identity elements let synthetases recognise correct tRNAs among similar L shapes precisely. Initiator tRNA binds P site directly excluded from elongation, committing frame in one molecular distinction fundamentally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Initiator tRNA (Met-tRNAi / fMet)",
+     "points": [
+      "Binds P site directly to start",
+      "Excluded from elongation factor delivery",
+      "fMet in bacteria/mitochondria (formyl THF)"
+     ]
+    },
+    "right": {
+     "title": "Elongator tRNAs (all others)",
+     "points": [
+      "Enter A site via EF-Tu/eEF1A only",
+      "Cycle A to P to E",
+      "Cannot start chains"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bacterial initiation assembles thirty S subunit with mRNA **Shine-Dalgarno** (AGGAGG pairing sixteen S tail) positioning AUG, initiation factors IF1/2/3 fidelity, fMet-tRNA, then fifty S joining with GTP hydrolysis; eukaryotic initiation scans forty three S preinitiation (forty S, eIF2 GTP Met-tRNAi, eIF1/1A/3/5) from five prime cap (eIF4F cap complex, eIF4G scaffold, eIF4E regulated by 4E-BP mTOR phosphorylation growth control) along leaders to Kozak consensus AUG (purine minus three, G plus four strongest), sixty S joining by eIF5B GTP, eighty S ready.",
+   "say": "Bacteria position by Shine-Dalgarno pairing, while eukaryotes scan from caps to Kozak AUG starts. MTOR control of cap binding integrates growth signals into initiation rates globally and therapeutically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Initiation feature",
+     "Bacteria",
+     "Eukaryotes (cytosol)"
+    ],
+    "rows": [
+     [
+      "Start positioning",
+      "Shine-Dalgarno to 16S",
+      "Cap scanning to Kozak AUG"
+     ],
+     [
+      "Initiator",
+      "fMet-tRNA (formylated)",
+      "Met-tRNAi (not formylated)"
+     ],
+     [
+      "Key GTPases",
+      "IF2",
+      "eIF2 (ternary), eIF5B (joining)"
+     ],
+     [
+      "Growth regulation",
+      "Stringent response ppGpp (RelA on starved ribosomes)",
+      "eIF2alpha kinases (PERK, PKR, GCN2, HRI integrated stress), mTOR 4E-BP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Integrated stress response** phosphorylates eIF2alpha (Ser51) by four kinases sensing ER stress (PERK, unfolded protein module), viral double stranded RNA (PKR, interferon), amino acid starvation (GCN2 uncharged tRNA) and heme deficiency (HRI reticulocytes coordinating globin with heme), paradoxically lowering global initiation while preferentially translating ATF4 (upstream open reading frame skipping logic) to adapt or apoptose.",
+   "say": "Four stress kinases phosphorylate eIF2alpha lowering global initiation while preferentially translating ATF4 adaptation master switch. Diphtheria toxin and ricin weaponise elongation and ribosome chokepoints lethally at catalytic doses.",
+   "vis": null
+  },
+  {
+   "tx": "**Puromycin** (aminoacyl nucleoside mimicking tyrosyl tRNA A site acceptor) terminates chains prematurely by accepting peptide and dropping off (causing truncated products, laboratory nascent chain labelling puromycylation assays, historical antimicrobial toxicity), aminoglycosides distort decoding centre proofreading (next lesson), hippuristanol and rocaglates clamp eIF4A helicase scanning (oncology and antiviral investigational, Zotatifin), pateamine and didemnin elongation poisons complete initiation pharmacology beyond antibiotics into eukaryotic selective agents where therapeutic windows are earned by proliferation and viral dependence asymmetries.",
+   "say": "Puromycin terminates chains prematurely as tyrosyl tRNA mimic historically and in nascent labelling assays. EIF4A clamping agents extend initiation pharmacology into oncology investigational windows by proliferation asymmetries exploitable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Initiation poison",
+     "Chokepoint",
+     "Theatre"
+    ],
+    "rows": [
+     [
+      "Diphtheria/Pseudomonas toxin",
+      "eEF2 ADP-ribosylated (elongation, here as warning)",
+      "Vaccine preventable; antitoxin plus antibiotics"
+     ],
+     [
+      "Ricin, Shiga toxin",
+      "28S depurination (ribosome inactivated)",
+      "Bioterror and HUS diarrhoea contexts"
+     ],
+     [
+      "Rocaglates (eIF4A clamp)",
+      "Scanning helicase frozen on leaders",
+      "Oncology/antiviral investigational"
+     ],
+     [
+      "Puromycin",
+      "A site acceptor mimic, premature release",
+      "Laboratory labelling; too toxic systemic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Energy accounting starts honestly: charging costs ATP to AMP (**two high energy bonds** per residue prepaid before ribosomes), initiation spends GTP (eIF2, eIF5B), elongation two GTP per residue next lesson, termination and recycling further GTP/ATP, totalling about four to five high energy phosphates per peptide bond all-in, protein synthesis consuming a fifth to a third cellular energy in growing cells. Elongation chemistry itself, remarkably, costs no nucleotide at the bond forming step, peptidyl transferase ribozyme next.",
+   "say": "Charging prepays two high energy bonds per residue before ribosomes spend more in initiation and elongation. Protein synthesis consumes a fifth to a third of growing cell energy economically under starvation control.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cost prepaid before the bond",
+    "nodes": [
+     {
+      "id": "chg",
+      "label": "Charging: ATP to AMP (counts 2)"
+     },
+     {
+      "id": "init",
+      "label": "Initiation: GTP (eIF2, eIF5B)"
+     },
+     {
+      "id": "elong",
+      "label": "Elongation ahead: 2 GTP per residue"
+     },
+     {
+      "id": "total",
+      "label": "About 4 to 5 bonds per peptide bond total"
+     }
+    ],
+    "edges": [
+     [
+      "chg",
+      "init"
+     ],
+     [
+      "init",
+      "elong"
+     ],
+     [
+      "elong",
+      "total"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
