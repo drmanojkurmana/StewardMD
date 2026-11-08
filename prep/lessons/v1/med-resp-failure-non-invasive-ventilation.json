@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "med-resp-failure",
+ "subject": "medicine",
+ "title": "Non-invasive ventilation, sleep-disordered breathing, and hypoventilation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Positive pressure delivered via an external facial interface avoids the infectious and traumatic hazards of endotracheal intubation. Initiating **non-invasive ventilation** (NIV) provides ventilatory support in conscious patients with respiratory pump failure. The primary evidence-based indication is acute hypercapnic respiratory failure complicating an acute exacerbation of chronic obstructive pulmonary disease with respiratory acidosis (arterial pH 7.25 to 7.35, PaCO2 > 45 mmHg) despite optimal medical bronchodilator and corticosteroid therapy. Early NIV reduces endotracheal intubation rates, hospital length of stay, and inpatient mortality.",
+   "say": "Positive pressure delivered through an external mask avoids the hazards of endotracheal intubation. Initiating non-invasive ventilation provides mechanical support in conscious patients experiencing ventilatory pump failure. The primary indication is acute hypercapnic respiratory failure complicating chronic obstructive pulmonary disease with acidosis despite medical therapy. Non-invasive ventilation reduces intubation rates and hospital mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indications for acute NIV",
+     "points": [
+      "Acute COPD exacerbation with pH 7.25 to 7.35",
+      "Cardiogenic pulmonary edema (CPAP or BiPAP)",
+      "Weaning bridge in COPD post-extubation",
+      "Neuromuscular disease with acute hypercapnia"
+     ]
+    },
+    "right": {
+     "title": "Contraindications to acute NIV",
+     "points": [
+      "Respiratory arrest or severe encephalopathy",
+      "Facial trauma, burns, or recent GI surgery",
+      "Inability to clear copious respiratory secretions",
+      "High aspiration risk or persistent vomiting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dual-pressure ventilatory support provides separate, independent pressure levels during inspiration and expiration. Applying bilevel positive airway pressure (**BiPAP**) delivers an inspiratory positive airway pressure (IPAP) and an expiratory positive airway pressure (EPAP). The difference between IPAP and EPAP constitutes the pressure support that unloads fatigued respiratory muscles, enhances tidal volume, and purges excess carbon dioxide. Simultaneously, EPAP maintains patency of distal alveoli and upper airways at end-expiration, increasing functional residual capacity, recruiting collapsed lung units, and correcting concomitant hypoxaemia.",
+   "say": "Dual-pressure ventilatory support delivers distinct pressures during inspiration and exhalation. Applying bilevel positive airway pressure generates an inspiratory pressure and an expiratory pressure. The difference between these levels provides pressure support that augments tidal volume and washes out carbon dioxide. Meanwhile, the expiratory pressure maintains alveolar recruitment and prevents airway collapse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bipap",
+      "label": "Deliver BiPAP via fitted oronasal mask"
+     },
+     {
+      "id": "ipap",
+      "label": "IPAP (10 to 15 cmH2O): augments tidal volume & clears CO2"
+     },
+     {
+      "id": "epap",
+      "label": "EPAP (4 to 5 cmH2O): recruits alveoli & maintains oxygenation"
+     },
+     {
+      "id": "abg",
+      "label": "Repeat arterial blood gas at 1 to 2 hours to confirm pH correction"
+     }
+    ],
+    "edges": [
+     [
+      "bipap",
+      "ipap"
+     ],
+     [
+      "bipap",
+      "epap"
+     ],
+     [
+      "ipap",
+      "abg"
+     ],
+     [
+      "epap",
+      "abg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delivering a single, constant positive pressure throughout both inspiratory and expiratory phases improves cardiogenic alveolar filling defects. Prescribing continuous positive airway pressure (**CPAP**) is highly effective in acute cardiogenic pulmonary edema. By splinting open fluid-filled alveoli, CPAP increases functional residual capacity, reverses intrapulmonary shunt, and reduces the mechanical work of breathing. Hemodynamically, elevated intrathoracic pressure decreases left ventricular afterload by lowering transmural wall stress and reduces systemic venous return (preload), rapidly improving pulmonary congestion without requiring mechanical ventilatory rate support.",
+   "say": "Delivering a single constant positive pressure throughout inspiration and expiration treats cardiogenic alveolar flooding. Prescribing continuous positive airway pressure is highly effective in acute cardiogenic pulmonary edema. By opening fluid-filled alveoli, it reverses intrapulmonary shunting. Increased intrathoracic pressure unloads the failing left ventricle by reducing preload and afterload.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CPAP (Continuous pressure)",
+     "points": [
+      "Single constant pressure throughout breathing cycle",
+      "Splints open flooded alveoli and airways",
+      "Reduces LV preload & transmural afterload",
+      "First-line in cardiogenic pulmonary edema & OSA"
+     ]
+    },
+    "right": {
+     "title": "BiPAP (Bilevel pressure)",
+     "points": [
+      "Two distinct pressure levels (IPAP and EPAP)",
+      "Pressure support actively clears carbon dioxide",
+      "Directly assists fatigued ventilatory muscles",
+      "First-line in acute hypercapnic COPD exacerbations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Repetitive nocturnal upper airway collapse provokes sleep fragmentation, episodic oxyhaemoglobin desaturation, and sympathetic surges. Pathological development of **obstructive sleep apnoea** (OSA) stems from pharyngeal muscular hypotonia during sleep combined with anatomical narrowing from tonsillar hypertrophy, retrognathia, or parapharyngeal fat deposition. Patients present with loud habitual snoring, choking or gasping arousals, witnessed apnoeas, morning headaches, and severe excessive daytime sleepiness measured on the Epworth Sleepiness Scale. Long-term untreated disease drives systemic arterial hypertension, atrial fibrillation, and cardiovascular morbidity.",
+   "say": "Repetitive nocturnal upper airway collapse causes sleep disruption and sympathetic activation. Developing obstructive sleep apnoea arises from pharyngeal airway narrowing combined with muscle relaxation during sleep. Major risk factors include obesity, tonsillar enlargement and retrognathia. Patients report habitual snoring, nocturnal gasping, morning headaches and severe daytime fatigue. Untreated disease accelerates systemic hypertension and heart disease.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-lung-gross.webp",
+    "alt": "Upper airway pharyngeal anatomy, dynamic collapse, and obstructive sleep pathology.",
+    "caption": "Pharyngeal anatomical structures and collapsible airway segments during sleep. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Overnight continuous multi-channel physiological monitoring provides the gold-standard diagnostic verification of sleep architecture and respiratory disturbances. Conducting diagnostic **polysomnography** records electroencephalography, electro-oculography, electromyography, electrocardiography, nasal pressure airflow, thoracic and abdominal respiratory inductance plethysmography, and pulse oximetry. Polysomnography clearly differentiates obstructive apnoeas (cessation of nasal airflow despite persistent or exaggerated thoracic and abdominal respiratory efforts) from central apnoeas (simultaneous cessation of both nasal airflow and thoracoabdominal breathing movements due to absent central neural drive).",
+   "say": "Continuous nocturnal multi-channel recording delivers the definitive diagnostic assessment of sleep architecture. Conducting overnight polysomnography records brain waves, eye movements, airflow, chest wall motion and oxygen saturation. The test clearly distinguishes obstructive events, where airflow ceases despite persistent chest effort, from central apnoeas, where both airflow and respiratory effort cease together.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstructive apnoea event",
+     "points": [
+      "Nasal and oral airflow cessation >= 10 seconds",
+      "Persistent or increased thoracoabdominal effort",
+      "Upper airway anatomical mechanical collapse",
+      "Accompanied by oxyhaemoglobin desaturation"
+     ]
+    },
+    "right": {
+     "title": "Central apnoea event",
+     "points": [
+      "Nasal and oral airflow cessation >= 10 seconds",
+      "Complete absence of thoracoabdominal respiratory effort",
+      "Loss of central pontomedullary respiratory drive",
+      "Seen in heart failure (Cheyne-Stokes) and stroke"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Quantifying nocturnal respiratory events categorizes sleep apnoea severity and directs therapeutic continuous positive airway pressure titration. Calculating the **apnoea-hypopnoea index** (AHI) divides the total number of apnoeas (complete airflow cessation >= 10 seconds) and hypopnoeas (>= 30% airflow reduction with >= 3% desaturation or arousal) by total sleep time in hours. Mild disease is defined by an AHI of 5 to 15 events per hour; moderate disease ranges from 15 to 30 events per hour; severe disease exceeds 30 events per hour, requiring nightly CPAP therapy.",
+   "say": "Quantifying nocturnal respiratory pauses categorizes sleep apnoea severity and guides device prescription. Calculating the apnoea-hypopnoea index divides total events by sleep time in hours. An index between five and fifteen indicates mild disease. Values from fifteen to thirty indicate moderate disease. An index exceeding thirty reflects severe disease requiring nocturnal continuous positive airway pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AHI severity category",
+     "Events per hour of sleep",
+     "Clinical management recommendations"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "< 5 events/hr",
+      "Reassurance, sleep hygiene, weight maintenance"
+     ],
+     [
+      "Mild OSA",
+      "5 to 14 events/hr",
+      "Weight loss, positional therapy, mandibular advancement device"
+     ],
+     [
+      "Moderate OSA",
+      "15 to 30 events/hr",
+      "Nocturnal CPAP titration or oral advancement splints"
+     ],
+     [
+      "Severe OSA",
+      "> 30 events/hr",
+      "Mandatory nocturnal CPAP therapy to reduce cardiac risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic daytime alveolar hypoventilation in severely obese individuals produces daytime hypercapnia and secondary polycythemia. Diagnosing **obesity hypoventilation syndrome** (Pickwickian syndrome) requires the clinical triad of a body mass index (BMI) >= 30 kg/m2, chronic daytime hypercapnia (arterial PaCO2 > 45 mmHg on room air), and sleep-disordered breathing, after strictly excluding alternative pulmonary, neurological, or metabolic causes. Blunted central ventilatory responsiveness to carbon dioxide combined with excessive respiratory resistive and elastance loads drives progressive daytime hypoventilation, pulmonary arterial hypertension, and right ventricular hypertrophy.",
+   "say": "Chronic daytime hypoventilation in severely obese individuals leads to carbon dioxide retention and secondary erythrocytosis. Diagnosing obesity hypoventilation syndrome requires a body mass index of thirty or greater, daytime hypercapnia above forty-five millimeters of mercury, and sleep-disordered breathing, without alternative lung disease. Depressed respiratory drive and excessive chest load cause progressive pulmonary hypertension and right heart strain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "obesity",
+      "label": "Severe obesity (BMI >= 30 kg/m2) with chest loading"
+     },
+     {
+      "id": "blunt",
+      "label": "Blunted central respiratory drive response to CO2"
+     },
+     {
+      "id": "daytime",
+      "label": "Awake daytime hypercapnia (PaCO2 > 45 mmHg)"
+     },
+     {
+      "id": "cor",
+      "label": "Pulmonary hypertension and chronic cor pulmonale"
+     }
+    ],
+    "edges": [
+     [
+      "obesity",
+      "blunt"
+     ],
+     [
+      "blunt",
+      "daytime"
+     ],
+     [
+      "daytime",
+      "cor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multidisciplinary management of chronic hypoventilation syndromes combines nocturnal ventilatory support with sustainable metabolic weight loss. Initiating nocturnal non-invasive positive pressure therapy using **bilevel ventilation** or CPAP restores nocturnal alveolar ventilation, corrects sleep fragmentation, and resets blunted medullary chemoreceptor sensitivity to carbon dioxide. Patients demonstrate gradual resolution of daytime hypercapnia, lower serum bicarbonate, and improved daytime alertness. Concurrently, medical weight management or bariatric metabolic surgery achieves substantial, durable reduction in chest wall restrictive loading, occasionally reversing the underlying hypoventilation state entirely.",
+   "say": "Managing chronic hypoventilation syndromes combines nocturnal ventilatory support with long-term weight reduction. Initiating nocturnal bilevel positive pressure ventilation restores gas exchange and resets central chemoreceptor sensitivity. Daytime hypercapnia gradually clears and serum bicarbonate normalizes. Significant weight loss through lifestyle programs or bariatric surgery reduces chest wall impedance and improves outcomes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-resp-inspection.webp",
+    "alt": "Chest wall inspection, respiratory excursion, and breathing pattern assessment.",
+    "caption": "Thoracic cage mechanics and nocturnal hypoventilation evaluation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
