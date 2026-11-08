@@ -1,0 +1,245 @@
+{
+  "id": "pnr-hydrocephalus-vp-shunt-complications",
+  "title": "Pediatric Hydrocephalus: Etiology, VP Shunts and ETV Management",
+  "subject": "ss-paediatric-neurology",
+  "module": "Congenital Malformations, Hydrocephalus and Raised ICP",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Pediatric hydrocephalus is classified pathophysiologically as non-communicating or communicating. Obstructive lesions prevent internal ventricular outflow, whereas communicating forms impair subarachnoid resorption.",
+      "tx": "Classify **Communicating vs non-communicating hydrocephalus** based on the anatomical site of cerebrospinal fluid flow disruption. Non-communicating (obstructive) hydrocephalus results from intraventricular obstruction along CSF transit pathways (congenital aqueductal stenosis, Chiari malformation, Dandy-Walker cyst, or posterior fossa neoplasm). Communicating hydrocephalus arises from impaired extraventricular resorption of CSF by arachnoid villi and granulations, classically triggered by post-infectious meningitis or post-hemorrhagic intraventricular hemorrhage (Clinical signs).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-Communicating (Obstructive)",
+          "points": [
+            "Intraventricular obstruction (aqueduct of Sylvius / foramina)",
+            "Disproportionate enlargement proximal to blockage",
+            "Aqueductal stenosis, Chiari II, Dandy-Walker, tectal glioma"
+          ]
+        },
+        "right": {
+          "title": "Communicating (Non-Obstructive)",
+          "points": [
+            "Obstruction at arachnoid granulations / basal cisterns",
+            "Symmetrical panventricular dilatation including 4th ventricle",
+            "Post-bacterial meningitis, subarachnoid or intraventricular hemorrhage"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In infants before cranial sutures fuse, hydrocephalus presents with dramatic macrocephaly. Downward ocular displacement and percussion resonance over open sutures are typical physical signs.",
+      "tx": "Elicit **Sun-setting eyes and Macewen sign** during infant cranial examination. Expanding intraventricular pressure before cranial suture closure accelerates head circumference growth crossing percentiles upwards, accompanied by a tense, bulging anterior fontanelle, split cranial sutures, and prominent scalp veins. Increased pressure on the midbrain tectum and Perlia nucleus causes upward gaze paralysis with sclera visible above the iris (sun-setting sign). Percussion over dilated ventricles and open sutures yields a cracked-pot resonant resonance known as Macewen sign (VP shunt failure).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physical sign",
+          "Anatomical mechanism",
+          "Diagnostic significance"
+        ],
+        "rows": [
+          [
+            "Sun-setting sign",
+            "Tectal plate compression; impaired upward gaze",
+            "Elevated intracranial pressure in infants"
+          ],
+          [
+            "Macewen cracked-pot sign",
+            "Separation of cranial sutures & dilated ventricles",
+            "Percussion resonance over pterion / fontanelle"
+          ],
+          [
+            "Accelerated head circumference",
+            "Suture expansion accommodating fluid accumulation",
+            "Serial percentiles crossing upwards rapidly"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ventriculoperitoneal shunts frequently fail during the first year of life. The commonest cause is mechanical obstruction of the ventricular catheter by choroid plexus.",
+      "tx": "Diagnose **VP shunt failure timeline and causes** during emergency evaluation. Ventriculoperitoneal (VP) shunts carry a 30% to 40% failure rate within the first postoperative year and an overall failure rate exceeding 50% by 5 years. Proximal ventricular catheter blockage by ingrown choroid plexus, ependymal debris, or gliosis accounts for over 60% of mechanical failures, manifesting acutely with irritability, recurrent morning vomiting, headache, lethargy, and fontanelle fullness (Shunt infections).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "place",
+            "label": "Surgical placement of ventriculoperitoneal shunt"
+          },
+          {
+            "id": "fail",
+            "label": "First year failure risk: 30% to 40% (highest in first 6 months)"
+          },
+          {
+            "id": "prox",
+            "label": "Proximal catheter occlusion (choroid plexus / glial tissue ingrowth)"
+          }
+        ],
+        "edges": [
+          [
+            "place",
+            "fail"
+          ],
+          [
+            "fail",
+            "prox"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Most shunt infections occur within the first two months after surgical placement. Coagulase-negative staphylococci form stubborn biofilms that necessitate hardware removal.",
+      "tx": "Identify **Shunt infection microbiology and timing** to direct aggressive intervention. Greater than 70% of shunt infections occur within 1 to 2 months of surgical implantation or revision, resulting from intraoperative colonization by patient skin flora: Staphylococcus epidermidis (coagulase-negative staphylococci, ~50%) and Staphylococcus aureus (~25%). Because bacteria produce an extracellular biofilm on silicone hardware, antibiotics alone fail; curative management requires complete shunt externalization, external ventricular drain placement, and targeted IV vancomycin plus intraventricular antimicrobials (ETV criteria).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infectious parameter",
+          "Microbiology & timeline",
+          "Therapeutic standard of care"
+        ],
+        "rows": [
+          [
+            "Primary pathogens",
+            "Staph epidermidis (50%), Staph aureus (25%), Gram-negative bacilli",
+            "Biofilm-producing skin colonizers"
+          ],
+          [
+            "Incubation window",
+            "Over 70% present within 60 days of surgery",
+            "Presents with fever, tracking erythema, and meningismus"
+          ],
+          [
+            "Mandatory protocol",
+            "Complete hardware explantation + temporary EVD",
+            "Intravenous vancomycin; re-shunt after CSF sterile x 72h"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Endoscopic third ventriculostomy creates an internal bypass from the third ventricle into the interpeduncular cistern. Calculating the success score helps select ideal surgical candidates.",
+      "tx": "Apply **Endoscopic third ventriculostomy (ETV) criteria** to manage obstructive hydrocephalus without hardware. ETV uses a rigid or flexible neuroendoscope introduced through Kocher point to fenestrate the third ventricle floor (tuber cinereum) between the mamillary bodies and infundibular recess into the prepontine and interpeduncular cisterns. The ETV Success Score calculates predicted patency based on age, etiology, and prior shunt history; infants under 6 months or post-infectious etiologies have lower success, whereas older children with isolated aqueductal stenosis achieve > 80% long-term shunt-free survival (Overdrainage).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cand",
+            "label": "Non-communicating hydrocephalus (aqueductal stenosis / tectal mass)"
+          },
+          {
+            "id": "etv",
+            "label": "Endoscopic fenestration of third ventricle floor into prepontine cistern"
+          },
+          {
+            "id": "score",
+            "label": "ETV Success Score: Age + Etiology + Prior Shunt predicts long-term success"
+          }
+        ],
+        "edges": [
+          [
+            "cand",
+            "etv"
+          ],
+          [
+            "etv",
+            "score"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chronic overdrainage of cerebrospinal fluid collapses the ventricular walls onto the shunt catheter. Low pressure headaches and slit-like ventricles define this troublesome syndrome.",
+      "tx": "Recognize **Overdrainage and slit ventricle syndrome** in chronically shunted children. Low-pressure siphon effects draw excessive CSF when upright, producing small, collapsed, slit-like ventricles on CT/MRI. Intermittent coaptation of the ventricular walls occludes catheter side-holes, triggering paradoxical episodic intracranial hypertension with severe low-pressure upright headaches relieved by lying recumbent. Management includes upgrading to a programmable anti-siphon valve, endoscopic third ventriculostomy, or temporary lumbar CSF infusion (Peritoneal pseudocyst).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Overdrainage Mechanics",
+          "points": [
+            "Excessive negative hydrostatic siphoning",
+            "Ventricles collapse into slit-like cavities",
+            "Low-pressure headache relieved by lying flat"
+          ]
+        },
+        "right": {
+          "title": "Interventional Upgrades",
+          "points": [
+            "Anti-siphon gravity-assisted valve insertion",
+            "Programmable valve opening pressure elevation",
+            "Palliative ETV to restore physiological dynamics"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Distal shunt complications manifest within the abdominal cavity as fluid collections or pain. An infected or unabsorbed CSF peritoneal pseudocyst requires temporary external drainage.",
+      "tx": "Diagnose **Peritoneal pseudocyst and abdominal complications** from distal catheter failure. Low-grade subclinical peritonitis or chronic inflammation prevents peritoneal absorption, forming a fibrous-walled, non-epithelialized fluid collection around the distal tip (CSF pseudocyst) presenting with progressive painless abdominal distension, palpable mass, fever, or distal shunt malfunction. Abdominal ultrasound confirms the loculated cystic fluid; management requires distal catheter externalization, antimicrobial treatment, and eventual relocation to the pleural space or right atrium (Preterm PHVD).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Clinical presentation",
+          "Diagnostic & surgical intervention"
+        ],
+        "rows": [
+          [
+            "Abdominal CSF pseudocyst",
+            "Palpable cystic abdominal mass; distal failure",
+            "Ultrasound confirms fluid; laparoscopic externalization"
+          ],
+          [
+            "Inguinal hernia / Hydrocele",
+            "High intra-abdominal CSF pressure patent processus vaginalis",
+            "Elective hernia repair; shunt remains peritoneal"
+          ],
+          [
+            "Bowel perforation",
+            "Distal tubing extrusion through anus / umbilicus",
+            "Emergency exploratory laparoscopy; hardware explantation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Premature infants with intraventricular hemorrhage cannot tolerate early permanent shunts. Subcutaneous reservoirs or subgaleal shunts permit serial ventricular tapping until the baby grows.",
+      "tx": "Manage **Post-hemorrhagic ventricular dilatation (PHVD) in preterms** using staged temporizing drainage. Premature neonates with grade 3 or 4 intraventricular hemorrhage develop progressive communicating ventriculomegaly with elevated protein that rapidly clogs permanent shunts. Surgically placing a subcutaneous ventricular access device (Ommaya reservoir) or ventricular subgaleal shunt permits serial aseptic tapping of CSF (10-15 mL/kg/day) to relieve cranial tension until CSF clears, protein drops below 1.5 g/L, and body weight exceeds 2 to 2.5 kg for definitive shunt placement (Management complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "preterm",
+            "label": "Preterm neonate with Grade 3/4 IVH & progressive PHVD"
+          },
+          {
+            "id": "vad",
+            "label": "Surgical placement of subcutaneous Ventricular Reservoir (Ommaya)"
+          },
+          {
+            "id": "tap",
+            "label": "Serial sterile CSF tapping (10-15 mL/kg/day) to control head growth"
+          },
+          {
+            "id": "def",
+            "label": "Definitive VP shunt once infant reaches >= 2.0-2.5 kg and CSF protein normalizes"
+          }
+        ],
+        "edges": [
+          [
+            "preterm",
+            "vad"
+          ],
+          [
+            "vad",
+            "tap"
+          ],
+          [
+            "tap",
+            "def"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-storage-disorders",
+ "subject": "biochemistry",
+ "title": "Mucopolysaccharidoses and other storage diseases",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Mucopolysaccharidoses store partially degraded **glycosaminoglycans** (dermatan, heparan, keratan sulfates) because one lysosomal exoenzyme in their sequential trimming is missing. Shared somatic signatures follow: coarse facies, dysostosis multiplex on radiographs (thick skull, oar shaped ribs, bullet vertebrae), hepatosplenomegaly, joint stiffness without inflammation, hernias, recurrent ear and airway infections, and cloudy or clear corneas by type.",
+   "say": "Mucopolysaccharidoses store glycosaminoglycans, giving coarse facies, dysostosis multiplex, liver enlargement and stiff joints. Corneas are cloudy or clear by type, which examinations exploit relentlessly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type (eponym)", "Enzyme missing", "GAG stored"],
+    "rows": [
+     ["I (Hurler)", "Alpha-L-iduronidase", "Dermatan plus heparan"],
+     ["II (Hunter)", "Iduronate sulfatase (X linked)", "Dermatan plus heparan"],
+     ["III (Sanfilippo)", "Heparan enzymes (4 subtypes)", "Heparan only"],
+     ["IV (Morquio)", "Galactose-6-sulfatase etc.", "Keratan"]
+    ]
+   }
+  },
+  {
+   "tx": "The supreme examination contrast is **Hurler versus Hunter**: identical GAGs and facies, but Hunter (X linked, boys) spares the cornea (clear) while Hurler clouds it, and Hunter adds pebbly ivory skin lesions over shoulders. Both regress cognitively in severe forms; attenuated Scheie (MPS I) keeps intellect with stiff joints and cloudy cornea and adult survival. One corneal finding plus inheritance separates two otherwise twin stems.",
+   "say": "Hunter spares the cornea while Hurler clouds it, and Hunter is X linked in boys. One corneal finding plus inheritance separates two otherwise twin stems. Attenuated forms keep intellect.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hurler (MPS I)", "points": ["Cornea cloudy", "Both sexes (recessive)", "Severe: regression, death in childhood"]},
+    "right": {"title": "Hunter (MPS II)", "points": ["Cornea clear (classic contrast)", "Boys (X linked)", "Pebbly shoulder skin lesions"]
+    }
+   }
+  },
+  {
+   "tx": "**Sanfilippo** (MPS III) stores heparan only, so soma stays mild while brain bears the disease: toddlers develop hyperactivity, sleep reversal, speech loss and severe behavioural disturbance before dementia, often mislabelled as autism or ADHD first. Morquio (MPS IV) inverts the pattern: keratan skeletal disease (short trunk, pectus, odontoid hypoplasia with atlantoaxial danger) with intellect preserved and cornea mildly cloudy.",
+   "say": "Sanfilippo keeps soma mild while brain bears the disease, with hyperactivity and sleep reversal mislabelled as autism first. Morquio inverts the pattern with skeletal disease and intellect preserved.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Sanfilippo (brain dominant)", "points": ["Heparan only", "Behaviour and sleep first", "Mild facies and soma"]},
+    "right": {"title": "Morquio (bone dominant)", "points": ["Keratan stored", "Short trunk, odontoid danger", "Intellect preserved"]
+    }
+   }
+  },
+  {
+   "tx": "Diagnosis layers from screening urine **GAG** quantification and pattern, through leukocyte or plasma enzyme assay (definitive), to genetics for counselling and prenatal options. I-cell disease from the membrane module is the great mimic with high plasma lysosomal enzymes (mistargeted, not missing), coarse features and stiff joints, reminding you that storage physiology fails by misdelivery as well as by missing enzymes.",
+   "say": "Diagnosis layers from urine GAG patterns through enzyme assay to genetics. I-cell disease mimics storage with high plasma enzymes from mistargeting, reminding you that delivery fails as well as enzymes.",
+   "vis": null
+  },
+  {
+   "tx": "Treatment divides by brain access: intravenous **enzyme replacement** (laronidase, idursulfase, elosulfase and others) improves viscera, endurance and liver size but crosses the blood brain barrier negligibly, so haematopoietic stem cell transplant early (Hurler, before regression) remains the brain protecting standard in selected children. Airway, cardiac valve, cervical spine and anaesthetic risks dominate multidisciplinary care regardless of enzyme availability.",
+   "say": "Enzyme replacement improves viscera but barely reaches brain, so early transplant remains brain protecting in selected Hurler children. Airway, valve and cervical spine risks dominate multidisciplinary care.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Therapy", "Reaches brain?", "Best window"],
+    "rows": [
+     ["IV enzyme replacement", "Negligibly", "Any age for somatic gain"],
+     ["Stem cell transplant", "Donor microglia deliver enzyme", "Hurler under about 2.5 years, pre-regression"],
+     ["Supportive and surgical", "Symptomatic", "Airway, valves, spine, hearing, vision"]
+    ]
+   }
+  },
+  {
+   "tx": "Beyond MPS, keep two storage neighbours ready: **GM1 gangliosidosis** (beta-galactosidase, cherry red spot plus dysostosis bridging sphingolipid and MPS worlds) and mucolipidoses (including I-cell and pseudo-Hurler polydystrophy with high plasma enzymes). The unifying bedside question never changes: which undegraded macromolecule, in which cells, explains facies, skeleton, cornea, brain and viscera together in this child?",
+   "say": "GM1 gangliosidosis bridges sphingolipid and MPS worlds with cherry red spot plus dysostosis. The unifying question never changes: which undegraded molecule, in which cells, explains the whole child together?",
+   "vis": {
+    "kind": "flow",
+    "title": "One question per storage child",
+    "nodes": [
+     {"id": "m", "label": "Which molecule accumulates?"},
+     {"id": "c", "label": "In which cells (neuron, macrophage, fibroblast)?"},
+     {"id": "p", "label": "Pattern: cornea, skeleton, brain, viscera"}
+    ],
+    "edges": [["m", "c"], ["c", "p"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

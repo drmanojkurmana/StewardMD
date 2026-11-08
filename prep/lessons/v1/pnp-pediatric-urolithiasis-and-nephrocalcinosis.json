@@ -1,0 +1,150 @@
+{
+  "id": "pnp-pediatric-urolithiasis-and-nephrocalcinosis",
+  "title": "Pediatric Nephrolithiasis: Cystinuria, Primary Hyperoxaluria and Citrate Management",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Hypertension, CAKUT and Nephrolithiasis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Underlying metabolic derangements account for the vast majority of pediatric nephrolithiasis cases.",
+      "tx": "Recognize the fundamental principle of **Metabolic etiology dominance in children** presenting with kidney stones. Unlike adult nephrolithiasis where dietary habits and environmental factors predominate, over 75-80% of children with urolithiasis have an identifiable underlying metabolic risk factor; idiopathic hypercalciuria represents by far the most common single metabolic abnormality, identified in 40-50% of pediatric stone formers, followed by hypocitraturia, hyperuricosuria, and cystinuria.",
+      "vis": {
+        "kind": "table",
+        "title": "Metabolic Abnormalities in Pediatric Urolithiasis",
+        "cols": ["Metabolic Derangement", "Pediatric Prevalence", "Pathophysiologic Impact"],
+        "rows": [
+          ["Idiopathic hypercalciuria", "40-50%", "Precipitates calcium oxalate/phosphate crystal nucleation"],
+          ["Hypocitraturia", "30-40%", "Loss of natural calcium complexation inhibitor"],
+          ["Hyperoxaluria", "10-20%", "Forms highly insoluble calcium oxalate crystals"],
+          ["Cystinuria", "5-10%", "Defective dibasic transporter forms insoluble cystine stones"]
+        ]
+      }
+    },
+    {
+      "say": "Timed twenty-four-hour urine collections establish quantitative excretion benchmarks for metabolic evaluation.",
+      "tx": "Perform comprehensive metabolic workup using **24-hour urine collection diagnostic benchmarks** in all stone-forming children. Diagnostic criteria for urinary solute abnormalities include: hypercalciuria defined as urinary calcium > 4 mg/kg/day (or spot urine calcium-to-creatinine ratio > 0.2 mg/mg after age 2 years); hyperoxaluria defined as oxalate excretion > 0.5 mmol/1.73m²/day; hypocitraturia defined as citrate excretion < 320 mg/1.73m²/day; and hyperuricosuria defined as uric acid excretion > 10 mg/kg/day.",
+      "vis": {
+        "kind": "table",
+        "title": "24-Hour Urine Metabolic Diagnostic Benchmarks",
+        "cols": ["Urinary Parameter", "Diagnostic Cutoff (Abnormal)", "Clinical Interpretation"],
+        "rows": [
+          ["Calcium", "> 4 mg/kg/day (or UPCR > 0.2)", "Hypercalciuria (absorptive, renal, or resorptive)"],
+          ["Oxalate", "> 0.5 mmol/1.73m²/day", "Hyperoxaluria (primary genetic or enteric)"],
+          ["Citrate", "< 320 mg/1.73m²/day", "Hypocitraturia (tubular acidosis or chronic diarrhea)"],
+          ["Uric acid", "> 10 mg/kg/day", "Hyperuricosuria (purine turnover or metabolic defect)"]
+        ]
+      }
+    },
+    {
+      "say": "Primary hyperoxaluria type one leads to aggressive nephrocalcinosis and systemic oxalosis in young infants.",
+      "tx": "Identify the genetic and clinical features of **Primary hyperoxaluria type 1 (PH1) AGXT defect** in infantile nephrolithiasis. Primary hyperoxaluria type 1 is a devastating autosomal recessive inborn error of metabolism caused by mutations in the AGXT gene on chromosome 2q37.3, which encodes hepatic peroxisomal alanine:glyoxylate aminotransferase; absence of this enzyme shunts glyoxylate to oxalate, causing profound hyperoxaluria, recurrent nephrocalcinosis, early renal failure, and systemic oxalosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "agxt", "label": "Biallelic AGXT mutation on 2q37.3 (PH1)"},
+          {"id": "shunt", "label": "Glyoxylate cannot transaminate -> shunted to Oxalate"},
+          {"id": "dep", "label": "Massive hyperoxaluria -> Nephrocalcinosis & Oxalosis"}
+        ],
+        "edges": [
+          ["agxt", "shunt"],
+          ["shunt", "dep"]
+        ]
+      }
+    },
+    {
+      "say": "Small interfering RNA molecules silence hepatic glycolate oxidase and provide transformative therapy for primary hyperoxaluria.",
+      "tx": "Prescribe disease-modifying RNA-interference therapy with **Lumasiran and nedosiran RNAi breakthrough** in pediatric PH1. Subcutaneous lumasiran is an RNA-interference therapeutic agent targeting glycolate oxidase (encoded by HAO1); by depleting glycolate oxidase, it halts upstream glyoxylate substrate synthesis, achieving a dramatic reduction in urinary oxalate excretion by > 65% in pediatric trials, preserving renal function and halting systemic calcium oxalate crystal deposition.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional PH1 Management",
+          "points": [
+            "Hyperhydration (> 3-4 L/m²/day)",
+            "High-dose pyridoxine (vitamin B6) trial",
+            "Eventual combined liver-kidney transplantation"
+          ]
+        },
+        "right": {
+          "title": "Targeted RNAi (Lumasiran)",
+          "points": [
+            "Subcutaneous monthly/quarterly dosing",
+            "Silences hepatic glycolate oxidase (HAO1)",
+            "Reduces urinary oxalate excretion > 65%"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Defective dibasic amino acid transport leads to precipitation of pathognomonic hexagonal crystals in acidic urine.",
+      "tx": "Evaluate transport genetics in **Cystinuria SLC3A1/SLC7A9 transporter defect** manifesting with recurrent calculi. Cystinuria is an autosomal recessive disorder caused by mutations in SLC3A1 (type A) or SLC7A9 (type B), which encode the heavy and light subunits of the renal and intestinal dibasic amino acid transporter responsible for reabsorbing COLA (cystine, ornithine, lysine, and arginine); insolubility of cystine in acidic urine forms radiopaque stones and pathognomonic flat hexagonal crystals.",
+      "vis": {
+        "kind": "table",
+        "title": "Cystinuria Molecular and Laboratory Features",
+        "cols": ["Feature", "Mechanism / Test", "Characteristic Finding"],
+        "rows": [
+          ["Transporter defect", "Mutations in SLC3A1 (2p21) or SLC7A9 (19q13)", "Impaired proximal tubular COLA reabsorption"],
+          ["Urine microscopy", "Centrifuged first morning urine", "Pathognomonic hexagonal flat cystine plates"],
+          ["Screening test", "Cyanide-nitroprusside chemical reaction", "Red-purple coloration in presence of free cystine"],
+          ["Stone radiopacity", "Sulfur-containing amino acid structure", "Faintly radiopaque ground-glass appearance on X-ray"]
+        ]
+      }
+    },
+    {
+      "say": "Therapy requires vigorous hydration, urinary alkalinization above pH seven point five, and thiol binding agents.",
+      "tx": "Formulate a comprehensive regimen for **Urinary alkalinization and tiopronin in cystinuria** stone prevention. Because cystine solubility increases exponentially above pH 7.0-7.5, medical management demands aggressive hydration exceeding 3 L/m²/day day and night, oral potassium citrate to maintain urine pH >= 7.5, and the addition of thiol-binding chelating agents (such as tiopronin or D-penicillamine) which cleave cystine disulfides into much more soluble mixed cysteine-drug complexes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "hydr", "label": "Aggressive fluid intake (> 3 L/m²/day around clock)"},
+          {"id": "alk", "label": "Potassium citrate to maintain urine pH >= 7.5"},
+          {"id": "thiol", "label": "Add Tiopronin if cystine excretion remains > 250 mg/L"}
+        ],
+        "edges": [
+          ["hydr", "alk"],
+          ["alk", "thiol"]
+        ]
+      }
+    },
+    {
+      "say": "Urinary citrate acts as a natural inhibitor of calcium crystallization and is repleted with oral potassium citrate.",
+      "tx": "Prescribe physiological stone inhibition using **Hypocitraturia and potassium citrate dosing** in recurrent stone formers. Citrate is a potent endogenous inhibitor of calcium stone formation that chelates free ionized calcium and directly poisons calcium oxalate and calcium phosphate crystal growth; hypocitraturia (often secondary to distal renal tubular acidosis or chronic diarrhea) is treated with oral potassium citrate (1-2 mEq/kg/day divided into 2-3 daily doses) to restore urinary citrate excretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Potassium Citrate Therapy",
+          "points": [
+            "Preferred agent in pediatric nephrolithiasis",
+            "Dose: 1-2 mEq/kg/day divided 2-3 times daily",
+            "Alkalinizes urine and provides systemic alkali load",
+            "Complexes ionic calcium to prevent crystal nucleation"
+          ]
+        },
+        "right": {
+          "title": "Sodium Citrate (Avoid)",
+          "points": [
+            "Increases urinary sodium excretion",
+            "Obligates increased renal calcium excretion",
+            "Exacerbates hypercalciuria and stone risk",
+            "Reserved only for patients with severe hyperkalemia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Premature neonates treated with chronic furosemide are at high risk for medullary nephrocalcinosis.",
+      "tx": "Monitor high-risk infants to detect **Nephrocalcinosis in preterm infants on furosemide** during neonatal intensive care. Chronic loop diuretic therapy with furosemide in very low birth weight preterm neonates induces massive hypercalciuria, precipitating microscopic and macroscopic medullary nephrocalcinosis in up to 60% of exposed infants; management involves serial renal ultrasonography, weaning loop diuretics, and transitioning to a calcium-sparing thiazide diuretic like chlorothiazide.",
+      "vis": {
+        "kind": "table",
+        "title": "Neonatal Nephrocalcinosis Risk and Resolution",
+        "cols": ["Clinical Factor", "Pathophysiologic Action", "Management Strategy"],
+        "rows": [
+          ["Furosemide therapy", "Inhibits loop NKCC2, wasting calcium into urine", "Transition to chlorothiazide to spare calcium"],
+          ["Very low birth weight", "Immature tubular transport and high bone turnover", "Optimize calcium-to-phosphorus intake ratio"],
+          ["Ultrasonography", "Reveals hyperechoic medullary pyramids", "Periodic surveillance; often resolves spontaneously"]
+        ]
+      }
+    }
+  ]
+}

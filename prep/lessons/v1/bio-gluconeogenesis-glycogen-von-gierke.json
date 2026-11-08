@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Von Gierke and glucose-6-phosphatase system",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In **von Gierke disease** (type I), glucose-6-phosphate cannot become free glucose, so fasting blood sugar falls while glycogen and fat pack the liver to massive hepatomegaly with a doll like face. Toddlers present after overnight fasts with sweating, irritability or seizures that feeding aborts. Glucagon fails to raise glucose (it may raise lactate instead), a bedside paradox examiners love.",
+   "say": "In von Gierke disease, glucose-6-phosphate cannot become free glucose, so fasting sugar falls while liver packs with glycogen and fat. Toddlers present after overnight fasts, and glucagon fails to raise glucose. Feeding aborts the episodes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-gluconeogenesis-glycogen-gen1.webp",
+    "alt": "An enlarged liver and packed hepatocyte glycogen show blocked glucose release with fasting features.",
+    "caption": "Von Gierke disease with blocked glucose release and stored glycogen, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Trapped **glucose-6-phosphate** overflows down every open road, and each metabolite explains one complication: glycolysis overflow makes lactate (acidosis), HMP shunt overflow makes ribose and urate precursors, lipogenesis makes triglycerides, and glycogen synthesis enlarges liver further. Reciting the crossroads predicts the blood panel (low glucose, high lactate, high urate, high lipids) without memorising a list.",
+   "say": "Trapped glucose-6-phosphate overflows down every open road. Glycolysis makes lactate, the shunt feeds urate, and lipogenesis makes triglycerides. Reciting the crossroads predicts the blood panel without memorising a list.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Overflow road", "Product in excess", "Clinical result"],
+    "rows": [
+     ["Glycolysis", "Lactate", "Metabolic acidosis"],
+     ["HMP shunt to purines", "Uric acid", "Gout, kidney stones"],
+     ["Lipogenesis", "Triglycerides", "Fatty liver, eruptive risk"],
+     ["Glycogen synthesis", "Stored glycogen", "Massive hepatomegaly"]
+    ]
+   }
+  },
+  {
+   "tx": "Type Ia lacks the phosphatase catalytic subunit itself, while type Ib lacks the **translocase** importing glucose-6-phosphate into the endoplasmic reticulum, adding neutropenia and recurrent bacterial infections with inflammatory bowel like disease. Granulocyte colony stimulating factor supports severe Ib neutropenia. Both share the metabolic storm because the lumenal reaction starves either way, proving compartment logic in a human disease.",
+   "say": "Type Ia lacks the phosphatase itself, while type Ib lacks the translocase and adds neutropenia with recurrent infections. Both share the metabolic storm because the lumenal reaction starves either way, proving compartment logic in human disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Type Ia (enzyme absent)", "points": ["Full metabolic picture", "Neutrophils normal", "Commoner form"]},
+    "right": {"title": "Type Ib (translocase absent)", "points": ["Same metabolic picture", "Neutropenia plus infections", "May need G-CSF support"]
+    }
+   }
+  },
+  {
+   "tx": "Long term risks follow the trapped metabolites: urate nephropathy and stones, hepatic **adenomas** that can transform, renal glomerular injury, osteoporosis and pancreatitis from severe hypertriglyceridaemia. Growth failure improves when overnight glucose is secured. Regular liver imaging, urate and lipid control, and kidney surveillance therefore structure follow up as much as glucose itself.",
+   "say": "Long term risks follow the trapped metabolites: urate kidney injury, hepatic adenomas, renal damage and pancreatitis from severe hypertriglyceridaemia. Growth improves when overnight glucose is secured. Liver imaging and kidney surveillance structure follow up.",
+   "vis": null
+  },
+  {
+   "tx": "Treatment supplies glucose by the clock rather than by enzyme: frequent daytime feeds, **uncooked cornstarch** overnight (slowly digested raw starch), and continuous gastric glucose in infants. Fructose and galactose are limited because they enter as trapped glucose-6-phosphate without yielding blood glucose. Families carry glucose and sick day plans, since gastroenteritis fasting precipitates the severest crises.",
+   "say": "Treatment supplies glucose by the clock: frequent feeds, uncooked cornstarch overnight, and continuous gastric glucose in infants. Fructose and galactose are limited because they trap without yielding blood glucose. Families carry sick day plans.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Purpose"],
+    "rows": [
+     ["Frequent feeds, cornstarch overnight", "Never allow a long fast"],
+     ["Limit fructose and galactose", "Avoid trapped precursors"],
+     ["Allopurinol, lipid and BP control", "Protect kidney and vessels"],
+     ["Liver imaging surveillance", "Watch adenomas"]
+    ]
+   }
+  },
+  {
+   "tx": "Rank von Gierke against its neighbours by asking where release blocks: Hers disease (hepatic phosphorylase) leaves gluconeogenesis free, so hypoglycaemia stays mild and lactate normal; debrancher disease behaves similarly with limit dextrin. Only the shared **phosphatase exit** blocks both supply lines and diverts carbon to lactate and fat. That one question (does gluconeogenesis rescue?) separates severe from mild hepatic forms instantly.",
+   "say": "Ask whether gluconeogenesis rescues. Hers and debrancher diseases leave it free, so hypoglycaemia stays mild. Only the shared phosphatase exit blocks both supply lines. That one question separates severe from mild hepatic forms instantly.",
+   "vis": {
+    "kind": "flow",
+    "title": "Does GNG rescue?",
+    "nodes": [
+     {"id": "q", "label": "Fasting hypoglycaemia with liver enlargement"},
+     {"id": "both", "label": "Both routes blocked: von Gierke (severe)"},
+     {"id": "one", "label": "One route blocked: Hers or Cori (milder)"}
+    ],
+    "edges": [["q", "both"], ["q", "one"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
