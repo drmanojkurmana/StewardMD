@@ -550,7 +550,20 @@
     fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
     hub: '<circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M12 9V6M12 15v3M10 10.5 6.5 7.5M14 10.5l3.5-3M10 13.5l-3.5 3M14 13.5l3.5 3"/>',
     receipt_long: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
-    bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>'
+    bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
+    // ── Home reference-look icons (owner 2026-11-08): hand-drawn line icons, one per tile, no two alike.
+    hrfStart: '<rect x="5" y="4.5" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 2.8h6"/><path d="M12 10v6M9 13h6"/>',
+    hrfDx: '<circle cx="10" cy="8" r="3.2"/><path d="M4.5 19.5a5.5 5.5 0 0 1 9-4.2"/><circle cx="17" cy="16.5" r="3"/><path d="m19.3 18.8 2 2"/>',
+    hrfCapsule: '<rect x="3.5" y="8" width="17" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="m8.5 8.5 7 7"/>',
+    hrfCalc: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><circle cx="8.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="18" r=".9" fill="currentColor" stroke="none"/>',
+    hrfVirus: '<circle cx="12" cy="12" r="4.5"/><path d="M12 7.5V4M12 20v-3.5M7.5 12H4M20 12h-3.5M8.8 8.8 6.3 6.3M17.7 17.7l-2.5-2.5M15.2 8.8l2.5-2.5M6.3 17.7l2.5-2.5"/><circle cx="10.2" cy="10.8" r="1" fill="currentColor" stroke="none"/><circle cx="13.8" cy="13.2" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/>',
+    hrfFlask: '<path d="M10 3h4"/><path d="M10.5 3v5L5 18a1.8 1.8 0 0 0 1.6 2.7h10.8A1.8 1.8 0 0 0 19 18L13.5 8V3"/><path d="M7.5 14.5h9"/>',
+    hrfIvBag: '<path d="M9 3.5h6"/><rect x="6.5" y="5" width="11" height="13" rx="2.5"/><path d="M9.5 9.5h5M12 8v5M9.5 11h5" stroke-width="1.4"/><path d="M12 18v1.5a2 2 0 0 0 2 2"/>',
+    hrfHospital: '<path d="M5 21V8.5A1.5 1.5 0 0 1 6.5 7h6A1.5 1.5 0 0 1 14 8.5V21"/><path d="M14 11h3.5A1.5 1.5 0 0 1 19 12.5V21"/><path d="M3.5 21h17"/><path d="M9.5 9.5v4M7.5 11.5h4"/>',
+    hrfHome: '<path d="M12 3.8 3.8 11.2h2.4v8.6h11.6v-8.6h2.4Z" fill="currentColor" stroke="none"/><path d="M10.2 19.8v-4.6h3.6v4.6" fill="none" stroke="#fff" stroke-width="1.6"/>',
+    hrfFolder: '<path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/>',
+    hrfGrid4: '<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
+    hrfSparkle: '<path d="M11 4c.6 3.8 2.2 5.4 6 6-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-6Z" fill="currentColor" stroke="none"/><path d="M18.5 3.5c.3 1.8 1 2.5 2.8 2.8-1.8.3-2.5 1-2.8 2.8-.3-1.8-1-2.5-2.8-2.8 1.8-.3 2.5-1 2.8-2.8Z" fill="currentColor" stroke="none"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -1240,6 +1253,7 @@
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
+    paywall: function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("home-banner"); return; } } catch (e) {} toast("Plans loading\u2026"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { try { window.SMD_dictateMaik(); } catch (e) { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); } },
@@ -1907,7 +1921,7 @@
       ".hv-drag{flex:0 0 auto;color:var(--hmut);padding:6px;margin-left:2px;touch-action:none;cursor:grab}",
       ".hv-tool-tog.dragging{opacity:.55;background:var(--hbg)}",
       ".rnav-grid.reordering .rnav-tile{touch-action:none}",
-      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
+      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s cubic-bezier(.42,0,.58,1) infinite alternate}",
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
       "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
@@ -1942,7 +1956,7 @@
       "#homeV2 .rnav-try-go{min-height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
       "#homeV2 .rnav-try-no{min-height:44px;padding:0 6px;border:0;background:none;color:var(--rds-muted,#5b7083);font:600 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
       "@media (prefers-reduced-motion:reduce){#homeV2 .rnav-htab{transition:none}}",
-      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px;font-family:'Atkinson Hyperlegible Next','Inter Variable',system-ui,sans-serif}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px;touch-action:manipulation}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
+      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px;font-family:'Manrope','Atkinson Hyperlegible Next','Inter Variable',system-ui,sans-serif}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px;touch-action:manipulation}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -1977,6 +1991,15 @@
     var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
     if (mins <= 270) return "Hi night owl" + nm + ". It\u2019s too early to say good morning";  // 00:00\u201304:30
     return greetV4() + nm;
+  }
+  function isProV4() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
+  // Hero greeting for the reference home: line 1 in white, "Dr <first>" in mint below.
+  // Same clock/account source as greetLineV4(); guests get the line with no name.
+  function greetHeroV4() {
+    var f = acctFirstV4(), nm = f ? "Dr " + escV4(f) : "";
+    var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();
+    if (mins <= 270) return '<span class="hrf-greet-line">Hi night owl,</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '') + '<span class="hrf-greet-note">It\u2019s too early to say good morning</span>';
+    return '<span class="hrf-greet-line">' + greetV4() + ',</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '');
   }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
@@ -2596,7 +2619,7 @@
   }
   function homeToolsSectionMarkup() {
     var T = homeTabsApi();
-    var grid = '<p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p><div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>';
+    var grid = '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>';
     if (!T) return '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' + grid;
     // First run with tabs: what the user already has on Home is not "new" to them.
     try { var st = homeStarter(); T.seedSeen(HOME_TOOLS.filter(function (t) { return homeToolEligible(t) && homeToolVisible(t, st); }).map(function (t) { return t.act; })); } catch (e) {}
@@ -2605,10 +2628,10 @@
       var on = id === cur;
       return '<button type="button" role="tab" class="rnav-htab' + (on ? ' on' : '') + '" id="rnavHtab-' + id + '" data-hometab="' + id + '" aria-selected="' + on + '" aria-controls="rnavHpanel-' + id + '" tabindex="' + (on ? 0 : -1) + '">' + homeTabLabel(T, id) + '</button>';
     }).join("");
-    return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical tools</h2>' +
-        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All tools</span></button></div>' +
-      '<div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div>' +
-      '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '><div id="rnavTry">' + homeTryCard(T) + '</div>' + grid + '</div>' +
+    return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical Tools</h2>' +
+        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All tools</span>' + ric("chevron_right") + '</button></div>' +
+      '<div class="hrf-pillsrow"><div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div></div>' +
+      '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '>' + grid + '<div id="rnavTry">' + homeTryCard(T) + '</div></div>' +
       T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
         return '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-' + id + '" aria-labelledby="rnavHtab-' + id + '"' + (cur === id ? '' : ' hidden') + '>' + (cur === id ? homeTabPanel(T, id) : '') + '</div>';
       }).join("");
@@ -2790,32 +2813,34 @@
   }
 
   function homeRedesignMarkup() {
+    var pro = isProV4();
     return '' +
-      '<header class="rnav-head rds-safe-top">' +
+      '<main class="v3-main rnav-main"><div class="rnav-stack">' +
+        '<div class="hrf-hero"><img class="hrf-art" src="/assets/home-hero.webp" width="1170" height="886" alt="" aria-hidden="true" fetchpriority="high">' +
+      '<header class="rnav-head hrf-head">' +
         '<button class="rds-icon-btn" data-act="menu" aria-label="Menu">' + ric("menu") + '</button>' +
-        '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span></div>' +
+        '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span><span class="hrf-pro" id="hrfProChip"' + (pro ? '' : ' hidden') + '>Pro</span></div>' +
         '<div class="rnav-head-sp"></div>' +
         '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
         '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
         '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
       '</header>' +
-      '<main class="v3-main rnav-main"><div class="rnav-stack">' +
-        '<div class="rnav-greet"><div class="rnav-eyebrow">' + dateV4() + '</div><div class="rnav-hi">' + greetLineV4() + '</div></div>' +
+        '<div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div></div>' +
+        '<div class="rnav-qa hrf-qa">' +
+          '<button class="rnav-qa-btn hrf-qa-btn is-first" data-act="startcase" aria-label="Start a Case">' + svg("hrfStart", "hrf-ic") + '<span>Start Case</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + svg("hrfDx", "hrf-ic") + '<span>Dx Patient</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + svg("hrfCapsule", "hrf-ic") + '<span>Drugs</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + svg("hrfCalc", "hrf-ic") + '<span>Calculators</span></button>' +
+        '</div>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + (pro ? '' : ' data-act="paywall" role="button" tabindex="0" aria-label="StewardMD Pro — see plans"') + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
+        '<div class="rnav-qrow hrf-qrow">' +
+          '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + svg("hrfVirus", "hrf-ic") + '<span>Syndromes</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("hrfFlask", "hrf-ic") + '<span>Antibiogram</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + svg("hrfIvBag", "hrf-ic") + '<span>Dosing</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + svg("hrfHospital", "hrf-ic") + '<span>Hospital+</span></button>' +
+        '</div>' +
         '<div id="rnavWatch"></div>' +
         '<div id="rnavResume"></div>' +
-        '<div class="rnav-qa">' +
-          '<button class="rnav-qa-btn" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
-          '<button class="rnav-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
-          '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
-          '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
-        '</div>' +
-        '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
-        '<div class="rnav-qrow">' +
-          '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
-          '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
-          '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
-          '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
-        '</div>' +
         homeToolsSectionMarkup() +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
@@ -2823,12 +2848,12 @@
           '<div class="cred">© 2026 StewardMD · All rights reserved</div>' +
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
-      '<nav class="rnav-tabbar rds-safe-bottom">' +
-        '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
-        '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-ai-mark.png" alt="" width="26" height="26" draggable="false"></span><span>Ask Maik</span></button>' +
-        '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
-        '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
+      '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
+        '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + svg("hrfHome", "hrf-tab-ic") + '<span>Home</span></button>' +
+        '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + svg("hrfFolder", "hrf-tab-ic") + '<span>Cases</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("tile", { size: 43 }) : svg("hrfSparkle", "hrf-sparkle")) + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
+        '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
+        '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
       '</nav>';
   }
   // Populate the dashboard cards from REAL data only (no placeholders). Anything with
@@ -2964,6 +2989,15 @@
       if (_rtb) { var _rsync = function () { _rtb.innerHTML = document.body.classList.contains("dark") ? ric("light_mode") : ric("dark_mode"); };
         _rsync(); _rtb.addEventListener("click", function () { setTimeout(_rsync, 40); }); }
       try { hydrateRnav(); } catch (e) {}
+      // The banner is a section with role="button" (its content is not phrasing content),
+      // so Enter/Space are wired here; a native button would swallow the block markup.
+      try { var _bn = root.querySelector("#hrfBanner"); if (_bn) _bn.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && _bn.getAttribute("data-act") === "paywall") { e.preventDefault(); ACT.paywall(); } }); } catch (e) {}
+      // Tier can land after first paint: keep the Pro chip and the banner's tap honest.
+      try { window.addEventListener("smd:tier", function () {
+        var pro = isProV4(), chip = document.getElementById("hrfProChip"), bn = document.getElementById("hrfBanner");
+        if (chip) chip.hidden = !pro;
+        if (bn) { if (pro) { bn.removeAttribute("data-act"); bn.removeAttribute("role"); bn.removeAttribute("tabindex"); bn.removeAttribute("aria-label"); } else { bn.setAttribute("data-act", "paywall"); bn.setAttribute("role", "button"); bn.setAttribute("tabindex", "0"); bn.setAttribute("aria-label", "StewardMD Pro — see plans"); } }
+      }); } catch (e) {}
     } else if (homeV4On()) {
       root.classList.add("hv4"); root.innerHTML = homeV4Markup();
       // header theme toggle reflects current theme (moon in light, sun in dark)
@@ -10326,7 +10360,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "liquid", appearSet: false };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { homeColor: "", fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "liquid", appearSet: false };
   var APPEARANCES = [{ id: "standard", name: "Standard" }, { id: "frosted", name: "Frosted" }, { id: "liquid", name: "Liquid" }, { id: "tinted3d", name: "Tinted 3D" }, { id: "blend", name: "Blend" }];
   var THEMES = [
     { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
@@ -10366,6 +10400,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           fontScale: Math.min(2, Math.max(.8, +o.fontScale || 1)),
           density: o.density, autoFit: !!o.autoFit, userSet: !!o.userSet,
           theme: okTheme ? o.theme : "classic",
+          homeColor: normHexD(o.homeColor),
           font: okFont ? o.font : "plex",
           headingStyle: o.headingStyle === "script" ? "script" : "default",
           // Liquid is the default look (owner 2026-10-18). A saved "standard" counts as a choice only when the user picked it
@@ -10377,6 +10412,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     } catch (e) {}
     return Object.assign({}, DDEF);
   }
+  // Home-only colour code from Settings. Returns #rrggbb, or "" if it is not a colour.
+  function normHexD(v) {
+    v = String(v || "").trim().replace(/^#/, "");
+    if (/^[0-9a-f]{3}$/i.test(v)) v = v.replace(/./g, "$&$&");
+    return /^[0-9a-f]{6}$/i.test(v) ? "#" + v.toLowerCase() : "";
+  }
+  // White hero text must stay readable: WCAG 4.5:1 against the chosen colour.
+  function hexOkD(hex) {
+    var c = [1, 3, 5].map(function (i) { var v = parseInt(hex.substr(i, 2), 16) / 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); });
+    return 1.05 / (.2126 * c[0] + .7152 * c[1] + .0722 * c[2] + .05) >= 4.5;
+  }
+  function applyHomeColorD() {
+    var hc = normHexD(ds.homeColor), el = document.documentElement, st = document.getElementById("hrfHomeColor");
+    ds.homeColor = hc;
+    if (!hc) { el.removeAttribute("data-home-color"); if (st) st.remove(); return; }
+    el.setAttribute("data-home-color", hc);
+    if (!st) { st = document.createElement("style"); st.id = "hrfHomeColor"; document.head.appendChild(st); }
+    st.textContent = "html[data-home-color] #homeV2#homeV2.rnav{--sphere-mid:" + hc + ";--sphere-base:color-mix(in srgb," + hc + " 55%,#000);--sphere-hi:color-mix(in srgb," + hc + " 62%,#fff);--sphere-glow:color-mix(in srgb," + hc + " 45%,transparent);--teal:" + hc + ";--rds-primary:" + hc + "}";
+  }
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {
     try {
@@ -10387,6 +10441,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
     var el = document.documentElement;
     if (ds.theme && ds.theme !== "classic") el.setAttribute("data-theme", ds.theme); else el.removeAttribute("data-theme");
+    applyHomeColorD();
     if (ds.appearance && ds.appearance !== "standard") el.setAttribute("data-appearance", ds.appearance); else el.removeAttribute("data-appearance");
     if (ds.font && ds.font !== "plex") el.setAttribute("data-font", ds.font); else el.removeAttribute("data-font");
     if (ds.headingStyle === "script") { el.setAttribute("data-head", "script"); ensureFont(SCRIPT_FONT); } else el.removeAttribute("data-head");
@@ -10498,6 +10553,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
         THEMES.map(function (t) { return '<button class="hv-th" data-t="' + t.id + '" style="--sw-paper:' + t.paper + ';--sw-acc:' + t.accent + '"><span class="hv-th-dot"></span><span class="hv-th-nm">' + t.name + '</span></button>'; }).join("") +
       '</div></div>' +
+      '<div class="hv-d-sec"><h4>Home colour</h4><div style="display:flex;gap:8px;align-items:center"><input id="hvHomeColor" type="text" maxlength="7" placeholder="#00004d" aria-label="Home colour code" aria-describedby="hvHomeColorMsg" autocomplete="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0;height:44px;box-sizing:border-box;padding:0 12px;border:1px solid var(--line,#dde);border-radius:10px;background:var(--panel,#fff);color:var(--ink,#111);font:500 16px var(--mono,monospace)"><button type="button" class="hv-fn" id="hvHomeColorReset" style="min-height:44px">Reset</button></div><div class="hv-info" id="hvHomeColorMsg" role="status" style="margin-top:6px">Type a colour code to colour the Home screen. Other screens keep your theme.</div></div>' +
       '<div class="hv-d-sec"><h4>App appearance</h4><div class="hv-fonts" id="hvAppear">' +
         APPEARANCES.map(function (a) { return '<button class="hv-fn" data-a="' + a.id + '">' + a.name + '</button>'; }).join("") +
       '</div><div class="hv-info" style="margin-top:6px">Liquid-glass styling across the app. The ICU dashboard is never affected.</div></div>' +
@@ -10560,6 +10616,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       applyD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
+    var hcIn = s.querySelector("#hvHomeColor"), hcMsg = s.querySelector("#hvHomeColorMsg"), hcRs = s.querySelector("#hvHomeColorReset");
+    if (hcIn) hcIn.addEventListener("input", function () {
+      var h = normHexD(hcIn.value);
+      if (!h) { hcMsg.textContent = hcIn.value.trim().length < 4 ? "Type a colour code like #00004d." : "That is not a colour code. Try one like #00004d."; return; }
+      if (!hexOkD(h)) { hcMsg.textContent = "Too light: white text would be hard to read. Choose a darker colour."; return; }
+      ds.homeColor = h; applyD(); hcMsg.textContent = "Home colour set to " + h + ".";
+    });
+    if (hcRs) hcRs.addEventListener("click", function () { ds.homeColor = ""; applyD(); hcIn.value = ""; hcMsg.textContent = "Home colour reset. Home follows your theme again."; });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); ds.appearSet = true; applyD(); refreshD(); }); });
 
     // The MaiK section edits the theme on screen: it used to edit only the light palette, so in dark
@@ -10684,6 +10748,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     [a, hp].forEach(function (b) { if (b) { b.setAttribute("role", "switch"); b.setAttribute("aria-checked", String(b.classList.contains("on"))); b.setAttribute("aria-label", b === a ? "Optimise for this device" : "Vibration feedback on tap"); } });
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
+    var hcv = s.querySelector("#hvHomeColor"); if (hcv && document.activeElement !== hcv) hcv.value = ds.homeColor || "";
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-a") === ds.appearance); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-h") === ds.headingStyle); });

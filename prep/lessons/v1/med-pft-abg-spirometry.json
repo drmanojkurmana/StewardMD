@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "med-pft-abg",
+ "subject": "medicine",
+ "title": "Pulmonary function testing, spirometry, and arterial blood gas interpretation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Pulmonary function testing evaluates mechanical ventilatory capacity through dynamic lung volume measurements. Performing standard **spirometry** records forced expiratory volume in one second (FEV1) and forced vital capacity (FVC). In healthy adults, the normal FEV1/FVC ratio exceeds 0.70 to 0.75. Reductions below seventy percent define an obstructive ventilatory defect, whereas a proportionate reduction in both FEV1 and FVC with a preserved or elevated ratio indicates a restrictive ventilatory defect requiring full lung volume measurement.",
+   "say": "Pulmonary function testing evaluates mechanical breathing performance through dynamic lung volume recordings. Performing standard spirometry measures forced expiratory volume in one second and forced vital capacity. In healthy adults, the normal ratio exceeds point seventy. Values below seventy percent define an obstructive ventilatory defect, whereas proportionate reductions with a preserved ratio suggest restrictive disease.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-spirometry.svg",
+    "alt": "Spirometry volume-time tracings and flow-volume loops.",
+    "caption": "Spirometric volume-time curves and flow-volume loops. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Distinguishing between chronic respiratory patterns relies on specific spirometric criteria. Developing an **obstructive pattern** is characterized by disproportionate reduction of maximal airflow relative to volume, classic in asthma and chronic obstructive pulmonary disease. Significant post-bronchodilator reversibility is confirmed when FEV1 improves by at least twelve percent and two hundred millilitres following inhaled salbutamol. Conversely, irreversible airflow limitation characterizes established chronic obstructive pulmonary disease.",
+   "say": "Differentiating between chronic respiratory disorders relies on specific spirometric standards. Developing an obstructive pattern produces disproportionate reduction of airflow relative to volume, characteristic of asthma and emphysema. Significant bronchodilator reversibility is confirmed when volume improves by twelve percent and two hundred millilitres after salbutamol. Irreversible airflow obstruction is characteristic of chronic obstructive pulmonary disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstructive defect",
+     "points": [
+      "FEV1/FVC ratio < 0.70",
+      "FEV1 reduced disproportionately",
+      "Scooped expiratory flow-volume loop",
+      "Asthma, COPD, bronchiectasis"
+     ]
+    },
+    "right": {
+     "title": "Restrictive defect",
+     "points": [
+      "FEV1/FVC ratio normal or > 0.75",
+      "Total lung capacity (TLC) < 80% predicted",
+      "Witch-hat miniature flow-volume loop",
+      "Idiopathic pulmonary fibrosis, chest wall disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "True restriction cannot be diagnosed by spirometry alone and requires measuring total lung capacity. Establishing a **restrictive pattern** requires showing total lung capacity below eighty percent of predicted value using body plethysmography or helium dilution. Because gas trapped behind closed airways cannot be measured by helium wash-in, body plethysmography remains the gold standard to measure thoracic gas volume and calculate residual volume. Intrinsic parenchymal fibrosis and extrinsic chest wall deformities produce distinctive volume patterns.",
+   "say": "True restrictive disease cannot be established by spirometry alone and requires measuring total lung capacity. Confirming a restrictive pattern requires demonstrating total lung capacity below eighty percent of predicted value using whole-body plethysmography. Because gas trapped behind closed airways escapes helium equilibration, body plethysmography serves as the definitive reference to calculate residual volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Measured lung parameter",
+     "Diagnostic threshold",
+     "Clinical significance"
+    ],
+    "rows": [
+     [
+      "Spirometry",
+      "FEV1/FVC ratio",
+      "< 0.70 post-bronchodilator",
+      "Defines airflow obstruction"
+     ],
+     [
+      "Plethysmography",
+      "Total lung capacity (TLC)",
+      "< 80% predicted value",
+      "Confirms true restrictive lung defect"
+     ],
+     [
+      "Plethysmography",
+      "Residual volume (RV)",
+      "> 120% predicted value",
+      "Identifies pulmonary gas trapping and hyperinflation"
+     ],
+     [
+      "Diffusing capacity",
+      "DLCO single-breath",
+      "< 80% predicted value",
+      "Indicates alveolar-capillary membrane impairment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measuring alveolar-capillary gas transfer provides critical insight into pulmonary membrane integrity. Determining the **diffusing capacity** of the lung for carbon monoxide (DLCO) quantifies gas transfer across alveolar-capillary units. A reduced DLCO with a restrictive pattern indicates intrinsic parenchymal lung disease such as idiopathic pulmonary fibrosis, whereas a normal DLCO with restriction points to extrinsic chest wall disorders or neuromuscular weakness. In obstructive disease, emphysema reduces DLCO while chronic asthma preserves it.",
+   "say": "Assessing alveolar-capillary gas exchange provides valuable insight into membrane integrity. Measuring the diffusing capacity for carbon monoxide quantifies gas transfer across functional units. A reduced diffusing capacity in restrictive disease indicates intrinsic parenchymal disease like pulmonary fibrosis, whereas normal values indicate chest wall disorders. Emphysema reduces diffusing capacity, whereas chronic asthma preserves it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reduced DLCO (< 80%)",
+     "points": [
+      "Idiopathic pulmonary fibrosis and ILD",
+      "Pulmonary emphysema (alveolar destruction)",
+      "Pulmonary arterial hypertension",
+      "Recurrent pulmonary thromboembolism"
+     ]
+    },
+    "right": {
+     "title": "Normal or elevated DLCO",
+     "points": [
+      "Bronchial asthma (normal or increased)",
+      "Extrinsic chest wall kyphoscoliosis (normal)",
+      "Neuromuscular diaphragmatic weakness (normal)",
+      "Pulmonary haemorrhage / polycythaemia (elevated)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Visual inspection of graphical loops displays physiological airway dynamics across the respiratory cycle. Analyzing the **flow-volume loop** reveals characteristic configurations according to the anatomical site of obstruction. Fixed upper airway obstruction from tracheal stenosis creates symmetrical truncation of both inspiratory and expiratory limbs. Variable extrathoracic obstruction like vocal cord paralysis selectively flattens the inspiratory curve, whereas variable intrathoracic tracheobronchial collapse selectively blunts the expiratory curve.",
+   "say": "Visual analysis of graphical breathing loops demonstrates airway dynamics across the respiratory cycle. Examining the flow-volume loop shows characteristic contours depending on the site of airway obstruction. Fixed upper airway lesions like tracheal stenosis cause flattening of both limbs. Variable extrathoracic obstruction blunts the inspiratory loop, whereas variable intrathoracic collapse reduces expiratory flow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-pft-abg-fig1.webp",
+    "alt": "Illustration of flow-volume loops and arterial blood gas diagrams.",
+    "caption": "Flow-volume loop patterns in upper and lower airway obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Arterial blood gas sampling provides essential measurements of oxygenation, ventilation, and metabolic acid-base balance. Evaluating the **arterial oxygen tension** (PaO2) and carbon dioxide tension (PaCO2) identifies acute respiratory failure. Normal arterial PaO2 ranges between 80 and 100 mmHg on room air, while normal PaCO2 spans 35 to 45 mmHg. Hypercapnia (PaCO2 > 45 mmHg) signifies alveolar hypoventilation, while isolated hypoxaemia with low or normal PaCO2 reflects ventilation-perfusion inequality or alveolar filling.",
+   "say": "Arterial blood gas analysis delivers critical data regarding oxygenation, ventilation and systemic acid-base status. Evaluating arterial oxygen tension and carbon dioxide tension helps identify acute respiratory failure. Normal arterial oxygen tension ranges between eighty and one hundred millimetres of mercury. Hypercapnia indicates alveolar hypoventilation, whereas isolated hypoxaemia reflects ventilation-perfusion mismatching or alveolar flooding.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-abg-steps.svg",
+    "alt": "Stepwise algorithm for arterial blood gas analysis and acid base interpretation.",
+    "caption": "Systematic interpretation of pH, PaCO2, and bicarbonate in blood gas analysis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating the underlying pathophysiological mechanism of hypoxaemia requires calculating the alveolar-arterial oxygen gradient. Calculating the **A-a gradient** compares calculated alveolar oxygen (PAO2) with measured arterial oxygen (PaO2) using the alveolar gas equation. A normal gradient spans 5 to 15 mmHg in young adults, rising with age. A normal A-a gradient during hypoxaemia confirms alveolar hypoventilation or high altitude, whereas an elevated gradient proves intrinsic pulmonary pathology.",
+   "say": "Differentiating the physiological mechanism of hypoxaemia requires measuring the alveolar-arterial oxygen gradient. Calculating the gradient compares expected alveolar oxygen with measured arterial oxygen using the alveolar gas equation. A normal gradient measures five to fifteen millimetres of mercury. A normal gradient in a hypoxaemic patient confirms pure hypoventilation, whereas an elevated gradient proves intrinsic lung pathology.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism of hypoxaemia",
+     "A-a oxygen gradient",
+     "Response to supplemental O2",
+     "Representative clinical etiology"
+    ],
+    "rows": [
+     [
+      "Hypoventilation",
+      "Normal gradient",
+      "Corrects promptly (100%)",
+      "Opioid overdose, Guillain-Barré syndrome"
+     ],
+     [
+      "High altitude",
+      "Normal gradient",
+      "Corrects promptly (100%)",
+      "Low atmospheric ambient PO2"
+     ],
+     [
+      "V/Q mismatch",
+      "Elevated gradient",
+      "Corrects with low/mod O2",
+      "COPD, bronchial asthma, pneumonia"
+     ],
+     [
+      "Right-to-left shunt",
+      "Elevated gradient",
+      "Refractory to 100% O2",
+      "ARDS, massive pulmonary atelectasis"
+     ],
+     [
+      "Diffusion impairment",
+      "Elevated gradient",
+      "Corrects with supplemental O2",
+      "Advanced idiopathic pulmonary fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The two most prevalent causes of an elevated alveolar-arterial oxygen gradient respond differently to high-flow oxygen. Hypoxaemia caused by **V/Q mismatch** readily corrects when breathing supplemental oxygen because delivering higher fraction of inspired oxygen elevates alveolar oxygen tension even in poorly ventilated regions. In contrast, an anatomical or physiological right-to-left shunt allows venous blood to bypass ventilated alveoli entirely, producing severe hypoxaemia that remains persistently refractory to administration of one hundred percent inspired oxygen.",
+   "say": "The two commonest causes of an elevated oxygen gradient respond differently to supplemental oxygen. Hypoxaemia from ventilation-perfusion mismatch improves when breathing oxygen because inspired oxygen raises alveolar tension in underventilated units. In contrast, a right-to-left shunt permits deoxygenated blood to bypass gas exchange units, producing severe hypoxaemia that remains refractory to one hundred percent oxygen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "V/Q mismatch",
+     "points": [
+      "Commonest mechanism of clinical hypoxaemia",
+      "Alveoli receive blood but reduced airflow",
+      "Elevated A-a oxygen gradient",
+      "Readily corrects with low-flow supplemental O2"
+     ]
+    },
+    "right": {
+     "title": "Right-to-left shunt",
+     "points": [
+      "Perfusion completely bypasses ventilated alveoli",
+      "Intracardiac shunts (cyanotic CHD) or ARDS",
+      "Severely elevated A-a oxygen gradient",
+      "Refractory to 100% supplemental oxygen therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
