@@ -25,62 +25,20 @@
       "say": "Malignant bowel obstruction represents one of the most distressing complications in advanced gynecologic oncology, developing in up to fifty percent of terminal ovarian cancer patients. Diffuse peritoneal carcinomatosis causes multifocal small bowel encasement, mesenteric foreshortening, and tumor infiltration of myenteric neural plexuses.",
       "tx": "**Malignant bowel obstruction** (MBO) develops in 25% to 50% of advanced epithelial ovarian cancer patients, resulting from diffuse **peritoneal carcinomatosis**, mesenteric foreshortening, extensive serosal encasement, and neoplastic infiltration of the **myenteric autonomic plexus** causing dynamic intestinal hypomotility.  Evidence-based practice integrates malignant bowel obstruction (MBO), 25-50% terminal ovarian cancer, multi-segmental encasement.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "shed",
-            "label": "Peritoneal carcinomatosis spreads along small bowel serosa"
-          },
-          {
-            "id": "encase",
-            "label": "Tumor plaque encasement causes mesenteric retraction and kinking"
-          },
-          {
-            "id": "plexus",
-            "label": "Direct invasion into myenteric plexus suppresses peristalsis"
-          },
-          {
-            "id": "obstruct",
-            "label": "Multifocal functional and mechanical bowel obstruction ensues"
-          }
-        ],
-        "edges": [
-          [
-            "shed",
-            "encase"
-          ],
-          [
-            "encase",
-            "plexus"
-          ],
-          [
-            "plexus",
-            "obstruct"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/bowel-obstruction-fig1.webp",
+        "alt": "Illustration of adhesive small bowel obstruction with dilated proximal bowel and an abdominal radiograph with air-fluid levels.",
+        "caption": "Adhesive obstruction with dilated bowel and air-fluid levels. Credit: StewardMD."
       }
     },
     {
       "say": "Computed tomography of the abdomen and pelvis with intravenous contrast serves as the definitive diagnostic imaging modality. CT imaging distinguishes a single-site focal mechanical blockage that might be surgically bypassable from diffuse, multifocal carcinomatosis where surgery is futile and contraindicated.",
       "tx": "Contrast-enhanced **computed tomography** of the abdomen and pelvis is the gold standard imaging investigation for MBO, essential for differentiating a focal, isolated **mechanical obstruction** (potentially amenable to surgical resection or enterostomy) from multifocal, inoperable **peritoneal carcinomatosis**.  Evidence-based practice integrates CT imaging for MBO, single-site vs multifocal, inoperable carcinomatosis.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Operable Focal Obstruction",
-          "points": [
-            "Single discrete transition point on CT scan",
-            "No massive ascites or diffuse peritoneal carcinomatosis",
-            "Good functional baseline (ECOG 0-2)"
-          ]
-        },
-        "right": {
-          "title": "Inoperable Diffuse Carcinomatosis",
-          "points": [
-            "Multifocal transition points and bowel wall thickening",
-            "Massive refractory malignant ascites and mesenteric cake",
-            "Severe cachexia and poor performance status (ECOG 3-4)"
-          ]
-        }
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-xray-small-bowel-obstruction.webp",
+        "alt": "Erect abdominal radiograph with multiple dilated central small bowel loops and step-ladder air-fluid levels.",
+        "caption": "Dilated small bowel loops with air-fluid levels on erect film. Credit: James Heilman, MD."
       }
     },
     {
