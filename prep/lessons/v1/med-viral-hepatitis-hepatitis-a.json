@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "med-viral-hepatitis",
+ "subject": "medicine",
+ "title": "Hepatitis A, hepatitis B virology, surface antigens, and core serology",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Transmission of enteric non-enveloped picornaviruses through contaminated food or drinking water causes acute, self-limiting hepatocyte inflammation. Caused by **Hepatitis A** virus (a single-stranded RNA hepatovirus), infection presents with abrupt fever, malaise, anorexia, nausea, and right upper quadrant discomfort, followed within days by jaundice and dark urine. The illness never progresses to chronic hepatitis or a carrier state. Diagnosis is confirmed by detecting serum anti-HAV IgM, which remains detectable for three to six months following acute infection.",
+   "say": "Transmission of non-enveloped picornaviruses through contaminated water or food triggers acute, self-limiting hepatic inflammation. Caused by the Hepatitis A virus, clinical illness presents with fever, malaise, nausea, and jaundice. The infection never causes chronic liver disease or a carrier state. Detecting anti-HAV IgM confirms acute infection, remaining positive for several months.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hepatitis-bcde-serology-phases-cure-fig1.webp",
+    "alt": "Overview diagram contrasting viral hepatitis genomes, transmission routes, and clinical courses.",
+    "caption": "Comparative viral hepatology, transmission modes, and chronicity risks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Infection with an enveloped, partially double-stranded DNA hepadnavirus constitutes a major global cause of acute hepatitis, cirrhosis, and hepatocellular carcinoma. Transmitted parenterally, sexually, or vertically during childbirth, **hepatitis B** virus replicates via reverse transcription of an RNA intermediate. In immunocompetent adults, acute infection resolves spontaneously in over ninety-five percent of cases. Conversely, vertical perinatal transmission results in chronic infection in approximately ninety percent of exposed neonates, highlighting the critical necessity of birth-dose immunization.",
+   "say": "Infection with an enveloped, partially double-stranded DNA hepadnavirus causes acute hepatitis, cirrhosis, and liver cancer. Transmitted sexually, parenterally, or vertically at birth, hepatitis B replicates through reverse transcription of an RNA intermediate. While ninety-five percent of adults clear the virus, vertical transmission produces chronic infection in ninety percent of neonates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hepatitis virus",
+     "Genome & family",
+     "Transmission route",
+     "Chronicity risk"
+    ],
+    "rows": [
+     [
+      "Hepatitis A",
+      "ssRNA (Picornaviridae)",
+      "Faecal-oral (food, water)",
+      "0% (Never chronic)"
+     ],
+     [
+      "Hepatitis B",
+      "dsDNA (Hepadnaviridae)",
+      "Parenteral, sexual, vertical",
+      "90% neonatal; <5% adult"
+     ],
+     [
+      "Hepatitis C",
+      "ssRNA (Flaviviridae)",
+      "Blood-borne, injection use",
+      "75% to 85% chronicity"
+     ],
+     [
+      "Hepatitis E",
+      "ssRNA (Hepeviridae)",
+      "Faecal-oral (waterborne)",
+      "Severe in pregnancy (20% mortality)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Appearance of circulating outer envelope lipoprotein represents the earliest detectable serological indicator of active viral infection. Detecting serum **HBsAg** (hepatitis B surface antigen) occurs one to ten weeks following viral exposure, preceding clinical symptoms and transaminase elevation. Persistence of HBsAg in circulation for longer than six months formally defines chronic hepatitis B infection. Eventual clearance of HBsAg accompanied by development of neutralizing anti-HBs antibodies signifies clinical cure and immune protection.",
+   "say": "Appearance of circulating envelope lipoprotein provides the earliest serological indicator of active infection. Detecting serum HBsAg occurs weeks after exposure, preceding transaminase elevation and jaundice. Persistence of surface antigen for over six months confirms chronic hepatitis B. Eventual clearance accompanied by anti-HBs development confirms immunological recovery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hepatitis-bcde-serology-phases-cure-fig2.webp",
+    "alt": "Serological curve illustrating the rise and fall of HBsAg, anti-HBc IgM, and anti-HBs.",
+    "caption": "Serological timelines of hepatitis B surface antigen, core antibodies, and viral clearance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Production of antibody directed against intracellular nucleocapsid protein serves as the definitive hallmark of recent acute infection. Presence of **anti-HBc IgM** appears shortly after HBsAg and remains elevated for four to six months. It represents the sole serological marker detectable during the diagnostic window period, when surface antigen has fallen below detection thresholds but surface antibody has not yet emerged. Total anti-HBc (predominantly IgG) persists for life, serving as an indelible marker of past infection.",
+   "say": "Generating antibodies against the nucleocapsid core protein marks acute infection. Presence of anti-HBc IgM appears alongside surface antigen and persists for several months. It represents the sole serological marker detectable during the window period, when surface antigen has disappeared but surface antibody has not yet developed. Total core antibody remains detectable indefinitely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-HBc IgM",
+     "points": [
+      "Marker of acute infection within past 6 months",
+      "Sole positive marker in window period",
+      "Declines as acute hepatitis resolves",
+      "Distinguishes acute from chronic HBV"
+     ]
+    },
+    "right": {
+     "title": "Anti-HBc IgG / Total",
+     "points": [
+      "Replaces IgM after 6 months",
+      "Persists indefinitely for life",
+      "Indicates past natural infection",
+      "Absent in individuals receiving recombinant vaccine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Secretory nucleocapsid peptide release provides a direct surrogate indicator of active viral replication and high epidemiological infectivity. Circulating **HBeAg** (hepatitis B e-antigen) is produced during translation of the precore/core gene, correlating with extremely high serum HBV DNA levels. Spontaneous or treatment-induced seroconversion from HBeAg to anti-HBe signifies immunological control, accompanied by marked reduction in viral load and normalization of liver enzymes. However, precore stop codon mutants continue active viral replication despite being persistently HBeAg-negative.",
+   "say": "Secretory nucleocapsid antigen provides an accurate surrogate for active viral replication and infectivity. Circulating HBeAg correlates with high viral DNA levels and extreme transmission risk. Seroconversion from e-antigen to anti-HBe indicates immune control and viral suppression. However, precore viral mutants continue active replication despite testing persistently negative for e-antigen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serological profile",
+     "HBsAg",
+     "Anti-HBc",
+     "Anti-HBs",
+     "Clinical interpretation"
+    ],
+    "rows": [
+     [
+      "Acute hepatitis B",
+      "Positive",
+      "IgM Positive",
+      "Negative",
+      "Active acute infection"
+     ],
+     [
+      "Window period",
+      "Negative",
+      "IgM Positive",
+      "Negative",
+      "Resolving acute HBV"
+     ],
+     [
+      "Resolved natural HBV",
+      "Negative",
+      "IgG Positive",
+      "Positive",
+      "Immune via past infection"
+     ],
+     [
+      "Vaccine-induced immunity",
+      "Negative",
+      "Negative",
+      "Positive",
+      "Immune via recombinant vaccine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergence of neutralizing protective antibody directed against the surface envelope marks definitive clinical resolution and lifelong immunity. Developing serum **anti-HBs** (hepatitis B surface antibody) in concentrations exceeding ten milli-international units per millilitre neutralizes viral particles and confers protection against re-infection. Patients immunized with the recombinant hepatitis B vaccine develop isolated anti-HBs antibodies, lacking antibodies against the core antigen. Conversely, individuals recovering from natural infection possess both anti-HBs and total anti-HBc antibodies.",
+   "say": "Development of neutralizing antibodies against surface envelope antigens confirms recovery and lifelong immunity. Serum anti-HBs titres exceeding ten units per millilitre confer protection against re-infection. Individuals immunized with recombinant vaccine demonstrate isolated anti-HBs, with completely negative core antibodies. Patients recovering from natural infection carry both anti-HBs and anti-HBc.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural Immunity",
+     "points": [
+      "Anti-HBs positive (>10 mIU/mL)",
+      "Anti-HBc total (IgG) positive",
+      "HBsAg negative",
+      "Derived from cleared natural infection"
+     ]
+    },
+    "right": {
+     "title": "Vaccine-Induced Immunity",
+     "points": [
+      "Anti-HBs positive (>10 mIU/mL)",
+      "Anti-HBc total completely negative",
+      "HBsAg negative",
+      "Derived from recombinant HBsAg vaccination"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The immunological age at initial exposure inversely determines the probability of developing permanent viral persistence. Developing **neonatal chronicity** occurs in up to ninety percent of infants infected via perinatal vertical transmission, because immature neonatal immune systems exhibit immune tolerance to HBsAg and HBeAg. In contrast, older children develop chronic disease in thirty percent of cases, whereas immunocompetent adults clear the virus in over ninety-five percent. Chronic carriers face substantial cumulative lifetime risks of developing cirrhosis and hepatocellular carcinoma.",
+   "say": "Age at exposure inversely determines the likelihood of developing permanent viral persistence. Developing neonatal chronicity occurs in ninety percent of vertically infected infants due to immune tolerance. In contrast, older children develop chronicity in thirty percent of cases, whereas adults clear infection in ninety-five percent. Chronic infection leads to cirrhosis and liver cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "exposure",
+      "label": "Exposure to Hepatitis B Virus"
+     },
+     {
+      "id": "neonatal",
+      "label": "Perinatal vertical transmission -> 90% chronic carrier"
+     },
+     {
+      "id": "adult",
+      "label": "Adult horizontal transmission -> <5% chronic carrier"
+     }
+    ],
+    "edges": [
+     [
+      "exposure",
+      "neonatal"
+     ],
+     [
+      "exposure",
+      "adult"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simultaneous administration of passive neutralizing antibodies and active immunization at delivery prevents perinatal transmission in infants born to infectious mothers. Administering **HBV immunoprophylaxis** requires delivering hepatitis B immune globulin (HBIG) and the first dose of recombinant vaccine at separate anatomical sites within twelve hours of birth. This dual regimen reduces vertical transmission from over ninety percent down to under five percent, ensuring effective prevention even in mothers with highly viraemic HBeAg-positive profiles.",
+   "say": "Delivering passive antibodies alongside active immunization at delivery prevents mother-to-child transmission. Administering HBV immunoprophylaxis involves giving hepatitis B immune globulin and recombinant vaccine at separate anatomical injection sites within twelve hours of delivery. This protocol reduces transmission from ninety percent down to under five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "delivery",
+      "label": "Infant born to HBsAg-positive mother"
+     },
+     {
+      "id": "hbig",
+      "label": "Administer HBIG within 12 hours of birth"
+     },
+     {
+      "id": "vaccine",
+      "label": "Administer HBV vaccine dose 1 within 12 hours"
+     }
+    ],
+    "edges": [
+     [
+      "delivery",
+      "hbig"
+     ],
+     [
+      "delivery",
+      "vaccine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

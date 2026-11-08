@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "med-malabsorption",
+ "subject": "medicine",
+ "title": "Tropical sprue, Whipple disease, and diagnostic malabsorption testing",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Acquired malabsorption syndromes in endemic geographic zones compromise diffuse mucosal transport across the jejunum and ileum. Manifesting after persistent microbial colonisation in residents or travellers to South Asia and the Caribbean, **tropical sprue** produces progressive watery diarrhoea, steatorrhoea, profound weight loss, and megaloblastic anaemia. Secondary folate and vitamin B12 deficiencies arise because inflammatory mucosal injury spans the entire length of the small intestine. Initial therapeutic response is characteristically achieved through prolonged courses of oral tetracycline combined with high-dose oral folic acid supplementation.",
+   "say": "Acquired malabsorption syndromes in endemic regions compromise mucosal transport throughout the small bowel. Developing after persistent bacterial colonisation in South Asia or the Caribbean, tropical sprue produces chronic diarrhoea, steatorrhoea, and megaloblastic anaemia. Folate and cobalamin deficiencies emerge because mucosal damage involves both jejunum and ileum. Treatment requires prolonged oral tetracycline combined with high-dose folic acid supplementation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Tropical sprue",
+     "Coeliac disease"
+    ],
+    "rows": [
+     [
+      "Distribution",
+      "Continuous jejunum and ileum",
+      "Duodenum and proximal jejunum"
+     ],
+     [
+      "Aetiology",
+      "Post-infectious bacterial dysbiosis",
+      "Autoimmune reaction to gluten"
+     ],
+     [
+      "Nutritional loss",
+      "Folate and vitamin B12",
+      "Iron and folate deficiency"
+     ],
+     [
+      "First-line therapy",
+      "Tetracycline plus folic acid",
+      "Lifelong gluten-free diet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diffuse small bowel mucosal damage drives progressive blunting and flattening of the absorptive surface area. Diagnostic endoscopic biopsies demonstrate subtotal **villous blunting** accompanied by deep crypt hyperplasia and extensive mononuclear infiltration within the lamina propria. Unlike proximal-predominant enteropathies, histological lesions in tropical sprue extend into the distal ileum, explaining the high frequency of cobalamin malabsorption. Structural mucosal recovery requires several months of antimicrobial therapy, underscoring the post-infectious pathogenesis of persistent proximal and distal bacterial overgrowth.",
+   "say": "Diffuse mucosal injury reduces the absorptive surface of the small intestine. Endoscopic biopsies reveal marked villous blunting alongside crypt hyperplasia and dense lamina propria infiltration. Unlike proximal enteropathies, changes extend throughout the distal ileum, causing profound cobalamin deficiency. Histological restitution requires months of antimicrobial therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gi-celiac-ibd-gerd-malnutrition-fig1.webp",
+    "alt": "Histopathological features of malabsorptive enteropathy showing villous blunting and mucosal inflammation.",
+    "caption": "Enteropathy histopathology with mucosal blunting and chronic inflammatory infiltrate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Infection with the actinomycete bacterium Tropheryma whipplei triggers a rare, multisystem granulomatous illness affecting middle-aged men. Developing **Whipple disease** typically begins with migratory, seronegative polyarthralgias preceding gastrointestinal symptoms by several years. Eventual presentation includes chronic diarrhoea, malabsorption with marked weight loss, generalized lymphadenopathy, hyperpigmentation, and low-grade pyrexia. Central nervous system involvement manifests as cognitive decline, supranuclear ophthalmoplegia, or pathognomonic oculomasticatory myorhythmia, necessitating rigorous neurological surveillance.",
+   "say": "Infection with Tropheryma whipplei causes a rare systemic illness primarily affecting men. Classic Whipple disease begins with migratory polyarthralgias years before gastrointestinal complaints arise. Patients eventually develop chronic diarrhoea, severe weight loss, lymphadenopathy, and low-grade fever. Neurological manifestations involve cognitive impairment and characteristic oculomasticatory myorhythmia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "infection",
+      "label": "Tropheryma whipplei infection"
+     },
+     {
+      "id": "macrophage",
+      "label": "Macrophage infiltration of lamina propria"
+     },
+     {
+      "id": "obstruction",
+      "label": "Lymphatic obstruction and malabsorption"
+     }
+    ],
+    "edges": [
+     [
+      "infection",
+      "macrophage"
+     ],
+     [
+      "macrophage",
+      "obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis of Whipple disease relies upon characteristic histopathological demonstration of bacterial accumulation within mucosal phagocytes. Small intestinal endoscopic biopsies reveal infiltration of the lamina propria by foamy **PAS-positive macrophages** containing non-acid-fast, diastase-resistant inclusions representing bacillary cell wall fragments. Electron microscopy confirms intracellular rods, while specific polymerase chain reaction assays identify bacterial DNA in tissue specimens, synovial fluid, or cerebrospinal fluid. These pathognomonic histological inclusions distinguish the disorder from Mycobacterium avium complex infections.",
+   "say": "Definitive diagnosis of Whipple disease requires identifying bacterial accumulation within tissue phagocytes. Small bowel mucosal biopsies show lamina propria infiltration by foamy PAS-positive macrophages that resist diastase digestion. Electron microscopy demonstrates intact bacillary walls, while polymerase chain reaction detects specific bacterial DNA in tissue or cerebrospinal fluid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Whipple disease biopsy",
+     "points": [
+      "Foamy macrophages in lamina propria",
+      "Periodic acid-Schiff (PAS) positive",
+      "Diastase resistant staining",
+      "Acid-fast bacillus stain negative"
+     ]
+    },
+    "right": {
+     "title": "Mycobacterium avium (MAC)",
+     "points": [
+      "Lamina propria macrophage sheets",
+      "Periodic acid-Schiff (PAS) positive",
+      "Ziehl-Neelsen acid-fast positive",
+      "Occurs in profound HIV immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bacterial eradication in Whipple disease mandates blood-brain barrier-penetrating antibiotics to avert fatal neurological relapses. Initiating **ceftriaxone maintenance** via intravenous infusion for two to four weeks clears acute systemic bacteraemia, followed by oral trimethoprim-sulfamethoxazole for one full year. Meropenem provides an effective alternative induction regimen in penicillin-allergic patients. Regular clinical monitoring and repeat duodenal biopsies confirm clearance of intact bacilli, though clearing degraded glycoprotein remnants from macrophages may require several years.",
+   "say": "Eradicating Whipple disease requires antibiotics that cross the blood-brain barrier to prevent neurological relapse. Commencing ceftriaxone maintenance intravenously for two to four weeks is followed by oral co-trimoxazole for twelve months. Intravenous meropenem serves as an effective alternative. Serial biopsies confirm eradication of viable bacilli.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "induction",
+      "label": "IV Ceftriaxone for 2 to 4 weeks"
+     },
+     {
+      "id": "transition",
+      "label": "Assess clinical response and CNS clearance"
+     },
+     {
+      "id": "maintenance",
+      "label": "Oral Co-trimoxazole for 12 months"
+     }
+    ],
+    "edges": [
+     [
+      "induction",
+      "transition"
+     ],
+     [
+      "transition",
+      "maintenance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diminished brush border disaccharidase activity causes unabsorbed dietary disaccharides to pass intact into the colonic lumen. Developing **lactose intolerance** results from genetically programmed downregulation of lactase-phlorizin hydrolase (primary adult-type hypolactasia) or secondary mucosal injury following viral gastroenteritis or coeliac sprue. Unhydrolysed lactose exerts an osmotic draw within the small bowel and undergoes colonic bacterial fermentation into short-chain fatty acids, hydrogen, and methane. Patients experience explosive watery diarrhoea, flatulence, abdominal cramps, and bloating within hours after milk ingestion.",
+   "say": "Reduced brush-border disaccharidase activity prevents normal digestion of milk sugar. Developing lactose intolerance results from adult-type lactase non-persistence or secondary enterocyte injury following gastroenteritis. Undigested lactose draws water into the lumen and undergoes bacterial fermentation in the colon, producing gaseous bloating, cramps, and watery diarrhoea.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glucose-galactose-malabsorption-fig1.webp",
+    "alt": "Diagram illustrating brush border disaccharide hydrolysis and monosaccharide transport.",
+    "caption": "Small intestinal enterocyte transport mechanisms and luminal carbohydrate breakdown. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating enterocyte mucosal malabsorption from pancreatic exocrine insufficiency relies on assessing passive carbohydrate uptake across intact small bowel epithelium. Administering an oral pentose load during the **D-xylose test** evaluates functional proximal mucosal surface area without requiring digestive pancreatic enzymes. Normal individuals passively absorb D-xylose in the jejunum and excrete more than four grams in a five-hour urine collection. Abnormally low urinary excretion indicates intrinsic mucosal disease such as coeliac sprue, whereas pancreatic insufficiency yields normal values.",
+   "say": "Distinguishing mucosal malabsorption from pancreatic insufficiency depends on measuring passive carbohydrate transport. Performing the oral D-xylose test evaluates proximal mucosal integrity without requiring pancreatic enzymes. Normal individuals passively absorb the pentose sugar and excrete over four grams in five-hour urine. Low excretion indicates mucosal enteropathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mucosal enteropathy",
+     "points": [
+      "Impaired enterocyte absorptive surface",
+      "Low five-hour urinary D-xylose (<4 g)",
+      "Low two-hour serum D-xylose level",
+      "Examples: Coeliac, tropical sprue"
+     ]
+    },
+    "right": {
+     "title": "Pancreatic insufficiency",
+     "points": [
+      "Deficient intraluminal lipase and protease",
+      "Normal urinary D-xylose (>4 g)",
+      "Normal passive mucosal absorption",
+      "Examples: Chronic pancreatitis, cystic fibrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-invasive detection of carbohydrate malabsorption measures expired gaseous fermentation products produced by resident colonic microflora. During the standard **lactose hydrogen breath test**, patients ingest fifty grams of lactose, followed by serial end-expiratory breath sampling every fifteen minutes for three hours. An elevation in exhaled breath hydrogen greater than twenty parts per million above baseline confirms colonic fermentation of unabsorbed sugar. Concurrent measurement of methane accounts for non-hydrogen-producing methanogenic organisms, ensuring high diagnostic accuracy.",
+   "say": "Non-invasive testing detects carbohydrate malabsorption by measuring expired bacterial gases. During the lactose hydrogen breath test, serial breath samples are collected after an oral lactose challenge. A rise in breath hydrogen over twenty parts per million indicates colonic fermentation of unabsorbed disaccharide. Concurrent methane sampling avoids false-negative results.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ingestion",
+      "label": "Oral 50 g lactose ingestion"
+     },
+     {
+      "id": "colonic",
+      "label": "Colonic fermentation into H2 and CH4"
+     },
+     {
+      "id": "detection",
+      "label": "Exhaled hydrogen rises >20 ppm"
+     }
+    ],
+    "edges": [
+     [
+      "ingestion",
+      "colonic"
+     ],
+     [
+      "colonic",
+      "detection"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
