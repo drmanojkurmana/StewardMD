@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "med-localisation",
+ "subject": "medicine",
+ "title": "Brainstem Localisation: Crossed Syndromes and Midbrain Lesions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Vascular infarction or mass lesions within the brainstem produce pathognomonic neurovascular syndromes characterised by crossed neurological deficits. These alternating **brainstem syndromes** arise because descending corticospinal motor and ascending spinothalamic sensory tracts cross the neuraxis below or above the brainstem, whereas exiting cranial nerve fascicles emerge ipsilaterally without decussation.",
+   "say": "Vascular infarction or mass lesions within the brainstem produce pathognomonic neurovascular syndromes characterized by crossed neurological deficits. These alternating brainstem syndromes arise because long projection tracts decussate across the neuraxis, whereas exiting cranial nerve fascicles emerge ipsilaterally without decussation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/brainstem-and-alternating-syndromes-fig1.webp",
+    "alt": "Anatomical cross section of brainstem infarct syndromes and alternating deficits.",
+    "caption": "Brainstem vascular anatomy and cross-sectional alternating stroke syndromes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The hallmark clinical principle of brainstem localisation is the alternating crossed deficit, termed **crossed hemiplegia**. An acute focal brainstem lesion injures an exiting ipsilateral cranial nerve nucleus or nerve root alongside uncrossed corticospinal tract fibres, producing an ipsilateral cranial nerve lower motor neuron palsy paired with a contralateral upper motor neuron hemiparesis of the limbs.",
+   "say": "The hallmark clinical principle of brainstem localisation is the alternating crossed deficit, termed crossed hemiplegia. An acute brainstem lesion injures an exiting ipsilateral cranial nerve alongside descending corticospinal tract fibres, producing an ipsilateral cranial nerve palsy paired with a contralateral hemiparesis of the body.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "les",
+      "label": "Focal Brainstem Lesion"
+     },
+     {
+      "id": "cn",
+      "label": "Ipsilateral Exiting Cranial Nerve"
+     },
+     {
+      "id": "pyr",
+      "label": "Contralateral Limb Hemiplegia"
+     }
+    ],
+    "edges": [
+     [
+      "les",
+      "cn"
+     ],
+     [
+      "les",
+      "pyr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the ventral midbrain, ischaemic occlusion of paramedian penetrating branches of the posterior cerebral artery produces the classic neurovascular disorder designated as **Weber syndrome**. The ischaemic core damages the ventromedial cerebral peduncle and fascicles of the emerging third cranial nerve, presenting with ipsilateral complete third nerve ophthalmoplegia paired with contralateral spastic hemiplegia.",
+   "say": "In the ventral midbrain, ischemic occlusion of paramedian penetrating branches of the posterior cerebral artery produces Weber syndrome. The ischemic core damages the ventromedial cerebral peduncle and exiting third cranial nerve fascicles, presenting with an ipsilateral third nerve palsy paired with contralateral hemiplegia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cns-cranial_nerves_vision.webp",
+    "alt": "Clinical examination of cranial nerves, pupillary light reflex, and eye movements.",
+    "caption": "Examination of cranial nerve three function, ocular motility, and pupillary symmetry. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physical examination in Weber syndrome reveals ipsilateral ptosis, a dilated fixed unreactive pupil, and an eye displaced outwards and downwards at rest due to unopposed fourth and sixth nerve actions. These ocular findings confirm complete dysfunction of the **oculomotor nerve** (cranial nerve III), while the contralateral arm and leg exhibit spastic weakness, hyperreflexia, and an extensor Babinski response.",
+   "say": "Physical examination in Weber syndrome reveals ipsilateral ptosis, a dilated unreactive pupil, and an eye resting down and out from unopposed action of other nerves. These findings confirm complete dysfunction of the oculomotor nerve, while the contralateral limbs exhibit spastic hemiparesis and hyperreflexia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ipsilateral Deficits (CN III)",
+     "points": [
+      "Complete ptosis from levator palpebrae paralysis",
+      "Eye positioned down-and-out at rest",
+      "Mydriasis with absent pupillary light reflex",
+      "Paralysis of superior, inferior, medial recti"
+     ]
+    },
+    "right": {
+     "title": "Contralateral Deficits (Corticospinal)",
+     "points": [
+      "Upper motor neuron hemiparesis of limbs",
+      "Contralateral lower facial weakness (UMN pattern)",
+      "Velocity-dependent spastic hypertonia",
+      "Positive Babinski sign on affected side"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When a midbrain ischaemic infarct extends more dorsally into the tegmentum, it damages the red nucleus and superior cerebellar peduncle decussation. Clinically recognised as **Benedikt syndrome**, patients present with an ipsilateral oculomotor nerve palsy combined with contralateral involuntary hyperkinetic movements, including prominent coarse intention tremor, chorea, and athetoid posturing of the contralateral limbs.",
+   "say": "When a midbrain ischemic infarct extends dorsally into the tegmentum, it damages the red nucleus and cerebellothalamic fibres. Recognized as Benedikt syndrome, patients present with an ipsilateral oculomotor nerve palsy combined with contralateral coarse intention tremor, chorea, and athetoid movements.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Weber Syndrome",
+     "points": [
+      "Ventral midbrain (cerebral peduncle)",
+      "Ipsilateral CN III palsy",
+      "Contralateral spastic hemiplegia",
+      "Involves pyramidal corticospinal tract"
+     ]
+    },
+    "right": {
+     "title": "Benedikt Syndrome",
+     "points": [
+      "Tegmentum of midbrain (red nucleus)",
+      "Ipsilateral CN III palsy",
+      "Contralateral tremor, ataxia, choreoathetosis",
+      "Involves cerebellorubrothalamic pathway"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A related midbrain tegmental stroke involving the exiting fascicles of cranial nerve III and the dentatorubrothalamic tract without injuring the corticospinal tract is termed **Claude syndrome**. This produces an ipsilateral third nerve palsy paired with prominent contralateral cerebellar ataxia, dysmetria, and kinetic tremor, distinguishing it from the hemiplegia of Weber and involuntary choreoathetosis of Benedikt.",
+   "say": "A related midbrain tegmental stroke involving the exiting fascicles of cranial nerve three and the dentatorubrothalamic tract is termed Claude syndrome. This produces an ipsilateral third nerve palsy paired with contralateral cerebellar ataxia and dysmetria, without the hemiplegia seen in Weber syndrome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "teg",
+      "label": "Dorsal Tegmental Midbrain Infarct"
+     },
+     {
+      "id": "cn3",
+      "label": "Ipsilateral Oculomotor Nerve Palsy"
+     },
+     {
+      "id": "atax",
+      "label": "Contralateral Cerebellar Ataxia"
+     }
+    ],
+    "edges": [
+     [
+      "teg",
+      "cn3"
+     ],
+     [
+      "teg",
+      "atax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the lower brainstem, occlusion of the posterior inferior cerebellar artery (PICA) or vertebral artery produces the most frequent of all brainstem stroke presentations, designated as **lateral medullary syndrome** (Wallenberg syndrome). In contrast to midbrain ventral strokes, lateral medullary infarction selectively spares the medullary pyramid, completely preserving contralateral limb motor power while generating striking sensory and autonomic dissociations.",
+   "say": "In the lower brainstem, occlusion of the posterior inferior cerebellar artery or vertebral artery produces lateral medullary syndrome, also known as Wallenberg syndrome. Unlike midbrain strokes, lateral medullary infarction spares the medullary pyramid, completely preserving limb motor power while causing severe sensory deficits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brainstem Level",
+     "Vascular Supply",
+     "Syndrome Name",
+     "Distinctive Clinical Features"
+    ],
+    "rows": [
+     [
+      "Ventral Midbrain",
+      "PCA paramedian branches",
+      "Weber syndrome",
+      "Ipsilateral CN III + contralateral spastic hemiplegia"
+     ],
+     [
+      "Midbrain Tegmentum",
+      "PCA penetrating branches",
+      "Benedikt syndrome",
+      "Ipsilateral CN III + contralateral tremor/chorea"
+     ],
+     [
+      "Dorsal Midbrain",
+      "PCA tegmental branches",
+      "Claude syndrome",
+      "Ipsilateral CN III + contralateral cerebellar ataxia"
+     ],
+     [
+      "Lateral Medulla",
+      "Vertebral artery / PICA",
+      "Wallenberg syndrome",
+      "Crossed analgesia, vertigo, ataxia, Horner syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular localisation across the brainstem depends upon understanding the four medial structures (Motor pathway, Medial lemniscus, Medial longitudinal fasciculus, Motor cranial nuclei 3, 4, 6, 12) versus four lateral structures (Spinocerebellar, Spinothalamic, Sensory trigeminal nucleus, Sympathetic pathway). This rule of **four** provides rapid, reliable anatomical localisation during acute neurovascular emergency presentations.",
+   "say": "Vascular localisation across the brainstem depends upon the rule of four: four medial structures containing motor and lemniscal tracts versus four lateral structures containing spinocerebellar, spinothalamic, sensory trigeminal, and sympathetic pathways. This rule provides rapid, reliable anatomical localisation during neurovascular emergencies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brainstem Zone",
+     "Tracts and Nuclei Involved",
+     "Clinical Deficits Produced"
+    ],
+    "rows": [
+     [
+      "Paramedian Zone",
+      "Corticospinal, Medial lemniscus, MLF, CN 3/4/6/12",
+      "Contralateral weakness, loss of vibration, INO"
+     ],
+     [
+      "Lateral Zone",
+      "Spinothalamic, Spinocerebellar, Sympathetic, CN 5/7/8/9/10",
+      "Crossed pain loss, limb ataxia, Horner, vertigo"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 423"
+}
