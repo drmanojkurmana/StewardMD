@@ -1,0 +1,86 @@
+{
+ "v": 1,
+ "module": "bio-cell-membrane",
+ "subject": "biochemistry",
+ "title": "Organelles and marker enzymes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **rough endoplasmic reticulum** ribosomes feed nascent secretory and membrane proteins co-translationally into the lumen for signal peptide cleavage, N-linked core glycosylation on dolichol, disulfide formation and chaperone (BiP, calnexin cycle) folding checks. The smooth reticulum makes steroids and phospholipids and detoxifies through cytochrome P450 (barbiturate induced hypertrophy in hepatocytes is visible pharmacology), while transitional elements export COPII vesicles to Golgi.",
+   "say": "Rough reticulum folds secretory proteins with glycosylation and chaperone checks. Smooth reticulum makes steroids and detoxifies through P450. COPII vesicles export finished cargo to Golgi.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Organelle", "Marker enzyme (classic)", "Signature job"],
+    "rows": [
+     ["Endoplasmic reticulum", "Glucose-6-phosphatase", "Folding, N-glycosylation start, detox"],
+     ["Golgi apparatus", "Galactosyltransferase", "Glycan finishing, sorting to destinations"],
+     ["Inner mitochondrial membrane", "Succinate dehydrogenase", "Respiration (complex II)"],
+     ["Lysosome", "Acid phosphatase", "Acid digestion (hydrolases, V-ATPase)"],
+     ["Peroxisome", "Catalase (and urate oxidase historically)", "VLCFA oxidation, peroxide disposal"],
+     ["Plasma membrane", "5-prime nucleotidase, Na/K ATPase", "Transport, signalling"]
+    ]
+   }
+  },
+  {
+   "tx": "**Golgi** stacks process cis to medial to trans: glycans trim and elaborate (mannose trimming, galactose and sialic acid caps), O-glycosylation, proteoglycan sulfation, proteolytic maturation (proinsulin, proalbumin), and sorting at the trans Golgi network into constitutive secretion, regulated secretory granules, or mannose-6-phosphate tagged lysosomal delivery. Brefeldin collapses Golgi into reticulum experimentally; I-cell disease from the next lesson shows sorting failure in patients.",
+   "say": "Golgi stacks finish glycans and sort cargo to secretion, granules or lysosomes through mannose-6-phosphate tags. I-cell disease shows sorting failure in patients most dramatically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Through the Golgi stack",
+    "nodes": [
+     {"id": "cis", "label": "Cis: receives COPII cargo"},
+     {"id": "med", "label": "Medial: glycans trimmed and built"},
+     {"id": "trans", "label": "Trans network: sorts three ways"},
+     {"id": "out", "label": "Secretion, granules, lysosomes"}
+    ],
+    "edges": [["cis", "med"], ["med", "trans"], ["trans", "out"]]
+   }
+  },
+  {
+   "tx": "When folding fails despite chaperones, terminally misfolded proteins retrotranslocate for proteasomal **ER-associated degradation**, and overload triggers the unfolded protein response (IRE1 splicing XBP1, PERK attenuating translation, ATF6 inducing chaperones) that restores balance or, when irremediable, apoptoses. Alpha-1 antitrypsin Z polymers and deltaF508 CFTR retention are ER quality control diseases, linking this organelle directly to lung, liver and pancreas clinics.",
+   "say": "Misfolded proteins undergo ER-associated degradation, and overload triggers the unfolded protein response. Antitrypsin polymers and CFTR retention are quality control diseases linking to lung and liver clinics.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Quality control succeeds", "points": ["Chaperones refold or ERAD degrades", "UPR expands capacity briefly", "Secretion resumes"]},
+    "right": {"title": "Quality control overwhelmed", "points": ["UPR switches pro-apoptotic (CHOP)", "Polymers retained (antitrypsin Z)", "Cell sacrificed to protect tissue"]
+    }
+   }
+  },
+  {
+   "tx": "**Mitochondria** retain bacterial signatures: double membranes (porin permeable outer, cardiolipin rich invaginated inner cristae), circular DNA encoding thirteen respiratory subunits plus rRNAs and tRNAs, 70S ribosomes, fission fusion dynamics and maternal inheritance. Matrix houses TCA cycle, fat oxidation and urea cycle entry; intermembrane space collects protons and cytochrome c whose cytosolic release commits apoptosis through the apoptosome, merging energy and death in one compartment.",
+   "say": "Mitochondria retain bacterial signatures with maternal circular DNA encoding thirteen subunits. Matrix houses oxidation cycles, while cytochrome c release commits apoptosis through the apoptosome machinery.",
+   "vis": null
+  },
+  {
+   "tx": "**Lysosomes** acidify to pH about five by V-ATPase (proton ATPase, no counter ion shortcut) arming sixty acid hydrolases (proteases cathepsins, lipases, glycosidases, sulfatases, nucleases, phosphatases) that digest endocytosed, phagocytosed and autophagic cargo to reusable monomers. Autophagy routes (macroautophagy double membrane autophagosomes, chaperone mediated direct translocation) feed them during starvation and quality control, and lysosomal exocytosis repairs plasma membrane wounds by calcium triggered fusion.",
+   "say": "Lysosomes acidify to pH five, arming sixty hydrolases for digestion and autophagy cargo. Lysosomal exocytosis even repairs membrane wounds by calcium triggered fusion at the surface.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Lysosome input route", "Cargo", "Failure example"],
+    "rows": [
+     ["Endocytosis", "LDL, fluids, receptors", "Storage when hydrolase missing"],
+     ["Phagocytosis", "Bacteria, apoptotic cells", "Chronic granulomatous killing separate (NADPH oxidase)"],
+     ["Autophagy", "Organelles, aggregates", "Neurodegeneration when clearance lags"],
+     ["Mannose-6-phosphate delivery", "Hydrolases themselves", "I-cell mistargeting (next lesson)"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cytoskeleton** gives organelles roads and addresses: microtubules (tubulin, dynamic instability, kinesin outward and dynein inward motors, colchicine and taxane drug targets, cilia and mitotic spindle), actin microfilaments (motility, microvilli, cytokinesis, cytochalasin targets), and intermediate filaments (keratins, vimentin, neurofilaments, lamins whose failure progerias prematurely ages nuclei). Marker logic plus motor directionality answers most cell fractionation and toxin stems without memorising micrographs.",
+   "say": "Microtubules, actin and intermediate filaments give organelles roads and addresses with drug targets at each polymer. Marker logic plus motor directionality answers most fractionation and toxin stems.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fraction spins, markers answer",
+    "nodes": [
+     {"id": "spin", "label": "Homogenate spun faster stepwise"},
+     {"id": "pel", "label": "Nuclei, mitochondria, microsomes pellet in order"},
+     {"id": "mark", "label": "Marker enzyme identifies each fraction"}
+    ],
+    "edges": [["spin", "pel"], ["pel", "mark"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
