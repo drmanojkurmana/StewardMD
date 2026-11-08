@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Gluconeogenesis steps and substrates",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Only liver, and kidney cortex during prolonged fasting, can release glucose because only they own **glucose-6-phosphatase**. Gluconeogenesis rebuilds glucose from lactate, glycerol and glucogenic amino acids, sharing most glycolytic enzymes in reverse. Four bypass enzymes handle the three irreversible glycolytic steps, and their locations (mitochondria, cytosol, endoplasmic reticulum) are themselves favourite examination questions.",
+   "say": "Only liver and kidney cortex can release glucose because only they own glucose-6-phosphatase. Gluconeogenesis rebuilds glucose from lactate, glycerol and glucogenic amino acids. Four bypass enzymes handle the irreversible glycolytic steps across mitochondria, cytosol and endoplasmic reticulum.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Bypass enzyme", "Compartment", "Detour it provides"],
+    "rows": [
+     ["Pyruvate carboxylase", "Mitochondria", "Pyruvate to oxaloacetate"],
+     ["PEPCK", "Cytosol and mitochondria", "Oxaloacetate to PEP"],
+     ["Fructose-1,6-bisphosphatase", "Cytosol", "Past the PFK-1 step"],
+     ["Glucose-6-phosphatase", "Endoplasmic reticulum", "Free glucose released"]
+    ]
+   }
+  },
+  {
+   "tx": "The first bypass needs **pyruvate carboxylase**, a biotin enzyme switched on by acetyl-CoA accumulating from fat burning during fasting. Oxaloacetate then leaves mitochondria as malate or aspartate because no direct transporter exists, and PEPCK converts it to phosphoenolpyruvate using GTP. Species and fasting duration shift the PEPCK balance between mitochondrial and cytosolic forms.",
+   "say": "Pyruvate carboxylase needs biotin and is switched on by acetyl-CoA from fat burning. Oxaloacetate leaves mitochondria as malate or aspartate, and PEPCK converts it to phosphoenolpyruvate using GTP. Fasting shifts the balance between the mitochondrial and cytosolic forms.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pyruvate back to PEP",
+    "nodes": [
+     {"id": "pyr", "label": "Pyruvate (cytosol to mitochondria)"},
+     {"id": "oaa", "label": "Oxaloacetate (carboxylase)"},
+     {"id": "mal", "label": "Export as malate or aspartate"},
+     {"id": "pep", "label": "PEP by PEPCK (GTP)"}
+    ],
+    "edges": [["pyr", "oaa"], ["oaa", "mal"], ["mal", "pep"]]
+   }
+  },
+  {
+   "tx": "Substrates differ in value: **alanine** from muscle protein is the main amino acid donor, lactate returns through the Cori cycle, glycerol from fat enters at dihydroxyacetone phosphate, and propionate from odd chain fats enters through succinyl-CoA. Even chain fatty acids contribute no net glucose because acetyl-CoA carbons exit as carbon dioxide, a boundary students must state explicitly.",
+   "say": "Alanine is the main amino acid donor, lactate returns through the Cori cycle, and glycerol enters at dihydroxyacetone phosphate. Propionate enters through succinyl-CoA. Even chain fatty acids contribute no net glucose because acetyl-CoA carbons exit as carbon dioxide.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Can become net glucose", "points": ["Lactate and pyruvate", "Glycerol from fat", "Glucogenic amino acids", "Propionate (odd chains)"]},
+    "right": {"title": "Cannot become net glucose", "points": ["Acetyl-CoA (even chains)", "Ketone bodies", "Leucine and lysine carbon", "Cholesterol fragments"]
+    }
+   }
+  },
+  {
+   "tx": "Building one glucose from two pyruvates costs six high energy phosphate bonds (four ATP plus two GTP), far more than glycolysis earned. The expense is deliberate insurance for brain and red cells. **Fructose-1,6-bisphosphatase** provides the second bypass in cytosol, and the final phosphatase sits facing the endoplasmic reticulum lumen, requiring translocases that fail in von Gierke variants.",
+   "say": "Building one glucose from two pyruvates costs six high energy bonds, far more than glycolysis earned. The expense insures brain and red cells. Fructose-1,6-bisphosphatase provides the second bypass, and the final phosphatase faces the endoplasmic reticulum lumen.",
+   "vis": null
+  },
+  {
+   "tx": "Ethanol metabolism floods liver cytosol with **NADH**, pushing pyruvate toward lactate and oxaloacetate toward malate, so gluconeogenesis stalls after drinking without food. The result is alcohol hypoglycaemia, worst in children and depleted adults whose glycogen is already gone. Intravenous glucose, not glucagon, rescues it because glucagon needs glycogen or a working pathway to act through.",
+   "say": "Ethanol floods liver cytosol with NADH, pushing pyruvate toward lactate, so gluconeogenesis stalls after drinking without food. Children and depleted adults develop alcohol hypoglycaemia. Intravenous glucose rescues it because glucagon needs glycogen to act through.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Block", "Mechanism", "Bedside consequence"],
+    "rows": [
+     ["Ethanol NADH surge", "Precursors diverted to lactate and malate", "Fasting hypoglycaemia"],
+     ["Von Gierke phosphatase loss", "Glucose-6-phosphate trapped", "Hypoglycaemia plus lactate and urate up"],
+     ["PEPCK or carboxylase faults (rare)", "First bypass fails", "Hypoglycaemia with acidosis"]
+    ]
+   }
+  },
+  {
+   "tx": "Hormones rewrite enzyme amounts over hours in parallel with minute to minute allosteric control: insulin suppresses **PEPCK** and glucose-6-phosphatase gene transcription, while glucagon and cortisol induce them. That is why steroid therapy and Cushing syndrome raise fasting glucose, and why uncontrolled diabetes overproduces glucose overnight. The next lesson adds the two interorgan cycles that feed this machinery.",
+   "say": "Insulin suppresses PEPCK and glucose-6-phosphatase genes, while glucagon and cortisol induce them. Steroid therapy therefore raises fasting glucose, and uncontrolled diabetes overproduces glucose overnight. The next lesson adds the interorgan cycles that feed this machinery.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Insulin (fed) transcription", "points": ["PEPCK gene suppressed", "Phosphatase gene suppressed", "Glucokinase induced"]},
+    "right": {"title": "Glucagon and cortisol (fasting) transcription", "points": ["PEPCK gene induced", "Phosphatase gene induced", "Gluconeogenesis capacity rises"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
