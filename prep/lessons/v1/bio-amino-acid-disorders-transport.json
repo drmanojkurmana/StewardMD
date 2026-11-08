@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Transport and glycine disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hartnup disease** deletes the neutral amino acid transporter (SLC6A19, B0AT1) from gut and renal tubule, wasting tryptophan, phenylalanine and other neutral amino acids while peptide absorption (PepT1) partially rescues nutrition. Tryptophan shortage throttles niacin synthesis (sixty to one conversion), producing episodic photosensitive pellagra like rash, cerebellar ataxia and psychiatric symptoms after sunlight, illness or poor diet, treated with nicotinamide and protein repletion.",
+   "say": "Hartnup deletes the neutral amino acid transporter, wasting tryptophan and throttling niacin synthesis. Episodic pellagra like rash and ataxia follow sunlight or illness, treated with nicotinamide.",
+   "vis": {
+    "kind": "flow",
+    "title": "From transporter to pellagra",
+    "nodes": [
+     {
+      "id": "tr",
+      "label": "Neutral transporter absent (gut, kidney)"
+     },
+     {
+      "id": "trp",
+      "label": "Tryptophan wasted"
+     },
+     {
+      "id": "nia",
+      "label": "Niacin synthesis falls"
+     },
+     {
+      "id": "pel",
+      "label": "Rash, ataxia episodes"
+     }
+    ],
+    "edges": [
+     [
+      "tr",
+      "trp"
+     ],
+     [
+      "trp",
+      "nia"
+     ],
+     [
+      "nia",
+      "pel"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Many Hartnup carriers and screened newborns stay asymptomatic on adequate protein, because peptide transport bypasses the single amino acid defect, a nuance separating biochemical phenotype from disease. Compare **cystinuria** (dibasic COLA loss, stones) from the sulfur lesson: same membrane logic, different amino acid class and organ signature. Iminoglycinuria (proline, hydroxyproline, glycine loss) is benign and needs recognition only.",
+   "say": "Many Hartnup patients stay asymptomatic on adequate protein because peptide transport bypasses the defect. Cystinuria applies the same membrane logic to dibasic amino acids with stones instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hartnup (neutral class)",
+     "points": [
+      "Tryptophan lost, niacin falls",
+      "Rash and ataxia episodes",
+      "Nicotinamide treats"
+     ]
+    },
+    "right": {
+     "title": "Cystinuria (dibasic COLA class)",
+     "points": [
+      "Cystine lost, stones form",
+      "No vitamin failure",
+      "Alkali and thiols treat"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Non-ketotic hyperglycinaemia** (glycine encephalopathy) blocks the mitochondrial glycine cleavage system (P protein commonest), flooding brain with glycine, at once inhibitory in cord and brainstem (apnoea, hiccups, hypotonia) and excitatory as NMDA co-agonist in cortex (intractable seizures, burst suppression EEG). CSF to plasma glycine ratio above 0.08 confirms what plasma alone cannot, because peripheral glycine rises in many acidaemias (ketotic hyperglycinaemia is secondary, not this disease).",
+   "say": "Non-ketotic hyperglycinaemia floods brain with glycine, causing apnoea and intractable seizures. Spinal fluid to plasma glycine ratio confirms it, separating primary disease from secondary ketotic elevation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Non-ketotic (cleavage failure)",
+     "Ketotic (organic acidaemias)"
+    ],
+    "rows": [
+     [
+      "CSF:plasma glycine",
+      "High (above about 0.08)",
+      "Normal ratio, plasma high"
+     ],
+     [
+      "Ketosis and acidosis",
+      "Absent",
+      "Present, drives glycine"
+     ],
+     [
+      "Newborn story",
+      "Hiccups, apnoea, burst suppression",
+      "Vomiting, coma, acidosis"
+     ],
+     [
+      "Prognosis lever",
+      "Early sodium benzoate, NMDA strategies limited",
+      "Treat the acidemia cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment of glycine encephalopathy remains sobering: sodium **benzoate** conjugates glycine to hippurate for excretion, dextromethorphan or ketamine block NMDA excess in selected cases, valproate is avoided (raises glycine and ammonia), yet classic neonatal disease still usually leaves profound disability. Attenuated forms with later onset and milder course reward early therapy more, and genetic counselling must convey that gradient honestly to families.",
+   "say": "Benzoate conjugates glycine for excretion and valproate is avoided, yet classic neonatal disease usually leaves profound disability. Attenuated forms reward early therapy more. Counselling must convey that gradient honestly.",
+   "vis": null
+  },
+  {
+   "tx": "**Tandem mass spectrometry** newborn screening unifies this whole module: one dried blood spot measures amino acids (phenylalanine, leucine, methionine patterns) and acylcarnitines (C8, C3, C5 flags) presymptomatically for PKU, MSUD, homocystinuria, methylmalonic and propionic acidaemias and fat oxidation defects. False positives from parenteral nutrition, transfusions and maternal B12 deficiency, plus false negatives from early sampling, keep metabolic teams, not machines, as diagnosticians.",
+   "say": "Tandem mass spectrometry screens amino acids and acylcarnitines presymptomatically for most of this module. Nutrition, transfusions and maternal B12 status cause false results, keeping teams as diagnosticians.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood spot flag",
+     "Disease hunted"
+    ],
+    "rows": [
+     [
+      "Phenylalanine high, ratio high",
+      "PKU and BH4 axis"
+     ],
+     [
+      "Leucine high (XLE peak)",
+      "Maple syrup urine disease"
+     ],
+     [
+      "Methionine high",
+      "Homocystinuria (insensitive, second tier homocysteine)"
+     ],
+     [
+      "C3 carnitine high",
+      "Propionic or methylmalonic acidaemia"
+     ],
+     [
+      "C5 carnitine high",
+      "Isovaleric acidaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sorting habit** closes amino acid disorders: smell (maple, sweaty feet, mousy), stones (cystine), lens direction (down homocystinuria), rash by sunlight (Hartnup), black urine (alkaptonuria) and hiccupping apnoeic newborn (glycine) each name a disease before any level returns. Specialised products next follow amino acids forward into hormones, pigments and gases rather than downward to energy and urea.",
+   "say": "Smell, stones, lens direction, sunlight rash, black urine and hiccupping newborn each name a disease before any level returns. Next, amino acids build hormones, pigments and gases forward.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bedside sort before levels return",
+    "nodes": [
+     {
+      "id": "smell",
+      "label": "Smell: maple, sweaty feet, mousy"
+     },
+     {
+      "id": "sign",
+      "label": "Sign: lens, stones, rash, black urine"
+     },
+     {
+      "id": "lab",
+      "label": "Level: amino acids, acylcarnitines, ratios"
+     }
+    ],
+    "edges": [
+     [
+      "smell",
+      "sign"
+     ],
+     [
+      "sign",
+      "lab"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

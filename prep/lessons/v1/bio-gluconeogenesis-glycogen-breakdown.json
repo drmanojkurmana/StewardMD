@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Glycogenolysis and its cascade",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Glycogen phosphorylase** releases glucose-1-phosphate by phosphorolysis, inserting phosphate instead of water so the sugar arrives already phosphorylated and no ATP is spent. It needs pyridoxal phosphate and races along alpha-1,4 chains from every non reducing end simultaneously. Four residues before a branch it stalls, creating the limit dextrin that the debranching enzyme must finish.",
+   "say": "Glycogen phosphorylase releases glucose-1-phosphate by phosphorolysis, so no ATP is spent. It needs pyridoxal phosphate and races from every non reducing end. Four residues before a branch it stalls, creating limit dextrin for the debrancher.",
+   "vis": {
+    "kind": "flow",
+    "title": "Releasing glucose units",
+    "nodes": [
+     {"id": "gly", "label": "Glycogen (many ends)"},
+     {"id": "pho", "label": "Phosphorylase (PLP) releases G-1-P"},
+     {"id": "deb", "label": "Debrancher clears branches"},
+     {"id": "g6p", "label": "Glucose-6-phosphate pool"}
+    ],
+    "edges": [["gly", "pho"], ["pho", "deb"], ["deb", "g6p"]]
+   }
+  },
+  {
+   "tx": "The **debranching enzyme** carries two activities on one protein: a transferase that moves three residues onto a neighbouring chain, then an amylo-alpha-1,6-glucosidase that frees the single branch glucose as free glucose (the only free glucose from glycogen). Its absence (Cori disease, type III) leaves limit dextrin granules, hepatomegaly and fasting hypoglycaemia milder than von Gierke because gluconeogenesis still works.",
+   "say": "The debranching enzyme moves three residues, then frees the branch glucose itself as free glucose. Its absence in Cori disease leaves limit dextrin, liver enlargement and milder fasting hypoglycaemia because gluconeogenesis still works.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Activity", "Bond handled", "Product"],
+    "rows": [
+     ["Transferase (debrancher)", "Moves alpha-1,4 trio", "Longer chain for phosphorylase"],
+     ["Glucosidase (debrancher)", "Alpha-1,6 branch point", "One free glucose"],
+     ["Phosphoglucomutase", "1-phosphate to 6-phosphate", "Glucose-6-phosphate"]
+    ]
+   }
+  },
+  {
+   "tx": "What happens next splits liver from muscle decisively: liver **glucose-6-phosphatase** frees glucose into blood, muscle lacks it, so muscle glucose-6-phosphate burns internally only. This single enzyme presence explains organ roles, von Gierke severity, and why muscle glycogen cannot rescue hypoglycaemia during a marathon. Kidney cortex shares the phosphatase and contributes in prolonged fasting.",
+   "say": "Liver glucose-6-phosphatase frees glucose into blood, while muscle lacks it, so muscle sugar burns internally only. This single enzyme explains organ roles and why muscle glycogen cannot rescue hypoglycaemia during a marathon.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Liver glycogenolysis", "points": ["Ends in free blood glucose", "Glucagon responsive", "Serves brain and red cells"]},
+    "right": {"title": "Muscle glycogenolysis", "points": ["Ends in own glycolysis", "Adrenaline, calcium, AMP responsive", "Serves contraction only"]
+    }
+   }
+  },
+  {
+   "tx": "Hormones amplify the signal through a **cAMP cascade**: glucagon or adrenaline activates adenylyl cyclase, protein kinase A phosphorylates phosphorylase kinase, which phosphorylates phosphorylase b to active a, while synthase is phosphorylated off. In muscle, phosphorylase kinase also binds calmodulin, so contraction calcium activates breakdown directly. AMP allosterically wakes muscle phosphorylase even without hormones during hard work.",
+   "say": "Hormones amplify through a cyclic AMP cascade ending in active phosphorylase a, while synthase switches off. In muscle, phosphorylase kinase binds calmodulin, so contraction calcium activates breakdown directly. AMP wakes muscle phosphorylase during hard work.",
+   "vis": null
+  },
+  {
+   "tx": "Insulin reverses the cascade by activating **phosphoprotein phosphatase**, stripping phosphates so phosphorylase sleeps and synthase wakes, especially when glucose-6-phosphate is abundant after meals. Glucose itself helps by binding liver phosphorylase a and exposing it to the phosphatase, a feed forward signal that incoming sugar should be stored. The cascade therefore reads hormones and metabolites together before deciding.",
+   "say": "Insulin activates phosphoprotein phosphatase, so phosphorylase sleeps and synthase wakes. Glucose itself exposes liver phosphorylase to the phosphatase, signalling that incoming sugar should be stored. The cascade reads hormones and metabolites together.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Signal", "Cascade direction", "Net glycogen effect"],
+    "rows": [
+     ["Glucagon (liver)", "Kinases on", "Breakdown to blood glucose"],
+     ["Adrenaline (liver and muscle)", "Kinases on plus calcium in muscle", "Breakdown for export or work"],
+     ["Insulin plus glucose (fed)", "Phosphatase on", "Synthesis and storage"]
+    ]
+   }
+  },
+  {
+   "tx": "Defects along this cascade produce graded fasting failure: hepatic phosphorylase absence (Hers, type VI) and phosphorylase kinase defects (type IX) cause hepatomegaly and mild hypoglycaemia because gluconeogenesis compensates. Their mildness contrasts with von Gierke, where both glycogenolysis and gluconeogenesis end blocked at the shared **glucose-6-phosphate** exit. That shared exit logic is the fastest way to rank severity in examinations.",
+   "say": "Hepatic phosphorylase and kinase defects cause mild hypoglycaemia because gluconeogenesis compensates. Von Gierke is severe because both pathways end blocked at the shared glucose-6-phosphate exit. That shared exit logic ranks severity fastest in examinations.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Mild hepatic defects (VI, IX, III)", "points": ["One route blocked", "Gluconeogenesis compensates", "Ketones rise appropriately"]},
+    "right": {"title": "Von Gierke (type I)", "points": ["Shared exit blocked", "Neither route can release glucose", "Lactate and urate rise instead"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

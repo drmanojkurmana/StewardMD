@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "Nitric oxide, creatine and glutathione",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Nitric oxide synthase** converts arginine to nitric oxide plus citrulline using BH4, FAD, FMN, heme and NADPH across three isoforms: endothelial (eNOS, calcium calmodulin, shear stress pulsatile picomoles for vasodilation), neuronal (nNOS, signalling), and inducible (iNOS, cytokine induced, calcium independent micromoles for macrophage killing). NO diffuses to smooth muscle guanylate cyclase, raising cGMP; nitrates donate NO, PDE5 inhibitors preserve its cGMP, and inhaled NO selectively dilates ventilated lung units.",
+   "say": "Nitric oxide synthase converts arginine to nitric oxide across endothelial, neuronal and inducible isoforms. Nitrates donate it, PDE5 inhibitors preserve its signal, and inhaled gas dilates ventilated lung units selectively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Isoform",
+     "Control",
+     "Output and job"
+    ],
+    "rows": [
+     [
+      "eNOS (endothelial)",
+      "Calcium, shear stress",
+      "Picomoles, vessel tone"
+     ],
+     [
+      "nNOS (neuronal)",
+      "Calcium, synaptic",
+      "Signalling, gut motility"
+     ],
+     [
+      "iNOS (inducible)",
+      "Cytokines, calcium independent",
+      "Micromoles, microbial killing, sepsis vasodilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When superoxide is abundant NO is scavenged to **peroxynitrite**, simultaneously losing vasodilation (endothelial dysfunction of diabetes and hypercholesterolaemia) and gaining a cytotoxic oxidant. BH4 oxidation uncouples eNOS to make superoxide instead of NO, a feed forward injury statins, ACE inhibitors and exercise partly reverse. Asymmetric dimethylarginine (ADMA), an endogenous NOS inhibitor cleared renally, accumulates in kidney failure as a cardiovascular risk marker.",
+   "say": "Superoxide scavenges nitric oxide to peroxynitrite, losing vasodilation while gaining an oxidant. BH4 oxidation uncouples the enzyme to make superoxide instead, a feed forward injury worth recognising.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Coupled eNOS (healthy)",
+     "points": [
+      "BH4 replete, NO made",
+      "cGMP vasodilation",
+      "Platelets restrained"
+     ]
+    },
+    "right": {
+     "title": "Uncoupled eNOS (disease)",
+     "points": [
+      "BH4 oxidised, superoxide made",
+      "Peroxynitrite injury",
+      "Vasoconstriction tendency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Creatine** synthesis spends arginine plus glycine (kidney amidinotransferase) then SAM methylation (liver) to make creatine, ninety five percent in muscle, where creatine kinase buffers ATP as phosphocreatine during burst work. About two grams daily degrade spontaneously to creatinine proportional to muscle mass, filtered freely, making plasma creatinine a muscle confounded filtration marker that creatine supplements, rhabdomyolysis, trimethoprim secretion blockade and amputation all distort predictably.",
+   "say": "Creatine buffers muscle ATP as phosphocreatine, degrading daily to creatinine proportional to muscle mass. Supplements, rhabdomyolysis and secretion blockers distort creatinine as a filtration marker predictably.",
+   "vis": {
+    "kind": "flow",
+    "title": "Creatine to creatinine",
+    "nodes": [
+     {
+      "id": "syn",
+      "label": "Arginine plus glycine, SAM methylates"
+     },
+     {
+      "id": "mus",
+      "label": "Muscle phosphocreatine buffer"
+     },
+     {
+      "id": "cre",
+      "label": "Creatinine spontaneous daily"
+     },
+     {
+      "id": "gfr",
+      "label": "Filtered: filtration marker (muscle confounded)"
+     }
+    ],
+    "edges": [
+     [
+      "syn",
+      "mus"
+     ],
+     [
+      "mus",
+      "cre"
+     ],
+     [
+      "cre",
+      "gfr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glutathione** (gamma-glutamylcysteinylglycine, cysteine rate limiting, gamma linkage peptidase resistant) is the dominant intracellular thiol buffer, cycling reduced to oxidised through glutathione peroxidase (selenium) and reductase (NADPH from the HMP shunt, closing the G6PD loop). It conjugates electrophiles and drugs (glutathione S-transferases, mercapturic acid excretion) and detoxifies acetaminophen NAPQI metabolite until stores empty.",
+   "say": "Glutathione is the dominant thiol buffer, cycling through selenium peroxidase and NADPH reductase. It conjugates electrophiles and detoxifies acetaminophen metabolite until stores empty, closing the G6PD loop.",
+   "vis": null
+  },
+  {
+   "tx": "**N-acetylcysteine** rescues acetaminophen poisoning by resupplying cysteine for glutathione synthesis (and direct reduction early), most effective within eight hours, guided by the Rumack-Matthew nomogram and continued when presentation is late or levels unobtainable with injury evolving. The same thiol logic explains NAC mucolysis (disulfide cleavage) and why G6PD deficient, asthmatic (bronchospasm caution IV) and chronic liver patients need individualised handling.",
+   "say": "N-acetylcysteine resupplies cysteine for glutathione synthesis, most effective within eight hours by nomogram guidance. The same thiol logic explains its mucolysis and cautions in asthma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glutathione job",
+     "Failure or therapy"
+    ],
+    "rows": [
+     [
+      "Peroxide disposal (peroxidase)",
+      "G6PD or selenium failure haemolysis"
+     ],
+     [
+      "NAPQI detoxification",
+      "NAC resupply in paracetamol poisoning"
+     ],
+     [
+      "Drug conjugation (GST)",
+      "Mercapturic acids in urine"
+     ],
+     [
+      "Redox buffering (GSH:GSSG)",
+      "Oxidant drugs overwhelm in deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Arginine** also feeds urea (prior module), agmatine and polyamine routes, while citrulline recycling (kidney converts intestinal citrulline to arginine, the intestinal renal axis supplemented in cycle defects) ties gas, nitrogen and muscle lessons into one amino acid. Next, SAM methylation and polyamines show arginine and methionine spending on growth and gene control rather than energy.",
+   "say": "Arginine feeds urea, gas and polyamine routes, while citrulline recycling ties gut to kidney. Next, SAM methylation and polyamines show amino acids spending on growth and gene control rather than energy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Arginine four ways",
+    "nodes": [
+     {
+      "id": "arg",
+      "label": "Arginine"
+     },
+     {
+      "id": "no",
+      "label": "Nitric oxide plus citrulline"
+     },
+     {
+      "id": "urea",
+      "label": "Urea plus ornithine"
+     },
+     {
+      "id": "cre",
+      "label": "Creatine (with glycine)"
+     }
+    ],
+    "edges": [
+     [
+      "arg",
+      "no"
+     ],
+     [
+      "arg",
+      "urea"
+     ],
+     [
+      "arg",
+      "cre"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

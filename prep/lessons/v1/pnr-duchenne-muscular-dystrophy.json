@@ -1,0 +1,251 @@
+{
+  "id": "pnr-duchenne-muscular-dystrophy",
+  "title": "Duchenne and Becker Muscular Dystrophies: Dystrophinopathy Management",
+  "subject": "ss-paediatric-neurology",
+  "module": "Spinal Muscular Atrophy, Duchenne Dystrophy and Neuropathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Duchenne muscular dystrophy is an X-linked recessive disorder caused by disruptions in the dystrophin reading frame. Without dystrophin, the sarcolemma loses its mechanical anchor.",
+      "tx": "Differentiate the **X-linked out-of-frame mutation** responsible for Duchenne muscular dystrophy. DMD arises from deletions (accounting for 60% to 70%), duplications, or point mutations within the 79 exons of the DMD gene on Xp21.2. The reading frame hypothesis dictates that out-of-frame mutations introduce premature stop codons resulting in complete loss of dystrophin (< 5% on muscle biopsy), whereas in-frame mutations produce shortened, partially functional dystrophin causing milder Becker dystrophy (Creatine kinase elevation).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Duchenne (Out-of-Frame)",
+          "points": [
+            "Frameshift deletion or duplication",
+            "Truncated protein degraded completely",
+            "Dystrophin < 5% of normal; severe progression"
+          ]
+        },
+        "right": {
+          "title": "Becker (In-Frame)",
+          "points": [
+            "Intact reading frame maintained",
+            "Shortened semi-functional dystrophin",
+            "Dystrophin 20-50%; ambulation preserved > 16 yr"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Creatine kinase levels rise massively even before weakness becomes apparent. Membrane microtears cause leakage of intracellular muscle enzymes into the bloodstream.",
+      "tx": "Detect marked **Serum creatine kinase elevation** as the essential early screening biomarker. Disruption of the dystrophin-glycoprotein complex makes muscle fibers susceptible to contraction-induced mechanical tears, leaking cytoplasmic enzymes into plasma. Serum creatine kinase is massively elevated at 10 to 100 times the upper limit of normal, often exceeding 10,000 to 50,000 U/L from early infancy, even in asymptomatic toddlers before any obvious clinical delay (Clinical hallmarks).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease stage",
+          "Serum CK level",
+          "Clinical presentation"
+        ],
+        "rows": [
+          [
+            "Neonatal & infancy",
+            "10,000 to 50,000 U/L (massive)",
+            "Asymptomatic; accidental transaminase elevation"
+          ],
+          [
+            "Early childhood (3-5 yr)",
+            "5,000 to 20,000 U/L (elevated)",
+            "Gowers sign, waddling gait, frequent falls"
+          ],
+          [
+            "Adolescent non-ambulatory",
+            "Gradual decline towards normal",
+            "Extensive fibro-fatty replacement of muscle tissue"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Between three and five years of age, affected boys demonstrate characteristic physical signs. Weak pelvic girdle muscles force them to climb up their own thighs to achieve an upright posture.",
+      "tx": "Elicit the **Gowers sign and calf hypertrophy** during functional neurological assessment. Proximal pelvic girdle weakness prevents the child from rising directly from a supine or squatting position, compelling him to push hands on knees and walk hands up the thighs to achieve standing (Gowers maneuver). Inspection reveals prominent pseudohypertrophy of the calves, infraspinatus, and deltoid muscles, resulting from progressive fatty infiltration and endomysial fibrosis rather than true muscle fiber enlargement (Corticosteroid therapy).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pelvic",
+            "label": "Proximal hip & gluteal muscle weakness"
+          },
+          {
+            "id": "gowers",
+            "label": "Gowers maneuver: Walks hands up legs to stand"
+          },
+          {
+            "id": "pseudo",
+            "label": "Calf pseudohypertrophy from fibrofatty infiltration"
+          }
+        ],
+        "edges": [
+          [
+            "pelvic",
+            "gowers"
+          ],
+          [
+            "gowers",
+            "pseudo"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Daily oral corticosteroids form the established global standard of care. Long term therapy prolongs walking ability and delays both spinal deformity and respiratory failure.",
+      "tx": "Initiate the **Daily corticosteroid standard of care** in young boys with confirmed dystrophinopathy. Prednisone at 0.75 mg/kg/day or deflazacort at 0.9 mg/kg/day started between ages 4 and 6 significantly slows muscle breakdown, prolonging independent ambulation by 2 to 3 years. Chronic steroid therapy preserves pulmonary vital capacity, delays the onset of restrictive lung disease and scoliosis, and reduces the risk of progressive dilated cardiomyopathy, requiring close monitoring of weight, linear growth, bone density, and cataracts (Exon-skipping).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Corticosteroid regimen",
+          "Recommended dosage",
+          "Specific clinical benefits & side effects"
+        ],
+        "rows": [
+          [
+            "Prednisone",
+            "0.75 mg/kg/day oral daily",
+            "Prolongs walking 2-3 yr; higher weight gain risk"
+          ],
+          [
+            "Deflazacort",
+            "0.90 mg/kg/day oral daily",
+            "Similar motor efficacy; less weight gain, higher cataract risk"
+          ],
+          [
+            "Supportive monitoring",
+            "Quarterly height & weight tracking",
+            "Annual DEXA bone scans; calcium & vitamin D co-therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Precision molecular therapies now target specific dystrophin transcript mutations. Exon skipping antisense oligonucleotides restore the reading frame to generate Becker-like proteins.",
+      "tx": "Implement mutation-specific **Exon-skipping therapeutics** based on multiplex ligation-dependent probe amplification genetic analysis. Synthetic phosphorodiamidate morpholino antisense oligonucleotides bind pre-messenger RNA to skip targeted exons during splicing, converting an out-of-frame deletion into an in-frame transcript. Eteplirsen skips exon 51 (applicable to ~13% of DMD patients), golodirsen and viltolarsen skip exon 53 (~8%), and casimersen skips exon 45 (~8%), restoring partial functional dystrophin expression (Microdystrophin gene transfer).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antisense drug",
+          "Targeted exon",
+          "Applicable patient subset"
+        ],
+        "rows": [
+          [
+            "Eteplirsen",
+            "Exon 51 skipping",
+            "Deletions amenable to exon 51 skip (~13% total DMD)"
+          ],
+          [
+            "Golodirsen / Viltolarsen",
+            "Exon 53 skipping",
+            "Deletions amenable to exon 53 skip (~8% total DMD)"
+          ],
+          [
+            "Casimersen",
+            "Exon 45 skipping",
+            "Deletions amenable to exon 45 skip (~8% total DMD)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Gene replacement therapy introduces a shortened synthetic microdystrophin construct. Adeno-associated viral vectors deliver the gene to skeletal and cardiac myocytes.",
+      "tx": "Assess **Cardiomyopathy surveillance and ACE inhibitors** therapy as a systemic gene transfer paradigm. Because the full 14-kilobase dystrophin cDNA exceeds viral packaging constraints, delandistrogene moxeparvovec utilizes an adeno-associated virus serotype rh74 capsid to deliver a engineered microdystrophin gene containing essential actin-binding and beta-dystroglycan domains. Administered as a single intravenous infusion (1.33 x 10^14 vector genomes/kg), it requires prior testing for anti-AAVrh74 neutralizing antibodies and strict steroid coverage to prevent acute immune-mediated myocarditis and hepatotoxicity (Cardiomyopathy surveillance).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vector",
+            "label": "AAVrh74 vector carrying microdystrophin construct"
+          },
+          {
+            "id": "screen",
+            "label": "Pre-treatment screen: Anti-AAVrh74 neutralizing antibodies"
+          },
+          {
+            "id": "infusion",
+            "label": "Single IV infusion (1.33 x 10^14 vg/kg) with steroid cover"
+          },
+          {
+            "id": "expression",
+            "label": "Sustained sarcolemmal microdystrophin expression"
+          }
+        ],
+        "edges": [
+          [
+            "vector",
+            "screen"
+          ],
+          [
+            "screen",
+            "infusion"
+          ],
+          [
+            "infusion",
+            "expression"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dilated cardiomyopathy eventually affects all patients with Duchenne muscular dystrophy. Starting cardioprotective medications before left ventricular ejection fraction falls is vital.",
+      "tx": "Conduct structured **Nocturnal non-invasive ventilation** prophylaxis starting in early childhood. Cardiac involvement manifests as subepicardial fibrosis in the posterobasal left ventricular wall, advancing to dilated cardiomyopathy and heart failure. Baseline echocardiography or cardiac magnetic resonance imaging is initiated by age 6 to 8 and repeated annually. Prophylactic therapy with angiotensin-converting enzyme inhibitors (enalapril) or angiotensin receptor blockers and beta-blockers must be started by age 10, even with normal systolic function, to delay myocardial fibrosis (Ventilatory management).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surveillance modality",
+          "Screening schedule",
+          "Intervention threshold"
+        ],
+        "rows": [
+          [
+            "Cardiac MRI / Echo",
+            "Annual baseline starting age 6-8",
+            "Late gadolinium enhancement or strain reduction"
+          ],
+          [
+            "ACE inhibitor (Enalapril)",
+            "Mandatory by age 10 for all boys",
+            "Initiate before LVEF decline; suppresses remodeling"
+          ],
+          [
+            "Mineralocorticoid antagonist",
+            "Add eplerenone or spironolactone",
+            "Further slows progressive myocardial fibrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Respiratory insufficiency stems from progressive diaphragm and intercostal weakness. Non-invasive positive pressure ventilation provides life prolonging nocturnal support.",
+      "tx": "Initiate **Becker muscular dystrophy reading frame** as vital capacity declines in teenage years. Progressive respiratory muscle exhaustion leads to nocturnal hypoventilation, hypercapnia, morning headaches, and ineffective cough mechanics. Monitor forced vital capacity and peak cough flow every 6 months; when forced vital capacity drops below 50% predicted or nocturnal pulse oximetry confirms desaturations, commence nocturnal bilevel non-invasive positive pressure ventilation and prescribe a mechanical insufflation-exsufflation cough assist device (Management complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resp",
+            "label": "Diaphragm weakness: FVC < 50% predicted or nocturnal desaturations"
+          },
+          {
+            "id": "bilevel",
+            "label": "Nocturnal bilevel non-invasive ventilation (BiPAP)"
+          },
+          {
+            "id": "cough",
+            "label": "Mechanical insufflation-exsufflation (cough assist) device"
+          }
+        ],
+        "edges": [
+          [
+            "resp",
+            "bilevel"
+          ],
+          [
+            "resp",
+            "cough"
+          ]
+        ]
+      }
+    }
+  ]
+}

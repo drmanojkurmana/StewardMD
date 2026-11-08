@@ -1,0 +1,149 @@
+{
+  "id": "pnp-congenital-urinary-anomalies-cakut",
+  "title": "CAKUT Spectrum: PUJO, Posterior Urethral Valves and Vesicoureteral Reflux",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Hypertension, CAKUT and Nephrolithiasis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Fetal pelvic dilatation provides early anatomical warning of developmental urinary obstruction.",
+      "tx": "Evaluate gestational pelvic measurements applying the standardized **Antenatal hydronephrosis grading (AP renal pelvic diameter)** protocols. Antenatal hydronephrosis on maternal ultrasound is graded by anteroposterior renal pelvic diameter (APRPD): >= 4-7 mm in second trimester and >= 7-10 mm in third trimester warrants postnatal surveillance to detect obstructive uropathy, renal dysplasia, or vesicoureteral reflux.",
+      "vis": {
+        "kind": "table",
+        "title": "Antenatal Hydronephrosis Sonographic Thresholds",
+        "cols": ["Gestational Window", "APRPD Threshold", "Clinical Strategy"],
+        "rows": [
+          ["Second Trimester", ">= 4-7 mm", "Identifies early mild to moderate caliceal dilatation"],
+          ["Third Trimester", ">= 7-10 mm", "Warrants mandatory postnatal structural surveillance"],
+          ["Severe Dilatation", "> 10-15 mm", "High risk of intrinsic obstruction or vesicoureteral reflux"]
+        ]
+      }
+    },
+    {
+      "say": "Neonatal sonography requires deliberate scheduling to avoid transient physiological misinterpretation.",
+      "tx": "Structure early postnatal imaging following the strict **Postnatal ultrasound timing protocol** to ensure accuracy. Initial postnatal renal ultrasound is performed at 48-72 hours of life to avoid false-negative underestimation due to transient neonatal physiological oliguria, unless PUV is suspected where immediate emergent imaging and prompt catheter decompression are mandated on day one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Timing (48-72 Hours)",
+          "points": [
+            "Performed at 48-72 hours of life",
+            "Physiological neonatal oliguria has resolved",
+            "Accurate measurement of renal pelvis diameter"
+          ]
+        },
+        "right": {
+          "title": "Urgent Day 1 Imaging",
+          "points": [
+            "Indicated if posterior urethral valves suspected",
+            "Severe bilateral hydroureteronephrosis on fetal scans",
+            "Oligohydramnios with palpable distended bladder"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Obstructive urethral membranes present exclusively in male neonates and distort the lower urinary tract.",
+      "tx": "Identify severe infravesical blockage recognizing the **Posterior urethral valves (PUV) keyhole sign** on ultrasound. PUV occurs exclusively in males, caused by congenital obstructing folds of the verumontanum (Type 1 Young classification), displaying a thick-walled trabeculated bladder and dilated posterior urethra (keyhole sign) on ultrasound, accompanied by bilateral hydroureteronephrosis and high risks of neonatal respiratory distress.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "fold", "label": "Type 1 Young Verumontanum Folds"},
+          {"id": "press", "label": "High-Pressure Intravesical Obstruction"},
+          {"id": "us", "label": "Trabeculated Bladder & Dilated Urethra (Keyhole Sign)"},
+          {"id": "kid", "label": "Bilateral Hydroureteronephrosis & Renal Dysplasia"}
+        ],
+        "edges": [
+          ["fold", "press"],
+          ["press", "us"],
+          ["us", "kid"]
+        ]
+      }
+    },
+    {
+      "say": "Relieving acute bladder outflow pressure prevents progressive renal parenchymal destruction.",
+      "tx": "Execute immediate bladder drainage following the **Urgent neonatal PUV decompression** guidelines at birth. Immediate neonatal management of PUV requires transurethral bladder catheterization (5-8 Fr feeding tube) followed by cystoscopic primary valve ablation; vesicostomy is performed if the urethra is too small, relieving elevated hydrostatic pressures to salvage developing renal parenchyma and restore electrolytes.",
+      "vis": {
+        "kind": "table",
+        "title": "Neonatal Posterior Urethral Valve Interventions",
+        "cols": ["Phase", "Procedure & Equipment", "Clinical Goal"],
+        "rows": [
+          ["Initial Decompression", "Transurethral 5-8 Fr feeding tube catheter", "Relieves high intravesical hydrostatic pressure"],
+          ["Definitive Treatment", "Transurethral cystoscopic valve ablation", "Disrupts obstructing mucosal leaflets"],
+          ["Alternative Bailout", "Cutaneous vesicostomy", "Decompresses bladder if infant urethra is too small"]
+        ]
+      }
+    },
+    {
+      "say": "Dynamic diuretic renography differentiates functional stasis from true mechanical pelviureteric obstruction.",
+      "tx": "Quantify upper tract drainage dynamics using **Pelviureteric junction obstruction (PUJO) diuretic renography** protocols. PUJO is the most common cause of significant pediatric hydronephrosis; confirmed by 99mTc-MAG3 renography demonstrating prolonged washout half-time (T1/2 > 20 minutes) after furosemide (1 mg/kg), confirming true mechanical resistance across the pelviureteric junction rather than non-obstructive compliant pelvic flaccidity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True PUJ Obstruction",
+          "points": [
+            "Washout half-time T1/2 > 20 minutes",
+            "Flat or rising curve after furosemide (1 mg/kg)",
+            "Mechanical narrowing requiring surgical repair"
+          ]
+        },
+        "right": {
+          "title": "Non-Obstructive Dilatation",
+          "points": [
+            "Rapid washout with T1/2 < 10-15 minutes",
+            "Steep clearance downslope following diuretic",
+            "Compliant system managed safely with observation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical correction is indicated when serial functional evaluations demonstrate true parenchymal deterioration.",
+      "tx": "Establish definitive operative indications applying strict **Anderson-Hynes dismembered pyeloplasty criteria** during surveillance. Surgical pyeloplasty is indicated for differential renal function < 40%, a fall of > 10% on serial scans, worsening hydronephrosis, or recurrent febrile urinary tract infections, resecting the aperistaltic obstructive adynamic pelviureteric segment and re-anastomosing the spatulated ureter to the renal pelvis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "eval", "label": "Serial MAG3 Renography & Ultrasound"},
+          {"id": "crit", "label": "Function < 40%, Loss > 10%, or Recurrent Febrile UTI"},
+          {"id": "surg", "label": "Anderson-Hynes Dismembered Pyeloplasty"}
+        ],
+        "edges": [
+          ["eval", "crit"],
+          ["crit", "surg"]
+        ]
+      }
+    },
+    {
+      "say": "Retrograde urinary flow staging guides medical surveillance and operative antireflux selection.",
+      "tx": "Grade retrograde ureteral incompetence applying the **International VUR classification grades (I-V)** under fluoroscopy. Micturating cystourethrogram (MCUG) grades vesicoureteral reflux from Grade I (reflux into non-dilated ureter) to Grade V (massive reflux, severe tortuosity, and complete loss of papillary impressions), defining the structural risk of intrarenal reflux and scarring during acute pyelonephritis episodes across pediatric cohorts.",
+      "vis": {
+        "kind": "table",
+        "title": "International Reflux Study VUR Classification",
+        "cols": ["Grade", "Fluoroscopic Appearance", "Parenchymal Scarring Risk"],
+        "rows": [
+          ["Grade I", "Reflux into ureter only, no caliceal filling", "Minimal risk of renal injury"],
+          ["Grade II", "Reflux into pelvis & calices without dilatation", "Low risk, excellent spontaneous resolution"],
+          ["Grade III", "Mild to moderate dilatation, blunting of fornices", "Moderate risk, requires close infection vigilance"],
+          ["Grade IV", "Moderate tortuosity, complete blunting of calices", "High risk of progressive reflux nephropathy"],
+          ["Grade V", "Massive reflux, extreme tortuosity, effaced calices", "Severe risk, surgical correction usually required"]
+        ]
+      }
+    },
+    {
+      "say": "Daily low-dose chemoprophylaxis cuts febrile urinary recurrences in half without altering established scars.",
+      "tx": "Prescribe targeted infection prevention based on **Continuous antibiotic prophylaxis (CAP) trials (RIVUR study)** findings. The RIVUR trial demonstrated that daily co-trimoxazole or nitrofurantoin prophylaxis in children with Grades II-IV VUR reduces recurrent febrile UTIs by 50% without altering renal scarring, providing critical protection against recurrent urosepsis while awaiting spontaneous maturation of the vesicoureteral junction.",
+      "vis": {
+        "kind": "table",
+        "title": "RIVUR Trial Prophylaxis Evidence",
+        "cols": ["Intervention", "Clinical Finding", "Long-Term Evidence"],
+        "rows": [
+          ["Daily Prophylaxis", "Co-trimoxazole or nitrofurantoin daily", "50% reduction in recurrent febrile UTI"],
+          ["Target Cohort", "Children with Grade II to IV VUR", "Greatest benefit in bladder-bowel dysfunction"],
+          ["Parenchymal Scars", "DMSA scar incidence unchanged", "Emphasizes prompt treatment of acute infections"]
+        ]
+      }
+    }
+  ]
+}

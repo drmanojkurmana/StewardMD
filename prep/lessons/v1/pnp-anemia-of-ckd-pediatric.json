@@ -1,0 +1,147 @@
+{
+  "id": "pnp-anemia-of-ckd-pediatric",
+  "title": "Pediatric Anemia of CKD: Iron Repletion, ESA Targets and Resistance",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Pediatric AKI, Dialysis and Chronic Kidney Disease",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Progressive loss of functional nephrons impairs erythropoietin synthesis and disrupts physiological iron regulation.",
+      "tx": "Evaluate the complex **Pathophysiology: EPO deficiency and hepcidin** driving anemia in chronic kidney disease. Anemia of CKD develops as functional renal mass declines below GFR 60 mL/min/1.73m², driven primarily by deficient production of erythropoietin (EPO) by peritubular interstitial fibroblasts, shortened erythrocyte survival, uremic marrow suppression, and chronic inflammation which increases hepatic hepcidin, blocking ferroportin-mediated intestinal iron absorption and macrophage iron release.",
+      "vis": {
+        "kind": "table",
+        "title": "Mechanisms Driving CKD Anemia",
+        "cols": ["Factor", "Pathophysiological Mechanism", "Impact on Erythropoiesis"],
+        "rows": [
+          ["EPO deficiency", "Loss of peritubular capillary fibroblasts", "Decreased erythrocyte precursor stimulation"],
+          ["Hepcidin excess", "Uremic inflammation and decreased clearance", "Degrades ferroportin, trapping iron in stores"],
+          ["Uremic toxins", "Circulating retention of guanidines/toxins", "Shortens RBC lifespan and blunts marrow"],
+          ["Blood loss", "Frequent sampling, dialysis circuit losses", "Accelerates iron depletion over time"]
+        ]
+      }
+    },
+    {
+      "say": "Serum ferritin and transferrin saturation define thresholds for initiating parenteral or oral iron supplementation.",
+      "tx": "Assess iron parameters against standard **Iron repletion thresholds: TSAT and ferritin** before prescribing stimulators. According to KDIGO/IPNA guidelines, iron deficiency must be corrected prior to initiating erythropoiesis-stimulating agents (ESAs); iron therapy is indicated when transferrin saturation (TSAT) is <= 20% and serum ferritin is <= 100 ng/mL in non-dialysis CKD (or <= 200 ng/mL in hemodialysis patients), aiming for targets of TSAT > 20% and ferritin 100-500 ng/mL.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Iron Deficiency Triggers",
+          "points": [
+            "Transferrin saturation (TSAT) <= 20%",
+            "Ferritin <= 100 ng/mL (non-dialysis CKD)",
+            "Ferritin <= 200 ng/mL (hemodialysis patients)"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic Target Goals",
+          "points": [
+            "Maintain TSAT between 20% and 50%",
+            "Maintain serum ferritin 100-500 ng/mL",
+            "Avoid routine ferritin levels > 500-800 ng/mL"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Intravenous iron overcomes hepcidin-mediated intestinal blockade in children on maintenance hemodialysis.",
+      "tx": "Select appropriate routes comparing **Oral vs IV iron therapy in pediatric CKD** based on dialysis status. While oral iron (ferrous sulfate or polysaccharide iron complex at 2-3 mg/kg/day elemental iron) is first-line in non-dialysis or peritoneal dialysis patients, children receiving hemodialysis require intravenous iron (such as iron sucrose or ferric carboxymaltose) because oral absorption is severely impaired by elevated hepcidin levels.",
+      "vis": {
+        "kind": "table",
+        "title": "Iron Formulations in Pediatric Nephrology",
+        "cols": ["Route", "Preferred Formulation", "Clinical Indication and Dosing"],
+        "rows": [
+          ["Oral", "Ferrous sulfate / Iron complex", "2-3 mg/kg/day elemental iron in non-dialysis CKD"],
+          ["IV (sucrose)", "Iron sucrose", "1-2 mg/kg per dose over repeated dialysis runs"],
+          ["IV (carboxymaltose)", "Ferric carboxymaltose", "High-dose single infusion in older children"]
+        ]
+      }
+    },
+    {
+      "say": "Erythropoiesis-stimulating agents are titrated to maintain safe hemoglobin concentrations between ten and twelve grams.",
+      "tx": "Prescribe therapy using established **Erythropoiesis-stimulating agents (ESAs) dosing** and target parameters. Epoetin alfa (initial dose 50-100 U/kg subcutaneously or intravenously 1-3 times weekly) or long-acting darbepoetin alfa (0.45 mcg/kg once weekly or biweekly) are initiated once iron stores are replete, titrating doses to maintain target hemoglobin between 10.0 and 12.0 g/dL without overshoot.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "iron", "label": "Replete iron: TSAT > 20%, Ferritin > 100"},
+          {"id": "esa", "label": "Start Epoetin (50-100 U/kg) or Darbepoetin (0.45 mcg/kg)"},
+          {"id": "targ", "label": "Titrate to target Hb 10.0-12.0 g/dL"}
+        ],
+        "edges": [
+          ["iron", "esa"],
+          ["esa", "targ"]
+        ]
+      }
+    },
+    {
+      "say": "Normalizing hemoglobin above thirteen grams significantly increases stroke and cardiovascular thrombotic complications.",
+      "tx": "Avoid full anemia correction based on **Target hemoglobin limits (10-12 g/dL) and risks**. Evidence from clinical trials demonstrates that targeting hemoglobin levels > 12.0-13.0 g/dL with high-dose ESAs does not confer additional quality-of-life benefits and significantly increases risks of serious adverse outcomes, including vascular access thrombosis, severe de novo or worsening hypertension, seizures, and increased stroke risk.",
+      "vis": {
+        "kind": "table",
+        "title": "Risks of Excess ESA and High Hemoglobin",
+        "cols": ["Complication", "Threshold / Driver", "Clinical Manifestation"],
+        "rows": [
+          ["Hypertension", "Rapid Hb rise (> 1 g/dL in 2 weeks)", "Vasoconstriction and hypertensive crisis"],
+          ["Vascular access thrombosis", "Elevated blood viscosity (Hb > 12 g/dL)", "Loss of AV fistula or graft patency"],
+          ["Cardiovascular events", "High-dose ESA toxicity", "Elevated stroke and myocardial stress"]
+        ]
+      }
+    },
+    {
+      "say": "Persistent anemia despite high stimulator doses mandates investigation for occult bleeding, infection, and hyperparathyroidism.",
+      "tx": "Investigate underlying causes defining **ESA hyporesponsiveness/resistance causes** when response falters. ESA resistance is defined as failure to achieve or maintain target hemoglobin despite epoetin doses > 300 U/kg/week (or darbepoetin > 1.5 mcg/kg/week); primary causes include absolute or functional iron deficiency, acute or chronic systemic inflammation, severe secondary hyperparathyroidism causing marrow osteitis fibrosa, aluminum toxicity, and occult gastrointestinal blood loss.",
+      "vis": {
+        "kind": "table",
+        "title": "Differential Diagnosis of ESA Hyporesponsiveness",
+        "cols": ["Etiology", "Diagnostic Marker", "Corrective Action"],
+        "rows": [
+          ["Iron deficiency", "Low TSAT (< 20%) or low ferritin", "Administer intravenous iron repletion"],
+          ["Occult inflammation", "Elevated CRP, catheter infection", "Treat occult infection and sepsis sources"],
+          ["Hyperparathyroidism", "Intact PTH > 300-500 pg/mL", "Control phosphate, calcitriol/cinacalcet"],
+          ["B12 / folate deficiency", "Macrocytosis, low serum levels", "Nutritional vitamin replacement"]
+        ]
+      }
+    },
+    {
+      "say": "Severe secondary hyperparathyroidism induces marrow fibrosis that blunts normal hematopoietic stem cell maturation.",
+      "tx": "Recognize the detrimental impact of **Secondary hyperparathyroidism and marrow fibrosis** on erythropoiesis. Severely elevated intact parathyroid hormone (PTH) levels (> 300-500 pg/mL) directly inhibit erythroid colony-forming units (CFU-E) and promote bone marrow peritrabecular fibrosis (osteitis fibrosa cystica); controlling hyperparathyroidism with phosphate binders, active vitamin D (calcitriol), or calcimimetics dramatically improves ESA sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "pth", "label": "Severe Hyperparathyroidism (iPTH > 300-500 pg/mL)"},
+          {"id": "marrow", "label": "Peritrabecular Osteitis Fibrosa & CFU-E Inhibition"},
+          {"id": "res", "label": "Blunted Erythropoiesis & Severe ESA Resistance"}
+        ],
+        "edges": [
+          ["pth", "marrow"],
+          ["marrow", "res"]
+        ]
+      }
+    },
+    {
+      "say": "Oral hypoxia-inducible factor stabilizers stimulate endogenous erythropoietin production while enhancing iron utilization.",
+      "tx": "Evaluate emerging options including **HIF prolyl hydroxylase inhibitors (HIF-PHI)** for oral anemia management. HIF prolyl hydroxylase inhibitors (such as roxadustat and vadadustat) represent a novel oral class that stabilizes the alpha subunit of hypoxia-inducible factor; by mimicking the physiologic response to hypoxia, they stimulate endogenous renal and hepatic erythropoietin production and downregulate hepcidin, thereby improving iron absorption and mobilization without requiring massive exogenous iron doses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Traditional ESAs (Epoetin)",
+          "points": [
+            "Parenteral injection (SC or IV)",
+            "Supraphysiologic EPO peak levels",
+            "Ineffective in high-hepcidin inflammation"
+          ]
+        },
+        "right": {
+          "title": "HIF Stabilizers (Roxadustat)",
+          "points": [
+            "Oral administration",
+            "Near-physiologic endogenous EPO induction",
+            "Downregulates hepcidin to enhance iron mobilization"
+          ]
+        }
+      }
+    }
+  ]
+}
