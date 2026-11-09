@@ -8,177 +8,181 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Ichthyosis vulgaris** anchors this lesson. Recognition of Ichthyosis vulgaris starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Ichthyosis vulgaris gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/leprosy-fig2.webp",
-    "alt": "Ichthyosis Vulgaris teaching image.",
-    "caption": "Ichthyosis Vulgaris illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**X-linked ichthyosis** anchors this lesson. The mechanism behind X-linked ichthyosis explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "X-linked ichthyosis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Ichthyosis vulgaris** represents the most frequent inherited disorder of keratinisation, affecting approximately one in two hundred and fifty individuals as an autosomal semidominant trait. Loss-of-function mutations in the filaggrin gene on chromosome 1q21 disrupt epidermal barrier formation. Patients present in early childhood with fine, translucent, polygonal scales that predominantly cover extensor extremities while strictly sparing the flexural creases. Associated findings include prominent hyperlinear palms and soles, keratosis pilaris, and atopic eczema. Skin biopsy demonstrates marked attenuation or total absence of the epidermal granular layer.",
+   "say": "Ichthyosis vulgaris is an autosomal semidominant condition resulting from filaggrin gene mutations. Fine pale scales coat extensor surfaces like the shins, but crucially spare the antecubital and popliteal fossae. Look for palmar hyperlinearity and keratosis pilaris. On histology, the hallmark diagnostic feature is an absent or markedly reduced stratum granulosum.",
    "vis": {
     "kind": "table",
-    "title": "Ichthyosis Vulgaris set",
+    "title": "Ichthyosis Vulgaris Profile",
     "cols": [
-     "Item",
-     "Point"
+     "Feature",
+     "Clinical or Pathological Finding"
     ],
     "rows": [
      [
-      "X-linked ichthyosis",
-      "Central fact in this lesson"
+      "Inheritance pattern",
+      "Autosomal semidominant with incomplete penetrance"
      ],
      [
-      "Lamellar ichthyosis",
-      "Companion fact to revise together"
+      "Genetic defect",
+      "Filaggrin loss-of-function on chromosome 1q21"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Scale distribution",
+      "Extensor extremities with classic flexural sparing"
+     ],
+     [
+      "Granular layer",
+      "Markedly attenuated or completely absent on biopsy"
      ]
     ]
    }
   },
   {
-   "tx": "**Lamellar ichthyosis** anchors this lesson. Clinically, lamellar ichthyosis presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Lamellar ichthyosis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**X-linked ichthyosis** arises from steroid sulfatase enzyme deficiency caused by deletions or point mutations in the STS gene at chromosome Xp22.3. Male infants present within the first three months of life with dark brown, tightly adherent, polygonal scales distributed over the limbs, trunk, and characteristically covering the lateral neck in a dirty neck pattern. Unlike ichthyosis vulgaris, flexural creases are often involved while palms and soles are spared. Asymptomatic comma-shaped corneal deposits occur in fifty percent of adult males. Cryptorchidism occurs in up to twenty percent.",
+   "say": "X-linked ichthyosis stems from steroid sulfatase deficiency and affects males. It manifests with dirty-brown polygonal scales that prominently encircle the lateral neck while sparing palms and soles. Corneal opacities seen on slit lamp examination do not affect vision. Obstetric history often reveals failure of labor progression due to placental sulfatase deficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/x-linked-ichthyosis-fig1.webp",
+    "alt": "Medical illustration of X-linked ichthyosis with dark brown adherent scales.",
+    "caption": "Dark brown polygonal scales along the neck and trunk with retention hyperkeratosis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Lamellar ichthyosis** is a severe autosomal recessive non-bullous disorder of cornification most commonly caused by pathogenic variants in the TGM1 gene encoding transglutaminase-1. Most affected neonates present at birth encased in a taut, shiny collodion membrane. Following membrane shedding, patients develop universal, large, dark brown, quadrangular plate-like scales over the entire body surface without sparing flexures. Cicatricial ectropion, eclabium, scarring alopecia, and heat intolerance from severe hypohidrosis constitute major clinical complications. Topical urea, alpha-hydroxy acids, and oral acitretin improve shedding.",
+   "say": "Lamellar ichthyosis is an autosomal recessive condition commonly linked to transglutaminase-1 defects. Newborns usually present encased in a collodion shell. Once desquamated, dark plate-like scales involve the entire skin including flexural creases. Severe ectropion risks exposure keratitis, and defective sweat ducts cause potentially life-threatening hyperthermia in hot conditions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lamellar-ichthyosis-fig1.webp",
+    "alt": "Illustration of lamellar ichthyosis showing plate-like scales.",
+    "caption": "Large plate-like polygonal scales across the body with severe ectropion and eclabium. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Collodion baby** describes a striking neonatal presentation in which the infant is born encased in a shiny, taut, parchment-like membrane that distorts facial anatomy, producing severe ectropion and eclabium. The collodion jacket fissures and peels over two to four weeks. Most cases eventually declare themselves as lamellar ichthyosis or congenital ichthyosiform erythroderma, though ten percent resolve permanently as self-healing collodion baby. Immediate management in a high-humidity incubator with sterile barrier ointments prevents hypothermia, transcutaneous fluid loss, and fatal neonatal sepsis.",
+   "say": "A collodion baby is born inside a tight glistening membrane that restricts chest movement and feeding. Crucial management in the neonatal unit requires humidified incubators and bland barrier ointments. Keratolytic agents such as salicylic acid must never be applied because thin neonatal skin permits rapid toxic systemic absorption.",
+   "vis": {
+    "kind": "flow",
+    "title": "Collodion Baby Management and Evolution",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Taut Collodion Shell",
+      "sub": "Ectropion, eclabium, respiratory restriction"
+     },
+     {
+      "id": "c2",
+      "label": "Humidified Incubator",
+      "sub": "Sterile fluid balance and bland emollients"
+     },
+     {
+      "id": "c3",
+      "label": "Membrane Shedding",
+      "sub": "Spontaneous desquamation over 2 to 4 weeks"
+     },
+     {
+      "id": "c4",
+      "label": "Permanent Phenotype",
+      "sub": "Lamellar ichthyosis or self-healing infant"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Immediate stabilization"
+     ],
+     [
+      "c2",
+      "c3",
+      "Gentle skin care"
+     ],
+     [
+      "c3",
+      "c4",
+      "Diagnostic clarification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Harlequin ichthyosis** represents the most catastrophic congenital disorder of cornification, transmitted as an autosomal recessive condition due to loss-of-function mutations in the ABCA12 lipid transporter gene. Neonates are encased in massive, thick, yellow-white diamond-shaped armour plates separated by wide, fiery red fissures. Severe bilateral ectropion, absence of external ear structures, eclabium, and digital gangrene from constriction bands are typical. Prompt admission to the neonatal intensive care unit and immediate initiation of oral acitretin has transformed this previously fatal disease into a survivable condition.",
+   "say": "Harlequin ichthyosis is caused by homozygous ABCA12 mutations disabling epidermal glucosylceramide export. Massive keratin armour plates with deep erythematous fissures leave the infant at severe risk of sepsis and hypothermia. Early oral acitretin accelerates plate shedding and dramatically enhances neonatal survival.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/harlequin-ichthyosis-fig1.webp",
+    "alt": "Illustration of harlequin ichthyosis neonatal clinical features.",
+    "caption": "Thick plate-like hyperkeratotic armour with deep fissures, severe ectropion, and eclabium. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Epidermolysis bullosa** encompasses a group of inherited mechanobullous disorders marked by profound tissue fragility where minimal frictional shearing provokes blisters and erosions. Classification hinges on the ultrastructural level of cleavage: simplex within basal keratinocytes from keratin 5 or 14 defects; junctional through the lamina lucida from laminin-332 or collagen XVII mutations; and dystrophic beneath the lamina densa due to type VII collagen (COL7A1) mutations. Recessive dystrophic epidermolysis bullosa leads to pseudosyndactyly mitten deformities and high lifetime mortality from aggressive metastatic squamous cell carcinoma.",
+   "say": "Epidermolysis bullosa causes blistering following trivial mechanical friction. Subtype classification relies on the level of split: simplex occurs in the basal layer, junctional occurs within the basement membrane lamina lucida, and dystrophic occurs in the sublamina densa. Recessive dystrophic disease causes devastating hand pseudosyndactyly and early aggressive skin malignancies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/epidermolysis-bullosa-simplex-fig1.webp",
+    "alt": "Illustration of epidermolysis bullosa cleavage planes.",
+    "caption": "Intraepidermal blister cleavage plane within basal keratinocytes following minor friction. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Neurofibromatosis type 1** is an autosomal dominant neurocutaneous syndrome caused by heterozygous mutations in the NF1 gene on chromosome 17q11.2, which encodes the tumour suppressor protein neurofibromin. Clinical diagnosis requires meeting two or more cardinal criteria: six or more cafe-au-lait macules exceeding five millimetres before puberty or fifteen millimetres after puberty; intertriginous axillary or inguinal freckling known as Crowe sign; two or more cutaneous neurofibromas or one plexiform neurofibroma; optic pathway glioma; two or more iris Lisch nodules; and distinctive osseous sphenoid dysplasia.",
+   "say": "Neurofibromatosis type 1 results from NF1 mutations leading to unrestrained RAS activation. Remember the classic diagnostic criteria: six cafe-au-lait macules, Crowe sign axillary freckling, cutaneous neurofibromas, optic pathway gliomas, and iris Lisch nodules on slit lamp examination. Plexiform neurofibromas carry an eight to twelve percent lifetime risk of malignant transformation.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Neurofibromatosis Type 1",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Chromosome 17q11.2 (neurofibromin)",
+      "Six or more cafe-au-lait spots",
+      "Crowe sign axillary freckling",
+      "Lisch nodules and optic gliomas"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Neurofibromatosis Type 2",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Chromosome 22q12 (merlin)",
+      "Bilateral vestibular schwannomas",
+      "Posterior subcapsular lens opacities",
+      "Intracranial meningiomas"
      ]
     }
    }
   },
   {
-   "tx": "**Collodion baby** anchors this lesson. Investigation choice for collodion baby follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Collodion baby gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Tuberous sclerosis** complex is an autosomal dominant disorder caused by inactivating mutations in TSC1 (hamartin on chromosome 9q34) or TSC2 (tuberin on chromosome 16p13.3), leading to continuous hyperactivation of the mTOR growth cascade. Cardinal cutaneous signs include three or more hypomelanotic ash-leaf macules visible under Wood lamp, facial angiofibromas (adenoma sebaceum) across the nose and cheeks, periungual Koenen tumours emerging around puberty, and leathery lumbosacral shagreen patches. Associated systemic hamartomas include cortical tubers causing epilepsy, subependymal giant cell astrocytomas, cardiac rhabdomyomas, and renal angiomyolipomas.",
+   "say": "Tuberous sclerosis stems from mutations in hamartin or tuberin disinhibiting mTOR signalling. Hypopigmented ash-leaf macules are the earliest detectable cutaneous sign, best visualized under Wood lamp illumination. Malar angiofibromas and subungual Koenen tumours develop during childhood. Systemic monitoring focuses on seizure control and screening for renal angiomyolipomas and cardiac rhabdomyomas.",
    "vis": {
     "kind": "image",
-    "src": "v1/kb/media/psoriasis-fig1.webp",
-    "alt": "Ichthyosis Vulgaris teaching image.",
-    "caption": "Ichthyosis Vulgaris illustration. Illustration: StewardMD original.",
+    "src": "v1/kb/media/tuberous-sclerosis-complex-fig1.webp",
+    "alt": "Illustration of tuberous sclerosis complex clinical features.",
+    "caption": "Characteristic cutaneous signs of tuberous sclerosis complex including hypomelanotic macules and facial angiofibromas. Illustration: StewardMD original.",
     "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Harlequin ichthyosis** anchors this lesson. Separation of harlequin ichthyosis from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Harlequin ichthyosis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Ichthyosis Vulgaris set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Harlequin ichthyosis",
-      "Central fact in this lesson"
-     ],
-     [
-      "Epidermolysis bullosa",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Epidermolysis bullosa** anchors this lesson. Management of epidermolysis bullosa follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Epidermolysis bullosa gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Named precisely",
-     "points": [
-      "Discriminator sought",
-      "Severity graded"
-     ]
-    },
-    "right": {
-     "title": "Labelled vaguely",
-     "points": [
-      "Mimic missed",
-      "Referral misdirected"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Neurofibromatosis** anchors this lesson. Complications of neurofibromatosis are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Neurofibromatosis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/dermatitis-herpetiformis-fig1.webp",
-    "alt": "Ichthyosis Vulgaris teaching image.",
-    "caption": "Ichthyosis Vulgaris illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Axillary freckling** anchors this lesson. Anchoring axillary freckling beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Axillary freckling gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Ichthyosis Vulgaris set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Axillary freckling",
-      "Central fact in this lesson"
-     ],
-     [
-      "Tuberous sclerosis",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
    }
   }
  ],
  "quiz": [],
  "cards": [
   {
-   "f": "Ichthyosis Vulgaris: central fact",
-   "b": "Ichthyosis vulgaris is the anchor fact; name it precisely and grade severity."
+   "f": "Ichthyosis vulgaris: histological hallmark on skin biopsy",
+   "b": "Attenuated or totally absent stratum granulosum with filaggrin deficiency."
   },
   {
-   "f": "Ichthyosis Vulgaris: discriminator",
-   "b": "X-linked ichthyosis separates this topic from its nearest mimics."
+   "f": "Harlequin ichthyosis: underlying mutated transporter gene",
+   "b": "ABCA12 gene mutations causing defective lipid secretion into stratum corneum."
   },
   {
-   "f": "Ichthyosis Vulgaris: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "f": "Neurofibromatosis type 1: diagnostic criterion for cafe-au-lait macules",
+   "b": "Six or more macules >5 mm in prepubertal or >15 mm in postpubertal individuals."
   }
  ],
  "keys": [
-  "Ichthyosis vulgaris anchors the topic",
-  "X-linked ichthyosis is the discriminator",
-  "Name, grade, act and review in order"
+  "Ichthyosis vulgaris features flexural sparing and absent granular layer due to filaggrin mutations",
+  "X-linked ichthyosis causes dirty-brown scaling and corneal opacities from steroid sulfatase deficiency",
+  "Neurofibromatosis and tuberous sclerosis exhibit distinct multi-system neurocutaneous hamartomas"
  ]
 }
