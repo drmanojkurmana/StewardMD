@@ -1,154 +1,227 @@
 {
-  "id": "pen-cah-21-hydroxylase-deficiency",
-  "title": "Congenital Adrenal Hyperplasia: 21-Hydroxylase Deficiency, 17-OHP and Crisis Care",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Adrenal Cortex, CAH and Differences of Sex Development",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Monogenic enzyme blocks in adrenal steroidogenesis redirect precursors into virulent androgen excess.",
-      "tx": "Evaluate adrenal enzymatic pathways by recognizing **21-hydroxylase deficiency dominance** as the major cause of CAH. Deficiency of 21-hydroxylase (CYP21A2 gene on chromosome 6p21.3) accounts for > 90-95% of congenital adrenal hyperplasia, resulting in impaired cortisol and aldosterone synthesis with precursor shunting into androgens.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "cyp", "label": "CYP21A2 Gene Mutation (6p21.3)"},
-          {"id": "block", "label": "21-Hydroxylase Block (> 90-95% CAH)"},
-          {"id": "loss", "label": "Impaired Cortisol and Aldosterone Synthesis"},
-          {"id": "shunt", "label": "17-OHP Precursor Shunting into Androgen Excess"}
-        ],
-        "edges": [
-          ["cyp", "block"],
-          ["block", "loss"],
-          ["block", "shunt"]
-        ]
-      }
+ "id": "pen-cah-21-hydroxylase-deficiency",
+ "title": "Congenital Adrenal Hyperplasia: 21-Hydroxylase Deficiency, 17-OHP and Crisis Care",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Adrenal Cortex, CAH and Differences of Sex Development",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Monogenic enzyme blocks in adrenal steroidogenesis redirect precursors into virulent androgen excess.",
+   "tx": "Evaluate adrenal enzymatic pathways by recognizing **21-hydroxylase deficiency dominance** as the major cause of CAH. Deficiency of 21-hydroxylase (CYP21A2 gene on chromosome 6p21.3) accounts for > 90-95% of congenital adrenal hyperplasia, resulting in impaired cortisol and aldosterone synthesis with precursor shunting into androgens.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cyp",
+      "label": "CYP21A2 Gene Mutation (6p21.3)"
+     },
+     {
+      "id": "block",
+      "label": "21-Hydroxylase Block (> 90-95% CAH)"
+     },
+     {
+      "id": "loss",
+      "label": "Impaired Cortisol and Aldosterone Synthesis"
+     },
+     {
+      "id": "shunt",
+      "label": "17-OHP Precursor Shunting into Androgen Excess"
+     }
+    ],
+    "edges": [
+     [
+      "cyp",
+      "block"
+     ],
+     [
+      "block",
+      "loss"
+     ],
+     [
+      "block",
+      "shunt"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The degree of residual enzymatic activity determines whether neonates waste salt or manifest isolated virilization.",
+   "tx": "Distinguish between classic clinical presentations comparing **Classic salt-wasting vs simple virilizing** variants in infancy. Classic CAH is divided into salt-wasting (75%, severe aldosterone deficiency, neonatal shock) and simple virilizing (25%, adequate aldosterone, prenatal virilization in females). Both forms demonstrate progressive adrenal cortical hyperplasia driven by pituitary corticotropin elevation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/congenital-adrenal-hyperplasia-fig1.webp",
+    "alt": "Diagram of the Prader scale showing progressive virilisation of female external genitalia from clitoromegaly to complete labioscrotal fusion in congenital adrenal hyperplasia.",
+    "caption": "Spectrum of external genital virilisation across Prader stages in congenital adrenal hyperplasia."
+   }
+  },
+  {
+   "say": "Salt losing neonates deteriorate rapidly with cardiovascular collapse and life threatening electrolyte derangements.",
+   "tx": "Identify acute metabolic collapse by recognizing **Salt-wasting crisis clinical presentation** during the second week of life. Salt-wasting neonates present at 7-14 days of life with vomiting, weight loss, lethargy, hyponatremia (Na < 125 mEq/L), hyperkalemia (K > 7.0 mEq/L), metabolic acidosis, and hypovolemic shock.",
+   "vis": {
+    "kind": "table",
+    "title": "Salt-Wasting Neonatal Crisis Parameters",
+    "cols": [
+     "Parameter",
+     "Laboratory Finding",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Timing of Onset",
+      "7-14 days of life",
+      "Maternal aldosterone clearance reveals mineralocorticoid deficit"
+     ],
+     [
+      "Serum Sodium",
+      "Na < 125 mEq/L (hyponatremia)",
+      "Renal tubular sodium wasting with volume contraction"
+     ],
+     [
+      "Serum Potassium",
+      "K > 7.0 mEq/L (hyperkalemia)",
+      "Failure of principal cell potassium excretion"
+     ],
+     [
+      "Clinical Picture",
+      "Shock and metabolic acidosis",
+      "Severe hypovolemia and impaired vascular tone"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Universal neonatal dried blood spot screening enables early pre-symptomatic detection of severe steroid enzyme blocks.",
+   "tx": "Establish biochemical confirmation through neonatal screening using **Newborn 17-OHP screening threshold** limits. Newborn blood spot screening measures 17-hydroxyprogesterone (17-OHP) via immunoassay or tandem mass spectrometry; levels > 30-100 nmol/L confirm classic 21-hydroxylase deficiency. Premature infants require gestation-adjusted birth weight nomograms to minimize false-positive recalls.",
+   "vis": {
+    "kind": "table",
+    "title": "Newborn Dried Blood Spot 17-OHP Screening",
+    "cols": [
+     "Assay Method",
+     "Diagnostic Cutoff",
+     "Clinical Decision"
+    ],
+    "rows": [
+     [
+      "Tandem Mass Spectrometry",
+      "> 30-100 nmol/L",
+      "Confirms classic 21-hydroxylase deficiency"
+     ],
+     [
+      "Immunoassay Screen",
+      "Adjusted for birth weight",
+      "Stratifies false positives in premature neonates"
+     ],
+     [
+      "Follow-up Protocol",
+      "Urgent serum electrolytes & 17-OHP",
+      "Immediate pediatric endocrine referral"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Emergency fluid resuscitation corrects hypovolemic shock and hypoglycemia while avoiding cardiotoxic potassium.",
+   "tx": "Initiate emergency stabilization by infusing **Acute crisis resuscitation fluid** without any added potassium. Immediate resuscitation requires an IV bolus of 0.9% normal saline (20 mL/kg) with 5-10% dextrose to treat hypovolemia and hypoglycemia, followed by parenteral hydrocortisone; potassium-containing fluids are strictly forbidden.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+    "alt": "Medical illustration of acute adrenal crisis showing vascular collapse, refractory hypotension, hyponatraemia, and hyperkalaemia.",
+    "caption": "Pathophysiological cascade of acute adrenal crisis and circulatory collapse in salt-wasting CAH."
+   }
+  },
+  {
+   "say": "Lifelong dual hormone replacement suppresses pituitary drive while maintaining fluid and electrolyte balance.",
+   "tx": "Prescribe chronic physiologic replacement by titrating **Maintenance hydrocortisone and fludrocortisone dosing** across infancy. Maintenance therapy requires oral hydrocortisone (10-15 mg/m²/day divided TID) and fludrocortisone (0.05-0.2 mg/day) plus oral sodium chloride supplements (1-2 g/day, 17-34 mEq/day) in infants. Plasma renin activity and 17-OHP are monitored periodically.",
+   "vis": {
+    "kind": "table",
+    "title": "Maintenance Replacement Regimen in CAH",
+    "cols": [
+     "Medication",
+     "Dosage Target",
+     "Therapeutic Objective"
+    ],
+    "rows": [
+     [
+      "Oral Hydrocortisone",
+      "10-15 mg/m²/day divided TID",
+      "Replaces glucocorticoid and suppresses ACTH drive"
+     ],
+     [
+      "Oral Fludrocortisone",
+      "0.05-0.2 mg/day once daily",
+      "Normalizes renin and maintains intravascular volume"
+     ],
+     [
+      "Sodium Chloride",
+      "1-2 g/day (17-34 mEq/day)",
+      "Compensates for immature renal tubular sodium conservation"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Transplacental dexamethasone therapy prevents virilization of female external genitalia when initiated early in pregnancy.",
+   "tx": "Evaluate controversial maternal intervention assessing **Prenatal dexamethasone ethics and indication** protocols. Maternal dexamethasone (20 mcg/kg/day) initiated before 9 weeks gestation suppresses fetal ACTH and virilization in at-risk female fetuses; requires early non-invasive prenatal sex determination via cell-free fetal DNA. Therapy is promptly discontinued if the fetus is confirmed 46,XY.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prenatal Dexamethasone (20 mcg/kg/day)",
+     "points": [
+      "Initiated before 9 weeks gestation",
+      "Crosses placenta uninhibited by 11beta-HSD2",
+      "Prevents virilization in affected 46,XX fetuses"
+     ]
     },
-    {
-      "say": "The degree of residual enzymatic activity determines whether neonates waste salt or manifest isolated virilization.",
-      "tx": "Distinguish between classic clinical presentations comparing **Classic salt-wasting vs simple virilizing** variants in infancy. Classic CAH is divided into salt-wasting (75%, severe aldosterone deficiency, neonatal shock) and simple virilizing (25%, adequate aldosterone, prenatal virilization in females). Both forms demonstrate progressive adrenal cortical hyperplasia driven by pituitary corticotropin elevation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Salt-Wasting CAH (75%)",
-          "points": [
-            "Severe aldosterone deficiency",
-            "Prenatal virilization in females",
-            "Neonatal shock and severe salt crisis"
-          ]
-        },
-        "right": {
-          "title": "Simple Virilizing CAH (25%)",
-          "points": [
-            "Adequate aldosterone preservation",
-            "Ambiguous genitalia in 46,XX females",
-            "Pseudoprecocious puberty in males"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Salt losing neonates deteriorate rapidly with cardiovascular collapse and life threatening electrolyte derangements.",
-      "tx": "Identify acute metabolic collapse by recognizing **Salt-wasting crisis clinical presentation** during the second week of life. Salt-wasting neonates present at 7-14 days of life with vomiting, weight loss, lethargy, hyponatremia (Na < 125 mEq/L), hyperkalemia (K > 7.0 mEq/L), metabolic acidosis, and hypovolemic shock.",
-      "vis": {
-        "kind": "table",
-        "title": "Salt-Wasting Neonatal Crisis Parameters",
-        "cols": ["Parameter", "Laboratory Finding", "Pathophysiological Mechanism"],
-        "rows": [
-          ["Timing of Onset", "7-14 days of life", "Maternal aldosterone clearance reveals mineralocorticoid deficit"],
-          ["Serum Sodium", "Na < 125 mEq/L (hyponatremia)", "Renal tubular sodium wasting with volume contraction"],
-          ["Serum Potassium", "K > 7.0 mEq/L (hyperkalemia)", "Failure of principal cell potassium excretion"],
-          ["Clinical Picture", "Shock and metabolic acidosis", "Severe hypovolemia and impaired vascular tone"]
-        ]
-      }
-    },
-    {
-      "say": "Universal neonatal dried blood spot screening enables early pre-symptomatic detection of severe steroid enzyme blocks.",
-      "tx": "Establish biochemical confirmation through neonatal screening using **Newborn 17-OHP screening threshold** limits. Newborn blood spot screening measures 17-hydroxyprogesterone (17-OHP) via immunoassay or tandem mass spectrometry; levels > 30-100 nmol/L confirm classic 21-hydroxylase deficiency. Premature infants require gestation-adjusted birth weight nomograms to minimize false-positive recalls.",
-      "vis": {
-        "kind": "table",
-        "title": "Newborn Dried Blood Spot 17-OHP Screening",
-        "cols": ["Assay Method", "Diagnostic Cutoff", "Clinical Decision"],
-        "rows": [
-          ["Tandem Mass Spectrometry", "> 30-100 nmol/L", "Confirms classic 21-hydroxylase deficiency"],
-          ["Immunoassay Screen", "Adjusted for birth weight", "Stratifies false positives in premature neonates"],
-          ["Follow-up Protocol", "Urgent serum electrolytes & 17-OHP", "Immediate pediatric endocrine referral"]
-        ]
-      }
-    },
-    {
-      "say": "Emergency fluid resuscitation corrects hypovolemic shock and hypoglycemia while avoiding cardiotoxic potassium.",
-      "tx": "Initiate emergency stabilization by infusing **Acute crisis resuscitation fluid** without any added potassium. Immediate resuscitation requires an IV bolus of 0.9% normal saline (20 mL/kg) with 5-10% dextrose to treat hypovolemia and hypoglycemia, followed by parenteral hydrocortisone; potassium-containing fluids are strictly forbidden.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "resusc", "label": "0.9% Normal Saline Bolus (20 mL/kg)"},
-          {"id": "glu", "label": "5-10% Dextrose Infusion for Hypoglycemia"},
-          {"id": "ster", "label": "Parenteral Hydrocortisone Bolus"},
-          {"id": "rule", "label": "Potassium-Containing Fluids Strictly Forbidden"}
-        ],
-        "edges": [
-          ["resusc", "glu"],
-          ["glu", "ster"],
-          ["ster", "rule"]
-        ]
-      }
-    },
-    {
-      "say": "Lifelong dual hormone replacement suppresses pituitary drive while maintaining fluid and electrolyte balance.",
-      "tx": "Prescribe chronic physiologic replacement by titrating **Maintenance hydrocortisone and fludrocortisone dosing** across infancy. Maintenance therapy requires oral hydrocortisone (10-15 mg/m²/day divided TID) and fludrocortisone (0.05-0.2 mg/day) plus oral sodium chloride supplements (1-2 g/day, 17-34 mEq/day) in infants. Plasma renin activity and 17-OHP are monitored periodically.",
-      "vis": {
-        "kind": "table",
-        "title": "Maintenance Replacement Regimen in CAH",
-        "cols": ["Medication", "Dosage Target", "Therapeutic Objective"],
-        "rows": [
-          ["Oral Hydrocortisone", "10-15 mg/m²/day divided TID", "Replaces glucocorticoid and suppresses ACTH drive"],
-          ["Oral Fludrocortisone", "0.05-0.2 mg/day once daily", "Normalizes renin and maintains intravascular volume"],
-          ["Sodium Chloride", "1-2 g/day (17-34 mEq/day)", "Compensates for immature renal tubular sodium conservation"]
-        ]
-      }
-    },
-    {
-      "say": "Transplacental dexamethasone therapy prevents virilization of female external genitalia when initiated early in pregnancy.",
-      "tx": "Evaluate controversial maternal intervention assessing **Prenatal dexamethasone ethics and indication** protocols. Maternal dexamethasone (20 mcg/kg/day) initiated before 9 weeks gestation suppresses fetal ACTH and virilization in at-risk female fetuses; requires early non-invasive prenatal sex determination via cell-free fetal DNA. Therapy is promptly discontinued if the fetus is confirmed 46,XY.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Prenatal Dexamethasone (20 mcg/kg/day)",
-          "points": [
-            "Initiated before 9 weeks gestation",
-            "Crosses placenta uninhibited by 11beta-HSD2",
-            "Prevents virilization in affected 46,XX fetuses"
-          ]
-        },
-        "right": {
-          "title": "Ethical and Safety Considerations",
-          "points": [
-            "Requires cell-free fetal DNA testing",
-            "Discontinued immediately if fetus is 46,XY",
-            "Potential maternal metabolic adverse risks"
-          ]
-        }
-      }
-    },
-    {
-      "say": "High circulating trophic drive stimulates benign ectopic nodular hyperplasia within the testes of affected males.",
-      "tx": "Screen adolescent and adult males with CAH through **Testicular adrenal rest tumors (TART) monitoring** sonography. Males with poorly controlled CAH develop bilateral testicular adrenal rest tumors (TART) stimulated by chronic ACTH elevation, causing testicular discomfort and infertility, detected by routine testicular ultrasound.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "acth", "label": "Poor Compliance & Chronic ACTH Hypersecretion"},
-          {"id": "hyper", "label": "Stimulation of Aberrant Adrenal Rest Tissue in Rete Testis"},
-          {"id": "tart", "label": "Bilateral Testicular Adrenal Rest Tumors (TART)"},
-          {"id": "comp", "label": "Testicular Discomfort, Tubule Compression & Infertility"}
-        ],
-        "edges": [
-          ["acth", "hyper"],
-          ["hyper", "tart"],
-          ["tart", "comp"]
-        ]
-      }
+    "right": {
+     "title": "Ethical and Safety Considerations",
+     "points": [
+      "Requires cell-free fetal DNA testing",
+      "Discontinued immediately if fetus is 46,XY",
+      "Potential maternal metabolic adverse risks"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "High circulating trophic drive stimulates benign ectopic nodular hyperplasia within the testes of affected males.",
+   "tx": "Screen adolescent and adult males with CAH through **Testicular adrenal rest tumors (TART) monitoring** sonography. Males with poorly controlled CAH develop bilateral testicular adrenal rest tumors (TART) stimulated by chronic ACTH elevation, causing testicular discomfort and infertility, detected by routine testicular ultrasound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "acth",
+      "label": "Poor Compliance & Chronic ACTH Hypersecretion"
+     },
+     {
+      "id": "hyper",
+      "label": "Stimulation of Aberrant Adrenal Rest Tissue in Rete Testis"
+     },
+     {
+      "id": "tart",
+      "label": "Bilateral Testicular Adrenal Rest Tumors (TART)"
+     },
+     {
+      "id": "comp",
+      "label": "Testicular Discomfort, Tubule Compression & Infertility"
+     }
+    ],
+    "edges": [
+     [
+      "acth",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "tart"
+     ],
+     [
+      "tart",
+      "comp"
+     ]
+    ]
+   }
+  }
+ ]
 }

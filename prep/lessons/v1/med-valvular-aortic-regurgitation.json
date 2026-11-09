@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "med-valvular",
+ "subject": "medicine",
+ "title": "Aortic stenosis, regurgitation and Austin Flint murmur",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The most common primary valvular heart disease requiring intervention in elderly adults is **aortic stenosis**. Progressive fibrocalcific remodeling of a normal trileaflet valve, or accelerated calcification of a congenital bicuspid valve, obstructs left ventricular outflow. Severe stenosis is defined by an aortic valve area of 1.0 cm2 or less, a mean transvalvular Doppler gradient exceeding 40 mmHg, or a peak aortic jet velocity exceeding 4.0 m/s.",
+   "say": "Aortic stenosis represents the most frequent valvular disorder requiring intervention in elderly patients. Fibrocalcific degeneration of a normal trileaflet or congenital bicuspid valve causes progressive obstruction. Severe stenosis is defined by a valve area of one square centimetre or less.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity grade",
+     "Aortic valve area",
+     "Mean Doppler gradient",
+     "Peak jet velocity"
+    ],
+    "rows": [
+     [
+      "Mild stenosis",
+      "> 1.5 cm2",
+      "< 25 mmHg",
+      "< 3.0 m/s"
+     ],
+     [
+      "Moderate stenosis",
+      "1.0 to 1.5 cm2",
+      "25 to 40 mmHg",
+      "3.0 to 4.0 m/s"
+     ],
+     [
+      "Severe stenosis",
+      "<= 1.0 cm2",
+      ">= 40 mmHg",
+      ">= 4.0 m/s"
+     ],
+     [
+      "Very severe stenosis",
+      "<= 0.6 cm2",
+      ">= 60 mmHg",
+      ">= 5.0 m/s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cardinal clinical triad of symptomatic severe aortic stenosis comprises angina, syncope, and dyspnoea. The emergence of **angina** or exertional syncope signifies critical left ventricular outflow tract limitation, indicating a median survival of only 2 to 3 years without valve replacement. Exertional dyspnoea reflecting heart failure carries the gravest prognosis, with median survival dropping below 1 to 2 years.",
+   "say": "The cardinal symptom triad in aortic stenosis comprises angina, exertional syncope and dyspnoea. Developing angina or syncope marks critical outflow obstruction with a two to three year median survival without intervention. Exertional heart failure carries the poorest prognosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "as",
+      "label": "Severe aortic stenosis"
+     },
+     {
+      "id": "angina",
+      "label": "Angina (median survival 5 years)"
+     },
+     {
+      "id": "syncope",
+      "label": "Syncope (median survival 3 years)"
+     },
+     {
+      "id": "dyspnea",
+      "label": "Dyspnoea / HF (median survival 2 years)"
+     },
+     {
+      "id": "tavi",
+      "label": "Urgent surgical or transcatheter replacement"
+     }
+    ],
+    "edges": [
+     [
+      "as",
+      "angina"
+     ],
+     [
+      "as",
+      "syncope"
+     ],
+     [
+      "as",
+      "dyspnea"
+     ],
+     [
+      "dyspnea",
+      "tavi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical examination in severe aortic stenosis yields classic peripheral and auscultatory signs. The carotid pulse exhibits a slow upstroke and small amplitude, termed **pulsus parvus et tardus**. Auscultation reveals a harsh, crescendo-decrescendo midsystolic ejection murmur radiating into the carotids, an absent or soft single second heart sound, and an S4 gallop reflecting concentric left ventricular hypertrophy.",
+   "say": "Physical examination in aortic stenosis reveals classic diagnostic signs. The carotid pulse exhibits a weak delayed upstroke termed pulsus parvus et tardus. Auscultation reveals a harsh systolic ejection murmur radiating to the neck with a soft single second heart sound.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Anatomical heart cutaway illustrating calcified stenotic aortic valve leaflets and pulse delay.",
+    "caption": "Calcific aortic stenosis and associated pulsus parvus et tardus contour. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Diastolic reflux of blood from the aorta into the left ventricle characterizes **aortic regurgitation**. Etiologies divide into primary valve leaflet destruction from endocarditis or rheumatic disease, and aortic root dilatation from Marfan syndrome, bicuspid aortopathy, or aortic dissection. Chronic severe regurgitation causes massive left ventricular volume and pressure overload, producing the largest cardiac chamber dimensions observed in clinical medicine.",
+   "say": "Diastolic backward flow from the aorta into the left ventricle defines aortic regurgitation. Leaflet destruction from endocarditis and root dilatation from bicuspid aortopathy represent major causes. Chronic severe regurgitation leads to marked ventricular enlargement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aortic stenosis",
+     "points": [
+      "Concentric hypertrophy (pressure overload)",
+      "Normal chamber size, thickened walls",
+      "Narrow pulse pressure (parvus et tardus)",
+      "Systolic ejection murmur"
+     ]
+    },
+    "right": {
+     "title": "Aortic regurgitation",
+     "points": [
+      "Eccentric hypertrophy (volume overload)",
+      "Massive chamber dilatation (cor bovinum)",
+      "Wide pulse pressure (water hammer)",
+      "Early diastolic decrescendo murmur"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Auscultation of chronic aortic regurgitation reveals an early diastolic, high-pitched decrescendo blowing murmur. It is best heard with the diaphragm at the third or fourth left intercostal space with the patient leaning forward in full expiration. Severe regurgitation also generates an apical low-pitched mid-diastolic rumbling murmur termed the **Austin Flint murmur**, produced when the regurgitant jet vibrates the anterior mitral leaflet.",
+   "say": "Aortic regurgitation produces an early diastolic high pitched blowing murmur. Listen with the diaphragm along the left sternal border with the patient leaning forward in expiration. Severe disease also produces an apical diastolic rumble called the Austin Flint murmur.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Phonocardiogram comparing early diastolic murmur of AR and apical Austin Flint rumble.",
+    "caption": "Early diastolic decrescendo murmur and apical Austin Flint diastolic rumble. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Distinguishing the Austin Flint rumble from true organic rheumatic mitral stenosis is a classic clinical challenge. An Austin Flint murmur lacks a loud first heart sound and possesses no **opening snap**, whereas rheumatic mitral stenosis characteristically displays both. Furthermore, amyl nitrite inhalation decreases peripheral afterload, softening an Austin Flint murmur while accentuating the murmur of organic mitral stenosis.",
+   "say": "Distinguishing the Austin Flint rumble from organic mitral stenosis is a classic clinical problem. An Austin Flint murmur features a normal S1 and lacks an opening snap. Inhaling amyl nitrite softens the Austin Flint murmur while intensifying the murmur of true mitral stenosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Austin Flint murmur",
+     "Rheumatic mitral stenosis"
+    ],
+    "rows": [
+     [
+      "First heart sound (S1)",
+      "Normal or soft",
+      "Loud and prominent"
+     ],
+     [
+      "Opening snap",
+      "Absent",
+      "Present (pathognomonic)"
+     ],
+     [
+      "Amyl nitrite response",
+      "Murmur softens (reduced afterload)",
+      "Murmur intensifies (increased flow)"
+     ],
+     [
+      "Mitral valve morphology",
+      "Normal pliable leaflets on echo",
+      "Fused commissures, thickened leaflets"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reversal of blood flow into the low-pressure left ventricle produces an exaggerated pulse pressure with classic eponymous signs. Wide pulse pressure generates the bounding **water hammer pulse**, systolic capillary pulsations under nailbeds known as Quincke sign, head nodding synchronous with systole termed de Musset sign, and femoral pistol-shot sounds termed Traube sign, alongside Duroziez double murmur heard over compressed femoral arteries.",
+   "say": "Massive diastolic runoff produces wide pulse pressure with peripheral vascular signs. Bounding water hammer pulses, capillary nailbed flush called Quincke sign, and rhythmic head nodding termed de Musset sign reflect large stroke volumes followed by rapid diastolic runoff.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eponymous sign",
+     "Physical examination method",
+     "Diagnostic finding"
+    ],
+    "rows": [
+     [
+      "Corrigan pulse",
+      "Palpate carotid artery",
+      "Abrupt, visible bounding upstroke"
+     ],
+     [
+      "Quincke sign",
+      "Gentle pressure on translucent nailbed",
+      "Alternating blanching and flushing"
+     ],
+     [
+      "de Musset sign",
+      "Observe head at rest",
+      "Rhythmic systolic head bobbing"
+     ],
+     [
+      "Duroziez sign",
+      "Auscultate femoral artery with stethoscope compression",
+      "To-and-fro systolic and diastolic murmur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management of severe valvular aortic disease requires surgical or transcatheter intervention. In aortic stenosis, symptomatic patients or asymptomatic individuals with an ejection fraction below 50% warrant valve replacement. In chronic severe aortic regurgitation, surgery is indicated when symptoms appear, or when **left ventricular** end-systolic dimension exceeds 50 mm, preventing irreversible myocardial damage.",
+   "say": "Definitive treatment for severe aortic disease requires valve replacement. For aortic stenosis, symptoms or an ejection fraction below fifty percent mandate replacement. In aortic regurgitation, surgery is indicated for symptoms or when end-systolic diameter exceeds fifty millimetres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "as_ar",
+      "label": "Severe aortic stenosis or regurgitation"
+     },
+     {
+      "id": "echo",
+      "label": "Echocardiogram: gradients and LV dimensions"
+     },
+     {
+      "id": "crit",
+      "label": "Symptoms or LV decompensation"
+     },
+     {
+      "id": "savr_tavi",
+      "label": "Surgical AVR or Transcatheter TAVI"
+     }
+    ],
+    "edges": [
+     [
+      "as_ar",
+      "echo"
+     ],
+     [
+      "echo",
+      "crit"
+     ],
+     [
+      "crit",
+      "savr_tavi"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

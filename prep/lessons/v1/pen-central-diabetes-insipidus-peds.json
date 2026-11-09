@@ -1,155 +1,231 @@
 {
-  "id": "pen-central-diabetes-insipidus-peds",
-  "title": "Pediatric Central Diabetes Insipidus: Water Deprivation, Desmopressin and Etiologies",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Rickets, Calcium Disorders and Posterior Pituitary",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Excessive dilute urine output in excess of physiological norms accompanied by intense polydipsia defines polyuria.",
-      "tx": "Establish pathological urinary losses by checking **Classic clinical polyuria threshold in children** during initial assessment. Pathological polyuria in children is defined as urine output > 2 L/m²/day (> 4-5 mL/kg/hr in infants), accompanied by persistent intense polydipsia and craving for ice-cold water.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Pathological Polyuria Criteria",
-          "points": [
-            "Urine output > 2 L/m²/day in children",
-            "> 4-5 mL/kg/hr in infants and neonates",
-            "Urine osmolality < 300 mOsm/kg"
-          ]
-        },
-        "right": {
-          "title": "Clinical Hallmarks",
-          "points": [
-            "Craving for ice-cold refrigerated water",
-            "Nocturia and secondary enuresis",
-            "Hypernatremic dehydration risk"
-          ]
-        }
-      }
+ "id": "pen-central-diabetes-insipidus-peds",
+ "title": "Pediatric Central Diabetes Insipidus: Water Deprivation, Desmopressin and Etiologies",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Rickets, Calcium Disorders and Posterior Pituitary",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Excessive dilute urine output in excess of physiological norms accompanied by intense polydipsia defines polyuria.",
+   "tx": "Establish pathological urinary losses by checking **Classic clinical polyuria threshold in children** during initial assessment. Pathological polyuria in children is defined as urine output > 2 L/m²/day (> 4-5 mL/kg/hr in infants), accompanied by persistent intense polydipsia and craving for ice-cold water.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-insipidus-fig1.webp",
+    "alt": "Neuroendocrine diagram showing the hypothalamic-neurohypophyseal pathway synthesizing vasopressin and collecting duct V2 receptor-mediated aquaporin-2 translocation.",
+    "caption": "Hypothalamic-posterior pituitary vasopressin axis and renal collecting duct water reabsorption."
+   }
+  },
+  {
+   "say": "Intracranial neoplasms and histiocytic infiltrates represent the most frequent identifiable organic drivers in children.",
+   "tx": "Investigate underlying pediatric causes by reviewing the **Etiological breakdown in children** presenting with polyuria. Pediatric central DI is caused by craniopharyngioma / germinoma (30-40%), Langerhans cell histiocytosis (LCH, 15-20%), neurosurgical trauma, septo-optic dysplasia, or hereditary AVP mutations. Contrast neuroimaging is mandatory in all presenting cases.",
+   "vis": {
+    "kind": "table",
+    "title": "Etiological Categories of Pediatric Central DI",
+    "cols": [
+     "Etiological Category",
+     "Incidence",
+     "Key Identifying Clinical Features"
+    ],
+    "rows": [
+     [
+      "Craniopharyngioma / Germinoma",
+      "30-40% of cases",
+      "Suprasellar mass with calcification or visual field defects"
+     ],
+     [
+      "Langerhans Cell Histiocytosis",
+      "15-20% of cases",
+      "Thickened infundibulum and osteolytic bone lesions"
+     ],
+     [
+      "Neurosurgical Trauma",
+      "Common post-op",
+      "Follows pituitary tumor resection or severe head injury"
+     ],
+     [
+      "Genetic / Hereditary AVP",
+      "Rare (< 5%)",
+      "Autosomal dominant AVP-neurophysin II gene mutations"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Loss of the posterior pituitary bright spot accompanied by stalk widening signals histiocytic granulomatous infiltration.",
+   "tx": "Evaluate sellar and suprasellar architecture identifying **LCH pituitary stalk thickening** on contrast brain MRI. In children presenting with isolated central DI, pituitary MRI reveals thickening of the pituitary stalk (> 3 mm) and loss of the posterior pituitary T1 hyperintense bright spot, mandating staging for bone LCH.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mri",
+      "label": "Contrast-Enhanced Pituitary Magnetic Resonance Scan"
+     },
+     {
+      "id": "thick",
+      "label": "Infundibular Stalk Thickening (> 3 mm)"
+     },
+     {
+      "id": "loss",
+      "label": "Loss of Normal Posterior Pituitary T1 Bright Spot"
+     },
+     {
+      "id": "lch",
+      "label": "Skeletal Survey & Staging for Langerhans Cell Histiocytosis"
+     }
+    ],
+    "edges": [
+     [
+      "mri",
+      "thick"
+     ],
+     [
+      "mri",
+      "loss"
+     ],
+     [
+      "thick",
+      "lch"
+     ],
+     [
+      "loss",
+      "lch"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Supervised fluid restriction evaluates intrinsic vasopressin release under rising plasma osmotic pressure.",
+   "tx": "Execute dynamic diagnostic restriction adhering to **Water deprivation protocol criteria** under strict hemodynamic monitoring. Water deprivation is halted when serum sodium reaches > 145 mEq/L or serum osmolality > 300 mOsm/kg, or if body weight drops by 3-5%; central DI fails to concentrate urine above 300 mOsm/kg.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-insipidus-fig2.webp",
+    "alt": "Renal collecting duct principal cell signaling alongside diagnostic urine osmolality response curves during water deprivation and desmopressin challenge.",
+    "caption": "Water deprivation testing curves and collecting duct aquaporin-2 channel kinetics in diabetes insipidus."
+   }
+  },
+  {
+   "say": "Administration of exogenous vasopressin analog distinguishes central secretion failure from peripheral tubular resistance.",
+   "tx": "Differentiate central from nephrogenic diabetes insipidus assessing the **Desmopressin (DDAVP) challenge test response** acutely. Subcutaneous or intranasal desmopressin (1-2 mcg SC or 10 mcg intranasal) produces a dramatic > 50% increase in urine osmolality with a prompt reduction in urine volume in central DI, but no response in nephrogenic DI.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central DI Response",
+     "points": [
+      "Dramatic > 50% rise in urine osmolality",
+      "Urine osmolality exceeds 600-800 mOsm/kg",
+      "Prompt dramatic reduction in urine volume"
+     ]
     },
-    {
-      "say": "Intracranial neoplasms and histiocytic infiltrates represent the most frequent identifiable organic drivers in children.",
-      "tx": "Investigate underlying pediatric causes by reviewing the **Etiological breakdown in children** presenting with polyuria. Pediatric central DI is caused by craniopharyngioma / germinoma (30-40%), Langerhans cell histiocytosis (LCH, 15-20%), neurosurgical trauma, septo-optic dysplasia, or hereditary AVP mutations. Contrast neuroimaging is mandatory in all presenting cases.",
-      "vis": {
-        "kind": "table",
-        "title": "Etiological Categories of Pediatric Central DI",
-        "cols": ["Etiological Category", "Incidence", "Key Identifying Clinical Features"],
-        "rows": [
-          ["Craniopharyngioma / Germinoma", "30-40% of cases", "Suprasellar mass with calcification or visual field defects"],
-          ["Langerhans Cell Histiocytosis", "15-20% of cases", "Thickened infundibulum and osteolytic bone lesions"],
-          ["Neurosurgical Trauma", "Common post-op", "Follows pituitary tumor resection or severe head injury"],
-          ["Genetic / Hereditary AVP", "Rare (< 5%)", "Autosomal dominant AVP-neurophysin II gene mutations"]
-        ]
-      }
-    },
-    {
-      "say": "Loss of the posterior pituitary bright spot accompanied by stalk widening signals histiocytic granulomatous infiltration.",
-      "tx": "Evaluate sellar and suprasellar architecture identifying **LCH pituitary stalk thickening** on contrast brain MRI. In children presenting with isolated central DI, pituitary MRI reveals thickening of the pituitary stalk (> 3 mm) and loss of the posterior pituitary T1 hyperintense bright spot, mandating staging for bone LCH.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "mri", "label": "Contrast-Enhanced Pituitary Magnetic Resonance Scan"},
-          {"id": "thick", "label": "Infundibular Stalk Thickening (> 3 mm)"},
-          {"id": "loss", "label": "Loss of Normal Posterior Pituitary T1 Bright Spot"},
-          {"id": "lch", "label": "Skeletal Survey & Staging for Langerhans Cell Histiocytosis"}
-        ],
-        "edges": [
-          ["mri", "thick"],
-          ["mri", "loss"],
-          ["thick", "lch"],
-          ["loss", "lch"]
-        ]
-      }
-    },
-    {
-      "say": "Supervised fluid restriction evaluates intrinsic vasopressin release under rising plasma osmotic pressure.",
-      "tx": "Execute dynamic diagnostic restriction adhering to **Water deprivation protocol criteria** under strict hemodynamic monitoring. Water deprivation is halted when serum sodium reaches > 145 mEq/L or serum osmolality > 300 mOsm/kg, or if body weight drops by 3-5%; central DI fails to concentrate urine above 300 mOsm/kg.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "start", "label": "Supervised Water Deprivation Protocol"},
-          {"id": "stop", "label": "Halt: Na > 145 mEq/L, Osm > 300 mOsm/kg, or 3-5% Weight Loss"},
-          {"id": "fail", "label": "Urine Osmolality Fails to Rise (< 300 mOsm/kg)"},
-          {"id": "conf", "label": "Confirmed Diagnosis of Diabetes Insipidus"}
-        ],
-        "edges": [
-          ["start", "stop"],
-          ["stop", "fail"],
-          ["fail", "conf"]
-        ]
-      }
-    },
-    {
-      "say": "Administration of exogenous vasopressin analog distinguishes central secretion failure from peripheral tubular resistance.",
-      "tx": "Differentiate central from nephrogenic diabetes insipidus assessing the **Desmopressin (DDAVP) challenge test response** acutely. Subcutaneous or intranasal desmopressin (1-2 mcg SC or 10 mcg intranasal) produces a dramatic > 50% increase in urine osmolality with a prompt reduction in urine volume in central DI, but no response in nephrogenic DI.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Central DI Response",
-          "points": [
-            "Dramatic > 50% rise in urine osmolality",
-            "Urine osmolality exceeds 600-800 mOsm/kg",
-            "Prompt dramatic reduction in urine volume"
-          ]
-        },
-        "right": {
-          "title": "Nephrogenic DI Response",
-          "points": [
-            "Failure of response (< 50% rise in urine osmolality)",
-            "Urine osmolality remains < 300 mOsm/kg",
-            "Persistent unabated dilute polyuria"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Careful dose titration allows scheduled breakthrough diuresis each day to protect against water intoxication.",
-      "tx": "Maintain physiological fluid homeostasis by establishing **Oral and melt desmopressin titration** for outpatient therapy. Maintenance therapy uses oral desmopressin (0.05-0.2 mg TID) or sublingual melt (60-120 mcg TID), carefully titrated to permit a brief breakthrough diuresis once daily to prevent hyponatremic water intoxication.",
-      "vis": {
-        "kind": "table",
-        "title": "Desmopressin Formulations and Dosing",
-        "cols": ["Formulation", "Typical Dosage Range", "Clinical Administration Rule"],
-        "rows": [
-          ["Oral Tablets", "0.05-0.2 mg TID orally", "Titrate dose allowing 1h breakthrough diuresis daily"],
-          ["Sublingual Melt", "60-120 mcg TID sublingual", "Rapid oral transmucosal absorption unaffected by food"],
-          ["Intranasal Solution", "5-10 mcg once or twice daily", "Variable absorption during viral rhinitis or congestion"]
-        ]
-      }
-    },
-    {
-      "say": "Hypothalamic osmoreceptor destruction eliminates the thirst mechanism and requires fixed fluid prescriptions.",
-      "tx": "Prevent life threatening hypernatremia by coordinating **Adipsic diabetes insipidus management** protocols after neurosurgery. Damage to hypothalamic osmoreceptors (post-craniopharyngioma resection) destroys the thirst mechanism; requires rigid daily fixed fluid prescription matched to daily morning weight to prevent severe hypernatremia. Caregivers adjust water intake dynamically based on weight shifts.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "resect", "label": "Hypothalamic Damage Post-Craniopharyngioma Resection"},
-          {"id": "thirst", "label": "Destruction of Thirst Osmoreceptors (Adipsia)"},
-          {"id": "wt", "label": "Daily Morning Weight & Fixed Fluid Prescription"},
-          {"id": "norm", "label": "Prevention of Severe Hypernatremic Dehydration"}
-        ],
-        "edges": [
-          ["resect", "thirst"],
-          ["thirst", "wt"],
-          ["wt", "norm"]
-        ]
-      }
-    },
-    {
-      "say": "Neurosurgical insult to the pituitary stalk classically unfolds in a distinct three phase fluid sequence.",
-      "tx": "Anticipate predictable postoperative fluid transitions by monitoring the **Triphasic response after neurosurgery** closely. Pituitary surgery or head trauma triggers a classic triphasic response: Phase 1 (transient DI for 24-48h), Phase 2 (SIADH with hyponatremia at days 3-7 from dying neuron AVP leak), and Phase 3 (permanent DI after day 8).",
-      "vis": {
-        "kind": "table",
-        "title": "Triphasic Post-Neurosurgical Fluid Response",
-        "cols": ["Phase", "Timeline", "Underlying Mechanism & Fluid Status"],
-        "rows": [
-          ["Phase 1: Transient DI", "Hours to 24-48h", "Axonal shock with acute cessation of AVP secretion (polyuria)"],
-          ["Phase 2: Transient SIADH", "Days 3-7 post-op", "Degenerating hypothalamic neurons leak stored AVP (hyponatremia)"],
-          ["Phase 3: Permanent DI", "After day 8 post-op", "Irreversible neuronal death with permanent loss of AVP"]
-        ]
-      }
+    "right": {
+     "title": "Nephrogenic DI Response",
+     "points": [
+      "Failure of response (< 50% rise in urine osmolality)",
+      "Urine osmolality remains < 300 mOsm/kg",
+      "Persistent unabated dilute polyuria"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Careful dose titration allows scheduled breakthrough diuresis each day to protect against water intoxication.",
+   "tx": "Maintain physiological fluid homeostasis by establishing **Oral and melt desmopressin titration** for outpatient therapy. Maintenance therapy uses oral desmopressin (0.05-0.2 mg TID) or sublingual melt (60-120 mcg TID), carefully titrated to permit a brief breakthrough diuresis once daily to prevent hyponatremic water intoxication.",
+   "vis": {
+    "kind": "table",
+    "title": "Desmopressin Formulations and Dosing",
+    "cols": [
+     "Formulation",
+     "Typical Dosage Range",
+     "Clinical Administration Rule"
+    ],
+    "rows": [
+     [
+      "Oral Tablets",
+      "0.05-0.2 mg TID orally",
+      "Titrate dose allowing 1h breakthrough diuresis daily"
+     ],
+     [
+      "Sublingual Melt",
+      "60-120 mcg TID sublingual",
+      "Rapid oral transmucosal absorption unaffected by food"
+     ],
+     [
+      "Intranasal Solution",
+      "5-10 mcg once or twice daily",
+      "Variable absorption during viral rhinitis or congestion"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Hypothalamic osmoreceptor destruction eliminates the thirst mechanism and requires fixed fluid prescriptions.",
+   "tx": "Prevent life threatening hypernatremia by coordinating **Adipsic diabetes insipidus management** protocols after neurosurgery. Damage to hypothalamic osmoreceptors (post-craniopharyngioma resection) destroys the thirst mechanism; requires rigid daily fixed fluid prescription matched to daily morning weight to prevent severe hypernatremia. Caregivers adjust water intake dynamically based on weight shifts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Hypothalamic Damage Post-Craniopharyngioma Resection"
+     },
+     {
+      "id": "thirst",
+      "label": "Destruction of Thirst Osmoreceptors (Adipsia)"
+     },
+     {
+      "id": "wt",
+      "label": "Daily Morning Weight & Fixed Fluid Prescription"
+     },
+     {
+      "id": "norm",
+      "label": "Prevention of Severe Hypernatremic Dehydration"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "thirst"
+     ],
+     [
+      "thirst",
+      "wt"
+     ],
+     [
+      "wt",
+      "norm"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Neurosurgical insult to the pituitary stalk classically unfolds in a distinct three phase fluid sequence.",
+   "tx": "Anticipate predictable postoperative fluid transitions by monitoring the **Triphasic response after neurosurgery** closely. Pituitary surgery or head trauma triggers a classic triphasic response: Phase 1 (transient DI for 24-48h), Phase 2 (SIADH with hyponatremia at days 3-7 from dying neuron AVP leak), and Phase 3 (permanent DI after day 8).",
+   "vis": {
+    "kind": "table",
+    "title": "Triphasic Post-Neurosurgical Fluid Response",
+    "cols": [
+     "Phase",
+     "Timeline",
+     "Underlying Mechanism & Fluid Status"
+    ],
+    "rows": [
+     [
+      "Phase 1: Transient DI",
+      "Hours to 24-48h",
+      "Axonal shock with acute cessation of AVP secretion (polyuria)"
+     ],
+     [
+      "Phase 2: Transient SIADH",
+      "Days 3-7 post-op",
+      "Degenerating hypothalamic neurons leak stored AVP (hyponatremia)"
+     ],
+     [
+      "Phase 3: Permanent DI",
+      "After day 8 post-op",
+      "Irreversible neuronal death with permanent loss of AVP"
+     ]
+    ]
+   }
+  }
+ ]
 }
