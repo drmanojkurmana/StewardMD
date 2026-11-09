@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Frey Syndrome, Auriculotemporal Nerve, and Salivary Pathways",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The secretomotor pathway regulating parotid salivation involves a complex parasympathetic relay spanning cranial nerves IX and V. Preganglionic parasympathetic cell bodies reside in the **inferior salivatory nucleus** of the medulla oblongata. Their axons travel in the glossopharyngeal nerve (cranial nerve IX), exiting the skull base through the intermediate compartment of the jugular foramen.",
+   "say": "Parotid salivation is governed by preganglionic parasympathetic fibres from the inferior salivatory nucleus. These axons leave the brainstem in the glossopharyngeal nerve.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-frey.svg",
+    "alt": "Anatomical diagram of the parasympathetic pathway to parotid gland and aberrant nerve regeneration in Frey syndrome",
+    "caption": "Secretomotor parasympathetic pathway to the parotid gland via the otic ganglion and auriculotemporal nerve. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediately below the jugular foramen, the glossopharyngeal nerve emits the tympanic nerve (Jacobson nerve). The tympanic nerve re-enters the skull through the tympanic canaliculus, ramifying on the promontory of the middle ear cavity to form the tympanic plexus. From this plexus emerges the **lesser petrosal nerve**, which carries preganglionic fibres into the middle cranial fossa.",
+   "say": "The tympanic nerve enters the middle ear to form the tympanic plexus over the promontory. Fibres emerge as the lesser petrosal nerve, traversing the skull floor toward foramen ovale.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Glossopharyngeal Nerve (CN IX exits jugular foramen)"
+     },
+     {
+      "id": "g2",
+      "label": "Tympanic Nerve of Jacobson (Enters middle ear cavity via inferior canaliculus)"
+     },
+     {
+      "id": "g3",
+      "label": "Tympanic Plexus on Promontory (Provides sensory fibres to middle ear mucosa)"
+     },
+     {
+      "id": "g4",
+      "label": "Lesser Petrosal Nerve (Traverses middle fossa and exits via foramen ovale)"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The lesser petrosal nerve exits the middle cranial fossa through the foramen ovale (or canal of Arnold) to terminate in the otic ganglion, situated in the infratemporal fossa immediately below foramen ovale medial to the mandibular nerve. In the **otic ganglion**, preganglionic parasympathetic axons form synapses with multipolar postganglionic secretomotor neurons.",
+   "say": "Passing through foramen ovale, the lesser petrosal nerve synapses in the otic ganglion. Postganglionic secretomotor fibres emerge to join the auriculotemporal nerve.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Preganglionic Input (Lesser petrosal nerve carries CN IX parasympathetics)"
+     },
+     {
+      "id": "o2",
+      "label": "Otic Ganglion Synapse (Located medial to mandibular nerve trunk in infratemporal fossa)"
+     },
+     {
+      "id": "o3",
+      "label": "Postganglionic Emergence (Unmyelinated cholinergic secretomotor fibres exit ganglion)"
+     },
+     {
+      "id": "o4",
+      "label": "Auriculotemporal Nerve Hitchhiking (Postganglionics join V3 trunk to reach parotid acini)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The auriculotemporal nerve arises from the posterior division of the mandibular nerve by two roots that encircle the middle meningeal artery. The **auriculotemporal nerve** curves backwards around the neck of the mandible, enters the upper pole of the parotid gland, and ascends across the root of the zygomatic arch to provide sensory supply to the temple, tragus, and external acoustic meatus.",
+   "say": "Encircling the middle meningeal artery by two roots, the auriculotemporal nerve enters the parotid gland. It delivers secretomotor fibres to acini and supplies sensory twigs to the temple.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fibre Modality",
+     "Functional Target",
+     "Physiological Effect"
+    ],
+    "rows": [
+     [
+      "Postganglionic parasympathetic (from otic)",
+      "Parotid serous acini",
+      "Stimulates watery amylase-rich salivary secretion"
+     ],
+     [
+      "Postganglionic sympathetic (from superior cervical)",
+      "Arteriolar vascular smooth muscle",
+      "Vasoconstriction producing thick viscous saliva"
+     ],
+     [
+      "General somatic sensory (from V3)",
+      "Capsule, temple, tragus, EAM, TMJ",
+      "Proprioception and pain from temporal scalp and joint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frey syndrome (auriculotemporal syndrome, gustatory sweating) is a distressing complication occurring following surgical parotidectomy or penetrating trauma to the parotid bed. The patient experiences localized facial flushing, hyperaemia, and profuse **gustatory sweating** over the preauricular cutaneous area whenever smelling, anticipating, or masticating savoury food.",
+   "say": "Frey syndrome features localized preauricular sweating and flushing triggered by the smell or taste of food. It represents a classic complication following parotidectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Physiological State",
+     "points": [
+      "Parasympathetics innervate deep parotid salivary acini",
+      "Sympathetics innervate cutaneous sweat glands and arterioles",
+      "Chewing triggers intraoral salivary flow without cutaneous reaction",
+      "Strict segregation between visceral salivation and cutaneous sweating"
+     ]
+    },
+    "right": {
+     "title": "Frey Syndrome (Aberrant Reinnervation)",
+     "points": [
+      "Surgical transection of auriculotemporal secretomotor and sensory axons",
+      "Regenerating parasympathetics misdirected to empty cutaneous sweat gland receptors",
+      "Salivary stimulation triggers cholinergic sweat production (gustatory sweating)",
+      "Diagnosed objectively by the Minor starch-iodine test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The pathophysiology of Frey syndrome represents a classic model of aberrant nerve regeneration (misdirected reinnervation). During surgical resection of the parotid, postganglionic parasympathetic secretomotor fibres targeting parotid acini and sympathetic sensory fibres to cutaneous sweat glands are severed. During healing, regenerating parasympathetic axons misdirect along Schwann cell sheaths to reinnervate denervated cutaneous **sweat glands**.",
+   "say": "Aberrant axonal regeneration drives Frey syndrome. Severed parasympathetic secretomotor fibres misdirect into cutaneous sweat gland receptors, causing gustatory perspiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Parotidectomy Trauma (Transection of auriculotemporal nerve branches in parotid bed)"
+     },
+     {
+      "id": "f2",
+      "label": "Axonal Sprouting (Cut parasympathetic secretomotor and sympathetic sudomotor fibres regenerate)"
+     },
+     {
+      "id": "f3",
+      "label": "Aberrant Reinnervation (Parasympathetic axons mistakenly connect to cutaneous sweat gland receptors)"
+     },
+     {
+      "id": "f4",
+      "label": "Gustatory Sweating (Masticatory stimuli produce sweat droplets and cutaneous erythema on cheek)"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because both postganglionic parasympathetic secretomotor terminals and sympathetic postganglionic sudomotor terminals on sweat glands are physiologically cholinergic, the misdirected nerves function perfectly. Whenever the patient tastes sour or spicy food, parasympathetic efferent volleys intended to produce saliva stimulate cutaneous sweat glands and vasodilate cheek arterioles, producing **preauricular erythema**.",
+   "say": "Both secretomotor and sudomotor endings release acetylcholine. Consequently, gustatory stimulation reliably activates sweat receptors, drenching the preauricular skin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Normal Innervation",
+     "Misdirected State in Frey Syndrome"
+    ],
+    "rows": [
+     [
+      "Neurotransmitter",
+      "Acetylcholine (ACh)",
+      "Acetylcholine (ACh) retained"
+     ],
+     [
+      "Receptor type",
+      "Muscarinic M3 receptors",
+      "Muscarinic M3 on cutaneous sweat glands"
+     ],
+     [
+      "Trigger",
+      "Cephalic phase of digestion (food anticipation)",
+      "Food intake directly triggers facial perspiration"
+     ],
+     [
+      "Diagnostic test",
+      "Normal salivary flow rate",
+      "Minor starch-iodine test turns dark blue-black over cheek"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnosis of Frey syndrome is confirmed objectively using the Minor starch-iodine test. The cheek is painted with an iodine solution, allowed to dry, and dusted with starch powder. The patient then chews a lemon wedge or sialogogue; as **gustatory sweat** emerges from cutaneous pores, moisture dissolves the iodine-starch complex, producing an unmistakable intense purple-black colorimetric reaction.",
+   "say": "The Minor starch-iodine test objectively confirms Frey syndrome. Chewing a lemon dissolves iodine and starch on the skin, producing a dramatic purple-black discoloration.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic tracing the course of facial and auriculotemporal nerves across the lateral facial plane",
+    "caption": "Surgical anatomy of preauricular nerve pathways and the anatomical site of gustatory sweating. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

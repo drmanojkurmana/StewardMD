@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-orbit",
+ "subject": "anatomy",
+ "title": "Superior Oblique, Trochlea, Oculomotor Nerve, and Horner Syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The superior oblique is a fusiform extraocular muscle arising from the body of the sphenoid bone immediately superomedial to the optic canal. It courses forward along the superomedial wall of the orbit towards the **trochlea**, a small fibrocartilaginous pulley attached to the trochlear fovea of the frontal bone at the anteromedial orbital angle.",
+   "say": "Arising superomedial to the optic canal, the superior oblique courses along the orbital wall. Its slender tendon enters the fibrocartilaginous trochlear pulley at the anteromedial angle.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Gross anatomical dissection of eyeball showing extraocular musculature and superior oblique tendon",
+    "caption": "Anatomical dissection of extraocular muscles displaying the superior oblique pulley mechanism. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Passing through the trochlea, the slender tendon of the superior oblique turns abruptly posterolaterally at an acute angle of fifty-four degrees. Passing beneath the superior rectus, it inserts into the posterolateral quadrant of the **sclera** behind the equator of the globe. Because of this reflected trajectory, contraction depresses, abducts, and intorts the eyeball.",
+   "say": "After looping through the trochlea, the tendon reflects posterolaterally beneath superior rectus. Its primary action is intorsion, accompanied by downward depression when the eye is adducted.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Actions (Anatomical Posture)",
+     "points": [
+      "Primary physiological action: Intorsion (internal rotation)",
+      "Secondary physiological action: Depression of the globe",
+      "Tertiary physiological action: Abduction of the globe",
+      "Maximum depressive power achieved when eye is adducted 54 degrees"
+     ]
+    },
+    "right": {
+     "title": "Clinical Testing Position",
+     "points": [
+      "Instruct patient to adduct the eye (look towards nose)",
+      "Ask patient to look downwards towards the floor",
+      "Isolates depressive action of superior oblique from inferior rectus",
+      "Paralysis causes vertical diplopia maximal on reading or walking downstairs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The superior oblique is innervated exclusively by the trochlear nerve (cranial nerve IV). Uniquely, the **trochlear nerve** is the only cranial nerve that emerges from the dorsal surface of the brainstem, and its fibres completely decussate before exit. It is also the thinnest cranial nerve with the longest intracranial course, rendering it exceptionally vulnerable to deceleration trauma.",
+   "say": "Cranial nerve four exclusively innervates superior oblique. It uniquely emerges from the dorsal midbrain and completely crosses, traversing a long, fragile intracranial route.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Trochlear Nucleus (Lower midbrain at level of inferior colliculus)"
+     },
+     {
+      "id": "t2",
+      "label": "Dorsal Decussation (Exits dorsal brainstem behind anterior medullary velum)"
+     },
+     {
+      "id": "t3",
+      "label": "Cavernous Sinus Wall (Embedded in lateral dural wall between CN III and V1)"
+     },
+     {
+      "id": "t4",
+      "label": "Superior Orbital Fissure (Enters orbit outside tendinous ring to pierce superior oblique)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trochlear nerve palsy presents clinically with vertical and torsional diplopia that is characteristically aggravated when looking downwards and inwards, such as when reading a book or descending stairs. To compensate for uninhibited extorsion, the patient develops a classic compensatory **head tilt** toward the contralateral shoulder (Bielschowsky sign), which aligns the visual axes.",
+   "say": "Trochlear palsy causes vertical diplopia when walking down stairs. Patients tilt the head toward the opposite shoulder to eliminate extorsion, known as Bielschowsky sign.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn3-4-6-eye.webp",
+    "alt": "Clinical examination of cranial nerves III, IV, and VI assessing extraocular gaze and ocular alignment",
+    "caption": "Diagnostic clinical evaluation of extraocular motility and cranial nerve ocular alignment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The oculomotor nerve (cranial nerve III) supplies five of the seven orbital muscles. Entering the orbit through the central sector of the superior orbital fissure within the common tendinous ring, it divides into a superior and an inferior division. The **superior division** supplies superior rectus and levator palpebrae superioris, while the larger inferior division supplies medial rectus, inferior rectus, and inferior oblique.",
+   "say": "The oculomotor nerve enters through the tendinous ring, dividing into two branches. The superior branch feeds superior rectus and levator, while the inferior branch feeds three muscles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oculomotor Branch",
+     "Muscles Innervated",
+     "Functional Motor Action"
+    ],
+    "rows": [
+     [
+      "Superior division",
+      "Levator palpebrae superioris",
+      "Elevates the upper eyelid"
+     ],
+     [
+      "Superior division",
+      "Superior rectus muscle",
+      "Elevates, adducts, and intorts the eyeball"
+     ],
+     [
+      "Inferior division",
+      "Medial rectus muscle",
+      "Adducts the eyeball toward the midline"
+     ],
+     [
+      "Inferior division",
+      "Inferior rectus muscle",
+      "Depresses, adducts, and extorts the eyeball"
+     ],
+     [
+      "Inferior division",
+      "Inferior oblique muscle",
+      "Extorts, elevates, and abducts the eyeball (also gives motor root to ciliary ganglion)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Situated in the posterior orbit between the optic nerve and the lateral rectus muscle is the ciliary ganglion. This minute parasympathetic relay station receives three roots: a motor parasympathetic root from the inferior division of CN III, a sensory root from the **nasociliary nerve** (V1), and a sympathetic root from the internal carotid plexus.",
+   "say": "Resting between the optic nerve and lateral rectus, the ciliary ganglion receives parasympathetic, sympathetic, and sensory roots. Only preganglionic parasympathetic fibres synapse here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Motor Root (Preganglionic parasympathetic from Edinger-Westphal via CN III; SYNAPSES in ganglion)"
+     },
+     {
+      "id": "r2",
+      "label": "Sensory Root (Afferent sensory fibres from nasociliary nerve V1; PASSES THROUGH without synapse)"
+     },
+     {
+      "id": "r3",
+      "label": "Sympathetic Root (Postganglionic vasomotor fibres from carotid plexus; PASSES THROUGH without synapse)"
+     },
+     {
+      "id": "r4",
+      "label": "Short Ciliary Nerves (8-10 branches pierce sclera to supply sphincter pupillae, ciliaris, and cornea)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r4"
+     ],
+     [
+      "r2",
+      "r4"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postganglionic parasympathetic axons leaving the ciliary ganglion traverse eight to ten short ciliary nerves to pierce the sclera around the optic nerve. These fibres innervate the **sphincter pupillae** to constrict the pupil (miosis) and the ciliaris muscle to relax zonular tension, allowing the lens to round up during accommodation for near vision.",
+   "say": "Postganglionic parasympathetics exit via short ciliary nerves to innervate sphincter pupillae and ciliaris. They mediate pupillary constriction and lens accommodation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parasympathetic Pathway (Constriction)",
+     "points": [
+      "Edinger-Westphal nucleus in midbrain",
+      "Travels in peripheral mantle of CN III",
+      "Synapses in ciliary ganglion",
+      "Innervates sphincter pupillae (miosis) and ciliaris"
+     ]
+    },
+    "right": {
+     "title": "Sympathetic Pathway (Dilatation)",
+     "points": [
+      "Hypothalamus -> C8-T2 ciliospinal centre of Budge",
+      "Ascends sympathetic chain to superior cervical ganglion",
+      "Postganglionic fibres travel along internal carotid",
+      "Innervates dilator pupillae (mydriasis) and superior tarsal muscle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interruption of the oculosympathetic pathway anywhere along its three-neuron chain precipitates Horner syndrome. Characterized by the classic triad of partial ptosis (paralysis of superior tarsal muscle), miosis (uninhibited sphincter pupillae), and ipsilateral facial anhidrosis, **Horner syndrome** frequently indicates an apical lung Pancoast tumor compressing the lower cervical and upper thoracic sympathetic chain.",
+   "say": "Interruption of the oculosympathetic chain causes Horner syndrome: partial ptosis, miosis, and facial anhidrosis. An apical lung Pancoast tumour invading the chain is a common cause.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-visual-lesions.svg",
+    "alt": "Anatomical schematic mapping autonomic pupillary defects, Horner syndrome, and visual pathway pathways",
+    "caption": "Diagnostic mapping of sympathetic pathways, Horner syndrome, and ocular parasympathetic pupillary reflexes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}
