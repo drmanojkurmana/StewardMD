@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "psy-schizophrenia-schizophrenia",
+ "subject": "psychiatry",
+ "module": "psy-schizophrenia",
+ "title": "Schizophrenia Phenotypes and Symptom Clusters",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Schizophrenia** is a severe, chronic psychiatric disorder characterized by profound disturbances in thought content, perception, emotional regulation, and social functioning. Epidemiological surveys demonstrate a worldwide lifetime prevalence of approximately one percent, with onset characteristically peaking during late adolescence and early adulthood.",
+   "say": "Schizophrenia affects approximately one percent of people worldwide. It causes profound disruptions in thought, perception, and emotional expression, starting in young adults.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/schizophrenia-fig1.webp",
+    "alt": "Schizophrenia clinical pathway, diagnosis, and symptom clusters.",
+    "caption": "Schizophrenia clinical pathway illustrating diagnosis, positive versus negative symptoms, and therapy.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Positive symptoms** represent an excess or distortion of normal psychological functioning, encompassing auditory hallucinations, bizarre or persecutory delusions, disorganized formal thought disorder, and grossly abnormal psychomotor behavior. These manifestations are driven by hyperactive dopaminergic neurotransmission within the subcortical mesolimbic pathway and respond well to dopamine-blocking antipsychotics.",
+   "say": "Positive symptoms represent an excess of mental functions, including hallucinations, delusions, and bizarre speech. They respond well to dopamine-blocking antipsychotics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Symptom Cluster",
+     "points": [
+      "Auditory and somatic hallucinations",
+      "Persecutory and grandiose delusions",
+      "Disorganized speech and thought derailment",
+      "Mesolimbic dopamine pathway hyperactivity"
+     ]
+    },
+    "right": {
+     "title": "Negative Symptom Cluster",
+     "points": [
+      "Affective flattening and emotional blunting",
+      "Avolition and loss of goal-directed drive",
+      "Alogia and severe poverty of speech",
+      "Mesocortical dopamine pathway hypoactivity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Negative symptoms** reflect a deficit or loss of normal cognitive and emotional capabilities, clinically recognized as the five As: affective blunting, alogia, avolition, anhedonia, and asociality. These chronic debilitating features correlate with prefrontal hypodopaminergia, drive profound occupational disability, and exhibit limited responsiveness to first-generation antipsychotics.",
+   "say": "Negative symptoms reflect deficits in motivation, speech, and emotional display. Driven by prefrontal dopamine deficits, they cause severe long-term functional disability.",
+   "vis": {
+    "kind": "table",
+    "title": "Negative Symptom Five As",
+    "cols": [
+     "Symptom Domain",
+     "Clinical Manifestation",
+     "Functional Consequence"
+    ],
+    "rows": [
+     [
+      "Affective blunting",
+      "Restricted facial expression and vocal monotone",
+      "Impaired interpersonal resonance"
+     ],
+     [
+      "Alogia",
+      "Severe poverty of speech and content",
+      "Restricted verbal communicative ability"
+     ],
+     [
+      "Avolition",
+      "Inability to initiate goal-directed activities",
+      "Neglect of personal hygiene and work"
+     ],
+     [
+      "Anhedonia",
+      "Inability to experience pleasure from activities",
+      "Loss of hobbies and social enjoyment"
+     ],
+     [
+      "Asociality",
+      "Lack of interest in interpersonal relationships",
+      "Severe social isolation and withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dopamine hypothesis of schizophrenia** posits that positive psychotic symptoms result from excessive dopamine D2 receptor stimulation within the subcortical mesolimbic tract, whereas negative symptoms and cognitive deficits stem from primary dopamine hypofunction within the mesocortical tract terminating in the dorsolateral prefrontal cortex.",
+   "say": "The dopamine hypothesis links positive symptoms to mesolimbic hyperactivation, while negative symptoms stem from prefrontal mesocortical dopamine deficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+    "alt": "Dopaminergic pathways and receptor targets in schizophrenia.",
+    "caption": "Dopaminergic neurocircuits showing mesolimbic and mesocortical tracts involved in schizophrenia.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Diagnostic duration criteria** differ subtly between international classification manuals. The DSM-5 requires continuous signs of disturbance lasting at least six months, including at least one month of active-phase symptoms. In contrast, the ICD-11 requires at least one month of prominent active symptoms for definitive diagnosis.",
+   "say": "DSM-5 requires continuous illness signs for at least six months, with one active month. ICD-11 diagnoses schizophrenia after one month of prominent active symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DSM-5 Diagnostic Standard",
+     "points": [
+      "Requires 6 months overall continuous signs",
+      "At least 1 month active-phase symptoms",
+      "Must include delusions, hallucinations, or speech",
+      "Prominent social and occupational dysfunction"
+     ]
+    },
+    "right": {
+     "title": "ICD-11 Diagnostic Standard",
+     "points": [
+      "Requires 1 month active symptom duration",
+      "Streamlined cross-cultural applicability",
+      "Eliminated classic operationalized subtypes",
+      "Focuses on dimensional symptom rating"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Schizoaffective disorder** presents with concurrent psychotic symptoms alongside a prominent major mood episode of depression or mania. Crucially, diagnostic validation requires that delusions or hallucinations must persist for at least two consecutive weeks in the complete absence of significant mood symptoms during the lifetime course.",
+   "say": "Schizoaffective disorder combines psychosis with mood episodes. Psychotic delusions or voices must persist for at least two weeks without any mood disturbance.",
+   "vis": {
+    "kind": "flow",
+    "title": "Schizoaffective Diagnostic Distinction",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Patient displays simultaneous major mood episode and psychosis"
+     },
+     {
+      "id": "n2",
+      "label": "Mood episode resolves completely under therapy"
+     },
+     {
+      "id": "n3",
+      "label": "Delusions or auditory hallucinations persist for at least two weeks"
+     },
+     {
+      "id": "n4",
+      "label": "Establishes schizoaffective disorder rather than psychotic mood disorder"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cognitive impairment** affects up to eighty percent of patients with schizophrenia, spanning working memory, executive function, processing speed, and sustained vigilance. Unlike neurodegenerative dementias, cognitive deficits in schizophrenia emerge early during the prodromal phase, remain relatively stable, and dictate long-term vocational outcome.",
+   "say": "Cognitive deficits involving working memory and processing speed appear early in schizophrenia. They predict long-term employment and independent living success.",
+   "vis": {
+    "kind": "table",
+    "title": "Cognitive Deficit Profiles",
+    "cols": [
+     "Cognitive Domain",
+     "Assessment Measure",
+     "Clinical Impact"
+    ],
+    "rows": [
+     [
+      "Working memory",
+      "N-back test, digit span backward",
+      "Inability to hold and manipulate facts"
+     ],
+     [
+      "Executive function",
+      "Wisconsin Card Sorting Test",
+      "Impaired cognitive flexibility and planning"
+     ],
+     [
+      "Processing speed",
+      "Digit symbol substitution test",
+      "Slowed performance of daily routines"
+     ],
+     [
+      "Sustained attention",
+      "Continuous performance test",
+      "Distractibility during workplace tasks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ventricular enlargement** represents the most robust and replicated structural neuroimaging finding in schizophrenia, visible on magnetic resonance imaging as symmetric lateral and third ventricle dilatation accompanied by diffuse cortical gray matter volume reduction, particularly within the superior temporal gyrus and hippocampus.",
+   "say": "Brain imaging reliably reveals enlarged lateral and third ventricles with reduced cortical gray matter. Medial temporal and superior temporal volumes are reduced.",
+   "vis": {
+    "kind": "flow",
+    "title": "Neurodevelopmental Structural Changes",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Genetic risk combined with early neurodevelopmental insults"
+     },
+     {
+      "id": "n2",
+      "label": "Aberrant excessive synaptic pruning during adolescence"
+     },
+     {
+      "id": "n3",
+      "label": "Cortical gray matter volume loss in prefrontal and temporal lobes"
+     },
+     {
+      "id": "n4",
+      "label": "Compensatory passive enlargement of lateral cerebral ventricles"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

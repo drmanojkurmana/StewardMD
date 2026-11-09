@@ -1,0 +1,258 @@
+{
+ "v": 1,
+ "id": "psy-psychology-theories-freud-psychoanalysis",
+ "subject": "psychiatry",
+ "module": "psy-psychology-theories",
+ "title": "Psychoanalytic Theory and Structural Model",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Sigmund Freud psychoanalysis** established the foundational psychological doctrine that human behavior, personality, and psychopathology are driven primarily by unconscious mental conflicts and repressed instinctual drives. Psychoanalytic technique utilizes free association, dream analysis, and examination of transference to bring unconscious material into conscious awareness.",
+   "say": "Freud's psychoanalytic model posits that behavior is shaped by unconscious desires and childhood conflicts. Bringing repressed material to light relieves symptoms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/substance-use-disorder-fig1.webp",
+    "alt": "Mesolimbic dopaminergic reward pathway and primitive drive neurobiology.",
+    "caption": "Mesolimbic reward circuitry reflecting instinctual neurobiological drives and reinforcement.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Structural model of personality** conceptualizes the human psyche as divided into three interacting dynamic agencies: the id, the ego, and the superego. Personality functioning and mental health depend upon the ego's ongoing success in mediating the conflicting demands between instinctual id impulses, moral superego prohibitions, and realistic environmental constraints.",
+   "say": "Freud divided the mind into id, ego, and superego. Healthy mental functioning requires the ego to balance primitive urges against moral standards and reality.",
+   "vis": {
+    "kind": "table",
+    "title": "Freudian Structural Agencies",
+    "cols": [
+     "Agency",
+     "Operating Principle",
+     "Consciousness Level",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Id",
+      "Pleasure principle",
+      "Completely unconscious",
+      "Immediate gratification of sexual and aggressive drives"
+     ],
+     [
+      "Ego",
+      "Reality principle",
+      "Conscious and unconscious",
+      "Mediates drives against external reality, uses defenses"
+     ],
+     [
+      "Superego",
+      "Morality and perfection",
+      "Largely unconscious",
+      "Internalized societal ethics, conscience, guilt generation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Id operates on the pleasure principle** seeking immediate, uninhibited discharge of instinctual tension and gratification of biological drives, containing both sexual libido known as Eros and aggressive destructive impulses known as Thanatos. It functions entirely through primary process thinking, which is illogical, timeless, and incapable of delayed gratification.",
+   "say": "The id operates on the pleasure principle, demanding immediate relief of instinctual tension. It employs primitive, primary-process thinking without regard for reality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Process Thinking (Id)",
+     "points": [
+      "Operates on immediate pleasure principle",
+      "Illogical, timeless, and symbolic",
+      "Cannot tolerate delays or frustrations",
+      "Seen in dreams, early infancy, psychosis"
+     ]
+    },
+    "right": {
+     "title": "Secondary Process Thinking (Ego)",
+     "points": [
+      "Operates on realistic adaptation",
+      "Logical, sequential, and oriented in time",
+      "Tolerates frustration and delays action",
+      "Dominates normal waking adult cognition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ego operates on the reality principle** developing secondary process thinking that evaluates environmental possibilities, delays instinctual discharge, and devises realistic strategies to satisfy drives safely. Operating across conscious, preconscious, and unconscious realms, the ego deploys unconscious defense mechanisms to shield against overwhelming anxiety.",
+   "say": "The ego operates on the reality principle, postponing gratification until safe opportunities arise. It employs defense mechanisms to protect consciousness from anxiety.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ego Mediation Function",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Primitive instinctual drive emerges from unconscious id"
+     },
+     {
+      "id": "n2",
+      "label": "Ego evaluates external environmental safety and moral rules"
+     },
+     {
+      "id": "n3",
+      "label": "Realistic delayed action plan formulated via secondary process"
+     },
+     {
+      "id": "n4",
+      "label": "Unconscious defense mechanisms deployed if anxiety surges"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Superego represents the moral conscience** formed through the internalization of parental and societal values, rules, and prohibitions during early childhood socialization. Comprising both the conscience, which punishes transgressions with guilt, and the ego ideal, which rewards adherence to moral aspirations with pride, it opposes id impulses directly.",
+   "say": "The superego acts as the internal moral compass, incorporating parental and societal ethics. It generates feelings of guilt when ethical boundaries are breached.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conscience (Superego Component)",
+     "points": [
+      "Punishes perceived moral transgressions",
+      "Generates unconscious and conscious guilt",
+      "Arises from parental rules and prohibitions",
+      "Overactive in severe clinical depression"
+     ]
+    },
+    "right": {
+     "title": "Ego Ideal (Superego Component)",
+     "points": [
+      "Aspires toward idealized perfection",
+      "Rewards ethical achievements with pride",
+      "Arises from admired models and values",
+      "Provides standards for self-esteem"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Psychosexual stages of development** outline Freud's chronological sequence wherein instinctual libidinal energy concentrates upon distinct erogenous zones: oral stage in infancy, anal stage in toddlerhood, phallic stage in preschool years, latency period in middle childhood, and genital stage during adolescence and adulthood.",
+   "say": "Freud proposed that libidinal energy focuses on different body zones as children mature. Fixation at any stage shapes adult character traits and neuroses.",
+   "vis": {
+    "kind": "table",
+    "title": "Freudian Psychosexual Stages",
+    "cols": [
+     "Stage",
+     "Age Period",
+     "Erogenous Focus",
+     "Adult Fixation Traits"
+    ],
+    "rows": [
+     [
+      "Oral",
+      "0 to 18 months",
+      "Mouth, sucking, biting",
+      "Excessive smoking, overeating, dependency"
+     ],
+     [
+      "Anal",
+      "18 months to 3 years",
+      "Bowel and bladder control",
+      "Obstinacy, stinginess, neatness or messiness"
+     ],
+     [
+      "Phallic",
+      "3 to 6 years",
+      "Genitals, Oedipal crisis",
+      "Vanity, recklessness, relationship conflicts"
+     ],
+     [
+      "Latency",
+      "6 years to puberty",
+      "Dormant libido, peer play",
+      "Sublimation into learning and athletics"
+     ],
+     [
+      "Genital",
+      "Puberty onward",
+      "Mature heterosexual love",
+      "Healthy capacity to love and to work"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oedipus complex** occurs during the phallic stage of psychosexual development, wherein the young male child experiences unconscious erotic attraction toward his mother and rivalry toward his father. Resolving the crisis through fear of castration leads the boy to abandon incestuous rivalry and identify with the father, establishing the superego.",
+   "say": "The Oedipus complex features unconscious rivalry with the same-sex parent. Resolving this crisis through identification cements the child's moral superego.",
+   "vis": {
+    "kind": "flow",
+    "title": "Oedipal Resolution Sequence",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Phallic stage libido directs toward opposite-sex parent"
+     },
+     {
+      "id": "n2",
+      "label": "Rivalry and hostility develop toward same-sex parent"
+     },
+     {
+      "id": "n3",
+      "label": "Fear of paternal retribution produces castration anxiety"
+     },
+     {
+      "id": "n4",
+      "label": "Renunciation of rivalry leads to healthy paternal identification"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Unconscious defence mechanisms** represent automatic psychological operations mobilized by the ego to protect consciousness against intrapsychic conflict and signal anxiety arising from forbidden id drives or harsh superego demands. Defenses distort internal or external reality unconsciously, ranging from primitive denial to mature sublimation.",
+   "say": "Defense mechanisms are automatic ego strategies that prevent anxiety from reaching consciousness. They ward off forbidden instinctual desires and excessive moral guilt.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immature Defenses",
+     "points": [
+      "Distort external and internal reality",
+      "Denial, projection, acting out",
+      "Common in personality disorders and severe stress",
+      "Impair social adaptation and relationships"
+     ]
+    },
+    "right": {
+     "title": "Mature Defenses",
+     "points": [
+      "Acknowledge reality while managing distress",
+      "Sublimation, humor, suppression, altruism",
+      "Promote constructive emotional resolution",
+      "Associated with psychological resilience"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
