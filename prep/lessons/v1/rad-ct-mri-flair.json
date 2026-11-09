@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-ct-mri-flair",
+ "subject": "radiology",
+ "module": "rad-ct-mri",
+ "title": "FLAIR, Diffusion MRI, Gadolinium and MRI Safety",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "FLAIR nulls spinal fluid",
+   "tx": "**FLAIR** means fluid attenuated inversion recovery. An inversion pulse waits until cerebrospinal fluid crosses zero magnetisation, then reads the signal, so spinal fluid appears dark while oedema and gliosis stay bright. Periventricular multiple sclerosis plaques that hide against bright fluid on plain T2 become obvious on FLAIR. The hippocampus normally looks slightly brighter than other cortex because it has three layers instead of six.",
+   "say": "FLAIR means fluid attenuated inversion recovery. An inversion pulse waits until spinal fluid crosses zero magnetisation, then reads the signal, so spinal fluid looks dark while oedema stays bright. Periventricular sclerosis plaques that hide against bright fluid on plain T2 stand out clearly. Hippocampus normally looks slightly brighter because it carries three cortical layers instead of six.",
+   "vis": {"kind": "compare", "left": {"title": "Plain T2", "points": ["Spinal fluid bright white", "Periventricular plaque hidden", "Cortex intermediate grey", "Fluid and lesion both bright"]}, "right": {"title": "FLAIR", "points": ["Spinal fluid dark", "Periventricular plaque bright", "Oedema stays bright", "Cortical lesions stand out"]}}
+  },
+  {
+   "title": "FLAIR in venous thrombosis imaging",
+   "tx": "The image pair combines **FLAIR MRI** with venography in cerebral venous sinus thrombosis. Axial FLAIR can show sulcal hyperintensity from congested veins and parenchymal oedema in a non arterial territory. Magnetic resonance venography then shows the absent flow signal inside the thrombosed sinus. Arachnoid granulations stay round and follow fluid signal, while thrombus looks linear along the sinus course.",
+   "say": "This figure pairs FLAIR imaging with venography in cerebral venous sinus thrombosis. Axial FLAIR can show sulcal brightness from congested veins and oedema outside any arterial territory. Venography then shows absent flow inside the blocked sinus. Granulations stay round and follow fluid signal, while clot looks linear along the sinus course.",
+   "vis": {"kind": "image", "src": "v1/kb/media/cerebral-venous-thrombosis-fig1.webp", "alt": "FLAIR MRI and MR venography images showing cerebral venous sinus thrombosis.", "caption": "FLAIR MRI and venography showing a thrombosed cerebral venous sinus. Image: Wolf et al., CC BY-SA 4.0, via Wikimedia Commons."}
+  },
+  {
+   "title": "Diffusion restriction in stroke",
+   "tx": "**Diffusion weighted imaging** maps how freely water molecules move between two gradient pulses. Cytotoxic oedema traps water inside swollen cells within minutes of arterial occlusion, so acute infarct appears bright on diffusion images and dark on the apparent diffusion coefficient map. That paired pattern separates a stroke under one week old from a chronic cavity, where water moves freely and the diffusion signal fades.",
+   "say": "Diffusion weighted imaging maps how freely water moves between two gradient pulses. Cytotoxic oedema traps water inside swollen cells within minutes of arterial blockage, so acute infarct looks bright on diffusion images and dark on the coefficient map. That pairing separates a stroke under one week old from a chronic cavity where water moves freely.",
+   "vis": {"kind": "table", "cols": ["Finding", "DWI", "ADC map"], "rows": [["Acute infarct", "Bright", "Dark"], ["Chronic infarct", "Faint or dark", "Bright"], ["Abscess cavity", "Bright", "Dark"], ["Simple cyst", "Dark", "Bright"]]}
+  },
+  {
+   "title": "T2 shine through trap",
+   "tx": "**T2 shine through** makes a very T2 bright lesion look bright on diffusion images even though its water moves freely. The apparent diffusion coefficient map exposes the trap because free water stays bright there instead of turning dark. Vasogenic oedema around a tumour is the common example. True restriction needs both diffusion brightness and coefficient darkness in the same voxels before an acute infarct is reported.",
+   "say": "T2 shine through makes a very T2 bright lesion look bright on diffusion images even though its water moves freely. The coefficient map exposes the trap because free water stays bright there instead of turning dark. Vasogenic oedema around a tumour is the common example, so true restriction needs diffusion brightness plus coefficient darkness together.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bright on DWI"}, {"id": "b", "label": "Check ADC map"}, {"id": "c", "label": "Dark ADC: restriction"}, {"id": "d", "label": "Bright ADC: shine through"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  },
+  {
+   "title": "Gadolinium enhancement patterns",
+   "tx": "**Gadolinium enhancement** marks tissue where the blood brain barrier leaks or where vessels are dense. Ring enhancement surrounds necrotic tumour and abscess, while solid nodular enhancement fills a meningioma together with its dural tail. Leptomeningeal enhancement coats sulci and cranial nerves in meningitis and carcinomatosis. Enhancement is judged on fat suppressed T1 images compared against the pre contrast T1, never on T2 brightness alone.",
+   "say": "Gadolinium enhancement marks tissue where the blood brain barrier leaks or vessels are dense. Ring enhancement surrounds necrotic tumour and abscess, while solid nodular enhancement fills a meningioma with its dural tail. Meningeal coating follows sulci and cranial nerves in meningitis. Enhancement is judged on fat suppressed T1 against the pre contrast scan, never on T2 brightness alone.",
+   "vis": {"kind": "table", "cols": ["Pattern", "Typical cause", "Key clue"], "rows": [["Ring", "Abscess or necrotic tumour", "Thin smooth wall favours abscess"], ["Solid nodular", "Meningioma", "Dural tail present"], ["Leptomeningeal", "Meningitis", "Coats sulci and nerves"], ["Periventricular", "Multiple sclerosis", "Open ring toward cortex"]]}
+  },
+  {
+   "title": "White matter signal on MRI",
+   "tx": "**White matter hyperintensity** on FLAIR and T2 appears in demyelination, small vessel ischaemia, migraine and adrenoleukodystrophy. The pictured scan shows confluent white matter change, which examiners pair with posterior peritrigonal predominance in adrenoleukodystrophy. Multiple sclerosis instead favours periventricular Dawson fingers pointing away from the ventricle. Distribution, symmetry and patient age separate these causes more reliably than brightness alone.",
+   "say": "White matter brightness on FLAIR and T2 appears in demyelination, small vessel ischaemia, migraine and adrenoleukodystrophy. The pictured scan shows confluent white matter change, which examiners pair with posterior predominance in adrenoleukodystrophy. Sclerosis instead favours periventricular fingers pointing away from the ventricle. Distribution, symmetry and age separate these causes more reliably than brightness alone.",
+   "vis": {"kind": "image", "src": "v1/kb/media/adrenoleukodystrophy-fig1.webp", "alt": "MRI brain showing confluent white matter lesions beside a clinical photograph in adrenoleukodystrophy.", "caption": "MRI brain white matter lesions in adrenoleukodystrophy. Illustration: StewardMD."}
+  },
+  {
+   "title": "Absolute MRI contraindications",
+   "tx": "**MRI contraindications** centre on ferromagnetic implants and devices that the static field can move, heat or reset. Older aneurysm clips of unknown metal, intraocular metallic foreign bodies and non conditional pacemakers bar the scan until their model is proven safe. Modern pacemakers and clips carry conditional ratings that allow scanning under set field strengths and slew rates, so the device card decides, not the device name.",
+   "say": "MRI contraindications centre on ferromagnetic implants the static field can move, heat or reset. Older aneurysm clips of unknown metal, metal inside the eye and non conditional pacemakers bar the scan until the model is proven safe. Modern devices carry conditional ratings allowing scans under set conditions, so the device card decides rather than the name.",
+   "vis": {"kind": "compare", "left": {"title": "Bar until cleared", "points": ["Unknown aneurysm clip metal", "Intraocular metal fragment", "Non conditional pacemaker", "Swan Ganz catheter with wires"]}, "right": {"title": "Usually conditional", "points": ["Modern conditional pacemaker", "Titanium orthopaedic hardware", "Coronary stents after interval", "Dental fillings and braces"]}}
+  },
+  {
+   "title": "Gadolinium and kidney risk",
+   "tx": "**Nephrogenic systemic fibrosis** was linked to older linear gadolinium agents in patients whose glomerular filtration rate fell below 30. Macrocyclic agents carry far lower risk and dominate current practice, but the kidney function and agent group are still recorded before injection. Gadolinium is avoided in pregnancy unless the result changes urgent management, because the agent crosses the placenta and recirculates through the fetal kidneys into amniotic fluid.",
+   "say": "Nephrogenic systemic fibrosis was linked to older linear gadolinium agents when filtration fell below thirty. Macrocyclic agents carry far lower risk and dominate current practice, yet kidney function and agent group are still recorded before injection. Gadolinium is avoided in pregnancy unless the result changes urgent care, because it crosses the placenta and recirculates through fetal kidneys.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check kidney function"}, {"id": "b", "label": "Pick macrocyclic agent"}, {"id": "c", "label": "Record dose and group"}, {"id": "d", "label": "Scan and observe"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}
