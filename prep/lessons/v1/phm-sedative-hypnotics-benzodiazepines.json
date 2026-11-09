@@ -1,0 +1,267 @@
+{
+  "v": 1,
+  "module": "phm-sedative-hypnotics",
+  "subject": "pharmacology",
+  "title": "Benzodiazepines, Flumazenil and the Z Drugs",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Benzodiazepines** bind a dedicated pocket on the GABA A receptor chloride channel, distinct from GABA itself, and increase the frequency of channel opening when GABA is present, deepening inhibition across cortex, limbic system and spinal cord. Because they need GABA to work and the channel has a conductance ceiling, benzodiazepines alone rarely stop breathing in healthy adults, the safety margin that retired the barbiturates. Alcohol, opioids and other sedatives erase that margin synergistically.",
+      "say": "Benzodiazepines turn up GABA's volume without playing the instrument themselves; that is their safety margin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bzd",
+            "label": "Benzodiazepine binds its GABA A receptor pocket"
+          },
+          {
+            "id": "freq",
+            "label": "Channel opening frequency rises where GABA acts"
+          },
+          {
+            "id": "cl",
+            "label": "Chloride influx deepens neuronal inhibition"
+          },
+          {
+            "id": "ceiling",
+            "label": "Ceiling effect: GABA presence limits maximal depression"
+          }
+        ],
+        "edges": [
+          [
+            "bzd",
+            "freq"
+          ],
+          [
+            "freq",
+            "cl"
+          ],
+          [
+            "cl",
+            "ceiling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Individual agents are chosen by half life and metabolism: **diazepam**, long acting with active metabolites, suits alcohol withdrawal tapers and status epilepticus; **lorazepam**, conjugated directly without active metabolites, is the reliable choice in liver disease and the elderly and the preferred intravenous agent for prolonged seizures; **midazolam**, ultra short and water soluble, owns procedural sedation and infusions. The conjugation shortcut (lorazepam, oxazepam, temazepam) is the famous LOT trio spared by failing livers.",
+      "say": "Diazepam lasts, lorazepam is liver safe, midazolam is brief; the LOT drugs bypass oxidation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Long and intermediate agents",
+          "points": [
+            "Diazepam: active metabolites, withdrawal tapers, seizures",
+            "Chlordiazepoxide: alcohol withdrawal tradition",
+            "Clonazepam: long acting anticonvulsant and panic use",
+            "Accumulation in elderly and liver disease"
+          ]
+        },
+        "right": {
+          "title": "Liver friendly and short agents",
+          "points": [
+            "Lorazepam, oxazepam, temazepam: direct conjugation (LOT)",
+            "Midazolam: ultra short, procedural and infusion use",
+            "Lorazepam preferred in status epilepticus infusions",
+            "All need dose restraint in respiratory disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In **status epilepticus** a benzodiazepine is the first drug and minutes decide outcome: intravenous lorazepam 4 mg or diazepam 10 mg, buccal or intramuscular midazolam where no vein exists, repeated once before second line levetiracetam, lacosamide or phenytoin loading. Underdosing from fear is the commonest error; the seizure injures brain faster than the sedative injures breathing when airways are attended. Escalation beyond two doses belongs to critical care with anaesthetic infusions.",
+      "say": "Seizures first, sedative fear second: full dose benzodiazepine early, airway attended, second line loaded next.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "seize",
+            "label": "Generalised seizure beyond 5 minutes: status epilepticus"
+          },
+          {
+            "id": "bzd",
+            "label": "Lorazepam 4 mg IV or midazolam buccal or IM"
+          },
+          {
+            "id": "repeat",
+            "label": "Repeat benzodiazepine once at 5 to 10 minutes"
+          },
+          {
+            "id": "second",
+            "label": "Second line loading, then critical care if refractory"
+          }
+        ],
+        "edges": [
+          [
+            "seize",
+            "bzd"
+          ],
+          [
+            "bzd",
+            "repeat"
+          ],
+          [
+            "repeat",
+            "second"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Chronic use** extracts its price list: tolerance to sedation and anticonvulsion within weeks, physical dependence with withdrawal seizures after months, anterograde amnesia, falls and hip fractures in the elderly, and paradoxical disinhibition in children and dementia. Prescribing discipline therefore means short courses, taper plans, and avoiding the class in sleep apnoea, myasthenia gravis and acute intoxication. Withdrawal tapers convert short acting agents to diazepam equivalents and descend over weeks to months.",
+      "say": "Weeks bring tolerance, months bring dependence; prescribe with the exit taper already written.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Costs of chronic use",
+          "points": [
+            "Tolerance to sedation within weeks",
+            "Dependence with withdrawal seizure risk",
+            "Falls, fractures and cognitive dulling in the elderly",
+            "Paradoxical agitation in children and dementia"
+          ]
+        },
+        "right": {
+          "title": "Disciplined use",
+          "points": [
+            "Lowest dose, shortest course, review date set",
+            "Taper via diazepam equivalents over weeks",
+            "Avoid in sleep apnoea and acute intoxication",
+            "Non drug insomnia and anxiety therapy first line chronically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Flumazenil** competitively antagonises the benzodiazepine pocket, reversing sedation within minutes, and is stocked for iatrogenic oversedation after procedures. Its half life of about an hour is shorter than most agonists it reverses, so resedation stalks the recovery ward. In chronic benzodiazepine dependence or mixed tricyclic overdose it can precipitate withdrawal seizures and unmask arrhythmias, which confines it to selected, monitored, usually anaesthetist led indications rather than undifferentiated coma cocktails.",
+      "say": "Flumazenil reverses for an hour while the sedative lasts all night; dependence turns the antidote into a seizure trigger.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "over",
+            "label": "Iatrogenic benzodiazepine oversedation"
+          },
+          {
+            "id": "flu",
+            "label": "Flumazenil titrated in 0.2 mg increments"
+          },
+          {
+            "id": "wake",
+            "label": "Sedation reverses within minutes"
+          },
+          {
+            "id": "resed",
+            "label": "Observe for resedation as flumazenil wanes"
+          }
+        ],
+        "edges": [
+          [
+            "over",
+            "flu"
+          ],
+          [
+            "flu",
+            "wake"
+          ],
+          [
+            "wake",
+            "resed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **zolpidem** family, the Z drugs, bind the same GABA A complex at alpha 1 predominant sites, aiming hypnotic selectivity at hypnotic doses with less anxiolytic, anticonvulsant and muscle relaxant spill. Zolpidem and zaleplon (ultra short, for sleep onset) and their cousin eszopiclone next lesson remain dependence forming controlled drugs, not the harmless alternatives marketing promised. Complex sleep behaviours, cooking, driving and eating asleep, forced dose cuts and boxed warnings, particularly in women clearing zolpidem slowly.",
+      "say": "Z drugs aim at the sleep subunit only; dependence and sleep driving followed them anyway.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Zolpidem and zaleplon",
+          "points": [
+            "Alpha 1 selective GABA A modulation",
+            "Zaleplon ultra short: sleep onset only",
+            "Zolpidem lower starting dose in women",
+            "Complex sleep behaviours carry boxed warnings"
+          ]
+        },
+        "right": {
+          "title": "Shared sedative cautions",
+          "points": [
+            "Dependence and rebound insomnia on stopping",
+            "Additive respiratory depression with opioids and alcohol",
+            "Falls and next morning impairment in the elderly",
+            "Short courses with review, as for benzodiazepines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Paradoxical reactions** deserve a named step because examinations and wards both meet them: instead of calm, a minority (children, elderly, dementia, brain injury, high dose intravenous use) become agitated, aggressive and disinhibited as cortical brakes release. Management stops the drug rather than escalating it, protects the airway, and chooses antipsychotic or dexmedetomidine strategies where sedation remains essential. Documenting the reaction prevents every future team repeating the experiment.",
+      "say": "Agitation after a sedative can be the sedative; stop it rather than stacking more.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Benzodiazepine given for sedation or agitation"
+          },
+          {
+            "id": "paradox",
+            "label": "Worsening agitation and disinhibition instead of calm"
+          },
+          {
+            "id": "stop",
+            "label": "Stop the benzodiazepine, protect airway and safety"
+          },
+          {
+            "id": "alt",
+            "label": "Alternative strategy and permanent documentation"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "paradox"
+          ],
+          [
+            "paradox",
+            "stop"
+          ],
+          [
+            "stop",
+            "alt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sorting the sedative shelf** by mechanism prepares the barbiturate contrast next lesson: benzodiazepines raise opening frequency and need GABA, barbiturates prolong opening duration and open channels directly at high dose (hence lethal respiratory depression), Z drugs select alpha 1 subunits, and newer agents leave GABA entirely (melatonin agonists, orexin antagonists). Mechanism, not brand familiarity, predicts which overdose has an antidote, a ceiling or neither.",
+      "say": "Frequency, duration, subunit or new target: the mechanism predicts the overdose story every time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GABA A modulators",
+          "points": [
+            "Benzodiazepines: frequency up, GABA required, ceiling",
+            "Barbiturates: duration up, direct opening, no ceiling",
+            "Z drugs: alpha 1 subunit selectivity",
+            "Flumazenil antagonises only the benzodiazepine pocket"
+          ]
+        },
+        "right": {
+          "title": "Beyond GABA (next lessons)",
+          "points": [
+            "Ramelteon: melatonin MT1 MT2 agonism",
+            "Suvorexant: orexin receptor antagonism",
+            "Buspirone: serotonin 1A partial agonism for anxiety",
+            "Each trades sedative power for safety in its niche"
+          ]
+        }
+      }
+    }
+  ]
+}
