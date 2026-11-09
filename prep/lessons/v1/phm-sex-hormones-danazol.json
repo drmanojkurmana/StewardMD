@@ -1,0 +1,210 @@
+{
+  "v": 1,
+  "module": "phm-sex-hormones",
+  "subject": "pharmacology",
+  "title": "Danazol, Oestrogens and SERMs: Estradiol, Tamoxifen, Raloxifene, Clomiphene and Letrozole",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Danazol**, a synthetic ethisterone derivative with weak androgenic and antigonadotrophic actions, suppresses the mid cycle LH surge and creates a hypo oestrogenic, hyperandrogenic endometrial environment, historically serving endometriosis, hereditary angioedema (hepatic C1 inhibitor synthesis raised) and immune thrombocytopenia niches. Androgenic tolls (acne, hirsutism, voice deepening that may not reverse, lipid and hepatic effects) demoted it behind GnRH analogues and modern agents wherever alternatives exist.",
+      "say": "Danazol treats endometriosis and angioedema in an androgenic accent patients often refuse to keep.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Danazol territory",
+          "points": [
+            "Endometriosis historically, before GnRH analogues",
+            "Hereditary angioedema prophylaxis via C1 inhibitor",
+            "Immune thrombocytopenia legacy niche",
+            "Fibrocystic breast disease historically"
+          ]
+        },
+        "right": {
+          "title": "Danazol tolls",
+          "points": [
+            "Acne, hirsutism and irreversible voice changes",
+            "HDL suppression and hepatic strain",
+            "Teratogenic: virilised female fetus, contraception mandatory",
+            "Oedema and muscle cramps"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Estradiol** is the principal human oestrogen, delivered orally (first pass hepatic clotting factor and binding globulin effects), transdermally (circumventing them, kinder venous thromboembolism profile), vaginally (local atrophy therapy at systemic whisper doses) and by implant or gel, with route selection now a thrombosis pharmacology decision as much as a preference. Ethinylestradiol, the contraceptive oestrogen from the next lessons, resists hepatic inactivation by design and carries the strongest hepatic signature.",
+      "say": "Route is destiny for oestrogens: skin spares the liver what the stomach provokes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral oestrogen effects",
+          "points": [
+            "First pass hepatic protein synthesis changes",
+            "Clotting factors and SHBG rise",
+            "Higher venous thromboembolism risk",
+            "Triglycerides rise, gallbladder disease nudged"
+          ]
+        },
+        "right": {
+          "title": "Transdermal advantages",
+          "points": [
+            "Bypasses first pass hepatic effects",
+            "Venous thromboembolism near baseline in studies",
+            "Steadier levels, no daily peaks",
+            "Preferred with thrombosis or migraine risk factors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Selective oestrogen receptor modulators bend the receptor tissue by tissue: **tamoxifen** antagonises breast (treating and preventing oestrogen receptor positive cancer) while agonising endometrium (hyperplasia and cancer risk multiplied), bone (preserved) and coagulation (venous thrombosis). It is a prodrug whose CYP2D6 conversion to endoxifen matters, so strong 2D6 inhibitors (paroxetine, fluoxetine) are avoided beside it in favour of venlafaxine for its hot flushes, an interaction circuit examinations adore.",
+      "say": "Tamoxifen blocks breast and stimulates uterus; choose its antidepressant partner by CYP2D6 manners.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-tamoxifen.webp",
+        "alt": "Tamoxifen selective oestrogen receptor modulation illustration in breast and endometrium",
+        "caption": "Tamoxifen's split personality: antagonist in breast, agonist in endometrium and bone. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Raloxifene** re tuned the SERM dial: antagonist in breast (prevention in postmenopausal women) and endometrium (no stimulation, its selling point over tamoxifen), agonist in bone (vertebral fracture prevention), antagonist on coagulation's mercy (venous thrombosis risk retained). It treats no cancer and prevents no hip fractures, boundaries that define it as precisely as its benefits. Hot flushes worsen, making it a poor choice for the symptomatic recently menopausal.",
+      "say": "Raloxifene keeps tamoxifen's breast and bone gifts and drops the endometrial bill; thrombosis stays.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Raloxifene profile",
+          "points": [
+            "Bone agonist: vertebral fractures reduced",
+            "Breast antagonist: invasive cancer prevention",
+            "Endometrium neutral, no stimulation",
+            "Venous thrombosis risk retained"
+          ]
+        },
+        "right": {
+          "title": "Raloxifene limits",
+          "points": [
+            "No cancer treatment role",
+            "Hip fracture prevention unproven",
+            "Hot flushes worsened",
+            "Premenopausal use unlicensed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clomiphene** (clomifene) antagonises hypothalamic oestrogen receptors, blinding the axis to oestrogen so GnRH, LH and FSH surge and ovulation follows in anovulatory infertility (polycystic ovary syndrome classically), with multiple pregnancy near 8 percent, ovarian enlargement, visual disturbance warnings and mood effects. Letrozole has overtaken it as first line for PCOS ovulation induction in trials (better live birth), moving clomiphene to second chairs and male hypogonadism off label niches.",
+      "say": "Clomiphene tricks the hypothalamus into an ovulation surge; letrozole now beats it for PCOS live births.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "clom",
+            "label": "Clomiphene blocks hypothalamic oestrogen sensing"
+          },
+          {
+            "id": "gnrh",
+            "label": "GnRH, LH and FSH rise in compensation"
+          },
+          {
+            "id": "ovul",
+            "label": "Follicular development and ovulation follow"
+          },
+          {
+            "id": "twins",
+            "label": "Multiple pregnancy risk counselled beforehand"
+          }
+        ],
+        "edges": [
+          [
+            "clom",
+            "gnrh"
+          ],
+          [
+            "gnrh",
+            "ovul"
+          ],
+          [
+            "ovul",
+            "twins"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Letrozole** and anastrozole (next lesson) inhibit aromatase, the enzyme converting androgens to oestrogens in fat, muscle and tumour, collapsing oestrogen supply in postmenopausal women (in premenopausal women the axis simply shouts louder, hence ovarian suppression partners). In breast cancer they outperform tamoxifen in postmenopausal adjuvant therapy; in ovulation induction letrozole's five early cycle days exploit a transient suppression the axis then overcorrects into follicular growth.",
+      "say": "Aromatase inhibitors starve oestrogen at its factory; useless alone before menopause because the axis shouts back.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aromatase inhibition in cancer",
+          "points": [
+            "Postmenopausal oestrogen synthesis collapsed",
+            "Adjuvant superiority over tamoxifen in trials",
+            "Bone loss and arthralgia as class tolls",
+            "Premenopausal use needs ovarian suppression"
+          ]
+        },
+        "right": {
+          "title": "Letrozole in ovulation induction",
+          "points": [
+            "Five days early in the cycle",
+            "Transient suppression, then FSH rebound",
+            "Better live birth than clomiphene in PCOS trials",
+            "Mono follicular development commoner, multiples fewer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oestrogen deficiency therapy and** its timing hypothesis complete the hormone map before contraception: systemic hormone replacement treats vasomotor symptoms best and protects bone, with cardiovascular arithmetic favourable when started under 60 or within a decade of menopause and unfavourable late, progestogen added wherever a uterus remains to prevent endometrial cancer, and breast cancer risk increments small, regimen dependent (micronised progesterone kinder than medroxyprogesterone in cohort data) and counselled in absolute numbers.",
+      "say": "HRT timing writes its risk: early for symptoms with a protected uterus, late starts discouraged.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HRT favourable window",
+          "points": [
+            "Under 60 or within 10 years of menopause",
+            "Vasomotor relief unmatched",
+            "Bone protection while taken",
+            "Transdermal route preferred with risk factors"
+          ]
+        },
+        "right": {
+          "title": "HRT obligations",
+          "points": [
+            "Progestogen with any uterus present",
+            "Breast risk counselled by regimen and duration",
+            "Stroke and VTE small absolute increments late",
+            "Annual indication review, not automatic decades"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**The anti oestrogen shelf** sorts by mechanism for the examination grid: receptor antagonists pure (fulvestrant, a degrader in cancer), SERMs tissue selective (tamoxifen, raloxifene), synthesis blockade (aromatase inhibitors), hypothalamic antagonism exploited for ovulation (clomiphene) and androgenic suppression antiques (danazol). Every agent is one cell of that grid plus its tissue accent, and vignettes supply the tissue to identify the cell.",
+      "say": "Block the receptor, select the tissue, starve the synthesis or trick the hypothalamus: four cells hold the shelf.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Receptor level agents",
+          "points": [
+            "Tamoxifen and raloxifene: SERM tissue selectivity",
+            "Fulvestrant: pure antagonist and degrader",
+            "Clomiphene: hypothalamic antagonism for ovulation",
+            "Mifepristone cross reference: progesterone and glucocorticoid"
+          ]
+        },
+        "right": {
+          "title": "Synthesis level agents",
+          "points": [
+            "Letrozole and anastrozole: aromatase blockade",
+            "Danazol: antigonadotrophic androgenic suppression",
+            "GnRH analogues from the pituitary lesson upstream",
+            "Ovarian suppression completes premenopausal strategies"
+          ]
+        }
+      }
+    }
+  ]
+}
