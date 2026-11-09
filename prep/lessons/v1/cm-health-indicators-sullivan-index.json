@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-health-indicators-sullivan-index",
+ "subject": "community-medicine",
+ "module": "cm-health-indicators",
+ "title": "Sullivan Index, Disability Rates and Natural History of Disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Sullivan index in one subtraction",
+   "tx": "The **Sullivan index** takes life expectancy and subtracts the average duration of disability, leaving expected years lived free of disability. If life expectancy is 70 years and expected disability spans 6 years, the index gives 64 disability free years. It needs only a life table plus disability prevalence, which is why surveys can compute it cheaply.",
+   "say": "One subtraction defines this index. Take life expectancy, remove the average years lived with disability, and the remainder is the disability free span. Seventy minus six gives sixty four. A life table plus disability prevalence is all the method needs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Input", "Example value", "Role"],
+    "rows": [
+     ["Life expectancy", "70 years", "Starting total"],
+     ["Expected disability duration", "6 years", "Subtracted part"],
+     ["Sullivan index", "64 years", "Years free of disability"]
+    ]
+   }
+  },
+  {
+   "title": "Event type disability indicators",
+   "tx": "**Days of restricted activity** lead the event type indicators, counting days when illness cuts usual activity within a recall period. Bed disability days narrow the count to days spent in bed, while work loss and school loss days capture economic and educational cost. Short recall periods improve accuracy, since families forget minor illness days within weeks.",
+   "say": "Event indicators count affected days. Restricted activity days come first, then bed days, then work or school days lost. Each step narrows the meaning and raises the cost signal. Short recall windows keep answers honest, because minor illness fades from memory within weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "Counts", "Main use"],
+    "rows": [
+     ["Restricted activity days", "Days usual activity is cut", "Overall illness burden"],
+     ["Bed disability days", "Days spent in bed", "Severe illness burden"],
+     ["Work or school loss days", "Days absent from work or school", "Economic and education cost"]
+    ]
+   }
+  },
+  {
+   "title": "Person type disability indicators",
+   "tx": "**Limitation of mobility** heads the person type indicators: confined to bed, confined to the house, or needing special aid to move inside or outside. Limitation of activity covers basic self care such as eating, washing, dressing and toileting, plus major activity like holding a job. Surveys classify each person once, unlike event counts that tally days.",
+   "say": "Person indicators classify people, not days. Mobility limits range from bed confinement to needing an aid outdoors. Activity limits cover washing, dressing and toileting, plus holding a job. Each person is classified once, which suits prevalence surveys.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limitation of mobility",
+     "points": ["Confined to bed", "Confined to the house", "Needs aid to get around"]
+    },
+    "right": {
+     "title": "Limitation of activity",
+     "points": ["Cannot eat, wash or dress alone", "Cannot perform major work activity", "Needs help with toileting"]
+    }
+   }
+  },
+  {
+   "title": "What a good indicator must satisfy",
+   "tx": "An ideal **health indicator** should be valid, reliable, sensitive, specific, feasible and relevant. Validity means it measures what it claims; reliability means different observers agree. Sensitivity catches real change, while specificity avoids change from unrelated causes. Feasibility keeps data collection affordable, and relevance ties the number to a decision a manager must actually take.",
+   "say": "Six tests judge any indicator. It must measure the right thing, agree across observers, react to real change, ignore unrelated change, stay affordable to collect, and inform a real decision. Few indicators pass all six, so profiles use several together.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Criterion", "Test it passes"],
+    "rows": [
+     ["Valid", "Measures what it claims to measure"],
+     ["Reliable", "Different observers get the same answer"],
+     ["Sensitive and specific", "Moves with real change only"],
+     ["Feasible and relevant", "Affordable and tied to a decision"]
+    ]
+   }
+  },
+  {
+   "title": "Health status indicators beyond deaths",
+   "tx": "**Nutritional status indicators** add positive health evidence through preschool anthropometry, heights at school entry and the prevalence of low birth weight below 2.5 kg. Health care delivery indicators track facilities and staff per population, while utilisation rates show beds and visits actually used. Environmental and socio-economic indicators complete the profile that mortality alone cannot give.",
+   "say": "Deaths tell only half the story. Child growth, school entry heights and low birth weight add positive evidence. Facility ratios show supply, visit and bed rates show use, and water, housing and income indicators complete the community profile.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator group", "Typical measure"],
+    "rows": [
+     ["Nutritional status", "Low birth weight prevalence"],
+     ["Health care delivery", "Population per facility or doctor"],
+     ["Utilisation", "Bed occupancy and visit rates"],
+     ["Environmental", "Safe water and sanitation coverage"]
+    ]
+   }
+  },
+  {
+   "title": "Natural history: the prepathogenesis phase",
+   "tx": "The **prepathogenesis phase** runs before disease begins in the person, while agent, host and environment interact in the surroundings. A susceptible host, a present agent and a favourable environment are each necessary, yet disease starts only when the three interact. People often call this being in the midst of disease: exposed to risk, but not yet ill.",
+   "say": "Before illness starts, three players circle each other. Agent, host and environment must all be present, and disease begins only when they interact. Clinicians call this standing in the midst of disease: exposed to risk, not yet ill.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Agent present in environment"},
+     {"id": "b", "label": "Susceptible host exposed"},
+     {"id": "c", "label": "Favourable environment"},
+     {"id": "d", "label": "Interaction starts disease"}
+    ],
+    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Natural history: the pathogenesis phase",
+   "tx": "The **pathogenesis phase** begins when the agent enters the susceptible host, then moves through multiplication, tissue change, incubation and early then late disease. Outcomes end at recovery, disability or death. In chronic disease the early part stays presymptomatic below the clinical horizon, so screening hunts in exactly that silent window before signs appear.",
+   "say": "Entry of the agent opens the second phase. Multiplication and tissue change follow, then incubation, early disease and late disease. Recovery, disability or death ends the course. Chronic disease hides early below the clinical horizon, and screening hunts in that silent window.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Agent enters host"},
+     {"id": "b", "label": "Multiplication and tissue change"},
+     {"id": "c", "label": "Incubation period"},
+     {"id": "d", "label": "Early then late disease"},
+     {"id": "e", "label": "Recovery, disability or death"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Clinical horizon and the physician's episode",
+   "tx": "The **clinical horizon** marks where signs and symptoms first become recognisable, often well after pathological change began. A hospital doctor usually sees one episode after that line, while field study of natural history reveals the silent years before it. Cohort studies establish this timeline best, though cost and labour push most knowledge toward cross-sectional and retrospective designs.",
+   "say": "One line matters here. Signs appear at the clinical horizon, often long after tissue change began. Hospital practice sees a single episode beyond that line. Cohort studies map the silent years best, but their cost pushes knowledge toward cheaper designs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before the horizon",
+     "points": ["Tissue change without symptoms", "Screening can still detect disease", "Presymptomatic phase of chronic illness"]
+    },
+    "right": {
+     "title": "After the horizon",
+     "points": ["Signs and symptoms recognisable", "Patients seek care and get counted", "Late pathogenesis and outcomes"]
+    }
+   }
+  },
+  {
+   "title": "Why natural history directs prevention",
+   "tx": "Knowing the **natural history of disease** tells planners where each intervention bites: primordial and primary action in the prepathogenesis phase, early diagnosis early in pathogenesis, and disability limitation late. Without that map, programmes mistime their effort, screening after symptoms or promoting health to the already disabled. Every later prevention lesson in this module hangs on this timeline.",
+   "say": "This timeline tells planners where to act. Early phases take primordial and primary action. Early disease takes prompt diagnosis. Late disease takes disability limitation. Mistimed programmes waste effort, so keep this map under every prevention answer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Phase", "Intervention that bites"],
+    "rows": [
+     ["Prepathogenesis", "Primordial and primary prevention"],
+     ["Early pathogenesis", "Early diagnosis and treatment"],
+     ["Late pathogenesis", "Disability limitation and rehabilitation"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-levels-prevention-iceberg-phenomenon",
+ "subject": "community-medicine",
+ "module": "cm-levels-prevention",
+ "title": "Iceberg Phenomenon, Epidemiological Triad and Risk Factors",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The floating tip: clinical cases",
+   "tx": "The **iceberg phenomenon** compares disease in a community to an iceberg whose floating tip holds the clinical cases a physician actually sees. Those visible cases bring symptoms, seek care and enter records. Everything planners count in routine statistics comes from this small tip, which is why clinic experience alone misleads community diagnosis so reliably.",
+   "say": "Picture an iceberg. The small floating tip holds the clinical cases doctors see: patients with symptoms, who seek care and enter the records. Routine statistics describe only that tip, which is why clinic experience alone misleads community diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Above the waterline",
+     "points": ["Clinical cases with symptoms", "Patients who seek care", "Cases entering routine records"]
+    },
+    "right": {
+     "title": "Below the waterline",
+     "points": ["Latent and inapparent infection", "Presymptomatic and undiagnosed cases", "Carriers spreading infection"]
+    }
+   }
+  },
+  {
+   "title": "The submerged mass below the waterline",
+   "tx": "The **submerged portion** hides latent, inapparent, presymptomatic and undiagnosed cases plus carriers in the community. The waterline separates apparent from inapparent disease. This hidden mass forms an undiagnosed reservoir that keeps transmission going after visible cases are treated, which is why case treatment alone so often fails to control endemic disease.",
+   "say": "Below the waterline lies the hidden mass: latent, inapparent, presymptomatic and undiagnosed cases, plus carriers. That reservoir keeps transmission alive after visible cases are treated. Case treatment alone therefore fails against endemic disease again and again.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Hidden state", "Why it sustains transmission"],
+    "rows": [
+     ["Latent infection", "Activates later into clinical disease"],
+     ["Inapparent infection", "Spreads without symptoms"],
+     ["Undiagnosed case", "Receives no treatment or isolation"],
+     ["Carrier state", "Sheds agent while feeling well"]
+    ]
+   }
+  },
+  {
+   "title": "Diseases where the hidden part dominates",
+   "tx": "In **hypertension and diabetes**, with anaemia, malnutrition and mental illness, unknown morbidity far exceeds known morbidity. Most hypertensive adults in a typical survey are undetected, untreated or uncontrolled, the pattern teachers call the rule of halves. Detecting the submerged part demands screening surveys, since waiting for symptoms guarantees that complications announce the disease first.",
+   "say": "Some diseases hide most of their burden. Hypertension, diabetes, anaemia, malnutrition and mental illness carry far more unknown than known cases. Surveys find most hypertensive adults undetected or uncontrolled. Screening, not waiting for symptoms, exposes that hidden share.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease", "Hidden pattern"],
+    "rows": [
+     ["Hypertension", "Most cases undetected or uncontrolled"],
+     ["Diabetes", "Years of silent hyperglycaemia"],
+     ["Anaemia", "Mild cases never reach a clinic"],
+     ["Mental illness", "Stigma keeps cases unreported"]
+    ]
+   }
+  },
+  {
+   "title": "Spectrum of disease beside the iceberg",
+   "tx": "The **spectrum of disease** runs from subclinical infection at one end to fatal illness at the other, with mild to severe illness between, like colours shading along a band. Leprosy shows the full range, from indeterminate patches to lepromatous disease. Rabies breaks the pattern as an exception with almost uniform fatality once symptoms begin.",
+   "say": "A sister idea grades severity. Disease runs from silent infection through mild and severe illness to death, shading like colours on a band. Leprosy displays the full range. Rabies breaks the pattern, killing almost uniformly once symptoms begin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Subclinical infection"},
+     {"id": "b", "label": "Mild illness"},
+     {"id": "c", "label": "Moderate illness"},
+     {"id": "d", "label": "Severe illness"},
+     {"id": "e", "label": "Fatal illness"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "The epidemiological triad",
+   "tx": "The **epidemiological triad** explains disease through agent, host and environment in interaction. Mere presence of all three starts nothing; disease begins when they interact in the prepathogenesis phase. Their combination also sets the distribution of disease, from a single case to an epidemic, which makes the triad the first diagram to draw in any outbreak answer.",
+   "say": "Three corners explain occurrence. Agent, host and environment must interact; mere presence starts nothing. Their combination also decides whether one case or an epidemic follows. Draw this triangle first in any outbreak answer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Corner", "Question it answers"],
+    "rows": [
+     ["Agent", "What causes the disease?"],
+     ["Host", "Who gets it and why them?"],
+     ["Environment", "Where and when does transmission favour?"]
+    ]
+   }
+  },
+  {
+   "title": "Agent, host and environment factors",
+   "tx": "**Agent factors** span biological agents, nutrients in excess or deficiency, physical agents such as heat and radiation, chemical agents, mechanical agents and social agents. Host factors are intrinsic: age, sex, heredity, immunity and behaviour. Environmental factors are extrinsic and split into physical, biological and psychosocial surroundings that favour or block the meeting.",
+   "say": "Fill each corner. Agents include microbes, nutrients, heat, chemicals, mechanical forces and social agents. Host factors stay intrinsic: age, sex, heredity, immunity, behaviour. Environment stays extrinsic, split into physical, biological and psychosocial surroundings.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Corner", "Factors inside it"],
+    "rows": [
+     ["Agent", "Biological, nutrient, physical, chemical, mechanical, social"],
+     ["Host", "Age, sex, heredity, immunity, behaviour"],
+     ["Environment", "Physical, biological and psychosocial surroundings"]
+    ]
+   }
+  },
+  {
+   "title": "Risk factors: causative, contributory, predictive",
+   "tx": "A **risk factor** may be truly causative, like smoking for lung cancer; merely contributory, like inactivity for coronary disease; or predictive only in a statistical sense, like illiteracy for perinatal mortality. Detection should trigger one question: can this factor be reduced cheaply, and will reducing it delay the outcome? Otherwise measurement wastes resources.",
+   "say": "Not every association causes disease. Smoking truly causes lung cancer. Inactivity contributes to coronary disease. Illiteracy only predicts perinatal deaths statistically. After detecting any factor, ask whether cutting it cheaply would delay the outcome.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Example"],
+    "rows": [
+     ["Causative", "Smoking and lung cancer"],
+     ["Contributory", "Inactivity and coronary disease"],
+     ["Predictive only", "Illiteracy and perinatal mortality"]
+    ]
+   }
+  },
+  {
+   "title": "Modifiable versus unmodifiable risk",
+   "tx": "**Modifiable risk factors** such as smoking, hypertension, raised cholesterol, inactivity and obesity yield to intervention and guide individual care. Unmodifiable factors such as age, sex, race, family history and genetic make-up cannot change; they act as signals that alert services to likely outcomes. Prevention budgets belong mainly to the first group, screening logic to the second.",
+   "say": "Sort factors by whether action can change them. Smoking, blood pressure, cholesterol, inactivity and obesity yield to intervention. Age, sex and family history cannot change, so they serve as warning signals. Budgets follow the first group; screening follows the second.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modifiable",
+     "points": ["Smoking and tobacco use", "Hypertension and raised cholesterol", "Obesity and physical inactivity"]
+    },
+    "right": {
+     "title": "Unmodifiable",
+     "points": ["Age and sex", "Race and genetic make-up", "Family history of disease"]
+    }
+   }
+  },
+  {
+   "title": "Risk groups and the risk approach",
+   "tx": "The **risk approach** identifies groups such as at-risk mothers, infants, families, chronically ill and elderly people by defined biological, physical and socio-cultural criteria, then directs action to them first. Its slogan runs: something for all, but more for those in need, in proportion to need. Scarce resources then reach the likeliest cases before the rest.",
+   "say": "Group level thinking completes the lesson. Defined criteria pick out at-risk mothers, infants, families and elderly people, and services reach them first. The slogan says it: something for all, more for those in need, in proportion to need.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Criteria that define risk groups",
+     "points": ["Biological: age, pregnancy, blood pressure", "Physical: slums, crowding, water supply", "Socio-cultural: class, education, habits"]
+    },
+    "right": {
+     "title": "Groups reached first",
+     "points": ["At-risk mothers and infants", "Chronically ill and handicapped people", "Elderly people living alone"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

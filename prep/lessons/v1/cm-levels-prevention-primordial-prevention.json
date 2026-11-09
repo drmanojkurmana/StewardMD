@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-levels-prevention-primordial-prevention",
+ "subject": "community-medicine",
+ "module": "cm-levels-prevention",
+ "title": "Primordial, Primary, Secondary and Tertiary Prevention",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Primordial prevention stops risk factors forming",
+   "tx": "**Primordial prevention** prevents the emergence of risk factors themselves in populations where they have not yet appeared. Many adult problems begin in childhood, when smoking habits, eating patterns and activity levels form. Discouraging children from adopting harmful lifestyles, backed by healthy public policy on food and tobacco, is the main tool, delivered through individual and mass education.",
+   "say": "The earliest level acts before risk factors even appear. Childhood is the target, because smoking, eating and activity habits form then. Healthy public policy plus mass education keep harmful lifestyles from taking root in the first place.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Primordial prevention"],
+    "rows": [
+     ["Target", "Populations without the risk factor"],
+     ["Timing", "Before risk factors emerge"],
+     ["Main tools", "Education and healthy public policy"],
+     ["Classic example", "Stopping children taking up smoking"]
+    ]
+   }
+  },
+  {
+   "title": "Primary prevention acts before disease onset",
+   "tx": "**Primary prevention** acts before disease onset and removes the possibility that disease will ever occur, working in the prepathogenesis phase. It promotes general health and quality of life, and adds specific protection against named hazards. Sanitation, safe water, immunisation and protection from occupational hazards all sit here, long before any patient exists.",
+   "say": "Next level, still before any disease. Action in the prepathogenesis phase removes the chance of disease occurring. General health promotion joins specific protection here: sanitation, safe water, immunisation and workplace protection, long before a patient exists.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Primary action", "Disease it removes"],
+    "rows": [
+     ["Safe water and sanitation", "Cholera and typhoid"],
+     ["Immunisation", "Measles and poliomyelitis"],
+     ["Occupational protection", "Industrial injury and poisoning"]
+    ]
+   }
+  },
+  {
+   "title": "Population strategy versus high risk strategy",
+   "tx": "The **population strategy** shifts the whole distribution of a risk factor, since a small fall in average blood pressure or cholesterol prevents more events than treating a few severe cases. The high risk strategy finds individuals at special risk and brings them preventive care, needing screening to detect them. Both approaches complement each other and primordial action.",
+   "say": "Two routes deliver primary prevention. Shifting the whole population distribution prevents more events than rescuing a few severe cases, because most events arise from the many at moderate risk. Finding high risk individuals helps them, but needs screening to locate them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Population strategy",
+     "points": ["Targets everyone, whatever their risk", "Small shifts, large event reduction", "No screening needed to start"]
+    },
+    "right": {
+     "title": "High risk strategy",
+     "points": ["Targets individuals at special risk", "Needs screening for detection", "Benefit concentrated in few people"]
+    }
+   }
+  },
+  {
+   "title": "Secondary prevention shortens disease",
+   "tx": "**Secondary prevention** halts disease progress and prevents complications through early diagnosis and adequate treatment. Screening tests and case finding programmes seek unrecognised disease, then treatment arrests the process before irreversible change. It also reverses communicability of infections, protecting contacts. Its cost is real: the patient has already faced pain, anguish and lost productivity.",
+   "say": "Once disease exists, speed matters. Early diagnosis plus adequate treatment arrests progress before irreversible change, and treating infections also protects contacts. Remember the drawback: pain, worry and lost work have already happened, which primary action would have avoided.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Unrecognised early disease"},
+     {"id": "b", "label": "Screening or case finding"},
+     {"id": "c", "label": "Early diagnosis confirmed"},
+     {"id": "d", "label": "Adequate prompt treatment"},
+     {"id": "e", "label": "Progress arrested"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Tertiary prevention limits established damage",
+   "tx": "**Tertiary prevention** covers all measures that reduce impairments and disabilities, minimise suffering from existing disease and promote adjustment to irremediable conditions. Treatment late in the course can still prevent sequelae, and rehabilitation restores function where defect has stabilised. This level extends prevention into psychosocial, vocational and medical rehabilitation delivered by a team.",
+   "say": "Late disease still allows prevention. Measures here limit impairment and disability, ease suffering, and help patients adjust to lasting conditions. Rehabilitation joins medical care with social, vocational and psychological support from a whole team.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limit what disease left",
+     "points": ["Reduce impairment after stroke", "Limit disability after injury", "Minimise suffering in chronic disease"]
+    },
+    "right": {
+     "title": "Restore a life role",
+     "points": ["Retrain for work within limits", "Restore family and social roles", "Adjust to irremediable conditions"]
+    }
+   }
+  },
+  {
+   "title": "The four levels on one timeline",
+   "tx": "Place each level against the **natural history** timeline: primordial action targets underlying social and economic conditions, primary action targets specific causal factors, secondary action targets early disease, and tertiary action targets late disease. Aims move from minimising hazards, to cutting incidence, to shortening duration, to reducing complications. Targets widen from whole populations to individual patients.",
+   "say": "Align the levels with the disease timeline. Conditions first, causal factors next, early disease after that, late disease last. Aims shift from minimising hazards toward cutting complications, and targets narrow from whole populations to individual patients.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Level", "Phase targeted", "Aim"],
+    "rows": [
+     ["Primordial", "Underlying conditions", "Minimise hazards to health"],
+     ["Primary", "Specific causal factors", "Reduce incidence"],
+     ["Secondary", "Early disease", "Shorten duration"],
+     ["Tertiary", "Late disease", "Reduce complications"]
+    ]
+   }
+  },
+  {
+   "title": "Where exam stems usually trap you",
+   "tx": "Stems trap candidates between **primordial and primary** prevention most often. Giving a vaccine, iodising salt or fitting a helmet is primary, because the risk factor or hazard already exists in that population. Teaching children never to smoke where smoking has not yet taken hold is primordial. Read whether the risk pattern already exists before choosing.",
+   "say": "Watch the classic trap. Vaccines, iodised salt and helmets count as primary prevention, because the hazard already exists around those people. Stopping a habit before it ever takes hold counts as primordial. Ask whether the risk pattern exists yet.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primordial examples",
+     "points": ["Children never start smoking", "Healthy food policy before obesity spreads", "Activity habits formed in childhood"]
+    },
+    "right": {
+     "title": "Primary examples",
+     "points": ["Vaccination against measles", "Iodised salt in an endemic area", "Helmets for current riders"]
+    }
+   }
+  },
+  {
+   "title": "Boundaries are useful, not rigid",
+   "tx": "**Food supplementation** exposes the fuzzy boundary teachers warn about: the same supplement is primary prevention for a healthy family member and secondary, almost curative, prevention for a malnourished child. Authorities disagree on exact borders between levels, yet the scheme still organises budgets and teaching. Exams accept the timeline logic even when one act serves two levels at once.",
+   "say": "Borders blur in real programmes. One food supplement protects a healthy sibling yet treats a malnourished child, serving two levels at once. Scholars accept that fuzziness. The timeline still organises teaching and budgets, and examiners reward the logic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Same supplement given to", "Level served"],
+    "rows": [
+     ["Healthy family member", "Primary prevention"],
+     ["Mildly malnourished child", "Secondary, almost curative"],
+     ["Recovering wasted child", "Tertiary support to function"]
+    ]
+   }
+  },
+  {
+   "title": "Why earlier levels win on cost",
+   "tx": "Earlier action wins because **primary prevention** is usually safe, cheap and free of suffering, while secondary care costs more and tertiary rehabilitation costs most. Industrialised countries cut cholera and typhoid mainly by raising living standards and sanitation, before universal immunisation. That history explains why budgets that only fund hospitals keep paying for preventable disease.",
+   "say": "Cost rises as you move later. Primary action stays cheap and spares suffering, hospital care costs more, rehabilitation costs most. Cholera and typhoid fell mainly with sanitation and living standards, before vaccines became universal. Hospital only budgets keep paying for preventable disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Level", "Relative cost", "Suffering before benefit"],
+    "rows": [
+     ["Primordial and primary", "Lowest", "None, disease never occurs"],
+     ["Secondary", "Moderate", "Early disease already present"],
+     ["Tertiary", "Highest", "Disability already established"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
