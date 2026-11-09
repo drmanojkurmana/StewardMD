@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "id": "der-cutaneous-markers-acanthosis-nigricans",
+ "subject": "dermatology",
+ "module": "der-cutaneous-markers",
+ "title": "Acanthosis Nigricans",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acanthosis nigricans** produces velvety, hyperpigmented, papillomatous plaques classically distributed along the posterior neck, axillae, and groin creases. The benign variant links to insulin resistance, obesity, and type 2 diabetes mellitus, driven by hyperinsulinaemia stimulating keratinocyte IGF-1 receptors. Conversely, malignant acanthosis nigricans arises rapidly in non-obese elderly adults, involves the oral mucosa or palms as tripe palms, and signals an underlying abdominal malignancy, most frequently gastric adenocarcinoma.",
+   "say": "Acanthosis nigricans presents with velvety, hyperpigmented plaques across intertriginous skin folds. While benign cases reflect hyperinsulinaemia acting on insulin-like growth factor receptors in metabolic syndrome, rapid extensive involvement in an older individual demands urgent investigation for occult visceral cancers, particularly gastric adenocarcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acanthosis-nigricans-fig1.webp",
+    "alt": "Clinical photograph of velvety hyperpigmented plaque on the neck.",
+    "caption": "Velvety hyperpigmented plaque with skin fold accentuation along the posterior neck in acanthosis nigricans. Masryyy, CC BY-SA 4.0.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Necrobiosis lipoidica** manifests as well-demarcated, yellowish-brown atrophic plaques with violaceous indurated borders and prominent surface telangiectasias over the anterior pretibial shins. Although strongly correlated with diabetes mellitus, fewer than one percent of diabetic individuals develop lesions, and strict glycaemic control does not alter plaque progression. Histopathology reveals tiered palisading granulomas alternating with necrobiotic degenerated collagen in the lower dermis. High-potency topical or intralesional corticosteroids provide first-line medical therapy.",
+   "say": "Necrobiosis lipoidica typically appears on the anterior shins as shiny waxy yellow plaques with visible telangiectatic vessels. Although historically named diabeticorum, tight blood sugar control does not heal the lesions. Watch for secondary ulceration following minor blunt trauma, and treat early active margins with potent topical corticosteroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/necrobiosis-lipoidica-fig1.webp",
+    "alt": "Clinical illustration of pretibial necrobiosis lipoidica plaque.",
+    "caption": "Waxy yellow-brown atrophic pretibial plaque with violaceous erythematous rim and prominent surface telangiectasias. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Diabetic dermopathy** represents the single most prevalent cutaneous marker of long-standing diabetes mellitus, appearing in over fifty percent of patients. Lesions begin as small, discrete, dull red papules on the pretibial shins that evolve into circular or oval, shallow atrophic brown macules. The process stems from microangiopathy and extravasation of erythrocytes, with haemosiderin deposition causing post-inflammatory hyperpigmentation. Lesions are benign, asymptomatic, and require no active medical intervention.",
+   "say": "Diabetic dermopathy, commonly termed shin spots, presents as multiple discrete hyperpigmented atrophic depressions over the shins. They reflect localized dermal microangiopathy after subtle mechanical trauma. Reassure the patient that these spots are harmless, require no topical treatment, and serve clinically as a reminder of underlying microvascular disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Pretibial Dermatoses in Diabetes",
+    "cols": [
+     "Feature",
+     "Diabetic Dermopathy",
+     "Necrobiosis Lipoidica"
+    ],
+    "rows": [
+     [
+      "Lesion morphology",
+      "Multiple discrete atrophic brown macules",
+      "Expanding yellowish waxy plaque"
+     ],
+     [
+      "Surface vessels",
+      "Absent surface telangiectasia",
+      "Prominent visible telangiectasia"
+     ],
+     [
+      "Ulceration risk",
+      "Negligible ulcer risk",
+      "Frequent painful ulceration"
+     ],
+     [
+      "Primary treatment",
+      "Reassurance and trauma avoidance",
+      "Potent topical or intralesional steroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eruptive xanthomas** present as sudden crops of tender, yellowish-orange papules measuring one to four millimetres, seated on an erythematous base over the buttocks, shoulders, and extensor surfaces. They indicate profound hypertriglyceridaemia, with serum triglyceride concentrations almost invariably surpassing one thousand milligrams per decilitre. This threshold creates an imminent hazard of acute necrotising pancreatitis. Biopsy demonstrates dermal lipid-laden histiocytic foam cells. Immediate fat restriction and fibrate pharmacotherapy are life-saving.",
+   "say": "Eruptive xanthomas erupt explosively as tiny yellow papules on extensor limbs and buttocks when serum triglycerides cross one thousand milligrams per decilitre. Recognize this as an urgent endocrine emergency because circulating chylomicrons can trigger catastrophic acute pancreatitis. Initiate rapid dietary fat restriction and fibrate therapy immediately.",
+   "vis": {
+    "kind": "flow",
+    "title": "Severe Hypertriglyceridaemia Pathway",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Triglycerides > 1000 mg/dL",
+      "sub": "Chylomicronaemia and LPL saturation"
+     },
+     {
+      "id": "n2",
+      "label": "Eruptive Xanthomas",
+      "sub": "Dermal macrophage lipid engulfment"
+     },
+     {
+      "id": "n3",
+      "label": "Acute Pancreatitis Risk",
+      "sub": "Toxic free fatty acid generation"
+     },
+     {
+      "id": "n4",
+      "label": "Urgent Management",
+      "sub": "Dietary fat cessation and fibrates"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "Extravasation"
+     ],
+     [
+      "n1",
+      "n3",
+      "Capillary injury"
+     ],
+     [
+      "n3",
+      "n4",
+      "Immediate action"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pyoderma gangrenosum** constitutes a rapidly progressive, non-infectious necrotising ulcerative dermatosis. Lesions initiate as tender follicular pustules or erythematous nodules that break down into painful, necrotic ulcers exhibiting characteristic ragged, undermined, violaceous borders. Pathergy occurs in up to thirty percent of individuals, causing ulcer enlargement following minor needle punctures or surgical debridement. Over fifty percent of cases associate with inflammatory bowel disease, seronegative arthritis, or haematologic malignancies. Systemic corticosteroids represent cornerstone medical therapy.",
+   "say": "Pyoderma gangrenosum is a neutrophil-mediated destructive ulcer with classic violaceous undermined edges. Surgical debridement must be strictly avoided because pathergy will accelerate ulcer breakdown. Check all patients for underlying inflammatory bowel disease or haematological disorders, and initiate high-dose systemic corticosteroids or cyclosporine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pyoderma-gangrenosum-fig1.webp",
+    "alt": "Clinical illustration of pyoderma gangrenosum ulcer.",
+    "caption": "Rapidly enlarging leg ulcer with characteristic violaceous undermined border and cribriform necrotic base. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Sweet syndrome** presents with high-spiking pyrexia, peripheral neutrophil leukocytosis, and sudden eruptive emergence of tender, juicy, erythematous pseudovesicular plaques over the face, neck, and upper limbs. Histological evaluation shows massive, dense neutrophilic infiltration throughout the upper dermis with pronounced papillary oedema, notably devoid of leukocytoclastic vasculitis. Classical associations include acute myeloid leukaemia, myelodysplastic syndromes, and recent upper respiratory tract infections. Systemic oral prednisolone induces prompt dramatic resolution within forty-eight hours.",
+   "say": "Sweet syndrome, or acute febrile neutrophilic dermatosis, manifests with abrupt fever, neutrophilia, and juicy-looking erythematous plaques that mimic vesicles due to severe dermal oedema. Biopsy confirms dense neutrophils without vasculitis. Screen for acute myeloid leukaemia and start oral prednisone, which prompts swift improvement within days.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sweet-syndrome-fig1.webp",
+    "alt": "Clinical illustration of Sweet syndrome plaques.",
+    "caption": "Tender, juicy, erythematous pseudovesicular plaques with dense dermal neutrophilic infiltrate. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Leser-Trelat sign** is the sudden, explosive eruption of multiple, pruritic seborrhoeic keratoses over several weeks on an erythematous base across the trunk and neck. This cutaneous paraneoplastic marker reflects systemic hypersecretion of epidermal growth factor receptor ligands or transforming growth factor alpha by hidden tumours. The underlying neoplasm is an aggressive gastrointestinal adenocarcinoma, predominantly gastric or colonic carcinoma, in over sixty percent of documented cases. Comprehensive endoscopic and radiological oncological staging is urgently indicated.",
+   "say": "The sign of Leser-Trelat denotes the rapid outbreak of dozens of itchy seborrhoeic keratoses on the trunk. Unlike benign seborrhoeic warts that accumulate gradually with age, this explosive eruption signals an occult intra-abdominal malignancy, most frequently gastric cancer. An immediate diagnostic gastroscopy and colonoscopy are indicated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign Seborrhoeic Keratoses",
+     "points": [
+      "Gradual emergence over decades",
+      "Common incidental finding in elderly",
+      "Typically painless and non-pruritic",
+      "No internal malignancy association"
+     ]
+    },
+    "right": {
+     "title": "Leser-Trelat Paraneoplastic Sign",
+     "points": [
+      "Explosive outbreak over weeks",
+      "Accompanied by intense pruritus",
+      "Multiple verrucous eruptive papules",
+      "Mandates urgent occult cancer search"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Paraneoplastic pemphigus** presents with severe, intractable, painful oral stomatitis and conjunctivitis extending to lichenoid or flaccid bullous skin eruptions. The autoantibody profile targets plakin family proteins, specifically envoplakin and periplakin, causing extensive suprabasal acantholysis and keratinocyte necrosis. It signals an underlying occult haematological malignancy in nearly one hundred percent of patients, primarily non-Hodgkin lymphoma, chronic lymphocytic leukaemia, or Castleman disease. Prognosis remains poor despite intensive immunosuppression, with progressive bronchiolitis obliterans causing fatal respiratory failure.",
+   "say": "Paraneoplastic pemphigus is a devastating autoimmune blistering dermatosis dominated by relentless mucosal ulcerations of the mouth and eyes. Circulating antibodies attack envoplakin and periplakin. Almost every patient has an underlying lymphoid neoplasm like non-Hodgkin lymphoma or Castleman disease, and lethal bronchiolitis obliterans often supervenes.",
+   "vis": {
+    "kind": "table",
+    "title": "High-Yield Paraneoplastic Cutaneous Syndromes",
+    "cols": [
+     "Cutaneous Marker",
+     "Typical Morphology",
+     "Underlying Malignancy"
+    ],
+    "rows": [
+     [
+      "Malignant acanthosis nigricans",
+      "Rapid velvety flexural thickening",
+      "Gastric adenocarcinoma"
+     ],
+     [
+      "Leser-Trelat sign",
+      "Explosive pruritic seborrhoeic warts",
+      "Gastrointestinal tract carcinomas"
+     ],
+     [
+      "Paraneoplastic pemphigus",
+      "Relentless stomatitis and mucosal ulcers",
+      "Non-Hodgkin lymphoma and Castleman"
+     ],
+     [
+      "Necrolytic migratory erythema",
+      "Annular erosive migrating plaques",
+      "Pancreatic alpha-cell glucagonoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Malignant acanthosis nigricans: most common primary neoplasm",
+   "b": "Gastric adenocarcinoma in over sixty percent of cases."
+  },
+  {
+   "f": "Eruptive xanthomas: key laboratory threshold",
+   "b": "Serum triglycerides exceeding 1000 mg/dL with acute pancreatitis risk."
+  },
+  {
+   "f": "Sweet syndrome: histological hallmark on dermal biopsy",
+   "b": "Dense mature dermal neutrophilic infiltrate without leukocytoclastic vasculitis."
+  }
+ ],
+ "keys": [
+  "Acanthosis nigricans benign form links to insulin resistance while rapid onset signals gastric cancer",
+  "Pyoderma gangrenosum exhibits pathergy and associates with inflammatory bowel disease",
+  "Sweet syndrome presents with fever, leukocytosis, and dermal neutrophils responsive to steroids"
+ ]
+}
