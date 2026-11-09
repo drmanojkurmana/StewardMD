@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Boerhaave Syndrome, Mackler Triad, and Corrosive Oesophageal Strictures",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Spontaneous transmural rupture of the esophagus following sudden, forceful increases in intraluminal pressure is designated as **Boerhaave syndrome**. The rupture occurs when violent retching or vomiting takes place against an uncoordinated, closed cricopharyngeal sphincter. Unlike superficial mucosal Mallory-Weiss tears confined to the gastroesophageal junction, Boerhaave syndrome involves a full-thickness rupture that contaminates the mediastinum and pleural spaces with caustic gastric secretions and bacteria.",
+   "say": "Boerhaave syndrome is a full-thickness tear of the esophageal wall caused by violent vomiting against a closed upper sphincter, contaminating the mediastinum with gastric contents.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/boerhaave-syndrome-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating spontaneous rupture of the distal esophagus and mediastinal contamination.",
+    "caption": "Boerhaave syndrome: barogenic rupture of the left posterolateral distal esophagus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical tear in Boerhaave syndrome exhibits a consistent predilection for the left posterolateral aspect of the distal thoracic esophagus, situated two to three centimetres proximal to the gastroesophageal junction. This zone represents a structural weakness due to thinning of the longitudinal muscularis propria and lack of adjacent organ support. The classic clinical presentation is defined by **Mackler triad**, which comprises vomiting, severe lower retrosternal chest pain, and cervical subcutaneous emphysema.",
+   "say": "The tear typically occurs in the left posterolateral wall of the lower esophagus. Mackler triad classically describes vomiting followed by acute chest pain and subcutaneous emphysema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "retch",
+      "label": "Violent Vomiting Against Closed Cricopharyngeus"
+     },
+     {
+      "id": "spike",
+      "label": "Massive Sudden Rise in Intraluminal Pressure"
+     },
+     {
+      "id": "tear",
+      "label": "Transmural Tear of Left Posterolateral Lower Esophagus"
+     },
+     {
+      "id": "triad",
+      "label": "Mackler Triad: Vomiting, Retrosternal Pain & Emphysema"
+     },
+     {
+      "id": "sepsis",
+      "label": "Rapid Progression to Polymicrobial Mediastinitis & Shock"
+     }
+    ],
+    "edges": [
+     [
+      "retch",
+      "spike"
+     ],
+     [
+      "spike",
+      "tear"
+     ],
+     [
+      "tear",
+      "triad"
+     ],
+     [
+      "triad",
+      "sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chest radiography often reveals pneumomediastinum, subcutaneous air in the soft tissues of the neck, a left-sided pleural effusion, and hydropneumothorax. When esophageal rupture is suspected, the initial diagnostic imaging investigation of choice is a water-soluble gastrografin esophagogram. Barium sulfate is strictly avoided in suspected acute perforations because extraluminal barium induces severe **chemical mediastinitis and granulomatous fibrosis** throughout the mediastinum.",
+   "say": "Chest radiography demonstrates air in the mediastinum or neck tissues. Water-soluble gastrografin swallow is the test of choice, as barium is strictly avoided to prevent mediastinal fibrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Water-Soluble Gastrografin",
+     "points": [
+      "Diagnostic agent of choice in perforation",
+      "Readily absorbed by pleura and mediastinum",
+      "Does not incite fibrotic foreign-body reaction",
+      "Rapidly outlines transmural contrast extravasation"
+     ]
+    },
+    "right": {
+     "title": "Barium Sulfate Suspension",
+     "points": [
+      "Strictly contraindicated in suspected rupture",
+      "Induces severe chemical mediastinal fibrosis",
+      "Triggers chronic granulomatous reaction",
+      "Reserved for subtle mucosal stricture detail"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Computed tomography of the chest and upper abdomen with oral and intravenous contrast is the most sensitive definitive modality for detecting occult extraluminal air and localized fluid collections. Thoracentesis of pleural fluid reveals acidic pleural effusion with a pH under six point zero, accompanied by elevated **salivary amylase levels** and food particles. Rapid diagnosis within twenty-four hours is critical to prevent fatal polymicrobial sepsis and septic shock.",
+   "say": "CT of the chest confirms extraluminal air and fluid collections. Pleural aspiration reveals acidic fluid with high salivary amylase and food particles, confirming esophageal rupture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pleural Fluid Parameter",
+     "Observed Value",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Fluid pH",
+      "pH < 6.0",
+      "Massive contamination by acidic gastric juice"
+     ],
+     [
+      "Salivary Amylase",
+      "Markedly elevated",
+      "Swallowed salivary transudation through tear"
+     ],
+     [
+      "Gross Appearance",
+      "Turbid, brownish-green with debris",
+      "Direct extravasation of ingested food particles"
+     ],
+     [
+      "Microbiology",
+      "Polymicrobial oral flora and anaerobes",
+      "Rapid development of necrotizing mediastinitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Operative intervention for acute presentation within twenty-four hours entails an urgent left thoracotomy, thorough mediastinal and pleural debridement, and **two-layer primary surgical repair** over a large chest tube. The surgeon incises the mediastinal pleura, debrides non-viable muscular tissue, and sutures the mucosa and muscularis separately. The repair is reinforced with a vascularized autologous tissue pedicle, such as an intercostal muscle flap, diaphragmatic flap, or pleural patch.",
+   "say": "For tears recognized within twenty-four hours, urgent left thoracotomy with thorough debridement and two-layer primary repair buttressed by an intercostal muscle flap is the standard of care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thor",
+      "label": "Left Posterolateral Thoracotomy in 6th Intercostal Space"
+     },
+     {
+      "id": "deb",
+      "label": "Extensive Debridement of Contaminated Mediastinum"
+     },
+     {
+      "id": "sut",
+      "label": "Two-Layer Closure: Mucosa Followed by Muscularis"
+     },
+     {
+      "id": "flap",
+      "label": "Buttressing with Vascularized Intercostal Muscle Flap"
+     },
+     {
+      "id": "drain",
+      "label": "Wide Dependent Closed Intercostal Tube Drainage"
+     }
+    ],
+    "edges": [
+     [
+      "thor",
+      "deb"
+     ],
+     [
+      "deb",
+      "sut"
+     ],
+     [
+      "sut",
+      "flap"
+     ],
+     [
+      "flap",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When diagnosis is delayed beyond twenty-four hours, the esophageal tissues become friable, necrotic, and unable to hold primary sutures. Under these contaminated conditions, attempting primary closure results in breakdown and lethal mediastinitis. Surgical options in late presentation include T-tube drainage creating a controlled esophagocutaneous fistula, temporary endoluminal covered metallic stenting, or **esophageal diversion and cervical esophagostomy** with subsequent delayed colon interposition reconstruction.",
+   "say": "When treatment is delayed over twenty-four hours, friable inflamed tissues prevent primary repair. Surgeons use T-tube drainage or cervical diversion with delayed reconstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing of Intervention",
+     "Tissue Condition",
+     "Recommended Surgical Approach"
+    ],
+    "rows": [
+     [
+      "Early (< 24 Hours)",
+      "Pliable tissues, limited necrosis",
+      "Primary two-layer repair with flap buttress"
+     ],
+     [
+      "Delayed (> 24 Hours)",
+      "Friable, edematous, necrotic tissue",
+      "T-tube drainage or esophageal exclusion"
+     ],
+     [
+      "Extensive Gangrene",
+      "Non-viable thoracic esophagus",
+      "Transhiatal resection, cervical spit fistula & feeding J-tube"
+     ],
+     [
+      "Contained Mediastinal Leak",
+      "Localized collection without sepsis",
+      "Non-operative: NPO, IV antibiotics, covered stent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chemical injury from accidental or suicidal ingestion of caustic substances produces extensive damage culminating in a **corrosive stricture**. Strong alkaline agents like sodium hydroxide produce liquefactive necrosis, melting through protein matrices and saponifying fats, which promotes deep transmural penetration. In contrast, acidic agents produce coagulative necrosis, forming a firm surface eschar that partially limits deeper tissue penetration but frequently causes severe pyloric and antral gastric injuries.",
+   "say": "Ingestion of caustic alkalis causes liquefactive necrosis that penetrates deeply through the esophageal wall, while acids cause coagulative necrosis and primarily injure the gastric antrum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alkali Ingestion (Caustic Soda)",
+     "points": [
+      "Causes deep liquefactive tissue necrosis",
+      "Saponifies lipids and denatures proteins",
+      "Penetrates transmurally into mediastinum",
+      "Produces dense, long-segment esophageal strictures"
+     ]
+    },
+    "right": {
+     "title": "Acid Ingestion (Hydrochloric Acid)",
+     "points": [
+      "Produces superficial coagulative necrosis",
+      "Forms protective firm protective surface eschar",
+      "Passes rapidly through esophagus into stomach",
+      "Produces severe prepyloric gastric outlet necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency evaluation requires early flexible endoscopy performed within twenty-four to forty-eight hours to grade the depth of mucosal injury using the Zargar classification. Endoscopy is terminated at the first circumferential burn to avoid iatrogenic perforation. Mature, fibrous corrosive strictures typically develop two to three months following ingestion and are managed initially with **Savary-Gilliard wire-guided dilators** or pneumatic balloon dilatation, reserving esophageal replacement using a retrosternal colonic conduit for intractable strictures.",
+   "say": "Early endoscopy within forty-eight hours assesses mucosal burns. Mature strictures appearing months later are treated with wire-guided dilators, reserving colon interposition for refractory cases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diseases-of-esophagus-fig1.webp",
+    "alt": "Endoscopic classification diagram showing grading of corrosive mucosal injury from superficial erythema to ulceration.",
+    "caption": "Endoscopic assessment of caustic injury: guiding dilatation protocols versus surgical esophageal reconstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
