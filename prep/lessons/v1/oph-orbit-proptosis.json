@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "id": "oph-orbit-proptosis",
+ "subject": "ophthalmology",
+ "module": "oph-orbit",
+ "title": "Proptosis and Thyroid Eye Disease",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Proptosis** is forward displacement of globe from orbit by expanded contents, tumour, inflammation or vascular engorgement, distinguished from lid retraction pseudo proptosis by exophthalmometry. Axial proptosis points intraconal or diffuse disease, eccentric displacement points extraconal mass opposite its quadrant. Pulsation, bruit, pain and vision change split vascular, infective and compressive causes before imaging returns.",
+   "say": "Forward globe displacement gives proptosis from expanded orbital contents during diagnostic assessment in clinic. Direction of displacement gives compartment localisation before imaging returns from radiology. Vascular signs give cause separation early in assessment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Orbit sections with fat expansion and muscle enlargement producing proptosis in thyroid disease.",
+    "caption": "Proptosis from orbital expansion. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Thyroid eye disease** is autoimmune orbital inflammation expanding fat and extraocular muscles with tendon sparing, giving bilateral though asymmetric proptosis, lid retraction, chemosis and diplopia. Muscle belly enlargement with spared insertion on imaging separates it from myositis where tendon thickens painfully. Activity and severity grading together decide immunosuppression versus rehabilitation timing.",
+   "say": "Autoimmune expansion gives bilateral proptosis with lid retraction in thyroid disease characteristically. Tendon sparing gives imaging separation from myositis. Activity grading gives treatment timing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-orbitopathy-fig1.webp",
+    "alt": "Thyroid eye disease features diagram with lid retraction, proptosis and muscle involvement.",
+    "caption": "Thyroid orbitopathy features. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Lid retraction** in thyroid disease from levator and sympathetic overaction exposes superior sclera and widens fissure, mimicking proptosis even with normal globe position. True measurement therefore needs exophthalmometry plus lid position recording separately. Stare and lid lag on downgaze complete bedside thyroid eye signs before scans are requested.",
+   "say": "Levator overaction gives scleral show mimicking proptosis without globe displacement actually. Separate lid recording gives measurement accuracy in assessment. Downgaze lag gives bedside completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Thyroid eye bedside signs",
+    "cols": [
+     "Sign",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Lid retraction",
+      "Superior scleral show"
+     ],
+     [
+      "Lid lag",
+      "Lag on downgaze"
+     ],
+     [
+      "Proptosis",
+      "Exophthalmometer asymmetry"
+     ],
+     [
+      "Chemosis activity",
+      "Inflammation grading input"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compressive optic neuropathy at crowded apex is sight threatening thyroid complication needing colour vision, fields and disc review at every active visit. Steroids, decompression or radiotherapy escalate by response in specialist pathways. **Dysthyroid optic neuropathy** may occur with modest proptosis because apex crowding, not globe displacement, decides nerve danger.",
+   "say": "Apex crowding gives nerve compression danger independent of proptosis degree during clinical assessment in thyroid disease. Colour vision monitoring gives surveillance sensitivity at every active visit. Escalation follows response grading in pathways.",
+   "vis": null
+  },
+  {
+   "tx": "Unilateral proptosis differential prioritises tumour, orbital cellulitis, vascular fistula and thyroid disease in adults, dermoid and rhabdomyosarcoma considerations in children by tempo. Painful rapid with fever infects, painless slow with displacement masses, pulsatile with bruit fistulises. **Tempo plus pain** sorts proptosis before alphabet differential lists are recited.",
+   "say": "Tempo together with pain gives proptosis sorting before imaging in clinic practically. Fever gives infection priority in rapid painful cases. Pulsation gives vascular direction instantly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thyroid pattern",
+     "points": [
+      "Bilateral asymmetric proptosis",
+      "Lid retraction and lag",
+      "Tendon sparing muscles"
+     ]
+    },
+    "right": {
+     "title": "Mass pattern",
+     "points": [
+      "Unilateral eccentric displacement",
+      "Direction opposite mass quadrant",
+      "Painless slow tempo"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Orbital cellulitis** as proptosis cause imports Chandler staging from ENT: postseptal signs pain on movement, ophthalmoplegia, vision change need emergency imaging and drainage pathways. Preseptal swelling without those signs observes differently. Repeating staging here is deliberate because ophthalmology owns vision monitoring while ENT owns sinus source control jointly.",
+   "say": "Postseptal signs give orbital cellulitis emergency pattern needing imaging urgently always. Vision monitoring gives ophthalmology role alongside sinus source control. Preseptal disease gives different observation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Proptosis triage sequence",
+    "nodes": [
+     {
+      "id": "meas",
+      "label": "Measure displacement and direction"
+     },
+     {
+      "id": "vision",
+      "label": "Vision, colour, pupil, movements"
+     },
+     {
+      "id": "tempo",
+      "label": "Tempo, pain, pulsation sorting"
+     },
+     {
+      "id": "image",
+      "label": "Image by suspected compartment"
+     }
+    ],
+    "edges": [
+     [
+      "meas",
+      "vision"
+     ],
+     [
+      "vision",
+      "tempo"
+     ],
+     [
+      "tempo",
+      "image"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rehabilitation in inactive thyroid disease sequences decompression, then strabismus surgery, then lid surgery, because each step changes the next measurements. Operating lids before alignment wastes revisions predictably. **Inactive stability** for months precedes rehabilitation, activity treatment preceding all cosmetic ambition in safe programmes.",
+   "say": "Rehabilitation sequence gives decompression before alignment before lid surgery in stepwise order correctly. Stability duration gives rehabilitation gating in inactive thyroid disease. Activity treatment is placed before cosmetic ambition.",
+   "vis": {
+    "kind": "table",
+    "title": "Thyroid rehabilitation order",
+    "cols": [
+     "Order",
+     "Operation"
+    ],
+    "rows": [
+     [
+      "First",
+      "Orbital decompression"
+     ],
+     [
+      "Second",
+      "Strabismus alignment"
+     ],
+     [
+      "Third",
+      "Lid position surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise proptosis teaching for presentations: direction of displacement localises the compartment, tempo with pain sorts the cause, tendon sparing identifies thyroid disease, and colour vision monitors the crowded apex sensitively. Hertel measurement quantifies change while rehabilitation sequences decompression before alignment before lids strictly. **Axial versus eccentric** displacement is the first sentence of every proptosis presentation in examinations.",
+   "say": "Direction together gives compartment localisation in proptosis presentations simply and first in examinations. Tempo gives cause sorting before any scan is available in clinic. Rehabilitation order gives prevention of revision surgery afterward.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Thyroid muscle imaging sign",
+   "b": "Muscle belly enlargement with tendon sparing; tendon thickening painful suggests myositis instead."
+  },
+  {
+   "f": "Rehabilitation sequence",
+   "b": "Decompression first, then strabismus, then lids, only after inactive stability."
+  },
+  {
+   "f": "Apex danger monitor",
+   "b": "Colour vision and fields; neuropathy occurs without large proptosis."
+  }
+ ],
+ "keys": [
+  "Eccentric displacement points away from mass",
+  "Lid retraction mimics proptosis, measure both",
+  "Painful febrile proptosis images urgently"
+ ]
+}

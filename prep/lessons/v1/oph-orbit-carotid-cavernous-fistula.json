@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "id": "oph-orbit-carotid-cavernous-fistula",
+ "subject": "ophthalmology",
+ "module": "oph-orbit",
+ "title": "Carotid Cavernous Fistula, Blowout and Orbital Tumours",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Carotid cavernous fistula** shunts arterial blood into cavernous sinus and orbital veins, giving pulsatile proptosis, bruit, corkscrew episcleral vessels, chemosis and raised pressure from venous congestion. Direct high flow follows trauma or aneurysm rupture, indirect low flow dural types present insidiously in older women. Auscultation over globe and temple is a bedside test modern imaging has not replaced.",
+   "say": "Arterial venous shunting gives pulsatile proptosis with bruit and corkscrew vessels characteristically. Bedside auscultation gives detection before imaging returns. Venous pressure gives secondary glaucoma mechanism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Orbital venous and muscle anatomy relevant to fistula congestion and proptosis.",
+    "caption": "Orbital congestion anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Blow-out fracture** returns ophthalmically as floor entrapment with diplopia, enophthalmos and infraorbital numbness after blunt globe trauma, operative urgency set by muscle entrapment and defect size. Paediatric trapdoor with vagal symptoms is hours emergency already taught. Delayed enophthalmos measurement after swelling settles decides late reconstruction need.",
+   "say": "Floor entrapment together gives diplopia with infraorbital numbness after blunt trauma during ophthalmic assessment in clinic. Entrapment gives operative urgency while swelling settlement gives late measurement accuracy. Reconstruction follows defect assessment in planning.",
+   "vis": {
+    "kind": "table",
+    "title": "Fistula flow types",
+    "cols": [
+     "Type",
+     "Pattern"
+    ],
+    "rows": [
+     [
+      "Direct high flow",
+      "Traumatic, pulsatile, bruit loud"
+     ],
+     [
+      "Indirect low flow",
+      "Older women, insidious red eye"
+     ],
+     [
+      "Shared risk",
+      "Venous pressure glaucoma, nerve palsies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Orbital rhabdomyosarcoma** is the malignant orbital tumour of childhood giving rapidly progressive unilateral proptosis over weeks in a child, needing urgent biopsy and oncology staging rather than cellulitis trials. Its tempo separates it from dermoid slow growth and infection febrile course. Any rapidly enlarging orbital mass in childhood is malignancy until tissue proves otherwise.",
+   "say": "Rapid childhood proptosis gives malignancy priority needing urgent biopsy always in practice. Weeks tempo gives separation from slow dermoid growth. Tissue diagnosis gives oncology pathway.",
+   "vis": null
+  },
+  {
+   "tx": "Secondary glaucoma in fistula follows episcleral venous pressure floor logic from outflow lesson: veins drain against arterialised pressure, angle may fill with blood on gonioscopy. Treating eye pressure without closing fistula fails, definitive endovascular closure treats cause. **Blood in Schlemm canal** is the gonioscopic sign examinations pair with venous pressure elevation.",
+   "say": "Venous floor elevation together gives secondary pressure rise in fistula disease by a clear mechanism in clinic. Fistula closure gives cause treatment beyond pressure drops alone. Canal blood on gonioscopy gives the venous sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-orbitopathy-fig1.webp",
+    "alt": "Orbital features diagram for comparison of congestive proptosis patterns.",
+    "caption": "Congestive proptosis comparison. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Orbital lymphoma in elderly gives painless moulding mass conforming to globe without bone destruction early, biopsy with flow studies deciding systemic staging. Lacrimal gland region masses split inflammatory, lymphoid and epithelial by tempo and pain. **Moulding without destruction** suggests lymphoma over carcinoma in orbital imaging language.",
+   "say": "Painless moulding mass together gives lymphoma suggestion in elderly orbital disease characteristically on imaging in clinic. Biopsy with flow studies gives staging direction for systemic assessment. Bone preservation gives an imaging clue additionally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fistula proptosis",
+     "points": [
+      "Pulsatile with bruit",
+      "Corkscrew vessels, chemosis",
+      "Pressure from venous floor"
+     ]
+    },
+    "right": {
+     "title": "Tumour proptosis",
+     "points": [
+      "Non pulsatile displacement",
+      "Direction opposite mass",
+      "Biopsy by tempo and age"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cavernous haemangioma, now venous malformation terminology evolving, is commonest benign orbital tumour of adults giving slow axial proptosis with well circumscribed intraconal mass on imaging. Schwannoma, meningioma and glioma occupy nerve sheath lessons by tissue. **Axial slow** proptosis in adult is haemangioma until imaging proves otherwise in teaching probability.",
+   "say": "Slow axial proptosis together gives benign vascular tumour probability in adults classically during orbit assessment in clinic. Circumscribed intraconal mass gives imaging confirmation of the lesion. Nerve sheath tumours give tissue alternatives additionally.",
+   "vis": {
+    "kind": "flow",
+    "title": "Proptosis cause sorting",
+    "nodes": [
+     {
+      "id": "pulse",
+      "label": "Pulsation or bruit present"
+     },
+     {
+      "id": "fist",
+      "label": "Fistula imaging pathway"
+     },
+     {
+      "id": "tempo",
+      "label": "Tempo and age sorting"
+     },
+     {
+      "id": "biopsy",
+      "label": "Biopsy by suspected tissue"
+     }
+    ],
+    "edges": [
+     [
+      "pulse",
+      "fist"
+     ],
+     [
+      "pulse",
+      "tempo"
+     ],
+     [
+      "tempo",
+      "biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endovascular embolisation closes most fistulas through venous or arterial routes in interventional suites, ophthalmology monitoring pressure, exposure and nerve recovery afterward. Vision threat from pressure or corneal exposure may need temporising treatment before closure scheduling. **Interventional closure** is cause therapy, drops are bridge only.",
+   "say": "Endovascular closure gives cause therapy for fistula in interventional suites currently. Pressure and exposure give bridge treatment before closure. Nerve recovery gives monitoring afterward.",
+   "vis": {
+    "kind": "table",
+    "title": "Orbital mass tempo map",
+    "cols": [
+     "Tempo",
+     "First suspicion"
+    ],
+    "rows": [
+     [
+      "Weeks, child",
+      "Rhabdomyosarcoma, biopsy urgent"
+     ],
+     [
+      "Months, elderly painless",
+      "Lymphoma assessment"
+     ],
+     [
+      "Years, adult axial",
+      "Benign vascular tumour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise vascular and tumour orbit teaching: pulsation with bruit fistulises, moulding painless mass suggests lymphoma, rapid childhood proptosis biopsies urgently, and slow axial proptosis vascularises in adults. Venous pressure logic explains fistula glaucoma completely, while entrapment tempo times blowout surgery. **Bruit auscultation** over the globe remains a thirty second bedside test with pathway changing value.",
+   "say": "Pulsation together gives fistula direction instantly at bedside examination in clinic for patients. Tempo with age gives tumour sorting before biopsy is planned. Venous pressure logic gives glaucoma explanation in fistula.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Fistula bedside set",
+   "b": "Pulsatile proptosis, bruit, corkscrew vessels, chemosis and venous pressure glaucoma; close fistula endovascularly."
+  },
+  {
+   "f": "Childhood rapid proptosis",
+   "b": "Rhabdomyosarcoma until biopsy proves otherwise; urgent tissue and oncology staging."
+  },
+  {
+   "f": "Blood in Schlemm canal",
+   "b": "Gonioscopic sign of raised episcleral venous pressure, classic in fistula."
+  }
+ ],
+ "keys": [
+  "Treat fistula cause, drops only bridge",
+  "Moulding painless mass suggests lymphoma",
+  "Tempo plus age sorts orbital masses"
+ ]
+}

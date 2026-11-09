@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "id": "oph-conjunctiva-inclusion-conjunctivitis",
+ "subject": "ophthalmology",
+ "module": "oph-conjunctiva",
+ "title": "Inclusion, Membranous and Allergic Conjunctivitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Inclusion conjunctivitis** is adult chlamydial follicular conjunctivitis from genital reservoir serovars, chronic unilateral or bilateral follicles with mucopurulent discharge failing standard drops. It needs systemic therapy and partner evaluation because topical treatment cannot clear genital carriage. Neonatal inclusion disease at five to fourteen days is same organism vertical route from previous lesson timing.",
+   "say": "Genital reservoir together gives chronic follicular conjunctivitis failing drops in adults characteristically during clinic assessment over months. Systemic therapy gives reservoir clearance beyond topical treatment alone. Partner evaluation is part of eye care.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/conjunctivitis-trachoma-allergic-fig1.webp",
+    "alt": "Conjunctivitis with discharge pattern relevant to chronic follicular inclusion disease.",
+    "caption": "Chronic follicular conjunctivitis pattern. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Membranous conjunctivitis** differential revisits bleeding peel sign: diphtheria in unvaccinated, ligneous fibrin disease, Stevens Johnson and severe viral membranes each systemic in implication. Ligneous disease gives woody pseudomembranes recurring from plasminogen deficiency with gingival company. Membrane therefore triggers systemic differential, never repeated topical escalation alone.",
+   "say": "Bleeding peel gives systemic differential needing review beyond topical escalation always in membranous disease. Woody recurrence gives plasminogen deficiency clue. Vaccination history accompanies assessment.",
+   "vis": {
+    "kind": "table",
+    "title": "Membrane differential",
+    "cols": [
+     "Cause",
+     "Company"
+    ],
+    "rows": [
+     [
+      "Diphtheria",
+      "Unvaccinated, systemic toxicity"
+     ],
+     [
+      "Ligneous disease",
+      "Woody recurrence, gingiva involved"
+     ],
+     [
+      "Severe viral",
+      "Epidemic, pseudomembrane often"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Allergic conjunctivitis** gives itching as dominant symptom with chemosis, papillae and stringy discharge in atopic seasonal or perennial patterns, vision preserved and cornea clear in simple disease. Itch separates allergy from infection more reliably than redness degree. Mast cell stabiliser and antihistamine therapy plus allergen control form backbone, steroids reserved and pressure monitored.",
+   "say": "Dominant itching gives allergic separation from infection at triage most reliably in clinic. Papillae with chemosis gives examination company. Steroid reservation gives pressure safety.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/conjunctivitis-fig1.webp",
+    "alt": "Conjunctivitis types diagram with allergic itchy pattern comparison.",
+    "caption": "Allergic pattern in conjunctivitis types. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Giant papillary conjunctivitis from contact lens or prosthesis mechanical immune reaction enlarges upper tarsal papillae until lens tolerance fails, treated by lens holiday, hygiene, refitting and allergy therapy. It bridges allergy and contact lens modules clinically. **Upper tarsal eversion** finds it, symptomatic lens wearers always everted before lens prescription changes.",
+   "say": "Lens reaction together gives giant papillae with tolerance failure in contact lens wearers characteristically during fitting review in clinic. Lid eversion gives diagnosis before any prescription changes. Holiday and refitting give care backbone.",
+   "vis": null
+  },
+  {
+   "tx": "Neonatal prophylaxis and adult sexual health meet in chlamydia teaching: same genus, different serovar groups and routes, eye as sentinel for systemic carriage. Conjunctival swab nucleic testing confirms both inclusion and neonatal disease where available. **Sentinel eye** concept justifies referral pathways beyond ophthalmology in chronic follicular cases.",
+   "say": "Eye findings together give sentinel value for systemic carriage in chlamydial disease during clinical assessment in adults and children. Nucleic testing gives confirmation where laboratory access is available. Referral pathways are companion to eye treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trachoma chlamydia",
+     "points": [
+      "Repeated endemic exposure",
+      "Scarring over years",
+      "Community SAFE control"
+     ]
+    },
+    "right": {
+     "title": "Inclusion chlamydia",
+     "points": [
+      "Genital reservoir adults",
+      "Chronic follicles, no scarring cycle",
+      "Systemic therapy, partners"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Allergic severity spectrum runs from seasonal nuisance to vernal and atopic keratoconjunctivitis in the following lessons, where corneal involvement changes treatment ceiling and urgency substantially. Simple allergy never stains the cornea significantly, an escalation phrase examiners listen for directly at the slit lamp. **Corneal staining** in an allergic labelled case reclassifies severity and treatment intensity immediately in clinic.",
+   "say": "Simple allergy together gives clear cornea with itch dominance in seasonal patterns safely during clinic assessment in children and adults. Corneal staining gives severity reclassification immediately at examination. Spectrum awareness gives escalation timing in care.",
+   "vis": {
+    "kind": "flow",
+    "title": "Chronic follicular pathway",
+    "nodes": [
+     {
+      "id": "chron",
+      "label": "Chronic follicles fail drops"
+     },
+     {
+      "id": "swab",
+      "label": "Swab for chlamydia"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic therapy given"
+     },
+     {
+      "id": "part",
+      "label": "Partner pathway completed"
+     }
+    ],
+    "edges": [
+     [
+      "chron",
+      "swab"
+     ],
+     [
+      "swab",
+      "sys"
+     ],
+     [
+      "sys",
+      "part"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxic folliculosis from chronic drops, especially miotics and preserved preparations, mimics inclusion disease with inferior follicles improving after withdrawal. Drug history is therefore a swab saving question in chronic conjunctivitis clinics. **Withdrawal test** diagnoses toxic cause while inclusion needs laboratory confirmation, sequence decided by exposure plausibility.",
+   "say": "Chronic drop exposure gives follicular mimicry improving after withdrawal in clinic assessment characteristically. Drug history gives swab saving triage. Exposure plausibility gives sequence decisions.",
+   "vis": {
+    "kind": "table",
+    "title": "Chronic follicular causes",
+    "cols": [
+     "Cause",
+     "Discriminator"
+    ],
+    "rows": [
+     [
+      "Inclusion chlamydia",
+      "Genital reservoir, swab positive"
+     ],
+     [
+      "Toxic drops",
+      "Improves after withdrawal"
+     ],
+     [
+      "Molluscum lid lesion",
+      "Find lid margin lesion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise chronic conjunctivitis teaching in adults: follicles failing drops need chlamydia thinking with systemic therapy, membranes that bleed need systemic differential review, and dominant itch needs allergy assessment with lid eversion. The sentinel eye concept justifies referral beyond ophthalmology, while toxic drop history justifies withdrawal before laboratory confirmation. **Systemic therapy** is the phrase that separates inclusion cure from every topical conjunctivitis.",
+   "say": "Follicular chronicity together gives systemic direction while dominant itch gives allergy direction at triage simply. Sentinel eye concept gives referral justification beyond the eye clinic. Membrane bleeding gives systemic review urgency.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Inclusion conjunctivitis cure",
+   "b": "Systemic therapy plus partner evaluation; topical drops cannot clear genital reservoir."
+  },
+  {
+   "f": "Allergy discriminator",
+   "b": "Itching dominates with papillae and clear cornea; staining reclassifies severity."
+  },
+  {
+   "f": "Toxic folliculosis test",
+   "b": "Inferior follicles from chronic drops improve after withdrawal of the preparation."
+  }
+ ],
+ "keys": [
+  "Chronic follicles need chlamydia swab",
+  "Eye is sentinel for genital carriage",
+  "Membranes trigger systemic differential"
+ ]
+}

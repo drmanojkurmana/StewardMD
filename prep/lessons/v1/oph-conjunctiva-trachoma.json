@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "id": "oph-conjunctiva-trachoma",
+ "subject": "ophthalmology",
+ "module": "oph-conjunctiva",
+ "title": "Trachoma and Herbert Pits",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Trachoma** is chronic chlamydial keratoconjunctivitis from repeated infection in poverty and crowding, progressing follicles and papillae to conjunctival scarring, entropion trichiasis and corneal blindness over years. It remains leading infectious blindness cause globally despite simple organism, because reinfection cycles continue untreated. SAFE strategy surgery, antibiotics, face cleanliness and environment organises control programmes memorably.",
+   "say": "Repeated chlamydial infection gives scarring blindness over years in trachoma endemic settings globally. Reinfection cycles give progression despite simple organism biology. Control strategy gives programme organisation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chlamydial-infection-fig1.webp",
+    "alt": "Clinical trachoma manifestations with trichiasis and corneal damage in endemic disease.",
+    "caption": "Trachoma scarring and trichiasis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Herbert pits** are small peripheral corneal depressions at limbus from resolved limbal follicles, pathognomonic scars of trachoma alongside superior pannus where vessels invade cornea under upper lid disease. Follicles on everted upper tarsus in a child from endemic area start diagnostic pathway. Pits plus pannus plus scarring together make clinical diagnosis without laboratory in field programmes.",
+   "say": "Limbal pits give pathognomonic scar evidence in trachoma diagnosis field assessment characteristically. Superior pannus gives vascular invasion company. Field diagnosis gives programme treatment decisions.",
+   "vis": {
+    "kind": "table",
+    "title": "Trachoma sign set",
+    "cols": [
+     "Sign",
+     "Stage meaning"
+    ],
+    "rows": [
+     [
+      "Follicles upper tarsus",
+      "Active infection inflammation"
+     ],
+     [
+      "Herbert pits limbus",
+      "Resolved follicle scars"
+     ],
+     [
+      "Conjunctival scarring",
+      "Repeated infection damage"
+     ],
+     [
+      "Trichiasis entropion",
+      "Blinding mechanical stage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "World Health grading simplifies field assessment: follicular inflammation, intense inflammation, scarring, trichiasis and corneal opacity as TF TI TS TT CO sequence. Each grade maps to SAFE component intensity in district decisions. **Trichiasis grade** triggers surgical lists because lashes, not infection, blind at that stage mechanically.",
+   "say": "Field grading gives programme mapping by district prevalence in trachoma control work globally. Trichiasis grade gives surgical list trigger mechanically. Opacity grade gives blindness endpoint.",
+   "vis": {
+    "kind": "flow",
+    "title": "SAFE strategy components",
+    "nodes": [
+     {
+      "id": "surg",
+      "label": "Surgery for trichiasis"
+     },
+     {
+      "id": "abx",
+      "label": "Antibiotics mass or individual"
+     },
+     {
+      "id": "face",
+      "label": "Facial cleanliness promotion"
+     },
+     {
+      "id": "env",
+      "label": "Environmental water sanitation"
+     }
+    ],
+    "edges": [
+     [
+      "surg",
+      "abx"
+     ],
+     [
+      "abx",
+      "face"
+     ],
+     [
+      "face",
+      "env"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mass azithromycin class distribution reduces community reservoir where prevalence thresholds met, single dose advantage aiding coverage, individual therapy suiting low prevalence tails. Surgery for trichiasis uses bilamellar rotation procedures repositioning lash margin outward durably. **Reinfection prevention** by face washing and fly control sustains gains antibiotics start, environment being slowest SAFE letter.",
+   "say": "Mass distribution together gives reservoir reduction where prevalence thresholds are met in programme districts globally. Margin rotation gives trichiasis correction durably after surgery in adults. Environmental improvement gives the slowest sustained gain.",
+   "vis": null
+  },
+  {
+   "tx": "Differential of follicular conjunctivitis in non endemic clinic includes viral, inclusion chlamydia from genital reservoir and toxic folliculosis from drops, separated by exposure and chronicity. Trachoma needs endemic repeated exposure history, visitors rarely scar from single episodes. **Repeated cycles** phrase distinguishes trachoma biology from one off chlamydial inclusion disease next lesson.",
+   "say": "Exposure history gives trachoma separation from single episode follicular disease in clinic assessment. Repeated cycles give scarring biology distinction. Endemic residence gives context need.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/conjunctivitis-trachoma-allergic-fig1.webp",
+    "alt": "Acute conjunctivitis with discharge for comparison to chronic follicular trachoma patterns.",
+    "caption": "Conjunctivitis pattern comparison. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Corneal blindness in trachoma is mechanical and dryness mediated: inturned lashes abrade, scarred lids fail closure and tear distribution, vascular pannus invades visual axis. Lid rotation therefore restores comfort and halts abrasion even though corneal scar remains. **Prevention timing** teaches operating trichiasis before opacity, because rotation cannot reverse established corneal scar afterward.",
+   "say": "Lash abrasion gives mechanical blindness progression in late trachoma disease stages mechanically. Rotation gives abrasion halt without scar reversal afterward. Timing gives prevention value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active trachoma child",
+     "points": [
+      "Follicles and inflammation",
+      "Antibiotics and hygiene",
+      "Reservoir control community"
+     ]
+    },
+    "right": {
+     "title": "Blinding trachoma adult",
+     "points": [
+      "Scarring, trichiasis, opacity",
+      "Rotation surgery urgent",
+      "Cornea scar irreversible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Elimination certification needs prevalence surveys below thresholds in children and trichiasis unknown to system below limits in adults, surveillance continuing after validation. Programmes therefore count surgical backlog as carefully as infection rates. **Backlog clearance** is elimination criterion, not service extra, in trachoma endgame districts.",
+   "say": "Prevalence thresholds together give elimination certification in programme endgame assessment across endemic districts globally. Surgical backlog clearance gives criterion status in district evaluation. Surveillance is continued after validation always.",
+   "vis": {
+    "kind": "table",
+    "title": "SAFE letter actions",
+    "cols": [
+     "Letter",
+     "Action target"
+    ],
+    "rows": [
+     [
+      "S surgery",
+      "Trichiasis backlog cleared"
+     ],
+     [
+      "A antibiotics",
+      "Reservoir prevalence reduced"
+     ],
+     [
+      "F face",
+      "Clean faces in children"
+     ],
+     [
+      "E environment",
+      "Water, sanitation, flies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise trachoma teaching for field and clinic: Herbert pits are pathognomonic scars, superior pannus invades under the upper lid, SAFE strategy controls districts, and lid rotation saves cornea only before opacity forms. Follicles mark active infection, scars mark historical damage, and trichiasis marks the surgical grade in one sweep. **Infectious blindness** leadership globally makes trachoma the archetype of public health ophthalmology.",
+   "say": "Pathognomonic pits together give trachoma recognition with superior pannus company in examinations reliably for students. Rotation timing gives cornea saving before opacity develops in adults. Programme strategy gives control organisation in districts.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Herbert pits",
+   "b": "Resolved limbal follicle scars at peripheral cornea, pathognomonic for trachoma with superior pannus."
+  },
+  {
+   "f": "SAFE strategy",
+   "b": "Surgery trichiasis, Antibiotics reservoir, Facial cleanliness, Environmental improvement."
+  },
+  {
+   "f": "Trachoma blindness mechanism",
+   "b": "Scarring entropion trichiasis abrades cornea; rotate lid before opacity forms."
+  }
+ ],
+ "keys": [
+  "Trachoma is reinfection scarring, not single infection",
+  "Trichiasis is surgical grade in field grading",
+  "Pits plus pannus diagnose without laboratory"
+ ]
+}
