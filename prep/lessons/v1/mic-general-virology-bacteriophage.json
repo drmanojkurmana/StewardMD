@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-general-virology",
+  "subject": "microbiology",
+  "title": "Bacteriophage, Oncogenic Viruses, Prions, CJD and Kuru",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **bacteriophage** is a virus infecting bacteria. A typical tailed phage has an icosahedral head containing DNA, a contractile or noncontractile tail and tail fibres that recognise bacterial receptors. In the lytic cycle the phage replicates and lyses the host; in lysogeny its genome integrates as prophage or persists as plasmid and is copied with the cell. Phage choice determines toxin transfer and bacterial evolution.",
+      "say": "Phages are bacterial viruses that either lyse the host now or ride quietly as prophages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lytic cycle",
+          "points": [
+            "Attachment and genome injection",
+            "Host machinery redirected",
+            "New capsids assembled",
+            "Lysin breaks wall and progeny escape"
+          ]
+        },
+        "right": {
+          "title": "Lysogenic cycle",
+          "points": [
+            "Prophage integrated or plasmid borne",
+            "Repressor maintains latency",
+            "Host may gain toxin or resistance traits",
+            "Induction can re enter lytic cycle"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lysogenic conversion** explains several toxin genes: diphtheria toxin from corynephage beta, cholera toxin from CTX phi, some botulinum toxins, Shiga toxin from lambdoid phages and streptococcal pyrogenic exotoxins. A bacterium's virulence can therefore be a mobile phage property rather than a fixed species trait. Phage typing also historically tracked Staphylococcus aureus and Salmonella outbreaks before whole genome sequencing.",
+      "say": "Some of microbiology's most famous toxins are phage genes expressed by their bacterial hosts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phage carried toxins",
+          "points": [
+            "Diphtheria toxin",
+            "Cholera toxin",
+            "Shiga toxins",
+            "Scarlet fever pyrogenic exotoxins"
+          ]
+        },
+        "right": {
+          "title": "Practical consequences",
+          "points": [
+            "Toxin production can vary among strains",
+            "Antibiotics may induce some toxin phages",
+            "Phage susceptibility historically typed outbreaks",
+            "Genome sequencing now traces mobile elements precisely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oncogenic viruses** transform cells by viral oncoproteins, insertional activation or chronic inflammation. HPV E6 and E7 disable p53 and Rb; EBV latency proteins drive B cell proliferation; HBV and HCV cause hepatocellular carcinoma through integration, viral proteins and chronic injury; HHV 8 drives Kaposi sarcoma in immunosuppression. Vaccination against HPV and HBV prevents virus associated cancers upstream.",
+      "say": "Viral cancer prevention works best before infection, through HPV and hepatitis B vaccination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct mechanisms",
+          "points": [
+            "HPV E6 degrades p53",
+            "HPV E7 inactivates Rb pathway",
+            "HTLV 1 Tax drives T cell proliferation",
+            "EBV latent proteins mimic growth signals"
+          ]
+        },
+        "right": {
+          "title": "Indirect mechanisms",
+          "points": [
+            "HBV and HCV chronic hepatic inflammation",
+            "Regeneration and mutation accumulation",
+            "Immunosuppression permits HHV 8 disease",
+            "Coinfections and aflatoxin can amplify liver risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prions** are infectious proteins, not viruses. Normal prion protein PrP C converts into misfolded protease resistant PrP Sc, which templates further conversion and aggregates in brain. There is no nucleic acid genome, no useful routine culture or antibody response in the host, and infectivity resists many ordinary decontamination methods. Disease is transmissible, hereditary or sporadic depending on how the first misfolded seed arises.",
+      "say": "Prions transmit a shape, not a genome, and standard sterilisation assumptions fail.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal protein",
+          "points": [
+            "PrP C is host encoded",
+            "Rich in alpha helices",
+            "Protease sensitive",
+            "Expressed especially in nervous tissue"
+          ]
+        },
+        "right": {
+          "title": "Disease protein",
+          "points": [
+            "PrP Sc rich in beta sheets",
+            "Partially protease resistant",
+            "Aggregates and vacuolates brain",
+            "No nucleic acid has been identified as genome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Creutzfeldt Jakob disease** occurs most often sporadically with rapidly progressive dementia, myoclonus, ataxia and characteristic MRI or EEG changes. Variant CJD followed bovine spongiform encephalopathy exposure, affects younger patients, begins often with psychiatric symptoms and involves lymphoreticular tissues more prominently. Genetic prion diseases include Gerstmann Straussler Scheinker syndrome and fatal familial insomnia from PRNP variants.",
+      "say": "Rapid dementia with myoclonus demands prion disease in the differential and urgent neurology input.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sporadic CJD",
+          "points": [
+            "Older adults typically",
+            " Rapid dementia and myoclonus",
+            "Startle sensitivity and ataxia",
+            "MRI basal ganglia or cortical ribboning"
+          ]
+        },
+        "right": {
+          "title": "Variant CJD",
+          "points": [
+            "Younger age distribution",
+            "Early psychiatric and sensory symptoms",
+            "Pulvinar sign on MRI classically",
+            "Linked to BSE contaminated food chain historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Kuru** was a prion disease transmitted among the Fore people of Papua New Guinea through ritual endocannibalism, especially consumption of brain tissue. It caused tremor, ataxia and progressive neurologic death and declined after the practice stopped, followed by very long incubation cases. Kuru provided decisive epidemiologic evidence that a transmissible spongiform encephalopathy could spread without a conventional microorganism.",
+      "say": "Kuru disappeared after transmission practice ceased, despite incubation periods lasting decades.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exposure",
+            "label": "Prion exposure in brain tissue"
+          },
+          {
+            "id": "incubation",
+            "label": "Silent years or decades"
+          },
+          {
+            "id": "ataxia",
+            "label": "Tremor, ataxia and dysarthria"
+          },
+          {
+            "id": "decline",
+            "label": "Progressive immobility and death"
+          }
+        ],
+        "edges": [
+          [
+            "exposure",
+            "incubation"
+          ],
+          [
+            "incubation",
+            "ataxia"
+          ],
+          [
+            "ataxia",
+            "decline"
+          ]
+        ]
+      }
+    }
+  ]
+}
