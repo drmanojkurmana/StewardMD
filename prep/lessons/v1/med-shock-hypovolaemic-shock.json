@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-shock",
+ "subject": "medicine",
+ "title": "Circulatory Shock: Hypovolaemic, Cardiogenic, and Distributive States",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A life-threatening generalized state of acute systemic circulatory failure characterized by inadequate tissue cellular perfusion and oxygen delivery resulting in cellular dysoxia is circulatory shock. Shock is categorized pathophysiologically into four fundamental hemodynamic classes: hypovolaemic, cardiogenic, obstructive, and distributive, all sharing the final common pathway of cellular lactic **acidosis**.",
+   "say": "A life-threatening state of acute circulatory failure characterized by inadequate tissue perfusion and oxygen delivery is circulatory shock. Shock is categorized into four hemodynamic classes: hypovolaemic, cardiogenic, obstructive, and distributive, all causing cellular lactic acidosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Hemodynamic classification of shock and compensatory physiological responses.",
+    "caption": "Circulatory shock classes, intravascular volume depletion, and compensatory mechanisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Loss of effective circulating intravascular blood or extracellular fluid volume causes **hypovolaemic shock**. Hemodynamically characterized by depressed central venous pressure, reduced left ventricular stroke volume, and low cardiac output, compensatory baroreceptor activation induces intense peripheral vasoconstriction, producing cold, clammy extremities, delayed capillary refill, and elevated systemic vascular resistance.",
+   "say": "Loss of effective intravascular volume causes hypovolaemic shock. Characterized by low central venous pressure, reduced stroke volume, and depressed cardiac output, compensatory vasoconstriction produces cold, clammy extremities and elevated systemic vascular resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shock Classification",
+     "Cardiac Output (CO)",
+     "Central Venous Pressure (CVP)",
+     "Systemic Vascular Resistance (SVR)"
+    ],
+    "rows": [
+     [
+      "Hypovolaemic Shock",
+      "Markedly Decreased",
+      "Markedly Decreased",
+      "Elevated (compensatory vasoconstriction)"
+     ],
+     [
+      "Cardiogenic Shock",
+      "Markedly Decreased",
+      "Markedly Elevated",
+      "Elevated (compensatory vasoconstriction)"
+     ],
+     [
+      "Distributive (Septic)",
+      "Elevated (early hyperdynamic)",
+      "Normal or Decreased",
+      "Markedly Decreased (vasodilation)"
+     ],
+     [
+      "Obstructive (PE / Tamponade)",
+      "Markedly Decreased",
+      "Markedly Elevated",
+      "Elevated (compensatory vasoconstriction)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary pump failure of the heart causing critical systemic hypoperfusion despite adequate intravascular filling pressures defines **cardiogenic shock**. Most commonly precipitated by acute extensive myocardial infarction destroying over forty percent of left ventricular myocardium, hemodynamics demonstrate severely depressed cardiac index (under 2.2 L/min/m2), elevated pulmonary capillary wedge pressure (over 18 mmHg), and pulmonary oedema.",
+   "say": "Primary pump failure causing critical hypoperfusion despite adequate filling pressures defines cardiogenic shock. Most commonly caused by extensive myocardial infarction, hemodynamics show a depressed cardiac index under 2.2 and elevated pulmonary wedge pressure exceeding 18 mmHg.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig1.webp",
+    "alt": "Pathophysiological vicious cycle of myocardial hypoperfusion in cardiogenic shock.",
+    "caption": "Myocardial ischemia, declining stroke volume, and compensatory vasoconstriction in cardiogenic shock. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In pure cardiogenic shock with severe myocardial contractile dysfunction and pulmonary congestion, the first-line inotropic agent of choice is **dobutamine**. By stimulating myocardial beta-1 adrenergic receptors, dobutamine enhances myocardial contractility and stroke volume while modest beta-2 stimulation reduces afterload, though concurrent noradrenaline is required if mean arterial pressure is under sixty-five mmHg.",
+   "say": "In cardiogenic shock with severe contractile failure, the inotropic agent of choice is dobutamine. By stimulating beta-1 receptors, dobutamine enhances contractility and stroke volume while reducing afterload, combined with noradrenaline if hypotension is marked.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pump",
+      "label": "Severe LV Contractile Failure"
+     },
+     {
+      "id": "dob",
+      "label": "Dobutamine Beta-1 Inotropic Stimulation"
+     },
+     {
+      "id": "co",
+      "label": "Increased Stroke Volume & Restored Cardiac Index"
+     }
+    ],
+    "edges": [
+     [
+      "pump",
+      "dob"
+     ],
+     [
+      "dob",
+      "co"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical mechanical impedance to normal cardiac chamber filling or ventricular emptying produces obstructive shock. Classic aetiologies comprise massive pulmonary embolism (obstructing right ventricular outflow), cardiac tamponade (restricting diastolic filling), and tension pneumothorax. All feature elevated jugular venous pressure, depressed cardiac output, and clear lung fields on auscultation (except pulmonary **embolism**).",
+   "say": "Mechanical impedance to cardiac chamber filling or ventricular outflow produces obstructive shock. Classic causes include massive pulmonary embolism, cardiac tamponade, and tension pneumothorax, all featuring elevated jugular venous pressure with clear lung fields.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiac Tamponade",
+     "points": [
+      "Pericardial fluid impairs biventricular diastolic filling",
+      "Beck triad: Hypotension, JVP elevation, muffled sounds",
+      "Prominent pulsus paradoxus (> 10 mmHg fall)",
+      "Immediate emergency needle pericardiocentesis"
+     ]
+    },
+    "right": {
+     "title": "Tension Pneumothorax",
+     "points": [
+      "Pleural air pressure collapses vena cava and lung",
+      "Tracheal deviation away from affected hemithorax",
+      "Absent breath sounds with hyperresonance",
+      "Immediate needle thoracostomy decompression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Widespread pathological loss of vasomotor tone causing profound systemic vasodilation and arterial capacitance pooling defines **distributive shock**. The dominant prototype is septic shock, where endothelial nitric oxide overproduction reduces systemic vascular resistance, producing warm extremities and bounding pulses initially, alongside anaphylactic shock (histaminergic vasodilation) and neurogenic shock (loss of sympathetic tone).",
+   "say": "Widespread loss of vasomotor tone causing severe vasodilation and arterial pooling defines distributive shock. The prototype is septic shock, where nitric oxide reduces systemic resistance, producing warm extremities initially, alongside anaphylactic and neurogenic shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Distributive Shock Type",
+     "Primary Trigger / Mediator",
+     "Key Diagnostic Feature"
+    ],
+    "rows": [
+     [
+      "Septic Shock",
+      "Endotoxin, TNF, IL-1, Inducible Nitric Oxide (iNOS)",
+      "Elevated serum lactate, fever, warm peripheries early"
+     ],
+     [
+      "Anaphylactic Shock",
+      "IgE-mediated histamine, leukotrienes, tryptase",
+      "Urticaria, angioedema, bronchospasm, cardiovascular collapse"
+     ],
+     [
+      "Neurogenic Shock",
+      "High spinal cord transection (above T6 level)",
+      "Hypotension WITH paradoxical bradycardia and warm, dry skin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assessing fluid responsiveness in critically ill patients before infusing excess fluid utilizes dynamic physiological tests rather than static central venous pressure. The reversible bedside diagnostic gold standard is the **passive leg raise** (PLR) test. Raising the patient's legs to forty-five degrees while transitioning the trunk supine autotransfuses three-hundred millilitres of blood; a transient increase in stroke volume exceeding ten percent confirms fluid responsiveness.",
+   "say": "Assessing fluid responsiveness before infusing excess fluid relies on dynamic tests rather than static venous pressure. The bedside gold standard is the passive leg raise test, which autotransfuses three-hundred millilitres of blood; a rise in stroke volume over ten percent confirms fluid responsiveness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pos",
+      "label": "Semi-Recumbent Baseline (45 degrees)"
+     },
+     {
+      "id": "plr",
+      "label": "Passive Leg Elevation to 45 deg with Trunk Flat"
+     },
+     {
+      "id": "auto",
+      "label": "Autotransfuses ~300 mL Venous Blood from Legs"
+     },
+     {
+      "id": "resp",
+      "label": "Stroke Volume Rise > 10% Confirms Volume Responsiveness"
+     }
+    ],
+    "edges": [
+     [
+      "pos",
+      "plr"
+     ],
+     [
+      "plr",
+      "auto"
+     ],
+     [
+      "auto",
+      "resp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refractory septic shock requiring escalating doses of noradrenaline and vasopressin suggests relative adrenal failure, termed critical illness-related corticosteroid insufficiency (CIRCI). Low-dose physiological corticosteroid replacement with intravenous **hydrocortisone** (two-hundred milligrams daily as continuous infusion or fifty milligrams every six hours) accelerates shock reversal and shortens vasopressor dependence.",
+   "say": "Refractory septic shock requiring escalating vasopressor doses suggests relative adrenal failure, termed critical illness corticosteroid insufficiency. Low-dose intravenous hydrocortisone accelerates shock reversal and shortens vasopressor dependence without adverse bleeding risks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "refr",
+      "label": "Refractory Shock on High-Dose Noradrenaline"
+     },
+     {
+      "id": "circi",
+      "label": "Hypothalamic-Pituitary-Adrenal Axis Exhaustion"
+     },
+     {
+      "id": "hyd",
+      "label": "IV Hydrocortisone 200 mg/day Accelerates Shock Reversal"
+     }
+    ],
+    "edges": [
+     [
+      "refr",
+      "circi"
+     ],
+     [
+      "circi",
+      "hyd"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 297"
+}
