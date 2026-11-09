@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "module": "pat-myocardial-pericardial",
+  "subject": "pathology",
+  "title": "Cardiomyopathies, Myocarditis, Pericardial Disease, Myxoma, and Congenital Heart Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Dilated cardiomyopathy stretches ventricles into weak globes from alcohol, viruses, chemotherapy, peripartum states, tachycardia, and gene mutations, presenting as systolic heart failure with functional valve regurgitation. The stretched phenotype is **dilated cardiomyopathy (DCM)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Big weak ventricles define dilated cardiomyopathy; hunt alcohol, viruses, drugs, genes, and peripartum timing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dilated-cardiomyopathy-fig1.webp",
+        "alt": "Dilated cardiomyopathy echocardiogram",
+        "caption": "Dilated cardiomyopathy echocardiogram with stretched, weak ventricles and systolic failure."
+      }
+    },
+    {
+      "tx": "Hypertrophic cardiomyopathy thickens septum asymmetrically with myocyte disarray, sarcomere mutations, dynamic outflow obstruction worsened by dehydration and exertion, and sudden death in young athletes. Histological disorganisation is **myocyte disarray of hypertrophic cardiomyopathy**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Disarrayed thick myocytes plus a family sudden death history name hypertrophic cardiomyopathy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phenotype",
+          "Gene or cause accent",
+          "Classic risk"
+        ],
+        "rows": [
+          [
+            "Hypertrophic",
+            "Sarcomere mutations",
+            "Sudden death, outflow gradient"
+          ],
+          [
+            "Dilated",
+            "Titin truncations, alcohol, chemo",
+            "Systolic failure, arrhythmia"
+          ],
+          [
+            "Restrictive",
+            "Amyloid, sarcoid, storage",
+            "Diastolic failure, conduction disease"
+          ],
+          [
+            "Arrhythmogenic",
+            "Desmosomal mutations",
+            "Ventricular arrhythmia, sudden death"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Restrictive cardiomyopathy stiffens ventricles with amyloid, sarcoid granulomas, iron, or fibrosis until filling fails with preserved cavity size, biatrial enlargement, and conduction disease. Infiltrative stiffness defines **restrictive cardiomyopathy, amyloid prototype**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Small stiff ventricles, huge atria, and conduction disease demand amyloid and sarcoid exclusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diastolic failure, preserved ejection fraction"
+          },
+          {
+            "id": "b",
+            "label": "Echo strain, MRI tissue characterisation"
+          },
+          {
+            "id": "c",
+            "label": "Amyloid typing or sarcoid evidence"
+          },
+          {
+            "id": "d",
+            "label": "Cause directed therapy, diuresis care"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cardiac amyloidosis thickens walls without true myocyte hypertrophy, producing low ECG voltage against echo thickness, apical sparing strain, and heart failure where transthyretin and AL types diverge therapeutically. That voltage mass mismatch flags **cardiac amyloidosis in restrictive disease**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Thick walls with low voltage is amyloid until proven otherwise; type it before treating it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cardiac-amyloidosis-fig1.webp",
+        "alt": "Cardiac amyloidosis pathology",
+        "caption": "Cardiac amyloidosis pathology, the infiltrative cause of restrictive cardiomyopathy."
+      }
+    },
+    {
+      "tx": "Myocarditis inflames myocardium after viral or immune triggers with chest pain, troponin, arrhythmia, or fulminant failure, while Chagas cardiomyopathy from Trypanosoma cruzi scars apex and conduction system across Latin America. Parasitic prototype is **Chagas cardiomyopathy with apical aneurysm**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Myocarditis mimics infarction with clean arteries; Chagas adds apical aneurysm and conduction disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cause",
+          "Clue",
+          "Test accent"
+        ],
+        "rows": [
+          [
+            "Viral and immune myocarditis",
+            "Recent illness, chest pain, troponin",
+            "MRI Lake Louise criteria"
+          ],
+          [
+            "Chagas disease",
+            "Endemic exposure, RBBB pattern",
+            "Serology, echo apical view"
+          ],
+          [
+            "Giant cell myocarditis",
+            "Fulminant failure, arrhythmia",
+            "Biopsy, immunosuppression"
+          ],
+          [
+            "Checkpoint inhibitor myocarditis",
+            "Cancer immunotherapy timing",
+            "Urgent steroids, cardiology"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Constrictive pericarditis cages the heart in scarred pericardium producing equalised diastolic pressures, Kussmaul sign, and pericardial knock, separated from restriction by imaging and catheterisation and cured by pericardiectomy. The cage disease is **chronic constrictive pericarditis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Constriction cages from outside, restriction stiffens from inside; imaging separates them because surgery cures one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Constriction",
+          "points": [
+            "Pericardial thickening, calcification",
+            "Septal bounce, Kussmaul sign",
+            "Pericardiectomy curative"
+          ]
+        },
+        "right": {
+          "title": "Restriction",
+          "points": [
+            "Myocardial infiltration or fibrosis",
+            "Biatrial enlargement marked",
+            "Treat infiltrative cause"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cardiac tamponade compresses chambers under rising pericardial pressure with pulsus paradoxus, tachycardia, and distant heart sounds until urgent drainage, while atrial myxoma prolapses through mitral valves causing positional symptoms and emboli. Both demand echo urgency: **tamponade physiology and atrial myxoma tumour effects**.",
+      "say": "Tamponade is pressure, myxoma is a ball valve; echocardiography separates and saves in both.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Condition",
+          "Echo signature",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Tamponade",
+            "Chamber collapse, respirophasic flows",
+            "Urgent pericardiocentesis"
+          ],
+          [
+            "Atrial myxoma",
+            "Pedunculated atrial mass prolapsing",
+            "Surgical excision"
+          ],
+          [
+            "Rhabdomyoma",
+            "Childhood ventricular masses, tuberous sclerosis",
+            "Often regresses, observe"
+          ],
+          [
+            "Pericardial effusion chronic",
+            "Large fluid without compression",
+            "Cause hunt, drainage by symptoms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Congenital shunts culminate in Eisenmenger syndrome when pulmonary vascular disease reverses flow right to left with cyanosis and erythrocytosis, while tetralogy of Fallot and coarctation headline structural examinations beside ventricular septal defects. That reversal endpoint is **Eisenmenger syndrome of unrepaired shunts**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Eisenmenger is a shunt reversed by pulmonary vascular disease; closing it then kills, so prevention is childhood repair.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Left to right shunt overcirculates lungs"
+          },
+          {
+            "id": "b",
+            "label": "Pulmonary vessels remodel and resist"
+          },
+          {
+            "id": "c",
+            "label": "Pressures equalise, shunt reverses"
+          },
+          {
+            "id": "d",
+            "label": "Cyanosis, erythrocytosis, closure contraindicated"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

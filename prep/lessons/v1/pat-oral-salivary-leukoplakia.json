@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Leukoplakia, Erythroplakia, Oral Cancer Risk, and Salivary Gland Foundations",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Leukoplakia is a clinical white patch that cannot be scraped off or characterised as another disease, carrying dysplasia risk graded histologically after biopsy excludes candida, lichen planus, and frictional keratosis. The diagnosis of exclusion is **oral leukoplakia, potentially malignant disorder**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "A white patch that neither scrapes nor names itself earns biopsy; leukoplakia is a risk label, not reassurance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cancer-fig1.webp",
+        "alt": "Oral cancer presentations",
+        "caption": "Oral cancer presentations arising within potentially malignant disorders."
+      }
+    },
+    {
+      "tx": "Erythroplakia, the red velvety counterpart, harbours severe dysplasia, carcinoma in situ, or invasive cancer in most biopsies despite rarer occurrence, making any red patch an urgent referral. The dangerous red patch is **oral erythroplakia, high grade until proven otherwise**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Red patches frighten oral pathologists more than white ones; most erythroplakia already harbours high grade disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leukoplakia",
+          "points": [
+            "White, commoner",
+            "Dysplasia in minority",
+            "Biopsy risk stratifies"
+          ]
+        },
+        "right": {
+          "title": "Erythroplakia",
+          "points": [
+            "Red velvety, rarer",
+            "Severe dysplasia or cancer usual",
+            "Urgent referral and excision"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Speckled leukoplakia mixing red and white, nodular surfaces, tongue and floor of mouth sites, and non-homogeneous texture raise malignant transformation risk above smooth homogeneous patches. Risk reading is **non-homogeneous leukoplakia high risk features**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Speckled, nodular, tongue or floor of mouth: those leukoplakias transform first and follow closest.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Lower risk",
+          "Higher risk"
+        ],
+        "rows": [
+          [
+            "Appearance",
+            "Homogeneous flat white",
+            "Speckled, nodular, verrucous"
+          ],
+          [
+            "Site",
+            "Cheek along bite line",
+            "Tongue, floor of mouth"
+          ],
+          [
+            "Habits",
+            "No tobacco or alcohol",
+            "Smoking, alcohol, betel quid"
+          ],
+          [
+            "Histology",
+            "No dysplasia",
+            "Moderate or severe dysplasia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tobacco smoked and smokeless, alcohol synergy, betel quid, and high risk HPV for oropharynx drive oral carcinogenesis, while proliferative verrucous leukoplakia in older women defies treatment with relentless multifocal spread. The multifocal relapser is **proliferative verrucous leukoplakia**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Proliferative verrucous leukoplakia in older women spreads multifocally despite treatment; surveillance is lifelong.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "White or red patch found"
+          },
+          {
+            "id": "b",
+            "label": "Habits reviewed, lesion photographed"
+          },
+          {
+            "id": "c",
+            "label": "Biopsy grades dysplasia"
+          },
+          {
+            "id": "d",
+            "label": "Excision and surveillance by risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dysplasia grading from mild through severe to carcinoma in situ schedules excision and surveillance intervals, because transformation risk climbs with grade while some mild lesions regress after habit cessation. That schedule is **oral epithelial dysplasia grading and management**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Grade the dysplasia, remove the habit, schedule the surveillance; oral prevention runs on those three rails.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "No or mild dysplasia",
+          "points": [
+            "Habit cessation, observation",
+            "Photographic monitoring",
+            "Rebiopsy on change"
+          ]
+        },
+        "right": {
+          "title": "Moderate or severe dysplasia",
+          "points": [
+            "Complete excision favoured",
+            "Close specialist surveillance",
+            "Field change vigilance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oral squamous carcinoma presents as non-healing ulcer, indurated mass, or exophytic growth with neck nodes, staged by size, depth of invasion, and nodal spread for surgery and radiotherapy planning. Depth now stages alongside size: **oral squamous cell carcinoma staging by depth of invasion**.",
+      "say": "A three week non-healing oral ulcer is cancer until biopsy acquits it; depth of invasion now stages it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+        "alt": "Salivary glands anatomy and histology with oral cavity",
+        "caption": "Oral cavity and salivary gland anatomy framing oral cancer and salivary disease."
+      }
+    },
+    {
+      "tx": "Salivary glands divide tumours by gland size inversely to malignancy probability: parotid mostly benign pleomorphic adenoma, smaller glands increasingly malignant, with facial nerve at parotid surgery's centre. That size rule is **salivary tumour malignancy by gland size**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Bigger gland, kinder tumour: parotid mostly benign, sublingual mostly malignant, nerve preservation permitting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/salivary-gland-disorders-ent-fig1.webp",
+        "alt": "Salivary gland disorders",
+        "caption": "Salivary gland disorders across stones, infection, and tumours."
+      }
+    },
+    {
+      "tx": "Pleomorphic adenoma, commonest salivary tumour, mixes epithelial and myoepithelial elements in chondromyxoid stroma, recurs if enucleated through capsular pseudopods, and rarely transforms into carcinoma ex pleomorphic adenoma. The mixed tumour is **pleomorphic adenoma of salivary glands**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Excise pleomorphic adenoma with a cuff, never shell it out; pseudopods left behind recur years later.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Gland accent",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Pleomorphic adenoma",
+            "Parotid commonest",
+            "Carcinoma ex pleomorphic adenoma risk"
+          ],
+          [
+            "Warthin tumour",
+            "Parotid, older male smokers",
+            "Bilateral sometimes, lymphoid stroma"
+          ],
+          [
+            "Mucoepidermoid carcinoma",
+            "Commonest salivary malignancy",
+            "Grading drives therapy"
+          ],
+          [
+            "Adenoid cystic carcinoma",
+            "Minor glands favoured",
+            "Perineural spread, late lung metastases"
+          ]
+        ]
+      }
+    }
+  ]
+}

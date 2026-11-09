@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-lung-tumours",
+  "subject": "pathology",
+  "title": "Carcinoid Tumours, Pancoast Tumour, Horner and SVC Syndromes, Lambert-Eaton, and Hamartoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Bronchial carcinoid tumours grow as vascular central polyps causing wheeze, haemoptysis, and recurrent pneumonia, typical forms rarely metastasising, atypical forms by mitoses and necrosis behaving worse. Salt and pepper neuroendocrine chromatin marks the **bronchial carcinoid tumour, typical versus atypical**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "A vascular bronchial polyp with wheeze and haemoptysis in a younger non smoker suggests carcinoid.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typical carcinoid",
+          "points": [
+            "Low mitoses, no necrosis",
+            "Central, surgical cure usual",
+            "Carcinoid syndrome rare from lung primary"
+          ]
+        },
+        "right": {
+          "title": "Atypical carcinoid",
+          "points": [
+            "More mitoses or necrosis",
+            "Peripheral commoner, nodes spread",
+            "Closer small cell surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Carcinoid syndrome flushes and diarrhoeas when serotonin reaches systemic circulation, usually from liver metastases of gut primaries, while bronchial primaries occasionally bypass hepatic inactivation directly. The mediator remains **serotonin driven carcinoid syndrome**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Bronchial carcinoids can flush without liver metastases because their serotonin skips the portal filter.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Bronchial carcinoid",
+          "Midgut carcinoid"
+        ],
+        "rows": [
+          [
+            "Syndrome route",
+            "Systemic veins directly",
+            "Needs liver metastases usually"
+          ],
+          [
+            "Heart disease",
+            "Possible either side rarely",
+            "Right sided classic"
+          ],
+          [
+            "Urine 5-HIAA",
+            "Raised when syndromic",
+            "Raised with liver burden"
+          ],
+          [
+            "Imaging pearl",
+            "Central vascular polyp",
+            "Desmoplastic mesenteric mass"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pancoast tumours invade the superior sulcus, destroying first ribs and vertebrae, injuring brachial plexus lower trunk and sympathetic chain, producing shoulder pain radiating down ulnar arm. The apical invader is **Pancoast (superior sulcus) tumour syndrome**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Shoulder pain down the ulnar arm with an apical mass is Pancoast tumour until imaging acquits it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lung-cancer-fig1.webp",
+        "alt": "Lung carcinoma patterns and metastasis",
+        "caption": "Lung carcinoma patterns including apical superior sulcus tumours."
+      }
+    },
+    {
+      "tx": "Horner syndrome joins Pancoast anatomy when stellate ganglion invasion interrupts sympathetic supply, producing ptosis, miosis, anhidrosis, and enophthalmos on the tumour's side. That sympathetic signature is **Horner syndrome of superior sulcus invasion**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Ptosis, small pupil, dry face beside shoulder pain localises invasion to the stellate ganglion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Horner present",
+          "points": [
+            "Ptosis, miosis, anhidrosis",
+            "Stellate ganglion invaded",
+            "Apical imaging urgent"
+          ]
+        },
+        "right": {
+          "title": "Plexus dominant",
+          "points": [
+            "C8 T1 pain, hand wasting",
+            "Lower trunk brachial injury",
+            "MRI plexus and spine required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Superior vena cava syndrome swells face, neck, and arms with venous collaterals when malignancy, increasingly lymphoma and lung cancer, compresses or thromboses the great vein, stenting relieving emergencies. The venous emergency is **superior vena cava (SVC) syndrome**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Swollen face, distended neck veins, and a mediastinal mass mean SVC syndrome; tissue and stent race together.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Facial swelling, venous distension"
+          },
+          {
+            "id": "b",
+            "label": "CT venography maps obstruction"
+          },
+          {
+            "id": "c",
+            "label": "Tissue diagnosis pursued safely"
+          },
+          {
+            "id": "d",
+            "label": "Stent for severe, therapy for cause"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lambert-Eaton myasthenic syndrome weakens proximal muscles through presynaptic calcium channel antibodies, improving transiently with activity, drying mouth, and betraying small cell cancer in half its patients. The presynaptic syndrome is **Lambert-Eaton myasthenic syndrome (LEMS)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Weakness that briefly improves with use plus dry mouth means Lambert-Eaton; hunt small cell cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Lambert-Eaton",
+          "Myasthenia gravis"
+        ],
+        "rows": [
+          [
+            "Weakness pattern",
+            "Proximal legs, improves with activity",
+            "Ocular, bulbar, fatigable"
+          ],
+          [
+            "Reflexes and autonomics",
+            "Reduced reflexes, dry mouth",
+            "Reflexes normal, autonomics spared"
+          ],
+          [
+            "Antibody",
+            "Voltage gated calcium channel",
+            "Acetylcholine receptor, MuSK"
+          ],
+          [
+            "Cancer link",
+            "Small cell lung cancer",
+            "Thymoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pulmonary hamartoma, commonest benign lung tumour, grows coin lesions of cartilage, fat, and cleft epithelium with popcorn calcification in middle aged incidental imaging. The benign coin is **pulmonary hamartoma (chondroid hamartoma)**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Popcorn calcification in a coin lesion reassures toward hamartoma, lung's commonest benign tumour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mesothelioma-fig1.webp",
+        "alt": "Mesothelioma pleural mass on coronal CT",
+        "caption": "Thoracic tumour imaging contrasting pleural malignancy with benign coin lesions."
+      }
+    },
+    {
+      "tx": "Metastatic lung disease outnumbers primary tumours, cannonball deposits from kidney, testis, and colon, lymphangitic threads from breast and stomach, and miliary patterns each narrating their primaries. Pattern reading performs **metastatic patterns in the lung**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Cannonballs, lymphangitic threads, or miliary seeds in lung each point back to a different primary.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Solitary pulmonary nodule",
+          "points": [
+            "Primary cancer, hamartoma, granuloma race",
+            "Growth and PET characterise",
+            "Biopsy by risk and position"
+          ]
+        },
+        "right": {
+          "title": "Multiple deposits",
+          "points": [
+            "Metastases favoured strongly",
+            "Primary hunt guided by pattern",
+            "Oncology staging follows"
+          ]
+        }
+      }
+    }
+  ]
+}
