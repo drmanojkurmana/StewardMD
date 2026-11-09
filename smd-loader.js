@@ -121,7 +121,7 @@
     ".smd-ld-fact.out{opacity:0}" +
     ".smd-ld-fact span{display:inline-block;animation:smdLdWord .42s cubic-bezier(.23,1,.32,1) both;animation-delay:calc(var(--i)*24ms)}" +
     ".smd-ld-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}" +
-    ".smd-ld-cover{position:fixed;inset:0;z-index:790;display:flex;align-items:center;justify-content:center;transition:opacity .2s ease}" +
+    ".smd-ld-cover{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;transition:opacity .2s ease}" +
     ".smd-ld-cover.out{opacity:0;pointer-events:none}" +
     ".smd-ld-back{position:absolute;left:12px;top:calc(env(safe-area-inset-top,0px) + 8px);width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:inherit;font:inherit;display:flex;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}" +
     ".smd-ld-back:active{opacity:.5}" +
@@ -177,21 +177,53 @@
     var clear = /^(transparent|rgba\(.*, 0\))$/;
     return { bg: !clear.test(b.backgroundColor) ? b.backgroundColor : !clear.test(h.backgroundColor) ? h.backgroundColor : "#101418", fg: b.color };
   }
-  /* Covers the screen while promise p is pending. The result passes straight through, so the caller opens the module
-     first and the cover fades off the top of it. If the person taps back, the result never arrives and nothing opens. */
-  function during(p) {
-    var c = pageColours(), cancelled = false, el = document.createElement("div");
+  /* One full-screen cover at a time. It stays up until the hold time has passed and no download is pending, so a module
+     can open and do its first load behind it. It sits above the modules (z-index 880 to 885). */
+  var active = null;
+  function cover() {
+    if (active) return active;
+    var col = pageColours(), el = document.createElement("div"), c = { el: el, until: 0, pending: 0, cancelled: false, onBack: null, t: 0 };
     el.className = "smd-ld-cover";
-    el.style.background = c.bg; el.style.color = c.fg;
+    el.style.background = col.bg; el.style.color = col.fg;
     el.innerHTML = '<button type="button" class="smd-ld-back" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button><span class="smd-ld-sr" role="status">Loading</span>' + html();
     document.body.appendChild(el);
-    function hide() { el.classList.add("out"); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 220); }
-    el.firstChild.addEventListener("click", function () { cancelled = true; hide(); });
-    return p.then(function (v) {
-      if (cancelled) return new Promise(function () {});
-      setTimeout(hide, 0);
-      return v;
-    }, function (e) { hide(); throw e; });
+    el.firstChild.addEventListener("click", function () {
+      c.cancelled = true; hide(c);
+      if (c.onBack) try { c.onBack(); } catch (e) {}
+    });
+    return (active = c);
   }
-  window.SMD_LOADER = { html: html, during: during };
+  function hide(c) {
+    clearTimeout(c.t);
+    if (active === c) active = null;
+    c.el.classList.add("out");
+    setTimeout(function () { if (c.el.parentNode) c.el.parentNode.removeChild(c.el); }, 220);
+  }
+  function settle(c) {
+    clearTimeout(c.t);
+    if (c.pending) return;
+    var left = c.until - Date.now();
+    if (left <= 0) hide(c); else c.t = setTimeout(function () { settle(c); }, left);
+  }
+  /* Keep the cover up for at least ms. onBack runs if the person taps back, to close the module opened behind it. */
+  function hold(ms, onBack) {
+    var c = cover();
+    c.until = Math.max(c.until, Date.now() + ms);
+    if (onBack) c.onBack = onBack;
+    settle(c);
+  }
+  /* Keep the cover up while p is pending, plus a moment for the module's first paint. The result passes straight through,
+     so the caller opens the module behind the cover. After a back tap the result never arrives and nothing opens. */
+  function during(p) {
+    var c = cover();
+    c.pending++;
+    return p.then(function (v) {
+      if (c.cancelled) return new Promise(function () {});
+      c.pending--;
+      c.until = Math.max(c.until, Date.now() + 700);
+      settle(c);
+      return v;
+    }, function (e) { c.pending--; hide(c); throw e; });
+  }
+  window.SMD_LOADER = { html: html, during: during, hold: hold };
 })();
