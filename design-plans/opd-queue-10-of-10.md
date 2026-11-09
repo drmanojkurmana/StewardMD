@@ -12,7 +12,7 @@ The three decisions below were taken as recommended. Nothing here has been run o
 
 | Phase | State |
 |---|---|
-| 0 Safety net | Done: tag `opd-queue-pre-revamp`, flag `smd_opd_q2` (off), doctor harness repaired and in CI. Not done: `PRODUCT.md` / `DESIGN.md` (needs the owner). |
+| 0 Safety net | Done: recovery point is commit `6649970a` (the tag could not be pushed from the cloud session), flag `smd_opd_q2` (off), doctor harness repaired and in CI. Not done: `PRODUCT.md` / `DESIGN.md` (needs the owner). |
 | 1 Record | Done: one record per patient, number reuse, truthful backup card. Not done: merge of old duplicates, last-visit summary. |
 | 2 Clinic setup | Done: New clinic form in the app, staff text, first-run empty state (new screen). |
 | 3 Screen | Done behind the flag: queue screen, sheets, undo, autosave, 44px, names, tokens, 320 / 390, dark. Findings 1 to 3 fixed on both screens. Not done: check-in sheet audit, Patients as a view, Analytics. |

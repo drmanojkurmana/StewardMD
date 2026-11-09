@@ -12169,6 +12169,6 @@ duplicate records made before the fix are NOT auto-merged (a wrong merge puts on
 another's name). The on-device record is keyed by the server's MR number, not the ticket. The new screen
 ships behind `smd_opd_q2`, default off, with a switch in Settings because the app has no flag screen.
 The plan's ui-ux-pro-max style suggestion for healthcare (Neumorphism / Claymorphism) was rejected: low
-contrast surfaces fight a dense clinical list. Recovery point: tag `opd-queue-pre-revamp`.
+contrast surfaces fight a dense clinical list. Recovery point: commit `6649970a`, the parent of the change (the tag `opd-queue-pre-revamp` could not be pushed from the cloud session).
 Reversible: `smd_opd_q2=0` (the default) and `smd_opd_patient_key=0`.
 
