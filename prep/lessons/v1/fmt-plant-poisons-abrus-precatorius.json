@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-plant-poisons-abrus-precatorius",
+ "subject": "forensic-medicine",
+ "module": "fmt-plant-poisons",
+ "title": "Abrus Precatorius, Sui Needles, Datura and Oleanders",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Abrus seeds and the toxalbumin abrin",
+   "tx": "**Abrus precatorius**, jequirity, rosary bead, gunja or rati, is a slender twining climber found all over India whose egg shaped seeds are bright scarlet with a large black spot at one end, eight by six millimetres and about one hundred five milligrams each. They contain **abrin**, a toxalbumin similar to viper venom that inhibits protein synthesis and kills cells, with abrine, a haemagglutinin and a lipolytic enzyme. All parts of the plant are poisonous, and the seeds are tasteless and odourless.",
+   "say": "Scarlet seeds with a black spot carry abrin, a protein synthesis poison kin to viper venom, at a hundred milligrams a seed.",
+   "vis": {"kind": "table", "cols": ["Abrus feature", "Detail", "Forensic point"], "rows": [["Seed look", "Scarlet with black spot", "Identifiable in stomach"], ["Seed weight", "About 105 mg each", "Traditional rati weight"], ["Active principle", "Abrin toxalbumin", "Blocks protein synthesis"], ["Fatal injected dose", "90 to 120 mg, one to two seeds", "Subcutaneous route worst"]]}
+  },
+  {
+   "title": "Sui needles for cattle killing",
+   "tx": "The seeds are decorticated and made into **sui needles**: paste of seed alone or with datura, opium and onion in spirit and water is shaped into small sharp spikes fifteen millimetres long weighing ninety to one hundred twenty milligrams, dried in the sun and set two at a time into holes in a wooden handle. A forceful blow drives the needle into an animal's flesh. Leather workers poison cattle this way for cheap hides or revenge, and the resulting illness imitates viper bite so closely that poisoning is not suspected.",
+   "say": "Seed paste spikes in a wooden handle are driven into cattle for their hides, and the death masquerades as snake bite.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Seeds decorticated and pasted"}, {"id": "b", "label": "Spikes dried, set in handle"}, {"id": "c", "label": "Blow drives needle into flesh"}, {"id": "d", "label": "Viper like death follows in days"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Abrin poisoning by mouth and by needle",
+   "tx": "Swallowed abrin declares itself after hours to two or three days in **abrus poisoning**: severe upper gut irritation, abdominal pain, nausea, vomiting, bloody diarrhoea, weakness, cold sweat, trembling hands, weak rapid pulse, miosis and rectal bleeding, with delayed cytotoxic injury to brain, liver, kidneys and adrenals at two to five days. Injected extract instead gives painful swelling, ecchymosis, inflammation and necrosis at the puncture, with convulsions or coma before death from cardiac failure in three to five days.",
+   "say": "By mouth, bloody gut then organ failure over days; by needle, a necrotic puncture with viper like systemic collapse.",
+   "vis": {"kind": "compare", "left": {"title": "Oral abrus", "points": ["Delay hours to three days", "Bloody diarrhoea, rectal bleeding", "Delayed brain and kidney injury", "Seeds may pass partly intact"]}, "right": {"title": "Injected abrus", "points": ["Painful swollen puncture site", "Ecchymosis and necrosis", "Convulsions or coma", "Death in three to five days"]}}
+  },
+  {
+   "title": "Homicidal sui and malingering uses",
+   "tx": "For homicide the needle is kept **between two fingers and the victim is slapped**, driving it into the body almost unnoticed. Powdered seeds are rubbed into eyes by malingerers to manufacture conjunctivitis. The seeds also serve as abortifacient, arrow poison and, taken internally, to disturb uterine function and prevent conception. Treatment dissects the needle out where present, lavages and gives charcoal and purgative, injects antiabrin where available, and alkalinises urine with ten grams of sodium bicarbonate daily against haemoglobin blocking the renal tubules.",
+   "say": "A slap hides the homicidal needle, seed dust fakes conjunctivitis, and the buried needle must be dissected out.",
+   "vis": {"kind": "table", "cols": ["Abrus use", "Method", "Clue"], "rows": [["Cattle killing", "Sui blow with handle", "Needle fragment in flesh"], ["Homicide", "Slap drives finger needle", "Small necrotic puncture"], ["Malingering", "Seed powder in eyes", "Manufactured conjunctivitis"], ["Treatment anchor", "Dissect needle, antiabrin", "Alkalinise the urine"]]}
+  },
+  {
+   "title": "Datura, the thorn apple deliriant",
+   "tx": "**Datura fastuosa** grows on waste ground all over India, white flowered alba and purple flowered niger, with spherical spiny thorn apple fruits holding up to five hundred yellowish brown seeds. Seeds and fruit carry nought point two to one point four percent hyoscine, hyoscyamine and traces of atropine. These alkaloids first stimulate higher then motor centres, then depress and paralyse medullary centres, while peripheral anticholinergic effects dominate the clinical picture.",
+   "say": "Five hundred atropine kin seeds in a spiny fruit make datura the classic Indian deliriant of roadside robberies.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Seeds eaten or decoction drunk"}, {"id": "b", "label": "Higher centres stimulated first"}, {"id": "c", "label": "Anticholinergic storm follows"}, {"id": "d", "label": "Medullary depression threatens"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Datura poisoning: dry, blind and delirious",
+   "tx": "**Datura poisoning** begins within half an hour of seeds, minutes of decoction: bitter taste, dry mouth and throat, difficult speech and swallowing, hoarse voice, flushed face, congested conjunctivae and widely dilated pupils with lost accommodation, temporary blindness, photophobia and diplopia. Then restlessness and agitation, failure to recognise relatives, urinary retention, confusion, giddiness and a staggering gait complete the anticholinergic delirium that roadside robbers exploit to stupefy travellers.",
+   "say": "Dry mouth, huge blind pupils, flushed skin and delirious staggering within the hour are datura's unmistakable storm.",
+   "vis": {"kind": "compare", "left": {"title": "Datura eye and skin", "points": ["Pupils wide, accommodation lost", "Temporary blindness, photophobia", "Face flushed, conjunctivae red", "Pollen alone can dilate one pupil"]}, "right": {"title": "Datura mind and body", "points": ["Restless, agitated, confused", "Relatives not recognised", "Urinary retention", "Staggers as if drunk"]}}
+  },
+  {
+   "title": "Datura seeds versus capsicum seeds",
+   "tx": "Recovered seeds are separated by the **datura capsicum seed table**. Datura seeds are large and thick, kidney shaped, dark or yellowish brown, laterally compressed with a double edged convex border, surface pitted with small depressions, odourless and bitter, embryo curved outward at the hilum on section. Capsicum seeds are smaller, thinner, paler and single edged. The distinction matters because datura is criminally mixed into food, and seed fragments in vomit or stomach contents are primary evidence.",
+   "say": "Kidney shaped, double edged, pitted and bitter names datura seed; smaller and single edged names harmless capsicum.",
+   "vis": {"kind": "table", "cols": ["Trait", "Datura seed", "Capsicum seed"], "rows": [["Size and shape", "Large, thick, kidney shaped", "Smaller, thinner"], ["Border", "Double edged convex border", "Single edged"], ["Surface and taste", "Pitted, odourless, bitter", "Smoother, pungent"], ["Embryo on section", "Curved outward at hilum", "Curved differently"]]}
+  },
+  {
+   "title": "Yellow oleander, Cerbera thevetia",
+   "tx": "**Cerbera thevetia**, yellow oleander, and Nerium odorum are cardiac glycoside plants whose poison behaves like digitalis on the heart. Ingestion, classically of seeds or root in suicidal and abortifacient use, gives gut irritation followed by bradycardia, heart block and fatal arrhythmia, with vomiting keeping some poison out. Reddy classifies oleanders among heart poisons with digitalis and aconite. Serum digoxin cross reactivity can support the diagnosis while treatment follows cardiac glycoside lines with rhythm monitoring.",
+   "say": "Yellow oleander seeds poison the heart like digitalis, ending in block and arrhythmia after a vomiting start.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Oleander seeds ingested"}, {"id": "b", "label": "Gut irritation and vomiting"}, {"id": "c", "label": "Bradycardia and heart block"}, {"id": "d", "label": "Fatal arrhythmia threatens"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Cerbera odollam and plant cardiac poisons compared",
+   "tx": "**Cerbera odollam**, the suicide tree of coastal regions, carries cerberin, another digitalis like glycoside in its kernel, producing hyperkalaemia with bradyarrhythmia. The forensic lesson across oleanders is uniform: plant cardiac poisons present as unexplained bradycardia and block in a previously well person, seeds or plant parts are sought in gastric contents, and the ECG is preserved as evidence. Aconite, next lesson, differs by burning tingling and bidirectional arrhythmias rather than clean digitalis like block.",
+   "say": "Coastal Cerbera and yellow oleander both block the heart like digitalis, so preserve the ECG and hunt seeds in the stomach.",
+   "vis": {"kind": "compare", "left": {"title": "Oleander pattern", "points": ["Digitalis like glycosides", "Bradycardia and heart block", "Seeds in gastric contents", "ECG kept as evidence"]}, "right": {"title": "Aconite contrast preview", "points": ["Tingling and numbness first", "Arrhythmias of many types", "Root mistaken for horseradish", "Death in two to six hours"]}}
+  }
+ ],
+ "quiz": []
+}
