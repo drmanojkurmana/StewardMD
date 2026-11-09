@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "ent-laryngeal-cancer-glottic-carcinoma",
+ "subject": "ent",
+ "module": "ent-laryngeal-cancer",
+ "title": "Carcinoma of the Larynx",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Glottic carcinoma** arises on the vocal fold and hoarsens voice within millimetres of growth, presenting early while still curable by voice preserving treatment. Sparse fold lymphatics delay nodal spread, so early lesions rarely need elective neck treatment. Smoking drives most cases, and persistent hoarseness beyond three weeks in a smoker is cancer until endoscopy and biopsy prove otherwise.",
+   "say": "Fold cancer hoarsens voice within millimetres and presents early for curative treatment. Sparse lymphatics delay nodal spread in early lesions significantly. Smoker hoarseness beyond three weeks needs cancer exclusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-cancer-fig1.webp",
+    "alt": "Glottic laryngeal carcinoma diagram showing tumour arising on the vocal fold.",
+    "caption": "Glottic carcinoma of the vocal fold. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Supraglottic carcinoma** grows in a lymph rich, symptom poor region, presenting late with referred ear pain, neck nodes or muffled voice while the folds still move. Bilateral neck treatment accompanies primary therapy because drainage crosses midline freely. Aspiration risk after treatment is higher here because sensation and sphincteric protection are disturbed by both tumour and therapy.",
+   "say": "Lymph rich supraglottic growth presents late through nodes or ear pain. Bilateral neck treatment is part of primary therapy routinely here. Aspiration risk is higher after treatment in this region.",
+   "vis": {
+    "kind": "table",
+    "title": "Laryngeal cancer by subsite",
+    "cols": [
+     "Subsite",
+     "Presentation pattern"
+    ],
+    "rows": [
+     [
+      "Glottic",
+      "Early hoarseness, late nodes"
+     ],
+     [
+      "Supraglottic",
+      "Late nodes and ear pain"
+     ],
+     [
+      "Subglottic",
+      "Airway narrowing, voice late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subglottic carcinoma** is rarest, spreading downward toward trachea and prelaryngeal nodes while voice stays normal until airway narrowing dominates. Stridor in an adult smoker therefore earns subglottic inspection with imaging, not repeated asthma labelling. Treatment more often needs laryngectomy based approaches because cricoid involvement limits conservation surgery and radiation fields must cover paratracheal nodes.",
+   "say": "Rare subglottic growth narrows airway while voice remains normal initially. Adult stridor needs subglottic inspection rather than asthma labels. Cricoid involvement is a limit on conservation options significantly.",
+   "vis": {
+    "kind": "table",
+    "title": "Subglottic warnings",
+    "cols": [
+     "Sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Adult stridor",
+      "Inspect subglottis"
+     ],
+     [
+      "Normal voice",
+      "Does not exclude disease"
+     ],
+     [
+      "Cricoid spread",
+      "Limits conservation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TNM staging larynx** turns on fold mobility, subsite spread, cartilage invasion and extralaryngeal extension for the primary, with nodal size, number, laterality and extranodal spread for the neck. Impaired mobility upstages glottic disease, fixation advances further, and cartilage invasion marks advanced local disease. Imaging with endoscopy under anaesthesia together assign stage before multidisciplinary treatment selection.",
+   "say": "Mobility, cartilage invasion and extralaryngeal spread set primary stage in laryngeal cancer. Fixation advances stage beyond impaired mobility further. Combined imaging and anaesthetic endoscopy assign stage accurately.",
+   "vis": {
+    "kind": "flow",
+    "title": "Staging before treatment",
+    "nodes": [
+     {
+      "id": "scope",
+      "label": "Endoscopy and biopsy"
+     },
+     {
+      "id": "mob",
+      "label": "Record fold mobility"
+     },
+     {
+      "id": "img",
+      "label": "CT and MRI deep extent"
+     },
+     {
+      "id": "mdt",
+      "label": "Multidisciplinary selection"
+     }
+    ],
+    "edges": [
+     [
+      "scope",
+      "mob"
+     ],
+     [
+      "mob",
+      "img"
+     ],
+     [
+      "img",
+      "mdt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Total laryngectomy** removes the whole voice box for advanced or salvage disease, separating airway to a permanent neck stoma and swallowing to the pharynx. It cures many advanced tumours at the cost of natural voice, smell and airway humidification. Patient selection weighs cure probability against pulmonary reserve, support at home and acceptance of stoma life, discussed honestly before consent.",
+   "say": "Whole voice box removal gives permanent stoma breathing with separated swallowing. Cure probability is weighed against stoma life acceptance honestly. Pulmonary reserve and home support affect selection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Organ preservation route",
+     "points": [
+      "Radiation based treatment",
+      "Larynx retained anatomically",
+      "Salvage surgery if failure"
+     ]
+    },
+    "right": {
+     "title": "Total laryngectomy route",
+     "points": [
+      "Whole larynx removed",
+      "Permanent neck stoma",
+      "Voice prosthesis rehabilitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Partial laryngectomy** removes part of the larynx with tumour margins while preserving breathing without permanent stoma and swallowing without tube in selected intermediate tumours. Vertical and supraglottic partial operations suit different subsites, each demanding adequate pulmonary reserve for temporary aspiration. Modern transoral laser and robotic resections extend conservation to lesions once needing open surgery, with margins assessed microscopically.",
+   "say": "Partial removal preserves breathing and swallowing in selected intermediate tumours. Pulmonary reserve is required for temporary aspiration tolerance. Laser resections extend conservation with microscopic margins.",
+   "vis": null
+  },
+  {
+   "tx": "**Tracheoesophageal puncture** creates a controlled fistula between trachea and oesophagus after laryngectomy, fitted with a one way voice prosthesis that diverts lung air to vibrate the pharynx for speech. It gives the most natural post laryngectomy voice in successful users. Leakage around the prosthesis, candida colonisation and fistula widening are its maintenance burdens, managed by prosthesis changes in clinic.",
+   "say": "Controlled fistula with valve diverts lung air for pharyngeal voice after laryngectomy. Successful users have the most natural replacement voice available. Leakage and colonisation need clinic maintenance regularly.",
+   "vis": {
+    "kind": "table",
+    "title": "Voice after total laryngectomy",
+    "cols": [
+     "Method",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Voice prosthesis",
+      "Lung air vibrates pharynx"
+     ],
+     [
+      "Oesophageal speech",
+      "Swallowed air eructation voice"
+     ],
+     [
+      "Electrolarynx",
+      "External vibration device"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oesophageal speech** uses swallowed air released through the pharyngo-oesophageal segment to produce serviceable voice without devices or surgery, learned with speech therapy over months. Success varies and fluency rarely matches prosthesis speech, but it needs no maintenance hardware. The electrolarynx remains the immediate fallback for every laryngectomy patient from the first postoperative week, guaranteeing communication while long term methods are learned.",
+   "say": "Swallowed air release produces device free voice learned over months of therapy. Fluency is rarely equal to prosthesis speech in successful users. External devices give communication from the first week.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-framework-and-vocal-cords-fig1.webp",
+    "alt": "Laryngeal framework diagram for orientation to resection levels and voice rehabilitation.",
+    "caption": "Laryngeal framework and resection orientation. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Radiotherapy** treats early glottic cancer with cure rates matching surgery while preserving voice quality better on average, and forms the backbone of chemoradiation preservation for intermediate disease. Failure after radiation leaves salvage laryngectomy with higher wound complications in irradiated tissue. Choice between primary surgery and radiation therefore weighs voice priorities, comorbidity, salvage acceptability and patient preference after balanced counselling.",
+   "say": "Radiation gives cure in early fold cancer with voice preservation advantage on average. Salvage surgery after failure has higher wound complications in irradiated tissue. Balanced counselling weighs voice priorities and salvage acceptability.",
+   "vis": null
+  },
+  {
+   "tx": "**Verrucous carcinoma** is a warty, locally destructive but rarely metastasising variant that needs wide excision and generous biopsy because superficial samples read as benign hyperkeratosis. Radiation is traditionally avoided from concern about anaplastic transformation, though modern series debate the magnitude. Its lesson is sampling depth: a wart that destroys cartilage is cancer however bland its surface histology appears.",
+   "say": "Warty locally destructive growth rarely spreads to nodes in verrucous carcinoma. Generous deep biopsy is required because surface samples mislead pathologists. Cartilage destruction indicates cancer despite bland surface histology.",
+   "vis": {
+    "kind": "table",
+    "title": "Larynx treatment anchors",
+    "cols": [
+     "Scenario",
+     "Anchor"
+    ],
+    "rows": [
+     [
+      "Early glottic",
+      "Radiation or laser, voice preserved"
+     ],
+     [
+      "Advanced resectable",
+      "Laryngectomy or chemoradiation by MDT"
+     ],
+     [
+      "Verrucous",
+      "Wide excision, deep biopsy"
+     ],
+     [
+      "Post laryngectomy",
+      "Prosthesis voice rehabilitation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Glottic cancer pattern",
+   "b": "Early hoarseness, sparse nodes; radiation or laser preserves voice with high cure in early disease."
+  },
+  {
+   "f": "Voice prosthesis mechanism",
+   "b": "Tracheoesophageal puncture valve diverts lung air to vibrate pharynx after total laryngectomy."
+  },
+  {
+   "f": "Verrucous carcinoma",
+   "b": "Warty, destroys locally, rarely metastasises; needs deep biopsy and wide excision."
+  }
+ ],
+ "keys": [
+  "Hoarseness over three weeks in a smoker is cancer until disproved",
+  "Supraglottic cancer needs bilateral neck treatment",
+  "Fixation and cartilage invasion mean advanced stage"
+ ]
+}
