@@ -1,194 +1,245 @@
 {
   "v": 1,
-  "module": "pat-platelet-disorders",
-  "subject": "pathology",
-  "title": "Haemolytic Uraemic Syndrome, Bernard-Soulier, Glanzmann, and von Willebrand Disease",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-platelet-disorders",
+  "key": null,
+  "title": "Haemolytic Uraemic Syndrome, Bernard-Soulier, Glanzmann, and von Willebrand Disease",
   "steps": [
     {
-      "tx": "Haemolytic uraemic syndrome triads microangiopathic haemolysis, thrombocytopenia, and acute kidney injury, classically after Shiga toxin Escherichia coli bloody diarrhoea in children, with complement driven atypical forms behind it. The renal microangiopathy is **haemolytic uraemic syndrome (HUS)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Bloody diarrhoea then pallor, low platelets, and kidney failure in a child spell Shiga toxin HUS.",
+      "tx": "Typical **haemolytic uraemic syndrome** represents the leading cause of acute kidney injury in young children, classically triggered by gastrointestinal infection with Shiga toxin-producing Escherichia coli (serotype O157:H7) or Shigella dysenteriae. Following a prodrome of crampy abdominal pain and gross bloody diarrhoea, absorbed Shiga toxins (Stx1 and Stx2) bind globotriaosylceramide (Gb3) receptors abundantly expressed on glomerular endothelial cells. Receptor-mediated endocytosis arrests cellular protein synthesis, causing swelling, detachment, and thrombosis confined predominantly to the renal microvasculature, producing acute oliguric renal failure.",
+      "say": "Typical haemolytic uraemic syndrome is the commonest cause of acute renal failure in toddlers and young children. It follows foodborne infection with Shiga toxin-producing E. coli O157:H7, typically contracted from undercooked ground beef. The Shiga toxin binds Gb3 receptors on glomerular capillary endothelial cells, shutting down protein synthesis. Swollen, damaged endothelial cells trigger localized microthrombi that occlude glomeruli, presenting with acute oliguria, haemolytic anaemia, and thrombocytopenia.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/hemolytic-uremic-syndrome-fig1.webp",
-        "alt": "Haemolytic uraemic syndrome schistocyte blood film",
+        "alt": "Peripheral blood smear showing schistocytes, helmet cells, and thrombocytopenia in haemolytic uraemic syndrome",
         "caption": "Haemolytic uraemic syndrome with schistocytes and microangiopathic haemolysis."
       }
     },
     {
-      "tx": "Separating HUS from TTP decides therapy: HUS is kidney dominant with ADAMTS13 preserved, TTP is brain and systemic dominant with enzyme absent, and atypical complement HUS earns complement blockade. That fork is **HUS versus TTP differentiation by ADAMTS13 and organ pattern**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Kidney first suggests HUS, neurology first suggests TTP; ADAMTS13 adjudicates the borderland.",
+      "tx": "In contrast to diarrhoea-associated typical HUS, atypical haemolytic uraemic syndrome is a genetic disorder of complement regulation that can strike at any age without diarrhoea. Pathogenesis centers on loss-of-function mutations in regulatory proteins of the **alternative complement pathway**, predominantly complement factor H, factor I, or membrane cofactor protein (CD46), or gain-of-function mutations in C3 or factor B. Uncontrolled alternative complement activation generates membrane attack complexes (C5b-9) that lyse glomerular endothelial cells, managed targetedly with the anti-C5 monoclonal antibody eculizumab.",
+      "say": "Atypical haemolytic uraemic syndrome is not caused by bacterial toxins; rather, it is an inherited disorder of complement regulation. Patients harbor genetic defects in complement regulatory proteins, most frequently factor H or factor I. Lacking proper inhibitory control, the alternative complement pathway runs wild, depositing membrane attack complexes on endothelial cells and driving severe thrombosis. Treating atypical HUS requires targeted complement blockade with the monoclonal antibody eculizumab.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "HUS pattern",
+          "title": "Typical (Shiga-Toxin) HUS",
           "points": [
-            "Kidney injury dominant",
-            "ADAMTS13 above ten percent",
-            "Diarrhoeal or complement driven"
+            "Triggered by STEC (E. coli O157:H7)",
+            "Preceded by bloody diarrhoea in young children",
+            "Toxin binds endothelial Gb3 receptors",
+            "Managed with supportive fluid and electrolyte care"
           ]
         },
         "right": {
-          "title": "TTP pattern",
+          "title": "Atypical (Complement) HUS",
           "points": [
-            "Neurological and systemic ischaemia",
-            "ADAMTS13 under ten percent",
-            "Plasma exchange emergency"
+            "Genetic mutations in Factor H, Factor I, or CD46",
+            "Occurs without antecedent diarrhoeal prodrome",
+            "Unchecked alternative complement C5 activation",
+            "Requires targeted anti-C5 antibody (eculizumab)"
           ]
         }
       }
     },
     {
-      "tx": "Bernard-Soulier syndrome deletes the GPIb platelet receptor for von Willebrand factor, so platelets cannot tether to injured vessels, producing giant platelets, thrombocytopenia, and severe mucosal bleeding from childhood. The adhesion defect is **Bernard-Soulier syndrome (GPIb deficiency)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Giant platelets that cannot stick to von Willebrand factor define Bernard-Soulier syndrome.",
+      "tx": "Bernard-Soulier syndrome is a rare autosomal recessive bleeding disorder resulting from loss-of-function mutations in genes encoding the **glycoprotein Ib-IX-V receptor complex** (GP1BA, GP1BB, or GP9). Because this receptor complex binds subendothelial von Willebrand factor, platelets fail to adhere to exposed collagen under high arteriolar shear rates. Morphological examination of peripheral blood reveals severe bleeding tendency paired with moderate thrombocytopenia and pathognomonic giant platelets measuring four to eight micrometers in diameter, approaching the dimensions of normal erythrocytes.",
+      "say": "Bernard-Soulier syndrome is an autosomal recessive disorder caused by deficiency of the glycoprotein one-b-nine-five complex, the primary receptor that anchors platelets to subendothelial von Willebrand factor. Without this receptor, platelets cannot adhere to injured vessel walls. A classic diagnostic hallmark on the blood film is the appearance of giant platelets, often as large as normal red blood cells, accompanied by mild thrombocytopenia and a prolonged bleeding time.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/bernard-soulier-syndrome-fig1.webp",
-        "alt": "Bernard Soulier platelet defect",
+        "alt": "Peripheral blood smear showing giant platelets in Bernard-Soulier syndrome beside normal red blood cells",
         "caption": "Bernard-Soulier platelet defect with absent GPIb adhesion receptor and giant platelets."
       }
     },
     {
-      "tx": "Glanzmann thrombasthenia removes the GPIIb-IIIa fibrinogen receptor, so platelets aggregate to nothing despite normal count and adhesion, and ristocetin response survives while ADP, collagen, and adrenaline responses vanish. The aggregation defect is **Glanzmann thrombasthenia (GPIIb-IIIa deficiency)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Normal count, no aggregation except ristocetin: Glanzmann thrombasthenia has lost its fibrinogen bridge.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Disease",
-          "Receptor lost",
-          "Aggregometry signature"
-        ],
-        "rows": [
-          [
-            "Bernard-Soulier",
-            "GPIb adhesion receptor",
-            "Ristocetin response absent"
-          ],
-          [
-            "Glanzmann thrombasthenia",
-            "GPIIb-IIIa aggregation receptor",
-            "Only ristocetin response preserved"
-          ],
-          [
-            "von Willebrand disease",
-            "vWF quantity or quality",
-            "Ristocetin cofactor reduced"
-          ],
-          [
-            "Storage pool disease",
-            "Granule release",
-            "Second wave aggregation lost"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Von Willebrand disease, commonest inherited bleeding disorder, reduces platelet adhesion and factor VIII carriage through quantitative type 1 and 3 or qualitative type 2 von Willebrand factor defects. Mucosal bleeding dominates its story: **von Willebrand disease (vWD)**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Von Willebrand disease is the commonest inherited bleeder: nose, gums, periods, and post extraction oozing.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/von-willebrand-disease-fig1.webp",
-        "alt": "Von Willebrand disease overview",
-        "caption": "Von Willebrand disease overview linking adhesion failure to factor VIII carriage."
-      }
-    },
-    {
-      "tx": "Von Willebrand factor levels swing with blood group O lowering them, stress, oestrogen, and inflammation raising them, so borderline results need repeated testing and clinical bleeding scores before labels attach. Variability discipline is **von Willebrand testing interpretation**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Group O runs low and stress runs high; repeat borderline von Willebrand tests before labelling anyone.",
+      "tx": "Glanzmann thrombasthenia is an autosomal recessive bleeding disorder caused by quantitative deficiency or functional defect of the **glycoprotein IIb/IIIa integrin complex** (integrin alpha-IIb beta-3), encoded by ITGA2B and ITGB3 genes. While primary platelet adhesion to subendothelium occurs normally, platelets cannot aggregate together because glycoprotein IIb/IIIa functions as the essential receptor that binds divalent fibrinogen molecules to cross-link adjacent platelets. Patients present with severe lifelong mucocutaneous haemorrhages, menorrhagia, and prolonged bleeding time despite having completely normal platelet counts and normal platelet morphology.",
+      "say": "Glanzmann thrombasthenia is an autosomal recessive disorder resulting from deficiency of glycoprotein two-b-three-a, the integrin that binds fibrinogen to cross-link platelets together into a cohesive plug. Platelet adhesion to vessel walls is preserved, but platelet-to-platelet aggregation is totally abolished. Patients suffer from severe mucocutaneous bleeding and epistaxis. In striking contrast to Bernard-Soulier, both platelet count and platelet size are completely normal.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Type patterns",
+          "title": "Bernard-Soulier Syndrome",
           "points": [
-            "Type 1 partial quantity loss, commonest",
-            "Type 2 quality defects, subtypes",
-            "Type 3 near absent, severe, factor VIII low"
+            "Defect: Glycoprotein Ib-IX-V receptor complex",
+            "Primary failure of platelet adhesion to vWF",
+            "Blood smear: Moderate thrombocytopenia with giant platelets",
+            "Aggregometry: Fails with ristocetin; normal with ADP/collagen"
           ]
         },
         "right": {
-          "title": "Treatment levers",
+          "title": "Glanzmann Thrombasthenia",
           "points": [
-            "Desmopressin releases stores in type 1",
-            "vWF concentrates for severe or resistant",
-            "Tranexamic acid for mucosal procedures"
+            "Defect: Glycoprotein IIb/IIIa integrin complex",
+            "Primary failure of platelet aggregation (fibrinogen binding)",
+            "Blood smear: Normal platelet count and normal platelet size",
+            "Aggregometry: Normal with ristocetin; fails with ADP/collagen"
           ]
         }
       }
     },
     {
-      "tx": "Atypical HUS results from complement alternative pathway dysregulation by factor H, I, MCP, or C3 defects and autoantibodies, relapsing after transplant unless complement blockade with eculizumab protects the kidney. The complement disease is **atypical haemolytic uraemic syndrome (aHUS)**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "No diarrhoea, relapsing course, family history: atypical complement HUS earns eculizumab thinking early.",
+      "tx": "Accounting for one percent of the global population, **von Willebrand disease** is the most frequent inherited bleeding disorder in humans. Transmitted predominantly in an autosomal dominant fashion, it is characterized by quantitative deficiency or qualitative dysfunction of von Willebrand factor, a massive multimeric adhesive glycoprotein synthesized by vascular endothelial cells and megakaryocytes. Von Willebrand factor mediates initial platelet adhesion by bridging subendothelial type I and III collagen fibers to platelet glycoprotein Ib receptors and serves as the physiological stabilizing carrier for coagulation factor VIII.",
+      "say": "Von Willebrand disease is the single most common inherited bleeding disorder, affecting approximately one percent of people worldwide. It is mostly inherited as an autosomal dominant trait. Von Willebrand factor performs two vital jobs in haemostasis: first, it acts as molecular glue bridging subendothelial collagen to platelet glycoprotein one-b; second, it binds factor eight in plasma, shielding it from rapid clearance. Patients present with easy bruising, recurrent nosebleeds, and menorrhagia.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Microangiopathy with kidney dominance"
-          },
-          {
-            "id": "b",
-            "label": "ADAMTS13 preserved, Shiga test sent"
-          },
-          {
-            "id": "c",
-            "label": "Complement studies and genetics"
-          },
-          {
-            "id": "d",
-            "label": "Eculizumab for complement mediated disease"
-          }
+        "kind": "image",
+        "src": "v1/kb/media/von-willebrand-disease-fig1.webp",
+        "alt": "Diagram of von Willebrand factor multimer structure and dual physiological roles in adhesion and factor VIII carriage",
+        "caption": "Von Willebrand disease overview linking adhesion failure to factor VIII carriage."
+      }
+    },
+    {
+      "tx": "The International Society on Thrombosis and Haemostasis classifies von Willebrand disease into three primary categories based on quantitative versus qualitative multimeric defects. **Type 1 von Willebrand disease** accounts for seventy-five to eighty percent of all cases, inherited as an autosomal dominant trait characterized by a mild to moderate partial quantitative reduction of structurally normal vWF multimers. Type 2 encompasses qualitative functional defects divided into subtypes 2A, 2B, 2M, and 2N. Type 3 is an autosomal recessive, severe quantitative deficiency characterized by complete absence of vWF.",
+      "say": "Von Willebrand disease is divided into three main types. Type one is the commonest, accounting for nearly eighty percent of cases; it is an autosomal dominant partial quantitative deficiency where normal multimers are produced, but in reduced amounts. Type two comprises qualitative defects where the protein is present but defective. Type three is rare, severe, autosomal recessive disorder where von Willebrand factor is completely absent, causing severe bleeding that mimics haemophilia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "vWD Classification",
+          "Inheritance Pattern",
+          "Underlying Pathophysiological Defect",
+          "Factor VIII Activity"
         ],
-        "edges": [
+        "rows": [
           [
-            "a",
-            "b"
+            "Type 1 vWD",
+            "Autosomal dominant",
+            "Partial quantitative reduction in normal vWF",
+            "Proportionately decreased (30-50%)"
           ],
           [
-            "b",
-            "c"
+            "Type 2A vWD",
+            "Autosomal dominant",
+            "Loss of high-molecular-weight multimers",
+            "Normal or mildly decreased"
           ],
           [
-            "c",
-            "d"
+            "Type 2B vWD",
+            "Autosomal dominant",
+            "Gain of function binding GPIb; causes thrombocytopenia",
+            "Normal or mildly decreased"
+          ],
+          [
+            "Type 2N vWD",
+            "Autosomal recessive",
+            "Defective binding domain for Factor VIII",
+            "Severely decreased (<10%), mimicking haemophilia A"
+          ],
+          [
+            "Type 3 vWD",
+            "Autosomal recessive",
+            "Virtually complete absence of vWF protein",
+            "Profoundly decreased (<5%), hemarthroses"
           ]
         ]
       }
     },
     {
-      "tx": "Supportive care in typical HUS, meticulous fluids, dialysis, transfusion restraint, and avoidance of antimotility drugs and antibiotics controversies in Shiga disease, carries most children to recovery. Kidney support excellence is **supportive care in Shiga toxin HUS**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "In typical childhood HUS, superb fluids and dialysis support beat exotic therapy; avoid platelet transfusion unless bleeding.",
+      "tx": "Light transmission platelet aggregometry provides definitive laboratory discrimination among inherited platelet disorders. When exposed to agonists, normal platelets aggregate, increasing light transmission through platelet-rich plasma. In Bernard-Soulier syndrome, aggregation fails specifically in response to **ristocetin-induced platelet agglutination** because the glycoprotein Ib receptor is absent, while responses to adenosine diphosphate, collagen, and thrombin remain intact. Crucially, adding normal plasma fails to correct Bernard-Soulier ristocetin response, whereas in von Willebrand disease, adding normal plasma replenishes vWF and completely corrects ristocetin agglutination.",
+      "say": "Platelet aggregometry tests how platelets aggregate when exposed to chemical agonists. In Bernard-Soulier syndrome, platelets fail to agglutinate with ristocetin because they lack the glycoprotein one-b receptor, while aggregation with ADP and collagen is normal. Crucially, adding normal plasma does not fix Bernard-Soulier, because the platelet receptor itself is missing. In von Willebrand disease, ristocetin agglutination also fails, but adding normal plasma restores normal agglutination by providing the missing plasma factor.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Problem",
-          "Support",
-          "Avoid"
+        "kind": "compare",
+        "left": {
+          "title": "Bernard-Soulier Aggregometry",
+          "points": [
+            "Fails with ristocetin; normal with ADP, collagen, epinephrine",
+            "Defect is intrinsic to platelet membrane (GPIb absence)",
+            "Does NOT correct upon adding normal donor plasma",
+            "Smear shows giant platelets with thrombocytopenia"
+          ]
+        },
+        "right": {
+          "title": "Von Willebrand Aggregometry",
+          "points": [
+            "Fails with ristocetin; normal with ADP, collagen, epinephrine",
+            "Defect is in plasma carrier protein (vWF deficiency)",
+            "COMPLETELY corrects upon mixing with normal plasma",
+            "Smear shows normal platelet count and normal size"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Therapeutic management of von Willebrand disease depends upon the specific clinical subtype. For patients with mild type 1 disease experiencing minor surgical procedures or mucosal bleeding, **intravenous desmopressin acetate** is the agent of choice, triggering rapid exocytosis of endogenous von Willebrand factor and factor VIII stored within endothelial Weibel-Palade bodies. In contrast, desmopressin is contraindicated in type 2B disease because releasing hyperactive vWF induces acute thrombocytopenia. Patients with type 3 or severe type 2 disease require plasma-derived, viral-inactivated factor VIII concentrates enriched with vWF.",
+      "say": "Treating von Willebrand disease is tailored to the specific subtype. In mild type one disease, desmopressin is the first-line drug: it stimulates endothelial Weibel-Palade bodies to release stored von Willebrand factor and factor eight into plasma, raising levels three to five-fold. However, never give desmopressin in type two-B disease, because releasing gain-of-function multimers precipitates acute platelet clumping and thrombocytopenia. Severe type three disease requires replacement with purified plasma-derived factor eight-vWF concentrates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "w1",
+            "label": "vWD Bleeding Episode"
+          },
+          {
+            "id": "w2",
+            "label": "Type 1: Desmopressin (DDAVP)"
+          },
+          {
+            "id": "w3",
+            "label": "Type 2B: Avoid DDAVP (Clumping)"
+          },
+          {
+            "id": "w4",
+            "label": "Type 2/3: vWF-Containing Concentrates"
+          },
+          {
+            "id": "w5",
+            "label": "Adjunct: Oral Tranexamic Acid"
+          }
         ],
-        "rows": [
+        "edges": [
           [
-            "Acute kidney injury",
-            "Fluids, dialysis when indicated",
-            "Nephrotoxins where possible"
+            "w1",
+            "w2",
+            "Mild Quantitative"
           ],
           [
-            "Anaemia",
-            "Red cell transfusion by symptoms",
-            "Platelets unless bleeding or procedure"
+            "w1",
+            "w3",
+            "Gain of Function Danger"
           ],
           [
-            "Hypertension",
-            "Agents safe in renal failure",
-            "Delayed control worsens outcome"
+            "w1",
+            "w4",
+            "Qualitative or Absent"
           ],
           [
-            "Neurological signs",
-            "Imaging, seizure care",
-            "Missing TTP overlap assessment"
+            "w2",
+            "w5",
+            "Mucosal Haemostasis"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What morphological and aggregometric pattern definitively diagnoses Bernard-Soulier syndrome?",
+      "options": [
+        "Giant platelets on blood smear with failed ristocetin agglutination that does not correct with normal plasma",
+        "Normal platelet morphology with absent aggregation to ADP, collagen, and epinephrine",
+        "Severe isolated thrombocytopenia with abundant micro-megakaryocytes and elevated D-dimer",
+        "Small hypogranular platelets with normal aggregation to all agonists including ristocetin"
+      ],
+      "correct": 0,
+      "explain": "Bernard-Soulier syndrome is characterized by giant platelets with thrombocytopenia, and failure of ristocetin-induced platelet agglutination that cannot be corrected by adding normal plasma."
+    },
+    {
+      "q": "Why is desmopressin (DDAVP) contraindicated in patients diagnosed with type 2B von Willebrand disease?",
+      "options": [
+        "It releases hyperactive vWF that binds platelets spontaneously, precipitating acute thrombocytopenia",
+        "It triggers direct lysis of red blood cells, causing acute intravascular haemolysis",
+        "It causes severe hypertension and accelerated coronary artery thrombosis",
+        "It neutralizes circulating factor VIII, precipitating severe hemarthroses"
+      ],
+      "correct": 0,
+      "explain": "In type 2B vWD, vWF has a gain-of-function mutation; desmopressin releases this abnormal vWF, triggering intravascular platelet clumping and severe paradoxical thrombocytopenia."
+    },
+    {
+      "q": "What receptor defect is responsible for the failure of platelet aggregation in Glanzmann thrombasthenia?",
+      "options": [
+        "Deficiency or dysfunction of the glycoprotein IIb/IIIa integrin complex",
+        "Absence of the glycoprotein Ib-IX-V receptor complex",
+        "Loss-of-function mutation in the P2Y12 ADP receptor",
+        "Defective endothelial expression of thrombomodulin"
+      ],
+      "correct": 0,
+      "explain": "Glanzmann thrombasthenia is caused by deficiency of glycoprotein IIb/IIIa (integrin alpha-IIb beta-3), preventing fibrinogen cross-linking between adjacent platelets."
     }
   ]
 }

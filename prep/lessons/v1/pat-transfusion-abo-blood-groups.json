@@ -1,223 +1,282 @@
 {
   "v": 1,
-  "module": "pat-transfusion",
-  "subject": "pathology",
-  "title": "ABO Groups, Bombay Phenotype, Cross-Matching, Components, TRALI, and TACO",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-transfusion",
+  "key": null,
+  "title": "ABO Groups, Bombay Phenotype, Cross-Matching, Components, TRALI, and TACO",
   "steps": [
     {
-      "tx": "ABO antigens are carbohydrate structures on red cells whose absence provokes naturally occurring IgM antibodies against the missing antigen, so group O cells carry neither A nor B while AB plasma suits almost everyone. Landsteiner's rules organise transfusion: the **ABO blood group system**.",
-      "say": "You carry antibodies against the A or B antigens you lack; that single rule runs the blood bank.",
+      "tx": "The ABO blood group system is governed by the ABO gene on chromosome 9q34, which encodes specific glycosyltransferase enzymes that add terminal monosaccharide sugars to a pre-existing H antigen polysaccharide core. The A allele encodes **alpha-N-acetylgalactosaminyltransferase enzyme activity**, attaching N-acetylgalactosamine to form the A antigen. The B allele encodes alpha-galactosyltransferase, adding D-galactose to generate the B antigen. The O allele carries a single base-pair deletion causing a frameshift that produces an enzymatically inactive protein, leaving the unmodified H antigen intact on erythrocyte membranes.",
+      "say": "The ABO blood groups are determined by glycosyltransferase enzymes that attach terminal sugar molecules to a precursor carbohydrate core called the H antigen. The A allele encodes an enzyme that adds N-acetylgalactosamine, creating the A antigen. The B allele encodes an enzyme that adds D-galactose, creating the B antigen. The O allele carries a frameshift mutation producing an inactive enzyme, leaving the H antigen unmodified on red blood cells.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Group",
-          "Red cell antigens",
-          "Plasma antibodies",
-          "Transfusion pearl"
+          "ABO Phenotype",
+          "Red Cell Surface Antigen",
+          "Serum Isohaemagglutinins",
+          "Terminal Immunodominant Sugar"
         ],
         "rows": [
           [
-            "O",
-            "Neither A nor B",
-            "Anti-A and anti-B",
-            "Universal red cell donor"
+            "Group A",
+            "A antigen (and H antigen)",
+            "Anti-B antibodies (predominantly IgM)",
+            "N-acetylgalactosamine"
           ],
           [
-            "A",
-            "A antigen",
-            "Anti-B",
-            "A or O cells"
+            "Group B",
+            "B antigen (and H antigen)",
+            "Anti-A antibodies (predominantly IgM)",
+            "D-galactose"
           ],
           [
-            "B",
-            "B antigen",
-            "Anti-A",
-            "B or O cells"
+            "Group AB",
+            "Both A and B antigens",
+            "Neither Anti-A nor Anti-B antibodies",
+            "Both N-acetylgalactosamine and D-galactose"
           ],
           [
-            "AB",
-            "Both antigens",
-            "Neither antibody",
-            "Universal plasma donor"
+            "Group O",
+            "H antigen only (unmodified)",
+            "Both Anti-A and Anti-B (predominantly IgG)",
+            "Unsubstituted L-fucose on H antigen"
           ]
         ]
       }
     },
     {
-      "tx": "Bombay phenotype individuals cannot build the H antigen scaffold beneath A and B structures, so they type as O yet carry potent anti-H destroying ordinary O cells, and can receive only Bombay blood. The paradoxical group is **Bombay phenotype (Oh) blood**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Bombay blood types as O but kills O cells with anti-H; only Bombay donors can save these patients.",
+      "tx": "The rare **Bombay blood phenotype**, designated Oh, results from homozygous inheritance of the recessive h allele (hh genotype) on chromosome 19. Patients lack functional alpha-1,2-fucosyltransferase 1 (FUT1), the enzyme required to attach L-fucose to precursor oligosaccharide chains to synthesize the H antigen core. Lacking H substance, Bombay individuals cannot synthesize A or B antigens regardless of their ABO genotype. In their serum, Bombay individuals produce potent, complement-fixing IgM and IgG antibodies against A, B, and H antigens, and can receive red cells safely only from another Bombay individual.",
+      "say": "The Bombay blood phenotype is an extraordinarily rare condition caused by homozygous recessive inheritance of the h allele. Affected individuals cannot synthesize the H antigen core because they lack the fucosyltransferase enzyme that attaches L-fucose. Because they have no H antigen, they cannot form A or B antigens either. Bombay individuals produce strong, complement-fixing antibodies against A, B, and H antigens, so they can safely receive transfusions only from another Bombay donor.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "True group O",
+          "title": "Standard Group O Phenotype",
           "points": [
-            "H antigen present, A B absent",
-            "Anti-A and anti-B only",
-            "Receives O cells safely"
+            "Genotype: OO with functional H gene (H/H or H/h)",
+            "Carries abundant H antigen on red cell membranes",
+            "Serum contains anti-A and anti-B, but NO anti-H",
+            "Can receive blood from any standard Group O donor"
           ]
         },
         "right": {
-          "title": "Bombay Oh phenotype",
+          "title": "Bombay (Oh) Phenotype",
           "points": [
-            "H antigen absent entirely",
-            "Anti-H plus anti-A and anti-B",
-            "Needs rare Bombay donor blood"
+            "Genotype: hh (lacks functional FUT1 fucosyltransferase)",
+            "Lacks H antigen entirely on red cell membranes",
+            "Serum contains potent anti-A, anti-B, AND anti-H",
+            "Must receive blood strictly from a Bombay Oh donor"
           ]
         }
       }
     },
     {
-      "tx": "Rh D antigen, a protein rather than carbohydrate, immunises D negative patients after pregnancy or transfusion, causing haemolytic disease of future D positive newborns unless anti-D prophylaxis intervenes. Sensitisation prevention centres on the **Rh D antigen and anti-D prophylaxis**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "D sensitisation happens silently in pregnancy and harms the next baby; anti-D exists to interrupt exactly that.",
+      "tx": "The Rhesus blood group system is encoded by two closely linked homologous genes, RHD and RHCE, on chromosome 1p36. The **RhD surface antigen** is the most potent protein immunogen in transfusion medicine. Unlike naturally occurring ABO antibodies, Rh antibodies are immune-mediated IgG molecules formed only following exposure through transfusion or feto-maternal haemorrhage. When an Rh-negative mother carries an Rh-positive fetus, maternal IgG anti-D antibodies can cross the placenta during subsequent pregnancies, causing severe immune-mediated fetal haemolysis, hydrops fetalis, and erythroblastosis fetalis, prevented by administering anti-D immunoglobulin.",
+      "say": "The Rh system is clinically second only to the ABO system. The D antigen is the most immunogenic protein antigen on red cells. Rh-negative individuals do not have naturally occurring antibodies; they produce IgG anti-D antibodies only after being exposed to Rh-positive blood during a transfusion or pregnancy. If an Rh-negative mother becomes sensitized, her anti-D antibodies cross the placenta in subsequent pregnancies to cause fetal haemolytic disease, preventable by routine Rh-immune globulin prophylaxis.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "D negative mother, D positive fetus"
+            "id": "r1",
+            "label": "Rh-Negative Mother, Rh+ Fetus"
           },
           {
-            "id": "b",
-            "label": "Fetomaternal bleed sensitises silently"
+            "id": "r2",
+            "label": "Feto-Maternal Haemorrhage at Delivery"
           },
           {
-            "id": "c",
-            "label": "Anti-D prophylaxis clears fetal cells"
+            "id": "r3",
+            "label": "Maternal IgG Anti-D Sensitization"
           },
           {
-            "id": "d",
-            "label": "Future newborns protected from haemolysis"
+            "id": "r4",
+            "label": "Placental Crossing in Next Pregnancy"
+          },
+          {
+            "id": "r5",
+            "label": "Haemolytic Disease of the Fetus"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "r1",
+            "r2",
+            "Delivery Trauma"
           ],
           [
-            "b",
-            "c"
+            "r2",
+            "r3",
+            "Primary Immune Exposure"
           ],
           [
-            "c",
-            "d"
+            "r3",
+            "r4",
+            "Active Transplacental Transport"
+          ],
+          [
+            "r4",
+            "r5",
+            "Erythroblastosis & Hydrops Fetalis"
           ]
         ]
       }
     },
     {
-      "tx": "Antibody screening hunts unexpected red cell antibodies in recipient plasma against reagent cells by indirect Coombs technique, while cross-matching mixes recipient plasma with actual donor cells as the final compatibility rehearsal. The two safety nets are **antibody screening and serological cross-matching**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Screen finds the antibody, cross-match rehearses the actual unit; electronic issue replaces the rehearsal only under strict rules.",
+      "tx": "An **acute haemolytic transfusion reaction** is a catastrophic, life-threatening emergency caused by transfusing ABO-incompatible red blood cells, almost invariably resulting from clerical or patient-identification errors. Pre-existing recipient IgM isohaemagglutinins bind foreign transfused erythrocyte antigens, triggering immediate, massive complement activation through the classical pathway. Intravascular haemolysis releases free haemoglobin, provoking severe flank pain, burning at the infusion site, high fever, hypotension, and shock. The release of red cell stroma and inflammatory cytokines triggers disseminated intravascular coagulation and acute renal failure from haemoglobinuric nephropathy.",
+      "say": "An acute haemolytic transfusion reaction is an ABO disaster that occurs when incompatible red cells are accidentally transfused into a patient, almost always due to clerical error. Recipient IgM antibodies immediately bind foreign red cells and fix complement, triggering explosive intravascular haemolysis. Patients develop sudden fever, chills, flank pain, and shock. Free haemoglobin and cell stroma flood the kidneys and bloodstream, plunging the patient into acute renal failure and DIC.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/acute-haemolytic-transfusion-reaction-fig1.webp",
-        "alt": "Acute haemolytic transfusion reaction mechanism",
+        "alt": "Pathophysiological flowchart of acute intravascular haemolysis in ABO-incompatible transfusion reaction",
         "caption": "Acute haemolytic transfusion reaction, the ABO catastrophe cross-matching exists to prevent."
       }
     },
     {
-      "tx": "Modern transfusion prescribes components, not whole blood: packed red cells for oxygen carriage, fresh frozen plasma for multiple factor deficiency, cryoprecipitate for fibrinogen, and platelet concentrates for thrombocytopenic bleeding. Component thinking is **blood component therapy selection**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Order the missing component, not whole blood: cells, plasma, cryoprecipitate, and platelets each have one job.",
+      "tx": "Pre-transfusion compatibility testing is a rigorous multi-tier procedure designed to prevent haemolytic transfusion reactions. The protocol incorporates forward blood grouping (testing patient red cells with reagent anti-A, anti-B, and anti-D antisera) and reverse grouping (testing patient serum against reagent A1 and B red cells) to confirm ABO concordance. An antibody screen detects unexpected non-ABO red cell antibodies using the **indirect antiglobulin test**. Finally, a cross-match incubates recipient serum with donor erythrocytes, verifying that no preformed antibody causes agglutination or complement-mediated lysis.",
+      "say": "Pre-transfusion testing prevents fatal transfusion errors through three distinct safety steps. First, ABO and Rh typing perform forward grouping to detect red cell antigens and reverse grouping to detect serum antibodies. Second, an antibody screen using the indirect antiglobulin test checks patient serum for unexpected non-ABO antibodies like Kell or Duffy. Finally, a major cross-match mixes recipient serum directly with donor red cells to ensure complete in vitro compatibility before the unit is released.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Component",
-          "Supplies",
-          "Classic indication"
+          "Testing Procedure",
+          "Biological Specimen Tested",
+          "Reagent Utilized",
+          "Diagnostic Objective"
         ],
         "rows": [
           [
-            "Packed red cells",
-            "Oxygen carriage",
-            "Symptomatic anaemia, bleeding"
+            "Forward Grouping",
+            "Patient red blood cells",
+            "Commercial anti-A, anti-B, anti-D antisera",
+            "Identifies surface antigens (A, B, RhD)"
           ],
           [
-            "Fresh frozen plasma",
-            "All coagulation factors",
-            "DIC, liver coagulopathy, massive transfusion"
+            "Reverse Grouping",
+            "Patient serum or plasma",
+            "Reagent A1 and B red blood cells",
+            "Identifies expected circulating isoantibodies"
           ],
           [
-            "Cryoprecipitate",
-            "Fibrinogen, VIII, von Willebrand factor",
-            "Low fibrinogen bleeding"
+            "Antibody Screen",
+            "Patient serum or plasma",
+            "Panel of reagent red cells (O-negative)",
+            "Detects unexpected non-ABO IgG alloantibodies"
           ],
           [
-            "Platelet concentrate",
-            "Platelet number and function",
-            "Thrombocytopenic bleeding, procedures"
+            "Major Cross-Match",
+            "Recipient serum + Donor red cells",
+            "Direct incubation and indirect antiglobulin",
+            "Confirms in vitro serological compatibility"
           ]
         ]
       }
     },
     {
-      "tx": "Acute haemolytic transfusion reaction from ABO incompatibility destroys donor cells intravascularly with fever, flank pain, hypotension, and DIC, most often from human identification error, demanding immediate stop, clerical check, and supportive care. The lethal error reaction is **acute haemolytic transfusion reaction**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Fever and flank pain in the first minutes mean stop the transfusion, keep the line, check the labels, call the bank.",
+      "tx": "Transfusion-related acute lung injury is the leading cause of transfusion-associated mortality, defined as new acute respiratory distress syndrome developing within six hours of transfusion without pre-existing circulatory overload. Pathogenesis involves an **immune neutrophil-mediated capillary leak**: donor plasma contains high-titer anti-human leukocyte antigen (anti-HLA) or anti-human neutrophil antigen (anti-HNA) antibodies, typically from multiparous female donors. These antibodies bind recipient neutrophils sequestered within pulmonary capillaries, triggering elastase release, massive endothelial damage, and non-cardiogenic pulmonary oedema with normal pulmonary capillary wedge pressure.",
+      "say": "Transfusion-related acute lung injury, or TRALI, is the leading cause of transfusion fatalities. Within six hours of transfusion, patients develop acute hypoxemia and bilateral pulmonary infiltrates. TRALI occurs when anti-HLA or anti-neutrophil antibodies in donor plasma, usually from multiparous female donors, bind and activate recipient neutrophils sequestered in pulmonary capillaries. Neutrophils release toxic proteases, causing alveolar capillary leak and non-cardiogenic pulmonary edema with completely normal cardiac pressures.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "First minutes protocol",
+          "title": "TRALI (Capillary Leak)",
           "points": [
-            "Stop transfusion, keep venous access",
-            "Clerical check at bedside",
-            "Return unit, send samples, inform bank"
+            "Donor anti-HLA or anti-neutrophil antibodies",
+            "Non-cardiogenic pulmonary edema (normal PCWP)",
+            "Normal brain natriuretic peptide (BNP)",
+            "Does NOT respond to diuretic therapy; requires ventilation"
           ]
         },
         "right": {
-          "title": "Never do",
+          "title": "TACO (Volume Overload)",
           "points": [
-            "Restart a questioned unit",
-            "Discard the bag before investigation",
-            "Delay fluids and DIC support"
+            "Hydrostatic volume overload from rapid infusion",
+            "Cardiogenic pulmonary edema (elevated PCWP >18 mmHg)",
+            "Markedly elevated serum BNP / NT-proBNP",
+            "Responds dramatically to intravenous furosemide diuresis"
           ]
         }
       }
     },
     {
-      "tx": "TRALI floods lungs with noncardiogenic oedema within six hours through donor anti-leucocyte antibodies and recipient neutrophil activation, while TACO overloads circulation with hydrostatic oedema in older, cardiac, and rapidly transfused patients. Separating them guides therapy: **TRALI versus TACO after transfusion**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Breathless after transfusion: TRALI leaks, TACO overloads; diuretics help one and harm the other.",
+      "tx": "Transfusion-associated circulatory overload is a frequent, preventable hydrostatic pulmonary complication occurring during or within twelve hours following rapid or excessive blood component transfusion. Unlike TRALI, the primary pathophysiological defect is acute volume expansion in patients with compromised cardiopulmonary reserve, elderly individuals, or chronic renal disease. Clinical presentation features acute respiratory distress, severe hypertension, tachypnoea, jugular venous distension, S3 gallop, and bilateral basilar crackles. Serum **brain natriuretic peptide elevation** confirms myocardial stretch, and prompt administration of intravenous furosemide with upright positioning rapidly resolves symptoms.",
+      "say": "Transfusion-associated circulatory overload, or TACO, is hydrostatic pulmonary edema caused by infusing too much volume too quickly into patients with borderline cardiac or renal function. Within hours of transfusion, patients experience acute dyspnea, marked hypertension, engorged neck veins, and bilateral pulmonary crackles. Unlike TRALI, serum BNP is markedly elevated due to acute ventricular stretch, and giving intravenous furosemide diuresis produces prompt clinical improvement.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/allergic-transfusion-reaction-fig1.webp",
-        "alt": "Allergic transfusion reaction pathophysiology",
+        "alt": "Differentiation and clinical features of transfusion-associated pulmonary and allergic reactions",
         "caption": "Transfusion reaction mechanisms spanning allergic, haemolytic, and lung injury patterns."
       }
     },
     {
-      "tx": "Massive transfusion balances red cells, plasma, and platelets in near whole blood ratios while chasing calcium, potassium, temperature, and fibrinogen, with leukoreduction and irradiation protecting immunocompromised recipients. That protocol discipline is **massive transfusion and special requirements practice**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Massive transfusion is ratios plus calcium, warmth, and fibrinogen; irradiation and leukoreduction guard special patients.",
+      "tx": "Modern blood banking separates whole blood donations into specific therapeutic components to maximize resource utilization and minimize volume hazards. Transfusion of **packed red blood cells** is indicated for acute symptomatic anaemia, with one unit predictably elevating adult haemoglobin by one gram per deciliter and haematocrit by three percent. Platelet concentrates treat severe thrombocytopenia, fresh frozen plasma restores all clotting factors in dilutional coagulopathy or liver failure, and cryoprecipitate provides concentrated fibrinogen, factor VIII, and von Willebrand factor for hypofibrinogenemia.",
+      "say": "Whole blood is routinely fractionated into specific components to treat precise clinical deficits. One unit of packed red blood cells raises adult haemoglobin by one gram per deciliter. Platelet transfusions replenish platelets in consumptive or hypoplastic marrow failure. Fresh frozen plasma replaces all coagulation factors in severe liver failure, while cryoprecipitate provides concentrated fibrinogen and factor eight to treat hypofibrinogenemia and massive obstetric haemorrhage.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Special requirement",
-          "Prevents",
-          "For whom"
+          "Blood Component",
+          "Primary Therapeutic Contents",
+          "Clinical Indications",
+          "Expected Therapeutic Increment"
         ],
         "rows": [
           [
-            "Leukoreduced components",
-            "Febrile reactions, CMV, alloimmunisation",
-            "Most modern inventories routinely"
+            "Packed Red Cells",
+            "Erythrocytes with minimal plasma (hematocrit 60%)",
+            "Symptomatic anaemia, acute blood loss",
+            "Increases Hb by 1 g/dL per unit"
           ],
           [
-            "Irradiated components",
-            "Transfusion associated graft versus host disease",
-            "Immunodeficiency, directed family donations"
+            "Platelet Concentrate",
+            ">=5.5 x 10^10 platelets in plasma",
+            "Thrombocytopenic bleeding or prophylaxis (<10k)",
+            "Raises platelets by 30,000 to 50,000 / uL"
           ],
           [
-            "Washed cells",
-            "Severe allergic recurrence, IgA deficiency reactions",
-            "Selected reaction histories"
+            "Fresh Frozen Plasma",
+            "All soluble clotting factors and albumin",
+            "Multiple factor deficiencies, massive transfusion",
+            "Increases factor levels by 2% to 3% per unit"
           ],
           [
-            "CMV negative",
-            "Cytomegalovirus transmission",
-            "Seronegative pregnant and transplant patients"
+            "Cryoprecipitate",
+            "Fibrinogen (>150 mg), Factor VIII, vWF, FXIII",
+            "Severe hypofibrinogenemia (<100 mg/dL), DIC",
+            "Elevates fibrinogen by 50 to 100 mg/dL per pool"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What immunodominant terminal sugar is attached to the H antigen core to form the blood group A antigen?",
+      "options": [
+        "N-acetylgalactosamine",
+        "D-galactose",
+        "L-fucose",
+        "N-acetylglucosamine"
+      ],
+      "correct": 0,
+      "explain": "The A allele encodes an alpha-N-acetylgalactosaminyltransferase that attaches N-acetylgalactosamine to the H antigen core to produce the A antigen."
+    },
+    {
+      "q": "What genetic and phenotypic defect defines the Bombay blood phenotype (Oh)?",
+      "options": [
+        "Homozygous recessive hh genotype lacking the FUT1 enzyme needed to synthesize the H antigen",
+        "Deletion of the ABO locus on chromosome 9 resulting in complete lack of plasma isohaemagglutinins",
+        "Inability to synthesize RhD protein due to deletion of the RHD gene",
+        "Failure to express CD55 and CD59 on the erythrocyte membrane"
+      ],
+      "correct": 0,
+      "explain": "The Bombay phenotype is caused by homozygous recessive hh mutations in the FUT1 gene on chromosome 19, preventing synthesis of the H antigen core."
+    },
+    {
+      "q": "What clinical and hemodynamic feature distinguishes transfusion-related acute lung injury (TRALI) from transfusion-associated circulatory overload (TACO)?",
+      "options": [
+        "Normal pulmonary capillary wedge pressure and lack of response to diuretics in TRALI",
+        "Markedly elevated serum brain natriuretic peptide (BNP) in TRALI",
+        "Development of severe hypertension and jugular venous distension in TRALI",
+        "Rapid clinical resolution upon administering intravenous furosemide in TRALI"
+      ],
+      "correct": 0,
+      "explain": "TRALI is a non-cardiogenic capillary leak with normal wedge pressure that does not respond to diuretics, whereas TACO is hydrostatic volume overload with elevated BNP responding to diuretics."
     }
   ]
 }

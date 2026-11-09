@@ -1,223 +1,268 @@
 {
   "v": 1,
-  "module": "pat-coagulation-disorders",
-  "subject": "pathology",
-  "title": "Coagulation Cascade, PT INR, APTT, and Mixing Studies",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-coagulation-disorders",
+  "key": null,
+  "title": "Coagulation Cascade, PT INR, APTT, and Mixing Studies",
   "steps": [
     {
-      "tx": "Secondary haemostasis builds fibrin through tissue factor ignition, platelet surface amplification, and thrombin burst, sealing the platelet plug into a durable clot while anticoagulant pathways confine it to injury. The cascade's modern cell based framing is the **coagulation cascade and thrombin generation**.",
-      "say": "Tissue factor lights the fire, platelets host the burst, thrombin builds fibrin; anticoagulants keep it local.",
+      "tx": "The coagulation cascade functions as a proteolytic amplifying series of zymogen activations terminating in fibrin clot generation. Secondary haemostasis initiates physiologically when vascular injury exposes subendothelial tissue factor (thromboplastin) to circulating factor VII. The assembly of the **extrinsic tenase complex**, comprising tissue factor, activated factor VIIa, calcium ions, and anionic phospholipids, cleaves substrate factor X to factor Xa. This extrinsic trigger operates rapidly, generating initial trace amounts of thrombin that subsequently recruit the intrinsic amplification loop.",
+      "say": "Coagulation is a tightly regulated proteolytic cascade where inactive enzyme precursors are sequentially converted into active serine proteases. In vivo clotting begins through the extrinsic pathway when vascular damage exposes subendothelial tissue factor to circulating factor seven. Tissue factor binds factor seven-a in the presence of calcium to form the extrinsic tenase complex, which cleaves factor ten into factor ten-a, providing the initial burst of thrombin.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/coagulation-cascade-and-anticoagulants-fig1.webp",
-        "alt": "Coagulation and anticoagulation pathways",
+        "alt": "Diagram of the intrinsic, extrinsic, and common coagulation cascade pathways with anticoagulant targets",
         "caption": "Coagulation cascade and anticoagulation pathways with drug targets marked."
       }
     },
     {
-      "tx": "Prothrombin time tests the extrinsic and common pathways, tissue factor, factor VII, X, V, prothrombin, and fibrinogen, standardised across reagents as INR for warfarin control and liver synthetic assessment. The standardised ratio is the **INR (international normalised ratio) from prothrombin time**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "PT and INR watch factor VII's world: warfarin, liver failure, and vitamin K answer here first.",
+      "tx": "The **prothrombin time assay** evaluates the functional integrity of the extrinsic pathway and common pathway, encompassing factors VII, X, V, prothrombin (factor II), and fibrinogen. Patient citrated plasma is incubated with recombinant tissue factor, phospholipid extract, and calcium, recording time to clot formation (reference range eleven to thirteen seconds). To standardize international reporting for patients receiving vitamin K antagonist therapy, the prothrombin time is converted into the International Normalized Ratio (INR), calculated by dividing patient clotting time by mean normal control time raised to the International Sensitivity Index.",
+      "say": "The prothrombin time tests the extrinsic and common coagulation pathways by adding tissue thromboplastin and calcium to citrated plasma. It screens factors seven, ten, five, prothrombin, and fibrinogen. Because commercial thromboplastin reagents vary widely in sensitivity, results are standardized as the International Normalized Ratio, or INR. The target INR for routine oral warfarin anticoagulation in venous thromboembolism is typically between two point zero and three point zero.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "PT and INR prolonged",
+          "title": "Prothrombin Time (PT / INR)",
           "points": [
-            "Warfarin, vitamin K deficiency",
-            "Liver synthetic failure",
-            "Factor VII, X, V, II deficiency"
+            "Screens extrinsic and common pathways (VII, X, V, II, I)",
+            "Triggered by adding tissue factor and calcium",
+            "Used to monitor oral vitamin K antagonists (warfarin)",
+            "Factor VII has shortest half-life (6 hours), prolonging PT first"
           ]
         },
         "right": {
-          "title": "APTT prolonged",
+          "title": "Activated Partial Thromboplastin Time",
           "points": [
-            "Heparin, haemophilia A and B",
-            "Lupus anticoagulant paradox",
-            "Factor VIII, IX, XI deficiency"
+            "Screens intrinsic and common pathways (XII, XI, IX, VIII, X, V, II, I)",
+            "Triggered by contact activators (silica, kaolin) and phospholipid",
+            "Used to monitor unfractionated heparin therapy",
+            "Sensitive to haemophilia A, haemophilia B, and lupus anticoagulant"
           ]
         }
       }
     },
     {
-      "tx": "Activated partial thromboplastin time tests intrinsic and common pathways and monitors unfractionated heparin, prolonging also in lupus anticoagulant where thrombosis, not bleeding, is the clinical danger. The intrinsic screen is the **activated partial thromboplastin time (APTT)**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "APTT watches heparin and haemophilia factors, but a lupus anticoagulant prolongs it while clotting the patient.",
+      "tx": "Evaluating the intrinsic coagulation system relies on the **activated partial thromboplastin time**, which measures the functional activity of factors XII, XI, IX, and VIII alongside the common pathway. Patient plasma is incubated with a negatively charged contact activator such as micronized silica or ellagic acid and partial thromboplastin phospholipid, followed by recalcification, with normal clotting occurring within twenty-five to thirty-five seconds. The assay monitors unfractionated heparin anticoagulation, titrating therapy to achieve an APTT ratio of 1.5 to 2.5 times baseline control.",
+      "say": "The activated partial thromboplastin time evaluates the intrinsic and common pathways, screening factors twelve, eleven, nine, eight, ten, five, prothrombin, and fibrinogen. Clotting is initiated by contact activation using silica or celite along with phospholipid. It is the primary clinical assay used to monitor unfractionated heparin therapy and investigate unexplained bruising in inherited factor deficiencies such as haemophilia.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/coagulation-disorders-fig2.webp",
-        "alt": "Coagulation cascade drug targets",
+        "alt": "Biochemical schematic of coagulation cascade demonstrating factor activation sites and drug intervention points",
         "caption": "Coagulation cascade drug targets across anticoagulant classes."
       }
     },
     {
-      "tx": "Mixing studies add normal plasma to patient plasma: correction implies factor deficiency starved of supply, non-correction implies an inhibitor or lupus anticoagulant neutralising the mixture, guiding factor assays and Bethesda titres. That fork is the **mixing study in prolonged clotting times**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Corrects means missing factor, fails to correct means inhibitor; the mixing study forks every long APTT.",
+      "tx": "When an isolated prolongation of prothrombin time or activated partial thromboplastin time is discovered, performing a **plasma mixing study** is the mandatory diagnostic step to distinguish factor deficiency from a circulating inhibitor. Patient plasma is mixed in a one-to-one ratio with normal pooled plasma containing one hundred percent factor levels. If the prolonged clotting time corrects into the normal range, a simple factor deficiency is confirmed. Failure of the prolonged clotting time to correct signifies the presence of a circulating pathological inhibitor.",
+      "say": "A one-to-one plasma mixing study is the essential initial test when evaluating an unexplained prolonged clotting time. Patient plasma is blended equally with normal pooled plasma and re-tested. Because normal clotting requires only fifty percent factor activity, a simple factor deficiency corrects immediately to normal. If the clotting time remains prolonged despite adding normal plasma, a pathological circulating inhibitor like a factor antibody or lupus anticoagulant is present.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Prolonged PT or APTT found"
+            "id": "m1",
+            "label": "Prolonged Baseline APTT"
           },
           {
-            "id": "b",
-            "label": "Mix one to one with normal plasma"
+            "id": "m2",
+            "label": "1:1 Normal Pooled Mix"
           },
           {
-            "id": "c",
-            "label": "Corrects: factor deficiency assay"
+            "id": "m3",
+            "label": "Immediate Correction"
           },
           {
-            "id": "d",
-            "label": "No correction: inhibitor or LA workup"
+            "id": "m4",
+            "label": "No Correction (Inhibitor)"
+          },
+          {
+            "id": "m5",
+            "label": "Specific Factor Assay"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "m1",
+            "m2",
+            "Mixing Protocol"
           ],
           [
-            "b",
-            "c"
+            "m2",
+            "m3",
+            "Clotting Time Normalizes"
           ],
           [
-            "b",
-            "d"
+            "m2",
+            "m4",
+            "Time Remains Prolonged"
+          ],
+          [
+            "m3",
+            "m5",
+            "Identify Deficient Factor"
           ]
         ]
       }
     },
     {
-      "tx": "Time and temperature expose factor VIII inhibitors: immediate mixing may correct while incubated mixtures prolong as antibody destroys factor VIII, a pattern called time dependent inhibition in acquired haemophilia. That incubated behaviour defines **time-dependent factor VIII inhibition**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Incubate the mixing study; acquired factor VIII inhibitors reveal themselves only after time together.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Pattern",
-          "Meaning",
-          "Next test"
-        ],
-        "rows": [
-          [
-            "Corrects immediately and stays",
-            "Factor deficiency",
-            "Specific factor assays"
-          ],
-          [
-            "Corrects then prolongs incubated",
-            "Factor VIII inhibitor",
-            "Bethesda inhibitor titre"
-          ],
-          [
-            "Never corrects",
-            "Lupus anticoagulant or strong inhibitor",
-            "Phospholipid dependence tests"
-          ],
-          [
-            "Both PT and APTT long",
-            "Common pathway, liver, DIC, warfarin",
-            "Fibrinogen, platelets, clinical review"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Pre-analytical errors counterfeit coagulopathy daily: underfilled citrate tubes, heparin contaminated lines, high haematocrit, and delayed processing prolong times in healthy people, so repeat clean sampling precedes exotic assays. That discipline is **coagulation sample quality control**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Repeat the blue top properly before chasing rare factors; bad samples manufacture coagulopathy daily.",
+      "tx": "The convergence of the extrinsic and intrinsic pathways generates the common pathway on activated platelet surfaces. Factor Xa serves as the enzymatic core of the **prothrombinase enzyme complex**, assembling with non-enzymatic cofactor Va, calcium ions, and negatively charged phosphatidylserine membranes. This membrane-bound multimolecular complex accelerates the conversion of prothrombin (factor II) into active thrombin (factor IIa) by more than three hundred thousand-fold compared to free factor Xa in solution, generating the explosive thrombin burst essential for haemostasis.",
+      "say": "The common pathway begins with the assembly of the prothrombinase complex on the negatively charged phosphatidylserine surface of activated platelets. In the presence of calcium ions, active factor ten-a complexes with cofactor five-a to cleave prothrombin into active thrombin. Assembling this complex accelerates thrombin generation by more than three hundred thousand-fold over free factor ten-a alone, ensuring rapid localized clot formation.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Suspect the sample",
+          "title": "Prothrombinase Complex",
           "points": [
-            "Underfilled or clotted citrate tube",
-            "Drawn from heparinised line",
-            "Result defies the clinical picture"
+            "Enzyme: Factor Xa (vitamin K-dependent serine protease)",
+            "Cofactor: Factor Va (activated by thrombin feedback)",
+            "Assembly surface: Platelet anionic phosphatidylserine",
+            "Cleaves prothrombin into active alpha-thrombin"
           ]
         },
         "right": {
-          "title": "Suspect the patient",
+          "title": "Intrinsic Tenase Complex",
           "points": [
-            "Bleeding history concordant",
-            "Repeat sample confirms abnormality",
-            "Family or drug history supports"
+            "Enzyme: Factor IXa (vitamin K-dependent serine protease)",
+            "Cofactor: Factor VIIIa (activated by thrombin)",
+            "Assembly surface: Platelet phospholipid membrane",
+            "Cleaves factor X into active factor Xa"
           ]
         }
       }
     },
     {
-      "tx": "Direct oral anticoagulants distort routine tests unpredictably, dabigatran stretching thrombin time exquisitely and Xa inhibitors variably prolonging PT, so drug specific calibrated assays answer urgent surgical questions. Test literacy includes **DOAC effects on coagulation screening**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Routine clotting screens mislead on DOACs; ask which drug and order its calibrated assay instead.",
+      "tx": "Active **thrombin enzyme activity** coordinates multiple positive and negative feedback loops governing vascular haemostasis. Thrombin cleaves fibrinopeptides A and B from soluble fibrinogen, exposing polymerization sites that assemble into insoluble fibrin strands. Simultaneously, thrombin cleaves protease-activated receptors (PAR-1 and PAR-4) on platelets to drive granule secretion. In contrast, upon binding endothelial thrombomodulin, thrombin undergoes a conformational shift that switches its substrate specificity, activating protein C to downregulate factors Va and VIIIa, thereby containing thrombus propagation.",
+      "say": "Thrombin is the central multifunctional serine protease of haemostasis. It directly converts fibrinogen into insoluble fibrin monomers and activates factor thirteen to cross-link the meshwork. Through positive feedback, it activates factors five, eight, and eleven. Conversely, when thrombin binds endothelial thrombomodulin, it switches roles to activate protein C, turning off further clotting and preventing dangerous occlusion of healthy vessels.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Drug class",
-          "Screen distortion",
-          "Specific assay"
+          "Target Substrate",
+          "Action of Thrombin",
+          "Downstream Physiological Consequence",
+          "Feedback Category"
         ],
         "rows": [
           [
-            "Dabigatran",
-            "Thrombin time exquisitely long",
-            "Dilute thrombin time"
+            "Fibrinogen",
+            "Cleaves fibrinopeptides A and B",
+            "Forms insoluble fibrin polymer mesh",
+            "Procoagulant execution"
           ],
           [
-            "Rivaroxaban, apixaban",
-            "PT variable, APTT modest",
-            "Calibrated anti-Xa level"
+            "Factors V and VIII",
+            "Proteolytic cleavage into Va and VIIIa",
+            "Massive amplification of tenase and prothrombinase",
+            "Positive feedback amplification"
           ],
           [
-            "Warfarin",
-            "INR designed for it",
-            "INR monitoring standard"
+            "Platelet PAR-1",
+            "Tethers ligand domain cleavage",
+            "Platelet activation, shape change, granule release",
+            "Primary haemostasis linkage"
           ],
           [
-            "Heparin unfractionated",
-            "APTT therapeutic range",
-            "APTT or anti-Xa monitoring"
+            "Thrombomodulin Complex",
+            "Activates circulating Protein C to APC",
+            "Inactivates factors Va and VIIIa",
+            "Negative feedback anticoagulation"
           ]
         ]
       }
     },
     {
-      "tx": "Point of care viscoelastic tests, thromboelastography and rotational thromboelastometry, watch whole blood clot form, strengthen, and lyse at the bedside of trauma, cardiac, and liver surgery. The tracing method is **viscoelastic haemostatic testing (TEG and ROTEM)**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "TEG and ROTEM draw the whole clot's life story at the bedside when minutes matter more than factors.",
+      "tx": "Newly polymerized fibrin strands remain loosely associated via non-covalent hydrogen bonding, vulnerable to rapid mechanical disruption and premature enzymatic lysis. The transglutaminase **factor XIIIa cross-linking** stabilizes the nascent clot by catalyzing covalent isopeptide bonds between lysine and glutamine residues on adjacent fibrin chains. Activated by thrombin and calcium, factor XIIIa also covalently cross-links alpha-2-antiplasmin into the fibrin meshwork, imparting resistance against fibrinolysis. Factor XIII deficiency manifests with delayed umbilical cord bleeding and recurrent soft tissue haematomas.",
+      "say": "Fresh fibrin strands initially hold together only by weak hydrogen bonds. Factor thirteen-a, a transglutaminase activated by thrombin and calcium, covalently cross-links lysine and glutamine residues between adjacent fibrin monomers to create an insoluble, mechanically resilient polymer. It also binds alpha-two-antiplasmin into the clot, shielding it from premature fibrinolysis. In factor thirteen deficiency, routine PT and APTT are normal, but clots dissolve in urea solutions.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Whole blood clot initiation timed"
-          },
-          {
-            "id": "b",
-            "label": "Strength reflects platelets and fibrinogen"
-          },
-          {
-            "id": "c",
-            "label": "Lysis percentage measured"
-          },
-          {
-            "id": "d",
-            "label": "Components targeted in real time"
-          }
+        "kind": "compare",
+        "left": {
+          "title": "Uncrosslinked Fibrin Mesh",
+          "points": [
+            "Held by weak non-covalent hydrogen bonding",
+            "Dissolves completely in 5M urea or 1% monochloroacetic acid",
+            "Rapidly degraded by tissue plasminogen activator and plasmin",
+            "Cannot withstand physiological arterial shear stress"
+          ]
+        },
+        "right": {
+          "title": "Covalently Stabilized Fibrin",
+          "points": [
+            "Covalent isopeptide bonds catalyzed by factor XIIIa",
+            "Insoluble in 5M urea solution after 24 hours",
+            "Incorporate alpha-2-antiplasmin to resist fibrinolysis",
+            "Forms permanent hemostatic seal allowing tissue repair"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "To restrict thrombus formation to sites of vascular trauma, circulating **physiological anticoagulant pathways** maintain systemic blood fluidity. Antithrombin III, a serpin synthesized by the liver, irreversibly neutralizes thrombin, factor Xa, and factor IXa, an inhibitory reaction accelerated several thousand-fold by endothelial heparan sulfate or therapeutic heparin. Concurrently, activated protein C, with its cofactor protein S, cleaves and permanently inactivates factors Va and VIIIa. Tissue factor pathway inhibitor directly blocks factor Xa and feedback-inhibits the tissue factor-factor VIIa catalytic complex.",
+      "say": "Healthy endothelium prevents widespread clotting through three natural anticoagulant mechanisms. Antithrombin three directly inactivates thrombin, factor ten-a, and factor nine-a, a reaction accelerated thousands of times by heparin. The protein C and protein S pathway destroys activated cofactors five-a and eight-a. Finally, tissue factor pathway inhibitor shuts down the tissue factor-factor seven-a complex once initial factor ten-a has been generated.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Natural Anticoagulant",
+          "Primary Synthesis Site",
+          "Target Coagulation Factors",
+          "Deficiency Manifestation"
         ],
-        "edges": [
+        "rows": [
           [
-            "a",
-            "b"
+            "Antithrombin III",
+            "Hepatic parenchymal cells",
+            "Thrombin (IIa), Xa, IXa, XIa",
+            "Severe venous thromboembolism, heparin resistance"
           ],
           [
-            "b",
-            "c"
+            "Protein C",
+            "Liver (vitamin K-dependent)",
+            "Factors Va and VIIIa (proteolytic cleavage)",
+            "Neonatal purpura fulminans, warfarin skin necrosis"
           ],
           [
-            "c",
-            "d"
+            "Protein S",
+            "Liver, endothelial cells, megakaryocytes",
+            "Cofactor for activated protein C",
+            "Recurrent deep vein thrombosis and pulmonary embolism"
+          ],
+          [
+            "TFPI",
+            "Vascular endothelial cells",
+            "Factor Xa and Tissue Factor-VIIa complex",
+            "Experimental consumptive coagulopathy"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which coagulation factor has the shortest biological half-life, causing early prolongation of the prothrombin time during warfarin therapy?",
+      "options": [
+        "Factor VII (half-life approximately 6 hours)",
+        "Factor II / Prothrombin (half-life approximately 60 hours)",
+        "Factor IX (half-life approximately 24 hours)",
+        "Factor X (half-life approximately 40 hours)"
+      ],
+      "correct": 0,
+      "explain": "Factor VII has the shortest half-life (roughly 6 hours) among the vitamin K-dependent clotting factors, leading to rapid depletion and early PT prolongation upon starting warfarin."
+    },
+    {
+      "q": "What result from a 1:1 plasma mixing study indicates the presence of a circulating coagulation factor inhibitor rather than a factor deficiency?",
+      "options": [
+        "Failure of the prolonged clotting time to correct into the normal range",
+        "Immediate normalization of the clotting time to match normal pooled plasma",
+        "Shortening of the clotting time to below normal reference values",
+        "Complete dissolution of the clot upon exposure to 5 molar urea"
+      ],
+      "correct": 0,
+      "explain": "In a 1:1 mixing study, normal pooled plasma provides 50% factor levels, correcting a true deficiency. Failure to correct demonstrates an inhibitor neutralizing the added factors."
+    },
+    {
+      "q": "Which enzyme catalyzes the covalent cross-linking of fibrin monomers to form a mechanically stable, urea-insoluble hemostatic plug?",
+      "options": [
+        "Factor XIIIa (fibrin-stabilizing factor)",
+        "Factor IIa (thrombin)",
+        "Factor Xa (Stuart-Prower factor)",
+        "Plasmin"
+      ],
+      "correct": 0,
+      "explain": "Factor XIIIa is a transglutaminase that creates covalent isopeptide bonds between adjacent fibrin chains, rendering the clot insoluble in 5M urea."
     }
   ]
 }

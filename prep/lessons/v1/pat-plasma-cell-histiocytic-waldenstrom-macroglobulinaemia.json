@@ -1,223 +1,285 @@
 {
   "v": 1,
-  "module": "pat-plasma-cell-histiocytic",
-  "subject": "pathology",
-  "title": "Waldenstrom Macroglobulinaemia, Langerhans Cell Histiocytosis, Birbeck Granules, and CD1a",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-plasma-cell-histiocytic",
+  "key": null,
+  "title": "Waldenstrom Macroglobulinaemia, Langerhans Cell Histiocytosis, Birbeck Granules, and CD1a",
   "steps": [
     {
-      "tx": "Waldenstrom macroglobulinaemia infiltrates marrow with lymphoplasmacytic lymphoma cells secreting monoclonal IgM, producing anaemia, lymphadenopathy, and hyperviscosity rather than the lytic bones and renal failure of myeloma. MYD88 mutation supports most cases. The IgM lymphoplasmacytic disease is **Waldenstrom macroglobulinaemia**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "IgM spike plus marrow lymphoplasmacytic infiltrate without lytic bones spells Waldenstrom macroglobulinaemia.",
+      "tx": "Waldenstrom macroglobulinaemia is an indolent B-cell lymphoma characterized by bone marrow infiltration by clonal lymphoplasmacytic cells accompanied by secretion of a monoclonal immunoglobulin M paraprotein. Greater than ninety percent of patients carry the activating **MYD88 L265P mutation**, which substitutes leucine with proline at codon 265 in the Toll-IL-1 receptor domain. This somatic mutation triggers constitutive IRAK4-IRAK1 kinase phosphorylation, driving downstream nuclear factor kappa B and Bruton tyrosine kinase activation that promotes continuous neoplastic B-cell survival and proliferation.",
+      "say": "Waldenstrom macroglobulinaemia is a low-grade lymphoma where lymphoplasmacytic cells infiltrate the bone marrow while secreting a monoclonal IgM paraprotein. More than ninety percent of patients harbor the MYD88 L265P somatic mutation. This mutation triggers spontaneous dimerization of the MYD88 adaptor protein, permanently activating downstream Bruton tyrosine kinase and NF-kappa-B pathways, explaining why BTK inhibitors like ibrutinib are so effective.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/waldenstrom-fig1.webp",
-        "alt": "Waldenstrom macroglobulinaemia histology and IgM",
+        "alt": "Bone marrow histology showing lymphoplasmacytic infiltrate in Waldenstrom macroglobulinaemia",
         "caption": "Waldenstrom macroglobulinaemia histology with monoclonal IgM production."
       }
     },
     {
-      "tx": "IgM's pentameric bulk explains Waldenstrom signatures: hyperviscosity with retinal changes, cold agglutinin or cryoglobulin behaviour in some clones, neuropathy from anti-MAG antibodies, and amyloid occasionally. Monitoring IgM level tracks both tumour and symptoms. The pentamer effect is **IgM-mediated symptom burden in Waldenstrom disease**.",
-      "say": "In Waldenstrom disease the IgM level is a symptom dial: viscosity, neuropathy, and cold phenomena follow it.",
+      "tx": "Because immunoglobulin M is a massive pentameric macromolecule with a molecular weight of nine hundred kilodaltons confined predominantly to the intravascular compartment, high concentrations dramatically increase serum viscosity, precipitating **hyperviscosity syndrome**. Clinical manifestations emerge when serum relative viscosity exceeds four centipoise (normal 1.4 to 1.8), featuring headaches, dizziness, confusion, epistaxis, and marked visual disturbances. Fundoscopic examination characteristically reveals marked engorgement and segmentation of retinal veins, termed sausage-link or boxcar retinal segmentation, alongside flame-shaped retinal haemorrhages and papilloedema.",
+      "say": "Because IgM is a huge pentameric molecule weighing nine hundred kilodaltons, it stays trapped within the vascular space, increasing blood thickness and causing hyperviscosity syndrome. When serum viscosity rises above four centipoise, patients suffer headaches, vertigo, ataxia, and epistaxis. Ophthalmoscopy reveals classic sausage-link or boxcar engorgement of retinal veins accompanied by retinal haemorrhages, signalling an impending threat to vision.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Waldenstrom pattern",
+          "title": "Waldenstrom Hyperviscosity",
           "points": [
-            "IgM spike, marrow based",
-            "Hyperviscosity, neuropathy",
-            "No lytic bone lesions"
+            "Driven by pentameric IgM paraprotein (900 kDa)",
+            "80% of IgM remains inside intravascular compartment",
+            "Presents with sausage-link retinal veins and epistaxis",
+            "Directly treated with therapeutic plasmapheresis"
           ]
         },
         "right": {
-          "title": "Myeloma pattern",
+          "title": "Multiple Myeloma Pathology",
           "points": [
-            "IgG or IgA spike",
-            "Lytic bones, cast nephropathy",
-            "CRAB features dominate"
+            "Driven primarily by monomeric IgG paraprotein (150 kDa)",
+            "Causes punched-out osteolytic bone lesions",
+            "Causes severe hypercalcemia and cast nephropathy",
+            "Hyperviscosity is rare (<2% of IgG myeloma cases)"
           ]
         }
       }
     },
     {
-      "tx": "Bing-Neel syndrome names direct infiltration of the central nervous system by lymphoplasmacytic cells, a rare Waldenstrom complication requiring cerebrospinal fluid immunophenotyping and intrathecal thinking in therapy. Cognitive or cranial nerve signs in Waldenstrom patients demand that search: **Bing-Neel syndrome**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "New neurology in Waldenstrom disease means Bing-Neel infiltration until cerebrospinal fluid studies clear it.",
+      "tx": "Accurate clinical differentiation between Waldenstrom macroglobulinaemia and multiple myeloma is vital. Unlike multiple myeloma, Waldenstrom macroglobulinaemia characteristically features prominent hepatomegaly, splenomegaly, and generalized lymphadenopathy resulting from tissue infiltration by neoplastic lymphoplasmacytic cells. Furthermore, **osteolytic bone lesions are absent** in Waldenstrom macroglobulinaemia, hypercalcaemia is distinctly rare, and renal failure from light chain cast nephropathy is uncommon. Neoplastic cells express mature B-cell antigens CD19, CD20, and CD22, without the CD56 or CD138 dominance of multiple myeloma plasma cells.",
+      "say": "Differentiating Waldenstrom macroglobulinaemia from multiple myeloma is a classic exam topic. Waldenstrom patients develop hepatosplenomegaly and lymphadenopathy, which are distinctly unusual in multiple myeloma. Crucially, Waldenstrom macroglobulinaemia does not cause punched-out lytic bone lesions, does not produce hypercalcaemia, and rarely causes cast nephropathy. The cells are hybrid lymphoplasmacytoid cells that retain surface CD20 expression.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Complication",
-          "Mechanism",
-          "First response"
+          "Clinicopathological Feature",
+          "Waldenstrom Macroglobulinaemia",
+          "Multiple Myeloma",
+          "Diagnostic Importance"
         ],
         "rows": [
           [
-            "Hyperviscosity",
-            "IgM pentamer bulk",
-            "Urgent plasma exchange"
+            "Monoclonal Paraprotein",
+            "IgM (pentameric paraprotein)",
+            "IgG (55%) or IgA (20%)",
+            "Determines hyperviscosity risk"
           ],
           [
-            "Peripheral neuropathy",
-            "Anti-MAG antibody, amyloid, infiltration",
-            "Neurophysiology, clone therapy"
+            "Bone Lesions",
+            "Absent (normal skeletal survey)",
+            "Punched-out osteolytic lesions",
+            "Definitive imaging discriminator"
           ],
           [
-            "Bing-Neel syndrome",
-            "CNS lymphoplasmacytic infiltration",
-            "CSF studies, MRI, targeted therapy"
+            "Organomegaly / Adenopathy",
+            "Common (hepatosplenomegaly, nodes)",
+            "Rare in uncomplicated myeloma",
+            "Reflects lymphomatous biology"
           ],
           [
-            "Cold agglutinin overlap",
-            "IgM cold reactivity",
-            "Cold avoidance, rituximab"
+            "Defining Somatic Mutation",
+            "MYD88 L265P in >90% of cases",
+            "Translocations t(11;14), t(4;14), hyperdiploidy",
+            "Guides targeted kinase therapy"
           ]
         ]
       }
     },
     {
-      "tx": "Treatment of Waldenstrom disease waits for symptoms, then uses rituximab based combinations and BTK inhibitors such as zanubrutinib, avoiding rituximab monotherapy flare of IgM in high viscosity states. Plasma exchange precedes rituximab when viscosity threatens. That sequencing is **Waldenstrom therapy sequencing around IgM flare**.",
-      "say": "Exchange before rituximab when IgM is high; the antibody flare can thicken blood before it thins disease.",
+      "tx": "The acute emergence of severe hyperviscosity symptoms, including visual loss, stupor, or mucosal haemorrhage, constitutes a medical emergency requiring immediate **therapeutic plasma exchange**. Because eighty percent of pentameric IgM molecules reside within the intravascular volume, performing a single plasma volume exchange removes up to seventy percent of circulating IgM, rapidly restoring normal serum viscosity and resolving retinal ischaemia. Plasmapheresis must precede definitive systemic chemotherapy or rituximab administration, because rituximab can provoke a transient IgM flare that acutely worsens hyperviscosity.",
+      "say": "Symptomatic hyperviscosity is an emergency that demands immediate therapeutic plasma exchange. Because eighty percent of IgM is trapped inside blood vessels, plasmapheresis removes up to seventy percent of the paraprotein in a single session, rapidly restoring microvascular blood flow and saving vision. Crucially, plasmapheresis must be done before starting rituximab, because rituximab can trigger a dangerous temporary surge in IgM called the IgM flare.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Symptomatic disease confirmed"
+            "id": "p1",
+            "label": "Acute Hyperviscosity Signs"
           },
           {
-            "id": "b",
-            "label": "Viscosity assessed, exchange if threatened"
+            "id": "p2",
+            "label": "Immediate Plasmapheresis"
           },
           {
-            "id": "c",
-            "label": "Rituximab combination or BTK inhibitor"
+            "id": "p3",
+            "label": "Intravascular IgM Removal"
           },
           {
-            "id": "d",
-            "label": "IgM and symptoms tracked together"
+            "id": "p4",
+            "label": "Viscosity Normalizes"
+          },
+          {
+            "id": "p5",
+            "label": "Definitive Chemotherapy (BTK / Rituximab)"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "p1",
+            "p2",
+            "Emergency Indication"
           ],
           [
-            "b",
-            "c"
+            "p2",
+            "p3",
+            "Single Volume Exchange"
           ],
           [
-            "c",
-            "d"
+            "p3",
+            "p4",
+            "Prevents Stroke & Blindness"
+          ],
+          [
+            "p4",
+            "p5",
+            "Safe Systemic Induction"
           ]
         ]
       }
     },
     {
-      "tx": "Langerhans cell histiocytosis accumulates clonal dendritic cells with grooved nuclei in bone, skin, pituitary, lung, and nodes of children and smoking adults, driven usually by BRAF pathway mutations. Lytic skull lesions and diabetes insipidus headline childhood disease: **Langerhans cell histiocytosis (LCH)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Lytic bone lesions plus diabetes insipidus in a child mean Langerhans cell histiocytosis until biopsy clears it.",
+      "tx": "Langerhans cell histiocytosis is a clonal proliferative neoplasm of bone-marrow-derived myeloid dendritic cells that share phenotypic features with epidermal Langerhans cells. Modern genomic investigations have conclusively proven that Langerhans cell histiocytosis is a genuine neoplastic disease driven by activating **somatic MAPK pathway mutations**, predominantly the BRAF V600E mutation identified in fifty to sixty percent of lesions, or MAP2K1 mutations in another twenty percent. This constitutively active kinase signalling arrests dendritic cell differentiation and promotes chronic tissue-destructive inflammation.",
+      "say": "Langerhans cell histiocytosis was once considered an inflammatory disorder, but we now know it is a true clonal neoplasm. Over fifty percent of cases carry the somatic BRAF V600E mutation, with another twenty percent harboring MAP2K1 mutations. These mutations constitutively activate the RAS-RAF-MEK-ERK pathway, locking immature dendritic cells into an activated, cytokine-secreting state that recruits eosinophils and destroys local bone and visceral tissues.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/pulmonary-langerhans-histiocytosis-fig1.webp",
-        "alt": "Pulmonary Langerhans cell histiocytosis",
+        "alt": "High-resolution computed tomography showing cystic and nodular lung lesions in pulmonary Langerhans cell histiocytosis",
         "caption": "Pulmonary Langerhans cell histiocytosis, the smoking associated adult form with cystic lung disease."
       }
     },
     {
-      "tx": "Electron microscopy once diagnosed LCH by tennis racket Birbeck granules, cytoplasmic organelles of Langerhans cells, now replaced by immunostaining for CD1a and langerin CD207 on biopsy tissue. The racket organelle is the **Birbeck granule of Langerhans cells**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Birbeck granules are museum pieces now; CD1a and langerin stains make the LCH diagnosis today.",
+      "tx": "The pathognomonic ultrastructural feature of Langerhans cell histiocytosis observed on transmission electron microscopy is the presence of **Birbeck cytoplasmic granules**. Birbeck granules are elongated, rod-shaped, pentalaminar cytoplasmic organelles measuring twenty to forty nanometers in width, displaying a characteristic central linear striated zipper-like density. The organelle frequently terminates in a rounded, bulbous, expanded vesicle at one pole, creating a classic tennis-racket morphology. Birbeck granules represent internalized cell-membrane subdomains formed during receptor-mediated endocytosis facilitated by Langerin (CD207).",
+      "say": "The ultimate ultrastructural hallmark of Langerhans cells on electron microscopy is the Birbeck granule. These unique pentalaminar cytoplasmic structures look like miniature rods with a central zipper line. When one end swells into a round terminal vesicle, it produces the classic tennis-racket appearance. Birbeck granules form through receptor-mediated endocytosis of the C-type lectin Langerin, functioning in antigen processing.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Historical diagnosis",
+          "title": "Birbeck Granule Ultrastructure",
           "points": [
-            "Birbeck granules on electron microscopy",
-            "Grooved coffee bean nuclei",
-            "S100 positivity supportive"
+            "Rod-shaped pentalaminar organelles",
+            "Central striated periodic zipper density",
+            "Terminal bulbous vesicular expansion (tennis racket)",
+            "Formed by invagination of Langerin (CD207)"
           ]
         },
         "right": {
-          "title": "Modern diagnosis",
+          "title": "Weibel-Palade Bodies",
           "points": [
-            "CD1a and CD207 langerin positive",
-            "BRAF V600E in many cases",
-            "MAPK pathway targeted options"
+            "Rod-shaped storage organelles in endothelial cells",
+            "Store von Willebrand factor and P-selectin",
+            "Release contents upon stimulation by DDAVP",
+            "Absent in dendritic Langerhans cells"
           ]
         }
       }
     },
     {
-      "tx": "CD1a presents lipid antigens on dendritic cells and marks cortical thymocytes and Langerhans cells, so its bright expression on lesional histiocytes separates LCH from other histiocytic disorders such as Rosai-Dorfman and Erdheim-Chester disease. The lipid presenting marker is **CD1a in Langerhans cell histiocytosis**.",
-      "say": "CD1a plus langerin separates LCH from its histiocytic cousins; panel thinking beats single stains.",
+      "tx": "Immunohistochemical confirmation of Langerhans cell histiocytosis requires demonstrating intense cell-surface and cytoplasmic positivity for **cluster of differentiation 1a** and Langerin (CD207). Langerin is a transmembrane C-type lectin directly involved in Birbeck granule biogenesis, serving as the most specific immunohistochemical marker for the disease. Neoplastic Langerhans cells also express S100 protein and vimentin, but remain negative for non-Langerhans histiocytic and myeloid markers such as CD68, CD163, and myeloperoxidase, allowing pathologists to confirm the diagnosis without electron microscopy.",
+      "say": "Immunohistochemistry has largely replaced electron microscopy in confirming Langerhans cell histiocytosis. Pathologists test for CD1a and Langerin, also known as CD207. Langerin is the most specific marker because it is directly required to form Birbeck granules. Lesional cells also stain strongly for S100 protein, while remaining negative for ordinary macrophage markers like CD68, firmly establishing Langerhans lineage.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Disorder",
-          "Signature markers",
-          "Clue"
+          "Immunohistochemical Marker",
+          "Staining Pattern in LCH",
+          "Biological Role",
+          "Diagnostic Specificity"
         ],
         "rows": [
           [
-            "LCH",
-            "CD1a, CD207, BRAF often",
-            "Bone, pituitary, lung, skin"
+            "Langerin (CD207)",
+            "Membrane and cytoplasmic (Golgi)",
+            "C-type lectin; drives Birbeck granule assembly",
+            "Most specific diagnostic marker for LCH"
           ],
           [
-            "Rosai-Dorfman",
-            "S100, emperipolesis, CD1a negative",
-            "Massive painless nodes"
+            "CD1a",
+            "Intense diffuse membrane positivity",
+            "Presents lipid antigens to invariant NKT cells",
+            "Sensitive and reliable diagnostic hallmark"
           ],
           [
-            "Erdheim-Chester",
-            "CD68, factor XIIIa, BRAF often",
-            "Symmetric leg bone sclerosis"
+            "S100 Protein",
+            "Nuclear and cytoplasmic positivity",
+            "Calcium-binding protein family member",
+            "Sensitive screening marker; shared with melanoma"
           ],
           [
-            "Juvenile xanthogranuloma",
-            "Touton giant cells",
-            "Skin nodules of childhood"
+            "CD68 (KP1)",
+            "Negative or weak patchy staining",
+            "Lysosomal macrophage-associated glycoprotein",
+            "Negative staining excludes sinus histiocytosis"
           ]
         ]
       }
     },
     {
-      "tx": "Pulmonary LCH stalks young smokers with stellate interstitial nodules evolving into bizarre cysts and pneumothorax, and smoking cessation alone can regress early disease, making the history therapeutic. That exposure disease is **pulmonary Langerhans cell histiocytosis of smokers**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Cystic lung disease in a young smoker earns an LCH thought, and quitting smoking is its first therapy.",
+      "tx": "The clinical presentation of Langerhans cell histiocytosis spans a broad spectrum from solitary indolent lesions to fatal multisystem leukaemia-like dissemination. Unifocal disease (eosinophilic granuloma) presents as a solitary, punched-out osteolytic bone defect in the skull, ribs, or femur in older children. Multifocal unisystem disease presents in young children with the **Hand-Schuller-Christian triad** of osteolytic skull lesions, exophthalmos, and diabetes insipidus resulting from pituitary stalk infiltration. Multisystem Letterer-Siwe disease strikes infants under two years with hepatosplenomegaly, skin rash, pancytopenia, and poor prognosis.",
+      "say": "Langerhans cell histiocytosis presents in three classical clinical patterns. Eosinophilic granuloma is unifocal disease, causing a solitary osteolytic lesion in the calvarium or femur in older children. The Hand-Schuller-Christian triad describes multifocal bone disease in young children presenting with punched-out skull defects, bulging eyes from orbital infiltration, and diabetes insipidus from pituitary stalk invasion. Finally, Letterer-Siwe disease is an aggressive multisystem cancer in infants presenting with rash, bone marrow failure, and hepatosplenomegaly.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Young smoker, cystic interstitial pattern"
+            "id": "l1",
+            "label": "Langerhans Cell Clonal Expansion"
           },
           {
-            "id": "b",
-            "label": "Biopsy or BAL CD1a cells assessed"
+            "id": "l2",
+            "label": "Unifocal: Eosinophilic Granuloma (Bone)"
           },
           {
-            "id": "c",
-            "label": "Complete smoking cessation"
+            "id": "l3",
+            "label": "Multifocal: Hand-Schuller-Christian Triad"
           },
           {
-            "id": "d",
-            "label": "Systemic therapy for progressive disease"
+            "id": "l4",
+            "label": "Multisystem: Letterer-Siwe Disease (Infants)"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "l1",
+            "l2",
+            "Single Bone Defect"
           ],
           [
-            "b",
-            "c"
+            "l1",
+            "l3",
+            "Skull Defect, Exophthalmos, DI"
           ],
           [
-            "c",
-            "d"
+            "l1",
+            "l4",
+            "Skin Rash, Marrow Failure, Hepatosplenomegaly"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What specific somatic mutation is present in over 90% of patients with Waldenstrom macroglobulinaemia?",
+      "options": [
+        "MYD88 L265P mutation",
+        "BRAF V600E mutation",
+        "JAK2 V617F mutation",
+        "CALR exon 9 52-bp deletion"
+      ],
+      "correct": 0,
+      "explain": "The MYD88 L265P somatic mutation is identified in >90% of Waldenstrom macroglobulinaemia cases, driving constitutive downstream NF-kappa-B and BTK survival signaling."
+    },
+    {
+      "q": "What ultrastructural cytoplasmic organelle visible on electron microscopy is pathognomonic of Langerhans cell histiocytosis?",
+      "options": [
+        "Birbeck granules with tennis-racket morphology",
+        "Weibel-Palade bodies",
+        "Russell bodies within rough endoplasmic reticulum",
+        "Auer rods with crystalline periodicity"
+      ],
+      "correct": 0,
+      "explain": "Birbeck granules are rod-shaped pentalaminar cytoplasmic organelles with a central zipper line and bulbous terminal vesicle resembling a tennis racket, unique to Langerhans cells."
+    },
+    {
+      "q": "Which clinical triad classically characterizes multifocal unisystem Langerhans cell histiocytosis (Hand-Schuller-Christian disease)?",
+      "options": [
+        "Osteolytic calvarial defects, exophthalmos, and diabetes insipidus",
+        "Hepatosplenomegaly, thrombocytopenia, and generalized lymphadenopathy",
+        "Fever, drenching night sweats, and weight loss exceeding 10%",
+        "Palpable purpura, arthralgias, and abdominal pain"
+      ],
+      "correct": 0,
+      "explain": "The Hand-Schuller-Christian triad consists of punched-out calvarial bone defects, exophthalmos from orbital involvement, and diabetes insipidus from pituitary stalk infiltration."
     }
   ]
 }

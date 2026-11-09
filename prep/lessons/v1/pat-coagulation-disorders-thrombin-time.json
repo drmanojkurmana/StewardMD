@@ -1,207 +1,285 @@
 {
   "v": 1,
-  "module": "pat-coagulation-disorders",
-  "subject": "pathology",
-  "title": "Thrombin Time, Haemophilia A and B, Factor VIII, and Christmas Disease",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-coagulation-disorders",
+  "key": null,
+  "title": "Thrombin Time, Haemophilia A and B, Factor VIII, and Christmas Disease",
   "steps": [
     {
-      "tx": "Thrombin time adds thrombin directly to plasma and times fibrin formation, isolating fibrinogen quantity and quality plus thrombin inhibitors such as heparin and dabigatran from upstream factor problems. Prolongation narrows thinking to the final step: the **thrombin time test**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Thrombin time skips the cascade and interrogates fibrinogen itself plus any thrombin inhibitor aboard.",
+      "tx": "The **thrombin clotting time** directly assesses the final step of the common coagulation pathway: the proteolytic cleavage of soluble fibrinogen into insoluble fibrin monomers. Exogenous bovine or human thrombin is added to citrated platelet-poor plasma, bypassing the intrinsic, extrinsic, and tenase complexes entirely (reference range fourteen to nineteen seconds). The thrombin time prolongs markedly in quantitative hypofibrinogenemia under one hundred milligrams per deciliter, qualitative dysfibrinogenemia, severe hyperfibrinogenolysis, or in the presence of therapeutic thrombin inhibitors including unfractionated heparin and dabigatran.",
+      "say": "The thrombin time measures the direct conversion of fibrinogen to fibrin by adding exogenous thrombin to citrated plasma. Because it bypasses both the intrinsic and extrinsic pathways, it tests only the final step of clot formation. The thrombin time is prolonged in hypofibrinogenemia, in qualitative dysfibrinogenemia, and in the presence of thrombin inhibitors like unfractionated heparin or direct oral thrombin inhibitors such as dabigatran.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Thrombin time prolonged",
+          "title": "Thrombin Clotting Time",
           "points": [
-            "Low or dysfibrinogenaemia",
-            "Heparin or dabigatran present",
-            "Fibrin degradation products excess"
+            "Triggered by adding exogenous active thrombin",
+            "Bypasses all upstream cascade factors",
+            "Highly sensitive to unfractionated heparin contamination",
+            "Prolonged by dabigatran and high fibrin degradation products"
           ]
         },
         "right": {
-          "title": "Thrombin time normal",
+          "title": "Reptilase Time",
           "points": [
-            "Fibrinogen conversion intact",
-            "Look upstream at factors",
-            "Reptilase time separates heparin effect"
+            "Triggered by venom enzyme from Bothrops atrox",
+            "Cleaves only fibrinopeptide A from fibrinogen",
+            "Completely resistant to heparin and antithrombin III",
+            "Normal in heparin contamination, prolonged in dysfibrinogenemia"
           ]
         }
       }
     },
     {
-      "tx": "Reptilase, a snake venom enzyme clotting fibrinogen without thrombin and immune to heparin, stays normal when heparin alone prolongs thrombin time, while fibrinogen disorders prolong both tests together. That separation uses the **reptilase time heparin discrimination**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Reptilase ignores heparin; normal reptilase with long thrombin time convicts heparin, not fibrinogen.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Thrombin time",
-          "Reptilase time",
-          "Interpretation"
-        ],
-        "rows": [
-          [
-            "Prolonged",
-            "Normal",
-            "Heparin or dabigatran effect"
-          ],
-          [
-            "Prolonged",
-            "Prolonged",
-            "Fibrinogen low or dysfunctional"
-          ],
-          [
-            "Normal",
-            "Normal",
-            "Final step intact"
-          ],
-          [
-            "Very prolonged",
-            "Prolonged",
-            "Severe hypofibrinogenaemia, DIC consideration"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Haemophilia A, X-linked factor VIII deficiency, bleeds into joints and muscles from childhood, prolongs APTT with normal PT and platelets, and grades severe under one percent factor activity with spontaneous haemarthroses. The commonest severe factor deficiency is **haemophilia A (factor VIII deficiency)**.",
-      "say": "Bleeding joints, long APTT, normal platelets in a boy: haemophilia A until factor assay returns.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/coagulation-disorders-haemophilia-and-dic-fig1.webp",
-        "alt": "Haemophilia and DIC pathophysiology",
-        "caption": "Haemophilia pathophysiology contrasted with DIC consumption coagulopathy."
-      }
-    },
-    {
-      "tx": "Haemophilia B repeats the same bleeding script from factor IX deficiency, eponymously Christmas disease after the first described patient, separated only by specific factor assay and treated with factor IX concentrates. The factor IX twin is **haemophilia B (Christmas disease)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Christmas disease is haemophilia B; only the factor assay separates identical bleeding twins.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Haemophilia A",
-          "points": [
-            "Factor VIII deficient",
-            "Commoner, X-linked",
-            "Emicizumab prophylaxis option"
-          ]
-        },
-        "right": {
-          "title": "Haemophilia B",
-          "points": [
-            "Factor IX deficient",
-            "Christmas disease eponym",
-            "Longer half life concentrates available"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Factor VIII travels protected by von Willebrand factor, so von Willebrand disease lowers VIII secondarily, while haemophilia carriers may bleed after surgery and deserve level testing before procedures. Carrier bleeding recognition is **symptomatic haemophilia carrier assessment**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Carrier mothers can bleed too; check factor levels before surgery instead of assuming X-linked protection.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Severity",
-          "Factor level",
-          "Bleeding pattern"
-        ],
-        "rows": [
-          [
-            "Severe",
-            "Under 1 percent",
-            "Spontaneous joint and muscle bleeds"
-          ],
-          [
-            "Moderate",
-            "1 to 5 percent",
-            "Bleeds after minor trauma"
-          ],
-          [
-            "Mild",
-            "5 to 40 percent",
-            "Surgical and dental bleeding"
-          ],
-          [
-            "Carrier, low level",
-            "Variable, may be under 40 percent",
-            "Procedural risk, test before surgery"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Modern haemophilia care prevents bleeds with regular factor prophylaxis or emicizumab bridging factor VIII function in haemophilia A, reserving on demand treatment for breakthrough bleeds and surgery. Prevention first is **prophylaxis in severe haemophilia**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Prophylaxis prevents the arthropathy our predecessors watched helplessly; emicizumab changed haemophilia A again.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/acquired-haemophilia-fig1.webp",
-        "alt": "Acquired hemophilia A pathophysiology",
-        "caption": "Acquired haemophilia A from factor VIII autoantibodies in older adults."
-      }
-    },
-    {
-      "tx": "Inhibitors, alloantibodies neutralising infused factor in severe congenital disease or autoantibodies in acquired haemophilia of the elderly and postpartum, convert manageable deficiency into refractory bleeding needing bypassing agents. Bethesda titres quantify them: **factor VIII inhibitor (Bethesda) assessment**. That is why this detail earns its place in every examination and ward round.",
-      "say": "When factor stops working, measure the Bethesda titre; inhibitors rewrite haemophilia management completely.",
+      "tx": "When an unexpectedly prolonged thrombin time is encountered, performing a **reptilase time test** immediately clarifies whether the etiology represents heparin contamination versus a true fibrinogen abnormality. Reptilase, an enzyme isolated from the venom of Bothrops atrox, cleaves only fibrinopeptide A from fibrinogen. Because reptilase activity is completely independent of antithrombin III, it is entirely unaffected by therapeutic or catheter-flush heparin. A prolonged thrombin time paired with a normal reptilase time confirms heparin effect, whereas prolongation of both indicates afibrinogenemia or dysfibrinogenemia.",
+      "say": "The reptilase time is the definitive test to distinguish heparin contamination from a true fibrinogen defect. Reptilase is a snake venom enzyme that cleaves fibrinopeptide A to initiate clotting. Unlike thrombin, reptilase is completely insensitive to heparin and antithrombin three. If the thrombin time is prolonged but the reptilase time is completely normal, heparin contamination is confirmed. If both tests are prolonged, a genuine fibrinogen deficiency or abnormal dysfibrinogenemia is present.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Factor recovery poor or bleeding refractory"
+            "id": "t1",
+            "label": "Prolonged Thrombin Time"
           },
           {
-            "id": "b",
-            "label": "Mixing study fails incubated correction"
+            "id": "t2",
+            "label": "Reptilase Time Test"
           },
           {
-            "id": "c",
-            "label": "Bethesda titre quantifies inhibitor"
+            "id": "t3",
+            "label": "Normal Reptilase: Heparin Effect"
           },
           {
-            "id": "d",
-            "label": "Bypassing agents, eradication therapy"
+            "id": "t4",
+            "label": "Prolonged Reptilase: Fibrinogen Defect"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "t1",
+            "t2",
+            "Investigate Cause"
           ],
           [
-            "b",
-            "c"
+            "t2",
+            "t3",
+            "Unaffected by Heparin"
           ],
           [
-            "c",
-            "d"
+            "t2",
+            "t4",
+            "True Fibrinogen Pathology"
           ]
         ]
       }
     },
     {
-      "tx": "Gene therapy now delivers durable factor production for eligible adults with haemophilia A and B in some health systems, while extended half life concentrates lengthen prophylaxis intervals for others. Counselling must balance durability unknowns: **gene therapy counselling in haemophilia**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Gene therapy offers years of factor from one infusion; counsel durability and liver monitoring honestly.",
+      "tx": "Haemophilia A is an X-linked recessive bleeding disorder resulting from loss-of-function mutations in the F8 gene located on chromosome Xq28, producing deficiency of **coagulation factor VIII**. Affecting one in five thousand live male births, it classically presents with spontaneous, painful, deep musculoskeletal bleeding episodes, predominantly recurrent hemarthroses into large hinge joints (knees, elbows, ankles) and extensive intramuscular haematomas. Laboratory testing demonstrates an isolated prolongation of the activated partial thromboplastin time that corrects on 1:1 mixing, with normal prothrombin time, normal bleeding time, and normal platelet counts.",
+      "say": "Haemophilia A is the classical X-linked recessive bleeding disorder caused by mutations in the factor eight gene. It almost exclusively affects males, presenting with deep musculoskeletal haemorrhages rather than superficial petechiae. Repeated spontaneous bleeding into large hinge joints like knees and ankles produces chronic crippling haemophilic arthropathy. Laboratory workup reveals an isolated prolongation of the APTT that corrects with normal plasma, while PT and platelet counts remain completely normal.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-disorders-haemophilia-and-dic-fig1.webp",
+        "alt": "Comparison of haemophilia bleeding pathophysiology versus consumption coagulopathy in DIC",
+        "caption": "Haemophilia pathophysiology contrasted with DIC consumption coagulopathy."
+      }
+    },
+    {
+      "tx": "In circulation, factor VIII exists in an essential non-covalent stoichiometric complex with **von Willebrand factor carrier protein**. Von Willebrand factor protects factor VIII from rapid proteolytic inactivation by activated protein C and factor Xa, extending the intravascular half-life of factor VIII from two hours to twelve hours. Furthermore, von Willebrand factor delivers factor VIII directly to sites of vascular endothelial injury. Consequently, in severe type 3 von Willebrand disease, secondary deficiency of factor VIII develops due to accelerated clearance, leading to deep soft tissue bleeding mimicking classic haemophilia.",
+      "say": "Factor eight circulates in plasma tightly bound to von Willebrand factor. This carrier protein protects factor eight from premature proteolytic degradation by activated protein C, extending its half-life from two hours up to twelve hours. When von Willebrand factor is deficient, as in severe type three von Willebrand disease, unbound factor eight is cleared rapidly from circulation, causing secondary factor eight deficiency that can produce joint and muscle bleeding resembling classic haemophilia.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Established care",
+          "title": "Bound Factor VIII Complex",
           "points": [
-            "Factor prophylaxis, emicizumab in A",
-            "Proven joint protection",
-            "Treatment burden ongoing"
+            "Non-covalent complex with vWF multimers",
+            "Plasma half-life extended to 12 hours",
+            "Protected from activated Protein C cleavage",
+            "Directly localized to subendothelial injury sites"
           ]
         },
         "right": {
-          "title": "Emerging care",
+          "title": "Free Unbound Factor VIII",
           "points": [
-            "Gene therapy single infusion",
-            "Durability still being learned",
-            "Eligibility and liver criteria strict"
+            "Synthesized by liver sinusoidal endothelial cells",
+            "Rapid clearance with half-life of only 2 hours",
+            "Rapidly degraded by circulating proteases",
+            "Observed in severe Type 3 von Willebrand disease"
           ]
         }
       }
+    },
+    {
+      "tx": "Clinical severity in both haemophilia A and haemophilia B correlates strictly with the measured **baseline factor activity level**. Severe haemophilia corresponds to less than one percent factor activity (less than 0.01 international units per milliliter), characterized by frequent spontaneous hemarthroses and life-threatening intracranial haemorrhages. Moderate haemophilia encompasses factor levels between one and five percent, with bleeding triggered by minor trauma. Mild haemophilia displays factor levels between five and forty percent, where patients experience prolonged haemorrhage only following major surgical procedures, dental extractions, or severe accidental trauma.",
+      "say": "The severity of haemophilia is strictly determined by baseline factor activity. Severe disease, defined by factor activity under one percent of normal, causes frequent spontaneous bleeding into joints and muscles without preceding injury. Moderate haemophilia, with activity between one and five percent, causes severe bleeding after minor trauma. Mild haemophilia, with five to forty percent activity, may go undiagnosed until prolonged bleeding follows major surgery or tooth extraction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Haemophilia Severity",
+          "Factor Activity Level",
+          "Typical Clinical Bleeding Pattern",
+          "Joint Bleeding Risk"
+        ],
+        "rows": [
+          [
+            "Severe Haemophilia",
+            "<1% (<0.01 IU/mL)",
+            "Spontaneous hemarthroses and muscle haematomas",
+            "Severe crippling arthropathy without prophylaxis"
+          ],
+          [
+            "Moderate Haemophilia",
+            "1% to 5% (0.01-0.05 IU/mL)",
+            "Bleeding after minor trauma or minor surgery",
+            "Occasional hemarthroses, rarely spontaneous"
+          ],
+          [
+            "Mild Haemophilia",
+            "5% to 40% (0.05-0.40 IU/mL)",
+            "Bleeding only after major trauma or surgery",
+            "Spontaneous joint bleeding virtually never occurs"
+          ],
+          [
+            "Normal Coagulation",
+            "50% to 150% (0.50-1.50 IU/mL)",
+            "Normal physiological haemostatic response",
+            "Zero pathological joint bleeding risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Haemophilia B, historically designated **Christmas disease**, is an X-linked recessive bleeding disorder caused by mutations in the F9 gene on chromosome Xq27, leading to quantitative deficiency or qualitative dysfunction of factor IX. Clinically indistinguishable from haemophilia A, it presents with identical joint hemarthroses, muscle haematomas, and prolonged activated partial thromboplastin time. Factor IX is a vitamin K-dependent serine protease with a longer plasma half-life (eighteen to twenty-four hours) than factor VIII, requiring specific chromogenic or one-stage factor assays to definitively differentiate it from haemophilia A.",
+      "say": "Haemophilia B, or Christmas disease, is caused by mutations in the factor nine gene on the X chromosome. Clinically and through routine screening tests, haemophilia B is completely identical to haemophilia A: both produce spontaneous hemarthroses, deep haematomas, and an isolated prolonged APTT. The only way to tell them apart is by ordering specific factor eight and factor nine activity assays. Factor nine has a longer half-life of roughly twenty-four hours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acquired-haemophilia-fig1.webp",
+        "alt": "Factor replacement therapy and clinical bleeding features in haemophilia B",
+        "caption": "Acquired haemophilia A from factor VIII autoantibodies in older adults."
+      }
+    },
+    {
+      "tx": "The management of haemophilia centers on prophylactic replacement of the deficient factor with recombinant or plasma-derived viral-inactivated concentrates. For patients with mild haemophilia A, **desmopressin acetate administration** induces transient two to four-fold increases in endogenous factor VIII and von Willebrand factor by stimulating exocytosis from endothelial Weibel-Palade bodies. The major modern therapeutic complication in severe haemophilia is the development of neutralizing alloantibody inhibitors (measured in Bethesda units), occurring in twenty-five to thirty percent of severe haemophilia A patients following factor exposure.",
+      "say": "Modern haemophilia care relies on regular prophylactic infusions of recombinant factor eight or factor nine concentrates to keep trough levels above one to three percent. In mild haemophilia A, intravenous or intranasal desmopressin can be used to release stored factor eight from endothelial Weibel-Palade bodies, avoiding blood products. The most serious treatment complication is the emergence of neutralizing IgG alloantibodies, called inhibitors, which occur in up to thirty percent of severe haemophilia A patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Strategy",
+          "Mechanism of Action",
+          "Clinical Indication",
+          "Key Monitoring / Precautions"
+        ],
+        "rows": [
+          [
+            "Recombinant Factor VIII",
+            "Direct intravenous replacement of deficient factor",
+            "Prophylaxis and bleeding in haemophilia A",
+            "Screen for neutralizing inhibitors (Bethesda assay)"
+          ],
+          [
+            "Desmopressin (DDAVP)",
+            "Releases stored vWF and factor VIII from Weibel-Palade",
+            "Mild haemophilia A and Type 1 vWD",
+            "Fluid restriction to prevent hyponatremia and seizures"
+          ],
+          [
+            "Bypassing Agents (FEIBA / rFVIIa)",
+            "Activates common pathway bypassing factor VIII",
+            "Bleeding in patients with high-titer inhibitors",
+            "Thrombotic risk; avoid concurrent tranexamic acid"
+          ],
+          [
+            "Antifibrinolytics (Tranexamic Acid)",
+            "Competitive lysine-binding site inhibitor of plasmin",
+            "Mucosal and dental extraction bleeding",
+            "Contraindicated in upper urinary tract bleeding (clot colic)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The introduction of **emicizumab bispecific antibody therapy** has transformed prophylaxis in haemophilia A. Emicizumab is a humanized bispecific monoclonal antibody engineered to simultaneously bind activated factor IXa with one arm and zymogen factor X with the other arm. By physically bridging these two enzymes in the proper spatial orientation, emicizumab mimics the cofactor function of activated factor VIIIa, restoring tenase complex activity. Administered subcutaneously once weekly or monthly, it effectively prevents bleeding even in patients who harbor high-titer neutralizing factor VIII inhibitors.",
+      "say": "Emicizumab is a groundbreaking bispecific monoclonal antibody that mimics the cofactor function of activated factor eight. One arm of the antibody binds factor nine-a while the other arm grasps factor ten, bringing them into close proximity on the cell membrane to activate factor ten. Because emicizumab has a completely different molecular structure from factor eight, it is not neutralized by factor eight inhibitors, providing reliable subcutaneous prophylaxis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Subcutaneous Emicizumab"
+          },
+          {
+            "id": "e2",
+            "label": "Binds Factor IXa & X"
+          },
+          {
+            "id": "e3",
+            "label": "Spatial Bridging"
+          },
+          {
+            "id": "e4",
+            "label": "Factor Xa Generation"
+          },
+          {
+            "id": "e5",
+            "label": "Haemostasis Restored in FVIII Inhibitors"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2",
+            "Bispecific Monoclonal Arms"
+          ],
+          [
+            "e2",
+            "e3",
+            "Mimics Factor VIIIa Cofactor"
+          ],
+          [
+            "e3",
+            "e4",
+            "Prothrombinase Activation"
+          ],
+          [
+            "e4",
+            "e5",
+            "Bypasses Neutralizing Antibodies"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What coagulation test result distinguishes unfractionated heparin contamination from a true fibrinogen deficiency or dysfibrinogenemia?",
+      "options": [
+        "Prolonged thrombin time with a completely normal reptilase time",
+        "Prolonged prothrombin time with a normal activated partial thromboplastin time",
+        "Shortened thrombin time that normalizes upon incubation with protamine",
+        "Complete correction of the bleeding time upon adding desmopressin"
+      ],
+      "correct": 0,
+      "explain": "Reptilase is insensitive to heparin and antithrombin III; therefore, heparin contamination causes a prolonged thrombin time with a normal reptilase time, while fibrinogen defects prolong both."
+    },
+    {
+      "q": "What is the typical laboratory coagulation profile observed in an uncomplicated patient with severe haemophilia A?",
+      "options": [
+        "Isolated prolonged APTT with normal PT, normal platelet count, and normal bleeding time",
+        "Prolonged PT and prolonged APTT with severe thrombocytopenia",
+        "Isolated prolonged PT with normal APTT and elevated D-dimer",
+        "Normal PT and normal APTT with prolonged bleeding time and giant platelets"
+      ],
+      "correct": 0,
+      "explain": "Haemophilia A is an isolated deficiency of factor VIII in the intrinsic pathway, causing an isolated prolongation of the APTT while PT, platelet count, and bleeding time remain normal."
+    },
+    {
+      "q": "What factor activity threshold defines severe haemophilia A and haemophilia B?",
+      "options": [
+        "Less than 1% of normal factor activity (<0.01 IU/mL)",
+        "Between 1% and 5% of normal factor activity",
+        "Between 5% and 40% of normal factor activity",
+        "Between 40% and 50% of normal factor activity"
+      ],
+      "correct": 0,
+      "explain": "Severe haemophilia is defined by baseline factor activity of less than 1% (<0.01 IU/mL), predisposing patients to spontaneous hemarthroses and muscle haematomas."
     }
   ]
 }
