@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-bp-regulation",
+ "subject": "physiology",
+ "title": "Atrial Natriuretic Peptide, Autoregulation, and Valsalva Manoeuvre",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "When extracellular fluid volume expands, increased venous return distends atrial myocytes, triggering the synthesis and secretion of **atrial natriuretic peptide** (ANP). Stored in dense cytoplasmic granules of atrial myocytes, ANP counteracts the renin-angiotensin-aldosterone axis by promoting rapid urinary sodium excretion (natriuresis) and water excretion (diuresis).",
+   "say": "Atrial natriuretic peptide is released by stretched atrial myocytes in volume overload, counteracting aldosterone to promote natriuresis and diuresis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sodium-water-balance-long-case-fig1.webp",
+    "alt": "Atrial natriuretic peptide signaling and renal tubular actions.",
+    "caption": "Atrial natriuretic peptide secretion and renal natriuretic actions in volume expansion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "ANP acts by binding to cell-surface natriuretic peptide receptor-A, which possesses intrinsic particulate **guanylyl cyclase** activity. Generating cyclic guanosine monophosphate (cGMP) and activating protein kinase G, ANP relaxes vascular smooth muscle to induce systemic vasodilation, inhibits renin and aldosterone secretion, and dilates afferent renal arterioles while constricting efferent arterioles to augment glomerular filtration.",
+   "say": "ANP binds receptors with intrinsic guanylyl cyclase activity, generating cyclic GMP to relax vascular smooth muscle and enhance glomerular filtration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dist",
+      "label": "Atrial Stretch Induced by Hypervolaemia or Heart Failure"
+     },
+     {
+      "id": "anp",
+      "label": "Atrial Myocytes Secrete 28-Amino-Acid Peptide ANP into Plasma"
+     },
+     {
+      "id": "cgmp",
+      "label": "NPR-A Activation Generates Cyclic GMP in Target Tissues"
+     },
+     {
+      "id": "resp",
+      "label": "Inhibits Renin & Aldosterone, Promotes Natriuresis, Dilates Arterioles"
+     }
+    ],
+    "edges": [
+     [
+      "dist",
+      "anp"
+     ],
+     [
+      "anp",
+      "cgmp"
+     ],
+     [
+      "cgmp",
+      "resp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The intrinsic capacity of vascular beds to maintain relatively constant blood flow despite wide variations in perfusion pressure is defined as **autoregulation**. In the brain and kidneys, blood flow remains remarkably stable across mean arterial pressures spanning sixty to one hundred and sixty millimetres of mercury, preventing ischaemic hypoperfusion during hypotension and capillary barotrauma during hypertensive surges.",
+   "say": "Autoregulation keeps blood flow stable despite fluctuations in perfusion pressure between 60 and 160 millimetres, protecting brain and kidneys.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ Vascular Bed",
+     "Autoregulatory Range (MAP)",
+     "Dominant Underlying Mechanism",
+     "Clinical Sensitivity"
+    ],
+    "rows": [
+     [
+      "Cerebral Circulation",
+      "60 to 160 mmHg",
+      "Metabolic (pCO2) and Bayliss myogenic",
+      "Disrupted in severe traumatic brain injury"
+     ],
+     [
+      "Renal Circulation",
+      "75 to 160 mmHg",
+      "Myogenic reflex and tubuloglomerular feedback",
+      "Preserves glomerular filtration rate (GFR)"
+     ],
+     [
+      "Coronary Circulation",
+      "60 to 180 mmHg",
+      "Local metabolic (adenosine, pO2, NO)",
+      "Directly couples flow to myocardial oxygen work"
+     ],
+     [
+      "Skeletal Muscle",
+      "Moderate autoregulation",
+      "Local metabolic metabolites during exercise",
+      "Flow increases 20-fold during active exercise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two major physiological theories account for autoregulation: the myogenic theory and the metabolic theory. The **myogenic mechanism** (Bayliss effect) describes an intrinsic smooth muscle response: acute elevation of intravascular pressure stretches arteriolar walls, opening stretch-activated cation channels to depolarise myocytes and trigger reflexive vasoconstriction.",
+   "say": "The Bayliss myogenic mechanism contracts vascular smooth muscle in response to stretch, keeping blood flow constant as perfusion pressure rises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myogenic Theory (Bayliss Effect)",
+     "points": [
+      "Intrinsic property of vascular smooth muscle cells",
+      "Stretch opens mechanosensitive TRP cation channels",
+      "Depolarisation triggers calcium influx and vasoconstriction",
+      "Operates rapidly to protect distal fragile capillaries"
+     ]
+    },
+    "right": {
+     "title": "Metabolic Theory",
+     "points": [
+      "Driven by accumulation of tissue vasoactive metabolites",
+      "Inadequate flow accumulates adenosine, CO2, H+, and K+",
+      "Metabolites relax vascular smooth muscle directly",
+      "Restores tissue flow to match local metabolic demand"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A clinical bedside evaluation of autonomic cardiovascular control is the **Valsalva manoeuvre**. The patient exhales forcefully against a closed glottis or manometer, sustaining an intrathoracic pressure of forty millimetres of mercury for fifteen seconds. The maneuver divides hemodynamically into four distinct phases that test baroreceptor and autonomic integrity.",
+   "say": "The Valsalva manoeuvre tests autonomic reflexes through four distinct phases produced by sustained forced exhalation against a closed glottis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Valsalva Phase",
+     "Intrathoracic Dynamics",
+     "Blood Pressure Alteration",
+     "Reflex Heart Rate Response"
+    ],
+    "rows": [
+     [
+      "Phase 1 (Strain Onset)",
+      "Forced exhalation compresses thoracic aorta",
+      "Transient spike in blood pressure",
+      "Brief transient reflex bradycardia"
+     ],
+     [
+      "Phase 2 (Sustained Strain)",
+      "High intrathoracic pressure blocks venous return",
+      "Progressive fall in stroke volume & MAP",
+      "Reflex tachycardia and vasoconstriction"
+     ],
+     [
+      "Phase 3 (Strain Release)",
+      "Sudden thoracic decompression pools blood in lungs",
+      "Transient sharp drop in arterial pressure",
+      "Transient tachycardia maintains cardiac output"
+     ],
+     [
+      "Phase 4 (Pressure Overshoot)",
+      "Venous return rushes into constricted vasculature",
+      "Marked arterial pressure overshoot",
+      "Vagal reflex bradycardia (Marey law)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During Phase 2 of the Valsalva manoeuvre, sustained high intrathoracic pressure compresses the vena cava, severely restricting venous return. Stroke volume, pulse pressure, and mean arterial pressure collapse, unloading carotid baroreceptors and triggering maximal sympathetic vasoconstriction and **reflex tachycardia**. Heart rate rises steeply to compensate for diminished stroke volume.",
+   "say": "In phase two, obstructed venous return collapses blood pressure, unloading baroreceptors to trigger reflex tachycardia and intense vasoconstriction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "strain",
+      "label": "Sustained Intrathoracic Pressure (40 mmHg) Collapses Vena Cava"
+     },
+     {
+      "id": "vr",
+      "label": "Venous Return and Cardiac Filling Drop Precipitously"
+     },
+     {
+      "id": "bp",
+      "label": "Stroke Volume and Arterial Blood Pressure Fall Steeply"
+     },
+     {
+      "id": "tachy",
+      "label": "Baroreceptor Unloading Triggers Maximal Sympathetic Reflex Tachycardia"
+     }
+    ],
+    "edges": [
+     [
+      "strain",
+      "vr"
+     ],
+     [
+      "vr",
+      "bp"
+     ],
+     [
+      "bp",
+      "tachy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upon release of the strain in Phase 4, accumulated venous blood surges into the pulmonary and left heart chambers. Propelled into a peripheral arterial tree that remains intensely constricted from Phase 2 sympathetic activation, stroke volume surges, generating a dramatic **arterial overshoot**. This sudden hypertension stretches carotid baroreceptors, producing profound reflex bradycardia.",
+   "say": "Upon release in phase four, venous blood surges into constricted arterioles, causing a pressure overshoot that triggers marked vagal bradycardia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Autonomic Response",
+     "points": [
+      "Clear blood pressure drop in Phase 2 with reflex tachycardia",
+      "Prominent arterial pressure overshoot in Phase 4",
+      "Marked secondary reflex bradycardia (Valsalva ratio > 1.5)",
+      "Confirms intact baroreceptor and autonomic pathways"
+     ]
+    },
+    "right": {
+     "title": "Autonomic Neuropathy (Square Wave)",
+     "points": [
+      "Loss of Phase 2 reflex tachycardia and vasoconstriction",
+      "Absence of Phase 4 blood pressure overshoot",
+      "Absence of Phase 4 rebound reflex bradycardia",
+      "Square wave response typical of severe autonomic failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failure of normal regulatory reflexes produces clinical **hypertension**, defined as sustained blood pressure exceeding one hundred and forty millimetres systolic or ninety millimetres diastolic. Essential hypertension accounts for ninety-five percent of cases, driven by increased total peripheral resistance, reset baroreceptors, sympathetic overactivity, and impaired renal pressure natriuresis.",
+   "say": "Hypertension represents sustained blood pressure over 140/90, caused by elevated peripheral resistance, reset baroreceptors, and impaired renal natriuresis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-gen-blood-pressure.webp",
+    "alt": "Clinical assessment and diagnostic criteria of arterial hypertension.",
+    "caption": "Measurement and cardiovascular staging of systemic arterial hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
