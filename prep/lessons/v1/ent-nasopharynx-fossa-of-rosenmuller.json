@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "id": "ent-nasopharynx-fossa-of-rosenmuller",
+ "subject": "ent",
+ "module": "ent-nasopharynx",
+ "title": "Fossa of Rosenmuller, Serous Otitis and Neck Metastasis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **fossa of Rosenmuller** is the pharyngeal recess tucked behind the Eustachian tube cushion on the lateral nasopharyngeal wall, and it is the commonest site of origin for nasopharyngeal carcinoma. Its depth hides early tumours from casual inspection, so directed endoscopy with palpation under anaesthesia historically found lesions that mirrors missed. Every adult nasopharyngeal examination names this recess explicitly in the record.",
+   "say": "The recess behind the ear tube cushion is the commonest cancer origin site here. Early tumours are hidden by depth and directed endoscopy is therefore essential. Adult examination needs explicit recording of this recess in safe practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasopharyngeal-carcinoma-fig1.webp",
+    "alt": "Diagram of nasopharyngeal carcinoma presentation with neck node, ear effusion and nasal features.",
+    "caption": "Nasopharyngeal carcinoma presentation pattern. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Unilateral serous otitis media** in an adult is effusion behind an intact drum from tubal blockage, giving conductive loss, fullness and a dull retracted membrane with fluid level or bubbles. In children effusion usually follows adenoid and tubal immaturity, but in adults a nasopharyngeal mass must be excluded first. The rule is absolute in examinations: adult unilateral effusion earns nasopharyngeal endoscopy, with imaging and biopsy of any lesion found.",
+   "say": "Fluid behind the drum in an adult indicates tube blockage from nasopharyngeal disease until disproved. Childhood effusion usually follows adenoid immaturity without tumour concern. Adult unilateral effusion requires endoscopy with biopsy of lesions.",
+   "vis": {
+    "kind": "table",
+    "title": "Serous effusion by age group",
+    "cols": [
+     "Group",
+     "Usual cause",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Child",
+      "Adenoid and tubal immaturity",
+      "Observe, treat nose and ears"
+     ],
+     [
+      "Adult bilateral",
+      "Allergy, infection, barotrauma",
+      "Medical care and review"
+     ],
+     [
+      "Adult unilateral",
+      "Nasopharyngeal mass until disproved",
+      "Endoscopy and imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neck node metastasis** is the first presentation in a large share of nasopharyngeal carcinomas, typically a painless hard upper deep cervical or posterior triangle mass in an adult. Fine needle aspiration showing metastatic carcinoma with unknown primary triggers nasopharyngeal examination, imaging and viral studies as the primary hunt. Excisional biopsy before primary identification is discouraged because it complicates later definitive neck treatment planning.",
+   "say": "Painless hard upper neck nodes give the first presentation in many nasopharyngeal cancers. Needle sampling with unknown primary status triggers a directed nasopharyngeal hunt. Excision before primary identification complicates later neck treatment planning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasopharyngeal-tumours-fig1.webp",
+    "alt": "Diagram of nasopharyngeal tumour spread into neck nodes and adjacent compartments.",
+    "caption": "Spread to neck nodes and adjacent spaces. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Drainage anatomy explains bilateral nodes from a midline organ: retropharyngeal nodes filter first, then upper jugular and posterior triangle chains on both sides. Node level five involvement behind sternocleidomastoid is particularly characteristic of nasopharyngeal origin among unknown primaries. **Low neck or supraclavicular nodes** and bulky bilateral disease worsen stage and prognosis, shifting treatment intensity and distant spread surveillance upward.",
+   "say": "Midline drainage produces bilateral nodes through retropharyngeal and jugular chains on both sides. Posterior triangle involvement is characteristic of nasopharyngeal origin among unknown primaries. Low neck disease worsens prognosis and increases surveillance intensity.",
+   "vis": {
+    "kind": "flow",
+    "title": "Nasopharyngeal nodal spread",
+    "nodes": [
+     {
+      "id": "np",
+      "label": "Nasopharyngeal primary"
+     },
+     {
+      "id": "retro",
+      "label": "Retropharyngeal nodes"
+     },
+     {
+      "id": "upper",
+      "label": "Upper jugular and posterior chains"
+     },
+     {
+      "id": "low",
+      "label": "Low neck spread, worse stage"
+     }
+    ],
+    "edges": [
+     [
+      "np",
+      "retro"
+     ],
+     [
+      "retro",
+      "upper"
+     ],
+     [
+      "upper",
+      "low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Skull base invasion from the recess reaches foramina carrying the fifth and sixth cranial nerves early, producing facial pain or numbness and lateral gaze palsy with diplopia. Superior spread through foramen lacerum reaches the cavernous sinus and internal carotid artery. **Cranial nerve examination** is therefore staging, not ritual, in every new nasopharyngeal tumour, and deficits map the superior extent that resonance imaging must confirm.",
+   "say": "Skull base invasion affects fifth and sixth nerves with facial pain and gaze palsy. Cavernous sinus involvement threatens carotid and ocular nerves together in advanced disease. Nerve examination provides staging information that imaging must confirm.",
+   "vis": {
+    "kind": "table",
+    "title": "Skull base nerve staging",
+    "cols": [
+     "Nerve",
+     "Sign"
+    ],
+    "rows": [
+     [
+      "Fifth nerve",
+      "Facial pain or numbness"
+     ],
+     [
+      "Sixth nerve",
+      "Lateral gaze palsy"
+     ],
+     [
+      "Examination",
+      "Stages superior extent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biopsy technique in the recess balances yield and bleeding: endoscopic directed biopsies under general anaesthesia allow deep sampling and haemostasis, while clinic biopsy suits exophytic lesions with preparation. Blind random biopsies of a normal looking nasopharynx have low yield and are reserved for strong occult primary suspicion with imaging guidance. **Frozen section** is rarely needed because definitive histology with viral staining decides treatment more completely.",
+   "say": "Directed biopsies under anaesthesia allow deep sampling with secure haemostasis control. Clinic biopsy is suitable for visible exophytic lesions with preparation available. Random blind sampling has low yield without imaging guidance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Visible recess lesion",
+     "points": [
+      "Directed endoscopic biopsy",
+      "Viral staining on tissue",
+      "Stage with MRI and PET"
+     ]
+    },
+    "right": {
+     "title": "Occult primary, normal view",
+     "points": [
+      "Imaging guided reassessment",
+      "Viral blood markers assist",
+      "Avoid repeated blind biopsies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Treatment response in nodes is watched as carefully as the primary, because persistent nodal disease after chemoradiation is the commonest salvage surgery indication in this cancer. Planned neck dissection debates have largely given way to response adapted surgery for residual masses only. **Surveillance imaging** distinguishes fibrosis from viable tumour before any neck operation, sparing many patients unnecessary dissection after complete metabolic response.",
+   "say": "Persistent nodal disease after chemoradiation gives the main salvage surgery indication here. Response adapted surgery reserves dissection for residual masses only. Metabolic imaging separates fibrosis from viable tumour before operation.",
+   "vis": null
+  },
+  {
+   "tx": "Benign lesions also occupy the recess and mimic cancer: adenoid remnants in adults, Thornwaldt cysts in the midline posterior wall and minor salivary tumours. Thornwaldt cyst presents with postnasal discharge, halitosis and occipital headache from a midline cystic swelling. **Imaging character** usually separates cyst from solid tumour before biopsy, preventing unnecessary radical pathways for benign disease.",
+   "say": "Benign cysts with adenoid remnants are occasional mimics of cancer in the nasopharynx on examination. Midline cystic swelling with postnasal discharge indicates Thornwaldt cyst typically. Imaging character separates cyst from solid tumour before biopsy.",
+   "vis": {
+    "kind": "table",
+    "title": "Recess lesions: benign mimics",
+    "cols": [
+     "Lesion",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Thornwaldt cyst",
+      "Midline cyst, postnasal discharge"
+     ],
+     [
+      "Adult adenoid remnant",
+      "Midline lymphoid tissue, symmetric"
+     ],
+     [
+      "Minor salivary tumour",
+      "Submucosal smooth swelling"
+     ],
+     [
+      "Carcinoma",
+      "Lateral recess mass, nodes, EBV linked"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis in nasopharyngeal carcinoma has improved with intensity modulated radiotherapy and viral DNA guidance, yet distant metastasis to bone, lung and liver remains the dominant failure pattern in advanced nodal disease. Surveillance therefore includes systemic review beyond the neck in high stage survivors. **Bone pain or rising viral titres** between visits trigger metastatic imaging rather than reassurance, however well the nasopharynx itself appears on endoscopy.",
+   "say": "Distant spread to bone, lung and liver dominates failure in advanced nodal disease. Systemic surveillance is part of high stage survivorship review afterwards. Bone pain or rising viral levels require metastatic imaging promptly.",
+   "vis": null
+  },
+  {
+   "tx": "The recess lesson compresses to bedside rules. Inspect the fossa behind the tube in every adult with unilateral effusion, unexplained neck nodes, blood stained discharge or cranial nerve signs. Treat neck metastasis as a primary hunt, stage nerves as anatomy and spare benign cysts radical treatment. **Midline drainage** explains bilateral nodes and must shape neck coverage in every definitive plan.",
+   "say": "Recess inspection is required in adults with effusion, nodes, bleeding or nerve signs. Neck metastasis triggers a primary hunt with nerve staging included. Midline drainage explains bilateral nodes and shapes neck coverage.",
+   "vis": {
+    "kind": "table",
+    "title": "Adult nasopharyngeal red flags",
+    "cols": [
+     "Presentation",
+     "Required response"
+    ],
+    "rows": [
+     [
+      "Unilateral ear effusion",
+      "Endoscopy of recess"
+     ],
+     [
+      "Upper neck node",
+      "Primary hunt with viral studies"
+     ],
+     [
+      "Blood stained discharge",
+      "Imaging and biopsy pathway"
+     ],
+     [
+      "Fifth or sixth nerve signs",
+      "Skull base staging urgently"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Fossa of Rosenmuller",
+   "b": "Recess behind Eustachian tube cushion; commonest origin of nasopharyngeal carcinoma."
+  },
+  {
+   "f": "Adult unilateral serous otitis rule",
+   "b": "Exclude nasopharyngeal mass by endoscopy, with imaging and biopsy of any lesion."
+  },
+  {
+   "f": "Nasopharyngeal nodal pattern",
+   "b": "Retropharyngeal then upper jugular and posterior triangle, often bilateral; level five disease is characteristic."
+  }
+ ],
+ "keys": [
+  "Adult unilateral effusion is nasopharyngeal cancer until disproved",
+  "Posterior triangle nodes suggest nasopharyngeal primary",
+  "Skull base nerves stage the tumour superiorly"
+ ]
+}

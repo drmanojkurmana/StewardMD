@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sur-testis",
+ "subject": "surgery",
+ "title": "Hydrocele, Varicocele and Scrotal Swellings",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fluid collecting between the layers covering the testis forms a **hydrocele**. It produces a painless scrotal swelling that shines a torch beam through, a property called transillumination. The testis itself usually cannot be felt separately within the fluid. You can get above a hydrocele with your fingers, which separates it from an inguinal hernia that descends from the groin.",
+   "say": "A hydrocele collects fluid around the testis and transilluminates brightly with a torch.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-transillumination_scrotum.webp",
+    "alt": "Transillumination technique for scrotal swellings.",
+    "caption": "Transillumination of a hydrocele. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The operation everting the hydrocele sac behind the testis is the **Jaboulay procedure**. Turning the sac inside out stops fluid recollecting around the testis. It suits most adult hydroceles that are large or uncomfortable. Lord plication suits thin walled sacs, while eversion suits thick sacs, and both need careful haemostasis to prevent a haematoma.",
+   "say": "The Jaboulay procedure everts the hydrocele sac behind the testis to stop fluid recollecting.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-jaboulay-procedure-for-hydrocele.webp",
+    "alt": "Jaboulay operation for hydrocele with sac eversion.",
+    "caption": "Jaboulay procedure: sac eversion for hydrocele. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dilated veins of the pampiniform plexus feeling like a bag of worms form a **varicocele**. Most occur on the left because its vein drains into the renal vein. Large varicoceles can impair sperm production and shrink the testis. A varicocele that stays filled when the man lies flat, or a new right sided one, needs imaging of the kidney and abdomen.",
+   "say": "A varicocele feels like a bag of worms, occurs mostly on the left, and can impair sperm production.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Varicocele"
+    ],
+    "rows": [
+     [
+      "Side",
+      "Left commonest"
+     ],
+     [
+      "Feel",
+      "Bag of worms"
+     ],
+     [
+      "Concern",
+      "Fertility and shrinkage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A painless cyst of the epididymis containing milky fluid is a **spermatocele**. It sits above and behind the testis and can be felt separately from it. Like epididymal cysts, it transilluminates and usually needs no treatment. Its milky fluid contains sperm, and the swelling sits posterolateral to the upper pole of the testis.",
+   "say": "A spermatocele is a painless milky cyst above the testis that usually needs no treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydrocele",
+     "points": [
+      "Surrounds the testis",
+      "Testis not felt separately",
+      "Whole front of testis covered"
+     ]
+    },
+    "right": {
+     "title": "Spermatocele",
+     "points": [
+      "Above the testis",
+      "Felt separately",
+      "Localised cyst"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gathering the hydrocele sac into folds with stitches is **Lord plication**. It suits smaller hydroceles and causes less bleeding than sac excision. The folded sac absorbs fluid without reforming a cavity. Plication avoids opening the sac widely, so postoperative haematoma and infection rates run lower than with excision.",
+   "say": "Lord plication folds the hydrocele sac with stitches and suits smaller hydroceles.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-lords-plication-for-hydrocele.webp",
+    "alt": "Lord plication procedure for primary hydrocele.",
+    "caption": "Lord plication for hydrocele. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A hydrocele appearing suddenly in an adult needs a search for an underlying **secondary cause**. Testicular tumours, infection and trauma can all provoke reactive fluid. Ultrasound examines the testis whenever it cannot be felt clearly. Blood stained hydrocele fluid after minor trauma should raise suspicion of an underlying tumour and go for cytology.",
+   "say": "A sudden adult hydrocele needs ultrasound to exclude tumour, infection or trauma underneath.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "New hydrocele found"
+     },
+     {
+      "id": "n1",
+      "label": "Testis cannot be felt"
+     },
+     {
+      "id": "n2",
+      "label": "Ultrasound performed"
+     },
+     {
+      "id": "n3",
+      "label": "Underlying cause treated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In children a hydrocele often connects to the abdomen through a patent **processus vaginalis**. Most close naturally in the first years of life. Persisting swellings that vary in size need hernia style repair of the connection. A swelling that shrinks overnight and refills by evening confirms the open connection to the peritoneal cavity.",
+   "say": "Childhood hydroceles often connect to the abdomen and most close naturally in early life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Child hydrocele"
+    ],
+    "rows": [
+     [
+      "Cause",
+      "Open processus vaginalis"
+     ],
+     [
+      "Course",
+      "Often closes alone"
+     ],
+     [
+      "Surgery",
+      "If persisting or varying"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating a hydrocele from an inguinal hernia depends on whether the examiner can **get above the swelling**. A hydrocele is confined to the scrotum, so the cord feels normal above it. A hernia extends upward and the fingers cannot get above it.",
+   "say": "Getting above the swelling separates a scrotal hydrocele from a hernia extending from the groin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydrocele",
+     "points": [
+      "Can get above it",
+      "Confined to scrotum",
+      "Transilluminates"
+     ]
+    },
+    "right": {
+     "title": "Inguinal hernia",
+     "points": [
+      "Cannot get above it",
+      "Extends to groin",
+      "Cough impulse present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Aspiration alone is discouraged because fluid returns and infection may follow, a principle of **definitive repair**. Surgery is offered when the hydrocele is large, uncomfortable or diagnostically uncertain. Small painless hydroceles can safely be watched. Aspiration in older men is sometimes used when anaesthesia is risky, with sclerotherapy to reduce the near certain recurrence.",
+   "say": "Definitive surgery beats aspiration, which recurs and risks infection, while small hydroceles can be watched.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Large or uncertain hydrocele"
+     },
+     {
+      "id": "n1",
+      "label": "Surgery offered"
+     },
+     {
+      "id": "n2",
+      "label": "Sac everted or plicated"
+     },
+     {
+      "id": "n3",
+      "label": "Small painless ones watched"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

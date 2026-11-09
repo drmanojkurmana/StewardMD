@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "id": "ent-salivary-pleomorphic-adenoma",
+ "subject": "ent",
+ "module": "ent-salivary",
+ "title": "Salivary Gland Disorders and Tumours",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Pleomorphic adenoma** is the commonest benign salivary tumour, usually a slow growing painless firm parotid mass in a middle aged adult with mixed epithelial and stromal elements under the microscope. Its capsule sends pseudopods into surrounding gland, so simple enucleation leaves tumour behind and recurrence follows years later. Long standing tumours carry a small but real risk of malignant transformation, rising with duration and recurrence.",
+   "say": "Slow painless parotid growth in middle age indicates pleomorphic adenoma most commonly. Capsular pseudopods make simple enucleation inadequate and recurrence follows incomplete removal. Long duration increases malignant transformation risk gradually.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/salivary-gland-disorders-ent-fig1.webp",
+    "alt": "Salivary diagram with submandibular stone disease and pleomorphic adenoma excision anatomy.",
+    "caption": "Salivary disorders and adenoma excision. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Warthin tumour** is the second benign parotid tumour of older male smokers, often bilateral or multifocal in the parotid tail, with cystic spaces and lymphoid stroma that concentrate tracer on nuclear scans. Its smoking association and bilaterality separate it from pleomorphic adenoma in examination answers. Malignant change is rare, so elderly patients with comorbidity sometimes observe small proven Warthin tumours instead of accepting operative risk.",
+   "say": "Older male smokers develop cystic parotid tail tumours that are often bilateral. Tracer concentration on nuclear scans supports Warthin tumour diagnosis characteristically. Rare malignant change allows observation in elderly comorbid patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pleomorphic adenoma",
+     "points": [
+      "Commonest benign tumour",
+      "Solitary firm painless mass",
+      "Pseudopods forbid enucleation",
+      "Late malignant change possible"
+     ]
+    },
+    "right": {
+     "title": "Warthin tumour",
+     "points": [
+      "Older male smokers",
+      "Parotid tail, often bilateral",
+      "Cystic with lymphoid stroma",
+      "Tracer avid on scans"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mucoepidermoid carcinoma** is the commonest malignant salivary tumour overall, graded from indolent low grade disease to aggressive high grade cancer with nodal spread. Low grade tumours mimic benign masses for years, which is why every salivary mass earns histology rather than assumption. High grade disease with pain, facial weakness or nodes declares malignancy clinically before the pathologist confirms grade and stage.",
+   "say": "Mucoepidermoid cancer is the commonest malignant salivary tumour across grades overall. Low grade disease imitates benign masses and requires histology for separation. Pain with facial weakness or nodes indicates malignancy clinically.",
+   "vis": {
+    "kind": "table",
+    "title": "Salivary tumours: examination anchors",
+    "cols": [
+     "Tumour",
+     "Anchor fact"
+    ],
+    "rows": [
+     [
+      "Pleomorphic adenoma",
+      "Commonest benign, pseudopods"
+     ],
+     [
+      "Warthin tumour",
+      "Smoker, bilateral parotid tail"
+     ],
+     [
+      "Mucoepidermoid carcinoma",
+      "Commonest malignant overall"
+     ],
+     [
+      "Adenoid cystic carcinoma",
+      "Perineural spread, late lung spread"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adenoid cystic carcinoma** infiltrates nerves relentlessly, producing pain and nerve deficits out of proportion to mass size, with skip spread along nerve sheaths beyond palpable disease. It grows slowly yet metastasises late to lungs, so ten year survival overstates cure and follow up extends for decades. Cribriform Swiss cheese histology is its microscopic signature, and radiotherapy commonly follows surgery for perineural burden even with clear margins.",
+   "say": "Nerve infiltration produces pain beyond mass size in adenoid cystic cancer characteristically. Slow growth with late lung spread requires decades of follow up. Radiotherapy follows surgery for nerve burden despite clear margins.",
+   "vis": null
+  },
+  {
+   "tx": "**Perineural spread** as a behaviour links adenoid cystic carcinoma to the facial nerve in parotid disease and trigeminal branches in palate disease, producing numbness, weakness or pain along named nerves. Imaging must therefore trace nerves to skull base, not merely measure the gland mass. A painful salivary tumour with nerve signs is malignant until histology proves otherwise, however slow its growth appears over clinic visits.",
+   "say": "Nerve spread produces numbness, weakness or pain along named nerve territories. Imaging traces nerves to skull base rather than measuring gland size alone. Painful tumours with nerve signs are malignant until disproved.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+    "alt": "Salivary glands anatomy and histology diagram showing parotid, submandibular and sublingual glands.",
+    "caption": "Salivary gland anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Frey syndrome** is gustatory sweating and flushing over the parotid skin after parotidectomy, caused by regenerating parasympathetic fibres meant for the gland that instead innervate sweat glands. Eating triggers visible sweating that embarrasses socially, and starch iodine testing maps the area objectively. Barrier reconstruction at primary surgery reduces incidence, while topical antiperspirants or botulinum treatment manage established cases by severity.",
+   "say": "Eating triggered sweating over parotid skin follows gland surgery by nerve miswiring. Regenerated fibres activate sweat glands instead of salivary tissue during meals. Barrier reconstruction prevents and targeted treatment manages established cases.",
+   "vis": {
+    "kind": "flow",
+    "title": "Frey syndrome mechanism",
+    "nodes": [
+     {
+      "id": "cut",
+      "label": "Parotid fibres divided at surgery"
+     },
+     {
+      "id": "reg",
+      "label": "Fibres regenerate into skin"
+     },
+     {
+      "id": "eat",
+      "label": "Eating activates fibres"
+     },
+     {
+      "id": "sweat",
+      "label": "Gustatory sweating appears"
+     }
+    ],
+    "edges": [
+     [
+      "cut",
+      "reg"
+     ],
+     [
+      "reg",
+      "eat"
+     ],
+     [
+      "eat",
+      "sweat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sialolithiasis** favours the submandibular gland and duct because its saliva is alkaline, mucoid and calcium rich and drains uphill against gravity around the mylohyoid bend. Meal time pain and swelling that subside between meals is the classic history, with a palpable stone in the floor of mouth in many cases. Ultrasound confirms most stones, and duct preserving removal or gland excision follows stone position and gland damage.",
+   "say": "Submandibular stones form in alkaline mucoid saliva draining uphill against gravity. Meal time pain with swelling that subsides indicates duct obstruction classically. Palpable floor stones confirm diagnosis before imaging in many cases.",
+   "vis": {
+    "kind": "table",
+    "title": "Why submandibular stones dominate",
+    "cols": [
+     "Factor",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Alkaline calcium rich saliva",
+      "Precipitation favoured"
+     ],
+     [
+      "Mucoid viscous secretion",
+      "Stasis in duct"
+     ],
+     [
+      "Uphill duct course",
+      "Gravity opposes drainage"
+     ],
+     [
+      "Long duct with bend",
+      "Stone lodging sites"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Superficial parotidectomy** removes the gland lateral to the facial nerve plane for benign tumours, identifying and preserving the nerve trunk and branches throughout dissection. Total removal adds deep lobe dissection medial to the nerve for deep or malignant disease. Facial weakness after surgery is therefore complication, not expectation, and consent names temporary and permanent weakness rates honestly before any parotid operation proceeds.",
+   "say": "Benign tumour surgery removes gland lateral to the facial nerve plane carefully. Nerve identification with preservation is continuous throughout dissection in standard technique. Weakness after surgery is a complication rather than an expectation in consent.",
+   "vis": null
+  },
+  {
+   "tx": "**Mumps** is viral parotitis with bilateral gland swelling, fever and pain worsened by sour foods, complicated by orchitis in postpubertal males, pancreatitis and sensorineural deafness in children. It imitates bacterial sialadenitis, which is usually unilateral with pus at the duct orifice in dehydrated elderly patients. Vaccination history and bilaterality separate viral disease at triage before investigations consume resources.",
+   "say": "Viral parotitis gives bilateral swelling with fever and pain on sour foods. Bacterial infection is usually unilateral with pus in dehydrated elderly patients. Bilaterality with vaccination history separates viral disease at triage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mumps-fig1.webp",
+    "alt": "Child with bilateral parotid swelling in mumps parotitis.",
+    "caption": "Bilateral parotitis in mumps. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A **ranula** is a mucus extravasation cyst of sublingual gland origin that fills the floor of mouth with a bluish translucent swelling named for its frog belly likeness. Plunging ranula extends through mylohyoid into the neck, presenting as submandibular swelling without obvious oral component. Excision of the sublingual gland, not simple marsupialisation alone, gives durable cure because the gland is the mucus source.",
+   "say": "Sublingual gland leakage produces a bluish floor swelling with frog belly appearance. Extension through muscle gives neck swelling without obvious oral component. Gland excision provides durable cure over simple drainage procedures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple ranula",
+     "points": [
+      "Bluish floor of mouth swelling",
+      "Translucent, painless, fluctuant",
+      "Sublingual gland source"
+     ]
+    },
+    "right": {
+     "title": "Plunging ranula",
+     "points": [
+      "Extends through mylohyoid",
+      "Submandibular neck swelling",
+      "Needs gland excision for cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sjogren syndrome** destroys salivary and lacrimal glands autoimmunely, producing dry mouth with dental decay, dry eyes and bilateral parotid enlargement that fluctuates. Persistent hard unilateral enlargement inside Sjogren disease raises lymphoma, which develops in a minority over years of lymphoid stimulation. Sialography historically showed punctate sialectasis, while modern assessment uses autoantibodies, ultrasound and labial gland biopsy together.",
+   "say": "Autoimmune gland destruction produces dry mouth with decay and dry eyes together. Persistent hard enlargement raises lymphoma within chronic lymphoid stimulation. Antibodies with ultrasound and lip biopsy provide modern assessment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sj-gren-s-disease-fig1.webp",
+    "alt": "Diagram of Sjogren gland autoimmunity with salivary and lacrimal manifestations.",
+    "caption": "Sjogren gland autoimmunity. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Sialography** cannulates the duct to image its tree, showing stones as filling defects, strictures as narrowings and Sjogren change as punctate collections, though ultrasound and magnetic resonance sialography have replaced it for many questions. It remains contraindicated in acute infection where pressure worsens sepsis. The investigation sequence today is ultrasound first, cross sectional imaging for tumours, and tissue diagnosis by core or excision, never fine aspiration alone for operable parotid masses in some traditions.",
+   "say": "Duct imaging shows stones, strictures and autoimmune change in selected cases currently. Acute infection contraindicates pressurised duct studies because sepsis worsens afterwards. Ultrasound first with tumour imaging and tissue diagnosis gives modern sequence.",
+   "vis": {
+    "kind": "table",
+    "title": "Salivary investigation sequence",
+    "cols": [
+     "Question",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Stone suspected",
+      "Ultrasound of gland and duct"
+     ],
+     [
+      "Tumour extent",
+      "MRI with nerve tracing"
+     ],
+     [
+      "Duct anatomy",
+      "Sialography in selected cases"
+     ],
+     [
+      "Tissue diagnosis",
+      "Core or excision histology"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Pleomorphic adenoma surgery rule",
+   "b": "Never enucleate; pseudopods require superficial parotidectomy with facial nerve preservation."
+  },
+  {
+   "f": "Frey syndrome",
+   "b": "Gustatory sweating after parotidectomy from parasympathetic fibres rewiring to sweat glands."
+  },
+  {
+   "f": "Submandibular stone reasons",
+   "b": "Alkaline calcium rich mucoid saliva plus long uphill duct with mylohyoid bend."
+  }
+ ],
+ "keys": [
+  "Painful salivary tumour with nerve signs is malignant until disproved",
+  "Warthin tumour: older male smoker, bilateral parotid tail",
+  "Ranula cure needs sublingual gland excision"
+ ]
+}

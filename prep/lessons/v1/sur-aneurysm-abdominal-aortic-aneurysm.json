@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sur-aneurysm",
+ "subject": "surgery",
+ "title": "Abdominal Aortic Aneurysm, EVAR and Carotid Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Permanent dilatation of the abdominal aorta beyond three centimetres is an **abdominal aortic aneurysm**. Most lie below the kidney arteries, called infrarenal aneurysms. They enlarge silently and are often found on scans for other problems. Repair is usually offered at 5.5 centimetres in men, because rupture risk then overtakes the risk of planned surgery.",
+   "say": "An abdominal aortic aneurysm dilates the aorta beyond three centimetres, usually below the renal arteries.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aaa-fig1.webp",
+    "alt": "Abdominal aortic aneurysm anatomy and rupture.",
+    "caption": "Abdominal aortic aneurysm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An aneurysm confined below the renal arteries is an **infrarenal aneurysm**. This position allows both open grafting and stent grafting in most patients. Aneurysms extending above the renal arteries are far more complex to treat. Aneurysms reaching the kidney arteries may need fenestrated stent grafts with holes that keep the kidney arteries open.",
+   "say": "Infrarenal aneurysms sit below the renal arteries and allow standard open or stent repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Position",
+     "Complexity"
+    ],
+    "rows": [
+     [
+      "Infrarenal",
+      "Standard repair"
+     ],
+     [
+      "Juxtarenal",
+      "More complex"
+     ],
+     [
+      "Suprarenal",
+      "Most complex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tearing of the aneurysm with bleeding into the abdomen is a **ruptured AAA**. Sudden abdominal or back pain with collapse and a pulsatile mass is the classic picture. Immediate resuscitation and emergency repair offer the only chance of survival. Half of patients with a rupture die before reaching hospital, and blood pressure is kept deliberately modest during resuscitation.",
+   "say": "A ruptured aneurysm causes sudden pain, collapse and a pulsatile mass needing emergency repair.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/atherosclerosis-hypertension-and-aneurysms-fig1.webp",
+    "alt": "Abdominal aortic aneurysm on CT imaging.",
+    "caption": "Aneurysm on CT imaging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Repair from inside the aorta with a fabric covered stent is **EVAR**. Endovascular aneurysm repair avoids a large abdominal incision and suits older, frailer patients. Lifelong imaging surveillance watches for leaks around the graft. An endoleak is blood still entering the sac around the graft; type two leaks often settle, while types one and three need fixing.",
+   "say": "EVAR repairs aneurysms from inside with a stent graft and needs lifelong leak surveillance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-aortic-aneurysms-evar-and-carotid-endarterectomy-fig1.webp",
+    "alt": "EVAR stent graft and carotid endarterectomy.",
+    "caption": "EVAR and carotid surgery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Replacing the aneurysm with a sewn in fabric tube through an abdominal incision is **open aneurysm repair**. It is durable and needs little surveillance afterwards. Younger fit patients often prefer its long term reliability. Open repair clamps the aorta above the sac, so kidney and gut tolerance of the clamp sets the safe operating window.",
+   "say": "Open aneurysm repair sews in a durable fabric tube and needs little surveillance afterwards.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EVAR",
+     "points": [
+      "Inside stent graft",
+      "Less invasive",
+      "Lifelong surveillance"
+     ]
+    },
+    "right": {
+     "title": "Open repair",
+     "points": [
+      "Sewn fabric tube",
+      "Major operation",
+      "Very durable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ultrasound checks offered to men in their mid sixties form **aneurysm screening**. Finding aneurysms early allows planned repair before rupture. Small aneurysms enter surveillance with scans at intervals based on size. Surveillance scans run every year for 3.0 to 3.9 centimetres, every three months for 4.0 to 4.9, and more often above 5.0.",
+   "say": "Aneurysm screening finds silent aneurysms early so repair is planned before rupture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Men screened by ultrasound"
+     },
+     {
+      "id": "n1",
+      "label": "Aneurysm found early"
+     },
+     {
+      "id": "n2",
+      "label": "Size based surveillance"
+     },
+     {
+      "id": "n3",
+      "label": "Planned repair at threshold"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest peripheral aneurysm, behind the knee, is a **popliteal aneurysm**. It threatens the leg through clotting and embolisation rather than rupture. Finding one prompts a search for an aortic aneurysm, and vice versa. About half of popliteal aneurysms are bilateral, and a third of patients also carry an aortic aneurysm.",
+   "say": "Popliteal aneurysms threaten the leg by clotting and prompt a search for aortic aneurysm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aneurysm",
+     "Main danger"
+    ],
+    "rows": [
+     [
+      "Aortic",
+      "Rupture"
+     ],
+     [
+      "Popliteal",
+      "Clotting and emboli"
+     ],
+     [
+      "Femoral",
+      "Emboli"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An infected aneurysm caused by bacteria seeding the arterial wall is a **mycotic aneurysm**. Despite the name, bacteria rather than fungi usually cause it. Treatment combines prolonged antibiotics with surgical removal of infected tissue. Salmonella species seed damaged aortic wall more than most bacteria, and fever with back pain in a known aneurysm is the warning pair.",
+   "say": "Mycotic aneurysms are infected arterial swellings, usually bacterial, needing antibiotics and surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bacteria seed artery wall"
+     },
+     {
+      "id": "n1",
+      "label": "Wall weakens and balloons"
+     },
+     {
+      "id": "n2",
+      "label": "Antibiotics started"
+     },
+     {
+      "id": "n3",
+      "label": "Infected tissue removed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A contained leak held only by surrounding tissue, not arterial wall, is a **pseudoaneurysm**. It follows arterial puncture or trauma and pulsates with a bruit. Ultrasound guided compression or injection often seals smaller ones. Thrombin injection under ultrasound seals most groin pseudoaneurysms in minutes, and the neck width decides suitability.",
+   "say": "A pseudoaneurysm is a contained leak without arterial wall, often after puncture, sealed by compression or injection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True aneurysm",
+     "points": [
+      "All wall layers present",
+      "Slow enlargement",
+      "Planned repair"
+     ]
+    },
+    "right": {
+     "title": "Pseudoaneurysm",
+     "points": [
+      "No arterial wall",
+      "After puncture or trauma",
+      "Compression or injection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Splitting of the aortic wall layers with blood tracking between them is **aortic dissection**. Surgery replaces the ascending aorta in the dangerous type. Neck artery narrowing, carotid stenosis, is treated by endarterectomy or stenting to prevent stroke, while subclavian steal reverses arm flow to supply the brain.",
+   "say": "Aortic dissection splits the wall and needs ascending replacement, while carotid narrowing is cleared to prevent stroke.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Ascending dissection",
+      "Emergency surgery"
+     ],
+     [
+      "Carotid stenosis",
+      "Endarterectomy or stent"
+     ],
+     [
+      "Subclavian steal",
+      "Treat proximal narrowing"
+     ]
+    ]
+   }
+  }
+ ]
+}

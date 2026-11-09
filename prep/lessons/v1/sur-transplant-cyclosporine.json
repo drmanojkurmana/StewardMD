@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "sur-transplant",
+ "subject": "surgery",
+ "title": "Cyclosporine, Mycophenolate and Transplant Immunosuppression",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A calcineurin inhibitor that suppresses T cell activation by blocking interleukin production is **cyclosporine**. It transformed transplantation in the nineteen eighties by dramatically improving graft survival. Kidney damage, tremor, gum overgrowth and high blood pressure are its characteristic toxicities requiring careful level monitoring.",
+   "say": "Cyclosporine blocks T cell activation and transformed transplantation, though kidney damage needs level monitoring.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+    "alt": "Acute renal allograft rejection prevented by immunosuppression.",
+    "caption": "Immunosuppression preventing rejection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An antimetabolite blocking lymphocyte proliferation, gentler on kidneys than azathioprine, is **mycophenolate**. It is now standard in most maintenance regimens alongside a calcineurin inhibitor. Diarrhoea and low white cell counts are its commonest adverse effects in practice. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Mycophenolate blocks lymphocyte proliferation and is standard in maintenance regimens.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Main toxicity"
+    ],
+    "rows": [
+     [
+      "Cyclosporine",
+      "Kidney damage, gum growth"
+     ],
+     [
+      "Mycophenolate",
+      "Diarrhoea, low white cells"
+     ],
+     [
+      "Tacrolimus",
+      "Diabetes, tremor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Donor immune cells attacking recipient tissues after stem cell transplantation cause **graft versus host disease**. Skin rash, diarrhoea and liver injury appear together in the acute form. Prevention uses immunosuppression, while established disease needs high dose steroids. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Graft versus host disease attacks skin, gut and liver after stem cell transplantation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-graft-versus-host-disease-fig1.webp",
+    "alt": "Acute graft versus host disease pathophysiology.",
+    "caption": "Graft versus host disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The commonest solid organ transplant worldwide, with the longest experience, is **kidney transplantation**. It gives better survival and quality of life than long term dialysis for suitable patients. Living donor kidneys last longest on average. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Kidney transplantation beats long term dialysis for suitable patients, with living donors lasting longest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "End stage kidney failure"
+     },
+     {
+      "id": "n1",
+      "label": "Assessment for listing"
+     },
+     {
+      "id": "n2",
+      "label": "Living or deceased donor"
+     },
+     {
+      "id": "n3",
+      "label": "Dialysis independence"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cooling and flushing organs to slow metabolism during transport is **organ preservation**. Cold storage buys hours for matching and travel between hospitals. Machine perfusion increasingly extends safe preservation and assesses organ quality. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Organ preservation cools organs to slow metabolism, and machine perfusion increasingly extends safe time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Benefit"
+    ],
+    "rows": [
+     [
+      "Cold storage",
+      "Simple, hours gained"
+     ],
+     [
+      "Machine perfusion",
+      "Longer, quality assessed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The standard cold storage fluid rich in lactobionate and raffinose is the **University of Wisconsin solution**. It prevents cell swelling during cold ischaemia better than earlier fluids. It remains widely used for liver, kidney and pancreas preservation. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "University of Wisconsin solution prevents cell swelling during cold organ storage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Organ flushed cold"
+     },
+     {
+      "id": "n1",
+      "label": "UW solution fills vessels"
+     },
+     {
+      "id": "n2",
+      "label": "Cell swelling prevented"
+     },
+     {
+      "id": "n3",
+      "label": "Transport window extended"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Indias organ transplantation law regulating donation and banning organ trade is **THOTA**. The Transplantation of Human Organs and Tissues Act authorises brain death certification and living donation rules. Authorisation committees approve unrelated living donations to prevent commercial dealing. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "THOTA regulates Indian organ donation, bans trade, and governs brain death certification.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Related donor",
+     "points": [
+      "Family member",
+      "Standard approval",
+      "Documents verified"
+     ]
+    },
+    "right": {
+     "title": "Unrelated donor",
+     "points": [
+      "Authorisation committee",
+      "Trade excluded",
+      "Extra scrutiny"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Balancing rejection prevention against infection and cancer risk is the art of **immunosuppression titration**. Too little loses grafts, too much causes opportunistic infection and malignancy. Regular review adjusts doses as graft age and risk change. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Immunosuppression titration balances rejection against infection and cancer risk over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Doses set after transplant"
+     },
+     {
+      "id": "n1",
+      "label": "Levels and function monitored"
+     },
+     {
+      "id": "n2",
+      "label": "Doses eased with time"
+     },
+     {
+      "id": "n3",
+      "label": "Infection watched constantly"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure to take immunosuppressants reliably is the leading preventable cause of late graft loss, termed **non adherence**. Teenagers and young adults are at highest risk during care transitions. Education, simplified regimens and family support protect grafts. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Non adherence is the leading preventable cause of late graft loss, especially in young adults.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+    "alt": "Dialysis and transplant pathways in kidney failure.",
+    "caption": "Kidney replacement pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

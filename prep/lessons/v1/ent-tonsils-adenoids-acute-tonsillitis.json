@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "id": "ent-tonsils-adenoids-acute-tonsillitis",
+ "subject": "ent",
+ "module": "ent-tonsils-adenoids",
+ "title": "Acute and Chronic Tonsillitis and Tonsillectomy",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acute tonsillitis** is infection of the palatine tonsils that presents with fever, sore throat, painful swallowing and tender upper neck nodes, most often viral in origin. Bacterial disease, classically group A streptococcus, gives higher fever, tonsillar exudate and absent cough. Examination finds enlarged red tonsils with follicular exudate or a confluent membrane, congested pillars and an oedematous uvula in heavier attacks.",
+   "say": "Tonsil infection gives fever, sore throat and painful swallowing with tender neck nodes. Streptococcal disease has higher fever with exudate and no cough present. Examination finds enlarged red tonsils with exudate and congested pillars around them.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-tonsillitis-fig1.webp",
+    "alt": "Throat examination with enlarged red palatine tonsils covered by purulent exudate and a swollen uvula.",
+    "caption": "Enlarged exudative tonsils in acute tonsillitis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Membranous tonsillitis** is the pattern where exudate unites into a membrane over the tonsil, and the differential decides urgency: diphtheria gives a grey adherent membrane that bleeds on removal with bull neck and systemic toxicity, while infectious mononucleosis gives shaggy exudate with generalised nodes and splenomegaly. Vincent angina ulcerates one tonsil with foul breath in poor dentition. Every membrane therefore earns microbiological sampling before antibiotics blur the picture.",
+   "say": "A united membrane over the tonsil has a differential that decides urgency for the patient. Diphtheria gives a grey adherent membrane with neck swelling and systemic toxicity present. Glandular fever gives exudate with generalised nodes and splenomegaly on examination.",
+   "vis": {
+    "kind": "table",
+    "title": "Membrane over the tonsil: causes",
+    "cols": [
+     "Cause",
+     "Distinguishing features"
+    ],
+    "rows": [
+     [
+      "Diphtheria",
+      "Grey adherent membrane, bleeds on removal, bull neck"
+     ],
+     [
+      "Infectious mononucleosis",
+      "Generalised nodes, splenomegaly, atypical lymphocytes"
+     ],
+     [
+      "Vincent angina",
+      "One sided ulcer, foul breath, poor dentition"
+     ],
+     [
+      "Candidiasis",
+      "White curdy patches that wipe off easily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic tonsillitis** follows repeated acute attacks and leaves persistent sore throat, halitosis, cheesy debris in crypts and persistently enlarged jugulodigastric nodes between episodes. Signs that support chronicity at examination are congestion of the anterior pillars, debris expressed from crypts on pressure and non tender persistent nodes. Size alone never proves chronic disease, because large tonsils in children are often physiological and quiet between infections.",
+   "say": "Repeated attacks leave persistent sore throat with bad breath and cheesy crypt debris. Congested pillars with debris on pressure support chronic disease at examination. Large size alone never proves chronicity because big tonsils in children are often normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute tonsillitis",
+     "points": [
+      "Fever with painful swallowing",
+      "Exudate over red enlarged tonsils",
+      "Tender neck nodes present",
+      "Settles between attacks fully"
+     ]
+    },
+    "right": {
+     "title": "Chronic tonsillitis",
+     "points": [
+      "Persistent sore throat and halitosis",
+      "Crypt debris on pressure",
+      "Congested anterior pillars",
+      "Persistent non tender nodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Indications for tonsillectomy** centre on frequency and severity: recurrent disabling attacks meeting agreed episode thresholds, peritonsillar abscess after a further attack, obstructive sleep apnoea from hypertrophy, suspected malignancy in unilateral enlargement and chronic disease unresponsive to medical care. Paradise criteria counting seven attacks in one year, five yearly for two years or three yearly for three years operationalise the recurrent indication. Documented attacks matter more than remembered sore throats.",
+   "say": "Recurrent disabling attacks with obstructive apnoea and abscess history give the main indications for removal. Agreed episode counts operationalise recurrence and need documented attacks for support. One sided enlargement in an adult requires exclusion of malignancy before routine surgery.",
+   "vis": {
+    "kind": "table",
+    "title": "Tonsillectomy indications",
+    "cols": [
+     "Indication",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "Recurrent attacks",
+      "Seven in one year, five yearly for two, three yearly for three"
+     ],
+     [
+      "Peritonsillar abscess",
+      "After further attack or severe episode"
+     ],
+     [
+      "Obstructive hypertrophy",
+      "Sleep apnoea with adenotonsillar enlargement"
+     ],
+     [
+      "Unilateral enlargement",
+      "Exclude malignancy, send histology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post tonsillectomy haemorrhage** divides by timing into primary bleeding within the first day from inadequate haemostasis or a slipped vessel, reactionary bleeding in the first hours and secondary bleeding around days five to ten when the slough separates and infection supervenes. Secondary bleeding is the classic examination answer and needs admission, resuscitation and often return to theatre. Children compensate silently then decompensate fast, so tachycardia outranks blood pressure as a warning sign.",
+   "say": "Bleeding after tonsil removal divides by timing into primary, reactionary and secondary patterns. Secondary bleeding around days five to ten follows slough separation with infection present. Children compensate silently and then decompensate fast, so pulse rate gives the earliest warning.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bleeding after tonsillectomy: response",
+    "nodes": [
+     {
+      "id": "see",
+      "label": "Fresh bleeding or repeated swallowing"
+     },
+     {
+      "id": "res",
+      "label": "Admit, resuscitate, group and save"
+     },
+     {
+      "id": "exam",
+      "label": "Inspect fossa, remove clot"
+     },
+     {
+      "id": "the",
+      "label": "Theatre if bleeding persists"
+     }
+    ],
+    "edges": [
+     [
+      "see",
+      "res"
+     ],
+     [
+      "res",
+      "exam"
+     ],
+     [
+      "exam",
+      "the"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Rose position** places the patient supine with head extended over the table edge and a shoulder pillow during tonsillectomy and adenoidectomy, giving direct vision and letting blood drain away from the airway. Boyle Davis gag with tongue blade holds the mouth open while dissection proceeds. Position related teaching pairs naturally with bleeding teaching because access, suction and post operative lateral positioning together protect the airway across the whole episode.",
+   "say": "Head extended over the table edge gives direct vision during tonsil surgery. The position allows blood drainage away from the airway during dissection work. Lateral positioning after surgery protects the airway while recovery proceeds.",
+   "vis": null
+  },
+  {
+   "tx": "**Infectious mononucleosis** imitates bacterial tonsillitis with exudative tonsils, fever and nodes, but generalised lymphadenopathy, splenomegaly, palatal petechiae and atypical lymphocytes redirect diagnosis toward Epstein Barr virus. Ampicillin class antibiotics given in error produce a widespread rash that is not true allergy. Airway obstruction from massive tonsillar swelling occasionally needs steroids or urgent intervention, and splenic rupture risk forbids contact sport during recovery.",
+   "say": "Glandular fever imitates bacterial tonsillitis with exudate, fever and neck nodes present. Generalised nodes with splenomegaly and atypical lymphocytes redirect diagnosis toward viral disease. Certain antibiotics produce a widespread rash in this condition without true allergy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/infectious-mononucleosis-fig1.webp",
+    "alt": "Clinical features diagram of infectious mononucleosis with lymphadenopathy, splenomegaly and exudative pharyngitis.",
+    "caption": "Infectious mononucleosis features. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Adenoid hypertrophy travels with tonsillar disease in children and gives nasal obstruction, mouth breathing, hyponasal speech and ear effusion from tubal blockage. The classic **adenoid facies** shows an open mouth, dull expression, elongated face and crowded teeth after years of obstruction. Snoring with witnessed apnoea moves assessment from anatomy to sleep study, because apnoea severity decides urgency more than tonsil size alone.",
+   "say": "Enlarged adenoids give nasal blockage with mouth breathing and ear effusion in children. Years of obstruction produce an open mouthed elongated face with crowded teeth. Witnessed apnoea needs sleep assessment because severity decides urgency over size.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tonsils-and-adenoids-fig1.webp",
+    "alt": "Composite of peritonsillar abscess with uvula deviation, adenoid hypertrophy and unilateral tonsil enlargement.",
+    "caption": "Tonsil and adenoid pathology composite. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Adenoidectomy** accompanies tonsillectomy for obstructive disease, recurrent ear effusion with hearing loss or chronic adenoiditis, performed blind by curette or under vision with suction diathermy in modern practice. Bleeding and velopharyngeal insufficiency are its specific risks, the latter revealing itself as nasal regurgitation and hypernasal speech after surgery. Children with submucous cleft palate need particular caution because the adenoid pad supports their palatal closure.",
+   "say": "Adenoid removal accompanies tonsil surgery for obstruction or persistent ear effusion with hearing loss. Nasal regurgitation with hypernasal speech indicates velopharyngeal insufficiency after surgery. Submucous cleft palate needs particular caution because the adenoid supports closure.",
+   "vis": null
+  },
+  {
+   "tx": "Examination synthesis for tonsils runs on three discriminations. Exudate with membrane needs diphtheria exclusion, exudate with generalised nodes needs glandular fever testing, and unilateral enlargement in an adult needs malignancy exclusion. Bleeding is timed as primary, reactionary or secondary, with the five to ten day slough bleed as the classic secondary pattern. **Histology** follows every unilateral or suspicious specimen without exception in safe practice.",
+   "say": "Membrane formation needs diphtheria exclusion while generalised nodes need glandular fever testing. One sided enlargement in an adult needs malignancy exclusion before routine surgery proceeds. Bleeding timing separates primary vessel problems from secondary slough infection clearly.",
+   "vis": {
+    "kind": "table",
+    "title": "Tonsil red flags and actions",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Adherent grey membrane",
+      "Sample urgently, exclude diphtheria"
+     ],
+     [
+      "Generalised nodes and spleen",
+      "Test for glandular fever"
+     ],
+     [
+      "Unilateral enlargement, adult",
+      "Image and biopsy pathway"
+     ],
+     [
+      "Bleeding days five to ten",
+      "Admit, resuscitate, theatre standby"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Paradise criteria for tonsillectomy",
+   "b": "Seven attacks in one year, five per year for two years, or three per year for three years, all documented and disabling."
+  },
+  {
+   "f": "Secondary post tonsillectomy bleed",
+   "b": "Days five to ten as slough separates with infection; admit, resuscitate and prepare for theatre."
+  },
+  {
+   "f": "Rose position",
+   "b": "Supine with head extended over table edge for tonsillectomy and adenoidectomy; blood drains away from airway."
+  }
+ ],
+ "keys": [
+  "Membrane on tonsil: exclude diphtheria first",
+  "Unilateral tonsil enlargement in an adult is malignancy until disproved",
+  "Secondary haemorrhage occurs at days five to ten"
+ ]
+}

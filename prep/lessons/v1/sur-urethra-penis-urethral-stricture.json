@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "sur-urethra-penis",
+ "subject": "surgery",
+ "title": "Urethral Stricture and Penile Conditions",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Scar narrowing of the urethra that obstructs urine flow is a **urethral stricture**. Causes include infection, instrumentation, catheter trauma and pelvic fracture. Patients report a weakening stream, straining and incomplete emptying over months. Bulbar strictures after falls astride a beam differ from penile strictures after infection, and site dictates the repair chosen.",
+   "say": "A urethral stricture scars and narrows the channel, causing a weakening stream over months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Infection",
+      "Gonococcal urethritis"
+     ],
+     [
+      "Trauma",
+      "Pelvic fracture"
+     ],
+     [
+      "Instrumentation",
+      "Catheter injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive repair excising the scar and rejoining healthy urethra is **urethroplasty**. It gives the best long term success for most strictures. Longer defects may need a graft of cheek lining to bridge the gap. Excision with end to end joining suits bulbar strictures under 2 centimetres and succeeds in over 90 percent at five years.",
+   "say": "Urethroplasty excises the scar and rejoins healthy urethra, giving the best long term success.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stricture length measured"
+     },
+     {
+      "id": "n1",
+      "label": "Scar excised fully"
+     },
+     {
+      "id": "n2",
+      "label": "Healthy ends rejoined"
+     },
+     {
+      "id": "n3",
+      "label": "Graft used if gap long"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cutting the stricture from inside with a scope mounted knife is **optical internal urethrotomy**. It suits short, first time strictures and is quicker than open repair. Recurrence is commoner than after urethroplasty, especially for long scars. Repeated urethrotomy after two failures rarely cures, and each cut adds scar that lengthens the stricture.",
+   "say": "Optical urethrotomy cuts short strictures from inside, though recurrence is commoner than after open repair.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urethrotomy",
+     "points": [
+      "Internal cut by scope",
+      "Short strictures",
+      "Higher recurrence"
+     ]
+    },
+    "right": {
+     "title": "Urethroplasty",
+     "points": [
+      "Open excision and join",
+      "Most strictures",
+      "Best long term success"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A tight foreskin that cannot be pulled back over the glans is **phimosis**. In adults it may follow scarring skin disease or repeated infection. It can obstruct urine flow and raise the risk of penile cancer. Lichen sclerosus gives a white, scarred foreskin and meatal narrowing, and it needs long term potent steroid cream plus review.",
+   "say": "Phimosis means the foreskin cannot retract over the glans, and adult scarring raises cancer risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Problem"
+    ],
+    "rows": [
+     [
+      "Phimosis",
+      "Foreskin cannot retract"
+     ],
+     [
+      "Paraphimosis",
+      "Foreskin trapped behind glans"
+     ],
+     [
+      "Balanitis",
+      "Inflamed glans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A retracted foreskin trapped behind the glans causing painful swelling is **paraphimosis**. Venous congestion swells the glans and worsens the trap. Firm gentle compression usually allows reduction, but delay risks tissue death. Ice and manual compression for five minutes usually shrinks the swelling, and a dorsal slit is the fallback if reduction fails.",
+   "say": "Paraphimosis traps the retracted foreskin behind the glans and needs prompt gentle reduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Foreskin trapped behind glans"
+     },
+     {
+      "id": "n1",
+      "label": "Glans swells painfully"
+     },
+     {
+      "id": "n2",
+      "label": "Compression and reduction tried"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery if reduction fails"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical removal of the foreskin is **circumcision**. It treats pathological phimosis, recurrent infection and some early penile cancers. It is also performed for religious and cultural reasons worldwide. Bleeding and meatal stenosis are the common early problems, and both usually settle without returning to theatre.",
+   "say": "Circumcision removes the foreskin for pathological phimosis, recurrent infection and some early cancers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Pathological phimosis",
+      "Scarred tight foreskin"
+     ],
+     [
+      "Recurrent balanitis",
+      "Repeated infection"
+     ],
+     [
+      "Early cancer",
+      "Selected small tumours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignancy arising on the glans or foreskin, usually squamous in type, is **carcinoma penis**. It links to human papillomavirus, phimosis and poor hygiene. Early tumours are curable, so painless ulcers or warts that persist need biopsy. A warty or ulcerated lesion on the glans that persists beyond a few weeks needs biopsy, not another course of cream.",
+   "say": "Carcinoma of the penis is usually squamous, links to virus and phimosis, and persistent ulcers need biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urooncology-bladder-kidney-testis-fig1.webp",
+    "alt": "Urological cancers including penile tumour assessment.",
+    "caption": "Urological tumour assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inguinal lymph node spread determines prognosis in penile cancer, a process called **nodal staging**. Palpable groin nodes after treating infection need sampling. Early node removal improves survival when spread is present. Nodes that remain enlarged six weeks after antibiotics for the primary tumour are biopsied, because reactive swelling should have settled.",
+   "say": "Groin node staging drives prognosis in penile cancer, and early node removal improves survival when spread exists.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Primary tumour treated"
+     },
+     {
+      "id": "n1",
+      "label": "Groin nodes assessed"
+     },
+     {
+      "id": "n2",
+      "label": "Suspicious nodes sampled"
+     },
+     {
+      "id": "n3",
+      "label": "Node surgery if spread"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Keeping urine flowing while a stricture awaits repair may need a **suprapubic catheter**. A tube through the lower abdominal wall drains the bladder directly. It rests the urethra before definitive reconstruction surgery. The catheter also lets the urethra rest before graft repair, and it is removed once a contrast study shows no leak.",
+   "say": "A suprapubic catheter drains the bladder directly and rests the urethra before reconstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urethral catheter",
+     "points": [
+      "Through the urethra",
+      "May worsen stricture",
+      "Short term use"
+     ]
+    },
+    "right": {
+     "title": "Suprapubic catheter",
+     "points": [
+      "Through abdominal wall",
+      "Rests the urethra",
+      "Before reconstruction"
+     ]
+    }
+   }
+  }
+ ]
+}
