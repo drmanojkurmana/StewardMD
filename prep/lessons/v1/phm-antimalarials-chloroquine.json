@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antimalarials",
+  "subject": "pharmacology",
+  "title": "Antimalarials I: Chloroquine, Primaquine, Quinine, Mefloquine and Artemisinin Combinations",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Chloroquine**, the 4 aminoquinoline that concentrates a thousand fold in the parasite's food vacuole and blocks haem polymerisation, leaves free haem to poison Plasmodium from inside its own digestion. Resistance transporters (PfCRT) evicted it from falciparum therapy across most of the world, while vivax (outside defined resistant pockets), ovale, malariae and knowlesi subsets and rheumatological second careers (lupus, rheumatoid arthritis via hydroxychloroquine) keep it prescribed. Its dose arithmetic is quoted in base versus salt, a conversion error genre of its own.",
+      "say": "Chloroquine poisons the parasite with its own haem waste; resistance, not potency, ended its reign.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antimalarials-act-artesunate-primaquine-prophylaxis-fig1.webp",
+        "alt": "Antimalarial drug life cycle targets diagram showing blood, liver and gametocyte stages",
+        "caption": "Antimalarial targets across the parasite life cycle, chloroquine at the blood stage food vacuole."
+      }
+    },
+    {
+      "tx": "**Primaquine**, the 8 aminoquinoline, alone reaches hypnozoites (sleeping vivax and ovale liver forms) for radical cure over 14 days and sterilises falciparum gametocytes in single low dose, billing haemolysis in G6PD deficiency (screen or risk stratify first) and methaemoglobinaemia. **Tafenoquine** stretches that chemistry into single dose radical cure and weekly prophylaxis, demanding quantitative G6PD certainty because its month long tail cannot be withdrawn once swallowed.",
+      "say": "Primaquine wakes the sleepers and sterilises gametocytes; G6PD decides who may take it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primaquine roles",
+          "points": [
+            "Radical cure of vivax and ovale hypnozoites (14 days)",
+            "Single low dose falciparum gametocytocide",
+            "G6PD screening or risk stratification first",
+            "Haemolysis dose and variant dependent"
+          ]
+        },
+        "right": {
+          "title": "Tafenoquine differences",
+          "points": [
+            "Single dose radical cure, weekly prophylaxis",
+            "Quantitative G6PD testing mandatory",
+            "Half life about 2 weeks, irreversible once taken",
+            "Psychiatric cautions in labelling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Quinine**, cinchona's original alkaloid, treats severe malaria where artesunate is unavailable and leg cramps in folklore it should vacate, billing cinchonism (the quinidine cousin syndrome from the arrhythmia lessons), hypoglycaemia from pancreatic insulin release (pregnancy magnifies), thrombocytopenia and blackwater fever associations. Its intravenous era ended when artesunate trials cut severe malaria mortality by a quarter to a third in adults and children, one of tropical medicine's clearest drug victories.",
+      "say": "Quinine is severe malaria's retired champion; artesunate beat it on mortality, not tradition.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quinine burden",
+          "points": [
+            "Cinchonism: tinnitus, headache, nausea, visual upset",
+            "Hypoglycaemia via insulin release",
+            "QT and thrombocytopenia effects",
+            "Three times daily oral tails after IV starts"
+          ]
+        },
+        "right": {
+          "title": "Artesunate succession",
+          "points": [
+            "Mortality reduced versus quinine in SEAQUAMAT and AQUAMAT",
+            "Simpler bolus dosing, fewer metabolic traps",
+            "Delayed haemolysis surveillance after therapy",
+            "Rectal pre referral form where injections impossible"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mefloquine**, weekly and treatment dosed, survives in chemoprophylaxis for chloroquine resistant regions where its neuropsychiatric ledger (vivid dreams, anxiety, depression, psychosis, vestibular injury) is consented and screened, and in artemisinin combination partnerships (artesunate mefloquine) where its long tail guards the partnership. Seizure and psychiatric histories fence it, and its month scale half life makes adverse effects appointments, not episodes.",
+      "say": "Mefloquine prevents weekly and haunts psychiatrically; screen minds before mosquitoes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Psychiatric and seizure history screened"
+          },
+          {
+            "id": "start",
+            "label": "Weekly mefloquine begun before travel"
+          },
+          {
+            "id": "dream",
+            "label": "Dreams and mood reviewed at each dose"
+          },
+          {
+            "id": "switch",
+            "label": "Neuropsychiatric symptoms: switch prophylaxis"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "start"
+          ],
+          [
+            "start",
+            "dream"
+          ],
+          [
+            "dream",
+            "switch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Artesunate** and the artemisinins (from Artemisia annua, sesquiterpene lactones with an endoperoxide bridge that haem iron detonates into radicals) kill parasites faster than any class, including young ring stages, then vanish within hours, which is why they are never given alone: **artemether lumefantrine** and sister ACTs (artemisinin based combination therapies) pair the sprinter with a long tail partner (lumefantrine, amodiaquine, piperaquine, mefloquine, pyronaridine) that executes survivors and guards resistance.",
+      "say": "Artemisinins sprint and vanish; the partner's tail finishes the race and guards the resistance gate.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-malaria-act.webp",
+        "alt": "Falciparum and mixed malaria ACT treatment illustration",
+        "caption": "Artemisinin combination therapy for falciparum malaria, sprinter plus long tail partner. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Sulfadoxine pyrimethamine**, the antifolate pair from the sulfonamide mechanism, fell to stepwise antifolate resistance in treatment yet survives protectively: intermittent preventive therapy in pregnancy and infancy and seasonal chemoprevention in Sahel children exploit its monthly dosing where parasite sensitivity for prophylaxis persists. Its Stevens Johnson history at treatment doses and sulfa fences ride along, and resistance markers (dhfr, dhps mutations) are surveyed like weather.",
+      "say": "Sulfadoxine pyrimethamine lost treatment and kept prevention; monthly dosing is its remaining superpower.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Preventive niches",
+          "points": [
+            "Intermittent preventive therapy in pregnancy",
+            "Seasonal chemoprevention in children (with amodiaquine)",
+            "Intermittent preventive therapy in infants",
+            "Monthly dosing, directly observed feasible"
+          ]
+        },
+        "right": {
+          "title": "Treatment retirement",
+          "points": [
+            "Quintuple antifolate mutations across Africa and Asia",
+            "Stevens Johnson at repeated treatment doses",
+            "Sulfa allergy fences apply",
+            "Molecular surveillance guides policy switches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Artemisinin partial resistance** ( kelch13 mutations, ring stage survival, delayed clearance in Southeast Asia and emerging African signals) is managed by the combination architecture itself: partner drug efficacy audits, triple ACTs in trials, and multiple first line therapies policy, because monotherapy thinking created chloroquine and sulfadoxine graves this lesson began with. Parasite clearance half life is the surveillance vital sign behind the policy.",
+      "say": "Slow clearance is resistance clearing its throat; partners, triples and rotation are the replies being rehearsed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resistance signals",
+          "points": [
+            "Kelch13 propeller mutations validated",
+            "Day 3 positivity and clearance half life prolongation",
+            "Partner drug failures follow artemisinin delay",
+            "Geography: Mekong first, African signals watched"
+          ]
+        },
+        "right": {
+          "title": "Policy replies",
+          "points": [
+            "Rotate or multiply first line ACTs",
+            "Triple ACT combinations in evaluation",
+            "Partner drug efficacy surveillance",
+            "Never artemisinin monotherapy, anywhere"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chloroquine vigilance** and cardiac chronicity closes its portrait: cumulative dose retinopathy (bull's eye maculopathy, screening at five years in autoimmune dosing), QT prolongation and overdose lethality in small multiples (a child can die on a couple of tablets, making storage a poisoning intervention), and hydroxychloroquine's kinder but real versions of the same. Children, overdoses and long autoimmune courses each carry a different chloroquine vigilance.",
+      "say": "Chloroquine overdose kills children in tablets, chronicity blinds slowly; storage and screening are its antidotes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chronic",
+            "label": "Chronic hydroxychloroquine or chloroquine therapy"
+          },
+          {
+            "id": "screen",
+            "label": "Baseline and annual retinal screening after 5 years"
+          },
+          {
+            "id": "dose",
+            "label": "Real weight dose ceilings respected"
+          },
+          {
+            "id": "store",
+            "label": "Household storage child proofed against overdose"
+          }
+        ],
+        "edges": [
+          [
+            "chronic",
+            "screen"
+          ],
+          [
+            "screen",
+            "dose"
+          ],
+          [
+            "dose",
+            "store"
+          ]
+        ]
+      }
+    }
+  ]
+}

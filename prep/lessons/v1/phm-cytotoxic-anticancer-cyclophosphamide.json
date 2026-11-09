@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer I: Alkylating Agents, Cyclophosphamide, Acrolein and Mesna",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Alkylating agents** weld alkyl groups onto DNA (guanine N7 principally), crosslinking strands into unreadable code in any cell cycle phase, at the price of the class signature late ledger: infertility, secondary leukaemia years later and cumulative marrow injury. Cyclophosphamide, ifosfamide, the nitrosoureas (carmustine crossing into brain), busulfan (conditioning and pulmonary fibrosis), melphalan and temozolomide divide the family's territory by solubility and target organ.",
+      "say": "Alkylators crosslink DNA in any phase and invoice fertility and future leukaemia for it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Family map",
+          "points": [
+            "Cyclophosphamide and ifosfamide: oxazaphosphorines",
+            "Nitrosoureas: CNS penetration, delayed marrow nadirs",
+            "Busulfan: conditioning, lung fibrosis, seizures",
+            "Temozolomide: oral glioma alkylator"
+          ]
+        },
+        "right": {
+          "title": "Class late ledger",
+          "points": [
+            "Secondary leukaemia (peak years after therapy)",
+            "Infertility dose and age graded",
+            "Cumulative marrow stem cell injury",
+            "Cell cycle non specific kill pattern"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cyclophosphamide** is a prodrug: hepatic CYP2B6 liberation yields phosphoramide mustard (the alkylator) and **acrolein**, the bladder toxin from the metabolism lessons, so its three careers (oncology combinations, autoimmune pulses in lupus nephritis and vasculitis, transplant conditioning) all carry bladder protection arithmetic and a fertility conversation scaled to cumulative dose and age. Its immunosuppression is pharmacology's bridge between cancer and rheumatology wards.",
+      "say": "One prodrug, three wards; acrolein and fertility follow cyclophosphamide everywhere it works.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pro",
+            "label": "Cyclophosphamide swallowed or infused (prodrug)"
+          },
+          {
+            "id": "liver",
+            "label": "Hepatic activation: phosphoramide mustard plus acrolein"
+          },
+          {
+            "id": "kill",
+            "label": "DNA crosslinks in tumour and lymphocytes"
+          },
+          {
+            "id": "bladder",
+            "label": "Acrolein reaches bladder: protection begins"
+          }
+        ],
+        "edges": [
+          [
+            "pro",
+            "liver"
+          ],
+          [
+            "liver",
+            "kill"
+          ],
+          [
+            "liver",
+            "bladder"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mesna** (sodium 2 mercaptoethane sulfonate) is acrolein's assigned antidote: a thiol that concentrates in urine and binds acrolein into harmless thioether, dosed as fractions of the oxazaphosphorine dose around each infusion with hydration, mandatory with ifosfamide (whose chloroacetaldehyde adds encephalopathy) and high dose cyclophosphamide. Haemorrhagic cystitis despite protection escalates through bladder irrigation to urology, and BK virus shares the differential in transplant bladders.",
+      "say": "Mesna waits in the urine and handcuffs acrolein; ifosfamide never travels without it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mesna mechanics",
+          "points": [
+            "Thiol binds acrolein in urinary tract",
+            "Dosed fractionally around each oxazaphosphorine dose",
+            "Hydration and voiding frequency partner it",
+            "Oral and IV routes interchangeable by schedule"
+          ]
+        },
+        "right": {
+          "title": "Breakthrough cystitis",
+          "points": [
+            "Gross haematuria: stop drug, hydrate, irrigate",
+            "BK virus and adenovirus differentials",
+            "Ifosfamide encephalopathy: methylene blue rescue",
+            "Late bladder fibrosis and malignancy surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Autoimmune cyclophosphamide** writes its second label: intravenous pulses or daily oral courses (Euro Lupus low dose versus NIH high dose debates) induce remission in lupus nephritis and ANCA vasculitis, succeeded by azathioprine or mycophenolate maintenance precisely to cap cumulative exposure, with fertility preservation ( GnRH analogues, sperm and oocyte banking) and bladder cancer vigilance extending decades beyond the last pulse.",
+      "say": "Autoimmune cyclophosphamide is a capped loan; maintenance drugs exist to stop borrowing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Induction design",
+          "points": [
+            "Pulse IV versus daily oral cumulative arithmetic",
+            "Euro Lupus low dose regimen for suitable patients",
+            "Remission then maintenance switch by plan",
+            "Vaccination and prophylaxis (PJP) alongside"
+          ]
+        },
+        "right": {
+          "title": "Decades long vigilance",
+          "points": [
+            "Fertility preservation offered before first dose",
+            "Bladder cancer and leukaemia surveillance",
+            "Cumulative dose recorded in the chart permanently",
+            "Nadir blood counts at days 10 to 14"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ifosfamide** spends its structural difference (activation slower, metabolites heavier) on sarcoma and germ cell territory and a distinct toxicity stack: universal mesna, Fanconi syndrome (proximal tubular wasting of phosphate, glucose and bicarbonate), encephalopathy from drowsiness to coma (methylene blue therapeutic and prophylactic), and haemorrhagic cystitis if protection lapses. Sarcoma regimens dose it in grams per square metre over days with inpatient vigilance.",
+      "say": "Ifosfamide trades cyclophosphamide's ease for sarcoma reach and a kidney brain toxicity stack.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ifosfamide territory",
+          "points": [
+            "Soft tissue and bone sarcomas",
+            "Germ cell salvage combinations",
+            "Paediatric solid tumours",
+            "Multi day gram scale infusions"
+          ]
+        },
+        "right": {
+          "title": "Ifosfamide stack",
+          "points": [
+            "Fanconi syndrome: phosphate and bicarbonate wasting",
+            "Encephalopathy: methylene blue",
+            "Mesna universal, not optional",
+            "Prior cisplatin kidneys fence eligibility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nitrosourea signatures** complete the family: carmustine and lomustine treat brain tumours across the barrier and bill delayed (4 to 6 week) cumulative nadirs and pulmonary fibrosis by lifetime dose, while busulfan conditioning for transplant adds seizure prophylaxis and hepatic sinusoidal obstruction risk, and high dose melphalan conditions myeloma transplants with cryotherapy against its mucositis. Each alkylator's organ signature is its examination portrait.",
+      "say": "Name the alkylator, name its organ: brain drugs bill lungs late, conditioners bill liver and lung.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrosoureas",
+          "points": [
+            "Carmustine and lomustine cross into CNS",
+            "Nadir delayed to 4 to 6 weeks, cumulative",
+            "Pulmonary fibrosis by lifetime dose",
+            "Glioma and lymphoma salvage niches"
+          ]
+        },
+        "right": {
+          "title": "Conditioning alkylators",
+          "points": [
+            "Busulfan: seizures prophylaxed, sinusoidal obstruction risk",
+            "Melphalan high dose: myeloma transplant, mucositis",
+            "Thiotepa: CNS and transplant niches",
+            "Exposure guided dosing (busulfan AUC) where available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chlorambucil and bendamustine** serve the family's gentler wing: chlorambucil's oral decades in chronic lymphocytic leukaemia (now largely targeted therapy displaced) and bendamustine's hybrid alkylator purine analogue behaviour in indolent lymphomas, both billing the class late ledger quietly at low daily doses. Gentleness is dose and schedule, never mechanism, and counselling must not let oral tablets impersonate safety.",
+      "say": "Even the gentle alkylators keep the late ledger; oral and old does not mean harmless.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chlorambucil",
+          "points": [
+            "Historical CLL oral therapy",
+            "Marrow suppression gentle and cumulative",
+            "Secondary malignancy ledger persists",
+            "Largely displaced by targeted agents"
+          ]
+        },
+        "right": {
+          "title": "Bendamustine",
+          "points": [
+            "Indolent lymphoma and CLL regimens",
+            "Alkylator with purine analogue features",
+            "Lymphopenia and opportunistic infection vigilance",
+            "Rash and infusion reactions added"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Alkylator stewardship** closes with arithmetic that outlives regimens: cumulative dose recorded forever, fertility discussed before cycle one (not after amenorrhoea), secondary malignancy consent as standard, and extravasation personalities (most alkylators are irritants rather than vesicants, mechlorethamine the vesicant ancestor excepted). The mustard gas genealogy of the class is history; the dose ledger is its living legacy.",
+      "say": "Record the cumulative dose like a radiation dose; fertility talk happens before cycle one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "consent",
+            "label": "Fertility, late malignancy and marrow consent"
+          },
+          {
+            "id": "dose",
+            "label": "Cumulative dose ledger opened in the record"
+          },
+          {
+            "id": "protect",
+            "label": "Mesna, hydration and antiemetics by agent"
+          },
+          {
+            "id": "survive",
+            "label": "Survivorship: gonads, bladder, marrow surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "consent",
+            "dose"
+          ],
+          [
+            "dose",
+            "protect"
+          ],
+          [
+            "protect",
+            "survive"
+          ]
+        ]
+      }
+    }
+  ]
+}

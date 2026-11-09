@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antiprotozoal-anthelmintic",
+  "subject": "pharmacology",
+  "title": "Anthelmintics: Benzimidazoles, Praziquantel, Ivermectin, DEC and Pyrantel",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Albendazole** and mebendazole, the benzimidazoles, bind parasite beta tubulin and starve worms of glucose uptake and microtubule transport, covering roundworm, hookworm, whipworm (weaker), pinworm and tissue cestodes. Albendazole's active sulfoxide metabolite and fatty food absorption make it the systemic twin (hydatid and neurocysticercosis courses over weeks), while mebendazole stays luminal for gut worms in chewable single doses and school deworming programmes.",
+      "say": "Benzimidazoles starve worms through tubulin; albendazole travels, mebendazole stays in the gut.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-albendazole.webp",
+        "alt": "Albendazole administration illustration for intestinal helminths",
+        "caption": "Albendazole, the systemic benzimidazole for intestinal and tissue helminths. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Neurocysticercosis** is benzimidazole therapy's danger lesson: albendazole (with praziquantel partnerships improving cyst kill) given only under corticosteroid cover and after ophthalmology excludes eye cysts, because dying cysts inflame where they sit and seizures or blindness bill the uninformed. Calcified cysts get no anthelmintic at all, only antiseizure therapy, and imaging stages decide everything. The exam trap is treating first and scanning later.",
+      "say": "Kill cysts under steroids with eyes cleared, or the cure causes the seizure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "image",
+            "label": "Imaging stages cysts: viable, degenerating, calcified"
+          },
+          {
+            "id": "eye",
+            "label": "Ophthalmology excludes ocular cysts"
+          },
+          {
+            "id": "steroid",
+            "label": "Corticosteroids started with or before albendazole"
+          },
+          {
+            "id": "seizure",
+            "label": "Antiseizure therapy continued beyond cyst death"
+          }
+        ],
+        "edges": [
+          [
+            "image",
+            "eye"
+          ],
+          [
+            "eye",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "seizure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hydatid** disease bends albendazole to surgery's adjuvant: preoperative and postoperative courses shrink Echinococcus cysts and guard against spillage seeding, while PAIR (puncture aspirate inject reaspirate) procedures run under its cover with anaphylaxis readiness for cyst fluid. Long courses bring the benzimidazole chronic ledgers: hepatitis, marrow suppression and alopecia monitored by blood counts and enzymes, and teratogenicity fences around pregnancy.",
+      "say": "Albendazole surrounds hydatid surgery like a chemical glove; blood counts watch its long courses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydatid deployment",
+          "points": [
+            "Pre and post operative albendazole cover",
+            "PAIR procedures under drug cover",
+            "Inoperable and disseminated disease long courses",
+            "Anaphylaxis readiness at any cyst breach"
+          ]
+        },
+        "right": {
+          "title": "Long course monitoring",
+          "points": [
+            "Liver enzymes and blood counts serially",
+            "Alopecia and GI upset counselled",
+            "Pregnancy avoided (teratogenicity)",
+            "Fatty food boosts absorption deliberately"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Praziquantel**, a pyrazinoisoquinoline flooding schistosome tegument with calcium, paralyses and exposes flukes and tapeworms in single day courses across schistosomiasis species, liver and lung flukes, and intestinal cestodes, billing dizziness and abdominal upset plus inflammation where cysts die. It is mass drug administration's other pillar (school and community schistosomiasis campaigns) and neurocysticercosis's partner, with enzyme inducing antiseizure drugs slashing its levels where the two meet.",
+      "say": "Praziquantel calcium floods every fluke and tapeworm in a day; inducers can empty it before it works.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Praziquantel territory",
+          "points": [
+            "All schistosome species, single day dosing",
+            "Liver, lung and intestinal flukes (except Fasciola)",
+            "Intestinal tapeworms single dose",
+            "Neurocysticercosis partner to albendazole"
+          ]
+        },
+        "right": {
+          "title": "Praziquantel cautions",
+          "points": [
+            "Ocular cysticercosis excluded before use",
+            "Carbamazepine and phenytoin gut its levels",
+            "Dizziness: no driving on dose day",
+            "Fasciola needs triclabendazole instead"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ivermectin**, the avermectin opening glutamate gated chloride channels, owns strongyloidiasis (where it is curative and pre immunosuppression screening saves lives), onchocerciasis microfilarial control (annual mass administration), scabies (oral rescue for crusted disease) and head lice niches, with Mazzotti inflammatory reactions to dying microfilariae and Loa loa encephalopathy fencing high loiasis coinfection zones. Its veterinary fame must never be dose translated by enthusiasm.",
+      "say": "Ivermectin cures strongyloides before steroids unleash it; that screening pairing is its finest hour.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ivermectin crowns",
+          "points": [
+            "Strongyloidiasis drug of choice",
+            "Onchocerciasis community control",
+            "Crusted scabies oral therapy",
+            "Filariasis mass administration partner"
+          ]
+        },
+        "right": {
+          "title": "Ivermectin fences",
+          "points": [
+            "Loa loa high loads: encephalopathy risk",
+            "Mazzotti reactions in onchocerciasis",
+            "Pre steroid strongyloides screening rule",
+            "Weight based dosing, veterinary forms refused"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Diethylcarbamazine** (DEC), a piperazine derivative immobilising microfilariae for immune disposal, treats lymphatic filariasis individually (and medicated salt historically), tropical pulmonary eosinophilia, and loa loa at expert hands, billing fever and inflammation proportional to microfilarial load and Mazzotti class reactions in onchocerciasis that removed it there. Mass filariasis elimination now prefers triple therapy (ivermectin, DEC, albendazole: IDA) where onchocerciasis geography permits.",
+      "say": "DEC clears microfilariae and bills inflammation per worm killed; triple therapy shortened elimination by years.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "load",
+            "label": "Microfilarial load and geography assessed"
+          },
+          {
+            "id": "dec",
+            "label": "DEC individual therapy or IDA mass round"
+          },
+          {
+            "id": "react",
+            "label": "Fever and inflammation treated supportively"
+          },
+          {
+            "id": "survey",
+            "label": "Transmission surveys verify elimination progress"
+          }
+        ],
+        "edges": [
+          [
+            "load",
+            "dec"
+          ],
+          [
+            "dec",
+            "react"
+          ],
+          [
+            "react",
+            "survey"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pyrantel pamoate**, a depolarising neuromuscular blocker for worms, paralyses roundworm, hookworm and pinworm spastically for expulsion in single doses with minimal human absorption, serving pregnancy adjacent and paediatric niches where benzimidazole policy hesitates, while levamisole's immunomodulant second career (and agranulocytosis and ANCA vasculitis via cocaine adulteration) completes the older anthelmintic shelf's examinable residue.",
+      "say": "Pyrantel paralyses worms out in one dose and barely enters the patient; the gut is its whole world.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pyrantel profile",
+          "points": [
+            "Single dose roundworm, hookworm, pinworm",
+            "Poorly absorbed, luminal action",
+            "Spastic paralysis then expulsion",
+            "Household co treatment for pinworm"
+          ]
+        },
+        "right": {
+          "title": "Shelf residue",
+          "points": [
+            "Levamisole: immunomodulant past, vasculitis notoriety",
+            "Niclosamide: tapeworm alternative, unavailable widely",
+            "Piperazine: historical, GABA agonist in worms",
+            "Triclabendazole: Fasciola's specific answer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mass drug administration** ethics and arithmetic close the module: whole communities treated without individual diagnosis (prevalence thresholds deciding), donated drugs (ivermectin, albendazole, praziquantel) at continental scale, coverage above 65 to 80 percent as the operative quality metric, and pregnancy and age exclusions honoured inside campaigns rather than clinics. The pharmacology is population pharmacokinetics with consent structures examiners increasingly ask about by name.",
+      "say": "Deworming nations is pharmacology at census scale; coverage percentage is the dose that matters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MDA machinery",
+          "points": [
+            "Prevalence thresholds trigger community rounds",
+            "Donated drug supply chains",
+            "Coverage targets 65 to 80 percent minimum",
+            "School platforms reach children efficiently"
+          ]
+        },
+        "right": {
+          "title": "MDA safeguards",
+          "points": [
+            "Pregnancy and age exclusions inside campaigns",
+            "Adverse event surveillance at scale",
+            "Loa loa mapping before ivermectin rounds",
+            "Impact surveys recalibrate frequency"
+          ]
+        }
+      }
+    }
+  ]
+}
