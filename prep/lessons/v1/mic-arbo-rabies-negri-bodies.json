@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-arbo-rabies",
+  "subject": "microbiology",
+  "title": "Negri Bodies, Rabies PEP, Ebola, Hantavirus and CCHF",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Negri bodies** are eosinophilic cytoplasmic inclusions in neurons infected by rabies virus, classically in hippocampal pyramidal cells and Purkinje cells. They supported historical postmortem diagnosis but are neither universally present nor as sensitive as direct fluorescent antibody testing or PCR. Their absence cannot clear an animal or human specimen. Corneal impression tests are obsolete and should not delay exposure management.",
+      "say": "Negri bodies are historic clues; modern rabies diagnosis usesFAT and molecular tests.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Negri body facts",
+          "points": [
+            "Round or oval eosinophilic inclusions",
+            "Contain rabies viral antigen and RNA",
+            "Prominent in hippocampus and cerebellum",
+            "Can be absent in confirmed rabies"
+          ]
+        },
+        "right": {
+          "title": "Modern diagnosis",
+          "points": [
+            "Direct fluorescent antibody on brain",
+            "RT-PCR on saliva, CSF or skin biopsy",
+            "Nuchal skin biopsy can help antemortem",
+            "No test result should delay indicated PEP"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post-exposure prophylaxis** works because rabies incubation is usually long enough for vaccine-induced antibody to intercept virus before central nervous system entry. Wash wounds for at least fifteen minutes, avoid suturing initially, infiltrate immunoglobulin into and around category III wounds, and vaccinate into deltoid. Previously vaccinated people receive shorter vaccine courses and no immunoglobulin.",
+      "say": "PEP succeeds by winning a race against slow axonal transport.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Unvaccinated severe exposure",
+          "points": [
+            "Immediate wound washing",
+            "Rabies immunoglobulin once, wound infiltrated",
+            "Vaccine multi-dose schedule",
+            "Tetanus and bacterial wound care also needed"
+          ]
+        },
+        "right": {
+          "title": "Previously vaccinated",
+          "points": [
+            "Wound washing still immediate",
+            "No rabies immunoglobulin",
+            "Abbreviated booster vaccine course",
+            "Document prior complete vaccination"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ebola virus** is a filovirus causing severe haemorrhagic fever with fever, vomiting, diarrhoea, fluid loss, shock and coagulopathy after contact with blood or body fluids of patients or bodies. It is not casually airborne in ordinary care, but aerosol-generating and sharps procedures raise risk. Early isolation, meticulous PPE, safe fluids and electrolyte care and safe burials interrupt outbreaks.",
+      "say": "Ebola spreads through body-fluid contact, so barrier discipline and safe burial save lives.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission",
+          "points": [
+            "Blood, vomit, diarrhoea and other fluids",
+            "Contaminated sharps and surfaces while wet",
+            "Funeral contact is high risk",
+            "Sexual persistence in survivors can occur rarely"
+          ]
+        },
+        "right": {
+          "title": "Response",
+          "points": [
+            "Immediate isolation and notification",
+            "Trained PPE donning and doffing",
+            "PCR from blood",
+            "Ring vaccination in eligible outbreaks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hantaviruses** are rodent-borne RNA viruses causing haemorrhagic fever with renal syndrome in Eurasia and hantavirus pulmonary syndrome in the Americas. Exposure follows inhaling aerosolised rodent urine or droppings in sheds, homes or fields. Thrombocytopenia, haemoconcentration and capillary leak dominate; treatment is supportive, with ventilatory and renal care deciding outcome.",
+      "say": "Rodent excreta aerosols connect hantavirus fever to renal or pulmonary capillary leak.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Old World pattern",
+          "points": [
+            "Haemorrhagic fever with renal syndrome",
+            "Hantaan, Seoul, Puumala and Dobrava viruses",
+            "Milder Puumala disease is nephropathia epidemica",
+            "Rodent control and dust avoidance help"
+          ]
+        },
+        "right": {
+          "title": "New World pattern",
+          "points": [
+            "Hantavirus pulmonary syndrome",
+            "Sin Nombre and Andes viruses",
+            "Rapid pulmonary oedema and shock",
+            "Andes virus can transmit person to person rarely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Crimean-Congo haemorrhagic fever** is a tick-borne nairovirus also transmitted by livestock blood and nosocomial exposure. Fever, myalgia, thrombocytopenia, hepatitis and haemorrhage progress rapidly in severe cases. Ribavirin is often used although evidence is debated; meticulous barrier nursing and laboratory biosafety are crucial. Virus isolation demands high-containment reference laboratories.",
+      "say": "CCHF combines tick exposure, livestock blood and high-risk hospital transmission.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exposure clues",
+          "points": [
+            "Hyalomma tick bite",
+            "Slaughtering or crushing ticks",
+            "Contact with viraemic livestock blood",
+            "Healthcare exposure to patient blood"
+          ]
+        },
+        "right": {
+          "title": "Diagnosis and care",
+          "points": [
+            "PCR in acute phase",
+            "IgM later or paired serology",
+            "Support platelets, blood and organs",
+            "Use strict standard and contact precautions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Across viral haemorrhagic fevers the first action is not naming the virus but **isolating the patient, minimising sharps and fluid exposure, notifying public health and sending appropriate PCR safely**. Malaria, dengue, leptospirosis, typhoid and sepsis remain common mimics and may need parallel treatment. A travel, animal, tick and sick-contact history taken in the first minutes shapes the entire pathway.",
+      "say": "In viral haemorrhagic fever, infection control starts before species confirmation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "history",
+            "label": "Travel, tick, animal and contact history"
+          },
+          {
+            "id": "isolate",
+            "label": "Isolate and apply barrier precautions"
+          },
+          {
+            "id": "notify",
+            "label": "Notify laboratory and public health"
+          },
+          {
+            "id": "test",
+            "label": "PCR and parallel mimic testing"
+          }
+        ],
+        "edges": [
+          [
+            "history",
+            "isolate"
+          ],
+          [
+            "isolate",
+            "notify"
+          ],
+          [
+            "notify",
+            "test"
+          ]
+        ]
+      }
+    }
+  ]
+}

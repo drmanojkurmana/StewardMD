@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-mercury-poisoning",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Mercury Poisoning, Acrodynia and Copper Poisoning",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Mercury forms and corrosive sublimate",
+   "tx": "**Mercury or quicksilver** is a bright silvery liquid metal, volatile at room temperature. Mercuric compounds are soluble and intensely poisonous; mercurous compounds are far less soluble and less active. Swallowed metallic mercury is not absorbed and is not poisonous, while inhaled vapour and finely divided metal on skin or mucosa are absorbed. Mercuric chloride, corrosive sublimate, is the classic poison: colourless prismatic crystals with a styptic metallic taste, fatal at one to two grams in three to five days.",
+   "say": "Swallowed quicksilver passes harmlessly, but its vapour and soluble mercuric salts kill at one to two grams.",
+   "vis": {"kind": "table", "cols": ["Mercury form", "Absorption", "Danger"], "rows": [["Metallic, swallowed", "Not absorbed", "Not poisonous"], ["Metallic vapour, inhaled", "Readily absorbed", "Corrosive bronchitis"], ["Mercuric chloride", "Soluble, corrosive", "Fatal 1 to 2 grams"], ["Mercurous chloride, calomel", "Poorly soluble", "Much less active"]]}
+  },
+  {
+   "title": "Two phases of acute mercury poisoning",
+   "tx": "Acute mercuric poisoning runs in **two phases**. First come acrid metallic taste, throat constriction, hoarse voice, corroded greyish white mouth and fauces, burning pain, vomiting of greyish bloody mucoid material with membrane shreds, bloody diarrhoea with tenesmus and early circulatory collapse. In one to three days the second phase brings glossitis and ulcerative gingivitis with loosening teeth and jaw necrosis, then tubular necrosis with polyuria, albuminuria, uraemia and acidosis, and later membranous colitis with dysentery.",
+   "say": "First the corroded mouth and bloody gut, then in days the ulcerated gums and necrosed kidneys define mercuric poisoning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Metallic taste, corroded mouth"}, {"id": "b", "label": "Bloody vomiting and diarrhoea"}, {"id": "c", "label": "Gingivitis, loosening teeth"}, {"id": "d", "label": "Tubular necrosis, uraemia"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Chronic mercury: tremor, gums and erethism",
+   "tx": "**Chronic mercury poisoning or hydrargyrism** shows a classic triad of gingivitis with salivation, tremors and neuropsychiatric change. Salivation, sore mouth, a blue gum line, loosening teeth and progressive uraemia accompany moderately coarse tremor beginning in the hands and spreading to lips, tongue, arms and legs: Danbury tremors, hatter's shakes, worst as concussio mercurialis where no activity is possible. Mercurial erethism adds anxiety, shyness, irritability, memory loss and suicidal melancholia, the mad hatter picture.",
+   "say": "Salivating gums, hatter's tremor and shy irritable erethism are chronic mercury's triad in workers and mirror makers.",
+   "vis": {"kind": "compare", "left": {"title": "Physical chronic signs", "points": ["Gingivitis and salivation", "Blue line on gums", "Coarse spreading tremor", "Progressive kidney failure"]}, "right": {"title": "Erethism, the mind", "points": ["Anxiety, shyness, timidity", "Irritability, lost confidence", "Memory loss, insomnia", "Suicidal melancholia"]}}
+  },
+  {
+   "title": "Mercurialentis and acrodynia",
+   "tx": "Two named curiosities complete mercury. **Mercurialentis** is a brownish deposit of mercury on the anterior lens capsule seen by slit lamp as a malt brown reflex, bilateral and harmless to vision. **Acrodynia or pink disease** is an idiosyncratic hypersensitivity of children to chronic mercury in any form: insidious anorexia, insomnia, sweating, itchy generalised rash and photophobia, with hands and feet puffy, painful and paraesthetic with peeling skin, sometimes shedding teeth. Minamata disease is the organic mercury disaster from contaminated fish in Japan in 1956.",
+   "say": "A brown lens reflex that spares vision and a pink peeling rash in children are mercury's two named signatures.",
+   "vis": {"kind": "table", "cols": ["Mercury syndrome", "Subject", "Hallmark"], "rows": [["Mercurialentis", "Vapour exposed workers", "Malt brown lens reflex, vision kept"], ["Acrodynia, pink disease", "Children, idiosyncratic", "Puffy painful peeling hands and feet"], ["Minamata disease", "Fish eaters, organic mercury", "Ataxia, dysarthria, field loss"], ["Erethism", "Minor industry workers", "Shyness, irritability, tremor"]]}
+  },
+  {
+   "title": "Treating mercury without making it worse",
+   "tx": "**Mercury treatment** binds first: milk, egg white, salt poor albumin, sodium formaldehyde sulphoxylate or sodium bicarbonate lavage, cathartics withheld, whole bowel irrigation considered. BAL is the chelating agent of choice on the arsenic regimen; penicillamine serves less severe vapour and inorganic poisoning, two hundred fifty milligrams four times daily for five days in adults. Two traps are examined: BAL with penicillamine together can form a toxic compound, and calcium EDTA must not be used because it is nephrotoxic with mercury. Haemodialysis answers significant kidney damage.",
+   "say": "BAL for mercury, penicillamine for milder cases, never BAL with penicillamine together, and never EDTA near mercury kidneys.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bind with milk or egg white"}, {"id": "b", "label": "BAL chelation, choice agent"}, {"id": "c", "label": "Penicillamine if less severe"}, {"id": "d", "label": "Dialysis for kidney damage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Copper sulphate, blue vitriol",
+   "tx": "**Copper** metal itself is not poisonous, but its compounds powerfully inhibit enzymes. Copper sulphate, blue vitriol, forms large blue crystals; copper subacetate or verdigris is bluish green. Symptoms begin in fifteen to thirty minutes with metallic taste, salivation, burning and colicky pain, thirst and repeated vomiting of blue or green material, then liquid brown non bloody diarrhoea with straining. Copper sulphate kills at thirty grams and subacetate at fifteen, in one to three days.",
+   "say": "Blue green vomit within half an hour of blue crystals is copper sulphate until the stomach contents prove otherwise.",
+   "vis": {"kind": "compare", "left": {"title": "Copper poisoning picture", "points": ["Metallic taste, salivation", "Blue or green vomiting", "Colicky pain, thirst", "Brown liquid stools"]}, "right": {"title": "Severe copper features", "points": ["Haemolysis and jaundice", "Haemoglobinuria, uraemia", "Methaemoglobinaemia", "Paralysis then coma"]}}
+  },
+  {
+   "title": "Copper treatment and postmortem colours",
+   "tx": "**Copper poisoning treatment** washes the stomach with one percent potassium ferrocyanide, forming insoluble cupric ferrocyanide, forbids emetics, gives demulcents that form insoluble copper albuminate, castor oil to clear the bowel, early haemodialysis and chelation with penicillamine, EDTA or BAL. At autopsy the skin may be yellow, greenish blue froth sits at mouth and nostrils, and gastric mucosa and contents are greenish or bluish over a soft fatty liver with proximal tubular degeneration.",
+   "say": "Ferrocyanide in the wash and penicillamine after it treat copper, whose green blue stomach signs its name postmortem.",
+   "vis": {"kind": "table", "cols": ["Copper step", "Action", "Reason"], "rows": [["Lavage", "Potassium ferrocyanide 1 percent", "Insoluble copper complex"], ["Demulcents", "Albumin forming drinks", "Limits absorption"], ["Chelation", "Penicillamine, EDTA or BAL", "Removes absorbed copper"], ["Dialysis", "Early in severe cases", "Clears circulating copper"]]}
+  },
+  {
+   "title": "Chalcosis and Wilson disease confusion",
+   "tx": "Copper deposited in tissues is **chalcosis**: a pigmented ring in the deeper cornea, green hair from copper algicides in swimming pools, a green line on the gums in chronic poisoning, vineyard sprayer's granulomatous lung from inhaled copper sulphate spray, and peripheral neuritis with muscle atrophy. Reddy notes chronic poisoning causes Wilson's disease in his framing; the examiner's practical point is that tissue copper overload, occupational or metabolic, converges on cornea, liver, lung and nerve.",
+   "say": "Green hair, a corneal ring and sprayer's lung are chalcosis, copper written into cornea, hair and lung by chronic exposure.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Chronic copper exposure"}, {"id": "b", "label": "Corneal pigmented ring forms"}, {"id": "c", "label": "Green gum line and neuritis"}, {"id": "d", "label": "Sprayer's granulomatous lung"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Circumstances of copper and mercury cases",
+   "tx": "Both metals poison mostly by accident in **copper and mercury circumstances**. Copper's colour and taste forbid homicide and make suicide rare; food cooked in untinned copper vessels and greened with verdigris, children swallowing attractive blue crystals, abortifacient use and cattle poisoning fill the casebook. Mercury accidents come from strong solutions used to wash abscess cavities or irrigate vagina, uterus or rectum, and from contraceptive or abortifacient vaginal introduction; homicidal and suicidal mercury is rare.",
+   "say": "Untinned vessels, blue crystals and irrigation accidents poison with copper and mercury far oftener than any murderer does.",
+   "vis": {"kind": "compare", "left": {"title": "Copper circumstances", "points": ["Verdigris from untinned vessels", "Children swallow blue crystals", "Abortifacient internal use", "Cattle poisoning rare"]}, "right": {"title": "Mercury circumstances", "points": ["Cavity and uterine irrigation", "Vaginal contraceptive use", "Occupational vapour exposure", "Homicide and suicide rare"]}}
+  }
+ ],
+ "quiz": []
+}

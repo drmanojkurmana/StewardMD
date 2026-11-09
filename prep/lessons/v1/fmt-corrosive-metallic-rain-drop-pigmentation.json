@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-rain-drop-pigmentation",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Rain Drop Pigmentation, Lead Poisoning and Burtonian Lines",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Rain drop pigmentation of chronic arsenic",
+   "tx": "**Rain drop pigmentation** is the finely mottled brown discolouration of chronic arsenic poisoning, appearing mostly on skin flexures, temples, eyelids and neck and persisting for many months. Fine drops of pigment scattered on a lighter ground give the name. It arrives with hyperkeratosis of palms and soles, irregular nail thickening with Mees lines, polyneuritis and failing general health. Finding it should trigger hair, nail and urine arsenic estimation and a search for the exposure source.",
+   "say": "Mottled brown raindrops on flexures and neck, persisting for months, are the skin signature of chronic arsenic.",
+   "vis": {"kind": "table", "cols": ["Feature", "Rain drop pigmentation", "Companion signs"], "rows": [["Distribution", "Flexures, temples, eyelids, neck", "Persists many months"], ["Palms and soles", "Hyperkeratosis develops", "Irregular thickening"], ["Nails", "Mees lines appear", "Dates the exposure"], ["Nerves", "Polyneuritis follows", "Paraesthesia and pain"]]}
+  },
+  {
+   "title": "Lead, the steel grey poison",
+   "tx": "**Lead** is a heavy steel grey metal, and all its salts poison: lead acetate or sugar of lead, lead carbonate or safeda, bright yellow lead chromate, litharge, red lead or sindur and lead sulphide. Plumbism is common and regarded as an industrial disease, from painters, plumbers, battery and printing workers and contaminated water. Homicidal use is rare, suicide is not a lead pattern, and red lead paste is used locally for abortion and mixed with arsenic as cattle poison.",
+   "say": "Every lead salt poisons, industry supplies most cases, and red lead turns up in abortion pastes and cattle fodder.",
+   "vis": {"kind": "compare", "left": {"title": "Common lead salts", "points": ["Acetate, sugar of lead", "Carbonate, safeda white", "Chromate, bright yellow", "Red lead, sindur scarlet"]}, "right": {"title": "Typical circumstances", "points": ["Industrial chronic exposure", "Contaminated food and water", "Abortion paste misuse", "Embedded bullet, 12 to 48 days"]}}
+  },
+  {
+   "title": "Basophilic stippling and lead anaemia",
+   "tx": "Lead blocks haem synthesis and shortens red cell survival, producing **lead anaemia with basophilic stippling**: many dark blue pinhead spots of aggregated ribosomes in red cell cytoplasm from inhibition of pyrimidine nucleotidase, with polychromasia, reticulocytosis, poikilocytosis and nucleated red cells. Stippled cells also appear in arsenic and zinc poisoning, and eosinophilia is commoner still. Urinary porphyrins may reach five hundred micrograms daily, and zinc protoporphyrin is the usual assay.",
+   "say": "Blue stippled red cells with porphyrinuria mark lead's grip on the haem pathway before any line appears on the gums.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Lead inhibits haem synthesis"}, {"id": "b", "label": "Ribosomes aggregate in red cells"}, {"id": "c", "label": "Basophilic stippling appears"}, {"id": "d", "label": "Anaemia with reticulocytosis"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Burtonian line on the gums",
+   "tx": "The **Burtonian line** is a stippled blue line at the junction of gums and teeth, seen in fifty to seventy percent of chronic lead cases, usually within a week of exposure and especially on the upper jaw. Hydrogen sulphide from decomposing food in a dirty mouth converts deposited lead to blue black lead sulphide under the gum epithelium, so the line appears only near dirty or carious teeth. Mercury, copper, bismuth, iron and silver can paint a similar blue line.",
+   "say": "A blue gum line beside dirty teeth in half to two thirds of cases is lead sulphide painted by mouth bacteria.",
+   "vis": {"kind": "table", "cols": ["Line feature", "Burtonian line", "Also produced by"], "rows": [["Colour and site", "Blue, gum to tooth junction", "Mercury, copper, bismuth"], ["Frequency", "50 to 70 percent of cases", "Absent with clean teeth"], ["Timing", "Within a week of exposure", "Upper jaw favoured"], ["Chemistry", "Lead sulphide deposit", "Needs oral hydrogen sulphide"]]}
+  },
+  {
+   "title": "Lead colic and constipation",
+   "tx": "**Lead colic** strikes intestines, ureters, uterus and vessels in about eighty five percent of cases, coming at night in attacks of a few minutes that recur over days or weeks, with severe pain and usual constipation, though vomiting or diarrhoea may occur. The abdomen in colic is not tender in proportion to the pain and the pain eases with pressure, behaviour that separates it from surgical emergencies. Calcium gluconate intravenously is the traditional reliever of the colic.",
+   "say": "Night colic in eighty five percent, severe yet pressure eased and constipated, is lead gripping smooth muscle and vessels.",
+   "vis": {"kind": "compare", "left": {"title": "Lead colic pattern", "points": ["Attacks of minutes, at night", "Recurs over weeks", "Constipation usual", "Pain eased by pressure"]}, "right": {"title": "Surgical abdomen contrast", "points": ["Tenderness proportional to pain", "Rigidity on palpation", "Pain worsened by pressure", "Single evolving episode"]}}
+  },
+  {
+   "title": "Lead palsy: wrist drop and foot drop",
+   "tx": "**Lead palsy** is a late sign in under ten percent, commoner in adults and men, striking the muscle groups most prone to fatigue: extensors of the wrist giving wrist drop through the radial nerve, then deltoid, biceps, anterior tibial giving foot drop, rarely eye or intrinsic hand muscles. Tremor, numbness, hyperaesthesia and cramps precede weakness, nerve degeneration and muscle atrophy follow, and recovery may be complete but is usually slow.",
+   "say": "Wrist drop first, then foot drop, in the most used muscles: lead palsy is late, under ten percent, and slow to heal.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tremor, numbness, cramps first"}, {"id": "b", "label": "Wrist extensors fail, wrist drop"}, {"id": "c", "label": "Anterior tibial fails, foot drop"}, {"id": "d", "label": "Slow, sometimes complete recovery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Lead encephalopathy in children",
+   "tx": "**Lead encephalopathy** in some form is said to accompany almost every case of plumbism and is commonest in children, often with tetraethyl lead. Vomiting, headache, insomnia, visual disturbance, irritability, restlessness, delirium, hallucinations, convulsions, coma and death follow. It is usually irreversible: about eighty five percent keep permanent brain damage and about twenty five percent die. X rays in children show radio opaque bands at the metaphyses of long bones and iliac crest margins.",
+   "say": "Convulsing children with lead in their bones carry an eighty five percent risk of permanent brain damage, a quarter fatally.",
+   "vis": {"kind": "table", "cols": ["Lead encephalopathy", "Frequency or sign", "Action"], "rows": [["Permanent brain damage", "About 85 percent", "Prevention is everything"], ["Death", "About 25 percent", "Emergency chelation"], ["Bone X ray in children", "Dense metaphyseal bands", "Confirms chronic exposure"], ["Blood picture", "Stippling, porphyrinuria", "Zinc protoporphyrin assay"]]}
+  },
+  {
+   "title": "Treating lead by severity bands",
+   "tx": "**Lead treatment is graded by blood lead**. Severe poisoning with encephalopathy gets BAL four milligrams per kilogram at once, repeated four hourly until blood lead falls below forty, with EDTA seventy five then fifty milligrams per kilogram daily intravenously, BAL given at least four hours before EDTA because EDTA alone mobilises lead and worsens symptoms. Moderate cases take EDTA alone; mild cases, blood lead twenty to thirty five, take penicillamine or succimer ten milligrams per kilogram thrice daily for twenty days, the safer and more effective oral agent.",
+   "say": "BAL before EDTA in encephalopathy, EDTA alone when moderate, penicillamine or succimer when mild: severity picks the chelator.",
+   "vis": {"kind": "compare", "left": {"title": "Severe with encephalopathy", "points": ["BAL 4 mg per kg immediately", "EDTA after four hour gap", "Continue until below 40", "Then oral chelation"]}, "right": {"title": "Mild poisoning", "points": ["Blood lead 20 to 35 range", "Penicillamine or DMSA oral", "DMSA less toxic, preferred", "Until below 15 or three months"]}}
+  },
+  {
+   "title": "Prevention in lead industries",
+   "tx": "**Prophylaxis of plumbism** is an occupational discipline: proper factory ventilation, personal hygiene with periodical medical examination of workers, a diet rich in calcium, a small amount of sulphuric acid in water in the classical regimen, and a weekly saline purgative. Embedded lead bullets deserve the same respect, producing poisoning twelve to forty eight days after wounding. Every chronic case ends with source removal; chelation without exposure control only rents recovery.",
+   "say": "Ventilation, hygiene checks, calcium rich diet and source removal prevent what chelation can only repair temporarily.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Ventilate the workplace"}, {"id": "b", "label": "Examine workers periodically"}, {"id": "c", "label": "Remove the exposure source"}, {"id": "d", "label": "Chelate the poisoned worker"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

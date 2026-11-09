@@ -1,0 +1,206 @@
+{
+  "v": 1,
+  "module": "mic-intestinal-protozoa",
+  "subject": "microbiology",
+  "title": "Non-Pathogenic Amoebae, Giardia lamblia and Cryptosporidium",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Microscopic examination of fecal smears frequently reveals amoebic cysts that are morphologically indistinguishable from Entamoeba histolytica but derive from the completely non-invasive commensal species **Entamoeba dispar**. E. dispar colonizes the colonic mucosa without secreting cytotoxic proteases, never induces epithelial ulceration, and never ingests host erythrocytes. Molecular diagnostics including fecal polymerase chain reaction and coproantigen enzyme immunoassay reliably differentiate them.",
+      "say": "Non-invasive Entamoeba dispar looks identical under the microscope but never invades mucosa or causes dysentery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entamoeba histolytica",
+          "points": [
+            "Pathogenic invasive protozoan",
+            "Erythrophagocytosis seen in trophozoites",
+            "Positive stool Gal/GalNAc antigen test",
+            "Requires immediate systemic treatment"
+          ]
+        },
+        "right": {
+          "title": "Entamoeba dispar",
+          "points": [
+            "Commensal, non-invasive organism",
+            "Erythrocytes never ingested in vivo",
+            "Negative E. histolytica antigen assays",
+            "Asymptomatic carriage requires no therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The flagellated protozoan **Giardia lamblia**, also designated Giardia intestinalis or duodenalis, is the leading protozoal cause of waterborne diarrhoeal illness worldwide. Transmission follows consumption of cold mountain stream water or poorly filtered municipal supplies contaminated by wilderness animal reservoirs like beavers, giving rise to the clinical moniker beaver fever. Acid-resistant quadrinucleate cysts easily survive standard chlorination.",
+      "say": "Chlorine-resistant Giardia cysts in backcountry stream water cause persistent malabsorptive diarrhoea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/giardiasis-fig1.webp",
+        "alt": "Giardia lamblia trophozoite morphology",
+        "caption": "Giardia lamblia binucleate pear-shaped trophozoite showing ventral sucking disc [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Direct examination of fresh diarrhoeal stool wet mounts reveals motile trophozoites that are pear-shaped or teardrop-shaped, measuring ten to twenty micrometres in length. The organism moves with a characteristic tumbling, erratic **falling leaf motility** propelled by four pairs of flagella. Bilateral symmetry is marked by two identical round nuclei containing central karyosomes, paired median bodies, and a ventral concave sucking disc.",
+      "say": "Fresh wet preparations demonstrate tumbling falling-leaf motility and bilateral symmetry with two nuclei.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Morphological Element",
+          "Diagnostic Description"
+        ],
+        "rows": [
+          [
+            "Overall contour",
+            "Dorsally convex, ventrally flat pear-shaped symmetry"
+          ],
+          [
+            "Nuclear structure",
+            "Two identical vesicular nuclei resembling eyeglasses or monkey face"
+          ],
+          [
+            "Flagellar apparatus",
+            "Four paired flagella (anterior, posterior, ventral, caudal)"
+          ],
+          [
+            "Locomotion pattern",
+            "Erratic fluttering and tumbling falling leaf motility in wet mount"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Trophozoites attach firmly to the brush border of duodenal and jejunal enterocytes using their microtubular **ventral sucking disc**. Mechanical barrier occlusion combined with brush border enzyme blunting impairs fat and carbohydrate absorption without invading mucosal epithelium. Consequently, patients present with foul-smelling, pale, greasy, floating steatorrhoea accompanied by conspicuous epigastric distension, flatulence, and sulfurous belching.",
+      "say": "Ventral sucking discs adhere to duodenal microvilli, blunting disaccharidases and causing greasy steatorrhoea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g1",
+            "label": "Ingested cysts excyst in duodenum under alkaline pH"
+          },
+          {
+            "id": "g2",
+            "label": "Ventral disc attaches to duodenal and jejunal microvilli"
+          },
+          {
+            "id": "g3",
+            "label": "Enzyme blunting causes non-invasive osmotic steatorrhoea and gas"
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2"
+          ],
+          [
+            "g2",
+            "g3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When stool microscopy remains negative despite high suspicion, the **Entero-Test** or string test samples upper intestinal contents. The patient swallows a gelatin capsule containing a weighted nylon string, with the proximal end taped to the cheek. After several hours in the duodenum, the string is retrieved and the bile-stained distal mucous scrapings are examined under microscopy for attached motile trophozoites.",
+      "say": "The Entero-Test string retrieves bile-stained duodenal mucus to demonstrate attached Giardia trophozoites.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Specimen Evaluated",
+          "Diagnostic Target"
+        ],
+        "rows": [
+          [
+            "Stool wet mount",
+            "Fresh diarrhoeal stool",
+            "Motile trophozoites with falling leaf motility"
+          ],
+          [
+            "Stool iodine stain",
+            "Formed or semi-formed stool",
+            "Quadrinucleate oval cysts with axonemes"
+          ],
+          [
+            "Entero-Test (string)",
+            "Duodenal and jejunal mucus",
+            "Live trophozoites adhering to distal nylon string"
+          ],
+          [
+            "Fecal EIA / NAAT",
+            "Preserved stool aliquot",
+            "Giardia-specific coproantigens or gene targets"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The coccidian parasite **Cryptosporidium parvum** infects mucosal enterocytes, lodging within a unique intracellular but extracytoplasmic vacuole beneath the brush border membrane. Transmission occurs via contaminated swimming pools and municipal water because thick-walled oocysts resist routine chlorination. In immunocompetent hosts, it produces self-limiting watery diarrhoea, whereas in advanced human immunodeficiency virus it causes unrelenting, life-threatening dehydration.",
+      "say": "Chlorine-tolerant Cryptosporidium oocysts occupy an extracytoplasmic enterocyte niche, driving watery diarrhoea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-protozoa-amoebiasis-giardiasis-coccidia-fig1.webp",
+        "alt": "Intestinal protozoa diagnostic comparison",
+        "caption": "Morphological comparison of intestinal amoebae, Giardia, and coccidian parasites [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Fecal smears stained with the Kinyoun **modified acid-fast stain** display round pinkish-red oocysts measuring four to six micrometres in diameter against a contrasting green or blue counterstained background. Each mature oocyst contains four naked crescentic sporozoites without sporocysts. In contrast to other coccidia, Cryptosporidium oocysts do not exhibit intrinsic ultraviolet autofluorescence, facilitating clear separation from Cyclospora.",
+      "say": "Modified acid-fast staining highlights four to six micrometre pink-red oocysts lacking autofluorescence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cryptosporidium oocyst",
+          "points": [
+            "Size: 4 to 6 micrometres, perfectly spherical",
+            "Acid-fast: bright pink-red on modified Kinyoun",
+            "Autofluorescence: absent under 365 nm UV light",
+            "Sporulation: fully sporulated when passed in stool"
+          ]
+        },
+        "right": {
+          "title": "Cyclospora cayetanensis",
+          "points": [
+            "Size: 8 to 10 micrometres, twice as large",
+            "Acid-fast: variable staining (ghost forms)",
+            "Autofluorescence: bright neon blue under UV light",
+            "Sporulation: unsporulated when passed in stool"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "While oral **tinidazole** or metronidazole provides rapid cure for giardiasis, Cryptosporidium exhibits marked antimicrobial resistance. In immunocompetent patients, nitazoxanide reduces duration of symptoms by interfering with pyruvate-ferredoxin oxidoreductase enzyme-dependent electron transfer. In acquired immunodeficiency syndrome, aggressive immune restoration using combination antiretroviral therapy represents the only definitive intervention that cures cryptosporidiosis.",
+      "say": "Metronidazole cures giardiasis, while immune restoration with antiretrovirals is necessary to clear cryptosporidiosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Giardiasis: single-dose oral tinidazole 2g or metronidazole"
+          },
+          {
+            "id": "t2",
+            "label": "Cryptosporidiosis in immunocompetent: nitazoxanide for 3 days"
+          },
+          {
+            "id": "t3",
+            "label": "Cryptosporidiosis in HIV/AIDS: initiate immediate combination antiretroviral therapy"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ]
+        ]
+      }
+    }
+  ]
+}

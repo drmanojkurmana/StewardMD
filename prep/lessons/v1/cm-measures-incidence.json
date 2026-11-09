@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-measures-incidence",
+ "subject": "community-medicine",
+ "module": "cm-measures",
+ "title": "Incidence and Prevalence: Point, Period and Attack Rates",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Incidence counts only new cases",
+   "tx": "**Incidence** counts new cases of disease arising in a defined population at risk during a specified period. The denominator excludes people who already have the disease or cannot develop it, such as the immune. Because it tracks fresh events, incidence measures the force of morbidity and answers whether control measures are stopping new disease.",
+   "say": "Count only what is new. New cases arising in a population at risk over a defined period give this rate. People already ill or immune leave the denominator. Fresh events reveal whether control measures are stopping new disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Part", "Rule"],
+    "rows": [
+     ["Numerator", "New cases in the period"],
+     ["Denominator", "Population at risk, excluding existing cases"],
+     ["Time", "Clearly specified period"],
+     ["Meaning", "Force of morbidity, risk of developing disease"]
+    ]
+   }
+  },
+  {
+   "title": "Prevalence counts old and new together",
+   "tx": "**Prevalence** counts all existing cases, new and old, in a population at a point or period of time. It is a static snapshot of burden, ideal for planning beds, clinics and drug supply. Long duration inflates it: lifelong hypertension and diabetes accumulate high prevalence even when yearly incidence stays modest.",
+   "say": "Now count everything present. Old and new cases together at one moment give the burden snapshot planners use for beds, clinics and drug supply. Long lasting disease inflates the figure, so hypertension and diabetes dominate it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Incidence thinking",
+     "points": ["New cases only", "Needs a time period", "Tests control of spread"]
+    },
+    "right": {
+     "title": "Prevalence thinking",
+     "points": ["Old plus new cases", "Snapshot of total burden", "Plans services and supplies"]
+    }
+   }
+  },
+  {
+   "title": "Point prevalence freezes one moment",
+   "tx": "**Point prevalence** freezes the count at a single moment: on 31 December, three of six followed students were ill, giving three current cases. Surveys that examine a whole village in one week report this form. It suits chronic, stable conditions and falters for short illnesses that start and end between surveys.",
+   "say": "Freeze one moment. On a chosen day, count who is ill right then: three of six followed students, in the textbook example. Village surveys report this form. Short illnesses slip between surveys, so chronic stable conditions suit it best.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suits point prevalence",
+     "points": ["Chronic stable disease", "One week village survey", "Slowly changing burden"]
+    },
+    "right": {
+     "title": "Defeats point prevalence",
+     "points": ["Illness lasting two days", "Rapid outbreak peaks", "Strong seasonal swings"]
+    }
+   }
+  },
+  {
+   "title": "Period prevalence spans an interval",
+   "tx": "**Period prevalence** counts everyone ill at any time during an interval, including those ill at its start and those who develop or recover within it. The same six students yield six cases across the year 2004, against three at its final day. Longer intervals always raise this figure, so stems must name the interval before any comparison.",
+   "say": "Stretch the window. Everyone ill at any point during the interval counts, including starters, developers and recoverers. Six students give six across a year but three on its last day. Longer windows always raise the figure; name the interval before comparing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Same six students"],
+    "rows": [
+     ["Point prevalence, 31 December", "3 currently ill"],
+     ["Period prevalence, whole year", "6 ill at some time"],
+     ["Incidence during the year", "3 newly ill"]
+    ]
+   }
+  },
+  {
+   "title": "The prevalence equals incidence times duration",
+   "tx": "The relation **P equals I times D** links the pair when incidence and duration stay steady: prevalence equals incidence multiplied by average duration. Diarrhoea at 10 new cases per 100 child weeks with half a week duration gives about 5 current cases per 100 children. Better treatment that shortens duration cuts prevalence without touching incidence at all.",
+   "say": "One formula links the pair. Multiply incidence by average duration to estimate prevalence when both stay steady. Faster cure shortens duration and cuts prevalence without preventing a single new case, a distinction examiners probe constantly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "New cases arise (incidence)"},
+     {"id": "b", "label": "Cases persist (duration)"},
+     {"id": "c", "label": "Existing load (prevalence)"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Attack rate: incidence in an outbreak",
+   "tx": "The **attack rate** expresses incidence during an epidemic or outbreak over a short, named period. When fever struck 2800 of 4000 villagers across one month in 1996 and proved to be malaria, the attack rate was 70 percent. Food poisoning after a wedding meal is the other classic setting: exposed eaters form the denominator.",
+   "say": "Outbreaks rename incidence. Cases among the exposed over the short outbreak period give this rate: 2800 of 4000 villagers, seventy percent, in one malaria month. Wedding meal food poisoning is the other classic, with eaters as the denominator.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Setting", "Denominator used"],
+    "rows": [
+     ["Village malaria outbreak", "Whole village population, 4000"],
+     ["Wedding meal poisoning", "People who ate the meal"],
+     ["Hostel meningitis scare", "Hostel residents exposed"]
+    ]
+   }
+  },
+  {
+   "title": "Secondary attack rate measures contagiousness",
+   "tx": "The **secondary attack rate** counts exposed contacts who develop disease within one incubation period after a primary case, excluding the primary case itself. Measles reaches about 90 percent among susceptible household contacts, marking extreme contagiousness. Immune contacts leave the denominator, so vaccination history must be known before the rate means anything.",
+   "say": "Within households, count what the first case sparks. Susceptible contacts falling ill within one incubation period, divided by susceptible contacts, gives this rate. Measles near ninety percent marks extreme contagiousness. Immune contacts must leave the denominator.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Part", "Rule"],
+    "rows": [
+     ["Numerator", "Contacts ill within one incubation period"],
+     ["Denominator", "Susceptible exposed contacts only"],
+     ["Excluded", "The primary case and immune contacts"],
+     ["Meaning", "Contagiousness within households or institutions"]
+    ]
+   }
+  },
+  {
+   "title": "Which measure answers which question",
+   "tx": "Match measure to question: **cohort studies** yield incidence by following the healthy forward, while cross-sectional surveys yield prevalence in one sweep. Aetiology questions need incidence, since prevalence mixes survival with causation; a disease can look common because patients live long, not because risk is high. Service planning reverses the choice and takes prevalence.",
+   "say": "Match the measure to the question. Follow the healthy forward for incidence; sweep once for prevalence. Cause hunting needs incidence, because prevalence mixes survival with risk. Service planning reverses the choice and takes prevalence every time.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Choose incidence when",
+     "points": ["Testing what causes disease", "Judging prevention of new cases", "Following a cohort forward"]
+    },
+    "right": {
+     "title": "Choose prevalence when",
+     "points": ["Planning beds, clinics and drugs", "Running a one sweep survey", "Estimating community burden"]
+    }
+   }
+  },
+  {
+   "title": "Difficulties that distort both rates",
+   "tx": "**Case definition** decides both rates before counting begins: without an operational definition and a standard classification, two districts count different diseases under one name. Hospital data miss mild illness that never seeks care, while private sector cases escape official returns. Reliable morbidity data therefore lean on surveys and surveillance to correct facility figures.",
+   "say": "Definitions decide the numbers. Without one operational case definition, districts count different diseases under a single name. Clinics miss mild illness, private cases escape returns, and surveys plus surveillance must correct the facility picture.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Distortion", "Correction"],
+    "rows": [
+     ["No shared case definition", "Operational definition plus standard classification"],
+     ["Mild illness never seeks care", "Community morbidity surveys"],
+     ["Private cases escape returns", "Surveillance including private sector"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

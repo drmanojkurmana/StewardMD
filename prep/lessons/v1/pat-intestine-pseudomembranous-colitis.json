@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-intestine",
+  "subject": "pathology",
+  "title": "Pseudomembranous Colitis, Ischaemic Colitis, Appendicitis, and Intestinal Carcinoid",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Pseudomembranous colitis erupts when Clostridioides difficile toxins A and B, unleashed after antibiotics clear competing flora, volcano fibrin and neutrophil plaques across colonic mucosa with profuse diarrhoea. Toxin B glucosylates Rho family switches inside colonocytes, collapsing their cytoskeleton, while the exuding fibrin caps erupt like miniature volcanoes; cephalosporins, clindamycin and fluoroquinolones head the antibiotic culprit list for **Clostridioides difficile** colitis in ward patients.",
+      "say": "Antibiotics then watery diarrhoea plus pseudomembranes means C difficile toxins until stool testing clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/c-diff-fig1.webp",
+        "alt": "Clostridioides difficile colitis pathogenesis",
+        "caption": "Clostridioides difficile colitis pathogenesis from dysbiosis to pseudomembrane."
+      }
+    },
+    {
+      "tx": "Testing strategy pairs toxin detection with organism evidence because colonisation without toxin production mimics disease in carriers, especially infants, while ileus may silence diarrhoea in fulminant cases. Laboratories therefore screen with glutamate dehydrogenase or nucleic acid testing and confirm free **toxin** in stool, because treating a colonised child under two years old, where carriage runs naturally high, exposes the infant to drugs without touching any disease.",
+      "say": "Toxin, not mere organism presence, makes C difficile disease; fulminant ileus may hide its diarrhoea.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Colonisation",
+          "points": [
+            "Organism or gene positive, toxin negative",
+            "No diarrhoea attributable",
+            "No treatment, isolation by policy"
+          ]
+        },
+        "right": {
+          "title": "True infection",
+          "points": [
+            "Toxin positive with diarrhoea",
+            "Leucocytosis, AKI in severe disease",
+            "Fidaxomicin or vancomycin therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fulminant disease with ileus, megacolon, perforation risk, and shock needs oral plus rectal vancomycin strategies, surgical consultation early, and faecal microbiota transplantation for recurrences. Fidaxomicin now leads first line therapy where available because it spares Bacteroides and lowers relapse, while a white cell count above 15,000 or a creatinine climbing past 1.5 mg per decilitre promotes any case into the **severe** bracket needing closer observation.",
+      "say": "Megacolon and ileus in C difficile disease bring surgeons early; recurrence earns microbiota transplantation discussion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Severity",
+          "Markers",
+          "Therapy accent"
+        ],
+        "rows": [
+          [
+            "Non-severe",
+            "Counts and creatinine near baseline",
+            "Fidaxomicin or oral vancomycin"
+          ],
+          [
+            "Severe",
+            "WCC over 15, creatinine risen",
+            "Oral therapy, close monitoring"
+          ],
+          [
+            "Fulminant",
+            "Ileus, megacolon, shock",
+            "Combination routes, surgical review"
+          ],
+          [
+            "Recurrent",
+            "Relapse after treatment",
+            "Taper strategies, microbiota transplant"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ischaemic colitis starves watershed splenic flexure and rectosigmoid mucosa after hypotension, emboli, or vasculitis, bloody diarrhoea and pain in older vascular patients, thumbprinting oedema on imaging. Griffiths point at the splenic flexure relies on a sometimes tenuous marginal artery linking superior and inferior mesenteric flow, whereas the rectum usually escapes through its rich collateral supply; sudden pain followed within a day by bloody stool sketches **ischaemic colitis** before any scan confirms it.",
+      "say": "Bloody diarrhoea after hypotension in an older patient at the splenic flexure watershed is ischaemic colitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+        "alt": "Intestinal patterns including ischaemic and inflammatory colitis",
+        "caption": "Intestinal patterns across inflammatory, malabsorptive, and structural disease."
+      }
+    },
+    {
+      "tx": "Appendicitis obstructs its lumen by lymphoid hyperplasia or faecolith, distending, ischaemia, bacterial invasion, and gangrene toward perforation, pain migrating periumbilical to right iliac fossa. Early visceral pain travels through T10 fibres to the umbilicus, then parietal peritoneal irritation localises tenderness to **McBurney point**, two thirds along the line from umbilicus to anterior superior iliac spine; anorexia arriving before the pain shift remains a quietly discriminating history detail.",
+      "say": "Periumbilical pain settling right iliac fossa with anorexia is appendicitis performing its classic migration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Luminal obstruction, distension"
+          },
+          {
+            "id": "b",
+            "label": "Visceral periumbilical pain"
+          },
+          {
+            "id": "c",
+            "label": "Parietal inflammation localises pain"
+          },
+          {
+            "id": "d",
+            "label": "Gangrene and perforation threaten"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Appendiceal carcinoid, now neuroendocrine tumour, hides in many appendicectomy specimens at the tip, small ones cured by appendicectomy, larger or mesoappendiceal invasive ones earning right hemicolectomy discussion. Tumours under 1 cm confined to the tip need nothing further, those above 2 cm move to right hemicolectomy, and the grey zone between them turns on mesoappendiceal invasion, margin status and **Ki-67** grade rather than diameter alone.",
+      "say": "An incidental two centimetre appendiceal carcinoid earns hemicolectomy talk; a tiny tip lesion is already cured.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Under 1 cm tip lesion",
+          "points": [
+            "Appendicectomy sufficient usually",
+            "No invasion features",
+            "No follow up intensity"
+          ]
+        },
+        "right": {
+          "title": "Over 2 cm or invasive",
+          "points": [
+            "Mesoappendix or base involved",
+            "Right hemicolectomy considered",
+            "Oncology staging follows"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intestinal carcinoid of midgut secretes serotonin and tachykinins, desmoplastically kinking bowel and mesentery, syndrome appearing when liver metastases bypass first pass inactivation. Urinary 5-HIAA confirms serotonin excess, and chronic exposure scars the tricuspid and pulmonary valves into right sided **carcinoid heart disease**, a fibrotic twist that can dominate prognosis long after flushing and diarrhoea settle under somatostatin analogue therapy.",
+      "say": "Midgut carcinoids kink bowel with fibrosis years before flushing announces their liver metastases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Mechanism",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "Pseudomembranous colitis",
+            "C difficile toxins after antibiotics",
+            "Volcano plaques at sigmoidoscopy"
+          ],
+          [
+            "Ischaemic colitis",
+            "Watershed hypoperfusion",
+            "Thumbprinting, older vasculopath"
+          ],
+          [
+            "Appendicitis",
+            "Luminal obstruction sequence",
+            "Migrating right iliac pain"
+          ],
+          [
+            "Midgut carcinoid",
+            "Serotonin desmoplasia",
+            "Mesenteric mass, syndrome late"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Colonic ischaemia usually heals conservatively because collateral flow rescues mucosa, while gangrene, perforation, or persistent sepsis converts management surgical, separating transient from transmural disease. Most mucosal cases settle within two weeks on bowel rest and fluids, yet a segment still bleeding or painful beyond a fortnight hints at a forming **stricture**, while peritonism, pneumatosis or portal venous gas announces transmural necrosis needing resection.",
+      "say": "Most ischaemic colitis heals with support; peritonism or sepsis means gangrene and a surgeon.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bloody diarrhoea, watershed pain"
+          },
+          {
+            "id": "b",
+            "label": "CT thumbprinting, lactate review"
+          },
+          {
+            "id": "c",
+            "label": "Supportive care, antibiotics selected"
+          },
+          {
+            "id": "d",
+            "label": "Surgery if gangrene or perforation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

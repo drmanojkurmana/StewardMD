@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-hepatitis-viruses",
+  "subject": "microbiology",
+  "title": "Hepatitis E in Pregnancy, HBV Vaccine and Chronic Carriers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hepatitis E in pregnancy can progress to **fulminant hepatic failure**, coagulopathy, encephalopathy and death, especially in the third trimester during genotype 1 outbreaks. The pregnant patient with acute hepatitis in an HEV endemic or outbreak setting is therefore a high-acuity case, not routine viral hepatitis. Fetal loss and preterm delivery also increase. Early referral to a liver-capable centre matters.",
+      "say": "Pregnancy turns HEV from self-limited hepatitis into a fulminant-failure risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Danger features",
+          "points": [
+            "Rising bilirubin with INR prolongation",
+            "Encephalopathy or hypoglycaemia",
+            "Ascites and renal dysfunction",
+            "Obstetric bleeding risk"
+          ]
+        },
+        "right": {
+          "title": "Response",
+          "points": [
+            "Urgent hepatology and critical care referral",
+            "Serial INR, glucose and mental status",
+            "Avoid hepatotoxic drugs",
+            "Plan delivery with liver and obstetric teams"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Faecal-oral transmission** drives HAV and epidemic HEV. Infected people shed virus in stool, with HAV shedding greatest before symptoms and HEV outbreaks often linked to monsoon flooding and unsafe water. Hand hygiene, safe water, sanitation and food hygiene prevent spread; HAV vaccine and post-exposure prophylaxis protect contacts, while HEV vaccines are licensed only in limited jurisdictions.",
+      "say": "Clean water stops A and E before a prescription is ever needed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HAV contacts",
+          "points": [
+            "Vaccine promptly after exposure",
+            "Immunoglobulin for selected high-risk contacts",
+            "Food handler exclusion by local rules",
+            "Household hygiene emphasis"
+          ]
+        },
+        "right": {
+          "title": "HEV outbreaks",
+          "points": [
+            "Chlorinate or boil drinking water",
+            "Repair sewage contamination",
+            "Pregnant patients seek care early",
+            "Avoid raw undercooked pork where zoonotic risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **hepatitis B vaccine** contains recombinant HBsAg and induces protective anti-HBs. It is given at birth in many schedules, with hepatitis B immunoglobulin added for infants of HBsAg-positive mothers. A post-vaccination anti-HBs concentration of at least ten milli international units per millilitre is the conventional protective correlate. Nonresponders need repeat series and HBsAg exclusion.",
+      "say": "HBV vaccine teaches anti-HBs protection and blocks both HBV and delta disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infant protection",
+          "points": [
+            "Birth dose as early as possible",
+            "HBIG for infants of HBsAg positive mothers",
+            "Complete the primary series",
+            "Post vaccination serologic testing in exposed infants"
+          ]
+        },
+        "right": {
+          "title": "Adult response",
+          "points": [
+            "Healthcare workers document anti HBs",
+            "Diabetes and kidney failure may respond poorly",
+            "Booster policy depends on immune status and risk",
+            "No live virus is present in vaccine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A **chronic HBV carrier** has HBsAg persistence for more than six months. Carrier is not one clinical state: immune tolerant, immune active, inactive and reactivation phases are defined by HBeAg, HBV DNA, ALT and fibrosis. Some need antivirals, others monitoring. Infectivity varies mainly with HBV DNA, so calling every carrier equally infectious or equally well is a clinical error.",
+      "say": "A chronic carrier needs phase staging, not just a label and reassurance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lower replication",
+          "points": [
+            "HBeAg negative",
+            "Low or undetectable HBV DNA",
+            "Normal ALT over time",
+            "Still requires hepatocellular carcinoma risk assessment"
+          ]
+        },
+        "right": {
+          "title": "Active disease",
+          "points": [
+            "High or fluctuating HBV DNA",
+            "Raised ALT",
+            "Significant fibrosis or cirrhosis",
+            "Antiviral therapy and HCC surveillance considered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Perinatal HBV prevention combines maternal screening, infant **birth-dose vaccine and HBIG**, completion of the series and post-vaccination testing. Tenofovir in late pregnancy is used when maternal viral load is very high under specialist guidance. Breastfeeding is not withheld after immunoprophylaxis. Missed birth prophylaxis cannot be repaired by later reassurance, so maternity and newborn records must close the loop.",
+      "say": "The first day of life is the decisive HBV prevention window for exposed newborns.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Test mother for HBsAg"
+          },
+          {
+            "id": "birth",
+            "label": "Vaccine plus HBIG for exposed infant"
+          },
+          {
+            "id": "series",
+            "label": "Complete vaccine series"
+          },
+          {
+            "id": "check",
+            "label": "Post vaccination HBsAg and anti HBs"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "birth"
+          ],
+          [
+            "birth",
+            "series"
+          ],
+          [
+            "series",
+            "check"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "HBV can **reactivate** when immune control is removed by chemotherapy, anti-CD20 therapy, transplantation or withdrawal of antivirals. HBsAg-positive patients need prophylactic antivirals in high-risk regimens; HBsAg-negative anti-HBc-positive patients can reverse seroconvert. Screening before immunosuppression prevents fulminant flares that may appear months after treatment begins. This is why the anti-HBc marker matters beyond diagnosis.",
+      "say": "Screen for HBV before immunosuppression because reactivation can be fulminant and preventable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Before therapy",
+          "points": [
+            "HBsAg for everyone at risk",
+            "Anti HBc for occult exposure",
+            "Anti HBs for immunity context",
+            "HBV DNA if any marker suggests risk"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "Entecavir or tenofovir prophylaxis for high risk",
+            "Monitor DNA and ALT in moderate risk",
+            "Continue after immunosuppression for a defined period",
+            "Vaccinate nonimmune patients when feasible"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "id": "fmt-identification-dental-eruption",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Dental Eruption Timelines and the Gustafson Method",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Dental anatomy and the temporary deciduous dentition",
+   "tx": "In forensic odontological identification, the **deciduous dentition eruption timeline** provides chronological age estimation from six months of age through early childhood. The primary dentition comprises twenty temporary milk teeth: four central incisors, four lateral incisors, four canines, and eight deciduous molars. Eruption commences with the lower central incisors at six to eight months and concludes with the second deciduous molars at two to two-and-a-half years.",
+   "say": "Temporary milk teeth erupt between six months and two-and-a-half years, starting with lower central incisors and ending with second deciduous molars.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Deciduous tooth",
+     "Average eruption age",
+     "Clinical eruption sequence"
+    ],
+    "rows": [
+     [
+      "Central incisors (lower first, then upper)",
+      "6 to 8 months",
+      "First temporary teeth to pierce oral gingiva"
+     ],
+     [
+      "Lateral incisors (upper first, then lower)",
+      "7 to 9 months",
+      "Expands anterior dental biting surface"
+     ],
+     [
+      "First deciduous molars",
+      "12 to 14 months",
+      "Provides primary chewing and masticatory stability"
+     ],
+     [
+      "Canines (cuspids)",
+      "16 to 20 months",
+      "Erupts between incisors and first molars"
+     ],
+     [
+      "Second deciduous molars",
+      "20 to 30 months",
+      "Completes primary temporary set of twenty teeth"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mixed dentition and permanent teeth eruption sequence",
+   "tx": "Between six and twelve years of age, the **mixed dentition transition phase** witnesses the sequential shedding of deciduous roots and the emergence of permanent successors. The first permanent molar erupts at six years behind the temporary molars, earning the designation of the six-year molar. Central incisors appear at seven, lateral incisors at eight, first premolars at nine, second premolars at ten, and canines at eleven to twelve years.",
+   "say": "The permanent teeth appear from age six to twelve, beginning with the first permanent molar at six years and concluding with the canine at twelve years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Age 6: First permanent molar (six-year molar)"
+     },
+     {
+      "id": "b",
+      "label": "Age 7 to 8: Permanent central and lateral incisors"
+     },
+     {
+      "id": "c",
+      "label": "Age 9 to 10: First and second permanent premolars"
+     },
+     {
+      "id": "d",
+      "label": "Age 11 to 12: Permanent canines and second permanent molars"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The second permanent molar and twelve-year benchmark",
+   "tx": "In legal medicine, establishing whether a juvenile has attained twelve years depends on the **second permanent molar eruption**. This tooth pierces the alveolar ridge behind the first molar between twelve and fourteen years of age. Under Section 21 BNS, this dental milestone helps determine whether a child possesses sufficient mental maturity to judge the nature and consequences of conduct when facing criminal culpability.",
+   "say": "Eruption of the second permanent molar occurs at twelve years, providing a vital legal milestone for assessing juvenile mental maturity in criminal cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Six-year molar (1st permanent)",
+     "points": [
+      "Erupts behind temporary molars",
+      "No predecessor milk tooth shed",
+      "Key cornerstone of permanent dental arch",
+      "Marks entry into primary school age"
+     ]
+    },
+    "right": {
+     "title": "Twelve-year molar (2nd permanent)",
+     "points": [
+      "Erupts distal to first permanent molar",
+      "Appears at twelve to fourteen years",
+      "Vital statutory maturity boundary",
+      "Aids juvenile justice age certification"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The third molar or wisdom tooth eruption",
+   "tx": "Representing the final dental unit to erupt, the **third permanent molar timeline** spans seventeen to twenty-five years of age, widely termed the wisdom tooth. While its presence confirms that an individual is an adolescent or adult, third molars frequently demonstrate impaction, malposition, or congenital agenesis, requiring forensic dentists to corroborate findings through orthopantomogram radiographs rather than relying exclusively on oral clinical inspection.",
+   "say": "Wisdom teeth erupt between seventeen and twenty-five years, confirming adult status, though impaction or congenital absence requires dental X-ray verification.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dental examination reveals erupted third molar crown"
+     },
+     {
+      "id": "b",
+      "label": "Panoramic orthopantomogram (OPG) taken to evaluate root apex"
+     },
+     {
+      "id": "c",
+      "label": "Demirjian dental root closure stage calculated"
+     },
+     {
+      "id": "d",
+      "label": "Forensic certification of individual passing eighteen-year threshold"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Adult dental age estimation and the Gustafson method",
+   "tx": "Once all thirty-two permanent teeth have erupted and epiphyseal bone plates have united, the **Gustafson adult age estimation method** provides the standard forensic technique for evaluating adult human remains. Developed by G\u00f6sta Gustafson, the method evaluates progressive physiological and degenerative changes occurring across tooth tissues over decades, sectioning a single-rooted tooth longitudinally to examine six morphological parameters under light microscopy.",
+   "say": "The Gustafson method estimates adult age past twenty-five by evaluating six microstructural tooth wear and aging criteria on a ground dental section.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Extraction of intact single-rooted tooth (incisor or premolar)"
+     },
+     {
+      "id": "b",
+      "label": "Longitudinal ground section prepared to 1 mm thickness"
+     },
+     {
+      "id": "c",
+      "label": "Microscopic scoring of six regressive dental parameters"
+     },
+     {
+      "id": "d",
+      "label": "Linear regression calculation predicting age with error margin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The six microscopic Gustafson aging criteria",
+   "tx": "The pathologist grades each parameter from zero to three across the **six Gustafson regressive criteria**, reflecting cumulative dental senescence. The criteria comprise Attrition (masticatory enamel and dentin wear), Periodontosis (gingival attachment migration toward root), Secondary dentin (pulp cavity narrowing), Cementum apposition (apical root thickening), Root resorption (loss of cementum and dentin), and Root transparency (mineralization of apical dentinal tubules).",
+   "say": "Gustafson scores six dental changes: attrition, periodontitis recession, secondary dentin, cementum buildup, root resorption, and root dentin translucency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gustafson criterion",
+     "Underlying biological mechanism",
+     "Grading range"
+    ],
+    "rows": [
+     [
+      "Attrition (A)",
+      "Physical wear of enamel and dentin during mastication",
+      "0 (no wear) to 3 (pulp chamber exposed)"
+     ],
+     [
+      "Periodontosis (P)",
+      "Age-dependent apical migration of periodontal membrane",
+      "0 (normal gingiva) to 3 (lower third of root exposed)"
+     ],
+     [
+      "Secondary dentin (S)",
+      "Continuous odontoblastic dentin deposition reducing pulp size",
+      "0 (no dentin) to 3 (pulp cavity completely obliterated)"
+     ],
+     [
+      "Cementum apposition (C)",
+      "Progressive cementoblast deposition around root apex",
+      "0 (normal layer) to 3 (great apical accumulation)"
+     ],
+     [
+      "Root resorption (R)",
+      "Osteoclastic resorption of apical root surface",
+      "0 (no resorption) to 3 (extensive cementum and dentin loss)"
+     ],
+     [
+      "Root transparency (T)",
+      "Sclerotic obliteration of dentinal tubules by minerals",
+      "0 (no translucency) to 3 (transparency past root half)"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Root transparency as the single most reliable parameter",
+   "tx": "Among all six evaluated factors, forensic studies prove that **dentin root transparency reliability** represents the most dependable individual criterion in Gustafson's schema. As human teeth age, intratubular dentin deposits mineral hydroxyapatite crystals within the lumens of dentinal tubules starting at the apical root tip. Because refractive indices of crystals and dentin matrix equalize, the apical root becomes glassy, transparent, and completely immune to periodontal disease distortion.",
+   "say": "Root dentin transparency is the most accurate aging factor because crystal mineralization of tubules begins at the root tip and resists periodontal infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Progressive deposition of peritubular hydroxyapatite crystals"
+     },
+     {
+      "id": "b",
+      "label": "Equalization of refractive index between tubule and matrix"
+     },
+     {
+      "id": "c",
+      "label": "Formation of glass-like translucent apical dentin zone"
+     },
+     {
+      "id": "d",
+      "label": "Measurement of transparency height under transmitted light"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mathematical calculation and standard error of the Gustafson formula",
+   "tx": "To determine chronological age, the scores are summed and entered into the **Gustafson linear regression equation**, expressed as Age equals 11.43 plus 4.56 multiplied by total score. While this formula provides accurate age approximations across populations, individual biological variations in dietary coarseness, bruxism, and oral hygiene introduce a standard error of plus or minus four to five years in estimated forensic age.",
+   "say": "The Gustafson formula calculates age as 11.43 plus 4.56 times total score, carrying an expected standard error of four to five years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strengths of Gustafson method",
+     "points": [
+      "Applies to adult remains when bone fusion finishes",
+      "Teeth survive fire, acid, decomposition, and burial",
+      "Objective quantitative microscopic scoring",
+      "Independent of antemortem dental charts"
+     ]
+    },
+    "right": {
+     "title": "Limitations and error sources",
+     "points": [
+      "Requires destructive ground sectioning of tooth",
+      "Coarse diets cause excessive chewing attrition",
+      "Periodontal infection alters gingival scores",
+      "Carries standard error of +/- 4 to 5 years"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Modern modifications: The Lamendin method and dental cementum annuli",
+   "tx": "Recognizing that ground sectioning destroys valuable tooth specimens, contemporary forensic scientists utilize the **Lamendin non-destructive dental method**, measuring transparency and periodontosis height directly on intact single-rooted teeth without thin sectioning. In addition, counting incremental dental cementum annuli under polarized light microscopy provides annual growth rings analogous to tree trunks, achieving age estimations with an accuracy of plus or minus two to three years.",
+   "say": "The Lamendin technique evaluates whole intact teeth without sectioning, while cementum annuli counting provides annual growth rings for precise age dating.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intact tooth extracted and gently cleaned without sectioning"
+     },
+     {
+      "id": "b",
+      "label": "Measurement of total root height and transparency length"
+     },
+     {
+      "id": "c",
+      "label": "Measurement of periodontosis gingival line height"
+     },
+     {
+      "id": "d",
+      "label": "Application of Lamendin regression formula with 3-year error"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

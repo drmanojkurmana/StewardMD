@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-hepatobiliary-arterial-enhancement-with",
+ "subject": "radiology",
+ "module": "rad-hepatobiliary",
+ "title": "Arterial Enhancement With Washout, Haemangioma and Focal Nodular Hyperplasia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Washout marks hepatocellular carcinoma",
+   "tx": "**Arterial phase hyperenhancement** with later washout is the CT and MRI signature of hepatocellular carcinoma in a cirrhotic liver. The tumour draws new hepatic artery branches so it lights brighter than liver in the arterial phase, then its poor portal supply leaves it darker than liver in portal venous and delayed phases. That in and out pattern lets examiners diagnose cancer without biopsy in cirrhosis.",
+   "say": "Arterial phase hyperenhancement with later washout is the signature of hepatocellular carcinoma in a cirrhotic liver. The tumour lights brighter in the arterial phase from new artery branches, then turns darker as portal supply lags. That in and out pattern allows diagnosis without biopsy in cirrhosis.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arterial phase: tumour bright"}, {"id": "b", "label": "Portal phase: tumour fades"}, {"id": "c", "label": "Delayed: washout dark"}, {"id": "d", "label": "Capsule may enhance late"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Haemangioma fills from the edge",
+   "tx": "**Peripheral nodular enhancement** that creeps inward is the haemangioma pattern: discontinuous bright nodules at the lesion edge in the arterial phase match blood pool density at every phase, then fill centripetally until the lesion is uniform. Small haemangiomas can flash fill completely and mimic cancer, but they stay bright on delayed images instead of washing out, and they shine very bright on T2 MRI like a light bulb.",
+   "say": "Peripheral nodular enhancement creeping inward is the haemangioma pattern: bright edge nodules match blood pool at every phase, then fill toward the centre. Small lesions can flash fill and mimic cancer, but they stay bright on delayed images instead of washing out, and shine very bright on T2 like a light bulb.",
+   "vis": {"kind": "compare", "left": {"title": "Haemangioma", "points": ["Peripheral nodules first", "Matches blood pool density", "Centripetal fill in", "No washout, T2 light bulb"]}, "right": {"title": "Hepatocellular carcinoma", "points": ["Whole lesion arterial bright", "Washout in portal phase", "Enhancing capsule late", "Cirrhotic liver background"]}}
+  },
+  {
+   "title": "Focal nodular hyperplasia keeps its scar",
+   "tx": "**Central scar** of focal nodular hyperplasia is a fibrous hub with radiating septa that enhances late, because it is fibrous tissue rather than necrosis. The lesion itself enhances brightly and homogeneously in the arterial phase from a central feeding artery, then fades to near liver density. Unlike adenoma it contains functioning hepatocytes and bile ductules, so it takes up hepatobiliary contrast and stays bright in the hepatobiliary phase.",
+   "say": "Central scar of focal nodular hyperplasia is a fibrous hub that enhances late because it is fibrous tissue, not necrosis. The lesion enhances homogeneously in the arterial phase, then fades to near liver density. It contains functioning hepatocytes, so it takes up hepatobiliary contrast and stays bright later.",
+   "vis": {"kind": "table", "cols": ["Feature", "Focal nodular hyperplasia", "Hepatic adenoma"], "rows": [["Central scar", "Present, enhances late", "Absent"], ["Hepatobiliary phase", "Stays bright", "Turns dark"], ["Bleeding risk", "Very low", "Real, especially large"], ["Hormone link", "Weak", "Strong, contraceptive pills"]]}
+  },
+  {
+   "title": "LI RADS sorts cirrhotic nodules",
+   "tx": "**LI RADS categories** grade liver observations in cirrhosis from definitely benign to definitely hepatocellular carcinoma, using arterial enhancement, washout, capsule, size and threshold growth. A lesion 20 mm or larger with arterial enhancement plus washout reaches the definite cancer category and is treated without biopsy. Subcentimetre observations stay in surveillance because most are regenerative or dysplastic nodules that declare themselves slowly.",
+   "say": "LI RADS categories grade liver observations in cirrhosis from benign to definite carcinoma, using arterial enhancement, washout, capsule, size and growth. A lesion twenty millimetres or larger with arterial enhancement plus washout is treated without biopsy. Subcentimetre observations stay in surveillance because most declare themselves slowly.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Nodule in cirrhotic liver"}, {"id": "b", "label": "Score enhancement and washout"}, {"id": "c", "label": "Add size and growth"}, {"id": "d", "label": "Category sets treatment"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Metastases wash differently",
+   "tx": "**Hypovascular metastases** from colon, pancreas and stomach cancers sit darker than liver in the portal venous phase when normal liver enhances most, the reverse timing of carcinoma washout. Hypervascular metastases from neuroendocrine tumours, renal cancer and melanoma instead flash in the arterial phase and can hide later. Knowing the primary tells the radiologist which phase to interrogate, and rim enhancement with a necrotic centre favours metastasis over primary liver cancer.",
+   "say": "Hypovascular metastases from colon, pancreas and stomach sit darker than liver in the portal venous phase, the reverse timing of carcinoma washout. Hypervascular metastases from neuroendocrine tumours and renal cancer flash in the arterial phase instead. Knowing the primary tells the radiologist which phase to interrogate.",
+   "vis": {"kind": "compare", "left": {"title": "Hypovascular deposits", "points": ["Dark in portal phase", "Colon and pancreas primaries", "Rim enhancement", "Multiple, varied sizes"]}, "right": {"title": "Hypervascular deposits", "points": ["Bright in arterial phase", "Neuroendocrine and renal primaries", "May hide later", "Check arterial phase carefully"]}}
+  },
+  {
+   "title": "Hydatid water lily in the liver",
+   "tx": "**Water lily sign** appears when the inner membrane of a hydatid cyst detaches and floats on the cyst fluid, wrinkling like a lily pad on CT and ultrasound. Intact hepatic hydatid cysts instead show daughter cysts inside a mother cyst, a wheel spoke pattern no tumour copies. Serology supports the diagnosis, and biopsy is avoided because spilling cyst contents risks anaphylaxis and peritoneal seeding of new cysts.",
+   "say": "Water lily sign appears when the inner membrane of a hydatid cyst detaches and floats on the fluid, wrinkling like a lily pad. Intact cysts show daughter cysts inside a mother cyst. Biopsy is avoided because spilling cyst contents risks anaphylaxis and peritoneal seeding of new cysts.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Hydatid cyst grows"}, {"id": "b", "label": "Inner membrane detaches"}, {"id": "c", "label": "Membrane floats: water lily"}, {"id": "d", "label": "No biopsy: spill risk"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "MRCP maps the bile ducts",
+   "tx": "**Magnetic resonance cholangiopancreatography** uses heavily T2 weighted sequences where static bile and pancreatic juice shine bright while solid tissue stays dark, mapping ducts without contrast injection or radiation. It finds the level and cause of obstruction, choledocholithiasis and duct variants before any intervention. Endoscopic retrograde studies are now reserved for therapy, stenting, stone extraction and sphincterotomy, because MRCP carries no pancreatitis risk.",
+   "say": "Magnetic resonance cholangiopancreatography uses heavily T2 weighted sequences where static bile shines bright while solid tissue stays dark, mapping ducts without injection or radiation. It finds the level and cause of obstruction before intervention. Endoscopic studies are reserved for therapy because they carry pancreatitis risk.",
+   "vis": {"kind": "table", "cols": ["Question", "MRCP", "Endoscopic study"], "rows": [["Duct anatomy map", "Excellent, non invasive", "Invasive, pancreatitis risk"], ["Stone detection", "Very good", "Good plus extraction"], ["Therapy", "None", "Stent and sphincterotomy"], ["Failed bile access", "Still maps above block", "May fail at papilla"]]}
+  },
+  {
+   "title": "HIDA and the cystic duct",
+   "tx": "**HIDA scan** follows a technetium labelled iminodiacetic acid tracer through hepatocytes into bile, proving cystic duct patency when the gallbladder fills. Non filling of the gallbladder by four hours, or after morphine augmentation, supports acute cholecystitis in the right clinical setting. The rim sign, a band of increased liver activity beside the gallbladder fossa, warns of severe inflammation or gangrene needing urgent surgery.",
+   "say": "HIDA scan follows a technetium tracer through hepatocytes into bile, proving cystic duct patency when the gallbladder fills. Non filling by four hours supports acute cholecystitis in the right setting. The rim sign beside the gallbladder fossa warns of severe inflammation or gangrene needing urgent surgery.",
+   "vis": {"kind": "compare", "left": {"title": "Normal HIDA", "points": ["Liver takes tracer", "Gallbladder fills within an hour", "Bowel activity follows", "Cystic duct patent"]}, "right": {"title": "Acute cholecystitis", "points": ["Gallbladder never fills", "Cystic duct blocked", "Rim sign if severe", "Matches clinical Murphy picture"]}}
+  }
+ ]
+}

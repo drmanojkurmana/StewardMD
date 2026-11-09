@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-case-control-case-control-study",
+ "subject": "community-medicine",
+ "module": "cm-case-control",
+ "title": "Case-Control Studies: Odds Ratio, Matching and Bias",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Effect to cause: the retrospective direction",
+   "tx": "A **case-control study** starts with disease already present and looks backward for exposure, proceeding from effect to cause. Cases with the disease and controls without it are asked, or their records searched, for past exposure. It is the design of first resort for rare diseases and outbreaks needing quick answers.",
+   "say": "Start where disease already exists and walk backward. Cases and non-diseased controls report or document past exposure. Rare diseases and urgent outbreaks reach for this design first because it starts at the outcome end.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cases with disease selected"},
+     {"id": "b", "label": "Controls without disease selected"},
+     {"id": "c", "label": "Past exposure measured in both"},
+     {"id": "d", "label": "Exposure rates compared"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Selecting cases and controls",
+   "tx": "**Selection of controls** decides validity: controls must represent the population that produced the cases, sampled independently of exposure. Hospital controls risk distortion when their own diseases share the exposure, one face of selection bias. Some investigators draw cases from one source and controls from several, and repeat studies in different areas for consistency.",
+   "say": "Controls carry the study. They must represent the population that produced the cases, chosen regardless of exposure. Hospital controls distort when their diseases share the exposure. Several control sources and repeated studies in different areas strengthen belief.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Control source", "Caution"],
+    "rows": [
+     ["Hospital patients", "Their diseases may share the exposure"],
+     ["Neighbours or relatives", "May share lifestyle too closely"],
+     ["General population", "Costly but most representative"]
+    ]
+   }
+  },
+  {
+   "title": "Matching neutralises confounding",
+   "tx": "**Matching** selects controls similar to cases on variables such as age, sex, occupation or social status that influence outcome and would otherwise confound. Smoking confounds alcohol and oesophageal cancer because it travels with drinking and independently causes the cancer. Never match on the exposure under study itself, or its effect is matched away.",
+   "say": "Comparability is manufactured here. Controls mirror cases on age, sex or occupation so those forces cannot fake an association. Smoking confounds alcohol studies because it travels with drinking and causes the cancer alone. Never match the exposure itself away.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Match on confounders",
+     "points": ["Age and sex distribution", "Occupation and social status", "Known outcome influencers"]
+    },
+    "right": {
+     "title": "Never match on",
+     "points": ["The exposure under study", "Steps on its causal pathway", "Consequences of the exposure"]
+    }
+   }
+  },
+  {
+   "title": "Measuring exposure identically in both groups",
+   "tx": "**Measurement of exposure** must use precisely the same definitions, interviews, questionnaires or records for cases and controls. Hospital and employment records dodge memory error where they exist. When associations are tested, systematic error matters more than the p-value, so identical method is a design requirement, not a courtesy.",
+   "say": "Same ruler for both groups. Identical definitions, interviews and record sources measure exposure in cases and controls alike. Records bypass memory where they exist. Systematic error outweighs the p-value when associations are judged, so identical method is mandatory.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Source", "Strength", "Weakness"],
+    "rows": [
+     ["Interview or questionnaire", "Covers unrecorded habits", "Memory differs by disease status"],
+     ["Hospital records", "Documented before outcome known", "Only for admitted patients"],
+     ["Employment records", "Objective exposure history", "Misses home exposures"]
+    ]
+   }
+  },
+  {
+   "title": "Exposure rates: the first analysis",
+   "tx": "**Exposure rates** compare how often cases and controls report the factor: in the classic smoking table, 33 of 35 lung cancer cases smoked (94.2 percent) against 55 of 82 controls (67.0 percent), with p below 0.001. That gap signals association, but says nothing directly about how many smokers develop cancer. Risk needs the next step.",
+   "say": "First compare exposure frequency. Ninety four percent of lung cancer cases smoked against sixty seven percent of controls in the classic table, a highly significant gap. That gap signals association only. How many smokers fall ill needs a different calculation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Smokers", "Exposure rate"],
+    "rows": [
+     ["Lung cancer cases, 35", "33", "94.2 percent"],
+     ["Controls, 82", "55", "67.0 percent"],
+     ["Difference", "p below 0.001", "Association signalled"]
+    ]
+   }
+  },
+  {
+   "title": "Odds ratio from the cross product",
+   "tx": "The **odds ratio** multiplies the table's diagonal entries against the off-diagonal, ad over bc, estimating relative risk when disease is rare. Light smokers in the classic data carried 8.1 times the lung cancer odds of non-smokers. Its three assumptions: rare disease, representative cases, and representative controls.",
+   "say": "Cross multiply the four cells. Diagonal product over off-diagonal product estimates relative risk when disease stays rare. Light smokers showed eight times the odds in the classic data. Rare disease and representative groups are the price of that shortcut.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Exposure", "Disease yes", "Disease no"],
+    "rows": [
+     ["Exposed", "a", "b"],
+     ["Not exposed", "c", "d"],
+     ["Odds ratio", "ad divided by bc", "Approximates relative risk if rare"]
+    ]
+   }
+  },
+  {
+   "title": "Recall bias: memory differs by outcome",
+   "tx": "**Recall bias** arises because cases search their memories harder than healthy controls: a patient after myocardial infarction remembers past habits and events more completely than a person who stayed well. Interview length per group exposes the imbalance usefully. Records made before disease began, and blinding of interviewers, reduce the distortion.",
+   "say": "Memory itself biases answers. Cases ransack their pasts; healthy controls shrug. Heart attack survivors recall habits far more completely than the well. Longer case interviews betray the imbalance. Old records and blinded interviewers cut the distortion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cases remembering",
+     "points": ["Motivated search of the past", "Minor exposures recalled fully", "Longer interviews recorded"]
+    },
+    "right": {
+     "title": "Controls remembering",
+     "points": ["No illness to explain", "Minor exposures forgotten", "Shorter interviews recorded"]
+    }
+   }
+  },
+  {
+   "title": "Berkesonian and selection bias",
+   "tx": "**Berkesonian bias** distorts hospital based studies because admission chances differ by exposure and disease combinations, warping who becomes a case or control. Selection bias more broadly means cases or controls fail to represent their source populations. Prevention during design beats statistical rescue later, since unrepresentative sampling cannot be repaired by analysis.",
+   "say": "Hospitals warp sampling in a named way. Admission chances differ across exposure and disease combinations, so ward cases and controls misrepresent their populations. Design prevents this; analysis cannot repair unrepresentative sampling afterwards.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Bias", "Mechanism"],
+    "rows": [
+     ["Recall bias", "Cases remember exposure better than controls"],
+     ["Selection bias", "Groups fail to represent source populations"],
+     ["Berkesonian bias", "Hospital admission chances distort sampling"],
+     ["Confounding bias", "Third factor linked to exposure and disease"]
+    ]
+   }
+  },
+  {
+   "title": "Thalidomide: the design at its best",
+   "tx": "The **thalidomide tragedy** shows the design's power: among 46 mothers delivered of deformed babies, 41 had taken thalidomide in early pregnancy, against none of 300 mothers of normal babies. A rare, dramatic outcome with a memorable exposure is exactly where retrospective enquiry answers fastest, years before any cohort could accumulate cases.",
+   "say": "One tragedy proves the design. Forty one of forty six mothers of deformed babies had taken the drug in early pregnancy; none of three hundred mothers of normal babies had. Rare dramatic outcomes with memorable exposures answer fastest looking backward.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Deformed babies noticed, 1961"},
+     {"id": "b", "label": "Mothers asked about pregnancy drugs"},
+     {"id": "c", "label": "41 of 46 exposed, 0 of 300 controls"},
+     {"id": "d", "label": "Teratogenicity confirmed in laboratory"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

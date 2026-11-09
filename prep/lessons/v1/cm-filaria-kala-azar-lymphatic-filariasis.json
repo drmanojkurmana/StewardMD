@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-filaria-kala-azar-lymphatic-filariasis",
+ "subject": "community-medicine",
+ "module": "cm-filaria-kala-azar",
+ "title": "Lymphatic Filariasis: Vector, Microfilaraemia and Mass Chemotherapy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Parasite biology and Indian distribution",
+   "tx": "Across endemic districts of India, **lymphatic filariasis** represents a major cause of preventable permanent physical disability and social stigma. The nematode Wuchereria bancrofti accounts for over ninety-nine percent of all cases nationwide, causing extensive genital and lower limb involvement, whereas Brugia malayi produces less than one percent of cases, restricted to isolated rural pockets in coastal Kerala, Odisha and Assam, sparing the genitalia.",
+   "say": "Wuchereria bancrofti causes ninety-nine percent of Indian filariasis, affecting the legs and genitals. Brugia malayi causes the remaining one percent in isolated rural pockets, sparing the genitalia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wuchereria bancrofti (99%)",
+     "points": ["Pan-Indian endemic distribution", "Both leg lymphoedema and hydrocele", "Transmitted by Culex quinquefasciatus"]
+    },
+    "right": {
+     "title": "Brugia malayi (<1%)",
+     "points": ["Restricted to pockets in Kerala and Odisha", "Leg lymphoedema only; spares genitalia", "Transmitted by Mansonia mosquitoes"]
+    }
+   }
+  },
+  {
+   "title": "Vector bionomics: Culex quinquefasciatus",
+   "tx": "The domestic culicine mosquito **Culex quinquefasciatus** serves as the principal urban and rural vector of bancroftian filariasis across India. It breeds abundantly in grossly polluted, stagnant, organic-rich wastewater collections, including open roadside masonry drains, septic tanks, sewage overflows, soak pits and cesspools; the female vector feeds aggressively indoors during night hours, resting on hanging clothes and dark corners.",
+   "say": "Culex quinquefasciatus breeds prolifically in polluted drains, cesspools and open sewage. It bites indoors during late night hours, transmitting microfilariae across families.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vector bionomic trait", "Habit in Indian communities", "Public health significance"],
+    "rows": [
+     ["Breeding water quality", "Grossly polluted, stagnant organic sewage", "Multiplies in unpaved municipal drains"],
+     ["Biting periodicity", "Strictly nocturnal, peaking midnight to 2 AM", "Bed nets provide effective barrier"],
+     ["Flight range", "Typically within several hundred metres", "Transmission clusters around foul drains"],
+     ["Resting site", "Dark indoor walls, curtains and clothing", "Targeted by indoor residual insecticides"]
+    ]
+   }
+  },
+  {
+   "title": "Nocturnal periodicity and blood sampling",
+   "tx": "Diagnostic blood surveys exploit the phenomenon of **nocturnal periodicity**, wherein microfilariae of Wuchereria bancrofti retreat into deep pulmonary capillaries during daylight hours and surge into peripheral circulation between ten o'clock at night and two o'clock in the morning. Consequently, epidemiological surveillance teams conduct field blood collection exclusively during night surveys, preparing twenty-microlitre thick blood smears stained with Giemsa to detect motile sheathed microfilariae.",
+   "say": "Microfilariae hide in deep lung vessels by day and enter the bloodstream between ten at night and two in the morning. Blood surveys must be conducted at night to find them.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Nocturnal surge: 10 PM to 2 AM"},
+     {"id": "b", "label": "20 microlitre capillary blood draw"},
+     {"id": "c", "label": "Giemsa stain and microscopic microfilaria count"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Epidemiological indices: microfilaria and endemicity",
+   "tx": "Programme officers evaluate district transmission using the **microfilaria rate**, which measures the percentage of night blood smears containing microfilariae, with an operational benchmark of less than one percent indicating successful transmission interruption. The Endemicity Rate combines the microfilaria rate with the clinical disease rate, while transmission assessment surveys evaluate antigenemia among six to seven-year-old schoolchildren using immunochromatographic cards.",
+   "say": "The microfilaria rate is the percentage of people with microfilariae in night blood. Bringing this rate below one percent across communities indicates that transmission has been stopped.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Filariasis index", "Mathematical definition", "Elimination threshold benchmark"],
+    "rows": [
+     ["Microfilaria Rate (Mf rate)", "(Persons positive for Mf / Total examined) x 100", "Must be reduced below 1 percent"],
+     ["Mf Density", "Average Mf count per 20 mcl blood in positive cases", "Assesses community reservoir intensity"],
+     ["Endemicity Rate", "Percentage positive for Mf or overt clinical disease", "Guides initial district MDA selection"],
+     ["Transmission Assessment Survey", "Filariasis test strip positivity in school entrants", "Determines when to safely stop MDA rounds"]
+    ]
+   }
+  },
+  {
+   "title": "Clinical progression: acute adenolymphangitis to elephantiasis",
+   "tx": "Adult filarial worms reside within afferent lymphatic channels, causing chronic endothelial proliferation, valvular incompetence and lymphatic ectasia that culminate in **elephantiasis**. Repeated episodes of acute adenolymphangitis triggered by secondary bacterial streptococcal invasion accelerate irreversible subcutaneous fibrosis and brawny non-pitting oedema, transforming reversible lymphoedema into massive, verrucous, hyperkeratotic skin enlargement of the lower limbs and scrotum.",
+   "say": "Adult worms block lymphatic vessels. Secondary bacterial infections trigger repeated attacks of severe pain and swelling, slowly turning soft swelling into hard, permanent elephantiasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Adult worms in lymphatic vessels"},
+     {"id": "b", "label": "Recurrent bacterial adenolymphangitis"},
+     {"id": "c", "label": "Progressive lymphatic dilatation"},
+     {"id": "d", "label": "Fibrotic elephantiasis and hydrocele"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Mass drug administration strategy",
+   "tx": "To eliminate the human infectious reservoir, national authorities implement **mass drug administration**, delivering a single annual prophylactic dose of anthelmintics to every resident living in endemic districts, excluding pregnant women, children under two years of age and the severely ill. Sustained population treatment coverage exceeding sixty-five to eighty percent for five to six consecutive years drains circulating microfilariae below vector transmission thresholds.",
+   "say": "Mass drug administration gives annual preventive tablets to everyone in endemic districts. Treating over eighty percent of the community for five years extinguishes the parasite reservoir.",
+   "vis": {
+    "kind": "table",
+    "cols": ["MDA implementation rule", "Operational standard", "Rationale for guideline"],
+    "rows": [
+     ["Annual treatment cycle", "Single dose administered once every 12 months", "Matches slow reproductive biology of worms"],
+     ["Target population coverage", "Minimum 65 to 80 percent of total population", "Ensures vector mosquitoes encounter no microfilariae"],
+     ["Exclusion criteria", "Pregnancy, infants under 2, severe illness", "Prevents adverse fetal and infant reactions"],
+     ["Directly observed ingestion", "Tablets swallowed in front of health worker", "Avoids non-compliance and drug dumping"]
+    ]
+   }
+  },
+  {
+   "title": "Diethylcarbamazine citrate pharmacology and dosing",
+   "tx": "The synthetic piperazine compound **diethylcarbamazine citrate** forms the bedrock of filariasis chemotherapy, dosed at six milligrams per kilogram body weight in mass campaigns. It alters microfilarial surface membranes to expose hidden antigens to host immune destruction, clearing circulating parasites within forty-eight hours; systemic reactions such as fever, headache and dizziness arise from massive antigen release from dying microfilariae.",
+   "say": "Diethylcarbamazine exposes parasite membranes so the immune system can destroy them within two days. Mild fever and headache result from the rapid destruction of dying parasites.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Microfilaricidal effect",
+     "points": ["Clears 90% of microfilariae in 48 hours", "Prevents vector mosquitoes from getting infected", "Triggers transient host fever and headache"]
+    },
+    "right": {
+     "title": "Macrofilaricidal effect",
+     "points": ["Sterilises or slowly kills adult worms", "Suppresses new microfilaria output for months", "Requires repeated annual administration"]
+    }
+   }
+  },
+  {
+   "title": "Albendazole and ivermectin synergy",
+   "tx": "Co-administering albendazole at a fixed four-hundred-milligram dose with diethylcarbamazine produces powerful anthelmintic synergy, destroying intestinal geohelminths while crippling adult filarial worms. In non-co-endemic districts, adding **ivermectin co-administration** at two hundred micrograms per kilogram paralyses microfilarial pharyngeal musculature, achieving near-complete clearance of circulating microfilariae that lasts for up to two years.",
+   "say": "Adding albendazole and ivermectin creates a potent combination. It clears microfilariae for up to two years while simultaneously deworming children of intestinal roundworms.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Anthelmintic drug", "Prescribed dosage", "Primary mechanism of action"],
+    "rows": [
+     ["Diethylcarbamazine (DEC)", "6 mg/kg body weight", "Unmasks microfilarial antigens to host antibodies"],
+     ["Albendazole", "400 mg fixed single dose", "Inhibits worm tubulin polymerisation and deworms"],
+     ["Ivermectin", "200 mcg/kg body weight", "Opens glutamate-gated chloride channels in worms"]
+    ]
+   }
+  },
+  {
+   "title": "Morbidity management and disability prevention",
+   "tx": "The second essential pillar of the national program is **morbidity management**, providing comprehensive self-care education and clinical services to patients already suffering from chronic elephantiasis or hydrocele. Patients learn meticulous daily limb hygiene using soap and clean water, prompt topical application of antifungal cream to interdigital fungal cracks, and regular limb elevation, while hospitals offer free surgical eversion and excision for hydroceles.",
+   "say": "Morbidity management teaches patients to wash swollen limbs with soap and water, treat skin cracks with antifungal cream, and keep limbs elevated. Hospitals provide free hydrocele surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Daily soap and water limb washing"},
+     {"id": "b", "label": "Antifungal treatment for interdigital fissures"},
+     {"id": "c", "label": "Limb elevation and gentle exercise"},
+     {"id": "d", "label": "Free surgical repair for scrotal hydrocele"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

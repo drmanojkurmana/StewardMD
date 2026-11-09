@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-plant-poisons-aconite",
+ "subject": "forensic-medicine",
+ "module": "fmt-plant-poisons",
+ "title": "Aconite, Strychnine and Castor: Cardiac and Convulsant Plants",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Aconite root mistaken for horseradish",
+   "tx": "**Aconite**, monkshood, blue rocket, mitha zaher, grows in the Himalayas, and the roots of Aconitum napellus and Aconitum ferox are the potent parts, holding aconitine and a dozen related alkaloids. The dry root is conical, five to ten centimetres, dark brown outside and white inside turning pink in air, odourless, taste first sweet then acrid. It is mistaken for horseradish root, which stays whitish and tastes pungent without the pink change or the tingling that follows.",
+   "say": "A dark root turning pink in air and tingling the tongue is aconite, not the pale pungent horseradish it imitates.",
+   "vis": {"kind": "table", "cols": ["Trait", "Aconite root", "Horseradish root"], "rows": [["Shape and colour", "Conical, dark brown outside", "Cylindrical, yellowish white"], ["Cut surface", "White turning pink in air", "Stays whitish"], ["Taste", "Sweet, then acrid, tingling", "Pungent only"], ["Fatal dose", "One gram of root", "Food, not a poison"]]}
+  },
+  {
+   "title": "Aconite tingling and hippus",
+   "tx": "**Aconite poisoning** announces itself immediately: burning from mouth to stomach with tingling and numbness of mouth, tongue and pharynx, salivation giving way to dry mouth and thirst, then tingling all over the body, headache, giddiness, pallor, profuse sweating, subnormal temperature, weak limbs, paraesthesias, ataxia and slurred speech. The pupils alternately contract and dilate, the hippus sign, settling dilated later, with dim vision and diplopia. Two to five milligrams of aconitine kill in two to six hours.",
+   "say": "Burning tingling lips, sweating cold skin and pupils that pulse in and out are aconite before the heart declares itself.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Mouth burns, tongue tingles"}, {"id": "b", "label": "Tingling spreads over body"}, {"id": "c", "label": "Pupils show hippus, vision dims"}, {"id": "d", "label": "Weakness and ataxia develop"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Aconite kills by heart and breath together",
+   "tx": "The heart decides the ending in **aconite cardiac toxicity**: hypotension with arrhythmia and atrioventricular block, tachycardia first then bradycardia from block, while the mind usually stays clear with marked general weakness and chest oppression. Death comes from paralysis of the heart or respiratory centres or both. Treatment lavages with warm water and weak iodine or tannic acid to precipitate the alkaloid, gives multidose charcoal, a cathartic, and atropine half to one milligram, then supports rhythm and breathing.",
+   "say": "Block, falling pressure and a clear mind mark aconite's ending, treated by lavage, charcoal, atropine and rhythm support.",
+   "vis": {"kind": "compare", "left": {"title": "Aconite cardiac course", "points": ["Tachycardia then bradycardia", "AV block and arrhythmias", "Hypotension develops", "Mind remains clear"]}, "right": {"title": "Aconite treatment anchors", "points": ["Iodine or tannic lavage", "Multidose charcoal", "Atropine half to one mg", "Support rhythm and airway"]}}
+  },
+  {
+   "title": "Strychnine blocks the inhibitory transmitter",
+   "tx": "**Strychnine**, from the seeds of Strychnos nux vomica, competitively blocks glycine, the inhibitory transmitter, at ventral horn motor neurone receptor sites in cord and brainstem. Widespread inhibition fails and release excitation follows, stimulating the cerebral cortex while GABA mediated presynaptic inhibition is unaffected. The seeds hold one and a half percent each of strychnine and the weaker brucine, strychnine being ten to twenty times the more poisonous. Uncrushed seeds pass through the gut harmlessly.",
+   "say": "By blocking glycine, strychnine removes the cord's brakes, and whole seeds swallowed intact cannot poison at all.",
+   "vis": {"kind": "table", "cols": ["Strychnine fact", "Detail", "Exam point"], "rows": [["Source", "Nux vomica seeds, 1.5 percent", "Brucine also present, weaker"], ["Mechanism", "Blocks glycine inhibition", "Release excitation of cord"], ["Uncrushed seeds", "Pass entire in faeces", "Crushing releases poison"], ["Persistence", "Found in cadaver to four years", "Exhumation value"]]}
+  },
+  {
+   "title": "Strychnine convulsions with a clear mind",
+   "tx": "**Strychnine convulsions** strike all muscles at once, first clonic then tonic, five to fifteen minutes after the alkaloid is swallowed. The face is cyanosed and anxious, eyes staring, pupils dilated, mouth frothing often bloodstained, and risus sardonicus draws the mouth corners back. Antigravity muscles dominate, arching the body into opisthotonos supported on heels and head, arms flexed or rigid, hands clenched. Consciousness is never lost and suffering is severe with full awareness of impending death.",
+   "say": "Simultaneous tonic convulsions, a sardonic grin and a perfectly clear mind are strychnine, tetanus's great mimic.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bitter taste, uneasiness, fear"}, {"id": "b", "label": "Twitchings, then all muscle spasm"}, {"id": "c", "label": "Opisthotonos, risus sardonicus"}, {"id": "d", "label": "Conscious throughout, death by asphyxia"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Strychnine versus tetanus",
+   "tx": "The courtroom differential is **strychnine against tetanus**. Strychnine follows a dose by minutes, strikes all muscles simultaneously, relaxes completely between spasms, and kills or clears within hours. Tetanus follows a wound by days, begins with jaw stiffness and lockjaw, never relaxes fully between spasms, and runs for days to weeks. In strychnine the jaw is involved with the general spasm, not first and alone, and a chemical history of rodenticide or a bitter drink is sought.",
+   "say": "Minutes after a dose with full relaxation between spasms is strychnine; days after a wound with lockjaw first is tetanus.",
+   "vis": {"kind": "compare", "left": {"title": "Strychnine poisoning", "points": ["Onset minutes after dose", "All muscles at once", "Complete relaxation between spasms", "Course of hours"]}, "right": {"title": "Tetanus", "points": ["Onset days after wound", "Lockjaw begins the picture", "Rigidity persists between spasms", "Course of days to weeks"]}}
+  },
+  {
+   "title": "Castor seeds and ricin",
+   "tx": "**Ricinus communis**, the castor or arandi plant, bears three lobed softly spiny fruits with smooth flattened oval mottled seeds resembling croton seeds. The seeds hold **ricin**, a water soluble toxalbumen said to be six thousand times as powerful as cyanide, blocking protein synthesis, plus a powerful allergen. Unbroken or cooked seeds are non poisonous when swallowed. Five to ten seeds are the fatal dose, killing in two to five days.",
+   "say": "Mottled castor seeds carry ricin, harmless whole or cooked, lethal crushed at five to ten seeds over two to five days.",
+   "vis": {"kind": "table", "cols": ["Castor feature", "Detail", "Point"], "rows": [["Seed look", "Mottled, flattened oval", "Resembles croton seed"], ["Poison", "Ricin toxalbumen", "Blocks protein synthesis"], ["Safe forms", "Unbroken or cooked seeds", "Shell prevents release"], ["Fatal dose", "5 to 10 seeds", "Death in 2 to 5 days"]]}
+  },
+  {
+   "title": "Ricin poisoning course",
+   "tx": "**Ricin poisoning** burns mouth, throat and stomach like an alkali burn, with salivation, nausea, vomiting, bloody diarrhoea, severe abdominal pain, thirst, calf and abdominal cramps, haemolysis, drowsiness, delirium, convulsions, shallow breathing, uraemia, jaundice, dehydration, collapse and death, the full effect taking up to five days. Seed dust alone causes watering eyes, conjunctivitis, sneezing, nasal inflammation, headache, pharyngitis and asthmatic bronchitis in workers. Treatment is lavage, charcoal, demulcents, cathartics and support; seed fragments may be found in the gut at autopsy.",
+   "say": "Bloody gut, haemolysis and five days of decline follow crushed castor seeds, while their dust alone inflames eyes and airways.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Crushed seeds release ricin"}, {"id": "b", "label": "Burning gut, bloody diarrhoea"}, {"id": "c", "label": "Haemolysis, jaundice, uraemia"}, {"id": "d", "label": "Collapse over two to five days"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Three plant poisons, three mechanisms",
+   "tx": "The module's convulsant and cardiac plants separate cleanly by mechanism in **plant poison mechanisms compared**. Aconite opens sodium channels and poisons heart and nerve with tingling. Oleanders inhibit the sodium potassium pump like digitalis and block the heart. Strychnine removes glycine inhibition and convulses the cord with a clear mind. Abrin and ricin, the toxalbumins, stop protein synthesis itself and destroy gut, liver and kidney over days. Mechanism predicts antidote strategy: rhythm support, glycoside management, benzodiazepine type spasm control historically, and pure support respectively.",
+   "say": "Tingling heart, blocked heart, convulsing cord or dying cells: each plant's mechanism dictates its treatment family.",
+   "vis": {"kind": "compare", "left": {"title": "Cardiac plants", "points": ["Aconite: tingling, AV block", "Oleander: digitalis like block", "Cerbera: hyperkalaemic block", "ECG preserved as evidence"]}, "right": {"title": "Convulsant and cellular plants", "points": ["Strychnine: glycine blocked", "Abrus: protein synthesis stopped", "Castor: ricin cell death", "Support is the mainstay"]}}
+  }
+ ],
+ "quiz": []
+}

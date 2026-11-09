@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-general-toxicology-penicillamine",
+ "subject": "forensic-medicine",
+ "module": "fmt-general-toxicology",
+ "title": "Penicillamine, Newer Chelators, Toxidromes and Viscera in Poisoning",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Penicillamine, the oral chelator",
+   "tx": "**Penicillamine** is a hydrolysis product of penicillin carrying one stable sulphydryl group, and Reddy calls it the chelating agent of maximum efficiency for copper, besides lead and mercury. It is given orally at thirty milligrams per kilogram per day up to two grams daily in four divided doses for about seven days, or one to three grams by slow saline drip for two to four days. Oral dosing makes it the practical long course chelator.",
+   "say": "Penicillamine leads for copper at thirty milligrams per kilo daily by mouth, and also covers lead and mercury.",
+   "vis": {"kind": "table", "cols": ["Chelator", "Route", "Best metal"], "rows": [["Penicillamine", "Oral, four divided doses", "Copper, maximum efficiency"], ["BAL", "Deep intramuscular in oil", "Arsenic in severe poisoning"], ["EDTA", "Intravenous infusion", "Lead, treatment of choice"], ["Desferrioxamine", "Oral and intravenous", "Iron"]]}
+  },
+  {
+   "title": "DMSA and DMPS, the safer dithiols",
+   "tx": "**DMSA or succimer** and DMPS carry the same dithiol sulphydryl grouping as dimercaprol in more hydrophilic, less toxic molecules with a better therapeutic index. Succimer treats lead, mercury and arsenic at ten milligrams per kilogram orally every eight hours for five days then every twelve hours for fourteen days, does not redistribute lead to the brain, is kinder to kidneys and can be used in G6PD deficiency. DMPS is dosed five milligrams per kilogram intravenously then orally.",
+   "say": "Succimer keeps lead out of the brain, spares kidneys and G6PD patients, at ten milligrams per kilo on a nineteen day taper.",
+   "vis": {"kind": "compare", "left": {"title": "Succimer advantages", "points": ["No lead redistribution to brain", "Less nephrotoxic than EDTA", "Safe in G6PD deficiency", "Oral nineteen day course"]}, "right": {"title": "Older agents cautions", "points": ["BAL harms damaged liver", "BAL haemolyses in G6PD lack", "EDTA can redistribute metals", "All need renal monitoring"]}}
+  },
+  {
+   "title": "Desferrioxamine for iron",
+   "tx": "**Desferrioxamine** arrives already carrying trivalent iron as a chelate and exchanges it avidly for free iron in acute iron poisoning. Eight to twelve grams orally each day bind iron still in the stomach, while two grams intravenously in five percent laevulose bind absorbed iron, repeated twelve hourly if needed. It also promotes removal of radioactive heavy metals. The iron complex colours urine characteristically, which clinicians watch as a rough guide to continuing therapy.",
+   "say": "Desferrioxamine swaps its carried iron for the patient's free iron, orally for the stomach load and intravenously for absorbed iron.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Acute iron poisoning confirmed"}, {"id": "b", "label": "Oral dose binds gastric iron"}, {"id": "c", "label": "Intravenous dose binds absorbed iron"}, {"id": "d", "label": "Complex excreted in urine"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Toxidromes, syndromes that name the poison",
+   "tx": "A **toxidrome** is a recognisable syndrome of pupil size, pulse, temperature, skin state and mental state that names a poison class at the bedside before any laboratory result. The cholinergic toxidrome wets every secretion with pinpoint pupils; the anticholinergic toxidrome is dry, hot and mad with wide pupils; the opioid toxidrome pins the pupils with respiratory depression; the sympathomimetic toxidrome is sweaty, fast and agitated. Each toxidrome points at its own antidote family.",
+   "say": "Wet and pinpoint, dry and wide, slow with pinpoint, or fast and sweaty: the toxidrome names the class and its antidote.",
+   "vis": {"kind": "table", "cols": ["Toxidrome", "Pupils and skin", "Antidote direction"], "rows": [["Cholinergic", "Pinpoint, secretions everywhere", "Atropine family"], ["Anticholinergic", "Wide pupils, dry hot skin", "Supportive, physostigmine debate"], ["Opioid", "Pinpoint, breathing depressed", "Naloxone"], ["Sympathomimetic", "Wide pupils, sweaty, fast pulse", "Sedation and cooling"]]}
+  },
+  {
+   "title": "Enhanced elimination of absorbed poison",
+   "tx": "When supportive care fails, **elimination by excretion** is escalated for severe poisoning, progressive deterioration despite full support, high risk of serious morbidity, or failure of the normal excretory route. Options climb from multidose charcoal through urinary manipulation to haemodialysis and haemoperfusion, chosen by the poison's molecular size, protein binding and volume of distribution. The indications, not the availability of a machine, decide whether extracorporeal removal is attempted.",
+   "say": "Escalate elimination for severity, deterioration despite support or a blocked natural route, matched to the poison's properties.",
+   "vis": {"kind": "compare", "left": {"title": "Escalate when", "points": ["Poisoning is severe", "Deterioration despite full care", "High morbidity risk", "Normal excretion has failed"]}, "right": {"title": "Methods in order", "points": ["Multidose activated charcoal", "Urinary excretion manipulated", "Haemodialysis for small molecules", "Haemoperfusion for bound toxins"]}}
+  },
+  {
+   "title": "Preservation of viscera in poisoning deaths",
+   "tx": "At autopsy in suspected poisoning, **preservation of viscera** follows the rules built in the autopsy module: stomach and contents with small intestine in one bottle, sliced liver and kidney in another, blood and urine separately, in saturated saline or rectified spirit according to the exception lists, never formalin. A sample of the preservative itself travels with the set, bottles are filled two thirds, sealed, labelled and locked in a sealed box with the inquest and authorisation papers.",
+   "say": "Two bottles, separate blood and urine, the right preservative, a preservative control sample and never formalin: viscera discipline decides poisoning trials.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stomach and intestine bottled"}, {"id": "b", "label": "Liver and kidney bottled apart"}, {"id": "c", "label": "Blood and urine kept separate"}, {"id": "d", "label": "Sealed box with papers dispatched"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Which poison needs which preservative",
+   "tx": "Preservative choice repeats its exceptions at the toxicology bench in **preservative selection by poison**. Saturated saline is routine but forbidden for corrosive acids and alkalis, corrosive sublimate and aconite. Rectified spirit is forbidden for alcohol, kerosene, chloroform, ether, chloral hydrate, formic and acetic acids, formaldehyde, phenol, phosphorus and paraldehyde. Blood for alcohol takes sodium fluoride with potassium oxalate; volatile poison tissue travels in nylon bags, not plastic.",
+   "say": "Saline fails corrosives and aconite, spirit fails alcohol, phenol and phosphorus, and volatile tissues travel in nylon, not plastic.",
+   "vis": {"kind": "table", "cols": ["Sample", "Preservative", "Forbidden when"], "rows": [["Routine viscera", "Saturated saline", "Corrosives, sublimate, aconite"], ["Alternative viscera", "Rectified spirit", "Alcohol, phenol, phosphorus"], ["Blood for alcohol", "Fluoride plus oxalate", "Oxalic and CO cases use citrate"], ["Lung for volatiles", "Nylon bag, no fluid", "Plastic leaks volatiles"]]}
+  },
+  {
+   "title": "The doctor's legal duties revisited",
+   "tx": "A poisoning admission triggers the **medicolegal duties in poisoning** in parallel with treatment: inform the police where the case is suicidal, homicidal or accidental with legal consequences, do not wash out evidence before samples are secured, retain the container and leftover food or medicine, and maintain secrecy where the law protects the patient. In suspected homicidal poisoning nothing is told to attendants that would let a suspect destroy evidence, and dying declaration arrangements are requested if the patient sinks.",
+   "say": "Inform police, keep the container, sample before washing out, and guard the evidence from the very people who brought the patient.",
+   "vis": {"kind": "compare", "left": {"title": "Always do", "points": ["Treat and stabilise first", "Retain container and leftovers", "Sample before gastric emptying", "Inform police in medicolegal cases"]}, "right": {"title": "Never do", "points": ["Delay treatment for formalities", "Discard vomit or washings", "Alert a suspected poisoner", "Record opinions as certainties"]}}
+  },
+  {
+   "title": "Ideal poison and why real poisons fail it",
+   "tx": "Examination lore describes the **ideal homicidal poison**: tasteless, odourless, colourless, cheap, easily available, lethal in small dose, delayed in action so the giver escapes, simulating a natural disease, leaving no antidote gap and no trace detectable after death. No real poison meets every condition, which is why homicidal poisoning is uncommon with violent corrosives and commoner with chronic mimics such as arsenic. Suicidal poisoning, by contrast, favours whatever is at hand at home or farm.",
+   "say": "The perfect poison is tasteless, delayed and undetectable, and since none exists, chronic mimics like arsenic come closest.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "List ideal poison properties"}, {"id": "b", "label": "Test candidate poison against them"}, {"id": "c", "label": "Corrosives fail on taste and speed"}, {"id": "d", "label": "Arsenic approaches the ideal"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

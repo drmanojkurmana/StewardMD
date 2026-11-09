@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-cohort-cohort-study",
+ "subject": "community-medicine",
+ "module": "cm-cohort",
+ "title": "Cohort Studies: Relative Risk, Attributable Risk and Population Attributable Risk",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Cause to effect: cohorts identified before disease",
+   "tx": "A **cohort study** identifies exposed and unexposed groups before the disease appears, then observes them over time to count who develops it. Also called prospective, longitudinal, incidence or forward-looking study, it works from cause to effect. Because exposure precedes outcome in the design, incidence and true relative risk follow directly.",
+   "say": "Groups form before disease appears here. Exposed and unexposed cohorts are watched over time and new cases counted. Cause precedes effect inside the design, so incidence and true relative risk come out directly. Prospective and forward-looking are its other names.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Exposed cohort assembled"},
+     {"id": "b", "label": "Unexposed cohort assembled"},
+     {"id": "c", "label": "Both followed over time"},
+     {"id": "d", "label": "Incidence compared"}
+    ],
+    "edges": [["a", "b"], ["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "What counts as a cohort",
+   "tx": "A **birth cohort** shares a defined experience in a time window: everyone born in 2010 forms one, as do people exposed to a drug, vaccine or infection in a period, or couples married in the same span. Myocardial infarction survivors of one year form another. The shared starting experience, not geography, defines membership.",
+   "say": "Shared experience defines membership. Everyone born in one year, everyone given one drug in a period, couples married in one span: each forms a cohort. Even survivors of one year's heart attacks qualify. Geography alone does not.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cohort type", "Shared experience"],
+    "rows": [
+     ["Birth cohort", "Born in the same year or period"],
+     ["Exposure cohort", "Same drug, vaccine or infection window"],
+     ["Marriage cohort", "Married in the same period"],
+     ["Survivor cohort", "Survived the same event year"]
+    ]
+   }
+  },
+  {
+   "title": "When cohort studies are indicated",
+   "tx": "**Rare exposures** with high disease incidence among the exposed justify cohorts best, such as industrial chemicals or radiation groups, especially when case-control and descriptive evidence already suggests association. Easy follow-up, a stable cooperative cohort and ample funds complete the indication list, since decades of tracking may be needed for cancer outcomes.",
+   "say": "Reserve this expensive design for the right questions. Rare exposures with frequent disease among the exposed, like industrial chemicals, justify it best. Prior evidence should already suggest association. Stable, reachable cohorts and ample funds decide feasibility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Favours a cohort",
+     "points": ["Rare exposure, common disease in exposed", "Prior evidence of association", "Stable cohort, easy follow-up"]
+    },
+    "right": {
+     "title": "Favours case-control instead",
+     "points": ["Rare disease, common exposure", "Quick answer needed", "Limited funds and time"]
+    }
+   }
+  },
+  {
+   "title": "Framework: free of disease at entry",
+   "tx": "Both cohorts must start **free of the disease** under study: coronary candidates are examined at entry and existing cases excluded. Groups should be equally susceptible and comparable on variables influencing frequency, with diagnostic criteria fixed beforehand. Follow-up then runs under identical conditions until outcome, disability or death is recorded in each group.",
+   "say": "Entry demands a clean slate. Existing cases are examined out at the start, both groups equally susceptible and comparable, diagnostic criteria fixed in advance. Identical follow-up then records onset, disability or death in each group.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Requirement", "Reason"],
+    "rows": [
+     ["Disease free at entry", "Only new cases count as outcomes"],
+     ["Equal susceptibility", "Fair incidence comparison"],
+     ["Criteria fixed beforehand", "No shifting case definition mid-study"]
+    ]
+   }
+  },
+  {
+   "title": "Incidence in exposed and unexposed",
+   "tx": "**Incidence among exposed** divides new cases by all exposed: 70 lung cancers among 7000 smokers gives 10 per 1000, against 3 among 3000 non-smokers, 1 per 1000. No other common design measures both incidences directly, which is why cohort evidence anchors causation arguments despite its cost and duration.",
+   "say": "Direct incidence is the prize. Seventy cases among seven thousand smokers, ten per thousand, against three among three thousand non-smokers, one per thousand. No cheaper design measures both rates directly, which is why cohort evidence anchors causation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Cases and total", "Incidence"],
+    "rows": [
+     ["Smokers", "70 of 7000", "10 per 1000"],
+     ["Non-smokers", "3 of 3000", "1 per 1000"],
+     ["Significance", "p below 0.001", "Association shown"]
+    ]
+   }
+  },
+  {
+   "title": "Relative risk measures strength",
+   "tx": "**Relative risk** divides incidence in the exposed by incidence in the unexposed: 10 over 1 gives 10, so smokers carried ten times the lung cancer risk. One means no association; above one suggests positive association; below one suggests protection. Aetiological enquiries prize it because size indexes the strength of association, though strength alone never proves causation.",
+   "say": "Divide the two incidences. Ten over one gives ten: smokers carried tenfold risk. One means no association, above one suggests harm, below one suggests protection. Strength guides aetiological judgement, though strength alone never proves causation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Relative risk", "Reading"],
+    "rows": [
+     ["Below 1", "Exposure associated with less disease"],
+     ["Equal to 1", "No association"],
+     ["2", "Twice the incidence, 100 percent increase"],
+     ["10 in the smoking example", "Very strong association"]
+    ]
+   }
+  },
+  {
+   "title": "Attributable risk measures impact in the exposed",
+   "tx": "**Attributable risk** subtracts unexposed incidence from exposed incidence, often as a percent of exposed incidence: (10 minus 1) over 10 gives 90 percent of smokers' lung cancer attributed to smoking. It estimates disease removable if the exposure vanished, so programme planners read it before relative risk when choosing interventions.",
+   "say": "Subtract instead of dividing. Ten minus one, over ten, attributes ninety percent of smokers' lung cancer to smoking itself. That estimates disease removable if exposure vanished. Planners reach for this figure before relative risk when funding interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Relative risk answers",
+     "points": ["How strong is the association?", "Aetiological enquiries", "Ratio of two incidences"]
+    },
+    "right": {
+     "title": "Attributable risk answers",
+     "points": ["How much disease could vanish?", "Prevention planning", "Difference of two incidences"]
+    }
+   }
+  },
+  {
+   "title": "Population attributable risk widens the lens",
+   "tx": "**Population attributable risk** subtracts unexposed incidence from total population incidence: with lung cancer deaths at 74 per 100000 person-years overall and 10 in non-smokers, (74 minus 10) over 74 gives 86 percent of population deaths avoidable if cigarettes vanished. Common moderate risks can beat rare strong ones on this measure.",
+   "say": "Widen the lens to everyone. Total incidence minus unexposed incidence, over total incidence: eighty six percent of lung cancer deaths avoidable without cigarettes in the physicians' data. Common moderate risks can outweigh rare strong ones here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rate per 100000 person-years", "Value"],
+    "rows": [
+     ["Heavy smokers", "224"],
+     ["Non-smokers", "10"],
+     ["Total population", "74"],
+     ["Population attributable share", "86 percent avoidable"]
+    ]
+   }
+  },
+  {
+   "title": "Relative versus attributable: the contraceptive lesson",
+   "tx": "The **oral contraceptive example** separates the pair: cardiovascular relative risk stayed roughly constant with age, yet attributable risk ran more than five times higher in older women. That gap grounded advice against pill use at 35 years and above. Strength stayed flat while absolute harm climbed, a distinction single-measure readers miss entirely.",
+   "say": "One drug example separates the pair forever. Cardiovascular relative risk barely moved with age, yet attributable harm ran five times higher in older women, grounding advice against the pill after thirty five. Flat strength, climbing harm: miss one measure, miss the policy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Relative risk with age",
+     "points": ["Roughly constant across ages", "Strength of association steady", "Age blind on its own"]
+    },
+    "right": {
+     "title": "Attributable risk with age",
+     "points": ["More than five times higher when older", "Absolute harm climbs steeply", "Drove the age 35 advice"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

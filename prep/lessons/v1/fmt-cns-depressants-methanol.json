@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "id": "fmt-cns-depressants-methanol",
+ "subject": "forensic-medicine",
+ "module": "fmt-cns-depressants",
+ "title": "Methanol Poisoning: Snowfield Vision, Acidosis and Ethanol Antidote",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Methanol hides in methylated spirit",
+   "tx": "**Methyl alcohol**, wood alcohol or methanol, is a colourless volatile liquid smelling like ethyl alcohol with a burning taste. Mineralised methylated spirit is ninety percent ethyl alcohol, nine point five percent wood naphtha and nought point five percent crude pyridine. Methanol also rides in home made beverages, antifreeze, paint removers, dyes, resins, adhesives and varnish. It absorbs through stomach, lungs and skin, oxidises at one fifth the rate of ethanol and accumulates with repeated small doses.",
+   "say": "Wood alcohol in methylated spirit and antifreeze absorbs everywhere, burns five times slower than ethanol and therefore piles up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Methanol source",
+     "Setting",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Methylated spirit",
+      "90 percent ethanol mixture",
+      "Drunk as cheap spirit"
+     ],
+     [
+      "Home made beverages",
+      "Illicit distillation",
+      "Mass poisoning outbreaks"
+     ],
+     [
+      "Antifreeze, paint remover",
+      "Household and workshop",
+      "Accidental ingestion"
+     ],
+     [
+      "Skin and inhalation",
+      "Occupational exposure",
+      "Toxicity without drinking"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Formaldehyde and formic acid do the damage",
+   "tx": "Methanol itself is mildly intoxicating; its metabolites are the poison in **methanol metabolism**. The liver oxidises methanol to formaldehyde, thirty three times as toxic, then to formic acid, six times as toxic, which inhibits cytochrome oxidase, raises lactate and drives metabolic acidosis while destroying retinal ganglion cells and the optic disc. Death is mainly from acidosis, central depression being minor. Eighty milligrams per hundred millilitres of blood is a dangerous level, and methanol lingers three to four days.",
+   "say": "Formaldehyde at thirty three times and formic acid at six times methanol's toxicity are what blind and acidify the patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Methanol absorbed"
+     },
+     {
+      "id": "b",
+      "label": "Formaldehyde formed, 33 times toxic"
+     },
+     {
+      "id": "c",
+      "label": "Formic acid formed, 6 times toxic"
+     },
+     {
+      "id": "d",
+      "label": "Acidosis and optic nerve injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Snowfield vision and blindness",
+   "tx": "The eyes announce methanol in **visual toxicity of formic acid**. Ten to twenty millilitres can blind. Photophobia, blurred or misty snowfield vision, seeing spots, central and peripheral scotomata, shrinking visual fields for colour and form, then fairly sudden failure of vision or complete blindness follow optic neuritis and atrophy. Pupils are dilated and fixed. Fundoscopy shows hyperaemia of the optic disc then retinal oedema, with degenerative change in retinal ganglion cells and disc. High concentrations lodge in vitreous body and optic nerve.",
+   "say": "Snowfield blur at ten millilitres and sudden blindness after it are formic acid eating the optic nerve from inside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Visual symptoms",
+     "points": [
+      "Photophobia, misty vision",
+      "Snowfield appearance",
+      "Scotomata central and peripheral",
+      "Sudden complete blindness"
+     ]
+    },
+    "right": {
+     "title": "Visual signs",
+     "points": [
+      "Pupils dilated and fixed",
+      "Disc hyperaemia then oedema",
+      "Ganglion cell degeneration",
+      "Optic atrophy follows"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Anion gap acidosis is the chemical signature",
+   "tx": "**Severe non diabetic anion gap metabolic acidosis** in an unconscious patient suggests methyl alcohol poisoning, shared with ethylene glycol and salicylate intoxication. An increased osmolal gap with visual symptoms strengthens the pointer. Symptoms may appear within an hour or wait twenty four hours, ending in delirium and coma lasting two to three days, with convulsions terminally. Sixty to two hundred millilitres kill in twenty four to thirty six hours, sometimes delayed to four days.",
+   "say": "Anion gap acidosis plus visual symptoms plus an osmolal gap is methanol until proved otherwise, at sixty millilitres lethal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chemical clue",
+     "Methanol pattern",
+     "Shared with"
+    ],
+    "rows": [
+     [
+      "Anion gap acidosis",
+      "Severe, characteristic",
+      "Ethylene glycol, salicylates"
+     ],
+     [
+      "Osmolal gap",
+      "Increased early",
+      "Other toxic alcohols"
+     ],
+     [
+      "Urine",
+      "Strongly acid, acetone trace",
+      "Albumin may appear"
+     ],
+     [
+      "Blood level danger",
+      "80 mg per 100 ml",
+      "Persists three to four days"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Ethanol is the antidote by competition",
+   "tx": "**Ethanol treats methanol poisoning** by competing for the catalase and alcohol dehydrogenase pathway, blocking formaldehyde formation and letting the less toxic parent methanol be excreted unmetabolised. It is given intravenously as a ten percent solution, five hundred millilitres to start and repeated, holding serum ethanol at one hundred to one hundred fifty milligrams percent with frequent checks; orally, sixty millilitres in fruit juice over thirty minutes then fifteen millilitres of fifty percent hourly maintains it. The intravenous route avoids gastritis.",
+   "say": "Hold blood ethanol at one hundred to one fifty to freeze methanol metabolism while the parent alcohol leaves unchanged.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start ten percent ethanol infusion"
+     },
+     {
+      "id": "b",
+      "label": "Hold level 100 to 150 mg percent"
+     },
+     {
+      "id": "c",
+      "label": "Formaldehyde formation blocked"
+     },
+     {
+      "id": "d",
+      "label": "Methanol excreted unmetabolised"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Haemodialysis is the treatment of choice in severe cases",
+   "tx": "**Haemodialysis** cuts methanol half life from forty hours to about one hour and simultaneously clears formic acid and corrects acidosis, making it the treatment of choice in severe poisoning. Gastric lavage uses five percent bicarbonate, five hundred millilitres left in the stomach, and activated charcoal reduces mortality by adsorbing alcohol and pulling metabolites back into the gut. Bicarbonate therapy fights the acidosis that itself kills, while fomepizole, the modern alcohol dehydrogenase blocker, follows the same competitive logic as ethanol where available.",
+   "say": "Dialysis shrinks forty hours to one, bicarbonate fights the killing acidosis, and ethanol or fomepizole blocks new acid forming.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Remove the poison",
+     "points": [
+      "Haemodialysis, choice in severe",
+      "Half life forty hours to one",
+      "Clears formate and acid",
+      "Charcoal pulls metabolites to gut"
+     ]
+    },
+    "right": {
+     "title": "Block and neutralise",
+     "points": [
+      "Ethanol competes for enzyme",
+      "Bicarbonate lavage and therapy",
+      "Fomepizole blocks dehydrogenase",
+      "Hold ethanol level measured"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Methanol versus ethanol at the bedside",
+   "tx": "The two alcohols separate on **latency, eyes and acidosis**. Ethanol intoxicates promptly and proportionately, with no visual loss and no deep acidosis. Methanol inebriates less and more prolonged, hides for up to a day, then declares itself with abdominal cramps, snowfield vision and anion gap acidosis from its metabolites. A drunk patient who is not very drunk but cannot see and is acidotic has methanol poisoning until excluded, and treatment starts on that suspicion.",
+   "say": "Too little drunkenness, failing eyes and deep acidosis after a quiet day separate methanol from ordinary ethanol intoxication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trait",
+     "Ethanol",
+     "Methanol"
+    ],
+    "rows": [
+     [
+      "Inebriation",
+      "Prompt, proportional",
+      "Less, prolonged"
+     ],
+     [
+      "Latency",
+      "None",
+      "Up to 24 hours"
+     ],
+     [
+      "Vision",
+      "Blurred only",
+      "Snowfield, blindness"
+     ],
+     [
+      "Acidosis",
+      "Mild or absent",
+      "Severe anion gap"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mass outbreaks and adulterated liquor",
+   "tx": "**Methanol mass poisoning** follows illicit liquor adulterated or distilled with industrial spirit, striking drinkers of one supply within a day of each other with the same visual and acidotic picture. The medicolegal response treats every case as a sentinel: preserve the liquor and its container, blood and vitreous for methanol, notify police and public health to seize the source, and screen every person who shared the supply before symptoms, because antidote and dialysis save sight only when given before the optic nerve dies.",
+   "say": "One blind drinker means a poisoned batch: seize the supply, screen every sharer and treat before eyes fail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sentinel case with visual loss"
+     },
+     {
+      "id": "b",
+      "label": "Liquor and container preserved"
+     },
+     {
+      "id": "c",
+      "label": "Police and health notified"
+     },
+     {
+      "id": "d",
+      "label": "All sharers screened and treated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Postmortem and sample discipline in methanol death",
+   "tx": "At autopsy, **methanol death** shows congestion of organs with optic nerve and retinal injury where survival allowed, acute tubular necrosis of kidneys and liver injury. Blood, vitreous and urine are sampled early because methanol distributes by water content and concentrates in vitreous and optic nerve. The suspected beverage, its container and any methylated spirit bottles at the scene travel with the samples. Death is certified on acidosis and metabolite injury, not on the parent alcohol level alone.",
+   "say": "Vitreous and optic nerve carry the highest methanol, so sample them early and send the bottle that supplied the drink.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Samples to take",
+     "points": [
+      "Blood methanol level",
+      "Vitreous humour sample",
+      "Urine, strongly acid",
+      "Suspected beverage and container"
+     ]
+    },
+    "right": {
+     "title": "Findings expected",
+     "points": [
+      "Optic nerve degeneration",
+      "Acute tubular necrosis",
+      "Liver injury present",
+      "Acidosis as death mechanism"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-data-presentation-bar-chart",
+  "subject": "community-medicine",
+  "module": "cm-data-presentation",
+  "title": "Bar Charts, Pie Charts, Line Diagrams, Scatter, and Pictograms",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Bar chart: separated bars for categories",
+      "tx": "The **bar chart in data presentation** draws separated bars of equal width whose heights represent frequencies of categorical data: districts, blood groups, causes of death, or years treated as labels. Gaps between bars declare that the horizontal axis is not continuous. Simple bars show one series; equal scaling from a zero baseline is mandatory, since truncated axes manufacture false differences that examiners and journal referees both punish.",
+      "say": "Bar charts compare categories with separated bars. Always start the axis at zero or the comparison lies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "bc1", "label": "List categories on horizontal axis" },
+          { "id": "bc2", "label": "Draw separated bars from zero baseline" },
+          { "id": "bc3", "label": "Label heights with counts or percents" }
+        ],
+        "edges": [["bc1", "bc2"], ["bc2", "bc3"]]
+      }
+    },
+    {
+      "title": "Multiple and component bar charts",
+      "tx": "Grouped (multiple) bars place two or more series side by side per category, while the **component bar chart** stacks segments within one bar to show parts of a whole alongside totals. Percentage component bars equalise every bar to one hundred, sacrificing totals to compare composition across districts or years. Choose grouping for absolute comparison and stacking for composition; mixing aims produces unreadable figures.",
+      "say": "Side by side bars compare amounts; stacked bars compare ingredients. Percentage stacks hide totals, so state that clearly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Multiple (grouped) bars",
+          "points": ["Series side by side per category", "Compares absolute values", "Best for two to four series"]
+        },
+        "right": {
+          "title": "Component (stacked) bars",
+          "points": ["Segments stacked in one bar", "Compares composition", "Percent version fixes length at 100"]
+        }
+      }
+    },
+    {
+      "title": "Pie chart: parts of one whole",
+      "tx": "A **pie chart** divides a circle into sectors whose angles equal each category's share times three hundred sixty degrees, displaying composition of a single total: causes of maternal death, budget heads, or blood group distribution. It fails for trends, for many similar slices, and for comparing two populations, where stacked percentage bars win. Every sector needs a label with its percentage, since angles alone deceive the eye.",
+      "say": "Pie charts show shares of one whole. Convert each percent to degrees by multiplying by three point six.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Share", "Sector angle"],
+        "rows": [
+          ["50 percent", "180 degrees"],
+          ["25 percent", "90 degrees"],
+          ["10 percent", "36 degrees"],
+          ["5 percent", "18 degrees"]
+        ]
+      }
+    },
+    {
+      "title": "Line diagram: trends over time",
+      "tx": "The **line diagram for time trends** plots values against time points (infant mortality by year, malaria cases by month) and joins them, exposing trend direction, seasonality, cyclicity, and sudden epidemic spikes. Unlike bars, the line stresses continuity and rate of change. Two lines compare two populations elegantly, provided both axes share one scale and the lines carry labels rather than a distant legend.",
+      "say": "Line diagrams reveal trends, seasons, and spikes over time. Use them for rates by year or cases by month.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ln1", "label": "Plot value at each time point" },
+          { "id": "ln2", "label": "Join points in time order" },
+          { "id": "ln3", "label": "Read trend, season, and spikes" }
+        ],
+        "edges": [["ln1", "ln2"], ["ln2", "ln3"]]
+      }
+    },
+    {
+      "title": "Scatter diagram: two variables together",
+      "tx": "Plotting paired measurements (body mass index against blood pressure, income against infant mortality) as dots gives the **scatter diagram**, the visual home of correlation. A cloud rising to the right signals positive correlation, falling signals negative, and a shapeless cloud signals none. The scatter plot precedes any correlation coefficient: it exposes curvature and outliers that a single number would conceal.",
+      "say": "Scatter plots pair two measurements per person. Their tilt previews correlation before any coefficient is computed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Patterned clouds",
+          "points": ["Rising band: positive correlation", "Falling band: negative correlation", "Curve: non linear relation"]
+        },
+        "right": {
+          "title": "Warnings in the cloud",
+          "points": ["Round cloud: no correlation", "One distant dot: outlier to check", "Clusters: hidden subgroups"]
+        }
+      }
+    },
+    {
+      "title": "Pictogram: pictures for lay audiences",
+      "tx": "The **pictogram in health education** replaces bar heights with rows of little symbols (each figure standing for, say, one thousand births or ten deaths) so lay audiences grasp quantities without reading axes. Its charm carries risks: symbols must stay one size with fractions handled honestly, since doubling a picture's height quadruples its area and exaggerates differences grotesquely.",
+      "say": "Pictograms speak to lay readers through repeated symbols. Keep symbols identical in size or the picture exaggerates.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Pictogram rule", "Why"],
+        "rows": [
+          ["One fixed value per symbol", "Honest counting by the reader"],
+          ["Never stretch symbol size", "Area grows as square of height"],
+          ["Round to whole or half symbols", "Avoids false precision"],
+          ["Title states the unit value", "Reader can decode quantities"]
+        ]
+      }
+    },
+    {
+      "title": "Spot maps and choropleth maps",
+      "tx": "Geography enters through the **spot map in epidemiology**, pinning each case at its residence to reveal clustering around a water source or vector habitat (John Snow's cholera map remains the founding example), while choropleth maps shade whole districts by rate intensity. Spot maps suggest the source; shaded maps compare burden. Rates, never raw counts, must drive shading where populations differ.",
+      "say": "Spot maps pin cases to find the source; shaded maps compare district rates. Shade by rates, never by raw counts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spot map",
+          "points": ["One dot per case at residence", "Reveals clustering near a source", "Snow's Broad Street cholera map"]
+        },
+        "right": {
+          "title": "Choropleth map",
+          "points": ["Districts shaded by rate", "Compares regional burden", "Needs population denominators"]
+        }
+      }
+    },
+    {
+      "title": "Box plot and stem leaf displays",
+      "tx": "The **box and whisker plot** compresses a distribution into median, quartiles, and extremes: the box spans the interquartile range, the line inside marks the median, and whiskers reach the fences beyond which dots flag outliers. The stem and leaf plot preserves every original value while showing shape, suiting small datasets in ward audits where histograms would hide the actual numbers.",
+      "say": "A box plot shows median, quartiles, and outliers in one glance. Stem and leaf keeps every value visible for small datasets.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Box plot element", "Represents"],
+        "rows": [
+          ["Box edges", "First and third quartiles"],
+          ["Line inside box", "Median"],
+          ["Whisker ends", "Fences at 1.5 times IQR"],
+          ["Dots beyond fences", "Outliers to investigate"]
+        ]
+      }
+    },
+    {
+      "title": "Matching chart to question",
+      "tx": "The closing skill is **choosing the right diagram**: composition takes pie or stacked bars, comparison takes simple or grouped bars, trend takes lines, distribution takes histograms, relationship takes scatter, geography takes maps, and public persuasion takes pictograms. Examination stems name the data and the message; answering with the mismatched classic (pie for trend, bar for continuous distribution) is the commonest avoidable error in this module.",
+      "say": "Match chart to message: pie for shares, bars for groups, lines for trends, histograms for distributions, scatter for relationships.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ch1", "label": "Ask: share, compare, trend, or relation?" },
+          { "id": "ch2", "label": "Pick pie, bar, line, or scatter" },
+          { "id": "ch3", "label": "Label fully, start bars at zero" }
+        ],
+        "edges": [["ch1", "ch2"], ["ch2", "ch3"]]
+      }
+    }
+  ]
+}

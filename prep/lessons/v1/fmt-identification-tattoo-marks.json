@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "id": "fmt-identification-tattoo-marks",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Tattoo Marks, Mutilation and DNA Fingerprinting",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Tattoo pigments and biological dermis deposition",
+   "tx": "In forensic identification, a permanent **tattoo mark indelible design** is created by puncturing the epidermis with needles and introducing insoluble pigments into the vascular reticular dermis. While epidermal cellular layers shed continuously, dermal macrophages phagocytose the pigment particles, trapping them permanently within dermal collagen bundles. Even when the epidermis macerates during postmortem drowning or putrefaction, the deeper dermal tattoo design remains visible.",
+   "say": "Tattoos are permanent because ink particles are trapped by dermal macrophages in the deep skin, remaining visible even when outer skin peels away.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tattoo pigment type",
+     "Chemical compound",
+     "Forensic permanence"
+    ],
+    "rows": [
+     [
+      "Black / Blue-black",
+      "Carbon particles, India ink, graphite",
+      "Most permanent; persists indefinitely in dermis"
+     ],
+     [
+      "Red pigment",
+      "Cinnabar (mercuric sulfide), cochineal",
+      "Prone to fading; causes allergic granulomas"
+     ],
+     [
+      "Green pigment",
+      "Chromium oxide, malachite green",
+      "Highly durable; resistant to sunlight and laser"
+     ],
+     [
+      "Yellow / Brown",
+      "Cadmium sulfide, ferric oxide, turmeric",
+      "Fades more rapidly over several decades"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Medicolegal significance and regional lymph node migration",
+   "tx": "The discovery of tattoos provides crucial clues to personal identity, reflecting names, religious symbols, military emblems, gang affiliations, or prison histories. Crucially, when criminals attempt surgical excision or skin peels during decomposition, the **lymphatic tattoo pigment migration** phenomenon assists identification: phagocytosed pigment particles drain into regional lymph nodes (e.g. axillary or inguinal nodes), tattooing the nodal cortex black or blue on autopsy dissection.",
+   "say": "Tattoos reveal names, religion, and military history. When skin is destroyed, ink draining into regional lymph nodes confirms tattooing on autopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tattoo ink deposited in reticular dermis"
+     },
+     {
+      "id": "b",
+      "label": "Dermal macrophages phagocytose insoluble particles"
+     },
+     {
+      "id": "c",
+      "label": "Lymphatic drainage carries ink to regional lymph node cortex"
+     },
+     {
+      "id": "d",
+      "label": "Histological identification of nodal pigment on postmortem"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Removal techniques and residual cicatricial scarring",
+   "tx": "Individuals frequently attempt **tattoo mark deliberate removal** to disguise identity or eliminate gang emblems. Conventional methods include surgical excision, dermabrasion, chemical cautery with salabrasion or trichloroacetic acid, and modern Q-switched Nd:YAG laser photothermolysis. However, surgical and chemical removal methods leave distinct telltale cicatricial scars that preserve the original outline, which can be visualized under oblique lighting or ultraviolet photography.",
+   "say": "Removing tattoos with surgery, acids, or lasers leaves characteristic scars matching the original outline, detectable under special lighting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical / chemical removal",
+     "points": [
+      "Leaves keloidal, hypertrophic cicatricial scar",
+      "Distorts skin lines and dermal architecture",
+      "Original tattoo outline often visible in scar matrix",
+      "Regional lymph node pigmentation remains intact"
+     ]
+    },
+    "right": {
+     "title": "Q-switched laser removal",
+     "points": [
+      "Selectively shatters intracellular pigment granules",
+      "Minimal superficial cicatricial scarring produced",
+      "Ink fragments cleared via systemic lymphatics",
+      "Deep dermal ghost shadows may persist"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Criminal mutilation and dismemberment of corpses",
+   "tx": "In homicide investigations, perpetrators often commit **criminal mutilation of corpses** to obstruct victim identification and hinder transport. Dismemberment involves decapitation, amputating hands and feet to eliminate fingerprints, shaving pubic hair, burning facial features, or immersing remains in corrosive sulfuric acid. The forensic pathologist must assemble body fragments anatomically, match severed cut margins, reconstruct stature, and harvest deep bone for DNA testing.",
+   "say": "Perpetrators mutilate corpses by removing heads, hands, or facial skin to destroy identity, requiring pathologists to reassemble parts and sample bone for DNA.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recovery of scattered dismembered body parts from scene"
+     },
+     {
+      "id": "b",
+      "label": "Radiological imaging to match bone cut edges and foreign bodies"
+     },
+     {
+      "id": "c",
+      "label": "Anatomical reassembly on mortuary dissection table"
+     },
+     {
+      "id": "d",
+      "label": "Deep femoral cortex bone window harvested for nuclear DNA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "History and principles of DNA fingerprinting",
+   "tx": "Revolutionizing forensic jurisprudence, the **DNA profiling identification principle** was invented by Sir Alec Jeffreys in 1984, and pioneered in India by Dr. Lalji Singh at the Centre for DNA Fingerprinting and Diagnostics. Over ninety-nine percent of human DNA is identical across individuals; however, polymorphic non-coding regions exhibit hypervariable repeating sequence motifs known as Short Tandem Repeats (STRs) that provide unique genetic signatures.",
+   "say": "DNA profiling, invented by Alec Jeffreys, analyzes hypervariable short tandem repeat sequences in non-coding DNA to create unique genetic profiles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pioneer / Institution",
+     "Contribution to forensic genetics",
+     "Technological milestone"
+    ],
+    "rows": [
+     [
+      "Sir Alec Jeffreys (1984)",
+      "Discovery of DNA fingerprinting",
+      "Restriction fragment length polymorphism (RFLP)"
+     ],
+     [
+      "Dr. Lalji Singh",
+      "Father of Indian DNA profiling",
+      "Developed Bkm-derived probe; established CDFD Hyderabad"
+     ],
+     [
+      "FBI CODIS system",
+      "Standardized core STR loci",
+      "Expanded from 13 to 20 national core STR markers"
+     ],
+     [
+      "Multiplex PCR technology",
+      "Microsatellite amplification",
+      "Allows profiling from picogram amounts of biological trace"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Biological sources of forensic DNA evidence",
+   "tx": "In criminal casework, forensic biologists isolate high-molecular-weight genomic material from diverse **biological specimens for DNA extraction**. Viable sources include peripheral bloodstains, seminal fluid, vaginal swabs, saliva on cigarette butts, hair shafts possessing nucleated follicular root sheaths, touched items containing epithelial skin flakes, tooth dental pulp, and deep compact cortical bone harvested from femoral shafts in skeletonized remains.",
+   "say": "DNA can be extracted from blood, semen, saliva, hair with roots, skin cells, dental pulp, and dense leg bone in skeletonized remains.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Biological evidence recovered from scene under strict chain of custody"
+     },
+     {
+      "id": "b",
+      "label": "Lysis of cell membranes and proteinase K digestion"
+     },
+     {
+      "id": "c",
+      "label": "Phenol-chloroform or magnetic bead DNA purification"
+     },
+     {
+      "id": "d",
+      "label": "Quantification using real-time quantitative PCR"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Short Tandem Repeat analysis and multiplex PCR",
+   "tx": "Modern casework utilizes **Short Tandem Repeat multiplex amplification**, targeting repeating tetranucleotide or pentanucleotide motifs across twenty standardized chromosomal loci. Forensic geneticists amplify these micro-loci simultaneously using multiplex polymerase chain reaction tagged with fluorescent dyes. Capillary electrophoresis separates the amplified DNA fragments by base-pair length, generating an electropherogram showing distinct allele peaks with match probabilities exceeding one in billions.",
+   "say": "Forensic labs amplify twenty short tandem repeat markers using multiplex PCR and capillary electrophoresis, yielding match probabilities over one in a billion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Multiplex PCR amplification of 20 core STR loci"
+     },
+     {
+      "id": "b",
+      "label": "Capillary electrophoresis separation by fragment base size"
+     },
+     {
+      "id": "c",
+      "label": "Laser excitation detects multi-colored fluorescent dyes"
+     },
+     {
+      "id": "d",
+      "label": "Electropherogram generates numerical allele profile"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Y-chromosome STR profiling in sexual assault",
+   "tx": "When analyzing sexual assault specimens containing overwhelming amounts of female victim epithelial cells mixed with minute quantities of male semen, **Y-chromosome STR lineage testing** provides an invaluable diagnostic solution. Because primers target only the male-specific Y-chromosome non-recombining region, the female background DNA does not amplify, allowing unhindered profiling of the male perpetrator and determining the number of male contributors in gang rape.",
+   "say": "Y-STR testing targets only male DNA, allowing detectives to detect male rapist semen mixed with overwhelming female cells in sexual assault samples.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autosomal STR profiling",
+     "points": [
+      "Profiles loci across 22 autosomes plus amelogenin",
+      "Provides individual unique identification (1 in billions)",
+      "Equal maternal and paternal inheritance",
+      "Female DNA can drown out minute male semen trace"
+     ]
+    },
+    "right": {
+     "title": "Y-STR lineage profiling",
+     "points": [
+      "Profiles loci exclusively on male Y-chromosome",
+      "Ignores overwhelming female victim cellular background",
+      "Shared identically down paternal lineage (father to son)",
+      "Indispensable in gang rape and male kinship disputes"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Mitochondrial DNA analysis in charred and degraded remains",
+   "tx": "When severe thermal charring, advanced putrefaction, or weathered skeletonization degrades nuclear DNA, forensic scientists deploy **mitochondrial DNA hypervariable sequencing**. Because each human cell contains hundreds of mitochondria carrying circular double-stranded DNA genomes, mtDNA survives extreme environmental insults. Sequenced across hypervariable control regions (HV1 and HV2), mtDNA is inherited strictly through maternal lineage, enabling identification using distant maternal relatives.",
+   "say": "Mitochondrial DNA survives extreme heat and decay because hundreds of copies exist per cell. Inherited maternally, it matches charred remains to maternal family.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severely charred or skeletonized bone fragment recovered"
+     },
+     {
+      "id": "b",
+      "label": "Cryogenic pulverization of bone into fine mineral powder"
+     },
+     {
+      "id": "c",
+      "label": "Sanger sequencing of mitochondrial HV1 and HV2 regions"
+     },
+     {
+      "id": "d",
+      "label": "Profile matched against mother or maternal lineage relatives"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

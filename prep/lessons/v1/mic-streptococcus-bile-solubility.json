@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-streptococcus",
+  "subject": "microbiology",
+  "title": "Bile Solubility, Quellung Reaction and Pneumococcal Bench Confirmation",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **bile solubility test** adds sodium deoxycholate to pneumococcal suspension or colony: bile salts activate pneumococcal autolysin (LytA amidase), clearing turbidity and flattening colonies within minutes, viridans streptococci remaining insoluble. It is induced self digestion as identification, the draughtsman colony's chemistry demonstrated on demand.",
+      "say": "Bile wakes pneumococcus's own autolysin; the colony digests itself as proof.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bile test mechanics",
+          "points": [
+            "10 percent sodium deoxycholate reagent",
+            "Tube clearing or colony disappearance",
+            "Viridans controls stay turbid",
+            "False negatives in old or capsulated strains"
+          ]
+        },
+        "right": {
+          "title": "Autolysin biology",
+          "points": [
+            "LytA breaks peptidoglycan amide bonds",
+            "Stationary phase autolysis (draughtsman centres)",
+            "Penicillin killing partly autolysin mediated",
+            "LytA gene PCR identification cousin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Quellung reaction** (Neufeld) mixes pneumococci with type specific antiserum and methylene blue: capsule appears swollen, refractile and sharply haloed under the microscope as antibody binds and changes its optics, serotyping strains for epidemiology and vaccine studies, latex agglutination and PCR serotyping its successors.",
+      "say": "Antibody makes the capsule visible as a halo; Quellung named serotypes for a century.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quellung reading",
+          "points": [
+            "Capsule halo sharpens with homologous serum",
+            "Omniserum pools narrow to type sera",
+            "CSF and culture both typable",
+            "Skill dependent microscopy"
+          ]
+        },
+        "right": {
+          "title": "Modern serotyping",
+          "points": [
+            "Latex and coagglutination kits",
+            "Molecular capsule locus sequencing",
+            "Surveillance laboratories type invasive isolates",
+            "Replacement monitoring depends on it"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pneumococcal virulence beyond capsule** includes pneumolysin (cholesterol dependent cytolysin, complement activator), surface proteins (PspA, PspC), neuraminidases exposing receptors, IgA protease, and pili in colonising clones, protein vaccine candidates because capsule replacement outruns polysaccharides. Pneumolysin also makes alpha haemolysis in anaerobic depth.",
+      "say": "Pneumolysin punches and prevaricates while capsule hides: proteins queue as vaccine candidates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Protein weapons",
+          "points": [
+            "Pneumolysin pores and classical complement activation",
+            "PspA blocks complement deposition",
+            "Neuraminidase unmasks adhesion receptors",
+            "IgA1 protease cleaves mucosal antibody"
+          ]
+        },
+        "right": {
+          "title": "Vaccine implications",
+          "points": [
+            "Protein antigens serotype independent hope",
+            "Pneumolysin toxoid candidates",
+            "Whole cell approaches researched",
+            "Polysaccharide replacement keeps pressure on"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bench algorithm** for alpha haemolytic streptococci consolidates this and the previous lesson: optochin and bile for pneumococcus, salt tolerance and PYR for enterococcus (next lesson kin), grouping exclusion, and reporting rules (pneumococcus from sterile sites fully worked and called urgently).",
+      "say": "Alpha zone forks three ways: optochin, bile, then salt and PYR for the rest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "alpha",
+            "label": "Alpha haemolytic colony"
+          },
+          {
+            "id": "opt",
+            "label": "Optochin susceptible or bile soluble: pneumococcus"
+          },
+          {
+            "id": "salt",
+            "label": "Grows in 6.5 percent salt and PYR: enterococcus"
+          },
+          {
+            "id": "virid",
+            "label": "Neither: viridans streptococci group"
+          }
+        ],
+        "edges": [
+          [
+            "alpha",
+            "opt"
+          ],
+          [
+            "alpha",
+            "salt"
+          ],
+          [
+            "salt",
+            "virid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**CSF bench urgency** uses these identities at speed: gram positive diplococci in CSF Gram stain is pneumococcus until excluded and telephoned, latex antigen after antibiotics, culture and PCR parallel, susceptibility MIC by meningitis breakpoints. Bench minutes change empiric vancomycin decisions.",
+      "say": "Diplococci in CSF are a phone call, not a routine result.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CSF rapid stack",
+          "points": [
+            "Cytospin Gram stain immediate",
+            "Antigen or multiplex PCR if antibiotics given",
+            "Culture incubated in CO2",
+            "Cell counts and chemistry parallel"
+          ]
+        },
+        "right": {
+          "title": "Meningitis differentials by Gram",
+          "points": [
+            "Lancet diplococci: pneumococcus",
+            "Kidney diplococci negative: meningococcus",
+            "Small pleomorphic rods negative: Haemophilus",
+            "Gram positive rods and cocci in newborn: Listeria, GBS"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pneumococcal meningitis management** beside the bench: ceftriaxone plus vancomycin until MIC, dexamethasone with or before first antibiotic in many guidelines (hearing outcomes), repeat lumbar puncture selectively (no improvement, resistant MIC), neurosurgical and ENT sources for recurrence, vaccination and cochlear implant vigilance after.",
+      "say": "Steroid with the first dose and hearing in follow up: meningitis care extends past sterilisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute decisions",
+          "points": [
+            "Do not delay antibiotics for imaging in classic presentations",
+            "Dexamethasone timing with first dose",
+            "Vancomycin until ceftriaxone susceptibility",
+            "ICU for airway and pressure"
+          ]
+        },
+        "right": {
+          "title": "After survival",
+          "points": [
+            "Audiology screening mandatory",
+            "Neurodevelopmental follow up children",
+            "Vaccination completion and asplenia check",
+            "Recurrence: CSF leak hunt"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Invasive isolate stewardship** saves pneumococci for serotyping and resistance surveillance, because conjugate programmes are judged by which serotypes still invade (replacement versus failure). A discarded isolate is a blind spot in national vaccine policy, reference laboratories exist to receive them.",
+      "say": "Send invasive pneumococci onward; vaccine policy reads what benches save.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surveillance questions",
+          "points": [
+            "Vaccine type versus replacement disease",
+            "Resistance by serotype and clone",
+            "Age and risk group shifts",
+            "Outbreaks in care homes and prisons"
+          ]
+        },
+        "right": {
+          "title": "Bench duties",
+          "points": [
+            "Freeze or refer sterile site isolates",
+            "Record vaccine history with requests",
+            "MIC for penicillin and ceftriaxone reported",
+            "Clusters telephoned same day"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Quellung heritage** also typed the pre antibiotic serum therapy era (type specific antisera treated lobar pneumonia), reminding that pneumococcal identity was therapy before penicillin. Its capsule reaction remains the conceptual ancestor of every antigen detection kit in this curriculum. Modern antigen kits inherit this thinking digitally, but the halo under the microscope remains the clearest picture of what a capsule actually is.",
+      "say": "Serum therapy needed the type before the dose; typing began as a prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serum era",
+          "points": [
+            "Type I and II antisera in lobar pneumonia",
+            "Sputum Quellung at the bedside",
+            "Mortality benefit before sulphonamides",
+            "Serum sickness the limiting price"
+          ]
+        },
+        "right": {
+          "title": "Concept heirs",
+          "points": [
+            "Latex antigen kits",
+            "Urinary antigen immunoassays",
+            "Monoclonal typing reagents",
+            "Capsule vaccines target the same structures"
+          ]
+        }
+      }
+    }
+  ]
+}
