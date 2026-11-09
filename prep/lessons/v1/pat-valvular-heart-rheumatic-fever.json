@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-valvular-heart",
+  "subject": "pathology",
+  "title": "Rheumatic Fever: Aschoff Bodies, Anitschkow Cells, Jones Criteria, and MacCallum Plaque",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute rheumatic fever follows group A streptococcal pharyngitis by weeks in susceptible children, when cross reactive immunity inflames heart, joints, skin, and brain while sparing the throat that started it. Molecular mimicry drives the **acute rheumatic fever post-streptococcal syndrome**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Rheumatic fever licks the joints and bites the heart, weeks after streptococcal sore throat in childhood.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Group A streptococcal pharyngitis"
+          },
+          {
+            "id": "b",
+            "label": "Cross reactive antibodies and T cells form"
+          },
+          {
+            "id": "c",
+            "label": "Carditis, arthritis, chorea, skin signs"
+          },
+          {
+            "id": "d",
+            "label": "Valve scarring accumulates with recurrences"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aschoff bodies, focal myocardial granulomas of T cells, plasma cells, and pathognomonic activated macrophages beside fibrinoid necrosis, are the pathognomonic histology of rheumatic carditis in its proliferative phase. The diagnostic granuloma is the **Aschoff body of rheumatic carditis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Aschoff bodies are rheumatic carditis under the microscope; find one and the diagnosis is histologically sealed.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Myocardial finding",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "Exudative",
+            "Oedema, early inflammation",
+            "Acute injury begins"
+          ],
+          [
+            "Proliferative",
+            "Aschoff bodies formed",
+            "Pathognomonic granulomas"
+          ],
+          [
+            "Healing",
+            "Fibrosis replaces lesions",
+            "Scar without valve destiny alone"
+          ],
+          [
+            "Valve chronicity",
+            "Leaflet thickening, commissure fusion",
+            "Rheumatic heart disease emerges"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anitschkow cells, activated macrophages inside Aschoff bodies, show central chromatin in caterpillar longitudinal and owl eye cross sectional patterns, earning their caterpillar cell nickname in every pathology viva. The signature macrophage is the **Anitschkow (caterpillar) cell**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Caterpillar chromatin names the Anitschkow cell, the activated macrophage starring inside Aschoff bodies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aschoff body present",
+          "points": [
+            "Rheumatic carditis proven histologically",
+            "Anitschkow macrophages present",
+            "Pancarditis context supports"
+          ]
+        },
+        "right": {
+          "title": "Non-specific myocarditis",
+          "points": [
+            "Lymphocytic infiltrates, viral causes",
+            "No Aschoff granulomas",
+            "Different therapy and prognosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Jones criteria organise diagnosis: two major manifestations, or one major plus two minor, beside evidence of preceding streptococcal infection, with carditis, migratory polyarthritis, chorea, erythema marginatum, and subcutaneous nodules major. That framework endures as the **revised Jones criteria for rheumatic fever**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Two major, or one major plus two minor, plus streptococcal evidence: Jones criteria in one breath.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Major criteria",
+          "Minor criteria",
+          "Streptococcal evidence"
+        ],
+        "rows": [
+          [
+            "Carditis clinical or echocardiographic",
+            "Fever, arthralgia",
+            "Raised ASO or anti-DNase B"
+          ],
+          [
+            "Migratory polyarthritis",
+            "Raised ESR, CRP",
+            "Positive throat culture or antigen"
+          ],
+          [
+            "Sydenham chorea",
+            "Prolonged PR interval",
+            "Recent scarlet fever"
+          ],
+          [
+            "Erythema marginatum, nodules",
+            "Prior rheumatic fever counted",
+            "Rising titres strongest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "MacCallum plaque roughens the left atrial endocardium above the posterior mitral leaflet where regurgitant jets strike during rheumatic mitral disease, a small gross signature of jet injury. The atrial jet lesion is the **MacCallum plaque of rheumatic mitral regurgitation**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "MacCallum plaque is jet injury written on the left atrium above a regurgitant rheumatic mitral valve.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig2.webp",
+        "alt": "Rheumatic mitral stenosis hemodynamic progression",
+        "caption": "Rheumatic mitral disease haemodynamic progression from carditis to stenosis."
+      }
+    },
+    {
+      "tx": "Sydenham chorea arrives months later as the delayed major manifestation with involuntary movements, emotional lability, and hypotonia, often alone without inflammatory markers, yet still counting fully toward diagnosis. The late neurological major criterion is **Sydenham chorea of rheumatic fever**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Chorea may arrive alone months later and still diagnose rheumatic fever; do not demand fever beside it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early manifestations",
+          "points": [
+            "Arthritis and carditis within weeks",
+            "Inflammatory markers high",
+            "Streptococcal titres rising"
+          ]
+        },
+        "right": {
+          "title": "Chorea presentation",
+          "points": [
+            "Months after infection",
+            "Markers may be normal",
+            "Titres may have fallen, criteria adapt"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Secondary prophylaxis with regular benzathine penicillin prevents recurrent streptococcal infections and cumulative valve destruction for years after an attack, duration graded by carditis and residual valve disease. Recurrence prevention is **rheumatic fever secondary penicillin prophylaxis**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Monthly benzathine penicillin after rheumatic fever protects valves from the next streptococcus for years.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig1.webp",
+        "alt": "Mitral stenosis pathophysiology",
+        "caption": "Rheumatic mitral stenosis pathophysiology, the late valve legacy prophylaxis prevents."
+      }
+    },
+    {
+      "tx": "Acute carditis treatment combines eradication penicillin, anti-inflammatory therapy for arthritis and severe carditis, heart failure care, and chorea support, while valve surgery waits for chronic haemodynamic disease. Layered care is **acute rheumatic carditis management**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Kill streptococcus, calm inflammation, support the failing valve, then protect every future throat infection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnosis by Jones criteria plus strep evidence"
+          },
+          {
+            "id": "b",
+            "label": "Eradication antibiotic course"
+          },
+          {
+            "id": "c",
+            "label": "Anti-inflammatory and heart failure therapy"
+          },
+          {
+            "id": "d",
+            "label": "Long term secondary prophylaxis enrolled"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

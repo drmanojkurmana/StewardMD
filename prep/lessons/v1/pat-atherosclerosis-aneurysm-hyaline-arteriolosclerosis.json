@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-atherosclerosis-aneurysm",
+  "subject": "pathology",
+  "title": "Hyaline and Hyperplastic Arteriolosclerosis, Monckeberg Calcification, and Aortic Aneurysm",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic hypertension and diabetes leak plasma proteins into arteriole walls and thicken basement membranes until homogeneous pink hyaline narrows lumens of kidney, retina, and brain vessels. That glassy small vessel change is **hyaline arteriolosclerosis**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Hyaline arteriolosclerosis is plasma protein glass in arteriole walls, the slow burn of hypertension and diabetes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyaline arteriolosclerosis",
+          "points": [
+            "Homogeneous pink wall thickening",
+            "Benign hypertension, diabetes, ageing",
+            "Benign nephrosclerosis kidney"
+          ]
+        },
+        "right": {
+          "title": "Hyperplastic arteriolosclerosis",
+          "points": [
+            "Onion skin concentric lamination",
+            "Malignant hypertension emergency",
+            "Fibrinoid necrosis accompanies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Malignant hypertension drives arterioles into concentric smooth muscle hyperplasia resembling onion skin layers, with fibrinoid necrosis in kidney and brain heralding hypertensive emergency. The laminated lesion is **hyperplastic (onion-skin) arteriolosclerosis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Onion skin arterioles mean malignant hypertension; find fibrinoid necrosis beside them in kidney and retina.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Hyaline type",
+          "Hyperplastic type"
+        ],
+        "rows": [
+          [
+            "Setting",
+            "Years of benign hypertension, diabetes",
+            "Malignant hypertension crisis"
+          ],
+          [
+            "Wall",
+            "Hyaline protein deposition",
+            "Onion skin smooth muscle layers"
+          ],
+          [
+            "Kidney",
+            "Benign nephrosclerosis, granular surface",
+            "Flea bitten kidney, fibrinoid necrosis"
+          ],
+          [
+            "Urgency",
+            "Chronic risk control",
+            "Emergency pressure lowering"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monckeberg medial calcific sclerosis rings muscular artery media with calcium in ageing, diabetes, and kidney disease, stiffening vessels and falsifying ankle pressures without narrowing the lumen or causing ischaemia directly. The medial railroad track is **Monckeberg medial calcification**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Monckeberg calcifies the media, not the lumen; pipes stiffen, ankle pressures lie, flow survives.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intimal atherosclerosis",
+          "points": [
+            "Plaques narrow lumen",
+            "Ischaemia and thrombosis",
+            "Lipid and inflammation driven"
+          ]
+        },
+        "right": {
+          "title": "Medial Monckeberg calcification",
+          "points": [
+            "Calcified media, lumen spared",
+            "Stiff vessels, false high ankle index",
+            "Ageing, diabetes, CKD mineral disorder"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Abdominal aortic aneurysm dilates the infrarenal aorta beyond three centimetres through atherosclerotic medial destruction, proteolysis, and inflammation, tripling rupture risk as diameter passes five and a half centimetres. Size schedules surveillance and repair: the **abdominal aortic aneurysm (AAA)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Three centimetres names it, five and a half repairs it in most men; diameter is destiny in AAA.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aaa-fig1.webp",
+        "alt": "Ruptured abdominal aortic aneurysm",
+        "caption": "Abdominal aortic aneurysm and rupture, where diameter predicts catastrophe."
+      }
+    },
+    {
+      "tx": "Ruptured aneurysm announces with abdominal or back pain, hypotension, and a pulsatile mass, a triad often incomplete, while ultrasound confirms size and CT maps repair anatomy in stable patients. Free rupture kills most before hospital. That presentation is **ruptured AAA triad and imaging pathway**.",
+      "say": "Pain, hypotension, pulsatile mass: incomplete triads still demand immediate aneurysm thinking.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pain with hypotension, aneurysm suspected"
+          },
+          {
+            "id": "b",
+            "label": "Bedside ultrasound confirms aorta dilated"
+          },
+          {
+            "id": "c",
+            "label": "Stable: CT angiography maps repair"
+          },
+          {
+            "id": "d",
+            "label": "Unstable: theatre or EVAR without delay"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endovascular aneurysm repair seals the sac from inside with stent grafts, sparing open surgery at the price of endoleak surveillance, while open repair suits anatomy and youth where durability counts. Choice individualises **EVAR versus open aneurysm repair**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "EVAR trades operative trauma for lifelong endoleak surveillance; anatomy and age arbitrate the choice.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/atherosclerosis-hypertension-and-aneurysms-fig1.webp",
+        "alt": "Abdominal aortic aneurysm CT",
+        "caption": "CT anatomy of abdominal aortic aneurysm guiding endovascular versus open repair."
+      }
+    },
+    {
+      "tx": "Thoracic aneurysms follow different masters: hypertension, bicuspid aortic valve, Marfan and Loeys-Dietz connective tissue disease, and tertiary syphilis historically, ascending segments threatening dissection and rupture at smaller sizes. That aetiology split is **thoracic versus abdominal aneurysm causation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Abdominal means atherosclerosis, thoracic means connective tissue, valve, pressure, or old syphilis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Dominant causes",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Infrarenal abdominal",
+            "Atherosclerosis, smoking, male sex",
+            "Screen older male smokers"
+          ],
+          [
+            "Ascending thoracic",
+            "Marfan, bicuspid valve, hypertension",
+            "Dissection risk dominates"
+          ],
+          [
+            "Descending thoracic",
+            "Atherosclerosis plus hypertension",
+            "Spinal cord ischaemia concern"
+          ],
+          [
+            "Mycotic aneurysm",
+            "Infected embolus, bacteraemia",
+            "Rapid expansion, fever, source hunt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Screening men over sixty five who ever smoked with one ultrasound prevents rupture deaths cost effectively, and small aneurysms enter diameter based surveillance intervals rather than immediate surgery. That programme is **population AAA screening and surveillance intervals**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "One ultrasound for older men who smoked prevents rupture deaths; small aneurysms are watched, not cut.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Watch",
+          "points": [
+            "Under repair threshold diameter",
+            "Timed ultrasound surveillance",
+            "Smoking cessation, statin, pressure control"
+          ]
+        },
+        "right": {
+          "title": "Repair",
+          "points": [
+            "Threshold reached or rapid growth",
+            "Symptomatic at any size",
+            "EVAR or open by anatomy and fitness"
+          ]
+        }
+      }
+    }
+  ]
+}

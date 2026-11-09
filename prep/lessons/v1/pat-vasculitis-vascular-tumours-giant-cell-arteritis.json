@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-vasculitis-vascular-tumours",
+  "subject": "pathology",
+  "title": "Giant Cell Arteritis, Takayasu, Polyarteritis Nodosa, Kawasaki, and GPA",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Giant cell arteritis inflames large arteries of patients over fifty, especially temporal and ophthalmic branches, with new headache, scalp tenderness, jaw claudication, polymyalgia, and threatened blindness demanding steroids before biopsy. The over fifty large vessel disease is **giant cell (temporal) arteritis**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "New headache, jaw claudication, and visual threat over fifty: steroids today, biopsy this week, in that order.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/temporal-arteritis-fig1.webp",
+        "alt": "Giant cell arteritis histopathology",
+        "caption": "Giant cell arteritis histopathology with giant cells at the internal elastic lamina."
+      }
+    },
+    {
+      "tx": "Temporal artery biopsy shows granulomatous panarteritis with giant cells attacking fragmented internal elastic lamina, but skip lesions and prior steroids cause false negatives, so ultrasound halo signs increasingly share diagnosis. Sampling length matters in **temporal artery biopsy for giant cell arteritis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Biopsy a long segment and expect skip lesions; a negative biopsy never overrules a classic clinical picture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supports GCA",
+          "points": [
+            "Jaw claudication, scalp tenderness",
+            "Very high ESR and CRP",
+            "Halo sign or positive biopsy"
+          ]
+        },
+        "right": {
+          "title": "Vision threatened",
+          "points": [
+            "Amaurosis fugax, diplopia, loss",
+            "Intravenous methylprednisolone",
+            "Ophthalmology same day"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Takayasu arteritis scars aorta and its primary branches in young women, pulseless arms, bruits, claudication, and renovascular hypertension earning its pulseless disease nickname across prepulseless inflammatory and late occlusive phases. The young woman large vessel disease is **Takayasu arteritis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "A young woman with absent pulses, bruits, and arm pressure differences has Takayasu arteritis until proven otherwise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/takayasu-arteritis-fig1.webp",
+        "alt": "Takayasu arteritis vascular lesions",
+        "caption": "Takayasu arteritis vascular lesions across aorta and primary branches."
+      }
+    },
+    {
+      "tx": "Polyarteritis nodosa necrotises medium arteries at branch points into microaneurysms, sparing lungs, injuring kidney, gut, nerves, and skin, historically linked to hepatitis B, without glomerulonephritis or ANCA. The medium vessel necrotising disease is **polyarteritis nodosa (PAN)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "PAN hits medium arteries, spares lungs, skips glomerulonephritis, and asks about hepatitis B.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vessel size",
+          "Disease",
+          "Signature"
+        ],
+        "rows": [
+          [
+            "Large",
+            "Giant cell, Takayasu arteritis",
+            "Aorta and primary branches"
+          ],
+          [
+            "Medium",
+            "Polyarteritis nodosa, Kawasaki",
+            "Microaneurysms, coronary disease"
+          ],
+          [
+            "Small ANCA",
+            "GPA, MPA, EGPA",
+            "Glomerulonephritis, lung haemorrhage"
+          ],
+          [
+            "Small immune complex",
+            "IgA vasculitis, cryoglobulinaemia",
+            "Palpable purpura patterns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Kawasaki disease inflames medium arteries of febrile children under five, coronary aneurysms its feared legacy, diagnosed by fever days plus conjunctivitis, rash, mucosal changes, extremity changes, and a large cervical node. Timely immunoglobulin prevents aneurysms: **Kawasaki disease coronary protection**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Five days of fever with red eyes, lips, rash, and hands in a toddler means Kawasaki; IVIG timing saves coronaries.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kawasaki clues",
+          "points": [
+            "Prolonged fever, bilateral nonpurulent conjunctivitis",
+            "Strawberry tongue, cracked lips, extremity change",
+            "Coronary echo surveillance"
+          ]
+        },
+        "right": {
+          "title": "Scarlet fever mimic",
+          "points": [
+            "Sandpaper rash, Pastia lines",
+            "Streptococcal evidence",
+            "Responds to penicillin course"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Granulomatosis with polyangiitis destroys upper airway, lung, and kidney with necrotising granulomas and small vessel vasculitis: saddle nose, sinusitis, cavitating nodules, and crescentic glomerulonephritis. Its older name yields to description: **granulomatosis with polyangiitis (GPA, formerly Wegener)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Nose, lung, and kidney destroyed together with PR3 ANCA means granulomatosis with polyangiitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic sinusitis, saddle nose deformity"
+          },
+          {
+            "id": "b",
+            "label": "Cavitating pulmonary nodules"
+          },
+          {
+            "id": "c",
+            "label": "Crescentic glomerulonephritis"
+          },
+          {
+            "id": "d",
+            "label": "PR3 ANCA supports, biopsy confirms pattern"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Vasculitis classification by vessel size, Chapel Hill style, organises the differential before antibodies refine it, because large, medium, and small vessel diseases share almost no bedside geography. That size map is **vasculitis classification by vessel calibre**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Ask vessel size first in every vasculitis; geography separates diseases antibodies later refine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Calibre",
+          "Prototype",
+          "Organ accent"
+        ],
+        "rows": [
+          [
+            "Large",
+            "Takayasu arteritis",
+            "Limb claudication, bruits"
+          ],
+          [
+            "Medium",
+            "Polyarteritis nodosa",
+            "Gut, nerve, kidney arteries"
+          ],
+          [
+            "Small ANCA",
+            "Microscopic polyangiitis",
+            "Kidney and lung capillaries"
+          ],
+          [
+            "Variable",
+            "Behcet disease",
+            "Mouth and genital ulcers, thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Induction therapy for organ threatening vasculitis pairs high dose glucocorticoids with rituximab or cyclophosphamide, plasma exchange in selected pulmonary renal crises, and prophylaxis against the treatment's infections. Severity schedules intensity: **organ-threatening vasculitis induction therapy**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Organ threatening vasculitis gets steroids plus rituximab or cyclophosphamide, and prophylaxis against their infections.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Limited disease",
+          "points": [
+            "No organ threat yet",
+            "Methotrexate options in GPA",
+            "Steroid minimisation planned"
+          ]
+        },
+        "right": {
+          "title": "Organ threatening",
+          "points": [
+            "Renal failure, lung haemorrhage",
+            "Rituximab or cyclophosphamide induction",
+            "Plasma exchange selected cases"
+          ]
+        }
+      }
+    }
+  ]
+}

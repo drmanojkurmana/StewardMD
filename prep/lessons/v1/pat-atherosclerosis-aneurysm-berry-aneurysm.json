@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-atherosclerosis-aneurysm",
+  "subject": "pathology",
+  "title": "Berry Aneurysms, Aortic Dissection, Cystic Medial Necrosis, and Syphilitic Aortitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Berry aneurysms balloon from branch points of the circle of Willis where medial muscle and internal elastic lamina end, growing silently until rupture floods subarachnoid space with thunderclap headache. Anterior communicating artery leads the sites: the **berry (saccular) aneurysm**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Berry aneurysms hide at circle of Willis branch points until thunderclap subarachnoid haemorrhage announces them.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Share",
+          "Associated clue"
+        ],
+        "rows": [
+          [
+            "Anterior communicating",
+            "Commonest single site",
+            "Bifrontal and interhemispheric blood"
+          ],
+          [
+            "Posterior communicating",
+            "Frequent",
+            "Third nerve palsy with pupil involvement"
+          ],
+          [
+            "Middle cerebral bifurcation",
+            "Frequent",
+            "Sylvian fissure clot"
+          ],
+          [
+            "Basilar tip",
+            "Posterior circulation",
+            "Midbrain and thalamic threat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Polycystic kidney disease, family history, hypertension, smoking, and connective tissue disorders raise berry aneurysm risk, while size, posterior location, and growth raise rupture risk enough to discuss clipping or coiling. That counselling balance is **berry aneurysm rupture risk assessment**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Screen polycystic kidney families with aneurysm history; size and site decide prophylactic repair talks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Observe",
+          "points": [
+            "Small, anterior, stable aneurysm",
+            "Blood pressure and smoking addressed",
+            "Interval imaging surveillance"
+          ]
+        },
+        "right": {
+          "title": "Repair discussion",
+          "points": [
+            "Large, posterior, growing, symptomatic",
+            "Prior subarachnoid haemorrhage",
+            "Coiling versus clipping by anatomy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Aortic dissection tears through a diseased media, driving a blood filled false lumen that can rupture, tamponade, occlude branch vessels, and shear the aortic valve within hours of tearing chest pain. Stanford type A involves ascending aorta: **aortic dissection, Stanford classification**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Tearing pain plus pulse deficits means dissection; type A goes to theatre, type B earns medical control first.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig1.webp",
+        "alt": "Aortic dissection pathophysiology",
+        "caption": "Aortic dissection pathophysiology with intimal tear and false lumen propagation."
+      }
+    },
+    {
+      "tx": "Cystic medial necrosis, pools of mucoid matrix with elastic fibre loss weakening the aortic media, underlies dissection in Marfan syndrome and hypertension, though modern language prefers medial degeneration. The weakened substrate is **cystic medial degeneration of the aorta**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Medial degeneration is the soil of dissection, richest in Marfan aortas and hypertensive ageing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig2.webp",
+        "alt": "Aortic dissection classification",
+        "caption": "Aortic dissection classification guiding surgical versus medical management."
+      }
+    },
+    {
+      "tx": "Marfan aortopathy dilates the sinuses of Valsalva progressively from fibrillin defect, so beta blockade or angiotensin blockade, activity guidance, and elective root replacement at thresholds prevent dissection. Surveillance imaging schedules life: **Marfan aortic surveillance and prophylactic replacement**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Measure the Marfan root yearly and replace it on schedule; dissection prevented is a life saved quietly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fibrillin defect weakens aortic media"
+          },
+          {
+            "id": "b",
+            "label": "Sinus of Valsalva dilates progressively"
+          },
+          {
+            "id": "c",
+            "label": "Medical therapy slows expansion"
+          },
+          {
+            "id": "d",
+            "label": "Elective root replacement before dissection"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Syphilitic aortitis of tertiary syphilis inflames ascending aortic vasa vasorum into tree bark scarring, dilating the root, widening commissures into regurgitation, and ostially narrowing coronary origins. The ascending pattern betrays **syphilitic (luetic) aortitis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Tree bark ascending aorta with root dilation and coronary ostial narrowing is tertiary syphilis until serology clears it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Syphilitic aneurysm",
+          "points": [
+            "Ascending aorta and root",
+            "Tree bark intimal scarring",
+            "Coronary ostial stenosis, AR"
+          ]
+        },
+        "right": {
+          "title": "Atherosclerotic aneurysm",
+          "points": [
+            "Infrarenal abdominal aorta",
+            "Calcified plaque burden",
+            "Rupture dominates risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dissection pain migrates as the flap extends, pulse and blood pressure differ between arms, and new aortic regurgitation, tamponade, stroke, or limb ischaemia mark branch involvement demanding CT angiography immediately. That migrating picture is **aortic dissection clinical progression signs**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Pain that travels with the flap, unequal arm pressures, and new regurgitation demand CT angiography now.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Flap reaches",
+          "Sign",
+          "Danger"
+        ],
+        "rows": [
+          [
+            "Coronary ostia",
+            "Myocardial infarction pattern",
+            "Wrong thrombolysis catastrophe"
+          ],
+          [
+            "Pericardium",
+            "Tamponade",
+            "Obstructive shock"
+          ],
+          [
+            "Carotid vessels",
+            "Stroke, coma",
+            "Cerebral malperfusion"
+          ],
+          [
+            "Iliac vessels",
+            "Pulse loss, limb ischaemia",
+            "Limb and gut malperfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anti-impulse therapy with beta blockade before vasodilators cuts aortic wall shear in dissection, because dilating first reflexively increases contractility and propagates the flap. Sequence saves aortas: **anti-impulse therapy ordering in dissection**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Block the impulse before dilating the vessel; order of drugs propagates or protects the flap.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspected dissection, analgesia given"
+          },
+          {
+            "id": "b",
+            "label": "Beta blockade lowers heart rate and shear"
+          },
+          {
+            "id": "c",
+            "label": "Vasodilator added only after blockade"
+          },
+          {
+            "id": "d",
+            "label": "Type A to theatre, type B medical unless complicated"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

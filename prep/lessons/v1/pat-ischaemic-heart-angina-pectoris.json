@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-ischaemic-heart",
+  "subject": "pathology",
+  "title": "Angina, Myocardial Infarction Timeline, Troponin, Rupture, and Dressler Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Angina pectoris is myocardial ischaemia announcing as central pressure pain on exertion or emotion, relieved by rest or nitrates, divided into stable, unstable, and vasospastic Prinzmetal patterns by tempo and trigger. The exertional prototype remains **stable angina pectoris of fixed coronary stenosis**.",
+      "say": "Exertional pressure relieved by rest or nitrate is stable angina; pain at rest rewrites the risk entirely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stable angina",
+          "points": [
+            "Predictable exertional trigger",
+            "Fixed severe stenosis",
+            "Risk factor therapy foundation"
+          ]
+        },
+        "right": {
+          "title": "Unstable patterns",
+          "points": [
+            "Rest, crescendo, or new severe pain",
+            "Plaque disruption with thrombus",
+            "Emergency troponin pathway"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Myocardial infarction kills cardiomyocytes by coagulative necrosis on a timetable: wavy fibres within hours, neutrophil infiltration through day three, macrophages clearing debris, granulation tissue, then collagen scar over weeks. Dating infarcts follows **myocardial infarction histological timeline**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Wavy fibres, neutrophils, macrophages, granulation, scar: histology dates an infarct like tree rings.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ischaemic-heart-disease-and-infarction-fig1.webp",
+        "alt": "Myocardial infarction pathophysiology diagram",
+        "caption": "Myocardial infarction pathophysiology from plaque rupture to necrosis and healing."
+      }
+    },
+    {
+      "tx": "Contraction band necrosis, dense eosinophilic cross bands from calcium flooded hypercontraction, marks reperfusion of infarcted myocardium by thrombolysis, intervention, or resuscitation, distinguishing reperfused from uninterrupted necrosis. The reperfusion signature is **contraction band necrosis of reperfused infarction**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Contraction bands mean blood returned to dying muscle; they are reperfusion's histological receipt.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Time",
+          "Histology",
+          "Gross"
+        ],
+        "rows": [
+          [
+            "Under 12 hours",
+            "Wavy fibres, early coagulative change",
+            "Often normal appearance"
+          ],
+          [
+            "1 to 3 days",
+            "Dense neutrophil infiltration",
+            "Pale with hyperaemic border"
+          ],
+          [
+            "3 to 14 days",
+            "Macrophages, granulation begins",
+            "Yellow softening, rupture risk"
+          ],
+          [
+            "Weeks to months",
+            "Collagen scar matures",
+            "White fibrous scar"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Troponin I and T released from necrotic cardiomyocytes dominate diagnosis with high sensitivity assays detecting injury within hours, while CK-MB helps date reinfarction by its shorter curve and myoglobin rises earliest but nonspecifically. The diagnostic standard is **cardiac troponin in myocardial injury**.",
+      "say": "High sensitivity troponin rules modern chest pain pathways; CK-MB still helps time a second infarct.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ischemic-heart-disease-fig2.webp",
+        "alt": "Coronary thrombosis drug therapy",
+        "caption": "Coronary thrombosis therapy targets across antiplatelet and anticoagulant pathways."
+      }
+    },
+    {
+      "tx": "Troponin elevation means myocardial injury, not automatically type 1 infarction: supply demand mismatch, myocarditis, pulmonary embolism, sepsis, and kidney failure raise it, demanding type classification before therapy. That taxonomy is **myocardial infarction types one to five**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Troponin accuses injury, not a mechanism; classify type one plaque events against supply demand type two.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 infarction",
+          "points": [
+            "Plaque rupture or erosion thrombosis",
+            "Antiplatelet, anticoagulant, reperfusion",
+            "Culprit lesion strategy"
+          ]
+        },
+        "right": {
+          "title": "Type 2 injury",
+          "points": [
+            "Tachycardia, hypoxia, anaemia, sepsis",
+            "Treat the supply demand driver",
+            "Troponin pattern supports, context decides"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Free wall rupture, papillary muscle rupture with torrential mitral regurgitation, and septal rupture strike in the macrophage softened window days three to seven, announcing by tamponade or shock after infarction. Mechanical catastrophe timing follows **post-infarction rupture window**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "New shock three to seven days after infarction means rupture until echocardiography proves otherwise.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Timing",
+          "Presentation"
+        ],
+        "rows": [
+          [
+            "Free wall rupture",
+            "Days 3 to 7 classic",
+            "Tamponade, electromechanical dissociation"
+          ],
+          [
+            "Papillary rupture",
+            "Days 2 to 7",
+            "Acute pulmonary oedema, murmur may soften"
+          ],
+          [
+            "Septal rupture",
+            "Days 3 to 5",
+            "Harsh murmur, right heart failure"
+          ],
+          [
+            "LV aneurysm",
+            "Weeks later",
+            "Persistent ST elevation, thrombus, failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dressler syndrome autoimmune pericarditis arrives weeks after infarction or cardiac surgery with fever, pleuritic pain, rub, and effusion, answering anti-inflammatory therapy while anticoagulation is handled cautiously. The late pericarditis is **Dressler syndrome (post-myocardial infarction pericarditis)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Fever and pleuritic pain weeks after infarction mean Dressler syndrome, not automatically a new infarct.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early post-MI pericarditis",
+          "points": [
+            "Days 1 to 3, infarct adjacent",
+            "Local inflammation over necrosis",
+            "Usually self limited"
+          ]
+        },
+        "right": {
+          "title": "Dressler syndrome",
+          "points": [
+            "Weeks later, autoimmune",
+            "Fever, rub, effusion, pleurisy",
+            "NSAIDs, colchicine, steroids selected"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Reperfusion injury paradoxically kills additionally through oxidative burst, calcium overload, and microvascular obstruction when flow returns, limiting salvage despite opened arteries and motivating conditioning research. That salvage ceiling is **myocardial reperfusion injury and no-reflow**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Opening the artery does not save every cell; reperfusion itself injures through oxidation and microvascular block.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Plaque rupture occludes artery"
+          },
+          {
+            "id": "b",
+            "label": "Minutes decide salvageable myocardium"
+          },
+          {
+            "id": "c",
+            "label": "Reperfusion by PCI or thrombolysis"
+          },
+          {
+            "id": "d",
+            "label": "Scar, remodelling, surveillance follow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

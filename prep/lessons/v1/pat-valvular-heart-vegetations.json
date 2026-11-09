@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-valvular-heart",
+  "subject": "pathology",
+  "title": "Valve Vegetations Compared: Infective, Libman-Sacks, Marantic, and Carcinoid Heart Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Vegetation describes any valve mass, but its composition separates infected friable growths destroying tissue from sterile platelet fibrin deposits of marantic and Libman-Sacks disease riding intact leaflets. Composition before organism is **vegetation characterisation by pathology**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Ask what a vegetation is made of before asking what grows from it; sterile and infected masses diverge completely.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vegetation type",
+          "Composition",
+          "Valve damage"
+        ],
+        "rows": [
+          [
+            "Infective",
+            "Organisms, fibrin, platelets, inflammation",
+            "Destructive, perforation, abscess"
+          ],
+          [
+            "Marantic NBTE",
+            "Sterile platelet fibrin, bland",
+            "Leaflet intact, emboli dominate"
+          ],
+          [
+            "Libman-Sacks",
+            "Immune complexes, fibrin, inflammation",
+            "Either surface, regurgitation late"
+          ],
+          [
+            "Lambl excrescence",
+            "Degenerative filamentous fronds",
+            "Ageing, usually incidental"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Libman-Sacks endocarditis of lupus plants sterile verrucous vegetations on either valve surface including undersurfaces, linked to antiphospholipid antibodies, embolising silently more often than destroying acutely. The lupus vegetation remains **Libman-Sacks sterile endocarditis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Lupus vegetations sit on either surface and embolise quietly; cultures stay negative while antibodies speak.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Libman-Sacks",
+          "points": [
+            "Lupus, antiphospholipid association",
+            "Either surface, small verrucae",
+            "Sterile cultures"
+          ]
+        },
+        "right": {
+          "title": "Infective endocarditis",
+          "points": [
+            "Fever, positive cultures usual",
+            "Downstream surface, destructive",
+            "Emboli septic, abscess possible"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nonbacterial thrombotic endocarditis, marantic endocarditis, deposits sterile platelet fibrin along valve closure lines in cancer, sepsis, antiphospholipid syndrome, and wasting states, embolising to brain, spleen, and kidney without infection signs. The wasting associated lesion is **marantic (nonbacterial thrombotic) endocarditis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Marantic vegetations embolise from cancer and wasting valves while cultures and fever stay silent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-valve-prolapse-fig1.webp",
+        "alt": "Mitral valve prolapse pathology",
+        "caption": "Valve substrate pathology predisposing to vegetation formation and regurgitation."
+      }
+    },
+    {
+      "tx": "Embolic pattern separates sterile from infective sources imperfectly: sterile vegetations shower bland infarcts, infective ones add abscess, mycotic aneurysm, and fever, so cultures, inflammatory markers, and autoimmune serology travel together. That combined hunt is **sterile versus infective vegetation workup**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Bland infarcts suggest sterile vegetations, septic emboli suggest infection; send cultures and serology together.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Vegetation seen on echocardiography"
+          },
+          {
+            "id": "b",
+            "label": "Three culture sets before antibiotics"
+          },
+          {
+            "id": "c",
+            "label": "Lupus, antiphospholipid, malignancy review"
+          },
+          {
+            "id": "d",
+            "label": "Therapy: antibiotics, anticoagulation, or both paths"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Carcinoid heart disease bathes right sided valves in serotonin from liver metastasised midgut tumours, plastering tricuspid and pulmonary valves with fibrous plaques until regurgitation and stenosis fail the right heart. Left valves escape behind lung clearance: **carcinoid heart disease, right sided fibrosis**.",
+      "say": "Flushing diarrhoea plus right valve fibrosis means carcinoid heart disease; the lungs protect the left side.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig2.webp",
+        "alt": "Rheumatic mitral stenosis hemodynamic progression",
+        "caption": "Valve haemodynamic progression, contrasting left sided rheumatic disease with right sided carcinoid fibrosis."
+      }
+    },
+    {
+      "tx": "Urinary 5-HIAA and chromogranin confirm carcinoid syndrome biochemically, somatostatin analogues control flushing and diarrhoea, and valve replacement is considered when right heart failure advances despite syndrome control. Biochemical confirmation uses **urinary 5-HIAA in carcinoid syndrome**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Measure urinary 5-HIAA, calm the syndrome with somatostatin analogues, and time valve surgery to right heart failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Carcinoid heart",
+          "Rheumatic heart"
+        ],
+        "rows": [
+          [
+            "Valves favoured",
+            "Tricuspid and pulmonary right side",
+            "Mitral then aortic left side"
+          ],
+          [
+            "Lesion style",
+            "Fibrous plaque plastering",
+            "Commissure fusion, calcification"
+          ],
+          [
+            "Systemic clue",
+            "Flushing, diarrhoea, wheeze",
+            "Streptococcal and Jones history"
+          ],
+          [
+            "Key test",
+            "5-HIAA, chromogranin, echo",
+            "Echo morphology, strep serology"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prosthetic valve endocarditis splits early hospital acquired staphylococcal disease from late community patterns, invades sewing rings into abscess and dehiscence, and usually demands surgical counsel early. The device infection is **prosthetic valve endocarditis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Fever with a prosthetic valve is endocarditis until proven otherwise, and abscess makes it surgical early.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early prosthetic infection",
+          "points": [
+            "Within months of surgery",
+            "Staphylococci including epidermidis",
+            "Ring abscess, dehiscence common"
+          ]
+        },
+        "right": {
+          "title": "Late prosthetic infection",
+          "points": [
+            "Community organisms as native valves",
+            "Vegetations more visible",
+            "Antibiotics may cure selected cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Echocardiography escalates from transthoracic to transoesophageal when prostheses, devices, abscess suspicion, or negative images meet high clinical probability, because missing endocarditis costs valves and lives. That escalation rule is **transoesophageal echo in suspected endocarditis**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Prosthetic valve or high suspicion with negative surface echo earns transoesophageal imaging without argument.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspicion raised clinically"
+          },
+          {
+            "id": "b",
+            "label": "Transthoracic echo first"
+          },
+          {
+            "id": "c",
+            "label": "Transoesophageal if prosthesis or doubt"
+          },
+          {
+            "id": "d",
+            "label": "CT or PET imaging for complications selected"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

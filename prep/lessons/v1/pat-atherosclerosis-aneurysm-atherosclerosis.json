@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-atherosclerosis-aneurysm",
+  "subject": "pathology",
+  "title": "Atherosclerosis: Fatty Streaks, Fibrous Caps, Foam Cells, and Response to Injury",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Atherosclerosis hardens and narrows large and medium arteries through lipid rich plaques that grow for decades, rupture or erode to thrombose, weaken walls into aneurysms, and stenose organs into ischaemia. It remains the dominant killer substrate: **atherosclerosis of elastic and muscular arteries**.",
+      "say": "Lipid plaques that rupture, stenose, and aneurysm: atherosclerosis underlies most heart attacks and strokes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Endothelial injury and lipid entry"
+          },
+          {
+            "id": "b",
+            "label": "Monocytes become foam cells"
+          },
+          {
+            "id": "c",
+            "label": "Smooth muscle builds fibrous cap"
+          },
+          {
+            "id": "d",
+            "label": "Rupture, thrombosis, stenosis, aneurysm"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fatty streaks, flat yellow intimal lines of foam cells in teenagers and even children, are the earliest visible lesions, universal yet not destined all to progress, concentrating later at branch points of disturbed flow. The precursor lesion is the **fatty streak of atherosclerosis**.",
+      "say": "Fatty streaks appear in teenagers at branch points; only some mature into dangerous plaques.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fatty streak",
+          "points": [
+            "Foam cells only, flat lesion",
+            "Present from adolescence",
+            "Reversible in principle"
+          ]
+        },
+        "right": {
+          "title": "Mature plaque",
+          "points": [
+            "Necrotic lipid core, fibrous cap",
+            "Calcification, neovessels",
+            "Rupture and thrombosis risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The fibrous cap of smooth muscle and collagen roofs the necrotic lipid core, and its thickness decides destiny: thick caps stenose slowly, thin inflamed caps with large cores rupture into thrombosis. Vulnerability lives in the **thin fibrous cap atheroma (vulnerable plaque)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Thin cap, big core, heavy inflammation: that plaque ruptures; thick caps merely narrow.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Stable plaque",
+          "Vulnerable plaque"
+        ],
+        "rows": [
+          [
+            "Fibrous cap",
+            "Thick, collagen rich",
+            "Thin, inflamed, enzymatically weakened"
+          ],
+          [
+            "Lipid core",
+            "Small",
+            "Large necrotic core"
+          ],
+          [
+            "Symptoms",
+            "Gradual exertional ischaemia",
+            "Sudden thrombosis, infarction"
+          ],
+          [
+            "Imaging clue",
+            "Heavy calcification often",
+            "Positive remodelling, spotty calcium"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Foam cells are macrophages, and later smooth muscle cells, gorged on oxidised LDL taken through scavenger receptors that never switch off, dying into the necrotic core while releasing inflammatory cytokines. The lipid stuffed cell is the **foam cell of atherosclerosis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Foam cells are macrophages that ate oxidised LDL without an off switch and died into the core.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "LDL enters and oxidises in intima"
+          },
+          {
+            "id": "b",
+            "label": "Monocytes recruited, become macrophages"
+          },
+          {
+            "id": "c",
+            "label": "Scavenger uptake creates foam cells"
+          },
+          {
+            "id": "d",
+            "label": "Foam cell death feeds necrotic core"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The response to injury hypothesis frames atherosclerosis as chronic healing: endothelial injury from hypertension, smoking, diabetes, and lipids invites lipid entry, inflammation, and smooth muscle repair that overshoots. That founding framework remains the **response-to-injury hypothesis of atherosclerosis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Atherosclerosis is healing that never stops: injury, lipid, inflammation, and overshooting repair in a loop.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Injury drivers",
+          "points": [
+            "Hypertension shear, smoking toxins",
+            "Diabetes glycation, high LDL",
+            "Branch point disturbed flow"
+          ]
+        },
+        "right": {
+          "title": "Protective forces",
+          "points": [
+            "Laminar flow, nitric oxide",
+            "HDL reverse transport",
+            "Statins, pressure and glucose control"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Risk factor modification attacks every loop stage: LDL lowering with statins and beyond, blood pressure and diabetes control, smoking cessation, and antiplatelet therapy after events, shrinking events long before plaques visibly regress. The event prevention package is **atherosclerosis risk factor modification**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Lower LDL, pressure, glucose, and smoke exposure together; events fall years before plaques visibly shrink.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/atherosclerosis-hypertension-and-aneurysms-fig1.webp",
+        "alt": "Abdominal aortic aneurysm CT in atherosclerosis",
+        "caption": "Atherosclerotic abdominal aortic aneurysm on CT, a late wall weakening complication."
+      }
+    },
+    {
+      "tx": "Plaque thrombosis arrives by rupture of the cap, superficial erosion over proteoglycan rich lesions especially in younger women and smokers, or eruptive calcified nodules, each exposing thrombogenic core to blood. The commonest trigger remains **atherosclerotic plaque rupture with thrombosis**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Rupture, erosion, or calcified nodule: three doors into the same coronary thrombosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mechanism",
+          "Substrate",
+          "Typical context"
+        ],
+        "rows": [
+          [
+            "Plaque rupture",
+            "Thin cap, large core",
+            "Commonest fatal coronary thrombosis"
+          ],
+          [
+            "Plaque erosion",
+            "Proteoglycan rich, intact cap",
+            "Younger patients, women, smokers"
+          ],
+          [
+            "Calcified nodule",
+            "Eruptive calcification",
+            "Older, tortuous calcified arteries"
+          ],
+          [
+            "Embolism",
+            "Plaque debris downstream",
+            "Procedures, aortic sources"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aneurysmal weakening completes the disease spectrum when medial destruction and inflammation thin the wall until pulsatile pressure dilates it, most lethally in the infrarenal aorta of older male smokers. That dilation endpoint is **atherosclerotic abdominal aortic aneurysm**. That is why this detail earns its place in every examination and ward round.",
+      "say": "The same disease that narrows coronaries dilates the aorta; older male smokers earn ultrasound screening.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aaa-fig1.webp",
+        "alt": "Ruptured abdominal aortic aneurysm",
+        "caption": "Ruptured abdominal aortic aneurysm, the catastrophic endpoint of atherosclerotic wall weakening."
+      }
+    }
+  ]
+}

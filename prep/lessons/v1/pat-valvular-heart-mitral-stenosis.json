@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-valvular-heart",
+  "subject": "pathology",
+  "title": "Mitral Stenosis Fish Mouth, Calcific Aortic Stenosis, Mitral Prolapse, and Infective Endocarditis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Rheumatic mitral stenosis fuses commissures and thickens leaflets into a fish mouth or buttonhole valve, obstructing left atrial emptying until pulmonary hypertension, atrial fibrillation, and right heart failure follow. The fused orifice is the **fish-mouth mitral stenosis valve**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Fish mouth commissure fusion is rheumatic mitral stenosis; the left atrium pays first, lungs and right heart next.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig1.webp",
+        "alt": "Mitral stenosis pathophysiology",
+        "caption": "Mitral stenosis pathophysiology with left atrial pressure overload and pulmonary consequences."
+      }
+    },
+    {
+      "tx": "Auscultation teaches the lesion: loud first sound, opening snap, and low mid diastolic rumble with presystolic accentuation while sinus rhythm lasts, severity lengthening the murmur and closing the snap interval. That bedside triad is **mitral stenosis auscultatory severity signs**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Loud S1, opening snap, long rumble: closer snap and longer murmur mean tighter mitral stenosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tight stenosis clues",
+          "points": [
+            "S1 to opening snap interval short",
+            "Long diastolic rumble",
+            "Pulmonary hypertension signs"
+          ]
+        },
+        "right": {
+          "title": "Milder stenosis clues",
+          "points": [
+            "Snap later after S2",
+            "Short murmur, soft signs",
+            "Symptoms only on exertion or pregnancy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Calcific aortic stenosis of ageing and bicuspid valves progressively obstructs ejection with exertional dyspnoea, angina, and syncope, whose appearance historically halved survival without valve replacement. The degenerative obstruction is **calcific aortic stenosis of ageing and bicuspid valves**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Dyspnoea, angina, syncope in calcific aortic stenosis once timed survival; replacement rewrites that clock.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Symptom",
+          "Mechanism",
+          "Classic teaching"
+        ],
+        "rows": [
+          [
+            "Exertional dyspnoea",
+            "Raised filling pressures, hypertrophy",
+            "Heart failure heralds decline"
+          ],
+          [
+            "Angina",
+            "Demand exceeds calcified supply",
+            "Even without epicardial disease"
+          ],
+          [
+            "Syncope",
+            "Fixed output cannot rise",
+            "Exertional or arrhythmic"
+          ],
+          [
+            "Late signs",
+            "Slow rising pulse, soft A2",
+            "Bedside severity still matters"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mitral valve prolapse billows myxomatous leaflets into the left atrium with a mid systolic click and late murmur, usually benign, occasionally regurgitant, arrhythmic, endocarditis prone, or chordally ruptured. The click murmur valve is **mitral valve prolapse (myxomatous degeneration)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Click then late murmur means prolapse; most live normally, a minority earn surveillance and repair.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-valve-prolapse-fig1.webp",
+        "alt": "Mitral valve prolapse pathology",
+        "caption": "Mitral valve prolapse pathology with myxomatous leaflet billowing."
+      }
+    },
+    {
+      "tx": "Balloon mitral valvotomy splits fused rheumatic commissures along their natural lines, ideal when leaflets remain pliable without heavy calcification, thrombus, or significant regurgitation, scored echocardiographically beforehand. Patient selection uses the **Wilkins score for mitral valvotomy suitability**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Pliable leaflets, fused commissures, no thrombus: balloon valvotomy splits rheumatic stenosis along its seams.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe symptomatic mitral stenosis"
+          },
+          {
+            "id": "b",
+            "label": "Echo: pliability, calcium, regurgitation, thrombus"
+          },
+          {
+            "id": "c",
+            "label": "Balloon valvotomy if favourable"
+          },
+          {
+            "id": "d",
+            "label": "Surgery if anatomy hostile"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infective endocarditis seeds damaged or prosthetic valves with bacteraemic organisms forming friable infected vegetations that embolise, destroy leaflets, invade annuli, and declare through fever and new murmurs. Duke criteria organise certainty: **infective endocarditis by modified Duke criteria**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Fever, new murmur, emboli, and positive cultures assemble Duke criteria; echocardiography hunts the vegetation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subacute pattern",
+          "points": [
+            "Viridans streptococci, dental source",
+            "Weeks of fever, splenomegaly",
+            "Osler nodes, Janeway lesions teaching"
+          ]
+        },
+        "right": {
+          "title": "Acute pattern",
+          "points": [
+            "Staphylococcus aureus, devices, injection use",
+            "Days, valve destruction, abscess",
+            "Urgent surgery consultation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Blood cultures before antibiotics, at least three sets from separate sites, remain the diagnostic cornerstone whose neglect sterilises the evidence and condemns patients to blind prolonged therapy. Culture discipline is **blood cultures before antibiotics in endocarditis**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Three culture sets before antibiotics whenever endocarditis is possible; sterilised evidence helps nobody.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          " organism group",
+          "Typical source",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Viridans streptococci",
+            "Oral cavity",
+            "Subacute native valve disease"
+          ],
+          [
+            "Staphylococcus aureus",
+            "Skin, devices, injection use",
+            "Acute destructive, metastatic abscess"
+          ],
+          [
+            "Enterococci",
+            "Gut and urinary tracts",
+            "Older men, procedures"
+          ],
+          [
+            "Culture negative",
+            "Prior antibiotics, fastidious HACEK, zoonoses",
+            "Serology and molecular rescue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Surgery in endocarditis is timed by heart failure from valve destruction, uncontrolled infection or abscess, and embolic prevention in large mobile vegetations, decided by endocarditis teams rather than fever curves. Those triggers are **surgical indications in infective endocarditis**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Failure, uncontrolled infection, embolism risk: those three, not fever alone, send endocarditis to theatre.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cultures, echo, Duke assessment"
+          },
+          {
+            "id": "b",
+            "label": "Empirical then targeted antibiotics"
+          },
+          {
+            "id": "c",
+            "label": "Daily failure, abscess, embolus review"
+          },
+          {
+            "id": "d",
+            "label": "Endocarditis team surgical timing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
