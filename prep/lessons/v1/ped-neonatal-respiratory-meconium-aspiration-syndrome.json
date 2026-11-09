@@ -1,0 +1,190 @@
+{
+ "key": "ped-neonatal-respiratory-meconium-aspiration-syndrome",
+ "v": 1,
+ "module": "ped-neonatal-respiratory",
+ "subject": "paediatrics",
+ "title": "Meconium Aspiration, Pulmonary Hypertension and Distress Scoring",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Passage of fetal colonic content into amniotic fluid occurs in response to hypoxic stress, leading to **meconium aspiration syndrome**. Occurring predominantly in post-term or growth-restricted neonates who suffer in utero asphyxia, deep fetal gasping draws thick particulate meconium into the terminal bronchioles, causing mechanical obstruction, severe chemical pneumonitis, and secondary surfactant inactivation.",
+   "say": "Meconium aspiration syndrome causes mechanical airway plugging, chemical pneumonitis, and surfactant inactivation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-meconium.webp",
+    "alt": "Resuscitation management of infant born through meconium-stained liquor.",
+    "caption": "Resuscitation management of an infant delivered through meconium-stained liquor. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Small airways plugged with particulate meconium create a dynamic **ball valve airway obstruction**. Air enters around the semi-solid meconium plug during active inspiratory expansion but becomes trapped during passive expiratory narrowing. Progressive alveolar hyperinflation and air trapping frequently precipitate pulmonary air leaks, with pneumothorax developing in twenty percent of affected neonates.",
+   "say": "A ball-valve mechanism traps air behind meconium plugs, predisposing to pneumothorax.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inspiratory Phase",
+     "points": [
+      "Bronchial lumen widens during inspiration",
+      "Air flows past semi-occlusive meconium plug",
+      "Alveoli expand distally"
+     ]
+    },
+    "right": {
+     "title": "Expiratory Phase",
+     "points": [
+      "Bronchial lumen narrows during expiration",
+      "Plug creates complete mechanical blockage",
+      "Air trapped under tension causes alveolar rupture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chest radiography reflects heterogeneous airway involvement, displaying coarse **patchy pulmonary infiltrates alternating with areas of hyperinflation**. Irregular fluffy infiltrates represent chemical atelectasis and inflammation, while interspaced lucent regions represent hyperinflated alveoli. Flattened diaphragmatic contours and widened intercostal spaces confirm significant gas trapping.",
+   "say": "Radiography shows coarse patchy infiltrates alternating with hyperinflated lung fields.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiological Sign",
+     "Underlying Pathophysiology",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Coarse patchy infiltrates",
+      "Chemical pneumonitis and atelectasis",
+      "Severe ventilation-perfusion mismatch"
+     ],
+     [
+      "Hyperinflation and flat diaphragms",
+      "Ball-valve expiratory gas trapping",
+      "High risk of barotrauma and pneumothorax"
+     ],
+     [
+      "Pneumothorax / pneumomediastinum",
+      "Rupture of overdistended marginal alveoli",
+      "Sudden cardiovascular decompensation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Current neonatal guidelines dictate that **routine endotracheal suctioning is no longer recommended** for non-vigorous infants born through meconium-stained liquor. Randomized controlled trials prove that routine tracheal intubation delays resuscitation without improving survival. Resuscitation should proceed under a radiant warmer with standard initial steps, beginning positive pressure ventilation promptly if the infant is apneic.",
+   "say": "Current guidelines advise against routine tracheal intubation, prioritizing prompt positive pressure ventilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Current Resuscitation Standard",
+     "points": [
+      "Warm, dry, and stimulate under radiant warmer",
+      "Initiate PPV within first minute if apneic",
+      "Intubate only if airway is obstructed by plugs"
+     ]
+    },
+    "right": {
+     "title": "Historical Practice Discarded",
+     "points": [
+      "Routine intrapartum suction on perineum",
+      "Routine tracheal intubation before first breath",
+      "Delayed ventilation causing worse hypoxia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A life-threatening vascular complication triggered by acute hypoxia and parenchymal inflammation is **persistent pulmonary hypertension of the newborn**. Failure of normal postnatal pulmonary vascular resistance reduction maintains supra-systemic pulmonary arterial pressures, causing massive right-to-left shunting of deoxygenated blood through the patent ductus arteriosus and foramen ovale into the aorta.",
+   "say": "Persistent pulmonary hypertension causes right-to-left shunting and severe hypoxemia refractory to oxygen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cardiovascular Site",
+     "Direction of Shunt",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Patent ductus arteriosus",
+      "Pulmonary artery into descending aorta",
+      "Pre-ductal vs post-ductal SpO2 gradient over 10%"
+     ],
+     [
+      "Patent foramen ovale",
+      "Right atrium directly into left atrium",
+      "Profound central cyanosis refractory to 100% O2"
+     ],
+     [
+      "Tricuspid valve",
+      "Tricuspid regurgitation jet",
+      "Elevated pulmonary systolic pressure on echo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirmation of ductal shunting relies on detecting a **pre and post ductal oxygen gradient**. Simultaneous pulse oximetry on the right upper extremity (pre-ductal) and lower extremity (post-ductal) reveals a saturation difference exceeding five to ten percent. The gold standard for definitive diagnosis is bedside echocardiography demonstrating elevated pulmonary artery pressures and right-to-left shunt flow.",
+   "say": "A saturation gradient between the right hand and foot confirms right-to-left ductal shunting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pre-Ductal Sampling Site",
+     "points": [
+      "Right wrist or radial arterial line",
+      "Supplied before ductus arteriosus insertion",
+      "Reflects blood delivering to cerebral circulation"
+     ]
+    },
+    "right": {
+     "title": "Post-Ductal Sampling Site",
+     "points": [
+      "Either lower extremity or umbilical arterial line",
+      "Supplied after ductus arteriosus insertion",
+      "Diluted by desaturated pulmonary arterial shunt"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The selective targeted medical therapy of choice for persistent pulmonary hypertension is **inhaled nitric oxide**. Administered directly into the ventilator circuit at twenty parts per million, nitric oxide diffuses into pulmonary vascular smooth muscle cells to activate guanylyl cyclase, producing selective pulmonary vasodilation without causing systemic hypotension. Unresponsive infants may require extracorporeal membrane oxygenation.",
+   "say": "Inhaled nitric oxide selectively dilates pulmonary vasculature to reverse right-to-left shunting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Pharmacological Target",
+     "Clinical Benefit"
+    ],
+    "rows": [
+     [
+      "Inhaled nitric oxide (iNO)",
+      "Stimulates cGMP in pulmonary arterioles",
+      "Selective pulmonary vasodilation, avoids systemic drop"
+     ],
+     [
+      "Sildenafil",
+      "Phosphodiesterase-5 inhibitor",
+      "Maintains elevated intracellular cGMP levels"
+     ],
+     [
+      "Milrinone",
+      "Phosphodiesterase-3 inhibitor",
+      "Improves right ventricular function and lusitropy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Objective bedside quantification of neonatal respiratory distress utilizes the **Downes scoring system** in term infants and the Silverman-Anderson score in preterms. Downes score grades respiratory rate, cyanosis, air entry, grunting, and retractions from zero to two. A total score exceeding six indicates severe respiratory distress and impending respiratory failure requiring urgent positive pressure support.",
+   "say": "A Downes score over six indicates severe distress and impending respiratory failure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-downe-score.webp",
+    "alt": "Clinical chart of Downes score evaluating respiratory distress parameters.",
+    "caption": "Downes clinical scoring system assessing neonatal respiratory compromise. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
