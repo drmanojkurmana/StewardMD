@@ -1,0 +1,196 @@
+{
+  "v": 1,
+  "module": "mic-gram-positive-bacilli",
+  "subject": "microbiology",
+  "title": "Schick Test, Bacillus anthracis and Anthrax Diagnosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Schick test** (1913) read diphtheria immunity in skin: intradermal toxin in one forearm, heat inactivated control in the other; redness at toxin site without control reaction meant susceptible (no antitoxin), no reaction immune, both reacting pseudoreaction (protein sensitivity), both fading combined. Obsolete beside antitoxin antibody assays, it remains hypersensitivity classification heritage.",
+      "say": "Toxin arm red, control arm quiet meant susceptible; Schick read immunity on forearms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Schick reads",
+          "points": [
+            "Positive: susceptible (needs immunisation)",
+            "Negative: immune (antitoxin present)",
+            "Pseudoreaction: allergy to proteins, immune",
+            "Combined: susceptible plus allergic"
+          ]
+        },
+        "right": {
+          "title": "Schick succession",
+          "points": [
+            "Serum antitoxin IgG levels",
+            "Health worker immunity documentation",
+            "Toxoid boosters by schedule, not skin",
+            "Historical role in school immunisation programmes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bacillus anthracis** is a large gram positive spore forming boxcar rod (previous morphology), capsulated by poly D glutamic acid (anti phagocytic, McFadyean staining next lesson), non motile and non haemolytic unlike cereus cousins, soil spore persistent, causing cutaneous eschars, inhalational and gastrointestinal anthrax and injectional disease in people who inject drugs.",
+      "say": "Boxcar rods, glutamate capsule, no motility, no haemolysis: anthracis breaks Bacillus habits.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anthrax-fig1.webp",
+        "alt": "Anthrax clinical and imaging features including cutaneous eschar",
+        "caption": "Anthrax key clinical features, the painless eschar with oedema of cutaneous disease."
+      }
+    },
+    {
+      "tx": "**Anthrax toxins** are three proteins making two toxins on plasmid pXO1: protective antigen (delivery pore), lethal factor (MAP kinase protease) and oedema factor (adenylyl cyclase), while capsule rides pXO2. PA plus LF is lethal toxin, PA plus EF oedema toxin, antitoxins (raxibacumab, obiltoxaximab) target PA delivery.",
+      "say": "One delivery truck, two poisons: block protective antigen and both toxins stall.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Toxin components",
+          "points": [
+            "Protective antigen: receptor binding and pore",
+            "Lethal factor: metalloprotease, macrophage death",
+            "Oedema factor: calmodulin activated cyclase",
+            "Genes on pXO1 plasmid"
+          ]
+        },
+        "right": {
+          "title": "Capsule plasmid",
+          "points": [
+            "pXO2 encodes poly D glutamic acid capsule",
+            "Antiphagocytic, weakly immunogenic",
+            "Loss of either plasmid attenuates (Sterne vaccine lacks pXO2)",
+            "Toxin and capsule together define virulence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cutaneous anthrax** (95 percent natural cases) evolves papule to vesicle to painless black eschar with striking oedema over one to two weeks after spore inoculation through skin breaks (hide, wool, animal work), usually curable with ciprofloxacin or doxycycline, eschar itself needing no surgery or debridement heroics.",
+      "say": "Painless eschar, dramatic oedema, animal contact: leave the eschar, give the antibiotic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eschar evolution",
+          "points": [
+            "Itchy papule day 1 to 2",
+            "Vesicles and ulcer",
+            "Black eschar with gelatinous oedema",
+            "Regional nodes, low fever usually"
+          ]
+        },
+        "right": {
+          "title": "Eschar differentials",
+          "points": [
+            "Rickettsial eschars (scrub typhus, spotted fevers)",
+            "Brown recluse and ecthyma traditions",
+            "Orf and cowpox in animal workers",
+            "Culture and PCR from vesicle fluid and eschar edge"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Inhalational anthrax** incubates days to weeks (spores dormantly macrophage carried), prodrome flu like, then fulminant mediastinitis with widened mediastinum, haemorrhagic effusions, shock and meningitis in half, treated with combination bactericidal plus protein synthesis inhibitor plus antitoxin in modern guidance, post exposure prophylaxis 60 days because spores germinate late.",
+      "say": "Widened mediastinum after a flu prodrome in an exposed worker is anthrax until excluded.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inhalational portrait",
+          "points": [
+            "Biphasic: prodrome then fulminant",
+            "Haemorrhagic mediastinitis and pleural effusions",
+            "Gram positive rods in blood cultures late",
+            "Meningitis haemorrhagic in half"
+          ]
+        },
+        "right": {
+          "title": "Response logic",
+          "points": [
+            "Combination therapy plus antitoxin for systemic",
+            "Drain effusions (toxin reservoir)",
+            "PEP ciprofloxacin or doxycycline 60 days plus vaccine series",
+            "Public health and law enforcement joint investigation deliberate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anthrax diagnosis and biosafety**: swab vesicle fluid and blood cultures (rods may appear), PCR at reference laboratories, Ascoli precipitin test heritage for animal products, specimens handled BSL2 with BSL3 culture precautions, and immediate notification because natural versus deliberate is first a laboratory and veterinary question.",
+      "say": "Notify on suspicion and let reference laboratories confirm; anthrax is never a bench surprise to keep.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnostic stack",
+          "points": [
+            "Gram stain boxcar rods in fluid or blood",
+            "Culture non haemolytic medusa colonies (next lesson)",
+            "PCR reference confirmation",
+            "Serology retrospective in survivors"
+          ]
+        },
+        "right": {
+          "title": "Safety and reporting",
+          "points": [
+            "Immediate public health notification",
+            "Isolate referral, limited bench manipulation",
+            "Animal and product source investigation",
+            "Mass exposure PEP logistics preplanned"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gastrointestinal and injectional anthrax** complete forms: oropharyngeal and bowel disease from undercooked infected meat (necrotic ulcers, ascites, sepsis), injectional from contaminated heroin (severe soft tissue without classic eschar), each treated systemically and investigated as source events. Veterinary and wildlife reservoirs also maintain spores independently of human cases, so eradication is not a realistic objective.",
+      "say": "Meat and needles deliver the other anthrax forms; tissue destruction outruns skin signs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GI anthrax",
+          "points": [
+            "Contaminated meat outbreaks",
+            "Oropharyngeal ulcers and neck oedema",
+            "Haemorrhagic ascites and sepsis",
+            "High fatality without early therapy"
+          ]
+        },
+        "right": {
+          "title": "Injectional anthrax",
+          "points": [
+            "Contaminated heroin spores",
+            "Severe soft tissue infection, compartment syndromes",
+            "Eschar often absent",
+            "Surgery plus combination antibiotics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anthrax vaccination** (AVA adsorbed PA, newer adjuvanted) serves military, laboratory and post exposure roles (with 60 day antibiotics), animal live spore Sterne vaccine controls livestock reservoirs, carcass disposal (no opening, deep burial or burning) preventing soil seeding. One health before the phrase existed.",
+      "say": "Vaccinate herds, bury carcasses whole, PEP for sixty days: spores set every timeline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Human vaccine use",
+          "points": [
+            "Pre exposure occupational groups",
+            "Post exposure with antibiotics (spore latency)",
+            "PA based, reactogenicity managed",
+            "Boosters by continuing risk"
+          ]
+        },
+        "right": {
+          "title": "Animal and soil",
+          "points": [
+            "Livestock vaccination endemic districts",
+            "Carcasses not necropsied (spore seeding)",
+            "Incineration or deep burial with lime traditions",
+            "Soil foci persist decades (Gruinard legacy)"
+          ]
+        }
+      }
+    }
+  ]
+}
