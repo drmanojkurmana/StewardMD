@@ -1,0 +1,301 @@
+{
+ "v": 1,
+ "module": "sur-oral",
+ "subject": "surgery",
+ "title": "Commando Operation, Neck Dissection Classifications, and Ranula",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Locally advanced carcinoma of the oral cavity involving the tongue, floor of mouth, and adjacent mandible demands aggressive composite surgical extirpation. The classic composite resection is famously known as the **commando operation**, an acronym representing Combined Mandibulectomy and Neck Dissection with oral lesion excision in-continuity. Originally named after the daring commando raids of the Second World War, the procedure achieves en bloc oncological clearance of the primary tumor and primary draining lymphatic basin.",
+   "say": "The commando operation is a composite resection combining mandibulectomy, oral tumor excision, and neck dissection in one continuous specimen. It provides definitive oncological clearance for locally advanced oral cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Advanced Oral Tumor with Mandibular Invasion"
+     },
+     {
+      "id": "neck",
+      "label": "Cervical Neck Dissection (Levels I to V)"
+     },
+     {
+      "id": "mandible",
+      "label": "Segmental Mandibulectomy in Continuity"
+     },
+     {
+      "id": "primary",
+      "label": "Wide Excision of Oral Mucosal Lesion"
+     },
+     {
+      "id": "specimen",
+      "label": "En Bloc Commando Specimen Removed"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "neck"
+     ],
+     [
+      "neck",
+      "mandible"
+     ],
+     [
+      "mandible",
+      "primary"
+     ],
+     [
+      "primary",
+      "specimen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following a commando resection, loss of mandibular bone continuity produces severe cosmetic deformity and the functional handicap known as Andy Gump deformity, where the unsupported chin falls backward. To restore dental occlusion, facial projection, and mastication, modern reconstructive surgery utilizes a **free fibula flap**. The vascularized fibular osteocutaneous flap, based on the peroneal artery and venae comitantes, permits multiple osteotomies to accurately contour the neo-mandible while providing skin for intraoral lining.",
+   "say": "Segmental mandibulectomy causes severe chin collapse. Reconstruction with a vascularized free fibula flap based on the peroneal vessels restores the mandibular arch and supports dental implants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reconstruction Option",
+     "Vascular Pedicle",
+     "Clinical Indications and Limitations"
+    ],
+    "rows": [
+     [
+      "Free Vascularized Fibula Flap",
+      "Peroneal artery and paired venae comitantes",
+      "Gold standard for bony mandibular reconstruction, accommodates endosseous dental implants"
+     ],
+     [
+      "Pectoralis Major Myocutaneous",
+      "Thoracoacromial vascular axis",
+      "Reliable pedicled soft tissue bulk, no bony support, ideal for salvage in elderly"
+     ],
+     [
+      "Radial Forearm Free Flap",
+      "Radial artery and cephalic vein",
+      "Thin pliable intraoral lining, limited bone stock, risk of radius donor fracture"
+     ],
+     [
+      "Titanium Reconstruction Plate",
+      "Alloplastic bridging hardware",
+      "Temporarily bridges bone gap, high risk of long-term plate exposure and hardware failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of cervical lymph node metastases follows standardized anatomical classifications. The historical benchmark was the **radical neck dissection**, codified by George Crile. This extensive procedure removes all lymphatic tissue from levels one through five along with three non-lymphatic structures: the internal jugular vein, the sternocleidomastoid muscle, and the spinal accessory nerve. Sacrificing the accessory nerve leads to severe shoulder drop and chronic trapezius neuropathic pain.",
+   "say": "Radical neck dissection excises cervical nodal levels one through five along with three non-lymphatic structures: the accessory nerve, internal jugular vein, and sternocleidomastoid muscle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Radical Neck Dissection (RND)",
+     "points": [
+      "Clears all lymph node levels from level I to level V",
+      "Routinely sacrifices internal jugular vein (IJV)",
+      "Routinely sacrifices sternocleidomastoid muscle (SCM)",
+      "Routinely sacrifices spinal accessory nerve (CN XI)",
+      "High morbidity: shoulder syndrome and facial venous engorgement"
+     ]
+    },
+    "right": {
+     "title": "Modified Radical Neck Dissection",
+     "points": [
+      "Clears all lymph node levels from level I to level V",
+      "Systematically preserves one or more non-lymphatic structures",
+      "Subdivided into Type I, Type II, and Type III variants",
+      "Type III preserves nerve, vein, and sternocleidomastoid",
+      "Provides equivalent oncological clearance with reduced shoulder morbidity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To reduce functional and cosmetic morbidity without compromising oncological cure, surgeons developed the **modified radical neck dissection**. By definition, this operation removes all lymph node groups from levels one through five while preserving one or more of the non-lymphatic structures routinely resected in radical neck dissection. Preservation of the spinal accessory nerve maintains trapezius motor function, preventing shoulder abduction weakness, while sparing the internal jugular vein avoids venous hypertension.",
+   "say": "Modified radical neck dissection clears nodal levels one through five while preserving one or more non-lymphatic structures. Preserving the accessory nerve prevents debilitating shoulder drop.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MRND Variant",
+     "Structures Preserved",
+     "Structures Resected"
+    ],
+    "rows": [
+     [
+      "Type I MRND",
+      "Spinal accessory nerve (CN XI) preserved",
+      "Internal jugular vein and sternocleidomastoid muscle resected"
+     ],
+     [
+      "Type II MRND",
+      "Spinal accessory nerve and internal jugular vein preserved",
+      "Sternocleidomastoid muscle resected"
+     ],
+     [
+      "Type III MRND (Functional)",
+      "Spinal accessory nerve, internal jugular vein, and SCM all preserved",
+      "Only lymphatic tissue of levels I through V excised fascial-plane"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with clinically node-negative necks presenting with early-stage oral cancer, an elective **selective neck dissection** is preferred over comprehensive nodal clearance. For oral cavity primaries, the standard procedure is a supraomohyoid neck dissection, which removes only levels one, two, and three, preserving levels four and five. If frozen section examination demonstrates unexpected metastatic involvement in these nodes, the dissection is immediately converted to a comprehensive modified radical clearance.",
+   "say": "Selective neck dissection removes only the primary draining nodal basins. For oral cavity tumors, supraomohyoid neck dissection clears levels one, two, and three, sparing other groups.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cN0",
+      "label": "Clinically Node-Negative Oral Cancer"
+     },
+     {
+      "id": "sond",
+      "label": "Supraomohyoid Neck Dissection (Levels I, II, III)"
+     },
+     {
+      "id": "frozen",
+      "label": "Intraoperative Frozen Section Assessment"
+     },
+     {
+      "id": "clear",
+      "label": "Nodes Clear: Conclude Dissection"
+     },
+     {
+      "id": "pos",
+      "label": "Node Positive: Convert to Comprehensive MRND"
+     }
+    ],
+    "edges": [
+     [
+      "cN0",
+      "sond"
+     ],
+     [
+      "sond",
+      "frozen"
+     ],
+     [
+      "frozen",
+      "clear"
+     ],
+     [
+      "frozen",
+      "pos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign cystic swellings in the sublingual space frequently present diagnostic dilemmas. A **ranula** is a translucent, bluish extravasation pseudocyst arising in the floor of the mouth, historically likened to the translucent underbelly of a frog. It develops when traumatic ductal rupture or chronic inflammation in the sublingual salivary gland allows continuous leakage of viscous saliva into surrounding submucosal tissues. Because it lacks an epithelial lining, it is a pseudocyst.",
+   "say": "A ranula is a bluish, translucent extravasation pseudocyst arising from the sublingual salivary gland in the floor of the mouth. Trauma allows mucus to pool in the submucosa, resembling a frog belly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple Oral Ranula",
+     "points": [
+      "Confined entirely to the floor of the mouth above mylohyoid",
+      "Pushes the anterior tongue superiorly and medially",
+      "Bluish, translucent, painless, soft cystic fluctuant swelling",
+      "Transilluminates brightly on torchlight examination"
+     ]
+    },
+    "right": {
+     "title": "Plunging Ranula",
+     "points": [
+      "Herniates through or behind posterior border of mylohyoid",
+      "Presents as a soft, compressible cystic swelling in upper neck",
+      "May exhibit minimal or absent intraoral mucosal swelling",
+      "Bimanually compressible between submandibular triangle and mouth"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When saliva from a leaking sublingual gland tracks around the free posterior border of the mylohyoid muscle or penetrates through congenital mylohyoid boutons, it enters the neck, forming a **plunging ranula**. Patients present with a soft, doughy, painless mass in the submandibular triangle that fluctuates on bimanual palpation. Contrast-enhanced computed tomography or magnetic resonance imaging demonstrates the classic tail sign, showing the cystic neck lesion tapering into the sublingual space.",
+   "say": "A plunging ranula herniates past the mylohyoid muscle into the submandibular neck space. Cross-sectional imaging reveals the pathognomonic tail sign tapering back toward the sublingual gland.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "duct",
+      "label": "Sublingual Gland Acinar Rupture"
+     },
+     {
+      "id": "oral",
+      "label": "Extravasation Creates Oral Ranula"
+     },
+     {
+      "id": "mylo",
+      "label": "Tracts Behind Free Posterior Edge of Mylohyoid"
+     },
+     {
+      "id": "neck",
+      "label": "Enters Submandibular Space (Plunging Ranula)"
+     },
+     {
+      "id": "tail",
+      "label": "CT Confirms Characteristic Tail Sign"
+     }
+    ],
+    "edges": [
+     [
+      "duct",
+      "oral"
+     ],
+     [
+      "oral",
+      "mylo"
+     ],
+     [
+      "mylo",
+      "neck"
+     ],
+     [
+      "neck",
+      "tail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of a ranula has evolved away from simple incision, aspiration, or marsupialization, which suffer prohibitive recurrence rates exceeding sixty to eighty percent. Definitive cure mandates **sublingual gland excision**, removing the offending salivary source. For a simple oral ranula, transoral excision of the ipsilateral sublingual gland is sufficient. For an extensive plunging ranula, a combined transoral and transcervical approach allows complete evacuation of the cervical pseudocyst alongside sublingual gland removal.",
+   "say": "Simple drainage or marsupialization leads to frequent recurrence. Permanent cure demands complete surgical excision of the underlying sublingual salivary gland through a transoral or transcervical approach.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Surgical Technique",
+     "Long-Term Recurrence Rate"
+    ],
+    "rows": [
+     [
+      "Needle Aspiration",
+      "Bedside fluid aspiration without anesthesia",
+      "Approaches one hundred percent recurrence within weeks"
+     ],
+     [
+      "Marsupialization",
+      "Unroofing cystic wall and suturing edges to floor of mouth",
+      "High recurrence rate of sixty to eighty percent"
+     ],
+     [
+      "Sublingual Gland Excision",
+      "Transoral removal of entire ipsilateral sublingual gland",
+      "Curative with recurrence rate dropping to less than two percent"
+     ],
+     [
+      "Combined Transoral-Cervical",
+      "Sublingual gland removal plus cervical pseudocyst evacuation",
+      "Definitive approach for large multi-compartment plunging ranulas"
+     ]
+    ]
+   }
+  }
+ ]
+}
