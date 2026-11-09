@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-history-public-health-edwin-chadwick-sanitary-awakening",
+ "subject": "community-medicine",
+ "module": "cm-history-public-health",
+ "title": "Sanitary Awakening to Alma-Ata: Chadwick, Lister, Ross and Primary Health Care",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Industrial cities at their unhealthiest",
+   "tx": "The **industrial revolution** created slums, overcrowding, accumulated filth and high sickness and death rates, especially among women and children. In 1842 the mean age at death in London was 44 years for gentry and professionals but only 22 years for the working class. Frequent cholera visitations compounded the misery and forced the state to look at living conditions.",
+   "say": "Industrial growth poisoned its own cities. Slums, crowding and filth drove death rates up, and in 1842 Londoners of the working class died at a mean age of twenty two against forty four for professionals. Cholera forced official attention.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group in London, 1842", "Mean age at death"],
+    "rows": [
+     ["Gentry and professionals", "44 years"],
+     ["Working class", "22 years"],
+     ["Gap between classes", "22 years"]
+    ]
+   }
+  },
+  {
+   "title": "Chadwick and the great sanitary awakening",
+   "tx": "**Edwin Chadwick**, a lawyer, investigated the health of large town inhabitants after the cholera epidemic of 1832. His report on the sanitary conditions of the labouring population in Great Britain became a landmark of public health, focusing government attention on housing and working conditions. Filth was named man's greatest enemy, and the anti-filth crusade that followed is called the great sanitary awakening.",
+   "say": "A lawyer changed medicine here. After the 1832 cholera epidemic he documented how the labouring population lived, and his report forced housing and working conditions onto the government agenda. Filth was named the enemy; the crusade became the great sanitary awakening.",
+   "vis": {
+    "kind": "table",
+    "cols": ["His finding", "Action it forced"],
+    "rows": [
+     ["Filth in labouring districts", "Anti-filth crusade begins"],
+     ["Housing and working conditions", "Government attention and inspection"],
+     ["Cholera visitations", "Sanitary reform of large towns"]
+    ]
+   }
+  },
+  {
+   "title": "The Public Health Acts and state duty",
+   "tx": "The **Public Health Act of 1848** in England first enacted the principle that the state holds direct responsibility for the health of the people. Sir John Simon, first medical officer of health for London, then built a public health system admired worldwide. The comprehensive Public Health Act of 1875 consolidated control of the physical environment, from water to housing.",
+   "say": "Law converted outrage into duty. The 1848 Act made the state responsible for public health for the first time. London's first medical officer of health built the admired system, and the 1875 Act consolidated control over water, housing and environment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Chadwick report published"},
+     {"id": "b", "label": "Public Health Act 1848"},
+     {"id": "c", "label": "Medical officer system built"},
+     {"id": "d", "label": "Public Health Act 1875"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Lister and antiseptic surgery",
+   "tx": "**Joseph Lister** applied the germ theory to the operating theatre, using carbolic acid antisepsis to kill microbes in wounds, instruments and dressings. Surgical sepsis, once expected after operations, fell sharply, and amputation mortality dropped with it. His work turned Pasteur's laboratory insight into a daily hospital ritual: sterile technique, later refined from antisepsis toward asepsis.",
+   "say": "Germ theory entered the operating theatre through carbolic acid. Wounds, instruments and dressings were treated to kill microbes, surgical sepsis fell, and amputation deaths dropped. Laboratory insight became daily ritual, later refined from antisepsis toward asepsis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before antisepsis",
+     "points": ["Wound sepsis expected after surgery", "High amputation mortality", "No microbe concept in theatre"]
+    },
+    "right": {
+     "title": "After antisepsis",
+     "points": ["Carbolic acid on wounds and tools", "Sepsis and amputation deaths fall", "Path toward sterile aseptic ritual"]
+    }
+   }
+  },
+  {
+   "title": "Ronald Ross and the mosquito proof",
+   "tx": "**Ronald Ross** proved in 1897 that Anopheles mosquitoes transmit malaria, finding the parasite's developmental stages in the mosquito gut at Secunderabad. Vector control thereby gained a scientific target: drain breeding sites, screen houses and attack the insect, not only the patient. His Nobel Prize in 1902 marked vector borne disease as a public health discipline.",
+   "say": "In 1897 a surgeon major in India found malaria parasites developing inside Anopheles mosquitoes, proving the vector. Control gained a target beyond the patient: breeding sites, house screening and the insect itself. A Nobel Prize followed in 1902.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Parasite found in mosquito gut"},
+     {"id": "b", "label": "Anopheles proven as vector"},
+     {"id": "c", "label": "Breeding site control targeted"},
+     {"id": "d", "label": "Vector discipline established"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Health for All and the 1977 resolution",
+   "tx": "The **World Health Assembly** resolved in 1977 that the main social goal of governments and the World Health Organization should be attainment by all people, by the year 2000, of a level of health permitting a socially and economically productive life. That goal, Health for All, answered the gross disparities between rich and poor, urban and rural populations.",
+   "say": "A global goal replaced scattered programmes in 1977. Governments pledged that by 2000 everyone would reach health permitting a socially and economically productive life. Health for All answered the gross gaps between rich and poor, city and village.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Year", "Milestone"],
+    "rows": [
+     ["1977", "Health for All resolved by World Health Assembly"],
+     ["1978", "Alma-Ata conference on primary health care"],
+     ["1981", "Member states pledge the Health for All target"]
+    ]
+   }
+  },
+  {
+   "title": "Alma-Ata and the definition of primary care",
+   "tx": "The **Alma-Ata declaration** of 1978 defined primary health care as essential health care based on practical, scientifically sound and socially acceptable methods, made universally accessible through full community participation at a cost the community and country can afford. It called this approach health by the people, placing people's health in people's hands.",
+   "say": "One year later a conference in Alma-Ata named the vehicle. Essential care, scientifically sound and socially acceptable, universally accessible through community participation, at affordable cost. Health by the people became the slogan, and the definition still anchors exams.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Definition word", "What it demands"],
+    "rows": [
+     ["Essential health care", "Only what everyone needs first"],
+     ["Socially acceptable methods", "Community accepts the methods used"],
+     ["Full participation", "Community helps plan and run care"],
+     ["Affordable cost", "Community and country can sustain it"]
+    ]
+   }
+  },
+  {
+   "title": "Eight elements and four principles",
+   "tx": "**Primary health care** rests on equitable distribution, community participation, intersectoral coordination and appropriate technology. Its eight elements run from education about prevailing health problems, food supply and nutrition, safe water and sanitation, maternal and child health with family planning, immunisation and endemic disease control, to treatment of common conditions and essential drugs.",
+   "say": "Four principles carry the system: equity, participation, intersectoral coordination and appropriate technology. Eight elements fill it, from health education and safe water to maternal care, immunisation, endemic control, common treatment and essential drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Principle", "Meaning in practice"],
+    "rows": [
+     ["Equitable distribution", "Services reach the poor first, not last"],
+     ["Community participation", "People plan and run their services"],
+     ["Intersectoral coordination", "Water, food and education sectors join health"],
+     ["Appropriate technology", "Methods science supports and villages afford"]
+    ]
+   }
+  },
+  {
+   "title": "From disease control phase to comprehensive care",
+   "tx": "The early **disease control phase** of public health, roughly 1880 to 1920, chased general cleanliness, garbage disposal and quarantine. Alma-Ata widened that narrow start into comprehensive care joining promotive, preventive, curative and rehabilitative services at the first contact level. Exams contrast the two eras to test whether candidates see public health as sanitation alone or as a full system.",
+   "say": "Close with the widening arc. Early public health chased cleanliness, garbage and quarantine. Alma-Ata widened that start into comprehensive first contact care: promotive, preventive, curative and rehabilitative together. Sanitation alone is the old answer; the system is the new one.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Disease control phase",
+     "points": ["General cleanliness and refuse disposal", "Quarantine to contain spread", "Physical environment only"]
+    },
+    "right": {
+     "title": "Comprehensive primary care",
+     "points": ["Promotive and preventive services", "Curative and rehabilitative services", "First contact, community run"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
