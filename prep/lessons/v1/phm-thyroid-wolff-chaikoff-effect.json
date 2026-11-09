@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-thyroid",
+  "subject": "pharmacology",
+  "title": "Wolff Chaikoff and Jod Basedow Effects, Thyroid Storm and Amiodarone Thyroid Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Wolff Chaikoff effect** is the gland's own brake: an acute iodide flood inhibits iodide organification (via iodinated lipids suppressing hydrogen peroxide generation), throttling hormone synthesis for about two days until the sodium iodide symporter downregulates, intrathyroidal iodide falls and synthesis escapes back to work. Failure to escape, in glands already damaged by Hashimoto thyroiditis or prior therapy, converts the brake into iodine induced hypothyroidism, the mechanism behind amiodarone and lithium thyroid failures below.",
+      "say": "Iodide first brakes the gland, then the gland escapes by closing its iodide door; damaged glands cannot escape.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "flood",
+            "label": "Acute iodide load reaches the thyroid"
+          },
+          {
+            "id": "brake",
+            "label": "Organification inhibited: Wolff Chaikoff brake"
+          },
+          {
+            "id": "nis",
+            "label": "Sodium iodide symporter downregulates over 2 days"
+          },
+          {
+            "id": "escape",
+            "label": "Intrathyroidal iodide falls, synthesis resumes"
+          }
+        ],
+        "edges": [
+          [
+            "flood",
+            "brake"
+          ],
+          [
+            "brake",
+            "nis"
+          ],
+          [
+            "nis",
+            "escape"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The mirror phenomenon, **Jod Basedow**, is iodine induced hyperthyroidism: autonomous thyroid tissue (nodular goitre, latent Graves) in iodine deficient glands suddenly fed substrate manufactures hormone without permission, after iodinated contrast, kelp or amiodarone loads. Where Wolff Chaikoff is a brake failing in damaged glands, Jod Basedow is an accelerator appearing in autonomous ones; the same contrast scan can therefore explain either patient's new thyroid dysfunction depending on the gland it met.",
+      "say": "Feed an autonomous gland iodine and it storms; feed a damaged gland and it stalls. Same load, opposite glands.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wolff Chaikoff failure (hypothyroid)",
+          "points": [
+            "Damaged gland cannot escape organification block",
+            "Hashimoto, post radioiodine or surgical glands",
+            "Amiodarone and lithium chronic loads",
+            "Hypothyroidism managed by replacement or load removal"
+          ]
+        },
+        "right": {
+          "title": "Jod Basedow (hyperthyroid)",
+          "points": [
+            "Autonomous nodules or latent Graves fed iodine",
+            "Contrast, kelp or amiodarone as substrate donors",
+            "Iodine deficient populations at highest risk",
+            "Thionamides harder: gland is iodine replete"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Potassium perchlorate** competitively blocks the sodium iodide symporter, discharging intrathyroidal iodide, a pharmacological crowbar once used in iodine induced thyrotoxicosis and still stocked in some European storm protocols, limited by aplastic anaemia history at high prolonged doses. Pertechnetate and other anions share the transporter, which is also why perchlorate discharge tests once diagnosed organification defects. Modern use is niche, short and specialist supervised.",
+      "say": "Perchlorate jams the iodide door and empties the gland's fuel tank; niche, brief and supervised.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "perch",
+            "label": "Potassium perchlorate given"
+          },
+          {
+            "id": "nis",
+            "label": "Sodium iodide symporter competitively blocked"
+          },
+          {
+            "id": "discharge",
+            "label": "Intrathyroidal iodide discharged, synthesis starved"
+          },
+          {
+            "id": "limit",
+            "label": "Short courses only: historical marrow toxicity"
+          }
+        ],
+        "edges": [
+          [
+            "perch",
+            "nis"
+          ],
+          [
+            "nis",
+            "discharge"
+          ],
+          [
+            "discharge",
+            "limit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Thyroid storm** is decompensated thyrotoxicosis with mortality that punishes delay: fever, tachycardia out of proportion or atrial fibrillation, delirium or coma, heart failure and hepatic dysfunction after a precipitant (infection, surgery, radioiodine, iodine loads, drug cessation). Scoring systems (Burch Wartofsky) formalise suspicion, but treatment starts on clinical conviction because laboratories cannot grade it. Every drug in the next steps is sequenced, and sequence is the pharmacology being examined.",
+      "say": "Storm is thyrotoxicosis with organ failure; treat on conviction, in sequence, without waiting for permission from numbers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Storm recognition",
+          "points": [
+            "Fever, tachycardia or atrial fibrillation, delirium",
+            "Heart failure and hepatic dysfunction",
+            "Precipitant: infection, surgery, iodine, cessation",
+            "Burch Wartofsky score supports, never delays"
+          ]
+        },
+        "right": {
+          "title": "Resuscitation chassis",
+          "points": [
+            "Intensive care, cooling, fluids, glucose",
+            "Treat the precipitant (antibiotics where indicated)",
+            "Beta blockade with short acting agents where failure allows",
+            "Avoid aspirin: displaces T4 from binding proteins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Storm pharmacology in order: first a thionamide in high dose (propylthiouracil traditionally for its conversion blockade, methimazole increasingly favoured for safety) to stop synthesis; at least an hour later, iodine (Lugol or potassium iodide) to block release, never before lest it refuel synthesis; **propranolol in thyrotoxicosis** (or esmolol where ventricular function is fragile) controlling rate and, at high dose, conversion; corticosteroids for conversion blockade and relative adrenal insufficiency; and cholestyramine as an enteral hormone sink in refractory cases.",
+      "say": "Thionamide, wait an hour, iodine, beta blocker, steroid: recite the order until it is reflex.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amiodarone-induced-thyrotoxicosis-fig1.webp",
+        "alt": "Amiodarone induced thyrotoxicosis subtypes diagram comparing type 1 and type 2 mechanisms",
+        "caption": "Amiodarone thyroid disease subtypes, the iodine load lesson that follows this storm sequence."
+      }
+    },
+    {
+      "tx": "**Agranulocytosis** shadows every thionamide prescription in storm and calm alike: incidence near 0.2 to 0.5 percent, usually within the first months, announced by sore throat and fever, confirmed by same day neutrophil count, treated by permanent cessation of both thionamides (cross reactivity rules the class out), antibiotics and haematology support. Baseline counts do not predict it and routine serial counts catch it late; the patient's instruction card is the surveillance system, which is why it is written, not spoken once.",
+      "say": "Sore throat on a thionamide is a blood count the same day; the warning card is the monitoring programme.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "warn",
+            "label": "Warning card issued at first thionamide prescription"
+          },
+          {
+            "id": "symptom",
+            "label": "Sore throat, fever or mouth ulcers reported"
+          },
+          {
+            "id": "count",
+            "label": "Same day neutrophil count, drug withheld"
+          },
+          {
+            "id": "ban",
+            "label": "Confirmed: both thionamides banned permanently"
+          }
+        ],
+        "edges": [
+          [
+            "warn",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "count"
+          ],
+          [
+            "count",
+            "ban"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Amiodarone thyroid** disease closes the loop because one drug delivers both phenomena: its iodine load (a 200 mg tablet liberates milligrams of iodide daily) causes hypothyroidism by Wolff Chaikoff failure in damaged glands, and thyrotoxicosis either by Jod Basedow in autonomous glands (type 1, treated with thionamides, perchlorate historically) or by destructive thyroiditis (type 2, treated with glucocorticoids), with mixed forms common and amiodarone usually continued under cardiology counsel because withdrawal can worsen the arrhythmia and the thyrotoxicosis.",
+      "say": "Amiodarone can stall or storm the thyroid; type one gets thionamides, type two steroids, and cardiology co owns every call.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amiodarone hypothyroidism",
+          "points": [
+            "Wolff Chaikoff escape failure in susceptible glands",
+            "Commoner in iodine replete regions",
+            "Levothyroxine added, amiodarone usually continued",
+            "TSH monitored 3 to 6 monthly on therapy"
+          ]
+        },
+        "right": {
+          "title": "Amiodarone thyrotoxicosis",
+          "points": [
+            "Type 1 Jod Basedow: thionamides, difficult control",
+            "Type 2 destructive thyroiditis: glucocorticoids",
+            "Mixed forms: combination therapy",
+            "Thyroidectomy for refractory, drug usually continued meanwhile"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Propranolol's storm role** deserves its own residue: non selective beta blockade controls tremor, palpitations and rate, and at doses above 160 mg daily measurably inhibits peripheral T4 to T3 conversion, which is why it outranks cardioselective agents in classic teaching while esmolol's nine minute half life wins where ejection fraction is unknown. In decompensated thyrotoxic heart failure, beta blockade itself can collapse output, so short acting titratable agents and intensive care judgement replace bravado.",
+      "say": "Propranolol calms and converts in storm, but failing ventricles get esmolol's nine minute forgiveness instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Propranolol in thyrotoxicosis",
+          "points": [
+            "Rate, tremor and agitation control",
+            "High dose conversion blockade contribution",
+            "Oral or intravenous, longer commitment",
+            "Avoid in decompensated failure without support"
+          ]
+        },
+        "right": {
+          "title": "Esmolol alternative",
+          "points": [
+            "Nine minute half life, minute to minute titration",
+            "Test of beta blockade tolerance in fragile ventricles",
+            "Intensive care setting assumed",
+            "Conversion blockade negligible: symptoms only"
+          ]
+        }
+      }
+    }
+  ]
+}
