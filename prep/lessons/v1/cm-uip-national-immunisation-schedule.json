@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-uip-national-immunisation-schedule",
+ "subject": "community-medicine",
+ "module": "cm-uip",
+ "title": "National Immunisation Schedule: Vaccines and Protection Timeline",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Birth doses: immediate newborn protection",
+   "tx": "The Universal Immunisation Programme mandates three **birth doses** before hospital discharge: BCG at 0.05 ml intradermally over the left deltoid, bivalent oral polio vaccine zero dose at two drops orally, and hepatitis B birth dose at 0.5 ml intramuscularly within 24 hours of delivery. Hepatitis B birth dose prevents perinatal vertical transmission from chronic carrier mothers and must not be delayed beyond 24 hours.",
+   "say": "Give BCG, oral polio zero dose and hepatitis B within 24 hours of birth. The hepatitis B shot prevents vertical transmission and loses its protective window if given late.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine", "Dose and route", "Injection site"],
+    "rows": [
+     ["BCG", "0.05 ml intradermal", "Left upper arm deltoid"],
+     ["bOPV zero dose", "2 drops oral", "Mouth"],
+     ["Hepatitis B birth", "0.5 ml intramuscular", "Anterolateral left mid-thigh"]
+    ]
+   }
+  },
+  {
+   "title": "Primary infant series at six, ten, and fourteen weeks",
+   "tx": "The **primary infant series** begins at six weeks, repeating at ten and fourteen weeks, delivering pentavalent vaccine containing diphtheria, pertussis, tetanus, hepatitis B and Haemophilus influenzae type b, along with bivalent OPV drops and liquid rotavirus vaccine. Fractional inactivated polio vaccine is co-administered as two 0.1 ml intradermal doses at six and fourteen weeks on the right deltoid to establish mucosal and systemic immunity.",
+   "say": "At six, ten and fourteen weeks, infants receive pentavalent, oral polio drops and rotavirus vaccine. Fractional inactivated polio is injected intradermally at six and fourteen weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Injectable vaccines",
+     "points": ["Pentavalent at 6, 10, 14 weeks", "Fractional IPV at 6 and 14 weeks", "Anterolateral thigh and right deltoid"]
+    },
+    "right": {
+     "title": "Oral vaccines",
+     "points": ["bOPV 1, 2, 3 at 6, 10, 14 weeks", "Rotavirus 5 drops at 6, 10, 14 weeks", "Mucosal gut IgA induction"]
+    }
+   }
+  },
+  {
+   "title": "Pneumococcal conjugate vaccine schedule",
+   "tx": "The **pneumococcal conjugate vaccine** schedule follows a two plus one regimen under the national schedule, administered as two primary doses at six weeks and fourteen weeks, followed by a booster dose at nine completed months. Injection is delivered intramuscularly into the anterolateral aspect of the mid-thigh, preventing invasive pneumococcal disease including bacteraemic pneumonia and bacterial meningitis in infants under two years.",
+   "say": "Pneumococcal vaccine follows a two plus one schedule: primary shots at six and fourteen weeks, followed by a booster at nine completed months.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Dose 1 at 6 weeks"},
+     {"id": "b", "label": "Dose 2 at 14 weeks"},
+     {"id": "c", "label": "Booster at 9 months"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Nine-month transition and Japanese encephalitis",
+   "tx": "At nine completed months, the infant receives the first dose of **measles rubella vaccine** subcutaneous at 0.5 ml on the right upper arm, alongside the first dose of vitamin A oral suspension at 100,000 international units. In endemic districts, the live attenuated SA 14-14-2 Japanese encephalitis vaccine first dose is administered subcutaneously in the left upper arm, while PCV booster is given concurrently.",
+   "say": "Nine months marks the transition to measles rubella, the first dose of vitamin A, the PCV booster, and Japanese encephalitis vaccine in endemic districts.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Intervention", "Dose and route", "Special instruction"],
+    "rows": [
+     ["Measles rubella 1", "0.5 ml subcutaneous", "Right upper arm deltoid"],
+     ["Vitamin A dose 1", "100,000 IU oral", "Given with 1 ml spoon"],
+     ["JE vaccine dose 1", "0.5 ml subcutaneous", "Endemic districts only"],
+     ["PCV booster", "0.5 ml intramuscular", "Right anterolateral thigh"]
+    ]
+   }
+  },
+  {
+   "title": "Second year boosters and vitamin A schedule",
+   "tx": "Between sixteen and twenty-four months, children receive **second year boosters** consisting of the DPT first booster intramuscularly, the second dose of measles rubella vaccine subcutaneously, the second Japanese encephalitis dose where applicable, and an OPV booster dose. Vitamin A prophylaxis continues with 200,000 international units every six months until five years of age, completing a total of nine doses across childhood.",
+   "say": "Between sixteen and twenty-four months, give DPT first booster, MR second dose, OPV booster and Japanese encephalitis second dose. Vitamin A continues biannually.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "16-24 months DPT booster 1"},
+     {"id": "b", "label": "MR-2 and OPV booster"},
+     {"id": "c", "label": "Vitamin A every 6 months to 5 years"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "School age boosters and tetanus-diphtheria replacement",
+   "tx": "At five to six years, children receive the second DPT booster to renew waning pertussis and diphtheria protection before primary school entry. National policy replaced tetanus toxoid with **tetanus and adult diphtheria vaccine** for adolescents at ten years and sixteen years, as well as for pregnant women, ensuring sustained community immunity against adult diphtheria outbreaks while preserving neonatal tetanus elimination gains.",
+   "say": "The second DPT booster arrives at five years. At ten and sixteen years, Td vaccine replaces tetanus toxoid to prevent adult diphtheria outbreaks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age point", "Vaccine supplied", "Clinical objective"],
+    "rows": [
+     ["5 to 6 years", "DPT second booster", "Preschool immunity renewal"],
+     ["10 years", "Td vaccine 0.5 ml IM", "Diphtheria and tetanus booster"],
+     ["16 years", "Td vaccine 0.5 ml IM", "Adolescent booster protection"],
+     ["Pregnancy", "Td 1, Td 2 or Td booster", "Prevents maternal and neonatal tetanus"]
+    ]
+   }
+  },
+  {
+   "title": "Closing coverage gaps with Mission Indradhanush",
+   "tx": "The government launched **Mission Indradhanush** and its intensified phases to rapidly accelerate full immunisation coverage in low-performing districts, urban slums, remote hamlets and nomadic settlements. By head-counting dropouts and left-out infants through door-to-door microplanning, mobile vaccination teams conduct multi-day focused immunization drives each month to deliver missed antigens, reducing infant morbidity in vulnerable geographic pockets.",
+   "say": "Mission Indradhanush targets geographic pockets where routine sessions miss children. Mobile teams conduct intensive monthly rounds to find dropouts and administer overdue doses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Vulnerability microplan mapping"},
+     {"id": "b", "label": "Household dropout identification"},
+     {"id": "c", "label": "Special catch-up immunization sessions"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Digital tracking through the U-WIN portal",
+   "tx": "The **U-WIN platform** digitises the entire maternal and child immunisation registry across public and private sectors in India, creating individual beneficiary records linked to unique registration identifiers. It automates automated SMS vaccination alerts, generates session lists for auxiliary nurse midwives, verifies digital certificates with QR codes, and tracks individual children across district boundaries to minimise dropouts.",
+   "say": "The U-WIN platform registers every pregnant mother and newborn child. It sends automated reminder texts, creates session lists, and prevents dropouts during migration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Legacy tracking",
+     "points": ["Paper mother-child registers", "Lost records on migration", "Manual dropout counting"]
+    },
+    "right": {
+     "title": "U-WIN digital system",
+     "points": ["Cloud-based beneficiary registry", "Portable records across states", "Automated SMS reminders"]
+    }
+   }
+  },
+  {
+   "title": "Catch-up vaccination and zero dose children",
+   "tx": "Children who have received no routine vaccinations are classified as **zero dose children**, demanding prompt catch-up according to national guidelines without restarting the series. Pentavalent and rotavirus vaccines can be initiated up to one year of age, while DPT boosters can be given up to seven years. When an older child presents late, health workers administer all eligible missed antigens simultaneously at distinct anatomical sites.",
+   "say": "For children presenting late, never restart an interrupted vaccination series. Administer all overdue eligible vaccines at separate anatomical sites during the same visit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine antigen", "Upper age limit", "Action if presented late"],
+    "rows": [
+     ["BCG", "Up to 1 year of age", "Give 0.1 ml if over 1 month old"],
+     ["Pentavalent", "Up to 1 year of age", "Resume from last documented dose"],
+     ["Rotavirus", "Up to 1 year of age", "Do not initiate after 12 months"],
+     ["DPT booster", "Up to 7 years of age", "Administer Td if older than 7 years"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
