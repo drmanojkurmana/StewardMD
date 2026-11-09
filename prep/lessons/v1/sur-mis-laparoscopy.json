@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sur-mis",
+ "subject": "surgery",
+ "title": "Minimally Invasive Surgery: Laparoscopy, Energy Devices, and Robotics",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Establishing a working visual field inside the peritoneal cavity requires the deliberate creation of a **pneumoperitoneum**. Carbon dioxide represents the universal insufflation gas of choice because it is strictly non-combustible, enabling the safe concurrent deployment of electrosurgery and laser energy. Furthermore, carbon dioxide exhibits high solubility in human blood, allowing rapid systemic absorption and prompt pulmonary exhalation, which dramatically minimizes the lethal risk of acute gas embolism compared to less soluble alternatives like room air or nitrous oxide.",
+   "say": "Carbon dioxide is the insufflation gas of choice for laparoscopy because it does not support combustion and dissolves rapidly in blood, greatly reducing the risk of fatal gas embolism.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ins-laparoscope-telescope.webp",
+    "alt": "Ten-millimetre thirty-degree rigid laparoscopic telescope.",
+    "caption": "Rigid optical laparoscopic telescope with angled lens providing panoramic abdominal visualization. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The physiological working pressure during adult laparoscopic procedures is maintained tightly between twelve and fifteen millimetres of mercury. Pressures exceeding fifteen millimetres of mercury compress the inferior vena cava, decreasing cardiac preload and systemic venous return. Simultaneously, cephalad elevation of the diaphragmatic domes reduces functional residual capacity and increases peak inspiratory ventilation pressures. Systemic absorption of the insufflated gas produces hypercapnia and respiratory acidosis, while renal vein and parenchymal compression induces transient **oliguria** through neurohormonal activation.",
+   "say": "Intra-abdominal pressure is maintained between twelve and fifteen millimetres of mercury. Higher pressures impede venous return to the heart, reduce lung volumes, and induce transient oliguria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Physiological Effect of CO2 Pneumoperitoneum",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Cardiovascular",
+      "Decreased venous return and increased systemic vascular resistance",
+      "Judicious intravenous hydration and limit pressure to 12-14 mmHg"
+     ],
+     [
+      "Pulmonary",
+      "Diaphragmatic elevation and increased peak airway pressures",
+      "Controlled mechanical ventilation with increased minute volume"
+     ],
+     [
+      "Acid-Base Status",
+      "Hypercapnia and systemic respiratory acidosis from CO2 uptake",
+      "Adjust ventilator minute ventilation to clear absorbed carbon dioxide"
+     ],
+     [
+      "Renal Function",
+      "Renal parenchymal compression causing transient decreased GFR",
+      "Restores promptly following desufflation at the close of surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peritoneal access is achieved via either closed needle puncture or open cutdown techniques. The closed method utilizes the spring-loaded **Veress needle**, inserted classically through the subumbilical midline. Safety tests to verify correct intraperitoneal positioning include the syringe aspiration test, the saline drop test, and confirming a low initial insufflation pressure under eight to ten millimetres of mercury. In patients with previous midline laparotomy scars where adhesive tethering is feared, alternative entry at Palmer point in the left upper quadrant is preferred.",
+   "say": "Closed peritoneal access uses the spring-loaded Veress needle at the umbilicus or Palmer point. Proper intraperitoneal position is confirmed when the saline drop test drains freely and starting pressures remain low.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "insert",
+      "label": "Veress Needle Insertion at Umbilicus"
+     },
+     {
+      "id": "aspirate",
+      "label": "Syringe Aspiration (No Blood or Bowel Content)"
+     },
+     {
+      "id": "saline",
+      "label": "Saline Drop Test Drains Freely"
+     },
+     {
+      "id": "insufflate",
+      "label": "Low Initial Pressure (<8-10 mmHg) Confirms Entry"
+     }
+    ],
+    "edges": [
+     [
+      "insert",
+      "aspirate"
+     ],
+     [
+      "aspirate",
+      "saline"
+     ],
+     [
+      "saline",
+      "insufflate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with prior abdominal operations, pregnant patients, or children, surgeons frequently prefer the direct vision **Hasson technique**. In this open cutdown approach, an incision is made through the skin and umbilical fascia, exposing the peritoneum under direct visualization. The peritoneum is incised sharply, allowing visual confirmation of the free peritoneal cavity before introducing a blunt olive-tipped cannula anchored with fascial stay sutures. This open method dramatically reduces the risk of accidental major vascular lacerations and occult bowel perforation.",
+   "say": "The Hasson open technique establishes access under direct vision through an umbilical fascial cutdown. This approach significantly reduces the danger of blind trocar injury to underlying bowel or major vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Veress Needle Technique",
+     "points": [
+      "Closed blind puncture technique",
+      "Relies on tactile clicks and saline drop test",
+      "Rapid setup in unoperated abdomens",
+      "Risk of retroperitoneal vascular laceration"
+     ]
+    },
+    "right": {
+     "title": "Hasson Open Cutdown",
+     "points": [
+      "Open direct visualization of peritoneal space",
+      "Fascial stay sutures anchor blunt cannula",
+      "Safest in previously operated abdomens",
+      "Virtually eliminates blind major vessel injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Catastrophic complications during laparoscopy arise primarily during initial blind access. Trocar injury to the abdominal aorta or inferior vena cava presents with immediate cardiovascular collapse and massive retroperitoneal haemorrhage. Furthermore, direct intravascular gas injection can trigger an acute **gas embolism**. This disaster manifests as sudden circulatory arrest, severe cyanosis, a mechanical mill-wheel heart murmur, and a precipitously falling end-tidal carbon dioxide level, managed urgently by immediate desufflation, steep left lateral decubitus positioning, and hyperoxygenation.",
+   "say": "Gas embolism is a rare but lethal complication marked by sudden cardiovascular collapse and a characteristic mill-wheel murmur. Immediate desufflation and placing the patient in the left lateral position are crucial.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Major Complication",
+     "Presenting Signs",
+     "Emergency Interventions"
+    ],
+    "rows": [
+     [
+      "Major Vascular Laceration",
+      "Sudden hypotension, blood in trocar, retroperitoneal haematoma",
+      "Immediate emergency open conversion laparotomy and vessel repair"
+     ],
+     [
+      "Occult Bowel Injury",
+      "Postoperative fever, peritonitis, delayed leukopenia",
+      "Urgent re-laparoscopy, bowel debridement, and repair"
+     ],
+     [
+      "Venous Gas Embolism",
+      "Mill-wheel murmur, sudden EtCO2 collapse, hypoxia",
+      "Immediate desufflation, Durant manoeuvre (left lateral Trendelenburg)"
+     ],
+     [
+      "Port-Site Hernia",
+      "Postoperative bowel obstruction or tender mass",
+      "Prevent by routine suture closure of all fascial defects 10 mm or larger"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dissection and haemostasis during minimally invasive surgery rely on sophisticated energy modalities. While traditional electrosurgery utilizes high-frequency alternating electrical current, the advanced **harmonic scalpel** employs ultrasonic mechanical vibrations at fifty-five thousand five hundred Hertz. As the active vibrating blade contacts tissue under pressure, protein hydrogen bonds break, generating localized coagulative denaturation at low temperatures under eighty degrees Celsius. This ultrasonic device effectively coagulates and transects vessels up to five millimetres in diameter with minimal lateral thermal spread.",
+   "say": "The harmonic scalpel cuts and coagulates tissue using high-frequency ultrasonic vibration rather than electrical current. It seals vessels up to five millimetres while causing minimal lateral heat damage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ins-harmonic-scalpel.webp",
+    "alt": "Ultrasonic shears instrument showing handle grip and dual activation controls.",
+    "caption": "Harmonic scalpel ultrasonic shears providing precise dissection with minimal thermal spread. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Laparoscopic mechanical tissue division and reconstruction utilize advanced endosurgical **stapling devices**. These articulating linear endostaplers deliver parallel staggered rows of titanium staples while simultaneously driving an integrated cutting blade between them to divide tissues cleanly. Modern vascular and intestinal staple cartridges feature variable closed staple heights tailored to the thickness of specific tissues, enabling secure sealing of thick gastric walls, mesenteric vascular bundles, and bronchial stumps without risk of tissue crushing or postoperative anastomotic dehiscence.",
+   "say": "Endosurgical staplers deploy multiple rows of titanium staples while dividing intervening tissue. Selecting the correct staple cartridge height for specific tissue thickness prevents bleeding and anastomotic leaks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "select",
+      "label": "Select Cartridge Height (Vascular, Intestinal, Gastric)"
+     },
+     {
+      "id": "clamp",
+      "label": "Position Jaws and Clamp Tissue for 15 Seconds"
+     },
+     {
+      "id": "fire",
+      "label": "Fire Integrated Cutting Knife and Deploy B-Form Staples"
+     },
+     {
+      "id": "inspect",
+      "label": "Release Jaws and Inspect Staple Line Haemostasis"
+     }
+    ],
+    "edges": [
+     [
+      "select",
+      "clamp"
+     ],
+     [
+      "clamp",
+      "fire"
+     ],
+     [
+      "fire",
+      "inspect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Overcoming the optical and ergonomic constraints of conventional laparoscopy, **robotic surgery** platforms utilize a console-based master-slave configuration. High-definition binocular optical viewers provide immersive three-dimensional stereoscopic vision with superior depth perception. Articulated EndoWrist instruments provide seven degrees of freedom, faithfully replicating the dexterity of the human hand while completely eliminating physiological resting tremors. These technological advantages enhance complex intracorporeal suturing and microdissection within narrow pelvic and mediastinal corridors, while natural orifice transluminal endoscopic surgery explores scarless abdominal interventions.",
+   "say": "Robotic surgical systems provide three-dimensional stereoscopic visualization and articulated instruments with seven degrees of freedom. This technology removes hand tremors and facilitates delicate suturing in tight spaces.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Conventional Laparoscopy",
+     "Robotic-Assisted Surgery"
+    ],
+    "rows": [
+     [
+      "Optical Visualization",
+      "Two-dimensional flat screen; relies on assistant camera operator",
+      "High-definition 3D stereoscopic view controlled directly by surgeon"
+     ],
+     [
+      "Instrument Degrees of Freedom",
+      "4 degrees of freedom; rigid straight non-articulating shaft",
+      "7 degrees of freedom with EndoWrist articulating technology"
+     ],
+     [
+      "Tremor Filtration",
+      "Natural physiological surgeon tremor transmitted to tip",
+      "Software motion scaling and complete tremor cancellation"
+     ],
+     [
+      "Fulcrum Effect",
+      "Instruments move in opposite direction to hand movement",
+      "Intuitive ergonomic movement matching natural hand motions"
+     ]
+    ]
+   }
+  }
+ ]
+}

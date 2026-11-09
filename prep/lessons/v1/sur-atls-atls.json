@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "sur-atls",
+ "subject": "surgery",
+ "title": "ATLS Primary Survey, Airway Protocols, and Trauma Ultrasound",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The Advanced Trauma Life Support framework provides a structured, reproducible approach to evaluating and resuscitating severely injured polytrauma patients. Operating on the core principle that the greatest threat to life must be identified and treated first, the resuscitation team conducts an immediate **primary survey**. Clinical evaluation and simultaneous resuscitation proceed systematically following the ABCDE sequence: Airway maintenance with cervical spine protection, Breathing and ventilation, Circulation with haemorrhage control, Disability neurological evaluation, and complete Exposure.",
+   "say": "The ATLS primary survey follows the ABCDE priority sequence to detect and treat life-threatening injuries immediately. Assessment and resuscitation occur simultaneously before moving to secondary examinations.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-chest_trauma_survey.webp",
+    "alt": "Medical illustration of thoracic trauma examination, flail chest, and primary survey life threats.",
+    "caption": "Rapid identification of immediate life-threatening injuries during the ATLS primary survey. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Airway assessment represents the paramount first priority, and clinicians must strictly maintain **cervical spine protection** throughout all airway maneuvers. In all victims of blunt deceleration trauma or injuries above the clavicle, an unstable cervical spine fracture is presumed present until cleared clinically and radiologically. Motion must be prevented using rigid cervical collars, lateral head blocks, and forehead taping, or continuous manual in-line stabilization during urgent airway manipulation. The patient should never undergo cervical hyperextension during emergency intubation.",
+   "say": "Airway evaluation always includes rigid cervical spine immobilization. In blunt trauma victims, manual in-line stabilization protects the cervical cord from catastrophic secondary injury during intubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permitted Airway Maneuvers",
+     "points": [
+      "Manual in-line cervical stabilization",
+      "Modified jaw-thrust without head tilt",
+      "Gentle suctioning of blood and vomit",
+      "Oropharyngeal or nasopharyngeal airway insertion"
+     ]
+    },
+    "right": {
+     "title": "Prohibited Maneuvers",
+     "points": [
+      "Head-tilt chin-lift maneuver",
+      "Cervical hyperextension or rotation",
+      "Blind nasal intubation in midface trauma",
+      "Releasing cervical collar before full clearance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When the airway is obstructed or the patient cannot maintain adequate oxygenation, clinicians must establish a **definitive airway**. A definitive airway is defined as an inflatable cuffed tube secured firmly within the trachea, connected to an oxygen-enriched ventilation source. Indications include severe maxillofacial fractures, expanding neck haematomas, apnoea, refractory hypoxaemia, and severe neurological depression with a Glasgow Coma Scale score of eight or less. Orotracheal intubation using direct or video laryngoscopy with manual in-line stabilization is the gold standard.",
+   "say": "A definitive airway is a cuffed tube placed within the trachea. Patients with severe facial trauma, airway compromise, or a Glasgow Coma Scale score of eight or less require immediate intubation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "assess",
+      "label": "Assess Airway Patency and GCS"
+     },
+     {
+      "id": "gcs_check",
+      "label": "GCS <= 8 or Severe Airway Threat?"
+     },
+     {
+      "id": "intubate",
+      "label": "Orotracheal Intubation with In-Line Stabilization"
+     },
+     {
+      "id": "confirm",
+      "label": "Confirm End-Tidal CO2 and Bilateral Breath Sounds"
+     }
+    ],
+    "edges": [
+     [
+      "assess",
+      "gcs_check"
+     ],
+     [
+      "gcs_check",
+      "intubate"
+     ],
+     [
+      "intubate",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In cannot-intubate, cannot-oxygenate scenarios where extensive craniofacial trauma or laryngeal edema prevents translaryngeal endotracheal tube placement, an emergency surgical airway must be performed immediately. The surgical procedure of choice is a surgical **cricothyroidotomy**. The clinician palpates the cricothyroid membrane between the thyroid and cricoid cartilages, makes a transverse incision through the membrane, dilates the opening with a scalpel handle or Trousseau dilator, and inserts a cuffed tracheostomy or endotracheal tube into the subglottic trachea.",
+   "say": "When translaryngeal intubation fails, emergency surgical cricothyroidotomy provides immediate airway access. An incision through the cricothyroid membrane accommodates a cuffed tube into the subglottic airway.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Airway Procedure",
+     "Anatomical Landmark",
+     "Patient Age Group",
+     "Key Clinical Caveat"
+    ],
+    "rows": [
+     [
+      "Surgical Cricothyroidotomy",
+      "Cricothyroid membrane (between thyroid and cricoid)",
+      "Adults and children over 12 years",
+      "Contraindicated under 12 years due to funnel larynx"
+     ],
+     [
+      "Needle Cricothyroidotomy",
+      "Cricothyroid membrane puncture with 12-14G needle",
+      "Infants and children under 12 years",
+      "Requires jet insufflation; limits carbon dioxide clearance"
+     ],
+     [
+      "Formal Tracheostomy",
+      "Second and third tracheal rings",
+      "All age groups (elective or semi-elective)",
+      "Too time-consuming for immediate emergency field resuscitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the breathing and circulation assessments of the primary survey, clinicians must identify and decompress immediately fatal thoracic injuries. The most urgent is a **tension pneumothorax**, which arises when a one-way pleural flap valve allows inspired air into the pleural space while preventing its escape. Progressive intrapleural air accumulation collapses the ipsilateral lung, shifts the mediastinum contralaterally, and severely kinks the inferior vena cava, precipitating severe obstructive shock, marked hypotension, distended neck veins, and absent ipsilateral breath sounds.",
+   "say": "Tension pneumothorax produces fatal obstructive shock by shifting the mediastinum and obstructing systemic venous return. Treatment is immediate decompression without waiting for a chest radiograph.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tension Pneumothorax",
+     "points": [
+      "Severe respiratory distress and cyanosis",
+      "Hypotension and obstructive shock",
+      "Tracheal deviation to contralateral side",
+      "Distended jugular veins, hyperresonance"
+     ]
+    },
+    "right": {
+     "title": "Massive Haemothorax",
+     "points": [
+      "Profound haemorrhagic hypovolaemic shock",
+      "Trachea typically midline or mildly shifted",
+      "Flat, collapsed neck veins from blood loss",
+      "Dullness to percussion on affected side"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic ultrasound has replaced invasive peritoneal lavage as the premier bedside investigation for detecting occult intra-abdominal haemorrhage during trauma resuscitation. The standard **FAST scan** provides rapid, non-invasive evaluation of four distinct acoustic windows: the pericardial subxiphoid view, the right upper quadrant hepatorenal space of Morison, the left upper quadrant splenorenal recess, and the pelvic pouch of Douglas. Morison pouch represents the most sensitive dependent anatomical space for free peritoneal fluid accumulation in the supine patient.",
+   "say": "The FAST ultrasound exam rapidly checks four dependent spaces for free fluid in the pericardium, right and left upper quadrants, and pelvis. Morison pouch is the most sensitive space in the supine patient.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-surg-fast_dpl_trauma.webp",
+    "alt": "Diagram showing the four acoustic windows of the FAST examination in trauma.",
+    "caption": "Acoustic examination windows of the Focused Assessment with Sonography for Trauma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contemporary trauma resuscitation employs the extended examination, termed the **eFAST scan**, which expands the traditional four abdominal windows to include bilateral anterior thoracic views. By placing a high-frequency probe along the second to fourth intercostal spaces at the midclavicular lines, clinicians evaluate pleural dynamics. The normal glistening interface between parietal and visceral pleura produces visible lung sliding. The absence of lung sliding, accompanied by the classic barcode or stratosphere sign on M-mode ultrasonography, rapidly confirms a pneumothorax.",
+   "say": "The extended FAST protocol adds thoracic ultrasound windows to identify pneumothorax and haemothorax. Loss of normal lung sliding and the appearance of the barcode sign on M-mode confirm a pneumothorax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thoracic Sonographic Sign",
+     "B-Mode Ultrasound Finding",
+     "M-Mode Finding",
+     "Clinical Diagnosis"
+    ],
+    "rows": [
+     [
+      "Normal Lung Sliding",
+      "Glistening shimmering movement at pleural line",
+      "Seashore sign (granular pattern below pleural line)",
+      "Normal intact pleural gliding; excludes pneumothorax"
+     ],
+     [
+      "Pneumothorax Sign",
+      "Complete absence of glistening pleural movement",
+      "Barcode sign / Stratosphere sign (parallel horizontal lines)",
+      "Pneumothorax confirmed at that acoustic intercostal space"
+     ],
+     [
+      "Lung Point Sign",
+      "Transition point between sliding lung and absent sliding",
+      "Alternating seashore and barcode patterns with breathing",
+      "Specific physical margin of the pneumothorax air pocket"
+     ],
+     [
+      "Dependent Fluid Sign",
+      "Anechoic black fluid stripe in costophrenic recess",
+      "Sinusoid sign with dynamic respiratory movement",
+      "Haemothorax or significant pleural effusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Integrating sonographic findings into resuscitation pathways directs subsequent operative decision-making. In a hemodynamically unstable polytrauma patient displaying refractory hypotension, demonstrating free anechoic peritoneal fluid on FAST mandates immediate transfer to the operating theater for emergency exploratory laparotomy. In sharp contrast, a hemodynamically stable patient with a positive FAST examination undergoes contrast-enhanced abdominal **computed tomography** to characterize specific parenchymal organ injuries, assign precise organ injury grades, and identify candidates for conservative non-operative management.",
+   "say": "In an unstable patient, a positive FAST mandates immediate emergency laparotomy. If the patient is hemodynamically stable, contrast-enhanced CT scanning defines organ injury severity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "unstable",
+      "label": "Positive FAST in Polytrauma Patient"
+     },
+     {
+      "id": "hemo",
+      "label": "Hemodynamically Stable?"
+     },
+     {
+      "id": "stable_fork",
+      "label": "Unstable -> Emergency Laparotomy"
+     },
+     {
+      "id": "ct_scan",
+      "label": "Stable -> Contrast-Enhanced Abdominal CT"
+     }
+    ],
+    "edges": [
+     [
+      "unstable",
+      "hemo"
+     ],
+     [
+      "hemo",
+      "stable_fork"
+     ],
+     [
+      "stable_fork",
+      "ct_scan"
+     ]
+    ]
+   }
+  }
+ ]
+}

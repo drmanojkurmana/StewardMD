@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "sur-burns",
+ "subject": "surgery",
+ "title": "Curling Ulcer, Electrical and Chemical Burns, and Burn Sepsis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Severe thermal injury produces intense physiological stress and systemic splanchnic hypoperfusion, predisposing burn victims to acute gastrointestinal mucosal ulceration. Classically termed **Curling ulcer**, this acute stress erosive lesion arises primarily in the gastric fundus or proximal duodenum following major cutaneous burns exceeding thirty percent body surface area. Ischaemic mucosal compromise and reduced protective prostaglandin synthesis allow gastric acid to cause focal full-thickness mucosal sloughing, predisposing patients to sudden massive upper gastrointestinal haemorrhage or free perforation.",
+   "say": "Curling ulcer refers to acute gastric or duodenal stress ulceration resulting from splanchnic hypoperfusion in major burn patients. Severe mucosal ischaemia triggers erosions that can bleed profusely or perforate without timely acid suppression.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-burns-wound.webp",
+    "alt": "Medical diagram illustrating burn depth assessment and systemic complications.",
+    "caption": "Burn injury extent, depth assessment charts, and anatomical lines for surgical decompression. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The widespread introduction of early enteral nutrition alongside routine prophylaxis with proton pump inhibitors has drastically reduced the clinical incidence of ulcer perforation. When severe upper gastrointestinal bleeding occurs, immediate diagnostic and therapeutic **endoscopy** represents the initial investigation of choice. Endoscopic modalities such as bipolar electrocoagulation, hemoclipping, or dilute adrenaline injection achieve haemostasis in most patients. Persistent arterial haemorrhage unresponsive to repeated endoscopic interventions necessitates prompt angiographic embolization or surgical ulcer ligation combined with definitive acid-reducing procedures.",
+   "say": "Early enteral nutrition and gastric acid suppression have made ulcer perforation relatively uncommon. If substantial haemorrhage develops, prompt therapeutic endoscopy provides effective localized haemostasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resuscitate",
+      "label": "Resuscitation and IV PPI"
+     },
+     {
+      "id": "scope",
+      "label": "Urgent Endoscopy"
+     },
+     {
+      "id": "bleed_check",
+      "label": "Persistent Bleeding?"
+     },
+     {
+      "id": "intervene",
+      "label": "Angiographic Embolization or Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "resuscitate",
+      "scope"
+     ],
+     [
+      "scope",
+      "bleed_check"
+     ],
+     [
+      "bleed_check",
+      "intervene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrical burn injuries demonstrate unique pathophysiological features because electrical current travels through internal tissues following paths of least electrical resistance. Nerves, blood vessels, and muscles possess low resistance and conduct current easily, whereas dry skin and cortical bone offer high resistance. As electrical energy converts into thermal energy in proportion to tissue resistance, the periosteum and deep periosseous muscles suffer intense heat generation. Consequently, a deceptive **iceberg effect** occurs where innocent-looking cutaneous entry and exit wounds mask devastating deep muscle necrosis.",
+   "say": "Electrical injury creates disproportionate deep tissue destruction known as the iceberg effect. Because deep periosseous muscles conduct high current and absorb intense thermal energy, severe occult necrosis occurs beneath intact skin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low-Resistance Tissues",
+     "points": [
+      "Nerves and peripheral pathways",
+      "Vascular lumens and flowing blood",
+      "Skeletal muscle masses",
+      "High current conductance"
+     ]
+    },
+    "right": {
+     "title": "High-Resistance Tissues",
+     "points": [
+      "Dry cutaneous epidermis",
+      "Dense cortical bone",
+      "Subcutaneous adipose tissue",
+      "Maximal Joule heat generation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-voltage electrical contact exceeding one thousand volts frequently induces life-threatening cardiac dysrhythmias and extensive occult muscular destruction. Immediate baseline electrocardiography and continuous cardiac monitoring are mandatory to detect ventricular fibrillation, heart block, or asystole. Massive muscular breakdown precipitates severe **rhabdomyolysis**, releasing abundant intracellular myoglobin and potassium into the systemic circulation. Acidic urine causes myoglobin precipitation within renal tubules, precipitating acute tubular necrosis unless aggressive intravenous fluid resuscitation maintains an elevated hourly urine output.",
+   "say": "High-voltage electrical shock causes cardiac arrhythmias and extensive rhabdomyolysis. Heavy myoglobinuria risks acute renal failure unless clinicians maintain aggressive hydration and brisk urinary flow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Thermal Burns",
+     "High-Voltage Electrical Injury"
+    ],
+    "rows": [
+     [
+      "Primary Damage Site",
+      "Cutaneous surface and dermis",
+      "Deep muscle compartments and nerves"
+     ],
+     [
+      "Cardiac Monitoring",
+      "Indicated if preexisting disease",
+      "Mandatory continuous monitoring for all"
+     ],
+     [
+      "Target Urine Output",
+      "0.5 to 1.0 mL per kg per hour",
+      "1.0 to 1.5 mL per kg per hour until clear"
+     ],
+     [
+      "Urine Alkalinization",
+      "Not routinely required",
+      "Sodium bicarbonate added to prevent tubular cast formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chemical injuries arise from exposure to strong acids or potent alkalis and require instantaneous emergency decontamination. Acidic substances cause rapid protein denaturation and superficial coagulation necrosis, forming a firm protective eschar that paradoxically limits deeper chemical penetration. In sharp contrast, basic alkali compounds saponify cellular fatty acids and dissolve proteins, producing extensive **liquefaction necrosis** that penetrates unchecked into deep fascial planes. Neutralizing solutions must never be applied because the resulting exothermic reaction produces severe secondary thermal injury.",
+   "say": "Chemical burns require immediate copious water irrigation. Alkalis produce liquefaction necrosis that penetrates deeply, making them far more destructive than acids which form a coagulative eschar.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acidic Burns",
+     "points": [
+      "Causes protein denaturation",
+      "Produces firm coagulation necrosis",
+      "Forms protective limiting eschar",
+      "Depth is relatively self-limiting"
+     ]
+    },
+    "right": {
+     "title": "Alkaline Burns",
+     "points": [
+      "Causes fatty acid saponification",
+      "Produces destructive liquefaction necrosis",
+      "Deep progressive tissue penetration",
+      "Requires prolonged irrigation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency management for all cutaneous chemical exposures centers on immediate, copious water lavage using low-pressure tap water or saline for at least thirty to sixty minutes. A critical clinical exception involves **hydrofluoric acid**, an inorganic acid widely employed in glass etching and semiconductor manufacturing. Free fluoride ions penetrate cell membranes avidly, chelating intracellular calcium and magnesium to trigger agonizing pain, refractory hypocalcaemia, and fatal cardiac arrests. Management mandates immediate copious irrigation followed by generous topical or intradermal infiltration of ten percent calcium gluconate.",
+   "say": "Copious water irrigation is the universal first aid for chemical burns. For hydrofluoric acid exposure, rapid calcium gluconate administration is essential to bind fluoride ions and prevent lethal systemic hypocalcaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "exposure",
+      "label": "Chemical Exposure Identified"
+     },
+     {
+      "id": "irrigate",
+      "label": "Copious Water Lavage for 30-60 Min"
+     },
+     {
+      "id": "agent",
+      "label": "Hydrofluoric Acid Suspected?"
+     },
+     {
+      "id": "calcium",
+      "label": "Infiltrate Topical or Subcutaneous Calcium Gluconate"
+     }
+    ],
+    "edges": [
+     [
+      "exposure",
+      "irrigate"
+     ],
+     [
+      "irrigate",
+      "agent"
+     ],
+     [
+      "agent",
+      "calcium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive microbial proliferation within devitalized tissue represents the primary determinant of late mortality in severe burn victims. During the initial hospital days, colonized wound flora consists predominantly of Gram-positive skin commensals like Staphylococcus aureus. By the second week, opportunistic Gram-negative bacilli including Pseudomonas aeruginosa, Klebsiella pneumoniae, and Acinetobacter baumannii colonize the burn eschar. Uncontrolled microbial invasion into viable, vascularized underlying dermis and subcutaneous fat defines true **burn wound sepsis**, precipitating systemic inflammatory collapse, thrombocytopenia, and refractory septic shock.",
+   "say": "Burn wound sepsis develops as opportunistic Gram-negative bacteria penetrate through dead eschar into viable subcutaneous fat. This invasive infection causes rapid clinical decompensation and severe septic shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Predominant Microorganisms",
+     "Clinical Features"
+    ],
+    "rows": [
+     [
+      "First 48 to 72 Hours",
+      "Staphylococcus aureus and Streptococcus",
+      "Local erythema and superficial colonisation"
+     ],
+     [
+      "Day 5 to Day 14",
+      "Pseudomonas aeruginosa and Acinetobacter",
+      "Focal black eschar discoloration, green exudate"
+     ],
+     [
+      "Beyond Day 14",
+      "Candida albicans and Aspergillus species",
+      "Rapid eschar separation, systemic sepsis, leukopenia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating superficial microbial colonization from life-threatening invasive infection requires careful inspection of the wound margins and quantitative microbiological examination. Pathognomonic clinical hallmarks of invasive infection include focal dark brown or black discoloration of the eschar, premature separation of the eschar, and rapid conversion of a partial-thickness injury into full-thickness dermal necrosis. Definitive histological confirmation relies on a full-thickness **punch biopsy** demonstrating greater than one hundred thousand organisms per gram of tissue alongside visible microvascular invasion into unburned viable tissue.",
+   "say": "A full-thickness punch biopsy provides definitive proof of invasive burn sepsis by demonstrating microbial invasion into viable underlying tissue. Urgent surgical excision and targeted intravenous antibiotics are life-saving.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Focal Black Eschar or Systemic Sepsis"
+     },
+     {
+      "id": "biopsy",
+      "label": "Full-Thickness Punch Biopsy"
+     },
+     {
+      "id": "confirm",
+      "label": "Tissue Invasion Confirmed (>10^5 CFU/g)"
+     },
+     {
+      "id": "excise",
+      "label": "Urgent Radical Excision and Systemic Antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "biopsy"
+     ],
+     [
+      "biopsy",
+      "confirm"
+     ],
+     [
+      "confirm",
+      "excise"
+     ]
+    ]
+   }
+  }
+ ]
+}
