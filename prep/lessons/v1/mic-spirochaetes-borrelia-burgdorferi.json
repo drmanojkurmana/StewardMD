@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "module": "mic-spirochaetes",
+  "subject": "microbiology",
+  "title": "Borrelia burgdorferi, Lyme Disease, Erythema Migrans and Borrelia recurrentis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Borrelia burgdorferi** sensu lato is a tick borne spirochaete complex transmitted mainly by Ixodes ticks after prolonged attachment. It causes Lyme disease in North America and Europe, with genospecies differing in tissue preference. The organism is difficult to culture in routine laboratories, requiring special Barbour Stoenner Kelly medium, so serology, PCR in selected specimens and clinical recognition dominate diagnosis.",
+      "say": "Lyme disease is transmitted during prolonged Ixodes feeding and is usually diagnosed clinically or serologically.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission",
+          "points": [
+            "Ixodes nymphs are small and easily missed",
+            "Risk increases after roughly thirty six to forty eight hours attachment",
+            "Deer support adult ticks but rodents are key reservoirs",
+            "Prompt tick removal reduces risk"
+          ]
+        },
+        "right": {
+          "title": "Complex members",
+          "points": [
+            "B burgdorferi sensu stricto prominent in North America",
+            "B afzelii associated with skin disease in Europe",
+            "B garinii associated more with neuroborreliosis",
+            "All are extracellular motile spirochaetes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Erythema migrans** is the characteristic expanding annular rash of early localised Lyme disease, often with central clearing but frequently uniformly erythematous. It is a clinical diagnosis in an endemic exposure setting, and serology may still be negative. Multiple lesions can indicate early dissemination rather than multiple bites. Photographing and marking the edge can document expansion when the history is uncertain.",
+      "say": "An expanding erythema migrans lesion in Lyme country should be treated without waiting for serology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typical lesion",
+          "points": [
+            "Expands over days to weeks",
+            "Often larger than five centimetres",
+            "Minimal scaling or pain",
+            "May have central clearing but need not look like a target"
+          ]
+        },
+        "right": {
+          "title": "Lookalikes",
+          "points": [
+            "Cellulitis is more painful and rapidly progressive",
+            "Tinea has scale and slower change",
+            "Granuloma annulare lacks recent expansion",
+            "Southern tick associated rash illness can mimic it"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early disseminated Lyme disease may involve **multiple erythema migrans lesions**, facial nerve palsy, lymphocytic meningitis, radiculoneuritis and carditis with fluctuating atrioventricular block. Late disease classically causes intermittent or persistent large joint arthritis, especially the knee, and acrodermatitis chronica atrophicans in European infection. Objective manifestations guide serologic interpretation because nonspecific fatigue and pain alone have very low predictive value.",
+      "say": "Facial palsy, heart block and a swollen knee are stronger Lyme clues than fatigue alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neurologic and cardiac",
+          "points": [
+            "Unilateral or bilateral facial palsy",
+            "Lymphocytic meningitis",
+            "Painful radiculoneuritis, especially in Europe",
+            "High degree AV block can fluctuate rapidly"
+          ]
+        },
+        "right": {
+          "title": "Late features",
+          "points": [
+            "Recurrent large joint swelling",
+            "Acrodermatitis chronica atrophicans",
+            "Peripheral neuropathy in late European disease",
+            "Objective arthritis usually strongly seropositive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Lyme serology uses a **two tier strategy**: a sensitive enzyme immunoassay first, followed by immunoblot or a second immunoassay in modified two tier protocols. IgM immunoblot interpretation is restricted to early disease because false positives become common when used indiscriminately. Antibodies persist after successful therapy and cannot be used as a test of cure. Pre test probability determines whether a positive result is meaningful.",
+      "say": "Lyme antibodies record exposure and immune response, not bacterial eradication after treatment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Objective compatible manifestation"
+          },
+          {
+            "id": "eia",
+            "label": "Sensitive EIA or IFA"
+          },
+          {
+            "id": "confirm",
+            "label": "Immunoblot or second EIA"
+          },
+          {
+            "id": "interpret",
+            "label": "Interpret with stage and exposure"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "eia"
+          ],
+          [
+            "eia",
+            "confirm"
+          ],
+          [
+            "confirm",
+            "interpret"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Borrelia recurrentis** causes louse borne relapsing fever. It changes surface variable major proteins by gene conversion, temporarily escaping antibody control and producing repeated febrile episodes separated by apparent recovery. The human body louse transmits it in settings of crowding, displacement and poor clothing hygiene. A single antibiotic dose can trigger a Jarisch Herxheimer reaction as organisms are rapidly cleared.",
+      "say": "Relapsing fever returns because Borrelia changes its surface coat faster than immunity clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/relapsing-fever-fig1.webp",
+        "alt": "Relapsing fever spirochaetes in blood smear",
+        "caption": "Spirochaetes visible in blood during a febrile relapsing fever episode."
+      }
+    },
+    {
+      "tx": "Doxycycline treats most **early Lyme disease** and also covers several tick borne coinfections, while ceftriaxone is used for selected neurologic and high degree cardiac manifestations. Avoid repeating antibiotics for persistent nonspecific symptoms without objective evidence, because prolonged courses add harm without treating a proven ongoing infection. Tick removal, exposure prevention and checking for additional attached ticks complete the encounter.",
+      "say": "Treat objective Lyme disease decisively, but do not let persistent antibodies justify indefinite antibiotics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Usually doxycycline",
+          "points": [
+            "Erythema migrans",
+            "Facial palsy without meningitis in selected cases",
+            "Mild carditis as outpatient only if appropriate",
+            "Early disseminated multiple lesions"
+          ]
+        },
+        "right": {
+          "title": "Escalate evaluation",
+          "points": [
+            "Meningitis or radiculoneuritis may require IV therapy by guideline",
+            "High degree AV block needs cardiac monitoring",
+            "Arthritis may need repeat oral or IV course",
+            "Pregnancy and young children need regimen adjustment"
+          ]
+        }
+      }
+    }
+  ]
+}

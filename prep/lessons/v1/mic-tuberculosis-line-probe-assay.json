@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-tuberculosis",
+  "subject": "microbiology",
+  "title": "Line Probe Assay, IGRA, Tuberculin Test, BCG, MDR-TB and Niacin Test",
+  "minutes": 7,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **line probe assay** amplifies mycobacterial DNA and hybridises products to probes arranged as lines on a strip. Wild type and mutation bands reveal resistance associated changes in genes such as rpoB for rifampicin, katG and inhA for isoniazid, and selected fluoroquinolone and injectable targets on second line assays. Missing wild type bands can indicate resistance even when a specific mutation probe is absent.",
+      "say": "LPA converts resistance mutations into a band pattern much faster than growth based susceptibility testing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First line LPA",
+          "points": [
+            "rpoB predicts rifampicin resistance",
+            "katG usually high level isoniazid resistance",
+            "inhA promoter often low level isoniazid resistance",
+            "Works best on smear positive specimens and isolates"
+          ]
+        },
+        "right": {
+          "title": "Second line LPA",
+          "points": [
+            "gyrA and gyrB for fluoroquinolones",
+            "rrs and eis for injectable agents",
+            "Guides MDR and pre XDR regimen construction",
+            "Sequencing can resolve discordant results"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "An **interferon gamma release assay** measures T cell interferon gamma after stimulation with Mycobacterium tuberculosis antigens such as ESAT 6 and CFP 10. These antigens are absent from BCG and most environmental mycobacteria, improving specificity in vaccinated people. Like tuberculin testing, IGRA identifies immune sensitisation consistent with infection but cannot by itself distinguish latent infection from active tuberculosis disease.",
+      "say": "IGRA detects tuberculosis immune memory, not the anatomical presence of active disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benefits",
+          "points": [
+            "Single blood collection visit",
+            "Not boosted by prior BCG vaccination",
+            "No reader measurement of skin induration",
+            "Objective laboratory cutoff"
+          ]
+        },
+        "right": {
+          "title": "Limits",
+          "points": [
+            "Cannot separate latent from active disease",
+            "Indeterminate results occur with immune suppression",
+            "Conversion and reversion occur near cutoff",
+            "Laboratory processing time affects validity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **tuberculin skin test** injects purified protein derivative intradermally and measures transverse induration, not erythema, after 48 to 72 hours. Cutoffs vary with risk and immune state because positive predictive value changes with prevalence and consequences. False negatives arise with HIV, recent infection, overwhelming tuberculosis, malnutrition and technical errors; false positives can reflect BCG or nontuberculous mycobacteria, especially with smaller reactions.",
+      "say": "Measure raised induration at two to three days and interpret it using the patient's risk category.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Technique",
+          "points": [
+            "Intradermal injection raises a wheal",
+            "Read within 48 to 72 hours",
+            "Record millimetres of induration",
+            "Do not record erythema as the result"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Five millimetres can be positive in high risk immunosuppression",
+            "Ten millimetres is used in many intermediate risk groups",
+            "Fifteen millimetres suits low risk populations in some guidelines",
+            "Active disease requires microbiological investigation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**BCG vaccine** is live attenuated Mycobacterium bovis given to reduce severe childhood tuberculosis, especially miliary disease and tuberculous meningitis. Protection against adult pulmonary tuberculosis varies widely by region and prior environmental mycobacterial exposure. BCG can cause local ulceration and lymphadenitis, while disseminated BCG disease signals severe immune deficiency such as SCID or profound T cell dysfunction and requires urgent specialist management.",
+      "say": "BCG chiefly protects young children from disseminated and meningeal tuberculosis, not every pulmonary case.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benefits and effects",
+          "points": [
+            "Strongest evidence against severe childhood forms",
+            "Variable pulmonary protection by geography",
+            "Normal local papule ulcer and scar sequence",
+            "Regional nodes may enlarge transiently"
+          ]
+        },
+        "right": {
+          "title": "Safety warnings",
+          "points": [
+            "Avoid in known severe immunodeficiency",
+            "Disseminated BCG suggests SCID or advanced immune failure",
+            "Suppurative lymphadenitis may need aspiration",
+            "BCG does not make IGRA positive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MDR TB** means resistance to at least isoniazid and rifampicin, the two most powerful first line drugs. Pre XDR and XDR categories add fluoroquinolone and other priority drug resistance according to current definitions. Treatment uses longer all oral regimens built from susceptibility results and drug availability, often including bedaquiline, linezolid and a fluoroquinolone. Every additional resistance result can remove a drug and reshape the regimen.",
+      "say": "MDR means both isoniazid and rifampicin are lost; modern category labels follow additional priority drug resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "CBNAAT suggests rifampicin resistance"
+          },
+          {
+            "id": "expand",
+            "label": "LPA and culture DST expand profile"
+          },
+          {
+            "id": "classify",
+            "label": "Classify MDR or further resistance"
+          },
+          {
+            "id": "regimen",
+            "label": "Build individual all oral regimen"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "expand"
+          ],
+          [
+            "expand",
+            "classify"
+          ],
+          [
+            "classify",
+            "regimen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **niacin test** exploits accumulation of niacin in culture medium by Mycobacterium tuberculosis because it cannot efficiently convert niacin to NAD. A reagent strip or chemical test turns positive, historically helping distinguish M tuberculosis from Mycobacterium bovis, which is usually niacin negative. Molecular identification and MPT64 antigen testing now provide faster modern routes, but the biochemical logic remains a classic examination distinction.",
+      "say": "Niacin accumulation supports M tuberculosis and helps contrast it with usually niacin negative M bovis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "M tuberculosis clues",
+          "points": [
+            "Niacin accumulation positive",
+            "Nitrate reduction usually positive",
+            "MPT64 antigen positive in many rapid tests",
+            "Rough buff colonies on LJ"
+          ]
+        },
+        "right": {
+          "title": "M bovis clues",
+          "points": [
+            "Usually niacin and nitrate negative",
+            "Dysgonic growth improved by pyruvate",
+            "Intrinsic pyrazinamide resistance",
+            "Associated historically with unpasteurised milk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sputum smear grading** uses standardised scales based on the number of acid fast bacilli per number of microscopic fields examined. Higher grades correlate with cavitation, transmission risk and delayed conversion during treatment. Follow up smears monitor response but can remain positive from dead organisms, which is why culture conversion carries stronger evidence of sterilising activity in drug resistant disease and clinical trials.",
+      "say": "Smear grade estimates burden and infectiousness, whereas culture conversion better tracks living bacilli.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uses of grading",
+          "points": [
+            "Prioritises infection control urgency",
+            "Supports household contact assessment",
+            "Predicts longer time to negativity",
+            "Standardises reporting between laboratories"
+          ]
+        },
+        "right": {
+          "title": "Monitoring caveats",
+          "points": [
+            "ZN stains viable and dead bacilli",
+            "Fluorescence grades require defined field counts",
+            "Culture may convert before smear clears",
+            "Worsening grade prompts adherence and resistance review"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When molecular and phenotypic tests disagree, the isolate should not be forced into a single convenient label. **Repeat testing, sequencing and reference laboratory review** can reveal heteroresistance, mixed infection, disputed rpoB mutations or low level resistance missed by critical concentration methods. Treatment history and clinical response are part of the laboratory interpretation, not an afterthought, and specimens should be saved for arbitration.",
+      "say": "Discordant resistance results signal heteroresistance or disputed mutations and deserve reference laboratory arbitration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reasons for discordance",
+          "points": [
+            "Mixed susceptible and resistant populations",
+            "Silent or disputed gene mutations",
+            "Low bacterial load and sampling variation",
+            "Phenotypic critical concentration borderline"
+          ]
+        },
+        "right": {
+          "title": "Safe response",
+          "points": [
+            "Repeat molecular test on fresh specimen",
+            "Send culture for sequencing and phenotypic DST",
+            "Avoid prematurely discarding an effective drug",
+            "Consult TB and reference laboratory specialists"
+          ]
+        }
+      }
+    }
+  ]
+}
