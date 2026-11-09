@@ -1,0 +1,223 @@
+{
+ "v": 1,
+ "module": "sur-abdominal-trauma",
+ "subject": "surgery",
+ "title": "Hollow Viscus Trauma, Seat Belt Sign, and Pelvic Fracture Bleeding",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blunt deceleration trauma or crushing abdominal impacts can compress air-filled intestinal loops against the rigid lumbar vertebral column, resulting in acute **hollow viscus injury**. The small intestine, particularly the proximal jejunum near the ligament of Treitz and the distal ileum near the ileocaecal valve, represents the most common site of perforation. Disruption releases acidic digestive enzymes, bile, and bacterial contents into the peritoneal cavity, initiating chemical peritonitis that progresses rapidly into diffuse bacterial peritonitis.",
+   "say": "Blunt abdominal trauma can crush the small intestine against the spine, causing hollow viscus perforation. Released intestinal contents produce chemical peritonitis that progresses to severe bacterial infection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/advanced-trauma-life-support-primary-survey-and-damage-control-fig1.webp",
+    "alt": "Operative view of damage control laparotomy showing hollow viscus perforation and packing.",
+    "caption": "Damage control laparotomy: control of hollow viscus contamination and intra-abdominal packing. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A vital physical examination marker in vehicular trauma victims is the presence of the **seat belt sign**, characterized by a continuous band of cutaneous ecchymosis and abrasion extending transversely across the lower abdomen. Present in up to twenty percent of passengers restrained by two-point lap belts, this sign correlates strongly with underlying small bowel or mesenteric transections and concomitant lumbar spine flexion-distraction fractures, historically recognized as Chance fractures. Its presence warrants continuous inpatient observation and serial abdominal examinations.",
+   "say": "The seat belt sign is a transverse abdominal bruise that indicates high risk for underlying small bowel rupture and lumbar Chance fractures. Its presence mandates admission and serial examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Seat Belt Sign Associated Injury",
+     "Anatomical Structure",
+     "Clinical Presentation and Danger"
+    ],
+    "rows": [
+     [
+      "Small Bowel Perforation",
+      "Proximal jejunum or terminal ileum",
+      "Delayed peritonitis, free intra-abdominal fluid on CT"
+     ],
+     [
+      "Mesenteric Avulsion",
+      "Mesenteric arterial arcade tear",
+      "Devascularisation of bowel loop, active intra-abdominal bleeding"
+     ],
+     [
+      "Chance Fracture",
+      "Lumbar vertebrae (L1 to L3)",
+      "Horizontal flexion-distraction fracture; spinal instability"
+     ],
+     [
+      "Abdominal Wall Disruption",
+      "Rectus abdominis muscle transection",
+      "Traumatic abdominal wall hernia, severe localized tenderness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosing blunt hollow viscus injury remains challenging because initial emergency computed tomography scans can be normal or show only subtle findings. Diagnostic signs on computed tomography include unexplained free intraperitoneal fluid without solid organ injury, localized bowel wall thickening exceeding three millimetres, mesenteric fat stranding, and extraluminal free air. Because free air is absent in over half of traumatic bowel perforations, persistent or worsening abdominal pain, localized guarding, and unexplained tachycardia mandate urgent **exploratory laparotomy**.",
+   "say": "Computed tomography may show subtle signs such as unexplained free fluid, thickened bowel loops, or mesenteric stranding. Free air is absent in many bowel tears, so clinical peritonitis dictates laparotomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CT Findings of Viscus Tear",
+     "points": [
+      "Free peritoneal fluid without solid organ injury",
+      "Bowel wall thickening (>3 mm)",
+      "Focal mesenteric haematoma or stranding",
+      "Pneumoperitoneum (seen in under 50%)"
+     ]
+    },
+    "right": {
+     "title": "Clinical Hallmarks",
+     "points": [
+      "Progressive abdominal tenderness and guarding",
+      "Persistent unexplained resting tachycardia",
+      "Rising leukocyte count and lactic acidosis",
+      "Development of overt peritonitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In hemodynamically unstable trauma patients where ultrasound is equivocal or unavailable, **diagnostic peritoneal lavage** provides rapid confirmation of intra-abdominal haemorrhage. Performed via an open or closed infraumbilical catheter insertion, the aspiration of ten millilitres of frank, non-clotting blood immediately confirms a positive tap. If aspiration is negative, one litre of warm normal saline is infused and siphoned back. In blunt trauma, positive lavage criteria include a red blood cell count exceeding one hundred thousand per microlitre.",
+   "say": "Diagnostic peritoneal lavage confirms internal bleeding in unstable patients when ultrasound is equivocal. Aspiration of ten millilitres of gross blood or high red cell counts indicates positive lavage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lavage Metric",
+     "Positive Threshold in Blunt Trauma",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Gross Blood Aspiration",
+      ">= 10 mL frank non-clotting blood",
+      "Immediate positive test; transfer directly to OR"
+     ],
+     [
+      "Red Blood Cell Count",
+      "Greater than 100,000 per microlitre",
+      "Significant intra-abdominal haemorrhage confirmed"
+     ],
+     [
+      "White Blood Cell Count",
+      "Greater than 500 per microlitre",
+      "Peritoneal inflammatory response to visceral perforation"
+     ],
+     [
+      "Biochemical Markers",
+      "Presence of amylase, bile, or bacteria",
+      "Confirms hollow viscus perforation into peritoneal space"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe pelvic ring disruptions caused by high-energy crush or motorcycle collisions induce torrential, life-threatening haemorrhage. In over eighty-five percent of cases, **pelvic fracture bleeding** originates from the low-pressure presacral and prevesical retroperitoneal venous plexuses alongside disrupted cancellous pelvic fracture bone surfaces. Arterial haemorrhage accounts for the remaining fifteen percent, typically arising from branches of the internal iliac artery, especially the superior gluteal, internal pudendal, and lateral sacral arteries.",
+   "say": "Pelvic fracture haemorrhage is primarily venous, arising from torn retroperitoneal venous plexuses and raw fracture surfaces. Arterial bleeding accounts for fifteen percent, mostly from internal iliac branches.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-pelvic-and-retroperitoneal-trauma-fig1.webp",
+    "alt": "Anatomical schematic showing pelvic fractures, retroperitoneal haematoma, and renal injury.",
+    "caption": "Pelvic ring disruption, expanding retroperitoneal haematoma, and associated urogenital injuries. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate emergency management for unstable pelvic fractures focuses on mechanical stabilization to reduce pelvic volume. Applying a commercial pelvic binder or tightly wrapping a folded bedsheet centered directly over the **greater trochanters** closes an open-book pelvic ring disruption. Compressing the pelvic volume stabilizes bony fracture surfaces, promotes local clot formation, and prevents further retroperitoneal venous bleeding. Binders must be centered over the greater trochanters rather than the soft iliac crests to achieve mechanical reduction.",
+   "say": "Applying a pelvic binder centered over the greater trochanters closes the pelvic ring volume. This stabilizes fractured bone surfaces and facilitates clot formation in bleeding pelvic veins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "unstable",
+      "label": "Pelvic Ring Fracture with Hypotension"
+     },
+     {
+      "id": "binder",
+      "label": "Apply Pelvic Binder Centered Over Trochanters"
+     },
+     {
+      "id": "xray",
+      "label": "Confirm Fracture Reduction on Pelvic Radiograph"
+     },
+     {
+      "id": "angio",
+      "label": "Persistent Shock -> Pelvic Packing or Embolization"
+     }
+    ],
+    "edges": [
+     [
+      "unstable",
+      "binder"
+     ],
+     [
+      "binder",
+      "xray"
+     ],
+     [
+      "xray",
+      "angio"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traumatic retroperitoneal haemorrhage is categorized into three distinct anatomical zones that dictate surgical decision-making. Zone One represents the central midline retroperitoneum, extending from the diaphragmatic hiatus to the sacral promontory. It contains the abdominal aorta, inferior vena cava, pancreas, and duodenum. A **retroperitoneal haematoma** located within Zone One mandates mandatory surgical exploration in both blunt and penetrating trauma mechanisms to identify and repair lethal vascular and duodenopancreatic lacerations.",
+   "say": "Retroperitoneal haematomas in zone one occupy the central midline and contain the aorta and vena cava. Zone one haematomas always require mandatory surgical exploration in both blunt and penetrating trauma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Zone",
+     "Contained Structures",
+     "Blunt Trauma Strategy",
+     "Penetrating Trauma Strategy"
+    ],
+    "rows": [
+     [
+      "Zone I (Central)",
+      "Abdominal aorta, IVC, pancreas, duodenum",
+      "Mandatory surgical exploration",
+      "Mandatory surgical exploration"
+     ],
+     [
+      "Zone II (Flank)",
+      "Kidneys, renal vessels, ascending/descending colon",
+      "Explore only if expanding or pulsatile",
+      "Mandatory surgical exploration"
+     ],
+     [
+      "Zone III (Pelvis)",
+      "Pelvic bones, internal iliac vessels, presacral plexus",
+      "Do NOT explore; pack and angioembolize",
+      "Selective exploration if bleeding persists"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to central injuries, haematomas in Zone Three are confined within the true pelvis below the sacral promontory. In blunt pelvic trauma, opening a stable Zone Three pelvic haematoma during laparotomy releases the natural retroperitoneal **tamponade**, precipitating catastrophic, uncontrollable exsanguination. Instead, management relies on extraperitoneal pelvic packing through a separate suprapubic incision without opening the peritoneum, followed by immediate transfer to the interventional radiology suite for selective catheter angioembolization.",
+   "say": "Zone three pelvic haematomas must not be opened directly during laparotomy because surgical exploration destroys retroperitoneal tamponade. Extra-peritoneal packing and angioembolization are the preferred approaches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Zone I Exploration",
+     "points": [
+      "Mandatory exploration in all cases",
+      "High incidence of major vascular injury",
+      "Mobilize viscera using Cattell-Braasch maneuver",
+      "Direct vascular and duodenal repair"
+     ]
+    },
+    "right": {
+     "title": "Zone III Avoidance",
+     "points": [
+      "Do not explore directly in blunt trauma",
+      "Disrupts natural retroperitoneal tamponade",
+      "Treated with external binder and pelvic packing",
+      "Transcatheter arterial angioembolization"
+     ]
+    }
+   }
+  }
+ ]
+}

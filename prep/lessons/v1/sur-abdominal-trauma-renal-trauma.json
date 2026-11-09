@@ -1,0 +1,270 @@
+{
+ "v": 1,
+ "module": "sur-abdominal-trauma",
+ "subject": "surgery",
+ "title": "Renal and Lower Urinary Tract Trauma and Abdominal Compartment Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The kidneys are protected within the retroperitoneal Gerota fascia, surrounded by perinephric fat and the lower rib cage. Direct deceleration impacts or lower rib fractures frequently produce acute **renal trauma**. Clinical evaluation reveals flank contusions, lower rib tenderness, and microscopic or gross haematuria. Crucially, the degree of haematuria correlates poorly with injury severity; catastrophic complete avulsion of the renal artery pedicle or ureteropelvic junction transection can present with completely clear urine.",
+   "say": "Renal trauma arises from flank impacts and lower rib fractures. Crucially, the presence or absence of haematuria does not predict injury severity, as pedicle avulsions can present with completely clear urine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-pelvic-and-retroperitoneal-trauma-fig1.webp",
+    "alt": "Diagram showing retroperitoneal renal laceration, perirenal hematoma, and pelvic trauma.",
+    "caption": "Renal parenchymal laceration, expanding perirenal haematoma within Gerota fascia, and pelvic trauma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contrast-enhanced multiphase computed tomography represents the definitive diagnostic gold standard for evaluating suspected renal trauma. Scanning must incorporate an early arterial phase to evaluate parenchymal vascularity, followed by a delayed excretory phase at ten minutes to detect **urinary extravasation** from the renal pelvis or calyces. Renal injuries are graded from One for simple contusions to Grade Five for a shattered kidney or complete hilar pedicle avulsion. Over eighty-five percent of stable blunt renal injuries are managed non-operatively.",
+   "say": "Multiphase CT with delayed excretory imaging is the gold standard to detect renal injury and urinary leakage. Most stable renal injuries are managed conservatively without surgical intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AAST Renal Grade",
+     "Parenchymal Findings",
+     "Collecting System Status",
+     "Vascular Status"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "Subcapsular haematoma or simple contusion",
+      "Intact collecting system",
+      "No vascular injury"
+     ],
+     [
+      "Grade II",
+      "Superficial laceration <1 cm parenchymal depth",
+      "Intact collecting system",
+      "No vascular injury"
+     ],
+     [
+      "Grade III",
+      "Deep laceration >1 cm parenchymal depth",
+      "Intact collecting system",
+      "No vascular injury"
+     ],
+     [
+      "Grade IV",
+      "Laceration extending through corticomedullary junction",
+      "Extravasation of contrast from collecting system",
+      "Segmental renal artery or vein injury"
+     ],
+     [
+      "Grade V",
+      "Completely shattered, fragmented kidney",
+      "Complete ureteropelvic junction avulsion",
+      "Main renal artery or vein thrombosis or avulsion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traumatic injury to the urinary bladder occurs commonly in association with pelvic ring fractures or direct lower abdominal blows. Traumatic bladder disruptions are categorized into extraperitoneal and intraperitoneal ruptures. An **extraperitoneal bladder rupture** accounts for eighty to eighty-five percent of presentations, arising when sharp bony pelvic fracture spicules lacerate the anterolateral bladder wall. Extravasated urine dissects into the retroperitoneal space of Retzius, producing flame-shaped contrast extravasation on cystography.",
+   "say": "Extraperitoneal bladder rupture accounts for over eighty percent of bladder tears and is caused by pelvic bone fragments. Extravasated urine collects in the space of Retzius and responds well to catheter drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extraperitoneal Rupture",
+     "points": [
+      "80% to 85% of all bladder ruptures",
+      "Laceration by sharp pelvic bone fragments",
+      "Flame-shaped contrast in space of Retzius",
+      "Managed conservatively with Foley catheter"
+     ]
+    },
+    "right": {
+     "title": "Intraperitoneal Rupture",
+     "points": [
+      "15% to 20% of bladder ruptures",
+      "Direct blow to distended, full bladder",
+      "Contrast outlines bowel loops and gutters",
+      "Requires emergency operative laparotomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast, an **intraperitoneal bladder rupture** occurs when a sudden blunt impact strikes a tensely distended, full urinary bladder, rupturing the thin dome into the free peritoneal cavity. Extravasated urine irritates the peritoneum, producing chemical peritonitis and resorption of urinary urea and creatinine. Cystography reveals contrast outlining small bowel loops and pooling in the paracolic gutters. Unlike extraperitoneal tears, intraperitoneal ruptures mandate emergency exploratory laparotomy and primary two-layer watertight surgical repair.",
+   "say": "Intraperitoneal bladder rupture occurs when a full bladder bursts at the dome from sudden blunt impact. Contrast outlines peritoneal bowel loops, requiring emergency laparotomy and surgical repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "full",
+      "label": "Blunt Force Over Tensely Distended Bladder"
+     },
+     {
+      "id": "dome",
+      "label": "Tear of Superior Peritonealized Bladder Dome"
+     },
+     {
+      "id": "urine",
+      "label": "Urine Extravasates into Free Peritoneal Cavity"
+     },
+     {
+      "id": "repair",
+      "label": "Emergency Laparotomy & Two-Layer Watertight Suture"
+     }
+    ],
+    "edges": [
+     [
+      "full",
+      "dome"
+     ],
+     [
+      "dome",
+      "urine"
+     ],
+     [
+      "urine",
+      "repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traumatic urethral injuries occur almost exclusively in male patients, categorized into anterior and posterior disruptions. A **posterior urethral injury** involves the membranous urethra at the urogenital diaphragm and occurs in severe pelvic fractures when shearing forces disrupt the puboprostatic ligaments. Classic clinical examination findings include blood at the external urethral meatus, inability to void, a distended urinary bladder, and a high-riding, ballotable prostate gland displaced superiorly on digital rectal examination.",
+   "say": "Posterior urethral disruption is associated with pelvic fractures and presents with blood at the urethral meatus, inability to urinate, and a high-riding prostate. Blind catheterization is strictly contraindicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Division",
+     "Involved Segment",
+     "Mechanism of Trauma",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "Posterior Urethra",
+      "Membranous and prostatic urethra",
+      "High-energy pelvic fractures with shear",
+      "High-riding prostate, blood at meatus, butterfly perineal hematoma"
+     ],
+     [
+      "Anterior Urethra",
+      "Bulbar and penile spongy urethra",
+      "Straddle injury (bicycle frame, manhole)",
+      "Scrotal hematoma confined by Colles fascia, intact normal prostate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blind passage of a transurethral Foley catheter in a patient with suspected urethral trauma is strictly contraindicated because catheter manipulation can convert a partial mucosal tear into a complete transection and introduce severe infection into a sterile pelvic haematoma. The initial diagnostic investigation of choice is a **retrograde urethrogram**, performed by gently injecting twenty millilitres of water-soluble contrast into the external meatus under fluoroscopic guidance. If disruption is confirmed, emergency urinary diversion is achieved via a percutaneous suprapubic cystostomy.",
+   "say": "Never insert a Foley catheter blindly if urethral trauma is suspected. Retrograde urethrography must be performed first to assess urethral integrity, placing a suprapubic catheter if a tear is found.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Blood at Meatus or Pelvic Fracture"
+     },
+     {
+      "id": "withhold",
+      "label": "Do NOT Pass Transurethral Catheter"
+     },
+     {
+      "id": "rug",
+      "label": "Perform Retrograde Urethrogram (RUG)"
+     },
+     {
+      "id": "stomy",
+      "label": "Contrast Extravasation -> Suprapubic Cystostomy"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "withhold"
+     ],
+     [
+      "withhold",
+      "rug"
+     ],
+     [
+      "rug",
+      "stomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aggressive resuscitation of polytrauma shock with massive crystalloid and blood product administration frequently leads to widespread visceral and retroperitoneal edema. When intra-abdominal pressure rises above twelve millimetres of mercury, intra-abdominal hypertension develops. Sustained intra-abdominal pressure exceeding twenty millimetres of mercury accompanied by new organ failure defines **abdominal compartment syndrome**. Elevated pressure compresses the inferior vena cava, elevates the diaphragmatic domes, and reduces renal cortical blood flow, precipitating oliguria, refractory hypercapnia, and metabolic acidosis.",
+   "say": "Abdominal compartment syndrome develops when massive fluid resuscitation drives intra-abdominal pressure above twenty millimetres of mercury, causing visceral compression, oliguria, and respiratory failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Pathophysiological Impact of High IAP",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Renal System",
+      "Renal vein compression and renal parenchymal hypoperfusion",
+      "Progressive oliguria refractory to fluid boluses"
+     ],
+     [
+      "Pulmonary System",
+      "Upward diaphragmatic displacement reduces lung compliance",
+      "Elevated peak inspiratory pressures, hypoxia, hypercapnia"
+     ],
+     [
+      "Cardiovascular",
+      "Inferior vena cava compression diminishes venous return",
+      "Decreased cardiac preload, tachycardia, hypotension"
+     ],
+     [
+      "Splanchnic Viscera",
+      "Mesenteric microvascular capillary hypoperfusion",
+      "Intestinal ischaemia, mucosal barrier loss, bacterial translocation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Monitoring intra-abdominal pressure is accomplished at the bedside by measuring urinary bladder pressure using a standard indwelling Foley catheter transduced with sterile saline. When medical therapies including neuromuscular blockade, gastrointestinal decompression, and fluid restriction fail to control pressure, immediate surgical intervention is life-saving. The definitive treatment for refractory abdominal compartment syndrome is an emergent **decompressive laparotomy**. The abdomen is opened widely and left open using a temporary negative-pressure vacuum dressing to allow visceral decompression.",
+   "say": "Intra-abdominal pressure is monitored by measuring urinary bladder pressure via a Foley catheter. If medical therapy fails, emergency decompressive laparotomy with temporary open abdominal closure is life-saving.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "measure",
+      "label": "Monitor Bladder Pressure (>20 mmHg with Organ Failure)"
+     },
+     {
+      "id": "medical",
+      "label": "Trial Medical Decompression (NG Tube, Paralysis)"
+     },
+     {
+      "id": "refractory",
+      "label": "Persistent Pressure and Worsening Oliguria?"
+     },
+     {
+      "id": "laparotomy",
+      "label": "Emergency Decompressive Laparotomy & Vacuum Closure"
+     }
+    ],
+    "edges": [
+     [
+      "measure",
+      "medical"
+     ],
+     [
+      "medical",
+      "refractory"
+     ],
+     [
+      "refractory",
+      "laparotomy"
+     ]
+    ]
+   }
+  }
+ ]
+}

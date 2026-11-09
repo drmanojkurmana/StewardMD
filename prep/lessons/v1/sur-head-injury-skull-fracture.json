@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "module": "sur-head-injury",
+ "subject": "surgery",
+ "title": "Skull Fractures, Basilar Signs, and Cerebrospinal Fluid Leaks",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Cranial trauma frequently produces osseous disruptions categorized anatomically into vault fractures and basilar skull fractures. Fractures of the cranial vault may be linear, comminuted, or depressed, and are designated as compound whenever an overlying cutaneous laceration or communicating paranasal sinus mucosal tear violates sterility. A **depressed skull fracture** is defined as inward displacement of the outer table of bone below the level of the surrounding inner table, mandating urgent operative elevation and debridement whenever contaminated.",
+   "say": "Skull fractures are classified into vault and basilar fractures. A depressed fracture displaces cranial bone inwards, and open contaminated fractures require prompt surgical debridement to prevent intracranial infection.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-neo-head_skull_trauma.webp",
+    "alt": "Medical diagram illustrating cranial anatomy and patterns of skull trauma.",
+    "caption": "Anatomical vault structure, cranial sutures, and patterns of traumatic osseous fracture. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Linear vault fractures crossing anatomical vascular grooves carry profound clinical significance because they threaten major underlying vessels. A linear fracture coursing across the squamous temporal bone or pterion can lacerate the middle meningeal artery, precipitating an acute epidural haematoma. Similarly, fractures extending across the occipital bone toward the foramen magnum threaten dural venous sinuses, risking massive intracranial haemorrhage or venous sinus thrombosis. Consequently, all patients with documented **linear skull fractures** warrant mandatory computed tomography imaging.",
+   "say": "Linear skull fractures crossing vascular grooves can tear the middle meningeal artery or dural venous sinuses. Every patient with a documented skull fracture requires mandatory cranial CT scanning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fracture Type",
+     "Anatomical Pattern",
+     "Primary Clinical Danger",
+     "Surgical Indication"
+    ],
+    "rows": [
+     [
+      "Linear Vault Fracture",
+      "Single undisplaced fracture line through bone",
+      "Underlying epidural haematoma or dural tear",
+      "Conservative observation unless vascular injury exists"
+     ],
+     [
+      "Depressed Skull Fracture",
+      "Bone fragment depressed below inner table",
+      "Cortical laceration, seizure focus, dural tear",
+      "Operative elevation if depression exceeds bone thickness"
+     ],
+     [
+      "Compound Vault Fracture",
+      "Fracture communicating with skin laceration",
+      "High risk of intracranial infection and meningitis",
+      "Emergency operative debridement and primary repair"
+     ],
+     [
+      "Basilar Skull Fracture",
+      "Fracture through anterior or middle cranial base",
+      "Cranial nerve palsies and persistent CSF fistula",
+      "Conservative initial care; repair persistent CSF leak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fractures traversing the irregular bony floor of the anterior, middle, or posterior cranial fossae constitute basilar skull fractures. Plain skull radiography fails to identify up to fifty percent of these injuries due to complex overlapping facial bones, making high-resolution thin-cut computed tomography with bone window reconstruction the gold standard imaging modality. Diagnosis relies primarily upon pathognomonic physical signs, including bilateral periorbital ecchymosis, retroauricular mastoid ecchymosis, haemotympanum, and cranial **dural tears** with cerebrospinal fluid leakage.",
+   "say": "Basilar skull fractures involve the cranial base and are diagnosed primarily through clinical examination and fine-cut CT. Key signs include periorbital bruising, mastoid ecchymosis, and cerebrospinal fluid leaks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Fossa Fracture",
+     "points": [
+      "Fracture of cribriform plate or orbital roof",
+      "Bilateral periorbital ecchymosis (raccoon eyes)",
+      "Subconjunctival haemorrhage without posterior limit",
+      "Presents with cerebrospinal fluid rhinorrhoea"
+     ]
+    },
+    "right": {
+     "title": "Middle / Posterior Fossa",
+     "points": [
+      "Fracture of petrous temporal bone",
+      "Mastoid ecchymosis (Battle sign)",
+      "Haemotympanum on otoscopic examination",
+      "Presents with cerebrospinal fluid otorrhoea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fractures involving the anterior cranial fossa involve the cribriform plate of the ethmoid bone or the orbital roofs. Blood tracking from the fractured orbital plate into the loose preseptal periorbital tissues produces prominent bilateral periorbital ecchymosis, colloquially recognized as **raccoon eyes**. Pathognomonically, the ecchymosis is strictly confined by the orbital septum, sparing the tarsal plates of the eyelids, and is accompanied by bright red subconjunctival haemorrhage with no discernible posterior limit on ocular examination.",
+   "say": "Raccoon eyes refer to bilateral periorbital ecchymosis from anterior cranial fossa fractures. The ecchymosis respects the orbital septum, spares the tarsal plates, and features subconjunctival bleeding without a visible posterior limit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "impact",
+      "label": "Anterior Cranial Base Impact"
+     },
+     {
+      "id": "cribriform",
+      "label": "Fracture of Cribriform Plate / Orbit"
+     },
+     {
+      "id": "track",
+      "label": "Blood Tracks into Periorbital Soft Tissue"
+     },
+     {
+      "id": "raccoon",
+      "label": "Raccoon Eyes and Subconjunctival Haemorrhage"
+     }
+    ],
+    "edges": [
+     [
+      "impact",
+      "cribriform"
+     ],
+     [
+      "cribriform",
+      "track"
+     ],
+     [
+      "track",
+      "raccoon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laceration of the closely adherent dura and arachnoid overlying a fractured cribriform plate creates an abnormal communicating fistula with the nasal cavity, resulting in clear **cerebrospinal fluid rhinorrhoea**. Patients notice clear, watery nasal discharge that characteristically increases upon forward head flexion or Valsalva maneuvers, often reporting a distinct salty or sweet taste in the posterior pharynx. Tearing of the delicate olfactory nerve rootlets traversing the cribriform foramina simultaneously produces permanent anosmia.",
+   "say": "A cribriform plate fracture can tear adherent meninges, allowing clear cerebrospinal fluid to leak from the nose. Patients describe watery nasal dripping that worsens when bending forward.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Test",
+     "Testing Methodology",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Halo or Ring Sign",
+      "Drop bloody discharge onto white filter paper or sheet",
+      "Central blood circle with clear expanding outer fluid ring"
+     ],
+     [
+      "Glucose Oxidase Strip",
+      "Test fluid with bedside glucose dipstick",
+      "Unreliable due to nasal mucosal glucose and lacrimation"
+     ],
+     [
+      "Beta-2 Transferrin",
+      "Electrophoretic assay of gathered drainage fluid",
+      "Gold standard; highly sensitive and specific for CSF"
+     ],
+     [
+      "High-Resolution CT",
+      "Fine-cut 1 mm axial and coronal bone window CT",
+      "Identifies precise bony cribriform or sphenoid defects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fractures traversing the petrous portion of the temporal bone in the middle or posterior cranial fossa produce distinct otological signs. Blood extravasating along the posterior auricular artery produces cutaneous ecchymosis over the mastoid process, known as **Battle sign**. Because blood takes time to dissect through tissue planes, Battle sign typically manifests twelve to twenty-four hours following injury. Otoscopic examination frequently reveals dark blood pooling behind an intact tympanic membrane, termed haemotympanum, or frank cerebrospinal fluid otorrhoea if ruptured.",
+   "say": "Petrous temporal bone fractures cause mastoid ecchymosis, known as Battle sign, which develops within twenty-four hours. Otoscopy reveals haemotympanum or clear fluid draining through a torn eardrum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Battle Sign Features",
+     "points": [
+      "Bruising over the mastoid process",
+      "Appears 12 to 24 hours after injury",
+      "Reflects petrous temporal bone fracture",
+      "May be accompanied by facial nerve weakness"
+     ]
+    },
+    "right": {
+     "title": "Haemotympanum Features",
+     "points": [
+      "Blue-purple bulging tympanic membrane",
+      "Blood fills middle ear cavity",
+      "Produces conductive hearing impairment",
+      "Usually resolves spontaneously over weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing true cerebrospinal fluid from ordinary nasal mucus or blood is vital in suspected basilar trauma. When placed on filter paper, fluid containing blood and cerebrospinal fluid separates into a dark central bloody spot surrounded by a clear outer ring, recognized as the **halo sign**. However, the definitive biochemical gold standard for confirming a cerebrospinal fluid fistula is demonstrating beta-two transferrin, an asialated isoform of transferrin found exclusively within cerebrospinal fluid, perilymph, and the ocular aqueous humor.",
+   "say": "The filter paper halo sign suggests cerebrospinal fluid leakage, but laboratory testing for beta-two transferrin provides definitive confirmation because this protein isoform is unique to cerebrospinal fluid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fluid",
+      "label": "Clear Watery Fluid from Nose or Ear"
+     },
+     {
+      "id": "bedside",
+      "label": "Inspect for Halo Ring on White Linen"
+     },
+     {
+      "id": "lab",
+      "label": "Collect Fluid for Beta-2 Transferrin Assay"
+     },
+     {
+      "id": "confirm",
+      "label": "Positive Transferrin Confirms Active Dural Fistula"
+     }
+    ],
+    "edges": [
+     [
+      "fluid",
+      "bedside"
+     ],
+     [
+      "bedside",
+      "lab"
+     ],
+     [
+      "lab",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial management for post-traumatic cerebrospinal fluid rhinorrhoea or otorrhoea is non-operative, as over eighty percent of acute traumatic dural tears heal spontaneously within seven to ten days. Recommended conservative protocols include strict bed rest, elevation of the head of the bed to thirty degrees, and instructing the patient to avoid nose blowing or coughing. Routine prophylactic **antibiotic therapy** is strictly contraindicated because clinical trials confirm it fails to prevent bacterial meningitis while selecting for virulent resistant pathogens.",
+   "say": "Most traumatic cerebrospinal fluid leaks close spontaneously with head elevation and bed rest. Prophylactic antibiotics should not be administered because they do not prevent meningitis and promote resistant bacteria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Management Strategy",
+     "Clinical Protocol",
+     "Rationale and Evidence"
+    ],
+    "rows": [
+     [
+      "Head Positioning",
+      "Elevate head of bed to 30 to 45 degrees",
+      "Decreases resting hydrostatic intracranial pressure"
+     ],
+     [
+      "Patient Instructions",
+      "Avoid coughing, sneezing, and nose blowing",
+      "Prevents intracranial pneumocephalus and fistula disruption"
+     ],
+     [
+      "Prophylactic Antibiotics",
+      "Not recommended; strictly withhold",
+      "Does not reduce meningitis incidence; breeds resistant flora"
+     ],
+     [
+      "Surgical Repair",
+      "Endoscopic transnasal repair if leaking >7-10 days",
+      "Prevents delayed ascending pneumococcal meningitis"
+     ]
+    ]
+   }
+  }
+ ]
+}

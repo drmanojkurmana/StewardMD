@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "sur-neck-face-trauma",
+ "subject": "surgery",
+ "title": "Maxillofacial Fractures, Le Fort Types, and Popliteal Artery Trauma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "High-velocity blunt facial trauma arising from vehicular impacts or assaults produces complex fractures of the facial skeleton. The definitive classification for midfacial maxillary fractures was established by Rene Le Fort, based on characteristic lines of structural weakness. All Le Fort fracture configurations share one pathognomonic anatomical hallmark: bilateral disruption of the **pterygoid plates** at the skull base, disconnecting the midface from the posterior cranial base.",
+   "say": "The Le Fort classification describes midfacial maxillary fractures. All Le Fort fracture configurations share the hallmark feature of bilateral fractures through the pterygoid plates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Le Fort Type",
+     "Fracture Line Course",
+     "Floating Structural Component",
+     "Classic Physical Signs"
+    ],
+    "rows": [
+     [
+      "Le Fort I (Guerin / Horizontal)",
+      "Transverse across lower maxilla above tooth roots",
+      "Floating lower dental arch and hard palate",
+      "Grasping upper teeth moves palate while nose remains still"
+     ],
+     [
+      "Le Fort II (Pyramidal)",
+      "Nasal bridge, lacrimal bones, orbital floor, maxilla",
+      "Pyramidal floating midface, nose, and hard palate",
+      "Bilateral periorbital ecchymosis, step-off at inferior orbital rim"
+     ],
+     [
+      "Le Fort III (Craniofacial Dysjunction)",
+      "Zygomatic arch, lateral orbit, nasofrontal junction",
+      "Complete separation of entire facial skeleton from skull",
+      "Severe dish-face deformity, massive facial edema, high CSF leak risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically distinguishing the three Le Fort fracture patterns relies on stabilizing the patient's forehead with one hand while grasping the anterior maxillary teeth with the other. In a Le Fort One fracture, only the hard palate and dental arch mobilize independently. In a Le Fort Two injury, the palate and nasal pyramid move as a single block while the forehead remains still. In a severe **Le Fort III fracture**, the entire facial skeleton displaces as a unit, producing a dish-face deformity.",
+   "say": "Le Fort fractures are distinguished by grasping the upper teeth while stabilizing the forehead. In type one only the palate moves; in type two the nose moves too; in type three the entire face is detached.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Le Fort I (Floating Palate)",
+     "points": [
+      "Transverse horizontal maxillary fracture",
+      "Passes through piriform aperture",
+      "Alveolar ridge and hard palate mobilize",
+      "Nasal bridge and orbital rims remain stable"
+     ]
+    },
+    "right": {
+     "title": "Le Fort III (Craniofacial Split)",
+     "points": [
+      "Complete craniofacial dysjunction",
+      "Fracture traverses zygomaticofrontal sutures",
+      "Entire facial skeleton mobilizes from calvarium",
+      "High incidence of cribriform CSF rhinorrhoea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The mandible represents the second most commonly fractured facial bone after the nasal bones. Because the mandible functions as an anatomical ring, fractures are multiple in over fifty percent of cases, exemplified by a direct blow to the parasymphysis fracturing the contralateral condylar neck. Clinical hallmarks include malocclusion, sublingual haematoma on the floor of the mouth, known as the **Coleman sign**, and sensory anaesthesia of the chin from inferior alveolar nerve traction.",
+   "say": "Because the mandible forms a bony ring, impacts often cause fractures in two places. Pathognomonic signs include dental malocclusion and a sublingual haematoma on the floor of the mouth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Mandibular Site",
+     "Incidence Percentage",
+     "Typical Mechanism of Injury",
+     "Associated Complications"
+    ],
+    "rows": [
+     [
+      "Condyle and Subcondylar Neck",
+      "Approximately 30% of cases",
+      "Indirect force from direct blow to contralateral chin",
+      "Limited mouth opening, deviation of jaw on opening"
+     ],
+     [
+      "Angle of the Mandible",
+      "Approximately 25% of cases",
+      "Direct lateral impact, often involving impacted third molar",
+      "Inferior alveolar nerve anaesthesia, severe malocclusion"
+     ],
+     [
+      "Body and Parasymphysis",
+      "Approximately 20% to 25%",
+      "Direct frontal impact (assault, vehicular steering wheel)",
+      "Coleman sublingual haematoma, step deformity between teeth"
+     ],
+     [
+      "Coronoid Process",
+      "Under 2% of cases",
+      "High-velocity penetrating trauma or direct zygomatic blow",
+      "Rare isolated fracture; impingement on temporalis muscle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fractures involving the lateral facial skeleton frequently disrupt the tetrapod articulation of the cheekbone, historically termed a tripod or **zygomaticomaxillary complex fracture**. Fracture lines traverse the zygomatic arch, the zygomaticofrontal suture, the inferior orbital rim, and the lateral maxillary buttress. Patients present with flattening of the malar cheek prominence, diplopia resulting from inferior rectus muscle entrapment in the orbital floor, and trismus caused by the depressed zygomatic arch impinging on the coronoid process.",
+   "say": "A zygomaticomaxillary complex fracture disrupts the cheekbone at four pillars, causing flattening of the cheek, double vision from orbital floor involvement, and locked jaw from arch impingement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "impact",
+      "label": "Direct Impact to Malar Cheek Prominence"
+     },
+     {
+      "id": "fracture",
+      "label": "Disruption of Four Zygomatic Articulations"
+     },
+     {
+      "id": "impinge",
+      "label": "Depressed Arch Impinges on Mandibular Coronoid"
+     },
+     {
+      "id": "symptoms",
+      "label": "Malar Flattening, Trismus, & Infraorbital Numbness"
+     }
+    ],
+    "edges": [
+     [
+      "impact",
+      "fracture"
+     ],
+     [
+      "fracture",
+      "impinge"
+     ],
+     [
+      "impinge",
+      "symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transitioning to peripheral vascular emergencies, trauma to the knee region carries a devastating risk of arterial occlusion. The popliteal artery is exceptionally vulnerable during high-energy trauma because it is tethered anatomically at the adductor hiatus proximally and by the fibrous arch of the soleus muscle distally. Acute traumatic knee dislocation or displaced proximal tibial fractures subject the fixed artery to severe traction, producing intimal disruption, thrombosis, or complete **popliteal artery injury**.",
+   "say": "The popliteal artery is tethered tightly above and below the knee, making it vulnerable to traction transection or intimal thrombosis during knee dislocations and displaced fractures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Knee Dislocation",
+     "points": [
+      "Hyperextension injury mechanism",
+      "Tears posterior capsule and cruciates",
+      "Popliteal artery stretched over tibial plateau",
+      "High rate of arterial intimal tear and thrombosis"
+     ]
+    },
+    "right": {
+     "title": "Posterior Knee Dislocation",
+     "points": [
+      "Direct high-energy dashboard blow to tibia",
+      "Tibial plateau driven posteriorly into fossa",
+      "Direct mechanical transection of popliteal artery",
+      "Highest overall incidence of complete vascular transection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because the popliteal artery is a true functional end-artery with minimal collateral reserve around the knee, acute occlusion produces profound lower extremity ischaemia. The safe warm ischaemia time for skeletal muscle is strictly limited to six hours. Revascularization delayed beyond six to eight hours leads to irreversible ischemic muscle necrosis, rhabdomyolysis, and an amputation rate exceeding sixty percent. Consequently, any patient with a suspected knee dislocation warrants urgent vascular evaluation including calculation of the **ankle-brachial index**.",
+   "say": "The warm ischaemia window for the lower extremity is only six hours. Delayed revascularization leads to irreversible muscle necrosis and amputation, mandating urgent vascular assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ankle-Brachial Index (ABI)",
+     "Vascular Status",
+     "Mandatory Diagnostic Protocol"
+    ],
+    "rows": [
+     [
+      "ABI >= 0.90 with Normal Pulses",
+      "Normal arterial perfusion; low likelihood of injury",
+      "Serial physical examinations and continuous pulse oximetry"
+     ],
+     [
+      "ABI < 0.90 or Asymmetric Pulses",
+      "Significant arterial flow impairment suspected",
+      "Urgent contrast-enhanced computed tomography angiography (CTA)"
+     ],
+     [
+      "Absent Distal Pulses / Hard Signs",
+      "Complete acute popliteal arterial occlusion confirmed",
+      "Immediate transfer to operating room for emergency revascularization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When hard signs of acute arterial occlusion are identified, the patient is transferred directly to the operating room for emergency revascularization. Operative reconstruction requires harvesting an autologous reversed saphenous vein graft from the uninjured contralateral leg; prosthetic PTFE grafts are avoided in contaminated trauma wounds. If severe orthopedic skeletal instability exists, the surgical team establishes an immediate temporary intravascular shunt to restore limb perfusion while the orthopedic surgeons perform external fixation, followed by definitive **interposition grafting**.",
+   "say": "Emergency surgical repair uses a reversed saphenous vein graft from the uninjured leg. A temporary shunt restores blood flow immediately while orthopedic surgeons fix unstable bone fractures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "occlusion",
+      "label": "Acute Popliteal Occlusion & Warm Ischaemia"
+     },
+     {
+      "id": "shunt",
+      "label": "Insert Temporary Intravascular Shunt"
+     },
+     {
+      "id": "fixation",
+      "label": "Rapid Orthopedic External Skeletal Fixation"
+     },
+     {
+      "id": "bypass",
+      "label": "Definitive Reversed Saphenous Vein Interposition Graft"
+     }
+    ],
+    "edges": [
+     [
+      "occlusion",
+      "shunt"
+     ],
+     [
+      "shunt",
+      "fixation"
+     ],
+     [
+      "fixation",
+      "bypass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following successful restoration of arterial inflow, reperfusion of ischemic muscle beds triggers profound capillary hyperpermeability and marked tissue swelling within the rigid fascial envelopes of the lower leg. Unchecked pressure rises precipitate severe reperfusion compartment syndrome, obliterating microvascular capillary flow and destroying neuromuscular function. To prevent this catastrophe, performing prophylactic four-compartment **decompressive fasciotomy** is mandatory whenever the ischaemia time exceeds four to six hours, utilizing standard two-incision anterolateral and posteromedial approaches.",
+   "say": "Reperfusion after hours of ischaemia causes intense muscle swelling within the lower leg. A prophylactic four-compartment fasciotomy is mandatory to prevent compartment syndrome and limb loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fasciotomy Incision",
+     "Decompressed Leg Compartments",
+     "Contained Neurovascular Structures"
+    ],
+    "rows": [
+     [
+      "Anterolateral Incision",
+      "Anterior and Lateral compartments",
+      "Deep peroneal nerve, anterior tibial artery, superficial peroneal nerve"
+     ],
+     [
+      "Posteromedial Incision",
+      "Superficial posterior and Deep posterior compartments",
+      "Tibial nerve, posterior tibial vessels, peroneal vessels"
+     ]
+    ]
+   }
+  }
+ ]
+}
