@@ -1,0 +1,271 @@
+{
+ "key": "ped-inheritance-syndromes-trinucleotide-repeat",
+ "v": 1,
+ "module": "ped-inheritance-syndromes",
+ "subject": "paediatrics",
+ "title": "Trinucleotide Repeats, Fragile X, Marfan and Noonan Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Dynamic mutations expand unstably across generations, provoking progressively earlier and more severe disease. Disorders driven by **trinucleotide repeat expansion** violate classic stable Mendelian laws through the genetic phenomenon of anticipation, where repeat copy numbers expand during parental gametogenesis. Repeat thresholds determine phenotypic expression, progressing from normal stability to unmethylated premutation carriers, and ultimately to full disease-causing repeat expansions.",
+   "say": "Trinucleotide repeat expansions are dynamic mutations that enlarge across generations. Genetic anticipation causes successive generations to suffer earlier disease onset and greater severity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trinucleotide Disease",
+     "Expanded Repeat Triplet",
+     "Gene & Chromosome",
+     "Repeat Expansion Range",
+     "Anticipation Parent Bias"
+    ],
+    "rows": [
+     [
+      "Fragile X syndrome",
+      "CGG repeat",
+      "FMR1 at Xq27.3",
+      "Normal: 5-44; Full: >200",
+      "Expands in maternal transmission"
+     ],
+     [
+      "Huntington disease",
+      "CAG repeat",
+      "HTT at 4p16.3",
+      "Normal: 10-26; Full: >36",
+      "Expands in paternal transmission"
+     ],
+     [
+      "Myotonic dystrophy type 1",
+      "CTG repeat",
+      "DMPK at 19q13.3",
+      "Normal: 5-34; Full: >50",
+      "Expands in maternal transmission"
+     ],
+     [
+      "Friedreich ataxia",
+      "GAA repeat (Intron 1)",
+      "FXN at 9q21.1",
+      "Normal: 5-33; Full: >66",
+      "Autosomal recessive; maternal/paternal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypermethylation and transcriptional silencing of the fragile X mental retardation protein causes intellectual disability. As the most common inherited cause of intellectual impairment in males, **Fragile X syndrome** arises from an unstable CGG repeat expansion exceeding two hundred copies in the 5-prime untranslated region of the FMR1 gene on Xq27.3. Massive expansion induces promoter hypermethylation, silencing FMR1 transcription and eliminating FMRP, an essential mRNA-binding translational repressor in neuronal dendrites.",
+   "say": "Fragile X syndrome is the most common inherited cause of male intellectual disability. More than two hundred CGG repeats silence the FMR1 gene, eliminating FMRP protein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FMR1 Premutation (55 to 200 CGGs)",
+     "points": [
+      "Unmethylated FMR1 gene; normal FMRP levels",
+      "Fragile X-associated tremor/ataxia syndrome (FXTAS)",
+      "Fragile X-associated primary ovarian insufficiency",
+      "Prone to expand to full mutation during oogenesis"
+     ]
+    },
+    "right": {
+     "title": "FMR1 Full Mutation (>200 CGGs)",
+     "points": [
+      "Promoter hypermethylation; absent FMRP",
+      "Moderate to severe intellectual disability in males",
+      "Autism spectrum features and attention deficits",
+      "Classic dysmorphic craniofacial and testicular signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Physical manifestations emerge prominently during pubertal maturation under gonadotropic stimulation. Classic post-pubertal stigmata of Fragile X syndrome include **macroorchidism testicular enlargement**, where testicular volume exceeds thirty millilitres measured by orchidometer. Craniofacial features include a long narrow face, prominent forehead, prognathic chin, large everted pinnae, high-arched palate, joint hypermobility, mitral valve prolapse, and stereotypic hand flapping or biting.",
+   "say": "Post-pubertal boys with Fragile X display striking macroorchidism with testicular volumes over thirty millilitres. Features include a long face, prominent jaw, large ears, and hand flapping.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Clinical Stigmata in Fragile X",
+     "Underlying Structural Pathology",
+     "Diagnostic Evaluation"
+    ],
+    "rows": [
+     [
+      "Genitalia",
+      "Bilateral macroorchidism (>30 mL)",
+      "Interstitial fluid and tubular expansion",
+      "Prader orchidometer measurement"
+     ],
+     [
+      "Craniofacial",
+      "Long narrow face, prognathism, large ears",
+      "Connective tissue dysregulation",
+      "Clinical dysmorphic examination"
+     ],
+     [
+      "Cardiovascular",
+      "Mitral valve prolapse, aortic root dilation",
+      "Connective tissue elastin laxity",
+      "Echocardiography in adolescence"
+     ],
+     [
+      "Neurobehavioural",
+      "Hand flapping, gaze avoidance, autism",
+      "Synaptic dendritic spine maturation failure",
+      "Autism and cognitive psychometrics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibrillin-1 mutations provoke systemic connective tissue laxity and dysregulated transforming growth factor signalling. The autosomal dominant disorder **Marfan syndrome** is caused by heterozygous mutations in the FBN1 gene on chromosome 15q21 encoding fibrillin-1, a primary microfibrillar extracellular matrix protein. Microfibril deficiency causes fragmentation of elastic fibres and loss of TGF-beta sequestration, resulting in excessive TGF-beta signalling and progressive tissue dilatation.",
+   "say": "Marfan syndrome is an autosomal dominant fibrillin-1 defect causing elastic tissue weakness and excessive TGF-beta signalling. It affects the skeleton, eyes, and ascending aorta.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Skeletal Manifestations of Marfan",
+     "points": [
+      "Tall slender habitus with dolichostenomelia",
+      "Arm span exceeding standing height by >1.05",
+      "Arachnodactyly (positive wrist and thumb signs)",
+      "Pectus excavatum or carinatum, scoliosis"
+     ]
+    },
+    "right": {
+     "title": "Ocular and Cardiovascular Pathology",
+     "points": [
+      "Ectopia lentis (superotemporal lens subluxation)",
+      "Ascending aortic root aneurysm and dissection",
+      "Mitral valve prolapse with regurgitation",
+      "Dural ectasia on lumbosacral magnetic resonance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progressive aortic root dilatation represents the foremost life-threatening cardiovascular complication. Progressive **aortic dissection risk** in Marfan syndrome stems from cystic medial necrosis of the elastic aortic root. Pharmacological therapy with beta-blockers or angiotensin receptor blockers (losartan) slows aortic enlargement, while elective prophylactic root replacement is indicated when aortic diameter reaches fifty millimetres, preventing catastrophic spontaneous rupture.",
+   "say": "Cystic medial necrosis causes ascending aortic aneurysms that risk fatal dissection. Beta-blockers and losartan slow aortic expansion; surgical replacement is done at fifty millimetres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Landmark",
+     "Diagnostic Threshold in Marfan",
+     "Cardiovascular Significance",
+     "Preventive Management"
+    ],
+    "rows": [
+     [
+      "Aortic root Z-score",
+      "Z-score >=2.0 on echocardiography",
+      "Denotes progressive root dilatation",
+      "Annual echocardiographic tracking"
+     ],
+     [
+      "Aortic diameter",
+      "Reaches 45 to 50 mm",
+      "High risk of acute dissection/rupture",
+      "Elective aortic root replacement surgery"
+     ],
+     [
+      "Ectopia lentis",
+      "Superotemporal subluxation of lens",
+      "Pathognomonic ocular hallmark",
+      "Slit-lamp examination with full dilation"
+     ],
+     [
+      "Systemic score",
+      "Ghent criteria score >=7 points",
+      "Confirms multiorgan involvement",
+      "Multidisciplinary cardiology care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hyperactivation of the RAS-MAPK intracellular signalling pathway produces phenotypic features mimicking Turner syndrome. The autosomal dominant RASopathy **Noonan syndrome** is caused by gain-of-function mutations in PTPN11 in fifty percent, as well as SOS1, RAF1, and KRAS. Affecting males and females with normal karyotypes (46,XY or 46,XX), it presents with short stature, webbed neck, low posterior hairline, hypertelorism, downward slanting palpebral fissures, and low-set rotated ears.",
+   "say": "Noonan syndrome is an autosomal dominant RASopathy mimicking Turner syndrome with normal karyotypes. Features include short stature, webbed neck, low ears, and dysplastic pulmonary valve stenosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Noonan Syndrome Cardiovascular",
+     "points": [
+      "Dysplastic pulmonary valve stenosis in 60%",
+      "Hypertrophic cardiomyopathy in 20%",
+      "Secundum atrial septal defect",
+      "Contrast with Turner coarctation of aorta"
+     ]
+    },
+    "right": {
+     "title": "Noonan Genitourinary and Haematological",
+     "points": [
+      "Cryptorchidism in over 70% of males",
+      "Coagulation factor deficiencies (Factor XI)",
+      "Normal karyotype (46,XY in males; 46,XX in females)",
+      "Normal female fertility; reduced male fertility"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Universal dried blood spot surveillance detects asymptomatic inborn errors before neurological damage occurs. The public health strategy **newborn screening** collects capillary blood onto standardized Guthrie filter paper cards between forty-eight and seventy-two hours of life. Utilizing tandem mass spectrometry, enzyme assays, and fluoroimmunoassays, screening identifies congenital hypothyroidism, congenital adrenal hyperplasia, phenylketonuria, galactosaemia, and sickle cell disorders.",
+   "say": "Newborn screening uses heel-prick dried blood spots at forty-eight to seventy-two hours to detect treatable disorders like hypothyroidism, adrenal hyperplasia, and phenylketonuria before damage occurs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Screened Disorder",
+     "Primary Screening Marker",
+     "Diagnostic Cut-Off Window",
+     "Early Preventable Injury"
+    ],
+    "rows": [
+     [
+      "Congenital hypothyroidism",
+      "Elevated dried blood spot TSH",
+      "Heel prick at 48 to 72 hours",
+      "Permanent severe intellectual cretinism"
+     ],
+     [
+      "Congenital adrenal hyperplasia",
+      "Elevated 17-hydroxyprogesterone",
+      "Heel prick at 48 to 72 hours",
+      "Fatal neonatal salt-wasting shock"
+     ],
+     [
+      "Phenylketonuria (PKU)",
+      "Elevated phenylalanine:tyrosine ratio",
+      "After 24 hours of milk protein",
+      "Severe irreversible brain damage"
+     ],
+     [
+      "Classic galactosaemia",
+      "Total galactose & GALT activity",
+      "Prior to clinical liver failure",
+      "Fatal E. coli sepsis and liver failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-directive communication of genetic risk facilitates autonomous family reproductive planning. Professional **genetic counselling** calculates precise recurrence risks based on Mendelian inheritance, parental carrier status, and gonadal mosaicism. Counsellors explain prenatal diagnostic options including chorionic villus sampling at eleven to thirteen weeks, amniocentesis at fifteen to eighteen weeks, and pre-implantation genetic testing during in vitro fertilization.",
+   "say": "Genetic counselling calculates precise recurrence risks and guides prenatal testing. Options include chorionic villus sampling at eleven weeks, amniocentesis at fifteen weeks, and pre-implantation tests.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chorionic Villus Sampling (CVS)",
+     "points": [
+      "Performed at 11 to 13 weeks gestation",
+      "Yields abundant fetal chromosomal DNA",
+      "Carries 0.5% procedure-related loss risk"
+     ]
+    },
+    "right": {
+     "title": "Amniocentesis",
+     "points": [
+      "Performed at 15 to 18 weeks gestation",
+      "Amniocyte culture for karyotype and DNA",
+      "Procedure-related fetal loss under 0.3%"
+     ]
+    }
+   }
+  }
+ ]
+}
