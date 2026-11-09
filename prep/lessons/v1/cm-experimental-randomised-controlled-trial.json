@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-experimental-randomised-controlled-trial",
+ "subject": "community-medicine",
+ "module": "cm-experimental",
+ "title": "Randomised Controlled Trials: Randomisation, Blinding and Placebo",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The six basic steps of an RCT",
+   "tx": "A **randomised controlled trial** runs six steps in order: draw up the protocol, select reference and experimental populations, randomise, manipulate or intervene, follow up, then assess outcomes. It is an epidemiological experiment and the first choice method for evaluating new programmes and therapies, because allocation, not nature, decides who receives the intervention.",
+   "say": "Six steps in fixed order. Protocol, population selection, randomisation, intervention, follow-up, assessment. Allocation by the investigator, not by nature, makes it an experiment and the first choice for evaluating new therapies and programmes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Protocol drawn up"},
+     {"id": "b", "label": "Populations selected"},
+     {"id": "c", "label": "Randomisation"},
+     {"id": "d", "label": "Intervention applied"},
+     {"id": "e", "label": "Follow-up and assessment"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Protocol first, and pilot runs",
+   "tx": "The **protocol** fixes aims, questions, eligibility criteria, sample size, allocation procedure, treatments, standardised schedules and responsibilities before anyone is enrolled, and multi-centre trials cannot run without it. Preliminary pilot runs expose flaws in procedures and acceptability. Once agreed, the final protocol is followed strictly to prevent bias and shrink error.",
+   "say": "Paper before patients. The protocol fixes aims, eligibility, sample size, allocation, treatments and responsibilities in advance, and pilot runs expose flaws early. Multi-centre trials collapse without one. Once agreed, deviation itself becomes a source of bias.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Protocol fixes", "Before enrolment"],
+    "rows": [
+     ["Aims and questions", "What the trial must answer"],
+     ["Eligibility and sample size", "Who enters, how many"],
+     ["Allocation and treatments", "How groups form and differ"],
+     ["Schedules and responsibilities", "Who does what, when"]
+    ]
+   }
+  },
+  {
+   "title": "Reference population versus study population",
+   "tx": "The **reference population** is who results should apply to, from all mankind down to one city's schoolchildren, while the study population is the sample actually enrolled, ideally drawn at random from it. Volunteers must give informed consent, represent their reference group and be eligible: non-anaemic volunteers cannot test an anaemia drug, nor the already immune a vaccine.",
+   "say": "Two populations, two jobs. The reference population is who results should serve; the study sample is who actually enrols, ideally drawn randomly from it. Consent, representativeness and eligibility gate entry: the non-anaemic cannot test anaemia drugs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reference population",
+     "points": ["Results should apply here", "May be a whole city or one group", "Defined by the research question"]
+    },
+    "right": {
+     "title": "Study population",
+     "points": ["Actually enrolled and randomised", "Consenting and eligible volunteers", "Should mirror the reference group"]
+    }
+   }
+  },
+  {
+   "title": "Randomisation, the heart of the trial",
+   "tx": "**Randomisation** allocates participants to study and control groups by chance, usually from random number tables, only after eligibility and consent. It eliminates selection bias and distributes known and unknown confounders alike, which matching can never promise. Stratified randomisation balances strong variables such as age and sex within subgroups first.",
+   "say": "Chance allocates here, after consent and eligibility. Randomisation kills selection bias and scatters known and unknown confounders alike, something matching can never promise for unmeasured factors. Stratify first when age or sex must balance exactly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Property", "Effect"],
+    "rows": [
+     ["Equal chance of either group", "Selection bias eliminated"],
+     ["Unknown factors scattered evenly", "Comparability beyond matching"],
+     ["Done after consent", "No post-randomisation exclusions by design"]
+    ]
+   }
+  },
+  {
+   "title": "Manipulation, follow-up and attrition",
+   "tx": "**Manipulation** applies, withdraws or reduces the suspected factor in the study group alone: a drug, vaccine, dietary component or habit. Follow-up examines both groups at defined intervals with equal intensity until outcome assessment. Losses from death, migration and lost interest form attrition, which heavy levels make impossible to generalise past.",
+   "say": "Intervene in one group only, then watch both identically. Equal intensity follow-up at defined intervals protects the contrast. Deaths, migration and lost interest leak participants as attrition; heavy leakage traps results inside the trial.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Study group receives intervention"},
+     {"id": "b", "label": "Control group receives comparator"},
+     {"id": "c", "label": "Equal intensity follow-up"},
+     {"id": "d", "label": "Outcomes assessed in both"}
+    ],
+    "edges": [["a", "b"], ["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Blinding: single, double, triple",
+   "tx": "**Blinding** hides allocation to neutralise subject variation, observer bias and evaluation bias, none of which randomisation or sample size can fix. Single blind hides group from participants; double blind hides it from participants and doctors; triple blind adds the data analyst. Double blinding is used most often; death as an outcome needs blinding least.",
+   "say": "Knowledge itself biases results three ways: patients report, observers measure, analysts judge. Hide allocation from participants for single blind, add doctors for double, add the analyst for triple. Double blinding dominates practice; death needs it least.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Design", "Who is blinded"],
+    "rows": [
+     ["Single blind", "Participant only"],
+     ["Double blind", "Participant and doctor"],
+     ["Triple blind", "Participant, doctor and analyst"]
+    ]
+   }
+  },
+  {
+   "title": "Placebo and the control arm",
+   "tx": "A **placebo** gives the control group an inert look-alike so that expectation effects equalise across arms; where effective therapy exists, the comparator is that active treatment instead. The whooping cough vaccine field trials randomised 3801 vaccinated children against 3757 controls, yielding attack rates of 1.45 against 6.72 per 1000 child-months, the numerical style examiners quote.",
+   "say": "Controls need theatre too. An inert look-alike equalises expectation, unless proven therapy exists to compare against. Historical vaccine field trials show the arithmetic: attack rates of one point four five against six point seven two per thousand child-months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Placebo control fits when",
+     "points": ["No proven therapy exists", "Outcomes are subjective", "Expectation effects are strong"]
+    },
+    "right": {
+     "title": "Active control fits when",
+     "points": ["Proven therapy already exists", "Withholding treatment would harm", "New drug must beat the standard"]
+    }
+   }
+  },
+  {
+   "title": "Concurrent parallel versus crossover designs",
+   "tx": "In **concurrent parallel** designs each patient stays in the assigned group throughout, while crossover designs let each patient serve as their own control, switching after a washout that clears carry-over effects. Crossover needs fewer patients but fails when the drug cures, works only at one disease stage, or the disease changes radically during the study.",
+   "say": "Two chassis carry trials. Parallel designs keep patients in one arm throughout. Crossover designs switch each patient after washout, halving numbers, but collapse when treatment cures, timing matters, or the disease itself shifts mid-study.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Parallel", "Crossover"],
+    "rows": [
+     ["Patient role", "One group throughout", "Own control after switch"],
+     ["Sample needed", "Larger", "Smaller"],
+     ["Fails when", "Groups drift apart", "Cure or stage specific effect"]
+    ]
+   }
+  },
+  {
+   "title": "Allocation concealment guards the random list",
+   "tx": "**Allocation concealment** keeps the upcoming assignment hidden from whoever enrols patients, using sealed opaque envelopes or central allocation, so recruiters cannot steer sicker patients toward a preferred arm. It differs from blinding, which hides assignment after enrolment. Trials with weak concealment exaggerate benefits, which is why appraisal checklists ask about it separately.",
+   "say": "Guard the list itself. Sealed opaque envelopes or central allocation stop recruiters steering sicker patients into a favoured arm. Concealment protects enrolment; blinding protects everything after. Weak concealment inflates benefits, so appraisers ask separately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allocation concealment",
+     "points": ["Acts before enrolment", "Hides the next assignment", "Blocks recruiter steering"]
+    },
+    "right": {
+     "title": "Blinding",
+     "points": ["Acts after enrolment", "Hides the given assignment", "Blocks expectation and observer bias"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

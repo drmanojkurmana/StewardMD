@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-measures-crude-death-rate",
+ "subject": "community-medicine",
+ "module": "cm-measures",
+ "title": "Crude Death Rate, Specific Death Rates and Proportional Mortality",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Crude death rate in one line",
+   "tx": "The **crude death rate** counts deaths from all causes in one year per 1000 estimated mid-year population in a given place. It is the simplest mortality measure and often the only one available for a district. Because one figure summarises a whole population, planners examine it first before opening detailed tables.",
+   "say": "Simplest first. All deaths in one year, per thousand mid-year population, in one place. Districts often have nothing else, so planners open with this figure before turning to detailed tables.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Part", "Definition"],
+    "rows": [
+     ["Numerator", "Deaths from all causes in the year"],
+     ["Denominator", "Estimated mid-year population"],
+     ["Multiplier", "Per 1000 population"]
+    ]
+   }
+  },
+  {
+   "title": "Two factors hide inside one figure",
+   "tx": "**Population composition** and age-specific death rates jointly produce the crude figure. An older population dies more each year even with excellent care, while a young population hides poor care behind few deaths. That mixture is the rate's major disadvantage: communities differing in age, sex or race composition cannot be compared crudely.",
+   "say": "Two ingredients hide inside one figure. Age structure and age-specific risks mix together. Old populations die more despite good care; young ones hide poor care. Unlike structures cannot be compared crudely; that is the central flaw.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Older population",
+     "points": ["Many deaths each year", "High crude rate despite good care", "Looks unhealthy on crude figures"]
+    },
+    "right": {
+     "title": "Younger population",
+     "points": ["Few deaths each year", "Low crude rate despite poor care", "Looks healthy on crude figures"]
+    }
+   }
+  },
+  {
+   "title": "The A and B paradox",
+   "tx": "In the standard example, **population A** records a crude rate of 15.2 per 1000 against 9.9 in population B, yet B carries higher age-specific rates in every age group: 22.6 against 13.5 in infancy, and 18.8 against 10.7 at ages 45 to 64. A simply holds more old people. Developing countries show the same pattern nationally.",
+   "say": "One example exposes the trap. The first population shows fifteen point two per thousand against nine point nine, yet the second is worse in every single age group. More old people explain the reversal. Developing countries display the same national pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rate per 1000", "Population A", "Population B"],
+    "rows": [
+     ["Crude death rate", "15.2", "9.9"],
+     ["Age 0 to 1 years", "13.5", "22.6"],
+     ["Age 45 to 64 years", "10.7", "18.8"],
+     ["Age 65 years and above", "59.7", "61.1"]
+    ]
+   }
+  },
+  {
+   "title": "Cause specific death rates",
+   "tx": "**Cause specific death rates** divide deaths from one disease, such as tuberculosis, cancer or accidents, by the mid-year population. They permit comparison between different causes within the same population and expose which killers deserve priority. Reliable values need satisfactory medical certification of cause, without which certification error quietly reshapes the ranking.",
+   "say": "Name one cause at a time. Deaths from tuberculosis, cancer or accidents over the same mid-year population rank the killers inside one community. Trustworthy ranking needs proper medical certification of cause, or error quietly reshapes the table.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rate", "Numerator"],
+    "rows": [
+     ["Tuberculosis death rate", "Deaths from tuberculosis in the year"],
+     ["Cancer death rate", "Deaths from cancer in the year"],
+     ["Accident death rate", "Deaths from accidents in the year"]
+    ]
+   }
+  },
+  {
+   "title": "Group specific death rates",
+   "tx": "**Age specific death rates** divide deaths in one age group by that group's mid-year population, and sex specific rates do the same for males or females. Monthly rates multiply deaths by 12 and weekly rates by 52 to stay comparable with annual figures. These rates identify groups at risk for preventive action.",
+   "say": "Slice by group next. Deaths in one age band over that band's population, or male deaths over male population. Monthly counts multiply by twelve, weekly by fifty two, to face annual figures. At-risk groups emerge from these slices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "All deaths in the year"},
+     {"id": "b", "label": "Split by cause"},
+     {"id": "c", "label": "Split by age and sex"},
+     {"id": "d", "label": "At-risk groups identified"}
+    ],
+    "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Proportional mortality: share of all deaths",
+   "tx": "**Proportional mortality** expresses deaths from one cause per 100 total deaths, needing no population denominator at all. Respiratory diseases forming 29.47 percent of deaths in one area instantly mark the major killer group there. Prematurity forming 46.4 percent of infant deaths in rural India in 1994 pointed services straight at preterm care.",
+   "say": "Shares need no population count. Deaths from one cause per hundred total deaths show relative importance at once. Respiratory diseases near twenty nine percent mark one area's major killers. Prematurity near forty six percent of infant deaths pointed services at preterm care.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Share", "Figure", "Signal"],
+    "rows": [
+     ["Respiratory deaths of all deaths", "29.47 percent", "Major killer group in that area"],
+     ["Prematurity deaths of infant deaths", "46.4 percent, rural 1994", "Focus on preterm care"],
+     ["Under-5 deaths of all deaths", "Varies by hygiene level", "Child survival priority"]
+    ]
+   }
+  },
+  {
+   "title": "Under-5 and 50-plus proportional rates",
+   "tx": "The **under-5 proportionate mortality** divides deaths below age five by total deaths, reflecting both infant and child mortality together. Its mirror, proportional mortality at 50 years and above, rises as populations age and communicable deaths fall. Swarup's index uses that older share: higher values mark more developed mortality patterns.",
+   "say": "Two age shares mirror each other. Under-five deaths over all deaths track child survival. Deaths at fifty and above over all deaths rise as societies age and infections fall. The older share even carries an eponym as a development marker.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Under-5 proportionate mortality",
+     "points": ["Under-5 deaths over total deaths", "High where hygiene is poor", "Falls as child survival improves"]
+    },
+    "right": {
+     "title": "Proportional mortality 50-plus",
+     "points": ["Deaths at 50-plus over total deaths", "Rises as populations age", "Higher in developed patterns"]
+    }
+   }
+  },
+  {
+   "title": "What proportional mortality cannot say",
+   "tx": "**Risk of dying** cannot be read from proportional mortality, because the measure never counts people alive. A cause can form a large share simply because other causes shrank. Comparisons across populations or years therefore mislead, and the measure serves best inside one population to rank relative importance, especially for preventable communicable deaths.",
+   "say": "Shares hide risk. No living population enters the calculation, so a cause can dominate merely because rivals shrank. Cross population comparisons mislead. Use shares to rank importance inside one population, above all for preventable infectious deaths.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Can proportional mortality answer it?"],
+    "rows": [
+     ["Which cause kills the largest share here?", "Yes, within this population"],
+     ["What is my risk of dying from it?", "No, no population denominator"],
+     ["Is district X worse than district Y?", "No, shares distort comparison"]
+    ]
+   }
+  },
+  {
+   "title": "Survival rate completes the mortality set",
+   "tx": "The **survival rate** follows patients forward: those alive after five years divided by all diagnosed or treated, times 100, usually reckoned from diagnosis or treatment start. Cancer services quote it as a yardstick of therapy standards. It complements fatality: one follows cases to death, the other follows patients to survival.",
+   "say": "Follow patients forward to finish the set. Alive after five years over all diagnosed or treated, times one hundred, from diagnosis or treatment start. Cancer services quote it to grade therapy. Fatality watches cases die; survival watches patients live.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Patients diagnosed or treated"},
+     {"id": "b", "label": "Followed for five years"},
+     {"id": "c", "label": "Alive at five years counted"},
+     {"id": "d", "label": "Survival rate in percent"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}
