@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-malaria-nvbdcp",
+ "subject": "community-medicine",
+ "module": "cm-malaria",
+ "title": "Malaria and NVBDCP: Indices, Treatment Policy and Vector Control",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The parasite life cycle in two hosts",
+   "tx": "The cycle diagram follows **Plasmodium** through liver schizogony in humans, erythrocyte invasion with ring trophozoites, and gametocyte return to the mosquito for sexual development. Vivax and ovale add dormant liver hypnozoites that relapse months later. Falciparum skips latency and instead sequesters, which is why it kills.",
+   "say": "Two hosts, one cycle. Liver first, red cells next, gametocytes back to mosquitoes. Vivax hides dormant liver forms that relapse; falciparum sequesters in organs instead, which is why it kills.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/malaria-fig1.webp",
+    "alt": "Plasmodium life cycle diagram with liver schizogony, erythrocyte invasion, ring trophozoites and gametocyte stages.",
+    "caption": "Plasmodium life cycle through human liver, red cells and mosquito. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Indices: API, ABER, SPR, SFR",
+   "tx": "**Annual parasite incidence** (confirmed cases per 1000 population under surveillance) is the sophisticated incidence measure, valid only beside the annual blood examination rate showing enough blood was actually examined. Slide positivity rate and its falciparum subset grade transmission among the febrile tested. India's API fell from 2.12 in 2001 to 0.12 in 2021 in the programme series.",
+   "say": "Indices need their denominators. Parasite incidence per thousand means little without blood examination rates proving effort. Positivity among tested fever grades transmission. Two decades cut national incidence from two point one to near zero point one.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Index", "Definition"],
+    "rows": [
+     ["API", "Confirmed cases per 1000 population per year"],
+     ["ABER", "Blood examinations per 100 population per year"],
+     ["SPR", "Positive slides per 100 slides examined"],
+     ["SFR", "Falciparum positives per 100 slides"]
+    ]
+   }
+  },
+  {
+   "title": "Diagnosis: microscopy and RDT together",
+   "tx": "**Microscopy** of thick and thin smears remains the reference standard speciating parasites and counting density, while rapid diagnostic tests serve where microscopy cannot answer within 24 hours. Fever in endemic areas is presumptive malaria until tested under the programme's test-treat-track logic. Species identification decides treatment, because vivax needs liver-stage radical cure.",
+   "say": "Species decides treatment. Microscopy speciates and counts where available in a day; rapid tests cover the gaps. Endemic fever is tested, never assumed, and vivax identification triggers liver-stage therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fever in endemic area"},
+     {"id": "b", "label": "Smear or RDT performed"},
+     {"id": "c", "label": "Species identified"},
+     {"id": "d", "label": "Species-specific regimen given"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Vivax: chloroquine plus primaquine radical cure",
+   "tx": "**Vivax treatment** pairs chloroquine for blood stages with primaquine 14 days for hypnozoites (radical cure), after considering G6PD deficiency risk of haemolysis. Skipping primaquine guarantees relapses that families read as drug failure. Falciparum instead takes artemisinin combination therapy plus single-dose primaquine for gametocytes, with artesunate-lumefantrine in the North-East where partner-drug resistance dictates.",
+   "say": "Vivax needs two wars: blood stages now, liver sleepers for fourteen days, G6PD risk respected. Falciparum takes combination therapy plus a gametocyte dose. Region rewrites the partner drug where resistance rules.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Species", "Blood treatment", "Added duty"],
+    "rows": [
+     ["P. vivax", "Chloroquine course", "Primaquine 14 days, radical cure"],
+     ["P. falciparum (most states)", "ACT with sulfadoxine-pyrimethamine", "Single-dose primaquine"],
+     ["P. falciparum (North-East)", "Artemether-lumefantrine", "Single-dose primaquine"]
+    ]
+   }
+  },
+  {
+   "title": "Severe malaria: artesunate first, fast",
+   "tx": "**Severe malaria** (impaired consciousness, convulsions, severe anaemia, jaundice, bleeding, shock, pulmonary oedema among danger signs) takes parenteral artesunate immediately, then full oral ACT when swallowing returns. Don'ts examiners quote: no delaying for transfer without first dose, no oral therapy in vomiting severe disease, no steroids for cerebral malaria.",
+   "say": "Severe disease brooks no delay. Parenteral artesunate now, oral combination when swallowing returns. First dose precedes transfer; steroids harm cerebral malaria. The don'ts list is quoted verbatim in examinations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do immediately",
+     "points": ["Parenteral artesunate first dose", "Check glucose, treat hypoglycaemia", "Refer with treatment running"]
+    },
+    "right": {
+     "title": "Never do",
+     "points": ["Delay dose until transfer completes", "Oral therapy in unconscious patient", "Steroids for cerebral malaria"]
+    }
+   }
+  },
+  {
+   "title": "Vector control: nets, spray, larvae",
+   "tx": "**Vector control** layers long-lasting insecticidal nets for sleeping protection, indoor residual spraying where vectors rest indoors, larval source management (filling, larvivorous fish, bacterial larvicides) and personal protection. Forest and outdoor-biting vectors evade indoor measures, which is why stratification by local vector behaviour precedes tool selection under NVBDCP.",
+   "say": "Tools follow vector behaviour. Nets guard sleepers, sprays hit indoor resters, larval measures empty breeding, forest biters evade all three and demand stratification first. Programme choice is ecological, not habitual.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Target"],
+    "rows": [
+     ["Long-lasting insecticidal nets", "Night-biting vectors at sleep"],
+     ["Indoor residual spray", "Indoor-resting vectors"],
+     ["Larval source management", "Breeding sites near homes"],
+     ["Personal protection", "Outdoor and forest exposure"]
+    ]
+   }
+  },
+  {
+   "title": "NVBDCP: one umbrella, many diseases",
+   "tx": "The **National Vector Borne Disease Control Programme** umbrellas malaria, dengue, chikungunya, Japanese encephalitis, kala-azar and lymphatic filariasis under shared vector logic, surveillance and state-district machinery. Dengue and JE report through AES and fever surveillance lines. Elimination targets stagger by disease: malaria and filariasis and kala-azar each carry dated national commitments.",
+   "say": "One umbrella, six diseases. Shared vector machinery carries malaria beside dengue, encephalitis, kala-azar and filariasis, each with dated elimination commitments. Programme stems name the umbrella before the disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fever and vector surveillance"},
+     {"id": "b", "label": "Disease confirmed and reported"},
+     {"id": "c", "label": "Vector control activated locally"},
+     {"id": "d", "label": "Elimination indicators reviewed"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Chemoprophylaxis and special groups",
+   "tx": "**Chemoprophylaxis** serves defined exposures: short-term travellers to high-risk areas (doxycycline or mefloquine patterns by duration), long-term residents in special projects, and pregnancy protocols where intermittent strategies apply by endemicity. Pregnant falciparum malaria is treated as emergency with trimester-specific drug choice, quinine historically first trimester, ACT thereafter in programme guidance.",
+   "say": "Prevention drugs serve defined exposures, not whole districts. Travellers, project residents and pregnancies each carry protocols. Pregnancy falciparum is an emergency whose drug choice turns on trimester.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Prophylaxis logic"],
+    "rows": [
+     ["Short-term traveller", "Drug by duration and area risk"],
+     ["Pregnant woman, endemic area", "Prevention plus emergency treatment readiness"],
+     ["Forest project worker", "Personal protection plus standby treatment"]
+    ]
+   }
+  },
+  {
+   "title": "Elimination arithmetic: from control to zero",
+   "tx": "**Elimination** demands cases fall to zero indigenous transmission with surveillance strong enough to prove it: every fever tested, every case investigated, foci classified and responded to, imported cases preventing re-establishment. The global technical strategy pairs high intervention coverage with surveillance as a core intervention, the sentence that summarises the endgame examiners expect.",
+   "say": "Zero must be proven, not declared. Every fever tested, every case investigated, foci classified, imports contained. Surveillance itself counts as a core intervention in the global strategy, the endgame sentence to quote.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Control phase",
+     "points": ["Reduce burden to low levels", "Aggregate indices suffice", "Mortality prevention leads"]
+    },
+    "right": {
+     "title": "Elimination phase",
+     "points": ["Case-by-case investigation", "Focus classification and response", "Re-establishment prevention"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
