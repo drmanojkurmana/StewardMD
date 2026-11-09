@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "module": "obg-abortion",
+ "subject": "obstetrics-gynaecology",
+ "title": "Recurrent Pregnancy Loss, Antiphospholipid Syndrome and Cerclage",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Three or more consecutive miscarriages, investigated as a couple, define **recurrent pregnancy loss** in classic teaching. Many guidelines now investigate after two losses, especially when mothers are older. Most couples still achieve a live birth afterwards. Investigation after two losses is usual when the mother is over 35 or each loss was a euploid fetus.",
+   "say": "Recurrent pregnancy loss follows repeated miscarriages and most couples still achieve live birth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Immune",
+      "Antiphospholipid syndrome"
+     ],
+     [
+      "Anatomical",
+      "Septate uterus"
+     ],
+     [
+      "Endocrine",
+      "Thyroid, prolactin"
+     ],
+     [
+      "Genetic",
+      "Parental translocation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An autoimmune clotting disorder causing miscarriage, thrombosis and placental failure is the **antiphospholipid antibody syndrome**. Lupus anticoagulant, anticardiolipin and anti beta two glycoprotein antibodies define it serologically. Aspirin plus heparin through pregnancy transforms outcomes. Antibodies must be positive twice, twelve weeks apart, with a clinical event before the syndrome is diagnosed.",
+   "say": "Antiphospholipid syndrome causes miscarriage through clotting and aspirin plus heparin transforms outcomes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Antibodies confirmed twice"
+     },
+     {
+      "id": "n1",
+      "label": "Pregnancy planned"
+     },
+     {
+      "id": "n2",
+      "label": "Aspirin and heparin started"
+     },
+     {
+      "id": "n3",
+      "label": "Live birth rates soar"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painless cervical opening in mid pregnancy causing loss is **cervical incompetence**. A history of painless dilatation and delivery of a live fetus supports it. Ultrasound funneling of the cervix adds evidence in the current pregnancy. A cervix under 25 millimetres on transvaginal scan before 24 weeks is the ultrasound trigger for a stitch.",
+   "say": "Cervical incompetence opens the cervix painlessly in mid pregnancy causing loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Incompetence",
+     "points": [
+      "Painless dilatation",
+      "Live fetus delivered",
+      "Mid trimester"
+     ]
+    },
+    "right": {
+     "title": "Preterm labour",
+     "points": [
+      "Painful contractions",
+      "Infection often",
+      "Any gestation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A vaginal stitch encircling the cervix at the bladder reflection level is the **McDonald cerclage**. Placed around twelve to fourteen weeks on history or ultrasound criteria, it is removed at thirty seven weeks. It is the simpler and commoner cerclage operation. It uses a purse string suture with no bladder dissection, and success in history indicated cases reaches about 80 percent.",
+   "say": "McDonald cerclage places a vaginal stitch at twelve to fourteen weeks, removed at thirty seven.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-tension-free-vaginal-tape.webp",
+    "alt": "Vaginal surgery context for cerclage.",
+    "caption": "Vaginal surgery context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An abdominal or high vaginal stitch at the cervicoisthmic junction is the **Shirodkar cerclage**. It sits higher than McDonald and historically needed caesarean delivery, though vaginal removal variants exist. It is chosen after failed vaginal cerclage in some centres. The suture sits at the internal os, so delivery by caesarean was traditional before removable modifications appeared.",
+   "say": "Shirodkar cerclage sits higher at the cervicoisthmic junction after failed vaginal cerclage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "McDonald",
+     "Shirodkar"
+    ],
+    "rows": [
+     [
+      "Level",
+      "Mid cervix",
+      "Cervicoisthmic"
+     ],
+     [
+      "Removal",
+      "Vaginal usually",
+      "Often caesarean historically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parental chromosome rearrangements causing recurrent loss are found by **couple karyotyping**. Balanced translocations in either partner produce unbalanced gametes. Genetic counselling and embryo or prenatal testing follow a positive result. Balanced reciprocal translocations are the commonest finding, present in about 2 to 5 percent of couples tested.",
+   "say": "Couple karyotyping finds balanced translocations causing recurrent loss through unbalanced gametes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Both partners karyotyped"
+     },
+     {
+      "id": "n1",
+      "label": "Translocation found"
+     },
+     {
+      "id": "n2",
+      "label": "Counselling offered"
+     },
+     {
+      "id": "n3",
+      "label": "Testing options discussed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uterine anomalies, especially the septate uterus, are imaged by **three dimensional ultrasound** or MRI. Septum resection improves outcomes in selected recurrent loss. Other anomalies like bicornuate uterus rarely need surgery. A septate uterus keeps a fibrous partition with poor blood supply, so an embryo implanting on it often miscarries.",
+   "say": "Three dimensional ultrasound images uterine anomalies, and septum resection helps selected cases.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Recurrent loss assessment.",
+    "caption": "Recurrent loss workup. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Thyroid disease, diabetes and raised prolactin are screened as **endocrine causes**. All are treatable and cheap to exclude. Optimising them before conception is a universal first step in recurrent loss care. A thyroid stimulating hormone above 4 milli international units per litre is treated before the next conception attempt.",
+   "say": "Endocrine screening excludes treatable thyroid, diabetes and prolactin causes cheaply.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treatable",
+     "points": [
+      "Thyroid disease",
+      "Diabetes",
+      "Raised prolactin"
+     ]
+    },
+    "right": {
+     "title": "Unexplained",
+     "points": [
+      "Half of couples",
+      "Supportive care",
+      "Good prognosis still"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Supportive care with early scans and reassurance itself improves outcomes, known as the **tender loving care effect**. Dedicated recurrent loss clinics embody this approach. Even unexplained cases succeed in about two thirds of next pregnancies. Progesterone supplements are added for women with three or more losses and bleeding in the current pregnancy.",
+   "say": "Supportive early scan care itself improves outcomes in dedicated recurrent loss clinics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Early booking scan"
+     },
+     {
+      "id": "n1",
+      "label": "Serial reassurance scans"
+     },
+     {
+      "id": "n2",
+      "label": "Dedicated clinic support"
+     },
+     {
+      "id": "n3",
+      "label": "Success in two thirds"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

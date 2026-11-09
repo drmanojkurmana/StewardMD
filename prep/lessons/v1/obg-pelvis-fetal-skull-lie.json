@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "obg-pelvis-fetal-skull",
+ "subject": "obstetrics-gynaecology",
+ "title": "Lie, Attitude, Presentation, Position and Denominator",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The relation of the fetal long axis to the mothers long axis is the **lie**. Longitudinal lie is normal, transverse and oblique lies are abnormal near term. Lie is described before presentation in every examination. Transverse lie at term in labour risks cord prolapse and arm presentation, so it is never left to labour.",
+   "say": "Lie relates the fetal axis to the mothers, with longitudinal being normal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lie",
+     "Axis"
+    ],
+    "rows": [
+     [
+      "Longitudinal",
+      "Aligned"
+     ],
+     [
+      "Transverse",
+      "Across"
+     ],
+     [
+      "Oblique",
+      "Diagonal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The posture of fetal parts to each other, usually full flexion, is the **attitude**. A flexed attitude presents the smallest diameters to the pelvis. Deflexion and extension produce brow and face presentations. Full flexion gives a presenting diameter of about 9.5 centimetres, while full extension in face presentation presents 9 centimetres but with a poor fit.",
+   "say": "Attitude describes fetal flexion, with full flexion presenting the smallest diameters.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+    "alt": "Fetal skull attitude model.",
+    "caption": "Fetal attitude. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The fetal part first entering the pelvis and felt vaginally is the **presentation**. Vertex presentation of the flexed head is by far the commonest. Breech, face, brow and shoulder presentations each carry distinct risks. Cephalic presentation covers vertex, face and brow; the vertex alone accounts for about 96 percent of labours.",
+   "say": "Presentation is the part entering the pelvis first, with vertex being commonest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lie established"
+     },
+     {
+      "id": "n1",
+      "label": "Presenting part felt"
+     },
+     {
+      "id": "n2",
+      "label": "Presentation named"
+     },
+     {
+      "id": "n3",
+      "label": "Risks considered"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The relation of a chosen point on the presentation to the mothers pelvis is the **position**. Left occipitotransverse and similar terms locate the denominator precisely. Position determines the rotation needed for birth. Left occipitoanterior is the commonest position at delivery, reached by internal rotation through 45 degrees.",
+   "say": "Position relates the denominator to the mothers pelvis and determines rotation needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Denominator",
+     "Presentation"
+    ],
+    "rows": [
+     [
+      "Occiput",
+      "Vertex"
+     ],
+     [
+      "Sacrum",
+      "Breech"
+     ],
+     [
+      "Mentum",
+      "Face"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The reference point on the presenting part used to describe position is the **denominator**. Occiput for vertex, sacrum for breech and mentum for face are standard. Every position statement is meaningless without its denominator. Mentum posterior in face presentation cannot deliver vaginally because the chin must rotate forward under the pubis.",
+   "say": "The denominator is the reference point making every position statement meaningful.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_diameters_station.webp",
+    "alt": "Fetal position and station assessment.",
+    "caption": "Position assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Descent level relative to the ischial spines measured in centimetres is the **station**. Zero station sits at the spines, negative above and positive below. Station complements abdominal fifths in judging progress. Station is judged against the ischial spines on vaginal examination, while fifths palpable are judged abdominally; the two should agree.",
+   "say": "Station measures descent against the ischial spines in centimetres above or below.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Abdominal fifths",
+     "points": [
+      "Palpation above brim",
+      "Engagement judged"
+     ]
+    },
+    "right": {
+     "title": "Vaginal station",
+     "points": [
+      "Against spines",
+      "Descent judged"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Compound presentation, a hand beside the head, complicates delivery and is called **compound presentation**. It often resolves as labour advances and the hand withdraws. Persistence with cord prolapse risk changes management. The hand usually slips back as the head descends, and the arm is never pulled to speed delivery.",
+   "say": "Compound presentation puts a hand beside the head and often resolves as labour advances.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hand felt beside head"
+     },
+     {
+      "id": "n1",
+      "label": "Labour observed"
+     },
+     {
+      "id": "n2",
+      "label": "Hand usually withdraws"
+     },
+     {
+      "id": "n3",
+      "label": "Intervene if obstructed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unstable lie changing between examinations near term is **unstable lie**. Causes include polyhydramnios, placenta praevia and pelvic tumours. Admission and stabilising induction or caesarean prevent cord accidents. Stabilising induction holds the head over the brim with oxytocin once membranes are ruptured under controlled conditions.",
+   "say": "Unstable lie near term needs admission because cord accidents can follow membrane rupture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Excess fluid",
+      "Polyhydramnios"
+     ],
+     [
+      "Low placenta",
+      "Praevia"
+     ],
+     [
+      "Pelvic mass",
+      "Fibroid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systematic description order prevents confusion and is taught as **lie presentation position**. Examiners state each element before giving an opinion on progress. Leopold manoeuvres plus vaginal findings together build the full picture. Examiners deduct marks when position is stated without naming the denominator and side.",
+   "say": "Stating lie, presentation and position systematically prevents confusion in labour assessment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-leopold.webp",
+    "alt": "Leopold manoeuvres for lie and presentation.",
+    "caption": "Leopold assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
