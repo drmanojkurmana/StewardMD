@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "obg-gtd",
+ "subject": "obstetrics-gynaecology",
+ "title": "Theca Lutein Cysts, Suction Evacuation and hCG Surveillance",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Large bilateral ovarian cysts driven by very high hCG in molar pregnancy are **theca lutein cysts**. They can reach fifteen centimetres and make ovaries feel like grapefruit sized masses. They resolve spontaneously as hormone falls after evacuation. They appear in about a quarter of complete moles and shrink over two to four months without treatment.",
+   "say": "Theca lutein cysts enlarge both ovaries under very high hCG and resolve after evacuation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Laterality",
+      "Bilateral"
+     ],
+     [
+      "Cause",
+      "Very high hCG"
+     ],
+     [
+      "Course",
+      "Resolve spontaneously"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Removing molar tissue with suction under ultrasound guidance is **suction evacuation**. It is safer than sharp curettage for the soft, vascular molar uterus. An experienced operator and cross matched blood are standing precautions. Blood is cross matched before evacuation because the molar uterus can bleed heavily and suddenly.",
+   "say": "Suction evacuation removes molar tissue more safely than sharp curettage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
+    "alt": "Molar pregnancy for suction evacuation.",
+    "caption": "Molar evacuation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serial beta hCG measurement after evacuation until negative and beyond is **hCG surveillance**. Weekly values plot a fall that should be smooth and progressive. Plateau or rise on consecutive samples defines neoplasia needing chemotherapy. A fall that flattens for three consecutive values, or rises across two, defines the plateau and rise criteria.",
+   "say": "hCG surveillance plots weekly falls, and plateau or rise defines neoplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Weekly hCG measured"
+     },
+     {
+      "id": "n1",
+      "label": "Smooth fall expected"
+     },
+     {
+      "id": "n2",
+      "label": "Plateau on samples"
+     },
+     {
+      "id": "n3",
+      "label": "Chemotherapy triggered"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Criteria for starting chemotherapy include plateaued or rising hormone, histological choriocarcinoma and metastatic disease, grouped as **treatment triggers**. A hormone still high six months after evacuation also qualifies. Specialist centres apply these uniformly. Histological choriocarcinoma after a mole earns chemotherapy even when hCG is falling.",
+   "say": "Treatment triggers include plateaued hormone, choriocarcinoma histology and metastases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surveillance continues",
+     "points": [
+      "Falling hCG",
+      "No metastases",
+      "No chemotherapy"
+     ]
+    },
+    "right": {
+     "title": "Chemotherapy starts",
+     "points": [
+      "Plateau or rise",
+      "Choriocarcinoma",
+      "Metastatic disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Theca lutein cysts occasionally twist or rupture, causing acute abdomen termed **cyst accident**. Most still settle conservatively because surgery on these ovaries risks oophorectomy. Aspiration under imaging helps tense symptomatic cysts rarely. Ovarian conservation is the rule even for huge cysts, because they regress completely once hCG clears.",
+   "say": "Cyst accidents from theca lutein cysts usually settle conservatively to preserve ovaries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Acute pain develops"
+     },
+     {
+      "id": "n1",
+      "label": "Scan shows cyst accident"
+     },
+     {
+      "id": "n2",
+      "label": "Conservative care usually"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery only if uncontrolled"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reliable contraception during surveillance prevents a new pregnancy confusing hormone trends, a rule of **surveillance contraception**. Oral contraceptives are safe after hormone normalises per current guidance. Pregnancy is deferred until follow up completes. Combined pills were once feared to raise neoplasia risk; modern guidance allows them after hCG normalises.",
+   "say": "Surveillance contraception prevents new pregnancy confusing hormone trends during follow up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Advice"
+    ],
+    "rows": [
+     [
+      "Until hCG negative",
+      "Barrier or pill per protocol"
+     ],
+     [
+      "After complete mole",
+      "Defer pregnancy per centre"
+     ],
+     [
+      "After partial mole",
+      "Shorter deferral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Duration of follow up differs by mole type, longer after complete mole, reflecting **risk based duration**. Partial mole follow up ends sooner after hormone normalisation. Centres issue individual end dates in writing. After a partial mole, follow up ends once hCG is normal on two samples, much shorter than after complete mole.",
+   "say": "Risk based duration follows complete moles longer than partial moles after normalisation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hydatidiform-mole-fig1.webp",
+    "alt": "Molar tissue guiding surveillance duration.",
+    "caption": "Molar surveillance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Respiratory distress during evacuation from trophoblast deportation to lungs is **trophoblastic embolisation**. Large moles with high hormone levels carry the risk. Supportive oxygen and ventilation tide most patients over as it resolves. High output cardiac failure from the hyperdynamic molar circulation can accompany the respiratory picture.",
+   "say": "Trophoblastic embolisation during evacuation causes respiratory distress needing supportive ventilation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Large mole evacuated"
+     },
+     {
+      "id": "n1",
+      "label": "Trophoblast reaches lungs"
+     },
+     {
+      "id": "n2",
+      "label": "Breathlessness develops"
+     },
+     {
+      "id": "n3",
+      "label": "Supportive care resolves"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Women are warned that future pregnancies usually proceed normally, termed **future pregnancy counselling**. Recurrence risk is about one in eighty after one mole, rising after two. Early scan and post delivery hormone check guard each future pregnancy. Two consecutive molar pregnancies lift recurrence to about one in five, and genetic referral follows.",
+   "say": "Future pregnancy counselling reassures that most next pregnancies proceed normally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/choriocarcinoma-fig1.webp",
+    "alt": "Trophoblastic disease pathway.",
+    "caption": "Trophoblastic pathway. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
