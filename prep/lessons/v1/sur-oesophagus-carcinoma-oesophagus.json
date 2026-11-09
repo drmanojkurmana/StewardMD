@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Carcinoma of the Oesophagus, Histological Subtypes, and Ivor Lewis Oesophagectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Malignant neoplasms of the esophagus exhibit two predominant histological subtypes with distinct epidemiological profiles. **Carcinoma of the esophagus** presents primarily as squamous cell carcinoma or adenocarcinoma. Squamous cell carcinoma accounts for the majority of cases globally, typically arises in the upper and middle thirds of the esophagus, and strongly correlates with tobacco use, heavy alcohol consumption, and caustic lye strictures. In contrast, adenocarcinoma arises in the lower third from Barrett metaplasia.",
+   "say": "Squamous cell carcinoma develops in the upper and middle esophagus linked to tobacco and alcohol, whereas adenocarcinoma occurs in the lower esophagus arising from Barrett metaplasia driven by reflux.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/upper-gastrointestinal-tract-cancers-fig1.webp",
+    "alt": "Anatomical schematic showing the distribution of squamous cell carcinoma versus adenocarcinoma along the esophagus.",
+    "caption": "Esophageal cancer epidemiology: upper squamous tumors versus distal adenocarcinoma at the gastroesophageal junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the esophageal wall lacks a true serosal layer, tumours invade early into surrounding mediastinal structures and extensive submucosal lymphatic channels. The classic clinical presentation is **progressive painless dysphagia**, initially affecting dense solid food and progressively worsening to include soft solids and liquids. Due to the high distensibility of the esophagus, dysphagia typically does not manifest until at least sixty percent of the luminal circumference is infiltrated.",
+   "say": "Because the esophagus lacks an outer serosal covering, cancer spreads early into surrounding tissues. Progressive dysphagia for solids and then liquids appears once sixty percent of the lumen is blocked.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-dysphagia_score.webp",
+    "alt": "Clinical chart depicting dysphagia grading from solids to liquids and common esophageal etiologies.",
+    "caption": "Dysphagia severity grading: correlating luminal stenosis with functional progression from solids to liquids. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Barium esophagography provides valuable morphological information regarding tumour location and luminal stenosis. The classic radiological hallmark of an advanced infiltrating esophageal cancer is an irregular, jagged, shouldered filling defect with **apple-core shelf-like margins** and mucosal destruction. While barium studies provide an initial anatomical roadmap, definitive diagnosis requires flexible upper endoscopy with multiple targeted biopsies and brush cytology.",
+   "say": "Barium swallow reveals an irregular filling defect with classic apple-core shelf-like edges, confirming mucosal destruction. Flexible endoscopy with tissue biopsy establishes the definitive diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-carcinoma-oesophagus.webp",
+    "alt": "Barium swallow radiograph demonstrating an irregular stricture with shouldered margins in carcinoma of the esophagus.",
+    "caption": "Barium esophagogram: ragged filling defect and shouldered margins characteristic of advanced esophageal carcinoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Accurate staging dictates therapeutic strategy. Contrast-enhanced computed tomography of the chest, abdomen, and pelvis evaluates gross local invasion and distant visceral metastases. For assessing tumour depth (T stage) and regional nodal involvement (N stage), **endoscopic ultrasound** is the most sensitive diagnostic tool. EUS visualizes the five distinct histological layers of the esophageal wall and allows fine-needle aspiration of suspicious peri-esophageal and celiac lymph nodes.",
+   "say": "Endoscopic ultrasound is the gold standard for evaluating local tumour wall depth and regional lymph nodes, while CT and PET scans screen for distant metastatic spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EUS Layer",
+     "Histological Correlation",
+     "T-Stage Designation"
+    ],
+    "rows": [
+     [
+      "Layer 1 & 2",
+      "Mucosa (epithelium & lamina propria)",
+      "T1a (Intramucosal carcinoma)"
+     ],
+     [
+      "Layer 3",
+      "Submucosa",
+      "T1b (Submucosal invasion)"
+     ],
+     [
+      "Layer 4",
+      "Muscularis propria",
+      "T2 (Invasion into muscle layer)"
+     ],
+     [
+      "Layer 5",
+      "Adventitia",
+      "T3 (Invasion through adventitia)"
+     ],
+     [
+      "Adjacent structures",
+      "Aorta, pleura, pericardium, tracheobronchial tree",
+      "T4a (Resectable) / T4b (Unresectable)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adenocarcinomas of the gastroesophageal junction are classified using the anatomical **Siewert classification**. Type I tumours originate one to five centimetres above the anatomical gastroesophageal junction, representing distal esophageal cancers. Type II true junctional tumours lie within one centimetre above and two centimetres below the junction. Type III subcardial tumours arise two to five centimetres below the junction and infiltrate upward into the distal esophagus, behaving biologically like gastric carcinomas.",
+   "say": "Gastroesophageal junction cancers are categorized using the Siewert classification. Type one is distal esophageal, type two is true junctional, and type three behaves as a proximal gastric carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Siewert Type I & II",
+     "points": [
+      "Type I: 1 to 5 cm above junction",
+      "Type II: 1 cm above to 2 cm below junction",
+      "Arises in Barrett metaplastic mucosa",
+      "Managed via transthoracic esophagectomy"
+     ]
+    },
+    "right": {
+     "title": "Siewert Type III",
+     "points": [
+      "2 to 5 cm below anatomical junction",
+      "Subcardial primary gastric carcinoma",
+      "Extensive subdiaphragmatic lymphatic spread",
+      "Managed via extended total gastrectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For locally advanced, resectable esophageal tumours (T2 or higher, or node-positive disease), international randomized trials have established **neoadjuvant chemoradiotherapy** as the standard of care prior to surgery. The CROSS trial demonstrated that administering carboplatin and paclitaxel with concurrent 41.4 Gray radiation therapy significantly improves overall survival, increases complete R0 resection rates, and achieves a complete pathological response in up to forty-nine percent of squamous carcinomas.",
+   "say": "Neoadjuvant chemoradiotherapy based on the CROSS trial is the standard of care for locally advanced resectable disease, shrinking tumours and doubling complete resection rates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stag",
+      "label": "Clinical Staging Demonstrates T2-4 or N+ Disease"
+     },
+     {
+      "id": "cross",
+      "label": "CROSS Protocol Neoadjuvant Chemoradiotherapy (Carboplatin + Paclitaxel + 41.4 Gy)"
+     },
+     {
+      "id": "restag",
+      "label": "Restaging CT & PET-CT at 6 to 8 Weeks Post-Chemoradiotherapy"
+     },
+     {
+      "id": "surg",
+      "label": "En Bloc Surgical Esophagectomy with 2-Field Lymphadenectomy"
+     },
+     {
+      "id": "surv",
+      "label": "Significant Prolongation of Long-Term Overall Survival"
+     }
+    ],
+    "edges": [
+     [
+      "stag",
+      "cross"
+     ],
+     [
+      "cross",
+      "restag"
+     ],
+     [
+      "restag",
+      "surg"
+     ],
+     [
+      "surg",
+      "surv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The surgical benchmark for resecting middle and lower third esophageal tumours is the **two-stage Ivor Lewis oesophagectomy**. The operation begins with an abdominal laparotomy or laparoscopy to mobilize the stomach, divide the left gastric artery, and create a vascularized gastric conduit based on the right gastroepiploic artery. Next, a right thoracotomy is performed to resect the thoracic esophagus en bloc with mediastinal lymph nodes and construct an intrathoracic esophagogastric anastomosis above the azygos vein.",
+   "say": "The Ivor Lewis esophagectomy is a two-stage procedure. An abdominal phase mobilizes the stomach into a conduit, followed by a right chest phase to resect the esophagus and create an intrathoracic anastomosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "phase1",
+      "label": "Abdominal Phase: Gastric Mobilization & Conduit Creation on Right Gastroepiploic"
+     },
+     {
+      "id": "nodes1",
+      "label": "Abdominal Lymphadenectomy: Celiac, Left Gastric & Paracardial Nodes"
+     },
+     {
+      "id": "phase2",
+      "label": "Right Thoracotomy Phase: En Bloc Esophageal Resection & Mediastinal Dissection"
+     },
+     {
+      "id": "azygos",
+      "label": "Division of Azygos Vein to Expose Mid-Thoracic Esophagus"
+     },
+     {
+      "id": "anast",
+      "label": "Circular Stapled Intrathoracic Esophagogastric Anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "phase1",
+      "nodes1"
+     ],
+     [
+      "nodes1",
+      "phase2"
+     ],
+     [
+      "phase2",
+      "azygos"
+     ],
+     [
+      "azygos",
+      "anast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For upper third tumours or when an intrathoracic anastomosis is deemed high risk, surgeons perform a three-incision McKeown oesophagectomy, placing the final anastomosis in the left neck. The most dreaded early surgical complication is an **anastomotic leak**, presenting with tachycardia, mediastinitis, or chest tube drainage. Modern surgical care emphasizes hybrid or totally minimally invasive techniques using laparoscopy and thoracoscopy, which substantially reduce pulmonary complications.",
+   "say": "A three-incision McKeown esophagectomy places the anastomosis in the neck for high tumours. The most serious early complication is an anastomotic leak causing fever, tachycardia, and sepsis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Procedure",
+     "Incisions Utilized",
+     "Anastomotic Location & Indication"
+    ],
+    "rows": [
+     [
+      "Ivor Lewis",
+      "Abdomen + Right Thoracotomy",
+      "Intrathoracic (Middle & lower third tumours)"
+     ],
+     [
+      "McKeown (Three-Hole)",
+      "Right Thorax + Abdomen + Left Neck",
+      "Cervical (Upper third & junctional tumours)"
+     ],
+     [
+      "Transhiatal",
+      "Abdomen + Left Neck (No thoracotomy)",
+      "Cervical (Lower third; poor pulmonary reserve)"
+     ],
+     [
+      "Minimally Invasive (MIO)",
+      "Laparoscopy + Thoracoscopy",
+      "Intrathoracic or cervical; lower morbidity"
+     ]
+    ]
+   }
+  }
+ ]
+}

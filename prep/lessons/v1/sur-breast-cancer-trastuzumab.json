@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "HER2-Positive Breast Cancer, Targeted Trastuzumab, and Cardiotoxicity Surveillance",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Approximately fifteen to twenty percent of invasive mammary carcinomas demonstrate overexpression of the human epidermal growth factor receptor 2 protein, encoded by the **ERBB2 oncogene** located on chromosome 17q12. HER2 is a transmembrane receptor tyrosine kinase belonging to the epidermal growth factor receptor family. Historically associated with aggressive tumour biology, high nuclear grade, and poor clinical prognosis, HER2 amplification is now a primary therapeutic target for biological monoclonal antibodies.",
+   "say": "Human epidermal growth factor receptor 2 is amplified in twenty percent of breast carcinomas. Driven by the ERBB2 oncogene, it promotes rapid cell proliferation and serves as a major therapeutic target.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-fig1.webp",
+    "alt": "Schematic diagram of the HER2 transmembrane tyrosine kinase receptor and downstream oncogenic signalling.",
+    "caption": "HER2 receptor biology: homodimerization and heterodimerization triggering proliferative cell signalling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unlike other members of the EGFR family, HER2 exists in an active conformation without an identified physiological ligand. Instead, it readily forms heterodimers with ligand-bound HER1, HER3, or HER4 receptors. Heterodimerization with HER3 is exceptionally potent, activating two major intracellular cascades: the RAS-MAPK pathway driving mitotic proliferation, and the **PI3K-AKT-mTOR pathway** promoting cell survival, neo-angiogenesis, and resistance to standard cytotoxic chemotherapy.",
+   "say": "HER2 lacks a specific ligand and signals primarily by partnering with other receptors like HER3. This heterodimerization strongly activates intracellular cascades that fuel cellular proliferation and resist apoptosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "over",
+      "label": "ERBB2 Gene Amplification & Receptor Overexpression"
+     },
+     {
+      "id": "dimer",
+      "label": "Ligand-Independent Heterodimerization with HER3"
+     },
+     {
+      "id": "akt",
+      "label": "PI3K-AKT-mTOR Intracellular Cascade Activation"
+     },
+     {
+      "id": "mapk",
+      "label": "RAS-RAF-MEK-ERK Mitogenic Kinase Signalling"
+     },
+     {
+      "id": "growth",
+      "label": "Unchecked Cellular Division & Survival Advantage"
+     }
+    ],
+    "edges": [
+     [
+      "over",
+      "dimer"
+     ],
+     [
+      "dimer",
+      "akt"
+     ],
+     [
+      "dimer",
+      "mapk"
+     ],
+     [
+      "akt",
+      "growth"
+     ],
+     [
+      "mapk",
+      "growth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate pathological testing of every newly diagnosed invasive breast carcinoma is required to determine HER2 status. Initial screening relies on immunohistochemistry to assess membrane staining intensity. A score of zero or one plus is considered negative, while a score of three plus indicates intense, complete circumferential membranous staining in over ten percent of tumour cells, confirming HER2 positivity. Intermediate scores of two plus represent equivocal results and mandate reflex testing via **fluorescence in situ hybridization**.",
+   "say": "Every invasive breast cancer is screened for HER2 using immunohistochemistry. An unequivocal three-plus score confirms positivity, while an equivocal two-plus result requires confirmation by fluorescence in situ hybridization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IHC Score",
+     "Membrane Staining Pattern",
+     "Clinical Interpretation"
+    ],
+    "rows": [
+     [
+      "0",
+      "No staining or faint partial staining in <10% cells",
+      "HER2 Negative"
+     ],
+     [
+      "1+",
+      "Faint, incomplete membrane staining in >10% cells",
+      "HER2 Negative"
+     ],
+     [
+      "2+",
+      "Weak to moderate complete membrane staining >10%",
+      "Equivocal (Mandates FISH reflex)"
+     ],
+     [
+      "3+",
+      "Intense, circumferential complete membrane staining >10%",
+      "HER2 Positive (Eligible for targeted drugs)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fluorescence in situ hybridization quantifies the ratio of ERBB2 gene copies to chromosome 17 centromeres within tumour nuclei. A dual-probe ratio of ERBB2 to CEP17 equal to or greater than two point zero, or an absolute average ERBB2 copy number of six or more signals per cell, definitively confirms **HER2 gene amplification**. Patients demonstrating gene amplification benefit dramatically from targeted biological therapy, regardless of the initial equivocal immunohistochemical score.",
+   "say": "Fluorescence in situ hybridization measures the ratio of ERBB2 genes to chromosome 17 centromeres. A ratio of two or greater confirms gene amplification, qualifying the patient for targeted antibody therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immunohistochemistry (IHC)",
+     "points": [
+      "Evaluates cell membrane protein expression",
+      "Rapid, inexpensive, widely available assay",
+      "Semi-quantitative visual scoring (0 to 3+)",
+      "Subject to pre-analytical fixation artifacts"
+     ]
+    },
+    "right": {
+     "title": "In Situ Hybridization (FISH)",
+     "points": [
+      "Directly quantifies gene copy number",
+      "Rigorous, objective molecular standard",
+      "Definitive ratio: ERBB2 to CEP17 >= 2.0",
+      "Resolves equivocal IHC 2+ cases reliably"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The breakthrough targeted agent that transformed the natural history of this disease is **trastuzumab**, a recombinant humanized IgG1 monoclonal antibody. Trastuzumab binds specifically to the extracellular juxtamembrane domain four of the HER2 receptor. Receptor engagement prevents cleavage of the extracellular domain, impairs intracellular kinase signaling, and recruits host natural killer cells to destroy the malignant target through antibody-dependent cellular cytotoxicity.",
+   "say": "Trastuzumab is a monoclonal antibody that binds domain four of the HER2 receptor. It blocks proliferative signaling and recruits natural killer cells to destroy the cancer through antibody-dependent cytotoxicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+    "alt": "Diagram showing the mechanism of action of trastuzumab binding domain four of the HER2 receptor.",
+    "caption": "Trastuzumab binding: blocking HER2 signaling and engaging antibody-dependent cellular cytotoxicity. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Adjuvant clinical trials established that adding one full year of trastuzumab to standard cytotoxic chemotherapy reduces the risk of breast cancer recurrence by nearly one-half and lowers overall mortality by one-third. In modern practice, patients with tumours larger than two centimetres or biopsy-proven nodal disease receive neoadjuvant chemotherapy combined with **dual HER2 blockade**, pairing trastuzumab with pertuzumab. Pertuzumab binds domain two of HER2, preventing its heterodimerization with HER3 and enhancing complete pathological response.",
+   "say": "Adding one year of trastuzumab cuts recurrence risk in half. Pairing trastuzumab with pertuzumab provides dual blockade, preventing receptor dimerization and improving rates of pathological complete response.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Biopsy-Proven HER2-Positive Invasive Carcinoma"
+     },
+     {
+      "id": "neo",
+      "label": "Neoadjuvant Chemotherapy with Dual Blockade (Trastuzumab + Pertuzumab)"
+     },
+     {
+      "id": "surg",
+      "label": "Definitive Surgery: Breast Conservation or Mastectomy"
+     },
+     {
+      "id": "pcr",
+      "label": "Assess Pathological Response: Residual versus Complete"
+     },
+     {
+      "id": "adj",
+      "label": "Complete 1-Year Targeted Therapy (Trastuzumab or T-DM1)"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "neo"
+     ],
+     [
+      "neo",
+      "surg"
+     ],
+     [
+      "surg",
+      "pcr"
+     ],
+     [
+      "pcr",
+      "adj"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary clinical toxicity associated with trastuzumab therapy is cardiac dysfunction. HER2 signaling is vital for normal adult cardiomyocyte survival and adaptation to biomechanical stress. Blocking this pathway produces **type II cardiotoxicity**, characterized by a painless decline in left ventricular ejection fraction. Unlike anthracycline cardiotoxicity, trastuzumab-induced cardiac injury is typically dose-independent, does not produce ultrastructural myocyte necrosis on biopsy, and is usually reversible upon drug cessation.",
+   "say": "Trastuzumab can produce cardiac dysfunction because cardiomyocytes use HER2 for stress repair. This type two cardiotoxicity causes a decline in ejection fraction, but is typically reversible once the drug is stopped.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I (Anthracycline Toxicity)",
+     "points": [
+      "Cumulative dose-dependent myocyte injury",
+      "Vacuolar degeneration and myocyte necrosis",
+      "Irreversible permanent myocardial scarring",
+      "Carries high risk of refractory heart failure"
+     ]
+    },
+    "right": {
+     "title": "Type II (Trastuzumab Toxicity)",
+     "points": [
+      "Dose-independent cardiac dysfunction",
+      "No cellular necrosis or ultrastructural damage",
+      "Typically reversible after drug cessation",
+      "Safe re-challenge possible after LVEF recovery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before initiating trastuzumab, baseline cardiac evaluation via echocardiography or multi-gated acquisition scanning is mandatory to measure left ventricular ejection fraction. Surveillance scans are repeated every three months during the one-year treatment course. If the ejection fraction drops by ten or more percentage points below baseline to an absolute value under fifty percent, **trastuzumab treatment interruption** is required. Following brief cessation and initiation of cardioprotective ACE inhibitors or beta-blockers, ejection fraction typically recovers.",
+   "say": "Echocardiograms are performed at baseline and every three months during trastuzumab treatment. If ejection fraction drops significantly below fifty percent, treatment is paused until heart function normalizes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Echocardiographic Finding",
+     "Clinical Action",
+     "Follow-up Strategy"
+    ],
+    "rows": [
+     [
+      "LVEF >= 50% and stable",
+      "Continue trastuzumab on schedule",
+      "Repeat echo every 3 months"
+     ],
+     [
+      "LVEF drop >= 10% but absolute >= 50%",
+      "Continue trastuzumab cautiously",
+      "Repeat echo in 4 to 6 weeks"
+     ],
+     [
+      "LVEF < 50% with >= 10% drop from baseline",
+      "Withhold trastuzumab immediately",
+      "Initiate ACE inhibitor and repeat in 4 weeks"
+     ],
+     [
+      "LVEF recovers to >= 50% after pause",
+      "Resume trastuzumab therapy",
+      "Close cardiovascular monitoring"
+     ],
+     [
+      "Persistent LVEF depression over 4 weeks",
+      "Discontinue trastuzumab permanently",
+      "Cardiology consultation for heart failure"
+     ]
+    ]
+   }
+  }
+ ]
+}

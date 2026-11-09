@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Modified Radical Mastectomy, Breast-Conserving Surgery, and Margin Control",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The operative management of localized operable mammary malignancy balances oncological radicality against postoperative cosmetic form and quality of life. The modern historical benchmark is the **modified radical mastectomy**, which removes the entire mammary glandular parenchyma along with the nipple-areolar complex, overlying elliptical skin paddle, pectoral fascia, and level one and two axillary lymph nodes. Unlike Halsted radical surgery, both pectoralis major and minor muscles are routinely preserved.",
+   "say": "Modified radical mastectomy removes the entire breast parenchyma, overlying skin island, nipple complex, and levels one and two axillary lymph nodes, while leaving the pectoralis major muscle intact.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-modified-radical-mastectomy.webp",
+    "alt": "Surgical diagram outlining the incision lines and anatomical boundaries of a modified radical mastectomy.",
+    "caption": "Modified radical mastectomy technique: preserving the pectoralis major muscle while dissecting axillary nodal contents. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical variations of the modified mastectomy differ in their handling of the smaller pectoral muscular barrier. The Patey procedure entails division or complete excision of the pectoralis minor muscle to afford wide, unhindered surgical exposure of apical level three axillary nodes. In contrast, the Auchincloss modification and the Madden operation maintain both pectoralis muscles in continuity, retracting pectoralis minor medially to clear levels one and two, which preserves the **medial pectoral nerve**.",
+   "say": "The Patey modification divides the pectoralis minor to access level three nodes, whereas the Auchincloss and Madden variations preserve both pectoral muscles and avoid denervating the chest wall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patey Modification",
+     "points": [
+      "Pectoralis minor divided or resected",
+      "Direct visualization of level III apex",
+      "Higher risk of lateral pectoral atrophy",
+      "Useful for bulky matted axillary disease"
+     ]
+    },
+    "right": {
+     "title": "Auchincloss & Madden",
+     "points": [
+      "Both pectoral muscles fully preserved",
+      "Pectoralis minor retracted superomedially",
+      "Spares medial and lateral pectoral nerves",
+      "Standard approach for routine operable cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Axillary dissection requires rigorous anatomical identification of key neurovascular boundaries to avoid chronic surgical disability. The surgeon identifies the axillary vein along the superior border, strictly preserving its adventitial sheath. Descending along the medial wall of the axilla on serratus anterior lies the long thoracic nerve of Bell. Injuring this nerve denervates the serratus anterior muscle, resulting in a prominent, disabling **winged scapula** when pushing forward.",
+   "say": "During axillary dissection, the surgeon identifies and preserves the long thoracic nerve on the chest wall. Transection of this nerve paralyses the serratus anterior muscle, leading to a winged scapula.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inc",
+      "label": "Transverse Elliptical Stewart Skin Flap Elevation"
+     },
+     {
+      "id": "vein",
+      "label": "Identification of Inferior Edge of Axillary Vein"
+     },
+     {
+      "id": "bell",
+      "label": "Preservation of Long Thoracic Nerve of Bell on Chest Wall"
+     },
+     {
+      "id": "lat",
+      "label": "Preservation of Thoracodorsal Nerve to Latissimus Dorsi"
+     },
+     {
+      "id": "spec",
+      "label": "En Bloc Delivery of Mammary Parenchyma and Axillary Fat Pad"
+     }
+    ],
+    "edges": [
+     [
+      "inc",
+      "vein"
+     ],
+     [
+      "vein",
+      "bell"
+     ],
+     [
+      "bell",
+      "lat"
+     ],
+     [
+      "lat",
+      "spec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Running along the posterior axillary wall within the subscapular fat pad is the thoracodorsal neurovascular bundle. The thoracodorsal nerve innervates the latissimus dorsi muscle, which controls humerus adduction, extension, and internal rotation. Preserving this muscle and its nerve supply is critical if subsequent latissimus dorsi myocutaneous flap breast reconstruction is planned. Furthermore, transecting the sensory intercostobrachial nerve during axillary clearance causes persistent **inner arm numbness** along the upper medial arm.",
+   "say": "The thoracodorsal nerve runs along the posterior axillary wall to power the latissimus dorsi. Preserving this nerve maintains shoulder power and leaves open the option for latissimus dorsi flap breast reconstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Axillary Structure",
+     "Anatomical Course",
+     "Functional Deficit if Injured"
+    ],
+    "rows": [
+     [
+      "Long Thoracic Nerve",
+      "Descends on serratus anterior",
+      "Winged scapula deformity"
+     ],
+     [
+      "Thoracodorsal Nerve",
+      "Accompanies thoracodorsal artery",
+      "Weak shoulder adduction & pull-up"
+     ],
+     [
+      "Intercostobrachial Nerve",
+      "Crosses axillary fat pad from T2",
+      "Anaesthesia of medial upper arm"
+     ],
+     [
+      "Axillary Vein",
+      "Superior border of dissection",
+      "Acute massive upper limb thrombosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For suitable candidates with unicentric disease, **breast-conserving surgery** provides long-term survival equivalent to modified radical mastectomy. Also known as wide local excision or lumpectomy, the procedure excises the primary malignancy with a surrounding cuff of healthy macroscopic tissue, coupled with sentinel node biopsy and mandatory postoperative whole-breast external beam radiotherapy. This multimodality approach preserves natural mammary contour and reduces physical and psychological distress compared with total organ ablation.",
+   "say": "Breast-conserving surgery, also termed lumpectomy or wide local excision, removes the tumour with clear margins. Combined with radiation therapy, it achieves long-term survival rates identical to mastectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-breast-mastectomy.webp",
+    "alt": "Macroscopic surgical specimen of an excised breast cancer showing clear margins around the central tumour core.",
+    "caption": "Mastectomy versus wide excision: evaluating gross tumour margins to ensure complete local extirpation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histopathological evaluation of surgical margins is paramount during breast-conserving procedures. Pathologists paint the specimen margins with colored inks to evaluate the interface between neoplastic cells and the surgical boundary. For invasive ductal and lobular carcinomas, international consensus guidelines define an acceptable surgical clearance as **no ink on tumour**. If malignant cells touch the marked inked border, re-excision or conversion to mastectomy is mandatory to prevent local recurrence.",
+   "say": "Pathologists paint surgical specimens with ink to check the clearance margins. For invasive carcinoma, guidelines require no ink touching the tumour, meaning a microscopic layer of clear normal tissue is present.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Invasive Carcinoma Margins",
+     "points": [
+      "Guideline requires no ink on tumour",
+      "Single cell clearance prevents recurrence",
+      "Adjuvant radiation treats microdeposits",
+      "Routine re-excision not required if clear"
+     ]
+    },
+    "right": {
+     "title": "Ductal Carcinoma In Situ",
+     "points": [
+      "Requires two-millimetre clear inked margin",
+      "Non-invasive intraductal skip pattern",
+      "Sub-millimetre clearance risks failure",
+      "Mandates surgical cavity cavity shave"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Certain clinical scenarios represent absolute contraindications to breast conservation, obligating total mastectomy instead. These include multicentric carcinoma involving two or more distinct anatomical quadrants, diffuse suspicious pleomorphic microcalcifications throughout the breast parenchyma, persistently positive margins despite repeat re-excisions, and prior therapeutic mantle radiation to the chest wall. First or second trimester pregnancy is also an absolute contraindication because **curative adjuvant radiotherapy** cannot be safely administered to the gravid patient.",
+   "say": "Absolute contraindications to breast conservation include multicentric disease across multiple quadrants, extensive microcalcifications, prior thoracic radiation, and early pregnancy where radiotherapy is contraindicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Contraindication Type",
+     "Clinical Scenario",
+     "Underlying Rationale"
+    ],
+    "rows": [
+     [
+      "Multicentricity",
+      "Lesions in separate quadrants",
+      "Single lumpectomy cannot excise both"
+     ],
+     [
+      "Diffuse Calcifications",
+      "Extensive branching microcalcifications",
+      "Widespread occult intraductal malignancy"
+     ],
+     [
+      "Prior Radiation",
+      "Prior chest or lymphoma radiation",
+      "Exceeds normal tissue radiation tolerance"
+     ],
+     [
+      "Early Pregnancy",
+      "First or second trimester gestation",
+      "Fetal teratogenicity from breast radiation"
+     ],
+     [
+      "Persistent Margins",
+      "Inked margins positive after shave",
+      "Inability to achieve local tumour control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate or delayed breast reconstruction restores body symmetry following mastectomy. Autologous options harvest patient tissue, such as the **deep inferior epigastric perforator** free flap, which transfers lower abdominal skin and subcutaneous fat while sparing the rectus abdominis muscle to prevent abdominal wall herniation. Alternatively, prosthetic techniques utilize silicone gel or saline implants placed under the pectoralis major muscle, frequently preceded by a temporary tissue expander to stretch overlying cutaneous flaps.",
+   "say": "Breast reconstruction can be performed using silicone implants or autologous tissue like the deep inferior epigastric perforator flap, which transfers abdominal skin and fat without sacrificing the rectus muscle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mast",
+      "label": "Skin-Sparing or Nipple-Sparing Mastectomy"
+     },
+     {
+      "id": "plan",
+      "label": "Evaluation of Patient Habitats & Adjuvant Radiation Plans"
+     },
+     {
+      "id": "diep",
+      "label": "Autologous DIEP Flap: Sparing Rectus Abdominis Muscle"
+     },
+     {
+      "id": "implant",
+      "label": "Prosthetic Subpectoral Expander & Silicone Implant"
+     },
+     {
+      "id": "symm",
+      "label": "Nipple Reconstruction & Contralateral Symmetrization"
+     }
+    ],
+    "edges": [
+     [
+      "mast",
+      "plan"
+     ],
+     [
+      "plan",
+      "diep"
+     ],
+     [
+      "plan",
+      "implant"
+     ],
+     [
+      "diep",
+      "symm"
+     ],
+     [
+      "implant",
+      "symm"
+     ]
+    ]
+   }
+  }
+ ]
+}
