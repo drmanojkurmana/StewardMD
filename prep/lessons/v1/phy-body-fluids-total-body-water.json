@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "phy-body-fluids",
+ "subject": "physiology",
+ "title": "Total Body Water and Fluid Compartments",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Water constitutes the principal chemical solvent of the human body, accounting for approximately sixty percent of total body weight in a healthy young adult male. This fraction of **total body water** varies with adiposity and sex: adipose tissue contains less than ten percent water, so women and elderly individuals exhibit lower total body water fractions near fifty percent.",
+   "say": "Water comprises roughly sixty percent of body weight in an adult male. Because adipose tissue contains minimal water, total body water fraction is lower in women and obesity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sodium-water-balance-and-osmolality-fig1.webp",
+    "alt": "Body fluid compartments and proportional distribution of total body water.",
+    "caption": "Proportional distribution of total body water into intracellular and extracellular volumes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Total body water of approximately forty-two litres in a standard seventy-kilogram adult is partitioned into two major physiological compartments. The **intracellular fluid** encompasses two-thirds of total body water, amounting to roughly twenty-eight litres enclosed within cell membranes. The remaining one-third, roughly fourteen litres, constitutes the extracellular fluid bathing all cells of the organism.",
+   "say": "In a standard adult, total body water is partitioned into intracellular fluid, which holds two-thirds of the volume, and extracellular fluid, which holds one-third.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid Compartment",
+     "Fraction of Body Weight",
+     "Volume in 70 kg Adult",
+     "Fraction of TBW"
+    ],
+    "rows": [
+     [
+      "Total Body Water",
+      "60 percent",
+      "42 litres",
+      "100 percent"
+     ],
+     [
+      "Intracellular Fluid (ICF)",
+      "40 percent",
+      "28 litres",
+      "67 percent (two-thirds)"
+     ],
+     [
+      "Extracellular Fluid (ECF)",
+      "20 percent",
+      "14 litres",
+      "33 percent (one-third)"
+     ],
+     [
+      "Interstitial Fluid (ISF)",
+      "15 percent",
+      "10.5 litres",
+      "25 percent (three-quarters of ECF)"
+     ],
+     [
+      "Plasma Volume",
+      "5 percent",
+      "3.5 litres",
+      "8 percent (one-quarter of ECF)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The extracellular fluid is subdivided into two principal subcompartments separated by the capillary endothelium: the interstitial fluid and vascular plasma. The **interstitial fluid** accounts for three-quarters of extracellular volume, providing the immediate external fluid microenvironment surrounding non-vascular cells, while plasma represents the non-cellular liquid component of circulating intravascular blood.",
+   "say": "Extracellular fluid divides into interstitial fluid, which accounts for three-quarters of its volume, and circulating vascular plasma, which accounts for one-quarter.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Interstitial Fluid",
+     "points": [
+      "Surrounds parenchymal cells in tissue spaces",
+      "Volume approximately 10.5 litres in adult",
+      "Low protein content (albumin excluded by capillary)",
+      "Forms gel-like matrix with hyaluronic acid and collagen"
+     ]
+    },
+    "right": {
+     "title": "Plasma Volume",
+     "points": [
+      "Contained within vascular circulation",
+      "Volume approximately 3.5 litres in adult",
+      "High protein content (7 g/dL, generating oncotic pressure)",
+      "Continuously filtered across capillary walls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A specialized subfraction of extracellular fluid comprises fluid within epithelial-lined body spaces, designated **transcellular fluid**. Although collectively measuring only one to two litres, it includes cerebrospinal fluid, aqueous and vitreous humour, synovial joint fluid, peritoneal and pleural effusions, and digestive secretions, each maintaining specialized ionic compositions shaped by local transport epithelia.",
+   "say": "Transcellular fluid comprises specialized extracellular collections such as cerebrospinal fluid and synovial fluid, separated by epithelial barriers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transcellular Pool",
+     "Anatomical Enclosure",
+     "Unique Compositional Feature"
+    ],
+    "rows": [
+     [
+      "Cerebrospinal Fluid",
+      "Subarachnoid space and ventricles",
+      "Very low protein, high chloride, no cells"
+     ],
+     [
+      "Aqueous Humour",
+      "Anterior and posterior eye chambers",
+      "Maintains intraocular pressure, delivers nutrients"
+     ],
+     [
+      "Synovial Fluid",
+      "Diarthrodial joint cavities",
+      "High hyaluronic acid and lubricin viscosity"
+     ],
+     [
+      "Pericardial/Pleural Fluid",
+      "Serous serosal cavities",
+      "Small lubrication volume minimizing friction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measurement of fluid compartment volumes in vivo relies on the classic **indicator dilution** principle. A known mass of a non-toxic marker substance that distributes evenly throughout the target compartment without undergoing rapid metabolism is injected intravenously. After complete mixing, concentration is measured, and volume equals injected mass minus excreted amount divided by equilibrium concentration.",
+   "say": "Compartment volumes are measured using the indicator dilution principle: injected mass minus excreted marker divided by equilibrium plasma concentration equals compartment volume.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inj",
+      "label": "Inject Known Mass (M) of Tracer Substance"
+     },
+     {
+      "id": "mix",
+      "label": "Allow Uniform Compartmental Mixing and Measure Excretion (E)"
+     },
+     {
+      "id": "con",
+      "label": "Measure Equilibrium Tracer Concentration (C) in Plasma"
+     },
+     {
+      "id": "vol",
+      "label": "Calculate Volume = (M - E) / C"
+     }
+    ],
+    "edges": [
+     [
+      "inj",
+      "mix"
+     ],
+     [
+      "mix",
+      "con"
+     ],
+     [
+      "con",
+      "vol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because cell membranes are selectively permeable, different tracer substances must be chosen to measure specific compartments. To measure total body water, markers such as deuterium oxide, tritiated water, or **antipyrine** are employed because they diffuse freely across both cell membranes and capillary endothelium, distributing uniformly throughout all body water.",
+   "say": "Tracer selection depends on permeability. Heavy water, tritiated water, and antipyrine freely penetrate all membranes, measuring total body water.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Compartment",
+     "Ideal Tracer Substances",
+     "Distribution Barrier"
+    ],
+    "rows": [
+     [
+      "Total Body Water (TBW)",
+      "Deuterium oxide (D2O), Antipyrine",
+      "Distributes across all lipid membranes"
+     ],
+     [
+      "Extracellular Fluid (ECF)",
+      "Inulin, Mannitol, Radiolabelled sodium",
+      "Crosses capillaries but cannot enter cells"
+     ],
+     [
+      "Plasma Volume (PV)",
+      "Evans blue dye, 131I-Human Serum Albumin",
+      "Retained within vascular capillary walls"
+     ],
+     [
+      "Intracellular Fluid (ICF)",
+      "Calculated indirectly (TBW minus ECF)",
+      "No single direct penetrating tracer exists"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Osmotic forces dictate water shifts between the intracellular and extracellular spaces. Because cell membranes are highly permeable to water via aquaporins, water redistributes rapidly until intracellular and extracellular **osmolarity** reach perfect equilibrium. Adding hypertonic saline expands the extracellular volume while drawing water out of cells by osmosis, shrinking the intracellular compartment.",
+   "say": "Because membranes are water-permeable, intracellular and extracellular osmolarity are always equal. Adding hypertonic solute draws water out of cells, causing intracellular shrinkage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypernatremia-fig1.webp",
+    "alt": "Osmotic shifts and intracellular cell shrinkage in hypernatremic states.",
+    "caption": "Transmembrane osmotic water redistribution between intracellular and extracellular fluid compartments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Darrow-Yannet diagrams illustrate these compartmental fluid shifts. Infusion of isotonic saline causes pure **isomotic volume expansion**, increasing extracellular volume without altering osmolarity or intracellular volume. In contrast, plain water loss during sweating or diabetes insipidus produces hyperosmotic volume contraction, raising osmolarity across both compartments and shrinking intracellular volume.",
+   "say": "Darrow-Yannet diagrams depict fluid shifts. Isotonic saline causes pure extracellular expansion, whereas dehydration raises osmolarity and shrinks both compartments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isosmotic Volume Expansion",
+     "points": [
+      "Infusion of 0.9% normal saline",
+      "ECF volume increases significantly",
+      "Plasma osmolarity remains unchanged",
+      "ICF volume remains completely unaltered"
+     ]
+    },
+    "right": {
+     "title": "Hyperosmotic Volume Contraction",
+     "points": [
+      "Sweating, diabetes insipidus, water deprivation",
+      "ECF volume decreases with rising osmolarity",
+      "Water moves from ICF to ECF by osmosis",
+      "ICF volume shrinks significantly with high osmolarity"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

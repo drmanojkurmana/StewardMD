@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "module": "phy-body-fluids",
+ "subject": "physiology",
+ "title": "Indicator Dilution, Inulin, Osmolarity, and Tonicity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Measuring the extracellular fluid volume requires a tracer that readily crosses the vascular capillary wall but cannot penetrate the plasma membrane of parenchymal cells. The uncharged fructose polysaccharide **inulin** fulfills these criteria precisely: after intravenous injection, inulin disperses rapidly throughout plasma and interstitial spaces while remaining excluded from the intracellular compartment.",
+   "say": "Inulin is the gold-standard tracer for measuring extracellular fluid. It crosses capillary walls into the interstitium but cannot penetrate cell membranes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inulin Properties",
+     "points": [
+      "Inert uncharged plant polysaccharide",
+      "Freely filtered at the renal glomerulus",
+      "Neither reabsorbed nor secreted by tubules",
+      "Perfect tracer for ECF and glomerular filtration"
+     ]
+    },
+    "right": {
+     "title": "Other ECF Tracers",
+     "points": [
+      "Mannitol: inert sugar alcohol",
+      "Radiolabelled sulfate: distributes into ECF",
+      "Radiolabelled sodium: slightly overestimates ECF",
+      "Sodium enters cells in small amounts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To measure vascular plasma volume in isolation, the tracer must remain confined within the vascular lumen by the capillary endothelium. The synthetic azo dye **Evans blue** binds avidly to circulating plasma albumin with high affinity. Alternatively, radiolabelled serum albumin (131I-albumin) can be administered directly, enabling calculation of plasma volume from its circulating dilution.",
+   "say": "Plasma volume is measured with tracers that bind or match albumin, such as Evans blue dye or radio-iodinated albumin, which remain inside the capillaries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ev",
+      "label": "Intravenous Injection of Evans Blue Dye"
+     },
+     {
+      "id": "alb",
+      "label": "Dye Binds Endogenous Circulating Plasma Albumin"
+     },
+     {
+      "id": "cap",
+      "label": "Albumin Complex Remains Confined by Endothelial Barrier"
+     },
+     {
+      "id": "dil",
+      "label": "Measure Concentration to Calculate Plasma Volume"
+     }
+    ],
+    "edges": [
+     [
+      "ev",
+      "alb"
+     ],
+     [
+      "alb",
+      "cap"
+     ],
+     [
+      "cap",
+      "dil"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Total blood volume is derived directly from plasma volume and venous haematocrit. Because whole blood comprises cellular elements and liquid plasma, total blood volume equals plasma volume divided by one minus the **haematocrit**. In an adult with a plasma volume of three litres and a haematocrit of forty percent, total circulating blood volume measures approximately five litres.",
+   "say": "Total blood volume is calculated by dividing plasma volume by one minus the haematocrit, typically yielding five litres in an adult.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood Component",
+     "Normal Fraction",
+     "Volume in 70 kg Adult",
+     "Determinant"
+    ],
+    "rows": [
+     [
+      "Plasma Volume",
+      "60 percent of blood",
+      "3.0 to 3.5 litres",
+      "Measured by Evans blue / albumin"
+     ],
+     [
+      "Red Cell Volume",
+      "40 percent of blood",
+      "2.0 to 2.2 litres",
+      "Measured by 51Cr-labelled erythrocytes"
+     ],
+     [
+      "Total Blood Volume",
+      "100 percent of blood",
+      "5.0 to 5.5 litres",
+      "Calculated as Plasma Volume / (1 - Hct)"
+     ],
+     [
+      "Venous Haematocrit",
+      "40 to 45 percent",
+      "Packed cell fraction",
+      "Centrifuged erythrocyte column"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct chemical determination of intracellular fluid volume is impossible because no tracer distributes into all cells without also equilibrating in the extracellular fluid. Consequently, intracellular fluid volume is calculated indirectly by subtracting extracellular volume from **total body water**. Deuterium oxide measures total body water, inulin measures extracellular volume, and the difference defines intracellular volume.",
+   "say": "Intracellular fluid volume cannot be measured directly. It is determined by subtracting inulin extracellular volume from deuterium total body water.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct Tracer Dilution",
+     "points": [
+      "Total Body Water: Deuterium oxide, antipyrine",
+      "Extracellular Fluid: Inulin, mannitol",
+      "Plasma Volume: Evans blue, 131I-albumin",
+      "Erythrocyte Mass: 51Chromium-tagged red cells"
+     ]
+    },
+    "right": {
+     "title": "Indirect Derived Volume",
+     "points": [
+      "Intracellular Fluid = TBW minus ECF volume",
+      "Interstitial Fluid = ECF minus Plasma volume",
+      "Total Blood Volume = Plasma volume / (1 - Hct)",
+      "Mathematical subtraction yields true physiological volumes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Solute concentration can be expressed in terms of weight or volume of solvent. Osmolality expresses the concentration of osmotically active particles per kilogram of solvent (water), whereas **osmolarity** defines particle count per litre of solution. In biological fluids with dilute aqueous solutions, normal plasma values range between two hundred and eighty and two hundred and ninety-five milliosmoles.",
+   "say": "Osmolality measures particles per kilogram of solvent, while osmolarity measures particles per litre of solution. Normal plasma values are 280 to 295 milliosmoles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Unit Definition",
+     "Temperature Sensitivity",
+     "Normal Plasma Range"
+    ],
+    "rows": [
+     [
+      "Osmolality",
+      "mOsm/kg of water (solvent)",
+      "Independent of temperature",
+      "280 to 295 mOsm/kg H2O"
+     ],
+     [
+      "Osmolarity",
+      "mOsm/L of solution",
+      "Slightly temperature dependent",
+      "275 to 290 mOsm/L solution"
+     ],
+     [
+      "Effective Osmoles",
+      "Impermeant solutes (Na+, glucose)",
+      "Determines transcellular water shifts",
+      "Calculated tonicity"
+     ],
+     [
+      "Ineffective Osmoles",
+      "Urea, ethanol (freely permeant)",
+      "Equilibrates across lipid bilayer",
+      "Raises osmolality without tonicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical distinction exists between total osmolarity and physiological **tonicity**. Tonicity refers strictly to the effective osmotic pressure exerted by impermeant solutes that cannot penetrate the cell membrane, such as sodium and glucose. Permeant solutes such as urea and ethanol cross cell membranes freely; they contribute to measured plasma osmolality but exert zero effective tonicity.",
+   "say": "Tonicity is the effective osmotic pressure created by impermeant solutes like sodium. Freely permeant solutes like urea increase osmolality without affecting tonicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyponatremia-fig2.webp",
+    "alt": "Tonicity, effective osmoles, and cellular volume responses.",
+    "caption": "Effective versus ineffective osmoles determining plasma tonicity and cellular fluid shifts. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Placing erythrocytes in solutions of varying tonicity demonstrates dramatic volume alterations. In a **hypotonic solution** such as 0.45% saline, the extracellular chemical potential of water is higher than the intracellular fluid, driving water into erythrocytes by osmosis. The cells swell, round into spherocytes, and undergo osmotic lysis if membrane mechanical tensile strength is exceeded.",
+   "say": "In a hypotonic solution, water moves into erythrocytes by osmosis, causing swelling and lysis. In a hypertonic solution, water exits and cells crenate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypotonic Medium (< 280 mOsm/L)",
+     "points": [
+      "Extracellular water activity exceeds intracellular",
+      "Net water influx into erythrocytes via aquaporins",
+      "Cellular swelling and loss of biconcave shape",
+      "Osmotic lysis and haemoglobin release"
+     ]
+    },
+    "right": {
+     "title": "Hypertonic Medium (> 300 mOsm/L)",
+     "points": [
+      "Intracellular water activity exceeds extracellular",
+      "Net water efflux from erythrocytes into medium",
+      "Cellular shrinkage and scalloped crenation",
+      "Intracellular dehydration and concentrated cytosol"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe hypertonic states cause neuronal dehydration with life-threatening intracranial complications. Rapid elevation of serum sodium extracts water from brain parenchymal cells, causing brain shrinkage and traction tearing of delicate bridging cerebral veins. Conversely, treating chronic hypernatraemia with rapid plain water infusion causes sudden **cerebral oedema**, because accumulated intracellular organic idiogenic osmoles draw water rapidly into brain cells.",
+   "say": "Severe hypernatraemia draws water from brain cells, causing shrinkage and traction on bridging veins. Overly rapid correction causes cerebral oedema from trapped idiogenic osmoles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypernatremia-fig1.webp",
+    "alt": "Cerebral consequences of acute and chronic hypernatremia.",
+    "caption": "Neuronal dehydration and vascular traction in severe hypertonic states. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

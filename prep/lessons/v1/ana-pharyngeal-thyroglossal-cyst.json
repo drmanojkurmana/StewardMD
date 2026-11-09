@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-pharyngeal",
+ "subject": "anatomy",
+ "title": "Thyroid Gland Descent and Thyroglossal Duct Anomalies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The thyroid gland develops as an endodermal diverticulum arising from the floor of the embryonic pharynx at the **foramen cecum**, situated at the apex of the terminal sulcus between the anterior two-thirds and posterior third of the tongue. This primordial endodermal cord proliferates and descends into the anterior neck during the fourth week.",
+   "say": "The thyroid gland originates as an endodermal pouch at the foramen cecum on the tongue floor, located at the junction of the oral and pharyngeal tongue. This endodermal bud proliferates and descends through the neck tissues during the fourth week.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-thyroid-relations.svg",
+    "alt": "Thyroid gland descent path from foramen cecum down to tracheal rings",
+    "caption": "Embryonic thyroglossal descent pathway and adult thyroid relations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As the thyroid primordium migrates downward in the prevertebral midline, it remains connected to the tongue base via a slender epithelial tube designated the **thyroglossal duct**. This duct descends anterior to or through the developing hyoid bone, anterior to the thyroid cartilage, and terminates where the thyroid reaches its definitive position across tracheal rings two to four.",
+   "say": "During descent, the developing thyroid remains tethered to the tongue by a slender conduit termed the thyroglossal duct. This epithelial tract courses anterior to or traverses the hyoid bone before reaching its final destination across the upper tracheal rings.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathway of Thyroid Descent",
+    "nodes": [
+     {
+      "id": "tongue",
+      "label": "Foramen Cecum of Tongue Base"
+     },
+     {
+      "id": "hyoid",
+      "label": "Hyoid Bone Primordium"
+     },
+     {
+      "id": "larynx",
+      "label": "Thyroid and Cricoid Cartilages"
+     },
+     {
+      "id": "trach",
+      "label": "Definitive Site: Tracheal Rings 2-4"
+     }
+    ],
+    "edges": [
+     [
+      "tongue",
+      "hyoid"
+     ],
+     [
+      "hyoid",
+      "larynx"
+     ],
+     [
+      "larynx",
+      "trach"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "By the seventh gestational week, the thyroglossal duct normally undergoes complete atrophy and disappears, leaving only the foramen cecum as an anatomical pit on the tongue. In approximately fifty percent of normal individuals, the distal remnant of this duct persists as a slender **pyramidal lobe** projecting upward from the thyroid isthmus.",
+   "say": "By the seventh week, the thyroglossal duct normally obliterates completely, leaving the foramen cecum as a blind pit on the tongue. In roughly half of people, the distal tip of the tract persists as a pyramidal lobe ascending from the thyroid isthmus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Duct Remnants",
+     "points": [
+      "Foramen cecum at tongue base",
+      "Pyramidal lobe of the thyroid gland",
+      "Levator glandulae thyroideae fibromuscular band",
+      "Complete obliteration of intermediate duct"
+     ]
+    },
+    "right": {
+     "title": "Pathological Persistence",
+     "points": [
+      "Thyroglossal duct cyst along midline",
+      "Lingual thyroid from failure of descent",
+      "Secondary thyroglossal fistula after rupture",
+      "Intracystic papillary thyroid carcinoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "If an epithelial segment of the thyroglossal duct fails to obliterate, retained secretions expand the tract into a **thyroglossal cyst**. Characteristically presenting as a painless, smooth, cystic swelling located strictly in the midline of the anterior neck, sixty-five percent of thyroglossal cysts lie immediately inferior to the hyoid bone in the subhyoid position.",
+   "say": "When a segment of the duct fails to obliterate, accumulated secretions produce a thyroglossal cyst. Presenting as a smooth, painless midline neck mass, two-thirds of these cysts develop in the subhyoid position just below the hyoid bone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Site",
+     "Incidence Proportion",
+     "Relation to Hyoid Bone",
+     "Clinical Characteristic"
+    ],
+    "rows": [
+     [
+      "Subhyoid",
+      "65 percent of cases",
+      "Immediately beneath hyoid body",
+      "Most frequent presentation"
+     ],
+     [
+      "Suprahyoid",
+      "20 percent of cases",
+      "Between hyoid and tongue base",
+      "Mistaken for submental lymph node"
+     ],
+     [
+      "Thyroid Cartilage Level",
+      "15 percent of cases",
+      "Anterior to thyroid cartilage",
+      "May deviate slightly from midline"
+     ],
+     [
+      "Lingual Base",
+      "Under 2 percent of cases",
+      "Substance of tongue at foramen cecum",
+      "Presents with dysphagia or airway compromise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the persistent thyroglossal duct tract remains embryologically anchored to the foramen cecum and intimately wrapped around the hyoid bone, a thyroglossal cyst displays a pathognomonic physical sign: it **moves upward on tongue protrusion** as well as on swallowing. Movement with tongue protrusion reliably distinguishes it from thyroid nodules and lymphadenopathy.",
+   "say": "Because the tract is attached to the foramen cecum and wraps around the hyoid bone, a thyroglossal cyst moves upward when the patient protrudes the tongue as well as during swallowing. This elevation with tongue protrusion distinguishes it from other neck masses.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dynamic Kinematic Examination",
+    "nodes": [
+     {
+      "id": "tongue",
+      "label": "Patient Extends Tongue"
+     },
+     {
+      "id": "genio",
+      "label": "Genioglossus Muscle Contracts"
+     },
+     {
+      "id": "duct",
+      "label": "Tethered Thyroglossal Tract Pulled Cranially"
+     },
+     {
+      "id": "cyst",
+      "label": "Cyst Moves Noticeably Upward"
+     }
+    ],
+    "edges": [
+     [
+      "tongue",
+      "genio"
+     ],
+     [
+      "genio",
+      "duct"
+     ],
+     [
+      "duct",
+      "cyst"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A thyroglossal cyst is never congenital in opening onto the skin; a **thyroglossal fistula** is always an acquired condition resulting from spontaneous rupture of an infected cyst through the skin or incomplete surgical incision and drainage. The fistulous external orifice lies in the midline, tethered to the hyoid bone, discharging intermittent mucus.",
+   "say": "A thyroglossal fistula is never congenital; it develops as an acquired tract following spontaneous rupture of an infected cyst or incomplete drainage. The fistulous opening sits in the midline and discharges mucus.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-subtotal-and-total-thyroidectomy.webp",
+    "alt": "Surgical anatomy of the thyroid gland, hyoid bone, and strap muscles",
+    "caption": "Anterior neck anatomy and surgical approach to thyroglossal resection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Definitive surgical cure demands the classic **Sistrunk operation**, founded upon embryonic anatomy. Simple enucleation of the cyst carries a recurrence rate exceeding fifty percent because microscopic epithelial tract arborizations encircle the hyoid bone. The Sistrunk procedure resects the cyst, the entire central body of the hyoid bone, and a core of tongue muscle up to the foramen cecum.",
+   "say": "Definitive surgical cure requires the Sistrunk operation. Simple excision fails with high recurrence because microscopic tract branches encircle the hyoid bone. The Sistrunk technique resects the cyst, the central body of the hyoid, and a cylinder of tongue base up to the foramen cecum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple Cyst Enucleation",
+     "points": [
+      "Leaves hyoid bone untouched",
+      "Ignores microscopic duct tract branches",
+      "High recurrence rate (over 50%)",
+      "Increases risk of chronic fistulisation"
+     ]
+    },
+    "right": {
+     "title": "Sistrunk Procedure",
+     "points": [
+      "Resects central body of hyoid bone",
+      "Excises core of base of tongue tissue",
+      "Traces tract up to foramen cecum",
+      "Reduces recurrence rate to under 3%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failure of the embryonic thyroid to descend from the foramen cecum results in a **lingual thyroid**, wherein ectopic thyroid tissue resides entirely inside the posterior base of the tongue. In seventy percent of patients with lingual thyroid, this represents the patient only functioning thyroid tissue, meaning biopsy or excision causes irreversible hypothyroidism.",
+   "say": "Complete failure of thyroid descent produces a lingual thyroid, where ectopic thyroid tissue rests within the posterior tongue. In seventy percent of these individuals, this mass represents their sole functional thyroid tissue, so excision causes permanent hypothyroidism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thyroid Migration Disorder",
+     "Underlying Pathophysiology",
+     "Clinical Presentation",
+     "Critical Precaution"
+    ],
+    "rows": [
+     [
+      "Thyroglossal Cyst",
+      "Persistent patent segment of duct",
+      "Painless midline mass moving on protrusion",
+      "Must confirm normal eutopic thyroid by ultrasound"
+     ],
+     [
+      "Lingual Thyroid",
+      "Complete arrest of descent at foramen cecum",
+      "Dysphagia, airway stridor, dysarthria",
+      "Sole functioning thyroid tissue in 70 percent"
+     ],
+     [
+      "Thyroglossal Fistula",
+      "Acquired rupture of infected cyst",
+      "Weeping midline cutaneous sinus",
+      "Requires Sistrunk procedure including hyoid core"
+     ],
+     [
+      "Thyroglossal Carcinoma",
+      "Malignancy arising in duct epithelium",
+      "Rapidly enlarging hard midline mass",
+      "Usually papillary thyroid carcinoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

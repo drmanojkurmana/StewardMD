@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sur-plastic",
+ "subject": "surgery",
+ "title": "Split-Thickness and Full-Thickness Skin Grafts: Biology and Graft Take",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A skin graft represents a segment of epidermis and dermis completely detached from its native blood supply and transferred to an adequately vascularized recipient wound bed. In reconstructive plastic surgery, a **split-thickness skin graft** includes the entire epidermis and a variable portion of the underlying dermis. Categorized into thin, intermediate, and thick varieties, split-thickness grafts are harvested from donor sites such as the anterolateral thigh or buttocks using an electric, air-powered, or manual Humby dermatome.",
+   "say": "A split-thickness skin graft consists of the epidermis and a variable thickness of dermis completely separated from its native vascular bed. Commonly taken from the thighs, it is harvested using a specialized dermatome.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-split-thickness-skin-grafting.webp",
+    "alt": "Surgical field view showing an expanded meshed split-thickness skin graft over a granulating wound.",
+    "caption": "Application of a meshed split-thickness skin autograft to a clean granulating recipient wound bed. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The split-thickness donor site heals spontaneously over ten to fourteen days through rapid **re-epithelialization** arising from deep epidermal appendages retained within the remaining reticular dermis. Residual hair follicles, sebaceous glands, and sweat gland duct remnants provide the cellular reservoir for re-epithelialization. Because split-thickness grafts contain only partial dermis, they survive readily on marginal recipient beds and allow for mechanical meshing. However, they exhibit significant secondary contracture, reduced wear durability, and imperfect color match compared to thicker reconstructive alternatives.",
+   "say": "The donor site of a split-thickness graft heals spontaneously from preserved hair follicles and sweat glands. While these grafts take reliably, they undergo substantial secondary contraction as they mature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Graft Characteristic",
+     "Thin Split-Thickness (0.15-0.3 mm)",
+     "Thick Split-Thickness (0.45-0.6 mm)"
+    ],
+    "rows": [
+     [
+      "Dermal Thickness",
+      "Includes only upper papillary dermis",
+      "Includes substantial reticular dermis"
+     ],
+     [
+      "Primary Contracture",
+      "Very low immediate recoil on harvesting",
+      "Moderate immediate elastic recoil"
+     ],
+     [
+      "Secondary Contracture",
+      "High long-term cicatricial contraction",
+      "Low long-term cicatricial contraction"
+     ],
+     [
+      "Donor Site Healing",
+      "Rapid re-epithelialisation in 7 to 10 days",
+      "Slower re-epithelialisation in 14 to 21 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In clinical scenarios demanding superior aesthetic color match, minimal contracture, and durable resilience, surgeons select a **full-thickness skin graft**, historically known as a Wolfe graft. Comprising the epidermis and the entire anatomical dermis, this graft is excised sharply using a scalpel. Following harvesting, all remaining subcutaneous adipose tissue must be meticulously defatted using sharp curved scissors because retained fat functions as an impassable barrier to nutrient diffusion. Donor sites cannot regenerate and require primary surgical closure.",
+   "say": "A full-thickness skin graft contains the entire dermis and epidermis. It must be meticulously defatted before transfer and is ideal for visible areas like the face, while its donor defect is closed primarily.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-full-thickness-skin-grafting.webp",
+    "alt": "Surgical photograph of a full-thickness Wolfe skin graft being defatted with curved scissors.",
+    "caption": "Meticulous defatting of a harvested full-thickness Wolfe skin graft before recipient placement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Choosing between split-thickness and full-thickness grafts depends on the anatomical location, defect dimensions, and functional requirements. Full-thickness grafts undergo substantial immediate primary contraction upon harvesting due to abundant intact dermal elastin fibers, but display minimal **secondary contracture** once healed. This makes them ideal for the eyelid, nasal tip, oral commissure, and palmar digits. Conversely, split-thickness grafts demonstrate minimal immediate primary recoil but contract markedly as wound myofibroblasts act during long-term healing.",
+   "say": "Full-thickness grafts display high immediate elastic recoil but almost no secondary contraction once healed. Split-thickness grafts behave oppositely, contracting considerably over months of wound healing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Split-Thickness Skin Graft",
+     "points": [
+      "Partial dermal thickness",
+      "Donor site heals spontaneously",
+      "High secondary contraction",
+      "Can be expanded by meshing"
+     ]
+    },
+    "right": {
+     "title": "Full-Thickness Skin Graft",
+     "points": [
+      "Complete dermal thickness",
+      "Donor site requires surgical suture",
+      "Minimal secondary contraction",
+      "Requires defatting and pristine bed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Successful graft integration, termed **graft take**, is a complex three-phase biological process through which an avascular cutaneous tissue segment becomes fully vascularized. Because the graft arrives devoid of functional vascular flow, it depends entirely on the surrounding recipient wound bed for oxygenation and cellular sustenance. A suitable recipient bed must possess healthy, vascularized granulation tissue or well-perfused subcutaneous muscle; avascular cortical bone devoid of periosteum or bare tendon lacking paratenon cannot support skin graft survival.",
+   "say": "Graft take describes the sequential biological process by which a transplanted skin segment establishes new vascular connections. The recipient bed must possess robust capillary perfusion for the graft to survive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "phase1",
+      "label": "Serum Imbibition (Hours 0-48)"
+     },
+     {
+      "id": "phase2",
+      "label": "Inosculation (Hours 48-72)"
+     },
+     {
+      "id": "phase3",
+      "label": "Revascularization (Day 4 Onward)"
+     },
+     {
+      "id": "mature",
+      "label": "Lymphatic and Neural Integration"
+     }
+    ],
+    "edges": [
+     [
+      "phase1",
+      "phase2"
+     ],
+     [
+      "phase2",
+      "phase3"
+     ],
+     [
+      "phase3",
+      "mature"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the initial twenty-four to forty-eight hours post-transplantation, the graft survives exclusively through passive **serum imbibition**, often termed the plasmatic circulation phase. Capillary action draws nutrient-rich serous transudate and plasma from the underlying recipient bed into the graft capillary network. The graft absorbs fluid, gaining up to forty percent in weight, and appears distinctly oedematous, pale, and slightly cyanotic. Fibrinogen in the exudate polymerizes into a fibrin glue network that temporarily anchors the graft to the underlying recipient bed.",
+   "say": "During the first forty-eight hours, the graft survives through serum imbibition, passively absorbing nutrient-rich plasma fluid. It gains weight and is temporarily anchored by a thin fibrin matrix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase of Graft Take",
+     "Timeline",
+     "Key Biological Events",
+     "Graft Appearance"
+    ],
+    "rows": [
+     [
+      "Serum Imbibition",
+      "0 to 48 hours",
+      "Passive diffusion of plasma fluid; fibrin anchoring",
+      "Oedematous, pale, slightly cyanotic"
+     ],
+     [
+      "Inosculation",
+      "48 to 72 hours",
+      "End-to-end alignment of graft and host capillaries",
+      "Pink punctate areas appearing on blanching"
+     ],
+     [
+      "Revascularisation",
+      "Day 4 to Day 7",
+      "True capillary ingrowth and new endothelial budding",
+      "Uniformly pink, brisk capillary refill"
+     ],
+     [
+      "Maturation",
+      "Week 2 onward",
+      "Lymphatic drainage restored; collagen remodelling",
+      "Pliable, adherent, gradual neurotisation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Between forty-eight and seventy-two hours, the second phase of revascularization, known as **inosculation**, takes place. Pre-existing endothelial capillary buds sprouting from the granulating recipient bed align directly with the open, pre-formed vascular channels within the graft dermis. Primitive microvascular kissing anastomoses form, establishing true circulatory flow across the junctional interface. Clinically, the graft transitions from a pale, congested appearance to a vibrant pink color, displaying discernible blanching and capillary refill upon gentle manual compression.",
+   "say": "Inosculation occurs between forty-eight and seventy-two hours as budding recipient capillaries connect directly to graft vessels. This establishes true microvascular blood flow and turns the graft pink.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "align",
+      "label": "Capillary Sprout Alignment"
+     },
+     {
+      "id": "connect",
+      "label": "Microvascular Anastomotic Bridging"
+     },
+     {
+      "id": "flow",
+      "label": "Direct Intravascular Perfusion Restored"
+     },
+     {
+      "id": "pink",
+      "label": "Graft Blanches with Capillary Refill"
+     }
+    ],
+    "edges": [
+     [
+      "align",
+      "connect"
+     ],
+     [
+      "connect",
+      "flow"
+     ],
+     [
+      "flow",
+      "pink"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Meticulous surgical technique is paramount because clinical graft failure stems predominantly from preventable local mechanical complications. The single most common cause of graft failure is a subgraft **haematoma**, which physically separates the graft dermis from the underlying recipient capillary sprouts, completely arresting serum imbibition. Additional culprits include fluid seromas, shearing motion that tears fragile capillary inosculation links, and wound infection exceeding one hundred thousand bacteria per gram of tissue, particularly when beta-haemolytic streptococci secrete fibrinolytic enzymes.",
+   "say": "Haematoma formation is the leading cause of skin graft failure because it mechanically blocks nutrient diffusion. Shearing forces and bacterial infection also rapidly destroy delicate vascular connections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Failure Mechanism",
+     "Pathophysiological Impact",
+     "Preventive Surgical Action"
+    ],
+    "rows": [
+     [
+      "Haematoma Formation",
+      "Physical barrier preventing plasma imbibition",
+      "Meticulous recipient bed haemostasis; pie-crusting incisions"
+     ],
+     [
+      "Shearing Motion",
+      "Disrupts delicate inosculation capillary bridges",
+      "Tie-over bolster dressings; rigid splint immobilization"
+     ],
+     [
+      "Seroma Accumulation",
+      "Lifts graft off granulating wound surface",
+      "Mechanical meshing or drainage slits in graft"
+     ],
+     [
+      "Streptococcal Infection",
+      "Bacterial streptokinase lyses the anchoring fibrin seal",
+      "Preoperative wound debridement; targeted antimicrobials"
+     ]
+    ]
+   }
+  }
+ ]
+}

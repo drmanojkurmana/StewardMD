@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "sur-plastic",
+ "subject": "surgery",
+ "title": "Flap Classification, Local Transposition, and Free Tissue Transfer",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In reconstructive plastic surgery, distinguishing between a graft and a flap is fundamental to wound reconstruction. While a skin graft relies completely upon recipient bed capillary **inosculation** for its survival, a flap carries its own intact or surgically restored blood supply. Flaps represent the reconstructive modality of choice when covering avascular wound beds such as bare cortical bone devoid of periosteum, exposed tendons lacking paratenon, joint cavities, or synthetic prosthetic hardware where free skin grafts invariably fail.",
+   "say": "Unlike a skin graft that requires nutrient uptake and capillary inosculation from the recipient bed, a flap carries its own dedicated blood supply. Flaps can successfully cover bare bone, exposed tendons, and irradiated defects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Skin Graft",
+     "points": [
+      "Lacks intrinsic vascular blood supply",
+      "Requires vascularised granulating recipient bed",
+      "Survives via imbibition and inosculation",
+      "Cannot cover bare bone or tendon"
+     ]
+    },
+    "right": {
+     "title": "Surgical Flap",
+     "points": [
+      "Maintains intact intrinsic vascular pedicle",
+      "Provides own blood flow and lymphatic drainage",
+      "Brings independent tissue vascularity",
+      "Successfully covers avascular structures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Flaps are classified according to their intrinsic vascular architecture into random pattern and axial pattern varieties. A **random pattern flap** lacks a named anatomically identifiable vascular axis, relying instead on microvascular perfusion delivered through the subdermal and dermal capillary plexuses. Consequently, random flaps possess strict geometrical constraints and generally require a length-to-width ratio not exceeding two to one on the trunk and extremities, though highly vascular facial tissues safely permit a three to one ratio.",
+   "say": "Random pattern flaps rely on the unoriented subdermal plexus rather than a single named artery. They are restricted to strict length-to-width ratios to prevent distal ischaemic necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Pattern",
+     "Perfusion Source",
+     "Length-to-Width Ratio Limit",
+     "Clinical Application"
+    ],
+    "rows": [
+     [
+      "Random Pattern Flap",
+      "Dermal and subdermal microvascular plexus",
+      "1.5:1 to 2:1 (up to 3:1 on vascular face)",
+      "Small local facial defects; simple wound closures"
+     ],
+     [
+      "Axial Pattern Flap",
+      "Named direct cutaneous anatomical artery",
+      "No strict ratio; length determined by angiosome",
+      "Groin flap; deltopectoral flap; forehead flap"
+     ],
+     [
+      "Perforator Flap",
+      "Isolated musculocutaneous or septocutaneous vessel",
+      "Extensive paddle based on single perforator",
+      "Anterolateral thigh flap; DIEP flap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reconstruction of small to moderate adjacent cutaneous defects relies predominantly on versatile **local flaps**, which are harvested immediately contiguous with the surgical wound. Local flaps are categorized into advancement, pivotal, and interpolation designs. Advancement flaps glide directly forward into the defect along a straight linear vector without rotational distortion, exemplified by simple single-pedicle advancement or V-Y advancement flaps. In a V-Y closure, a triangular island flap is advanced forward into the defect, and the donor gap is closed in a straight line.",
+   "say": "Local flaps are recruited immediately adjacent to a wound defect. Advancement flaps move straight forward into the wound, whereas pivotal flaps rotate around an anatomical anchor point.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "identify",
+      "label": "Adjacent Soft Tissue Defect Identified"
+     },
+     {
+      "id": "assess",
+      "label": "Evaluate Tissue Laxity and Langer Lines"
+     },
+     {
+      "id": "design",
+      "label": "Design Advancement or Pivotal Flap"
+     },
+     {
+      "id": "transpose",
+      "label": "Mobilise Flap and Close Primary and Secondary Defects"
+     }
+    ],
+    "edges": [
+     [
+      "identify",
+      "assess"
+     ],
+     [
+      "assess",
+      "design"
+     ],
+     [
+      "design",
+      "transpose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pivotal flaps rotate around a fixed pivot point and encompass rotation flaps and transposition flaps. A classic **transposition flap**, such as the Limberg rhomboid flap or Webster bilobed flap, is lifted over an intervening bridge of intact normal skin and transposed into an adjacent defect. Geometric planning must account for the inevitable functional shortening of the flap radius as it rotates through its arc. The resulting secondary donor site is either sutured primarily or covered with a split-thickness skin graft.",
+   "say": "Transposition flaps like the Limberg rhomboid flap move laterally across intact skin to fill a neighbouring defect. Surgeons must account for radial shortening as the flap rotates through its arc.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anal-stenosis-fig1.webp",
+    "alt": "Surgical diagram showing local advancement and transposition flap design.",
+    "caption": "Surgical mobilization of a local vascularized flap to reconstruct a soft tissue defect. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When reconstructing larger composite tissue defects, surgeons utilize robust regional **pedicled flaps** transferred from an anatomical site separated from the wound. These axial flaps remain connected to their donor origin by a vascular leash containing a recognized artery and vein. Prominent examples include the deltopectoral flap based on the internal mammary perforators, the pectoralis major myocutaneous flap supplied by the pectoral branch of the thoracoacromial axis, and the latissimus dorsi flap nourished by the thoracodorsal neurovascular bundle.",
+   "say": "Pedicled flaps are harvested from distant regions while remaining tethered to their primary vascular pedicle. The pectoralis major and latissimus dorsi flaps provide excellent bulk and reliable perfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pedicled Flap",
+     "Dominant Arterial Supply",
+     "Tissue Components",
+     "Classic Clinical Application"
+    ],
+    "rows": [
+     [
+      "Pectoralis Major",
+      "Thoracoacromial artery (pectoral branch)",
+      "Pectoralis muscle and overlying skin",
+      "Head and neck mucosal and cutaneous reconstruction"
+     ],
+     [
+      "Latissimus Dorsi",
+      "Thoracodorsal artery and vein",
+      "Latissimus muscle with or without skin paddle",
+      "Autologous breast reconstruction; thoracic wall defects"
+     ],
+     [
+      "Deltopectoral Flap",
+      "Internal mammary perforating branches (1st-4th)",
+      "Cutaneous fasciocutaneous chest paddle",
+      "Pharyngeal reconstruction; lower facial soft tissue loss"
+     ],
+     [
+      "Forehead Flap",
+      "Supratrochlear and supraorbital vessels",
+      "Axial forehead skin and frontalis muscle",
+      "Nasal reconstruction; nasal tip and ala replacement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complex composite reconstruction of extensive oncological or traumatic defects has been revolutionized by microvascular **free flap** transfer. In this advanced procedure, a block of skin, muscle, bone, or intestine is completely detached from its donor site along with its dominant feeding artery and draining vein. The isolated tissue paddle is transferred to the recipient defect, where its pedicle vessels undergo microscopic end-to-end or end-to-side anastomoses to local recipient arteries and veins under operating microscope visualization.",
+   "say": "A free flap is completely detached from its donor site and reconnected to recipient vessels using microvascular anastomoses. This technique allows single-stage reconstruction of extensive complex defects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pedicled Flap",
+     "points": [
+      "Remains attached to native vascular origin",
+      "Limited reach dictated by pedicle length",
+      "No microvascular anastomosis required",
+      "Technically simpler and faster"
+     ]
+    },
+    "right": {
+     "title": "Microvascular Free Flap",
+     "points": [
+      "Completely divided from native blood supply",
+      "Unlimited anatomical transfer reach",
+      "Requires operative microvascular surgery",
+      "Enables precise composite tissue tailoring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Selecting an optimal free flap depends on the precise structural tissue requirements of the recipient defect. When reconstructing full-thickness segmental mandibular defects following radical oral cancer resection, the osteocutaneous **fibula free flap** based on the peroneal vessels represents the undisputed gold standard, providing up to twenty-five centimetres of dense cortical bone suitable for osseointegrated dental implants. For thin, pliable soft tissue resurfacing of the tongue or floor of mouth, surgeons choose the radial forearm fasciocutaneous free flap.",
+   "say": "Free flap choice matches the missing tissue. The free fibula flap provides structural vascularized bone for mandibular reconstruction, while the radial forearm flap supplies pliable skin for oral lining.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Free Flap Donor",
+     "Arterial Supply",
+     "Primary Composition",
+     "Reconstructive Indication"
+    ],
+    "rows": [
+     [
+      "Free Fibula Flap",
+      "Peroneal artery and venae comitantes",
+      "Vascularised cortical bone and skin paddle",
+      "Segmental mandibular or long bone reconstruction"
+     ],
+     [
+      "Radial Forearm Flap",
+      "Radial artery and cephalic vein",
+      "Thin, pliable, hairless skin and fascia",
+      "Tongue, floor of mouth, and pharyngeal defects"
+     ],
+     [
+      "Anterolateral Thigh",
+      "Descending branch of lateral circumflex femoral",
+      "Fasciocutaneous or musculocutaneous paddle",
+      "Extensive extremity and soft tissue defect coverage"
+     ],
+     [
+      "DIEP Flap",
+      "Deep inferior epigastric perforator vessels",
+      "Lower abdominal skin and adipose tissue",
+      "Autologous post-mastectomy breast reconstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The postoperative survival of a microvascular free flap hinges upon vigilant clinical and instrumented perfusion monitoring during the critical initial forty-eight to seventy-two hours. Thrombosis of the venous anastomosis is significantly more common and insidious than arterial occlusive failure. A failing flap with acute **venous thrombosis** becomes rapidly cyanotic, tensely swollen, and cool, exhibiting brisk dark bleeding upon pinprick testing. Immediate operative re-exploration, anastomotic revision, and mechanical thrombectomy within hours can successfully salvage the compromised flap.",
+   "say": "Free flap monitoring is critical because early venous thrombosis can destroy the reconstruction. A cyanotic, tense flap bleeding dark blood on pinprick mandates immediate emergency surgical re-exploration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arterial Occlusion",
+     "points": [
+      "Flap becomes pale, marble-white, and cold",
+      "Capillary refill completely absent",
+      "Loss of Doppler arterial acoustic signals",
+      "No bleeding upon diagnostic skin needle pinprick"
+     ]
+    },
+    "right": {
+     "title": "Venous Thrombosis",
+     "points": [
+      "Flap becomes congested, cyanotic, and tense",
+      "Capillary refill becomes sluggish or falsely brisk",
+      "Loss of venous hum on Doppler interrogation",
+      "Rapid dark purplish bleeding on skin needle pinprick"
+     ]
+    }
+   }
+  }
+ ]
+}

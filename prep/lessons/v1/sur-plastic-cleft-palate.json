@@ -1,0 +1,266 @@
+{
+ "v": 1,
+ "module": "sur-plastic",
+ "subject": "surgery",
+ "title": "Cleft Palate and Acute Hand Infections: Paronychia and Felon",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Embryological development of the secondary palate involves the elevation, horizontal migration, and midline fusion of the paired lateral palatine processes of the maxillary prominences between the seventh and twelfth weeks of gestation. Failure of these palatal shelves to unite with each other and the nasal septum produces a **cleft palate**. The defect may range from a submucous cleft or isolated bifid uvula to complete clefting of both the soft and hard palate extending forward to the incisive foramen.",
+   "say": "Cleft palate arises from failed fusion of the secondary palatal shelves during early embryonic life. Defects range from an isolated bifid uvula to complete clefting extending through the hard palate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ectrodactyly-ectodermal-dysplasia-clefting-fig1.webp",
+    "alt": "Medical diagram illustrating craniofacial clefting and structural palate deformities.",
+    "caption": "Anatomical disruption of the hard and soft palate in congenital orofacial cleft syndromes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unrepaired palatal clefts inflict substantial functional morbidity, impairing infantile feeding because the infant cannot create an airtight intraoral seal to generate negative suction. Disruption of the tensor veli palatini and levator veli palatini muscle sling leads to persistent Eustachian tube dysfunction, predisposing virtually all affected children to chronic recurrent serous otitis media and conductive hearing loss. As speech develops, failure of the soft palate to close against the posterior pharyngeal wall causes severe **velopharyngeal insufficiency**, producing hypernasal resonance and compensatory articulation errors.",
+   "say": "Children with unrepaired palatal clefts cannot generate intraoral suction for feeding and develop chronic otitis media from Eustachian tube dysfunction. Velopharyngeal insufficiency causes severe hypernasal speech.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Functional Domain",
+     "Underlying Pathophysiology",
+     "Clinical Consequence and Management"
+    ],
+    "rows": [
+     [
+      "Infant Feeding",
+      "Inability to generate intraoral negative suction",
+      "Requires specialized squeeze bottles (Haberman feeder)"
+     ],
+     [
+      "Middle Ear Function",
+      "Tensor veli palatini failure to open Eustachian tube",
+      "Recurrent serous otitis media; mandates tympanostomy grommets"
+     ],
+     [
+      "Speech Development",
+      "Velopharyngeal sphincter incompetence",
+      "Hypernasal speech and compensatory pharyngeal fricatives"
+     ],
+     [
+      "Maxillofacial Growth",
+      "Scarring from early palatoplasty",
+      "Midface hypoplasia and Class III malocclusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Determining the timing of palatoplasty balances speech development needs against potential midfacial skeletal growth restriction. Surgical closure of the palate is performed between nine and eighteen months of age, ideally before the child begins developing intelligible speech patterns, while minimizing surgical scarring that could restrict subsequent maxillary anteroposterior growth. Standard surgical techniques like the **two-flap palatoplasty** of Bardach or the pushback palatoplasty incorporate meticulous intravelar veloplasty, surgically detaching the abnormally oriented levator veli palatini muscles from the posterior hard palate to reconstruct a functional retroclinal muscular sling.",
+   "say": "Palatoplasty is ideally performed between nine and eighteen months to facilitate normal speech while minimizing maxillary growth restriction. Intravelar veloplasty reconstructs the essential levator muscle sling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "age",
+      "label": "Infant Reaches 9-18 Months"
+     },
+     {
+      "id": "incise",
+      "label": "Bilateral Mucoperiosteal Flap Elevation"
+     },
+     {
+      "id": "reposition",
+      "label": "Intravelar Veloplasty to Realign Levator Muscles"
+     },
+     {
+      "id": "close",
+      "label": "Tension-Free Midline Three-Layer Palatal Closure"
+     }
+    ],
+    "edges": [
+     [
+      "age",
+      "incise"
+     ],
+     [
+      "incise",
+      "reposition"
+     ],
+     [
+      "reposition",
+      "close"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transitioning to acute surgical emergencies of the upper extremity, closed fascial compartments of the hand make infections particularly destructive. The most frequently encountered superficial infection is acute **paronychia**, which affects the soft tissue fold surrounding the nail plate. Typically initiated by minor trauma such as nail-biting, aggressive manicures, or hangnail pulling, Staphylococcus aureus invades the lateral nail fold. Infection produces intense throbbing pain, localized erythema, and marked oedema bordering the lateral margin of the nail.",
+   "say": "Acute paronychia is a common infection of the lateral nail fold, typically caused by staphylococcal invasion following minor cuticle trauma. Patients present with throbbing pain, redness, and localized swelling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "early",
+      "label": "Early Cellulitis Without Pus"
+     },
+     {
+      "id": "medical",
+      "label": "Warm Soaks and Oral Antibiotics"
+     },
+     {
+      "id": "assess",
+      "label": "Abscess or Fluctuance Formed?"
+     },
+     {
+      "id": "drain",
+      "label": "Elevate Eponychial Fold or Partial Nail Plate Excision"
+     }
+    ],
+    "edges": [
+     [
+      "early",
+      "medical"
+     ],
+     [
+      "medical",
+      "assess"
+     ],
+     [
+      "assess",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of acute paronychia depends strictly on the clinical stage of presentation. In the early cellulitic phase without demonstrable fluctuance, conservative measures comprising warm water soaks, hand elevation, and targeted oral antistaphylococcal antibiotics achieve resolution. Once a localized abscess forms beneath the eponychium, surgical drainage is mandatory. Drainage entails gently inserting the tip of an eleven-blade scalpel or iris scissors beneath the lateral nail fold to release the trapped pus without incising the germinal nail matrix, followed by partial **nail avulsion** if purulence tracks subungually.",
+   "say": "Early paronychia responds to warm soaks and antibiotics, but formed collections require drainage. Lifting the eponychial fold releases the pus, and underlying subungual extension mandates partial nail removal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Cellulitic Paronychia",
+     "points": [
+      "Localized erythema and tenderness",
+      "Absence of fluctuant collection",
+      "Treated with warm antiseptic soaks",
+      "Responds to oral anti-staphylococcal therapy"
+     ]
+    },
+    "right": {
+     "title": "Fluctuant Abscess / Runaround",
+     "points": [
+      "Visible collection of frank pus",
+      "Pus tracking beneath the nail bed",
+      "Requires surgical eponychial elevation",
+      "Mandates partial or complete nail plate avulsion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infection involving the closed anatomical terminal pulp space of the distal digit is termed a **felon** or whitlow. The distal digital pulp is compartmentalized into numerous small, non-compliant fibrofatty chambers by tough vertical fibrous septa that anchor the deep dermis to the underlying periosteum of the distal phalanx. Typically inoculated by minor puncture wounds from splinters or needles, bacterial proliferation within these enclosed fibrous chambers triggers a rapid increase in compartment pressure, compromising microvascular capillary perfusion.",
+   "say": "A felon is a closed pulp space infection of the terminal digit. Rigid vertical fibrous septa connect the skin to bone, creating high-pressure compartments where swelling can induce ischaemic tissue necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Acute Paronychia",
+     "Digital Pulp Felon"
+    ],
+    "rows": [
+     [
+      "Anatomical Location",
+      "Lateral nail fold and eponychial margin",
+      "Volar closed fibrofatty pulp space of distal phalanx"
+     ],
+     [
+      "Primary Risk Factor",
+      "Nail biting, manicuring, hangnail picking",
+      "Minor puncture wound (wooden splinter, sewing needle)"
+     ],
+     [
+      "Key Complication",
+      "Subungual abscess and chronic nail dystrophy",
+      "Digital artery thrombosis and distal phalanx osteomyelitis"
+     ],
+     [
+      "Incision Approach",
+      "Sulcus elevation or partial nail plate removal",
+      "Mid-lateral or direct longitudinal incision over fluctuance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unrelieved compartment pressure within the terminal digital pulp rapidly causes digital capillary occlusion and ischaemic necrosis of the pulp tissues. Furthermore, because several fibrous septa insert directly onto the periosteum, untreated infections frequently spread directly to the underlying bone, resulting in destructive **osteomyelitis** of the distal phalanx. Patients present with severe, agonizingly throbbing pain, tense swelling, and exquisite tenderness localized to the volar digital pad, unable to sleep due to pulsating discomfort.",
+   "say": "High compartment pressure in a felon can thrombose digital capillaries and cause distal phalanx osteomyelitis. Patients experience agonizing throbbing pain and tense swelling of the fingertip pad.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inoculate",
+      "label": "Puncture Inoculation into Pulp"
+     },
+     {
+      "id": "pressure",
+      "label": "Septal Compartment Pressure Spikes"
+     },
+     {
+      "id": "ischaemia",
+      "label": "Microvascular Occlusion and Necrosis"
+     },
+     {
+      "id": "drain",
+      "label": "Emergency Incision and Drainage to Prevent Osteomyelitis"
+     }
+    ],
+    "edges": [
+     [
+      "inoculate",
+      "pressure"
+     ],
+     [
+      "pressure",
+      "ischaemia"
+     ],
+     [
+      "ischaemia",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency surgical drainage is required whenever tense induration or fluctuance develops in a felon. The optimal surgical technique utilizes a direct longitudinal volar incision placed strictly over the point of maximal fluctuance, or a **mid-axial incision** along the non-working lateral border of the digit, positioned dorsal to the neurovascular bundle. The surgeon divides the tense vertical fibrous septa to ensure uninhibited drainage while avoiding deep exploration that might contaminate the sterile flexor tendon sheath or injure the digital nerve.",
+   "say": "Surgical drainage requires dividing the vertical fibrous septa over the point of fluctuance or via a mid-lateral approach. Careful dissection avoids damaging the digital nerve or entering the flexor tendon sheath.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Incision Technique",
+     "Surgical Approach",
+     "Key Advantages and Precautions"
+    ],
+    "rows": [
+     [
+      "Longitudinal Volar Incision",
+      "Directly over maximal fluctuance on tactile pad",
+      "Avoids crossing distal flexion crease; highly effective"
+     ],
+     [
+      "Mid-Axial Lateral Incision",
+      "Non-touch lateral border dorsal to digital bundle",
+      "Spares volar tactile sensation; technically meticulous"
+     ],
+     [
+      "Fishmouth Incision",
+      "Transverse incision around entire fingertip margin",
+      "Historical technique now condemned due to unstable scar"
+     ],
+     [
+      "Through-and-Through",
+      "Bilateral incisions with drain passed through",
+      "Condemned due to excessive scarring and anaesthetic fingertip"
+     ]
+    ]
+   }
+  }
+ ]
+}

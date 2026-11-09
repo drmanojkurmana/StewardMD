@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "phy-cardiac-electro",
+ "subject": "physiology",
+ "title": "Cardiac Pacemaker Potentials, SA Node, and Conduction System",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rhythmic autorhythmic excitation of the heart originates in specialized nodal tissue rather than contractile myocytes. The primary physiological pacemaker is the **sinoatrial node** (SA node), located subepicardially at the junction of the superior vena cava and right atrium. SA nodal cells generate spontaneous rhythmic action potentials at a baseline intrinsic rate of sixty to one hundred discharges per minute.",
+   "say": "Autorhythmic pacing originates in the sinoatrial node near the superior vena cava, discharging spontaneous action potentials sixty to one hundred times per minute.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Cardiac pacemaker action potential and specialized conduction system.",
+    "caption": "Pacemaker action potential waveform and autorhythmic cardiac conduction system. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unlike ventricular myocytes, pacemaker cells lack a stable resting membrane potential. Following repolarisation to a maximum diastolic potential of negative sixty millivolts, the membrane undergoes continuous, spontaneous slow diastolic depolarisation known as the **pacemaker potential**. This prepotential steadily drifts upward until reaching threshold at negative forty millivolts, initiating an action potential.",
+   "say": "Pacemaker cells lack a stable resting potential. After repolarisation, the membrane steadily drifts upward during slow diastolic depolarisation to reach threshold.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mdp",
+      "label": "Maximum Diastolic Potential Reached at -60 mV"
+     },
+     {
+      "id": "if",
+      "label": "Funny Channels Open Conducting Inward Sodium Current (If)"
+     },
+     {
+      "id": "tca",
+      "label": "Transient T-Type Calcium Channels (Cav3.1) Open at -50 mV"
+     },
+     {
+      "id": "lca",
+      "label": "Threshold Reached at -40 mV: Long-Lasting L-Type Calcium Channels (Cav1.2) Fire Upstroke"
+     }
+    ],
+    "edges": [
+     [
+      "mdp",
+      "if"
+     ],
+     [
+      "if",
+      "tca"
+     ],
+     [
+      "tca",
+      "lca"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The initial inward current driving slow diastolic depolarisation is the **funny current** (If), conducted through hyperpolarisation-activated cyclic nucleotide-gated channels (HCN4). These channels activate upon membrane hyperpolarisation below negative fifty millivolts, conducting a slow inward sodium current. Ivabradine selectively blocks HCN channels, slowing the slope of diastolic depolarisation to reduce heart rate without depressing myocyte contractility.",
+   "say": "The funny current conducted by HCN channels activates upon hyperpolarisation to carry inward sodium. Ivabradine blocks HCN channels, reducing heart rate safely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Funny Current (If)",
+     "points": [
+      "Activated by hyperpolarisation below -50 mV",
+      "Mixed cation channel predominantly conducting sodium inward",
+      "HCN4 isoform dominant in sinoatrial nodal cells",
+      "Slope accelerated by cyclic AMP (beta-1 adrenergic stimulation)"
+     ]
+    },
+    "right": {
+     "title": "Delayed Rectifier (IK)",
+     "points": [
+      "Activated during action potential upstroke",
+      "Conducts outward potassium current to repolarise nodal cell",
+      "Progressive decay of IK at rest unmasks inward depolarising currents",
+      "Terminates action potential and sets maximum diastolic potential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In pacemaker tissue, the phase 0 action potential upstroke is not driven by fast sodium channels, which are permanently inactivated at negative sixty millivolts. Instead, the depolarising upstroke is mediated entirely by the opening of voltage-gated **L-type calcium channels** (Cav1.2). Because calcium conductance is slower than sodium conductance, pacemaker upstroke velocity (dV/dt) is sluggish compared with working ventricular myocytes.",
+   "say": "Pacemaker phase zero upstroke is driven by L-type calcium channels rather than sodium channels, resulting in a slower upstroke velocity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "SA Nodal Pacemaker Action Potential",
+     "Ventricular Myocyte Action Potential"
+    ],
+    "rows": [
+     [
+      "Resting Membrane Potential",
+      "Unstable pacemaker potential (-60 to -40 mV)",
+      "Stable resting potential (-85 to -90 mV)"
+     ],
+     [
+      "Phase 0 Depolarising Ion",
+      "Inward Calcium (via L-type Cav1.2 channels)",
+      "Inward Sodium (via fast Nav1.5 channels)"
+     ],
+     [
+      "Phase 0 Upstroke Velocity (dV/dt)",
+      "Slow (1 to 10 V/s)",
+      "Extremely rapid (150 to 300 V/s)"
+     ],
+     [
+      "Phase 1 & Phase 2 Plateau",
+      "Absent (smooth transition from 0 to 3)",
+      "Prominent notch (1) and prolonged plateau (2)"
+     ],
+     [
+      "Spontaneous Phase 4 Automaticity",
+      "Present (spontaneous pacemaking)",
+      "Absent (flat baseline until stimulated)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autonomic nerves modulate heart rate by altering the slope of the pacemaker potential. Sympathetic stimulation releases noradrenaline, which binds **beta-1 adrenergic receptors** coupled to Gs, elevating intracellular cyclic AMP. Cyclic AMP directly opens HCN channels and protein kinase A phosphorylates L-type calcium channels, steepening phase 4 depolarisation to accelerate heart rate (positive chronotropy).",
+   "say": "Sympathetic stimulation raises cyclic AMP to open HCN and calcium channels, steepening phase four depolarisation to accelerate heart rate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symp",
+      "label": "Noradrenaline / Adrenaline Stimulates Nodal Beta-1 GPCR"
+     },
+     {
+      "id": "camp",
+      "label": "Gs Activation Elevates Intracellular Cyclic AMP via Adenylyl Cyclase"
+     },
+     {
+      "id": "slope",
+      "label": "Direct HCN Binding & PKA Phosphorylation Steepens Phase 4 Slope"
+     },
+     {
+      "id": "tachy",
+      "label": "Threshold Reached Earlier Producing Sinus Tachycardia"
+     }
+    ],
+    "edges": [
+     [
+      "symp",
+      "camp"
+     ],
+     [
+      "camp",
+      "slope"
+     ],
+     [
+      "slope",
+      "tachy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conversely, parasympathetic vagal stimulation releases acetylcholine onto nodal **muscarinic M2 receptors** coupled to Gi. The dissociated beta-gamma subunit directly opens G protein-coupled inward rectifier potassium channels (GIRK/IKACh), hyperpolarising maximum diastolic potential, while alpha-Gi suppresses adenylyl cyclase, flattening phase 4 slope to slow heart rate (negative chronotropy).",
+   "say": "Vagal acetylcholine binds M2 receptors to open GIRK potassium channels and lower cyclic AMP, flattening phase four slope and slowing heart rate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sympathetic Stimulation",
+     "points": [
+      "Neurotransmitter: Noradrenaline on Beta-1 receptors",
+      "Increases adenylyl cyclase activity and cyclic AMP",
+      "Steepens slope of phase 4 spontaneous depolarisation",
+      "Lowers threshold potential and shortens action potential",
+      "Result: Positive chronotropy (tachycardia)"
+     ]
+    },
+    "right": {
+     "title": "Parasympathetic Stimulation",
+     "points": [
+      "Neurotransmitter: Acetylcholine on Muscarinic M2 receptors",
+      "Inhibits adenylyl cyclase and opens GIRK (IKACh) potassium channels",
+      "Flattens slope of phase 4 spontaneous depolarisation",
+      "Hyperpolarises maximum diastolic potential (more negative)",
+      "Result: Negative chronotropy (bradycardia)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "From the SA node, action potentials sweep across atrial internodal pathways to the **atrioventricular node** (AV node). Within the slow-conducting nodal transitional zone, small-diameter myocytes and sparse gap junctions introduce an obligatory AV nodal delay of zero point zero nine to zero point one two seconds, allowing complete atrial mechanical systole before ventricular excitation begins.",
+   "say": "The atrioventricular node introduces a delay of roughly one tenth of a second, ensuring atria finish contracting before the ventricles are excited.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sa",
+      "label": "SA Node Generates Action Potential (Velocity 0.05 m/s)"
+     },
+     {
+      "id": "atr",
+      "label": "Atrial Internodal Tracts Rapidly Conduct Impulse Across Atria (1 m/s)"
+     },
+     {
+      "id": "av",
+      "label": "AV Node Introduces Critical 0.1-Second Delay (Velocity 0.02 to 0.05 m/s)"
+     },
+     {
+      "id": "purk",
+      "label": "Bundle of His & Purkinje Fibres Rapidly Activate Ventricles (4 m/s)"
+     }
+    ],
+    "edges": [
+     [
+      "sa",
+      "atr"
+     ],
+     [
+      "atr",
+      "av"
+     ],
+     [
+      "av",
+      "purk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following the AV node, impulses enter the bundle of His and arborize into specialized **Purkinje fibres**. Featuring wide cellular diameters and high connexin-40 gap junction density, Purkinje fibres conduct at four metres per second, the fastest in the heart. This rapid conduction coordinates simultaneous endocardial-to-epicardial ventricular activation, maximizing hemodynamic ejection efficiency.",
+   "say": "Purkinje fibres conduct at four metres per second, the fastest in the heart, ensuring synchronous ventricular contraction for optimal ejection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Cardiac conduction velocity and electrical syncytium.",
+    "caption": "Purkinje fibre rapid conduction coordinating synchronous biventricular activation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

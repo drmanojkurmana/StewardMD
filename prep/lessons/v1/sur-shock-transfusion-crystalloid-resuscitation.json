@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sur-shock-transfusion",
+ "subject": "surgery",
+ "title": "Crystalloid Resuscitation, Blood Components, and Autotransfusion",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Intravenous fluid resuscitation in surgical hypovolaemia relies primarily on **balanced crystalloids** rather than supraphysiological sodium chloride solutions. Solutions such as Ringer's lactate and Plasma-Lyte possess electrolyte compositions closely mimicking human plasma. In contrast, large-volume infusion of standard zero point nine percent normal saline delivers excessive chloride ions. This excessive chloride induces renal vasoconstriction, decreases glomerular filtration rate, and triggers hyperchloraemic metabolic acidosis that worsens patient outcomes.",
+   "say": "Intravenous fluid resuscitation in surgical shock should prioritise balanced crystalloids over normal saline. Solutions like Ringer lactate resemble normal plasma electrolytes, whereas large infusions of normal saline cause hyperchloraemic acidosis and renal vasoconstriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Balanced Crystalloids",
+     "points": [
+      "Physiological chloride concentration",
+      "Contains organic buffers like lactate or acetate",
+      "Maintains renal cortical blood flow",
+      "Lower risk of hyperkalaemia or acidosis"
+     ]
+    },
+    "right": {
+     "title": "0.9% Normal Saline",
+     "points": [
+      "Supraphysiological chloride concentration",
+      "No buffer system included",
+      "Causes renal vasoconstriction and oliguria",
+      "Induces hyperchloraemic metabolic acidosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transfusion of **packed red blood cells** restores intravascular oxygen-carrying capacity in haemorrhagic shock. Red blood cell units are stored at one to six degrees Celsius in citrate-phosphate-dextrose-adenine solutions, providing a usable shelf life of thirty-five to forty-two days. Current surgical guidelines recommend a restrictive transfusion trigger of seven grams per decilitre in stable non-bleeding patients, reserving higher thresholds of eight grams per decilitre for individuals with acute coronary syndromes.",
+   "say": "Packed red cells restore oxygen delivery during significant blood loss. They are stored refrigerated for up to forty-two days. Clinical guidelines support a restrictive trigger of seven grams per decilitre for most stable patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Storage Temperature",
+     "Shelf Life",
+     "Primary Clinical Indication"
+    ],
+    "rows": [
+     [
+      "Packed Red Cells",
+      "1 to 6 degrees C",
+      "35 to 42 days",
+      "Haemoglobin under 7 g/dL or active shock"
+     ],
+     [
+      "Fresh Frozen Plasma",
+      "Minus 18 degrees C or colder",
+      "12 months",
+      "Coagulopathy with INR over 1.5 or MTP"
+     ],
+     [
+      "Platelet Concentrates",
+      "20 to 24 degrees C with agitation",
+      "5 to 7 days",
+      "Thrombocytopenia under 50,000/uL"
+     ],
+     [
+      "Cryoprecipitate",
+      "Minus 18 degrees C or colder",
+      "12 months",
+      "Hypofibrinogenaemia under 1.5 g/L"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Administration of **fresh frozen plasma** replaces depleted soluble clotting factors during ongoing coagulopathy or massive haemorrhage. Fresh frozen plasma is separated from whole blood and frozen within eight hours, preserving both labile factors five and eight and stable factors. Therapeutic indications include correction of microvascular bleeding when the international normalised ratio exceeds one point five, urgent warfarin reversal when prothrombin complex concentrate is unavailable, and formal massive transfusion protocols.",
+   "say": "Fresh frozen plasma replaces all soluble coagulation factors during massive haemorrhage. It requires freezing within eight hours of collection and is indicated when the international normalised ratio exceeds one point five.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-transfusion.webp",
+    "alt": "Paediatric and adult blood components for therapeutic transfusion.",
+    "caption": "Blood components and weight-based volume administration parameters. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Haemostatic plug formation requires **platelet concentrates** to prevent microvascular oozing in surgical patients with thrombocytopenia or platelet dysfunction. Random donor platelets are harvested from single whole blood donations, whereas single donor apheresis platelets yield equivalent therapeutic counts from one donor, reducing alloimmunisation risks. Platelets must be stored at room temperature between twenty and twenty-four degrees Celsius with continuous gentle agitation, limiting their shelf life to five days due to bacterial contamination risks.",
+   "say": "Platelet concentrates prevent microvascular bleeding in thrombocytopenic surgical patients. Stored at room temperature with continuous agitation, they carry a short five-day shelf life because of bacterial contamination risks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Random Donor Platelets",
+     "points": [
+      "Derived from single whole blood unit",
+      "Requires pooling of four to six units",
+      "Exposes recipient to multiple donors",
+      "Increases risk of HLA alloimmunisation"
+     ]
+    },
+    "right": {
+     "title": "Single Donor Apheresis",
+     "points": [
+      "Obtained from single apheresis donor",
+      "Provides full therapeutic adult dose",
+      "Minimises donor antigen exposures",
+      "Reduces refractoriness and viral transmission"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Precipitated protein concentrates known as **cryoprecipitate** deliver concentrated fibrinogen, factor eight, von Willebrand factor, and factor thirteen. It is manufactured by slowly thawing fresh frozen plasma at four degrees Celsius and harvesting the insoluble cold precipitate. A standard adult pool of ten units provides approximately two grams of fibrinogen, serving as the first-line replacement when serum fibrinogen falls below one point five to two grams per litre in bleeding surgical patients.",
+   "say": "Cryoprecipitate is harvested by thawing fresh frozen plasma at four degrees Celsius. It provides concentrated fibrinogen, factor eight, and factor thirteen to control bleeding when serum fibrinogen drops below critical levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ffp",
+      "label": "Fresh frozen plasma frozen at -18 C"
+     },
+     {
+      "id": "thaw",
+      "label": "Controlled thawing at 4 C"
+     },
+     {
+      "id": "cent",
+      "label": "Centrifugation yields cold insoluble precipitate"
+     },
+     {
+      "id": "pool",
+      "label": "Pooled cryoprecipitate (rich in fibrinogen, FVIII, vWF)"
+     }
+    ],
+    "edges": [
+     [
+      "ffp",
+      "thaw"
+     ],
+     [
+      "thaw",
+      "cent"
+     ],
+     [
+      "cent",
+      "pool"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Incompatible red cell transfusions trigger **acute haemolytic transfusion reaction**, which represents a life-threatening medical emergency. Intravascular haemolysis occurs when recipient preformed anti-A or anti-B antibodies bind donor erythrocytes, activating the complement cascade. Anaesthetised surgical patients demonstrate unexplained hypotension, tachycardia, oozing from surgical incisions, and dark port-wine urine indicating haemoglobinuria. The transfusion must be stopped immediately while aggressive hydration and osmotic diuresis protect renal tubular integrity.",
+   "say": "Acute haemolytic transfusion reaction results from ABO incompatibility causing immediate intravascular lysis. In anaesthetised patients, look for unexplained hypotension, diffuse surgical oozing, and dark red haemoglobinuria.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-haemolytic-transfusion-reaction-fig1.webp",
+    "alt": "Pathophysiology of acute intravascular haemolysis following ABO incompatibility.",
+    "caption": "Complement-mediated intravascular haemolysis and subsequent renal tubular injury. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical blood conservation frequently employs **autotransfusion** using intraoperative cell salvage technology. Blood aspirated from clean operative fields is mixed with anticoagulant, filtered, centrifuged, and washed to separate red blood cells from free haemoglobin, debris, and anticoagulant. The resulting packed erythrocytes possess a haematocrit of fifty to sixty percent with normal twenty-three diphosphoglycerate levels, enabling immediate reinfusion and reducing homologous blood requirements in major vascular or orthopaedic operations.",
+   "say": "Intraoperative autotransfusion collects, washes, and reinfuses the patient's own shed blood. This technique produces high-quality red cells while substantially reducing the need for donor blood products.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "asp",
+      "label": "Aspiration of shed operative blood with heparin"
+     },
+     {
+      "id": "res",
+      "label": "Reservoir filtering of gross clots and tissue"
+     },
+     {
+      "id": "wash",
+      "label": "Centrifugation and saline washing of red cells"
+     },
+     {
+      "id": "reinf",
+      "label": "Reinfusion of washed red cells (Hct 50-60%)"
+     }
+    ],
+    "edges": [
+     [
+      "asp",
+      "res"
+     ],
+     [
+      "res",
+      "wash"
+     ],
+     [
+      "wash",
+      "reinf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recognising essential **contraindications to cell salvage** prevents devastating systemic contamination and catastrophic coagulopathies. Aspiration of blood contaminated with enteric contents, faeces, active purulent infection, or topical haemostatic agents like microfibrillar collagen is strictly prohibited. While malignant fields historically represented an absolute contraindication, modern leukodepletion filtration allows cautious salvage in select oncological procedures where massive haemorrhage threatens survival.",
+   "say": "Cell salvage must never aspirate blood contaminated with bowel contents, pus, or topical haemostatic agents. Reinfusing contaminated fluids risks catastrophic systemic sepsis and disseminated intravascular coagulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe for Cell Salvage",
+     "points": [
+      "Uncontaminated abdominal trauma",
+      "Major elective vascular reconstruction",
+      "Complex spine and pelvic surgery",
+      "Severe ectopic pregnancy rupture"
+     ]
+    },
+    "right": {
+     "title": "Strict Contraindications",
+     "points": [
+      "Gross enteric or faecal contamination",
+      "Presence of topical thrombin or collagen",
+      "Active purulent collection or abscess",
+      "Irrigation with hydrogen peroxide"
+     ]
+    }
+   }
+  }
+ ]
+}

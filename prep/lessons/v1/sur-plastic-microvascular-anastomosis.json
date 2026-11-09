@@ -1,0 +1,271 @@
+{
+ "v": 1,
+ "module": "sur-plastic",
+ "subject": "surgery",
+ "title": "Microvascular Surgery, Z-Plasty Principles, Tissue Expansion, and Cleft Lip",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Executing a successful microvascular vascular reconnection requires specialized microsurgical instrumentation, high-magnification operating microscopes, and meticulous operative discipline. During a **microvascular anastomosis**, surgeons employ non-absorbable eight-zero to ten-zero monofilament nylon sutures swaged onto delicate atraumatic needles to join vessels measuring one to three millimetres in diameter. Crucial technical steps include careful adventitial stripping from vessel ends to prevent thrombogenic adventitial prolapse into the lumen, atraumatic mechanical dilatation, continuous heparinized saline irrigation, and precise full-thickness transmural suture placement without luminal constriction.",
+   "say": "Microvascular anastomosis requires high optical magnification and fine nylon sutures to join small vessels. Surgeons meticulously strip adventitia from the vessel cut ends to avoid intraluminal thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prep",
+      "label": "Prepare Vessel Ends and Strip Adventitia"
+     },
+     {
+      "id": "dilate",
+      "label": "Atraumatic Mechanical Vessel Dilatation"
+     },
+     {
+      "id": "suture",
+      "label": "Full-Thickness Interrupted 9-0/10-0 Suturing"
+     },
+     {
+      "id": "flow",
+      "label": "Release Microvascular Clamps and Verify Patency"
+     }
+    ],
+    "edges": [
+     [
+      "prep",
+      "dilate"
+     ],
+     [
+      "dilate",
+      "suture"
+     ],
+     [
+      "suture",
+      "flow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reconstructive plastic surgeons utilize mathematical transposition geometric principles to redirect scars and release joint contractures. The classic **Z-plasty** technique consists of a central limb flanked by two equal-length peripheral limbs angled at identical degrees, creating two interlocking triangular flaps. When transposed, this maneuver accomplishes three distinct clinical objectives: it lengthens the tissue along the axis of the central limb, changes the direction of the scar by ninety degrees to align with relaxed skin tension lines, and breaks up rigid straight-line cicatricial contractures.",
+   "say": "A Z-plasty transposes two triangular flaps along a central limb. It lengthens contracted tissue along that central axis, rotates scar orientation by ninety degrees, and breaks up straight linear scars.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Angle of Z-Plasty",
+     "Theoretical Length Gain",
+     "Directional Scar Rotation",
+     "Typical Clinical Use"
+    ],
+    "rows": [
+     [
+      "30 Degrees",
+      "25% elongation along central limb",
+      "Rotates axis toward tension lines",
+      "Small facial scars where adjacent laxity is limited"
+     ],
+     [
+      "45 Degrees",
+      "50% elongation along central limb",
+      "Intermediate rotational transposition",
+      "Correction of moderate linear webs and scar bands"
+     ],
+     [
+      "60 Degrees (Classic)",
+      "75% elongation along central limb",
+      "90-degree complete scar redirection",
+      "Standard joint contracture releases and major scar revisions"
+     ],
+     [
+      "Multiple Z-Plasties",
+      "Multiple smaller length increments",
+      "Breaks long linear scar into zigzag",
+      "Long flexion contractures along the neck or limbs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The angle between the central and peripheral limbs strictly dictates the theoretical percentage gain in length achieved along the original axis. While a thirty-degree angle yields a twenty-five percent increase and forty-five degrees provides a fifty percent increase, the standard sixty-degree angle generates a theoretical seventy-five percent **tissue lengthening**. Increasing the angle beyond sixty degrees produces excessive rotational tension and makes triangular flap transposition difficult, whereas angles under thirty degrees risk distal tip flap necrosis from compromised dermal vascularity.",
+   "say": "The classic sixty-degree Z-plasty delivers a seventy-five percent increase in length along the central axis. Constructing smaller angles reduces elongation, while wider angles create excessive closure tension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "30-Degree Z-Plasty",
+     "points": [
+      "Provides 25% theoretical lengthening",
+      "Requires minimal adjacent tissue laxity",
+      "Narrow flap tips vulnerable to ischaemia",
+      "Useful in tight aesthetic facial subunits"
+     ]
+    },
+    "right": {
+     "title": "60-Degree Classic Z-Plasty",
+     "points": [
+      "Provides 75% theoretical lengthening",
+      "Optimal balance of elongation and tension",
+      "Robust vascular perfusion of transposed flaps",
+      "Gold standard for functional joint contracture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When reconstructing large cutaneous defects where adjacent skin is scarce, surgeons utilize controlled mechanical deformation to stimulate neo-vascular tissue growth. Clinical **tissue expansion** harnesses the physiological phenomena of biological creep and mechanical stretch by surgically implanting an inflatable silicone elastomer balloon beneath healthy skin adjacent to the defect. Over weeks, incremental saline injections through an accessible self-sealing port gradually distend the overlying tissue, stimulating active epidermal mitosis, dermal remodeling, and angiogenesis to create perfectly matched tissue.",
+   "say": "Tissue expansion involves placing an inflatable silicone balloon under normal skin to stimulate active cell proliferation through mechanical stretch. This creates identical, well-vascularized tissue for reconstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "implant",
+      "label": "Subcutaneous Silicone Expander Implantation"
+     },
+     {
+      "id": "inflate",
+      "label": "Weekly Sterile Saline Injections"
+     },
+     {
+      "id": "expand",
+      "label": "Achieve Desired Expanded Tissue Dome"
+     },
+     {
+      "id": "reconstruct",
+      "label": "Remove Expander and Advance Expanded Flap"
+     }
+    ],
+    "edges": [
+     [
+      "implant",
+      "inflate"
+     ],
+     [
+      "inflate",
+      "expand"
+     ],
+     [
+      "expand",
+      "reconstruct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Expanded cutaneous tissue matches the surrounding recipient recipient site perfectly in color, texture, sensation, and hair-bearing potential, making tissue expansion the premier technique for reconstructing large traumatic scalp alopecia and giant congenital melanocytic naevi. Histologically, expansion induces marked **epidermal thickening** accompanied by compaction and thinning of the underlying dermis, while muscular and adipose layers atrophy. Surrounding the silicone shell, a dense vascularized fibrous capsule forms, which contributes significant supplementary collateral blood flow to the advancing expanded flap.",
+   "say": "Expanded skin perfectly replicates native color and texture, making it ideal for repairing large scalp defects. Histologically, the epidermis thickens and a rich vascular capsule forms around the expander.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue Layer",
+     "Histological Response to Expansion",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Epidermis",
+      "Marked mitotic activity and hyperkeratosis",
+      "Increased total surface area without skin thinning"
+     ],
+     [
+      "Dermis",
+      "Progressive thinning and collagen compaction",
+      "Reversible thinning that recovers after expander removal"
+     ],
+     [
+      "Subcutaneous Fat",
+      "Marked compressive atrophy and volume loss",
+      "Thin, pliable reconstructive flap created"
+     ],
+     [
+      "Surrounding Capsule",
+      "Dense, highly vascular fibrovascular pseudomembrane",
+      "Enhances flap vascularity but may contract if not scored"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Orofacial clefts represent the most prevalent congenital craniofacial malformations encountered in paediatric reconstructive surgery. Embryologically, a congenital **cleft lip** results from failure of anatomical fusion between the maxillary prominence and the medial nasal prominence between the fourth and seventh weeks of intrauterine gestation. The deformity manifests as a unilateral or bilateral disruption involving the vermilion border, philtral columns, nasal sill, and the underlying continuous ring of the orbicularis oris muscle, often displacing the lower lateral alar cartilage.",
+   "say": "Cleft lip results from failed fusion between the maxillary and medial nasal prominences during early embryonic development. The muscular ring of the orbicularis oris is disrupted, causing functional and aesthetic deformities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ankyloblepharon-ectodermal-defects-clefting-fig1.webp",
+    "alt": "Medical illustration showing congenital craniofacial anomalies and clefting.",
+    "caption": "Embryological and anatomical disruption seen in orofacial clefting and associated anomalies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Establishing the safe, optimal timing for primary elective cleft lip surgical repair follows the classic clinical guideline known as the **rule of tens**. Established to minimize anaesthetic and perioperative risks in infants, this guideline stipulates that the infant should achieve a minimum age of ten weeks, weigh at least ten pounds (approximately four point five kilograms), exhibit a haemoglobin level of at least ten grams per decilitre, and have a circulating white blood cell count under ten thousand per microlitre.",
+   "say": "Surgical repair of a cleft lip is planned according to the rule of tens. The infant should be at least ten weeks old, weigh ten pounds, have a haemoglobin of ten grams, and show no signs of infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rule of Tens Criterion",
+     "Required Threshold",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Chronological Age",
+      "At least 10 weeks of age",
+      "Maturity of hepatic, renal, and pulmonary functions"
+     ],
+     [
+      "Body Weight",
+      "At least 10 pounds (4.5 kg)",
+      "Sufficient physiological reserve for general anaesthesia"
+     ],
+     [
+      "Haemoglobin Level",
+      "At least 10 g/dL",
+      "Adequate oxygen carrying capacity and blood reserve"
+     ],
+     [
+      "Leukocyte Count",
+      "Under 10,000 per microlitre",
+      "Absence of active acute systemic or respiratory infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical reconstruction of unilateral cleft lip aims to restore normal philtral column symmetry, repair the nasal floor, align the vermilion margin, and reconstruct the continuous muscular sphincter of the orbicularis oris. The most widely adopted surgical repair is the **Millard rotation-advancement** flap technique. In this elegant procedure, the shortened medial philtral element is incised and rotated downward into normal anatomical position, while a lateral lip flap is advanced across the cleft gap into the resulting subalar defect.",
+   "say": "The Millard rotation-advancement technique is the classic repair for unilateral cleft lip. Rotating the medial lip downward and advancing a lateral flap restores symmetrical philtral columns and muscle continuity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mark",
+      "label": "Anatomical Landmark Marking"
+     },
+     {
+      "id": "incise",
+      "label": "Medial Rotation and Lateral Advancement Incisions"
+     },
+     {
+      "id": "muscle",
+      "label": "Reconstruction of Orbicularis Oris Muscle Ring"
+     },
+     {
+      "id": "close",
+      "label": "Skin and Vermilion-Cutaneous Alignment"
+     }
+    ],
+    "edges": [
+     [
+      "mark",
+      "incise"
+     ],
+     [
+      "incise",
+      "muscle"
+     ],
+     [
+      "muscle",
+      "close"
+     ]
+    ]
+   }
+  }
+ ]
+}

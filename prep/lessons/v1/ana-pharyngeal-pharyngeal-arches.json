@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-pharyngeal",
+ "subject": "anatomy",
+ "title": "Pharyngeal Arches and Pouch Derivatives",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During the fourth and fifth weeks, the developing head and neck display six pairs of rounded mesenchymal swellings designated **pharyngeal arches**, numbered one through six (arch five regressing rapidly). Each arch consists of a mesenchymal core derived from paraxial mesoderm and neural crest, bounded externally by ectodermal clefts and internally by endodermal pouches.",
+   "say": "In weeks four and five, the embryonic neck exhibits rounded mesenchymal bars termed pharyngeal arches, numbered one to six. Each arch contains a core of mesoderm and neural crest, wrapped externally by ectodermal clefts and internally by endodermal pouches.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-arch-derivatives.svg",
+    "alt": "Pharyngeal arches, skeletal bars, cranial nerve innervation, and muscles",
+    "caption": "Pharyngeal arch cranial nerves and muscular derivatives. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Every pharyngeal arch receives a dedicated cranial nerve, a skeletal cartilaginous bar, an aortic arch artery, and a muscular primordium. The **first pharyngeal arch** (mandibular arch) is innervated by the mandibular nerve (V3). Its muscular derivatives comprise the muscles of mastication, mylohyoid, anterior belly of digastric, tensor tympani, and tensor veli palatini.",
+   "say": "Every pharyngeal arch receives a cranial nerve, a skeletal rod, an artery, and a muscular block. The first arch is innervated by the mandibular nerve. It forms the muscles of mastication, mylohyoid, anterior belly of digastric, tensor tympani, and tensor veli palatini.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharyngeal Arch",
+     "Cranial Nerve",
+     "Muscular Derivatives",
+     "Skeletal Derivatives"
+    ],
+    "rows": [
+     [
+      "1st (Mandibular)",
+      "Mandibular nerve (CN V3)",
+      "Mastication, mylohyoid, tensors",
+      "Malleus, incus, Meckel cartilage"
+     ],
+     [
+      "2nd (Hyoid)",
+      "Facial nerve (CN VII)",
+      "Facial expression, stapedius, stylohyoid",
+      "Stapes, styloid process, lesser horn hyoid"
+     ],
+     [
+      "3rd Arch",
+      "Glossopharyngeal (CN IX)",
+      "Stylopharyngeus only",
+      "Greater horn and lower body of hyoid"
+     ],
+     [
+      "4th and 6th",
+      "Vagus nerve (CN X branches)",
+      "Cricothyroid, intrinsic laryngeal, pharynx",
+      "Thyroid, cricoid, and arytenoid cartilages"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cartilaginous bar of the first arch is Meckel cartilage, which undergoes endochondral ossification at its dorsal extremity to form the malleus and incus of the middle ear. The **second pharyngeal arch** (hyoid arch) is innervated by the facial nerve (CN VII), giving rise to muscles of facial expression, stapedius, stylohyoid, and posterior digastric.",
+   "say": "The first arch Meckel cartilage forms the malleus and incus. The second arch is supplied by the facial nerve and forms the muscles of facial expression, stapedius, stylohyoid, and the posterior digastric belly. Its cartilage builds the stapes and styloid process.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First Arch Skeletal",
+     "points": [
+      "Malleus and incus auditory ossicles",
+      "Anterior ligament of the malleus",
+      "Sphenomandibular ligament",
+      "Mandible forms around Meckel bar"
+     ]
+    },
+    "right": {
+     "title": "Second Arch Skeletal",
+     "points": [
+      "Stapes ossicle of middle ear",
+      "Styloid process of temporal bone",
+      "Stylohyoid ligament",
+      "Lesser horn and upper body of hyoid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The third pharyngeal arch is innervated by the glossopharyngeal nerve (CN IX), supplying a single muscle, the stylopharyngeus. Its cartilage forms the greater horn and lower body of the hyoid bone. The fourth arch is innervated by the **superior laryngeal nerve**, while the sixth arch is supplied by the recurrent laryngeal nerve.",
+   "say": "The third arch is innervated by the glossopharyngeal nerve, supplying only the stylopharyngeus muscle and forming the greater horn of the hyoid bone. The fourth arch is innervated by the superior laryngeal nerve, while the sixth arch is innervated by the recurrent laryngeal nerve.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cranial Nerve Innervation of Arches",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Arch 1: Mandibular (CN V3)"
+     },
+     {
+      "id": "a2",
+      "label": "Arch 2: Facial (CN VII)"
+     },
+     {
+      "id": "a3",
+      "label": "Arch 3: Glossopharyngeal (CN IX)"
+     },
+     {
+      "id": "a46",
+      "label": "Arches 4 and 6: Vagus (CN X)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a46"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Internally, four pairs of endodermal outpocketings known as pharyngeal pouches develop between the arches. The **first pharyngeal pouch** expands into an elongated tubotympanic recess, whose distal expansion forms the tympanic middle ear cavity and mastoid antrum. The proximal stalk remains narrow to form the pharyngotympanic (Eustachian) tube.",
+   "say": "Internally, four pairs of endodermal pharyngeal pouches project outward. The first pouch dilates into the tubotympanic recess, whose distal end forms the middle ear cavity and mastoid antrum. Its narrow proximal segment persists as the Eustachian tube.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pouch-derivatives.svg",
+    "alt": "Pharyngeal pouch 1-4 derivatives: tonsil, parathyroids, thymus",
+    "caption": "Pharyngeal pouch endocrine and lymphatic organogenesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The second pharyngeal pouch is largely obliterated by the expanding palatine tonsil, persisting as the tonsillar fossa and crypts. The third pharyngeal pouch differentiates into two components: the dorsal wing forms the **inferior parathyroid gland**, while the ventral wing migrates into the anterior mediastinum to form the bilateral lobes of the thymus.",
+   "say": "The second pouch is largely absorbed by the palatine tonsil, leaving the tonsillar crypts. The third pouch divides into two wings: the dorsal wing forms the inferior parathyroid gland, while the ventral wing migrates into the chest to establish the thymus gland.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Third Pouch Derivatives",
+     "points": [
+      "Dorsal wing: Inferior parathyroid (parathyroid III)",
+      "Ventral wing: Bilateral lobes of thymus",
+      "Migrates caudally past fourth pouch derivatives",
+      "Thymus pulls inferior parathyroid into lower neck"
+     ]
+    },
+    "right": {
+     "title": "Fourth Pouch Derivatives",
+     "points": [
+      "Dorsal wing: Superior parathyroid (parathyroid IV)",
+      "Ventral wing: Ultimobranchial body",
+      "Ultimobranchial incorporates into thyroid as C cells",
+      "Superior parathyroid remains higher on posterior thyroid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because the thymus migrates long distances caudally, it drags parathyroid III with it, causing the third pouch derivative to settle below the fourth pouch derivative as the inferior parathyroid. The fourth pharyngeal pouch dorsal wing forms the **superior parathyroid gland**, while its ventral ultimobranchial body fuses with the thyroid gland to contribute calcitonin-secreting parafollicular C cells.",
+   "say": "Because the thymus journeys far into the chest, it drags parathyroid three along, positioning it lower than parathyroid four as the inferior parathyroid gland. The fourth pouch dorsal wing forms the superior parathyroid, while its ventral body yields calcitonin C cells in the thyroid.",
+   "vis": {
+    "kind": "flow",
+    "title": "Parathyroid Migration Paradox",
+    "nodes": [
+     {
+      "id": "p3",
+      "label": "Pouch 3: Thymus plus Parathyroid III"
+     },
+     {
+      "id": "p4",
+      "label": "Pouch 4: Parathyroid IV"
+     },
+     {
+      "id": "mig",
+      "label": "Thymus Drags Parathyroid III Caudally"
+     },
+     {
+      "id": "pos",
+      "label": "Adult Anatomy: Parathyroid III sits Inferior"
+     }
+    ],
+    "edges": [
+     [
+      "p3",
+      "mig"
+     ],
+     [
+      "p4",
+      "pos"
+     ],
+     [
+      "mig",
+      "pos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of normal pharyngeal pouch and arch differentiation leads to significant clinical syndromes. In **DiGeorge syndrome** (22q11.2 microdeletion), failure of third and fourth pouch organogenesis results in congenital absence of the thymus causing severe T-cell immunodeficiency, alongside parathyroid aplasia triggering neonatal tetany and hypocalcemia.",
+   "say": "Defective pouch differentiation produces distinct clinical syndromes. In DiGeorge syndrome, agenesis of the third and fourth pouches causes thymic aplasia with severe T-cell immunodeficiency and parathyroid aplasia leading to neonatal hypocalcemia and tetany.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pouch Derivation",
+     "Definitive Organ",
+     "Embryonic Layer",
+     "Congenital Anomaly"
+    ],
+    "rows": [
+     [
+      "Pouch 1",
+      "Eustachian tube, tympanic cavity",
+      "Endoderm",
+      "Conductive hearing loss"
+     ],
+     [
+      "Pouch 2",
+      "Palatine tonsillar crypts",
+      "Endoderm plus mesenchyme",
+      "Tonsillar hypoplasia"
+     ],
+     [
+      "Pouch 3",
+      "Inferior parathyroid, thymus",
+      "Endoderm",
+      "DiGeorge syndrome immunodeficiency"
+     ],
+     [
+      "Pouch 4",
+      "Superior parathyroid, C cells",
+      "Endoderm plus neural crest",
+      "Hypoparathyroidism, tetany"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

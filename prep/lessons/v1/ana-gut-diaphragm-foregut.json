@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-gut-diaphragm",
+ "subject": "anatomy",
+ "title": "Primitive Gut Tube Subdivisions and Midgut Rotation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Following cephalocaudal and lateral embryonic folding during the fourth week, the endoderm-lined yolk sac cavity is incorporated into the embryo to form the primitive gut tube. The primitive gut is divided into three distinct anatomical territories: the foregut, midgut, and hindgut, each supplied by an independent unpaired **ventral branch of aorta**.",
+   "say": "Following embryonic folding in the fourth week, part of the yolk sac is incorporated to create the primitive gut tube. The tube divides into three segments: foregut, midgut, and hindgut, each supplied by an unpaired branch from the abdominal aorta.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-midgut-rotation.svg",
+    "alt": "Foregut, midgut, hindgut divisions and 270 degree rotation sequence",
+    "caption": "Embryonic gut tube divisions and physiological midgut rotation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **foregut** extends from the pharyngeal membrane down to the duodenum immediately proximal to the entry of the bile duct at the major duodenal papilla. Supplied by the coeliac trunk, the foregut develops into the esophagus, stomach, first and upper second part of duodenum, liver, gallbladder, and pancreas.",
+   "say": "The foregut extends from the pharyngeal membrane to the mid-duodenum where the bile duct enters. Perfused by the coeliac trunk, the foregut forms the esophagus, stomach, proximal duodenum, liver, gallbladder, and the pancreas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gut Tube Segment",
+     "Anatomical Boundaries",
+     "Arterial Supply",
+     "Autonomic Innervation"
+    ],
+    "rows": [
+     [
+      "Foregut",
+      "Pharyngeal membrane to ampulla of Vater",
+      "Coeliac trunk",
+      "Vagus nerve (parasympathetic)"
+     ],
+     [
+      "Midgut",
+      "Ampulla of Vater to left colic flexure",
+      "Superior mesenteric artery",
+      "Vagus nerve (parasympathetic)"
+     ],
+     [
+      "Hindgut",
+      "Distal transverse colon to cloacal membrane",
+      "Inferior mesenteric artery",
+      "Pelvic splanchnic nerves (S2-S4)"
+     ],
+     [
+      "Pectinate Line",
+      "Embryonic junction in anal canal",
+      "Internal iliac (inferior rectal)",
+      "Pudendal somatic innervation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **midgut** begins at the major duodenal papilla and terminates at the junction of the proximal two-thirds and distal third of the transverse colon. Supplied entirely by the superior mesenteric artery, it differentiates into the lower half of the duodenum, jejunum, ileum, cecum, appendix, ascending colon, and proximal transverse colon.",
+   "say": "The midgut stretches from the major duodenal papilla to the distal third of the transverse colon. Supplied by the superior mesenteric artery, it yields the lower duodenum, small intestine, cecum, appendix, and ascending colon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Midgut Boundaries",
+     "points": [
+      "Origin: Ampulla of Vater in duodenum",
+      "Termination: Cannon-Böhm point on transverse colon",
+      "Artery: Superior mesenteric artery",
+      "Sensory: Periumbilical referred pain (T10)"
+     ]
+    },
+    "right": {
+     "title": "Hindgut Boundaries",
+     "points": [
+      "Origin: Distal third of transverse colon",
+      "Termination: Upper anal canal at pectinate line",
+      "Artery: Inferior mesenteric artery",
+      "Sensory: Hypogastric referred pain (L1-L2)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The hindgut extends from the distal third of the transverse colon to the pectinate line of the anal canal, supplied by the **inferior mesenteric artery**. It forms the distal transverse colon, descending colon, sigmoid colon, rectum, and the upper half of the anal canal down to the anal valves.",
+   "say": "The hindgut spans from the distal transverse colon to the pectinate line of the anal canal, supplied by the inferior mesenteric artery. It forms the left colon, sigmoid, rectum, and upper anal canal mucosa.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-colon-mesenteries.svg",
+    "alt": "Peritoneal attachments, mesenteries, and retroperitoneal fixation",
+    "caption": "Peritoneal mesenteries and retroperitoneal fixation of colonic segments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During the sixth week, rapid elongation of the midgut loop causes it to outgrow the abdominal cavity. The primary intestinal loop herniates into the extraembryonic coelom of the umbilical cord in a process designated **physiological umbilical herniation**. The loop possesses a cranial duodenojejunal limb and a caudal cecocolic limb, suspended by the superior mesenteric artery axis.",
+   "say": "In the sixth week, rapid small bowel growth outstrips the abdominal cavity. The midgut loop herniates through the umbilicus into the umbilical cord as a physiological umbilical hernia, rotating around the axis of the superior mesenteric artery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Midgut Rotation Sequence",
+    "nodes": [
+     {
+      "id": "hern",
+      "label": "Week 6: Herniation into Umbilical Cord"
+     },
+     {
+      "id": "rot1",
+      "label": "Initial 90 Degree Counterclockwise Rotation"
+     },
+     {
+      "id": "ret",
+      "label": "Week 10: Reduction into Abdomen (180 Rotation)"
+     },
+     {
+      "id": "fix",
+      "label": "Total 270 Degree Rotation and Zygosis Fixation"
+     }
+    ],
+    "edges": [
+     [
+      "hern",
+      "rot1"
+     ],
+     [
+      "rot1",
+      "ret"
+     ],
+     [
+      "ret",
+      "fix"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During its stay in the umbilical cord, the midgut loop undergoes an initial ninety-degree counterclockwise rotation around the superior mesenteric artery axis. In the tenth week, the abdomen expands, allowing the herniated loop to return to the peritoneal cavity. During this reduction, the midgut rotates another one hundred and eighty degrees counterclockwise, completing a total **270 degrees counterclockwise rotation**.",
+   "say": "While in the umbilical cord, the midgut undergoes an initial ninety-degree counterclockwise rotation. In week ten, the bowel returns to the abdomen while rotating another one hundred and eighty degrees, completing a total two hundred and seventy degrees counterclockwise turn.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cranial Limb Kinematics",
+     "points": [
+      "Forms the jejunum and proximal ileum",
+      "Returns first to the abdomen on week 10",
+      "Settles into the left upper quadrant",
+      "Pushes hindgut segments to the left flank"
+     ]
+    },
+    "right": {
+     "title": "Caudal Limb Kinematics",
+     "points": [
+      "Forms the cecum, appendix, and colon",
+      "Returns last to the abdomen",
+      "Cecal bud lands beneath the right liver lobe",
+      "Descends into right iliac fossa, forming ascending colon"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Upon returning, the jejunal loops enter first and settle into the left upper quadrant. The cecal bud enters last, temporarily lodging in the right upper quadrant beneath the liver before descending into the right iliac fossa. This caudal descent elongates the **ascending colon** and establishes the normal anatomical layout of the large bowel.",
+   "say": "Upon reduction, jejunal coils enter first to occupy the left upper quadrant. The cecal bud enters last, sitting under the right liver lobe before descending into the right iliac fossa, creating the ascending colon and placing the appendix in the lower right abdomen.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cecal Descent and Colon Placement",
+    "nodes": [
+     {
+      "id": "subhep",
+      "label": "Subhepatic Cecal Bud Placement"
+     },
+     {
+      "id": "desc",
+      "label": "Caudal Descent into Right Iliac Fossa"
+     },
+     {
+      "id": "asc",
+      "label": "Elongation of Ascending Colon"
+     },
+     {
+      "id": "retrof",
+      "label": "Retroperitoneal Fusion (Toldt Fascia)"
+     }
+    ],
+    "edges": [
+     [
+      "subhep",
+      "desc"
+     ],
+     [
+      "desc",
+      "asc"
+     ],
+     [
+      "asc",
+      "retrof"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arrest of midgut rotation can cause intestinal malrotation, wherein the small intestine remains entirely on the right and the colon on the left. Peritoneal bands called **Ladd bands** cross the duodenum to anchor the misplaced cecum, causing acute extrinsic duodenal obstruction and predisposing to midgut volvulus around the narrow superior mesenteric vascular stalk.",
+   "say": "Arrested midgut rotation causes intestinal malrotation, leaving the small bowel on the right and the colon on the left. Fibrous Ladd bands cross the duodenum to tether the misplaced cecum, causing extrinsic duodenal obstruction and predisposing to twisting midgut volvulus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rotational Anomaly",
+     "Embryonic Mechanism",
+     "Anatomical Finding",
+     "Emergency Complication"
+    ],
+    "rows": [
+     [
+      "Nonrotation",
+      "Arrest after initial 90 degrees",
+      "Small intestine on right, colon on left",
+      "Asymptomatic or chronic torsion"
+     ],
+     [
+      "Malrotation",
+      "Incomplete 270 degree rotation",
+      "Subhepatic cecum, narrow mesenteric base",
+      "Midgut volvulus with bowel necrosis"
+     ],
+     [
+      "Ladd Bands",
+      "Anomalous peritoneal attachments",
+      "Fibrous bands compressing duodenum",
+      "Bilious vomiting in neonates"
+     ],
+     [
+      "Reversed Rotation",
+      "90 clockwise rotation",
+      "Transverse colon posterior to duodenum",
+      "Internal hernia behind colon"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

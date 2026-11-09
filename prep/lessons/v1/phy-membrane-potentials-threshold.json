@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "phy-membrane-potentials",
+ "subject": "physiology",
+ "title": "Threshold, Depolarisation, and Voltage-Gated Sodium Channels",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Excitable membranes generate regenerative action potentials when an initial stimulus depolarises the membrane to a critical firing level termed the **threshold potential**. Typically occurring fifteen millivolts positive to resting potential (near negative fifty-five millivolts in large axons), threshold represents the exact voltage at which inward sodium current precisely equals outward repolarising potassium current.",
+   "say": "Threshold is the critical membrane potential where inward sodium current exceeds outward potassium current, triggering a regenerative action potential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action Potential Phase",
+     "Transmembrane Voltage",
+     "Dominant Channel State",
+     "Net Current Flow"
+    ],
+    "rows": [
+     [
+      "Resting Phase",
+      "-70 to -90 mV",
+      "K+ leak channels open; Nav closed",
+      "Net zero balance"
+     ],
+     [
+      "Threshold Level",
+      "-55 to -60 mV",
+      "Nav activation gates rapidly begin opening",
+      "Inward INa equals outward IK"
+     ],
+     [
+      "Rapid Depolarisation",
+      "-55 to +30 mV",
+      "Nav channels open in positive feedback",
+      "Massive inward sodium flux"
+     ],
+     [
+      "Repolarisation Phase",
+      "+30 to -70 mV",
+      "Nav inactivated; Kv delayed rectifiers open",
+      "Outward potassium flux"
+     ],
+     [
+      "After-Hyperpolarisation",
+      "-75 to -95 mV",
+      "Kv channels remain transiently open",
+      "Potassium approaches ENernst"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crossing threshold triggers explosive membrane **depolarisation** via a self-amplifying Hodgkin cycle. Opening of initial voltage-gated sodium channels allows sodium influx, which depolarises the membrane further, recruiting additional voltage-gated sodium channels in an explosive positive feedback cascade that drives membrane potential upward toward the positive sodium equilibrium potential.",
+   "say": "Crossing threshold triggers the explosive Hodgkin cycle. Sodium influx depolarises the membrane, opening more sodium channels in an all-or-none cascade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stim",
+      "label": "Initial Depolarising Stimulus Reaches Threshold Potential"
+     },
+     {
+      "id": "nav",
+      "label": "Voltage Sensors Open Activation Gates of Nav Channels"
+     },
+     {
+      "id": "naflux",
+      "label": "Massive Inward Sodium Current Enters Down Gradient"
+     },
+     {
+      "id": "spike",
+      "label": "Regenerative Hodgkin Cycle Produces Action Potential Spike"
+     }
+    ],
+    "edges": [
+     [
+      "stim",
+      "nav"
+     ],
+     [
+      "nav",
+      "naflux"
+     ],
+     [
+      "naflux",
+      "spike"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The molecular architecture of the **voltage-gated sodium channel** comprises a massive alpha subunit containing four homologous domains, each possessing six transmembrane alpha-helical segments (S1 through S6). Positively charged arginine and lysine residues in the fourth transmembrane segment (S4) act as voltage sensors, shifting outward upon membrane depolarisation to pull open the central activation gate.",
+   "say": "The voltage-gated sodium channel contains four domains with S4 segments acting as voltage sensors. Membrane depolarisation displaces these sensors, opening the channel.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/local-anaesthetics-esters-amides-blocks-fig1.webp",
+    "alt": "Structural gating mechanism of voltage-gated sodium channels.",
+    "caption": "Voltage sensor displacement and gating transitions in voltage-gated sodium channels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Voltage-gated sodium channels cycle sequentially through three discrete functional states: resting closed, open active, and inactivated. At resting negative potentials, the activation gate is closed while the inactivation gate remains open. Upon reaching threshold, the **activation gate** swings open within fractions of a millisecond, permitting high-conductance sodium influx that produces the action potential spike.",
+   "say": "Sodium channels cycle through closed, open, and inactivated states. Depolarisation rapidly opens the activation gate, admitting inward sodium current.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Resting Closed State",
+     "points": [
+      "Prevalent at normal resting potential (-70 mV)",
+      "Activation (m) gate is closed",
+      "Inactivation (h) gate is open and primed",
+      "Channel can be opened immediately by threshold stimulus"
+     ]
+    },
+    "right": {
+     "title": "Inactivated State",
+     "points": [
+      "Triggered automatically by prolonged depolarisation",
+      "Inactivation gate (IFM hydrophobic motif) plugs pore",
+      "Channel cannot conduct ions or reopen",
+      "Requires membrane repolarisation to reset"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Within one millisecond of opening, the channel is plugged by its cytoplasmic inactivation loop, an intracellular peptide loop between domains III and IV containing an isoleucine-phenylalanine-methionine motif. This **inactivation gate** closes the channel pore even though the membrane remains depolarised, terminating sodium influx and initiating the absolute refractory period.",
+   "say": "Within a millisecond of opening, a cytoplasmic loop closes the inactivation gate. This terminates sodium influx and enforces the absolute refractory period.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "open",
+      "label": "Channel Pore Conducting Inward Sodium at Peak Spike"
+     },
+     {
+      "id": "hinge",
+      "label": "Hydrophobic IFM Peptide Motif Swings into Intracellular Vestibule"
+     },
+     {
+      "id": "plug",
+      "label": "Pore Plugged: Sodium Conductance Terminates Completely"
+     },
+     {
+      "id": "repol",
+      "label": "Membrane Must Repolarise to Remove Inactivation Plug"
+     }
+    ],
+    "edges": [
+     [
+      "open",
+      "hinge"
+     ],
+     [
+      "hinge",
+      "plug"
+     ],
+     [
+      "plug",
+      "repol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Membrane **repolarisation** restores resting negativity, orchestrated by two synchronized events: rapid inactivation of sodium channels and delayed opening of voltage-gated potassium channels. These delayed rectifier potassium channels open sluggishly following depolarisation, allowing rapid outward potassium efflux down its electrochemical gradient that swiftly restores internal negativity.",
+   "say": "Repolarisation restores internal negativity through sodium channel inactivation combined with delayed opening of voltage-gated potassium channels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sodium Influx Termination",
+     "points": [
+      "Nav inactivation occurs automatically within 1 ms",
+      "Stops inward positive charge entry",
+      "Prevents potential from reaching full ENa (+65 mV)",
+      "Enforces unilateral forward impulse propagation"
+     ]
+    },
+    "right": {
+     "title": "Potassium Efflux Activation",
+     "points": [
+      "Delayed rectifier Kv channels open with short lag",
+      "Massive outward potassium current driven by gradient",
+      "Rapidly repolarises membrane back toward -70 mV",
+      "Transiently overshoots into after-hyperpolarisation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anticonvulsant agents exploit the conformational gating cycle of sodium channels. Drugs such as **phenytoin** and carbamazepine bind preferentially to the inactivated state of voltage-gated sodium channels, prolonging their recovery period and preventing rapid repetitive axonal firing without impairing normal low-frequency physiological action potential propagation.",
+   "say": "Anticonvulsants like phenytoin bind to the inactivated state of sodium channels. This prolongs recovery and halts high-frequency seizure discharge.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-phenytoin.webp",
+    "alt": "Anticonvulsant binding and stabilization of inactivated sodium channels.",
+    "caption": "Use-dependent sodium channel blockade by antiepileptic agents in excitable membranes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical local anaesthetics such as lignocaine and bupivacaine cross the axonal membrane in uncharged lipophilic form, re-protonate within the axoplasm, and bind to the inner pore vestibule of the **voltage-gated sodium channel**. This sterically occludes the ion conduction pathway, halting action potential generation and completely blocking nociceptive sensory transmission.",
+   "say": "Local anaesthetics cross axonal membranes and plug the internal pore of sodium channels, arresting action potential conduction and blocking pain transmission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Agent",
+     "Primary Molecular Target",
+     "Gating State Preference",
+     "Physiological Outcome"
+    ],
+    "rows": [
+     [
+      "Lignocaine / Bupivacaine",
+      "Nav channel inner pore vestibule",
+      "Inactivated and open states (use-dependent)",
+      "Blocks action potential conduction"
+     ],
+     [
+      "Tetrodotoxin (Pufferfish)",
+      "Nav outer pore selectivity filter",
+      "Resting and open closed channels",
+      "Fatal flaccid respiratory paralysis"
+     ],
+     [
+      "Saxitoxin (Red Tide Algae)",
+      "Nav outer pore vestibule",
+      "Blocks channel mouth directly",
+      "Paralytic shellfish poisoning"
+     ],
+     [
+      "Batrachotoxin (Arrow Frog)",
+      "Nav channel intramembrane site",
+      "Locks channel permanently open",
+      "Sustained depolarisation and arrhythmias"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "sur-burns",
+ "subject": "surgery",
+ "title": "Burn Depth Assessment and Total Body Surface Area Estimation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Accurate initial evaluation of **burn depth** dictates critical clinical decisions regarding fluid resuscitation volume, wound dressing choice, necessity of surgical tangential excision, and long-term functional prognosis. Burn depth depends on the temperature of the burning agent and the duration of tissue contact, categorized clinically into epidermal, superficial partial-thickness, deep partial-thickness, and full-thickness injuries.",
+   "say": "Accurate burn depth assessment determines fluid resuscitation, dressing selection, and the need for surgical excision. Depth is classified into epidermal, superficial partial, deep partial, and full thickness.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-burns-wound.webp",
+    "alt": "Cross-section of skin anatomy illustrating levels of thermal burn injury.",
+    "caption": "Cross-sectional burn depths, rule of nines body charts, and escharotomy lines. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Involving only the epidermis, a **first-degree burn** or superficial burn does not compromise the underlying basement membrane. Classically caused by ultraviolet sunburn or brief scalds, the affected skin is erythematous, warm, dry, and exquisitely painful due to irritated intact dermal nerve endings. Blisters do not form because the epidermal-dermal junction remains intact. These burns heal spontaneously within three to six days without leaving permanent scars.",
+   "say": "First-degree burns involve only the epidermal layer without blister formation. Erythematous and painful from intact dermal nerve endings, they heal completely within six days without scarring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Degree Epidermal Burn",
+     "points": [
+      "Limited exclusively to epidermis",
+      "Dry, erythematous, blanches briskly",
+      "No blisters formed",
+      "Heals in 3 to 6 days without scarring"
+     ]
+    },
+    "right": {
+     "title": "Superficial Partial-Thickness",
+     "points": [
+      "Extends into superficial papillary dermis",
+      "Moist, weeping, thin-walled blisters",
+      "Intensely painful and hyperaesthetic",
+      "Heals in 10 to 14 days with minimal pigment change"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thermal injury extending into the papillary dermis produces a **superficial partial-thickness burn**, commonly caused by hot liquid scalds or flash burns. The signature presentation includes thin-walled, fluid-filled blisters that form rapidly from inflammatory plasma exudation. Exposed burn beds appear pink, moist, and weeping, blanching rapidly upon light palpation. Because dermal sensory nerve endings are preserved and irritated, these injuries are intensely painful.",
+   "say": "Superficial partial-thickness burns extend into the papillary dermis, forming fluid-filled blisters over a pink, weeping, hyperaesthetic wound bed that heals within two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Superficial Partial-Thickness",
+     "Deep Partial-Thickness"
+    ],
+    "rows": [
+     [
+      "Anatomic Depth",
+      "Papillary dermis",
+      "Reticular dermis"
+     ],
+     [
+      "Wound Appearance",
+      "Pink, moist, blistered, weeping",
+      "Mottled pink-white, dry or cheesy"
+     ],
+     [
+      "Capillary Refill",
+      "Brisk and immediate",
+      "Sluggish or completely absent"
+     ],
+     [
+      "Sensation",
+      "Exquisitely painful to air and touch",
+      "Dull pressure preserved, pinprick reduced"
+     ],
+     [
+      "Healing Course",
+      "Spontaneous in 10 to 14 days",
+      "Prolonged (3 to 6 weeks) with hypertrophic scarring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extending deep into the reticular dermis, a **deep partial-thickness burn** destroys the majority of epidermal appendages and dermal capillaries. The wound appears mottled, dry, and waxy white or pale pink, with ruptured, unroofed blisters. Capillary refill is sluggish or absent due to capillary thrombosis. Pinprick sensation is markedly diminished or absent because sensory nerve endings are destroyed, although deep pressure sensation mediated by intact pacinian corpuscles remains intact.",
+   "say": "Deep partial-thickness burns destroy reticular dermal capillaries and nerve endings, appearing waxy white with sluggish refill and blunted sensation, often requiring surgical debridement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deep Partial-Thickness",
+     "points": [
+      "Destroys reticular dermal matrix",
+      "Mottled waxy white and dry appearance",
+      "Reduced pinprick sensation, pressure intact",
+      "Frequently requires surgical excision and grafting"
+     ]
+    },
+    "right": {
+     "title": "Full-Thickness (Third-Degree)",
+     "points": [
+      "Complete destruction of all skin elements",
+      "Leathery, charred, translucent or pearly white",
+      "Completely anaesthetic to all touch and pinprick",
+      "Strictly mandates surgical excision and skin grafting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Total destruction of both epidermis and full-thickness dermis constitutes a **third-degree burn**, extending into underlying subcutaneous fat or fascia. The burned skin is tough, leathery, charred black, or pearly white and dry, forming a rigid eschar with coagulated, thrombosed superficial veins clearly visible beneath. The wound is completely insensate to pinprick and fine touch. Spontaneous re-epithelialisation is impossible except from wound margins, mandating surgical excision and grafting.",
+   "say": "Third-degree full-thickness burns destroy the entire skin thickness, creating a rigid, leathery, anaesthetic eschar with visible thrombosed vessels that requires operative grafting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Burn Depth",
+     "Colour & Texture",
+     "Blistering",
+     "Sensation",
+     "Healing Potential"
+    ],
+    "rows": [
+     [
+      "Epidermal (1st deg)",
+      "Red, dry, blanches",
+      "Absent",
+      "Painful",
+      "Spontaneous in 3-6 days"
+     ],
+     [
+      "Superficial Partial (2nd)",
+      "Pink, moist, weeping",
+      "Present, thin-walled",
+      "Extremely painful",
+      "Spontaneous in 10-14 days"
+     ],
+     [
+      "Deep Partial (2nd)",
+      "Mottled pink-white, dry",
+      "Ruptured / absent",
+      "Dull, reduced pinprick",
+      "3-6 weeks, severe scarring"
+     ],
+     [
+      "Full-Thickness (3rd)",
+      "Leathery, charred, pearly",
+      "Absent",
+      "Completely anaesthetic",
+      "Requires surgical excision and graft"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside calculation of burn extent in adults utilises the **Wallace rule of nines**, which divides total body surface area into anatomical multiples of nine percent. The head and neck represent nine percent, each upper limb represents nine percent, the anterior trunk represents eighteen percent, the posterior trunk represents eighteen percent, each lower limb represents eighteen percent, and the perineum represents the remaining one percent.",
+   "say": "The Wallace rule of nines estimates adult burn surface area in multiples of nine: head and neck nine percent, each arm nine, anterior trunk eighteen, posterior trunk eighteen, each leg eighteen, and perineum one.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "head",
+      "label": "Head and Neck: 9% (4.5% anterior, 4.5% posterior)"
+     },
+     {
+      "id": "arms",
+      "label": "Upper Extremities: 18% (9% each arm)"
+     },
+     {
+      "id": "trunk",
+      "label": "Torso: 36% (18% anterior chest/abdomen, 18% back)"
+     },
+     {
+      "id": "legs",
+      "label": "Lower Extremities: 36% (18% each leg)"
+     },
+     {
+      "id": "peri",
+      "label": "Perineum and Genitalia: 1%"
+     }
+    ],
+    "edges": [
+     [
+      "head",
+      "arms"
+     ],
+     [
+      "arms",
+      "trunk"
+     ],
+     [
+      "trunk",
+      "legs"
+     ],
+     [
+      "legs",
+      "peri"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When estimating scattered, patchy, or irregular burn wounds, clinicians apply the **palmar surface rule**. The patient's palmar surface, encompassing the palm and all five outstretched fingers, represents approximately one percent of their total body surface area. Alternatively, the palm alone excluding fingers corresponds to roughly zero point five percent. This method is especially helpful for assessing small burns or subtracting unburned islands within confluent areas.",
+   "say": "The patient's palmar surface including fingers represents approximately one percent of their total body surface area. This rule is particularly useful for measuring scattered, irregular burn patches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rule of Nines",
+     "points": [
+      "Designed for large confluent burn wounds",
+      "Divides adult body into 9% anatomical zones",
+      "Rapid bedside estimation tool",
+      "Inaccurate for infants and young children"
+     ]
+    },
+    "right": {
+     "title": "Palmar Surface Method",
+     "points": [
+      "Ideal for small, scattered, or patchy burns",
+      "Patient's palm plus fingers equals 1% TBSA",
+      "Palm alone without fingers equals 0.5% TBSA",
+      "Useful for subtracting unburned islands"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients with major injuries meeting specialized **burn centre referral criteria** must be transferred to dedicated burn facilities following initial resuscitation. Established criteria include partial-thickness burns exceeding ten percent total body surface area, burns involving functionally critical areas like the face, hands, feet, genitalia, perineum, or major joints, any full-thickness burn, high-voltage electrical burns, chemical burns, and any documented smoke inhalation injury.",
+   "say": "Burn center referral is mandatory for burns exceeding ten percent surface area, full-thickness burns, chemical or electrical trauma, inhalation injury, or burns involving the face, hands, or genitalia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Criteria for Specialized Burn Centre Referral"
+    ],
+    "rows": [
+     [
+      "Burn Size and Depth",
+      "Partial-thickness over 10% TBSA, or any full-thickness burn of any size"
+     ],
+     [
+      "Critical Anatomical Sites",
+      "Burns involving face, hands, feet, genitalia, perineum, or overlying major joints"
+     ],
+     [
+      "Burn Mechanism",
+      "High-voltage electrical burns, lightning strikes, and corrosive chemical burns"
+     ],
+     [
+      "Respiratory Compromise",
+      "Concomitant smoke inhalation injury or carbon monoxide poisoning"
+     ],
+     [
+      "Associated Comorbidities",
+      "Concomitant mechanical trauma, extreme ages, or severe pre-existing illness"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "phy-cardiac-electro",
+ "subject": "physiology",
+ "title": "Mean Electrical Axis, Einthoven Triangle, and Heart Block",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "During ventricular depolarisation, the spatial summation of all individual myocyte electrical dipoles generates an instantaneous net cardiac vector. The average direction of this electrical vector in the frontal plane is the **mean electrical axis**, normally pointing downward and to the patient's left between negative thirty degrees and positive ninety degrees.",
+   "say": "The mean electrical axis represents the average frontal-plane direction of ventricular depolarisation, normally lying between minus 30 and plus 90 degrees.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Hexaxial frontal lead reference system and mean electrical axis quadrants.",
+    "caption": "Hexaxial reference system and electrical axis determination in the frontal plane. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The geometrical foundation of frontal plane limb leads is **Einthoven triangle**, an equilateral triangle formed by electrical electrodes placed on the right arm, left arm, and left leg, with the heart at its center. Einthoven law dictates that at any given instant, the electrical potential of Lead II equals the mathematical sum of Lead I and Lead III.",
+   "say": "Einthoven triangle models the heart at the center of three limb leads. Einthoven law states that Lead II potential equals Lead I plus Lead III.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bipolar Limb Lead",
+     "Positive Electrode",
+     "Negative Electrode",
+     "Vector Angle in Frontal Plane"
+    ],
+    "rows": [
+     [
+      "Lead I",
+      "Left Arm (LA)",
+      "Right Arm (RA)",
+      "0 degrees (horizontal)"
+     ],
+     [
+      "Lead II",
+      "Left Leg (LL)",
+      "Right Arm (RA)",
+      "+60 degrees (inferior left)"
+     ],
+     [
+      "Lead III",
+      "Left Leg (LL)",
+      "Left Arm (LA)",
+      "+120 degrees (inferior right)"
+     ],
+     [
+      "aVR (Augmented)",
+      "Right Arm (RA)",
+      "Combination (LA + LL)",
+      "-150 degrees (superior right)"
+     ],
+     [
+      "aVL (Augmented)",
+      "Left Arm (LA)",
+      "Combination (RA + LL)",
+      "-30 degrees (superior left)"
+     ],
+     [
+      "aVF (Augmented)",
+      "Left Leg (LL)",
+      "Combination (RA + LA)",
+      "+90 degrees (vertical inferior)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Axis determination is performed clinically by evaluating the net polarity of the QRS complex in Leads I and aVF. If QRS is predominantly positive in both Lead I and Lead aVF, the axis is normal. When the axis shifts between negative thirty and negative ninety degrees, **left axis deviation** is present, caused by left ventricular hypertrophy, left anterior fascicular block, or inferior myocardial infarction.",
+   "say": "Normal axis is positive in both Lead I and aVF. Left axis deviation shifts the axis between minus 30 and minus 90 degrees, seen in left ventricular hypertrophy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Axis Deviation (-30 to -90 deg)",
+     "points": [
+      "Lead I is positive; Lead aVF is negative",
+      "Causes: Left anterior fascicular block, LV hypertrophy",
+      "Inferior myocardial infarction (loss of inferior forces)",
+      "Endocardial cushion defects (ostium primum ASD)"
+     ]
+    },
+    "right": {
+     "title": "Right Axis Deviation (+90 to +180 deg)",
+     "points": [
+      "Lead I is negative; Lead aVF is positive",
+      "Causes: Right ventricular hypertrophy, pulmonary embolism",
+      "Left posterior fascicular block (rare isolated block)",
+      "Chronic obstructive pulmonary disease, vertical heart"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conversely, **right axis deviation** occurs when the mean vector shifts between positive ninety and positive one hundred and eighty degrees, manifesting as a negative QRS in Lead I and a positive QRS in aVF. Pathological causes include right ventricular hypertrophy, acute pulmonary embolism with right ventricular strain, chronic cor pulmonale, and left posterior fascicular block.",
+   "say": "Right axis deviation shifts between plus 90 and plus 180 degrees, with negative Lead I and positive aVF, caused by right ventricular strain or pulmonary embolism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pe",
+      "label": "Pulmonary Arterial Hypertension or Acute Pulmonary Embolism"
+     },
+     {
+      "id": "rvh",
+      "label": "Right Ventricular Pressure Overload Induces Concentric Hypertrophy"
+     },
+     {
+      "id": "vec",
+      "label": "Right Ventricular Electrical Dipoles Overwhelm Left Ventricle"
+     },
+     {
+      "id": "rad",
+      "label": "Frontal Axis Rotates Rightward into +90 to +180 Degree Quadrant"
+     }
+    ],
+    "edges": [
+     [
+      "pe",
+      "rvh"
+     ],
+     [
+      "rvh",
+      "vec"
+     ],
+     [
+      "vec",
+      "rad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impairment of atrioventricular electrical conduction is categorized into three degrees of heart block. In **first-degree heart block**, every atrial impulse conducts to the ventricles, but conduction through the AV node is abnormally delayed, manifesting on the electrocardiogram as a fixed, prolonged PR interval exceeding zero point two zero seconds (five small squares).",
+   "say": "First-degree heart block features delayed AV nodal conduction with a constant, prolonged PR interval exceeding 0.20 seconds, with every P wave followed by a QRS.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AV Block Tier",
+     "Anatomical Site of Delay",
+     "ECG Diagnostic Pattern",
+     "Clinical Prognosis & Management"
+    ],
+    "rows": [
+     [
+      "First-Degree Block",
+      "AV node slow pathway",
+      "PR interval > 0.20 s; 1:1 AV conduction",
+      "Benign; often vagal tone or beta-blockers"
+     ],
+     [
+      "Mobitz Type I (Wenckebach)",
+      "Within AV nodal body",
+      "Progressive PR lengthening before dropped QRS",
+      "Usually benign, reversible nodal ischaemia"
+     ],
+     [
+      "Mobitz Type II",
+      "His bundle or bundle branches",
+      "Constant PR interval with intermittent dropped QRS",
+      "Dangerous; high risk of progression to complete block"
+     ],
+     [
+      "Third-Degree (Complete)",
+      "AV node or bilateral bundles",
+      "Complete AV dissociation; P and QRS independent",
+      "High syncope risk (Stokes-Adams); requires pacemaker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Second-degree block subdivides into Mobitz Type I (Wenckebach) and Mobitz Type II. In Mobitz Type I, the PR interval progressively lengthens across successive cardiac cycles until an AV impulse fails to conduct, resulting in a dropped QRS. In **Mobitz Type II block**, the PR interval remains constant before an isolated P wave suddenly fails to conduct, indicating infra-Hisian disease.",
+   "say": "Mobitz Type I shows progressive PR lengthening before a dropped beat. Mobitz Type II exhibits fixed PR intervals with sudden non-conducted P waves, requiring pacing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mobitz Type I (Wenckebach)",
+     "points": [
+      "Pathology localized within AV node tissue",
+      "Progressive PR lengthening until P wave dropped",
+      "Shortest PR occurs immediately after dropped beat",
+      "Responds favorably to atropine; pacemaker rarely needed"
+     ]
+    },
+    "right": {
+     "title": "Mobitz Type II",
+     "points": [
+      "Pathology localized below AV node (His-Purkinje system)",
+      "Fixed, constant PR intervals with periodic dropped QRS",
+      "Carries high risk of sudden asystole and Stokes-Adams syncope",
+      "Absolute indication for permanent pacemaker implantation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complete failure of atrial impulses to reach the ventricles produces **third-degree heart block**, or complete AV block. The atria contract under control of the SA node near seventy beats per minute, while an independent ventricular escape pacemaker paces the ventricles at twenty to forty beats per minute. The ECG reveals total AV dissociation with completely unrelated P waves and wide QRS complexes.",
+   "say": "Third-degree complete heart block exhibits complete dissociation between atria and ventricles, as an escape pacemaker drives slow, independent ventricular beats.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tran",
+      "label": "Total Anatomical or Functional Interruption of AV Node / His Axis"
+     },
+     {
+      "id": "atria",
+      "label": "Atria Depolarise Independently Driven by SA Node (Rate 70 to 80 bpm)"
+     },
+     {
+      "id": "vent",
+      "label": "Infranodal Escape Pacemaker Drives Ventricles (Rate 25 to 40 bpm)"
+     },
+     {
+      "id": "ecg",
+      "label": "Electrocardiogram Shows Complete AV Dissociation and Stokes-Adams Risk"
+     }
+    ],
+    "edges": [
+     [
+      "tran",
+      "atria"
+     ],
+     [
+      "tran",
+      "vent"
+     ],
+     [
+      "atria",
+      "ecg"
+     ],
+     [
+      "vent",
+      "ecg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sudden transient pauses in ventricular escape rhythm during transitions into high-grade heart block cause severe cerebral hypoperfusion, producing sudden syncope termed **Stokes-Adams attacks**. The patient loses consciousness abruptly without warning aura, exhibiting marked pallor followed by reactive flushing upon return of cardiac contractions, treated definitively with urgent transvenous pacing.",
+   "say": "Stokes-Adams attacks cause sudden syncope during transient ventricular asystole in complete block, presenting with sudden collapse and pallor.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Cardiac conduction block and severe bradyarrhythmia manifestations.",
+    "caption": "Severe atrioventricular block and ventricular escape rhythms on electrocardiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "module": "sur-atls",
+ "subject": "surgery",
+ "title": "Secondary Survey, Trauma Scores, Triage, and Damage Control Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The secondary survey begins strictly after the primary survey is completed, active ABCDE resuscitation is established, and the patient demonstrates stabilized vital functions. Structured as a comprehensive head-to-toe examination, this systematic evaluation encompasses a detailed neurological assessment, examination of all orifices, and obtaining an AMPLE history: Allergies, Medications, Past illnesses or pregnancy, Last meal, and Events surrounding the injury. The core purpose of the **secondary survey** is identifying all occult musculoskeletal, retroperitoneal, and visceral injuries.",
+   "say": "The secondary survey is a comprehensive head-to-toe assessment conducted only after the primary survey and resuscitation have stabilized the patient. It includes obtaining the essential AMPLE history.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AMPLE Component",
+     "Clinical Query",
+     "Resuscitative Impact"
+    ],
+    "rows": [
+     [
+      "A: Allergies",
+      "Antibiotic, analgesic, or tetanus toxoid allergies",
+      "Prevents severe iatrogenic anaphylaxis during trauma care"
+     ],
+     [
+      "M: Medications",
+      "Anticoagulants, antiplatelets, beta blockers",
+      "Explains absent tachycardia; guides reversal agents"
+     ],
+     [
+      "P: Past Illness / Pregnancy",
+      "Cardiopulmonary disease, diabetes, pregnancy status",
+      "Influences fluid tolerance and fetal monitoring protocols"
+     ],
+     [
+      "L: Last Meal",
+      "Timing of last solid food or liquid intake",
+      "Anticipates full stomach aspiration risk during intubation"
+     ],
+     [
+      "E: Events / Environment",
+      "Mechanism of trauma (seatbelt, ejection, fall height)",
+      "Predicts specific internal deceleration and blast injury patterns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classical organizational framework of modern trauma systems centers upon the **golden hour** concept. Pioneered by Cowley, this principle emphasizes that severely injured polytrauma patients experiencing uncontrolled haemorrhagic shock or critical cerebral ischaemia have the highest survival probability when definitive surgical haemorrhage control and resuscitation occur within sixty minutes of injury. While mortality follows a trimodal distribution spanning immediate, early, and late deaths, timely intervention during this early window halts the progression toward irreversible cellular shock and organ failure.",
+   "say": "The golden hour concept highlights that rapid resuscitation and surgical haemorrhage control within sixty minutes of trauma maximize survival by preventing irreversible cellular collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trimodal Death Peak",
+     "Timeline Following Injury",
+     "Primary Causes of Death",
+     "System Interventions"
+    ],
+    "rows": [
+     [
+      "First Peak (Immediate)",
+      "Seconds to minutes",
+      "Brainstem avulsion, high cord transection, aortic rupture",
+      "Injury prevention strategies (seatbelts, helmets, gun control)"
+     ],
+     [
+      "Second Peak (Early)",
+      "Minutes to several hours",
+      "Subdural haematoma, tension pneumothorax, ruptured spleen/liver",
+      "ATLS primary survey and golden hour surgical intervention"
+     ],
+     [
+      "Third Peak (Late)",
+      "Days to several weeks",
+      "Severe sepsis, multi-organ dysfunction syndrome (MODS)",
+      "Advanced ICU care, lung-protective ventilation, infection control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physiological grading in the field and emergency department utilizes the **Revised Trauma Score**, an established tool that predicts mortality based on initial clinical parameters. The score incorporates three physiological variables: the Glasgow Coma Scale score, the systolic blood pressure, and the spontaneous respiratory rate. Each variable is coded from zero to four according to specific measurement ranges. A low calculated physiological score correlates with high patient mortality, alerting triage personnel to transport the patient to a designated regional Level One trauma center.",
+   "say": "The Revised Trauma Score assesses the Glasgow Coma Scale, systolic blood pressure, and respiratory rate. Lower scores signify severe physiological derangement and higher mortality risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coded Value",
+     "Glasgow Coma Scale",
+     "Systolic Blood Pressure (mmHg)",
+     "Respiratory Rate (breaths/min)"
+    ],
+    "rows": [
+     [
+      "4",
+      "13 to 15",
+      "Greater than 89",
+      "10 to 29"
+     ],
+     [
+      "3",
+      "9 to 12",
+      "76 to 89",
+      "Greater than 29"
+     ],
+     [
+      "2",
+      "6 to 8",
+      "50 to 75",
+      "6 to 9"
+     ],
+     [
+      "1",
+      "4 to 5",
+      "1 to 49",
+      "1 to 5"
+     ],
+     [
+      "0",
+      "3",
+      "0 (No pulse)",
+      "0 (Apnoeic)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "While physiological scores guide triage, anatomical injury grading relies upon the **Injury Severity Score**. Calculated using the Abbreviated Injury Scale, the human body is divided into six anatomical regions: head and neck, face, thorax, abdomen, extremities and pelvis, and external surfaces. The score is computed as the sum of the squares of the highest Abbreviated Injury Scale scores in the three most severely injured body regions. The score ranges from one to seventy-five, with a score exceeding fifteen defining major polytrauma.",
+   "say": "The Injury Severity Score is an anatomical score summing the squares of the highest injury grades across three body regions. A score greater than fifteen defines severe major polytrauma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ais",
+      "label": "Assign AIS Grades (1-6) Across 6 Body Regions"
+     },
+     {
+      "id": "select",
+      "label": "Select Highest AIS Score in 3 Most Injured Regions"
+     },
+     {
+      "id": "square",
+      "label": "Sum the Squares of These Three AIS Scores"
+     },
+     {
+      "id": "total",
+      "label": "ISS > 15 Confirms Severe Major Polytrauma"
+     }
+    ],
+    "edges": [
+     [
+      "ais",
+      "select"
+     ],
+     [
+      "select",
+      "square"
+     ],
+     [
+      "square",
+      "total"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In circumstances where the quantity and severity of casualties overwhelm available medical personnel and facility resources, standard emergency management shifts into mass casualty protocols. Under a **mass casualty incident**, the ethical paradigm changes from providing maximal care to each individual patient to doing the greatest good for the greatest number of viable survivors. The triage team rapidly sorts casualties into four standardized color-coded categories: red, yellow, green, and black, according to physiological stability and the likelihood of survival.",
+   "say": "In mass casualty incidents, medical care focuses on saving the maximum number of salvageable lives. Patients are rapidly sorted into four color-coded categories based on urgency and survival potential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triage Category",
+     "Color Code",
+     "Clinical Description",
+     "Typical Examples"
+    ],
+    "rows": [
+     [
+      "Immediate (Priority 1)",
+      "Red",
+      "Life-threatening injuries treatable with immediate intervention",
+      "Tension pneumothorax, active external arterial bleeding, airway compromise"
+     ],
+     [
+      "Delayed (Priority 2)",
+      "Yellow",
+      "Serious injuries requiring surgical care within hours",
+      "Closed long bone fractures, stable abdominal trauma, large soft tissue wounds"
+     ],
+     [
+      "Minimal (Priority 3)",
+      "Green",
+      "Minor walking wounded capable of self-care and ambulation",
+      "Superficial abrasions, minor sprains, small lacerations"
+     ],
+     [
+      "Expectant (Priority 4)",
+      "Black",
+      "Deceased or catastrophic injuries incompatible with survival",
+      "Massive open brain injury, cardiac arrest, total body burns over 90%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When severely injured patients present with profound shock, attempting prolonged, definitive anatomical organ reconstruction in the operating theater frequently leads to intraoperative death on the table. Profound shock, massive fluid administration, and extensive tissue trauma trigger the lethal triad of trauma: hypothermia, severe metabolic acidosis, and consumptive coagulopathy. Recognizing this physiological exhaustion dictates an immediate transition from traditional complete repair to staged **damage control surgery**, designed to truncate operative duration and prioritize survival over anatomical perfection.",
+   "say": "Prolonged surgery in hypothermic, coagulopathic patients is lethal. Damage control surgery replaces definitive reconstruction with brief, life-saving maneuvers to arrest bleeding and control contamination.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-abdominal_trauma.webp",
+    "alt": "Medical illustration showing signs of abdominal trauma and retroperitoneal injury.",
+    "caption": "Abdominal trauma signs, inspection for pelvic stability, and retroperitoneal injury markers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Damage control surgery proceeds through three strictly planned stages. Stage One comprises an immediate, abbreviated emergency laparotomy lasting under sixty to ninety minutes, focusing exclusively on surgical haemorrhage control via packing or temporary intravascular shunts, and rapid **contamination control** by stapling or ligating hollow viscus injuries without constructing bowel anastomoses. The abdomen is left open with temporary negative-pressure vacuum closure to prevent fatal abdominal compartment syndrome, allowing the patient to be transferred immediately to the intensive care unit.",
+   "say": "Stage one of damage control surgery focuses exclusively on stopping haemorrhage with packing and controlling contamination, leaving the abdomen open to avoid abdominal compartment syndrome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stage1",
+      "label": "Stage 1: Abbreviated Laparotomy (<90 min) & Packing"
+     },
+     {
+      "id": "stage2",
+      "label": "Stage 2: ICU Resuscitation, Warming, & MTP Correction"
+     },
+     {
+      "id": "stage3",
+      "label": "Stage 3: Planned Re-Laparotomy (24-48 h) & Reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "stage1",
+      "stage2"
+     ],
+     [
+      "stage2",
+      "stage3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stage Two consists of intensive resuscitation in the surgical intensive care unit, dedicated to reversing the lethal triad before returning to the operating room. Active internal core rewarming restores normal temperature, while balanced blood component transfusion corrects coagulopathy and clears lactic acidosis. Once physiological normalization is achieved, usually twenty-four to forty-eight hours post-injury, **stage three laparotomy** is performed. The surgical team removes the intra-abdominal packs, conducts formal definitive organ reconstruction, performs necessary gastrointestinal anastomoses, and achieves permanent fascial abdominal closure.",
+   "say": "Stage two reverses acidosis and hypothermia in the intensive care unit. Once physiological parameters normalize, stage three returns the patient to the operating room for definitive reconstructive repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Location",
+     "Primary Clinical Objectives",
+     "Key Pitfalls to Avoid"
+    ],
+    "rows": [
+     [
+      "Stage 1: Abbreviated Surgery",
+      "Operating Room",
+      "Arrest haemorrhage (packing); control contamination; temporary abdominal closure",
+      "Do not perform lengthy bowel anastomoses; do not close fascia under tension"
+     ],
+     [
+      "Stage 2: Physiological Resuscitation",
+      "Intensive Care Unit",
+      "Active core warming; MTP transfusion; correct hypocalcaemia and acidosis",
+      "Avoid excessive crystalloid fluid overload; monitor for secondary compartment syndrome"
+     ],
+     [
+      "Stage 3: Definitive Reconstruction",
+      "Operating Room",
+      "Pack removal; thorough peritoneal washout; bowel anastomoses; fascial closure",
+      "Ensure complete haemostasis after pack removal before concluding reconstruction"
+     ]
+    ]
+   }
+  }
+ ]
+}

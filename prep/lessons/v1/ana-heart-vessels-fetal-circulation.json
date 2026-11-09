@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "ana-heart-vessels",
+ "subject": "anatomy",
+ "title": "Fetal Circulation and Circulatory Changes at Birth",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The human **fetal circulation** is anatomically configured to bypass nonventilated, high-resistance fetal lungs and prioritize highly oxygenated placental blood delivery to the rapidly developing brain and myocardium. It utilizes three specialized physiological shunts: the ductus venosus, the foramen ovale, and the ductus arteriosus.",
+   "say": "The fetal circulation is arranged to bypass high-resistance, fluid-filled lungs and direct oxygen-rich placental blood to the brain and heart. It relies on three vascular shunts: the ductus venosus, the foramen ovale, and the ductus arteriosus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-fetal-remnants.svg",
+    "alt": "Fetal circulation pathways, shunts, and adult ligamentous remnants",
+    "caption": "Fetal circulatory shunts and postpartum vascular transformation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Oxygenated blood returning from the placenta travels via the single left umbilical vein with an oxygen saturation of eighty percent. Arriving at the liver, roughly half of this blood enters the hepatic sinusoids while the remainder bypasses the liver through the **ductus venosus**, flowing straight into the inferior vena cava and reaching the right atrium.",
+   "say": "Placental blood returns through the left umbilical vein with eighty percent oxygen saturation. Reaching the liver, half flows through hepatic sinusoids while the rest bypasses hepatic tissue through the ductus venosus directly into the inferior vena cava.",
+   "vis": {
+    "kind": "flow",
+    "title": "Placental Inflow Stream",
+    "nodes": [
+     {
+      "id": "plac",
+      "label": "Placenta: 80% Oxygenated"
+     },
+     {
+      "id": "vein",
+      "label": "Left Umbilical Vein"
+     },
+     {
+      "id": "shunt",
+      "label": "Ductus Venosus Hepatic Bypass"
+     },
+     {
+      "id": "ivc",
+      "label": "Inferior Vena Cava to Right Atrium"
+     }
+    ],
+    "edges": [
+     [
+      "plac",
+      "vein"
+     ],
+     [
+      "vein",
+      "shunt"
+     ],
+     [
+      "shunt",
+      "ivc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inside the right atrium, the crista dividens of the limbus fossae ovalis directs the well-oxygenated stream from the inferior vena cava across the **foramen ovale** directly into the left atrium. From the left ventricle, this high-oxygen blood enters the ascending aorta to preferentially supply the carotid and coronary arteries nourishing the brain and heart.",
+   "say": "Within the right atrium, the crista dividens channels the stream from the inferior vena cava across the foramen ovale into the left atrium. This blood enters the ascending aorta to nourish the coronary arteries and developing brain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inferior Vena Cava Stream",
+     "points": [
+      "Contains oxygenated placental return",
+      "Guided by valve of IVC (Eustachian valve)",
+      "Streams across foramen ovale to left atrium",
+      "Perfuses carotid and coronary arteries"
+     ]
+    },
+    "right": {
+     "title": "Superior Vena Cava Stream",
+     "points": [
+      "Carries deoxygenated blood from head",
+      "Directed across tricuspid into right ventricle",
+      "Enters pulmonary artery outflow",
+      "Shunted across ductus arteriosus to lower body"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conversely, deoxygenated blood returning from the fetal upper body via the superior vena cava is directed across the tricuspid valve into the right ventricle. The right ventricle pumps this blood into the pulmonary artery, where ninety percent bypasses the high-resistance fetal lungs through the **ductus arteriosus** directly into the descending aorta.",
+   "say": "Deoxygenated blood from the upper body enters the right ventricle and is ejected into the pulmonary trunk. Ninety percent of this flow bypasses the nonventilated lungs through the ductus arteriosus, dumping directly into the descending aorta.",
+   "vis": {
+    "kind": "flow",
+    "title": "Right Ventricular Ejection Shunt",
+    "nodes": [
+     {
+      "id": "svc",
+      "label": "Superior Vena Cava Deoxygenated Stream"
+     },
+     {
+      "id": "rv",
+      "label": "Right Ventricle Outflow"
+     },
+     {
+      "id": "pda",
+      "label": "Ductus Arteriosus (90% Shunted)"
+     },
+     {
+      "id": "aorta",
+      "label": "Descending Aorta to Viscera and Placenta"
+     }
+    ],
+    "edges": [
+     [
+      "svc",
+      "rv"
+     ],
+     [
+      "rv",
+      "pda"
+     ],
+     [
+      "pda",
+      "aorta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dramatic circulatory changes occur at birth triggered by the newborn first breath and cord clamping. Pulmonary aeration expands alveolar capillaries, causing **pulmonary vascular resistance** to plunge dramatically. Blood flow through the pulmonary arteries surges, dramatically augmenting venous return to the left atrium and raising left atrial pressure above right atrial pressure.",
+   "say": "Sweeping vascular adjustments take place at birth upon the infant first breath and cord clamping. Lung expansion plunges pulmonary vascular resistance, sending massive blood flow through pulmonary veins into the left atrium and raising left atrial pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physiological Transition",
+     "Fetal Circulatory State",
+     "Neonatal Circulatory State",
+     "Underlying Trigger"
+    ],
+    "rows": [
+     [
+      "Pulmonary Resistance",
+      "Extremely high (collapsed lungs)",
+      "Plunges immediately to low baseline",
+      "Alveolar aeration with oxygen"
+     ],
+     [
+      "Systemic Resistance",
+      "Low (parallel placental circuit)",
+      "Surges with cord clamping",
+      "Removal of low-resistance placenta"
+     ],
+     [
+      "Foramen Ovale",
+      "Open (RA pressure exceeds LA)",
+      "Functionally sealed (LA exceeds RA)",
+      "Increased pulmonary venous return"
+     ],
+     [
+      "Ductus Arteriosus",
+      "Patent (PGE2 from placenta)",
+      "Constricts within 15 hours",
+      "Rising arterial PaO2 and falling PGE2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The reversal of the interatrial pressure gradient presses the flexible septum primum firmly against the muscular septum secundum, functionally sealing the foramen ovale. The ductus arteriosus constricts rapidly in response to rising arterial oxygen tension and falling circulating **prostaglandin E2** levels, closing functionally within fifteen hours post-delivery.",
+   "say": "The reversed atrial pressure gradient presses the septum primum against the septum secundum, closing the foramen ovale. The ductus arteriosus constricts rapidly due to rising blood oxygen levels and dropping prostaglandin E2, sealing within fifteen hours.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-vessel-walls.svg",
+    "alt": "Ductal smooth muscle contraction and vascular wall remodelling",
+    "caption": "Arterial remodelling and ligamentous obliteration of fetal shunts. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Over subsequent weeks, fibrous obliteration converts each fetal channel into an anatomical adult ligament: the umbilical vein becomes the **ligamentum teres hepatis**, the ductus venosus becomes the ligamentum venosum, the ductus arteriosus becomes the ligamentum arteriosum, and distal umbilical arteries become the medial umbilical ligaments.",
+   "say": "Over subsequent weeks, fibrous obliteration converts fetal shunts into adult ligaments: the umbilical vein becomes the ligamentum teres, the ductus venosus becomes the ligamentum venosum, and the ductus arteriosus becomes the ligamentum arteriosum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fetal Structure",
+     "Adult Fibrous Remnant",
+     "Anatomical Location",
+     "Clinical Sign / Pathology"
+    ],
+    "rows": [
+     [
+      "Left Umbilical Vein",
+      "Ligamentum teres hepatis",
+      "Free margin of falciform ligament",
+      "Recanalizes in portal hypertension"
+     ],
+     [
+      "Ductus Venosus",
+      "Ligamentum venosum",
+      "Fissure on visceral liver surface",
+      "Separates caudate from left lobe"
+     ],
+     [
+      "Foramen Ovale",
+      "Fossa ovalis (limbus margin)",
+      "Interatrial septum",
+      "Atrial septal defect, paradoxical stroke"
+     ],
+     [
+      "Ductus Arteriosus",
+      "Ligamentum arteriosum",
+      "Aorta to pulmonary bifurcation",
+      "Patent ductus, recurrent nerve tether"
+     ],
+     [
+      "Umbilical Arteries",
+      "Medial umbilical ligaments",
+      "Anterior abdominal wall folds",
+      "Bladder superior vesical branches"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the ductus arteriosus to close produces **patent ductus arteriosus**, characterized by a continuous machinery murmur loudest in the left infraclavicular region and a wide pulse pressure. Coarctation of the aorta typically involves the juxtaductal region near the insertion of the ligamentum arteriosum, presenting with upper extremity hypertension and delayed, diminished femoral pulses.",
+   "say": "Failure of ductal closure causes patent ductus arteriosus, recognized by a continuous machinery murmur below the left clavicle and bounding pulses. Juxtaductal coarctation of the aorta near the ligamentum arteriosum produces upper body hypertension with weak femoral pulses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patent Ductus Arteriosus",
+     "points": [
+      "Continuous rough machinery murmur",
+      "Left-to-right shunt from aorta to pulmonary",
+      "Treated with indomethacin or surgical ligation",
+      "Maintained patent in cyanotic heart disease with PGE1"
+     ]
+    },
+    "right": {
+     "title": "Coarctation of the Aorta",
+     "points": [
+      "Juxtaductal aortic narrowing",
+      "Radiofemoral pulse delay and discrepancy",
+      "Rib notching from intercostal collaterals",
+      "Strong association with Turner syndrome"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

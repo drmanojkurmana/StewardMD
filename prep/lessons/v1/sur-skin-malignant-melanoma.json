@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "sur-skin",
+ "subject": "surgery",
+ "title": "Malignant Melanoma and Benign Skin Proliferations",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Arising from neuroectodermal melanocytes, **malignant melanoma** represents the most lethal of all cutaneous neoplasms. Genetic drivers include activating mutations in the BRAF oncogene, most commonly the V600E substitution in the MAP kinase signalling cascade, alongside NRAS and KIT mutations. Intense intermittent ultraviolet exposure, blistering childhood sunburns, family history, and the presence of dysplastic melanocytic naevi represent the predominant predisposing risk factors.",
+   "say": "Malignant melanoma is an aggressive skin cancer arising from melanocytes, driven by BRAF V600E and NRAS mutations. Severe blistering sunburns and dysplastic naevi are primary risk factors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/melanoma-fig1.webp",
+    "alt": "Clinical appearance of an asymmetric pigmented malignant melanoma lesion.",
+    "caption": "Cutaneous malignant melanoma with asymmetrical architecture and irregular margins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bedside clinical screening for suspicious pigmented lesions follows the **ABCDE melanoma criteria**. Lesions are scrutinised for Asymmetry where two halves do not match, Border irregularity with notched or scalloped contours, Colour variegation displaying multiple shades of black, brown, red, or white, Diameter exceeding six millimetres, and Evolution denoting any documented alteration in size, shape, surface elevation, or bleeding.",
+   "say": "The ABCDE rule helps screen suspicious pigmented lesions: Asymmetry, Border irregularity, Colour variegation, Diameter greater than six millimetres, and Evolution in appearance over time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Abbreviation",
+     "Physical Exam Characteristic",
+     "Malignancy Concern"
+    ],
+    "rows": [
+     [
+      "Asymmetry",
+      "A",
+      "One half of the lesion fails to match the other",
+      "Disordered, uncoordinated lateral growth"
+     ],
+     [
+      "Border",
+      "B",
+      "Edges are scalloped, notched, or poorly defined",
+      "Irregular peripheral invasion into dermis"
+     ],
+     [
+      "Colour",
+      "C",
+      "Hues of tan, dark brown, black, red, and blue",
+      "Varying melanin concentration and regression"
+     ],
+     [
+      "Diameter",
+      "D",
+      "Lesion diameter greater than 6 mm (pencil eraser)",
+      "Higher likelihood of invasive malignancy"
+     ],
+     [
+      "Evolution",
+      "E",
+      "Documented change in size, shape, or symptom",
+      "Most sensitive single historical indicator"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The single most important histological prognostic determinant in primary melanoma is the **Breslow thickness**. Measured with an ocular micrometer, it quantifies the vertical microscopic depth in millimetres from the top of the epidermal granular cell layer to the deepest invading malignant melanocyte in the dermis or subcutis. Survival correlates inversely with Breslow depth, which dictates the necessary surgical resection margins and indications for sentinel node biopsy.",
+   "say": "Breslow thickness measures vertical tumour depth in millimetres from the granular layer to the deepest melanocyte. It is the single most important prognostic factor in primary cutaneous melanoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cutaneous-malignancies-melanoma-and-non-melanoma-fig1.webp",
+    "alt": "Diagram illustrating microscopic tumor invasion depth across cutaneous layers.",
+    "caption": "Cross-sectional anatomy of skin layers correlating with depth of tumor invasion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Historically, microstaging utilised the **Clark level of invasion**, which categorises tumour penetration according to anatomical dermal boundaries. Level one is confined to the epidermis in situ; level two invades into the papillary dermis; level three fills the papillary dermis and abuts the reticular dermis; level four invades between collagen bundles of the reticular dermis; and level five infiltrates into the underlying subcutaneous adipose tissue.",
+   "say": "The Clark classification defines anatomical levels of invasion from level one in situ within the epidermis to level five invading the subcutaneous fat, complementing Breslow measurement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Breslow Thickness",
+     "points": [
+      "Continuous metric measured in millimetres",
+      "Highest reproducibility and prognostic accuracy",
+      "Determines required surgical excision margins",
+      "Primary factor in AJCC melanoma staging"
+     ]
+    },
+    "right": {
+     "title": "Clark Level",
+     "points": [
+      "Categorical assessment of anatomic skin layers",
+      "Substantial inter-observer variation",
+      "Levels I (epidermis) through V (subcutis)",
+      "Retained primarily for very thin (<0.8 mm) tumours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Definitive surgical therapy requires **wide local excision** with margins dictated strictly by the Breslow depth confirmed on initial excisional biopsy. Melanoma in situ requires a zero point five centimetre clear margin. Tumours measuring up to one millimetre require a one centimetre margin, tumours between one and two millimetres warrant a one to two centimetre margin, while lesions thicker than two millimetres mandate a two centimetre radical margin down to deep fascia.",
+   "say": "Wide local excision margins depend strictly on Breslow depth: zero point five centimetres for in situ, one centimetre up to one millimetre depth, and two centimetres for tumours exceeding two millimetres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Breslow Tumour Thickness",
+     "Recommended Surgical Margin",
+     "Deep Plane of Dissection"
+    ],
+    "rows": [
+     [
+      "Melanoma in situ",
+      "0.5 cm clear margin",
+      "Down to subcutaneous fat"
+     ],
+     [
+      "1.0 mm or less",
+      "1.0 cm clear margin",
+      "Down to, but not including, deep muscular fascia"
+     ],
+     [
+      "1.01 to 2.0 mm",
+      "1.0 to 2.0 cm clear margin",
+      "Down to, but not including, deep muscular fascia"
+     ],
+     [
+      "Greater than 2.0 mm",
+      "2.0 cm clear margin",
+      "Down to, but not including, deep muscular fascia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To stage regional lymphatic basins accurately, **sentinel lymph node biopsy** is performed concurrently with definitive wide excision. A radiocolloid tracer like technetium-99m and vital blue dye are injected intradermally around the primary biopsy site. The first draining lymph node in the regional basin is identified with a gamma probe, excised, and examined with serial sectioning and immunohistochemistry for micrometastatic disease, indicated for all melanomas thicker than zero point eight millimetres.",
+   "say": "Sentinel lymph node biopsy maps the first draining lymph node using radiocolloid and blue dye. It is recommended for melanomas thicker than zero point eight millimetres or ulcerated thin tumours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inject",
+      "label": "Peritumoural injection of radiocolloid (Tc-99m) and patent blue dye"
+     },
+     {
+      "id": "track",
+      "label": "Lymphatic drainage concentrates tracer in sentinel node"
+     },
+     {
+      "id": "detect",
+      "label": "Intraoperative gamma probe and visual blue localization"
+     },
+     {
+      "id": "biopsy",
+      "label": "Targeted lymph node excision and immunohistochemical microstaging"
+     }
+    ],
+    "edges": [
+     [
+      "inject",
+      "track"
+     ],
+     [
+      "track",
+      "detect"
+     ],
+     [
+      "detect",
+      "biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating vascular proliferations requires distinguishing benign tumours from vascular malformations, exemplified by **infantile haemangioma**. Appearing shortly after birth as a bright red, strawberry-like plaque, it undergoes rapid cellular proliferation during the first year of life followed by spontaneous slow involution over five to seven years. It stains positively for glucose transporter one protein and responds promptly to oral propranolol therapy when functional impairment threatens vision or airway.",
+   "say": "Infantile haemangiomas are GLUT-1 positive vascular tumours that proliferate during infancy before spontaneously regressing over several years. Oral propranolol is first-line when treatment is needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infantile Haemangioma",
+     "points": [
+      "Appears in early weeks of life, not at birth",
+      "Rapid proliferative phase followed by involution",
+      "GLUT-1 positive on immunohistochemistry",
+      "Responds excellently to oral propranolol"
+     ]
+    },
+    "right": {
+     "title": "Vascular Malformation",
+     "points": [
+      "Present at birth and grows proportionally",
+      "Never undergoes spontaneous regression",
+      "GLUT-1 negative on immunohistochemistry",
+      "Treated by sclerotherapy, laser, or excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A rapidly growing, crateriform cutaneous lesion that mimics squamous cell carcinoma is **keratoacanthoma**. Characteristically presenting on sun-exposed skin of elderly individuals, it evolves over several weeks into a firm, dome-shaped nodule with a central plug of keratin debris. Although lesions historically demonstrate spontaneous involution over months leaving a depressed scar, complete surgical excision with clear margins is standard management because histological differentiation from invasive squamous carcinoma is unreliable.",
+   "say": "Keratoacanthoma is a rapidly growing dome-shaped nodule with a central keratin-filled crater. Because it clinically and histologically resembles squamous cell carcinoma, surgical excision is standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Keratoacanthoma",
+     "Cutaneous Squamous Cell Carcinoma"
+    ],
+    "rows": [
+     [
+      "Growth Rate",
+      "Rapid evolution over 4 to 8 weeks",
+      "Slow progressive growth over months"
+     ],
+     [
+      "Lesion Morphology",
+      "Dome-shaped volcano nodule with central keratin crater",
+      "Indurated ulcer with hard, everted margins"
+     ],
+     [
+      "Natural History",
+      "Stabilisation and spontaneous regression",
+      "Persistent, progressive, and destructive"
+     ],
+     [
+      "Management",
+      "Complete excisional biopsy",
+      "Wide local excision with margin clearance"
+     ]
+    ]
+   }
+  }
+ ]
+}
