@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoeal-acute-diarrhoeal-disease",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoeal",
+ "title": "Acute Diarrhoeal Disease: Assessment and Home Fluids",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Defining diarrhoea by change, not count alone",
+   "tx": "**Acute diarrhoea** is the passage of three or more loose or watery stools in twenty four hours, or stools looser and more frequent than normal for that child, lasting under fourteen days. Exclusively breastfed infants passing frequent soft stools are explicitly excluded. Blood in stool reclassifies the illness as dysentery with a different treatment pathway.",
+   "say": "Three loose stools, or clearly looser than that child's normal, under fourteen days. Breastfed soft stools do not count. Blood changes the name and treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-infectious-diarrheal-diseases-and-fig1.webp",
+    "alt": "Causes and features of acute infectious diarrhoeal diseases and bacterial food poisoning",
+    "caption": "Acute infectious diarrhoea: organisms, mechanisms and clinical patterns. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Why children die: dehydration, not the organism",
+   "tx": "**Dehydration** kills through hypovolaemia, acidosis and potassium loss while the infection itself usually burns out in days, which is why mortality collapsed wherever oral rehydration reached homes early. The organism decides stool character and antibiotic need; the fluid deficit decides survival. Every assessment therefore grades water before naming microbes.",
+   "say": "Fluid loss kills; most infections self limit. Grade dehydration before naming organisms. Mortality fell where oral solution arrived early, not where antibiotics multiplied.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Loss", "Danger"],
+    "rows": [
+     ["Water and sodium", "Hypovolaemia, shock"],
+     ["Bicarbonate", "Metabolic acidosis"],
+     ["Potassium", "Ileus, cardiac effects"],
+     ["Continued intake failure", "Malnutrition spiral"]
+    ]
+   }
+  },
+  {
+   "title": "The four point dehydration examination",
+   "tx": "**Clinical assessment** grades four signs together: general condition, sunken eyes, thirst and drinking behaviour, and skin pinch returning instantly, slowly or very slowly. Two or more signs in a column place the child in no, some or severe dehydration, mapping directly onto treatment plans A, B and C without waiting for any laboratory.",
+   "say": "Condition, eyes, thirst, skin pinch. Two signs per column grade the child and pick plan A, B or C. No laboratory stands between examination and fluids.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Severe pattern"],
+    "rows": [
+     ["Condition", "Lethargic or unconscious"],
+     ["Eyes", "Very sunken"],
+     ["Drinking", "Unable or poor"],
+     ["Skin pinch", "Returns in 2 seconds or more"]
+    ]
+   }
+  },
+  {
+   "title": "Plan A: home fluids and the danger list",
+   "tx": "**Plan A** treats no dehydration at home: more fluid than usual, continued feeding and breastfeeding, and zinc for ten to fourteen days, with carers taught the four return signs of many stools, repeated vomiting, marked thirst, fever, blood in stool or failure to improve in three days. Home fluid recipes supplement, never replace, packaged oral solution.",
+   "say": "More fluid, keep feeding, zinc a fortnight, four return signs memorised. Home drinks supplement the packet. Plan A is treatment, not dismissal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "No dehydration graded"},
+     {"id": "b", "label": "Extra home fluids started"},
+     {"id": "c", "label": "Feeding and zinc continued"},
+     {"id": "d", "label": "Return if danger signs appear"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Plan B: measured oral rehydration",
+   "tx": "**Plan B** gives oral rehydration solution at seventy five millilitres per kilogram over four hours in a facility for some dehydration, by spoon or cup in small frequent sips, reassessing hourly and regrading at four hours. Vomiting pauses intake for ten minutes, then slower resumption succeeds in most children without any drip.",
+   "say": "Seventy five per kilo over four hours, spooned patiently, regraded at the end. Vomit, pause ten minutes, restart slower. Most children never need a vein.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Element", "Plan B detail"],
+    "rows": [
+     ["Volume", "75 ml per kg over 4 hours"],
+     ["Method", "Spoon or cup, small sips"],
+     ["Reassessment", "Hourly, regrade at 4 hours"],
+     ["Vomiting", "Pause 10 minutes, resume slower"]
+    ]
+   }
+  },
+  {
+   "title": "Plan C and the severe pathway",
+   "tx": "**Plan C** resuscitates severe dehydration with rapid intravenous Ringer's lactate in age banded volumes and timelines, oral solution added as soon as the child drinks, and half hourly reassessment until radial pulse strengthens. Nasogastric oral solution bridges when veins fail and referral travels are long, under close observation.",
+   "say": "Rapid lactate by age band, oral solution the moment drinking returns, pulse checked every half hour. Nasogastric fluids bridge failed veins and long referrals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intravenous route",
+     "points": ["Ringer's lactate preferred", "Age banded rapid volumes", "Half hourly reassessment", "Switch to oral when drinking"]
+    },
+    "right": {
+     "title": "Nasogastric bridge",
+     "points": ["Oral solution by tube", "When IV access fails", "Slow steady rate", "Referral continues meanwhile"]
+    }
+   }
+  },
+  {
+   "title": "Zinc and continued feeding",
+   "tx": "**Zinc supplementation** for ten to fourteen days shortens the episode, reduces stool volume and protects against further diarrhoea for two to three months, dosed twenty milligrams above six months and ten below. Continued age appropriate feeding, with an extra meal for two weeks after recovery, prevents the diarrhoea malnutrition cycle from tightening.",
+   "say": "Zinc a fortnight shortens illness and shields the next quarter. Keep feeding through illness, add a meal after. Starving the gut deepens the next episode.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Detail"],
+    "rows": [
+     ["Zinc over 6 months", "20 mg daily, 10 to 14 days"],
+     ["Zinc under 6 months", "10 mg daily, 10 to 14 days"],
+     ["Feeding", "Continue, breastfeed more often"],
+     ["After recovery", "Extra meal for 2 weeks"]
+    ]
+   }
+  },
+  {
+   "title": "Rotavirus and the vaccine effect",
+   "tx": "**Rotavirus** historically caused the largest share of severe dehydrating diarrhoea in under fives, with winter peaks, vomiting prominent and older infants hit hardest. Live oral vaccine in the infant schedule has shifted admissions downward where coverage holds. Norovirus, adenovirus and bacterial causes fill much of the remaining seasonal pattern.",
+   "say": "Rotavirus ruled severe infant diarrhoea before vaccine; admissions bend where coverage holds. Vomiting prominent, winter peaked, infants hardest hit remains its signature.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cause", "Clue"],
+    "rows": [
+     ["Rotavirus", "Infant, vomiting, winter peak"],
+     ["Norovirus", "Outbreaks, all ages, vomiting"],
+     ["ETEC and others", "Travellers, watery stools"],
+     ["Campylobacter", "Pain, sometimes blood, poultry link"]
+    ]
+   }
+  },
+  {
+   "title": "Prevention stacked: water to vaccine",
+   "tx": "**Prevention layers** run from safe water and excreta disposal through handwashing with soap, safe weaning food, exclusive breastfeeding for six months, measles and rotavirus immunisation, and vitamin A and zinc sufficiency. Programmes report diarrhoea deaths falling fastest where oral rehydration corners exist in facilities and packets sit stocked in homes before illness strikes.",
+   "say": "Water, hands, weaning food, breastfeeding, vaccines, stocked packets at home. Deaths fall fastest where solution waits in the house, not across town.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Layer", "Example"],
+    "rows": [
+     ["Water and excreta", "Safe source, toilet use"],
+     ["Hands and food", "Soap, covered weaning food"],
+     ["Host defence", "Breastfeeding, immunisation"],
+     ["Home readiness", "ORS packets stocked"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
