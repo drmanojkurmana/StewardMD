@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-tissue-repair",
+  "subject": "pathology",
+  "title": "Cellular Proliferation, Stem Cell Niches, and VEGF-Driven Angiogenesis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Following tissue injury and resolution of acute inflammation, the body restores architectural integrity through tissue repair. Repair proceeds through two coordinated processes: regeneration, which replaces damaged tissue with identical native parenchymal cells, and **scar formation**, which replaces unregenerated parenchymal defects with dense fibrous collagenous connective tissue.",
+      "say": "Tissue repair restores injured tissue through parenchymal regeneration or fibrous scar formation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tissue_injury",
+            "label": "Acute Ischemic, Toxic, or Mechanical Damage Kills Local Parenchymal Cells"
+          },
+          {
+            "id": "stromal_check",
+            "label": "Integrity of Underlying Extracellular Matrix Scaffolding Assessed"
+          },
+          {
+            "id": "regeneration_path",
+            "label": "Intact Matrix Allows Complete Parenchymal Regeneration by Stem Cells"
+          },
+          {
+            "id": "fibrosis_path",
+            "label": "Disrupted Basement Membrane Mandates Granulation Tissue and Scar Formation"
+          }
+        ],
+        "edges": [
+          [
+            "tissue_injury",
+            "stromal_check"
+          ],
+          [
+            "stromal_check",
+            "regeneration_path"
+          ],
+          [
+            "stromal_check",
+            "fibrosis_path"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The intrinsic regenerative capacity of any organ depends fundamentally on the proliferative classification of its constituent cells. Divided according to mitotic turnover, human tissues comprise continuously dividing labile tissues, quiescent **stable tissues**, and non-dividing permanent tissues that have permanently exited the cell cycle.",
+      "say": "Human tissues are classified by regenerative potential into labile, stable, and permanent tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Labile (Continuously Dividing) Cells",
+          "points": [
+            "Continuously proliferate throughout adult life to replace shed cells",
+            "Derived from self-renewing resident tissue stem cell pools",
+            "Examples: hematopoietic bone marrow stem cells, oral mucosal epithelium",
+            "Epidermis, gastrointestinal crypt epithelium, and urinary tract transitional cells"
+          ]
+        },
+        "right": {
+          "title": "Stable (Quiescent) Cells",
+          "points": [
+            "Normally quiescent in G0 phase with low baseline mitotic turnover",
+            "Capable of rapid reentry into G1 phase upon injury or growth factor drive",
+            "Examples: hepatic parenchyma, renal tubular cells, pancreatic acini",
+            "Vascular endothelial cells, fibroblasts, and smooth muscle cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast to labile and stable tissues, permanent cells cannot undergo mitotic division in postnatal life. Comprising nerve cells within the central nervous system, skeletal muscle fibers, and **ventricular cardiomyocytes**, irreversible necrosis in permanent tissues cannot be restored by parenchymal replication, repairing exclusively through permanent fibrous scar tissue.",
+      "say": "Permanent tissues like cardiac myocytes cannot divide, healing exclusively through fibrous scarring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Permanent (Non-Dividing) Cells",
+          "points": [
+            "Terminally differentiated and permanently exited cell cycle into G0",
+            "Cannot undergo mitotic division following ischemic or physical injury",
+            "Neurons in central nervous system and cardiac ventricular myocytes",
+            "Irreversible cell death heals strictly through fibrous scarring or gliosis"
+          ]
+        },
+        "right": {
+          "title": "Hepatic Regenerative Capacity (Stable)",
+          "points": [
+            "Hepatocytes reside in G0 phase but retain massive proliferative reserve",
+            "Following 60% partial hepatectomy, remaining liver regenerates fully within weeks",
+            "Driven by priming cytokines (IL-6, TNF) and growth factors (HGF, TGF-alpha)",
+            "Terminates precisely when original liver mass is restored via antiproliferative TGF-beta"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Parenchymal regeneration and fibrous repair are driven by soluble polypeptide growth factors that bind specific cell-surface receptors. Most growth factors, such as epidermal growth factor and hepatocyte growth factor, bind **receptor tyrosine kinases**, autophosphorylating cytoplasmic tyrosine residues to fire Ras-MAP kinase cascades that promote cell cycle entry.",
+      "say": "Growth factors bind receptor tyrosine kinases, firing Ras-MAP kinase to drive cell division.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "growth_factor_bind",
+            "label": "Polypeptide Growth Factor (EGF, HGF, PDGF) Binds Extracellular Receptor Domain"
+          },
+          {
+            "id": "dimer_autophospho",
+            "label": "Induces Receptor Dimerization and Cytoplasmic Tyrosine Autophosphorylation"
+          },
+          {
+            "id": "ras_raf_mapk",
+            "label": "Recruits GRB2/SOS to Activate Membrane-Bound Ras GTPase and MAP Kinase"
+          },
+          {
+            "id": "cyclin_d_transcribe",
+            "label": "Transcription Factors (c-Myc, c-Jun) Induce Cyclin D, Driving G0-to-S Phase Entry"
+          }
+        ],
+        "edges": [
+          [
+            "growth_factor_bind",
+            "dimer_autophospho"
+          ],
+          [
+            "dimer_autophospho",
+            "ras_raf_mapk"
+          ],
+          [
+            "ras_raf_mapk",
+            "cyclin_d_transcribe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Repair of extensive tissue defects requires the growth of new blood vessels from existing vascular beds to supply oxygen and nutrients. Termed **angiogenesis or neovascularization**, this critical repair process is orchestrated by vascular endothelial growth factor-A, which binds VEGFR-two on endothelial tip cells to direct vessel sprouting.",
+      "say": "Angiogenesis sprouts new capillaries from existing vessels, orchestrated by VEGF-A binding VEGFR-2.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/age-related-macular-degeneration-fig1.webp",
+        "caption": "Subretinal choroidal neovascularization displaying uncontrolled VEGF-driven endothelial capillary sprouting.",
+        "alt": "Choroidal neovascular membrane formation driven by pathological VEGF secretion"
+      }
+    },
+    {
+      "tx": "During capillary sprouting, specialized endothelial tip cells sense VEGF gradients, extending filopodia to guide directional vessel migration. As the tip cell migrates, trailing stalk cells proliferate to form a functional vascular lumen, regulated by the **Notch signaling pathway** which ensures that only selected endothelial cells become active leading tip sprouts.",
+      "say": "VEGF stimulates endothelial tip cells, while Notch signaling suppresses adjacent cells to pattern sprouts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypoxia_hif1",
+            "label": "Tissue Hypoxia Stabilizes Hypoxia-Inducible Factor-1-Alpha (HIF-1-Alpha)"
+          },
+          {
+            "id": "vegf_secretion",
+            "label": "HIF-1 Drives Massive Secretion of Vascular Endothelial Growth Factor (VEGF-A)"
+          },
+          {
+            "id": "tip_cell_lead",
+            "label": "Endothelial Tip Cell Extends Motile Filopodia Toward the VEGF Gradient"
+          },
+          {
+            "id": "delta_notch_brake",
+            "label": "Tip Cell Expresses Delta-Like Ligand 4, Activating Notch in Stalk Cells to Inhibit Sprouting"
+          }
+        ],
+        "edges": [
+          [
+            "hypoxia_hif1",
+            "vegf_secretion"
+          ],
+          [
+            "vegf_secretion",
+            "tip_cell_lead"
+          ],
+          [
+            "tip_cell_lead",
+            "delta_notch_brake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Newly formed angiogenic capillary vessels are initially leaky because endothelial intercellular junctions are immature and VEGF directly increases microvascular permeability. This persistent leakage explains why **healing granulation tissue** is characteristically edematous and why therapeutic anti-VEGF monoclonal antibodies rapidly resolve pathological tissue edema in wet macular degeneration.",
+      "say": "Immature angiogenic vessels leak fluid into healing tissue, explaining why granulation beds are edematous.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immature Angiogenic Capillaries",
+          "points": [
+            "Endothelial cells express incomplete, loosely organized tight junctions",
+            "VEGF directly promotes hyperpermeability through vesicular vacuolar organelles",
+            "Paucicellular basement membrane lacking invested mural pericytes",
+            "Leads to continuous fluid exudation and clinical tissue edema"
+          ]
+        },
+        "right": {
+          "title": "Vascular Maturation and Stabilization",
+          "points": [
+            "Platelet-derived growth factor (PDGF-BB) recruits stabilizing pericytes",
+            "Angiopoietin-1 (Ang-1) binds Tie-2 receptors, stabilizing endothelial junctions",
+            "Transforming growth factor-beta (TGF-beta) stimulates basement membrane assembly",
+            "Vessels mature into tight, non-leaking, structurally stable microvessels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pathological neovascularization occurs when excessive, unregulated VEGF production drives abnormal, fragile vessel proliferation. In proliferative diabetic retinopathy, retinal capillary ischemia drives hypoxia-inducible factor-one alpha stabilization, stimulating exuberant **retinal neovascularization** that bleeds into the vitreous cavity and causes tractional retinal detachment.",
+      "say": "Retinal ischemia stabilizes HIF-1, driving abnormal VEGF neovascularization in diabetic retinopathy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetic-retinopathy-fig1.webp",
+        "caption": "Proliferative diabetic retinopathy showing abnormal, fragile neovascular fronds sprouting across the retina.",
+        "alt": "Funduscopic view of proliferative diabetic retinopathy with neovascularization"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
