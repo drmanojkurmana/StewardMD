@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-muscle-nervous",
+ "subject": "anatomy",
+ "title": "Sarcomere Organization and Muscle Varieties",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Skeletal muscle consists of multinucleated cylindrical fibres displaying regular transverse striations under light microscopy. The basic structural and functional repeating unit of a myofibril is the **sarcomere**, delimited between two dark transverse boundary partitions called Z discs (Z lines). Sarcomeres arrange in series along the entire longitudinal length of each myofibril.",
+   "say": "Skeletal muscle consists of multinucleated fibres displaying cross-striations. The basic contractile unit of a myofibril is the sarcomere, bounded between two dark transverse partitions termed Z discs. Sarcomeres repeat in series along the entire length of the myofibril.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sarcomere.svg",
+    "alt": "Sarcomere bands: A band, I band, H zone, Z line, and M line",
+    "caption": "Sarcomere molecular ultrastructure and myofilament alignment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A sarcomere exhibits alternating dark and light bands under polarised light. The dark **A band** is anisotropic, representing the entire longitudinal span of thick myosin filaments with overlapping thin actin filaments at its lateral margins. The width of the A band remains completely constant and unchanging during both muscular contraction and passive stretching.",
+   "say": "A sarcomere features alternating dark and light bands. The dark A band corresponds to the full length of thick myosin filaments with overlapping actin filaments. The width of the A band remains entirely constant during muscle contraction and relaxation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "A Band Properties",
+     "points": [
+      "Anisotropic to polarised light",
+      "Spans full length of thick myosin filaments",
+      "Overlaps thin actin filaments at peripheries",
+      "Width remains constant during contraction"
+     ]
+    },
+    "right": {
+     "title": "I Band Properties",
+     "points": [
+      "Isotropic to polarised light",
+      "Composed purely of thin actin filaments",
+      "Bisected in the middle by the dark Z disc",
+      "Shortens and narrows during contraction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The light isotropic band flanking the Z disc is the **I band**, comprising only thin actin filaments without overlapping thick filaments. In the centre of the A band lies a pale region designated the H zone, containing thick myosin filaments alone without thin actin filaments. Bisecting the H zone is the M line, formed by myomesin anchoring adjacent thick filaments.",
+   "say": "The pale isotropic zone flanking the Z line is the I band, containing only thin actin filaments. In the middle of the A band sits the lighter H zone, housing myosin filaments devoid of actin overlap. Bisecting the H zone is the M line.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sarcomere Region",
+     "Filament Content",
+     "Central Dividing Boundary",
+     "Contraction Dynamic"
+    ],
+    "rows": [
+     [
+      "A Band",
+      "Thick myosin plus overlapping actin",
+      "Bisected by H zone and M line",
+      "Length remains completely constant"
+     ],
+     [
+      "I Band",
+      "Thin actin filaments only",
+      "Bisected by transverse Z disc",
+      "Shortens and narrows markedly"
+     ],
+     [
+      "H Zone",
+      "Thick myosin filaments only",
+      "Bisected by M line protein bridge",
+      "Narrows and completely disappears"
+     ],
+     [
+      "Z Disc (Line)",
+      "Alpha-actinin anchoring lattice",
+      "Defines sarcomere boundaries",
+      "Adjacent Z discs pulled closer together"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Muscular shortening obeys the classic **sliding filament theory**, wherein thin actin filaments slide past thick myosin filaments toward the M line. Cross-bridge cycling between myosin heads and actin draws adjacent Z discs closer together. While individual actin and myosin filament lengths do not change, the I band narrows and the H zone completely disappears.",
+   "say": "Muscle contraction proceeds via the sliding filament theory, where thin actin filaments slide along thick myosin filaments toward the centre. Myosin cross-bridges pull Z discs closer together. Filament lengths never change, but the I band narrows and the H zone vanishes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sliding Filament Cycle",
+    "nodes": [
+     {
+      "id": "ca",
+      "label": "Sarcoplasmic Calcium Influx"
+     },
+     {
+      "id": "trop",
+      "label": "Troponin C Binds Calcium"
+     },
+     {
+      "id": "shift",
+      "label": "Tropomyosin Uncovers Actin Sites"
+     },
+     {
+      "id": "power",
+      "label": "Myosin Head Power Stroke to M Line"
+     }
+    ],
+    "edges": [
+     [
+      "ca",
+      "trop"
+     ],
+     [
+      "trop",
+      "shift"
+     ],
+     [
+      "shift",
+      "power"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thin filaments consist of filamentous actin wound with two regulatory proteins: **tropomyosin**, which physically blocks myosin-binding sites on actin during rest, and troponin. Troponin is a heterotrimer: troponin T binds tropomyosin, troponin I inhibits actin-myosin interaction, and troponin C binds calcium released from the sarcoplasmic reticulum to trigger the power stroke.",
+   "say": "Thin filaments comprise actin wound with tropomyosin and troponin. Tropomyosin sterically blocks myosin-binding sites during relaxation. The troponin complex contains troponin T binding tropomyosin, troponin I inhibiting binding, and troponin C binding calcium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Troponin Subunits",
+     "points": [
+      "Troponin T: Anchors complex to tropomyosin",
+      "Troponin I: Inhibits actomyosin ATPase",
+      "Troponin C: Binds four calcium ions",
+      "Absent in smooth muscle tissue"
+     ]
+    },
+    "right": {
+     "title": "Thick Filament Myosin",
+     "points": [
+      "Two heavy chains forming coiled tail",
+      "Four light chains at globular heads",
+      "Possesses actin-binding catalytic site",
+      "Hydrolyses ATP to power mechanical swing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast to voluntary skeletal muscle, **cardiac muscle** consists of branched uninucleated cardiomyocytes joined end-to-end at specialized junctional complexes termed intercalated discs. Transverse segments of the intercalated disc contain fascia adherens and desmosomes that transmit mechanical tension, while longitudinal lateral segments pack gap junctions that permit rapid electrical syncytial coupling.",
+   "say": "Cardiac muscle consists of branched uninucleated cells connected by intercalated discs. Transverse disc segments feature fascia adherens and desmosomes to transfer mechanical pulling forces, while longitudinal segments carry gap junctions that enable electrical syncytial activation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-fibre-types.svg",
+    "alt": "Skeletal, cardiac, and smooth muscle histological comparison",
+    "caption": "Structural comparison of skeletal, cardiac, and smooth muscle varieties. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Involuntary non-striated **smooth muscle** lines hollow visceral organs and blood vessel walls, featuring spindle-shaped fusiform cells with a single central elongated nucleus. Lacking sarcomeric organization, smooth muscle cells lack troponin, instead relying upon calcium binding to calmodulin to activate myosin light-chain kinase and phosphorylate myosin heads.",
+   "say": "Smooth muscle lines visceral organs and vessels, featuring spindle cells with central elongated nuclei. Lacking sarcomeres and striations, smooth muscle lacks troponin, utilizing calmodulin to activate myosin light-chain kinase and trigger contraction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle Category",
+     "Microscopic Striations",
+     "Nuclear Topography",
+     "Calcium Regulatory Mechanism"
+    ],
+    "rows": [
+     [
+      "Skeletal Muscle",
+      "Regular cross-striations",
+      "Multiple peripheral flattened nuclei",
+      "Troponin C on thin actin filaments"
+     ],
+     [
+      "Cardiac Muscle",
+      "Cross-striations, intercalated discs",
+      "Single central oval nucleus",
+      "Troponin C on thin actin filaments"
+     ],
+     [
+      "Smooth Muscle",
+      "Non-striated, smooth cytoplasm",
+      "Single central corkscrew nucleus",
+      "Calmodulin activates myosin light-chain kinase"
+     ],
+     [
+      "Myoepithelium",
+      "Non-striated contractile bands",
+      "Stellate shape around acini",
+      "Expels glandular secretions in breast/salivary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thin actin filaments in smooth muscle anchor to proteinaceous structures called **dense bodies** scattered within the sarcoplasm and along the inner sarcolemma. Functionally analogous to Z discs of striated muscle, dense bodies contain alpha-actinin and are interconnected by intermediate filaments (desmin and vimentin), allowing corkscrew contraction of the cell.",
+   "say": "Thin filaments in smooth muscle anchor to protein dense bodies dispersed through the cytoplasm and membrane. Serving the role of Z discs, dense bodies contain alpha-actinin and anchor desmin filaments, producing a corkscrew twisting contraction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Smooth Muscle Contraction Pathway",
+    "nodes": [
+     {
+      "id": "ca",
+      "label": "Intracellular Calcium Surge"
+     },
+     {
+      "id": "calm",
+      "label": "Calcium-Calmodulin Complex Formation"
+     },
+     {
+      "id": "mlck",
+      "label": "Myosin Light-Chain Kinase Activation"
+     },
+     {
+      "id": "force",
+      "label": "Myosin Head Phosphorylation and Tension"
+     }
+    ],
+    "edges": [
+     [
+      "ca",
+      "calm"
+     ],
+     [
+      "calm",
+      "mlck"
+     ],
+     [
+      "mlck",
+      "force"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

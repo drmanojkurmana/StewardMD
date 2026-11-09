@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-lymphoid-vessels",
+ "subject": "anatomy",
+ "title": "Lymphoid Organs, Histology and Microvascular Architecture",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Lymph nodes are encapsulated bean-shaped secondary lymphoid organs arranged along lymphatic vessels. Histologically, a lymph node is divided into an outer cortex, an intermediate paracortex, and an inner medulla. The outer **lymph node cortex** contains spherical lymphoid follicles packed with B lymphocytes, dedicated to humoral immune activation.",
+   "say": "Lymph nodes are encapsulated lymphoid organs filtering tissue lymph. Histologically, each node features an outer cortex, paracortex, and inner medulla. The outer cortex houses spherical lymphoid follicles packed with B cells that mediate humoral immunity.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-lymph-node.svg",
+    "alt": "Lymph node architecture: cortex, follicles, paracortex, and medulla",
+    "caption": "Lymph node histology showing cortical B-cell and paracortical T-cell zones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Primary lymphoid follicles are uniform aggregates of resting, mature B cells. Upon antigenic stimulation, a follicle activates into a secondary follicle displaying a pale **germinal centre** surrounded by a dark mantle zone. The germinal centre is the anatomical site where B cells undergo clonal proliferation, somatic hypermutation, and antibody affinity maturation.",
+   "say": "Primary follicles consist of resting B cells. Following antigen stimulation, they convert into secondary follicles displaying a pale germinal centre wrapped by a dark mantle zone. Germinal centres drive B-cell proliferation, somatic hypermutation, and affinity maturation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Follicle",
+     "points": [
+      "Homogeneous dark appearance throughout",
+      "Packed with naive resting B lymphocytes",
+      "Lacks central active proliferation",
+      "Found prior to antigenic challenge"
+     ]
+    },
+    "right": {
+     "title": "Secondary Follicle",
+     "points": [
+      "Prominent pale germinal centre",
+      "Houses centroblasts, centrocytes, FDCs",
+      "Dark mantle zone of naive B cells",
+      "Site of antibody class-switch recombination"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Deep to the superficial cortex lies the **paracortex**, representing the T-cell dependent zone of the lymph node. It contains specialized post-capillary venules designated high endothelial venules, lined by plump cuboidal endothelial cells. High endothelial venules express selectins and addressins that guide circulating naive T and B lymphocytes out of blood into lymph parenchyma.",
+   "say": "Beneath the cortex lies the paracortex, the T-cell dependent zone of the lymph node. It houses high endothelial venules lined by cuboidal endothelial cells expressing adhesion molecules that capture circulating lymphocytes into the node.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lymphocyte Transmigration through HEV",
+    "nodes": [
+     {
+      "id": "blood",
+      "label": "Circulating Blood Naive Lymphocyte"
+     },
+     {
+      "id": "roll",
+      "label": "L-Selectin Rolling on Addressins"
+     },
+     {
+      "id": "adh",
+      "label": "Integrin High-Affinity Arrest"
+     },
+     {
+      "id": "diap",
+      "label": "Diapedesis into Paracortical Stroma"
+     }
+    ],
+    "edges": [
+     [
+      "blood",
+      "roll"
+     ],
+     [
+      "roll",
+      "adh"
+     ],
+     [
+      "adh",
+      "diap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The spleen is the largest secondary lymphoid organ, lacking lymphatic vessel inflow and filtering circulating blood directly. It comprises white pulp and red pulp separated by a marginal zone. The **white pulp** is organized around central arterioles: periarteriolar lymphoid sheaths (PALS) contain T lymphocytes, while adjacent splenic follicles contain B lymphocytes.",
+   "say": "The spleen filters blood directly without lymphatic afferents. Comprising white and red pulp, its white pulp arranges around central arterioles: periarteriolar sheaths contain T cells, while adjacent follicles contain B lymphocytes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-red-pulp.svg",
+    "alt": "Splenic histology: white pulp, central arteriole, and red pulp sinusoids",
+    "caption": "Splenic microarchitecture: white pulp PALS and red pulp filtration cords. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The splenic **red pulp** consists of blood-filled venous sinusoids separated by cellular splenic cords of Billroth. Cords are packed with macrophages, plasma cells, and reticular fibres. Aging red blood cells with rigid membranes cannot squeeze through the narrow endothelial slits of sinusoids and are phagocytosed by cordal macrophages, mediating extravascular hemolysis.",
+   "say": "Splenic red pulp contains blood sinusoids separated by cellular cords of Billroth packed with macrophages. Aging red cells with stiffened membranes cannot squeeze through endothelial slits into sinusoids and are engulfed by cordal macrophages.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "White Pulp Functions",
+     "points": [
+      "Surrounds central arterioles",
+      "PALS houses CD4+ and CD8+ T cells",
+      "Follicles generate IgM and IgG antibodies",
+      "Primary site for opsonization of bacteria"
+     ]
+    },
+    "right": {
+     "title": "Red Pulp Functions",
+     "points": [
+      "Cords of Billroth and venous sinusoids",
+      "Culls aged and damaged erythrocytes",
+      "Removes Howell-Jolly nuclear bodies (pitting)",
+      "Recycles iron from degraded hemoglobin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The primary lymphoid organ for T-cell education is the **thymus**, situated in the anterior superior mediastinum. The thymus features an outer cortex where immature thymocytes undergo positive selection, and an inner medulla containing whorled concentric keratinised epithelial structures called Hassall corpuscles (thymic corpuscles), which instruct regulatory T-cell development.",
+   "say": "The primary lymphoid organ for T-cell education is the thymus in the anterior mediastinum. It contains an outer cortex where thymocytes undergo positive selection and an inner medulla marked by concentric epithelial Hassall corpuscles that foster regulatory T cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thymic Zone",
+     "Primary Cell Types",
+     "Educational Event",
+     "Specialized Feature"
+    ],
+    "rows": [
+     [
+      "Thymic Cortex",
+      "Immature double-positive T cells, nurse cells",
+      "Positive selection (MHC restriction)",
+      "Blood-thymus barrier protects from blood antigens"
+     ],
+     [
+      "Thymic Medulla",
+      "Single-positive T cells, dendritic cells",
+      "Negative selection (autoimmunity block)",
+      "Hassall corpuscles (keratinised epithelial rings)"
+     ],
+     [
+      "Palatine Tonsil",
+      "B-cell follicles, reticulated epithelium",
+      "Antigen sampling from oropharynx",
+      "Deep branched crypts collecting debris"
+     ],
+     [
+      "Peyer Patches",
+      "Ileal submucosal lymphoid aggregates",
+      "Mucosal IgA production",
+      "Overlying microfold M cells in gut"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood vessel walls are organized into three concentric tunics. The innermost **tunica intima** comprises a single layer of endothelium resting upon a subendothelial connective tissue bed and the internal elastic lamina. The middle tunica media contains circularly arranged smooth muscle cells and elastic lamellae, while the outer tunica adventitia contains collagen and vasa vasorum.",
+   "say": "Blood vessels feature three concentric tunics. The innermost tunica intima consists of endothelium and internal elastic lamina. The middle tunica media contains smooth muscle and elastic laminae, while the outer adventitia houses collagen and nutrient vasa vasorum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Class",
+     "Tunica Media Dominance",
+     "Mechanical Function",
+     "Anatomical Examples"
+    ],
+    "rows": [
+     [
+      "Elastic Artery",
+      "Concentric fenestrated elastin sheets",
+      "Dampens pulsatile systolic pressure",
+      "Aorta, pulmonary trunk, common carotid"
+     ],
+     [
+      "Muscular Artery",
+      "Thick circular smooth muscle layers",
+      "Regulates regional organ perfusion",
+      "Radial, femoral, brachial arteries"
+     ],
+     [
+      "Arteriole",
+      "One to two layers of smooth muscle",
+      "Primary site of systemic vascular resistance",
+      "Precapillary resistance vessels"
+     ],
+     [
+      "Vein",
+      "Thin media, thick collagenous adventitia",
+      "High capacitance blood reservoir",
+      "Venae cavae, saphenous veins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capillaries are classified into three architectural varieties: continuous capillaries possess an uninterrupted endothelial lining with tight junctions, found in the brain and muscle. **Fenestrated capillaries** exhibit transcellular pores bridged by delicate diaphragms, facilitating rapid filtration in renal glomeruli, intestinal villi, and endocrine glands. Discontinuous sinusoidal capillaries feature wide gaps in liver and spleen.",
+   "say": "Capillaries are categorized into continuous, fenestrated, and sinusoidal varieties. Continuous capillaries line brain and muscle with tight junctions. Fenestrated capillaries bear microscopic pores for filtration in kidneys and gut, while sinusoidal capillaries allow cell passage in liver and spleen.",
+   "vis": {
+    "kind": "flow",
+    "title": "Capillary Permeability Spectrum",
+    "nodes": [
+     {
+      "id": "cont",
+      "label": "Continuous: Brain (Blood-Brain Barrier)"
+     },
+     {
+      "id": "fen",
+      "label": "Fenestrated: Kidney and Intestine"
+     },
+     {
+      "id": "sin",
+      "label": "Sinusoidal: Liver, Spleen, Bone Marrow"
+     },
+     {
+      "id": "perm",
+      "label": "Maximal Macromolecular/Cellular Exchange"
+     }
+    ],
+    "edges": [
+     [
+      "cont",
+      "fen"
+     ],
+     [
+      "fen",
+      "sin"
+     ],
+     [
+      "sin",
+      "perm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-axilla-plexus",
+ "subject": "anatomy",
+ "title": "Lower Trunk Avulsion and Klumpke Paralysis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "In contrast to upper trunk injuries, forceful traction pulling the arm upward in extreme hyperabduction damages the lower roots of the brachial plexus (C8 and T1). This traction avulsion produces **Klumpke palsy** (Klumpke paralysis), characteristically seen in breech delivery with an extended arm or an individual catching a tree branch while falling from a height.",
+   "say": "Unlike upper plexus tears, forceful upward traction on a hyperabducted arm damages the lower roots at C8 and T1. This injury causes Klumpke palsy, seen in breech deliveries with an arm extended or someone grabbing a branch while falling.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-brachial-plexus.svg",
+    "alt": "Lower trunk roots C8-T1 and distal peripheral motor nerves",
+    "caption": "Lower trunk C8-T1 roots and ulnar-median motor innervation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The C8 and T1 ventral rami carry somatic motor fibres destined for all the intrinsic muscles of the hand via the ulnar and median nerves. Avulsion of these lower roots paralyzes all eighteen **intrinsic hand muscles**, including lumbricals, interossei, thenar, and hypothenar groups, producing profound manual motor deficit and loss of fine manipulation.",
+   "say": "C8 and T1 roots provide motor fibres to all intrinsic hand muscles via the ulnar and median nerves. Avulsion paralyzes lumbricals, interossei, thenar, and hypothenar muscles, eliminating fine manual dexterity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Erb Palsy (Upper Trunk)",
+     "points": [
+      "Involves C5 and C6 roots",
+      "Caused by traction widening head-shoulder angle",
+      "Paralyzes shoulder and elbow flexors",
+      "Produces waiter tip deformity; hand spared"
+     ]
+    },
+    "right": {
+     "title": "Klumpke Palsy (Lower Trunk)",
+     "points": [
+      "Involves C8 and T1 roots",
+      "Caused by traction pulling arm hyperabducted",
+      "Paralyzes all intrinsic muscles of hand",
+      "Produces true claw hand; shoulder spared"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The anatomical mechanism of the resulting **claw hand deformity** (main en griffe) reflects loss of the lumbrical and interosseous muscles. The lumbricals normally flex the metacarpophalangeal (MCP) joints and extend the interphalangeal (IP) joints. Their total paralysis leaves long digital extensors and flexors unopposed, producing MCP hyperextension and IP flexion.",
+   "say": "The resulting claw hand deformity reflects loss of lumbrical and interosseous function. Because lumbricals normally flex knuckle joints and extend fingers, their loss allows long tendons to hyperextend MCP joints and flex interphalangeal joints.",
+   "vis": {
+    "kind": "flow",
+    "title": "Claw Hand Biomechanical Imbalance",
+    "nodes": [
+     {
+      "id": "root",
+      "label": "C8-T1 Lower Trunk Root Avulsion"
+     },
+     {
+      "id": "lum",
+      "label": "Paralysis of All Lumbricals and Interossei"
+     },
+     {
+      "id": "ext",
+      "label": "Unopposed Extensor Digitorum Hyperextends MCP"
+     },
+     {
+      "id": "flex",
+      "label": "Unopposed FDP and FDS Flex IP Joints (Claw Hand)"
+     }
+    ],
+    "edges": [
+     [
+      "root",
+      "lum"
+     ],
+     [
+      "lum",
+      "ext"
+     ],
+     [
+      "lum",
+      "flex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because lower trunk avulsion damages both ulnar and median nerve contributions simultaneously, Klumpke palsy produces a true total claw hand affecting all digits from index to little finger. In contrast, an isolated ulnar nerve lesion at the wrist causes a partial claw hand affecting only the ring and little fingers due to preserved median **lateral lumbricals**.",
+   "say": "Because lower trunk trauma damages both ulnar and median inputs, Klumpke palsy produces a complete claw hand involving all four fingers. In contrast, an isolated ulnar nerve lesion claws only the ring and little fingers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Klumpke Claw Hand (Total)",
+     "points": [
+      "Affects digits 2, 3, 4, and 5 equally",
+      "Both ulnar and median intrinsic supplies lost",
+      "Profound atrophy of thenar and hypothenar",
+      "Complete loss of thumb opposition"
+     ]
+    },
+    "right": {
+     "title": "Isolated Ulnar Nerve Claw (Partial)",
+     "points": [
+      "Affects predominantly digits 4 and 5",
+      "Digits 2 and 3 spared by median lumbricals",
+      "Sensation spared on radial 3.5 digits",
+      "Normal thenar abduction and opposition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lower trunk avulsion disrupts the sympathetic pathway destined for the head and eye, which exits the spinal cord through the T1 ventral ramus before ascending to the superior cervical ganglion. Co-existent disruption of these T1 sympathetic preganglionic fibres produces ipsilateral **Horner syndrome**.",
+   "say": "Lower trunk avulsion disrupts ocular sympathetic fibres that exit the spinal cord through the T1 root. Tearing these fibres produces ipsilateral Horner syndrome alongside hand paralysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Horner Syndrome Component",
+     "Underlying Neural Target",
+     "Clinical Presentation",
+     "Compensatory Observation"
+    ],
+    "rows": [
+     [
+      "Partial Ptosis",
+      "Superior tarsal muscle (Muller muscle)",
+      "Drooping of upper eyelid (1-2 mm)",
+      "Müller smooth muscle paralysis"
+     ],
+     [
+      "Miosis",
+      "Dilator pupillae muscle",
+      "Constricted pupil, anisocoria",
+      "Exaggerated in dim lighting"
+     ],
+     [
+      "Anhidrosis",
+      "Sudomotor sympathetic sweat fibres",
+      "Absence of sweating on ipsilateral face",
+      "Skin feels dry and warm"
+     ],
+     [
+      "Enophthalmos",
+      "Orbitalis smooth muscle",
+      "Apparent sunken eyeball",
+      "Narrowed palpebral fissure appearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The combination of a complete claw hand and ipsilateral Horner syndrome (ptosis, miosis, anhidrosis) provides decisive diagnostic proof of preganglionic T1 root avulsion, indicating poor prognosis for spontaneous neurological recovery. Sensory loss in Klumpke palsy is distributed strictly along the medial border of the forearm and hand (**C8 and T1 dermatomes**).",
+   "say": "The pairing of a claw hand with Horner syndrome proves preganglionic T1 root avulsion, signaling poor spontaneous recovery. Sensory loss is confined to the medial border of the forearm, hand, and little finger.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-axillary_nodes.webp",
+    "alt": "Medial cutaneous nerve territories and lower trunk sensory distribution",
+    "caption": "Medial brachial and antebrachial cutaneous nerve distributions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical reconstruction for lower trunk avulsion is challenging because target intrinsic hand muscles lie distant from the neck, undergoing irreversible motor endplate fibrosis before regenerating axons can bridge the distance. Surgeons employ distal **nerve transfers**, such as transferring redundant motor branches of the pronator quadratus to the deep ulnar branch to restore pinch grip.",
+   "say": "Reconstructing lower trunk avulsions is challenging because target hand muscles undergo endplate fibrosis before regenerating axons reach them. Surgeons use distal nerve transfers, re-routing motor branches of pronator quadratus to the ulnar nerve to restore pinch grip.",
+   "vis": {
+    "kind": "flow",
+    "title": "Distal Nerve Transfer Strategy",
+    "nodes": [
+     {
+      "id": "root",
+      "label": "C8-T1 Root Avulsion at Foramen"
+     },
+     {
+      "id": "dis",
+      "label": "Distant Target: Hand Intrinsic Endplates"
+     },
+     {
+      "id": "trans",
+      "label": "Median AIN Motor Branch Transfer"
+     },
+     {
+      "id": "pinch",
+      "label": "Direct Re-innervation of Deep Ulnar Motor Branch"
+     }
+    ],
+    "edges": [
+     [
+      "root",
+      "dis"
+     ],
+     [
+      "dis",
+      "trans"
+     ],
+     [
+      "trans",
+      "pinch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrophysiological nerve conduction studies and electromyography differentiate preganglionic avulsion from postganglionic rupture: preservation of the sensory nerve action potential despite complete anesthesia confirms preganglionic avulsion proximal to the dorsal root ganglion. Splinting maintains thumb opposition and prevents fixed **MCP hyperextension contractures** during rehabilitation.",
+   "say": "Nerve conduction testing separates preganglionic avulsion from postganglionic tears: preserved sensory potentials despite anesthesia confirms preganglionic injury proximal to the sensory ganglion. Splinting prevents fixed claw deformities during recovery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plexus Feature",
+     "Erb-Duchenne Palsy",
+     "Klumpke Paralysis",
+     "Surgical Priority"
+    ],
+    "rows": [
+     [
+      "Involved Roots",
+      "C5 and C6 roots (upper trunk)",
+      "C8 and T1 roots (lower trunk)",
+      "Identify avulsion vs rupture"
+     ],
+     [
+      "Involved Limb Level",
+      "Shoulder and elbow joints",
+      "Wrist and intrinsic hand digits",
+      "Early transfer before fibrosis"
+     ],
+     [
+      "Resting Posture",
+      "Waiter tip (adducted, pronated)",
+      "Total claw hand (hyperextended MCP)",
+      "Night splinting in functional pose"
+     ],
+     [
+      "Autonomic Deficit",
+      "None (sympathetic outflow intact)",
+      "Horner syndrome (T1 preganglionic)",
+      "Marks root avulsion proximal to ganglion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
