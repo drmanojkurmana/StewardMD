@@ -8,177 +8,186 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Acute haematogenous osteomyelitis** anchors this lesson. Recognition of Acute haematogenous osteomyelitis starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Acute haematogenous osteomyelitis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Acute Haematogenous Osteomyelitis teaching image.",
-    "caption": "Acute Haematogenous Osteomyelitis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Staphylococcus aureus** anchors this lesson. The mechanism behind Staphylococcus aureus explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Staphylococcus aureus gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "An **acute haematogenous osteomyelitis** is a serious bacterial bone infection predominantly affecting growing children, with peak incidence between three and twelve years of age. Staphylococcus aureus causes more than eighty percent of cases worldwide. In neonates, Group B Streptococcus and Escherichia coli are frequent, whereas Salmonella species assume paramount clinical importance in children with sickle cell haemoglobinopathy.",
+   "say": "Acute haematogenous osteomyelitis is a severe bone infection primarily affecting children between three and twelve years. Staphylococcus aureus causes over eighty percent of all cases. In newborns, think of group B strep and E. coli, while in patients with sickle cell disease, Salmonella is classic.",
    "vis": {
     "kind": "table",
-    "title": "Acute Haematogenous Osteomyelitis set",
+    "title": "Microbiology by Clinical Setting",
     "cols": [
-     "Item",
-     "Point"
+     "Patient Population",
+     "Most Frequent Organism",
+     "Secondary Pathogens",
+     "Empirical Antibiotic"
     ],
     "rows": [
      [
+      "Children (over 3 years)",
+      "Staphylococcus aureus (>80%)",
+      "Kingella kingae, Streptococcus pyogenes",
+      "Cefazolin or Flucloxacillin (Vancomycin if MRSA)"
+     ],
+     [
+      "Neonates (<3 months)",
+      "Group B Streptococcus",
+      "Escherichia coli, S. aureus",
+      "Ampicillin plus Cefotaxime or Gentamicin"
+     ],
+     [
+      "Sickle cell disease",
+      "Salmonella species",
       "Staphylococcus aureus",
-      "Central fact in this lesson"
+      "Third-generation cephalosporin (Ceftriaxone)"
      ],
      [
-      "Metaphysis",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
+      "Puncture wound through shoe",
+      "Pseudomonas aeruginosa",
+      "Staphylococcus aureus",
+      "Ceftazidime or Ciprofloxacin"
      ]
     ]
    }
   },
   {
-   "tx": "**Metaphysis** anchors this lesson. Clinically, metaphysis presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Metaphysis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The distinctive predilection for the **metaphyseal vascular loops** reflects unique pediatric vascular anatomy. Nutrient arterioles terminate in sluggish, non-anastomosing venous sinusoidal loops adjacent to the epiphyseal growth plate. These loops lack functional phagocytic reticuloendothelial lining, creating a micro-environment where transient bacteremia readily seeds, triggering thrombosis, purulent exudation, and rapid intra-medullary pressure escalation.",
+   "say": "The infection targets the metaphysis because of its unique blood supply. Terminal nutrient arteries make sharp hairpin loops into slow-flowing venous lakes right beneath the growth plate. These loops lack active phagocytic cells, allowing circulating bacteria to settle, multiply, and spark thrombosis and pus formation.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Metaphyseal Predisposition",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Hairpin loops with turbulent, sluggish flow",
+      "Absence of lining reticuloendothelial cells",
+      "Vascular thrombosis promotes local infarction",
+      "High metabolic turnover in rapid growth"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Epiphyseal Protection",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Physeal cartilage acts as an avascular barrier",
+      "Prevents direct intra-articular spread in older children",
+      "Except in transphyseal vessels of infants under 1 year",
+      "Except where metaphysis is intracapsular"
      ]
     }
    }
   },
   {
-   "tx": "**Sequestrum** anchors this lesson. Investigation choice for sequestrum follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Sequestrum gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
-    "alt": "Acute Haematogenous Osteomyelitis teaching image.",
-    "caption": "Acute Haematogenous Osteomyelitis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Involucrum** anchors this lesson. Separation of involucrum from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Involucrum gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "As pus accumulates, it tracks through cortical Haversian and Volkmann canals to strip the loose pediatric periosteum, compromising cortical blood flow. The devascularized, necrotic bone segment that detaches is designated a **sequestrum**. Concurrently, the elevated, living periosteum deposits reactive new subperiosteal bone termed the involucrum, which encloses the necrotic core, while cloacae form discharging sinuses.",
+   "say": "As pus builds up under pressure, it burrows through tiny cortical channels and peels the periosteum off the bone. Deprived of blood, a segment of dead bone separates as a sequestrum. Meanwhile, the stripped periosteum lays down a rigid sleeve of new living bone called the involucrum, punctured by cloacae that vent pus to the skin.",
    "vis": {
     "kind": "table",
-    "title": "Acute Haematogenous Osteomyelitis set",
+    "title": "Pathological Hallmarks of Osteomyelitis",
     "cols": [
-     "Item",
-     "Point"
+     "Pathological Structure",
+     "Viability State",
+     "Structural Origin",
+     "Radiographic Appearance"
     ],
     "rows": [
      [
+      "Sequestrum",
+      "Dead avascular bone",
+      "Infarcted cortical bone segment",
+      "Dense, sclerotic, chalky white fragment with clear halo"
+     ],
+     [
       "Involucrum",
-      "Central fact in this lesson"
+      "Living reactive bone",
+      "Subperiosteal osteogenesis",
+      "Irregular thickened bony sleeve enclosing sequestrum"
      ],
      [
       "Cloaca",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
+      "Defect in involucrum",
+      "Perforation caused by pressure necrosis",
+      "Radiolucent cortical channel venting purulence"
      ]
     ]
    }
   },
   {
-   "tx": "**Cloaca** anchors this lesson. Management of cloaca follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Cloaca gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Clinical diagnosis hinges on point bone tenderness, refusal to bear weight, and high spiking fever. Initial plain radiographs remain completely normal for the first seven to ten days, displaying only subtle deep soft tissue swelling. **Magnetic resonance imaging** represents the definitive early diagnostic modality, revealing intense bone marrow oedema and subperiosteal fluid collections within twenty-four hours of symptom onset.",
+   "say": "Always suspect osteomyelitis in a child with high fever and severe, pinpoint bone tenderness who refuses to walk. Plain X-rays look completely normal for the first week to ten days, showing only faint muscle swelling. Magnetic resonance imaging is the investigation of choice, lighting up marrow edema and subperiosteal pus within hours.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Early Stage (Days 1 to 7)",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Plain radiographs show normal bone",
+      "Markedly elevated CRP and ESR",
+      "Blood cultures positive in 40 to 50 percent",
+      "MRI detects marrow oedema within 24 hours"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Late Stage (Days 10 to 14+)",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Focal cortical radiolucency and osteopenia",
+      "Elevated periosteal new bone formation",
+      "Visible sclerotic sequestrum and involucrum",
+      "Transition toward chronic osteomyelitis"
      ]
     }
    }
   },
   {
-   "tx": "**Brodie abscess** anchors this lesson. Complications of Brodie abscess are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Brodie abscess gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Acute Haematogenous Osteomyelitis teaching image.",
-    "caption": "Acute Haematogenous Osteomyelitis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Garre sclerosing osteomyelitis** anchors this lesson. Anchoring Garre sclerosing osteomyelitis beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Garre sclerosing osteomyelitis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Immediate management demands blood cultures followed by targeted intravenous bactericidal antibiotics. Urgent surgical intervention via **cortical drilling** or fenestration is indicated whenever a subperiosteal abscess is identified on ultrasound, or when toxic systemic signs and localized tenderness fail to improve after twenty-four to forty-eight hours of appropriate intravenous antimicrobial therapy, venting the medullary canal.",
+   "say": "Draw blood cultures and start high dose intravenous antibiotics immediately. If ultrasound or MRI shows a subperiosteal abscess, or if fever and severe pain persist after twenty-four to forty-eight hours of antibiotics, operate without delay. Drill holes in the cortex to vent the marrow cavity and relieve hydrostatic pressure.",
    "vis": {
     "kind": "table",
-    "title": "Acute Haematogenous Osteomyelitis set",
+    "title": "Indications for Surgical Decompression",
     "cols": [
-     "Item",
-     "Point"
+     "Clinical Indication",
+     "Diagnostic Corroboration",
+     "Surgical Action",
+     "Expected Outcome"
     ],
     "rows": [
      [
-      "Garre sclerosing osteomyelitis",
-      "Central fact in this lesson"
+      "Subperiosteal abscess",
+      "Fluctuant swelling or ultrasound fluid",
+      "Incision and cortical trephination",
+      "Decompresses marrow; stops cortical death"
      ],
      [
-      "Chronic osteomyelitis",
-      "Companion fact to revise together"
+      "Antibiotic failure at 24 to 48 hrs",
+      "Persistent fever, rising CRP, severe pain",
+      "Multiple drill holes through metaphysis",
+      "Evacuates medullary pus; salvages blood supply"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Intracapsular joint extension",
+      "Concomitant septic arthritis (hip/shoulder)",
+      "Urgent joint arthrotomy and washout",
+      "Prevents chondrolysis and epiphyseal arrest"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Acute Haematogenous Osteomyelitis: central fact",
-   "b": "Acute haematogenous osteomyelitis is the anchor fact; name it precisely and grade severity."
+   "q": "Why is the metaphysis of rapidly growing pediatric long bones preferentially seeded in haematogenous osteomyelitis?",
+   "options": [
+    "Sluggish blood flow in terminal hairpin sinusoidal loops lacking phagocytic cells",
+    "Absence of cortical bone allowing direct bacterial invasion from skin",
+    "Hypertrophied lymphatic drainage concentrating bacterial emboli",
+    "Direct communication with the epiphyseal vascular arcade across the physis"
+   ],
+   "correct": 0,
+   "explain": "The metaphysis possesses terminal arterial loops emptying into slow-flowing venous sinusoids that lack functional phagocytic reticuloendothelial cells, facilitating bacterial seeding during transient bacteraemia."
   },
   {
-   "f": "Acute Haematogenous Osteomyelitis: discriminator",
-   "b": "Staphylococcus aureus separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Acute Haematogenous Osteomyelitis: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "How long after the onset of acute haematogenous osteomyelitis do bony changes first become visible on plain radiographs?",
+   "options": [
+    "7 to 10 days",
+    "Within 12 to 24 hours",
+    "2 to 3 days",
+    "Over 4 to 6 weeks"
+   ],
+   "correct": 0,
+   "explain": "Plain radiographs remain entirely normal for the first 7 to 10 days; early findings are limited to soft tissue swelling until 30 to 50 percent of bone mineral is lost."
   }
- ],
- "keys": [
-  "Acute haematogenous osteomyelitis anchors the topic",
-  "Staphylococcus aureus is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }

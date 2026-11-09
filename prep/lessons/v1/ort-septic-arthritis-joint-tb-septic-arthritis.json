@@ -8,177 +8,192 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Septic arthritis** anchors this lesson. Recognition of Septic arthritis starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Septic arthritis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoporosis-fig1.webp",
-    "alt": "Septic Arthritis teaching image.",
-    "caption": "Septic Arthritis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Kocher criteria** anchors this lesson. The mechanism behind Kocher criteria explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Kocher criteria gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "An acute **septic arthritis** constitutes a true orthopaedic surgical emergency requiring rapid joint decompression to prevent irreversible chondral degradation. Bacterial proliferation in the synovial cavity provokes intense polymorphonuclear leukocyte influx. Released lysosomal enzymes, bacterial proteases, and matrix metalloproteinases destroy articular hyaline cartilage within twenty-four to forty-eight hours, causing permanent joint destruction.",
+   "say": "Septic arthritis is an absolute emergency. Bacteria in the joint trigger a massive flood of neutrophils. The combination of bacterial toxins and neutrophil elastases can destroy articular cartilage within twenty-four to forty-eight hours. Decompressing and washing out the joint immediately is the only way to save it.",
    "vis": {
     "kind": "table",
-    "title": "Septic Arthritis set",
+    "title": "Etiological Agents in Septic Arthritis",
     "cols": [
-     "Item",
-     "Point"
+     "Patient Cohort",
+     "Primary Pathogen",
+     "Alternative Pathogens",
+     "Clinical Feature"
     ],
     "rows": [
      [
-      "Kocher criteria",
-      "Central fact in this lesson"
+      "All adults and older children",
+      "Staphylococcus aureus (>60%)",
+      "Streptococcus pneumoniae, MRSA",
+      "Monoarticular hot swollen knee"
      ],
      [
-      "Tom smith arthritis",
-      "Companion fact to revise together"
+      "Sexually active young adults",
+      "Neisseria gonorrhoeae",
+      "S. aureus",
+      "Migratory tenosynovitis with pustules"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Children under 4 years",
+      "Kingella kingae",
+      "S. aureus, Group A Streptococcus",
+      "Subtle subacute onset with limp"
+     ],
+     [
+      "Prosthetic joint implants",
+      "Staphylococcus epidermidis",
+      "S. aureus, Cutibacterium acnes",
+      "Biofilm formation on metal hardware"
      ]
     ]
    }
   },
   {
-   "tx": "**Tom smith arthritis** anchors this lesson. Clinically, Tom Smith arthritis presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Tom smith arthritis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The validated **Kocher criteria** reliably differentiate pediatric septic arthritis of the hip from self-limiting transient synovitis. The four clinical predictive criteria include: inability to bear weight on the affected limb, oral temperature exceeding 38.5 degrees Celsius, erythrocyte sedimentation rate greater than forty millimeters per hour, and serum white blood cell count exceeding twelve thousand per microliter. Meeting all four confers a ninety-nine percent probability of septic arthritis.",
+   "say": "The Kocher criteria distinguish septic arthritis of the hip from transient synovitis in a limping child. The four criteria are: refusal to bear weight, fever over 38.5 degrees, ESR over forty, and white blood cell count over twelve thousand. If all four are present, the probability of septic arthritis is ninety-nine percent.",
+   "vis": {
+    "kind": "table",
+    "title": "Kocher Criteria and Probability Table",
+    "cols": [
+     "Number of Criteria Present",
+     "Calculated Septic Probability",
+     "Serum CRP Additive Value",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "1 of 4 criteria",
+      "3 percent",
+      "CRP under 20 mg/L confirms low risk",
+      "Outpatient observation and review"
+     ],
+     [
+      "2 of 4 criteria",
+      "40 percent",
+      "Intermediate probability",
+      "Close observation, consider ultrasound"
+     ],
+     [
+      "3 of 4 criteria",
+      "93 percent",
+      "CRP over 20 mg/L strengthens diagnosis",
+      "Urgent hip aspiration under sedation"
+     ],
+     [
+      "4 of 4 criteria",
+      "99 percent",
+      "Definitive bacterial infection",
+      "Emergency arthrotomy and drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate **diagnostic arthrocentesis** represents the gold-standard diagnostic procedure and must be performed prior to initiating systemic antibiotic therapy. Synovial fluid in septic arthritis appears frankly turbid or purulent. Analysis demonstrates a synovial white blood cell count exceeding fifty thousand per microliter with more than seventy-five percent polymorphonuclear neutrophils, markedly reduced synovial glucose, and high lactate concentrations.",
+   "say": "Aspirate the joint immediately before giving antibiotics. In septic arthritis, the synovial fluid is cloudy or thick with pus. A synovial white blood cell count over fifty thousand with more than seventy-five percent polymorphs confirms infection. Low joint fluid glucose and elevated lactate further cement the diagnosis.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Septic Synovial Fluid",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Turbid, purulent yellowish appearance",
+      "WBC count exceeding 50,000 / mm3",
+      "Over 75 to 90 percent neutrophils",
+      "Synovial glucose < 50% blood glucose"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Inflammatory (RA/Gout) Fluid",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Translucent to cloudy yellow fluid",
+      "WBC count 2,000 to 50,000 / mm3",
+      "Neutrophils roughly 50 to 70 percent",
+      "Normal or mildly depressed glucose"
      ]
     }
    }
   },
   {
-   "tx": "**Pseudoparalysis** anchors this lesson. Investigation choice for pseudoparalysis follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Pseudoparalysis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Septic Arthritis teaching image.",
-    "caption": "Septic Arthritis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Joint aspiration** anchors this lesson. Separation of joint aspiration from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Joint aspiration gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Septic Arthritis set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Joint aspiration",
-      "Central fact in this lesson"
-     ],
-     [
-      "Tuberculosis hip",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Tuberculosis hip** anchors this lesson. Management of tuberculosis hip follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Tuberculosis hip gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Emergency management requires urgent **surgical drainage** via open arthrotomy or arthroscopic joint lavage to clear proteolytic enzymes, purulent debris, and decompress elevated intra-articular pressure. In the hip joint, capsular distension compromises retinacular blood flow, risking avascular necrosis of the femoral head. Copious irrigation with six to nine liters of sterile saline washes out the intra-articular bacterial burden.",
+   "say": "Take the patient to the operating room for emergency open arthrotomy or arthroscopic joint lavage. In the hip, swelling inside the unyielding capsule strangles blood flow to the femoral head, leading to rapid osteonecrosis. Flush the joint with six to nine liters of sterile saline to wash away bacterial enzymes.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Arthroscopic Lavage",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Standard for knee and shoulder joints",
+      "Direct visual inspection of cartilage",
+      "Low morbidity, excellent joint clearance",
+      "Allows placement of suction drains"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Open Arthrotomy",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Mandatory in pediatric septic hip",
+      "Anterior or posterior capsular approach",
+      "Decompresses intracapsular tamponade",
+      "Guards against femoral head necrosis"
      ]
     }
    }
   },
   {
-   "tx": "**Stages of tb hip** anchors this lesson. Complications of stages of TB hip are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Stages of tb hip gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
-    "alt": "Septic Arthritis teaching image.",
-    "caption": "Septic Arthritis illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Apparent lengthening** anchors this lesson. Anchoring apparent lengthening beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Apparent lengthening gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Following surgical decompression, targeted **intravenous antibiotic** therapy is administered for two to three weeks, transitioned to oral agents once clinical defervescence and normalisation of C-reactive protein are confirmed. Delayed intervention beyond twenty-four to forty-eight hours results in catastrophic sequelae, including complete chondrolysis, fibrous or bony joint ankylosis, and pathological joint dislocation in infants (Tom Smith arthritis).",
+   "say": "Follow surgical drainage with high dose intravenous antibiotics for two to three weeks, switching to oral therapy once fever settles and C reactive protein drops back to normal. If treatment is delayed past forty-eight hours, cartilage dissolves completely, leaving the child with joint stiffness or pathological hip dislocation.",
    "vis": {
     "kind": "table",
-    "title": "Septic Arthritis set",
+    "title": "Late Complications of Delayed Treatment",
     "cols": [
-     "Item",
-     "Point"
+     "Complication",
+     "Mechanism",
+     "Peak Demographic",
+     "Long-Term Consequence"
     ],
     "rows": [
      [
-      "Apparent lengthening",
-      "Central fact in this lesson"
+      "Chondrolysis",
+      "Enzymatic matrix proteoglycan breakdown",
+      "Any age group with delayed drainage",
+      "Premature secondary osteoarthritis"
      ],
      [
-      "Wandering acetabulum",
-      "Companion fact to revise together"
+      "Tom Smith arthritis",
+      "Septic dislocation with capital femoral loss",
+      "Infants under 12 months of age",
+      "Limb shortening and unstable pseudarthrosis"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Fibrous / bony ankylosis",
+      "Pannus organization across eroded bone",
+      "Untreated or chronic septic joints",
+      "Permanent loss of joint mobility"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Septic Arthritis: central fact",
-   "b": "Septic arthritis is the anchor fact; name it precisely and grade severity."
+   "q": "Which synovial fluid white blood cell count threshold strongly indicates septic arthritis?",
+   "options": [
+    "Greater than 50,000 / mm3 with >75% polymorphonuclear cells",
+    "Between 2,000 and 10,000 / mm3 with predominantly lymphocytes",
+    "Less than 200 / mm3 with clear straw-colored appearance",
+    "Between 5,000 and 15,000 / mm3 with monocyte predominance"
+   ],
+   "correct": 0,
+   "explain": "A synovial fluid white blood cell count exceeding 50,000 / mm3 with more than 75 to 90 percent polymorphonuclear leukocytes is the hallmark laboratory finding of septic arthritis."
   },
   {
-   "f": "Septic Arthritis: discriminator",
-   "b": "Kocher criteria separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Septic Arthritis: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "According to the Kocher criteria, what is the probability of septic arthritis in a child meeting all four criteria?",
+   "options": [
+    "99 percent",
+    "40 percent",
+    "75 percent",
+    "10 percent"
+   ],
+   "correct": 0,
+   "explain": "When all four Kocher criteria are present (non-weight-bearing, fever >38.5C, ESR >40 mm/hr, WBC >12,000/uL), the probability of septic arthritis reaches 99 percent."
   }
- ],
- "keys": [
-  "Septic arthritis anchors the topic",
-  "Kocher criteria is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }

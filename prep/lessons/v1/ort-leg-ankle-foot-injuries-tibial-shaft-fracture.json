@@ -8,177 +8,188 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Tibial shaft fracture** anchors this lesson. Recognition of Tibial shaft fracture starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Tibial shaft fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Tibial Shaft Fracture teaching image.",
-    "caption": "Tibial Shaft Fracture illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Compartment syndrome leg** anchors this lesson. The mechanism behind compartment syndrome leg explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Compartment syndrome leg gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "A **tibial shaft fracture** is the most frequent long bone fracture encountered in orthopaedic trauma centers. Because the entire anteromedial surface of the tibia is subcutaneous and devoid of muscular coverage, it has the highest propensity for open fracture among all long bones. High-energy motor vehicle crashes and pedestrian strikes generate severe soft tissue stripping and devascularization.",
+   "say": "The tibia is the most frequently broken long bone. Because its entire shin border lies directly beneath the skin without muscular padding, it has the highest rate of open fractures. High-speed collisions crush the skin and strip periosteum, jeopardizing bone healing.",
    "vis": {
     "kind": "table",
-    "title": "Tibial Shaft Fracture set",
+    "title": "Tibial Anatomy and Vulnerability",
     "cols": [
-     "Item",
-     "Point"
+     "Anatomical Feature",
+     "Structural Characteristic",
+     "Clinical Vulnerability"
     ],
     "rows": [
      [
-      "Compartment syndrome leg",
-      "Central fact in this lesson"
+      "Anteromedial border",
+      "Strictly subcutaneous throughout length",
+      "High rate of open fractures and skin necrosis"
      ],
      [
-      "Pott fracture",
-      "Companion fact to revise together"
+      "Nutrient artery supply",
+      "Enters upper third via posterior cortex",
+      "Distal third relies on tenuous periosteal arcade"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Muscular compartments",
+      "Four tight fascial compartments",
+      "Extreme vulnerability to acute compartment syndrome"
      ]
     ]
    }
   },
   {
-   "tx": "**Pott fracture** anchors this lesson. Clinically, Pott fracture presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Pott fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The **Gustilo-Anderson classification** categorizes open tibial fractures to guide antibiotic selection and surgical debridement. Type I features a clean puncture wound smaller than one centimeter. Type II has a laceration between one and ten centimeters without extensive soft tissue damage. Type III involves extensive soft tissue trauma, subdivided into IIIa (adequate periosteal coverage), IIIb (periosteal stripping requiring flap coverage), and IIIc (arterial injury requiring repair).",
+   "say": "Gustilo and Anderson classify open fractures into three tiers. Type one is under one centimeter. Type two is one to ten centimeters without extensive soft tissue crushing. Type three has severe soft tissue damage, split into three A with adequate coverage, three B requiring plastic flap coverage, and three C with vascular damage requiring arterial repair.",
+   "vis": {
+    "kind": "table",
+    "title": "Gustilo-Anderson Open Fracture Classification",
+    "cols": [
+     "Gustilo Grade",
+     "Wound Size and Soft Tissue",
+     "Periosteal Stripping",
+     "Infection Rate"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Clean puncture < 1 cm",
+      "Minimal or none",
+      "0 to 2 percent"
+     ],
+     [
+      "Type II",
+      "Laceration 1 to 10 cm",
+      "Moderate without flap requirement",
+      "2 to 5 percent"
+     ],
+     [
+      "Type IIIa",
+      "Extensive laceration > 10 cm",
+      "Adequate soft tissue coverage",
+      "5 to 10 percent"
+     ],
+     [
+      "Type IIIb",
+      "Extensive loss / crushing",
+      "Extensive stripping; needs muscle flap",
+      "10 to 25 percent"
+     ],
+     [
+      "Type IIIc",
+      "Any open wound with vascular injury",
+      "Requires arterial repair for viability",
+      "25 to 50 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most urgent complication is **compartment syndrome** of the leg, arising within twenty-four hours from osseous haemorrhage and muscle oedema enclosed by non-compliant fascial envelopes. Unremitting pain out of proportion to injury exacerbated by passive toe extension is the earliest sensitive warning. Intracompartmental pressure within thirty millimeters of mercury of diastolic blood pressure mandates emergent four-compartment fasciotomy.",
+   "say": "Acute compartment syndrome is the most urgent threat. The four tight fascial envelopes in the leg cannot stretch when bleeding starts. Severe pain provoked by passive stretching of the toes is the earliest warning. If compartment pressure rises to within thirty millimeters of diastolic blood pressure, perform emergency four-compartment fasciotomy.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Early Warning Signs",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Pain out of proportion to injury",
+      "Pain on passive toe flexion and extension",
+      "Tense, woody leg on palpation",
+      "Paresthesia in deep peroneal territory"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Late Catastrophic Signs",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Complete foot motor paralysis",
+      "Loss of distal dorsalis pedis pulse",
+      "Extensive flexor muscle necrosis",
+      "Permanent equinus claw foot"
      ]
     }
    }
   },
   {
-   "tx": "**Lauge-hansen** anchors this lesson. Investigation choice for Lauge-Hansen follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Lauge-hansen gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
-    "alt": "Tibial Shaft Fracture teaching image.",
-    "caption": "Tibial Shaft Fracture illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Danis-weber** anchors this lesson. Separation of Danis-Weber from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Danis-weber gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Tibial Shaft Fracture set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Danis-weber",
-      "Central fact in this lesson"
-     ],
-     [
-      "Maisonneuve fracture",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Maisonneuve fracture** anchors this lesson. Management of Maisonneuve fracture follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Maisonneuve fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Closed, low-energy fractures with minimal shortening may be managed with **functional bracing** using a Sarmiento patellar-tendon-bearing cast. Initiated after initial swelling subsides at two to four weeks, the brace loads the patellar tendon, tibial flares, and hydrostatic muscle envelope. Permitting controlled cyclical axial micromotion stimulates robust external bridging callus while restoring knee and ankle mobility.",
+   "say": "For closed, stable fractures with under five degrees of angulation, use a Sarmiento patellar tendon bearing cast after initial swelling settles. The cast unloads the fracture by transferring weight through the patellar tendon and calf muscles, allowing early walking that accelerates callus formation.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Acceptable Alignment Criteria",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Varus/valgus angulation under 5 degrees",
+      "Anteroposterior tilt under 10 degrees",
+      "Shortening less than 10 to 12 mm",
+      "Cortical contact exceeding 50 percent"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Sarmiento Bracing Protocol",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Long leg cast for first 2 to 3 weeks",
+      "Transition to PTB functional brace",
+      "Early progressive weight-bearing",
+      "Weekly radiographic monitoring"
      ]
     }
    }
   },
   {
-   "tx": "**Tillaux fracture** anchors this lesson. Complications of Tillaux fracture are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Tillaux fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Tibial Shaft Fracture teaching image.",
-    "caption": "Tibial Shaft Fracture illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Calcaneus fracture** anchors this lesson. Anchoring calcaneus fracture beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Calcaneus fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The surgical gold standard for unstable, displaced, or open fractures is **intramedullary nailing** using a reamed interlocking nail. A transpatellar or infrapatellar tendon approach allows insertion of an unreamed or reamed nail with proximal and distal locking screws. Intramedullary fixation provides load-sharing biomechanics, protects the periosteal blood supply, and achieves union rates exceeding ninety-five percent.",
+   "say": "Reamed interlocking intramedullary nailing is the definitive surgical gold standard. The nail acts as an internal splint that shares load, preserves periosteal blood flow, and controls length and rotation. Patients can bear weight immediately, achieving union in over ninety-five percent of cases.",
    "vis": {
     "kind": "table",
-    "title": "Tibial Shaft Fracture set",
+    "title": "Surgical Fixation Modalities",
     "cols": [
-     "Item",
-     "Point"
+     "Method",
+     "Indications",
+     "Union Rate",
+     "Key Advantages"
     ],
     "rows": [
      [
-      "Calcaneus fracture",
-      "Central fact in this lesson"
+      "Reamed interlocking nail",
+      "Unstable diaphyseal fractures (Gustilo I-IIIa)",
+      "95 to 97 percent",
+      "Early weight-bearing, preserves periosteum"
      ],
      [
-      "Bohler angle",
-      "Companion fact to revise together"
+      "External fixator",
+      "Gustilo IIIb/IIIc, severe contaminated open break",
+      "Variable; pin tract risks",
+      "Damage control, soft tissue accessibility"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Low-profile locking plate",
+      "Peri-articular metaphyseal extension",
+      "90 to 92 percent",
+      "Direct anatomic articular reduction"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Tibial Shaft Fracture: central fact",
-   "b": "Tibial shaft fracture is the anchor fact; name it precisely and grade severity."
+   "q": "Which Gustilo-Anderson category requires a muscle flap transfer due to extensive periosteal stripping and soft tissue defect?",
+   "options": [
+    "Gustilo Type IIIb",
+    "Gustilo Type I",
+    "Gustilo Type II",
+    "Gustilo Type IIIa"
+   ],
+   "correct": 0,
+   "explain": "Gustilo Type IIIb fractures exhibit extensive soft tissue loss with periosteal stripping and bone exposure, requiring local or free flap coverage."
   },
   {
-   "f": "Tibial Shaft Fracture: discriminator",
-   "b": "Compartment syndrome leg separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Tibial Shaft Fracture: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "What difference between diastolic blood pressure and compartment pressure (delta P) indicates need for fasciotomy?",
+   "options": [
+    "30 mmHg or less",
+    "50 mmHg or more",
+    "70 mmHg or less",
+    "Greater than 40 mmHg"
+   ],
+   "correct": 0,
+   "explain": "A delta P (diastolic blood pressure minus intracompartmental pressure) of 30 mmHg or less indicates critical tissue ischaemia and mandates urgent fasciotomy."
   }
- ],
- "keys": [
-  "Tibial shaft fracture anchors the topic",
-  "Compartment syndrome leg is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }
