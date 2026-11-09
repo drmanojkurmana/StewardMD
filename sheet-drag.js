@@ -131,20 +131,36 @@
   /* ---- drag ---- */
   if (off("smd_sheet_drag")) return;
   var g = null;    // active gesture
-  var springStop = null;   // stop fn of an in-flight release spring: a new touch catches the sheet where it is
-  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
+  // In-flight release settle, owned by the shared controller: a touch OFF the sheet leaves it
+  // running; a touch ON the sheet holds it where it is. A drag supersedes its completion; a
+  // touch that never becomes a drag resumes it to its original target and completion.
+  var settleCtl = window.SMD_SPRING && SMD_SPRING.makeSettle ? SMD_SPRING.makeSettle(SMD_SPRING.animate) : null;
+  var flightSt = null, catchParked = false;
+  function startSettle(st, from, to, vel, k, c, done) {
+    flightSt = st;
+    var wrap = function () { if (flightSt === st) flightSt = null; done(); };
+    if (settleCtl) settleCtl.start({ from: from, to: to, velocity: vel, stiffness: k, damping: c, onUpdate: function (x) { paint(st, x); }, onDone: wrap });
+    else done();
+  }
+  function resumeParked() { if (catchParked) { catchParked = false; if (settleCtl) settleCtl.resume(); } }
 
   document.addEventListener("touchstart", function (e) {
-    stopSpring();
-    if (g || e.touches.length !== 1) { if (g) g.sheet.removeEventListener("touchmove", onMove, { passive: false }); g = null; return; }
-    var t = e.target;
-    if (!t || !t.closest || t.closest(NO_DRAG)) return;
+    var t = e.target, caught = false;
+    if (flightSt && settleCtl) {
+      var onEl = !!(t && (t === flightSt.sheet || (flightSt.sheet.contains && flightSt.sheet.contains(t))));
+      if (settleCtl.touch(onEl) === "ignore") return;          // touch elsewhere: the settle finishes normally
+      if (settleCtl.holding()) { caught = true; catchParked = true; }
+    }
+    if (g || e.touches.length !== 1) { if (g) { if (g.heldCatch && settleCtl) settleCtl.resume(); g.sheet.removeEventListener("touchmove", onMove, { passive: false }); } g = null; return; }
+    if (!t || !t.closest || t.closest(NO_DRAG)) return;        // parked catch resumes on touchend
     var sheet = findSheet(t); if (!sheet) return;
     var sr = sheet.getBoundingClientRect(), y = e.touches[0].clientY;
     var sc = scrollerIn(t, sheet);
     var curY = parseFloat((/translate3d\(0,\s*(-?[\d.]+)px/.exec(sheet.style.transform) || [0, 0])[1]) || 0;
-    g = { sheet: sheet, y0: y, x0: e.touches[0].clientX, h: sr.height, handle: y - sr.top < HANDLE_ZONE, base: curY,
+    g = { sheet: sheet, y0: y, x0: e.touches[0].clientX, h: sr.height, handle: y - sr.top < HANDLE_ZONE, base: caught ? (settleCtl.heldPos() || 0) : curY,
+          heldCatch: caught,
           sc: sc, active: false, dead: false, dy: 0, tr: window.SMD_SPRING ? SMD_SPRING.tracker() : null, dismiss: null };
+    if (caught) catchParked = false;
     // Non-passive touchmove ONLY on this sheet and only for this touch: a document-wide non-passive
     // listener makes iOS WebKit wait on JS before every scroll in the app (see prep.js, same lesson).
     sheet.addEventListener("touchmove", onMove, { passive: false });
@@ -161,6 +177,7 @@
       g.dismiss = findDismiss(g.sheet);
       if (!g.dismiss) { g.dead = true; return; }
       g.active = true; g.y0 = tch.clientY; dy = 0;            // start from here: no jump
+      if (g.heldCatch) { g.heldCatch = false; if (settleCtl) settleCtl.supersede(); flightSt = null; }   // the drag decides now
       g.sheet.style.transition = "none"; g.sheet.style.willChange = "transform";
       if (g.dismiss.scrim) { g.scrimOp = parseFloat(getComputedStyle(g.dismiss.scrim).opacity) || 1; g.dismiss.scrim.style.transition = "none"; }
     }
@@ -184,9 +201,12 @@
   function end() {
     var st = g; g = null;
     if (st) st.sheet.removeEventListener("touchmove", onMove, { passive: false });
-    if (!st || !st.active) return;
+    if (!st) { resumeParked(); return; }
+    if (!st.active) {   // tap / lost axis lock on a caught sheet: resume the original settle
+      if (st.heldCatch) { st.heldCatch = false; if (settleCtl) settleCtl.resume(); }
+      return;
+    }
     var v = st.tr ? st.tr.velocity() : 0, y = st.base + rubber(st.dy), totalDy = st.base + st.dy;
-    var S = window.SMD_SPRING;
     if (shouldDismiss(totalDy, v, st.h)) {
       var finish = function () {
         // Leave the sheet parked off-screen while the app closes it, then hand styling back to CSS.
@@ -196,13 +216,10 @@
           if (depthOn) syncDepth();
         }); });
       };
-      if (S) springStop = S.animate({ from: y, to: st.h + 20, velocity: Math.max(v, 900), stiffness: 300, damping: 38,
-                         onUpdate: function (x) { paint(st, x); }, onDone: function () { springStop = null; finish(); } });
-      else finish();
+      startSettle(st, y, st.h + 20, Math.max(v, 900), 300, 38, finish);
     } else {
       var back = function () { st.sheet.style.transform = ""; st.sheet.style.transition = ""; cleanup(st); if (depthOn) setDepth(0, false); };
-      if (S) springStop = S.animate({ from: y, to: 0, velocity: v, stiffness: 420, damping: 34, onUpdate: function (x) { paint(st, x); }, onDone: function () { springStop = null; back(); } });
-      else back();
+      startSettle(st, y, 0, v, 420, 34, back);
     }
   }
   document.addEventListener("touchend", end, { capture: true });

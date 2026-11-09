@@ -77,19 +77,37 @@
   }
 
   /* ---- gesture ---- */
-  var g = null, busy = false, springStop = null;
-  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
+  var g = null, busy = false;
+  // In-flight settle (snap-back, spring to HOLD, final spring home), owned by the shared
+  // controller: a touch OFF the scroller leaves it running; a touch ON it holds it where it
+  // is. A drag continues from the held pull; a touch that never becomes a drag resumes the
+  // original settle and its completion, exactly once.
+  var settleCtl = window.SMD_SPRING && SMD_SPRING.makeSettle ? SMD_SPRING.makeSettle(SMD_SPRING.animate) : null;
+  var flightSt = null, flightTo = 0, catchParked = false;
+  function resumeParked() { if (catchParked) { catchParked = false; if (settleCtl) settleCtl.resume(); } }
+  // Raw finger travel that produces a given resisted pull (inverse of resist), so a caught
+  // pull continues on the same resistance curve instead of restarting from 0.
+  function rawFor(pull) { return pull > 0 ? (pull >= MAX ? MAX * 8 : -MAX * 1.6 * Math.log(1 - pull / MAX)) : 0; }
   document.addEventListener("touchstart", function (e) {
-    stopSpring();
-    if (g || busy || e.touches.length !== 1) return;
-    var t = e.target; if (!t || !t.closest || t.closest("input,textarea,select,[contenteditable],canvas,[data-no-ptr]")) return;
+    var t = e.target, caught = null;
+    if (flightSt && settleCtl) {
+      var onEl = !!(t && flightSt.sc.contains && flightSt.sc.contains(t));
+      if (settleCtl.touch(onEl) === "ignore") return;          // touch elsewhere: the settle finishes normally
+      if (settleCtl.holding()) { caught = { pos: settleCtl.heldPos() || 0, st: flightSt, to: flightTo }; catchParked = true; }
+    }
+    if (g || e.touches.length !== 1) return;
+    if (busy && !caught) return;
+    if (!t || !t.closest || t.closest("input,textarea,select,[contenteditable],canvas,[data-no-ptr]")) return;   // parked catch resumes on touchend
     var sc = scrollerOf(t); if (!sc || sc.scrollTop > 0) return;
     // Inside a bottom sheet a pull-down at the top dismisses the sheet (sheet-drag.js), as on iOS.
     var lr = layerOf(sc).getBoundingClientRect();
     if (lr.bottom >= innerHeight - 2 && lr.top > innerHeight * 0.06 && lr.height < innerHeight - 4) return;
     var fn = actionFor(sc); if (!fn) return;
-    g = { sc: sc, fn: fn, y0: e.touches[0].clientY, x0: e.touches[0].clientX, on: false, dead: false, pull: 0, armed: false,
+    if (caught && sc !== caught.st.sc) return;
+    g = { sc: sc, fn: fn, y0: e.touches[0].clientY, x0: e.touches[0].clientX, on: false, dead: false, pull: caught ? caught.pos : 0, armed: false,
+          base: caught ? caught.pos : 0, raw0: caught ? rawFor(caught.pos) : 0, heldCatch: !!caught, caughtBusy: busy, heldTo: caught ? caught.to : null,
           tr: window.SMD_SPRING ? SMD_SPRING.tracker() : null, top: sc.getBoundingClientRect().top };
+    if (caught) catchParked = false;
     sc.addEventListener("touchmove", move, { passive: false });
   }, { passive: true, capture: true });
 
@@ -100,10 +118,11 @@
       if (Math.abs(dy) < 6 && Math.abs(dx) < 6) return;
       if (dy <= 0 || Math.abs(dx) > Math.abs(dy) || g.sc.scrollTop > 0) { g.dead = true; return; }
       g.on = true; g.y0 = e.touches[0].clientY; dy = 0;
+      if (g.heldCatch && !g.caughtBusy) { g.heldCatch = false; if (settleCtl) settleCtl.supersede(); flightSt = null; }   // the drag decides now
       g.sc.style.transition = "none"; g.sc.style.willChange = "transform";
     }
     if (e.cancelable) e.preventDefault();
-    g.pull = resist(dy);
+    g.pull = resist(g.raw0 + dy);
     if (g.tr) g.tr.add(g.pull, e.timeStamp || Date.now());
     g.sc.style.transform = "translate3d(0," + g.pull + "px,0)";
     drawSpinner(g.top, g.pull, false);
@@ -113,16 +132,25 @@
   }
 
   function springTo(st, to, v, done) {
-    var S = window.SMD_SPRING;
     var put = function (x) { st.sc.style.transform = x ? "translate3d(0," + x + "px,0)" : ""; drawSpinner(st.top, x, to === HOLD); if (to === 0 && spin) spin.style.opacity = String(Math.min(1, x / TRIGGER)); };
-    if (S) springStop = S.animate({ from: st.pull, to: to, velocity: v || 0, stiffness: 340, damping: 32, onUpdate: function (x) { st.pull = x; put(x); }, onDone: function () { springStop = null; st.pull = to; put(to); if (done) done(); } });
+    flightSt = st; flightTo = to;
+    var wrap = function () { if (flightSt === st) flightSt = null; st.pull = to; put(to); if (done) done(); };
+    if (settleCtl) settleCtl.start({ from: st.pull, to: to, velocity: v || 0, stiffness: 340, damping: 32, onUpdate: function (x) { st.pull = x; put(x); }, onDone: wrap });
     else { st.pull = to; put(to); if (done) done(); }
   }
   function release() {
     var st = g; g = null;
-    if (!st) return;
+    if (!st) { resumeParked(); return; }
     st.sc.removeEventListener("touchmove", move, { passive: false });
-    if (!st.on) return;
+    if (!st.on) {   // tap / lost axis lock on a caught pull: resume the original settle
+      if (st.heldCatch) { st.heldCatch = false; if (settleCtl) settleCtl.resume(); }
+      return;
+    }
+    if (st.caughtBusy) {   // dragged while a refresh settle was held: return to its target, refresh flow untouched
+      st.heldCatch = false;
+      if (settleCtl) settleCtl.resume(st.pull); else springTo(st, st.heldTo || HOLD, 0);
+      return;
+    }
     var v = st.tr ? st.tr.velocity() : 0;
     if (!triggered(st.pull)) { springTo(st, 0, v, function () { st.sc.style.willChange = ""; st.sc.style.transition = ""; }); return; }
     busy = true;

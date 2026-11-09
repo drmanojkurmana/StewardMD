@@ -73,19 +73,29 @@
 
   var open = null;    // { row, tray, w, timer }
   var swallowUntil = 0, g = null;
-  var springStop = null;
-  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
+  // In-flight settle (lock, snap-back or close), owned by the shared controller: a touch OFF
+  // the settling row leaves it running; a touch ON it holds it where it is. A drag supersedes
+  // its completion; a touch that never becomes a drag resumes it, completion exactly once.
+  var settleCtl = window.SMD_SPRING && SMD_SPRING.makeSettle ? SMD_SPRING.makeSettle(SMD_SPRING.animate) : null;
+  var flightRow = null, flightTray = null, catchParked = false;
+  function startSettle(row, tray, w, from, to, vel, done) {
+    flightRow = row; flightTray = tray;
+    var wrap = function () { if (flightRow === row) { flightRow = null; flightTray = null; } done(); };
+    if (settleCtl) settleCtl.start({ from: from, to: to, velocity: vel, stiffness: 420, damping: 36,
+      onUpdate: function (x) { row.style.transform = "translate3d(" + x + "px,0,0)"; tray.style.clipPath = clip(w, -x); }, onDone: wrap });
+    else { row.style.transform = "translate3d(" + to + "px,0,0)"; tray.style.clipPath = clip(w, -to); wrap(); }
+  }
+  function resumeParked() { if (catchParked) { catchParked = false; if (settleCtl) settleCtl.resume(); } }
 
   function closeOpen(animate) {
     var o = open; if (!o) return; open = null;
     clearInterval(o.timer);
-    stopSpring();
     var row = o.row, S = window.SMD_SPRING;
     var cur = parseFloat((/translate3d\((-?[\d.]+)px/.exec(row.style.transform) || [0, -o.w])[1]);
     if (isNaN(cur)) cur = -o.w;
-    var done = function () { springStop = null; row.style.transform = ""; row.style.willChange = ""; row.style.transition = ""; o.tray.remove(); };
-    if (animate && S && !S.reduced() && row.isConnected) springStop = S.animate({ from: cur, to: 0, velocity: 0, stiffness: 420, damping: 36, onUpdate: function (x) { row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(o.w, -x); }, onDone: done });
-    else done();
+    var done = function () { if (flightRow === row) { flightRow = null; flightTray = null; } row.style.transform = ""; row.style.willChange = ""; row.style.transition = ""; o.tray.remove(); };
+    if (animate && S && !S.reduced() && row.isConnected) startSettle(row, o.tray, o.w, cur, 0, 0, done);
+    else { if (settleCtl && flightRow === row) settleCtl.drop(); done(); }
   }
   function clip(w, revealed) { return "inset(0 0 0 " + Math.max(0, w - Math.max(0, revealed)) + "px)"; }
 
@@ -113,18 +123,23 @@
   }
 
   document.addEventListener("touchstart", function (e) {
-    stopSpring();
+    var t = e.target, x = e.touches[0].clientX, caught = false, caughtPos = 0, caughtTray = null;
+    if (flightRow && settleCtl) {
+      var onEl = !!(t && (flightRow.contains(t) || (flightTray && flightTray.contains(t))));
+      if (settleCtl.touch(onEl) === "ignore") return;          // touch elsewhere: the settle finishes normally
+      if (settleCtl.holding()) { caught = true; catchParked = true; caughtPos = settleCtl.heldPos() || 0; caughtTray = flightTray; }
+    }
     if (e.touches.length !== 1) { g = null; return; }
-    var t = e.target, x = e.touches[0].clientX;
     if (open && !(open.tray.contains(t))) { if (!open.row.contains(t)) closeOpen(true); }
     if (g) g.row.removeEventListener("touchmove", onMove, { passive: false });
     g = null;
-    if (x < 28 || x > innerWidth - 6) return;
+    if (x < 28 || x > innerWidth - 6) return;                  // parked catch resumes on touchend
     var row = rowFor(t); if (!row || inHScroller(row)) return;
     var acts = actionsOf(row); if (!acts.length) return;
     var curX = parseFloat((/translate3d\((-?[\d.]+)px/.exec(row.style.transform) || [0, 0])[1]) || 0;
-    var base = open && open.row === row ? curX : 0;
-    g = { row: row, acts: acts, x0: x, y0: e.touches[0].clientY, active: false, dead: false, base: base, w: trayWidth(acts.length, row.getBoundingClientRect().width), v: 0, lx: x, lt: performance.now(), dx: 0 };
+    var base = caught ? caughtPos : (open && open.row === row ? curX : 0);
+    g = { row: row, acts: acts, x0: x, y0: e.touches[0].clientY, active: false, dead: false, base: base, heldCatch: caught, caughtTray: caughtTray, w: trayWidth(acts.length, row.getBoundingClientRect().width), v: 0, lx: x, lt: performance.now(), dx: 0 };
+    if (caught) catchParked = false;
     row.addEventListener("touchmove", onMove, { passive: false });
   }, { passive: true, capture: true });
 
@@ -138,9 +153,10 @@
       if (it === "v") { g.dead = true; return; }
       if (!open || open.row !== g.row) {
         if (open) closeOpen(false);
-        g.tray = buildTray(g.row, g.acts, g.w);
-        open = { row: g.row, tray: g.tray, w: g.w, timer: 0 };
+        if (g.heldCatch && g.caughtTray && g.caughtTray.isConnected) { g.tray = g.caughtTray; open = { row: g.row, tray: g.tray, w: g.w, timer: 0 }; }   // adopt the caught tray: its removal is this drag's job now
+        else { g.tray = buildTray(g.row, g.acts, g.w); open = { row: g.row, tray: g.tray, w: g.w, timer: 0 }; }
       } else { clearInterval(open.timer); g.tray = open.tray; }
+      if (g.heldCatch) { g.heldCatch = false; if (settleCtl) settleCtl.supersede(); flightRow = null; flightTray = null; }   // the drag decides now
       // The row may carry its own transform transition (cards, list rows): off while the finger drives it, or the row lags behind.
       g.active = true; g.row.style.willChange = "transform"; g.row.style.transition = "none";
     }
@@ -155,24 +171,25 @@
 
   function release() {
     var st = g; g = null;
-    if (!st) return;
+    if (!st) { resumeParked(); return; }
     st.row.removeEventListener("touchmove", onMove, { passive: false });
-    if (!st.active || !open || open.row !== st.row) return;
+    if (!st.active) {   // tap / lost axis lock on a caught row: resume the original settle
+      if (st.heldCatch) { st.heldCatch = false; if (settleCtl) settleCtl.resume(); }
+      return;
+    }
+    if (!open || open.row !== st.row) return;
     swallowUntil = Date.now() + 350;
     var cur = parseFloat((/translate3d\((-?[\d.]+)px/.exec(st.row.style.transform) || [0, 0])[1]) || 0;
-    var o = open, S = window.SMD_SPRING, lock = shouldLock(cur, st.v, st.w);
+    var o = open, lock = shouldLock(cur, st.v, st.w);
     var to = lock ? -st.w : 0;
-    var upd = function (x) { st.row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(st.w, Math.min(st.w, -x)); };
     if (lock && !st.base) { try { window.SMD_HAPTICS && SMD_HAPTICS.medium(); } catch (x) {} }
     var fin = function () {
-      springStop = null;
       if (!lock) { if (open === o) { open = null; } st.row.style.transform = ""; st.row.style.willChange = ""; st.row.style.transition = ""; o.tray.remove(); return; }
       // Open: close itself if the row is re-rendered away or moves (scroll / layout change).
       var r0 = st.row.getBoundingClientRect().top;
       o.timer = setInterval(function () { if (!st.row.isConnected || Math.abs(st.row.getBoundingClientRect().top - r0) > 2) closeOpen(false); }, 250);
     };
-    if (S) springStop = S.animate({ from: cur, to: to, velocity: st.v, stiffness: 420, damping: 36, onUpdate: upd, onDone: fin });
-    else { upd(to); fin(); }
+    startSettle(st.row, o.tray, st.w, cur, to, st.v, fin);
   }
   document.addEventListener("touchend", release, { capture: true });
   document.addEventListener("touchcancel", release, { capture: true });
