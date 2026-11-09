@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-small-bowel",
+ "subject": "surgery",
+ "title": "Meckel Diverticulum and Omphalomesenteric Anomalies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most common congenital structural anomaly of the human gastrointestinal tract is **Meckel diverticulum**. Arising from incomplete obliteration of the embryonic vitelline duct, also known as the omphalomesenteric duct, this outpouching persists on the antimesenteric border of the ileum. As a true congenital diverticulum, the wall incorporates all three normal anatomical layers of the intestine: mucosa, submucosa, and muscularis propria.",
+   "say": "Meckel diverticulum is the commonest congenital GI anomaly, arising from persistent vitelline duct tissue on the antimesenteric ileal border.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-small-bowel-obstruction.webp",
+    "alt": "Abdominal radiograph demonstrating mechanical small bowel obstruction secondary to small bowel volvulus around a persistent vitelline band.",
+    "caption": "Small bowel obstruction: intestinal volvulus around a congenital mesodiverticular band in Meckel diverticulum. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic anatomical and epidemiological features of Meckel diverticulum are memorized using the surgical **rule of 2**. The anomaly occurs in approximately two percent of the general population, possesses a two-to-one male-to-female ratio in symptomatic individuals, measures approximately two inches in length, and is situated within two feet of the ileocaecal valve along the antimesenteric border.",
+   "say": "The rule of two states that Meckel diverticulum occurs in two percent of people, measures two inches, and lies two feet from the ileocaecal valve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rule of 2 Component",
+     "Anatomical or Epidemiological Metric",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Prevalence",
+      "2% of the general population",
+      "Most common congenital GI anomaly"
+     ],
+     [
+      "Gender Ratio",
+      "2:1 male-to-female predominance",
+      "Symptomatic complications predominate in males"
+     ],
+     [
+      "Location",
+      "Within 2 feet (60 cm) of ileocaecal valve",
+      "Must be sought when normal appendix found at surgery"
+     ],
+     [
+      "Length",
+      "Approximately 2 inches (5 cm) long",
+      "True diverticulum on antimesenteric border"
+     ],
+     [
+      "Heterotopia",
+      "Contains 2 common ectopic mucosal tissues",
+      "Gastric mucosa (60%) and pancreatic tissue (15%)"
+     ],
+     [
+      "Presentation",
+      "Typically presents before 2 years of age",
+      "Painless rectal bleeding in young children"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A vital pathological feature of Meckel diverticulum is the frequent presence of heterotopic mucosal tissue. Ectopic **gastric mucosa** is identified in over sixty percent of symptomatic diverticula, followed by ectopic pancreatic tissue in fifteen percent. Parietal cells within the ectopic gastric mucosa secrete hydrochloric acid into the diverticular lumen, which provokes peptic ulceration of the adjacent unbuffered ileal mucosa, precipitating painless lower gastrointestinal bleeding.",
+   "say": "Heterotopic gastric mucosa secretes acid that ulcerates adjacent ileal tissue, causing painless lower gastrointestinal bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ectopic Gastric Mucosa",
+     "points": [
+      "Present in 60% of symptomatic cases",
+      "Contains active parietal cells",
+      "Ulcerates adjacent native ileal mucosa",
+      "Painless cherry-red or maroon rectal bleeding"
+     ]
+    },
+    "right": {
+     "title": "Ectopic Pancreatic Tissue",
+     "points": [
+      "Present in 15% of cases",
+      "Acinar and ductal lobules",
+      "Acts as a lead point for intussusception",
+      "Rarely undergoes acute pancreatitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In pediatric patients presenting with unexplained painless, brick-red or maroon rectal bleeding, the diagnostic investigation of choice is the **Tc-99m pertechnetate scan**, historically termed the Meckel scan. Technetium-99m pertechnetate is selectively taken up by the mucus-secreting cells of ectopic gastric mucosa. Scintigraphy demonstrates an abnormal focal area of radiotracer accumulation in the right lower quadrant that appears simultaneously with normal stomach uptake.",
+   "say": "A Technetium-99m pertechnetate scan detects ectopic gastric mucosa, demonstrating tracer accumulation in the right lower quadrant.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Painless Lower GI Bleeding in Child or Young Adult"
+     },
+     {
+      "id": "prep",
+      "label": "Pre-Treatment with H2 Blockers or Pentagastrin"
+     },
+     {
+      "id": "scan",
+      "label": "Tc-99m Pertechnetate Scintigraphy (Meckel Scan)"
+     },
+     {
+      "id": "hot",
+      "label": "Focal Tracer Uptake in Right Iliac Fossa Identifies Lesion"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "prep"
+     ],
+     [
+      "prep",
+      "scan"
+     ],
+     [
+      "scan",
+      "hot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic sensitivity of the pertechnetate scan is substantially boosted by pharmacological pre-treatment. Histamine-2 receptor antagonists such as ranitidine or cimetidine inhibit intraluminal tracer secretion, trapping technetium within mucosal cells. Additionally, administration of **pentagastrin** stimulates pertechnetate uptake, while glucagon suppresses intestinal peristalsis to prevent rapid transit of washed-out isotope away from the diverticulum.",
+   "say": "Pre-treatment with H2 blockers, pentagastrin, and glucagon improves the sensitivity of the Meckel scan by enhancing tracer uptake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Agent",
+     "Mechanism of Action",
+     "Diagnostic Benefit on Scintigraphy"
+    ],
+    "rows": [
+     [
+      "H2 Blockers (Cimetidine)",
+      "Blocks luminal release of pertechnetate",
+      "Retains isotope inside gastric parietal cells"
+     ],
+     [
+      "Pentagastrin",
+      "Stimulates gastric mucosal metabolic activity",
+      "Accelerates pertechnetate extraction from blood"
+     ],
+     [
+      "Glucagon",
+      "Inhibits smooth muscle bowel motility",
+      "Prevents wash-out of isotope downstream"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beyond ulceration and bleeding, Meckel diverticulum can trigger mechanical bowel obstruction through several distinct mechanisms. The diverticulum can invert into the ileal lumen and serve as the lead point for an ileoileal or ileocolic **intussusception**. Alternatively, a persistent fibrous vitelline cord or mesodiverticular band running from the diverticulum to the umbilicus can act as an axis around which loops of small intestine twist, causing volvulus.",
+   "say": "Meckel diverticulum causes intestinal obstruction by inverting as an intussusception lead point or through volvulus around a vitelline band.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-bowel_obstruction.webp",
+    "alt": "Clinical illustration showing physical signs of small bowel obstruction including distension, hyperactive peristalsis, and dehydration.",
+    "caption": "Clinical evaluation of bowel obstruction: assessing visible peristalsis, abdominal distension, and signs of strangulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Obstruction of the narrow neck of the diverticulum by an enterolith, foreign body, or lymphoid hyperplasia produces acute **diverticulitis**. Clinically indistinguishable from acute appendicitis, patients present with migratory right lower quadrant abdominal pain, fever, and leukocytosis. When a normal appendix is encountered during emergency laparotomy for suspected appendicitis, the operating surgeon is obligated to search the terminal two feet of ileum retrograde to inspect for Meckel diverticulitis.",
+   "say": "Acute diverticulitis mimics appendicitis, obligating the surgeon to examine the terminal ileum whenever a normal appendix is found.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Diverticulitis",
+     "points": [
+      "Pain located slightly more medial or periumbilical",
+      "Negative appendicitis signs on ultrasound",
+      "High rate of early perforation",
+      "Arises from antimesenteric ileal border"
+     ]
+    },
+    "right": {
+     "title": "Acute Appendicitis",
+     "points": [
+      "Maximal tenderness strictly at McBurney point",
+      "Arises from posteromedial caecal border",
+      "Base located at confluence of taeniae coli",
+      "Mural appendicolith frequently visualized"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical management of symptomatic Meckel diverticulum requires laparoscopic or open **diverticulectomy** or segmental ileal resection. When the diverticulum has provoked peptic bleeding, simple wedge diverticulectomy may leave ulcerated ileal mucosa behind; therefore, formal segmental small bowel resection with primary end-to-end anastomosis is preferred. Incidental asymptomatic diverticula found during laparotomy in young patients should be resected if they possess a narrow neck, palpable thickening, or a fibrous band.",
+   "say": "Surgical resection of Meckel diverticulum entails diverticulectomy or segmental ileal resection, particularly when peptic ileal ulcers are present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "finding",
+      "label": "Meckel Diverticulum Identified (Bleeding, SBO, or Incidental)"
+     },
+     {
+      "id": "assess",
+      "label": "Examine Base: Wide or Narrow Neck? Palpable Heterotopia?"
+     },
+     {
+      "id": "resect",
+      "label": "Segmental Ileal Resection & Primary Anastomosis (if Bleeding)"
+     },
+     {
+      "id": "wedge",
+      "label": "Wedge Diverticulectomy (if Simple Thin-Walled Diverticulum)"
+     }
+    ],
+    "edges": [
+     [
+      "finding",
+      "assess"
+     ],
+     [
+      "assess",
+      "resect"
+     ],
+     [
+      "assess",
+      "wedge"
+     ]
+    ]
+   }
+  }
+ ]
+}

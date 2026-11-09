@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sur-small-bowel",
+ "subject": "surgery",
+ "title": "Small Bowel Tumours, Carcinoids, and Fistulas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Despite accounting for seventy-five percent of the length and ninety percent of the mucosal surface area of the digestive tract, primary **small bowel tumours** are remarkably rare, constituting less than five percent of all gastrointestinal neoplasms. Protective factors suppressing small bowel oncogenesis include rapid liquid transit limiting carcinogen exposure, high concentrations of detoxifying enzymes like benzpyrene hydroxylase, and abundant secretory immunoglobulin A.",
+   "say": "Small bowel tumours are rare despite the large surface area, protected by rapid transit, low bacterial counts, and high mucosal immunity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/carcinoid-syndrome-fig1.webp",
+    "alt": "Clinical illustration showing systemic features of carcinoid syndrome including cutaneous flushing, diarrhea, and tricuspid valve disease.",
+    "caption": "Carcinoid syndrome: systemic manifestations of neuroendocrine serotonin release following hepatic metastasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Malignant small bowel neoplasms are categorized into four principal histological subtypes: neuroendocrine tumours, adenocarcinomas, gastrointestinal stromal tumours, and lymphomas. Duodenal adenocarcinomas arise predominantly around the ampulla of Vater. Primary gastrointestinal stromal tumours predominate in the jejunum and express CD117 (c-kit), whereas intestinal **lymphoma** occurs most frequently in the ileum due to the concentration of lymphoid follicles in Peyer patches.",
+   "say": "Small bowel malignancies include neuroendocrine tumours, adenocarcinomas, stromal tumours, and lymphomas, varying by anatomical location.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Subtype",
+     "Predominant Location",
+     "Diagnostic Biomarker / Marker",
+     "Key Feature"
+    ],
+    "rows": [
+     [
+      "Neuroendocrine (Carcinoid)",
+      "Distal Ileum (terminal 60 cm)",
+      "Chromogranin A, synaptophysin",
+      "Multiple tumours, desmoplastic reaction"
+     ],
+     [
+      "Adenocarcinoma",
+      "Duodenum and proximal jejunum",
+      "CEA, cytokeratin 7 / 20",
+      "Aggressive, napkin-ring annular stricture"
+     ],
+     [
+      "Gastrointestinal Stromal (GIST)",
+      "Jejunum and ileum",
+      "CD117 (c-kit), DOG-1 positive",
+      "Exophytic, prone to cavitary bleeding"
+     ],
+     [
+      "Lymphoma (B-cell / T-cell)",
+      "Terminal ileum (Peyer patches)",
+      "CD20 positive (B-cell)",
+      "Bulky mass, high perforation risk with chemo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common primary malignancy of the small intestine is the neuroendocrine **carcinoid tumour**, originating from subepithelial enterochromaffin cells of Kulchitsky. Predominating in the distal ileum, these slow-growing tumours secrete bioactive amines including serotonin, bradykinin, and prostaglandins. Over thirty percent are multicentric, and locally secreted serotonin induces an intense fibroblastic desmoplastic reaction in the adjacent mesentery, causing kinking, foreshortening, and bowel obstruction.",
+   "say": "Carcinoid tumours arise from enterochromaffin cells in the ileum, causing an intense mesenteric fibrotic reaction that kinks the intestine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ec",
+      "label": "Enterochromaffin Cells of Kulchitsky in Crypts of Lieberkuhn"
+     },
+     {
+      "id": "serotonin",
+      "label": "Local Hypersecretion of Serotonin & Vasoactive Peptides"
+     },
+     {
+      "id": "fibrosis",
+      "label": "Intense Mesenteric Desmoplasia, Retraction & Kinking"
+     },
+     {
+      "id": "obstruct",
+      "label": "Subacute Mechanical Small Bowel Obstruction & Ischemia"
+     }
+    ],
+    "edges": [
+     [
+      "ec",
+      "serotonin"
+     ],
+     [
+      "serotonin",
+      "fibrosis"
+     ],
+     [
+      "fibrosis",
+      "obstruct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ordinarily, serotonin released into portal circulation is rapidly metabolized and cleared during first-pass transit by hepatic monoamine oxidase into five-hydroxyindoleacetic acid. However, when an intestinal carcinoid metastasizes to the liver or drains directly into systemic veins, vasoactive mediators bypass hepatic degradation, precipitating classic **carcinoid syndrome**. The syndrome manifests with episodic cutaneous flushing of the face and neck, secretory watery diarrhoea, bronchospasm, and tricuspid endocardial fibrosis.",
+   "say": "Carcinoid syndrome occurs when liver metastases release serotonin into systemic circulation, causing flushing, diarrhoea, and right-sided valvular disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Manifestation",
+     "Vasoactive Mediator",
+     "Pathological Consequence"
+    ],
+    "rows": [
+     [
+      "Episodic Cutaneous Flushing",
+      "Bradykinin, tachykinins, histamine",
+      "Sudden paroxysmal erythema of face, neck, and upper chest"
+     ],
+     [
+      "Secretory Diarrhoea",
+      "Serotonin (5-HT)",
+      "Stimulates intestinal motility and fluid secretion"
+     ],
+     [
+      "Bronchoconstriction / Wheezing",
+      "Histamine and serotonin",
+      "Reversible bronchospasm mimicking acute asthma"
+     ],
+     [
+      "Carcinoid Heart Disease",
+      "Serotonin plaque deposition",
+      "Tricuspid regurgitation and pulmonary stenosis (right heart)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biochemical confirmation of carcinoid syndrome is established by measuring twenty-four hour urinary excretion of five-hydroxyindoleacetic acid. Serum chromogranin A serves as a reliable circulating biomarker of neuroendocrine tumour burden. Diagnostic imaging employs Gallium-68 DOTATATE positron emission tomography, which binds somatostatin receptors with remarkable sensitivity. Medical management utilizes long-acting **octreotide** to block hormone release, while surgical resection of the primary and accessible hepatic metastases provides symptom relief.",
+   "say": "Diagnosis relies on 24-hour urine 5-HIAA and Gallium-68 DOTATATE scans, managed with somatostatin analogues like octreotide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "urine",
+      "label": "24-Hour Urine 5-HIAA & Serum Chromogranin A"
+     },
+     {
+      "id": "pet",
+      "label": "Ga-68 DOTATATE PET-CT Localizes Somatostatin Receptors"
+     },
+     {
+      "id": "somato",
+      "label": "Symptom Control with Long-Acting Somatostatin Analogues"
+     },
+     {
+      "id": "surg",
+      "label": "Cytoreductive Hepatic Resection & Primary En Bloc Excision"
+     }
+    ],
+    "edges": [
+     [
+      "urine",
+      "pet"
+     ],
+     [
+      "pet",
+      "somato"
+     ],
+     [
+      "somato",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An abnormal, epithelialized communication connecting the lumen of the intestine directly to the external skin surface is defined as an **enterocutaneous fistula**. Greater than eighty percent of all enterocutaneous fistulas arise iatrogenically as postoperative surgical complications following inadvertent enterotomy during adhesiolysis, anastomotic breakdown, or erosion from synthetic mesh and rigid abdominal drains.",
+   "say": "An enterocutaneous fistula connects intestinal lumen to skin, usually arising as a postoperative complication after surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-fistula-probe-and-director.webp",
+    "alt": "Surgical instruments photograph showing malleable fistula probe and grooved director used for tract exploration.",
+    "caption": "Fistula probe and grooved director: surgical instruments utilized in fistula tract identification and delineation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Enterocutaneous fistulas are categorized by twenty-four hour fluid output into low-output under two hundred millilitres, moderate-output from two hundred to five hundred millilitres, and high-output fistulas exceeding five hundred millilitres daily. High-output fistulas originating from the duodenum or proximal jejunum trigger catastrophic fluid depletion, severe electrolyte disturbances, profound zinc deficiency, and corrosive skin breakdown, demanding intensive parenteral fluid and nutritional **resuscitation**.",
+   "say": "Fistulas are classified by daily output, with high-output fistulas discharging over 500 mL and provoking severe dehydration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Output Category",
+     "Daily Fluid Loss",
+     "Typical Origin Site",
+     "Nutritional Strategy"
+    ],
+    "rows": [
+     [
+      "High-Output",
+      "> 500 mL / 24 hours",
+      "Duodenum, proximal jejunum",
+      "Total parenteral nutrition mandatory; bowel rest"
+     ],
+     [
+      "Moderate-Output",
+      "200 to 500 mL / 24 hours",
+      "Mid-gut ileum",
+      "Enteral feeding if tract length allows"
+     ],
+     [
+      "Low-Output",
+      "< 200 mL / 24 hours",
+      "Distal ileum, colon",
+      "Standard enteral nutrition or oral diet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The conditions that prevent spontaneous closure of an enterocutaneous fistula are summarized by the surgical mnemonic **FRIENDS**. These factors encompass Foreign body, Radiation enteritis, Infection or epithelialization, Neoplasm, Distal obstruction, and Short fistula tract under two centimetres. Initial management adheres to the SNAP protocol prioritizing Sepsis control, Nutritional support, Anatomical delineation, and Planned definitive operative repair delayed for four to six months.",
+   "say": "Factors preventing fistula closure are remembered by the FRIENDS mnemonic, managed with the SNAP protocol deferring surgery for four to six months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FRIENDS (Non-Closure Factors)",
+     "points": [
+      "F - Foreign body within tract (mesh, suture)",
+      "R - Radiation enteritis",
+      "I - Infection / abscess or Epithelialization",
+      "N - Neoplasm / Malignancy",
+      "D - Distal intestinal obstruction",
+      "S - Short tract length (< 2 cm)"
+     ]
+    },
+    "right": {
+     "title": "SNAP Protocol (Treatment Steps)",
+     "points": [
+      "S - Sepsis control & fluid resuscitation",
+      "N - Nutritional repletion (TPN / enteral)",
+      "A - Anatomy definition (CT fistulogram)",
+      "P - Planned definitive surgical repair"
+     ]
+    }
+   }
+  }
+ ]
+}
