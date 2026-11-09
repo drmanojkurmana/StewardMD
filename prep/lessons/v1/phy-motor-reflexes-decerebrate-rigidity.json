@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-motor-reflexes",
+  "subject": "physiology",
+  "title": "Brainstem Motor Control, Rigidity Postures, and the Babinski Sign",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Surgical transection of the brainstem between the superior colliculi and inferior colliculi, or rostral to the vestibular nuclei, produces a dramatic hypertonic posture. Termed **decerebrate rigidity**, the subject displays hyperpronation and rigid extension of all four limbs, arched dorsiflexion of the neck and spine termed opisthotonos, and clenched jaws.",
+      "say": "Decerebrate rigidity from midbrain transection produces rigid extension of all four limbs and opisthotonos.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypoxic-ischemic-encephalopathy-fig1.webp",
+        "caption": "Severe diffuse brainstem and cerebral ischemia leading to comatose states and abnormal posturing.",
+        "alt": "Severe hypoxic-ischemic brain damage producing coma and decerebrate posturing"
+      }
+    },
+    {
+      "tx": "The neurophysiological mechanism underlying decerebrate rigidity is uninhibited hyperactivity of the lateral vestibular nuclei and pontine reticulospinal system. Because the transection severs inhibitory corticoreticular and rubrospinal tracts while leaving the lateral **Deiters vestibular nucleus** intact, tonic facilitatory outflow to extensor motor neurons runs unchecked.",
+      "say": "Decerebrate rigidity results from unchecked facilitatory drive from Deiters lateral vestibular nucleus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "intercollicular_cut",
+            "label": "Intercollicular Transection Disconnects Cerebral Cortex and Red Nucleus"
+          },
+          {
+            "id": "loss_inhibition",
+            "label": "Loss of Corticoreticular Inhibition to Medullary Reticular Formation"
+          },
+          {
+            "id": "vestib_dominance",
+            "label": "Lateral Vestibular Nucleus (Deiters) and Pontine Reticular System Run Unofficially"
+          },
+          {
+            "id": "extensor_spasm",
+            "label": "Massive Facilitatory Vestibulospinal Drive Stimulates Alpha and Gamma Extensors"
+          }
+        ],
+        "edges": [
+          [
+            "intercollicular_cut",
+            "loss_inhibition"
+          ],
+          [
+            "loss_inhibition",
+            "vestib_dominance"
+          ],
+          [
+            "vestib_dominance",
+            "extensor_spasm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When transection or compressive damage occurs at a more rostral level above the midbrain red nucleus, a distinctly different posturing pattern emerges. In **decorticate posture**, the upper limbs exhibit flexion, adduction, and internal rotation at the elbows and wrists, whereas the lower extremities display rigid extension with internal rotation and plantar flexion.",
+      "say": "Decorticate posturing from rostral cerebral damage features upper limb flexion and lower limb extension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Decorticate Posturing",
+          "points": [
+            "Lesion located rostral to midbrain red nucleus (cerebral cortex or internal capsule)",
+            "Rubrospinal tract remains intact, driving upper limb flexor motor neurons",
+            "Upper extremities flexed and adducted tight against the chest",
+            "Lower extremities rigidly extended with ankle plantar flexion"
+          ]
+        },
+        "right": {
+          "title": "Decerebrate Posturing",
+          "points": [
+            "Lesion located at or below midbrain red nucleus (brainstem herniation)",
+            "Rubrospinal tract is severed, abolishing upper limb flexor drive",
+            "Upper extremities rigidly extended, internally rotated, and pronated",
+            "Lower extremities extended with pointed toes, indicating deeper brainstem coma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Differentiation between upper and lower motor neuron lesions represents a foundational clinical distinction in clinical neurology. Lesions affecting the corticospinal tract anywhere along its path from motor cortex to spinal cord constitute an **upper motor neuron lesion**, characterized by muscle spasticity, hyperactive deep tendon reflexes, clonus, loss of superficial reflexes, and the extensor plantar response.",
+      "say": "Upper motor neuron lesions produce spasticity, hyperreflexia, clonus, and an extensor plantar response.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuropathic-pain-fig1.webp",
+        "caption": "Motor and sensory neurological examination illustrating motor weakness and reflex asymmetry.",
+        "alt": "Upper versus lower motor neuron pathway testing and reflex differences"
+      }
+    },
+    {
+      "tx": "In stark contrast to upper motor neuron pathology, lesions that destroy the anterior horn cells or their projecting peripheral motor axons produce **lower motor neuron signs**. Affected skeletal muscles display flaccid paralysis with complete loss of muscle tone, profound denervation muscle atrophy, absent tendon reflexes, and spontaneous involuntary twitches of single motor units termed fasciculations.",
+      "say": "Lower motor neuron lesions cause flaccid paralysis, muscle atrophy, fasciculations, and absent reflexes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Upper Motor Neuron (UMN) Lesion",
+          "points": [
+            "Increased muscle tone (clasp-knife spasticity, velocity-dependent)",
+            "Hyperactive deep tendon reflexes with pathological sustained clonus",
+            "Disuse muscle atrophy (mild, late, minimal wasting)",
+            "Positive Babinski sign (extensor plantar response); absent fasciculations"
+          ]
+        },
+        "right": {
+          "title": "Lower Motor Neuron (LMN) Lesion",
+          "points": [
+            "Decreased muscle tone (flaccid paresis or complete flaccid paralysis)",
+            "Diminished or completely absent deep tendon reflexes (areflexia)",
+            "Severe, rapid neurogenic denervation muscle atrophy (up to 70-80% bulk loss)",
+            "Visible involuntary muscle fasciculations and fibrillations on EMG"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Firm mechanical stroking along the lateral plantar surface of the foot from the heel forward toward the little toe and curving across the metatarsal pads elicits a cutaneous reflex. In healthy adults, the normal physiological response is **plantar flexion of all toes**, mediated by sensory S1 afferents and motor L5-S1 efferents.",
+      "say": "Stroking the lateral sole of a healthy adult foot causes normal plantar flexion of all toes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sole_stroke",
+            "label": "Blunt Instrument Stroked Along Lateral Border of Plantar Sole Toward Base of Toes"
+          },
+          {
+            "id": "tibial_afferent",
+            "label": "Cutaneous Afferent Signals Travel in Tibial Nerve to S1 Spinal Segment"
+          },
+          {
+            "id": "corticospinal_gate",
+            "label": "Intact Descending Corticospinal Fibers Tonically Inhibit Primitive Flexor Spasm"
+          },
+          {
+            "id": "plantar_flex",
+            "label": "S1 Efferents Activate Flexor Hallucis Longus, Producing Downward Plantar Flexion"
+          }
+        ],
+        "edges": [
+          [
+            "sole_stroke",
+            "tibial_afferent"
+          ],
+          [
+            "tibial_afferent",
+            "corticospinal_gate"
+          ],
+          [
+            "corticospinal_gate",
+            "plantar_flex"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When the corticospinal tract is disrupted by stroke, trauma, or demyelinating disease, stroking the sole produces slow dorsiflexion of the great toe accompanied by fanning of the other four digits. Described by Joseph Babinski in 1896, this abnormal extensor response is the **Babinski sign**, reflecting uninhibited primitive spinal withdrawal reflexes.",
+      "say": "The Babinski sign is great toe dorsiflexion and toe fanning, proving corticospinal tract disruption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Adult Plantar Response",
+          "points": [
+            "Downward curling (plantar flexion) of great toe and all lateral toes",
+            "Mediated by intact S1 segmental spinal reflex arc",
+            "Tonic corticospinal inhibition suppresses primitive extensor synergy",
+            "Absence of toe fanning or hip withdrawal flexion"
+          ]
+        },
+        "right": {
+          "title": "Pathological Babinski Sign",
+          "points": [
+            "Slow extension and dorsiflexion of great toe (hallux dorsiflexion)",
+            "Simultaneous fanning and abduction of outer four digits (signe de l'éventail)",
+            "Definitive pathognomonic marker of corticospinal (UMN) tract lesion",
+            "Physiological in infants under one year due to incomplete tract myelination"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In patients with severe upper motor neuron spasticity, sudden rapid passive dorsiflexion of the ankle maintained under sustained stretch triggers rhythmic, oscillating muscle contractions. This clinical sign is **sustained ankle clonus**, driven by repetitive self-re-exciting stretch reflex loops in the spinal cord that fire at five to seven cycles per second due to the loss of supraspinal inhibitory control.",
+      "say": "Ankle clonus is rhythmic muscle oscillation triggered by sustained stretch due to loss of spinal inhibition.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rapid_dorsiflex",
+            "label": "Examiner Briskly Dorsiflexes Ankle and Maintains Sustained Upward Tension"
+          },
+          {
+            "id": "ia_burst",
+            "label": "Achilles Tendon Stretch Triggers Massive Synchronous Ia Spindle Discharge"
+          },
+          {
+            "id": "gastrocnemius_twitch",
+            "label": "Alpha Motor Neurons Fire, Causing Brisk Gastrocnemius-Soleus Plantar Contraction"
+          },
+          {
+            "id": "clonic_cycle",
+            "label": "Plantar Contraction Stretches Antagonists and Re-loads Spindles, Cycling at 5-7 Hz"
+          }
+        ],
+        "edges": [
+          [
+            "rapid_dorsiflex",
+            "ia_burst"
+          ],
+          [
+            "ia_burst",
+            "gastrocnemius_twitch"
+          ],
+          [
+            "gastrocnemius_twitch",
+            "clonic_cycle"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
