@@ -1863,20 +1863,40 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
   reading waits for it, a saved voice loads quietly; missing/unavailable/error/too-slow (`voiceChoice`) or one failed
   sentence falls back to the system voice chosen by the lessons' `bestVoice`, text shaped by their `sayText`/`sayChunks`
   (no copy in prep-play.js). `hush`/`stopVoice` stop Phonon too, `stopVoice` `release()`s it like the lessons' leave,
-  backgrounding hushes and invalidates the token, a length-based watchdog (`sayWatchdogMs`) keeps a hung `say()` from
-  stalling the session, and the mic opens 250 ms after playback ends (re-`unlock()` after a mic session, system fallback
-  when `play()` rejects). Listens through `SMD_NATIVE.transcribe` only when `Capacitor.Plugins.SpeechRecognition` exists
-  (it throws otherwise), else Web Speech; native ranked alternatives now reach JS via `opts.onMatches` in
-  `native-bridge.js` (the plugin already sent them; JS used to keep only the first). `parseVoice`: risky letter words
-  (a, to, for, be, see, the, eight…) count only as the whole utterance or after a strong cue (option/answer/letter/
-  choice), natural phrases ("I'll go with B", "my answer would be D"), joined forms (optionb, b.), repeats, numbers,
-  corrections after "wait", negations and letter ties give null, option words match fuzzily (joined splits, small edit
-  distance, clear winner only) and beat command words inside them ("stop codon"); commands need a short plainly-command
-  utterance. Partials commit only a standalone letter held 500 ms (`partialVote`), the prompt follows the real option
-  count (`choicePrompt`, E for 5 options), a first miss re-listens on the short prompt without re-reading the question
-  ("repeat" still re-reads), two misses wait for a tap, listening runs about 10 s and extends briefly mid-word, and the
-  heard text shows in the voice bar while listening. Not verified on a phone; the iOS speech plugin never restores the
-  `AVAudioSession` it sets in `start` (no `setActive(false)` in `Plugin.swift`), which only a device can confirm.
+  backgrounding hushes and invalidates the token, a length-based watchdog (`sayWatchdogMs`, scaled by rate) keeps a hung
+  `say()` from stalling the session, and the mic opens 250 ms after playback ends (re-`unlock()` after a mic session,
+  system fallback when `play()` rejects). Listens through `SMD_NATIVE.transcribe` only when
+  `Capacitor.Plugins.SpeechRecognition` exists (it throws otherwise), else Web Speech; native ranked alternatives now
+  reach JS via `opts.onMatches` in `native-bridge.js` (the plugin already sent them; JS used to keep only the first).
+  `parseVoice`: risky letter words (a, to, for, be, see, the, eight…) count only as the whole utterance or after a
+  strong cue (option/answer/letter/choice), natural phrases ("I'll go with B", "my answer would be D"), joined forms
+  (optionb, b.), repeats, numbers, corrections after "wait", negations and letter ties give null; option words are
+  normalised both sides (Greek symbols as words, hyphens as spaces, number words as digits, "%" as percent) and match
+  exactly first (60% or one word found in only one option with everything heard belonging to it; joined splits and
+  spelled acronyms join; a fragment like "a beta" never commits), fuzzily only with one clear winner, identical or
+  fully tied options give null, and a leading "I think" or trailing "is the answer" never blocks the match; bare
+  example/NATO words (apple…elephant, alpha…echo) count only as the whole utterance when no option uses the word,
+  "A for apple" answers from the letter before "for", and commands are whole-utterance phrases (repeat/skip/stop in
+  natural phrasing, slower/faster one clamped step) that an option's own words still beat ("stop codon"); a sentence
+  merely containing the word never fires. Partials commit a fast set (standalone letter, whole-utterance command) held
+  500 ms and everything else that parses held 1200 ms (`partialVote`). Every prompt steers to "option B": listening
+  reads "Listening… say option A to D, or read it", a first miss shows what was heard (`Heard "…"` / `Nothing heard.`,
+  status only, never logged or sent) and speaks "Sorry, say option A to D, or read the option.", two misses wait for
+  a tap, listening runs about 10 s and extends briefly mid-word. Bar (`prep133`): speed (the lessons' `lsp.r`,
+  `nextSpeed`/`speedLabel`, used by Phonon `say`/`prefetch` and the system voice; while listening it only saves,
+  during reading it restarts the current block), Repeat (stops speech and mic, clears misses, re-reads the question
+  or the feedback, `unlock()` in the tap) and Stop voice; stopping (button or spoken "stop") keeps a "Voice off"
+  bar with Start voice for the rest of the run across re-renders, Start resumes the same questions with answers
+  kept (saved voice reloads quietly, no card), and leaving or finishing clears it fully. iPhone letter check
+  (2026-11, code only): with `partialResults` on, iOS `Plugin.swift` resolves `start()` empty at engine start, so
+  the bridge never finishes early from that promise, and its `partialResults` listeners attach before `start()`;
+  a recognition error after start rejects an already-settled call (a no-op) and ends as `listeningState stopped`,
+  so the bridge finishes with the last partial (empty on silence) while a pre-start error (permission, busy mic,
+  unavailable locale) reaches `onError`, which Voice mode now treats as "Tap your answer" instead of burning a
+  miss; `onDevice: "prefer"` with no on-device en-IN model silently uses Apple's server recogniser in Swift (audio
+  may leave the phone, offline it errors into that empty finish). Not verified on a phone; the iOS speech plugin
+  never restores the `AVAudioSession` it sets in `start` (no `setActive(false)` in `Plugin.swift`), which only a
+  device can confirm.
 - **Focus room:** 25/50/90 min, `localStorage smd_prep_focus`, heartbeat POST each minute; live count = heartbeats in
   150 s (`play/focus`). Minutes in `fxm[month]` (under a minute logs nothing).
 - **Wrapped:** story cards from the store only (`days`, `wm[month][subject]`, `mod`, `hr`, `boss`, `spoth`, `fxm`), then a
