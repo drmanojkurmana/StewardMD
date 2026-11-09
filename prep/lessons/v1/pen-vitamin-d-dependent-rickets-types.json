@@ -1,300 +1,275 @@
 {
-  "id": "pen-vitamin-d-dependent-rickets-types",
-  "title": "Vitamin D-Dependent Rickets Types 1 and 2: CYP27B1, VDR Mutations and Alopecia",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Rickets, Calcium Disorders and Posterior Pituitary",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Vitamin D-dependent rickets type 1A is caused by an inability to bioactivate vitamin D into calcitriol.",
-      "tx": "Analyze the enzymatic defect and genetics of the **VDDR Type 1A 1-alpha-hydroxylase defect** in young infants. VDDR1A is an autosomal recessive deficiency of renal 25-hydroxyvitamin D 1-alpha-hydroxylase (CYP27B1 on 12q14.1), presenting in the first year of life with severe hypocalcemic tetany, rickets, and normal 25(OH)D but undetectable 1,25(OH)2D.",
-      "vis": {
-        "kind": "table",
-        "title": "VDDR1A Enzymatic and Biochemical Profile",
-        "cols": [
-          "Parameter",
-          "Laboratory Finding",
-          "Pathophysiological Basis"
-        ],
-        "rows": [
-          [
-            "Genetics",
-            "Biallelic mutation in CYP27B1 (12q14.1)",
-            "Complete loss of renal 1-alpha-hydroxylase activity"
-          ],
-          [
-            "Onset",
-            "Presents in first year of life (1 year)",
-            "Early hypocalcemic seizures, rickets, growth failure"
-          ],
-          [
-            "Serum 25(OH)D",
-            "Normal or elevated",
-            "Adequate substrate from sunlight and diet"
-          ],
-          [
-            "Serum 1,25(OH)2D",
-            "Undetectable or markedly reduced",
-            "Failure of renal conversion to calcitriol"
-          ],
-          [
-            "Calcium & Phosphate",
-            "Hypocalcemia and hypophosphatemia",
-            "Impaired intestinal absorption and PTH phosphaturia"
-          ]
-        ]
-      }
+ "id": "pen-vitamin-d-dependent-rickets-types",
+ "title": "Vitamin D-Dependent Rickets Types 1 and 2: CYP27B1, VDR Mutations and Alopecia",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Rickets, Calcium Disorders and Posterior Pituitary",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Vitamin D-dependent rickets type 1A is caused by an inability to bioactivate vitamin D into calcitriol.",
+   "tx": "Analyze the enzymatic defect and genetics of the **VDDR Type 1A 1-alpha-hydroxylase defect** in young infants. VDDR1A is an autosomal recessive deficiency of renal 25-hydroxyvitamin D 1-alpha-hydroxylase (CYP27B1 on 12q14.1), presenting in the first year of life with severe hypocalcemic tetany, rickets, and normal 25(OH)D but undetectable 1,25(OH)2D.",
+   "vis": {
+    "kind": "table",
+    "title": "VDDR1A Enzymatic and Biochemical Profile",
+    "cols": [
+     "Parameter",
+     "Laboratory Finding",
+     "Pathophysiological Basis"
+    ],
+    "rows": [
+     [
+      "Genetics",
+      "Biallelic mutation in CYP27B1 (12q14.1)",
+      "Complete loss of renal 1-alpha-hydroxylase activity"
+     ],
+     [
+      "Onset",
+      "Presents in first year of life (1 year)",
+      "Early hypocalcemic seizures, rickets, growth failure"
+     ],
+     [
+      "Serum 25(OH)D",
+      "Normal or elevated",
+      "Adequate substrate from sunlight and diet"
+     ],
+     [
+      "Serum 1,25(OH)2D",
+      "Undetectable or markedly reduced",
+      "Failure of renal conversion to calcitriol"
+     ],
+     [
+      "Calcium & Phosphate",
+      "Hypocalcemia and hypophosphatemia",
+      "Impaired intestinal absorption and PTH phosphaturia"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Therapy with physiological calcitriol or alfacalcidol bypasses the 1-alpha-hydroxylase block, rapidly healing rickets.",
+   "tx": "Administer targeted **Calcitriol physiological replacement in VDDR1A** to restore mineral homeostasis and promote skeletal healing. VDDR1A responds dramatically and completely to physiological doses of oral calcitriol (1,25-dihydroxyvitamin D3, 0.25-1.0 mcg/day or 20-50 ng/kg/day), bypassing the enzymatic blockade and normalizing serum calcium, alkaline phosphatase, and bone architecture.",
+   "vis": {
+    "kind": "flow",
+    "title": "Calcitriol Bypasses the Renal Hydroxylation Block",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Dietary Cholecalciferol / Sunlight"
+     },
+     {
+      "id": "c2",
+      "label": "Liver 25-Hydroxylation to 25(OH)D"
+     },
+     {
+      "id": "c3",
+      "label": "CYP27B1 Block: Cannot Form Calcitriol"
+     },
+     {
+      "id": "c4",
+      "label": "Oral Calcitriol (0.25-1.0 mcg/day or 20-50 ng/kg/day)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Intact hepatic hydroxylation"
+     ],
+     [
+      "c2",
+      "c3",
+      "Substrate accumulates; block in kidney"
+     ],
+     [
+      "c3",
+      "c4",
+      "Direct calcitriol restores intestinal calcium absorption"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Vitamin D-dependent rickets type 1B is caused by an inability to perform 25-hydroxylation in the liver.",
+   "tx": "Differentiate **VDDR Type 1B 25-hydroxylase deficiency** from nutritional vitamin D deficiency. VDDR1B is caused by homozygous mutations in hepatic 25-hydroxylase (CYP2R1 on 11p15.2), characterized by low serum 25(OH)D despite high sunlight/vitamin D exposure, responsive to oral calcifediol or calcitriol. Lifelong therapy restores normal bone architecture, resolves secondary hyperparathyroidism, and optimizes longitudinal adult height potential in growing children.",
+   "vis": {
+    "kind": "compare",
+    "title": "VDDR1A vs VDDR1B Hydroxylation Lesions",
+    "left": {
+     "title": "VDDR Type 1A (CYP27B1 at 12q14.1)",
+     "points": [
+      "Renal 1-alpha-hydroxylase deficiency",
+      "Serum 25(OH)D is normal or elevated",
+      "Serum 1,25(OH)2D is low or undetectable",
+      "Requires oral calcitriol therapy"
+     ]
     },
-    {
-      "say": "Therapy with physiological calcitriol or alfacalcidol bypasses the 1-alpha-hydroxylase block, rapidly healing rickets.",
-      "tx": "Administer targeted **Calcitriol physiological replacement in VDDR1A** to restore mineral homeostasis and promote skeletal healing. VDDR1A responds dramatically and completely to physiological doses of oral calcitriol (1,25-dihydroxyvitamin D3, 0.25-1.0 mcg/day or 20-50 ng/kg/day), bypassing the enzymatic blockade and normalizing serum calcium, alkaline phosphatase, and bone architecture.",
-      "vis": {
-        "kind": "flow",
-        "title": "Calcitriol Bypasses the Renal Hydroxylation Block",
-        "nodes": [
-          {
-            "id": "c1",
-            "label": "Dietary Cholecalciferol / Sunlight"
-          },
-          {
-            "id": "c2",
-            "label": "Liver 25-Hydroxylation to 25(OH)D"
-          },
-          {
-            "id": "c3",
-            "label": "CYP27B1 Block: Cannot Form Calcitriol"
-          },
-          {
-            "id": "c4",
-            "label": "Oral Calcitriol (0.25-1.0 mcg/day or 20-50 ng/kg/day)"
-          }
-        ],
-        "edges": [
-          [
-            "c1",
-            "c2",
-            "Intact hepatic hydroxylation"
-          ],
-          [
-            "c2",
-            "c3",
-            "Substrate accumulates; block in kidney"
-          ],
-          [
-            "c3",
-            "c4",
-            "Direct calcitriol restores intestinal calcium absorption"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Vitamin D-dependent rickets type 1B is caused by an inability to perform 25-hydroxylation in the liver.",
-      "tx": "Differentiate **VDDR Type 1B 25-hydroxylase deficiency** from nutritional vitamin D deficiency. VDDR1B is caused by homozygous mutations in hepatic 25-hydroxylase (CYP2R1 on 11p15.2), characterized by low serum 25(OH)D despite high sunlight/vitamin D exposure, responsive to oral calcifediol or calcitriol. Lifelong therapy restores normal bone architecture, resolves secondary hyperparathyroidism, and optimizes longitudinal adult height potential in growing children.",
-      "vis": {
-        "kind": "compare",
-        "title": "VDDR1A vs VDDR1B Hydroxylation Lesions",
-        "left": {
-          "title": "VDDR Type 1A (CYP27B1 at 12q14.1)",
-          "points": [
-            "Renal 1-alpha-hydroxylase deficiency",
-            "Serum 25(OH)D is normal or elevated",
-            "Serum 1,25(OH)2D is low or undetectable",
-            "Requires oral calcitriol therapy"
-          ]
-        },
-        "right": {
-          "title": "VDDR Type 1B (CYP2R1 at 11p15.2)",
-          "points": [
-            "Hepatic 25-hydroxylase deficiency",
-            "Serum 25(OH)D is low despite high vitamin D intake",
-            "Serum 1,25(OH)2D is normal or elevated",
-            "Heals with oral calcifediol or calcitriol"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Vitamin D-dependent rickets type 2A is characterized by end-organ resistance and massively elevated calcitriol levels.",
-      "tx": "Identify the receptor defect and laboratory hallmarks of **VDDR Type 2A vitamin D receptor mutations** causing hereditary rickets. VDDR2A (hereditary 1,25-dihydroxyvitamin D resistant rickets) is caused by end-organ resistance due to mutations in the vitamin D receptor (VDR on 12q13.11), featuring massively elevated serum 1,25(OH)2D (> 150-300 pg/mL).",
-      "vis": {
-        "kind": "table",
-        "title": "Biochemical Hallmarks of VDDR2A End-Organ Resistance",
-        "cols": [
-          "Laboratory Marker",
-          "Diagnostic Value",
-          "Underlying Mechanism"
-        ],
-        "rows": [
-          [
-            "Serum 1,25(OH)2D",
-            "Massively elevated (> 150-300 pg/mL)",
-            "Uninhibited CYP27B1 from lack of VDR negative feedback"
-          ],
-          [
-            "Serum Calcium",
-            "Profoundly low (5.0-7.0 mg/dL)",
-            "Severe impairment of active intestinal calcium transport"
-          ],
-          [
-            "Serum PTH",
-            "Markedly elevated (> 300-800 pg/mL)",
-            "Secondary parathyroid hyperplasia responding to hypocalcemia"
-          ],
-          [
-            "Serum 25(OH)D",
-            "Normal",
-            "Intact substrate intake and hepatic hydroxylation"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Total alopecia serves as a clinical marker for severe DNA-binding domain mutations in the vitamin D receptor.",
-      "tx": "Recognize **Total alopecia hallmark in severe VDR defects** as a pathognomonic clinical feature in infants with rickets. Total alopecia (alopecia universalis / absence of scalp hair, eyebrows, and eyelashes) occurs in severe VDDR2A mutants with defective DNA-binding domain, because liganded VDR is required for uncoupled hair follicle cycling.",
-      "vis": {
-        "kind": "compare",
-        "title": "VDR Mutation Severity and Alopecia Correlation",
-        "left": {
-          "title": "VDDR2A with Alopecia Universalis",
-          "points": [
-            "Mutations affecting zinc-finger DNA-binding domain or premature stop codons",
-            "Complete absence of hair follicle cycling from infancy",
-            "Poor skeletal response to oral calcitriol and high calcium doses"
-          ]
-        },
-        "right": {
-          "title": "VDDR2A without Alopecia",
-          "points": [
-            "Mutations affecting hormone-binding domain or coactivator interfaces",
-            "Preserved hair follicle stem cell function",
-            "May respond to pharmacological supra-physiological oral calcitriol"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Intravenous calcium infusions represent life-saving rescue therapy for children with severe receptor resistance.",
-      "tx": "Implement long-term **High-dose intravenous calcium rescue in VDDR2A** for children with refractory receptor resistance. Patients with alopecia and severe receptor mutations fail massive oral calcitriol doses; healing of rickets requires long-term continuous central venous intravenous calcium infusions (1000 mg/m²/day elemental calcium) using calcium gluconate over 12-14 hours overnight for several months to years.",
-      "vis": {
-        "kind": "flow",
-        "title": "Intravenous Calcium Rescue Protocol in VDDR2A",
-        "nodes": [
-          {
-            "id": "v1",
-            "label": "Severe VDDR2A with Alopecia (Refractory to Oral Calcitriol)"
-          },
-          {
-            "id": "v2",
-            "label": "Placement of Tunneled Central Venous Line"
-          },
-          {
-            "id": "v3",
-            "label": "Continuous Nocturnal Calcium Gluconate (1000 mg/m²/day)"
-          },
-          {
-            "id": "v4",
-            "label": "Radiological Healing of Rickets & PTH Normalization"
-          }
-        ],
-        "edges": [
-          [
-            "v1",
-            "v2",
-            "Oral therapy failure confirmed"
-          ],
-          [
-            "v2",
-            "v3",
-            "Overnight 12-14 hour infusions"
-          ],
-          [
-            "v3",
-            "v4",
-            "Direct skeletal mineralization bypassing VDR"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Type 2B rickets involves an overexpression of an abnormal nuclear protein that blocks normal receptor binding.",
-      "tx": "Differentiate the molecular mechanism of **VDDR Type 2B abnormal ribonuclear protein** from primary VDR gene mutations. VDDR2B is caused by overexpression of a dominant-negative ribonuclear protein that binds the vitamin D response element (VDRE), preventing VDR interaction, presenting without alopecia.",
-      "vis": {
-        "kind": "table",
-        "title": "VDDR2A vs VDDR2B Molecular Lesions",
-        "cols": [
-          "Feature",
-          "VDDR Type 2A",
-          "VDDR Type 2B"
-        ],
-        "rows": [
-          [
-            "Primary Defect",
-            "Mutations within VDR gene (12q13.11)",
-            "Dominant-negative ribonuclear protein overexpression"
-          ],
-          [
-            "Alopecia Frequency",
-            "Common in DNA-binding domain mutations",
-            "Absent; normal scalp and body hair"
-          ],
-          [
-            "DNA Binding",
-            "Defective VDR protein fails to bind VDRE",
-            "Endogenous protein competitively blocks VDRE site"
-          ],
-          [
-            "Receptor Structure",
-            "Abnormal VDR protein sequence",
-            "Structurally normal VDR and RXR molecules"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Gain-of-function CYP3A4 mutations cause rapid catabolism of active vitamin D metabolites.",
-      "tx": "Recognize the genetic and metabolic etiology of **VDDR Type 3 CYP3A4 gain-of-function** rickets. VDDR3 is caused by a heterozygous gain-of-function recurrent mutation in CYP3A4, which rapidly catabolizes 25(OH)D and 1,25(OH)2D into inactive biliary metabolites, requiring high-dose vitamin D3 to overcome degradation, administered as cholecalciferol.",
-      "vis": {
-        "kind": "flow",
-        "title": "CYP3A4 Accelerated Catabolism in VDDR3",
-        "nodes": [
-          {
-            "id": "d1",
-            "label": "Recurrent CYP3A4 Gain-of-Function Mutation"
-          },
-          {
-            "id": "d2",
-            "label": "Hyperactive Hydroxylation and Catabolism"
-          },
-          {
-            "id": "d3",
-            "label": "Rapid Inactivation into Polar Biliary Metabolites"
-          },
-          {
-            "id": "d4",
-            "label": "Severe Rickets Overcome by Cholecalciferol"
-          }
-        ],
-        "edges": [
-          [
-            "d1",
-            "d2",
-            "Constitutive enzymatic hyper-clearance"
-          ],
-          [
-            "d2",
-            "d3",
-            "Depletion of both 25(OH)D and calcitriol"
-          ],
-          [
-            "d3",
-            "d4",
-            "High substrate therapy saturates catabolism"
-          ]
-        ]
-      }
+    "right": {
+     "title": "VDDR Type 1B (CYP2R1 at 11p15.2)",
+     "points": [
+      "Hepatic 25-hydroxylase deficiency",
+      "Serum 25(OH)D is low despite high vitamin D intake",
+      "Serum 1,25(OH)2D is normal or elevated",
+      "Heals with oral calcifediol or calcitriol"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Vitamin D-dependent rickets type 2A is characterized by end-organ resistance and massively elevated calcitriol levels.",
+   "tx": "Identify the receptor defect and laboratory hallmarks of **VDDR Type 2A vitamin D receptor mutations** causing hereditary rickets. VDDR2A (hereditary 1,25-dihydroxyvitamin D resistant rickets) is caused by end-organ resistance due to mutations in the vitamin D receptor (VDR on 12q13.11), featuring massively elevated serum 1,25(OH)2D (> 150-300 pg/mL).",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-paed-xray_rickets.webp",
+    "alt": "Radiographic comparison of normal and rachitic pediatric wrist films highlighting growth plate zone disruption and frayed provisional calcification.",
+    "caption": "Growth plate zone architectural disruption in refractory childhood rickets."
+   }
+  },
+  {
+   "say": "Total alopecia serves as a clinical marker for severe DNA-binding domain mutations in the vitamin D receptor.",
+   "tx": "Recognize **Total alopecia hallmark in severe VDR defects** as a pathognomonic clinical feature in infants with rickets. Total alopecia (alopecia universalis / absence of scalp hair, eyebrows, and eyelashes) occurs in severe VDDR2A mutants with defective DNA-binding domain, because liganded VDR is required for uncoupled hair follicle cycling.",
+   "vis": {
+    "kind": "compare",
+    "title": "VDR Mutation Severity and Alopecia Correlation",
+    "left": {
+     "title": "VDDR2A with Alopecia Universalis",
+     "points": [
+      "Mutations affecting zinc-finger DNA-binding domain or premature stop codons",
+      "Complete absence of hair follicle cycling from infancy",
+      "Poor skeletal response to oral calcitriol and high calcium doses"
+     ]
+    },
+    "right": {
+     "title": "VDDR2A without Alopecia",
+     "points": [
+      "Mutations affecting hormone-binding domain or coactivator interfaces",
+      "Preserved hair follicle stem cell function",
+      "May respond to pharmacological supra-physiological oral calcitriol"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Intravenous calcium infusions represent life-saving rescue therapy for children with severe receptor resistance.",
+   "tx": "Implement long-term **High-dose intravenous calcium rescue in VDDR2A** for children with refractory receptor resistance. Patients with alopecia and severe receptor mutations fail massive oral calcitriol doses; healing of rickets requires long-term continuous central venous intravenous calcium infusions (1000 mg/m²/day elemental calcium) using calcium gluconate over 12-14 hours overnight for several months to years.",
+   "vis": {
+    "kind": "flow",
+    "title": "Intravenous Calcium Rescue Protocol in VDDR2A",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Severe VDDR2A with Alopecia (Refractory to Oral Calcitriol)"
+     },
+     {
+      "id": "v2",
+      "label": "Placement of Tunneled Central Venous Line"
+     },
+     {
+      "id": "v3",
+      "label": "Continuous Nocturnal Calcium Gluconate (1000 mg/m²/day)"
+     },
+     {
+      "id": "v4",
+      "label": "Radiological Healing of Rickets & PTH Normalization"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2",
+      "Oral therapy failure confirmed"
+     ],
+     [
+      "v2",
+      "v3",
+      "Overnight 12-14 hour infusions"
+     ],
+     [
+      "v3",
+      "v4",
+      "Direct skeletal mineralization bypassing VDR"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Type 2B rickets involves an overexpression of an abnormal nuclear protein that blocks normal receptor binding.",
+   "tx": "Differentiate the molecular mechanism of **VDDR Type 2B abnormal ribonuclear protein** from primary VDR gene mutations. VDDR2B is caused by overexpression of a dominant-negative ribonuclear protein that binds the vitamin D response element (VDRE), preventing VDR interaction, presenting without alopecia.",
+   "vis": {
+    "kind": "table",
+    "title": "VDDR2A vs VDDR2B Molecular Lesions",
+    "cols": [
+     "Feature",
+     "VDDR Type 2A",
+     "VDDR Type 2B"
+    ],
+    "rows": [
+     [
+      "Primary Defect",
+      "Mutations within VDR gene (12q13.11)",
+      "Dominant-negative ribonuclear protein overexpression"
+     ],
+     [
+      "Alopecia Frequency",
+      "Common in DNA-binding domain mutations",
+      "Absent; normal scalp and body hair"
+     ],
+     [
+      "DNA Binding",
+      "Defective VDR protein fails to bind VDRE",
+      "Endogenous protein competitively blocks VDRE site"
+     ],
+     [
+      "Receptor Structure",
+      "Abnormal VDR protein sequence",
+      "Structurally normal VDR and RXR molecules"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Gain-of-function CYP3A4 mutations cause rapid catabolism of active vitamin D metabolites.",
+   "tx": "Recognize the genetic and metabolic etiology of **VDDR Type 3 CYP3A4 gain-of-function** rickets. VDDR3 is caused by a heterozygous gain-of-function recurrent mutation in CYP3A4, which rapidly catabolizes 25(OH)D and 1,25(OH)2D into inactive biliary metabolites, requiring high-dose vitamin D3 to overcome degradation, administered as cholecalciferol.",
+   "vis": {
+    "kind": "flow",
+    "title": "CYP3A4 Accelerated Catabolism in VDDR3",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Recurrent CYP3A4 Gain-of-Function Mutation"
+     },
+     {
+      "id": "d2",
+      "label": "Hyperactive Hydroxylation and Catabolism"
+     },
+     {
+      "id": "d3",
+      "label": "Rapid Inactivation into Polar Biliary Metabolites"
+     },
+     {
+      "id": "d4",
+      "label": "Severe Rickets Overcome by Cholecalciferol"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2",
+      "Constitutive enzymatic hyper-clearance"
+     ],
+     [
+      "d2",
+      "d3",
+      "Depletion of both 25(OH)D and calcitriol"
+     ],
+     [
+      "d3",
+      "d4",
+      "High substrate therapy saturates catabolism"
+     ]
+    ]
+   }
+  }
+ ]
 }
