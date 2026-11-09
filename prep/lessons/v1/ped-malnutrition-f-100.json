@@ -1,0 +1,224 @@
+{
+  "key": "ped-malnutrition-f-100",
+  "v": 1,
+  "module": "ped-malnutrition",
+  "subject": "paediatrics",
+  "title": "Rehabilitation, Refeeding Syndrome and Malnutrition Staging",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Transitioning from stabilization to rehabilitation begins once life-threatening complications resolve. Entry into the **rehabilitation catch-up** phase is indicated when the child's appetite returns vigorously, bipedal oedema has largely subsided, and acute infections are controlled. During this phase, dietary protein and calorie density are escalated to achieve rapid tissue synthesis and accelerated catch-up growth.",
+      "say": "The rehabilitation phase begins when appetite returns and oedema resolves. Calories and protein are increased to support rapid tissue synthesis and catch-up growth.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/severe-acute-malnutrition-fig1.webp",
+        "alt": "Rehabilitation progression in severe acute malnutrition showing catch-up growth and oedema resolution.",
+        "caption": "Rehabilitation progression in severe acute malnutrition showing catch-up growth and oedema resolution.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Accelerated catch-up growth requires rich caloric density and high-biological-value protein. The transition diet utilizes **F-100 catch-up formula**, containing 100 kilocalories and 2.9 grams of protein per 100 millilitres. In community-based management, Ready-to-Use Therapeutic Food (RUTF), a lipid-based peanut paste enriched with milk powder, sugar, vegetable oils, and micronutrients providing 500 kcal per 92-gram sachet, replaces liquid F-100 because it resists bacterial spoilage.",
+      "say": "F-100 formula provides 100 kilocalories and 2.9 grams of protein per 100 millilitres. In community settings, lipid-based RUTF paste provides equivalent nutrition without bacterial contamination risks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "F-100 Milk Formula",
+          "points": [
+            "100 kcal and 2",
+            "9 g protein/100 mL",
+            "Inpatient use only",
+            "Cannot be sent home due to bacterial contamination risk"
+          ]
+        },
+        "right": {
+          "title": "RUTF (Plumpy'Nut)",
+          "points": [
+            "500 kcal per 92 g sachet",
+            "Water-free peanut paste",
+            "Completely sterile, ideal for outpatient community rehabilitation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Standard oral rehydration solutions are dangerously hypernatremic for severely malnourished physiology. The dedicated solution **ReSoMal rehydration** (Rehydration Solution for Malnutrition) modifies standard ORS by reducing sodium concentration from 75 to 45 milliequivalents per litre, while increasing potassium to 40 milliequivalents per litre and adding magnesium and zinc. ReSoMal is administered orally or by nasogastric tube at 5 mL/kg every thirty minutes for the first two hours.",
+      "say": "ReSoMal is specialized rehydration containing low sodium at 45 milliequivalents and high potassium at 40 milliequivalents. Standard ORS causes lethal fluid overload and heart failure in SAM.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Electrolyte Component",
+          "Standard Low-Osmolarity ORS",
+          "ReSoMal Formulation",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Sodium",
+            "75 mEq/L",
+            "45 mEq/L (Low)",
+            "Prevents congestive heart failure and sodium overload"
+          ],
+          [
+            "Potassium",
+            "20 mEq/L",
+            "40 mEq/L (High)",
+            "Corrects severe intracellular potassium depletion"
+          ],
+          [
+            "Glucose (Carbohydrate)",
+            "75 mmol/L (13.5 g/L)",
+            "125 mmol/L (25 g/L)",
+            "Provides caloric support and aids sodium cotransport"
+          ],
+          [
+            "Magnesium",
+            "Zero",
+            "3 mEq/L",
+            "Essential for cellular sodium-potassium ATPase pump"
+          ],
+          [
+            "Osmolarity",
+            "245 mOsm/L",
+            "300 mOsm/L",
+            "Balanced rehydration avoiding osmotic diarrhoea"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aggressive carbohydrate reintroduction into a starved organism triggers potentially fatal electrolyte shifts. The deadly metabolic complication **refeeding syndrome** occurs when rapid carbohydrate intake stimulates a surge in endogenous insulin secretion, driving extracellular phosphate, potassium, and magnesium into cells for glycolysis and protein synthesis. The resultant severe hypophosphataemia precipitates acute congestive heart failure, fatal cardiac arrhythmias, rhabdomyolysis, respiratory muscle paralysis, and seizures.",
+      "say": "Refeeding syndrome occurs when carbohydrate feeding triggers insulin surges that drive phosphate, potassium, and magnesium into cells. Severe hypophosphataemia causes fatal arrhythmias and heart failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cascade Stage",
+          "Biochemical Event",
+          "Physiological Consequence",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "1. Carbohydrate surge",
+            "High glucose feeding",
+            "Rapid pancreatic insulin release",
+            "Inhibition of lipolysis and proteolysis"
+          ],
+          [
+            "2. Intracellular shift",
+            "Insulin drives glucose into cells",
+            "Phosphate, K+, Mg2+ move intracellularly",
+            "Profound acute hypophosphataemia"
+          ],
+          [
+            "3. Energy depletion",
+            "Cellular ATP and 2,3-DPG fall",
+            "Impaired myocardial contractility",
+            "Acute congestive heart failure"
+          ],
+          [
+            "4. Tissue hypoxia",
+            "Left-shifted oxygen-haemoglobin curve",
+            "Reduced tissue oxygen unloading",
+            "Respiratory failure, rhabdomyolysis, death"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Daily monitoring of somatic mass verifies therapeutic efficiency in Nutritional Rehabilitation Centres. The rate of **catch-up growth velocity** is calculated in grams per kilogram of body weight per day. A weight gain of ten grams or more per kilogram daily indicates good catch-up growth, five to ten grams per kilogram daily represents moderate progress, and less than five grams per kilogram daily signifies poor progress requiring immediate investigation for occult infection or inadequate caloric intake.",
+      "say": "Catch-up growth is tracked in grams per kilogram daily. Weight gain of ten grams or more per kilogram daily is good; gain under five grams indicates persistent infection or underfeeding.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Good Catch-Up Growth",
+          "points": [
+            "Weight gain >=10 g/kg/day",
+            "Reflects adequate caloric absorption, resolved infection, and optimal catch-up"
+          ]
+        },
+        "right": {
+          "title": "Poor Catch-Up (<5 g/kg/day)",
+          "points": [
+            "Underlying occult infection (TB, HIV, UTI), malabsorption, sharing of RUTF with siblings, or feeding deficit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Historical anthropometric indices categorized pediatric undernutrition based on median weight deficits. The classic **Gomez classification** stratifies malnutrition using weight-for-age as a percentage of the fiftieth percentile of the Harvard standard: Grade I (mild) spans 75 to 89 percent, Grade II (moderate) covers 60 to 74 percent, and Grade III (severe) encompasses values below 60 percent. All oedematous children are automatically assigned to Grade III regardless of actual body weight.",
+      "say": "The Gomez classification grades malnutrition by weight-for-age percentage of Harvard standard: Grade 1 is 75 to 89 percent, Grade 2 is 60 to 74 percent, and Grade 3 is below 60 percent or any oedema.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Malnutrition Stratum",
+          "Weight-for-Age (% Harvard)",
+          "Clinical Severity",
+          "Mortality Risk"
+        ],
+        "rows": [
+          [
+            "Normal nutrition",
+            "90 to 110 percent",
+            "Optimal health",
+            "Baseline"
+          ],
+          [
+            "Grade I (Mild)",
+            "75 to 89 percent",
+            "Mild nutritional deficit",
+            "Slightly increased"
+          ],
+          [
+            "Grade II (Moderate)",
+            "60 to 74 percent",
+            "Moderate wasting/stunting",
+            "Substantially elevated"
+          ],
+          [
+            "Grade III (Severe)",
+            "Under 60 percent (or oedema)",
+            "Severe life-threatening malnutrition",
+            "High risk of mortality"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Distinguishing between acute wasting and chronic nutritional stunting is vital for epidemiology and therapy. The **Waterlow classification** separates malnutrition into wasting (weight-for-height, reflecting acute recent nutritional deficit) and stunting (height-for-age, reflecting long-standing chronic deprivation). Wasting is graded as normal (above 90%), Grade I (81-90%), Grade II (70-80%), and Grade III (below 70%), while stunting is graded as normal (above 95%), Grade I (90-95%), Grade II (85-89%), and Grade III (below 85%).",
+      "say": "The Waterlow classification distinguishes acute wasting using weight-for-height from chronic stunting using height-for-age. Wasting reflects recent starvation; stunting reflects chronic deprivation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Waterlow Wasting (Acute)",
+          "points": [
+            "Weight-for-height percentage",
+            "Normal >90%, Grade 1: 81-90%, Grade 2: 70-80%, Grade 3: <70%",
+            "Reflects acute weight loss"
+          ]
+        },
+        "right": {
+          "title": "Waterlow Stunting (Chronic)",
+          "points": [
+            "Height-for-age percentage",
+            "Normal >95%, Grade 1: 90-95%, Grade 2: 85-89%, Grade 3: <85%",
+            "Reflects chronic skeletal delay"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In India, clinical practice historically adopted standardized percentage strata tailored for field health workers. The **IAP malnutrition classification** (Indian Academy of Pediatrics) categorizes weight-for-age against the fiftieth percentile of WHO/NCHS standards: Grade I corresponds to 71 to 80 percent, Grade II is 61 to 70 percent, Grade III is 51 to 60 percent, and Grade IV is 50 percent or below. The presence of nutritional oedema reclassifies any category directly into kwashiorkor.",
+      "say": "The Indian Academy of Pediatrics classifies malnutrition into four grades from Grade 1 at 71 to 80 percent down to Grade 4 at 50 percent or less, with oedema designated as kwashiorkor.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-anthro-weight-iap.webp",
+        "alt": "Indian Academy of Pediatrics (IAP) four-grade weight-for-age classification chart.",
+        "caption": "Indian Academy of Pediatrics (IAP) four-grade weight-for-age classification chart.",
+        "ar": 1.5
+      }
+    }
+  ]
+}
