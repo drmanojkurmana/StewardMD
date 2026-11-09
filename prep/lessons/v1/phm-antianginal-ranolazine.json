@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "phm-antianginal",
+  "subject": "pharmacology",
+  "title": "Metabolic and Late Sodium Current Antianginals: Ranolazine, Nicorandil, Ivabradine, Trimetazidine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "When ischaemic myocardium lets sodium leak in through the persistent late sodium current, calcium follows through the sodium calcium exchanger and the stiff, calcium loaded ventricle relaxes badly. **Ranolazine** blocks that late current, so diastolic tension falls and subendocardial perfusion improves without changing heart rate or blood pressure at all. That haemodynamic silence is its selling point: it can be added when pressure and rate leave no room for conventional agents.",
+      "say": "Ranolazine unloads calcium by closing a leaky sodium channel, easing angina without touching rate or pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "late", "label": "Ischaemia opens persistent late sodium current" },
+          { "id": "calcium", "label": "Sodium calcium exchange loads the cell with calcium" },
+          { "id": "stiff", "label": "Diastolic stiffness rises, subendocardium is squeezed" },
+          { "id": "rano", "label": "Ranolazine blocks the late current, tension falls" }
+        ],
+        "edges": [["late", "calcium"], ["calcium", "stiff"], ["stiff", "rano"]]
+      }
+    },
+    {
+      "tx": "Ranolazine prolongs the **QT interval** modestly by blocking the rapid delayed rectifier potassium current, yet torsades is rare because its sodium blockade simultaneously suppresses early afterdepolarisations. It is contraindicated with strong CYP3A4 inhibitors and in significant liver disease, and it raises levels of digoxin and simvastatin. Dizziness, constipation and nausea are the common complaints; the dose ceiling is 1000 mg twice daily in American labelling.",
+      "say": "QT lengthens a little on ranolazine but torsades stays rare; mind CYP3A4 partners and liver disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ranolazine profile",
+          "points": [
+            "No effect on heart rate or blood pressure",
+            "Modest QT prolongation, torsades uncommon",
+            "Metabolised by CYP3A4 and CYP2D6",
+            "Raises digoxin and simvastatin levels"
+          ]
+        },
+        "right": {
+          "title": "Avoid or adjust",
+          "points": [
+            "Strong CYP3A4 inhibitors and inducers",
+            "Significant hepatic impairment",
+            "Pre existing long QT or QT prolonging partners",
+            "Simvastatin dose capped during co therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Part nitrate, part potassium channel opener, **nicorandil** dilates both epicardial coronary arteries and the venous capacitance bed, unloading the heart while feeding it. Its potassium channel action hyperpolarises smooth muscle through ATP sensitive channels, a mechanism shared with pinacidil and, in pancreatic beta cells, opposed by sulfonylureas. Headache is frequent early; the adverse effect that earns bold type is painful mucocutaneous ulceration, below.",
+      "say": "Nicorandil is a nitrate and a potassium channel opener in one molecule, dilating conduit arteries and veins together.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrate component",
+          "points": [
+            "Nitric oxide donation raises cyclic GMP",
+            "Venodilatation reduces preload",
+            "Large coronary arteries dilate",
+            "Tolerance can develop like other nitrates"
+          ]
+        },
+        "right": {
+          "title": "Potassium channel component",
+          "points": [
+            "ATP sensitive potassium channels open",
+            "Smooth muscle hyperpolarises and relaxes",
+            "Arteriolar resistance falls",
+            "Preconditioning like cardioprotection proposed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nicorandil **ulceration** is the adverse effect examinations love: painful oral, perianal, gastrointestinal or skin ulcers that resist all treatment until the drug is stopped, then heal within weeks. Diverticular perforation and fistula formation are reported, and the ulcers are routinely misdiagnosed as inflammatory bowel disease or malignancy first. Any non healing ulcer in a patient taking nicorandil is the drug until proven otherwise.",
+      "say": "A stubborn mouth or perianal ulcer on nicorandil heals when the drug stops; suspect it before scoping repeatedly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ulcer", "label": "Painful oral, perianal or gut ulcer fails to heal" },
+          { "id": "history", "label": "Drug history reveals nicorandil" },
+          { "id": "stop", "label": "Stop nicorandil, substitute another antianginal" },
+          { "id": "heal", "label": "Ulcer heals over weeks without other therapy" }
+        ],
+        "edges": [["ulcer", "history"], ["history", "stop"], ["stop", "heal"]]
+      }
+    },
+    {
+      "tx": "The pacemaker current If, the funny current, sets how fast the sinoatrial node drifts to threshold, and **ivabradine** blocks it selectively so heart rate falls with no effect on contractility, conduction or pressure. That purity suits chronic stable angina and heart failure patients stuck above 70 beats per minute in sinus rhythm despite beta blockade, or when beta blockers are contraindicated. It is useless in atrial fibrillation, where the node no longer drives the rate.",
+      "say": "Ivabradine slows only the pacemaker current: rate falls, everything else stays put, and fibrillation defeats it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "if", "label": "Funny current If drives diastolic depolarisation in SA node" },
+          { "id": "iva", "label": "Ivabradine blocks If from inside the channel" },
+          { "id": "slow", "label": "Slope flattens, resting heart rate falls 10 to 15 beats" },
+          { "id": "pure", "label": "Contractility, conduction and pressure unchanged" }
+        ],
+        "edges": [["if", "iva"], ["iva", "slow"], ["slow", "pure"]]
+      }
+    },
+    {
+      "tx": "Blocking HCN channels in the retina as well as the heart, ivabradine causes **luminous phenomena**: transient bright phosphenes in the visual field on sudden light intensity changes, reported by around one in seven users, usually mild and reversible. It also carries a small excess of atrial fibrillation and bradycardia in trials, is contraindicated below a resting rate of 70 in heart failure labelling, and must never combine with strong CYP3A4 inhibitors.",
+      "say": "Seeing brief flashes of light on ivabradine is the retinal cousin of its heart action; mention it before the patient panics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expected ivabradine effects",
+          "points": [
+            "Resting heart rate down 10 to 15 beats per minute",
+            "Luminous phosphenes with abrupt light changes",
+            "Mild headache and blurred vision reports",
+            "Effects reverse on stopping the drug"
+          ]
+        },
+        "right": {
+          "title": "Stop or avoid signals",
+          "points": [
+            "Symptomatic bradycardia or heart block",
+            "New atrial fibrillation on therapy",
+            "Resting rate already below 70 in heart failure use",
+            "Strong CYP3A4 inhibitor co prescription"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The metabolic agent **trimetazidine** inhibits the final enzyme of fatty acid beta oxidation, 3 ketoacyl CoA thiolase, nudging the ischaemic heart toward glucose oxidation, which yields more ATP per oxygen molecule consumed. Haemodynamics do not change; the cell simply burns a thriftier fuel. It is widely used in Europe and Asia as add on antianginal therapy but is not approved in the United States, a geography point examinations enjoy.",
+      "say": "Trimetazidine switches the heart to a thriftier fuel, glucose, gaining ATP per oxygen without touching haemodynamics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fatty acid oxidation",
+          "points": [
+            "Default fuel of the adult heart at rest",
+            "Oxygen hungry per ATP generated",
+            "Inhibited at 3 ketoacyl CoA thiolase by trimetazidine",
+            "Falls further during ischaemia anyway"
+          ]
+        },
+        "right": {
+          "title": "Glucose oxidation gain",
+          "points": [
+            "More ATP per molecule of oxygen consumed",
+            "Less lactate and proton accumulation",
+            "Contractile efficiency of ischaemic tissue improves",
+            "No change in rate, pressure or contractility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Trimetazidine is contraindicated in **Parkinson disease** and related movement disorders because it can provoke or worsen tremor, gait instability and restless legs, probably through dopaminergic pathways, and regulators restricted it to second line add on therapy for that reason. The four drugs of this lesson share one prescribing logic: each is added when rate, pressure or tolerance block the conventional trio of beta blocker, calcium channel blocker and nitrate.",
+      "say": "Never give trimetazidine in Parkinson disease; all four drugs here are add ons when the usual levers are stuck.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "stuck", "label": "Angina persists, rate and pressure already low" },
+          { "id": "choose", "label": "Choose by phenotype: rate high, pressure low, spasm" },
+          { "id": "add", "label": "Add ranolazine, nicorandil, ivabradine or trimetazidine" },
+          { "id": "review", "label": "Review symptom diary and adverse effects at follow up" }
+        ],
+        "edges": [["stuck", "choose"], ["choose", "add"], ["add", "review"]]
+      }
+    }
+  ]
+}

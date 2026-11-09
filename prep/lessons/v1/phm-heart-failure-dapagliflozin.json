@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phm-heart-failure",
+  "subject": "pharmacology",
+  "title": "SGLT2 Inhibitors and Remaining Heart Failure Adjuncts: Dapagliflozin, Nesiritide, Ivabradine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Blocking the sodium glucose cotransporter 2 of the proximal tubule, **dapagliflozin** wastes glucose and sodium together, yet its heart failure triumph surprised everyone: in DAPA HF it cut cardiovascular death and hospitalisation in reduced ejection fraction failure whether or not diabetes was present. Benefit appears within weeks, too fast for glucose control to explain, pointing instead at natriuresis, preload and afterload reduction, and improved myocardial energetics.",
+      "say": "Dapagliflozin helps failing hearts with or without diabetes, and it helps within weeks, so glucose is not the mechanism.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+        "alt": "Nephron diagram showing diuretic target sites including the proximal tubule",
+        "caption": "The proximal tubule site where SGLT2 inhibition produces glucose and sodium loss upstream of every diuretic target shown. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "In failure practice the dose is simply **10 mg once daily** with no titration, effective down to an eGFR (estimated glomerular filtration rate) of about 20 to 25, where the glucose lowering fades but cardiac and kidney protection persist. An early small eGFR dip of 3 to 5 ml per minute mirrors the RAAS blocker pattern and should not trigger stopping. Genital mycotic infection, volume depletion and the rare euglycaemic ketoacidosis headline its counselling.",
+      "say": "One flat dose, no titration, expect a small early kidney dip, and counsel about genital thrush and sick day pauses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Dapagliflozin 10 mg daily, diabetes or not"
+          },
+          {
+            "id": "dip",
+            "label": "Early eGFR dip of 3 to 5, then stabilisation"
+          },
+          {
+            "id": "benefit",
+            "label": "Fewer deaths and heart failure hospitalisations"
+          },
+          {
+            "id": "pause",
+            "label": "Pause during dehydrating illness or before surgery"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "dip"
+          ],
+          [
+            "dip",
+            "benefit"
+          ],
+          [
+            "start",
+            "pause"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Euglycaemic ketoacidosis** is the trap that defines safe SGLT2 prescribing: ketoacidosis at near normal glucose, because urinary glucose loss masks the hyperglycaemia that usually betrays it. Surgery, fasting, low carbohydrate diets and acute illness are the triggers, so the drug is withheld for several days around major surgery and during sick days. Any nauseated, acidotic patient on an SGLT2 inhibitor gets ketones checked regardless of the glucose reading.",
+      "say": "Normal glucose does not exclude ketoacidosis on these drugs; check ketones in any sick user.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Euglycaemic ketoacidosis clues",
+          "points": [
+            "Nausea, abdominal pain, rapid breathing, malaise",
+            "Glucose normal or modestly raised",
+            "High anion gap acidosis with raised ketones",
+            "Trigger: illness, fasting, surgery, very low carbohydrate intake"
+          ]
+        },
+        "right": {
+          "title": "Prevention routine",
+          "points": [
+            "Withhold several days before major surgery",
+            "Pause during dehydrating acute illness",
+            "Restart when eating and drinking normally",
+            "Teach the symptom list at initiation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The recombinant B type natriuretic peptide **nesiritide** dilates veins and arteries and promotes natriuresis, and its early trials promised breathlessness relief in acute failure. Larger outcome testing then showed no mortality or rehospitalisation benefit and more hypotension, so it faded to niche status. Its real legacy for examinations is diagnostic interference and humility: BNP assays measure a molecule that therapy can supply exogenously, and symptom relief does not guarantee outcome benefit.",
+      "say": "Nesiritide relieved breathlessness without improving outcomes; a cautionary tale examinations still teach.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nesiritide pharmacology",
+          "points": [
+            "Recombinant human B type natriuretic peptide",
+            "Venodilatation, arterial dilatation and natriuresis",
+            "Rapid dyspnoea relief in early studies",
+            "Hypotension its dose limiting effect"
+          ]
+        },
+        "right": {
+          "title": "What outcome trials showed",
+          "points": [
+            "No reduction in death or rehospitalisation",
+            "More symptomatic hypotension than comparators",
+            "Use contracted to selected niche cases",
+            "NT-proBNP unaffected by the drug, BNP assays confounded"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Already met among antianginals, **ivabradine** earns its failure indication from the SHIFT trial: in sinus rhythm with resting heart rate at or above 70 despite maximally tolerated beta blockade, it cut the composite of cardiovascular death and hospitalisation, driven by hospitalisations. It changes nothing else haemodynamically, works only while the sinus node drives the heart, and its luminous visual phenomena and atrial fibrillation signal from the angina lesson follow it here.",
+      "say": "In failure, ivabradine is for sinus rhythm hearts still racing past seventy on full beta blockade.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-fig2.webp",
+        "alt": "Frank Starling curve in heart failure showing the flattened relationship between filling pressure and stroke volume",
+        "caption": "The failing ventricle's flattened Starling curve; rate reduction with ivabradine helps the selected sinus rhythm patient on top of pillar therapy."
+      }
+    },
+    {
+      "tx": "True **positive inotropes** share a final common signature whatever their doorway: more calcium available to troponin per beat, bought with oxygen, arrhythmia and, when exposure lengthens, mortality. Dobutamine through beta 1, milrinone and inamrinone through phosphodiesterase 3, levosimendan by sensitising troponin, and digoxin through the sodium pump all obey it. The rule for practice is identical for each: lowest dose, shortest time, monitored bed, explicit exit plan.",
+      "say": "Every inotrope rents contractility with oxygen and arrhythmia; sign the exit plan before starting the infusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "need",
+            "label": "Low output with hypoperfusion confirmed"
+          },
+          {
+            "id": "choose",
+            "label": "Choose inotrope by pressure, rhythm and beta blockade"
+          },
+          {
+            "id": "monitor",
+            "label": "Continuous ECG, pressure and urine output monitoring"
+          },
+          {
+            "id": "exit",
+            "label": "Wean or escalate to device decision within days"
+          }
+        ],
+        "edges": [
+          [
+            "need",
+            "choose"
+          ],
+          [
+            "choose",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "exit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vasodilators in heart failure** divide by the failure's shape: intravenous nitrates unload congested lungs within minutes in hypertensive acute failure, nitroprusside serves selected monitored cases at cyanide's price, and oral hydralazine with isosorbide dinitrate remains the fallback when RAAS blockade is truly impossible, with outcome data strongest in self identified Black patients. In chronic stable failure, by contrast, no pure vasodilator substitutes for the four prognostic pillars.",
+      "say": "Vasodilators treat congestion and pressure today; only the pillars change the prognosis tomorrow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute failure vasodilatation",
+          "points": [
+            "Intravenous nitrates for hypertensive pulmonary oedema",
+            "Nitroprusside in selected monitored cases",
+            "Rapid symptom and filling pressure relief",
+            "Watch pressure floors in preload dependent states"
+          ]
+        },
+        "right": {
+          "title": "Chronic oral fallback",
+          "points": [
+            "Hydralazine plus isosorbide dinitrate combination",
+            "For RAAS intolerance or as add on in selected patients",
+            "Thrice daily dosing limits adherence",
+            "Never a substitute for tolerated pillar therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sequence a new reduced ejection fraction diagnosis and the pharmacology assembles itself: start all four pillars at low dose within weeks rather than maximising one before adding the next, titrate each toward trial doses with potassium, creatinine and pressure surveillance, use loop diuretics purely against congestion, then consider ivabradine, digoxin and devices for what remains. **Dapagliflozin** usually starts first in practice because it needs no titration and tolerates low pressure best of the four.",
+      "say": "Start all four pillars early at low dose, titrate together, and let diuretics chase water while pillars change fate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diagnose",
+            "label": "Reduced ejection fraction confirmed, congestion treated"
+          },
+          {
+            "id": "four",
+            "label": "Four pillars started at low dose within weeks"
+          },
+          {
+            "id": "titrate",
+            "label": "Titrate each with laboratory surveillance"
+          },
+          {
+            "id": "adjunct",
+            "label": "Add ivabradine, digoxin or devices for residual need"
+          }
+        ],
+        "edges": [
+          [
+            "diagnose",
+            "four"
+          ],
+          [
+            "four",
+            "titrate"
+          ],
+          [
+            "titrate",
+            "adjunct"
+          ]
+        ]
+      }
+    }
+  ]
+}
