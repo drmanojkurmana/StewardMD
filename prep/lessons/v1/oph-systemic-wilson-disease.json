@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "id": "oph-systemic-wilson-disease",
+ "subject": "ophthalmology",
+ "module": "oph-systemic",
+ "title": "Wilson Disease, Marfan and Lens Displacement",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Kayser-Fleischer ring** is a brown green copper deposit at the corneal limbus in Wilson disease, best seen on slit lamp and sometimes needing gonioscopy when faint. The ring signals copper overload affecting liver and brain as well as eye. Finding the ring therefore triggers systemic copper assessment rather than isolated eye treatment.",
+   "say": "Copper deposition together gives Wilson recognition at slit lamp clinics for young adults with liver or movement features. Slit lamp gives ring detection additionally. Gonioscopy gives faint ring confirmation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/liver-failure-wilson-galactosemia-gsd-fig1.webp",
+    "alt": "Kayser-Fleischer ring and Wilson disease features diagram.",
+    "caption": "Golden-brown Kayser-Fleischer copper deposition ring in Descemet membrane of peripheral cornea in Wilson disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Wilson disease also produces a sunflower cataract from copper deposition in the lens capsule, usually visually mild compared with systemic disease burden. The eye therefore acts as a diagnostic window in unexplained hepatitis or tremor. **Diagnostic window** thinking therefore sends young liver patients for slit lamp examination deliberately.",
+   "say": "Eye examination together gives systemic diagnosis in liver clinics for young patients with unexplained hepatitis or tremor presentations. Sunflower cataract gives lens clue additionally. Slit lamp gives deliberate referral.",
+   "vis": {
+    "kind": "table",
+    "title": "Wilson eye signs",
+    "cols": [
+     "Sign",
+     "Site"
+    ],
+    "rows": [
+     [
+      "Kayser-Fleischer ring",
+      "Corneal limbus copper"
+     ],
+     [
+      "Sunflower cataract",
+      "Lens capsule copper"
+     ],
+     [
+      "Faint ring",
+      "Gonioscopy confirms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ectopia lentis** means lens displacement from zonular weakness, and its direction carries diagnostic meaning in inherited connective tissue disorders. Upward and outward displacement is classic for Marfan syndrome, while downward displacement favours the metabolic disorder homocystinuria. Direction therefore separates two tall patient syndromes at the slit lamp.",
+   "say": "Displacement direction together gives syndrome separation at slit lamp clinics for tall patients with lens subluxation findings. Marfan gives upward pattern additionally. Homocystinuria gives downward pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Marfan displacement",
+     "points": [
+      "Upward outward lens",
+      "Tall habitus aortic risk"
+     ]
+    },
+    "right": {
+     "title": "Homocystinuria displacement",
+     "points": [
+      "Downward lens",
+      "Thrombosis and learning features"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Marfan syndrome adds high myopia, retinal detachment risk and aortic root disease, so lens displacement mandates cardiac assessment alongside eye care. The zonule protein defect explains both lens and vessel wall weakness conceptually. **Whole patient referral** therefore follows any new ectopia lentis diagnosis without exception.",
+   "say": "Cardiac referral together gives Marfan safety after lens diagnosis in eye clinics for tall adults with displaced lenses. Myopia gives retinal risk additionally. Aorta gives life threatening priority.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ectopia lentis flow",
+    "nodes": [
+     {
+      "id": "find",
+      "label": "Lens displacement found"
+     },
+     {
+      "id": "direct",
+      "label": "Direction separates cause"
+     },
+     {
+      "id": "refer",
+      "label": "Cardiac and genetic referral"
+     },
+     {
+      "id": "watch",
+      "label": "Retina surveillance plan"
+     }
+    ],
+    "edges": [
+     [
+      "find",
+      "direct"
+     ],
+     [
+      "direct",
+      "refer"
+     ],
+     [
+      "refer",
+      "watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Homocystinuria displaces the lens downward and carries thrombotic risk that changes anaesthetic and surgical planning for any lens operation. Dietary and metabolic management belongs to metabolic teams while eye surgery needs their clearance. **Thrombosis warning** therefore appears on homocystinuria theatre lists before lens surgery is booked.",
+   "say": "Metabolic clearance together gives surgical safety for homocystinuria in lens clinics for young patients needing operations. Thrombosis gives anaesthetic risk additionally. Direction gives downward confirmation."
+  },
+  {
+   "tx": "Down syndrome carries a distinctive eye profile including upward slanting fissures, iris speckling, high refractive error, keratoconus tendency and early cataract formation. Routine eye surveillance therefore belongs in Down syndrome health checks from childhood. **Scheduled surveillance** therefore replaces symptom led eye care in this population.",
+   "say": "Scheduled surveillance together gives Down syndrome eye care in paediatric clinics for children needing routine health checks. Refraction gives common need additionally. Keratoconus gives corneal watch.",
+   "vis": {
+    "kind": "table",
+    "title": "Lens displacement map",
+    "cols": [
+     "Cause",
+     "Direction clue"
+    ],
+    "rows": [
+     [
+      "Marfan syndrome",
+      "Upward outward"
+     ],
+     [
+      "Homocystinuria",
+      "Downward"
+     ],
+     [
+      "Trauma",
+      "Direction varies with zonule tear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examined together, copper rings, sunflower cataract and displacement direction show how anterior segment signs name systemic disease precisely. Each sign therefore earns a systemic referral, not just an eye label. **Sign to system** discipline therefore closes this lesson on inherited and metabolic eye disease.",
+   "say": "Systemic discipline together gives anterior segment value in examinations for students reliably in metabolic cases everywhere. Copper gives Wilson route additionally. Direction gives inherited separation.",
+   "vis": {
+    "kind": "table",
+    "title": "Sign to system anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Copper ring",
+      "Wilson disease assessment"
+     ],
+     [
+      "Upward lens",
+      "Marfan cardiac referral"
+     ],
+     [
+      "Downward lens",
+      "Homocystinuria metabolic care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here are simple: the ring means copper, upward means Marfan with aortic risk, and downward means homocystinuria with clotting risk. Slit lamp findings therefore change management far beyond the eye clinic. **Direction decides** is the phrase that closes lens displacement teaching.",
+   "say": "Direction deciding together gives displacement anchors in examinations for students reliably in inherited cases everywhere. Copper gives ring centre additionally. Aorta gives urgent completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Wilson and lens anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Ring",
+      "Copper overload Wilson disease"
+     ],
+     [
+      "Upward displacement",
+      "Marfan syndrome"
+     ],
+     [
+      "Downward displacement",
+      "Homocystinuria"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Kayser-Fleischer ring",
+   "b": "Corneal copper in Wilson disease; triggers liver and brain copper assessment."
+  },
+  {
+   "f": "Ectopia lentis directions",
+   "b": "Marfan displaces upward outward; homocystinuria displaces downward."
+  },
+  {
+   "f": "Down syndrome eyes",
+   "b": "Refractive error, keratoconus tendency and early cataract need scheduled surveillance."
+  }
+ ],
+ "keys": [
+  "Ring means copper overload",
+  "Direction decides displacement cause",
+  "Every ectopia lentis earns systemic referral"
+ ]
+}
