@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-child-health-kangaroo-mother-care",
+  "subject": "community-medicine",
+  "module": "cm-child-health",
+  "title": "Kangaroo Mother Care, Breastfeeding, and Levels of Newborn Care",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "What kangaroo mother care is",
+      "tx": "**Kangaroo mother care** is continuous skin to skin contact between a low birth weight baby and the mother's chest, combined with exclusive breastfeeding and early discharge with close follow up. The baby wears only a cap, socks, and nappy, held upright and prone between the breasts under the mother's clothing. It was developed in Colombia for settings short of incubators and now has global evidence behind it.",
+      "say": "Kangaroo mother care keeps the small baby skin to skin on the mother's chest. Her body becomes the incubator, and breastfeeding completes the method.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "k1", "label": "Baby placed upright between mother's breasts" },
+          { "id": "k2", "label": "Continuous skin to skin warmth day and night" },
+          { "id": "k3", "label": "Exclusive breastfeeding plus close follow up" }
+        ],
+        "edges": [["k1", "k2"], ["k2", "k3"]]
+      }
+    },
+    {
+      "title": "Which babies benefit and proven gains",
+      "tx": "Babies below two thousand grams who are haemodynamically stable gain most from **kangaroo care for low birth weight babies**: trials show lower mortality, less hypothermia, fewer severe infections, better weight gain, and longer exclusive breastfeeding. The method needs no electricity, which makes it decisive in district units and at home after discharge. Unstable babies first need stabilisation in a special newborn care unit.",
+      "say": "Stable babies under two thousand grams thrive with kangaroo care. It cuts deaths, cold stress, and infection while improving weight gain and breastfeeding.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Outcome", "Effect of kangaroo care"],
+        "rows": [
+          ["Mortality", "Lower than conventional incubator care"],
+          ["Hypothermia", "Markedly reduced episodes"],
+          ["Severe infection", "Reduced sepsis and hospital stay"],
+          ["Breastfeeding", "Higher exclusive rates at discharge"]
+        ]
+      }
+    },
+    {
+      "title": "How long and how to position",
+      "tx": "Sessions should last as long as possible each day, ideally beyond eighteen hours, with the head turned to one side, neck slightly extended, hips flexed in a frog position, and the abdomen at the mother's epigastrium so her breathing stimulates the baby; this is the correct **kangaroo position for preterm babies**. Fathers and other family members can share skin to skin sessions so the mother rests without breaking continuity.",
+      "say": "Keep the baby skin to skin for most of the day. Head turned aside, hips flexed like a frog, and family members can take turns.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Correct position",
+          "points": ["Upright prone on bare chest", "Head turned, airway open, neck extended", "Hips flexed, arms flexed, frog posture"]
+        },
+        "right": {
+          "title": "Dangerous errors",
+          "points": ["Baby wrapped over clothes, no skin contact", "Neck flexed, chin on chest, airway blocked", "Short feeds only sessions with long cold gaps"]
+        }
+      }
+    },
+    {
+      "title": "Exclusive breastfeeding for six months",
+      "tx": "Only breast milk, not even water, for the first six months defines **exclusive breastfeeding**, which delivers sterile nutrition, secretory IgA (immunoglobulin A), lactoferrin, and living cells that no formula reproduces. Colostrum in the first days is concentrated antibody rich milk and must never be discarded. Feeding should start within the first hour of birth and continue on demand day and night, eight to twelve times daily.",
+      "say": "Exclusive breastfeeding means only breast milk for six months, starting within the first hour. Colostrum is the baby's first vaccine, never waste it.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Breast milk component", "Protection it gives"],
+        "rows": [
+          ["Secretory IgA", "Coats gut and blocks pathogen attachment"],
+          ["Lactoferrin", "Starves bacteria of iron"],
+          ["Lysozyme and cells", "Direct killing of bacteria"],
+          ["Oligosaccharides", "Feed protective gut bifidobacteria"]
+        ]
+      }
+    },
+    {
+      "title": "Feeding the low birth weight baby",
+      "tx": "Small babies who cannot yet suckle receive expressed breast milk by cup, spoon, or gastric tube every two to three hours, advancing volumes by birth weight charts; this graded approach is **feeding support for low birth weight babies**. Hind milk, richer in fat, speeds weight gain. Supplements of iron, vitamin D, calcium, and phosphorus follow unit protocols, and daily weighing catches faltering growth before illness declares itself.",
+      "say": "A baby too small to suck gets expressed breast milk by cup or tube every two to three hours. Daily weights show whether growth is on track.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "f1", "label": "Express breast milk hygienically" },
+          { "id": "f2", "label": "Feed by cup or tube every 2 to 3 hours" },
+          { "id": "f3", "label": "Weigh daily and advance volumes" }
+        ],
+        "edges": [["f1", "f2"], ["f2", "f3"]]
+      }
+    },
+    {
+      "title": "Thermal protection: the warm chain",
+      "tx": "Newborns lose heat by evaporation, conduction, convection, and radiation, so delivery rooms maintain the **warm chain for newborn care**: a warm room near twenty five degrees, immediate drying, skin to skin contact, warm resuscitation, and delayed bathing. Hypothermia below thirty six point five degrees raises oxygen consumption, hypoglycaemia, and sepsis risk, and it silently worsens every other neonatal illness.",
+      "say": "The warm chain starts with a warm room and instant drying. A cold baby burns sugar and oxygen faster and slides into sepsis more easily.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heat loss routes",
+          "points": ["Evaporation from wet skin after birth", "Conduction to cold scales and tables", "Convection from draughts and fans", "Radiation to cold walls and windows"]
+        },
+        "right": {
+          "title": "Warm chain answers",
+          "points": ["Dry at once, remove wet cloth", "Warm surfaces and pre warmed towels", "Close draughts, keep room near 25 degrees", "Skin to skin and kangaroo care"]
+        }
+      }
+    },
+    {
+      "title": "Organisation of newborn care levels",
+      "tx": "India grades newborn services so each baby reaches the right intensity: the newborn care corner in the labour room, the newborn stabilisation unit at block level, and the **special newborn care unit** at district hospital level with radiant warmers, oxygen, continuous positive airway pressure, and trained nurses round the clock. Referral transport must keep the baby warm, with kangaroo transport preferred when an ambulance warmer is absent.",
+      "say": "Care rises from the labour room corner to the block stabilisation unit and the district special care unit. Warm transport, ideally kangaroo style, links them.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Level", "What it manages"],
+        "rows": [
+          ["Newborn care corner", "Resuscitation and warmth at every delivery point"],
+          ["Stabilisation unit (NBSU)", "Short care for stable sick newborns at block level"],
+          ["Special newborn care unit (SNCU)", "District intensive care for sick and small babies"],
+          ["District early intervention centre", "Follow up of development after discharge"]
+        ]
+      }
+    },
+    {
+      "title": "Discharge criteria and follow up",
+      "tx": "A kangaroo baby goes home when feeding directly from the breast, gaining fifteen to twenty grams daily for three consecutive days, maintaining temperature in kangaroo care, and the mother is confident; these are the standard **kangaroo discharge criteria**. Follow up runs weekly until the baby reaches forty weeks post conception or two thousand five hundred grams, watching weight, feeding, immunisation, hearing, vision, and development.",
+      "say": "Discharge needs steady weight gain of fifteen to twenty grams a day and a confident mother. Weekly follow up continues until the baby reaches term weight.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "dc1", "label": "Direct breastfeeding established" },
+          { "id": "dc2", "label": "Weight rising 15 to 20 grams daily" },
+          { "id": "dc3", "label": "Weekly follow up until 2500 grams" }
+        ],
+        "edges": [["dc1", "dc2"], ["dc2", "dc3"]]
+      }
+    },
+    {
+      "title": "Counselling the family",
+      "tx": "Success at home depends on **kangaroo counselling for families**: demonstrate the position, let the mother practise under observation, teach hand washing, danger signs of poor feeding, fast breathing, chest indrawing, fever, cold body, and convulsions, and enrol the father and grandmother as supporters. Written instructions in the local language plus the ASHA worker's scheduled home visits keep the practice alive after discharge.",
+      "say": "Counsel the whole family, not just the mother. Everyone should know the position, hand washing, and the danger signs that mean rush back.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Teach at discharge", "Why it matters"],
+        "rows": [
+          ["Return at once for poor feeding", "Earliest sign of sepsis in small babies"],
+          ["Keep baby skin to skin at home", "Prevents hypothermia between visits"],
+          ["Wash hands before handling", "Cuts cord and skin infection"],
+          ["Complete immunisation on schedule", "Small babies need full vaccine protection"]
+        ]
+      }
+    }
+  ]
+}

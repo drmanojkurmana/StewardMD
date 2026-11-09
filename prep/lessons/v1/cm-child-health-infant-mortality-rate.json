@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-child-health-infant-mortality-rate",
+  "subject": "community-medicine",
+  "module": "cm-child-health",
+  "title": "Child Mortality Indicators: IMR, NMR, Perinatal Mortality, and Low Birth Weight",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Infant mortality rate defined",
+      "tx": "The **infant mortality rate** counts deaths in the first year of life per one thousand live births in the same year, and it is the most sensitive single indicator of health services and living conditions. India's rate fell from one hundred forty six in 1951 to twenty eight in 2020. Roughly two thirds of infant deaths now occur in the neonatal period itself.",
+      "say": "Infant mortality rate is deaths under one year per thousand live births. India brought it down to twenty eight, and most deaths now happen in the first month.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Indicator", "Age window counted"],
+        "rows": [
+          ["Early neonatal mortality", "Deaths in first 7 days of life"],
+          ["Neonatal mortality rate", "Deaths in first 28 days per 1000 live births"],
+          ["Postneonatal mortality", "Deaths from 28 days to one year"],
+          ["Infant mortality rate", "All deaths under one year per 1000 live births"]
+        ]
+      }
+    },
+    {
+      "title": "Neonatal and perinatal mortality",
+      "tx": "Deaths in the first twenty eight days form the **neonatal mortality rate**, about twenty per one thousand live births in India, driven by prematurity, birth asphyxia, and sepsis. The perinatal mortality rate widens the lens to stillbirths after twenty eight weeks plus deaths in the first week, per one thousand total births, and it reflects the quality of antenatal and intranatal care most directly.",
+      "say": "Neonatal deaths cluster in the first week, from prematurity, asphyxia, and sepsis. Perinatal mortality adds stillbirths, so it judges pregnancy and labour care together.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neonatal mortality",
+          "points": ["Denominator is live births only", "Prematurity is the leading cause", "First week carries the highest risk"]
+        },
+        "right": {
+          "title": "Perinatal mortality",
+          "points": ["Denominator is total births", "Includes stillbirths after 28 weeks", "Best single judge of obstetric care"]
+        }
+      }
+    },
+    {
+      "title": "Under five mortality and child death rate",
+      "tx": "The **under five mortality rate** gives the probability of dying before the fifth birthday per one thousand live births; India recorded thirty two in 2020. It anchors the Sustainable Development Goal target of twenty five by 2030. The child mortality rate in demography instead counts deaths between exact ages one and five years among children alive at age one, a different denominator that examiners love to swap.",
+      "say": "Under five mortality is the chance of dying before age five per thousand live births. Do not confuse it with the one to four year child death rate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "u1", "label": "1000 live births enter the cohort" },
+          { "id": "u2", "label": "Deaths counted up to fifth birthday" },
+          { "id": "u3", "label": "Rate compared with SDG target of 25" }
+        ],
+        "edges": [["u1", "u2"], ["u2", "u3"]]
+      }
+    },
+    {
+      "title": "Low birth weight and its burden",
+      "tx": "A newborn under two thousand five hundred grams is **low birth weight**, whether preterm or growth restricted, and about one fifth of Indian newborns fall in this group. Low birth weight babies face hypothermia, hypoglycaemia, infection, and feeding failure, and they contribute the largest share of neonatal deaths. Maternal anaemia, short stature, young age, and closely spaced pregnancies are the upstream drivers.",
+      "say": "One in five Indian babies weighs under two thousand five hundred grams. These babies die more often from cold, low sugar, infection, and poor feeding.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Category", "Definition"],
+        "rows": [
+          ["Low birth weight", "Birth weight below 2500 grams"],
+          ["Very low birth weight", "Birth weight below 1500 grams"],
+          ["Extremely low birth weight", "Birth weight below 1000 grams"],
+          ["Small for gestational age", "Weight below tenth percentile for gestation"]
+        ]
+      }
+    },
+    {
+      "title": "Causes of neonatal and infant death",
+      "tx": "Prematurity complications, intrapartum asphyxia, and sepsis together cause most neonatal deaths, while pneumonia and diarrhoea dominate after the first month as **causes of infant mortality in India**. Congenital anomalies, neonatal tetanus, and severe malnutrition fill the remainder. Because causes differ by week of life, the remedy also changes: resuscitation and thermal care early, then immunisation, nutrition, and prompt case management.",
+      "say": "Early deaths come from prematurity, asphyxia, and sepsis. Later infant deaths come mainly from pneumonia and diarrhoea, so prevention must match the age.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First month killers",
+          "points": ["Prematurity and respiratory distress", "Birth asphyxia", "Sepsis and meningitis"]
+        },
+        "right": {
+          "title": "Later infancy killers",
+          "points": ["Pneumonia", "Diarrhoeal dehydration", "Severe malnutrition with infection"]
+        }
+      }
+    },
+    {
+      "title": "Social and biological determinants",
+      "tx": "Infant deaths concentrate where mothers are illiterate, deliveries happen at home, water is unsafe, and birth intervals are short; this pattern is called the **social determinants of infant mortality**. Biological factors include maternal age at both extremes, parity above four, and multiple pregnancy. Female infants receive care later in many households, which shows up as excess female mortality in the postneonatal months.",
+      "say": "Poverty, illiteracy, home delivery, and short birth gaps push infant mortality up. Care seeking is also slower for girls, which raises their later infancy deaths.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Determinant group", "Examples raising risk"],
+        "rows": [
+          ["Maternal", "Age under 18 or over 35, parity above four, anaemia"],
+          ["Household", "Unsafe water, indoor smoke, low income"],
+          ["Service related", "Home delivery, distant facility, delayed referral"],
+          ["Child related", "Low birth weight, twins, congenital anomaly"]
+        ]
+      }
+    },
+    {
+      "title": "Newborn care units: SNCU and NBSU",
+      "tx": "Sick newborns are stabilised close to home in a graded network where the **newborn stabilisation unit** at block level manages warmth, oxygen, and first dose antibiotics before referral, and the special newborn care unit at district level provides assisted ventilation and exchange transfusion. The newborn baby care corner in every labour room handles resuscitation in the first golden minute after birth.",
+      "say": "Block level stabilisation units keep a sick newborn warm and start treatment. District special newborn care units then provide ventilation and intensive care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "n1", "label": "Newborn care corner resuscitates at birth" },
+          { "id": "n2", "label": "Stabilisation unit gives warmth and antibiotics" },
+          { "id": "n3", "label": "District SNCU provides intensive newborn care" }
+        ],
+        "edges": [["n1", "n2"], ["n2", "n3"]]
+      }
+    },
+    {
+      "title": "Home based newborn care",
+      "tx": "Most newborn deaths happen at home in the first week, so the accredited social health activist completes scheduled **home based newborn care** visits on days one, three, seven, fourteen, twenty one, twenty eight, and forty two after a home delivery, with extra visits for low birth weight babies. She weighs the baby, checks temperature, cord, feeding, and danger signs, and refers at once for poor sucking, fast breathing, fever, or hypothermia.",
+      "say": "The ASHA visits every home born baby seven times in six weeks. Extra visits go to small babies, and any danger sign means immediate referral.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Visit day", "Main check"],
+        "rows": [
+          ["Day 1 and 3", "Warmth, cord, feeding, birth weight"],
+          ["Day 7 and 14", "Weight gain, jaundice, skin and eye infection"],
+          ["Day 21 and 28", "Growth, immunisation reminder, danger signs"],
+          ["Day 42", "Full check with first immunisation linkage"]
+        ]
+      }
+    },
+    {
+      "title": "Child survival interventions that work",
+      "tx": "The steepest mortality falls come from a short list of **child survival interventions**: skilled delivery with resuscitation, exclusive breastfeeding, complete immunisation, oral rehydration with zinc, pneumonia case management, vitamin A, and insecticide treated nets where malaria is endemic. Tracking every indicator through the Sample Registration System and the National Family Health Survey tells managers which district lags and why.",
+      "say": "Skilled delivery, breastfeeding, vaccines, oral rehydration with zinc, and pneumonia treatment save the most child lives. Surveys then show where the gaps remain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "c1", "label": "Skilled birth and early breastfeeding" },
+          { "id": "c2", "label": "Immunisation plus vitamin A cover" },
+          { "id": "c3", "label": "Prompt ORS zinc and pneumonia care" }
+        ],
+        "edges": [["c1", "c2"], ["c2", "c3"]]
+      }
+    }
+  ]
+}
