@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-contrast-iodinated-contrast",
+ "subject": "radiology",
+ "module": "rad-contrast",
+ "title": "Iodinated and Gadolinium Contrast Media and Reactions",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Iodine blocks the beam",
+   "tx": "**Iodinated contrast** carries iodine atoms with atomic number 53, which absorb diagnostic X-rays strongly and turn vessels and enhancing tissue white on CT. Each molecule is built on a benzene ring holding three iodine atoms. Water solubility, osmolality and ionisation of the side chains separate the generations of agents, and those chemical differences decide most of their adverse effect profiles.",
+   "say": "Iodinated contrast carries iodine atoms with atomic number fifty three, which absorb diagnostic X-rays strongly and turn vessels and enhancing tissue white on CT. Each molecule is built on a benzene ring holding three iodine atoms. Solubility, osmolality and side chain charge separate the generations, and those chemical differences decide most adverse effects.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tri-iodinated benzene ring"}, {"id": "b", "label": "Intravenous injection"}, {"id": "c", "label": "X-ray absorption rises"}, {"id": "d", "label": "Vessels appear white"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ionic versus non ionic agents",
+   "tx": "**Non ionic contrast** stays electrically neutral in solution, unlike older ionic agents that split into charged particles. Dropping the charge cut osmolality and ended most of the burning pain, nausea and haemodynamic swings of high osmolar ionic media such as diatrizoate. Low osmolar non ionic agents like iohexol and iopamidol, plus the iso osmolar dimer iodixanol, now cover almost all intravascular work.",
+   "say": "Non ionic contrast stays electrically neutral in solution, unlike older ionic agents that split into charged particles. Dropping the charge cut osmolality and ended most burning pain, nausea and pressure swings of high osmolar ionic media. Low osmolar non ionic agents plus the iso osmolar dimer iodixanol now cover almost all intravascular work.",
+   "vis": {"kind": "table", "cols": ["Agent class", "Example", "Osmolality"], "rows": [["High osmolar ionic", "Diatrizoate", "About 2000 mOsm per kg"], ["Low osmolar non ionic", "Iohexol", "600 to 800 mOsm per kg"], ["Iso osmolar dimer", "Iodixanol", "Near plasma 290"], ["Oral water soluble", "Gastrografin", "High, draws fluid in"]]}
+  },
+  {
+   "title": "Contrast associated kidney injury",
+   "tx": "**Contrast associated acute kidney injury** means a creatinine rise within 48 to 72 hours of contrast that may or may not be caused by the agent itself. Risk concentrates in chronic kidney disease with filtration below 30, dehydration, heart failure and repeated large doses. Isotonic saline hydration before and after the study is the one protective step with consistent support, alongside withholding nephrotoxic drugs on the day.",
+   "say": "Contrast associated acute kidney injury means a creatinine rise within forty eight to seventy two hours that may or may not be caused by the agent itself. Risk concentrates in kidney disease with filtration below thirty, dehydration, heart failure and repeated large doses. Saline hydration before and after is the protective step with consistent support.",
+   "vis": {"kind": "compare", "left": {"title": "Higher risk", "points": ["Filtration below 30", "Dehydration", "Heart failure", "Repeat large doses"]}, "right": {"title": "Protection", "points": ["Isotonic saline hydration", "Smallest diagnostic dose", "Hold nephrotoxic drugs", "Recheck creatinine at 72 hours"]}}
+  },
+  {
+   "title": "Metformin and contrast",
+   "tx": "**Metformin** itself is not nephrotoxic; the worry is lactic acidosis if contrast triggers kidney failure while the drug accumulates. Current practice continues metformin when filtration is 30 or above and no kidney injury exists. Below 30, or with an acute kidney injury, metformin is paused at the time of contrast and restarted only after 48 hours once renal function proves stable.",
+   "say": "Metformin itself is not nephrotoxic; the worry is lactic acidosis if contrast triggers kidney failure while the drug accumulates. Current practice continues metformin when filtration is thirty or above with no kidney injury. Below thirty, or with acute injury, the drug is paused and restarted only after forty eight hours once function proves stable.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check filtration rate"}, {"id": "b", "label": "30 or above: continue"}, {"id": "c", "label": "Below 30: pause drug"}, {"id": "d", "label": "Restart after 48 hours"}], "edges": [["a", "b"], ["b", "d"], ["a", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Allergy like reactions",
+   "tx": "**Anaphylactoid reactions** to contrast mimic allergy with urticaria, bronchospasm and hypotension but need no prior sensitisation and are not driven by IgE against the agent. Mild reactions settle with observation and antihistamines. Moderate bronchospasm needs inhaled bronchodilators and oxygen, while hypotension with airway swelling is treated exactly like anaphylaxis with intramuscular adrenaline 0.5 mg, fluids and senior help called early.",
+   "say": "Anaphylactoid reactions mimic allergy with urticaria, bronchospasm and low pressure but need no prior sensitisation and are not driven by IgE against the agent. Mild reactions settle with observation and antihistamines. Airway swelling with low pressure is treated like anaphylaxis with intramuscular adrenaline, fluids and senior help called early.",
+   "vis": {"kind": "table", "cols": ["Grade", "Features", "First treatment"], "rows": [["Mild", "Limited urticaria, nausea", "Observe, antihistamine"], ["Moderate", "Bronchospasm, facial oedema", "Oxygen, bronchodilator"], ["Severe", "Hypotension, airway swelling", "Adrenaline 0.5 mg intramuscular"], ["Delayed", "Rash after 1 hour to 1 week", "Symptomatic, document agent"]]}
+  },
+  {
+   "title": "Steroid premedication",
+   "tx": "**Steroid premedication** is reserved for patients with a previous moderate or severe reaction to the same class of agent. A common regimen gives prednisolone 50 mg orally at 13, 7 and 1 hour before the study, with an antihistamine an hour before. Premedication lowers recurrence but never removes it, so the scan still runs with resuscitation drugs drawn up and a canula in place.",
+   "say": "Steroid premedication is reserved for patients with a previous moderate or severe reaction to the same class of agent. A common regimen gives prednisolone fifty milligrams at thirteen, seven and one hour before the study, with an antihistamine an hour before. It lowers recurrence but never removes it, so resuscitation drugs stay drawn up.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Prednisolone 13 h before"}, {"id": "b", "label": "Repeat at 7 h and 1 h"}, {"id": "c", "label": "Antihistamine 1 h before"}, {"id": "d", "label": "Scan with rescue ready"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Barium versus water soluble contrast",
+   "tx": "**Barium sulphate** coats mucosa superbly and is inert inside the gut lumen, but leaked barium in the peritoneum or mediastinum causes severe chemical inflammation. Suspected perforation therefore uses water soluble Gastrografin first, accepting its weaker coating. Barium in the lung irritates less than hyperosmolar Gastrografin, which pulls fluid into alveoli, so aspiration risk can reverse the choice toward barium or an iso osmolar agent.",
+   "say": "Barium sulphate coats mucosa superbly and is inert inside the gut lumen, but leaked barium in the peritoneum or mediastinum causes severe chemical inflammation. Suspected perforation therefore uses water soluble Gastrografin first, accepting weaker coating. Barium irritates lung less than hyperosmolar Gastrografin, so aspiration risk can reverse the choice toward barium.",
+   "vis": {"kind": "compare", "left": {"title": "Barium sulphate", "points": ["Best mucosal coating", "Inert inside gut lumen", "Harmful if leaked outside", "Never in suspected perforation"]}, "right": {"title": "Gastrografin", "points": ["Water soluble, absorbed if leaked", "Weaker coating", "Hyperosmolar, harms lung", "First test for perforation"]}}
+  },
+  {
+   "title": "Gadolinium, microbubbles and extravasation",
+   "tx": "**Microbubble contrast** for ultrasound uses gas filled spheres that stay inside vessels and dissolve within minutes, safe in kidney failure. Gadolinium agents instead leave vessels and distribute through extracellular fluid, with nephrogenic systemic fibrosis risk confined largely to older linear agents at filtration below 30. Contrast extravasation into soft tissue usually needs only elevation and observation, escalating only for blistering, paraesthesia or a tense compartment.",
+   "say": "Microbubble contrast for ultrasound uses gas filled spheres that stay inside vessels and dissolve within minutes, safe in kidney failure. Gadolinium instead distributes through extracellular fluid, with fibrosis risk confined largely to older linear agents at low filtration. Extravasation into soft tissue usually needs elevation and observation, escalating only for blistering or a tense compartment.",
+   "vis": {"kind": "table", "cols": ["Agent", "Stays where", "Key risk"], "rows": [["Microbubbles", "Inside vessels only", "Rare hypersensitivity"], ["Gadolinium macrocyclic", "Extracellular fluid", "Very low fibrosis risk"], ["Gadolinium linear old", "Extracellular fluid", "Fibrosis at low filtration"], ["Iodinated extravasated", "Soft tissue depot", "Compartment injury if large"]]}
+  }
+ ]
+}
