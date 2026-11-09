@@ -1,0 +1,243 @@
+{
+    "v": 1,
+    "id": "rad-radiation-protection-alara",
+    "subject": "radiology",
+    "module": "rad-radiation-protection",
+    "title": "Radiation Safety Principles: ALARA, Bio-Effects, and Dose Limits",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "The ALARA Mandate and Cardinal Rules",
+            "tx": "**ALARA safety principle** mandates that all medical radiation exposures be kept As Low As Reasonably Achievable, with economic and societal factors taken into account. Practical implementation relies on three cardinal safety tools: minimizing exposure time near radiation sources, maximizing physical distance utilizing the inverse square law, and deploying structural lead shielding barriers to attenuate transmitted scatter rays.",
+            "say": "ALARA safety principle mandates that all medical radiation exposures be kept As Low As Reasonably Achievable, with economic and societal factors taken into account. Practical implementation relies on three cardinal safety tools: minimizing exposure time near radiation sources, maximizing physical distance utilizing the inverse square law, and deploying structural lead shielding barriers to attenuate transmitted scatter rays.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/radiation-safety-alara-fig1.webp",
+                "alt": "Diagram illustrating ALARA radiation safety principles including time, distance, and shielding",
+                "caption": "ALARA radiation protection framework demonstrating the three cardinal rules: minimizing exposure time, maximizing distance from the beam, and utilizing lead shielding barriers."
+            }
+        },
+        {
+            "title": "Deterministic Tissue Reactions",
+            "tx": "**Deterministic radiation effects** occur following lethal cellular damage and exhibit a specific minimum dose threshold below which the clinical pathology does not develop. Above this threshold, the biological severity of the reaction increases proportionally with increasing dose. Classic examples include transient cutaneous erythema at 2 grays, temporary epilation at 3 grays, and radiation-induced ocular cataracts at 0.5 gray.",
+            "say": "Deterministic radiation effects occur following lethal cellular damage and exhibit a specific minimum dose threshold below which the clinical pathology does not develop. Above this threshold, the biological severity of the reaction increases proportionally with increasing dose. Classic examples include transient cutaneous erythema at 2 grays, temporary epilation at 3 grays, and radiation-induced ocular cataracts at 0.5 gray.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Tissue Reaction",
+                    "Dose Threshold",
+                    "Onset Latency",
+                    "Clinical Severity"
+                ],
+                "rows": [
+                    [
+                        "Transient Skin Erythema",
+                        "2 Grays",
+                        "Hours to 24 hours",
+                        "Mild reversible capillary dilatation"
+                    ],
+                    [
+                        "Temporary Epilation",
+                        "3 Grays",
+                        "2 to 3 weeks",
+                        "Complete reversible hair follicle shedding"
+                    ],
+                    [
+                        "Permanent Epilation",
+                        "7 Grays",
+                        "3 weeks",
+                        "Irreversible hair follicle stem cell ablation"
+                    ],
+                    [
+                        "Radiation Cataract",
+                        "0.5 Gray (ICRP)",
+                        "Several years",
+                        "Progressive posterior subcapsular lens opacities"
+                    ],
+                    [
+                        "Permanent Male Sterility",
+                        "3.5 to 6 Grays",
+                        "Immediate to weeks",
+                        "Irreversible spermatogonial stem cell destruction"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Stochastic Carcinogenesis Mechanics",
+            "tx": "**Stochastic radiation risk** results from non-lethal, sublethal DNA mutations in reproductive or somatic stem cells. Under the internationally accepted linear no-threshold radiobiological model, there is no safe radiation threshold below which cancer cannot occur: every increment of exposure adds statistical probability. However, unlike deterministic injuries, the clinical severity of resulting radiation-induced cancer is entirely independent of the initiating dose.",
+            "say": "Stochastic radiation risk results from non-lethal, sublethal DNA mutations in reproductive or somatic stem cells. Under the internationally accepted linear no-threshold radiobiological model, there is no safe radiation threshold below which cancer cannot occur: every increment of exposure adds statistical probability. However, unlike deterministic injuries, the clinical severity of resulting radiation-induced cancer is entirely independent of the initiating dose.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Deterministic Effects",
+                    "points": [
+                        "Direct cell killing; clear dose threshold exists",
+                        "Severity of injury increases with increasing dose",
+                        "Examples include skin burns, epilation, and cataracts"
+                    ]
+                },
+                "right": {
+                    "title": "Stochastic Effects",
+                    "points": [
+                        "Sublethal DNA mutations; no dose threshold exists",
+                        "Probability increases with dose; severity is constant",
+                        "Examples include radiation-induced leukaemia and solid tumours"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Occupational Whole-Body Dose Limits",
+            "tx": "**Occupational dose limits** are established by the International Commission on Radiological Protection and the Atomic Energy Regulatory Board to prevent deterministic injuries and limit stochastic hazards. Radiation workers must not exceed an effective dose of 20 millisieverts per year averaged over five consecutive calendar years, with an absolute ceiling of 50 millisieverts in any single year.",
+            "say": "Occupational dose limits are established by the International Commission on Radiological Protection and the Atomic Energy Regulatory Board to prevent deterministic injuries and limit stochastic hazards. Radiation workers must not exceed an effective dose of 20 millisieverts per year averaged over five consecutive calendar years, with an absolute ceiling of 50 millisieverts in any single year.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Worker Category",
+                    "Annual Effective Limit",
+                    "Regulatory Averaging Period"
+                ],
+                "rows": [
+                    [
+                        "Occupational Worker (Whole Body)",
+                        "20 mSv per year",
+                        "Averaged over 5 years (max 50 mSv in any 1 year)"
+                    ],
+                    [
+                        "Cumulative Lifetime Limit",
+                        "Age multiplied by 10 mSv",
+                        "Lifetime occupational ceiling"
+                    ],
+                    [
+                        "Declared Pregnant Worker",
+                        "1 mSv to fetus",
+                        "Applies for the remainder of gestation"
+                    ],
+                    [
+                        "General Public Member",
+                        "1 mSv per year",
+                        "Excludes natural background and personal medical exams"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Organ-Specific Occupational Thresholds",
+            "tx": "**Equivalent organ limits** prevent deterministic reactions in highly exposed localized anatomical regions. The occupational equivalent dose limit for the lens of the eye was revised downward to 20 millisieverts per year averaged over five years, down from the historic 150 millisieverts, following evidence of radiation cataracts at lower thresholds. The annual equivalent limit for skin, hands, and feet remains 500 millisieverts.",
+            "say": "Equivalent organ limits prevent deterministic reactions in highly exposed localized anatomical regions. The occupational equivalent dose limit for the lens of the eye was revised downward to 20 millisieverts per year averaged over five years, down from the historic 150 millisieverts, following evidence of radiation cataracts at lower thresholds. The annual equivalent limit for skin, hands, and feet remains 500 millisieverts.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Ocular Lens Limit",
+                    "points": [
+                        "Mandated at 20 mSv per year averaged over 5 years",
+                        "Cannot exceed 50 mSv in any individual year",
+                        "Requires lead acrylic eyewear during interventional cases"
+                    ]
+                },
+                "right": {
+                    "title": "Extremities and Skin Limit",
+                    "points": [
+                        "Mandated at 500 mSv per calendar year",
+                        "Averaged over any 1 cm2 area of irradiated skin",
+                        "Protects fluoroscopists handling hands near direct beam"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Public Radiation Exposure Ceilings",
+            "tx": "**Public dose limits** protect non-radiation workers and visitors in healthcare facilities. The statutory limit for members of the general public is 1 millisievert effective dose per year. In special circumstances, a higher dose may be permitted in a single year provided the five-year average remains under 1 millisievert annually. The equivalent public limit for the ocular lens is 15 millisieverts.",
+            "say": "Public dose limits protect non-radiation workers and visitors in healthcare facilities. The statutory limit for members of the general public is 1 millisievert effective dose per year. In special circumstances, a higher dose may be permitted in a single year provided the five-year average remains under 1 millisievert annually. The equivalent public limit for the ocular lens is 15 millisieverts.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Public Dose Parameter",
+                    "Annual Statutory Limit",
+                    "Exclusion Criteria"
+                ],
+                "rows": [
+                    [
+                        "Annual Effective Dose",
+                        "1 millisievert (mSv)",
+                        "Excludes personal medical imaging and background"
+                    ],
+                    [
+                        "Lens of the Eye Equivalent",
+                        "15 millisieverts",
+                        "Protects non-radiation personnel in hospital suites"
+                    ],
+                    [
+                        "Skin Equivalent Dose",
+                        "50 millisieverts",
+                        "Averaged across any 1 cm2 exposed cutaneous area"
+                    ],
+                    [
+                        "Shielding Room Design Basis",
+                        "0.3 mSv per year",
+                        "Conservative target for uncontrolled adjacent waiting rooms"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Thermoluminescent Dosimeter Mechanics",
+            "tx": "**Thermoluminescent dosimeter badge** monitoring tracks cumulative occupational radiation over three-month service periods. Inside the badge, dysprosium-doped calcium sulphate crystals absorb incoming radiation, trapping excited electrons within metastable lattice defects. During laboratory processing, heating the card to 280 degrees Celsius releases trapped electrons back to ground states, emitting visible light whose intensity is proportional to absorbed dose.",
+            "say": "Thermoluminescent dosimeter badge monitoring tracks cumulative occupational radiation over three-month service periods. Inside the badge, dysprosium-doped calcium sulphate crystals absorb incoming radiation, trapping excited electrons within metastable lattice defects. During laboratory processing, heating the card to 280 degrees Celsius releases trapped electrons back to ground states, emitting visible light whose intensity is proportional to absorbed dose.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Radiation excites electrons into CaSO4:Dy traps"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Card heated to 280C in reader lab"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Photomultiplier measures emitted light proportionality"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Dosimeter Badge Placement Protocols",
+            "tx": "**Dosimeter placement protocol** rules require diagnostic workers to wear a single TLD badge at chest level beneath their lead apron to measure whole-body effective dose. In high-exposure fluoroscopy and interventional radiology suites, a two-badge system is mandated: one badge is worn under the apron at chest height, while a second badge is worn outside the lead collar at the neck.",
+            "say": "Dosimeter placement protocol rules require diagnostic workers to wear a single TLD badge at chest level beneath their lead apron to measure whole-body effective dose. In high-exposure fluoroscopy and interventional radiology suites, a two-badge system is mandated: one badge is worn under the apron at chest height, while a second badge is worn outside the lead collar at the neck.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Single-Badge Protocol",
+                    "points": [
+                        "Worn at chest level under lead apron",
+                        "Measures protected whole-body torso dose",
+                        "Standard for general diagnostic radiography staff"
+                    ]
+                },
+                "right": {
+                    "title": "Dual-Badge Interventional Protocol",
+                    "points": [
+                        "First badge worn under lead apron at chest",
+                        "Second badge worn outside lead at thyroid collar",
+                        "Calculates unshielded head, neck, and lens exposure"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}
