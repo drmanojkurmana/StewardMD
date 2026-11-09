@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-immune-response",
+  "subject": "microbiology",
+  "title": "Hypersensitivity I: Type I, Anaphylaxis, Arthus Reaction and Serum Sickness",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Type I hypersensitivity** is IgE mediated immediate allergy: first exposure sensitises (allergen specific IgE arms mast cells and basophils via Fc epsilon receptors), re exposure crosslinks that IgE within minutes, releasing histamine, tryptase, prostaglandins and leukotrienes into wheal and flare, rhinitis, asthma or anaphylaxis. Early phase minutes, late phase hours with eosinophils recruited behind.",
+      "say": "Sensitise silently, trigger in minutes: crosslinked IgE is allergy's loaded spring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sens", "label": "First exposure: allergen specific IgE made" },
+          { "id": "arm", "label": "IgE arms mast cells for weeks" },
+          { "id": "cross", "label": "Re exposure crosslinks IgE" },
+          { "id": "mediator", "label": "Histamine and lipid mediators released in minutes" }
+        ],
+        "edges": [["sens", "arm"], ["arm", "cross"], ["cross", "mediator"]]
+      }
+    },
+    {
+      "tx": "**Anaphylaxis** is type I at systemic scale: airway oedema and bronchospasm, vasodilation and capillary leak collapsing pressure, urticaria often but not always, treated immediately with intramuscular adrenaline (thigh, repeat every five minutes) before antihistamines or steroids, which are adjuncts only. Serum tryptase later confirms mast cell degranulation for the allergy workup.",
+      "say": "Adrenaline intramuscularly first and fast; everything else in anaphylaxis is supporting cast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anaphylaxis portrait",
+          "points": [
+            "Triggers: foods, drugs, venom, latex, contrast traditions",
+            "Airway, breathing, circulation simultaneously",
+            "Skin signs absent in a minority, shock leads",
+            "Biphasic reactions hours later watched"
+          ]
+        },
+        "right": {
+          "title": "Anaphylaxis answers",
+          "points": [
+            "IM adrenaline 0.5 mg adult thigh, repeat 5 minutely",
+            "Lie flat, legs raised, oxygen and fluids",
+            "Antihistamines and steroids adjunct only",
+            "Auto injector training and allergy referral after"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Type II hypersensitivity** is antibody against cell surface antigen: IgG and IgM fix complement and recruit phagocytes and NK cells onto blood cells (transfusion reactions, haemolytic disease of newborn, autoimmune cytopenias), drug haptens on membranes, and receptor antibodies stimulating (Graves) or blocking (myasthenia) as its functional fifth column.",
+      "say": "Antibody stuck on a cell surface marks that cell for complement, phagocytes or dysfunction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytotoxic type II",
+          "points": [
+            "ABO incompatible transfusion",
+            "Haemolytic disease of the newborn (anti D)",
+            "Autoimmune haemolytic anaemia and ITP mechanisms",
+            "Drug induced cytopenias (hapten and immune complex routes)"
+          ]
+        },
+        "right": {
+          "title": "Receptor type II variants",
+          "points": [
+            "Graves: TSH receptor stimulation",
+            "Myasthenia: acetylcholine receptor blockade and loss",
+            "Goodpasture: basement membrane antibody (linear IF)",
+            "Pemphigus: desmoglein antibodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Type III hypersensitivity** is immune complex disease: soluble complexes deposit in vessels, glomeruli and joints, fix complement and summon neutrophils whose enzymes injure the wall (vasculitis with fibrinoid necrosis). Serum sickness and Arthus are its experimental twins below; lupus and post infectious glomerulonephritis its clinical heirs.",
+      "say": "Complexes deposit, complement burns, neutrophils injure: small vessel vasculitis by recipe.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type III mechanics",
+          "points": [
+            "Antigen antibody complexes in slight antigen excess deposit",
+            "Complement consumption (low C3 C4)",
+            "Neutrophil lysosomal injury and fibrinoid necrosis",
+            "Sites: vessels, glomeruli, joints, skin"
+          ]
+        },
+        "right": {
+          "title": "Type III diseases",
+          "points": [
+            "Serum sickness and Arthus (models)",
+            "SLE and cryoglobulinaemic vasculitis",
+            "Post streptococcal glomerulonephritis (hypersensitivity cousin)",
+            "Hypersensitivity vasculitis drug triggered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Arthus reaction** is localised type III: a sensitised animal (or patient after repeated insulin or vaccines historically) injected intradermally develops haemorrhagic necrotic oedema in 4 to 10 hours as complexes form in vessel walls at the site. It taught that antibody excess locally can be as destructive as any toxin.",
+      "say": "Hours, local, haemorrhagic: Arthus is serum sickness in one square of skin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Arthus portrait",
+          "points": [
+            "Preformed high titre IgG required",
+            "Onset 4 to 10 hours, oedema and haemorrhage",
+            "Vessel wall complexes and neutrophils",
+            "Resolves over days, necrosis may ulcerate"
+          ]
+        },
+        "right": {
+          "title": "Clinical echoes",
+          "points": [
+            "Booster vaccine local reactions",
+            "Insulin injection sites historically",
+            "Farmer lung has type III components (with IV)",
+            "Distinguished from delayed type IV by hours and antibody"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Serum sickness** is systemic type III after foreign protein (historical antitoxins, modern monoclonals, antithymocyte globulin, some antibiotics): 7 to 14 days after first exposure (faster on re exposure) fever, rash, arthralgia, lymphadenopathy and low complement declare circulating complexes, resolving as antigen clears, treated supportively and with steroids when severe; drug fever mimics line its differential.",
+      "say": "Seven to fourteen days after foreign protein, complexes announce themselves in joints, skin and complement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serum sickness portrait",
+          "points": [
+            "Latency 1 to 2 weeks first exposure",
+            "Fever, urticarial and morbilliform rash, arthralgia",
+            "Complement consumed, complexes detectable",
+            "Self limiting as antigen cleared"
+          ]
+        },
+        "right": {
+          "title": "Modern causes",
+          "points": [
+            "Antithymocyte globulin and monoclonals (rituximab)",
+            "Antivenoms and antitoxins",
+            "Beta lactams and other drug serum sickness like reactions",
+            "Distinguish true (complement low) from like (normal)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gell and Coombs classification** itself needs placing: types I to III antibody mediated (minutes to hours to days), type IV T cell mediated (days), with modern additions (receptor functional antibodies) filed under II. Examination stems give the disease and ask the type, so disease to mechanism pairing is the skill, not list recitation.",
+      "say": "Pair every disease to its mechanism hour by hour: minutes I, hours II and III, days IV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antibody types",
+          "points": [
+            "I: IgE mast cell, minutes",
+            "II: anti cell antibody, hours",
+            "III: complexes, hours to days",
+            "II variants: receptor stimulation and blockade"
+          ]
+        },
+        "right": {
+          "title": "Cellular type",
+          "points": [
+            "IV: T cells and macrophages, 48 to 72 hours",
+            "Subtypes IVa to IVd by cytokine and effector",
+            "Contact dermatitis, tuberculin, granuloma",
+            "Next lesson dwells here"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Allergy testing hierarchy** applies type I: history first (timing, trigger, reproducibility), skin prick and specific IgE confirming sensitisation (not clinical allergy alone), component resolved diagnostics refining nut and venom risk, and supervised challenge as gold standard where history and tests disagree. Tryptase, total IgE and eosinophils support, never replace, the story.",
+      "say": "Sensitisation is a test result; allergy is a history the test must match.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Testing tools",
+          "points": [
+            "Skin prick: wheal versus controls in 15 minutes",
+            "Specific IgE: blood alternative when skin impossible",
+            "Component diagnostics: Ara h2 peanut risk class",
+            "Challenge testing: supervised gold standard"
+          ]
+        },
+        "right": {
+          "title": "Testing traps",
+          "points": [
+            "Positive test without history: sensitisation only",
+            "Antihistamines suppress skin tests",
+            "Total IgE nonspecific alone",
+            "Food panels without history mislead elimination diets"
+          ]
+        }
+      }
+    }
+  ]
+}
