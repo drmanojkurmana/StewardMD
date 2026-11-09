@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "module": "mic-arbo-rabies",
+  "subject": "microbiology",
+  "title": "Yellow Fever, Zika, West Nile, Aedes, Culex and Rabies Virus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Yellow fever** is a mosquito-borne flavivirus infection of tropical Africa and South America. After fever and myalgia, some patients enter a toxic phase with jaundice, haemorrhage, renal failure and shock. The 17D live vaccine is highly effective and often required for travel certification. Aedes aegypti drives urban cycles while jungle cycles involve other mosquitoes and primates.",
+      "say": "Yellow fever's toxic phase is hepatic, haemorrhagic and vaccine preventable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical course",
+          "points": [
+            "Initial fever, headache and back pain",
+            "Brief remission in some patients",
+            "Jaundice and bleeding in toxic phase",
+            "High fatality in severe visceral disease"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "Single 17D vaccine gives durable protection",
+            "Check contraindications in immune suppression and infancy",
+            "Vector control around cases",
+            "Travel certificates may be legally required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Zika virus** is an Aedes-borne flavivirus that often causes mild fever, rash, conjunctivitis and arthralgia, but infection in pregnancy can cause congenital Zika syndrome with microcephaly and brain injury. Sexual transmission also occurs. Diagnosis uses PCR early in blood or urine and serology later, complicated by dengue cross-reactivity. Prevention in pregnancy centres on mosquito avoidance and travel counselling.",
+      "say": "Zika's importance is fetal brain injury, not the usually mild maternal rash.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult infection",
+          "points": [
+            "Often asymptomatic",
+            "Maculopapular itchy rash",
+            "Nonpurulent conjunctivitis",
+            "Small joint arthralgia"
+          ]
+        },
+        "right": {
+          "title": "Congenital infection",
+          "points": [
+            "Severe microcephaly",
+            "Intracranial calcifications",
+            "Ocular abnormalities",
+            "Arthrogryposis and developmental disability"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**West Nile virus** cycles between Culex mosquitoes and birds, with humans and horses as dead-end hosts. Most infections are silent; West Nile fever causes fever and rash, while neuroinvasive disease causes meningitis, encephalitis or acute flaccid paralysis, especially in older and immunocompromised people. Diagnosis is mainly IgM in serum or CSF, and treatment is supportive.",
+      "say": "West Nile neuroinvasive disease is a Culex-bird cycle spilling into vulnerable humans.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission",
+          "points": [
+            "Culex mosquitoes bite birds and humans",
+            "Peak in warm mosquito season",
+            "Transfusion and transplant transmission rare",
+            "Dead bird surveillance can warn communities"
+          ]
+        },
+        "right": {
+          "title": "Neuroinvasive clues",
+          "points": [
+            "Encephalitis with tremor or parkinsonism",
+            "Asymmetric flaccid weakness",
+            "Older age increases risk",
+            "CSF IgM supports diagnosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Aedes aegypti** is a day-biting, container-breeding mosquito adapted to homes, transmitting dengue, chikungunya, Zika and urban yellow fever. **Culex** species often bite at night and breed in organically rich water, transmitting Japanese encephalitis and West Nile. Source reduction, larviciding, screens and personal protection must match the mosquito's breeding and biting habits.",
+      "say": "Day-biting Aedes and night-associated Culex demand different household control habits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aedes aegypti",
+          "points": [
+            "Clean stored water and discarded containers",
+            "Bites mainly daytime",
+            "Rests indoors near people",
+            "Short flight range focuses neighbourhood control"
+          ]
+        },
+        "right": {
+          "title": "Culex",
+          "points": [
+            "Polluted drains and rice fields",
+            "Night biting is common",
+            "Bird reservoirs matter",
+            "Larval source management is large scale"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rabies virus** is an enveloped bullet-shaped negative-sense RNA lyssavirus that travels retrogradely in peripheral nerves to the brain, then centrifugally to salivary glands. It avoids early immune detection and causes almost invariably fatal encephalitis once symptoms begin. Dog bites account for most human cases globally, with bats important in many regions. The wound is the portal and the clock.",
+      "say": "Rabies ascends nerves silently; prevention must happen before symptoms make it untreatable.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rabies-fig1.webp",
+        "alt": "Rabies post exposure prophylaxis decision diagram",
+        "caption": "Rabies exposure assessment and post-exposure prophylaxis pathway."
+      }
+    },
+    {
+      "tx": "Rabies **post-exposure prophylaxis** combines immediate wound washing, rabies immunoglobulin infiltrated around the wound for severe exposures in previously unvaccinated people, and a vaccine series. Pre-exposure vaccination simplifies later care and removes immunoglobulin need. Decisions follow exposure category, animal availability and local guidance. Never close a high-risk wound before washing and assessment.",
+      "say": "Wash first, infiltrate immunoglobulin for category III, and vaccinate without delay.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "wash",
+            "label": "Wash wound with soap and water"
+          },
+          {
+            "id": "category",
+            "label": "Classify exposure and animal risk"
+          },
+          {
+            "id": "rig",
+            "label": "RIG if severe and not previously vaccinated"
+          },
+          {
+            "id": "vaccine",
+            "label": "Start rabies vaccine series"
+          }
+        ],
+        "edges": [
+          [
+            "wash",
+            "category"
+          ],
+          [
+            "category",
+            "rig"
+          ],
+          [
+            "rig",
+            "vaccine"
+          ]
+        ]
+      }
+    }
+  ]
+}
