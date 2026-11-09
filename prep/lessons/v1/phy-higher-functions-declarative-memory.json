@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-higher-functions",
+  "subject": "physiology",
+  "title": "Memory Consolidation, Aphasia Syndromes, and Cerebral Dominance",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Human memory divides into distinct neuroanatomical systems based on whether acquired knowledge can be consciously recalled and articulated in words. Conscious recollection of autobiographical episodes and factual semantic knowledge represents **declarative memory**, which depends critically upon the medial temporal lobe, entorhinal cortex, and the bilateral hippocampi.",
+      "say": "Declarative memory is conscious recollection of facts and life events dependent on the hippocampus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ptsd-fig1.webp",
+        "caption": "Hyperactive amygdala and dysfunctional hippocampal memory consolidation in trauma processing.",
+        "alt": "Medial temporal lobe and amygdalo-hippocampal circuitry in emotional memory"
+      }
+    },
+    {
+      "tx": "In contrast to declarative memory, the acquisition of skilled motor habits, perceptual capabilities, and conditioned reflexes operates beneath conscious awareness. This implicit storage form is **procedural memory**, which remains intact even following bilateral hippocampal resection, utilizing the basal ganglia, cerebellar cortex, and premotor motor pathways.",
+      "say": "Procedural memory encodes motor skills and habits using the basal ganglia and cerebellum without awareness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Declarative (Explicit) Memory",
+          "points": [
+            "Subdivided into episodic (personal events) and semantic (facts/rules)",
+            "Encodes consciously accessible information expressed in verbal speech",
+            "Requires bilateral hippocampi, parahippocampal gyrus, and fornix",
+            "Vulnerable to bilateral medial temporal lobe damage (anterograde amnesia)"
+          ]
+        },
+        "right": {
+          "title": "Procedural (Implicit) Memory",
+          "points": [
+            "Includes motor skills (riding a bike, playing piano), habits, and priming",
+            "Expressed automatically through performance without conscious verbalization",
+            "Requires striatum, cerebellum, motor cortex, and amygdala (fear conditioning)",
+            "Preserved in amnesic patients like patient H.M. despite hippocampal loss"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Initial memory traces formed in the hippocampus are fragile and susceptible to retrograde disruption from trauma or anesthesia. Through the process of **systems consolidation**, repetitive sharp-wave ripples during slow-wave sleep transfer and integrate hippocampal representations into distributed neocortical networks, establishing permanent long-term stability independent of hippocampal structures.",
+      "say": "Systems consolidation transfers fragile hippocampal traces into neocortex during slow-wave sleep.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sensory_experience",
+            "label": "Multisensory Cortical Associations Converge into Medial Temporal Lobe"
+          },
+          {
+            "id": "hippocampal_index",
+            "label": "Dentate Gyrus and CA3 Rapidly Form Cohesive Temporary Associative Index"
+          },
+          {
+            "id": "sleep_replay",
+            "label": "Nocturnal Sharp-Wave Ripples Replay Memory Traces Back to Neocortex"
+          },
+          {
+            "id": "cortical_permanence",
+            "label": "Distributed Neocortical Synaptic Rewiring Establishes Autonomous Long-Term Trace"
+          }
+        ],
+        "edges": [
+          [
+            "sensory_experience",
+            "hippocampal_index"
+          ],
+          [
+            "hippocampal_index",
+            "sleep_replay"
+          ],
+          [
+            "sleep_replay",
+            "cortical_permanence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Associative learning can link a biologically neutral environmental cue with an innate unconditioned stimulus to modify behavioral reflexes. Formalized by Ivan Pavlov as the **conditioned reflex**, pairing a ringing bell with food presentation causes the neutral auditory stimulus to evoke salivation alone, converting it into an effective conditioned stimulus.",
+      "say": "A conditioned reflex occurs when a neutral cue paired with an innate stimulus learns to evoke the reflex.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical (Pavlovian) Conditioning",
+          "points": [
+            "Pairs unconditioned stimulus (food) with conditioned stimulus (bell tone)",
+            "Unconditioned response (salivation) automatically converts to conditioned response",
+            "Passive associative pairing independent of subject voluntary agency",
+            "Mediated through cerebellar circuits (eye-blink) and amygdala (fear)"
+          ]
+        },
+        "right": {
+          "title": "Operant (Skinnerian) Conditioning",
+          "points": [
+            "Subjects operate on environment to obtain rewards or avoid punishment",
+            "Reinforcement strengthens behavior; punishment weakens frequency",
+            "Active trial-and-error behavioral learning guided by feedback consequences",
+            "Mediated by ventral striatum, nucleus accumbens, and mesolimbic dopamine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In ninety-five percent of right-handed individuals and seventy percent of left-handed individuals, the left cerebral hemisphere is specialized for receptive and expressive language processing. This hemispheric lateralization represents **cerebral dominance**, establishing dedicated cortical zones in the dominant hemisphere for syntax, phonology, and verbal articulation.",
+      "say": "The left hemisphere shows cerebral dominance for language in ninety-five percent of right-handed adults.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/major-depressive-disorder-fig1.webp",
+        "caption": "Functional asymmetry across cerebral hemispheres illustrating lateralized frontocortical networks.",
+        "alt": "Prefrontal hemispheric lateralization and cortical network integration"
+      }
+    },
+    {
+      "tx": "Ischemic damage to the posterior inferior frontal gyrus of the dominant hemisphere, comprising Brodmann areas 44 and 45, impairs verbal fluency while sparing auditory comprehension. This non-fluent clinical deficit is **Broca aphasia**, characterized by slow, halting, effortful speech, telegraphic phrasing, and marked frustration due to intact self-monitoring.",
+      "say": "Broca aphasia causes halting non-fluent speech with preserved comprehension from dominant frontal damage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Broca (Expressive) Aphasia",
+          "points": [
+            "Lesion in posterior inferior frontal gyrus (Brodmann areas 44 and 45)",
+            "Non-fluent, slow, halting, effortful, agrammatic telegraphic speech",
+            "Spoken auditory and written comprehension remains relatively preserved",
+            "Repetition of words and sentences is significantly impaired; patient is aware"
+          ]
+        },
+        "right": {
+          "title": "Wernicke (Receptive) Aphasia",
+          "points": [
+            "Lesion in posterior superior temporal gyrus (Brodmann area 22)",
+            "Fluent, effortless, melodic speech devoid of semantic meaning (word salad)",
+            "Severely impaired auditory comprehension and written comprehension",
+            "Repetition impaired; patient unaware of linguistic deficits (anosognosia)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Damage to the posterior superior temporal gyrus of the dominant hemisphere disrupts language comprehension and semantic decoding. Patients with **Wernicke aphasia** speak fluently with natural grammar and intonation, but produce empty, nonsensical sentences filled with paraphasic errors, exhibiting severe impairment in understanding spoken and written speech.",
+      "say": "Wernicke aphasia causes fluent but meaningless word salad speech with poor comprehension from temporal damage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "area_22_stroke",
+            "label": "Superior Temporal Gyrus Infarction Destroys Brodmann Area 22 (Wernicke)"
+          },
+          {
+            "id": "phoneme_decode",
+            "label": "Auditory Word-Form Recognition and Lexical Retrieval Fail Completely"
+          },
+          {
+            "id": "fluent_output",
+            "label": "Intact Broca Area Emits Fluent Speech Unshackled from Semantic Constraints"
+          },
+          {
+            "id": "word_salad",
+            "label": "Patient Produces Rapid, Paraphasic, Incomprehensible Word Salad"
+          }
+        ],
+        "edges": [
+          [
+            "area_22_stroke",
+            "phoneme_decode"
+          ],
+          [
+            "phoneme_decode",
+            "fluent_output"
+          ],
+          [
+            "fluent_output",
+            "word_salad"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The subcortical white matter tract linking Wernicke receptive area directly to Broca motor speech area is the arcuate fasciculus. Infarction of the arcuate fasciculus spares both fluent spontaneous speech production and auditory language comprehension, but selectively obliterates repetition, manifesting clinically as **conduction aphasia**.",
+      "say": "Conduction aphasia from arcuate fasciculus lesions spares speech and comprehension but destroys repetition.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "comprehend_sound",
+            "label": "Spoken Words Heard and Decoded Accurately in Intact Wernicke Area"
+          },
+          {
+            "id": "arcuate_sever",
+            "label": "Arcuate Fasciculus Transected, Blocking Direct Forward Transmission to Frontal Lobe"
+          },
+          {
+            "id": "broca_intact",
+            "label": "Broca Area Can Formulate Fluent Independent Spontaneous Verbal Output"
+          },
+          {
+            "id": "repetition_loss",
+            "label": "Patient Cannot Repeat Spoken Phrases (e.g., 'No ifs, ands, or buts')"
+          }
+        ],
+        "edges": [
+          [
+            "comprehend_sound",
+            "arcuate_sever"
+          ],
+          [
+            "arcuate_sever",
+            "broca_intact"
+          ],
+          [
+            "arcuate_sever",
+            "repetition_loss"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

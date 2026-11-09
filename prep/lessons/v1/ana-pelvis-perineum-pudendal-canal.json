@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pelvis-perineum",
+ "subject": "anatomy",
+ "title": "Pudendal Canal, Pudendal Nerve, Internal Iliac Artery, and Rectum",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The pudendal canal (Alcock canal) is a horizontal fascial tunnel situated in the lateral wall of the ischioanal fossa. Formed by a splitting of the **obturator fascia** covering the medial surface of the obturator internus muscle, it lies approximately four centimetres above the ischial tuberosity. It transmits the pudendal nerve and internal pudendal vessels.",
+   "say": "Carved into the obturator fascia on the lateral ischioanal wall, the pudendal canal transmits the pudendal neurovascular bundle four centimetres above the ischial tuberosity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wall of Canal",
+     "Anatomical Boundary",
+     "Functional Relation"
+    ],
+    "rows": [
+     [
+      "Lateral wall",
+      "Obturator internus muscle and ischium",
+      "Muscular origin from pelvic surface of obturator membrane"
+     ],
+     [
+      "Medial wall",
+      "Splitting of obturator fascia (Alcock fascia)",
+      "Directly faces adipose tissue of ischioanal fossa"
+     ],
+     [
+      "Contents",
+      "Pudendal nerve and internal pudendal vessels",
+      "Enters posteriorly at lesser sciatic notch, exits anteriorly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pudendal nerve arises from the ventral rami of spinal nerves S2, S3, and S4 within the pelvic cavity. It exits the greater sciatic foramen below the piriformis muscle, curls around the posterior surface of the **ischial spine** and sacrospinous ligament, and enters the perineum through the lesser sciatic foramen to enter the pudendal canal.",
+   "say": "Originating from S2 through S4, the pudendal nerve loops behind the ischial spine to enter the lesser sciatic foramen. Obstetricians use this spine to guide local anaesthetic infiltration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Pelvic Cavity (Roots S2, S3, S4 assemble on piriformis)"
+     },
+     {
+      "id": "p2",
+      "label": "Greater Sciatic Foramen (Leaves pelvis in infrapiriform compartment)"
+     },
+     {
+      "id": "p3",
+      "label": "Ischial Spine Landmark (Hooks around sacrospinous ligament with internal pudendal artery)"
+     },
+     {
+      "id": "p4",
+      "label": "Lesser Sciatic Foramen (Enters ischioanal fossa to traverse Alcock canal)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During vaginal delivery, transvaginal pudendal nerve block provides perineal somatic analgesia for forceps delivery or episiotomy. The obstetrician palpates the **ischial spine** through the lateral vaginal wall, guiding a needle through the sacrospinous ligament immediately posterior to the spine to bathe the nerve in local anaesthetic without piercing the adjacent internal pudendal artery.",
+   "say": "Transvaginal pudendal nerve block targets the nerve as it hooks behind the ischial spine. Infiltration through the sacrospinous ligament numbs the entire somatic perineum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pudendal Nerve Block Anaesthesia",
+     "points": [
+      "Anaesthetises skin of perineum, lower vagina, and vulva",
+      "Relaxes external anal sphincter and levator ani",
+      "Abolishes somatic pain of stretching and episiotomy incision",
+      "Preserves autonomic labour contractions of uterine fundus"
+     ]
+    },
+    "right": {
+     "title": "Critical Vascular Precaution",
+     "points": [
+      "Internal pudendal artery lies lateral to nerve on spine",
+      "Aspiration test mandatory before injecting local anaesthetic",
+      "Prevents intravascular toxicity or retroperitoneal haematoma",
+      "Avoids injury to sciatic nerve situated more laterally"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Within the pudendal canal, the nerve gives off its terminal branches. The first branch is the inferior rectal nerve, which traverses the ischioanal fat medially to supply the external anal sphincter and perianal skin. The nerve then bifurcates into the **perineal nerve** supplying the urogenital muscles and scrotal/labial skin, and the dorsal nerve of the penis or clitoris.",
+   "say": "Branching inside Alcock canal yields the inferior rectal nerve, the perineal nerve, and the dorsal nerve of the penis or clitoris. These provide complete sensorimotor perineal innervation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Inferior Rectal Nerve (External anal sphincter, lining below pectinate line, perianal skin)"
+     },
+     {
+      "id": "b2",
+      "label": "Perineal Nerve (Deep branch to urogenital muscles; superficial posterior scrotal/labial branches)"
+     },
+     {
+      "id": "b3",
+      "label": "Dorsal Nerve of Penis/Clitoris (Traverses deep pouch to supply glans and sensory skin)"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The internal iliac artery is the chief vascular trunk supplying the pelvis, perineum, and gluteal region. Originating at the bifurcation of the common iliac artery opposite the lumbosacral disc, the **internal iliac** descends to the upper margin of the greater sciatic foramen, where it terminates by dividing into an anterior trunk and a posterior trunk.",
+   "say": "Originating opposite the lumbosacral joint, the internal iliac artery descends into the pelvis. It divides at the greater sciatic notch into anterior and posterior trunks.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-internal-iliac-artery-ligation.webp",
+    "alt": "Surgical field showing bilateral internal iliac artery ligation to control pelvic haemorrhage",
+    "caption": "Surgical exposure and anatomical ligation of the internal iliac artery anterior trunk for intractable obstetric haemorrhage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The branches of the internal iliac artery follow a remarkably consistent segmental distribution. The posterior trunk yields purely parietal branches: iliolumbar, lateral sacral, and the large superior gluteal artery. In contrast, the **anterior trunk** supplies both visceral and parietal branches, including the umbilical, obturator, inferior vesical, uterine, middle rectal, internal pudendal, and inferior gluteal arteries.",
+   "say": "The posterior trunk gives rise only to parietal vessels: iliolumbar, lateral sacral, and superior gluteal. The anterior trunk emits visceral conduits along with internal pudendal and inferior gluteal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Division",
+     "Arterial Branches",
+     "Territory Supplied"
+    ],
+    "rows": [
+     [
+      "Posterior trunk (parietal only)",
+      "Iliolumbar, lateral sacral, superior gluteal",
+      "Iliac fossa, cauda equina, sacrum, gluteus medius and minimus"
+     ],
+     [
+      "Anterior trunk (visceral branches)",
+      "Superior vesical (from umbilical), inferior vesical/vaginal, uterine, middle rectal",
+      "Urinary bladder, prostate, uterus, vagina, lower rectal muscularis"
+     ],
+     [
+      "Anterior trunk (parietal branches)",
+      "Obturator, internal pudendal, inferior gluteal",
+      "Adductor thigh, perineum and erectile roots, gluteus maximus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rectum begins at the level of the third sacral vertebra as the continuation of the sigmoid colon, terminating at the anorectal junction where it pierces the pelvic diaphragm. The lumen exhibits three permanent crescentic transverse mucosal folds called the **valves of Houston** (two on the left, one on the right), which support the weight of faecal mass.",
+   "say": "Extending from S3 to the pelvic floor, the rectum features three transverse crescentic folds of Houston. These shelve the faecal column to prevent premature descent.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-rectum.svg",
+    "alt": "Coronal anatomical diagram of rectum showing transverse valves of Houston and peritoneal reflections",
+    "caption": "Internal mucosal anatomy of the rectum displaying the three transverse rectal folds of Houston. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Peritoneal relationships divide the rectum into three distinct thirds that dictate surgical resection and metastatic dissemination patterns. The **upper third** is covered by peritoneum on its anterior and lateral surfaces; the middle third is covered only anteriorly where it reflects onto the bladder or uterus; and the lower third is entirely retroperitoneal and subdiaphragmatic.",
+   "say": "Peritoneal cover covers the upper third anteriorly and laterally, the middle third anteriorly only, and leaves the lower third entirely bare in the retroperitoneum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peritoneal Coverage of Rectum",
+     "points": [
+      "Upper third: Anterior and lateral surfaces peritonised",
+      "Middle third: Anterior surface only covered by peritoneum",
+      "Peritoneal reflection forms pouch of Douglas or rectovesical pouch",
+      "Lower third: Completely extraperitoneal (ampulla)"
+     ]
+    },
+    "right": {
+     "title": "Vascular Drainage and Portosystemic Anastomosis",
+     "points": [
+      "Superior rectal vein drains via inferior mesenteric to portal vein",
+      "Middle and inferior rectal veins drain to internal iliac (caval)",
+      "Rectal submucosal venous plexus links portal and caval systems",
+      "Venous engorgement causes internal and external haemorrhoids"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "51010ea3-1da8-4ff6-9ef0-0a5879a83d73",
+  "593f6b45-12c8-47c0-bf21-99eeae3f5ce8",
+  "5d59850c-e2f4-411a-a1db-7aa44ee940fe"
+ ]
+}

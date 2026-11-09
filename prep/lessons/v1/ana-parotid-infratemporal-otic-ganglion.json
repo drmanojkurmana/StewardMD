@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Otic Ganglion, Pterygoid Venous Plexus, and Muscles of Mastication",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The otic ganglion is a peripheral parasympathetic ganglion situated in the infratemporal fossa immediately below the foramen ovale. Topographically, the **otic ganglion** is intimately related to the trunk of the mandibular nerve, lying on its medial surface sandwiched against the tensor veli palatini muscle. Functionally, it relays secretomotor impulses to the parotid gland.",
+   "say": "Located below foramen ovale, the otic ganglion rests on the medial aspect of the mandibular nerve trunk. Functionally, it serves as the parasympathetic relay for the parotid gland.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-frey.svg",
+    "alt": "Anatomical schematic showing the position and roots of the otic ganglion in the infratemporal space",
+    "caption": "Topographical location of the otic ganglion and parasympathetic secretomotor relay pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The otic ganglion receives three distinct functional roots. Its parasympathetic motor root is formed by the lesser petrosal nerve (CN IX), which synapses within the ganglion. Its sympathetic root derives from the plexus on the middle meningeal artery (vasoconstrictor). Crucially, motor fibres from the **nerve to medial pterygoid** pass directly through the ganglion without synapsing to innervate tensor veli palatini and tensor tympani.",
+   "say": "The otic ganglion receives parasympathetic, sympathetic, and sensory roots. Motor fibres from the mandibular nerve pass through without synapsing to innervate tensor veli palatini and tensor tympani.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglionic Root",
+     "Originating Conduit",
+     "Synaptic Behaviour in Otic Ganglion"
+    ],
+    "rows": [
+     [
+      "Parasympathetic (motor)",
+      "Lesser petrosal nerve (CN IX via tympanic plexus)",
+      "SYNAPSES with postganglionic secretomotor neurons supplying parotid"
+     ],
+     [
+      "Sympathetic",
+      "Plexus around middle meningeal artery",
+      "PASSES THROUGH without synapse; postganglionic vasoconstrictor fibres"
+     ],
+     [
+      "Somatic motor (V3)",
+      "Nerve to medial pterygoid",
+      "PASSES THROUGH without synapse; innervates tensor tympani and tensor veli palatini"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surrounding and infiltrating the lateral pterygoid muscle in the infratemporal fossa is the pterygoid venous plexus, an extensive, valveless venous rete. The **pterygoid plexus** collects venous tributaries that correspond to the branches of the maxillary artery, ultimately coalescing posteriorly to form the short maxillary vein, which drains into the retromandibular vein.",
+   "say": "The pterygoid venous plexus surrounds the lateral pterygoid muscle. Collecting blood from masticatory tissues, it drains posteriorly into the maxillary vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Masticatory and Dental Inflow (Receives deep temporal, alveolar, and meningeal veins)"
+     },
+     {
+      "id": "p2",
+      "label": "Pterygoid Venous Plexus (Intricate venous meshwork embedding lateral pterygoid)"
+     },
+     {
+      "id": "p3",
+      "label": "Maxillary Vein (Unites with superficial temporal to form retromandibular vein)"
+     },
+     {
+      "id": "p4",
+      "label": "Retromandibular Vein (Main venous exit from infratemporal fossa)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the pterygoid venous plexus is entirely valveless, it serves as an anatomical crossroads linking superficial facial veins with deep intracranial sinuses. It communicates with the facial vein via the deep facial vein, and with the **cavernous sinus** through emissary veins traversing foramen ovale and foramen lacerum. Septic odontogenic infections can track through this network into cavernous sinus thrombosis.",
+   "say": "Lacking valves, the pterygoid plexus communicates with the facial vein and cavernous sinus. Infected emboli from lower molar abscesses can track retrogradely into the skull.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cavernous-sinus.svg",
+    "alt": "Anatomical schematic showing venous connections between pterygoid venous plexus and intracranial cavernous sinus",
+    "caption": "Emissary venous communications connecting the infratemporal pterygoid plexus to the intracranial cavernous sinus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The four classic muscles of mastication develop from the mesoderm of the first pharyngeal arch and are innervated by the mandibular division of the trigeminal nerve (CN V3). These comprise the masseter, temporalis, medial pterygoid, and **lateral pterygoid**. Together, they execute elevation, depression, protrusion, retraction, and side-to-side grinding movements of the mandible.",
+   "say": "Four muscles of mastication derive from the first pharyngeal arch, innervated by mandibular nerve V3: masseter, temporalis, medial pterygoid, and lateral pterygoid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle",
+     "Origin and Insertion",
+     "Primary Mandibular Action"
+    ],
+    "rows": [
+     [
+      "Masseter",
+      "Zygomatic arch to angle and lateral ramus of mandible",
+      "Powerful elevation (closing jaw) and slight protrusion"
+     ],
+     [
+      "Temporalis",
+      "Temporal fossa to coronoid process and anterior ramus",
+      "Powerful elevation; posterior horizontal fibres retract the mandible"
+     ],
+     [
+      "Medial pterygoid",
+      "Pterygoid fossa and tuberosity of maxilla to medial angle",
+      "Elevation and assistance in side-to-side grinding chewing"
+     ],
+     [
+      "Lateral pterygoid",
+      "Infratemporal crest and lateral pterygoid plate to condyle and disc",
+      "Only muscle that depresses (opens) the jaw; protrusion and side-to-side excursion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The lateral pterygoid is the only muscle of mastication that opens the mouth. Arising by two heads from the greater wing of the sphenoid and lateral pterygoid plate, the **lateral pterygoid** inserts into the pterygoid fovea on the anterior neck of the mandible and the articular disc of the temporomandibular joint. Bilateral contraction pulls the condyles forward, depressing and protruding the chin.",
+   "say": "The lateral pterygoid is the only masticatory muscle that opens the mouth. Contracting bilaterally, it pulls the mandibular condyles and articular discs forward to open the jaw.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jaw Closers (Elevators)",
+     "points": [
+      "Masseter, temporalis, and medial pterygoid muscles",
+      "Antigravity muscles with immense closing force",
+      "Innervated by branches of mandibular nerve V3",
+      "Tetanus toxin causes uncontrolled spasm (trismus / lockjaw)"
+     ]
+    },
+    "right": {
+     "title": "Jaw Opener (Depressor)",
+     "points": [
+      "Lateral pterygoid muscle (assisted by digastric and gravity)",
+      "Pulls condyle and intra-articular disc anteriorly",
+      "Initiates mouth opening and forward protrusion",
+      "Spasm prevents jaw closure in acute TMJ dislocation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unilateral contraction of the lateral pterygoid pulls the ipsilateral mandibular condyle forward and medially while the contralateral condyle rotates in place. This alternating action moves the chin to the opposite side, producing the essential grinding excursion of **mastication**. In unilateral trigeminal motor paralysis, pterygoid weakness causes the jaw to deviate towards the paralysed side on opening.",
+   "say": "Unilateral lateral pterygoid action pushes the chin to the opposite side during chewing. In trigeminal motor palsy, the jaw deviates toward the paralyzed side on opening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Unilateral Trigeminal Motor Deficit (Paralysis of left pterygoid muscles)"
+     },
+     {
+      "id": "p2",
+      "label": "Active Contralateral Drive (Right lateral pterygoid contracts unopposed)"
+     },
+     {
+      "id": "p3",
+      "label": "Mandibular Deviation (Right condyle pushes forward; chin deviates to paralysed left side)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During forceful local dental anaesthesia, an inferior alveolar nerve block targets the nerve as it enters the mandibular foramen. The needle traverses the pterygomandibular space between the ramus of the mandible and the **medial pterygoid** muscle. Inadvertent posterior penetration into the parotid gland can anesthetise the facial nerve, causing transient ipsilateral facial paralysis.",
+   "say": "Inferior alveolar nerve block infiltrates the pterygomandibular space. Inadvertent deep posterior injection into the parotid gland causes temporary facial nerve paralysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Landmark",
+     "Anatomical Target",
+     "Complication to Avoid"
+    ],
+    "rows": [
+     [
+      "Coronoid notch",
+      "Greatest concavity on anterior mandibular border",
+      "Defines horizontal level for needle insertion"
+     ],
+     [
+      "Pterygomandibular raphe",
+      "Fold formed by buccinator and superior constrictor",
+      "Needle inserted lateral to raphe into pterygomandibular space"
+     ],
+     [
+      "Lingula and foramen",
+      "Spike of bone shielding inferior alveolar foramen",
+      "Anaesthetic deposited immediately superior to bony lingula"
+     ],
+     [
+      "Parotid gland capsule",
+      "Posterior boundary behind mandibular ramus",
+      "Posterior needle over-insertion numbs facial nerve branches"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

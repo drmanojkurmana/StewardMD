@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-neck-triangles",
+ "subject": "anatomy",
+ "title": "Anterior Triangle Subdivisions, Posterior Triangle, and Erb Point",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The sternocleidomastoid muscle divides the neck into an anterior triangle and a posterior triangle. The anterior triangle is bounded anteriorly by the midline of the neck, posteriorly by the anterior border of sternocleidomastoid, and superiorly by the lower border of the mandible. The **anterior triangle** is further subdivided by the digastric muscle and omohyoid into four smaller triangles.",
+   "say": "Sternocleidomastoid divides the neck into anterior and posterior triangles. The anterior triangle is bounded by the midline, mandible, and muscle, subdivided into four smaller triangles.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-neck-triangles.svg",
+    "alt": "Anatomical schematic showing subdivisions of the anterior and posterior triangles of the neck",
+    "caption": "Topographical boundaries and muscular subdivisions of the cervical triangles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The four subdivisions of the anterior triangle are the submental, digastric (submandibular), carotid, and muscular triangles. The submental triangle is unique as the only **unpaired triangle**, situated between the anterior bellies of the two digastric muscles and the hyoid bone, with its floor formed by the mylohyoid muscles.",
+   "say": "Four anterior subdivisions exist: submental, digastric, carotid, and muscular triangles. The submental triangle is solitary in the midline, bounded by both digastrics and the hyoid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triangle",
+     "Muscular Boundaries",
+     "Major Contents"
+    ],
+    "rows": [
+     [
+      "Submental (unpaired)",
+      "Anterior bellies of digastrics and body of hyoid bone",
+      "Submental lymph nodes and submental vein tributaries"
+     ],
+     [
+      "Digastric (paired)",
+      "Anterior and posterior digastric bellies, inferior mandibular margin",
+      "Submandibular gland, facial artery and vein, hypoglossal nerve (XII)"
+     ],
+     [
+      "Carotid (paired)",
+      "Posterior digastric, superior belly omohyoid, anterior border SCM",
+      "Common carotid bifurcation, IJV, vagus, hypoglossal, ansa cervicalis"
+     ],
+     [
+      "Muscular (paired)",
+      "Midline of neck, superior omohyoid, anterior border SCM",
+      "Infrahyoid strap muscles, thyroid gland, larynx, trachea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The carotid triangle is an exceptionally vital surgical territory bounded by the posterior belly of digastric, superior belly of omohyoid, and anterior border of sternocleidomastoid. Within this triangle lies the bifurcation of the common carotid artery into the **internal carotid** (which gives no branches in the neck) and the external carotid artery (which gives off multiple anterior, posterior, and medial branches).",
+   "say": "The carotid triangle houses the common carotid bifurcation. The internal carotid emits no branches in the neck, while the external carotid gives off multiple collateral vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-carotid-branches.svg",
+    "alt": "Anatomical schematic of carotid triangle showing common carotid bifurcation and external carotid branches",
+    "caption": "Surgical anatomy of the carotid bifurcation within the carotid triangle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "At the common carotid bifurcation at the level of the upper border of thyroid cartilage (C4) lie two autonomic structures. The carotid sinus is a baroreceptor dilatation of the proximal internal carotid wall innervated by the glossopharyngeal nerve (sinus nerve of Hering). The **carotid body** is an oval chemoreceptor nestled behind the bifurcation that monitors arterial blood oxygen tension.",
+   "say": "At the C4 bifurcation lie two autonomic sensors: the carotid sinus baroreceptor in the vessel wall, and the carotid body chemoreceptor monitoring arterial oxygen tension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carotid Sinus (Baroreceptor)",
+     "points": [
+      "Dilatation at the origin of internal carotid artery",
+      "Thinned tunica media with rich baroreceptor nerve endings",
+      "Monitors systemic blood pressure changes",
+      "External massage stimulates CN IX, producing reflex bradycardia"
+     ]
+    },
+    "right": {
+     "title": "Carotid Body (Chemoreceptor)",
+     "points": [
+      "Minute neuroendocrine glomus tissue behind bifurcation",
+      "Richly vascularised parenchymal glomus cells",
+      "Responds primarily to hypoxaemia (low PaO2) and acidosis",
+      "Site of benign carotid body tumour (paraganglioma / chemodectoma)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The posterior triangle is bounded anteriorly by the posterior border of sternocleidomastoid, posteriorly by the anterior border of trapezius, and inferiorly by the middle third of the clavicle. Its muscular floor is formed by splenius capitis, levator scapulae, **scalenus medius**, and scalenus posterior, all carpeted by the dense prevertebral layer of deep cervical fascia.",
+   "say": "Bounded by sternocleidomastoid, trapezius, and the clavicle, the posterior triangle rests on a muscular floor of splenius capitis, levator scapulae, and the scalenes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Anterior Border: Posterior margin of sternocleidomastoid"
+     },
+     {
+      "id": "p2",
+      "label": "Posterior Border: Anterior margin of trapezius"
+     },
+     {
+      "id": "p3",
+      "label": "Inferior Base: Middle third of clavicle"
+     },
+     {
+      "id": "p4",
+      "label": "Roof: Investing layer of deep cervical fascia pierced by EJV"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p1",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coursing obliquely through the posterior triangle is the accessory nerve (cranial nerve XI). Emerging from beneath the posterior border of sternocleidomastoid at the junction of its upper and middle thirds, the **accessory nerve** runs within the investing fascia across the floor on levator scapulae to enter the anterior border of trapezius, five centimetres above the clavicle.",
+   "say": "The spinal accessory nerve traverses the posterior triangle superficially within the investing fascia. It crosses levator scapulae to innervate the trapezius muscle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "SCM Emergence (Leaves posterior border of SCM at upper/middle third junction)"
+     },
+     {
+      "id": "a2",
+      "label": "Superficial Fascial Course (Crosses posterior triangle embedded in investing fascia roof)"
+     },
+     {
+      "id": "a3",
+      "label": "Trapezius Entry (Disappears beneath anterior border of trapezius 5 cm above clavicle)"
+     },
+     {
+      "id": "a4",
+      "label": "Iatrogenic Risk (Exquisite vulnerability to injury during lymph node biopsy)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the accessory nerve lies exceptionally superficial within the investing fascia roof of the posterior triangle rather than deep to the muscular floor, it is the most frequently injured nerve during minor neck surgery. Accidental transection during posterior triangle cervical lymph node biopsy causes paralysis of **trapezius**, resulting in shoulder droop, winging of the scapula, and inability to abduct the arm above the horizontal plane.",
+   "say": "Traversing the roof of the triangle, the accessory nerve is easily injured during lymph node biopsies. Transection paralyzes trapezius, causing shoulder droop and impaired arm abduction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature of CN XI Injury",
+     "Underlying Pathophysiology",
+     "Physical Examination Sign"
+    ],
+    "rows": [
+     [
+      "Shoulder droop",
+      "Loss of upper trapezius muscle tone",
+      "Affected shoulder rests lower than normal side"
+     ],
+     [
+      "Inability to shrug",
+      "Complete denervation of trapezius muscle",
+      "Weakness against manual downward shoulder pressure"
+     ],
+     [
+      "Impaired arm abduction",
+      "Loss of scapular upward rotation",
+      "Cannot abduct arm above 90 degrees horizontal plane"
+     ],
+     [
+      "Scapular winging",
+      "Lateral displacement and inferior rotation",
+      "Scapula displaced laterally (unlike medial winging of serratus anterior)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Erb point of the neck (punctum nervosum) is situated at the midpoint of the posterior border of the sternocleidomastoid muscle. At this exact locus, four cutaneous sensory branches of the **cervical plexus** emerge from beneath the muscle: the lesser occipital (C2), great auricular (C2, C3), transverse cervical (C2, C3), and supraclavicular nerves (C3, C4). This is the target for superficial cervical plexus block.",
+   "say": "Erb point lies at the midpoint of the posterior sternocleidomastoid border. Four cutaneous cervical plexus nerves emerge here, marking the site for superficial cervical plexus blocks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ascending Branches from Erb Point",
+     "points": [
+      "Lesser occipital nerve (C2): ascends to scalp behind ear",
+      "Great auricular nerve (C2, C3): ascends toward angle of mandible",
+      "Supplies sensation to lower auricle, earlobe, and parotid skin",
+      "Vulnerable during high carotid endarterectomy incisions"
+     ]
+    },
+    "right": {
+     "title": "Transverse & Descending Branches",
+     "points": [
+      "Transverse cervical nerve (C2, C3): curves across SCM to anterior neck",
+      "Supraclavicular nerves (C3, C4): medial, intermediate, and lateral twigs",
+      "Supply cutaneous sensation down to second rib and shoulder",
+      "Infiltrated for thyroidectomy and clavicular fracture surgery"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "5ba470a0-a891-4b17-aba1-e25fe0a413a3",
+  "d67d8ce1-bbf8-4595-8a1d-5c7a229ae03e",
+  "f5ad4886-ad4b-48c0-a50c-adbdbc2502ae"
+ ]
+}

@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-spinal-cord",
+ "subject": "anatomy",
+ "title": "Spinal Cord Segments, Cauda Equina, and Lumbar Puncture",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The spinal cord is the cylindrical lower part of the central nervous system occupying the vertebral canal, measuring forty-five centimetres in length in adult males. In the adult, the **spinal cord** terminates inferiorly at the lower border of vertebral level L1 (or upper L2) as a tapered cone termed the conus medullaris. In newborns, it terminates lower, opposite vertebral level L3.",
+   "say": "Measuring forty-five centimetres, the adult spinal cord terminates at the lower border of L1 as the conus medullaris. In the newborn, the cord extends lower to L3.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cord-section.svg",
+    "alt": "Anatomical cross section of the spinal cord showing grey matter horns, white matter columns, and central canal",
+    "caption": "Cross-sectional parenchymal architecture of the spinal cord showing central grey matter and white matter tracts. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the vertebral column elongates much more rapidly than the spinal cord during fetal development, a marked disparity develops between spinal cord segments and vertebral levels. In the cervical region, add one to the vertebral spine to find the **cord segment**; in upper thoracic (T1-T6), add two; in lower thoracic (T7-T9), add three; while vertebrae T10-T12 overlie lumbar and sacral segments.",
+   "say": "Disproportionate vertebral growth creates disparity between cord segments and vertebrae. Lower thoracic spines overlie lumbar segments, while T12 and L1 overlie sacral segments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vertebral Spinous Process Level",
+     "Mathematical Rule of Thumb",
+     "Underlying Spinal Cord Segment"
+    ],
+    "rows": [
+     [
+      "C1 to C7 cervical spines",
+      "Add 1 to spine level",
+      "C2 to C8 cervical spinal cord segments"
+     ],
+     [
+      "T1 to T6 thoracic spines",
+      "Add 2 to spine level",
+      "T3 to T8 thoracic spinal cord segments"
+     ],
+     [
+      "T7 to T9 thoracic spines",
+      "Add 3 to spine level",
+      "T10 to L1 thoracolumbar spinal cord segments"
+     ],
+     [
+      "T10 spine",
+      "Fixed landmark",
+      "L1 and L2 spinal cord segments"
+     ],
+     [
+      "T11 spine",
+      "Fixed landmark",
+      "L3 and L4 spinal cord segments"
+     ],
+     [
+      "T12 spine",
+      "Fixed landmark",
+      "L5 and upper sacral segments"
+     ],
+     [
+      "L1 spine",
+      "Conus medullaris",
+      "Sacral (S1-S5) and coccygeal spinal segments"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extending downward from the apex of the conus medullaris is the filum terminale, a delicate fibrous thread derived from the pia mater. The **filum terminale** descends through the lumbar cistern, pierces the dural sac at S2, and anchors onto the dorsum of the coccyx. Tethering of the filum prevents excessive cephalic ascent of the cord during spinal movements.",
+   "say": "Extending from the conus medullaris, the pial filum terminale descends through the cistern. It pierces the dural sac at S2 to anchor onto the coccyx.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Conus Medullaris Apex (L1-L2 vertebral junction)"
+     },
+     {
+      "id": "f2",
+      "label": "Filum Terminale Internum (Pial thread traversing CSF of lumbar cistern to S2)"
+     },
+     {
+      "id": "f3",
+      "label": "Dural Sac Fundus (Pia merges with dura and arachnoid at S2 vertebral level)"
+     },
+     {
+      "id": "f4",
+      "label": "Filum Terminale Externum (Dense coccygeal ligament inserting onto first coccygeal segment)"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the spinal cord terminates at L1 while spinal nerves must exit their corresponding intervertebral foramina, the lumbosacral nerve roots elongate into an oblique descending spray resembling a horse's tail, designated the cauda equina. The **cauda equina** comprises the anterior and posterior nerve roots of spinal nerves L2 to Co1, bathed freely in the cerebrospinal fluid of the lumbar cistern.",
+   "say": "Lumbosacral roots stream downward like a horse tail to form the cauda equina. Bathed in the lumbar cistern CSF, they exit intervertebral foramina below the cord.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conus Medullaris Syndrome",
+     "points": [
+      "Location: T12-L1 vertebral level",
+      "Pathology: Lesion of sacral cord segments (upper motor neuron)",
+      "Symmetry: Bilateral and symmetrical presentation",
+      "Symptoms: Early urinary incontinence, saddle anaesthesia, preserved knee jerks"
+     ]
+    },
+    "right": {
+     "title": "Cauda Equina Syndrome",
+     "points": [
+      "Location: Below L1 vertebral level (lumbar cistern)",
+      "Pathology: Lesion of lumbosacral nerve roots (lower motor neuron)",
+      "Symmetry: Asymmetrical and unilateral presentation",
+      "Symptoms: Severe asymmetric radicular pain, flaccid leg weakness, late sphincter loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The spinal cord is enveloped by three protective meninges: outer dura mater, middle arachnoid mater, and inner pia mater. The dural sac and subarachnoid space extend inferiorly to the **second sacral vertebra** (S2). Below the termination of the cord at L1, the expanded subarachnoid space forms the lumbar cistern, holding cerebrospinal fluid and the floating nerve roots of the cauda equina.",
+   "say": "The dural sac terminates at S2, far below the L1 spinal cord termination. The resulting lumbar cistern holds CSF and the floating nerve roots of the cauda equina.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Spinal Meningeal Space",
+     "Anatomical Boundaries",
+     "Contained Tissues / Fluids"
+    ],
+    "rows": [
+     [
+      "Epidural space",
+      "Between spinal dural tube and vertebral periosteum",
+      "Internal vertebral venous plexus (Batson plexus) and adipose tissue"
+     ],
+     [
+      "Subdural space",
+      "Potential cleavage space between dura and arachnoid",
+      "Trace physiological serous lubricating fluid"
+     ],
+     [
+      "Subarachnoid space",
+      "Between arachnoid mater and pia mater",
+      "Cerebrospinal fluid (CSF) and descending cauda equina roots"
+     ],
+     [
+      "Pia mater",
+      "Adheres intimately to spinal cord parenchymal surface",
+      "Forms denticulate ligaments (21 pairs) and filum terminale"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lumbar puncture (spinal tap) safely samples cerebrospinal fluid by inserting a spinal needle into the lumbar cistern below the termination of the spinal cord. The intercristal line of **Jacoby line**, connecting the highest points of the iliac crests, crosses the vertebral column precisely at the L4 spinous process or L4-L5 intervertebral space, defining the safe puncture site.",
+   "say": "Lumbar puncture accesses the lumbar cistern below L1. The intercristal line connecting the iliac crests crosses at L4, identifying the safe L3-L4 or L4-L5 interspace.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Skin and Subcutaneous Tissue (Needle enters midline of L3-L4 or L4-L5 interspace)"
+     },
+     {
+      "id": "l2",
+      "label": "Supraspinous and Interspinous Ligaments (Fibrous midline ligaments provide friction resistance)"
+     },
+     {
+      "id": "l3",
+      "label": "Ligamentum Flavum (Dense elastic yellow ligament gives characteristic 'first pop')"
+     },
+     {
+      "id": "l4",
+      "label": "Epidural Space (Passes through venous fat layer without CSF flow)"
+     },
+     {
+      "id": "l5",
+      "label": "Dura-Arachnoid Maternal Complex (Punctures tough dura mater with 'second pop' into subarachnoid space)"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ],
+     [
+      "l4",
+      "l5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During lumbar puncture, the advancing needle traverses seven distinct anatomical layers in strict succession: skin, subcutaneous fat, supraspinous ligament, interspinous ligament, ligamentum flavum, epidural space, and the dura-arachnoid complex. Piercing the tough **ligamentum flavum** produces the characteristic first tactile pop, followed by the second pop as the needle breaches the dura into the subarachnoid space.",
+   "say": "The needle penetrates seven strata in order. Piercing the ligamentum flavum yields the first pop, followed by the dural puncture that yields clear CSF.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lumbar Puncture (Subarachnoid)",
+     "points": [
+      "Needle penetrates dura-arachnoid complex completely",
+      "Enters the subarachnoid space (lumbar cistern)",
+      "Clear CSF drips freely from needle hub",
+      "Used for CSF diagnostics and spinal anaesthesia"
+     ]
+    },
+    "right": {
+     "title": "Epidural Anaesthesia",
+     "points": [
+      "Needle stops within the epidural fat space",
+      "Does NOT penetrate the dura mater",
+      "Identified by loss of resistance to saline or air",
+      "Catheter infuses local anaesthetic bathing nerve roots"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The blood supply of the spinal cord is derived from one anterior spinal artery and two posterior spinal arteries, reinforced by segmental radicular arteries. The largest radicular feeder is the **artery of Adamkiewicz** (arteria radicularis magna), arising from a lower left intercostal or lumbar artery between T9 and L2. Surgical clamping of this artery during aortic aneurysm repair risks anterior spinal artery syndrome with paraplegia.",
+   "say": "One anterior and two posterior spinal arteries supply the cord, reinforced by the great radicular artery of Adamkiewicz. Interruption risks paraplegia and sphincter loss.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-spinal-cord-arteries.svg",
+    "alt": "Anatomical schematic showing anterior and posterior spinal arteries and radicular feeders including Adamkiewicz",
+    "caption": "Arterial vascular supply of the spinal cord highlighting the anterior spinal artery and artery of Adamkiewicz. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "0c53dc8e-9651-4dbc-8d11-74b7d378c6fc",
+  "21ef6458-b0f6-4be7-93f3-4beb25886133",
+  "4223a539-ecc7-4a2e-9f55-90df4554b7ba"
+ ]
+}

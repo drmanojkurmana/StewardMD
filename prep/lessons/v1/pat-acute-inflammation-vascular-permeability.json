@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-acute-inflammation",
+  "subject": "pathology",
+  "title": "Vascular Permeability, Endothelial Gaps, and Leukocyte Rolling",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Acute inflammation represents a rapid, stereotypical host defense response designed to deliver circulating leukocytes and plasma defense proteins directly to sites of microbial infection or tissue injury. The vascular hallmark of acute inflammation is the marked elevation of **vascular permeability**, transforming normally semipermeable microvessels into leaking conduits that permit protein-rich fluid exudation.",
+      "say": "Acute inflammation increases microvascular permeability to deliver plasma proteins and leukocytes to tissues.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cellulitis-fig1.webp",
+        "caption": "Acute bacterial soft-tissue cellulitis displaying the cardinal signs of rubor, tumor, calor, and dolor.",
+        "alt": "Cutaneous bacterial cellulitis showing intense rubor, calor, and edema"
+      }
+    },
+    {
+      "tx": "The classical signs of acute inflammation described by Celsus in antiquity and Virchow in the nineteenth century reflect underlying microvascular hemodynamics. Arteriolar vasodilation increases blood flow, producing heat and redness termed **calor and rubor**, while vascular leakage produces swelling termed tumor, and chemical mediators irritate sensory nerve endings to evoke pain (dolor) and loss of function.",
+      "say": "Arteriolar vasodilation and edema produce the cardinal signs: redness, heat, swelling, pain, and loss of function.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hemodynamic Changes",
+          "points": [
+            "Transient arteriolar vasoconstriction lasting a few seconds",
+            "Subsequent arteriolar vasodilation increasing local blood flow (hyperemia)",
+            "Opening of downstream microvascular capillary beds",
+            "Responsible for the cardinal signs of rubor (redness) and calor (heat)"
+          ]
+        },
+        "right": {
+          "title": "Permeability Changes",
+          "points": [
+            "Contraction of postcapillary venular endothelial cells",
+            "Formation of intercellular gaps permitting macromolecule escape",
+            "Outpouring of protein-rich fluid into interstitial spaces (tumor / edema)",
+            "Concentration of red cells slows microvascular velocity (stasis)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common and immediate mechanism increasing vascular permeability is endothelial cell contraction. Reversible binding of histamine, bradykinin, or leukotrienes to G-protein-coupled receptors on postcapillary venular endothelial cells triggers cytoskeletal phosphorylation, causing cells to contract and detach from one another to open **intercellular endothelial gaps**.",
+      "say": "Histamine and bradykinin contract postcapillary venular endothelial cells to open intercellular gaps.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "histamine_bind",
+            "label": "Mast Cell Histamine Binds H1 Receptors on Postcapillary Venule Endothelium"
+          },
+          {
+            "id": "calcium_myosin",
+            "label": "Intracellular Calcium Rise Phosphorylates Myosin Light Chain Kinase"
+          },
+          {
+            "id": "endothelial_contract",
+            "label": "Endothelial Cytoskeletal Filaments Contract, Retracting Cell Borders"
+          },
+          {
+            "id": "gap_formation",
+            "label": "Intercellular Gaps Open (0.1 to 1.0 um), Leaking Proteinaceous Exudate"
+          }
+        ],
+        "edges": [
+          [
+            "histamine_bind",
+            "calcium_myosin"
+          ],
+          [
+            "calcium_myosin",
+            "endothelial_contract"
+          ],
+          [
+            "endothelial_contract",
+            "gap_formation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to reversible endothelial contraction which peaks within fifteen minutes and resolves within half an hour, severe burns, necrotizing bacterial toxins, or physical lytic trauma cause direct endothelial injury. The resulting **direct vascular damage** produces immediate, prolonged leakage affecting all microvascular levels, including venules, capillaries, and arterioles, until thrombotic plugging or repair intervenes.",
+      "say": "Severe burns or toxins cause direct endothelial necrosis, leaking fluid until repaired or thrombosed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate Transient Response",
+          "points": [
+            "Mediated by histamine, bradykinin, leukotrienes C4/D4/E4, and substance P",
+            "Confined almost exclusively to postcapillary venules (20-60 um diameter)",
+            "Reversible endothelial cell contraction without structural cell death",
+            "Peaks within 5 to 10 minutes and subsides within 15 to 30 minutes"
+          ]
+        },
+        "right": {
+          "title": "Immediate Sustained Response",
+          "points": [
+            "Caused by severe thermal burns, lytic bacterial toxins, or severe trauma",
+            "Affects all microcirculatory levels: arterioles, capillaries, and venules",
+            "Direct endothelial cell detachment, necrosis, and basement membrane rupture",
+            "Persists for hours to days until vessels undergo thrombotic occlusion or repair"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "As protein-rich fluid escapes into the extravascular interstitium, intravascular red blood cell concentration increases dramatically, markedly elevating blood viscosity. This sluggish microvascular flow is **haemodynamic stasis**, which pushes heavier leukocytes out of the axial flowing stream toward the peripheral endothelial lining in a process termed margination.",
+      "say": "Stasis slows capillary flow, displacing leukocytes from the central axial stream to the vessel wall.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fluid_exudate",
+            "label": "Massive Fluid Outpouring Concentrates Intravascular Red Blood Cells"
+          },
+          {
+            "id": "viscosity_rises",
+            "label": "Blood Viscosity Rises, Slowing Velocity into Sluggish Hemodynamic Stasis"
+          },
+          {
+            "id": "axial_displacement",
+            "label": "Erythrocyte Rouleaux Exclude Leukocytes from Fast Central Axial Stream"
+          },
+          {
+            "id": "leukocyte_margin",
+            "label": "Leukocytes Tumble to Peripheral Stream, Marginating Against Vessel Wall"
+          }
+        ],
+        "edges": [
+          [
+            "fluid_exudate",
+            "viscosity_rises"
+          ],
+          [
+            "viscosity_rises",
+            "axial_displacement"
+          ],
+          [
+            "axial_displacement",
+            "leukocyte_margin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once marginated against the vascular endothelium, leukocytes tumble and roll along the endothelial surface via low-affinity transient tethering interactions. Mediated by specialized calcium-dependent carbohydrate-binding adhesion proteins known as **selectins**, these transient bonds break and reform rapidly under the shearing force of flowing blood.",
+      "say": "Selectins mediate low-affinity transient binding that allows leukocytes to roll along the endothelium.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endothelial Selectins (E-Selectin and P-Selectin)",
+          "points": [
+            "P-selectin pre-stored in Weibel-Palade bodies; mobilized to surface by histamine",
+            "E-selectin transcriptionally induced by TNF and IL-1 within 1 to 2 hours",
+            "Bind sialyl-Lewis X tetrasaccharide motifs on leukocyte glycoproteins",
+            "Mediate loose tethering and rolling of neutrophils along venular wall"
+          ]
+        },
+        "right": {
+          "title": "Leukocyte Selectin (L-Selectin)",
+          "points": [
+            "Constitutively expressed on microvilli tips of circulating neutrophils",
+            "Binds GlyCAM-1 and CD34 sialylated ligands on activated endothelium",
+            "Also directs lymphocyte homing across high endothelial venules in lymph nodes",
+            "Shed rapidly from leukocyte surface upon activation by chemokines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Within resting endothelial cells and circulating platelets, P-selectin is pre-synthesized and stored in specialized secretory cytoplasmic granules. Upon stimulation by histamine, thrombin, or platelet-activating factor, these **Weibel-Palade bodies** fuse with the plasma membrane within minutes, rapidly exocytosing P-selectin to the lumen to initiate leukocyte rolling without requiring new gene transcription.",
+      "say": "Weibel-Palade bodies rapidly exocytose pre-formed P-selectin to the endothelial surface upon histamine stimulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "histamine_trigger",
+            "label": "Mast Cell Histamine or Thrombin Stimulates Endothelial Receptors"
+          },
+          {
+            "id": "weibel_exocytosis",
+            "label": "Storage Granules (Weibel-Palade Bodies) Translocate to Apical Membrane"
+          },
+          {
+            "id": "p_selectin_present",
+            "label": "Pre-Formed P-Selectin and Von Willebrand Factor Displayed in Luminal Blood"
+          },
+          {
+            "id": "rolling_tether",
+            "label": "Marginated Neutrophils Catch on P-Selectin, Initiating Immediate Rolling"
+          }
+        ],
+        "edges": [
+          [
+            "histamine_trigger",
+            "weibel_exocytosis"
+          ],
+          [
+            "weibel_exocytosis",
+            "p_selectin_present"
+          ],
+          [
+            "p_selectin_present",
+            "rolling_tether"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While P-selectin provides immediate rapid tethering, sustained leukocyte rolling requires de novo transcriptional synthesis of E-selectin. Driven by macrophage-derived inflammatory cytokines interleukin-one and tumor necrosis factor, endothelial **E-selectin transcription** peaks at four to six hours, sustaining leukocyte recruitment to the inflamed site.",
+      "say": "Cytokines induce E-selectin expression on endothelium over four to six hours to sustain leukocyte rolling.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/erysipelas-fig1.webp",
+        "caption": "Sharply demarcated superficial streptococcal dermal infection illustrating intense cytokine-driven endothelial activation.",
+        "alt": "Cutaneous erysipelas showing intense dermal vascular dilatation and inflammatory recruitment"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

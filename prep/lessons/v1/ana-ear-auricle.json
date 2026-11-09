@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-ear",
+ "subject": "anatomy",
+ "title": "External Ear, Tympanic Membrane, and Middle Ear Ossicles",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The ear is the organ of hearing and equilibrium, divided into external ear, middle ear (tympanic cavity), and internal ear (labyrinth). The external ear consists of the auricle (pinna) and the external acoustic meatus. The **auricle** is structured from a single convoluted plate of elastic cartilage covered by thin skin, except at the fleshy lobule, which consists solely of fibrofatty tissue.",
+   "say": "The ear comprises external, middle, and internal divisions. The auricle consists of a single folded elastic cartilage sheet, except for the fibrofatty, cartilage-free lobule.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ossicle-chain.svg",
+    "alt": "Anatomical schematic showing external acoustic meatus, tympanic membrane, and middle ear ossicular chain",
+    "caption": "Acoustic conduction apparatus displaying the external meatus, tympanic membrane, and ossicles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The external acoustic meatus is an S-shaped canal approximately twenty-four millimetres in length extending from the concha to the tympanic membrane. To straighten the meatus for otoscopic examination in adults, the examiner must pull the pinna **upward and backward**. In infants, because the osseous meatus is not yet developed, the pinna must be drawn downward and backward.",
+   "say": "Measuring twenty-four millimetres, the S-shaped external meatus curves toward the eardrum. In adults, pulling the pinna upward and backward straightens the lumen for otoscopy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult Otoscopy Maneuver",
+     "points": [
+      "Cartilaginous outer 1/3 directed upward and backward",
+      "Osseous inner 2/3 directed downward and forward",
+      "Pinna pulled UPWARDS, BACKWARDS, and LATERALLY",
+      "Aligns cartilaginous and bony segments for straight line of sight"
+     ]
+    },
+    "right": {
+     "title": "Infant Otoscopy Maneuver",
+     "points": [
+      "Bony meatus absent; tympanic ring lies almost horizontal",
+      "Canal formed almost entirely of soft cartilaginous tissue",
+      "Pinna pulled DOWNWARDS and BACKWARDS",
+      "Avoids crushing fragile anterior and posterior canal walls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The tympanic membrane (eardrum) is a thin, semitransparent, pearly-grey disc placed obliquely at the medial end of the meatus, sloping downwards, forwards, and laterally at an angle of fifty-five degrees. The **tympanic membrane** comprises three layers: an outer cutaneous layer from ectoderm, a middle fibrous layer from mesoderm, and an inner mucous layer from endoderm.",
+   "say": "Placed obliquely at a fifty-five degree angle, the trilaminar pearly-grey tympanic membrane derives from all three embryonic germ layers: ectoderm, mesoderm, and endoderm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Outer Layer (Cutaneous stratified squamous derived from first pharyngeal cleft ectoderm)"
+     },
+     {
+      "id": "t2",
+      "label": "Middle Layer (Fibrous stratum with radial and circular collagen fibres from mesoderm)"
+     },
+     {
+      "id": "t3",
+      "label": "Inner Layer (Mucous simple cuboidal lining derived from first pharyngeal pouch endoderm)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Otoscopic examination reveals landmarks that confirm membrane orientation. The handle of the malleus is firmly embedded in the middle layer, its tip creating a central depression termed the umbo. Projecting anteroinferiorly from the **umbo** is the cone of light, a bright triangular light reflection. Above the anterior and posterior malleolar folds lies the flaccid, thin pars flaccida (Shrapnell membrane).",
+   "say": "On otoscopy, the handle of the malleus indents the center of the membrane at the umbo. A bright cone of light radiates anteroinferiorly across the tense drum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Otoscopic Landmark",
+     "Quadrant / Location",
+     "Clinical / Pathological Significance"
+    ],
+    "rows": [
+     [
+      "Umbo",
+      "Center of tympanic membrane",
+      "Deepest point of concavity produced by tip of malleus handle"
+     ],
+     [
+      "Cone of light",
+      "Anteroinferior quadrant",
+      "Reflects otoscope beam; distortion signals middle ear effusion or retraction"
+     ],
+     [
+      "Pars tensa",
+      "Lower 4/5 of membrane",
+      "Contains dense radial and circular fibrous layers; vibrates to acoustic sound"
+     ],
+     [
+      "Pars flaccida (Shrapnell)",
+      "Upper 1/5 above lateral malleolar process",
+      "Lacks fibrous middle layer; primary site of origin for retraction cholesteatoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The middle ear (tympanic cavity) is a narrow, air-filled, biconcave space carved out of the petrous temporal bone. It is shaped like a six-sided box with a roof, floor, anterior, posterior, lateral, and medial walls. The **tegmental roof** (tegmen tympani) is a thin plate of petrous bone that separates the middle ear from the temporal lobe in the middle cranial fossa.",
+   "say": "The middle ear is a six-sided biconcave chamber within the temporal bone. Its thin tegmental roof separates the cavity from the temporal lobe in the middle cranial fossa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Middle Ear Wall",
+     "Anatomical Boundary Structure",
+     "Critical Neighboring Hazard"
+    ],
+    "rows": [
+     [
+      "Roof (Tegmental wall)",
+      "Tegmen tympani of petrous temporal bone",
+      "Otitis media erodes roof, causing temporal lobe brain abscess"
+     ],
+     [
+      "Floor (Jugular wall)",
+      "Thin bone separating cavity from jugular bulb",
+      "Glomus jugulare tumour erodes through floor into middle ear"
+     ],
+     [
+      "Anterior wall (Carotid wall)",
+      "Opening of Eustachian tube and internal carotid canal",
+      "Internal carotid artery pulsates separated only by thin bone lamella"
+     ],
+     [
+      "Posterior wall (Mastoid wall)",
+      "Aditus ad antrum, pyramid, chorda tympani entrance",
+      "Aditus connects directly with mastoid antrum and air cells"
+     ],
+     [
+      "Lateral wall (Membranous)",
+      "Tympanic membrane and bony epitympanic scutum",
+      "Site of myringotomy incision (performed in anteroinferior quadrant)"
+     ],
+     [
+      "Medial wall (Labyrinthine)",
+      "Promontory, fenestra vestibuli (oval), fenestra cochleae (round)",
+      "Separates middle ear from inner ear vestibule and cochlea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spanning the middle ear cavity from the tympanic membrane to the oval window is a chain of three movable auditory ossicles: the malleus (hammer), incus (anvil), and stapes (stirrup). The **malleus** attaches to the tympanic membrane via its handle, articulates with the incus at a synovial saddle joint, which in turn articulates with the stapes via a ball-and-socket joint.",
+   "say": "Three ossicles bridge the cavity: malleus, incus, and stapes. They transform acoustic vibrations of the tympanic membrane into hydraulic waves in the inner ear perilymph.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Malleus (Handle embedded in tympanic membrane; head in epitympanic recess)"
+     },
+     {
+      "id": "o2",
+      "label": "Incudomalleolar Joint (Synovial saddle joint transferring mechanical energy)"
+     },
+     {
+      "id": "o3",
+      "label": "Incus (Body articulates with malleus; long process articulates with stapes)"
+     },
+     {
+      "id": "o4",
+      "label": "Incudostapedial Joint (Synovial ball-and-socket joint)"
+     },
+     {
+      "id": "o5",
+      "label": "Stapes (Footplate fits into fenestra vestibuli / oval window)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ],
+     [
+      "o4",
+      "o5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ossicular chain functions as an acoustic impedance-matching transformer, compensating for the energy loss that occurs when sound travels from air into liquid perilymph. This amplification is achieved via two mechanisms: the hydraulic lever ratio (17:1 area ratio between large tympanic membrane and small **stapes footplate**) and the ossicular lever ratio (1.3:1), multiplying acoustic sound pressure twenty-two fold.",
+   "say": "The ossicles match acoustic impedance. The 17 to 1 area ratio of eardrum to stapes footplate multiplies acoustic pressure twenty-two fold to drive cochlear perilymph.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydraulic Area Ratio (17:1)",
+     "points": [
+      "Vibrating area of tympanic membrane: ~55 mm2",
+      "Surface area of stapes footplate: ~3.2 mm2",
+      "Focuses acoustic force onto tiny oval window",
+      "Generates a 17-fold amplification of pressure"
+     ]
+    },
+    "right": {
+     "title": "Ossicular Lever Ratio (1.3:1)",
+     "points": [
+      "Handle of malleus longer than long process of incus",
+      "Functions as a mechanical class 1 lever",
+      "Multiplies mechanical force by 1.3-fold",
+      "Total pressure amplification: 17 x 1.3 = ~22-fold"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Two minute skeletal muscles dampen excessive acoustic vibrations to protect the delicate inner ear. The tensor tympani arises from the cartilaginous auditory tube, inserting into the handle of the malleus; it is innervated by the mandibular nerve (CN V3). The **stapedius** is the smallest skeletal muscle in the body, arising from the pyramidal eminence to insert on the stapes neck, innervated by the facial nerve (CN VII).",
+   "say": "Tensor tympani and stapedius protect the inner ear from loud sounds. Stapedius, the smallest skeletal muscle in the body, is innervated by the facial nerve.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-auditory-pathway.svg",
+    "alt": "Anatomical schematic tracing acoustic auditory pathways from the middle ear to the auditory cortex",
+    "caption": "Acoustic transmission pathway from middle ear ossicles to brainstem cochlear nuclei. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

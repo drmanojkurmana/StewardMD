@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Bariatric Surgery, Laparoscopic Sleeve Gastrectomy, and Roux-en-Y Bypass",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Metabolic and **bariatric surgery** represents the most effective and durable intervention for achieving substantial long-term weight reduction and resolving obesity-related metabolic comorbidities. Standard indications establish surgical eligibility for patients with a body mass index of forty kilograms per square metre or higher, or a body mass index of thirty-five or higher accompanied by major comorbidities including type 2 diabetes mellitus, hypertension, obstructive sleep apnea, and non-alcoholic steatohepatitis.",
+   "say": "Bariatric surgery is indicated for individuals with a BMI of forty or higher, or a BMI of thirty-five or higher with major comorbidities like diabetes or hypertension.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-stomach-gross.webp",
+    "alt": "Anatomical schematic illustrating gastric divisions and greater curvature mobilization during bariatric surgery.",
+    "caption": "Surgical bariatric anatomy: mobilizing the greater curvature to configure metabolic restriction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In Asian populations, obesity-related cardiovascular and metabolic risks manifest at lower body mass index thresholds due to higher visceral adiposity. Consequently, revised consensus guidelines reduce the eligibility threshold for Asian patients to a body mass index of **thirty-five kilograms per square metre** without comorbidities, or thirty or higher in the presence of poorly controlled type 2 diabetes or metabolic syndrome.",
+   "say": "For Asian populations, bariatric criteria are lower: a BMI of thirty-five without comorbidities, or thirty or higher with diabetes, reflecting higher visceral adiposity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Population Standard",
+     "Class II Obesity (With Comorbidities)",
+     "Class III Obesity (Severe Obesity)"
+    ],
+    "rows": [
+     [
+      "International (Western)",
+      "BMI >= 35.0 kg/m2 + comorbidity",
+      "BMI >= 40.0 kg/m2 (regardless of comorbidities)"
+     ],
+     [
+      "Asian Consensus Guidelines",
+      "BMI >= 30.0 kg/m2 + comorbidity",
+      "BMI >= 35.0 kg/m2 (regardless of comorbidities)"
+     ],
+     [
+      "Metabolic Surgery Criterion",
+      "BMI >= 27.5 kg/m2 (Asian) with uncontrolled T2D",
+      "Experimental / Protocol-driven metabolic surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most commonly performed bariatric procedure globally is the **laparoscopic sleeve gastrectomy**. This procedure resects approximately seventy-five to eighty percent of the stomach along the greater curvature, transforming the stomach into a narrow, vertical tubular conduit. By dividing the gastrosplenic and gastrocolic omenta, the surgeon completely mobilizes the greater curvature from two to four centimetres proximal to the pylorus up to the left crus of the diaphragm.",
+   "say": "Laparoscopic sleeve gastrectomy removes seventy-five to eighty percent of the stomach along the greater curvature, leaving a narrow vertical tube calibrated over a bougie.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mob",
+      "label": "Laparoscopic Division of Greater Omentum & Short Gastric Vessels"
+     },
+     {
+      "id": "boug",
+      "label": "Placement of 36 to 40 French Orogastric Sizing Bougie"
+     },
+     {
+      "id": "staple",
+      "label": "Sequential Endoscopic Linear Stapling from Antrum to Angle of His"
+     },
+     {
+      "id": "rem",
+      "label": "Extraction of Resected Greater Curvature & Fundus Specimen"
+     },
+     {
+      "id": "test",
+      "label": "Methylene Blue or Air Leak Testing of Long Staple Line"
+     }
+    ],
+    "edges": [
+     [
+      "mob",
+      "boug"
+     ],
+     [
+      "boug",
+      "staple"
+     ],
+     [
+      "staple",
+      "rem"
+     ],
+     [
+      "rem",
+      "test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A sizing orogastric bougie measuring thirty-six to forty French is positioned along the lesser curvature to calibrate the diameter of the gastric sleeve, ensuring uniform restriction while preventing luminal stenosis. Resecting the gastric fundus eliminates the primary production site of the orexigenic hunger hormone **ghrelin**. Consequently, patients experience profound post-operative appetite suppression alongside volumetric mechanical restriction, achieving excess weight loss of sixty to seventy percent within twelve months.",
+   "say": "Sizing over a thirty-six to forty French bougie prevents strictures. Excising the gastric fundus eliminates the hunger hormone ghrelin, suppressing appetite.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical Restriction",
+     "points": [
+      "Tubular volume reduced to 100 to 150 mL",
+      "Promotes early satiety with tiny food portions",
+      "Preserves normal anatomical pyloric sphincter",
+      "Maintains normal physiological digestion"
+     ]
+    },
+    "right": {
+     "title": "Neuroendocrine Modulation",
+     "points": [
+      "Complete anatomical excision of gastric fundus",
+      "Profound drop in circulating ghrelin levels",
+      "Suppresses central hunger and hedonic appetite",
+      "Accelerates rapid gastric emptying into duodenum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most dreaded acute surgical complication following sleeve gastrectomy is a **staple-line leak**, occurring in one to two percent of cases. Over eighty percent of leaks arise at the proximal-most staple line near the gastroesophageal junction, also known as the angle of His. This vulnerable site is prone to localized ischemia from division of the posterior gastric artery, thinner tissue vascularity, and high downstream intra-luminal sleeve pressure.",
+   "say": "A staple-line leak occurs in up to two percent of sleeve gastrectomies, most commonly at the angle of His near the gastroesophageal junction due to high pressure and ischemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sleeve",
+      "label": "Construction of High-Pressure Tubular Gastric Sleeve"
+     },
+     {
+      "id": "isch",
+      "label": "Relative Ischemia at Angle of His from Short Gastric Division"
+     },
+     {
+      "id": "press",
+      "label": "Elevated Intraluminal Pressure Against Functional Pylorus"
+     },
+     {
+      "id": "leak",
+      "label": "Micro-Disruption Producing Proximal Staple-Line Leak"
+     },
+     {
+      "id": "tachy",
+      "label": "Clinical Unexplained Tachycardia (>120 bpm) Preceding Sepsis"
+     }
+    ],
+    "edges": [
+     [
+      "sleeve",
+      "isch"
+     ],
+     [
+      "isch",
+      "press"
+     ],
+     [
+      "press",
+      "leak"
+     ],
+     [
+      "leak",
+      "tachy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unexplained persistent **tachycardia exceeding one hundred and twenty beats per minute** is the single earliest and most reliable clinical indicator of an anastomotic or staple-line leak in the bariatric patient. Other signs include tachypnea, fever, left shoulder tip pain, and oliguria. A hemodynamically unstable patient requires immediate emergency laparoscopic exploration, peritoneal lavage, external drain placement, and subsequent endoscopic covered metallic stenting.",
+   "say": "Persistent tachycardia over one hundred and twenty beats per minute is the earliest sign of a leak. Unstable patients need emergency exploration, drainage, or stenting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Presentation",
+     "Significance",
+     "Recommended Action"
+    ],
+    "rows": [
+     [
+      "Tachycardia > 120 bpm",
+      "Earliest clinical sign of leak or bleeding",
+      "Urgent CT with oral/IV contrast or laparoscopy"
+     ],
+     [
+      "Left Shoulder Tip Pain",
+      "Diaphragmatic irritation from subphrenic fluid",
+      "Cross-sectional abdominal imaging"
+     ],
+     [
+      "Leukocytosis & Fever",
+      "Developing intra-abdominal abscess",
+      "Broad-spectrum antibiotics and drainage"
+     ],
+     [
+      "Hemodynamic Instability",
+      "Septic shock or massive intra-abdominal bleed",
+      "Immediate return to operating room for exploration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The historic benchmark procedure combining restriction with mild malabsorption is the **Roux-en-Y gastric bypass**. The surgeon creates a tiny fifteen to thirty millilitre gastric pouch, completely transecting it from the excluded gastric remanent. A Roux limb of jejunum measuring seventy-five to one hundred centimetres is anastomosed to the pouch (gastrojejunostomy), while the biliopancreatic limb is connected to the jejunum downstream, bypassing the remaining stomach, duodenum, and proximal jejunum.",
+   "say": "Roux-en-Y gastric bypass creates a thirty-milliliter gastric pouch connected to a jejunal Roux limb, bypassing the remaining stomach, duodenum, and upper jejunum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sleeve Gastrectomy",
+     "points": [
+      "Purely restrictive and hormonal mechanism",
+      "Pyloric sphincter preserved in continuity",
+      "Aggravates pre-existing gastroesophageal reflux",
+      "Technically simpler with zero bowel anastomoses"
+     ]
+    },
+    "right": {
+     "title": "Roux-en-Y Bypass",
+     "points": [
+      "Combined restrictive and endocrine diversion",
+      "Highly effective treatment for severe GERD",
+      "Superior long-term remission of type 2 diabetes",
+      "Requires two gastrointestinal bowel anastomoses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Roux-en-Y gastric bypass is the procedure of choice for morbidly obese patients with severe pre-existing gastroesophageal reflux disease or Barrett esophagus, as the low-pressure gastric pouch completely abolishes acid exposure. Specific surgical complications of gastric bypass include **internal herniation** through mesenteric defects (Petersen defect), marginal ulcers at the gastrojejunostomy, and lifelong micronutrient deficiencies requiring daily multivitamin, calcium, iron, and vitamin B12 supplementation.",
+   "say": "Gastric bypass is ideal for severe acid reflux. Specific complications include internal herniation through Petersen defect and marginal ulcers, requiring lifelong vitamin supplementation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Pathophysiological Mechanism",
+     "Prevention & Management"
+    ],
+    "rows": [
+     [
+      "Internal Hernia",
+      "Bowel herniation through Petersen space defect",
+      "Meticulous suture closure of all mesenteric windows"
+     ],
+     [
+      "Marginal Ulcer",
+      "Acid exposure on vulnerable jejunal mucosa",
+      "Proton pump inhibitors, strict smoking cessation"
+     ],
+     [
+      "Dumping Syndrome",
+      "Rapid chyme transit into Roux jejunal limb",
+      "Dietary modifications, avoid simple carbohydrates"
+     ],
+     [
+      "Micronutrient Deficiency",
+      "Bypass of duodenum and proximal jejunum",
+      "Lifelong B12, iron, calcium, vitamin D supplements"
+     ]
+    ]
+   }
+  }
+ ]
+}

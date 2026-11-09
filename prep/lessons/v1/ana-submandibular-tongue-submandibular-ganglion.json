@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-submandibular-tongue",
+ "subject": "anatomy",
+ "title": "Submandibular Ganglion and Parasympathetic Secretomotor Pathways",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The submandibular ganglion is a minute, fusiform peripheral parasympathetic ganglion suspended from the lower border of the lingual nerve by two short connecting roots. Located on the lateral surface of the **hyoglossus muscle**, it lies immediately superior to the deep part of the submandibular gland and submandibular duct.",
+   "say": "Suspended from the lingual nerve on the hyoglossus muscle, the submandibular ganglion serves as the peripheral parasympathetic relay for the submandibular and sublingual glands.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-frey.svg",
+    "alt": "Anatomical schematic of parasympathetic ganglia showing connections of the submandibular ganglion",
+    "caption": "Autonomic parasympathetic secretomotor pathways connecting cranial nerves to salivary ganglia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The secretomotor pathway regulating submandibular and sublingual salivation originates in the superior salivatory nucleus of the pons. Preganglionic parasympathetic fibres leave the brainstem in the nervus intermedius of the facial nerve (cranial nerve VII), travel through the internal acoustic meatus, and enter the **chorda tympani** within the temporal bone.",
+   "say": "Preganglionic fibres arise in the facial superior salivatory nucleus, traverse the nervus intermedius, and travel within the chorda tympani across the middle ear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Superior Salivatory Nucleus (Pons, facial nerve motor nucleus area)"
+     },
+     {
+      "id": "p2",
+      "label": "Nervus Intermedius of CN VII (Traverses internal acoustic meatus and facial canal)"
+     },
+     {
+      "id": "p3",
+      "label": "Chorda Tympani Nerve (Branches 6 mm above stylomastoid foramen, crosses tympanic membrane)"
+     },
+     {
+      "id": "p4",
+      "label": "Petrotympanic Fissure (Exits skull to enter infratemporal fossa)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exiting the skull through the petrotympanic fissure, the chorda tympani joins the posterior border of the lingual nerve in the infratemporal fossa. The lingual nerve functions as a physical transport conduit, carrying the preganglionic fibres into the oral cavity. Passing through the posterior root of the ganglion, these fibres synapse on postganglionic neurons within the **submandibular ganglion**.",
+   "say": "Joining the lingual nerve, the chorda tympani reaches the floor of the mouth. Its preganglionic fibres enter the submandibular ganglion to synapse with secretomotor neurons.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglionic Root",
+     "Originating Conduit",
+     "Functional Role in Ganglion"
+    ],
+    "rows": [
+     [
+      "Parasympathetic (motor)",
+      "Chorda tympani via lingual nerve",
+      "SYNAPSES with postganglionic secretomotor neurons in ganglion"
+     ],
+     [
+      "Sympathetic",
+      "Plexus on facial artery (from superior cervical ganglion)",
+      "PASSES THROUGH without synapse; postganglionic vasoconstrictor fibres"
+     ],
+     [
+      "Sensory",
+      "Lingual nerve trunk (V3)",
+      "PASSES THROUGH without synapse; somatic afferents from glandular capsule"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postganglionic parasympathetic secretomotor axons distribute to the submandibular gland via five to six short glandular branches that penetrate the parenchyma directly. To reach the **sublingual gland**, other postganglionic axons re-enter the lingual nerve via its anterior connecting root, travelling forward within the nerve to innervate the anterior sublingual salivary acini.",
+   "say": "Short glandular branches directly supply the submandibular gland. Fibres destined for the sublingual gland loop back into the lingual nerve to reach the anterior oral floor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Submandibular Ganglion Synapse (Preganglionic chorda tympani fibres terminate)"
+     },
+     {
+      "id": "g2",
+      "label": "Direct Glandular Branches (Postganglionic fibres directly pierce submandibular gland)"
+     },
+     {
+      "id": "g3",
+      "label": "Re-entry to Lingual Nerve (Anterior root conveys postganglionics back into lingual nerve)"
+     },
+     {
+      "id": "g4",
+      "label": "Sublingual Gland Delivery (Terminal lingual twigs innervate sublingual acini)"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g1",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sympathetic innervation to the submandibular gland originates from the T1 spinal cord segment, ascending the sympathetic trunk to synapse in the superior cervical ganglion. Postganglionic fibres form a periarterial plexus around the **facial artery**, passing through the submandibular ganglion without synapsing to innervate vascular smooth muscle, producing vasoconstriction and viscous saliva.",
+   "say": "Sympathetic fibres ascend to the superior cervical ganglion, wrapping around the facial artery. Passing through the ganglion without synapsing, they govern salivary vasoconstriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parasympathetic Secretomotor Drive",
+     "points": [
+      "Origin: Superior salivatory nucleus (CN VII)",
+      "Conduit: Chorda tympani and lingual nerve",
+      "Synapse: Submandibular ganglion",
+      "Action: Profuse, watery, enzyme-rich saliva production"
+     ]
+    },
+    "right": {
+     "title": "Sympathetic Vasomotor Drive",
+     "points": [
+      "Origin: T1 spinal segment -> Superior cervical ganglion",
+      "Conduit: Periarterial plexus on facial artery",
+      "Synapse: Superior cervical ganglion (no synapse in submandibular)",
+      "Action: Vasoconstriction producing thick, viscous mucinous saliva"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The sublingual gland is the smallest of the three major salivary glands, weighing approximately four grams. Almond-shaped and predominantly mucous, the **sublingual gland** lies beneath the mucous membrane of the anterior floor of the mouth on the mylohyoid muscle, creating the prominent sublingual fold (plica sublingualis) on either side of the tongue.",
+   "say": "Weighing four grams, the predominantly mucous sublingual gland rests on the mylohyoid muscle. It raises the mucous membrane into the sublingual fold beneath the tongue.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-tonsil-relations.svg",
+    "alt": "Anatomical diagram of the floor of the mouth showing sublingual gland and ducts of Rivinus",
+    "caption": "Anatomical position of the sublingual gland raising the sublingual fold in the floor of the mouth. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unlike the solitary Wharton duct of the submandibular gland, the sublingual gland drains through eight to twenty minute excretory conduits known as the ducts of Rivinus. These open independently along the crest of the **sublingual fold**. Occasionally, several anterior ducts coalesce to form a major sublingual duct (duct of Bartholin) that joins the Wharton duct.",
+   "say": "Eight to twenty small ducts of Rivinus drain the sublingual gland along the sublingual fold. An anterior duct of Bartholin may join the main submandibular duct.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Salivary Feature",
+     "Sublingual Gland",
+     "Submandibular Gland"
+    ],
+    "rows": [
+     [
+      "Weight and morphology",
+      "4 grams; diffuse almond-shaped",
+      "12 to 15 grams; compact encapsulated U-shape"
+     ],
+     [
+      "Histological acini",
+      "Predominantly mucous (thick mucinous saliva)",
+      "Mixed seromucous with serous demilunes dominating"
+     ],
+     [
+      "Excretory ducts",
+      "8 to 20 small ducts of Rivinus opening on fold",
+      "Single large Wharton duct opening on sublingual caruncle"
+     ],
+     [
+      "Cystic pathology",
+      "Extravasation causes sublingual ranula or plunging ranula",
+      "Calculus causes obstructive sialolithiasis and mealtime pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rupture or ductal obstruction of the sublingual gland leads to extravasation of thick mucus into the surrounding tissues, producing a translucent, bluish submucosal cyst known as a ranula. When the mucous collection herniates through a defect in the mylohyoid muscle into the submandibular space of the neck, it forms a **plunging ranula** requiring complete surgical excision of the sublingual gland.",
+   "say": "Sublingual mucus extravasation forms a bluish translucent ranula. Herniation through the mylohyoid muscle into the neck produces a plunging ranula requiring gland excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Ductal Rupture / Obstruction (Mucus extravasates from delicate ducts of Rivinus)"
+     },
+     {
+      "id": "r2",
+      "label": "Simple Ranula (Bluish translucent swelling confined to anterior floor of mouth)"
+     },
+     {
+      "id": "r3",
+      "label": "Mylohyoid Boutonniere (Mucus tracks through congenital dehiscence in mylohyoid)"
+     },
+     {
+      "id": "r4",
+      "label": "Plunging Ranula (Fluctuant swelling presenting in submandibular neck space)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

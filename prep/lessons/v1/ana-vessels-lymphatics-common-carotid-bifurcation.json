@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-vessels-lymphatics",
+ "subject": "anatomy",
+ "title": "Carotid Arteries, Internal Jugular Vein, and Deep Cervical Nodes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The arterial vascular supply to the head and neck is anchored by the common carotid arteries. The right common carotid arises at the root of the neck from the brachiocephalic trunk behind the right sternoclavicular joint, whereas the **left common carotid** arises directly from the arch of the aorta in the superior mediastinum, giving the left vessel an additional thoracic segment.",
+   "say": "The right common carotid arises from the brachiocephalic trunk behind the sternoclavicular joint, while the left common carotid originates directly from the aortic arch.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-carotid-branches.svg",
+    "alt": "Anatomical schematic showing common carotid arteries, bifurcation at C4, and external carotid branches",
+    "caption": "Arterial architecture of the carotid system highlighting the C4 bifurcation and collateral branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ascending in the carotid sheath, the common carotid artery bifurcates at the level of the upper border of the thyroid cartilage (opposite the C3-C4 intervertebral disc) into the internal and external carotid arteries. The **internal carotid** gives off NO branches in the neck, ascending into the carotid canal, while the external carotid promptly emits anterior, posterior, medial, and terminal branches.",
+   "say": "Bifurcating at C4 opposite the thyroid cartilage, the internal carotid gives no cervical branches. The external carotid immediately emits collateral branches to head and neck structures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Internal Carotid Artery (ICA)",
+     "points": [
+      "Lies posterolateral to ECA at its origin",
+      "Gives absolutely NO branches in the neck",
+      "Enters carotid canal in petrous temporal bone",
+      "Supplies cerebral hemispheres, eye, and pituitary"
+     ]
+    },
+    "right": {
+     "title": "External Carotid Artery (ECA)",
+     "points": [
+      "Lies anteromedial to ICA at origin, then lateral",
+      "Gives eight major branches in the neck and face",
+      "Terminates within parotid gland as maxillary and superficial temporal",
+      "Supplies face, scalp, skull bones, meninges, and tongue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The eight branches of the external carotid artery follow an orderly anatomical distribution: three anterior (superior thyroid, lingual, facial), one medial (ascending pharyngeal), two posterior (occipital, posterior auricular), and two **terminal branches** (maxillary and superficial temporal). The external carotid terminates within the parotid gland behind the neck of the mandible.",
+   "say": "Eight branches arise from the external carotid: superior thyroid, lingual, facial anteriorly; ascending pharyngeal medially; occipital and posterior auricular posteriorly; and two terminals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branch Group",
+     "Arterial Branch",
+     "Primary Anatomical Territory"
+    ],
+    "rows": [
+     [
+      "Anterior branches (3)",
+      "Superior thyroid, lingual, facial",
+      "Thyroid gland, tongue, face, and tonsillar bed"
+     ],
+     [
+      "Medial branch (1)",
+      "Ascending pharyngeal artery",
+      "Pharyngeal wall, middle ear, and dura mater"
+     ],
+     [
+      "Posterior branches (2)",
+      "Occipital and posterior auricular",
+      "Posterior scalp, sternocleidomastoid, pinna"
+     ],
+     [
+      "Terminal branches (2)",
+      "Maxillary and superficial temporal",
+      "Masticatory muscles, infratemporal fossa, upper dentition, and temporal scalp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The internal jugular vein is the primary venous channel draining intracranial blood from the dural venous sinuses, face, and neck. Originating at the jugular foramen as the direct continuation of the **sigmoid sinus**, the vein descends within the lateral compartment of the carotid sheath. At its origin lies the superior bulb; at its termination lies the bivalved inferior bulb.",
+   "say": "The internal jugular vein continues from the sigmoid sinus at the jugular foramen. Descending within the carotid sheath lateral to the carotid artery, it drains intracranial and facial blood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "j1",
+      "label": "Sigmoid Sinus (Intracranial dural sinus exits via jugular foramen)"
+     },
+     {
+      "id": "j2",
+      "label": "Superior Bulb of IJV (Dilatation lodged in jugular fossa of petrous temporal)"
+     },
+     {
+      "id": "j3",
+      "label": "Carotid Sheath Descent (Descends lateral to ICA and common carotid artery)"
+     },
+     {
+      "id": "j4",
+      "label": "Brachiocephalic Confluence (Unites with subclavian vein behind sternoclavicular joint)"
+     }
+    ],
+    "edges": [
+     [
+      "j1",
+      "j2"
+     ],
+     [
+      "j2",
+      "j3"
+     ],
+     [
+      "j3",
+      "j4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Central venous catheterization frequently cannulates the right internal jugular vein because it forms a straight, direct axis with the superior vena cava and right atrium. The needle is inserted at the apex of the lesser supraclavicular fossa, bounded by the sternal and clavicular heads of the **sternocleidomastoid**, angled thirty degrees toward the ipsilateral nipple to avoid carotid puncture.",
+   "say": "The right internal jugular vein provides a direct route to the right atrium. Cannulation between the sternal and clavicular heads of sternocleidomastoid avoids the common carotid artery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Internal Jugular Vein",
+     "points": [
+      "Larger diameter than left in 75% of individuals",
+      "Follows direct linear vertical course to right atrium",
+      "Pleural dome rests lower than on left side",
+      "Free of thoracic duct injury risk at venous angle"
+     ]
+    },
+    "right": {
+     "title": "Left Internal Jugular Vein",
+     "points": [
+      "Smaller calibre; crosses anterior to great vessels",
+      "Pleural dome rises higher in root of neck",
+      "Thoracic duct arches into left venous angle",
+      "Catheterization carries risk of catastrophic chylothorax"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The deep cervical lymph nodes form an extensive vertical chain arranged along the length of the internal jugular vein from the skull base to the root of the neck. Embedded within the carotid sheath, they are clinically stratified into superior and **inferior deep cervical** groups by the intermediate tendon of the omohyoid muscle.",
+   "say": "Clustered along the internal jugular vein, deep cervical lymph nodes receive all lymphatic drainage from the head and neck. They divide into superior and inferior groups at the omohyoid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymph Node Group",
+     "Anatomical Location",
+     "Primary Sentinel Clinical Role"
+    ],
+    "rows": [
+     [
+      "Jugulodigastric node (Kuttner)",
+      "Crossed by posterior belly of digastric at level of hyoid",
+      "Chief sentinel node for palatine tonsil and posterior tongue carcinoma"
+     ],
+     [
+      "Jugulo-omohyoid node",
+      "Crossed by intermediate tendon of omohyoid at C6",
+      "Chief sentinel node for tip and anterior tongue carcinoma"
+     ],
+     [
+      "Supraclavicular nodes (Virchow)",
+      "In the subclavian triangle behind the clavicle",
+      "Left node (Troisier sign) signals gastric or abdominal malignancy (metastasis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "All lymphatic drainage from the entire head and neck ultimately passes through the deep cervical lymph nodes, which drain into the jugular lymph trunk. On the right side, the **jugular trunk** joins the subclavian trunk to form the right lymphatic duct; on the left side, it empties directly into the arch of the thoracic duct.",
+   "say": "Deep cervical nodes converge into the jugular lymph trunk. On the left, it joins the thoracic duct, which arches above the clavicle to enter the confluence of the jugular and subclavian veins.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-thoracic-duct.svg",
+    "alt": "Anatomical schematic tracing the thoracic duct arch and jugular lymphatic trunk in the left root of the neck",
+    "caption": "Left cervical termination of the thoracic duct and jugular lymph trunk at the angle of Pirogov. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Virchow node (the left supraclavicular lymph node) lies at the junction of the internal jugular and subclavian veins, receiving lymphatic channels communicating with the thoracic duct. Painless enlargement of this node, clinically designated the **Troisier sign**, is a classic physical finding indicating occult metastasis from abdominal adenocarcinoma, typically gastric carcinoma or pancreatic malignancy.",
+   "say": "Painless enlargement of the left supraclavicular Virchow node represents the Troisier sign. It indicates metastatic dissemination from occult abdominal adenocarcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Abdominal Malignancy (Gastric, colon, or pancreatic adenocarcinoma)"
+     },
+     {
+      "id": "v2",
+      "label": "Thoracic Duct Embolization (Tumour cells travel up cisterna chyli and thoracic duct)"
+     },
+     {
+      "id": "v3",
+      "label": "Retrograde Nodal Seeding (Cells reflux into left supraclavicular sentinel chain)"
+     },
+     {
+      "id": "v4",
+      "label": "Troisier Sign / Virchow Node (Hard, non-tender supraclavicular mass confirms metastasis)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "18b70783-b5fa-484e-94f3-3084823c57fa",
+  "2d849c5c-8738-4fc6-8b48-5952640914c2",
+  "35f1c95a-3c0b-4991-b5dc-93ebb8cf7f31"
+ ]
+}

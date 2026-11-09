@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-neck-triangles",
+ "subject": "anatomy",
+ "title": "Deep Cervical Fascia: Investing, Pretracheal, and Prevertebral Layers",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The deep cervical fascia forms an intricate system of concentric fibrocollagenous sheaths that partition the neck into functional muscular, visceral, and neurovascular compartments. It is organized into three defined sheets: the **investing layer**, the pretracheal layer, and the prevertebral layer. These fascial planes guide surgical dissections and dictate pathways of infection spread.",
+   "say": "The deep cervical fascia divides the neck into functional compartments via three defined sheets: investing, pretracheal, and prevertebral layers. They govern how infections spread.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-neck-triangles.svg",
+    "alt": "Anatomical cross section of the neck showing concentric layers of deep cervical fascia and muscular compartments",
+    "caption": "Cross-sectional layout of the investing, pretracheal, and prevertebral layers of deep cervical fascia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The investing layer of deep cervical fascia completely encircles the neck like a collar, situated beneath the superficial fascia and platysma. As it wraps around the neck, the **investing fascia** splits to enclose two muscles (sternocleidomastoid and trapezius), two salivary glands (parotid and submandibular), and forms two fascial spaces (suprasternal space of Burns and supraclavicular space).",
+   "say": "Encircling the neck like a collar, the investing layer splits to envelope sternocleidomastoid and trapezius muscles, as well as the parotid and submandibular glands.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fascial Specialization",
+     "Structures Enclosed",
+     "Anatomical Attachment"
+    ],
+    "rows": [
+     [
+      "Muscular enclosure",
+      "Sternocleidomastoid anteriorly and Trapezius posteriorly",
+      "Attaches to superior nuchal line and clavicle/scapula"
+     ],
+     [
+      "Glandular enclosure",
+      "Parotid gland and Submandibular salivary gland",
+      "Thickens to form stylomandibular ligament separating glands"
+     ],
+     [
+      "Suprasternal space of Burns",
+      "Anterior jugular venous arch and sternal heads of SCM",
+      "Splits 5 cm above jugular notch to attach to anterior/posterior manubrial lips"
+     ],
+     [
+      "Supraclavicular space",
+      "Terminal external jugular vein and supraclavicular nerves",
+      "Splits above clavicle before fusing with clavicular periosteum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pretracheal layer of deep cervical fascia is restricted to the anterior visceral compartment of the neck. Extending from the hyoid bone superiorly, it splits to invest the thyroid gland, forming the false capsule of the thyroid. The **pretracheal fascia** encloses the trachea, larynx, and oesophagus, descending into the superior mediastinum to blend with the fibrous pericardium.",
+   "say": "Confined to the anterior neck, the pretracheal fascia wraps the thyroid gland, trachea, and esophagus. It extends into the superior mediastinum to blend with the pericardium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Superior Attachment: Anchors to thyroid cartilage and hyoid bone"
+     },
+     {
+      "id": "p2",
+      "label": "Visceral Enclosure: Splits to form false thyroid capsule and suspensory ligament of Berry"
+     },
+     {
+      "id": "p3",
+      "label": "Mediastinal Descent: Blends with adventitia of aortic arch and fibrous pericardium"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the pretracheal fascia firmly attaches the thyroid capsule to the cricoid cartilage via the suspensory ligament of Berry, the **thyroid gland** characteristically moves synchronously upwards with the larynx during swallowing. Any midline neck mass that fails to move during deglutition is unlikely to arise from thyroid parenchyma, helping distinguish thyromegaly from lymphadenopathy.",
+   "say": "Anchored to the cricoid by the ligament of Berry, the thyroid moves upward with deglutition. Failure of a neck mass to elevate during swallowing excludes a thyroid origin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thyroid Mass / Thyroglossal Cyst",
+     "points": [
+      "Anchored via pretracheal fascia and Berry ligament",
+      "Tethered to cricoid cartilage and hyoid bone",
+      "Elevates crisply during deglutition (swallowing)",
+      "Thyroglossal cyst also elevates on tongue protrusion"
+     ]
+    },
+    "right": {
+     "title": "Cervical Lymphadenopathy",
+     "points": [
+      "Situated outside the pretracheal visceral sheath",
+      "Located within investing or prevertebral compartments",
+      "Remains stationary and does not move during swallowing",
+      "May be tethered to sternocleidomastoid or carotid sheath"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The prevertebral layer is a dense fibrous sheet that covers the anterior surfaces of the cervical vertebrae and prevertebral muscles (longus colli, longus capitis, and scalenes). Extending laterally over the scalenus anterior and brachial plexus, the **prevertebral fascia** continues into the axilla as the axillary sheath, enclosing the axillary artery and brachial plexus trunks.",
+   "say": "Covering the cervical spine and scalenes, the prevertebral fascia extends laterally. It continues into the axilla as the axillary sheath, enclosing the axillary vessels and brachial plexus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-thoracic-outlet.svg",
+    "alt": "Anatomical schematic showing scalene muscles, brachial plexus trunks, and axillary sheath extension",
+    "caption": "Extension of the prevertebral fascia to form the axillary sheath around the subclavian vessels and brachial plexus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The carotid sheath is a tubular fascial condensation extending from the base of the skull to the aortic arch. Formed by contributions from the investing, pretracheal, and prevertebral layers, the **carotid sheath** encloses the common and internal carotid arteries medially, the internal jugular vein laterally, and the vagus nerve (CN X) lying posteriorly between them.",
+   "say": "The carotid sheath extends from skull base to aorta. It houses the carotid artery medially, the internal jugular vein laterally, and the vagus nerve posteriorly between them.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Location in Sheath",
+     "Anatomical Structure",
+     "Clinical / Surgical Note"
+    ],
+    "rows": [
+     [
+      "Medial compartment",
+      "Common carotid artery (bifurcates at C4 into internal/external)",
+      "Thick-walled muscular artery; palpable pulse at anterior SCM border"
+     ],
+     [
+      "Lateral compartment",
+      "Internal jugular vein",
+      "Thin-walled vein; expands during Valsalva; lateral wall of sheath is thinner"
+     ],
+     [
+      "Posterior groove",
+      "Vagus nerve (cranial nerve X)",
+      "Descends vertically between artery and vein; injury causes vocal cord palsy"
+     ],
+     [
+      "Embedded on anterior wall",
+      "Ansa cervicalis (superior and inferior roots)",
+      "Innervates infrahyoid strap muscles; mobilized in neck dissection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Situated between the buccopharyngeal fascia covering the pharynx and the prevertebral fascia lies the retropharyngeal space. Bounded laterally by the carotid sheaths, the **retropharyngeal space** extends downwards from the skull base into the superior mediastinum. A retropharyngeal abscess, commonly arising from suppurative lymphadenitis or fishbone perforation, presents with dysphagia and airway compromise.",
+   "say": "Between the pharynx and prevertebral fascia lies the retropharyngeal space. Infections here expand readily down into the superior mediastinum, presenting with dysphagia and stridor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Pharyngeal / Tonsillar Infection (Bacterial suppuration in retropharyngeal nodes of Henle)"
+     },
+     {
+      "id": "r2",
+      "label": "Retropharyngeal Abscess (Pus collects in potential space behind buccopharyngeal fascia)"
+     },
+     {
+      "id": "r3",
+      "label": "Downward Mediastinal Spread (Infection cascades behind oesophagus into posterior mediastinum)"
+     },
+     {
+      "id": "r4",
+      "label": "Acute Necrotizing Mediastinitis (Catastrophic high-mortality intrathoracic complication)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ludwig angina is an acute, fulminant, gangrenous cellulitis of the submandibular and sublingual spaces, originating in eighty percent of cases from infected mandibular second or third molar roots. Because the mylohyoid line slopes downward, lower molar apices lie beneath mylohyoid, allowing pus to flood the submandibular space. The **tongue elevates** and pushes backward, precipitating fatal asphyxia.",
+   "say": "Ludwig angina is a spreading cellulitis of the floor of the mouth originating from lower molar roots. Massive submandibular swelling pushes the tongue upward, threatening airway asphyxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sublingual Space Involvement",
+     "points": [
+      "Located above the mylohyoid muscle diaphragm",
+      "Contains sublingual gland and deep submandibular duct",
+      "Tense wooden brawny oedema of oral floor",
+      "Elevates tongue against hard palate, occluding airway"
+     ]
+    },
+    "right": {
+     "title": "Submandibular Space Involvement",
+     "points": [
+      "Located below the mylohyoid muscle diaphragm",
+      "Contains superficial submandibular salivary gland",
+      "Produces bull-neck submental and bilateral jaw swelling",
+      "Spreads retrogradely into parapharyngeal space"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

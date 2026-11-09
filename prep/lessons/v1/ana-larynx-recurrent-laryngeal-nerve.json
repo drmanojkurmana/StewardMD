@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-larynx",
+ "subject": "anatomy",
+ "title": "Intrinsic Laryngeal Muscles, Glottic Dynamics, and Laryngeal Palsies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The intrinsic muscles of the larynx are small, striated skeletal muscles that modify the length, tension, and aperture of the vocal folds and laryngeal inlet. With the sole exception of the cricothyroid, all intrinsic muscles are innervated by the **recurrent laryngeal nerve**. They are functionally categorized into abductors, adductors, tensors, and sphincters.",
+   "say": "Except for the externally placed cricothyroid, all intrinsic laryngeal muscles are supplied by the recurrent laryngeal nerve. They act as abductors, adductors, tensors, and sphincters.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-laryngeal-nerves.svg",
+    "alt": "Anatomical schematic showing intrinsic laryngeal muscles, posterior cricoarytenoid, and recurrent laryngeal nerve",
+    "caption": "Intrinsic musculature of the larynx and distribution of terminal recurrent laryngeal motor branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The posterior cricoarytenoid is of paramount clinical importance as the ONLY abductor of the vocal cords in the human body. Arising from the posterior lamina of the cricoid cartilage, its fibres sweep superolaterally to insert into the muscular process of the **arytenoid cartilage**. Contraction pulls the muscular process medially and backwards, swinging the vocal processes laterally to open the glottis.",
+   "say": "The posterior cricoarytenoid is the sole abductor of the vocal cords. Contracting to open the rima glottidis, it is designated the essential safety muscle of the larynx.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Posterior Cricoarytenoid Contraction (Fibres pull on arytenoid muscular process)"
+     },
+     {
+      "id": "p2",
+      "label": "Medial and Downward Rotation (Muscular processes swing medially across cricoid surface)"
+     },
+     {
+      "id": "p3",
+      "label": "Lateral Vocal Process Swing (Vocal processes diverge widely laterally)"
+     },
+     {
+      "id": "p4",
+      "label": "Full Glottic Abduction (Rima glottidis widens to 19 mm for inspiration)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because breathing and life depend entirely on the ability to abduct the vocal cords to maintain airway patency, the posterior cricoarytenoid is universally crowned the **safety muscle of the larynx**. Bilateral paralysis of this single muscle abolishes vocal fold abduction, resulting in immediate suffocative inspiratory stridor and fatal asphyxiation unless an emergency airway is established.",
+   "say": "Because life depends on airway patency, the posterior cricoarytenoid is the safety muscle of the larynx. Bilateral paralysis causes immediate glottic closure and asphyxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Posterior Cricoarytenoid (Safety Muscle)",
+     "points": [
+      "Sole abductor of the vocal cords",
+      "Pulls vocal processes laterally to widen rima glottidis",
+      "Active during every inspiration of life",
+      "Bilateral paralysis causes acute airway closure and death"
+     ]
+    },
+    "right": {
+     "title": "Lateral Cricoarytenoid (Adductor)",
+     "points": [
+      "Arises from lateral arch of cricoid",
+      "Inserts into muscular process of arytenoid",
+      "Rotates vocal process medially to adduct cord",
+      "Closes intermembranous glottis for phonation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adduction of the vocal cords is executed by three coordinated muscles: the lateral cricoarytenoid, the transverse arytenoid, and the oblique arytenoid. The **lateral cricoarytenoid** rotates the vocal processes medially to close the anterior intermembranous glottis. The unpaired transverse arytenoid slides the bilateral arytenoid bodies together, closing the posterior intercartilaginous glottis.",
+   "say": "Adduction requires coordinated action: lateral cricoarytenoids close the anterior glottis, while the transverse arytenoid pulls both arytenoids together to close the posterior glottis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intrinsic Muscle",
+     "Anatomical Action on Glottis",
+     "Clinical Phonation Role"
+    ],
+    "rows": [
+     [
+      "Posterior cricoarytenoid",
+      "Abducts vocal folds (sole abductor)",
+      "Vital inspiratory safety muscle opening rima glottidis"
+     ],
+     [
+      "Lateral cricoarytenoid",
+      "Adducts vocal folds",
+      "Closes anterior intermembranous glottis for speech"
+     ],
+     [
+      "Transverse arytenoid (unpaired)",
+      "Adducts arytenoid cartilages",
+      "Closes posterior intercartilaginous glottis"
+     ],
+     [
+      "Thyroarytenoid / Vocalis",
+      "Relaxes and shortens vocal folds",
+      "Modulates vocal cord tension and lowers pitch"
+     ],
+     [
+      "Aryepiglotticus",
+      "Constricts laryngeal inlet",
+      "Protective sphincter preventing food entry into larynx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sensory innervation of the laryngeal mucosa is precisely divided at the level of the true vocal folds. Above the vocal folds, sensation is supplied exclusively by the **internal laryngeal nerve** (branch of superior laryngeal nerve CN X). Below the vocal folds, sensation to the subglottic mucosa and upper trachea is supplied by the recurrent laryngeal nerve.",
+   "say": "Sensory innervation splits at the vocal cords: the internal laryngeal nerve supplies mucosa above the folds, while the recurrent laryngeal nerve supplies the subglottic compartment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Supraglottic Compartment",
+     "points": [
+      "Sensory nerve: Internal laryngeal nerve (CN X)",
+      "Pierces thyrohyoid membrane with superior laryngeal artery",
+      "Afferent limb of cough reflex guarding laryngeal inlet",
+      "Paralysis causes silent pulmonary aspiration of food"
+     ]
+    },
+    "right": {
+     "title": "Subglottic Compartment",
+     "points": [
+      "Sensory nerve: Recurrent laryngeal nerve (CN X)",
+      "Accompanies inferior thyroid artery branches",
+      "Supplies subglottic mucosa down to upper trachea",
+      "Irritation triggers secondary bronchospasm and coughing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The internal laryngeal nerve provides the vital sensory afferent limb of the cough reflex. When foreign particles or liquids touch the laryngeal vestibule, sensory impulses transmitted via the internal laryngeal nerve fire the protective **cough reflex**. Foreign bodies such as fishbones or dentures characteristically lodge in the piriform fossa, where they can injure this nerve.",
+   "say": "The internal laryngeal nerve mediates the protective cough reflex. Foreign bodies lodging in the piriform fossa can irritate or damage this nerve, causing silent aspiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Vestibular Mucosal Contact (Food or foreign body touches supraglottic mucosa)"
+     },
+     {
+      "id": "c2",
+      "label": "Sensory Afferents (Internal laryngeal nerve fires signals into solitary tract nucleus)"
+     },
+     {
+      "id": "c3",
+      "label": "Efferent Motor Reflex (Vagus fires adductor spasm; phrenic nerve drives explosive cough)"
+     },
+     {
+      "id": "c4",
+      "label": "Airway Expulsion (High velocity expired air blasts foreign body out of vestibule)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Semon law describes the orderly sequence of functional loss during progressive compression of the recurrent laryngeal nerve. Semon observed that abductor fibres (supplying the posterior cricoarytenoid) are phylogenetically younger and more vulnerable, failing before adductor fibres. Consequently, in incomplete lesions, the cord assumes an **adducted position**, producing early airway stridor.",
+   "say": "Semon law dictates that abductor fibres succumb before adductor fibres during progressive nerve compression. In partial lesions, cords fall into an adducted stance, threatening airway compromise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage of Lesion",
+     "Functional Muscular Status",
+     "Position of Vocal Cord on Laryngoscopy"
+    ],
+    "rows": [
+     [
+      "Incomplete / early compression",
+      "Abductor fibres paralysed first; adductors still active",
+      "Vocal cord fixed in midline adducted position (Semon law)"
+     ],
+     [
+      "Complete / late paralysis",
+      "Both abductors and adductors completely paralysed",
+      "Vocal cord assumes intermediate cadaveric position (3.5 mm from midline)"
+     ],
+     [
+      "Recurrent nerve only cut",
+      "Cricothyroid (external laryngeal) intact; acts as tensor",
+      "Vocal cord fixed in paramedian position (1.5 mm from midline)"
+     ],
+     [
+      "Combined recurrent & superior cut",
+      "Total laryngeal paralysis (all muscles flaccid)",
+      "True cadaveric position with concave, bowed, flaccid cord"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Indirect laryngoscopy visualizes the vocal folds using a warmed laryngeal mirror positioned against the soft palate. The clinician observes the pale, glistening vocal cords abducting on inspiration and adducting to phonate the vowel 'E'. In unilateral complete **recurrent nerve** palsy, the paralysed vocal cord lies motionless in the paramedian position while the healthy cord adducts across the midline.",
+   "say": "Indirect laryngoscopy visualizes the glistening vocal cords. A paralyzed cord lies fixed in the paramedian position, while the opposite cord hyperadducts to compensate.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-thyroid-relations.svg",
+    "alt": "Anatomical schematic showing indirect laryngoscopy views of normal vs paralyzed vocal folds",
+    "caption": "Diagnostic laryngoscopic views of vocal fold positions in phonation, inspiration, and recurrent palsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-apoptosis",
+  "subject": "pathology",
+  "title": "Caspase Cascades, BCL-2 Family Dynamics, and the Apoptosome",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The proteolytic dismantling of a cell during apoptosis is executed by a specialized family of intracellular cysteine-dependent aspartate-directed proteases. Known as **caspases**, these enzymes exist as inactive zymogens in resting cells and are sequentially activated through a hierarchical cascade of initiator and executioner proteases.",
+      "say": "Caspases are cysteine proteases that cleave after aspartate residues in a coordinated enzymatic cascade.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "zymogen_state",
+            "label": "Caspases Synthesized as Inactive Procaspase Zymogens with Prodomains"
+          },
+          {
+            "id": "initiator_cleave",
+            "label": "Initiator Caspases (8, 9, 10) Undergo Autocatalytic Induced-Proximity Dimerization"
+          },
+          {
+            "id": "executioner_cut",
+            "label": "Active Initiators Proteolytically Cleave Executioner Caspases (3, 6, 7)"
+          },
+          {
+            "id": "substrate_digest",
+            "label": "Executioners Cleave Nuclear Scaffold Lamin, Cytoskeleton, and ICAD"
+          }
+        ],
+        "edges": [
+          [
+            "zymogen_state",
+            "initiator_cleave"
+          ],
+          [
+            "initiator_cleave",
+            "executioner_cut"
+          ],
+          [
+            "executioner_cut",
+            "substrate_digest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Initiator caspases possess lengthy amino-terminal prodomains that mediate protein-protein recruitment interactions. In the extrinsic pathway, procaspases-eight and ten use death effector domains to dock with FADD, whereas in the intrinsic pathway, **procaspase-9 uses caspase recruitment domains** to bind the central hub of the apoptosome.",
+      "say": "Initiator caspase-9 uses its CARD domain to dock with the apoptosome and initiate intrinsic apoptosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Initiator Caspases (Caspases 8, 9, 10)",
+          "points": [
+            "Possess large N-terminal interaction prodomains (DED or CARD)",
+            "Activated as homodimers upon assembly onto multimeric platforms",
+            "Function exclusively to cleave and activate downstream executioner zymogens",
+            "Do not directly digest cellular architectural proteins"
+          ]
+        },
+        "right": {
+          "title": "Executioner Caspases (Caspases 3, 6, 7)",
+          "points": [
+            "Possess short prodomains; pre-exist as inactive dimeric zymogens",
+            "Activated by cleavage of interdomain linker by initiator caspases",
+            "Directly dismantle cellular architecture by digesting hundreds of targets",
+            "Caspase-3 is the chief executioner responsible for apoptotic morphology"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Executioner caspase-three carries out the final morphological and biochemical changes of apoptosis. Caspase-three cleaves the inhibitor of caspase-activated deoxyribonuclease, freeing **caspase-activated DNase** to translocate into the nucleus and cleave genomic chromatin specifically at internucleosomal linker regions, producing a diagnostic DNA ladder.",
+      "say": "Caspase-3 cleaves the inhibitor of CAD, unleashing DNA digestion into internucleosomal fragments.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "icad_bound",
+            "label": "Inactive CAD Deoxyribonuclease Held Tightly Bound by Inhibitor Protein ICAD"
+          },
+          {
+            "id": "casp3_cleave",
+            "label": "Active Executioner Caspase-3 Specifically Cleaves and Inactivates ICAD"
+          },
+          {
+            "id": "cad_liberated",
+            "label": "Active CAD Translocates into Nucleus and Attaches to Chromatin"
+          },
+          {
+            "id": "ladder_cleavage",
+            "label": "Cleaves Internucleosomal Linker DNA Every 180 to 200 Base Pairs"
+          }
+        ],
+        "edges": [
+          [
+            "icad_bound",
+            "casp3_cleave"
+          ],
+          [
+            "casp3_cleave",
+            "cad_liberated"
+          ],
+          [
+            "cad_liberated",
+            "ladder_cleavage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mitochondrial membrane permeability is tightly governed by the balance between opposing factions of the BCL-2 protein family. Pro-survival guardians including **BCL-2 and BCL-XL** insert into the outer mitochondrial membrane, where they bind and sequester pro-apoptotic proteins to preserve outer membrane integrity and retain cytochrome c.",
+      "say": "Anti-apoptotic BCL-2 and BCL-XL preserve mitochondrial membrane integrity, keeping cytochrome c inside.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "caption": "Hepatocellular malignancy demonstrating evasion of apoptosis through upregulation of anti-apoptotic BCL-2.",
+        "alt": "Liver carcinoma exhibiting neoplastic resistance to intrinsic apoptosis"
+      }
+    },
+    {
+      "tx": "Opposing BCL-2 are multi-domain pro-apoptotic effector proteins located within the cytoplasm and outer mitochondrial membrane. When activated by cellular stress, **BAX and BAK** undergo conformational activation and oligomerize into high-conductance macromolecular pores within the outer mitochondrial membrane, permitting the escape of cytochrome c into the cytosol.",
+      "say": "BAX and BAK oligomerize in outer mitochondrial membranes, forming pores that release cytochrome c.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anti-Apoptotic Guardians (BCL-2, BCL-XL, MCL-1)",
+          "points": [
+            "Possess four BCL-2 homology domains (BH1 through BH4)",
+            "Reside in outer mitochondrial, ER, and nuclear membranes",
+            "Maintain low membrane permeability by binding and sequestering BAX/BAK",
+            "Overexpressed in follicular lymphoma due to t(14;18) translocation"
+          ]
+        },
+        "right": {
+          "title": "Pro-Apoptotic Effectors (BAX, BAK)",
+          "points": [
+            "Possess BH1, BH2, and BH3 domains but lack BH4 domain",
+            "BAX resides in cytosol; BAK is integrated in outer mitochondrial membrane",
+            "Stress triggers conformational shift, membrane insertion, and oligomerization",
+            "Forms multimeric outer membrane pores that release cytochrome c"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sensory proteins containing only the third BCL-2 homology domain act as damage sentinels. Members such as **BIM, PUMA, and NOXA** are transcriptionally induced by p53 in response to DNA damage, directly neutralizing anti-apoptotic BCL-2 and allosterically activating BAX and BAK to initiate outer membrane permeabilization.",
+      "say": "BH3-only proteins like BIM and PUMA sense stress, neutralize BCL-2, and activate BAX and BAK.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p53_activation",
+            "label": "Severe Genotoxic DNA Damage Induces p53 Transcription Factor"
+          },
+          {
+            "id": "puma_noxa_up",
+            "label": "p53 Drives Transcription of BH3-Only Sensors PUMA and NOXA"
+          },
+          {
+            "id": "bcl2_displacement",
+            "label": "BH3 Peptides Bind Hydrophobic Groove of BCL-2, Displacing BAX"
+          },
+          {
+            "id": "pore_opening",
+            "label": "Unleashed BAX and BAK Oligomerize into Mitochondrial Outer Membrane Pores"
+          }
+        ],
+        "edges": [
+          [
+            "p53_activation",
+            "puma_noxa_up"
+          ],
+          [
+            "puma_noxa_up",
+            "bcl2_displacement"
+          ],
+          [
+            "bcl2_displacement",
+            "pore_opening"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the cytosol, released cytochrome c binds apoptotic protease activating factor-one in the presence of deoxyadenosine triphosphate. Seven cytochrome c and Apaf-1 complexes assemble together into a pinwheel-shaped heptameric macromolecular platform designated the **apoptosome**, which recruits and proteolytically cleaves multiple molecules of initiator procaspase-9.",
+      "say": "Cytochrome c and Apaf-1 form the heptameric apoptosome, recruiting and activating procaspase-9.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-lupus-erythematosus-fig1.webp",
+        "caption": "Systemic autoimmune pathology showing autoantibodies directed against cellular nucleic acid and apoptotic debris.",
+        "alt": "Autoimmune immune-complex formation driven by impaired clearance of apoptotic remnants"
+      }
+    },
+    {
+      "tx": "Spontaneous accidental activation of executioner caspases is prevented by endogenous intracellular brake proteins known as inhibitors of apoptosis. Concurrently released from mitochondria with cytochrome c, **SMAC and DIABLO** bind and neutralize these inhibitors of apoptosis, lifting the brake to permit full execution of the caspase cascade.",
+      "say": "Mitochondrial SMAC and DIABLO bind and neutralize inhibitors of apoptosis, permitting caspase activation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iap_brake",
+            "label": "X-Linked Inhibitor of Apoptosis (XIAP) Tonically Inhibits Caspases-3 and 9"
+          },
+          {
+            "id": "smac_efflux",
+            "label": "Mitochondrial Outer Membrane Pores Release SMAC/DIABLO into Cytosol"
+          },
+          {
+            "id": "xiap_neutralize",
+            "label": "SMAC/DIABLO Binds BIR Domains of XIAP with High Affinity"
+          },
+          {
+            "id": "caspase_unleashed",
+            "label": "XIAP Dissociates, Allowing Caspase-9 and 3 to Execute Unrestricted Apoptosis"
+          }
+        ],
+        "edges": [
+          [
+            "iap_brake",
+            "smac_efflux"
+          ],
+          [
+            "smac_efflux",
+            "xiap_neutralize"
+          ],
+          [
+            "xiap_neutralize",
+            "caspase_unleashed"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

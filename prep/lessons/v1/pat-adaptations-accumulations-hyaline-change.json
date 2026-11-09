@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-adaptations-accumulations",
+  "subject": "pathology",
+  "title": "Hyaline Change, Intracellular Pigments, and Melanin Synthesis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "In descriptive histopathology, the term hyaline denotes any intracellular or extracellular alteration that presents as a homogeneous, glassy, structureless, bright pink eosinophilic appearance under standard hematoxylin and eosin staining. This non-specific morphological transformation is **hyaline change**, produced by diverse physical accumulations of dense proteinaceous material.",
+      "say": "Hyaline change refers to any glassy pink homogeneous appearance under hematoxylin and eosin staining.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "protein_accumulation",
+            "label": "Diverse Mechanical, Vascular, or Protein Folding Stresses"
+          },
+          {
+            "id": "protein_crosslink",
+            "label": "Intracellular Cytoskeletal or Extracellular Collagen Cross-Linking"
+          },
+          {
+            "id": "optical_homogeneity",
+            "label": "Refractile Homogeneous Glassy Pink Eosinophilic Texture"
+          },
+          {
+            "id": "histologic_hyaline",
+            "label": "Identified Across Arteriolosclerosis, Mallory Bodies, and Scars"
+          }
+        ],
+        "edges": [
+          [
+            "protein_accumulation",
+            "protein_crosslink"
+          ],
+          [
+            "protein_crosslink",
+            "optical_homogeneity"
+          ],
+          [
+            "optical_homogeneity",
+            "histologic_hyaline"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intracellular hyaline change occurs characteristically within damaged ballooned hepatocytes of patients suffering from chronic alcoholic liver disease. Toxic acetaldehyde metabolites cross-link cytokeratin eight and eighteen intermediate filaments with ubiquitin and p62 proteins, forming irregular rope-like eosinophilic perinuclear inclusions designated **Mallory-Denk bodies**.",
+      "say": "Mallory-Denk bodies are tangled cytokeratin intermediate filaments that form hyaline clumps in hepatocytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intracellular Hyaline Examples",
+          "points": [
+            "Mallory-Denk bodies: aggregated cytokeratins in alcoholic hepatitis",
+            "Russell bodies: massive immunoglobulin accumulation in plasma cell ER",
+            "Hyaline droplets: reabsorbed plasma proteins in renal proximal tubules",
+            "Crooke hyaline: cytokeratin filaments in ACTH-secreting basophils"
+          ]
+        },
+        "right": {
+          "title": "Extracellular Hyaline Examples",
+          "points": [
+            "Hyaline arteriolosclerosis: plasma protein insudation in hypertension",
+            "Hyalinized scars: old, dense, acellular collagenous fibrous plaques",
+            "Corpora amylacea: inspissated prostatic and pulmonary secretions",
+            "Glomerular sclerosis: acellular basement membrane thickening in diabetes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In aging permanent cells such as myocardium and neurons, autophagocytosed organellar membranes undergo chronic free radical peroxidation. Cross-linked Schiff bases that resist lysosomal acid hydrolase degradation accumulate as golden-brown, finely granular perinuclear pigments designated **lipofuscin**, serving as an endogenous cellular biomarker of past free radical injury.",
+      "say": "Lipofuscin is an indigestible golden-brown wear-and-tear pigment from lipid peroxidation in aging cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mitochondrial_turnover",
+            "label": "Sublethal Free Radical Peroxidation Damages Organellar Lipids"
+          },
+          {
+            "id": "autolysosome_fusion",
+            "label": "Autophagosomes Deliver Peroxidized Membranes to Acid Lysosomes"
+          },
+          {
+            "id": "crosslinked_residue",
+            "label": "Cross-Linked Lipids and Proteins Resist Enzymatic Digestion"
+          },
+          {
+            "id": "perinuclear_cap",
+            "label": "Insoluble Lipofuscin Granules Accumulate Around the Aging Nucleus"
+          }
+        ],
+        "edges": [
+          [
+            "mitochondrial_turnover",
+            "autolysosome_fusion"
+          ],
+          [
+            "autolysosome_fusion",
+            "crosslinked_residue"
+          ],
+          [
+            "crosslinked_residue",
+            "perinuclear_cap"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic iron overload from hereditary hemochromatosis or repeated blood transfusions forces excessive ferric iron storage within tissue macrophages and parenchymal cells. Excess iron forms coarse, granular, golden-yellow to brown intracellular aggregates termed **haemosiderin**, which stains intensely bright blue with the Prussian blue potassium ferrocyanide reaction.",
+      "say": "Haemosiderin forms coarse golden-brown iron aggregates that stain brilliant blue with Prussian blue stain.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hemochromatosis-fig1.webp",
+        "caption": "Hepatic parenchymal iron overload displaying dense haemosiderin granules packed within hepatocytes.",
+        "alt": "Haemosiderin pigment deposition in liver tissue and Prussian blue reaction"
+      }
+    },
+    {
+      "tx": "When localized to alveolar macrophages following chronic pulmonary venous congestion, haemosiderin accumulation marks old extravasated red blood cells. Termed **heart failure cells**, these iron-engorged alveolar histiocytes reflect mechanical red cell breakdown following elevated left atrial capillary pressures in mitral stenosis.",
+      "say": "Heart failure cells are alveolar macrophages laden with haemosiderin from congested capillaries.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemosiderin Properties",
+          "points": [
+            "Endogenous iron-storage aggregate composed of ferritin clusters",
+            "Coarse, refractile, golden-yellow to brown microscopic granules",
+            "Identified definitively using Perls Prussian blue chemical reaction",
+            "Causes bronze diabetes, cirrhosis, and dilated cardiomyopathy"
+          ]
+        },
+        "right": {
+          "title": "Bilirubin Properties",
+          "points": [
+            "Major iron-free pigment derived from degraded heme porphyrin ring",
+            "Yellow-brown to greenish-brown non-refractile globular deposits",
+            "Negative for Perls Prussian blue; stains emerald green with Fouchet",
+            "Accumulates in biliary canaliculi, hepatocytes, and sclera in jaundice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The dark brown-black insoluble pigment responsible for human cutaneous, hair, and iris pigmentation is melanin. Synthesized exclusively by neural crest-derived melanocytes, the copper-dependent enzyme **tyrosinase** oxidizes tyrosine into dihydroxyphenylalanine, polymerizing the intermediate into dense pigment granules packaged within membrane-bound melanosomes.",
+      "say": "Melanocytes use the copper enzyme tyrosinase to convert tyrosine into brown-black melanin pigment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tyrosine_substrate",
+            "label": "L-Tyrosine Transported into Membrane-Bound Stage I Melanosomes"
+          },
+          {
+            "id": "tyrosinase_action",
+            "label": "Copper-Containing Tyrosinase Catalyzes Hydroxylation to DOPA"
+          },
+          {
+            "id": "dopaquinone_path",
+            "label": "Oxidizes DOPA to Dopaquinone, Branching to Eumelanin or Pheomelanin"
+          },
+          {
+            "id": "keratinocyte_transfer",
+            "label": "Melanosomes Transferred to Basal Keratinocytes to Form Supranuclear Caps"
+          }
+        ],
+        "edges": [
+          [
+            "tyrosine_substrate",
+            "tyrosinase_action"
+          ],
+          [
+            "tyrosinase_action",
+            "dopaquinone_path"
+          ],
+          [
+            "dopaquinone_path",
+            "keratinocyte_transfer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthesized melanosomes are transferred along dendritic arborizations to neighboring basal epidermal keratinocytes, where they align directly above the nucleus like protective parasols. This dense supranuclear melanin cap absorbs and scatters incoming **ultraviolet radiation**, shielding vulnerable nuclear genomic DNA from mutagenic cyclobutane pyrimidine dimer formation.",
+      "say": "Keratinocytes position melanin caps directly over their nuclei to shield DNA from ultraviolet radiation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/melanoma-fig1.webp",
+        "caption": "Atypical melanocytic proliferation showing prominent melanin pigment deposition in malignant melanoma.",
+        "alt": "Cutaneous malignant melanoma with dense intracellular and extracellular melanin"
+      }
+    },
+    {
+      "tx": "In tissue sections, dark brown melanin can be differentiated from morphologically similar hemosiderin and lipofuscin pigments using specialized histochemical stains. Melanin reduces ammoniacal silver nitrate into visible black metallic silver in the **Fontana-Masson argentaffin reaction**, and can be bleached completely by potassium permanganate.",
+      "say": "Fontana-Masson silver stain turns melanin granules black, differentiating them from other pigments.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Melanin Histochemical Profile",
+          "points": [
+            "Positive (black metallic precipitate) with Fontana-Masson silver stain",
+            "Bleached and dissolved completely by potassium permanganate",
+            "Negative for iron with Perls Prussian blue reaction",
+            "Autofluorescence negative under ultraviolet microscopy"
+          ]
+        },
+        "right": {
+          "title": "Lipofuscin Histochemical Profile",
+          "points": [
+            "Resistant to potassium permanganate bleaching procedures",
+            "Acid-fast positive with long Ziehl-Neelsen carbolfuchsin staining",
+            "Emits bright golden-yellow autofluorescence under UV light",
+            "Stains positively with Sudan black B due to peroxidized lipid core"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

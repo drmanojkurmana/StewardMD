@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-brainstem",
+ "subject": "anatomy",
+ "title": "Lateral Medullary Syndrome (Wallenberg) and Medullary Syndromes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The vascular supply of the medulla oblongata is derived from the vertebral arteries and their branches, particularly the anterior spinal artery and the posterior inferior cerebellar artery (PICA). Because these vessels nourish distinct wedge-shaped territories, arterial thrombosis precipitates classic brainstem stroke syndromes: **Wallenberg syndrome** laterally and medial medullary syndrome medially.",
+   "say": "Vertebral arteries and their branches supply the medulla. PICA occlusion produces lateral medullary Wallenberg syndrome, while anterior spinal occlusion causes medial medullary syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cord-section.svg",
+    "alt": "Anatomical schematic showing vascular territories of the medulla and spinal cord pathways",
+    "caption": "Cross-sectional topography of medullary vascular zones: lateral (PICA) vs medial (anterior spinal). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Lateral medullary syndrome (Wallenberg syndrome) is the most frequent brainstem vascular accident. It is caused by acute ischemic infarction of the posterolateral wedge of the medulla, resulting from occlusion of the posterior inferior cerebellar artery (PICA) or, more frequently, the parent **vertebral artery**. The ischemic wedge involves multiple nuclei and ascending/descending tracts.",
+   "say": "Occlusion of PICA or the vertebral artery causes Wallenberg syndrome. Infarction of the posterolateral medulla involves multiple nuclei and tracts with dramatic neurological signs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Vascular Thrombosis (Vertebral artery or PICA occlusion)"
+     },
+     {
+      "id": "w2",
+      "label": "Posterolateral Infarction (Ischemia of nucleus ambiguus, spinothalamic tract, spinal V, sympathetic path)"
+     },
+     {
+      "id": "w3",
+      "label": "Crossed Sensory Loss (Ipsilateral facial numbness with contralateral body pain/temp loss)"
+     },
+     {
+      "id": "w4",
+      "label": "Bulbar Palsy & Horner (Dysphagia, hoarseness, ataxia, vertigo, and ipsilateral ptosis/miosis)"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The neuroanatomical signature of Wallenberg syndrome is crossed (alternating) sensory loss. Infarction of the spinal trigeminal nucleus and tract causes loss of pain and temperature sensation over the ipsilateral side of the face. Concurrently, infarction of the adjacent **spinothalamic tract** causes loss of pain and temperature sensation over the contralateral trunk and limbs.",
+   "say": "Crossed sensory loss is the hallmark of Wallenberg syndrome: ipsilateral facial numbness from the spinal trigeminal tract, and contralateral body pain loss from the spinothalamic tract.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ipsilateral Facial Sensory Deficit",
+     "points": [
+      "Structure: Spinal nucleus and tract of trigeminal (CN V)",
+      "Deficit: Loss of pain and temperature over ipsilateral face",
+      "Corneal reflex: Depressed on affected side",
+      "Follows onion-skin distribution from mouth to occiput"
+     ]
+    },
+    "right": {
+     "title": "Contralateral Body Sensory Deficit",
+     "points": [
+      "Structure: Ascending lateral spinothalamic tract",
+      "Deficit: Loss of pain and temperature over contralateral limbs and trunk",
+      "Dorsal column sensation: Sparing of touch, vibration, proprioception",
+      "Alternating sensory pattern unique to lateral brainstem lesions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infarction of the nucleus ambiguus within the lateral medulla produces acute severe bulbar motor paralysis. The nucleus ambiguus provides branchiomotor efferents to cranial nerves IX and X; its destruction causes ipsilateral paralysis of the soft palate, pharynx, and larynx. The patient presents with acute dysphagia, nasal regurgitation of fluids, **dysphonia** (hoarseness), and a bovine cough.",
+   "say": "Infarction of nucleus ambiguus paralyzes the palate, pharynx, and larynx. Patients present with severe dysphagia, nasal regurgitation, hoarseness, and loss of the gag reflex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infarcted Structure",
+     "Functional Neural Modality",
+     "Resulting Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Nucleus ambiguus (CN IX, X)",
+      "Motor to palatal, pharyngeal, and laryngeal muscles",
+      "Dysphagia, hoarseness, absent gag reflex, uvula deviates to normal side"
+     ],
+     [
+      "Vestibular nuclei (inferior, medial)",
+      "Vestibular balance and vestibulo-ocular pathways",
+      "Rotational vertigo, intractable nausea, vomiting, nystagmus"
+     ],
+     [
+      "Inferior cerebellar peduncle (restiform)",
+      "Spinocerebellar and olivocerebellar mossy/climbing fibres",
+      "Ipsilateral limb ataxia, dysmetria, intentional tremor, falling to lesion side"
+     ],
+     [
+      "Descending sympathetic tract",
+      "Central oculosympathetic pathway from hypothalamus",
+      "Ipsilateral Horner syndrome (ptosis, miosis, facial anhidrosis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Involvement of the descending hypothalamospinal sympathetic tract passing through the lateral tegmentum produces an ipsilateral Horner syndrome (partial ptosis, miosis, and facial anhidrosis). Destruction of the inferior cerebellar peduncle causes ipsilateral **limb ataxia** and dysmetria, while vestibular nuclei ischemia produces violent rotational vertigo, vomiting, and horizontal-rotary nystagmus.",
+   "say": "Sympathetic tract damage yields ipsilateral Horner syndrome, inferior cerebellar peduncle damage causes ipsilateral ataxia, and vestibular nuclei damage causes violent vertigo.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Hypothalamospinal Tract Damage (Disrupts central sympathetic fibres descending to T1-T2 ciliospinal centre)"
+     },
+     {
+      "id": "s2",
+      "label": "Sympathetic Denervation (Loss of superior tarsal and pupillodilator drive)"
+     },
+     {
+      "id": "s3",
+      "label": "Ipsilateral Horner Syndrome (Classic mild ptosis, pupillary miosis, and facial anhidrosis)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Notice that Wallenberg syndrome characteristically spares motor strength in the limbs. Because the corticospinal motor tracts descend ventrally in the medullary pyramids and the medial lemniscus ascends medially, both are completely spared in lateral medullary infarction. The patient exhibits no limb weakness, which can initially mislead clinicians into dismissing a catastrophic **brainstem stroke**.",
+   "say": "Limb weakness is conspicuously absent in Wallenberg syndrome because the ventral pyramid is spared. Sparing of motor power can mislead clinicians despite extensive bulbar damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral Medullary Syndrome (PICA)",
+     "points": [
+      "Motor power: Intact (corticospinal tract spared in pyramid)",
+      "Deep sensation: Intact (medial lemniscus spared medially)",
+      "Hallmarks: Crossed sensory loss, Horner syndrome, ataxia, dysphagia",
+      "Vascular culprit: PICA or vertebral artery"
+     ]
+    },
+    "right": {
+     "title": "Medial Medullary Syndrome (Dejerine)",
+     "points": [
+      "Motor power: Contralateral hemiparesis (pyramid infarcted)",
+      "Deep sensation: Contralateral loss of vibration/proprioception (medial lemniscus)",
+      "Tongue: Ipsilateral hypoglossal palsy (tongue deviates to lesion side)",
+      "Vascular culprit: Anterior spinal artery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast, medial medullary syndrome (Dejerine anterior bulbar syndrome) results from occlusion of the anterior spinal artery or paramedian branches of the vertebral artery. Infarction of the medial medullary column damages three structures: the pyramid (causing contralateral hemiparesis), the **medial lemniscus** (contralateral loss of vibration and joint position sense), and the hypoglossal nerve (ipsilateral flaccid tongue paralysis).",
+   "say": "Medial medullary syndrome from anterior spinal occlusion strikes the pyramid, medial lemniscus, and hypoglossal nerve: contralateral hemiparesis and ipsilateral tongue palsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medial Medullary Structure",
+     "Normal Function",
+     "Deficit in Dejerine Syndrome"
+    ],
+    "rows": [
+     [
+      "Medullary pyramid",
+      "Descending corticospinal motor fibres",
+      "Contralateral spastic hemiparesis (sparing the face)"
+     ],
+     [
+      "Medial lemniscus",
+      "Ascending dorsal column touch and proprioception",
+      "Contralateral loss of vibration, conscious proprioception, discriminative touch"
+     ],
+     [
+      "Hypoglossal nerve rootlets",
+      "Somatic motor supply to tongue musculature",
+      "Ipsilateral lower motor neuron tongue paralysis (tongue deviates to lesion side)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rostral to the medulla lies the pons, constructed from a ventral basis pontis and a dorsal pontine tegmentum. The basis pontis features transverse pontocerebellar fibres entering the massive middle cerebellar peduncles, and the basilar groove housing the **basilar artery**. Complete occlusion of the basilar artery precipitates the devastating locked-in syndrome (pseudocoma), where consciousness is fully preserved but quadriplegia is complete.",
+   "say": "The pons features the basilar groove housing the basilar artery. Occlusion causes locked-in syndrome: quadriplegia with preserved consciousness, communicating only via vertical eye movements.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.webp",
+    "alt": "Gross anatomical specimen of ventral pons showing basilar sulcus and middle cerebellar peduncles",
+    "caption": "Gross ventral anatomy of the pons displaying the basilar artery sulcus and middle cerebellar peduncles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "7faee676-e4f6-4ab5-bb44-8bba9d13334d",
+  "e1b34c3a-977b-4f7e-8c0e-fc76c5f164cd",
+  "14149a0f-eeaa-4f18-8b8e-7ac64bbca53c"
+ ]
+}

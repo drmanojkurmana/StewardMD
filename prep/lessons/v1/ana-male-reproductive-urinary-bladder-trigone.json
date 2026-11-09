@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-male-reproductive",
+ "subject": "anatomy",
+ "title": "Urinary Bladder Trigone, Extravasation of Urine, Colles Fascia, and Penis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The urinary bladder is a hollow muscular reservoir situated in the anterior lesser pelvis behind the pubic symphysis. When empty, it is entirely pelvic in position, but as it distends beyond three hundred millilitres, the **urinary bladder** expands superiorly into the hypogastrium of the abdominal cavity, peeling the peritoneum off the anterior abdominal wall.",
+   "say": "Resting behind the pubic bones when empty, the bladder ascends into the lower abdomen as it fills. Distension peels the peritoneum upward, permitting safe suprapubic puncture.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-urinary-bladder-gross.webp",
+    "alt": "Gross anatomical dissection of human urinary bladder showing muscular wall and mucosal mucosal lining",
+    "caption": "Gross specimen of the bivalved urinary bladder showing detrusor muscularis and internal trigone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The internal mucosal surface of the bladder is heavily folded in the empty state, except over a smooth triangular area on the base called the trigone. The **vesical trigone** is bounded superiorly by the interureteric crest (Mercier bar) connecting the two ureteric orifices, and inferiorly by the internal urethral orifice at the bladder neck.",
+   "say": "On the internal bladder base, the trigone forms a smooth triangular territory. The interureteric crest connects the two ureteric openings above the internal urethral orifice.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-bladder-trigone.svg",
+    "alt": "Anatomical schematic of urinary bladder trigone showing ureteric orifices, interureteric bar, and uvula vesicae",
+    "caption": "Internal geometry of the bladder base highlighting the ureteric orifices, interureteric ridge, and trigone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The trigone possesses unique embryological, histological, and physiological characteristics. While the body of the bladder develops from endoderm of the vesicourethral canal, the trigone is derived from the incorporated caudal ends of the mesodermal **mesonephric ducts**. Consequently, the mucosal lining of the trigone is smooth, firmly bound to underlying muscularis, and never forms rugae.",
+   "say": "Unlike the endodermal bladder dome, the trigone derives embryologically from mesodermal mesonephric ducts. Its mucosa adheres firmly to underlying muscle, remaining entirely smooth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bladder Trigone",
+     "points": [
+      "Embryological origin: Mesodermal (mesonephric ducts)",
+      "Mucosal surface: Glassy smooth, firmly bound, no rugae",
+      "Innervation: Dense noradrenergic sympathetic supply",
+      "Clinical role: Prevents ureteric reflux during detrusor contraction"
+     ]
+    },
+    "right": {
+     "title": "Bladder Dome and Body",
+     "points": [
+      "Embryological origin: Endodermal (urogenital sinus)",
+      "Mucosal surface: Loosely attached, corrugated into heavy folds",
+      "Innervation: Cholinergic parasympathetic (pelvic splanchnics)",
+      "Clinical role: Expands passively and contracts during micturition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the perineum, the superficial fascia is stratified into a fatty superficial layer and a deep membranous layer designated Colles fascia. **Colles fascia** attaches laterally to the ischiopubic rami and posteriorly blends with the free posterior border of the perineal membrane and perineal body. Anteriorly, it continues over the penis and scrotum into Scarpa fascia.",
+   "say": "Colles fascia represents the membranous superficial perineal layer. It fuses laterally with ischiopubic rami and posteriorly with the perineal membrane, continuing upward into Scarpa fascia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fascial Attachment",
+     "Anatomical Boundary",
+     "Limitation of Fluid Spread"
+    ],
+    "rows": [
+     [
+      "Posterior attachment",
+      "Posterior edge of perineal membrane and perineal body",
+      "Prevents extravasated fluid from entering the posterior anal triangle"
+     ],
+     [
+      "Lateral attachments",
+      "Fascia lata of the thigh 1 cm below inguinal ligament (Holden line)",
+      "Prevents extravasated fluid from tracking down into the lower extremities"
+     ],
+     [
+      "Anterior continuity",
+      "Continuous with dartos fascia of scrotum, Buck fascia, Scarpa fascia",
+      "Permits extravasated fluid to expand into scrotum, penis, and abdominal wall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Straddle injuries to the perineum or false catheterisation can rupture the spongy urethra within the bulb of the penis. When the bulbous urethra is torn below the perineal membrane, **extravasation of urine** escapes into the superficial perineal pouch. Guided by the tight fascial attachments of Colles fascia, urine fills the scrotum, invests the penis, and ascends up the anterior abdominal wall.",
+   "say": "Rupture of the bulbous urethra leaks urine into the superficial perineal pouch. Because Colles fascia attaches posteriorly and laterally, urine tracks into the scrotum, penis, and abdomen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Bulbous Urethra Laceration (Straddle fall onto perineum crushes urethra against pubic arch)"
+     },
+     {
+      "id": "r2",
+      "label": "Superficial Pouch Extravasation (Urine floods space beneath Colles fascia)"
+     },
+     {
+      "id": "r3",
+      "label": "Scrotal and Penile Swelling (Fluid fills dartos and Buck fascial compartments)"
+     },
+     {
+      "id": "r4",
+      "label": "Abdominal Wall Ascent (Tracks beneath Scarpa fascia up to costal margins; cannot enter thigh)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The structural anatomy of the penis comprises three cylindrical bodies of erectile cavernous tissue bound by fibrous envelopes. Paired dorsolateral **corpora cavernosa** form the main dorsal bulk, while a solitary ventromedial corpus spongiosum traverses the ventral groove, expanding distally to cap the cavernosa as the glans penis. Each cylinder is encased in the dense tunica albuginea.",
+   "say": "Three erectile columns constitute the penis: paired dorsal corpora cavernosa and a ventral corpus spongiosum. The corpus spongiosum transmits the urethra and expands into the glans.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Erectile Cylinder",
+     "Position",
+     "Proximal Root Origin",
+     "Distal Termination"
+    ],
+    "rows": [
+     [
+      "Corpora cavernosa (paired)",
+      "Dorsolateral",
+      "Crura attached to ischiopubic rami",
+      "Blunt ends capped by the glans penis"
+     ],
+     [
+      "Corpus spongiosum (solitary)",
+      "Ventromedial (in ventral groove)",
+      "Bulb attached to perineal membrane",
+      "Expands to form the conical glans penis"
+     ],
+     [
+      "Tunica albuginea",
+      "Surrounds cylinders",
+      "Dense fibroelastic capsule",
+      "Thicker around cavernosa; thinner around spongiosum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "All three erectile cylinders are bundled together by deep fascia of the penis (Buck fascia). Coursing between Buck fascia and the underlying tunica albuginea along the dorsal midline is the **neurovascular bundle** of the penis, arranged from lateral to medial as the paired dorsal nerves of the penis, dorsal arteries, and a solitary deep dorsal vein in the exact midline.",
+   "say": "Buck fascia bundles all three erectile cylinders. Along the dorsal midline lies the neurovascular bundle: dorsal nerves laterally, dorsal arteries intermediately, and deep dorsal vein in the center.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Lateral: Dorsal Nerve of Penis (Sensory branch of pudendal; provides glans sensation)"
+     },
+     {
+      "id": "n2",
+      "label": "Intermediate: Dorsal Artery of Penis (Branch of internal pudendal; supplies skin and glans)"
+     },
+     {
+      "id": "n3",
+      "label": "Midline: Deep Dorsal Vein (Passes under pubic arch into prostatic venous plexus)"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Penile erection is an integrated neurovascular reflex coordinated by parasympathetic cavernous nerves (S2-S4 pelvic splanchnics). Parasympathetic firing induces nitric oxide release and relaxation of smooth muscle within the helicine arteries and cavernous sinusoids. Trapping of blood against the unyielding **tunica albuginea** compresses emissary veins, maintaining rigidity until sympathetic discharge produces ejaculation.",
+   "say": "Parasympathetic cavernous nerves release nitric oxide to dilate helicine arteries and fill cavernous sinusoids. Trapped blood against the rigid tunica albuginea maintains erection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Parasympathetic Stimulation (Pelvic splanchnics S2-S4 activate nitric oxide synthase)"
+     },
+     {
+      "id": "e2",
+      "label": "Helicine Artery Dilatation (Cavernous sinusoids engorge with arterial blood)"
+     },
+     {
+      "id": "e3",
+      "label": "Veno-Occlusion (Expanding sinusoids compress subtunical venous plexus against rigid tunica)"
+     },
+     {
+      "id": "e4",
+      "label": "Erection Maintained (High intracavernous pressure maintained until sympathetic detumescence)"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "980d6ea3-515e-4e16-8121-204dc9aff794",
+  "0e93ef7d-4838-4056-ae9b-b93478a5df7c",
+  "64d97f14-cf46-4d2a-9670-bf2d0d1661da"
+ ]
+}

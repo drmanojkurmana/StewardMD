@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-male-reproductive",
+ "subject": "anatomy",
+ "title": "Testicular Coverings, Tunica Vaginalis, Pampiniform Plexus, and Lymphatics",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During embryonic development, the testis develops high on the posterior abdominal wall and descends through the inguinal canal into the scrotum. In doing so, it evaginates each successive layer of the anterior abdominal wall, acquiring concentric coats. The **scrotum** provides a thermoregulated cutaneous sac that maintains testicular temperature two to three degrees below core body temperature.",
+   "say": "Descending from the posterior abdominal wall, the testis evaginates layers of the abdominal wall. The scrotum maintains testicular temperature two to three degrees below core body heat.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-spermatic-cord.svg",
+    "alt": "Anatomical schematic of spermatic cord layers and testicular coverings derived from abdominal wall",
+    "caption": "Derivation of testicular and spermatic cord coverings from corresponding anterior abdominal wall layers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Proceeding from superficial to deep, the six concentric coverings of the testis and spermatic cord correspond precisely to anterior abdominal wall strata. Skin is followed by dartos muscle (Scarpa fascia), **external spermatic fascia** (external oblique aponeurosis), cremasteric fascia and muscle (internal oblique), internal spermatic fascia (fascia transversalis), and tunica vaginalis (peritoneum).",
+   "say": "Six layers invest the testis: skin, dartos, external spermatic fascia, cremaster, internal spermatic fascia, and tunica vaginalis. Each corresponds to an abdominal wall layer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scrotal / Testicular Layer",
+     "Abdominal Wall Precursor",
+     "Key Structural Characteristics"
+    ],
+    "rows": [
+     [
+      "Skin and Dartos muscle",
+      "Colles fascia / Scarpa fascia",
+      "Contains smooth dartos muscle fibres that wrinkle scrotal skin in the cold"
+     ],
+     [
+      "External spermatic fascia",
+      "External oblique aponeurosis",
+      "Thin tubular sheath arising from the margins of the superficial inguinal ring"
+     ],
+     [
+      "Cremasteric fascia and muscle",
+      "Internal oblique muscle",
+      "Loops of skeletal muscle innervated by genital branch of genitofemoral nerve"
+     ],
+     [
+      "Internal spermatic fascia",
+      "Fascia transversalis",
+      "Delicate fibrous funnel derived from margins of the deep inguinal ring"
+     ],
+     [
+      "Tunica vaginalis",
+      "Peritoneal processus vaginalis",
+      "Double-layered serous sac covering anterior and lateral surfaces of testis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The tunica vaginalis is a closed serous sac representing the persistent distal pouch of the embryonic processus vaginalis. It consists of an outer parietal layer lining the internal spermatic fascia and an inner **visceral layer** intimately adherent to the tunica albuginea of the testis and epididymis. Between these layers lies a potential cavity lubricated by serous fluid.",
+   "say": "The tunica vaginalis consists of visceral and parietal serous layers. Normally containing a droplet of lubricating fluid, it cushions the anterior and lateral surfaces of the testis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Parietal Layer of Tunica Vaginalis (Adherent to inner wall of internal spermatic fascia)"
+     },
+     {
+      "id": "v2",
+      "label": "Tunica Vaginalis Cavity (Potential space holding 1-2 mL of physiological serous fluid)"
+     },
+     {
+      "id": "v3",
+      "label": "Visceral Layer of Tunica Vaginalis (Covers testis and epididymis except at posterior border)"
+     },
+     {
+      "id": "v4",
+      "label": "Tunica Albuginea (Dense, bluish-white fibrous capsule investing testicular parenchyma)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Abnormal accumulation of serous fluid within the tunica vaginalis cavity produces a hydrocele. Because the fluid completely surrounds the anterior and lateral aspects of the gonad, a primary **hydrocele** is classically translucent upon transillumination and allows the examining fingers to get above the swelling in the scrotum, distinguishing it from an indirect inguinal hernia.",
+   "say": "Fluid collection between tunica vaginalis layers produces a hydrocele. A hydrocele characteristically transilluminates brilliantly, and the examiner's fingers can get above the mass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Vaginal Hydrocele",
+     "points": [
+      "Fluid confined within patent tunica vaginalis sac",
+      "Brilliantly translucent to penlight transillumination",
+      "Examiner can readily get above the swelling at root of scrotum",
+      "Testis is impalpable, buried within fluid swelling"
+     ]
+    },
+    "right": {
+     "title": "Inguinal Hernia into Scrotum",
+     "points": [
+      "Peritoneal sac with bowel or omentum descends from canal",
+      "Opaque to transillumination (except in neonatal bowel gas)",
+      "Cannot get above the mass because it continues into inguinal ring",
+      "Cough impulse palpable at the neck of the swelling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surrounding the testicular artery within the spermatic cord is the pampiniform plexus, a network of ten to twelve anastomosing veins. The **pampiniform plexus** acts as an efficient countercurrent heat exchanger, cooling warm arterial blood before it reaches the seminiferous tubules. It coalesces in the deep inguinal ring to form four veins, and ultimately a single testicular vein.",
+   "say": "Ten to twelve anastomosing veins form the pampiniform plexus around the testicular artery. Countercurrent heat exchange cools arterial blood before it reaches sperm-producing tubules.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/varicocele-fig1.webp",
+    "alt": "Clinical and anatomical illustration of varicocele showing dilated pampiniform venous plexus",
+    "caption": "Anatomical configuration of dilated pampiniform venous plexus resulting in clinical varicocele. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Venous drainage displays striking asymmetry between sides. The right testicular vein drains into the inferior vena cava at an acute oblique angle, whereas the left testicular vein enters the **left renal vein** at a perpendicular right angle. Furthermore, the left vein is longer, lacks a competent valve, and may be compressed beneath the superior mesenteric artery.",
+   "say": "Asymmetry in venous outflow explains left-sided varicocele predominance. The left testicular vein enters the left renal vein at a right angle, sustaining higher hydrostatic pressures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Right Testicular Vein: Enters IVC obliquely at acute angle with valve protection"
+     },
+     {
+      "id": "d2",
+      "label": "Left Testicular Vein: Enters left renal vein at 90-degree right angle (high hydrostatic column)"
+     },
+     {
+      "id": "d3",
+      "label": "Nutcracker Effect: Left renal vein compressed between SMA and abdominal aorta"
+     },
+     {
+      "id": "d4",
+      "label": "Venous Reflux: Sustained retrograde pressure produces left-sided varicocele in 90% of cases"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically, a varicocele is an abnormal dilatation and tortuosity of the pampiniform plexus, classically resembling a bag of worms on palpation. Because ninety percent occur on the left side, sudden emergence of an isolated **right varicocele** or a non-emptying left varicocele in an older patient demands urgent imaging to exclude retroperitoneal renal cell carcinoma obstructing venous outflow.",
+   "say": "Palpating like a bag of worms, varicoceles occur predominantly on the left. A new right-sided varicocele is an alarming red flag for retroperitoneal tumour or caval obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Idiopathic Left Varicocele",
+     "points": [
+      "Develops in young men during adolescence",
+      "Decompresses completely when patient lies supine",
+      "Caused by valvular incompetence and anatomical 90-degree angle",
+      "May impair spermatogenesis via testicular hyperthermia"
+     ]
+    },
+    "right": {
+     "title": "Secondary (Malignant) Varicocele",
+     "points": [
+      "Arises on the right side or in patients over 40 years old",
+      "Fails to empty or decompress in the recumbent position",
+      "Caused by retroperitoneal tumour or RCC renal vein thrombus",
+      "Requires immediate abdominal ultrasound and contrast CT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The lymphatic drainage of the male gonad faithfully recapitulates its intra-abdominal embryological site of origin. Lymphatic vessels from the testis and epididymis ascend in the spermatic cord and retroperitoneum to terminate in the **para-aortic** (lumbar) lymph nodes around the L2 vertebral level. In sharp contrast, scrotal skin lymphatics drain into the superficial inguinal lymph nodes.",
+   "say": "Testicular lymphatics drain to para-aortic lymph nodes at the L2 level where the organ originated. In contrast, superficial scrotal skin drains to superficial inguinal nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Structure",
+     "Primary Lymphatic Drainage",
+     "Clinical Presentation of Malignancy"
+    ],
+    "rows": [
+     [
+      "Testis and epididymis",
+      "Para-aortic / lumbar lymph nodes (L2 level)",
+      "Testicular germ cell tumours present with retroperitoneal nodal masses"
+     ],
+     [
+      "Scrotal skin and dartos",
+      "Superficial inguinal lymph nodes",
+      "Scrotal squamous cell carcinoma presents with palpable groin lymphadenopathy"
+     ],
+     [
+      "Prostate gland",
+      "Internal iliac and sacral lymph nodes",
+      "Prostate carcinoma metastasises to obturator and internal iliac nodes"
+     ],
+     [
+      "Urinary bladder",
+      "External and internal iliac lymph nodes",
+      "Bladder urothelial carcinoma metastasises along iliac vascular chain"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "10df754e-6592-40c9-9273-c77b6755ad42",
+  "3824fd7a-1037-4750-bdc7-23ac1aceb92f",
+  "83fa36d1-895b-4d7b-ad14-d3d9bf84d94a"
+ ]
+}

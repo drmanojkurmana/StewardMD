@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-scalp-face",
+ "subject": "anatomy",
+ "title": "Dangerous Area of Face, Facial Vein, and Facial Nerve Branches",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The triangular zone of the midface encompassing the upper lip, philtrum, and dorsum of the nose up to the medial angle of the eye is clinically designated the **dangerous area of the face**. Infections within this region, such as furuncles or cellulitis, carry the peril of intracranial septic extension due to unique valveless venous communications.",
+   "say": "Covering the upper lip and nose, the dangerous area of the face carries venous risks. Valveless veins can transmit septic emboli into the intracranial cavernous sinus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cavernous-sinus.svg",
+    "alt": "Anatomical schematic showing cavernous sinus relations and tributaries from the facial venous system",
+    "caption": "Venous anastomoses connecting the facial vein and pterygoid plexus to the intracranial cavernous sinus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The facial vein is the chief venous drainage channel of the face. It begins at the medial canthus of the eye as the angular vein, formed by the junction of the supratrochlear and supraorbital veins. Crucially, the **facial vein** is entirely valveless throughout its course, permitting bidirectional blood flow dictated purely by intrathoracic pressure gradients and facial muscular contractions.",
+   "say": "Beginning as the angular vein at the inner eye, the facial vein descends across the cheek. Because it lacks valves, blood can flow in reverse under altered pressure gradients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Angular Vein (Formed at medial canthus by supratrochlear and supraorbital veins)"
+     },
+     {
+      "id": "v2",
+      "label": "Facial Vein (Descends obliquely across cheek behind facial artery)"
+     },
+     {
+      "id": "v3",
+      "label": "Common Facial Vein (Unites with anterior branch of retromandibular vein)"
+     },
+     {
+      "id": "v4",
+      "label": "Internal Jugular Vein (Terminates directly into IJV at carotid triangle)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two direct anatomical routes connect the facial vein with the intracranial cavernous sinus. First, the angular vein communicates directly with the superior ophthalmic vein, which exits the orbit through the superior orbital fissure into the **cavernous sinus**. Second, the deep facial vein connects the facial vein to the pterygoid venous plexus, which communicates via emissary veins through foramen ovale.",
+   "say": "Two conduits link the facial vein to the cavernous sinus: the superior ophthalmic vein at the inner canthus, and the deep facial vein through the pterygoid plexus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anastomotic Route",
+     "Intervening Conduit",
+     "Cranial Base Portal"
+    ],
+    "rows": [
+     [
+      "Anterior superior route",
+      "Angular vein -> Superior ophthalmic vein",
+      "Superior orbital fissure directly into cavernous sinus"
+     ],
+     [
+      "Deep infratemporal route",
+      "Facial vein -> Deep facial vein -> Pterygoid venous plexus",
+      "Foramen ovale and foramen vesalii emissary veins into cavernous sinus"
+     ],
+     [
+      "Inferior systemic route",
+      "Facial vein -> Common facial vein",
+      "Internal jugular vein draining into systemic brachiocephalic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Squeezing a pimple or infected hair follicle in the dangerous area can propel septic thrombophlebitis retrogradely through these valveless pathways. The resulting **cavernous sinus thrombosis** presents with high-spiking fevers, severe headache, chemosis, periorbital oedema, proptosis, and ophthalmoplegia due to compressive compromise of cranial nerves III, IV, V1, V2, and VI traversing the sinus.",
+   "say": "Septic emboli reaching the cavernous sinus trigger septic thrombosis. Patients develop chemosis, proptosis, and ophthalmoplegia from paralysis of cranial nerves three, four, and six.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Furuncle in Dangerous Area (Staphylococcus infection on upper lip or ala of nose)"
+     },
+     {
+      "id": "p2",
+      "label": "Retrograde Septic Thrombophlebitis (Propelled via angular and ophthalmic veins)"
+     },
+     {
+      "id": "p3",
+      "label": "Cavernous Sinus Thrombosis (Bilateral thrombosis due to circular intercavernous sinuses)"
+     },
+     {
+      "id": "p4",
+      "label": "Multiple Cranial Neuropathies (Ophthalmoplegia, ptosis, and forehead sensory loss)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The facial nerve (cranial nerve VII) provides complete motor innervation to the muscles of facial expression. Exiting the base of the skull through the stylomastoid foramen, the main trunk of the **facial nerve** enters the posteromedial surface of the parotid gland, within which it divides into two primary divisions: the temporofacial and cervicofacial divisions.",
+   "say": "Exiting the stylomastoid foramen, the facial nerve penetrates the parotid gland. Inside the glandular parenchyma, it divides into temporofacial and cervicofacial branches.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic tracing the intratemporal and extracranial branches of the facial nerve",
+    "caption": "Extracranial distribution of the five terminal motor branches of the facial nerve emerging from the parotid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within the parotid gland, the facial nerve forms a branching network known as the pes anserinus (goose foot), which yields five terminal motor branches emerging from the gland margins: temporal, zygomatic, **buccal**, marginal mandibular, and cervical. These branches radiate across the face to innervate the facial musculature developed from the second pharyngeal arch.",
+   "say": "The pes anserinus within the parotid emits five motor branches: temporal, zygomatic, buccal, marginal mandibular, and cervical. These supply muscles derived from the second pharyngeal arch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Terminal Branch",
+     "Parotid Emergence",
+     "Target Musculature Supplied"
+    ],
+    "rows": [
+     [
+      "Temporal branch",
+      "Upper superior border",
+      "Frontalis, corrugator supercilii, upper orbicularis oculi"
+     ],
+     [
+      "Zygomatic branch",
+      "Anterosuperior border",
+      "Lower orbicularis oculi, zygomaticus major and minor"
+     ],
+     [
+      "Buccal branch",
+      "Anterior border above duct",
+      "Buccinator, orbicularis oris, levator labii superioris"
+     ],
+     [
+      "Marginal mandibular",
+      "Anteroinferior border",
+      "Depressor labii inferioris, depressor anguli oris, mentalis"
+     ],
+     [
+      "Cervical branch",
+      "Lower inferior border",
+      "Platysma muscle in superficial cervical fascia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute infranuclear lesion of the facial nerve at or distal to the stylomastoid foramen produces Bell palsy. This causes complete flaccid paralysis of all ipsilateral facial muscles: loss of forehead wrinkles, inability to close the eye (lagophthalmos with Bell phenomenon), loss of the **nasolabial fold**, sagging of the corner of the mouth, and accumulation of food in the vestibule.",
+   "say": "Lower motor neuron facial palsy causes total ipsilateral facial paralysis. The patient loses forehead wrinkling, cannot close the eyelid, and displays corner-of-mouth drooping.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lower Motor Neuron Lesion (Bell Palsy)",
+     "points": [
+      "Lesion at or distal to facial motor nucleus",
+      "Paralysis of both upper and lower facial muscles",
+      "Inability to wrinkle forehead on affected side",
+      "Eye cannot close; Bell phenomenon visible"
+     ]
+    },
+    "right": {
+     "title": "Upper Motor Neuron Lesion (Stroke)",
+     "points": [
+      "Supranuclear lesion in corticobulbar tract",
+      "Paralysis of lower facial muscles only",
+      "Forehead wrinkling preserved due to bilateral cortical innervation",
+      "Voluntary smile lost but emotional smile may be spared"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emerging from the anterior border of the parotid gland, the parotid duct (Stensen duct) courses horizontally forward across the masseter muscle one fingerbreadth below the zygomatic arch. Accompanied by the transverse facial artery, the **parotid duct** turns medially at the anterior border of masseter, pierces the buccal pad of fat and buccinator, and opens opposite the upper second molar tooth.",
+   "say": "The parotid duct crosses masseter, pierces buccinator, and opens into the oral vestibule opposite the maxillary second molar. Clamping must avoid the adjacent buccal nerve.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Parotid Gland Emergence (Leaves anterior border 1 cm below zygomatic arch)"
+     },
+     {
+      "id": "d2",
+      "label": "Masseter Crossing (Runs horizontally across superficial surface of masseter)"
+     },
+     {
+      "id": "d3",
+      "label": "Buccinator Perforation (Turns medially at anterior border of masseter to pierce buccinator)"
+     },
+     {
+      "id": "d4",
+      "label": "Oral Cavity Orifice (Opens on mucosal papilla opposite crown of upper 2nd molar)"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "22182f5f-a58f-4be5-b192-7af03d8f4d29",
+  "2ea11d0d-0f75-421c-a919-2ee0a92b50bf",
+  "30c0cabf-6865-4aca-9a52-05a53307ef3a"
+ ]
+}
