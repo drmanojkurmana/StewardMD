@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "LEEP, Cone Biopsy and Treatment of Cervical Precancer",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Excising the transformation zone with an electrified wire loop is **LEEP**, loop electrosurgical excision. It treats and diagnoses in one specimen, unlike ablation which destroys evidence. The loop removes the whole zone where precancer lives. One visit can therefore confirm grade, clear margins and cure the lesion together.",
+   "say": "LEEP excises the transformation zone and provides tissue for histology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Zone mapped"
+     },
+     {
+      "id": "n1",
+      "label": "Loop excision"
+     },
+     {
+      "id": "n2",
+      "label": "Specimen graded"
+     },
+     {
+      "id": "n3",
+      "label": "Margins judged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cutting a cone of cervix with a scalpel for deeper disease is **cone biopsy**. It reaches endocervical lesions that loops and colposcopy cannot fully see. Suspected microinvasion and glandular precancer are its classic indications. Cold knife cones bleed more and need theatre, buying depth and clean margins in exchange.",
+   "say": "Cone biopsy involves cutting deeper tissue for endocervical disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Why cone"
+    ],
+    "rows": [
+     [
+      "Endocervical lesion",
+      "Beyond loop reach"
+     ],
+     [
+      "Microinvasion doubt",
+      "Full depth needed"
+     ],
+     [
+      "Glandular precancer",
+      "Skip lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Destroying lesions by heat or cold without a specimen is **ablative treatment**. It suits fully visible lesions already biopsied with concordant results. Cryotherapy and thermal ablation power screen and treat programmes worldwide. Ablation after unsampled screening trades certainty for completion, acceptable only within strict eligibility rules.",
+   "say": "Ablative treatment destroys precancer without providing a specimen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Excision (LEEP)",
+     "points": [
+      "Specimen obtained",
+      "Margins known",
+      "More bleeding"
+     ]
+    },
+    "right": {
+     "title": "Ablation",
+     "points": [
+      "No specimen",
+      "Faster, cheaper",
+      "Strict eligibility"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Abnormal cells at the cut edge signal possible residual disease, defining **margin status**. Ectocervical and endocervical margins carry different implications for follow up intensity. Positive margins do not mandate immediate re-excision in every woman. Surveillance with viral testing rescues many, reserving repeat surgery for persistence or invasion.",
+   "say": "Margin status involves abnormal cells at the edge of the specimen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Margins reported"
+     },
+     {
+      "id": "n1",
+      "label": "Risk judged"
+     },
+     {
+      "id": "n2",
+      "label": "Viral surveillance"
+     },
+     {
+      "id": "n3",
+      "label": "Re-excision if persistent"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding, infection and cervical stenosis follow excision in a minority, listing **excision complications**. Delayed bleeding around the eschar separation week surprises women who felt recovered. Stenosis matters most when it hides the zone from later sampling or blocks menstrual flow. Depth restraint prevents most harm, because radical depth rarely improves cure.",
+   "say": "Excision complications involve bleeding, infection and cervical stenosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Bleeding",
+      "First weeks"
+     ],
+     [
+      "Infection",
+      "Early"
+     ],
+     [
+      "Stenosis",
+      "Late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excisional treatment slightly raises later preterm birth risk, shaping **fertility counselling**. Risk climbs with depth and repeat procedures, so young women get conservative depth. Ablation spares cervical strength where it is eligible. Pregnancy after treatment earns cervical length surveillance rather than automatic intervention.",
+   "say": "Fertility counselling explains preterm risk after excisional treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Choice",
+     "Cervical effect"
+    ],
+    "rows": [
+     [
+      "Shallow excision",
+      "Small risk"
+     ],
+     [
+      "Deep or repeat",
+      "Higher risk"
+     ],
+     [
+      "Ablation",
+      "Strength spared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Viral testing after treatment proving cure is the **test of cure**. A negative result returns women toward routine intervals with confidence. Persistent viral positivity finds residual disease earlier than cytology does. The test of cure converts anxious annual smears into a single decisive checkpoint.",
+   "say": "The test of cure involves viral testing after treatment of precancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Treatment done"
+     },
+     {
+      "id": "n1",
+      "label": "Viral test later"
+     },
+     {
+      "id": "n2",
+      "label": "Negative to recall"
+     },
+     {
+      "id": "n3",
+      "label": "Positive to colposcopy"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hysterectomy enters only for recurrent disease, invasion or unrelated pathology, bounding **surgery limits**. Removing the uterus for first time precancer overtreats most women. Completed families with repeated positive margins form the reasonable exception. Even after hysterectomy, vault screening continues where precancer history demands it.",
+   "say": "Surgery limits reserve hysterectomy for recurrent or invasive disease.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-vaginal-hysterectomy.webp",
+    "alt": "Vaginal hysterectomy.",
+    "caption": "Hysterectomy route. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treatment succeeds when histology, margins and viral follow up agree, summarising **treatment audit**. Discordant cases go to multidisciplinary review rather than routine filing. Registries link treatment to later cancers to prove the programme works. The excision specimen is therefore both cure and the programme report card.",
+   "say": "Treatment audit involves checking histology, margins and viral follow up.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Cervical cancer local spread.",
+    "caption": "Cervical cancer. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

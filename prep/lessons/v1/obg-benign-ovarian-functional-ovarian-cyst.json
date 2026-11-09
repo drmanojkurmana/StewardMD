@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-benign-ovarian",
+ "subject": "obstetrics-gynaecology",
+ "title": "Functional Cysts, Dermoids, Torsion and Benign Ovarian Masses",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Simple cysts arising from a follicle that fails to rupture or involute are **functional ovarian cysts**. Most resolve spontaneously over a few cycles without treatment. Pain follows rupture, haemorrhage into the cyst or torsion rather than the cyst itself. A persistent or complex mass leaves this benign category and earns full adnexal assessment.",
+   "say": "Functional ovarian cysts arise from follicles and usually resolve without treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/functional-ovarian-cyst-fig1.webp",
+    "alt": "Follicular cyst and ovarian torsion.",
+    "caption": "Functional cysts and torsion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A follicular cyst persists when ovulation fails, while a corpus luteum cyst persists after ovulation, separating **follicular and luteal cysts**. Corpus luteum cysts bleed more readily and mimic ectopic pregnancy when they rupture. Follicular cysts are usually thin walled, unilocular and silent. Both share spontaneous resolution as their defining natural history.",
+   "say": "Follicular and luteal cysts differ by ovulation timing and bleeding tendency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Follicular",
+     "Corpus luteum"
+    ],
+    "rows": [
+     [
+      "Ovulation",
+      "Failed",
+      "Occurred"
+     ],
+     [
+      "Bleeding",
+      "Uncommon",
+      "Common"
+     ],
+     [
+      "Usual course",
+      "Resolves",
+      "Resolves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A mature cystic teratoma containing skin, hair, teeth and sebum is the classic **dermoid cyst**. It is the commonest germ cell tumour of young women and is often bilateral. Rokitansky nodules hold the solid elements that imaging loves to show. Torsion is its favourite complication because the fatty mass floats and swings freely.",
+   "say": "Dermoid cysts contain skin and hair and commonly undergo torsion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Origin"
+    ],
+    "rows": [
+     [
+      "Hair and sebum",
+      "Ectoderm"
+     ],
+     [
+      "Teeth and bone",
+      "Mesoderm"
+     ],
+     [
+      "Thyroid tissue",
+      "Endoderm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Twisting of the ovary on its pedicle cutting venous then arterial flow is **ovarian torsion**. Sudden severe unilateral pain with nausea in a woman with an adnexal mass is torsion until disproved. Doppler whirlpool sign shows the twisted pedicle directly. Detorsion preserves ovaries that old teaching removed, because even blue ovaries commonly recover function.",
+   "say": "Ovarian torsion twists the pedicle and requires urgent detorsion to save the ovary.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ovarian-torsion-fig1.webp",
+    "alt": "Twisted ovarian pedicle with whirlpool sign.",
+    "caption": "Torsion and whirlpool sign. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serous cystadenomas are thin walled and unilocular, while mucinous tumours grow huge and multilocular, contrasting **serous and mucinous cystadenomas**. Mucinous giants can fill the whole abdomen and still stay benign. Bilaterality favours serous tumours and metastatic disease over mucinous primaries. Size alone never settles benignity, so wall nodules and solid areas decide concern.",
+   "say": "Serous and mucinous cystadenomas differ in locularity, size and bilaterality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serous",
+     "points": [
+      "Thin walled",
+      "Unilocular",
+      "Often bilateral"
+     ]
+    },
+    "right": {
+     "title": "Mucinous",
+     "points": [
+      "Multilocular",
+      "Can grow huge",
+      "Usually unilateral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Spillage of mucinous tumour filling the peritoneum with gelatinous ascites is **pseudomyxoma peritonei**. Most cases start in the appendix rather than the ovary, which redirects the search. A fibroma with pleural effusion and ascites that vanish after removal is Meigs syndrome. Brenner tumours are small, solid and usually incidental beside larger masses.",
+   "say": "Pseudomyxoma peritonei involves gelatinous ascites and usually starts in the appendix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Fibroma",
+      "Meigs syndrome"
+     ],
+     [
+      "Brenner",
+      "Small solid incidental"
+     ],
+     [
+      "Mucinous rupture",
+      "Pseudomyxoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound rules separating benign from malignant masses without surgery are the **IOTA simple rules**. Benign features include unilocularity and smooth walls; malignant features include solid areas, ascites and papillary projections. The Risk of Malignancy Index combines scan features, menopausal status and a serum marker. Inapplicable scans go to expert sonographers rather than guesswork.",
+   "say": "IOTA simple rules separate benign from malignant masses on ultrasound features.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Adnexal mass seen"
+     },
+     {
+      "id": "n1",
+      "label": "IOTA features applied"
+     },
+     {
+      "id": "n2",
+      "label": "Benign or malignant pattern"
+     },
+     {
+      "id": "n3",
+      "label": "Route decided"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Expectant care suits simple asymptomatic cysts, while surgery follows symptoms, growth or suspicion, defining **cyst management choice**. Rupture with haemoperitoneum, torsion and diagnostic doubt all force operation. Postmenopausal cysts earn lower thresholds for removal than identical premenopausal ones. Aspiration alone recurs and forfeits histology, so it rarely replaces excision.",
+   "say": "Cyst management choice involves observation for simple cysts and surgery for suspicion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Observe",
+     "points": [
+      "Simple cyst",
+      "No symptoms",
+      "Premenopausal"
+     ]
+    },
+    "right": {
+     "title": "Operate",
+     "points": [
+      "Torsion or rupture",
+      "Solid areas",
+      "Postmenopausal mass"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Removal of the cyst with ovarian conservation through an elliptical cortical incision is **ovarian cystectomy**. It preserves fertility and hormones in young women who form most benign cases. Oophorectomy is reserved for necrosis, suspicion or completed families with destroyed ovaries. The excised wall always goes to histology because imaging cannot certify benignity.",
+   "say": "Ovarian cystectomy removes the cyst and preserves fertility in young women.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-ovarian-cystectomy.webp",
+    "alt": "Ovarian cystectomy incision.",
+    "caption": "Cystectomy technique. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
