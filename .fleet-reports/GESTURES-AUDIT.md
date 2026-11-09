@@ -106,6 +106,50 @@ surface was found that is not in the tables.
 11. With `prefers-reduced-motion` on (system setting): sheets still track the finger, but settle briefly with no fling or bounce.
 12. Tier B spot check: calipers / ECG / DICOM / signature still land exactly where the finger stops, unchanged.
 
+## Fix round 2 — settle-freeze blocker, swipe-back regression, hit targets (2026-11-09)
+
+Blocker was real: `SMD_SPRING.animate()`'s `stop()` never calls `onDone`, and every surface
+called it unconditionally at touchstart, so any touch during a settle froze that surface
+partway with its completion lost. All four surfaces now share one contract, implemented once
+in [smd-spring.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/smd-spring.js:20)
+as `SMD_SPRING.makeSettle(animate)` (pure seam, node-tested): it owns the in-flight settle,
+tracks its painted position from `onUpdate`, and decides `touch(onElement)` → `ignore`
+(touch elsewhere: settle finishes normally) / `hold` (touch on the element: frozen where it
+is). While held, `resume()` re-runs the same settle to its original target with its original
+completion, exactly once; `supersede()` drops that completion when a drag takes over, and
+the drag's own release starts the next settle. `start()` supersedes any previous settle.
+Existing `animate()` contract unchanged for other callers; reduced motion still completes
+synchronously, so there is never a flight to catch.
+
+- [sheet-drag.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/sheet-drag.js:133): touchstart only holds when the touch is inside the settling sheet; elsewhere it returns and the settle finishes. A catch seeds `g.base` from the held position (no jump); drag activation supersedes; tap, lost axis lock, `touchcancel` or a catch that never forms a gesture resumes via `end()`/parked-catch. `finish`/`back` run exactly once.
+- [swipe-actions.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/swipe-actions.js:74): same, keyed on the settling row/tray. A closing row (`open === null`) is caught from its painted offset, not `base: 0`; a caught tray is adopted by the re-drag instead of leaked, and its removal belongs to the new release. Tap resumes the lock/close settle (timer or tray removal exactly once).
+- [pull-refresh.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/pull-refresh.js:79): same, keyed on the settling scroller. A caught pull continues on the same resistance curve (`rawFor`, the inverse of `resist`), so the spring to HOLD and the snap-back resume to their original targets; a drag during a busy settle returns to its target with the refresh flow untouched; the final completion (`busy = false`, cleanup) runs exactly once.
+- [prep.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/prep.js:2925) `bindSheetDrag`: the dismiss flight is only held when the pointer lands inside the settling sheet (any other pointerdown under root leaves it running). The sheet and scrim animations are committed at their painted values and cancelled, the scrim keeps its painted opacity (no fill-forwards leftover at 0); a tap or lost axis resumes a fresh dismiss flight; a drag continues from the held Y and decides. `oncancel` no longer suppresses close: close runs once via `onfinish` or the fallback timer, and a deliberate catch clears `flight` first so neither can fire. Snap-back settles from `PREP_MOTION.settle` are caught the same way (painted Y via computed transform).
+
+Regression restored: [swipe-back.js](/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/gestures-global/swipe-back.js:345)
+depth-off settle is `.18s ease` again (`settleTransition(depth, ms)`, pure-tested, including
+when `settleMs` returns 300 for a slow release); the depth-on velocity-seeded timing is
+unchanged. The depth-off path matches origin/main.
+
+Hit targets (skill: enlarge invisibly, never grow the layout): the visible back button is
+38px again with a 44px `::after` hitbox (`inset:-3px`), and the A-Z strip is 22px again
+(letters 22px) with a 44px `::before` hitbox (±11px). `wouldOverlap()` reads
+`getBoundingClientRect()`, which is the 38px visible box — unchanged and still correct.
+
+Verification this round: `node --check` on all edited files pass. The brief's targeted suite
+(`gestures-pure`, `toast-swipe-pure`, `premium-motion-pure`, `prep-nav`, `prep-app`,
+`opd-profile-sheet`) is 85 pass, 0 fail, including 8 new assert tests: touch elsewhere,
+tap-on-element hold/resume, catch-then-drag supersede, supersede-by-new-settle, synchronous
+reduced-motion completion, depth-off timing, prep wiring, and hit-target shapes — each
+completion exactly once and no settle left partway. `node test/run-swipe-back-ui.mjs` still
+fails before any assertion in this sandbox (`webSocketDebuggerUrl` undefined, Chrome/CDP
+does not start — same as the base round), so its 5 known base failures could not be re-run
+and no new harness result is claimed. Nothing verified on a device.
+
+Cache-busts this round: `gest1` → `gest2` for smd-spring, sheet-drag, pull-refresh,
+swipe-actions, swipe-back and az-scrubber in index.html, prep loader `prep128` → `prep129`,
+and the `sw.js` CACHE name gained `gest2` in place of `gest1`.
+
 ## Compliance notes (standing UI rules)
 
 Palette/layout/copy unchanged by this job (no visual redesign). Fixes touch only timing,
