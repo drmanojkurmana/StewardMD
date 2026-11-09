@@ -83,7 +83,7 @@
       }
     },
     {
-      "tx": "**Spreading factors** dissolve the neighbourhood for pyogenes: hyaluronidase digests ground substance, streptokinase activates plasminogen dissolving clots, DNases liquefy pus (improving spread, thinning abscesses historically treated with streptokinase streptodornase), and C5a peptidase trims neutrophil summons at the surface.",
+      "tx": "**Spreading factors** dissolve the neighbourhood for pyogenes: hyaluronidase digests ground substance, streptokinase activates plasminogen dissolving clots, DNases liquefy pus (improving spread, thinning abscesses historically treated with streptokinase streptodornase), and C5a peptidase trims neutrophil summons at the surface. Examiners often pair this with streptococcal toxic shock, where the same superantigens act systemically rather than on a child's throat and skin.",
       "say": "Dissolve matrix, clot and pus while muting neutrophil calls: spreading is engineered.",
       "vis": {
         "kind": "compare",
@@ -113,12 +113,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "swab", "label": "Tonsillar and posterior pharyngeal swab" },
-          { "id": "plate", "label": "Blood agar streaked and stabbed" },
-          { "id": "read", "label": "Beta colonies at 24 and 48 hours" },
-          { "id": "group", "label": "Bacitracin, PYR or latex grouping" }
+          {
+            "id": "swab",
+            "label": "Tonsillar and posterior pharyngeal swab"
+          },
+          {
+            "id": "plate",
+            "label": "Blood agar streaked and stabbed"
+          },
+          {
+            "id": "read",
+            "label": "Beta colonies at 24 and 48 hours"
+          },
+          {
+            "id": "group",
+            "label": "Bacitracin, PYR or latex grouping"
+          }
         ],
-        "edges": [["swab", "plate"], ["plate", "read"], ["read", "group"]]
+        "edges": [
+          [
+            "swab",
+            "plate"
+          ],
+          [
+            "plate",
+            "read"
+          ],
+          [
+            "read",
+            "group"
+          ]
+        ]
       }
     },
     {

@@ -88,12 +88,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "alpha", "label": "Alpha haemolytic colony" },
-          { "id": "opt", "label": "Optochin susceptible or bile soluble: pneumococcus" },
-          { "id": "salt", "label": "Grows in 6.5 percent salt and PYR: enterococcus" },
-          { "id": "virid", "label": "Neither: viridans streptococci group" }
+          {
+            "id": "alpha",
+            "label": "Alpha haemolytic colony"
+          },
+          {
+            "id": "opt",
+            "label": "Optochin susceptible or bile soluble: pneumococcus"
+          },
+          {
+            "id": "salt",
+            "label": "Grows in 6.5 percent salt and PYR: enterococcus"
+          },
+          {
+            "id": "virid",
+            "label": "Neither: viridans streptococci group"
+          }
         ],
-        "edges": [["alpha", "opt"], ["alpha", "salt"], ["salt", "virid"]]
+        "edges": [
+          [
+            "alpha",
+            "opt"
+          ],
+          [
+            "alpha",
+            "salt"
+          ],
+          [
+            "salt",
+            "virid"
+          ]
+        ]
       }
     },
     {
@@ -172,7 +197,7 @@
       }
     },
     {
-      "tx": "**Quellung heritage** also typed the pre antibiotic serum therapy era (type specific antisera treated lobar pneumonia), reminding that pneumococcal identity was therapy before penicillin. Its capsule reaction remains the conceptual ancestor of every antigen detection kit in this curriculum.",
+      "tx": "**Quellung heritage** also typed the pre antibiotic serum therapy era (type specific antisera treated lobar pneumonia), reminding that pneumococcal identity was therapy before penicillin. Its capsule reaction remains the conceptual ancestor of every antigen detection kit in this curriculum. Modern antigen kits inherit this thinking digitally, but the halo under the microscope remains the clearest picture of what a capsule actually is.",
       "say": "Serum therapy needed the type before the dose; typing began as a prescription.",
       "vis": {
         "kind": "compare",

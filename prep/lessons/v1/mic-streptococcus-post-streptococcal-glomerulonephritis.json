@@ -88,12 +88,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "screen", "label": "Rectovaginal culture 36 to 37 weeks" },
-          { "id": "labour", "label": "Positive or risk: intrapartum penicillin" },
-          { "id": "four", "label": "Four hours before delivery optimal" },
-          { "id": "baby", "label": "Newborn observation or evaluation by algorithm" }
+          {
+            "id": "screen",
+            "label": "Rectovaginal culture 36 to 37 weeks"
+          },
+          {
+            "id": "labour",
+            "label": "Positive or risk: intrapartum penicillin"
+          },
+          {
+            "id": "four",
+            "label": "Four hours before delivery optimal"
+          },
+          {
+            "id": "baby",
+            "label": "Newborn observation or evaluation by algorithm"
+          }
         ],
-        "edges": [["screen", "labour"], ["labour", "four"], ["four", "baby"]]
+        "edges": [
+          [
+            "screen",
+            "labour"
+          ],
+          [
+            "labour",
+            "four"
+          ],
+          [
+            "four",
+            "baby"
+          ]
+        ]
       }
     },
     {
@@ -147,7 +172,7 @@
       }
     },
     {
-      "tx": "**GBS vaccine horizon** (capsular conjugate in maternal trials) aims to protect neonates through transferred IgG (the antibody module's placenta logic), potentially retiring screening complexity, while serotype replacement watched from pneumococcal experience counsels humility. Prevention history here is unfinished science.",
+      "tx": "**GBS vaccine horizon** (capsular conjugate in maternal trials) aims to protect neonates through transferred IgG (the antibody module's placenta logic), potentially retiring screening complexity, while serotype replacement watched from pneumococcal experience counsels humility. Prevention history here is unfinished science. Until trials mature, screening and intrapartum prophylaxis remain the standard against which any vaccine must prove both safety in pregnancy and durable neonatal antibody.",
       "say": "Vaccinate the mother, arm the newborn through placenta: GBS prevention's next chapter.",
       "vis": {
         "kind": "compare",

@@ -183,17 +183,42 @@
       }
     },
     {
-      "tx": "**Meningococcal disease surveillance** tracks serogroup, age and vaccine programme effects (MenB infant programmes, adolescent MenACWY herd), genomics detecting hyperinvasive lineages (cc11 W expansion) and capsule switching. Bench sugar becomes sequence; public health reads both.",
+      "tx": "**Meningococcal disease surveillance** tracks serogroup, age and vaccine programme effects (MenB infant programmes, adolescent MenACWY herd), genomics detecting hyperinvasive lineages (cc11 W expansion) and capsule switching. Bench sugar becomes sequence; public health reads both. Genomic surveillance also watches vaccine antigen variants, because protein based MenB coverage depends on which surface proteins circulating strains actually express.",
       "say": "Serogroup plus sequence decides whether a case is tragedy or outbreak beginning.",
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "case", "label": "Confirmed invasive case isolate saved" },
-          { "id": "group", "label": "Serogroup and genomic lineage typed" },
-          { "id": "contacts", "label": "Prophylaxis and vaccination circles drawn" },
-          { "id": "trend", "label": "Programme impact and strain shifts reviewed" }
+          {
+            "id": "case",
+            "label": "Confirmed invasive case isolate saved"
+          },
+          {
+            "id": "group",
+            "label": "Serogroup and genomic lineage typed"
+          },
+          {
+            "id": "contacts",
+            "label": "Prophylaxis and vaccination circles drawn"
+          },
+          {
+            "id": "trend",
+            "label": "Programme impact and strain shifts reviewed"
+          }
         ],
-        "edges": [["case", "group"], ["group", "contacts"], ["contacts", "trend"]]
+        "edges": [
+          [
+            "case",
+            "group"
+          ],
+          [
+            "group",
+            "contacts"
+          ],
+          [
+            "contacts",
+            "trend"
+          ]
+        ]
       }
     }
   ]
