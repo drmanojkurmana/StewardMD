@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-gallbladder",
+ "subject": "surgery",
+ "title": "Mucocele, Empyema, and Gallstone Ileus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "When a solitary calculus becomes impacted chronically in the cystic duct without bacterial colonization, the gallbladder transforms into a **mucocele of gallbladder**. Over time, trapped intraluminal bile pigments are gradually resorbed by the epithelial lining, while goblet cells continuously secrete clear mucus. The result is massive progressive distension of the organ filled with non-pigmented, sterile, glassy mucoid liquid, traditionally termed white bile.",
+   "say": "A gallbladder mucocele occurs when chronic sterile cystic duct obstruction leads to bile pigment reabsorption and massive clear mucus accumulation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gallbladder-disease-fig1.webp",
+    "alt": "Anatomical schematic showing impacted stone in the cystic duct neck resulting in massive gallbladder hydrops and white bile.",
+    "caption": "Mucocele of the gallbladder: chronic sterile impaction of the cystic duct causing marked hydrops. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinically, a mucocele manifests as a visible, non-tender, pear-shaped mass in the right hypochondrium that moves smoothly downward with respiration. Because active infection is absent, the patient remains afebrile without leukocytosis or peritoneal signs. However, persistent unrelieved intra-cystic pressure threatens wall ischemia and secondary bacterial infection, making early elective **cholecystectomy** the definitive treatment of choice.",
+   "say": "Patients with a mucocele present with a palpable non-tender right upper quadrant mass without fever, requiring elective cholecystectomy to prevent complications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Mucocele (Hydrops)",
+     "Empyema Gallbladder"
+    ],
+    "rows": [
+     [
+      "Intraluminal Fluid",
+      "Clear sterile mucus ('white bile')",
+      "Turbid purulent pus and bacterial debris"
+     ],
+     [
+      "Systemic Sepsis",
+      "Absent (patient is afebrile)",
+      "Severe (high fever, rigors, tachycardia)"
+     ],
+     [
+      "Abdominal Signs",
+      "Smooth non-tender palpable mass",
+      "Exquisite tenderness, guarding, peritonitis"
+     ],
+     [
+      "Leukocyte Count",
+      "Normal white blood cell count",
+      "Marked leukocytosis (>15,000 to 20,000/uL)"
+     ],
+     [
+      "Surgical Urgency",
+      "Urgent elective cholecystectomy",
+      "Emergency surgery or percutaneous drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If an acutely obstructed hydropic gallbladder becomes colonized by virulent gas-forming or pyogenic enteric bacteria, the organ progresses to an **empyema of gallbladder**. The lumen becomes tightly distended with frank purulent exudate, creating extreme intraluminal pressure that compromises venous return. The ischemic, necrotic wall is highly vulnerable to gangrenous perforation, leading to diffuse peritonitis and overwhelming Gram-negative septic shock.",
+   "say": "Empyema develops when an obstructed gallbladder fills with frank pus, generating wall ischemia, gangrene, and an imminent risk of septic perforation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "obstruct",
+      "label": "Cystic Duct Obstruction with Bacterial Seeding"
+     },
+     {
+      "id": "pus",
+      "label": "Suppurative Exudate & Massive Intraluminal Pressure"
+     },
+     {
+      "id": "ischemia",
+      "label": "Mural Ischemia, Thrombosis & Gangrene"
+     },
+     {
+      "id": "perforate",
+      "label": "Free Perforation into Peritoneum or Pericholecystic Abscess"
+     }
+    ],
+    "edges": [
+     [
+      "obstruct",
+      "pus"
+     ],
+     [
+      "pus",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "perforate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency management of gallbladder empyema mandates aggressive intravenous fluid resuscitation, broad-spectrum antimicrobial coverage, and prompt surgical decompression. In medically fit patients, emergency laparoscopic or open cholecystectomy is executed with intraoperative needle decompression of the tense purulent fundus. For septic, hemodynamically unstable patients with multiple organ failure, bedside ultrasound-guided **percutaneous cholecystostomy** provides rapid life-saving decompression.",
+   "say": "Gallbladder empyema requires urgent surgical cholecystectomy or emergency percutaneous cholecystostomy drainage in unstable, septic candidates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Emergency Cholecystectomy",
+     "points": [
+      "Definitive removal of infected organ",
+      "Aspirate tense fundus before manipulation",
+      "Subtotal cholecystectomy if Calot frozen",
+      "Favoured in hemodynamically stable patients"
+     ]
+    },
+    "right": {
+     "title": "Percutaneous Cholecystostomy",
+     "points": [
+      "Bedside ultrasound-guided catheter insertion",
+      "Immediate purulent decompression",
+      "Local anaesthesia, avoids general anaesthetic",
+      "Bridge to stabilization in septic shock"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A rare but catastrophic mechanical complication of long-standing gallstone disease in the elderly is **gallstone ileus**. Repeated episodes of pericholecystic inflammation cause the fundus of the gallbladder to adhere densely to the adjacent duodenal bulb. Over time, pressure necrosis from a large calculus eroding through the gallbladder wall produces a wide spontaneous cholecystoduodenal fistula.",
+   "say": "Gallstone ileus occurs when a large gallstone erodes through a cholecystoduodenal fistula and causes mechanical bowel obstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "adhere",
+      "label": "Recurrent Inflammation: Gallbladder Adheres to Duodenum"
+     },
+     {
+      "id": "erosion",
+      "label": "Pressure Necrosis & Cholecystoduodenal Fistula Formation"
+     },
+     {
+      "id": "migrate",
+      "label": "Large Calculus (>2.5 cm) Enters Intestinal Lumen"
+     },
+     {
+      "id": "impact",
+      "label": "Mechanical Impaction in Terminal Ileum (Gallstone Ileus)"
+     }
+    ],
+    "edges": [
+     [
+      "adhere",
+      "erosion"
+     ],
+     [
+      "erosion",
+      "migrate"
+     ],
+     [
+      "migrate",
+      "impact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once within the gastrointestinal tract, the large gallstone travels through the jejunum and ileum until it encounters the narrowest segment of the small intestine. This anatomical site of obstruction is the **terminal ileum**, situated immediately proximal to the ileocaecal valve. Less frequently, a calculus impacts within the duodenum itself to produce gastric outlet obstruction, designated eponymously as Bouveret syndrome.",
+   "say": "The extruded gallstone typically impacts at the narrow terminal ileum, though duodenal impaction causing gastric outlet obstruction is known as Bouveret syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Impaction Site",
+     "Clinical Presentation",
+     "Eponymic Designation"
+    ],
+    "rows": [
+     [
+      "Terminal Ileum (70%)",
+      "Mechanical small bowel obstruction",
+      "Classic Gallstone Ileus"
+     ],
+     [
+      "Proximal Duodenum (5%)",
+      "Gastric outlet obstruction, vomiting",
+      "Bouveret Syndrome"
+     ],
+     [
+      "Jejunum (15%)",
+      "High small bowel obstruction",
+      "Jejunal Gallstone Ileus"
+     ],
+     [
+      "Sigmoid Colon (5%)",
+      "Large bowel obstruction through colonic fistula",
+      "Colonic Gallstone Obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic pathognomonic radiological triad identified on plain abdominal radiographs or computed tomography in gallstone ileus is **Rigler triad**. This classic triad comprises mechanical small bowel obstruction, pneumobilia indicating gas within the biliary tree, and an aberrantly located radiopaque gallstone in the right lower quadrant. Computed tomography provides superior diagnostic accuracy, clearly delineating the fistula, calculus, and transition zone.",
+   "say": "Rigler triad consists of small bowel obstruction, pneumobilia, and an ectopic gallstone in the right iliac fossa on abdominal imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rigler Triad Components",
+     "points": [
+      "Dilated small bowel loops with air-fluid levels",
+      "Pneumobilia (gas within intrahepatic bile ducts)",
+      "Ectopic radiopaque calculus in right lower quadrant",
+      "Fixation of gallstone on serial radiographs"
+     ]
+    },
+    "right": {
+     "title": "Rigler Sign (Pneumoperitoneum)",
+     "points": [
+      "Completely different radiological entity",
+      "Also known as the 'double-wall sign'",
+      "Free air outlining both inner and outer bowel wall",
+      "Signifies hollow viscus perforation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical management of gallstone ileus prioritizes relief of the acute bowel obstruction through an emergency **enterolithotomy**. Through a laparotomy or laparoscopy, the impacted calculus is milked slightly proximally into healthy, uninflamed ileum and extracted via a longitudinal enterotomy that is closed transversely to avert luminal narrowing. Concomitant fistula takedown and cholecystectomy are generally avoided during the emergency operation to minimize operative mortality.",
+   "say": "Enterolithotomy alone relieves the bowel obstruction by extracting the stone through a healthy ileal enterotomy, deferring complex fistula takedown.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-courvoisier_sign.webp",
+    "alt": "Clinical illustration distinguishing causes of palpable enlarged gallbladder including mucocele, empyema, and pancreaticobiliary malignancy.",
+    "caption": "Palpable gallbladder: clinical differentiation of hydrops and empyema from malignant distal biliary obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

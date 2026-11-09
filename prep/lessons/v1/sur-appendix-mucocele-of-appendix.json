@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sur-appendix",
+ "subject": "surgery",
+ "title": "Mucocele, Pseudomyxoma Peritonei, and Appendicitis in Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Progressive cystic dilatation of the vermiform appendix caused by chronic intraluminal accumulation of gelatinous, mucus-rich secretions is termed a **mucocele of appendix**. Mucoceles are categorized pathologically into four distinct entities: non-neoplastic retention cysts, mucosal hyperplasia, low-grade appendiceal mucinous neoplasms, and invasive mucinous adenocarcinomas. While simple retention cysts stem from faecolith obstruction, true mucinous neoplasms demonstrate autonomous neoplastic mucin production.",
+   "say": "A mucocele of the appendix is cystic dilatation from mucus accumulation, ranging from benign retention cysts to mucinous neoplasms.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-mucocele-of-appendix.webp",
+    "alt": "Gross surgical specimen of a massively distended, glassy translucent mucocele of the appendix.",
+    "caption": "Mucocele of the appendix: marked cystic distension of the appendiceal lumen filled with thick mucin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On cross-sectional computed tomography, an appendiceal mucocele appears as a well-circumscribed, round or tubular, low-attenuation cystic mass in the right lower quadrant, characteristically exhibiting curved mural calcification known as the porcelain appendix. Extreme care must be exercised during surgical manipulation to completely prevent iatrogenic capsular rupture. Unintentional spillage of neoplastic mucin into the peritoneal cavity seeds epithelial cells that produce catastrophic **pseudomyxoma peritonei**.",
+   "say": "CT demonstrates a tubular cystic mass with mural calcification, which must be handled delicately to prevent peritoneal mucin spillage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/appendiceal-mucinous-neoplasm-fig1.webp",
+    "alt": "Pathological diagram showing appendiceal mucinous neoplasm with abundant gelatinous mucin pools and peritoneal implants.",
+    "caption": "Appendiceal mucinous neoplasm: epithelial mucin secretion with potential for extensive transcoelomic dissemination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The devastating peritoneal syndrome characterized by progressive accumulation of abundant gelatinous mucinous ascites and multifocal peritoneal implants throughout the abdominal cavity is **pseudomyxoma peritonei**. Arising almost exclusively from ruptured low-grade appendiceal mucinous neoplasms, expelled neoplastic goblet cells implant on peritoneal surfaces and continue producing voluminous jelly-like mucin, traditionally described as jelly belly.",
+   "say": "Pseudomyxoma peritonei involves progressive accumulation of jelly-like mucinous fluid following intraperitoneal rupture of an appendiceal neoplasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lamn",
+      "label": "Low-Grade Appendiceal Mucinous Neoplasm (LAMN)"
+     },
+     {
+      "id": "rupture",
+      "label": "Spontaneous or Iatrogenic Intraperitoneal Rupture"
+     },
+     {
+      "id": "seed",
+      "label": "Transcoelomic Implantation of Mucin-Secreting Goblet Cells"
+     },
+     {
+      "id": "pmp",
+      "label": "Pseudomyxoma Peritonei: 'Jelly Belly' & Intestinal Encasing"
+     }
+    ],
+    "edges": [
+     [
+      "lamn",
+      "rupture"
+     ],
+     [
+      "rupture",
+      "seed"
+     ],
+     [
+      "seed",
+      "pmp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contemporary definitive curative treatment protocol for resectable pseudomyxoma peritonei combines complete surgical **cytoreductive surgery** with hyperthermic intraperitoneal chemotherapy. Pioneered by Paul Sugarbaker, the surgeon performs peritonectomy procedures to strip all affected peritoneal surfaces and resects involved viscera. This extirpation is immediately followed by ninety minutes of continuous perfusion with heated mitomycin C at forty-two degrees Celsius.",
+   "say": "Cytoreductive peritonectomy combined with hyperthermic intraperitoneal chemotherapy is the definitive curative treatment for pseudomyxoma peritonei.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Surgical Action",
+     "Oncological Objective"
+    ],
+    "rows": [
+     [
+      "Cytoreductive Surgery",
+      "Complete peritonectomy & visceral resection",
+      "Achieve complete macroscopic cytoreduction (CC-0 score)"
+     ],
+     [
+      "Perfusion Phase",
+      "Peritoneal perfusion at 41 to 42 degrees Celsius",
+      "Hyperthermia increases tissue depth of chemotherapy"
+     ],
+     [
+      "Intraperitoneal Agent",
+      "Mitomycin C or oxaliplatin instillation for 90 min",
+      "Direct cytotoxic destruction of microscopic floating cells"
+     ],
+     [
+      "Reconstruction",
+      "Gastrointestinal anastomoses after washout",
+      "Restore digestive continuity safely after chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common non-obstetric surgical emergency encountered during gestation is **appendicitis in pregnancy**, occurring in approximately one in one thousand pregnancies. Diagnosing appendicitis during pregnancy is notoriously difficult because common physiological symptoms of pregnancy, including nausea, vomiting, anorexia, and mild leukocytosis, mimic acute appendicitis. Delays in diagnosis carry severe hazards of perforation, fetal loss, and premature labor.",
+   "say": "Appendicitis is the most frequent non-obstetric surgical emergency in pregnancy, often delayed because symptoms mimic normal gestation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Pregnant Appendicitis",
+     "points": [
+      "Appendix located strictly in right iliac fossa",
+      "Maximal tenderness at McBurney point",
+      "Classic Rovsing and Blumberg signs",
+      "Alvarado score highly sensitive"
+     ]
+    },
+    "right": {
+     "title": "Appendicitis in Pregnancy",
+     "points": [
+      "Appendix displaced cephalad and laterally by uterus",
+      "Maximal pain in right upper quadrant by 3rd trimester",
+      "Guarding blunted by abdominal wall laxity",
+      "Alvarado score unreliable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The anatomical position of the appendix changes continuously throughout gestation as the expanding gravid uterus elevates and displaces the caecum. Beginning in the second trimester, the appendix is pushed progressively superiorly and laterally, so that by the **third trimester**, maximal pain and tenderness are localized to the right upper quadrant or flank, closely mimicking acute cholecystitis or pyelonephritis.",
+   "say": "The expanding gravid uterus pushes the appendix superiorly and laterally, shifting pain to the right upper quadrant by the third trimester.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tri1",
+      "label": "First Trimester: Appendix in Standard Right Lower Quadrant"
+     },
+     {
+      "id": "tri2",
+      "label": "Second Trimester: Displaced Upward to Level of Umbilicus"
+     },
+     {
+      "id": "tri3",
+      "label": "Third Trimester: Pushed into Right Upper Quadrant / Flank"
+     },
+     {
+      "id": "mimic",
+      "label": "Atypical Pain Mimics Acute Cholecystitis or Pyelonephritis"
+     }
+    ],
+    "edges": [
+     [
+      "tri1",
+      "tri2"
+     ],
+     [
+      "tri2",
+      "tri3"
+     ],
+     [
+      "tri3",
+      "mimic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transabdominal graded-compression ultrasound is the first-line imaging modality of choice in pregnant women. When ultrasound is non-diagnostic or inconclusive, magnetic resonance imaging without intravenous gadolinium contrast is the definitive second-line modality, achieving a diagnostic accuracy exceeding ninety-five percent without exposing the fetus to ionizing **radiation hazard**. Non-contrast MRI clearly visualizes the inflamed, thickened appendiceal lumen.",
+   "say": "Ultrasound is the initial imaging modality in pregnancy, followed by non-contrast MRI to avoid ionizing radiation to the fetus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Modality",
+     "Safety Profile in Pregnancy",
+     "Diagnostic Utility"
+    ],
+    "rows": [
+     [
+      "Graded-Compression US",
+      "Completely safe (no radiation)",
+      "First-line screening; operator dependent in late pregnancy"
+     ],
+     [
+      "MRI Abdomen (No Gadolinium)",
+      "Completely safe across all trimesters",
+      "Gold standard definitive imaging for inconclusive ultrasound"
+     ],
+     [
+      "Computed Tomography (CT)",
+      "Ionizing radiation (< 50 mGy fetal dose)",
+      "Reserved strictly when MRI unavailable and perforation suspected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prompt open or laparoscopic appendicectomy is indicated upon clinical or radiological confirmation, with early surgery significantly reducing perforation rates. While uncomplicated appendicitis carries a fetal loss rate under two percent, perforated appendicitis with peritonitis causes fetal mortality rates to surge to twenty percent. Consequently, aggressive surgical intervention is prioritized, while elective **interval appendicectomy** is strictly deferred until several months postpartum.",
+   "say": "Prompt surgery prevents appendiceal perforation in pregnancy, avoiding fetal loss rates that reach twenty percent with peritonitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Confirmation via Graded Ultrasound or Non-Contrast MRI"
+     },
+     {
+      "id": "surg",
+      "label": "Prompt Laparoscopic or Open Appendicectomy"
+     },
+     {
+      "id": "tocolysis",
+      "label": "Perioperative Fetal Heart Rate Monitoring & Tocolysis"
+     },
+     {
+      "id": "protect",
+      "label": "Prevents Peritonitis & Reduces Fetal Mortality from 20% to <2%"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "surg"
+     ],
+     [
+      "surg",
+      "tocolysis"
+     ],
+     [
+      "tocolysis",
+      "protect"
+     ]
+    ]
+   }
+  }
+ ]
+}

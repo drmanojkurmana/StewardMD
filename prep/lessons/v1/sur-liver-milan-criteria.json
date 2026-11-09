@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "sur-liver",
+ "subject": "surgery",
+ "title": "Liver Segmentation, Resection, and Transplantation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Modern anatomic liver surgery relies fundamentally upon functional vascular anatomy described by the **Couinaud segments**. Couinaud partitioned the liver into eight autonomous functional segments, each supplied by its own central branch of the portal triad comprising the portal vein, hepatic artery, and bile duct. Segments are numbered Roman I through VIII clockwise, with segment one representing the independent caudate lobe.",
+   "say": "Couinaud liver anatomy divides the liver into eight independent segments, each possessing its own central portal triad branch and dedicated venous drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tumors-of-the-liver-and-fig1.webp",
+    "alt": "Anatomical schematic showing Couinaud liver segments I through VIII defined by hepatic and portal venous planes.",
+    "caption": "Couinaud segmental liver anatomy: eight functionally independent units defined by portal pedicles and hepatic veins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical dividing plane separating the functional true right liver from the left liver is designated as **Cantlie line**. Running from the middle of the gallbladder fossa anteriorly to the left border of the inferior vena cava posteriorly, Cantlie line corresponds precisely to the path of the middle hepatic vein. This physiological boundary divides segment five and eight on the right from segment four on the left.",
+   "say": "Cantlie line extends from the gallbladder fossa to the vena cava along the middle hepatic vein, separating the functional right and left liver lobes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Liver Sector",
+     "Couinaud Segments",
+     "Portal Pedicle",
+     "Draining Hepatic Vein"
+    ],
+    "rows": [
+     [
+      "Right Posterior",
+      "Segments VI & VII",
+      "Right posterior sectoral trunk",
+      "Right hepatic vein"
+     ],
+     [
+      "Right Anterior",
+      "Segments V & VIII",
+      "Right anterior sectoral trunk",
+      "Right & middle hepatic veins"
+     ],
+     [
+      "Left Medial",
+      "Segment IV (IVa, IVb)",
+      "Left portal vein branch",
+      "Middle hepatic vein"
+     ],
+     [
+      "Left Lateral",
+      "Segments II & III",
+      "Left lateral sectoral trunk",
+      "Left hepatic vein"
+     ],
+     [
+      "Caudate Lobe",
+      "Segment I",
+      "Direct bilateral portal branches",
+      "Direct vena cava tributaries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical extirpation of hepatic parenchymal territory along defined segmental planes is known as anatomical **liver resection**. Formal right hemihepatectomy removes segments five, six, seven, and eight, whereas left hemihepatectomy excises segments two, three, and four. To prevent postoperative hepatic insufficiency, the anticipated future liver remnant must constitute at least twenty percent of total liver volume in healthy parenchyma, and at least forty percent in cirrhotic livers.",
+   "say": "Anatomical liver resection removes specific Couinaud segments while preserving a critical remnant volume of at least forty percent in cirrhotic patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triad",
+      "label": "Vascular Inflow Occlusion (Pringle Manoeuvre)"
+     },
+     {
+      "id": "plane",
+      "label": "Transection Along Anatomical Scissurae"
+     },
+     {
+      "id": "vein",
+      "label": "Controlled Ligation of Sectoral Outflow Veins"
+     },
+     {
+      "id": "remnant",
+      "label": "Preservation of Sufficient Functional Remnant"
+     }
+    ],
+    "edges": [
+     [
+      "triad",
+      "plane"
+     ],
+     [
+      "plane",
+      "vein"
+     ],
+     [
+      "vein",
+      "remnant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During difficult hepatic parenchymal transection, intraoperative blood loss is minimized by temporary clamping of the hepatoduodenal ligament, termed the **Pringle manoeuvre**. Compression of the common bile duct, hepatic artery proper, and main portal vein within the free edge of the lesser omentum suppresses hepatic vascular inflow. Continuous clamping is generally limited to fifteen minutes followed by five minutes of reperfusion to avert severe warm ischaemia-reperfusion injury.",
+   "say": "The Pringle manoeuvre compresses the portal triad in the hepatoduodenal ligament to control hepatic arterial and portal venous inflow during liver resection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pringle Manoeuvre Controls",
+     "points": [
+      "Hepatic artery proper inflow",
+      "Main portal venous inflow",
+      "Common bile duct compression",
+      "Anterior parenchymal bleeding"
+     ]
+    },
+    "right": {
+     "title": "Bleeding NOT Controlled",
+     "points": [
+      "Retrograde hepatic vein bleeding",
+      "Inferior vena cava laceration",
+      "Aberrant left hepatic artery (from LGA)",
+      "Direct retrohepatic venous branches"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For cirrhotic patients with early hepatocellular carcinoma unsuitable for resection, the global benchmark selection criteria for deceased-donor liver transplantation are the **Milan criteria**. These restrictive criteria require either a solitary hepatocellular tumour measuring up to five centimetres in diameter, or up to three discrete nodules each not exceeding three centimetres in diameter, without macroscopic vascular invasion or extrahepatic spread.",
+   "say": "The Milan criteria define transplant eligibility as a single tumour up to five centimetres or up to three tumours each under three centimetres.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+    "alt": "Diagnostic schematic illustrating Milan criteria size thresholds for single versus multifocal hepatocellular carcinoma in liver transplantation.",
+    "caption": "Milan criteria for liver transplantation: single lesion up to 5 cm or up to 3 lesions not exceeding 3 cm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When candidates satisfy the Milan criteria, orthotopic **liver transplantation** confers remarkable five-year overall survival rates surpassing seventy percent with recurrence rates below fifteen percent. Total recipient hepatectomy eradicates both microscopic satellite intrahepatic metastases and the preneoplastic cirrhotic parenchymal environment, thereby eliminating the underlying portal hypertension and safeguarding against future de novo hepatocarcinogenesis.",
+   "say": "Meeting the Milan criteria yields over seventy percent five-year survival following liver transplantation, simultaneously curing the malignancy and underlying cirrhosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/liver-transplantation-fig1.webp",
+    "alt": "Surgical diagram showing orthotopic liver transplantation with vascular anastomoses to the vena cava, portal vein, and hepatic artery.",
+    "caption": "Orthotopic liver transplantation: complete organ replacement curing hepatocellular carcinoma and portal hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Prior to surgery, assessment of underlying functional hepatic reserve in prospective candidates relies on the classic **Child-Pugh score**. Calculated from serum bilirubin, serum albumin, prothrombin time prolongation, severity of ascites, and degree of encephalopathy, patients are categorized into classes A, B, or C. Major anatomical liver resections are generally reserved exclusively for well-compensated Child-Pugh class A patients possessing normal indocyanine green clearance.",
+   "say": "The Child-Pugh score grades hepatic functional reserve using five clinical and biochemical parameters, restricting major resections to class A patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "1 Point",
+     "2 Points",
+     "3 Points"
+    ],
+    "rows": [
+     [
+      "Serum Bilirubin (mg/dL)",
+      "< 2.0",
+      "2.0 - 3.0",
+      "> 3.0"
+     ],
+     [
+      "Serum Albumin (g/dL)",
+      "> 3.5",
+      "2.8 - 3.5",
+      "< 2.8"
+     ],
+     [
+      "INR / PT prolongation",
+      "< 1.7 (<4 s)",
+      "1.7 - 2.3 (4-6 s)",
+      "> 2.3 (>6 s)"
+     ],
+     [
+      "Ascites",
+      "None",
+      "Mild / medically controlled",
+      "Moderate to severe / refractory"
+     ],
+     [
+      "Hepatic Encephalopathy",
+      "None",
+      "Grade 1 - 2",
+      "Grade 3 - 4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the modern era of liver allocation, waitlist organ distribution for liver transplantation is universally governed by the objective **MELD score**. Incorporating logarithmic values of serum bilirubin, serum creatinine, and the international normalized ratio of prothrombin time, this mathematical metric accurately forecasts ninety-day waitlist mortality. Higher scores prioritize sicker decompensated recipients for donor organ matching without reliance on subjective clinical impressions.",
+   "say": "The MELD score utilizes bilirubin, creatinine, and INR to objectively predict ninety-day mortality and prioritize organ allocation in liver transplantation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "params",
+      "label": "Laboratory Inputs: Bilirubin, Creatinine, INR, Sodium"
+     },
+     {
+      "id": "meld",
+      "label": "Objective MELD-Na Calculation"
+     },
+     {
+      "id": "mort",
+      "label": "Stratification of 90-Day Waitlist Mortality"
+     },
+     {
+      "id": "alloc",
+      "label": "Equity-Based Sickest-First Organ Allocation"
+     }
+    ],
+    "edges": [
+     [
+      "params",
+      "meld"
+     ],
+     [
+      "meld",
+      "mort"
+     ],
+     [
+      "mort",
+      "alloc"
+     ]
+    ]
+   }
+  }
+ ]
+}

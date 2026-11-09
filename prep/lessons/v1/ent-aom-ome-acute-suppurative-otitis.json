@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "ent-aom-ome-acute-suppurative-otitis",
+ "subject": "ent",
+ "module": "ent-aom-ome",
+ "title": "Acute Otitis Media, Otitis Media with Effusion, and Myringotomy",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Acute suppurative otitis media is an acute bacterial infection of the mucoperiosteal lining of the middle ear cleft, most commonly caused by Streptococcus pneumoniae, non-typeable Haemophilus influenzae, and Moraxella catarrhalis. Typically following a viral upper respiratory infection, pathogens ascend retrograde through the Eustachian tube. The disease progresses through five classical clinical stages, beginning with the **stage of tubal occlusion**.",
+   "say": "Triggered by upper respiratory viral infections, bacterial otitis media ascends the Eustachian tube. It progresses through five distinct stages, beginning with tubal occlusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-otitis-media-fig1.webp",
+    "alt": "Clinical otoscopy illustration showing acute suppurative otitis media with bulging drum and radial vascularity",
+    "caption": "Stages of acute suppurative otitis media showing tympanic vascular engorgement and purulent bulging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In the stage of tubal occlusion, tubal edema traps air in the middle ear cleft, generating negative middle ear pressure that pulls the tympanic membrane inward. Otoscopy shows a retracted drum, foreshortened handle of malleus, and prominent lateral process. This advances into the **stage of presuppuration**, where inflammatory hyperemia produces prominent radial blood vessels along the malleus handle, creating the classic wagon-wheel appearance.",
+   "say": "Negative pressure causes eardrum retraction in stage one. Stage two presuppuration dilates radial vessels along the malleus, creating a wagon-wheel appearance.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sequential Evolution of Acute Otitis Media",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Tubal Occlusion (Drum Retraction)"
+     },
+     {
+      "id": "s2",
+      "label": "Presuppuration (Wagon-Wheel Radial Vessels)"
+     },
+     {
+      "id": "s3",
+      "label": "Suppuration (Bulging Yellow Cartridge Drum)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the **stage of suppuration**, frank pus fills the middle ear cleft under pressure, causing excruciating ear pain, high fever, and hearing loss. The tympanic membrane bulges outward into the canal like a red or yellow cartridge paper, with impending necrosis at its thinnest point. Without intervention, it enters the stage of perforation, where a small spontaneous rupture releases pulsating purulent discharge (pulsatile lighthouse sign), accompanied by dramatic relief of pain and fever.",
+   "say": "Suppuration fills the middle ear with tense pus, causing severe pain and a bulging drum. Spontaneous rupture releases pulsating discharge, bringing immediate pain relief.",
+   "vis": {
+    "kind": "table",
+    "title": "Classical Clinical Stages of Acute Suppurative Otitis Media",
+    "cols": [
+     "Stage of ASOM",
+     "Tympanic Membrane Appearance",
+     "Dominant Symptoms",
+     "Recommended Management"
+    ],
+    "rows": [
+     [
+      "1. Tubal occlusion",
+      "Retracted drum, distorted light reflex",
+      "Ear fullness, mild deafness",
+      "Nasal decongestants, analgesics"
+     ],
+     [
+      "2. Presuppuration",
+      "Radial blood vessels (Wagon-wheel)",
+      "Throbbing otalgia, pyrexia",
+      "Oral amoxicillin, analgesia"
+     ],
+     [
+      "3. Suppuration",
+      "Bulging red/yellow drum, loss of landmarks",
+      "Excruciating pain, high fever",
+      "Urgent myringotomy, antibiotics"
+     ],
+     [
+      "4. Perforation",
+      "Pulsating discharge (Lighthouse sign)",
+      "Rapid pain relief, fever abates",
+      "Antibiotic ear drops, keep dry"
+     ],
+     [
+      "5. Resolution",
+      "Perforation closes, normal drum",
+      "Hearing completely restored",
+      "Observation to ensure healing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a bulging tympanic membrane threatens intracranial complications or pain fails to respond to antibiotics, surgical drainage via **myringotomy** is indicated. An incisional slit is deliberately made in the posteroinferior quadrant of the tympanic membrane. The posteroinferior quadrant is selected because it lies distant from the delicate ossicular chain and chorda tympani nerve located superiorly, and provides optimal dependent drainage.",
+   "say": "Myringotomy drains tense middle ear pus through an incision in the posteroinferior quadrant, safely away from the ossicles and chorda tympani.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myringotomy for Acute Suppuration",
+     "points": [
+      "Performed in posteroinferior quadrant.",
+      "Incision is circumferential or radial.",
+      "Evacuates pressurized pus to relieve excruciating pain.",
+      "Avoids damage to malleus, incus, and chorda tympani."
+     ]
+    },
+    "right": {
+     "title": "Grommet Placement for Effusion",
+     "points": [
+      "Performed in anteroinferior quadrant.",
+      "Small radial incision made for collar button tube.",
+      "Equalizes middle ear pressure for months.",
+      "Anteroinferior position minimizes risk of extrusion."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otitis media with effusion, also termed **glue ear** or serous otitis media, is characterized by the accumulation of non-purulent amber or mucoid fluid within the middle ear cleft behind an intact tympanic membrane. Unlike acute suppurative otitis, active signs of acute bacterial infection and pain are absent. It represents the single most common cause of conductive hearing impairment in school-aged children, often manifesting as inattentiveness.",
+   "say": "Otitis media with effusion, or glue ear, collects non-purulent fluid behind an intact drum without acute pain. It is the leading cause of childhood conductive hearing loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-otitis-media-and-effusion-fig1.webp",
+    "alt": "Otoscopic appearance of otitis media with effusion showing fluid levels, amber discoloration, and air bubbles",
+    "caption": "Otitis media with effusion demonstrating characteristic amber drum tinting and meniscus air-fluid levels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The foremost predisposing risk factor for persistent bilateral middle ear effusion in young children is Eustachian tube obstruction secondary to **adenoid hypertrophy**. Enlarged adenoid vegetation mechanically obstructs the pharyngeal tubal cushions and serves as a chronic bacterial biofilm reservoir. Children display chronic mouth breathing, snoring, nasal speech (rhinolalia clausa), and an elongated, dull facial appearance designated the adenoid facies.",
+   "say": "Adenoid hypertrophy blocks the Eustachian tube and acts as a bacterial reservoir. Affected children display mouth breathing, snoring, and characteristic adenoid facies.",
+   "vis": {
+    "kind": "flow",
+    "title": "Etiological Link Between Adenoids and Glue Ear",
+    "nodes": [
+     {
+      "id": "ad1",
+      "label": "Adenoid Hypertrophy & Chronic Biofilm"
+     },
+     {
+      "id": "ad2",
+      "label": "Eustachian Tubal Obstruction & Negative Pressure"
+     },
+     {
+      "id": "ad3",
+      "label": "Middle Ear Effusion & Conductive Deafness"
+     }
+    ],
+    "edges": [
+     [
+      "ad1",
+      "ad2"
+     ],
+     [
+      "ad2",
+      "ad3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Otoscopic examination in otitis media with effusion reveals an amber-colored or dull grey tympanic membrane, a chalky white shortened handle of malleus, and prominent chalk-like lateral process. Pathognomonic visual signs include horizontal **air-fluid levels** or multiple translucent air bubbles visible through the drum. Pure tone audiometry demonstrates a conductive hearing loss of twenty to forty decibels, accompanied by a flat Type B tympanogram.",
+   "say": "Otoscopy reveals an amber drum with air-fluid levels or bubbles. Audiometry shows twenty to forty decibels of conductive loss with a flat Type B tympanogram.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Evaluation of Otitis Media with Effusion",
+    "cols": [
+     "Diagnostic Modality",
+     "Key Clinical Finding",
+     "Significance in Glue Ear"
+    ],
+    "rows": [
+     [
+      "Pneumatic otoscopy",
+      "Impaired or absent drum mobility",
+      "Gold standard bedside examination"
+     ],
+     [
+      "Otoscopic inspection",
+      "Amber color, air-fluid meniscus levels",
+      "Confirms presence of middle ear fluid"
+     ],
+     [
+      "Tympanometry",
+      "Flat Type B curve with normal volume",
+      "Confirms non-aerated middle ear cleft"
+     ],
+     [
+      "Pure tone audiometry",
+      "20 to 40 dB conductive hearing gap",
+      "Quantifies functional educational deficit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial management of glue ear consists of a watchful waiting period of three months, as up to ninety percent of post-infectious effusions resolve spontaneously. When bilateral effusion and hearing impairment persist beyond three months, surgical intervention via **grommet insertion** (tympanostomy tube) is indicated, often combined with adenoidectomy. The tiny ventilating tube equalizes pressure, remaining in the drum for six to twelve months until spontaneous extrusion.",
+   "say": "Management begins with three months of watchful waiting. Persistent effusions receive surgical ventilation grommet placement, often combined with adenoidectomy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Management Algorithm for Childhood Glue Ear",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Watchful Waiting (3 Months Active Observation)"
+     },
+     {
+      "id": "g2",
+      "label": "Persistent Bilateral Effusion with >25 dB Loss"
+     },
+     {
+      "id": "g3",
+      "label": "Myringotomy with Grommet Placement (+/- Adenoidectomy)"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-011",
+  "bk2-ent-012",
+  "bk2-ent-013"
+ ]
+}

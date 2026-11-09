@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "id": "ana-blood-supply-brain-heubner-artery",
+ "subject": "anatomy",
+ "module": "ana-blood-supply-brain",
+ "title": "Vertebrobasilar Circulation, Deep Perforators, and Watershed Infarcts",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The recurrent artery of Heubner (medial striate artery) arises from the anterior cerebral artery near the anterior communicating junction and loops backward alongside the parent vessel. Entering the anterior perforated substance, the **Heubner artery** supplies the head of the caudate nucleus, anterior lentiform nucleus, and the anterior limb of the internal capsule. Occlusion causes weakness of the contralateral face and arm.",
+   "say": "Arising from the anterior cerebral artery, the recurrent artery of Heubner enters the anterior perforated substance to supply the caudate head and anterior internal capsule limb.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-circle-of-willis.svg",
+    "alt": "Anatomical schematic showing the origin and distribution of the recurrent artery of Heubner and perforating branches",
+    "caption": "Origin of the recurrent artery of Heubner from the anterior cerebral artery entering the anterior perforated substance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The two vertebral arteries ascend through the foramina transversaria of cervical vertebrae C6 to C1, pierce the posterior atlanto-occipital membrane, and traverse the foramen magnum. On the anterior surface of the pontomedullary junction, they unite to form the midline **basilar artery**. The basilar artery ascends along the basilar groove of the pons, terminating at the upper pontine border by bifurcating into the posterior cerebral arteries.",
+   "say": "Vertebral arteries ascend through cervical foramina transversaria and unite at the pontomedullary junction to form the midline basilar artery along the pons.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vertebrobasilar Formation and Course",
+    "nodes": [
+     {
+      "id": "vb1",
+      "label": "Paired Vertebral Arteries"
+     },
+     {
+      "id": "vb2",
+      "label": "Midline Basilar Artery"
+     },
+     {
+      "id": "vb3",
+      "label": "Terminal Posterior Cerebral Bifurcation"
+     }
+    ],
+    "edges": [
+     [
+      "vb1",
+      "vb2"
+     ],
+     [
+      "vb2",
+      "vb3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The basilar artery distributes several critical cerebellar and brainstem branches along its pontine trajectory. Its major branches include the paired anterior inferior cerebellar arteries (AICA), labyrinthine arteries supplying the inner ear, multiple slender transverse pontine branches, and the paired superior cerebellar arteries. Acute thrombosis of the basilar trunk leads to bilateral pontine necrosis and the catastrophic **locked-in syndrome**.",
+   "say": "The basilar artery yields anterior inferior cerebellar, labyrinthine, pontine, and superior cerebellar branches. Complete thrombosis precipitates locked-in syndrome.",
+   "vis": {
+    "kind": "table",
+    "title": "Major Branches of the Vertebrobasilar System",
+    "cols": [
+     "Arterial Branch",
+     "Vessel of Origin",
+     "Course and Terrritory",
+     "Occlusion Syndrome"
+    ],
+    "rows": [
+     [
+      "PICA",
+      "Vertebral artery",
+      "Lateral medulla, inferior cerebellum",
+      "Wallenberg syndrome"
+     ],
+     [
+      "AICA",
+      "Lower basilar trunk",
+      "Caudal pons, middle cerebellar peduncle",
+      "Lateral pontine syndrome"
+     ],
+     [
+      "Labyrinthine artery",
+      "AICA or basilar trunk",
+      "Internal acoustic meatus, inner ear",
+      "Ipsilateral acute deafness"
+     ],
+     [
+      "Superior cerebellar",
+      "Distal basilar artery",
+      "Superior cerebellar surface, midbrain",
+      "Cerebellar ataxia and dysmetria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Venous blood from cerebral capillary beds drains through two systems: superficial cortical veins and deep internal cerebral veins. Superficial veins empty into dural venous sinuses, with the superior cerebral veins ascending into the superior sagittal sinus. The superior anastomotic vein of Trolard connects to the superior sagittal sinus, while the inferior anastomotic **vein of Labbe** drains into the transverse sinus.",
+   "say": "Superficial cerebral veins empty into dural sinuses. The anastomotic vein of Trolard drains into superior sagittal sinus, and the vein of Labbe drains into transverse sinus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-venous-sinuses.svg",
+    "alt": "Anatomical schematic showing deep and superficial cerebral veins, dural venous sinuses, and anastomotic channels",
+    "caption": "Dural venous sinus architecture and major anastomotic cortical veins of Trolard and Labbe. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deep cerebral structures drain into paired internal cerebral veins formed at the foramen of Monro by the confluence of the thalamostriate vein and choroid vein. Under the splenium of the corpus callosum, the two internal cerebral veins unite with the basal veins of Rosenthal to form the single midline **great cerebral vein** of Galen, which joins the inferior sagittal sinus to form the straight sinus.",
+   "say": "Internal cerebral veins unite with basal veins to form the great cerebral vein of Galen beneath the splenium, draining directly into the straight sinus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Deep Venous Confluence of the Brain",
+    "nodes": [
+     {
+      "id": "gv1",
+      "label": "Internal Cerebral Veins"
+     },
+     {
+      "id": "gv2",
+      "label": "Great Cerebral Vein of Galen"
+     },
+     {
+      "id": "gv3",
+      "label": "Straight Sinus"
+     }
+    ],
+    "edges": [
+     [
+      "gv1",
+      "gv2"
+     ],
+     [
+      "gv2",
+      "gv3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Watershed or border-zone infarcts develop at the distal peripheral junctions where the terminal capillary territories of major cerebral arteries border each other. These boundary zones possess the lowest perfusion pressures in the entire cerebral microvasculature. Severe systemic hypotension or cardiogenic shock precipitously drops perfusion pressure, causing bilateral ischaemic necrosis along the **cortical watershed zones**.",
+   "say": "Border-zone infarcts occur at junctions between major arterial territories. Systemic hypoperfusion drops perfusion pressure below critical thresholds, causing bilateral watershed necrosis.",
+   "vis": {
+    "kind": "table",
+    "title": "Classification and Topography of Cerebral Watershed Zones",
+    "cols": [
+     "Watershed Region",
+     "Bordering Major Arteries",
+     "Predisposing Trigger",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Anterior cortical",
+      "ACA and MCA boundary",
+      "Severe systemic hypotension",
+      "Man-in-a-barrel proximal weakness"
+     ],
+     [
+      "Posterior cortical",
+      "MCA and PCA boundary",
+      "Cardiac arrest, profound shock",
+      "Cortical blindness, visual agnosia"
+     ],
+     [
+      "Internal subcortical",
+      "Lenticulostriate and MCA",
+      "Carotid artery severe stenosis",
+      "Subcortical lacunar-like hemiparesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anterior cortical border-zone between the anterior and middle cerebral arteries corresponds somatotopically to the proximal shoulder and pelvic girdle representation on the motor homunculus. Bilateral watershed infarction in this region spares distal hand and foot function while paralyzing proximal arm and thigh muscles, producing the distinctive **man-in-a-barrel syndrome** where patients cannot move their shoulders or hips.",
+   "say": "Infarction at the ACA-MCA border zone paralyzes proximal shoulder and hip muscles while sparing distal hand and foot movement, termed man-in-a-barrel syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proximal Limb Function",
+     "points": [
+      "Bilateral weakness of shoulders and upper arms.",
+      "Ischaemic injury of parasagittal motor strip at ACA-MCA border zone.",
+      "Classic man-in-a-barrel posture."
+     ]
+    },
+    "right": {
+     "title": "Distal Limb Function",
+     "points": [
+      "Preserved motor function of hands and fingers.",
+      "Middle cerebral territory perfusion remains sufficient for lateral cortex.",
+      "Able to write and grasp despite shoulder paralysis."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Posterior cortical watershed infarcts occur along the junction between middle and posterior cerebral artery territories in the parieto-occipital region. Severe hypotension causing bilateral parieto-occipital infarction precipitates **Balint syndrome**, characterized by psychic paralysis of gaze (optic apraxia), impaired visually guided reaching (optic ataxia), and inability to perceive visual scenes as a whole (simultanagnosia).",
+   "say": "Bilateral parieto-occipital border-zone strokes produce Balint syndrome, marked by optic apraxia, optic ataxia, and simultanagnosia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Triad of Balint Syndrome from Posterior Watershed Stroke",
+    "nodes": [
+     {
+      "id": "bl1",
+      "label": "Simultanagnosia (Scene Blindness)"
+     },
+     {
+      "id": "bl2",
+      "label": "Optic Ataxia (Reaching Deficit)"
+     },
+     {
+      "id": "bl3",
+      "label": "Optic Apraxia (Gaze Paralysis)"
+     }
+    ],
+    "edges": [
+     [
+      "bl1",
+      "bl2"
+     ],
+     [
+      "bl2",
+      "bl3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "124a5a8d-b86e-44e8-b2d8-74a20a2605a5",
+  "499449f3-ab15-4d13-95a6-eedf8579c58b",
+  "8895bf32-2d03-4525-909b-297f7cdd27df"
+ ]
+}

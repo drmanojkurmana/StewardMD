@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "sur-gallbladder",
+ "subject": "surgery",
+ "title": "Laparoscopic Cholecystectomy and Critical View of Safety",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The gold standard surgical therapy for symptomatic cholelithiasis and benign gallbladder disease is **laparoscopic cholecystectomy**. First performed successfully in the late 1980s, this minimally invasive approach has entirely supplanted open cholecystectomy. Four trocars are introduced into the peritoneal cavity under carbon dioxide pneumoperitoneum, delivering dramatically reduced postoperative pain, minimal wound morbidity, rapid recovery, and hospital discharge within twenty-four hours.",
+   "say": "Laparoscopic cholecystectomy is the surgical benchmark for gallstone disease, providing rapid recovery and minimal morbidity through four laparoscopic ports.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-laparoscopic-cholecystectomy.webp",
+    "alt": "Surgical photograph of laparoscopic cholecystectomy showing four port placements and endoscopic retraction of the gallbladder.",
+    "caption": "Laparoscopic cholecystectomy: four-port minimally invasive approach providing rapid postoperative recovery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Safe dissection within the hepatobiliary triangle relies on meticulous understanding of the anatomical boundaries of the **Calot triangle**. In its classic definition, this triangular space is bounded medially by the common hepatic duct, laterally by the cystic duct, and superiorly by the cystic artery. Modern surgical literature frequently defines the hepatobiliary triangle using the inferior surface of liver segment five as the superior margin.",
+   "say": "Calot triangle is bounded by the common hepatic duct medially, the cystic duct laterally, and the cystic artery or liver margin superiorly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholecystitis-critical-view-and-biliary-injury-fig1.webp",
+    "alt": "Anatomical illustration showing boundaries of Calot triangle, cystic duct, cystic artery, and common bile duct.",
+    "caption": "Anatomy of Calot triangle: relationships between cystic duct, cystic artery, and the main biliary tree. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within the fat and loose areolar tissue of Calot triangle lies the cystic artery alongside the constant cystic lymph node of Lund, also known as the node of Cloquet. The cystic artery typically arises from the right hepatic artery within the triangle before bifurcating into superficial and deep branches. A critical danger is an aberrant or tortuous **caterpillar turn** of the right hepatic artery, which can be mistakenly transected.",
+   "say": "The cystic artery lies within Calot triangle alongside Lund lymph node, where a tortuous right hepatic artery can be accidentally clipped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Structure",
+     "Standard Anatomy",
+     "High-Risk Surgical Anomaly"
+    ],
+    "rows": [
+     [
+      "Cystic Artery",
+      "Arises from right hepatic artery in triangle",
+      "Arises from left hepatic or gastroduodenal artery"
+     ],
+     [
+      "Right Hepatic Artery",
+      "Passes posterior to common hepatic duct",
+      "Moynihan caterpillar loop looping into triangle"
+     ],
+     [
+      "Cystic Duct",
+      "Enters middle third of common hepatic duct",
+      "Low insertion, spiral posterior course, or absent duct"
+     ],
+     [
+      "Accessory Bile Duct",
+      "Absent",
+      "Duct of Luschka draining into gallbladder fossa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To definitively prevent devastating misidentification of the common bile duct as the cystic duct, Strasberg introduced the **critical view of safety**. This standardized surgical protocol demands three rigorous criteria before clipping or dividing any tubular structure. First, Calot triangle must be cleared entirely of fat and fibrous tissue. Second, the lowest third of the gallbladder must be dissected off the cystic plate. Third, exactly two structures must be seen entering the gallbladder.",
+   "say": "The critical view of safety requires clearing Calot triangle, separating the lower gallbladder from the liver bed, and visualizing exactly two entering structures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clear",
+      "label": "1. Complete Clearance of Fat & Fibrous Tissue from Calot Triangle"
+     },
+     {
+      "id": "plate",
+      "label": "2. Dissection of Lower Third of Gallbladder off Cystic Plate"
+     },
+     {
+      "id": "two",
+      "label": "3. Conclusive Demonstration of Exactly Two Entering Structures"
+     },
+     {
+      "id": "clip",
+      "label": "Safe Application of Clips and Division of Cystic Duct and Artery"
+     }
+    ],
+    "edges": [
+     [
+      "clear",
+      "plate"
+     ],
+     [
+      "plate",
+      "two"
+     ],
+     [
+      "two",
+      "clip"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Attaining the critical view of safety completely exposes the fibrous cystic plate behind the infundibulum and validates that no other conduit traverses the field. Only when the cystic duct and **cystic artery** are observed terminating directly into the gallbladder wall is it permissible to apply surgical hemoclips. If these criteria cannot be conclusively met due to severe inflammation, clipping must never proceed blind.",
+   "say": "Only two structures, the cystic duct and cystic artery, should enter the gallbladder before clips are safely placed on the cystic plate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Critical View of Safety Achieved",
+     "points": [
+      "Calot triangle fat completely cleared",
+      "Lower third of liver bed (cystic plate) exposed",
+      "Exactly two structures enter gallbladder",
+      "Safe to apply clips and divide"
+     ]
+    },
+    "right": {
+     "title": "Infundo-Cystic Technique Flaws",
+     "points": [
+      "Relies on infundibulum following duct",
+      "Severe traction tents common bile duct",
+      "CBD misidentified as cystic duct",
+      "Major bile duct transection hazard"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A vital anatomical landmark visible laparoscopically across the inferior liver surface is the **Rouviere sulcus**. This two-to-three centimetre transverse cleft, situated anterior to segment one and right of the liver hilum, marks the plane of the right portal triad. In safe laparoscopic technique, all dissection is strictly restricted above the horizontal line drawn across Rouviere sulcus to guarantee avoidance of the underlying main bile duct.",
+   "say": "Rouviere sulcus marks the plane of the right portal pedicle, defining a safety line above which all surgical dissection must remain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Landmark",
+     "Location",
+     "Surgical Safety Function"
+    ],
+    "rows": [
+     [
+      "Rouviere Sulcus",
+      "Inferior surface of right liver lobe",
+      "Defines the lower boundary line of safe dissection"
+     ],
+     [
+      "Umbilical Fissure",
+      "Between segment III and IV",
+      "Dissection kept strictly to the right of this plane"
+     ],
+     [
+      "Lymph Node of Lund",
+      "Overlying cystic artery in Calot triangle",
+      "Reliable guide pointing directly toward cystic artery"
+     ],
+     [
+      "Cystic Plate",
+      "Fibrous bed between gallbladder and liver",
+      "Exposed to verify absence of aberrant ducts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When severe chronic fibrotic scarring, acute gangrene, or a frozen Calot triangle prevents unambiguous identification of the critical view of safety, continuing hazardous dissection risks biliary transection. In this hostile environment, the surgeon must execute a safe bail-out procedure such as **subtotal cholecystectomy**. The anterior wall of the gallbladder is excised, stones are evacuated, and the stump is secured, leaving the posterior wall adherent to the liver.",
+   "say": "In a hostile frozen Calot triangle, executing a fenestrating or reconstituting subtotal cholecystectomy provides a safe bail-out preventing bile duct injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hostile",
+      "label": "Hostile Anatomy / Frozen Calot Triangle Encountered"
+     },
+     {
+      "id": "stop",
+      "label": "Cease Inappropriate Calot Dissection Immediately"
+     },
+     {
+      "id": "bailout",
+      "label": "Select Bail-Out: Subtotal Cholecystectomy or Conversion"
+     },
+     {
+      "id": "protect",
+      "label": "Evacuate Stones & Close Stump to Prevent CBD Injury"
+     }
+    ],
+    "edges": [
+     [
+      "hostile",
+      "stop"
+     ],
+     [
+      "stop",
+      "bailout"
+     ],
+     [
+      "bailout",
+      "protect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subtotal cholecystectomy is subdivided into reconstituting and fenestrating subtypes based upon management of the infundibular remnant. In a reconstituting subtotal procedure, the lower infundibular cuff is closed with sutures, creating a small closed pouch. In a fenestrating subtotal procedure, the internal cystic duct orifice is sutured from within the lumen, the mucosa is destroyed by diathermy, and a wide **surgical drain** is left in the subhepatic space.",
+   "say": "Subtotal cholecystectomy leaves the posterior wall on the liver, closing the internal cystic orifice or creating a closed remnant pouch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fenestrating Subtotal",
+     "points": [
+      "Gallbladder remnant left wide open",
+      "Internal cystic duct orifice suture-ligated",
+      "Mucosa ablated with electrocautery",
+      "High risk of temporary biliary fistula"
+     ]
+    },
+    "right": {
+     "title": "Reconstituting Subtotal",
+     "points": [
+      "Lower gallbladder cuff closed as pouch",
+      "Continuous or interrupted purse-string suture",
+      "Lower risk of postoperative bile leak",
+      "Risk of recurrent gallstones in remnant"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-external-ear-exostosis",
+ "subject": "ent",
+ "module": "ent-external-ear",
+ "title": "External Ear Tumours, Auricular Trauma, and Perichondritis",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Benign bony outgrowths of the external acoustic meatus comprise exostoses and osteomas. Exostoses are multiple, bilateral, smooth, broad-based sessile hyperostoses arising from the periosteum of the anterior and posterior osseous canal walls. Frequently termed **surfer ear**, they are provoked by repeated immersion in cold water during aquatic sports, causing thermal irritation that stimulates periosteal osteogenesis.",
+   "say": "Exostoses are multiple, bilateral, broad-based bony outgrowths found in surfers exposed to cold water. They arise from cold-induced periosteal stimulation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diseases-of-the-external-ear-fig1.webp",
+    "alt": "Anatomical schematic comparing canal exostoses and pedunculated osteoma",
+    "caption": "Sessile bilateral exostoses narrowing the osseous ear canal compared to a solitary osteoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast to exostoses, an osteoma of the external canal is a solitary, unilateral, pedunculated benign bony neoplasm that arises uniquely at the junction of the bony and cartilaginous canal near the tympanosquamous or tympanomastoid suture line. Histologically, an **osteoma** features a fibrovascular core enveloped by lamellar bone. While small lesions remain asymptomatic, large outgrowths trap cerumen and cause conductive hearing impairment.",
+   "say": "An osteoma is a solitary, unilateral, pedunculated bony lesion arising at the tympanosquamous junction, unlike multiple bilateral cold-induced exostoses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exostoses (Surfer Ear)",
+     "points": [
+      "Multiple and bilateral sessile lesions.",
+      "Triggered by chronic cold-water exposure.",
+      "Arise from deep anterior and posterior osseous walls.",
+      "Histologically dense compact bone without marrow."
+     ]
+    },
+    "right": {
+     "title": "Canal Osteoma",
+     "points": [
+      "Solitary and unilateral pedunculated lesion.",
+      "No association with cold water immersion.",
+      "Arises from tympanosquamous or tympanomastoid suture.",
+      "Histologically contains fibrovascular channels and trabeculae."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Blunt trauma to the auricle, common in boxers, wrestlers, and rugby players, can strip the perichondrium from the underlying auricular cartilage, generating a **haematoma auris**. Blood accumulates within the subperichondrial space, presenting as a tense, fluctuant, painless doughy purple swelling on the anterior surface of the pinna. Because auricular cartilage is completely avascular, relying solely on perichondrial diffusion, trapped hematoma leads to ischemic chondronecrosis.",
+   "say": "Blunt trauma shears the perichondrium from ear cartilage, forming a subperichondrial hematoma. Without prompt drainage, avascular cartilage dies from ischemia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Cauliflower Deformity",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Blunt Auricular Shear Trauma"
+     },
+     {
+      "id": "h2",
+      "label": "Subperichondrial Hematoma with Ischemia"
+     },
+     {
+      "id": "h3",
+      "label": "Cartilage Necrosis & Fibrocartilaginous Cauliflower Ear"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If an auricular hematoma is neglected or inadequately drained, neocartilage formation and fibrous organization distort the delicate pinna architecture, producing a permanent, shrivelled deformity termed **cauliflower ear** (boxer ear). Management mandates prompt wide-bore needle aspiration or surgical incision and evacuation under strict aseptic conditions, followed by contoured through-and-through bolster button compression dressing to prevent hematoma reaccumulation.",
+   "say": "Untreated hematoma leads to cauliflower ear deformity. Urgent surgical evacuation followed by compressive through-and-through bolster dressings prevents reaccumulation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-ear-gross.webp",
+    "alt": "Anatomical schematic showing auricular cartilage framework, helix, antihelix, concha, and vascular supply",
+    "caption": "Cartilaginous framework of the pinna covered by perichondrium responsible for cartilage viability. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Perichondritis of the pinna is an aggressive bacterial infection of the perichondrium, commonly secondary to ear piercings traversing the cartilage (high helical piercing), lacerations, or poorly drained hematomas. The causative organism in over seventy percent of cases is **Pseudomonas aeruginosa**. The auricle becomes swollen, dusky red, and exquisitely tender, but notably spares the non-cartilaginous lobule of the ear.",
+   "say": "Perichondritis is pseudomonal infection of the ear perichondrium following piercings or trauma. Swelling and redness involve the entire cartilage but spare the lobule.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perichondritis of Pinna",
+     "points": [
+      "Pseudomonas aeruginosa infection of perichondrium.",
+      "Triggered by cartilage piercing or trauma.",
+      "Involves helix, antihelix, and concha.",
+      "Characteristically spares the non-cartilaginous ear lobule."
+     ]
+    },
+    "right": {
+     "title": "Erysipelas of Pinna",
+     "points": [
+      "Streptococcus pyogenes infection of dermis.",
+      "Involves superficial cutaneous lymphatics.",
+      "Sharply demarcated bright red spreading erythema.",
+      "Consistently involves the ear lobule (Milian ear sign)."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A preauricular sinus is a congenital branchial anomaly presenting as a tiny pit, usually situated on the skin immediately anterior to the ascending crus of the helix. It arises from the incomplete fusion of the six embryonic **hillocks of His** derived from the first and second branchial arches during the sixth week of gestation. While asymptomatic sinuses require no intervention, recurrent abscesses require complete surgical excision of the tortuous arborizing epithelial tract.",
+   "say": "A preauricular sinus opens near the ascending helix from incomplete fusion of embryonic hillocks of His. Recurrent infections demand complete surgical excision of the tract.",
+   "vis": {
+    "kind": "table",
+    "title": "Embryological Derivation of Auricular Hillocks of His",
+    "cols": [
+     "Branchial Arch Origin",
+     "Hillock Number",
+     "Adult Anatomical Derivative",
+     "Clinical Abnormality"
+    ],
+    "rows": [
+     [
+      "First arch (Mandibular)",
+      "Hillock 1",
+      "Tragus",
+      "Preauricular tag"
+     ],
+     [
+      "First arch (Mandibular)",
+      "Hillock 2 and 3",
+      "Crus of helix and ascending helix",
+      "Preauricular sinus pit"
+     ],
+     [
+      "Second arch (Hyoid)",
+      "Hillock 4 and 5",
+      "Antihelix and scapha",
+      "Microtia malformation"
+     ],
+     [
+      "Second arch (Hyoid)",
+      "Hillock 6",
+      "Antitragus and lobule",
+      "Lobule coloboma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microtia represents a spectrum of congenital malformations characterized by an underdeveloped, dysmorphic external ear, often accompanied by congenital aural atresia of the external canal. Classified from grade I (mild hypoplasia) to grade IV (complete **anotia** or total absence of the ear), reconstruction is staged around ten years of age using autologous rib costal cartilage frameworks, followed by middle ear atresia repair.",
+   "say": "Microtia ranges from mild ear hypoplasia to complete absence, termed anotia. Surgical reconstruction begins around age ten using autologous rib cartilage frameworks.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Timeline for Microtia Reconstruction",
+    "nodes": [
+     {
+      "id": "mc1",
+      "label": "Assessment & Bone-Conduction Aid in Infancy"
+     },
+     {
+      "id": "mc2",
+      "label": "Autologous Rib Cartilage Harvest (Age 10)"
+     },
+     {
+      "id": "mc3",
+      "label": "Lobule Transposition & Tragal Construction"
+     }
+    ],
+    "edges": [
+     [
+      "mc1",
+      "mc2"
+     ],
+     [
+      "mc2",
+      "mc3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Foreign bodies in the external auditory canal are common in pediatric emergency settings. Vegetable foreign bodies such as beans, seeds, or peas expand upon contact with water, making ear syringing strictly contraindicated. Insects should first be killed by instilling **mineral oil** or lidocaine to paralyze them prior to removal under magnification. Button batteries represent extreme emergencies requiring immediate extraction to prevent caustic liquefaction necrosis.",
+   "say": "Never syringe vegetable foreign bodies with water as they swell. Paralyze live insects with mineral oil before removal, and extract button batteries immediately.",
+   "vis": {
+    "kind": "table",
+    "title": "Emergency Management of Ear Foreign Bodies",
+    "cols": [
+     "Foreign Body Variety",
+     "Initial Emergency Action",
+     "Strict Contraindication",
+     "Removal Technique"
+    ],
+    "rows": [
+     [
+      "Button battery",
+      "Immediate emergency removal",
+      "Never instill water or eardrops",
+      "Hook removal under direct vision"
+     ],
+     [
+      "Vegetable matter (Peas, beans)",
+      "Keep strictly dry",
+      "Never syringe (Absorbs water and swells)",
+      "Micro-instrumentation behind object"
+     ],
+     [
+      "Live insects",
+      "Instill mineral oil or lidocaine",
+      "Never grasp live struggling insect",
+      "Gentle suction or forceps removal"
+     ],
+     [
+      "Spherical bead / bead",
+      "Inspect canal under microscope",
+      "Never use straight grasping forceps",
+      "Right-angle hook passed behind object"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-001",
+  "bk2-ent-002",
+  "bk2-ent-003"
+ ]
+}

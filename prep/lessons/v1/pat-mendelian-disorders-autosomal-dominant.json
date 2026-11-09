@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-mendelian-disorders",
+  "subject": "pathology",
+  "title": "Mendelian Inheritance Patterns, Genetic Penetrance, and Autosomal Dominance",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Monogenic diseases caused by single-gene mutations adhere to predictable transmission probabilities governed by principles of segregating alleles. Understanding these classic transmission modes constitutes the study of clinical **Mendelian inheritance**, encompassing autosomal dominant, autosomal recessive, and sex-linked patterns that determine disease recurrence in subsequent family generations.",
+      "say": "Mendelian inheritance describes single-gene disorders transmitting along predictable family pedigrees.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "monogenic_defect",
+            "label": "Pathogenic Point Mutation in a Single Nuclear Gene"
+          },
+          {
+            "id": "allele_segregation",
+            "label": "Meiotic Segregation of Maternal and Paternal Alleles"
+          },
+          {
+            "id": "pedigree_pattern",
+            "label": "Predictable Transmission Ratios Manifest Across Generations"
+          }
+        ],
+        "edges": [
+          [
+            "monogenic_defect",
+            "allele_segregation"
+          ],
+          [
+            "allele_segregation",
+            "pedigree_pattern"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In single-gene disorders displaying dominant expression, inheritance of a single mutant allele from either parent is sufficient to produce clinical disease. Because every affected individual possesses one mutant and one normal allele, each offspring carries a fifty percent recurrence risk under **autosomal dominant inheritance**, exemplified by adult polycystic kidney disease.",
+      "say": "Autosomal dominant disorders require only one mutant allele and show vertical pedigree transmission.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/polycystic-kidney-disease-fig1.webp",
+        "alt": "Autosomal dominant polycystic kidney disease with multiple bilateral cysts",
+        "caption": "Bilateral gross renal enlargement and parenchymal cyst formation in autosomal dominant polycystic kidney disease."
+      }
+    },
+    {
+      "tx": "Disorders manifesting only when both maternal and paternal alleles at a given locus carry loss-of-function mutations follow recessive inheritance. Unaffected heterozygous parents act as carriers, conferring a twenty-five percent risk of homozygous disease among their offspring under **autosomal recessive inheritance**.",
+      "say": "Autosomal recessive diseases require two mutant alleles and typically involve metabolic enzyme defects.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dominant Structural Defects",
+          "points": [
+            "Mutations encode altered structural proteins or receptor subunits",
+            "Exert dominant-negative interference on macromolecular multimeric complexes",
+            "Show vertical pedigree transmission through successive generations",
+            "Often present in late childhood or adulthood with variable clinical expressivity"
+          ]
+        },
+        "right": {
+          "title": "Recessive Enzyme Deficiencies",
+          "points": [
+            "Loss-of-function mutations affecting catalytic cellular enzymes",
+            "Half-normal enzyme activity in heterozygotes maintains physiological homeostasis",
+            "Show horizontal pedigree distribution confined to sibships of carrier parents",
+            "Typically present early in infancy with uniform, severe metabolic derangement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sex-linked transmission occurs when disease-causing mutant alleles reside upon the X chromosome. Because biological males carry a single X chromosome, hemizygous males express the disease phenotype, while heterozygous females remain asymptomatic carriers, illustrating classic **X-linked recessive inheritance**, which lacks direct father-to-son transmission across family pedigrees.",
+      "say": "X-linked recessive disorders express fully in hemizygous males, with no direct father-to-son transmission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "carrier_mother",
+            "label": "Heterozygous Carrier Mother Transmits Mutant X Chromosome"
+          },
+          {
+            "id": "hemizygous_son",
+            "label": "Son Inherits Single Mutant X Chromosome and Shows Disease"
+          },
+          {
+            "id": "unaffected_father",
+            "label": "Affected Father Cannot Transmit Mutant X to Male Offspring"
+          }
+        ],
+        "edges": [
+          [
+            "carrier_mother",
+            "hemizygous_son"
+          ],
+          [
+            "hemizygous_son",
+            "unaffected_father"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The prototypic autosomal dominant connective tissue disorder caused by heterozygous mutations in the FBN1 gene on chromosome 15q21 is **Marfan syndrome**. This disease impairs microfibrillar scaffolding of elastic fibers, producing prominent pleiotropic pathology across skeletal, cardiovascular, and ocular systems throughout the patient's lifetime.",
+      "say": "Marfan syndrome is an autosomal dominant fibrillin-1 disorder affecting skeleton, eyes, and aorta.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diseases-of-the-aorta-fig1.webp",
+        "alt": "Ascending aortic root aneurysmal dilatation in Marfan syndrome",
+        "caption": "Aortic root aneurysmal dilatation and media degeneration characteristic of Marfan syndrome."
+      }
+    },
+    {
+      "tx": "Skeletal manifestations of Marfan syndrome stem from excessive, unconstrained linear bone growth. Affected patients exhibit unusually tall stature, abnormally long slender extremities, an increased arm-span-to-height ratio, joint laxity, pectus excavatum, and arachnodactyly, a distinctive constellation of clinical signs designated as **dolichostenomelia**.",
+      "say": "Dolichostenomelia describes the tall stature, long limbs, and spider fingers seen in Marfan patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fbn1_mutation",
+            "label": "Mutant Fibrillin Fails to Regulate Periosteal Growth Factors"
+          },
+          {
+            "id": "unrestrained_growth",
+            "label": "Unrestrained Longitudinal Epiphyseal Chondrocyte Proliferation"
+          },
+          {
+            "id": "skeletal_habitus",
+            "label": "Dolichostenomelia, Pectus Deformity, and Arachnodactyly"
+          }
+        ],
+        "edges": [
+          [
+            "fbn1_mutation",
+            "unrestrained_growth"
+          ],
+          [
+            "unrestrained_growth",
+            "skeletal_habitus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cardiovascular pathology represents the most lethal complication in patients with Marfan syndrome. Fragmentation of elastic laminae in the aortic tunica media produces cystic medial degeneration, causing ascending aortic root aneurysm that predisposes to life-threatening **aortic dissection in Marfan**, requiring elective root replacement.",
+      "say": "Cystic medial necrosis of the ascending aorta predisposes Marfan patients to fatal aortic dissection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "elastic_fragmentation",
+            "label": "Fragmentation of Elastic Laminae in Aortic Tunica Media"
+          },
+          {
+            "id": "cystic_degeneration",
+            "label": "Accumulation of Basophilic Ground Substance in Media"
+          },
+          {
+            "id": "aortic_root_aneurysm",
+            "label": "Progressive Annuloaortic Ectasia and Valve Regurgitation"
+          },
+          {
+            "id": "intimal_tear",
+            "label": "Catastrophic Intimal Tear and False Lumen Aortic Dissection"
+          }
+        ],
+        "edges": [
+          [
+            "elastic_fragmentation",
+            "cystic_degeneration"
+          ],
+          [
+            "cystic_degeneration",
+            "aortic_root_aneurysm"
+          ],
+          [
+            "aortic_root_aneurysm",
+            "intimal_tear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ocular manifestations in Marfan syndrome result from structural laxity of ciliary zonules that suspend the crystalline lens. Bilateral dislocation, typically displaced in an upward and outward direction, represents the diagnostic hallmark termed **ectopia lentis**, contrasting sharply with downward dislocation seen in homocystinuria.",
+      "say": "Ectopia lentis in Marfan syndrome presents with upward and temporal dislocation of the lens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Marfan Syndrome",
+          "Homocystinuria"
+        ],
+        "rows": [
+          [
+            "Inheritance",
+            "Autosomal Dominant (FBN1 on 15q21)",
+            "Autosomal Recessive (CBS Deficiency)"
+          ],
+          [
+            "Lens Dislocation",
+            "Upward and Temporal Ectopia Lentis",
+            "Downward and Inward Subluxation"
+          ],
+          [
+            "Vascular Risk",
+            "Aortic Aneurysm and Dissection",
+            "Multisystem Severe Arterial and Venous Thrombosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

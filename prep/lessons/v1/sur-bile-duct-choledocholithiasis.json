@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "sur-bile-duct",
+ "subject": "surgery",
+ "title": "Choledocholithiasis and Biliary Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The presence of one or more gallstones residing within the lumen of the common bile duct or common hepatic duct is designated as **choledocholithiasis**. Most bile duct stones are secondary calculi that have formed primarily within the gallbladder and subsequently migrated through a patent cystic duct. Less commonly, primary stones originate de novo within the ductal system, typically brown pigment calculi arising on a background of chronic biliary stasis and infection.",
+   "say": "Choledocholithiasis refers to stones in the common bile duct, predominantly migrating from the gallbladder or rarely forming de novo as primary pigment stones.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-peroperative-cholangiogram-choledocholithiasis.webp",
+    "alt": "Intraoperative cholangiogram demonstrating multiple rounded filling defects within the dilated common bile duct.",
+    "caption": "Choledocholithiasis: intraoperative cholangiogram confirming faceted calculi causing ductal obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients with symptomatic choledocholithiasis characteristically exhibit fluctuating obstructive jaundice, dark tea-coloured urine, pale acholic clay-coloured stools, and generalized pruritus. Ductal occlusion raises intrabiliary pressure above fifteen centimetres of water, halting hepatic bile excretion and forcing conjugated bilirubin into the systemic bloodstream. When complete mechanical obstruction persists, static bile promotes rapid retrograde bacterial colonization culminating in acute **ascending cholangitis**.",
+   "say": "Choledocholithiasis produces fluctuating obstructive jaundice, pale stools, dark urine, and pruritus, carrying a hazardous risk of ascending cholangitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stone",
+      "label": "Stone Migration or Primary Duct Calculus"
+     },
+     {
+      "id": "pressure",
+      "label": "Intrabiliary Pressure Exceeds 15-20 cm H2O"
+     },
+     {
+      "id": "jaundice",
+      "label": "Conjugated Hyperbilirubinaemia & Acholic Stools"
+     },
+     {
+      "id": "sepsis",
+      "label": "Retrograde Bacterial Seeding & Sepsis (Cholangitis)"
+     }
+    ],
+    "edges": [
+     [
+      "stone",
+      "pressure"
+     ],
+     [
+      "pressure",
+      "jaundice"
+     ],
+     [
+      "jaundice",
+      "sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial non-invasive screening for suspected biliary obstruction is executed using transabdominal ultrasonography. While ultrasound exhibits exquisite sensitivity for detecting gallbladder calculi and dilated extrahepatic ducts exceeding six millimetres, its direct sensitivity for visualizing common duct calculi is limited to fifty percent due to overlying duodenum and **colonic gas**. A normal ultrasound therefore never completely excludes choledocholithiasis.",
+   "say": "Transabdominal ultrasound detects biliary ductal dilatation reliably but misses half of common bile duct stones due to obscuring bowel gas.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/evaluation-of-liver-function-fig1.webp",
+    "alt": "Ultrasound schematic illustrating intrahepatic and extrahepatic biliary ductal dilatation secondary to distal common bile duct stone obstruction.",
+    "caption": "Sonographic biliary dilatation: extrahepatic common bile duct calibre exceeding six millimetres in choledocholithiasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The non-invasive gold standard imaging modality for comprehensive evaluation of the biliary and pancreatic ductal tree is **MRCP**. Utilizing heavy T2-weighted magnetic resonance sequences without ionizing radiation or intravenous iodinated contrast, static fluid within the biliary system produces high signal intensity while background parenchyma is suppressed. Common duct stones are identified with sensitivity and specificity exceeding ninety-five percent as low-signal intraluminal filling defects.",
+   "say": "MRCP is the non-invasive imaging benchmark for choledocholithiasis, displaying calculi as low-signal filling defects within the hyperintense biliary fluid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MRCP (Diagnostic)",
+     "points": [
+      "Purely diagnostic, entirely non-invasive",
+      "Zero ionizing radiation or contrast allergy",
+      "Comprehensive 3D anatomical visualization",
+      "No risk of post-procedure pancreatitis"
+     ]
+    },
+    "right": {
+     "title": "ERCP (Therapeutic)",
+     "points": [
+      "Invasive endoscopic fluoroscopy",
+      "Direct therapeutic intervention and stone extraction",
+      "Sphincterotomy, balloon trawl, and stenting",
+      "5-10% incidence of acute pancreatitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When therapeutic stone extraction or tissue sampling is required, the definitive interventional endoscopic procedure is **ERCP**. A side-viewing duodenoscope is advanced to the second part of the duodenum, the ampulla of Vater is cannulated under fluoroscopy, and radiopaque contrast medium is injected retrograde into the common duct. Once stones are verified, an endoscopic sphincterotomy is executed to widen the biliary orifice.",
+   "say": "ERCP allows direct visualization and therapeutic extraction of bile duct calculi following endoscopic sphincterotomy of the ampulla of Vater.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "duod",
+      "label": "Duodenoscopy to Ampulla of Vater in D2"
+     },
+     {
+      "id": "cannula",
+      "label": "Selective Cannulation of Common Bile Duct"
+     },
+     {
+      "id": "contrast",
+      "label": "Fluoroscopic Cholangiogram Demonstrates Calculi"
+     },
+     {
+      "id": "sphincter",
+      "label": "Endoscopic Sphincterotomy & Balloon / Basket Extraction"
+     }
+    ],
+    "edges": [
+     [
+      "duod",
+      "cannula"
+     ],
+     [
+      "cannula",
+      "contrast"
+     ],
+     [
+      "contrast",
+      "sphincter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following endoscopic sphincterotomy, common bile duct stones are cleared utilizing balloon occlusion catheters or a Dormia wire basket. For giant calculi exceeding fifteen millimetres that cannot be cleared through the sphincterotomy orifice, mechanical, electrohydraulic, or holmium laser **lithotripsy** is performed to fragment the concretions. If complete ductal clearance cannot be achieved in a single session, an internal plastic stent is deployed to prevent recurrent impaction.",
+   "say": "Choledocholithiasis clearance is accomplished using balloons or Dormia baskets, employing laser or mechanical lithotripsy for giant stones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Mechanism",
+     "Indications",
+     "Complications"
+    ],
+    "rows": [
+     [
+      "Balloon Extraction",
+      "Inflatable balloon trawls lumen",
+      "Stones < 10 mm in diameter",
+      "Ductal mucosal abrasion"
+     ],
+     [
+      "Dormia Basket",
+      "Four-wire helical basket traps stone",
+      "Firm stones 10-15 mm",
+      "Basket impaction on stone"
+     ],
+     [
+      "Laser Lithotripsy",
+      "Holmium laser pulses via cholangioscope",
+      "Giant impacted stones > 15 mm",
+      "Ductal perforation if misdirected"
+     ],
+     [
+      "Biliary Stenting",
+      "Plastic 7-10 Fr pigtail stent",
+      "Incomplete clearance, sepsis",
+      "Stent clogging and cholangitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most significant and feared procedural complication following ERCP is post-procedure **acute pancreatitis**, occurring in five to ten percent of all patients. Precipitated by mechanical thermal injury during sphincterotomy or hydrostatic trauma from repetitive pancreatic duct cannulation, systemic inflammation can be severe. Prevention involves selective rectal indomethacin or diclofenac administration and temporary prophylactic pancreatic duct stenting in high-risk candidates.",
+   "say": "Acute pancreatitis is the most frequent major complication of ERCP, mitigated by prophylactic rectal nonsteroidal anti-inflammatory drugs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Post-ERCP Complications",
+     "points": [
+      "Acute pancreatitis (5% to 10%)",
+      "Bleeding from sphincterotomy site (1% to 2%)",
+      "Duodenal perforation (retroperitoneal)",
+      "Acute ascending cholangitis from infected contrast"
+     ]
+    },
+    "right": {
+     "title": "Preventive Strategies",
+     "points": [
+      "Pre-procedure rectal NSAIDs (indomethacin 100 mg)",
+      "Guidewire-assisted biliary cannulation",
+      "Placement of temporary pancreatic duct stent",
+      "Prophylactic intravenous hydration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients harbouring synchronous cholelithiasis and choledocholithiasis, modern surgical practice selects between a two-stage or single-stage strategy. The standard two-stage protocol employs preoperative ERCP clearance followed by elective laparoscopic cholecystectomy during the same hospital stay. Alternatively, single-stage management utilizes laparoscopic cholecystectomy combined with intraoperative **choledochoscopy**, clearing the common bile duct transcystically or via formal choledochotomy.",
+   "say": "Synchronous gallbladder and duct stones are managed by preoperative ERCP followed by cholecystectomy, or single-stage laparoscopic common bile duct exploration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strategy",
+     "Components",
+     "Advantages",
+     "Disadvantages"
+    ],
+    "rows": [
+     [
+      "Two-Stage Approach",
+      "Pre-op ERCP then laparoscopic cholecystectomy",
+      "Familiar, widely available in most centres",
+      "Two anaesthetic procedures, risk of post-ERCP pancreatitis"
+     ],
+     [
+      "Single-Stage Approach",
+      "Laparoscopic cholecystectomy + CBD exploration",
+      "Single anaesthetic, shorter stay, intact sphincter",
+      "Requires advanced laparoscopic skills and choledochoscope"
+     ],
+     [
+      "Postoperative ERCP",
+      "Lap cholecystectomy with intentional post-op ERCP",
+      "Employed when CBD exploration fails",
+      "Risk of retained stone if post-op ERCP fails"
+     ]
+    ]
+   }
+  }
+ ]
+}

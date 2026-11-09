@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-tissue-repair",
+  "subject": "pathology",
+  "title": "TGF-Beta Signaling, Granulation Tissue, and Collagen Deposition",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The central molecular cytokine orchestrating connective tissue scar formation and pathological organ fibrosis across human tissues is transforming growth factor beta. Secreted by alternatively activated M2 macrophages and platelets, **transforming growth factor-beta (TGF-beta)** stimulates fibroblast proliferation, activates collagen transcription, and suppresses collagenolytic matrix metalloproteinases.",
+      "say": "TGF-beta is the master fibrogenic cytokine that stimulates fibroblast collagen synthesis while blocking degradation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "macrophage_release",
+            "label": "M2 Macrophages and Platelets Secrete Latent TGF-Beta Complexes"
+          },
+          {
+            "id": "protease_activate",
+            "label": "Extracellular Plasmin Cleaves Latency-Associated Peptide, Freeing TGF-Beta"
+          },
+          {
+            "id": "smad_transduction",
+            "label": "Binds Serine/Threonine Kinase Receptors to Phosphorylate Smad2 and Smad3"
+          },
+          {
+            "id": "collagen_transcribe",
+            "label": "Smad Complex Translocates into Nucleus, Driving Fibrillar Collagen Gene Transcription"
+          }
+        ],
+        "edges": [
+          [
+            "macrophage_release",
+            "protease_activate"
+          ],
+          [
+            "protease_activate",
+            "smad_transduction"
+          ],
+          [
+            "smad_transduction",
+            "collagen_transcribe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "TGF-beta signaling operates via transmembrane serine-threonine kinase receptors that phosphorylate receptor-regulated Smad proteins. Phosphorylated Smad2 and Smad3 bind common mediator Smad4, translocating into the nucleus to induce transcription of type one and **type three procollagen genes**, fibronectin, and tissue inhibitors of metalloproteinases (TIMPs).",
+      "say": "TGF-beta signals through Smad2 and Smad3 to activate fibrillar collagen and TIMP gene expression.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-fibrosis-fig1.webp",
+        "caption": "Exaggerated fibroblastic proliferation and dense interstitial collagen deposition in pulmonary fibrosis.",
+        "alt": "Idiopathic pulmonary fibrosis histology showing dense collagenous scar remodeling"
+      }
+    },
+    {
+      "tx": "Within three to five days following tissue injury, the initial blood clot is progressively invaded by a specialized, vascularized temporary repair tissue. Termed **granulation tissue**, this pink, soft, granular tissue consists of proliferating newly formed capillary loops, active fibroblasts, loose extracellular matrix, and interspersed macrophages.",
+      "say": "Granulation tissue is soft, pink repair tissue composed of sprouting capillaries and proliferating fibroblasts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetic-foot-ulcer-fig1.webp",
+        "caption": "Chronic cutaneous ulceration showing pale non-healing base with impaired healthy granulation tissue formation.",
+        "alt": "Chronic diabetic foot ulcer displaying base with defective granulation bed"
+      }
+    },
+    {
+      "tx": "The distinctive granular gross texture of granulation tissue is produced by the microscopic arches of proliferating endothelial capillary loops pushing upward into the wound bed. Macrophages within granulation tissue continuously secrete **fibroblast growth factors and PDGF**, stimulating local fibroblasts to synthesize loose extracellular matrix rich in hyaluronic acid.",
+      "say": "Granulation tissue gets its granular texture from loops of new capillaries supported by active fibroblasts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Granulation Tissue (Days 3 to 7)",
+          "points": [
+            "Grossly soft, pink, moist, and bleeding easily upon gentle contact",
+            "Densely packed with newly sprouted, leaky, immature capillary loops",
+            "High cellularity: abundant macrophages, proliferating fibroblasts",
+            "Loose, edematous extracellular matrix rich in type III collagen"
+          ]
+        },
+        "right": {
+          "title": "Mature Fibrous Scar (Weeks to Months)",
+          "points": [
+            "Grossly pale, firm, avascular, and contracted fibrous plaque",
+            "Vessels regress and disappear, leaving dense hypocellular connective tissue",
+            "Fibroblasts convert to inactive spindle-shaped fibrocytes",
+            "Dense, parallel bundles of mechanically strong type I collagen fibers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The extracellular matrix provides essential structural scaffolding and mechanical signaling for tissue regeneration. Composed of fibrous structural collagens, adhesive glycoproteins like fibronectin and laminin, and **proteoglycan ground substance**, the matrix anchors cells and stores immobilized growth factors that regulate cell migration.",
+      "say": "The extracellular matrix anchors cells with collagen, laminin, and proteoglycans, regulating cell migration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I Collagen Properties",
+          "points": [
+            "Most abundant collagen (90% of body collagen) in bone, tendon, and mature scars",
+            "Thick, banded, rigid fibrillar bundles providing high tensile strength",
+            "Triple helix composed of two alpha-1(I) and one alpha-2(I) chains",
+            "Defective in osteogenesis imperfecta (brittle bone disease)"
+          ]
+        },
+        "right": {
+          "title": "Type III Collagen Properties",
+          "points": [
+            "Flexible fibrillar reticulin fibers abundant in pliable distensible tissues",
+            "Predominates in blood vessels, embryonic dermis, and early granulation tissue",
+            "Triple helix composed of three identical alpha-1(III) collagen chains",
+            "Defective in vascular Ehlers-Danlos syndrome, predisposing to arterial rupture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During the progression of wound healing, a critical phenotypic transition occurs in collagen composition. Early granulation tissue is packed with flexible **type three collagen**, which is gradually degraded by matrix metalloproteinases and replaced over weeks by dense, cross-linked bundles of mechanically resilient type one collagen.",
+      "say": "Early granulation tissue rich in type III collagen is gradually replaced by strong type I collagen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "early_synthesis",
+            "label": "Fibroblasts Rapidly Synthesize Pliable Type III Fibrillar Collagen (Reticulin)"
+          },
+          {
+            "id": "mmp_turnover",
+            "label": "Collagenases (MMP-1, MMP-8) Enzymatically Degrade Type III Scaffolding"
+          },
+          {
+            "id": "type1_deposition",
+            "label": "Fibroblasts Deposit Thick, Stiff Bundles of Type I Fibrillar Collagen"
+          },
+          {
+            "id": "lysyl_crosslink",
+            "label": "Lysyl Oxidase Cross-Links Fibrils, Escalating Tensile Breaking Strength"
+          }
+        ],
+        "edges": [
+          [
+            "early_synthesis",
+            "mmp_turnover"
+          ],
+          [
+            "mmp_turnover",
+            "type1_deposition"
+          ],
+          [
+            "type1_deposition",
+            "lysyl_crosslink"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extracellular collagen fibril maturation requires covalent cross-linking between lysine and hydroxylysine residues. Catalyzed in the extracellular space by the copper-dependent enzyme **lysyl oxidase**, covalent intermolecular cross-links bond adjacent tropocollagen triple helices, dramatically augmenting the ultimate tensile strength of the healing scar.",
+      "say": "Copper-dependent lysyl oxidase cross-links collagen fibrils, boosting the scar's tensile strength.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intracellular Hydroxylation (Prolyl/Lysyl Hydroxylase)",
+          "points": [
+            "Occurs inside rough endoplasmic reticulum during procollagen synthesis",
+            "Requires molecular oxygen, ferrous iron (Fe2+), and vitamin C (ascorbic acid)",
+            "Hydroxyproline residues are essential for stabilizing the triple helix",
+            "Defective in scurvy: unstable collagen denatures, causing wound dehiscence"
+          ]
+        },
+        "right": {
+          "title": "Extracellular Cross-Linking (Lysyl Oxidase)",
+          "points": [
+            "Occurs in extracellular matrix after cleavage of procollagen propeptides",
+            "Copper-dependent enzyme deaminates lysine residues into reactive aldehydes",
+            "Aldehydes spontaneously condense to form covalent cross-links between fibrils",
+            "Defective in Menkes kinky hair disease and lathyrism (sweet pea ingestion)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Clean, uninfected surgical incisions whose opposing wound edges are precisely re-approximated with sutures or surgical staples heal through primary union. In **healing by primary intention**, the epithelial barrier reconstitutes within twenty-four to forty-eight hours, requiring minimal granulation tissue and resolving with a thin, cosmetically favorable linear scar.",
+      "say": "Healing by primary intention occurs in clean sutured wounds with minimal scarring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "clean_incision",
+            "label": "Sharp Surgical Scalpel Incision with Well-Approximated Sutured Margins"
+          },
+          {
+            "id": "clot_epithelium",
+            "label": "Blood Clot Seals Defect; Basal Epithelial Spur Reconstitutes within 24-48 Hours"
+          },
+          {
+            "id": "minimal_granulation",
+            "label": "Narrow Incisional Defect Filled by Modest Ingrowth of Granulation Tissue"
+          },
+          {
+            "id": "hairline_scar",
+            "label": "Collagen Remodeling Yields a Narrow, Pale, Cosmetically Favorable Linear Scar"
+          }
+        ],
+        "edges": [
+          [
+            "clean_incision",
+            "clot_epithelium"
+          ],
+          [
+            "clot_epithelium",
+            "minimal_granulation"
+          ],
+          [
+            "minimal_granulation",
+            "hairline_scar"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "ent-vestibular-tests-caloric-test",
+ "subject": "ent",
+ "module": "ent-vestibular-tests",
+ "title": "Vestibular Evaluation, Caloric Testing, and Bedside Signs",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The bithermal caloric test of Fitzgerald and Hallpike is a standardized laboratory examination evaluating horizontal semicircular canal function independently in each ear. The patient is placed supine with the head elevated thirty degrees to align the lateral canal vertically. The external ear is irrigated for forty seconds with water at thirty degrees Celsius (cold) and forty-four degrees Celsius (warm), inducing convective **endolymph flow**.",
+   "say": "The Fitzgerald-Hallpike caloric test elevates the head thirty degrees to orient the lateral canal vertically. Irrigating with cold and warm water induces convective currents.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn8-hearing.webp",
+    "alt": "Clinical vestibulo-ocular assessment and patient positioning during vestibular examination",
+    "caption": "Vestibular testing evaluating vestibulo-ocular reflex pathways and horizontal nystagmus responses. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Caloric stimulation generates horizontal nystagmus governed by the classic mnemonic COWS: Cold Opposite, Warm Same. Cold irrigation cools endolymph, increasing its density and causing ampullofugal convective sinking that inhibits the vestibular nerve, driving slow eye deviation toward the irrigated ear with fast compensatory **nystagmus beating** toward the opposite ear. Warm irrigation produces ampullopetal rising and excitation, driving nystagmus beating toward the same ear.",
+   "say": "The mnemonic COWS governs caloric nystagmus: cold water induces fast beating to the opposite ear, whereas warm water induces fast beating to the same ear.",
+   "vis": {
+    "kind": "table",
+    "title": "Caloric Irrigation Responses (COWS Principle)",
+    "cols": [
+     "Irrigation Temperature",
+     "Convective Endolymph Current",
+     "Ampullary Deflection",
+     "Direction of Fast Nystagmus"
+    ],
+    "rows": [
+     [
+      "Cold water (30 deg C, 7 below body)",
+      "Sinks downward (Increased density)",
+      "Ampullofugal (Inhibitory)",
+      "Beats to OPPOSITE ear"
+     ],
+     [
+      "Warm water (44 deg C, 7 above body)",
+      "Rises upward (Decreased density)",
+      "Ampullopetal (Excitatory)",
+      "Beats to SAME ear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Using Jongkees formula, caloric electronystagmography calculates canal paresis and directional preponderance. A **canal paresis** exceeding twenty-five percent indicates unilateral hypofunction of the horizontal semicircular canal, characteristic of vestibular neuritis, Meniere disease, or vestibular schwannoma. Directional preponderance exceeding thirty percent reflects a central or peripheral imbalance in nystagmus tone.",
+   "say": "Jongkees formula calculates canal paresis. A reduction exceeding twenty-five percent confirms unilateral vestibular hypofunction, seen in vestibular neuritis or acoustic neuroma.",
+   "vis": {
+    "kind": "flow",
+    "title": "Jongkees Caloric Analysis Pathway",
+    "nodes": [
+     {
+      "id": "j1",
+      "label": "Four Caloric Irrigations (R30, L30, R44, L44)"
+     },
+     {
+      "id": "j2",
+      "label": "Calculate Max Slow-Phase Velocity"
+     },
+     {
+      "id": "j3",
+      "label": "Canal Paresis (>25%) & Directional Preponderance"
+     }
+    ],
+    "edges": [
+     [
+      "j1",
+      "j2"
+     ],
+     [
+      "j2",
+      "j3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Dix-Hallpike test is the definitive diagnostic gold standard for posterior semicircular canal benign paroxysmal positional vertigo. The patient is rapidly moved from a seated posture to supine with the head turned forty-five degrees and extended thirty degrees over the bed edge. In positive cases, freely floating canaliths provoke a paroxysm of geotropic torsional **upbeating nystagmus** displaying a characteristic latency, duration under one minute, and fatigue on repeat testing.",
+   "say": "The Dix-Hallpike maneuver diagnoses posterior canal positional vertigo. Canaliths produce torsional upbeating nystagmus with latency, brief duration, and fatigue on repeat testing.",
+   "vis": {
+    "kind": "table",
+    "title": "Hallmarks of Benign Positional Nystagmus (Dix-Hallpike)",
+    "cols": [
+     "Feature",
+     "Peripheral BPPV Pattern",
+     "Central Positional Pathology"
+    ],
+    "rows": [
+     [
+      "Latency",
+      "Present (2 to 20 seconds delay)",
+      "Absent (Immediate onset)"
+     ],
+     [
+      "Direction",
+      "Torsional upbeating toward lower ear",
+      "Pure vertical, horizontal, or downbeating"
+     ],
+     [
+      "Duration",
+      "Crescendo-decrescendo (< 60 seconds)",
+      "Prolonged persistent (> 60 seconds)"
+     ],
+     [
+      "Fatiguability",
+      "Yes (Fatigues on repeated positioning)",
+      "No (No fatigue on repetition)"
+     ],
+     [
+      "Subjective vertigo",
+      "Severe distress and nausea",
+      "Mild or absent vertigo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The head impulse test (Halmagyi-Curthoys test) provides a rapid bedside evaluation of high-frequency vestibulo-ocular reflex function. While the patient fixes their gaze on the examiner nose, the examiner applies a sudden, unpredictable small-amplitude rapid head thrust laterally. An abnormal test reveals a corrective **catch-up saccade** back to the examiner nose, confirming peripheral vestibular hypofunction on the side of the turn.",
+   "say": "The head impulse test rapidly evaluates the vestibulo-ocular reflex. In unilateral vestibular loss, a rapid head thrust causes the eyes to slip off target, requiring a catch-up saccade.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Positive Head Impulse Test",
+    "nodes": [
+     {
+      "id": "hi1",
+      "label": "Rapid High-Velocity Head Thrust"
+     },
+     {
+      "id": "hi2",
+      "label": "Deficient Vestibulo-Ocular Reflex Gain"
+     },
+     {
+      "id": "hi3",
+      "label": "Corrective Catch-Up Saccade to Fixation Target"
+     }
+    ],
+    "edges": [
+     [
+      "hi1",
+      "hi2"
+     ],
+     [
+      "hi2",
+      "hi3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fistula test assesses the presence of an abnormal bony dehiscence in the labyrinthine capsule, most commonly erosions of the lateral semicircular canal caused by cholesteatoma. Increasing pressure in the external canal using a Siegle pneumatic speculum drives endolymph movement, provoking vertigo and conjugate deviation of the eyes to the opposite side. A **fistula sign** confirms an open communication between middle ear and labyrinth.",
+   "say": "The fistula test applies pressure to the ear canal with a pneumatic speculum. Induced vertigo and nystagmus confirm an erosive bony fistula, typically caused by cholesteatoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/enlarged-vestibular-aqueduct-fig1.webp",
+    "alt": "Anatomical schematic showing bony labyrinth dehiscence and inner ear capsule anatomy",
+    "caption": "Labyrinthine erosion of the lateral semicircular canal predisposing to labyrinthine fistula. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Two peculiar sound- and pressure-induced vestibular phenomena reflect third mobile window abnormalities of the labyrinth. The **Tullio phenomenon** refers to the induction of acute vertigo and oscillopsia by loud sounds, classically seen in superior semicircular canal dehiscence. Hennebert sign refers to positive vestibular symptoms induced by pneumatic pressure changes in the absence of an eardrum perforation, observed in congenital syphilis and Meniere disease.",
+   "say": "Loud sounds provoke vertigo in Tullio phenomenon, typical of superior canal dehiscence. Canal pressure changes without perforation provoke vertigo in Hennebert sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tullio Phenomenon",
+     "points": [
+      "Acoustic-induced vestibular activation.",
+      "Triggered by loud sounds or musical tones.",
+      "Causes sudden vertigo and vertical-torsional nystagmus.",
+      "Classic hallmark of superior canal dehiscence."
+     ]
+    },
+    "right": {
+     "title": "Hennebert Sign",
+     "points": [
+      "Pressure-induced vestibular activation with intact drum.",
+      "Triggered by tragal pressure or pneumatic otoscopy.",
+      "No direct tympanic membrane perforation present.",
+      "Characteristic of congenital syphilis and endolymphatic hydrops."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bedside balance evaluation utilizes vestibulospinal postural examinations. In the Romberg test, the patient stands with feet together and arms crossed; closing the eyes unmasks sensory ataxia, with patients swaying toward the side of acute vestibular loss. In the Unterberger stepping test, the patient marches in place with eyes closed for fifty steps; a progressive rotation of the body exceeding **45 degrees** toward one side indicates peripheral hypofunction.",
+   "say": "Romberg testing checks postural stability with eyes closed. In the Unterberger stepping test, rotation beyond forty-five degrees reveals unilateral vestibular hypofunction.",
+   "vis": {
+    "kind": "table",
+    "title": "Bedside Vestibulospinal Postural Examination",
+    "cols": [
+     "Examination",
+     "Patient Instruction",
+     "Positive Finding",
+     "Pathological Interpretation"
+    ],
+    "rows": [
+     [
+      "Romberg test",
+      "Stand erect, feet together, close eyes",
+      "Sways or falls toward lesion side",
+      "Uncompensated vestibular loss"
+     ],
+     [
+      "Sharpened Romberg",
+      "Tandem heel-to-toe stance, eyes closed",
+      "Loss of balance in seconds",
+      "Sensory or vestibular unsteadiness"
+     ],
+     [
+      "Unterberger test",
+      "March in place 50 steps, eyes closed",
+      "Body turns > 45 degrees",
+      "Lateralizes to hypofunctioning labyrinth"
+     ],
+     [
+      "Past-pointing",
+      "Raise and lower index finger to target",
+      "Consistent deviation to one side",
+      "Vestibular tonus asymmetry"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "2e503cf9-96b0-45e0-b8e0-e41d93e9ec8a",
+  "735ebf92-7013-4f25-8c37-7b22f55d1ba9",
+  "de44676a-c317-4175-b7a8-bb935324586f"
+ ]
+}

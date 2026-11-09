@@ -1,0 +1,289 @@
+{
+ "v": 1,
+ "module": "sur-portal-hypertension",
+ "subject": "surgery",
+ "title": "Surgical Management of Portal Hypertension",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A common cause of non-cirrhotic portal hypertension in children and young adults across developing nations is **extrahepatic portal vein obstruction**. Thrombotic occlusion of the extrahepatic trunk of the portal vein leads to compensatory transformation into a tortuous leash of periportal collaterals designated as portal cavernoma. Because the intrinsic liver architecture remains pristine, hepatic synthetic function is completely preserved despite massive splenomegaly and variceal bleeding.",
+   "say": "Extrahepatic portal vein obstruction causes prehepatic portal hypertension and cavernoma formation, presenting with variceal bleeding despite normal hepatic synthetic function.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/extrahepatic-portal-vein-obstruction-fig1.webp",
+    "alt": "Ultrasound and angiographic diagram demonstrating portal cavernoma collaterals bypassing extrahepatic portal vein thrombosis.",
+    "caption": "Extrahepatic portal vein obstruction: cavernoma transformation around an occluded extrahepatic portal vein. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In adult patients presenting with gross splenomegaly, preserved hepatic parenchyma, and marked presinusoidal portal hypertension, a key differential diagnosis is **non-cirrhotic portal fibrosis**. Also termed idiopathic non-cirrhotic portal hypertension, histopathology reveals dense periportal obliterative phlebosclerosis of intrahepatic portal venules without cirrhotic nodularity. Like extrahepatic venous block, patient longevity is threatened primarily by acute variceal haemorrhage rather than progressive liver cell failure.",
+   "say": "Non-cirrhotic portal fibrosis presents with portal hypertension and massive splenomegaly due to intrahepatic portal venule sclerosis with normal liver function.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EHPVO",
+     "points": [
+      "Prehepatic obstruction site",
+      "Children and young adults",
+      "Portal vein cavernoma on imaging",
+      "Rex shunt or proximal splenorenal shunt"
+     ]
+    },
+    "right": {
+     "title": "NCPF",
+     "points": [
+      "Intrahepatic presinusoidal obstruction",
+      "Young to middle-aged adults",
+      "Patent extrahepatic portal vein trunk",
+      "Splenectomy and devascularisation or shunt"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe hepatic venous outflow obstruction occurring anywhere from the small hepatic venules to the inferior vena cava junction constitutes **Budd-Chiari syndrome**. Most frequently provoked by myeloproliferative neoplasms or thrombophilia, the resultant centrilobular congestion causes a clinical triad of tender hepatomegaly, refractory intractable ascites, and abdominal pain. Compensatory hypertrophy of the caudate lobe typically ensues because its independent venules drain directly into the vena cava.",
+   "say": "Budd-Chiari syndrome results from hepatic venous outflow obstruction, presenting with painful hepatomegaly, ascites, and compensatory caudate lobe hypertrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thromb",
+      "label": "Hepatic Vein Thrombosis (Thrombophilia / MPN)"
+     },
+     {
+      "id": "congest",
+      "label": "Severe Sinusoidal Congestion & Centrilobular Necrosis"
+     },
+     {
+      "id": "triad",
+      "label": "Tender Hepatomegaly, Intractable Ascites & Pain"
+     },
+     {
+      "id": "caudate",
+      "label": "Caudate Hypertrophy via Direct Vena Cava Drainage"
+     }
+    ],
+    "edges": [
+     [
+      "thromb",
+      "congest"
+     ],
+     [
+      "congest",
+      "triad"
+     ],
+     [
+      "triad",
+      "caudate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial medical management of catastrophic gastrointestinal haemorrhage secondary to **acute variceal bleeding** prioritizes airway protection, cautious restrictive blood transfusion, and intravenous vasoactive pharmacotherapy. Continuous infusions of somatostatin, octreotide, or terlipressin rapidly lower portal pressures through selective splanchnic vasoconstriction. Emergent esophagogastroduodenoscopy performed within twelve hours provides definitive endoscopic band ligation to arrest active hemorrhage.",
+   "say": "Acute variceal bleeding demands hemodynamic resuscitation, splanchnic vasoconstrictor infusions like octreotide or terlipressin, and prompt endoscopic band ligation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modality",
+     "Mechanism of Action",
+     "Key Benefit",
+     "Clinical Caution"
+    ],
+    "rows": [
+     [
+      "Terlipressin / Octreotide",
+      "Splanchnic arterial vasoconstriction",
+      "Decreases portal inflow pressure",
+      "Hypertension, cardiac ischaemia"
+     ],
+     [
+      "Endoscopic Band Ligation",
+      "Mechanical strangulation of varices",
+      "High haemostasis, low rebleeding",
+      "Requires clear endoscopic view"
+     ],
+     [
+      "Prophylactic Ceftriaxone",
+      "Prevents spontaneous bacterial peritonitis",
+      "Reduces rebleeding and mortality",
+      "Mandatory in all bleeding cirrhotics"
+     ],
+     [
+      "Restrictive Transfusion",
+      "Maintains Hb between 7 and 8 g/dL",
+      "Prevents rebound portal pressure surge",
+      "Avoid aggressive over-transfusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When endoscopic band ligation and medical therapy fail to arrest torrential bleeding, temporary mechanical compression is achieved utilizing a **Sengstaken-Blakemore tube**. This triple-lumen device incorporates a gastric balloon inflated with two hundred millilitres of water or air, an esophageal balloon inflated to thirty millimetres of mercury, and a gastric aspiration port. The esophageal balloon must be deflated every six hours to prevent transmural pressure necrosis.",
+   "say": "The Sengstaken-Blakemore tube provides temporary balloon tamponade for refractory variceal bleeding, requiring planned deflation to avoid esophageal necrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-sengstaken-blakemore-tube.webp",
+    "alt": "Photograph of Sengstaken-Blakemore tube showing gastric and esophageal balloons with three separate functional ports.",
+    "caption": "Sengstaken-Blakemore tube: triple-lumen balloon tamponade for refractory bleeding gastroesophageal varices. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "For definitive rescue in medically refractory variceal haemorrhage or intractable cirrhotic ascites, interventional radiologists create a **TIPS** conduit. Under fluoroscopic and ultrasound control via the internal jugular vein, an expandable polytetrafluoroethylene-covered metallic stent is deployed between a major hepatic vein and an intrahepatic branch of the portal vein. This non-surgical low-resistance tract decompresses the portal system directly into systemic circulation.",
+   "say": "TIPS creates a low-resistance stent tract between the hepatic vein and portal vein, effectively decompressing portal hypertension at the expense of encephalopathy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tips-and-portal-interventions-fig1.webp",
+    "alt": "Fluoroscopic and anatomical schematic of transjugular intrahepatic portosystemic shunt connecting hepatic vein to intrahepatic portal vein branch.",
+    "caption": "TIPS: percutaneous portosystemic decompression bypassing the congested hepatic sinusoidal vascular bed. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical decompressive operations are broadly divided into non-selective and selective varieties of surgical **portosystemic shunt**. A classic side-to-side portacaval shunt diverts total portal inflow into the inferior vena cava, providing magnificent variceal decompression but precipitating debilitating postoperative hepatic encephalopathy. Conversely, selective shunts decompress gastrosplenic varices while preserving mesenteric portal blood perfusion to the hepatic parenchyma.",
+   "say": "Surgical portosystemic shunts reduce variceal pressure, with selective shunts preserving mesenteric portal perfusion to decrease encephalopathy rates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shunt Type",
+     "Vascular Anastomosis",
+     "Portal Inflow to Liver",
+     "Encephalopathy Risk"
+    ],
+    "rows": [
+     [
+      "Portacaval (End-to-Side)",
+      "Portal vein to inferior vena cava",
+      "Zero (completely diverted)",
+      "Extremely high"
+     ],
+     [
+      "Portacaval (Side-to-Side)",
+      "Lateral portal vein to IVC",
+      "Retrograde hepatofugal flow",
+      "Very high"
+     ],
+     [
+      "Distal Splenorenal (Warren)",
+      "Splenic vein to left renal vein",
+      "Preserved via portal vein",
+      "Lowest among shunts"
+     ],
+     [
+      "Proximal Splenorenal (Linton)",
+      "Splenic vein to left renal vein + splenectomy",
+      "Partially diverted",
+      "Moderate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gold standard selective surgical decompression is the distal **splenorenal shunt**, pioneered by Warren. The splenic vein is divided at its confluence with the superior mesenteric vein, and its distal splenic end is anastomosed end-to-side into the left renal vein. Concomitant complete division of all coronary and gastroepiploic veins isolates the high-pressure mesenteric territory from the low-pressure gastrosplenic bed.",
+   "say": "The Warren distal splenorenal shunt anastomoses the splenic vein to the left renal vein, selectively decompressing varices while maintaining portal liver flow.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warren Distal Splenorenal",
+     "points": [
+      "Selective gastrosplenic decompression",
+      "Preserves superior mesenteric portal flow",
+      "Spleen remains in situ",
+      "Lower rates of hepatic encephalopathy"
+     ]
+    },
+    "right": {
+     "title": "Linton Proximal Splenorenal",
+     "points": [
+      "Non-selective total decompression",
+      "Obligatory concomitant splenectomy",
+      "Indicated if severe hypersplenism present",
+      "Higher incidence of encephalopathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients with unshuntable thrombosed portal and splenic veins, extensive surgical gastroesophageal devascularisation is indicated to obliterate collateral inflow. The most complete extensive devascularisation technique is the **Sugiura procedure**, which combines abdominal and thoracic division of all periesophageal and perigastric veins, esophageal mucosal transection, splenectomy, and pyloroplasty without constructing any vascular portosystemic anastomosis.",
+   "say": "The Sugiura procedure performs extensive gastroesophageal devascularisation, esophageal transection, and splenectomy for patients with unshuntable portal thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thromb",
+      "label": "Extensive Portal & Splenic Vein Thrombosis"
+     },
+     {
+      "id": "devasc",
+      "label": "Paraesophageal & Paragastric Devascularisation"
+     },
+     {
+      "id": "transect",
+      "label": "Esophageal Transection & Re-Anastomosis"
+     },
+     {
+      "id": "splen",
+      "label": "Splenectomy to Correct Severe Hypersplenism"
+     }
+    ],
+    "edges": [
+     [
+      "thromb",
+      "devasc"
+     ],
+     [
+      "devasc",
+      "transect"
+     ],
+     [
+      "transect",
+      "splen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive chronic congestive pooling of blood within the splenic red pulp triggers clinically significant secondary **hypersplenism**. This syndrome is characterized by marked splenomegaly paired with peripheral blood cytopenias, manifest as severe thrombocytopenia, leukopenia, or normocytic anaemia despite hyperplastic bone marrow. While isolated hypersplenism rarely warrants splenectomy in cirrhosis, platelets and white cell counts rebound swiftly following successful portosystemic shunt decompression.",
+   "say": "Hypersplenism causes peripheral cytopenias due to splenic sequestration, which improves following surgical shunt decompression or targeted splenectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Splenic Sequestration",
+     "Bone Marrow Response",
+     "Clinical Impact"
+    ],
+    "rows": [
+     [
+      "Thrombocytopenia",
+      "Platelets trapped in splenic cords",
+      "Megakaryocyte hyperplasia",
+      "Bleeding diathesis if <50,000/uL"
+     ],
+     [
+      "Leukopenia",
+      "Splenic margination of neutrophils",
+      "Myeloid hyperplasia",
+      "Rarely causes opportunistic infection"
+     ],
+     [
+      "Anaemia",
+      "Premature destruction of erythrocytes",
+      "Erythroid hyperplasia",
+      "Exacerbates fatigue and pallor"
+     ],
+     [
+      "Splenomegaly",
+      "Red pulp sinusoidal expansion",
+      "Normal architectural response",
+      "Abdominal discomfort, early satiety"
+     ]
+    ]
+   }
+  }
+ ]
+}

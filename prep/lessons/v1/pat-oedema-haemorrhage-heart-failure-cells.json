@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "pat-oedema-haemorrhage",
+  "subject": "pathology",
+  "title": "Pulmonary Congestion, Extravasation, and Tissue Haemorrhage",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Decompensation of the left ventricle or rheumatic mitral stenosis produces elevated pressures within pulmonary veins, venules, and alveolar capillaries. High retrograde hydrostatic pressure causes alveolar septal capillary distension, transudation of edema fluid, and microvascular rupture termed acute and chronic **pulmonary congestion**, resulting in orthopnea and paroxysmal nocturnal dyspnea.",
+      "say": "Elevated left atrial pressure transmits retrograde stasis, causing severe pulmonary congestion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-hypertension-left-heart-fig1.webp",
+        "alt": "Pulmonary congestion and capillary engorgement from left heart failure",
+        "caption": "Pulmonary venous hypertension and capillary engorgement secondary to left-sided heart disease."
+      }
+    },
+    {
+      "tx": "Within congested alveolar spaces, extravasated erythrocytes undergo phagocytosis and enzymatic degradation by residential alveolar macrophages. Lysosomal breakdown of hemoglobin yields abundant granular brown pigment, transforming these macrophages into diagnostic alveolar **heart failure cells**, easily highlighted on Prussian blue histological stains.",
+      "say": "Heart failure cells are hemosiderin-laden alveolar macrophages that phagocytose extravasated red blood cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rbc_extravasation",
+            "label": "Capillary Rupture Discharges Red Blood Cells into Alveoli"
+          },
+          {
+            "id": "macrophage_phagocytosis",
+            "label": "Alveolar Macrophages Ingest Extravasated Erythrocytes"
+          },
+          {
+            "id": "hemosiderin_production",
+            "label": "Heme Oxygenase Produces Golden-Brown Hemosiderin Granules"
+          },
+          {
+            "id": "siderophages",
+            "label": "Persistent Heart Failure Cells Visible on Prussian Blue"
+          }
+        ],
+        "edges": [
+          [
+            "rbc_extravasation",
+            "macrophage_phagocytosis"
+          ],
+          [
+            "macrophage_phagocytosis",
+            "hemosiderin_production"
+          ],
+          [
+            "hemosiderin_production",
+            "siderophages"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maintaining circulating blood within liquid form while rapidly generating a localized plug at sites of vascular injury represents the tightly regulated physiological process of **normal haemostasis**. This sequence coordinates transient arteriolar vasoconstriction, primary platelet plug formation, and secondary coagulation cascade activation into a durable fibrin meshwork.",
+      "say": "Normal hemostasis coordinates vascular spasm, platelet aggregation, and fibrin mesh crosslinking.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vasoconstriction",
+            "label": "Endothelin Release Triggers Transient Arteriolar Spasm"
+          },
+          {
+            "id": "platelet_plug",
+            "label": "von Willebrand Factor Binds Platelets to Exposed Collagen"
+          },
+          {
+            "id": "fibrin_mesh",
+            "label": "Thrombin Cleaves Fibrinogen to Form Stabilized Fibrin Clot"
+          }
+        ],
+        "edges": [
+          [
+            "vasoconstriction",
+            "platelet_plug"
+          ],
+          [
+            "platelet_plug",
+            "fibrin_mesh"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extravasation of red blood cells into cutaneous tissues, mucosal surfaces, or serous linings produces distinct macroscopic patterns based on lesion dimensions. Minute pinpoint focal hemorrhages measuring one to two millimeters in diameter are termed **petechiae**, most characteristically caused by severe thrombocytopenia or defective platelet function.",
+      "say": "Petechiae are pinpoint one to two millimeter hemorrhages caused by platelet deficits or capillary fragility.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vascular-and-platelet-bleeding-disorders-fig1.webp",
+        "alt": "Petechiae and microvascular hemorrhage from severe thrombocytopenia",
+        "caption": "Microvascular bleeding and petechiae resulting from thrombocytopenia and platelet dysfunction."
+      }
+    },
+    {
+      "tx": "Cutaneous and mucosal hemorrhages measuring between three and five millimeters in diameter are categorized as **purpura**. These lesions occur frequently in setting of immune-mediated thrombocytopenia, systemic vasculitis, elevated vascular fragility in scurvy, or severe systemic meningococcemia, presenting as flat or palpably raised purple lesions.",
+      "say": "Purpura describes three to five millimeter hemorrhages arising from vasculitis or severe platelet consumption.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hemorrhage Type",
+          "Diameter Range",
+          "Underlying Pathophysiology"
+        ],
+        "rows": [
+          [
+            "Petechiae",
+            "1 to 2 mm",
+            "Thrombocytopenia, Platelet Dysfunction, Increased Capillary Fragility"
+          ],
+          [
+            "Purpura",
+            "3 to 5 mm",
+            "Systemic Vasculitis, Scurvy, Amyloidosis, Severe Thrombocytopenia"
+          ],
+          [
+            "Ecchymoses",
+            "1 to 2 cm or Larger",
+            "Trauma, Coagulation Factor Deficiencies, Subcutaneous Hematoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Larger confluent subcutaneous hemorrhages measuring greater than one to two centimeters are designated as **ecchymoses**. Following tissue extravasation, local macrophages phagocytose red blood cells, enzymatically converting red hemoglobin into blue-green biliverdin and golden-yellow hemosiderin, producing characteristic contusion color evolution across successive days.",
+      "say": "Ecchymoses are large bruises that change color as macrophages enzymatically degrade extravasated hemoglobin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "extravasated_hb",
+            "label": "Red-Blue Hemoglobin Extravasates into Subcutaneous Fat"
+          },
+          {
+            "id": "biliverdin_phase",
+            "label": "Macrophage Heme Oxygenase Converts Heme to Green Biliverdin"
+          },
+          {
+            "id": "bilirubin_phase",
+            "label": "Biliverdin Reductase Generates Yellow-Orange Bilirubin"
+          },
+          {
+            "id": "hemosiderin_phase",
+            "label": "Iron Sequestration Yields Long-Lasting Brown Hemosiderin"
+          }
+        ],
+        "edges": [
+          [
+            "extravasated_hb",
+            "biliverdin_phase"
+          ],
+          [
+            "biliverdin_phase",
+            "bilirubin_phase"
+          ],
+          [
+            "bilirubin_phase",
+            "hemosiderin_phase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accumulation of a discrete, three-dimensional volume of extravasated blood enclosed within tissue parenchyma, fascial compartments, or muscle bellies is designated as a **haematoma**. While minor hematomas resolve spontaneously through macrophage clearance, extensive retroperitoneal hematomas can sequester massive blood volumes and trigger circulatory collapse.",
+      "say": "A hematoma is an enclosed three-dimensional blood collection that can cause compartment compression.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Superficial Cutaneous Hematoma",
+          "points": [
+            "Focal, palpable painful swelling within dermal or subcutaneous layers",
+            "Arises typically from minor direct blunt mechanical vascular trauma",
+            "Undergoes spontaneous macrophage clearance and gradual enzymatic resorption",
+            "Rarely threatens systemic hemodynamics or adjacent neurovascular bundles"
+          ]
+        },
+        "right": {
+          "title": "Deep Compartment Hematoma",
+          "points": [
+            "High-pressure blood accumulation inside enclosed osteofascial envelopes",
+            "Arises from major arterial laceration, pelvic fractures, or coagulopathies",
+            "Risks neurovascular compression, tissue ischemia, and acute compartment syndrome",
+            "May sequester life-threatening volumes precipitating hemorrhagic shock"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rapid loss of greater than twenty percent of total circulating intravascular blood volume compromises venous return, decreases cardiac output, and precipitates tissue hypoperfusion. Sustained cellular hypoxia and metabolic lactic acidosis culminate in life-threatening systemic **haemorrhagic shock** unless prompt fluid resuscitation and definitive surgical hemostasis are achieved.",
+      "say": "Acute severe blood loss precipitates hemorrhagic shock with widespread systemic tissue hypoperfusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "blood_loss",
+            "label": "Massive Acute Hemorrhage Exceeding 20 Percent Blood Volume"
+          },
+          {
+            "id": "hypovolemia",
+            "label": "Decreased Venous Return and Severely Reduced Cardiac Output"
+          },
+          {
+            "id": "sympathetic_response",
+            "label": "Reflex Tachycardia and Systemic Arteriolar Vasoconstriction"
+          },
+          {
+            "id": "cellular_hypoxia",
+            "label": "Progressive Anaerobic Metabolism and Decompensated Lactic Acidosis"
+          }
+        ],
+        "edges": [
+          [
+            "blood_loss",
+            "hypovolemia"
+          ],
+          [
+            "hypovolemia",
+            "sympathetic_response"
+          ],
+          [
+            "sympathetic_response",
+            "cellular_hypoxia"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

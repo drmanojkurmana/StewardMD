@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "sur-obstruction",
+ "subject": "surgery",
+ "title": "Caecal Volvulus, Intussusception, and Ogilvie Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Torsion of the caecum and ascending colon around their mesenteric pedicle occurs in individuals possessing congenital incomplete peritoneal fixation, termed **caecal volvulus**. Due to failure of the ascending colon to fuse with the posterior parietal peritoneum during embryogenesis, the mobile caecum twists and rotates into the left upper quadrant. Patients present with acute distal small bowel obstruction, severe colicky abdominal pain, and an empty right iliac fossa.",
+   "say": "Caecal volvulus results from incomplete embryological peritoneal fixation, with the mobile caecum twisting into the left upper quadrant.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-caecal-volvulus.webp",
+    "alt": "Plain abdominal radiograph of caecal volvulus showing a kidney-shaped dilated caecum positioned in the left upper quadrant.",
+    "caption": "Caecal volvulus on abdominal radiograph: comma-shaped dilated caecum pointing toward the left hypochondrium. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On plain abdominal radiographs, caecal volvulus characteristically displays a dilated, gas-filled, comma-shaped or kidney-shaped loop positioned in the left upper quadrant or mid-abdomen, with absence of gas in the right iliac fossa. Unlike sigmoid volvulus, endoscopic detorsion is rarely successful and carries an unacceptable risk of perforation. The definitive surgical therapy is emergency right hemicolectomy with primary **ileocolic anastomosis**.",
+   "say": "Caecal volvulus demonstrates a comma-shaped loop in the left upper quadrant and requires surgical resection via right hemicolectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mobility",
+      "label": "Congenital Hypermobile Caecum & Mesentery"
+     },
+     {
+      "id": "twist",
+      "label": "Axial Torsion & Dislocation to Left Upper Quadrant"
+     },
+     {
+      "id": "ischaemia",
+      "label": "Rapid Compromise of Ileocolic Arterial Perfusion"
+     },
+     {
+      "id": "resect",
+      "label": "Emergency Right Hemicolectomy with Primary Anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "mobility",
+      "twist"
+     ],
+     [
+      "twist",
+      "ischaemia"
+     ],
+     [
+      "ischaemia",
+      "resect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The telescoping or invagination of a proximal segment of the gastrointestinal tract into the lumen of an immediately adjacent distal segment defines **adult intussusception**. Unlike pediatric intussusception which is idiopathic and managed with pneumatic reduction, greater than ninety percent of adult intussusceptions possess a distinct pathological lead point. In the colon, over sixty percent of lead points are primary malignant neoplasms, predominantly colonic adenocarcinomas.",
+   "say": "Adult intussusception involves invagination of bowel driven by a distinct lead point, which is malignant in over sixty percent of colonic cases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intussusception-fig1.webp",
+    "alt": "Cross-sectional ultrasound and CT diagrams demonstrating the target or doughnut sign of intestinal intussusception.",
+    "caption": "Intussusception anatomy: telescoping intussuscipiens and intussusceptum producing a classic target sign on imaging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Abdominal computed tomography is the gold standard imaging investigation for intussusception, demonstrating a pathognomonic sausage-shaped mass on longitudinal views and a concentric target or doughnut sign on axial slices. Because colonic intussusceptions harbour underlying malignancies, pneumatic or hydrostatic reduction is strictly contraindicated to prevent intraluminal tumour shedding or perforation. Surgical therapy demands en bloc **bowel resection** without preliminary reduction.",
+   "say": "Computed tomography reveals a target sign in adult intussusception, requiring formal en bloc oncological resection without prior manual reduction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Colonic Intussusception",
+     "points": [
+      "Pathological lead point malignant (> 60%)",
+      "Adenocarcinoma or lymphoma",
+      "Manual reduction strictly contraindicated",
+      "Formal oncological bowel resection"
+     ]
+    },
+    "right": {
+     "title": "Enteric (Small Bowel)",
+     "points": [
+      "Lead point predominantly benign (60%)",
+      "Meckel diverticulum, adenoma, GIST, lipoma",
+      "Gentle reduction permissible if bowel viable",
+      "Segmental resection of lead point"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute, massive dilatation of the colon occurring in the absence of any mechanical anatomical intraluminal or extrinsic obstruction constitutes acute colonic pseudo-obstruction. First described by Sir Heneage Ogilvie in 1948, this syndrome is also widely designated as **Ogilvie syndrome**. The pathophysiology stems from an autonomic neurovisceral dysregulation, characterized by excessive sympathetic tone or impaired parasympathetic sacral plexus outflow to the distal colon.",
+   "say": "Ogilvie syndrome produces acute massive colonic pseudo-obstruction without mechanical blockage, driven by autonomic neurovisceral imbalance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ogilvie-syndrome-fig1.webp",
+    "alt": "Radiological schematic showing marked caecal and colonic dilatation in Ogilvie syndrome and response to neostigmine.",
+    "caption": "Ogilvie syndrome: acute colonic pseudo-obstruction managed by pharmacological neostigmine or colonoscopic decompression. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ogilvie syndrome predominantly afflicts elderly, bedridden patients recovering from severe metabolic disorders, cardiac events, trauma, or major orthopaedic or pelvic surgery. When caecal diameter exceeds ten to twelve centimetres on serial abdominal radiographs, Laplace law dictates that wall tension increases dangerously, precipitating spontaneous perforation. Medical therapy with the acetylcholinesterase inhibitor **neostigmine** delivers prompt parasympathetic stimulation, producing rapid colonic decompression in over eighty percent of patients.",
+   "say": "Caecal dilatation over ten centimetres risks perforation, effectively treated with intravenous neostigmine to stimulate colonic motility.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Management Protocol",
+     "Clinical Endpoint / Safeguard"
+    ],
+    "rows": [
+     [
+      "Initial Conservative",
+      "Nasogastric tube, rectal tube, correct electrolytes",
+      "Discontinue opiates and anticholinergic drugs"
+     ],
+     [
+      "Pharmacological",
+      "Neostigmine 2 mg IV infusion over 5 minutes",
+      "Continuous ECG monitoring; have atropine at bedside"
+     ],
+     [
+      "Endoscopic",
+      "Colonoscopic decompression without bowel preparation",
+      "Placement of flatus decompression tube beyond splenic flexure"
+     ],
+     [
+      "Surgical",
+      "Caecostomy or subtotal colectomy",
+      "Mandatory if caecal ischaemia, gangrene or perforation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with suspected adhesive small bowel obstruction without strangulation, a powerful diagnostic and therapeutic protocol is the oral **Gastrografin challenge**. The patient ingests one hundred millilitres of water-soluble, hyperosmolar Gastrografin through a nasogastric tube, followed by serial abdominal radiographs at four, eight, and twenty-four hours. If contrast reaches the colon within twenty-four hours, successful non-operative resolution of the obstruction is predicted with ninety-nine percent accuracy.",
+   "say": "The Gastrografin challenge confirms non-operative resolution of small bowel obstruction when contrast reaches the colon within twenty-four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ng",
+      "label": "Nasogastric Decompression & Water-Soluble Contrast Administration"
+     },
+     {
+      "id": "xray",
+      "label": "Serial Abdominal Radiographs at 4, 8, 12 & 24 Hours"
+     },
+     {
+      "id": "colon",
+      "label": "Contrast Reaches Colon within 24 Hours: SBO Resolved"
+     },
+     {
+      "id": "surg",
+      "label": "Failure of Transit at 24 Hours: Operative Exploration Indicated"
+     }
+    ],
+    "edges": [
+     [
+      "ng",
+      "xray"
+     ],
+     [
+      "xray",
+      "colon"
+     ],
+     [
+      "xray",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beyond its prognostic value, Gastrografin exerts a direct therapeutic effect by drawing intraluminal fluid from the oedematous bowel wall into the lumen due to its high osmolarity of nineteen hundred milliosmoles per litre. This fluid shifts decrease bowel wall edema and stimulate vigorous peristalsis. However, if contrast fails to enter the colon by twenty-four hours, conservative therapy is abandoned in favour of surgical laparotomy or laparoscopy for **bowel resection and anastomosis**.",
+   "say": "Hyperosmolar Gastrografin reduces bowel wall edema to promote resolution, with surgery required if contrast fails to reach the colon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Therapeutic Benefits",
+     "points": [
+      "Hyperosmolar agent (1900 mOsm/L)",
+      "Draws fluid into lumen, clears edema",
+      "Accelerates intestinal transit",
+      "Reduces hospital stay significantly"
+     ]
+    },
+    "right": {
+     "title": "Safety Precautions",
+     "points": [
+      "Aspiration hazard (chemical pneumonitis)",
+      "Ensure stomach emptied prior to ingestion",
+      "Contraindicated in active peritonitis",
+      "Avoid in known contrast hypersensitivity"
+     ]
+    }
+   }
+  }
+ ]
+}

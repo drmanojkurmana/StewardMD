@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "id": "ana-blood-supply-brain-circle-of-willis",
+ "subject": "anatomy",
+ "module": "ana-blood-supply-brain",
+ "title": "Circle of Willis and Major Cerebral Arteries",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Arterial blood supply to the brain is derived from two paired systems: the internal carotid arteries anteriorly and the vertebral arteries posteriorly. These two inputs anastomose at the base of the brain around the optic chiasma and infundibulum within the interpeduncular cistern, forming the polygonal **circle of Willis**. This arterial ring provides crucial collateral circulation during gradual occlusion of individual parent vessels.",
+   "say": "Internal carotid and vertebral systems anastomose at the base of the brain to form the circle of Willis, providing vital collateral blood flow around the optic chiasma.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-circle-of-willis.svg",
+    "alt": "Anatomical schematic showing the arteries forming the circle of Willis and communicating branches",
+    "caption": "Polygonal anastomosis of the circle of Willis uniting the anterior carotid and posterior vertebrobasilar circulations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The circle of Willis is constructed from nine component vessels: a single anterior communicating artery, paired anterior cerebral arteries, paired terminal internal carotid segments, paired posterior communicating arteries, and paired posterior cerebral arteries. The basilar artery bifurcates into the **posterior cerebral artery** pair, while the internal carotids give rise to the anterior and middle cerebral arteries.",
+   "say": "Nine arteries assemble the circle: one anterior communicating, two anterior cerebral, two internal carotid, two posterior communicating, and two posterior cerebral arteries.",
+   "vis": {
+    "kind": "table",
+    "title": "Component Arteries of the Circle of Willis",
+    "cols": [
+     "Arterial Component",
+     "Parent Source",
+     "Connecting Junction",
+     "Paired or Unpaired"
+    ],
+    "rows": [
+     [
+      "Anterior communicating",
+      "Bilateral ACA connection",
+      "Connects left and right ACA",
+      "Single unpaired"
+     ],
+     [
+      "Anterior cerebral (A1)",
+      "Internal carotid bifurcation",
+      "Courses medially above optic nerve",
+      "Paired"
+     ],
+     [
+      "Internal carotid (terminal)",
+      "Common carotid bifurcation",
+      "Enters via carotid canal",
+      "Paired"
+     ],
+     [
+      "Posterior communicating",
+      "Internal carotid posterior wall",
+      "Links carotid to PCA",
+      "Paired"
+     ],
+     [
+      "Posterior cerebral (P1)",
+      "Basilar artery bifurcation",
+      "Curves around midbrain",
+      "Paired"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anterior cerebral artery curves over the genu of the corpus callosum to supply the medial aspects of the frontal and parietal lobes. Cortical territory includes the leg and perineal areas of the motor and sensory strips within the **paracentral lobule**. Infarction results in spastic hemiparesis and sensory impairment maximal in the contralateral lower extremity, associated with gait apraxia and abulia.",
+   "say": "Curving above the corpus callosum, the anterior cerebral artery supplies the paracentral lobule. Infarctions cause contralateral lower limb weakness and sensory loss.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cerebral-territories.svg",
+    "alt": "Anatomical diagram of cerebral hemisphere showing territories of anterior, middle, and posterior cerebral arteries",
+    "caption": "Cortical territories: anterior cerebral (medial strip), middle cerebral (lateral convexity), and posterior cerebral (occipital base). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The middle cerebral artery is the largest terminal branch of the internal carotid and enters the lateral sulcus. It supplies almost the entire superolateral convexity of the cerebral hemisphere, including motor and sensory areas for the face, upper limb, and trunk, alongside Broca and Wernicke speech centers. Occlusion produces contralateral **hemiplegia** and hemianesthesia sparing the leg, with global or motor aphasia.",
+   "say": "Supplying the lateral cerebral convexity, the middle cerebral artery covers face and arm areas and speech centres. Occlusion results in contralateral hemiplegia and aphasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Cerebral Occlusion",
+     "points": [
+      "Contralateral lower limb weakness and sensory loss.",
+      "Urinary urge incontinence.",
+      "Abulia and frontal release signs."
+     ]
+    },
+    "right": {
+     "title": "Middle Cerebral Occlusion",
+     "points": [
+      "Contralateral facial and upper limb paralysis.",
+      "Dense contralateral hemisensory loss.",
+      "Homonymous hemianopia and language aphasia."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The posterior cerebral artery curves around the midbrain to supply the inferomedial temporal lobe and the entire occipital lobe, including the calcarine cortex. Infarction causes contralateral homonymous **hemianopia** with characteristic macular sparing. Macular sparing occurs because the macular representation at the occipital pole receives dual collateral blood supply from terminal branches of the middle cerebral artery.",
+   "say": "Supplying occipital and inferomedial temporal lobes, posterior cerebral artery strokes produce contralateral homonymous hemianopia with macular sparing from MCA collaterals.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vascular Pathophysiology of Macular Sparing",
+    "nodes": [
+     {
+      "id": "ms1",
+      "label": "PCA Calcarine Infarction"
+     },
+     {
+      "id": "ms2",
+      "label": "Preserved Occipital Pole"
+     },
+     {
+      "id": "ms3",
+      "label": "MCA Collateral Perfusion"
+     }
+    ],
+    "edges": [
+     [
+      "ms1",
+      "ms2"
+     ],
+     [
+      "ms2",
+      "ms3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The M1 segment of the middle cerebral artery gives off fine, slender penetrating vessels termed lateral lenticulostriate arteries that ascend directly into the basal ganglia and internal capsule. Because these vessels lack muscular adventitia and branch at sharp right angles, chronic hypertension causes microaneurysms that rupture, earning the largest branch the eponym of **Charcot artery** of cerebral hemorrhage.",
+   "say": "Penetrating lenticulostriate branches supply the internal capsule. Prone to hypertensive rupture, the largest branch is historically named the Charcot artery of cerebral hemorrhage.",
+   "vis": {
+    "kind": "table",
+    "title": "Perforating Arteries of the Basal Forebrain",
+    "cols": [
+     "Arterial Branch",
+     "Origin Vessel",
+     "Supplied Structures",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Lateral lenticulostriate",
+      "Middle cerebral (M1)",
+      "Putamen, internal capsule posterior limb",
+      "Hypertensive stroke, hemiplegia"
+     ],
+     [
+      "Medial striate (Heubner)",
+      "Anterior cerebral (A1/A2)",
+      "Anterior caudate head, anterior limb",
+      "Contralateral face/arm paresis"
+     ],
+     [
+      "Anterior choroidal",
+      "Internal carotid artery",
+      "Optic tract, choroid plexus, posterior limb",
+      "Triple H syndrome (paresis, sensory, vision)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Saccular or berry aneurysms are congenital or degenerative berry-shaped outpocketings arising at arterial bifurcations within the circle of Willis where the internal elastic lamina and muscular media are deficient. The most frequent site of a **berry aneurysm** is the junction of the anterior communicating artery with the anterior cerebral artery, followed closely by the junction of the internal carotid with the posterior communicating artery.",
+   "say": "Berry aneurysms develop at circle of Willis branch points lacking muscular media, most frequently at the anterior communicating artery junction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Frequency Distribution of Circle of Willis Aneurysms",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Anterior Communicating (40%)"
+     },
+     {
+      "id": "b2",
+      "label": "Posterior Communicating (30%)"
+     },
+     {
+      "id": "b3",
+      "label": "MCA Trifurcation (20%)"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rupture of an intracranial berry aneurysm spills arterial blood under high pressure directly into the subarachnoid space, producing acute subarachnoid hemorrhage. Patients describe the sudden onset of an agonizing thunderclap headache, often called the worst headache of life, rapidly accompanied by meningism, photophobia, vomiting, and loss of consciousness without focal **lateralizing signs**.",
+   "say": "Aneurysmal rupture floods the subarachnoid space, causing a catastrophic sudden thunderclap headache accompanied by vomiting, stiff neck, and photophobia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Clinical Cascade of Aneurysmal Subarachnoid Hemorrhage",
+    "nodes": [
+     {
+      "id": "sh1",
+      "label": "Aneurysm Wall Rupture"
+     },
+     {
+      "id": "sh2",
+      "label": "Subarachnoid Extravasation"
+     },
+     {
+      "id": "sh3",
+      "label": "Thunderclap Headache & Meningism"
+     }
+    ],
+    "edges": [
+     [
+      "sh1",
+      "sh2"
+     ],
+     [
+      "sh2",
+      "sh3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "124a5a8d-b86e-44e8-b2d8-74a20a2605a5",
+  "499449f3-ab15-4d13-95a6-eedf8579c58b",
+  "8895bf32-2d03-4525-909b-297f7cdd27df"
+ ]
+}

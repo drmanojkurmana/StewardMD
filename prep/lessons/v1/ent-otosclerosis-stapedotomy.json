@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-otosclerosis-stapedotomy",
+ "subject": "ent",
+ "module": "ent-otosclerosis",
+ "title": "Stapedotomy Technique, Medical Therapy, and Ossicular Discontinuity",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Stapedotomy is performed under local or general anesthesia through an endomeatal approach using a surgical microscope. The surgeon elevates a tympanomeatal flap from six to twelve o'clock to enter the middle ear. The chorda tympani nerve is gently mobilized, and the posterosuperior bony canal wall margin is curetted away to expose the incudostapedial joint, pyramidal eminence, and the **stapes footplate**.",
+   "say": "Through an ear-canal incision, the surgeon elevates a tympanomeatal flap, exposes the middle ear, and curettes the bony rim to visualize the stapes and facial nerve canal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/otosclerosis-fig1.webp",
+    "alt": "Surgical view of middle ear showing incus, stapedius tendon, pyramidal eminence, and stapes footplate",
+    "caption": "Surgical exposure of the oval window niche during permeatal stapedotomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Palpation confirms complete immobility of the stapes footplate while the malleus and incus remain mobile. The surgical sequence requires strict adherence to order: the incudostapedial joint is disarticulated, the stapedius tendon is severed with micro-scissors or laser, the stapes arch is fractured and removed, and a calibrated zero point six millimetre fenestration is drilled in the **posterior half** of the footplate.",
+   "say": "The incudostapedial joint is separated, the stapedius tendon severed, stapes crura removed, and a zero point six millimetre hole created in the posterior footplate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Steps of Stapedotomy",
+    "nodes": [
+     {
+      "id": "st1",
+      "label": "Disarticulate Incudostapedial Joint & Cut Tendon"
+     },
+     {
+      "id": "st2",
+      "label": "Fracture and Remove Stapes Arch"
+     },
+     {
+      "id": "st3",
+      "label": "Drill 0.6 mm Hole & Crimp Piston to Incus"
+     }
+    ],
+    "edges": [
+     [
+      "st1",
+      "st2"
+     ],
+     [
+      "st2",
+      "st3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A piston prosthesis, manufactured from fluoroplastic (Teflon) or titanium, is measured to size (typically four to four point five millimetres in length). The shaft of the piston is positioned into the footplate fenestration, and its wire loop is crimped securely around the **long process of the incus**. A tissue seal of blood clot, fat, or venous adventitia is placed around the piston shaft to prevent perilymph fistula.",
+   "say": "A four-millimetre Teflon piston is placed into the footplate hole and crimped around the incus long process. A tissue seal prevents perilymph leakage.",
+   "vis": {
+    "kind": "table",
+    "title": "Technical Pitfalls and Complications of Stapedotomy",
+    "cols": [
+     "Intraoperative Hazard",
+     "Underlying Mechanism",
+     "Surgical Prevention",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Floating footplate",
+      "Loosening of entirely fixed footplate",
+      "Drill fenestration before dividing crura",
+      "Perilymph loss, sensorineural deafness"
+     ],
+     [
+      "Facial nerve injury",
+      "Dehiscent nerve sagging over oval window",
+      "Identify nerve prior to drilling",
+      "Facial nerve palsy"
+     ],
+     [
+      "Loose crimping",
+      "Inadequate piston loop tightening",
+      "Verify secure mechanical coupling",
+      "Persistent air-bone gap"
+     ],
+     [
+      "Perilymph fistula",
+      "Inadequate tissue seal around fenestration",
+      "Place fat or blood seal around shaft",
+      "Postoperative vertigo and fluctuating loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical therapy for active otosclerosis utilizes **sodium fluoride**, administered orally at twenty to forty milligrams daily. Fluoride ions exchange with hydroxyl groups in developing osteoid to form fluorapatite, which is resistant to osteoclastic resorption. Sodium fluoride accelerates the maturation of spongy, hypervascular active otospongiosis into dense, sclerotic, inactive bone, arresting disease progression in patients with active Schwartze sign or sensorineural decline.",
+   "say": "Oral sodium fluoride converts spongy vascular otospongiosis into dense, inactive fluorapatite bone, halting disease progression in sensorineural otosclerosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active Otospongiotic Phase",
+     "points": [
+      "Hypercellular, richly vascular woven bone.",
+      "Rapid progression of hearing loss.",
+      "Displays positive Schwartze sign.",
+      "Arrested effectively by oral sodium fluoride therapy."
+     ]
+    },
+    "right": {
+     "title": "Mature Sclerotic Phase",
+     "points": [
+      "Dense, hypocellular, avascular lamellar bone.",
+      "Stable or fixed conductive air-bone gap.",
+      "Schwartze sign absent (Pale promontory).",
+      "Ideal indication for corrective stapedotomy surgery."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Impedance audiometry in otosclerosis demonstrates characteristic compliance profiles. Because the stapes is anchored rigidly into the oval window, middle ear acoustic compliance is reduced while middle ear air pressure remains normal, producing a shallow **Type As tympanogram**. In early otosclerosis, the acoustic stapedial reflex displays an on-off effect (biphasic reflex) before disappearing completely as stapedial ankylosis becomes total.",
+   "say": "Impedance testing in otosclerosis reveals a shallow Type As tympanogram due to stiffening. The acoustic stapedial reflex shows an early on-off effect before disappearing.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-middle-ear-gain.svg",
+    "alt": "Compliance curves comparing normal Type A, shallow Type As of otosclerosis, and deep Type Ad of disarticulation",
+    "caption": "Tympanometric compliance curves: Type As in otosclerosis versus Type Ad in ossicular disarticulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In sharp contrast to the stiffening of otosclerosis, traumatic head injury or chronic erosion can sever the ossicular chain, generating **ossicular discontinuity**. The incudostapedial joint is the most common site of traumatic disruption. Because middle ear compliance becomes infinitely high without ossicular impedance, tympanometry demonstrates an exaggerated, off-scale Type Ad tympanogram with an air-bone gap of fifty to sixty decibels.",
+   "say": "Traumatic incus dislocation causes ossicular discontinuity, producing an off-scale deep Type Ad tympanogram and a massive sixty-decibel conductive hearing loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Differential Diagnosis of Intact Drum Conductive Loss",
+    "cols": [
+     "Feature",
+     "Otosclerosis (Stapes Fixation)",
+     "Ossicular Chain Discontinuity"
+    ],
+    "rows": [
+     [
+      "Tympanogram type",
+      "Type As (Shallow, reduced compliance)",
+      "Type Ad (Deep, hypercompliant)"
+     ],
+     [
+      "Stapedial reflex",
+      "Absent (or biphasic on-off effect)",
+      "Absent (Disrupted ossicular arc)"
+     ],
+     [
+      "Gelle test",
+      "Negative (Pressure causes no change)",
+      "Positive (Pressure stiffens membrane)"
+     ],
+     [
+      "Onset and course",
+      "Insidious, progressive, bilateral",
+      "Sudden onset post-trauma, unilateral"
+     ],
+     [
+      "Air-bone gap",
+      "25 to 40 decibels",
+      "50 to 60 decibels (Maximum conductive)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Gelle test uses pneumatic otoscopy to differentiate stapes fixation from other causes of conductive deafness. The stem of a vibrating tuning fork is placed on the mastoid while a pneumatic speculum increases air pressure within the external canal. In normal hearing or ossicular discontinuity, increased pressure tenses the drum and dampens sound. In fixed otosclerosis, sound loudness remains completely unchanged, confirming a **negative Gelle test**.",
+   "say": "The Gelle test applies canal pressure during mastoid bone conduction. In stapes fixation, pressure fails to dampen sound perception, confirming a negative Gelle test.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biomechanical Principle of the Gelle Test",
+    "nodes": [
+     {
+      "id": "gt1",
+      "label": "Vibrating Fork on Mastoid + Canal Pressurization"
+     },
+     {
+      "id": "gt2",
+      "label": "Increased Air Pressure Rigidifies Drum"
+     },
+     {
+      "id": "gt3",
+      "label": "Fixed Stapes Ignores Pressure: Sound Unchanged (Negative)"
+     }
+    ],
+    "edges": [
+     [
+      "gt1",
+      "gt2"
+     ],
+     [
+      "gt2",
+      "gt3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following stapedotomy, patients must avoid nose-blowing, heavy lifting, straining, and air travel for at least four to six weeks to prevent displacement of the prosthesis or perilymph fistulae. Postoperative vertigo is common for forty-eight hours due to mechanical serous labyrinthitis. Long-term audiometry confirms closure of the **air-bone gap to within ten decibels** in over ninety percent of carefully selected patients.",
+   "say": "Postoperative care requires avoiding straining, sneezing, and flying for six weeks. Over ninety percent of patients achieve air-bone gap closure to within ten decibels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Postoperative Precautions",
+     "points": [
+      "Strict avoidance of nose blowing or sneezing with closed mouth.",
+      "No heavy lifting (> 10 kg) or strenuous exertion.",
+      "No air travel or scuba diving for 6 weeks.",
+      "Keep ear canal strictly dry until healed."
+     ]
+    },
+    "right": {
+     "title": "Expected Clinical Milestones",
+     "points": [
+      "Mild transient rotational vertigo resolves in 48 hours.",
+      "Canal packing removed at 7 to 10 days.",
+      "Dramatic hearing improvement noted upon pack removal.",
+      "Audiometry at 6 to 12 weeks confirms gap closure."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-041",
+  "bk2-ent-042",
+  "bk2-ent-043"
+ ]
+}

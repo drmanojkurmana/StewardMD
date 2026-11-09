@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "id": "ana-cerebrum-sulci-and-gyri",
+ "subject": "anatomy",
+ "module": "ana-cerebrum",
+ "title": "Cerebral Cortex Topography and Functional Localization",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The cerebral hemispheres feature an extensively folded external surface that substantially expands cortical surface area while fitting into the neurocranium. Deep furrows termed sulci delimit prominent elevated convolutions called gyri. The prominent **lateral sulcus** (Sylvian fissure) separates the temporal lobe inferiorly from the overlying frontal and parietal lobes, harboring the buried insular cortex within its deep depths.",
+   "say": "Sulci and gyri expand cerebral surface area. The deep lateral sulcus separates the temporal lobe from frontal and parietal lobes, burying the insula in its depths.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.webp",
+    "alt": "Gross anatomical photograph of the lateral surface of the cerebral hemisphere showing lobes, sulci, and gyri",
+    "caption": "Lateral surface of the cerebral hemisphere displaying primary sulcal landmarks and lobar divisions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central sulcus of Rolando extends across the superolateral cerebral mantle to delineate the boundary between the anterior frontal lobe and the posterior parietal lobe. Immediately anterior to this fissure lies the precentral gyrus, which houses the primary **motor cortex** (Brodmann area 4). Immediately posterior sits the postcentral gyrus, containing the primary somatosensory cortex (Brodmann areas 3, 1, and 2).",
+   "say": "The central sulcus separates the frontal and parietal lobes. The precentral gyrus contains primary motor area 4, while the postcentral gyrus contains primary somatosensory areas.",
+   "vis": {
+    "kind": "table",
+    "title": "Key Sulcal Landmarks and Surrounding Functional Gyri",
+    "cols": [
+     "Sulcus",
+     "Anterior Boundary Gyrus",
+     "Posterior Boundary Gyrus",
+     "Functional Roles"
+    ],
+    "rows": [
+     [
+      "Central sulcus",
+      "Precentral gyrus (Area 4)",
+      "Postcentral gyrus (Areas 3, 1, 2)",
+      "Somatic motor versus sensory"
+     ],
+     [
+      "Lateral sulcus",
+      "Inferior frontal gyrus",
+      "Superior temporal gyrus",
+      "Motor speech versus auditory"
+     ],
+     [
+      "Parieto-occipital sulcus",
+      "Precuneus (Parietal)",
+      "Cuneus (Occipital)",
+      "Visuospatial versus primary vision"
+     ],
+     [
+      "Calcarine sulcus",
+      "Upper calcarine bank",
+      "Lower lingual bank",
+      "Upper versus lower visual fields"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the dominant left hemisphere, expressive motor speech production is organized within the pars triangularis and pars opercularis of the inferior frontal gyrus. Known as **Broca area** (Brodmann areas 44 and 45), damage here causes expressive non-fluent motor aphasia where patients retain language comprehension but speak with great telegraphic effort and halting articulation.",
+   "say": "Broca area in the dominant inferior frontal gyrus directs expressive motor speech. Damage produces non-fluent expressive aphasia with preserved auditory comprehension.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-language-areas.svg",
+    "alt": "Anatomical schematic showing Broca and Wernicke language areas linked by the arcuate fasciculus",
+    "caption": "Cortical language centers: Broca area in the inferior frontal gyrus and Wernicke area in the superior temporal gyrus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Receptive language processing is localized to the posterior third of the superior temporal gyrus in the dominant hemisphere. Termed **Wernicke area** (Brodmann area 22), this cortical center decodes spoken auditory communication. Lesions produce fluent receptive sensory aphasia, where patients speak effortlessly with normal cadence and grammar but utter meaningless neologisms and lack comprehension.",
+   "say": "Located in the posterior superior temporal gyrus, Wernicke area decodes spoken language. Lesions cause fluent receptive aphasia with rapid nonsensical speech and absent comprehension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broca Expressive Aphasia",
+     "points": [
+      "Brodmann areas 44 and 45 in inferior frontal gyrus.",
+      "Non-fluent, halting, telegraphic motor speech.",
+      "Severe word-finding difficulty with preserved comprehension."
+     ]
+    },
+    "right": {
+     "title": "Wernicke Receptive Aphasia",
+     "points": [
+      "Brodmann area 22 in superior temporal gyrus.",
+      "Fluent, voluminous speech with paraphasias.",
+      "Profoundly impaired auditory comprehension."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The medial surface of the occipital lobe is bisected horizontally by the calcarine sulcus, whose banks harbor the primary **visual cortex** (Brodmann area 17 or striate cortex). Histologically distinguished by the prominent myelinated line of Gennari, the upper bank (cuneus) receives impulses from the inferior visual field quadrant, while the lower bank (lingual gyrus) receives projections from the superior quadrant.",
+   "say": "Primary visual cortex area 17 borders the calcarine sulcus. The upper cuneus receives the inferior visual field, and the lower lingual gyrus receives the superior visual field.",
+   "vis": {
+    "kind": "flow",
+    "title": "Retinotopic Organization Along the Calcarine Sulcus",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Visual Field Stimulus"
+     },
+     {
+      "id": "v2",
+      "label": "Calcarine Sulcus Banks"
+     },
+     {
+      "id": "v3",
+      "label": "Brodmann Area 17"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary auditory perception is localized to the anterior transverse temporal gyri of Heschl (Brodmann areas 41 and 42), situated on the superior surface of the temporal lobe inside the lateral sulcus. The **auditory cortex** exhibits strict tonotopic organization, with high-frequency sound frequencies processed in deep posterior regions and low sound frequencies represented in shallow anterior zones.",
+   "say": "Transverse temporal gyri of Heschl house the primary auditory cortex, tonotopically mapping high sound frequencies posteriorly and low frequencies anteriorly.",
+   "vis": {
+    "kind": "table",
+    "title": "Cortical Sensory and Motor Areas by Brodmann Classification",
+    "cols": [
+     "Area Number",
+     "Anatomical Gyrus",
+     "Primary Function",
+     "Lesion Deficit"
+    ],
+    "rows": [
+     [
+      "Area 4",
+      "Precentral gyrus",
+      "Primary motor",
+      "Contralateral flaccid paralysis"
+     ],
+     [
+      "Areas 3, 1, 2",
+      "Postcentral gyrus",
+      "Primary sensory",
+      "Contralateral hemi-hypesthesia"
+     ],
+     [
+      "Area 17",
+      "Calcarine banks",
+      "Primary visual",
+      "Contralateral homonymous hemianopia"
+     ],
+     [
+      "Areas 41, 42",
+      "Transverse gyri of Heschl",
+      "Primary auditory",
+      "Impaired sound localization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The two cerebral hemispheres are structurally united across the midline by the massive C-shaped **corpus callosum**, comprising over two hundred million commissural axons. From anterior to posterior, it is anatomically divided into the rostrum, genu, body (trunk), and thickened posterior splenium. The genu curves forward into the frontal poles as the forceps minor, while the splenium sweeps backward into the occipital poles as the forceps major.",
+   "say": "The corpus callosum unites both cerebral hemispheres. Its anatomical parts are the rostrum, genu, body, and splenium, with radiation into forceps minor and forceps major.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anterior to Posterior Anatomy of the Corpus Callosum",
+    "nodes": [
+     {
+      "id": "cc1",
+      "label": "Rostrum and Genu"
+     },
+     {
+      "id": "cc2",
+      "label": "Callosal Body"
+     },
+     {
+      "id": "cc3",
+      "label": "Posterior Splenium"
+     }
+    ],
+    "edges": [
+     [
+      "cc1",
+      "cc2"
+     ],
+     [
+      "cc2",
+      "cc3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical or ischaemic disruption of the corpus callosum generates the classic disconnection syndrome known as alien hand or split-brain syndrome. In pure alexia without agraphia, an infarction of the left posterior cerebral artery damages the left occipital cortex and the **splenium**, preventing visual word forms perceived in the intact right occipital lobe from accessing language centers in the left hemisphere.",
+   "say": "Splenium infarction causes alexia without agraphia. Visual word forms perceived in the right occipital cortex cannot cross callosal fibres to reach left hemisphere language centres.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of Alexia Without Agraphia",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Right Occipital Perception"
+     },
+     {
+      "id": "d2",
+      "label": "Interrupted Splenial Fibres"
+     },
+     {
+      "id": "d3",
+      "label": "Inaccessible Left Language Areas"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "d73b45d2-ef66-4141-a7d2-9295ce8c8811",
+  "d56ef1b6-1267-4df8-8a37-db8b3f23dc66",
+  "05b418ce-3a90-4d9f-a20b-b67a4aa6a442"
+ ]
+}

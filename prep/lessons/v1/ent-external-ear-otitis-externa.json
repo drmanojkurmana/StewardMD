@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ent-external-ear-otitis-externa",
+ "subject": "ent",
+ "module": "ent-external-ear",
+ "title": "Infections of the External Ear Canal and Malignant Otitis",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Acute diffuse otitis externa, commonly known as swimmer ear, is an inflammatory dermatological infection of the external auditory canal epithelium triggered by water immersion and trauma. Loss of the acidic lipid mantle of cerumen allows opportunistic pathogens to proliferate. The principal causative bacterial organism in over sixty percent of cases is **Pseudomonas aeruginosa**, followed by Staphylococcus aureus, causing severe otalgia, canal edema, and pruritus.",
+   "say": "Water exposure and scratching disrupt the acidic protective lipid layer of the ear canal. Pseudomonas aeruginosa causes diffuse otitis externa, marked by severe pain and swelling.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/otitis-externa-fig1.webp",
+    "alt": "Clinical otoscopy illustration showing acute diffuse otitis externa with marked canal erythema and edema",
+    "caption": "Diffuse otitis externa displaying severe canal stenosis, erythema, and purulent desquamative discharge. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On clinical examination, acute otitis externa is distinguished by exquisite pain upon manipulation of the **pinna or tragus** (tragal sign), because the skin of the outer meatus is intimately adhered to the underlying perichondrium. The canal appears circumferentially erythematous, narrowed by edematous swelling, and coated with creamy seropurulent debris. Treatment entails meticulous microsuction toilet, topical antibiotic drops containing ciprofloxacin, and analgesia.",
+   "say": "Exquisite pain on moving the pinna or pressing the tragus is the hallmark of otitis externa. Treatment requires microsuction cleaning and topical ciprofloxacin ear drops.",
+   "vis": {
+    "kind": "flow",
+    "title": "Management Cascade for Acute Otitis Externa",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Aural Toilet (Microsuction Cleaning)"
+     },
+     {
+      "id": "o2",
+      "label": "Insert Ear Wick if Canal Stenosed"
+     },
+     {
+      "id": "o3",
+      "label": "Topical Ciprofloxacin & Dexamethasone Drops"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Localized otitis externa, or furunculosis, is an acute, localized staphylococcal infection centered on a hair follicle within the outer cartilaginous third of the canal. Because the bony canal lacks hair follicles, a **furuncle of the ear** can never arise in the inner two-thirds. The swelling causes intense, throbbing ear pain disproportionate to the lesion size due to tension within the dense fibrocartilaginous dermis.",
+   "say": "Arising only in the hair-bearing cartilaginous canal, a staphylococcal furuncle causes intense throbbing ear pain due to severe tissue tension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Furunculosis (Localized)",
+     "points": [
+      "Staphylococcus aureus infection.",
+      "Confined strictly to outer cartilaginous third.",
+      "Presents as a solitary, exquisitely tender boil.",
+      "Treated with 10% ichthammol glycerine wick and oral antibiotics."
+     ]
+    },
+    "right": {
+     "title": "Diffuse Otitis Externa",
+     "points": [
+      "Pseudomonas aeruginosa predominantly.",
+      "Involves both cartilaginous and bony canal walls.",
+      "Circumferential erythema and narrowing of full lumen.",
+      "Treated with microsuction toilet and topical antibiotic drops."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otomycosis is a fungal infection of the external acoustic meatus, frequently flourishing in warm, humid climates or following prolonged topical antibiotic therapy. The most common species is Aspergillus niger, recognizable by its characteristic black spore heads resembling a **wet newspaper**. Aspergillus fumigatus produces blue-green spores, while Candida albicans generates white curd-like debris. Treatment includes suction clearance and topical clotrimazole.",
+   "say": "Fungal otomycosis often follows antibiotic ear drops. Aspergillus niger displays characteristic black spores on a white background, resembling wet newspaper.",
+   "vis": {
+    "kind": "table",
+    "title": "Common Etiological Agents in Otomycosis",
+    "cols": [
+     "Fungal Pathogen",
+     "Characteristic Otoscopic Appearance",
+     "Clinical Features",
+     "Topical Therapy"
+    ],
+    "rows": [
+     [
+      "Aspergillus niger",
+      "Black punctate spores on white mycelia (Wet newspaper)",
+      "Intense itching, ear blockage",
+      "1% Clotrimazole or gentian violet"
+     ],
+     [
+      "Aspergillus fumigatus",
+      "Pale blue-green velvety spore masses",
+      "Mild otalgia, watery discharge",
+      "Topical clotrimazole drops"
+     ],
+     [
+      "Candida albicans",
+      "White or creamy curd-like cottage cheese exudate",
+      "Erythematous canal floor",
+      "Topical nystatin or clotrimazole"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant otitis externa, also known as necrotizing otitis externa, is a life-threatening, aggressive pseudomonal osteomyelitis of the temporal bone occurring almost exclusively in elderly diabetic or immunocompromised patients. Patients present with deep, boring, unremitting nocturnal earache and foul-smelling purulent otorrhea refractory to standard topical therapy. The pathognomonic clinical sign is the presence of florid **granulation tissue** at the bony-cartilaginous junction.",
+   "say": "Malignant otitis externa is pseudomonal osteomyelitis of the temporal bone in elderly diabetics. Severe night pain and granulation tissue at the bony junction are diagnostic.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diseases-of-the-external-ear-fig1.webp",
+    "alt": "Clinical otoscopy diagram showing granulation tissue at the floor of the external meatus in malignant otitis externa",
+    "caption": "Malignant otitis externa displaying pathognomonic granulation tissue at the junction of the bony and cartilaginous canal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Infection spreads through the fissures of Santorini and the stylomastoid foramen to involve the skull base. The **facial nerve** is the most common cranial nerve paralyzed, followed by cranial nerves nine, ten, eleven, and twelve at the jugular foramen. Cranial neuropathies indicate advanced skull base osteomyelitis and portend a worse prognosis, requiring prompt intravenous antipseudomonal therapy with ceftazidime or meropenem.",
+   "say": "Spreading through skull base fissures, malignant otitis frequently paralyzes the facial nerve, followed by lower cranial nerves, signifying extensive skull base osteomyelitis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Invasive Spread of Malignant Otitis Externa",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Chondritis at Bony-Cartilaginous Junction"
+     },
+     {
+      "id": "m2",
+      "label": "Spread via Fissures of Santorini & Stylomastoid Foramen"
+     },
+     {
+      "id": "m3",
+      "label": "Facial Nerve Palsy & Jugular Foramen Syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radionucleotide imaging is pivotal for diagnosing and monitoring necrotizing otitis externa. A technetium-99m methylene diphosphonate bone scan shows intense osteoblastic activity, providing an exquisitely sensitive test for early bone involvement, though it remains permanently positive due to bone remodeling. In contrast, a **gallium-67 citrate scan** binds to active leukocytes and normalizes as infection resolves, serving as the gold standard for monitoring therapeutic cure.",
+   "say": "Technetium bone scans detect early bony invasion but remain positive forever. Gallium-67 scans bind active leukocytes and normalize with recovery, monitoring treatment cure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Technetium-99m Bone Scan",
+     "points": [
+      "Reflects osteoblastic activity and bone turnover.",
+      "Exquisitely sensitive for early temporal bone involvement.",
+      "Remains positive for months to years after clinical cure.",
+      "Used for initial diagnosis, not for monitoring cure."
+     ]
+    },
+    "right": {
+     "title": "Gallium-67 Citrate Scan",
+     "points": [
+      "Reflects active polymorphonuclear leukocyte infiltration.",
+      "Normalizes rapidly once osteomyelitis is eradicated.",
+      "Serves as the gold standard for determining cessation of therapy.",
+      "Repeated at 6-8 weeks to confirm complete resolution."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Keratosis obturans is a distinct clinical entity characterized by the accumulation of a pearly-white desquamated keratin plug in the bony external meatus, causing marked symmetrical bony canal expansion. Occurring typically in younger patients with chronic sinusitis or bronchiectasis, it causes acute severe otalgia and conductive deafness. Unlike canal cholesteatoma, **keratosis obturans** causes circumferential canal widening without focal bony ulceration.",
+   "say": "Keratosis obturans forms a large keratin plug causing bilateral canal expansion in young patients with bronchiectasis, presenting with pain and conductive hearing loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Keratosis Obturans Versus External Canal Cholesteatoma",
+    "cols": [
+     "Feature",
+     "Keratosis Obturans",
+     "Canal Cholesteatoma"
+    ],
+    "rows": [
+     [
+      "Typical Age",
+      "Young adults (5 to 20 years)",
+      "Elderly patients (> 60 years)"
+     ],
+     [
+      "Laterality",
+      "Bilateral in 50% of cases",
+      "Almost always strictly unilateral"
+     ],
+     [
+      "Associated Diseases",
+      "Bronchiectasis, chronic sinusitis",
+      "None, or prior ear radiation/trauma"
+     ],
+     [
+      "Bone Involvement",
+      "Smooth circumferential canal remodeling",
+      "Focal osteitis with bone sequestrum"
+     ],
+     [
+      "Otalgia",
+      "Severe, acute otalgia",
+      "Mild dull ache, silent painless erosion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-001",
+  "bk2-ent-002",
+  "bk2-ent-003"
+ ]
+}

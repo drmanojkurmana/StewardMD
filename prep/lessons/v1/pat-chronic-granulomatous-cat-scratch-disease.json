@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-chronic-granulomatous",
+  "subject": "pathology",
+  "title": "Cat Scratch Disease, Schaumann Bodies, and M1 versus M2 Macrophages",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Bacterial inoculation following a feline scratch or bite introduces the pleomorphic Gram-negative bacillus Bartonella henselae. Within two to four weeks, regional draining lymph nodes become massively enlarged and tender, establishing the clinical syndrome of **cat scratch disease**, which characteristically resolves spontaneously over several months.",
+      "say": "Cat scratch disease is caused by Bartonella henselae, producing subacute regional lymphadenitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cat-scratch-disease-fig1.webp",
+        "caption": "Regional lymphadenopathy exhibiting stellate necrotizing granulomas filled with central neutrophils.",
+        "alt": "Cat scratch disease lymph node showing stellate necrotizing granuloma"
+      }
+    },
+    {
+      "tx": "The pathognomonic histological lesion of cat scratch disease in lymph nodes is the necrotizing suppurative granuloma. Early lymphoid hyperplasia progresses into well-circumscribed granulomas with palisaded epithelioid histiocytes encircling an irregular, star-shaped central core of liquefactive necrosis packed with dying neutrophils, termed a **stellate necrotizing granuloma**.",
+      "say": "Cat scratch disease characteristically forms stellate necrotizing granulomas with central neutrophils.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inoculation_site",
+            "label": "Kitten Scratch Inoculates Bartonella Henselae into Cutaneous Dermis"
+          },
+          {
+            "id": "follicular_hyperplasia",
+            "label": "Regional Lymph Node Enlarges with Prominent Germinal Center Proliferation"
+          },
+          {
+            "id": "microabscess_forms",
+            "label": "Neutrophilic Microabscesses Form in Interfollicular and Sinusoidal Zones"
+          },
+          {
+            "id": "stellate_granuloma",
+            "label": "Palisading Epithelioid Histiocytes Encircle Pus, Forming Stellate Granuloma"
+          }
+        ],
+        "edges": [
+          [
+            "inoculation_site",
+            "follicular_hyperplasia"
+          ],
+          [
+            "follicular_hyperplasia",
+            "microabscess_forms"
+          ],
+          [
+            "microabscess_forms",
+            "stellate_granuloma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because Bartonella henselae organisms stain poorly on standard hematoxylin and eosin sections, microbiological confirmation requires specialized silver impregnation. Using the **Warthin-Starry silver stain**, the bacteria appear as dark brown-black pleomorphic bacilli and coccobacilli clustered in extracellular clumps within the necrotic stellate core.",
+      "say": "Warthin-Starry silver stain highlights pleomorphic Bartonella bacilli as dark clusters in necrotic cores.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cat Scratch Disease (Immunocompetent)",
+          "points": [
+            "Caused by Bartonella henselae following cat scratch or flea vector",
+            "Primary cutaneous papule followed by regional subacute lymphadenopathy",
+            "Histology: stellate necrotizing granulomas with central neutrophilic pus",
+            "Microbes demonstrated extracellularly using Warthin-Starry silver stain"
+          ]
+        },
+        "right": {
+          "title": "Bacillary Angiomatosis (Immunocompromised / HIV)",
+          "points": [
+            "Opportunistic Bartonella henselae or quintana infection in advanced AIDS",
+            "Histology: lobular vascular proliferation resembling pyogenic granuloma",
+            "Endothelial cells plump and epithelioid with neutrophilic stromal dust",
+            "Presents as red-purple vascular cutaneous papules and visceral lesions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In granulomatous conditions such as sarcoidosis, chronic berylliosis, and tuberculosis, multinucleated giant cells generate concentric mineralized lamellar inclusions. Known as **Schaumann bodies**, these basophilic conchoidal concretions measure twenty to one hundred micrometers, consisting of insoluble calcium carbonate, calcium phosphate, and iron chelated within an organic protein matrix.",
+      "say": "Schaumann bodies are laminated calcium-protein concretions within multinucleated giant cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Schaumann Inclusions",
+          "points": [
+            "Laminated concentric rings of calcium, phosphate, and iron complexes",
+            "Strongly basophilic, staining dark blue on routine hematoxylin and eosin",
+            "Positive for iron with Perls Prussian blue and calcium with von Kossa",
+            "Most prominent in sarcoidosis, berylliosis, and hypersensitivity pneumonitis"
+          ]
+        },
+        "right": {
+          "title": "Asteroid Inclusions",
+          "points": [
+            "Star-shaped stellate structures with 10 to 30 radiating spicules",
+            "Stain intensely eosinophilic with pink rays radiating from central core",
+            "Consist of compressed cytoskeletal vimentin intermediate filaments",
+            "Reside in clear cytoplasmic vacuoles inside giant cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Macrophage functional diversity is governed by dynamic polarization into distinct phenotypic states. Classically activated **M1 macrophages** are induced by interferon-gamma and toll-like receptor ligands, expressing inducible nitric oxide synthase, secreting interleukin-twelve, and promoting T-helper-one immune responses to destroy intracellular pathogens.",
+      "say": "M1 macrophages are primed by interferon-gamma to produce nitric oxide and drive microbicidal defenses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "th1_ifn",
+            "label": "CD4+ Th1 Cells and NK Cells Secrete High Levels of Interferon-Gamma"
+          },
+          {
+            "id": "stat1_activation",
+            "label": "Binds IFN-Gamma Receptor, Activating STAT1 and IRF5 Transcription"
+          },
+          {
+            "id": "inos_induction",
+            "label": "Induces Inducible Nitric Oxide Synthase (iNOS), Generating Toxic NO"
+          },
+          {
+            "id": "m1_phenotype",
+            "label": "Drives Microbicidal Killing, Pro-Inflammatory Cytokines, and Tissue Injury"
+          }
+        ],
+        "edges": [
+          [
+            "th1_ifn",
+            "stat1_activation"
+          ],
+          [
+            "stat1_activation",
+            "inos_induction"
+          ],
+          [
+            "inos_induction",
+            "m1_phenotype"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, alternatively activated macrophages are induced by T-helper-two cytokines interleukin-four and interleukin-thirteen. Known as **M2 macrophages**, these cells express arginase-one to convert L-arginine into ornithine and proline, synthesizing collagen precursors, vascular endothelial growth factor, and transforming growth factor-beta to facilitate tissue repair and fibrosis.",
+      "say": "M2 macrophages are induced by IL-4 and IL-13, using arginase-1 to promote tissue repair and scarring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "M1 Macrophage Profile",
+          "points": [
+            "Triggered by IFN-gamma, LPS, and microbial nucleic acids",
+            "Arginine metabolism: metabolizes L-arginine via iNOS into nitric oxide",
+            "Cytokine secretion: IL-1-beta, IL-6, IL-12, IL-23, and TNF-alpha",
+            "Primary role: microbicidal pathogen killing, tumor surveillance, inflammation"
+          ]
+        },
+        "right": {
+          "title": "M2 Macrophage Profile",
+          "points": [
+            "Triggered by IL-4, IL-13, IL-10, and glucocorticoids",
+            "Arginine metabolism: metabolizes L-arginine via arginase-1 into proline",
+            "Cytokine secretion: IL-10, TGF-beta, VEGF, PDGF, and FGF",
+            "Primary role: anti-inflammatory dampening, wound healing, fibrosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The balance between M1 and M2 polarization determines the pathological outcome of chronic inflammatory diseases. Unrestrained M1 activation drives chronic autoimmune tissue destruction, chronic osteomyelitis, and non-healing inflammatory ulcers, whereas excessive, dysregulated **M2 activation drives pathological fibrosis**, culminating in idiopathic pulmonary fibrosis, liver cirrhosis, and systemic sclerosis.",
+      "say": "Unchecked M1 activity drives chronic tissue necrosis, while excessive M2 activity causes organ fibrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tuberculous-lymphadenitis-fig1.webp",
+        "caption": "Chronic granulomatous lymph node showing balanced macrophage activation states and central necrosis.",
+        "alt": "Tuberculous lymphadenitis exhibiting chronic epithelioid macrophage activation"
+      }
+    },
+    {
+      "tx": "Therapeutic modulation of macrophage polarization represents a major frontier in immunotherapy. Pharmacological shifting from a pro-fibrotic M2 state toward a balanced phenotype can retard progressive organ fibrosis, while re-educating immunosuppressive M2-like **tumor-associated macrophages** back into tumoricidal M1 killers enhances anti-neoplastic checkpoint inhibitor immunotherapy.",
+      "say": "Re-educating immunosuppressive M2 macrophages into M1 killers enhances anti-tumor immunotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tumor_microenv",
+            "label": "Tumor Cells Secrete CSF-1 and TGF-Beta, Skewing Macrophages to M2 Phenotype"
+          },
+          {
+            "id": "immune_suppress",
+            "label": "M2 Tumor-Associated Macrophages Suppress CD8+ Cytotoxic T-Cells via PD-L1"
+          },
+          {
+            "id": "repolarize_drug",
+            "label": "Targeted Antibodies (Anti-CSF-1R, TLR Agonists) Repolarize Cells Toward M1"
+          },
+          {
+            "id": "tumor_killing",
+            "label": "Reactivated M1 Macrophages Excrete ROS and Nitric Oxide to Destroy Neoplastic Cells"
+          }
+        ],
+        "edges": [
+          [
+            "tumor_microenv",
+            "immune_suppress"
+          ],
+          [
+            "immune_suppress",
+            "repolarize_drug"
+          ],
+          [
+            "repolarize_drug",
+            "tumor_killing"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
