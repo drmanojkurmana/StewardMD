@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "ana-gametogenesis",
+ "subject": "anatomy",
+ "title": "Cortical Reaction, Cleavage and Blastocyst Formation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The unfertilized oocyte is enveloped by a thick, translucent glycoprotein matrix designated the **zona pellucida**, secreted jointly by the growing oocyte and surrounding follicular granulosa cells. Composed of four major sulfated glycoproteins termed ZP1 through ZP4, this protective shell mediates species-specific sperm binding and prevents premature implantation in the fallopian tube.",
+   "say": "The unfertilized oocyte is encased by a translucent glycoprotein matrix termed the zona pellucida, synthesized by the oocyte and granulosa cells. Built from four glycoproteins designated ZP1 through ZP4, it mediates sperm binding and prevents ectopic tubal implantation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-twinning-timing.svg",
+    "alt": "Early embryo cleavage stages within the protective zona pellucida",
+    "caption": "Early zygotic cleavage stages and blastocyst formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Penetration of the first fertilizing spermatozoon initiates the **cortical reaction**, discharging thousands of subcortical granules into the perivitelline space via exocytosis. These granules release hydrolytic enzymes and zinc that alter ZP3 and ZP2 receptors, hardening the zona pellucida into an impenetrable barrier to block polyspermy.",
+   "say": "Entry of the first sperm triggers the cortical reaction, releasing thousands of subcortical granules into the perivitelline space. These granules discharge enzymes that modify ZP3 receptors, hardening the zona pellucida to prevent lethal polyspermy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Polyspermy Block Mechanisms",
+    "nodes": [
+     {
+      "id": "sperm",
+      "label": "Sperm-Oolemma Membrane Fusion"
+     },
+     {
+      "id": "depol",
+      "label": "Fast Block: Oolemma Depolarisation"
+     },
+     {
+      "id": "cort",
+      "label": "Cortical Granule Exocytosis"
+     },
+     {
+      "id": "hard",
+      "label": "Zona Reaction: Hardened Glycoproteins"
+     }
+    ],
+    "edges": [
+     [
+      "sperm",
+      "depol"
+     ],
+     [
+      "depol",
+      "cort"
+     ],
+     [
+      "cort",
+      "hard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once diploidy is restored, the single-cell zygote undergoes a series of rapid mitotic cell divisions termed **cleavage**, without any increase in overall embryonic mass. The daughter cells produced by these early divisions are called blastomeres. Because the constraining zona pellucida remains intact, each successive division yields progressively smaller cells with higher nuclear-to-cytoplasmic ratios.",
+   "say": "Following fertilisation, the zygote embarks upon rapid mitotic divisions termed cleavage, with no increase in overall cytoplasmic volume. The resulting daughter cells are blastomeres. Confined within the rigid zona pellucida, blastomeres become progressively smaller with each round.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Zygote Cleavage Mechanics",
+     "points": [
+      "Rapid mitotic divisions without cellular growth",
+      "Blastomeres become progressively smaller",
+      "Constrained entirely inside zona pellucida",
+      "Total embryonic volume remains constant"
+     ]
+    },
+    "right": {
+     "title": "Cellular Potency States",
+     "points": [
+      "Early blastomeres (up to 8-cell) are totipotent",
+      "Can form both embryo and extraembryonic tissue",
+      "Later cells become pluripotent inner cell mass",
+      "Lineage restriction increases with compaction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Around the sixteen-cell stage on day three post-fertilisation, the tightly packed cluster of spherical blastomeres resembles a mulberry, designated a **morula**. Blastomeres undergo compaction, establishing tight junctions between outer cells and gap junctions between inner cells. The outer cells will form the placenta, while inner cells will produce the embryo proper.",
+   "say": "Around the sixteen-cell stage on day three, the cluster of blastomeres resembles a mulberry, termed a morula. Cells undergo compaction, forming tight junctions between outer cells and gap junctions internally. Outer cells become placenta, while inner cells form the embryo.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Developmental Day",
+     "Morphological Stage",
+     "Cell Number",
+     "Salient Embryonic Event"
+    ],
+    "rows": [
+     [
+      "Day 1",
+      "Zygote",
+      "1 cell",
+      "Pronuclear fusion, first cleavage spindle"
+     ],
+     [
+      "Day 2",
+      "Cleaving Blastomeres",
+      "2 to 4 cells",
+      "Equal cleavage divisions inside zona"
+     ],
+     [
+      "Day 3",
+      "Morula",
+      "12 to 16 cells",
+      "Compaction and tight junction assembly"
+     ],
+     [
+      "Day 4 to 5",
+      "Early Blastocyst",
+      "32 to 64 cells",
+      "Fluid blastocoele cavity formation"
+     ],
+     [
+      "Day 6",
+      "Implanting Blastocyst",
+      "100+ cells",
+      "Zona hatching and endometrial adhesion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "As fluid penetrates through the outer cell layer, a central fluid-filled cavity called the blastocoele coalesces, transforming the morula into a **blastocyst**. The blastocyst differentiates into an outer monomorphic epithelial layer called the trophoblast and an eccentric inner cell mass called the embryoblast. The trophoblast orchestrates uterine invasion and develops into the fetal placenta.",
+   "say": "As fluid accumulates internally, a central cavity forms, converting the morula into a blastocyst. The blastocyst segregates into an outer epithelial trophoblast and an inner cell mass termed the embryoblast. The trophoblast directs uterine invasion to form the placenta.",
+   "vis": {
+    "kind": "flow",
+    "title": "Blastocyst Differentiation",
+    "nodes": [
+     {
+      "id": "mor",
+      "label": "Compacted Solid Morula"
+     },
+     {
+      "id": "fluid",
+      "label": "Fluid Influx through Na/K Pumps"
+     },
+     {
+      "id": "troph",
+      "label": "Outer Trophoblast (Placenta)"
+     },
+     {
+      "id": "emb",
+      "label": "Inner Cell Mass (Embryo Proper)"
+     }
+    ],
+    "edges": [
+     [
+      "mor",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "troph"
+     ],
+     [
+      "fluid",
+      "emb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before implantation into the maternal uterine endometrium can occur, the blastocyst must break free from the surrounding zona pellucida in a process termed **zona hatching**. Around day five or six, trophoblast cells secrete proteolytic enzymes that digest a small aperture in the thinned zona pellucida, allowing the expanding blastocyst to squeeze out and contact endometrial epithelium.",
+   "say": "Before attaching to the uterine lining, the blastocyst must break free from its shell in a process known as zona hatching. Around day six, trophoblast enzymes digest an opening in the zona pellucida, allowing the blastocyst to emerge and contact endometrial cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intact Zona Pellucida",
+     "points": [
+      "Present from fertilization through day five",
+      "Prevents tubal adherence and ectopic pregnancy",
+      "Blocks premature polyspermic invasion",
+      "Keeps cleaving blastomeres clustered"
+     ]
+    },
+    "right": {
+     "title": "Hatched Blastocyst",
+     "points": [
+      "Emerged through enzymatically digested hole",
+      "Exposes naked trophoblast microvilli",
+      "Enables direct adhesion to endometrium",
+      "Permits uterine stromal invasion on day 6"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Errors during gametogenesis meiotic divisions can cause chromosomal aneuploidy through failure of chromosome pairs to separate, a catastrophe designated **nondisjunction**. If homologous chromosomes fail to segregate in meiosis I or sister chromatids fail to disjoin in meiosis II, gametes inherit unbalanced chromosome counts, causing clinical syndromes like trisomy 21.",
+   "say": "Errors during meiotic divisions can cause chromosomal aneuploidies through failure of chromosome separation, termed nondisjunction. If homologous pairs fail to separate in meiosis one or chromatids fail in meiosis two, gametes carry abnormal counts like trisomy twenty-one.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-nondisjunction.svg",
+    "alt": "Chromosomal nondisjunction in meiosis I and meiosis II",
+    "caption": "Meiotic nondisjunction mechanisms producing aneuploid gametes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Maternal age directly correlates with the frequency of meiotic nondisjunction because primary oocytes remain arrested in prophase I for decades, deteriorating spindle integrity. Following implantation on day seven, the inner cell mass of the hatched blastocyst organizes into epiblast and hypoblast layers, forming the **bilaminar disc** that initiates embryonic tissue lineage segregation.",
+   "say": "Advanced maternal age increases meiotic nondisjunction risks because oocytes remain suspended in prophase one for decades, degrading meiotic spindle proteins. After implantation on day seven, the inner cell mass organizes into epiblast and hypoblast to form the bilaminar disc.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aneuploidy / Stage",
+     "Cytogenetic Basis",
+     "Clinical Consequence",
+     "Critical Mechanism"
+    ],
+    "rows": [
+     [
+      "Trisomy 21",
+      "Nondisjunction of chromosome 21",
+      "Down syndrome",
+      "Spindle breakdown in aging oocyte"
+     ],
+     [
+      "Monosomy X",
+      "Loss of sex chromosome",
+      "Turner syndrome (45,X)",
+      "Paternal or maternal meiotic loss"
+     ],
+     [
+      "Trisomy 18",
+      "Nondisjunction of chromosome 18",
+      "Edwards syndrome",
+      "Severe congenital malformations"
+     ],
+     [
+      "Bilaminar Disc",
+      "Inner cell mass segregation",
+      "Epiblast and hypoblast",
+      "Drives gastrulation and germ layers"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

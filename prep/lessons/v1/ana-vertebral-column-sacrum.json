@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-vertebral-column",
+ "subject": "anatomy",
+ "title": "Sacrum, Intervertebral Discs and Deep Back Muscles",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **sacrum** is a large, triangular bone formed by the embryonic fusion of five sacral vertebrae, wedge-shaped to transmit torso weight into the pelvic girdle. Its concave pelvic surface exhibits four pairs of anterior sacral foramina transmitting ventral rami of sacral nerves, while the convex dorsal surface features four posterior sacral foramina.",
+   "say": "The sacrum is a broad triangular bone formed by the fusion of five sacral vertebrae, wedged into the pelvis to distribute weight. Its smooth pelvic surface features four pairs of anterior sacral foramina for ventral nerve rami, while the rough dorsal aspect carries dorsal foramina.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Sacrum wedged into the bony pelvis with promontory and pelvic brim",
+    "caption": "Sacral anatomy and relationship to the bony pelvis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anterior superior projection of the first sacral body forms the clinically vital **sacral promontory**, an indispensable obstetric landmark demarcating the true pelvic inlet. The central sacral canal transmits the cauda equina, the filum terminale, and the meninges down to the termination of the dural sac at the level of the second sacral vertebra.",
+   "say": "The anterior margin of the first sacral body forms the sacral promontory, a critical obstetric landmark bounding the pelvic inlet. The sacral canal carries the cauda equina, filum terminale, and the dural sac down to its termination at the second sacral vertebra.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sacral Feature",
+     "Anatomical Morphology",
+     "Transmitted Structures",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Sacral Promontory",
+      "Superior border of S1 body",
+      "Pelvic brim boundary",
+      "Obstetric conjugate measurement"
+     ],
+     [
+      "Sacral Canal",
+      "Continuation of vertebral canal",
+      "Cauda equina and filum",
+      "Site of caudal epidural anaesthesia"
+     ],
+     [
+      "Sacral Hiatus",
+      "Deficiency of S5 laminae",
+      "Filum terminale, 5th sacral nerve",
+      "Needle entry for caudal block"
+     ],
+     [
+      "Auricular Surface",
+      "L-shaped lateral articular facet",
+      "Articulates with ilium",
+      "Sacroiliac joint stability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adjacent vertebral bodies from C2 down to S1 are united by resilient secondary cartilaginous articulations containing an **intervertebral disc**. Each disc consists of an outer fibrous ring called the anulus fibrosus and a gelatinous central core called the nucleus pulposus. Discs account for approximately twenty-five percent of the total height of the vertebral column.",
+   "say": "Adjacent vertebral bodies from C2 to S1 are bonded by intervertebral discs. Each disc comprises an outer fibrocartilaginous ring named the anulus fibrosus surrounding a gelatinous core called the nucleus pulposus. Discs contribute one quarter of spinal column height.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cervical-fractures.svg",
+    "alt": "Intervertebral disc structure and spinal ligament alignment",
+    "caption": "Intervertebral disc structure, anulus fibrosus, and longitudinal ligaments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central core is the **nucleus pulposus**, a high water-content proteoglycan gel derived embryologically from the notochord. Acting as a pressurized hydraulic cushion, it redistributes compressive forces uniformly across the vertebral endplates. With aging, progressive dehydration of the nucleus pulposus reduces spinal flexibility and narrows the intervertebral disc spaces on plain radiographs.",
+   "say": "The central core is the nucleus pulposus, a proteoglycan gel derived from the embryonic notochord. Functioning as a hydraulic shock absorber, it disperses axial compression evenly across the endplates. Age-related dehydration thins the disc, reducing height and flexibility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anulus Fibrosus",
+     "points": [
+      "Concentric rings of fibrocartilage",
+      "Alternating oblique type I collagen fibres",
+      "Anchors disc to ring apophyses",
+      "Thicker anteriorly than posteriorly"
+     ]
+    },
+    "right": {
+     "title": "Nucleus Pulposus",
+     "points": [
+      "Avascular proteoglycan water gel",
+      "Embryonic remnant of the notochord",
+      "Equalizes compressive spinal loads",
+      "Dehydrates with progressive aging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When the outer anulus fibrosus tears under flexion and rotational strain, a **prolapsed disc** occurs, typically bulging posterolaterally where the posterior longitudinal ligament is thinnest. A posterolateral disc herniation at the L4-L5 level characteristically spares the exiting L4 nerve root and compresses the traversing L5 nerve root as it descends toward the next foramen.",
+   "say": "When the anulus fibrosus ruptures under strain, a prolapsed disc develops, typically herniating posterolaterally where ligamentous support is weakest. An L4-L5 herniation spares the exiting L4 nerve and compresses the traversing L5 root descending to the next level.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lumbar Disc Herniation Cascade",
+    "nodes": [
+     {
+      "id": "tear",
+      "label": "Posterolateral Anular Fissure"
+     },
+     {
+      "id": "hernia",
+      "label": "Nucleus Pulposus Extrusion"
+     },
+     {
+      "id": "root",
+      "label": "Traversing Nerve Root Impingement"
+     },
+     {
+      "id": "radic",
+      "label": "Sciatica and Radiculopathy"
+     }
+    ],
+    "edges": [
+     [
+      "tear",
+      "hernia"
+     ],
+     [
+      "hernia",
+      "root"
+     ],
+     [
+      "root",
+      "radic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spinal stability is reinforced by specialized intervertebral ligaments. Connecting the laminae of adjacent vertebrae is the **ligamentum flavum**, built of elastic yellow fibres that stretch during forward spinal flexion and recoil during extension. Because it maintains tension on the spinal canal wall, it prevents the capsule from buckling into the spinal cord.",
+   "say": "Spinal stability is reinforced by deep ligaments. Bridging the laminae of adjacent vertebrae is the ligamentum flavum, composed of yellow elastic fibres that stretch in flexion and recoil in extension. Its elastic recoil prevents the canal lining from pinching the cord.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ligamentum Flavum",
+     "points": [
+      "Binds adjacent laminae across levels",
+      "Contains eighty percent elastic tissue",
+      "Provides perceptible pop during lumbar puncture",
+      "Thickens in degenerative lumbar stenosis"
+     ]
+    },
+    "right": {
+     "title": "Longitudinal Ligaments",
+     "points": [
+      "Anterior longitudinal prevents hyperextension",
+      "Posterior longitudinal prevents hyperflexion",
+      "Composed of inelastic collagen fibres",
+      "Posterior band narrows over lower lumbar levels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The deep musculature maintaining upright posture is dominated by the **erector spinae** muscle complex, lying in the groove beside the vertebral spinous processes. From lateral to medial, it divides into three columns: iliocostalis, longissimus, and spinalis. Innervated by dorsal rami of spinal nerves, the erector spinae acts as the chief extensor of the vertebral column.",
+   "say": "Upright spinal posture is maintained by the erector spinae muscle complex situated beside the spinous processes. Arranged from lateral to medial into iliocostalis, longissimus, and spinalis columns, it is innervated by dorsal rami and serves as the primary spinal extensor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle Column",
+     "Medial to Lateral Position",
+     "Typical Attachments",
+     "Primary Biomechanical Action"
+    ],
+    "rows": [
+     [
+      "Spinalis",
+      "Most medial column",
+      "Spinous processes to spinous processes",
+      "Extends vertebral column"
+     ],
+     [
+      "Longissimus",
+      "Intermediate column",
+      "Transverse processes and ribs",
+      "Extends and lateral bends column"
+     ],
+     [
+      "Iliocostalis",
+      "Most lateral column",
+      "Iliac crest to ribs and transverse",
+      "Lateral flexion and extension"
+     ],
+     [
+      "Transversospinalis",
+      "Deep to erector spinae",
+      "Transverse to spinous processes",
+      "Rotates vertebral segments"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep to the erector spinae lies the oblique **transversospinalis group**, comprising semispinalis, multifidus, and rotatores running from transverse processes up to spinous processes. These deeper postural fibres provide fine segmental stabilization and rotational control of individual vertebrae during dynamic movement, counteracting rotational shearing stresses across intervertebral discs.",
+   "say": "Lying deep to the erector spinae is the transversospinalis group, consisting of semispinalis, multifidus, and rotatores. Running obliquely from transverse to spinous processes, these deep fascicles stabilize individual vertebrae and control fine segmental rotation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Back Muscle Functional Stratification",
+    "nodes": [
+     {
+      "id": "sup",
+      "label": "Superficial: Trapezius and Latissimus"
+     },
+     {
+      "id": "inter",
+      "label": "Intermediate: Erector Spinae Extensors"
+     },
+     {
+      "id": "deep",
+      "label": "Deep: Transversospinalis Rotators"
+     },
+     {
+      "id": "stab",
+      "label": "Segmental Postural Control"
+     }
+    ],
+    "edges": [
+     [
+      "sup",
+      "inter"
+     ],
+     [
+      "inter",
+      "deep"
+     ],
+     [
+      "deep",
+      "stab"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

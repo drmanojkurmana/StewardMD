@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-vertebral-column",
+ "subject": "anatomy",
+ "title": "Vertebral Column Architecture and Regional Vertebrae",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A typical vertebra comprises an anterior weight-bearing vertebral body and a posterior neural vertebral arch enclosing the vertebral foramen. The **vertebral body** features thin compact cortical bone surrounding vascular cancellous trabeculae. Its superior and inferior surfaces are capped with hyaline cartilage plates that anchor the resilient intervertebral discs.",
+   "say": "A typical vertebra consists of an anterior body and a posterior vertebral arch surrounding the vertebral foramen. The vertebral body contains vascular cancellous bone enclosed by a thin cortical shell. Its surfaces are capped with hyaline cartilage plates that bond to intervertebral discs.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cervical-fractures.svg",
+    "alt": "Vertebral column segments, cervical vertebrae, atlas and axis",
+    "caption": "Vertebral anatomy, neural arch, and cervical spine architecture. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Projecting posteriorly from the body, two cylindrical pedicles and two flattened laminae unite to complete the **vertebral arch**. The arch supports seven processes: one posterior spinous process, two lateral transverse processes, and four articular processes with facet joints. Concavities on the pedicles form the intervertebral foramina that transmit spinal nerves.",
+   "say": "Extending backwards from the body, two pedicles and two laminae meet to complete the vertebral arch. The arch anchors seven processes comprising one spinous, two transverse, and four articular processes. Grooves on the pedicles create intervertebral foramina for exiting nerves.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vertebral Arch Components",
+    "nodes": [
+     {
+      "id": "ped",
+      "label": "Paired Pedicles"
+     },
+     {
+      "id": "lam",
+      "label": "Paired Laminae"
+     },
+     {
+      "id": "proc",
+      "label": "Articular and Spinous Processes"
+     },
+     {
+      "id": "for",
+      "label": "Intervertebral Foramen"
+     }
+    ],
+    "edges": [
+     [
+      "ped",
+      "lam"
+     ],
+     [
+      "lam",
+      "proc"
+     ],
+     [
+      "ped",
+      "for"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first cervical vertebra, designated the **atlas**, lacks both a vertebral body and a spinous process, consisting simply of anterior and posterior arches joined by two lateral masses. Its kidney-shaped superior articular facets articulate with the occipital condyles at the atlanto-occipital joints, providing the nodding motion of the head.",
+   "say": "The first cervical vertebra, the atlas, lacks a vertebral body and spinous process, consisting of anterior and posterior arches linked by lateral masses. Its superior facets cup the occipital condyles at the atlanto-occipital joints to allow nodding movements.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atlas (C1) Anatomy",
+     "points": [
+      "Lacks vertebral body and spinous process",
+      "Anterior and posterior arches with tubercle",
+      "Cup-shaped superior articular facets",
+      "Permits nodding motion (yes joint)"
+     ]
+    },
+    "right": {
+     "title": "Axis (C2) Anatomy",
+     "points": [
+      "Features robust vertical odontoid dens",
+      "Massive bifid spinous process",
+      "Flat horizontal superior articular facets",
+      "Permits head rotation (no joint)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The second cervical vertebra is the **axis**, distinguished by a robust vertical projection termed the dens, or odontoid process. Representing the phylogenetically detached body of the atlas, the dens acts as a pivot around which the atlas rotates. The transverse ligament of the atlas straps the dens against the anterior arch of C1.",
+   "say": "The second cervical vertebra is the axis, characterized by its vertical peg called the dens or odontoid process. Representing the absorbed body of the atlas, the dens serves as a pivot pin. The transverse ligament locks the dens against the anterior atlas arch.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Vertebral column and pelvis architecture",
+    "caption": "Axial skeleton alignment and vertebral column curvature. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "All cervical vertebrae are identified by the presence of a **foramen transversarium** in each transverse process. In vertebrae C1 through C6, this foramen transmits the vertebral artery, vertebral veins, and sympathetic plexuses toward the foramen magnum. The transverse process of C7 transmits only accessory vertebral veins, as the vertebral artery enters at C6.",
+   "say": "Every cervical vertebra is identified by a foramen transversarium in each transverse process. In C1 through C6, this aperture transmits the ascending vertebral artery and sympathetic plexuses. The C7 foramen carries only accessory veins, since the artery enters at C6.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vertebral Region",
+     "Distinguishing Feature",
+     "Spine Orientation",
+     "Canal Shape"
+    ],
+    "rows": [
+     [
+      "Cervical (C1-C7)",
+      "Foramen transversarium in transverse process",
+      "Bifid (C2-C6); C7 prominent",
+      "Large triangular"
+     ],
+     [
+      "Thoracic (T1-T12)",
+      "Costal facets on body and transverse process",
+      "Long, sloping downward",
+      "Small circular"
+     ],
+     [
+      "Lumbar (L1-L5)",
+      "Massive kidney body, no costal facets",
+      "Quadrilateral, horizontal",
+      "Medium triangular"
+     ],
+     [
+      "Sacral (S1-S5)",
+      "Fused into triangular curved sacrum",
+      "Fused into median sacral crest",
+      "Sacral canal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thoracic vertebrae articulate with ribs via costal facets on their bodies and transverse processes, displaying heart-shaped bodies. In contrast, a typical **lumbar vertebra** possesses a massive kidney-shaped body without costal facets or foramina transversaria. Its thick quadrilateral spinous process projects horizontally backward, creating wide interlaminar windows suitable for spinal needle entry.",
+   "say": "Thoracic vertebrae bear costal facets for rib articulations. In contrast, a typical lumbar vertebra possesses a massive kidney-shaped body devoid of costal facets. Its broad quadrilateral spinous process projects horizontally, creating wide interspinous gaps for needle access.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thoracic Vertebra",
+     "points": [
+      "Heart-shaped body with costal facets",
+      "Sloping spines overlapping lower level",
+      "Frontal facet orientation guides rotation",
+      "Narrow circular spinal canal"
+     ]
+    },
+    "right": {
+     "title": "Lumbar Vertebra",
+     "points": [
+      "Massive kidney-shaped vertebral body",
+      "Horizontal quadrilateral spine",
+      "Sagittal facet orientation guides flexion",
+      "Triangular spacious spinal canal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A congenital anomaly occurring in roughly one percent of individuals is the presence of an anomalous **cervical rib**, arising from the anterior tubercle of the transverse process of the seventh cervical vertebra. It can compress the lower trunk of the brachial plexus (C8-T1) and the subclavian artery, causing thoracic outlet syndrome with wasting of intrinsic hand muscles.",
+   "say": "A cervical rib arises from the costal element of the seventh cervical vertebra in about one percent of individuals. This supernumerary rib can compress the lower trunk of the brachial plexus and subclavian artery, triggering thoracic outlet syndrome with intrinsic hand wasting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cervical Rib Compression Cascade",
+    "nodes": [
+     {
+      "id": "rib",
+      "label": "C7 Transverse Costal Rib"
+     },
+     {
+      "id": "comp",
+      "label": "Lower Trunk (C8-T1) Pressure"
+     },
+     {
+      "id": "subc",
+      "label": "Subclavian Artery Kinking"
+     },
+     {
+      "id": "symp",
+      "label": "Hypothenar Wasting and Ischemia"
+     }
+    ],
+    "edges": [
+     [
+      "rib",
+      "comp"
+     ],
+     [
+      "comp",
+      "subc"
+     ],
+     [
+      "subc",
+      "symp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Regional facet orientation governs kinematics: cervical facets lie at forty-five degrees permitting universal motion, thoracic facets lie in the coronal plane permitting rotation, and lumbar facets lie in the sagittal plane permitting flexion and extension. The **fifth lumbar vertebra** features the largest body and massive transverse processes that anchor the robust iliolumbar ligaments.",
+   "say": "Facet alignment determines mobility: cervical facets slope at forty-five degrees, thoracic facets lie in the coronal plane for rotation, and lumbar facets face sagittally for flexion and extension. The fifth lumbar vertebra bears the largest body and anchors iliolumbar ligaments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Spinal Level",
+     "Facet Joint Plane",
+     "Dominant Kinematic Motion",
+     "Restricted Motion"
+    ],
+    "rows": [
+     [
+      "Cervical",
+      "Transverse/oblique (45 degrees)",
+      "Universal flexion, extension, tilt",
+      "Extreme shear"
+     ],
+     [
+      "Thoracic",
+      "Coronal plane",
+      "Axial torso rotation",
+      "Flexion and extension"
+     ],
+     [
+      "Lumbar",
+      "Sagittal plane",
+      "Flexion and extension",
+      "Axial rotation blocked"
+     ],
+     [
+      "Lumbosacral",
+      "Coronal transition",
+      "Resists anterior lumbosacral shear",
+      "Excessive translation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

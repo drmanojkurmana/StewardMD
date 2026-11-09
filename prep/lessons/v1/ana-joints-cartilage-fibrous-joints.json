@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-joints-cartilage",
+ "subject": "anatomy",
+ "title": "Fibrous Joints and Cartilaginous Classifications",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Joints are classified structurally according to the intervening binding tissue into fibrous, cartilaginous, and synovial varieties. In a **fibrous joint**, articulating bone surfaces are fastened securely by dense fibrous connective tissue without an intervening joint cavity. These immoveable or minimally moveable articulations permit little to no motion, prioritizing structural stability.",
+   "say": "Joints are classified by their binding tissues into fibrous, cartilaginous, and synovial categories. In a fibrous joint, bones unite through dense collagenous tissue with no intervening joint cavity. These stable articulations allow minimal or no movement.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-joint-classes.svg",
+    "alt": "Classification of joints into fibrous, cartilaginous, and synovial",
+    "caption": "Structural classes of human skeletal articulations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cranial bones are united by specialized fibrous joints known as sutures, which interlock bone edges through sutural ligaments. A peg-and-socket fibrous articulation anchoring teeth into alveolar sockets is designated a **gomphosis**, secured by the specialized periodontal ligament. Inflammation or destruction of this periodontal tissue leads to pathological tooth loosening in advanced scurvy or chronic periodontitis.",
+   "say": "Cranial sutures bind skull bones tightly through sutural ligaments. A peg-and-socket fibrous joint securing teeth into alveolar ridges is termed a gomphosis, anchored by the periodontal ligament. Loss of this ligament causes progressive tooth mobility.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+    "alt": "Fetal skull showing coronal, sagittal, and lambdoid sutures",
+    "caption": "Cranial sutures representing specialized fibrous joints of the skull. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When adjacent bones are held together by a substantial interosseous ligament or membrane, the fibrous articulation is termed a **syndesmosis**, permitting slight compensatory movement. Classical examples include the inferior tibiofibular syndesmosis and the interosseous membrane uniting the radius and ulna. Rupture of the distal tibiofibular syndesmosis constitutes a high ankle sprain.",
+   "say": "When bones are bound by an extensive interosseous ligament or sheet, the joint is termed a syndesmosis, permitting modest give. The inferior tibiofibular joint and the forearm interosseous membrane illustrate this design. Syndesmotic disruption causes high ankle instability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suture and Gomphosis",
+     "points": [
+      "Sutures interlock cranial bones",
+      "Gomphosis anchors tooth to alveolar bone",
+      "Short dense collagen fibres",
+      "Functionally synarthrotic (immoveable)"
+     ]
+    },
+    "right": {
+     "title": "Syndesmosis",
+     "points": [
+      "Bones united by fibrous cord or sheet",
+      "Inferior tibiofibular joint and forearm",
+      "Longer intervening collagen fibres",
+      "Functionally amphiarthrotic (slight give)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cartilaginous joints unite bones through either hyaline cartilage or fibrocartilage. A temporary joint where bones are joined directly by a bar of hyaline cartilage is classified as a **synchondrosis**, or primary cartilaginous joint. Because the intervening hyaline cartilage converts to bone after growth ceases, all primary cartilaginous joints eventually obliterate through synostosis.",
+   "say": "Cartilaginous articulations unite skeletal elements through hyaline or fibrocartilage. A temporary joint joined by hyaline cartilage is a synchondrosis, or primary cartilaginous joint. Because hyaline cartilage eventually ossifies, these joints inevitably undergo synostosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cartilaginous Joint Subtypes",
+    "nodes": [
+     {
+      "id": "cart",
+      "label": "Cartilaginous Articulations"
+     },
+     {
+      "id": "prim",
+      "label": "Primary: Synchondrosis (Hyaline)"
+     },
+     {
+      "id": "sec",
+      "label": "Secondary: Symphysis (Fibrocartilage)"
+     },
+     {
+      "id": "fuse",
+      "label": "Synostosis: Bony Fusion"
+     }
+    ],
+    "edges": [
+     [
+      "cart",
+      "prim"
+     ],
+     [
+      "cart",
+      "sec"
+     ],
+     [
+      "prim",
+      "fuse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prominent examples of synchondroses include the epiphyseal growth plate connecting the epiphysis to the metaphysis, and the spheno-occipital synchondrosis at the base of the skull. The first **chondrosternal joint** uniting the first rib cartilage to the manubrium sterni is also a permanent primary cartilaginous joint, whereas the second to seventh chondrosternal joints are synovial.",
+   "say": "Key examples of synchondroses include the epiphyseal growth plate and the spheno-occipital joint. The junction between the first rib and manubrium is also a primary cartilaginous joint, unlike the lower chondrosternal joints which develop synovial cavities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Joint Type",
+     "Intervening Cartilage",
+     "Mobility Degree",
+     "Classic Examples"
+    ],
+    "rows": [
+     [
+      "Synchondrosis",
+      "Hyaline cartilage plate",
+      "Immoveable; temporary",
+      "Growth plates, spheno-occipital"
+     ],
+     [
+      "Symphysis",
+      "Fibrocartilaginous disc",
+      "Slight resilient yield",
+      "Pubic symphysis, intervertebral"
+     ],
+     [
+      "1st Chondrosternal",
+      "Hyaline cartilage bar",
+      "Immoveable; rigid",
+      "First rib to manubrium"
+     ],
+     [
+      "2nd-7th Chondrosternal",
+      "Synovial cavity and capsule",
+      "Gliding respiratory motion",
+      "True ribs to sternal body"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A permanent midline articulation where opposing bone ends are coated with thin hyaline cartilage and fused by a thick fibrocartilaginous disc is termed a **symphysis**, or secondary cartilaginous joint. Found strictly along the median plane of the torso, symphyses include the pubic symphysis and all intervertebral joints. They never undergo normal synostosis with advancing age.",
+   "say": "A permanent midline articulation bound by a dense fibrocartilaginous disc is called a symphysis, or secondary cartilaginous joint. Located strictly along the bodily midline, symphyses encompass the pubic symphysis and intervertebral discs. They resist complete bony fusion in normal aging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Cartilaginous",
+     "points": [
+      "United by pure hyaline cartilage",
+      "Temporary; undergoes synostosis",
+      "Includes physeal growth plates",
+      "Zero functional mobility"
+     ]
+    },
+    "right": {
+     "title": "Secondary Cartilaginous",
+     "points": [
+      "United by central fibrocartilage disc",
+      "Permanent; located in midline",
+      "Includes pubic symphysis and spine",
+      "Provides resilient shock absorption"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast to fibrous and cartilaginous connections, a **synovial joint** possesses a fluid-filled articular cavity bounded by a fibrous capsule and synovial membrane. Articulating surfaces glide frictionless upon hyaline articular cartilage bathed in lubricating synovial fluid. Synovial joints dominate the appendicular skeleton, conferring wide ranges of angular, rotary, and translational motion.",
+   "say": "Unlike fibrous or cartilaginous joints, a synovial joint features a fluid-filled cavity enclosed by a fibrous capsule and synovial lining. Articulating surfaces glide smoothly on hyaline cartilage lubricated by synovial fluid, permitting extensive multi-axis movement.",
+   "vis": {
+    "kind": "flow",
+    "title": "Synovial Joint Structural Envelope",
+    "nodes": [
+     {
+      "id": "cap",
+      "label": "Fibrous Capsule"
+     },
+     {
+      "id": "syn",
+      "label": "Synovial Membrane Lining"
+     },
+     {
+      "id": "flu",
+      "label": "Synovial Fluid Secretion"
+     },
+     {
+      "id": "art",
+      "label": "Articular Cartilage Cushion"
+     }
+    ],
+    "edges": [
+     [
+      "cap",
+      "syn"
+     ],
+     [
+      "syn",
+      "flu"
+     ],
+     [
+      "flu",
+      "art"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A biaxial synovial joint featuring reciprocally concavo-convex articular surfaces is designated a **saddle joint**, or sellar articulation. The prime anatomical exemplar is the first carpometacarpal joint of the thumb, formed between the trapezium and the base of the first metacarpal. This geometric arrangement permits flexion, extension, abduction, adduction, and axial opposition of the human thumb.",
+   "say": "A biaxial joint featuring interlocking saddle-shaped surfaces is termed a saddle joint, or sellar articulation. The premier example is the first carpometacarpal joint at the base of the thumb. This unique geometry allows thumb opposition and grip dexterity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Joint Classification",
+     "Surface Geometry",
+     "Axes of Motion",
+     "Anatomical Example"
+    ],
+    "rows": [
+     [
+      "Saddle (Sellar)",
+      "Reciprocally concavo-convex",
+      "Biaxial with axial rotation",
+      "1st Carpometacarpal (thumb)"
+     ],
+     [
+      "Suture",
+      "Interlocking bony denticles",
+      "Zero (synarthrosis)",
+      "Coronal and sagittal cranial sutures"
+     ],
+     [
+      "Gomphosis",
+      "Conical peg in socket",
+      "Zero (synarthrosis)",
+      "Dentoalveolar articulation"
+     ],
+     [
+      "Syndesmosis",
+      "Interosseous ligamentous sheet",
+      "Slight amphiarthrosis",
+      "Distal tibiofibular joint"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

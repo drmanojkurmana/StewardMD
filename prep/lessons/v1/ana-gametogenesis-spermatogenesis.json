@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-gametogenesis",
+ "subject": "anatomy",
+ "title": "Spermatogenesis, Oogenesis and Fertilisation Events",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Human gametogenesis transforms primordial germ cells into specialized haploid gametes through meiosis. In males, the continuous process of **spermatogenesis** begins at puberty within the seminiferous tubules of the testes, proceeding under the trophic stimulation of follicle-stimulating hormone and testosterone produced by interstitial Leydig cells.",
+   "say": "Human gametogenesis transforms primordial germ cells into haploid gametes through meiotic division. In males, spermatogenesis begins at puberty inside the testicular seminiferous tubules, stimulated by follicle-stimulating hormone and testosterone from Leydig cells.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-testis-descent.svg",
+    "alt": "Testicular anatomy, seminiferous tubules, and descent pathway",
+    "caption": "Testicular architecture and site of spermatogenesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Spermatogonia stem cells divide mitotically to produce primary spermatocytes, which undergo the first meiotic division to generate secondary spermatocytes. The second meiotic division yields haploid round spermatids. The subsequent morphological transformation of round spermatids into streamlined flagellated spermatozoa without further cell division is termed **spermiogenesis**, occurring while embedded in supporting Sertoli cells.",
+   "say": "Spermatogonia produce primary spermatocytes, which complete meiosis one to form secondary spermatocytes. The second meiotic division creates round spermatids. The subsequent physical transformation of round spermatids into mature flagellated spermatozoa is spermiogenesis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Stages of Male Gametogenesis",
+    "nodes": [
+     {
+      "id": "gonia",
+      "label": "Spermatogonia (46,XY)"
+     },
+     {
+      "id": "prim",
+      "label": "Primary Spermatocyte (46,XY)"
+     },
+     {
+      "id": "sec",
+      "label": "Secondary Spermatocyte (23,X or Y)"
+     },
+     {
+      "id": "sperm",
+      "label": "Spermiogenesis to Spermatozoa"
+     }
+    ],
+    "edges": [
+     [
+      "gonia",
+      "prim"
+     ],
+     [
+      "prim",
+      "sec"
+     ],
+     [
+      "sec",
+      "sperm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During spermiogenesis, the Golgi apparatus condenses to form the apical acrosomal cap, the flagellum grows from the centriole, and mitochondria wrap around the midpiece to power motility. Mature spermatozoa travel through the **ductus deferens** and epididymis where they acquire forward motility, remaining stored until emission into the ejaculate.",
+   "say": "During spermiogenesis, the Golgi apparatus condenses into an acrosomal cap, the tail sprouts from the centriole, and mitochondria wrap around the midpiece. Spermatozoa enter the epididymis and ductus deferens to acquire progressive motility.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-spermatic-cord.svg",
+    "alt": "Spermatic cord and ductus deferens transit pathway",
+    "caption": "Spermatic cord and transit of mature gametes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Female gametogenesis follows a discontinuous timeline beginning before birth. In embryonic ovaries, oogonia proliferate mitotically before entering meiosis I to form primary oocytes. During intrauterine development, all primary oocytes arrest in the diplotene stage of prophase I, remaining suspended in this **primary oocyte arrest** until ovulation occurs decades later.",
+   "say": "Female gametogenesis follows a discontinuous timeline initiated before birth. In embryonic ovaries, oogonia enter meiosis one to form primary oocytes. All primary oocytes arrest in the diplotene stage of prophase one until awakened decades later at ovulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spermatogenesis Timeline",
+     "points": [
+      "Initiates continuously at puberty",
+      "Four functional spermatozoa per spermatocyte",
+      "Entire cycle requires ~64 to 74 days",
+      "Continues throughout adult male life"
+     ]
+    },
+    "right": {
+     "title": "Oogenesis Timeline",
+     "points": [
+      "Initiates during intrauterine fetal life",
+      "One ovum and polar bodies per oocyte",
+      "Prolonged diplotene meiotic arrest",
+      "Exhausts at female menopause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Under the preovulatory luteinizing hormone surge, a selected mature Graafian follicle resumes meiosis I, extruding the first polar body and yielding a secondary oocyte. The secondary oocyte immediately enters meiosis II and arrests at **metaphase II arrest**. It remains frozen in metaphase II until fertilisation by a penetrating sperm triggers the completion of meiosis II.",
+   "say": "Triggered by the midcycle luteinizing hormone surge, the mature follicle finishes meiosis one, producing a secondary oocyte and the first polar body. The secondary oocyte advances into meiosis two and arrests in metaphase two until fertilisation triggers completion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oogenesis Stage",
+     "Nuclear Chromosome Set",
+     "Timing of Occurrence",
+     "Regulatory Trigger"
+    ],
+    "rows": [
+     [
+      "Primary Oocyte",
+      "46 chromosomes, 4N DNA",
+      "Arrests in fetal diplotene I",
+      "Oocyte maturation inhibitor"
+     ],
+     [
+      "Secondary Oocyte",
+      "23 chromosomes, 2N DNA",
+      "Arrests in metaphase II",
+      "Preovulatory LH surge"
+     ],
+     [
+      "First Polar Body",
+      "23 chromosomes, 2N DNA",
+      "Extruded before ovulation",
+      "Completion of meiosis I"
+     ],
+     [
+      "Mature Zygote",
+      "46 chromosomes, 2N DNA",
+      "Completes meiosis II",
+      "Sperm membrane fusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Freshly ejaculated spermatozoa cannot immediately fertilize an ovum until they undergo physiological priming in the female genital tract termed **capacitation**. Lasting roughly seven hours, capacitation removes glycoprotein coats and seminal plasma proteins from the acrosome, altering membrane fluidity and inducing hyperactive sperm motility necessary to penetrate the cumulus oophorus.",
+   "say": "Freshly ejaculated sperm cannot fertilize an egg until conditioned within the female reproductive tract by capacitation. Taking several hours, capacitation sheds inhibitory glycoprotein coats and triggers hyperactive motility needed to breach the cumulus cells.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sperm Priming and Activation",
+    "nodes": [
+     {
+      "id": "ejac",
+      "label": "Ejaculated Spermatozoa"
+     },
+     {
+      "id": "cap",
+      "label": "Female Tract Capacitation"
+     },
+     {
+      "id": "bind",
+      "label": "ZP3 Receptor Binding"
+     },
+     {
+      "id": "acro",
+      "label": "Acrosome Reaction Activation"
+     }
+    ],
+    "edges": [
+     [
+      "ejac",
+      "cap"
+     ],
+     [
+      "cap",
+      "bind"
+     ],
+     [
+      "bind",
+      "acro"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upon contacting the protective zona pellucida of the oocyte, the capacitated sperm binds specifically to the ZP3 glycoprotein receptor. This binding triggers the **acrosome reaction**, wherein the outer acrosomal membrane fuses with the sperm plasma membrane. The reaction releases hyaluronidase and acrosin enzymes that digest a microscopic tunnel through the zona pellucida.",
+   "say": "When a capacitated sperm contacts the zona pellucida, it binds to the ZP3 glycoprotein. This triggers the acrosome reaction, causing acrosomal membranes to fuse and release hyaluronidase and acrosin enzymes that bore a channel through the coat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capacitation Process",
+     "points": [
+      "Occurs in uterus and fallopian tube",
+      "Removes surface glycoproteins",
+      "Increases membrane calcium permeability",
+      "Induces hyperactivated motility"
+     ]
+    },
+    "right": {
+     "title": "Acrosome Reaction",
+     "points": [
+      "Triggered by binding to ZP3 receptor",
+      "Exocytosis of acrosomal vesicle contents",
+      "Releases acrosin and hyaluronidase",
+      "Permits sperm passage through zona"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fertilisation normally occurs within the ampulla of the fallopian tube. Fusion of the sperm and oocyte plasma membranes depolarises the oolemma and sparks intracellular calcium waves. This calcium surge triggers the oocyte to complete meiosis II, extruding the second polar body and forming the female **pronucleus** that unites with the male pronucleus to restore diploidy.",
+   "say": "Fertilisation typically occurs in the ampulla of the uterine tube. Fusion of sperm and egg membranes sparks an intracellular calcium wave that prompts the oocyte to complete meiosis two. Extruding the second polar body allows the male and female pronuclei to unite.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Anatomical Site",
+     "Biochemical Mechanism",
+     "Biological Outcome"
+    ],
+    "rows": [
+     [
+      "Spermatogenesis",
+      "Seminiferous tubules",
+      "Continuous mitotic and meiotic cycles",
+      "Produces millions of sperm daily"
+     ],
+     [
+      "Oocyte Meiosis I",
+      "Developing ovarian follicle",
+      "LH-mediated resumption of diplotene",
+      "Yields secondary oocyte and polar body"
+     ],
+     [
+      "Capacitation",
+      "Uterine and tubal lumen",
+      "Sterol removal and hyperactivation",
+      "Enables acrosomal exocytosis"
+     ],
+     [
+      "Fertilisation",
+      "Ampulla of fallopian tube",
+      "Pronuclear fusion and restoration of 46",
+      "Creates genetically unique zygote"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
