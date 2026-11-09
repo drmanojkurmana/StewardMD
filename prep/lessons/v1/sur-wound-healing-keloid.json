@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-wound-healing",
+ "subject": "surgery",
+ "title": "Keloid, Hypertrophic Scar, and Collagen Dynamics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Aberrant wound repair can lead to excessive cutaneous fibroblastic proliferation known as a **keloid**. Unlike normal physiological scars, a keloid exhibits aggressive local growth extending far beyond the original boundaries of the surgical or traumatic wound into adjacent normal dermis. Keloids occur most frequently in individuals with darker skin pigmentation and have a predilection for the earlobes, deltoid region, sternum, and upper back.",
+   "say": "Aberrant wound repair can generate a keloid, where excessive fibroblastic tissue extends beyond the original wound margins into healthy dermis. They occur more frequently in darker skin types across the sternum, deltoid, and earlobes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/surgical-wound-healing-and-scarring-fig1.webp",
+    "alt": "Keloid and hypertrophic scar pathology diagram.",
+    "caption": "Diagram illustrating excessive dermal collagen expansion in keloid formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinicians must accurately distinguish a keloid from a benign **hypertrophic scar** to select the appropriate therapeutic approach. Hypertrophic scars arise rapidly within weeks of cutaneous injury, remain strictly confined within the boundaries of the original incision, and frequently regress spontaneously over twelve to eighteen months. They typically develop across anatomical areas subjected to significant dynamic skin tension, such as flexor joint creases and the anterior chest.",
+   "say": "Clinicians must distinguish a keloid from a hypertrophic scar. Hypertrophic scars remain confined within the original cut borders, appear within weeks, and often improve spontaneously over time.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypertrophic Scar",
+     "points": [
+      "Confined strictly to original wound borders",
+      "Develops rapidly within 4 weeks of injury",
+      "Frequently regresses over 1 to 2 years",
+      "Strongly linked to physical skin tension"
+     ]
+    },
+    "right": {
+     "title": "Keloid",
+     "points": [
+      "Invades beyond original wound margins",
+      "Develops months or years after minor trauma",
+      "Rarely regresses and worsens over time",
+      "Genetic predilection and familial tendency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The biochemical distinction between physiological and pathological scarring lies in the synthesis and arrangement of **collagen type III**. In uninjured adult dermis, collagen type one comprises eighty percent of matrix protein while type three accounts for twenty percent. In keloids, immature collagen type three persists in abnormally elevated concentrations, failing to undergo normal enzymatic remodelling and forming thick, haphazardly arranged, hyalinized collagen whorls under light microscopy.",
+   "say": "Pathological scars exhibit abnormal persistence of collagen type three. In keloids, fibroblasts fail to replace immature type three collagen with structured type one bundles, producing disorganized hyalinized collagen whorls.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue Type",
+     "Collagen I to III Ratio",
+     "Microscopic Fibre Architecture",
+     "Myofibroblast Presence"
+    ],
+    "rows": [
+     [
+      "Normal adult dermis",
+      "4 to 1 ratio (80% type I)",
+      "Organized bundles parallel to skin lines",
+      "Absent in resting tissue"
+     ],
+     [
+      "Hypertrophic scar",
+      "Elevated type III (3 to 1 ratio)",
+      "Parallel collagen sheets within boundary",
+      "Abundant and active"
+     ],
+     [
+      "Keloid tissue",
+      "Markedly elevated type III (2 to 1)",
+      "Haphazard, hyalinized, glassy bundles",
+      "Sparse or absent in central core"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histologically, keloid specimens demonstrate prominent thick eosinophilic bands of **hyalinized collagen** bundles interspersed with proliferating fibroblasts and rich capillary loops. The dermal appendages, including hair follicles, sebaceous glands, and eccrine sweat ducts, are completely effaced by the expansile matrix. Mast cells are present in increased numbers within the active margin, releasing histamine and cytokines that generate persistent severe pruritus and localized discomfort.",
+   "say": "Histological sections of keloids show prominent hyalinized collagen bands and active fibroblasts that efface normal dermal appendages. Elevated mast cell counts produce prominent itching and local tenderness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lobomycosis-fig1.webp",
+    "alt": "Keloidal nodular pathology and dermal expansion.",
+    "caption": "Keloidal nodular lesions demonstrating dense fibrous tissue proliferation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "First-line conservative management of active keloids centers on **intralesional triamcinolone** acetonide injections administered every three to four weeks. Triamcinolone suppresses fibroblast proliferation, inhibits transforming growth factor beta transcription, and enhances collagenase activity within the scar matrix. Repeated injections produce progressive scar softening and flattening, though patients must be warned regarding potential local complications including cutaneous atrophy, telangiectasia, and skin hypopigmentation.",
+   "say": "First-line therapy for active keloids relies on intralesional triamcinolone injections every month. This corticosteroid inhibits fibroblast activity and induces collagenase, flattening the lesion over sequential treatments.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Assess scar: pruritus, firmness, and extension beyond margins"
+     },
+     {
+      "id": "inj",
+      "label": "Inject triamcinolone acetonide (10 to 40 mg/mL) into dense core"
+     },
+     {
+      "id": "int",
+      "label": "Repeat injections at 3 to 4 week intervals for 3 to 6 cycles"
+     },
+     {
+      "id": "out",
+      "label": "Symptom relief, matrix regression, and scar flattening achieved"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "inj"
+     ],
+     [
+      "inj",
+      "int"
+     ],
+     [
+      "int",
+      "out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical excision of a keloid as monotherapy must be strictly avoided because simple re-resection carries a devastating **keloid recurrence** rate approaching fifty to one hundred percent. When surgical excision is indicated for massive or functionally debilitating lesions, it must be performed with meticulous intralesional debulking, gentle tissue handling, and immediate multimodal adjuvant therapy, such as postoperative silicone gel sheeting, continuous pressure earrings, or superficial radiotherapy.",
+   "say": "Simple surgical excision alone carries a recurrence rate exceeding fifty percent. When surgery is necessary, surgeons perform intralesional excision paired with immediate adjuvant pressure garments or radiotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Primary Mechanism",
+     "Recurrence Rate (Monotherapy)",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Simple surgical excision",
+      "Mechanical removal of scar volume",
+      "50% to 100%",
+      "Contraindicated alone; causes larger recurrence"
+     ],
+     [
+      "Intralesional triamcinolone",
+      "Inhibits TGF-beta and boosts collagenase",
+      "< 30%",
+      "First-line therapy for symptomatic lesions"
+     ],
+     [
+      "Silicone gel sheeting",
+      "Hydrates stratum corneum, lowers capillary flow",
+      "Moderate",
+      "Standard preventative and adjuvant measure"
+     ],
+     [
+      "Postoperative radiotherapy",
+      "Ablates proliferating dermal fibroblasts",
+      "10% to 20%",
+      "Reserved for refractory recurrent keloids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical pressure therapy applying twenty to thirty millimetres of mercury across the healing scar counteracts capillary perfusion and induces localized tissue hypoxia. This cellular hypoxia decreases fibroblast proliferation and accelerates collagen degradation. Applied through customized **pressure garments** or spring-loaded ear clips worn for eighteen to twenty-four hours daily over six to twelve months, pressure therapy provides effective non-invasive control of hypertrophic burns scars.",
+   "say": "Pressure garments applying twenty to thirty millimetres of mercury induce local hypoxia that curbs fibroblast proliferation. Patients wear these garments for up to twenty-four hours daily following burn injuries.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adjuvant Pressure Therapy",
+     "points": [
+      "Delivers 20 to 30 mmHg continuous force",
+      "Worn 18 to 23 hours daily for 6 to 12 months",
+      "Induces mild hypoxia and collagen remodelling",
+      "Standard of care following severe deep burns"
+     ]
+    },
+    "right": {
+     "title": "Silicone Gel Sheeting",
+     "points": [
+      "Non-invasive occlusive silicone barrier",
+      "Restores epidermal stratum corneum hydration",
+      "Downregulates fibroblast cytokine signalling",
+      "Applied over closed surgical incisions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Refractory keloids that fail repeated corticosteroid injections and pressure regimens require multimodal escalation combining surgical excision with low-dose superficial **external beam radiotherapy**. Delivered within twenty-four to forty-eight hours of surgical closure in divided fractions of ten to fifteen Gray, radiation eliminates rapidly dividing wound fibroblasts before new abnormal collagen matrix can be deposited, substantially lowering long-term recurrence rates.",
+   "say": "Refractory keloids warrant multimodal treatment pairing surgical excision with superficial external beam radiation within forty-eight hours. Radiation targets proliferating fibroblasts to prevent aggressive recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "step1",
+      "label": "Careful intralesional surgical excision preserving clean margin"
+     },
+     {
+      "id": "step2",
+      "label": "Superficial radiotherapy (12 to 15 Gy) initiated within 24 hours"
+     },
+     {
+      "id": "step3",
+      "label": "Topical silicone gel sheeting applied once skin re-epithelialises"
+     },
+     {
+      "id": "step4",
+      "label": "Close long-term follow-up at 3, 6, and 12 months for recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "step1",
+      "step2"
+     ],
+     [
+      "step2",
+      "step3"
+     ],
+     [
+      "step3",
+      "step4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 6"
+}

@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "med-hiv",
+ "subject": "medicine",
+ "title": "Advanced AIDS Complications: Cryptococcus, CMV, and Kaposi Sarcoma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In patients with advanced human immunodeficiency virus infection and profound cellular immunosuppression (CD4 counts below one-hundred cells per microlitre), opportunistic fungal and viral pathogens emerge with devastating severity. The classic subacute meningoencephalitis presenting with unremitting headache, low-grade fevers, and marked intracranial hypertension is **cryptococcal meningitis**, driven by encapsulated Cryptococcus neoformans.",
+   "say": "In patients with advanced HIV infection and CD4 counts under one-hundred, opportunistic fungal and viral infections cause severe disease. The classic subacute meningoencephalitis presenting with unremitting headache, fever, and intracranial hypertension is cryptococcal meningitis, caused by Cryptococcus neoformans.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-opportunistic-long-case-fig1.webp",
+    "alt": "Spectrum of opportunistic infections and clinical manifestations in advanced AIDS.",
+    "caption": "Opportunistic infections and organ distribution in severe CD4 immunosuppression. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The management of cryptococcal meningitis in AIDS requires delicate therapeutic timing. Induction therapy begins with liposomal amphotericin B paired with flucytosine. However, to prevent catastrophic intracranial immune reconstitution inflammatory syndrome (IRIS) and fatal cerebral herniation, initiation of antiretroviral therapy must be strictly delayed until two to six weeks after starting effective antifungal **therapy**.",
+   "say": "Management of cryptococcal meningitis requires careful therapeutic timing. Induction begins with amphotericin B and flucytosine. However, to avoid fatal intracranial IRIS, starting antiretroviral therapy must be delayed two to six weeks after initiating antifungal treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "crypt",
+      "label": "Cryptococcal Meningitis Diagnosed"
+     },
+     {
+      "id": "antif",
+      "label": "Amphotericin B + Flucytosine Induction (2 wk)"
+     },
+     {
+      "id": "art",
+      "label": "Delay ART Initiation for 2 to 6 Weeks"
+     }
+    ],
+    "edges": [
+     [
+      "crypt",
+      "antif"
+     ],
+     [
+      "antif",
+      "art"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common vision-threatening opportunistic viral infection in patients with advanced AIDS whose CD4 count drops below fifty cells per microlitre is **CMV retinitis**, caused by reactivation of cytomegalovirus. Patients present with painless progressive visual blurring, floaters, and visual field scotomas. Fundoscopy demonstrates classic dense perivascular retinal haemorrhages with fluffy white granular exudates, described as scrambled eggs and ketchup.",
+   "say": "The most common vision-threatening opportunistic infection in patients with CD4 counts under fifty is CMV retinitis. Patients present with painless visual blurring, floaters, and scotomas. Fundoscopy reveals perivascular retinal haemorrhages with white granular exudates, described as scrambled eggs and ketchup.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CMV Retinitis",
+     "points": [
+      "Severe CD4 lymphopenia (< 50 cells / uL)",
+      "Painless progressive vision loss and floaters",
+      "Scrambled eggs and ketchup fundoscopic appearance",
+      "Treated with IV Ganciclovir OR Valganciclovir"
+     ]
+    },
+    "right": {
+     "title": "Ocular Toxoplasmosis",
+     "points": [
+      "Moderate immunosuppression (CD4 < 100)",
+      "Vitritis with headlight in the fog fundoscopy",
+      "Accompanied by active anterior uveitis",
+      "Treated with Pyrimethamine + Sulfadiazine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive first-line antiviral pharmacotherapy for CMV retinitis is oral **valganciclovir** (900 mg twice daily induction for twenty-one days, followed by 900 mg daily maintenance) or intravenous ganciclovir. Immediate-sight threatening lesions encroaching within fifteen-hundred micrometres of the fovea require adjunctive intravitreal ganciclovir or foscarnet injections to halt irreversible macular destruction.",
+   "say": "The first-line antiviral therapy for CMV retinitis is oral valganciclovir or intravenous ganciclovir. Sight-threatening lesions threatening the fovea mandate urgent adjunctive intravitreal injections of ganciclovir or foscarnet to prevent irreversible macular blindness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiviral Agent",
+     "Mechanism of Action",
+     "Primary Dose-Limiting Toxicity"
+    ],
+    "rows": [
+     [
+      "Ganciclovir / Valganciclovir",
+      "Inhibits viral DNA polymerase (guanosine analogue)",
+      "Dose-dependent bone marrow suppression (neutropenia)"
+     ],
+     [
+      "Foscarnet (Phosphonoformic acid)",
+      "Direct pyrophosphate analogue DNA polymerase inhibitor",
+      "Severe nephrotoxicity and symptomatic hypocalcaemia"
+     ],
+     [
+      "Cidofovir",
+      "Acyclic nucleoside phosphonate DNA inhibitor",
+      "Nephrotoxicity (co-administer with oral Probenecid)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A low-grade vascular spindle cell neoplasm strongly associated with human herpesvirus 8 (HHV-8, Kaposi sarcoma-associated herpesvirus) represents the most common AIDS-associated malignancy, universally designated as **Kaposi sarcoma**. Presenting as painless, non-pruritic, violaceous, purplish-brown cutaneous macules, plaques, and nodules, lesions involve the skin, oral mucosa (hard palate), gastrointestinal tract, and lungs.",
+   "say": "A vascular neoplasm strongly associated with human herpesvirus 8 represents the most common AIDS malignancy, designated as Kaposi sarcoma. Presenting as painless violaceous purplish-brown cutaneous plaques and nodules, it involves the skin, oral palate, gastrointestinal tract, and lungs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/kaposi-sarcoma-fig1.webp",
+    "alt": "Clinical appearance of violaceous cutaneous plaques and nodules in Kaposi sarcoma.",
+    "caption": "Violaceous dermal vascular plaques in AIDS-related Kaposi sarcoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histopathology of Kaposi sarcoma reveals proliferation of spindle-shaped endothelial cells forming slit-like vascular spaces containing extravasated erythrocytes, haemosiderin-laden macrophages, and positive immunohistochemical nuclear staining for **HHV-8** latency-associated nuclear antigen (LANA). The primary foundation of therapy is immediate antiretroviral initiation, which halts tumour progression and induces regression in localized disease.",
+   "say": "Histopathology of Kaposi sarcoma reveals proliferation of spindle endothelial cells forming slit-like vascular channels containing extravasated red cells and nuclear HHV-8 staining. The foundation of therapy is immediate antiretroviral therapy, which induces tumour regression in localized disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hhv8",
+      "label": "HHV-8 Infection + HIV Immunosuppression"
+     },
+     {
+      "id": "spin",
+      "label": "Endothelial Spindle Cell Proliferation & Slits"
+     },
+     {
+      "id": "art",
+      "label": "Immune Restoration with ART Induces Tumor Regression"
+     }
+    ],
+    "edges": [
+     [
+      "hhv8",
+      "spin"
+     ],
+     [
+      "spin",
+      "art"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention of mother-to-child transmission (**PMTCT**) has reduced vertical perinatal HIV transmission rates from over thirty percent to under one percent. Global guidelines mandate universal lifelong triple-drug antiretroviral therapy for all HIV-infected pregnant women from the earliest recognition of pregnancy, combined with elective caesarean section if maternal viral load exceeds one-thousand copies per millilitre near term.",
+   "say": "Prevention of mother-to-child transmission has reduced vertical perinatal HIV transmission from thirty percent to under one percent. Guidelines mandate lifelong triple-drug antiretroviral therapy for all pregnant women with HIV, combined with infant prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transmission Period",
+     "Perinatal Risk Factor",
+     "Effective Preventive Strategy"
+    ],
+    "rows": [
+     [
+      "Antenatal (In Utero)",
+      "High maternal plasma viral load",
+      "Continuous maternal triple ART (TLD) throughout gestation"
+     ],
+     [
+      "Intrapartum (Delivery)",
+      "Prolonged rupture of membranes; vaginal birth",
+      "IV Zidovudine if viral load > 1000; scheduled Cesarean delivery"
+     ],
+     [
+      "Postnatal (Breastfeeding)",
+      "Viral shedding in breast milk",
+      "Maternal viral suppression; infant daily Nevirapine or Zidovudine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-exposure prophylaxis (PEP) guidelines distinguish occupational from non-occupational exposure. For high-risk mucous membrane or percutaneous blood exposures to an HIV-positive source, three-drug **prophylaxis** with tenofovir, lamivudine, and dolutegravir must begin within two to seventy-two hours, maintaining strict twenty-eight-day adherence to abort established systemic retroviral integration.",
+   "say": "Post-exposure prophylaxis guidelines distinguish occupational from non-occupational exposures. For high-risk percutaneous exposures to an HIV-positive source, three-drug prophylaxis with tenofovir, lamivudine, and dolutegravir must begin within seventy-two hours for twenty-eight days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "need",
+      "label": "High-Risk Percutaneous Needlestick Exposure"
+     },
+     {
+      "id": "pep",
+      "label": "Initiate TLD Within 72 Hours (Ideally < 2 hr)"
+     },
+     {
+      "id": "comp",
+      "label": "Complete 28-Day Regimen with Repeat Serology"
+     }
+    ],
+    "edges": [
+     [
+      "need",
+      "pep"
+     ],
+     [
+      "pep",
+      "comp"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 202"
+}

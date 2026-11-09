@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-adrenal",
+ "subject": "medicine",
+ "title": "Adrenal Crisis and Diagnostic Stimulation Testing",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Establishing the definitive diagnosis of primary or secondary adrenocortical insufficiency requires dynamic provocation of adrenal reserve. The short **acth stimulation test** (cosyntropin or Synacthen test) represents the gold-standard diagnostic modality worldwide. Administering two hundred and fifty micrograms of synthetic ACTH intramuscularly or intravenously stimulates maximal glucocorticoid synthesis in functional adrenocortical tissue. Serum cortisol concentrations are measured at baseline, thirty minutes, and sixty minutes following administration. A normal intact adrenal axis generates a peak serum cortisol concentration of eighteen micrograms per decilitre or higher.",
+   "say": "Establishing the definitive diagnosis of adrenocortical insufficiency requires dynamic provocation of adrenal reserve. The short acth stimulation test represents the gold-standard diagnostic modality worldwide. Administering two hundred and fifty micrograms of synthetic ACTH stimulates maximal glucocorticoid synthesis in functional adrenal tissue. Serum cortisol is measured at baseline, thirty minutes, and sixty minutes. A normal adrenal axis generates a peak cortisol of eighteen micrograms per decilitre or higher, whereas blunted responses confirm insufficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenal-addison-cushing-crisis-long-case-fig1.webp",
+    "alt": "Clinical and laboratory diagnostic comparison between primary adrenal insufficiency and Cushing syndrome.",
+    "caption": "Diagnostic discrimination and clinical features of Addison disease and Cushing syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute, decompensated circulatory collapse resulting from absolute or relative glucocorticoid deficiency represents a medical emergency carrying significant mortality. An acute **adrenal crisis** is typically precipitated by acute infection, trauma, surgery, or dehydration in patients with pre-existing Addison disease or sudden cessation of chronic exogenous corticosteroids. Patients present with severe refractory hypotension resistant to vasopressors, hypovolaemic shock, acute abdominal pain mimicking a surgical abdomen, vomiting, delirium, and profound lethargy. Immediate management mandates aggressive fluid resuscitation with isotonic normal saline and five percent dextrose, alongside parenteral corticosteroid administration.",
+   "say": "Acute circulatory collapse resulting from absolute glucocorticoid deficiency represents a medical emergency carrying significant mortality. An acute adrenal crisis is precipitated by infection, trauma, surgery, or abrupt cessation of chronic corticosteroids. Patients present with refractory hypotension, hypovolaemic shock, acute abdominal pain, vomiting, and lethargy. Immediate management mandates aggressive fluid resuscitation with normal saline and dextrose alongside parenteral corticosteroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+    "alt": "Pathophysiological cascade and circulatory collapse of acute adrenal crisis.",
+    "caption": "Pathophysiological cascade and haemodynamic collapse of acute adrenal crisis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency pharmacological intervention must never be delayed to perform prolonged diagnostic biochemical testing in suspected acute crisis. Intravenous **hydrocortisone** serves as the definitive lifesaving glucocorticoid, administered immediately as a one-hundred-milligram intravenous bolus followed by one hundred milligrams every eight hours. At doses exceeding fifty milligrams daily, hydrocortisone provides sufficient intrinsic mineralocorticoid activity, rendering concurrent fludrocortisone unnecessary during initial resuscitation. Once the acute crisis resolves, corticosteroids are gradually tapered to physiological oral maintenance, typically twenty milligrams of hydrocortisone daily.",
+   "say": "Emergency pharmacological intervention must never be delayed for diagnostic testing in suspected acute crisis. Intravenous hydrocortisone serves as the lifesaving glucocorticoid, administered immediately as a one-hundred-milligram bolus followed by one hundred milligrams every eight hours. At high doses, hydrocortisone provides intrinsic mineralocorticoid activity, rendering concurrent fludrocortisone unnecessary during acute resuscitation. Patients are subsequently tapered to oral maintenance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sx",
+      "label": "Suspected acute adrenal crisis: Refractory hypotension + shock"
+     },
+     {
+      "id": "bolus",
+      "label": "Immediate IV Hydrocortisone 100 mg bolus (Do NOT wait for test results)"
+     },
+     {
+      "id": "fluids",
+      "label": "Aggressive IV 0.9% Saline + 5% Dextrose (Correct volume and hypoglycaemia)"
+     },
+     {
+      "id": "maint",
+      "label": "Hydrocortisone 100 mg IV q8h until stable, then taper to oral maintenance"
+     }
+    ],
+    "edges": [
+     [
+      "sx",
+      "bolus"
+     ],
+     [
+      "bolus",
+      "fluids"
+     ],
+     [
+      "fluids",
+      "maint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The distinctive physical sign of generalized cutaneous and mucosal bronze pigmentation distinguishes primary adrenal failure from secondary hypothalamic-pituitary disorders. Clinical **hyperpigmentation** develops insidiously in primary Addison disease because the absence of negative cortisol feedback releases hypothalamic corticotropin-releasing hormone and pituitary pro-opiomelanocortin (POMC) transcription. Enzymatic cleavage of POMC generates both ACTH and alpha-melanocyte-stimulating hormone, stimulating melanocortin-1 receptors on basal epidermal melanocytes. Melanin is preferentially deposited in sun-exposed areas, skin creases of palms and soles, pressure points (elbows, knees), recent scars, and oral buccal mucosa.",
+   "say": "The distinctive physical sign of generalized cutaneous and mucosal bronze pigmentation distinguishes primary adrenal failure from secondary hypothalamic-pituitary disorders. Clinical hyperpigmentation develops insidiously in primary Addison disease because the absence of negative cortisol feedback releases pro-opiomelanocortin transcription. Enzymatic cleavage generates ACTH and melanocyte-stimulating hormone, stimulating melanocytes. Melanin is preferentially deposited in skin creases, pressure points, and oral buccal mucosa.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Adrenal Failure (Addison)",
+     "points": [
+      "Diffuse bronze cutaneous hyperpigmentation",
+      "Prominent buccal and gingival mucosal pigmentation",
+      "Markedly elevated circulating plasma ACTH and POMC",
+      "Deficiency of both cortisol and aldosterone"
+     ]
+    },
+    "right": {
+     "title": "Secondary Adrenal Failure (Pituitary)",
+     "points": [
+      "Pale, alabaster skin appearance (no hyperpigmentation)",
+      "Normal oral mucous membranes and skin creases",
+      "Deficient pituitary ACTH secretion",
+      "Aldosterone is strictly preserved by the renin system"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Widespread abdominal cross-sectional imaging frequently uncovers unsuspected, asymptomatic adrenal masses requiring systematic clinical discrimination. An **adrenal incidentaloma** is defined as an asymptomatic adrenal mass measuring one centimetre or larger detected on imaging performed for unrelated indications. Management mandates two critical questions: is the mass hormonally functional, and is it malignant. Every patient requires biochemical screening: an overnight one-milligram dexamethasone suppression test for cortisol, metanephrines for phaeochromocytoma, and aldosterone-renin ratio if hypertensive. Masses exceeding four centimetres warrant surgical resection.",
+   "say": "Widespread cross-sectional imaging frequently uncovers unsuspected adrenal masses requiring systematic clinical discrimination. An adrenal incidentaloma is defined as an asymptomatic adrenal mass measuring one centimetre or larger detected on unrelated imaging. Management mandates determining whether the mass is hormonally functional or malignant. Every patient requires biochemical screening for cortisol, metanephrines, and aldosterone. Masses exceeding four centimetres or showing non-contrast CT attenuation above ten Hounsfield units warrant surgical adrenalectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Metric",
+     "Benign Adenoma Profile",
+     "Suspicious / Malignant Profile"
+    ],
+    "rows": [
+     [
+      "Size Threshold",
+      "< 4 centimetres in diameter",
+      ">= 4 centimetres in diameter"
+     ],
+     [
+      "Unenhanced CT Attenuation",
+      "<= 10 Hounsfield Units (Lipid-rich)",
+      "> 10 Hounsfield Units (Lipid-poor)"
+     ],
+     [
+      "Contrast Washout Percentage",
+      "Absolute washout > 60% at 15 min",
+      "Absolute washout < 60% (Delayed washout)"
+     ],
+     [
+      "Hormonal Function Screening",
+      "Non-functional (~80% of cases)",
+      "Functional (Pheo, Cushing, Conn syndrome)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fulminant bilateral haemorrhagic infarction of the adrenal glands triggered by overwhelming meningococcal septicaemia carries devastating morbidity. Classically described as **waterhouse-friderichsen syndrome**, this catastrophic disorder arises during Neisseria meningitidis or Pseudomonas bacteraemia. Endotoxin-induced widespread disseminated intravascular coagulation, endothelial necrosis, and severe microcirculatory thrombosis trigger massive bilateral adrenocortical haemorrhage. Patients present with rapidly progressive septic shock, widespread purpura fulminans, petechial rash, profound acute adrenal crisis, and multiorgan failure. Management requires emergent intensive care resuscitation, high-dose intravenous ceftriaxone, aggressive volume resuscitation, and stress-dose intravenous hydrocortisone.",
+   "say": "Fulminant bilateral haemorrhagic infarction of the adrenal glands triggered by overwhelming meningococcal septicaemia carries devastating morbidity. Classically described as waterhouse-friderichsen syndrome, this catastrophic disorder arises during Neisseria meningitidis bacteraemia. Endotoxin-induced disseminated intravascular coagulation and severe microcirculatory thrombosis trigger massive bilateral adrenocortical haemorrhage. Patients present with septic shock, purpura fulminans, and acute adrenal crisis, requiring emergent antibiotics, fluids, and stress-dose hydrocortisone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sepsis",
+      "label": "Fulminant meningococcaemia: Endotoxin storm + severe DIC"
+     },
+     {
+      "id": "haem",
+      "label": "Microcirculatory thrombosis -> Bilateral adrenal haemorrhagic necrosis"
+     },
+     {
+      "id": "crisis",
+      "label": "Waterhouse-Friderichsen: Purpura fulminans + acute adrenal crisis + septic shock"
+     }
+    ],
+    "edges": [
+     [
+      "sepsis",
+      "haem"
+     ],
+     [
+      "haem",
+      "crisis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Precise clinical **adrenal insufficiency differentiation** determines lifelong mineralocorticoid replacement requirements. While the standard cosyntropin stimulation test evaluates adrenal cortex responsiveness, measuring baseline morning plasma ACTH unequivocally establishes anatomical level. In primary adrenal failure, plasma ACTH is markedly elevated above one hundred picograms per millilitre. In secondary central insufficiency, plasma ACTH is inappropriately normal or suppressed. In secondary disease, adrenal cortical atrophy occurs from chronic trophic deprivation, though the zona glomerulosa remains intact and fludrocortisone replacement is completely unnecessary.",
+   "say": "Differentiating primary from secondary adrenal insufficiency determines lifelong mineralocorticoid replacement requirements. While cosyntropin stimulation testing evaluates adrenal cortex responsiveness, measuring baseline plasma ACTH unequivocally establishes the anatomical level. In primary adrenal failure, plasma ACTH is markedly elevated. In secondary central insufficiency, plasma ACTH is inappropriately low. In secondary disease, the zona glomerulosa remains intact and fludrocortisone replacement is completely unnecessary.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Insufficiency (Addison)",
+     "points": [
+      "Adrenal cortical destruction (Autoimmune, TB)",
+      "Plasma ACTH markedly elevated (> 100 pg/mL)",
+      "Requires daily Hydrocortisone (15-20 mg)",
+      "Requires daily Fludrocortisone (0.05-0.1 mg)"
+     ]
+    },
+    "right": {
+     "title": "Secondary Insufficiency (Pituitary)",
+     "points": [
+      "Pituitary or hypothalamic failure (Macroadenoma)",
+      "Plasma ACTH inappropriately low or normal",
+      "Requires daily Hydrocortisone replacement",
+      "Fludrocortisone is NOT required (aldosterone intact)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patient education and self-management protocols represent the single most important defense against recurring adrenal crisis in chronic insufficiency. Every patient receiving chronic glucocorticoid therapy must carry a medical alert bracelet and emergency injectable **hydrocortisone education**. During mild febrile illness or minor trauma, patients are instructed to double their oral hydrocortisone dose for forty-eight hours (sick-day rules). For major surgical procedures, severe trauma, or persistent vomiting precluding oral ingestion, immediate parenteral administration of one hundred milligrams of hydrocortisone is mandatory, followed by urgent hospital admission.",
+   "say": "Patient education and self-management protocols represent the most important defense against recurring adrenal crisis in chronic insufficiency. Every patient receiving chronic glucocorticoids must carry a medical alert bracelet and emergency injectable hydrocortisone. During febrile illness or minor trauma, patients are instructed to double their oral hydrocortisone dose for forty-eight hours. For severe trauma or persistent vomiting, immediate parenteral hydrocortisone is mandatory followed by hospital admission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Baseline maintenance: Hydrocortisone 15-20 mg daily in divided doses"
+     },
+     {
+      "id": "sick",
+      "label": "Mild febrile illness / minor stress: Double or triple oral dose for 48 hours"
+     },
+     {
+      "id": "vomit",
+      "label": "Severe trauma / vomiting: 100 mg IM hydrocortisone injection + hospitalize"
+     }
+    ],
+    "edges": [
+     [
+      "stable",
+      "sick"
+     ],
+     [
+      "sick",
+      "vomit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

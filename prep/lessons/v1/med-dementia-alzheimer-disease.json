@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "med-dementia",
+ "subject": "medicine",
+ "title": "Alzheimer Disease and Lobar Dementia Syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The most common cause of progressive cognitive impairment and dementia in older adults is **Alzheimer disease**, accounting for sixty to eighty percent of all cases. Typically beginning insidiously after age sixty-five, it is characterised by early, prominent impairment of episodic memory (inability to encode and retrieve newly learned information), followed by progressive dysnomia, visuospatial disorientation, and executive dysfunction.",
+   "say": "The most common cause of progressive cognitive decline and dementia in older adults is Alzheimer disease, accounting for seventy percent of cases. Beginning insidiously after age sixty-five, it is characterized by early impairment of episodic memory, followed by naming difficulties, disorientation, and executive dysfunction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alzheimers-disease-fig1.webp",
+    "alt": "Fluorodeoxyglucose PET imaging showing bilateral temporoparietal hypometabolism.",
+    "caption": "Bilateral temporoparietal hypometabolism on PET imaging in Alzheimer disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The dual microscopic hallmarks required for neuropathological confirmation of Alzheimer disease comprise extracellular senile plaques and intracellular neurofibrillary lesions. Extracellular **amyloid plaques** consist of spherical aggregates of hydrophobic amyloid-beta 42 peptides, cleaved sequentially from the transmembrane amyloid precursor protein by beta-secretase (BACE1) and the intramembranous gamma-secretase complex.",
+   "say": "The dual microscopic hallmarks of Alzheimer disease comprise extracellular senile plaques and intracellular neurofibrillary lesions. Extracellular amyloid plaques consist of spherical aggregates of amyloid-beta 42 peptides, cleaved from amyloid precursor protein by beta and gamma secretases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alzheimers-disease-fig2.webp",
+    "alt": "Neuropathology showing extracellular amyloid plaques and intracellular neurofibrillary tangles.",
+    "caption": "Histopathological hallmarks of Alzheimer disease: amyloid plaques and tau tangles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The second essential pathological hallmark is the intracellular accumulation of **neurofibrillary tangles**, composed of hyperphosphorylated tau protein assembled into paired helical filaments. Under physiological conditions, tau stabilizes axonal microtubules. In Alzheimer disease, pathological hyperphosphorylation causes tau detachment from microtubules, leading to cytoskeletal collapse, disrupted axonal transport, and retrograde neuronal synaptic death.",
+   "say": "The second essential pathological hallmark is the intracellular accumulation of neurofibrillary tangles, composed of hyperphosphorylated tau protein. Under normal conditions, tau stabilizes microtubules. Hyperphosphorylation causes tau detachment, leading to cytoskeletal collapse and neuronal death.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amyloid-Beta Plaques",
+     "points": [
+      "Extracellular spherical core deposits",
+      "Composed of cleaved A-beta-42 peptide",
+      "Deposits early (10-20 years before symptoms)",
+      "Triggers neuroinflammation and synaptotoxicity"
+     ]
+    },
+    "right": {
+     "title": "Neurofibrillary Tangles",
+     "points": [
+      "Intracellular flame-shaped inclusions",
+      "Composed of hyperphosphorylated tau protein",
+      "Correlates directly with severity of cognitive loss",
+      "Spreads from entorhinal cortex to neocortex"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extensive loss of cholinergic projection neurons originating within the basal forebrain nucleus basalis of Meynert deprives the cerebral cortex and hippocampus of acetylcholine, impairing memory encoding. First-line symptomatic pharmacotherapy utilizes centrally acting acetylcholinesterase inhibitors such as **donepezil**, rivastigmine, and galantamine, which delay cognitive decline in mild to moderate disease.",
+   "say": "Extensive loss of cholinergic projection neurons within the basal forebrain nucleus basalis of Meynert deprives the cortex and hippocampus of acetylcholine. First-line symptomatic therapy utilizes acetylcholinesterase inhibitors such as donepezil, which delay cognitive decline in mild to moderate disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Pharmacological Mechanism",
+     "Approved Indication in Alzheimer Disease"
+    ],
+    "rows": [
+     [
+      "Donepezil (Aricept)",
+      "Reversible acetylcholinesterase inhibitor",
+      "Mild, moderate, and severe Alzheimer disease"
+     ],
+     [
+      "Rivastigmine (Exelon)",
+      "Dual acetyl- and butyryl-cholinesterase inhibitor",
+      "Mild to moderate AD; also approved in Parkinson dementia"
+     ],
+     [
+      "Galantamine (Razadyne)",
+      "AChE inhibitor + allosteric nicotinic modulator",
+      "Mild to moderate Alzheimer disease"
+     ],
+     [
+      "Memantine (Namenda)",
+      "Uncompetitive moderate-affinity NMDA antagonist",
+      "Moderate to severe Alzheimer disease (monotherapy or combo)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In moderate to severe Alzheimer disease, chronic pathological overactivation of glutamate NMDA receptors leads to continuous neurotoxic calcium influx, excitotoxicity, and neuronal apoptosis. The uncompetitive, low-affinity NMDA receptor antagonist **memantine** selectively blocks excessive pathological tonic glutamate stimulation while preserving physiological neurotransmission, and is frequently co-prescribed alongside donepezil.",
+   "say": "In moderate to severe Alzheimer disease, overactivation of glutamate NMDA receptors leads to neurotoxic calcium influx and excitotoxicity. The uncompetitive NMDA receptor antagonist memantine selectively blocks pathological glutamate stimulation while preserving normal transmission, frequently combined with donepezil.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "glut",
+      "label": "Pathological Tonic Glutamate Leak"
+     },
+     {
+      "id": "nmda",
+      "label": "Continuous NMDA Receptor Activation"
+     },
+     {
+      "id": "mem",
+      "label": "Memantine Blockade Halts Calcium Influx"
+     }
+    ],
+    "edges": [
+     [
+      "glut",
+      "nmda"
+     ],
+     [
+      "nmda",
+      "mem"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The second most prevalent aetiology of cognitive impairment in older adults is **vascular dementia**. Arising from strategic territorial strokes, multi-infarct cortical damage, or chronic subcortical ischaemic small vessel lipohyalinosis (Binswanger disease), it typically presents with a stepwise, fluctuating clinical deterioration, prominent early executive dysfunction, slowed mental processing speed, and extensive periventricular white matter hyperintensities on T2/FLAIR MRI.",
+   "say": "The second most prevalent cause of cognitive impairment in older adults is vascular dementia. Arising from territorial strokes or chronic subcortical small vessel disease, it presents with a stepwise fluctuating decline, early executive dysfunction, psychomotor slowing, and extensive white matter hyperintensities on brain MRI.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alzheimer Disease",
+     "points": [
+      "Insidious onset with smooth, continuous progression",
+      "Early prominent impairment of episodic memory",
+      "Hippocampal and temporoparietal cortical atrophy",
+      "Normal motor examination in early stages"
+     ]
+    },
+    "right": {
+     "title": "Vascular Dementia",
+     "points": [
+      "Stepwise, abrupt, or fluctuating clinical decline",
+      "Early executive dysfunction and processing slowing",
+      "Extensive white matter lesions, lacunes, infarcts",
+      "Focal neurological signs (pseudobulbar palsy, gait ataxia)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A focal cortical dementia syndrome presenting typically before sixty-five years of age with profound personality changes, social disinhibition, loss of empathy, apathy, hyperorality, and compulsive stereotypic behaviours is behavioural-variant **frontotemporal dementia** (bvFTD). In sharp contrast to Alzheimer disease, episodic memory and visuospatial orientation remain strikingly preserved during early stages.",
+   "say": "A focal cortical dementia presenting before sixty-five years with personality change, social disinhibition, loss of empathy, and compulsive behaviours is frontotemporal dementia. In contrast to Alzheimer disease, episodic memory and visuospatial orientation remain preserved during early stages.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ftd",
+      "label": "Early Presenile Onset (< 65 yr)"
+     },
+     {
+      "id": "pers",
+      "label": "Social Disinhibition & Apathy"
+     },
+     {
+      "id": "atrop",
+      "label": "Selective Frontal & Temporal Lobar Atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "ftd",
+      "pers"
+     ],
+     [
+      "pers",
+      "atrop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neuropathologically, frontotemporal lobar degeneration exhibits knife-blade atrophy of frontal and temporal lobes with neuronal loss and astrocytic gliosis. Cases divide pathologically into those containing hyperphosphorylated **tau** inclusions (FTLD-tau, including Pick bodies) versus those containing ubiquitin and TAR DNA-binding protein 43 inclusions (FTLD-TDP), frequently linked genetically to C9orf72 hexanucleotide expansions.",
+   "say": "Neuropathologically, frontotemporal lobar degeneration exhibits severe atrophy of frontal and temporal lobes with neuronal loss. Cases divide pathologically into those containing tau inclusions, including Pick bodies, versus those containing TDP-43 inclusions, frequently linked to C9orf72 genetic expansions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dementia Syndrome",
+     "Primary Proteinopathy",
+     "Key Neuroimaging Pattern",
+     "Distinctive Clinical Features"
+    ],
+    "rows": [
+     [
+      "Alzheimer Disease",
+      "Extracellular A-beta + Intracellular Tau",
+      "Bilateral hippocampal & temporoparietal atrophy",
+      "Early episodic amnesia, apraxia, agnosia"
+     ],
+     [
+      "Vascular Dementia",
+      "Cerebral lipohyalinosis & atherosclerosis",
+      "Extensive leukoaraiosis, lacunes, cortical infarcts",
+      "Stepwise decline, executive dysexecutive syndrome"
+     ],
+     [
+      "Frontotemporal Dementia",
+      "Tau (Pick bodies) OR TDP-43 inclusions",
+      "Asymmetric frontal and anterior temporal atrophy",
+      "Disinhibition, loss of empathy, preserved memory early"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 426"
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "med-epilepsy",
+ "subject": "medicine",
+ "title": "Antiseizure Medications and Status Epilepticus Protocol",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The rapid-acting benzodiazepine of absolute first-line choice in the emergency resuscitation of convulsive status epilepticus is intravenous **lorazepam** (0.1 mg/kg, typically 4 mg IV bolus). By binding allosterically to gamma-aminobutyric acid type A (GABA-A) receptors, it enhances inhibitory chloride conductance, hyperpolarising neuronal membranes to terminate sustained ictal discharges.",
+   "say": "The rapid-acting benzodiazepine of first-line choice in convulsive status epilepticus is intravenous lorazepam. By binding allosterically to GABA-A receptors, it enhances inhibitory chloride conductance, hyperpolarising neuronal membranes to terminate sustained seizure activity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-diazepam.webp",
+    "alt": "Mechanism of benzodiazepine GABA-A chloride channel opening and hyperpolarisation.",
+    "caption": "Benzodiazepine allosteric modulation of GABA-A receptor chloride influx. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "If status epilepticus continues beyond five minutes despite intravenous lorazepam, urgent second-line non-sedating antiepileptic therapy must be infused immediately. Intravenous levetiracetam (60 mg/kg), fosphenytoin (20 mg PE/kg), or sodium **valproate** (40 mg/kg) provide equivalent efficacy for terminating established status epilepticus, avoiding sedative respiratory depression and preserving airway reflexes.",
+   "say": "If status epilepticus continues beyond five minutes despite intravenous lorazepam, second-line non-sedating therapy must be infused. Intravenous levetiracetam, fosphenytoin, or sodium valproate provide equivalent efficacy for terminating established status epilepticus without causing respiratory depression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emergency Phase",
+     "Time Window",
+     "First-Line Therapeutic Regimen",
+     "Key Monitoring Parameters"
+    ],
+    "rows": [
+     [
+      "Impending Status",
+      "0 to 5 minutes",
+      "Supportive airway, high-flow O2, check fingerstick glucose",
+      "Pulse oximetry, blood pressure"
+     ],
+     [
+      "Established Status",
+      "5 to 20 minutes",
+      "IV Lorazepam 4 mg (repeat once at 5-10 min)",
+      "Respiratory rate, sedation"
+     ],
+     [
+      "Second-Line Infusion",
+      "20 to 40 minutes",
+      "IV Levetiracetam OR Fosphenytoin OR Valproate",
+      "ECG monitoring (fosphenytoin arrhythmia)"
+     ],
+     [
+      "Refractory Status",
+      "> 40 minutes",
+      "General anaesthesia: IV Propofol, Midazolam, or Ketamine",
+      "Intubation, continuous cEEG burst suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A broad-spectrum antiepileptic drug that selectively binds the synaptic vesicle glycoprotein SV2A to inhibit calcium-dependent exocytosis of excitatory neurotransmitters is **levetiracetam**. Lacking cytochrome P450 hepatic enzyme induction or major drug-drug interactions, it represents a versatile first-line agent for both focal and generalised seizures, though behavioural irritability requires clinical monitoring.",
+   "say": "A broad-spectrum antiepileptic drug that selectively binds the synaptic vesicle protein SV2A is levetiracetam. Lacking cytochrome P450 interactions, it represents a versatile first-line agent for focal and generalized seizures, though behavioral changes require monitoring.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/seizure-epilepsy-fig2.webp",
+    "alt": "Molecular synaptic targets and mechanisms of modern antiepileptic drugs.",
+    "caption": "Synaptic mechanisms of antiepileptic agents targeting ion channels and vesicular release. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The traditional first-line drug of choice for focal seizures is the voltage-gated sodium channel blocker **carbamazepine**. It stabilises sodium channels in their inactivated state, blocking high-frequency repetitive discharges. However, because carbamazepine can exacerbate generalised absence and myoclonic seizures, accurate electroclinical distinction between focal and generalised onset is mandatory before initiation.",
+   "say": "The traditional first-line drug for focal seizures is the voltage-gated sodium channel blocker carbamazepine. It stabilises sodium channels in their inactivated state. However, because carbamazepine can exacerbate absence and myoclonic seizures, confirming focal onset is essential before treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broad-Spectrum AEDs",
+     "points": [
+      "Levetiracetam, Valproate, Lamotrigine, Topiramate",
+      "Safe and effective for focal AND generalised seizures",
+      "Treats JME, absence, and GTC seizures",
+      "Drug of choice when seizure type is uncertain"
+     ]
+    },
+    "right": {
+     "title": "Narrow-Spectrum AEDs",
+     "points": [
+      "Carbamazepine, Phenytoin, Oxcarbazepine, Gabapentin",
+      "Indicated strictly for focal onset seizures",
+      "Exacerbates absence and myoclonic seizures",
+      "Avoid in juvenile myoclonic epilepsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adverse drug reactions to older sodium channel blockers require close therapeutic drug monitoring. Acute concentration-dependent **phenytoin toxicity** manifests with horizontal gaze-evoked nystagmus (levels over twenty micrograms per millilitre), cerebellar ataxia, dysmetria, and stupor. Chronic toxicity produces non-dose-dependent cosmetic side effects, including gingival hyperplasia, hirsutism, peripheral neuropathy, and osteomalacia.",
+   "say": "Adverse reactions to older sodium channel blockers require close therapeutic drug monitoring. Acute concentration-dependent phenytoin toxicity manifests with horizontal nystagmus, cerebellar ataxia, dysmetria, and stupor. Chronic toxicity produces gingival hyperplasia, hirsutism, and peripheral neuropathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phenytoin Plasma Concentration",
+     "Characteristic Neurological Signs",
+     "Clinical Action Required"
+    ],
+    "rows": [
+     [
+      "10 to 20 mcg/mL",
+      "Therapeutic window",
+      "Optimal seizure control without overt toxicity"
+     ],
+     [
+      "20 to 30 mcg/mL",
+      "Horizontal gaze-evoked nystagmus",
+      "Mild toxicity; reduce daily maintenance dosage"
+     ],
+     [
+      "30 to 40 mcg/mL",
+      "Prominent cerebellar ataxia, dysarthria, tremor",
+      "Moderate toxicity; hold dose and check free levels"
+     ],
+     [
+      "> 40 mcg/mL",
+      "Lethargy, stupor, coma, paradoxical seizures",
+      "Severe toxicity; supportive care and hemodialysis eval"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive neurophysiological investigation for evaluating suspected seizures, classifying epilepsy syndromes, and detecting non-convulsive status epilepticus is the electroencephalogram (**EEG**). Surface electrodes record postsynaptic cortical pyramidal potentials, identifying interictal epileptiform biomarkers (sharp waves, spikes, spike-wave complexes) and guiding safe pharmacological withdrawal.",
+   "say": "The definitive neurophysiological test for evaluating suspected seizures and detecting non-convulsive status epilepticus is the electroencephalogram. Surface electrodes record cortical potentials, identifying interictal epileptiform biomarkers such as spikes and spike-wave complexes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clin",
+      "label": "Suspected First Seizure"
+     },
+     {
+      "id": "eeg",
+      "label": "Routine / Sleep-Deprived EEG"
+     },
+     {
+      "id": "syn",
+      "label": "Syndromic Classification & Targeted AED"
+     }
+    ],
+    "edges": [
+     [
+      "clin",
+      "eeg"
+     ],
+     [
+      "eeg",
+      "syn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following a focal motor seizure, transient focal neurological weakness affecting the previously convulsing limb or hemibody is recognised as **Todd paralysis**. Resolving spontaneously within minutes to thirty-six hours, this postictal motor exhaustion results from prolonged local neuronal hyperpolarisation and transient metabolic exhaustion of the motor cortex, mimicking an acute stroke.",
+   "say": "Following a focal motor seizure, transient weakness affecting the previously convulsing limb is recognized as Todd paralysis. Resolving spontaneously within minutes to thirty-six hours, this postictal weakness results from temporary metabolic exhaustion of the motor cortex, mimicking an acute stroke.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Todd Paralysis",
+     "points": [
+      "Preceded by witnessed focal motor seizure activity",
+      "Transient hemiparesis or aphasia",
+      "Completely resolves within 24 to 36 hours",
+      "Normal acute diffusion MRI excluding stroke"
+     ]
+    },
+    "right": {
+     "title": "Acute Ischaemic Stroke",
+     "points": [
+      "Sudden onset neurological deficit without seizure",
+      "Persistent hemiparesis or facial droop",
+      "Requires immediate emergency reperfusion",
+      "Diffusion-weighted MRI confirms restricted diffusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Paroxysmal clinical episodes resembling epileptic seizures that lack ictal epileptiform cortical electrophysiological discharges are classified as **psychogenic non-epileptic seizures** (PNES). Distinguishing semiological clues include forced eyelid closure against examination, asynchronous out-of-phase thrashing limb movements, pelvic thrusting, side-to-side head shaking, ictal crying, and absent postictal acidosis.",
+   "say": "Paroxysmal episodes resembling epileptic seizures that lack epileptiform discharges on EEG are classified as psychogenic non-epileptic seizures. Distinguishing clinical clues include forced eyelid closure against opening, out-of-phase thrashing, pelvic thrusting, and preserved pupillary light reflexes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Semiological Feature",
+     "Epileptic Seizure",
+     "Psychogenic Non-Epileptic Seizure (PNES)"
+    ],
+    "rows": [
+     [
+      "Eyes During Episode",
+      "Open, fixed gaze or deviated",
+      "Forcefully closed; resists active manual opening"
+     ],
+     [
+      "Motor Movement Pattern",
+      "Synchronous, rhythmic, in-phase clonic jerking",
+      "Asynchronous, out-of-phase thrashing, pelvic thrusting"
+     ],
+     [
+      "Ictal Electroencephalography",
+      "Synchronous epileptiform spike discharges",
+      "Normal background rhythm with muscle artifact"
+     ],
+     [
+      "Postictal Serum Prolactin",
+      "Markedly elevated (2-3 times baseline)",
+      "Normal baseline concentration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 425"
+}

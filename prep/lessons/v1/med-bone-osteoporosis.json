@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "med-bone",
+ "subject": "medicine",
+ "title": "Osteoporosis and Metabolic Bone Disorders",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Progressive deterioration of skeletal microarchitecture accompanied by low bone mineral density and heightened fracture susceptibility defines the systemic disorder **osteoporosis**. Predominating in postmenopausal females from estrogen deprivation and in older adults from senile uncoupling of bone remodeling, it remains entirely asymptomatic until low-trauma fragility fractures occur. The most frequent fracture sites include the thoracic and lumbar vertebral bodies (producing wedge compression fractures, kyphosis, and height loss), the femoral neck and intertrochanteric hip, and the distal radius (Colles fracture). Clinical evaluation combines fall risk assessment, biochemical mineral profiling, and quantitative densitometry.",
+   "say": "Progressive deterioration of skeletal microarchitecture accompanied by low bone mineral density and fracture susceptibility defines osteoporosis. Predominating in postmenopausal females from estrogen loss and in older adults from senile remodeling failure, it remains asymptomatic until low-trauma fragility fractures occur. Common fracture sites include thoracic and lumbar vertebrae, the femoral neck, and the distal radius. Evaluation combines fall risk assessment, biochemical profiling, and quantitative densitometry.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/osteoporosis-fig1.webp",
+    "alt": "Bone microarchitecture changes in osteoporosis showing cortical thinning and trabecular disconnection.",
+    "caption": "Trabecular bone loss and structural thinning predisposing to fragility fractures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dual-energy x-ray absorptiometry represents the gold-standard imaging modality for quantifying areal bone mineral density and fracture risk. Performing a central **dexa scan** of the lumbar spine and proximal femur measures bone mineral content in grams per square centimetre. Results are reported as a T-score, reflecting standard deviations from a young adult healthy reference population. According to World Health Organization criteria, a T-score of minus two point five or lower defines osteoporosis, while values between minus one and minus two point five define osteopenia.",
+   "say": "Dual-energy x-ray absorptiometry represents the gold-standard imaging modality for quantifying bone mineral density and fracture risk. Performing a central dexa scan of the lumbar spine and proximal femur measures bone mineral content. Results are reported as a t-score, reflecting standard deviations from a young adult reference population. According to criteria, a T-score of minus two point five or lower defines osteoporosis, while values between minus one and minus two point five define osteopenia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Category",
+     "T-Score Definition (SD)",
+     "Clinical Significance",
+     "Typical Management"
+    ],
+    "rows": [
+     [
+      "Normal Bone Density",
+      "T-score >= -1.0",
+      "Low 10-year fracture risk",
+      "Adequate calcium and vitamin D intake"
+     ],
+     [
+      "Osteopenia (Low Bone Mass)",
+      "-1.0 > T-score > -2.5",
+      "Moderate fracture risk",
+      "Calculate FRAX; treat if high risk"
+     ],
+     [
+      "Osteoporosis",
+      "T-score <= -2.5",
+      "High fragility fracture risk",
+      "Pharmacological antiresorptive or anabolic therapy"
+     ],
+     [
+      "Severe (Established) Osteoporosis",
+      "T-score <= -2.5 plus fragility fracture",
+      "Very high imminent fracture risk",
+      "Parenteral anabolic therapy (e.g. Teriparatide)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Integrating clinical risk factors with bone mineral density calculates the ten-year probability of catastrophic skeletal fractures. The clinical **frax** tool calculates individual fracture risk based on age, body mass index, prior fragility fracture, smoking, glucocorticoids, and femoral neck bone density. Pharmacological treatment is indicated when the ten-year probability of major osteoporotic fracture exceeds twenty percent, or hip fracture probability exceeds three percent. In postmenopausal women, oral alendronate or annual intravenous zoledronic acid constitutes first-line therapy, potently suppressing osteoclastic bone resorption.",
+   "say": "Integrating clinical risk factors with bone mineral density calculates the ten-year probability of catastrophic fractures. The clinical frax tool calculates individual risk based on age, body mass index, prior fractures, smoking, steroids, and femoral neck density. Treatment is indicated when ten-year major osteoporotic fracture probability exceeds twenty percent, or hip fracture exceeds three percent. Oral alendronate or annual intravenous zoledronic acid constitutes first-line therapy, suppressing osteoclastic bone resorption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "frax",
+      "label": "FRAX Score: 10-year major fracture > 20% OR hip fracture > 3%"
+     },
+     {
+      "id": "anti",
+      "label": "First-line: Oral Alendronate (70 mg/wk) OR IV Zoledronic acid (5 mg/yr)"
+     },
+     {
+      "id": "precaution",
+      "label": "Take on empty stomach upright 30 min (Alendronate); screen GFR (> 35 mL/min)"
+     }
+    ],
+    "edges": [
+     [
+      "frax",
+      "anti"
+     ],
+     [
+      "anti",
+      "precaution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted monoclonal antibody therapy and recombinant hormonal peptides provide alternative and anabolic mechanisms for high-risk bone disease. Administering subcutaneous **denosumab** every six months potently neutralizes receptor activator of nuclear factor-kappa B ligand (RANKL), completely blocking osteoclastogenesis and bone resorption in renal impairment where bisphosphonates are contraindicated. Discontinuing denosumab causes rebound bone loss. For severe osteoporosis with multiple vertebral fractures, daily subcutaneous teriparatide provides powerful osteoanabolic stimulation, directly promoting osteoblastic bone formation rather than antiresorptive maintenance.",
+   "say": "Targeted antibody therapy and recombinant peptides provide alternative and anabolic mechanisms for high-risk bone disease. Administering subcutaneous denosumab every six months neutralizes RANK ligand, blocking osteoclastogenesis even in renal impairment where bisphosphonates are contraindicated. Discontinuing denosumab causes rebound bone loss. For severe osteoporosis with multiple fractures, daily subcutaneous teriparatide provides powerful anabolic stimulation, promoting osteoblastic bone formation rather than antiresorptive maintenance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Denosumab (Antiresorptive)",
+     "points": [
+      "Fully human monoclonal antibody against RANKL",
+      "Subcutaneous injection 60 mg every 6 months",
+      "Safe in chronic kidney disease (no renal clearance)",
+      "Rebound vertebral fracture risk if abruptly stopped"
+     ]
+    },
+    "right": {
+     "title": "Teriparatide (Osteoanabolic)",
+     "points": [
+      "Recombinant human PTH (1-34) peptide",
+      "Daily subcutaneous 20 mcg injection for max 24 months",
+      "Directly stimulates osteoblasts to form new bone",
+      "Follow with antiresorptive drug to consolidate gains"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective skeletal mineralization of newly formed osteoid matrix distinguishes metabolic softening disorders from architectural thinning. In adults, **osteomalacia** stems from severe vitamin D deficiency or hypophosphataemia, producing widespread bone pain, proximal muscle weakness, and a waddling gait. In children before epiphyseal fusion, this defect produces rickets, characterized by craniotabes, rachitic rosary, and bowed legs. Pathognomonic radiographic findings in osteomalacia comprise Looser zones (pseudofractures): narrow, transverse, radiolucent bands perpendicular to the cortex on the femoral neck and pubic rami.",
+   "say": "Defective skeletal mineralization of osteoid matrix distinguishes metabolic softening disorders from architectural thinning. In adults, osteomalacia stems from severe vitamin D deficiency or hypophosphataemia, producing bone pain, proximal weakness, and a waddling gait. In children before epiphyseal fusion, this defect produces rickets with craniotabes, rachitic rosary, and bowed legs. Pathognomonic radiographic findings in osteomalacia comprise looser zones, representing radiolucent bands perpendicular to the cortex.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/metabolic-bone-osteoporosis-paget-long-case-fig1.webp",
+    "alt": "Radiographic and biochemical features differentiating osteoporosis, osteomalacia, and Paget disease.",
+    "caption": "Comparative features of osteomalacia looser zones, osteoporosis, and Pagetic remodeling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Disordered, focal, accelerated bone remodeling characterized by excessive osteoclastic resorption followed by chaotic osteoblastic bone deposition defines **paget disease of bone** (osteitis deformans). Most commonly affecting the pelvis, femur, lumbar spine, and skull, the remodeled bone is structurally weak, thickened, vascular, and deformed. Patients present with skeletal deformity, increasing hat size, bone pain, and sensorineural hearing loss from cranial nerve compression. The hallmark biochemical profile features a markedly raised alkaline phosphatase alongside normal serum calcium and phosphate.",
+   "say": "Disordered, focal bone remodeling characterized by excessive osteoclast resorption followed by chaotic osteoblast deposition defines paget disease of bone. Most commonly affecting the pelvis, femur, spine, and skull, the remodeled bone is thickened, vascular, and deformed. Patients present with skeletal deformity, increasing hat size, bone pain, and hearing loss from nerve compression. The hallmark biochemical profile features a markedly raised alkaline phosphatase with normal calcium and phosphate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paget Disease of Bone",
+     "points": [
+      "Focal, disorganized remodeling (Mosaic pattern of bone)",
+      "Markedly elevated serum alkaline phosphatase",
+      "Serum calcium and phosphate are strictly normal",
+      "First-line treatment: Single infusion IV Zoledronic acid"
+     ]
+    },
+    "right": {
+     "title": "Osteomalacia",
+     "points": [
+      "Generalized mineralization defect of newly formed osteoid",
+      "Elevated alkaline phosphatase with LOW serum calcium/PO4",
+      "Secondary hyperparathyroidism is uniformly present",
+      "First-line treatment: High-dose Ergocalciferol / Calcitriol"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic parathyroid overactivity and end-stage renal failure induce destructive cystic, fibrous, and sclerotic skeletal transformations. Severe hyperparathyroidism drives **osteitis fibrosa cystica**, characterized by subperiosteal bone resorption and brown tumours filled with hemosiderin-laden giant cells. In chronic kidney disease, altered mineral metabolism creates renal osteodystrophy, encompassing high-turnover bone disease and adynamic bone disease. Conversely, the rare congenital sclerosing disorder osteopetrosis results from defective osteoclast carbonic anhydrase II, producing dense, brittle bones with marrow failure.",
+   "say": "Chronic parathyroid overactivity and end-stage renal failure induce destructive cystic and sclerotic skeletal transformations. Severe hyperparathyroidism drives osteitis fibrosa cystica, characterized by subperiosteal bone resorption and brown tumours. In chronic kidney disease, altered mineral metabolism creates renal osteodystrophy, encompassing high-turnover disease and adynamic bone disease. Conversely, the rare sclerosing disorder osteopetrosis results from defective osteoclasts, producing dense, brittle bones with marrow failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Bone Disorder",
+     "Serum Calcium",
+     "Serum Phosphate",
+     "Alkaline Phosphatase",
+     "Intact PTH"
+    ],
+    "rows": [
+     [
+      "Osteoporosis",
+      "Normal",
+      "Normal",
+      "Normal",
+      "Normal"
+     ],
+     [
+      "Osteomalacia / Rickets",
+      "Low or normal",
+      "Low",
+      "Elevated",
+      "Elevated (Secondary HPT)"
+     ],
+     [
+      "Paget Disease of Bone",
+      "Normal",
+      "Normal",
+      "Markedly elevated",
+      "Normal"
+     ],
+     [
+      "Primary Hyperparathyroidism",
+      "Elevated",
+      "Low",
+      "Elevated",
+      "Elevated"
+     ],
+     [
+      "Renal Osteodystrophy",
+      "Low or normal",
+      "Elevated",
+      "Elevated",
+      "Markedly elevated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A comprehensive multidisciplinary approach optimizes skeletal integrity and prevents catastrophic fragility fractures in osteoporotic patients. Long-term surveillance mandates repeat dual-energy x-ray absorptiometry every two years during active therapy to monitor treatment response. In patients receiving oral bisphosphonates, considering a drug holiday after five years of oral therapy or three years of intravenous zoledronic acid balances fracture prevention against rare risks of atypical femoral fractures and osteonecrosis of the jaw, ensuring preserved **bone health**.",
+   "say": "A comprehensive multidisciplinary approach optimizes skeletal integrity and prevents catastrophic fragility fractures in osteoporotic patients. Long-term surveillance mandates repeat dual-energy x-ray absorptiometry every two years during therapy to monitor response. In patients receiving bisphosphonates, considering a drug holiday after five years of oral therapy balances fracture prevention against rare risks of atypical femoral fractures, ensuring preserved bone health.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "assess",
+      "label": "Baseline DEXA + FRAX score + Fall risk assessment"
+     },
+     {
+      "id": "rx",
+      "label": "Initiate antiresorptive or anabolic therapy + Calcium/Vitamin D"
+     },
+     {
+      "id": "reassess",
+      "label": "Repeat DEXA at 2 years; consider drug holiday at 5 years if stable"
+     }
+    ],
+    "edges": [
+     [
+      "assess",
+      "rx"
+     ],
+     [
+      "rx",
+      "reassess"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

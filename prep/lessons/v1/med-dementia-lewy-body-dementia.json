@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "med-dementia",
+ "subject": "medicine",
+ "title": "Lewy Body Dementia, Normal Pressure Hydrocephalus, and Prion Disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A neurodegenerative dementia characterised by the clinical triad of spontaneous parkinsonism, prominent cognitive fluctuations with pronounced variations in attention and alertness, and recurrent well-formed vivid visual hallucinations is **Lewy body dementia** (DLB). Pathologically, alpha-synuclein Lewy bodies deposit widely across neocortical and limbic structures as well as brainstem nuclei.",
+   "say": "A neurodegenerative dementia characterized by the triad of spontaneous parkinsonism, fluctuating cognitive attention, and recurrent vivid visual hallucinations is Lewy body dementia. Pathologically, alpha-synuclein Lewy bodies deposit widely across neocortical, limbic, and brainstem structures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dementia-with-lewy-bodies-fig1.webp",
+    "alt": "Cortical and subcortical Lewy body pathology and dopamine transporter imaging.",
+    "caption": "Neocortical alpha-synuclein Lewy bodies and basal ganglia loss in DLB. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A crucial diagnostic and therapeutic pitfall in Lewy body dementia is catastrophic neuroleptic sensitivity. Up to fifty percent of DLB patients treated with first-generation antipsychotics develop irreversible parkinsonian rigidity, severe autonomic instability, acute sedation, and cardiovascular collapse. Furthermore, the presence of **REM sleep behaviour disorder** (acting out dreams with loss of normal motor atonia) frequently precedes dementia onset by decades.",
+   "say": "A crucial diagnostic and therapeutic pitfall in Lewy body dementia is severe neuroleptic sensitivity. Half of patients given first-generation antipsychotics develop irreversible rigidity and autonomic collapse. Furthermore, REM sleep behaviour disorder frequently precedes dementia onset by decades.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Core Clinical Feature",
+     "Diagnostic Description",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Fluctuating Cognition",
+      "Marked variations in attention, alertness, and daytime somnolence",
+      "Distinguishes DLB from stable memory loss in AD"
+     ],
+     [
+      "Recurrent Visual Hallucinations",
+      "Detailed, well-formed, non-threatening figures (animals, people)",
+      "Occurs early; high specificity for cortical Lewy bodies"
+     ],
+     [
+      "Spontaneous Parkinsonism",
+      "Symmetrical bradykinesia, rigidity, postural instability",
+      "Tremor less prominent; levodopa response modest"
+     ],
+     [
+      "REM Sleep Behaviour Disorder",
+      "Loss of REM muscle atonia; dream enactment and kicking",
+      "Major early prodromal biomarker of synucleinopathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A potentially reversible neurosurgical cause of dementia characterised by ventricular enlargement out of proportion to cerebral sulcal atrophy is **normal pressure hydrocephalus** (NPH). Pathophysiologically caused by impaired cerebrospinal fluid absorption at arachnoid granulations, it presents with the classic Hakim-Adams triad of gait apraxia, urinary urgency or incontinence, and subcortical cognitive decline.",
+   "say": "A potentially reversible neurosurgical cause of dementia characterized by ventricular enlargement out of proportion to sulcal atrophy is normal pressure hydrocephalus. Caused by impaired CSF absorption at arachnoid granulations, it presents with the classic triad of gait apraxia, urinary incontinence, and cognitive decline.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/normal-pressure-hydrocephalus-fig1.webp",
+    "alt": "Cross-sectional MRI showing ventriculomegaly with Evans index > 0.3 in NPH.",
+    "caption": "Symmetrical ventriculomegaly and periventricular CSF transudation in NPH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial and most responsive component of the NPH clinical triad is the magnetic or glue-footed **gait apraxia**, where patients walk with a slow, wide-based, shuffling gait with feet appearing magnetically attached to the floor. Diagnostic and prognostic confirmation requires a large-volume lumbar puncture (removing forty to fifty millilitres of CSF), where immediate objective improvement in gait speed confirms candidate suitability for ventriculoperitoneal shunting.",
+   "say": "The initial and most responsive component of the NPH triad is the magnetic gait apraxia, where patients walk with a slow wide-based shuffling gait with feet appearing glued to the floor. Diagnostic confirmation requires a high-volume lumbar puncture, where immediate improvement in gait speed predicts shunt success.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tri",
+      "label": "Triad: Gait Apraxia + Incontinence + Dementia"
+     },
+     {
+      "id": "tap",
+      "label": "High-Volume CSF Tap Test (40-50 mL)"
+     },
+     {
+      "id": "vps",
+      "label": "Ventriculoperitoneal Shunt Implantation"
+     }
+    ],
+    "edges": [
+     [
+      "tri",
+      "tap"
+     ],
+     [
+      "tap",
+      "vps"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rapidly progressive, fatal neurodegenerative spongiform encephalopathy caused by propagation of infectious, misfolded prion protein (PrPSc) is **Creutzfeldt-Jakob disease** (CJD). Typically causing death within one year of onset, patients present with explosive cognitive deterioration, prominent startle myoclonus, ataxia, visual disturbances (Heidenhain variant), and akinetic mutism in terminal stages.",
+   "say": "A rapidly progressive fatal neurodegenerative spongiform encephalopathy caused by propagation of misfolded prion protein is Creutzfeldt-Jakob disease. Typically fatal within one year, patients present with explosive cognitive decline, startle myoclonus, ataxia, and akinetic mutism in terminal stages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prion-diseases-fig1.webp",
+    "alt": "Cortical ribboning on MRI and spongiform encephalopathy histology in CJD.",
+    "caption": "Cortical ribboning on diffusion MRI and spongiform vacuolation in prion disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic neurophysiological hallmark of sporadic Creutzfeldt-Jakob disease on electroencephalography is the presence of characteristic **periodic sharp wave complexes** (PSWCs) occurring synchronously across both hemispheres at a frequency of one Hertz. Supporting investigations include ribbon-like cortical diffusion restriction on brain MRI (cortical ribboning) and positive cerebrospinal fluid real-time quaking-induced conversion (RT-QuIC) assay.",
+   "say": "The diagnostic neurophysiological hallmark of sporadic Creutzfeldt-Jakob disease on EEG is the presence of periodic sharp wave complexes occurring synchronously at one Hertz. Supporting investigations include cortical ribboning on diffusion MRI and a positive CSF RT-QuIC assay.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Characteristic Finding in Sporadic CJD",
+     "Sensitivity & Specificity"
+    ],
+    "rows": [
+     [
+      "Electroencephalography (EEG)",
+      "Periodic synchronous sharp-wave complexes (PSWCs) at 1 Hz",
+      "Sensitivity 65%; Specificity 90%"
+     ],
+     [
+      "Diffusion-Weighted MRI (DWI)",
+      "Cortical ribboning and hyperintensity in basal ganglia / pulvinar",
+      "Sensitivity > 90%; Specificity > 95%"
+     ],
+     [
+      "CSF RT-QuIC Assay",
+      "Real-time quaking-induced conversion detects misfolded PrPSc",
+      "Sensitivity > 92%; Specificity > 98% (Gold standard)"
+     ],
+     [
+      "CSF 14-3-3 Protein",
+      "Elevated surrogate marker of acute massive neuronal destruction",
+      "Sensitive but non-specific marker of rapid necrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standardised bedside cognitive screening utilizes the thirty-point Mini-Mental State Examination (**MMSE**) or Montreal Cognitive Assessment (MoCA). Evaluating orientation, registration, attention and calculation, delayed recall, language, and visuospatial construction, scores under twenty-four points indicate cognitive impairment, with MoCA exhibiting superior sensitivity for detecting mild cognitive impairment and executive dysexecutive syndromes.",
+   "say": "Standardized bedside cognitive screening utilizes the thirty-point Mini-Mental State Examination or Montreal Cognitive Assessment. Evaluating orientation, memory registration, attention, delayed recall, and visuospatial construction, scores under twenty-four points indicate cognitive impairment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "comp",
+      "label": "Subjective Cognitive Complaint"
+     },
+     {
+      "id": "moca",
+      "label": "MoCA / MMSE Screening (< 24/30)"
+     },
+     {
+      "id": "rev",
+      "label": "Exclude Reversible Medical Metabolic Causes"
+     }
+    ],
+    "edges": [
+     [
+      "comp",
+      "moca"
+     ],
+     [
+      "moca",
+      "rev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A vital clinical requirement before diagnosing irreversible neurodegenerative dementia is comprehensive screening to exclude a **reversible dementia** or an acute confusional state termed delirium. Routine laboratory evaluation must rule out severe vitamin B12 deficiency (subacute combined degeneration), primary hypothyroidism (elevated TSH), neurosyphilis (positive RPR/VDRL), normal pressure hydrocephalus, and chronic subdural haematoma.",
+   "say": "A vital clinical requirement before diagnosing irreversible dementia is screening to exclude a reversible dementia or acute delirium. Routine laboratory evaluation must rule out severe vitamin B12 deficiency, hypothyroidism, neurosyphilis, normal pressure hydrocephalus, and chronic subdural haematoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reversible Aetiology",
+     "Diagnostic Laboratory / Imaging Test",
+     "Definitive Reversal Therapy"
+    ],
+    "rows": [
+     [
+      "Vitamin B12 Deficiency",
+      "Serum B12, methylmalonic acid, homocysteine",
+      "Intramuscular Cyanocobalamin replacement"
+     ],
+     [
+      "Severe Hypothyroidism",
+      "Serum Thyroid-Stimulating Hormone (TSH), Free T4",
+      "Oral Levothyroxine hormone titration"
+     ],
+     [
+      "Neurosyphilis",
+      "Serum and CSF VDRL / Treponemal antibodies",
+      "Intravenous Aqueous Crystalline Penicillin G for 14 days"
+     ],
+     [
+      "Normal Pressure Hydrocephalus",
+      "Brain MRI (Evans index > 0.3) + CSF tap test",
+      "Ventriculoperitoneal shunt surgical diversion"
+     ],
+     [
+      "Chronic Subdural Haematoma",
+      "Non-contrast Head CT (crescentic extra-axial collection)",
+      "Burr-hole evacuation and surgical drainage"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 426"
+}

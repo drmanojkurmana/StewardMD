@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-nutrition",
+ "subject": "medicine",
+ "title": "Micronutrient Deficiencies and Enteral-Parenteral Nutrition",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The leading cause of preventable childhood blindness worldwide is **vitamin A deficiency** (retinol deficiency). Essential for synthesis of rhodopsin within retinal rod photoreceptors and maintenance of specialized epithelial differentiation, deficiency presents early with impaired dark adaptation recognized as nyctalopia or night blindness.",
+   "say": "The leading cause of preventable childhood blindness worldwide is vitamin A deficiency. Essential for rhodopsin synthesis in retinal rods and epithelial maintenance, deficiency presents early with impaired dark adaptation termed night blindness.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-vitamin-mineral-signs.webp",
+    "alt": "Clinical photographic signs of micronutrient and vitamin deficiencies in children.",
+    "caption": "Ocular, mucocutaneous, and skeletal signs of pediatric vitamin and mineral deficiencies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Progression of ocular vitamin A deficiency produces xerophthalmia. The pathognomonic physical finding is the appearance of triangular, dry, foamy, silvery-grey elevated plaques on the bulbar conjunctiva adjacent to the limbus, universally designated as **Bitot spots**, resulting from keratinizing squamous metaplasia of conjunctival epithelium, progressing to corneal ulceration and irreversible keratomalacia.",
+   "say": "Progression of ocular vitamin A deficiency produces xerophthalmia. The pathognomonic sign is Bitot spots, which are triangular foamy silvery plaques on the bulbar conjunctiva caused by epithelial keratinization, progressing to corneal keratomalacia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rod",
+      "label": "Rhodopsin Depletion (Night Blindness / Nyctalopia)"
+     },
+     {
+      "id": "bitot",
+      "label": "Conjunctival Squamous Metaplasia (Bitot Spots)"
+     },
+     {
+      "id": "kerat",
+      "label": "Corneal Ulceration & Melting (Keratomalacia)"
+     }
+    ],
+    "edges": [
+     [
+      "rod",
+      "bitot"
+     ],
+     [
+      "bitot",
+      "kerat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An essential trace element cofactor for over three-hundred metalloenzymes (including RNA and DNA polymerases) is zinc. Inherited deficiency caused by mutations in the intestinal zinc transporter ZIP4 (SLC39A4) is **acrodermatitis enteropathica**, presenting in weaning infants with periorificial and acral vesiculobullous and pustular dermatitis, severe chronic diarrhoea, alopecia, and impaired wound healing, responding dramatically to zinc.",
+   "say": "An essential trace mineral cofactor for metalloenzymes is zinc. Inherited deficiency caused by mutations in the zinc transporter ZIP4 causes acrodermatitis enteropathica, presenting with periorificial dermatitis, alopecia, and chronic diarrhea, responding dramatically to oral zinc.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acrodermatitis Enteropathica",
+     "points": [
+      "Mutations in intestinal zinc transporter (ZIP4)",
+      "Periorificial (mouth, perineum) and acral dermatitis",
+      "Alopecia, chronic diarrhea, and growth retardation",
+      "Responds dramatically to oral Zinc supplementation"
+     ]
+    },
+    "right": {
+     "title": "Vitamin C Deficiency (Scurvy)",
+     "points": [
+      "Defective collagen proline/lysine hydroxylation",
+      "Perifollicular hemorrhages and corkscrew hairs",
+      "Bleeding, spongy gingivitis and subperiosteal hematomas",
+      "Responds rapidly to oral Ascorbic acid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Deficiency of the essential trace antioxidant micronutrient selenium, an indispensable constituent of glutathione peroxidase and iodothyronine deiodinases, precipitates an endemic dilated congestive cardiomyopathy in selenium-deficient geographic regions, historically recognized as Keshan disease. Selenium deficiency also significantly impairs normal peripheral enzymatic conversion of prohormone **thyroxine** to active triiodothyronine.",
+   "say": "Deficiency of the antioxidant micronutrient selenium, an essential component of glutathione peroxidase, causes an endemic dilated cardiomyopathy termed Keshan disease. Selenium deficiency also impairs conversion of thyroxine to active triiodothyronine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trace Mineral",
+     "Primary Enzymatic Function",
+     "Characteristic Deficiency Syndrome"
+    ],
+    "rows": [
+     [
+      "Zinc",
+      "Metalloenzymes, DNA/RNA polymerase, Gustin",
+      "Acrodermatitis enteropathica, impaired wound healing, hypogeusia"
+     ],
+     [
+      "Selenium",
+      "Glutathione peroxidase (antioxidant protection)",
+      "Keshan disease (congestive cardiomyopathy), myositis"
+     ],
+     [
+      "Copper",
+      "Cytochrome c oxidase, Lysyl oxidase, Ceruloplasmin",
+      "Microcytic anaemia, sensory ataxia mimicking B12 subacute degeneration"
+     ],
+     [
+      "Chromium",
+      "Potentiates cellular insulin receptor signaling",
+      "Glucose intolerance, refractory peripheral neuropathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When oral intake is inadequate, artificial nutritional support must be delivered. Guidelines mandate that if the gut works, use it, making **enteral nutrition** via nasogastric or percutaneous endoscopic gastrostomy (PEG) feeding the preferred first-line modality over intravenous routes. Enteral feeding preserves gut mucosal barrier architecture, prevents bacterial translocation, and reduces septic infections.",
+   "say": "When oral nutrition is inadequate, artificial nutritional support must be started. Guidelines mandate that if the gut works, use it, making enteral nutrition via nasogastric or PEG tube preferred over intravenous feeding. Enteral feeding maintains gut mucosal barriers and prevents septic complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gut",
+      "label": "Functioning Gastrointestinal Tract"
+     },
+     {
+      "id": "ent",
+      "label": "Enteral Tube Feeding (Nasogastric / PEG)"
+     },
+     {
+      "id": "barr",
+      "label": "Preserves Gut Mucosal Integrity & Halts Bacterial Translocation"
+     }
+    ],
+    "edges": [
+     [
+      "gut",
+      "ent"
+     ],
+     [
+      "ent",
+      "barr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with prolonged gastrointestinal tract failure (short bowel syndrome, high-output enterocutaneous fistulas, severe paralytic ileus), total **parenteral nutrition** (TPN) delivered via a dedicated central venous catheter provides macronutrients and micronutrients directly into the bloodstream. Major hazards include catheter bloodstream infections, hyperosmolar hyperglycemia, and cholestatic liver disease.",
+   "say": "In patients with gastrointestinal failure such as short bowel syndrome, total parenteral nutrition delivered through a central venous catheter provides nutrients directly into the bloodstream. Key complications include catheter infections, hyperglycemia, and cholestatic liver disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enteral Nutrition (EN)",
+     "points": [
+      "Delivered via GI tract (NG tube or Gastrostomy)",
+      "Preserves gut mucosal villous architecture",
+      "Maintains secretomotor IgA and immune barrier",
+      "Lower infection rates and significantly lower cost"
+     ]
+    },
+    "right": {
+     "title": "Parenteral Nutrition (PN)",
+     "points": [
+      "Intravenous delivery via dedicated central line (TPN)",
+      "Indicated strictly for intestinal tract failure",
+      "High risk of catheter-related bloodstream infections",
+      "Causes gut mucosal atrophy and parenteral liver disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A chronic medical condition of abnormal or excessive body fat accumulation defined by a body mass index (BMI) of thirty kilograms per square metre or higher is **obesity**. Adipose tissue functions as an active endocrine organ, secreting pro-inflammatory adipokines (leptin, TNF-alpha, IL-6) while reducing anti-inflammatory adiponectin, driving systemic insulin resistance.",
+   "say": "A chronic medical condition of excessive body fat defined by a BMI of thirty or higher is obesity. Adipose tissue functions as an active endocrine organ, secreting pro-inflammatory cytokines while suppressing adiponectin, which drives systemic insulin resistance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/b12-deficiency-fig1.webp",
+    "alt": "Metabolic, endocrine, and systemic organ pathology in metabolic syndrome.",
+    "caption": "Endocrine adipokine dysregulation, insulin resistance, and systemic metabolic complications. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The constellation of metabolic risk factors that directly increase the risk of cardiovascular disease, type 2 diabetes mellitus, and all-cause mortality defines the **metabolic syndrome**. Defined under NCEP ATP III criteria, diagnosis requires three or more features: abdominal waist circumference elevation, hypertriglyceridemia, low HDL cholesterol, systemic hypertension, and elevated fasting glucose.",
+   "say": "The constellation of risk factors that increase the risk of cardiovascular disease and type 2 diabetes defines the metabolic syndrome. Diagnosis requires three or more features: abdominal obesity, elevated triglycerides, low HDL cholesterol, hypertension, and elevated fasting blood glucose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NCEP ATP III Criterion",
+     "Threshold in Men",
+     "Threshold in Women"
+    ],
+    "rows": [
+     [
+      "Abdominal Waist Circumference",
+      "> 102 cm (> 40 inches) (Asian > 90 cm)",
+      "> 88 cm (> 35 inches) (Asian > 80 cm)"
+     ],
+     [
+      "Serum Triglycerides",
+      ">= 150 mg/dL (or on drug treatment)",
+      ">= 150 mg/dL (or on drug treatment)"
+     ],
+     [
+      "HDL Cholesterol",
+      "< 40 mg/dL (or on drug treatment)",
+      "< 50 mg/dL (or on drug treatment)"
+     ],
+     [
+      "Blood Pressure",
+      ">= 130 / 85 mmHg (or on antihypertensives)",
+      ">= 130 / 85 mmHg (or on antihypertensives)"
+     ],
+     [
+      "Fasting Blood Glucose",
+      ">= 100 mg/dL (or on antidiabetic therapy)",
+      ">= 100 mg/dL (or on antidiabetic therapy)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 326, 328"
+}
