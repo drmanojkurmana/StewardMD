@@ -1,0 +1,236 @@
+{
+  "v": 1,
+  "module": "pat-nerve-muscle",
+  "subject": "pathology",
+  "title": "Wallerian Degeneration, Guillain-Barre, Duchenne Dystrophy, Myasthenia, and Myositis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Focal mechanical transection or crush injury of a peripheral nerve initiates rapid anterograde degeneration of the axon segment isolated distal to the lesion site. Within twenty-four to forty-eight hours, neurofilaments fragment, the axoplasm granularly disintegrates, and surrounding myelin sheaths collapse into ovoid droplets. That sequence is **Wallerian degeneration**. Recruited hematogenous macrophages phagocytose myelin and axonal debris. Proliferating Schwann cells align longitudinally within the preserved basal lamina tube, creating parallel cellular columns called Bands of Bungner to guide regenerating axon sprouts.",
+      "say": "Wallerian degeneration involves distal axonal fragmentation and myelin breakdown followed by Schwann cell Bands of Bungner formation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "transection",
+            "label": "Axonal transection"
+          },
+          {
+            "id": "fragmentation",
+            "label": "Distal neurofilament breakdown"
+          },
+          {
+            "id": "phagocytosis",
+            "label": "Macrophage myelin clearance"
+          },
+          {
+            "id": "bungner",
+            "label": "Bands of Bungner guide regeneration"
+          }
+        ],
+        "edges": [
+          [
+            "transection",
+            "fragmentation"
+          ],
+          [
+            "fragmentation",
+            "phagocytosis"
+          ],
+          [
+            "phagocytosis",
+            "bungner"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary demyelinating neuropathies affect myelin sheaths while sparing the underlying axon cylinder. Myelin destruction leads to severe electrophysiological slowing of nerve conduction velocities with preserved compound muscle action potential amplitudes. That process is **segmental demyelination**. Following myelin breakdown, proliferating Schwann cells remyelinate denuded axonal segments, producing shortened internodal distances and thinner myelin sheaths. Repetitive cycles of demyelination and remyelination create concentric laminations of redundant Schwann cell cytoplasm and basement membrane called onion bulbs.",
+      "say": "Segmental demyelination destroys myelin while preserving axons, causing slowed conduction velocities and thin remyelinated internodes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Axonal degeneration",
+          "Segmental demyelination"
+        ],
+        "rows": [
+          [
+            "Primary target",
+            "Axon cylinder and neurofilaments",
+            "Myelin sheath and Schwann cell"
+          ],
+          [
+            "Conduction velocity",
+            "Normal or mildly reduced",
+            "Markedly slowed conduction velocity"
+          ],
+          [
+            "Action potential amplitude",
+            "Markedly reduced amplitude",
+            "Relatively preserved amplitude"
+          ],
+          [
+            "Histological hallmark",
+            "Axonal loss, muscle fiber atrophy",
+            "Thin myelin, shortened internodes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute inflammatory demyelinating polyradiculoneuropathy typically develops two to three weeks following Campylobacter jejuni enteritis, cytomegalovirus, or Epstein-Barr virus infection. Molecular mimicry between microbial lipooligosaccharides and human peripheral nerve gangliosides triggers autoimmune attack against Schwann cell membranes. That paralyzing condition is **Guillain-Barre syndrome**. Patients present with symmetrical, ascending flaccid motor paralysis and areflexia. Cerebrospinal fluid analysis reveals classic albuminocytological dissociation, with elevated protein levels reaching one hundred to one thousand milligrams per decilitre without cellular pleocytosis.",
+      "say": "Guillain-Barre syndrome causes post-infectious ascending flaccid motor paralysis with CSF albuminocytological dissociation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Guillain-Barre syndrome",
+          "points": [
+            "Post-infectious autoimmune onset",
+            "Rapidly ascending motor weakness",
+            "Areflexia in lower limbs",
+            "CSF albuminocytological dissociation"
+          ]
+        },
+        "right": {
+          "title": "Myasthenia gravis",
+          "points": [
+            "Postsynaptic AChR receptor attack",
+            "Fatigable ocular and bulbar weakness",
+            "Normal deep tendon reflexes",
+            "Thymic hyperplasia or thymoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hereditary motor and sensory neuropathies encompass genetically determined chronic progressive peripheral nerve disorders. The commonest variant, type 1A, is an autosomal dominant neuropathy caused by a duplication of the PMP22 gene encoding peripheral myelin protein twenty-two on chromosome 17p11. The eponymic condition is **Charcot-Marie-Tooth**. Patients develop symmetrical distal calf muscle wasting and weakness producing an inverted champagne bottle leg appearance, accompanied by high-arched pes cavus and hammer toes. Sural nerve biopsy reveals extensive onion-bulb formation around thinly remyelinated axons.",
+      "say": "Charcot-Marie-Tooth disease type 1A is a PMP22 duplication neuropathy producing peroneal atrophy, pes cavus, and onion-bulb formations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Charcot-Marie-Tooth 1A",
+          "Neurofibroma (NF1)"
+        ],
+        "rows": [
+          [
+            "Inheritance",
+            "Autosomal dominant (PMP22)",
+            "Autosomal dominant (NF1 gene)"
+          ],
+          [
+            "Clinical picture",
+            "Distal muscle wasting, pes cavus",
+            "Cutaneous nodules, cafe-au-lait spots"
+          ],
+          [
+            "Pathology",
+            "Schwann cell onion-bulb rings",
+            "Unencapsulated wavy spindle cells"
+          ],
+          [
+            "Malignant potential",
+            "Zero malignant transformation",
+            "Risk of malignant peripheral nerve sheath tumour"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most prevalent and severe muscular dystrophy is an X-linked recessive lethal myopathy affecting one in thirty-five hundred live male births. Out-of-frame deletions or nonsense mutations in the DMD gene on chromosome Xp21 lead to virtually complete absence of the dystrophin protein. That fatal disease is **Duchenne muscular dystrophy**. Serum creatine kinase levels are markedly elevated from birth. Young boys present between two and five years old with clumsy gait, pelvic girdle weakness, and pseudohypertrophy of calves caused by fatty and fibrous tissue infiltration replacing degenerate muscle fibers.",
+      "say": "Duchenne muscular dystrophy is an X-linked recessive myopathy caused by out-of-frame DMD deletions with total dystrophin deficiency.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/muscular-dystrophies-and-other-muscle-fig1.webp",
+        "alt": "Dystrophin complex and muscular dystrophies",
+        "caption": "Diagram of sarcolemmal dystrophin glycoprotein complex comparing out-of-frame Duchenne deletions to in-frame Becker mutations."
+      }
+    },
+    {
+      "tx": "The critical membrane protein linking the intracellular actin cytoskeleton to the extracellular matrix through the transmembrane dystroglycan complex is **dystrophin**. In-frame mutations preserve the reading frame and produce an abnormal, truncated protein present in reduced amounts, causing the clinically milder **Becker muscular dystrophy**. Pelvic and proximal lower limb weakness in affected children causes them to use their hands to walk up their own thighs and torso when rising from the floor, an exam finding termed **Gowers sign**.",
+      "say": "Dystrophin links actin to the extracellular matrix; in-frame deletions cause milder Becker dystrophy, both manifesting Gowers sign.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Duchenne muscular dystrophy",
+          "Becker muscular dystrophy"
+        ],
+        "rows": [
+          [
+            "Gene mutation",
+            "Out-of-frame deletion or nonsense",
+            "In-frame deletions or duplications"
+          ],
+          [
+            "Dystrophin protein",
+            "Virtually absent (<5% normal)",
+            "Abnormal size or reduced quantity"
+          ],
+          [
+            "Clinical onset",
+            "Early childhood (2 to 5 years)",
+            "Late childhood or adolescence"
+          ],
+          [
+            "Wheelchair dependence",
+            "By age 12 to 15 years",
+            "Preserved ambulation past age 16"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autoimmune neuromuscular junction disorder is characterized by fluctuating muscle weakness and rapid fatigability that worsens with repetitive activity and improves after rest. Eighty-five percent of patients harbour circulating IgG autoantibodies against postsynaptic nicotinic acetylcholine receptors at the motor endplate. That disorder is **myasthenia gravis**. Complement activation and receptor internalization simplify post-junctional folds and reduce acetylcholine receptor density. Ocular muscles are affected early, manifesting with fluctuating ptosis and diplopia. Thymic abnormalities occur in eighty percent, including thymic follicular hyperplasia and thymoma.",
+      "say": "Myasthenia gravis is an autoimmune postsynaptic acetylcholine receptor disorder causing fluctuating ptosis, diplopia, and fatigable weakness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "autoantibody",
+            "label": "Anti-AChR autoantibodies"
+          },
+          {
+            "id": "complement",
+            "label": "Complement endplate damage"
+          },
+          {
+            "id": "loss",
+            "label": "Loss of acetylcholine receptors"
+          },
+          {
+            "id": "fatigue",
+            "label": "Muscle fatigability on exertion"
+          }
+        ],
+        "edges": [
+          [
+            "autoantibody",
+            "complement"
+          ],
+          [
+            "complement",
+            "loss"
+          ],
+          [
+            "loss",
+            "fatigue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic autoimmune myopathy involves complement-mediated microangiopathy and perivascular CD4 positive T-cell infiltration, predominantly targeting perimysial connective tissue. Diagnostic muscle biopsy reveals diagnostic **perifascicular atrophy**, where rows of atrophic myofibers cluster around the perimeter of muscle fascicles. The disease is **dermatomyositis**. Cutaneous hallmarks include an erythematous heliotrope rash across upper eyelids and Gottron papules over knuckle joints. In contrast, polymyositis lacks cutaneous lesions and displays endomysial CD8 positive cytotoxic T cells directly invading non-necrotic myofibers.",
+      "say": "Dermatomyositis displays perifascicular muscle atrophy, perimysial CD4 T cells, heliotrope eyelid rash, and Gottron papules.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dermatomyositis-fig1.webp",
+        "alt": "Dermatomyositis clinical signs",
+        "caption": "Clinical photographs displaying violaceous Gottron papules over metacarpophalangeal joints and periungual telangiectasia in dermatomyositis."
+      }
+    }
+  ]
+}

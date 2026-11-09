@@ -1,0 +1,236 @@
+{
+  "v": 1,
+  "module": "pat-skin",
+  "subject": "pathology",
+  "title": "Psoriasis, Munro Microabscesses, Lichen Planus, and Civatte Bodies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic immune-mediated papulosquamous dermatosis is driven by the interleukin-23 and interleukin-17 immunological axis, stimulating rapid keratinocyte proliferation. Typical lesions present as sharply demarcated, erythematous, salmon-pink plaques covered by thick, adherent, silvery-white micaceous scales on extensor surfaces, including elbows, knees, presacral skin, and scalp. That dermatological disease is **psoriasis**. The epidermal turnover time accelerates dramatically from twenty-eight days down to four days, preventing normal keratinocyte maturation and leading to diffuse parakeratosis with complete absence of the stratum granulosum.",
+      "say": "Psoriasis is an IL-23 and IL-17 mediated dermatosis causing erythematous plaques with silvery micaceous scales on extensor surfaces.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/psoriasis-fig1.webp",
+        "alt": "Psoriasis nail changes",
+        "caption": "Clinical photograph displaying geometric nail pitting, distal onycholysis, and subungual hyperkeratosis in chronic plaque psoriasis."
+      }
+    },
+    {
+      "tx": "When overlying micaceous silvery scales are scraped away from a psoriatic plaque, punctate bleeding droplets appear on the exposed surface. This diagnostic clinical phenomenon is **Auspitz sign**. Histologically, marked thinning and attenuation of the suprapapillary epidermal plates occurs directly over elongated, tortuous, hyperaemic dermal capillary loops within congested dermal papillae. Psoriasis also frequently causes nail abnormalities in thirty percent of patients, manifested by thimble-like pitting, salmon-colored oil-drop spots, subungual hyperkeratosis, and distal onycholysis.",
+      "say": "Auspitz sign produces pinpoint bleeding upon scale removal due to thin suprapapillary plates over dilated dermal capillaries.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical finding",
+          "Pathological mechanism",
+          "Diagnostic value"
+        ],
+        "rows": [
+          [
+            "Silvery micaceous scales",
+            "Severe parakeratosis, retained nuclei",
+            "Hallmark of active plaque"
+          ],
+          [
+            "Auspitz sign",
+            "Thin suprapapillary plates, tortuous loops",
+            "Confirmatory clinical test"
+          ],
+          [
+            "Koebner phenomenon",
+            "Plaque induction by local trauma",
+            "Isomorphic response marker"
+          ],
+          [
+            "Nail pitting",
+            "Psoriatic matrix parakeratotic shedding",
+            "Associated with psoriatic arthritis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic examination of active psoriatic lesions reveals regular downward elongation of rete ridges with clubbed bases, resembling a row of test tubes in a rack. Neutrophils migrate from dilated papillary capillaries through the spinosum, where they form spongiform pustules of Kogoj, into the thickened parakeratotic stratum corneum. Aggregates of neutrophils within the stratum corneum are **Munro microabscesses**. The stratum granulosum is completely absent beneath areas of parakeratosis, and dermal papillae show marked oedema and capillary dilation.",
+      "say": "Munro microabscesses are collections of neutrophils within the parakeratotic stratum corneum characteristic of psoriasis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cytokines",
+            "label": "IL-23 and IL-17 activation"
+          },
+          {
+            "id": "hyperplasia",
+            "label": "Marked epidermal hyperplasia"
+          },
+          {
+            "id": "parakeratosis",
+            "label": "Loss of granular layer and parakeratosis"
+          },
+          {
+            "id": "munro",
+            "label": "Neutrophils form Munro microabscesses"
+          }
+        ],
+        "edges": [
+          [
+            "cytokines",
+            "hyperplasia"
+          ],
+          [
+            "hyperplasia",
+            "parakeratosis"
+          ],
+          [
+            "parakeratosis",
+            "munro"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pruritic, purple, polygonal, planar papules and plaques represent the classic cutaneous manifestations of a subacute cytotoxic T-cell dermatosis targeting basal keratinocytes. Lesions preferentially affect flexor surfaces of wrists, forearms, anterior legs, and genitalia, frequently following the Koebner isomorphic response. The condition is **lichen planus**. Pathogenesis involves CD8 positive cytotoxic T lymphocytes recognizing altered antigens in basal epidermal cells, frequently triggered by viral infections such as hepatitis C virus or pharmacological exposures to beta-blockers and antimalarials.",
+      "say": "Lichen planus presents with pruritic, purple, polygonal papules on flexor wrists driven by CD8 cytotoxic T-cell basal attack.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lichen-planus-fig1.webp",
+        "alt": "Lichen planus pathology",
+        "caption": "Forearm papules with fine Wickham striae alongside histology showing band-like dermal infiltrate, sawtoothed rete ridges, and Civatte bodies."
+      }
+    },
+    {
+      "tx": "Inspection of the surface of lichen planus papules with a magnifying lens reveals a delicate, reticulated network of fine white lines and puncta. These surface markings are **Wickham striae**. Histologically, they correspond to focal, wedge-shaped thickening of the stratum granulosum. Mucosal involvement occurs in up to seventy percent of patients, presenting as painless, bilateral, lacy white reticular arborizations across the buccal mucosa that may persist for years after cutaneous papules have spontaneously resolved.",
+      "say": "Wickham striae are white reticular surface lines caused by focal wedge-shaped hypergranulosis in lichen planus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Psoriasis",
+          "points": [
+            "Extensor surface plaques",
+            "Silvery micaceous scales",
+            "Absent stratum granulosum",
+            "Neutrophil-rich microabscesses"
+          ]
+        },
+        "right": {
+          "title": "Lichen planus",
+          "points": [
+            "Flexor surface violaceous papules",
+            "Wickham striae on surface",
+            "Wedge-shaped hypergranulosis",
+            "Dense band-like T-cell infiltrate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cytotoxic T-cell destruction of basal keratinocytes induces hydropic degeneration with cell rounding and apoptosis. The resulting shrunken, necrotic, anucleate, intensely eosinophilic apoptotic basal cells are extruded into the papillary dermis or lower epidermis as **Civatte bodies**, also termed colloid or cytoid bodies. Direct immunofluorescence demonstrates globular deposits of IgM, IgG, and complement C3 decorating these apoptotic keratinocytes. The dermal-epidermal junction takes on an irregular, jagged sawtoothed contour caused by uneven basal cell dropout and reactive pointed rete ridge elongation.",
+      "say": "Civatte bodies are apoptotic basal keratinocytes that drop into the papillary dermis amidst sawtoothed rete ridges in lichen planus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Lichen planus",
+          "Lupus erythematosus"
+        ],
+        "rows": [
+          [
+            "Infiltrate location",
+            "Band-like at dermoepidermal junction",
+            "Deep perivascular and periadnexal"
+          ],
+          [
+            "Epidermal rete ridges",
+            "Pointed sawtoothed rete ridges",
+            "Marked epidermal atrophy"
+          ],
+          [
+            "Civatte bodies",
+            "Numerous in papillary dermis",
+            "Scattered in basilar layer"
+          ],
+          [
+            "Lupus band test",
+            "Negative continuous BMZ band",
+            "Continuous granular IgG/C3 along BMZ"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histological inflammatory reaction pattern centered directly at the junction between epidermis and dermis is termed **interface dermatitis**. Cytotoxic lymphocytes infiltrate the basal cell layer, inducing cytoplasmic vacuolization, loss of basal nuclear polarity, and individual necrotic keratinocyte apoptosis. In the lichenoid variant, exemplified by lichen planus, a dense, continuous band of lymphocytes hugs the undulating dermoepidermal junction. In the vacuolar variant, seen in acute cutaneous lupus erythematosus and erythema multiforme, basal vacuolization occurs with sparse, dispersed inflammatory cells.",
+      "say": "Interface dermatitis produces basal keratinocyte vacuolar degeneration and apoptosis, categorized into lichenoid and vacuolar patterns.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "antigen",
+            "label": "Basal keratinocyte antigen change"
+          },
+          {
+            "id": "cd8",
+            "label": "CD8+ T-cell recruitment"
+          },
+          {
+            "id": "vacuolization",
+            "label": "Basal vacuolization and apoptosis"
+          },
+          {
+            "id": "sawtooth",
+            "label": "Sawtooth contour and Civatte body shedding"
+          }
+        ],
+        "edges": [
+          [
+            "antigen",
+            "cd8"
+          ],
+          [
+            "cd8",
+            "vacuolization"
+          ],
+          [
+            "vacuolization",
+            "sawtooth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Self-limiting acute papulosquamous eruption of children and young adults begins with a solitary, sharply demarcated, round or oval erythematous herald patch on the trunk. Days to weeks later, a widespread eruption of smaller oval macules with delicate collarette scales erupts along Langer lines of cleavage in a fir-tree distribution. The disorder is **pityriasis rosea**. Associated with human herpesvirus six and seven reactivation, histology demonstrates focal parakeratosis in mounds, spongiosis, and mild superficial perivascular lymphocytic infiltration, resolving spontaneously over six weeks.",
+      "say": "Pityriasis rosea starts with an oval herald patch and progresses along skin cleavage lines in a Christmas tree distribution.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Clinical presentation",
+          "Characteristic feature"
+        ],
+        "rows": [
+          [
+            "Initial lesion",
+            "Solitary 2 to 6 cm oval plaque",
+            "Herald patch with collarette scale"
+          ],
+          [
+            "Secondary rash",
+            "Smaller oval maculopapular lesions",
+            "Long axes aligned with skin cleavage lines"
+          ],
+          [
+            "Truncal pattern",
+            "Symmetric oblique distribution",
+            "Christmas tree or fir tree pattern"
+          ],
+          [
+            "Resolution",
+            "Spontaneous clearing in 6 to 8 weeks",
+            "No scarring or permanent pigment change"
+          ]
+        ]
+      }
+    }
+  ]
+}

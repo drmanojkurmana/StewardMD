@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "pat-skin",
+  "subject": "pathology",
+  "title": "Pemphigus Vulgaris, Acantholysis, Bullous Pemphigoid, and Dermatitis Herpetiformis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Potentially life-threatening autoimmune bullous disorder presents in middle-aged adults with painful flaccid blisters and extensive mucosal erosions affecting the oral cavity in over eighty percent. Blisters rupture readily under shear forces, leaving tender weeping denuded areas prone to secondary infection. That disease is **pemphigus vulgaris**. Circulating IgG autoantibodies target desmoglein 3, a transmembrane desmosomal cadherin that anchors keratinocytes together in mucosal and suprabasal epidermis, interfering with adhesion and triggering intracellular apoptotic signaling cascades.",
+      "say": "Pemphigus vulgaris produces painful flaccid intraepidermal blisters and oral erosions caused by IgG anti-desmoglein 3 autoantibodies.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pemphigus-vulgaris-fig1.webp",
+        "alt": "Pemphigus vulgaris histopathology",
+        "caption": "Skin biopsy histology and diagram displaying suprabasal acantholytic blister, rounded Tzanck cells, and tombstone basal row."
+      }
+    },
+    {
+      "tx": "Loss of intercellular desmosomal bridges between squamous epithelial cells causes them to round up, detach from one another, and float free within the expanding vesicle fluid. That fundamental microscopic process is **acantholysis**. Clinically, application of gentle mechanical tangential pressure to normal-appearing perilesional skin dislodges the superficial epidermis, producing a new blister or epidermal sliding known as Nikolsky sign. Acantholysis also explains the Tzanck smear finding of rounded, detached keratinocytes with hyperchromatic nuclei.",
+      "say": "Acantholysis is the loss of desmosomal adhesion between keratinocytes, producing free rounded cells and a positive Nikolsky sign.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "antibody",
+            "label": "IgG binds desmoglein 3"
+          },
+          {
+            "id": "desmosome",
+            "label": "Desmosomal dissociation"
+          },
+          {
+            "id": "acantholysis",
+            "label": "Keratinocyte acantholysis"
+          },
+          {
+            "id": "blister",
+            "label": "Flaccid intraepidermal blister"
+          }
+        ],
+        "edges": [
+          [
+            "antibody",
+            "desmosome"
+          ],
+          [
+            "desmosome",
+            "acantholysis"
+          ],
+          [
+            "acantholysis",
+            "blister"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic sections of pemphigus vulgaris show an intraepidermal blister split immediately above the basal cell layer, known as a suprabasal cleft. Basal keratinocytes remain attached to the underlying basement membrane zone by intact hemidesmosomes while separating laterally from each other. That classical histological pattern resembles a **tombstone appearance**. Detached acantholytic cells within the blister lumen exhibit enlarged nuclei and condensed peripheral cytoplasmic rings. In pemphigus foliaceus, anti-desmoglein 1 autoantibodies cause a more superficial subcorneal blister split.",
+      "say": "Pemphigus vulgaris forms a suprabasal blister with basal keratinocytes lined up on the basement membrane like a row of tombstones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pemphigus vulgaris",
+          "points": [
+            "Suprabasal acantholytic split",
+            "Tombstone row of basal cells",
+            "Anti-desmoglein 3 targets",
+            "Severe oral mucosal erosions"
+          ]
+        },
+        "right": {
+          "title": "Pemphigus foliaceus",
+          "points": [
+            "Subcorneal acantholytic split",
+            "Intact lower epidermal layers",
+            "Anti-desmoglein 1 targets",
+            "Spares mucosal surfaces"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Direct immunofluorescence of perilesional skin sections incubated with fluorescein-conjugated antibodies identifies continuous intercellular immunoglobulin deposition throughout all levels of the epidermal spinous layer. This classic net-like diagnostic finding is described as a **fishnet pattern**. Circulating autoantibodies consist predominantly of IgG1 and IgG4 directed against desmoglein cadherins, accompanied by complement C3. Indirect immunofluorescence using monkey esophagus substrate detects circulating serum autoantibodies whose titers correlate closely with clinical disease severity.",
+      "say": "Direct immunofluorescence in pemphigus vulgaris shows an intercellular fishnet pattern of IgG and C3 throughout the epidermis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "Target antigen",
+          "DIF pattern"
+        ],
+        "rows": [
+          [
+            "Pemphigus vulgaris",
+            "Desmoglein 3 (and 1)",
+            "Intercellular epidermal fishnet IgG"
+          ],
+          [
+            "Pemphigus foliaceus",
+            "Desmoglein 1",
+            "Subcorneal intercellular IgG"
+          ],
+          [
+            "Bullous pemphigoid",
+            "BP180 and BP230",
+            "Linear basement membrane zone IgG/C3"
+          ],
+          [
+            "Dermatitis herpetiformis",
+            "Epidermal transglutaminase",
+            "Granular IgA at dermal papillae tips"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most common autoimmune subepidermal blistering dermatosis occurs predominantly in elderly individuals over sixty years old, presenting with large, firm, tense bullae that do not rupture easily. The primary targets are hemidesmosomal anchor proteins BP180 (type XVII collagen) and BP230, which connect the basal keratinocyte cytoskeleton to the lamina lucida. That disease is **bullous pemphigoid**. In contrast to pemphigus, mucosal involvement occurs in fewer than twenty percent of patients, and Nikolsky sign is negative because the entire epidermis remains intact over the blister cavity.",
+      "say": "Bullous pemphigoid produces tense subepidermal blisters in elderly patients due to IgG antibodies against hemidesmosomal BP180 and BP230.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bullous-pemphigoid-fig1.webp",
+        "alt": "Bullous pemphigoid histopathology",
+        "caption": "Histological section displaying subepidermal blister with intact full-thickness epidermal roof and abundant eosinophils in blister fluid."
+      }
+    },
+    {
+      "tx": "Microscopic examination of bullous pemphigoid shows complete detachment of the basal keratinocyte layer from the underlying dermis, creating a clean **subepidermal blister**. The blister cavity contains fibrin, abundant eosinophils, and scattered neutrophils, bounded above by a taut, intact full-thickness epidermal roof. Eosinophils line up along the dermal-epidermal junction and release major basic protein and eosinophil cationic protein, driving proteolytic cleavages in the basement membrane that expand the blister.",
+      "say": "A clean subepidermal blister with an eosinophil-rich fluid collection and an intact full-thickness epidermal roof defines bullous pemphigoid.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pemphigus vulgaris blister",
+          "points": [
+            "Intraepidermal suprabasal split",
+            "Thin fragile flaccid roof",
+            "Positive Nikolsky sign",
+            "Prominent acantholytic cells"
+          ]
+        },
+        "right": {
+          "title": "Bullous pemphigoid blister",
+          "points": [
+            "Subepidermal lamina lucida split",
+            "Full-thickness sturdy roof",
+            "Negative Nikolsky sign",
+            "Abundant eosinophils in cavity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Direct immunofluorescence of perilesional skin in bullous pemphigoid reveals intense, smooth, continuous deposition of IgG and complement C3 along the dermoepidermal basement membrane zone. That ribbon-like hallmark is **linear basement membrane** staining. Salt-split skin testing on human skin incubated in one molar sodium chloride splits the lamina lucida: bullous pemphigoid autoantibodies bind specifically to the epidermal roof of the split, confirming reactivity against the extracellular domain of BP180.",
+      "say": "Direct immunofluorescence demonstrates a continuous linear ribbon of IgG and C3 along the basement membrane zone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Pemphigus vulgaris",
+          "Bullous pemphigoid"
+        ],
+        "rows": [
+          [
+            "Blister level",
+            "Intraepidermal suprabasal",
+            "Subepidermal basement membrane"
+          ],
+          [
+            "Blister roof",
+            "Fragile flaccid roof",
+            "Sturdy full-thickness roof"
+          ],
+          [
+            "Oral involvement",
+            "Very common (>80%)",
+            "Uncommon (<20%)"
+          ],
+          [
+            "Immunofluorescence",
+            "Intercellular fishnet IgG",
+            "Linear basement membrane IgG/C3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intensely pruritic, burning, grouped polymorphic vesicles symmetrically distributed over extensor elbows, knees, buttocks, and upper back occur in intimate association with celiac disease. The condition is **dermatitis herpetiformis**. IgA autoantibodies directed against epidermal transglutaminase form circulating immune complexes with dietary gluten transglutaminase. These complexes deposit in a granular pattern specifically within the tips of dermal papillae, recruiting neutrophils to form microabscesses that detach the epidermal basement membrane into tiny subepidermal vesicles, responding dramatically to dapsone and a gluten-free diet.",
+      "say": "Dermatitis herpetiformis features grouped pruritic vesicles, granular IgA at dermal papillae tips, and celiac disease association.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gluten",
+            "label": "Gluten sensitivity enteropathy"
+          },
+          {
+            "id": "iga",
+            "label": "IgA anti-transglutaminase complexes"
+          },
+          {
+            "id": "papillae",
+            "label": "Deposition in dermal papillae tips"
+          },
+          {
+            "id": "microabscess",
+            "label": "Neutrophil microabscess and vesicle split"
+          }
+        ],
+        "edges": [
+          [
+            "gluten",
+            "iga"
+          ],
+          [
+            "iga",
+            "papillae"
+          ],
+          [
+            "papillae",
+            "microabscess"
+          ]
+        ]
+      }
+    }
+  ]
+}
