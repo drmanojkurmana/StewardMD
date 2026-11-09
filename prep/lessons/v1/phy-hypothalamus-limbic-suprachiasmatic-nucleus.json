@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-hypothalamus-limbic",
+  "subject": "physiology",
+  "title": "Circadian Clocks, the Limbic System, and Kluver-Bucy Syndrome",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The master mammalian pacemaker coordinating 24-hour biological timing resides within bilateral paired hypothalamic structures positioned immediately dorsal to the optic chiasm. Known as the **suprachiasmatic nucleus**, this tiny cluster of approximately twenty thousand neurons maintains an autonomous transcriptional feedback cycle that synchronizes all peripheral tissue clocks.",
+      "say": "The suprachiasmatic nucleus above the optic chiasm is the master pacemaker synchronizing circadian clocks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "clock_bmal1",
+            "label": "CLOCK and BMAL1 Heterodimerize in Nucleus to Activate Transcription"
+          },
+          {
+            "id": "per_cry_synth",
+            "label": "Drives Transcription of Period (PER1/2/3) and Cryptochrome (CRY1/2) Genes"
+          },
+          {
+            "id": "cytosol_accum",
+            "label": "PER and CRY Proteins Accumulate in Cytosol, Undergoing Phosphorylation"
+          },
+          {
+            "id": "negative_feedback",
+            "label": "Translocate Back into Nucleus to Inhibit CLOCK:BMAL1, Completing 24-Hour Cycle"
+          }
+        ],
+        "edges": [
+          [
+            "clock_bmal1",
+            "per_cry_synth"
+          ],
+          [
+            "per_cry_synth",
+            "cytosol_accum"
+          ],
+          [
+            "cytosol_accum",
+            "negative_feedback"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "To keep the intrinsic circadian period aligned with the physical solar day, environmental light information synchronizes the molecular pacemaker. Intrinsically photosensitive retinal ganglion cells expressing melanopsin project directly to the suprachiasmatic nucleus via the **retinohypothalamic tract**, releasing glutamate and pituitary adenylate cyclase-activating polypeptide to reset clock gene transcription.",
+      "say": "Melanopsin ganglion cells project via the retinohypothalamic tract to reset clock genes to environmental light.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Retinohypothalamic Tract (RHT)",
+          "points": [
+            "Arises from intrinsically photosensitive retinal ganglion cells (ipRGCs)",
+            "Expresses photopigment melanopsin, tuned to blue light (~480 nm)",
+            "Independent of rod and cone image-forming visual pathways",
+            "Relays non-visual environmental illuminance to synchronize pacemaker"
+          ]
+        },
+        "right": {
+          "title": "Peripheral Clock Entrainment",
+          "points": [
+            "SCN directs autonomic nervous system and neuroendocrine rhythms",
+            "Controls rhythmic glucocorticoid secretion from adrenal cortex",
+            "Synchronizes secondary peripheral clocks in liver, heart, and muscle",
+            "Peripheral clocks also entrained by timing of nutrient and food intake"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The suprachiasmatic nucleus regulates nocturnal hormone production through a multisynaptic pathway projecting to the pineal gland. SCN signals pass through the paraventricular nucleus, descend the spinal cord to the intermediolateral horn at T1-T2, and ascend to the superior cervical ganglion, directing pineal **melatonin secretion during darkness**.",
+      "say": "Darkness disinhibits pineal melatonin secretion via a pathway passing through the superior cervical ganglion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "light_absence",
+            "label": "Absence of Environmental Retinal Light Relieves SCN Inhibition"
+          },
+          {
+            "id": "scg_sympathetic",
+            "label": "Intermediolateral Horn Activates Superior Cervical Ganglion Sympathetic Neurons"
+          },
+          {
+            "id": "pineal_norepi",
+            "label": "Norepinephrine Binds Beta-1 Adrenergic Receptors on Pinealocytes"
+          },
+          {
+            "id": "melatonin_surge",
+            "label": "Serotonin N-Acetyltransferase Induction Drives Massive Melatonin Synthesis"
+          }
+        ],
+        "edges": [
+          [
+            "light_absence",
+            "scg_sympathetic"
+          ],
+          [
+            "scg_sympathetic",
+            "pineal_norepi"
+          ],
+          [
+            "pineal_norepi",
+            "melatonin_surge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emotional expression, behavioral motivation, autonomic drive, and memory formation are integrated by an interconnected ring of medial forebrain structures. Termed the **limbic system**, this network includes the cingulate gyrus, parahippocampal gyrus, hippocampus, amygdaloid nuclear complex, septal nuclei, and mammillary bodies, coordinating affective responses to environmental stimuli.",
+      "say": "The limbic system integrates the amygdala, hippocampus, and cingulate to govern emotions and memory.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bipolar-disorder-fig1.webp",
+        "caption": "Limbic and frontostriatal neurocircuits illustrating dysregulated affective and emotional states.",
+        "alt": "Dysregulated frontolimbic connectivity underlying altered affective and mood states"
+      }
+    },
+    {
+      "tx": "In 1937, James Papez proposed an anatomical circuit through which emotional experiences are elaborated and transformed into conscious feeling. Originating in the hippocampus, the **Papez circuit** projects via the fornix to the mammillary bodies, relays via the mammillothalamic tract to the anterior thalamus, and projects to the cingulate cortex.",
+      "say": "The Papez circuit links the hippocampus, fornix, mammillary bodies, and cingulate gyrus to process emotions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hippocampus",
+            "label": "Hippocampus Projects Axons Ventrally into the Curved Arching Fornix"
+          },
+          {
+            "id": "mammillary_body",
+            "label": "Fornix Columns Terminate Within the Hypothalamic Mammillary Bodies"
+          },
+          {
+            "id": "anterior_thalamus",
+            "label": "Mammillothalamic Tract Projects Excitatory Relays to Anterior Thalamus"
+          },
+          {
+            "id": "cingulate_cortex",
+            "label": "Thalamocortical Projections Radiate to the Cingulate Gyrus"
+          }
+        ],
+        "edges": [
+          [
+            "hippocampus",
+            "mammillary_body"
+          ],
+          [
+            "mammillary_body",
+            "anterior_thalamus"
+          ],
+          [
+            "anterior_thalamus",
+            "cingulate_cortex"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Situated within the anterior medial temporal pole immediately rostral to the hippocampus, the **amygdala acts as emotional hub**, particularly specialized for detecting danger, social threat, and fear. Its basolateral nuclei integrate processed sensory inputs to orchestrate emotional memories, while the central nucleus projects to the brainstem to evoke autonomic fight-or-flight reactions.",
+      "say": "The amygdala processes fear, social threats, and emotional memories, driving defensive reactions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Basolateral Amygdala",
+          "points": [
+            "Receives high-level processed sensory inputs from all cortical modalities",
+            "Undergoes synaptic plasticity during associative fear conditioning",
+            "Encodes the emotional valence and motivational significance of stimuli",
+            "Projects robustly to prefrontal cortex, striatum, and hippocampus"
+          ]
+        },
+        "right": {
+          "title": "Central Amygdaloid Nucleus",
+          "points": [
+            "Major visceral and behavioral output station of the amygdaloid complex",
+            "Projects to lateral hypothalamus to drive sympathetic cardiovascular surges",
+            "Projects to periaqueductal grey to execute freezing behavioral immobility",
+            "Projects to dorsal motor vagal nucleus to modulate bradycardia and gut tone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bilateral surgical resection or herpes simplex encephalitis destroying the anterior temporal lobes and bilateral amygdaloid complexes produces a profound behavioral syndrome. Described by Heinrich Kluver and Paul Bucy, **Kluver-Bucy syndrome** is characterized by visual agnosia, docility with complete loss of fear, hyperorality, hypersexuality, and dietary changes.",
+      "say": "Bilateral amygdala destruction causes Kluver-Bucy syndrome, with visual agnosia, hyperorality, and docility.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/substance-use-disorder-fig1.webp",
+        "caption": "Disrupted mesolimbic and temporal motivational networks showing altered reward seeking and emotional drive.",
+        "alt": "Altered mesolimbic reward circuitry and temporal lobe neuroplastic remodeling"
+      }
+    },
+    {
+      "tx": "Experimental stimulation of the perifornical hypothalamic nuclei or transection of descending cortical inhibitory pathways unmasks intense unprovoked defensive attacks. This physiological outburst is designated **sham rage**, accompanied by pupillary dilation, piloerection, claw unsheathing, and snarling, proving that the hypothalamus organizes coordinated emotional aggression under tonic cortical inhibition.",
+      "say": "Sham rage occurs when cortical inhibition is removed, revealing hypothalamic centers for aggressive defense.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sham Rage Features",
+          "points": [
+            "Evoked by decortication sparing posterior hypothalamus",
+            "Lacks true directed objective: attacks neutral objects or walls",
+            "Violent autonomic storm: severe tachycardia, hypertension, piloerection",
+            "Terminates immediately once provoking tactile contact ceases"
+          ]
+        },
+        "right": {
+          "title": "Cortical Inhibitory Control",
+          "points": [
+            "Orbitofrontal and ventromedial prefrontal cortices project to limbic nuclei",
+            "Suppresses aggressive impulsive reactions through serotonergic pathways",
+            "Balances behavioral emotional outbursts against social consequences",
+            "Frontal lobe injury produces disinhibition, tactlessness, and explosive anger"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
