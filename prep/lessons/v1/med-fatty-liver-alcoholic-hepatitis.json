@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-fatty-liver",
+ "subject": "medicine",
+ "title": "Alcoholic hepatitis, Maddrey discriminant function, MASLD, and hepatic steatosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Heavy ongoing ethanol consumption precipitates acute necroinflammatory hepatocellular injury against a background of chronic steatohepatitis. Clinically presenting as **Alcoholic hepatitis**, the syndrome manifests with rapid-onset jaundice, fever, anorexia, tender hepatomegaly, and neutrophilic leukocytosis. Serum transaminase profiles characteristically demonstrate an AST to ALT ratio greater than two, with both enzymes generally remaining below five hundred units per litre. This selective aspartate aminotransferase predominance reflects ethanol-induced mitochondrial injury coupled with hepatic pyridoxal-5-phosphate depletion, which impairs alanine aminotransferase synthesis.",
+   "say": "Heavy chronic alcohol intake causes acute necroinflammatory liver injury. Clinically presenting as Alcoholic hepatitis, this condition manifests with rapid jaundice, fever, tender hepatomegaly, and leukocytosis. Serum transaminases characteristically show an AST to ALT ratio exceeding two, because vitamin B6 depletion preferentially impairs alanine aminotransferase synthesis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-fatty-liver-fig1.webp",
+    "alt": "Histopathological and gross appearances of alcoholic liver disease and steatohepatitis.",
+    "caption": "Hepatic steatosis, alcoholic hepatitis histopathology, and neutrophilic inflammation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Microscopic examination of liver biopsy specimens in acute alcoholic injury identifies classic pathognomonic features of cytoskeletal collapse and cellular damage. Demonstrating intracellular **Mallory bodies** (Mallory-Denk inclusions) reveals tangled aggregates of cytokeratins eight and eighteen within swollen, ballooned hepatocytes. Surrounding these damaged cells is a prominent infiltrate composed primarily of polymorphonuclear neutrophils rather than lymphocytes, accompanied by fine pericellular or perisinusoidal chicken-wire fibrosis. Centrilobular zone three hepatocytes demonstrate the greatest vulnerability due to diminished baseline oxygen tension.",
+   "say": "Histological examination of liver tissue in alcoholic injury indicates classic microscopic hallmarks of cell collapse. Demonstrating intracellular Mallory bodies reveals aggregated cytokeratins inside swollen, ballooned hepatocytes. A prominent infiltrate of neutrophils surrounds these dying cells, accompanied by extensive pericellular fibrosis centered in the vulnerable centrilobular zones.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alcoholic Hepatitis Histology",
+     "points": [
+      "Mallory-Denk hyaline inclusions",
+      "Prominent neutrophilic infiltration",
+      "Pericellular chicken-wire fibrosis",
+      "Zone 3 centrilobular predilection"
+     ]
+    },
+    "right": {
+     "title": "Viral Hepatitis Histology",
+     "points": [
+      "Councilman apoptotic acidophilic bodies",
+      "Mononuclear lymphocytic portal infiltrate",
+      "Interface hepatitis and bridging necrosis",
+      "Portal and periportal distribution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Quantifying short-term mortality risk in acute alcoholic hepatitis directs the critical choice of immunosuppressive pharmacological therapy. Calculating the **Maddrey discriminant function** utilizes prothrombin time prolongation and serum bilirubin through the standard formula: four point six multiplied by the difference in prothrombin time in seconds plus total serum bilirubin in milligrams per decilitre. A calculated discriminant function value of thirty-two or greater establishes severe disease, predicting a thirty-day mortality rate between thirty-five and fifty percent without targeted therapy.",
+   "say": "Quantifying mortality risk in acute alcoholic hepatitis determines whether immunosuppressive drugs are indicated. Calculating the Maddrey discriminant function incorporates prothrombin time prolongation and serum bilirubin values. A score of thirty-two or higher indicates severe disease with a one-month mortality rate reaching fifty percent without therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "formula",
+      "label": "Maddrey DF = 4.6 * [PT patient - PT control] + Total Bilirubin (mg/dL)"
+     },
+     {
+      "id": "cutoff",
+      "label": "DF >= 32: Severe Alcoholic Hepatitis"
+     },
+     {
+      "id": "rx",
+      "label": "Initiate Oral Prednisolone 40 mg daily for 28 days"
+     }
+    ],
+    "edges": [
+     [
+      "formula",
+      "cutoff"
+     ],
+     [
+      "cutoff",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suppression of cytotoxic cytokine cascades in severe alcoholic hepatitis provides a measurable thirty-day survival benefit in selected patients. Administering **prednisolone** at an oral dose of forty milligrams daily for four weeks reduces short-term mortality by dampening tumour necrosis factor and interleukin production. Active systemic infection and gastrointestinal bleeding must be ruled out prior to starting glucocorticoids. Treatment response is evaluated at day seven using the Lille model, while historical second-line pentoxifylline is no longer recommended due to lack of demonstrated efficacy.",
+   "say": "Suppression of inflammatory cytokine cascades provides significant short-term survival benefits in severe alcoholic hepatitis. Administering prednisolone at forty milligrams daily for four weeks reduces mortality by inhibiting cytokine production. Active sepsis and gastrointestinal bleeding must be excluded before initiation, with treatment response reassessed at day seven via the Lille score.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic agent",
+     "Mechanism of action",
+     "Standard dosing",
+     "Clinical evidence & role"
+    ],
+    "rows": [
+     [
+      "Prednisolone",
+      "Glucocorticoid anti-inflammatory",
+      "40 mg daily for 28 days",
+      "First-line when Maddrey DF >= 32 without sepsis"
+     ],
+     [
+      "Lille model reassessment",
+      "Dynamic response algorithm",
+      "Evaluated on treatment day 7",
+      "Score > 0.45 indicates non-response; stop steroid"
+     ],
+     [
+      "Pentoxifylline",
+      "Phosphodiesterase / TNF inhibitor",
+      "400 mg three times daily",
+      "Historical alternative; no proven survival benefit"
+     ],
+     [
+      "Nutritional support",
+      "Enteral caloric supplementation",
+      "35 kcal/kg/day and 1.5 g/kg protein",
+      "Mandatory baseline supportive intervention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cessation of chronic alcohol intake in hospitalized patients precipitates acute hyperadrenergic and neurocognitive disturbances requiring vigilant management. Experiencing **alcohol withdrawal** produces a continuum of symptoms ranging from mild tremors, anxiety, and diaphoresis within six hours, to withdrawal seizures and life-threatening delirium tremens between forty-eight and ninety-six hours. Using symptom-triggered protocols such as the Clinical Institute Withdrawal Assessment directs benzodiazepine dosing. Long-acting diazepam or chlordiazepoxide is preferred in preserved liver function, whereas lorazepam or oxazepam is indicated in hepatic decompensation.",
+   "say": "Cessation of chronic alcohol consumption in hospitalized patients triggers severe adrenergic disturbances requiring vigilant management. Experiencing alcohol withdrawal spans from tremors and tachycardia to generalized seizures and delirium tremens. Using symptom-triggered scoring protocols guides benzodiazepine therapy, with short-acting agents like lorazepam preferred in patients with advanced liver failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Minor Withdrawal & Seizures",
+     "points": [
+      "Onset 6 to 36 hours post-cessation",
+      "Tremor, insomnia, diaphoresis, tachycardia",
+      "Seizures: Generalized tonic-clonic within 12 to 48 hours",
+      "Responsive to standard benzodiazepine titration"
+     ]
+    },
+    "right": {
+     "title": "Delirium Tremens",
+     "points": [
+      "Onset 48 to 96 hours post-cessation",
+      "Severe delirium, hallucinations, hyperthermia",
+      "Significant autonomic collapse and mortality risk",
+      "Requires aggressive high-dose benzodiazepines in ICU"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The contemporary global epidemic of obesity and insulin resistance drives progressive hepatic fat accumulation independent of significant alcohol consumption. Redefined as **MASLD** (metabolic dysfunction-associated steatotic liver disease, formerly termed NAFLD), the diagnostic framework requires imaging or histological evidence of hepatic steatosis in combination with at least one cardiometabolic risk factor, such as elevated body mass index, impaired fasting glucose, dyslipidaemia, or arterial hypertension. Progression to progressive necroinflammation and ballooning designates metabolic dysfunction-associated steatohepatitis (MASH), which carries a heightened risk of cirrhosis.",
+   "say": "The global epidemic of obesity and diabetes causes progressive liver fat accumulation independent of alcohol intake. Redefined as MASLD, this diagnostic framework requires documented hepatic steatosis combined with at least one cardiometabolic risk factor such as obesity, diabetes, or hypertension. Progression to active necroinflammation marks steatohepatitis, which carries substantial risks of cirrhosis and liver cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "steatosis",
+      "label": "Documented Hepatic Steatosis"
+     },
+     {
+      "id": "metabolic",
+      "label": "Plus >= 1 Cardiometabolic Factor (Obesity, T2DM, HTN, Dyslipidaemia)"
+     },
+     {
+      "id": "masld",
+      "label": "MASLD Diagnosis -> Stratify fibrosis risk"
+     }
+    ],
+    "edges": [
+     [
+      "steatosis",
+      "metabolic"
+     ],
+     [
+      "metabolic",
+      "masld"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-invasive risk stratification allows primary care clinicians to identify individuals with steatotic liver disease who harbour advanced architectural fibrosis. Calculating the **FIB-4 score** incorporates four readily available laboratory parameters: patient age, aspartate aminotransferase, alanine aminotransferase, and platelet count. A FIB-4 score below one point three zero reliably rules out advanced fibrosis with a negative predictive value exceeding ninety percent, allowing routine monitoring in primary care. Conversely, a value exceeding two point six seven designates high risk, mandating referral for elastography.",
+   "say": "Non-invasive scoring systems allow clinicians to identify steatotic liver disease patients who harbour advanced fibrosis. Calculating the FIB-4 score combines patient age, transaminases, and platelet count into a validated formula. A score below one point three rules out advanced fibrosis, whereas a value above two point six seven mandates specialist referral for elastography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FIB-4 score range",
+     "Clinical interpretation",
+     "Negative / positive predictive value",
+     "Recommended management action"
+    ],
+    "rows": [
+     [
+      "< 1.30 (<2.0 in age >65)",
+      "Low risk of advanced fibrosis (F0-F1)",
+      "NPV > 90%",
+      "Lifestyle intervention, retest in 2-3 years"
+     ],
+     [
+      "1.30 to 2.67",
+      "Indeterminate intermediate risk",
+      "Inconclusive window",
+      "Second-line testing with transient elastography"
+     ],
+     [
+      "> 2.67",
+      "High risk of advanced fibrosis (F3-F4)",
+      "PPV ~ 65% to 80%",
+      "Immediate hepatology referral and liver stiffness scan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantitative acoustic imaging provides rapid non-invasive assessment of hepatic architectural stiffness and steatotic lipid accumulation. Performing **transient elastography** (FibroScan) measures shear wave velocity generated by mechanical vibration, converting tissue displacement into a physical stiffness measurement reported in kilopascals. Liver stiffness values below six kilopascals exclude significant fibrosis, while values exceeding twelve to fifteen kilopascals confirm cirrhosis. Concurrently, the controlled attenuation parameter quantifies acoustic ultrasound attenuation in decibels per metre, reliably grading histological steatosis from S1 through S3.",
+   "say": "Quantitative ultrasound imaging provides rapid non-invasive evaluation of hepatic stiffness and lipid accumulation. Performing transient elastography measures shear wave velocity, generating a tissue stiffness value reported in kilopascals. Values above twelve kilopascals confirm cirrhosis, while the companion controlled attenuation parameter accurately grades the extent of fatty steatosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-fatty-liver-gen1.webp",
+    "alt": "Ultrasound transducer technique and elastography shear wave propagation through hepatic parenchyma.",
+    "caption": "Transient elastography shear wave stiffness measurement and controlled attenuation parameter. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

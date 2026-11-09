@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-viral-hepatitis",
+ "subject": "medicine",
+ "title": "Hepatitis B antiviral therapy, entecavir, acute liver failure, and encephalopathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Suppression of hepatitis B replication in treatment-naive individuals relies upon potent nucleoside analogues possessing a high genetic barrier to resistance. Prescribing **entecavir**, a cyclopentyl guanosine analogue, selectively inhibits hepatitis B virus polymerase at all three operational stages: priming, reverse transcription, and positive-strand synthesis. Administered orally at a standard dosage of zero point five milligrams daily, entecavir achieves profound viral suppression and histological improvement with resistance rates under one percent over five years. Renal dose adjustment is mandatory in patients with impaired glomerular filtration.",
+   "say": "Suppression of hepatitis B viral replication in treatment-naive patients requires potent nucleoside analogues with high resistance barriers. Prescribing entecavir selectively inhibits hepatitis B polymerase during priming, reverse transcription, and DNA synthesis. Administered daily at zero point five milligrams, entecavir produces profound viral suppression with minimal long-term resistance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-viral-hepatitis-fig1.webp",
+    "alt": "Clinical and microscopic presentation of viral hepatitis and hepatocyte inflammation.",
+    "caption": "Potent oral nucleoside analogue suppression of hepatitis B viral replication. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Selecting initial antiviral therapy requires distinguishing agents with high genetic barriers from legacy nucleosides prone to treatment failure. Comparing **antiviral resistance barriers** reveals that entecavir and tenofovir require multiple concurrent viral mutations to confer phenotypic resistance, maintaining durability during decade-long continuous administration. In contrast, historical agents such as lamivudine select for single amino acid substitutions in the conserved YMDD polymerase motif within one year. Entecavir retains efficacy against wild-type virus but exhibits cross-resistance in patients harbouring pre-existing lamivudine-resistant mutants.",
+   "say": "Selecting initial antiviral therapy requires distinguishing high-barrier modern agents from legacy drugs prone to failure. Comparing antiviral resistance barriers demonstrates that entecavir and tenofovir require multiple concurrent mutations to lose clinical efficacy. Historical drugs like lamivudine fail rapidly through single mutations within the viral polymerase motif.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-Barrier First-Line",
+     "points": [
+      "Entecavir and Tenofovir",
+      "Resistance rates under 1% at 5 years in naive hosts",
+      "Multiple simultaneous mutations required",
+      "First-line recommendations across global guidelines"
+     ]
+    },
+    "right": {
+     "title": "Low-Barrier Legacy Agents",
+     "points": [
+      "Lamivudine, Adefovir, and Telbivudine",
+      "Resistance exceeds 70% at 5 years",
+      "Single YMDD motif mutations (M204V/I) cause failure",
+      "No longer recommended as initial monotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "International clinical practice guidelines outline precise biochemical and virological thresholds governing the initiation of lifelong antiviral therapy. Evaluating **antiviral treatment indications** focuses primarily on serum HBV DNA levels exceeding two thousand international units per millilitre combined with elevated alanine aminotransferase above the upper limit of normal. Patients presenting with documented cirrhosis, whether compensated or decompensated, require immediate antiviral initiation regardless of transaminase levels whenever serum HBV DNA is detectable. Therapy significantly diminishes downstream rates of decompensation and hepatocellular carcinoma.",
+   "say": "Clinical practice guidelines define precise biochemical and virological thresholds governing the initiation of antiviral therapy. Evaluating antiviral treatment indications focuses on viral loads exceeding two thousand units combined with elevated liver enzymes. Patients with established cirrhosis require immediate antiviral therapy whenever viral DNA is detectable, regardless of transaminase values.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cirrhosis",
+      "label": "Documented Cirrhosis"
+     },
+     {
+      "id": "dna",
+      "label": "HBV DNA Detectable -> Initiate Entecavir or Tenofovir immediately"
+     },
+     {
+      "id": "noncirrhotic",
+      "label": "Non-cirrhotic: HBV DNA >2000 IU/mL + ALT elevated -> Treat"
+     }
+    ],
+    "edges": [
+     [
+      "cirrhosis",
+      "dna"
+     ],
+     [
+      "noncirrhotic",
+      "dna"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sudden catastrophic hepatocyte necrosis occurring in an individual without pre-existing chronic liver disease creates an immediate threat to life. Characterized as **acute liver failure**, the formal syndrome requires the rapid onset of severe hepatic synthetic dysfunction manifest as coagulopathy with an international normalized ratio of one point five or higher, accompanied by any clinical degree of hepatic encephalopathy developing within twenty-six weeks of jaundice. Viral hepatitis, idiosyncratic drug-induced reactions, and acetaminophen overdose represent the leading global aetiologies.",
+   "say": "Sudden catastrophic liver cell necrosis occurring in patients without pre-existing chronic disease creates an immediate emergency. Characterized as acute liver failure, the condition requires severe synthetic dysfunction manifest as an INR of one point five or higher, combined with hepatic encephalopathy within twenty-six weeks of jaundice. Viral infection and drug reactions represent leading causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic criterion",
+     "Required threshold",
+     "Underlying pathophysiological significance"
+    ],
+    "rows": [
+     [
+      "Hepatic synthetic failure",
+      "INR >= 1.5",
+      "Loss of clotting factor synthesis by necrotic hepatocytes"
+     ],
+     [
+      "Cerebral dysfunction",
+      "Hepatic encephalopathy (any grade)",
+      "Systemic hyperammonaemia and cerebral oedema"
+     ],
+     [
+      "Temporal window",
+      "Onset within 26 weeks of jaundice",
+      "Differentiates acute liver failure from chronic decompensation"
+     ],
+     [
+      "Underlying liver status",
+      "No pre-existing cirrhosis",
+      "Excludes acute-on-chronic liver failure syndromes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stratifying patients according to the velocity of clinical progression reveals distinct aetiological patterns and divergent transplant-free survival trajectories. Comparing **hyperacute versus subacute** presentations shows that hyperacute liver failure develops within seven days of jaundice onset, most frequently caused by acetaminophen toxicity or ischaemic hepatitis, and carries a favourable spontaneous recovery rate. Conversely, subacute liver failure manifests between five and twenty-six weeks after initial jaundice, commonly triggered by non-acetaminophen drug reactions, and paradoxically exhibits poor spontaneous survival without emergency liver transplantation.",
+   "say": "Classifying patients by their speed of progression reveals distinct causes and divergent survival patterns. Comparing hyperacute versus subacute failure shows that hyperacute disease occurs within seven days of jaundice, often from paracetamol toxicity, and has higher spontaneous recovery. Subacute failure develops over several weeks and paradoxically carries very poor survival without liver transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperacute Liver Failure",
+     "points": [
+      "Onset of encephalopathy <7 days after jaundice",
+      "Causes: Acetaminophen, ischaemia, hepatitis A/E",
+      "High frequency of cerebral oedema",
+      "Favourable transplant-free survival (>60%)"
+     ]
+    },
+    "right": {
+     "title": "Subacute Liver Failure",
+     "points": [
+      "Onset 5 to 26 weeks after initial jaundice",
+      "Causes: Idiosyncratic drug reactions, autoimmune",
+      "Lower incidence of early cerebral oedema",
+      "Poor transplant-free survival (<20% without transplant)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Assessing altered cerebral function through standardized neurocognitive staging directs critical intensive care interventions and monitoring protocols. Classifying **hepatic encephalopathy grades** using the West Haven system categorizes neurological impairment from grade one with mild confusion and sleep disturbances, to grade two with marked lethargy and asterixis. Progression to grade three involves gross confusion and somnolence with preserved response to verbal stimuli, while grade four represents unresponsive coma. Intubation for airway protection is mandatory upon reaching grade three or four.",
+   "say": "Assessing altered cerebral function through standardized staging directs intensive care interventions and monitoring. Classifying hepatic encephalopathy grades via the West Haven system spans from mild confusion in grade one, to lethargy and asterixis in grade two. Grade three features gross confusion and somnolence, while grade four represents unresponsive coma requiring tracheal intubation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "West Haven grade",
+     "Mental status",
+     "Neurological signs",
+     "Airway management"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Mild confusion, sleep reversal, euphoria",
+      "Impaired handwriting, subtle apraxia",
+      "Spontaneous breathing"
+     ],
+     [
+      "Grade 2",
+      "Lethargy, apathy, disorientation to time",
+      "Asterixis (flapping tremor), ataxia",
+      "Close aspiration monitoring"
+     ],
+     [
+      "Grade 3",
+      "Somnolence, responsive to voice, severe confusion",
+      "Hyperreflexia, clonus, persistent asterixis",
+      "Elective tracheal intubation"
+     ],
+     [
+      "Grade 4",
+      "Coma, unresponsive to voice",
+      "Decerebrate posturing, absent reflexes",
+      "Mandatory mechanical ventilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Validating the necessity and urgency of emergency orthotopic liver transplantation requires application of rigorous prognostic algorithms. Applying the **King's College criteria** stratifies non-acetaminophen acute liver failure, defining irreversible mortality risk if the international normalized ratio exceeds six point five in isolation. Alternatively, meeting any three of five adverse markers (age under ten or over forty, idiosyncratic drug or seronegative aetiology, jaundice-to-encephalopathy interval exceeding seven days, serum bilirubin over seventeen point five milligrams per decilitre, or INR over three point five) mandates urgent transplant listing.",
+   "say": "Determining the urgency of emergency liver transplantation requires applying validated prognostic criteria. Applying the King's College criteria for non-paracetamol failure identifies extreme mortality if the INR exceeds six point five alone. Alternatively, meeting three of five adverse variables, including prolonged jaundice, severe hyperbilirubinaemia, or extreme age, mandates immediate transplant listing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "single",
+      "label": "INR > 6.5 (Standalone criterion)"
+     },
+     {
+      "id": "triple",
+      "label": "Any 3 of: Age <10 or >40, Jaundice to coma >7d, Bilirubin >17.5 mg/dL, INR >3.5, Non-A/B or drug"
+     },
+     {
+      "id": "txpl",
+      "label": "Urgent Orthotopic Liver Transplant Listing"
+     }
+    ],
+    "edges": [
+     [
+      "single",
+      "txpl"
+     ],
+     [
+      "triple",
+      "txpl"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing brainstem herniation secondary to refractory intracranial hypertension remains the supreme therapeutic priority in advanced acute liver failure. Controlling **cerebral oedema** in grade three or four encephalopathy involves maintaining head elevation at thirty degrees, avoiding hyperthermia, and delivering thirty percent hypertonic saline or intravenous mannitol twenty percent to control acute intracranial pressure spikes. Achieving a target serum sodium between one hundred and forty-five and one hundred and fifty millimoles per litre produces an osmotic gradient that effectively decreases cellular astrocyte swelling.",
+   "say": "Preventing brain herniation from raised intracranial pressure remains the highest therapeutic priority in advanced liver failure. Controlling cerebral oedema in deep encephalopathy requires elevating the bed to thirty degrees, avoiding fever, and infusing hypertonic saline or mannitol for acute pressure spikes. Maintaining serum sodium near one hundred and fifty millimoles per litre reduces brain swelling.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antivirals-herpes-hepatitis-flu-covid-fig1.webp",
+    "alt": "Diagram of neurocritical care targets in acute hepatic encephalopathy and cerebral oedema.",
+    "caption": "Critical care management targets for intracranial hypertension in acute liver failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
