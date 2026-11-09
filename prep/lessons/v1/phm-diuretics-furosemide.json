@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Loop Diuretics, High-Ceiling Saluretics, and Early Distal Tubule Thiazides",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical short-acting sulfonamide loop diuretic that functions as a high-ceiling saluretic is **furosemide**. Acting on the luminal brush border of the thick ascending limb of Henle loop, furosemide selectively and reversibly inhibits the Na+/K+/2Cl- symporter. By blocking active reabsorption of twenty-five percent of filtered sodium, it dramatically impairs medullary hypertonicity and osmotic water reabsorption, producing rapid, powerful diuresis within thirty minutes orally or five minutes intravenously. Adverse hazards include profound hypokalemia, hypomagnesemic tetany, hyponatremia, metabolic alkalosis, hyperuricemia, and dose-dependent sensorineural ototoxicity.",
+      "say": "Furosemide blocks the luminal Na+/K+/2Cl- symporter in the thick ascending limb, producing powerful high-ceiling diuresis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+        "alt": "Nephron schematic highlighting anatomical transport sites of diuretic action",
+        "caption": "Nephron transport sites illustrating thick ascending limb, distal convoluted tubule, and collecting duct molecular targets for diuretic classes."
+      }
+    },
+    {
+      "tx": "A long-acting sulfonylurea loop diuretic characterized by superior, predictable oral bioavailability and a prolonged duration of action is **torsemide**. Unlike furosemide, whose oral bioavailability fluctuates widely between ten and ninety percent and is blunted by intestinal mucosal edema in congestive heart failure, torsemide exhibits consistent eighty-to-ninety percent absorption unaffected by food or bowel congestion. Furthermore, torsemide possesses inherent antialdosterone properties, resulting in lower urinary potassium wasting and greater reduction in left ventricular remodeling and cardiovascular hospitalization in chronic heart failure.",
+      "say": "Torsemide provides reliable oral absorption and antialdosterone properties, outperforming furosemide in congestive heart failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Torsemide (Long-Acting Sulfonylurea)",
+          "points": [
+            "Predictable oral bioavailability of 80% to 90%",
+            "Absorption unaffected by intestinal edema in heart failure",
+            "Longer duration of saluretic action (12 to 16 hours)",
+            "Possesses antialdosterone and antifibrotic cardiac actions"
+          ]
+        },
+        "right": {
+          "title": "Furosemide (Prototypical Loop Diuretic)",
+          "points": [
+            "Erratic oral bioavailability ranging widely from 10% to 90%",
+            "Delayed and blunted absorption during gut wall edema",
+            "Short duration of saluretic action (6 to 8 hours)",
+            "No direct antialdosterone or myocardial remodeling benefit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The class of moderate-efficacy sulfonamide diuretics that act specifically in the cortical diluting segment of the early distal convoluted tubule is **thiazides**. By binding competitively to the chloride-binding site of the apical electroneutral Na+/Cl- cotransporter, thiazides inhibit the reabsorption of approximately five percent of filtered sodium and chloride. Unlike loop diuretics, which promote hypercalciuria, thiazide inhibition of distal sodium entry enhances basolateral Na+/Ca2+ exchange, actively increasing calcium reabsorption and decreasing urinary calcium loss, making them valuable in recurrent calcium oxalate nephrolithiasis and senile osteoporosis.",
+      "say": "Thiazides inhibit the distal Na+/Cl- cotransporter, conserving calcium to prevent kidney stones while lowering blood pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-nephron-filtration.webp",
+        "alt": "Cellular schematics detailing tubular cotransporters and ion channels",
+        "caption": "Distal convoluted tubule and collecting duct cellular transport architecture detailing apical NCCT cotransporters and basolateral exchangers."
+      }
+    },
+    {
+      "tx": "The prototypical thiazide diuretic widely prescribed as foundational once-daily oral antihypertensive therapy is **hydrochlorothiazide**. In acute administration, hydrochlorothiazide lowers blood pressure by reducing extracellular fluid volume and cardiac output through urinary sodium excretion. In chronic long-term therapy beyond four to six weeks, cardiac output returns toward normal while total peripheral resistance decreases due to direct arteriolar vasodilation. However, it requires an estimated glomerular filtration rate above thirty milliliters per minute to remain effective, losing diuretic potency in moderate-to-severe chronic renal failure.",
+      "say": "Hydrochlorothiazide lowers blood pressure initially by volume depletion, and chronically by relaxing peripheral arteriolar resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hctz",
+            "label": "Oral hydrochlorothiazide administration (12.5 to 25 mg daily)"
+          },
+          {
+            "id": "ncct",
+            "label": "Competitive inhibition of distal tubule apical Na+/Cl- cotransporter"
+          },
+          {
+            "id": "acute",
+            "label": "Acute phase (1 to 2 weeks): extracellular volume and cardiac output reduction"
+          },
+          {
+            "id": "chronic",
+            "label": "Chronic phase (>4 weeks): sustained reduction in systemic vascular resistance"
+          }
+        ],
+        "edges": [
+          [
+            "hctz",
+            "ncct"
+          ],
+          [
+            "ncct",
+            "acute"
+          ],
+          [
+            "acute",
+            "chronic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The progressive attenuation of natriuretic efficacy observed during chronic, continuous, or repeated administration of loop diuretics is the **loop diuretic braking phenomenon**. Initiated by acute intravascular volume depletion triggering sympathetic nervous system activation and the renin-angiotensin-aldosterone axis, the kidneys compensate for massive proximal and loop sodium loss by undergoing structural hypertrophy of distal convoluted tubule and collecting duct epithelial cells. These hypertrophied downstream segments markedly upregulate Na+/Cl- cotransporters and ENaC channels, actively reabsorbing sodium and blunting diuretic response.",
+      "say": "The braking phenomenon causes distal nephron hypertrophy and sodium reabsorption, creating resistance to loop diuretics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "loop",
+            "label": "High-dose loop diuretic administration blocks thick ascending limb"
+          },
+          {
+            "id": "vol",
+            "label": "Intravascular volume depletion and neurohormonal RAAS activation"
+          },
+          {
+            "id": "hyper",
+            "label": "Cellular hypertrophy of distal convoluted tubule and collecting ducts"
+          },
+          {
+            "id": "resist",
+            "label": "Upregulated distal sodium reabsorption establishes diuretic resistance"
+          }
+        ],
+        "edges": [
+          [
+            "loop",
+            "vol"
+          ],
+          [
+            "vol",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "resist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classic systemic acid-base disturbance characteristically induced by high-dose therapy with loop and thiazide diuretics is hypokalemic hypochloremic **metabolic alkalosis**. Massive delivery of unabsorbed sodium to the late distal tubule and cortical collecting duct stimulates apical epithelial sodium channels. This generates a lumen-negative electrical potential that accelerates electrogenic potassium excretion by principal cells and proton secretion by alpha-intercalated cells. Concurrently, intravascular volume depletion triggers secondary aldosterone elevation, worsening hydrogen ion wasting and raising serum bicarbonate.",
+      "say": "Loop and thiazide diuretics induce hypokalemic metabolic alkalosis by accelerating distal proton and potassium secretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Loop and Thiazide Diuretics",
+          "points": [
+            "Inhibit upstream sodium chloride reabsorption",
+            "Massive sodium delivery to collecting duct enhances ENaC uptake",
+            "Accelerates electrogenic secretion of K+ and H+ into lumen",
+            "Generates hypokalemic, hypochloremic metabolic alkalosis"
+          ]
+        },
+        "right": {
+          "title": "Potassium-Sparing Diuretics (Spironolactone, Amiloride)",
+          "points": [
+            "Block collecting duct aldosterone receptors or ENaC channels",
+            "Blunts lumen-negative potential, halting K+ and H+ excretion",
+            "Causes systemic retention of potassium and hydrogen ions",
+            "Generates hyperkalemic, hyperchloremic metabolic acidosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The non-sulfonamide phenoxyacetic acid derivative that functions as a potent high-ceiling loop diuretic is **ethacrynic acid**. Structurally devoid of a sulfonamide chemical moiety, ethacrynic acid binds and inhibits the Na+/K+/2Cl- cotransporter in the thick ascending limb with diuretic efficacy identical to furosemide. Consequently, it represents the vital loop diuretic of choice in patients with a history of severe, life-threatening allergic hypersensitivity to sulfonamides. However, it carries the highest incidence of permanent irreversible sensorineural ototoxicity among all diuretics, particularly when combined with aminoglycosides.",
+      "say": "Ethacrynic acid is a non-sulfonamide loop diuretic safe in sulfa allergy, but carries the highest risk of permanent ototoxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ethacrynic Acid (Phenoxyacetic Acid)",
+          "points": [
+            "Completely devoid of sulfonamide chemical structure",
+            "Safe in severe sulfa allergy or Stevens-Johnson history",
+            "Equipotent high-ceiling saluretic action on NKCC2",
+            "Highest incidence of severe irreversible sensorineural ototoxicity"
+          ]
+        },
+        "right": {
+          "title": "Sulfonamide Loop Diuretics (Furosemide, Bumetanide)",
+          "points": [
+            "Contain sulfonamide functional group (SO2NH2)",
+            "Contraindicated in severe documented sulfonamide anaphylaxis",
+            "Reversible, concentration-dependent ototoxicity profile",
+            "Wider clinical availability and lower financial cost"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A common metabolic consequence observed during chronic maintenance therapy with loop and thiazide diuretics is **hyperuricemia**. Because diuretics are organic acids, they compete directly with endogenous uric acid for secretion via organic anion transporter pathways in the proximal convoluted tubule. Furthermore, diuretic-induced extracellular fluid volume depletion stimulates compensatory proximal tubular fluid and urate reabsorption, elevating serum uric acid concentrations and predisposing susceptible individuals to acute attacks of gouty arthritis.",
+      "say": "Diuretics provoke hyperuricemia by competing for proximal tubular secretion and stimulating compensatory urate reabsorption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diur",
+            "label": "Chronic loop or thiazide diuretic administration"
+          },
+          {
+            "id": "compete",
+            "label": "Competitive inhibition of uric acid secretion via proximal OAT transporters"
+          },
+          {
+            "id": "volume",
+            "label": "Volume depletion upregulates proximal tubular sodium and urate reabsorption"
+          },
+          {
+            "id": "gout",
+            "label": "Elevated serum uric acid concentration triggering acute gouty arthritis flare"
+          }
+        ],
+        "edges": [
+          [
+            "diur",
+            "compete"
+          ],
+          [
+            "diur",
+            "volume"
+          ],
+          [
+            "compete",
+            "gout"
+          ],
+          [
+            "volume",
+            "gout"
+          ]
+        ]
+      }
+    }
+  ]
+}
