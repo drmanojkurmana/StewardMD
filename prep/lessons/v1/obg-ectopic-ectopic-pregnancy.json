@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-ectopic",
+ "subject": "obstetrics-gynaecology",
+ "title": "Ectopic Pregnancy: Sites, Rupture and Haemoperitoneum",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Implantation of pregnancy outside the uterine cavity is an **ectopic pregnancy**. Over ninety five percent occur in the fallopian tube, most often its ampullary part. It complicates one to two percent of pregnancies and remains a leading early maternal killer. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Ectopic pregnancy implants outside the cavity, mostly in the tubal ampulla.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ectopic-pregnancy-fig1.webp",
+    "alt": "Ectopic pregnancy implantation sites.",
+    "caption": "Ectopic sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The widest tubal segment where most ectopics implant and may abort through the fimbriae is the **ampulla**. Ampullary pregnancies often present as tubal abortion rather than rupture. Blood trickles into the peritoneum causing gradual symptoms. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The ampulla hosts most ectopics, which often abort through the fimbriae gradually.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Ampulla",
+      "Tubal abortion common"
+     ],
+     [
+      "Isthmus",
+      "Early rupture"
+     ],
+     [
+      "Interstitial",
+      "Late, catastrophic rupture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The narrow tubal segment rupturing earliest, around six weeks, is the **isthmus**. It cannot distend, so even small pregnancies split it. Presentation is correspondingly earlier and more acute than ampullary disease. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The isthmus ruptures earliest because it cannot distend around the pregnancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Isthmic implantation"
+     },
+     {
+      "id": "n1",
+      "label": "Cannot distend"
+     },
+     {
+      "id": "n2",
+      "label": "Rupture by six weeks"
+     },
+     {
+      "id": "n3",
+      "label": "Acute presentation"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Splitting of the tube with bleeding into the abdomen is **tubal rupture**. Sudden severe pain, shoulder tip pain from diaphragmatic irritation and fainting follow. The clinical triad of amenorrhoea, pain and bleeding may be incomplete, so suspicion must stay high. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Tubal rupture causes sudden pain, shoulder tip pain and fainting from internal bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-ectopic-pregnancy-surgeries.webp",
+    "alt": "Surgical procedures for ectopic pregnancy.",
+    "caption": "Ectopic surgery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Free blood in the peritoneal cavity from rupture is **haemoperitoneum**. It produces peritonism, tachycardia and falling haemoglobin. Resuscitation with blood and immediate surgery are simultaneous priorities in the unstable patient. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Haemoperitoneum from rupture needs simultaneous resuscitation, blood and surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable ectopic",
+     "points": [
+      "Resuscitate and evaluate",
+      "Methotrexate or surgery options",
+      "Planned approach"
+     ]
+    },
+    "right": {
+     "title": "Unstable ruptured",
+     "points": [
+      "Blood and theatre immediately",
+      "Salpingectomy usual",
+      "Life before tube"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Risk factors damage tubal transport and include previous pelvic infection, tubal surgery and assisted conception, grouped as **tubal risk factors**. Previous ectopic pregnancy carries the highest recurrence risk. Many ectopics, however, occur with no risk factor at all. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Tubal risk factors damage transport, though many ectopics occur with none at all.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Strength"
+    ],
+    "rows": [
+     [
+      "Previous ectopic",
+      "Highest"
+     ],
+     [
+      "Tubal surgery",
+      "High"
+     ],
+     [
+      "Pelvic infection",
+      "Moderate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dangerous implantation in the uterine muscle segment of tube is **interstitial pregnancy**. It ruptures late, around twelve weeks, into rich uterine vessels. Haemorrhage is catastrophic and may need hysterectomy. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Interstitial pregnancy ruptures late into rich vessels with catastrophic haemorrhage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Interstitial implantation"
+     },
+     {
+      "id": "n1",
+      "label": "Grows to 12 weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Rupture into uterine vessels"
+     },
+     {
+      "id": "n3",
+      "label": "Catastrophic bleeding"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside free fluid on ultrasound with an empty uterus drives emergency action, termed **positive FAST equivalent** in pregnancy terms. In a shocked woman with positive pregnancy test, this means theatre without delay for further imaging. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Free fluid with empty uterus in a shocked pregnant woman means theatre without delay.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Ectopic emergency assessment.",
+    "caption": "Ectopic assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chronic ectopic with organised pelvic blood collection forms a **pelvic haematocele**. Repeated small leaks wall off behind the uterus causing chronic pain and a tender mass. Surgery evacuates clot and removes the affected tube. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Chronic ectopic walls off blood as a pelvic haematocele causing chronic pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Course",
+     "Presentation"
+    ],
+    "rows": [
+     [
+      "Acute rupture",
+      "Shock, sudden pain"
+     ],
+     [
+      "Tubal abortion",
+      "Gradual pain"
+     ],
+     [
+      "Chronic",
+      "Haematocele, chronic pain"
+     ]
+    ]
+   }
+  }
+ ]
+}

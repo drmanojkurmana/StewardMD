@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "module": "obg-gtd",
+ "subject": "obstetrics-gynaecology",
+ "title": "FIGO Prognostic Score, Methotrexate and Actinomycin D",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The scoring system predicting chemotherapy resistance risk in trophoblastic neoplasia is the **FIGO prognostic score**. Age, previous pregnancy type, interval, hormone level, tumour size, metastasis site and prior chemotherapy all score points. Totals divide patients into low and high risk treatment groups.",
+   "say": "The FIGO prognostic score totals eight factors to divide low and high risk treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Scores points"
+    ],
+    "rows": [
+     [
+      "Age",
+      "Over 40 scores"
+     ],
+     [
+      "Interval",
+      "Longer scores more"
+     ],
+     [
+      "hCG level",
+      "Higher scores more"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Scores of six or below define low risk disease treated with a single drug, the **low risk group**. Single agent methotrexate cures nearly all of these women. Resistance switches to the alternative single drug before combinations. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Low risk scores of six or below cure with single agent methotrexate nearly always.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Score six or below"
+     },
+     {
+      "id": "n1",
+      "label": "Single agent started"
+     },
+     {
+      "id": "n2",
+      "label": "Response tracked by hCG"
+     },
+     {
+      "id": "n3",
+      "label": "Switch drug if resistant"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Scores of seven or above define high risk disease needing combination chemotherapy, the **high risk group**. The EMA-CO regimen alternates weekly drug blocks. Cure still exceeds ninety percent at specialist centres. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "High risk scores need EMA-CO combination chemotherapy with cure exceeding ninety percent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/choriocarcinoma-fig1.webp",
+    "alt": "High risk trophoblastic treatment pathway.",
+    "caption": "High risk treatment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The folate antagonist given by intramuscular injection on alternate days with folinic rescue is **methotrexate** in this setting. Mouth ulcers, conjunctivitis and pleuritic pain are its recognisable toxicities. Blood counts and liver tests precede each course. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Methotrexate with folinic rescue causes mouth ulcers and pleuritic pain as recognisable toxicities.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-methotrexate.webp",
+    "alt": "Methotrexate mechanism and use.",
+    "caption": "Methotrexate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The antibiotic derived chemotherapy drug rescuing methotrexate resistant low risk disease is **actinomycin D**. Given intravenously in pulses, it salvages most methotrexate failures without combinations. Hair loss and nausea exceed methotrexate effects. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Actinomycin D rescues methotrexate resistant low risk disease in most cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Methotrexate first",
+     "points": [
+      "Intramuscular alternate days",
+      "Milder toxicity",
+      "Folinic rescue"
+     ]
+    },
+    "right": {
+     "title": "Actinomycin rescue",
+     "points": [
+      "Intravenous pulses",
+      "More nausea, hair loss",
+      "Salvages resistance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hormone level at diagnosis scores heavily because it mirrors tumour burden, termed **hCG scoring**. Levels above one hundred thousand attract maximum points in that row. Serial levels thereafter are the supreme response marker. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "hCG scoring mirrors tumour burden, and serial levels remain the supreme response marker.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "hCG level",
+     "Points trend"
+    ],
+    "rows": [
+     [
+      "Below thousand",
+      "Lowest"
+     ],
+     [
+      "Thousand to hundred thousand",
+      "Middle"
+     ],
+     [
+      "Above hundred thousand",
+      "Highest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interval from the causative pregnancy lengthens scores because older disease resists more, the **interval factor**. Disease declaring years after a term pregnancy scores worst. This partly explains why post term choriocarcinoma behaves aggressively. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "The interval factor scores longer gaps worse because older disease resists treatment more.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Short interval scores low"
+     },
+     {
+      "id": "n1",
+      "label": "Long interval scores high"
+     },
+     {
+      "id": "n2",
+      "label": "Combination likely when high"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Previous failed chemotherapy adds points and usually mandates combinations regardless of other factors, called **prior chemotherapy scoring**. These patients cluster in the high and ultra high risk groups. Newer immunotherapy options are transforming salvage here. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Prior chemotherapy scoring mandates combinations and clusters patients in high risk groups.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-trophoblastic-disease-and-choriocarcinoma-fig1.webp",
+    "alt": "Prognostic scoring and histology.",
+    "caption": "Prognostic scoring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ultra high risk disease with brain or liver spread may start with gentle induction chemotherapy to avoid early death from haemorrhage, termed **induction EP**. Full EMA-CO follows once stabilised. This sequencing cut early mortality dramatically in reported series. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Induction chemotherapy stabilises ultra high risk disease before full combination treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Ultra high risk identified"
+     },
+     {
+      "id": "n1",
+      "label": "Gentle induction given"
+     },
+     {
+      "id": "n2",
+      "label": "Haemorrhage risk falls"
+     },
+     {
+      "id": "n3",
+      "label": "Full regimen follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
