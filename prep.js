@@ -2923,7 +2923,7 @@
      taps the sheet's own scrim, so each module closes it its own way (focus return included). Touch and pen only; a
      sheet scrolled into its content scrolls first; form fields never start a drag. Transform and opacity only. */
   function bindSheetDrag() {
-    var g = null;
+    var g = null, flight = null;   // flight: in-flight WAAPI dismiss, cancelled when the sheet is caught again
     var rm = function () { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
     var scrolled = function (t, sh) { for (var n = t; n && n !== sh.parentNode; n = n.parentNode) if (n.scrollTop > 0) return true; return false; };
     var put = function (d, y) {
@@ -2931,6 +2931,7 @@
       if (d.scrim) d.scrim.style.opacity = String(Math.max(0, Math.min(1, 1 - y / (d.h * 1.1))).toFixed(3));
     };
     root.addEventListener("pointerdown", function (e) {
+      if (flight) { try { if (flight.commitStyles) flight.commitStyles(); } catch (x) {} try { flight.cancel(); } catch (x) {} flight = null; }
       if (g || e.pointerType === "mouse" || !e.target.closest) return;
       var sh = e.target.closest(".pn-sheet-wrap > .pn-sheet");
       if (!sh || e.target.closest("input, select, textarea, label")) return;
@@ -2972,11 +2973,11 @@
         if (rm() || !d.sh.animate) return close();
         var ms = Math.round(Math.max(140, Math.min(260, (d.h - d.y) / Math.max(d.v, 1.4)))), a;
         try {
-          a = d.sh.animate([{ transform: "translateY(" + d.y.toFixed(1) + "px)" }, { transform: "translateY(100%)" }], { duration: ms, easing: "cubic-bezier(.32, .72, 0, 1)", fill: "forwards" });
+          a = flight = d.sh.animate([{ transform: "translateY(" + d.y.toFixed(1) + "px)" }, { transform: "translateY(100%)" }], { duration: ms, easing: "cubic-bezier(.32, .72, 0, 1)", fill: "forwards" });
           if (d.scrim) d.scrim.animate([{ opacity: d.scrim.style.opacity || 1 }, { opacity: 0 }], { duration: ms, easing: "ease-out", fill: "forwards" });
         } catch (x) { return close(); }
-        var once = function () { if (once.done) return; once.done = 1; close(); };
-        a.onfinish = once; G.setTimeout(once, ms + 80);
+        var once = function () { if (once.done || flight !== a) return; once.done = 1; flight = null; close(); };
+        a.onfinish = once; a.oncancel = function () { once.done = 1; }; G.setTimeout(once, ms + 80);
         return;
       }
       var from = "translateY(" + d.y.toFixed(1) + "px)";
