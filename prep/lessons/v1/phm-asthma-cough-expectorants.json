@@ -1,0 +1,256 @@
+{
+  "v": 1,
+  "module": "phm-asthma-cough",
+  "subject": "pharmacology",
+  "title": "Mucolytics, Expectorants, and Emergency Management of Status Asthmaticus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Pharmacological formulations that enhance the volume or reduce the viscosity of respiratory tract secretions to facilitate sputum evacuation by coughing are classified as **expectorants**. Subdivided into reflex expectorants like potassium iodide and ammonium chloride, which irritate gastric vagal sensory afferents to stimulate the bronchial secretomotor reflex, and directly acting agents like guaifenesin, these drugs hydrate dried airway mucus. Guaifenesin increases output of thin respiratory tract fluid, lubricating irritated mucosa and converting exhausting dry coughs into productive coughs.",
+      "say": "Expectorants hydrate respiratory secretions through vagal gastric reflexes or direct bronchial stimulation to clear mucus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reflex Expectorants (Potassium Iodide)",
+          "points": [
+            "Irritates gastric mucosal sensory vagal receptors",
+            "Triggers gastropulmonary secretomotor reflex",
+            "Increases watery bronchial secretion via vagal efferents",
+            "Risk of thyroid dysfunction and iodism side effects"
+          ]
+        },
+        "right": {
+          "title": "Direct Expectorants (Guaifenesin)",
+          "points": [
+            "Absorbed systemically and secreted by bronchial glands",
+            "Reduces sputum surface tension and adhesiveness directly",
+            "Safe over-the-counter expectorant across pediatric groups",
+            "Minimal autonomic side effects at standard therapeutic doses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pharmacological agents that directly degrade the biochemical cross-linking and macromolecular structure of respiratory mucus to liquefy viscous secretions are **mucolytics**. Agents such as N-acetylcysteine, carbocisteine, and ambroxol chemically disrupt disulfide bonds between mucin glycoprotein polymers or stimulate surfactant synthesis. By reducing sputum viscosity and elasticity, mucolytics enhance ciliary clearance in chronic bronchitis, bronchiectasis, and cystic fibrosis. Inhaled N-acetylcysteine can trigger severe reflex bronchospasm in asthmatics, requiring concurrent bronchodilator coverage.",
+      "say": "Mucolytics chemically cleave mucin disulfide bonds to liquefy tenacious sputum for easier expectoration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mucus",
+            "label": "Tenacious viscous bronchial mucus with polymer disulfide bonds"
+          },
+          {
+            "id": "nac",
+            "label": "N-acetylcysteine donates free sulfhydryl (-SH) groups"
+          },
+          {
+            "id": "split",
+            "label": "Cleavage of mucoprotein disulfide bonds into smaller oligomers"
+          },
+          {
+            "id": "clear",
+            "label": "Marked reduction in viscosity and enhanced mucociliary clearance"
+          }
+        ],
+        "edges": [
+          [
+            "mucus",
+            "nac"
+          ],
+          [
+            "nac",
+            "split"
+          ],
+          [
+            "split",
+            "clear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A semisynthetic derivative of the vasicine alkaloid obtained from Adhatoda vasica that functions as an effective mucolytic and secretolytic is **bromhexine**. Taken orally, bromhexine depolymerizes mucopolysaccharide fibers within bronchial mucus by activating hydrolytic lysosomal enzymes, while concurrently stimulating type II alveolar pneumocytes to produce pulmonary surfactant. Its active oxidative metabolite, ambroxol, exhibits even greater secretolytic potency, thinning tenaciously adherent secretions and improving the penetration of co-prescribed antibiotics like amoxicillin into respiratory mucus.",
+      "say": "Bromhexine depolymerizes mucopolysaccharides and stimulates surfactant synthesis to clear bronchial mucus plugs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mucolytic agent",
+          "Chemical origin",
+          "Primary molecular mechanism",
+          "Distinctive therapeutic asset"
+        ],
+        "rows": [
+          [
+            "Bromhexine",
+            "Vasicine alkaloid derivative",
+            "Lysosomal enzyme activation and surfactant production",
+            "Improves co-prescribed antibiotic sputum levels"
+          ],
+          [
+            "Ambroxol",
+            "Active metabolite of bromhexine",
+            "Stimulates surfactant synthesis and ciliary beat",
+            "Potent oral secretolytic and throat analgesic action"
+          ],
+          [
+            "N-Acetylcysteine",
+            "Sulfhydryl-bearing amino acid",
+            "Direct reduction of mucin disulfide bonds",
+            "Parenteral antidote in paracetamol poisoning"
+          ],
+          [
+            "Dornase alfa",
+            "Recombinant human DNase I",
+            "Cleaves extracellular neutrophil DNA networks",
+            "Specific choice in cystic fibrosis sputum"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A fulminant, life-threatening acute asthma exacerbation characterized by severe bronchospasm, tenacious mucus plugging, and airway inflammation refractory to initial inhaled bronchodilators is **status asthmaticus**. Patients present in extreme respiratory distress with tachypnea exceeding thirty breaths per minute, pulse above 120 beats per minute, pulsus paradoxus exceeding 20 mmHg, inability to speak complete sentences, and peak expiratory flow below forty percent of predicted. A silent chest with absent breath sounds signals impending respiratory muscle exhaustion and fatal asphyxia.",
+      "say": "Status asthmaticus is severe refractory bronchospasm where a silent chest warns of respiratory muscle exhaustion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-exac-fig1.webp",
+        "alt": "Airway changes during life-threatening acute asthma exacerbation",
+        "caption": "Pathology of severe status asthmaticus demonstrating extensive luminal mucus plugs, eosinophilic inflammation, and complete airway collapse."
+      }
+    },
+    {
+      "tx": "The intravenous mineral formulation administered as a crucial adjunctive bronchodilator in acute life-threatening status asthmaticus is **magnesium sulfate**. Administered as a single intravenous infusion of 1.2 to 2.0 grams over twenty minutes, magnesium functions as a physiological calcium antagonist, blocking voltage-gated calcium channel influx into bronchial smooth muscle cells and suppressing calcium release from the sarcoplasmic reticulum. In addition, it blunts acetylcholine release at parasympathetic motor nerve endings and stabilizes mast cell membranes, producing prompt bronchodilation in severe crises unresponsive to standard nebulization.",
+      "say": "Intravenous magnesium sulfate acts as a calcium antagonist to relax smooth muscle in refractory status asthmaticus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mg",
+            "label": "Intravenous magnesium sulfate infusion (2 grams over 20 minutes)"
+          },
+          {
+            "id": "ca_block",
+            "label": "Competitive blockade of voltage-gated L-type calcium channels"
+          },
+          {
+            "id": "ach",
+            "label": "Inhibition of presynaptic acetylcholine release from parasympathetic nerves"
+          },
+          {
+            "id": "dilate",
+            "label": "Rapid smooth muscle hyperpolarization and reversal of severe bronchospasm"
+          }
+        ],
+        "edges": [
+          [
+            "mg",
+            "ca_block"
+          ],
+          [
+            "mg",
+            "ach"
+          ],
+          [
+            "ca_block",
+            "dilate"
+          ],
+          [
+            "ach",
+            "dilate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The highly purified recombinant formulation of human deoxyribonuclease I that acts as an enzyme-cleaving mucolytic in cystic fibrosis is **dornase alfa**. In cystic fibrosis, chronic endobronchial pseudomonal infection results in massive neutrophilic infiltration, autolysis, and extracellular accumulation of highly polymerized, viscous human DNA strands that severely thicken sputum. Dornase alfa selectively hydrolyzes this extracellular DNA network into small oligonucleotides, dramatically liquefying purulent endobronchial secretions and decreasing the frequency of pulmonary exacerbations without damaging functional lung parenchyma.",
+      "say": "Dornase alfa hydrolyzes extracellular neutrophil DNA networks to liquefy viscous secretions in cystic fibrosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dornase Alfa (Recombinant Human DNase I)",
+          "points": [
+            "Enzymatically hydrolyzes extracellular human neutrophil DNA",
+            "Specifically formulated for inhalation in cystic fibrosis",
+            "Reduces viscoelasticity of infected purulent sputum",
+            "Preserves structural integrity of normal respiratory tissues"
+          ]
+        },
+        "right": {
+          "title": "N-Acetylcysteine (Sulfhydryl Mucolytic)",
+          "points": [
+            "Chemically reduces mucin protein disulfide bonds",
+            "Broad mucolytic activity across chronic bronchitis and COPD",
+            "Ineffective against high molecular weight DNA networks",
+            "Can precipitate acute bronchospasm in reactive airways"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "An adjunctive medical gas mixture composed of helium and oxygen utilized to reduce the physical work of breathing in critical status asthmaticus is **heliox inhalation**. Because helium exhibits a density approximately one-third that of nitrogen, a mixture of 80% helium and 20% oxygen dramatically lowers total gas density. This converts highly turbulent airflow across severely narrowed, obstructed subsegmental bronchi into smooth laminar flow, lowering airway resistance, decreasing dynamic hyperinflation, and enhancing the deep pulmonary penetration of concurrent nebulized bronchodilator particles.",
+      "say": "Heliox lowers inhaled gas density to transform turbulent airflow into laminar flow across narrowed asthmatic bronchi.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atmospheric Air / Medical Nitrogen Mix",
+          "points": [
+            "Composed of 78% nitrogen and 21% oxygen",
+            "High physical gas density creates turbulent flow in narrowed airways",
+            "Elevates work of breathing and dynamic hyperinflation",
+            "Impairs deep aerosol particle penetration into peripheral alveoli"
+          ]
+        },
+        "right": {
+          "title": "Heliox Gas Mixture (80:20 or 70:30 Helium:Oxygen)",
+          "points": [
+            "Helium density is one-third of ambient nitrogen",
+            "Converts turbulent airflow into smooth laminar flow across obstructions",
+            "Reduces Reynolds number and respiratory muscle fatigue",
+            "Doubles pulmonary aerosol deposition of nebulized salbutamol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Emergency triage and therapeutic escalation in acute asthma are governed by standardized clinical metrics known as **objective exacerbation grading**. Using peak expiratory flow measurements, arterial blood gas analysis, and vital signs, exacerbations are classified as mild, moderate, severe, or life-threatening. A peak flow below thirty-three percent, normal or elevated PaCO2 (indicating loss of compensatory hyperventilation due to exhaustion), exhaustion, cyanosis, and hypotension define a life-threatening crisis requiring immediate intensive care admission and readiness for rapid-sequence mechanical ventilation.",
+      "say": "Objective exacerbation grading uses peak flow and blood gases to detect exhaustion and guide intensive care escalation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Exacerbation severity",
+          "Peak expiratory flow (% predicted)",
+          "Arterial blood gas profile",
+          "Clinical management setting"
+        ],
+        "rows": [
+          [
+            "Moderate exacerbation",
+            "50% to 75% of predicted",
+            "Normal PaO2; respiratory alkalosis (low PaCO2)",
+            "Outpatient SABA nebulization and oral prednisolone"
+          ],
+          [
+            "Severe acute asthma",
+            "33% to 50% of predicted",
+            "PaO2 <60 mmHg; PaCO2 low (hyperventilation)",
+            "Hospital admission; oxygen, nebulizers, IV steroids"
+          ],
+          [
+            "Life-threatening asthma",
+            "Under 33% of predicted",
+            "Normal PaCO2 (pseudonormalization) or hypercapnia",
+            "Intensive care transfer; IV magnesium; ventilatory support"
+          ],
+          [
+            "Near-fatal asthma",
+            "Unrecordable / silent chest",
+            "Severe hypercapnia and respiratory acidosis",
+            "Immediate endotracheal intubation and mechanical ventilation"
+          ]
+        ]
+      }
+    }
+  ]
+}
