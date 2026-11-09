@@ -1,0 +1,163 @@
+{
+  "v": 1,
+  "module": "phm-antiparkinsonian",
+  "subject": "pharmacology",
+  "title": "Anticholinergics in Parkinsonism and Cognitive Enhancers: Trihexyphenidyl, Donepezil, Memantine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Trihexyphenidyl** (benzhexol) restores the striatal dopamine acetylcholine seesaw from the other side: when dopamine falls, cholinergic interneurons overact, and central anticholinergic blockade damps tremor (more than bradykinesia) in younger patients. Its price is the full anticholinergic catalogue: dry mouth, constipation, urinary retention, blurred vision, confusion and memory failure, which is why age over 70 or any cognitive impairment effectively bans the class in modern practice.",
+      "say": "Trihexyphenidyl helps young tremor and harms old brains; age writes the prescription more than tremor does.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where anticholinergics fit",
+          "points": [
+            "Younger patients with tremor dominant disease",
+            "Drug induced parkinsonism adjunct with caution",
+            "Sialorrhoea reduction as a side benefit",
+            "When levodopa response is incomplete for tremor"
+          ]
+        },
+        "right": {
+          "title": "Where they are banned in practice",
+          "points": [
+            "Age over 70 or any cognitive impairment",
+            "Prostatic urinary retention and glaucoma",
+            "Constipation and ileus prone patients",
+            "Dementia with Lewy bodies: confusion catastrophe"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Drug induced parkinsonism from dopamine blockers is managed first by removing or reducing the blocker, with anticholinergics or amantadine as bridges, never by reflex levodopa which fights the antipsychotic's purpose. Anticholinergics also treat **acute dystonia** dramatically: intravenous procyclidine or benztropine unwinds an oculogyric crisis within minutes, a resuscitation room pearl quite separate from their weak chronic tremor role.",
+      "say": "Acute dystonia melts under intravenous anticholinergics; chronic drug induced parkinsonism wants the blocker removed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "blocker", "label": "Dopamine blocker started: antipsychotic or metoclopramide" },
+          { "id": "dystonia", "label": "Acute dystonia: oculogyric crisis, torticollis" },
+          { "id": "iv", "label": "Intravenous anticholinergic reverses within minutes" },
+          { "id": "review", "label": "Review the blocker: reduce, switch or cover briefly" }
+        ],
+        "edges": [["blocker", "dystonia"], ["dystonia", "iv"], ["iv", "review"]]
+      }
+    },
+    {
+      "tx": "Crossing to dementia pharmacology, **donepezil** reversibly inhibits acetylcholinesterase, raising synaptic acetylcholine in a cortex losing cholinergic neurons in Alzheimer disease, with modest symptomatic benefit on cognition and function and no disease modification. Rivastigmine (also inhibiting butyrylcholinesterase, with a patch formulation) and galantamine (plus nicotinic modulation) share the class. Cholinergic adverse effects run in reverse of anticholinergic teaching: nausea, diarrhoea, bradycardia, syncope, vivid dreams and muscle cramps.",
+      "say": "Donepezil tops up a fading cholinergic cortex; expect gut and pulse to feel it first.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alzheimers-disease-fig1.webp",
+        "alt": "Brain PET scans in Alzheimer disease showing regional hypometabolism",
+        "caption": "Alzheimer disease imaging, the condition cholinesterase inhibitors and memantine symptomatically support."
+      }
+    },
+    {
+      "tx": "**Memantine** antagonises the NMDA receptor with moderate affinity and a fast off rate, blocking pathological glutamate excitotoxicity while sparing physiological learning signals, which suits moderate to severe Alzheimer disease alone or combined with donepezil. It is generally well tolerated (dizziness and occasional confusion), renally dosed, and examinations love it as the anti ketamine: same receptor, opposite kinetic manners, entirely different therapeutic universe.",
+      "say": "Memantine guards the NMDA gate politely where ketamine bars it theatrically; kinetics make the difference.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Memantine profile",
+          "points": [
+            "Moderate affinity, voltage dependent NMDA blockade",
+            "Moderate to severe Alzheimer disease",
+            "Combines with donepezil in later stages",
+            "Renal dose adjustment, dizziness the main toll"
+          ]
+        },
+        "right": {
+          "title": "NMDA contrast set",
+          "points": [
+            "Ketamine: high affinity, dissociative anaesthesia",
+            "Amantadine: weak NMDA blockade in Parkinson therapy",
+            "Memantine: engineered for chronic tolerability",
+            "All three answer NMDA questions in examinations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Galantamine** adds nicotinic allosteric modulation to acetylcholinesterase inhibition and is metabolised by CYP2D6 and CYP3A4, making poor metabolisers and inhibitor partners its prescribing footnote. Across the class, initiation means slow titration over weeks to let the gut adapt, dosing with food, and vigilance where beta blockers, bradycardia or peptic ulcer disease already live, because vagotonic cholinergic excess respects none of those territories. Donepezil's long half life forgives a missed dose and permits once daily timing chosen around dreams.",
+      "say": "Titrate cholinesterase inhibitors slowly with food, and respect hearts and stomachs already on beta blockers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "start", "label": "Donepezil 5 mg started, taken consistently" },
+          { "id": "titr", "label": "Increase to 10 mg after 4 to 6 weeks" },
+          { "id": "review", "label": "Cognition, function, pulse and weight reviewed" },
+          { "id": "continue", "label": "Continue while benefit and tolerability balance" }
+        ],
+        "edges": [["start", "titr"], ["titr", "review"], ["review", "continue"]]
+      }
+    },
+    {
+      "tx": "The **cholinergic seesaw** unifies this lesson and much of the examination paper: anticholinergics worsen dementia and relieve parkinsonian tremor, cholinesterase inhibitors aid dementia and can worsen tremor or provoke bradycardia, and dementia with Lewy bodies, exquisitely cholinergic deficient, benefits most from cholinesterase inhibitors while suffering most from dopamine blockers and anticholinergics. One transmitter, four quadrants, endless vignettes built from the crossings.",
+      "say": "Cholinergic up helps memory and hurts tremor; down helps tremor and hurts memory. Lewy body patients live at the extreme.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cholinergic enhancement",
+          "points": [
+            "Agents: donepezil, rivastigmine, galantamine",
+            "Helps Alzheimer and Lewy body cognition",
+            "Costs: bradycardia, gut upset, vivid dreams",
+            "Can worsen tremor modestly"
+          ]
+        },
+        "right": {
+          "title": "Cholinergic blockade",
+          "points": [
+            "Agents: trihexyphenidyl, procyclidine, benztropine",
+            "Helps tremor and acute dystonia",
+            "Costs: confusion, retention, constipation, dry mouth",
+            "Effectively banned in cognitive impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Parkinson disease dementia and dementia with Lewy bodies borrow the Alzheimer shelf because cholinergic loss is severer there: rivastigmine and donepezil carry the evidence and licences, memantine assists selected cases, while antipsychotics are rationed to quetiapine or clozapine under specialist care, given neuroleptic sensitivity reactions that can be fatal. An **anticholinergic burden** audit across bladder, bowel, sleep and pain drugs often improves cognition more than any enhancer adds.",
+      "say": "In Lewy body disease, subtract anticholinergics before adding enhancers, and ration antipsychotics to specialists.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "audit", "label": "Anticholinergic burden audit of the whole drug list" },
+          { "id": "subtract", "label": "Remove bladder, sleep and pain anticholinergics" },
+          { "id": "enhance", "label": "Rivastigmine or donepezil for cognition" },
+          { "id": "psych", "label": "Psychosis: quetiapine or clozapine, specialist led" }
+        ],
+        "edges": [["audit", "subtract"], ["subtract", "enhance"], ["enhance", "psych"]]
+      }
+    },
+    {
+      "tx": "**Deprescribing hygiene** closes the lesson: every anticholinergic started in a young tremor patient carries a planned old age exit, every cholinesterase inhibitor carries pulse and syncope review, memantine carries renal arithmetic, and all of them carry an annual ask whether benefit persists. Monitored trials of halving or stopping donepezil in advanced disease are legitimate medicine, not abandonment, when goals of care have shifted toward comfort.",
+      "say": "Start every one of these drugs with its review date and exit criteria already written.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Starting rules",
+          "points": [
+            "Trihexyphenidyl: young, cognitively intact, tremor dominant",
+            "Donepezil: baseline pulse, ECG where syncope history",
+            "Memantine: renal function sets the dose",
+            "All: indication and review date documented"
+          ]
+        },
+        "right": {
+          "title": "Stopping rules",
+          "points": [
+            "Anticholinergics out before cognitive impairment arrives",
+            "Cholinesterase inhibitors trialled off in advanced disease",
+            "Comfort goals govern late stage decisions",
+            "Withdrawal effects monitored on any cessation"
+          ]
+        }
+      }
+    }
+  ]
+}
