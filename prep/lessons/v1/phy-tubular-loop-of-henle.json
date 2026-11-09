@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-tubular",
+  "subject": "physiology",
+  "title": "The Loop of Henle, the NKCC2 Cotransporter, and the Distal Tubule",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The U-shaped loop of Henle dips into the renal medulla to establish the osmotic driving force required for concentrating urine. While the thin descending limb is highly permeable to water via aquaporin-1 and impermeable to solutes, the thick ascending limb is completely **impermeable to water**, actively extracting sodium chloride.",
+      "say": "The loop of Henle separates water and salt reabsorption: the descending limb reabsorbs water, while the ascending limb pumps out salt.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thin Descending Limb",
+          "points": [
+            "Highly expressed Aquaporin-1 water channels",
+            "Extremely permeable to water; impermeable to NaCl and urea",
+            "Tubular fluid becomes hyperosmolar (up to 1200 mOsm/kg at hairpin turn)",
+            "Passive water withdrawal driven by hypertonic medullary interstitium"
+          ]
+        },
+        "right": {
+          "title": "Thick Ascending Limb (TAL)",
+          "points": [
+            "Strictly impermeable to water; lacks aquaporin water channels",
+            "Massive active reabsorption of NaCl via apical NKCC2 cotransporters",
+            "Tubular fluid becomes hypo-osmolar (~100 mOsm/kg entering distal tubule)",
+            "Known universally as the diluting segment of the nephron"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Active solute extraction in the thick ascending limb is driven by the electroneutral apical **NKCC2 cotransporter**, which moves one sodium, one potassium, and two chloride ions from the tubular lumen into the epithelial cell. This transporter accounts for twenty-five percent of total renal sodium reabsorption.",
+      "say": "The NKCC2 cotransporter pumps one sodium, one potassium, and two chloride ions into thick ascending limb cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "baso_pump",
+            "label": "Basolateral Na+/K+-ATPase Generates Inward Sodium Electrochemical Gradient"
+          },
+          {
+            "id": "nkcc2_sym",
+            "label": "Apical NKCC2 Cotransports 1 Na+, 1 K+, and 2 Cl- Across Apical Membrane"
+          },
+          {
+            "id": "cl_exit",
+            "label": "Chloride Exits Basolaterally via ClC-Kb and ClC-Ka Anion Channels"
+          },
+          {
+            "id": "k_recycle",
+            "label": "Potassium Recycles Back into Lumen via Apical ROMK Channels"
+          }
+        ],
+        "edges": [
+          [
+            "baso_pump",
+            "nkcc2_sym"
+          ],
+          [
+            "nkcc2_sym",
+            "cl_exit"
+          ],
+          [
+            "nkcc2_sym",
+            "k_recycle"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because potassium is recycled back out into the lumen through apical ROMK channels while chloride exits across the basolateral membrane, the tubular lumen develops an eight millivolt **lumen-positive transepithelial potential**. This positive charge repels divalent cations, driving paracellular reabsorption of calcium and magnesium.",
+      "say": "Potassium recycling creates a lumen-positive electrical charge that pushes calcium and magnesium across paracellular junctions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Transport Route",
+          "Driving Force",
+          "Transported Solutes",
+          "Pathology / Drug Target"
+        ],
+        "rows": [
+          [
+            "Apical NKCC2",
+            "Secondary active transport (Na+ gradient)",
+            "1 Na+, 1 K+, 2 Cl- (transcellular)",
+            "Inhibited by furosemide and bumetanide"
+          ],
+          [
+            "Apical ROMK",
+            "Potassium recycling down electrical gradient",
+            "K+ ion backflux into lumen",
+            "Defective in Bartter syndrome Type II"
+          ],
+          [
+            "Paracellular Pathway",
+            "Lumen-positive transepithelial potential (+8 mV)",
+            "Calcium (Ca2+) and Magnesium (Mg2+)",
+            "Claudin-16 and claudin-19 tight junction pores"
+          ],
+          [
+            "Basolateral ClC-Kb",
+            "Facilitated chloride egress",
+            "Cl- exits into medullary interstitium",
+            "Defective in Bartter syndrome Type III"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High-ceiling loop diuretics like furosemide, torsemide, and bumetanide inhibit the chloride-binding site of the **apical NKCC2 cotransporter**. By abolishing both the transcellular sodium chloride uptake and the lumen-positive potential, loop diuretics induce massive natriuresis and increase urinary excretion of calcium and magnesium.",
+      "say": "Furosemide blocks NKCC2, stopping salt reabsorption and causing significant loss of sodium, potassium, calcium, and magnesium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "furosemide",
+            "label": "Furosemide Binds Reversibly to Chloride-Binding Pocket of NKCC2"
+          },
+          {
+            "id": "block",
+            "label": "Inhibition of Na+-K+-2Cl- Cotransport Across Thick Ascending Limb"
+          },
+          {
+            "id": "pot_loss",
+            "label": "Abolishes Lumen-Positive Transepithelial Potential (+8 mV -> 0 mV)"
+          },
+          {
+            "id": "wasting",
+            "label": "Massive Natriuresis, Chloruresis, Hypokalaemia, Hypercalciuria, and Hypomagnesaemia"
+          }
+        ],
+        "edges": [
+          [
+            "furosemide",
+            "block"
+          ],
+          [
+            "block",
+            "pot_loss"
+          ],
+          [
+            "pot_loss",
+            "wasting"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inherited loss-of-function mutations in NKCC2, ROMK, or basolateral chloride channels produce **Bartter syndrome**. Presenting in infancy with severe polyuria, hypokalemia, metabolic alkalosis, hypercalciuria, and nephrocalcinosis with completely normal systemic blood pressure, Bartter syndrome precisely mirrors chronic high-dose loop diuretic administration throughout childhood.",
+      "say": "Bartter syndrome is an inherited defect in thick ascending limb salt reabsorption, mimicking lifelong loop diuretic overdose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bartter-syndrome-fig1.webp",
+        "alt": "Bartter syndrome renal tubular transport pathology",
+        "caption": "Thick ascending limb NKCC2 defect, juxtaglomerular hyperplasia, and nephrocalcinosis in Bartter syndrome."
+      }
+    },
+    {
+      "tx": "Fluid exiting the thick ascending limb enters the **early distal convoluted tubule**, which reabsorbs five to seven percent of filtered sodium chloride. Like the ascending limb, this segment is impermeable to water, further diluting tubular fluid to fifty to seventy-five milliosmoles per kilogram as solutes are extracted.",
+      "say": "The early distal tubule is impermeable to water, reabsorbing salt to further dilute urine down to fifty milliosmoles per kilogram.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thick Ascending Limb (Loop)",
+          "points": [
+            "NKCC2 cotransporter mediates salt uptake",
+            "Generates hypertonic medullary gradient",
+            "Lumen-positive potential drives paracellular Ca2+ reabsorption",
+            "Inhibited by loop diuretics (furosemide)"
+          ]
+        },
+        "right": {
+          "title": "Early Distal Convoluted Tubule",
+          "points": [
+            "NCCT (NCC) electroneutral cotransporter mediates salt uptake",
+            "Active transcellular Ca2+ reabsorption via TRPV5 and calbindin",
+            "Electroneutral luminal potential",
+            "Inhibited by thiazide diuretics (hydrochlorothiazide)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Electroneutral sodium and chloride entry across the apical membrane of the early distal convoluted tubule is mediated by the **thiazide-sensitive NCC cotransporter**. Thiazide diuretics inhibit this carrier, promoting natriuresis while paradoxically enhancing transcellular calcium reabsorption through apical TRPV5 calcium channels and basolateral sodium-calcium exchangers.",
+      "say": "Thiazide diuretics block the NCC cotransporter, promoting salt excretion while increasing calcium reabsorption to treat kidney stones.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thiazide",
+            "label": "Hydrochlorothiazide Inhibits Apical Thiazide-Sensitive Na+-Cl- Cotransporter (NCC)"
+          },
+          {
+            "id": "na_drop",
+            "label": "Intracellular Sodium Concentration Drops in Distal Tubular Cells"
+          },
+          {
+            "id": "ncx_stim",
+            "label": "Enhances Basolateral 3 Na+ / 1 Ca2+ Exchanger (NCX1) Activity"
+          },
+          {
+            "id": "ca_reabs",
+            "label": "Augments Apical TRPV5 Ca2+ Entry: Decreases Urinary Calcium Excretion"
+          }
+        ],
+        "edges": [
+          [
+            "thiazide",
+            "na_drop"
+          ],
+          [
+            "na_drop",
+            "ncx_stim"
+          ],
+          [
+            "ncx_stim",
+            "ca_reabs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cystic dilation of collecting ducts and loops in medullary pyramids disrupts corticomedullary osmotic gradients in **medullary cystic kidney disease**. Patients exhibit impaired urinary concentrating capacity, severe polyuria, salt wasting, and progressive tubulointerstitial fibrosis without glomerular immune complex deposition, eventually progressing to end-stage renal disease.",
+      "say": "Medullary cystic kidney disease disrupts medullary architecture, causing severe urinary concentrating defects and polyuria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/medullary-cystic-kidney-disease-fig1.webp",
+        "alt": "Medullary cystic kidney disease and corticomedullary disruption",
+        "caption": "Medullary architecture loss, tubular microcysts, and corticomedullary gradient disruption."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

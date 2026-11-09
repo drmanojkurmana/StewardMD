@@ -1,0 +1,246 @@
+{
+  "v": 1,
+  "module": "phy-gfr",
+  "subject": "physiology",
+  "title": "PAH Clearance, Effective Renal Plasma Flow, and Renin Release",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Quantification of total renal plasma flow requires a substance that is almost completely removed from renal arterial blood in a single capillary transit. The exogenous organic anion **para-aminohippurate**, abbreviated as PAH, is freely filtered at the glomerulus and avidly secreted by proximal tubular basolateral transporters.",
+      "say": "Para-aminohippurate is filtered and avidly secreted, clearing nearly ninety percent of plasma in a single pass.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PAH Handling in Kidney",
+          "points": [
+            "Freely filtered across glomerular capillaries (~20% of renal load)",
+            "Actively secreted by proximal tubule OAT transporters (~70% of load)",
+            "Approximately 90% extracted in a single circulatory pass",
+            "PAH clearance measures effective renal plasma flow (ERPF)"
+          ]
+        },
+        "right": {
+          "title": "Inulin Handling in Kidney",
+          "points": [
+            "Freely filtered across glomerular capillaries (~20% of load)",
+            "Zero tubular secretion and zero tubular reabsorption",
+            "Exactly 20% extracted in a single pass (matching filtration fraction)",
+            "Inulin clearance measures true glomerular filtration rate (GFR)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because approximately ten percent of renal blood flows through non-clearing medullary capsules and adipose tissue, kidneys do not achieve one hundred percent extraction of PAH. Consequently, PAH clearance measures **effective renal plasma flow**, which averages roughly six hundred millilitres per minute in healthy adults.",
+      "say": "PAH clearance measures effective renal plasma flow, underestimating true renal plasma flow by about ten percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renal Perfusion Metric",
+          "Standard Formula",
+          "Normal Adult Value",
+          "Measurement Substrate"
+        ],
+        "rows": [
+          [
+            "Effective Renal Plasma Flow (ERPF)",
+            "CPAH = (UPAH × V) / PPAH",
+            "~585 to 600 mL / min",
+            "Exogenous Para-aminohippurate"
+          ],
+          [
+            "True Renal Plasma Flow (TRPF)",
+            "ERPF / Extraction Ratio (~0.90)",
+            "~650 to 660 mL / min",
+            "Corrected for 90% renal PAH extraction"
+          ],
+          [
+            "Total Renal Blood Flow (RBF)",
+            "TRPF / (1 - Haematocrit)",
+            "~1200 mL / min",
+            "Calculated assuming normal Hct ~ 0.45"
+          ],
+          [
+            "Filtration Fraction (FF)",
+            "Cinulin / CPAH",
+            "~0.19 to 0.21 (20%)",
+            "Ratio of GFR to ERPF"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Active tubular secretion of PAH is a saturable carrier-mediated process relying on basolateral organic anion transporter 1 and apical multidrug resistance proteins. When plasma PAH concentration exceeds approximately twenty milligrams per decilitre, the **transport maximum for PAH** is reached, causing clearance to drop toward inulin clearance.",
+      "say": "When plasma levels exceed transport maximum, PAH secretion saturates, and its clearance declines toward inulin clearance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "low_p",
+            "label": "Low Plasma PAH (< 15 mg/dL): Carrier Transporters Far from Saturation"
+          },
+          {
+            "id": "high_ext",
+            "label": "Avid Secretion Clears ~90% of PAH; CPAH Accurately Measures ERPF"
+          },
+          {
+            "id": "high_p",
+            "label": "High Plasma PAH (> 20 mg/dL): Exceeds Secretory Capacity (Tm ~ 80 mg/min)"
+          },
+          {
+            "id": "fall_cl",
+            "label": "Clearance Declines Progressively Toward GFR as Unsecreted PAH Escapes in Veins"
+          }
+        ],
+        "edges": [
+          [
+            "low_p",
+            "high_ext"
+          ],
+          [
+            "high_ext",
+            "high_p"
+          ],
+          [
+            "high_p",
+            "fall_cl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endocrine regulation of systemic blood pressure and renal hemodynamics is anchored by the **juxtaglomerular apparatus**, located at the vascular pole of the nephron. It comprises three specialized structures: granular renin-producing juxtaglomerular cells in afferent arterioles, the sensor macula densa in the thick ascending limb, and extraglomerular mesangial lacis cells.",
+      "say": "The juxtaglomerular apparatus controls renin release through granular juxtaglomerular cells, the macula densa, and mesangial cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+        "alt": "Juxtaglomerular apparatus and renal microcirculation",
+        "caption": "Juxtaglomerular apparatus anatomy, renin granules, and vascular microenvironment."
+      }
+    },
+    {
+      "tx": "The proteolytic hormone **renin** is synthesized, stored, and secreted by specialized granular juxtaglomerular cells of the afferent arteriole. Renin release is triggered by three primary physiological stimuli: decreased renal perfusion pressure (renal baroreceptor), increased renal sympathetic nerve activity, and diminished sodium chloride delivery to the macula densa.",
+      "say": "Renin is released in response to low arteriolar perfusion pressure, renal sympathetic activation, or low sodium delivery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stimulus for Renin Release",
+          "Receptor / Sensing Mechanism",
+          "Intracellular Second Messenger",
+          "Clinical Trigger"
+        ],
+        "rows": [
+          [
+            "Decreased Afferent Stretch",
+            "Intrarenal vascular baroreceptor",
+            "Decreased intracellular calcium",
+            "Hypovolaemia, aortic coarctation, renal stenosis"
+          ],
+          [
+            "Sympathetic Activation",
+            "Beta-1 adrenergic receptors on JG cells",
+            "Elevated cyclic AMP (cAMP)",
+            "Exercise, upright posture, hemorrhagic shock"
+          ],
+          [
+            "Decreased Luminal NaCl Delivery",
+            "Macula densa NKCC2 transporters",
+            "Elevated local prostaglandins (PGE2)",
+            "Low dietary salt, vigorous loop diuretic therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unlike most secretory cells where calcium promotes exocytosis, renin secretion is uniquely inhibited by elevated intracellular calcium. Consequently, increased arterial stretch opens stretch-activated calcium channels, raising intracellular calcium and suppressing **renin release from granules**; conversely, low calcium or elevated cyclic adenosine monophosphate strongly triggers exocytosis.",
+      "say": "Uniquely, calcium inhibits renin secretion, meaning low intracellular calcium and high cyclic AMP trigger renin release.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stim",
+            "label": "Renal Hypotension or Sympathetic Beta-1 Stimulation"
+          },
+          {
+            "id": "camp",
+            "label": "Intracellular cAMP Accumulates; Intracellular Ca2+ Suppressed"
+          },
+          {
+            "id": "exoc",
+            "label": "Granular Exocytosis Releases Active Renin into Renal Circulation"
+          },
+          {
+            "id": "ang1",
+            "label": "Renin Cleaves Circulating Angiotensinogen to Angiotensin I"
+          }
+        ],
+        "edges": [
+          [
+            "stim",
+            "camp"
+          ],
+          [
+            "camp",
+            "exoc"
+          ],
+          [
+            "exoc",
+            "ang1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once in the systemic circulation, renin acts enzymatically upon liver-derived angiotensinogen, cleaving a decapeptide designated angiotensin I. Within pulmonary and renal capillary endothelium, **angiotensin converting enzyme** removes two C-terminal amino acids to generate the potent octapeptide vasoconstrictor angiotensin II, which stimulates arterial constriction and adrenal aldosterone release.",
+      "say": "Renin cleaves angiotensinogen into angiotensin one, which angiotensin converting enzyme converts into active angiotensin two.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "liver",
+            "label": "Liver Synthesizes and Releases Circulating Glycoprotein Angiotensinogen"
+          },
+          {
+            "id": "renin_act",
+            "label": "Renin Cleaves Angiotensinogen (14-mer) into Inactive Decapeptide Angiotensin I"
+          },
+          {
+            "id": "ace_act",
+            "label": "Endothelial ACE (Pulmonary and Renal) Converts Ang I into Active Octapeptide Ang II"
+          },
+          {
+            "id": "ang2_act",
+            "label": "Angiotensin II Drives Vasoconstriction, Aldosterone Secretion, and Na+ Retention"
+          }
+        ],
+        "edges": [
+          [
+            "liver",
+            "renin_act"
+          ],
+          [
+            "renin_act",
+            "ace_act"
+          ],
+          [
+            "ace_act",
+            "ang2_act"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rare renin-secreting juxtaglomerular cell tumors, or hemangiopericytomas, produce autonomous oversecretion of renin, causing severe hypertension and hypokalemia. Similarly, unilateral renal artery stenosis produces **secondary hyperreninaemic hypertension**, where local renal parenchymal ischaemia stimulates persistent excess renin output despite high systemic blood pressure.",
+      "say": "Renal artery stenosis triggers persistent renin secretion, producing severe secondary hypertension and hypokalemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/renal-cell-carcinoma-fig1.webp",
+        "alt": "Renal neoplasia and vascular pathology",
+        "caption": "Renal parenchymal tumors, juxtaglomerular cell lesions, and neuroendocrine vascular hypertension."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

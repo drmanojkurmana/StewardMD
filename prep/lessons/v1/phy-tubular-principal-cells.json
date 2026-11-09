@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "phy-tubular",
+  "subject": "physiology",
+  "title": "Principal Cells, Intercalated Cells, and Aldosterone Regulation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The late distal tubule and cortical collecting duct contain two morphologically and functionally distinct cell populations: principal cells and intercalated cells. Comprising over seventy percent of the epithelium, **cortical principal cells** mediate variable sodium reabsorption and potassium excretion under hormonal control.",
+      "say": "Principal cells reabsorb sodium and secrete potassium under aldosterone control, making up seventy percent of collecting ducts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cortical Principal Cells (~75%)",
+          "points": [
+            "Apical epithelial sodium channels (ENaC) mediate Na+ uptake",
+            "Apical ROMK channels mediate potassium secretion",
+            "Basolateral mineralocorticoid receptors respond to aldosterone",
+            "Apical Aquaporin-2 water channels inserted under ADH stimulation"
+          ]
+        },
+        "right": {
+          "title": "Intercalated Cells (~25%)",
+          "points": [
+            "Type A intercalated cells secrete protons and reclaim HCO3-",
+            "Type B intercalated cells secrete HCO3- and reclaim protons",
+            "Abundant apical and basolateral H+-ATPases and Cl-/HCO3- exchangers",
+            "Govern systemic acid-base balance independently of ENaC"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sodium entry across the apical membrane of principal cells is mediated by the **epithelial sodium channel**, universally abbreviated as ENaC. Driven by the chemical gradient maintained by basolateral sodium-potassium ATPases, uncoupled sodium entry creates a transepithelial lumen-negative potential of negative ten to twenty millivolts.",
+      "say": "Sodium enters principal cells through ENaC channels, creating a lumen-negative voltage that draws potassium out into the urine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "enac",
+            "label": "Apical ENaC Channels Facilitate Electro-Diffusion of Sodium into Principal Cells"
+          },
+          {
+            "id": "lumen_neg",
+            "label": "Uncoupled Cation Reabsorption Generates Lumen-Negative Voltage (-10 to -20 mV)"
+          },
+          {
+            "id": "k_drive",
+            "label": "Electrical Driving Force Pulls Intracellular Potassium into Lumen via ROMK"
+          },
+          {
+            "id": "na_pump",
+            "label": "Basolateral Na+/K+-ATPase Pumps 3 Na+ Out and 2 K+ In, Sustaining the Cycle"
+          }
+        ],
+        "edges": [
+          [
+            "enac",
+            "lumen_neg"
+          ],
+          [
+            "lumen_neg",
+            "k_drive"
+          ],
+          [
+            "enac",
+            "na_pump"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The lumen-negative transepithelial potential provides the critical electrical driving force for passive potassium secretion across apical **ROMK potassium channels**. Consequently, increased sodium delivery to the collecting duct (such as occurs with loop or thiazide diuretics) accelerates ENaC sodium uptake, enhancing potassium wasting and causing severe hypokalaemia.",
+      "say": "Increased sodium delivery accelerates ENaC uptake, deepening the negative voltage and causing diuretic-induced potassium wasting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gitelman-syndrome-fig1.webp",
+        "alt": "Distal nephron transport defect and hypokalaemia",
+        "caption": "Distal nephron electrolyte wasting, potassium secretion mechanics, and hypokalaemic metabolic alkalosis."
+      }
+    },
+    {
+      "tx": "The steroid hormone **aldosterone**, synthesized in the adrenal zona glomerulosa, diffuses across the basolateral membrane of principal cells to bind cytosolic mineralocorticoid receptors. The hormone-receptor complex translocates to the nucleus, transcribing serum and glucocorticoid-regulated kinase 1 to stimulate ENaC synthesis and prevent channel retrieval.",
+      "say": "Aldosterone binds mineralocorticoid receptors, increasing ENaC channel density and driving sodium retention and potassium loss.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-cortex-medulla-steroids-catecholamines-fig1.webp",
+        "alt": "Adrenal steroidogenesis and mineralocorticoid pathways",
+        "caption": "Adrenal steroid hormone synthesis, mineralocorticoid receptor dynamics, and renal epithelial target responses."
+      }
+    },
+    {
+      "tx": "Pharmacological blockade of aldosterone with spironolactone or eplerenone, or direct ENaC channel blockade with amiloride and triamterene, halts principal cell sodium reabsorption. Known clinically as **potassium-sparing diuretics**, these therapeutic agents abolish the lumen-negative potential, eliminating potassium secretion and effectively preventing or correcting severe diuretic-induced hypokalaemia.",
+      "say": "Potassium-sparing diuretics block aldosterone or ENaC channels, eliminating the electrical drive for potassium secretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aldosterone Receptor Antagonists",
+          "points": [
+            "Spironolactone and eplerenone competitive mineralocorticoid blockers",
+            "Slow onset of action (requires protein synthesis downregulation)",
+            "Indicated in congestive heart failure, cirrhosis, and primary aldosteronism",
+            "Risk of hyperkalaemia, especially with ACE inhibitors"
+          ]
+        },
+        "right": {
+          "title": "Direct ENaC Blockers",
+          "points": [
+            "Amiloride and triamterene directly plug ENaC pore",
+            "Rapid onset independent of gene transcription",
+            "Directly eliminates lumen-negative electrical gradient",
+            "Specific treatment of Liddle syndrome and lithium nephrogenic DI"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acid excretion in the cortical collecting duct is performed by specialized **type A intercalated cells**. These cells express apical proton-translocating ATPases and apical potassium-proton ATPases, actively pumping hydrogen ions into the tubular lumen against steep hundred-fold concentration gradients while reclaiming filtered potassium.",
+      "say": "Type A intercalated cells pump protons into urine via apical proton ATPases, regenerating bicarbonate to combat acidosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "carbonic",
+            "label": "Intracellular CA-II Generates H+ and HCO3- from Cellular CO2 and H2O"
+          },
+          {
+            "id": "h_pump",
+            "label": "Apical H+-ATPase and H+/K+-ATPase Actively Pump H+ into Urine"
+          },
+          {
+            "id": "buffer_urine",
+            "label": "Luminal H+ Buffered by Ammonia (NH4+) and Titratable Phosphate (H2PO4-)"
+          },
+          {
+            "id": "bicarb_blood",
+            "label": "Basolateral Anion Exchanger (AE1) Returns New HCO3- to Peritubular Blood"
+          }
+        ],
+        "edges": [
+          [
+            "carbonic",
+            "h_pump"
+          ],
+          [
+            "h_pump",
+            "buffer_urine"
+          ],
+          [
+            "carbonic",
+            "bicarb_blood"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Failure of type A intercalated cells to secrete protons into tubular fluid causes **distal type 1 renal tubular acidosis**. Inability to acidify urine below pH five point five results in systemic hyperchloremic non-anion gap metabolic acidosis, accompanied by progressive calcium phosphate nephrolithiasis and severe hypokalemia.",
+      "say": "Distal type one RTA is the failure of intercalated cells to secrete hydrogen ions, preventing urine acidification below pH five point five.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type of RTA",
+          "Primary Tubular Defect",
+          "Minimal Urine pH",
+          "Serum Potassium",
+          "Nephrolithiasis Risk"
+        ],
+        "rows": [
+          [
+            "Type 1 (Distal RTA)",
+            "Type A intercalated cell H+-ATPase failure",
+            "Invariably > 5.5",
+            "Hypokalaemia (K+ wasting)",
+            "High risk (calcium phosphate stones)"
+          ],
+          [
+            "Type 2 (Proximal RTA)",
+            "Proximal tubule HCO3- reabsorption failure",
+            "Can drop < 5.5 (if filtered load low)",
+            "Hypokalaemia",
+            "Low risk (no stones)"
+          ],
+          [
+            "Type 4 (Hyperkalaemic RTA)",
+            "Aldosterone deficiency or resistance",
+            "Usually < 5.5",
+            "Hyperkalaemia",
+            "Low risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, **type B intercalated cells** operate during systemic metabolic alkalosis to eliminate excess alkali. Featuring a polarity mirror-image of type A cells, they express apical pendrin chloride-bicarbonate exchangers that actively secrete bicarbonate into the lumen while basolateral proton pumps extrude hydrogen ions into the bloodstream.",
+      "say": "Type B intercalated cells secrete bicarbonate into urine via pendrin exchangers during metabolic alkalosis to restore acid balance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type A Intercalated Cell (Acid Secretor)",
+          "points": [
+            "Activated during systemic acidosis",
+            "Apical H+-ATPase and H+/K+-ATPase pumps H+ into lumen",
+            "Basolateral AE1 (Band 3) returns HCO3- to systemic blood",
+            "Acidifies urine down to a minimum pH of 4.5"
+          ]
+        },
+        "right": {
+          "title": "Type B Intercalated Cell (Base Secretor)",
+          "points": [
+            "Activated during systemic metabolic alkalosis",
+            "Apical pendrin (Cl-/HCO3- exchanger) secretes HCO3- into urine",
+            "Basolateral H+-ATPase pumps protons back into systemic blood",
+            "Alkalinizes urine up to pH 8.0 to eliminate excess base"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
