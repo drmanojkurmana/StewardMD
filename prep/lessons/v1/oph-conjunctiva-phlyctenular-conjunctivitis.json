@@ -1,0 +1,193 @@
+{
+ "v": 1,
+ "id": "oph-conjunctiva-phlyctenular-conjunctivitis",
+ "subject": "ophthalmology",
+ "module": "oph-conjunctiva",
+ "title": "Phlyctenular Disease, Pterygium and Pinguecula",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Phlyctenular conjunctivitis** is delayed hypersensitivity nodule at limbus or conjunctiva in children reacting to staphylococcal or tuberculous antigens, giving focal redness, irritation and photophobia. Nodules may ulcerate and conjunctival lesions heal without scar while corneal lesions vascularise and scar. Source antigen review includes lid staph carriage and tuberculosis exposure by setting prevalence.",
+   "say": "Hypersensitivity nodule gives focal limbal inflammation in children characteristically by antigen reaction. Lid and tuberculosis sources give antigen review direction. Corneal involvement gives scar risk."
+  },
+  {
+   "tx": "**Phlyctenular keratitis** extends nodule onto cornea with fascicular ulcer trailing vessels across limbus, photophobia prominent in children hiding eyes from light. Steroid responsiveness is high but infection exclusion precedes suppression, herpes and bacterial ulcer in differential. Antigen source treatment reduces recurrence beyond repeated steroid courses alone.",
+   "say": "Corneal extension gives trailing vessels with photophobia in childhood phlycten disease seriously. Infection exclusion gives steroid safety before suppression. Source treatment gives recurrence reduction.",
+   "vis": {
+    "kind": "table",
+    "title": "Phlycten antigen sources",
+    "cols": [
+     "Source",
+     "Review"
+    ],
+    "rows": [
+     [
+      "Staphylococcal lid carriage",
+      "Blepharitis treatment backbone"
+     ],
+     [
+      "Tuberculosis exposure",
+      "Setting based systemic review"
+     ],
+     [
+      "Recurrence pattern",
+      "Source over repeated steroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pterygium** is fibrovascular conjunctival growth onto cornea from nasal limbus in ultraviolet exposed adults, elastotic degeneration with wing shaped fold whose apex advances toward visual axis. It induces astigmatism by flattening and threatens axis by growth or recurrence scarring. Excision with conjunctival autograft gives lowest recurrence standard in modern surgery teaching.",
+   "say": "Ultraviolet degeneration gives nasal wing growth onto cornea in adults characteristically by exposure. Astigmatism induction gives visual effect before axis invasion. Autograft excision gives recurrence standard.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/conjunctivitis-fig1.webp",
+    "alt": "Conjunctival lesion comparison diagram relevant to pterygium growth patterns.",
+    "caption": "Conjunctival growth patterns. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pinguecula** is yellowish elastotic conjunctival nodule at limbus that never crosses onto cornea, separating it from pterygium by corneal invasion alone. It inflames as pingueculitis occasionally, otherwise observes without surgery for cosmesis only reluctantly. Apex on cornea is therefore one question diagnosis discriminator at slit lamp.",
+   "say": "Limbal nodule without corneal crossing together gives pinguecula separation from pterygium simply at slit lamp during clinic assessment in adults. Occasional inflammation gives treatment need in pingueculitis episodes. Observation gives usual care in quiet lesions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pterygium",
+     "points": [
+      "Crosses limbus onto cornea",
+      "Nasal wing, ultraviolet link",
+      "Autograft excision if advancing"
+     ]
+    },
+    "right": {
+     "title": "Pinguecula",
+     "points": [
+      "Stops at limbus always",
+      "Yellow elastotic nodule",
+      "Observe unless inflamed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pterygium recurrence after bare sclera excision historically high, autograft and antimetabolite adjuncts reducing it by technique generation. Recurrent disease scars fornix and restricts motility in aggressive cases needing specialist reconstruction. **Primary prevention** ultraviolet protection in outdoor workers delays incidence more cheaply than recurrent surgery cycles.",
+   "say": "Graft technique together gives recurrence reduction across surgical generations in pterygium care standards for outdoor workers in sunny regions. Aggressive recurrence gives motility restriction risk after surgery. Ultraviolet protection gives primary prevention in populations.",
+   "vis": {
+    "kind": "table",
+    "title": "Pterygium operation generations",
+    "cols": [
+     "Technique",
+     "Recurrence logic"
+    ],
+    "rows": [
+     [
+      "Bare sclera",
+      "High recurrence history"
+     ],
+     [
+      "Autograft",
+      "Lowest recurrence standard"
+     ],
+     [
+      "Recurrent scar",
+      "Specialist reconstruction"
+     ]
+    ],
+    "caption": "Fibrovascular corneal encroachment in pterygium. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Conjunctival intraepithelial neoplasia and squamous carcinoma mimic pterygium or chronic conjunctivitis in elderly sun damaged eyes, gelatinous limbal mass with feeder vessels needing excision biopsy. Any atypical, gelatinous or unilateral persistent limbal lesion therefore biopsies rather than routine pterygium scheduling. **Masquerade limbal mass** rule protects oncology timing in conjunctiva clinics.",
+   "say": "Gelatinous limbal mass gives neoplasia suspicion in elderly sun damaged eyes needing biopsy urgently. Feeder vessels give masquerade clue. Routine scheduling gives dangerous delay.",
+   "vis": {
+    "kind": "flow",
+    "title": "Limbal lesion pathway",
+    "nodes": [
+     {
+      "id": "see",
+      "label": "Limbal lesion assessed"
+     },
+     {
+      "id": "cross",
+      "label": "Crosses cornea or gelatinous"
+     },
+     {
+      "id": "surg",
+      "label": "Autograft if classic pterygium"
+     },
+     {
+      "id": "biopsy",
+      "label": "Biopsy if atypical gelatinous"
+     }
+    ],
+    "edges": [
+     [
+      "see",
+      "cross"
+     ],
+     [
+      "cross",
+      "surg"
+     ],
+     [
+      "cross",
+      "biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phlyctenular disease versus pterygium age split helps conjunctiva triage substantially: childhood limbal nodule suggests hypersensitivity, adult nasal wing suggests ultraviolet degeneration, and elderly gelatinous mass suggests ocular surface neoplasia needing biopsy. The same limbus hosts three age defined diseases, a demographic pattern examinations test strongly. **Age plus morphology** reads limbal lesions before investigations in conjunctiva teaching.",
+   "say": "Age together with morphology gives limbal lesion reading before investigations in clinic triage simply. Child nodule gives hypersensitivity direction. Elderly gelatinous gives neoplasia direction.",
+   "vis": {
+    "kind": "table",
+    "title": "Limbus by age",
+    "cols": [
+     "Age pattern",
+     "Lesion first"
+    ],
+    "rows": [
+     [
+      "Child nodule photophobia",
+      "Phlycten hypersensitivity"
+     ],
+     [
+      "Adult nasal wing",
+      "Pterygium degeneration"
+     ],
+     [
+      "Elderly gelatinous mass",
+      "Neoplasia biopsy pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise limbal teaching by age and morphology: phlycten nodules hypersensitise children to lid or tuberculous antigens, pterygium crosses the limbus while pinguecula stops at it, and gelatinous masses in elderly eyes need neoplasia biopsy. Source treatment prevents phlycten recurrence while conjunctival autograft prevents pterygium recurrence after excision. **Corneal crossing** is the pinguecula exclusion test in one slit lamp look.",
+   "say": "Corneal crossing together gives pterygium confirmation while stopping at limbus gives pinguecula at slit lamp simply. Source treatment and graft choice give recurrence prevention in care. Age with morphology gives limbal reading.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Phlycten mechanism",
+   "b": "Delayed hypersensitivity to staphylococcal or tuberculous antigen in children; treat source plus suppression after infection exclusion."
+  },
+  {
+   "f": "Pterygium versus pinguecula",
+   "b": "Pterygium crosses limbus onto cornea; pinguecula never crosses. Autograft excision minimises recurrence."
+  },
+  {
+   "f": "Gelatinous limbal mass",
+   "b": "Excision biopsy for ocular surface neoplasia, never routine pterygium scheduling."
+  }
+ ],
+ "keys": [
+  "Child limbal nodule thinks antigen source",
+  "Corneal crossing separates pterygium",
+  "Atypical limbal lesions biopsy first"
+ ]
+}

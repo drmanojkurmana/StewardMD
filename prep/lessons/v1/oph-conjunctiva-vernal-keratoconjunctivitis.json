@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "id": "oph-conjunctiva-vernal-keratoconjunctivitis",
+ "subject": "ophthalmology",
+ "module": "oph-conjunctiva",
+ "title": "Vernal Keratoconjunctivitis and Shield Ulcer",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Vernal keratoconjunctivitis** is severe seasonal allergic inflammation of young males in warm climates, giant cobblestone papillae under upper lid, limbal Horner Trantas dots and intense itching with ropy discharge. It recurs spring yearly and usually remit after puberty, corneal complications deciding morbidity meanwhile. Atopy history accompanies most cases though disease is more than simple allergy in severity.",
+   "say": "Severe seasonal allergy gives giant papillae and limbal dots in young males characteristically. Intense itching gives dominant symptom burden. Puberty gives usual remission timing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vernal-keratoconjunctivitis-fig1.webp",
+    "alt": "Vernal keratoconjunctivitis clinical diagram with giant papillae and limbal changes.",
+    "caption": "Palpebral cobblestone papillae, Horner-Trantas dots, and shield ulcer in vernal keratoconjunctivitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Horner-Trantas dots** are white limbal collections of eosinophils and epithelial debris at limbus in active vernal disease, visible without eversion as gelatinous limbal thickening in limbal form. Palpebral form hides cobblestones until eversion, both forms coexisting commonly. Dots therefore allow limbal diagnosis at slit lamp while papillae need lid flip.",
+   "say": "White limbal collections together give active vernal evidence at slit lamp directly during clinic assessment in young patients each spring. Gelatinous limbal thickening gives limbal form recognition for examiners. Lid eversion gives palpebral form completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Vernal forms",
+    "cols": [
+     "Form",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Palpebral",
+      "Cobblestone giant papillae everted"
+     ],
+     [
+      "Limbal",
+      "Gelatinous thickening, Trantas dots"
+     ],
+     [
+      "Mixed",
+      "Both, commonest severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Shield ulcer** is oval superior corneal epithelial defect from giant papillae mechanical abrasion and inflammatory mediators, base covered by inflammatory plaque resisting healing until plaque debrided and inflammation suppressed. It threatens vision by scarring and infection in a child whose main complaint began as itch. Shield shape and superior location are examination image phrases.",
+   "say": "Superior oval defect gives shield ulcer from papillae abrasion in vernal disease seriously. Plaque base gives healing resistance needing debridement. Vision threat gives escalation need.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/conjunctivitis-fig1.webp",
+    "alt": "Conjunctivitis comparison diagram for allergic severity context in vernal disease.",
+    "caption": "Allergic severity context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treatment escalates mast cell and antihistamine base through immunomodulator drops to pulsed steroids for ulcers under pressure monitoring, allergen and rubbing control throughout. Eye rubbing worsens papillae mechanically and keratoconus association in vernal children needs refraction surveillance. **Rubbing cessation** is treatment instruction repeated as firmly as drop instillation technique.",
+   "say": "Immunomodulator escalation together gives steroid sparing control in severe vernal disease safely over repeated seasons in children. Rubbing cessation gives mechanical protection as instruction to families. Keratoconus surveillance is companion to childhood care.",
+   "vis": {
+    "kind": "table",
+    "title": "Vernal visit set",
+    "cols": [
+     "Check",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Cornea stain",
+      "Shield ulcer exclusion"
+     ],
+     [
+      "Pressure",
+      "Steroid response watch"
+     ],
+     [
+      "Refraction",
+      "Keratoconus surveillance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cobblestone papillae** are giant polygonal flat topped papillae with vascular cores paving upper tarsus, distinct from smaller allergic papillae by size and mechanical corneal effect. Their weight and movement abrade superior cornea with every blink in active disease. Photophobia in vernal child therefore signals cornea, not drama, until shield ulcer excluded.",
+   "say": "Giant flat topped paving gives cobblestone recognition on eversion in active disease characteristically. Blink abrasion gives superior corneal effect mechanically. Photophobia gives ulcer exclusion need."
+  },
+  {
+   "tx": "Atopic keratoconjunctivitis is adult counterpart with lid eczema, chronic inflammation and corneal vascularisation risk, herpes simplex susceptibility added. Vernal versus atopic split by age, lid skin and season emphasis in differential tables. **Puberty remission** expectation distinguishes vernal counselling from lifelong atopic management planning.",
+   "say": "Adult atopic disease gives lid eczema company with corneal risk chronically in contrast. Age and skin give vernal separation in differential. Remission expectation gives counselling difference.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vernal escalation ladder",
+    "nodes": [
+     {
+      "id": "base",
+      "label": "Allergy drops, no rubbing"
+     },
+     {
+      "id": "imm",
+      "label": "Immunomodulator maintenance"
+     },
+     {
+      "id": "pulse",
+      "label": "Pulsed steroid if ulcer"
+     },
+     {
+      "id": "deb",
+      "label": "Debride shield plaque"
+     }
+    ],
+    "edges": [
+     [
+      "base",
+      "imm"
+     ],
+     [
+      "imm",
+      "pulse"
+     ],
+     [
+      "pulse",
+      "deb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Steroid complications in children, pressure rise and cataract, mandate lowest effective exposure and pressure checks at every pulsed course, family warned explicitly. Steroid responder children may need pressure therapy while vernal still active, parallel tracks in same clinic visit. **Pressure monitoring** is part of vernal prescription, not separate glaucoma suspicion.",
+   "say": "Childhood steroid exposure gives pressure and cataract monitoring need at every course safely. Responder management gives parallel track in clinic. Family warning gives explicit consent.",
+   "vis": {
+    "kind": "table",
+    "title": "Vernal corneal threats",
+    "cols": [
+     "Threat",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Shield ulcer plaque",
+      "Debride, suppress inflammation"
+     ],
+     [
+      "Steroid pressure rise",
+      "Monitor, pressure therapy parallel"
+     ],
+     [
+      "Keratoconus from rubbing",
+      "Refraction surveillance, no rub"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise vernal teaching for seasonal clinics: young males itch in spring, cobblestone papillae hide under the upper lid, Trantas dots mark the limbus, and shield ulcer threatens the superior cornea. Escalation uses immunomodulators for maintenance, pulsed steroids for corneal disease, and pressure monitoring at every steroid course in children. **Photophobia means cornea** involvement in a vernal child until examination proves otherwise.",
+   "say": "Age together with season gives vernal recognition while lid eversion gives cobblestone confirmation simply in clinic. Corneal photophobia gives ulcer urgency in affected children always. Pressure monitoring gives steroid safety in treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Horner Trantas dots",
+   "b": "White limbal eosinophil collections in active vernal disease with gelatinous limbal thickening."
+  },
+  {
+   "f": "Shield ulcer",
+   "b": "Superior oval defect from giant papillae, plaque base needs debridement plus suppression."
+  },
+  {
+   "f": "Vernal demographic",
+   "b": "Young males in warm climates, spring recurrence, remission after puberty usually."
+  }
+ ],
+ "keys": [
+  "Evert lid in severe allergy always",
+  "No rubbing is vernal treatment",
+  "Steroids in children need pressure checks"
+ ]
+}
