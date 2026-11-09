@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-acute-inflammation",
+  "subject": "pathology",
+  "title": "Integrin Activation, Endothelial Transmigration, and Chemotaxis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Rolling leukocytes slow down and arrest firmly on the activated endothelial lining when low-affinity tethering switches to high-affinity adhesion. This firm arrest is mediated by heterodimeric cell-surface glycoproteins consisting of non-covalently linked alpha and beta chains known as **integrins**, expressed constitutively on leukocyte surfaces in low-affinity conformations.",
+      "say": "Integrins are heterodimeric leukocyte receptors that switch to high affinity to arrest rolling cells firmly.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aspiration-pneumonia-fig1.webp",
+        "caption": "Acute necrotizing pulmonary inflammation displaying massive neutrophilic transmigration into alveolar spaces.",
+        "alt": "Aspiration bronchopneumonia showing intense alveolar neutrophilic consolidation"
+      }
+    },
+    {
+      "tx": "As rolling neutrophils encounter chemokines displayed on the luminal endothelial surface, chemokine receptors trigger an intracellular signaling cascade termed inside-out signaling. This phosphorylation event induces a rapid allosteric conformational shift that converts the **beta-two integrin LFA-1** from a bent, low-affinity state into an extended, high-affinity ligand-binding conformation.",
+      "say": "Chemokines trigger inside-out signaling that straightens LFA-1 integrins into high-affinity conformations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chemokine_dock",
+            "label": "Rolling Neutrophil Binds Endothelial Proteoglycan-Bound Chemokine (CXCL8)"
+          },
+          {
+            "id": "inside_out_signal",
+            "label": "G-Protein-Coupled Receptor Triggers Intracellular Talin and Kindlin Recruitment"
+          },
+          {
+            "id": "integrin_unfold",
+            "label": "LFA-1 (CD11a/CD18) Unfolds from Inactive Bent to Extended High-Affinity State"
+          },
+          {
+            "id": "icam1_arrest",
+            "label": "High-Affinity LFA-1 Clamps Endothelial ICAM-1, Halting Rolling Instantly"
+          }
+        ],
+        "edges": [
+          [
+            "chemokine_dock",
+            "inside_out_signal"
+          ],
+          [
+            "inside_out_signal",
+            "integrin_unfold"
+          ],
+          [
+            "integrin_unfold",
+            "icam1_arrest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High-affinity beta-two integrins on neutrophils bind specific counter-receptors belonging to the immunoglobulin superfamily expressed on activated endothelial cells. Most critically, leukocyte LFA-one and Mac-one bind **intercellular adhesion molecule-1 (ICAM-1)**, whose endothelial expression is massively upregulated by tumor necrosis factor and interleukin-one.",
+      "say": "Activated neutrophil integrins clamp endothelial ICAM-1, arresting the leukocyte firmly on the vessel wall.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Beta-2 Integrins (CD18 Family)",
+          "points": [
+            "LFA-1 (CD11a/CD18): binds endothelial ICAM-1 and ICAM-2",
+            "Mac-1 (CD11b/CD18): binds ICAM-1 and complement fragment iC3b",
+            "Constitutively expressed on neutrophils, monocytes, and T-lymphocytes",
+            "Mutated or absent in leukocyte adhesion deficiency type 1"
+          ]
+        },
+        "right": {
+          "title": "Beta-1 Integrins (VLA Family)",
+          "points": [
+            "VLA-4 (CD49d/CD29, alpha-4-beta-1): binds endothelial VCAM-1",
+            "Expressed predominantly on monocytes, eosinophils, and lymphocytes",
+            "Directs non-neutrophilic recruitment in chronic inflammation and asthma",
+            "Targeted pharmacologically by monoclonal antibody natalizumab"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following firm adhesion, leukocytes flatten out and migrate through the interendothelial junctions into the extravascular interstitium. Termed **diapedesis or transmigration**, this process occurs predominantly across postcapillary venules, driven by homotypic binding between platelet endothelial cell adhesion molecule-one molecules expressed on both leukocyte and endothelial borders.",
+      "say": "Diapedesis is leukocyte transmigration across interendothelial junctions mediated by PECAM-1.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anterior-uveitis-fig1.webp",
+        "caption": "Anterior chamber uveal inflammation illustrating intense vascular diapedesis and hypopyon formation.",
+        "alt": "Anterior uveitis demonstrating intense leukocyte transmigration into aqueous humor"
+      }
+    },
+    {
+      "tx": "To traverse the dense basement membrane underlying the endothelial monolayer, migrating leukocytes must digest extracellular matrix barriers. Adherent neutrophils secrete matrix metalloproteinases, specifically **collagenases and gelatinases**, which transiently dissolve type four collagen and laminin to permit smooth passage into the connective tissue.",
+      "say": "Neutrophils secrete collagenases that dissolve basement membrane type IV collagen during transmigration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "junctional_exit",
+            "label": "Leukocyte Squeezes Through PECAM-1 Sealed Interendothelial Junction"
+          },
+          {
+            "id": "basement_encounter",
+            "label": "Encounters Dense Extracellular Scaffolding of Type IV Collagen and Laminin"
+          },
+          {
+            "id": "mmp_secretion",
+            "label": "Specific Granules Release Matrix Metalloproteinases (MMP-2 and MMP-9)"
+          },
+          {
+            "id": "interstitial_entry",
+            "label": "Enzymatic Focal Cleavage Opens Route into the Extravascular Stroma"
+          }
+        ],
+        "edges": [
+          [
+            "junctional_exit",
+            "basement_encounter"
+          ],
+          [
+            "basement_encounter",
+            "mmp_secretion"
+          ],
+          [
+            "mmp_secretion",
+            "interstitial_entry"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once in the extravascular connective tissue, leukocytes migrate directionally along a chemical concentration gradient toward the source of infection or tissue damage. This directed locomotion is **chemotaxis**, guided by both exogenous bacterial peptides and endogenous chemical attractants like complement fragment C5a, leukotriene B4, and chemokine interleukin-eight.",
+      "say": "Chemotaxis guides leukocytes along chemical concentration gradients toward the site of tissue injury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exogenous Chemotactic Factors",
+          "points": [
+            "Bacterial formyl-methionyl peptides (N-formylmethionine, fMLP)",
+            "Conserved signature of prokaryotic bacterial protein initiation",
+            "Binds specific G-protein-coupled formyl peptide receptors (FPR1)",
+            "Directs leukocytes toward live dividing bacterial pathogens"
+          ]
+        },
+        "right": {
+          "title": "Endogenous Chemotactic Factors",
+          "points": [
+            "Complement fragment C5a generated during complement activation",
+            "Leukotriene B4 (LTB4) generated via 5-lipoxygenase pathway",
+            "Chemokines such as interleukin-8 (CXCL8) secreted by macrophages",
+            "Bind specific rhodopsin-like seven-transmembrane GPCRs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Binding of chemotactic agents to seven-transmembrane G-protein-coupled receptors activates small intracellular GTPases belonging to the Rho, Rac, and Cdc42 families. Rac stimulates actin polymerization to push forward a crawling **leading-edge pseudopod**, while Rho activates myosin phosphorylation at the trailing edge to retract the cell body.",
+      "say": "Rac polymerizes actin at the leading edge to extend pseudopods, while Rho contracts the trailing tail.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gpcr_binding",
+            "label": "Chemoattractant Binds G-Protein-Coupled Receptor on Leukocyte Membrane"
+          },
+          {
+            "id": "phospholipase_c",
+            "label": "G-Beta-Gamma Subunits Activate Phosphoinositide 3-Kinase and Rac GTPase"
+          },
+          {
+            "id": "actin_treadmill",
+            "label": "Polymerization of G-Actin into F-Actin Pushes Leading Edge Pseudopod"
+          },
+          {
+            "id": "directional_crawl",
+            "label": "Myosin Motors Contract Trailing Cell Body, Pulling Leukocyte Forward"
+          }
+        ],
+        "edges": [
+          [
+            "gpcr_binding",
+            "phospholipase_c"
+          ],
+          [
+            "phospholipase_c",
+            "actin_treadmill"
+          ],
+          [
+            "actin_treadmill",
+            "directional_crawl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The nature of the cellular infiltrate at an inflamed focus changes dynamically over time. During the initial six to twenty-four hours, **neutrophils predominate** because they are more abundant in blood and respond rapidly to chemokines, whereas monocytes replace neutrophils over twenty-four to forty-eight hours, transforming into long-lived tissue macrophages.",
+      "say": "Neutrophils arrive first within twenty-four hours, followed by monocytes that survive longer as macrophages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Infiltrate: Neutrophils (6 to 24 Hours)",
+          "points": [
+            "Represent 60-70% of circulating white blood cells in blood",
+            "Fast responders with high surface density of CXCR1/CXCR2 receptors",
+            "Short lifespan in tissue: undergo apoptosis within 24 to 48 hours",
+            "Specialize in rapid microbial killing via toxic granule discharge"
+          ]
+        },
+        "right": {
+          "title": "Late Infiltrate: Monocytes / Macrophages (24 to 48 Hours)",
+          "points": [
+            "Less abundant in blood; slower transendothelial migration velocity",
+            "Survive for weeks or months in tissue as differentiated macrophages",
+            "Phagocytose apoptotic neutrophils, cellular debris, and dead microbes",
+            "Secrete growth factors (VEGF, TGF-beta) to coordinate tissue repair"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
