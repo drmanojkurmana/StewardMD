@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "id": "ent-septum-external-nose-septal-haematoma",
+ "subject": "ent",
+ "module": "ent-septum-external-nose",
+ "title": "Septal Haematoma, Saddle Nose, and Choanal Atresia",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A septal haematoma is an acute collection of blood within the subperichondrial space between the quadrilateral cartilage and its overlying mucoperichondrium. It typically follows blunt nasal trauma, sports injuries, or nasal surgery. On anterior rhinoscopy, it manifests as a bilateral, smooth, rounded, purplish, boggy, **fluctuant swelling** of the nasal septum that completely obliterates the nasal airway and fails to shrink upon application of topical decongestants.",
+   "say": "A septal haematoma collects blood beneath the perichondrium following nasal trauma, presenting as a bilateral, boggy, fluctuant swelling that blocks both nostrils.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Anatomical schematic showing subperichondrial blood accumulation lifting mucoperichondrium from septal cartilage",
+    "caption": "Subperichondrial hematoma stripping mucoperichondrium and cutting off cartilage perfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The nasal septal cartilage is completely avascular, depending entirely on nutrient diffusion from capillary plexuses residing in the overlying mucoperichondrium. When a haematoma lifts the perichondrium away on both sides, the cartilage is instantly deprived of oxygenation and glucose. Within forty-eight to seventy-two hours, ischemic necrosis destroys the cartilage, often compounded by secondary bacterial infection converting the clot into a **septal abscess**.",
+   "say": "Avascular septal cartilage relies on perichondrial diffusion. Trapped blood starves the cartilage, causing necrosis within seventy-two hours and forming a septal abscess.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiological Cascade of Untreated Septal Haematoma",
+    "nodes": [
+     {
+      "id": "sh1",
+      "label": "Subperichondrial Hematoma Strips Perichondrium"
+     },
+     {
+      "id": "sh2",
+      "label": "Ischemic Necrosis & Bacterial Infection (Abscess)"
+     },
+     {
+      "id": "sh3",
+      "label": "Cartilage Resorption & Permanent Saddle Nose Collapse"
+     }
+    ],
+    "edges": [
+     [
+      "sh1",
+      "sh2"
+     ],
+     [
+      "sh2",
+      "sh3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A septal haematoma or abscess represents an emergency demanding immediate surgical evacuation. Under strict aseptic conditions, an incisional drainage slit is made on the dependent portion of the septal mucosa to evacuate all clot and purulent debris. Bilateral anterior nasal packing or through-and-through **mattress quilting sutures** are placed to compress the mucoperichondrial flaps firmly back against the cartilage, preventing hematoma reaccumulation.",
+   "say": "Immediate surgical drainage is mandatory. The clot is evacuated and compression packing or quilting mattress sutures are placed to prevent reaccumulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septal Haematoma",
+     "points": [
+      "Fresh, sterile subperichondrial blood clot.",
+      "Painless or mild dull ache with total obstruction.",
+      "Normal systemic temperature; no chills.",
+      "Treated with urgent incisional drainage and packing."
+     ]
+    },
+    "right": {
+     "title": "Septal Abscess",
+     "points": [
+      "Secondary bacterial suppuration of hematoma (Staph).",
+      "Severe throbbing pain, high fever, and chills.",
+      "Septal mucosa is dusky red, exquisitely tender, and fluctuant.",
+      "High risk of cavernous sinus thrombosis and saddle nose."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Destruction and resorption of the quadrilateral septal cartilage destroys the structural scaffolding supporting the middle third of the external nose, precipitating a **saddle nose deformity** (pug nose). The cartilaginous nasal dorsum collapses inward, creating a characteristic sunken depression above the nasal tip. Reconstruction requires open rhinoplasty with dorsal augmentation grafting using autologous costal rib cartilage or auricular cartilage.",
+   "say": "Loss of septal cartilage causes saddle nose deformity with dorsal collapse. Surgical reconstruction requires open rhinoplasty using autologous rib or ear cartilage grafts.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-polyps-fig1.webp",
+    "alt": "Anatomical schematic showing external nasal dorsum collapse in cartilaginous saddle nose deformity",
+    "caption": "Saddle nose deformity resulting from loss of cartilaginous dorsal strut support. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Septal perforation represents a full-thickness defect uniting both nasal cavities through mucosal and cartilaginous destruction. Common etiologies include digital picking trauma, previous submucous resection, untreated septal hematoma, and chronic intranasal cocaine abuse. Small anterior perforations produce an annoying, high-pitched **whistling sound** during quiet nasal inspiration, while large perforations cause crusting, foul odor, and recurrent bleeding.",
+   "say": "Septal perforations unite both nasal cavities. Small anterior holes cause an audible whistle during breathing, while large holes cause severe crusting and bleeding.",
+   "vis": {
+    "kind": "table",
+    "title": "Etiological Categories of Nasal Septal Perforation",
+    "cols": [
+     "Etiological Category",
+     "Specific Causes",
+     "Characteristic Location",
+     "Key Clinical Clue"
+    ],
+    "rows": [
+     [
+      "Traumatic / Surgical",
+      "Submucous resection, digital picking",
+      "Cartilaginous anterior septum",
+      "History of nasal surgery or habit"
+     ],
+     [
+      "Substance abuse",
+      "Chronic intranasal cocaine abuse",
+      "Mid-cartilaginous septum",
+      "Ischemic vasoconstriction necrosis"
+     ],
+     [
+      "Granulomatous disease",
+      "Granulomatosis with polyangiitis (GPA)",
+      "Involves cartilage and bone",
+      "C-ANCA positive, systemic vasculitis"
+     ],
+     [
+      "Infectious disease",
+      "Syphilis (Tertiary gumma), Tuberculosis",
+      "Bony septum (Syphilis) or cartilage",
+      "VDRL positive, tissue biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fracture of the nasal bones represents the most common fracture of the human facial skeleton, typically resulting from direct frontal or lateral impacts. Diagnosis is made primarily on clinical examination rather than plain radiography, looking for nasal deformity, crepitus, and mobility. Closed reduction using a **Walsham forceps** to realign the nasal bones and an Asch forceps to straighten the septum must be performed within seven to ten days before callus sets.",
+   "say": "Nasal bone fractures are diagnosed clinically by crepitus and deformity. Closed reduction using Walsham and Asch forceps must be done within ten days before bones set.",
+   "vis": {
+    "kind": "flow",
+    "title": "Management Timeline for Fractured Nasal Bones",
+    "nodes": [
+     {
+      "id": "nf1",
+      "label": "Immediate Assessment: Exclude Septal Hematoma"
+     },
+     {
+      "id": "nf2",
+      "label": "Wait 2 to 3 Days for Acute Facial Edema to Subside"
+     },
+     {
+      "id": "nf3",
+      "label": "Closed Reduction under Anesthesia within 7 to 10 Days"
+     }
+    ],
+    "edges": [
+     [
+      "nf1",
+      "nf2"
+     ],
+     [
+      "nf2",
+      "nf3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choanal atresia is a congenital failure of canalization of the posterior nasal apertures, resulting from the persistence of the embryonic buccopharyngeal membrane. Atresia is mixed bony-membranous in seventy percent of cases and purely bony in thirty percent. Bilateral choanal atresia is a neonatal life-threatening emergency, because neonates are **obligate nasal breathers** until approximately six weeks of life.",
+   "say": "Choanal atresia blocks the posterior nasal openings. Bilateral atresia is a neonatal emergency because newborn infants are obligate nasal breathers.",
+   "vis": {
+    "kind": "table",
+    "title": "Comparison of Bilateral Versus Unilateral Choanal Atresia",
+    "cols": [
+     "Feature",
+     "Bilateral Choanal Atresia",
+     "Unilateral Choanal Atresia"
+    ],
+    "rows": [
+     [
+      "Clinical urgency",
+      "Neonatal airway emergency at delivery",
+      "Elective presentation in childhood or adult"
+     ],
+     [
+      "Presentation",
+      "Cyclical cyanosis (Pink on crying)",
+      "Persistent unilateral thick rhinorrhea"
+     ],
+     [
+      "Feeding response",
+      "Severe choking and cyanosis on feeding",
+      "Normal suckling and swallowing"
+     ],
+     [
+      "Immediate management",
+      "McGovern nipple or oral airway tube",
+      "Observation until elective repair"
+     ],
+     [
+      "Definitive therapy",
+      "Immediate transnasal endoscopic puncture",
+      "Elective endoscopic resection at 1 to 2 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classical clinical hallmark of bilateral choanal atresia is cyclical cyanosis: the infant turns dramatically pink and breathes easily while crying through an open mouth, but becomes deeply cyanotic and suffocates as soon as crying stops and the mouth closes. Immediate emergency airway management utilizes a **McGovern nipple** or Guedel oral airway to maintain an open mouth pathway until definitive transnasal endoscopic repair punctures and stents the atretic plate.",
+   "say": "Bilateral atresia causes cyclical cyanosis, where crying restores pink color but mouth closure causes suffocation. A McGovern nipple maintains oral breathing until endoscopic repair.",
+   "vis": {
+    "kind": "flow",
+    "title": "Emergency Airway Protocol for Bilateral Choanal Atresia",
+    "nodes": [
+     {
+      "id": "ca1",
+      "label": "Cyclical Cyanosis at Delivery (Pink on Crying)"
+     },
+     {
+      "id": "ca2",
+      "label": "Immediate McGovern Nipple or Oral Airway Placement"
+     },
+     {
+      "id": "ca3",
+      "label": "Transnasal Endoscopic Puncture & Stenting"
+     }
+    ],
+    "edges": [
+     [
+      "ca1",
+      "ca2"
+     ],
+     [
+      "ca2",
+      "ca3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-091",
+  "bk2-ent-092",
+  "bk2-ent-093"
+ ]
+}
