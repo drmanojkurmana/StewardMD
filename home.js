@@ -10372,7 +10372,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     { id: "contrast", name: "High-Contrast", accent: "#00463d", paper: "#ffffff" }
   ];
   var FONTS = [
-    { id: "plex", name: "IBM Plex Sans", web: null },
+    { id: "plex", name: "Default", web: null },
     { id: "system", name: "System", web: null },
     { id: "arial", name: "Arial", web: null },
     { id: "serif", name: "Serif", web: null },
