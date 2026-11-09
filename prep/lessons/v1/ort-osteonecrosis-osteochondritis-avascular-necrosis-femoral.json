@@ -3,182 +3,209 @@
  "id": "ort-osteonecrosis-osteochondritis-avascular-necrosis-femoral",
  "subject": "orthopaedics",
  "module": "ort-osteonecrosis-osteochondritis",
- "title": "Avascular Necrosis Femoral",
+ "title": "Avascular Necrosis Femoral Head",
  "minutes": 6,
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Avascular necrosis femoral head** anchors this lesson. Recognition of Avascular necrosis femoral head starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Avascular necrosis femoral head gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
-    "alt": "Avascular Necrosis Femoral teaching image.",
-    "caption": "Avascular Necrosis Femoral illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Ficat arlet staging** anchors this lesson. The mechanism behind Ficat Arlet staging explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Ficat arlet staging gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "An **avascular necrosis** of the femoral head represents cellular death of bone and marrow elements resulting from compromised microvascular blood supply. The anterosuperior weight-bearing dome is most vulnerable because it relies on terminal retinacular branches of the medial femoral circumflex artery. Major non-traumatic etiologies encompass chronic corticosteroid therapy, heavy alcohol consumption, sickle cell disease, and systemic lupus erythematosus.",
+   "say": "Avascular necrosis of the femoral head is bone infarction caused by interrupted blood supply. The upper weight-bearing part of the head is most vulnerable because it depends on terminal branches of the medial femoral circumflex artery. High-dose steroids, alcohol abuse, sickle cell disease, and lupus are the classic non-traumatic causes.",
    "vis": {
     "kind": "table",
-    "title": "Avascular Necrosis Femoral set",
+    "title": "Etiological Risk Factors",
     "cols": [
-     "Item",
-     "Point"
+     "Etiological Category",
+     "Underlying Mechanism",
+     "Clinical Association",
+     "Bilateral Rate"
     ],
     "rows": [
      [
-      "Ficat arlet staging",
-      "Central fact in this lesson"
+      "Corticosteroid therapy",
+      "Fat hypertrophy and microvascular thrombosis",
+      "Doses > 20 mg/day for > 3 months",
+      "Bilateral in 70 to 80 percent"
      ],
      [
-      "Steroid-induced",
-      "Companion fact to revise together"
+      "Chronic alcoholism",
+      "Hyperlipidaemia and marrow fat emboli",
+      "Intake > 400 mL/week",
+      "Bilateral in 60 to 70 percent"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Traumatic",
+      "Direct vascular transection",
+      "Displaced neck femur or hip dislocation",
+      "Strictly unilateral to trauma"
+     ],
+     [
+      "Sickle cell disease",
+      "Sickling microvascular occlusion",
+      "HbSS and HbSC genotypes",
+      "Bilateral in 50 percent"
      ]
     ]
    }
   },
   {
-   "tx": "**Steroid-induced** anchors this lesson. Clinically, steroid-induced presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Steroid-induced gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The widely adopted **Ficat-Arlet classification** stages disease progression based on clinical symptoms, plain radiographs, and magnetic resonance imaging. Stage 0 is preclinical and preradiographic. Stage I features normal radiographs but positive magnetic resonance imaging. Stage II shows patchy sclerosis and osteopenia with a preserved spherical contour. Stage III demonstrates subchondral fracture with articular flattening. Stage IV exhibits secondary osteoarthritis.",
+   "say": "Ficat and Arlet staged avascular necrosis from zero to four. Stage zero is silent with normal tests. Stage one has normal X-rays but abnormal magnetic resonance imaging. Stage two shows patchy sclerosis on X-ray, but the head remains round. Stage three shows subchondral collapse, seen as the crescent sign. Stage four is secondary osteoarthritis.",
+   "vis": {
+    "kind": "table",
+    "title": "Ficat-Arlet Staging System",
+    "cols": [
+     "Stage",
+     "Plain Radiograph",
+     "Magnetic Resonance Imaging",
+     "Femoral Head Contour"
+    ],
+    "rows": [
+     [
+      "Stage 0",
+      "Normal",
+      "Normal (histology positive)",
+      "Spherical and intact"
+     ],
+     [
+      "Stage I",
+      "Normal (pre-radiographic)",
+      "Positive (marrow edema / double-line)",
+      "Spherical and intact"
+     ],
+     [
+      "Stage II",
+      "Sclerosis, osteopenia, geodes",
+      "Demarcated necrotic geographic zone",
+      "Spherical; no collapse"
+     ],
+     [
+      "Stage III",
+      "Crescent sign visible",
+      "Subchondral bone collapse",
+      "Flattened, non-spherical dome"
+     ],
+     [
+      "Stage IV",
+      "Narrowed joint space, osteophytes",
+      "Advanced articular destruction",
+      "Obliterated joint space (OA)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In Stage III disease, plain radiographs demonstrate the pathognomonic **crescent sign**, visualized best on the frog-leg lateral pelvic projection. The crescent represents a thin, curved radiolucent subchondral fracture line separating necrotic cancellous bone from overlying intact articular cartilage. Its appearance signals impending structural collapse of the weight-bearing dome and marks the critical transition where joint-preserving procedures fail.",
+   "say": "The crescent sign on a frog-leg lateral X-ray confirms stage three. It is a curved dark sliver of air or fluid right beneath the joint cartilage, indicating that the dead bone underneath has fractured. Once you see the crescent sign, the femoral head is collapsing, and joint-preserving operations will no longer work.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Crescent Sign Pathomechanics",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Subchondral microfracture under load",
+      "Separates articular cartilage from dead bone",
+      "Best seen on frog-leg lateral X-ray",
+      "Marks irreversibility of joint preservation"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Double-Line Sign on MRI",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Characteristic T2-weighted MRI finding",
+      "Outer hypointense rim (sclerotic bone)",
+      "Inner hyperintense line (granulation tissue)",
+      "Diagnostic in Stage I and II pre-collapse"
      ]
     }
    }
   },
   {
-   "tx": "**Caisson disease** anchors this lesson. Investigation choice for Caisson disease follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Caisson disease gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Avascular Necrosis Femoral teaching image.",
-    "caption": "Avascular Necrosis Femoral illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Crescent sign** anchors this lesson. Separation of crescent sign from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Crescent sign gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Avascular Necrosis Femoral set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Crescent sign",
-      "Central fact in this lesson"
-     ],
-     [
-      "Core decompression",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Core decompression** anchors this lesson. Management of core decompression follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Core decompression gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "In pre-collapse stages (Ficat I and II), surgical **core decompression** reduces elevated intraosseous compartmental pressure, venting congested venous sinusoids to stimulate neovascularization. Drilling an eight-millimeter channel or multiple small percutaneous tracks into the necrotic anterosuperior lesion, often combined with autologous bone marrow aspirate concentrate (BMAC), halts progression and preserves native joint architecture in up to eighty percent of cases.",
+   "say": "In stage one and two before bone collapses, perform core decompression. Drilling a tunnel into the dead segment relieves trapped marrow pressure and allows new blood vessels to sprout into the dead bone. Adding bone marrow stem cells from the iliac crest boosts bone regeneration and prevents the hip from collapsing in eighty percent of patients.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Core Decompression Alone",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "8 mm drill channel into necrotic zone",
+      "Relieves intraosseous hypertension",
+      "Success rate 70% in small lesions",
+      "Requires protected partial weight-bearing"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Biologically Augmented Decompression",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Multiple percutaneous 3 mm drill tracks",
+      "Bone marrow aspirate concentrate (BMAC)",
+      "Delivers mesenchymal stem cells and VEGF",
+      "Superior survivorship in Ficat II disease"
      ]
     }
    }
   },
   {
-   "tx": "**Kienbock disease** anchors this lesson. Complications of Kienbock disease are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Kienbock disease gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoporosis-fig1.webp",
-    "alt": "Avascular Necrosis Femoral teaching image.",
-    "caption": "Avascular Necrosis Femoral illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Freiberg disease** anchors this lesson. Anchoring Freiberg disease beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Freiberg disease gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Once structural collapse occurs in Ficat Stages III and IV, joint-preserving procedures are futile, and **total hip arthroplasty** becomes the definitive gold-standard solution. Cementless porous-coated acetabular cups and femoral stems provide biologic osseous ingrowth. Modern bearing surfaces such as ceramic-on-ceramic or ceramic-on-cross-linked polyethylene deliver exceptional long-term survivorship exceeding ninety percent at twenty years, even in young active patients.",
+   "say": "Once the femoral head has collapsed into stage three or four, total hip arthroplasty is the only reliable cure. A cementless ceramic-on-polyethylene or ceramic-on-ceramic replacement eliminates pain and restores full function, achieving over ninety percent implant survival at twenty years.",
    "vis": {
     "kind": "table",
-    "title": "Avascular Necrosis Femoral set",
+    "title": "Management Algorithm by Ficat Stage",
     "cols": [
-     "Item",
-     "Point"
+     "Ficat Stage",
+     "Surgical Philosophy",
+     "Preferred Procedure",
+     "Long-Term Survivorship"
     ],
     "rows": [
      [
-      "Freiberg disease",
-      "Central fact in this lesson"
+      "Stage I (Pre-radiographic)",
+      "Joint preservation",
+      "Core decompression + BMAC",
+      "80 to 85 percent avoid replacement"
      ],
      [
-      "Kohler disease",
-      "Companion fact to revise together"
+      "Stage II (Pre-collapse)",
+      "Joint preservation",
+      "Core decompression or vascularized fibula",
+      "70 to 75 percent joint survival"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Stage III (Crescent sign)",
+      "Joint reconstruction / replacement",
+      "Total hip arthroplasty (cementless)",
+      "Excellent pain relief and mobility"
+     ],
+     [
+      "Stage IV (Secondary OA)",
+      "Prosthetic joint replacement",
+      "Total hip arthroplasty",
+      "Over 90 percent survivorship at 20 years"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Avascular Necrosis Femoral: central fact",
-   "b": "Avascular necrosis femoral head is the anchor fact; name it precisely and grade severity."
+   "q": "Which radiographic sign in Ficat Stage III femoral avascular necrosis signifies subchondral bone fracture?",
+   "options": [
+    "Crescent sign on frog-leg lateral radiograph",
+    "Terry Thomas sign on anteroposterior view",
+    "Shenton line parabolic disruption",
+    "Codman triangle at the femoral neck"
+   ],
+   "correct": 0,
+   "explain": "The crescent sign, best seen on frog-leg lateral views, represents a subchondral fracture between the necrotic bone and overlying cartilage in Ficat Stage III."
   },
   {
-   "f": "Avascular Necrosis Femoral: discriminator",
-   "b": "Ficat arlet staging separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Avascular Necrosis Femoral: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "What is the primary objective of core decompression in early-stage (Ficat I and II) avascular necrosis?",
+   "options": [
+    "Relieving elevated intraosseous marrow pressure and stimulating neovascularization",
+    "Excising the dead bone and replacing it with a titanium endoprosthesis",
+    "Realigning the femoral neck into thirty degrees of anatomical valgus",
+    "Inducing chemical arthrodesis across the hip articulation"
+   ],
+   "correct": 0,
+   "explain": "Core decompression decreases elevated intraosseous compartmental pressure and creates a channel for creeping substitution and neovascular ingrowth into the necrotic bone."
   }
- ],
- "keys": [
-  "Avascular necrosis femoral head anchors the topic",
-  "Ficat arlet staging is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }

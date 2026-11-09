@@ -3,182 +3,191 @@
  "id": "ort-perthes-scfe-legg-calve-perthes",
  "subject": "orthopaedics",
  "module": "ort-perthes-scfe",
- "title": "Legg Calve Perthes",
+ "title": "Legg-Calve-Perthes and SCFE",
  "minutes": 6,
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Legg-calve-perthes disease** anchors this lesson. Recognition of Legg-Calve-Perthes disease starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Legg-calve-perthes disease gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Legg Calve Perthes teaching image.",
-    "caption": "Legg Calve Perthes illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Catterall classification** anchors this lesson. The mechanism behind Catterall classification explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Catterall classification gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Pediatric hip pathology divides into two major eponymous entities: **Legg-Calve-Perthes disease** and slipped capital femoral epiphysis. Legg-Calve-Perthes disease involves idiopathic self-limiting avascular necrosis of the proximal femoral epiphysis in children aged four to eight years, predominantly affecting boys. Conversely, slipped capital femoral epiphysis occurs in overweight adolescents aged eleven to fourteen years during the pubertal growth spurt.",
+   "say": "Perthes disease and slipped capital femoral epiphysis are the two major hip conditions of childhood. Perthes is idiopathic avascular necrosis of the femoral head in active boys aged four to eight. Slipped capital femoral epiphysis is a displacement of the growth plate in overweight adolescents aged eleven to fourteen.",
    "vis": {
     "kind": "table",
-    "title": "Legg Calve Perthes set",
+    "title": "Demographic and Clinical Comparison",
     "cols": [
-     "Item",
-     "Point"
+     "Feature",
+     "Legg-Calve-Perthes Disease",
+     "Slipped Capital Femoral Epiphysis (SCFE)"
     ],
     "rows": [
      [
-      "Catterall classification",
-      "Central fact in this lesson"
+      "Peak age group",
+      "4 to 8 years (range 3 to 12)",
+      "11 to 14 years (adolescent growth spurt)"
      ],
      [
-      "Herring lateral pillar",
-      "Companion fact to revise together"
+      "Sex predilection",
+      "Boys > Girls (4:1)",
+      "Boys > Girls (2:1)"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Body habitus",
+      "Slight, active, delayed skeletal age",
+      "Obese, delayed endocrine maturation"
+     ],
+     [
+      "Primary pathology",
+      "Avascular necrosis of capital epiphysis",
+      "Hypertrophic physeal shearing displacement"
+     ],
+     [
+      "Bilateral incidence",
+      "10 to 15 percent (asynchronous)",
+      "20 to 40 percent (sequential)"
      ]
     ]
    }
   },
   {
-   "tx": "**Herring lateral pillar** anchors this lesson. Clinically, Herring lateral pillar presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Herring lateral pillar gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The radiographic staging of Perthes disease follows Waldenstrom four sequential phases: initial avascular necrosis, fragmentation, reossification, and final healed remodeling. The **Herring lateral pillar** classification on anteroposterior radiographs predicts long-term femoral sphericity based on height preservation of the lateral third of the capital epiphysis: Group A maintains one hundred percent height, Group B retains over fifty percent, and Group C loses over fifty percent, carrying a poor prognosis.",
+   "say": "Perthes progresses through four Waldenstrom stages: necrosis, fragmentation, reossification, and remodeling. The Herring lateral pillar classification predicts outcome. It measures the height of the outer third of the femoral head: group A has full height, group B retains over half, and group C collapses to under half height, leading to severe deformities.",
+   "vis": {
+    "kind": "table",
+    "title": "Herring Lateral Pillar Classification",
+    "cols": [
+     "Herring Group",
+     "Lateral Pillar Height",
+     "Clinical Prognosis",
+     "Treatment Recommendation"
+    ],
+    "rows": [
+     [
+      "Group A",
+      "100 percent height preserved",
+      "Excellent; no collapse",
+      "Symptomatic observation and physical therapy"
+     ],
+     [
+      "Group B",
+      "Over 50 percent height retained",
+      "Good if age <8; guarded if >8",
+      "Surgical containment if over 8 years old"
+     ],
+     [
+      "Group C",
+      "Under 50 percent height preserved",
+      "Poor; severe head flattening",
+      "Deformity correction; guarded outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The overarching therapeutic objective in Perthes disease is biological **containment of the femoral head**. The softened, revascularizing capital epiphysis is maintained deeply seated within the concentric spherical acetabular cup, which acts as a biological mould preventing lateral extrusion and hinge abduction. Containment is achieved conservatively using an Atlanta abduction orthosis, or surgically via a proximal femoral varus derotation osteotomy or Salter innominate osteotomy.",
+   "say": "The central rule of Perthes treatment is containment. The softened femoral head must be kept seated deeply inside the round acetabulum so the socket acts as a spherical mould while the bone rebuilds. If the head squirts outward, it deforms permanently. Keep it inside using an abduction brace or femoral varus osteotomy.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Containment Principles",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Acetabulum acts as spherical mould",
+      "Prevents lateral subluxation and extrusion",
+      "Eliminates hinge abduction impingement",
+      "Preserves long-term joint congruency"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Surgical Options",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Femoral varus derotation osteotomy (VDRO)",
+      "Salter innominate pelvic osteotomy",
+      "Triple pelvic osteotomy in older children",
+      "Cheilectomy for hinge abduction relief"
      ]
     }
    }
   },
   {
-   "tx": "**Head at risk signs** anchors this lesson. Investigation choice for head at risk signs follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Head at risk signs gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoporosis-fig1.webp",
-    "alt": "Legg Calve Perthes teaching image.",
-    "caption": "Legg Calve Perthes illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Gage sign** anchors this lesson. Separation of Gage sign from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Gage sign gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Legg Calve Perthes set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Gage sign",
-      "Central fact in this lesson"
-     ],
-     [
-      "Containment",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Containment** anchors this lesson. Management of containment follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Containment gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "In slipped capital femoral epiphysis, the femoral neck slips anteriorly and superiorly while the capital epiphysis remains securely within the acetabulum, producing relative **posterior and inferior displacement** of the head. Physical examination demonstrates an obligatory external rotation deformity: as the examiner passively flexes the affected hip, the limb automatically rotates into external rotation due to the posteroinferior physeal shear.",
+   "say": "In SCFE, the femoral neck slips upward and forward, so the head ends up displaced downward and backward. On examination, look for obligatory external rotation. As you passively flex the child hip up toward ninety degrees, the thigh automatically twists outward into external rotation because of the tilted growth plate.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Klein Line Alignment",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Drawn along superior femoral neck on AP view",
+      "Normally intersects lateral capital epiphysis",
+      "Fails to intersect epiphysis in SCFE",
+      "Known as positive Trethowan sign"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Obligatory External Rotation",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Hip automatically rotates out upon flexion",
+      "Loss of internal rotation in flexion",
+      "Characteristic pathognomonic bedside sign",
+      "Distinguishes SCFE from groin strain"
      ]
     }
    }
   },
   {
-   "tx": "**Slipped capital femoral epiphysis** anchors this lesson. Complications of slipped capital femoral epiphysis are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Slipped capital femoral epiphysis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Legg Calve Perthes teaching image.",
-    "caption": "Legg Calve Perthes illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Trethowan sign** anchors this lesson. Anchoring Trethowan sign beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Trethowan sign gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Definitive management of slipped capital femoral epiphysis requires urgent **in situ pinning** using a single central cannulated cancellous screw to arrest further displacement. Attempting forceful closed reduction of a stable slip is strictly contraindicated because manipulation damages tenuous ascending retinacular vessels, causing catastrophic avascular necrosis. Fixation is performed in situ across the center of the physis, achieving physeal fusion.",
+   "say": "Treat SCFE with emergency single in situ cannulated screw fixation. Never attempt forceful closed reduction of a stable slip. Forcible manipulation tears the posterior retinacular blood vessels and causes avascular necrosis. Simply screw the displaced head right where it sits, which locks the growth plate and stimulates fusion.",
    "vis": {
     "kind": "table",
-    "title": "Legg Calve Perthes set",
+    "title": "SCFE Stability and Surgical Urgency",
     "cols": [
-     "Item",
-     "Point"
+     "Classification",
+     "Definition",
+     "AVN Risk",
+     "Surgical Action"
     ],
     "rows": [
      [
-      "Trethowan sign",
-      "Central fact in this lesson"
+      "Stable SCFE",
+      "Patient can bear weight with/without crutches",
+      "Under 2 percent",
+      "Urgent single in situ percutaneous screw"
      ],
      [
-      "Klein line",
-      "Companion fact to revise together"
+      "Unstable SCFE",
+      "Patient cannot bear weight even with crutches",
+      "Climbs to 25 to 50 percent",
+      "Emergency decompression and gentle pinning"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Prophylactic pinning",
+      "Contralateral asymptomatic hip in high risk",
+      "Negligible risk",
+      "Indicated in young age (<10) or endocrinopathy"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Legg Calve Perthes: central fact",
-   "b": "Legg-calve-perthes disease is the anchor fact; name it precisely and grade severity."
+   "q": "What pathognomonic physical sign is elicited during passive hip flexion in an adolescent with slipped capital femoral epiphysis?",
+   "options": [
+    "Obligatory external rotation of the lower limb",
+    "Audible Ortolani reduction clunk",
+    "Complete absence of femoral head translation",
+    "Sudden sharp internal rotation into full abduction"
+   ],
+   "correct": 0,
+   "explain": "Obligatory external rotation during passive hip flexion is the hallmark clinical physical finding of SCFE, caused by the posterior-inferior displacement of the femoral head relative to the neck."
   },
   {
-   "f": "Legg Calve Perthes: discriminator",
-   "b": "Catterall classification separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Legg Calve Perthes: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "Why is forceful closed reduction strictly contraindicated in stable slipped capital femoral epiphysis?",
+   "options": [
+    "It tears the posterior retinacular vessels, provoking avascular necrosis",
+    "It causes irreversible tearing of the ligamentum teres",
+    "It converts a stable slip into an unstable open pelvic break",
+    "It triggers acute reflex sympathetic dystrophy of the knee"
+   ],
+   "correct": 0,
+   "explain": "Forceful closed reduction kinks or lacerates the delicate posterior retinacular blood supply of the femoral head, increasing the risk of avascular necrosis from <2% up to 50%."
   }
- ],
- "keys": [
-  "Legg-calve-perthes disease anchors the topic",
-  "Catterall classification is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }
