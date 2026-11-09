@@ -1,0 +1,245 @@
+{
+  "v": 1,
+  "module": "phm-glaucoma",
+  "subject": "pharmacology",
+  "title": "Osmotic Diuretics, Direct Miotics, and Angle-Closure Glaucoma Emergencies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The high-capacity intravenous osmotic diuretic utilized as an emergency hyperosmotic agent in acute angle-closure crises is **mannitol**. Infused as a 20% solution at 1.5 to 2.0 g/kg over thirty to forty-five minutes, mannitol remains strictly in the intravascular compartment, raising plasma osmolality. This draws water from the vitreous body and anterior chamber into retinal capillaries, causing rapid vitreous shrinkage that lowers intraocular pressure within thirty minutes. Key hazards include intravascular volume overload, acute pulmonary edema, congestive cardiac failure, and hyperosmolar hyperkalemia.",
+      "say": "Intravenous mannitol rapidly reduces vitreous volume and intraocular pressure by creating a steep intravascular osmotic gradient.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hyperosmotic agent",
+          "Route of administration",
+          "Typical clinical dosage",
+          "Crucial clinical limitation"
+        ],
+        "rows": [
+          [
+            "Mannitol",
+            "Intravenous infusion (20%)",
+            "1.5 to 2.0 g/kg over 45 minutes",
+            "Precipitates acute pulmonary edema in cardiac disease"
+          ],
+          [
+            "Glycerol",
+            "Oral solution (50%)",
+            "1.0 to 1.5 g/kg chilled on ice",
+            "Severe nausea and hyperglycemia in diabetes mellitus"
+          ],
+          [
+            "Isosorbide",
+            "Oral solution",
+            "1.0 to 1.5 g/kg",
+            "Safe in diabetes as it is excreted unchanged without glucose conversion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classic direct-acting muscarinic cholinergic agonist applied topically to manage glaucoma and induce prompt miosis is **pilocarpine**. By selectively stimulating M3 receptors on the iris sphincter and ciliary muscle, pilocarpine contracts the pupillary sphincter to produce pinpoint miosis, pulling the peripheral iris base away from the trabecular meshwork in angle-closure glaucoma. In open-angle glaucoma, ciliary muscle contraction pulls on the scleral spur to expand trabecular interspaces, facilitating outflow. Adverse effects include brow ache, induced accommodative myopia, and peripheral retinal tears in high myopes.",
+      "say": "Pilocarpine induces miosis and stretches the scleral spur to clear the drainage angle and open trabecular spaces.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pilo",
+            "label": "Topical pilocarpine 1% to 4% ocular instillation"
+          },
+          {
+            "id": "m3",
+            "label": "Stimulation of ciliary and iris sphincter M3 receptors"
+          },
+          {
+            "id": "contract",
+            "label": "Sphincter and longitudinal ciliary muscle contraction"
+          },
+          {
+            "id": "spur",
+            "label": "Anterior scleral spur traction and trabecular space widening"
+          }
+        ],
+        "edges": [
+          [
+            "pilo",
+            "m3"
+          ],
+          [
+            "m3",
+            "contract"
+          ],
+          [
+            "contract",
+            "spur"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An acute ophthalmic emergency characterized by sudden mechanical occlusion of the iridocorneal filtration angle is **angle-closure glaucoma**. Initiated by relative pupillary block where the posterior iris adheres tightly to the crystalline lens, trapped aqueous humour builds within the posterior chamber, bowing the peripheral iris forward against the trabecular meshwork (iris bombe). Patients experience excruciating peri-orbital pain, hemicranial headache, nausea, colored rainbow halos around lights, a cloudy steamy cornea, and a stony hard eyeball with intraocular pressure exceeding fifty millimeters of mercury. Immediate multi-agent medical suppression precedes definitive laser peripheral iridotomy.",
+      "say": "Acute angle-closure glaucoma is a medical emergency requiring rapid pressure lowering before curative laser iridotomy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+        "alt": "Cross section of anterior eye in acute angle-closure glaucoma",
+        "caption": "Acute angle-closure glaucoma pathophysiology demonstrating pupillary block, anterior iris bombe displacement, and mechanical occlusion of the iridocorneal drainage angle."
+      }
+    },
+    {
+      "tx": "The insidious, chronic optic neuropathy marked by progressive resistance to aqueous outflow despite a wide iridocorneal angle is **open-angle glaucoma**. While gonioscopy demonstrates an open anterior chamber angle without anatomical crowding, microscopic extracellular matrix deposition, endothelial cell loss, and trabecular meshwork compaction impede drainage into Schlemm's canal. This causes chronic painless elevation of intraocular pressure, progressive cupping of the optic nerve head with a cup-to-disc ratio exceeding 0.6, and permanent peripheral visual field arcuate defects. Medical management focuses on chronic once-daily topical eye drops that enhance outflow or suppress production.",
+      "say": "Open-angle glaucoma causes painless, progressive visual field loss from microscopic trabecular resistance despite an open angle.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/angle-recession-glaucoma-fig1.webp",
+        "alt": "Gonioscopic examination of the iridocorneal filtration angle",
+        "caption": "Gonioscopic view of the anterior chamber angle structures essential for differentiating open-angle from angle-closure glaucoma."
+      }
+    },
+    {
+      "tx": "The transparent intraocular fluid maintaining ocular geometry and nourishing the avascular cornea and crystalline lens is **aqueous humour**. Continuously synthesized by ciliary processes at two to three microliters per minute, aqueous travels from the posterior chamber through the pupil into the anterior chamber. Outflow follows two pathways: the pressure-dependent trabecular meshwork pathway handling eighty percent of flow, and the pressure-independent uveoscleral pathway handling fifteen to twenty percent. Imbalance between secretion and outflow resistance determines intraocular pressure, normally ten to twenty-one millimeters of mercury.",
+      "say": "Aqueous humour nourishes avascular ocular tissues and maintains intraocular pressure through balanced secretion and dual outflow paths.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trabecular Outflow Pathway (Conventional)",
+          "points": [
+            "Handles 80% to 85% of total aqueous drainage",
+            "Traverses trabecular meshwork into Schlemm canal",
+            "Directly dependent on intraocular pressure levels",
+            "Targeted by miotics, nitric oxide donors, and trabeculoplasty"
+          ]
+        },
+        "right": {
+          "title": "Uveoscleral Outflow Pathway (Unconventional)",
+          "points": [
+            "Handles 15% to 20% of total aqueous drainage",
+            "Passes through ciliary muscle bundles into suprachoroid",
+            "Largely independent of intraocular pressure gradients",
+            "Targeted primarily by prostaglandin analogues and alpha-2 agonists"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A notable pharmacological side effect observed during chronic topically administered glaucoma therapy is progressive alteration in **iris pigmentation**. Prostaglandin analogues like latanoprost, bimatoprost, and travoprost stimulate melanin synthesis within stromal melanocytes by upregulating tyrosinase enzyme expression, without causing melanocyte hyperplasia or malignant transformation. The resulting brown darkening is most pronounced in green, hazel, and multicolored eyes and is completely irreversible once established. Furthermore, long-term topical miotics such as pilocarpine can generate tiny cystic epithelial tags at the pupillary border known as iris pigment epithelial cysts.",
+      "say": "Prostaglandin analogues induce permanent iris darkening by stimulating melanin synthesis within existing stromal melanocytes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ophthalmic drug group",
+          "Cosmetic or pigmentary side effect",
+          "Reversibility upon drug cessation",
+          "Underlying cellular mechanism"
+        ],
+        "rows": [
+          [
+            "Prostaglandin analogues",
+            "Iris heterochromia and darkening",
+            "Irreversible (permanent color change)",
+            "Tyrosinase activation in stromal melanocytes"
+          ],
+          [
+            "Prostaglandin analogues",
+            "Eyelash hypertrichosis and curling",
+            "Reversible after several months",
+            "Prolongation of hair follicle anagen phase"
+          ],
+          [
+            "Prostaglandin analogues",
+            "Periorbital deepening (sulcus hollow)",
+            "Largely reversible",
+            "Inhibition of preadipocyte differentiation"
+          ],
+          [
+            "Cholinergic miotics",
+            "Iris pigment epithelial cysts",
+            "Reversible on withdrawal or phenylephrine add",
+            "Pupillary border epithelial hypertrophy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pharmacological agents that induce pupillary dilation and cycloplegia, designated as **mydriatics**, represent dangerous triggers for acute glaucoma in anatomically predisposed eyes. Anticholinergic drugs like atropine, cyclopentolate, and tropicamide, along with sympathomimetic alpha-1 agonists like phenylephrine, dilate the pupil. In eyes possessing shallow anterior chambers or narrow angles, pupillary mid-dilation folds and bunches the peripheral iris root into the iridocorneal filtration angle, precipitating acute pupillary block and sudden closure. Consequently, gonioscopic verification or anterior chamber depth evaluation is mandatory prior to therapeutic or diagnostic pharmacological mydriasis.",
+      "say": "Mydriatics must be avoided in narrow angles because pupillary mid-dilation crowds the peripheral iris into the drainage angle.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "myd",
+            "label": "Instillation of mydriatic agent (atropine, cyclopentolate, phenylephrine)"
+          },
+          {
+            "id": "dil",
+            "label": "Pupil enters mid-dilated position (3.5 to 4.5 mm)"
+          },
+          {
+            "id": "bunch",
+            "label": "Peripheral iris root bunches and crowds shallow anterior chamber angle"
+          },
+          {
+            "id": "block",
+            "label": "Mechanical occlusion of trabecular meshwork and acute IOP spike"
+          }
+        ],
+        "edges": [
+          [
+            "myd",
+            "dil"
+          ],
+          [
+            "dil",
+            "bunch"
+          ],
+          [
+            "bunch",
+            "block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The clinical anatomical boundary that determines drainage mechanics and guides surgical versus medical glaucoma strategy is the **iridocorneal filtration angle**. Visualized and graded by gonioscopy using the Shaffer system, the angle encompasses Schwalbe line, the trabecular meshwork, scleral spur, and ciliary body band. When gonioscopy reveals an angle grade below two, the eye is anatomically occludable, requiring laser peripheral iridotomy rather than exclusive topical drops. In contrast, open angles with grade three or four receive stepped topical medical regimens directed at aqueous inflow suppression or outflow enhancement.",
+      "say": "Gonioscopic assessment of the iridocorneal angle determines whether a patient requires definitive laser iridotomy or medical drops.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Shaffer angle grade",
+          "Angle width in degrees",
+          "Anatomical visible structures",
+          "Clinical management strategy"
+        ],
+        "rows": [
+          [
+            "Grade 4 (Wide open)",
+            "35 to 45 degrees",
+            "All structures visible to ciliary band",
+            "Medical topical therapy for open-angle glaucoma"
+          ],
+          [
+            "Grade 3 (Open)",
+            "20 to 35 degrees",
+            "Visible down to scleral spur",
+            "Low risk of closure; routine medical care"
+          ],
+          [
+            "Grade 2 (Moderately narrow)",
+            "20 degrees",
+            "Visible down to trabecular meshwork",
+            "Occludable angle; close monitoring indicated"
+          ],
+          [
+            "Grade 1 to 0 (Closed)",
+            "Under 10 degrees or slit",
+            "Schwalbe line only or no structures seen",
+            "Emergency laser peripheral iridotomy indicated"
+          ]
+        ]
+      }
+    }
+  ]
+}
