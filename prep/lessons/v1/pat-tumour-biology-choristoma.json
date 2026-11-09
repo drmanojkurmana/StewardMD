@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-tumour-biology",
+  "subject": "pathology",
+  "title": "Choristoma, Teratoma, Invasion, and Routes of Metastasis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A choristoma is the mirror image of a hamartoma: histologically normal tissue found where it does not belong, such as pancreatic tissue resting in the gastric wall or adrenal cortex beneath the kidney capsule. Because the tissue is foreign to the site, the lesion earns the name **choristoma**.",
+      "say": "A choristoma is normal tissue in the wrong place, like pancreatic rests sitting in the stomach wall.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hamartoma",
+          "points": [
+            "Native tissue, wrong arrangement",
+            "Lung chondroid hamartoma",
+            "Grows with the patient"
+          ]
+        },
+        "right": {
+          "title": "Choristoma",
+          "points": [
+            "Normal tissue, wrong location",
+            "Pancreatic rest in gastric wall",
+            "Also called heterotopia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Teratomas arise from totipotent germ cells and build tissues from all three germ layers, hair, teeth, cartilage, gut, and neural elements in one mass, most famously in ovary and testis and in the sacrococcygeal region of infants. Mature forms behave benignly; immature neural elements worsen prognosis; the tumour is a **teratoma**.",
+      "say": "Teratomas contain all three germ layers, from hair and teeth to gut and brain, arising most often in gonads.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mediastinal-teratoma-fig1.webp",
+        "alt": "Mediastinal teratoma findings and pathology",
+        "caption": "Teratoma pathology with mature tissues derived from multiple germ layers."
+      }
+    },
+    {
+      "tx": "Invasion is the first decisive step separating carcinoma in situ from cancer: tumour cells degrade basement membrane with proteases, alter adhesion, and migrate into stroma, provoking desmoplasia. Loss of E-cadherin loosens cells from their neighbours, and this stromal breach is **tumour invasion**.",
+      "say": "Invasion begins when tumour cells dissolve the basement membrane and migrate into stroma; that breach defines cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Adhesion loosens as E-cadherin falls"
+          },
+          {
+            "id": "b",
+            "label": "Proteases degrade basement membrane"
+          },
+          {
+            "id": "c",
+            "label": "Cells migrate through remodelled stroma"
+          },
+          {
+            "id": "d",
+            "label": "Lymphovascular invasion opens escape routes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Metastasis, the discontinuous spread of tumour to distant sites, is the single property that unequivocally marks malignancy, and its inefficiency is remarkable: millions of cells shed daily yet few survive shear, immune attack, and foreign soil. Successful colonies prove the lethal capability called **metastasis**.",
+      "say": "Metastasis alone proves malignancy, yet it is strikingly inefficient; almost every shed tumour cell dies on the journey.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer subtypes and their metastatic patterns to bone, lung, liver, and brain."
+      }
+    },
+    {
+      "tx": "Carcinomas favour lymphatic spread first, draining to sentinel and then regional nodes in an orderly sequence surgeons can map, whereas sarcomas largely ignore nodes and travel by blood. Enlarged nodes may reflect metastasis or reactive hyperplasia, so tissue confirmation matters; the carcinoma route is **lymphatic spread**.",
+      "say": "Carcinomas travel lymph first to sentinel nodes; sarcomas prefer blood, which is why their staging differs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lymphatic spread",
+          "points": [
+            "Typical of carcinomas",
+            "Sentinel node mapped first",
+            "Orderly regional progression"
+          ]
+        },
+        "right": {
+          "title": "Haematogenous spread",
+          "points": [
+            "Typical of sarcomas and some carcinomas",
+            "Liver via portal, lung via caval flow",
+            "Bone, brain, adrenal deposits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Venous drainage predicts haematogenous destinations: colorectal cancer rides the portal vein to liver, systemic tumours meet lung first, and prostate cancer reaches lumbar vertebrae through the valveless Batson plexus. Renal, thyroid, hepatocellular, and choriocarcinoma join sarcomas as blood borne specialists; the governing principle is **venous drainage anatomy**.",
+      "say": "Follow the veins to predict metastases: colon to liver, prostate to lumbar spine through Batson plexus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary tumour",
+          "Favoured route",
+          "Classic distant site"
+        ],
+        "rows": [
+          [
+            "Colorectal carcinoma",
+            "Portal venous",
+            "Liver"
+          ],
+          [
+            "Prostate carcinoma",
+            "Batson vertebral plexus",
+            "Lumbar vertebrae, osteoblastic"
+          ],
+          [
+            "Renal cell carcinoma",
+            "Renal vein, caval extension",
+            "Lung, cannonball deposits"
+          ],
+          [
+            "Breast carcinoma",
+            "Lymphatic then venous",
+            "Bone, lung, liver, brain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Seed and soil still explain the exceptions: breast cancer thrives in bone, uveal melanoma in liver, and some organs such as spleen and skeletal muscle resist colonisation despite rich blood flow. Chemokine matching and premetastatic niche preparation refine the old idea; its modern name is the **seed and soil hypothesis**.",
+      "say": "Seed and soil explains why breast cancer loves bone and uveal melanoma loves liver while spleen resists colonisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Permissive soil",
+          "points": [
+            "Bone marrow for breast and prostate",
+            "Liver for gastrointestinal primaries",
+            "Prepared premetastatic niches"
+          ]
+        },
+        "right": {
+          "title": "Resistant soil",
+          "points": [
+            "Spleen and skeletal muscle",
+            "Rich flow yet rare deposits",
+            "Hostile local microenvironment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Benign tumours never metastasise by definition, so a claimed benign tumour with distant deposits demands reclassification, sampling error review, or a second primary. Rare borderline exceptions such as metastasising leiomyoma prove the rule by their oddity; the definitional boundary remains **absence of metastasis** in benign disease.",
+      "say": "If a supposedly benign tumour has metastasised, question the diagnosis; benign tumours by definition never spread.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Question",
+          "Benign answer",
+          "Malignant answer"
+        ],
+        "rows": [
+          [
+            "Distant deposits?",
+            "Never",
+            "Defining capability"
+          ],
+          [
+            "Local invasion?",
+            "Expands, compresses",
+            "Infiltrates and destroys"
+          ],
+          [
+            "After excision?",
+            "Cured",
+            "Recurrence and spread possible"
+          ],
+          [
+            "Node enlargement?",
+            "Reactive only",
+            "Metastasis until proven otherwise"
+          ]
+        ]
+      }
+    }
+  ]
+}

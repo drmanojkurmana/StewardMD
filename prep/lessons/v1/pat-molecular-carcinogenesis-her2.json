@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-molecular-carcinogenesis",
+  "subject": "pathology",
+  "title": "HER2 Amplification, Tumour Suppressor Genes, RB, and TP53",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "HER2 is a growth factor receptor with no known ligand that signals strongest when overexpressed; amplification of its ERBB2 gene in breast and gastric cancers produces aggressive growth exquisitely vulnerable to targeted antibodies. Trastuzumab transformed this subtype's prognosis; the amplified receptor is **HER2**.",
+      "say": "HER2 amplified breast and gastric cancers grow aggressively but answer beautifully to trastuzumab based therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer molecular subtypes, including the HER2 positive group defined by ERBB2 amplification."
+      }
+    },
+    {
+      "tx": "Laboratories score HER2 by immunohistochemistry and confirm equivocal cases by in situ hybridisation counting gene copies, because therapy worth years of life depends on getting the call right. A score of 3+ or proven amplification defines **HER2-positive cancer** for treatment selection.",
+      "say": "HER2 testing by immunohistochemistry with hybridisation confirmation decides who receives life extending targeted therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "IHC score",
+          "Meaning",
+          "Next step"
+        ],
+        "rows": [
+          [
+            "0 or 1+",
+            "HER2 negative",
+            "No HER2 targeted therapy"
+          ],
+          [
+            "2+",
+            "Equivocal",
+            "Reflex in situ hybridisation"
+          ],
+          [
+            "3+",
+            "HER2 positive",
+            "Trastuzumab based therapy"
+          ],
+          [
+            "ISH amplified",
+            "Gene amplification proven",
+            "Treat as HER2 positive"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tumour suppressor genes restrain growth, repair damage, or trigger death in dangerous cells, and cancer requires losing both alleles, so their inheritance patterns look recessive within the cell yet dominant in pedigrees. Retinoblastoma and p53 founded this class; they are the **tumour suppressor genes**, the brakes to the oncogene accelerators.",
+      "say": "Suppressor genes are the brakes: both copies must fail inside a cell before growth escapes control.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gatekeepers",
+          "points": [
+            "Directly restrain proliferation",
+            "RB, APC, PTEN",
+            "Loss releases growth directly"
+          ]
+        },
+        "right": {
+          "title": "Caretakers",
+          "points": [
+            "Maintain genome integrity",
+            "BRCA1, BRCA2, mismatch repair",
+            "Loss breeds further mutations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The RB protein holds the cell cycle at the G1 restriction point by sequestering E2F transcription factors until cyclin dependent kinases phosphorylate it in response to genuine growth signals. Inheriting one defective RB allele seeds childhood retinoblastoma after a single somatic second hit inactivates the other; the founding suppressor is the **RB gene**.",
+      "say": "RB guards the G1 checkpoint; children inheriting one bad copy need only one more hit to develop retinoblastoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/retinoblastoma-fig1.webp",
+        "alt": "Retinoblastoma manifestations and pathology",
+        "caption": "Retinoblastoma, the childhood tumour founded on two hits to the RB suppressor gene."
+      }
+    },
+    {
+      "tx": "TP53, the guardian of the genome, pauses the cycle for repair or orders apoptosis when DNA damage is severe, and it is mutated in over half of human cancers, more than any other gene. Germline mutation produces Li-Fraumeni syndrome; the guardian itself is **TP53**, encoding the p53 protein.",
+      "say": "TP53 is mutated in over half of cancers; its germline failure causes the Li-Fraumeni cancer family syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "DNA damage sensed in the cell"
+          },
+          {
+            "id": "b",
+            "label": "p53 halts cycle and recruits repair"
+          },
+          {
+            "id": "c",
+            "label": "Repair succeeds: cycle resumes"
+          },
+          {
+            "id": "d",
+            "label": "Repair fails: apoptosis or senescence"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Loss of heterozygosity is the visible scar of the second hit: a cell inheriting or acquiring one suppressor mutation deletes or reduplicates the remaining normal allele, leaving no functional copy. Tumour DNA showing a single allele where blood shows two demonstrates **loss of heterozygosity**.",
+      "say": "Loss of heterozygosity is how the second hit usually happens, deleting the last working suppressor copy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal cell",
+          "points": [
+            "Two working suppressor alleles",
+            "Growth restrained appropriately",
+            "Damage repaired or cell removed"
+          ]
+        },
+        "right": {
+          "title": "After second hit",
+          "points": [
+            "No working suppressor allele",
+            "Checkpoint control lost",
+            "Clonal expansion begins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Suppressor loss explains targeted therapy limits: drugs inhibit overactive oncogene products readily, but replacing an absent brake protein throughout a tumour remains pharmacologically hard, so prevention and early detection carry suppressor syndromes. Synthetic lethality, PARP inhibition in BRCA loss, is the elegant exception exploiting **caretaker gene loss**.",
+      "say": "You cannot easily drug an absent brake; PARP inhibitors in BRCA loss succeed by synthetic lethality instead.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Suppressor",
+          "Syndrome when inherited",
+          "Signature tumours"
+        ],
+        "rows": [
+          [
+            "RB",
+            "Hereditary retinoblastoma",
+            "Retinoblastoma, osteosarcoma"
+          ],
+          [
+            "TP53",
+            "Li-Fraumeni syndrome",
+            "Sarcoma, breast, brain, adrenal"
+          ],
+          [
+            "APC",
+            "Familial adenomatous polyposis",
+            "Colorectal cancer"
+          ],
+          [
+            "BRCA1 and BRCA2",
+            "Hereditary breast ovarian cancer",
+            "Breast, ovarian, prostate, pancreas"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "HER2 and the suppressors frame modern molecular reporting: amplification calls invite antibodies and kinase inhibitors, while suppressor and repair status selects platinum, PARP inhibitors, and immunotherapy. Reading a cancer genome as accelerators stuck on and brakes cut remains the clinician's core skill in **molecular oncology interpretation**.",
+      "say": "Read every molecular report as accelerators and brakes: HER2 stuck on invites a drug, suppressor loss redirects the plan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Accelerator findings",
+          "points": [
+            "HER2 amplification, EGFR mutation",
+            "Matched targeted drugs exist",
+            "Resistance mutations monitored"
+          ]
+        },
+        "right": {
+          "title": "Brake findings",
+          "points": [
+            "TP53, RB, BRCA loss",
+            "Guide platinum, PARP, immunotherapy",
+            "Trigger germline testing and screening"
+          ]
+        }
+      }
+    }
+  ]
+}

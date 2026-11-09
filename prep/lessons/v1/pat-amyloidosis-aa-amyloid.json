@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-amyloidosis",
+  "subject": "pathology",
+  "title": "AA Amyloidosis, Transthyretin, and Dialysis Amyloidosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic inflammation keeps the liver pouring out the acute phase protein serum amyloid A for years, until a fragment of that protein misfolds and deposits in kidney, spleen, liver, and gut. Because no plasma cell clone is responsible, this secondary form is **AA amyloidosis**, and treating the underlying inflammation is its primary therapy.",
+      "say": "AA amyloidosis is the price of years of uncontrolled inflammation, depositing serum amyloid A fragments in kidney and spleen.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aa-amyloidosis-fig1.webp",
+        "alt": "AA amyloidosis pathogenesis",
+        "caption": "AA amyloidosis pathogenesis from chronic inflammation through serum amyloid A to tissue deposition."
+      }
+    },
+    {
+      "tx": "The precursor distinction drives everything: serum amyloid A rises a thousandfold during inflammation, and sustained elevation in rheumatoid arthritis, chronic infection, inflammatory bowel disease, or familial Mediterranean fever supplies the amyloid building blocks. The hepatic acute phase precursor is **serum amyloid A protein**, cleaved to the AA fragment found in tissue.",
+      "say": "Serum amyloid A is the liver made precursor; sustained thousandfold elevation in chronic inflammation supplies AA amyloid.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic inflammation sustains cytokine drive"
+          },
+          {
+            "id": "b",
+            "label": "Liver secretes excess serum amyloid A"
+          },
+          {
+            "id": "c",
+            "label": "AA fragment misfolds into beta pleated fibrils"
+          },
+          {
+            "id": "d",
+            "label": "Kidney, spleen, liver deposition advances"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Familial Mediterranean fever shows the principle in pure form: pyrin inflammasome attacks flood the body with interleukin 1 and serum amyloid A from childhood, and amyloid nephropathy was historically its lethal complication. Daily colchicine suppresses attacks and prevents amyloid, making this autoinflammatory disease, **familial Mediterranean fever**, the model AA risk state.",
+      "say": "In familial Mediterranean fever, daily colchicine prevents the AA amyloidosis that once killed these patients young.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-mediterranean-fever-fig1.webp",
+        "alt": "Familial Mediterranean fever overview",
+        "caption": "Familial Mediterranean fever, the inherited autoinflammatory disease whose untreated course leads to AA amyloidosis."
+      }
+    },
+    {
+      "tx": "Transthyretin tells a different story: this normal transport protein for thyroxine and retinol becomes amyloidogenic with age or with inherited destabilising mutations, depositing mainly in heart and nerves. Wild type disease in elderly hearts and mutant disease with polyneuropathy together form **transthyretin amyloidosis**, increasingly recognised behind carpal tunnel syndrome and heart failure.",
+      "say": "Transthyretin amyloidosis affects ageing hearts and, in mutant form, peripheral nerves; bilateral carpal tunnel is the early clue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wild type ATTR",
+          "points": [
+            "Normal transthyretin sequence, ageing related",
+            "Elderly hearts, bilateral carpal tunnel first",
+            "Bone scintigraphy often diagnostic"
+          ]
+        },
+        "right": {
+          "title": "Hereditary ATTR",
+          "points": [
+            "Destabilising transthyretin mutation",
+            "Polyneuropathy with cardiac involvement",
+            "Family history, genetic testing needed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Long term haemodialysis cannot clear beta2-microglobulin, which accumulates over years and deposits in osteoarticular tissues, causing carpal tunnel syndrome, destructive spondyloarthropathy, and bone cysts. This late dialysis complication is **dialysis-related amyloidosis**, markedly reduced by modern high flux membranes and transplantation.",
+      "say": "Beta2 microglobulin that dialysis cannot clear deposits around joints after years of treatment, causing carpal tunnel and bone cysts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Precursor",
+          "Dominant organs"
+        ],
+        "rows": [
+          [
+            "AA",
+            "Serum amyloid A",
+            "Kidney, spleen, liver, gut"
+          ],
+          [
+            "ATTR wild type",
+            "Normal transthyretin",
+            "Heart, carpal tunnel"
+          ],
+          [
+            "ATTR hereditary",
+            "Mutant transthyretin",
+            "Nerves and heart"
+          ],
+          [
+            "A-beta2M",
+            "Beta2 microglobulin",
+            "Joints, spine, carpal tunnel"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Organ patterns separate the amyloid types at the bedside: AA favours kidney and spleen with relative cardiac sparing, AL attacks heart and nerves aggressively, and ATTR concentrates on heart and conduction tissue. Macroglossia points to AL, nephrotic syndrome to AA or AL, and heart failure with carpal tunnel to ATTR; the sorting exercise is **amyloid organ patterning**.",
+      "say": "Let the organ pattern sort the type: kidney for AA, heart and tongue for AL, heart and carpal tunnel for transthyretin disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kidney dominant",
+          "points": [
+            "Nephrotic syndrome, enlarged kidneys",
+            "AA from chronic inflammation",
+            "AL with plasma cell clone"
+          ]
+        },
+        "right": {
+          "title": "Heart dominant",
+          "points": [
+            "Restrictive physiology, conduction disease",
+            "ATTR, especially in the elderly",
+            "AL when light chains are clonal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment follows the precursor with complete logic: suppress inflammation and serum amyloid A in AA, silence or stabilise transthyretin in ATTR, kill the light chain clone in AL, and transplant or improve dialysis in beta2-microglobulin disease. Colchicine, anti-cytokine biologics, tafamidis, and gene silencers all embody **precursor-directed therapy**.",
+      "say": "Each amyloid type is treated by cutting its precursor supply: control inflammation, stabilise transthyretin, or kill the clone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Type the amyloid precisely"
+          },
+          {
+            "id": "b",
+            "label": "AA: suppress inflammation and SAA"
+          },
+          {
+            "id": "c",
+            "label": "ATTR: stabilise or silence transthyretin"
+          },
+          {
+            "id": "d",
+            "label": "AL: clone directed chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monitoring closes the loop: serum amyloid A concentration predicts AA progression and regression, free light chains track AL, and imaging plus biomarkers follow ATTR hearts. Amyloid load can genuinely regress when precursor supply stops, which is why sustained **precursor suppression** is measured, not assumed.",
+      "say": "Amyloid can regress when its precursor is switched off, so measure SAA or free light chains to prove suppression is real.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Precursor marker",
+          "Response signal"
+        ],
+        "rows": [
+          [
+            "AA",
+            "Serum amyloid A level",
+            "Falling SAA, stabilising proteinuria"
+          ],
+          [
+            "AL",
+            "Free light chain difference",
+            "Deep haematological response"
+          ],
+          [
+            "ATTR",
+            "NT-proBNP, imaging burden",
+            "Slowed functional decline"
+          ],
+          [
+            "A-beta2M",
+            "Beta2 microglobulin level",
+            "Transplant normalises clearance"
+          ]
+        ]
+      }
+    }
+  ]
+}
