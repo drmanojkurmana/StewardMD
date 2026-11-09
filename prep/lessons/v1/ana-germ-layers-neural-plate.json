@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-germ-layers",
+ "subject": "anatomy",
+ "title": "Neural Induction and Neural Crest Migration",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Neurulation is the embryonic process transforming midline ectoderm into the neural tube. Induced by chordin, noggin, and follistatin secreted by the notochord, the overlying ectoderm thickens to form the slipper-shaped **neural plate** during the third gestational week. This specialized neuroectoderm gives origin to the brain and spinal cord.",
+   "say": "Neurulation converts surface ectoderm into the neural tube. Stimulated by morphogens from the notochord, overlying ectoderm thickens into the slipper-like neural plate during week three. This neuroectoderm generates the entire central nervous system.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-neural-tube.svg",
+    "alt": "Neural plate, neural groove, neural folds, and neural tube closure",
+    "caption": "Neurulation and neural tube closure along the dorsal midline. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As the lateral margins of the neural plate elevate, they produce paired longitudinal neural folds flanking a central depressed neural groove. The elevated crests of the folds converge toward the midline, where the **neural tube** fuses. Closure begins in the cervical region at the level of the fifth somite and zips cranially and caudally.",
+   "say": "The edges of the neural plate elevate to form paired neural folds flanking a central neural groove. The converging crests meet in the midline to form the neural tube. Fusion initiates in the cervical region and zips both headward and tailward.",
+   "vis": {
+    "kind": "flow",
+    "title": "Stages of Neurulation",
+    "nodes": [
+     {
+      "id": "pl",
+      "label": "Thickened Neuroectodermal Plate"
+     },
+     {
+      "id": "groove",
+      "label": "Neural Folds and Central Groove"
+     },
+     {
+      "id": "fuse",
+      "label": "Cervical Fusion at Somite 5"
+     },
+     {
+      "id": "tube",
+      "label": "Closed Cylindrical Neural Tube"
+     }
+    ],
+    "edges": [
+     [
+      "pl",
+      "groove"
+     ],
+     [
+      "groove",
+      "fuse"
+     ],
+     [
+      "fuse",
+      "tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cranial and caudal extremities of the neural tube communicate temporarily with the amniotic cavity via neuropores. The **anterior neuropore** closes reliably on day twenty-five (at the eighteen to twenty somite stage). Failure of anterior neuropore closure prevents calvarial and cerebral development, resulting in lethal anencephaly.",
+   "say": "Open ends of the neural tube communicate with amniotic fluid through neuropores. The anterior neuropore seals on day twenty-five. Failure of anterior closure halts brain and skull vault development, producing lethal anencephaly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Neuropore",
+     "points": [
+      "Located at the cephalic end of tube",
+      "Closes on gestational day 25",
+      "Failure causes anencephaly and cranioschisis",
+      "Marks site of lamina terminalis in adult"
+     ]
+    },
+    "right": {
+     "title": "Posterior Neuropore",
+     "points": [
+      "Located at the caudal end of tube",
+      "Closes on gestational day 28",
+      "Failure causes spina bifida and myelomeningocele",
+      "Marks terminal ventricle level"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **posterior neuropore** closes three days later on gestational day twenty-eight (at the twenty-five somite stage). Failure of posterior neuropore closure causes spina bifida, ranging from occult vertebral defects to open myelomeningocele with neurological paralysis. Periconceptional maternal supplementation with folic acid dramatically reduces neural tube defect rates by seventy percent.",
+   "say": "The posterior neuropore seals on day twenty-eight. Defective closure causes spina bifida, ranging from minor vertebral gaps to myelomeningocele with lower-limb paralysis. Maternal periconceptional folic acid supplementation prevents over seventy percent of these anomalies.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
+    "alt": "Folic acid supplementation mechanism in neural tube closure",
+    "caption": "Folic acid prevention of neural tube defects and closed neuropores. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During neural fold elevation, a specialized population of cells along the fold crest undergoes epithelial-to-mesenchymal transition and detaches, designated **neural crest** cells. Often termed the fourth germ layer, these multipotent migratory cells journey extensively along defined pathways throughout the embryo, differentiating into diverse tissue types.",
+   "say": "As neural folds elevate, a specialized population at the fold crest detaches, forming neural crest cells. Referred to as the fourth germ layer, these migratory cells journey along embryonic pathways to differentiate into diverse nervous, endocrine, and skeletal structures.",
+   "vis": {
+    "kind": "flow",
+    "title": "Neural Crest Lineage Dispersal",
+    "nodes": [
+     {
+      "id": "crest",
+      "label": "Dorsal Neuroectodermal Crest"
+     },
+     {
+      "id": "emt",
+      "label": "Epithelial-Mesenchymal Transition"
+     },
+     {
+      "id": "cranial",
+      "label": "Cranial Crest: Branchial Face"
+     },
+     {
+      "id": "trunk",
+      "label": "Trunk Crest: PNS and Chromaffin"
+     }
+    ],
+    "edges": [
+     [
+      "crest",
+      "emt"
+     ],
+     [
+      "emt",
+      "cranial"
+     ],
+     [
+      "emt",
+      "trunk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trunk neural crest cells migrate along two main pathways: a dorsolateral route under the ectoderm to form **melanocytes** in the skin, and a ventral route through anterior sclerotomes. The ventral stream differentiates into dorsal root sensory ganglia, sympathetic chain ganglia, parasympathetic enteric plexuses of Meissner and Auerbach, and chromaffin cells of the adrenal medulla.",
+   "say": "Trunk neural crest cells follow two routes: a superficial path under the ectoderm to become cutaneous melanocytes, and a deep ventral path through somites. The ventral stream yields sensory ganglia, sympathetic chains, enteric plexuses, and adrenal chromaffin cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neural Crest Derivative",
+     "Embryonic Pathway",
+     "Adult Anatomical Site",
+     "Clinical Pathology"
+    ],
+    "rows": [
+     [
+      "Melanocytes",
+      "Dorsolateral subectodermal",
+      "Basal epidermis, uveal tract",
+      "Vitiligo, cutaneous melanoma"
+     ],
+     [
+      "Enteric Ganglia",
+      "Vagal and sacral ventral stream",
+      "Gut submucosa and myenteric wall",
+      "Hirschsprung disease"
+     ],
+     [
+      "Adrenal Medulla",
+      "Trunk ventral stream",
+      "Chromaffin core of adrenal gland",
+      "Phaeochromocytoma"
+     ],
+     [
+      "Schwann Cells",
+      "Peripheral nerve pathway",
+      "Myelin sheath of peripheral nerves",
+      "Neurofibromatosis type 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the head and neck, cranial neural crest cells form the ectomesenchyme that builds the branchial arches, the frontonasal process, the bones of the face, and the aorticopulmonary septum. Defective migration of cranial neural crest cells into the outflow tract of the heart causes conotruncal heart defects, including **tetralogy of Fallot** and persistent truncus arteriosus.",
+   "say": "In the head, cranial crest cells form ectomesenchyme constructing facial bones, branchial arches, and the aorticopulmonary septum. Defective crest migration into the cardiac outflow tract leads to conotruncal defects like tetralogy of Fallot and persistent truncus arteriosus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cranial Crest Derivatives",
+     "points": [
+      "Craniofacial bones and cartilage",
+      "Dentine of teeth and odontoblasts",
+      "Spiral aorticopulmonary septum",
+      "Ciliary and otic parasympathetic ganglia"
+     ]
+    },
+    "right": {
+     "title": "Neural Crest Neurocristopathies",
+     "points": [
+      "Hirschsprung aganglionic megacolon",
+      "Treacher Collins mandibulofacial dysostosis",
+      "DiGeorge third/fourth pouch anomalies",
+      "Waardenburg syndrome with heterochromia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failure of vagal neural crest cells to migrate into the distal colonic wall results in congenital absence of myenteric Auerbach and submucosal Meissner plexuses, causing **Hirschsprung disease**. The aganglionic bowel segment undergoes chronic tonic contraction, creating functional bowel obstruction and massive proximal megacolon in neonates.",
+   "say": "Failure of neural crest cells to colonize the distal colon eliminates myenteric and submucosal plexuses, causing Hirschsprung disease. The aganglionic segment remains spastically contracted, creating distal bowel obstruction and marked proximal megacolon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurocristopathy",
+     "Underlying Defect",
+     "Key Anatomical Manifestation",
+     "Diagnostic Hallmark"
+    ],
+    "rows": [
+     [
+      "Hirschsprung Disease",
+      "Failure of neural crest gut migration",
+      "Distal colonic functional obstruction",
+      "Absent ganglion cells on rectal biopsy"
+     ],
+     [
+      "DiGeorge Syndrome",
+      "Defective 3rd/4th pharyngeal crest",
+      "Thymic aplasia, conotruncal cardiac defects",
+      "22q11.2 microdeletion, hypocalcaemia"
+     ],
+     [
+      "Waardenburg Syndrome",
+      "Melanocyte crest migration fault",
+      "White forelock, heterochromia iridis",
+      "PAX3 mutation, sensorineural deafness"
+     ],
+     [
+      "Treacher Collins",
+      "1st and 2nd branchial arch crest fault",
+      "Malar hypoplasia, mandibular retrognathia",
+      "TCOF1 mutation, conductive deafness"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

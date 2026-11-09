@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "ana-heart-vessels",
+ "subject": "anatomy",
+ "title": "Heart Tube Development and Septation Events",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The primitive heart forms from splanchnic lateral plate mesoderm within the cardiogenic field. Around day twenty-one, paired endothelial heart tubes fuse in the midline into a single contractile tube displaying five sequential dilations: from caudal to cranial, the sinus venosus, primitive atrium, primitive ventricle, **bulbus cordis**, and truncus arteriosus.",
+   "say": "The primitive heart originates from splanchnic mesoderm within the cardiogenic area. On day twenty-one, paired tubes fuse into a single contractile tube with five chambers: sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, and truncus arteriosus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-atrial-septation.svg",
+    "alt": "Heart tube dilations, atrial septation, septum primum and secundum",
+    "caption": "Primitive heart tube chambers and atrial septation mechanics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the heart tube elongates faster than the pericardial cavity, it undergoes **dextral looping** on day twenty-three, bending to the right and folding ventrally. This critical loop repositions the bulbus cordis and ventricle anteriorly while displacing the primitive atrium and sinus venosus dorsocranially, establishing the basic topographical layout of the mammalian heart.",
+   "say": "Because the heart tube outgrows the pericardial sac, it undergoes dextral looping on day twenty-three, bending rightward and ventrally. This rotation places the ventricle and bulbus cordis anteriorly while pushing the atrium and sinus venosus dorsocranially.",
+   "vis": {
+    "kind": "flow",
+    "title": "Heart Tube Looping and Fate",
+    "nodes": [
+     {
+      "id": "tube",
+      "label": "Straight Midline Heart Tube"
+     },
+     {
+      "id": "dloop",
+      "label": "Dextral Looping to the Right"
+     },
+     {
+      "id": "vent",
+      "label": "Ventricle and Bulbus Shift Ventral"
+     },
+     {
+      "id": "atr",
+      "label": "Atrium Shifts Dorsocranial"
+     }
+    ],
+    "edges": [
+     [
+      "tube",
+      "dloop"
+     ],
+     [
+      "dloop",
+      "vent"
+     ],
+     [
+      "dloop",
+      "atr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primitive chambers develop into specific adult structures: the sinus venosus forms the smooth sinus venarum of the right atrium and the coronary sinus, while the primitive atrium yields the pectinate trabeculated appendages. The proximal bulbus cordis forms the trabeculated right ventricle, its conus cordis forms the **ventricular outflow tracts**, and the truncus arteriosus forms the aorta and pulmonary trunk.",
+   "say": "Primitive chambers become adult structures: the sinus venosus forms the smooth right atrial wall and coronary sinus, while the atrium yields trabeculated appendages. The bulbus cordis forms the right ventricle and outflow tracts, and the truncus arteriosus builds the great arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primitive Chamber",
+     "Adult Right Heart Derivative",
+     "Adult Left Heart Derivative",
+     "Consequence of Failure"
+    ],
+    "rows": [
+     [
+      "Sinus Venosus",
+      "Sinus venarum, SA node",
+      "Coronary sinus, oblique vein",
+      "Sinus venosus ASD"
+     ],
+     [
+      "Primitive Atrium",
+      "Pectinate right auricle",
+      "Pectinate left auricle",
+      "Ostium secundum ASD"
+     ],
+     [
+      "Primitive Ventricle",
+      "Part of right ventricle",
+      "Trabeculated left ventricle",
+      "Single ventricle defect"
+     ],
+     [
+      "Bulbus Cordis",
+      "Conus arteriosus (infundibulum)",
+      "Aortic vestibule below valve",
+      "Double outlet right ventricle"
+     ],
+     [
+      "Truncus Arteriosus",
+      "Ascending aorta trunk",
+      "Pulmonary arterial trunk",
+      "Persistent truncus arteriosus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Atrial septation initiates late in the fourth week as a crescentic sickle-shaped crest called the **septum primum** grows down from the roof toward the endocardial cushions. The temporary gap between its advancing lower edge and the cushions is the ostium primum. Before the ostium primum closes, cell death in the upper septum primum creates perforations that coalesce into the ostium secundum.",
+   "say": "Atrial septation begins late in week four when the sickle-shaped septum primum descends toward the endocardial cushions. The opening below its advancing edge is the ostium primum. Before it seals, apoptosis in its upper portion creates the ostium secundum.",
+   "vis": {
+    "kind": "flow",
+    "title": "Atrial Septation Sequence",
+    "nodes": [
+     {
+      "id": "sp1",
+      "label": "Septum Primum Grows Down"
+     },
+     {
+      "id": "op1",
+      "label": "Ostium Primum Closes at Cushion"
+     },
+     {
+      "id": "op2",
+      "label": "Ostium Secundum Perforations Form"
+     },
+     {
+      "id": "sp2",
+      "label": "Thick Septum Secundum Descends"
+     }
+    ],
+    "edges": [
+     [
+      "sp1",
+      "op1"
+     ],
+     [
+      "sp1",
+      "op2"
+     ],
+     [
+      "op2",
+      "sp2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Next, a thick muscular crescent called the **septum secundum** descends immediately to the right of septum primum. The septum secundum never forms a complete partition; its free concave margin leaves an oval opening called the foramen ovale. The flexible upper edge of septum primum acts as a one-way flap valve, permitting right-to-left shunting of oxygenated placental blood.",
+   "say": "Next, a thick muscular fold called the septum secundum descends to the right of septum primum. It leaves an oval aperture named the foramen ovale. The thin septum primum acts as a one-way flutter valve, allowing right-to-left shunting of placental blood.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septum Primum (Valve)",
+     "points": [
+      "Thin, flexible membranous crescent",
+      "Forms the floor of the fossa ovalis",
+      "Acts as a one-way flap valve",
+      "Pushed against septum secundum at birth"
+     ]
+    },
+    "right": {
+     "title": "Septum Secundum (Limbus)",
+     "points": [
+      "Thick, rigid muscular partition",
+      "Forms the limbus of the fossa ovalis",
+      "Leaves persistent open foramen ovale",
+      "Provides structural backing for valve"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "At birth, pulmonary expansion and umbilical cord clamping drastically lower right atrial pressure and elevate left atrial pressure. This pressure reversal forces the flexible flap of septum primum firmly against the rigid septum secundum, functionally sealing the **foramen ovale**. Complete anatomical fusion occurs within several months, transforming the site into the fossa ovalis.",
+   "say": "At birth, first breath and cord clamping drop pulmonary resistance and drive up left atrial pressure. This pressure swing presses the flap of septum primum against the septum secundum, functionally closing the foramen ovale before anatomical fusion creates the fossa ovalis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hemodynamic Stage",
+     "Right Atrial Pressure",
+     "Left Atrial Pressure",
+     "Status of Foramen Ovale"
+    ],
+    "rows": [
+     [
+      "Fetal Life",
+      "High (placental return and pulmonary resistance)",
+      "Low (minimal pulmonary return)",
+      "Widely patent; right-to-left shunt"
+     ],
+     [
+      "Immediate Birth",
+      "Drops sharply with cord clamping",
+      "Surges with pulmonary vascular filling",
+      "Functional closure by valve flap"
+     ],
+     [
+      "Infancy (3 to 6 mo)",
+      "Lower than left atrium permanently",
+      "Higher than right atrium permanently",
+      "Anatomical fusion into fossa ovalis"
+     ],
+     [
+      "Probe Patent PFO",
+      "Transiently spikes during Valsalva",
+      "Normal resting baseline",
+      "Potential for paradoxical embolus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventricular septation combines a muscular portion and a membranous portion. The muscular ventricular septum grows upward from the apex, halting short of the cushions to leave the temporary interventricular foramen. Closure of this foramen requires the **membranous ventricular septum**, formed by the fusion of the inferior endocardial cushion, the right conus ridge, and the left conus ridge.",
+   "say": "Ventricular septation combines muscular and membranous components. The muscular septum ascends from the apex, leaving a temporary interventricular foramen. Closure is achieved by the membranous septum, formed by fusion of endocardial cushions and conal ridges.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tetralogy-of-fallot-fig1.webp",
+    "alt": "Ventricular septal defect and conotruncal malalignment in tetralogy of Fallot",
+    "caption": "Conotruncal septation defect producing ventricular septal malalignment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Abnormal conotruncal septation mediated by neural crest cells underlies major cyanotic heart diseases. Unequal division of the truncus arteriosus from anterior displacement of the conotruncal septum produces **tetralogy of Fallot**, featuring pulmonary infundibular stenosis, an overriding aorta, a large membranous ventricular septal defect, and secondary right ventricular hypertrophy.",
+   "say": "Flawed conotruncal septation by neural crest cells causes cyanotic congenital heart defects. Anterior displacement of the infundibular septum produces tetralogy of Fallot, comprising pulmonary stenosis, an overriding aorta, a ventricular septal defect, and right ventricular hypertrophy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cyanotic Defect",
+     "Embryonic Conotruncal Fault",
+     "Four Classical Components",
+     "Clinical Hallmark"
+    ],
+    "rows": [
+     [
+      "Tetralogy of Fallot",
+      "Anterior displacement of conus septum",
+      "PS, overriding aorta, VSD, RVH",
+      "Cyanotic tet spells, boot-shaped heart"
+     ],
+     [
+      "Transposition (TGA)",
+      "Linear non-spiral truncus septation",
+      "Aorta off RV, pulmonary trunk off LV",
+      "Lethal unless mixing shunt (PDA/ASD)"
+     ],
+     [
+      "Persistent Truncus",
+      "Total failure of truncus septation",
+      "Single outflow vessel with valve, VSD",
+      "Early heart failure, marked cyanosis"
+     ],
+     [
+      "Membranous VSD",
+      "Failure of cushion and conus fusion",
+      "Isolated defect in membranous septum",
+      "Most common congenital cardiac defect"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

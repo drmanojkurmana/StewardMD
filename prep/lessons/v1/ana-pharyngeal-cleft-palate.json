@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-pharyngeal",
+ "subject": "anatomy",
+ "title": "Facial Prominences, Cleft Lip and Cleft Palate",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Facial development occurs between weeks four and ten, orchestrated by five mesenchymal facial prominences surrounding the stomodeum: an unpaired frontonasal prominence, paired maxillary prominences, and paired mandibular prominences. The **maxillary prominence** of the first arch grows medially to form the cheeks, lateral upper lip, and secondary palate.",
+   "say": "Facial morphogenesis takes place between weeks four and ten around the primitive mouth, guided by five swellings: an unpaired frontonasal prominence, paired maxillary prominences, and paired mandibular prominences. Maxillary prominences form the cheeks and lateral upper lip.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-arch-derivatives.svg",
+    "alt": "Embryonic facial prominences: frontonasal, maxillary, and mandibular",
+    "caption": "Facial prominences and skeletal fusion planes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bilateral ectodermal nasal placodes invaginate to produce nasal pits flanked by medial and lateral nasal prominences. The intermaxillary segment forms through midline fusion of the two medial nasal prominences, giving origin to three structures: the **philtrum of the upper lip**, the premaxillary part of the maxilla bearing the four upper incisors, and the primary palate.",
+   "say": "Nasal placodes invaginate into pits bounded by medial and lateral nasal prominences. Midline fusion of both medial nasal prominences creates the intermaxillary segment, which yields the philtrum of the lip, the premaxilla housing four incisors, and the primary palate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Intermaxillary Segment Formation",
+    "nodes": [
+     {
+      "id": "front",
+      "label": "Frontonasal Prominence"
+     },
+     {
+      "id": "med",
+      "label": "Paired Medial Nasal Prominences"
+     },
+     {
+      "id": "fuse",
+      "label": "Midline Merging of Medial Prominences"
+     },
+     {
+      "id": "inter",
+      "label": "Intermaxillary Segment (Philtrum and Primary Palate)"
+     }
+    ],
+    "edges": [
+     [
+      "front",
+      "med"
+     ],
+     [
+      "med",
+      "fuse"
+     ],
+     [
+      "fuse",
+      "inter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive upper lip forms when the maxillary prominence grows medially and merges seamlessly with the intermaxillary segment. Failure of fusion between the maxillary prominence and the medial nasal prominence results in a **cleft lip**, which can be unilateral or bilateral. The cleft characteristically lies lateral to the midline philtrum.",
+   "say": "The definitive upper lip forms when the maxillary prominence fuses with the medial nasal prominence. Failure of this fusion produces a cleft lip, which may be unilateral or bilateral. The defect sits lateral to the philtrum along the philtral ridge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/craniofacial-cleft-aesthetic-rhinoplasty-fig1.webp",
+    "alt": "Cleft lip and palate anatomical deformities and repair planes",
+    "caption": "Cleft lip and palate morphology and surgical landmarks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cleft lip occurs in approximately one in one thousand births, displaying male predominance. Unilateral cleft lip results from failure of the maxillary prominence on one side to fuse with the medial nasal prominence. Bilateral cleft lip occurs when both maxillary prominences fail to unite with the intermaxillary segment, leaving the **premaxilla** dangling freely.",
+   "say": "Cleft lip affects roughly one in a thousand births with a male predominance. Unilateral cleft lip stems from failure of one maxillary prominence to merge with the medial nasal prominence. Bilateral cleft lip leaves the central premaxilla projecting forward on the nasal septum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cleft Lip Characteristics",
+     "points": [
+      "Defect anterior to incisive foramen",
+      "Failure of maxillary and medial nasal fusion",
+      "Higher incidence in males (60-80%)",
+      "Repaired at 3 months (Rule of 10s)"
+     ]
+    },
+    "right": {
+     "title": "Cleft Palate Characteristics",
+     "points": [
+      "Defect posterior to incisive foramen",
+      "Failure of lateral palatine processes to fuse",
+      "Higher incidence in females (67%)",
+      "Repaired at 9 to 12 months for speech"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Palatogenesis involves a primary palate and a secondary palate. The small triangular primary palate derives from the intermaxillary segment, lying anterior to the incisive foramen. The hard and soft secondary palate develops from paired shelf-like outgrowths of the maxillary prominences termed **lateral palatine processes**, or palatal shelves.",
+   "say": "Palatogenesis combines primary and secondary palates. The triangular primary palate derives from the intermaxillary segment anterior to the incisive foramen. The secondary palate develops from horizontal shelves of the maxillary prominences termed lateral palatine processes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Secondary Palate Elevation and Fusion",
+    "nodes": [
+     {
+      "id": "vert",
+      "label": "Vertical Shelves Flanking the Tongue"
+     },
+     {
+      "id": "drop",
+      "label": "Mandible Enlarges, Tongue Drops"
+     },
+     {
+      "id": "elev",
+      "label": "Palatal Shelves Elevate Horizontally"
+     },
+     {
+      "id": "fuse",
+      "label": "Midline Fusion with Nasal Septum"
+     }
+    ],
+    "edges": [
+     [
+      "vert",
+      "drop"
+     ],
+     [
+      "drop",
+      "elev"
+     ],
+     [
+      "elev",
+      "fuse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the seventh and eighth weeks, the enlarging embryonic mandible causes the tongue to drop downward. The vertical palatal shelves elevate into a horizontal plane above the tongue and fuse with each other in the midline and with the downward-growing nasal septum, completing the **secondary palate**. Midline fusion proceeds from anterior to posterior, terminating at the uvula.",
+   "say": "In weeks seven and eight, mandibular growth allows the tongue to drop. The palatal shelves rotate horizontally above the tongue and fuse in the midline with each other and the nasal septum. This fusion zips from front to back, finishing at the uvula.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Palatal Component",
+     "Embryonic Source",
+     "Demarcating Boundary",
+     "Normal Fate"
+    ],
+    "rows": [
+     [
+      "Primary Palate",
+      "Intermaxillary segment (medial nasal)",
+      "Anterior to incisive foramen",
+      "Houses four maxillary incisors"
+     ],
+     [
+      "Secondary Palate",
+      "Lateral palatine processes of maxilla",
+      "Posterior to incisive foramen",
+      "Forms hard palate and soft palate"
+     ],
+     [
+      "Nasal Septum",
+      "Tectum posterius of frontonasal",
+      "Downgrowth in median plane",
+      "Fuses with upper palatal surface"
+     ],
+     [
+      "Uvula",
+      "Posterior tips of palatal shelves",
+      "Free posterior soft palate margin",
+      "Last anatomical structure to fuse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the lateral palatine processes to fuse with each other or with the primary palate results in a **cleft palate**, which may involve the hard palate, soft palate, or both. The incisive foramen serves as the crucial anatomical dividing line: defects anterior to it represent primary palate clefts, while defects posterior represent secondary palate clefts.",
+   "say": "Failure of palatal shelves to fuse produces a cleft palate, which may affect the hard palate, soft palate, or both. The incisive foramen serves as the anatomical dividing marker between primary palate anterior clefts and secondary palate posterior clefts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Cleft Deformities",
+     "points": [
+      "Cleft lip, cleft upper alveolus",
+      "Failure of mesenchyme to bridge groove",
+      "Lies anterior to the incisive foramen",
+      "Often associated with dental anomalies"
+     ]
+    },
+    "right": {
+     "title": "Posterior Cleft Deformities",
+     "points": [
+      "Cleft secondary palate, bifid uvula",
+      "Failure of horizontal shelf fusion",
+      "Lies posterior to the incisive foramen",
+      "Causes velopharyngeal insufficiency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The mildest manifestation of secondary palate clefting is a **bifid uvula**, caused by failure of the caudalmost tips of the palatal shelves to merge. Cleft palate leads to velopharyngeal incompetence with hypernasal speech and recurrent middle ear effusions due to tensor veli palatini dysfunction. Surgical repair of cleft palate is performed at nine to twelve months before speech development.",
+   "say": "The mildest secondary palate defect is a bifid uvula, caused by failure of the tips of the shelves to merge. Cleft palate causes hypernasal speech and middle ear effusions from tensor veli palatini weakness. Surgical palatoplasty is performed around one year of age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Repair",
+     "Timing of Procedure",
+     "Surgical Criteria / Rule",
+     "Functional Goal"
+    ],
+    "rows": [
+     [
+      "Cleft Lip (Cheiloplasty)",
+      "3 months (10-12 weeks)",
+      "Rule of 10s: 10 lbs, 10g Hb, 10 weeks",
+      "Lip seal, feeding, cosmetic symmetry"
+     ],
+     [
+      "Cleft Palate (Palatoplasty)",
+      "9 to 12 months",
+      "Prior to onset of speech phonemes",
+      "Velopharyngeal competence, speech"
+     ],
+     [
+      "Alveolar Bone Graft",
+      "8 to 11 years",
+      "Before canine eruption on X-ray",
+      "Provides bony arch for permanent teeth"
+     ],
+     [
+      "Pharyngoplasty",
+      "4 to 6 years",
+      "Persistent hypernasal escape",
+      "Narrows velopharyngeal sphincter"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
