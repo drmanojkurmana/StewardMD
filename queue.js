@@ -23,6 +23,16 @@
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }
   function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
   function now() { return Date.now(); }
+  /* A flag in queue-flags.js DEFS resolves there (query, then localStorage, then default). On a page that
+   * loads no DEFS for the key (test harnesses), localStorage alone decides. */
+  function flagOn(key, def) {
+    var F = G.SMD_QUEUE_FLAGS;
+    try { if (F && F.defs && F.defs()[key]) return F.bool(key); } catch (e) {}
+    var v = null; try { v = G.localStorage.getItem(key); } catch (e) {}
+    return v === "1" ? true : v === "0" ? false : def;
+  }
+  function q2On() { return flagOn("smd_opd_q2", false); }                    // the 2026-11 queue screen
+  function patientKeyOn() { return flagOn("smd_opd_patient_key", true); }    // one device record per patient
   function emrOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
 
   // ---- derived display data (pure) --------------------------------------------------------
@@ -68,14 +78,14 @@
         '<div class="q-pos">' + (idx + 1) + "</div>" +
         '<div class="q-tl-info"><div class="q-tl-nm">' + tok(t) + phi("name", t.name, esc(t.name || "Patient")) + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
         '<div class="q-tl-acts">' +
-          (t.status !== "called" ? '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
-          (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
-          (t.status === "called" ? '<button class="q-ic" title="No-show (did not come when called)" data-q-act="noshow:' + esc(t.id) + '">' + ms("person_off") + "</button>" : "") +
-          '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
-          '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
-          '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
-          (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
-          '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" +   // every patient gets an Assessment button (clinic + hospital); opens the consult record
+          (t.status !== "called" ? '<button class="q-ic" title="Call" aria-label="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
+          (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" aria-label="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
+          (t.status === "called" ? '<button class="q-ic" title="No-show (did not come when called)" aria-label="No-show (did not come when called)" data-q-act="noshow:' + esc(t.id) + '">' + ms("person_off") + "</button>" : "") +
+          '<button class="q-ic" title="Start" aria-label="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
+          '<button class="q-ic" title="Priority" aria-label="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
+          '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" aria-label="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
+          (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" aria-label="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
+          '<button class="q-ic" title="Assessment + Ask MaiK" aria-label="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" +   // every patient gets an Assessment button (clinic + hospital); opens the consult record
         "</div></div>";
   }
   /* D13: RECALL NO-SHOWS. state.noShows: undefined = closed, null = loading, false = failed (said so, never
@@ -84,7 +94,7 @@
     var n = state.noShows;
     if (n === undefined) return "";
     var h = '<div class="q-card" style="margin:8px 0"><div class="q-card-h">' + ms("person_search") + " No-shows you can recall" +
-      ' <button class="q-ic" title="Close" data-q-act="noshowsclose">' + ms("close") + "</button></div>";
+      ' <button class="q-ic" title="Close" aria-label="Close" data-q-act="noshowsclose">' + ms("close") + "</button></div>";
     if (n === null) return h + '<div class="q-empty">Loading no-shows...</div></div>';
     if (n === false) return h + '<div class="q-empty">The no-shows could not be loaded. Do not read this as none. <button class="q-pause" style="width:auto;padding:6px 10px" data-q-act="noshows">Try again</button></div></div>';
     if (!n.length) return h + '<div class="q-empty">No one marked no-show in the last 4 hours.</div></div>';
@@ -103,9 +113,12 @@
     var why = "";
     try { why = window.prompt("Why is this patient recalled? (recorded in the audit trail)", "Patient arrived late") || ""; } catch (e) {}
     if (why.trim().length < 3) { try { G.toast && G.toast("Not recalled: a reason is required."); } catch (e) {} return; }
-    act(sid, "/no-show/recall", { ticketId: ticketId, reason: why.trim(), to: "waiting" }).then(function (r) {
+    doRecall(sid, ticketId, why.trim());
+  }
+  function doRecall(sid, ticketId, why) {
+    act(sid, "/no-show/recall", { ticketId: ticketId, reason: why, to: "waiting" }).then(function (r) {
       try { G.toast && G.toast(r && r.ok ? "Recalled with the same token." : "Not recalled: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {}
-      if (r && r.ok) loadNoShows();
+      if (r && r.ok && st.noShows !== undefined) loadNoShows();
     }, function () { try { G.toast && G.toast("Not recalled: the server could not be reached."); } catch (e) {} });
   }
   function orderedTickets(state) {
@@ -121,6 +134,7 @@
   // Rows for the queue timeline, filtered by the live search box. Position numbers keep the
   // TRUE queue index (a searched patient still shows #12, not #1).
   function timelineRows(state) {
+    if (q2On()) return rowsV2(state);
     var ordered = orderedTickets(state);
     var q = (state.search || "").trim().toLowerCase();
     var vis = q ? ordered.filter(function (t) { return matchTicket(t, q); }) : ordered;
@@ -128,7 +142,7 @@
     return vis.map(function (t) { return ticketRow(t, ordered.indexOf(t), ordered); }).join("");
   }
   function renderConsult(cur) {
-    if (!cur) return '<div class="q-consult"><div class="q-empty">' + ms("play_circle") + "<div style=\"margin-top:8px\">No one in consultation. Tap a patient's <b>Start</b> or <b>Finish</b> to advance the queue.</div></div></div>";
+    if (!cur) return '<div class="q-consult"><div class="q-empty">' + ms("play_circle") + "<div style=\"margin-top:8px\">No one in consultation. Tap a patient's <b>Start</b> to begin.</div></div></div>";
     var vt = cur.visitType === "followup" ? "Follow-up" : "New";
     return '<div class="q-consult"><div class="q-consult-b">' +
       '<div class="q-cn"><div><h3>' + tok(cur) + phi("name", cur.name, esc(cur.name || "Patient")) + "</h3>" +
@@ -168,13 +182,167 @@
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
     var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" data-phi-input type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
-    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" aria-label="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
-    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + (ins.html || esc(ins.msg)) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
+    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("schedule") + "</div><div style=\"flex:1\"><h4>Running late</h4><p>" + (ins.html || esc(ins.msg)) + '</p></div><button class="q-ai-x" data-q-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>On time</h4><p style="margin:0">No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
     // The doctor's own session above, the hospital's whole OPD day beneath it.
     return kpis + pulseCard(state) + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
       '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
-      '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div></section>";
+      '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + "Queue Timeline</h2>" + timeline + ai + "</div></section>";
+  }
+
+  /* ==== The 2026-11 queue screen (flag smd_opd_q2; design-plans/opd-queue-10-of-10.md) ====================
+   * Built around the one decision the doctor makes here: who do I see next, and am I running behind.
+   * A status sentence, the patient in the room, the next patient with one labelled button, then the rest
+   * as plain rows that open a sheet of worded actions. Every action is the SAME data-q-act command the
+   * earlier screen sends, so the server calls, permissions and audit are unchanged. */
+  function findTicket(id, list) { var ts = list || st.tickets || []; for (var i = 0; i < ts.length; i++) if (ts[i].id === id) return ts[i]; return null; }
+  function whenV2(t) {
+    var waitMs = now() - (t.registeredAt || now());
+    if (isQueued(t.status) && waitMs > 30 * 60000) return { late: true, text: "Waiting " + mins(waitMs) + " min" };
+    if (t.status === "called") return { text: "Called" + (t.calledAt ? ", " + mins(now() - t.calledAt) + " min ago" : "") };
+    if (t.etaStart) {
+      var m = mins(t.etaStart - now()), c = t.confidence || t.etaConfidence || 0;
+      // The estimate's own confidence (functions/_queue_eta.js): under 60 it is said to be rough.
+      return { text: m <= 0 ? "Due now" : "About " + m + " min" + (c && c < 60 ? ", rough estimate" : "") };
+    }
+    return { text: "Waiting " + mins(waitMs) + " min" };
+  }
+  function priV2(t) { return t.priority >= 2 ? '<span class="q2-tag danger">Emergency</span>' : t.priority === 1 ? '<span class="q2-tag warn">' + esc(prioLabel(t)) + "</span>" : ""; }
+  function nameV2(t) { return tok(t) + phi("name", t.name, esc(t.name || "Patient")); }
+  function statusV2(state, k, ordered) {
+    var s = state.session || {}, paused = s.status === "paused", longest = 0;
+    ordered.forEach(function (t) { var w = now() - (t.registeredAt || now()); if (w > longest) longest = w; });
+    var late = longest > 30 * 60000, parts = [k.waiting ? k.waiting + " waiting" : "No one waiting"];
+    if (k.waiting && mins(longest) >= 1) parts.push("Longest " + mins(longest) + " min");
+    if (k.avgConsult) parts.push("You average " + k.avgConsult + " min a patient");
+    return '<section class="q2-status' + (late ? " late" : "") + '" role="status">' +
+      (late ? '<span class="q2-tag warn">Running late</span>' : "") + "<p>" + esc(parts.join(". ") + ".") + "</p>" +
+      (s.doctorStatus === "emergency" ? '<div class="q2-hold">' + ms("warning") + '<span>You marked an emergency. Patients see that you are held up.</span><button class="q2-btn" data-q-act="emergency">Emergency over</button></div>' : "") +
+      (paused ? '<div class="q2-hold">' + ms("pause_circle") + '<span>Queue paused. No one is being called.</span><button class="q2-btn" data-q-act="pause">Resume</button></div>' : "") +
+      "</section>";
+  }
+  function nowV2(cur) {
+    if (!cur) return "";
+    var since = cur.consultStartAt || 0;
+    return '<section class="q2-now" aria-label="With you now"><h2 class="q2-h">With you now</h2>' +
+      '<div class="q2-idline"><div class="q2-name">' + nameV2(cur) + '</div><span class="q2-tag">' + (cur.visitType === "followup" ? "Follow-up" : "New") + "</span></div>" +
+      '<p class="q2-muted">' + (since ? '<span data-q2-since="' + esc(since) + '">In consult ' + mins(now() - since) + " min</span>" : "In consult") + "</p>" +
+      '<button class="q2-btn primary" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Open assessment</span></button>" +
+      // A real <button>: a tap, Enter or a screen reader asks "End this consult?". The swipe still ends it in one move.
+      '<button type="button" class="q-swipe q2-swipe" id="qSwipe" data-q-act="endask" aria-label="End consultation">' +
+        '<span class="q-swipe-fill"></span><span class="q-swipe-txt">Swipe to end consultation</span>' +
+        '<span class="q-swipe-knob" id="qSwipeKnob">' + ms("chevron_right") + "</span></button>" +
+      '<button class="q2-link" data-q-act="row:' + esc(cur.id) + '">More for this patient</button>' +
+      "</section>";
+  }
+  function nextV2(t) {
+    var w = whenV2(t), called = t.status === "called", id = esc(t.id);
+    return '<section class="q2-next" aria-label="Next patient"><h2 class="q2-h">Next</h2>' +
+      '<div class="q2-idline"><div class="q2-name">' + nameV2(t) + "</div>" + priV2(t) + "</div>" +
+      '<p class="q2-muted' + (w.late ? " late" : "") + '">' + esc(w.text) + "</p>" +
+      '<div class="q2-acts">' +
+        (called
+          ? '<button class="q2-btn primary" data-q-act="start:' + id + '">' + ms("play_arrow") + "<span>Start consult</span></button>" +
+            '<button class="q2-btn" data-q-act="noshow:' + id + '">Did not come</button>'
+          : '<button class="q2-btn primary" data-q-act="call:' + id + '">' + ms("campaign") + "<span>Call in</span></button>" +
+            '<button class="q2-btn" data-q-act="start:' + id + '">Start consult</button>') +
+        '<button class="q2-btn icon" data-q-act="row:' + id + '" aria-label="More actions for this patient">' + ms("more_horiz") + "</button>" +
+      "</div></section>";
+  }
+  function rowV2(t, pos) {
+    var w = whenV2(t);
+    return '<button type="button" class="q2-row" data-q-act="row:' + esc(t.id) + '" data-q-tid="' + esc(t.id) + '">' +
+      '<span class="q2-pos">' + pos + "</span>" +
+      '<span class="q2-rinfo"><span class="q2-rname">' + nameV2(t) + '</span><span class="q2-rmeta">' + priV2(t) + '<span class="q2-rwhen' + (w.late ? " late" : "") + '">' + esc(w.text) + "</span></span></span>" +
+      ms("chevron_right") + "</button>";
+  }
+  // The rows under "Next". While searching, every match is listed (the next patient too) with its true place.
+  function rowsV2(state) {
+    var ordered = orderedTickets(state), q = (state.search || "").trim().toLowerCase();
+    var vis = q ? ordered.filter(function (t) { return matchTicket(t, q); }) : ordered.slice(1);
+    if (!vis.length) return '<p class="q2-muted q2-none">' + (q ? "No patient matches “" + phi("other", state.search) + "”." : "No one else is waiting.") + "</p>";
+    return vis.map(function (t) { return rowV2(t, ordered.indexOf(t) + 1); }).join("");
+  }
+  function canvasV2(state) {
+    var tickets = (state.tickets || []).slice(), ordered = orderedTickets(state);
+    var cur = tickets.filter(function (t) { return t.status === "in_consultation"; })[0] || null;
+    var k = computeKpis(tickets);
+    var head = statusV2(state, k, ordered) + pulseCard(state);
+    if (!cur && !ordered.length) {
+      return head + noShowPanel(state) + '<section class="q2-empty"><h2 class="q2-h">No patients yet</h2>' +
+        "<p>" + (state.ghisToken ? "Today's hospital list has not come in. Refresh to pull it, or add a patient yourself." : "Add your first patient, or ask reception to check one in. They appear here as soon as they are added.") + "</p>" +
+        '<button class="q2-btn primary" data-q-act="add">' + ms("person_add") + "<span>Add patient</span></button>" +
+        '<button class="q2-link" data-q-act="noshows">Recall a no-show</button></section>';
+    }
+    var search = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" data-phi-input type="search" autocomplete="off" autocapitalize="off" aria-label="Search the queue" placeholder="Search name or ID" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" aria-label="Clear search" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
+    return head + nowV2(cur) + (ordered.length ? nextV2(ordered[0]) : '<section class="q2-next"><h2 class="q2-h">Next</h2><p class="q2-muted">No one is waiting.</p></section>') +
+      '<section class="q2-list" aria-label="Waiting"><div class="q2-listh"><h2 class="q2-h">Waiting' + (ordered.length > 1 ? " · " + (ordered.length - 1) + " more" : "") + '</h2><button class="q2-link" data-q-act="noshows">No-shows</button></div>' +
+      noShowPanel(state) + search + '<div id="qTlRows">' + rowsV2(state) + "</div></section>";
+  }
+  function headerV2(state, view, doctorName, dept) {
+    var ca = state.clinicAdmin || {}, clinic = inClinicWorkplace();
+    var title = (clinic && ca.name) || doctorName, sub = clinic ? (state.me && state.me.name && state.me.name !== title ? state.me.name : dept) : dept;
+    return '<header class="q-top q2-top"><div class="q-top-in">' +
+      '<button class="q-iconbtn" data-q-act="close" aria-label="Close OPD Queue">' + ms("close") + "</button>" +
+      '<div class="q2-title"><b>' + esc(title) + "</b><span>" + esc(sub || "") + "</span></div>" +
+      '<div class="q-top-r">' +
+      (view === "dashboard" && !clinic ? '<button class="q-iconbtn" data-q-act="importopd" aria-label="Refresh from the hospital list">' + ms("refresh") + "</button>" : "") +
+      (view === "dashboard" ? '<button class="q2-add" data-q-act="add" aria-label="Add patient">' + ms("person_add") + "<span>Add</span></button>" : "") +
+      (state.session || state.ghisToken
+        ? '<button class="q-avatar q-avatar-btn" data-q-act="docprofile" aria-label="Your profile, clinic and staff">' + esc(initials(doctorName)) + "</button>"
+        : '<div class="q-avatar">' + esc(initials(doctorName)) + "</div>") +
+      "</div></div></header>";
+  }
+  function sheetItem(act, icon, label, cls) { return '<button class="q2-item' + (cls ? " " + cls : "") + '" data-q-act="' + act + '">' + ms(icon) + "<span>" + label + "</span></button>"; }
+  function renderRowSheet(state) {
+    var t = findTicket(state.rowSheet && state.rowSheet.ticketId, state.tickets); if (!t) return "";
+    var id = esc(t.id), items = "", s = state.session || {};
+    if (t.status === "in_consultation") {
+      items = sheetItem("assess:" + id, "assignment", "Open assessment") +
+        sheetItem("sendback:" + id, "undo", "Send back to waiting") +
+        sheetItem("emergency", "warning", s.doctorStatus === "emergency" ? "Emergency over" : "I have an emergency, hold the queue") +
+        sheetItem("pause", "pause_circle", s.status === "paused" ? "Resume the queue" : "Pause the queue");
+    } else {
+      items = sheetItem("start:" + id, "play_arrow", "Start consult") +
+        (t.status !== "called" ? sheetItem("call:" + id, "campaign", "Call in")
+          : sheetItem("sendback:" + id, "undo", "Send back to waiting") + sheetItem("noshow:" + id, "person_off", "Did not come")) +
+        sheetItem("prio:" + id, "priority_high", t.priority ? "Change priority" : "Set priority") +
+        sheetItem("assess:" + id, "assignment", "Open assessment") +
+        (emrOn() && t.ghisPatientId ? sheetItem("profile:" + id, "clinical_notes", "Open record") : "") +
+        '<div class="q2-sep"></div>' + sheetItem("remove:" + id, "person_remove", "Remove from queue", "danger");
+    }
+    return '<div class="q-sheet" data-q-act="row-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="dialog" aria-label="Actions for this patient">' +
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="row-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="q2-name">' + nameV2(t) + priV2(t) + '</div><p class="q2-muted">' + esc(t.status === "in_consultation" ? "With you now" : whenV2(t).text) + "</p>" +
+      items + "</div></div>";
+  }
+  function renderConfirm(c) {
+    return '<div class="q-sheet" data-q-act="confirm-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="alertdialog" aria-label="' + esc(c.title) + '">' +
+      '<div class="q2-name">' + esc(c.title) + "</div>" + (c.bodyHtml ? '<p class="q2-muted">' + c.bodyHtml + "</p>" : "") +
+      '<button class="q2-btn ' + (c.danger ? "danger" : "primary") + '" data-q-act="confirm-ok">' + esc(c.ok) + "</button>" +
+      '<button class="q2-btn" data-q-act="confirm-close">Cancel</button></div></div>';
+  }
+  function renderRecallSheet(r) {
+    return '<div class="q-sheet" data-q-act="recall-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="dialog" aria-label="Recall this patient">' +
+      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="recall-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="q2-name">Recall this patient</div><p class="q2-muted">They keep the same token and go back to waiting. The reason is recorded in the audit trail.</p>' +
+      '<label class="q-gate-lbl" for="qRecallWhy">Reason</label><input id="qRecallWhy" class="q-gate-in" type="text" maxlength="120" value="' + esc(r.reason || "Patient arrived late") + '">' +
+      '<button class="q2-btn primary" data-q-act="recall-ok">Recall</button></div></div>';
+  }
+  function snackV2(sn) {
+    return '<div class="q2-snack" role="status"><span>' + esc(sn.msg) + "</span>" + (sn.undo ? '<button data-q-act="snack-undo">Undo</button>' : "") + "</div>";
+  }
+  var snackTimer = 0;
+  function snack(msg, undo) {
+    st.snack = { msg: msg, undo: undo || null }; paint();
+    clearTimeout(snackTimer); snackTimer = setTimeout(function () { st.snack = null; paint(); }, 7000);
+    try { if (snackTimer && snackTimer.unref) snackTimer.unref(); } catch (e) {}
+  }
+  function ask(c) { st.rowSheet = null; st.confirm = c; paint(); }
+  // The consult timer between repaints (a live board can go a minute without one).
+  function tickNow() {
+    try { var el = document.querySelector("#smdQueue [data-q2-since]"); if (el) el.textContent = "In consult " + mins(now() - (+el.getAttribute("data-q2-since") || now())) + " min"; } catch (e) {}
   }
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
@@ -189,17 +357,20 @@
         ? '<button class="q-avatar q-avatar-btn" data-q-act="docprofile" title="Doctor profile" aria-label="Doctor profile">' + esc(initials(doctorName)) + "</button>"
         : '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div>") +
       "</div></div></header>";
-    var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
+    var v2 = q2On();
+    if (v2) header = headerV2(state, view, doctorName, dept);
+    var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : (v2 ? canvasV2(state) : dashboardCanvas(state));
     // "Patients" opens the saved-patients list of the active clinic store (My Clinic device / Shared Clinic
     // Drive) - every patient consulted till now, tap to reopen their consult. It's a launcher, not a view.
     var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
-    var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
-    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") + "</div>";
+    var main = '<div class="q-main' + (v2 ? " q2" : "") + '">' + header + '<div class="q-canvas">' + canvas + "</div>" + (v2 && state.snack ? snackV2(state.snack) : "") + bottom + "</div>";
+    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") +
+      (state.rowSheet ? renderRowSheet(state) : "") + (state.recallSheet ? renderRecallSheet(state.recallSheet) : "") + (state.confirm ? renderConfirm(state.confirm) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
   // ---- Clinic & staff admin (owner, native clinic): Clinic ID + add nursing/reception/billing with a
-  // PIN so they sign in at stewardmd.in/opd. Reuses the live server endpoints (GET /org, GET /members,
+  // PIN so they sign in as front-desk staff. Reuses the live server endpoints (GET /org, GET /members,
   // POST /member [+ /member/pin]); owner authority via STAFF_ADMIN. GHIS/hospital sessions are skipped
   // (staff there are managed in the hospital's own system). ----
   /* The add-staff fields live inside the profile sheet, and loadClinicAdmin repaints that whole
@@ -217,6 +388,15 @@
       var again = document.getElementById(activeId);
       if (again) { try { again.focus(); if (selStart != null && again.setSelectionRange) again.setSelectionRange(selStart, selEnd); } catch (e) {} }
     }
+  }
+  function loadClinicName(orgId) {
+    if (st.clinicAdmin && st.clinicAdmin.name) return;
+    apiGet("/org?orgId=" + encodeURIComponent(orgId)).then(function (r) {
+      if (!(r && r.ok && r.org) || st.orgId !== orgId) return;
+      var ca = st.clinicAdmin = st.clinicAdmin || {};
+      ca.code = r.org.code || ""; ca.name = r.org.name || "";
+      if (st.view === "dashboard" && !st.profileOpen) paint();
+    }).catch(function () {});
   }
   function loadClinicAdmin() {
     if (!st.orgId || st.ghisToken) { st.clinicAdmin = null; return; }
@@ -306,12 +486,12 @@
           var lockedMin = m.lockedUntil && m.lockedUntil > Date.now() ? Math.ceil((m.lockedUntil - Date.now()) / 60000) : 0;
           var why = lockedMin ? " · locked " + lockedMin + "m (too many tries)" : m.hasPin ? " · PIN set" : " · no PIN yet";
           return '<div class="q-staff-row"><div class="q-staff-id"><b>' + esc(m.identity || m.email || "staff") + "</b><span>" + esc(roleLabel(m.role)) + esc(why) + (m.active === false ? " · disabled" : "") + "</span></div>" +
-            '<button class="q-ic q-rm" title="Remove access" data-q-act="staffremove:' + esc(m.identity) + '">' + ms("person_remove") + "</button></div>";
+            '<button class="q-ic q-rm" title="Remove access" aria-label="Remove access" data-q-act="staffremove:' + esc(m.identity) + '">' + ms("person_remove") + "</button></div>";
         }).join("")
       : '<div class="q-staff-empty">No team members yet. Add doctors, nursing, reception or billing below.</div>';
     return '<div class="q-profile-sec"><div class="q-sec-h">Clinic &amp; staff</div>' +
-      '<div class="q-profile-row q-clinic-id"><span>' + ms("badge") + " Clinic ID</span><b class=\"mono\">" + code + '</b><button class="q-ic" title="Copy Clinic ID" data-q-act="copyclinic:' + code + '">' + ms("content_copy") + "</button></div>" +
-      '<div class="q-hint" style="margin:2px 0 10px">Staff sign in at <b>stewardmd.in/opd</b> with this Clinic ID + their login and PIN.</div>' +
+      '<div class="q-profile-row q-clinic-id"><span>' + ms("badge") + " Clinic ID</span><b class=\"mono\">" + code + '</b><button class="q-ic" title="Copy Clinic ID" aria-label="Copy Clinic ID" data-q-act="copyclinic:' + code + '">' + ms("content_copy") + "</button></div>" +
+      '<div class="q-hint" style="margin:2px 0 10px">Staff open StewardMD on their phone, choose OPD Queue, then <b>I\'m front-desk staff</b>, and sign in with this Clinic ID, their login and PIN.</div>' +
       '<div class="q-staff-list">' + rows + "</div>" +
       '<div class="q-staff-add">' +
         '<input id="qStaffName" placeholder="Login name (e.g. nurse1)" autocomplete="off" autocapitalize="none">' +
@@ -356,6 +536,7 @@
       '<div class="q-profile-row">' + ms("stethoscope") + "<span>Status</span><b>" + esc(status) + "</b></div>" +
       clinicAdminHtml(state) +
       '<div class="q-profile-acts">' +
+        (q2On() && s.id && !state.demo ? '<button class="q-pbtn" data-q-act="pause">' + ms(s.status === "paused" ? "play_circle" : "pause_circle") + (s.status === "paused" ? "Resume the queue" : "Pause the queue") + "</button>" : "") +
         '<button class="q-pbtn" data-q-act="switch">' + ms("swap_horiz") + "Switch clinic / hospital</button>" +
         (state.ghisToken ? '<button class="q-pbtn danger" data-q-act="logout">' + ms("logout") + "Sign out of GHIS</button>" : "") +
       "</div>" +
@@ -400,7 +581,7 @@
   }
 
   // ---- Settings view (Stitch queue_configuration_settings port) ---------------------------
-  function num(k, label, val, hint) { return '<div class="q-fld"><label>' + label + '</label><input type="number" min="1" data-cfg="' + k + '" value="' + esc(val) + '"><span class="q-hint">' + (hint || "") + "</span></div>"; }
+  function num(k, label, val, hint) { return '<div class="q-fld"><label for="qCfg_' + k + '">' + label + '</label><input type="number" inputmode="numeric" min="1" id="qCfg_' + k + '" data-cfg="' + k + '" value="' + esc(val) + '"><span class="q-hint">' + (hint || "") + "</span></div>"; }
   function tog(k, label, val, hint) { return '<div class="q-togrow"><div><div class="q-togl">' + label + "</div>" + (hint ? '<div class="q-hint">' + hint + "</div>" : "") + '</div><label class="q-tog"><input type="checkbox" data-cfg="' + k + '"' + (val ? " checked" : "") + "><span></span></label></div>"; }
   // ---- Case storage (LOCAL device prefs, not server config) ----------------------------------
   // No-MRN OPD patients save to My Clinic on this device (SMD_CLINIC) with encrypted Google Drive
@@ -432,14 +613,39 @@
       (hint ? '<div class="q-hint">' + hint + "</div>" : "") +
       '</div><label class="q-tog"><input type="checkbox"' + (on ? " checked" : "") + ' onclick="return false"><span></span></label></div>';
   }
+  /* Whether this phone's cases are really backed up. hasPassword() is a PROMISE: the card used to test
+   * it with !!, which is always true, so "Back up to Drive now" and an "On" switch showed on a phone
+   * where no backup had ever been set up. st.backup.hasPw: null = not known yet, false = not set up. */
+  function loadBackupState() {
+    var C = G.SMD_CLINIC, last = 0;
+    try { last = (C && C.lastBackupAt && C.lastBackupAt()) || 0; } catch (e) {}
+    if (!C || !C.hasPassword) { st.backup = { hasPw: false, last: last }; return; }
+    st.backup = { hasPw: st.backup ? st.backup.hasPw : null, last: last };
+    var done = function (has) { st.backup = { hasPw: !!has, last: last }; paintStorageCard(); };
+    try { Promise.resolve(C.hasPassword()).then(done, function () { done(false); }); } catch (e) { done(false); }
+  }
+  // Only the card: a full repaint of Settings would wipe numbers the doctor has typed but not saved.
+  function paintStorageCard() {
+    if (st.view !== "settings") return;
+    var el = document.getElementById("qStorageCard"); if (!el) return;
+    try { el.outerHTML = storageCard(); } catch (e) {}
+  }
+  function backupWhen(ms) {
+    try { return new Date(ms).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; }
+  }
   function storageCard() {
     if (!emrOn()) return "";   // storage is only meaningful when the EMR/assessment is on
     var shared = opdStorageMode() === "shared";
-    var head = '<div class="q-card"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
-      '<div class="q-hint" style="margin:-4px 0 12px">Patients with a hospital MRN save to GHIS. Patients with no MRN get a clinic ID (<b>SMD-' + esc(clinicCode()) + '-nnn</b>) and save to your clinic ' + (shared ? "(synced across your devices)." : "on this device.") + "</div>";
+    var where = "get a clinic ID (<b>SMD-" + esc(clinicCode()) + "-nnn</b>) and save to your clinic " + (shared ? "(synced across your devices)." : "on this device.");
+    // A personal clinic has no GHIS: only a hospital workplace is told about it.
+    var intro = inClinicWorkplace()
+      ? "Each patient's notes are saved to your clinic " + (shared ? "and synced across your devices." : "on this phone.") + " A patient added without an MR number gets a clinic ID (<b>SMD-" + esc(clinicCode()) + "-nnn</b>)."
+      : "Patients with a hospital MRN save to GHIS. Patients with no MRN " + where;
+    var head = '<div class="q-card" id="qStorageCard"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
+      '<div class="q-hint q-hint-lead">' + intro + "</div>";
     // ONE clinic, two modes - My Clinic (this device) or Shared Clinic (multi-device sync).
-    var sel = '<div class="q-hint" style="margin:2px 0 6px;font-weight:700;color:var(--ink,#0f172a)">Where no-MRN cases are saved</div>' +
-      localTog("This device only", !shared, "My Clinic - stays on this phone, encrypted Drive backup", "storagemode:device") +
+    var sel = '<div class="q-hint q-hint-h">Where cases are saved</div>' +
+      localTog("This device only", !shared, "My Clinic - stays on this phone", "storagemode:device") +
       localTog("Shared across my devices", shared, "Encrypted, synced to your clinic Google Drive - open on any of your devices", "storagemode:shared");
     var ctrls;
     if (shared) {
@@ -447,17 +653,22 @@
       var status = !app ? "Not unlocked on this device"
         : (app.conflictCount && app.conflictCount() ? (app.conflictCount() + " to review")
           : (app.pendingCount && app.pendingCount() ? (app.pendingCount() + " to sync") : "All synced"));
-      ctrls = '<div class="q-hint" style="margin:10px 0 4px">Shared clinic · ' + esc(status) + "</div>" +
+      ctrls = '<div class="q-hint q-hint-status">Shared clinic · ' + esc(status) + "</div>" +
         '<button class="q-set-btn" data-q-act="sharedsetup">' + ms("group") + (app ? " Manage shared clinic" : " Set up / unlock shared clinic") + "</button>" +
-        (app ? '<button class="q-set-btn" data-q-act="sharedsync" style="margin-top:8px">' + ms("cloud_sync") + " Sync now</button>" : "");
+        (app ? '<button class="q-set-btn" data-q-act="sharedsync">' + ms("cloud_sync") + " Sync now</button>" : "");
     } else {
-      var C = G.SMD_CLINIC;
-      var hasPw = !!(C && C.hasPassword && C.hasPassword());
+      var bk = st.backup || { hasPw: null, last: 0 };
       var autoOn = storeAutoSyncOn();
-      ctrls = localTog("Back up all cases to Google Drive", autoOn, autoOn ? "On · every case backs up ~15s after you save" : "Off · back up each case manually", "storagetoggle") +
-        (hasPw
-          ? '<button class="q-set-btn" data-q-act="storagesync">' + ms("cloud_upload") + " Back up to Drive now</button>"
-          : '<button class="q-set-btn" data-q-act="storagesetup">' + ms("lock") + " Set up Google Drive backup</button>");
+      if (bk.hasPw === true) {
+        ctrls = localTog("Back up all cases to Google Drive", autoOn, autoOn ? "On · every case backs up ~15s after you save" : "Off · back up each case manually", "storagetoggle") +
+          '<div class="q-hint q-hint-status" role="status">' + (bk.last ? "Last backup: " + esc(backupWhen(bk.last)) : "No backup has completed yet.") + "</div>" +
+          '<button class="q-set-btn" data-q-act="storagesync">' + ms("cloud_upload") + " Back up to Drive now</button>";
+      } else if (bk.hasPw === false) {
+        ctrls = '<div class="q-warn" role="status">' + ms("cloud_off") + "<span><b>Not backed up.</b> Notes are only on this phone. If the app is removed or the phone is lost, they are gone.</span></div>" +
+          '<button class="q-set-btn" data-q-act="storagesetup">' + ms("lock") + " Set up Google Drive backup</button>";
+      } else {
+        ctrls = '<div class="q-hint q-hint-status" role="status">Checking the backup on this phone…</div>';
+      }
     }
     return head + sel + ctrls + "</div>";
   }
@@ -472,13 +683,16 @@
         : (r && r.error === "no_token") ? "Sign in to Google Drive first." : "Backup failed. Try again.";
       try { G.toast && G.toast(m); } catch (e) {}
       if (r && (r.error === "no_password")) { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (C.open) C.open(); }
-      paint();
+      loadBackupState();
     });
   }
   function settingsCanvas(state) {
     var c = state.config;
     var head = '<div class="q-set-hd"><h2 class="q-h2" style="margin:0">' + ms("settings") + "Queue configuration</h2>" +
-      (c ? '<button class="q-finish" style="font-size:14px;padding:10px 18px" data-q-act="savecfg">' + ms("save") + " Save changes</button>" : "") + "</div>";
+      (c && !q2On() ? '<button class="q-finish" style="font-size:14px;padding:10px 18px" data-q-act="savecfg">' + ms("save") + " Save changes</button>" : "") +
+      (c && q2On() ? '<span class="q-hint" id="qCfgSaved" role="status">Changes save as you make them.</span>' : "") + "</div>";
+    var layoutCard = '<div class="q-card"><div class="q-card-h">' + ms("view_agenda") + "Queue screen</div>" +
+      localTog("New queue layout", q2On(), "The next patient gets one labelled button; other actions open from the patient's row. Turn off to go back.", "q2toggle") + "</div>";
     var cfgCards = c
       ? '<div class="q-card"><div class="q-card-h">' + ms("notifications_active") + "Notification triggers</div>" +
           num("early", "Early warning (patients ahead)", c.early, "SMS/WhatsApp when this many are ahead") +
@@ -492,7 +706,7 @@
           tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
         "</div>"
       : '<div class="q-card"><div class="q-skel" style="height:16px;width:50%;margin-bottom:16px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px"></div></div>';
-    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>";
+    return head + '<section class="q-grid2">' + storageCard() + cfgCards + layoutCard + "</section>";
   }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
@@ -553,6 +767,7 @@
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
   // Swipe-to-end control on the Currently Consulting card. Rebound after each full paint;
   // move/up listeners live only during an active drag (added on down, removed on up) so no leak.
+  var swipeAt = 0;
   function initConsultSwipe() {
     var track = document.getElementById("qSwipe"), knob = document.getElementById("qSwipeKnob");
     if (!track || !knob) return;
@@ -569,7 +784,7 @@
       if (e.cancelable) e.preventDefault();
     }
     function up() {
-      if (!dragging) return; dragging = false;
+      if (!dragging) return; dragging = false; swipeAt = now();
       document.removeEventListener("touchmove", move); document.removeEventListener("touchend", up);
       document.removeEventListener("mousemove", move); document.removeEventListener("mouseup", up);
       knob.style.transition = ""; if (fill) fill.style.transition = "";
@@ -631,7 +846,7 @@
   function refresh() {
     /* demo has no server session; don't clobber unsaved settings mid-poll; and the profile sheet
      * (Clinic and staff) is a form the owner is filling in, for the same reason settings is. */
-    if (st.demo || !st.session || st.view === "settings" || st.profileOpen || st.prioSheet) return;
+    if (st.demo || !st.session || st.view === "settings" || st.profileOpen || st.prioSheet || st.rowSheet || st.confirm || st.recallSheet) return;
     st.pollN = (st.pollN || 0) + 1;
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).
@@ -648,12 +863,23 @@
     st.view = view; paint();
     if (st.demo) return;   // demo has no server session to fetch analytics/config from
     if (view === "analytics" && st.session) apiGet("/analytics?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok && st.view === "analytics") { st.analytics = r.analytics; paint(); } }).catch(function () {});
+    if (view === "settings") loadBackupState();
     if (view === "settings") apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {});
   }
-  function saveCfg() {
+  function saveCfg(quiet) {
     var cfg = {};
     root().querySelectorAll("[data-cfg]").forEach(function (inp) { cfg[inp.getAttribute("data-cfg")] = inp.type === "checkbox" ? inp.checked : Number(inp.value); });
-    apiPost("/config", { config: cfg }).then(function (r) { if (r && r.ok) { st.config = r.config; paint(); try { G.toast && G.toast("Settings saved"); } catch (e) {} } }).catch(function () {});
+    // quiet = autosave: no repaint (it would take the field the doctor is still typing in), one line of status.
+    var say = function (m) { var el = document.getElementById("qCfgSaved"); if (quiet && el) el.textContent = m; else { try { G.toast && G.toast(m); } catch (e) {} } };
+    apiPost("/config", { config: cfg }).then(function (r) {
+      if (r && r.ok) { st.config = r.config; if (!quiet) paint(); say(quiet ? "Saved." : "Settings saved"); }
+      else say("Not saved: " + ((r && (r.message || r.error)) || "no response") + ".");
+    }).catch(function () { say("Not saved: the server could not be reached."); });
+  }
+  var cfgTimer = 0;
+  function onChange(e) {
+    var t = e && e.target; if (!t || !t.getAttribute || !t.getAttribute("data-cfg") || !q2On() || st.demo) return;
+    clearTimeout(cfgTimer); cfgTimer = setTimeout(function () { saveCfg(true); }, 600);
   }
 
   // Copy to clipboard that works on Android/iOS WebViews AND degrades honestly: the async clipboard API
@@ -672,6 +898,14 @@
     var b = e.target.closest && e.target.closest("[data-q-act]"); if (!b) return;
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "row-stop") return;                                    // a tap inside a sheet's card
+    if (cmd === "row-close") { st.rowSheet = null; paint(); return; }
+    if (cmd === "confirm-close") { st.confirm = null; paint(); return; }
+    if (cmd === "recall-close") { st.recallSheet = null; paint(); return; }
+    if (cmd === "row") { st.rowSheet = { ticketId: arg }; paint(); return; }
+    if (cmd === "q2toggle") { try { localStorage.setItem("smd_opd_q2", q2On() ? "0" : "1"); } catch (e) {} st.rowSheet = st.confirm = st.recallSheet = st.snack = null; if (q2On() && st.orgId) loadClinicName(st.orgId); paint(); return; }
+    if (cmd === "snack-undo") { var su = st.snack && st.snack.undo; st.snack = null; clearTimeout(snackTimer); paint(); if (su) su(); return; }
+    if (st.rowSheet && cmd !== "prio-pick") st.rowSheet = null;        // an action picked from the row sheet closes it
     if (cmd === "clearsearch") { st.search = ""; paint(); return; }
     if (cmd === "chooser") { _setWp(""); root().innerHTML = _chooseType(); return; }     // back to Hospital / Personal clinic (forgets remembered workplace)
     if (cmd === "docprofile") { st.profileOpen = true; paint(); loadClinicAdmin(); return; }
@@ -701,9 +935,9 @@
     if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); wsqAlerts("bind", arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
-    if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "newclinic") { root().innerHTML = _newClinicForm(); try { var nc = document.getElementById("qNcName"); if (nc) nc.focus(); } catch (e) {} return; }
+    if (cmd === "newclinicgo") { createClinic(); return; }
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
-    if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
     if (cmd === "staffout") { if (!signOutDesk()) return; wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); try { if (G.StewardIdentityResolver && G.StewardIdentityResolver.clearCache) G.StewardIdentityResolver.clearCache(); } catch (e) {} st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
@@ -746,6 +980,35 @@
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode - sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
+    if (cmd === "confirm-ok") { var cf = st.confirm; st.confirm = null; paint(); if (cf && cf.run) cf.run(); return; }
+    if (cmd === "endask") {
+      if (now() - swipeAt < 500) return;   // the click a mouse drag leaves behind
+      var ct = findTicket(st.session && st.session.currentTicketId) || (st.tickets || []).filter(function (x) { return x.status === "in_consultation"; })[0];
+      ask({ title: "End this consult?", bodyHtml: ct ? nameV2(ct) + " leaves the room and the queue moves on." : "", ok: "End consult", run: function () { act(sid, "/advance"); } });
+      return;
+    }
+    if (cmd === "recall-ok") {
+      var rw = document.getElementById("qRecallWhy"), why2 = rw ? String(rw.value || "").trim() : "", rs = st.recallSheet;
+      if (why2.length < 3) { try { G.toast && G.toast("Give a reason for the recall."); } catch (e) {} return; }
+      st.recallSheet = null; paint();
+      if (rs) doRecall(sid, rs.ticketId, why2);
+      return;
+    }
+    if (q2On() && cmd === "remove") {
+      var rt = findTicket(arg);
+      ask({ title: "Remove from the queue?", bodyHtml: (rt ? nameV2(rt) + ". " : "") + "For a mistaken, duplicate or wrongly routed entry. This cannot be undone and is recorded in the audit trail.", ok: "Remove from queue", danger: true,
+        run: function () { act(sid, "/status", { ticketId: arg, status: "cancelled" }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Not removed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } }); } });
+      return;
+    }
+    if (q2On() && cmd === "noshow") {
+      paint();
+      act(sid, "/status", { ticketId: arg, status: "no_show" }).then(function (r) {
+        if (!(r && r.ok)) { try { G.toast && G.toast("Not marked: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} return; }
+        snack("Marked as did not come. They can be recalled for 4 hours.", function () { doRecall(sid, arg, "Marked no-show by mistake"); });
+      });
+      return;
+    }
+    if (q2On() && cmd === "recall") { st.recallSheet = { ticketId: arg }; paint(); return; }
     if (cmd === "finish") act(sid, "/advance");
     else if (cmd === "start") {
       // Start consult -> straight into the Initial Assessment (the consult record). If another patient is
@@ -847,18 +1110,42 @@
   }
   // View EMR profile (flag smd_opd_emr) and Start-consult both route through openTicketEmr.
   function openEmrProfile(ticketId) { openTicketEmr(ticketId, ""); }
-  // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
-  // the same patient reuses their record instead of creating a duplicate each time).
+  /* Find-or-create the on-device clinic record for an OPD ticket.
+   *
+   * BUGFIX (2026-11-09): the record was keyed by TICKET id alone. A returning patient gets a new ticket
+   * every visit, so every visit made a new record with a new SMD-<code>-<seq> number and the earlier
+   * notes were not in front of the doctor. The PATIENT is the key now: the MR number the server issued
+   * (it rides on the ticket as ghisPatientId, and carries the clinic's code, so two clinics cannot
+   * collide). A ticket with no MR number still gets its own record. Reversible: smd_opd_patient_key=0. */
   function localClinicId(t, store, mapKey) {
     var MAP = mapKey || "stewardmd.opd.localmap", map = {};
     try { map = JSON.parse(localStorage.getItem(MAP) || "{}") || {}; } catch (e) {}
+    function keep() { try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {} }
     var id = map[t.id];
     if (id && store.getPatient && store.getPatient(id)) return id;
-    // Assign a stable hospital-style id for this no-MRN patient: SMD-<clinic code>-<seq>.
-    var seq = padSeq((((store.listPatients && store.listPatients()) || []).length) + 1);
-    var mrn = "SMD-" + clinicCode() + "-" + seq;
-    id = store.addPatient({ name: t.name || "Patient", mrn: mrn });
-    map[t.id] = id; try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {}
+    var all = (store.listPatients && store.listPatients()) || [];
+    var mrn = String(t.ghisPatientId || t.mrn || "").trim();
+    if (mrn && patientKeyOn()) {
+      var pk = "mrn:" + mrn.toUpperCase();
+      id = map[pk];
+      if (!(id && store.getPatient && store.getPatient(id))) {
+        id = "";
+        // A record restored from backup, or made on another device, is not in this phone's map: find it by number.
+        for (var a = 0; a < all.length; a++) { if (String(all[a].mrn || "").trim().toUpperCase() === mrn.toUpperCase()) { id = all[a].id; break; } }
+      }
+      if (!id) id = store.addPatient({ name: t.name || "Patient", mrn: mrn });
+      map[t.id] = id; map[pk] = id; keep();
+      return id;
+    }
+    // No MR number on the ticket: SMD-<clinic code>-<seq>. The next number is one past the highest in
+    // use, never "how many records there are", which repeats a number after a record is deleted.
+    var code = clinicCode(), pre = "SMD-" + code + "-", hi = all.length;
+    for (var b = 0; b < all.length; b++) {
+      var m = String(all[b].mrn || "");
+      if (m.indexOf(pre) === 0) { var nn = parseInt(m.slice(pre.length), 10); if (nn > hi) hi = nn; }
+    }
+    id = store.addPatient({ name: t.name || "Patient", mrn: pre + padSeq(hi + 1) });
+    map[t.id] = id; keep();
     return id;
   }
   // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
@@ -989,9 +1276,34 @@
       var mine = ((r && r.orgs) || []).filter(function (o) { return o.mode !== "connect" && o.mode !== "wardsynq"; });
       var rows = mine.length ? mine.map(function (o) {
         return '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickclinic:' + esc(o.id) + '">' + ms("home_health") + " " + esc(o.name || "Clinic") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + "</small></button>";
-      }).join("") : '<p class="q-gate-sub">No personal clinic yet - set one up in the console.</p>';
-      el.innerHTML = _wrap('<p class="q-gate-sub">Choose your clinic.</p>' + rows + '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("add") + " New clinic (in console)</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>");
+      }).join("") : '<p class="q-gate-sub">You have no clinic here yet. Create one to start your queue.</p>';
+      el.innerHTML = _wrap('<p class="q-gate-sub">Choose your clinic.</p>' + rows + '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("add") + " New clinic</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>");
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
+  }
+  /* A new clinic is made HERE. This used to open the staff console in a browser, which is not where a
+   * doctor on a phone sets up a clinic. Same route the staff console's wizard uses: POST /onboard/clinic
+   * makes the clinic and one consulting room with this doctor in it. */
+  function _newClinicForm(err, name, room) {
+    return _wrap('<p class="q-gate-sub">Set up your clinic. You can add staff after this.</p>' +
+      '<label class="q-gate-lbl" for="qNcName">Clinic name</label>' +
+      '<input id="qNcName" class="q-gate-in" type="text" autocomplete="organization" autocapitalize="words" maxlength="80" value="' + esc(name || "") + '">' +
+      '<label class="q-gate-lbl" for="qNcRoom">Your consulting room</label>' +
+      '<input id="qNcRoom" class="q-gate-in" type="text" autocapitalize="words" maxlength="40" value="' + esc(room == null ? "Consulting Room" : room) + '">' +
+      '<div class="q-gate-err" role="alert">' + (err ? esc(err) : "") + "</div>" +
+      '<button class="q-gate-btn" data-q-act="newclinicgo">Create clinic</button>' +
+      '<button class="q-gate-close" data-q-act="typeclinic">Back</button>');
+  }
+  function createClinic() {
+    var nEl = document.getElementById("qNcName"), rEl = document.getElementById("qNcRoom");
+    var name = nEl ? String(nEl.value || "").trim() : "", room = rEl ? String(rEl.value || "").trim() : "";
+    if (name.length < 2) { root().innerHTML = _newClinicForm("Enter your clinic's name.", name, room); return; }
+    var btn = root().querySelector(".q-gate-btn"); if (btn) { btn.disabled = true; btn.textContent = "Creating your clinic…"; }
+    apiPost("/onboard/clinic", { name: name, roomName: room || "Consulting Room" }).then(function (r) {
+      if (r && r.ok && r.org && r.org.id) { _setWp("clinic:" + r.org.id); st.ghisToken = null; startClinic(r.org.id); return; }
+      var why = (r && r.error === "account_required") ? "Sign in to your StewardMD account first, then create the clinic."
+        : "The clinic was not created" + ((r && (r.message || r.error)) ? " (" + (r.message || r.error) + ")" : "") + ". Try again.";
+      root().innerHTML = _newClinicForm(why, name, room);
+    }, function () { root().innerHTML = _newClinicForm("Could not reach the server. Check your connection and try again.", name, room); });
   }
   // The old dead end: a note telling front-desk staff to go and use the web console, behind a button
   // that called window.open(_blank) - which a Capacitor WKWebView silently ignores, so it did nothing
@@ -1296,6 +1608,7 @@
         st.session = r.session; st.tickets = r.tickets || [];
         st.me = { name: (r.room && r.room.name) || r.session.doctorName || "Room", dept: (r.room && r.room.department) || "" };
         st.view = "dashboard"; paint();
+        if (q2On()) loadClinicName(orgId);   // the new header is titled with the clinic, not the app
         clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);   // refresh() polls /list by session id
         liveStart(refresh);
         return;
@@ -1306,7 +1619,7 @@
   }
   // No room auto-assigned to this doctor here -> let them pick which room they are manning today.
   function _pickRoom(orgId, rooms) {
-    if (!rooms.length) { root().innerHTML = _wrap('<p class="q-gate-sub">No consulting room is set up for you here yet. Ask the clinic admin, or add rooms in the console.</p><button class="q-gate-btn" style="background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("open_in_new") + " Open console</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>"); return; }
+    if (!rooms.length) { root().innerHTML = _wrap('<p class="q-gate-sub">No consulting room is set up for you at this clinic yet. Ask the clinic\'s admin to add you to a room.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); return; }
     var rows = rooms.map(function (rm) {
       return '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickroom:' + esc(orgId) + '~' + esc(rm.id) + '">' + ms("meeting_room") + " " + esc(rm.name || "Room") + (rm.number ? " · " + esc(rm.number) : "") + (rm.department ? "<br><small style=\"opacity:.85;font-weight:400\">" + esc(rm.department) + "</small>" : "") + "</button>";
     }).join("");
@@ -1450,6 +1763,8 @@
     st.openOpts = opts || {};
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
+    clearInterval(st.tickId); st.tickId = setInterval(tickNow, 20000); try { if (st.tickId && st.tickId.unref) st.tickId.unref(); } catch (e) {}
     if (st.demo) { loadSession(); return; }
     // A front-desk staff session is not a doctor workplace: go straight to the desk, never the
     // Hospital/Personal chooser or the GHIS gate.
@@ -1473,7 +1788,7 @@
     if (wp.indexOf("wardsynq:") === 0) { st.ghisToken = null; st.openOpts = { hospitalId: wp.slice(9), source: "wardsynq" }; loadSession(); return; }
     el.innerHTML = _chooseType();   // no remembered workplace -> Hospital vs Personal clinic
   }
-  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; liveActivity(); }
+  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); clearInterval(st.tickId); st.rowSheet = st.confirm = st.recallSheet = st.snack = null; st.demo = false; liveActivity(); }
   // Lock Screen / Dynamic Island (live-activities.js): the consult in progress (counting up) and how
   // many are waiting. Token number and counts ONLY, never a patient name (the Lock Screen is public).
   // Ends when the queue screen closes or nobody is in consult or waiting.
@@ -1515,6 +1830,7 @@
     _openTicketEmr: openTicketEmr,   // test seam: workplace-based EMR routing (see test/queue-clinic-emr-route.test.mjs)
     // Live filter of the queue timeline - updates ONLY the rows container so the search input
     // keeps focus while typing (no full repaint).
+    _q2: q2On, _localClinicId: localClinicId,
     _search: function (v) {
       st.search = v;
       var b = document.getElementById("qTlRows"); if (b) b.innerHTML = timelineRows(st);

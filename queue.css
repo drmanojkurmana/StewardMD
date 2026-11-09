@@ -1001,3 +1001,109 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-canvas { overflow-x: hidden; overscroll-behavior: contain; touch-action: pan-y; }
 #smdQueue .q-canvas > * { min-width: 0; max-width: 100%; }
 #smdQueue .q-pulse-row, #smdQueue .q-fd .q-pulse-row { touch-action: pan-x pan-y; overscroll-behavior-x: contain; }
+
+/* ── Truthful backup card, clinic set-up form, 44px targets (both queue screens) ─────────────────── */
+#smdQueue { --warn-container: #fdf2de; --on-warn-container: #6f4a06; --r-card: 20px; --r-ctl: 10px; --r-tag: 6px; }
+body.dark #smdQueue { --warn-container: #3a2e12; --on-warn-container: #f3d08a; }
+#smdQueue .q-hint-lead { margin: -4px 0 12px; }
+#smdQueue .q-hint-h { margin: 2px 0 6px; font-weight: 700; color: var(--on-surface); }
+#smdQueue .q-hint-status { margin: 10px 0 4px; }
+#smdQueue .q-warn { display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; padding: 12px; border-radius: var(--r-ctl); background: var(--warn-container); color: var(--on-warn-container); font: 500 13px/1.45 var(--q-sans); }
+#smdQueue .q-warn .material-symbols-outlined { font-size: 20px; flex: 0 0 auto; }
+#smdQueue .q-gate-lbl { display: block; text-align: left; margin: 0 2px 6px; font: 600 13px var(--q-sans); color: var(--on-surface-variant); }
+#smdQueue .q-gate-close { min-height: 44px; }
+#smdQueue .q-finish { min-height: 44px; }
+#smdQueue input { caret-color: var(--primary); }
+
+/* ── The 2026-11 queue screen (flag smd_opd_q2). Tokens only. Radius: cards 20, controls 10, tags 6.
+   Colour: teal = the patient with the doctor and the primary action; amber and red = a patient needs
+   someone; everything else neutral. Flat surfaces; only the snackbar and the sheets float. ───────── */
+#smdQueue .q2 .q-canvas { gap: 20px; }
+#smdQueue .q2 .q-card { animation: none; }
+#smdQueue .q2-top .q-top-in { gap: 10px; }
+#smdQueue .q2-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+#smdQueue .q2-title b { font: 800 16px/1.25 var(--q-sans); color: var(--on-surface); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#smdQueue .q2-title span { font: 500 12px/1.3 var(--q-sans); color: var(--secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#smdQueue .q2-add { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border: none; border-radius: var(--r-ctl); background: var(--primary); color: var(--on-primary); font: 700 14px var(--q-sans); cursor: pointer; }
+#smdQueue .q2-add .material-symbols-outlined { font-size: 20px; }
+
+#smdQueue .q2-h { margin: 0 0 8px; font: 700 13px/1.3 var(--q-sans); color: var(--secondary); }
+#smdQueue .q2-muted { margin: 4px 0 0; font: 500 14px/1.4 var(--q-sans); color: var(--on-surface-variant); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-muted.late, #smdQueue .q2-rwhen.late { color: var(--error); font-weight: 700; }
+#smdQueue .q2-name { font: 800 22px/1.25 var(--q-sans); color: var(--on-surface); overflow-wrap: anywhere; min-width: 0; }
+#smdQueue .q2-idline { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+#smdQueue .q2-tag { display: inline-block; flex: 0 0 auto; padding: 3px 8px; border-radius: var(--r-tag); background: var(--sc-high); color: var(--on-surface-variant); font: 700 12px/1.4 var(--q-sans); white-space: nowrap; }
+#smdQueue .q2-tag.warn { background: var(--warn-container); color: var(--on-warn-container); }
+#smdQueue .q2-tag.danger { background: var(--error-container); color: var(--on-error-container); }
+#smdQueue .q2-rmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+#smdQueue .q2-sheet .q2-name .q2-tag { margin-left: 8px; vertical-align: middle; }
+
+#smdQueue .q2-status p { margin: 0; font: 600 17px/1.4 var(--q-sans); color: var(--on-surface); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-status .q2-tag { margin-bottom: 6px; }
+#smdQueue .q2-hold { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 10px 12px; border-radius: var(--r-ctl); background: var(--warn-container); color: var(--on-warn-container); font: 600 14px/1.4 var(--q-sans); }
+#smdQueue .q2-hold > span:not(.material-symbols-outlined) { flex: 1; min-width: 0; }
+#smdQueue .q2-hold .q2-btn { width: auto; flex: 0 0 auto; margin: 0; padding: 0 14px; }
+
+#smdQueue .q2-now, #smdQueue .q2-next, #smdQueue .q2-empty { border-radius: var(--r-card); padding: 18px; border: 1px solid var(--outline-variant); background: var(--sc-lowest); }
+#smdQueue .q2-now { background: color-mix(in srgb, var(--primary) 9%, var(--sc-lowest)); border-color: color-mix(in srgb, var(--primary) 34%, var(--outline-variant)); }
+#smdQueue .q2-now .q2-btn.primary { margin-top: 14px; }
+#smdQueue .q2-swipe { display: block; width: 100%; margin-top: 10px; padding: 0; font: inherit; color: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; }
+#smdQueue .q2-swipe span { display: block; }
+#smdQueue .q2-swipe .q-swipe-txt, #smdQueue .q2-swipe .q-swipe-knob { display: flex; }
+#smdQueue .q2-empty p { margin: 0 0 14px; font: 500 15px/1.5 var(--q-sans); color: var(--on-surface-variant); }
+#smdQueue .q2-empty .q2-h { font: 800 20px/1.25 var(--q-sans); color: var(--on-surface); }
+
+#smdQueue .q2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; padding: 0 14px; box-sizing: border-box; border: 1px solid var(--outline-variant); border-radius: var(--r-ctl); background: var(--sc-lowest); color: var(--on-surface); font: 700 15px/1.2 var(--q-sans); cursor: pointer; transition: transform .12s var(--smd-ease, ease), background .15s ease; }
+#smdQueue .q2-btn:active { transform: scale(.98); }
+#smdQueue .q2-btn.primary { border-color: var(--primary); background: var(--primary); color: var(--on-primary); }
+#smdQueue .q2-btn.danger { border-color: var(--error); background: var(--error); color: var(--on-error); }
+#smdQueue .q2-btn.icon { width: 48px; flex: 0 0 48px; padding: 0; color: var(--secondary); }
+#smdQueue .q2-btn .material-symbols-outlined { font-size: 20px; }
+#smdQueue .q2-acts { display: flex; gap: 8px; margin-top: 14px; }
+#smdQueue .q2-acts .q2-btn { flex: 1 1 0; min-width: 0; }
+#smdQueue .q2-acts .q2-btn.primary { flex: 1.25 1 0; }
+#smdQueue .q2-acts .q2-btn.icon { flex: 0 0 48px; }
+#smdQueue .q2-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; border: none; background: none; color: var(--primary); font: 600 14px var(--q-sans); cursor: pointer; }
+#smdQueue .q2-now .q2-link { margin: 4px 0 -10px; }
+
+#smdQueue .q2-listh { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#smdQueue .q2-listh .q2-h { margin: 0; }
+#smdQueue .q2-row { display: grid; grid-template-columns: 32px minmax(0, 1fr) 24px; align-items: center; gap: 10px; width: 100%; min-height: 60px; padding: 10px 2px; border: none; border-top: 1px solid var(--sc-high); background: none; color: var(--on-surface); text-align: left; cursor: pointer; }
+#smdQueue .q2-row:active { background: var(--sc-low); }
+#smdQueue .q2-row > .material-symbols-outlined { color: var(--outline); font-size: 22px; }
+#smdQueue .q2-pos { font: 700 15px var(--q-sans); color: var(--secondary); text-align: center; font-variant-numeric: tabular-nums; }
+#smdQueue .q2-rinfo { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+#smdQueue .q2-rname { font: 600 16px/1.3 var(--q-sans); overflow-wrap: anywhere; }
+#smdQueue .q2-rwhen { font: 500 13px/1.3 var(--q-sans); color: var(--on-surface-variant); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-none { padding: 14px 2px; border-top: 1px solid var(--sc-high); }
+
+#smdQueue .q2-sheet { display: flex; flex-direction: column; }
+#smdQueue .q2-sheet > .q2-btn { margin-top: 10px; }
+#smdQueue .q2-sheet > .q2-muted { margin-bottom: 12px; }
+#smdQueue .q2-sheet > .q-gate-in { margin-top: 0; }
+#smdQueue .q2-item { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 54px; padding: 0 2px; border: none; border-top: 1px solid var(--sc-low); background: none; color: var(--on-surface); font: 600 16px/1.3 var(--q-sans); text-align: left; cursor: pointer; }
+#smdQueue .q2-item:active { background: var(--sc-low); }
+#smdQueue .q2-item .material-symbols-outlined { font-size: 22px; color: var(--secondary); flex: 0 0 auto; }
+#smdQueue .q2-item.danger, #smdQueue .q2-item.danger .material-symbols-outlined { color: var(--error); }
+#smdQueue .q2-sep { height: 10px; border-top: 1px solid var(--sc-low); }
+
+#smdQueue .q2-snack { position: absolute; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 25; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 8px 6px 14px; border-radius: var(--r-ctl); background: var(--on-surface); color: var(--surface); font: 600 14px/1.4 var(--q-sans); box-shadow: 0 6px 20px rgba(20,32,43,.28); }
+#smdQueue .q2-snack button { flex: 0 0 auto; min-height: 44px; padding: 0 14px; border: 1px solid color-mix(in srgb, var(--surface) 45%, transparent); border-radius: var(--r-tag); background: none; color: inherit; font: 700 14px var(--q-sans); cursor: pointer; }
+
+#smdQueue .q2 button:focus-visible, #smdQueue .q2-sheet button:focus-visible, #smdQueue .q2-sheet input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+@media (min-width: 901px) { #smdQueue .q2 .q-canvas { max-width: 720px; } #smdQueue .q2-snack { left: auto; right: 24px; bottom: 24px; max-width: 420px; } }
+@media (prefers-reduced-motion: reduce) { #smdQueue .q2-btn, #smdQueue .q2-btn:active { transition: none; transform: none; } }
+/* 44px floor for the controls the queue shares between both screens (measured by test/run-opd-q2-ui.mjs). */
+#smdQueue .q-ic, #smdQueue .q-profile-x { width: 44px; height: 44px; }
+#smdQueue .q-avatar-btn { width: 44px; height: 44px; }
+#smdQueue .q-pbtn { min-height: 44px; }
+#smdQueue .q-staff-add input, #smdQueue .q-staff-add select { min-height: 44px; }
+#smdQueue .q-tl-acts .q-ic { width: auto; }
+#smdQueue .q2-sheet .q2-name .q2-tag { display: table; margin: 6px 0 0; }
+@media (max-width: 359px) {
+  #smdQueue .q2-acts { flex-wrap: wrap; }
+  #smdQueue .q2-acts .q2-btn.primary { flex: 1 0 100%; }
+  #smdQueue .q2-swipe .q-swipe-txt { padding-left: 64px; font-size: 14px; }
+  #smdQueue .q2-add { width: 44px; padding: 0; justify-content: center; }
+  #smdQueue .q2-add span:not(.material-symbols-outlined) { display: none; }
+}

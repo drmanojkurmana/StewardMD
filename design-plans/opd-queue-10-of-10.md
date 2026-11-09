@@ -6,6 +6,22 @@ Baseline from the 2026-11-09 rating: doctor 6, AI 6.5, engineering 6.5. This pla
 and says how we will know. Skills used: impeccable (shape, Operate mode), ui-ux-pro-max (guideline
 lookups), antislop-ui (tells and delivery gate), improve-ui (evidence rules and plan format).
 
+## Status (2026-11-09, after "implement the plan")
+
+The three decisions below were taken as recommended. Nothing here has been run on a phone yet.
+
+| Phase | State |
+|---|---|
+| 0 Safety net | Done: tag `opd-queue-pre-revamp`, flag `smd_opd_q2` (off), doctor harness repaired and in CI. Not done: `PRODUCT.md` / `DESIGN.md` (needs the owner). |
+| 1 Record | Done: one record per patient, number reuse, truthful backup card. Not done: merge of old duplicates, last-visit summary. |
+| 2 Clinic setup | Done: New clinic form in the app, staff text, first-run empty state (new screen). |
+| 3 Screen | Done behind the flag: queue screen, sheets, undo, autosave, 44px, names, tokens, 320 / 390, dark. Findings 1 to 3 fixed on both screens. Not done: check-in sheet audit, Patients as a view, Analytics. |
+| 4 AI | Done: nothing rule-based is labelled AI; a low-confidence ETA says "rough estimate". Not done: evals in CI. |
+| 5 Engineering | Done: no `window.open` for clinic set-up; no `confirm` / `prompt` on the new screen; browser test of the doctor's day in CI. Not done: router and `opd-emr.js` splits. |
+| 6 Ship | Not done: native rebuild, phone check, owner approval. Cache tokens and the service worker cache are bumped. |
+
+Open items are listed in `vault/Roadmap.md`.
+
 ## Owner decisions needed before Phase 3
 
 Phases 0 to 2 do not depend on these. Recommendation is first in each.

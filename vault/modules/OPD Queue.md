@@ -56,8 +56,59 @@ card's "Write NFC Tag" (`writeNfc`, Text + /opd?uid= deep link, read-back verifi
 - Tests: `test/smd-nfc.test.mjs`, `test/smd-nfc-ios.test.mjs`, `test/opd-nfc-barcode.test.mjs`, `test/run-nfc-ui.mjs`.
 - Decision: Decisions.md 2026-10-29 "iPhone Ni-Key NFC".
 
+## One device record per patient (fixed 2026-11-09)
+`localClinicId` (`queue.js`) keyed the on-device clinic record by TICKET id. A returning patient gets a new
+ticket each visit, so every visit made a new record with a second number (`SMD-<code>-<seq>`) and the
+earlier notes were not in front of the doctor. The key is now the PATIENT: the server's MR number on the
+ticket (`t.ghisPatientId`, format `SMD-<CLINIC>-NNNNN`, so two clinics cannot collide). Lookup order: this
+phone's map by ticket, the map by `mrn:<NUMBER>`, then a scan of the store by MR number (a record restored
+from backup is not in the map). A ticket with no MR number still gets its own record, numbered one past the
+highest in use (the old `length + 1` repeated a number after a delete). Kill switch
+`smd_opd_patient_key=0`. Test: `test/queue-patient-key.test.mjs`.
+- NOT done: records duplicated before this fix are not merged. `personal-clinic.js addPatient` still uses
+  `length + 1` when it mints a number itself (its own Add patient form). Both are in [[Roadmap]].
+
+## GOTCHA - `SMD_CLINIC.hasPassword()` is a Promise
+The storage card tested it with `!!`, which is always true, so "Back up to Drive now" and an On switch
+showed on a phone with no backup set up. `loadBackupState()` resolves it into `st.backup` (`hasPw`: null =
+not known yet, false = not set up) and `paintStorageCard()` swaps only `#qStorageCard`, because a full
+repaint of Settings wipes numbers the doctor has typed. The card now says "Not backed up", or the last
+backup time from `lastBackupAt()`.
+
+## The 2026-11 queue screen (flag `smd_opd_q2`, default OFF until the owner approves it on a phone)
+Plan and evidence: `design-plans/opd-queue-10-of-10.md`. Switch: OPD Queue > Settings > Queue screen, or
+`?q2=1`, or `localStorage.smd_opd_q2`. Off renders the earlier screen exactly.
+- Built around one decision: who is next, and am I running behind. A status sentence replaces the four stat
+  cards and the insight card; "With you now"; "Next" with one labelled primary button (Call in, then Start
+  consult); the rest as plain rows that open a sheet of worded actions, Remove last.
+- Every action is the SAME `data-q-act` command the earlier screen sends, so server calls, permissions and
+  audit are unchanged. New commands are presentation only: `row`, `row-close`, `endask`, `confirm-ok`,
+  `confirm-close`, `recall-ok`, `recall-close`, `snack-undo`, `q2toggle`.
+- No `window.confirm` / `prompt` on this screen: Remove asks in an in-app sheet; Did not come runs at once
+  with a 7 second Undo (it recalls with the same token); recall asks its reason in a sheet.
+- The swipe to end a consult is now a real `<button>`: a tap, Enter or a screen reader gets "End this
+  consult?". A mouse drag leaves a click behind; `swipeAt` ignores it for 500 ms.
+- The header's X CLOSES the queue (on the earlier screen the arrow means "switch workplace and forget it");
+  Switch and Pause are in the profile sheet. The header is titled with the clinic (`loadClinicName`).
+- Settings autosave on this screen (`onChange`, 600 ms, no repaint).
+- CSS: `.q2-*` at the end of `queue.css`, tokens only, radius 20 / 10 / 6 (`--r-card`, `--r-ctl`, `--r-tag`),
+  amber via `--warn-container`. A unit test fails on a raw hex in that block.
+- Tests: `test/queue-q2-render.test.mjs`, browser `test/run-opd-q2-ui.mjs` on `test/opd-q2-harness.html`
+  (a STATEFUL fake of /api/queue; 320 and 390 wide, dark; asserts 44px targets and a name on every
+  control). Both run in `.github/workflows/opd-console-ui.yml`.
+- GOTCHA: `test/queue-staff-entry.test.mjs` greps for lines containing `st.clinicAdmin.code =`; write to a
+  local alias instead (see `loadClinicName`).
+- GOTCHA: `_render` is pure, so anything it draws must read the `state` it is given. `renderRowSheet`
+  first looked the ticket up in module state and drew nothing under a unit test.
+
+## Clinic set-up in the app (2026-11-09)
+"New clinic" opens a form in the queue (`_newClinicForm`, `createClinic`) and posts to the route the staff
+console's wizard already uses, `POST /api/queue/onboard/clinic` (native org plus one room with this doctor
+in it). It used to `window.open("https://stewardmd.in/opd")`. The staff helper text now tells staff to sign
+in through "I'm front-desk staff" in the app. Still a browser link: `addhosp` (Connect EMR wizard).
+
 ## Flags
-`smd_opd_queue`, `smd_opd_emr` (EMR overlay), `smd_opd_emr_write` (+ server `QUEUE_EMR_WRITE=1`),
+`smd_opd_q2` (the 2026-11 screen, default off), `smd_opd_patient_key` (default on), `smd_opd_queue`, `smd_opd_emr` (EMR overlay), `smd_opd_emr_write` (+ server `QUEUE_EMR_WRITE=1`),
 `smd_opd_maik` (localStorage-only kill switch, not in queue-flags DEFS), `smd_opd_wp` ("0" restores
 token-first routing), `smd_opd_storage_mode` (device | shared).
 
