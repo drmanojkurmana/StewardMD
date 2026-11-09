@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "id": "ent-ear-tumours-glomus-tympanicum",
+ "subject": "ent",
+ "module": "ent-ear-tumours",
+ "title": "Paragangliomas of the Temporal Bone and Canal Carcinoma",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Paragangliomas, historically designated glomus tumours or chemodectomas, are benign, slow-growing, highly vascular neuroendocrine neoplasms arising from extra-adrenal paraganglion glomus cells derived from the embryonic neural crest. In the temporal bone, they arise either in the middle ear cleft as a **glomus tympanicum** or along the dome of the jugular bulb within the jugular foramen as a glomus jugulare.",
+   "say": "Temporal paragangliomas are vascular neuroendocrine tumors from neural crest cells. They arise either on the promontory as glomus tympanicum or at the jugular bulb as glomus jugulare.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ear-and-cpa-tumours-fig1.webp",
+    "alt": "Axial and coronal contrast-enhanced imaging showing hypervascular skull base paraganglioma",
+    "caption": "Radiological imaging demonstrating skull base erosion and intense contrast enhancement in glomus jugulare. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Glomus tympanicum arises from glomus bodies situated along the tympanic branch of the glossopharyngeal nerve (Jacobson nerve) or the auricular branch of the vagus nerve (Arnold nerve) over the cochlear promontory. Confined entirely within the middle ear cavity, it presents early with hallmark **pulsatile tinnitus** synchronous with the patient heartbeat, accompanied by progressive conductive hearing loss and occasional bloody otorrhea.",
+   "say": "Arising from Jacobson nerve on the promontory, glomus tympanicum presents early with heartbeat-synchronous pulsatile tinnitus and conductive hearing loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glomus Tympanicum",
+     "points": [
+      "Arises on promontory along Jacobson nerve.",
+      "Confined to middle ear cavity; intact jugular plate.",
+      "Lower cranial nerves completely unaffected.",
+      "Cured via permeatal or postauricular tympanotomy."
+     ]
+    },
+    "right": {
+     "title": "Glomus Jugulare",
+     "points": [
+      "Arises in adventitia of jugular bulb.",
+      "Destroys bony caroticojugular spine and plate.",
+      "Paralyzes cranial nerves IX, X, XI, and XII.",
+      "Requires complex skull base infratemporal fossa surgery."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otoscopic inspection in glomus tympanicum reveals a fleshy, red or purple, vascular pulsating mass visible behind the intact lower half of the tympanic membrane, classic for the **rising sun sign**. Applying positive pneumatic pressure with a Siegle speculum blenches the tumor and transiently arrests its pulsations, a pathognomonic physical examination finding known as the Brown sign.",
+   "say": "Otoscopy reveals the rising sun sign, a red pulsating mass in the lower drum. Increasing ear canal air pressure blanches the tumor in Brown sign.",
+   "vis": {
+    "kind": "table",
+    "title": "Physical Examination Signs in Temporal Paraganglioma",
+    "cols": [
+     "Sign Name",
+     "Examination Technique",
+     "Positive Finding",
+     "Pathophysiological Basis"
+    ],
+    "rows": [
+     [
+      "Rising sun sign",
+      "Otoscopic visualization of drum",
+      "Red-purple vascular mass rising from floor",
+      "Hypervascular tumor in hypotympanum"
+     ],
+     [
+      "Brown sign",
+      "Pneumatic otoscopy with Siegle bulb",
+      "Tumor blanches and ceases pulsing",
+      "Canal pressure exceeds capillary perfusion"
+     ],
+     [
+      "Aqueduct sign (Phelps)",
+      "High-resolution CT temporal bone",
+      "Intact bony plate under hypotympanum",
+      "Distinguishes tympanicum from jugulare"
+     ],
+     [
+      "Salt and pepper pattern",
+      "T1-weighted contrast MRI",
+      "Hypointense flow voids and hemorrhage",
+      "Intense hypervascularity and slow flow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-resolution computed tomography of the temporal bone is the critical imaging investigation to distinguish glomus tympanicum from glomus jugulare. In glomus tympanicum, the thin bony jugular plate separating the hypotympanum from the jugular bulb remains completely intact and sclerotic. In **glomus jugulare**, the bony jugular fossa plate is moth-eaten and eroded, with tumor expanding upward into the middle ear.",
+   "say": "High-resolution CT distinguishes both tumors. An intact bony floor beneath the middle ear confirms glomus tympanicum, whereas an eroded jugular plate signals glomus jugulare.",
+   "vis": {
+    "kind": "flow",
+    "title": "Radiological Differentiation of Paragangliomas",
+    "nodes": [
+     {
+      "id": "ct1",
+      "label": "Pulsatile Vascular Middle Ear Mass on Otoscopy"
+     },
+     {
+      "id": "ct2",
+      "label": "High-Resolution CT Temporal Bone with Bone Windows"
+     },
+     {
+      "id": "ct3",
+      "label": "Intact Jugular Plate: Tympanicum / Eroded Plate: Jugulare"
+     }
+    ],
+    "edges": [
+     [
+      "ct1",
+      "ct2"
+     ],
+     [
+      "ct2",
+      "ct3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In advanced glomus jugulare, expansile bony osteolysis within the jugular foramen compresses traversing neural structures, precipitating the classic **jugular foramen syndrome** (Vernet syndrome). Tumor invasion paralyzes cranial nerves nine (glossopharyngeal), ten (vagus), and eleven (accessory), producing dysphagia, loss of gag reflex, unilateral vocal cord paralysis with hoarseness, and weakness of the trapezius and sternocleidomastoid muscles.",
+   "say": "Glomus jugulare invades the jugular foramen to paralyze cranial nerves nine, ten, and eleven, producing hoarseness, swallowing impairment, and shoulder drop.",
+   "vis": {
+    "kind": "table",
+    "title": "Cranial Nerve Deficits in Advanced Skull Base Paraganglioma",
+    "cols": [
+     "Cranial Nerve",
+     "Eponymous Foramen",
+     "Functional Loss",
+     "Clinical Symptom"
+    ],
+    "rows": [
+     [
+      "Glossopharyngeal (CN IX)",
+      "Jugular foramen",
+      "Loss of posterior tongue taste and gag",
+      "Dysphagia and pharyngeal anesthesia"
+     ],
+     [
+      "Vagus (CN X)",
+      "Jugular foramen",
+      "Vocal cord paralysis, palatal weakness",
+      "Hoarse breathy voice, nasal regurgitation"
+     ],
+     [
+      "Accessory (CN XI)",
+      "Jugular foramen",
+      "Trapezius and SCM motor paralysis",
+      "Shoulder drop, unable to shrug"
+     ],
+     [
+      "Hypoglossal (CN XII)",
+      "Hypoglossal canal",
+      "Ipsilateral tongue hemiatrophy",
+      "Tongue deviates toward paralyzed side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive surgical excision of temporal paragangliomas is preceded by digital subtraction angiography and selective **preoperative embolization**. Angiography delineates the feeding arterial supply, derived predominantly from the ascending pharyngeal artery of the external carotid. Embolizing the tumor with polyvinyl alcohol particles twenty-four to forty-eight hours prior to surgery dramatically reduces intraoperative blood loss.",
+   "say": "Superselective embolization of the ascending pharyngeal artery twenty-four to forty-eight hours preoperatively collapses tumor vasculature, drastically reducing operative bleeding.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Protocol for Skull Base Paraganglioma",
+    "nodes": [
+     {
+      "id": "em1",
+      "label": "Digital Subtraction Angiography Mapping"
+     },
+     {
+      "id": "em2",
+      "label": "Ascending Pharyngeal Artery Embolization"
+     },
+     {
+      "id": "em3",
+      "label": "Infratemporal Fossa Surgical Resection (Fisch Type A)"
+     }
+    ],
+    "edges": [
+     [
+      "em1",
+      "em2"
+     ],
+     [
+      "em2",
+      "em3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary malignant neoplasms of the ear are rare but aggressive, dominated by **squamous cell carcinoma** of the external auditory canal. Arising usually in elderly patients with a decades-long history of chronic draining otitis media, it manifests with deep unremitting otalgia, sanguinous discharge, and a friable bleeding polypoid mass in the deep bony meatus refractory to topical drops.",
+   "say": "Squamous cell carcinoma of the ear canal develops in elderly patients with chronic drainage. A bloody discharging mass and severe pain warrant immediate deep biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-ear-gross.webp",
+    "alt": "Anatomical schematic showing external auditory canal boundaries, temporal bone, and parotid gland",
+    "caption": "Malignant invasion of the external auditory canal spreading into the parotid gland and skull base. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Development of facial nerve palsy in a patient presenting with an external canal polypoid mass is a grave diagnostic sign confirming malignant neoplastic infiltration through the bony canal wall into the mastoid segment of the facial nerve. Management requires staging computed tomography and magnetic resonance imaging followed by **en bloc lateral temporal bone resection**, total parotidectomy, and ipsilateral neck dissection combined with postoperative radiotherapy.",
+   "say": "Facial nerve palsy in an ear mass signifies aggressive malignancy. Curative treatment demands lateral temporal bone resection, parotidectomy, and postoperative radiotherapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Pittsburgh Staging for External Auditory Canal Carcinoma",
+    "cols": [
+     "Stage",
+     "Primary Tumor Extent",
+     "Surgical Resection Extent",
+     "Overall Prognosis"
+    ],
+    "rows": [
+     [
+      "T1",
+      "Limited to external canal without bone erosion",
+      "Sleeve resection of canal",
+      "Excellent (>85% 5-year survival)"
+     ],
+     [
+      "T2",
+      "Limited bone erosion (< full thickness)",
+      "Lateral temporal bone resection",
+      "Good (60% to 70% survival)"
+     ],
+     [
+      "T3",
+      "Full-thickness bone erosion / middle ear",
+      "Subtotal temporal bone resection",
+      "Guarded (40% to 50% survival)"
+     ],
+     [
+      "T4",
+      "Involves cochlea, petrous apex, or carotid",
+      "Total temporal bone resection",
+      "Poor (< 20% survival)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-081",
+  "bk2-ent-082",
+  "bk2-ent-083"
+ ]
+}
