@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-anatomy-development",
+ "subject": "obstetrics-gynaecology",
+ "title": "Levator Ani and Mullerian Anomalies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The broad muscular sling forming the main pelvic floor is the **levator ani**. Puborectalis, pubococcygeus and iliococcygeus parts cradle the pelvic organs and maintain continence angles. Obstetric avulsion of its pubic attachments explains many prolapses. Avulsion affects roughly one in five women after a first vaginal birth and is commoner after forceps.",
+   "say": "Levator ani slings the pelvic floor and its obstetric avulsion explains many prolapses.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-posterior-colporrhaphy.webp",
+    "alt": "Levator ani in pelvic floor repair.",
+    "caption": "Levator ani. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure of Mullerian duct fusion or resorption producing uterine malformations forms **Mullerian anomalies**. They range from septate uterus to absent uterus with functioning ovaries. Renal anomalies accompany them in about a third of cases. The levator is the muscle group, and naming puborectalis, pubococcygeus and iliococcygeus separately earns examination marks.",
+   "say": "Mullerian anomalies range from septate uterus to absent uterus with renal associations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defect",
+     "Result"
+    ],
+    "rows": [
+     [
+      "No development",
+      "Absent uterus"
+     ],
+     [
+      "No fusion",
+      "Bicornuate, didelphys"
+     ],
+     [
+      "No resorption",
+      "Septate uterus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sling maintaining the anorectal angle for faecal continence is **puborectalis**. Its relaxation permits defecation, its tonic contraction prevents leakage at rest. Levator assessment includes testing this muscle specifically. On digital palpation its strength is graded on the Oxford scale from zero to five.",
+   "say": "Puborectalis maintains the anorectal angle for continence by tonic contraction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tonic contraction"
+     },
+     {
+      "id": "n1",
+      "label": "Angle maintained"
+     },
+     {
+      "id": "n2",
+      "label": "Continence preserved"
+     },
+     {
+      "id": "n3",
+      "label": "Relaxation permits defecation"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging levator avulsion by ultrasound or MRI predicts prolapse recurrence after surgery, termed **levator assessment**. Bilateral avulsion roughly doubles recurrence risk. It increasingly informs choice between vaginal and abdominal repair routes. Tomographic ultrasound slices at the plane of minimal hiatal dimensions show the avulsion best.",
+   "say": "Levator assessment predicts prolapse recurrence and informs repair route choice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anorectal-abscess-fig1.webp",
+    "alt": "Pelvic floor anatomy context.",
+    "caption": "Pelvic floor context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The gap in levator ani where urethra, vagina and rectum pass through is the **urogenital hiatus**. Enlargement of this gap, called ballooning, correlates with prolapse severity. It is measured on imaging at rest and on strain. Hiatal area over 25 square centimetres on Valsalva counts as severe ballooning in imaging studies.",
+   "say": "The urogenital hiatus enlarges with prolapse severity on imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal hiatus",
+     "points": [
+      "Organs supported",
+      "No descent"
+     ]
+    },
+    "right": {
+     "title": "Ballooned hiatus",
+     "points": [
+      "Gap enlarged",
+      "Prolapse descends"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Supervised exercises strengthening levator function treat early prolapse and incontinence as **pelvic floor training**. Supervised programmes outperform leaflet instructions substantially in trials. A third of women cannot contract correctly without teaching. Three months of supervised training is the trial standard before judging whether surgery is needed.",
+   "say": "Pelvic floor training needs supervision because a third cannot contract correctly alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Programme"
+    ],
+    "rows": [
+     [
+      "Supervision",
+      "Physiotherapist taught"
+     ],
+     [
+      "Duration",
+      "Three months minimum"
+     ],
+     [
+      "Benefit",
+      "Early prolapse, incontinence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Denervation of levator during vaginal delivery contributes to later prolapse beyond direct tearing, called **neurogenic injury**. Pudendal stretch during long second stages is the underlying mechanism. This explains prolapse in women without visible tears. Pudendal nerve terminal motor latency lengthens after long second stages, providing the test evidence for this injury.",
+   "say": "Neurogenic levator injury from pudendal stretch explains prolapse without visible tears.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Long second stage"
+     },
+     {
+      "id": "n1",
+      "label": "Pudendal nerve stretched"
+     },
+     {
+      "id": "n2",
+      "label": "Muscle weakened silently"
+     },
+     {
+      "id": "n3",
+      "label": "Late prolapse"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mullerian anomaly classification by American and European systems guides surgery, termed **classification guided care**. Septate uteri are resected hysteroscopically; bicornuate rarely need unification surgery. Correct typing prevents operations on the wrong anomaly. The ESHRE and ESGE system grades septa by wall thickness ratios, replacing vague descriptive terms.",
+   "say": "Classification guided care resects septate uteri but rarely unifies bicornuate ones.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Mullerian anomaly assessment.",
+    "caption": "Anomaly assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Obstructed anomalies present at puberty with pain and amenorrhoea, needing **adolescent presentation awareness**. Imperforate hymen and transverse septum trap menstrual blood as haematocolpos. Timely drainage preserves fertility completely in these girls. A bluish bulging membrane with a pelvic mass above it in a 13 year old is imperforate hymen until disproved.",
+   "say": "Obstructed Mullerian anomalies present at puberty and timely drainage preserves fertility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haematocolpos",
+     "points": [
+      "Cyclic pain, no flow",
+      "Bluish hymen or septum"
+     ]
+    },
+    "right": {
+     "title": "MRKH",
+     "points": [
+      "No pain, normal hormones",
+      "Absent uterus"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-pph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Postpartum Haemorrhage, the 4 Ts and First-Line Uterotonics",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blood loss over five hundred millilitres after vaginal birth or a litre after caesarean is **postpartum haemorrhage**. Visual estimation understates loss by half, so weighed drapes and shock index guide resuscitation. It remains the worlds leading direct cause of maternal death. Major haemorrhage is over one litre; severe over two litres, thresholds that trigger transfusion protocols.",
+   "say": "Postpartum haemorrhage exceeds five hundred millilitres vaginally and visual estimation understates it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/postpartum-haemorrhage-fig1.webp",
+    "alt": "PPH management pathway.",
+    "caption": "PPH pathway. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure of the uterus to contract, responsible for seventy percent of cases, is **atonic PPH**. Overdistension, prolonged labour, chorioamnionitis and retained tissue all exhaust the muscle. A soft boggy uterus rising in the abdomen is the finding. Retained placenta and a uterus that will not stay contracted often coexist, so the placenta is checked first.",
+   "say": "Atonic PPH from a soft boggy uterus causes seventy percent of postpartum haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "T",
+     "Cause"
+    ],
+    "rows": [
+     [
+      "Tone",
+      "Atony"
+     ],
+     [
+      "Tissue",
+      "Retained placenta"
+     ],
+     [
+      "Trauma",
+      "Tears, rupture"
+     ],
+     [
+      "Thrombin",
+      "Coagulopathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sorting every haemorrhage into tone, tissue, trauma and thrombin is the **4 Ts** framework. Each category has a distinct first treatment, from uterotonics to repair to transfusion. Teams call out the likely T while resuscitation runs. Thrombin problems announce themselves as oozing from cannula sites and a wound that will not clot.",
+   "say": "The 4 Ts sort haemorrhage into tone, tissue, trauma and thrombin with distinct treatments.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bleeding recognised"
+     },
+     {
+      "id": "n1",
+      "label": "Four Ts assessed aloud"
+     },
+     {
+      "id": "n2",
+      "label": "Cause treated directly"
+     },
+     {
+      "id": "n3",
+      "label": "Resuscitation parallel"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first line uterotonic contracting the uterus within minutes is **oxytocin**. Slow intravenous bolus followed by infusion is the standard sequence. Rapid bolus drops blood pressure and is avoided in cardiac disease. Ten international units by slow intravenous bolus, then forty units in an infusion, is a common regimen.",
+   "say": "Oxytocin is the first line uterotonic by slow bolus then infusion.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-oxytocin.webp",
+    "alt": "Oxytocin for atonic haemorrhage.",
+    "caption": "Oxytocin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The prostaglandin F2 alpha injection for refractory atony is **carboprost**. Given intramuscularly or into the myometrium, it rescues many oxytocin failures. Asthma forbids it because it bronchoconstricts powerfully. The dose is 250 micrograms, repeatable every fifteen minutes to a maximum of two milligrams.",
+   "say": "Carboprost rescues refractory atony but is forbidden in asthma for bronchoconstriction.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-carboprost.webp",
+    "alt": "Carboprost stimulating uterine contraction.",
+    "caption": "Carboprost. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The ergot alkaloid giving sustained tetanic uterine contraction is **methylergometrine**. Hypertension and cardiac disease forbid it because it vasoconstricts equally powerfully. It is given intramuscularly, never as a rapid intravenous push. Two hundred micrograms intramuscularly is standard, and intravenous use is avoided for its pressure surge.",
+   "say": "Methylergometrine gives sustained contraction but hypertension forbids it.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-methylergometrine.webp",
+    "alt": "Methylergometrine uterine action.",
+    "caption": "Methylergometrine. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Calling for help, rubbing the uterus and emptying the bladder open every response, the **first response bundle**. A full bladder mechanically prevents contraction and is drained immediately. Two large bore cannulae and blood samples follow within minutes. A full bladder is emptied at once, because even 300 millilitres of urine can hold the uterus open.",
+   "say": "The first response bundle rubs the uterus, empties the bladder and gains access.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Help called"
+     },
+     {
+      "id": "n1",
+      "label": "Uterus rubbed up"
+     },
+     {
+      "id": "n2",
+      "label": "Bladder catheterised"
+     },
+     {
+      "id": "n3",
+      "label": "Cannulae and samples"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shock index, heart rate divided by systolic pressure, flags hidden severity as the **shock index**. Values at or above one predict transfusion need better than blood pressure alone. It costs nothing and trends beautifully. A shock index rising above 0.9 while blood pressure still looks normal is the trigger to escalate early.",
+   "say": "Shock index at or above one predicts transfusion need better than pressure alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Index under 0.9",
+     "points": [
+      "Compensated",
+      "Continue protocol"
+     ]
+    },
+    "right": {
+     "title": "Index 1 or more",
+     "points": [
+      "Severe, transfuse early",
+      "Senior help"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Simultaneous resuscitation and cause treatment, never sequential, is the governing **parallel principle**. One team member owns uterotonics, another access and blood, another documentation and timings. Role allocation is rehearsed in drills. Theatre is booked in parallel when tone treatment starts, so no time is lost if drugs fail.",
+   "say": "Parallel resuscitation and cause treatment with allocated roles governs haemorrhage response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Role",
+     "Owns"
+    ],
+    "rows": [
+     [
+      "Leader",
+      "Decisions and Ts"
+     ],
+     [
+      "Midwife",
+      "Uterotonics and massage"
+     ],
+     [
+      "Assistant",
+      "Access, blood, samples"
+     ]
+    ]
+   }
+  }
+ ]
+}

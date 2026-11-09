@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "obg-puerperium",
+ "subject": "obstetrics-gynaecology",
+ "title": "Involution, Lochia, Lactation and Puerperal Sepsis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Shrinkage of the uterus from one kilogram to sixty grams over six weeks is **involution of uterus**. The fundus descends a centimetre a day and is impalpable abdominally by two weeks. Subinvolution signals retained tissue or infection. By day ten the fundus should no longer be palpable abdominally; a high fundus then means subinvolution.",
+   "say": "Involution shrinks the uterus over six weeks, descending a centimetre daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time",
+     "Fundus"
+    ],
+    "rows": [
+     [
+      "Day 1",
+      "At umbilicus"
+     ],
+     [
+      "Day 10 to 14",
+      "Impapable abdominally"
+     ],
+     [
+      "Week 6",
+      "Pre pregnant size"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vaginal discharge of the puerperium progressing red, serous then white is **lochia**. Rubra lasts days, serosa to two weeks, alba beyond. Offensive or prolonged red lochia warns of infection or retained products. Lochia that turns red again after fading, or smells offensive, is reported the same day.",
+   "say": "Lochia progresses red, serous then white, and offensive lochia warns of infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lochia rubra days"
+     },
+     {
+      "id": "n1",
+      "label": "Serosa to 2 weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Alba beyond"
+     },
+     {
+      "id": "n3",
+      "label": "Offensive means investigate"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Milk production maintained by suckling driven prolactin and oxytocin is **lactation**. The let down reflex ejects milk while prolactin makes more for the next feed. Exclusive breastfeeding for six months is the global recommendation. Prolactin surges with each feed and falls between; non breastfeeding mothers lose the stimulus within weeks.",
+   "say": "Lactation uses prolactin for production and oxytocin for ejection by suckling.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Puerperium and lactation care.",
+    "caption": "Puerperium care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fever over thirty eight degrees on two days after the first twenty four hours defines **puerperal pyrexia**. Causes run from endometritis and urinary infection to mastitis and thrombosis. A systematic source hunt, not reflex antibiotics alone, is the response. The classic definition excludes the first 24 hours, when haemorrhage alone explains most fevers.",
+   "say": "Puerperal pyrexia needs a systematic source hunt from uterus to breast to veins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endometritis",
+     "points": [
+      "Uterine tenderness",
+      "Offensive lochia",
+      "Commonest"
+     ]
+    },
+    "right": {
+     "title": "Mastitis",
+     "points": [
+      "Painful breast segment",
+      "Flu like fever",
+      "After first week"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ascending genital tract infection after delivery, historically childbed fever, is **puerperal sepsis**. Group A streptococcus remains its deadliest agent, killing within hours. Sepsis bundles with early antibiotics and senior review are mandatory. Endometritis after caesarean is five to ten times commoner than after vaginal birth.",
+   "say": "Puerperal sepsis, especially group A streptococcus, kills within hours without bundles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fever and tachycardia"
+     },
+     {
+      "id": "n1",
+      "label": "Cultures and lactate"
+     },
+     {
+      "id": "n2",
+      "label": "Antibiotics within hour"
+     },
+     {
+      "id": "n3",
+      "label": "Senior review"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painful engorged breast segment with fever from milk stasis and infection is **mastitis**. Continued feeding or expressing empties the breast and is central to cure. Flucloxacillin covers staphylococcus while feeding continues. Abscess follows mastitis in about one in ten untreated cases, usually after the second week.",
+   "say": "Mastitis needs continued emptying plus flucloxacillin while feeding continues.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/postpartum-haemorrhage-fig1.webp",
+    "alt": "Postpartum care pathways.",
+    "caption": "Postpartum care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A fluctuant, pointing collection within the breast needing drainage is a **breast abscess**. Ultrasound confirms and guides needle aspiration, now preferred over incision. Feeding usually continues from the affected side after drainage. Needle aspiration repeated every few days now replaces open drainage for most breast abscesses.",
+   "say": "Breast abscess is drained by ultrasound guided aspiration while feeding continues.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Mastitis",
+      "Antibiotics, emptying"
+     ],
+     [
+      "Abscess",
+      "Aspiration or drainage"
+     ],
+     [
+      "Recurrent",
+      "Culture, review technique"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Afterpains from uterine contraction during feeding are strongest in multiparae, termed **afterpains**. They confirm good involution and fade in days. Simple analgesia suffices, though severe pain earns a retained tissue check. Pain that worsens after the first week, rather than fading, earns examination for retained tissue.",
+   "say": "Afterpains confirm involution in multiparae and fade in days with simple analgesia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Feeding triggers oxytocin"
+     },
+     {
+      "id": "n1",
+      "label": "Uterus contracts"
+     },
+     {
+      "id": "n2",
+      "label": "Pain peaks day two"
+     },
+     {
+      "id": "n3",
+      "label": "Fades by week one"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The six week postnatal check closes the episode reviewing physical and mental health, contraception and screening, called the **postnatal review**. Blood pressure, perineum, mood and cervical screening status are all covered. It is chronically undervalued and underattended. Contraception and mood are the two items women most often report were skipped at this visit.",
+   "say": "The six week postnatal review covers pressure, perineum, mood and contraception.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Postnatal uterine involution check.",
+    "caption": "Involution check. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
