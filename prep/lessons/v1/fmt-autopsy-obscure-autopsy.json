@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-autopsy-obscure-autopsy",
+ "subject": "forensic-medicine",
+ "module": "fmt-autopsy",
+ "title": "Obscure and Negative Autopsy, Viscera Preservation, Virtopsy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Negative autopsy defined",
+   "tx": "An autopsy is **negative autopsy** when gross and microscopic examination, toxicology and laboratory investigations together fail to reveal any cause of death. About two to five percent of all autopsies end this way. The proportion runs higher in teenagers and young adults up to about thirty five years. A negative result still excludes injuries and poisons that were alleged, which is itself valuable evidence for the investigation.",
+   "say": "Two to five percent of autopsies find no cause, more often in the young, yet they still exclude alleged injuries.",
+   "vis": {"kind": "table", "cols": ["Cause of a negative result", "Example", "Corrective step"], "rows": [["Inadequate history", "Vagal inhibition death", "Interview witnesses again"], ["Missed external marks", "Needle or snake bite marks", "Re-examine the whole skin"], ["Missed internal signs", "Air embolism, pneumothorax", "Use special opening tests"], ["Missing laboratory work", "No toxicology sent", "Preserve and dispatch samples"]]}
+  },
+  {
+   "title": "Obscure autopsy and its trap",
+   "tx": "An **obscure autopsy** shows only minimal, indefinite findings that do not add up to a definite cause of death. These cases usually involve a young healthy person who died suddenly and unexpectedly. The standing trap is blaming a mild natural disease that happens to be present. Reddy warns that mild disease must not be implicated until injury, poisoning and functional causes have been eliminated with great care.",
+   "say": "Obscure autopsies tempt doctors to blame mild incidental disease, which is exactly what must be resisted.",
+   "vis": {"kind": "compare", "left": {"title": "Obscure autopsy picture", "points": ["Young healthy person", "Sudden unexpected death", "Minimal or indefinite findings", "Police press for an answer"]}, "right": {"title": "Correct response", "points": ["Admit inability if unsure", "Order laboratory studies", "Interview those who saw the end", "Re-examine tongue bite and airways"]}}
+  },
+  {
+   "title": "The six groups of obscure causes",
+   "tx": "Reddy groups the hidden killers behind obscure autopsy into **six categories of obscure causes**. They are natural disease with only microscopic findings, biochemical disturbances such as uraemia, diabetes and potassium deficiency, endocrine failure like adrenal insufficiency, concealed trauma including reflex vagal inhibition, poisoning without macroscopic change, and miscellaneous allergy or drug idiosyncrasy. Working through the six groups systematically stops the examiner from stopping at the first mild abnormality seen.",
+   "say": "Run through natural, biochemical, endocrine, concealed trauma, poisoning and allergy groups before settling any obscure death.",
+   "vis": {"kind": "table", "cols": ["Group", "Example causes", "Test that helps"], "rows": [["Natural, microscopic only", "Rheumatic Aschoff bodies", "Myocardial histology"], ["Biochemical", "Uraemia, potassium lack", "Vitreous and blood chemistry"], ["Endocrine", "Adrenal insufficiency", "History and gland histology"], ["Concealed trauma and poisoning", "Vagal inhibition, narcotics", "Scene history and toxicology"]]}
+  },
+  {
+   "title": "What to re-examine in an obscure death",
+   "tx": "The second look follows a checklist of easily missed findings in the **re-examination of an obscure case**. Search for tongue bite, a foreign body in the airway, fat or air embolism, sepsis, cardiac hypertrophy, blocked coronary ostia, sickle cell thrombi, small electrical burns and needle marks. Add bacteriology, virology, histology, biochemistry and toxicology. If all fails and circumstances are unequivocally natural, undetermined natural circumstances is an honest certificate.",
+   "say": "Check tongue, airways, coronary ostia, burns and needle marks again, then let the laboratory speak before certifying.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Look for tongue bite and airway bodies"}, {"id": "b", "label": "Test embolism and coronary ostia"}, {"id": "c", "label": "Send five laboratory disciplines"}, {"id": "d", "label": "Certify undetermined if still blank"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Saturated saline as the routine preservative",
+   "tx": "For chemical analysis the routine choice is **saturated saline preservative**, a saturated solution of common salt, with one clear exception list. Do not use it in poisoning by corrosive acids, corrosive alkalis, corrosive sublimate or aconite. Stomach with contents and a length of small intestine go in one bottle; liver and kidney, cut into thin slices, go in another; blood and urine travel separately. Never preserve viscera in formaldehyde, which ruins poison extraction.",
+   "say": "Saturated salt solution is the default, formalin is forbidden, and corrosives plus aconite break the saline rule.",
+   "vis": {"kind": "table", "cols": ["Bottle", "Contents", "Notes"], "rows": [["Bottle one", "Stomach and small intestine", "Organs opened before preserving"], ["Bottle two", "Liver slices and kidney", "Cut half to one cm thick"], ["Separate bottles", "Blood and urine", "Fluoride added for alcohol"], ["Never used", "Formaldehyde solution", "Blocks poison extraction"]]}
+  },
+  {
+   "title": "Rectified spirit and its exception list",
+   "tx": "The alternative is **rectified spirit preservative**, forbidden whenever the suspected poison would dissolve in or be masked by alcohol. The exceptions are alcohol and kerosene, chloroform and ether, chloral hydrate, formic and acetic acids, formaldehyde, phenol, phosphorus and paraldehyde. A separate sample of the preservative itself, twenty five millilitres of spirit or twenty five grams of salt, must travel with the viscera so the laboratory can exclude contamination.",
+   "say": "Spirit fails for alcohol, phenol, phosphorus and several volatiles, and a sample of the preservative itself must accompany viscera.",
+   "vis": {"kind": "compare", "left": {"title": "Spirit acceptable", "points": ["Most metallic poisons", "Many alkaloid poisonings", "When saline is unsuitable", "Sealed and labelled at once"]}, "right": {"title": "Spirit forbidden", "points": ["Alcohol or kerosene suspected", "Chloroform, ether, chloral hydrate", "Phenol and phosphorus", "Formic acid and paraldehyde"]}}
+  },
+  {
+   "title": "When no preservative is needed",
+   "tx": "Preservative adds nothing when **analysis within twenty four hours** is guaranteed or the sample stays refrigerated or on ice. Bone, hair and nails need no preservative at all, and lung tissue for inhaled poisons is sent dry. Blood for alcohol keeps with sodium fluoride at ten milligrams per millilitre, which blocks glycolysis and bacterial growth, plus potassium oxalate as anticoagulant. Bottles are filled only two thirds to allow for gas.",
+   "say": "Skip preservative for next day analysis, refrigeration, hair, nails and bone, but fluoridate blood meant for alcohol testing.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Decide analysis timing first"}, {"id": "b", "label": "Refrigerate if within a day"}, {"id": "c", "label": "Add fluoride to blood samples"}, {"id": "d", "label": "Fill bottles only two thirds"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Virtopsy, imaging without the knife",
+   "tx": "**Virtual autopsy or virtopsy** examines the dead body with computed tomography and magnetic resonance imaging instead of opening it. CT shows morbid anatomy and bone injury, MRI shows soft tissue and vessel states, and MR spectroscopy measures decomposition metabolites that help estimate time since death. Air embolism, pneumothorax and firearm tracks with inward and outward bevelling display beautifully. It also preserves evidence that a conventional autopsy would destroy.",
+   "say": "CT and MRI virtopsy maps fractures, gas and bullet tracks without a scalpel, and keeps fragile evidence intact.",
+   "vis": {"kind": "table", "cols": ["Modality", "Best shown", "Forensic gain"], "rows": [["Multislice CT", "Bone and fracture pattern", "Entry versus exit bevelling"], ["MRI", "Soft tissue and vessels", "Organ trauma mapping"], ["MR spectroscopy", "Decay metabolites", "Time since death support"], ["3D reconstruction", "Projectile track", "Court ready visualisation"]]}
+  },
+  {
+   "title": "Psychological autopsy in equivocal death",
+   "tx": "When the manner of death is equivocal, a **psychological autopsy** reconstructs the dead person's state of mind through structured interviews with family, friends, coworkers and fellow students. It gathers medical, educational, marital, employment, psychiatric and substance history, plus previous attempts and the chronology of the last days. It serves custodial deaths and contested insurance claims. It improves manner of death determination but can never validly declare that suicide definitely occurred.",
+   "say": "Structured interviews rebuild the last days and state of mind, sharpening manner of death without ever proving suicide outright.",
+   "vis": {"kind": "compare", "left": {"title": "Data gathered", "points": ["Interviews with family and friends", "Medical and school records", "Previous suicide attempts", "Chronology of final days"]}, "right": {"title": "Main uses and limit", "points": ["Custodial death enquiries", "Contested insurance claims", "Criminal suicide or homicide doubt", "Cannot prove suicide validly"]}}
+  }
+ ],
+ "quiz": []
+}
