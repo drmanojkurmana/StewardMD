@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antiepileptics",
+  "subject": "pharmacology",
+  "title": "Gabapentinoids, Phenobarbitone, Status Epilepticus and Absence Seizures Integrated",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Gabapentin** was designed as a GABA analogue yet ignores GABA receptors, binding instead the alpha 2 delta subunit of voltage gated calcium channels and reducing excitatory transmitter release, which serves focal seizures modestly and neuropathic pain, its dominant modern use, substantially. Absorption saturates (bioavailability falls as dose climbs), kidneys clear it unchanged, and pregabalin, its more potent linear cousin, absorbed the pain and anxiety markets while inheriting the sedation, weight gain and misuse scheduling.",
+      "say": "Gabapentin is a calcium channel drug in GABA clothing; pain pays its salary now, seizures rarely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gabapentin facts",
+          "points": [
+            "Alpha 2 delta calcium channel binding",
+            "Saturable absorption: diminishing returns per dose rise",
+            "Renal clearance, dose by creatinine clearance",
+            "Focal seizure adjunct, neuropathic pain mainstay"
+          ]
+        },
+        "right": {
+          "title": "Gabapentinoid burdens",
+          "points": [
+            "Sedation, dizziness, ataxia and weight gain",
+            "Misuse and dependence: controlled scheduling",
+            "Respiratory depression with opioids in overdose data",
+            "Withdrawal symptoms on abrupt cessation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phenobarbitone** from the sedative module returns as an antiepileptic elder: GABA enhancement at barbiturate sites suppresses focal and tonic clonic seizures cheaply and reliably, with a half life of days that forgives adherence lapses and punishes accumulation. Sedation, cognitive and behavioural effects (especially in children), enzyme induction and dependence explain its demotion where alternatives are affordable, yet global neurology still runs on it, and intravenous phenobarbital remains a refractory status option.",
+      "say": "Phenobarbitone is cheap, forgiving and cognitively expensive; the world still uses it, examinations still test it.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-diazepam.webp",
+        "alt": "Diazepam benzodiazepine illustration for seizure management",
+        "caption": "Diazepam, the benzodiazepine partner whose class opens the status epilepticus algorithm this lesson integrates. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Status epilepticus** assembled end to end: five minutes of continuous seizure defines it, benzodiazepine first line (adequate dose, by any route available), one second line load among levetiracetam, fosphenytoin or valproate, then refractory care with anaesthetic infusion and EEG in intensive care. Glucose is checked and corrected, thiamine precedes it in alcohol histories, and the cause hunt (non adherence, infection, metabolic, autoimmune, structural) runs in parallel rather than after the convulsions stop.",
+      "say": "Five minutes starts the clock: benzodiazepine, one big second line load, intensive care, cause hunt in parallel.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "five",
+            "label": "Seizure at 5 minutes: status epilepticus declared"
+          },
+          {
+            "id": "bzd",
+            "label": "Full dose benzodiazepine, repeated once"
+          },
+          {
+            "id": "second",
+            "label": "One second line load: levetiracetam, fosphenytoin or valproate"
+          },
+          {
+            "id": "refract",
+            "label": "Refractory: anaesthetic infusion, EEG, intensive care"
+          }
+        ],
+        "edges": [
+          [
+            "five",
+            "bzd"
+          ],
+          [
+            "bzd",
+            "second"
+          ],
+          [
+            "second",
+            "refract"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Absence seizures** close the module's other pole: brief staring arrests with immediate recovery, 3 Hz spike wave on EEG, provoked by hyperventilation in clinic, and treated by ethosuximide when pure, valproate when tonic clonic company exists, lamotrigine when both ethosuximide and valproate fail the patient. Sodium channel blockers (carbamazepine, phenytoin, gabapentin, vigabatrin) can multiply absences, so the staring child worsened by carbamazepine is a syndrome error, not drug resistance.",
+      "say": "Absence wants T channel drugs; sodium blockers can manufacture more absences from a misread syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Absence essentials",
+          "points": [
+            "Brief arrests, abrupt return, no postictal phase",
+            "Hyperventilation provokes attacks and EEG signature",
+            "Ethosuximide first for pure absence",
+            "Prognosis excellent in childhood absence epilepsy"
+          ]
+        },
+        "right": {
+          "title": "Absence aggravators",
+          "points": [
+            "Carbamazepine and phenytoin",
+            "Gabapentin, pregabalin and vigabatrin",
+            "Tiagabine (GABA uptake blocker) similarly",
+            "Reassess syndrome when seizures multiply on therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gabapentinoid prescribing** beyond epilepsy needs its own discipline because pain practice dwarfs seizure practice: start low at night, titrate over days, dose by kidney, judge at adequate dose and duration, and taper rather than abandon abruptly. Inadequate trials (too low, too brief) manufacture non responders, while indefinite escalation manufactures sedation and falls. Dependence and diversion controls now attach in many jurisdictions, reshaping repeat prescription habits.",
+      "say": "Pain dosing is slow, renal and judged fairly; taper out, never drop out.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Gabapentin started low at night, pregabalin twice daily"
+          },
+          {
+            "id": "titr",
+            "label": "Titrate over days against sedation"
+          },
+          {
+            "id": "judge",
+            "label": "Judge pain function at adequate dose and duration"
+          },
+          {
+            "id": "taper",
+            "label": "Continue, switch or taper: never stop abruptly"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "titr"
+          ],
+          [
+            "titr",
+            "judge"
+          ],
+          [
+            "judge",
+            "taper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Withdrawal and discontinuation** separate the antiepileptic cabinet into two temperaments: most agents taper over weeks to months after seizure freedom measured in years (two years is the usual conversation opener), while benzodiazepines, phenobarbital and gabapentinoids add physiological dependence requiring slower, symptom guided descent. Abrupt cessation after surgery, stock outs or patient experimentation is a leading preventable cause of breakthrough seizures and status, so supply continuity is pharmacology too.",
+      "say": "Two seizure free years opens the taper conversation; supply gaps close it with status epilepticus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard taper logic",
+          "points": [
+            "Discuss after about 2 years seizure free",
+            "One drug at a time over weeks to months",
+            "Driving restrictions during and after taper",
+            "Relapse risk counselled, highest early"
+          ]
+        },
+        "right": {
+          "title": "Dependence prone agents",
+          "points": [
+            "Benzodiazepines and phenobarbital: slowest tapers",
+            "Gabapentinoids: taper over at least a week, oftener longer",
+            "Withdrawal seizures and autonomic symptoms",
+            "Never let supply lapse in dependent patients"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Driving, contraception, bone health and mood** form the chronic review quartet examinations compress into single stems: seizure freedom intervals govern licences by jurisdiction, enzyme inducers demand non hormonal or high dose contraception planning (teratogenicity lesson next), long term therapy thins bone through vitamin D and direct effects, and depression screening matters because epilepsy, several of its drugs and suicidality warnings travel together.",
+      "say": "Review licences, contraception, bones and mood with the levels; chronic epilepsy care is a quartet, not a blood test.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Review quartet part one",
+          "points": [
+            "Driving: seizure free intervals per local law",
+            "Contraception: inducer interactions planned around",
+            "Pregnancy intentions reviewed annually",
+            "Folate status in women of childbearing potential"
+          ]
+        },
+        "right": {
+          "title": "Review quartet part two",
+          "points": [
+            "Bone health: vitamin D, densitometry where indicated",
+            "Mood and suicidality screened and documented",
+            "Behavioural drug effects asked by agent name",
+            "Adherence and supply continuity confirmed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rescue medication** exports status treatment into the community: buccal midazolam for prolonged seizures in children and adults with care plans, rectal diazepam historically, now joined by intranasal midazolam in some systems. Families trained with written plans, dose by weight or age band, ambulance thresholds and post dose observation convert the algorithm of step three into kitchen table action, reducing both status duration and emergency attendances.",
+      "say": "Buccal midazolam and a written plan move the status algorithm from the resus bay to the kitchen table.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "plan",
+            "label": "Written rescue plan with dose by weight band"
+          },
+          {
+            "id": "five",
+            "label": "Seizure reaches 5 minutes at home or school"
+          },
+          {
+            "id": "buccal",
+            "label": "Buccal midazolam given by trained carer"
+          },
+          {
+            "id": "amb",
+            "label": "Ambulance if seizures continue, repeat per plan limits"
+          }
+        ],
+        "edges": [
+          [
+            "plan",
+            "five"
+          ],
+          [
+            "five",
+            "buccal"
+          ],
+          [
+            "buccal",
+            "amb"
+          ]
+        ]
+      }
+    }
+  ]
+}

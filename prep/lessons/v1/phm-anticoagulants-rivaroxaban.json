@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-anticoagulants",
+  "subject": "pharmacology",
+  "title": "Direct Oral Anticoagulants: Rivaroxaban, Apixaban and Andexanet Alfa",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Direct factor Xa inhibitors **rivaroxaban** and apixaban block free and clot bound factor Xa at the convergence of the intrinsic and extrinsic pathways, halting thrombin generation without touching antithrombin. Fixed dosing without routine monitoring, rapid onset within two to four hours and half lives of roughly 9 to 14 hours rebuilt anticoagulation around convenience. Their Achilles heel mirrors their virtue: no INR like compass, so adherence and renal function carry the safety burden invisibly.",
+      "say": "Rivaroxaban and apixaban block factor Xa directly: fixed doses, fast on, and safety carried by adherence and kidneys.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-disorders-fig2.webp",
+        "alt": "Coagulation cascade diagram showing drug targets including factor Xa inhibitors",
+        "caption": "Coagulation cascade drug targets, with factor Xa at the convergence inhibited directly by rivaroxaban and apixaban."
+      }
+    },
+    {
+      "tx": "Between the two, **apixaban** twice daily earned the gentlest bleeding record across atrial fibrillation trials, while rivaroxaban once daily suits adherence challenged patients at a slightly higher gastrointestinal bleeding price in several comparisons. Dose reduction is rule bound, not vibes: apixaban halves to 2.5 mg twice daily only when two of age 80 plus, weight 60 kg or less, and creatinine 133 micromol per litre or more are present.",
+      "say": "Apixaban bleeds least, rivaroxaban doses once; halve apixaban only when two of the three criteria are met.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apixaban",
+          "points": [
+            "5 mg twice daily, 2.5 mg when two reduction criteria met",
+            "Lowest major bleeding in atrial fibrillation trials",
+            "Least renal dependence of the Xa inhibitors",
+            "Criteria: age 80 plus, weight 60 kg or less, creatinine raised"
+          ]
+        },
+        "right": {
+          "title": "Rivaroxaban",
+          "points": [
+            "20 mg once daily with food, 15 mg in renal impairment bands",
+            "Once daily convenience for adherence",
+            "Treatment doses must be taken with food for absorption",
+            "Gastrointestinal bleeding signal higher in comparisons"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Venous thromboembolism** treatment exploits their speed: rivaroxaban and apixaban begin at higher loading doses (15 mg twice daily for 21 days, or apixaban 10 mg twice daily for 7 days) and step down, no heparin lead in and no bridging, because therapeutic levels arrive within hours. Dabigatran and edoxaban, by contrast, demand five days of parenteral anticoagulation first in their trial designs, a sequencing distinction examinations reliably harvest.",
+      "say": "Rivaroxaban and apixaban treat clots from dose one; dabigatran and edoxaban still want five days of heparin first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "clot",
+            "label": "Acute venous thromboembolism diagnosed"
+          },
+          {
+            "id": "load",
+            "label": "Loading dose rivaroxaban or apixaban from day one"
+          },
+          {
+            "id": "step",
+            "label": "Step down to maintenance dose at 7 or 21 days"
+          },
+          {
+            "id": "review",
+            "label": "Review duration: provoked versus unprovoked, bleeding risk"
+          }
+        ],
+        "edges": [
+          [
+            "clot",
+            "load"
+          ],
+          [
+            "load",
+            "step"
+          ],
+          [
+            "step",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Andexanet alfa** is a decoy factor Xa protein, catalytically inert, that soaks up rivaroxaban and apixaban (and enoxaparin in part) to restore endogenous factor Xa activity within minutes. Licensed for life threatening bleeding on Xa inhibitors, it is expensive, stocked selectively, raises thrombotic event rates as anticoagulation lifts, and complicates heparin responsiveness if surgery follows. Four factor PCC remains the common alternative where andexanet is unavailable, chosen by protocol rather than improvisation.",
+      "say": "Andexanet is a decoy sponge for Xa inhibitors: fast, costly, prothrombotic, and not everywhere at 3 am.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Andexanet alfa",
+          "points": [
+            "Decoy factor Xa binding Xa inhibitors stoichiometrically",
+            "Bolus plus two hour infusion dosing",
+            "Thrombotic events in about a tenth of recipients",
+            "Interferes with heparin effect if surgery follows"
+          ]
+        },
+        "right": {
+          "title": "Where it fits",
+          "points": [
+            "Life threatening bleeding on apixaban or rivaroxaban",
+            "Given alongside source control, not instead of it",
+            "Four factor PCC the fallback where unstocked",
+            "Restart anticoagulation planning starts immediately"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Renal thresholds** fence the whole class: rivaroxaban avoids below creatinine clearance 15, apixaban carries the most permissive renal labelling yet still demands caution in severe impairment, and dabigatran, 80 percent renally cleared, forbids below 30 in most jurisdictions. Dialysis removes dabigatran but not the Xa inhibitors, which are highly protein bound. Extremes of body weight and interacting CYP3A4 plus P glycoprotein inhibitors or inducers complete the prescribing checklist.",
+      "say": "Kidneys fence every DOAC differently; dabigatran dialyses off, Xa inhibitors do not.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "check",
+            "label": "Check creatinine clearance, weight and interacting drugs"
+          },
+          {
+            "id": "choose",
+            "label": "Match agent to renal band and bleeding profile"
+          },
+          {
+            "id": "counsel",
+            "label": "Counsel adherence: no monitoring means no safety net"
+          },
+          {
+            "id": "review",
+            "label": "Renal function reviewed at least annually, oftener if borderline"
+          }
+        ],
+        "edges": [
+          [
+            "check",
+            "choose"
+          ],
+          [
+            "choose",
+            "counsel"
+          ],
+          [
+            "counsel",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Switching** and perioperative choreography exploit the short half lives: most procedures need only 24 to 48 hours of interruption graded by bleeding risk and renal function, with no bridging heparin because offset and onset are both fast. Neuraxial anaesthesia carries the strictest windows. Resumption waits for surgical haemostasis, typically 24 hours after low risk and 48 to 72 after high risk procedures, remembering that full anticoagulation arrives within hours of the first tablet.",
+      "say": "Short half lives simplify surgery: stop one to two days, restart when haemostasis allows, never bridge.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interruption rules",
+          "points": [
+            "Low bleeding risk: omit about 24 hours beforehand",
+            "High bleeding risk or neuraxial: 48 hours or more",
+            "Longer when creatinine clearance is reduced",
+            "No bridging heparin for DOAC interruptions"
+          ]
+        },
+        "right": {
+          "title": "Resumption rules",
+          "points": [
+            "Low risk procedures: restart after about 24 hours",
+            "High risk: wait 48 to 72 hours for haemostasis",
+            "Full effect within 2 to 4 hours of restarting",
+            "Prophylactic LMWH covers the gap if swallowing is delayed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Where DOACs must not go matters as much as where they shine: mechanical heart valves (dabigatran increased thrombosis and bleeding in RE ALIGN), moderate to severe rheumatic mitral stenosis, and triple positive **antiphospholipid syndrome**, where rivaroxaban lost to warfarin on arterial events. Pregnancy and breastfeeding lack safety data and default to heparins. Recognising the warfarin strongholds from the previous lessons is the same knowledge viewed from the other side.",
+      "say": "Valves, rheumatic mitral stenosis and triple positive antiphospholipid syndrome still belong to warfarin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DOAC territory",
+          "points": [
+            "Non valvular atrial fibrillation stroke prevention",
+            "Venous thromboembolism treatment and prophylaxis",
+            "Post orthopaedic surgery prophylaxis regimens",
+            "Selected cancer associated thrombosis protocols"
+          ]
+        },
+        "right": {
+          "title": "Warfarin territory",
+          "points": [
+            "Mechanical prosthetic heart valves",
+            "Rheumatic mitral stenosis with atrial fibrillation",
+            "Triple positive antiphospholipid syndrome",
+            "Pregnancy defaults to heparins instead"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When **bleeding** strikes without an antidote on the shelf, management is mechanical and temporal: stop the drug, compress, transfuse, correct calcium and temperature, consider activated charcoal within hours of ingestion and tranexamic acid early, and let the 9 to 14 hour half life work while source control proceeds. Drug calibrated anti Xa levels, where available, quantify what the clock only estimates.",
+      "say": "Without an antidote, time and source control are the reversal; charcoal early, tranexamic acid early, hands on the bleeding point.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acs-fig2.webp",
+        "alt": "Coronary plaque rupture and antithrombotic therapy diagram",
+        "caption": "Plaque rupture and antithrombotic targets, the arterial setting where Xa inhibitor bleeding decisions are commonly faced."
+      }
+    }
+  ]
+}
