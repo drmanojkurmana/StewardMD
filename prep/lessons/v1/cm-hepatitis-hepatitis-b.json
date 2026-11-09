@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-hepatitis-hepatitis-b",
+ "subject": "community-medicine",
+ "module": "cm-hepatitis",
+ "title": "Hepatitis B: Serology, Window Period and Prevention",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Endemicity is read off HBsAg prevalence",
+   "tx": "**HBsAg prevalence** grades endemicity: 8 percent or more in the general population defines high endemicity, 5 to 7 high-intermediate, 2 to 4 low-intermediate, and under 2 percent low endemicity. India sits in the intermediate bands in programme teaching. The grade decides how aggressively birth dose and catch-up vaccination must be pushed.",
+   "say": "One blood marker grades whole regions. Eight percent surface antigen or more means high endemicity; under two means low. Intermediate grades, India's teaching position, demand strong birth dose discipline without complacency.",
+   "vis": {
+    "kind": "table",
+    "cols": ["HBsAg prevalence", "Endemicity grade"],
+    "rows": [
+     ["8 percent or more", "High"],
+     ["5 to 7 percent", "High-intermediate"],
+     ["2 to 4 percent", "Low-intermediate"],
+     ["Under 2 percent", "Low"]
+    ]
+   }
+  },
+  {
+   "title": "Three antigens, three antibodies",
+   "tx": "The virus presents **surface antigen (HBsAg)**, core antigen (HBcAg, not free in blood) and e antigen (HBeAg), answered by anti-HBs, anti-HBc and anti-HBe. Every serology stem is a pattern of these six. Surface antibody alone means vaccine immunity; core antibody presence proves natural infection happened at some point.",
+   "say": "Six markers, every stem a pattern. Surface antigen means infected now; surface antibody means protected; core antibody proves natural infection once occurred; e antigen flags heavy replication. Learn the grammar before the sentences.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Marker", "Meaning when positive"],
+    "rows": [
+     ["HBsAg", "Current infection"],
+     ["Anti-HBs", "Immunity, vaccine or recovery"],
+     ["Anti-HBc (total)", "Natural infection, past or present"],
+     ["HBeAg", "High viral replication, infectious"]
+    ]
+   }
+  },
+  {
+   "title": "The serology timeline and window period",
+   "tx": "The timeline chart shows **HBsAg rising first**, followed by HBeAg and symptoms, then IgM anti-HBc, with anti-HBs appearing only after HBsAg clears. Between surface antigen loss and antibody gain lies the window period, when IgM anti-HBc alone proves acute infection. Chronic persistence insets at the right when HBsAg survives beyond 6 months.",
+   "say": "Read the curves in order. Surface antigen first, e antigen with symptoms, core IgM next, surface antibody last after clearance. The gap between antigen loss and antibody gain is the window, provable only by core IgM.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hepatitis-bcde-serology-phases-cure-fig2.webp",
+    "alt": "Hepatitis B serology timeline with acute marker curves, the window period, and a chronic persistence inset.",
+    "caption": "Acute hepatitis B marker curves, window period and chronic persistence. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Pattern table examiners actually use",
+   "tx": "**Acute hepatitis B** reads HBsAg positive, IgM anti-HBc positive, HBeAg positive. Chronic active replication keeps HBsAg and IgG anti-HBc with HBeAg; low replication swaps in anti-HBe. Vaccinated persons show anti-HBs alone. Window period shows IgM anti-HBc alone. Four rows answer nearly every serology stem written.",
+   "say": "Four rows answer nearly every stem. Acute: surface antigen plus core IgM. Chronic replicating: add e antigen. Vaccinated: surface antibody alone. Window: core IgM alone. Drill the table, not trivia.",
+   "vis": {
+    "kind": "table",
+    "cols": ["State", "HBsAg", "Anti-HBc", "Anti-HBs"],
+    "rows": [
+     ["Acute infection", "Positive", "IgM positive", "Negative"],
+     ["Chronic infection", "Positive", "IgG positive", "Negative"],
+     ["Recovered naturally", "Negative", "IgG positive", "Positive"],
+     ["Vaccinated", "Negative", "Negative", "Positive"]
+    ]
+   }
+  },
+  {
+   "title": "Age decides chronicity",
+   "tx": "**Perinatal infection** becomes chronic in up to 90 percent of infected newborns, childhood infection in roughly a third, and immunocompetent adult infection in under 5 percent. That gradient is the entire public health argument for the 24-hour birth dose: the same virus is a brief illness in adults and a lifelong carrier state from birth.",
+   "say": "Age writes the prognosis. Nine of ten infected newborns carry for life; fewer than one in twenty adults do. The twenty four hour birth dose exists because of that single gradient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infected at birth",
+     "points": ["Chronicity up to 90 percent", "Decades of silent carriage", "Cirrhosis and cancer risk accumulate"]
+    },
+    "right": {
+     "title": "Infected as adult",
+     "points": ["Chronicity under 5 percent", "Acute illness then clearance", "Lifelong surface antibody"]
+    }
+   }
+  },
+  {
+   "title": "Prevention: vaccine, HBIG, blood safety",
+   "tx": "**Prevention stacks** three layers: universal infant vaccination with birth dose, hepatitis B immunoglobulin plus vaccine within hours for babies of carrier mothers and after needle-stick exposure, and screened blood with safe injection practice. Post-exposure management is time-critical in hours, not clinic visits, a distinction stems test with occupational exposure stories.",
+   "say": "Three layers prevent. Universal infant vaccine with its birth dose, immunoglobulin plus vaccine within hours after exposure or carrier-mother birth, and screened blood with safe injections. Post-exposure clocks run in hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Exposure or carrier-mother birth"},
+     {"id": "b", "label": "HBIG plus vaccine within hours"},
+     {"id": "c", "label": "Complete vaccine series"},
+     {"id": "d", "label": "Anti-HBs checked where indicated"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "National hepatitis control and free treatment",
+   "tx": "The **national viral hepatitis programme** integrates testing at facilities (HBsAg in antenatal panels), model treatment centres giving free oral antivirals, and Haryana's free test-and-treat model for hepatitis C adopted nationally. Tenofovir-based therapy suppresses hepatitis B without curing carriage, so prevention by vaccine remains the programme's foundation stone.",
+   "say": "Programmes now test and treat free. Antenatal surface antigen screening, model treatment centres, oral antivirals that suppress without curing. Suppression is not eradication, so the birth dose remains the foundation stone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Programme element", "Function"],
+    "rows": [
+     ["Antenatal HBsAg testing", "Finds carrier mothers early"],
+     ["Model treatment centres", "Free antivirals and training"],
+     ["Birth dose within 24 hours", "Prevents the chronicity gradient"]
+    ]
+   }
+  },
+  {
+   "title": "Needle-stick: the occupational stem",
+   "tx": "After **needle-stick exposure** from an HBsAg-positive source, an unvaccinated worker receives HBIG and starts vaccine immediately; a vaccinated responder (anti-HBs 10 mIU/ml or more) needs nothing; a known non-responder gets HBIG with booster logic per protocol. The stem always hides vaccination and responder status inside the story; extract both before answering.",
+   "say": "Occupational stems hide two facts. Vaccination history and responder status decide everything: immunoglobulin plus vaccine for the unvaccinated, nothing for proven responders, protocol cover for non-responders. Extract both facts before answering.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unvaccinated worker",
+     "points": ["HBIG immediately", "Start vaccine series", "Follow-up serology scheduled"]
+    },
+    "right": {
+     "title": "Vaccinated responder",
+     "points": ["Anti-HBs 10 or more documented", "No HBIG, no booster", "Document and reassure"]
+    }
+   }
+  },
+  {
+   "title": "Counselling carriers without stigma",
+   "tx": "**Carrier counselling** covers household vaccination, not sharing razors or toothbrushes, safe sex until partners immunise, blood donation exclusion, and reassurance that casual contact, food sharing and work do not transmit. Alcohol avoidance and periodic liver monitoring complete chronic care. Stigma, not infectivity, is usually the heavier daily burden services must treat.",
+   "say": "Counselling protects households without exiling people. Vaccinate contacts, separate razors, defer blood donation, reassure on food and work. Add liver monitoring and alcohol avoidance. Stigma usually outweighs infectivity as daily burden.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Advise", "Reassure"],
+    "rows": [
+     ["Vaccinate household contacts", "Casual contact is safe"],
+     ["Never share razors or toothbrushes", "Sharing food is safe"],
+     ["No blood donation", "Normal work and school continue"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
