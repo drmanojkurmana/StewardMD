@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "phy-gas-transport",
+  "subject": "physiology",
+  "title": "The Oxygen-Haemoglobin Dissociation Curve, P50, and the Bohr Effect",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Because oxygen possesses poor solubility in aqueous blood plasma, over ninety-eight percent of oxygen in circulating blood is carried bound chemically to haemoglobin. The relationship between oxygen partial pressure and percentage saturation of haemoglobin yields the classic S-shaped **oxygen-haemoglobin dissociation curve**.",
+      "say": "The oxygen-haemoglobin dissociation curve describes how oxygen binds to haemoglobin across physiological partial pressures.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Physiological Benchmark",
+          "Significance in Gas Transport"
+        ],
+        "rows": [
+          [
+            "Hüfner Constant",
+            "1.34 mL O2 per gram pure Hb",
+            "Maximal theoretical oxygen carrying capacity per gram"
+          ],
+          [
+            "Normal Haemoglobin Concentration",
+            "15 g / dL whole blood",
+            "Circulating carrier protein concentration in healthy adult"
+          ],
+          [
+            "Arterial Oxygen Content (CaO2)",
+            "~20.1 mL O2 / dL",
+            "Sum of haemoglobin-bound and physically dissolved oxygen"
+          ],
+          [
+            "Venous Oxygen Content (CvO2)",
+            "~15.0 mL O2 / dL",
+            "Residual oxygen after resting peripheral tissue extraction (~5 mL/dL)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The distinctive sigmoidal configuration of the curve reflects **positive cooperativity** among the four subunit haem groups of the tetrameric haemoglobin molecule. When the first haem group binds an oxygen molecule, it shifts the quaternary conformation from the tense deoxygenated state to the relaxed oxygenated state, progressively increasing affinity for subsequent oxygen molecules.",
+      "say": "Positive cooperativity among the four subunits creates a sigmoidal curve, increasing haemoglobin affinity as each oxygen binds.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tense State (T-State)",
+          "points": [
+            "Deoxygenated haemoglobin quaternary structure",
+            "Constrained by inter-subunit salt bridges",
+            "Low affinity for oxygen molecules",
+            "Stabilized by 2,3-BPG, H+, and elevated CO2"
+          ]
+        },
+        "right": {
+          "title": "Relaxed State (R-State)",
+          "points": [
+            "Oxygenated haemoglobin quaternary structure",
+            "Salt bridges ruptured; central cavity narrows",
+            "High affinity for oxygen molecules (~500× higher)",
+            "Dominates in pulmonary capillary beds"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The standard physiological measure of haemoglobin affinity for oxygen is the **P50 value**, defined as the oxygen partial pressure required to achieve fifty percent saturation of haemoglobin. Under normal standard physiological conditions of pH seven point four, carbon dioxide tension forty millimetres of mercury, and temperature thirty-seven degrees Celsius, normal P50 measures twenty-six point eight millimetres of mercury.",
+      "say": "P50 is the oxygen partial pressure producing fifty percent haemoglobin saturation, normally twenty-six point eight millimetres of mercury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Increased P50 (Right Shift)",
+          "points": [
+            "P50 exceeds 27 mmHg (e.g., 30 to 35 mmHg)",
+            "Decreased haemoglobin affinity for oxygen",
+            "Facilitates unloading of oxygen at higher tissue PO2",
+            "Stimulated by acidosis, hypercapnia, fever, and 2,3-BPG"
+          ]
+        },
+        "right": {
+          "title": "Decreased P50 (Left Shift)",
+          "points": [
+            "P50 falls below 26 mmHg (e.g., 18 to 22 mmHg)",
+            "Increased haemoglobin affinity for oxygen",
+            "Holds oxygen tightly; retards peripheral release",
+            "Triggered by alkalosis, hypothermia, low 2,3-BPG, HbF"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A physiological rightward shift of the dissociation curve signifies decreased oxygen affinity, facilitating the unloading of oxygen to metabolically active peripheral tissues. Conditions promoting a **rightward shift** include acidosis with decreased pH, hypercapnia, elevated body temperature, and increased concentrations of erythrocyte 2,3-bisphosphoglycerate.",
+      "say": "A rightward curve shift lowers oxygen affinity, aiding oxygen release in exercising tissues with acidosis, heat, and high carbon dioxide.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "active",
+            "label": "Active Metabolizing Muscle: Generates Lactic Acid, CO2, and Heat"
+          },
+          {
+            "id": "shift",
+            "label": "Rightward Shift of Dissociation Curve: P50 Rises Above 27 mmHg"
+          },
+          {
+            "id": "unload",
+            "label": "Haemoglobin Readily Releases O2 into Capillaries at Higher PO2"
+          },
+          {
+            "id": "perf",
+            "label": "Tissue Oxygen Delivery Enhanced Without Requiring Severe Hypoxia"
+          }
+        ],
+        "edges": [
+          [
+            "active",
+            "shift"
+          ],
+          [
+            "shift",
+            "unload"
+          ],
+          [
+            "unload",
+            "perf"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The specific physiological mechanism whereby increasing carbon dioxide tension and hydrogen ion concentration lowers haemoglobin affinity for oxygen is designated the **Bohr effect**. When hydrogen ions bind specific histidine residues and carbon dioxide forms carbamino groups on globin chains, salt bridges stabilize the low-affinity deoxygenated tense state.",
+      "say": "The Bohr effect lowers oxygen affinity when hydrogen ions and carbon dioxide bind globin, releasing oxygen to hard-working tissues.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "co2",
+            "label": "Metabolic Tissue Produces CO2 -> Hydrated by CA to H+ and HCO3-"
+          },
+          {
+            "id": "bind",
+            "label": "H+ Binds Deoxy-Hb Histidine Residues; CO2 Forms Carbamino Compounds"
+          },
+          {
+            "id": "salt",
+            "label": "Stabilization of Inter-Subunit Salt Bridges Locks T-State Conformation"
+          },
+          {
+            "id": "bohr",
+            "label": "Bohr Effect: Oxygen Affinity Decreases, Driving O2 Offloading"
+          }
+        ],
+        "edges": [
+          [
+            "co2",
+            "bind"
+          ],
+          [
+            "bind",
+            "salt"
+          ],
+          [
+            "salt",
+            "bohr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, a leftward shift of the dissociation curve indicates increased oxygen affinity and tighter binding, characterized by a lower P50. Triggers producing a **leftward shift** include systemic alkalosis, hypothermia, decreased 2,3-BPG levels in banked stored blood, and the presence of fetal haemoglobin or carboxyhaemoglobin.",
+      "say": "A leftward shift increases oxygen affinity and reduces P50, seen with alkalosis, hypothermia, fetal haemoglobin, and banked blood.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Direction of Shift",
+          "Effect on P50",
+          "Precipitating Physiological and Clinical Factors"
+        ],
+        "rows": [
+          [
+            "Right Shift (Decreased Affinity)",
+            "P50 Increases (> 27 mmHg)",
+            "High H+ (acidosis), High CO2, High Temperature, High 2,3-BPG, Exercise"
+          ],
+          [
+            "Left Shift (Increased Affinity)",
+            "P50 Decreases (< 26 mmHg)",
+            "Low H+ (alkalosis), Low CO2, Hypothermia, Low 2,3-BPG, HbF, CO poisoning"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fetal haemoglobin possesses a significantly higher oxygen affinity than adult haemoglobin, yielding a pronounced left-shifted curve. Because gamma globin chains possess a neutral serine residue instead of a positively charged histidine at position one hundred forty-three, **fetal haemoglobin** binds 2,3-BPG poorly, enabling efficient transplacental oxygen extraction from maternal blood.",
+      "say": "Fetal haemoglobin binds 2,3-BPG poorly due to gamma chains, shifting the curve left to draw oxygen across the placenta.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alpha1-antitrypsin-lung-disease-fig1.webp",
+        "alt": "Genetic variants and gas transport",
+        "caption": "Genetic globin variations and structural alterations impacting oxygen-carrying dynamics."
+      }
+    },
+    {
+      "tx": "The upper plateau of the curve above sixty millimetres of mercury provides a broad safety margin for pulmonary oxygen loading. Even if alveolar oxygen tension drops from one hundred to seventy millimetres of mercury, arterial haemoglobin remains over ninety percent saturated, defending systemic tissue oxygenation against moderate **environmental hypoxaemia**.",
+      "say": "The upper flat plateau ensures that haemoglobin stays over ninety percent saturated even if alveolar oxygen tension drops substantially.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Oxygen saturation curves and hypoxia",
+        "caption": "Arterial oxygen saturation plateaus and clinical thresholds for hypoxaemic decompensation."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
