@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-innate-antigens",
+  "subject": "microbiology",
+  "title": "Innate and Acquired Immunity, Active and Passive Immunity and Adjuvants",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Innate immunity** is preformed and immediate: skin and mucosal barriers, gastric acid and lysozyme, complement alternative pathway, phagocytes, NK cells and pattern recognition receptors reading microbial signatures (PAMPs) through Toll like receptors. It has no memory and no specificity beyond patterns, yet decides most microbial encounters before adaptive immunity wakes, and its defects present as defined infectious phenotypes.",
+      "say": "Born ready, pattern specific, memory free: innate immunity fights tonight's invasion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Innate components",
+          "points": [
+            "Barriers and secretions",
+            "Complement and acute phase proteins",
+            "Neutrophils, macrophages, NK cells",
+            "TLRs and other pattern receptors"
+          ]
+        },
+        "right": {
+          "title": "Innate character",
+          "points": [
+            "Minutes to hours response",
+            "No clonal expansion",
+            "Same response on re exposure",
+            "Instructs adaptive response via dendritic cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acquired (adaptive) immunity** answers with specific receptors built by gene rearrangement: B cell antibodies (humoral) and T cell receptors (cellular), clonal expansion over days, and memory that accelerates and strengthens re encounters. Primary responses lag and lead with IgM; secondary responses are faster, higher and IgG dominated, the kinetics every vaccine schedule exploits.",
+      "say": "Adaptive immunity is slow first and swift forever after; memory is its signature.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary response",
+          "points": [
+            "Lag of days",
+            "IgM first, modest titre",
+            "Affinity matures in germinal centres",
+            "Memory cells generated"
+          ]
+        },
+        "right": {
+          "title": "Secondary response",
+          "points": [
+            "Lag short, titre high and sustained",
+            "IgG dominant, higher affinity",
+            "Booster vaccinations exploit it",
+            "Memory B and T cells persist years"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Active immunity** is self made after infection or vaccination (slow, durable, memory bearing), while **passive immunity** is borrowed antibody: maternal IgG across placenta and IgA in milk, immunoglobulin preparations, monoclonal antibodies and antitoxins, immediate but months brief and memory free. Comparing their onset and duration answers a permanent examination duo.",
+      "say": "Active is earned slowly and kept; passive arrives tonight and leaves by season's end.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Active immunity",
+          "points": [
+            "After infection or vaccination",
+            "Onset weeks, duration years to life",
+            "Memory and booster responses",
+            "Herd effects in populations"
+          ]
+        },
+        "right": {
+          "title": "Passive immunity",
+          "points": [
+            "Maternal IgG and breast milk IgA",
+            "Immunoglobulin and monoclonal prophylaxis",
+            "Immediate, weeks to months duration",
+            "No memory; repeat for continued cover"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Adjuvants** are vaccine ingredients that wake innate immunity so adaptive responses amplify: alum (depot and inflammasome traditions), oil emulsions, TLR agonists (MPL, CpG), and saponin systems in modern subunit vaccines, without which purified antigens often tolerise or whisper. Adjuvant selection explains why subunit vaccines protect at all and why reactogenicity profiles differ by product.",
+      "say": "Pure antigen whispers; adjuvant knocks on the innate door so the lesson is heard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adjuvant roster",
+          "points": [
+            "Alum: oldest, antibody biased",
+            "MF59 and AS03 oil emulsions: influenza",
+            "AS04 (MPL plus alum): HPV and hepatitis B",
+            "AS01 (saponin plus MPL): shingles and malaria"
+          ]
+        },
+        "right": {
+          "title": "Adjuvant effects",
+          "points": [
+            "Dendritic cell activation and trafficking",
+            "Higher titres, dose sparing",
+            "Broader and longer responses in elderly",
+            "Local reactogenicity the visible price"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Herd immunity** emerges when immune proportion interrupts transmission chains, protecting the unvaccinable (newborns, chemotherapy patients) at thresholds set by R0 and vaccine effectiveness (measles demanding mid ninety percents). It is a community pharmacokinetics of immunity, eroded by clustering of refusal even where average coverage looks adequate.",
+      "say": "Averages hide pockets; measles finds the unimmune cluster, not the national mean.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "vacc", "label": "Coverage rises in a community" },
+          { "id": "chains", "label": "Transmission chains interrupt" },
+          { "id": "protect", "label": "Unvaccinable protected indirectly" },
+          { "id": "cluster", "label": "Refusal clusters reopen chains locally" }
+        ],
+        "edges": [["vacc", "chains"], ["chains", "protect"], ["protect", "cluster"]]
+      }
+    },
+    {
+      "tx": "**Pattern recognition** deserves its mechanisms: TLR4 reads LPS, TLR2 peptidoglycan and lipoteichoic acid, TLR5 flagellin, TLR3, 7, 8 and 9 read nucleic acids in endosomes, NLRs and RIG like receptors patrol cytosol, and mannose receptors and scavenger pathways assist phagocytosis. Their signalling (MyD88, NF kappa B) writes cytokine weather the cytokine lesson spends.",
+      "say": "Each microbial signature has a named reader; the readers write the cytokine weather.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surface TLRs",
+          "points": [
+            "TLR4 LPS, TLR2 lipoproteins",
+            "TLR5 flagellin, TLR1 6 partners",
+            "CD14 assists LPS sensing",
+            "Defects: pyogenic infection phenotypes"
+          ]
+        },
+        "right": {
+          "title": "Internal sensors",
+          "points": [
+            "Endosomal TLR3 7 8 9: viral nucleic acids",
+            "NLRP3 inflammasome: IL 1 beta release",
+            "RIG MDA5: cytosolic viral RNA",
+            "cGAS STING: cytosolic DNA"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phagocyte killing machinery** bridges to immunodeficiency: ingestion, phagolysosome fusion, oxidative burst (NADPH oxidase superoxide), nitric oxide and granule enzymes, with opsonins (IgG Fc, C3b) multiplying grip. Chronic granulomatous disease knocks out the burst; leukocyte adhesion deficiency stops arrival; each defect's organism roster (catalase positive bacteria and fungi) is mechanism read clinically.",
+      "say": "Arrive, grip, engulf, burn: each verb is a named immunodeficiency when missing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Killing steps",
+          "points": [
+            "Chemotaxis and adhesion (integrins)",
+            "Opsonised ingestion (Fc and complement receptors)",
+            "Phagolysosome fusion",
+            "Oxidative burst and granule enzymes"
+          ]
+        },
+        "right": {
+          "title": "Defect phenotypes",
+          "points": [
+            "LAD: no pus, delayed cord separation",
+            "CGD: catalase positive abscesses, granulomas",
+            "Chediak Higashi: giant granules, silvery hair",
+            "Neutropenia: mucosal and skin sepsis tempo"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acute phase response** systemises innate output: IL 1, IL 6 and TNF from macrophages instruct hepatic CRP, fibrinogen, ferritin and serum amyloid A, fever via hypothalamic prostaglandins, and marrow neutrophilia, giving clinicians CRP and procalcitonin as its gauges. These mediators become sepsis physiology when the pattern response loses its local address.",
+      "say": "CRP is the liver reporting macrophage cytokine weather; sepsis is that weather gone national.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute phase cast",
+          "points": [
+            "Positive: CRP, fibrinogen, ferritin, SAA",
+            "Negative: albumin and transferrin fall",
+            "IL 6 the principal hepatic instructor",
+            "Fever and neutrophilia accompany"
+          ]
+        },
+        "right": {
+          "title": "Clinical gauges",
+          "points": [
+            "CRP kinetics over days, not minutes",
+            "Procalcitonin bacterial leaning (imperfect)",
+            "ESR rides fibrinogen slowly",
+            "Patterns assist, never replace, cultures"
+          ]
+        }
+      }
+    }
+  ]
+}
