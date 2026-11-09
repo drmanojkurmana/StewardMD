@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-clostridia-anaerobes",
+  "subject": "microbiology",
+  "title": "Nocardia, Modified Acid-Fast Staining and Actinomycetes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nocardia** species are aerobic branching filamentous bacteria from soil and decaying matter, weakly gram positive beaded filaments fragmenting to rods, **modified acid fast** positive (mycolic acids shorter than mycobacteria, decolorised by 1 percent sulfuric not strong acid alcohol), inhaled to lungs of immunocompromised hosts and inoculated to skin of gardeners.",
+      "say": "Branching, aerobic, weakly acid fast: Nocardia sits between Actinomyces and tuberculosis on the bench.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Organism portrait",
+          "points": [
+            "Aerial hyphae chalky colonies days later",
+            "Beaded branching filaments fragmenting",
+            "Modified ZN with 1 percent acid positive",
+            "Soil, dust and water biofilms source"
+          ]
+        },
+        "right": {
+          "title": "Host terrain",
+          "points": [
+            "Steroids, transplant, HIV low CD4, anti TNF",
+            "Chronic lung disease (bronchiectasis, COPD)",
+            "Alcoholism and diabetes contributions",
+            "Often no exposure drama remembered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nocardiosis syndromes** run pulmonary (subacute pneumonia, nodules, cavitation, empyema mimicking TB and malignancy), disseminated (brain abscesses classically multiple, skin lesions), cutaneous (sporotrichoid lymphocutaneous, mycetoma grains), and eye, with brain imaging mandatory in pulmonary disease of the immunocompromised because silent abscess changes duration.",
+      "say": "Lung Nocardia earns a brain scan; silent abscesses set the treatment calendar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pulmonary portrait",
+          "points": [
+            "Weeks of cough, fever, weight loss",
+            "Nodules and cavitation on imaging",
+            "Pleural involvement common",
+            "TB and fungal mimics delay"
+          ]
+        },
+        "right": {
+          "title": "Dissemination",
+          "points": [
+            "Brain abscess single or multiple",
+            "Skin nodules and abscesses",
+            "Bacteraemia in catheter hosts",
+            "Species complexes differ in virulence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nocardia therapy** anchors on co trimoxazole (sulfonamides historically) with susceptibility guided partners (imipenem, amikacin, linezolid near universal, ceftriaxone, minocycline), combinations in severe and CNS disease, six to twelve months duration, longer in immunocompromise, species predicting patterns (farcinica resistant reputation).",
+      "say": "Sulphonamide anchor, combination for brain, year for the immunocompromised: Nocardia therapy arithmetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regimen logic",
+          "points": [
+            "Co trimoxazole backbone high dose",
+            "Add imipenem or amikacin severe and CNS",
+            "Linezolid reliable but toxicity long courses",
+            "Susceptibility testing reference advised"
+          ]
+        },
+        "right": {
+          "title": "Duration logic",
+          "points": [
+            "Cutaneous months shorter",
+            "Pulmonary 6 to 12 months",
+            "CNS and immunocompromised 12 plus",
+            "Immune restoration part of therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Laboratory handling for Nocardia** needs warning the bench: slow growth on routine media (2 days to 2 weeks), colonies dismissed as diphtheroid or contaminant, selective media (Thayer Martin even, paraffin baiting heritage), hold cultures in chronic lung and immunocompromised specimens, modified ZN requested explicitly.",
+      "say": "Telephone the laboratory or Nocardia is discarded as skin before it grows.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "suspect", "label": "Immunocompromised pneumonia or abscess" },
+          { "id": "warn", "label": "Laboratory warned: hold cultures, modified ZN" },
+          { "id": "grow", "label": "Chalky colonies in days to weeks" },
+          { "id": "species", "label": "MALDI and sequencing speciation and referral susceptibilities" }
+        ],
+        "edges": [["suspect", "warn"], ["warn", "grow"], ["grow", "species"]]
+      }
+    },
+    {
+      "tx": "**Mycetoma fork** (actinomycetoma by Nocardia, Streptomyces and Actinomadura versus eumycetoma by fungi) reads grains by colour and filaments by width and acid fastness, therapy diverging antibiotics versus antifungals plus surgery. Tropical foot swelling with sinuses earns grain examination before empirical choices.",
+      "say": "Grains again: thin acid fast filaments take antibiotics, broad fungal hyphae take antifungals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Actinomycetoma",
+          "points": [
+            "Nocardia brasiliensis and kin (gardener skin)",
+            "White yellow grains, thin filaments",
+            "Co trimoxazole based combinations",
+            "Faster progression than fungal usually"
+          ]
+        },
+        "right": {
+          "title": "Eumycetoma",
+          "points": [
+            "Madurella black grains and others",
+            "Broad septate hyphae in tissue",
+            "Azole therapy and surgery",
+            "Bone involvement late in both"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rhodococcus, Gordonia and Tsukamurella** are Nocardia's aerobic acid fast cousins (Rhodococcus equi foal pathogen causing cavitary pneumonia in advanced HIV, weakly acid fast coccobacilli, combination therapy), aerobic actinomycete bench reports increasingly speciated by MALDI and sequencing.",
+      "say": "Rhodococcus in advanced HIV cavitates like TB and Nocardia combined in differential.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rhodococcus",
+          "points": [
+            "Salmon pink colonies with age",
+            "Cavitary upper lobe pneumonia HIV",
+            "Weak acid fast coccobacilli",
+            "Macrolide rifampin containing combinations"
+          ]
+        },
+        "right": {
+          "title": "Bench cousins",
+          "points": [
+            "Gordonia device and sputum isolates",
+            "Tsukamurella catheter infections",
+            "Dietzia and others rare",
+            "Reference identification for sterile sites"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Modified acid fast technique** (1 percent sulfuric acid decoloriser instead of acid alcohol, or Kinyoun weak protocols) separates Nocardia and Rhodococcus from fully acid fast mycobacteria, a single reagent dilution carrying genus weight, and Gram stain beading adds the first clue from sputum.",
+      "say": "Weaker acid, weaker mycolic wall: one dilution separates Nocardia from tuberculosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stain ladder",
+          "points": [
+            "Full ZN acid alcohol: Mycobacterium",
+            "Modified 1 percent sulfuric: Nocardia, Rhodococcus",
+            "Legionella micdadei tissue modified positive curiosity",
+            "Cryptosporidium modified ZN on stool (parasite module)"
+          ]
+        },
+        "right": {
+          "title": "Bench sequence",
+          "points": [
+            "Beaded gram positive filaments noticed",
+            "Modified ZN requested same day",
+            "Aerobic incubation extended",
+            "HIV and immune status asked from chart"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Streptomyces and Actinomadura** complete actinomycetes (soil filaments, mycetoma and rare invasive), Streptomyces famous as antibiotic producers (streptomycin, tetracyclines, macrolides ancestry) infecting seldom. The order that medicated the century occasionally needs its own medicines.",
+      "say": "Streptomyces gave the antibiotic era and occasionally asks for it back.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Streptomyces",
+          "points": [
+            "Soil filamentous, earthy geosmin",
+            "Antibiotic producer genus historically",
+            "Mycetoma and rare invasive reports",
+            "Colonies leathery with aerial spores"
+          ]
+        },
+        "right": {
+          "title": "Actinomadura",
+          "points": [
+            "Madurae and pelletieri mycetomas (red grains pelletieri)",
+            "Thermophilic compost kin (farmer lung antigens separate)",
+            "Susceptibility guided long therapy",
+            "Geography tropical belt"
+          ]
+        }
+      }
+    }
+  ]
+}
