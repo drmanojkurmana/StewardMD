@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-infections",
+ "subject": "surgery",
+ "title": "Surgical Site Infections, Cellulitis, and Necrotising Fasciitis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Infections occurring at the operative incision within thirty days of a surgical procedure are classified as a **surgical site infection**. If an artificial prosthetic implant remains in situ, the monitoring window extends to ninety days. Accounting for twenty percent of all healthcare-associated infections, surgical site infections increase postoperative morbidity, prolong hospital stay, and elevate healthcare costs. The primary microbial culprit across most surgical specialties remains Staphylococcus aureus.",
+   "say": "Infections developing at the surgical incision within thirty days are classified as surgical site infections. They represent one fifth of all hospital infections, with Staphylococcus aureus remaining the leading pathogen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification Tier",
+     "Anatomical Plane Involved",
+     "Diagnostic Criteria",
+     "Primary Management"
+    ],
+    "rows": [
+     [
+      "Superficial incisional",
+      "Skin and subcutaneous adipose tissue",
+      "Purulent drainage, erythema, warmth, pain",
+      "Suture removal, wound opening, washouts"
+     ],
+     [
+      "Deep incisional",
+      "Deep fascia and muscular layers",
+      "Deep fascial debridement, purulent discharge",
+      "Surgical re-exploration, fascial washouts"
+     ],
+     [
+      "Organ or space",
+      "Any anatomical cavity opened or manipulated",
+      "Radiological abscess, organ contamination",
+      "CT-guided percutaneous drainage or re-laparotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superficial dermal infections that spread diffusely through subcutaneous tissue without suppurative collections represent **cellulitis**. Typically triggered by beta-haemolytic streptococci or Staphylococcus aureus entering through small cutaneous breaks, cellulitis presents with poorly demarcated, spreading erythema, localized heat, oedema, and marked tenderness. Linear erythematous streaks extending toward regional lymph nodes indicate ascending lymphangitis, signaling the need for prompt intravenous antibiotic therapy targeting Gram-positive cocci.",
+   "say": "Cellulitis is a non-suppurative infection spreading diffusely through subcutaneous layers. Patients exhibit spreading erythema, warmth, and pain, requiring prompt intravenous antibiotics targeting streptococci and staphylococci.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cellulitis-fig1.webp",
+    "alt": "Cellulitis dermal depth and clinical presentation.",
+    "caption": "Diagram illustrating subcutaneous inflammation and dermal erythema in cellulitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When local tissue necrosis leads to a focal, walled-off accumulation of purulent exudate, the lesion is termed an **abscess**. Clinically, an abscess is characterized by warmth, rubor, throbbing pain, and the cardinal sign of fluctuance elicited by alternating bimanual palpation. Because the surrounding fibrous pseudocapsule prevents systemic antibiotics from penetrating into the avascular purulent cavity, systemic antibiotic monotherapy is ineffective without definitive source control.",
+   "say": "An abscess is a localized, walled-off accumulation of pus exhibiting fluctuance on palpation. Because the thick pseudocapsule blocks antibiotic penetration, physical drainage is mandatory for cure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cellulitis",
+     "points": [
+      "Diffuse, non-fluctuant spreading erythema",
+      "Poorly demarcated advancing margins",
+      "Absence of liquified purulent cavity",
+      "Managed with systemic antibiotics alone"
+     ]
+    },
+    "right": {
+     "title": "Cutaneous Abscess",
+     "points": [
+      "Focal, fluctuant, tender swelling",
+      "Surrounded by an indurated inflammatory wall",
+      "Central liquefaction and pus accumulation",
+      "Requires mandatory surgical incision and drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive treatment of any fluctuant abscess is prompt **incision and drainage**, classically executed utilizing the Hilton method. An incision is made along relaxed skin tension lines over the point of maximal fluctuance. Closed sinus forceps are introduced into the cavity and opened widely in multiple directions to break down all internal loculations, followed by thorough saline irrigation and loose ribbon gauze packing.",
+   "say": "Definitive management requires incision and drainage via the Hilton method. Surgeons make an incision along tension lines and insert sinus forceps to disrupt loculations and evacuate all pus.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-incision-and-drainage-abscess.webp",
+    "alt": "Incision and drainage of an abscess using the Hilton method.",
+    "caption": "Incision and drainage of an abscess demonstrating loculation breakdown. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A rapidly progressive, life-threatening bacterial destruction of subcutaneous tissue and superficial fascia is known as **necrotising fasciitis**. The disease spreads along avascular fascial planes with alarming speed while initially sparing overlying skin and deeper muscle. Patients display severe systemic toxicity, marked tachycardia, and the pathognomonic clinical feature of extreme pain out of proportion to the mild overlying cutaneous erythema.",
+   "say": "Necrotising fasciitis is a surgical emergency involving rapid destruction of subcutaneous fascia. Patients exhibit profound toxicity and severe pain that is strikingly out of proportion to early skin findings.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Minor puncture, surgical cut, or perianal crypt infection"
+     },
+     {
+      "id": "spread",
+      "label": "Rapid bacterial proliferation along avascular superficial fascia"
+     },
+     {
+      "id": "thromb",
+      "label": "Microvascular thrombosis of perforating nutrient skin vessels"
+     },
+     {
+      "id": "necro",
+      "label": "Skin bullae, sensory anaesthesia, and patchy cutaneous gangrene"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "spread"
+     ],
+     [
+      "spread",
+      "thromb"
+     ],
+     [
+      "thromb",
+      "necro"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microbiologically, necrotising soft tissue infections are stratified into two primary distinct classes. **Type I necrotising fasciitis** is polymicrobial, representing synergistic co-infection by mixed aerobes and anaerobes such as Escherichia coli, Klebsiella, Bacteroides, and Peptostreptococcus, characteristically occurring in elderly diabetics. In contrast, Type II is monomicrobial, caused by virulent Group A beta-haemolytic Streptococcus pyogenes or Staphylococcus aureus, occurring even in young, healthy hosts.",
+   "say": "Necrotising infections are stratified microbiologically. Type one is polymicrobial, mixing aerobes and anaerobes in diabetic hosts, whereas type two is monomicrobial, driven by group A streptococci.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I (Polymicrobial)",
+     "points": [
+      "Mixed aerobes and obligate anaerobes",
+      "Bacteroides, E. coli, enterococci, Peptostreptococcus",
+      "Predominates in diabetics and obese patients",
+      "Often produces subcutaneous gas on radiography"
+     ]
+    },
+    "right": {
+     "title": "Type II (Monomicrobial)",
+     "points": [
+      "Group A Streptococcus pyogenes or MRSA",
+      "May occur in young, immunocompetent patients",
+      "Associated with streptococcal toxic shock syndrome",
+      "Rarely produces gas in soft tissues"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To aid early bedside detection of necrotising soft tissue infections, clinicians utilize the **LRINEC score**, based on routine laboratory parameters. A score of six or higher raises strong suspicion of necrotising infection, while eight or above indicates high probability. Key laboratory variables include elevated C-reactive protein above one hundred and fifty milligrams per litre, leukocytosis, anaemia, hyponatraemia, hyperglycemia, and elevated serum creatinine reflecting acute end-organ hypoperfusion.",
+   "say": "Clinicians use the LRINEC score to identify necrotising fasciitis early. A score of six or higher raises suspicion, incorporating elevated C-reactive protein, leukocytosis, and hyponatraemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Variable",
+     "Threshold Value",
+     "Assigned Score Points"
+    ],
+    "rows": [
+     [
+      "C-reactive protein",
+      ">= 150 mg/L",
+      "4 points"
+     ],
+     [
+      "Total white cell count",
+      "15 to 25 x 10^9/L (or > 25 x 10^9/L)",
+      "1 point (or 2 points)"
+     ],
+     [
+      "Haemoglobin",
+      "11 to 13.5 g/dL (or < 11 g/dL)",
+      "1 point (or 2 points)"
+     ],
+     [
+      "Serum sodium",
+      "< 135 mmol/L",
+      "2 points"
+     ],
+     [
+      "Serum creatinine",
+      "> 141 micromol/L (1.6 mg/dL)",
+      "2 points"
+     ],
+     [
+      "Serum glucose",
+      "> 10 mmol/L (180 mg/dL)",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate management of suspected necrotising fasciitis relies on aggressive physiological resuscitation, broad-spectrum intravenous antimicrobials, and urgent, radical **surgical debridement**. Surgeons extend fascial incisions until healthy, adherent, bleeding tissue is encountered in all directions. Non-viable fascia separates effortlessly along the dishwater-fluid plane under finger dissection; patients require mandatory planned operative re-exploration within twenty-four hours to excise advancing necrosis.",
+   "say": "Suspected necrotising fasciitis mandates urgent radical surgical debridement. Surgeons resect all non-viable tissue until bleeding margins are reached, followed by planned re-exploration within twenty-four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "recog",
+      "label": "Early recognition: pain out of proportion and high LRINEC score"
+     },
+     {
+      "id": "resusc",
+      "label": "Aggressive crystalloids, blood cultures, and broad-spectrum antibiotics"
+     },
+     {
+      "id": "or",
+      "label": "Immediate emergency theatre: radical debridement of necrotic fascia"
+     },
+     {
+      "id": "relook",
+      "label": "Planned second-look re-exploration in theatre at 24 to 48 hours"
+     }
+    ],
+    "edges": [
+     [
+      "recog",
+      "resusc"
+     ],
+     [
+      "resusc",
+      "or"
+     ],
+     [
+      "or",
+      "relook"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 7"
+}

@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-wound-healing",
+ "subject": "surgery",
+ "title": "Phases of Wound Healing and Closure Intentions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Tissue injury initiates a tightly coordinated cascade known as the **phases of wound healing**, comprising haemostasis, inflammation, proliferation, and remodelling. Immediately following incision, vasoconstriction and platelet aggregation establish a temporary fibrin plug. Platelet degranulation releases key growth factors including platelet-derived growth factor and transforming growth factor beta, which signal circulating inflammatory leukocytes to migrate into the injured wound bed.",
+   "say": "Tissue injury initiates a coordinated biological cascade comprising haemostasis, inflammation, proliferation, and remodelling. Platelet aggregation establishes an immediate fibrin plug while releasing growth factors that recruit circulating inflammatory leukocytes to the wound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "haem",
+      "label": "Haemostasis (0 to 24 hours): platelet plug and fibrin matrix"
+     },
+     {
+      "id": "infl",
+      "label": "Inflammation (day 1 to 4): neutrophil and macrophage debridement"
+     },
+     {
+      "id": "prol",
+      "label": "Proliferation (day 4 to 21): granulation tissue and angiogenesis"
+     },
+     {
+      "id": "remo",
+      "label": "Remodelling (day 21 to 1 year): collagen maturation and cross-linking"
+     }
+    ],
+    "edges": [
+     [
+      "haem",
+      "infl"
+     ],
+     [
+      "infl",
+      "prol"
+     ],
+     [
+      "prol",
+      "remo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neutrophils arrive within the first twenty-four hours to phagocytose contaminating bacteria and cellular debris, releasing reactive oxygen species and proteolytic enzymes. Around forty-eight to seventy-two hours, circulating monocytes differentiate into **macrophages**, which serve as the primary orchestrators of subsequent tissue repair. Macrophages release cytokines that stimulate neoangiogenesis, recruit dermal fibroblasts, and direct the synthesis of temporary extracellular matrix components.",
+   "say": "Neutrophils arrive first to clear bacteria and debris. By day three, wound macrophages orchestrate repair by releasing cytokines that promote angiogenesis, attract fibroblasts, and stimulate extracellular matrix production.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neutrophil Phase (Day 1-2)",
+     "points": [
+      "Predominant cell type in early wound",
+      "Primary function is bacterial phagocytosis",
+      "Releases free radicals and proteases",
+      "Short lifespan with apoptosis"
+     ]
+    },
+    "right": {
+     "title": "Macrophage Phase (Day 3-5)",
+     "points": [
+      "Differentiated from blood monocytes",
+      "Master conductor of healing cascade",
+      "Releases VEGF, PDGF, and FGF",
+      "Essential for proliferative transition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The proliferative phase spans day four to day twenty-one, characterized by abundant **granulation tissue** filling the tissue defect. Fibroblasts migrate along the fibrin scaffold and synthesize predominantly type three collagen, while endothelial cells form delicate capillary buds under the drive of vascular endothelial growth factor. Concurrently, basal keratinocytes at the wound margins detach, migrate across the granulation bed, and re-establish epidermal continuity.",
+   "say": "The proliferative phase spans day four to day twenty-one, forming pink granulation tissue. Fibroblasts synthesize type three collagen while endothelial buds restore perfusion and epithelial cells restore epidermal continuity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/surgical-wound-healing-and-scarring-fig1.webp",
+    "alt": "Granulation tissue formation and wound healing biology.",
+    "caption": "Granulation tissue showing rich capillary loops and fibroblast proliferation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Maturation and remodelling represent the final phase of healing, extending from three weeks up to an entire year. During this interval, **collagen remodelling** gradually replaces delicate type three collagen with robust type one collagen bundles aligned along lines of mechanical stress. Wound tensile strength reaches approximately twenty percent of normal uninjured dermis at three weeks, plateauing at a maximum of eighty percent by three months.",
+   "say": "Remodelling extends from three weeks up to one year. Fibroblasts replace type three collagen with mature type one collagen bundles, achieving a maximum tensile strength of eighty percent of normal uninjured tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Healing Timepoint",
+     "Dominant Collagen",
+     "Tensile Strength (% Normal)",
+     "Key Biological Process"
+    ],
+    "rows": [
+     [
+      "Day 1 to 3",
+      "None (fibrin)",
+      "< 3%",
+      "Leukocyte recruitment and microbial clearance"
+     ],
+     [
+      "Day 7 to 14",
+      "Type III collagen",
+      "10%",
+      "Fibroplasia, angiogenesis, granulation formation"
+     ],
+     [
+      "Week 3",
+      "Type III to Type I transition",
+      "20%",
+      "Epithelial bridge complete, suture removal safe"
+     ],
+     [
+      "Month 3 onwards",
+      "Type I collagen",
+      "70% to 80%",
+      "Collagen cross-linking and scar flattening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical wounds closed by immediate re-approximation of clean, viable tissue margins heal by **primary intention**. This technique applies to elective operative incisions such as an appendicectomy or hernia repair where tissue loss is minimal and bacterial contamination is absent. Healing occurs rapidly with minimal granulation tissue, minimal epithelial migration distance, and a thin, aesthetically favorable linear scar with low risk of wound dehiscence.",
+   "say": "Wounds closed by direct re-approximation of viable cut edges heal by primary intention. Minimal tissue loss and prompt apposition ensure rapid healing with a neat, narrow scar and low complication rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Intention",
+     "points": [
+      "Margins approximated with sutures or staples",
+      "Minimal tissue loss or dead space",
+      "Negligible granulation tissue needed",
+      "Rapid epithelialisation within 48 hours"
+     ]
+    },
+    "right": {
+     "title": "Secondary Intention",
+     "points": [
+      "Wound edges remain widely separated",
+      "Significant tissue deficit or infection",
+      "Abundant granulation tissue fills cavity",
+      "Extensive wound contraction and broad scar"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When extensive tissue loss or significant purulent contamination precludes immediate edge opposition, wounds are left open to heal by **secondary intention**. The cavity gradually fills from the base upward with vascular granulation tissue. Specialized myofibroblasts containing alpha-smooth muscle actin anchor to surrounding collagen and contract, drawing the peripheral wound margins toward the centre while re-epithelialisation slowly advances from the cutaneous borders.",
+   "say": "Wounds with extensive tissue loss or infection are left open to heal by secondary intention. Granulation tissue fills the defect while specialized myofibroblasts contract the margins inward.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+    "alt": "Open traumatic wound left for debridement and granulation.",
+    "caption": "Surgical wound debridement for open wound management. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contaminated traumatic lacerations, animal bites, and purulent intra-abdominal wounds frequently receive initial debridement followed by **delayed primary closure**. The open wound is cleansed, packed with moist saline gauze or connected to negative pressure therapy for four to five days until microbial counts drop below critical thresholds and healthy pink granulation appears. The viable margins are subsequently approximated with sutures, successfully combining tissue safety with structural cosmesis.",
+   "say": "Heavily contaminated wounds are managed with delayed primary closure. The wound is debrided and dressed open for four days, then safely sutured once bacterial loads drop below critical thresholds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "deb",
+      "label": "Initial emergency debridement and wound toilet"
+     },
+     {
+      "id": "dress",
+      "label": "Moist dressing or subatmospheric sponge for 4 to 5 days"
+     },
+     {
+      "id": "eval",
+      "label": "Bedside check: clean pink granulation bed without pus"
+     },
+     {
+      "id": "close",
+      "label": "Delayed suture closure of wound margins in theatre"
+     }
+    ],
+    "edges": [
+     [
+      "deb",
+      "dress"
+     ],
+     [
+      "dress",
+      "eval"
+     ],
+     [
+      "eval",
+      "close"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating closure strategies ensures optimal surgical outcomes across diverse operative and emergency scenarios. While clean surgical incisions should consistently undergo immediate primary closure within hours, infected open cavities require deliberate open drainage to prevent necrotising collections. Selecting appropriate closure timing reduces deep **surgical site infections**, minimizes postoperative scar contractures, and avoids catastrophic wound dehiscence requiring secondary emergency laparotomy.",
+   "say": "Matching closure methods to wound contamination prevents deep space infections. Immediate closure suits clean incisions, whereas deliberate secondary or delayed closure prevents abscess formation in contaminated wounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Closure Method",
+     "Timing of Closure",
+     "Primary Indications",
+     "Complication Profile"
+    ],
+    "rows": [
+     [
+      "Primary closure",
+      "Immediate (0 to 6 hours)",
+      "Clean elective surgical cuts, fresh lacerations",
+      "Low infection, risk of trapped haematoma"
+     ],
+     [
+      "Secondary closure",
+      "Never sutured (heals by contraction)",
+      "Chronic abscesses, pressure ulcers, pilonidal sinus",
+      "Protracted healing, broad hypertrophic scar"
+     ],
+     [
+      "Delayed primary closure",
+      "Day 4 to 6 post-injury",
+      "Grossly contaminated trauma, perforated peritonitis",
+      "Requires secondary procedure, low SSI risk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 6"
+}
