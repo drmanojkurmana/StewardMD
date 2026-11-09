@@ -221,7 +221,7 @@ try {
     ok(await geo(OVER) === "", "1. runner: no horizontal overflow " + (await geo(OVER)) + at);
     if (land) {
       // the answer column can open with the IQoach card above the options: compare the stem's top with that column's first block
-      const two = await geo(`var q=R(RT.querySelector(".pn-q")), o=R(RT.querySelector(".pn-opts")), top=o.t; [].forEach.call(RT.querySelector(".pn-qw").children,function(c){ var b=R(c); if(b.w&&b.h&&b.l>=q.r-1&&b.t<top) top=b.t; }); return q.r <= o.l + 1 && Math.abs(q.t-top) < 4 ? "" : "stem "+q.l.toFixed(0)+".."+q.r.toFixed(0)+" top "+q.t.toFixed(0)+" options "+o.l.toFixed(0)+".."+o.r.toFixed(0)+" column top "+top.toFixed(0);`);
+      const two = await geo(`var q=R(RT.querySelector(".pn-q")), o=R(RT.querySelector(".pn-opts")), top=o.t; [].forEach.call(RT.querySelector(".pn-qw").children,function(c){ var b=R(c); if(b.w&&b.h&&b.l>=q.r-1&&b.t<top) top=b.t; }); var tg=RT.querySelector(".pn-yq-tags"), st=tg?Math.min(R(tg).t,q.t):q.t; return q.r <= o.l + 1 && Math.abs(st-top) < 4 ? "" : "stem "+q.l.toFixed(0)+".."+q.r.toFixed(0)+" top "+q.t.toFixed(0)+" options "+o.l.toFixed(0)+".."+o.r.toFixed(0)+" column top "+top.toFixed(0);`);
       ok(two === "", "D5. landscape runner: the stem left, the options right " + two + at);
     } else {
       const col = await geo(`var w=R(RT.querySelector(".pn-qw")).w; return w <= 720*Z+1 ? "" : w.toFixed(1)+" > "+(720*Z).toFixed(1);`);
