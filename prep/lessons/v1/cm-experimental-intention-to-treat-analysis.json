@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-experimental-intention-to-treat-analysis",
+ "subject": "community-medicine",
+ "module": "cm-experimental",
+ "title": "Intention to Treat, Trial Phases, Field and Community Trials, CONSORT and NNT",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Intention to treat keeps the random groups",
+   "tx": "**Intention to treat** analysis counts every participant in the group randomisation assigned, whatever treatment they actually received, completed or abandoned. Crossovers, dropouts and protocol breakers stay home. The principle preserves the comparability randomisation bought, so the estimate answers the practical question: what does offering this treatment achieve in real patients?",
+   "say": "Analyse as randomised, always. Crossovers, dropouts and protocol breakers stay in their assigned groups. That preserves the comparability randomisation bought and answers the practical question: what does offering this treatment achieve in real patients?",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intention to treat",
+     "points": ["Groups exactly as randomised", "Dropouts counted at home", "Estimates real world offering effect"]
+    },
+    "right": {
+     "title": "Per protocol",
+     "points": ["Only completers analysed", "Random comparability broken", "Estimates ideal condition effect"]
+    }
+   }
+  },
+  {
+   "title": "Why per protocol alone misleads",
+   "tx": "**Per protocol** analysis quietly rebuilds selection bias: patients who tolerate and complete treatment differ from those who quit through side effects or deterioration. Removing them flatters the drug and can reverse a trial's verdict. Journals therefore demand the randomised-groups analysis as primary, with completer analysis offered only as supporting evidence beside it.",
+   "say": "Completers are survivors, not samples. Patients who tolerate treatment differ from those who quit through side effects or decline, so deleting them flatters the drug. Randomised groups stay primary; completer analysis supports, never replaces.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Who vanishes in per protocol", "Distortion created"],
+    "rows": [
+     ["Patients with side effects", "Harms understated"],
+     ["Patients who deteriorate early", "Benefits overstated"],
+     ["Non adherent patients", "Real world effect lost"]
+    ]
+   }
+  },
+  {
+   "title": "Phases of a clinical trial",
+   "tx": "Drug trials advance through **phases**: phase I tests safety and dose in few healthy volunteers, phase II explores efficacy and side effects in patients, phase III compares against standard care in large randomised groups, and phase IV watches marketed use for rare or late harms. Skipping phase III evidence is the classic stem flaw.",
+   "say": "Four phases gate a drug. Safety and dose in few volunteers, early efficacy in patients, large randomised comparison against standard care, then marketed surveillance for rare late harms. Stems skipping the large comparison phase describe unfinished evidence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Phase I safety and dose"},
+     {"id": "b", "label": "Phase II efficacy signals"},
+     {"id": "c", "label": "Phase III randomised comparison"},
+     {"id": "d", "label": "Phase IV marketed surveillance"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Clinical, preventive and risk factor trials",
+   "tx": "**Preventive trials** test measures in healthy people, chiefly vaccines and chemoprophylaxis, while risk factor trials interrupt sequences toward disease by cutting cholesterol, smoking, hypertension or inactivity, singly or combined. Cessation experiments withdraw a suspected cause, and health service evaluation trials test delivery systems themselves. Each subtype keeps randomisation at its core.",
+   "say": "Trials sort by target. Clinical trials treat patients; preventive trials protect the healthy with vaccines or chemoprophylaxis; risk factor trials cut cholesterol, smoking, pressure or inactivity; service trials test delivery itself. Randomisation stays the shared core.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trial type", "Participants", "Example"],
+    "rows": [
+     ["Clinical", "Patients", "New drug against standard care"],
+     ["Preventive", "Healthy people", "Vaccine or chemoprophylaxis"],
+     ["Risk factor", "People with risk factors", "Cholesterol or smoking intervention"],
+     ["Health service evaluation", "Facilities or districts", "New delivery model"]
+    ]
+   }
+  },
+  {
+   "title": "Field trials protect healthy people at scale",
+   "tx": "A **field trial** enrols healthy individuals in the community rather than hospital patients, testing prevention where disease actually occurs. The 1946 Medical Research Council whooping cough trials across ten sites, and the Yugoslav typhoid vaccine trials that overturned animal evidence, are the quoted classics. Field logistics, not ward logistics, decide their success.",
+   "say": "Healthy volunteers in real communities define field trials. Ten site whooping cough vaccine trials and the Yugoslav typhoid trials, which overturned animal evidence, are the classics. Village logistics, not ward logistics, decide whether they succeed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical trial setting",
+     "points": ["Hospital patients enrolled", "Treatment of existing disease", "Ward logistics dominate"]
+    },
+    "right": {
+     "title": "Field trial setting",
+     "points": ["Healthy community members enrolled", "Prevention where disease occurs", "Field logistics dominate"]
+    }
+   }
+  },
+  {
+   "title": "Community trials randomise whole communities",
+   "tx": "A **community trial** allocates entire villages, towns or districts to intervention or control, suiting measures that only work community-wide, such as water fluoridation or mass media campaigns. Analysis must respect clustering, since neighbours resemble each other. When disease is rare with long natural history, even this design may need thousands followed for a decade.",
+   "say": "Whole communities become the unit here. Villages or districts receive fluoridation or media campaigns together, because individual allocation cannot contain such measures. Clustering shrinks effective sample size, and rare slow diseases still demand thousands followed for years.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Community trial consequence"],
+    "rows": [
+     ["Unit of allocation", "Village, town or district"],
+     ["Suits", "Fluoridation, mass campaigns"],
+     ["Analysis caution", "Clustering within communities"]
+    ]
+   }
+  },
+  {
+   "title": "CONSORT: reporting so trials can be judged",
+   "tx": "**CONSORT** standardises trial reporting through a checklist and a participant flow diagram tracking enrolment, allocation, follow-up and analysis counts. Readers can then see exactly how many were randomised, lost and analysed in each arm. A trial report missing its flow diagram hides attrition, the first place experienced appraisers look for trouble.",
+   "say": "Reporting has a standard. A checklist plus a flow diagram tracks enrolment, allocation, follow-up and analysis arm by arm. Missing flow diagrams hide attrition, which is exactly where experienced appraisers look first for trouble.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Assessed for eligibility"},
+     {"id": "b", "label": "Randomised to arms"},
+     {"id": "c", "label": "Followed up, losses shown"},
+     {"id": "d", "label": "Analysed, numbers stated"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Number needed to treat",
+   "tx": "The **number needed to treat** inverts the absolute risk reduction: treat 1 divided by that reduction, rounded up, to prevent one extra bad outcome. A fall from 20 percent to 15 percent events gives a reduction of 0.05 and a value of 20 patients. Unlike relative risk, it carries baseline risk inside it, so clinicians can quote effort per success.",
+   "say": "Invert the absolute gain. Event rates falling from twenty to fifteen percent give a reduction of five hundredths; one over that means twenty patients treated per success. Baseline risk rides inside this number, unlike relative risk, so clinicians can quote effort honestly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Control events", "Treatment events", "NNT"],
+    "rows": [
+     ["20 percent", "15 percent", "20 patients"],
+     ["10 percent", "9 percent", "100 patients"],
+     ["50 percent", "25 percent", "4 patients"]
+    ]
+   }
+  },
+  {
+   "title": "Non-randomised designs when trials cannot run",
+   "tx": "**Non-randomised trials** fill gaps where randomisation is impossible or unethical: uncontrolled series, natural experiments such as Snow's water companies, and before-after comparisons with or without controls. Their weakness is comparability, which no analysis fully restores. Examiners pair each named design with its characteristic bias rather than asking for definitions alone.",
+   "say": "Some questions forbid randomisation. Uncontrolled series, natural experiments and before-after comparisons fill the gap, at the price of comparability no analysis fully restores. Pair each design with its characteristic bias in answers, not definitions alone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Design", "Characteristic weakness"],
+    "rows": [
+     ["Uncontrolled trial", "No comparison group at all"],
+     ["Natural experiment", "Groups formed by circumstance, not chance"],
+     ["Before and after study", "Secular change mimics treatment effect"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

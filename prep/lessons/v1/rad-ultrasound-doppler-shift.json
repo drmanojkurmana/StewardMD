@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-ultrasound-doppler-shift",
+ "subject": "radiology",
+ "module": "rad-ultrasound",
+ "title": "Doppler Shift, Colour and Spectral Doppler, Elastography",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Doppler shift measures blood velocity",
+   "tx": "**Doppler shift** is the frequency change between transmitted sound and the echo returning from moving red cells. Flow toward the probe raises the returning frequency and flow away lowers it. The shift doubles when the beam meets flow head on and falls to zero at ninety degrees, which is why velocity readings demand an angle of sixty degrees or less with angle correction switched on.",
+   "say": "Doppler shift is the frequency change between transmitted sound and the echo returning from moving red cells. Flow toward the probe raises the returning frequency and flow away lowers it. The shift doubles head on and falls to zero at ninety degrees, so velocity readings demand an angle of sixty degrees or less with correction on.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sound meets moving cells"}, {"id": "b", "label": "Frequency shifts"}, {"id": "c", "label": "Angle corrected"}, {"id": "d", "label": "Velocity calculated"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Colour Doppler maps direction",
+   "tx": "**Colour Doppler** paints mean velocity and direction over the grey scale image, by convention red toward the probe and blue away from it. The mnemonic BART, blue away red toward, holds only for the default map and flips if the operator inverts the scale. A tight carotid stenosis shows a mosaic of mixed colours where fast turbulent flow wraps through several hues inside one pixel cluster.",
+   "say": "Colour Doppler paints mean velocity and direction over the grey scale image, by convention red toward the probe and blue away from it. The mnemonic blue away red toward holds only for the default map and flips if the operator inverts the scale. A tight carotid narrowing shows a mosaic where fast turbulent flow wraps through several hues.",
+   "vis": {"kind": "compare", "left": {"title": "Default colour map", "points": ["Red toward probe", "Blue away from probe", "Brightness rises with speed", "Mosaic means turbulence"]}, "right": {"title": "Operator traps", "points": ["Inverted map reverses meaning", "Gain too high bleeds colour", "Wall filter hides slow flow", "Angle changes apparent speed"]}}
+  },
+  {
+   "title": "Spectral Doppler waveforms",
+   "tx": "**Spectral Doppler** plots velocity against time inside a small sample gate, exposing the waveform shape that colour alone cannot show. Arteries supplying low resistance beds like brain, liver and kidney keep forward diastolic flow, while fasting limb arteries turn triphasic with a brief reversal. A tardus parvus waveform, slow rise with low peak, marks stenosis upstream of the sampled segment.",
+   "say": "Spectral Doppler plots velocity against time inside a small sample gate, exposing waveform shape that colour alone cannot show. Arteries feeding low resistance beds like brain, liver and kidney keep forward diastolic flow, while fasting limb arteries turn triphasic. A slow rising low peak waveform marks narrowing upstream of the sampled segment.",
+   "vis": {"kind": "table", "cols": ["Waveform", "Shape", "Meaning"], "rows": [["Low resistance", "Forward diastolic flow", "Brain, liver, kidney beds"], ["High resistance", "Triphasic with reversal", "Fasting limb arteries"], ["Tardus parvus", "Slow rise, low peak", "Stenosis upstream"], ["To and fro", "Bidirectional swing", "Pseudoaneurysm neck"]]}
+  },
+  {
+   "title": "Resistive index",
+   "tx": "**Resistive index** equals peak systolic velocity minus end diastolic velocity, divided by peak systolic velocity. Normal intrarenal values sit below 0.70, and a raised index appears in obstruction, rejection and medical renal disease without separating them alone. In the transplant kidney a value above 0.80 prompts a search for rejection, vein thrombosis or a tight arterial anastomosis rather than naming one cause.",
+   "say": "Resistive index equals peak systolic minus end diastolic velocity, divided by peak systolic velocity. Normal intrarenal values sit below zero point seven zero, and a raised index appears in obstruction, rejection and medical renal disease without separating them alone. In a transplant kidney above zero point eight zero prompts a search rather than naming one cause.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure peak systole"}, {"id": "b", "label": "Measure end diastole"}, {"id": "c", "label": "Divide the difference"}, {"id": "d", "label": "Compare with 0.70"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Aliasing on Doppler",
+   "tx": "**Aliasing** wraps the colour or spectral display when velocity exceeds the Nyquist limit, which is half the pulse repetition frequency. Fast flow through a stenotic aortic valve folds from the top of the scale to the bottom, faking reversed flow. Raising the scale, shifting the baseline, lowering probe frequency or switching to continuous wave Doppler, which has no Nyquist limit, unwraps the true peak.",
+   "say": "Aliasing wraps the colour or spectral display when velocity exceeds the Nyquist limit, half the pulse repetition frequency. Fast flow through a narrowed aortic valve folds from the top of the scale to the bottom, faking reversed flow. Raising the scale, shifting baseline or switching to continuous wave Doppler, which has no such limit, unwraps the true peak.",
+   "vis": {"kind": "compare", "left": {"title": "Aliasing clues", "points": ["Colour wraps red to blue", "Spectral peak folds over", "Occurs at highest speeds", "Seen in tight stenoses"]}, "right": {"title": "Corrections", "points": ["Raise velocity scale", "Shift the baseline", "Lower probe frequency", "Use continuous wave Doppler"]}}
+  },
+  {
+   "title": "Elastography measures stiffness",
+   "tx": "**Elastography** estimates tissue stiffness either by tracking how a push deforms tissue or by timing shear waves crossing it. Shear wave speed rises in fibrosis, so liver readings climb from near 5 kilopascals in health toward 12.5 and beyond in cirrhosis, guiding biopsy and variceal screening decisions. A stiff breast mass raises concern, while a soft lesion of equal grey scale appearance favours a benign cause.",
+   "say": "Elastography estimates tissue stiffness by tracking how a push deforms tissue or by timing shear waves crossing it. Shear wave speed rises in fibrosis, so liver readings climb from near five kilopascals in health toward twelve point five and beyond in cirrhosis. A stiff breast mass raises concern, while a soft lesion favours a benign cause.",
+   "vis": {"kind": "table", "cols": ["Liver state", "Stiffness guide", "Action hint"], "rows": [["Healthy liver", "Below 6 kilopascals", "Fibrosis unlikely"], ["Significant fibrosis", "8 to 12 kilopascals", "Stage further"], ["Cirrhosis range", "Above 12.5 kilopascals", "Variceal screening"], ["Acute hepatitis", "Falsely raised", "Repeat after recovery"]]}
+  },
+  {
+   "title": "Endoscopic and contrast ultrasound",
+   "tx": "**Endoscopic ultrasound** places a high frequency probe inside the gut lumen, millimetres from the pancreas, bile duct and gut wall layers. It stages oesophageal and rectal tumours by wall layer invasion and guides needle sampling of pancreatic masses through the stomach wall. Contrast enhanced ultrasound instead uses intravenous microbubbles to show liver lesion washout in real time without radiation or kidney injury.",
+   "say": "Endoscopic ultrasound places a high frequency probe inside the gut lumen, millimetres from pancreas, bile duct and gut wall layers. It stages oesophageal and rectal tumours by wall invasion and guides needle sampling of pancreatic masses. Contrast enhanced ultrasound instead uses intravenous microbubbles to show liver lesion washout in real time without radiation or kidney injury.",
+   "vis": {"kind": "compare", "left": {"title": "Endoscopic ultrasound", "points": ["Probe inside gut lumen", "Gut wall layers resolved", "Needle sampling guided", "Pancreas and bile duct close"]}, "right": {"title": "Contrast ultrasound", "points": ["Intravenous microbubbles", "Real time washout pattern", "No radiation", "No kidney injury risk"]}}
+  },
+  {
+   "title": "Mirror artefact in Doppler",
+   "tx": "**Mirror artefact** also corrupts Doppler studies when a strong reflector like the diaphragm or bladder wall folds a vessel image into a false second location. Spectral traces from the ghost vessel duplicate the real waveform, tempting a report of two arteries where one exists. Changing the acoustic window, reducing gain and tracing the vessel in two planes exposes the copy before measurements are recorded.",
+   "say": "Mirror artefact also corrupts Doppler studies when a strong reflector like the diaphragm or bladder wall folds a vessel image into a false second location. Spectral traces from the ghost duplicate the real waveform, tempting a report of two arteries where one exists. Changing the window, reducing gain and tracing in two planes exposes the copy.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Strong reflector present"}, {"id": "b", "label": "Ghost vessel appears"}, {"id": "c", "label": "Change acoustic window"}, {"id": "d", "label": "Ghost disappears"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

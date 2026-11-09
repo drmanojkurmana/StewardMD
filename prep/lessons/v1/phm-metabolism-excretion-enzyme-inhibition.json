@@ -1,0 +1,270 @@
+{
+  "v": 1,
+  "module": "phm-metabolism-excretion",
+  "subject": "pharmacology",
+  "title": "Cytochrome P450 Enzyme Inhibition, Phase I Oxidation, and Phase II Conjugation Pathways",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "In direct contrast to transcriptional enzyme induction requiring days to weeks, pharmacological suppression of cytochrome P450 catalytic activity occurs immediately within hours through **enzyme inhibition**. Inhibition occurs through competitive reversible binding at the haem active site, non-competitive allosteric interference, or irreversible mechanism-based suicide inactivation where reactive drug metabolites covalently bind and destroy the apoprotein. This immediately blunts substrate metabolism and causes rapid toxic accumulation.",
+      "say": "Cytochrome P450 inhibition occurs within hours through competitive binding or suicide inactivation, causing immediate toxic surges.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Competitive reversible inhibition",
+          "points": [
+            "Substrate and inhibitor compete for haem site",
+            "Reversible upon inhibitor withdrawal",
+            "Examples include cimetidine and ciprofloxacin",
+            "Overcome by increasing substrate concentration"
+          ]
+        },
+        "right": {
+          "title": "Mechanism-based suicide inactivation",
+          "points": [
+            "Metabolite covalently binds CYP apoprotein",
+            "Irreversible destruction of the enzyme complex",
+            "Examples include erythromycin and ritonavir",
+            "Recovery requires de novo enzyme synthesis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Clinically critical cytochrome P450 inhibitors include azole antifungals (ketoconazole, itraconazole), macrolide antibiotics (clarithromycin, erythromycin), cimetidine, ciprofloxacin, and protease inhibitors like ritonavir. Consuming **grapefruit juice** selectively destroys intestinal enterocyte CYP3A4 via furanocoumarin compounds, elevating oral bioavailability and precipitating severe toxicity from simvastatin, felodipine, and cyclosporine without altering intravenous clearance. Azithromycin does not inhibit CYP enzymes, offering a safer macrolide alternative.",
+      "say": "Grapefruit juice irreversibly destroys intestinal enterocyte CYP3A4, causing dangerous toxic surges in oral statins and felodipine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CYP Inhibitor",
+          "Inhibited CYP Isoenzyme",
+          "Substrate affected",
+          "Severe toxic complication"
+        ],
+        "rows": [
+          [
+            "Ketoconazole",
+            "CYP3A4 (potent competitive)",
+            "Midazolam, cyclosporine",
+            "Extreme sedation, severe nephrotoxicity"
+          ],
+          [
+            "Clarithromycin",
+            "CYP3A4 (suicide inhibitor)",
+            "Simvastatin, atorvastatin",
+            "Rhabdomyolysis and acute renal failure"
+          ],
+          [
+            "Ciprofloxacin",
+            "CYP1A2 (potent)",
+            "Theophylline",
+            "Tachycardia, tremors, status epilepticus"
+          ],
+          [
+            "Grapefruit juice",
+            "Intestinal enterocyte CYP3A4",
+            "Felodipine, amlodipine",
+            "Severe orthostatic hypotension and shock"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatic drug biotransformation pathways are classified into non-synthetic Phase I reactions and synthetic Phase II conjugations. Reactions that introduce or unmask reactive polar functional groups such as hydroxyl (-OH), amino (-NH2), carboxyl (-COOH), or sulfhydryl (-SH) moieties on lipophilic molecules constitute **Phase I oxidation**. Oxidation represents the predominant Phase I pathway, carried out by microsomal CYP enzymes, alcohol dehydrogenase, aldehyde oxidase, and mitochondrial monoamine oxidase.",
+      "say": "Phase I functionalization reactions introduce reactive polar groups like hydroxyl and amino radicals onto lipophilic molecules.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lipophilic",
+            "label": "Lipophilic parent xenobiotic"
+          },
+          {
+            "id": "phase1",
+            "label": "Phase I oxidation, reduction, or hydrolysis"
+          },
+          {
+            "id": "polar",
+            "label": "Introduction of polar functional group (-OH, -NH2, -COOH)"
+          },
+          {
+            "id": "phase2",
+            "label": "Phase II synthetic conjugation attachment"
+          },
+          {
+            "id": "excretion",
+            "label": "Water-soluble conjugate excreted in urine and bile"
+          }
+        ],
+        "edges": [
+          [
+            "lipophilic",
+            "phase1"
+          ],
+          [
+            "phase1",
+            "polar"
+          ],
+          [
+            "polar",
+            "phase2"
+          ],
+          [
+            "phase2",
+            "excretion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In addition to oxidation, Phase I biotransformation encompasses chemical reduction and hydrolysis carried out by microsomal and cytosolic enzymes. Azo and nitro reductions convert compounds like prontosil into active sulfanilamide, while chloramphenicol undergoes nitro reduction. Hydrolysis cleaves ester and amide bonds through non-microsomal esterases and amidases, converting the local anaesthetic procaine into para-aminobenzoic acid and hydrolyzing the active prodrug **enalapril** into active enalaprilat in the liver and blood.",
+      "say": "Non-oxidative Phase I pathways include reduction of chloramphenicol and esterase hydrolysis of prodrug enalapril into enalaprilat.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase I reaction type",
+          "Catalytic enzyme family",
+          "Prototypical drug substrate",
+          "Resulting metabolic product"
+        ],
+        "rows": [
+          [
+            "Ester hydrolysis",
+            "Nonspecific plasma pseudocholinesterases",
+            "Succinylcholine, procaine",
+            "Succinylmonocholine, choline"
+          ],
+          [
+            "Amide hydrolysis",
+            "Hepatic cytosolic amidases",
+            "Lidocaine",
+            "Monoethylglycinexylidide"
+          ],
+          [
+            "Nitro reduction",
+            "Hepatic nitro reductases",
+            "Chloramphenicol",
+            "Inactive aryl amine metabolite"
+          ],
+          [
+            "Esterase cleavage",
+            "Hepatic carboxylesterase-1",
+            "Enalapril (prodrug)",
+            "Enalaprilat (active ACE inhibitor)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The covalent enzymatic coupling of an endogenous, highly polar, hydrophilic molecule to a parent drug or its Phase I functionalized metabolite is defined as **Phase II conjugation**. These synthetic reactions almost universally yield stable, inactive, highly water-soluble conjugates that are rapidly eliminated from the body through renal glomerular filtration and active biliary secretion. Major conjugation pathways include glucuronidation, sulfation, glutathione conjugation, acetylation, methylation, and amino acid conjugation.",
+      "say": "Phase II synthetic reactions attach endogenous polar molecules like glucuronic acid to generate inactive, water-soluble excretable conjugates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phase I functionalization",
+          "points": [
+            "Introduces or exposes polar functional groups",
+            "Metabolites may be active, inactive, or toxic",
+            "Moderate increase in water solubility",
+            "Predominantly CYP-dependent oxidations"
+          ]
+        },
+        "right": {
+          "title": "Phase II conjugation",
+          "points": [
+            "Covalently links large endogenous polar moiety",
+            "Metabolites almost universally pharmacologically inert",
+            "Dramatic surge in hydrophilicity for excretion",
+            "Includes glucuronidation, sulfation, acetylation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The quantitatively most common and versatile Phase II metabolic reaction in human pharmacology is mediated by uridine 5-diphospho-glucuronosyltransferase (UGT) enzymes in the endoplasmic reticulum, termed **glucuronidation**. This pathway transfers glucuronic acid from UDP-glucuronic acid to substrates including morphine, paracetamol, bilirubin, and chloramphenicol. Neonates display a physiological deficiency in hepatic UGT activity, leading to toxic chloramphenicol accumulation, vascular collapse, and cyanosis known as grey baby syndrome.",
+      "say": "Glucuronidation is the commonest Phase II reaction; its neonatal deficiency causes chloramphenicol grey baby syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "substrate",
+            "label": "Substrate drug with -OH, -COOH, or -NH2 acceptor group"
+          },
+          {
+            "id": "donor",
+            "label": "Cofactor UDP-glucuronic acid donor"
+          },
+          {
+            "id": "ugt",
+            "label": "Microsomal UGT enzyme catalytic transfer"
+          },
+          {
+            "id": "conjugate",
+            "label": "Highly polar water-soluble glucuronide conjugate"
+          },
+          {
+            "id": "elimination",
+            "label": "Excretion via renal organic anion transporters or bile"
+          }
+        ],
+        "edges": [
+          [
+            "substrate",
+            "ugt"
+          ],
+          [
+            "donor",
+            "ugt"
+          ],
+          [
+            "ugt",
+            "conjugate"
+          ],
+          [
+            "conjugate",
+            "elimination"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cytosolic N-acetyltransferase-2 (NAT2) transfers an acetyl group from acetyl-coenzyme A to aromatic amines and hydrazine compounds, defining the metabolic pathway of **acetylation**. Human populations display bimodal genetic polymorphism separating individuals into slow acetylators and rapid acetylators. Slow acetylators comprise roughly fifty percent of Indian and Western populations; they experience prolonged half-lives and elevated toxicity from isoniazid (peripheral neuropathy), hydralazine (drug-induced lupus erythematosus), and procainamide.",
+      "say": "Slow acetylators have deficient NAT2 enzymes, predisposing them to isoniazid peripheral neuropathy and hydralazine-induced lupus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Acetylation status",
+          "NAT2 enzymatic velocity",
+          "Substrate drug half-life",
+          "Primary adverse susceptibility"
+        ],
+        "rows": [
+          [
+            "Slow acetylators (~50% pop)",
+            "Deficient NAT2 activity",
+            "Isoniazid t1/2: 3 hours",
+            "Isoniazid peripheral neuropathy, hydralazine SLE"
+          ],
+          [
+            "Rapid acetylators (~50% pop)",
+            "High NAT2 activity",
+            "Isoniazid t1/2: 1 hour",
+            "Subtherapeutic failure, isoniazid hepatotoxicity risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Paracetamol biotransformation illustrates the critical clinical interplay between Phase I oxidation and Phase II conjugation pathways. At therapeutic doses, ninety-five percent of paracetamol undergoes safe Phase II glucuronidation and sulfation. The remaining five percent is oxidized by CYP2E1 into the highly reactive, cytotoxic electrophile N-acetyl-p-benzoquinone imine (NAPQI), which is immediately detoxified by conjugation with hepatic **glutathione**. In acute overdose, glutathione stores are exhausted, allowing NAPQI to bind hepatocyte macromolecules and cause centrilobular necrosis.",
+      "say": "Paracetamol overdose exhausts hepatic glutathione, allowing toxic NAPQI to bind liver proteins and cause fatal centrilobular necrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-paracetamol.webp",
+        "alt": "Paracetamol metabolic pathways and hepatotoxicity",
+        "caption": "Paracetamol metabolic pathways demonstrating Phase I CYP2E1 oxidation to NAPQI, glutathione conjugation, and Phase II glucuronidation."
+      }
+    }
+  ]
+}

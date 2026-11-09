@@ -522,3 +522,71 @@ html[data-appearance="frosted"] #sbrSettings[data-settings-ui]{--st-fill:color-m
 html[data-appearance="liquid"] #sbrSettings[data-settings-ui]{--st-fill:color-mix(in srgb,var(--st-card) 48%,transparent);--st-blur:blur(24px) saturate(200%);--st-extra:inset 0 1px 0 rgba(255,255,255,.7),0 10px 26px -12px rgba(6,60,50,.3)}
 html[data-appearance="tinted3d"] #sbrSettings[data-settings-ui]{--st-fill:linear-gradient(160deg,color-mix(in srgb,var(--sphere-hi,#2f9184) 10%,var(--st-card)),color-mix(in srgb,var(--sphere-hi,#2f9184) 24%,var(--st-card)));--st-extra:0 2px 3px rgba(6,60,50,.14),0 14px 26px -12px rgba(6,60,50,.3),inset 0 1px 0 rgba(255,255,255,.55)}
 html[data-appearance="blend"] #sbrSettings[data-settings-ui]{--st-fill:linear-gradient(135deg,color-mix(in srgb,var(--sphere-hi,#2f9184) 20%,var(--st-card)),var(--st-card) 55%,color-mix(in srgb,var(--sphere-mid,#12564a) 14%,var(--st-card)));--st-extra:0 6px 18px -10px rgba(6,60,50,.3)}
+
+/* Inside a Settings section (owner 2026-11-09): one flat iOS list. Builders set inline borders and fills, hence !important. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail>summary{font-size:17px;font-weight:400;color:var(--st-ink)}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-row{position:relative;display:block;margin:0;padding:0;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-row::before,#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is([role=radio]+[role=radio],[data-ie-privacy],[data-ie-ask])::before{content:"";position:absolute;z-index:1;top:0;left:16px;right:0;height:.5px;background:var(--st-sep);pointer-events:none}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radiogroup],#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-caps]{margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-caps]>div{padding:10px 16px 14px!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-lbl{margin:0!important;padding:20px 16px 6px;font-size:13px;line-height:1.3;font-weight:400;letter-spacing:0;text-transform:none;color:var(--st-sub)}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]{position:relative;min-height:54px;box-sizing:border-box;padding:10px 16px!important;border:0!important;background:transparent!important;color:var(--st-ink)!important;transform:none!important;opacity:1;touch-action:manipulation;transition:background-color .12s ease-out}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio][aria-disabled=true]{opacity:.5}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]:active{background:var(--st-press)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]>span:first-child>span:first-child{font-size:17px!important;font-weight:400!important;line-height:1.25!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]>span:first-child>span:nth-child(2){margin-top:2px!important;font-size:13px!important;font-weight:400!important;line-height:1.35!important;color:var(--st-sub)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]>span:first-child>span:nth-child(2) b{font-weight:500;color:var(--st-ink)}
+/* The trailing tick is the only selection mark, as in iOS. A drawn glyph replaces the text tick. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [role=radio]>span[aria-hidden]{flex:0 0 20px;width:20px;height:20px;font-size:0!important;color:transparent!important;background:var(--settings-primary);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.8l4.3 4.2 8.7-10'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.8l4.3 4.2 8.7-10'/%3E%3C/svg%3E") center/contain no-repeat}
+/* Full-width actions read as tinted rows, not boxed buttons. Compact ones (Download, Pause) sit in their own flex row and stay inline. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is(.ie-seg,.me-seg)>.smd-nav-btn,#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-row>.smd-nav-btn{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;min-height:48px;margin:0!important;padding:0 16px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--settings-primary)!important;font-size:17px;font-weight:400;text-align:left;transform:none!important;opacity:1}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is(.ie-seg,.me-seg)>.smd-nav-btn:active,#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-row>.smd-nav-btn:active{background:var(--st-press)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smd-nav-btn:not(:is(.ie-seg,.me-seg,.smd-nav-row)>*){border:0!important;border-radius:999px!important;background:var(--st-press)!important;box-shadow:none!important;color:var(--settings-primary)!important;font-weight:500}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-ms-note{margin:0;padding:11px 16px;border:0;border-radius:0;background:transparent;font-size:13px;font-weight:400;line-height:1.4;text-align:left;color:var(--st-sub)}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-chev{font-size:0}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-chev::before{content:"›";font-size:22px;line-height:1}
+/* The iPad detail header already says this; the list starts at its first real row. */
+@media (min-width:768px){
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-group:is([data-title="AI & voice"],[data-title="Advanced"]) .settings-card>.sbr-note{display:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-group[data-title="AI & voice"] .settings-card>.sbr-note+*::before{display:none}
+}
+/* Display & Accessibility sheet: same iOS grouped language as Settings. */
+#hvSheet#hvSheet.settings-display{--st-bg:#f2f2f7;--st-card:#fff;--st-ink:#000;--st-sep:rgba(60,60,67,.29);--st-sub:rgba(60,60,67,.6);--st-fill:rgba(118,118,128,.12);--st-on:#fff;--st-tint:var(--teal,#0e6e63);background:var(--st-bg)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:var(--st-ink)}
+body:is(.dark,.v3-dark) #hvSheet#hvSheet.settings-display{--st-bg:#000;--st-card:#1c1c1e;--st-ink:#fff;--st-sep:rgba(84,84,88,.65);--st-sub:rgba(235,235,245,.6);--st-fill:rgba(118,118,128,.26);--st-on:#636366}
+html:not([data-font]) #hvSheet#hvSheet.settings-display *{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",var(--sans,system-ui),sans-serif}
+#hvSheet#hvSheet.settings-display .settings-done{min-height:44px;margin:0 0 2px auto;padding:0;background:none;border:0;border-radius:0;color:var(--st-tint);font-size:17px;font-weight:600;transform:none}
+#hvSheet#hvSheet.settings-display .settings-done:active{opacity:.5}
+#hvSheet#hvSheet.settings-display .hv-sh-t{margin:0 4px 18px;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.02em;color:var(--st-ink)}
+#hvSheet#hvSheet.settings-display .hv-d-sec{margin:0 0 16px;padding:14px 16px;border:0;border-radius:18px;background:var(--st-card)}
+#hvSheet#hvSheet.settings-display .settings-display-detail{margin:0 0 16px;border:0;border-radius:18px;background:var(--st-card);overflow:hidden}
+#hvSheet#hvSheet.settings-display .settings-display-detail>summary{padding:15px 16px;font-size:17px;font-weight:400;color:var(--st-ink)}
+#hvSheet#hvSheet.settings-display .settings-display-detail .hv-d-sec{margin:0}
+#hvSheet#hvSheet.settings-display h4{margin:0 0 9px;font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--st-sub)}
+#hvSheet#hvSheet.settings-display .hv-info{color:var(--st-sub)}
+/* Density: a segmented control. */
+#hvSheet#hvSheet.settings-display .hv-seg{display:flex;flex-wrap:nowrap;gap:0;padding:2px;border-radius:9px;background:var(--st-fill)}
+#hvSheet#hvSheet.settings-display .hv-seg button{position:relative;flex:1 1 0;min-width:0;min-height:36px;padding:0 4px;border:0;border-radius:7px;background:none;color:var(--st-ink);font-size:14px;font-weight:500;box-shadow:none;transform:none}
+#hvSheet#hvSheet.settings-display .hv-seg button::after{content:"";position:absolute;inset:-4px 0}
+#hvSheet#hvSheet.settings-display .hv-seg button.on{background:var(--st-on);border:0;color:var(--st-ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.16)}
+/* Presets, fonts and appearance: a list with one tick. */
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts){display:block;margin:0 -16px -14px}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;padding:8px 16px;border:0;border-radius:0;background:none;color:var(--st-ink);font-size:17px;font-weight:400;text-align:left;box-shadow:none;transform:none}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button:active{background:var(--st-fill)}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button+button::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--st-sep)}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button.on{background:none;border:0;color:var(--st-ink)}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button.on::after{content:"";flex:0 0 20px;width:20px;height:20px;background:var(--st-tint);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.8l4.3 4.2 8.7-10'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.8l4.3 4.2 8.7-10'/%3E%3C/svg%3E") center/contain no-repeat}
+#hvSheet#hvSheet.settings-display .hv-reset{min-height:48px;margin:0 0 4px;border:0;border-radius:18px;background:var(--st-card);color:#d70015;font-size:17px;font-weight:400}
+body:is(.dark,.v3-dark) #hvSheet#hvSheet.settings-display .hv-reset{color:#ff6961}
+body:is(.dark,.v3-dark) #hvSheet#hvSheet.settings-display{--st-tint:#37c8b4}
+#hvSheet#hvSheet.settings-display .settings-done{background:none!important;color:var(--st-tint)!important}
+#hvSheet#hvSheet.settings-display .hv-seg button.on{background:var(--st-on)!important;border:0!important;color:var(--st-ink)!important}
+#hvSheet#hvSheet.settings-display :is(.hv-pre,.hv-fonts) button.on{background:none!important;border:0!important;color:var(--st-ink)!important}
+#hvSheet#hvSheet.settings-display .hv-info{padding:0}
+#hvSheet#hvSheet.settings-display .hv-sw{margin:0;padding:0;border:0;border-radius:0;background:none}
+#hvSheet#hvSheet.settings-display .hv-sw .lab{font-size:17px;font-weight:400;color:var(--st-ink)}
+#hvSheet#hvSheet.settings-display .hv-sw .sub{font-size:13px;font-weight:400;color:var(--st-sub)}
+@media (max-width:360px){#hvSheet#hvSheet.settings-display .hv-seg button{font-size:12.5px;padding:0 1px}}
+/* Display density inside Settings. */
+body.smd-dens-compact #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-row,body.smd-dens-compact #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-tg,body.smd-dens-compact #sbrSettings#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary,body.smd-dens-compact #sbrSettings#sbrSettings[data-settings-ui] .settings-card [role=radio]{min-height:44px}
+body.smd-dens-comfortable #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-row,body.smd-dens-comfortable #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-tg,body.smd-dens-comfortable #sbrSettings#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary,body.smd-dens-comfortable #sbrSettings#sbrSettings[data-settings-ui] .settings-card [role=radio]{min-height:62px}
+body.smd-dens-large #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-row,body.smd-dens-large #sbrSettings#sbrSettings[data-settings-ui] .settings-card .sbr-tg,body.smd-dens-large #sbrSettings#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary,body.smd-dens-large #sbrSettings#sbrSettings[data-settings-ui] .settings-card [role=radio]{min-height:70px}

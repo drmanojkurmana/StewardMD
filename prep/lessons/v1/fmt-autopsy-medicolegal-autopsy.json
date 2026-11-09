@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-autopsy-medicolegal-autopsy",
+ "subject": "forensic-medicine",
+ "module": "fmt-autopsy",
+ "title": "Medicolegal Autopsy Techniques and Exhumation",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "What makes an autopsy medicolegal",
+   "tx": "A **medicolegal autopsy** is performed on the order of an investigating authority in unnatural, sudden or suspicious death, and it aims to establish identity, cause of death, time since death and the nature of any injuries. Unlike a clinical autopsy, it needs no consent from relatives, but it demands a complete external and internal examination with photography and preserved samples. Every finding may later be tested in court.",
+   "say": "A medicolegal autopsy answers identity, cause, timing and injuries for the law, and needs authority, not family consent.",
+   "vis": {"kind": "table", "cols": ["Question to answer", "How the autopsy answers it", "Record kept"], "rows": [["Who is this", "Features, prints, DNA samples", "Photographs and charts"], ["Why did death occur", "External and internal examination", "Postmortem report"], ["When did death occur", "Postmortem changes together", "Timed observations"], ["What injuries exist", "Layered dissection of wounds", "Body diagrams"]]}
+  },
+  {
+   "title": "Virchow technique, organ by organ",
+   "tx": "In the **Virchow technique**, organs are removed and dissected one by one: cranial cavity first, then thoracic, cervical and abdominal organs in turn, with the spinal cord taken from the back. The method suits focused examination of a single diseased organ. Its price is that anatomical relations between organs are lost as each organ leaves the body, so connections such as a fistula or an embolus path can be missed.",
+   "say": "Virchow removes organs one at a time, which is tidy for single organs but breaks the relations between them.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Open cranial cavity first"}, {"id": "b", "label": "Remove thoracic organs singly"}, {"id": "c", "label": "Remove abdominal organs singly"}, {"id": "d", "label": "Dissect each organ on the board"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Rokitansky technique and infective cases",
+   "tx": "The **Rokitansky technique** combines in situ dissection with removal of organs in blocks, keeping much of the dissection inside the body. Reddy names it the preferred choice when the dead person carried a highly transmissible disease such as HIV or hepatitis B, because fewer free organs are handled on the open board. The pathologist still inspects each system in place before any block is lifted out.",
+   "say": "Rokitansky dissects largely in place, and that contained approach is preferred for HIV or hepatitis B bodies.",
+   "vis": {"kind": "compare", "left": {"title": "Rokitansky strengths", "points": ["Dissection mainly in situ", "Organs removed as blocks", "Less handling of free organs", "Preferred in infective cases"]}, "right": {"title": "Virchow strengths", "points": ["Each organ examined alone", "Clear single organ display", "Familiar routine sequence", "Relations lost between organs"]}}
+  },
+  {
+   "title": "Letulle en masse removal",
+   "tx": "The **Letulle technique** removes the cervical, thoracic, abdominal and pelvic organs together as one mass, tongue to rectum, and dissects that block outside the body. Every attachment stays intact, so the aorta, oesophagus, trachea and bowel can be followed without a single cut across their connections. Reddy describes freeing the neck structures, diaphragm and pelvic floor so the whole block pulls forward and out in one piece.",
+   "say": "Letulle lifts tongue to rectum out as one block, keeping every connection intact for the board dissection.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Free neck structures en masse"}, {"id": "b", "label": "Cut diaphragm attachments"}, {"id": "c", "label": "Free bladder and pelvic floor"}, {"id": "d", "label": "Lift the whole block forward"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ghon en bloc removal by systems",
+   "tx": "The **Ghon technique** is the middle path: cervical, thoracic and abdominal organs come out as separate system blocks, and the urogenital system forms another block of its own. Relations survive inside each block while the blocks stay small enough to handle and photograph cleanly. Many teaching mortuaries default to Ghon for routine medicolegal work because it balances anatomical continuity against a manageable dissection field.",
+   "say": "Ghon removes organs in system blocks, a compromise that keeps local relations without one unwieldy mass.",
+   "vis": {"kind": "table", "cols": ["Technique", "Unit removed", "Relations preserved"], "rows": [["Virchow", "Single organs", "No"], ["Rokitansky", "In situ plus blocks", "Partly"], ["Ghon", "System blocks", "Within each block"], ["Letulle", "One total mass", "Fully"]]}
+  },
+  {
+   "title": "Exhumation needs a Magistrate order",
+   "tx": "**Exhumation** is the lawful digging out of an already buried body, and in India there is no time limit for ordering it. It serves criminal cases such as disguised homicide, suspected poisoning and criminal negligence, plus civil claims over insurance, compensation and disputed identity. The body is exhumed only on the written order of an Executive Magistrate, under a medical officer, in the presence of police, preferably in natural light.",
+   "say": "India sets no time limit on exhumation, but a written Executive Magistrate order and daylight digging are mandatory.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Magistrate issues written order"}, {"id": "b", "label": "Grave identified by plot and marker"}, {"id": "c", "label": "Soil removed in shallow layers"}, {"id": "d", "label": "Body photographed in position"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Conduct of the exhumation",
+   "tx": "The team uncovers the grave ten to fifteen centimetres at a time, notes soil, water and plant growth, and measures depth to skull and feet in a careful **exhumation procedure**. The body is brushed clean, photographed where it lies and lifted on a plank or sheet. In suspected mineral poisoning, about half a kilogram of earth in contact with the body, plus samples from above, below and each side, goes for analysis with a piece of coffin and clothing.",
+   "say": "Dig in shallow layers, photograph before lifting, and send contact soil for analysis whenever mineral poisoning is alleged.",
+   "vis": {"kind": "table", "cols": ["Step", "Detail", "Purpose"], "rows": [["Layered digging", "10 to 15 cm at a time", "Avoid damaging remains"], ["Measurements", "Depth to skull and feet", "Fix the burial record"], ["Soil samples", "About 500 g in contact", "Detect mineral poison"], ["Soil sifting", "Fine mesh after lifting", "Recover teeth and bullets"]]}
+  },
+  {
+   "title": "Second autopsy and its limits",
+   "tx": "A **second autopsy** on an exhumed, previously autopsied body is difficult because decay merges contusions, blurs patterns and the first dissection has already altered the anatomy. Before starting, gather the first report, scene and autopsy photographs, hospital records and X rays, and invite the first pathologist if possible. Contusions can paradoxically become visible once blood drains from tissues after the first autopsy, so detailed documentation still has value.",
+   "say": "A second autopsy fights decay and prior cuts, yet drained tissues sometimes reveal contusions the first examination missed.",
+   "vis": {"kind": "compare", "left": {"title": "Gather before starting", "points": ["First autopsy report", "Scene and autopsy photographs", "Hospital records and X rays", "Police investigation papers"]}, "right": {"title": "Expect these problems", "points": ["Contusions merged by decay", "Patterns blurred or lost", "First cuts alter anatomy", "Burial artefacts confuse findings"]}}
+  },
+  {
+   "title": "When the autopsy finds nothing, first thoughts",
+   "tx": "Occasionally the full examination ends without a cause, the seed of the **negative autopsy** discussed in the next lesson. Inadequate history heads the causes: vagal inhibition, status epilepticus and hypersensitivity can kill without leaving anatomical findings. Missed needle marks, snake bite punctures and small electric burns punish a cursory external examination. The honest response is more history, more laboratory work and re-examination, not a guessed cause.",
+   "say": "A blank autopsy usually means missing history or a missed surface mark, so look again before concluding anything.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "No cause found at first pass"}, {"id": "b", "label": "Re-examine skin for marks and bites"}, {"id": "c", "label": "Test for air embolism and pneumothorax"}, {"id": "d", "label": "Send toxicology and laboratory samples"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

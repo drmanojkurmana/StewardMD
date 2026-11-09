@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phm-antiemetics",
+  "subject": "pharmacology",
+  "title": "Serotonin 5-HT3 Antagonists, Dopamine Blockers, and Neurokinin-1 Receptor Inhibitors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical selective competitive antagonist at serotonin 5-HT3 receptors that revolutionized antiemetic management is **ondansetron**. By blocking 5-HT3 receptors located on peripheral vagal afferents in the small intestinal mucosa and centrally within the area postrema and nucleus tractus solitarius, ondansetron potently suppresses emesis triggered by chemotherapeutic emetogens and abdominal radiation. While generally well tolerated with mild headache and constipation, high-dose intravenous administration exceeding 16 mg blocks cardiac hERG potassium channels, causing dose-dependent prolongation of the QT interval.",
+      "say": "Ondansetron blocks central and peripheral 5-HT3 receptors to control chemotherapy-induced and postoperative emesis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiemetics-prokinetics-fig1.webp",
+        "alt": "Anatomical diagram of vomiting center, area postrema, and gut vagal afferents",
+        "caption": "Central and peripheral emetic pathways showing the chemoreceptor trigger zone, solitary tract nucleus, and gut enterochromaffin 5-HT3 receptors."
+      }
+    },
+    {
+      "tx": "A potent second-generation 5-HT3 receptor antagonist characterized by tenfold higher binding affinity than ondansetron and minimal CYP450 interactions is **granisetron**. Available as oral tablets, intravenous injection, and an extended-release transdermal patch providing continuous systemic delivery for up to seven days, granisetron does not significantly prolong the cardiac QT interval at standard therapeutic doses. It is primarily metabolized by hepatic CYP3A4 without inducing or inhibiting other isozymes, making it exceptionally safe in elderly cancer patients receiving complex multi-drug chemotherapy regimens.",
+      "say": "Granisetron provides potent 5-HT3 antagonism available as a transdermal patch with minimal cardiac QT prolongation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "5-HT3 receptor antagonist",
+          "Terminal elimination half-life",
+          "Relative receptor binding affinity",
+          "Distinctive clinical formulation asset"
+        ],
+        "rows": [
+          [
+            "Ondansetron",
+            "4 hours",
+            "1 (Reference baseline)",
+            "Oral tablets, disintegrating film, IV injection"
+          ],
+          [
+            "Granisetron",
+            "9 hours",
+            "10-fold higher affinity",
+            "7-day extended-release transdermal skin patch"
+          ],
+          [
+            "Palonosetron",
+            "40 hours",
+            "30-fold higher affinity",
+            "Allosteric cooperativity; active in delayed emesis"
+          ],
+          [
+            "Tropisetron",
+            "7 hours",
+            "5-fold higher affinity",
+            "Combined 5-HT3 antagonism and alpha-7 nicotinic agonism"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The unique second-generation 5-HT3 receptor antagonist characterized by a prolonged forty-hour terminal elimination half-life and distinct allosteric binding interactions is **palonosetron**. Demonstrating over thirty times the receptor binding affinity of first-generation agents, palonosetron binds with positive cooperativity to the 5-HT3 receptor, triggering receptor internalization and prolonged functional desensitization. Consequently, a single intravenous dose administered prior to chemotherapy prevents not only acute emesis in the first twenty-four hours but also delayed chemotherapy-induced nausea and vomiting across days two through five.",
+      "say": "Palonosetron triggers 5-HT3 receptor internalization with a forty-hour half-life, preventing delayed chemotherapy emesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "palo",
+            "label": "Single IV dose of palonosetron 0.25 mg pre-chemotherapy"
+          },
+          {
+            "id": "bind",
+            "label": "High-affinity allosteric binding and positive cooperativity"
+          },
+          {
+            "id": "internal",
+            "label": "Prolonged 5-HT3 receptor endocytosis and membrane downregulation"
+          },
+          {
+            "id": "delayed",
+            "label": "Persistent 40-hour suppression protecting against delayed nausea and vomiting"
+          }
+        ],
+        "edges": [
+          [
+            "palo",
+            "bind"
+          ],
+          [
+            "bind",
+            "internal"
+          ],
+          [
+            "internal",
+            "delayed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The prototypical substituted benzamide that acts as both a central dopamine D2 receptor antagonist and an upper gastrointestinal prokinetic agent is **metoclopramide**. In the chemoreceptor trigger zone of the area postrema, metoclopramide blocks D2 receptors to exert potent antiemetic efficacy. Peripherally, it stimulates enteric 5-HT4 receptors and enhances acetylcholine release from myenteric postganglionic neurons, increasing lower esophageal sphincter tone, accelerating gastric emptying, and promoting duodenal transit. Because it crosses the blood-brain barrier, it can provoke acute dystonic extrapyramidal reactions and parkinsonism.",
+      "say": "Metoclopramide combines antiemetic D2 blockade with 5-HT4 prokinetic action, but can trigger acute dystonic reactions.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/post-operative-nausea-vomiting-fig1.webp",
+        "alt": "Pathways of postoperative nausea and vomiting and neurochemical targets",
+        "caption": "Postoperative emetic signaling detailing dopamine D2, serotonin 5-HT3, neurokinin-1, and muscarinic input into the medullary vomiting center."
+      }
+    },
+    {
+      "tx": "A peripheral dopamine D2 receptor antagonist engineered to provide potent prokinetic and antiemetic efficacy without central neurological side effects is **domperidone**. Because domperidone possesses high polarity and does not penetrate the blood-brain barrier into the basal ganglia, it does not provoke extrapyramidal dystonias or sedation. However, because the area postrema lies outside the blood-brain barrier, domperidone effectively blocks CTZ dopamine receptors, making it the antiemetic of choice in Parkinson disease patients receiving levodopa or dopamine agonists. High parenteral doses provoked fatal ventricular arrhythmias, restricting it to oral use.",
+      "say": "Domperidone blocks area postrema D2 receptors without entering the basal ganglia, making it ideal in Parkinson disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Domperidone (Peripheral D2 Blocker)",
+          "points": [
+            "Polar molecule excluded by blood-brain barrier from basal ganglia",
+            "Zero extrapyramidal reactions, acute dystonias, or parkinsonism",
+            "Acts on area postrema (outside BBB) and pituitary (galactorrhea)",
+            "Drug of choice for nausea in patients with Parkinson disease"
+          ]
+        },
+        "right": {
+          "title": "Metoclopramide (Central & Peripheral)",
+          "points": [
+            "Lipophilic benzamide crosses blood-brain barrier freely",
+            "High incidence of acute oculogyric crises and akathisia in young adults",
+            "Potent prokinetic action via enteric 5-HT4 receptor stimulation",
+            "Carries black-box warning for irreversible tardive dyskinesia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The prototypical orally active, non-peptide selective neurokinin-1 receptor antagonist developed for the prevention of chemotherapy-induced emesis is **aprepitant**. By crossing the blood-brain barrier to selectively block substance P binding to NK-1 receptors within the nucleus tractus solitarius and area postrema, aprepitant specifically suppresses the delayed phase of emesis caused by highly emetogenic chemotherapy like cisplatin. Combined with a 5-HT3 antagonist and dexamethasone in a three-drug regimen, aprepitant elevates complete protection against acute and delayed vomiting to greater than eighty-five percent.",
+      "say": "Aprepitant blocks substance P at neurokinin-1 receptors, specifically preventing delayed chemotherapy-induced emesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chemo",
+            "label": "Highly emetogenic chemotherapy (cisplatin) administration"
+          },
+          {
+            "id": "subp",
+            "label": "Delayed release of substance P in brainstem emetic nuclei"
+          },
+          {
+            "id": "nk1",
+            "label": "Aprepitant competitive blockade of central NK-1 receptors"
+          },
+          {
+            "id": "protect",
+            "label": "Arrest of delayed emetic reflex on days 2 through 5 post-chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "chemo",
+            "subp"
+          ],
+          [
+            "subp",
+            "nk1"
+          ],
+          [
+            "nk1",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The water-soluble phosphorylated prodrug of aprepitant formulated for rapid intravenous infusion is **fosaprepitant** dimeglumine. Administered as a single intravenous infusion of 150 mg thirty minutes prior to initiating highly emetogenic chemotherapy, fosaprepitant is rapidly converted to parent aprepitant within thirty minutes by ubiquitous endothelial and hepatic phosphatases. This single-day intravenous regimen achieves bioequivalent systemic exposure to a conventional three-day oral aprepitant schedule, eliminating oral pill burden in nauseated oncology patients while ensuring adherence during critical early treatment phases.",
+      "say": "Fosaprepitant is an intravenous prodrug cleaved to aprepitant in thirty minutes, replacing a three-day oral schedule.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intravenous Fosaprepitant (Single-Dose)",
+          "points": [
+            "Water-soluble prodrug infused intravenously over 20 to 30 minutes",
+            "Rapid enzymatic dephosphorylation to parent aprepitant",
+            "Replaces multi-day oral dosing with a single pre-chemotherapy bag",
+            "Associated with transient infusion-site pain and thrombophlebitis"
+          ]
+        },
+        "right": {
+          "title": "Oral Aprepitant (Three-Day Schedule)",
+          "points": [
+            "Requires oral capsule ingestion on 3 consecutive days (125 mg then 80 mg)",
+            "Dependent on gastrointestinal absorption in nauseated patients",
+            "Substrate and moderate inhibitor of hepatic CYP3A4 enzymes",
+            "Zero infusion-site phlebitis or venous irritation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A potent piperazine phenothiazine derivative that acts as a dopamine D2 receptor antagonist with additional alpha-adrenergic and weak anticholinergic properties is **prochlorperazine**. Acting predominantly on the chemoreceptor trigger zone, prochlorperazine is widely utilized for acute labyrinthine vertigo-associated emesis, severe postoperative nausea, and migraine-associated vomiting. Like metoclopramide, it crosses the blood-brain barrier and can induce acute oculogyric crises, torticollis, facial grimacing, and motor restlessness, which respond promptly to intravenous diphenhydramine or benztropine.",
+      "say": "Prochlorperazine is a phenothiazine antiemetic for vertigo and migraine nausea that can provoke acute dystonic reactions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical emetic indication",
+          "Preferred antiemetic class",
+          "Primary receptor target",
+          "First-line representative drug"
+        ],
+        "rows": [
+          [
+            "Acute chemotherapy emesis",
+            "5-HT3 receptor antagonists",
+            "Peripheral vagal and central 5-HT3",
+            "Ondansetron / Palonosetron"
+          ],
+          [
+            "Delayed chemotherapy emesis",
+            "Neurokinin-1 (NK-1) antagonists",
+            "Central substance P NK-1 receptor",
+            "Aprepitant / Fosaprepitant"
+          ],
+          [
+            "Vestibular motion sickness",
+            "Anticholinergic / H1 antihistamine",
+            "Vestibular muscarinic and H1 receptors",
+            "Hyoscine (scopolamine) / Promethazine"
+          ],
+          [
+            "Gastroparesis with nausea",
+            "D2 antagonist prokinetic",
+            "Upper GI 5-HT4 and D2 receptors",
+            "Metoclopramide / Domperidone"
+          ]
+        ]
+      }
+    }
+  ]
+}

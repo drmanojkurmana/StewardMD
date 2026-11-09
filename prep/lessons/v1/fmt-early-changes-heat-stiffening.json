@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-early-changes-heat-stiffening",
+ "subject": "forensic-medicine",
+ "module": "fmt-early-changes",
+ "title": "Heat Stiffening, Cold Stiffening and Estimating Time Since Death",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Heat stiffening above sixty five degrees",
+   "tx": "Exposure to temperatures above 65 degrees Celsius produces **heat stiffening**, a rigidity far stronger than ordinary rigor mortis. It appears in deaths from burning, high voltage electric shock and falls into hot liquid. Heat denatures and coagulates muscle protein exactly as cooking does. The muscles contract, dry out and may carbonise on the surface, with a brownish pink zone of cooked meat beneath over normal red muscle.",
+   "say": "Heat above sixty five degrees cooks muscle protein, so the body stiffens more strongly than in ordinary rigor.",
+   "vis": {"kind": "table", "cols": ["Feature", "Heat stiffening", "Rigor mortis"], "rows": [["Cause", "Protein coagulation by heat above 65 C", "ATP loss after death"], ["Strength", "Very marked, hard to overcome", "Moderate, yields to force"], ["Muscle look", "Dry, contracted, cooked meat zone", "Normal colour, firm"], ["Later course", "Stays until tissues soften by decay", "Passes off in sequence"]]}
+  },
+  {
+   "title": "Flexion posture produced by heat",
+   "tx": "Because flexor muscles are bulkier than extensors, heat contraction bends the limbs into a **flexed pugilistic posture** even though nobody moved the body after death. Students often mistake this attitude for a defensive pose adopted during life. The stiffening persists until muscles and ligaments soften from decomposition. True rigor mortis never develops in muscle that has already been heat stiffened, which helps separate the two processes at the scene.",
+   "say": "Stronger flexors bend the heated body into a boxer like pose, and that pose proves nothing about a struggle.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Body exposed to intense heat"}, {"id": "b", "label": "Muscle protein coagulates and shortens"}, {"id": "c", "label": "Bulkier flexors overpower extensors"}, {"id": "d", "label": "Limbs fixed in flexion until decay softens them"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Cold stiffening in freezing conditions",
+   "tx": "A body exposed to freezing temperatures before acid metabolites accumulate develops **cold stiffening** because body fluids freeze and subcutaneous fat solidifies. The whole body feels extremely cold and markedly rigid. Forcible flexion of a joint breaks ice in the synovial fluid with a sudden sharp cracking sound. Hardened fat in the skin folds of infants can imitate a ligature mark, a trap worth remembering in winter deaths.",
+   "say": "Frozen fluids and solid fat make a cold body rigid, and cracking ice in a joint gives the process away.",
+   "vis": {"kind": "compare", "left": {"title": "Cold stiffening clues", "points": ["Body feels icy cold throughout", "Sharp crack when a joint is forced", "Fat folds feel hard and rigid", "Common after freezing exposure"]}, "right": {"title": "What happens on warming", "points": ["Stiffness melts away in warm air", "Ordinary rigor then appears quickly", "That rigor also passes off fast", "No protein coagulation is present"]}}
+  },
+  {
+   "title": "How cold stiffening resolves",
+   "tx": "Place a cold stiffened body in a warm room and the **sequence after thawing** is diagnostic: stiffness disappears first, then normal rigor mortis develops rapidly and passes off quickly. This order never occurs in heat stiffening, where coagulated protein cannot relax. Exam questions exploit the contrast, so state it plainly in the report: cold stiffening is a physical freezing effect, heat stiffening is a chemical cooking effect.",
+   "say": "After thawing, stiffness vanishes and only then does brief normal rigor follow, which separates cold from heat stiffening.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Frozen body brought into warmth"}, {"id": "b", "label": "Ice melts and stiffness disappears"}, {"id": "c", "label": "Rigor mortis develops rapidly"}, {"id": "d", "label": "Rigor passes off quickly"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Why no single sign fixes the time of death",
+   "tx": "Every postmortem change varies with temperature, body build, clothing and cause of death, so **a range, never a point estimate**, is the honest answer for time since death. Reddy stresses that the figure offered is at best an educated guess open to error. The examiner combines cooling, lividity, rigor, decomposition, stomach contents and insect evidence, then reports the bracket that fits all of them together.",
+   "say": "Give a time bracket built from several signs together, because any single sign can mislead on its own.",
+   "vis": {"kind": "table", "cols": ["Evidence used", "What is noted", "Main weakness"], "rows": [["Body cooling", "Core temperature fall", "Depends on climate and clothing"], ["Lividity and rigor", "Fixity and muscle spread", "Shift with position and heat"], ["Decomposition", "Colour, gas and liquefaction", "Faster in sepsis and summer"], ["Stomach and insects", "Meal state and maggot stage", "Meal time often uncertain"]]}
+  },
+  {
+   "title": "Stomach contents and the last meal",
+   "tx": "When the hour of the last meal is known, the **state of gastric emptying** narrows the interval usefully. A light meal usually leaves the stomach in one to two hours, a medium meal in three to four hours and a heavy meal in five to eight hours. Food still recognisable by the naked eye was generally eaten within about two hours. Shock, head injury and coma can halt emptying completely, so corroboration is essential.",
+   "say": "Recognisable food points to death within roughly two hours of eating, unless shock or head injury froze digestion.",
+   "vis": {"kind": "table", "cols": ["Meal size", "Usual gastric emptying", "Exam caution"], "rows": [["Light meal", "1 to 2 hours", "Fluids leave even faster"], ["Medium meal", "3 to 4 hours", "Fat slows the process"], ["Heavy meal", "5 to 8 hours", "Wide individual variation"], ["After head injury", "May exceed 24 hours", "Do not date death by stomach alone"]]}
+  },
+  {
+   "title": "Vitreous potassium and the Madea Henssge formula",
+   "tx": "Vitreous humour resists early decay, and its **potassium rise after death** is fairly linear for up to 120 hours. Potassium climbs by about 0.2 millimoles per litre each hour from a starting value near 5 to 8. The Madea and Henssge formula reads: postmortem interval equals 5.26 times the potassium concentration minus 30.9. Even then the 95 percent confidence limits stretch to plus or minus 20 hours at 100 hours.",
+   "say": "Vitreous potassium rises steadily, and the formula converts it to hours, but the error band stays wide.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Aspirate vitreous from the eye"}, {"id": "b", "label": "Measure potassium concentration"}, {"id": "c", "label": "Apply PMI equals 5.26 K minus 30.9"}, {"id": "d", "label": "Quote interval with plus minus 20 hour limits"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Other fluids used for timing",
+   "tx": "Several body fluids change in parallel and can support the estimate when vitreous is unavailable. **Synovial fluid potassium** more than doubles within the first two days, and cisternal spinal fluid potassium rises at a constant rate over the first 20 hours. Blood lactic acid rises fifty to seventy five fold in 12 to 24 hours, steepest in the first six to eight hours. None of these replaces the combined clinical picture.",
+   "say": "Synovial and spinal fluid potassium plus blood lactate move predictably, yet each only supports the wider estimate.",
+   "vis": {"kind": "compare", "left": {"title": "Fluid markers that rise", "points": ["Synovial potassium doubles in two days", "CSF potassium rises for twenty hours", "Blood lactate climbs fifty fold or more", "Amino acid nitrogen reaches 30 by 48 hours"]}, "right": {"title": "Markers that fall", "points": ["Blood sodium drops about 0.9 per hour", "Vitreous glucose falls to zero in hours", "Vitreous chloride drifts slowly down", "High vitreous glucose suggests diabetes"]}}
+  },
+  {
+   "title": "Writing the opinion on time since death",
+   "tx": "A defensible report lists each observation separately before offering the bracket, because **transparent reasoning survives cross examination** better than a bare number. Note rectal temperature, lividity fixity, rigor distribution, green discolouration, stomach state and maggot stage with the ambient conditions. If the signs conflict, say which sign was discounted and why, for example refrigeration delaying rigor. Courts accept a reasoned range; they punish false precision.",
+   "say": "Record every sign and the weather first, then give the range, and explain any sign you chose to discount.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Record temperature, lividity and rigor"}, {"id": "b", "label": "Add decomposition, stomach and insects"}, {"id": "c", "label": "Find the bracket fitting all signs"}, {"id": "d", "label": "State limits and conflicting signs openly"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,241 @@
+{
+  "v": 1,
+  "module": "phm-nsaids",
+  "subject": "pharmacology",
+  "title": "Oxicams, Parenteral Ketorolac, Paracetamol Overdose, and Antidotal Therapy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical oxicam derivative characterized by a remarkably long plasma elimination half-life of fifty hours is **piroxicam**. Because of its slow hepatic clearance, piroxicam achieves stable steady-state plasma concentrations allowing convenient once-daily 20 mg dosing in chronic rheumatoid arthritis, ankylosing spondylitis, and osteoarthritis. However, its prolonged systemic persistence and marked non-selective inhibition of both COX-1 and COX-2 result in a high incidence of severe peptic ulceration, gastrointestinal hemorrhage, and severe cutaneous bullous drug eruptions like Stevens-Johnson syndrome.",
+      "say": "Piroxicam is a once-daily oxicam NSAID with a 50-hour half-life that carries substantial gastrointestinal and cutaneous risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Oxicam drug entity",
+          "Plasma elimination half-life",
+          "Relative COX-2 selectivity",
+          "Primary clinical application"
+        ],
+        "rows": [
+          [
+            "Piroxicam",
+            "50 hours",
+            "Non-selective COX-1 and COX-2",
+            "Chronic rheumatoid and osteoarthritis"
+          ],
+          [
+            "Meloxicam",
+            "20 hours",
+            "Preferential COX-2 selectivity",
+            "Lower gastrointestinal toxicity profile"
+          ],
+          [
+            "Lornoxicam",
+            "4 hours",
+            "Potent non-selective inhibition",
+            "Short-term acute postoperative pain"
+          ],
+          [
+            "Tenoxicam",
+            "70 hours",
+            "Non-selective COX-1 and COX-2",
+            "Prolonged once-daily arthritis control"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A potent pyrrolo-pyrrole derivative engineered primarily for parenteral analgesic efficacy rather than anti-inflammatory use is **ketorolac**. Providing analgesic efficacy comparable to moderate doses of morphine without causing respiratory depression, sedation, or biliary spasm, ketorolac is widely used for moderate-to-severe postoperative pain and acute renal colic. Because it exerts exceptionally potent COX-1 inhibition, prolonged systemic use carries high risks of severe gastrointestinal bleeding, surgical site hematomas, and acute renal failure, legally restricting its use to a maximum duration of five days.",
+      "say": "Ketorolac provides opioid-level postoperative analgesia without sedation, but is restricted to five days maximum.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parenteral Ketorolac (NSAID)",
+          "points": [
+            "Potent cyclooxygenase inhibition without opioid receptor binding",
+            "Analgesic efficacy comparable to 10 mg parenteral morphine",
+            "Zero respiratory depression, sedation, or physical dependence",
+            "Strictly restricted to 5 days maximum due to ulcer and renal risks"
+          ]
+        },
+        "right": {
+          "title": "Morphine (Opioid Agonist)",
+          "points": [
+            "Mu-opioid receptor agonist in central pain pathways",
+            "Produces dose-dependent sedation, euphoria, and analgesia",
+            "Significant respiratory depression, nausea, constipation, addiction",
+            "Safe in renal impairment without precipitating gastrointestinal ulceration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A sulfonanilide NSAID exhibiting preferential inhibition of the inducible COX-2 isoform over COX-1 is **nimesulide**. Recognized for its rapid onset of analgesic and antipyretic action, nimesulide weakly inhibits platelet aggregation and causes significantly fewer gastric mucosal erosions than non-selective NSAIDs. However, because of idiosyncratic, severe, and occasionally fatal hepatotoxicity resulting in fulminant hepatic necrosis, nimesulide is banned in many countries and strictly prohibited in children under twelve years of age. When used in adults, therapy must never exceed fifteen consecutive days.",
+      "say": "Nimesulide is a preferential COX-2 inhibitor with low gastric toxicity, but risks severe idiosyncratic hepatotoxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nime",
+            "label": "Oral nimesulide administration"
+          },
+          {
+            "id": "cox2",
+            "label": "Preferential COX-2 inhibition with low gastric ulcer risk"
+          },
+          {
+            "id": "hep",
+            "label": "Idiosyncratic mitochondrial toxicity and oxidative stress in hepatocytes"
+          },
+          {
+            "id": "fail",
+            "label": "Acute centrilobular liver necrosis and fulminant hepatic failure"
+          }
+        ],
+        "edges": [
+          [
+            "nime",
+            "cox2"
+          ],
+          [
+            "nime",
+            "hep"
+          ],
+          [
+            "hep",
+            "fail"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The ubiquitous para-aminophenol derivative that acts as a first-line analgesic and antipyretic devoid of significant peripheral anti-inflammatory action is **paracetamol** (acetaminophen). Acting primarily in the central nervous system by inhibiting peroxidase catalytic activity of prostaglandin H2 synthase, paracetamol resets the hypothalamic thermoregulatory set-point and blocks central pain transmission without causing gastric ulceration, platelet dysfunction, or bronchospasm. At therapeutic doses up to 4 grams daily in adults, it undergoes benign hepatic glucuronidation and sulfation, with only a small fraction oxidized via CYP2E1.",
+      "say": "Paracetamol resets the hypothalamic fever thermostat centrally without causing gastric ulcers or platelet dysfunction.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-paracetamol.webp",
+        "alt": "Paracetamol central analgesic action and hepatic metabolic pathways",
+        "caption": "Illustration of paracetamol central thermoregulatory mechanisms, benign conjugation, and toxic metabolite generation in overdose."
+      }
+    },
+    {
+      "tx": "The life-saving sulfhydryl-donating antidote administered to prevent or abort fatal centrilobular hepatic necrosis in acute paracetamol overdose is **N-acetylcysteine** (NAC). In massive ingestions exceeding 150 mg/kg, normal hepatic glucuronide and sulfate pathways become saturated, shunting paracetamol into CYP2E1 oxidation to produce the highly reactive electrophilic toxic metabolite NAPQI. N-acetylcysteine replenishes depleted intracellular glutathione stores and directly conjugates NAPQI, preventing covalent binding to hepatocyte macromolecules. It is most effective when administered within eight hours of ingestion.",
+      "say": "N-acetylcysteine donates sulfhydryl groups to replenish glutathione and neutralize the reactive hepatotoxic metabolite NAPQI.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/toxic-hepatitis-fig1.webp",
+        "alt": "Toxic hepatitis from paracetamol showing centrilobular necrosis",
+        "caption": "Hepatic histology and biochemical pathways showing CYP2E1 oxidation of paracetamol, glutathione depletion, and centrilobular hepatocyte necrosis."
+      }
+    },
+    {
+      "tx": "The clinical risk stratification tool used worldwide to determine the necessity of intravenous or oral N-acetylcysteine therapy following acute paracetamol ingestion is the **Rumack-Matthew nomogram**. Plotting serum paracetamol concentration against the exact post-ingestion time between four and twenty-four hours, the nomogram establishes a treatment line beginning at 150 micrograms per milliliter at four hours. Patients whose concentrations plot above this line are at high risk of acute liver failure and must immediately receive a full course of N-acetylcysteine.",
+      "say": "The Rumack-Matthew nomogram plots paracetamol levels between four and twenty-four hours to guide antidote therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Post-ingestion time",
+          "Nomogram treatment threshold",
+          "Clinical toxic phase",
+          "Primary clinical presentation"
+        ],
+        "rows": [
+          [
+            "4 hours",
+            "150 mcg/mL",
+            "Phase 1 (0 to 24 hours)",
+            "Asymptomatic or mild anorexia, nausea, vomiting"
+          ],
+          [
+            "8 hours",
+            "75 mcg/mL",
+            "Phase 2 (24 to 72 hours)",
+            "Right upper quadrant pain, rising AST, ALT, and INR"
+          ],
+          [
+            "12 hours",
+            "37.5 mcg/mL",
+            "Phase 3 (72 to 96 hours)",
+            "Peak liver necrosis, jaundice, encephalopathy, renal failure"
+          ],
+          [
+            "24 hours",
+            "4.7 mcg/mL",
+            "Phase 4 (>96 hours)",
+            "Gradual hepatic recovery or death from multi-organ failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The prototypical diaryl-substituted pyrazole derivative that acts as a selective inhibitor of cyclooxygenase-2 is **celecoxib**. Exhibiting approximately ten-to-twenty-fold higher selectivity for COX-2 over COX-1, celecoxib delivers equivalent analgesic and anti-inflammatory efficacy in rheumatoid arthritis and osteoarthritis while sparing gastric mucosal COX-1. Consequently, it demonstrates a fifty percent reduction in endoscopic gastroduodenal ulcers compared to traditional NSAIDs. However, it retains renal fluid retention hazards and carries a sulfonamide moiety, contraindicating its use in severe sulfa allergy.",
+      "say": "Celecoxib selectively inhibits COX-2 to spare gastric mucosa while treating osteoarthritis and rheumatoid arthritis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Celecoxib (Selective COX-2 Inhibitor)",
+          "points": [
+            "Selective COX-2 inhibition sparing gastric COX-1",
+            "50% reduction in symptomatic gastrointestinal ulcers",
+            "Zero inhibition of platelet thromboxane A2 (no bleeding defect)",
+            "Sulfonamide structure: contraindicated in sulfa hypersensitivity"
+          ]
+        },
+        "right": {
+          "title": "Traditional NSAIDs (Non-Selective)",
+          "points": [
+            "Inhibit both COX-1 and COX-2 non-selectively",
+            "High rate of gastric ulceration, dyspepsia, perforation",
+            "Prolong bleeding time by inhibiting platelet thromboxane",
+            "Non-sulfonamide chemical structures (except nimesulide)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The critical clinical hazard associated with selective cyclooxygenase-2 inhibition is an elevated **cardiovascular thrombotic risk**. In vascular biology, endothelial COX-2 continuously synthesizes prostacyclin, a potent vasodilator and inhibitor of platelet aggregation. Selective coxibs suppress this protective endothelial prostacyclin without inhibiting platelet COX-1-derived thromboxane A2. This prothrombotic imbalance creates unopposed platelet aggregation and vasoconstriction, significantly increasing the incidence of myocardial infarction, ischemic stroke, and sudden vascular death, leading to rofecoxib withdrawal.",
+      "say": "Selective COX-2 inhibition unbalances the vascular prostacyclin to thromboxane ratio, accelerating myocardial infarction risks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "coxib",
+            "label": "Selective COX-2 inhibitor administration (coxibs)"
+          },
+          {
+            "id": "pgi2",
+            "label": "Suppression of endothelial prostacyclin (PGI2) vasodilation"
+          },
+          {
+            "id": "txa2",
+            "label": "Unopposed platelet COX-1 synthesis of thromboxane A2"
+          },
+          {
+            "id": "clot",
+            "label": "Platelet hyperreactivity, arterial thrombosis, and acute coronary syndrome"
+          }
+        ],
+        "edges": [
+          [
+            "coxib",
+            "pgi2"
+          ],
+          [
+            "coxib",
+            "txa2"
+          ],
+          [
+            "pgi2",
+            "clot"
+          ],
+          [
+            "txa2",
+            "clot"
+          ]
+        ]
+      }
+    }
+  ]
+}

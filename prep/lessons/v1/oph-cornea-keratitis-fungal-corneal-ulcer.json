@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-fungal-corneal-ulcer",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Fungal Corneal Ulcer",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Fungal corneal ulcer** follows vegetative trauma in agricultural workers, dry raised grey white infiltrate with feathery edges, satellite lesions and often hypopyon disproportionate to surface size. Course is slower and deeper than bacterial ulcer, worsening on antibacterial or steroid therapy classically. Potassium hydroxide mount of scraping gives rapid hyphae evidence while culture confirms species slowly.",
+   "say": "Vegetative trauma together gives feathery fungal pattern in agricultural workers characteristically during harvest seasons in endemic regions. Rapid mount gives hyphae evidence before culture. Steroid worsening gives history clue.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m105-oph-cornea-keratitis-fungal-corneal-ulcer.webp",
+    "alt": "Fungal corneal ulcer with dry feathery margins and smaller satellite lesions nearby.",
+    "caption": "A fungal ulcer shows feathery infiltrate margins with separate satellite lesions in the surrounding cornea. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Feathery margins** with satellite infiltrates separate fungal from bacterial smooth edged ulcers at slit lamp, though overlap needs microbiology in every severe case. Dry texture and raised surface add bedside weight before mount results. Endothelial plaque below ulcer signals deep fungal penetration toward chamber invasion.",
+   "say": "Feathery edges together give fungal separation from bacterial ulcers at slit lamp during assessment in tropical clinics characteristically. Dry raised texture gives bedside weight additionally. Deep plaque gives penetration warning.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal bedside set",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Feathery margins",
+      "Hyphal spread pattern"
+     ],
+     [
+      "Satellite lesions",
+      "Separated fungal colonies"
+     ],
+     [
+      "Endothelial plaque",
+      "Deep penetration warning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Satellite lesions** are smaller infiltrates separated from main ulcer by clearer cornea where hyphae seed discontinuously, a pattern bacteria rarely produce. Their presence raises fungal priority in scraping media selection, fungal plates and stains requested explicitly. Communication with laboratory therefore includes fungal suspicion phrase, not ulcer unspecified.",
+   "say": "Separated satellites together give fungal priority in laboratory requests at scraping in severe ulcers in clinic. Explicit suspicion gives media selection value. Bacterial rarity gives pattern weight.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fungal ulcer pattern",
+     "points": [
+      "Feathery dry raised infiltrate",
+      "Satellites, endothelial plaque",
+      "Vegetative trauma history"
+     ]
+    },
+    "right": {
+     "title": "Bacterial ulcer pattern",
+     "points": [
+      "Smooth suppurative infiltrate",
+      "Rapid melt tempo",
+      "Lens or surface trauma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Filamentous fungi dominate tropical vegetative disease while yeast dominates immunocompromised or post surgical corneas in temperate settings, antifungal choice following mount morphology initially. Therapy is prolonged weeks, penetration limited, surgery earlier for deep or non responding disease than bacterial equivalents. **Slow response** expectation prevents premature therapy switching in fungal protocols.",
+   "say": "Morphology together gives initial antifungal direction before species culture in fungal protocols at referral centres over weeks. Prolonged course gives response expectation setting. Deep disease gives earlier surgery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fungal ulcer pathway",
+    "nodes": [
+     {
+      "id": "veg",
+      "label": "Vegetative trauma history"
+     },
+     {
+      "id": "mount",
+      "label": "Scrape, mount for hyphae"
+     },
+     {
+      "id": "anti",
+      "label": "Prolonged antifungal therapy"
+     },
+     {
+      "id": "surg",
+      "label": "Early graft if deep failure"
+     }
+    ],
+    "edges": [
+     [
+      "veg",
+      "mount"
+     ],
+     [
+      "mount",
+      "anti"
+     ],
+     [
+      "anti",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The mount settles arguments that the slit lamp cannot. **Septate hyphae** branching in a corneal scraping confirm filamentous fungal infection before culture grows, and calcofluor white makes the fungal walls fluoresce so they stand out from debris. A potassium hydroxide preparation dissolves corneal cells while leaving hyphae intact. Scraping the ulcer edge and base gives the best yield, and a positive mount starts antifungal therapy the same day rather than after days of waiting.",
+   "say": "Septate hyphae on a KOH mount confirm fungal keratitis before culture returns. Scraping edge and base gives the best yield and starts treatment the same day.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m221-oph-cornea-keratitis-fungal-corneal-ulcer.webp",
+    "alt": "Photomicrograph style view of septate fungal hyphae in a corneal scraping on KOH and calcofluor white preparations.",
+    "caption": "Branching septate hyphae from a corneal scraping are shown on KOH wet mount and calcofluor white staining. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Steroid history worsening fungal ulcer is diagnostic clue and therapeutic prohibition until fungal control established under specialist care. Many referrals arrive steroid worsened from bacterial assumption in agricultural belts. **Steroid worsened ulcer** in farmer therefore scrapes for fungus before any further suppression discussion.",
+   "say": "Steroid worsening together gives fungal clue in agricultural referrals at tertiary cornea clinics during history review in detail. Scraping gives priority before suppression. Assumption history gives teaching value."
+  },
+  {
+   "tx": "Therapeutic keratoplasty in fungal disease needs wider margins because hyphae extend beyond visible infiltrate, recurrence in graft commoner than bacterial grafts. Postoperative antifungal continuation and recurrence surveillance extend months. **Margin generosity** is fungal graft principle examinations contrast with bacterial tectonic urgency.",
+   "say": "Margin generosity together gives fungal graft principle at therapeutic surgery in referral centres for deep ulcers failing therapy. Recurrence surveillance gives months duration afterward. Visible edge gives underestimation warning.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal course expectations",
+    "cols": [
+     "Expectation",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Weeks of therapy",
+      "Slow hyphal clearance"
+     ],
+     [
+      "Deep penetration",
+      "Endothelial plaque pathway"
+     ],
+     [
+      "Graft recurrence risk",
+      "Hyphae beyond visible edge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention in agricultural belts is protective eyewear during harvest and immediate care for vegetative injuries, public health reducing perforation burden substantially. Delayed presentation predicts perforation and endophthalmitis more than organism virulence in outcome studies. **Injury day presentation** campaigns therefore target farmers before ulcer microbiology begins.",
+   "say": "Protective eyewear together gives perforation prevention in harvest injury programmes across agricultural belts in endemic regions. Early presentation gives outcome dominance additionally. Campaign timing gives harvest targeting.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "History",
+      "Vegetative trauma in farmer"
+     ],
+     [
+      "Signs",
+      "Feathery, satellites, plaque"
+     ],
+     [
+      "Rapid test",
+      "Mount shows hyphae"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: farmer feathery satellites mount hyphae and steroid worsening forbids suppression. Therapy prolongs, margins widen and prevention wears eyewear at harvest. **Endothelial plaque** is deep warning that moves surgical planning earlier than surface size suggests. Referral speed from primary care decides perforation rates in farming districts more than drug brand.",
+   "say": "Farmer history together gives fungal priority while mount gives rapid confirmation at scraping in tropical clinics reliably for treatment. Plaque gives surgical timing advancement additionally. Prevention gives population value.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal action set",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Hyphae on mount",
+      "Start antifungal, stop steroid"
+     ],
+     [
+      "Deep plaque present",
+      "Plan early surgical option"
+     ],
+     [
+      "Harvest injury",
+      "Same day ulcer assessment"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Fungal ulcer signature",
+   "b": "Vegetative trauma, dry feathery infiltrate, satellites and hypopyon; mount shows hyphae."
+  },
+  {
+   "f": "Steroid in fungal ulcer",
+   "b": "Worsens disease; steroid worsened farmer ulcer scrapes for fungus first."
+  },
+  {
+   "f": "Fungal graft principle",
+   "b": "Wide margins beyond visible infiltrate because hyphae extend further; prolonged postoperative therapy."
+  }
+ ],
+ "keys": [
+  "Satellites raise fungal priority at scraping",
+  "Endothelial plaque means deep penetration",
+  "Eyewear prevents harvest perforations"
+ ]
+}

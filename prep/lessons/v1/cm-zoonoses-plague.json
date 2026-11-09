@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "id": "cm-zoonoses-plague",
+ "subject": "community-medicine",
+ "module": "cm-zoonoses",
+ "title": "Bacterial Zoonoses: Plague, Brucellosis, Anthrax and Scrub Typhus",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Plague transmission and Xenopsylla cheopis",
+   "tx": "The Gram-negative coccobacillus Yersinia pestis causes **bubonic plague**, maintained in wild sylvatic rodent reservoirs and transmitted to domestic commensal rats and humans by the oriental rat flea Xenopsylla cheopis. When multiplying bacteria block the flea proventriculus, the starving insect repeatedly attempts feeding and regurgitates live organisms into the host, causing rapid bacterial transport to draining regional lymph nodes that enlarge into agonizingly tender buboes.",
+   "say": "Yersinia pestis multiplies inside the flea proventriculus until it blocks the gut. The starving flea regurgitates bacteria into the bite wound, swelling regional lymph nodes into painful buboes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/plague-fig1.webp",
+    "alt": "Microbiology and clinical presentation of Yersinia pestis plague showing bubo formation and bipolar staining",
+    "caption": "Plague: Bubo formation in regional lymphatics and safety-pin bipolar staining of Yersinia pestis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Pneumonic plague and aerosol transmission",
+   "tx": "While bubonic plague remains non-communicable between humans without fleas, secondary haematogenous seeding of lung parenchyma produces **pneumonic plague**, which converts the infection into an explosive person-to-person respiratory emergency. Patients discharge millions of virulent bacilli in bloody, frothy sputum through coughing, causing severe respiratory distress with cyanosis and cardiovascular collapse that leads to death within twenty-four hours if untreated.",
+   "say": "Pneumonic plague spreads directly from person to person through coughing. Patients discharge bloody sputum teeming with bacilli, causing rapid respiratory failure and death within twenty-four hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bubonic plague",
+     "points": ["Flea bite transmission from rats", "Painful inguinal or axillary buboes", "No direct person-to-person spread"]
+    },
+    "right": {
+     "title": "Pneumonic plague",
+     "points": ["Airborne droplet aerosol transmission", "Bloody frothy sputum and cyanosis", "Highly contagious person-to-person danger"]
+    }
+   }
+  },
+  {
+   "title": "Flea indices and rodent control sequencing",
+   "tx": "Surveillance teams track rodent ectoparasites using the **cheopis index**, defined as the average number of Xenopsylla cheopis fleas per trapped rodent host, with an index exceeding one indicating epidemic transmission danger. Crucially, public health control demands applying insecticidal dusts like malathion to rodent runs before trapping or poisoning rats; killing rats first forces starved fleas to abandon cooling rodent corpses and bite human hosts.",
+   "say": "A cheopis index exceeding one flea per rat signals transmission risk. Health teams must always dust burrows with insecticide before killing rats, so starving fleas do not bite humans.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cheopis index exceeds 1 flea per rat"},
+     {"id": "b", "label": "Insecticide dusting of rodent burrows"},
+     {"id": "c", "label": "Delayed rodenticide trapping and baiting"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Brucellosis: occupational transmission and undulant fever",
+   "tx": "The bacterial zoonosis **brucellosis transmission** is acquired through occupational exposure to infected animal tissues or consumption of raw unpasteurised milk and cheeses from dairy cows, goats and sheep. Caused by Brucella melitensis, abortus or suis, the intracellular pathogen colonises the reticuloendothelial system, causing undulant fever, profuse drenching night sweats with a mouldy odor, arthralgia, sacroliitis and hepatosplenomegaly in dairy farmers and slaughterhouse workers.",
+   "say": "Brucellosis infects dairy farmers and consumers of unpasteurised milk. Bacteria survive inside macrophages, triggering undulant fevers, heavy night sweats, joint pains and splenic enlargement.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Brucella species", "Primary animal host", "Human pathogenicity"],
+    "rows": [
+     ["Brucella melitensis", "Goats and sheep", "Most invasive and severe human illness"],
+     ["Brucella abortus", "Cattle and buffaloes", "Moderate severity, causes bovine abortion"],
+     ["Brucella suis", "Swine herds", "Severe suppurative destructive lesions"],
+     ["Brucella canis", "Domestic dogs", "Infrequent, mild human febrile illness"]
+    ]
+   }
+  },
+  {
+   "title": "Anthrax: cutaneous eschar and spore resistance",
+   "tx": "Forming exceptionally resilient spores that survive in alkaline soils for decades, Bacillus anthracis causes **cutaneous anthrax** in agricultural workers handling infected livestock carcasses, wool or hides. Infection begins as a painless, pruritic papule that rapidly develops into a central necrotic vesicle, ulcerating into a pathognomonic painless black eschar surrounded by extensive non-pitting gelatinous oedema, responding promptly to oral ciprofloxacin or penicillin.",
+   "say": "Anthrax spores survive in dry soil for decades. Spores entering broken skin produce a painless black scab surrounded by brawny swelling, known as the malignant pustule.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anthrax-fig1.webp",
+    "alt": "Clinical photograph of cutaneous anthrax malignant pustule and microbiology of Bacillus anthracis",
+    "caption": "Anthrax: Painless black cutaneous eschar with surrounding brawny gelatinous oedema. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Inhalational anthrax and public health response",
+   "tx": "Industrial processing of contaminated wool or animal hair creates aerosolised spores that provoke **inhalational anthrax**, historically termed woolsorter disease. Alveolar macrophages phagocytose inhaled spores, transporting them to mediastinal lymph nodes where germination triggers haemorrhagic mediastinitis, widening of the mediastinum on chest radiography, pleural effusion and septic shock, requiring dual intravenous bactericidal and antitoxin therapy alongside post-exposure ciprofloxacin chemoprophylaxis.",
+   "say": "Inhaling anthrax spores leads to severe bleeding inside chest lymph nodes, widening the mediastinum and causing septic shock. Emergency treatment requires intravenous antibiotics and antitoxin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cutaneous anthrax (95%)",
+     "points": ["Entry through skin cuts from hides", "Painless coal-black depressed eschar", "Low mortality with early antibiotics"]
+    },
+    "right": {
+     "title": "Inhalational anthrax (<5%)",
+     "points": ["Aerosol spore inhalation into lungs", "Haemorrhagic mediastinitis and shock", "Extremely high fatality without prompt care"]
+    }
+   }
+  },
+  {
+   "title": "Scrub typhus: vector and the diagnostic eschar",
+   "tx": "In agricultural valleys and scrub terrain across India, **scrub typhus transmission** is mediated by the bite of larval trombiculid mites, specifically Leptotrombidium deliense, which inoculate Orientia tsutsugamushi during feeding. At the unnoticed chigger bite site, an erythematous macule evolves into a pathognomonic painless cigarette-burn eschar with regional lymphadenopathy, accompanied by high spiking fever, headache, prominent conjunctival suffusion and maculopapular trunk rash.",
+   "say": "Chigger mites lurking on scrub vegetation transmit Orientia tsutsugamushi. The bite leaves a cigarette-burn black scab, accompanied by high fever, red eyes and swollen lymph nodes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scrub-typhus-fig1.webp",
+    "alt": "Illustration showing scrub typhus transmission by larval trombiculid chigger mites and characteristic eschar",
+    "caption": "Scrub typhus: Leptotrombidium chigger mite vector, characteristic necrotic eschar and systemic vasculitis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Systemic complications and Weil-Felix test",
+   "tx": "Delayed diagnosis of scrub typhus permits widespread endothelial vasculitis to trigger **acute lung injury**, non-cardiogenic pulmonary oedema, acute kidney injury, myocarditis, meningoencephalitis and disseminated intravascular coagulation. While point-of-care IgM ELISA tests provide modern confirmation, historical laboratories utilized the Weil-Felix agglutination reaction, where serum antibodies from infected patients agglutinate Proteus mirabilis OX-K antigens at diagnostic titres of one in eighty or higher.",
+   "say": "Untreated scrub typhus attacks blood vessels throughout the body, causing kidney failure, lung oedema and brain inflammation. An IgM antibody test or OX-K agglutination confirms the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Endothelial invasion by Orientia"},
+     {"id": "b", "label": "Microvascular leak and vasculitis"},
+     {"id": "c", "label": "Weil-Felix OX-K agglutination or IgM ELISA"},
+     {"id": "d", "label": "Acute lung and renal multi-organ injury"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Targeted antimicrobial therapy for scrub typhus",
+   "tx": "The definitive therapeutic choice for confirmed or suspected scrub typhus is **doxycycline administration**, given orally at one hundred milligrams twice daily for seven consecutive days, typically inducing complete defervescence within thirty-six to forty-eight hours. For pregnant women and young children where tetracyclines are avoided, oral azithromycin at five hundred milligrams once daily for five days provides equivalent clinical cure without dental or fetal adverse effects.",
+   "say": "Doxycycline cures scrub typhus within two days. For pregnant mothers and young infants, azithromycin is the safest and most effective alternative antibiotic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Patient group", "First-line antibiotic", "Regimen duration and route"],
+    "rows": [
+     ["Non-pregnant adults", "Doxycycline 100 mg twice daily", "Oral tablets for 7 consecutive days"],
+     ["Pregnant women", "Azithromycin 500 mg once daily", "Oral tablets for 5 consecutive days"],
+     ["Paediatric children", "Azithromycin 10 mg/kg daily", "Oral suspension for 5 consecutive days"],
+     ["Severe organ failure", "Intravenous doxycycline or azithromycin", "Parenteral therapy until oral recovery"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

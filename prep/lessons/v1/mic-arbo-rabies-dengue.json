@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "module": "mic-arbo-rabies",
+  "subject": "microbiology",
+  "title": "Dengue, NS1 Antigen, Chikungunya, Japanese Encephalitis and KFD",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Dengue** is a flavivirus infection transmitted by Aedes aegypti and Aedes albopictus. Four serotypes circulate; primary infection is often influenza-like, while secondary infection with another serotype carries greater severe-disease risk through antibody-dependent enhancement and host responses. Fever, retro-orbital pain, myalgia, rash, thrombocytopenia and rising haematocrit frame the course.",
+      "say": "Dengue becomes dangerous around defervescence, when plasma leakage peaks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dengue-fig1.webp",
+        "alt": "Dengue warning signs and plasma leakage diagram",
+        "caption": "Dengue course and warning signs around defervescence."
+      }
+    },
+    {
+      "tx": "**NS1 antigen** is secreted by dengue virus infected cells and is detectable in blood early, typically in the first five days of fever. After that window, dengue **IgM** becomes more useful. PCR can identify virus and serotype early. A negative NS1 late in illness does not exclude dengue, and test timing must be recorded with the day of fever.",
+      "say": "NS1 early, IgM later: dengue tests are chosen by illness day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Days 1 to 5",
+          "points": [
+            "NS1 antigen commonly positive",
+            "RT-PCR most specific and can type serotype",
+            "IgM may still be negative",
+            "CBC shows falling platelets and white cells"
+          ]
+        },
+        "right": {
+          "title": "After day 5",
+          "points": [
+            "IgM increasingly detectable",
+            "NS1 sensitivity declines",
+            "Paired IgG helps classify primary versus secondary in labs",
+            "Haematocrit tracks plasma leakage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Dengue haemorrhagic fever** in older terminology and severe dengue in current WHO language describe plasma leakage, severe bleeding or organ impairment. Warning signs include persistent vomiting, severe abdominal pain, mucosal bleeding, lethargy, liver enlargement and rising haematocrit with rapidly falling platelets. Careful isotonic fluid titration is central; both under-resuscitation and overload worsen outcomes.",
+      "say": "Rising haematocrit with falling platelets warns that dengue is leaking plasma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warning signs",
+          "points": [
+            "Abdominal pain or tenderness",
+            "Persistent vomiting",
+            "Clinical fluid accumulation",
+            "Mucosal bleed and lethargy"
+          ]
+        },
+        "right": {
+          "title": "Severe dengue",
+          "points": [
+            "Shock from plasma leakage",
+            "Severe bleeding",
+            "AST or ALT very high",
+            "Impaired consciousness, heart or kidney dysfunction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chikungunya** is an alphavirus also spread by Aedes mosquitoes, causing abrupt fever and prominent symmetric polyarthralgia that can persist for months. Rash and conjunctivitis occur. It mimics dengue but severe plasma leakage is uncommon, and joint pain dominates. Co-circulation means public-health laboratories may need to test for dengue, chikungunya and Zika in the same febrile patient.",
+      "say": "Dengue leaks plasma; chikungunya cripples joints for weeks to months.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chikungunya clues",
+          "points": [
+            "Sudden high fever",
+            "Severe symmetric small-joint pain",
+            "Rash and myalgia",
+            "Chronic arthralgia in a substantial minority"
+          ]
+        },
+        "right": {
+          "title": "Dengue contrasts",
+          "points": [
+            "Retro-orbital pain and thrombocytopenia prominent",
+            "Plasma leakage around defervescence",
+            "Bleeding risk guides NSAID avoidance",
+            "Haematocrit monitoring is central"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Japanese encephalitis** is a flavivirus maintained in Culex mosquitoes, pigs and wading birds, with humans as dead-end hosts. Most infections are asymptomatic; encephalitis causes fever, seizures, movement disorders and coma with substantial mortality and disability. Vaccination protects travellers and endemic populations. Diagnosis usually relies on IgM in serum or cerebrospinal fluid because viraemia is brief by presentation.",
+      "say": "Japanese encephalitis is a Culex-borne brain disease best prevented by vaccination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ecology",
+          "points": [
+            "Culex tritaeniorhynchus in rice fields",
+            "Pigs amplify virus",
+            "Birds maintain the cycle",
+            "Humans do not sustain transmission"
+          ]
+        },
+        "right": {
+          "title": "Clinical points",
+          "points": [
+            "Acute encephalitis syndrome",
+            "Thalamic MRI changes may occur",
+            "CSF IgM supports diagnosis",
+            "Supportive care, no specific antiviral standard"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Kyasanur Forest disease** is a tick-borne flavivirus haemorrhagic fever in parts of India, associated with Haemaphysalis ticks, monkeys and forest exposure. Fever may be biphasic, with haemorrhagic and later neurologic phases. The unifying lesson across arboviruses is vector first: Aedes for dengue and chikungunya, Culex for Japanese encephalitis, and ticks for Kyasanur Forest disease.",
+      "say": "Name the vector and the arbovirus differential becomes geographically disciplined.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vector",
+            "label": "Identify mosquito, tick or exposure"
+          },
+          {
+            "id": "syndrome",
+            "label": "Fever, joints, brain or bleeding"
+          },
+          {
+            "id": "timed",
+            "label": "Choose NS1, PCR or IgM by day"
+          },
+          {
+            "id": "notify",
+            "label": "Notify and control vector source"
+          }
+        ],
+        "edges": [
+          [
+            "vector",
+            "syndrome"
+          ],
+          [
+            "syndrome",
+            "timed"
+          ],
+          [
+            "timed",
+            "notify"
+          ]
+        ]
+      }
+    }
+  ]
+}

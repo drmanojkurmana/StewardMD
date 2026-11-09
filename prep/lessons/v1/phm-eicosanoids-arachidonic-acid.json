@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phm-eicosanoids",
+  "subject": "pharmacology",
+  "title": "Eicosanoid Biosynthesis, Prostaglandin Analogues, and Leukotriene Pathway Inhibitors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The twenty-carbon polyunsaturated fatty acid liberated from membrane phospholipids that serves as the universal precursor for eicosanoid biosynthesis is **arachidonic acid**. Cleaved from membrane phospholipids by phospholipase A2 in response to inflammatory, physical, or hormonal stimuli, free arachidonic acid enters two major enzymatic cascades: the cyclooxygenase pathway generating prostanoids, and the 5-lipoxygenase pathway generating leukotrienes. Anti-inflammatory glucocorticoids indirectly arrest this initial cleavage by upregulating annexin A1 (lipocortin), which inhibits phospholipase A2 and deprives both downstream synthetic cascades of substrate.",
+      "say": "Arachidonic acid is cleaved by phospholipase A2 to fuel the cyclooxygenase and 5-lipoxygenase eicosanoid cascades.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mem",
+            "label": "Membrane phospholipids (sn-2 position)"
+          },
+          {
+            "id": "pla2",
+            "label": "Phospholipase A2 cleavage (inhibited by annexin A1)"
+          },
+          {
+            "id": "aa",
+            "label": "Free arachidonic acid pool"
+          },
+          {
+            "id": "split",
+            "label": "Bifurcation into COX (prostanoids) and 5-LOX (leukotrienes) cascades"
+          }
+        ],
+        "edges": [
+          [
+            "mem",
+            "pla2"
+          ],
+          [
+            "pla2",
+            "aa"
+          ],
+          [
+            "aa",
+            "split"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The bifunctional heme-containing enzyme that converts free arachidonic acid into prostaglandin endoperoxides G2 and H2 is **cyclooxygenase**. Two distinct catalytic isoforms exist: constitutive COX-1, which synthesizes homeostatic prostanoids that protect gastric mucosal epithelium, sustain renal medullary perfusion, and facilitate platelet aggregation; and inducible COX-2, which is markedly upregulated by inflammatory cytokines, endotoxins, and mitogens at sites of tissue damage and malignancy. Traditional non-steroidal anti-inflammatory drugs non-selectively inhibit both isoforms, balancing anti-inflammatory efficacy against gastric and renal toxicities.",
+      "say": "Cyclooxygenase exists as constitutive COX-1 sustaining mucosal and platelet homeostasis, and inducible COX-2 driving inflammation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cyclooxygenase-1 (Constitutive / COX-1)",
+          "points": [
+            "Expressed constitutively in gastric mucosa, platelets, kidneys",
+            "Produces thromboxane A2 (platelet clotting) and PGE2",
+            "Maintains gastric mucosal barrier and renal blood flow",
+            "Inhibition causes peptic ulceration and bleeding"
+          ]
+        },
+        "right": {
+          "title": "Cyclooxygenase-2 (Inducible / COX-2)",
+          "points": [
+            "Induced by cytokines (IL-1, TNF-alpha) and growth factors",
+            "Abundant in inflammatory lesions, synovial tissues, endothelium",
+            "Primary source of endothelial prostacyclin (PGI2)",
+            "Targeted selectively by coxibs (celecoxib, etoricoxib)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The potent prothrombotic and vasoconstrictive eicosanoid synthesized predominantly by platelet cyclooxygenase-1 and thromboxane synthase is **thromboxane A2**. Upon discharge from dense granules of activated platelets, thromboxane A2 stimulates Gq-coupled TP receptors to promote platelet shape change, fibrinogen receptor activation, and irreversible platelet aggregation while inducing intense arterial vasoconstriction. Because platelets lack nuclei and cannot synthesize new proteins, low-dose aspirin irreversibly acetylates platelet COX-1 serine residues, suppressing thromboxane A2 synthesis for the entire seven-to-ten-day lifetime of the platelet.",
+      "say": "Thromboxane A2 promotes platelet aggregation and vasoconstriction, permanently suppressed by low-dose aspirin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thromboxane A2 (TXA2 / Platelets)",
+          "points": [
+            "Synthesized by platelet COX-1 and thromboxane synthase",
+            "Potent agonist for platelet aggregation and degranulation",
+            "Induces robust systemic arterial vasoconstriction",
+            "Irreversibly abolished by low-dose daily aspirin"
+          ]
+        },
+        "right": {
+          "title": "Prostacyclin (PGI2 / Endothelium)",
+          "points": [
+            "Synthesized by vascular endothelial COX-2 and prostacyclin synthase",
+            "Potent inhibitor of platelet aggregation via cyclic AMP",
+            "Induces marked systemic arterial vasodilation",
+            "Synthesized de novo by nucleated endothelial cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A synthetic methyl ester analogue of prostaglandin E1 that exhibits potent gastric mucosal cytoprotective and myometrial uterotonic activities is **misoprostol**. Administered orally, misoprostol binds EP3 receptors on gastric parietal cells to decrease intracellular cyclic AMP, suppressing gastric acid secretion while enhancing mucosal bicarbonate and mucus production to prevent NSAID-induced gastroduodenal ulceration. In obstetrics, it is administered orally or vaginally combined with mifepristone for medical abortion up to nine weeks gestation, for cervical ripening, and for postpartum hemorrhage, though strictly contraindicated during intended pregnancy.",
+      "say": "Misoprostol is a synthetic PGE1 analogue used for NSAID gastroprotection and medical pregnancy termination.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prostaglandin analogue",
+          "Parent eicosanoid base",
+          "Primary clinical indication",
+          "Route of administration"
+        ],
+        "rows": [
+          [
+            "Misoprostol",
+            "Prostaglandin E1 analogue",
+            "NSAID ulcer prevention; medical abortion",
+            "Oral or vaginal tablet"
+          ],
+          [
+            "Dinoprostone",
+            "Prostaglandin E2 analogue",
+            "Cervical ripening and labor induction",
+            "Intracervical gel or vaginal insert"
+          ],
+          [
+            "Carboprost",
+            "15-methyl PGF2-alpha analogue",
+            "Refractory postpartum uterine hemorrhage",
+            "Intramuscular injection"
+          ],
+          [
+            "Alprostadil",
+            "Prostaglandin E1 analogue",
+            "Maintenance of patent ductus arteriosus",
+            "Continuous intravenous infusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The synthetic formulation of endogenous prostaglandin E1 indicated to maintain patency of fetal vascular shunts is **alprostadil**. Infused continuously intravenously in neonates diagnosed with cyanotic congenital heart disease, alprostadil relaxes ductal smooth muscle, preserving the patency of the **ductus arteriosus** until corrective or palliative cardiovascular surgery can be performed. Conversely, in premature neonates suffering from an unwanted hemodynamically significant persistent patent ductus arteriosus, pharmacological closure is achieved by administering cyclooxygenase inhibitors like intravenous indomethacin or ibuprofen to arrest endogenous prostaglandin production.",
+      "say": "Alprostadil keeps the ductus arteriosus open in cyanotic heart defects, whereas indomethacin closes it.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-indomethacin.webp",
+        "alt": "Indomethacin pharmacological actions on uterine tone and ductus arteriosus",
+        "caption": "Pharmacologic actions of indomethacin showing cyclooxygenase inhibition, ductal closure in premature neonates, and tocolytic uterine relaxation."
+      }
+    },
+    {
+      "tx": "The synthetic formulation of endogenous prostacyclin that serves as a potent pulmonary vasodilator and antiplatelet agent is **epoprostenol**. Acting on prostanoid IP receptors, epoprostenol activates adenylyl cyclase, elevating cyclic AMP within pulmonary arterial smooth muscle and circulating platelets. Administered as a continuous intravenous infusion via a dedicated central venous catheter due to its ultra-short three-minute plasma half-life, epoprostenol reduces pulmonary arterial pressure and improves long-term survival in severe primary pulmonary arterial hypertension. Abrupt infusion interruption can trigger rebound pulmonary hypertension and death.",
+      "say": "Epoprostenol is an intravenous prostacyclin analogue that lowers pulmonary arterial pressure and prolongs survival in pulmonary hypertension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic drug entity",
+          "Pharmacologic mechanism",
+          "Route of delivery",
+          "Plasma elimination half-life"
+        ],
+        "rows": [
+          [
+            "Epoprostenol",
+            "Prostacyclin (PGI2) IP receptor agonist",
+            "Continuous central IV infusion",
+            "3 to 5 minutes"
+          ],
+          [
+            "Treprostinil",
+            "Stable prostacyclin IP receptor agonist",
+            "Subcutaneous, IV, oral, inhaled",
+            "4 hours"
+          ],
+          [
+            "Iloprost",
+            "Inhaled prostacyclin analogue",
+            "Nebulized inhalation (6 to 9 times daily)",
+            "30 minutes"
+          ],
+          [
+            "Bosentan",
+            "Dual endothelin ETA / ETB receptor antagonist",
+            "Oral tablet twice daily",
+            "5 hours"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An orally bioavailable, highly selective cysteinyl leukotriene receptor antagonist that blocks airway inflammatory remodeling is **montelukast**. Synthesized via the 5-lipoxygenase pathway in leukocytes, cysteinyl leukotrienes (LTC4, LTD4, LTE4) bind CysLT1 receptors to trigger bronchoconstriction, hypersecretion of viscous mucus, mucosal edema, and eosinophil migration into the bronchial tree. Montelukast competitively blocks CysLT1 receptors, providing maintenance prophylaxis in chronic pediatric and adult asthma, exercise-induced bronchospasm, and allergic rhinitis. It carries a black-box safety warning regarding potential neuropsychiatric effects like depression and suicidal ideation.",
+      "say": "Montelukast blocks CysLT1 receptors to control chronic asthma and allergic rhinitis without acute bronchodilator rescue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lox",
+            "label": "5-Lipoxygenase generates leukotrienes LTC4, LTD4, LTE4"
+          },
+          {
+            "id": "cyslt1",
+            "label": "Leukotrienes target bronchial smooth muscle CysLT1 receptors"
+          },
+          {
+            "id": "block",
+            "label": "Montelukast competitive CysLT1 receptor antagonism"
+          },
+          {
+            "id": "relief",
+            "label": "Suppression of bronchospasm, mucosal edema, and eosinophilic influx"
+          }
+        ],
+        "edges": [
+          [
+            "lox",
+            "cyslt1"
+          ],
+          [
+            "cyslt1",
+            "block"
+          ],
+          [
+            "block",
+            "relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The orally active, selective direct inhibitor of 5-lipoxygenase that halts the biosynthesis of all leukotrienes from arachidonic acid is **zileuton**. By chelating the catalytic active-site iron atom within 5-lipoxygenase, zileuton halts the conversion of arachidonic acid to 5-HPETE and leukotriene A4. Consequently, it prevents the synthesis of both cysteinyl leukotrienes and leukotriene B4, a potent neutrophil chemoattractant. Indicated for maintenance therapy in chronic asthma and aspirin-exacerbated respiratory disease, zileuton requires baseline and periodic hepatic transaminase monitoring due to risk of toxic chemical hepatitis.",
+      "say": "Zileuton inhibits 5-lipoxygenase directly to arrest synthesis of all leukotrienes, requiring hepatic enzyme monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "5-LOX Enzyme Inhibitor (Zileuton)",
+          "points": [
+            "Inhibits 5-lipoxygenase catalytic active-site iron",
+            "Abolishes synthesis of all leukotrienes (LTB4, LTC4, LTD4, LTE4)",
+            "Suppresses neutrophil chemotaxis driven by LTB4",
+            "Requires routine hepatic transaminase safety monitoring"
+          ]
+        },
+        "right": {
+          "title": "CysLT1 Receptor Antagonists (Montelukast)",
+          "points": [
+            "Blocks CysLT1 cell surface receptors selectively",
+            "Inhibits cysteinyl leukotrienes (LTC4, LTD4, LTE4) only",
+            "Leaves neutrophil chemoattractant LTB4 unaffected",
+            "Safe hepatic profile without routine enzyme monitoring"
+          ]
+        }
+      }
+    }
+  ]
+}

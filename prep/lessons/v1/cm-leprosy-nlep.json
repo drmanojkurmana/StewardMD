@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "id": "cm-leprosy-nlep",
+ "subject": "community-medicine",
+ "module": "cm-leprosy",
+ "title": "Leprosy and NLEP: Classification, MDT and Grade-2 Disability",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The Ridley-Jopling spectrum",
+   "tx": "The spectrum panel contrasts **tuberculoid and lepromatous poles**: strong cell-mediated immunity with few well-demarcated lesions and few bacilli at one pole, absent specific immunity with innumerable lesions and bacilli-packed foamy macrophages at the other. Borderline states between them are immunologically unstable and reaction-prone. Programme classification simplifies this biology into treatment groups below.",
+   "say": "Immunity draws the spectrum. Strong cellular defence: few lesions, few bacilli. Absent defence: countless lesions, bacilli everywhere. Borderline states between poles shift and react. Treatment groups simplify this biology practically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leprosy-fig2.webp",
+    "alt": "Leprosy Ridley-Jopling spectrum contrasting tuberculoid and lepromatous poles with histology and skin findings.",
+    "caption": "Ridley-Jopling spectrum: tuberculoid versus lepromatous poles. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Cardinal signs make the diagnosis",
+   "tx": "**Cardinal signs** diagnose leprosy: a hypopigmented or reddish skin patch with definite sensory loss, a thickened or enlarged peripheral nerve with loss of function, and acid-fast bacilli on slit-skin smear. One sign with compatible picture suffices operationally in programme practice. Anaesthetic patches are the community screening hook every health worker is taught first.",
+   "say": "Three signs, one suffices. Patch that cannot feel, thickened tender nerve, bacilli on smear. The numb patch is the screening hook taught first because communities can be searched for exactly that.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cardinal sign", "How checked"],
+    "rows": [
+     ["Patch with sensory loss", "Light touch or pinprick testing"],
+     ["Thickened peripheral nerve", "Palpation: ulnar, peroneal, great auricular"],
+     ["Acid-fast bacilli", "Slit-skin smear microscopy"]
+    ]
+   }
+  },
+  {
+   "title": "PB versus MB: the operational split",
+   "tx": "**Paucibacillary** disease (few lesions, smear negative) takes 6 months of MDT; multibacillary (more lesions, smear positive or many nerves) takes 12 months in current WHO-aligned programme regimens of rifampicin, dapsone and clofazimine in blister packs. Lesion counting by trained workers assigns the pack; misclassification undertreats the infectious pole.",
+   "say": "Counting lesions assigns treatment. Few and smear-negative: six months. Many or smear-positive: twelve. Rifampicin, dapsone, clofazimine in calendar blister packs. Undertreating the infectious pole is the classification error that matters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paucibacillary (PB)",
+     "points": ["Few lesions (up to 5)", "Smear negative", "MDT for 6 months"]
+    },
+    "right": {
+     "title": "Multibacillary (MB)",
+     "points": ["More lesions or smear positive", "Greater infectiousness", "MDT for 12 months"]
+    }
+   }
+  },
+  {
+   "title": "Reactions: emergencies inside a slow disease",
+   "tx": "**Leprosy reactions** are acute immunological episodes: Type 1 (reversal) reactions inflame lesions and nerves, threatening permanent nerve damage within days; Type 2 (erythema nodosum leprosum) brings fever, crops of tender nodules, neuritis, iritis and orchitis in lepromatous disease. Steroids for nerve involvement are urgent; MDT continues through reactions, never stopped for them.",
+   "say": "Reactions are the emergencies. Type one inflames nerves toward permanent damage in days; type two storms systemically in lepromatous disease. Steroids rescue nerves urgently. MDT continues through reactions, never stopped for them.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reaction", "Setting", "Danger"],
+    "rows": [
+     ["Type 1 reversal", "Borderline disease", "Rapid nerve function loss"],
+     ["Type 2 ENL", "Lepromatous disease", "Neuritis, eye and systemic injury"],
+     ["Lucio phenomenon", "Diffuse lepromatous, rare", "Necrotising skin infarction"]
+    ]
+   }
+  },
+  {
+   "title": "Grade-2 disability: the programme's conscience",
+   "tx": "**Grade-2 disability** means visible deformity at diagnosis (claw hand, foot drop, lagophthalmos, ulcers, resorption), proving detection came late. Targets demand zero G2D in new child cases and under 1 per million population overall. Every G2D case in a child is therefore audited as a system failure, not a statistic.",
+   "say": "Visible deformity at diagnosis accuses delay. Claw hands and foot drop mean years missed. Zero such cases in children is the target; each one audits as system failure, not statistic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Silent nerve damage accumulates"},
+     {"id": "b", "label": "Detection delayed for years"},
+     {"id": "c", "label": "Grade-2 disability at diagnosis"},
+     {"id": "d", "label": "Case audited as system failure"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Elimination as a public health problem",
+   "tx": "**Elimination** in leprosy means registered prevalence under 1 per 10000 population, achieved globally in 2000 and by India in 2005, not zero transmission: thousands of new cases still surface yearly. Post-elimination complacency (lost skills, missed early patches) is the recognised enemy, answered by case detection campaigns in high-endemic districts on the pulse-polio house-to-house pattern.",
+   "say": "Elimination never meant zero. Under one per ten thousand registered prevalence, declared while thousands of new cases still surface. Complacency is the enemy; house-to-house detection campaigns borrow the pulse pattern against it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Elimination (achieved)",
+     "points": ["Prevalence under 1 per 10000", "India declared in 2005", "Transmission continues at low level"]
+    },
+    "right": {
+     "title": "Eradication (not achieved)",
+     "points": ["Zero transmission worldwide", "Long incubation hides reservoirs", "No declaration exists"]
+    }
+   }
+  },
+  {
+   "title": "NLEP machinery and indicators",
+   "tx": "The **National Leprosy Eradication Programme** tracks annual new case detection rate, proportion multibacillary, child proportion (ongoing transmission's fingerprint), female proportion and grade-2 disability proportion among new cases, beside treatment completion (released from treatment). Rising child cases with G2D is the worst combined signal a district can report.",
+   "say": "Indicators fingerprint transmission. Child proportion proves ongoing spread; multibacillary proportion grades infectious load; disability proportion grades delay. Child cases with deformity together form the worst district signal possible.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "Reads"],
+    "rows": [
+     ["Annual new case detection rate", "Case finding intensity and incidence proxy"],
+     ["Child proportion among new cases", "Recent ongoing transmission"],
+     ["Grade-2 proportion among new cases", "Diagnostic delay in the system"]
+    ]
+   }
+  },
+  {
+   "title": "Contact management and chemoprophylaxis",
+   "tx": "**Contact examination** of household members at diagnosis and periodically finds early patches when cure prevents deformity entirely. Single-dose rifampicin post-exposure prophylaxis for eligible contacts (excluding leprosy or TB suspects and young children per guidance) reduces early disease in trials adopted by WHO guidance. Immunoprophylaxis with BCG cross-protection remains background context.",
+   "say": "Households hide the next cases. Examine contacts at diagnosis and after; single-dose rifampicin protects eligible contacts in adopted guidance. Early patches found here are the deformities that never happen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Index case diagnosed"},
+     {"id": "b", "label": "Household contacts examined"},
+     {"id": "c", "label": "Eligible contacts offered prophylaxis"},
+     {"id": "d", "label": "Periodic re-examination scheduled"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Stigma, law and rehabilitation",
+   "tx": "**Stigma** historically outlawed patients through discriminatory statutes now repealed in programme goals (zero countries with leprosy discrimination laws targeted globally), while reconstructive surgery, ulcer care, protective footwear and community-based rehabilitation restore function and livelihood. Lepra reactions of society, teachers joke grimly, need longer therapy than the patient's own.",
+   "say": "Society needs treatment too. Discriminatory laws fall, surgery and footwear restore function, community rehabilitation restores livelihoods. The patient's bacilli cure in months; public reaction takes the longer course.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Burden", "Response"],
+    "rows": [
+     ["Deformity and ulcers", "Surgery, self-care, footwear"],
+     ["Livelihood loss", "Vocational rehabilitation"],
+     ["Legal discrimination", "Repeal and rights protection"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

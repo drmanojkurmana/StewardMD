@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-picorna-enteric",
+  "subject": "microbiology",
+  "title": "Poliovirus, Salk and Sabin Vaccines, VDPV and AFP Surveillance",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Poliovirus** is a non-enveloped enterovirus with three serotypes transmitted mainly faecal-orally. Most infections are asymptomatic or mildly febrile. A minority invade the central nervous system and destroy anterior horn motor neurons, causing asymmetric flaccid paralysis with intact sensation. Wild poliovirus types 2 and 3 have been certified eradicated, while endemic type 1 transmission persists in limited reservoirs.",
+      "say": "Polio paralysis is rare per infection but devastating and permanently motor selective.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infection spectrum",
+          "points": [
+            "Most infections asymptomatic",
+            "Minor illness with fever and malaise",
+            "Aseptic meningitis in some",
+            "Paralytic disease in under one percent"
+          ]
+        },
+        "right": {
+          "title": "Neurology",
+          "points": [
+            "Asymmetric flaccid weakness",
+            "Reduced reflexes in affected limbs",
+            "Sensation preserved",
+            "Bulbar disease threatens breathing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Salk vaccine** is inactivated poliovirus vaccine, IPV, given by injection. It produces strong serum IgG that prevents viraemic spread to the nervous system but induces weaker intestinal mucosal immunity than oral vaccine. It cannot replicate, revert or cause vaccine-associated paralytic poliomyelitis. IPV is therefore preferred in immunodeficiency and in polio-free settings concerned about vaccine-derived circulation.",
+      "say": "IPV protects the nervous system without any risk of vaccine virus replication.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IPV properties",
+          "points": [
+            "Formalin inactivated injected vaccine",
+            "Excellent humoral protection",
+            "No vaccine associated paralysis",
+            "Higher cost and injection logistics"
+          ]
+        },
+        "right": {
+          "title": "IPV limitations",
+          "points": [
+            "Less intestinal IgA than OPV",
+            "Can allow some gut infection and shedding",
+            "Requires trained injection delivery",
+            "Multiple doses or fractional schedules used"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Sabin oral polio vaccine** contains live attenuated virus that replicates in the gut, inducing local IgA and serum antibody and sometimes spreading secondarily to contacts. That intestinal barrier made OPV ideal for interrupting outbreaks. Its rare costs are vaccine-associated paralytic poliomyelitis and emergence of vaccine-derived polioviruses where population immunity is too low to stop continued circulation and reversion.",
+      "say": "OPV blocks the gut powerfully, but underimmunised circulation lets vaccine virus evolve back.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "OPV strengths",
+          "points": [
+            "Strong intestinal mucosal immunity",
+            "Easy oral delivery",
+            "Secondary spread can boost contacts",
+            "Rapid outbreak control"
+          ]
+        },
+        "right": {
+          "title": "OPV risks",
+          "points": [
+            "Rare vaccine associated paralysis",
+            "Circulating vaccine derived outbreaks",
+            "Immunodeficiency associated chronic shedding",
+            "Type 2 component removed from routine trivalent OPV"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vaccine-derived poliovirus** is Sabin virus that has regained neurovirulence and transmissibility through prolonged replication, usually in underimmunised communities or rarely within an immunodeficient person. Novel oral polio vaccine type 2 was genetically stabilised to reduce reversion risk during outbreak response. Detection of VDPV in stool or sewage is an eradication emergency requiring rapid high-coverage vaccination.",
+      "say": "VDPV is an immunity-gap signal, not an argument against vaccination itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Categories",
+          "points": [
+            "Circulating VDPV in communities",
+            "Immunodeficiency associated VDPV",
+            "Ambiguous isolates under investigation",
+            "Type 2 has dominated since wild type 2 eradication"
+          ]
+        },
+        "right": {
+          "title": "Response",
+          "points": [
+            "Immediate case and sewage investigation",
+            "Large synchronized supplementary campaigns",
+            "Use vaccine matched to VDPV type",
+            "Strengthen routine coverage in the source area"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acute flaccid paralysis surveillance** requires reporting and investigating flaccid weakness in children and any suspected polio at any age. Two stool specimens collected at least twenty-four hours apart within fourteen days of onset maximise poliovirus isolation because shedding declines with time. Surveillance quality indicators include notification speed, stool adequacy and non-polio AFP rate, proving the system would detect imported wild virus.",
+      "say": "Two timely stools are the laboratory backbone of AFP surveillance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "report",
+            "label": "Report acute flaccid paralysis"
+          },
+          {
+            "id": "stool",
+            "label": "Collect two adequate stools"
+          },
+          {
+            "id": "culture",
+            "label": "Cell culture and intratypic differentiation"
+          },
+          {
+            "id": "follow",
+            "label": "Sixty day residual paralysis review"
+          }
+        ],
+        "edges": [
+          [
+            "report",
+            "stool"
+          ],
+          [
+            "stool",
+            "culture"
+          ],
+          [
+            "culture",
+            "follow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "AFP has many causes besides polio, including **Guillain Barre syndrome**, transverse myelitis, traumatic neuritis, acute flaccid myelitis from other enteroviruses and hypokalaemic paralysis. Symmetry, reflexes, sensation, progression and cerebrospinal fluid help separate them, but surveillance requires stool testing even when another diagnosis seems likely. This avoids missing poliovirus hidden inside a familiar syndrome.",
+      "say": "AFP surveillance tests first and classifies later so polio cannot hide behind Guillain Barre.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Polio clues",
+          "points": [
+            "Fever at onset often present",
+            "Asymmetric proximal weakness",
+            "Reflex loss localised to affected limbs",
+            "No sensory loss"
+          ]
+        },
+        "right": {
+          "title": "Other AFP clues",
+          "points": [
+            "GBS is usually symmetric and ascending",
+            "Transverse myelitis has a sensory level",
+            "Traumatic neuritis follows injection or injury",
+            "Periodic paralysis is episodic and potassium linked"
+          ]
+        }
+      }
+    }
+  ]
+}

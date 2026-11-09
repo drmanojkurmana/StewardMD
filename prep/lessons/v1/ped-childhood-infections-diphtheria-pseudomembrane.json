@@ -1,0 +1,227 @@
+{
+ "key": "ped-childhood-infections-diphtheria-pseudomembrane",
+ "v": 1,
+ "module": "ped-childhood-infections",
+ "subject": "paediatrics",
+ "title": "Diphtheria, Pertussis, Polio, Dengue and Childhood Malaria",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Corynebacterium diphtheriae exotoxin induces localized mucosal necrosis and life-threatening systemic organ toxicity. Transmission occurs via respiratory droplets, where the bacterium elaborates an ADP-ribosylating exotoxin that inactivates elongation factor 2, arresting host cellular protein synthesis. Infection produces the classic **diphtheria pseudomembrane**, a dense, leathery, dirty-grey fibrinous exudate adhering tenaciously to the tonsils, uvula, and pharyngeal wall that bleeds profusely when scraped.",
+   "say": "Diphtheria exotoxin inactivates elongation factor two, arresting protein synthesis. It forms a tough grey pseudomembrane on the tonsils and pharynx that bleeds profusely upon attempted removal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diphtheria-fig1.webp",
+    "alt": "Clinical appearance of bull-neck cervical swelling and pharyngeal pseudomembrane in diphtheria.",
+    "caption": "Pharyngeal diphtheritic pseudomembrane and massive cervical lymphadenopathy producing bull-neck appearance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extensive cervical soft tissue edema and lymphadenopathy produce respiratory compromise. Patients develop profound **bull-neck diphtheria**, characterized by massive submandibular and anterior cervical swelling, hoarseness, stridor, and foul halitosis. Immediate management requires urgent equine diphtheria antitoxin (DAT) to neutralize circulating unbound toxin, combined with intravenous penicillin or oral erythromycin to eradicate the carrier state and stop ongoing toxin synthesis.",
+   "say": "Bull-neck cervical swelling and stridor threaten asphyxiation. Emergency treatment requires equine diphtheria antitoxin to neutralize free toxin, combined with penicillin or erythromycin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diphtheria Toxin Pathology",
+     "Clinical Timing",
+     "Organ Manifestation",
+     "Therapeutic Action"
+    ],
+    "rows": [
+     [
+      "Airway pseudomembrane",
+      "Days 1 to 5",
+      "Stridor, mechanical airway asphyxia",
+      "Emergency intubation or tracheostomy"
+     ],
+     [
+      "Toxic myocarditis",
+      "Days 7 to 14",
+      "Heart block, arrhythmias, cardiogenic shock",
+      "Continuous ECG, pacing, inotropes"
+     ],
+     [
+      "Palatal neuropathy",
+      "Weeks 2 to 3",
+      "Nasal regurgitation, nasal voice",
+      "Gavage feeding to prevent aspiration"
+     ],
+     [
+      "Ciliary & motor neuropathy",
+      "Weeks 4 to 7",
+      "Loss of accommodation, flaccid quadriplegia",
+      "Supportive care; complete recovery typical"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bordetella pertussis infection causes protracted spasmodic coughing paroxysms mediated by bacterial toxins. Transmitted via respiratory aerosols, whooping cough progresses from a mild catarrhal phase into the paroxysmal stage, characterized by violent bursts of coughing during expiration followed by the classic **pertussis inspiratory whoop**. Young infants under six months often present with apnoea, cyanosis, and bradycardia rather than a whoop, exhibiting marked absolute lymphocytosis.",
+   "say": "Pertussis causes violent coughing paroxysms followed by a loud inspiratory whoop and post-tussive vomiting. Infants under six months often present with apnoea without a whoop.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pertussis-fig1.webp",
+    "alt": "Clinical stages of pertussis and peripheral blood smear showing marked lymphocytosis.",
+    "caption": "Three clinical stages of pertussis and peripheral absolute lymphocytosis induced by pertussis toxin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Viral destruction of anterior horn motor neurons produces acute asymmetrical limb flaccidity. Enteroviral **poliomyelitis paralysis** selectively destroys anterior horn cells in the spinal cord, presenting as acute asymmetric flaccid paralysis affecting proximal lower extremities more severely than distal muscles, with intact sensation and diminished or absent tendon reflexes. Bulbar poliomyelitis involves cranial nerve motor nuclei, producing dysphagia, nasal regurgitation, dysarthria, and respiratory failure.",
+   "say": "Poliovirus selectively destroys spinal anterior horn motor neurons, causing acute asymmetrical flaccid paralysis with preserved sensation. Bulbar involvement threatens respiratory arrest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Poliomyelitis Characteristics",
+     "points": [
+      "Asymmetrical flaccid paralysis (lower > upper)",
+      "Proximal muscles more severely affected",
+      "Completely normal sensory examination",
+      "Loss of deep tendon reflexes in affected limb"
+     ]
+    },
+    "right": {
+     "title": "Guillain-Barr\u00e9 Syndrome Contrast",
+     "points": [
+      "Symmetrical ascending flaccid quadriparesis",
+      "Distal limbs affected first, progressing upward",
+      "Sensory paresthesias and radicular pain common",
+      "Albuminocytological dissociation in CSF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Active epidemiological surveillance detects wild and vaccine-derived poliovirus transmission worldwide. Public health mandates immediate reporting of every child under fifteen years presenting with **acute flaccid paralysis surveillance**, requiring notification within forty-eight hours of onset. To confirm or exclude poliovirus shedding, clinicians must collect two adequate stool specimens at least twenty-four to forty-eight hours apart within fourteen days of paralysis onset for viral culture.",
+   "say": "Acute flaccid paralysis surveillance mandates reporting within forty-eight hours in any child under fifteen. Two stool specimens collected twenty-four hours apart within fourteen days confirm poliovirus status.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surveillance Metric",
+     "National Standard Target",
+     "Operational Procedure",
+     "Public Health Objective"
+    ],
+    "rows": [
+     [
+      "Non-polio AFP rate",
+      ">=2 cases per 100,000 children <15 yr",
+      "Active hospital surveillance visits",
+      "Confirms surveillance sensitivity"
+     ],
+     [
+      "Stool adequacy rate",
+      ">=80% of AFP cases with 2 specimens",
+      "2 stools 24-48 hr apart within 14 days",
+      "Ensures viable poliovirus isolation"
+     ],
+     [
+      "Reverse cold chain",
+      "Stool maintained at <=8 degrees C",
+      "Packed in ice carriers to national lab",
+      "Prevents viral degradation"
+     ],
+     [
+      "60-day follow-up",
+      "Re-examine patient at 60 days",
+      "Evaluate for residual motor deficit",
+      "Distinguishes polio from transient GBS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capillary endothelial hyperpermeability provokes plasma leakage during defervescence in dengue fever. In pediatric dengue, transition from the febrile phase to the critical phase around days three to seven requires vigilant monitoring for **severe dengue warning signs**. These signs include persistent vomiting, severe abdominal pain, clinical fluid accumulation (pleural effusion, ascites), mucosal bleeding, lethargy, hepatomegaly exceeding two centimetres, and a rapid hematocrit rise accompanied by falling platelets.",
+   "say": "Severe dengue warning signs include persistent vomiting, severe abdominal pain, pleural effusion, mucosal bleeding, and rising hematocrit with falling platelets, signalling plasma leakage shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dengue Warning Signs (Critical Phase)",
+     "points": [
+      "Severe persistent abdominal pain or tenderness",
+      "Persistent vomiting (>3 episodes within 12 hours)",
+      "Fluid accumulation: pleural effusion or ascites",
+      "Mucosal bleeding from gums, epistaxis, or gut",
+      "Haematocrit rise concurrent with rapid platelet drop"
+     ]
+    },
+    "right": {
+     "title": "Dengue Shock Syndrome (DSS)",
+     "points": [
+      "Narrow pulse pressure (<=20 mmHg) or hypotension",
+      "Cold clammy extremities and delayed capillary refill",
+      "Severe plasma leakage into serous cavities",
+      "Immediate titrated isotonic crystalloid resuscitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sequestration of parasitized erythrocytes within microvasculature produces life-threatening end-organ failure. In children, **severe Plasmodium falciparum malaria** manifests as cerebral malaria with unarousable coma and seizures, severe malarial anaemia (haemoglobin below 5 g/dL), respiratory distress secondary to metabolic acidosis, hypoglycaemia, and acute renal failure. Intravenous artesunate (2.4 mg/kg at 0, 12, and 24 hours, then daily) is the first-line treatment of choice.",
+   "say": "Severe falciparum malaria causes cerebral malaria, severe anaemia, acidotic breathing, and hypoglycaemia. Intravenous artesunate is the definitive first-line medication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severe Malaria Presentation",
+     "Clinical Definition (WHO)",
+     "Pathophysiological Mechanism",
+     "Specific Paediatric Therapy"
+    ],
+    "rows": [
+     [
+      "Cerebral malaria",
+      "Unarousable coma lasting >1 hour",
+      "Cytoadherence in cerebral microvessels",
+      "IV artesunate; control convulsions"
+     ],
+     [
+      "Severe malarial anaemia",
+      "Haemoglobin <5 g/dL (Hct <15%)",
+      "Direct hemolysis and marrow dyserythropoiesis",
+      "Urgent packed RBC transfusion (10 mL/kg)"
+     ],
+     [
+      "Respiratory distress",
+      "Deep acidotic breathing (Kussmaul)",
+      "Severe metabolic lactic acidosis",
+      "IV fluids, correct anaemia, oxygen"
+     ],
+     [
+      "Hypoglycaemia",
+      "Blood glucose <40 mg/dL (<2.2 mmol/L)",
+      "Parasite consumption, quinine stimulation",
+      "10% Dextrose bolus (5 mL/kg IV)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Salmonella Typhi infection causes sustained bacteremia and reticuloendothelial inflammation in school-aged children. Pediatric **enteric typhoid fever** presents with insidious remittent step-ladder fever, headache, anorexia, relative bradycardia (Faget sign), transient rose spots over the trunk, and hepatosplenomegaly. Blood culture during the first week provides the diagnostic gold standard, while complications in the third week include ileal Peyer patch necrosis resulting in gastrointestinal perforation.",
+   "say": "Enteric fever presents with step-ladder fever, relative bradycardia, rose spots, and splenomegaly. Blood cultures in the first week establish diagnosis; ceftriaxone or azithromycin is effective.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Timeline in Enteric Fever",
+     "points": [
+      "Week 1: Blood culture positive in 80 to 90%",
+      "Week 2: Widal test titers rise (O >=1:160; H >=1:160)",
+      "Week 3: Stool and urine cultures become positive",
+      "Bone marrow culture remains positive throughout"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Antimicrobial Regimen",
+     "points": [
+      "Intravenous ceftriaxone (75 to 100 mg/kg/day for 10-14 days)",
+      "Oral azithromycin (20 mg/kg/day for 7 days)",
+      "Monitor for third-week terminal ileal perforation",
+      "Typhoid conjugate vaccine (TCV) prevents infection"
+     ]
+    }
+   }
+  }
+ ]
+}

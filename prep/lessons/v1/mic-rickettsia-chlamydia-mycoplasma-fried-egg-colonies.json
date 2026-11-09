@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Fried-Egg Colonies, Cold Agglutinins and Ureaplasma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Fried egg colonies** are the classical growth form of Mycoplasma on enriched agar: a dense central core grows down into the medium while a thinner translucent periphery spreads on the surface. Colonies are tiny and require low-power microscopy. Mycoplasma pneumoniae may instead show granular colonies, so the fried egg image is a genus clue rather than a universal appearance for every species.",
+      "say": "A tiny colony with a dense centre and pale rim is the classic Mycoplasma postcard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Colony features",
+          "points": [
+            "Dense opaque centre embedded in agar",
+            "Thin translucent peripheral zone",
+            "Often only tens to hundreds of micrometres",
+            "Viewed with a dissecting microscope"
+          ]
+        },
+        "right": {
+          "title": "Identification aids",
+          "points": [
+            "Dienes stain retains blue colonies",
+            "No reversion to walled bacterial forms",
+            "Requires sterols and enriched media",
+            "Molecular testing now dominates clinical diagnosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mycoplasmas are bounded by a **sterol containing cell membrane** rather than a wall. They are pleomorphic because there is no rigid sacculus. Their small genomes force dependence on host-like nutrients in culture. The absence of a wall also means vancomycin, cephalosporins and penicillins are intrinsically useless. Resistance must instead arise against protein synthesis or DNA gyrase targets, such as macrolide binding site mutations.",
+      "say": "A sterol membrane without a wall explains Mycoplasma shape, culture demands and drug resistance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Structural consequences",
+          "points": [
+            "Pleomorphic cells and colonies",
+            "Osmotic fragility compared with walled bacteria",
+            "Not visible meaningfully on Gram stain",
+            "Sterol required in artificial medium"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic consequences",
+          "points": [
+            "Beta lactams have no wall target",
+            "Macrolides target 50S ribosome",
+            "Doxycycline targets 30S ribosome",
+            "Fluoroquinolones target DNA enzymes in selected species"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cold agglutinins** typically appear during the second week of Mycoplasma pneumoniae infection. At low temperature, IgM crosslinks red cells, and the sample visibly clumps at room or refrigerator temperature but disperses at 37 degrees Celsius. Most patients have no major haemolysis, yet high titres and strong thermal amplitude can cause anaemia and peripheral ischaemic symptoms. The test is supportive and not specific.",
+      "say": "Clumping that disappears on warming is the bedside physics of cold agglutinins.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cold",
+            "label": "Blood cools below core temperature"
+          },
+          {
+            "id": "bind",
+            "label": "IgM crosslinks red cell I antigen"
+          },
+          {
+            "id": "warm",
+            "label": "Warming releases antibody"
+          },
+          {
+            "id": "complement",
+            "label": "Complement may remain and haemolyse"
+          }
+        ],
+        "edges": [
+          [
+            "cold",
+            "bind"
+          ],
+          [
+            "bind",
+            "warm"
+          ],
+          [
+            "warm",
+            "complement"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ureaplasma** species split urea and produce ammonia, a property that separates them from other mycoplasmas. Ureaplasma urealyticum and Ureaplasma parvum colonise the lower genital tract frequently, but can cause urethritis, chorioamnionitis associations, neonatal respiratory disease and hyperammonaemia syndromes in profoundly immunocompromised transplant recipients. Detection by PCR does not automatically prove disease because colonisation is common.",
+      "say": "Ureaplasma detection needs clinical context because genital colonisation is common.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biology",
+          "points": [
+            "Urease generates ammonia for energy",
+            "Tiny colonies on special A8 agar",
+            "U urealyticum and U parvum distinguished molecularly",
+            "No cell wall, therefore beta lactam resistant"
+          ]
+        },
+        "right": {
+          "title": "Disease associations",
+          "points": [
+            "Non gonococcal urethritis",
+            "Neonatal pneumonia and meningitis in preterm infants",
+            "Invasive disease after transplantation",
+            "Hyperammonaemia from systemic infection in rare cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mycoplasma hominis** is a genital mycoplasma associated with bacterial vaginosis ecology, postpartum fever, pelvic infection, surgical wound infection and bacteraemia after transplantation or urinary instrumentation. It is intrinsically resistant to macrolides that target a ribosomal site it does not share, whereas doxycycline and fluoroquinolones are usually active. It may form pinprick colonies on blood agar and be overlooked as diphtheroid-like contamination.",
+      "say": "M hominis reminds us that genital mycoplasmas do not all share M pneumoniae drug patterns.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Settings",
+          "points": [
+            "Postpartum and post abortion fever",
+            "Renal transplant wound infection",
+            "Pelvic inflammatory processes",
+            "Extragenital abscess after bacteraemia"
+          ]
+        },
+        "right": {
+          "title": "Laboratory clues",
+          "points": [
+            "Arginine metabolism",
+            "Tiny translucent colonies after prolonged incubation",
+            "Fails to grow as expected on routine media",
+            "PCR or sequencing from sterile sites helps"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mycoplasma genitalium** is a sexually transmitted species with established roles in urethritis, cervicitis and pelvic inflammatory disease. It grows extremely slowly, so NAAT is the only practical routine diagnostic. Macrolide resistance mutations are common in many populations and fluoroquinolone resistance is increasing. Resistance-guided sequential therapy is preferred where molecular resistance testing exists, and test of cure is important because symptoms can lag behind microbiological failure.",
+      "say": "M genitalium is a NAAT diagnosis whose therapy increasingly follows resistance genotype.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical features",
+          "points": [
+            "Persistent or recurrent urethritis",
+            "Cervicitis and pelvic pain",
+            "Often coinfected or confused with chlamydia",
+            "Extremely slow culture makes it impractical"
+          ]
+        },
+        "right": {
+          "title": "Treatment principles",
+          "points": [
+            "Test macrolide resistance where available",
+            "Avoid single dose azithromycin when resistance likely",
+            "Moxifloxacin for selected resistant infections",
+            "Perform test of cure after several weeks"
+          ]
+        }
+      }
+    }
+  ]
+}

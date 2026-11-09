@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-general-anaesthetics",
+  "subject": "pharmacology",
+  "title": "Ketamine, Etomidate, Dexmedetomidine and Halothane Hepatitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ketamine** blocks NMDA glutamate receptors and disconnects thalamocortical from limbic systems, producing dissociative anaesthesia: eyes open, reflexes partly preserved, profound analgesia with a cataleptic stare. Uniquely among induction agents it stimulates the sympathetic system, raising heart rate, pressure and cardiac output, which made it the classic choice for shocked and asthmatic patients (bronchodilatation included) and the caution in ischaemic hearts where demand climbs with supply uncertain.",
+      "say": "Ketamine disconnects rather than sedates, and it speeds the heart instead of slowing it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ketamine signature",
+          "points": [
+            "NMDA antagonism, dissociative state with analgesia",
+            "Sympathetic stimulation: rate, pressure and output rise",
+            "Airway reflexes and respiratory drive relatively preserved",
+            "Bronchodilatation useful in severe asthma"
+          ]
+        },
+        "right": {
+          "title": "Ketamine cautions",
+          "points": [
+            "Myocardial oxygen demand rises in ischaemic disease",
+            "Direct myocardial depression unmasked in catecholamine exhaustion",
+            "Increased secretions need an antisialagogue sometimes",
+            "Emergence phenomena colour recovery, below"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Emergence delirium** is ketamine's famous footnote: vivid dreams, hallucinations, floating sensations and occasional frank agitation as the patient surfaces, commoner in adults, women, larger doses and those with psychiatric histories. A quiet recovery environment, benzodiazepine co administration and avoiding ketamine in psychosis prone patients blunt the phenomenon. Subanaesthetic ketamine infusions exploit different territory altogether, serving analgesia and, as esketamine, treatment resistant depression under supervision.",
+      "say": "Waking from ketamine can be a vivid trip; quiet rooms and a benzodiazepine soften the landing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "emerge",
+            "label": "Emergence from ketamine dissociation"
+          },
+          {
+            "id": "dream",
+            "label": "Vivid dreams, hallucinations, floating sensations"
+          },
+          {
+            "id": "risk",
+            "label": "Risk higher: adults, large dose, psychiatric history"
+          },
+          {
+            "id": "blunt",
+            "label": "Benzodiazepine cover and quiet recovery reduce incidence"
+          }
+        ],
+        "edges": [
+          [
+            "emerge",
+            "dream"
+          ],
+          [
+            "dream",
+            "risk"
+          ],
+          [
+            "risk",
+            "blunt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Etomidate** is the haemodynamically politest induction agent, a GABA A modulator on an imidazole ring that barely touches heart rate, pressure or contractility, which made it the choice for shocked, elderly and cardiac surgical inductions. Its sins are pain on injection, myoclonus that mimics seizures, postoperative nausea, and the big one: inhibition of adrenal 11 beta hydroxylase suppressing cortisol synthesis for hours after even one dose, a controversy that shadows its use in sepsis.",
+      "say": "Etomidate spares the blood pressure and taxes the adrenal; one dose suppresses cortisol for hours.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Etomidate virtues",
+          "points": [
+            "Minimal cardiovascular depression at induction doses",
+            "Rapid onset, short redistribution awakening",
+            "Cerebral protection profile: reduced metabolic rate and pressure",
+            "Preferred historically in cardiac and shocked patients"
+          ]
+        },
+        "right": {
+          "title": "Etomidate costs",
+          "points": [
+            "Adrenal steroid synthesis suppressed for hours",
+            "Myoclonus, injection pain and vomiting",
+            "No analgesia whatsoever",
+            "Sepsis use debated because of the adrenal effect"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Alpha 2 agonist **dexmedetomidine** sedates by quieting the locus coeruleus, producing a patient who sleeps yet rouses to voice and drifts back, cooperative sedation with minimal respiratory depression prized in intensive care and awake procedures. Its bills are bradycardia and hypotension (with transient hypertension if loaded fast), dry mouth, and withdrawal hypertension after prolonged infusions. It doubles as an anaesthetic sparing analgesic adjunct across theatre practice.",
+      "say": "Dexmedetomidine sedates like natural sleep and spares breathing; bradycardia and pressure set its limits.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dex",
+            "label": "Dexmedetomidine infusion started"
+          },
+          {
+            "id": "lc",
+            "label": "Locus coeruleus alpha 2 stimulation reduces noradrenaline release"
+          },
+          {
+            "id": "sleep",
+            "label": "Rousable, cooperative sedation with spared respiration"
+          },
+          {
+            "id": "brady",
+            "label": "Bradycardia and hypotension dose limit the infusion"
+          }
+        ],
+        "edges": [
+          [
+            "dex",
+            "lc"
+          ],
+          [
+            "lc",
+            "sleep"
+          ],
+          [
+            "sleep",
+            "brady"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Halothane hepatitis** divides into two diseases: a mild, common, self limited transaminase rise after exposure, and a rare fulminant immune hepatitis (roughly one in ten thousand to thirty thousand exposures) with fever, jaundice and liver failure days to weeks later. Trifluoroacetylated liver proteins become neoantigens; risk concentrates in middle aged women, obesity, repeated exposures at short intervals and genetic predisposition, which is why halothane histories are taken before any modern volatile is judged innocent.",
+      "say": "Halothane hepatitis at its worst is immune, fulminant and remembered; repeated exposures write the risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mild halothane liver upset",
+          "points": [
+            "Transient transaminase rise after anaesthesia",
+            "Common and self limited",
+            "Shared in small measure by other volatiles",
+            "No long term sequelae expected"
+          ]
+        },
+        "right": {
+          "title": "Fulminant halothane hepatitis",
+          "points": [
+            "Fever, jaundice and liver failure days to weeks later",
+            "Trifluoroacetyl neoantigen immune mechanism",
+            "Risk: repeat exposure, obesity, middle aged women",
+            "High mortality without transplant assessment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Metabolism** predicts the hepatitis gradient: halothane is about 20 percent metabolised, sevoflurane 3 to 5 percent (to hexafluoroisopropanol, not the trifluoroacetyl culprit), isoflurane 0.2 and desflurane 0.02 percent, so immune hepatitis becomes progressively rarer across the modern family though case reports trail even desflurane. Cross sensitivity between volatiles sharing trifluoroacetyl chemistry argues for trigger histories that name agents, not just anaesthesia.",
+      "say": "The less a volatile is metabolised, the less hepatitis it causes; record the agent, not just the anaesthetic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hal",
+            "label": "Halothane 20 percent metabolised: trifluoroacetyl proteins"
+          },
+          {
+            "id": "mod",
+            "label": "Sevoflurane 3 to 5 percent, different metabolite"
+          },
+          {
+            "id": "min",
+            "label": "Isoflurane 0.2 and desflurane 0.02 percent metabolised"
+          },
+          {
+            "id": "rare",
+            "label": "Immune hepatitis risk falls across the sequence"
+          }
+        ],
+        "edges": [
+          [
+            "hal",
+            "mod"
+          ],
+          [
+            "mod",
+            "min"
+          ],
+          [
+            "min",
+            "rare"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Intracranial pressure** separates the intravenous shelf usefully: propofol, thiopentone and etomidate all reduce cerebral metabolic rate and intracranial pressure, while ketamine's historical ban in head injury (cerebral vasodilatation) has softened under modern ventilation and CO2 control, with neurocritical care increasingly accepting it. Dexmedetomidine barely disturbs cerebral physiology. Examinations still reward the classic answer, ketamine raises intracranial pressure, with the modern caveat as enrichment.",
+      "say": "Classic teaching bars ketamine in head injury; modern practice hedges, but examinations still want the classic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ICP friendly agents",
+          "points": [
+            "Propofol: metabolic suppression, pressure falls",
+            "Thiopentone: burst suppression at high dose",
+            "Etomidate: similar cerebral protection, adrenal cost",
+            "Dexmedetomidine: minimal cerebral disturbance"
+          ]
+        },
+        "right": {
+          "title": "Ketamine nuance",
+          "points": [
+            "Traditional teaching: cerebral vasodilatation raises ICP",
+            "Modern controlled ventilation data soften the ban",
+            "Sympathetic surge may raise cerebral perfusion pressure",
+            "Avoid where ICP is uncontrolled and unmonitored"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Assemble the induction choice** by physiology: propofol for the routine and day case, etomidate where pressure cannot fall (accepting adrenal debate), ketamine where pressure must rise or bronchi must open (accepting emergence and demand), thiopentone historically and for burst suppression, each followed by maintenance and the dexmedetomidine style adjuncts. The patient's ventricle, bronchi, brain and adrenal glands vote before the anaesthetist does.",
+      "say": "Induction is a vote among ventricle, bronchi, brain and adrenals; the agent merely counts it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Choose by circulation",
+          "points": [
+            "Hypovolaemia and shock: ketamine or etomidate",
+            "Severe asthma: ketamine bronchodilates",
+            "Cardiac tamponade physiology: ketamine tradition",
+            "Day case routine: propofol clarity"
+          ]
+        },
+        "right": {
+          "title": "Choose by brain and gland",
+          "points": [
+            "Raised ICP: propofol or thiopentone tradition",
+            "Sepsis adrenal debate: etomidate cautioned",
+            "Psychosis history: ketamine avoided",
+            "ICU rousable sedation: dexmedetomidine"
+          ]
+        }
+      }
+    }
+  ]
+}

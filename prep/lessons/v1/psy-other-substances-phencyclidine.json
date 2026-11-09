@@ -1,0 +1,288 @@
+{
+ "v": 1,
+ "id": "psy-other-substances-phencyclidine",
+ "subject": "psychiatry",
+ "module": "psy-other-substances",
+ "title": "Phencyclidine, Inhalants, Nicotine, and Anticholinergic Poisoning",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Phencyclidine**, widely known as PCP or angel dust, operates pharmacologically as a non-competitive antagonist at the glutamate NMDA receptor complex. Acute intoxication produces a notorious clinical state characterized by unpredictable violent agitation, superhuman muscular strength, analgesia, blank stare, severe ataxia, and acute psychosis.",
+   "say": "Phencyclidine blocks NMDA receptors, provoking violent agitation, anesthesia, and unpredictable rage with loss of pain sensation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Behavioral Presentation",
+     "points": [
+      "Extreme, unpredictable violent outbursts",
+      "Apparent 'superhuman' strength and insensitivity to pain",
+      "Catatonic posturing or bizarre blank staring",
+      "Acute delusional psychosis and agitation"
+     ]
+    },
+    "right": {
+     "title": "Objective Physical Signs",
+     "points": [
+      "Rotary multidirectional nystagmus",
+      "Prominent cerebellar ataxia and dysmetria",
+      "Severe hypertension and muscle rigidity",
+      "Risk of fatal rhabdomyolysis and renal failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rotary and vertical nystagmus** stands as the pathognomonic physical examination sign of phencyclidine intoxication, rarely observed in other substance toxicities. The presence of multidirectional rotary nystagmus paired with marked motor ataxia and extreme behavioral agitation strongly confirms PCP toxicity over standard psychostimulant intoxication.",
+   "say": "Rotary and vertical nystagmus is pathognomonic for phencyclidine poisoning, distinguishing it from amphetamine or cocaine toxicity.",
+   "vis": {
+    "kind": "table",
+    "title": "Nystagmus Patterns Across Toxicities",
+    "cols": [
+     "Substance / Toxin",
+     "Nystagmus Direction",
+     "Associated Neurological Signs"
+    ],
+    "rows": [
+     [
+      "Phencyclidine (PCP)",
+      "Rotary, vertical, and horizontal",
+      "Severe ataxia, analgesia, violent agitation"
+     ],
+     [
+      "Ethanol",
+      "Gaze-evoked horizontal nystagmus",
+      "Slurred speech, ataxia, flushed skin"
+     ],
+     [
+      "Phenytoin toxicity",
+      "Horizontal gaze nystagmus (early)",
+      "Dysmetria, sedation, diplopia"
+     ],
+     [
+      "MDMA / Ecstasy",
+      "Horizontal nystagmus with trismus",
+      "Mydriasis, bruxism, hyperthermia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Inhalant abuse** involves the deliberate sniffing or huffing of volatile hydrocarbons, such as toluene, benzene, butane, glue, and aerosol paint solvents, predominantly among impoverished adolescents. Inhaled vapors produce rapid intoxication, slurred speech, and ataxia, but carry lethal risk of sudden sniffing death syndrome from fatal ventricular arrhythmias.",
+   "say": "Inhalant abuse involves sniffing glue or paint fumes. It carries lethal risk of sudden sniffing death syndrome due to ventricular fibrillation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Inhalant Toxicity Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Volatile hydrocarbon inhalation via plastic bag or rag ('huffing')"
+     },
+     {
+      "id": "n2",
+      "label": "Rapid lipid-soluble diffusion into central nervous system"
+     },
+     {
+      "id": "n3",
+      "label": "Myocardial sensitization to circulating endogenous catecholamines"
+     },
+     {
+      "id": "n4",
+      "label": "Sudden sniffing death: acute stress triggers fatal ventricular fibrillation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nicotine dependence neurobiology** centers on nicotine binding to presynaptic alpha-4 beta-2 nicotinic acetylcholine receptors in the ventral tegmental area, triggering burst firing and rapid dopamine release in the nucleus accumbens. Chronic smoking up-regulates nicotinic receptors, precipitating intense withdrawal cravings, irritability, and restlessness within hours of cessation.",
+   "say": "Nicotine binds alpha-4 beta-2 receptors in the midbrain, releasing dopamine. Withdrawal produces severe cravings, irritability, and restlessness within hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nicotine Pharmacodynamics",
+     "points": [
+      "Rapid arterial delivery to brain within ten seconds",
+      "Stimulates presynaptic alpha-4 beta-2 receptors",
+      "Surge of dopamine in nucleus accumbens",
+      "Receptor desensitization and chronic up-regulation"
+     ]
+    },
+    "right": {
+     "title": "Withdrawal Syndrome",
+     "points": [
+      "Onset within two hours of last cigarette",
+      "Intense craving, irritability, and anxiety",
+      "Bradycardia, increased appetite, and weight gain",
+      "Difficulty concentrating and disturbed sleep"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Varenicline** is a high-affinity partial agonist at alpha-4 beta-2 nicotinic acetylcholine receptors, recognized as the most effective single smoking cessation monotherapy. By partially stimulating receptors, varenicline alleviates withdrawal cravings; by competitively blocking nicotine from binding, it eliminates the rewarding satisfaction of slip cigarettes.",
+   "say": "Varenicline is a partial agonist at alpha-4 beta-2 nicotinic receptors, relieving withdrawal while blocking smoking satisfaction.",
+   "vis": {
+    "kind": "table",
+    "title": "Smoking Cessation Therapies",
+    "cols": [
+     "Modality",
+     "Pharmacological Mechanism",
+     "Adverse Effect Profile"
+    ],
+    "rows": [
+     [
+      "Varenicline",
+      "Alpha-4 beta-2 partial agonist",
+      "Nausea, vivid abnormal dreams, insomnia"
+     ],
+     [
+      "Bupropion SR",
+      "Inhibits dopamine and NET reuptake",
+      "Dry mouth, insomnia; lowers seizure threshold"
+     ],
+     [
+      "Nicotine patch",
+      "Transdermal continuous baseline delivery",
+      "Local skin erythema, vivid dreams if worn overnight"
+     ],
+     [
+      "Nicotine gum/lozenge",
+      "Buccal mucosal rapid rescue absorption",
+      "Mouth irritation, dyspepsia, hiccups"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nicotine replacement therapy**, abbreviated NRT, delivers controlled, clean medicinal nicotine without the lethal combustion carcinogens, carbon monoxide, or tar present in tobacco smoke. Combining a long-acting transdermal nicotine patch for baseline craving suppression with short-acting gum or lozenges for breakthrough cravings yields significantly higher cessation rates.",
+   "say": "Combining a continuous transdermal nicotine patch with short-acting nicotine gum provides superior cessation rates compared to monotherapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Combination NRT Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Apply transdermal patch (21 mg/day) upon waking for steady baseline coverage"
+     },
+     {
+      "id": "n2",
+      "label": "Use 2 mg or 4 mg nicotine gum for acute situational breakthrough cravings"
+     },
+     {
+      "id": "n3",
+      "label": "Chew gum slowly until peppery taste emerges, then park in buccal cheek"
+     },
+     {
+      "id": "n4",
+      "label": "Taper patch dose sequentially to 14 mg then 7 mg over twelve weeks"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dhatura poisoning and anticholinergic delirium** arises from ingestion of Dhatura stramonium seeds containing tropane belladonna alkaloids (hyoscyamine, scopolamine, atropine), which competitively antagonize central and peripheral muscarinic acetylcholine receptors. Delirium presents with purposeless carphologia, micropsia, and severe combativeness, demanding rapid gastric decontamination and definitive antidote administration.",
+   "say": "Dhatura poisoning blocks muscarinic receptors, causing anticholinergic delirium with picking movements, dilated pupils, and fever.",
+   "vis": {
+    "kind": "table",
+    "title": "Classic Anticholinergic Toxidrome",
+    "cols": [
+     "Mnemonic Stanza",
+     "Physical Sign",
+     "Physiological Basis"
+    ],
+    "rows": [
+     [
+      "Blind as a bat",
+      "Mydriasis & cycloplegia",
+      "Pupillary sphincter and ciliary paralysis"
+     ],
+     [
+      "Dry as a bone",
+      "Anhidrosis & parched mucous membranes",
+      "Blockade of muscarinic sweat and salivary glands"
+     ],
+     [
+      "Red as a beet",
+      "Flushed erythematous cutaneous skin",
+      "Compensatory cutaneous cutaneous vasodilation"
+     ],
+     [
+      "Hot as a hare",
+      "Severe hyperthermia (>39 C)",
+      "Loss of evaporative thermoregulatory sweating"
+     ],
+     [
+      "Mad as a hatter",
+      "Agitated delirium with carphologia",
+      "Central muscarinic M1 receptor blockade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Poisoning by belladonna alkaloids such as atropine and scopolamine produces a classical peripheral and central anticholinergic syndrome. Physical examination reveals **hyperthermic anhidrosis toxidrome**, characterized by hyperpyrexia with dry flushed skin, non-reactive mydriasis, urinary retention, absent bowel sounds, and agitated delirium. Physostigmine, a tertiary acetylcholinesterase inhibitor that readily crosses the blood-brain barrier, provides specific reversal.",
+   "say": "Hyperthermic anhidrosis toxidrome produces dry flushed skin, mydriasis, delirium, and tachycardia in acute Dhatura poisoning, reversed by physostigmine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antimuscarinics-gen1.webp",
+    "alt": "Flushed delirious patient showing mydriasis, dry skin, and urinary retention in anticholinergic toxicity.",
+    "caption": "Flushed delirious man shows mydriasis, dry skin and urinary retention in anticholinergic toxicity. Anticholinergic toxidrome features with blocked receptors. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Physostigmine antidote** is a tertiary amine carbamate that reversibly inhibits acetylcholinesterase, raising acetylcholine concentrations to outcompete atropine at muscarinic synapses. Unlike quaternary neostigmine, physostigmine crosses the blood-brain barrier into the central nervous system, reversing both life-threatening peripheral arrhythmias and agitated central anticholinergic delirium.",
+   "say": "Physostigmine is the tertiary amine antidote for dhatura poisoning, crossing into the brain to reverse central anticholinergic delirium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physostigmine (Tertiary Amine)",
+     "points": [
+      "Crosses blood-brain barrier efficiently",
+      "Reverses central delirium and carphologia",
+      "Reverses peripheral mydriasis and flushing",
+      "Administered slow IV 1 to 2 mg over five minutes"
+     ]
+    },
+    "right": {
+     "title": "Neostigmine (Quaternary Amine)",
+     "points": [
+      "Permanent positive charge blocks BBB crossing",
+      "Cannot reverse central anticholinergic delirium",
+      "Used strictly for peripheral neuromuscular reversal",
+      "Ineffective in treating Dhatura psychosis"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

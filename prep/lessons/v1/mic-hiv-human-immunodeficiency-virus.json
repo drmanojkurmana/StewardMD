@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-hiv",
+  "subject": "microbiology",
+  "title": "HIV, gp120, gp41, CD4, CCR5 and Reverse Transcriptase",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Human immunodeficiency virus** is an enveloped lentivirus with two copies of positive-sense RNA and enzymes including **reverse transcriptase**, integrase and protease. Surface **gp120** attaches to CD4 and a chemokine co-receptor, then gp41 drives membrane fusion. HIV 1 causes most global disease; HIV 2 is concentrated in West Africa, progresses more slowly and is intrinsically resistant to some antiretroviral classes.",
+      "say": "gp120 knocks on CD4, a co-receptor opens the door, and gp41 fuses HIV inside.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entry sequence",
+          "points": [
+            "gp120 binds CD4",
+            "Conformational change exposes co receptor site",
+            "CCR5 or CXCR4 engagement",
+            "gp41 inserts fusion peptide and membranes merge"
+          ]
+        },
+        "right": {
+          "title": "After entry",
+          "points": [
+            "Reverse transcriptase makes DNA",
+            "Integrase inserts proviral DNA",
+            "Host transcription produces viral RNA and proteins",
+            "Protease matures infectious virions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CD4 receptor** expression targets helper T cells, macrophages and dendritic cells. CCR5 is the dominant co-receptor in transmitted infection; CXCR4-using variants may emerge later. People homozygous for CCR5 delta 32 are highly resistant to R5 HIV. Maraviroc blocks CCR5 and therefore requires a tropism test, while broadly neutralising antibodies and long acting agents target other vulnerable steps.",
+      "say": "CCR5 is the usual co-receptor at transmission, so tropism decides maraviroc's value.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "R5 virus",
+          "points": [
+            "Uses CCR5 with CD4",
+            "Dominates transmission and early disease",
+            "Infects macrophages efficiently",
+            "Maraviroc can block entry"
+          ]
+        },
+        "right": {
+          "title": "X4 or dual tropic virus",
+          "points": [
+            "Uses CXCR4 alone or with CCR5",
+            "More common in advanced disease",
+            "Associated with faster CD4 decline in cohorts",
+            "Maraviroc alone is not appropriate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Reverse transcriptase** lacks proofreading, so HIV generates enormous diversity within one host. Combined with rapid turnover and recombination, monotherapy rapidly selects resistance. Antiretroviral therapy therefore uses multiple active drugs with a high barrier where possible. Integrated provirus in resting memory CD4 cells forms the latent reservoir that prevents cure by drugs alone.",
+      "say": "Error-prone reverse transcription makes combination therapy a mathematical necessity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diversity engines",
+          "points": [
+            "Reverse transcriptase errors",
+            "Two RNA copies permit recombination",
+            "Millions to billions of virions produced daily untreated",
+            "APOBEC and immune pressure add variation"
+          ]
+        },
+        "right": {
+          "title": "Treatment implications",
+          "points": [
+            "At least two or three active agents classically",
+            "Adherence prevents replicating virus under drug pressure",
+            "Resistance testing after virologic failure",
+            "Latent reservoir persists despite suppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acute HIV can cause a **seroconversion illness** with fever, rash, pharyngitis, lymphadenopathy and mucosal ulcers two to four weeks after exposure. Viral load is very high and transmission risk is substantial. Fourth generation antigen antibody tests detect p24 and antibodies; HIV RNA resolves suspected acute infection when screening is negative or indeterminate. Early ART preserves immune function and prevents onward transmission.",
+      "say": "A mononucleosis-like illness after exposure plus very high HIV RNA is acute HIV until proven otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute clues",
+          "points": [
+            "Recent high risk exposure",
+            "Fever, rash and sore throat",
+            "Generalised lymphadenopathy",
+            "Aseptic meningitis occasionally"
+          ]
+        },
+        "right": {
+          "title": "Immediate actions",
+          "points": [
+            "Fourth generation test and HIV RNA",
+            "Start ART urgently after confirmation pathway",
+            "Screen other sexually transmitted infections",
+            "Partner services and prevention counselling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Transmission occurs through sexual contact, blood and from mother to child during pregnancy, delivery or breastfeeding. HIV is not spread by kissing, sharing food, mosquitoes or casual contact. A person with sustained **undetectable viral load on ART does not sexually transmit HIV**, summarised as U equals U. Prevention combines ART, PrEP, PEP, condoms, sterile injecting equipment and blood safety.",
+      "say": "Suppressed virus prevents sexual transmission; casual contact never transmits HIV.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diagnose",
+            "label": "Diagnose HIV early"
+          },
+          {
+            "id": "art",
+            "label": "Start and sustain ART"
+          },
+          {
+            "id": "suppress",
+            "label": "Viral load undetectable"
+          },
+          {
+            "id": "prevent",
+            "label": "No sexual transmission and better health"
+          }
+        ],
+        "edges": [
+          [
+            "diagnose",
+            "art"
+          ],
+          [
+            "art",
+            "suppress"
+          ],
+          [
+            "suppress",
+            "prevent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "CD4 decline is driven by direct killing, chronic immune activation, lymphoid tissue damage and loss of mucosal integrity. Opportunistic diseases appear at characteristic CD4 ranges, but bacterial infections and tuberculosis can occur earlier. Viral load predicts replication activity and transmission, whereas **CD4 count estimates current immune vulnerability**. Both tests guide management, yet neither replaces assessment for tuberculosis and other active coinfections at diagnosis.",
+      "say": "CD4 measures immune damage; viral load measures the engine causing it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CD4 count",
+          "points": [
+            "Risk stratifies opportunistic infections",
+            "Low count prompts prophylaxis decisions",
+            "Percentage can help when total varies",
+            "Recovery lags after ART starts"
+          ]
+        },
+        "right": {
+          "title": "Viral load",
+          "points": [
+            "Measures plasma HIV RNA copies",
+            "Confirms treatment response",
+            "Rising load triggers adherence and resistance review",
+            "Undetectable supports U equals U when sustained"
+          ]
+        }
+      }
+    }
+  ]
+}

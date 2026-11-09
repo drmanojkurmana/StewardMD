@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-corticosteroids",
+  "subject": "pharmacology",
+  "title": "Corticosteroids: Hydrocortisone, Prednisolone, Methylprednisolone, Dexamethasone and Betamethasone",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Hydrocortisone** is cortisol itself, the physiological glucocorticoid with equal glucocorticoid and mineralocorticoid activity and an eight to twelve hour biological life, dosed in replacement as split daily portions mimicking circadian rhythm and in stress doses when illness outruns the adrenal reserve. Its short action makes it the safest steroid to withdraw and the standard against which potency tables are calibrated.",
+      "say": "Hydrocortisone is the body's own steroid: replacement, stress cover and the potency yardstick in one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydrocortisone profile",
+          "points": [
+            "Identical to endogenous cortisol",
+            "Glucocorticoid and mineralocorticoid activity equal",
+            "Replacement 15 to 25 mg split across the day",
+            "Stress dosing for illness, surgery and crisis"
+          ]
+        },
+        "right": {
+          "title": "Synthetic successors",
+          "points": [
+            "Prednisolone: 4 fold glucocorticoid potency, oral workhorse",
+            "Methylprednisolone: intravenous pulses, less mineralocorticoid",
+            "Dexamethasone and betamethasone: 25 fold, longest acting",
+            "Each step trades duration against controllability"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prednisolone** (prednisone its hepatic prodrug twin) is the oral anti inflammatory default: four times hydrocortisone's glucocorticoid potency, intermediate 12 to 36 hour action permitting once morning dosing that respects the HPA axis, and decades of dosing folklore across allergy, asthma, autoimmunity and oncology. Prednisone needs hepatic activation, so severe liver disease argues for prednisolone directly, a conversion examinations test out of proportion to its clinical frequency.",
+      "say": "Prednisolone is the default oral steroid; prednisone is its liver activated twin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pred",
+            "label": "Prednisone swallowed"
+          },
+          {
+            "id": "liver",
+            "label": "Hepatic conversion to prednisolone"
+          },
+          {
+            "id": "gr",
+            "label": "Glucocorticoid receptor genomic actions over hours"
+          },
+          {
+            "id": "morning",
+            "label": "Once morning dosing spares the HPA axis most"
+          }
+        ],
+        "edges": [
+          [
+            "pred",
+            "liver"
+          ],
+          [
+            "liver",
+            "gr"
+          ],
+          [
+            "gr",
+            "morning"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Methylprednisolone** owns intravenous pulse therapy: gram scale daily doses for three days in transplant rejection, lupus nephritis, vasculitis and multiple sclerosis relapses, exploiting non genomic membrane effects at concentrations oral dosing never reaches. **Dexamethasone** and betamethasone, the fluorinated long distance runners (36 to 72 hours), own cerebral oedema, antenatal fetal lung maturation, COVID era hypoxic pneumonitis fame and dexamethasone suppression testing, with negligible mineralocorticoid activity and the deepest HPA suppression per milligram.",
+      "say": "Methylprednisolone pulses, dexamethasone endures; choose by how long you want the axis silenced.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pulse and intermediate",
+          "points": [
+            "Methylprednisolone 500 mg to 1 g daily for 3 days",
+            "Transplant rejection, vasculitis, MS relapses",
+            "Mineralocorticoid activity minimal",
+            "Hyperglycaemia and hypertension monitored per pulse"
+          ]
+        },
+        "right": {
+          "title": "Long acting pair",
+          "points": [
+            "Dexamethasone and betamethasone 25 to 30 fold potency",
+            "Cerebral oedema, fetal lung maturation, suppression tests",
+            "Biological half life 36 to 72 hours",
+            "Profound HPA suppression and psychosis potential"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Equivalence arithmetic unlocks switching**: hydrocortisone 20 mg equals prednisolone 5 mg equals methylprednisolone 4 mg equals dexamethasone 0.75 mg in glucocorticoid effect, while mineralocorticoid effect evaporates along the sequence. Anti inflammatory dosing (prednisolone 30 to 60 mg and beyond) dwarfs replacement (hydrocortisone 20 mg is prednisolone 5), which is why replacement patients on sick days double or triple hydrocortisone rather than reaching for the prednisolone conversion in panic.",
+      "say": "Twenty, five, four, zero point seven five: the equivalence chant that makes switching safe.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glucocorticoid equivalence",
+          "points": [
+            "Hydrocortisone 20 mg",
+            "Prednisolone 5 mg, methylprednisolone 4 mg",
+            "Dexamethasone 0.75 mg",
+            "Triamcinolone 4 mg (depot and joint roles)"
+          ]
+        },
+        "right": {
+          "title": "Mineralocorticoid gradient",
+          "points": [
+            "Hydrocortisone: full salt retaining activity",
+            "Prednisolone: modest, matters at high dose",
+            "Methylprednisolone and dexamethasone: negligible",
+            "Fludrocortisone: the mineralocorticoid specialist, next lesson"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Genomic mechanism** explains the tempo: cytosolic glucocorticoid receptors translocate to the nucleus, transactivate anti inflammatory genes (annexin 1, IL 10) and transrepress NF kappa B and AP 1 driven cytokine programmes over hours, which is why steroids never rescue the first hour of anaphylaxis or asthma and why topical, inhaled and local routes concentrate genomic effect where it is wanted while sparing the systemic ledger detailed in the next two lessons.",
+      "say": "Steroids rewrite genes over hours; they are architects, not firefighters, in every emergency they join.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bind",
+            "label": "Steroid binds cytosolic glucocorticoid receptor"
+          },
+          {
+            "id": "nucleus",
+            "label": "Complex translocates to the nucleus"
+          },
+          {
+            "id": "genes",
+            "label": "Anti inflammatory genes on, cytokine programmes off"
+          },
+          {
+            "id": "hours",
+            "label": "Clinical effect accrues over hours to days"
+          }
+        ],
+        "edges": [
+          [
+            "bind",
+            "nucleus"
+          ],
+          [
+            "nucleus",
+            "genes"
+          ],
+          [
+            "genes",
+            "hours"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Route engineering** contains the systemic price: inhaled steroids (asthma's preventive backbone), topical preparations ranked by potency for skin, intra articular injections, epidural and intrathecal niches, and ophthalmic preparations each deliver microgram to milligram doses locally with fractionated systemic spill. Technique (spacers, mouth rinsing, skin thinning awareness, joint asepsis) decides whether local truly stays local, which is why device teaching is pharmacology, not nursing garnish.",
+      "say": "Local routes are dose engineering; technique decides whether the rest of the body ever meets the drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Local route empires",
+          "points": [
+            "Inhaled: asthma and COPD prevention",
+            "Topical: eczema and psoriasis by potency ladder",
+            "Intra articular: monoarticular flares",
+            "Ophthalmic: anterior segment inflammation"
+          ]
+        },
+        "right": {
+          "title": "Containing spill",
+          "points": [
+            "Spacer and mouth rinsing for inhaled therapy",
+            "Potency and duration limits on skin",
+            "Asepsis and frequency caps for joints",
+            "Systemic review when local doses multiply"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antenatal corticosteroids** are the family's finest hour: betamethasone (or dexamethasone) given to mothers threatening preterm delivery crosses the placenta (escaped from placental 11 beta HSD inactivation that shields the fetus from prednisolone) and matures fetal lungs, cutting neonatal respiratory distress, intraventricular haemorrhage and death within a 24 hour to 7 day window. Prednisolone, by contrast, is placental inactivated and chosen when only the mother needs treating.",
+      "say": "Betamethasone reaches the fetal lung because the placenta cannot disarm it; prednisolone treats mothers only.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "threat",
+            "label": "Threatened preterm delivery before 34 to 36 weeks"
+          },
+          {
+            "id": "beta",
+            "label": "Betamethasone course to the mother"
+          },
+          {
+            "id": "lung",
+            "label": "Fetal surfactant production accelerates"
+          },
+          {
+            "id": "gain",
+            "label": "Less respiratory distress, haemorrhage and neonatal death"
+          }
+        ],
+        "edges": [
+          [
+            "threat",
+            "beta"
+          ],
+          [
+            "beta",
+            "lung"
+          ],
+          [
+            "lung",
+            "gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Prescribing grammar** for systemic courses binds the module: single morning doses, alternate day strategies where disease allows, shortest effective course, taper plans calibrated to duration and axis suppression (next lesson), bone, glucose, pressure and infection surveillance proportional to dose, and steroid treatment cards where systems use them. The anti inflammatory benefit is genomic and delayed; every prescription should name its review date and stopping rule at the first writing.",
+      "say": "Morning, brief, tapered, surveilled, with the stop date written on day one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Course design",
+          "points": [
+            "Lowest effective dose, shortest effective course",
+            "Single morning dose where possible",
+            "Taper planned by duration and indication",
+            "Review date named at initiation"
+          ]
+        },
+        "right": {
+          "title": "Surveillance proportional to dose",
+          "points": [
+            "Glucose, pressure, weight and mood",
+            "Bone protection beyond 3 months",
+            "Infection masking vigilance",
+            "Vaccination and PJP prophylaxis thresholds considered"
+          ]
+        }
+      }
+    }
+  ]
+}

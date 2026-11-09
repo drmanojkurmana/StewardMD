@@ -1,0 +1,219 @@
+{
+  "v": 1,
+  "module": "phm-anticholinesterases",
+  "subject": "pharmacology",
+  "title": "Organophosphates, Carbamates, Neurocognitive Inhibitors, and the Tensilon Test",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Slowly dissociating carbamate cholinesterase inhibition with dual esterase specificity is delivered by **rivastigmine**. It inhibits both acetylcholinesterase and butyrylcholinesterase in cortical neurons and glial tissue, undergoing carbamylation that persists for ten hours despite a short two-hour plasma elimination half-life. The transdermal patch formulation circumvents gastrointestinal nausea and emesis while providing constant continuous plasma drug levels in Alzheimer and Parkinson dementia.",
+      "say": "Rivastigmine inhibits both acetylcholinesterase and butyrylcholinesterase to sustain brain acetylcholine levels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Formulation",
+          "Bioavailability",
+          "Adverse effect profile",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "Oral capsule",
+            "Low due to first-pass (36%)",
+            "Nausea, vomiting, dyspepsia, anorexia",
+            "Standard initial dose escalation"
+          ],
+          [
+            "Transdermal patch",
+            "Continuous linear delivery",
+            "Local erythema, pruritus",
+            "Reduced gastrointestinal discomfort, high compliance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dual-action neurocognitive enhancement combining competitive enzyme inhibition with nicotinic allosteric sensitization is achieved with **galantamine**. Isolated initially from snowdrop bulbs, galantamine competitively inhibits acetylcholinesterase while simultaneously binding an allosteric site on presynaptic nicotinic receptors. This positive modulation increases presynaptic opening probability, amplifying calcium influx and enhancing endogenous acetylcholine exocytosis across cerebral memory pathways.",
+      "say": "Galantamine uniquely combines acetylcholinesterase inhibition with allosteric nicotinic receptor modulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Galantamine dual action",
+          "points": [
+            "Competitive acetylcholinesterase inhibitor",
+            "Positive allosteric modulator of nicotinic receptors",
+            "Increases presynaptic acetylcholine exocytosis",
+            "Metabolized by hepatic CYP2D6 and CYP3A4"
+          ]
+        },
+        "right": {
+          "title": "Rivastigmine dual action",
+          "points": [
+            "Pseudo-irreversible carbamate esterase inhibitor",
+            "Inhibits both AChE and plasma butyrylcholinesterase",
+            "Eliminated independently of hepatic cytochrome P450",
+            "Available as daily sustained transdermal patch"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Agricultural pesticides and chemical warfare agents produce devastating irreversible cholinesterase phosphorylation when formulated as an **organophosphate**. Compounds such as malathion, parathion, diazinon, and nerve gases bind covalently to the serine hydroxyl group in the esteratic pocket of acetylcholinesterase. Because the resulting phosphorus-oxygen bond resists spontaneous aqueous hydrolysis, synaptic acetylcholine accumulates uncontrollably throughout central, autonomic, and somatic synapses.",
+      "say": "Organophosphates covalently phosphorylate acetylcholinesterase, producing uncontrollable acetylcholine accumulation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/organophosphate-poisoning-fig1.webp",
+        "alt": "Organophosphate synaptic acetylcholine excess mechanisms",
+        "caption": "Irreversible organophosphate phosphorylation of acetylcholinesterase causing massive synaptic acetylcholine accumulation."
+      }
+    },
+    {
+      "tx": "Reversible, self-limiting agricultural insecticides that transiently inactivate acetylcholinesterase are classified as a **carbamate**. Common compounds including propoxur, carbaryl, and aldicarb carbamylate the catalytic serine active site without generating permanent covalent phosphorylation. Unlike organophosphates, carbamylated enzymes spontaneously hydrolyze within hours, and the chemical complex never undergoes covalent aging, rendering oxime reactivators unindicated in isolated carbamate poisoning.",
+      "say": "Carbamate insecticides spontaneously hydrolyze from acetylcholinesterase within hours and do not cause aging.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carbamate insecticides",
+          "points": [
+            "Carbamylate esteratic catalytic serine",
+            "Spontaneous decarbamylation occurs in hours",
+            "Never undergo chemical aging of enzyme",
+            "Pralidoxime oximes not indicated or beneficial"
+          ]
+        },
+        "right": {
+          "title": "Organophosphate insecticides",
+          "points": [
+            "Phosphorylate esteratic catalytic serine",
+            "Hydrolysis is extremely slow or negligible",
+            "Undergo irreversible aging through dealkylation",
+            "Oxime reactivators mandatory if given early"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Clinical differentiation between undertreated myasthenia gravis and overtreatment cholinergic weakness was established using the **Tensilon test**. Two milligrams of intravenous edrophonium chloride are administered initially to exclude hypersensitivity, followed forty-five seconds later by eight milligrams if no adverse response occurs. Immediate, dramatic relief of ptosis, diplopia, and limb fatigability within sixty seconds confirms a myasthenic state.",
+      "say": "The Tensilon test uses intravenous edrophonium to rapidly differentiate myasthenic weakness from drug toxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pt",
+            "label": "Fatigable ptosis or limb paresis"
+          },
+          {
+            "id": "test",
+            "label": "Intravenous edrophonium 2 mg test dose"
+          },
+          {
+            "id": "full",
+            "label": "Remaining 8 mg injected after 45 s"
+          },
+          {
+            "id": "resp",
+            "label": "Objective muscle strength restoration within 60 s"
+          }
+        ],
+        "edges": [
+          [
+            "pt",
+            "test"
+          ],
+          [
+            "test",
+            "full"
+          ],
+          [
+            "full",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Massive acetylcholine accumulation across autonomic and somatic effectors triggers the acute life-threatening **cholinergic toxidrome**. Clinical manifestations follow the classic mnemonic DUMBELS: diarrhea, urination, miosis, bronchorrhea with severe bronchospasm, emesis, lacrimation, and salivation. Concurrently, nicotinic receptor hyperstimulation produces widespread muscle fasciculations, severe motor weakness, diaphragmatic paralysis, and central respiratory arrest.",
+      "say": "Acute cholinergic toxidrome causes pinpoint pupils, copious lung secretions, fasciculations, and respiratory failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/organophosphate-fig1.webp",
+        "alt": "Organophosphate poisoning mechanism and SLUDGE features",
+        "caption": "Toxic accumulation of acetylcholine causing miosis, copious bronchorrhea, and skeletal fasciculations in organophosphate toxicity."
+      }
+    },
+    {
+      "tx": "Beyond the acute cholinergic crisis, organophosphates can trigger subacute paralytic complications recognized as **organophosphate-induced delayed polyneuropathy**. Appearing one to four weeks after exposure to specific organophosphorus esters like tri-ortho-cresyl phosphate, the condition results from inhibition and aging of neuropathy target esterase in axonal pathways, manifesting with bilateral stocking-glove sensory loss, foot drop, and permanent distal lower extremity spastic paraplegia.",
+      "say": "Neuropathy target esterase inhibition triggers delayed distal axonal polyneuropathy weeks after organophosphate poisoning.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Time of onset",
+          "Pathological mechanism",
+          "Clinical features"
+        ],
+        "rows": [
+          [
+            "Acute crisis",
+            "0 to 24 hours",
+            "Acetylcholinesterase inhibition",
+            "SLUDGE syndrome, fasciculations, coma"
+          ],
+          [
+            "Intermediate syndrome",
+            "24 to 96 hours",
+            "Nicotinic endplate desensitization",
+            "Neck flexor, proximal limb, and respiratory weakness"
+          ],
+          [
+            "Delayed polyneuropathy",
+            "1 to 4 weeks",
+            "Neuropathy target esterase aging",
+            "Bilateral foot drop, distal motor-sensory axonal loss"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Military personnel facing battlefield threat from chemical weapon nerve agents receive prophylactic orally administered **pyridostigmine bromide**. By carbamylating approximately twenty to thirty percent of peripheral acetylcholinesterase, pyridostigmine temporarily shields the active catalytic serine residues from permanent covalent binding by lethal organophosphate nerve gases like soman. Spontaneous decarbamylation subsequently liberates functional enzyme, preserving baseline vital autonomic transmission.",
+      "say": "Pretreatment with pyridostigmine shields acetylcholinesterase from permanent destruction by chemical nerve gases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ing",
+            "label": "Oral prophylactic pyridostigmine"
+          },
+          {
+            "id": "carb",
+            "label": "Carbamylation of 30% of acetylcholinesterase"
+          },
+          {
+            "id": "prot",
+            "label": "Enzyme catalytic site shielded from soman"
+          },
+          {
+            "id": "decarb",
+            "label": "Spontaneous decarbamylation restores enzyme"
+          }
+        ],
+        "edges": [
+          [
+            "ing",
+            "carb"
+          ],
+          [
+            "carb",
+            "prot"
+          ],
+          [
+            "prot",
+            "decarb"
+          ]
+        ]
+      }
+    }
+  ]
+}

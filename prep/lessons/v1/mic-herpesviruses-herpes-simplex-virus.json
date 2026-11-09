@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-herpesviruses",
+  "subject": "microbiology",
+  "title": "Herpes Simplex Virus, Tzanck Smear and Multinucleated Giant Cells",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Herpes simplex virus** types 1 and 2 are enveloped double stranded DNA viruses that infect epithelium, establish latency in sensory ganglia and reactivate. HSV 1 is classically oral but increasingly genital; HSV 2 is more often genital and recurs more frequently there. Site no longer proves type, so lesion PCR should type the virus for prognosis and counselling.",
+      "say": "Ganglion latency makes herpes a lifelong infection with intermittent shedding and recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HSV 1 tendencies",
+          "points": [
+            "Oral acquisition in childhood",
+            "Trigeminal ganglion latency",
+            "Herpes labialis and gingivostomatitis",
+            "Increasing share of first genital episodes"
+          ]
+        },
+        "right": {
+          "title": "HSV 2 tendencies",
+          "points": [
+            "Mostly sexual acquisition",
+            "Sacral ganglion latency",
+            "More frequent genital recurrences",
+            "Important neonatal and HIV interactions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Primary herpetic **gingivostomatitis** can cause painful oral ulcers, swollen gums, fever and poor intake in young children. Recurrent herpes labialis is usually milder and localised at the vermilion border. Herpetic whitlow affects fingers, eczema herpeticum complicates atopic dermatitis, and HSV keratoconjunctivitis threatens vision. Neonatal HSV can involve skin eye mouth, central nervous system or disseminated organs and is an emergency.",
+      "say": "Site determines herpes urgency, from cold sore to neonatal dissemination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mucocutaneous disease",
+          "points": [
+            "Grouped vesicles on erythematous base",
+            "Ulcers and crusting follow rupture",
+            "Primary episodes more systemic",
+            "Recurrences often have prodromal tingling"
+          ]
+        },
+        "right": {
+          "title": "High risk disease",
+          "points": [
+            "Neonatal vesicles or seizures",
+            "Eczema herpeticum over dermatitis",
+            "Dendritic corneal ulcer",
+            "Encephalitis with temporal lobe signs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A **Tzanck smear** scrapes the base of a fresh vesicle onto a slide for Giemsa or Wright staining. Multinucleated giant cells and nuclear moulding support HSV or varicella zoster infection but do not distinguish them. Sensitivity falls in crusted or older lesions and the test is negative in many true cases. PCR from a swab is more sensitive, faster and type specific.",
+      "say": "Tzanck giant cells are a rapid clue, but PCR is the modern answer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tzanck findings",
+          "points": [
+            "Multinucleated keratinocytes",
+            "Nuclear moulding and margination",
+            "Ballooning degeneration",
+            "Also positive in varicella zoster"
+          ]
+        },
+        "right": {
+          "title": "Better testing",
+          "points": [
+            "Unroof vesicle and swab base vigorously",
+            "PCR identifies HSV type or VZV",
+            "Direct fluorescent antibody where PCR unavailable",
+            "Culture is slower and less sensitive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Multinucleated giant cells** arise when HSV glycoproteins fuse infected epithelial cells. Their presence helps morphology but cannot separate HSV 1, HSV 2 and VZV. Similar syncytia can be induced by measles and respiratory syncytial virus in their tissues. The cellular pattern therefore begins, rather than finishes, microbiological identification.",
+      "say": "Giant cells say herpesvirus family is possible, not which member is present.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Morphology",
+          "points": [
+            "Several nuclei in one enlarged cell",
+            "Nuclei mould against one another",
+            "Cowdry A intranuclear inclusions may appear",
+            "Cytolysis creates vesicle fluid"
+          ]
+        },
+        "right": {
+          "title": "Confirmatory route",
+          "points": [
+            "PCR for HSV 1 and 2",
+            "PCR for VZV in zosteriform lesions",
+            "Immunohistochemistry on biopsy",
+            "Viral culture only in selected settings"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HSV encephalitis** typically injures medial temporal and orbitofrontal cortex, causing fever, confusion, personality change, seizures and focal deficits. CSF PCR is the diagnostic mainstay, but a very early negative can be repeated while acyclovir continues. MRI and EEG support localisation. Empirical intravenous acyclovir must begin immediately on clinical suspicion because delay increases death and disability.",
+      "say": "For suspected HSV encephalitis, give acyclovir first and use PCR to confirm the course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Fever, confusion or seizure"
+          },
+          {
+            "id": "acyclovir",
+            "label": "Start IV acyclovir immediately"
+          },
+          {
+            "id": "mri",
+            "label": "MRI and CSF studies"
+          },
+          {
+            "id": "pcr",
+            "label": "HSV PCR directs continuation"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "acyclovir"
+          ],
+          [
+            "acyclovir",
+            "mri"
+          ],
+          [
+            "mri",
+            "pcr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Genital herpes management combines **episodic or suppressive antivirals**, counselling on asymptomatic shedding, condom use and disclosure. Suppressive therapy reduces recurrence and transmission but does not eliminate either. In pregnancy, history, lesion examination at delivery and caesarean for active genital lesions or prodrome reduce neonatal exposure; acyclovir from thirty six weeks is used for people with recurrent genital herpes under obstetric guidance.",
+      "say": "Suppression lowers herpes transmission but never reduces it to zero.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antiviral use",
+          "points": [
+            "Start episodic therapy during prodrome",
+            "Suppression for frequent or distressing recurrences",
+            "Valacyclovir improves dosing convenience",
+            "Resistance is rare in immunocompetent hosts"
+          ]
+        },
+        "right": {
+          "title": "Counselling",
+          "points": [
+            "Transmission can occur without lesions",
+            "Condoms reduce but do not abolish risk",
+            "Avoid sex during prodrome and lesions",
+            "Pregnancy requires individualised delivery planning"
+          ]
+        }
+      }
+    }
+  ]
+}

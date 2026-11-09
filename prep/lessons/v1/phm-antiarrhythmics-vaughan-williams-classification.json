@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antiarrhythmics",
+  "subject": "pharmacology",
+  "title": "Vaughan Williams Classification and Class I Sodium Channel Blockers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Vaughan Williams classification** sorts antiarrhythmics by dominant ion channel action: class I blocks sodium channels, class II blocks beta receptors, class III blocks potassium channels and prolongs repolarisation, and class IV blocks L type calcium channels. The scheme is imperfect because many drugs cross classes, amiodarone most famously, yet it remains the examination language for predicting ECG effects, combinations and toxicities from a drug's address in the table.",
+      "say": "Four classes, three channels and one receptor; learn the address and the ECG behaviour follows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classes I and II",
+          "points": [
+            "Class I: sodium channel blockade, subdivided a, b and c",
+            "Class II: beta blockade slows SA and AV nodes",
+            "Class I widens or narrows QRS by subclass",
+            "Class II protects the ischaemic ventricle"
+          ]
+        },
+        "right": {
+          "title": "Classes III and IV",
+          "points": [
+            "Class III: potassium blockade prolongs action potential and QT",
+            "Class IV: verapamil and diltiazem slow AV conduction",
+            "Class III risks torsades from QT prolongation",
+            "Unclassified: adenosine, digoxin, magnesium, atropine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Class Ia agents **quinidine** and procainamide block sodium channels with intermediate kinetics and also block potassium channels, so they slow conduction, widen QRS modestly and prolong QT. That dual action once made them atrial fibrillation staples; proarrhythmia and extracardiac toxicity retired both to niche roles. Quinidine survives mainly in rare channelopathies and malaria history questions, procainamide in stable wide complex tachycardia algorithms where it remains a guideline option.",
+      "say": "Class Ia slows conduction and stretches QT together, which is both its power and its retirement notice.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+        "alt": "Polymorphic ventricular tachycardia ECG strip showing twisting QRS complexes",
+        "caption": "Polymorphic ventricular tachycardia, the proarrhythmic risk that potassium blocking class Ia and class III drugs carry."
+      }
+    },
+    {
+      "tx": "Derived from cinchona bark, quinidine's extracardiac signature is **cinchonism**: tinnitus, hearing disturbance, headache, nausea and visual blurring at rising levels, with thrombocytopenia and cinchona fever as immune extras. It also blocks vagal muscarinic receptors, so giving it alone in atrial fibrillation can accelerate AV conduction paradoxically; a rate slowing drug must board first. Diarrhoea alone stops therapy for many patients before any cardiac benefit accrues.",
+      "say": "Quinidine brings cinchonism, diarrhoea and a vagolytic trap; slow the node before you ever start it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cinchonism and quinidine toxicity",
+          "points": [
+            "Tinnitus, headache, nausea and blurred vision",
+            "Immune thrombocytopenia, occasionally abrupt",
+            "Diarrhoea frequently treatment limiting",
+            "QT prolongation with torsades risk"
+          ]
+        },
+        "right": {
+          "title": "Safe use remnants",
+          "points": [
+            "Rate control established before starting in atrial fibrillation",
+            "Brugada and short QT syndromes in specialist hands",
+            "Historical antimalarial role now superseded",
+            "Levels and platelets monitored when used"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Procainamide** is acetylated in the liver to NAPA (N acetyl procainamide), an active metabolite with class III potassium blocking action that the kidney must clear. Slow acetylators accumulate parent drug and develop the drug induced lupus detailed in the antihypertensive lessons; fast acetylators accumulate NAPA and its QT effect. Chronic use therefore demands metaboliser awareness, renal dose adjustment and antinuclear antibody vigilance, which together explain its retreat to short intravenous courses.",
+      "say": "Procainamide becomes a second drug in the liver; acetylator speed and kidneys decide which toxicity arrives.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "proc",
+            "label": "Procainamide given intravenously for stable wide complex tachycardia"
+          },
+          {
+            "id": "napa",
+            "label": "Hepatic acetylation produces active NAPA"
+          },
+          {
+            "id": "renal",
+            "label": "Renal impairment accumulates NAPA and prolongs QT"
+          },
+          {
+            "id": "lupus",
+            "label": "Slow acetylators risk drug induced lupus on chronic use"
+          }
+        ],
+        "edges": [
+          [
+            "proc",
+            "napa"
+          ],
+          [
+            "napa",
+            "renal"
+          ],
+          [
+            "proc",
+            "lupus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Class Ib agents bind sodium channels briefly and preferentially in depolarised, ischaemic tissue, so **lignocaine** (lidocaine) shortens the action potential slightly and barely touches healthy conduction or the ECG intervals. That tissue selectivity made intravenous lignocaine the classic post infarction ventricular arrhythmia drug before amiodarone displaced it; oral cousin mexiletine persists for chronic ventricular arrhythmias and myotonic and neuropathic pain niches where sodium channel blockade calms hyperexcitable membranes.",
+      "say": "Class Ib hugs sick, depolarised tissue and leaves healthy conduction alone; lignocaine intravenously, mexiletine by mouth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lignocaine (lidocaine)",
+          "points": [
+            "Intravenous, rapid hepatic clearance",
+            "Ischaemia selective sodium blockade",
+            "Minimal QRS or QT change at therapeutic levels",
+            "CNS toxicity: perioral tingling, tremor, seizures"
+          ]
+        },
+        "right": {
+          "title": "Mexiletine",
+          "points": [
+            "Oral structural cousin of lignocaine",
+            "Chronic ventricular arrhythmia suppression",
+            "Also used in myotonia and refractory neuropathic pain",
+            "Tremor, nausea and dizziness limit dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Class Ic agents **flecainide** and propafenone bind sodium channels avidly and dissociate slowly, markedly slowing conduction and widening QRS while barely changing repolarisation. In structurally normal hearts flecainide elegantly suppresses atrial fibrillation and supraventricular tachycardia, including pill in the pocket self administration. After infarction, however, the CAST trial showed flecainide increased mortality despite suppressing ectopy, banning class Ic drugs from scarred ventricles for ever.",
+      "say": "Flecainide is superb in normal hearts and forbidden in scarred ones; CAST wrote that rule in mortality.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ectopy",
+            "label": "Post infarction ectopy suppressed by flecainide in CAST"
+          },
+          {
+            "id": "scar",
+            "label": "Slow conduction through scar creates re entry circuits"
+          },
+          {
+            "id": "death",
+            "label": "Arrhythmic mortality rose despite ectopy suppression"
+          },
+          {
+            "id": "rule",
+            "label": "Rule: no class Ic with structural or ischaemic heart disease"
+          }
+        ],
+        "edges": [
+          [
+            "ectopy",
+            "scar"
+          ],
+          [
+            "scar",
+            "death"
+          ],
+          [
+            "death",
+            "rule"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Every class I drug can create the arrhythmias it treats, the principle of **proarrhythmia**, worst when structural disease, electrolyte disturbance, bradycardia or QT prolonging partners gather. Hypokalaemia and hypomagnesaemia from diuretics prime torsades with Ia and III agents, while Ic drugs unmask Brugada patterns and widen QRS dose dependently. Correcting potassium above 4 mmol per litre and magnesium before starting is prophylaxis, not pedantry.",
+      "say": "Antiarrhythmics cause arrhythmias; potassium, magnesium and the substrate decide how likely that is.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proarrhythmia amplifiers",
+          "points": [
+            "Hypokalaemia and hypomagnesaemia",
+            "Structural heart disease and scar",
+            "Bradycardia lengthening QT further",
+            "Stacked QT prolonging drug combinations"
+          ]
+        },
+        "right": {
+          "title": "Protective habits",
+          "points": [
+            "Potassium above 4 and magnesium repleted before starting",
+            "Baseline ECG with QRS and QTc recorded",
+            "Review interacting drugs at every change",
+            "Stop rules agreed for QRS widening over 25 percent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Read the **classification** backwards at the bedside: a widened QRS on therapy suggests class I effect or excess, a long QTc points to Ia or III, AV block implicates II, III or IV nodal agents, and new ventricular arrhythmia on a suppressant is proarrhythmia until proven otherwise. That single ECG grammar answers most examination stems in this module before any drug name is even considered.",
+      "say": "Widened QRS, long QT or new block on therapy tells you the class before the drug name does.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ECG clue",
+          "points": [
+            "QRS widening: class I effect or toxicity",
+            "QTc prolongation: class Ia or III effect",
+            "AV block: class II, III or IV nodal action",
+            "New arrhythmia on therapy: proarrhythmia"
+          ]
+        },
+        "right": {
+          "title": "Immediate response",
+          "points": [
+            "Check potassium, magnesium and drug levels",
+            "Review the interacting drug list",
+            "Hold the suspect agent and monitor",
+            "Treat torsades with magnesium and rate support"
+          ]
+        }
+      }
+    }
+  ]
+}

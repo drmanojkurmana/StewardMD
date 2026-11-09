@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-ethics-negligence-implied-consent",
+ "subject": "forensic-medicine",
+ "module": "fmt-ethics-negligence",
+ "title": "Consent and Medical Ethics: Implied Consent, Professional Secrecy and Privileged Communication",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Concept and boundaries of implied consent",
+   "tx": "In daily clinical encounters, **implied clinical consent presumption** operates whenever a patient's voluntary actions, posture, or conduct clearly signal agreement to undergo examination. When a patient enters a consultation chamber, answers clinical queries, sits upon the examination couch, or rolls up a sleeve for blood pressure measurement, consent is legally implied for routine non-invasive clinical inspection and palpation.",
+   "say": "Implied consent occurs when a patient's actions, such as rolling up a sleeve for blood pressure, indicate agreement to routine non-invasive examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical scenario",
+     "Consent type applicable",
+     "Legal validity boundary"
+    ],
+    "rows": [
+     [
+      "General outpatient check-up",
+      "Implied consent",
+      "Valid only for history and routine physical exam"
+     ],
+     [
+      "Venepuncture for routine CBC",
+      "Implied / oral express consent",
+      "Valid if patient extends arm voluntarily"
+     ],
+     [
+      "Per rectal or vaginal examination",
+      "Express written consent required",
+      "Implied consent is invalid for intimate exams"
+     ],
+     [
+      "Elective surgical laparotomy",
+      "Informed written consent mandatory",
+      "Implied consent completely void in surgical care"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Strict limitations of implied consent in intimate examinations",
+   "tx": "Medical officers must recognize that **intimate examination consent boundaries** strictly forbid relying upon implied consent for sensitive anatomical areas. Performing a per vaginal, per rectal, or external genitalia examination on implied grounds exposes the doctor to criminal charges of assault or voyeurism. The clinician must explicitly explain the clinical justification, secure express written informed consent, and ensure the continuous presence of a female chaperone.",
+   "say": "Implied consent never applies to intimate pelvic or rectal examinations. The doctor must obtain express written consent and ensure a female chaperone is present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intimate pelvic or rectal examination indicated"
+     },
+     {
+      "id": "b",
+      "label": "Explain clinical indication, procedure and comfort steps"
+     },
+     {
+      "id": "c",
+      "label": "Secure explicit written consent on clinical sheet"
+     },
+     {
+      "id": "d",
+      "label": "Conduct examination with continuous female chaperone presence"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The emergency doctrine and Section 92 IPC provisions",
+   "tx": "When an unconscious trauma victim or stuporous poisoning casualty arrives in casualty, the statutory **emergency doctrine of necessity** codified under Section 92 IPC (Section 26 BNS) empowers clinicians to perform life-saving surgery without prior consent. The law protects medical practitioners acting in good faith for the patient's benefit when the victim cannot express consent and no relative or guardian is immediately reachable.",
+   "say": "Under the emergency doctrine, doctors can perform life-saving surgery on an unconscious patient without waiting for consent if no relatives are reachable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Elective clinical situation",
+     "points": [
+      "Full informed consent mandatory",
+      "Patient possesses decision-making time",
+      "Surgery delayed if consent refused",
+      "Absolute respect for patient refusal"
+     ]
+    },
+    "right": {
+     "title": "Life-threatening emergency",
+     "points": [
+      "Protected under Section 92 IPC / 26 BNS",
+      "Treating unconscious / stuporous patient",
+      "Surgery performed in good faith for life",
+      "Two doctors document clinical urgency"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The ethical foundation of professional secrecy",
+   "tx": "Dating back to the Hippocratic tradition, the **professional secrecy confidentiality rule** imposes a binding legal and moral duty upon every doctor to guard all patient secrets learned during professional practice. Whether disclosing a disease diagnosis, reproductive history, psychiatric disturbance, or financial status, unauthorized disclosure violates the patient's constitutional right to privacy and represents serious professional misconduct under National Medical Commission regulations.",
+   "say": "Professional secrecy requires doctors to keep all patient medical and personal details confidential. Leaking patient secrets is a breach of privacy and ethics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ethical code",
+     "Statutory foundation",
+     "Scope of protection"
+    ],
+    "rows": [
+     [
+      "Hippocratic Oath",
+      "Historic professional pledge",
+      "Guarantees silence regarding private household life"
+     ],
+     [
+      "Declaration of Geneva",
+      "World Medical Association code",
+      "Pledges respect for patient secrets even after death"
+     ],
+     [
+      "NMC Ethics Regulations",
+      "Statutory Indian medical law",
+      "Classifies breach of secrecy as punishable misconduct"
+     ],
+     [
+      "Article 21 Constitution",
+      "Fundamental right to privacy",
+      "Protects personal autonomy and medical records from leaks"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Concept and definition of privileged communication",
+   "tx": "In medical jurisprudence, a **statutory privileged communication exemption** arises when a physician is legally, socially, or morally justified in disclosing confidential patient information to a competent public authority without patient consent. This release of secrecy is protected from slander, libel, or misconduct proceedings because protecting community health, national security, or vulnerable individuals supersedes individual patient confidentiality.",
+   "say": "Privileged communication is a legal exception where a doctor discloses confidential health data to public authorities to prevent crime or protect public safety.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doctor acquires confidential health information"
+     },
+     {
+      "id": "b",
+      "label": "Direct conflict between patient secrecy and public safety"
+     },
+     {
+      "id": "c",
+      "label": "Statutory or moral duty compelling notification exists"
+     },
+     {
+      "id": "d",
+      "label": "Protected communication delivered to competent authority"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Statutory duty to report notifiable infectious diseases",
+   "tx": "Under public health legislation, the **mandatory notifiable disease disclosure** legally compels clinicians to report communicable infections including cholera, plague, yellow fever, tuberculosis, and COVID-19 to district health officers. Protecting the wider community from epidemic contagion overrides personal secrecy, and doctors cannot be sued for breach of confidentiality when submitting statutory infectious disease notifications to government health departments.",
+   "say": "Doctors are legally required to report dangerous infectious diseases like cholera and tuberculosis to public health authorities to prevent epidemic outbreaks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infectious disease",
+     "Public health statute",
+     "Designated reporting authority"
+    ],
+    "rows": [
+     [
+      "Tuberculosis (active)",
+      "National Tuberculosis Elimination Program",
+      "Nikshay portal / District TB Officer"
+     ],
+     [
+      "Cholera / epidemic diarrhea",
+      "Epidemic Diseases Act",
+      "Chief Medical Officer / Municipal health board"
+     ],
+     [
+      "COVID-19 / pandemic pathogen",
+      "Disaster Management / Epidemic Act",
+      "Integrated Disease Surveillance Programme (IDSP)"
+     ],
+     [
+      "Food poisoning outbreak",
+      "Public Health by-laws",
+      "Local municipal sanitary authority"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Reporting medicolegal trauma and child abuse",
+   "tx": "Under criminal law, an absolute **statutory crime reporting duty** obligates clinicians to inform police authorities upon treating casualties exhibiting firearm bullet wounds, stab injuries, fatal poisonings, or unnatural trauma. Furthermore, under Section 19 of the POCSO Act, any medical practitioner who treats an adolescent showing signs of sexual assault must immediately report the case to local child protection or police units.",
+   "say": "Clinicians must report bullet injuries, stab wounds, and suspected poisonings to the police, and report all adolescent sexual abuse cases under the POCSO Act.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient with firearm wound or child sexual abuse arrives"
+     },
+     {
+      "id": "b",
+      "label": "Immediate emergency surgical and medical resuscitation"
+     },
+     {
+      "id": "c",
+      "label": "Simultaneous intimation to hospital medicolegal register"
+     },
+     {
+      "id": "d",
+      "label": "Mandatory statutory notification dispatched to police / child welfare"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Disclosing infectious status to sexual partners: the Mr X v Hospital Z ruling",
+   "tx": "In the landmark judgment Mr X v Hospital Z, the Supreme Court established the **sexual partner notification doctrine** regarding communicable sexually transmitted pathogens like HIV. The court ruled that where a patient's communicable infection threatens the life of an innocent spouse or prospective marriage partner, a physician does not commit breach of secrecy by warning the partner if the patient refuses to disclose.",
+   "say": "The Supreme Court ruled that a doctor may warn an innocent spouse or fianc\u00e9 about an HIV infection if the patient refuses to disclose, protecting the partner's life.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General confidentiality obligation",
+     "points": [
+      "Protects personal patient health information",
+      "Prohibits casual disclosure to relatives or friends",
+      "Guaranteed under NMC ethics guidelines",
+      "Maintains public trust in healthcare systems"
+     ]
+    },
+    "right": {
+     "title": "Partner notification exception",
+     "points": [
+      "Applies to deadly sexually transmitted disease",
+      "Operates when patient refuses voluntary disclosure",
+      "Protects innocent third party's right to life",
+      "Affirmed in Supreme Court Mr X v Hospital Z"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Testifying under judicial compulsion in court",
+   "tx": "When a medical witness is questioned in the witness box, the **judicial compulsion disclosure mandate** removes professional secrecy barriers upon a direct order from the presiding judge. While doctors must respectfully request judicial direction before revealing sensitive therapeutic records, once the judge rules that disclosure is essential to administration of justice, the practitioner must answer honestly under penalty of contempt.",
+   "say": "In court, a doctor must reveal confidential patient records if ordered by the judge, as judicial orders override medical secrecy in the pursuit of justice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doctor asked confidential clinical question in witness box"
+     },
+     {
+      "id": "b",
+      "label": "Doctor states ethical duty of secrecy and seeks direction"
+     },
+     {
+      "id": "c",
+      "label": "Presiding judge formally orders witness to answer on record"
+     },
+     {
+      "id": "d",
+      "label": "Doctor discloses confidential medical facts under judicial protection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

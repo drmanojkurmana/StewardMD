@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-neuroradiology-subarachnoid-haemorrhage-on",
+ "subject": "radiology",
+ "module": "rad-neuroradiology",
+ "title": "Subarachnoid Haemorrhage, Hyperdense MCA and Stroke CT Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Blood fills cisterns and sulci",
+   "tx": "**Subarachnoid haemorrhage** paints the basal cisterns, sylvian fissures and cortical sulci bright white on non contrast CT, the pattern shown in the pictured brain scan set. Blood layered in the interpeduncular and ambient cisterns with a thunderclap headache is aneurysmal until proven otherwise. Convexity only blood over the high sulci in an older patient instead suggests amyloid angiopathy or reversible vasoconstriction syndrome.",
+   "say": "Subarachnoid haemorrhage paints the basal cisterns, sylvian fissures and sulci bright white on non contrast CT. Blood in the basal cisterns with a thunderclap headache is aneurysmal until proven otherwise. Convexity only blood in an older patient suggests amyloid angiopathy or vasoconstriction syndrome instead.",
+   "vis": {"kind": "image", "src": "v1/kb/media/headache-migraine-red-flags-long-case-fig1.webp", "alt": "Brain CT image set showing subarachnoid haemorrhage in basal cisterns.", "caption": "Subarachnoid blood in basal cisterns on brain CT. Illustration: StewardMD."}
+  },
+  {
+   "title": "CT sensitivity falls with time",
+   "tx": "**CT sensitivity** for subarachnoid blood is highest in the first six hours, near complete with modern scanners and expert reading, then falls as blood dilutes and clears over days. A negative CT after twenty four hours therefore never closes the case when the story is thunderclap. Lumbar puncture looking for xanthochromia after twelve hours, or CT angiography in the right protocol, completes the pathway the local centre follows.",
+   "say": "CT sensitivity for subarachnoid blood is highest in the first six hours, then falls as blood dilutes over days. A negative CT after twenty four hours never closes a thunderclap case. Lumbar puncture for xanthochromia after twelve hours, or CT angiography, completes the pathway.",
+   "vis": {"kind": "table", "cols": ["Time from onset", "CT yield guide", "Next step if negative"], "rows": [["Under 6 hours", "Near complete, expert read", "Angiography by protocol"], ["6 to 24 hours", "High but falling", "Puncture or angiography"], ["1 to 7 days", "Falling steadily", "Puncture for xanthochromia"], ["Over 1 week", "Low", "MRI and angiography"]]}
+  },
+  {
+   "title": "Aneurysm shapes and sites",
+   "tx": "**Saccular aneurysm** balloons from branch points of the circle of Willis, anterior communicating artery commonest, then posterior communicating and middle cerebral bifurcation. The pictured aneurysm anatomy shows the sac neck and dome whose rupture fills the cisterns around its parent artery, so blood distribution hints the source: interhemispheric blood for anterior communicating, sylvian blood for middle cerebral. Posterior communicating rupture also drops a third nerve palsy beside the headache.",
+   "say": "Saccular aneurysm balloons from circle of Willis branch points, anterior communicating commonest. The pictured anatomy shows the sac whose rupture fills nearby cisterns, so blood distribution hints the source. Posterior communicating rupture also drops a third nerve palsy beside the headache.",
+   "vis": {"kind": "image", "src": "v1/kb/media/cerebral-aneurysm-fig1.webp", "alt": "Illustration of cerebral aneurysm anatomy at a vessel branch point with rupture.", "caption": "Cerebral aneurysm anatomy and rupture pattern. Illustration: StewardMD."}
+  },
+  {
+   "title": "Hyperdense MCA sign",
+   "tx": "**Hyperdense MCA sign** is a bright middle cerebral artery against darker brain and the opposite artery, fresh thrombus packed inside the vessel in acute ischaemic stroke. It predicts a large territory infarct and poor response to intravenous thrombolysis alone, pushing the team toward thrombectomy assessment. The sign must match the symptomatic side and survive comparison with calcified vessel walls, its common mimic in older patients.",
+   "say": "Hyperdense MCA sign is a bright middle cerebral artery from fresh thrombus packed inside it in acute stroke. It predicts a large territory infarct and pushes the team toward thrombectomy assessment. The sign must match the symptomatic side and survive comparison with calcified vessel walls.",
+   "vis": {"kind": "compare", "left": {"title": "True hyperdense artery", "points": ["Brighter than opposite side", "Matches symptom territory", "Early insular changes follow", "Thrombectomy assessment"]}, "right": {"title": "Calcified mimic", "points": ["Bilateral vessel brightness", "No territory symptoms", "Bone window confirms calcium", "No acute infarct signs"]}}
+  },
+  {
+   "title": "Early infarct signs on plain CT",
+   "tx": "**Insular ribbon loss** erases the normal grey white line of the insula within hours of middle cerebral occlusion, joined by lentiform obscuration and sulcal effacement over the dying cortex. Hypodensity covering more than one third of the middle cerebral territory warns against thrombolysis because haemorrhage risk climbs. ASPECTS scoring divides the territory into ten regions and subtracts one per early changed region, quantifying that judgement.",
+   "say": "Insular ribbon loss erases the insular grey white line within hours of middle cerebral occlusion, joined by lentiform obscuration and sulcal effacement. Hypodensity over one third of the territory warns against thrombolysis. ASPECTS divides the territory into ten regions and subtracts one per changed region.",
+   "vis": {"kind": "table", "cols": ["Early sign", "Structure lost", "Timing"], "rows": [["Insular ribbon loss", "Insular grey white line", "Within hours"], ["Lentiform obscuration", "Basal ganglia edge", "Within hours"], ["Sulcal effacement", "Cortical sulci", "Hours"], ["Established hypodensity", "Whole territory wedge", "6 hours onward"]]}
+  },
+  {
+   "title": "Vasospasm and delayed deterioration",
+   "tx": "**Cerebral vasospasm** narrows aneurysmal arteries between days four and fourteen after the bleed, causing delayed cerebral ischaemia just when the patient seemed safe. Thick cisternal clot burden on the first scan, graded by Fisher or modified Fisher scales, predicts that risk and sets nimodipine and monitoring intensity. New deficits in the window earn transcranial Doppler velocities, CT perfusion and induced hypertension discussions with neurosurgery and neurocritical care.",
+   "say": "Cerebral vasospasm narrows arteries between days four and fourteen after the bleed, causing delayed ischaemia when the patient seemed safe. Thick cisternal clot on the first scan predicts that risk. New deficits in the window earn Doppler velocities, perfusion imaging and urgent specialist discussion.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Thick cisternal clot day 0"}, {"id": "b", "label": "Nimodipine and monitoring"}, {"id": "c", "label": "Days 4 to 14 spasm window"}, {"id": "d", "label": "New deficit: perfusion scan"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Perimesencephalic pattern reassures",
+   "tx": "**Perimesencephalic haemorrhage** confines blood to the cisterns around the midbrain with at most minimal extension, normal angiography and a benign course in most patients. It lacks the diffuse sylvian and interhemispheric spread of aneurysmal rupture. One high quality negative CT angiogram, repeated per local protocol, separates it from a missed posterior circulation aneurysm, which is the one error this pattern cannot afford.",
+   "say": "Perimesencephalic haemorrhage confines blood around the midbrain with normal angiography and a benign course in most patients. It lacks the diffuse spread of aneurysmal rupture. One high quality negative angiogram separates it from a missed posterior circulation aneurysm, the one error this pattern cannot afford.",
+   "vis": {"kind": "compare", "left": {"title": "Perimesencephalic", "points": ["Blood around midbrain only", "Angiogram normal", "Benign course usual", "Venous source suspected"]}, "right": {"title": "Aneurysmal diffuse", "points": ["Sylvian and interhemispheric spread", "Aneurysm found", "Vasospasm risk high", "Hydrocephalus common"]}}
+  },
+  {
+   "title": "Hydrocephalus after the bleed",
+   "tx": "**Acute hydrocephalus** complicates aneurysmal bleeding when blood blocks cerebrospinal fluid flow and absorption, showing enlarged temporal horns and transependymal oedema on repeat CT. Falling consciousness after initial stability is its clinical flag, and an external ventricular drain treats pressure while the aneurysm is secured. Intraventricular blood extension worsens grade and prognosis in every scoring system, so the first report must state it explicitly.",
+   "say": "Acute hydrocephalus complicates aneurysmal bleeding when blood blocks fluid flow, showing enlarged temporal horns on repeat CT. Falling consciousness after initial stability is its flag, and a ventricular drain treats pressure while the aneurysm is secured. Intraventricular blood worsens every grade, so reports state it explicitly.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blood blocks fluid pathways"}, {"id": "b", "label": "Temporal horns enlarge"}, {"id": "c", "label": "Consciousness falls"}, {"id": "d", "label": "Ventricular drain placed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

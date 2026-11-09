@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-communication-communication-process",
+  "subject": "community-medicine",
+  "module": "cm-communication",
+  "title": "Health Communication: Process, Barriers, and Education Approaches",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Elements of the communication process",
+      "tx": "Every health message travels the **communication process**: a communicator encodes an idea into a message, sends it through a channel to an audience, whose decoding and feedback complete or break the loop. Feedback distinguishes communication from mere transmission; without it the health worker broadcasts blind. The audience's response (questions, adoption, rumours returning) is programme data, not noise.",
+      "say": "Communicator, message, channel, audience, feedback: the loop closes only when feedback returns. Without feedback you are broadcasting blind.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "cp1", "label": "Communicator encodes the message" },
+          { "id": "cp2", "label": "Channel carries it to the audience" },
+          { "id": "cp3", "label": "Audience decodes and feeds back" }
+        ],
+        "edges": [["cp1", "cp2"], ["cp2", "cp3"]]
+      }
+    },
+    {
+      "title": "Barriers to communication",
+      "tx": "**Barriers to health communication** stack at every element: physiological (deafness, illness), psychological (fear, prejudice, selective listening), environmental (noise, distance), semantic (jargon, language mismatch), and cultural (taboos around contraception or mental illness). Naming the barrier chooses the remedy: interpreters for language, privacy for taboo, repetition and demonstration for low literacy, quiet rooms for counselling.",
+      "say": "Barriers hide in the sender, message, channel, and receiver. Diagnose which one before prescribing louder repetition.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Barrier type", "Field example and remedy"],
+        "rows": [
+          ["Semantic", "Jargon to villagers; use local terms and pictures"],
+          ["Psychological", "Fear of cancer word; stage information gently"],
+          ["Environmental", "Noisy clinic; move counselling to quiet corner"],
+          ["Cultural", "Contraception taboo; involve trusted elders"]
+        ]
+      }
+    },
+    {
+      "title": "Approaches to health education",
+      "tx": "Three classical **approaches to health education** differ in power flow: the regulatory approach compels by law (seat belts, smoke free rules), the service approach supplies facilities and waits (clinics alone, historically disappointing), and the educational approach informs and motivates voluntary change, slowest but most durable. Modern programmes blend all three, reserving compulsion for risks imposed on others.",
+      "say": "Law compels, services wait, education persuades. Durable change blends them, with education carrying the long term load.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regulatory and service approaches",
+          "points": ["Laws, fines, mandates", "Facilities provided, uptake awaited", "Fast but brittle compliance"]
+        },
+        "right": {
+          "title": "Educational approach",
+          "points": ["Information plus motivation", "Voluntary informed choice", "Slow but durable behaviour change"]
+        }
+      }
+    },
+    {
+      "title": "Principles of health education",
+      "tx": "Field tested **principles of health education** include credibility of the messenger, interest anchored in felt needs, participation of the audience, motivation, comprehension in local language, reinforcement by repetition, learning by doing, proceeding from known to unknown and concrete to abstract, setting an example, good human relations, and feedback. Violating participation (lecturing at silent villagers) is the commonest programme failure mode.",
+      "say": "Start from felt needs, use local language, make people participate and practise. Lectures without participation rarely change behaviour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pe1", "label": "Anchor in felt need and known facts" },
+          { "id": "pe2", "label": "Participate, demonstrate, practise" },
+          { "id": "pe3", "label": "Reinforce with feedback and repetition" }
+        ],
+        "edges": [["pe1", "pe2"], ["pe2", "pe3"]]
+      }
+    },
+    {
+      "title": "Audio visual aids: choosing by purpose",
+      "tx": "**Audio visual aids in health education** divide into auditory (radio, announcements), visual projected (slides, films), visual non projected (posters, flip charts, flashcards, models), and combined (television, video, demonstrations). The cone of experience teaches that doing outlasts seeing, which outlasts hearing: a mother who practises preparing oral rehydration solution remembers it when the diarrhoea comes at midnight.",
+      "say": "Doing beats seeing beats hearing. Let mothers mix the solution themselves instead of only watching your demonstration.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Aid class", "Best use"],
+        "rows": [
+          ["Flip charts and flashcards", "Small group dialogue, sequential story"],
+          ["Posters", "Single message reminder at point of action"],
+          ["Models and demonstrations", "Skills: ORS mixing, hand washing, breastfeeding"],
+          ["Mass media spots", "Awareness, norms, campaign dates"]
+        ]
+      }
+    },
+    {
+      "title": "Focus group discussion",
+      "tx": "A **focus group discussion** gathers six to twelve homogeneous participants with a trained moderator and a guide of open questions to surface beliefs, rumours, and language around a topic (why mothers fear injections, why men avoid vasectomy). It researches and persuades simultaneously but generalises cautiously; findings guide message design and pretesting rather than estimating population percentages.",
+      "say": "Six to twelve similar people, one skilled moderator, open questions. Focus groups reveal why, never how many.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Focus group strengths",
+          "points": ["Surfaces beliefs and vocabulary", "Explains survey surprises", "Pretests messages cheaply"]
+        },
+        "right": {
+          "title": "Focus group limits",
+          "points": ["No population percentages", "Dominant voices can hijack", "Needs trained moderation"]
+        }
+      }
+    },
+    {
+      "title": "Role play and demonstration methods",
+      "tx": "**Role play in health education** lets participants enact real encounters (refusing a drink, negotiating condom use, counselling a defaulter mother) then debrief feelings and alternatives safely. Demonstration with return demonstration builds psychomotor skill. Both convert passive audiences into rehearsed actors, which is why training of community workers relies on them far more than on lectures.",
+      "say": "Role play rehearses real life safely. People who have practised refusal or counselling actually do it later.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "rp1", "label": "Enact the real life scene" },
+          { "id": "rp2", "label": "Debrief feelings and choices" },
+          { "id": "rp3", "label": "Replay with better strategy" }
+        ],
+        "edges": [["rp1", "rp2"], ["rp2", "rp3"]]
+      }
+    },
+    {
+      "title": "Counselling versus health education",
+      "tx": "Though cousins, **counselling and health education differ**: education addresses groups toward general behaviour, while counselling is a private, client centred dialogue helping one person decide (contraceptive choice, HIV test consent, infant feeding with HIV). Counselling demands listening, confidentiality, and non directive support; its Indian programme face is the counsellor cadre in ICTC (integrated counselling and testing centres) and family planning services.",
+      "say": "Education speaks to groups; counselling sits with one person's decision. Listening and confidentiality define the second.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Education versus counselling"],
+        "rows": [
+          ["Audience", "Group or public versus one client or couple"],
+          ["Goal", "General behaviour versus personal decision"],
+          ["Setting", "Community sessions versus private room"],
+          ["Core skill", "Clear messaging versus listening and empathy"]
+        ]
+      }
+    },
+    {
+      "title": "IEC and BCC in programmes",
+      "tx": "Programme vocabulary separates **information education communication (IEC)** materials and campaigns from behaviour change communication (BCC), which researches barriers and facilitators, segments audiences, and engineers environments (not just messages) toward specific behaviours. The newer umbrella, social and behaviour change communication, adds social norms and community mobilisation. Examiners test IEC as the older material centred term against BCC as the behaviour centred successor.",
+      "say": "IEC makes materials; BCC engineers behaviour change. Modern programmes fund the second and measure behaviour, not posters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IEC (older focus)",
+          "points": ["Posters, pamphlets, broadcasts", "Knowledge as the endpoint", "One message for all audiences"]
+        },
+        "right": {
+          "title": "BCC (behaviour focus)",
+          "points": ["Audience segmentation and research", "Barriers and facilitators addressed", "Behaviour indicators measured"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+ "v": 1,
+ "id": "psy-sexual-gender-erectile-dysfunction",
+ "subject": "psychiatry",
+ "module": "psy-sexual-gender",
+ "title": "Sexual Dysfunction, Paraphilic Disorders, and Gender Dysphoria",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Erectile dysfunction** is defined as the consistent or recurrent inability to attain or maintain an erection sufficient for satisfactory sexual performance, persisting for at least six months. The diagnostic workup distinguishes psychogenic etiology, featuring abrupt situational onset and preserved morning erections, from organic vascular, neurogenic, or endocrine causes.",
+   "say": "Erectile dysfunction is the inability to maintain an erection for six months. Preserved morning tumescence confirms a psychogenic over organic etiology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psychogenic Etiology",
+     "points": [
+      "Abrupt, sudden onset following psychological stress",
+      "Preserved nocturnal and early morning erections",
+      "Situational: fails with partner, normal with masturbation",
+      "High performance anxiety and fear of failure"
+     ]
+    },
+    "right": {
+     "title": "Organic Etiology",
+     "points": [
+      "Gradual, insidious progressive deterioration",
+      "Complete loss of nocturnal and morning erections",
+      "Constant across all sexual situations",
+      "Atherosclerosis, diabetes mellitus, neuropathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Phosphodiesterase-5 inhibitors**, such as sildenafil, tadalafil, and vardenafil, represent the first-line oral medical pharmacotherapy for erectile dysfunction. Sildenafil competitively inhibits the PDE-5 enzyme, preventing the catalytic degradation of cyclic guanosine monophosphate (cGMP) in the corpus cavernosum, which maintains vascular smooth muscle relaxation and tumescence.",
+   "say": "Sildenafil inhibits PDE-5 to prevent cGMP breakdown in the corpus cavernosum, sustaining vascular smooth muscle relaxation and penile erection.",
+   "vis": {
+    "kind": "flow",
+    "title": "Erectile Hemodynamic Pathway",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Sexual stimulation triggers cavernosal nitric oxide release"
+     },
+     {
+      "id": "n2",
+      "label": "Guanosine triphosphate converted to cyclic GMP via guanylyl cyclase"
+     },
+     {
+      "id": "n3",
+      "label": "Sildenafil blocks PDE-5, preventing enzymatic cGMP breakdown"
+     },
+     {
+      "id": "n4",
+      "label": "Sustained arterial vasodilation & sinusoidal engorgement"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nitrate contraindication with sildenafil** represents an absolute, life-threatening pharmacological rule: administering PDE-5 inhibitors concurrently with organic nitrates like nitroglycerin or isosorbide dinitrate causes catastrophic, refractory systemic vasodilation and fatal hypotension. Co-administration within 24 hours of sildenafil or 48 hours of tadalafil is strictly contraindicated.",
+   "say": "Combining sildenafil with nitroglycerin causes fatal hypotension and cardiovascular collapse. Concurrent nitrate therapy is an absolute contraindication.",
+   "vis": {
+    "kind": "table",
+    "title": "PDE-5 Inhibitor Pharmacokinetics",
+    "cols": [
+     "Drug",
+     "Onset of Action",
+     "Duration of Action",
+     "Nitrate Exclusion Window"
+    ],
+    "rows": [
+     [
+      "Sildenafil",
+      "30 to 60 minutes",
+      "4 to 6 hours",
+      "Minimum 24 hours post-dose"
+     ],
+     [
+      "Vardenafil",
+      "30 to 60 minutes",
+      "4 to 6 hours",
+      "Minimum 24 hours post-dose"
+     ],
+     [
+      "Tadalafil",
+      "30 to 45 minutes",
+      "24 to 36 hours ('weekend pill')",
+      "Minimum 48 hours post-dose"
+     ],
+     [
+      "Avanafil",
+      "15 minutes (rapid)",
+      "4 to 6 hours",
+      "Minimum 12 hours post-dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Premature ejaculation** is defined as a persistent pattern of ejaculation occurring within approximately one minute of vaginal penetration, before the individual wishes, causing clinically significant distress. Management combines behavioral techniques, such as the Semans stop-start method and Masters and Johnson squeeze technique, with short-acting serotonergic agents.",
+   "say": "Premature ejaculation occurs within one minute of penetration. It is treated with behavioral pause techniques and short-acting dapoxetine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Behavioral Therapies",
+     "points": [
+      "Semans stop-start pause conditioning",
+      "Masters and Johnson glans squeeze technique",
+      "Sensate focus non-genital exercises",
+      "Pelvic floor muscle rehabilitation"
+     ]
+    },
+    "right": {
+     "title": "Pharmacological Therapies",
+     "points": [
+      "Dapoxetine (short-acting SSRI taken 1-3h prior)",
+      "Daily off-label paroxetine or sertraline",
+      "Topical lidocaine/prilocaine desensitizing spray",
+      "Tramadol taken as an on-demand rescue agent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Vaginismus and female sexual pain disorders** involve involuntary, persistent muscular spasm of the outer third of the vagina and pelvic floor musculature (pubococcygeus) upon attempted vaginal entry. Coitus is rendered impossible or excruciatingly painful, successfully managed through progressive graded vaginal dilators, pelvic physical therapy, and relaxation training.",
+   "say": "Vaginismus is an involuntary pelvic floor muscle spasm preventing vaginal entry, successfully treated with progressive dilators and relaxation training.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vaginismus Rehabilitation Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Psychoeducation to demystify pelvic anatomy and involuntary spasm"
+     },
+     {
+      "id": "n2",
+      "label": "Pelvic floor progressive muscle relaxation & Kegel biofeedback"
+     },
+     {
+      "id": "n3",
+      "label": "Graduated self-insertion of silicone vaginal dilators (sizes 1 to 5)"
+     },
+     {
+      "id": "n4",
+      "label": "Gradual transition to partner coital attempts without fear"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sensate focus therapy**, devised by Masters and Johnson, systematically eliminates performance anxiety in couples through structured, progressive physical intimacy assignments. Partners are initially strictly forbidden from engaging in genital touching or intercourse, focusing exclusively on non-genital tactile caressing to foster mutual intimacy.",
+   "say": "Sensate focus eliminates performance anxiety through non-genital touching exercises, with sexual intercourse strictly banned in early phases.",
+   "vis": {
+    "kind": "table",
+    "title": "Masters and Johnson Sensate Focus Stages",
+    "cols": [
+     "Stage",
+     "Permitted Physical Interaction",
+     "Prohibited Behavior"
+    ],
+    "rows": [
+     [
+      "Phase 1: Non-genital",
+      "Back, shoulder, and facial massage",
+      "Strictly no breast, genital touching, or coitus"
+     ],
+     [
+      "Phase 2: Genital non-coital",
+      "Genital touching for sensation only",
+      "Strictly no orgasm pursuit or coital penetration"
+     ],
+     [
+      "Phase 3: Non-demanding coitus",
+      "Slow coital containment without thrusting",
+      "No performance demand or thrusting goals"
+     ],
+     [
+      "Phase 4: Full intercourse",
+      "Mutual pelvic thrusting to natural climax",
+      "Free coital intimacy without performance anxiety"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paraphilic disorders** are distinguished from benign non-pathological paraphilias by the mandatory presence of personal distress, functional impairment, or sexual activity involving non-consenting individuals. Major paraphilic entities include fetishism (arousal from inanimate objects), exhibitionism (flashing unsuspecting strangers), voyeurism (peeping), and frotteurism (touching non-consenting strangers).",
+   "say": "Paraphilic disorders require atypical sexual interests causing distress, impairment, or harm to non-consenting victims, such as voyeurism and exhibitionism.",
+   "vis": {
+    "kind": "table",
+    "title": "DSM-5 Paraphilic Entities",
+    "cols": [
+     "Paraphilic Disorder",
+     "Arousal Stimulus / Target",
+     "Legal & Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Exhibitionism",
+      "Exposing genitals to unsuspecting strangers",
+      "Public offense; high risk of legal arrest"
+     ],
+     [
+      "Voyeurism",
+      "Observing private, unsuspecting nude persons",
+      "Surreptitious peering; criminal privacy violation"
+     ],
+     [
+      "Frotteurism",
+      "Touching or rubbing against non-consenting persons",
+      "Crowded public transport offense"
+     ],
+     [
+      "Pedophilic disorder",
+      "Sexual attraction toward prepubescent children",
+      "Severe criminal felony; mandatory protective reporting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gender dysphoria** involves a marked, persistent incongruence between an individual's experienced or expressed gender and their assigned biological sex at birth, lasting at least six months and causing significant distress. Management encompasses affirmative social transition, gender-affirming hormone therapy, and gender confirmation surgery under multi-disciplinary mental health supervision.",
+   "say": "Gender dysphoria involves marked incongruence between experienced gender and assigned sex lasting six months, managed with affirmative care and hormonal therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Criteria",
+     "points": [
+      "Marked incongruence lasting at least 6 months",
+      "Desire to be rid of primary/secondary sex features",
+      "Desire for sexual characteristics of experienced gender",
+      "Clinically significant subjective distress or impairment"
+     ]
+    },
+    "right": {
+     "title": "Affirmative Management",
+     "points": [
+      "Social transition (name, pronouns, presentation)",
+      "Cross-sex hormone therapy (estrogen / testosterone)",
+      "Surgical gender affirmation (chest/genital surgery)",
+      "Comprehensive multi-disciplinary psychiatric support"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

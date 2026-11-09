@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-identification-bertillon-anthropometry",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Anthropometry, Cephalic Index and Craniofacial Superimposition",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The rise and historical fall of Bertillon anthropometry",
+   "tx": "Devised by French police clerk Alphonse Bertillon in 1879, the **Bertillon anthropometry identification system** (Bertillonage) represented the first scientific criminal identification framework. The system rested on the premises that human skeletal dimensions remain unchanged after age twenty-one, and that identical measurement combinations across eleven physical dimensions are astronomically rare. However, the system collapsed after the famous 1903 Will West case exposed measurement discrepancies.",
+   "say": "Bertillonage was the first scientific identification system, recording eleven body measurements. It was abandoned after the Will West case proved fingerprints superior.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Historical phase",
+     "Identification technology",
+     "Key scientific limitation"
+    ],
+    "rows": [
+     [
+      "Late 19th century",
+      "Bertillonage anthropometry (11 measures)",
+      "Observer measurement variation; calipers slip"
+     ],
+     [
+      "1903 landmark event",
+      "Will West vs William West incident",
+      "Two unrelated prisoners had identical Bertillon records"
+     ],
+     [
+      "Early 20th century",
+      "Transition to Henry dactylography",
+      "Fingerprints proved completely unique and non-varying"
+     ],
+     [
+      "Modern forensic practice",
+      "Digital biometric facial recognition & DNA",
+      "High-throughput algorithmic identification"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The eleven standard Bertillon physical measurements",
+   "tx": "Under the Bertillonage protocol, criminal clerks recorded **eleven standardized body measurements** using sliding calipers and gauges. These comprised standing height, sitting height, arm span (reach), head length, head breadth, bizygomatic facial breadth, length of right ear, length of left foot, length of left middle finger, length of left little finger, and length of left forearm from elbow to fingertip (cubit).",
+   "say": "Bertillon recorded standing and sitting height, arm span, head length and breadth, ear length, left foot, middle finger, little finger, and forearm cubit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gross stature: Standing height, sitting height, and arm span"
+     },
+     {
+      "id": "b",
+      "label": "Cranial dimensions: Head length, head breadth, and bizygomatic breadth"
+     },
+     {
+      "id": "c",
+      "label": "Ear measurement: Maximum length of right auricle"
+     },
+     {
+      "id": "d",
+      "label": "Limb extremities: Left foot, left middle finger, little finger, and cubit"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Will West case and triumph of dactylography",
+   "tx": "The historic downfall of anthropometry occurred in the **Will West penitentiary incident** at Leavenworth Prison in 1903. An incoming prisoner named Will West matched the exact eleven anthropometric measurements and photographic portrait of an existing inmate named William West, despite having no known biological relation. When fingerprint impressions were obtained, their friction ridge minutiae were entirely dissimilar, prompting criminal bureaus worldwide to replace Bertillonage with dactylography.",
+   "say": "In 1903, two unrelated prisoners had identical Bertillon measurements and facial features, but completely different fingerprints, cementing dactylography's supremacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bertillon anthropometry",
+     "points": [
+      "Relies on sliding calipers and soft tissue compressibility",
+      "Subject to significant examiner measurement error",
+      "Bone dimensions change with severe trauma or aging",
+      "Failed in the 1903 Leavenworth Will West case"
+     ]
+    },
+    "right": {
+     "title": "Galton-Henry dactylography",
+     "points": [
+      "Relies on immutable epidermal friction ridge architecture",
+      "Completely independent of examiner measuring pressure",
+      "Permanent from intrauterine life until decomposition",
+      "Proved decisive in distinguishing Will and William West"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Cranial anthropometry and the cephalic index",
+   "tx": "In physical anthropology and racial identification, the **cephalic index cranial calculation** (devised by Anders Retzius) expresses the ratio between maximum transverse cranial breadth and maximum anteroposterior cranial length. Measured using spreading calipers from the glabella to inion, and across the maximum biparietal width, the cephalic index equals maximum breadth divided by maximum length multiplied by one hundred.",
+   "say": "The cephalic index equals maximum head breadth divided by length times one hundred, measured with spreading calipers between glabella and inion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Measurement of maximum head length: Glabella to inion"
+     },
+     {
+      "id": "b",
+      "label": "Measurement of maximum head breadth: Biparietal width"
+     },
+     {
+      "id": "c",
+      "label": "Apply formula: (Maximum Breadth / Maximum Length) x 100"
+     },
+     {
+      "id": "d",
+      "label": "Classification into dolicho-, meso-, or brachycephalic skull"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Classification of skull types by cephalic index",
+   "tx": "Based on the calculated index, physical anthropologists classify crania into **three primary cephalic categories**. Dolichocephalic (long/narrow) skulls feature an index under seventy-five, typical of pure Aryans, Dravidians, and African populations. Mesaticephalic (medium) skulls range from seventy-five to seventy-nine-point-nine, typical of Europeans. Brachycephalic (broad/round) skulls score eighty or above, characteristic of Mongolian, Chinese, and Alpine populations.",
+   "say": "Skulls are classified by cephalic index: dolichocephalic under seventy-five, mesocephalic seventy-five to eighty, and brachycephalic over eighty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cranial classification",
+     "Cephalic index range",
+     "Characteristic ethnic / regional groups"
+    ],
+    "rows": [
+     [
+      "Dolichocephalic (Long head)",
+      "Under 75.0",
+      "Aryans, Dravidians, Aborigines, African Negroids"
+     ],
+     [
+      "Mesaticephalic (Medium head)",
+      "75.0 to 79.9",
+      "Western Europeans, modern North Indians, Anglo-Saxons"
+     ],
+     [
+      "Brachycephalic (Broad head)",
+      "80.0 to 84.9",
+      "Mongolians, Chinese, Nepalese, Swiss Alpine groups"
+     ],
+     [
+      "Hyperbrachycephalic (Very broad)",
+      "85.0 and above",
+      "Certain specialized Central Asian populations"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Principles of craniofacial superimposition",
+   "tx": "When an unknown skeletonized skull is recovered, **photographic craniofacial superimposition** compares the skull directly against antemortem facial photographs of missing persons. First utilized in the historic Ruxton murder trial (1935), the technique mounts the cleaned skull on an adjustable craniophore, rotating it until its orientation, tilt, and optical distance precisely duplicate the subject's head position in life.",
+   "say": "Craniofacial superimposition aligns an unknown skull on a craniophore with life photographs of a missing person, matching anatomical bony landmarks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antemortem life photograph of missing person enlarged to life size"
+     },
+     {
+      "id": "b",
+      "label": "Cleaned skull mounted on universal craniophore"
+     },
+     {
+      "id": "c",
+      "label": "Optical alignment matching photograph tilt, rotation, and distance"
+     },
+     {
+      "id": "d",
+      "label": "Comparison of soft tissue depth over anatomical bony landmarks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Anatomical landmarks in superimposition analysis",
+   "tx": "Pathologists evaluate concordance across standardized **craniofacial anthropometric landmarks**, comparing bony contours with overlying soft tissues. Critical landmarks comprise the nasion (nasofrontal junction), glabella, prosthion (upper alveolar margin), gnathion (inferior chin border), orbital rims matching pupillary apertures, ectocanthion, endocanthion, and lateral nasal aperture margins matching nasal ala contours. Facial tissue thickness tables guide expected soft tissue depth.",
+   "say": "The pathologist matches landmarks like nasion, chin gnathion, eye sockets, and nasal aperture, ensuring soft tissue depths match anatomical charts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cranial bony landmark",
+     "Soft tissue facial feature",
+     "Evaluation criteria"
+    ],
+    "rows": [
+     [
+      "Orbital apertures",
+      "Eyes and pupillary line",
+      "Eyeballs must sit centered within orbital cavities"
+     ],
+     [
+      "Nasal aperture (pyriform)",
+      "External nose and nasal ala",
+      "Bony nasal spine must support cartilaginous columella"
+     ],
+     [
+      "Alveolar margin (prosthion)",
+      "Upper lip and incisor teeth",
+      "Teeth must correspond with visible smile line"
+     ],
+     [
+      "Mental protuberance (gnathion)",
+      "Lower chin margin",
+      "Soft tissue chin pad thickness must match norms"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Video and digital 3D computed superimposition",
+   "tx": "Modern forensic laboratories replace manual optical mirrors with **digital video superimposition technology**. The skull is scanned using multi-detector computed tomography to create a three-dimensional surface mesh. Computer algorithms rotate the virtual skull model, align facial landmark vectors, adjust opacity sliders dynamically, and fade between the bony skull and antemortem life photograph, detecting subtle discrepancies that exclude wrong candidates.",
+   "say": "Modern labs use 3D CT skull scans and computer fading software to rotate and superimpose the skull over family photographs with millimeter accuracy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High-resolution 3D CT scan of recovered skull"
+     },
+     {
+      "id": "b",
+      "label": "Digital importation into craniofacial alignment software"
+     },
+     {
+      "id": "c",
+      "label": "Automated landmark vector registration against digitized photo"
+     },
+     {
+      "id": "d",
+      "label": "Opacity fade video output demonstrating anatomical match"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Evidentiary value: Exclusion versus positive proof",
+   "tx": "In legal medicine, courts treat the **evidentiary value of superimposition** primarily as a definitive method of exclusion rather than absolute positive proof. If anatomical landmarks, teeth, or orbital shapes fail to align with the photograph, the skull is conclusively excluded from belonging to that individual. However, because unrelated skulls of similar build can simulate a match, positive identity requires confirmation through nuclear or mitochondrial DNA analysis.",
+   "say": "Superimposition conclusively rules out wrong persons, but positive identification requires confirmation with dental records or DNA profiling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exclusionary power (Definitive)",
+     "points": [
+      "Mismatched landmarks eliminate candidate completely",
+      "Incompatible teeth or eye orbits disprove identity",
+      "Accepted by courts as absolute negative proof",
+      "Prevents false identification of victims"
+     ]
+    },
+    "right": {
+     "title": "Inclusionary proof (Corroborative)",
+     "points": [
+      "Suggests skull 'could belong' to the missing person",
+      "Cannot prove uniqueness beyond reasonable doubt",
+      "Subject to shared racial / facial contour similarities",
+      "Demands final corroboration with DNA profiling"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "id": "cm-maternal-antenatal-visits",
+  "subject": "community-medicine",
+  "module": "cm-maternal",
+  "title": "Antenatal Care, Maternal Mortality, and Safe Motherhood Schemes",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Schedule of antenatal visits",
+      "tx": "Every pregnant woman should register early and complete at least four **antenatal visits in pregnancy**, ideally in the first trimester, then between fourteen and twenty six weeks, twenty eight and thirty four weeks, and thirty six weeks to term. Each visit records weight, blood pressure, pallor, oedema, fundal height, fetal heart sounds, haemoglobin, urine albumin and sugar, blood group, and syphilis and HIV screening after consent.",
+      "say": "Four antenatal visits are the minimum, starting in the first trimester. Every visit checks blood pressure, haemoglobin, urine, weight, and the growing uterus.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Visit", "Gestation", "Key tasks"],
+        "rows": [
+          ["First", "Within 12 weeks", "Registration, history, blood group, haemoglobin, VDRL, HIV"],
+          ["Second", "14 to 26 weeks", "Fundal height, anomaly scan, first tetanus dose"],
+          ["Third", "28 to 34 weeks", "Anaemia recheck, growth, iron folic acid supply"],
+          ["Fourth", "36 weeks to term", "Presentation, pelvis, birth preparedness plan"]
+        ]
+      }
+    },
+    {
+      "title": "Iron folic acid and tetanus protection",
+      "tx": "An anaemia free pregnancy rests on **iron folic acid supplementation in pregnancy**: one hundred milligrams of elemental iron with five hundred micrograms of folic acid daily for six months, starting after the first trimester, and doubled in dose for women already anaemic. Deworming follows in the second trimester where hookworm is endemic. Two doses of tetanus and diphtheria toxoid protect mother and newborn against tetanus.",
+      "say": "Iron and folic acid run for six months in pregnancy, twice daily if she is already anaemic. Two Td doses protect her and the baby from tetanus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaemia-pregnancy-iron-transfusion-thresholds-fig1.webp",
+        "alt": "Illustration of maternal fetal iron transfer, plasma volume expansion in pregnancy, and microcytic red cells of iron deficiency",
+        "caption": "Iron in pregnancy: plasma volume expansion dilutes haemoglobin while iron crosses to the fetus. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Identifying the high risk pregnancy",
+      "tx": "A **high risk pregnancy** carries a raised chance of maternal or perinatal death and needs delivery at a first referral unit with blood and caesarean facilities. Warning flags include age below eighteen or above thirty five years, height under one hundred forty centimetres, previous caesarean or stillbirth, severe anaemia, hypertension, diabetes, twins, malpresentation, and bleeding at any stage of pregnancy.",
+      "say": "Short stature, severe anaemia, high blood pressure, a previous caesarean, and bleeding mark a high risk pregnancy. Such women must deliver where surgery and blood are available.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "History based risks",
+          "points": ["Age under 18 or over 35 years", "Previous caesarean section or stillbirth", "Height below 140 centimetres", "Bad obstetric history with repeated losses"]
+        },
+        "right": {
+          "title": "Current pregnancy risks",
+          "points": ["Severe anaemia or hypertension", "Bleeding before or after 28 weeks", "Twins, malpresentation, or hydramnios", "Diabetes, heart disease, or epilepsy"]
+        }
+      }
+    },
+    {
+      "title": "Maternal mortality ratio and rate",
+      "tx": "The **maternal mortality ratio** counts maternal deaths during pregnancy or within forty two days of its end, per one hundred thousand live births in the same period; India's ratio fell to ninety seven in 2018 to 2020. The maternal mortality rate instead divides by women of reproductive age. Direct causes like haemorrhage dominate, while anaemia and sepsis act as major indirect contributors.",
+      "say": "Maternal mortality ratio is deaths per one hundred thousand live births. India reached ninety seven, against a Sustainable Development Goal target of seventy by 2030.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Indicator", "Numerator and denominator"],
+        "rows": [
+          ["Maternal mortality ratio", "Maternal deaths per 100000 live births"],
+          ["Maternal mortality rate", "Maternal deaths per 100000 women aged 15 to 49"],
+          ["Lifetime risk of maternal death", "Risk across a woman's whole reproductive life"],
+          ["Proportionate mortality", "Share of maternal deaths among all female deaths"]
+        ]
+      }
+    },
+    {
+      "title": "Causes of maternal death and the three delays",
+      "tx": "Postpartum haemorrhage, eclampsia, sepsis, obstructed labour, and unsafe abortion cause most deaths, and the **three delays model of maternal death** explains why women die despite treatable disease. The first delay is late recognition and decision to seek care, the second is late arrival at a facility, and the third is late treatment after arrival because blood, staff, or theatre time is missing.",
+      "say": "Most mothers die of bleeding, fits, infection, or blocked labour. Deaths follow three delays: deciding to go, reaching the hospital, and getting treated there.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "d1", "label": "Delay 1: problem not recognised at home" },
+          { "id": "d2", "label": "Delay 2: transport to facility is late" },
+          { "id": "d3", "label": "Delay 3: blood or surgery unavailable on arrival" }
+        ],
+        "edges": [["d1", "d2"], ["d2", "d3"]]
+      }
+    },
+    {
+      "title": "Birth preparedness and complication readiness",
+      "tx": "For every pregnancy the family should complete **birth preparedness and complication readiness**: choose the delivery institution in advance, save money, arrange transport and a blood donor, and know the danger signs of bleeding, convulsions, severe headache, blurred vision, fever, and reduced fetal movement. Skilled birth attendance and institutional delivery convert this readiness into survival when labour starts.",
+      "say": "Birth preparedness means the institution, transport, money, and blood donor are decided before labour. Families must also know the danger signs that need urgent care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "b1", "label": "Identify institution and skilled attendant" },
+          { "id": "b2", "label": "Arrange transport, funds, and blood donor" },
+          { "id": "b3", "label": "Act at once on any danger sign" }
+        ],
+        "edges": [["b1", "b2"], ["b2", "b3"]]
+      }
+    },
+    {
+      "title": "The partograph in labour",
+      "tx": "Cervical dilatation plotted against time on the **partograph for monitoring labour** exposes slow progress hours before obstruction injures mother and baby. Plotting starts in the active phase at four centimetres; the alert line expects one centimetre per hour, and crossing the action line four hours to its right mandates referral or intervention. Fetal heart, contractions, pulse, blood pressure, and urine share the same sheet.",
+      "say": "The partograph plots cervical opening against time. Crossing the action line means labour is too slow and the woman needs referral or intervention.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Partograph element", "What it signals"],
+        "rows": [
+          ["Alert line", "Expected progress of 1 centimetre per hour"],
+          ["Action line", "Four hours behind alert, intervention due"],
+          ["Fetal heart record", "Distress when persistently below 120 or above 160"],
+          ["Moulding and caput", "Rising grades warn of cephalopelvic disproportion"]
+        ]
+      }
+    },
+    {
+      "title": "Postnatal visits and maternal schemes",
+      "tx": "Half of maternal and newborn deaths cluster in the first week, so **postnatal visits after delivery** are scheduled within twenty four hours, at forty eight to seventy two hours, at seven days, and at six weeks for institution and home births alike. Janani Suraksha Yojana pays cash for institutional delivery, Janani Shishu Suraksha Karyakram removes all user charges, Pradhan Mantri Surakshit Matritva Abhiyan guarantees a specialist antenatal check each month, and LaQshya certifies labour room quality.",
+      "say": "Postnatal checks run from the first day to six weeks, because the first week is the deadliest. Government schemes now pay for, and quality certify, institutional care.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Demand side schemes",
+          "points": ["Janani Suraksha Yojana cash for institutional delivery", "Janani Shishu Suraksha Karyakram free care and transport", "Pradhan Mantri Surakshit Matritva Abhiyan monthly specialist check"]
+        },
+        "right": {
+          "title": "Quality side schemes",
+          "points": ["LaQshya labour room quality certification", "First referral units with blood storage", "Maternal death surveillance and response audits"]
+        }
+      }
+    },
+    {
+      "title": "Maternal death review",
+      "tx": "Every maternal death must be notified within twenty four hours and reviewed under **maternal death surveillance and response**, which combines facility based review of case records with community based verbal autopsy at home. Review committees classify the cause, identify the delay responsible, and issue corrective orders on staffing, blood banks, referral transport, and drug stocks so the same failure does not kill again.",
+      "say": "Each maternal death is reviewed at the facility and in the community. The review names the delay and fixes the system gap that caused it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "r1", "label": "Death notified within 24 hours" },
+          { "id": "r2", "label": "Facility review plus verbal autopsy" },
+          { "id": "r3", "label": "Corrective action on staff, blood, and transport" }
+        ],
+        "edges": [["r1", "r2"], ["r2", "r3"]]
+      }
+    }
+  ]
+}

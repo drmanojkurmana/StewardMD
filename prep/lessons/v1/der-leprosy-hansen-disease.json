@@ -1,0 +1,272 @@
+{
+ "v": 1,
+ "id": "der-leprosy-hansen-disease",
+ "subject": "dermatology",
+ "module": "der-leprosy",
+ "title": "Hansen Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Mycobacterium leprae** is an obligate, acid-fast, intracellular bacillus with a unique tropism for cooler peripheral body tissues, specifically skin histiocytes and peripheral nerve Schwann cells. Possessing an exceptionally long doubling time of twelve to fourteen days, it cannot be cultured on artificial cell-free media. Inoculation occurs through respiratory droplets from untreated lepromatous patients during prolonged household contact. The pathogen enters Schwann cells via phenolic glycolipid-1 binding to laminin-2 on the basal lamina.",
+   "say": "Mycobacterium leprae is an acid-fast intracellular rod that targets cooler skin areas and Schwann cells. It doubles slowly every twelve to fourteen days and cannot be cultured in vitro, relying on phenolic glycolipid-1 to invade peripheral nerves.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leprosy-fig1.webp",
+    "alt": "Photomicrograph of lepromatous leprosy skin biopsy with abundant acid-fast bacilli.",
+    "caption": "Histiocytic foamy infiltration packed with clumps of acid-fast bacilli in lepromatous leprosy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Ridley-Jopling classification** categorizes leprosy along a five-group immunological spectrum determined entirely by the host cell-mediated immune response against the bacillus. At the hyper-reactive pole lies tuberculoid leprosy (TT), characterised by high cell-mediated immunity and scarce bacilli. At the anergic pole lies lepromatous leprosy (LL), marked by absent cell-mediated immunity, unrestrained bacillary proliferation, and high humoral antibody titres. Unstable intermediate groups comprise borderline tuberculoid (BT), mid-borderline (BB), and borderline lepromatous (BL) disease.",
+   "say": "The Ridley-Jopling classification spans from polar tuberculoid with strong immunity and few lesions, through borderline categories, down to anergic lepromatous leprosy with diffuse bacillary proliferation and negative lepromin skin tests.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leprosy-fig2.webp",
+    "alt": "Diagram illustrating the Ridley-Jopling spectrum of leprosy and immune responses.",
+    "caption": "The Ridley-Jopling immunological spectrum from polar tuberculoid to polar lepromatous disease. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Cardinal signs** defined by the World Health Organization establish the clinical diagnosis of leprosy when at least one of three criteria is present: a hypopigmented or erythematous skin lesion with definite loss of sensation; thickened or enlarged peripheral nerve trunks with corresponding sensory impairment or motor weakness; and a positive slit-skin smear demonstrating acid-fast bacilli. Testing for sensory impairment must methodically evaluate light touch with a wisp of cotton wool, temperature discrimination, and pinprick pain.",
+   "say": "The diagnosis of leprosy requires at least one WHO cardinal sign: an anaesthetic hypopigmented macule, thickened peripheral nerves with weakness, or positive acid-fast bacilli on slit-skin smear. Always test temperature and light touch systematically.",
+   "vis": {
+    "kind": "table",
+    "title": "WHO Cardinal Diagnostic Criteria for Leprosy",
+    "cols": [
+     "Diagnostic Criterion",
+     "Clinical Method of Detection",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Anaesthetic skin patch",
+      "Cotton wisp touch and thermal discrimination",
+      "Confirms cutaneous nerve branch destruction"
+     ],
+     [
+      "Thickened peripheral nerve",
+      "Palpation of ulnar, common peroneal, greater auricular",
+      "Confirms major trunk nerve involvement"
+     ],
+     [
+      "Positive slit-skin smear",
+      "Modified Ziehl-Neelsen staining of dermal fluid",
+      "Definitive microbiological proof of bacilli"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lepromatous leprosy** exhibits widespread, symmetrical, bilateral cutaneous infiltration characterized by multiple shiny macules, papules, nodules, and plaques with ill-defined borders. Facial dermal thickening and deep furrowing create classic leonine facies, accompanied by madarosis or loss of lateral eyebrows, and destruction of nasal septal cartilage producing saddle nose deformity. Peripheral nerve enlargement is diffuse and symmetrical. Dermal histiocytes become laden with ingested lipids and packed with globi of acid-fast bacilli, forming pathognomonic Virchow cells.",
+   "say": "Lepromatous leprosy produces symmetrical facial infiltration, giving leonine facies, loss of eyebrows, and saddle nose deformity. Dermal histiocytes fill with lipid and dense clusters of bacilli known as globi, creating pathognomonic Virchow cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tuberculoid Leprosy (TT)",
+     "points": [
+      "Single or few well-demarcated dry plaques",
+      "Early, complete, profound sensory loss",
+      "Asymmetrical solitary nerve enlargement",
+      "Negative slit-skin smears (paucibacillary)"
+     ]
+    },
+    "right": {
+     "title": "Lepromatous Leprosy (LL)",
+     "points": [
+      "Countless symmetrical shiny macules and nodules",
+      "Late, diffuse, glove-and-stocking sensory loss",
+      "Widespread bilateral symmetrical nerve thickening",
+      "Heavily positive smears with globi (multibacillary)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Type 1 lepra reaction** represents a delayed-type hypersensitivity reaction occurring exclusively in borderline forms (BT, BB, BL) during or following antimicrobial therapy. Driven by acute enhancement of cell-mediated immunity against mycobacterial antigens, existing skin plaques become suddenly erythematous, swollen, and tender. More critically, acute painful inflammation of peripheral nerve trunks (acute neuritis) rapidly supervenes, threatening irreversible axonal destruction and sudden claw hand or foot drop. High-dose oral prednisolone initiated immediately arrests neural destruction.",
+   "say": "A type one lepra reaction is a delayed hypersensitivity flare in borderline leprosy. Existing skin patches turn red and swollen, but acute neuritis is the real emergency. Immediate high-dose oral corticosteroids are required to prevent permanent claw hand deformities.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology and Rescue in Type 1 Reactions",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Borderline Leprosy",
+      "sub": "Immunologically unstable BT, BB, or BL disease"
+     },
+     {
+      "id": "r2",
+      "label": "Enhanced CMI",
+      "sub": "Surge in Th1 cytokines, interferon-gamma, TNF"
+     },
+     {
+      "id": "r3",
+      "label": "Acute Neuritis",
+      "sub": "Painful swelling of ulnar or peroneal trunks"
+     },
+     {
+      "id": "r4",
+      "label": "Oral Prednisolone",
+      "sub": "40 mg daily tapered over 12 to 24 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2",
+      "Antigen release"
+     ],
+     [
+      "r2",
+      "r3",
+      "Endoneurial edema"
+     ],
+     [
+      "r3",
+      "r4",
+      "Urgent neural rescue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Erythema nodosum leprosum** constitutes a type 2 lepra reaction mediated by circulating immune-complex deposition in multibacillary patients (BL and LL). Patients develop explosive crops of painful, tender, erythematous subcutaneous nodules accompanied by high remittent fever, malaise, lymphadenopathy, and polyarthritis. Severe systemic vasculitis can induce iridocyclitis, orchitis, dactylitis, and immune-complex glomerulonephritis. Thalidomide administered at one hundred to four hundred milligrams daily acts as the most potent therapy by suppressing tumour necrosis factor-alpha.",
+   "say": "Type two reaction, or erythema nodosum leprosum, is an immune-complex vasculitis in lepromatous patients. It causes painful red nodules, fever, and orchitis. Thalidomide is the drug of choice, working rapidly by inhibiting TNF-alpha.",
+   "vis": {
+    "kind": "table",
+    "title": "Comparison of Lepra Reaction Types",
+    "cols": [
+     "Feature",
+     "Type 1 Reversal Reaction",
+     "Type 2 (Erythema Nodosum Leprosum)"
+    ],
+    "rows": [
+     [
+      "Immunological mechanism",
+      "Type IV delayed hypersensitivity (CMI)",
+      "Type III immune-complex vasculitis"
+     ],
+     [
+      "Patient spectrum",
+      "Borderline spectrum (BT, BB, BL)",
+      "Multibacillary polar spectrum (BL, LL)"
+     ],
+     [
+      "Cutaneous findings",
+      "Edema of existing skin lesions",
+      "Crops of new tender subcutaneous nodules"
+     ],
+     [
+      "Treatment of choice",
+      "High-dose systemic oral corticosteroids",
+      "Thalidomide, clofazimine, or steroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Slit-skin smear** provides essential semi-quantitative microbiological assessment of bacillary density. Fluid scraped from the dermis of both earlobes, the forehead, and active skin lesions is heat-fixed and stained using the Ziehl-Neelsen technique with five percent sulfuric acid rather than twenty percent, reflecting the weaker acid-fastness of M. leprae. The bacterial index (BI) is graded on a logarithmic scale from 0 to 6+, where 6+ indicates more than one thousand bacilli per microscopic oil-immersion field.",
+   "say": "Slit-skin smears taken from earlobes and lesions use five percent sulfuric acid for decolourisation because lepra bacilli are less acid-fast than tubercle bacilli. The bacterial index scores bacillary density on a scale from zero to six plus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Slit-Skin Smear Collection Technique",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Skin Pinch",
+      "sub": "Pinch skin fold tightly to render it bloodless"
+     },
+     {
+      "id": "s2",
+      "label": "Dermal Slit",
+      "sub": "Make 5 mm incision, depth 2 mm into dermis"
+     },
+     {
+      "id": "s3",
+      "label": "Scrape Exudate",
+      "sub": "Turn blade 90 degrees, scrape dermal tissue"
+     },
+     {
+      "id": "s4",
+      "label": "5% Acid ZN Stain",
+      "sub": "Microscopic quantification of bacterial index"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Haemostasis"
+     ],
+     [
+      "s2",
+      "s3",
+      "Exudate harvest"
+     ],
+     [
+      "s3",
+      "s4",
+      "Smear analysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Multidrug therapy** protocols mandated by the World Health Organization eliminate bacillary transmission and prevent the emergence of drug resistance. Paucibacillary leprosy with one to five skin lesions receives six months of supervised monthly rifampicin 600 mg plus daily self-administered dapsone 100 mg. Multibacillary leprosy with six or more lesions receives twelve months of triple therapy: supervised monthly rifampicin 600 mg and clofazimine 300 mg, accompanied by daily self-administered dapsone 100 mg and clofazimine 50 mg.",
+   "say": "WHO multidrug therapy prevents drug resistance: paucibacillary disease receives six months of monthly rifampicin and daily dapsone; multibacillary disease receives twelve months of triple therapy adding clofazimine to rifampicin and dapsone.",
+   "vis": {
+    "kind": "table",
+    "title": "WHO Multidrug Therapy (MDT) Regimens in Adults",
+    "cols": [
+     "Component",
+     "Paucibacillary (PB) Regimen",
+     "Multibacillary (MB) Regimen"
+    ],
+    "rows": [
+     [
+      "Supervised monthly dose",
+      "Rifampicin 600 mg",
+      "Rifampicin 600 mg + Clofazimine 300 mg"
+     ],
+     [
+      "Daily self-administered dose",
+      "Dapsone 100 mg",
+      "Dapsone 100 mg + Clofazimine 50 mg"
+     ],
+     [
+      "Duration of therapy",
+      "6 months (completed within 9 months)",
+      "12 months (completed within 18 months)"
+     ],
+     [
+      "Skin lesion count",
+      "1 to 5 lesions, negative smears",
+      "6 or more lesions, or smear positive"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "M. leprae: cell surface receptor used for Schwann cell invasion",
+   "b": "Phenolic glycolipid-1 (PGL-1) binding to laminin-2 on basal lamina."
+  },
+  {
+   "f": "Type 1 lepra reaction: urgent clinical indication for oral steroids",
+   "b": "Acute neuritis with peripheral nerve pain, tenderness, or sudden motor weakness."
+  },
+  {
+   "f": "Erythema nodosum leprosum: definitive drug of choice",
+   "b": "Thalidomide, which rapidly suppresses tumour necrosis factor-alpha."
+  }
+ ],
+ "keys": [
+  "Leprosy is diagnosed by anaesthetic skin patches, thickened nerves, or positive acid-fast bacilli smears",
+  "Type 1 reactions feature acute nerve swelling needing steroids, while type 2 causes ENL vasculitis",
+  "WHO multidrug therapy combines rifampicin, dapsone, and clofazimine to cure multibacillary disease"
+ ]
+}

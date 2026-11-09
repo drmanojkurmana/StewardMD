@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-measures-standardized-mortality-ratio",
+ "subject": "community-medicine",
+ "module": "cm-measures",
+ "title": "Standardized Mortality Ratio and Direct and Indirect Standardization",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why crude rates cannot compare unlike populations",
+   "tx": "**Age standardization** removes the confounding effect of different age structures so mortality can be compared directly in one figure. Crude rates stay comparable only when populations share composition, which real districts never do. Adjustment can also cover sex, race or parity, producing age-sex adjusted rates for fair league tables.",
+   "say": "Unlike age structures poison crude comparisons. Standardization strips out that confounding and leaves one comparable figure. Sex, race or parity can be adjusted the same way, giving fair tables across districts that never share composition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crude comparison",
+     "points": ["Age structure mixed into the rate", "Older districts look worse unfairly", "Single figure, wrong conclusion"]
+    },
+    "right": {
+     "title": "Standardized comparison",
+     "points": ["Age structure effect removed", "Like compared with like", "Single figure, fair conclusion"]
+    }
+   }
+  },
+  {
+   "title": "Direct standardization step by step",
+   "tx": "**Direct standardization** applies the age-specific rates of the study population to a standard population whose numbers in each age and sex group are known. Expected deaths in each group are summed, then divided by the total standard population. A combined population of the compared districts often serves as that standard.",
+   "say": "Direct method first. Take the study population's age-specific rates and apply them to a standard population with known group sizes. Sum the expected deaths, divide by the standard total. Combined compared populations often serve as the standard.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Choose standard population"},
+     {"id": "b", "label": "Apply study age-specific rates"},
+     {"id": "c", "label": "Sum expected deaths"},
+     {"id": "d", "label": "Divide by standard total"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Standard population and standard million",
+   "tx": "A **standard population** supplies the age and sex structure both compared populations pretend to share. The standard million rescales any census into one million people while preserving its proportional age and sex distribution. Segi's world standard population appears in cancer comparisons, another name examiners attach to this step.",
+   "say": "Every adjustment needs a pretend shared structure. That is the standard population. Rescaled to one million with proportions preserved, it becomes the standard million. Cancer comparisons often use a named world standard; know that the choice shapes the answer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Choice", "When used"],
+    "rows": [
+     ["One compared population", "Two district comparison"],
+     ["Combined compared populations", "Created standard for two areas"],
+     ["World standard population", "International cancer comparisons"]
+    ]
+   }
+  },
+  {
+   "title": "Indirect standardization and expected deaths",
+   "tx": "**Indirect standardization** reverses the flow: national or reference age-specific rates are applied to the study population's own age groups to compute expected deaths. Only the study group's age distribution and total observed deaths are required. Small or unstable local rates therefore stop blocking comparison, the exact gap this method fills.",
+   "say": "Reverse the flow for the indirect method. Reference rates meet the study population's own age groups, producing expected deaths. Only local age structure and total observed deaths are needed, so small unstable local rates stop blocking comparison.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Take reference age-specific rates"},
+     {"id": "b", "label": "Apply to study age groups"},
+     {"id": "c", "label": "Sum expected deaths"},
+     {"id": "d", "label": "Compare with observed deaths"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "SMR: observed over expected, times 100",
+   "tx": "The **standardized mortality ratio** divides observed deaths by expected deaths and multiplies by 100. Coal workers with 9 observed deaths against 7.0 expected give 129, meaning mortality 29 percent above the national experience. Values above 100 mark unfavourable experience; values below 100 mark relatively favourable experience.",
+   "say": "One ratio summarises the indirect method. Observed over expected, times one hundred. Nine deaths against seven expected gives one hundred twenty nine: twenty nine percent worse than national experience. Above one hundred unfavourable, below it favourable.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age group", "Expected deaths"],
+    "rows": [
+     ["25 to 34 years", "0.9"],
+     ["35 to 44 years", "2.0"],
+     ["45 to 54 years", "1.6"],
+     ["55 to 64 years", "2.5"],
+     ["All ages: 9 observed, 7.0 expected", "SMR 129"]
+    ]
+   }
+  },
+  {
+   "title": "When indirect beats direct",
+   "tx": "**Small numbers** make local age-specific rates unstable or unavailable, and indirect standardization needs neither: only persons per age group locally plus reference rates. Direct standardization demands trustworthy local rates for every stratum. Occupational cohorts, small districts and rare outcomes therefore default to the indirect route and its ratio.",
+   "say": "Choose by data, not taste. Small places lack stable rates for every age stratum, which the direct method demands. The indirect route needs only local group sizes plus reference rates. Occupational cohorts and rare outcomes default there.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct needs",
+     "points": ["Local age-specific rates, every stratum", "Standard population structure", "Stable numbers in each group"]
+    },
+    "right": {
+     "title": "Indirect needs",
+     "points": ["Local persons per age group", "Reference age-specific rates", "Total observed deaths only"]
+    }
+   }
+  },
+  {
+   "title": "Reading an SMR in an exam stem",
+   "tx": "An **SMR of 80** means the study group suffered 20 percent fewer deaths than expected had reference rates applied to its structure. An SMR of 100 means exact parity. Stems that give observed and expected deaths want this ratio, while stems giving full age-specific tables for both populations usually want a directly standardized rate.",
+   "say": "Read the value plainly. Eighty means twenty percent fewer deaths than expected under reference rates; one hundred means parity. Observed plus expected in a stem calls for this ratio. Full age tables for both populations call for the direct rate instead.",
+   "vis": {
+    "kind": "table",
+    "cols": ["SMR", "Meaning"],
+    "rows": [
+     ["80", "20 percent fewer deaths than expected"],
+     ["100", "Same mortality as reference population"],
+     ["129", "29 percent more deaths than expected"]
+    ]
+   }
+  },
+  {
+   "title": "Beyond death: standardizing morbidity",
+   "tx": "**Morbidity standardization** applies the same logic where the event is disease occurrence rather than death, yielding a standardized morbidity ratio by the identical observed over expected form. Cancer registries compare district incidence this way before hunting environmental causes. The ratio form travels; the interpretation discipline stays identical.",
+   "say": "The ratio travels beyond death. Disease occurrence replaces mortality, registries compare district incidence, and the observed over expected form stays identical. Interpretation discipline does not change: above one hundred worse, below it better, structure removed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Reference incidence rates"},
+     {"id": "b", "label": "Applied to district age groups"},
+     {"id": "c", "label": "Expected cases summed"},
+     {"id": "d", "label": "Observed over expected ratio"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Other adjustment techniques to name",
+   "tx": "Examiners also accept **life tables** as age-adjusted mortality summaries, plus regression techniques and multivariate analysis that standardize for many variables simultaneously by computer. An index death rate with a standardizing factor gives absolute adjusted rates by the indirect family. Naming one alternative rescues stems where neither classic method fits the data given.",
+   "say": "Name the reserves. Life tables summarise mortality already age adjusted. Regression and multivariate methods adjust many variables at once. An index death rate with a standardizing factor yields absolute adjusted rates. One named alternative rescues awkward stems.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Technique", "Adjusts for"],
+    "rows": [
+     ["Life table", "Age, as a summary measure"],
+     ["Regression techniques", "Several variables efficiently"],
+     ["Multivariate analysis", "Many variables simultaneously"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

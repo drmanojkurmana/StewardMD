@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-agrochemical-organophosphate-poisoning",
+ "subject": "forensic-medicine",
+ "module": "fmt-agrochemical",
+ "title": "Organophosphate Poisoning: SLUDGE, Atropine and Oximes",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Organophosphates switch off cholinesterase",
+   "tx": "**Organophosphorus compounds** are esters of phosphoric acid in two series, alkyl phosphates such as malathion and TEPP and aryl phosphates such as parathion and methyl parathion, absorbed by inhalation, skin, mucosa and gut. They phosphorylate and inactivate acetylcholinesterase and pseudocholinesterase, so acetylcholine accumulates at parasympathetic, sympathetic and somatic sites. The phosphorylated enzyme loses an alkyl group with time, called ageing, after which it cannot be reactivated and must be replaced by new protein synthesis over days.",
+   "say": "Phosphorylated cholinesterase stops clearing acetylcholine, and ageing over a day makes that blockade permanent.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Organophosphate absorbed"}, {"id": "b", "label": "Cholinesterase phosphorylated"}, {"id": "c", "label": "Acetylcholine accumulates"}, {"id": "d", "label": "Ageing makes blockade permanent"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Severity follows cholinesterase level",
+   "tx": "**Poisoning severity tracks enzyme activity**: mild at twenty to fifty percent of normal cholinesterase, moderate at ten to twenty, severe below ten, with signs usually appearing when activity falls to thirty percent. Massive ingestion or inhalation begins within five minutes, most cases peak in two to eight hours, and skin absorption is slowest. Small repeated exposures can depress the enzyme to very low levels with minimal symptoms, so the spray history matters as much as the single dose story.",
+   "say": "Below ten percent enzyme is severe poisoning, repeated small sprays can drain it silently, and inhalation strikes in five minutes.",
+   "vis": {"kind": "table", "cols": ["Grade", "Cholinesterase activity", "Picture"], "rows": [["Mild", "20 to 50 percent", "Nausea, fatigue, cramps"], ["Moderate", "10 to 20 percent", "SLUDGE, tremor, confusion"], ["Severe", "Under 10 percent", "Respiratory failure, coma"], ["Signs threshold", "About 30 percent", "Symptoms usually appear"]]}
+  },
+  {
+   "title": "Muscarinic storm: the SLUDGE syndrome",
+   "tx": "Muscarinic overactivity is remembered as **SLUDGE**: salivation, lacrimation, urination, defaecation, gastrointestinal distress and emesis, with bronchoconstriction and increased bronchial secretions causing dyspnoea, cyanosis and pulmonary oedema, sweating, miosis with blurred vision, urinary incontinence and bradycardia or conduction blocks. These are the signs atropine reverses. Respiratory symptoms may imitate an asthma attack, and pancreatitis occasionally develops in the abdominal picture.",
+   "say": "Salivation, tears, urine, stool, cramps and vomiting spell SLUDGE, with wheeze, pinpoint pupils and a slow heart beside it.",
+   "vis": {"kind": "compare", "left": {"title": "SLUDGE components", "points": ["Salivation and lacrimation", "Urination and defaecation", "Gut distress, vomiting", "Bronchospasm and secretions"]}, "right": {"title": "Other muscarinic signs", "points": ["Miosis, blurred vision", "Sweating increased", "Bradycardia, AV blocks", "Urinary incontinence"]}}
+  },
+  {
+   "title": "Nicotinic and central effects",
+   "tx": "**Nicotinic manifestations** begin as stimulation then paralysis: muscle fasciculations, cramps and weakness from acetylcholine at motor end plates, with hypertension, tachycardia, pallor and mydriasis from sympathetic ganglia, the pupil and pulse traps that imitate sympathomimetic poisoning in ten to twenty percent. **Central effects** run restlessness, emotional lability, headache, tremor, anxiety, drowsiness, confusion, slurred speech, ataxia, convulsions, coma and depression of respiratory and cardiovascular centres, which with bronchospasm and muscle paralysis causes death.",
+   "say": "Twitching then paralysed muscles, a fast wide pupil variant and a depressed brain complete the three compartment picture.",
+   "vis": {"kind": "table", "cols": ["Compartment", "Signs", "Treatment target"], "rows": [["Muscarinic", "SLUDGE, miosis, bradycardia", "Atropine reverses"], ["Nicotinic", "Fasciculation then paralysis", "Oximes, ventilation"], ["Central", "Confusion, convulsions, coma", "Support and sedation care"], ["Death mechanism", "Respiratory paralysis and centre failure", "Airway is decisive"]]}
+  },
+  {
+   "title": "Atropine blocks the muscarinic flood",
+   "tx": "**Atropine** is the physiological antidote for muscarinic effects, competing with acetylcholine at muscarinic receptors without touching the enzyme or the nicotinic paralysis. It is titrated to drying of bronchial secretions, clearing of chest sounds, heart rate recovery and pupil response, and continued as infusion or repeated doses because organophosphates outlast single boluses. Pupils alone never set the dose, since ocular exposure can keep them small while the chest dries, and tachycardia from nicotinic stimulation is not a reason to withhold atropine from a flooding chest.",
+   "say": "Titrate atropine to a dry chest and recovering heart, not to pupil size, and keep it running while poison persists.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Atropine bolus given"}, {"id": "b", "label": "Bronchial secretions dry"}, {"id": "c", "label": "Heart rate and pressure recover"}, {"id": "d", "label": "Infusion maintains atropinisation"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Oximes reactivate the enzyme before ageing",
+   "tx": "**Oximes such as pralidoxime** reactivate phosphorylated cholinesterase by removing the phosphate group, restoring enzyme at nicotinic sites where atropine cannot help, and must be given before ageing fixes the enzyme permanently, classically within twenty four to thirty six hours. They improve muscle strength and fasciculations. Carbamate poisoning, the reversible cousin, usually needs atropine alone because its enzyme reactivates spontaneously. Oxime benefit fades once ageing completes, after which only new enzyme synthesis over days restores activity.",
+   "say": "Oximes rescue the enzyme and the muscles if they arrive before ageing, roughly inside the first day and a half.",
+   "vis": {"kind": "compare", "left": {"title": "Oximes achieve", "points": ["Reactivate cholinesterase", "Reverse muscle weakness", "Help nicotinic signs", "Best before ageing completes"]}, "right": {"title": "Oximes cannot", "points": ["Dry muscarinic secretions", "Replace atropine", "Revive aged enzyme", "Shorten central depression alone"]}}
+  },
+  {
+   "title": "Intermediate syndrome at one to four days",
+   "tx": "The **intermediate syndrome** arrives one to four days after the acute cholinergic crisis: motor cranial nerve palsies, weakness of neck flexors and proximal limb muscles and acute respiratory paresis, from prolonged cholinesterase inhibition and muscle necrosis. It does not respond to oximes or atropine, so surveillance and ventilatory support are the treatment. A patient whose head lift fails on day two is warning of respiratory failure exactly as in neurotoxic snake bite, and extubation decisions must respect this window.",
+   "say": "Neck flexor weakness at one to four days is the intermediate syndrome, immune to atropine and oximes, demanding ventilation vigilance.",
+   "vis": {"kind": "table", "cols": ["Feature", "Intermediate syndrome", "Acute crisis contrast"], "rows": [["Onset", "1 to 4 days after exposure", "Minutes to hours"], ["Muscles", "Neck flexors, proximal limbs", "All compartments at once"], ["Drug response", "Neither oxime nor atropine", "Atropine responsive"], ["Main danger", "Respiratory paresis", "Bronchospasm and coma"]]}
+  },
+  {
+   "title": "Delayed neuropathy at one to five weeks",
+   "tx": "**Delayed peripheral neuropathy** follows certain compounds, parathion, malathion and trichlorfon among them, by one to five weeks: paraesthesias and calf pain or cramps, then ataxia, weakness and toe drop progressing rapidly to a flaccid paresis that can ascend like Guillain Barre syndrome, with diminished reflexes, progression over two to three months and muscle wasting. It is a dying back axonopathy of the longest fibres, unrelated to the acute cholinesterase level, and no antidote reverses it once established.",
+   "say": "Calf pain then ascending flaccid weakness at one to five weeks is delayed neuropathy, untreatable once it declares itself.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Exposure one to five weeks prior"}, {"id": "b", "label": "Calf paraesthesia and cramps"}, {"id": "c", "label": "Toe drop, ascending weakness"}, {"id": "d", "label": "Wasting over two to three months"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Fatal doses, death and sample preservation",
+   "tx": "Fatal doses are small in **organophosphate fatality figures**: TEPP fifty milligrams intramuscularly or one hundred orally, parathion eighty or one hundred seventy five, malathion and diazinon about one gram orally, with death usually within twenty four hours untreated from respiratory muscle paralysis, respiratory centre failure or intense bronchoconstriction. The solvent's kerosene like smell fills stomach contents and vomit. Blood cholinesterase, stomach contents and the container are preserved, remembering that carbamates reverse within hours and can normalise the enzyme before sampling.",
+   "say": "Death is respiratory inside a day, the vomit smells of kerosene solvent, and cholinesterase must be sampled before it recovers.",
+   "vis": {"kind": "compare", "left": {"title": "Fatal dose guides", "points": ["TEPP 100 mg orally", "Parathion 175 mg orally", "Malathion about one gram", "Death within 24 hours untreated"]}, "right": {"title": "Preserve urgently", "points": ["Blood cholinesterase level", "Stomach contents and vomit", "Suspected container", "Note kerosene solvent smell"]}}
+  }
+ ],
+ "quiz": []
+}

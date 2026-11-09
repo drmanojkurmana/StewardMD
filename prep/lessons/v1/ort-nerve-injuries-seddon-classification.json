@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "id": "ort-nerve-injuries-seddon-classification",
+ "subject": "orthopaedics",
+ "module": "ort-nerve-injuries",
+ "title": "Seddon Classification",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **Seddon classification** divides peripheral nerve trauma into neurapraxia, axonotmesis, and neurotmesis based on structural discontinuity of axons and connective tissue sheaths. Sydney Sunderland later expanded this system into five degrees, refining prognosis by differentiating endoneurial, perineurial, and epineurial disruption. Establishing the grade early predicts whether spontaneous axon regeneration can occur or whether prompt microsurgical reconstruction is obligatory.",
+   "say": "Seddon classified nerve injuries into neurapraxia, axonotmesis, and neurotmesis. Sunderland expanded this into five grades based on sheath integrity. Knowing the structural tier tells you immediately whether the nerve can heal on its own or requires surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-nerve-injury-fig1.webp",
+    "alt": "Diagram comparing neurapraxia, axonotmesis, and neurotmesis with intact versus disrupted axonal sheaths.",
+    "caption": "Seddon classification of nerve injury showing continuity of nerve sheath across grades.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Neurapraxia** represents a reversible physiological conduction block caused by focal ischemia or myelin distortion without anatomical disruption of the axon or surrounding connective tissues. Motor deficits characteristically exceed sensory and autonomic loss. Wallerian degeneration does not take place distal to the compression site. Full clinical recovery occurs spontaneously within several days to twelve weeks once local ischemia resolves.",
+   "say": "Neurapraxia is temporary conduction failure without axonal breakage, often after blunt compression or tourniquet palsy. Motor fibers suffer more than sensory. Because axons remain intact, no Wallerian degeneration occurs, and full recovery happens within days to twelve weeks.",
+   "vis": {
+    "kind": "table",
+    "title": "Seddon Classification Features",
+    "cols": [
+     "Feature",
+     "Neurapraxia",
+     "Axonotmesis",
+     "Neurotmesis"
+    ],
+    "rows": [
+     [
+      "Anatomical continuity",
+      "Complete preservation",
+      "Axon broken, sheath intact",
+      "Complete transection"
+     ],
+     [
+      "Wallerian degeneration",
+      "Absent",
+      "Present distally",
+      "Present distally"
+     ],
+     [
+      "Recovery timeline",
+      "Days to 12 weeks",
+      "1 mm per day",
+      "Surgery required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Axonotmesis** entails physical disruption of the axon while preserving the protective Schwann cell basement membrane and endoneurial tubes. Wallerian degeneration ensues distal to the trauma within twenty-four to forty-eight hours. Axonal sprouts regenerate along preserved endoneurial scaffolding at a rate of one millimeter daily. An advancing Tinel sign provides reliable bedside confirmation of progressive functional regeneration.",
+   "say": "In axonotmesis, the axon breaks but the internal endoneurial sheath remains intact. Wallerian degeneration clears the distal segment, then regenerating sprouts advance at one millimeter daily. You track recovery by watching the Tinel percussion sign move distally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathology of Axonotmesis",
+     "points": [
+      "Axonal continuity is interrupted",
+      "Endoneurial Schwann tube remains intact",
+      "Distal Wallerian degeneration occurs"
+     ]
+    },
+    "right": {
+     "title": "Regeneration Features",
+     "points": [
+      "Growth proceeds at 1 mm each day",
+      "Tinel percussion sign advances distally",
+      "Surgery is not initially required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Neurotmesis** denotes complete anatomical transection of the nerve trunk, disrupting axons, endoneurium, perineurium, and epineurium. Distal Wallerian degeneration is universal, and regenerating proximal sprouts form an unorganized terminal neuroma rather than bridging the lesion. Spontaneous functional recovery is impossible. Microsurgical epineurial repair or autologous sural nerve grafting is mandatory to restore continuity.",
+   "say": "Neurotmesis means the entire nerve trunk is severed, including epineurium and perineurium. Axon sprouts cannot bridge the gap and form an irritable neuroma instead. Spontaneous healing never occurs. Only microsurgical nerve repair or cable grafting can restore function.",
+   "vis": {
+    "kind": "table",
+    "title": "Classification Correlation",
+    "cols": [
+     "Seddon Grade",
+     "Sunderland Equivalent",
+     "Surgical Need",
+     "Pathology"
+    ],
+    "rows": [
+     [
+      "Neurapraxia",
+      "Grade 1",
+      "Conservative",
+      "Myelin edema or focal demyelination"
+     ],
+     [
+      "Axonotmesis",
+      "Grade 2",
+      "Observation first",
+      "Axon transected, endoneurium intact"
+     ],
+     [
+      "Neurotmesis",
+      "Grades 3, 4, 5",
+      "Microsurgical repair",
+      "Endoneurial to epineurial division"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electromyography** provides critical diagnostic differentiation twenty-one days following injury, when denervation fibrillations and positive sharp waves appear in non-conducting motor units. Immediate testing is misleading because Wallerian degeneration requires two to three weeks to establish electrical changes. Nerve conduction studies corroborate conduction blocks early, but serial electromyography at twelve weeks confirms nascent polyphasic motor unit potentials herald reinnervation.",
+   "say": "Order electromyography three weeks after trauma, not on day one. Denervation potentials like fibrillations take up to twenty-one days to develop after axonal death. Later, nascent polyphasic motor unit potentials signal that regenerating axons have successfully reinnervated muscle fibers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Stage (0 to 2 Weeks)",
+     "points": [
+      "Normal insertional activity on needle EMG",
+      "Fibrillation potentials have not developed",
+      "NCS shows absent conduction across block"
+     ]
+    },
+    "right": {
+     "title": "Late Stage (3+ Weeks)",
+     "points": [
+      "Spontaneous fibrillation potentials appear",
+      "Positive sharp waves confirm denervation",
+      "Nascent polyphasic units mark recovery"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which pathological feature differentiates axonotmesis from neurotmesis?",
+   "options": [
+    "Preservation of the endoneurial sheath structure",
+    "Absence of Wallerian degeneration distal to trauma",
+    "Complete sparing of motor action potentials",
+    "Immediate resolution within twelve weeks"
+   ],
+   "correct": 0,
+   "explain": "Axonotmesis preserves the endoneurial and Schwann cell sheaths despite axonal breakage, permitting guided regeneration. Neurotmesis disrupts both axons and connective tissue sheaths."
+  },
+  {
+   "q": "How long after nerve injury does electromyography reliably demonstrate denervation fibrillations?",
+   "options": [
+    "2 to 3 weeks",
+    "24 to 48 hours",
+    "12 to 16 weeks",
+    "Within 6 hours"
+   ],
+   "correct": 0,
+   "explain": "Electromyography requires 14 to 21 days for denervated muscle fibers to develop membrane instability, showing spontaneous fibrillation potentials and positive sharp waves."
+  }
+ ]
+}

@@ -1,0 +1,210 @@
+{
+  "v": 1,
+  "module": "mic-superficial-subcutaneous-mycoses",
+  "subject": "microbiology",
+  "title": "Fungal Diagnostics: KOH Mount, Sabouraud Agar and Dimorphism",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Microscopic bedside examination of clinical scrapings requires a **KOH mount** using ten to twenty percent potassium hydroxide solution. The strong alkali digests epidermal keratin, cellular debris, and host proteinaceous background while leaving fungal chitinous cell walls intact. Adding forty percent dimethyl sulfoxide accelerates clearing without requiring external thermal heating of the glass slide.",
+      "say": "Alkaline digestion clears opaque human keratin while fungal chitin walls survive.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/superficial-fungal-infections-fig1.webp",
+        "alt": "Superficial fungal infection dermatopathology",
+        "caption": "Superficial fungal infection histopathology demonstrating branching septate fungal hyphae within the keratinised stratum corneum [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Standard laboratory recovery of pathogenic fungi employs **Sabouraud dextrose agar** formulated with four percent dextrose and peptone at an acidic pH of 5.6. This low pH suppresses bacterial overgrowth while fostering fungal sporulation. Cycloheximide is added to inhibit saprophytic environmental moulds, while chloramphenicol prevents contaminating bacterial multiplication during prolonged multi-week incubation at twenty-five degrees Celsius.",
+      "say": "Acidic peptone-dextrose medium supports fungal mycelial growth while antibiotics suppress bacteria.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medium composition",
+          "points": [
+            "Four percent dextrose carbon source",
+            "One percent enzymatic digest peptone",
+            "Agar base adjusted to pH 5.6",
+            "Chloramphenicol antibacterial additive"
+          ]
+        },
+        "right": {
+          "title": "Colony evaluation",
+          "points": [
+            "Surface texture cottony, powdery, or glabrous",
+            "Colony colour and topography on obverse face",
+            "Diffusible pigment visible on reverse face",
+            "Incubation required for up to four weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Superficial lipid-dependent infection of the stratum corneum is caused by **Malassezia furfur**, a lipophilic yeast belonging to normal cutaneous microbiota. Overgrowth in sebaceous regions leads to pityriasis versicolor with hyperpigmented or hypopigmented macules. The organism requires exogenous fatty acid supplementation such as sterile olive oil overlay for successful in vitro growth on routine laboratory media.",
+      "say": "This lipophilic organism colonizes oily skin areas and demands fatty acids for culture.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Lipophilic yeast overgrowth in sebaceous gland areas"
+          },
+          {
+            "id": "m2",
+            "label": "Production of azelaic acid inhibiting melanogenesis"
+          },
+          {
+            "id": "m3",
+            "label": "Characteristic hypopigmented or fawn scaly macules"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Direct microscopic examination of scales scraped from pityriasis versicolor demonstrates the pathognomonic **spaghetti and meatballs** pattern. Short, thick, curved, unbranched hyphal fragments represent the spaghetti elements, while clustered round budding yeast cells represent the meatballs. Staining scrapings with Albert stain or adding blue fountain pen ink enhances optical contrast under high-power light microscopy.",
+      "say": "Short curved hyphae interspersed with round yeast clusters resemble spaghetti with meatballs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spaghetti elements",
+          "points": [
+            "Short, angular, stubby hyphal segments",
+            "Non-branching filament morphology",
+            "Thick cell walls with high refractility"
+          ]
+        },
+        "right": {
+          "title": "Meatball elements",
+          "points": [
+            "Clusters of spherical thick-walled yeast cells",
+            "Unipolar budding with collarette scar",
+            "Four to eight micrometre diameter spores"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic endemic mycoses are characterized biologically as **dimorphic fungi** that alter their morphological architecture depending on ambient temperature. At room temperature of twenty-five degrees Celsius in soil or nature, they grow as multicellular sporulating filamentous moulds. In animal or human host tissues at thirty-seven degrees Celsius, they convert entirely into unicellular pathogenic budding yeast.",
+      "say": "Dimorphic organisms grow as moulds in cool soil but convert into yeasts in warm mammalian tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Saprophytic mould phase at 25 degrees Celsius with hyphae"
+          },
+          {
+            "id": "d2",
+            "label": "Inhalation of airborne conidia into warm lung alveoli"
+          },
+          {
+            "id": "d3",
+            "label": "Morphogenetic switch to yeast phase at 37 degrees Celsius"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2"
+          ],
+          [
+            "d2",
+            "d3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The cellular transformation between mould and yeast is driven by **thermal dimorphism** coupled with host nutritional cues and oxidative stress. Prototypic thermal dimorphic pathogens include Histoplasma capsulatum, Blastomyces dermatitidis, Paracoccidioides brasiliensis, and Talaromyces marneffei. Coccidioides immitis represents a distinct variant that forms large endospore-filled spherules rather than simple budding yeasts in mammalian tissues.",
+      "say": "Temperature switching triggers gene expression altering cell wall carbohydrates and shape.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Yeast phase pathogens",
+          "points": [
+            "Histoplasma intracellular small budding yeasts",
+            "Blastomyces broad-based thick-walled yeasts",
+            "Paracoccidioides mariner pilot-wheel budding yeasts",
+            "Talaromyces dividing by binary transverse fission"
+          ]
+        },
+        "right": {
+          "title": "Spherule phase pathogen",
+          "points": [
+            "Coccidioides forms large thick-walled spherules",
+            "Spherule diameter twenty to eighty micrometres",
+            "Internal cleavage into hundreds of endospores",
+            "Rupture releases endospores into tissue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Differentiating true dermatophytes from contaminant moulds requires assessing **dermatophyte test medium** containing phenol red indicator. Dermatophytes preferentially metabolize peptones first, producing alkaline amine metabolites that raise medium pH and turn the yellow agar bright red within days. Environmental saprophytic contaminants catabolize dextrose initially, generating acidic by-products that preserve the yellow color until carbohydrate depletion occurs.",
+      "say": "Dermatophytes produce alkaline amines from peptones that turn the indicator agar red.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Positive dermatophyte test",
+          "points": [
+            "Rapid alkaline shift within three to seven days",
+            "Phenol red indicator converts from yellow to red",
+            "Concomitant growth of pale fuzzy aerial mycelia"
+          ]
+        },
+        "right": {
+          "title": "Negative or saprophyte test",
+          "points": [
+            "Agar remains yellow during early mycelial growth",
+            "Late color change only after sugar exhaustion",
+            "Heavily pigmented green, black, or grey moulds"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Definitive microscopic identification of fungal cultures relies on mounting aerial mycelia in **lactophenol cotton blue**. Phenol acts as an immediate germicide killing live fungal elements, lactic acid preserves cellular morphology, and glycerol prevents preparation desiccation. Cotton blue dye, also called aniline blue, selectively stains fungal chitin and glucan intensely blue for high-contrast photomicrography.",
+      "say": "Lactophenol cotton blue fixes structures and stains chitinous fungal walls vivid blue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Phenol component kills infectious spores instantly"
+          },
+          {
+            "id": "l2",
+            "label": "Lactic acid clears and maintains osmotic architecture"
+          },
+          {
+            "id": "l3",
+            "label": "Cotton blue dye binds chitin for crisp light microscopy"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ]
+        ]
+      }
+    }
+  ]
+}
