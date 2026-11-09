@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sur-gallbladder",
+ "subject": "surgery",
+ "title": "Cholelithiasis and Biliary Colic",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The presence of solid crystalline concretions within the lumen of the gallbladder is defined as **cholelithiasis**. Affecting approximately ten to fifteen percent of the adult population, gallstones are classified morphologically and chemically into cholesterol stones, black pigment stones, and brown pigment stones. While nearly eighty percent of individuals harbouring gallstones remain asymptomatic throughout life, one to two percent develop symptomatic biliary pain or complications annually.",
+   "say": "Cholelithiasis refers to gallstones within the gallbladder, categorised into cholesterol and pigment varieties, with most individuals remaining entirely asymptomatic.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-cholelithiasis-solitary-cholesterol-stone.webp",
+    "alt": "Gross pathological specimen of gallbladder sliced open showing a large solitary faceted cholesterol gallstone.",
+    "caption": "Solitary cholesterol gallstone: large yellow crystalline calculus occupying the gallbladder lumen. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Accounting for over seventy-five percent of gallstones in Western and northern populations, yellow-white **cholesterol stones** arise from three interrelated pathophysiological abnormalities. These abnormalities encompass cholesterol supersaturation of hepatic bile, accelerated nucleation of cholesterol monohydrate microcrystals, and gallbladder smooth muscle hypomotility. Obesity, rapid weight loss, female sex, multiparity, and estrogen therapy dramatically heighten cholesterol secretion and stone genesis.",
+   "say": "Cholesterol stones develop from bile supersaturation, accelerated crystal nucleation, and impaired gallbladder motility, frequently linked to female hormones and obesity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "super",
+      "label": "Hepatic Hypersecretion of Cholesterol into Bile"
+     },
+     {
+      "id": "hypo",
+      "label": "Gallbladder Hypomotility & Stasis"
+     },
+     {
+      "id": "nucleate",
+      "label": "Accelerated Nucleation into Monohydrate Crystals"
+     },
+     {
+      "id": "stone",
+      "label": "Agglomeration into Macroscopic Cholesterol Gallstones"
+     }
+    ],
+    "edges": [
+     [
+      "super",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "nucleate"
+     ],
+     [
+      "nucleate",
+      "stone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to cholesterol calculi, **pigment stones** contain less than twenty percent cholesterol and consist predominantly of insoluble polymer complexes of calcium hydrogen bilirubinate. Pigment stones are divided into hard, radiopaque black stones forming in sterile gallbladder bile, and soft, radiolucent brown stones developing within infected bile ducts. Chronic intravascular haemolysis and liver cirrhosis markedly increase unconjugated bilirubin excretion, promoting rapid black stone precipitation.",
+   "say": "Pigment stones consist of polymerised calcium bilirubinate, divided into black stones linked to haemolysis and brown stones linked to biliary infection.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-cholelithiasis-pigment-stones.webp",
+    "alt": "Pathological specimen showing multiple small jet-black pigment gallstones filling the gallbladder lumen.",
+    "caption": "Pigment gallstones: irregular black calcium bilirubinate calculi associated with chronic haemolysis and cirrhosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating black from brown pigment calculi is critical in clinical surgical practice. Black stones form inside the sterile gallbladder in conditions of haemolysis, spherocytosis, or sickle cell anaemia, and fifty percent are visible on plain radiographs. Conversely, **brown pigment stones** are soft, greasy, and develop de novo within the common bile duct secondary to bacterial deconjugation of bilirubin by beta-glucuronidase producing organisms.",
+   "say": "Black pigment stones develop in sterile gallbladder bile during chronic haemolysis, while brown stones form in infected bile ducts from bacterial deconjugation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Black Pigment Stones",
+     "points": [
+      "Location: sterile gallbladder",
+      "Composition: calcium bilirubinate & copper",
+      "Aetiology: haemolysis, cirrhosis, ileal disease",
+      "Radiopacity: 50% radiopaque on plain X-ray"
+     ]
+    },
+    "right": {
+     "title": "Brown Pigment Stones",
+     "points": [
+      "Location: bile ducts (choledocholithiasis)",
+      "Composition: calcium bilirubinate & soaps",
+      "Aetiology: bacterial infection (E. coli, Clonorchis)",
+      "Radiopacity: almost always radiolucent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The earliest and most characteristic clinical manifestation of uncomplicated cholelithiasis is severe **biliary colic**. This pain occurs when a mobile gallstone impacts transiently against the neck of the gallbladder or within the spiral valves of Heister in the cystic duct. The resulting acute luminal distension and vigorous smooth muscle contraction stimulate visceral sensory afferents carried by the sympathetic splanchnic nerves.",
+   "say": "Biliary colic occurs when a stone transiently obstructs the cystic duct, causing intense visceral smooth muscle contraction and luminal distension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "impact",
+      "label": "Stone Impacts in Cystic Duct or Hartmann Pouch"
+     },
+     {
+      "id": "distend",
+      "label": "Acute Gallbladder Distension Against Obstruction"
+     },
+     {
+      "id": "colic",
+      "label": "Severe Visceral Epigastric / RUQ Pain (Biliary Colic)"
+     },
+     {
+      "id": "relief",
+      "label": "Spontaneous Disimpact Back into Gallbladder Lumen"
+     }
+    ],
+    "edges": [
+     [
+      "impact",
+      "distend"
+     ],
+     [
+      "distend",
+      "colic"
+     ],
+     [
+      "colic",
+      "relief"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Despite its traditional designation as a colic, the pain of biliary colic is typically constant and plateau-like rather than spasmodic, lasting from thirty minutes to six hours before subsiding. The pain centres in the epigastrium or right upper quadrant and radiates characteristically around the right costal margin to the inferior angle of the right scapula, termed **Boas sign**. Attacks are typically triggered thirty to ninety minutes following a fatty meal.",
+   "say": "Biliary colic presents as steady pain in the epigastrium or right upper quadrant radiating to the right scapula, typically triggered after fatty meals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Biliary Colic",
+     "Acute Cholecystitis"
+    ],
+    "rows": [
+     [
+      "Pain Duration",
+      "< 6 hours (typically 1 to 4 hours)",
+      "Persists > 6 hours (days if untreated)"
+     ],
+     [
+      "Systemic Fever",
+      "Absent",
+      "Present (low to moderate grade)"
+     ],
+     [
+      "Leukocytosis",
+      "Normal white blood cell count",
+      "Elevated with neutrophil band shift"
+     ],
+     [
+      "Physical Signs",
+      "Voluntary guarding only",
+      "Murphy sign positive, local peritonitis"
+     ],
+     [
+      "Gallbladder Wall",
+      "Thin and smooth on ultrasound",
+      "Thickened (>4 mm) with pericholecystic fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive primary imaging investigation of choice for establishing the presence of gallstones is transabdominal **ultrasound**. Real-time ultrasound possesses a sensitivity and specificity exceeding ninety-five percent for detecting cholelithiasis. Gallstones appear as echogenic intraluminal foci that cast sharp posterior acoustic shadowing and demonstrate gravitational movement when the patient shifts into the left lateral decubitus position.",
+   "say": "Transabdominal ultrasound is the investigation of choice for gallstones, demonstrating mobile echogenic intraluminal foci with posterior acoustic shadowing.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-cholelithiasis-mixed-calculi.webp",
+    "alt": "Pathological specimen showing chronic cholecystitis with multiple faceted mixed gallstones within a thickened gallbladder.",
+    "caption": "Mixed gallstones: multiple faceted cholesterol-pigment-calcium calculi causing recurrent episodes of biliary colic. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In truly asymptomatic cholelithiasis detected incidentally, prophylactic surgery is unjustified because the lifetime risk of developing serious biliary complications remains very low. However, prophylactic elective **laparoscopic cholecystectomy** is strongly indicated for high-risk subsets. These subsets encompass patients with calcified porcelain gallbladder, calculi larger than three centimetres, sickle cell disease, concomitant gallbladder polyps exceeding one centimetre, or anomalous pancreaticobiliary ductal junctions.",
+   "say": "Asymptomatic gallstones warrant observation, but cholecystectomy is indicated for stones over three centimetres, porcelain gallbladder, or sickle cell anaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication for Surgery",
+     "Pathological Rationale",
+     "Primary Hazard Prevented"
+    ],
+    "rows": [
+     [
+      "Symptomatic biliary colic",
+      "Recurrent obstruction of cystic duct",
+      "Acute cholecystitis, pancreatitis, cholangitis"
+     ],
+     [
+      "Porcelain gallbladder",
+      "Mural calcification from chronic inflammation",
+      "Gallbladder adenocarcinoma (up to 15%)"
+     ],
+     [
+      "Gallstones > 3 cm",
+      "Massive mechanical mucosal irritation",
+      "Ten-fold elevated risk of gallbladder carcinoma"
+     ],
+     [
+      "Sickle cell disease",
+      "Recurrent pigment stone precipitation",
+      "Prevents confusion with abdominal crisis"
+     ],
+     [
+      "Concomitant polyp > 1 cm",
+      "Autonomous epithelial growth",
+      "Pre-invasive dysplasia and carcinoma"
+     ]
+    ]
+   }
+  }
+ ]
+}
