@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-measles-measles",
+ "subject": "community-medicine",
+ "module": "cm-measles",
+ "title": "Measles: Clinical Course, Complications and Outbreak Control",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Prodrome, Koplik spots, rash: the sequence",
+   "tx": "**Measles** runs a recognisable course: incubation about 10 days, then prodrome of fever with cough, coryza and conjunctivitis (the three Cs), Koplik spots on buccal mucosa, then a maculopapular rash spreading downward from the hairline as fever peaks. Infectivity spans about 4 days before to 4 days after rash onset.",
+   "say": "Sequence is the diagnosis. Ten days incubation, fever with the three Cs, Koplik spots inside the cheek, then rash marching downward. Infectious four days either side of the rash; that window drives isolation advice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Incubation about 10 days"},
+     {"id": "b", "label": "Prodrome: fever, 3 Cs"},
+     {"id": "c", "label": "Koplik spots appear"},
+     {"id": "d", "label": "Rash spreads downward"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Complications kill, not the rash",
+   "tx": "**Post-measles complications** include diarrhoea, pneumonia (the commonest killer), otitis media, malnutrition with acute vitamin A deficiency progressing to keratomalacia and blindness, and encephalitis. Case fatality runs 2 to 3 percent generally in India, rising to 30 to 50 percent in epidemics among the malnourished. Death strikes the malnourished where cases crowd homes.",
+   "say": "The rash fades; complications kill. Pneumonia leads, diarrhoea and vitamin A collapse follow, encephalitis scars survivors. Fatality doubles digits where malnutrition and crowding meet, against two to three percent generally.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Complication", "Consequence"],
+    "rows": [
+     ["Pneumonia", "Commonest cause of measles death"],
+     ["Diarrhoea with malnutrition", "Prolonged wasting cycle"],
+     ["Vitamin A deficiency flare", "Keratomalacia and blindness"],
+     ["Encephalitis", "Death or neurological sequelae"]
+    ]
+   }
+  },
+  {
+   "title": "Vitamin A megadose in every case",
+   "tx": "**Vitamin A treatment** accompanies measles management: 50000 IU under 6 months, 100000 IU at 6 to 11 months, and 200000 IU at 12 months and above, on diagnosis and repeated the next day, with a third dose at 4 to 6 weeks when clinical deficiency signs such as Bitot spots exist. Two doses cut measles mortality in deficient populations.",
+   "say": "Every measles case earns vitamin A. Doses scale by age, given on diagnosis and repeated next day, third dose when eye signs show. Mortality falls where deficiency reigns; this is treatment, not supplementation trivia.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age", "Dose on day 1 and 2"],
+    "rows": [
+     ["Under 6 months", "50000 IU"],
+     ["6 to 11 months", "100000 IU"],
+     ["12 months and above", "200000 IU"]
+    ]
+   }
+  },
+  {
+   "title": "SSPE: the delayed invoice",
+   "tx": "**Subacute sclerosing panencephalitis** is a fatal late complication of early measles infection, appearing years later with personality change, myoclonus and progressive dementia, commoner when measles strikes before age two. It has no treatment. Prevention is measles vaccination itself, an argument that reaches parents unmoved by rash-week risks.",
+   "say": "One complication arrives years late and always kills. Personality change, jerks, dementia after infant measles, untreatable. Vaccination prevents it by preventing measles, the argument that moves hesitant parents.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute complications",
+     "points": ["Pneumonia and diarrhoea", "Otitis media, croup", "Days to weeks after rash"]
+    },
+    "right": {
+     "title": "SSPE",
+     "points": ["Years after early infection", "Progressive fatal dementia", "Prevented only by vaccination"]
+    }
+   }
+  },
+  {
+   "title": "Isolation and exclusion that actually help",
+   "tx": "**Isolation** for measles runs from the catarrhal stage through 3 days of rash in classic guidance (4 days after rash onset in current infection-control practice), with airborne precautions in facilities. Susceptible contacts are excluded and offered post-exposure vaccine within 72 hours, or immunoglobulin within 6 days for infants, pregnant and immunocompromised contacts.",
+   "say": "Isolate through the early rash days with airborne care. Contacts get vaccine inside seventy two hours, or immunoglobulin inside six days when vaccine is forbidden by age, pregnancy or immunity. Clocks, not intentions, decide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Measles case identified"},
+     {"id": "b", "label": "Isolate, airborne precautions"},
+     {"id": "c", "label": "Contacts listed same day"},
+     {"id": "d", "label": "Vaccine 72h or Ig 6 days"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Outbreak control: search, vaccinate, treat",
+   "tx": "**Outbreak response** combines active case search house to house, rapid MR vaccination of the susceptible age band in affected and adjoining areas regardless of documented status where records fail, vitamin A to cases, and pneumonia referral pathways. Waiting for laboratory confirmation before vaccinating loses the only week when ring action works.",
+   "say": "Respond before laboratories answer. Search houses, vaccinate the susceptible band widely, dose cases with vitamin A, open pneumonia referral paths. The ring works in week one or not at all.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Action", "Timing"],
+    "rows": [
+     ["Active case search", "Immediately, house to house"],
+     ["MR vaccination of susceptibles", "Within days, wide age band"],
+     ["Vitamin A to cases", "At first contact"],
+     ["Pneumonia referral readiness", "Throughout outbreak"]
+    ]
+   }
+  },
+  {
+   "title": "Modified and atypical measles",
+   "tx": "**Modified measles** is milder disease in partially immune persons (waning maternal antibody infants, immunoglobulin recipients), while atypical measles historically followed killed vaccine exposure. Both confuse surveillance definitions built on textbook rashes. Laboratory IgM confirmation therefore anchors outbreak declarations where vaccination coverage is high and classic presentations dilute.",
+   "say": "Partial immunity rewrites the textbook picture. Milder modified cases and historic atypical forms slip past rash-based definitions. High coverage areas confirm outbreaks by IgM, not by counting classic rashes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic measles",
+     "points": ["Full prodrome, Koplik spots", "Confluent downward rash", "Clinically diagnosable"]
+    },
+    "right": {
+     "title": "Modified measles",
+     "points": ["Milder, shorter course", "Partial immunity background", "Needs IgM confirmation"]
+    }
+   }
+  },
+  {
+   "title": "Measles and malnutrition: the two-way trap",
+   "tx": "**Malnutrition interaction** runs both ways: malnourished children suffer severer measles with higher fatality, while measles itself precipitates wasting, vitamin A collapse and kwashiorkor in borderline children. Post-measles nutritional rehabilitation (extra meals, vitamin A, growth monitoring) is therefore part of measles treatment, not an afterthought clinic referral.",
+   "say": "Each condition feeds the other. Malnutrition makes measles lethal; measles tips borderline children into wasting and eye damage. Nutritional rehabilitation belongs inside measles treatment, not in a later referral.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Borderline nutrition"},
+     {"id": "b", "label": "Measles infection strikes"},
+     {"id": "c", "label": "Appetite loss, vitamin A fall"},
+     {"id": "d", "label": "Wasting, keratomalacia risk"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Surveillance case definition and fever-rash systems",
+   "tx": "**Fever-rash surveillance** captures suspected measles (fever with maculopapular rash and cough, coryza or conjunctivitis) for laboratory confirmation and genotyping, integrated with rubella detection so congenital rubella prevention audits the same system. Discarded non-measles non-rubella rates prove the system is actually looking, exactly as AFP rates do for polio.",
+   "say": "Fever plus rash enters the net. Laboratory confirmation and genotyping sort measles from rubella, and discard rates prove the net is fishing. Elimination surveillance must demonstrate sensitivity, never merely report zero.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "What it proves"],
+    "rows": [
+     ["Suspected cases reported and tested", "System captures fever-rash illness"],
+     ["Non-measles discard rate adequate", "Sensitivity is real, not silence"],
+     ["Genotypes characterised", "Importation versus endemic chains"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
