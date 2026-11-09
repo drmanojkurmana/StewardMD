@@ -8,177 +8,260 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Herpes simplex** anchors this lesson. Recognition of Herpes simplex starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Herpes simplex gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Herpes simplex virus** belongs to the Alphaherpesvirinae subfamily, comprising two distinct double-stranded DNA viruses: HSV-1 and HSV-2. HSV-1 demonstrates a predilection for non-genital epithelial sites, causing orolabial cold sores, gingivostomatitis, and keratoconjunctivitis, though it now accounts for an increasing proportion of genital infections. HSV-2 is transmitted almost exclusively via sexual contact, predominantly provoking genital herpes. Both viruses possess the capacity to establish lifelong latent infection within sensory nerve ganglia following primary epithelial infection.",
+   "say": "Herpes simplex viruses type 1 and type 2 are double-stranded DNA viruses. HSV-1 classically causes oral cold sores while HSV-2 causes genital ulcers, and both establish lifelong dormancy in sensory ganglia.",
    "vis": {
     "kind": "image",
-    "src": "v1/kb/media/leprosy-fig2.webp",
-    "alt": "Herpes Simplex teaching image.",
-    "caption": "Herpes Simplex illustration. Illustration: StewardMD original.",
+    "src": "v1/kb/media/herpes-simplex-fig1.webp",
+    "alt": "Clinical photograph of grouped umbilicated vesicles of herpes simplex on the vermilion border.",
+    "caption": "Characteristic grouped vesicles on an erythematous base along the lip vermilion border. Illustration: StewardMD original.",
     "ar": 1.5
    }
   },
   {
-   "tx": "**Herpes zoster** anchors this lesson. The mechanism behind herpes zoster explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Herpes zoster gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Herpes Simplex set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Herpes zoster",
-      "Central fact in this lesson"
-     ],
-     [
-      "Postherpetic neuralgia",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Postherpetic neuralgia** anchors this lesson. Clinically, postherpetic neuralgia presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Postherpetic neuralgia gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Primary herpes** presents after an incubation period of two to twelve days, producing clinical illness that is substantially more severe and protracted than recurrent episodes. Patients develop crops of closely grouped, uniform, clear vesicles on an intensely erythematous, edematous base. The vesicles rapidly become umbilicated, pustular, and erode into shallow, painful scalloped ulcers before crusting. Systemic manifestations including fever, malaise, myalgias, and tender, painful regional lymphadenopathy accompany primary inoculation.",
+   "say": "Primary herpes simplex is severe, erupting with crops of grouped umbilicated blisters on a fiery red base. These break down into painful scalloped ulcers, accompanied by high fever and swollen tender lymph nodes.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Primary HSV Infection",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Severe systemic fever and malaise",
+      "Widespread, bilateral painful lesions",
+      "Prominent tender regional lymphadenopathy",
+      "Protracted course lasting 2 to 3 weeks"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Recurrent HSV Outbreak",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Localized, unilateral small lesion cluster",
+      "Preceded by tingling, burning prodrome",
+      "Minimal or absent systemic illness",
+      "Rapid resolution within 5 to 10 days"
      ]
     }
    }
   },
   {
-   "tx": "**Molluscum contagiosum** anchors this lesson. Investigation choice for molluscum contagiosum follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Molluscum contagiosum gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Ganglionic latency** is established as viral capsids ascend retrogradely along sensory nerve axons from primary mucosal lesions to sensory nerve cell bodies. HSV-1 establishes lifelong latency primarily within the trigeminal ganglion, whereas HSV-2 resides within the sacral dorsal root ganglia (S2 to S4). Viral DNA circularizes into episomes, expressing latency-associated transcripts (LATs) while suppressing lytic gene transcription. Reactivation is triggered by psychological stress, ultraviolet radiation, febrile illnesses, hormonal shifts during menstruation, local mechanical trauma, or immunosuppression.",
+   "say": "After the initial outbreak, the virus travels up sensory nerves to hide indefinitely: HSV-1 in the trigeminal ganglion and HSV-2 in the sacral ganglia. Emotional stress, fever, or sunlight reactivates viral replication.",
    "vis": {
     "kind": "image",
-    "src": "v1/kb/media/psoriasis-fig1.webp",
-    "alt": "Herpes Simplex teaching image.",
-    "caption": "Herpes Simplex illustration. Illustration: StewardMD original.",
+    "src": "v1/kb/media/herpes-simplex-fig2.webp",
+    "alt": "Diagram showing retrograde axonal transport to sensory ganglia and antiviral mechanisms.",
+    "caption": "Retrograde neural transit to sensory ganglia, lifelong viral latency, and acyclovir inhibition of viral DNA polymerase. Illustration: StewardMD original.",
     "ar": 1.5
    }
   },
   {
-   "tx": "**Umbilicated papules** anchors this lesson. Separation of umbilicated papules from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Umbilicated papules gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Eczema herpeticum** (Kaposi varicelliform eruption) represents a potentially life-threatening dermatological emergency where herpes simplex virus disseminates across pre-existing diseased skin, most commonly severe atopic dermatitis. Patients present with an abrupt eruption of innumerable, monomorphic, punched-out umbilicated vesicles that rapidly turn pustular, erode, and coalesce into extensive hemorrhagic crusts over the face, neck, and upper trunk. High-spiking pyrexia, toxaemia, and risk of secondary staphylococcal sepsis or fatal viremia demand immediate intravenous acyclovir therapy.",
+   "say": "Eczema herpeticum is a medical emergency where herpes simplex spreads across atopic eczema. Widespread monomorphic umbilicated blisters erupt across the face and neck, requiring immediate intravenous acyclovir to prevent fatal viremia.",
    "vis": {
-    "kind": "table",
-    "title": "Herpes Simplex set",
-    "cols": [
-     "Item",
-     "Point"
+    "kind": "flow",
+    "title": "Recognition and Emergency Rescue in Eczema Herpeticum",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Atopic Barrier Defect",
+      "sub": "Filaggrin mutations and antimicrobial peptide lack"
+     },
+     {
+      "id": "e2",
+      "label": "HSV Superinfection",
+      "sub": "Inoculation spreads rapidly across disrupted skin"
+     },
+     {
+      "id": "e3",
+      "label": "Monomorphic Vesicles",
+      "sub": "Punched-out umbilicated lesions with high fever"
+     },
+     {
+      "id": "e4",
+      "label": "IV Acyclovir",
+      "sub": "Immediate antiviral therapy prevents viremic death"
+     }
     ],
-    "rows": [
+    "edges": [
      [
-      "Umbilicated papules",
-      "Central fact in this lesson"
+      "e1",
+      "e2",
+      "Viral inoculation"
      ],
      [
-      "Verruca vulgaris",
-      "Companion fact to revise together"
+      "e2",
+      "e3",
+      "Epidermal dissemination"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "e3",
+      "e4",
+      "Emergency rescue"
      ]
     ]
    }
   },
   {
-   "tx": "**Verruca vulgaris** anchors this lesson. Management of verruca vulgaris follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Verruca vulgaris gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Tzanck smear** provides a rapid, inexpensive bedside cytological technique to confirm an alphaherpesvirus infection. A fresh, intact vesicle is unroofed, and the base is firmly scraped with a sterile scalpel blade to harvest epidermal cells, which are smeared on a glass slide and stained with Giemsa or Wright stain. Light microscopy reveals pathognomonic multinucleated giant cells containing molding nuclei, chromatin margination, and eosinophilic Cowdry A intranuclear inclusions.",
+   "say": "Scrape the base of an intact vesicle and stain with Giemsa to perform a Tzanck smear. It rapidly confirms herpes by revealing multinucleated giant cells with molded nuclei and Cowdry A inclusion bodies.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Cytology and Laboratory Modalities in HSV",
+    "cols": [
+     "Diagnostic Method",
+     "Microscopic / Laboratory Finding",
+     "Key Limitations"
+    ],
+    "rows": [
+     [
+      "Tzanck smear",
+      "Multinucleated giant cells and Cowdry A inclusions",
+      "Cannot differentiate HSV-1, HSV-2, or VZV"
+     ],
+     [
+      "Polymerase chain reaction",
+      "Amplification of viral DNA (gold standard)",
+      "High sensitivity, differentiates viral types"
+     ],
+     [
+      "Direct fluorescent antibody",
+      "Fluorescent tagged monoclonal antibodies",
+      "Rapid turnaround, discriminates HSV-1 and 2"
+     ],
+     [
+      "Viral culture",
+      "Cytopathic effect in cell lines within 48 hours",
+      "Lower sensitivity as lesions begin to crust"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acyclovir** is a guanosine analogue antiviral that acts as a selective inhibitor of herpes simplex viral DNA synthesis. The drug is an inactive prodrug that requires monophosphorylation by viral thymidine kinase, an enzyme unique to herpesviruses. Host cellular kinases subsequently convert acyclovir monophosphate into acyclovir triphosphate, which selectively competes with deoxyguanosine triphosphate for viral DNA polymerase, acting as an obligate DNA chain terminator because it lacks the 3-prime hydroxyl group necessary for phosphodiester elongation.",
+   "say": "Acyclovir is a prodrug activated only inside infected cells by viral thymidine kinase. The resulting acyclovir triphosphate terminates viral DNA chain elongation because it lacks the essential three-prime hydroxyl group.",
+   "vis": {
+    "kind": "flow",
+    "title": "Acyclovir Intracellular Activation Pathway",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Acyclovir Prodrug",
+      "sub": "Enters infected and uninfected cells freely"
+     },
+     {
+      "id": "a2",
+      "label": "Viral Thymidine Kinase",
+      "sub": "Selectively monophosphorylates drug only in virus"
+     },
+     {
+      "id": "a3",
+      "label": "Host Cellular Kinases",
+      "sub": "Converts monophosphate to active triphosphate"
+     },
+     {
+      "id": "a4",
+      "label": "DNA Chain Termination",
+      "sub": "Inhibits viral DNA polymerase; halts replication"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2",
+      "Selective viral uptake"
+     ],
+     [
+      "a2",
+      "a3",
+      "Cellular activation"
+     ],
+     [
+      "a3",
+      "a4",
+      "Chain termination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Valacyclovir** is the L-valyl ester prodrug of acyclovir designed to overcome the notoriously low oral bioavailability (ten to twenty percent) of parent acyclovir. Following oral ingestion, first-pass intestinal and hepatic hydrolysis by esterases converts valacyclovir into acyclovir, achieving bioavailability exceeding fifty-five percent and producing serum drug concentrations comparable to intravenous acyclovir. The recommended therapeutic regimen for primary genital herpes is valacyclovir 1000 mg orally twice daily for seven to ten days, initiated within seventy-two hours of symptom onset.",
+   "say": "Valacyclovir is the ester prodrug of acyclovir with three- to five-fold higher bioavailability. Dosing for primary genital herpes is one gram twice daily for seven to ten days, started as early as possible.",
+   "vis": {
+    "kind": "table",
+    "title": "Standard Antiviral Dosing Regimens for Herpes Simplex",
+    "cols": [
+     "Clinical Setting",
+     "Valacyclovir Regimen",
+     "Acyclovir Alternative"
+    ],
+    "rows": [
+     [
+      "Primary genital herpes",
+      "1000 mg orally twice daily for 7 to 10 days",
+      "400 mg orally three times daily for 7 to 10 days"
+     ],
+     [
+      "Recurrent genital outbreak",
+      "500 mg orally twice daily for 3 days",
+      "800 mg orally three times daily for 2 days"
+     ],
+     [
+      "Chronic suppressive therapy",
+      "500 to 1000 mg orally once daily",
+      "400 mg orally twice daily"
+     ],
+     [
+      "Herpetic gingivostomatitis",
+      "1000 mg twice daily for 7 days in adults",
+      "20 mg/kg/dose four times daily in children"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Suppressive therapy** with daily oral valacyclovir or acyclovir is indicated for patients experiencing frequent, disabling recurrences exceeding six episodes per year. Continuous daily administration of valacyclovir 500 to 1000 mg reduces the frequency of symptomatic recurrences by over seventy to eighty percent and reduces subclinical asymptomatic viral shedding by fifty percent, significantly lowering the risk of sexual transmission to uninfected partners. Annual drug cessation is recommended to reassess the patient baseline recurrence rate.",
+   "say": "Patients with six or more outbreaks yearly benefit from daily suppressive antiviral therapy. Taking valacyclovir daily reduces outbreaks by eighty percent and cuts asymptomatic viral transmission to sexual partners in half.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Episodic Therapy",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Patient initiates treatment during prodrome",
+      "Short courses of 1 to 5 days per outbreak",
+      "Shortens outbreak duration by 1 to 2 days",
+      "Does not reduce overall recurrence frequency"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Chronic Suppressive Therapy",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Continuous once-daily oral medication",
+      "Indicated for six or more recurrences per year",
+      "Reduces recurrence rate by 70% to 80%",
+      "Decreases asymptomatic sexual transmission"
      ]
     }
-   }
-  },
-  {
-   "tx": "**Plane warts** anchors this lesson. Complications of plane warts are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Plane warts gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/dermatitis-herpetiformis-fig1.webp",
-    "alt": "Herpes Simplex teaching image.",
-    "caption": "Herpes Simplex illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Scabies** anchors this lesson. Anchoring scabies beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Scabies gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Herpes Simplex set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Scabies",
-      "Central fact in this lesson"
-     ],
-     [
-      "Herpes simplex",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
    }
   }
  ],
  "quiz": [],
  "cards": [
   {
-   "f": "Herpes Simplex: central fact",
-   "b": "Herpes simplex is the anchor fact; name it precisely and grade severity."
+   "f": "Herpes simplex latency: primary anatomical site for HSV-1",
+   "b": "Trigeminal ganglion (sacral dorsal root ganglia S2-S4 for HSV-2)."
   },
   {
-   "f": "Herpes Simplex: discriminator",
-   "b": "Herpes zoster separates this topic from its nearest mimics."
+   "f": "Eczema herpeticum: underlying cutaneous predisposition",
+   "b": "Severe atopic dermatitis with epidermal barrier defect and reduced antimicrobial peptides."
   },
   {
-   "f": "Herpes Simplex: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "f": "Acyclovir: primary enzymatic mechanism conferring viral selectivity",
+   "b": "Monophosphorylation occurs exclusively via herpesvirus thymidine kinase."
   }
  ],
  "keys": [
-  "Herpes simplex anchors the topic",
-  "Herpes zoster is the discriminator",
-  "Name, grade, act and review in order"
+  "Herpes simplex produces grouped umbilicated vesicles on an erythematous base with sensory ganglionic latency",
+  "Tzanck smear reveals multinucleated giant cells and Cowdry A eosinophilic intranuclear inclusions",
+  "Acyclovir requires viral thymidine kinase for activation, acting as an obligate DNA chain terminator"
  ]
 }
