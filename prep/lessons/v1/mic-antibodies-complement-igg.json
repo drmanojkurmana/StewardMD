@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-antibodies-complement",
+  "subject": "microbiology",
+  "title": "Immunoglobulins I: IgG, IgM, IgA and IgE Structure and Function",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**IgG** is serum's dominant antibody (about 75 percent), a 150 kilodalton monomer that crosses placenta via FcRn (the only class transferred), opsonises through Fc gamma receptors, fixes complement, and persists with a three week half life recycled by that same receptor. Its four subclasses divide labour: IgG1 and 3 fix complement and opsonise best, IgG2 answers polysaccharides, IgG4 blocks quietly.",
+      "say": "IgG crosses placenta, opsonises, endures three weeks: the workhorse with four gears.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IgG profile",
+          "points": [
+            "75 percent of serum immunoglobulin",
+            "Placental transfer (neonatal cover, and disease)",
+            "Secondary response dominant class",
+            "Half life about 21 days (FcRn recycling)"
+          ]
+        },
+        "right": {
+          "title": "Subclass notes",
+          "points": [
+            "IgG1 and 3: complement and Fc receptor strong",
+            "IgG2: polysaccharide responses (spleen dependent)",
+            "IgG4: chronic antigen, blocking, deficiency associations",
+            "Subclass deficiency: sinopulmonary infections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**IgM** is the pentameric first responder (about 970 kilodaltons with J chain), confined largely to blood by size, fixing complement superbly per molecule, agglutinating brilliantly, and marking primary responses and acute infection serology (anti HAV IgM, anti HBc IgM). Its monomer form sits on naive B cells as receptor beside IgD.",
+      "say": "IgM arrives first, agglutinates best and stays in the blood: primary response signature.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IgM profile",
+          "points": [
+            "Pentamer plus J chain, intravascular",
+            "First antibody of primary response",
+            "Strongest complement fixer per molecule",
+            "Natural isohaemagglutinins anti A and B"
+          ]
+        },
+        "right": {
+          "title": "IgM in diagnosis",
+          "points": [
+            "Acute infection marker across serology",
+            "Cold agglutinins (Mycoplasma, EBV)",
+            "Waldenstrom macroglobulinaemia paraprotein",
+            "Hyper IgM syndromes: switching failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**IgA** guards surfaces: serum monomer minor, secretory dimer dominant in milk, tears, saliva and gut, two J chain linked units wrapped in secretory component (a piece of its epithelial transporter) resisting proteases, neutralising without inflaming. Selective IgA deficiency is the commonest primary immunoglobulin defect, often silent, sometimes sinopulmonary and transfusion relevant (anti IgA).",
+      "say": "IgA neutralises quietly on surfaces in a protease proof coat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Secretory IgA",
+          "points": [
+            "Dimer plus J chain plus secretory component",
+            "Transcytosed across epithelium (pIgR)",
+            "Immune exclusion without complement inflammation",
+            "Breast milk protection for infant gut"
+          ]
+        },
+        "right": {
+          "title": "IgA disorders",
+          "points": [
+            "Selective deficiency common, often asymptomatic",
+            "IgA nephropathy (galactose deficient IgA1)",
+            "Dermatitis herpetiformis and coeliac associations",
+            "Anaphylaxis risk with anti IgA in transfusion (rare)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**IgE** is the trace class with outsized consequences: bound to mast cell and basophil Fc epsilon receptors, crosslinked by allergen into histamine release ( type I hypersensitivity module), defending helminths at surfaces, measured as total and specific IgE in allergy work, and targeted by omalizumab. Serum half life days, tissue bound life weeks explains its pharmacology.",
+      "say": "Least abundant, most theatrical: IgE sits armed on mast cells awaiting crosslinking.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IgE biology",
+          "points": [
+            "Lowest serum concentration",
+            "Fc epsilon RI on mast cells and basophils",
+            "Helminth and venom defence at surfaces",
+            "No complement fixation, no placental transfer"
+          ]
+        },
+        "right": {
+          "title": "IgE clinical",
+          "points": [
+            "Specific IgE and skin prick allergy testing",
+            "Hyper IgE syndromes (STAT3 job)",
+            "Omalizumab anti IgE therapy",
+            "Eosinophilia companion signal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antibody anatomy** underlies all classes: two heavy and two light chains (kappa or lambda), variable regions forming the antigen binding site, constant regions assigning class and effector fate, hinge flexibility, and domains as folding units. Genes rearrange V D J segments in marrow and thymus, junctional diversity multiplying receptors beyond genome size.",
+      "say": "Variable tips choose targets, constant stems choose consequences; rearrangement builds the repertoire.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Structure map",
+          "points": [
+            "Fab arms: variable plus first constant domains",
+            "Fc stem: class effector functions",
+            "Hinge: flexibility (IgG3 longest)",
+            "Disulfide architecture per class"
+          ]
+        },
+        "right": {
+          "title": "Diversity machinery",
+          "points": [
+            "V D J recombination (heavy), V J (light)",
+            "Junctional and combinatorial diversity",
+            "Somatic hypermutation in germinal centres",
+            "Class switch recombination changes stem only"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Placental transfer asymmetry** is examination gold: IgG crosses (third trimester mostly), IgM cannot (so neonatal IgM means congenital infection), IgA arrives by milk instead, and maternal IgG both protects and blurs infant serology for months while causing haemolytic disease and neonatal lupus when misdirected. Torch serology reads this anatomy.",
+      "say": "IgG in a newborn is mother's; IgM in a newborn is the baby's own alarm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mother", "label": "Maternal IgG crosses via placental FcRn" },
+          { "id": "protect", "label": "Neonate protected (and serology blurred) months" },
+          { "id": "igm", "label": "Neonatal IgM cannot be maternal" },
+          { "id": "torch", "label": "Raised neonatal IgM signals congenital infection" }
+        ],
+        "edges": [["mother", "protect"], ["protect", "igm"], ["igm", "torch"]]
+      }
+    },
+    {
+      "tx": "**Effector functions** cash the constant region: opsonisation (Fc and complement receptors), complement classical activation (IgM then IgG1 3), antibody dependent cellular cytotoxicity (NK CD16 reading IgG), neutralisation (antitoxins and antivirals), mucosal exclusion (IgA), and mast cell arming (IgE). Ask what the Fc does before asking what the Fab binds in mechanism questions.",
+      "say": "Fab finds, Fc acts: opsonise, fix, kill, neutralise, exclude or degranulate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fc effectors",
+          "points": [
+            "Opsonisation speeds phagocytosis",
+            "ADCC by NK and myeloid cells",
+            "Complement C1q binding (IgM, IgG)",
+            "Placental and mucosal transport receptors"
+          ]
+        },
+        "right": {
+          "title": "Fab effectors",
+          "points": [
+            "Neutralisation of toxins and viruses",
+            "Agglutination and precipitation",
+            "Blocking adhesion and enzymes",
+            "Immune complex formation when excess antigen"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Serological windows** apply class logic to diagnosis timing: IgM early and transient (acute), IgG late and persistent (past or vaccine), avidity maturing with time (low avidity recent in toxoplasma and CMV pregnancy work), and seroconversion between paired samples outranking any single titre. The immunoglobulin classes are clocks as much as weapons.",
+      "say": "IgM says recent, IgG says ever, avidity says how long ago: serology is clock reading.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Timing reads",
+          "points": [
+            "IgM positive IgG negative: very early",
+            "Both positive: acute to recent",
+            "IgG alone: past or vaccine",
+            "Four fold rise in paired titres: confirmed"
+          ]
+        },
+        "right": {
+          "title": "Avidity and traps",
+          "points": [
+            "Low avidity: recent months",
+            "Maternal IgG blurs infant results",
+            "Rheumatoid factor fakes IgM assays",
+            "Immunodeficiency silences all classes"
+          ]
+        }
+      }
+    }
+  ]
+}

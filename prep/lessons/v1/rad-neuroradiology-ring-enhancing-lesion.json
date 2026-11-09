@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-neuroradiology-ring-enhancing-lesion",
+ "subject": "radiology",
+ "module": "rad-neuroradiology",
+ "title": "Ring Enhancing Lesions: Abscess, Tumour and Tuberculoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Ring enhancement has a short list",
+   "tx": "**Ring enhancing lesion** on post contrast CT or MRI gathers abscess, necrotic tumour, tuberculoma, resolving haematoma, demyelination and radiation necrosis into one shape. The mnemonic MAGIC DR lists metastasis, abscess, glioblastoma, infarct, contusion, demyelination and radiation change. Wall character, diffusion behaviour and the clinical temperature of the patient sort that list faster than ring size, which correlates with almost nothing.",
+   "say": "Ring enhancing lesion gathers abscess, necrotic tumour, tuberculoma, resolving haematoma, demyelination and radiation necrosis into one shape. Wall character, diffusion behaviour and the clinical temperature sort that list faster than ring size, which correlates with almost nothing.",
+   "vis": {"kind": "table", "cols": ["Cause", "Wall clue", "Patient clue"], "rows": [["Abscess", "Thin, smooth, thinner medially", "Fever, dental or cardiac source"], ["Glioblastoma", "Thick, irregular, nodular", "Older, afebrile, seizures"], ["Tuberculoma", "Ring with solid caseous centre", "Endemic exposure, meningitis"], ["Demyelination", "Open ring toward cortex", "Young, prior episodes"]]}
+  },
+  {
+   "title": "Abscess restricts diffusion",
+   "tx": "**Brain abscess** fills its cavity with pus that restricts diffusion strongly, bright on diffusion imaging and dark on the ADC map, the single most useful sequence split from necrotic tumour whose watery centre diffuses freely. The pictured abscess routes show haematogenous, sinus and dental sources seeding the corticomedullary junction. A smooth thin capsule, daughter lesions and fever complete the pattern that earns aspiration before antibiotics alone are trusted.",
+   "say": "Brain abscess fills its cavity with pus that restricts diffusion strongly, the most useful split from necrotic tumour whose centre diffuses freely. The pictured routes show cardiac, sinus and dental sources seeding the corticomedullary junction. Fever and a smooth thin capsule complete the pattern earning aspiration.",
+   "vis": {"kind": "image", "src": "v1/kb/media/brain-abscess-fig1.webp", "alt": "Illustration of brain abscess routes of spread and typical zones in the brain.", "caption": "Brain abscess routes and zones of formation. Illustration: StewardMD."}
+  },
+  {
+   "title": "Glioblastoma crosses the corpus callosum",
+   "tx": "**Butterfly glioma** is glioblastoma crossing the corpus callosum into both frontal lobes, an infiltrative growth no capsule contains. Its ring is thick, irregular and nodular with central necrosis, surrounding vasogenic oedema and mass effect out of proportion in an afebrile older patient. Spectroscopy raises choline and drops N acetylaspartate across even the normal looking margin, proving infiltration beyond the ring that surgery can never fully clear.",
+   "say": "Butterfly glioma is glioblastoma crossing the corpus callosum into both frontal lobes. Its ring is thick, irregular and nodular with central necrosis in an afebrile older patient. Spectroscopy shows infiltration beyond the ring that surgery can never fully clear, separating it from a contained abscess.",
+   "vis": {"kind": "compare", "left": {"title": "Glioblastoma ring", "points": ["Thick irregular wall", "Central necrosis, free diffusion", "Crosses corpus callosum", "Afebrile older patient"]}, "right": {"title": "Abscess ring", "points": ["Thin smooth wall", "Pus restricts diffusion", "Daughter lesions possible", "Febrile, source found"]}}
+  },
+  {
+   "title": "Tuberculoma and caseous centres",
+   "tx": "**Tuberculoma** rings a caseous centre that reads T2 dark when solid caseation dominates, unlike the T2 bright necrotic centre of most tumours. Conglomerate rings clustering near the meninges with basal meningitis, infarcts from vasculitis and hydrocephalus complete the tuberculosis picture in endemic settings. Target sign with central calcification inside the ring is the classic late appearance, and steroids ride with antitubercular therapy when paradoxical expansion threatens vision or consciousness.",
+   "say": "Tuberculoma rings a caseous centre that reads T2 dark when solid caseation dominates, unlike the bright necrotic centre of tumours. Conglomerate rings with basal meningitis and hydrocephalus complete the tuberculosis picture. Steroids ride with antitubercular therapy when paradoxical expansion threatens vision or consciousness.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Caseating granuloma forms"}, {"id": "b", "label": "Ring enhancement appears"}, {"id": "c", "label": "Centre calcifies: target sign"}, {"id": "d", "label": "Therapy with steroid cover"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Open ring favours demyelination",
+   "tx": "**Open ring sign** leaves the enhancing ring incomplete on the cortical side, the gap pointing toward grey matter, and it favours demyelination over abscess or tumour with high specificity. Tumefactive multiple sclerosis builds these large rings with little mass effect for their size and modest oedema. A young patient with prior transient neurological episodes and an open ring earns oligoclonal band testing and spine MRI before any biopsy is booked.",
+   "say": "Open ring sign leaves the enhancing ring incomplete on the cortical side, favouring demyelination over abscess or tumour. Tumefactive sclerosis builds large rings with little mass effect for their size. A young patient with prior episodes earns band testing and spine MRI before any biopsy is booked.",
+   "vis": {"kind": "compare", "left": {"title": "Open ring: demyelination", "points": ["Gap faces cortex", "Little mass effect", "Young patient, prior episodes", "Biopsy avoided if classic"]}, "right": {"title": "Closed ring: tumour or abscess", "points": ["Complete ring", "Mass effect present", "Oedema prominent", "Tissue often needed"]}}
+  },
+  {
+   "title": "Metastases sit at the junction",
+   "tx": "**Brain metastases** lodge at the grey white junction where vessels narrow, often multiple, round and surrounded by vasogenic oedema far larger than the nodule itself. Lung, breast, melanoma, renal and colon primaries dominate, and melanoma or renal deposits bleed into the ring. A solitary ring in a patient with known cancer is still metastasis only about nine times in ten, so atypical features reopen the abscess and primary tumour possibilities.",
+   "say": "Brain metastases lodge at the grey white junction where vessels narrow, often multiple with oedema far larger than the nodule. Lung, breast, melanoma, renal and colon primaries dominate. A solitary ring with known cancer is still metastasis only about nine times in ten, so atypical features reopen other causes.",
+   "vis": {"kind": "table", "cols": ["Primary", "Deposit habit", "Extra clue"], "rows": [["Lung", "Multiple junction nodules", "Commonest overall source"], ["Melanoma", "Haemorrhagic rings", "T1 bright melanin possible"], ["Breast", "Posterior fossa share", "Long latency possible"], ["Renal cell", "Hypervascular, bleeds", "Cannonball lung deposits"]]}
+  },
+  {
+   "title": "Toxoplasmosis in advanced HIV",
+   "tx": "**Toxoplasmosis** rings cluster in basal ganglia and corticomedullary junction when CD4 counts fall under 100, often multiple with an eccentric target nodule inside the ring wall. Lymphoma in the same host hugs the ventricles, crosses the corpus callosum and restricts diffusion from dense cellularity. Two weeks of antitoxoplasma therapy with imaging response is the classic test, because toxoplasmosis shrinks and lymphoma does not.",
+   "say": "Toxoplasmosis rings cluster in basal ganglia when CD4 counts fall under one hundred, often with an eccentric target nodule in the wall. Lymphoma hugs the ventricles and restricts diffusion from dense cellularity. Two weeks of antitoxoplasma therapy with imaging response is the classic separating test.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Ring lesions, CD4 under 100"}, {"id": "b", "label": "Antitoxoplasma therapy starts"}, {"id": "c", "label": "Imaging at two weeks"}, {"id": "d", "label": "No shrink: biopsy for lymphoma"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Radiation necrosis mimics recurrence",
+   "tx": "**Radiation necrosis** rings appear months to years inside a treated tumour field, copying recurrence on conventional MRI almost perfectly. Perfusion imaging separates them because necrosis has low blood volume while recurrent tumour rebuilds vessels with high blood volume. Spectroscopy and amino acid PET add votes in the same direction. The treatment forks are opposite, steroids and bevacizumab against necrosis versus more tumour therapy, so the imaging distinction is never academic.",
+   "say": "Radiation necrosis rings appear months to years inside a treated field, copying recurrence on conventional MRI. Perfusion separates them because necrosis has low blood volume while recurrent tumour rebuilds vessels. The treatment forks are opposite, so the imaging distinction is never academic.",
+   "vis": {"kind": "compare", "left": {"title": "Radiation necrosis", "points": ["Low perfusion blood volume", "Soap bubble or swiss cheese ring", "Steroids help", "Inside old radiation field"]}, "right": {"title": "Tumour recurrence", "points": ["High perfusion blood volume", "Solid nodular growth", "Needs tumour therapy", "Grows beyond field edge"]}}
+  }
+ ]
+}
