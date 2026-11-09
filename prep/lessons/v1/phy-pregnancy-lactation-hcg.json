@@ -1,237 +1,237 @@
 {
-  "v": 1,
-  "module": "phy-pregnancy-lactation",
-  "subject": "physiology",
-  "title": "Placental Hormones, Maternal Adaptations, and Lactation",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "Following blastocyst attachment to the maternal endometrial lining on postovulatory day six to eight, the outer syncytiotrophoblast layer begins intense secretion of a heterodimeric glycoprotein. This hormone is **human chorionic gonadotropin**, which shares an identical alpha subunit with luteinizing hormone, follicle-stimulating hormone, and thyroid-stimulating hormone, but carries a unique ninety-two amino acid beta subunit.",
-      "say": "Syncytiotrophoblast secretes human chorionic gonadotropin, which preserves the corpus luteum in early pregnancy.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/ectopic-pregnancy-fig1.webp",
-        "caption": "Abnormal extrauterine blastocyst implantation demonstrating early syncytiotrophoblastic endocrine activity.",
-        "alt": "Syncytiotrophoblast proliferation and beta-hCG secretion in ectopic gestation"
-      }
+ "v": 1,
+ "module": "phy-pregnancy-lactation",
+ "subject": "physiology",
+ "title": "Placental Hormones, Maternal Adaptations, and Lactation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Following blastocyst attachment to the maternal endometrial lining on postovulatory day six to eight, the outer syncytiotrophoblast layer begins intense secretion of a heterodimeric glycoprotein. This hormone is **human chorionic gonadotropin**, which shares an identical alpha subunit with luteinizing hormone, follicle-stimulating hormone, and thyroid-stimulating hormone, but carries a unique ninety-two amino acid beta subunit.",
+   "say": "Syncytiotrophoblast secretes human chorionic gonadotropin, which preserves the corpus luteum in early pregnancy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hcg.webp",
+    "caption": "Human chorionic gonadotropin: Graafian follicle, hCG receptor signalling and corpus luteum formation. [Credit: StewardMD]",
+    "alt": "Human chorionic gonadotropin: Graafian follicle, hCG receptor signalling and corpus luteum formation."
+   }
+  },
+  {
+   "tx": "During the second and third trimesters, the syncytiotrophoblast produces massive quantities of a peptide hormone structurally homologous to growth hormone and prolactin. Designated **human placental lactogen**, this hormone reduces maternal insulin sensitivity and peripheral glucose uptake, shunting abundant glucose and amino acids across the placental syncytium to nourish the growing fetus.",
+   "say": "Human placental lactogen decreases maternal insulin sensitivity to preserve blood glucose for the fetus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "syncytio_hpl",
+      "label": "Placental Syncytiotrophoblast Secretes Human Placental Lactogen (hPL)"
+     },
+     {
+      "id": "maternal_lipolysis",
+      "label": "Stimulates Maternal Adipocyte Lipolysis, Yielding Free Fatty Acids for Mother"
+     },
+     {
+      "id": "anti_insulin",
+      "label": "Induces Maternal Skeletal Muscle Insulin Resistance via Post-Receptor Blocks"
+     },
+     {
+      "id": "fetal_shunting",
+      "label": "Maintains High Maternal-Fetal Glucose Gradient for Rapid Facilitated Diffusion"
+     }
+    ],
+    "edges": [
+     [
+      "syncytio_hpl",
+      "maternal_lipolysis"
+     ],
+     [
+      "syncytio_hpl",
+      "anti_insulin"
+     ],
+     [
+      "anti_insulin",
+      "fetal_shunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy induces profound systemic physiological remodeling to accommodate fetal metabolic and respiratory demands. Most notably, **maternal cardiovascular adaptations** include a forty to fifty percent increase in maternal plasma volume and cardiac output, accompanied by marked systemic vasodilation mediated by prostacyclin and relaxin that lowers systemic vascular resistance and blood pressure.",
+   "say": "Maternal adaptations expand plasma volume and cardiac output by nearly half while systemic vascular resistance decreases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal Hemodynamic Changes",
+     "points": [
+      "Plasma volume expands 45-50%, producing physiological anemia",
+      "Stroke volume and heart rate increase, raising cardiac output 40-50%",
+      "Systemic vascular resistance falls due to uterine shunt and vasodilation",
+      "Systolic and diastolic blood pressures nadir in second trimester"
+     ]
     },
-    {
-      "tx": "During the second and third trimesters, the syncytiotrophoblast produces massive quantities of a peptide hormone structurally homologous to growth hormone and prolactin. Designated **human placental lactogen**, this hormone reduces maternal insulin sensitivity and peripheral glucose uptake, shunting abundant glucose and amino acids across the placental syncytium to nourish the growing fetus.",
-      "say": "Human placental lactogen decreases maternal insulin sensitivity to preserve blood glucose for the fetus.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "syncytio_hpl",
-            "label": "Placental Syncytiotrophoblast Secretes Human Placental Lactogen (hPL)"
-          },
-          {
-            "id": "maternal_lipolysis",
-            "label": "Stimulates Maternal Adipocyte Lipolysis, Yielding Free Fatty Acids for Mother"
-          },
-          {
-            "id": "anti_insulin",
-            "label": "Induces Maternal Skeletal Muscle Insulin Resistance via Post-Receptor Blocks"
-          },
-          {
-            "id": "fetal_shunting",
-            "label": "Maintains High Maternal-Fetal Glucose Gradient for Rapid Facilitated Diffusion"
-          }
-        ],
-        "edges": [
-          [
-            "syncytio_hpl",
-            "maternal_lipolysis"
-          ],
-          [
-            "syncytio_hpl",
-            "anti_insulin"
-          ],
-          [
-            "anti_insulin",
-            "fetal_shunting"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Pregnancy induces profound systemic physiological remodeling to accommodate fetal metabolic and respiratory demands. Most notably, **maternal cardiovascular adaptations** include a forty to fifty percent increase in maternal plasma volume and cardiac output, accompanied by marked systemic vasodilation mediated by prostacyclin and relaxin that lowers systemic vascular resistance and blood pressure.",
-      "say": "Maternal adaptations expand plasma volume and cardiac output by nearly half while systemic vascular resistance decreases.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Maternal Hemodynamic Changes",
-          "points": [
-            "Plasma volume expands 45-50%, producing physiological anemia",
-            "Stroke volume and heart rate increase, raising cardiac output 40-50%",
-            "Systemic vascular resistance falls due to uterine shunt and vasodilation",
-            "Systolic and diastolic blood pressures nadir in second trimester"
-          ]
-        },
-        "right": {
-          "title": "Maternal Respiratory Changes",
-          "points": [
-            "Progesterone directly stimulates medullary respiratory center",
-            "Tidal volume increases 40% with minimal change in respiratory rate",
-            "Mild chronic respiratory alkalosis develops (arterial PCO2 ~30 mmHg)",
-            "Renal bicarbonate excretion compensates, maintaining blood pH at 7.44"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Fetal gas and nutrient exchange relies on unique anatomical shunts that direct oxygenated umbilical venous blood preferentially toward vital cranial structures. Within the **fetal circulation**, the ductus venosus bypasses the hepatic sinusoids, the foramen ovale channels inferior vena caval blood directly into the left atrium, and the ductus arteriosus diverts pulmonary arterial outflow into the descending aorta.",
-      "say": "Fetal circulation uses the ductus venosus, foramen ovale, and ductus arteriosus to prioritize brain and heart oxygenation.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "umbilical_vein",
-            "label": "Umbilical Vein Delivers 80% Saturated Oxygenated Blood from Placenta"
-          },
-          {
-            "id": "ductus_venosus",
-            "label": "Ductus Venosus Channels Flow Past Liver Directly into Inferior Vena Cava"
-          },
-          {
-            "id": "foramen_ovale",
-            "label": "Crista Dividens Directs IVC Stream Across Foramen Ovale to Left Atrium"
-          },
-          {
-            "id": "ductus_arteriosus",
-            "label": "Ductus Arteriosus Shunts High-Resistance Pulmonary Trunk Output into Aorta"
-          }
-        ],
-        "edges": [
-          [
-            "umbilical_vein",
-            "ductus_venosus"
-          ],
-          [
-            "ductus_venosus",
-            "foramen_ovale"
-          ],
-          [
-            "foramen_ovale",
-            "ductus_arteriosus"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "At term, rising placental corticotropin-releasing hormone, fetal adrenal cortisol, and local estrogen-to-progesterone ratios increase myometrial responsiveness to uterotonic agonists. As cervical distension occurs during early labor, mechanical stretch stimulates sensory afferents that trigger pituitary oxytocin release via a neuroendocrine positive feedback cascade termed the **Ferguson reflex**.",
-      "say": "The Ferguson reflex is a positive feedback loop where cervical stretch stimulates neurohypophyseal oxytocin release.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "head_descends",
-            "label": "Fetal Presenting Part Presses Against and Stretches the Uterine Cervix"
-          },
-          {
-            "id": "spinohypothalamic",
-            "label": "Sensory Afferents Ascend Anterolateral Spinal Cord to Paraventricular Nuclei"
-          },
-          {
-            "id": "oxytocin_burst",
-            "label": "Posterior Pituitary Releases Pulsatile Neurosecretory Bursts of Oxytocin"
-          },
-          {
-            "id": "myometrial_squeeze",
-            "label": "Oxytocin Stimulates Gq-Coupled Receptors to Accelerate Delivery"
-          }
-        ],
-        "edges": [
-          [
-            "head_descends",
-            "spinohypothalamic"
-          ],
-          [
-            "spinohypothalamic",
-            "oxytocin_burst"
-          ],
-          [
-            "oxytocin_burst",
-            "myometrial_squeeze"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "During gestation, high concentrations of placental estrogen and progesterone stimulate massive ductal and alveolar branching in maternal breasts while actively blocking the secretory action of lactogenic hormones. Following placental expulsion at delivery, steroid levels plummet abruptly, unmasking lactotropes and allowing anterior pituitary **prolactin** to stimulate transcription of casein, alpha-lactalbumin, and lactose synthase.",
-      "say": "Placental steroid withdrawal at birth unlocks prolactin action, initiating milk protein and lactose synthesis.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
-        "caption": "Abnormal trophoblastic proliferation illustrating high placental endocrine production and subsequent delivery clearance.",
-        "alt": "Trophoblastic tissue mass causing marked elevation of circulating gestational hormones"
-      }
-    },
-    {
-      "tx": "While prolactin directs ongoing milk synthesis within mammary alveolar epithelial cells, milk delivery requires mechanical propulsion through lactiferous ducts. Suckling at the maternal nipple activates mechanosensory nerve terminals that trigger rapid neurohypophyseal oxytocin secretion, which contracts alveolar myoepithelial cells in the classic **milk ejection reflex**.",
-      "say": "Suckling triggers the milk ejection reflex as oxytocin contracts myoepithelial cells surrounding mammary alveoli.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "nipple_suckle",
-            "label": "Infant Suckling Stimulates Tactile Mechanoreceptors in Areola and Nipple"
-          },
-          {
-            "id": "sensory_tract",
-            "label": "Somatic Nerve Fibers Relay Afferent Signals via Intercostal Nerves to Brainstem"
-          },
-          {
-            "id": "oxytocin_surge",
-            "label": "Paraventricular and Supraoptic Neurons Rapidly Release Oxytocin into Blood"
-          },
-          {
-            "id": "myoepithelial",
-            "label": "Oxytocin Contracts Mammary Myoepithelial Cells, Forcing Milk into Ducts"
-          }
-        ],
-        "edges": [
-          [
-            "nipple_suckle",
-            "sensory_tract"
-          ],
-          [
-            "sensory_tract",
-            "oxytocin_surge"
-          ],
-          [
-            "oxytocin_surge",
-            "myoepithelial"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Frequent suckling stimulates sustained prolactin secretion while simultaneously activating hypothalamic beta-endorphin interneurons that suppress arcuate gonadotropin-releasing hormone pulses. This physiological suppression of follicle-stimulating hormone and luteinizing hormone prevents ovarian follicular recruitment, producing **lactational amenorrhoea** that provides natural postpartum spacing of births.",
-      "say": "Suckling-induced prolactin and endorphin surges suppress GnRH pulses, creating protective lactational amenorrhoea.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Colostrum (First 2-4 Days)",
-          "points": [
-            "Deep yellow, viscous secretion rich in secretory IgA antibodies",
-            "Higher protein, mineral, and fat-soluble vitamin content",
-            "Lower concentration of fats, lactose, and total energy calories",
-            "Confers essential passive mucosal gut immunity to the newborn"
-          ]
-        },
-        "right": {
-          "title": "Mature Breast Milk (After Day 10-14)",
-          "points": [
-            "Thin bluish-white emulsion rich in lactose and digestible lipids",
-            "Contains whey proteins (alpha-lactalbumin) and micellar caseins",
-            "Supplies optimal 67 kcal/dL caloric density for infant growth",
-            "Supplies maternal oligosaccharides that foster bifidobacterial flora"
-          ]
-        }
-      }
+    "right": {
+     "title": "Maternal Respiratory Changes",
+     "points": [
+      "Progesterone directly stimulates medullary respiratory center",
+      "Tidal volume increases 40% with minimal change in respiratory rate",
+      "Mild chronic respiratory alkalosis develops (arterial PCO2 ~30 mmHg)",
+      "Renal bicarbonate excretion compensates, maintaining blood pH at 7.44"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "Fetal gas and nutrient exchange relies on unique anatomical shunts that direct oxygenated umbilical venous blood preferentially toward vital cranial structures. Within the **fetal circulation**, the ductus venosus bypasses the hepatic sinusoids, the foramen ovale channels inferior vena caval blood directly into the left atrium, and the ductus arteriosus diverts pulmonary arterial outflow into the descending aorta.",
+   "say": "Fetal circulation uses the ductus venosus, foramen ovale, and ductus arteriosus to prioritize brain and heart oxygenation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "umbilical_vein",
+      "label": "Umbilical Vein Delivers 80% Saturated Oxygenated Blood from Placenta"
+     },
+     {
+      "id": "ductus_venosus",
+      "label": "Ductus Venosus Channels Flow Past Liver Directly into Inferior Vena Cava"
+     },
+     {
+      "id": "foramen_ovale",
+      "label": "Crista Dividens Directs IVC Stream Across Foramen Ovale to Left Atrium"
+     },
+     {
+      "id": "ductus_arteriosus",
+      "label": "Ductus Arteriosus Shunts High-Resistance Pulmonary Trunk Output into Aorta"
+     }
+    ],
+    "edges": [
+     [
+      "umbilical_vein",
+      "ductus_venosus"
+     ],
+     [
+      "ductus_venosus",
+      "foramen_ovale"
+     ],
+     [
+      "foramen_ovale",
+      "ductus_arteriosus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At term, rising placental corticotropin-releasing hormone, fetal adrenal cortisol, and local estrogen-to-progesterone ratios increase myometrial responsiveness to uterotonic agonists. As cervical distension occurs during early labor, mechanical stretch stimulates sensory afferents that trigger pituitary oxytocin release via a neuroendocrine positive feedback cascade termed the **Ferguson reflex**.",
+   "say": "The Ferguson reflex is a positive feedback loop where cervical stretch stimulates neurohypophyseal oxytocin release.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "head_descends",
+      "label": "Fetal Presenting Part Presses Against and Stretches the Uterine Cervix"
+     },
+     {
+      "id": "spinohypothalamic",
+      "label": "Sensory Afferents Ascend Anterolateral Spinal Cord to Paraventricular Nuclei"
+     },
+     {
+      "id": "oxytocin_burst",
+      "label": "Posterior Pituitary Releases Pulsatile Neurosecretory Bursts of Oxytocin"
+     },
+     {
+      "id": "myometrial_squeeze",
+      "label": "Oxytocin Stimulates Gq-Coupled Receptors to Accelerate Delivery"
+     }
+    ],
+    "edges": [
+     [
+      "head_descends",
+      "spinohypothalamic"
+     ],
+     [
+      "spinohypothalamic",
+      "oxytocin_burst"
+     ],
+     [
+      "oxytocin_burst",
+      "myometrial_squeeze"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During gestation, high concentrations of placental estrogen and progesterone stimulate massive ductal and alveolar branching in maternal breasts while actively blocking the secretory action of lactogenic hormones. Following placental expulsion at delivery, steroid levels plummet abruptly, unmasking lactotropes and allowing anterior pituitary **prolactin** to stimulate transcription of casein, alpha-lactalbumin, and lactose synthase.",
+   "say": "Placental steroid withdrawal at birth unlocks prolactin action, initiating milk protein and lactose synthesis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
+    "caption": "Abnormal trophoblastic proliferation illustrating high placental endocrine production and subsequent delivery clearance.",
+    "alt": "Trophoblastic tissue mass causing marked elevation of circulating gestational hormones"
+   }
+  },
+  {
+   "tx": "While prolactin directs ongoing milk synthesis within mammary alveolar epithelial cells, milk delivery requires mechanical propulsion through lactiferous ducts. Suckling at the maternal nipple activates mechanosensory nerve terminals that trigger rapid neurohypophyseal oxytocin secretion, which contracts alveolar myoepithelial cells in the classic **milk ejection reflex**.",
+   "say": "Suckling triggers the milk ejection reflex as oxytocin contracts myoepithelial cells surrounding mammary alveoli.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "nipple_suckle",
+      "label": "Infant Suckling Stimulates Tactile Mechanoreceptors in Areola and Nipple"
+     },
+     {
+      "id": "sensory_tract",
+      "label": "Somatic Nerve Fibers Relay Afferent Signals via Intercostal Nerves to Brainstem"
+     },
+     {
+      "id": "oxytocin_surge",
+      "label": "Paraventricular and Supraoptic Neurons Rapidly Release Oxytocin into Blood"
+     },
+     {
+      "id": "myoepithelial",
+      "label": "Oxytocin Contracts Mammary Myoepithelial Cells, Forcing Milk into Ducts"
+     }
+    ],
+    "edges": [
+     [
+      "nipple_suckle",
+      "sensory_tract"
+     ],
+     [
+      "sensory_tract",
+      "oxytocin_surge"
+     ],
+     [
+      "oxytocin_surge",
+      "myoepithelial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frequent suckling stimulates sustained prolactin secretion while simultaneously activating hypothalamic beta-endorphin interneurons that suppress arcuate gonadotropin-releasing hormone pulses. This physiological suppression of follicle-stimulating hormone and luteinizing hormone prevents ovarian follicular recruitment, producing **lactational amenorrhoea** that provides natural postpartum spacing of births.",
+   "say": "Suckling-induced prolactin and endorphin surges suppress GnRH pulses, creating protective lactational amenorrhoea.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Colostrum (First 2-4 Days)",
+     "points": [
+      "Deep yellow, viscous secretion rich in secretory IgA antibodies",
+      "Higher protein, mineral, and fat-soluble vitamin content",
+      "Lower concentration of fats, lactose, and total energy calories",
+      "Confers essential passive mucosal gut immunity to the newborn"
+     ]
+    },
+    "right": {
+     "title": "Mature Breast Milk (After Day 10-14)",
+     "points": [
+      "Thin bluish-white emulsion rich in lactose and digestible lipids",
+      "Contains whey proteins (alpha-lactalbumin) and micellar caseins",
+      "Supplies optimal 67 kcal/dL caloric density for infant growth",
+      "Supplies maternal oligosaccharides that foster bifidobacterial flora"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

@@ -1,238 +1,238 @@
 {
-  "v": 1,
-  "module": "phy-motility",
-  "subject": "physiology",
-  "title": "The Enteric Nervous System, Slow Waves, and Interstitial Cells",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "Possessing over five hundred million neurons distributed along the gastrointestinal tract, the **enteric nervous system** functions as a quasi-autonomous third division of the autonomic nervous system. It coordinates local peristalsis, mucosal blood flow, and fluid secretion independently of extrinsic input from the brain or spinal cord.",
-      "say": "The enteric nervous system contains over five hundred million neurons, regulating gut motility and secretion semi-autonomously.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Myenteric (Auerbach) Plexus",
-          "points": [
-            "Located between outer longitudinal and inner circular muscle layers",
-            "Extends continuously from upper oesophagus to internal anal sphincter",
-            "Governs gastrointestinal motility, tone, and contraction velocity",
-            "Inhibited by sympathetic outflow; stimulated by parasympathetic input"
-          ]
-        },
-        "right": {
-          "title": "Submucosal (Meissner) Plexus",
-          "points": [
-            "Located in submucosal space between circular muscle and mucosa",
-            "Most prominent in small and large intestine; sparse in oesophagus",
-            "Controls local mucosal secretion, absorption, and submucosal blood flow",
-            "Integrates sensory afferents from mucosal luminal chemoreceptors"
-          ]
-        }
-      }
+ "v": 1,
+ "module": "phy-motility",
+ "subject": "physiology",
+ "title": "The Enteric Nervous System, Slow Waves, and Interstitial Cells",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Possessing over five hundred million neurons distributed along the gastrointestinal tract, the **enteric nervous system** functions as a quasi-autonomous third division of the autonomic nervous system. It coordinates local peristalsis, mucosal blood flow, and fluid secretion independently of extrinsic input from the brain or spinal cord.",
+   "say": "The enteric nervous system contains over five hundred million neurons, regulating gut motility and secretion semi-autonomously.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myenteric (Auerbach) Plexus",
+     "points": [
+      "Located between outer longitudinal and inner circular muscle layers",
+      "Extends continuously from upper oesophagus to internal anal sphincter",
+      "Governs gastrointestinal motility, tone, and contraction velocity",
+      "Inhibited by sympathetic outflow; stimulated by parasympathetic input"
+     ]
     },
-    {
-      "tx": "Situated between the outer longitudinal and inner circular smooth muscle layers, the **myenteric plexus**, or Auerbach plexus, regulates gut motility. Activation of myenteric neurons increases tonic contraction of the gut wall, accelerates the velocity of peristaltic wave conduction, and coordinates receptive relaxation of downstream sphincters.",
-      "say": "The myenteric plexus lies between muscle layers, controlling contraction rhythm, tone, and sphincter relaxation.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
-        "alt": "Enteric neuromuscular architecture and plexuses",
-        "caption": "Enteric ganglionated nerve plexuses, neuromuscular junctions, and congenital aganglionosis in gut motility."
-      }
-    },
-    {
-      "tx": "Situated within the submucosa, the **submucosal plexus**, or Meissner plexus, senses luminal chemical and mechanical conditions. It regulates localized secretion of digestive enzymes, bicarbonate, and water, while modulating mucosal blood flow through the release of vasoactive intestinal peptide and acetylcholine.",
-      "say": "The submucosal plexus monitors luminal chemistry to regulate mucosal secretion and localized microvascular blood flow.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "lumen_chem",
-            "label": "Luminal Nutrients and Acid Stimulate Mucosal Enteroendocrine Cells"
-          },
-          {
-            "id": "sensory",
-            "label": "Submucosal Sensory Neurons Release Calcitonin Gene-Related Peptide"
-          },
-          {
-            "id": "secretomotor",
-            "label": "Secretomotor Interneurons Activate Apical CFTR Chloride Channels"
-          },
-          {
-            "id": "secretion",
-            "label": "Electrolyte and Fluid Secretion Hydrates and Neutralizes Intestinal Chyme"
-          }
-        ],
-        "edges": [
-          [
-            "lumen_chem",
-            "sensory"
-          ],
-          [
-            "sensory",
-            "secretomotor"
-          ],
-          [
-            "secretomotor",
-            "secretion"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Rhythmic, spontaneous oscillations in smooth muscle resting membrane potential that dictate gut contraction frequencies are designated **electrical slow waves**. Slow waves do not represent true action potentials themselves, but rather subthreshold depolarizations that bring smooth muscle cells closer to mechanical threshold.",
-      "say": "Slow waves are rhythmic subthreshold depolarizations that establish the baseline electrical rhythm of the digestive tract.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Gastrointestinal Segment",
-          "Slow Wave Frequency",
-          "Pacemaker Region",
-          "Contractile Function"
-        ],
-        "rows": [
-          [
-            "Stomach (Body and Antrum)",
-            "~3 cycles per minute (cpm)",
-            "Mid-greater curvature pacemaker",
-            "Trituration and antral retropulsion"
-          ],
-          [
-            "Duodenum",
-            "~12 cycles per minute",
-            "Proximal duodenal pacemaker",
-            "Rapid mixing with bile and pancreatic juice"
-          ],
-          [
-            "Jejunum",
-            "~10 to 11 cycles per minute",
-            "Descending jejunal pacemakers",
-            "Segmental mixing and nutrient absorption"
-          ],
-          [
-            "Ileum",
-            "~8 to 9 cycles per minute",
-            "Terminal ileal pacemakers",
-            "Slow propulsion toward ileocaecal valve"
-          ],
-          [
-            "Colon",
-            "~6 to 8 cycles per minute",
-            "Ascending and transverse colon",
-            "Haustral churning and water reclamation"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The specialized physiological pacemakers of the gastrointestinal tract that generate slow waves are the **interstitial cells of Cajal**. Forming an interconnected syncytial network with surrounding smooth muscle cells via gap junctions, these mesenchymal pacemaker cells express transmembrane receptor tyrosine kinase KIT.",
-      "say": "Interstitial cells of Cajal serve as gut pacemakers, generating slow waves through periodic ion fluxes.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "cajal",
-            "label": "Interstitial Cells of Cajal (ICC) Undergo Spontaneous Intracellular Ca2+ Oscillations"
-          },
-          {
-            "id": "ano1",
-            "label": "Activation of Anoctamin-1 (ANO1) Calcium-Activated Chloride Channels"
-          },
-          {
-            "id": "depol",
-            "label": "Slow Wave Depolarization Spreads via Gap Junctions to Smooth Muscle Syncytium"
-          },
-          {
-            "id": "spike",
-            "label": "Voltage-Gated L-Type Ca2+ Channels Open -> Spike Action Potentials and Contraction"
-          }
-        ],
-        "edges": [
-          [
-            "cajal",
-            "ano1"
-          ],
-          [
-            "ano1",
-            "depol"
-          ],
-          [
-            "depol",
-            "spike"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "When slow wave depolarizations exceed minus forty millivolts, voltage-gated L-type calcium channels open, generating **spike potentials and contraction**. Greater amplitude and duration of slow waves increase the frequency of superimposed calcium spike potentials, producing stronger, phasic smooth muscle mechanical contractions.",
-      "say": "Spike potentials occur when slow waves cross the threshold, letting calcium rush in to trigger smooth muscle contraction.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Electrical Slow Waves",
-          "points": [
-            "Generated by interstitial cells of Cajal pacemakers",
-            "Subthreshold cyclic fluctuations (-65 to -45 mV)",
-            "Occur constantly whether contractions take place or not",
-            "Dictate maximum possible frequency of contraction"
-          ]
-        },
-        "right": {
-          "title": "Spike Action Potentials",
-          "points": [
-            "True action potentials elicited when slow wave exceeds -40 mV",
-            "Mediated by influx of extracellular Ca2+ through L-type channels",
-            "Directly triggers calmodulin-myosin light chain phosphorylation",
-            "Enhanced by acetylcholine and gastrin; inhibited by adrenaline"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Congenital failure of neural crest cells to migrate into the distal bowel during embryonic development produces congenital megacolon, known as **Hirschsprung disease**. The absence of myenteric and submucosal plexuses in the aganglionic distal rectum prevents receptive relaxation, causing severe functional obstruction and proximal colonic dilation.",
-      "say": "Hirschsprung disease is congenital absence of enteric ganglia in the distal colon, causing severe constipation and megacolon.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/achalasia-fig1.webp",
-        "alt": "Enteric ganglion loss and neuromuscular aperistalsis",
-        "caption": "Pathophysiological failure of enteric inhibitory neurons, tonic muscular spasm, and lumen obstruction."
-      }
-    },
-    {
-      "tx": "Neurotransmitters of the enteric nervous system are functionally segregated into excitatory and inhibitory classes. While acetylcholine and substance P drive smooth muscle contraction, the primary **inhibitory enteric neurotransmitters** are nitric oxide and vasoactive intestinal peptide, which mediate receptive relaxation ahead of advancing food boluses.",
-      "say": "Acetylcholine stimulates gut contraction, while nitric oxide and VIP mediate essential receptive relaxation ahead of food.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Neurotransmitter Class",
-          "Primary Chemical Mediators",
-          "Receptor and Effector",
-          "Motor Action on Gut"
-        ],
-        "rows": [
-          [
-            "Excitatory Motor Neurons",
-            "Acetylcholine, Substance P",
-            "M3 muscarinic receptors (Gq / IP3)",
-            "Smooth muscle contraction and sphincter closure"
-          ],
-          [
-            "Inhibitory Motor Neurons",
-            "Nitric Oxide (NO), VIP, ATP",
-            "Soluble guanylyl cyclase (cGMP) / cAMP",
-            "Smooth muscle receptive relaxation and sphincter opening"
-          ],
-          [
-            "Secretomotor Neurons",
-            "VIP, Acetylcholine",
-            "Submucosal epithelial receptors",
-            "Stimulates active Cl-, HCO3-, and fluid secretion"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Submucosal (Meissner) Plexus",
+     "points": [
+      "Located in submucosal space between circular muscle and mucosa",
+      "Most prominent in small and large intestine; sparse in oesophagus",
+      "Controls local mucosal secretion, absorption, and submucosal blood flow",
+      "Integrates sensory afferents from mucosal luminal chemoreceptors"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI",
-  "src": []
+   }
+  },
+  {
+   "tx": "Situated between the outer longitudinal and inner circular smooth muscle layers, the **myenteric plexus**, or Auerbach plexus, regulates gut motility. Activation of myenteric neurons increases tonic contraction of the gut wall, accelerates the velocity of peristaltic wave conduction, and coordinates receptive relaxation of downstream sphincters.",
+   "say": "The myenteric plexus lies between muscle layers, controlling contraction rhythm, tone, and sphincter relaxation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+    "alt": "Enteric neuromuscular architecture and plexuses",
+    "caption": "Enteric ganglionated nerve plexuses, neuromuscular junctions, and congenital aganglionosis in gut motility."
+   }
+  },
+  {
+   "tx": "Situated within the submucosa, the **submucosal plexus**, or Meissner plexus, senses luminal chemical and mechanical conditions. It regulates localized secretion of digestive enzymes, bicarbonate, and water, while modulating mucosal blood flow through the release of vasoactive intestinal peptide and acetylcholine.",
+   "say": "The submucosal plexus monitors luminal chemistry to regulate mucosal secretion and localized microvascular blood flow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lumen_chem",
+      "label": "Luminal Nutrients and Acid Stimulate Mucosal Enteroendocrine Cells"
+     },
+     {
+      "id": "sensory",
+      "label": "Submucosal Sensory Neurons Release Calcitonin Gene-Related Peptide"
+     },
+     {
+      "id": "secretomotor",
+      "label": "Secretomotor Interneurons Activate Apical CFTR Chloride Channels"
+     },
+     {
+      "id": "secretion",
+      "label": "Electrolyte and Fluid Secretion Hydrates and Neutralizes Intestinal Chyme"
+     }
+    ],
+    "edges": [
+     [
+      "lumen_chem",
+      "sensory"
+     ],
+     [
+      "sensory",
+      "secretomotor"
+     ],
+     [
+      "secretomotor",
+      "secretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rhythmic, spontaneous oscillations in smooth muscle resting membrane potential that dictate gut contraction frequencies are designated **electrical slow waves**. Slow waves do not represent true action potentials themselves, but rather subthreshold depolarizations that bring smooth muscle cells closer to mechanical threshold.",
+   "say": "Slow waves are rhythmic subthreshold depolarizations that establish the baseline electrical rhythm of the digestive tract.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gastrointestinal Segment",
+     "Slow Wave Frequency",
+     "Pacemaker Region",
+     "Contractile Function"
+    ],
+    "rows": [
+     [
+      "Stomach (Body and Antrum)",
+      "~3 cycles per minute (cpm)",
+      "Mid-greater curvature pacemaker",
+      "Trituration and antral retropulsion"
+     ],
+     [
+      "Duodenum",
+      "~12 cycles per minute",
+      "Proximal duodenal pacemaker",
+      "Rapid mixing with bile and pancreatic juice"
+     ],
+     [
+      "Jejunum",
+      "~10 to 11 cycles per minute",
+      "Descending jejunal pacemakers",
+      "Segmental mixing and nutrient absorption"
+     ],
+     [
+      "Ileum",
+      "~8 to 9 cycles per minute",
+      "Terminal ileal pacemakers",
+      "Slow propulsion toward ileocaecal valve"
+     ],
+     [
+      "Colon",
+      "~6 to 8 cycles per minute",
+      "Ascending and transverse colon",
+      "Haustral churning and water reclamation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The specialized physiological pacemakers of the gastrointestinal tract that generate slow waves are the **interstitial cells of Cajal**. Forming an interconnected syncytial network with surrounding smooth muscle cells via gap junctions, these mesenchymal pacemaker cells express transmembrane receptor tyrosine kinase KIT.",
+   "say": "Interstitial cells of Cajal serve as gut pacemakers, generating slow waves through periodic ion fluxes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cajal",
+      "label": "Interstitial Cells of Cajal (ICC) Undergo Spontaneous Intracellular Ca2+ Oscillations"
+     },
+     {
+      "id": "ano1",
+      "label": "Activation of Anoctamin-1 (ANO1) Calcium-Activated Chloride Channels"
+     },
+     {
+      "id": "depol",
+      "label": "Slow Wave Depolarization Spreads via Gap Junctions to Smooth Muscle Syncytium"
+     },
+     {
+      "id": "spike",
+      "label": "Voltage-Gated L-Type Ca2+ Channels Open -> Spike Action Potentials and Contraction"
+     }
+    ],
+    "edges": [
+     [
+      "cajal",
+      "ano1"
+     ],
+     [
+      "ano1",
+      "depol"
+     ],
+     [
+      "depol",
+      "spike"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When slow wave depolarizations exceed minus forty millivolts, voltage-gated L-type calcium channels open, generating **spike potentials and contraction**. Greater amplitude and duration of slow waves increase the frequency of superimposed calcium spike potentials, producing stronger, phasic smooth muscle mechanical contractions.",
+   "say": "Spike potentials occur when slow waves cross the threshold, letting calcium rush in to trigger smooth muscle contraction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Electrical Slow Waves",
+     "points": [
+      "Generated by interstitial cells of Cajal pacemakers",
+      "Subthreshold cyclic fluctuations (-65 to -45 mV)",
+      "Occur constantly whether contractions take place or not",
+      "Dictate maximum possible frequency of contraction"
+     ]
+    },
+    "right": {
+     "title": "Spike Action Potentials",
+     "points": [
+      "True action potentials elicited when slow wave exceeds -40 mV",
+      "Mediated by influx of extracellular Ca2+ through L-type channels",
+      "Directly triggers calmodulin-myosin light chain phosphorylation",
+      "Enhanced by acetylcholine and gastrin; inhibited by adrenaline"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital failure of neural crest cells to migrate into the distal bowel during embryonic development produces congenital megacolon, known as **Hirschsprung disease**. The absence of myenteric and submucosal plexuses in the aganglionic distal rectum prevents receptive relaxation, causing severe functional obstruction and proximal colonic dilation.",
+   "say": "Hirschsprung disease is congenital absence of enteric ganglia in the distal colon, causing severe constipation and megacolon.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-enema-hirschsprung-disease.webp",
+    "alt": "Hirschsprung disease on contrast enema: narrow distal segment with dilated proximal colon.",
+    "caption": "Hirschsprung disease on contrast enema: narrow distal segment with dilated proximal colon. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Neurotransmitters of the enteric nervous system are functionally segregated into excitatory and inhibitory classes. While acetylcholine and substance P drive smooth muscle contraction, the primary **inhibitory enteric neurotransmitters** are nitric oxide and vasoactive intestinal peptide, which mediate receptive relaxation ahead of advancing food boluses.",
+   "say": "Acetylcholine stimulates gut contraction, while nitric oxide and VIP mediate essential receptive relaxation ahead of food.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurotransmitter Class",
+     "Primary Chemical Mediators",
+     "Receptor and Effector",
+     "Motor Action on Gut"
+    ],
+    "rows": [
+     [
+      "Excitatory Motor Neurons",
+      "Acetylcholine, Substance P",
+      "M3 muscarinic receptors (Gq / IP3)",
+      "Smooth muscle contraction and sphincter closure"
+     ],
+     [
+      "Inhibitory Motor Neurons",
+      "Nitric Oxide (NO), VIP, ATP",
+      "Soluble guanylyl cyclase (cGMP) / cAMP",
+      "Smooth muscle receptive relaxation and sphincter opening"
+     ],
+     [
+      "Secretomotor Neurons",
+      "VIP, Acetylcholine",
+      "Submucosal epithelial receptors",
+      "Stimulates active Cl-, HCO3-, and fluid secretion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
 }
