@@ -1,5 +1,5 @@
 /* StewardMD full-screen loader (smd-loader.js). ES5.
- * A 3D ring of discs plus a rotating lesser-known medical fact, for screens that would otherwise be empty while
+ * A 3D ring of beating hearts over a scrolling ECG, plus a rotating lesser-known medical fact, for screens that would otherwise be empty while
  * they load. skeletons.js uses it for "Loading..." placeholders that are alone on a screen; the module loaders
  * (kardia, prep, narke, tokos) use during() while their scripts download.
  * The ring is pure CSS transform and opacity, so it keeps turning while the main thread is parsing scripts.
@@ -99,15 +99,24 @@
   if (typeof window === "undefined") return;
   try { if (localStorage.getItem("smd_loader") === "0") return; } catch (e) {}
 
-  var COUNT = 12, TURN = 3.6, RADIUS = 62;
+  /* The ring turns once in three beats. The ECG moves one complex per beat, and its R wave is under the front heart at 43%. */
+  var COUNT = 12, BEAT = 1.2, TURN = BEAT * 3, RADIUS = 62, RED = "#e8405a";
+  var HEART = "M12 21C5 15.5 2 12 2 8a5 5 0 0 1 10-1.5A5 5 0 0 1 22 8c0 4-3 7.5-10 13z";
+  function mask(svg) { var u = "url(\"data:image/svg+xml," + encodeURIComponent(svg) + "\")"; return "-webkit-mask:" + u + " center/100% 100% no-repeat;mask:" + u + " center/100% 100% no-repeat;"; }
+  var SHARP = mask("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='" + HEART + "'/></svg>");
+  var SOFT = mask("<svg xmlns='http://www.w3.org/2000/svg' viewBox='-5 -5 34 34'><filter id='b'><feGaussianBlur stdDeviation='1.5'/></filter><path filter='url(#b)' d='" + HEART + "'/></svg>");
   var css =
     ".smd-ld{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;box-sizing:border-box;width:100%;min-height:min(62vh,460px);padding:24px;text-align:center;animation:smdLdIn .24s .12s both}" +
+    ".smd-ld-vis{display:flex;flex-direction:column;align-items:center;gap:8px}" +
     ".smd-ld-stage{width:190px;height:84px;perspective:360px;display:flex;align-items:center;justify-content:center}" +
+    ".smd-ld-beat{width:30px;height:30px;transform-style:preserve-3d;animation:smdLdBeat " + BEAT + "s linear infinite}" +
+    ".smd-ld-ecg{width:220px;height:40px;overflow:hidden;color:" + RED + ";-webkit-mask-image:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent);mask-image:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent)}" +
+    ".smd-ld-ecg svg{display:block;animation:smdLdEcg " + BEAT + "s linear infinite}" +
     ".smd-ld-ring{position:relative;width:30px;height:30px;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(0);animation:smdLdSpin " + TURN + "s linear infinite}" +
     ".smd-ld-disc{position:absolute;inset:0;transform-style:preserve-3d}" +
-    ".smd-ld-disc i{position:absolute;inset:0;border-radius:50%;animation:" + TURN + "s linear var(--d) infinite both}" +
-    ".smd-ld-disc .a{background:currentColor;animation-name:smdLdA}" +
-    ".smd-ld-disc .b{inset:-7px;background:radial-gradient(closest-side,currentColor 22%,transparent);animation-name:smdLdB}" +
+    ".smd-ld-disc i{position:absolute;inset:0;animation:" + TURN + "s linear var(--d) infinite both}" +
+    ".smd-ld-disc .a{background:linear-gradient(165deg,#ff7087," + RED + " 55%,#c81e43);" + SHARP + "animation-name:smdLdA}" +
+    ".smd-ld-disc .b{inset:-6px;background:" + RED + ";" + SOFT + "animation-name:smdLdB}" +
     ".smd-ld-fact{margin:0;max-width:21em;font-size:19px;line-height:1.36;font-weight:500;letter-spacing:-.012em;opacity:.86;transition:opacity .26s ease;text-wrap:balance}" +
     ".smd-ld-fact.out{opacity:0}" +
     ".smd-ld-fact span{display:inline-block;animation:smdLdWord .42s cubic-bezier(.23,1,.32,1) both;animation-delay:calc(var(--i)*24ms)}" +
@@ -121,9 +130,11 @@
     /* Keyframe position is the disc's place on the ring: 0% front, 25% side, 50% back. */
     "@keyframes smdLdA{0%,100%{opacity:1}9%,91%{opacity:.8}25%,75%{opacity:.44}38%,62%{opacity:.08}50%{opacity:0}}" +
     "@keyframes smdLdB{0%,12%,88%,100%{opacity:0}25%,75%{opacity:.16}50%{opacity:.34}}" +
+    "@keyframes smdLdBeat{0%,33%,100%{transform:scale(1)}43%{transform:scale(1.1)}52%{transform:scale(1)}60%{transform:scale(1.05)}72%{transform:scale(1)}}" +
+    "@keyframes smdLdEcg{to{transform:translateX(-110px)}}" +
     "@keyframes smdLdWord{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}" +
     /* Paused keeps each disc at its own place on the ring, so the still image is still a ring. */
-    "@media (prefers-reduced-motion:reduce){.smd-ld-ring,.smd-ld-disc i{animation-play-state:paused}.smd-ld-fact span{animation:none}}";
+    "@media (prefers-reduced-motion:reduce){.smd-ld-ring,.smd-ld-beat,.smd-ld-ecg svg,.smd-ld-disc i{animation-play-state:paused}.smd-ld-fact span{animation:none}}";
   var st = document.createElement("style"); st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
 
@@ -131,6 +142,9 @@
   for (var n = 0; n < COUNT; n++) {
     RING += '<div class="smd-ld-disc" style="transform:rotateY(' + (n * 360 / COUNT) + "deg) translateZ(" + RADIUS + "px);--d:" + (-n * TURN / COUNT).toFixed(2) + 's"><i class="a"></i><i class="b"></i></div>';
   }
+
+  var ECG = "M0 24";
+  for (var c = 0; c < 4; c++) ECG += "h18q6-6 12 0h10l3 3 4-22 4 26 3-7h10q10-10 20 0h26";
 
   var deck = [], fact = "", timer = 0;
   function next() {
@@ -156,7 +170,7 @@
   function html() {
     if (!timer) next();
     arm();
-    return '<div class="smd-ld" data-no-skel><div class="smd-ld-stage" aria-hidden="true"><div class="smd-ld-ring">' + RING + '</div></div><p class="smd-ld-fact">' + words(fact) + "</p></div>";
+    return '<div class="smd-ld" data-no-skel><div class="smd-ld-vis" aria-hidden="true"><div class="smd-ld-stage"><div class="smd-ld-beat"><div class="smd-ld-ring">' + RING + '</div></div></div><div class="smd-ld-ecg"><svg width="440" height="40" viewBox="0 0 440 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="' + ECG + '"/></svg></div></div><p class="smd-ld-fact">' + words(fact) + "</p></div>";
   }
   function pageColours() {
     var b = getComputedStyle(document.body), h = getComputedStyle(document.documentElement);
