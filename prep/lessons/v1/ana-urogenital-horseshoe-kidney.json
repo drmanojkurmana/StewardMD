@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-urogenital",
+ "subject": "anatomy",
+ "title": "Horseshoe Kidney, Bladder and Cloacal Partitioning",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During early pelvic development, proximity of bilateral metanephric blastemata can lead to pathological fusion. In ninety-five percent of cases, fusion of the lower poles across the midline creates a **horseshoe kidney**. As the conjoined organ ascends out of the pelvis during the seventh week, its central parenchymal isthmus is trapped beneath the inferior mesenteric artery.",
+   "say": "In the pelvis, proximity of metanephric blastemata can lead to lower-pole fusion, creating a horseshoe kidney. As the conjoined organ ascends during week seven, its midline isthmus is trapped beneath the inferior mesenteric artery.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-renal-anomalies.svg",
+    "alt": "Horseshoe kidney trapped under the inferior mesenteric artery",
+    "caption": "Horseshoe kidney lower pole fusion and arrest beneath the IMA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the inferior mesenteric artery arises from the aorta at the L3 vertebral level, the isthmus of a horseshoe kidney cannot ascend higher, fixing the kidneys permanently in the lower lumbar region. The ureters pass anteriorly over the fibrous or parenchymal **isthmus**, predisposing to urinary stasis, recurrent nephrolithiasis, and hydronephrosis.",
+   "say": "Because the inferior mesenteric artery emerges at L3, the isthmus cannot ascend further, arresting the kidneys in the lower lumbar spine. The ureters cross anterior to the isthmus, predisposing to urinary stasis, stones, and infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Renal Morphology",
+     "points": [
+      "Separate bilateral retroperitoneal organs",
+      "Ascend to T12-L3 vertebral levels",
+      "Hilum faces anteromedially",
+      "Supplied by single L1 renal arteries"
+     ]
+    },
+    "right": {
+     "title": "Horseshoe Kidney Morphology",
+     "points": [
+      "Lower poles united across midline isthmus",
+      "Arrested at L3 under inferior mesenteric artery",
+      "Hilum faces anteriorly (incomplete rotation)",
+      "Multiple anomalous accessory arteries from aorta"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Horseshoe kidney occurs in one in five hundred individuals, displaying strong associations with chromosomal aneuploidies, especially **Turner syndrome** (45,X), where it affects twenty percent of patients, and trisomy 18. Patients have an increased incidence of Wilms tumour, renal pelvic stone formation, and blunt traumatic injury against the lumbar spine.",
+   "say": "Horseshoe kidney affects one in five hundred people, showing strong links with Turner syndrome and trisomy eighteen. Patients face higher risks of Wilms tumour, kidney stones, and fracture of the isthmus against the lumbar spine in blunt trauma.",
+   "vis": {
+    "kind": "flow",
+    "title": "Horseshoe Kidney Pathogenesis",
+    "nodes": [
+     {
+      "id": "fuse",
+      "label": "Lower Metanephric Pole Fusion in Pelvis"
+     },
+     {
+      "id": "asc",
+      "label": "Cranial Ascent toward Lumbar Fossa"
+     },
+     {
+      "id": "trap",
+      "label": "Isthmus Arrested by IMA at L3"
+     },
+     {
+      "id": "rot",
+      "label": "Incomplete Rotation (Anterior Calyces)"
+     }
+    ],
+    "edges": [
+     [
+      "fuse",
+      "asc"
+     ],
+     [
+      "asc",
+      "trap"
+     ],
+     [
+      "trap",
+      "rot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The caudal expansion of the hindgut endoderm forms the **cloaca**, bounded ventrally by the ectodermal cloacal membrane. During weeks four through seven, a coronal wedge of mesenchyme designated the urorectal septum descends toward the cloacal membrane, dividing the cloaca into an anterior primitive urogenital sinus and a posterior anorectal canal.",
+   "say": "The dilated tail end of the hindgut forms the cloaca. Between weeks four and seven, the descending urorectal septum divides the cloaca into an anterior urogenital sinus and a posterior anorectal canal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cloacal Division",
+     "Primary Adult Derivatives",
+     "Embryonic Lining",
+     "Associated Malformation"
+    ],
+    "rows": [
+     [
+      "Vesicourethral Canal",
+      "Urinary bladder, female urethra",
+      "Endoderm",
+      "Bladder exstrophy"
+     ],
+     [
+      "Pelvic Urogenital Sinus",
+      "Prostatic and membranous urethra",
+      "Endoderm",
+      "Posterior urethral valves"
+     ],
+     [
+      "Phallic Sinus",
+      "Spongy penile urethra, vestibule",
+      "Endoderm",
+      "Hypospadias, epispadias"
+     ],
+     [
+      "Anorectal Canal",
+      "Rectum and upper anal canal",
+      "Endoderm",
+      "Imperforate anus, rectourethral fistula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The urorectal septum fuses with the cloacal membrane at the future **perineal body**, splitting the cloacal membrane into an anterior urogenital membrane and a posterior anal membrane. Complete failure of the urorectal septum to partition the cloaca produces persistent cloaca or imperforate anus with a rectovesical or rectovaginal fistula.",
+   "say": "The urorectal septum meets the cloacal membrane at the perineal body, splitting it into an anterior urogenital membrane and a posterior anal membrane. Defective septation causes an imperforate anus with a rectourethral or rectovaginal fistula.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cloacal Septation Sequence",
+    "nodes": [
+     {
+      "id": "cloaca",
+      "label": "Undivided Endodermal Cloaca"
+     },
+     {
+      "id": "sept",
+      "label": "Urorectal Septum Caudal Growth"
+     },
+     {
+      "id": "fuse",
+      "label": "Perineal Body Fusion Point"
+     },
+     {
+      "id": "split",
+      "label": "Anterior Bladder and Posterior Rectum"
+     }
+    ],
+    "edges": [
+     [
+      "cloaca",
+      "sept"
+     ],
+     [
+      "sept",
+      "fuse"
+     ],
+     [
+      "fuse",
+      "split"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **urinary bladder** develops predominantly from the vesicourethral canal of the urogenital sinus, lined by transitional endodermal epithelium. In contrast, the smooth triangular trigone of the bladder derives from the incorporated caudal ends of the mesonephric Wolffian ducts, which are eventually overgrown by endoderm.",
+   "say": "The urinary bladder derives from the urogenital sinus, lined by endodermal transitional epithelium. In contrast, the trigone of the bladder originates from mesodermal mesonephric ducts absorbed into the posterior bladder base.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-bladder-trigone.svg",
+    "alt": "Bladder trigone development and ureteric orifice locations",
+    "caption": "Bladder trigone morphology and mesonephric duct incorporation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extending from the apex of the bladder into the umbilicus is the **urachus**, representing the fibrous remnant of the embryonic allantois. In adult anatomy, the obliterated urachus forms the median umbilical ligament. If the urachus remains completely patent, urine discharges continuously from the umbilicus, known as a patent urachus.",
+   "say": "Extending from the bladder dome to the navel is the urachus, the remnant of the embryonic allantois. In adults, it persists as the median umbilical ligament. If the conduit remains completely open, urine leaks through the umbilicus as a patent urachus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urachal Remnant Defect",
+     "Anatomical Morphology",
+     "Clinical Presentation",
+     "Treatment Approach"
+    ],
+    "rows": [
+     [
+      "Patent Urachus",
+      "Entire lumen remains open to umbilicus",
+      "Continuous clear urine leakage at navel",
+      "Complete surgical excision"
+     ],
+     [
+      "Urachal Cyst",
+      "Intermediate segment patent, ends sealed",
+      "Painful infected midline infra-umbilical mass",
+      "Incision, drainage, delayed excision"
+     ],
+     [
+      "Urachal Sinus",
+      "Distal umbilical end patent, bladder sealed",
+      "Intermittent purulent umbilical drainage",
+      "Excision of sinus track"
+     ],
+     [
+      "Urachal Diverticulum",
+      "Bladder apex end patent, umbilicus sealed",
+      "Asymptomatic pouch on cystoscopy",
+      "Conservative unless recurrent UTI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Partial patency of the urachus produces distinct anomalies: an isolated fluid collection forms a **urachal cyst**, an opening at the umbilicus forms a urachal sinus, and a blind pouch at the bladder dome constitutes a urachal diverticulum. Urachal remnants can undergo malignant transformation in adulthood, giving rise to aggressive urachal adenocarcinomas at the bladder dome.",
+   "say": "Partial patency produces urachal cysts, sinuses, or diverticula. A urachal cyst can become infected, while a sinus discharges pus at the navel. In adults, urachal remnants may develop into adenocarcinoma at the dome of the bladder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Median Ligament",
+     "points": [
+      "Completely fibrous cord",
+      "Spans bladder apex to umbilicus",
+      "Lined by preperitoneal connective tissue",
+      "Zero patent epithelial lumen"
+     ]
+    },
+    "right": {
+     "title": "Urachal Adenocarcinoma",
+     "points": [
+      "Malignancy of mucin-secreting urachal remnant",
+      "Located exclusively at the bladder dome",
+      "Presents with hematuria and umbilical mucin",
+      "Requires partial cystectomy with en bloc resection"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

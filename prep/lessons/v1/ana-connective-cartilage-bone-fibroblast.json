@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-connective-cartilage-bone",
+ "subject": "anatomy",
+ "title": "Connective Tissue Cells, Collagen and Matrix Architecture",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Connective tissue provides mechanical support, metabolic exchange, and immune defense throughout the body, consisting of specialized cells dispersed within an abundant extracellular matrix. The primary resident structural cell is the **fibroblast**, a spindle-shaped mesenchymal cell characterized by an active rough endoplasmic reticulum and prominent Golgi apparatus for matrix synthesis.",
+   "say": "Connective tissue provides mechanical support, metabolic transit, and immune defense, consisting of cells embedded in an extracellular matrix. The chief resident cell is the fibroblast, a spindle-shaped cell possessing rough endoplasmic reticulum to synthesize matrix proteins.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cartilage-types.svg",
+    "alt": "Connective tissue matrix, collagen bundles, and cellular components",
+    "caption": "Connective tissue cellular components and extracellular matrix. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fibroblasts synthesize the precursors of all three connective tissue fibre classes: collagen, reticular, and elastic fibres, as well as ground substance glycosaminoglycans. During tissue injury and wound repair, quiescent fibroblasts transform into contractile **myofibroblasts** expressing alpha-smooth muscle actin, which pull wound edges together to facilitate wound contraction.",
+   "say": "Fibroblasts synthesize collagen, reticular, and elastic fibres along with ground substance proteoglycans. During wound repair, fibroblasts convert into contractile myofibroblasts expressing smooth muscle actin that pull wound margins together.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fibroblastic Functional States",
+    "nodes": [
+     {
+      "id": "stem",
+      "label": "Undifferentiated Mesenchymal Cell"
+     },
+     {
+      "id": "fib",
+      "label": "Quiescent Fibrocyte (Spindle Resting)"
+     },
+     {
+      "id": "act",
+      "label": "Active Fibroblast (Protein Secretion)"
+     },
+     {
+      "id": "myo",
+      "label": "Myofibroblast (Alpha-SMA Wound Contraction)"
+     }
+    ],
+    "edges": [
+     [
+      "stem",
+      "fib"
+     ],
+     [
+      "fib",
+      "act"
+     ],
+     [
+      "act",
+      "myo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune surveillance within connective tissue is maintained by resident and wandering cells. Tissue **macrophages**, or histiocytes, derive from circulating blood monocytes that cross post-capillary venules. Rich in lysosomes, macrophages phagocytose cellular debris and pathogens, function as antigen-presenting cells to helper T lymphocytes, and release cytokines during inflammation.",
+   "say": "Immune defense in connective tissue is guarded by resident cells. Tissue macrophages or histiocytes arise from blood monocytes. Packed with lysosomes, they engulf pathogens, present antigens to T cells, and secrete cytokines to orchestrate inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-red-pulp.svg",
+    "alt": "Reticular tissue stroma, macrophages, and plasma cell morphology",
+    "caption": "Reticular stroma, macrophages, and plasma cells in connective tissues. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Oval sentinel cells packed with coarse basophilic secretory granules are **mast cells**, predominantly stationed along microvascular borders in skin and mucosal linings. Upon cross-linking of surface high-affinity IgE receptors by allergen, mast cells undergo immediate explosive degranulation, releasing preformed histamine, heparin, and eosinophil chemotactic factor to trigger immediate type I hypersensitivity.",
+   "say": "Stationed along microvessels in skin and mucosa, mast cells are packed with dark basophilic granules. When surface IgE antibodies cross-link with allergens, mast cells degranulate, releasing histamine and heparin to trigger type one anaphylactic reactions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mast Cell Characteristics",
+     "points": [
+      "Perivascular localization in loose connective tissue",
+      "Granules contain histamine, heparin, proteases",
+      "Possesses high-affinity Fc-epsilon-RI receptors",
+      "Drives anaphylaxis and urticarial reactions"
+     ]
+    },
+    "right": {
+     "title": "Plasma Cell Characteristics",
+     "points": [
+      "Differentiated antibody-secreting B lymphocytes",
+      "Eccentric nucleus with clock-face chromatin",
+      "Prominent perinuclear Golgi negative halo",
+      "Synthesizes circulating immunoglobulins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Differentiated from antigen-activated B lymphocytes, **plasma cells** serve as dedicated antibody-secreting factories in loose connective tissue, especially within gut lamina propria. Histologically, they feature an eccentric round nucleus exhibiting peripheral clumps of alternating heterochromatin producing a classic clock-face or cartwheel appearance, alongside a prominent pale perinuclear Golgi halo.",
+   "say": "Differentiated from activated B cells, plasma cells are antibody-secreting factories in connective tissue. They exhibit an eccentric nucleus with a clock-face or cartwheel chromatin pattern and a pale perinuclear Golgi halo in deep basophilic cytoplasm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Connective Cell Type",
+     "Embryonic Derivation",
+     "Distinguishing Staining",
+     "Primary Physiological Role"
+    ],
+    "rows": [
+     [
+      "Fibroblast",
+      "Embryonic mesenchyme",
+      "Spindle basophilic cytoplasm",
+      "Fibre and ground substance synthesis"
+     ],
+     [
+      "Macrophage",
+      "Bone marrow monocyte",
+      "Irregular outline, phagosomes",
+      "Phagocytosis and antigen presentation"
+     ],
+     [
+      "Mast Cell",
+      "Marrow hematopoiesis",
+      "Metachromatic toluidine blue granules",
+      "Histamine release, allergic response"
+     ],
+     [
+      "Plasma Cell",
+      "B lymphocyte lineage",
+      "Clock-face nucleus, Golgi halo",
+      "Synthesis of specific immunoglobulins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Collagen is the most abundant protein in the human body, providing high tensile strength. It exists in multiple genetically distinct forms: **type I collagen** is the strongest, forming bone, tendon, ligaments, dermis, and dentin. Type II collagen constructs hyaline and elastic cartilage, type III forms delicate reticular networks, and type IV builds the non-fibrillar meshwork of basement membranes.",
+   "say": "Collagen is the most abundant human protein, providing tensile strength. Type one collagen builds bone, tendons, ligaments, and skin dermis. Type two builds cartilage, type three forms delicate reticular meshworks, and type four creates basement membrane lattices.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Collagen Class",
+     "Structural Form",
+     "Primary Tissue Locations",
+     "Genetic Pathology"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Dense parallel fibrils",
+      "Bone, tendon, ligament, skin dermis",
+      "Osteogenesis imperfecta"
+     ],
+     [
+      "Type II",
+      "Delicate loose fibrils",
+      "Hyaline cartilage, vitreous body",
+      "Achondrogenesis, Stickler syndrome"
+     ],
+     [
+      "Type III",
+      "Argyrophilic reticular mesh",
+      "Liver, spleen, lymph nodes, vessels",
+      "Vascular Ehlers-Danlos (rupture)"
+     ],
+     [
+      "Type IV",
+      "Two-dimensional sheet lattice",
+      "Basement membrane basal lamina",
+      "Alport syndrome, Goodpasture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delicate branching frameworks supporting cellular organs like the liver, spleen, and lymph nodes are formed by **reticular fibres**, composed of thin fibrils of type III collagen. Because they bind silver salts avidly, reticular fibres stain black on silver impregnation (argyrophilic) and positive on periodic acid-Schiff stain, produced by specialized reticular cells.",
+   "say": "Delicate branching networks supporting lymphoid and hematopoietic organs are reticular fibres, made of type three collagen. Avidly binding silver salts, they stain black on silver stains and form supportive scaffolds in lymph nodes and spleen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reticular Fibres (Type III)",
+     "points": [
+      "Delicate argyrophilic branching framework",
+      "Stains black with silver impregnation",
+      "Forms internal stroma of liver and spleen",
+      "First collagen laid down in healing wounds"
+     ]
+    },
+    "right": {
+     "title": "Elastic Fibres (Elastin)",
+     "points": [
+      "Yellow branching fibres rich in elastin",
+      "Stains brown-black with Verhoeff-Van Gieson",
+      "Forms lamellae of aorta and elastic arteries",
+      "Defective fibrillin-1 causes Marfan syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extracellular fibres and cells are immersed within a viscous, transparent **ground substance** featuring a high water content. Dominated by glycosaminoglycans (hyaluronic acid, chondroitin sulfate), proteoglycans (aggrecan), and multiadhesive glycoproteins (fibronectin, laminin), this gel acts as a molecular sieve, resists compressive forces, and binds growth factors to guide cell migration.",
+   "say": "Connective tissue cells and fibres are suspended in a hydrated ground substance. Dominated by hyaluronic acid, proteoglycans, and adhesive glycoproteins like fibronectin, this gelatinous matrix cushions compressive shocks and guides cell migration.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ground Substance Organization",
+    "nodes": [
+     {
+      "id": "hyal",
+      "label": "Central Hyaluronic Acid Backbone"
+     },
+     {
+      "id": "core",
+      "label": "Proteoglycan Core Proteins (Aggrecan)"
+     },
+     {
+      "id": "gag",
+      "label": "Negatively Charged GAG Chains (Chondroitin)"
+     },
+     {
+      "id": "hydr",
+      "label": "Hydrated Polyanionic Gel Resisting Compression"
+     }
+    ],
+    "edges": [
+     [
+      "hyal",
+      "core"
+     ],
+     [
+      "core",
+      "gag"
+     ],
+     [
+      "gag",
+      "hydr"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-urogenital",
+ "subject": "anatomy",
+ "title": "Embryonic Renal Systems and Ureteric Bud Induction",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The human urinary system develops from intermediate mesoderm, which forms three successive bilateral excretory systems displaying cranial-to-caudal succession during intrauterine life: the pronephros, mesonephros, and metanephros. The **pronephros** appears early in the fourth week as nonfunctional vestigial nephrotomes in the cervical region, regressing completely by day twenty-five.",
+   "say": "The urinary system develops from intermediate mesoderm in three successive waves: the pronephros, mesonephros, and metanephros. The pronephros appears in week four as nonfunctional cervical clusters that degenerate completely by day twenty-five.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-kidney-development.svg",
+    "alt": "Pronephros, mesonephros, and metanephros succession with ureteric bud",
+    "caption": "Sequential development of pronephric, mesonephric, and metanephric systems. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As the pronephros regresses, the **mesonephros** forms in the thoracolumbar intermediate mesoderm. It features functional glomeruli and tubules that produce small amounts of urine between weeks six and ten before degenerating. Its excretory conduit, the mesonephric (Wolffian) duct, persists in males to form the epididymis, ductus deferens, and seminal vesicles.",
+   "say": "As the pronephros regresses, the mesonephros forms in the thoracolumbar region. It possesses functional glomeruli that filter urine temporarily. In males, its drainage duct, the Wolffian duct, persists to build the epididymis, vas deferens, and seminal vesicles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Renal System",
+     "Timing of Activity",
+     "Anatomical Level",
+     "Ultimate Fetal Fate"
+    ],
+    "rows": [
+     [
+      "Pronephros",
+      "Week 4 (transient)",
+      "Cervical segments (7 to 10)",
+      "Completely degenerates"
+     ],
+     [
+      "Mesonephros",
+      "Weeks 6 to 10 (functional)",
+      "Thoracic to lumbar segments",
+      "Wolffian duct persists in males"
+     ],
+     [
+      "Metanephros",
+      "Week 5 onward (definitive)",
+      "Sacral intermediate mesoderm",
+      "Forms adult functioning kidney"
+     ],
+     [
+      "Ureteric Bud",
+      "Sprouts in late week 4",
+      "Outgrowth of lower Wolffian duct",
+      "Forms entire urinary collecting system"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive adult kidney develops from the third system, designated the **metanephros**, originating in the sacral intermediate mesoderm during the fifth week. Development of the metanephros requires reciprocal induction between two embryological primordia: the epithelial ureteric bud and the surrounding metanephric blastema.",
+   "say": "The adult kidney develops from the metanephros in the sacral region during week five. Metanephric organogenesis requires reciprocal molecular induction between two tissue components: the epithelial ureteric bud and the surrounding metanephric blastema.",
+   "vis": {
+    "kind": "flow",
+    "title": "Reciprocal Renal Induction",
+    "nodes": [
+     {
+      "id": "bud",
+      "label": "Ureteric Bud (Collecting System)"
+     },
+     {
+      "id": "ind",
+      "label": "Reciprocal GDNF-RET Signaling"
+     },
+     {
+      "id": "blas",
+      "label": "Metanephric Blastema (Excretory Nephrons)"
+     },
+     {
+      "id": "kid",
+      "label": "Functional Nephron-Collecting Fusion"
+     }
+    ],
+    "edges": [
+     [
+      "bud",
+      "ind"
+     ],
+     [
+      "blas",
+      "ind"
+     ],
+     [
+      "ind",
+      "kid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ureteric bud** arises as a diverticulum from the posterior wall of the mesonephric duct near its entrance into the cloaca. Penetrating the metanephric tissue cap, it undergoes repeated dichotomous branching to form the entire collecting system: the ureter, renal pelvis, major calyces, minor calyces, and one to three million collecting ducts.",
+   "say": "The ureteric bud sprouts from the mesonephric duct near the cloaca. Penetrating the metanephric cap, it branches repeatedly to construct the collecting system: ureter, renal pelvis, major and minor calyces, and millions of collecting tubules.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ureteric Bud Derivatives",
+     "points": [
+      "Ureter and renal pelvis",
+      "Major and minor renal calyces",
+      "Collecting ducts and collecting tubules",
+      "Induces nephrogenesis in blastema"
+     ]
+    },
+    "right": {
+     "title": "Metanephric Blastema Derivatives",
+     "points": [
+      "Bowman glomerular capsule",
+      "Proximal convoluted tubule",
+      "Loop of Henle (descending and ascending)",
+      "Distal convoluted tubule"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **metanephric blastema** represents the condensed sacral intermediate mesenchyme surrounding the branching ureteric bud tips. Under induction from the bud ampullae, blastemal cells undergo mesenchymal-to-epithelial transition, forming renal vesicles that elongate into S-shaped nephron tubules to create Bowman capsules, proximal tubules, loops of Henle, and distal convoluted tubules.",
+   "say": "The metanephric blastema consists of sacral intermediate mesoderm surrounding the bud tips. Stimulated by the bud, these cells convert into epithelial nephron tubules, creating Bowman capsules, proximal convoluted tubules, loops of Henle, and distal tubules.",
+   "vis": {
+    "kind": "flow",
+    "title": "Nephron Differentiation Steps",
+    "nodes": [
+     {
+      "id": "mes",
+      "label": "Mesenchymal Metanephric Cap"
+     },
+     {
+      "id": "ves",
+      "label": "Epithelial Renal Vesicle"
+     },
+     {
+      "id": "stub",
+      "label": "S-Shaped Tubule Formation"
+     },
+     {
+      "id": "glom",
+      "label": "Capillary Ingrowth to Glomerulus"
+     }
+    ],
+    "edges": [
+     [
+      "mes",
+      "ves"
+     ],
+     [
+      "ves",
+      "stub"
+     ],
+     [
+      "stub",
+      "glom"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the sixth to ninth weeks, the developing kidney undergoes **renal ascent** from its initial pelvic position in front of the sacrum up into the lumbar retroperitoneal fossa immediately beneath the suprarenal glands. This cranial ascent is driven by longitudinal elongation of the fetal torso and unbending of the caudal body curvature.",
+   "say": "Between weeks six and nine, the kidney undergoes cranial ascent from the pelvis in front of the sacrum to the upper lumbar fossa below the adrenal glands. This migration is driven by bodily elongation and uncurling of the fetal spine.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-renal-anomalies.svg",
+    "alt": "Renal ascent, pelvic kidney, and anomalous renal vessels",
+    "caption": "Renal ascent from pelvic origin and arterial laddering. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As the kidney ascends, its arterial supply changes continuously through a succession of transient lateral splanchnic arteries sprouting from the aorta. Lower embryonic vessels degenerate as higher ones form. Persistence of lower embryonic vessels produces **accessory renal arteries**, which typically enter the lower pole and can kink the ureteropelvic junction.",
+   "say": "During ascent, the kidney receives blood from temporary lateral branches of the aorta. Lower vessels degenerate as higher ones form. Persistent embryonic vessels become accessory renal arteries, which enter the lower pole and can obstruct the ureter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular State",
+     "Anatomical Vessel Origin",
+     "Perfusion Territory",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Pelvic Stage",
+      "Common iliac or middle sacral artery",
+      "Sacral metanephros",
+      "Supplies congenital pelvic kidney"
+     ],
+     [
+      "Ascending Stage",
+      "Successive aortic ladder branches",
+      "Migrating kidney parenchyma",
+      "Vessels normally involute"
+     ],
+     [
+      "Definitive Stage",
+      "Single renal artery at L1-L2 level",
+      "Adult renal parenchyma",
+      "Main bilateral supply"
+     ],
+     [
+      "Accessory Renal Artery",
+      "Persistent lower aortic branch (25%)",
+      "Lower pole of adult kidney",
+      "Ureteropelvic junction hydronephrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If a kidney fails to ascend out of the true pelvis, it remains as a congenital **pelvic kidney**, lying adjacent to the common iliac artery and anterior to the sacral promontory. Bilateral renal agenesis occurs when ureteric buds fail to develop, leading to lack of fetal urine production, severe oligohydramnios, and fatal Potter sequence.",
+   "say": "Failure of ascent leaves a congenital pelvic kidney near the common iliac artery. Bilateral renal agenesis occurs when ureteric buds fail to sprout, causing severe oligohydramnios, pulmonary hypoplasia, and fatal Potter sequence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pelvic Kidney Findings",
+     "points": [
+      "Kidney lodged in true pelvis near sacrum",
+      "Supplied by iliac or lower aortic branches",
+      "Possesses short ureter entering bladder normally",
+      "Normal renal function in absence of obstruction"
+     ]
+    },
+    "right": {
+     "title": "Renal Agenesis / Potter Sequence",
+     "points": [
+      "Complete failure of ureteric bud induction",
+      "Absent fetal urine causes severe oligohydramnios",
+      "Severe pulmonary hypoplasia is cause of death",
+      "Facial dysmorphism with flattened nose and low ears"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
