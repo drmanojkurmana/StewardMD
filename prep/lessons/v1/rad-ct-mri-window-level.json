@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-ct-mri-window-level",
+ "subject": "radiology",
+ "module": "rad-ct-mri",
+ "title": "CT Window Level, HRCT and T1 T2 MRI Weighting",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Window level picks the centre",
+   "tx": "**Window level** is the Hounsfield unit value placed at the middle grey of the display. Tissue at the level appears mid grey, tissue well above it appears white and tissue well below it appears black. A brain window centres near 40 HU because grey matter sits near 37 HU and white matter near 30 HU, so a narrow band around those values separates them.",
+   "say": "Window level is the Hounsfield value placed at middle grey on the screen. Tissue exactly at the level looks mid grey, denser tissue looks whiter and less dense tissue looks darker. Brain windows centre near forty units because grey and white matter lie close to that value, letting a narrow band split them apart.",
+   "vis": {"kind": "table", "cols": ["Window", "Level (HU)", "Width (HU)"], "rows": [["Brain", "40", "80"], ["Stroke", "32", "8"], ["Bone", "400", "1800"], ["Lung", "-600", "1500"], ["Mediastinum", "40", "350"]]}
+  },
+  {
+   "title": "Window width sets contrast",
+   "tx": "**Window width** is the range of Hounsfield values spread across the visible grey scale. Values above the top of the range show pure white and values below the bottom show pure black. A narrow width of 8 HU in a stroke window makes a 3 HU density difference visible, while a lung width of 1500 HU sacrifices soft tissue detail to show aerated parenchyma.",
+   "say": "Window width is the range of values stretched over the grey scale. Anything above the top prints pure white and anything below the bottom prints pure black. A stroke window only eight units wide reveals a three unit density gap, whereas a lung window fifteen hundred units wide trades soft tissue detail for aerated lung.",
+   "vis": {"kind": "compare", "left": {"title": "Narrow width", "points": ["High contrast between close densities", "Stroke window width 8 HU", "Brain window width 80 HU", "Outside range clips to black or white"]}, "right": {"title": "Wide width", "points": ["Low contrast, many densities shown", "Bone window width 1800 HU", "Lung window width 1500 HU", "Subtle density gaps disappear"]}}
+  },
+  {
+   "title": "Reading brain windows in stroke",
+   "tx": "A dedicated **stroke window** uses level 32 HU and width 8 HU to stretch the tiny density gap between normal cortex and early infarcted cortex. Early ischaemia lowers tissue density by only 1 to 3 HU through cytotoxic oedema. On a standard brain window that change is invisible, so the narrow stroke window is the setting that reveals the insular ribbon loss.",
+   "say": "A dedicated stroke window uses level thirty two and width eight to stretch the tiny gap between normal and early infarcted cortex. Early ischaemia lowers density by only one to three units through cytotoxic oedema. That change stays invisible on a standard brain window, so the narrow setting is what reveals loss of the insular ribbon.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Cytotoxic oedema"}, {"id": "b", "label": "Density falls 1 to 3 HU"}, {"id": "c", "label": "Stroke window width 8"}, {"id": "d", "label": "Insular ribbon loss seen"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "HRCT technique",
+   "tx": "**High resolution CT** of the lung uses thin sections of 1 to 1.5 mm, a high spatial frequency reconstruction algorithm and a small field of view targeted at one lung. It does not use intravenous contrast for routine interstitial lung disease assessment. Prone images separate dependent atelectasis from early fibrosis, and expiratory images expose air trapping in small airways disease.",
+   "say": "High resolution lung scanning uses slices only one to one point five millimetres thick, a sharp reconstruction algorithm and a small field targeted at one lung. Routine interstitial disease work needs no intravenous contrast. Prone views separate dependent collapse from early fibrosis, while expiratory views expose air trapping from small airways disease.",
+   "vis": {"kind": "table", "cols": ["HRCT element", "Setting", "Purpose"], "rows": [["Slice thickness", "1 to 1.5 mm", "Sharp lobular detail"], ["Algorithm", "High spatial frequency", "Edge enhancement"], ["Prone scan", "Posterior basal segments", "Exclude dependent collapse"], ["Expiratory scan", "End expiration", "Detect air trapping"]]}
+  },
+  {
+   "title": "HRCT secondary lobule",
+   "tx": "The **secondary pulmonary lobule** is the smallest lung unit bounded by connective tissue septa, measuring 1 to 2.5 cm across. Each lobule has a centrilobular bronchiole and pulmonary artery branch at its core and pulmonary veins plus lymphatics inside its septa. Interlobular septal thickening, centrilobular nodules and subpleural sparing are described by their position inside this lobule on high resolution images.",
+   "say": "The secondary pulmonary lobule is the smallest lung unit walled by connective tissue septa, measuring one to two point five centimetres. A bronchiole and artery branch sit at its core, while veins and lymphatics run in its septa. Septal thickening, centrilobular nodules and subpleural sparing are all localised by their position inside this lobule.",
+   "vis": {"kind": "compare", "left": {"title": "Lobule core", "points": ["Centrilobular bronchiole", "Pulmonary artery branch", "Centrilobular nodules sit here", "Tree in bud fills the core"]}, "right": {"title": "Lobule septa", "points": ["Pulmonary veins", "Lymphatics", "Septal thickening outlines lobule", "Kerley B lines are thick septa"]}}
+  },
+  {
+   "title": "T1 weighted MRI",
+   "tx": "On **T1 weighted** images fat appears bright, simple fluid appears dark and cortical bone gives almost no signal. Gadolinium based contrast shortens T1 relaxation, so enhancing tumour, infection and vessels turn bright after injection. Fat suppressed T1 sequences remove the competing fat signal, which makes gadolinium enhancement in the orbit, marrow and abdomen much easier to confirm.",
+   "say": "On T1 weighted images fat looks bright, simple fluid looks dark and cortical bone gives almost no signal. Gadolinium shortens T1 relaxation, so enhancing tumour, infection and vessels turn bright after injection. Fat suppressed T1 removes the competing fat brightness, which makes enhancement in the orbit, marrow and abdomen far easier to confirm.",
+   "vis": {"kind": "table", "cols": ["Tissue", "T1 signal", "T2 signal"], "rows": [["Fat", "Bright", "Intermediate bright"], ["Simple fluid", "Dark", "Bright"], ["Cortical bone", "Dark", "Dark"], ["Gadolinium tissue", "Bright", "Variable"]]}
+  },
+  {
+   "title": "T2 weighted MRI",
+   "tx": "On **T2 weighted** images water rich tissue appears bright, so cerebrospinal fluid, oedema, cysts and most tumours stand out against darker brain. Fat stays fairly bright on fast spin echo T2, unlike older spin echo sequences. Air, cortical bone, calcification and fast flowing blood appear dark on both T1 and T2, a useful check before calling a black focus a vessel flow void.",
+   "say": "On T2 weighted images water rich tissue looks bright, so spinal fluid, oedema, cysts and most tumours stand out against darker brain. Fat stays fairly bright on fast spin echo T2. Air, cortical bone, calcification and fast flowing blood look dark on both weightings, a handy check before calling a black focus a flow void.",
+   "vis": {"kind": "compare", "left": {"title": "Bright on T2", "points": ["Cerebrospinal fluid", "Oedema and cysts", "Most tumours", "Slow flowing blood"]}, "right": {"title": "Dark on both", "points": ["Air", "Cortical bone", "Calcification", "Fast blood flow void"]}}
+  },
+  {
+   "title": "Choosing the window at the console",
+   "tx": "**Display windowing** never changes the stored CT data, only the grey map applied to it. The same head scan is reviewed on brain, stroke, subdural and bone windows because each window answers a different question. A subdural window at level 60 and width 130 lifts a thin acute subdural collection away from the bright inner table, which a standard brain window merges into one white band.",
+   "say": "Display windowing never changes the stored scan data, only the grey map applied to it. One head scan is reviewed on brain, stroke, subdural and bone windows because each setting answers a different question. A subdural window at level sixty and width one hundred thirty lifts a thin acute collection away from the bright inner table.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "One head CT dataset"}, {"id": "b", "label": "Brain window 40/80"}, {"id": "c", "label": "Bone window 400/1800"}, {"id": "d", "label": "Different questions answered"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  }
+ ]
+}

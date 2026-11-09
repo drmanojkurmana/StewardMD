@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-silhouette-sign",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Silhouette Sign, Air Bronchogram and Cardiothoracic Ratio",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Same density plus contact erases borders",
+   "tx": "**Silhouette sign** is the loss of a normal border when two structures of the same radiographic density touch each other. The heart and consolidated lung are both soft tissue density, so pneumonia against the heart erases that heart border on the frontal film. A lesion separated from the heart by aerated lung keeps the border sharp, placing the lesion in a different lobe or the mediastinum.",
+   "say": "Silhouette sign is the loss of a normal border when two structures of the same density touch each other. Heart and consolidated lung are both soft tissue density, so pneumonia against the heart erases that border. A lesion separated from the heart by aerated lung keeps the border sharp, placing it in a different lobe.",
+   "vis": {"kind": "image", "src": "clinix/media/skills/skill-ix-paed-cxr_pneumonia_collapse.webp", "alt": "Chest radiographs comparing lobar consolidation and collapse with silhouette localisation diagrams.", "caption": "Chest radiographs comparing consolidation and collapse with silhouette localisation. Illustration: StewardMD."}
+  },
+  {
+   "title": "Right middle lobe erases right heart border",
+   "tx": "**Right middle lobe** consolidation touches the right atrial border, so its pneumonia wipes out the right heart edge while the right diaphragm stays visible. Left lower lobe consolidation instead erases the left hemidiaphragm outline and leaves the heart border intact. Lingular consolidation erases the left heart border. Matching the erased border to the structure it touches names the lobe without a lateral film.",
+   "say": "Right middle lobe consolidation touches the right atrial border, so its pneumonia wipes out the right heart edge while the diaphragm stays visible. Left lower lobe consolidation erases the diaphragm outline instead. Lingular consolidation erases the left heart border. Matching the erased border to the structure it touches names the lobe.",
+   "vis": {"kind": "table", "cols": ["Border lost", "Lobe consolidated", "Border kept"], "rows": [["Right heart border", "Right middle lobe", "Right diaphragm"], ["Right diaphragm", "Right lower lobe", "Right heart border"], ["Left heart border", "Lingula", "Left diaphragm"], ["Left diaphragm", "Left lower lobe", "Left heart border"]]}
+  },
+  {
+   "title": "Diaphragm domes and the lateral film",
+   "tx": "**Hemidiaphragm silhouette** also separates left from right on the lateral view. The heart touches the left hemidiaphragm and stops its outline short of the front, while the right dome is traced fully from front to back. The stomach bubble sits directly under the left dome, and the right dome peak usually rides higher. These three checks rescue laterality when markers are missing.",
+   "say": "Hemidiaphragm silhouette also separates left from right on the lateral view. The heart touches the left dome and stops its outline short of the front, while the right dome is traced fully. The stomach bubble sits under the left dome, and the right peak usually rides higher. These checks rescue laterality when markers are missing.",
+   "vis": {"kind": "compare", "left": {"title": "Left dome clues", "points": ["Outline stops at the heart", "Stomach bubble below", "Ends short of anterior chest", "Lies slightly lower at peak"]}, "right": {"title": "Right dome clues", "points": ["Traced front to back", "Liver density below", "Reaches anterior chest wall", "Peak usually higher"]}}
+  },
+  {
+   "title": "Hilum overlay sign",
+   "tx": "**Hilum overlay sign** applies the same density logic at the hilum. If hilar vessels vanish inside a mass shadow, the mass touches them and sits in the hilum itself. If vessels stay visible through the shadow, the mass lies in front of or behind the hilum, most often in the anterior mediastinum or descending aorta. One frontal film then sorts the compartment before cross sectional imaging.",
+   "say": "Hilum overlay sign applies the same density logic at the hilum. If hilar vessels vanish inside a mass shadow, the mass touches them and sits in the hilum itself. If vessels stay visible through the shadow, the mass lies in front or behind. One frontal film then sorts the compartment before cross sectional imaging.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Mass shadow at hilum"}, {"id": "b", "label": "Vessels visible through it"}, {"id": "c", "label": "Mass in front or behind"}, {"id": "d", "label": "Vessels lost: hilar mass"}], "edges": [["a", "b"], ["b", "c"], ["a", "d"]]}
+  },
+  {
+   "title": "Air bronchogram",
+   "tx": "**Air bronchogram** shows dark branching airways inside white consolidated lung because alveoli around them have filled with fluid, pus or cells while bronchi stay air filled. It proves the opacity is intrapulmonary airspace disease rather than a pleural collection, which pushes bronchi aside instead of outlining them. Absence of an air bronchogram in a complete lobe opacity favours obstructive collapse with a blocked bronchus.",
+   "say": "Air bronchogram shows dark branching airways inside white consolidated lung because alveoli around them filled with fluid, pus or cells while bronchi stay air filled. It proves the opacity is airspace disease rather than a pleural collection, which pushes bronchi aside. Absence in a complete lobe opacity favours obstructive collapse with a blocked bronchus.",
+   "vis": {"kind": "compare", "left": {"title": "Air bronchogram present", "points": ["Bronchi outlined dark", "Alveoli filled around them", "Consolidation confirmed", "Pneumonia pattern"]}, "right": {"title": "Air bronchogram absent", "points": ["Bronchus blocked or pushed", "Obstructive collapse likely", "Pleural fluid displaces lung", "Check for central tumour"]}}
+  },
+  {
+   "title": "Cardiothoracic ratio",
+   "tx": "**Cardiothoracic ratio** divides the widest cardiac diameter by the widest internal chest diameter on an erect posteroanterior film. Above 0.5 in an adult means cardiomegaly, with 15.5 cm as a rough absolute upper heart width. An anteroposterior supine film magnifies the heart and fakes enlargement, so the ratio is only trusted on a well inspired erect posteroanterior view with the scapulae rotated out.",
+   "say": "Cardiothoracic ratio divides the widest cardiac diameter by the widest internal chest diameter on an erect posteroanterior film. Above zero point five in an adult means an enlarged heart. A supine anteroposterior film magnifies the heart and fakes enlargement, so the ratio is trusted only on a well inspired erect view.",
+   "vis": {"kind": "table", "cols": ["Measurement", "Normal", "Abnormal"], "rows": [["Cardiothoracic ratio", "Up to 0.5", "Above 0.5 cardiomegaly"], ["Absolute heart width", "Up to 15.5 cm", "Above suggests enlargement"], ["Film type trusted", "Erect posteroanterior", "Supine AP magnifies heart"], ["Inspiration", "9 to 10 posterior ribs", "Poor effort fakes size"]]}
+  },
+  {
+   "title": "Cervicothoracic sign",
+   "tx": "**Cervicothoracic sign** uses the clavicles to place a mediastinal mass. The anterior mediastinum ends at the clavicles, so a mass whose outline survives above the clavicles must sit behind, in the posterior mediastinum or neck. A thyroid goitre sinking into the chest keeps a visible upper border above the clavicles for exactly this reason, separating it from an anterior mediastinal tumour whose top fades at the clavicles.",
+   "say": "Cervicothoracic sign uses the clavicles to place a mediastinal mass. The anterior mediastinum ends at the clavicles, so a mass whose outline survives above them must sit behind. A sinking thyroid goitre keeps a visible upper border above the clavicles, separating it from an anterior tumour whose top fades at the clavicles.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Mass outline above clavicles"}, {"id": "b", "label": "Not anterior mediastinum"}, {"id": "c", "label": "Posterior or neck origin"}, {"id": "d", "label": "Goitre fits the pattern"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Collapse shifts structures toward it",
+   "tx": "**Lobar collapse** loses volume, so the trachea, mediastinum and diaphragm shift toward the white lobe, the opposite pattern to a large effusion pushing them away. The pictured comparison pairs consolidation, which keeps volume and outlines bronchi, with collapse pulling fissures and hilum out of place. Raised hemidiaphragm, rib crowding and compensatory overinflation of the remaining lung complete the collapse checklist.",
+   "say": "Lobar collapse loses volume, so trachea, mediastinum and diaphragm shift toward the white lobe, opposite to a large effusion pushing them away. The pictured comparison pairs consolidation, which keeps volume, with collapse pulling fissures and hilum out of place. Raised diaphragm, rib crowding and overinflation of remaining lung complete the checklist.",
+   "vis": {"kind": "image", "src": "clinix/media/skills/skill-ix-paed-cxr_pneumonia_collapse.webp", "alt": "Chest radiographs contrasting consolidation with collapse showing volume loss and mediastinal shift.", "caption": "Consolidation versus collapse volume signs on chest radiographs. Illustration: StewardMD."}
+  }
+ ]
+}
