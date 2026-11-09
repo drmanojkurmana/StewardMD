@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-gram-positive-bacilli",
+  "subject": "microbiology",
+  "title": "Metachromatic Granules and Tellurite Medium in Diphtheria Diagnosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Metachromatic granules** are polyphosphate energy stores (volutin, Babes Ernst bodies) packed at Corynebacterium poles, staining reddish purple with toluidine blue and bluish black in Albert stain because the dye changes colour on the polymer (metachromasia). Richest on Loeffler serum medium, scarce on ordinary agar, they are a culture medium effect examiners love.",
+      "say": "Granules are phosphate batteries that change dye colour; serum medium fattens them for the stain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Granule biology",
+          "points": [
+            "Polyphosphate polymer stores",
+            "Polar location in dividing bacilli",
+            "Energy and phosphate reserve",
+            "Also in Spirillum volutans namesake"
+          ]
+        },
+        "right": {
+          "title": "Granule display",
+          "points": [
+            "Albert: black granules, green bodies",
+            "Neisser: granules brown black, bodies yellow",
+            "Ponder: granules dark blue",
+            "Loeffler slope maximises granule formation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Potassium tellurite medium** selects corynebacteria by tellurite tolerance and reads reduction to black metallic tellurium (grey black colonies), suppressing throat commensals, with biotype traditions (mitis smooth, gravis daisy head rough, intermedius small) once guiding epidemiology. Cystine tellurite blood agar is its modern blood enriched form.",
+      "say": "Tellurite blackens diphtheria colonies while silencing the throat crowd.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tellurite design",
+          "points": [
+            "0.04 percent potassium tellurite selective",
+            "Colonies grey black in 24 to 48 hours",
+            "Biotype colony morphology heritage",
+            "Hoyle and cystine tellurite variants"
+          ]
+        },
+        "right": {
+          "title": "Tellurite cautions",
+          "points": [
+            "Commensal corynebacteria also grow dark",
+            "Staphylococci may reduce weakly",
+            "Confirm Albert, catalase and toxigenicity",
+            "Incubation 48 hours before negative"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Biotypes gravis, mitis and intermedius** divided diphtheria by colony, haemolysis and fermentation (gravis starch and glycogen fermenter, severe reputation), now replaced by ribotyping and genome sequencing for outbreaks, belfanti split taxonomically. Historical severity associations were strain toxin and setting, not biotype destiny.",
+      "say": "Gravis sounded graver; genome typing replaced colony morphology for outbreak truth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biotype heritage",
+          "points": [
+            "Gravis: rough daisy head, starch positive",
+            "Mitis: smooth, haemolytic leaning",
+            "Intermedius: tiny colonies, lipid demanding",
+            "Belfanti: nitrate negative separate species now"
+          ]
+        },
+        "right": {
+          "title": "Modern typing",
+          "points": [
+            "Whole genome clusters and tox alleles",
+            "MLST and ribotype lineages",
+            "Vaccine era strain shifts tracked",
+            "Biotype retained in examinations, not reports"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Specimen pathway for suspected diphtheria** swabs beneath the membrane edge and throat plus nose, plated to blood, Loeffler and tellurite, alerting the laboratory by telephone because routine throat benches discard coryneforms, with toxin PCR at reference laboratories same day where systems allow.",
+      "say": "Swab under the membrane and telephone the bench, or diphtheroids get discarded as flora.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "swab",
+            "label": "Swabs from membrane edge, nose and throat"
+          },
+          {
+            "id": "phone",
+            "label": "Laboratory alerted (diphtheria suspected)"
+          },
+          {
+            "id": "plate",
+            "label": "Blood, Loeffler and tellurite plates"
+          },
+          {
+            "id": "tox",
+            "label": "Reference tox PCR and Elek confirmation"
+          }
+        ],
+        "edges": [
+          [
+            "swab",
+            "phone"
+          ],
+          [
+            "phone",
+            "plate"
+          ],
+          [
+            "plate",
+            "tox"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Iron and toxin regulation** (DtxR repressor binding tox promoter when iron plentiful) explains why diphtheria toxin pours under iron starvation in the throat and why laboratory toxin production needs low iron media (Elek conditions). Low iron in tissue is the signal the phage gene evolved to obey.",
+      "say": "Iron plenty, toxin off; iron scarce, toxin on: DtxR is diphtheria's thermostat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regulation mechanics",
+          "points": [
+            "DtxR iron complex represses tox",
+            "Iron uptake genes co regulated (siderophores)",
+            "Elek media iron limited deliberately",
+            "Host nutritional immunity starves iron (calprotectin kin)"
+          ]
+        },
+        "right": {
+          "title": "Bench consequences",
+          "points": [
+            "Toxin yield varies by strain and medium",
+            "PCR detects gene, Elek detects expression",
+            "Non toxigenic tox bearing strains (expression broken) exist",
+            "Reporting distinguishes gene from toxin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Non toxigenic diphtheriae** still cause invasive disease (endocarditis, bacteraemia, especially in disadvantaged and injecting populations) and throat carriage, and can acquire phage in situ theoretically, so species identification in sterile sites matters even where Elek is negative. Toxin negativity closes one question, not the isolate's file.",
+      "say": "No toxin does not mean no disease: non toxigenic strains still invade valves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non toxigenic disease",
+          "points": [
+            "Endocarditis and bacteraemia case series",
+            "Cutaneous carriage reservoirs",
+            "Outbreaks in homeless and injecting networks",
+            "Phage conversion theoretical concern"
+          ]
+        },
+        "right": {
+          "title": "Laboratory posture",
+          "points": [
+            "Speciate sterile site corynebacteria",
+            "Susceptibility test invasive isolates",
+            "Reference referral by protocol",
+            "Carriage treatment in defined outbreaks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Differential morphology** sorts throat bacilli: Klebsiella Loeffler bacillus heritage name for diphtheriae itself, diphtheroids shorter and granule poor, streptococci cocci obviously, Vincent fusospirochaetes in ulcerative tonsillitis, and Candida pseudomembranes that wipe off (diphtheria membrane bleeds). Bedside membrane behaviour precedes microscopy.",
+      "say": "Candida wipes, diphtheria bleeds: membrane behaviour is the first differential test.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Membrane mimics",
+          "points": [
+            "Candidiasis: curd like, removable",
+            "Infectious mononucleosis exudates",
+            "Vincent angina ulcerative with fusiforms",
+            "Streptococcal exudative pharyngitis"
+          ]
+        },
+        "right": {
+          "title": "Diphtheria clues",
+          "points": [
+            "Membrane adherent, bleeds on attempt",
+            "Extends beyond tonsil to uvula and palate",
+            "Bull neck and serosanguineous nasal discharge",
+            "Hoarseness and stridor laryngeal forms"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Albert stain viva pairing** closes: best medium Loeffler, best stain Albert (or Neisser), granule chemistry polyphosphate, tellurite black, toxigenicity Elek, immunity Schick (next lessons). Each named answer guards one variable, as sterilisation tests did, examiners rotate them in sequence. A question may jump between these pegs without warning, which is why the sequence is rehearsed as one chain.",
+      "say": "Medium, stain, granule, tellurite, tox, immunity: diphtheria answers rotate on six named pegs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peg sequence",
+          "points": [
+            "Loeffler grows granules",
+            "Albert shows granules",
+            "Tellurite selects colonies",
+            "Elek proves toxin"
+          ]
+        },
+        "right": {
+          "title": "Beyond bench",
+          "points": [
+            "Schick and antitoxin levels: immunity",
+            "tox PCR: gene speed",
+            "Genome: outbreak clusters",
+            "Antitoxin: therapy cannot wait any of these"
+          ]
+        }
+      }
+    }
+  ]
+}

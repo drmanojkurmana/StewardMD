@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "mic-clostridia-anaerobes",
+  "subject": "microbiology",
+  "title": "Nagler Reaction, Lecithinase and Clostridium tetani",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Nagler reaction** plates perfringens on egg yolk agar half spread with antitoxin: lecithinase splits yolk lecithin into opalescent precipitate around colonies only on the antitoxin free half, alpha toxin neutralised on the other, identifying C perfringens presumptively in hours. Egg yolk opacity is phospholipase made visible.",
+      "say": "Opalescence stops at the antitoxin border: Nagler neutralisation drawn on a plate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nagler setup",
+          "points": [
+            "Egg yolk agar plate, half antitoxin spread",
+            "Streak across both halves",
+            "Anaerobic incubation",
+            "Pearl opalescence antitoxin free side only"
+          ]
+        },
+        "right": {
+          "title": "Lecithinase cast",
+          "points": [
+            "C perfringens strong",
+            "C bifermentans and sordellii weaker kin",
+            "Bacillus cereus lecithinase aerobic distinction",
+            "Confirm by other perfringens tests"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clostridium tetani** is a slender anaerobic rod with terminal round spore (drumstick, tennis racket), swarming film growth, gelatin liquefier, toxin tetanospasmin maker, soil and gut spore ubiquitous, causing tetanus when spores germinate in anaerobic wounds (deep punctures, devitalised tissue, unclean deliveries and injections).",
+      "say": "Drumstick spores in soil plus a neglected wound equals tetanus risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Organism portrait",
+          "points": [
+            "Terminal spherical spore wider than rod",
+            "Swarming translucent film difficult isolation",
+            "Motile peritrichous vegetative",
+            "Spores resist boiling and disinfectants"
+          ]
+        },
+        "right": {
+          "title": "Disease doorways",
+          "points": [
+            "Puncture and crush wounds",
+            "Umbilical stump (neonatal tetanus)",
+            "Surgical, abortion and injection sites",
+            "Chronic ulcers and otitis rare portals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tetanospasmin** travels retrogradely in motor axons (and blood to cord terminals) to inhibitory interneurons, cleaving synaptobrevin (VAMP) so glycine and GABA release fails and motor neurons fire unchecked: trismus, risus sardonicus, opisthotonos, spasms on stimuli, autonomic storms, consciousness preserved. The same VAMP cut botulinum performs peripherally to opposite sign.",
+      "say": "Cut the brake cables in the cord: spasms are disinhibition, not excitation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Toxin journey",
+          "points": [
+            "Produced at wound, binds nerve endings",
+            "Retrograde axonal transport to cord and brainstem",
+            "Transsynaptic to inhibitory interneurons",
+            "VAMP cleavage blocks glycine and GABA"
+          ]
+        },
+        "right": {
+          "title": "Clinical grammar",
+          "points": [
+            "Trismus first (masseter nearest brainstem)",
+            "Generalised spasms, opisthotonos",
+            "Autonomic dysfunction second week",
+            "Spatula test: biting instead of gag"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tetanus management** is neutralise, clean, sedate, support: human tetanus immunoglobulin neutralises unbound toxin (intrathecal debated), wound debridement after HTIG, metronidazole (penicillin GABA antagonist theoretical disadvantage), benzodiazepine sedation escalating to paralysis and ventilation, autonomic management (magnesium, clonidine, morphine), immunisation because disease does not immunise.",
+      "say": "Immunoglobulin, debride, sedate deeply, ventilate long: tetanus care is supportive endurance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "htig",
+            "label": "HTIG neutralises unbound toxin"
+          },
+          {
+            "id": "wound",
+            "label": "Wound debrided, metronidazole started"
+          },
+          {
+            "id": "sedate",
+            "label": "Benzodiazepines, dark quiet room, minimise stimuli"
+          },
+          {
+            "id": "icu",
+            "label": "Ventilation and autonomic support weeks"
+          }
+        ],
+        "edges": [
+          [
+            "htig",
+            "wound"
+          ],
+          [
+            "wound",
+            "sedate"
+          ],
+          [
+            "sedate",
+            "icu"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tetanus prevention** is wound toilet plus toxoid: clean minor wounds need booster if over ten years (five for dirty), unknown or incomplete histories earn toxoid plus immunoglobulin for dirty wounds, neonatal tetanus falls with maternal immunisation and clean cord care, disease survivors still vaccinated because toxin dose that sickens does not immunise.",
+      "say": "The wound table (clean dirty by vaccine history) is tetanus prevention's whole algorithm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wound categories",
+          "points": [
+            "Clean minor versus tetanus prone (deep, dirty, devitalised, puncture)",
+            "History: 3 doses, last timing",
+            "Booster thresholds 10 and 5 years",
+            "HTIG 250 IU for dirty wounds unimmunised"
+          ]
+        },
+        "right": {
+          "title": "Programme victories",
+          "points": [
+            "Maternal neonatal elimination campaigns",
+            "Clean delivery and cord practices",
+            "School and military boosters",
+            "Adult decennial Td (Tdap once)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tetanus forms** specialise: generalised commonest, localised (rigidity near wound, may generalise), cephalic (head wound, cranial palsies, poor prognosis), neonatal (day 3 to 14, failure to suck then spasms), each with incubation and severity prognostication (short incubation worse), diagnosis clinical always (cultures rarely positive).",
+      "say": "Diagnosis is clinical; a negative wound culture never acquits tetanus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Form map",
+          "points": [
+            "Generalised: trismus to opisthotonos",
+            "Localised: wound neighbourhood rigidity",
+            "Cephalic: cranial nerve palsies after head injury or otitis",
+            "Neonatal: suck failure day 3 plus"
+          ]
+        },
+        "right": {
+          "title": "Prognostic signs",
+          "points": [
+            "Incubation under 7 days severe",
+            "Period of onset under 48 hours severe",
+            "Autonomic involvement grade",
+            "Age extremes and portal (umbilical, uterine) worse"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Reverse CAMP** returns for anaerobes: perfringens beta haemolysis inhibits staphylococcal sphingomyelinase zone (arrow pointing away), separating it from group B streptococcus CAMP positive, one plate two directions examiners toggle between modules deliberately. Keeping both CAMP directions in one mental picture prevents the commonest interpretation error when a plate contains an unfamiliar haemolysis pattern.",
+      "say": "Arrow toward staph is group B, arrow suppressed is perfringens: reverse CAMP flips the lesson.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CAMP positive",
+          "points": [
+            "GBS factor enhances staph haemolysis",
+            "Arrowhead toward staph streak",
+            "Sheep blood essential"
+          ]
+        },
+        "right": {
+          "title": "Reverse CAMP",
+          "points": [
+            "Perfringens alpha inhibits beta zone",
+            "Blunted or reverse arrow",
+            "Also Arcanobacterium traditions",
+            "Bench pattern recognition pairing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobic bench details for tetani** (cooked meat medium growth, swarming film on blood agar, Fildes technique isolating by swarming edge, toxin mouse tests abandoned) explain why laboratories seldom confirm; prevention and clinical diagnosis carry tetanus therefore, documentation of immunisation status the audit metric.",
+      "say": "Isolation is hard and irrelevant acutely; immunisation records are the useful laboratory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Culture reality",
+          "points": [
+            "Recovered in minority of cases",
+            "Swarming contaminates plates fast",
+            "Cooked meat and anaerobic jars",
+            "Toxin demonstration reference historical"
+          ]
+        },
+        "right": {
+          "title": "Useful records",
+          "points": [
+            "Toxoid history documented emergency departments",
+            "Wound prophylaxis audit",
+            "Maternal immunisation coverage",
+            "Case notification for surveillance"
+          ]
+        }
+      }
+    }
+  ]
+}
