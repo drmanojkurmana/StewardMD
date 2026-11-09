@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-renal-urinary-tumours",
+  "subject": "pathology",
+  "title": "Clear Cell Renal Carcinoma, VHL, Papillary and Chromophobe Types, Oncocytoma, and Angiomyolipoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Clear cell renal cell carcinoma** forms golden yellow, hypervascular cortical masses whose cells look empty because glycogen and lipid wash out during processing. Loss of the VHL gene on chromosome 3p stabilises HIF, switching on VEGF and explaining both the rich vasculature and why VEGF pathway drugs work. It accounts for about 70 percent of renal cancers.",
+      "say": "Golden, vascular, clear celled: VHL loss and VEGF drive clear cell renal carcinoma's appearance and therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "VHL tumour suppressor lost"
+          },
+          {
+            "id": "b",
+            "label": "HIF accumulates despite oxygen"
+          },
+          {
+            "id": "c",
+            "label": "VEGF drives hypervascular tumour"
+          },
+          {
+            "id": "d",
+            "label": "Anti-VEGF and immune therapy target axis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bilateral or early onset clear cell tumours should trigger testing for **von Hippel-Lindau disease**, an autosomal dominant condition pairing renal cancers with retinal and cerebellar haemangioblastomas, phaeochromocytomas and pancreatic cysts. Lifelong surveillance includes annual retinal examination, periodic abdominal imaging and plasma metanephrines. Finding one affected relative starts cascade screening, because renal tumours here are multiple and keep arriving over decades.",
+      "say": "Young bilateral renal tumours plus eye or CNS haemangioblastomas mean VHL; screen the whole family axis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "VHL lesion",
+          "Site",
+          "Screening accent"
+        ],
+        "rows": [
+          [
+            "Haemangioblastoma",
+            "Retina, cerebellum, spine",
+            "Annual eye and periodic MRI"
+          ],
+          [
+            "Clear cell RCC",
+            "Kidneys bilateral",
+            "Abdominal imaging intervals"
+          ],
+          [
+            "Phaeochromocytoma",
+            "Adrenal",
+            "Metanephrines before surgery"
+          ],
+          [
+            "Pancreatic lesions",
+            "Cysts, neuroendocrine tumours",
+            "Imaging surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Papillary renal carcinoma** builds true papillae stuffed with foamy macrophages, and type 1 tumours often carry MET pathway activation with trisomy 7 and 17. Chromophobe carcinoma looks different: raisinoid wrinkled nuclei, perinuclear halos and prominent cell borders from intercalated cell origin. Both types enhance less avidly on CT than clear cell cancer, a radiology clue to subtype before biopsy.",
+      "say": "Papillary fronds with macrophages and haloed chromophobe cells sort renal cancers beside clear cell type.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hereditary-papillary-renal-carcinoma-fig1.webp",
+        "alt": "Papillary renal carcinoma micrograph with papillary cores and foamy macrophages",
+        "caption": "Papillary renal carcinoma: papillary cores lined by tumour cells with foamy macrophages."
+      }
+    },
+    {
+      "tx": "A mahogany brown renal tumour with a central stellate scar suggests **oncocytoma**, a benign neoplasm of intercalated cells packed with mitochondria that give its cytoplasm a deeply eosinophilic granular look. Imaging cannot reliably separate it from chromophobe carcinoma, and even core biopsy can struggle. That diagnostic overlap is why many oncocytomas are only proven after surgical excision.",
+      "say": "Central scar and mitochondria packed cells suggest oncocytoma, chromophobe's benign twin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oncocytoma",
+          "points": [
+            "Benign, mahogany, central scar",
+            "Mitochondria rich nests",
+            "Surveillance in selected small lesions"
+          ]
+        },
+        "right": {
+          "title": "Chromophobe RCC",
+          "points": [
+            "Malignant, raisinoid nuclei",
+            "Perinuclear halos, plant cell borders",
+            "Surgical management by size"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Macroscopic fat inside a renal mass on CT virtually names an **angiomyolipoma**, a triphasic tumour of fat, thick-walled vessels and smooth muscle. Lesions larger than about 4 cm, or containing aneurysms over 5 mm, risk spontaneous retroperitoneal haemorrhage called Wunderlich syndrome. Bilateral tumours in a young patient should prompt a search for tuberous sclerosis, with its seizures and facial angiofibromas.",
+      "say": "Fat inside a renal mass means angiomyolipoma; large ones bleed and tuberous sclerosis grows them young.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lesion",
+          "Imaging signature",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Angiomyolipoma",
+            "Macroscopic fat in mass",
+            "Embolise bleeding, size surveillance"
+          ],
+          [
+            "Clear cell RCC",
+            "Enhancing vascular mass",
+            "Staging and resection pathway"
+          ],
+          [
+            "Oncocytoma",
+            "Central scar sometimes",
+            "Biopsy or surveillance selected"
+          ],
+          [
+            "Simple cyst",
+            "Water density, no enhancement",
+            "Bosniak category decides"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Incidental renal masses under 4 cm, termed **small renal masses**, prove benign in roughly a fifth of excised cases and many malignant ones grow only a few millimetres yearly. Older or comorbid patients may therefore choose core biopsy, thermal ablation or active surveillance with serial imaging. Immediate radical nephrectomy for every small mass sacrifices kidney function for cancers that might never have harmed.",
+      "say": "Small renal masses are often innocent; biopsy and surveillance spare kidneys that radical surgery once took.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-spc-renal-cell-carcinoma.webp",
+        "alt": "Nephrectomy specimen with golden yellow renal tumour",
+        "caption": "Renal cell carcinoma specimen: golden yellow cortical tumour in a nephrectomy specimen. Image: James Heilman, MD, CC BY-SA 3.0."
+      }
+    },
+    {
+      "tx": "Renal cancer has a signature route of spread: tumour thrombus grows directly into the **renal vein and inferior vena cava**, occasionally reaching the right atrium. Preoperative imaging must map the thrombus upper limit because it dictates vascular control and possible bypass. Haematogenous deposits produce round cannonball lung metastases, while ectopic erythropoietin or PTHrP secretion can announce the tumour before haematuria.",
+      "say": "Renal cancer rides its vein toward the heart; image the cava before any nephrectomy plan.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Renal mass characterised on CT"
+          },
+          {
+            "id": "b",
+            "label": "Vein and cava involvement staged"
+          },
+          {
+            "id": "c",
+            "label": "Partial versus radical nephrectomy chosen"
+          },
+          {
+            "id": "d",
+            "label": "Immune and VEGF therapy for advanced"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Partial nephrectomy** removes the tumour with a thin margin while preserving the rest of the kidney, matching radical nephrectomy for cancer control in tumours up to 7 cm in suitable positions. Preserved glomerular filtration protects against later chronic kidney disease and cardiovascular death. Tumour complexity scores based on size, depth and proximity to sinus structures predict whether nephron sparing is technically feasible.",
+      "say": "Take the tumour, spare the kidney when anatomy allows; function saved equals survival later.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Partial nephrectomy favoured",
+          "points": [
+            "Tumour under 7 cm feasible anatomy",
+            "Bilateral, solitary kidney, CKD",
+            "Function preserved"
+          ]
+        },
+        "right": {
+          "title": "Radical nephrectomy favoured",
+          "points": [
+            "Central, vein involved, large",
+            "Normal contralateral kidney",
+            "Oncological clearance priority"
+          ]
+        }
+      }
+    }
+  ]
+}

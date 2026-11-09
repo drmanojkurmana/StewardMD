@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-breast",
+  "subject": "pathology",
+  "title": "Medullary and Mucinous Breast Cancers, Paget Disease, ER PR HER2, Triple Negative, and Nottingham Grade",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Carcinoma with **medullary pattern** grows as syncytial sheets of high grade cells with indistinct borders, dense lymphoplasmacytic stroma and a smooth pushing edge. Despite looking alarming and usually testing triple negative, strictly defined examples carry a better outlook than ordinary grade 3 cancers. They cluster in BRCA1 carriers, so a young woman with this pattern merits germline testing referral.",
+      "say": "High grade yet lymphocyte rich and pushing: medullary pattern behaves kinder than its grade threatens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medullary pattern",
+          "points": [
+            "Syncytial sheets, lymphoid stroma",
+            "Pushing border, BRCA1 accent",
+            "Prognosis better than grade"
+          ]
+        },
+        "right": {
+          "title": "Mucinous carcinoma",
+          "points": [
+            "Tumour nests floating in mucin",
+            "Older women, ER positive",
+            "Indolent, node sparing tendency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Clusters of bland tumour cells floating in extracellular mucin lakes define **mucinous carcinoma**, a special type favouring postmenopausal women. Pure tumours, where mucin dominates almost the whole lesion, rarely involve axillary nodes and progress slowly. Once a solid invasive ductal component appears, the cancer is called mixed and prognosis follows that conventional component rather than the gelatinous background.",
+      "say": "Pure mucinous cancers float indolently and spare nodes; mixed forms follow their solid partners.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer molecular subtypes guiding receptor directed therapy."
+      }
+    },
+    {
+      "tx": "Persistent unilateral nipple crusting, scaling or erosion that fails topical steroids should be biopsied for **Paget disease of the nipple**, where large pale malignant cells scatter singly through the epidermis. Nearly every case hides underlying ductal carcinoma in situ or invasive cancer in the breast beneath. Treating it as eczema for months is the classic delay examiners probe.",
+      "say": "Unilateral nipple eczema that ignores steroids is Paget disease until biopsy acquits underlying cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nipple change",
+          "Likely cause",
+          "Duty"
+        ],
+        "rows": [
+          [
+            "Unilateral crusting persistent",
+            "Paget disease",
+            "Punch biopsy and imaging"
+          ],
+          [
+            "Bilateral eczema itchy",
+            "Dermatitis usual",
+            "Treat, review persistence"
+          ],
+          [
+            "Bloody single duct discharge",
+            "Papilloma or DCIS",
+            "Imaging and surgical referral"
+          ],
+          [
+            "New nipple inversion",
+            "Underlying mass tethering",
+            "Full triple assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Three stains steer nearly all breast cancer drug choices: **ER, PR and HER2** tested on every invasive tumour. Oestrogen receptor positivity predicts benefit from tamoxifen or aromatase inhibitors. HER2 amplification, scored 3+ by immunohistochemistry or confirmed by in situ hybridisation, opens anti-HER2 antibodies. Cancers lacking all three need chemotherapy based plans, so a missing receptor report is an incomplete report.",
+      "say": "ER, PR, HER2: three stains prescribe endocrine, targeted, or chemotherapy roads in breast cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+        "alt": "Breast cancer staging subtypes surgical management",
+        "caption": "Breast cancer staging and subtype management across surgery and systemic therapy."
+      }
+    },
+    {
+      "tx": "A **triple negative breast cancer** expresses neither oestrogen nor progesterone receptors and does not amplify HER2, leaving chemotherapy and, in selected cases, immunotherapy as systemic options. It disproportionately affects younger women and BRCA1 mutation carriers. Relapse tends to arrive early, within the first three years, and favours lung and brain over bone, inverting the usual metastatic timetable.",
+      "say": "Triple negative means chemotherapy carries the load BRCA testing and immunotherapy now share.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Luminal cancers",
+          "points": [
+            "ER positive, endocrine responsive",
+            "Later bone relapse accent",
+            "CDK inhibitors advanced care"
+          ]
+        },
+        "right": {
+          "title": "Triple negative",
+          "points": [
+            "No ER PR HER2 targets",
+            "Early visceral relapse",
+            "BRCA and PD-L1 guide additions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Germline **BRCA1** mutation carriers face lifetime breast cancer risks approaching 70 percent, alongside high grade serous ovarian and fallopian tube cancers. Their breast tumours are often triple negative with medullary features and arise before age 40. Finding one mutation triggers cascade testing of relatives, discussion of risk-reducing mastectomy and salpingo-oophorectomy, and eligibility for PARP inhibitor therapy in advanced disease.",
+      "say": "Triple negative under sixty earns BRCA testing; families inherit both risk and prevention options.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Triple negative or family pattern"
+          },
+          {
+            "id": "b",
+            "label": "Germline BRCA testing offered"
+          },
+          {
+            "id": "c",
+            "label": "PARP therapy eligibility known"
+          },
+          {
+            "id": "d",
+            "label": "Cascade screening and risk surgery counselled"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Nottingham grade** adds three microscopic scores, each from 1 to 3: tubule formation, nuclear pleomorphism and mitotic count. Totals of 3 to 5 make grade 1, 6 to 7 grade 2, and 8 to 9 grade 3. Mitotic count uses defined field areas, so guessing mitoses without calibration is a scoring trap. Grade predicts behaviour independently of tumour size.",
+      "say": "Tubules, nuclei, mitoses: Nottingham adds three observations into breast cancer's grade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Component",
+          "Score one favours",
+          "Score three"
+        ],
+        "rows": [
+          [
+            "Tubule formation",
+            "Mostly glandular",
+            "Solid sheets"
+          ],
+          [
+            "Nuclear pleomorphism",
+            "Small uniform",
+            "Bizarre marked variation"
+          ],
+          [
+            "Mitotic count",
+            "Low per field set",
+            "High per field set"
+          ],
+          [
+            "Total grade",
+            "3 to 5 grade one",
+            "8 to 9 grade three"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tender, disc-like subareolar tissue in an adolescent boy or an older man on spironolactone or antiandrogens usually means **gynaecomastia**, a benign glandular proliferation from oestrogen androgen imbalance. Male breast cancer instead forms a hard, eccentric, painless lump, sometimes with nipple retraction or bloody discharge. Because men present late, that eccentric hard mass always earns imaging and core biopsy.",
+      "say": "Tender subareolar tissue favours gynaecomastia; hard eccentric mass in an older man earns cancer workup.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gynaecomastia",
+          "points": [
+            "Subareolar rubbery tenderness",
+            "Drugs, liver, puberty causes",
+            "Reassure or treat cause"
+          ]
+        },
+        "right": {
+          "title": "Male breast cancer",
+          "points": [
+            "Hard eccentric painless mass",
+            "Nipple change, nodes",
+            "Same staging and receptors"
+          ]
+        }
+      }
+    }
+  ]
+}

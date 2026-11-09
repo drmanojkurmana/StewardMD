@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-tubulointerstitial-cystic",
+  "subject": "pathology",
+  "title": "Reflux and Drug-Induced Interstitial Nephritis, Analgesic Nephropathy, Papillary Necrosis, and Benign Nephrosclerosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Reflux nephropathy** scars a growing kidney when vesicoureteric reflux drives infected urine backward into compound papillae, typically at the renal poles. The imaging signature is a coarse cortical scar sitting directly over a clubbed, dilated calyx. Sterile low-grade reflux rarely scars; it is high-grade reflux combined with urinary infection in early childhood that destroys segments permanently.",
+      "say": "Coarse scars over clubbed calyces in a child mean reflux nephropathy; hunt reflux before blaming glomeruli.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reflux scarring",
+          "points": [
+            "Coarse polar scars, clubbed calyces",
+            "Childhood UTI history",
+            "Hypertension and proteinuria late"
+          ]
+        },
+        "right": {
+          "title": "Chronic pyelonephritis other causes",
+          "points": [
+            "Obstruction driven scarring",
+            "Stones, prostate, strictures",
+            "Similar end stage microscopy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A kidney that deteriorates one to three weeks after starting a beta-lactam, NSAID, proton pump inhibitor or checkpoint inhibitor suggests **acute interstitial nephritis**, with lymphocytes, plasma cells and eosinophils invading the interstitium and tubules. The classic fever, rash and eosinophilia triad appears in under a third of patients, so the drug timeline matters more than the allergic checklist.",
+      "say": "AKI two weeks after a new drug with sterile pyuria is interstitial nephritis until the chart is acquitted.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug family",
+          "Latency accent",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Beta lactam antibiotics",
+            "Days to weeks",
+            "Classic fever rash eosinophilia triad incomplete"
+          ],
+          [
+            "Proton pump inhibitors",
+            "Months insidious",
+            "Commonest modern culprit in series"
+          ],
+          [
+            "NSAIDs",
+            "Months, nephrotic overlap",
+            "Minimal change may coexist"
+          ],
+          [
+            "Checkpoint inhibitors",
+            "Cancer therapy timing",
+            "Other immune toxicities accompany"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Years of combination analgesic powders, classically phenacetin mixtures, concentrate prostaglandin-blocking drugs in the medulla until papillae necrose. **Analgesic nephropathy** then shows ring calcification around sloughed papillae, sterile pyuria and slowly rising creatinine, often with anaemia out of proportion. Patients may minimise intake, so asking total lifetime analgesic dose in kilograms is the history question that uncovers it.",
+      "say": "Decades of combination painkillers plus sloughed papillae equal analgesic nephropathy; ask analgesic grams honestly.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/analgesic-nephropathy-fig1.webp",
+        "alt": "Analgesic nephropathy gross and radiograph",
+        "caption": "Analgesic nephropathy with papillary necrosis and medullary calcification."
+      }
+    },
+    {
+      "tx": "Papillary tips live on a vascular knife edge, so several diseases converge on **renal papillary necrosis**: diabetes, sickle cell trait or disease, analgesic abuse, and obstruction with infection. A sloughed papilla can obstruct the ureter, causing colic and haematuria that mimic a stone. On contrast imaging the papilla shows a ring shadow or lobster-claw calyx instead.",
+      "say": "Diabetes, sickle cell, analgesics, obstruction: four roads into the same sloughed papilla.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Papillary necrosis clues",
+          "points": [
+            "Colic, haematuria, tissue in urine",
+            "Ring calcifications if chronic",
+            "Cause quartet reviewed"
+          ]
+        },
+        "right": {
+          "title": "Stone disease clues",
+          "points": [
+            "Radiopaque calculus tracked",
+            "Hydronephrosis above stone",
+            "Metabolic stone workup follows"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Decades of moderate hypertension produce **benign nephrosclerosis**: symmetrically shrunken kidneys with a finely granular subcapsular surface, like faded leather. Afferent arterioles thicken with hyaline deposits, starving glomeruli into wrinkled, sclerotic tufts. Proteinuria stays modest, usually under a gram daily; heavy proteinuria in a hypertensive patient should provoke a search for a second glomerular disease.",
+      "say": "Fine granular shrunken kidneys with hyaline arterioles are benign nephrosclerosis's gross signature.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig1.webp",
+        "alt": "Chronic kidney disease histopathology",
+        "caption": "Chronic kidney histopathology of nephrosclerosis and interstitial fibrosis."
+      }
+    },
+    {
+      "tx": "Whatever the original insult, biopsies converge on **interstitial fibrosis and tubular atrophy**, and the percentage of cortex scarred predicts progression to kidney failure better than the diagnostic label does. Tubules, not glomeruli, consume most renal oxygen and drive filtration long term. Reporting fibrosis severity is therefore not descriptive filler; it is the prognostic number clinicians act upon.",
+      "say": "Interstitial fibrosis percentage prognosticates kidneys better than the original diagnosis in most biopsies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Primary glomerular or vascular injury"
+          },
+          {
+            "id": "b",
+            "label": "Proteinuria and ischaemia injure tubules"
+          },
+          {
+            "id": "c",
+            "label": "Interstitial fibroblasts lay collagen"
+          },
+          {
+            "id": "d",
+            "label": "Atrophy and fibrosis set progression pace"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The single intervention with undisputed value in drug-induced interstitial nephritis is immediate **withdrawal of the culprit drug**; creatinine often improves within days once exposure stops. Corticosteroids are debated, generally reserved for biopsy-proven cases without recovery after withdrawal or with severe injury. Continuing a proton pump inhibitor through unexplained AKI because it seems harmless is the prescribing habit to unlearn.",
+      "say": "Stop the drug first in interstitial nephritis; steroids argue their case only after withdrawal.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Action",
+          "Timing",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "Stop culprit drug",
+            "Immediately on suspicion",
+            "Remove driving antigen"
+          ],
+          [
+            "Biopsy if AKI significant",
+            "Early, before steroids ideally",
+            "Confirm and grade activity"
+          ],
+          [
+            "Steroids considered",
+            "Severe or non recovering",
+            "Suppress interstitial inflammation"
+          ],
+          [
+            "Avoid rechallenge",
+            "Document allergy prominently",
+            "Prevent recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Medullary blood flow must stay low to preserve the concentrating gradient, leaving papillae permanently near hypoxia. That geography explains **medullary susceptibility**: toxins concentrated several-fold toward the tip, sickled cells sludging in vasa recta, and diabetic microangiopathy all strike the papilla first. Medullary injury also blunts concentrating ability early, so nocturia can precede any creatinine rise.",
+      "say": "The papilla lives poorest; every medullary toxin collects its debt there first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cortical accent diseases",
+          "points": [
+            "Glomerulonephritis families",
+            "Nephrotic and nephritic syndromes",
+            "Biopsy cortex sampled"
+          ]
+        },
+        "right": {
+          "title": "Medullary accent diseases",
+          "points": [
+            "Papillary necrosis causes",
+            "Analgesic and sickle injury",
+            "Concentrating defect early"
+          ]
+        }
+      }
+    }
+  ]
+}

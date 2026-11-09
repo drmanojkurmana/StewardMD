@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-poster-dalen-fuchs-nodules",
+ "subject": "ophthalmology",
+ "module": "oph-posterior-uveitis",
+ "title": "Dalen-Fuchs Nodules and Granulomatous Choroiditis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dalen-Fuchs nodules** are granulomatous collections between pigment epithelium and Bruch membrane in sympathetic ophthalmia and VKH disease, visible as yellow white deep choroidal spots in acute phases. They histologically mark epithelioid cell granuloma at pigment level, eponym linking two panuveitis entities. Deep yellow spots in bilateral panuveitis therefore suggest this granuloma level before imaging.",
+   "say": "Deep yellow spots together give granuloma level suggestion in bilateral panuveitis at fundus examination in clinic characteristically. Eponym gives entity linkage additionally. Pigment level gives histology phrase.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vogt-koyanagi-harada-disease-fig1.webp",
+    "alt": "Illustration of Vogt-Koyanagi-Harada disease showing choroidal inflammation with exudative retinal detachment and Dalen-Fuchs nodules, accompanied by periorbital vitiligo and eyelash poliosis.",
+    "caption": "Dalen-Fuchs nodules, choroidal granulomas, and exudative retinal detachment in Vogt-Koyanagi-Harada disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Sunset glow fundus** is depigmented orange fundus after VKH choroidal inflammation burns out melanocytes, late stage prevented by early adequate systemic therapy. Its presence dates undertreatment historically in referral assessments. Poliosis, vitiligo and alopecia integumentary phase accompany ocular depigmentation systemically in VKH course.",
+   "say": "Depigmented fundus together gives late VKH stage evidence at referral assessment in posterior clinics for adults with chronicity. Early therapy gives prevention value additionally. Skin company gives phase completion.",
+   "vis": {
+    "kind": "table",
+    "title": "VKH stage map",
+    "cols": [
+     "Stage",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Prodromal",
+      "Headache, tinnitus, meningism"
+     ],
+     [
+      "Acute uveitic",
+      "Exudative detachments bilateral"
+     ],
+     [
+      "Chronic convalescent",
+      "Sunset glow, Dalen Fuchs scars"
+     ],
+     [
+      "Recurrent",
+      "Anterior granulomatous flares"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exudative detachments in acute VKH give shifting fluid, disc swelling and choroidal thickening on ultrasound or tomography, responding dramatically to early high dose systemic therapy. Delay fibroses and depigments toward sunset stage irreversibly. **Early intensity** is therefore VKH outcome determinant quoted in every posterior examination answer.",
+   "say": "Shifting fluid together gives acute VKH pattern responsive to early intensity at emergency posterior assessment in adults. Delay gives irreversible depigmentation additionally. Tomography gives choroid thickness evidence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute VKH",
+     "points": [
+      "Exudative detachments bilateral",
+      "Disc swelling, thick choroid",
+      "High dose systemic rescue"
+     ]
+    },
+    "right": {
+     "title": "Chronic VKH",
+     "points": [
+      "Sunset glow depigmentation",
+      "Dalen Fuchs scar spots",
+      "Anterior recurrent flares"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sympathetic ophthalmia timing weeks to years after injury, granulomatous panuveitis in uninjured eye, enucleation of hopeless exciting eye within early window debated historically as prevention. Modern care immunosuppresses sympathising eye with salvage expectations. **Injury history** in bilateral granulomatous disease therefore asks penetrating trauma directly without embarrassment.",
+   "say": "Injury history together gives sympathetic direction in bilateral granulomatous disease at tertiary assessment for adults after trauma. Early suppression gives salvage additionally. Window debate gives historical context.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bilateral granuloma sorting",
+    "nodes": [
+     {
+      "id": "bil",
+      "label": "Bilateral granulomatous panuveitis"
+     },
+     {
+      "id": "hist",
+      "label": "Injury and prodrome histories"
+     },
+     {
+      "id": "stage",
+      "label": "Acute fluid or sunset stage"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic intensity pathway"
+     }
+    ],
+    "edges": [
+     [
+      "bil",
+      "hist"
+     ],
+     [
+      "hist",
+      "stage"
+     ],
+     [
+      "stage",
+      "sys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Choroidal granuloma** in sarcoid or tuberculosis gives deep yellow solitary or multiple lesions needing systemic differentiation by chest and immunology as anterior granuloma lessons taught. Posterior granuloma biopsy rarely ocular, systemic tissue deciding therapy. Deep lesion plus anterior mutton fat unifies granulomatous compartment inventory.",
+   "say": "Deep lesions together give systemic differentiation in posterior granuloma at joint clinics for adults with panuveitis over time. Systemic tissue gives therapy decision additionally. Inventory gives unification value."
+  },
+  {
+   "tx": "Imaging choroid thickness, indocyanine angiography dark dots and tomography fluid quantify VKH and granulomatous activity beyond colour fundus impression. Treatment response tracked by choroidal thinning and fluid resolution numerically. **Choroid metrics** therefore join haze and lesion grades as posterior numbers in granulomatous follow up.",
+   "say": "Choroid metrics together give granulomatous activity quantification at posterior follow up in specialist clinics over treatment months. Fluid resolution gives response additionally. Numbers give taper support.",
+   "vis": {
+    "kind": "table",
+    "title": "Granuloma imaging set",
+    "cols": [
+     "Metric",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Choroid thickness",
+      "VKH activity and response"
+     ],
+     [
+      "Fluid resolution",
+      "Exudative control grading"
+     ],
+     [
+      "Dark dot angiography",
+      "Granuloma burden pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anterior recurrent VKH after posterior burn out gives granulomatous anterior flares needing renewed systemic review, sunset fundus betraying posterior history in anterior clinic. Fundus examination therefore belongs to recurrent anterior granulomatous workup even without posterior complaints. **Look behind** rule prevents compartment amnesia in uveitis follow up.",
+   "say": "Fundus review together gives posterior history discovery in recurrent anterior granuloma at follow up in clinic for adults. Sunset gives betrayal evidence additionally. Compartment amnesia gives error name.",
+   "vis": {
+    "kind": "table",
+    "title": "Panuveitis eponym map",
+    "cols": [
+     "Eponym or sign",
+     "Entity link"
+    ],
+    "rows": [
+     [
+      "Dalen Fuchs nodules",
+      "Sympathetic and VKH granuloma"
+     ],
+     [
+      "Sunset glow",
+      "Chronic VKH depigmentation"
+     ],
+     [
+      "Candle wax drippings",
+      "Sarcoid periphlebitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: Dalen Fuchs granuloma level, sunset late VKH, exudative early VKH and sympathetic follows injury. Early intensity prevents depigmentation, choroid metrics grade response. **Bilateral deep yellow spots** phrase opens granulomatous panuveitis differential in examinations. Systemic teams share VKH and sympathetic care because skin, ear and meningeal phases extend beyond the eye.",
+   "say": "Deep yellow spots together give granulomatous panuveitis opening in examinations for students reliably at fundus description. Early intensity gives sunset prevention additionally. Metrics give response grading.",
+   "vis": {
+    "kind": "table",
+    "title": "Granuloma anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Dalen Fuchs level",
+      "Between pigment and Bruch membrane"
+     ],
+     [
+      "Sunset glow timing",
+      "Late undertreated VKH"
+     ],
+     [
+      "Sympathetic trigger",
+      "Penetrating injury fellow eye"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Dalen Fuchs nodules",
+   "b": "Granulomas between pigment epithelium and Bruch membrane in sympathetic ophthalmia and VKH."
+  },
+  {
+   "f": "Sunset glow fundus",
+   "b": "Depigmented late VKH fundus after choroidal burn out; prevented by early systemic therapy."
+  },
+  {
+   "f": "Acute VKH rescue",
+   "b": "Bilateral exudative detachments need early high dose systemic therapy before fibrosis."
+  }
+ ],
+ "keys": [
+  "Look at fundus in recurrent anterior granuloma",
+  "Choroid thickness grades VKH activity",
+  "Injury history asks directly in bilateral disease"
+ ]
+}

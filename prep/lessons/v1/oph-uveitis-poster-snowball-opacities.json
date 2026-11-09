@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-poster-snowball-opacities",
+ "subject": "ophthalmology",
+ "module": "oph-posterior-uveitis",
+ "title": "Snowball Opacities, Vitritis and Panuveitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Snowball opacities** in posterior context are vitreous inflammatory aggregates layering inferiorly in sarcoid and intermediate posterior overlap, graded by vitreous haze scales that standardise posterior activity. Haze grading by photographic standards decides treatment response objectively like anterior cell grading anteriorly. Posterior grading therefore mirrors anterior grading philosophy across compartments.",
+   "say": "Vitreous aggregates together give posterior grading by haze standards in uveitis follow up at hospital clinics objectively. Anterior mirroring gives philosophy consistency additionally. Response gives grade decisions."
+  },
+  {
+   "tx": "**Vitreous haze** obscures optic disc and vessels progressively by grade, photographic comparison anchors examiner consistency in trials and clinics. Clearing haze may lag lesion healing, so fundus lesion activity and haze grade record separately. Two posterior numbers therefore travel together in uveitis notes as anterior cells and flare did.",
+   "say": "Haze grade together with lesion activity gives two number posterior recording at every uveitis visit in clinic for consistency. Clearing lag gives separation need additionally. Photographic anchors give examiner consistency.",
+   "vis": {
+    "kind": "table",
+    "title": "Posterior grading pair",
+    "cols": [
+     "Grade",
+     "Records"
+    ],
+    "rows": [
+     [
+      "Vitreous haze",
+      "Media clarity by standards"
+     ],
+     [
+      "Lesion activity",
+      "Edge and leakage state"
+     ],
+     [
+      "Macular tomography",
+      "Oedema vision endpoint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Panuveitis** inflames all compartments simultaneously, sarcoid, Behcet, Vogt Koyanagi Harada and sympathetic ophthalmia as classic systemic entities needing systemic therapy by definition. Compartment inventory therefore ends in panuveitis label when anterior, vitreous and chorioretinal signs coexist. Its presence forbids topical only planning in protocols.",
+   "say": "All compartment inflammation together gives panuveitis systemic requirement in uveitis classification at presentation in tertiary clinics always. Inventory gives label accuracy additionally. Topical insufficiency gives protocol rule.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intermediate dominant",
+     "points": [
+      "Snowballs and bank inferior",
+      "Anterior quiet mostly",
+      "Step ladder by oedema"
+     ]
+    },
+    "right": {
+     "title": "Panuveitis pattern",
+     "points": [
+      "All compartments inflamed",
+      "Systemic entities classic",
+      "Systemic therapy mandatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Vogt-Koyanagi-Harada** disease gives bilateral panuveitis with exudative detachments, sunset glow fundus later and meningeal, auditory and skin company in phased course. Early systemic high dose therapy prevents chronic sunset depigmentation stage. Prodromal headache and tinnitus therefore belong to bilateral posterior clerking.",
+   "say": "Bilateral exudative pattern together gives VKH recognition with systemic company at presentation in posterior clinics for adults. Early intensity gives sunset prevention additionally. Prodrome gives clerking value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Panuveitis pathway",
+    "nodes": [
+     {
+      "id": "inv",
+      "label": "All compartments inventoried"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic entity panel"
+     },
+     {
+      "id": "treat",
+      "label": "Systemic therapy started"
+     },
+     {
+      "id": "grade",
+      "label": "Haze and lesion grading"
+     }
+    ],
+    "edges": [
+     [
+      "inv",
+      "sys"
+     ],
+     [
+      "sys",
+      "treat"
+     ],
+     [
+      "treat",
+      "grade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sympathetic ophthalmia** is bilateral granulomatous panuveitis after penetrating injury or surgery to fellow eye, rare but preventable teaching around early enucleation debates in hopeless injured eyes. Exciting eye and sympathising eye terminology structures examinations. Modern immunosuppression salvages many sympathising eyes when recognised early.",
+   "say": "Fellow eye granuloma together gives sympathetic recognition after penetrating injury at tertiary uveitis clinics rarely but critically. Early suppression gives salvage value additionally. Terminology gives viva structure."
+  },
+  {
+   "tx": "Masquerade syndromes, lymphoma or leukaemic infiltration mimicking vitritis in elderly steroid poor responders, need vitreous biopsy cytology where suspicion persists. Age plus poor response therefore reopens diagnosis in chronic posterior disease. **Steroid poor vitritis** in elderly is masquerade until cytology reassures.",
+   "say": "Poor response together gives masquerade reopening in elderly vitritis at tertiary clinics during chronic follow up over months. Cytology gives confirmation route additionally. Age gives suspicion weight.",
+   "vis": {
+    "kind": "table",
+    "title": "Panuveitis classic set",
+    "cols": [
+     "Entity",
+     "Company"
+    ],
+    "rows": [
+     [
+      "VKH disease",
+      "Meningeal, ear, skin phases"
+     ],
+     [
+      "Sympathetic ophthalmia",
+      "Penetrating injury fellow eye"
+     ],
+     [
+      "Behcet disease",
+      "Ulcer history, occlusion"
+     ],
+     [
+      "Sarcoidosis",
+      "Chest nodes, wax drippings"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic vitrectomy samples vitreous for cytology, culture and molecular tests in masquerade, infection or undiagnosed posterior disease balancing risk against therapeutic delay. Sample handling prearranged with laboratories decides yield more than surgical volume alone. **Laboratory choreography** therefore precedes diagnostic vitrectomy booking in undiagnosed vitritis.",
+   "say": "Laboratory choreography together gives diagnostic yield in vitrectomy sampling at tertiary centres for undiagnosed vitritis in adults. Handling gives value beyond volume additionally. Booking gives preparation need.",
+   "vis": {
+    "kind": "table",
+    "title": "Vitreous sample tests",
+    "cols": [
+     "Test",
+     "Question"
+    ],
+    "rows": [
+     [
+      "Cytology flow",
+      "Lymphoma masquerade present"
+     ],
+     [
+      "Culture molecular",
+      "Infection organism present"
+     ],
+     [
+      "Clinical response review",
+      "Steroid poor course explained"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: haze grades posteriorly as cells anteriorly, panuveitis systemises always, VKH phases and sympathetic follows injury. Masquerade biopsies elderly poor responders without apology. **Compartment inventory** completed before entity naming in every posterior presentation. Laboratory partnerships arranged before surgery decide whether sampling answers the masquerade question at all.",
+   "say": "Compartment inventory together gives entity naming accuracy in posterior presentations at uveitis clinics for adults reliably each time. Haze grading gives response objectivity additionally. Masquerade gives biopsy timing.",
+   "vis": {
+    "kind": "table",
+    "title": "Posterior anchors two",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Haze plus lesion grades",
+      "Two posterior numbers"
+     ],
+     [
+      "All compartments",
+      "Panuveitis systemic mandatory"
+     ],
+     [
+      "Elderly poor response",
+      "Biopsy for masquerade"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Vitreous haze grading",
+   "b": "Photographic standard grades media clarity, recorded separately from lesion activity."
+  },
+  {
+   "f": "VKH phases",
+   "b": "Bilateral panuveitis with exudative detachment, meningeal ear skin company, sunset glow late."
+  },
+  {
+   "f": "Masquerade vitritis rule",
+   "b": "Elderly steroid poor vitritis needs vitreous cytology for lymphoma exclusion."
+  }
+ ],
+ "keys": [
+  "Panuveitis forbids topical only plans",
+  "Sympathetic ophthalmia follows penetrating injury",
+  "Sample handling decides diagnostic yield"
+ ]
+}
