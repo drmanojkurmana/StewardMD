@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "obg-amniotic-fluid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Potter Sequence, Pulmonary Hypoplasia and Amnioinfusion",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The constellation of flattened facies, limb deformities and lung hypoplasia from prolonged absent fluid is the **Potter sequence**. It follows bilateral renal agenesis or prolonged early rupture. Pulmonary hypoplasia, not the kidney failure, is what kills at birth. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Potter sequence flattens features and hypoplases lungs from prolonged absent fluid.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amniotic-fluid-oligo-polyhydramnios-fig1.webp",
+    "alt": "Potter sequence from oligohydramnios causes.",
+    "caption": "Potter sequence causes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure of lung growth from chronic compression and absent fluid cycling is **pulmonary hypoplasia**. Earlier and longer fluid loss gives worse hypoplasia. It determines survival in prolonged preterm rupture cases. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Pulmonary hypoplasia from chronic fluid loss determines survival after prolonged rupture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Earlier rupture",
+      "Worse hypoplasia"
+     ],
+     [
+      "Longer latency",
+      "Worse hypoplasia"
+     ],
+     [
+      "Later rupture",
+      "Better outlook"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Removing excess fluid therapeutically by needle is **amnioreduction**. It eases maternal symptoms and may prolong pregnancy in twin transfusion recipients before laser. Volumes of one to two litres are removed slowly. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Amnioreduction removes one to two litres slowly to ease symptoms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe symptoms"
+     },
+     {
+      "id": "n1",
+      "label": "Needle into sac"
+     },
+     {
+      "id": "n2",
+      "label": "Slow fluid removal"
+     },
+     {
+      "id": "n3",
+      "label": "Symptoms eased"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Instilling saline into the uterus to restore fluid for scanning or labour is **amnioinfusion**. It clarifies anatomy in oligohydramnios and cushions the cord against variable decelerations. Infection risk limits its diagnostic use to selected cases. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Amnioinfusion restores fluid to clarify anatomy and cushion the cord in labour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic",
+     "points": [
+      "Clarifies anatomy",
+      "Selected cases"
+     ]
+    },
+    "right": {
+     "title": "In labour",
+     "points": [
+      "Cushions cord",
+      "Fewer variable decelerations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The prostaglandin inhibitor reducing fetal urine output to treat polyhydramnios is **indomethacin**. It risks premature ductus closure, so use is short and monitored. Maternal gastric and fetal cardiac surveillance accompany it. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Indomethacin reduces fetal urine for polyhydramnios but risks ductus closure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-indomethacin.webp",
+    "alt": "Indomethacin in pregnancy.",
+    "caption": "Indomethacin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fibrous bands amputating fetal parts after membrane rupture form the **amniotic band** sequence. Asymmetric limb and body wall defects result. It is a disruption, not an inherited malformation, so recurrence is negligible. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Amniotic bands amputate fetal parts asymmetrically with negligible recurrence risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Band sequence"
+    ],
+    "rows": [
+     [
+      "Pattern",
+      "Asymmetric amputations"
+     ],
+     [
+      "Recurrence",
+      "Negligible"
+     ],
+     [
+      "Cause",
+      "Membrane rupture bands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serial amnioinfusion for early renal oligohydramnios is experimental and offered only in trials, termed **investigational therapy**. Families need frank discussion of pulmonary prognosis regardless of kidney options. Neonatal dialysis planning forms part of counselling. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Serial amnioinfusion for renal oligohydramnios remains investigational within trials only.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Renal cause confirmed"
+     },
+     {
+      "id": "n1",
+      "label": "Trial options discussed"
+     },
+     {
+      "id": "n2",
+      "label": "Prognosis frank"
+     },
+     {
+      "id": "n3",
+      "label": "Neonatal plan made"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clubbed limbs and flattened nose with low set ears are the visible **Potter facies**. They result from mechanical compression without fluid cushioning. Their presence at birth confirms prolonged severe oligohydramnios. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Potter facies shows flattened nose and low ears from prolonged fluid absence.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Oligohydramnios assessment.",
+    "caption": "Oligohydramnios care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fluid assessment anchors decisions in growth restriction and rupture alike, summarised as **fluid centred surveillance**. Trends in deepest pool accompany Doppler at every review. Sudden fluid falls prompt delivery discussions at viable gestations. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fluid centred surveillance trends deepest pool with Doppler at every review.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Falling fluid",
+     "points": [
+      "Delivery discussed",
+      "Doppler checked",
+      "Steroids if preterm"
+     ]
+    },
+    "right": {
+     "title": "Stable fluid",
+     "points": [
+      "Surveillance continues",
+      "Interval scans",
+      "Reassess trends"
+     ]
+    }
+   }
+  }
+ ]
+}

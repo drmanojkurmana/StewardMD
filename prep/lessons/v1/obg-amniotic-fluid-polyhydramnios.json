@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "module": "obg-amniotic-fluid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Polyhydramnios, Oligohydramnios, AFI and Deepest Pool",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Excess amniotic fluid, deepest pool over eight centimetres or index over twenty five, is **polyhydramnios**. Diabetes, fetal anomalies and twin transfusion head the cause list. Breathlessness and discomfort mark severe acute cases. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Polyhydramnios exceeds normal fluid from diabetes, anomalies or twin transfusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amniotic-fluid-oligo-polyhydramnios-fig1.webp",
+    "alt": "Oligohydramnios and polyhydramnios etiologies.",
+    "caption": "Fluid abnormalities. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Too little fluid, deepest pool under two centimetres, is **oligohydramnios**. Ruptured membranes, growth restriction and renal anomalies cause it. The fetus is at risk of cord compression and, early, lung hypoplasia. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Oligohydramnios falls below two centimetres from rupture, restriction or renal anomalies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Low",
+     "High"
+    ],
+    "rows": [
+     [
+      "Deepest pool",
+      "Under 2 cm",
+      "Over 8 cm"
+     ],
+     [
+      "AFI",
+      "Under 5 cm",
+      "Over 25 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Summing deepest pools from four uterine quadrants gives the **amniotic fluid index**. It quantifies fluid for surveillance trends. Technique variation is wide, so trends by the same method matter most. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The amniotic fluid index sums four quadrant pools for surveillance trends.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Uterus divided in four"
+     },
+     {
+      "id": "n1",
+      "label": "Deepest pool each quadrant"
+     },
+     {
+      "id": "n2",
+      "label": "Values summed"
+     },
+     {
+      "id": "n3",
+      "label": "Trend followed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The single largest vertical pocket, preferred by many for fewer interventions, is the **single deepest pocket**. It labels fewer pregnancies abnormal than the index with similar outcomes. Either method must be used consistently. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The single deepest pocket labels fewer pregnancies abnormal with similar outcomes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "AFI",
+     "points": [
+      "Four quadrants summed",
+      "More abnormal labels"
+     ]
+    },
+    "right": {
+     "title": "Deepest pool",
+     "points": [
+      "Single pocket",
+      "Fewer interventions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failed swallowing from blocked oesophagus causes fluid excess, as in **oesophageal atresia**. The fetal stomach bubble is absent on scan. Polyhydramnios is often the first antenatal clue to this anomaly. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Oesophageal atresia blocks swallowing, causing polyhydramnios with an absent stomach bubble.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/esophageal-atresia-fig1.webp",
+    "alt": "Oesophageal atresia causing polyhydramnios.",
+    "caption": "Oesophageal atresia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Absent cranial vault prevents normal swallowing and fluid regulation in **anencephaly**. It is a classic polyhydramnios association detectable at the first trimester scan. The diagnosis is lethal and counselling follows local law and family wishes. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Anencephaly impairs swallowing and causes polyhydramnios detectable in the first trimester.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Swallowing blocked",
+      "Oesophageal atresia, anencephaly"
+     ],
+     [
+      "Urine excess",
+      "Diabetes, recipient twin"
+     ],
+     [
+      "Membrane",
+      "Chorioangioma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absent kidneys abolish fetal urine and fluid in bilateral **renal agenesis**. This lethal condition produces the Potter sequence of compressed facies and hypoplastic lungs. It is the extreme end of oligohydramnios causation. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Renal agenesis abolishes urine and fluid, producing the lethal Potter sequence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Kidneys absent"
+     },
+     {
+      "id": "n1",
+      "label": "No fetal urine"
+     },
+     {
+      "id": "n2",
+      "label": "Fluid absent"
+     },
+     {
+      "id": "n3",
+      "label": "Lungs hypoplastic"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Idiopathic cases with no cause found form the majority of mild polyhydramnios, termed **idiopathic polyhydramnios**. Even these carry slightly raised preterm and malpresentation risks. Glucose screening and anomaly review still complete the workup. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Idiopathic polyhydramnios still needs glucose screening and anomaly review.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Fluid abnormality assessment.",
+    "caption": "Fluid assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute polyhydramnios over days causes severe maternal breathlessness needing **amnioreduction**. Slow removal of one to two litres by amniocentesis relieves symptoms. It recurs while the cause persists, so it palliates rather than cures. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Amnioreduction slowly removes fluid to relieve breathlessness in acute polyhydramnios.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amnioreduction",
+     "points": [
+      "Needle drainage",
+      "Symptom relief",
+      "Recurs"
+     ]
+    },
+    "right": {
+     "title": "Expectant",
+     "points": [
+      "Mild chronic cases",
+      "Surveillance",
+      "Treat cause"
+     ]
+    }
+   }
+  }
+ ]
+}

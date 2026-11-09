@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "module": "obg-infections-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Asymptomatic Bacteriuria, Malaria and Zika in Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Bacteria in urine without symptoms, treated in pregnancy unlike outside it, is **asymptomatic bacteriuria**. Untreated, up to thirty percent ascend to pyelonephritis with preterm labour risk. A single culture at booking catches most cases. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Asymptomatic bacteriuria is treated in pregnancy because thirty percent ascend to pyelonephritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outside pregnancy",
+     "In pregnancy"
+    ],
+    "rows": [
+     [
+      "Usually untreated",
+      "Always treated"
+     ],
+     [
+      "Rare progression",
+      "Pyelonephritis in 30 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Kidney infection in pregnancy causing fever, loin pain and sepsis risk is acute **pyelonephritis**. It is the commonest serious medical admission in pregnancy. Intravenous antibiotics and hydration, with thromboprophylaxis, form treatment. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Pyelonephritis is the commonest serious medical admission in pregnancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fever and loin pain"
+     },
+     {
+      "id": "n1",
+      "label": "IV antibiotics started"
+     },
+     {
+      "id": "n2",
+      "label": "Hydration maintained"
+     },
+     {
+      "id": "n3",
+      "label": "Preterm labour watched"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fever parasite infection causing anaemia, hypoglycaemia and placental failure in pregnancy is **malaria in pregnancy**. Placental sequestration hides parasites from blood films. Intermittent preventive treatment and bed nets protect women in endemic areas, and severe disease needs artesunate. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Malaria in pregnancy sequesters in the placenta causing anaemia and growth failure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Malaria in pregnancy assessment.",
+    "caption": "Malaria assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mosquito borne virus causing microcephaly through fetal brain destruction is the **Zika virus**. Sexual transmission also occurs, so partner travel history matters. No vaccine or treatment exists, making prevention and surveillance the response. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Zika virus destroys fetal brain causing microcephaly, with prevention the only response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Zika",
+     "points": [
+      "Microcephaly",
+      "Mosquito and sexual spread",
+      "No treatment"
+     ]
+    },
+    "right": {
+     "title": "Parvovirus",
+     "points": [
+      "Fetal anaemia",
+      "Droplet spread",
+      "Transfusion rescues"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fifth disease virus suppressing fetal red cell production is **parvovirus B19** in pregnancy terms. Weekly Doppler watches for anaemia for eight to twelve weeks after exposure. Most exposed pregnancies end normally. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Parvovirus B19 suppresses fetal red cells and needs eight weeks of Doppler watching.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Week",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Exposure",
+      "Confirm maternal immunity"
+     ],
+     [
+      "Weeks 1 to 8",
+      "Weekly MCA Doppler"
+     ],
+     [
+      "Anaemia found",
+      "Transfusion referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Urinary infection recurrence prevention uses post treatment test of cure cultures, called **test of cure**. Persistent bacteriuria prompts low dose prophylaxis for the pregnancy. Nitrofurantoin avoidance near term and trimethoprim avoidance early shape drug choice. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Test of cure after bacteriuria treatment catches persistence needing prophylaxis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preterm-labour-fig1.webp",
+    "alt": "Preterm labour from infection context.",
+    "caption": "Infection and preterm labour. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Group B streptococcus in urine at any count marks heavy colonisation needing **intrapartum prophylaxis** automatically. It also treats as urinary infection at diagnosis in pregnancy. The neonatal team is alerted on the delivery plan. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Group B streptococcus bacteriuria automatically mandates intrapartum prophylaxis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "GBS in urine found"
+     },
+     {
+      "id": "n1",
+      "label": "Treated as UTI now"
+     },
+     {
+      "id": "n2",
+      "label": "Flagged for labour prophylaxis"
+     },
+     {
+      "id": "n3",
+      "label": "Neonatal team alerted"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Listeria from soft cheese and deli meats causes flu like illness with fetal loss, prevented by **food hygiene advice**. Pregnant women avoid unpasteurised products and refrigerated pates. Blood cultures diagnose febrile cases and ampicillin treats. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Food hygiene advice prevents listeria, which causes fetal loss from soft cheese.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Avoid",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Unpasteurised cheese",
+      "Listeria"
+     ],
+     [
+      "Refrigerated pate",
+      "Listeria"
+     ],
+     [
+      "Undercooked meat",
+      "Toxoplasma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fever in pregnancy always earns a cause hunt because maternal sepsis kills quickly, following **fever workup discipline**. Cultures before antibiotics, lactate and senior review mirror sepsis bundles. The fetus tolerates maternal fever poorly, so antipyretics accompany antibiotics. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fever workup discipline hunts the cause quickly because maternal sepsis kills fast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urinary source",
+     "points": [
+      "Commonest",
+      "Pyelonephritis protocol"
+     ]
+    },
+    "right": {
+     "title": "Malaria endemic",
+     "points": [
+      "Parasites sought",
+      "Artesunate if severe"
+     ]
+    }
+   }
+  }
+ ]
+}

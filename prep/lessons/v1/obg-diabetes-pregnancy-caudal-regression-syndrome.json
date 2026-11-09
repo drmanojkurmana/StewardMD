@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "obg-diabetes-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Diabetic Embryopathy, Macrosomia and Neonatal Hypoglycaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Failure of sacral and lower limb development in babies of diabetic mothers is **caudal regression syndrome**. Also called sacral agenesis, it is the most specific diabetic embryopathy though still rare. Good preconception control prevents it. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Caudal regression syndrome is the most specific diabetic embryopathy affecting the sacrum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Diabetic association"
+    ],
+    "rows": [
+     [
+      "Sacrum",
+      "Caudal regression"
+     ],
+     [
+      "Heart",
+      "Transposition, septal defects"
+     ],
+     [
+      "Neural tube",
+      "Increased defects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Heart malformations are the commonest major anomalies in pregestational diabetes, termed **congenital heart defects** of diabetic embryopathy. Transposition and ventricular septal defects predominate. Fetal echocardiography is routine for these pregnancies. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Congenital heart defects are the commonest anomalies in pregestational diabetes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cvs-cyanosis.webp",
+    "alt": "Congenital heart assessment in diabetic offspring.",
+    "caption": "Heart defects. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Excess fetal insulin driving truncal fat and shoulder growth produces diabetic **macrosomia**. The head grows normally while shoulders and abdomen enlarge disproportionately. This pattern is exactly what makes shoulder dystocia likely. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Diabetic macrosomia enlarges shoulders and abdomen disproportionately to the head.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Maternal glucose crosses"
+     },
+     {
+      "id": "n1",
+      "label": "Fetal insulin rises"
+     },
+     {
+      "id": "n2",
+      "label": "Truncal fat deposited"
+     },
+     {
+      "id": "n3",
+      "label": "Shoulder risk rises"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arrest of the shoulders after head delivery, an obstetric emergency, is **shoulder dystocia**. It complicates macrosomic and diabetic deliveries disproportionately. Manoeuvres from McRoberts to internal rotation follow a drilled sequence. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Shoulder dystocia arrests shoulders after head delivery and follows a drilled manoeuvre sequence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anticipated",
+     "points": [
+      "Diabetes, big baby",
+      "Team ready",
+      "Elective section discussed"
+     ]
+    },
+    "right": {
+     "title": "Unanticipated",
+     "points": [
+      "Drilled manoeuvres",
+      "McRoberts first",
+      "Document carefully"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After cord clamping the hyperinsulinaemic baby loses maternal glucose supply and crashes into **neonatal hypoglycaemia**. Early feeding and glucose monitoring guard the first day of life. Symptomatic or persistent lows need intravenous dextrose. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Neonatal hypoglycaemia follows cord clamping in hyperinsulinaemic babies of diabetic mothers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "Neonatal hypoglycaemia in diabetic pregnancy.",
+    "caption": "Neonatal hypoglycaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Excess fluid with diabetic pregnancies reflects fetal polyuria from hyperglycaemia, termed diabetic **polyhydramnios**. It signals poor recent control when other causes are excluded. Tightening control often normalises fluid over weeks. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Diabetic polyhydramnios signals poor recent control through fetal polyuria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Suggests"
+    ],
+    "rows": [
+     [
+      "Polyhydramnios",
+      "Poor control"
+     ],
+     [
+      "Macrosomia",
+      "Chronic excess"
+     ],
+     [
+      "Normal fluid and growth",
+      "Good control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stillbirth without warning in late diabetic pregnancy is **unexplained stillbirth**. Risk rises with poor control and vasculopathy, so surveillance and timed delivery at thirty eight to thirty nine weeks are standard. It has fallen with modern care but not vanished. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Unexplained stillbirth in diabetes is prevented by surveillance and timed delivery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Control optimised"
+     },
+     {
+      "id": "n1",
+      "label": "Growth and fluid scanned"
+     },
+     {
+      "id": "n2",
+      "label": "Delivery 38 to 39 weeks"
+     },
+     {
+      "id": "n3",
+      "label": "Stillbirth risk minimised"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Respiratory distress despite term delivery occurs because fetal hyperinsulinism delays surfactant, called **delayed lung maturity**. Diabetic babies also face hypocalcaemia, polycythaemia and jaundice. Neonatal teams attend these deliveries routinely. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Delayed lung maturity and metabolic problems bring neonatal teams to diabetic deliveries.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Diabetic delivery planning.",
+    "caption": "Diabetic delivery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Small left colon and transient tachypnoea join the list of lesser diabetic offspring effects, grouped as **minor neonatal morbidity**. Most resolve with supportive care in days. Their frequency still justifies delivery where neonatal support exists. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Minor neonatal morbidity in diabetic offspring mostly resolves with supportive care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major",
+     "points": [
+      "Anomalies, stillbirth",
+      "Preconception prevention"
+     ]
+    },
+    "right": {
+     "title": "Minor",
+     "points": [
+      "Transient metabolic upsets",
+      "Supportive care"
+     ]
+    }
+   }
+  }
+ ]
+}

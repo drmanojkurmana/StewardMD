@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "obg-heart-disease-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Mitral Stenosis, Eisenmenger, Cardiomyopathy and Valve Anticoagulation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Narrowing of the mitral valve from rheumatic scarring, the commonest heart lesion in pregnancy worldwide, is **rheumatic mitral stenosis**. Fixed outflow cannot accommodate the rise in cardiac output and heart rate of pregnancy. Pulmonary oedema threatens especially at peak output and after delivery.",
+   "say": "Rheumatic mitral stenosis cannot accommodate pregnancy output rises and threatens pulmonary oedema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Mild, asymptomatic",
+      "Usually tolerates"
+     ],
+     [
+      "Severe under 1 cm2",
+      "High decompensation risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Functional breathlessness grading predicting tolerance is the **NYHA class**. Classes one and two usually complete pregnancy safely, three and four carry major risk. Class is reassessed every trimester as output rises. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "NYHA class predicts pregnancy tolerance, with classes three and four carrying major risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Class assessed early"
+     },
+     {
+      "id": "n1",
+      "label": "Reassessed each trimester"
+     },
+     {
+      "id": "n2",
+      "label": "Delivery planned by class"
+     },
+     {
+      "id": "n3",
+      "label": "Anaesthesia involved early"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac output peaks at twenty eight to thirty four weeks and again immediately after delivery, the **peak cardiac output** danger windows. Autotransfusion from the contracted uterus floods the circulation after birth. Most decompensations cluster at these two moments. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Peak cardiac output windows in late pregnancy and just after delivery cluster decompensations.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Cardiac pregnancy assessment.",
+    "caption": "Cardiac assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Reversed shunt with cyanosis from pulmonary vascular disease, forbidding pregnancy, is **Eisenmenger syndrome**. Maternal mortality reaches thirty to fifty percent, mostly postpartum. Termination is discussed honestly, and contraception is life preserving. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Eisenmenger syndrome forbids pregnancy with maternal mortality up to fifty percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Eisenmenger",
+     "points": [
+      "Pregnancy contraindicated",
+      "Mortality 30 to 50 percent"
+     ]
+    },
+    "right": {
+     "title": "Simple shunt",
+     "points": [
+      "Left to right only",
+      "Often tolerates pregnancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Heart failure appearing in the last month or first five months after delivery without other cause is **peripartum cardiomyopathy**. Bromocriptine and standard failure therapy aid recovery in many. Future pregnancy counselling depends on whether function normalises. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Peripartum cardiomyopathy appears around delivery and future pregnancy depends on recovery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "Last month to 5 months after"
+     ],
+     [
+      "Echo",
+      "Dilated, weak ventricle"
+     ],
+     [
+      "Recovery",
+      "About half normalise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical valves demand anticoagulation balancing valve thrombosis against fetal harm, the **prosthetic valve** dilemma. Warfarin protects valves best but causes embryopathy in the first trimester. Heparin protects the fetus but thromboses valves more, while low molecular weight heparin with level monitoring is the common compromise, balloon mitral valvotomy relieves severe stenosis in pregnancy, endocarditis prophylaxis follows dental and delivery indications, ergometrine is avoided for its hypertensive surge, and mWHO classification grades every lesion from low to forbidden risk.",
+   "say": "The prosthetic valve dilemma balances warfarin embryopathy against heparin valve thrombosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preeclampsia-fig1.webp",
+    "alt": "Cardiovascular strain in pregnancy context.",
+    "caption": "Cardiac strain context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Splitting the fused mitral commissures with a balloon during pregnancy is **balloon mitral valvotomy**. It relieves severe stenosis refractory to medical therapy, ideally after twenty weeks. Radiation shielding protects the fetus during the brief procedure. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Balloon mitral valvotomy relieves refractory severe stenosis ideally after twenty weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe stenosis refractory"
+     },
+     {
+      "id": "n1",
+      "label": "After 20 weeks preferred"
+     },
+     {
+      "id": "n2",
+      "label": "Balloon splits commissures"
+     },
+     {
+      "id": "n3",
+      "label": "Output tolerated better"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ergometrine is avoided in cardiac disease because its vasoconstriction surges pressure, an **avoid ergometrine** rule. Oxytocin by slow infusion replaces it for the third stage. Even oxytocin boluses drop resistance dangerously and are given slowly. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Ergometrine is avoided in cardiac disease and oxytocin is given by slow infusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ergometrine",
+     "points": [
+      "Vasoconstriction surge",
+      "Avoid in cardiac disease"
+     ]
+    },
+    "right": {
+     "title": "Oxytocin infusion",
+     "points": [
+      "Slow, controlled",
+      "Preferred third stage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The modified WHO system grading lesions from safe to pregnancy forbidden is the **mWHO risk classification**. Class four includes Eisenmenger and severe stenosis with symptoms. It structures counselling, surveillance intensity and delivery planning for every lesion. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "mWHO classification grades every cardiac lesion from safe to pregnancy forbidden.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "mWHO",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "One",
+      "No increased risk"
+     ],
+     [
+      "Two to three",
+      "Moderate, specialist care"
+     ],
+     [
+      "Four",
+      "Pregnancy contraindicated"
+     ]
+    ]
+   }
+  }
+ ]
+}
