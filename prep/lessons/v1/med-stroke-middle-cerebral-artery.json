@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "med-stroke",
+ "subject": "medicine",
+ "title": "Vascular Stroke Syndromes: MCA, Lacunar Infarcts, and CVST",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The most frequent territory involved in acute ischaemic stroke is the middle cerebral artery arborization. Complete occlusion of the mainstem M1 segment produces the full **middle cerebral artery syndrome**, presenting with contralateral hemiplegia and hemisensory loss affecting the face and upper extremity far more severely than the lower extremity, contralateral homonymous hemianopia, and conjugate eye deviation toward the lesion.",
+   "say": "The most frequent territory involved in acute ischemic stroke is the middle cerebral artery. Mainstem occlusion produces the middle cerebral artery syndrome, presenting with contralateral hemiplegia and sensory loss affecting the face and arm far more than the leg, contralateral homonymous hemianopia, and gaze deviation toward the lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Middle Cerebral Artery (MCA)",
+     "points": [
+      "Face and arm weakness > leg weakness",
+      "Dominant hemisphere: Aphasia (Broca/Wernicke)",
+      "Non-dominant hemisphere: Hemispatial neglect",
+      "Contralateral homonymous hemianopia"
+     ]
+    },
+    "right": {
+     "title": "Anterior Cerebral Artery (ACA)",
+     "points": [
+      "Contralateral leg weakness > arm/face",
+      "Urinary incontinence (paracentral lobule)",
+      "Abulia, apathy, akinetic mutism",
+      "Primitive grasp and suck reflexes release"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Small subcortical ischaemic infarcts measuring under fifteen millimetres in diameter resulting from lipohyalinosis and microatheroma of deep penetrating lenticulostriate or thalamoperforating arterioles are termed **lacunar infarct** syndromes. Classic presentations include pure motor hemiparesis (posterior limb of internal capsule), pure sensory stroke (ventral posterolateral thalamus), ataxic hemiparesis, and clumsy hand-dysarthria syndrome.",
+   "say": "Small subcortical ischemic infarcts measuring under fifteen millimetres caused by lipohyalinosis of deep penetrating arterioles are termed lacunar infarcts. Classic syndromes include pure motor hemiparesis, pure sensory stroke, ataxic hemiparesis, and clumsy hand dysarthria syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lacunar Stroke Syndrome",
+     "Primary Anatomical Infarct Site",
+     "Physical Examination Features"
+    ],
+    "rows": [
+     [
+      "Pure Motor Hemiparesis",
+      "Posterior limb of internal capsule / Pons",
+      "Proportional face, arm, and leg weakness without sensory signs"
+     ],
+     [
+      "Pure Sensory Stroke",
+      "Ventral posterolateral (VPL) thalamus",
+      "Contralateral hemisensory numbness without motor weakness"
+     ],
+     [
+      "Ataxic Hemiparesis",
+      "Internal capsule / Corona radiata / Pons",
+      "Contralateral limb weakness paired with prominent ipsilateral ataxia"
+     ],
+     [
+      "Clumsy Hand-Dysarthria",
+      "Anterior limb of internal capsule / Genu",
+      "Severe dysarthria, facial weakness, and clumsy hand dexterity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symptomatic severe atherosclerotic stenosis of the extracranial internal carotid artery generates emboli or haemodynamic hypoperfusion. For symptomatic patients with seventy to ninety-nine percent luminal stenosis and life expectancy over five years, surgical **carotid endarterectomy** (CEA) provides profound stroke risk reduction when performed expeditiously within fourteen days of the index neurological event.",
+   "say": "Severe atherosclerotic stenosis of the extracranial internal carotid artery generates emboli or hypoperfusion. For symptomatic patients with seventy to ninety-nine percent stenosis, surgical carotid endarterectomy provides significant stroke risk reduction when performed within fourteen days of the index event.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-aortic-aneurysms-evar-and-carotid-endarterectomy-fig1.webp",
+    "alt": "Surgical carotid endarterectomy exposure and plaque excision.",
+    "caption": "Surgical exposure and atheromatous plaque removal during carotid endarterectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Embolisation of cardiac intracavitary thrombi into cerebral arteries accounts for up to thirty percent of ischaemic strokes, defining **cardioembolic stroke**. Non-valvular atrial fibrillation is the dominant driver, producing sudden maximal neurological deficits at onset due to large occlusive clots lodging in distal cortical branches. Direct oral anticoagulants provide definitive secondary prevention, superior to antiplatelets.",
+   "say": "Embolisation of intracavitary cardiac thrombi accounts for up to thirty percent of ischemic strokes, defining cardioembolic stroke. Non-valvular atrial fibrillation is the dominant driver, producing sudden maximal deficits at onset. Direct oral anticoagulants provide definitive secondary prevention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "af",
+      "label": "Atrial Fibrillation Stasis"
+     },
+     {
+      "id": "lath",
+      "label": "Left Atrial Appendage Thrombus"
+     },
+     {
+      "id": "emb",
+      "label": "Sudden Large Cortical Embolism"
+     }
+    ],
+    "edges": [
+     [
+      "af",
+      "lath"
+     ],
+     [
+      "lath",
+      "emb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ischaemic injury localized to border zones between adjacent major cerebral arterial circulations is designated as a **watershed infarct** (border-zone infarct). Typically triggered by profound systemic hypotension, cardiac arrest, or critical bilateral carotid occlusive disease, watershed strokes present with proximal limb weakness sparing distal hands and feet, classically described as the man-in-a-barrel syndrome.",
+   "say": "Ischemic injury localized to border zones between adjacent major cerebral arterial circulations is designated as a watershed infarct. Triggered by severe systemic hypotension or critical carotid stenosis, watershed strokes cause proximal limb weakness sparing distal extremities, termed the man-in-a-barrel syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cortical Watershed Infarction",
+     "points": [
+      "Junction of ACA, MCA, and PCA",
+      "Induced by severe systemic hypotension / shock",
+      "Proximal shoulder and hip weakness",
+      "Cortical sensory deficits and visual agnosia"
+     ]
+    },
+    "right": {
+     "title": "Internal Watershed Infarction",
+     "points": [
+      "Deep white matter (lenticulostriate / MCA border)",
+      "Rosary-like string of subcortical infarcts",
+      "Severe internal carotid artery stenosis",
+      "Fluctuating hemiparesis and cognitive slowing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thrombotic occlusion of dural venous sinuses or cerebral cortical veins is **cerebral venous sinus thrombosis** (CVST). Occurring predominantly in young women, it is strongly associated with oral contraceptive use, pregnancy, puerperium, and hereditary thrombophilias. Patients present with intractable progressive headache, papilloedema, focal seizures, and parasagittal venous haemorrhagic infarctions on magnetic resonance venography.",
+   "say": "Thrombotic occlusion of dural venous sinuses is termed cerebral venous sinus thrombosis. Occurring predominantly in young women, it is strongly associated with oral contraceptives, pregnancy, and thrombophilias. Patients present with progressive headache, papilloedema, seizures, and venous haemorrhagic infarcts on MR venography.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thromb",
+      "label": "Dural Sinus Thrombosis"
+     },
+     {
+      "id": "venous",
+      "label": "Venous Congestion & Hypertension"
+     },
+     {
+      "id": "bleed",
+      "label": "Bilateral Haemorrhagic Infarction"
+     }
+    ],
+    "edges": [
+     [
+      "thromb",
+      "venous"
+     ],
+     [
+      "venous",
+      "bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Even when neuroimaging confirms secondary haemorrhagic transformation within venous infarction, the mandatory first-line acute treatment for cerebral venous sinus thrombosis is therapeutic anticoagulation with full-dose **heparin** (low-molecular-weight heparin or unfractionated heparin). Anticoagulation prevents further thrombus propagation across dural sinuses, restores venous collateral drainage, and lowers intracranial venous pressure.",
+   "say": "Even when neuroimaging confirms secondary haemorrhagic transformation, the mandatory first-line treatment for cerebral venous sinus thrombosis is therapeutic anticoagulation with full-dose heparin. Anticoagulation halts thrombus propagation, restores venous drainage, and reduces intracranial pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sinus Location",
+     "Clinical Syndrome",
+     "Diagnostic Neuroimaging Signs"
+    ],
+    "rows": [
+     [
+      "Superior Sagittal Sinus",
+      "Headache, papilloedema, bilateral leg weakness",
+      "Empty delta sign on contrast-enhanced CT / MRV"
+     ],
+     [
+      "Transverse / Sigmoid Sinus",
+      "Mastoid pain, intracranial hypertension",
+      "Loss of flow void; unilateral petrosal congestion"
+     ],
+     [
+      "Cavernous Sinus",
+      "Proptosis, chemosis, painful ophthalmoplegia",
+      "Lateral wall bulging, thrombosis of facial vein tributaries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cerebrovascular events occurring in individuals under fifty years of age constitute **stroke in the young**, requiring thorough diagnostic workup beyond classic atherosclerosis. Leading causes include cervical arterial dissection (carotid or vertebral artery tear following minor neck trauma), patent foramen ovale with paradoxical venous embolism, antiphospholipid syndrome, and recreational drug vasospasm.",
+   "say": "Cerebrovascular events in individuals under fifty years constitute stroke in the young, requiring diagnostic workup beyond classic atherosclerosis. Leading causes include cervical arterial dissection, patent foramen ovale with paradoxical embolism, antiphospholipid syndrome, and recreational drug use.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-amyloid-angiopathy-fig1.webp",
+    "alt": "Microvascular cerebral amyloid angiopathy and young cerebrovascular pathology.",
+    "caption": "Non-atherosclerotic vascular pathology in young and atypical stroke presentations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 423"
+}
