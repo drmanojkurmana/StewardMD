@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "sur-urolithiasis",
+ "subject": "surgery",
+ "title": "Renal Calculus and Ureteric Colic",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A hard crystalline stone forming inside the kidney is a **renal calculus**. Most stones contain calcium oxalate, while infection stones contain phosphate mixtures. Stones cause pain only when they move or block urine flow. Calcium oxalate stones show on plain X ray, while uric acid stones are invisible on X ray but visible on computed tomography.",
+   "say": "A renal calculus is a hard kidney stone that hurts only when it moves or blocks urine flow.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-renal-calculus-kub.webp",
+    "alt": "Plain KUB film showing a renal calculus.",
+    "caption": "Renal calculus visible on a plain kidney film. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A large branched stone filling the renal pelvis and calyces is a **staghorn calculus**. It grows in infected alkaline urine and slowly destroys kidney tissue if ignored. Complete stone clearance is needed because fragments regrow quickly. Struvite infection stones form only when urease producing bacteria such as Proteus split urea, and women are affected more often.",
+   "say": "A staghorn calculus branches through the kidney in infected urine and destroys tissue unless fully cleared.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-staghorn-calculus.webp",
+    "alt": "Staghorn calculus filling the renal pelvis and calyces.",
+    "caption": "Staghorn calculus: branched stone filling the collecting system. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe loin pain radiating to the groin from a moving ureteric stone is **ureteric colic**. The patient rolls around unable to find comfort, unlike the still patient with peritonitis. Blood in the urine commonly accompanies the pain. Pain often radiates to the testicle or labium on the same side, because the ureter shares spinal segments T11 to L2 with the groin.",
+   "say": "Ureteric colic sends severe loin pain to the groin and makes the patient roll around restlessly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/renal-colic-fig1.webp",
+    "alt": "Renal colic pain radiation from loin to groin.",
+    "caption": "Renal colic: loin to groin pain from a ureteric stone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The best first scan for a suspected urinary stone is a **NCCT KUB**. This non contrast computed tomography of kidneys, ureters and bladder shows stone size and position accurately. It also reveals kidney swelling from obstruction. It detects about 95 percent of stones, though it gives no direct measure of how well each kidney is working.",
+   "say": "A non contrast CT of the urinary tract best shows stone size, position and kidney swelling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe loin to groin pain"
+     },
+     {
+      "id": "n1",
+      "label": "Urine tested for blood"
+     },
+     {
+      "id": "n2",
+      "label": "Non contrast CT performed"
+     },
+     {
+      "id": "n3",
+      "label": "Size and position guide treatment"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ureter narrows naturally at three places known as the **sites of ureteric narrowing**. Stones lodge at the pelviureteric junction, where the ureter crosses the pelvic brim, and where it enters the bladder. Knowing these sites helps predict where a stone will stick.",
+   "say": "Stones lodge at three natural narrowings: the junction, the pelvic brim crossing, and the bladder entry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Anatomy"
+    ],
+    "rows": [
+     [
+      "First",
+      "Pelviureteric junction"
+     ],
+     [
+      "Second",
+      "Crossing pelvic brim"
+     ],
+     [
+      "Third",
+      "Entry into bladder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shock waves focused from outside the body to break a stone are called **ESWL**. Extracorporeal shock wave lithotripsy suits many kidney and upper ureter stones without any cut. Fragments then pass naturally in the urine over days. Stones over about 2 centimetres, and hard cystine stones, fragment poorly, so size and stone type decide whether shock waves are offered.",
+   "say": "Shock wave treatment breaks stones from outside the body so fragments can pass naturally in urine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urinary-stones-eswl-urs-pcnl-fig1.webp",
+    "alt": "Interventional options for urinary stones including shock waves and keyhole surgery.",
+    "caption": "Stone treatment options: shock waves, endoscopy and keyhole surgery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Keyhole surgery through the back directly into the kidney is **PCNL**. Percutaneous nephrolithotomy removes large and staghorn stones through a small tract. It clears big stone burdens better than shock wave treatment alone. Bleeding is the main risk, and a perinephric haematoma, blood collecting around the kidney, is the complication most often examined.",
+   "say": "Keyhole surgery through the back removes large and staghorn stones through a small tract into the kidney.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tract made into kidney"
+     },
+     {
+      "id": "n1",
+      "label": "Scope passed through back"
+     },
+     {
+      "id": "n2",
+      "label": "Stone broken and removed"
+     },
+     {
+      "id": "n3",
+      "label": "Best for large stone burden"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Passing a fine scope up the ureter to see and laser a stone is **ureteroscopy**. It treats most ureteric stones and many kidney stones in one sitting. A temporary stent often follows to keep the ureter open while swelling settles. Stent symptoms are common, including frequency, loin pain on passing urine and visible blood, and patients must be warned beforehand.",
+   "say": "Ureteroscopy passes a fine scope up the ureter to laser stones, often leaving a temporary stent afterwards.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shock wave treatment",
+     "points": [
+      "No cuts at all",
+      "Fragments pass naturally",
+      "Suits smaller stones"
+     ]
+    },
+    "right": {
+     "title": "Ureteroscopy",
+     "points": [
+      "Scope through ureter",
+      "Laser breaks stone directly",
+      "Suits ureteric stones"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An infected kidney blocked by a stone is a surgical emergency needing urgent **decompression**. Antibiotics alone cannot reach pus behind an obstruction. A stent or a drainage tube through the back relieves pressure until the stone is treated later. Drainage within hours, not days, is the target, because an obstructed infected kidney can lose function and cause fatal sepsis.",
+   "say": "An infected blocked kidney needs urgent drainage by stent or back tube because antibiotics cannot reach trapped pus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fever with blocked kidney"
+     },
+     {
+      "id": "n1",
+      "label": "Antibiotics started"
+     },
+     {
+      "id": "n2",
+      "label": "Stent or back drainage placed"
+     },
+     {
+      "id": "n3",
+      "label": "Stone treated when sepsis settles"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
