@@ -1132,7 +1132,7 @@ body.dark #homeV2.rnav .rnav-main{background:#071318}
 #homeV2.rnav .hrf-head .rds-icon-btn{color:#fff;background:transparent;min-width:38px;width:38px;height:38px}
 #homeV2.rnav .hrf-head .rds-icon{font-size:22px;color:#fff}
 #homeV2.rnav .hrf-head .rnav-brand{color:#fff;font:600 19px/1.1 var(--rds-font);letter-spacing:-.01em;gap:7px;padding-left:2px}
-#homeV2.rnav .hrf-head .rnav-brand b{color:#fff;font-weight:600}
+#homeV2.rnav .hrf-head .rnav-brand b{color:var(--hrf-mint);font-weight:600}
 #homeV2.rnav .hrf-head .rnav-brand img{width:27px;height:27px;filter:brightness(0) invert(1)}
 #homeV2.rnav .hrf-head [data-act="search"]{margin-left:auto}
 /* One surface: header + greeting sit on a single art layer. html[data-appearance] outranks appearance.css. */
@@ -1276,3 +1276,24 @@ body.pro-verified #homeV2#homeV2.rnav .hrf-pro[hidden]{display:inline-flex!impor
   #homeV2#homeV2.rnav .hrf-art{left:auto;right:0;top:0;width:auto;height:min(272px,70%);-webkit-mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.1) 14%,rgba(0,0,0,.42) 30%,rgba(0,0,0,.82) 46%,#000 58%),linear-gradient(180deg,transparent 0,#000 16%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.1) 14%,rgba(0,0,0,.42) 30%,rgba(0,0,0,.82) 46%,#000 58%),linear-gradient(180deg,transparent 0,#000 16%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);mask-composite:intersect}
 }
 @media (min-width:561px){#homeV2#homeV2#homeV2.rnav .rnav-main{padding-inline:0;margin-inline:0;max-width:none;width:100%}}
+/* Quiet ledger (owner's pick 2026-11-09): the eight tiles sit in two flat hairline cards with a slim banner between. */
+#homeV2.rnav{--hrf-card:#fff;--hrf-hair:rgba(11,79,67,.13);--hrf-card-sh:0 1px 2px rgba(6,60,50,.06)}
+body.dark #homeV2.rnav{--hrf-card:var(--hrf-tile);--hrf-hair:rgba(255,255,255,.11);--hrf-card-sh:0 1px 2px rgba(0,0,0,.4)}
+html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:not(.dark) #homeV2.rnav{--hrf-hair:color-mix(in srgb,var(--sphere-base) 14%,transparent)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qrow{gap:0;overflow:hidden;border-radius:14px;background:var(--hrf-card);box-shadow:var(--hrf-card-sh),0 0 0 1px var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{position:relative;height:84px!important;min-height:84px!important;gap:7px;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;color:var(--hrf-ink);font-weight:500;font-size:12.5px;transition:background-color .1s ease}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{color:var(--hrf-deep);font-weight:700}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn+.hrf-qa-btn::before,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc+.hrf-qc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn:active,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc:active{transform:none;background:color-mix(in srgb,var(--hrf-ink) 7%,transparent)!important}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn:focus-visible,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc:focus-visible{outline:2px solid var(--hrf-deep);outline-offset:-3px}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-ic,body.dark #homeV2#homeV2#homeV2.rnav .hrf-ic{width:27px;height:27px;stroke-width:1.5;filter:none;color:var(--hrf-ink)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:var(--hrf-deep)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner{height:74px;margin-top:11px;padding:0 18px;border-radius:14px;background:var(--hrf-b1);box-shadow:var(--hrf-card-sh)}
+body.dark #homeV2#homeV2#homeV2.rnav .hrf-banner{box-shadow:var(--hrf-card-sh),0 0 0 1px var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner::after,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-dots,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner .rnav-hero-p{display:none}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner .rnav-hero-tt{font-size:19px;font-weight:700}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner-tag{margin-top:3px;font-size:9.5px}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner-logo{width:58px;height:58px;margin-right:-6px}
+@media (max-width:340px){html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-size:11px}}
+/* Smallest phones: the header cannot fit the chip and four icons; the banner still says Pro. */
+@media (max-width:350px){body #homeV2#homeV2#homeV2.rnav .hrf-head .hrf-pro{display:none!important}}
