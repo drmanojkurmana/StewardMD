@@ -57,7 +57,7 @@
         "rows": [
           [
             "Aura",
-            "Epigastric rising sensation, d\u00e9j\u00e0 vu, fear",
+            "Epigastric rising sensation, déjà vu, fear",
             "Sensory, motor, or brief psychic sensation"
           ],
           [
@@ -114,7 +114,41 @@
     {
       "tx": "First-line therapy for convulsive status epilepticus is intravenous **lorazepam** (0.1 mg/kg, maximum 4 mg) or intramuscular **midazolam** (10 mg for patients over 40 kg), which must be administered promptly within the first 5 to 10 minutes. If seizures continue after 5 to 10 minutes, the dose may be repeated once before initiating second-line intravenous infusions.",
       "say": "First line therapy for convulsive status epilepticus is intravenous lorazepam zero point one milligrams per kilogram or intramuscular midazolam ten milligrams. These rapid acting benzodiazepines must be administered promptly within the first five to ten minutes of persistent seizure activity.",
-      "vis": null
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Seizure reaches 5 minutes"
+          },
+          {
+            "id": "b",
+            "label": "Lorazepam IV or midazolam IM"
+          },
+          {
+            "id": "c",
+            "label": "Repeat benzodiazepine once if still seizing"
+          },
+          {
+            "id": "d",
+            "label": "Second-line intravenous drug"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
     },
     {
       "tx": "Second-line intravenous antiepileptic drugs for established status epilepticus include **levetiracetam** (60 mg/kg, max 4500 mg), fosphenytoin (20 mg PE/kg), or sodium valproate (40 mg/kg). The landmark **ESETT** trial demonstrated equivalent therapeutic efficacy and safety among levetiracetam, fosphenytoin, and valproate for terminating status epilepticus unresponsive to benzodiazepines.",
@@ -130,7 +164,41 @@
     {
       "tx": "**Refractory status epilepticus** is defined as persistence of seizures despite adequate doses of a benzodiazepine and a second-line antiepileptic drug. Treatment requires immediate tracheal intubation, intensive care admission, and continuous intravenous anesthetic infusions such as **propofol**, midazolam, or ketamine, titrated to achieve electroencephalographic burst suppression for 24 to 48 hours.",
       "say": "Refractory status epilepticus is defined as persistence of seizures despite adequate doses of a benzodiazepine and a second line antiepileptic drug. Management requires immediate tracheal intubation and continuous intravenous anesthetic infusions such as propofol titrated to achieve electroencephalographic burst suppression.",
-      "vis": null
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Seizures persist after two drug stages"
+          },
+          {
+            "id": "b",
+            "label": "Intubate and admit to intensive care"
+          },
+          {
+            "id": "c",
+            "label": "Anaesthetic infusion with EEG monitoring"
+          },
+          {
+            "id": "d",
+            "label": "Burst suppression for 24 to 48 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
     }
   ],
   "quiz": [

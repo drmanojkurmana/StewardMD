@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "med-headache",
+ "subject": "medicine",
+ "title": "Secondary Headaches: IIH and Medication-Overuse Headache",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A secondary headache syndrome characterised by elevated intracranial pressure in the absence of an intracranial mass lesion, hydrocephalus, or dural venous thrombosis is **idiopathic intracranial hypertension** (IIH, pseudotumor cerebri). Occurring predominantly in obese women of childbearing age, patients present with diffuse daily headaches, bilateral papilloedema, transient visual obscurations, and pulsatile tinnitus.",
+   "say": "A secondary headache syndrome characterized by elevated intracranial pressure without a mass, hydrocephalus, or venous thrombosis is idiopathic intracranial hypertension. Occurring predominantly in obese women of childbearing age, patients present with daily headaches, papilloedema, transient visual obscurations, and pulsatile tinnitus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/iih-fig1.webp",
+    "alt": "Pathophysiological mechanisms of idiopathic intracranial hypertension and papilloedema.",
+    "caption": "Impaired arachnoid granulation CSF absorption and papilloedema in IIH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic confirmation of IIH requires fulfilling the modified Dandy criteria: signs of raised intracranial pressure, normal neurological examination except for sixth cranial nerve palsy, normal brain parenchyma and venous sinuses on MRI/MRV, and documented elevated lumbar puncture opening pressure exceeding twenty-five centimetres of water with normal **cerebrospinal** fluid cytochemistry.",
+   "say": "Diagnostic confirmation of IIH requires fulfilling the modified Dandy criteria: signs of raised pressure, normal neurological exam except for sixth nerve palsy, normal MRI and MR venography, and documented lumbar puncture opening pressure exceeding twenty-five centimetres of water with normal CSF fluid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symp",
+      "label": "Headache + Papilloedema + Tinnitus"
+     },
+     {
+      "id": "mri",
+      "label": "MRI/MRV Excludes Mass & Sinus Thrombosis"
+     },
+     {
+      "id": "lp",
+      "label": "Opening Pressure > 25 cm H2O Confirms IIH"
+     }
+    ],
+    "edges": [
+     [
+      "symp",
+      "mri"
+     ],
+     [
+      "mri",
+      "lp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive first-line pharmacological treatment for idiopathic intracranial hypertension is the oral carbonic anhydrase inhibitor **acetazolamide**. By inhibiting carbonic anhydrase within choroid plexus epithelial cells, acetazolamide reduces cerebrospinal fluid production by up to fifty percent, successfully lowering intracranial pressure, relieving headache, and protecting against permanent optic atrophy and visual field loss.",
+   "say": "The definitive first-line pharmacological treatment for idiopathic intracranial hypertension is the oral carbonic anhydrase inhibitor acetazolamide. By inhibiting carbonic anhydrase within choroid plexus epithelial cells, acetazolamide reduces CSF production by half, protecting against permanent optic atrophy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Primary Mechanism",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Acetazolamide (1 to 4 g/day)",
+      "Choroid plexus carbonic anhydrase inhibition",
+      "Reduces CSF secretion; preserves optic nerve function"
+     ],
+     [
+      "Weight Reduction (Bariatric)",
+      "Decreases intra-abdominal and intrathoracic venous pressure",
+      "Disease-modifying long-term cure; prevents relapses"
+     ],
+     [
+      "Optic Nerve Sheath Fenestration",
+      "Surgical dural incising of optic sheath",
+      "Emergency decompression for progressive visual field loss"
+     ],
+     [
+      "Ventriculoperitoneal Shunt",
+      "Cerebrospinal fluid diversion into peritoneal cavity",
+      "Refractory headache and failure of medical therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frequent, excessive consumption of acute abortive analgesics in patients with primary headaches paradoxically transforms episodic headaches into a chronic daily headache pattern termed **medication overuse headache** (MOH). Defined as headache occurring on fifteen or more days per month in a patient taking simple analgesics for fifteen days/month or triptans/opioids for ten days/month, definitive cure requires structured withdrawal of the overused agent.",
+   "say": "Frequent excessive consumption of acute analgesics in primary headache patients paradoxically transforms headaches into a chronic daily pattern termed medication overuse headache. Occurring fifteen or more days monthly from overused analgesics or triptans, definitive cure requires complete withdrawal of the offending medication.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tension-ha-fig1.webp",
+    "alt": "Pathophysiological pathways and chronification of primary headache disorders.",
+    "caption": "Central sensitization and chronification in primary and medication-overuse headaches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Persistent leakage of cerebrospinal fluid through a dural puncture defect into the epidural space causes low intracranial CSF pressure and traction on pain-sensitive meninges, producing **post-dural puncture headache** (PDPH). The pathognomonic clinical feature is severe orthostatic (postural) headache that develops within fifteen minutes of sitting or standing upright and resolves completely upon lying flat.",
+   "say": "Persistent leakage of cerebrospinal fluid through a dural puncture defect causes low intracranial pressure and meningeal traction, producing post-dural puncture headache. The pathognomonic clinical feature is severe orthostatic headache that develops upon sitting or standing and resolves completely upon lying flat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Post-Dural Puncture Headache (Low ICP)",
+     "points": [
+      "Orthostatic: worse standing, relieved lying flat",
+      "Preceded by lumbar puncture or epidural breach",
+      "MRI: Pachymeningeal enhancement, subdural fluid",
+      "Treated with epidural autologous blood patch"
+     ]
+    },
+    "right": {
+     "title": "Raised ICP Headache (High ICP)",
+     "points": [
+      "Worse lying supine, coughing, or straining",
+      "Associated with morning nausea and vomiting",
+      "Accompanied by bilateral papilloedema",
+      "Treated with head elevation and Acetazolamide"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conservative management of post-dural puncture headache comprises bed rest, aggressive oral or intravenous hydration, simple analgesics, and oral caffeine. For severe, disabling orthostatic headaches persisting beyond forty-eight hours, the definitive therapeutic gold standard is an autologous **epidural** blood patch, where fifteen to twenty millilitres of the patient's own blood is injected into the epidural space to seal the dural hole.",
+   "say": "Conservative management of post-dural puncture headache comprises bed rest, hydration, analgesics, and caffeine. For severe disabling orthostatic headaches persisting beyond forty-eight hours, the definitive therapeutic gold standard is an autologous epidural blood patch to seal the dural defect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "leak",
+      "label": "Persistent CSF Dural Leak"
+     },
+     {
+      "id": "patch",
+      "label": "Autologous Epidural Blood Injection (15-20 mL)"
+     },
+     {
+      "id": "seal",
+      "label": "Immediate Fibrin Clot Seal & Pressure Restoration"
+     }
+    ],
+    "edges": [
+     [
+      "leak",
+      "patch"
+     ],
+     [
+      "patch",
+      "seal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical triage of acute headache requires rigorous screening for secondary life-threatening aetiologies using the SNOOP **mnemonic** (Systemic symptoms/fever, Neurological deficits, Onset sudden or thunderclap, Older age over fifty years, Pattern change or Papilloedema, Positional aggravation). Any red flag finding mandates emergency neuroimaging and vascular assessment.",
+   "say": "Clinical triage of acute headache requires screening for secondary life-threatening causes using the SNOOP mnemonic: Systemic symptoms, Neurological deficits, Onset sudden, Older age, Pattern change, and Positional aggravation. Any red flag mandates urgent neuroimaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SNOOP Red Flag Domain",
+     "Underlying Pathology Suspected",
+     "Emergency Diagnostic Action"
+    ],
+    "rows": [
+     [
+      "Systemic symptoms (fever, weight loss)",
+      "Meningitis, encephalitis, Giant cell arteritis",
+      "Lumbar puncture, blood cultures, ESR/CRP"
+     ],
+     [
+      "Neurological signs or focal deficits",
+      "Intracranial mass, stroke, brain abscess",
+      "Contrast-enhanced brain MRI with diffusion"
+     ],
+     [
+      "Onset sudden (Thunderclap within 1 min)",
+      "Subarachnoid haemorrhage, RCVS, CVST",
+      "Emergency non-contrast CT, followed by LP"
+     ],
+     [
+      "Older age (> 50 years new onset)",
+      "Giant cell arteritis, intracranial malignancy",
+      "Temporal artery ultrasound/biopsy, MRI brain"
+     ],
+     [
+      "Papilloedema / Positional change",
+      "Raised ICP mass, IIH, spontaneous CSF leak",
+      "Urgent neuroimaging before lumbar puncture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The group of primary headaches defined by severe unilateral head pain linked with ipsilateral cranial parasympathetic autonomic activation comprises the trigeminal **autonomic** cephalalgias (TACs). In addition to cluster headache, this family includes paroxysmal hemicrania (which responds completely to indomethacin) and short-lasting unilateral neuralgiform headache attacks with conjunctival injection and tearing (SUNCT).",
+   "say": "The group of primary headaches defined by unilateral head pain linked with ipsilateral cranial autonomic activation comprises the trigeminal autonomic cephalalgias. In addition to cluster headache, this family includes paroxysmal hemicrania, which responds completely to indomethacin, and short-lasting SUNCT attacks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TAC Disorder",
+     "Attack Duration",
+     "Daily Frequency",
+     "Absolute Drug of Choice"
+    ],
+    "rows": [
+     [
+      "Cluster Headache",
+      "15 to 180 minutes",
+      "1 every other day to 8 per day",
+      "High-flow Oxygen + Subcutaneous Sumatriptan"
+     ],
+     [
+      "Paroxysmal Hemicrania",
+      "2 to 30 minutes",
+      "5 to 40 per day",
+      "Oral Indomethacin (absolute diagnostic response)"
+     ],
+     [
+      "SUNCT / SUNA",
+      "1 to 600 seconds",
+      "Up to 100 per day",
+      "Lamotrigine OR Intravenous Lidocaine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 422"
+}

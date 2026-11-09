@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "med-ecg",
+ "subject": "medicine",
+ "title": "ECG frontal axis, conduction intervals and bundle branch block",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Systematic 12-lead electrocardiographic interpretation starts with determining rate, rhythm, and frontal plane electrical axis. The normal **ECG axis** lies between minus 30 degrees and plus 90 degrees. Examine leads I and aVF to determine quadrant orientation. Positive net deflection in both lead I and aVF confirms a normal axis. When lead I is positive while aVF is negative, inspect lead II: a negative lead II confirms left axis deviation.",
+   "say": "Electrocardiographic interpretation starts with determining rate, rhythm and mean frontal axis. The normal axis ranges from minus thirty to plus ninety degrees. Inspect leads one and aVF to define the quadrant. Positive deflections in both indicate a normal axis. When lead one is positive and aVF is negative, check lead two to confirm left axis deviation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Frontal axis quadrant",
+     "Lead I QRS",
+     "Lead aVF QRS",
+     "Clinical significance"
+    ],
+    "rows": [
+     [
+      "Normal axis (-30 to +90)",
+      "Positive",
+      "Positive",
+      "Normal cardiac orientation"
+     ],
+     [
+      "Left axis deviation (-30 to -90)",
+      "Positive",
+      "Negative (Lead II neg)",
+      "LAFB, LVH, inferior MI"
+     ],
+     [
+      "Right axis deviation (+90 to +180)",
+      "Negative",
+      "Positive",
+      "RVH, PE, LPFB, COPD"
+     ],
+     [
+      "Extreme axis deviation (northwest)",
+      "Negative",
+      "Negative",
+      "Ventricular tachycardia, severe RVH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Depolarisation spreading from the sinoatrial node through the atrioventricular node is represented by the **PR interval**. Normal duration ranges from 0.12 to 0.20 seconds, spanning 3 to 5 small squares. Prolongation beyond 0.20 seconds defines first-degree atrioventricular block, caused by degenerative conduction disease, increased vagal tone, or nodal blocking medications. Shortening under 0.12 seconds suggests an accessory pathway or junctional pacemaker rhythm.",
+   "say": "The PR interval measures conduction from sinoatrial node through the atrioventricular node. Normal values range from zero point one two to zero point two zero seconds. Prolongation beyond zero point two seconds defines first degree heart block. Shorter duration points toward an accessory pathway or junctional rhythm.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-avblock.svg",
+    "alt": "Diagram showing first degree, second degree Mobitz I and II, and third degree AV blocks on ECG.",
+    "caption": "Atrioventricular conduction delays and heart block patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ventricular depolarisation time is measured by the **QRS duration**. A normal complex measures under 0.12 seconds. Widening to 0.12 seconds or greater indicates delayed intraventricular conduction, such as bundle branch block, ventricular pre-excitation, hyperkalaemia, or a ventricular ectopic focus. A widened complex in a broad-complex tachycardia strongly favours ventricular tachycardia over supraventricular tachycardia with aberrancy.",
+   "say": "The QRS duration reflects the time required for ventricular depolarisation. Normal duration is under zero point one two seconds. Widening to zero point one two seconds or more indicates delayed intraventricular conduction. In wide complex tachycardia, a broad QRS strongly supports a ventricular origin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal QRS (< 0.12s)",
+     "points": [
+      "Rapid His-Purkinje conduction",
+      "Narrow, crisp morphology",
+      "Physiological ventricular activation"
+     ]
+    },
+    "right": {
+     "title": "Broad QRS (>= 0.12s)",
+     "points": [
+      "Slow trans-myocardial activation",
+      "Bundle branch blocks",
+      "Ventricular tachycardia or pacing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Delayed repolarisation raises vulnerability to life-threatening polymorphic ventricular arrhythmias. Measuring **QT prolongation** requires calculating the corrected QT interval, adjusted for heart rate using Bazett formula. A QTc exceeding 450 ms in men or 460 ms in women is prolonged, while values above 500 ms significantly elevate the risk of torsades de pointes. Severe hypocalcaemia and hypokalaemia are classic reversible causes.",
+   "say": "Delayed ventricular repolarisation creates vulnerability to ventricular arrhythmias. Calculating the corrected QT interval accounts for heart rate. A corrected value above four hundred and fifty milliseconds in men or four hundred and sixty in women is prolonged. Values exceeding five hundred milliseconds heighten the risk of torsades de pointes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ecg-qt-lvh.svg",
+    "alt": "Diagram comparing QT interval prolongation, electrolyte changes and voltage criteria on ECG.",
+    "caption": "QT interval duration and voltage criteria for ventricular hypertrophy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute transmural myocardial injury classically produces **ST elevation**. Convex upwards elevation in contiguous leads defines acute ST-elevation myocardial infarction. However, non-ischaemic conditions produce mimic patterns. Acute pericarditis causes widespread concave ST elevation with PR segment depression throughout limb and precordial leads. Brugada syndrome displays high take-off coved ST elevation in right precordial leads V1 and V2.",
+   "say": "Transmural myocardial ischaemia characteristically produces convex ST elevation in contiguous leads. However, non-ischaemic causes require careful exclusion. Acute pericarditis produces widespread concave ST elevation with PR depression. Brugada syndrome presents with coved ST elevation in right precordial leads.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology",
+     "ST segment morphology",
+     "Lead distribution"
+    ],
+    "rows": [
+     [
+      "STEMI",
+      "Convex upwards (tombstone)",
+      "Contiguous anatomical territory with reciprocal depression"
+     ],
+     [
+      "Acute pericarditis",
+      "Concave upwards (saddle-shaped)",
+      "Widespread across all leads except aVR, with PR depression"
+     ],
+     [
+      "Benign early repolarisation",
+      "Concave with prominent J-point notches",
+      "Anterolateral precordial leads in young athletes"
+     ],
+     [
+      "Brugada syndrome",
+      "Coved type 1 ST elevation",
+      "Right precordial leads V1 and V2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Repolarisation abnormalities often manifest as pathological **T wave inversion**. Inverted T waves in two or more contiguous leads suggest subendocardial myocardial ischaemia. Deep, symmetrical T wave inversions in leads V2 and V3, known as Wellens syndrome, indicate critical proximal left anterior descending coronary artery stenosis. Massive pulmonary embolism produces inverted T waves in anterior leads V1 through V4 alongside right axis deviation.",
+   "say": "Abnormal repolarisation frequently produces inverted T waves. Symmetrical T wave inversion in contiguous leads suggests myocardial ischaemia. Symmetrical deep inversions in leads V2 and V3 denote Wellens syndrome, signalling severe left anterior descending artery stenosis. Acute pulmonary embolism can also invert anterior T waves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inv",
+      "label": "Pathological T wave inversion"
+     },
+     {
+      "id": "dist",
+      "label": "Assess lead territory"
+     },
+     {
+      "id": "wellens",
+      "label": "V2-V3 deep symmetry: Wellens warning"
+     },
+     {
+      "id": "pe",
+      "label": "V1-V4 with tachycardia: PE warning"
+     },
+     {
+      "id": "ischemia",
+      "label": "Contiguous regional leads: Ischaemia"
+     }
+    ],
+    "edges": [
+     [
+      "inv",
+      "dist"
+     ],
+     [
+      "dist",
+      "wellens"
+     ],
+     [
+      "dist",
+      "pe"
+     ],
+     [
+      "dist",
+      "ischemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interruption of conduction down the main right or left fascicular tracts produces distinctive **bundle branch block** patterns. Right bundle branch block displays a prolonged QRS with an rSR prime rabbit-ear pattern in V1 and a slurred S wave in lateral leads I and V6. Left bundle branch block shows a broad, notched monophasic R wave in leads I, aVL, and V6, with a deep QS pattern in V1.",
+   "say": "Interruption in intraventricular conduction fascicles produces characteristic bundle branch block morphologies. Right bundle branch block demonstrates an rSR prime pattern in V1 with wide S waves in lateral leads. Left bundle branch block displays broad notched R waves in lateral leads and deep QS complexes in V1.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right bundle branch block",
+     "points": [
+      "rSR prime pattern in V1-V2",
+      "Slurred broad S wave in I and V6",
+      "Often seen in normal hearts or PE"
+     ]
+    },
+    "right": {
+     "title": "Left bundle branch block",
+     "points": [
+      "Broad notched R wave in I, aVL, V6",
+      "Deep broad QS complex in V1",
+      "Almost always indicates structural heart disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Whenever an ECG reveals bundle branch block, prolonged QTc, or acute ST-T shifts, perform an immediate clinical examination and obtain **cardiac biomarkers**. New left bundle branch block in a symptomatic patient should be treated as an acute coronary syndrome equivalent. Serial ECG recordings and echocardiography establish whether conduction delays reflect chronic degenerative fibrosis or acute coronary occlusion.",
+   "say": "When an ECG demonstrates new bundle branch block, prolonged QT or acute ST changes, evaluate the patient and measure cardiac biomarkers immediately. New left bundle branch block with chest pain requires management as an acute coronary syndrome. Serial tracings and echocardiography distinguish acute occlusion from chronic conduction disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ecg",
+      "label": "Abnormal 12-lead ECG"
+     },
+     {
+      "id": "eval",
+      "label": "Clinical exam and troponin"
+     },
+     {
+      "id": "echo",
+      "label": "Echocardiography"
+     },
+     {
+      "id": "tx",
+      "label": "Targeted antiarrhythmic or revascularization"
+     }
+    ],
+    "edges": [
+     [
+      "ecg",
+      "eval"
+     ],
+     [
+      "eval",
+      "echo"
+     ],
+     [
+      "echo",
+      "tx"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

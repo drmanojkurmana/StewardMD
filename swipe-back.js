@@ -260,9 +260,15 @@
     b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
     // display stays flex; visibility does the hiding. wouldOverlap() has to know where this button
     // WOULD land before deciding whether to show it, and a display:none element measures 0x0.
+    // Visible button stays 38px; the ::after hitbox (injected below) makes the touch area 44px.
     b.style.cssText = "position:fixed;left:9px;top:calc(env(safe-area-inset-top,0px) + 9px);z-index:99000;width:38px;height:38px;"
       + "display:flex;visibility:hidden;opacity:0;pointer-events:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
       + "background:rgba(15,118,110,.92);color:#fff;box-shadow:0 2px 10px -2px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent";
+    try {
+      var hs = document.createElement("style"); hs.id = "smdTopBackCss";
+      hs.textContent = "#smdTopBack::after{content:\"\";position:absolute;inset:-3px;border-radius:50%}";
+      (document.head || document.documentElement).appendChild(hs);
+    } catch (e) {}
     b.addEventListener("click", function (ev) { ev.stopPropagation(); goBack(); setTimeout(syncHandle, 80); });
     (document.body || document.documentElement).appendChild(b);
     _btn = b; return b;
@@ -330,7 +336,7 @@
     var sx = 0, sy = 0, t0 = 0, tracking = false, dragging = false, dragEl = null, curDx = 0, finishing = false;
     var lx = 0, lt = 0, vx = 0;                               // last sample + smoothed finger velocity (px/ms)
     var DIST = 70, EDGE = 30, MAXTIME = 800;                  // start <=30px from the left edge; >=70px (or 32% width) completes
-    var DRAWER = "cubic-bezier(0.32,0.72,0,1)";               // iOS-like settle curve
+    // (The drawer settle curve lives in settleTransition below.)
     function vw() { return window.innerWidth || 360; }
     // smd_swipe_depth=0 restores the previous gesture exactly (old .18s ease settle, distance-only commit).
     function depthOn() { try { return window.localStorage.getItem("smd_swipe_depth") !== "0"; } catch (e) { return true; } }
@@ -342,10 +348,21 @@
       if (vx < -0.3) return false;
       return dx >= w * 0.4 || (vx > 0.35 && dx >= 24) || (dx >= 70 && dt <= 800 && vx >= 0);
     }
+    // Settle ms seeded with release velocity (px/ms): distance/speed, clamped 110-300; slow release keeps 260.
+    function settleMs(dist, vPxMs) {
+      var a = Math.abs(vPxMs || 0);
+      if (a < 0.05) return 260;
+      return Math.round(Math.max(110, Math.min(300, Math.abs(dist) / a)));
+    }
+    // Settle transition: depth-on uses the velocity-seeded ms on the drawer curve; depth-off
+    // keeps the pre-depth timing exactly (.18s ease), whatever ms the caller computed.
+    function settleTransition(depth, ms) {
+      return depth ? ((ms || 260) / 1000) + "s cubic-bezier(0.32,0.72,0,1)" : ".18s ease";
+    }
     /* @pure-end */
-    function setX(el, x, anim) {
+    function setX(el, x, anim, ms) {
       if (!el) return;
-      el.style.transition = anim ? "transform " + (depthOn() ? ".26s " + DRAWER : ".18s ease") : "none";
+      el.style.transition = anim ? "transform " + settleTransition(depthOn(), ms) : "none";
       el.style.transform = x ? ("translateX(" + x + "px)") : "";
       el.style.boxShadow = x ? "-14px 0 34px -12px rgba(0,0,0,.45)" : "";
     }
@@ -355,13 +372,14 @@
       if (complete) {
         if (el && depthOn()) {
           // Finish the slide off-screen on the drawer curve, THEN go back, so the screen is not yanked.
-          finishing = true; setX(el, vw(), true);
-          setTimeout(function () { finishing = false; edgeSwipeAction(); clearEl(el); setTimeout(syncHandle, 80); }, 200);
+          var ms = settleMs(vw() - curDx, vx);
+          finishing = true; setX(el, vw(), true, ms);
+          setTimeout(function () { finishing = false; edgeSwipeAction(); clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
           return;
         }
         edgeSwipeAction(); if (el) clearEl(el); setTimeout(syncHandle, 80);
       }
-      else if (el) { setX(el, 0, true); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 300); }
+      else if (el) { setX(el, 0, true, settleMs(curDx, vx)); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 320); }
     }
     document.addEventListener("touchstart", function (e) {
       if (finishing) return;

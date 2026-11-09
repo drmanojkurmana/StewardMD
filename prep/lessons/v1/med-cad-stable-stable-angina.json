@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-cad-stable",
+ "subject": "medicine",
+ "title": "Stable angina, ischaemic diagnostics and revascularization",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Substernal chest discomfort provoked by exertion or emotional stress and promptly relieved by rest or sublingual nitroglycerin defines **stable angina**. The underlying pathophysiology involves a fixed atherosclerotic plaque causing luminal narrowing exceeding 70%, which limits myocardial oxygen delivery during increased demand. Characteristically retrosternal and crushing, the discomfort may radiate to the jaw, neck, or left arm.",
+   "say": "Substernal chest discomfort brought on by exertion and relieved by rest or nitroglycerin defines stable angina. Atherosclerotic plaques narrowing coronary luminal diameter by over seventy percent limit blood flow during exercise. Patients typically describe crushing central chest pressure radiating to the arm or neck.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typical angina (all 3)",
+     "points": [
+      "Substernal chest discomfort",
+      "Provoked by physical exertion or stress",
+      "Relieved by rest or nitrates in minutes"
+     ]
+    },
+    "right": {
+     "title": "Atypical angina (2 of 3)",
+     "points": [
+      "Meets only two criteria",
+      "More frequent in women and elderly",
+      "Non-cardiac chest pain meets <= 1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Contemporary cardiology guidelines designate stable atherosclerotic coronary disease as **chronic coronary syndrome**. This term highlights that coronary atherosclerosis is a dynamic, evolving process punctuated by periods of quiescence and potential acute destabilisation. Comprehensive medical management aims to reduce myocardial ischaemia, relieve symptoms, and prevent future atherothrombotic cardiovascular events through aggressive risk factor modification and lifestyle intervention.",
+   "say": "Modern cardiology terminology uses chronic coronary syndrome to describe stable coronary artery disease. This reflects that atherosclerosis is a continuous and evolving biological condition. Management focuses on controlling symptoms, improving functional capacity, and preventing acute thrombotic complications through comprehensive secondary prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention",
+     "Primary goal",
+     "First-line agents"
+    ],
+    "rows": [
+     [
+      "Antianginal symptom relief",
+      "Reduce oxygen demand, increase supply",
+      "Beta blockers, calcium channel blockers"
+     ],
+     [
+      "Event prevention",
+      "Plaque stabilization, prevent thrombosis",
+      "Aspirin, high-intensity statins"
+     ],
+     [
+      "Risk factor control",
+      "Blood pressure and glucose optimization",
+      "ACE inhibitors, SGLT2 inhibitors"
+     ],
+     [
+      "Lifestyle modification",
+      "Weight loss, smoking cessation",
+      "Aerobic exercise, Mediterranean diet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-invasive functional evaluation of intermediate-risk patients frequently utilizes the Bruce protocol **treadmill test**. Exercise stress tests monitor 12-lead ECG and blood pressure while workload increases every 3 minutes. The test is diagnostic for inducible myocardial ischaemia when horizontal or downsloping ST-segment depression of 1 mm or greater occurs 80 milliseconds past the J-point. Early onset depression indicates high-risk multi-vessel disease.",
+   "say": "Functional testing in intermediate risk chest pain uses the Bruce protocol treadmill test. Workload increases every three minutes while monitoring ECG and blood pressure. Horizontal or downsloping ST depression of one millimetre or more indicates inducible ischaemia. Deep early depression points toward severe multi vessel disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-cad-stable-fig1.webp",
+    "alt": "Graphic depicting treadmill exercise testing, ischemic ST depression and coronary perfusion.",
+    "caption": "Exercise stress testing and inducible myocardial ischaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients unable to exercise or demonstrating baseline ECG abnormalities benefit from **stress echocardiography**. Pharmacological stressors such as dobutamine increase heart rate and myocardial contractility, while ultrasound imaging monitors regional wall motion. Development of new or worsening regional wall motion abnormalities during stress identifies ischaemic myocardial segments, providing both anatomical localization and functional risk stratification.",
+   "say": "Patients unable to exercise undergo pharmacological stress echocardiography with dobutamine. Ultrasound imaging tracks left ventricular regional wall motion as heart rate and contractility rise. Development of new regional wall motion abnormalities pinpoints ischaemic myocardial territories with high diagnostic accuracy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exercise ECG",
+     "points": [
+      "Requires normal baseline ECG",
+      "Patient must achieve 85% target HR",
+      "Assesses functional exercise capacity"
+     ]
+    },
+    "right": {
+     "title": "Stress echocardiography",
+     "points": [
+      "Reliable in baseline LBBB or LVH",
+      "Uses dobutamine if unable to walk",
+      "Identifies precise anatomical wall defects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive gold standard for defining coronary luminal anatomy is invasive **coronary angiography**. Catheterization via radial or femoral arterial access introduces radio-opaque contrast into coronary arteries under fluoroscopy. Stenosis exceeding 70% in major epicardial arteries, or exceeding 50% in the left main coronary trunk, is considered haemodynamically significant. In borderline lesions, fractional flow reserve below 0.80 confirms functional ischaemia.",
+   "say": "Invasive coronary angiography remains the gold standard for defining coronary anatomy. Arterial catheters inject contrast into the coronaries under fluoroscopy. Luminal narrowing over seventy percent in epicardial vessels or fifty percent in the left main trunk is significant. Fractional flow reserve below zero point eight confirms lesion significance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cath",
+      "label": "Coronary catheterization"
+     },
+     {
+      "id": "angio",
+      "label": "Contrast coronary angiogram"
+     },
+     {
+      "id": "eval",
+      "label": "Assess stenosis diameter"
+     },
+     {
+      "id": "ffr",
+      "label": "Borderline: FFR measurement"
+     },
+     {
+      "id": "plan",
+      "label": "PCI or CABG revascularization"
+     }
+    ],
+    "edges": [
+     [
+      "cath",
+      "angio"
+     ],
+     [
+      "angio",
+      "eval"
+     ],
+     [
+      "eval",
+      "ffr"
+     ],
+     [
+      "ffr",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Catheter-based revascularization using balloon dilatation and drug-eluting stent implantation is termed **percutaneous coronary intervention**. Contemporary drug-eluting stents release antiproliferative agents like everolimus to prevent neointimal hyperplasia and restenosis. Patients undergoing PCI require dual antiplatelet therapy to prevent stent thrombosis. PCI is preferred for focal single-vessel or two-vessel disease without significant proximal left anterior descending involvement.",
+   "say": "Balloon dilatation with drug eluting stent deployment constitutes percutaneous coronary intervention. Modern stents release antiproliferative drugs to prevent in-stent restenosis. Dual antiplatelet therapy is essential to prevent acute stent thrombosis. PCI is ideal for discrete single or two vessel coronary disease.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-acs-reperfusion.svg",
+    "alt": "Diagram illustrating percutaneous coronary intervention and revascularization pathways.",
+    "caption": "Coronary revascularization pathways and stent deployment principles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "For complex multi-vessel disease, diabetic patients, or severe left main disease, **coronary artery bypass grafting** provides superior long-term survival. Surgeons construct bypass conduits around stenotic segments using the internal mammary artery and saphenous vein grafts. The left internal mammary artery anastomosed to the left anterior descending artery boasts over 90% patency at 10 years, serving as the cornerstone of surgical revascularization.",
+   "say": "For multi-vessel coronary disease, diabetes, or left main trunk stenosis, coronary artery bypass grafting offers superior outcomes. Bypasses use internal mammary arteries and saphenous vein grafts. The internal mammary artery to left anterior descending anastomosis achieves over ninety percent ten year patency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical scenario",
+     "Preferred revascularization",
+     "Underlying rationale"
+    ],
+    "rows": [
+     [
+      "Single vessel LAD stenosis",
+      "PCI with drug-eluting stent",
+      "Excellent patency, minimally invasive"
+     ],
+     [
+      "Left main stem disease (>50%)",
+      "CABG (or selected PCI)",
+      "Survival advantage with surgical bypass"
+     ],
+     [
+      "Three-vessel CAD in diabetes",
+      "CABG with arterial conduits",
+      "Reduced repeat revascularization and mortality"
+     ],
+     [
+      "Two-vessel CAD without LAD",
+      "PCI",
+      "Low SYNTAX score, rapid recovery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent angina occurring predominantly at rest and midnight caused by transient coronary vasospasm describes **Prinzmetal angina**. Episodic focal spasm in an epicardial artery causes transmural ischaemia with transient ST-segment elevation that resolves completely when spasm subsides. In contrast to fixed atherosclerosis, symptoms respond dramatically to calcium channel blockers and nitrates, whereas non-selective beta-blockers are contraindicated as they worsen vasospasm.",
+   "say": "Midnight rest angina caused by transient coronary vasospasm describes Prinzmetal angina. Dynamic spasm in epicardial vessels causes transmural ischaemia with reversible ST elevation. Symptoms respond well to calcium channel blockers and nitrates, while beta blockers are avoided because they can exacerbate vasospasm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic stable angina",
+     "points": [
+      "Exertional provocation",
+      "Fixed atherosclerotic plaque",
+      "ST depression during pain",
+      "Beta blockers first line"
+     ]
+    },
+    "right": {
+     "title": "Prinzmetal vasospastic angina",
+     "points": [
+      "Rest angina, early morning",
+      "Focal coronary vasospasm",
+      "Transient ST elevation during pain",
+      "Calcium channel blockers first line"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-haemolytic",
+ "subject": "medicine",
+ "title": "Cold Agglutinin Disease and PNH",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An autoimmune haemolytic disorder triggered by low ambient temperatures involves IgM autoantibodies directed against the erythrocyte I/i antigen complex. In **cold agglutinin disease**, monoclonal or polyclonal IgM antibodies bind red blood cells in cooler peripheral vascular beds of the fingers, toes, and ears (0 to 4°C). This IgM binding fixes complement component C1, initiating classical pathway activation. Upon warming to core temperature (37°C), IgM dissociates while deposited C3b persists on the cell surface, mediating extravascular hepatic Kupffer cell phagocytosis and painful acrocyanosis upon cold exposure.",
+   "say": "An autoimmune haemolytic disorder triggered by low ambient temperatures involves IgM autoantibodies directed against red cell surface antigens. In cold agglutinin disease, IgM antibodies bind red blood cells in cooler peripheral vascular beds of the fingers and ears. This antibody binding fixes complement component C1, initiating classical pathway activation. Upon rewarming to core temperature, IgM dissociates while deposited C3b persists, mediating extravascular clearance by hepatic Kupffer cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warm Autoimmune Haemolytic Anaemia",
+     "points": [
+      "Antibody isotype: Polyclonal IgG",
+      "Optimal thermal reactivity: 37°C",
+      "Site of clearance: Spleen (extravascular)",
+      "Peripheral smear: Microspherocytes",
+      "Response to corticosteroids: High (> 80%)"
+     ]
+    },
+    "right": {
+     "title": "Cold Agglutinin Disease",
+     "points": [
+      "Antibody isotype: Monoclonal IgM",
+      "Optimal thermal reactivity: 0-4°C",
+      "Site of clearance: Liver (C3b extravascular)",
+      "Peripheral smear: Clumped red cell agglutinates",
+      "Response to corticosteroids: Poor (use Rituximab)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acquired somatic mutation in the X-linked phosphatidylinositol glycan class A (PIGA) gene generates clonal haematopoietic stem cells deficient in glycosylphosphatidylinositol (GPI) anchors. Clinically designated as **paroxysmal nocturnal haemoglobinuria** (PNH), affected erythrocytes lack essential surface complement regulatory proteins. Because absent GPI anchors prevent cell-surface tethering of decay-accelerating factor (CD55) and membrane inhibitor of reactive lysis (CD59), erythrocytes become exquisitely vulnerable to uncontrolled alternative complement pathway activation, producing chronic Coombs-negative intravascular haemolysis, venous thrombosis, and marrow aplasia.",
+   "say": "An acquired somatic mutation in the X-linked PIGA gene generates clonal haematopoietic stem cells deficient in glycosylphosphatidylinositol anchors. Clinically designated as paroxysmal nocturnal haemoglobinuria, affected erythrocytes lack essential surface complement regulatory proteins. Absent anchors prevent cell-surface tethering of decay-accelerating factor and membrane inhibitor of reactive lysis. Erythrocytes become vulnerable to uncontrolled complement-mediated attack, causing chronic intravascular haemolysis, thrombosis, and marrow failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pnh-fig1.webp",
+    "alt": "Pathophysiological cascade of GPI anchor deficiency, CD55 and CD59 absence, and terminal complement activation.",
+    "caption": "Absence of GPI-anchored complement regulators CD55 and CD59 driving terminal membrane attack complex assembly. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Normal human erythrocytes express surface regulatory proteins that accelerate the dissociation of C3 and C5 convertases to prevent autologous complement damage. Tethered via a GPI lipid anchor, **cd55** (decay-accelerating factor) inhibits both classical and alternative C3 convertase complexes. Concurrently, CD59 (membrane inhibitor of reactive lysis) binds terminal complement components C8 and C9, blocking assembly of the cytolytic membrane attack complex (C5b-9). In PNH, absence of both CD55 and CD59 leaves erythrocytes unprotected, causing nocturnal haemoglobinuria during physiological sleep-induced hypoventilation and mild respiratory acidemia.",
+   "say": "Normal human erythrocytes express surface regulatory proteins that accelerate the dissociation of convertases to prevent autologous complement damage. Tethered via a GPI anchor, cd55 inhibits C3 convertase assembly. Concurrently, CD59 binds terminal complement components, blocking assembly of the cytolytic membrane attack complex. In paroxysmal nocturnal haemoglobinuria, deficiency of both protective proteins leaves erythrocytes vulnerable, precipitating intravascular lysis and morning dark urine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complement Regulator",
+     "Alternative Designation",
+     "Biochemical Mechanism",
+     "Consequence of Deficiency in PNH"
+    ],
+    "rows": [
+     [
+      "CD55",
+      "Decay-Accelerating Factor (DAF)",
+      "Accelerates decay of C3/C5 convertases",
+      "Unchecked C3b deposition on erythrocyte membrane"
+     ],
+     [
+      "CD59",
+      "Membrane Inhibitor of Reactive Lysis (MIRL)",
+      "Blocks C8/C9 incorporation into MAC",
+      "Uncontrolled pore formation and intravascular lysis"
+     ],
+     [
+      "PIGA Gene",
+      "Phosphatidylinositol Glycan Class A",
+      "Catalyzes first step of GPI core biosynthesis",
+      "Complete absence of all GPI-anchored proteins"
+     ],
+     [
+      "C5 Convertase",
+      "Terminal Pathway Driver",
+      "Cleaves C5 into C5a and C5b",
+      "Target of therapeutic monoclonal antibodies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted biological therapy utilizing a humanized monoclonal antibody directed against terminal complement protein C5 revolutionized the survival of patients with PNH. Prescribing **eculizumab** or its longer-acting counterpart ravulizumab binds with high affinity to C5, preventing its cleavage into pro-inflammatory anaphylatoxin C5a and membrane attack complex precursor C5b. This blockade halts terminal complement-mediated intravascular haemolysis, eliminates transfusion dependence, and drastically lowers the risk of life-threatening hepatic or cerebral venous thrombosis. Because C5 blockade impairs bactericidal defences against Neisseria species, mandatory meningococcal vaccination is required.",
+   "say": "Targeted biological therapy utilizing a humanized monoclonal antibody directed against terminal complement protein C5 revolutionized survival in PNH. Prescribing eculizumab or ravulizumab binds with high affinity to C5, preventing its cleavage into anaphylatoxin C5a and membrane attack complex precursor C5b. This targeted blockade halts intravascular haemolysis, eliminates transfusion dependence, and substantially decreases thromboembolic risk. Mandatory meningococcal vaccination is required prior to initiating therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pnh",
+      "label": "PNH Clone: Unregulated C3/C5 Convertase Activity"
+     },
+     {
+      "id": "drug",
+      "label": "Eculizumab Monoclonal Antibody Binds C5"
+     },
+     {
+      "id": "block",
+      "label": "Prevents C5 Cleavage into C5a and C5b"
+     },
+     {
+      "id": "stop",
+      "label": "Halts MAC Formation & Intravascular Haemolysis"
+     }
+    ],
+    "edges": [
+     [
+      "pnh",
+      "drug"
+     ],
+     [
+      "drug",
+      "block"
+     ],
+     [
+      "block",
+      "stop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical fragmentation of erythrocytes within microvascular arterioles and capillaries obstructed by fibrin and platelet microthrombi produces non-immune haemolysis. Developing **microangiopathic haemolytic anaemia** (MAHA) features high-shear mechanical slicing of flexible red blood cells as they squeeze past luminal microthrombi. Underlying clinical syndromes include thrombotic thrombocytopenic purpura (TTP) driven by ADAMTS13 deficiency, haemolytic uraemic syndrome (HUS) mediated by Shiga toxin, disseminated intravascular coagulation (DIC), and systemic scleroderma renal crisis. Patients exhibit negative Coombs testing alongside elevated LDH and indirect bilirubin.",
+   "say": "Mechanical fragmentation of erythrocytes within microvascular arterioles obstructed by fibrin and platelet microthrombi produces non-immune haemolysis. Developing microangiopathic haemolytic anaemia features high-shear mechanical slicing of red blood cells squeezing past luminal thrombi. Underlying conditions include thrombotic thrombocytopenic purpura, haemolytic uraemic syndrome, disseminated intravascular coagulation, and malignant hypertension. Laboratory evaluation confirms Coombs-negative haemolysis with elevated lactate dehydrogenase.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/microangiopathic-haemolytic-anaemia-fig1.webp",
+    "alt": "Peripheral blood smear illustrating fragmented red blood cells including helmet cells and schistocytes.",
+    "caption": "Peripheral blood smear displaying characteristic helmet cells and fragmented schistocytes in MAHA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Direct microscopic examination of the peripheral blood smear reveals sheared erythrocyte fragments that establish the morphological hallmark of microangiopathic haemolysis. The presence of **schistocytes**, also recognized as helmet cells, triangulocytes, and crescent fragments, exceeding one percent of circulating red blood cells confirms microangiopathic mechanical destruction. Accompanied by marked thrombocytopenia with large immature platelets, polychromasia, and absent platelets on automated counts, finding schistocytes constitutes a medical emergency mandating immediate investigation for thrombotic thrombocytopenic purpura and prompt initiation of therapeutic plasma exchange.",
+   "say": "Direct microscopic examination of the peripheral blood smear reveals sheared erythrocyte fragments that establish the morphological hallmark of microangiopathic haemolysis. The presence of schistocytes exceeding one percent of circulating red blood cells confirms microangiopathic mechanical damage. Accompanied by severe thrombocytopenia and reticulocytosis, finding schistocytes on blood smear represents an acute hematological emergency mandating immediate evaluation for thrombotic thrombocytopenic purpura.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Disorder",
+     "Underlying Pathophysiology",
+     "Coagulation Profile (PT/aPTT)",
+     "Diagnostic Hallmarks"
+    ],
+    "rows": [
+     [
+      "TTP",
+      "Severe ADAMTS13 deficiency (< 10%)",
+      "Strictly Normal PT and aPTT",
+      "PENTAD: MAHA, Thrombocytopenia, Fever, Renal, Neuro"
+     ],
+     [
+      "HUS",
+      "Shiga toxin endothelial capillary injury",
+      "Strictly Normal PT and aPTT",
+      "TRIAD: MAHA, Thrombocytopenia, Acute Kidney Injury"
+     ],
+     [
+      "DIC",
+      "Widespread tissue factor consumption",
+      "Markedly Prolonged PT and aPTT",
+      "Low fibrinogen, elevated D-dimer, systemic bleeding"
+     ],
+     [
+      "PNH",
+      "Somatic PIGA mutation with CD55/59 loss",
+      "Normal Coagulation Profile",
+      "Intravascular lysis, positive FLAER flow cytometry"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying circulating free haemoglobin scavenger glycoproteins provides a remarkably sensitive biochemical indicator of ongoing intravascular haemolysis. Circulating **haptoglobin** binds free haemoglobin dimers released from ruptured erythrocytes with high stoichiometric affinity, forming a stable complex that is cleared by CD163 receptors on hepatic macrophages. In intravascular haemolysis, haptoglobin clearance outpaces hepatic synthesis, causing serum haptoglobin concentrations to become undetectable. Concurrently, excess free haemoglobin oxidizes to methemoglobin, binds hemopexin, or filters through renal glomeruli, producing haemosiderinuria and dark morning haemoglobinuria.",
+   "say": "Quantifying circulating free haemoglobin scavenger glycoproteins provides a remarkably sensitive biochemical indicator of ongoing intravascular haemolysis. Circulating haptoglobin binds free haemoglobin dimers released from lysed erythrocytes, forming a stable complex cleared by hepatic macrophages. In intravascular haemolysis, haptoglobin consumption outpaces hepatic production, causing serum haptoglobin to become undetectable. Excess free haemoglobin is filtered by renal glomeruli, producing haemosiderinuria and dark urine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lysis",
+      "label": "Intravascular Erythrocyte Rupture & Free Hb Release"
+     },
+     {
+      "id": "bind",
+      "label": "Circulating Haptoglobin Binds Free Hb Dimers"
+     },
+     {
+      "id": "clear",
+      "label": "Hepatic CD163 Macrophage Uptake & Degradation"
+     },
+     {
+      "id": "zero",
+      "label": "Serum Haptoglobin Exhaustion: Undetectable Level"
+     }
+    ],
+    "edges": [
+     [
+      "lysis",
+      "bind"
+     ],
+     [
+      "bind",
+      "clear"
+     ],
+     [
+      "clear",
+      "zero"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing the definitive clinical diagnosis of paroxysmal nocturnal haemoglobinuria requires quantitative multiparameter flow cytometric immunophenotyping. Using fluorescently labelled inactive aerolysin variant, the **flaer flow cytometry** assay directly binds the GPI anchor core on granulocytes and monocytes. FLAER testing quantifies the exact percentage of GPI-deficient cells, identifying type 1 (normal), type 2 (partial deficiency), and type 3 (complete deficiency) cell clones with exquisite sensitivity exceeding 0.01 percent. This assay has completely superseded historic non-specific complement lysis tests such as the Ham acid haemolysis test and sucrose lysis test.",
+   "say": "Establishing the definitive clinical diagnosis of paroxysmal nocturnal haemoglobinuria requires quantitative multiparameter flow cytometric immunophenotyping. Using fluorescently labelled aerolysin variant, the flaer flow cytometry assay directly binds the GPI anchor core on granulocytes. FLAER testing quantifies the exact percentage of GPI-deficient clones with sensitivity exceeding 0.01 percent. This modern assay has completely replaced historic complement lysis tests such as the Ham test.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FLAER Flow Cytometry (Modern Gold Standard)",
+     "points": [
+      "Fluorescent aerolysin binds GPI anchor",
+      "Evaluates granulocytes, monocytes, and RBCs",
+      "Detects tiny clones (< 0.01% sensitivity)",
+      "Unaffected by recent blood transfusions",
+      "Distinguishes Type I, II, and III PNH clones"
+     ]
+    },
+    "right": {
+     "title": "Historic Acid Haemolysis (Ham Test)",
+     "points": [
+      "Incubation of RBCs in acidified serum (pH 6.4)",
+      "Activates alternative complement pathway",
+      "False-negative after recent RBC transfusion",
+      "Cumbersome, manual, low sensitivity",
+      "Completely obsolete in modern haematology"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

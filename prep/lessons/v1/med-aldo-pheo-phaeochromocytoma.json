@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-aldo-pheo",
+ "subject": "medicine",
+ "title": "Phaeochromocytoma and Catecholamine Crisis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Rare, life-threatening chromaffin cell neuroendocrine tumours originating in the adrenal medulla synthesize, store, and episodically release excessive catecholamines. Clinically designated as a **phaeochromocytoma**, this tumour produces paroxysmal or sustained severe hypertension accompanied by the classic clinical triad: episodic pounding headache, profuse generalized diaphoresis, and sudden palpitations or tachycardia. Paroxysms occur abruptly and last minutes to hours, provoked by physical exertion, postural changes, abdominal palpation, micturition, or medications including beta-blockers and metoclopramide. Untreated catecholamine storms risk fatal hypertensive encephalopathy, aortic dissection, myocardial infarction, and stress-induced cardiomyopathy (Takotsubo syndrome).",
+   "say": "Rare chromaffin cell neuroendocrine tumours originating in the adrenal medulla synthesize and release excessive catecholamines. Clinically designated as a phaeochromocytoma, this tumour produces paroxysmal hypertension accompanied by the classic triad: pounding headache, profuse diaphoresis, and palpitations. Paroxysms occur abruptly, provoked by physical exertion, postural changes, abdominal palpation, or beta-blockers. Untreated catecholamine storms risk fatal encephalopathy, aortic dissection, and stress cardiomyopathy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pheochromocytoma-fig1.webp",
+    "alt": "Pathology and biosynthetic catecholamine pathways in adrenal phaeochromocytoma.",
+    "caption": "Chromaffin cell neuroendocrine hyperplasia and catecholamine overproduction in phaeochromocytoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Biochemical confirmation of catecholamine excess relies on detecting stable methylated metabolites rather than fleeting parent catecholamine molecules. Measuring free **plasma metanephrines** (metanephrine and normetanephrine) represents the single most sensitive initial diagnostic screening test, exceeding ninety-seven percent sensitivity. Within chromaffin tumour cells, catecholamines are continuously metabolized into metanephrines by membrane-bound catechol-O-methyltransferase (COMT), independently of exocytotic catecholamine release. Blood must be drawn in a supine resting state after twenty minutes of cannulation to prevent false-positive adrenergic surges, with elevations greater than three times the upper reference limit virtually establishing the diagnosis.",
+   "say": "Biochemical confirmation of catecholamine excess relies on detecting stable methylated metabolites rather than parent catecholamines. Measuring free plasma metanephrines represents the most sensitive initial screening test, exceeding ninety-seven percent sensitivity. Within chromaffin cells, catecholamines are continuously metabolized into metanephrines by catechol-O-methyltransferase independently of release. Blood must be drawn in a supine resting state after twenty minutes, with elevations three times normal establishing the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "synth",
+      "label": "Adrenal chromaffin tumour: Continuous intracellular catecholamine turnover"
+     },
+     {
+      "id": "comt",
+      "label": "COMT enzyme converts epinephrine and norepinephrine into metanephrines"
+     },
+     {
+      "id": "test",
+      "label": "Supine free plasma metanephrines (> 3x normal confirms phaeochromocytoma)"
+     }
+    ],
+    "edges": [
+     [
+      "synth",
+      "comt"
+     ],
+     [
+      "comt",
+      "test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Twenty-four-hour urinary collections provide essential corroboration and remain valuable alternatives when plasma assays are equivocal. Measuring urinary fractionated metanephrines and **vanillylmandelic acid** (VMA) quantifies daily total catecholamine metabolite excretion. Vanillylmandelic acid, the stable final end-product of catecholamine degradation, exhibits high diagnostic specificity but lower sensitivity (roughly seventy-five percent) compared to metanephrines. Patients must adhere to strict dietary restrictions during urine collection, avoiding coffee, tea, chocolate, bananas, and citrus fruits, alongside pausing sympathomimetic decongestants, labetalol, and tricyclic antidepressants to prevent spurious laboratory elevations.",
+   "say": "Twenty-four-hour urinary collections provide corroboration and remain valuable when plasma assays are equivocal. Measuring urinary fractionated metanephrines and vanillylmandelic acid quantifies daily metabolite excretion. Vanillylmandelic acid, the stable final end-product of catecholamine breakdown, exhibits high specificity but lower sensitivity compared to metanephrines. Patients must adhere to dietary restrictions during collection, avoiding coffee, bananas, and citrus fruits to prevent false-positive elevations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Free Plasma Metanephrines",
+     "points": [
+      "Sensitivity > 97%, specificity ~85-90%",
+      "First-line test for high-risk patients (genetic syndromes)",
+      "Requires 20-30 minutes supine rest before phlebotomy",
+      "Reflects continuous intratumoural metabolite generation"
+     ]
+    },
+    "right": {
+     "title": "24-Hour Urine Metanephrines & VMA",
+     "points": [
+      "Sensitivity ~90%, specificity > 95%",
+      "Requires complete collection with urinary creatinine check",
+      "VMA represents final end-product of epinephrine/norepinephrine",
+      "Susceptible to dietary interference (vanilla, chocolate, coffee)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Once biochemical hypersecretion is confirmed, anatomical and functional imaging localizes the primary tumour and detects occult metastases. High-resolution non-contrast computed tomography or magnetic resonance imaging of the abdomen and pelvis localizes greater than ninety-five percent of tumours. Phaeochromocytomas appear as large, vascular, heterogeneous adrenal masses with prominent cystic or necrotic components. For functional localization, whole-body nuclear scintigraphy using an **mibg scan** (iodine-123 metaiodobenzylguanidine) concentrates selectively in adrenergic chromaffin vesicles via the norepinephrine transporter, identifying extra-adrenal paragangliomas, multiple tumours in genetic syndromes, and metastatic bone deposits.",
+   "say": "Once biochemical hypersecretion is confirmed, anatomical and functional imaging localizes the primary tumour and detects occult metastases. High-resolution computed tomography or magnetic resonance imaging of the abdomen localizes ninety-five percent of tumours. Phaeochromocytomas appear as vascular, heterogeneous adrenal masses. For functional localization, whole-body nuclear scintigraphy using an mibg scan concentrates selectively in adrenergic chromaffin vesicles, identifying extra-adrenal paragangliomas and metastatic deposits.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pheo-fig1.webp",
+    "alt": "Scintigraphic and cross-sectional imaging features of catecholamine-secreting phaeochromocytoma.",
+    "caption": "Cross-sectional and functional imaging localization of adrenal chromaffin tumours. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rigorous, sequential pharmacological adrenergic receptor blockade is mandatory prior to surgical extirpation to avert intraoperative catastrophe. Initiating oral **phenoxybenzamine**, an irreversible, non-competitive alpha-adrenergic receptor antagonist, begins ten to fourteen days before surgery. It prevents lethal intraoperative hypertensive crises during tumour manipulation and enables vascular volume expansion, because chronic intense alpha-adrenergic vasoconstriction severely contracts plasma volume. Patients are instructed to consume high-sodium diets and liberal fluid intake. Beta-adrenergic antagonists (such as propranolol or metoprolol) may only be added several days AFTER complete alpha-blockade to control reflex tachycardia.",
+   "say": "Rigorous, sequential adrenergic receptor blockade is mandatory prior to surgery to avert intraoperative catastrophe. Initiating oral phenoxybenzamine, an irreversible non-competitive alpha-blocker, begins ten to fourteen days before surgery. It prevents lethal hypertensive crises during tumour manipulation and enables vascular volume expansion. Beta-blockers may only be added several days AFTER complete alpha-blockade to control reflex tachycardia, preventing unopposed alpha-mediated vasoconstriction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Preparation Stage",
+     "Timing Before Surgery",
+     "Pharmacological Regimen",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Alpha-Blockade (First)",
+      "10 to 14 days pre-op",
+      "Phenoxybenzamine (10 mg BID titrated to 60-100 mg)",
+      "Blocks alpha-1 and alpha-2; expands vascular volume"
+     ],
+     [
+      "High-Salt Diet",
+      "7 to 10 days pre-op",
+      "Liberal oral sodium and oral fluid intake",
+      "Reverses chronic postural hypotension and hemoconcentration"
+     ],
+     [
+      "Beta-Blockade (Second)",
+      "2 to 3 days pre-op",
+      "Propranolol or Atenolol (ONLY after alpha-block)",
+      "Controls reflex tachycardia; never give as monotherapy"
+     ],
+     [
+      "Target Endpoints",
+      "24 hours pre-op",
+      "Seated BP < 130/80, standing SBP > 90, HR 60-80",
+      "Confirms adequate safe preoperative haemodynamic blockade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Administering a beta-adrenergic receptor antagonist prior to establishing complete alpha-adrenergic receptor blockade carries disastrous clinical consequences. If a beta-blocker is mistakenly administered alone, blockade of vasodilatory vascular beta-2 receptors leaves catecholamine-mediated alpha-1 vasoconstriction completely unopposed. This trigger precipitates catastrophic, refractory **hypertensive crisis**, acute coronary vasospasm, acute pulmonary oedema, and intracranial haemorrhage. Therefore, clinical guidelines strictly enforce the ironclad axiom: alpha-blockade must ALWAYS precede beta-blockade by several days, ensuring safe adrenergic suppression before general anaesthesia.",
+   "say": "Administering a beta-blocker prior to establishing complete alpha-adrenergic blockade carries disastrous clinical consequences. If a beta-blocker is mistakenly given alone, blockade of vasodilatory beta-2 receptors leaves alpha-1 vasoconstriction completely unopposed. This trigger precipitates catastrophic, refractory hypertensive crisis, acute coronary vasospasm, and pulmonary oedema. Clinical guidelines strictly enforce the axiom that alpha-blockade must always precede beta-blockade.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dangerous Error: Beta-Blockade First",
+     "points": [
+      "Beta-2 vasodilatation blocked unopposed",
+      "Massive alpha-1 mediated vasoconstriction",
+      "Extreme, refractory hypertensive storm (> 250 mmHg)",
+      "Acute pulmonary oedema, myocardial infarction, stroke"
+     ]
+    },
+    "right": {
+     "title": "Mandatory Standard: Alpha-Blockade First",
+     "points": [
+      "Phenoxybenzamine irreversible alpha-blockade established",
+      "Systemic vascular resistance falls smoothly",
+      "Beta-blocker added 48-72 hours later for reflex tachycardia",
+      "Safe intraoperative tumour mobilization and resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laparoscopic transperitoneal or retroperitoneal adrenalectomy constitutes the definitive curative therapy for adrenal phaeochromocytoma. During surgical resection, gentle dissection and early ligation of the main adrenal vein prevent intraoperative surges of catecholamines into the systemic circulation. Following tumour excision, sudden withdrawal of high circulating catecholamines combined with persistent irreversible alpha-blockade frequently triggers profound, life-threatening postoperative **hypotension**. Management requires aggressive intraoperative volume loading with isotonic crystalloids and temporary vasopressor support with norepinephrine until vascular tone recovers.",
+   "say": "Laparoscopic adrenalectomy constitutes the definitive curative therapy for adrenal phaeochromocytoma. During surgery, gentle dissection and early ligation of the adrenal vein prevent intraoperative surges of catecholamines into the circulation. Following tumour excision, sudden withdrawal of catecholamines combined with persistent alpha-blockade frequently triggers profound postoperative hypotension. Management requires aggressive volume loading with crystalloids and temporary vasopressor support.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "surg",
+      "label": "Laparoscopic adrenalectomy: Early adrenal vein clipping minimizes release"
+     },
+     {
+      "id": "drop",
+      "label": "Tumour excision: Sudden cessation of catecholamines + residual alpha-block"
+     },
+     {
+      "id": "post",
+      "label": "Severe hypotension: Aggressive IV crystalloid boluses + Norepinephrine"
+     }
+    ],
+    "edges": [
+     [
+      "surg",
+      "drop"
+     ],
+     [
+      "drop",
+      "post"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Roughly thirty to forty percent of all phaeochromocytomas arise in the setting of hereditary cancer predisposition syndromes. Germline mutations in RET (MEN 2A/2B), VHL (von Hippel-Lindau disease), NF1 (neurofibromatosis type 1), and SDHD/SDHB (succinate dehydrogenase subunits) drive familial disease. Because clinical malignancy cannot be diagnosed histologically and is defined strictly by the presence of metastases in non-chromaffin tissues (bones, lymph nodes, liver), every patient with phaeochromocytoma requires lifetime annual biochemical surveillance with plasma **metanephrine surveillance**.",
+   "say": "Roughly forty percent of all phaeochromocytomas arise in the setting of hereditary cancer predisposition syndromes. Germline mutations in RET, VHL, NF1, and succinate dehydrogenase subunits drive familial disease. Because malignancy cannot be diagnosed histologically and is defined strictly by distant metastases in non-chromaffin tissues like bone or liver, every patient requires lifetime annual surveillance with plasma metanephrine surveillance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genetic Syndrome",
+     "Mutated Gene",
+     "Associated Tumour Spectrum",
+     "Malignancy Potential"
+    ],
+    "rows": [
+     [
+      "MEN Type 2A / 2B",
+      "RET proto-oncogene",
+      "Medullary thyroid cancer, hyperparathyroidism",
+      "Low (< 5% malignant)"
+     ],
+     [
+      "von Hippel-Lindau (VHL)",
+      "VHL tumour suppressor",
+      "Renal cell carcinoma, hemangioblastomas",
+      "Low (~5% malignant)"
+     ],
+     [
+      "Neurofibromatosis Type 1",
+      "NF1 (neurofibromin)",
+      "Neurofibromas, café-au-lait spots, glioma",
+      "Low (~5-10% malignant)"
+     ],
+     [
+      "SDHB Paraganglioma",
+      "SDHB (mitochondrial)",
+      "Extra-adrenal paragangliomas (abdomen, thorax)",
+      "High (> 30-50% malignant)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

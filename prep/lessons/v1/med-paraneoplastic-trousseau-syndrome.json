@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "med-paraneoplastic",
+ "subject": "medicine",
+ "title": "Tumour Markers, Carcinoid Syndrome, and Trousseau Sign",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A paraneoplastic prothrombotic state characterised by recurrent, migratory, superficial thrombophlebitis affecting atypical venous channels across the trunk and upper extremities is **Trousseau syndrome** (thrombophlebitis migrans). Driven by tumour-derived mucin that interacts with selectins to induce platelet microthrombi and tissue factor secretion, it strongly heralds visceral malignancies, particularly pancreatic adenocarcinoma.",
+   "say": "A paraneoplastic prothrombotic state characterized by recurrent migratory superficial thrombophlebitis in atypical veins is Trousseau syndrome. Driven by tumour mucin triggering platelet microthrombi and tissue factor activation, it strongly heralds underlying visceral malignancies, especially pancreatic adenocarcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-malignancy_stigmata.webp",
+    "alt": "Clinical illustration of Trousseau sign of malignancy and paraneoplastic thrombosis.",
+    "caption": "Migratory thrombophlebitis and physical stigmata of occult visceral malignancy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Biochemical substances produced directly by neoplastic cells or by the host in response to malignancy serve as serum tumour markers. Carcinoembryonic antigen (**CEA**) is an oncofetal glycoprotein widely utilized for monitoring recurrence and therapeutic response in colorectal adenocarcinoma, though elevated levels also occur in cigarette smokers, cirrhosis, and inflammatory bowel disease.",
+   "say": "Biochemical substances produced by neoplastic cells or by the host serve as serum tumour markers. Carcinoembryonic antigen is an oncofetal glycoprotein used for monitoring recurrence in colorectal adenocarcinoma, though mild elevations also occur in smokers and cirrhosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Marker",
+     "Biochemical Nature",
+     "Primary Malignancy Monitored",
+     "Key Non-Malignant False Positives"
+    ],
+    "rows": [
+     [
+      "CEA",
+      "Oncofetal cell surface glycoprotein",
+      "Colorectal, gastric, pancreatic carcinoma",
+      "Cigarette smoking, cirrhosis, Crohn disease"
+     ],
+     [
+      "CA 19-9",
+      "Sialylated Lewis blood group antigen",
+      "Pancreatic adenocarcinoma, cholangiocarcinoma",
+      "Biliary obstruction, acute cholangitis, pancreatitis"
+     ],
+     [
+      "CA-125",
+      "High molecular weight transmembrane glycoprotein",
+      "Epithelial ovarian carcinoma",
+      "Endometriosis, pelvic inflammatory disease, cirrhosis"
+     ],
+     [
+      "Alpha-fetoprotein (AFP)",
+      "Fetal serum glycoprotein synthesized by liver/yolk sac",
+      "Hepatocellular carcinoma, non-seminomatous germ cell",
+      "Acute/chronic hepatitis, pregnancy, ataxia-telangiectasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A high molecular weight glycoprotein shed into circulation by coelomic epithelial cells is CA-125. Primarily employed for monitoring treatment response and detecting recurrence in epithelial **ovarian cancer**, serial CA-125 measurements correlate with tumour burden, but lack specificity for primary screening due to elevations in endometriosis, pelvic inflammatory disease, and benign ascites.",
+   "say": "A high molecular weight glycoprotein shed by coelomic epithelial cells is CA-125. Primarily used for monitoring treatment response and recurrence in epithelial ovarian cancer, serial measurements correlate with tumour burden but lack specificity for primary screening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ov",
+      "label": "Epithelial Ovarian Carcinoma"
+     },
+     {
+      "id": "ca125",
+      "label": "Serum CA-125 Biomarker Titration"
+     },
+     {
+      "id": "rec",
+      "label": "Early Detection of Post-Surgical Recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "ov",
+      "ca125"
+     ],
+     [
+      "ca125",
+      "rec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Combined serum measurements of alpha-fetoprotein (AFP) and beta-human chorionic gonadotropin (**beta-hCG**) are essential for the diagnostic staging and risk stratification of testicular germ cell tumours. While pure seminomas never produce AFP (elevated beta-hCG in fifteen percent), non-seminomatous germ cell tumours (embryonal carcinoma, yolk sac tumour, choriocarcinoma) demonstrate prominent elevations.",
+   "say": "Combined serum measurements of alpha-fetoprotein and beta-hCG are essential for staging testicular germ cell tumours. Pure seminomas never secrete AFP, whereas non-seminomatous germ cell tumours demonstrate marked elevations of both markers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pure Seminoma",
+     "points": [
+      "Alpha-fetoprotein (AFP) is NEVER elevated",
+      "Beta-hCG elevated in 15% to 20% of cases",
+      "Exquisitely radiosensitive and chemosensitive",
+      "Histology: Fried-egg cells with prominent nucleoli"
+     ]
+    },
+    "right": {
+     "title": "Non-Seminomatous Germ Cell (NSGCT)",
+     "points": [
+      "AFP elevated in yolk sac components (> 80%)",
+      "Beta-hCG markedly elevated in choriocarcinoma",
+      "Lacks primary radiosensitivity; treated with BEP chemo",
+      "Serial marker decline guides surgical retroperitoneal dissection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A paraneoplastic neuroendocrine syndrome resulting from systemic circulation of vasoactive amines (primarily serotonin, bradykinin, and prostaglandins) secreted by well-differentiated neuroendocrine tumours is **carcinoid syndrome**. Primary midgut carcinoids draining into the portal circulation do not cause systemic symptoms due to hepatic first-pass monoamine oxidase clearance until extensive hepatic metastases bypass liver metabolism.",
+   "say": "A paraneoplastic neuroendocrine syndrome resulting from vasoactive amines secreted by neuroendocrine tumours is carcinoid syndrome. Primary midgut tumours draining into the portal vein do not cause symptoms due to hepatic first-pass clearance until liver metastases bypass hepatic metabolism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/carcinoid-syndrome-fig1.webp",
+    "alt": "Clinical triad of carcinoid syndrome: cutaneous flushing, diarrhea, and tricuspid plaque.",
+    "caption": "Hepatic metastases, cutaneous flushing, secretory diarrhea, and right heart plaques in carcinoid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic clinical tetrad of carcinoid syndrome comprises paroxysmal cutaneous flushing of the face and upper chest (eighty-five percent), severe explosive secretory **diarrhoea** that persists during fasting (eighty percent), bronchospasm with wheezing (twenty percent), and right-sided cardiac valvular fibrosis (tricuspid regurgitation and pulmonary stenosis from serotonin-induced subendocardial fibrotic plaques).",
+   "say": "The clinical tetrad of carcinoid syndrome comprises paroxysmal facial flushing, severe secretory diarrhea persisting during fasting, bronchospasm, and right-sided cardiac valvular fibrosis causing tricuspid regurgitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Manifestation",
+     "Primary Vasoactive Mediator",
+     "Pathophysiological Characteristic"
+    ],
+    "rows": [
+     [
+      "Paroxysmal Cutaneous Flushing",
+      "Bradykinin, tachykinins, prostaglandins",
+      "Episodic bright red flushing of face/neck; provoked by alcohol/food"
+     ],
+     [
+      "Secretory Diarrhea",
+      "Serotonin (5-HT) excess",
+      "Watery, explosive, non-bloody; persists during fasting"
+     ],
+     [
+      "Carcinoid Heart Disease",
+      "Serotonin stimulating 5-HT2B receptors",
+      "Fibrotic plaque deposition on tricuspid and pulmonary valves"
+     ],
+     [
+      "Pellagra-like Skin Changes",
+      "Tryptophan depletion into serotonin synthesis",
+      "Niacin deficiency dermatitis, diarrhea, and dementia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive screening investigation for carcinoid syndrome is measuring twenty-four-hour urinary excretion of **5-HIAA** (5-hydroxyindoleacetic acid), the primary end-stage breakdown metabolite of serotonin cleared by the kidneys. Patients must avoid dietary serotonin sources (bananas, pineapples, walnuts, avocados) for forty-eight hours prior to urine collection to prevent false-positive elevations.",
+   "say": "The definitive screening test for carcinoid syndrome is measuring twenty-four-hour urinary 5-HIAA, the breakdown metabolite of serotonin. Patients must avoid dietary serotonin sources like bananas and walnuts for forty-eight hours prior to testing to avoid false-positive results.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tryp",
+      "label": "Dietary Tryptophan Converted to Serotonin (5-HT)"
+     },
+     {
+      "id": "mao",
+      "label": "Hepatic / Renal Monoamine Oxidase Breakdown"
+     },
+     {
+      "id": "hiaa",
+      "label": "24-Hour Urinary 5-HIAA Excretion > 25 mg/day"
+     }
+    ],
+    "edges": [
+     [
+      "tryp",
+      "mao"
+     ],
+     [
+      "mao",
+      "hiaa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical therapy for carcinoid syndrome relies on synthetic long-acting somatostatin analogues such as subcutaneous or depot intramuscular **octreotide** (or lanreotide). Somatostatin analogues bind somatostatin receptors (sstr2 and sstr5) on neuroendocrine cell membranes, profoundly suppressing hormonal secretion, halting flushing and diarrhoea, and stabilizing tumour growth, while radioactive lutetium-177 DOTATATE provides targeted peptide receptor radionuclide therapy.",
+   "say": "Medical therapy for carcinoid syndrome relies on long-acting somatostatin analogues such as octreotide. Somatostatin analogues bind neuroendocrine somatostatin receptors, profoundly suppressing hormonal secretion, controlling flushing and diarrhea, and stabilizing tumour growth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sstr",
+      "label": "Somatostatin Receptor Binding (sstr2/5)"
+     },
+     {
+      "id": "oct",
+      "label": "Octreotide Infusion Halts Serotonin Release"
+     },
+     {
+      "id": "res",
+      "label": "Resolution of Flushing & Diarrhoea"
+     }
+    ],
+    "edges": [
+     [
+      "sstr",
+      "oct"
+     ],
+     [
+      "oct",
+      "res"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 100, 102"
+}

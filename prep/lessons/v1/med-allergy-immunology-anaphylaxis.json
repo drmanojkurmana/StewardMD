@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "module": "med-allergy-immunology",
+ "subject": "medicine",
+ "title": "Anaphylaxis, Angioedema, and Primary Immunodeficiencies",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A severe, life-threatening generalised systemic hypersensitivity reaction is defined clinically as **anaphylaxis**. Triggered primarily by IgE-dependent cross-linking of high-affinity Fc epsilon receptors on tissue mast cells and circulating basophils, explosive release of preformed histamine, leukotrienes, and platelet-activating factor induces rapid systemic vasodilation, microvascular hyperpermeability, bronchoconstriction, and acute cardiovascular collapse.",
+   "say": "A severe life-threatening generalized systemic hypersensitivity reaction is defined clinically as anaphylaxis. Triggered by IgE cross-linking on tissue mast cells and circulating basophils, explosive release of histamine, leukotrienes, and platelet-activating factor induces rapid systemic vasodilation, bronchoconstriction, and acute cardiovascular collapse.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anaphylaxis-fig1.webp",
+    "alt": "Pathophysiological cascade and mediator release in acute anaphylaxis.",
+    "caption": "Mast cell degranulation and vascular collapse in systemic anaphylaxis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The absolute first-line drug of choice in the acute emergency management of anaphylaxis is **intramuscular adrenaline** (epinephrine), administered immediately into the anterolateral mid-thigh at a dose of 0.5 mg in adults (1:1000 dilution). Adrenaline exerts potent alpha-1 vasoconstriction to counteract vascular collapse, beta-1 cardiac inotropy, and beta-2 bronchodilation while halting further mast cell mediator release.",
+   "say": "The absolute first-line drug of choice in acute anaphylaxis is intramuscular adrenaline, administered immediately into the anterolateral mid-thigh at a dose of 0.5 mg in adults. Adrenaline exerts alpha-1 vasoconstriction, beta-1 inotropy, and beta-2 bronchodilation while halting further mast cell mediator release.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor Subtype",
+     "Physiological Target",
+     "Therapeutic Action in Anaphylaxis"
+    ],
+    "rows": [
+     [
+      "Alpha-1 Adrenergic",
+      "Vascular smooth muscle",
+      "Reverses systemic vasodilation and mucosal edema"
+     ],
+     [
+      "Beta-1 Adrenergic",
+      "Myocardial cardiomyocytes",
+      "Increases cardiac output and coronary perfusion"
+     ],
+     [
+      "Beta-2 Adrenergic",
+      "Bronchial smooth muscle & mast cells",
+      "Relieves bronchospasm; halts further degranulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To confirm systemic mast cell activation biochemically in acute anaphylaxis, serial measurements of **serum tryptase** should be collected. Peak circulating levels occur between one and two hours following symptom onset and decline over twenty-four hours. Elevation above the patient's baseline confirms systemic mast cell degranulation, differentiating true anaphylaxis from vasovagal syncope or vocal cord dysfunction.",
+   "say": "To confirm mast cell activation biochemically in acute anaphylaxis, serial measurements of serum tryptase should be collected. Peak circulating concentrations occur one to two hours following symptom onset. Elevation above baseline confirms systemic mast cell degranulation, differentiating anaphylaxis from vasovagal syncope.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "deg",
+      "label": "Mast Cell Degranulation"
+     },
+     {
+      "id": "tryp",
+      "label": "Serum Tryptase Peak (1-2 hr)"
+     },
+     {
+      "id": "conf",
+      "label": "Biochemical Confirmation"
+     }
+    ],
+    "edges": [
+     [
+      "deg",
+      "tryp"
+     ],
+     [
+      "tryp",
+      "conf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-pitting, localised swelling of the deep dermis, subcutaneous tissue, or submucosal compartments is termed **angioedema**. While histamine-mediated angioedema is accompanied by pruritic urticarial wheals and responds to adrenaline and antihistamines, bradykinin-mediated angioedema characteristically lacks pruritus or urticaria and fails completely to respond to conventional anti-allergic pharmacotherapy.",
+   "say": "Non-pitting swelling of the deep dermis, subcutaneous tissue, or submucosa is termed angioedema. While histamine-mediated angioedema is accompanied by pruritic urticaria and responds to adrenaline, bradykinin-mediated forms lack urticaria and fail completely to respond to conventional anti-allergic therapies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Histaminergic Angioedema",
+     "points": [
+      "Accompanied by pruritic urticarial wheals",
+      "Mast cell and IgE mediated",
+      "Responds to adrenaline, H1-antihistamines, steroids",
+      "Associated with food and venom allergies"
+     ]
+    },
+    "right": {
+     "title": "Bradykinin Angioedema",
+     "points": [
+      "Absence of urticaria or pruritus",
+      "Excess bradykinin generation",
+      "Refractory to adrenaline and antihistamines",
+      "Treated with C1-INH concentrates or icatibant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An autosomal dominant disorder characterised by recurrent episodes of non-pruritic subcutaneous and laryngeal oedema is **hereditary angioedema** (HAE). Pathogenetically caused by quantitative or functional deficiency of C1 esterase inhibitor (C1-INH), unrestrained activation of the contact kallikrein-kinin cascade generates excess bradykinin. Acute attacks require treatment with purified C1-INH concentrate or the bradykinin B2-receptor antagonist icatibant.",
+   "say": "An autosomal dominant disorder characterised by recurrent episodes of non-pruritic subcutaneous and laryngeal oedema is hereditary angioedema. Caused by deficiency of C1 esterase inhibitor, unrestrained kallikrein activation generates excess bradykinin. Acute attacks require purified C1 inhibitor concentrate or the bradykinin antagonist icatibant.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/c1-esterase-inhibitor-deficiency-fig1.webp",
+    "alt": "Pathophysiological pathway of hereditary angioedema and C1 inhibitor deficiency.",
+    "caption": "Kallikrein-kinin pathway dysregulation in hereditary angioedema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Iatrogenic bradykinin accumulation also occurs during pharmacotherapy with angiotensin-converting enzyme inhibitors, resulting in **ACE inhibitor angioedema**. Because ACE serves as the primary degradation enzyme for endogenous bradykinin, enzyme inhibition precipitates abrupt swelling of the tongue, lips, and pharynx even years after starting the offending medication, mandating immediate and permanent drug cessation.",
+   "say": "Iatrogenic bradykinin accumulation occurs during pharmacotherapy with ACE inhibitors, resulting in ACE inhibitor angioedema. Because angiotensin-converting enzyme serves as the primary breakdown pathway for bradykinin, enzyme inhibition precipitates abrupt swelling of the tongue and airway, mandating permanent drug discontinuation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "acei",
+      "label": "ACE Inhibitor Therapy"
+     },
+     {
+      "id": "brad",
+      "label": "Blocked Bradykinin Degradation"
+     },
+     {
+      "id": "edem",
+      "label": "Oropharyngeal & Airway Angioedema"
+     }
+    ],
+    "edges": [
+     [
+      "acei",
+      "brad"
+     ],
+     [
+      "brad",
+      "edem"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary immunodeficiency disorders present with distinct clinical infection susceptibility patterns determined by the compromised immune arm. The most prevalent symptomatic primary humoral immunodeficiency diagnosed in adulthood is **common variable immunodeficiency** (CVID), characterised by defective B-cell differentiation into plasma cells, profound hypogammaglobulinemia (low IgG, IgA, and IgM), impaired vaccine antibody responses, and recurrent sinopulmonary bacterial infections.",
+   "say": "Primary immunodeficiency disorders present with distinct infection patterns determined by the compromised immune branch. The most common symptomatic primary humoral immunodeficiency diagnosed in adults is common variable immunodeficiency. It features defective B-cell differentiation, marked hypogammaglobulinemia, impaired vaccine responses, and recurrent sinopulmonary infections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/allergy-anaphylaxis-immunodeficiency-long-case-fig1.webp",
+    "alt": "Classification of hypersensitivity reactions and immunodeficiency syndromes.",
+    "caption": "Pathophysiological classification of hypersensitivity reactions and primary immunodeficiencies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Defective phagocyte microbicidal oxidative burst due to genetic mutations in NADPH oxidase subunits defines **chronic granulomatous disease** (CGD). Inability to generate superoxide radicals predisposes affected patients to recurrent severe granulomatous infections and abscesses caused specifically by catalase-positive organisms (Staphylococcus aureus, Burkholderia cepacia, Serratia marcescens, Nocardia, and Aspergillus), diagnosed via abnormal dihydrorhodamine 123 oxidation testing.",
+   "say": "Defective phagocyte oxidative burst due to genetic mutations in NADPH oxidase subunits defines chronic granulomatous disease. Inability to generate superoxide radicals predisposes patients to recurrent severe infections by catalase-positive organisms such as Staphylococcus, Serratia, and Aspergillus, diagnosed through abnormal dihydrorhodamine 123 testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunodeficiency Disorder",
+     "Primary Pathological Defect",
+     "Characteristic Organism Susceptibility"
+    ],
+    "rows": [
+     [
+      "Selective IgA Deficiency",
+      "Isolated absence of mucosal IgA",
+      "Sinopulmonary infections, Giardia lamblia"
+     ],
+     [
+      "Common Variable Immunodeficiency",
+      "Failed plasma cell maturation (low IgG/IgA)",
+      "Encapsulated pyogenic bacteria (Pneumococcus, Haemophilus)"
+     ],
+     [
+      "Chronic Granulomatous Disease",
+      "Defective NADPH oxidase superoxide burst",
+      "Catalase-positive bacteria and fungi (Staph, Aspergillus)"
+     ],
+     [
+      "Terminal Complement Defect (C5-C9)",
+      "Defective membrane attack complex assembly",
+      "Recurrent disseminated Neisseria meningitidis infections"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 352-355"
+}

@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "med-acs",
+ "subject": "medicine",
+ "title": "Fibrinolysis, primary PCI and dual antiplatelet therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A non-fibrin-specific bacterial protein derived from beta-haemolytic streptococci is **streptokinase**. It forms an equimolar complex with circulating plasminogen, inducing systemic fibrinogenolysis that breaks down both pathological thrombi and circulating clotting factors. Because it is foreign, patients develop neutralising antibodies, meaning streptokinase cannot be re-administered within one year due to risk of severe anaphylaxis and therapeutic failure.",
+   "say": "Streptokinase is a bacterial protein that binds plasminogen to trigger systemic fibrinolysis. It breaks down circulating fibrinogen and clotting factors non-specifically. Because patients produce neutralising antibodies, it must not be re-administered within one year due to allergic risk and treatment failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Streptokinase",
+     "points": [
+      "Non-fibrin specific bacterial protein",
+      "Causes systemic lytic state",
+      "Antigenic; cannot repeat within 1 year",
+      "Given as 1.5 million unit infusion over 60 min"
+     ]
+    },
+    "right": {
+     "title": "Tenecteplase / Alteplase",
+     "points": [
+      "Genetically engineered tPA analogue",
+      "High fibrin specificity",
+      "Non-antigenic, safely repeatable",
+      "Given as single weight-adjusted IV bolus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genetically engineered recombinant tissue plasminogen activator variants offer superior pharmacological profiles. As a genetically modified variant of alteplase, **tenecteplase** possesses 14-fold higher fibrin specificity and 80-fold greater resistance to plasminogen activator inhibitor-1. Administered as a single weight-adjusted intravenous bolus over 5 to 10 seconds, tenecteplase achieves higher complete reperfusion rates with significantly lower non-cerebral bleeding.",
+   "say": "Genetically engineered tPA variants provide major pharmacological advantages. Tenecteplase exhibits eighty-fold greater resistance to inactivation and high fibrin specificity. Administered as a single weight-adjusted bolus over five seconds, it delivers rapid reperfusion with reduced non-cerebral bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient body weight",
+     "Tenecteplase bolus dose",
+     "Volume of 50 mg vial"
+    ],
+    "rows": [
+     [
+      "< 60 kg",
+      "30 mg (6,000 units)",
+      "6 mL"
+     ],
+     [
+      "60 to 69 kg",
+      "35 mg (7,000 units)",
+      "7 mL"
+     ],
+     [
+      "70 to 79 kg",
+      "40 mg (8,000 units)",
+      "8 mL"
+     ],
+     [
+      "80 to 89 kg",
+      "45 mg (9,000 units)",
+      "9 mL"
+     ],
+     [
+      ">= 90 kg",
+      "50 mg (10,000 units)",
+      "10 mL"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superior treatment modality for acute ST-elevation myocardial infarction is emergent **primary percutaneous coronary intervention**. Compared to fibrinolysis, primary PCI achieves higher patency of the infarct-related artery (TIMI 3 flow exceeding 90%), significantly lowers intracranial haemorrhage, and reduces recurrent infarction and mortality. The benchmark door-to-balloon time is under 90 minutes for PCI-capable centres, or under 120 minutes when transfer is required.",
+   "say": "Primary percutaneous coronary intervention is the preferred reperfusion strategy for STEMI. It achieves complete vessel patency in over ninety percent of cases while reducing reinfarction and intracranial bleeding compared to lysis. Guidelines mandate a door-to-balloon time under ninety minutes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-acs-reperfusion.svg",
+    "alt": "Flowchart showing door to balloon and door to needle benchmarks in acute myocardial infarction.",
+    "caption": "Reperfusion door-to-balloon and door-to-needle quality metrics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Platelet activation and thrombus propagation demand immediate combined inhibition. Administration of **dual antiplatelet therapy** combining aspirin with a potent P2Y12 receptor antagonist is mandatory in all acute coronary syndrome presentations. Aspirin irreversibly acetylates cyclooxygenase-1, inhibiting thromboxane A2 production, while P2Y12 inhibitors block adenosine diphosphate-mediated platelet glycoprotein IIb/IIIa receptor activation.",
+   "say": "Platelet activation in acute coronary syndromes requires immediate dual blockade. Dual antiplatelet therapy pairs aspirin with an oral P2Y12 antagonist. Aspirin blocks thromboxane synthesis via cyclooxygenase-1, while the P2Y12 inhibitor prevents ADP-driven platelet aggregation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rupt",
+      "label": "Coronary plaque rupture"
+     },
+     {
+      "id": "asp",
+      "label": "Aspirin blocks COX-1 / Thromboxane"
+     },
+     {
+      "id": "p2y",
+      "label": "P2Y12 inhibitor blocks ADP pathway"
+     },
+     {
+      "id": "agg",
+      "label": "Inhibition of GP IIb/IIIa activation"
+     },
+     {
+      "id": "thromb",
+      "label": "Prevention of coronary stent thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "rupt",
+      "asp"
+     ],
+     [
+      "rupt",
+      "p2y"
+     ],
+     [
+      "asp",
+      "agg"
+     ],
+     [
+      "p2y",
+      "agg"
+     ],
+     [
+      "agg",
+      "thromb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A direct-acting, reversibly binding oral P2Y12 receptor antagonist is **ticagrelor**. Unlike clopidogrel, ticagrelor does not require hepatic CYP2C19 bioactivation, providing rapid and consistent platelet inhibition within 30 minutes of a 180 mg loading dose. In the PLATO trial, ticagrelor significantly reduced cardiovascular death and stent thrombosis compared to clopidogrel, making it a preferred first-line agent alongside prasugrel.",
+   "say": "Ticagrelor is a direct acting, reversible P2Y12 inhibitor. Because it bypasses hepatic metabolic activation, it provides rapid platelet inhibition within thirty minutes. Clinical trials demonstrated superior reduction in cardiovascular death compared to clopidogrel, establishing it as preferred first line therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "P2Y12 inhibitor",
+     "Mechanism of action",
+     "Loading dose",
+     "Key clinical characteristics"
+    ],
+    "rows": [
+     [
+      "Clopidogrel",
+      "Irreversible prodrug (CYP2C19 dependent)",
+      "300 to 600 mg",
+      "Variable response, preferred if bleeding risk high"
+     ],
+     [
+      "Prasugrel",
+      "Irreversible prodrug (rapid activation)",
+      "60 mg",
+      "Contraindicated if prior stroke or TIA"
+     ],
+     [
+      "Ticagrelor",
+      "Reversible direct-acting antagonist",
+      "180 mg",
+      "Twice daily dosing, causes transient dyspnoea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unique adverse effects require proactive clinical recognition and counseling. Self-limiting **dyspnoea** occurs in 10% to 15% of patients on ticagrelor due to inhibition of cellular adenosine reuptake, elevating circulating adenosine levels. It characteristically manifests within the first few days of therapy, is not associated with bronchospasm or heart failure, and rarely necessitates drug discontinuation unless severe.",
+   "say": "Specific adverse effects require patient counseling. Mild dyspnoea develops in roughly ten percent of patients starting ticagrelor due to inhibition of adenosine reuptake. It typically appears within the first few days and resolves without compromising heart function or requiring discontinuation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ticagrelor-induced dyspnoea",
+     "points": [
+      "Mediated by adenosine reuptake inhibition",
+      "Onset in first 3-5 days of therapy",
+      "Normal lung fields and oxygen saturation",
+      "Usually benign and self-limiting"
+     ]
+    },
+    "right": {
+     "title": "Heart failure dyspnoea",
+     "points": [
+      "Elevated left ventricular filling pressure",
+      "Bilateral crackles and hypoxia",
+      "Elevated BNP and pulmonary congestion",
+      "Demands urgent diuretic therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following successful primary PCI with drug-eluting stents, continue dual antiplatelet therapy for at least 12 months in the absence of excessive bleeding risk. Concurrently, administer intravenous **unfractionated heparin** or subcutaneous enoxaparin during the acute intervention. Premature cessation of dual antiplatelet therapy is the single strongest predictor of catastrophic acute stent thrombosis, demanding explicit patient education.",
+   "say": "Maintain dual antiplatelet therapy for twelve months following drug eluting stent implantation unless major bleeding occurs. Provide parenteral anticoagulation with heparin during acute PCI. Unplanned early discontinuation of antiplatelet agents is the primary cause of acute stent thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pci",
+      "label": "Successful primary PCI with DES"
+     },
+     {
+      "id": "dapt",
+      "label": "Dual antiplatelet therapy for 12 months"
+     },
+     {
+      "id": "sec",
+      "label": "Statin + Beta blocker + ACE inhibitor"
+     },
+     {
+      "id": "prev",
+      "label": "Prevention of recurrent infarction and thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "pci",
+      "dapt"
+     ],
+     [
+      "dapt",
+      "sec"
+     ],
+     [
+      "sec",
+      "prev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Optimize long-term secondary prevention before hospital discharge. Prescribe high-intensity statins, beta-blockers, and angiotensin-converting enzyme inhibitors or angiotensin receptor blockers to promote positive ventricular remodeling. Arrange early participation in structured **cardiac rehabilitation** programs, which improve functional exercise tolerance, control atherogenic risk factors, and reduce all-cause cardiovascular mortality by 25%.",
+   "say": "Secondary prevention should be fully established before discharge. Prescribe statins, beta blockers and ACE inhibitors to prevent adverse remodeling. Enrolling in cardiac rehabilitation improves exercise capacity, controls risk factors, and reduces long term cardiovascular mortality.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-heart-disease-fig2.webp",
+    "alt": "Ruptured coronary plaque with thrombus, STEMI spectrum, infarcted heart and statin, antiplatelet and supportive drugs.",
+    "caption": "Secondary prevention pharmacotherapy and coronary plaque stabilization. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

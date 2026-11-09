@@ -1,0 +1,241 @@
+{
+ "v": 1,
+ "module": "med-acs",
+ "subject": "medicine",
+ "title": "ST-elevation myocardial infarction, biomarkers and triage",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Transmural myocardial ischaemia following acute atherothrombotic coronary occlusion characterizes **STEMI**. Rupture or erosion of an unstable fibroatheromatous plaque exposes thrombogenic lipid core contents, triggering platelet aggregation and complete occlusive thrombus formation. Rapid diagnosis demands an immediate 10-minute ECG demonstrating ST-segment elevation at the J-point of 1 mm or greater in contiguous leads, or 2 mm in V2-V3 in men.",
+   "say": "Transmural myocardial ischaemia caused by complete coronary artery occlusion defines STEMI. Rupture of a vulnerable plaque exposes thrombogenic material, creating an occlusive thrombus. Rapid diagnosis requires an immediate electrocardiogram showing persistent ST elevation in two anatomically contiguous leads.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acs-fig1.webp",
+    "alt": "Cross-sectional medical illustration of a coronary artery in acute coronary syndrome showing fibrous cap rupture over a lipid core, platelet aggregation, fibrin mesh, occlusive thrombus, and downstream myocardial ischaemia.",
+    "caption": "Acute coronary plaque rupture with occlusive thrombus and downstream myocardial ischaemia. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "Non-occlusive or partially occlusive thrombus resulting in subendocardial necrosis defines **NSTEMI**. In contrast to STEMI, the electrocardiogram shows ST-segment depression, transient T wave inversion, or non-specific repolarisation shifts without persistent ST elevation. The distinction between NSTEMI and unstable angina relies entirely on cardiac biomarker elevation, as unstable angina produces no detectable myocardial necrosis or biomarker release.",
+   "say": "Subendocardial necrosis caused by non-occlusive coronary thrombosis defines non ST-elevation myocardial infarction. The ECG demonstrates ST depression or T wave inversion without persistent elevation. Documenting elevated cardiac biomarkers distinguishes NSTEMI from unstable angina, where biomarkers remain normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NSTEMI",
+     "points": [
+      "Partially occlusive thrombus",
+      "Subendocardial ischaemia",
+      "ST depression or T inversion",
+      "Elevated cardiac troponins"
+     ]
+    },
+    "right": {
+     "title": "Unstable angina",
+     "points": [
+      "Transient or non-occlusive ischemia",
+      "Symptoms at rest or crescendo",
+      "ST shifts may occur during pain",
+      "Troponins strictly negative"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Episodes of rest angina, new-onset severe angina, or increasing frequency and duration of preexisting symptoms constitute **unstable angina**. It reflects high-risk plaque instability threatening complete thrombotic vessel occlusion. Patients exhibit dynamic ischemic symptoms, but high-sensitivity troponin levels remain below the 99th percentile upper reference limit. These individuals require aggressive anti-ischemic pharmacotherapy, dual antiplatelet loading, and early invasive risk stratification.",
+   "say": "Chest discomfort occurring at rest, new severe onset, or crescendo pattern constitutes unstable angina. It indicates an unstable coronary plaque threatening complete occlusion. While ischemic symptoms are prominent, troponin levels remain strictly normal. Immediate antiplatelet loading and early catheterization are warranted.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rest",
+      "label": "Rest or crescendo chest pain"
+     },
+     {
+      "id": "ecg",
+      "label": "No persistent ST elevation"
+     },
+     {
+      "id": "trop",
+      "label": "Check high-sensitivity troponin"
+     },
+     {
+      "id": "ua",
+      "label": "Troponin negative: Unstable angina"
+     },
+     {
+      "id": "nstemi",
+      "label": "Troponin positive: NSTEMI"
+     }
+    ],
+    "edges": [
+     [
+      "rest",
+      "ecg"
+     ],
+     [
+      "ecg",
+      "trop"
+     ],
+     [
+      "trop",
+      "ua"
+     ],
+     [
+      "trop",
+      "nstemi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gold-standard biochemical marker for detecting myocardial injury is cardiac **troponin**. Cardiac troponin I and troponin T are regulatory proteins released into the circulation following cardiomyocyte membrane disruption. High-sensitivity assays detect elevation within 2 to 3 hours of symptom onset, peaking at 12 to 24 hours and remaining elevated for 7 to 14 days, providing both sensitive early detection and prolonged diagnostic sensitivity.",
+   "say": "Cardiac troponin represents the gold standard biomarker for diagnosing myocardial injury. High sensitivity assays detect release within two to three hours after cardiomyocyte death. Levels peak between twelve and twenty-four hours and stay elevated for up to two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biomarker",
+     "Initial elevation",
+     "Peak level",
+     "Duration of elevation"
+    ],
+    "rows": [
+     [
+      "Cardiac troponin I / T",
+      "2 to 3 hours",
+      "12 to 24 hours",
+      "7 to 14 days"
+     ],
+     [
+      "CK-MB isoenzyme",
+      "4 to 6 hours",
+      "18 to 24 hours",
+      "48 to 72 hours"
+     ],
+     [
+      "Myoglobin",
+      "1 to 2 hours",
+      "6 to 8 hours",
+      "24 hours"
+     ],
+     [
+      "LDH (historic)",
+      "24 to 48 hours",
+      "3 to 5 days",
+      "10 to 14 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "While largely superseded by high-sensitivity troponins, the creatine kinase myocardial band **CK-MB** retains an essential diagnostic role. CK-MB levels rise within 4 to 6 hours, peak at 24 hours, and return to baseline within 48 to 72 hours. Because troponins linger for up to two weeks, a prompt rise in CK-MB is the definitive biomarker for detecting early reinfarction following initial myocardial infarction.",
+   "say": "The CK-MB isoenzyme retains an essential clinical niche in detecting early reinfarction. While troponins persist for up to two weeks, CK-MB returns to baseline within three days. A secondary rise in CK-MB reliably confirms recurrent necrosis when symptoms recur shortly after an infarct.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Troponin advantages",
+     "points": [
+      "Superior myocardial specificity",
+      "Earlier detection with high-sensitivity assays",
+      "High prognostic sensitivity"
+     ]
+    },
+    "right": {
+     "title": "CK-MB clinical utility",
+     "points": [
+      "Rapid clearance in 48-72 hours",
+      "Diagnoses early reinfarction",
+      "Correlates with infarct size"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients presenting with acute STEMI within 12 hours of symptom onset, emergent **thrombolysis** is indicated whenever primary percutaneous coronary intervention cannot be achieved within 120 minutes. Fibrinolytic agents activate plasminogen to plasmin, degrading fibrin matrices and restoring epicardial vessel patency. Administering fibrinolysis within the golden first hour yields dramatic myocardial salvage and substantial reduction in 30-day mortality.",
+   "say": "For STEMI presenting within twelve hours where percutaneous intervention cannot be achieved within two hours, emergency thrombolysis is indicated. Fibrinolytic agents convert plasminogen to plasmin, dissolving the occluding fibrin mesh. Treatment within the first hour yields substantial myocardial salvage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stemi",
+      "label": "Acute STEMI confirmed"
+     },
+     {
+      "id": "time",
+      "label": "PCI achievable within 120 min?"
+     },
+     {
+      "id": "pci",
+      "label": "Yes: Transfer for primary PCI"
+     },
+     {
+      "id": "lyse",
+      "label": "No: Immediate fibrinolysis within 10 min"
+     }
+    ],
+    "edges": [
+     [
+      "stemi",
+      "time"
+     ],
+     [
+      "time",
+      "pci"
+     ],
+     [
+      "time",
+      "lyse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safe application of fibrinolytic therapy requires rigorous exclusion of contraindications. Prior intracranial haemorrhage, known cerebral vascular malformation, ischemic stroke within 6 months, and active internal bleeding constitute absolute contraindications to **fibrinolytic therapy**. In these high-risk clinical scenarios, the haemorrhagic risk outweighs potential benefits, mandating emergency transfer for primary percutaneous coronary intervention regardless of transit delays.",
+   "say": "Safe thrombolysis demands rigorous exclusion of bleeding contraindications. Prior intracranial haemorrhage, intracranial tumours, recent major surgery or active internal bleeding absolutely preclude fibrinolytic agents. In these patients, emergency transfer for primary percutaneous intervention is mandatory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Contraindication type",
+     "Specific clinical conditions",
+     "Management approach"
+    ],
+    "rows": [
+     [
+      "Absolute contraindication",
+      "Prior intracranial hemorrhage, ischemic stroke < 6 mo",
+      "Transfer for primary PCI"
+     ],
+     [
+      "Absolute contraindication",
+      "Aortic dissection, known cerebral vascular malformation",
+      "Avoid all fibrinolytics"
+     ],
+     [
+      "Relative contraindication",
+      "Refractory hypertension (>180/110 mmHg), anticoagulant use",
+      "Weigh benefits against bleeding risk"
+     ],
+     [
+      "Relative contraindication",
+      "Traumatic CPR > 10 min, major surgery < 3 weeks",
+      "Prefer primary PCI if feasible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Time to reperfusion directly dictates myocardial survival and clinical outcome. Upon diagnosing acute myocardial infarction, initiate dual antiplatelet therapy with aspirin and a P2Y12 inhibitor, administer parenteral anticoagulation, and activate the local **cardiac catheterization** laboratory. Every minute of delay beyond onset increases microvascular obstruction, electrical instability, and long-term heart failure risk.",
+   "say": "Time to reperfusion dictates clinical survival in myocardial infarction. Administer dual antiplatelet therapy with aspirin and a P2Y12 inhibitor immediately, start parenteral anticoagulation and activate the cardiac catheterisation lab. Minimising delays limits necrosis and preserves ventricular function.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-acs-reperfusion.svg",
+    "alt": "Algorithm showing reperfusion timelines from first medical contact to primary PCI or lysis.",
+    "caption": "Reperfusion timelines and decision pathways for acute STEMI triage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

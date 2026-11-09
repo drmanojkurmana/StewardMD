@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "med-hypothyroidism",
+ "subject": "medicine",
+ "title": "Hashimoto Thyroiditis and Myxoedema Coma",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Autoimmune cellular and humoral destruction of thyroid parenchyma constitutes the leading cause of primary hypothyroidism in iodine-replete populations. Pathologically termed chronic lymphocytic thyroiditis, **hashimoto thyroiditis** occurs predominantly in women with an eight-to-one female preponderance. Activated CD4-positive helper T cells and CD8-positive cytotoxic T lymphocytes orchestrate follicular epithelial apoptosis, complemented by antibody-mediated cellular cytotoxicity. Histopathological examination demonstrates dense lymphocytic infiltration with germinal centre formation, parenchymal atrophy, fibrosis, and pathognomonic oncocytic metaplasia of follicular cells termed Hurthle or Askanazy cells. Patients initially present with a painless, rubbery, bosselated goitre.",
+   "say": "Autoimmune cellular and humoral destruction of thyroid tissue constitutes the leading cause of primary hypothyroidism in iodine-replete regions. Termed chronic lymphocytic thyroiditis, hashimoto thyroiditis occurs predominantly in women with a strong female preponderance. Activated helper T cells and cytotoxic lymphocytes drive follicular cell destruction, complemented by antibody cytotoxicity. Histopathology demonstrates dense lymphocytic infiltration, germinal centres, parenchymal fibrosis, and oxyphilic Hurthle cells. Patients present with a painless, firm, rubbery goitre.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-who_goitre_grading.webp",
+    "alt": "Physical examination and WHO goitre grading classification of diffuse thyroid enlargement.",
+    "caption": "WHO clinical goitre grading system applied to diffuse autoimmune Hashimoto enlargement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serological identification of circulating antibodies directed against key thyroid autoantigens confirms autoimmune thyroiditis. Demonstrating an elevated **anti-tpo antibody** titre establishes the diagnosis of Hashimoto thyroiditis with over ninety-five percent sensitivity. Anti-thyroglobulin antibodies are also frequently positive in roughly eighty percent of patients. High anti-TPO titres predict rapid progression from subclinical to overt hypothyroidism, higher rates of recurrent miscarriage, and a substantial long-term risk of concurrent autoimmune disorders including Addison disease, vitiligo, type 1 diabetes, and pernicious anaemia as part of autoimmune polyglandular syndromes.",
+   "say": "Serological identification of circulating antibodies directed against key thyroid autoantigens confirms autoimmune thyroiditis. Demonstrating an elevated anti-tpo antibody titre establishes the diagnosis of Hashimoto thyroiditis with over ninety-five percent sensitivity. Anti-thyroglobulin antibodies are also frequently positive in eighty percent of patients. High antibody titres predict rapid progression from subclinical to overt hypothyroidism, recurrent miscarriage, and concurrent autoimmune endocrinopathies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-Thyroid Peroxidase (Anti-TPO)",
+     "points": [
+      "Directly binds microsomal thyroid peroxidase enzyme",
+      "Present in > 95% of Hashimoto thyroiditis",
+      "Powerful predictor of progression to overt hypothyroidism",
+      "Associated with increased miscarriage and infertility"
+     ]
+    },
+    "right": {
+     "title": "Anti-Thyroglobulin (Anti-Tg)",
+     "points": [
+      "Targets 660-kDa thyroglobulin storage prohormone",
+      "Positive in 70-80% of autoimmune thyroiditis",
+      "Essential tumor marker surveillance in thyroid cancer",
+      "Interferes with serum thyroglobulin immunoassays"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Synthetic levorotatory thyroxine represents the undisputed standard of care for restoring physiological euthyroidism in thyroid failure. Initiating oral **levothyroxine** provides stable daily T4 replacement, which peripheral five-prime deiodinases convert smoothly into active intracellular T3. Dosing is typically calculated at one point six micrograms per kilogram daily. Levothyroxine must be taken with water on an empty stomach thirty to sixty minutes before breakfast, because food, calcium, and iron severely impair absorption. Therapeutic adequacy is monitored by measuring serum TSH six to eight weeks later.",
+   "say": "Synthetic thyroxine represents the standard of care for restoring physiological euthyroidism in thyroid failure. Initiating oral levothyroxine provides stable daily T4 replacement, which peripheral deiodinases convert smoothly into active T3. Dosing is based on lean body weight, typically calculated at one point six micrograms per kilogram daily. It must be taken on an empty stomach with water before breakfast, because calcium, iron, and food impair absorption. Serum TSH is evaluated six to eight weeks later.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dose",
+      "label": "Full replacement dose: 1.6 mcg/kg/day (Elderly/CAD: start 25-50 mcg)"
+     },
+     {
+      "id": "admin",
+      "label": "Administration: Fasting with water 30-60 min before breakfast"
+     },
+     {
+      "id": "tsh",
+      "label": "Titration: Check serum TSH at 6-8 weeks; adjust by 12.5-25 mcg"
+     }
+    ],
+    "edges": [
+     [
+      "dose",
+      "admin"
+     ],
+     [
+      "admin",
+      "tsh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe, long-standing, decompensated hypothyroidism exposed to acute systemic stress can precipitate a life-threatening endocrine emergency. Characterized by profound lethargy, hypothermia, bradycardia, respiratory depression, and multiorgan failure, **myxoedema coma** carries a mortality rate of twenty to forty percent. Precipitating factors include sepsis, cold environmental exposure, stroke, myocardial infarction, congestive heart failure, and sedatives. Physical examination reveals doughy non-pitting periorbital oedema, delayed deep tendon reflex relaxation, and hypotensive shock. Immediate management mandates intravenous hydrocortisone prior to levothyroxine infusion, passive rewarming, and mechanical ventilation.",
+   "say": "Severe, decompensated hypothyroidism exposed to acute systemic stress can precipitate a life-threatening endocrine emergency. Characterized by profound lethargy, hypothermia, bradycardia, respiratory depression, and multiorgan failure, myxoedema coma carries a mortality rate of up to forty percent. Precipitating triggers include sepsis, cold exposure, stroke, and sedative medications. Physical examination reveals non-pitting periorbital oedema and delayed tendon reflexes. Immediate management requires intravenous hydrocortisone, levothyroxine infusion, and passive warming.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myxedema-fig1.webp",
+    "alt": "Clinical signs and multisystem decompensation of myxoedema coma in severe hypothyroidism.",
+    "caption": "Multisystem decompensation and lethargy in severe myxoedema coma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An increasingly prevalent biochemical phenotype features elevated pituitary thyroid-stimulating hormone despite normal circulating free thyroid hormone concentrations. Diagnosing **subclinical hypothyroidism** is confirmed when serum TSH is elevated above the upper laboratory reference limit while free thyroxine remains strictly normal. Routine treatment with levothyroxine is recommended when serum TSH reaches ten milli-international units per litre or higher, during pregnancy or actively planning pregnancy, or in symptomatic individuals under sixty-five with positive anti-TPO antibodies. In older adults over eighty with modest TSH elevations below ten, watchful waiting is preferred to avoid overtreatment.",
+   "say": "An increasingly prevalent biochemical phenotype features elevated thyroid-stimulating hormone despite normal circulating free hormone concentrations. Diagnosing subclinical hypothyroidism is confirmed when serum TSH is elevated while free thyroxine remains normal. Treatment with levothyroxine is recommended when serum TSH reaches ten milli-units per litre or higher, during pregnancy, or in younger symptomatic individuals with positive anti-TPO antibodies. In older adults with modest TSH elevations, watchful waiting is generally preferred.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Serum TSH elevated with strictly normal free T4"
+     },
+     {
+      "id": "tsh10",
+      "label": "TSH >= 10 mIU/L: Treat with levothyroxine (Cardiovascular & progression risk)"
+     },
+     {
+      "id": "tshlow",
+      "label": "TSH < 10 mIU/L: Treat if pregnant, anti-TPO positive, symptomatic, or goitre present"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "tsh10"
+     ],
+     [
+      "screen",
+      "tshlow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Altered circulating thyroid hormone levels occurring in severe non-thyroidal systemic illness must not be mistaken for intrinsic thyroid failure. Termed non-thyroidal illness syndrome or **sick euthyroid syndrome**, cytokine-mediated inhibition of peripheral type one deiodinase impairs T4 conversion, resulting in low serum T3 with normal TSH. Inflammatory cytokines also augment type three deiodinase, generating high inactive reverse T3. As critical illness resolves, thyroid parameters spontaneously normalize without thyroid hormone intervention, making levothyroxine replacement unnecessary in intensive care units.",
+   "say": "Altered circulating thyroid hormone levels occurring in severe non-thyroidal illness must not be mistaken for intrinsic gland failure. Termed non-thyroidal illness syndrome or sick euthyroid syndrome, cytokine-mediated inhibition of peripheral deiodinase impairs T4 conversion, causing low serum T3 with normal TSH. Inflammatory cytokines also promote formation of inactive reverse T3. As critical illness resolves, thyroid parameters normalize spontaneously without thyroid hormone therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sick Euthyroid Syndrome",
+     "points": [
+      "Low total and free T3 with normal or low-normal TSH",
+      "High circulating reverse T3 (rT3) from type 3 deiodinase",
+      "Occurs in sepsis, severe burns, trauma, critical illness",
+      "Management: Treat underlying illness; no levothyroxine"
+     ]
+    },
+    "right": {
+     "title": "Primary Hypothyroidism",
+     "points": [
+      "Markedly elevated serum TSH with low free T4",
+      "Normal or low reverse T3 levels",
+      "Intrinsic autoimmune or structural thyroid failure",
+      "Management: Daily oral levothyroxine replacement therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A self-limiting inflammatory disorder of the thyroid gland triggered by viral infection presents with acute anterior cervical pain and tenderness. Historically termed **subacute granulomatous thyroiditis** or de Quervain thyroiditis, this disease follows an upper respiratory infection with coxsackie or influenza virus. Histology demonstrates follicular disruption and characteristic multinucleated giant cells surrounding fragmented colloid. It features severe neck pain radiating to the jaw, marked elevation of erythrocyte sedimentation rate exceeding fifty millimetres per hour, and low radioactive iodine uptake.",
+   "say": "A self-limiting inflammatory disorder of the thyroid gland triggered by viral infection presents with acute anterior cervical pain and tenderness. Historically termed subacute granulomatous thyroiditis, this disease follows an upper respiratory infection with coxsackie, mumps, or adenovirus. Histology demonstrates follicular disruption, neutrophil infiltration, and multinucleated giant cells surrounding colloid. In contrast to Hashimoto disease, it features localized neck pain, high erythrocyte sedimentation rate, and low radioiodine uptake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Hashimoto Thyroiditis",
+     "Subacute Granulomatous (de Quervain)"
+    ],
+    "rows": [
+     [
+      "Aetiology",
+      "Autoimmune (Anti-TPO mediated)",
+      "Post-viral inflammatory reaction"
+     ],
+     [
+      "Neck pain / Tenderness",
+      "Painless, rubbery goitre",
+      "Severe exquisite anterior neck pain radiating to jaw"
+     ],
+     [
+      "Inflammatory markers (ESR)",
+      "Normal or mildly elevated",
+      "Markedly elevated (> 50 to 100 mm/hr)"
+     ],
+     [
+      "Radioiodine uptake (RAIU)",
+      "Variable (Normal or elevated)",
+      "Suppressed (< 2%) during thyrotoxic phase"
+     ],
+     [
+      "Long-term outcome",
+      "Permanent lifelong hypothyroidism",
+      "Spontaneous recovery to euthyroidism (> 90%)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rigorous laboratory monitoring prevents insidious overtreatment or undertreatment in patients receiving chronic thyroid hormone therapy. Once euthyroidism is achieved, annual measurement of serum **tsh monitoring** is sufficient in stable individuals, maintaining TSH within the normal range of zero point five to four point five milli-units per litre. Iatrogenic overreplacement suppressing TSH below zero point one carries long-term risks of atrial fibrillation and accelerated bone demineralization, whereas persistent underreplacement perpetuates atherogenic dyslipidaemia, fatigue, and diastolic dysfunction.",
+   "say": "Rigorous laboratory monitoring prevents insidious overtreatment or undertreatment in patients receiving chronic thyroid hormone therapy. Once euthyroidism is achieved, annual measurement of serum tsh monitoring is sufficient in stable individuals, maintaining TSH within the normal reference range. Iatrogenic overreplacement carries long-term risks of atrial fibrillation and bone mineral loss, whereas underreplacement perpetuates dyslipidaemia and diastolic dysfunction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Euthyroid target: TSH 0.5 to 4.5 mIU/L (Special pop: pregnancy < 2.5)"
+     },
+     {
+      "id": "high",
+      "label": "TSH elevated (> 4.5): Increase dose by 12.5-25 mcg daily"
+     },
+     {
+      "id": "low",
+      "label": "TSH suppressed (< 0.1): Reduce dose to prevent arrhythmia and bone loss"
+     }
+    ],
+    "edges": [
+     [
+      "stable",
+      "high"
+     ],
+     [
+      "stable",
+      "low"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-adrenal",
+ "subject": "medicine",
+ "title": "Cushing Syndrome and Adrenal Disorders",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Prolonged, inappropriate tissue exposure to excessive circulating glucocorticoid concentrations produces the distinctive clinical constellation termed **cushing syndrome**. While exogenous pharmacological corticosteroid administration represents the most common etiology overall, endogenous hypercortisolism arises from autonomous adrenocortical neoplasms or adrenocorticotropic hormone (ACTH) hypersecretion. Hallmark physical signs include central obesity with a dorsocervical fat pad (buffalo hump) and rounded moon facies, proximal myopathy, violaceous wide cutaneous striae exceeding one centimetre on the abdomen, easy bruising, systemic arterial hypertension, and secondary diabetes mellitus.",
+   "say": "Prolonged tissue exposure to excessive circulating glucocorticoids produces the clinical constellation termed cushing syndrome. While exogenous corticosteroid administration represents the most common etiology overall, endogenous hypercortisolism arises from autonomous adrenal tumours or adrenocorticotropic hormone hypersecretion. Hallmark physical signs include central obesity with a buffalo hump and moon facies, proximal myopathy, wide violaceous abdominal striae, easy bruising, hypertension, and diabetes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig1.webp",
+    "alt": "Classic phenotypic physical signs and manifestations of Cushing syndrome.",
+    "caption": "Phenotypic features of hypercortisolism including centripetal obesity, moon facies, and purple striae. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Autonomous hypersecretion of adrenocorticotropic hormone by a benign pituitary corticotroph microadenoma represents the single most common cause of endogenous hypercortisolism. Designated specifically as **cushing disease**, it accounts for roughly seventy percent of all endogenous cases, predominating in women in their reproductive years. In contrast, ectopic ACTH secretion arises from non-pituitary neuroendocrine malignancies, most frequently small cell lung carcinoma or bronchial carcinoids. Ectopic cases present acutely with severe hyperpigmentation, profound hypokalaemic metabolic alkalosis, and muscle wasting, often lacking classical centripetal fat accumulation.",
+   "say": "Autonomous hypersecretion of adrenocorticotropic hormone by a pituitary corticotroph microadenoma represents the most common cause of endogenous hypercortisolism. Designated specifically as cushing disease, it accounts for seventy percent of endogenous cases. In contrast, ectopic acth secretion arises from non-pituitary neuroendocrine malignancies, most frequently small cell lung carcinoma or bronchial carcinoids. Ectopic cases present acutely with severe hyperpigmentation, profound hypokalaemia, and muscle wasting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cushing Disease (Pituitary)",
+     "points": [
+      "Pituitary corticotroph microadenoma (85%)",
+      "Female preponderance (3:1 ratio)",
+      "Slow, progressive onset of centripetal obesity",
+      "Partially suppresses with high-dose dexamethasone"
+     ]
+    },
+    "right": {
+     "title": "Ectopic ACTH Secretion",
+     "points": [
+      "Small cell lung cancer, bronchial carcinoid tumours",
+      "Rapid onset of severe muscle wasting and cachexia",
+      "Marked hyperpigmentation and hypokalaemic alkalosis",
+      "Completely unsuppressed by high-dose dexamethasone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Establishing the biochemical diagnosis of hypercortisolism requires demonstrating the loss of normal circadian glucocorticoid variation or failure of feedback suppression. The overnight one-milligram **dexamethasone suppression test** represents a highly sensitive initial screening tool; failing to suppress morning serum cortisol below one point eight micrograms per decilitre confirms pathological autonomous cortisol synthesis. Alternatively, measuring late-night salivary cortisol across two consecutive evenings reliably detects the loss of the physiological midnight cortisol nadir, offering exceptional sensitivity and non-invasive outpatient convenience.",
+   "say": "Establishing the biochemical diagnosis of hypercortisolism requires demonstrating the loss of normal circadian variation or failure of feedback suppression. The overnight one-milligram dexamethasone suppression test represents a sensitive initial screening tool; failing to suppress morning cortisol below one point eight micrograms per decilitre confirms autonomous synthesis. Alternatively, measuring late-night salivary cortisol across two evenings detects loss of the physiological midnight nadir with exceptional sensitivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Clinical suspicion of Cushing syndrome"
+     },
+     {
+      "id": "tests",
+      "label": "First-line screening: 1 mg DST (< 1.8 mcg/dL) OR Late-night salivary cortisol"
+     },
+     {
+      "id": "confirm",
+      "label": "At least two positive first-line screening tests confirm hypercortisolism"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "tests"
+     ],
+     [
+      "tests",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying non-protein-bound circulating glucocorticoid excretion across a complete diurnal cycle corroborates hypercortisolism without venipuncture stress. Measuring **24-hour urinary free cortisol** (UFC) provides an integrated index of daily unbound cortisol filtration by the glomeruli. Urinary values exceeding three times the upper limit of normal unequivocally establish Cushing syndrome. Concurrently, clinicians must exclude pseudo-Cushing states, wherein severe depression, chronic alcohol use disorder, morbid obesity, or severe physiological stress transiently activate the hypothalamic-pituitary-adrenal axis without true autonomous neoplastic secretion.",
+   "say": "Quantifying non-protein-bound circulating glucocorticoid excretion across a complete cycle corroborates hypercortisolism without venipuncture stress. Measuring 24-hour urinary free cortisol provides an integrated index of daily unbound cortisol filtration. Values exceeding three times the upper reference limit unequivocally establish Cushing syndrome. Clinicians must also exclude pseudo-Cushing states driven by depression, chronic alcohol use, or morbid obesity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Cushing Syndrome",
+     "points": [
+      "UFC > 3x upper limit of normal",
+      "Elevated late-night salivary cortisol (no nadir)",
+      "Fails low-dose dexamethasone suppression (< 1.8 mcg/dL)",
+      "Progressive clinical striae, myopathy, and osteopenia"
+     ]
+    },
+    "right": {
+     "title": "Pseudo-Cushing States",
+     "points": [
+      "Severe major depression, alcohol dependence, obesity",
+      "UFC mildly elevated (< 2-3x upper limit)",
+      "Preserved diurnal rhythm or suppresses with CRH testing",
+      "Resolves fully upon treating the underlying psychiatric condition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Once hypercortisolism is definitively confirmed, measuring plasma adrenocorticotropic hormone bifurcates the diagnostic algorithm into ACTH-dependent and ACTH-independent categories. Undetectable or low ACTH below five picograms per millilitre confirms an ACTH-independent adrenal origin, mandating non-contrast adrenal computed tomography to identify an **adrenal adenoma** or adrenocortical carcinoma. Conversely, normal or elevated ACTH confirms an ACTH-dependent etiology. Differentiating pituitary Cushing disease from ectopic ACTH utilizes high-dose dexamethasone suppression testing and corticotropin-releasing hormone stimulation, followed by bilateral inferior petrosal sinus sampling if pituitary imaging is equivocal.",
+   "say": "Once hypercortisolism is confirmed, measuring plasma adrenocorticotropic hormone bifurcates the diagnostic algorithm into dependent and independent categories. Low ACTH below five picograms per millilitre confirms an adrenal origin, mandating adrenal computed tomography to identify an adenoma or carcinoma. Conversely, elevated ACTH confirms an ACTH-dependent etiology. Differentiating pituitary Cushing disease from ectopic ACTH utilizes high-dose dexamethasone testing and inferior petrosal sinus sampling.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cortisol-producing-adenoma-fig1.webp",
+    "alt": "Computed tomography imaging and pathology of autonomous cortisol-producing adrenal adenoma.",
+    "caption": "Autonomous adrenal cortical adenoma driving ACTH-independent Cushing syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Performing **transsphenoidal selective adenomectomy** constitutes the primary curative intervention for pituitary-dependent Cushing disease. Successful surgical excision achieves immediate remission in eighty percent of microadenomas, inducing transient postoperative corticotroph suppression that requires temporary oral hydrocortisone replacement until the hypothalamic-pituitary-adrenal axis recovers over six to twelve months. For inoperable cases or refractory hypercortisolism awaiting radiotherapy, steroidogenesis inhibitors including ketoconazole and metyrapone block adrenal enzymatic cortisol synthesis, rapidly normalizing circulating glucocorticoids.",
+   "say": "Transsphenoidal selective adenomectomy constitutes the primary curative intervention for pituitary-dependent Cushing disease. Successful resection achieves immediate remission in eighty percent of microadenomas, inducing postoperative corticotroph suppression that requires temporary hydrocortisone replacement until the axis recovers. For inoperable cases or refractory disease, steroidogenesis inhibitors like ketoconazole and metyrapone block enzymatic synthesis, normalizing circulating glucocorticoids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tsh",
+      "label": "Pituitary Cushing disease confirmed on MRI / IPSS"
+     },
+     {
+      "id": "surg",
+      "label": "Endoscopic transsphenoidal selective adenomectomy"
+     },
+     {
+      "id": "post",
+      "label": "Post-op morning cortisol < 2 mcg/dL confirms cure (Start hydrocortisone)"
+     },
+     {
+      "id": "refract",
+      "label": "Refractory / Recurrent: Medical block (Osilodrostat) OR Bilateral adrenalectomy"
+     }
+    ],
+    "edges": [
+     [
+      "tsh",
+      "surg"
+     ],
+     [
+      "surg",
+      "post"
+     ],
+     [
+      "surg",
+      "refract"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary adrenocortical insufficiency driven by autoimmune destruction of all three adrenal cortical zones presents as the clinical antithesis of Cushing syndrome. Historically designated as **addison disease**, autoimmune adrenalitis accounts for eighty percent of primary adrenal failure in developed countries, mediated by autoantibodies against 21-hydroxylase. Patients develop severe fatigue, anorexia, unintended weight loss, orthostatic hypotension, and diffuse cutaneous and mucosal hyperpigmentation. Hyperpigmentation arises because deficient cortisol feedback stimulates pro-opiomelanocortin cleavage into ACTH and melanocyte-stimulating hormone, depositing melanin in palmar creases, buccal mucosa, and surgical scars.",
+   "say": "Primary adrenocortical insufficiency driven by autoimmune destruction of all three cortical zones presents as the clinical antithesis of Cushing syndrome. Historically designated as addison disease, autoimmune adrenalitis accounts for eighty percent of primary adrenal failure, mediated by 21-hydroxylase antibodies. Patients develop fatigue, anorexia, weight loss, orthostatic hypotension, and hyperpigmentation. Hyperpigmentation arises because absent cortisol stimulates pro-opiomelanocortin cleavage into ACTH and melanocyte-stimulating hormone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cushing Syndrome",
+     "points": [
+      "Excessive circulating glucocorticoids",
+      "Centripetal obesity, moon facies, buffalo hump",
+      "Systemic arterial hypertension and hyperglycaemia",
+      "Proximal muscle weakness and skin thinning"
+     ]
+    },
+    "right": {
+     "title": "Addison Disease",
+     "points": [
+      "Deficient glucocorticoids and mineralocorticoids",
+      "Severe anorexia, weight loss, and postural hypotension",
+      "Hyperpigmentation of buccal mucosa and skin creases",
+      "Hyponatraemia, hyperkalaemia, and metabolic acidosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laboratory evaluation of primary adrenal insufficiency exposes concurrent mineralocorticoid and glucocorticoid deficiencies. Unlike secondary pituitary adrenal failure where aldosterone secretion is preserved by the renin-angiotensin system, Addison disease destroys the zona glomerulosa. Laboratory profiling characteristically reveals hyponatraemia, hyperkalaemia, non-anion gap metabolic acidosis, and prerenal azotemia. Baseline diagnostic confirmation requires demonstrating low morning serum cortisol paired with elevated plasma ACTH, prompting immediate physiological **adrenal replacement** with oral hydrocortisone and fludrocortisone.",
+   "say": "Laboratory evaluation of primary adrenal insufficiency exposes concurrent mineralocorticoid and glucocorticoid deficiencies. Unlike secondary adrenal failure where aldosterone secretion is preserved, Addison disease destroys the zona glomerulosa. Laboratory testing characteristically reveals hyponatraemia, hyperkalaemia, metabolic acidosis, and elevated plasma ACTH. Diagnostic confirmation prompts physiological adrenal replacement with oral hydrocortisone and fludrocortisone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Primary Adrenal Insufficiency (Addison)",
+     "Secondary Adrenal Insufficiency (Pituitary)"
+    ],
+    "rows": [
+     [
+      "Morning Serum Cortisol",
+      "Low (< 3 to 5 mcg/dL)",
+      "Low (< 3 to 5 mcg/dL)"
+     ],
+     [
+      "Plasma ACTH",
+      "Markedly elevated (> 100 pg/mL)",
+      "Low or inappropriately normal"
+     ],
+     [
+      "Serum Potassium",
+      "Hyperkalaemia (Aldosterone deficient)",
+      "Strictly normal (Aldosterone intact)"
+     ],
+     [
+      "Serum Sodium",
+      "Hyponatraemia (Volume depletion)",
+      "Hyponatraemia (Dilutional, high ADH)"
+     ],
+     [
+      "Cutaneous Pigmentation",
+      "Hyperpigmentation present",
+      "Pale, alabaster skin appearance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

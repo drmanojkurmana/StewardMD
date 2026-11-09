@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-nephrotic",
+ "subject": "medicine",
+ "title": "Hypoalbuminaemia, hyperlipidaemia, and complications of nephrotic syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Extensive urinary protein dissipation exceeding hepatic synthetic capacity precipitates severe oncotic and volume dysregulation. Manifesting as **hypoalbuminaemia**, circulating serum albumin drops below thirty grams per litre, triggering progressive generalized fluid accumulation. In classical underfill pathophysiology, decreased intravascular oncotic pressure shifts plasma fluid into the interstitial space, producing hypovolaemia that activates the renin-angiotensin-aldosterone axis. Conversely, modern overfill pathophysiology establishes that filtered urinary proteases like plasmin directly activate epithelial sodium channels (ENaC) within the cortical collecting duct, driving primary intrarenal sodium retention independent of oncotic gradients.",
+   "say": "Extensive urinary protein loss outstripping hepatic synthesis causes severe fluid dysregulation. Manifesting as hypoalbuminaemia, circulating albumin falls below thirty grams per litre, precipitating generalized oedema. In classical underfill theory, falling oncotic pressure promotes fluid shift into tissues, while modern overfill mechanisms show that urinary plasmin directly activates collecting duct sodium channels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glomerular-nephrotic-nephritic-rta-fig1.webp",
+    "alt": "Diagram showing underfill versus overfill mechanisms of sodium retention and oedema in nephrotic syndrome.",
+    "caption": "Underfill versus overfill mechanisms of sodium retention and oedema in nephrotic syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Profound reduction in plasma oncotic pressure stimulates coordinated hepatic metabolic adjustments that drive atherogenic dyslipidaemia. Developing secondary **hyperlipidaemia** features marked elevations in low-density lipoprotein (LDL), very-low-density lipoprotein (VLDL), and serum triglycerides. Hepatic albumin synthesis is linked genetically to apolipoprotein B transcription, increasing hepatic lipid export. Concurrently, urinary loss of circulating lipoprotein lipase cofactors like apolipoprotein C-II impairs peripheral intravascular triglyceride hydrolysis. The resulting lipid overload causes lipiduria, recognizable as free fat droplets, fatty casts, and oval fat bodies on urinary microscopic inspection.",
+   "say": "Falling plasma oncotic pressure stimulates coordinated hepatic adjustments that cause atherogenic lipid elevations. Developing secondary hyperlipidaemia features marked increases in low-density lipoprotein and triglycerides. Hepatic lipid synthesis increases while urinary loss of regulatory apolipoproteins impairs peripheral clearance, creating lipiduria and microscopic fatty casts in urine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypoalb",
+      "label": "Severe Hypoalbuminaemia & Low Oncotic Pressure"
+     },
+     {
+      "id": "liver",
+      "label": "Compensatory Hepatic Lipogenesis (ApoB & Cholesterol up)"
+     },
+     {
+      "id": "clear",
+      "label": "Urinary loss of ApoC-II -> Impaired Lipoprotein Lipase clearance"
+     }
+    ],
+    "edges": [
+     [
+      "hypoalb",
+      "liver"
+     ],
+     [
+      "liver",
+      "clear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selective urinary excretion of natural anticoagulant proteins coupled with increased hepatic procoagulant synthesis generates a profound hypercoagulable diathesis. Precipitating **renal vein thrombosis** (RVT), nephrotic patients lose antithrombin III, protein C, and protein S in urine, while the liver accelerates synthesis of fibrinogen, factor five, and factor eight. Membranous nephropathy carries the highest risk of renal vein thrombosis, occurring in up to thirty percent of patients. Clinical presentations range from asymptomatic thrombosis to sudden flank pain, worsening macroscopic haematuria, acute kidney injury, or a new left-sided varicocele.",
+   "say": "Selective urinary loss of anticoagulant proteins combined with increased clotting factor synthesis creates a dangerous prothrombotic state. Precipitating renal vein thrombosis, nephrotic patients lose antithrombin three and protein C in urine while clotting factors rise. Membranous nephropathy carries the highest thrombosis risk, presenting with sudden flank pain, worsening haematuria, or an acute varicocele.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-nephrotic-gen1.webp",
+    "alt": "Contrast-enhanced CT scan demonstrating renal vein thrombosis and renal enlargement.",
+    "caption": "Renal vein thrombosis complicating nephrotic syndrome, displaying filling defect. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Response to initial corticosteroid administration stratifies pediatric nephrotic presentations into distinct prognostic and therapeutic categories. Diagnosing **steroid-sensitive nephrotic syndrome** (SSNS) requires complete resolution of proteinuria (negative dipstick on three consecutive days) within four weeks of oral prednisolone therapy. While initial remission rates exceed ninety percent in children with minimal change disease, over half experience frequent relapses or steroid dependence upon dose weaning. Second-line steroid-sparing maintenance agents, including levamisole, cyclophosphamide, calcineurin inhibitors, or anti-CD20 rituximab, prevent long-term glucocorticoid toxicity in recurrent relapsers.",
+   "say": "Response to initial corticosteroid therapy classifies pediatric nephrotic syndrome into distinct prognostic groups. Diagnosing steroid-sensitive nephrotic syndrome requires complete clearance of urinary protein within four weeks of oral prednisolone. Although initial remission occurs in ninety percent of children, frequent relapses occur, requiring steroid-sparing agents like levamisole, cyclophosphamide, or rituximab.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Steroid-Sensitive (SSNS)",
+     "points": [
+      "Complete remission within 4 weeks of oral steroid",
+      "Predominantly Minimal Change Disease (MCD)",
+      "Excellent long-term renal survival (>95%)",
+      "Steroid-sparing agents used for frequent relapses"
+     ]
+    },
+    "right": {
+     "title": "Steroid-Resistant (SRNS)",
+     "points": [
+      "Persistent proteinuria after 4 to 8 weeks of steroids",
+      "Frequently represents FSGS or genetic podocytopathy",
+      "High lifetime risk of progression to end-stage renal disease",
+      "Requires genetic testing (NPHS1/2) and second-line agents"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Direct viral infection of podocytes and renal tubular epithelial cells drives aggressive collapsing glomerulopathy in individuals with untreated retroviral infection. Manifesting as **HIV-associated nephropathy** (HIVAN), the disease develops predominantly in patients of African ancestry harbouring high-risk APOL1 alleles with advanced immunosuppression. Microscopic inspection reveals global collapse of glomerular capillary tufts, podocyte hyperplasia, and prominent microcystic dilatation of renal tubules containing proteinaceous casts. Kidneys remain characteristically enlarged and highly echogenic on ultrasound. Combination antiretroviral therapy (ART) combined with ACE inhibitors halts viral replication and slows progression.",
+   "say": "Direct viral infection of podocytes and tubular cells causes aggressive collapsing glomerulopathy in patients with untreated HIV. Manifesting as HIV-associated nephropathy, this disorder occurs in individuals of African descent carrying APOL1 risk alleles. Biopsy demonstrates capillary tuft collapse and microcystic tubular dilatation, while antiretroviral therapy and ACE inhibitors halt disease progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic parameter",
+     "HIV-Associated Nephropathy (HIVAN)",
+     "Immune Complex HIV Kidney Disease"
+    ],
+    "rows": [
+     [
+      "Clinical presentation",
+      "Severe nephrotic syndrome with rapid AKI",
+      "Nephritic or subnephrotic proteinuria"
+     ],
+     [
+      "Blood pressure profile",
+      "Typically normotensive (salt-wasting)",
+      "Frequently hypertensive"
+     ],
+     [
+      "Renal ultrasound",
+      "Enlarged, highly echogenic kidneys",
+      "Normal or shrunken kidneys"
+     ],
+     [
+      "Histopathology",
+      "Collapsing FSGS with microcystic tubules",
+      "Lupus-like or IgA immune complex deposition"
+     ],
+     [
+      "First-line management",
+      "Immediate Antiretroviral Therapy (ART) + ACEi",
+      "ART + immunosuppression if autoimmune"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent hyperglycaemia and intraglomerular hypertension induce progressive structural matrix expansion that represents the leading cause of end-stage renal disease globally. Characterized as **diabetic nephropathy**, the natural history progresses through five distinct stages: early glomerular hyperfiltration, microalbuminuria, overt macroalbuminuria with decline in filtration, and end-stage renal disease. Non-enzymatic glycation of proteins forms advanced glycation end-products (AGEs), stimulating mesangial cell matrix synthesis and transforming growth factor-beta release. Diffuse thickening of the glomerular basement membrane is the earliest detectable structural lesion, followed by progressive mesangial expansion.",
+   "say": "Persistent high blood glucose and intraglomerular hypertension cause progressive matrix expansion that represents the leading cause of renal failure worldwide. Characterized as diabetic nephropathy, disease progression spans from early hyperfiltration to microalbuminuria, macroalbuminuria, and end-stage renal disease. Non-enzymatic glycation generates structural damage, producing early basement membrane thickening and progressive mesangial expansion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Diabetic Nephropathy",
+     "points": [
+      "Glomerular hyperfiltration (eGFR elevated >120)",
+      "Emergence of microalbuminuria (uACR 30-300 mg/g)",
+      "Diffuse basement membrane thickening on electron microscopy",
+      "Reversible with strict glycaemic and BP control"
+     ]
+    },
+    "right": {
+     "title": "Advanced Diabetic Glomerulosclerosis",
+     "points": [
+      "Overt macroalbuminuria (uACR > 300 mg/g to nephrotic)",
+      "Progressive steady annual decline in eGFR",
+      "Formation of nodular Kimmelstiel-Wilson lesions",
+      "Accompanied by diabetic retinopathy in >90% of T1D"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Advanced nodular intercapillary glomerulosclerosis represents the pathognomonic histological hallmark of longstanding diabetic microvascular disease. Histological demonstration of **Kimmelstiel-Wilson nodules** reveals round, acellular, laminated mesangial nodules situated within the peripheral regions of the glomerular tuft. These nodular deposits stain strongly positive with periodic acid-Schiff and silver methenamine stains, surrounded by compressed and displaced peripheral capillary loops. Accompanying microvascular lesions include hyaline arteriolosclerosis involving both afferent and efferent arterioles, capsular drops on Bowman capsule, and fibrin caps on capillary loops.",
+   "say": "Advanced nodular glomerulosclerosis represents the pathognomonic histological hallmark of longstanding diabetic microvascular disease. Histological demonstration of Kimmelstiel-Wilson nodules shows round, acellular laminated mesangial nodules in the glomerular tuft. These lesions stain positive with periodic acid-Schiff, accompanied by hyaline arteriolosclerosis affecting both afferent and efferent arterioles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypergly",
+      "label": "Chronic Hyperglycaemia + Glomerular Hypertension"
+     },
+     {
+      "id": "mesangial",
+      "label": "Excess Mesangial Matrix Production (TGF-beta / AGEs)"
+     },
+     {
+      "id": "kw",
+      "label": "Acellular PAS-positive Kimmelstiel-Wilson Nodules"
+     }
+    ],
+    "edges": [
+     [
+      "hypergly",
+      "mesangial"
+     ],
+     [
+      "mesangial",
+      "kw"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multifactorial organ protection targeting glycaemic control, blood pressure reduction, and tubuloglomerular feedback dramatically slows diabetic nephropathy progression. Implementing modern **diabetic nephroprotection** combines strict blood pressure control (below one hundred and thirty over eighty millimetres of mercury) with maximum tolerated doses of ACE inhibitors or angiotensin receptor blockers. Adding SGLT2 inhibitors (dapagliflozin or empagliflozin) lowers intraglomerular pressure by restoring afferent arteriolar tone, decreasing progression to end-stage renal disease by thirty to forty percent. The selective non-steroidal mineralocorticoid antagonist finerenone provides additive cardiorenal risk reduction.",
+   "say": "Multifactorial organ protection targeting blood glucose, blood pressure, and renal hemodynamics slows diabetic nephropathy progression. Implementing modern diabetic nephroprotection combines ACE inhibitors or ARBs with SGLT2 inhibitors like dapagliflozin. Adding SGLT2 inhibitors lowers intraglomerular pressure, cutting end-stage renal progression by thirty percent, while finerenone provides complementary cardiorenal protection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic pillar",
+     "Target intervention",
+     "Renal hemodynamic / biological mechanism"
+    ],
+    "rows": [
+     [
+      "RAAS Blockade",
+      "ACE inhibitor or ARB (titrated)",
+      "Dilates efferent arteriole, reduces intraglomerular pressure"
+     ],
+     [
+      "SGLT2 Inhibition",
+      "Dapagliflozin or Empagliflozin",
+      "Restores tubuloglomerular feedback, constricts afferent arteriole"
+     ],
+     [
+      "Mineralocorticoid blocker",
+      "Finerenone (non-steroidal MRA)",
+      "Blocks aldosterone-mediated renal inflammation and fibrosis"
+     ],
+     [
+      "Glycaemic control",
+      "Metformin + GLP-1 receptor agonist",
+      "HbA1c target < 6.5% to 7.0%; weight and cardiovascular benefit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

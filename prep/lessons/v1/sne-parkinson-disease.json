@@ -19,7 +19,27 @@
     {
       "tx": "The pathological hallmark of Parkinson disease is progressive loss of dopaminergic neurons in the **substantia nigra** pars compacta with intraneuronal Lewy bodies containing misfolded **alpha-synuclein**. Central **anticholinergic** agents like **trihexyphenidyl** help tremor in younger patients, but are contraindicated in the elderly due to severe cognitive impairment, confusion, and urinary retention.",
       "say": "Central anticholinergic agents like trihexyphenidyl are effective for prominent resting tremor in younger patients with Parkinson disease. However, they are contraindicated in older adults because of severe confusion, memory deficits, urinary retention, and dry mouth.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathology point",
+          "Detail"
+        ],
+        "rows": [
+          [
+            "Neuron loss",
+            "Substantia nigra pars compacta"
+          ],
+          [
+            "Inclusions",
+            "Lewy bodies with alpha-synuclein"
+          ],
+          [
+            "Anticholinergics",
+            "Help tremor in the young, avoid in older patients"
+          ]
+        ]
+      }
     },
     {
       "tx": "**Progressive supranuclear palsy** (PSP) is a progressive neurodegenerative tauopathy distinguished from Parkinson disease by early unprovoked postural falls, symmetrical akinesia, axial rigidity, and a supranuclear **vertical gaze** palsy (downward before upward). Midbrain atrophy on sagittal cranial MRI produces the pathognomonic hummingbird or king penguin sign, whereas levodopa responsiveness remains exceptionally poor.",
@@ -130,7 +150,31 @@
     {
       "tx": "Advanced Parkinson disease with severe motor fluctuations refractory to medical optimization warrants evaluation for surgical neuromodulation. **Deep brain stimulation** of the **subthalamic nucleus** (STN) or **globus pallidus internus** (GPi) provides profound reductions in off-time, dyskinesias, and medication requirements. Candidates must exhibit robust levodopa responsiveness, absence of severe cognitive dementia, and medically managed psychiatric disease before undergoing stereotactic lead implantation.",
       "say": "Deep brain stimulation is an effective surgical intervention for patients with severe motor fluctuations and dyskinesias refractory to medical therapy. High frequency electrical stimulation of the subthalamic nucleus or globus pallidus internus markedly reduces off periods and permits substantial medication reductions. Favourable levodopa responsiveness and preserved cognitive function are mandatory selection criteria.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "DBS selection point",
+          "Requirement"
+        ],
+        "rows": [
+          [
+            "Response",
+            "Clear levodopa responsiveness"
+          ],
+          [
+            "Cognition",
+            "No severe dementia"
+          ],
+          [
+            "Psychiatry",
+            "Stable and treated"
+          ],
+          [
+            "Targets",
+            "Subthalamic nucleus or globus pallidus internus"
+          ]
+        ]
+      }
     }
   ],
   "quiz": [
