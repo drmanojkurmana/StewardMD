@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "obg-diagnosis-antenatal-care",
+ "subject": "obstetrics-gynaecology",
+ "title": "Dating Pregnancy: Naegele Rule, CRL and Booking Visit",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Estimating delivery date by adding a year, subtracting three months and adding seven days to the last period is the **Naegele rule**. It assumes a twenty eight day cycle with ovulation on day fourteen. Longer cycles need corresponding adjustment. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The Naegele rule adds a year, subtracts three months and adds seven days to the last period.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "First day of last period"
+     },
+     {
+      "id": "n1",
+      "label": "Add seven days"
+     },
+     {
+      "id": "n2",
+      "label": "Subtract three months"
+     },
+     {
+      "id": "n3",
+      "label": "Add one year"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most accurate ultrasound dating measurement in the first trimester is **crown-rump length**. Between seven and thirteen weeks it dates pregnancy within about five days. Later measurements become progressively less precise for dating. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Crown-rump length dates pregnancy within five days between seven and thirteen weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Best dating"
+    ],
+    "rows": [
+     [
+      "7 to 13 weeks",
+      "Crown-rump length"
+     ],
+     [
+      "14 to 20 weeks",
+      "Head and femur measures"
+     ],
+     [
+      "Later",
+      "Least accurate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fluid filled structure first visible in the uterus on transvaginal scan is the **gestational sac**. It appears at about four and a half to five weeks. The yolk sac follows, then the embryo with cardiac activity. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The gestational sac appears first, followed by yolk sac then embryo with cardiac activity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Gestational sac seen"
+     },
+     {
+      "id": "n1",
+      "label": "Yolk sac appears"
+     },
+     {
+      "id": "n2",
+      "label": "Embryo visible"
+     },
+     {
+      "id": "n3",
+      "label": "Cardiac activity confirmed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first comprehensive antenatal appointment assessing risks and baselines is the **booking visit**. Blood group, haemoglobin, infections and blood pressure are recorded. A care plan and visit schedule follow from this assessment. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The booking visit records baselines and builds the antenatal care plan.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Booking examination with fundal assessment.",
+    "caption": "Booking visit examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Routine contacts through pregnancy for a first baby number about ten, scheduled as **antenatal visits**. Blood pressure and urine are checked at every visit, with growth assessment from mid pregnancy. Additional visits follow any complication. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Antenatal visits check pressure and urine each time, with growth assessment from mid pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Every visit",
+     "Checked"
+    ],
+    "rows": [
+     [
+      "Blood pressure",
+      "Yes"
+     ],
+     [
+      "Urine protein",
+      "Yes"
+     ],
+     [
+      "Fetal growth",
+      "From mid pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When menstrual dating and early scan disagree by more than a week, the scan wins, a rule of **scan dating precedence**. The estimated date is then fixed and not changed by later scans. This prevents post term misclassification. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Scan dating takes precedence when it disagrees with menstrual dates by over a week.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Agree within a week",
+     "points": [
+      "Keep menstrual date",
+      "No change needed"
+     ]
+    },
+    "right": {
+     "title": "Disagree over a week",
+     "points": [
+      "Use scan date",
+      "Fix the date",
+      "Do not revise later"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Screening bloods at booking include syphilis, hepatitis B and HIV under **infectious screening**. Early treatment prevents most mother to child transmission. Rubella immunity is also checked to advise postpartum vaccination. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Booking infectious screening prevents mother to child transmission through early treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Booking visit pregnancy assessment.",
+    "caption": "Booking assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Risk assessment at booking assigns women to midwifery or consultant led care pathways, termed **care stratification**. Previous caesarean, hypertension and diabetes mandate consultant involvement. Low risk women need fewer interventions with equally good outcomes. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Care stratification assigns consultant led care for previous caesarean, hypertension and diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "History and baselines taken"
+     },
+     {
+      "id": "n1",
+      "label": "Risks identified"
+     },
+     {
+      "id": "n2",
+      "label": "Pathway assigned"
+     },
+     {
+      "id": "n3",
+      "label": "Escalation planned"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Documentation of the dating and plan in handheld notes ensures **continuity of care**. Every provider sees the same estimated date and risk summary. This prevents contradictory advice and duplicated testing. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Handheld notes ensure every provider sees the same date and risk summary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Recorded",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Estimated date",
+      "Fixed reference"
+     ],
+     [
+      "Blood group",
+      "Transfusion safety"
+     ],
+     [
+      "Risk factors",
+      "Pathway planning"
+     ]
+    ]
+   }
+  }
+ ]
+}

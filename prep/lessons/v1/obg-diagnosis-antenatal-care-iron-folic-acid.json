@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "obg-diagnosis-antenatal-care",
+ "subject": "obstetrics-gynaecology",
+ "title": "Iron and Folic Acid, Vaccination, Fundal Height and Leopold Manoeuvres",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Daily supplementation preventing anaemia and neural tube defects combines **iron folic acid**. Folic acid ideally starts before conception and continues through the first trimester. Iron continues through pregnancy where anaemia is prevalent. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Iron folic acid prevents anaemia and neural tube defects, ideally starting before conception.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Supplement",
+     "Prevents"
+    ],
+    "rows": [
+     [
+      "Folic acid",
+      "Neural tube defects"
+     ],
+     [
+      "Iron",
+      "Anaemia"
+     ],
+     [
+      "Calcium",
+      "Pre-eclampsia in low intake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tetanus and diphtheria protection in pregnancy is given as **Td vaccination**. Two doses protect mother and newborn against tetanus through transferred antibodies. Influenza and pertussis vaccines are also recommended in many programmes. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Td vaccination protects mother and newborn against tetanus through transferred antibodies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "First Td dose at booking"
+     },
+     {
+      "id": "n1",
+      "label": "Second after four weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Antibodies cross placenta"
+     },
+     {
+      "id": "n3",
+      "label": "Newborn protected"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distance from pubic symphysis to uterine fundus estimating gestational age is **fundal height**. In centimetres it roughly equals weeks between twenty and thirty six. Deviations beyond three centimetres prompt ultrasound growth assessment. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Fundal height in centimetres roughly equals weeks and deviations prompt growth scanning.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Fundal height measurement landmarks.",
+    "caption": "Fundal height measurement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The four systematic palpations determining fetal position through the abdomen are the **Leopold manoeuvres**. They identify lie, presentation, position and engagement before auscultation. Ultrasound confirms when palpation is uncertain. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Leopold manoeuvres identify lie, presentation, position and engagement by palpation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-leopold.webp",
+    "alt": "The four Leopold manoeuvres.",
+    "caption": "Leopold manoeuvres. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Indias antenatal care day programme guaranteeing quality checkups monthly is **PMSMA**. Pradhan Mantri Surakshit Matritva Abhiyan provides free specialist assessment on a fixed day each month. High risk pregnancies identified there get tracked follow up. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "PMSMA guarantees free monthly specialist antenatal assessment and high risk tracking.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Programme element",
+     "Provision"
+    ],
+    "rows": [
+     [
+      "Fixed day monthly",
+      "Ninth of month"
+     ],
+     [
+      "Specialist check",
+      "Free"
+     ],
+     [
+      "High risk tracking",
+      "Follow up assured"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Listening to the fetal heart after palpation completes the abdominal examination, called **auscultation**. Normal rate lies between one ten and one sixty beats per minute. Handheld Doppler is standard at antenatal visits. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Auscultation after palpation confirms fetal heart rate between one ten and one sixty.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Leopold manoeuvres done"
+     },
+     {
+      "id": "n1",
+      "label": "Presenting part located"
+     },
+     {
+      "id": "n2",
+      "label": "Doppler placed over back"
+     },
+     {
+      "id": "n3",
+      "label": "Rate counted fully"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anaemia screening repeats each trimester because haemoglobin falls physiologically then recovers, a pattern of **haemoglobin surveillance**. Ferritin clarifies iron deficiency when values are borderline. Intravenous iron treats late or intolerant cases. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Haemoglobin surveillance repeats each trimester and ferritin clarifies borderline iron deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral iron",
+     "points": [
+      "First line",
+      "Slow correction",
+      "Gut side effects"
+     ]
+    },
+    "right": {
+     "title": "Intravenous iron",
+     "points": [
+      "Late pregnancy or intolerance",
+      "Rapid correction",
+      "Supervised setting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Counselling on danger signs requiring immediate care is part of every visit, termed **birth preparedness**. Bleeding, fits, severe headache, reduced movements and leaking fluid head the list. Transport and blood donor planning accompany it. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Birth preparedness counsels danger signs and plans transport plus blood donors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Danger sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Bleeding",
+      "Immediate care"
+     ],
+     [
+      "Reduced movements",
+      "Same day assessment"
+     ],
+     [
+      "Severe headache",
+      "Urgent review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight, oedema and blood pressure trends together flag developing **pre-eclampsia risk**. No single visit value matters as much as the trajectory. Aspirin prophylaxis for high risk women starts from twelve weeks. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Pressure and weight trajectories flag pre-eclampsia risk better than single values.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Trends recorded each visit"
+     },
+     {
+      "id": "n1",
+      "label": "Rising pressure noticed"
+     },
+     {
+      "id": "n2",
+      "label": "Aspirin if high risk"
+     },
+     {
+      "id": "n3",
+      "label": "Closer surveillance started"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

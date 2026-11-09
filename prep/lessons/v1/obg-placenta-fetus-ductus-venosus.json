@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "obg-placenta-fetus",
+ "subject": "obstetrics-gynaecology",
+ "title": "Ductus Venosus, Foramen Ovale and Fetal Haemoglobin",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The shunt carrying oxygenated umbilical vein blood past the liver into the inferior vena cava is the **ductus venosus**. It delivers the best oxygenated blood toward the heart and brain. After birth it fibroses into the ligamentum venosum. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The ductus venosus shunts oxygenated blood past the liver toward heart and brain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Umbilical vein blood"
+     },
+     {
+      "id": "n1",
+      "label": "Ductus venosus shunt"
+     },
+     {
+      "id": "n2",
+      "label": "Inferior vena cava"
+     },
+     {
+      "id": "n3",
+      "label": "Heart and brain supplied"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The flap opening between the two atria directing blood right to left is the **foramen ovale**. It lets oxygenated blood bypass the lungs into the systemic circulation. Rising left atrial pressure at birth closes the flap functionally. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The foramen ovale directs oxygenated blood right to left, bypassing the fetal lungs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shunt",
+     "Bypasses"
+    ],
+    "rows": [
+     [
+      "Ductus venosus",
+      "Liver"
+     ],
+     [
+      "Foramen ovale",
+      "Lungs at atrial level"
+     ],
+     [
+      "Ductus arteriosus",
+      "Lungs at arterial level"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vessel joining pulmonary artery to aorta in fetal life is the **ductus arteriosus**. It diverts most right ventricular output away from fluid filled lungs. Prostaglandins keep it open before birth, and its closure follows birth. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The ductus arteriosus diverts right ventricular output away from the fluid filled lungs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before birth",
+     "points": [
+      "Ductus open",
+      "Lungs bypassed",
+      "Prostaglandin maintained"
+     ]
+    },
+    "right": {
+     "title": "After birth",
+     "points": [
+      "Ductus closes",
+      "Lungs perfused",
+      "Oxygen rises"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fetal blood uses haemoglobin F with two gamma chains, giving **fetal haemoglobin** its properties. Higher oxygen affinity suits placental gas exchange. Raised levels persist in some inherited blood disorders in adults. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Fetal haemoglobin uses gamma chains and higher affinity for placental oxygen exchange.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Chains"
+    ],
+    "rows": [
+     [
+      "HbF",
+      "Two alpha, two gamma"
+     ],
+     [
+      "HbA",
+      "Two alpha, two beta"
+     ],
+     [
+      "HbA2",
+      "Two alpha, two delta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At birth, clamping the cord and inflating the lungs trigger **circulatory transition**. Pulmonary resistance falls dramatically while systemic resistance rises. These pressure reversals close the fetal shunts over hours to days. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Circulatory transition at birth reverses pressures and closes the fetal shunts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cord clamped"
+     },
+     {
+      "id": "n1",
+      "label": "Lungs inflate"
+     },
+     {
+      "id": "n2",
+      "label": "Pulmonary resistance falls"
+     },
+     {
+      "id": "n3",
+      "label": "Shunts close functionally"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the ductus arteriosus to close after birth gives a **patent ductus arteriosus**. It is commoner in premature babies and causes heart failure from left to right shunting. Indomethacin or surgical ligation closes persistent ducts. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "A patent ductus in premature babies causes heart failure and may need drug closure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-indomethacin.webp",
+    "alt": "Indomethacin closing the ductus arteriosus.",
+    "caption": "Ductus closure pharmacology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Doppler study of the ductus venosus assesses fetal wellbeing in growth restriction, termed **ductus venosus Doppler**. Absent or reversed flow during atrial contraction signals decompensation. It times delivery in early severe growth restriction. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Ductus venosus Doppler signals decompensation in early severe fetal growth restriction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Waveform",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Forward flow",
+      "Compensated"
+     ],
+     [
+      "Absent a wave",
+      "Strain"
+     ],
+     [
+      "Reversed a wave",
+      "Decompensation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygenated blood streaming preferentially to the brain via the foramen ovale is called **preferential streaming**. Anatomy directs ductus venosus blood across the foramen to the left heart. The developing brain thus receives the richest blood available. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Preferential streaming delivers the richest blood to the developing fetal brain.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cvs-cyanosis.webp",
+    "alt": "Paediatric cyanosis and hyperoxia assessment.",
+    "caption": "Fetal to neonatal circulation assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Persistence of fetal circulation with right to left shunting after birth causes **persistent pulmonary hypertension** of the newborn. Hypoxia maintains high pulmonary resistance and cyanosis despite oxygen. Inhaled nitric oxide is a key treatment. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Persistent pulmonary hypertension keeps fetal shunting after birth and needs nitric oxide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pulmonary resistance stays high"
+     },
+     {
+      "id": "n1",
+      "label": "Right to left shunt persists"
+     },
+     {
+      "id": "n2",
+      "label": "Cyanosis despite oxygen"
+     },
+     {
+      "id": "n3",
+      "label": "Nitric oxide dilates lungs"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

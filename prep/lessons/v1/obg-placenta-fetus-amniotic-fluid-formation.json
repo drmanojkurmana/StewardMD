@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "obg-placenta-fetus",
+ "subject": "obstetrics-gynaecology",
+ "title": "Amniotic Fluid, Umbilical Cord and Fetal Circulation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fluid surrounding the fetus within the amniotic sac is produced by **amniotic fluid formation**. Early fluid comes from maternal plasma across membranes, later fetal urine dominates. The fetus swallows and inhales it in a continuous circulation. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Amniotic fluid forms from membranes early and fetal urine later, circulating continuously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Membrane transudate early"
+     },
+     {
+      "id": "n1",
+      "label": "Fetal urine later"
+     },
+     {
+      "id": "n2",
+      "label": "Swallowing recycles fluid"
+     },
+     {
+      "id": "n3",
+      "label": "Volume stays balanced"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal cord contains two arteries and one vein within Whartons jelly, the rule of **umbilical cord vessels**. A single umbilical artery associates with fetal anomalies and growth problems. Cord examination after delivery is therefore routine. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "A normal cord has two arteries and one vein, and a single artery associates with anomalies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vessel",
+     "Carries"
+    ],
+    "rows": [
+     [
+      "One vein",
+      "Oxygenated blood to fetus"
+     ],
+     [
+      "Two arteries",
+      "Deoxygenated blood to placenta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathway by which oxygenated placental blood reaches fetal organs is the **fetal circulation**. Three shunts divert blood away from lungs and liver, which do little work before birth. These shunts close functionally after the first breaths. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Fetal circulation uses three shunts to bypass lungs and liver before birth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Placental blood via vein"
+     },
+     {
+      "id": "n1",
+      "label": "Ductus venosus shunt"
+     },
+     {
+      "id": "n2",
+      "label": "Foramen ovale shunt"
+     },
+     {
+      "id": "n3",
+      "label": "Ductus arteriosus shunt"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Too little amniotic fluid, usually from ruptured membranes or poor fetal urine output, is **oligohydramnios**. Too much suggests diabetes or swallowing obstruction. Ultrasound deepest pool or index measurements quantify the abnormality. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Oligohydramnios means too little fluid from rupture or poor urine output.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oligohydramnios",
+     "points": [
+      "Too little fluid",
+      "Rupture or renal cause",
+      "Lung development risk"
+     ]
+    },
+    "right": {
+     "title": "Polyhydramnios",
+     "points": [
+      "Too much fluid",
+      "Diabetes or swallowing block",
+      "Preterm labour risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fetal urine production depends on functioning kidneys and placental flow, linking fluid to **renal assessment**. Bilateral renal agenesis gives absent fluid and the Potter sequence of compressed features. Serial scans track fluid trends over time. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Fluid volume reflects fetal kidney function, and absent kidneys give the Potter sequence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid",
+     "Think of"
+    ],
+    "rows": [
+     [
+      "Absent",
+      "Renal agenesis"
+     ],
+     [
+      "Reduced",
+      "Growth restriction, rupture"
+     ],
+     [
+      "Excess",
+      "Diabetes, gut atresia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sampling amniotic fluid for fetal cells and chemistry is **amniocentesis**. Performed after fifteen weeks, it diagnoses chromosomal and genetic conditions. Earlier sampling carries higher complication rates and is avoided. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Amniocentesis samples fluid after fifteen weeks for chromosomal diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ins-amni-hook.webp",
+    "alt": "Amniotic membrane instrument.",
+    "caption": "Amniotic sac instruments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The cord inserting into membranes rather than placenta directly is **velamentous insertion**. Vessels run unprotected and can tear when membranes rupture, causing fetal bleeding. Antenatal detection changes delivery planning. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Velamentous insertion leaves vessels unprotected, risking fetal bleeding at membrane rupture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cord inserts in membranes"
+     },
+     {
+      "id": "n1",
+      "label": "Vessels unprotected"
+     },
+     {
+      "id": "n2",
+      "label": "Rupture may tear them"
+     },
+     {
+      "id": "n3",
+      "label": "Fetal bleeding follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exchange across the placenta moves oxygen by simple gradient, a process of **placental transfer**. Most drugs and many infections also cross to some degree. Prescribing in pregnancy always considers this transfer. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Placental transfer moves oxygen, drugs and some infections to the fetus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Crosses readily",
+     "Crosses poorly"
+    ],
+    "rows": [
+     [
+      "Lipid soluble drugs",
+      "Heparin"
+     ],
+     [
+      "Oxygen and glucose",
+      "Insulin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal haemoglobin binds oxygen more strongly than adult haemoglobin, an adaptation called **higher affinity**. It draws oxygen across the placenta from maternal blood. The switch to adult haemoglobin completes over the first months of life. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fetal haemoglobin has higher oxygen affinity to draw oxygen across the placenta.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Pregnancy abdominal inspection.",
+    "caption": "Pregnancy assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

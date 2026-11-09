@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-maternal-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Plasma Volume, Cardiac Output and Supine Hypotension",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blood plasma volume rises by nearly half in normal pregnancy through **plasma volume expansion**. Red cell mass rises less, by about a fifth, diluting haemoglobin concentration. This explains the fall in haemoglobin called physiological anaemia of pregnancy. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Plasma volume expansion rises more than red cells, diluting haemoglobin in physiological anaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Change"
+    ],
+    "rows": [
+     [
+      "Plasma volume",
+      "Up about 45 percent"
+     ],
+     [
+      "Red cell mass",
+      "Up about 20 percent"
+     ],
+     [
+      "Haemoglobin",
+      "Falls by dilution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The dilutional fall in haemoglobin without true red cell deficiency is **physiological anaemia**. Values down to eleven grams per decilitre remain normal in mid pregnancy. Lower values need iron deficiency and other causes excluded. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Physiological anaemia dilutes haemoglobin, though values below eleven need iron deficiency excluded.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological",
+     "points": [
+      "Dilution only",
+      "Haemoglobin above 11",
+      "No treatment beyond diet"
+     ]
+    },
+    "right": {
+     "title": "True anaemia",
+     "points": [
+      "Iron or other deficiency",
+      "Haemoglobin below 11",
+      "Investigate and treat"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Heart output rises by forty percent through increased stroke volume and rate, termed raised **cardiac output**. It peaks around twenty four to twenty eight weeks. This hyperdynamic state produces flow murmurs and a bounding pulse normally. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Cardiac output rises forty percent by twenty eight weeks, producing normal flow murmurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stroke volume rises"
+     },
+     {
+      "id": "n1",
+      "label": "Heart rate rises"
+     },
+     {
+      "id": "n2",
+      "label": "Output peaks mid pregnancy"
+     },
+     {
+      "id": "n3",
+      "label": "Flow murmur appears"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compression of the inferior vena cava by the gravid uterus when lying flat causes **supine hypotension syndrome**. Venous return falls, causing faintness, nausea and reduced placental flow. Turning to the left lateral position relieves it instantly. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Supine hypotension follows vena caval compression lying flat and resolves in left lateral position.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Pregnancy positioning and inspection.",
+    "caption": "Pregnancy positioning. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pregnancy increases clotting factors and reduces fibrinolysis, creating a **hypercoagulable state**. This protects against delivery haemorrhage but raises venous thrombosis risk six fold. The risk persists into the puerperium. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The hypercoagulable state protects against haemorrhage but raises thrombosis risk six fold.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Change",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Clotting factors",
+      "Increased"
+     ],
+     [
+      "Fibrinolysis",
+      "Reduced"
+     ],
+     [
+      "Net result",
+      "Thrombosis risk rises"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peripheral resistance falls under progesterone and prostacyclin influence, lowering **blood pressure** in mid pregnancy. Diastolic pressure drops most around twenty weeks before returning toward term. Failure of this fall associates with later pre-eclampsia. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Blood pressure falls in mid pregnancy, and failure of this fall associates with pre-eclampsia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Resistance falls early"
+     },
+     {
+      "id": "n1",
+      "label": "Pressure nadirs mid pregnancy"
+     },
+     {
+      "id": "n2",
+      "label": "Gradual rise to term"
+     },
+     {
+      "id": "n3",
+      "label": "Absent fall warns"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Total body water increases by over six litres distributed across fetus, placenta and mother, termed **water retention**. Dependent ankle oedema by evening is physiological. Sudden generalised oedema with hypertension needs pre-eclampsia exclusion. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Water retention causes dependent evening oedema, while sudden generalised swelling needs exclusion of pre-eclampsia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Fundal height and pregnancy examination landmarks.",
+    "caption": "Pregnancy examination landmarks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Venous pressure rises in the legs from uterine compression and valve load, producing **varicosities and oedema**. Vulval and haemorrhoidal veins also engorge commonly. Most regress after delivery without intervention. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Leg venous pressure rises in pregnancy producing varicosities that mostly regress after delivery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological oedema",
+     "points": [
+      "Evening, dependent",
+      "Normal pressure",
+      "Reassure"
+     ]
+    },
+    "right": {
+     "title": "Pathological oedema",
+     "points": [
+      "Sudden, generalised",
+      "Raised pressure possible",
+      "Investigate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Plasma proteins fall by dilution, especially albumin, reducing **oncotic pressure**. This contributes to oedema formation in late pregnancy. It also alters drug binding and laboratory reference ranges. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Falling albumin reduces oncotic pressure and alters drug binding in pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protein",
+     "Change"
+    ],
+    "rows": [
+     [
+      "Albumin",
+      "Falls"
+     ],
+     [
+      "Binding globulins",
+      "Rise"
+     ],
+     [
+      "Total protein",
+      "Falls slightly"
+     ]
+    ]
+   }
+  }
+ ]
+}
