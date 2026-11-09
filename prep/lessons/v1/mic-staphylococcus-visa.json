@@ -83,7 +83,7 @@
       }
     },
     {
-      "tx": "**CoNS identification** sorts the skin crowd: novobiocin susceptibility (epidermidis susceptible, saprophyticus resistant), haemolysis, urease, ornithine and sugar patterns, MALDI now naming lugdunensis, the CoNS that behaves like aureus (aggressive endocarditis, abscesses) and must never be waved away as contaminant.",
+      "tx": "**CoNS identification** sorts the skin crowd: novobiocin susceptibility (epidermidis susceptible, saprophyticus resistant), haemolysis, urease, ornithine and sugar patterns, MALDI now naming lugdunensis, the CoNS that behaves like aureus (aggressive endocarditis, abscesses) and must never be waved away as contaminant. Species identification therefore matters most in blood, joint fluid, prosthesis sonicate and cerebrospinal fluid, where a name changes both drug choice and decisions about removing hardware.",
       "say": "Lugdunensis wears a CoNS coat with an aureus heart; name it and respect it.",
       "vis": {
         "kind": "compare",
@@ -113,12 +113,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "attach", "label": "Attachment to device surface proteins" },
-          { "id": "accum", "label": "Accumulation: biofilm matrix builds" },
-          { "id": "mature", "label": "Mature biofilm tolerates antibiotics" },
-          { "id": "disperse", "label": "Dispersal seeds bloodstream episodes" }
+          {
+            "id": "attach",
+            "label": "Attachment to device surface proteins"
+          },
+          {
+            "id": "accum",
+            "label": "Accumulation: biofilm matrix builds"
+          },
+          {
+            "id": "mature",
+            "label": "Mature biofilm tolerates antibiotics"
+          },
+          {
+            "id": "disperse",
+            "label": "Dispersal seeds bloodstream episodes"
+          }
         ],
-        "edges": [["attach", "accum"], ["accum", "mature"], ["mature", "disperse"]]
+        "edges": [
+          [
+            "attach",
+            "accum"
+          ],
+          [
+            "accum",
+            "mature"
+          ],
+          [
+            "mature",
+            "disperse"
+          ]
+        ]
       }
     },
     {
