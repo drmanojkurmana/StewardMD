@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "Vasoactive Amines, Histamine, Serotonin, and Arachidonic Metabolites",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Chemical mediators of inflammation are soluble chemical compounds that coordinate vascular and cellular responses following tissue trauma or infection. The earliest mediators released in acute inflammation are pre-formed vasoactive amines stored within cytoplasmic granules, predominantly **histamine and serotonin**, which act immediately to provoke vasodilation and vascular permeability.",
+      "say": "Histamine and serotonin are pre-formed vasoactive amines that instantly drive vasodilation and edema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaphylaxis-fig1.webp",
+        "caption": "Systemic mast cell degranulation triggering acute widespread histamine-mediated anaphylactic shock.",
+        "alt": "Systemic anaphylaxis driven by massive mast cell mediator release"
+      }
+    },
+    {
+      "tx": "Histamine is synthesized by decarboxylation of the amino acid histidine and stored within dense metachromatic granules of tissue mast cells, circulating basophils, and blood platelets. IgE cross-linking, anaphylatoxins C3a and C5a, physical trauma, or insect venoms trigger explosive **mast cell degranulation**, releasing pre-stored histamine into the interstitium.",
+      "say": "Mast cell degranulation releases pre-stored histamine in response to IgE, trauma, or complement.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ige_crosslink",
+            "label": "Antigen Cross-Links Allergen-Specific IgE Bound to High-Affinity Fc-Epsilon-RI"
+          },
+          {
+            "id": "calcium_entry",
+            "label": "Intracellular Calcium Surge Drives Granule Fusion with Plasma Membrane"
+          },
+          {
+            "id": "histamine_burst",
+            "label": "Pre-Stored Histamine Discharges Instantly into Surrounding Extracellular Fluid"
+          },
+          {
+            "id": "h1_activation",
+            "label": "Binds H1 Receptors on Endothelium to Drive Immediate Arteriolar Vasodilation"
+          }
+        ],
+        "edges": [
+          [
+            "ige_crosslink",
+            "calcium_entry"
+          ],
+          [
+            "calcium_entry",
+            "histamine_burst"
+          ],
+          [
+            "histamine_burst",
+            "h1_activation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Released histamine binds seven-transmembrane H1 receptors on vascular endothelial cells, triggering rapid endothelial cell contraction and opening intercellular gaps in postcapillary venules. Concurrently, histamine stimulates endothelial nitric oxide synthase to induce potent arteriolar vasodilation, producing the classic **wheal and flare reaction** observed in acute urticaria.",
+      "say": "Histamine stimulates H1 receptors, opening venular endothelial gaps and producing urticarial wheals.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-urticaria-fig1.webp",
+        "caption": "Transient pruritic erythematous edematous cutaneous wheals characteristic of acute urticaria.",
+        "alt": "Acute urticarial cutaneous wheals showing prominent dermal edema"
+      }
+    },
+    {
+      "tx": "In humans, pre-formed serotonin (5-hydroxytryptamine) is stored primarily within dense granules of circulating blood platelets and enterochromaffin cells of the gastrointestinal tract. Platelet aggregation induced by contact with subendothelial collagen releases **platelet serotonin**, which acts as a vasoactive mediator regulating microvascular tone and platelet plug recruitment.",
+      "say": "Platelet aggregation releases serotonin, regulating microvascular tone and reinforcing the hemostatic plug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Histamine Vasoactive Properties",
+          "points": [
+            "Pre-formed in mast cells, basophils, and platelets",
+            "Binds H1 receptors coupled to Gq/11 signaling cascades",
+            "Contracts postcapillary venular endothelial cells to form gaps",
+            "Produces intense pruritus by irritating unmyelinated C sensory nerve endings"
+          ]
+        },
+        "right": {
+          "title": "Serotonin (5-HT) Vasoactive Properties",
+          "points": [
+            "Pre-formed in platelet dense granules and enterochromaffin cells",
+            "Released upon platelet adhesion to exposed subendothelial collagen",
+            "Induces vasoconstriction in damaged vessels to limit blood loss",
+            "Acts as an essential central neurotransmitter and gut motility regulator"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Activation of cellular phospholipases by mechanical trauma or chemical mediators cleaves membrane phospholipids to release twenty-carbon polyunsaturated arachidonic acid. Free **arachidonic acid metabolism** branches into two major enzymatic cascades: the cyclooxygenase pathway generating prostaglandins and thromboxanes, and the lipoxygenase pathway yielding leukotrienes and lipoxins.",
+      "say": "Phospholipases cleave membrane lipids to release arachidonic acid, fueling prostaglandin and leukotriene synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "phospholipase_a2",
+            "label": "Inflammatory Stimuli Activate Membrane-Bound Phospholipase A2 (PLA2)"
+          },
+          {
+            "id": "arachidonic_pool",
+            "label": "Cleaves Membrane Phospholipids to Release Free Arachidonic Acid (20:4)"
+          },
+          {
+            "id": "cox_branch",
+            "label": "Cyclooxygenases (COX-1/2) Generate Prostaglandin H2 (PGH2) Intermediates"
+          },
+          {
+            "id": "lox_branch",
+            "label": "5-Lipoxygenase Generates Leukotrienes (LTB4, LTC4, LTD4, LTE4)"
+          }
+        ],
+        "edges": [
+          [
+            "phospholipase_a2",
+            "arachidonic_pool"
+          ],
+          [
+            "arachidonic_pool",
+            "cox_branch"
+          ],
+          [
+            "arachidonic_pool",
+            "lox_branch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The constitutive enzyme cyclooxygenase-one and the cytokine-inducible enzyme cyclooxygenase-two convert arachidonic acid into prostaglandin H2. Cell-specific synthases convert PGH2 into diverse prostanoids, notably **prostacyclin (PGI2)** in vascular endothelium, which mediates vasodilation and inhibits platelet aggregation, and thromboxane A2 in platelets, which promotes vasoconstriction and platelet aggregation.",
+      "say": "Endothelial prostacyclin promotes vasodilation, while platelet thromboxane A2 drives clotting and vasoconstriction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endothelial Prostacyclin (PGI2)",
+          "points": [
+            "Synthesized by vascular endothelial cells expressing prostacyclin synthase",
+            "Potent arterial and arteriolar vasodilator via IP-cAMP signaling",
+            "Potently inhibits platelet aggregation and activation",
+            "Maintains vascular patency and prevents intravascular thrombosis"
+          ]
+        },
+        "right": {
+          "title": "Platelet Thromboxane A2 (TxA2)",
+          "points": [
+            "Synthesized by activated platelets expressing thromboxane synthase",
+            "Potent vasoconstrictor of arterial smooth muscle via TP-IP3 signaling",
+            "Potently activates and aggregates circulating platelets",
+            "Targeted irreversibly by low-dose aspirin via COX-1 acetylation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prostaglandin E2 serves as a pivotal mediator of inflammation, fever, and pain hypersensitivity. Secreted by macrophages and endothelial cells, **prostaglandin E2** induces arteriolar vasodilation, elevates the hypothalamic thermoregulatory set point in response to pyrogens, and directly sensitizes peripheral nociceptive nerve terminals to the algogenic effects of bradykinin.",
+      "say": "Prostaglandin E2 causes vasodilation, resets the hypothalamic thermostat in fever, and sensitizes pain nerves.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "macrophage_cox2",
+            "label": "Induction of Macrophage COX-2 and Microsomal PGE Synthase-1"
+          },
+          {
+            "id": "pge2_efflux",
+            "label": "High Concentrations of Prostaglandin E2 Released into Interstitium"
+          },
+          {
+            "id": "vasodilate_hyperalgesia",
+            "label": "Binds EP2/EP4 Receptors, Dilating Arterioles and Sensitizing Pain Receptors"
+          },
+          {
+            "id": "central_pyrexia",
+            "label": "Crosses Blood-Brain Barrier to Reset Preoptic Hypothalamic Set Point"
+          }
+        ],
+        "edges": [
+          [
+            "macrophage_cox2",
+            "pge2_efflux"
+          ],
+          [
+            "pge2_efflux",
+            "vasodilate_hyperalgesia"
+          ],
+          [
+            "pge2_efflux",
+            "central_pyrexia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The 5-lipoxygenase pathway converts arachidonic acid into potent inflammatory mediators known as leukotrienes. Leukotriene B4 functions as a powerful chemotactic agent recruiting neutrophils, whereas **cysteinyl leukotrienes (LTC4, LTD4, LTE4)** produced by mast cells and eosinophils are a thousand-fold more potent than histamine in causing bronchoconstriction and vascular leakage.",
+      "say": "Cysteinyl leukotrienes are a thousand times more potent than histamine in driving bronchoconstriction in asthma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leukotriene B4 (LTB4)",
+          "points": [
+            "Synthesized by neutrophils and macrophages via LTA4 hydrolase",
+            "Potent chemoattractant directing leukocyte recruitment and aggregation",
+            "Activates neutrophil respiratory burst and lysosomal enzyme release",
+            "Promotes leukocyte-endothelial adhesion via integrin upregulation"
+          ]
+        },
+        "right": {
+          "title": "Cysteinyl Leukotrienes (LTC4, LTD4, LTE4)",
+          "points": [
+            "Synthesized by mast cells, basophils, and eosinophils via LTC4 synthase",
+            "Comprise the slow-reacting substance of anaphylaxis (SRS-A)",
+            "Induce severe, prolonged bronchial smooth muscle constriction in asthma",
+            "Promote marked venular permeability and hypersecretion of mucus"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
