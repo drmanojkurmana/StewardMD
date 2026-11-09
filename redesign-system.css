@@ -1141,7 +1141,7 @@ html[data-appearance] #homeV2.rnav .hrf-hero .hrf-head{position:relative;z-index
 #homeV2.rnav .rnav-greet .hrf-date{font:400 14px/1.3 var(--rds-font);letter-spacing:0;text-transform:none;color:var(--hrf-date)}
 #homeV2.rnav .rnav-greet .hrf-rule{width:36px;height:4px;border-radius:99px;background:var(--hrf-mint);margin:9px 0 0 2px}
 #homeV2.rnav .hrf-banner::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 361 112' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop stop-color='%233fd6ae' stop-opacity='0'/%3E%3Cstop offset='.55' stop-color='%233fd6ae' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%233fd6ae' stop-opacity='.05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='%23fff' fill-opacity='.05' d='M205 112C255 72 270 30 361 0V112Z'/%3E%3Cpath fill='url(%23a)' d='M130 112C180 92 225 92 260 100C300 109 335 104 361 88V112Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;isolation:isolate;overflow:hidden;margin:-8px -15px 0;padding:0 0 126px;border-radius:0;background:linear-gradient(180deg,var(--hrf-h0) 0,var(--hrf-h1) 100px,var(--hrf-h2) 205px,var(--hrf-h3) 225px,var(--hrf-h4) 250px,var(--hrf-h5) 275px,var(--hrf-h6) 300px,var(--hrf-page) 320px)}
+html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;isolation:isolate;overflow:hidden;margin:-8px -15px 0;padding:0 0 126px;border-radius:0;background:linear-gradient(180deg,var(--hrf-h0) 0,var(--hrf-h1) 31%,var(--hrf-h2) 64%,var(--hrf-h3) 70.3%,var(--hrf-h4) 78%,var(--hrf-h5) 86%,var(--hrf-h6) 93.8%,var(--hrf-page) 100%)}
 body.dark #homeV2.rnav{--hrf-h3:#174544;--hrf-h4:#123a3a;--hrf-h5:#0c2a2c;--hrf-h6:#091d21;--hrf-sh:rgba(0,0,0,.55);--hrf-hl:rgba(255,255,255,.08);--hrf-lo:rgba(0,0,0,.28)}
 #homeV2.rnav .hrf-art{position:absolute;top:0;left:0;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 70%,transparent 100%);pointer-events:none}
 #homeV2.rnav .hrf-qa{position:relative;z-index:3;margin-top:-109px;gap:8px}
@@ -1263,3 +1263,16 @@ body.dark #homeV2#homeV2.rnav .hrf-tabbar .rnav-tab.active{color:var(--hrf-mint)
 #homeV2#homeV2.rnav .hrf-tab-ic{width:27px;height:27px;stroke-width:2}
 #homeV2#homeV2.rnav .hrf-maik-circle{width:46px;height:46px;margin-top:0;box-shadow:inset 0 2px 5px rgba(255,255,255,.28),inset 0 -6px 10px rgba(0,0,0,.42),0 6px 12px -3px var(--sphere-glow,rgba(8,40,35,.6))}
 @media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-tabbar .rnav-tab{transition:none}#homeV2#homeV2.rnav .hrf-tabbar .rnav-tab:active{transform:none}}
+/* The Pro chip is the one Pro mark on Home: pro-badge.js appends its own dark label to these same elements. */
+#homeV2#homeV2.rnav .hrf-head .smd-probadge,#homeV2#homeV2.rnav .hrf-banner .smd-probadge{display:none!important}
+body.pro-verified #homeV2#homeV2.rnav .hrf-pro[hidden]{display:inline-flex!important}
+/* Wider than a phone: full-bleed hero, content centred up to 1040 px, art anchored right at hero height. */
+@media (min-width:561px){
+  #homeV2#homeV2.rnav .rnav-stack{max-width:none;padding-inline:0}
+  #homeV2#homeV2.rnav .rnav-stack>*:not(.hrf-hero){align-self:center;box-sizing:border-box;width:calc(100% - 56px);max-width:1040px}
+  html[data-appearance] #homeV2#homeV2.rnav .hrf-hero{align-self:stretch;margin-inline:0}
+  html[data-appearance] #homeV2#homeV2.rnav .hrf-hero .hrf-head{padding-inline:max(22px,calc((100% - 1040px)/2))}
+  #homeV2#homeV2.rnav .hrf-hero .rnav-greet{padding-inline:max(28px,calc((100% - 1040px)/2))}
+  #homeV2#homeV2.rnav .hrf-art{left:auto;right:max(0px,calc((100% - 1160px)/2));width:auto;height:100%;-webkit-mask-image:linear-gradient(to right,transparent,#000 30%),linear-gradient(180deg,#000 62%,transparent 96%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 30%),linear-gradient(180deg,#000 62%,transparent 96%);mask-composite:intersect}
+}
+@media (min-width:561px){#homeV2#homeV2#homeV2.rnav .rnav-main{padding-inline:0;margin-inline:0;max-width:none;width:100%}}
