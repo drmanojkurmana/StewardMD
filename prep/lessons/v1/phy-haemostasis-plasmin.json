@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-haemostasis",
+ "subject": "physiology",
+ "title": "Fibrinolysis, Natural Anticoagulants, and Haemophilia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "To prevent catastrophic occlusive thrombosis following vascular sealing, the body utilizes an endogenous enzymatic clot-dissolving mechanism designated **fibrinolysis**. The principal fibrinolytic enzyme is the serine protease plasmin, which cleaves insoluble fibrin polymers into soluble degradation fragments, restoring microvascular vessel patency as tissue repair proceeds.",
+   "say": "Fibrinolysis dissolves clots to restore vessel patency. Plasmin cleaves insoluble fibrin into soluble degradation fragments during tissue repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tpa",
+      "label": "Endothelial Cells Synthesize and Secrete Tissue Plasminogen Activator (tPA)"
+     },
+     {
+      "id": "plg",
+      "label": "tPA Binds Fibrin Clot and Cleaves Trapped Plasminogen into Active Plasmin"
+     },
+     {
+      "id": "lysis",
+      "label": "Plasmin Hydrolyses Insoluble Fibrin Meshwork into Soluble Degradation Products"
+     },
+     {
+      "id": "ddim",
+      "label": "Covalently Cross-Linked Fibrin Breakdown Generates Measurable D-Dimers"
+     }
+    ],
+    "edges": [
+     [
+      "tpa",
+      "plg"
+     ],
+     [
+      "plg",
+      "lysis"
+     ],
+     [
+      "lysis",
+      "ddim"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inactive circulating plasminogen binds avidly to lysine residues within the cross-linked fibrin clot. Endothelial cells synthesize **tissue plasminogen activator** (tPA), which binds fibrin-associated plasminogen with high catalytic efficiency, cleaving the arginine-valine bond to generate active plasmin locally within the thrombus while minimizing systemic free plasmin circulation.",
+   "say": "Endothelial tissue plasminogen activator cleaves clot-bound plasminogen into active plasmin, concentrating fibrinolysis inside the clot to prevent systemic bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clot-Bound Fibrinolysis",
+     "points": [
+      "tPA and plasminogen bind adjacent lysine residues on fibrin",
+      "Fibrin acts as a catalytic assembly template",
+      "Plasmin hydrolyses fibrin locally within thrombus",
+      "Protected from rapid circulating alpha-2 antiplasmin inhibition"
+     ]
+    },
+    "right": {
+     "title": "Free Circulating Inactivation",
+     "points": [
+      "Free plasmin in circulating plasma binds alpha-2 antiplasmin",
+      "Immediate irreversible enzymatic neutralisation",
+      "Plasminogen activator inhibitor-1 (PAI-1) inhibits free tPA",
+      "Prevents systemic hypofibrinogenaemia and bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When plasmin digests cross-linked fibrin stabilized by Factor XIIIa, it generates specific breakdown fragments containing intact covalent gamma-chain cross-links, designated **D-dimer**. Elevation of plasma D-dimer indicates active in vivo thrombin generation and subsequent fibrinolysis, serving as a high-sensitivity screening biomarker to rule out deep vein thrombosis and pulmonary embolism.",
+   "say": "Plasmin digestion of cross-linked fibrin generates D-dimers. Elevated D-dimer confirms active clotting and breakdown, used to exclude pulmonary embolism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antiplatelets-dapt-fibrinolytics-txa-fig1.webp",
+    "alt": "Plasminogen activation and fibrinolytic degradation mechanisms.",
+    "caption": "Plasminogen activation, fibrin meshwork digestion, and D-dimer generation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Uncontrolled systemic clotting is constrained by endogenous anticoagulant cascades. The most potent circulating inhibitor of thrombin and Factor Xa is **antithrombin** (antithrombin III). Synthesized by hepatocytes, antithrombin is an alpha-2 globulin that suicide-inhibits serine proteases. Endothelial heparan sulfate proteoglycans accelerate antithrombin inhibitory kinetics one thousand-fold, a mechanism mirrored by clinical heparin therapy.",
+   "say": "Antithrombin suicide-inhibits thrombin and Factor Xa. Endothelial heparan sulfate accelerates this reaction a thousand-fold, a mechanism mimicked by heparin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Natural Anticoagulant",
+     "Source / Location",
+     "Target Clotting Factors",
+     "Mechanism of Action"
+    ],
+    "rows": [
+     [
+      "Antithrombin III",
+      "Hepatocytes (circulating)",
+      "Thrombin, Xa, IXa, XIa, XIIa",
+      "Suicide substrate forming 1:1 complex; heparin accelerated"
+     ],
+     [
+      "Protein C",
+      "Hepatocytes (vitamin K)",
+      "Factors Va and VIIIa",
+      "Activated by thrombin-thrombomodulin; proteolytically destroys cofactors"
+     ],
+     [
+      "Protein S",
+      "Hepatocytes & endothelia",
+      "Cofactor for Protein C",
+      "Enhances activated Protein C binding to membrane surfaces"
+     ],
+     [
+      "Tissue Factor Pathway Inhibitor",
+      "Endothelial cells",
+      "Factor Xa and TF-VIIa complex",
+      "Blocks Xa directly and feedbacks to inhibit TF-VIIa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A second critical regulatory brake is the **protein C** pathway. Thrombin binds to the endothelial transmembrane receptor thrombomodulin, undergoing a conformational change that abolishes its procoagulant actions. The thrombin-thrombomodulin complex activates circulating vitamin K-dependent Protein C, which pairs with its cofactor Protein S on endothelial surfaces to proteolytically inactivate Factors Va and VIIIa.",
+   "say": "Thrombin binds thrombomodulin to activate Protein C, which pairs with Protein S to proteolytically destroy cofactors Va and VIIIa, halting coagulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tm",
+      "label": "Excess Circulating Thrombin Binds Endothelial Thrombomodulin"
+     },
+     {
+      "id": "apc",
+      "label": "Thrombin-Thrombomodulin Complex Activates Protein C to APC"
+     },
+     {
+      "id": "ps",
+      "label": "Activated Protein C (APC) Associates with Cofactor Protein S"
+     },
+     {
+      "id": "deg",
+      "label": "Cleaves and Inactivates Critical Cofactors Factor Va and Factor VIIIa"
+     }
+    ],
+    "edges": [
+     [
+      "tm",
+      "apc"
+     ],
+     [
+      "apc",
+      "ps"
+     ],
+     [
+      "ps",
+      "deg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-translational gamma-carboxylation of glutamic acid residues on Factors II, VII, IX, and X, alongside regulatory Proteins C and S, requires **vitamin K** as an essential cofactor. Reduced vitamin K hydroquinone powers gamma-glutamyl carboxylase, adding a carboxyl group to create dicarboxylic Gla domains that bind calcium to anchor onto platelet membranes. Warfarin inhibits vitamin K epoxide reductase, blocking this activation.",
+   "say": "Vitamin K gamma-carboxylates glutamic acid residues on Factors II, VII, IX, and X, allowing calcium binding. Warfarin blocks vitamin K recycling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carboxylated Factors (Functional)",
+     "points": [
+      "Contain paired negative carboxyl charges on Gla residues",
+      "Coordinate divalent calcium ion bridging",
+      "Anchor firmly onto platelet negatively charged phospholipids",
+      "Assemble tenase and prothrombinase catalytic complexes"
+     ]
+    },
+    "right": {
+     "title": "Des-Carboxy Factors (Warfarin Induced)",
+     "points": [
+      "Synthesized without post-translational gamma-carboxylation",
+      "Cannot coordinate calcium ion bridges",
+      "Remain floating in plasma; cannot bind platelet membrane",
+      "Functionally inactive, producing systemic therapeutic anticoagulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital deficiency of intrinsic pathway factors causes classic haemophilia. **Haemophilia A** is an X-linked recessive disorder caused by deficiency of Factor VIII, while Haemophilia B (Christmas disease) is caused by Factor IX deficiency. Because the intrinsic tenase complex is crippled, patients suffer deep tissue bleeds, painful recurrent hemarthroses leading to joint destruction, and marked isolated aPTT prolongation.",
+   "say": "Haemophilia A and B are X-linked deficiencies of Factors VIII and IX respectively, causing hemarthroses and deep tissue haematomas with isolated aPTT prolongation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/coagulation-disorders-haemophilia-and-dic-fig1.webp",
+    "alt": "Haemophilia factor deficiencies and clinical bleeding manifestations.",
+    "caption": "Factor VIII and Factor IX deficiencies and joint bleeding in haemophilia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treatment of haemophilia requires recombinant factor replacement to restore clotting competence. Recombinant Factor VIII concentrates are infused on demand or prophylactically. In mild Haemophilia A, **desmopressin** (DDAVP) stimulates endothelial V2 receptors, releasing endogenous stores of Factor VIII and von Willebrand factor from Weibel-Palade bodies into plasma to arrest bleeding.",
+   "say": "Haemophilia is managed with recombinant factor concentrates. Mild Haemophilia A responds to desmopressin, which mobilises stored Factor VIII and vWF from endothelia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Inheritance Pattern",
+     "Deficient Protein",
+     "Clinical Response to Desmopressin"
+    ],
+    "rows": [
+     [
+      "Haemophilia A",
+      "X-linked recessive",
+      "Factor VIII procoagulant protein",
+      "Transient 3 to 5-fold rise in mild cases"
+     ],
+     [
+      "Haemophilia B",
+      "X-linked recessive",
+      "Factor IX (Christmas factor)",
+      "Zero response (Factor IX is not stored in endothelia)"
+     ],
+     [
+      "Haemophilia C",
+      "Autosomal recessive",
+      "Factor XI (Rosenthal disease)",
+      "Zero response; treat with fresh frozen plasma"
+     ],
+     [
+      "Von Willebrand Disease Type 1",
+      "Autosomal dominant",
+      "Quantitative deficiency of vWF",
+      "Excellent response (releases stored vWF)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
