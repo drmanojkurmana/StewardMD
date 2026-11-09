@@ -1,0 +1,271 @@
+{
+    "v": 1,
+    "id": "ans-neuraxial-epidural-catheter",
+    "subject": "anaesthesia",
+    "module": "ans-neuraxial",
+    "title": "Epidural Anaesthesia: Loss of Resistance, Test Dosing, and Caudal Blocks",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Epidural Space Anatomy and Depth",
+            "tx": "**Epidural space anatomical boundaries** define a potential space encircling the spinal meninges, extending from the foramen magnum (where the periosteal and spinal dura mater fuse) down to the sacrococcygeal ligament covering the sacral hiatus. The space is bounded anteriorly by the posterior longitudinal ligament, laterally by pedicles and intervertebral foramina, and posteriorly by the ligamentum flavum. Mean skin-to-epidural depth in adults is 4 to 6 centimeters.",
+            "say": "Epidural space anatomical boundaries define a potential space encircling the spinal meninges, extending from the foramen magnum (where the periosteal and spinal dura mater fuse) down to the sacrococcygeal ligament covering the sacral hiatus. The space is bounded anteriorly by the posterior longitudinal ligament, laterally by pedicles and intervertebral foramina, and posteriorly by the ligamentum flavum. Mean skin-to-epidural depth in adults is 4 to 6 centimeters.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-spinal_position_asepsis.webp",
+                "alt": "Anatomical landmarks and needle alignment for lumbar epidural insertion",
+                "caption": "Anatomical landmarks and needle alignment for lumbar epidural insertion"
+            }
+        },
+        {
+            "title": "Tuohy Needle Design Features",
+            "tx": "**Tuohy epidural needle engineering** features a curved Huber directional tip with a blunt bevel angled at 15 to 30 degrees. The curved tip pushes the tough dura mater away rather than puncturing it as it pierces the ligamentum flavum, simultaneously directing the threaded flexible multiorifice epidural catheter cephalad into the epidural space. Shaft centimeter markings guide insertion depth.",
+            "say": "Tuohy epidural needle engineering features a curved Huber directional tip with a blunt bevel angled at 15 to 30 degrees. The curved tip pushes the tough dura mater away rather than puncturing it as it pierces the ligamentum flavum, simultaneously directing the threaded flexible multiorifice epidural catheter cephalad into the epidural space. Shaft centimeter markings guide insertion depth.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Needle Component",
+                    "Engineering Specification",
+                    "Clinical Function",
+                    "Safety Advantage"
+                ],
+                "rows": [
+                    [
+                        "Huber Curved Tip",
+                        "15 to 30 degree curved directional bevel",
+                        "Deflects dura away from cutting edge",
+                        "Minimizes accidental wet tap dural puncture"
+                    ],
+                    [
+                        "Catheter Directionality",
+                        "Smooth cephalad guidance",
+                        "Directs plastic catheter up epidural canal",
+                        "Ensures multiorifice catheter threads smoothly"
+                    ],
+                    [
+                        "Shaft Depth Markings",
+                        "Engraved rings at 1-cm increments",
+                        "Continuous visual confirmation of needle depth",
+                        "Prevents overshooting beyond expected ligament depth"
+                    ],
+                    [
+                        "Internal Metal Stylet",
+                        "Matches tip contour flush",
+                        "Prevents skin plugging into needle lumen",
+                        "Avoids epidural epidermoid tumor seeding"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Loss of Resistance Technique",
+            "tx": "**Loss of resistance to saline versus air** represents the standard technique for identifying the epidural space. As the Tuohy needle traverses dense supraspinous and interspinous ligaments, a specialized low-friction glass or plastic syringe encounters firm springy resistance. Upon piercing the ligamentum flavum into the epidural space, plunger resistance vanishes instantly; saline is preferred over air because accidental subdural air injection causes pneumocephalus and patchy analgesia.",
+            "say": "Loss of resistance to saline versus air represents the standard technique for identifying the epidural space. As the Tuohy needle traverses dense supraspinous and interspinous ligaments, a specialized low-friction glass or plastic syringe encounters firm springy resistance. Upon piercing the ligamentum flavum into the epidural space, plunger resistance vanishes instantly; saline is preferred over air because accidental subdural air injection causes pneumocephalus and patchy analgesia.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Loss of Resistance to Saline (Preferred)",
+                    "points": [
+                        "Zero risk of spinal cord venous air embolism or pneumocephalus",
+                        "Provides smooth lubricated glide for catheter advancement",
+                        "Eliminates patchy nerve root block caused by unabsorbed air bubbles"
+                    ]
+                },
+                "right": {
+                    "title": "Loss of Resistance to Air (Hazards)",
+                    "points": [
+                        "Accidental dural entry injects air, provoking severe pneumocephalus",
+                        "Compresses epidural veins, risking venous air embolism",
+                        "Air pockets can isolate nerve roots, creating patchy incomplete blocks"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Epidural Catheter Threading Depth",
+            "tx": "**Epidural catheter insertion depth** dictates reliable analgesia while avoiding complications: the catheter should be threaded exactly 3 to 5 centimeters into the epidural space. Threading less than 3 centimeters carries a high risk of accidental dislodgement as subcutaneous tissues slide during patient movement; threading deeper than 5 centimeters promotes catheter coiling, unilateral radicular analgesia, or exit through an intervertebral foramen.",
+            "say": "Epidural catheter insertion depth dictates reliable analgesia while avoiding complications: the catheter should be threaded exactly 3 to 5 centimeters into the epidural space. Threading less than 3 centimeters carries a high risk of accidental dislodgement as subcutaneous tissues slide during patient movement; threading deeper than 5 centimeters promotes catheter coiling, unilateral radicular analgesia, or exit through an intervertebral foramen.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify epidural space at 5 cm depth mark on Tuohy needle"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Thread multiorifice catheter through needle to 9 cm mark"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Withdraw Tuohy needle carefully over catheter"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Secure catheter firmly at skin at 9 cm (leaving 4 cm in epidural space)"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Epidural Test Dose Administration",
+            "tx": "**Epidural test dose protocol** detects accidental intravascular or intrathecal catheter placement prior to administering large therapeutic doses. A standard test dose consists of 3 milliliters of 1.5 percent lignocaine with 1:200,000 adrenaline (15 micrograms). Intravascular injection triggers an immediate heart rate surge of at least 20 to 30 beats per minute or a 20 mmHg systolic pressure spike within 30 to 60 seconds; intrathecal injection triggers rapid spinal motor block within three minutes.",
+            "say": "Epidural test dose protocol detects accidental intravascular or intrathecal catheter placement prior to administering large therapeutic doses. A standard test dose consists of 3 milliliters of 1.5 percent lignocaine with 1:200,000 adrenaline (15 micrograms). Intravascular injection triggers an immediate heart rate surge of at least 20 to 30 beats per minute or a 20 mmHg systolic pressure spike within 30 to 60 seconds; intrathecal injection triggers rapid spinal motor block within three minutes.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Accidental Catheter Location",
+                    "Test Dose Response (3 mL Lignocaine+Adrenaline)",
+                    "Latency of Clinical Signs",
+                    "Immediate Corrective Action"
+                ],
+                "rows": [
+                    [
+                        "Intravascular (Epidural Vein)",
+                        "Heart rate jumps >20-30 bpm; systolic BP rises >20 mmHg",
+                        "Within 30 to 60 seconds",
+                        "Withdraw catheter 1 cm; aspirate and re-test"
+                    ],
+                    [
+                        "Intrathecal (Subarachnoid)",
+                        "Dense motor paralysis of lower limbs (spinal block)",
+                        "Within 2 to 3 minutes",
+                        "Do not inject; withdraw catheter or convert to spinal"
+                    ],
+                    [
+                        "Subdural Space",
+                        "Sensory block far wider than expected; delayed onset",
+                        "Within 10 to 15 minutes",
+                        "Withdraw catheter; replace at another interspace"
+                    ],
+                    [
+                        "True Epidural Space",
+                        "Zero heart rate surge; negative aspiration",
+                        "Stable baseline throughout",
+                        "Proceed with fractionated therapeutic local anaesthetic"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Combined Spinal-Epidural Technique",
+            "tx": "**Combined spinal epidural (CSE) needle-through-needle** combines the rapid, dense, reliable surgical block of spinal anaesthesia with the flexibility of an indwelling epidural catheter for prolonged surgery and postoperative patient-controlled analgesia. An 18-gauge Tuohy needle locates the epidural space, a long 27-gauge pencil-point spinal needle is advanced through the Tuohy needle to pierce the dura and inject intrathecal drug, followed by threading the epidural catheter.",
+            "say": "Combined spinal epidural (CSE) needle-through-needle combines the rapid, dense, reliable surgical block of spinal anaesthesia with the flexibility of an indwelling epidural catheter for prolonged surgery and postoperative patient-controlled analgesia. An 18-gauge Tuohy needle locates the epidural space, a long 27-gauge pencil-point spinal needle is advanced through the Tuohy needle to pierce the dura and inject intrathecal drug, followed by threading the epidural catheter.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Needle-Through-Needle Advantages",
+                    "points": [
+                        "Instant onset of dense subarachnoid surgical block",
+                        "Indwelling epidural catheter extends duration indefinitely",
+                        "Provides exceptional postoperative infusion analgesia"
+                    ]
+                },
+                "right": {
+                    "title": "Technical Precautions",
+                    "points": [
+                        "Cannot verify epidural catheter function until spinal block recedes",
+                        "Risk of epidural drug leaking into subarachnoid space through dural hole",
+                        "Demands locking mechanism to stabilize spinal needle during injection"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Caudal Epidural Block in Children",
+            "tx": "**Caudal epidural block anatomy** accesses the sacral epidural space through the sacral hiatus, formed by failure of the fifth (and occasionally fourth) sacral laminae to fuse in the midline. Bounded superiorly by the sacral cornua and covered by the tough sacrococcygeal ligament, caudal block is the most widely performed regional technique in pediatric surgery, providing complete sensory analgesia for infraumbilical, inguinal, and lower limb procedures.",
+            "say": "Caudal epidural block anatomy accesses the sacral epidural space through the sacral hiatus, formed by failure of the fifth (and occasionally fourth) sacral laminae to fuse in the midline. Bounded superiorly by the sacral cornua and covered by the tough sacrococcygeal ligament, caudal block is the most widely performed regional technique in pediatric surgery, providing complete sensory analgesia for infraumbilical, inguinal, and lower limb procedures.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Palpate bilateral sacral cornua forming equilateral triangle with coccyx"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Insert 22-gauge short-bevel needle at 45 degrees to skin"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Pierce sacrococcygeal ligament with distinct tactile 'pop'"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Depress needle flat (20 degrees) and advance 2 to 3 mm into sacral canal"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Armitage Formula for Caudal Dosing",
+            "tx": "**Armitage pediatric caudal dosing formula** calculates required local anaesthetic volume (using 0.125 percent to 0.2 percent bupivacaine or ropivacaine with 1:200,000 adrenaline) based on child body weight: 0.5 mL/kg achieves lumbosacral analgesia (circumcision, hypospadias), 1.0 mL/kg achieves thoracolumbar analgesia up to T10 (inguinal herniotomy, orchiopexy), and 1.25 mL/kg reaches mid-thoracic levels up to T6 (umbilical hernia).",
+            "say": "Armitage pediatric caudal dosing formula calculates required local anaesthetic volume (using 0.125 percent to 0.2 percent bupivacaine or ropivacaine with 1:200,000 adrenaline) based on child body weight: 0.5 mL/kg achieves lumbosacral analgesia (circumcision, hypospadias), 1.0 mL/kg achieves thoracolumbar analgesia up to T10 (inguinal herniotomy, orchiopexy), and 1.25 mL/kg reaches mid-thoracic levels up to T6 (umbilical hernia).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Target Anatomical Dermatome Level",
+                    "Armitage Volume Formula",
+                    "Representative Pediatric Surgeries",
+                    "Maximum Recommended Dose"
+                ],
+                "rows": [
+                    [
+                        "Lumbosacral (S1 to S5)",
+                        "0.5 milliliters per kilogram",
+                        "Circumcision, hypospadias repair, clubfoot",
+                        "Do not exceed 2 mg/kg bupivacaine"
+                    ],
+                    [
+                        "Thoracolumbar (T10 to L1)",
+                        "1.0 milliliters per kilogram",
+                        "Inguinal herniotomy, orchidopexy, hydrocele",
+                        "Do not exceed 2 mg/kg bupivacaine"
+                    ],
+                    [
+                        "Mid-Thoracic (T6 to T8)",
+                        "1.25 milliliters per kilogram",
+                        "Infraumbilical laparotomy, umbilical hernia",
+                        "Strict volume cap; watch for motor block"
+                    ],
+                    [
+                        "High-Thoracic Risk",
+                        "Exceeds 1.5 mL/kg (hazardous)",
+                        "Not recommended via caudal route",
+                        "High risk of thoracic sympathetic blockade and apnea"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}
