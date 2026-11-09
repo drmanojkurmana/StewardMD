@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-measures-attack-rate",
+ "subject": "community-medicine",
+ "module": "cm-measures",
+ "title": "Attack Rate, Secondary Attack Rate and Case Fatality",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Attack rate renames incidence for outbreaks",
+   "tx": "The **attack rate** is incidence stated for an epidemic: cases among a defined exposed population during the outbreak period, multiplied by 100. A village of 4000 people saw 2800 fever cases in one month, later proven malaria, so the attack rate was 70 percent. The short named period separates it from routine annual incidence.",
+   "say": "Outbreaks rename incidence. Cases among the exposed during the outbreak window, times one hundred, give this rate. Twenty eight hundred of four thousand villagers in one malaria month means seventy percent. The short named window separates it from annual incidence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Part", "Village example"],
+    "rows": [
+     ["Cases in outbreak period", "2800 fever cases"],
+     ["Population exposed", "4000 villagers"],
+     ["Attack rate", "70 percent in one month"]
+    ]
+   }
+  },
+  {
+   "title": "Food poisoning: eaters form the denominator",
+   "tx": "**Food poisoning** after a shared meal is the second classic setting: guests who ate the suspected dish form the denominator, and those falling ill within the incubation range form the numerator. Comparing attack rates dish by dish incriminates the vehicle. A dish eaten by the ill and spared by the well carries the highest rate difference.",
+   "say": "Shared meals give the cleanest version. Eaters of each dish form its denominator; those ill within the incubation range form the numerator. Compare rates dish by dish, and the dish separating ill from well stands accused.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High attack rate dish",
+     "points": ["Most eaters fell ill", "Few non eaters fell ill", "Prime suspect vehicle"]
+    },
+    "right": {
+     "title": "Low attack rate dish",
+     "points": ["Most eaters stayed well", "Illness scattered among eaters", "Unlikely vehicle"]
+    }
+   }
+  },
+  {
+   "title": "Secondary attack rate defined precisely",
+   "tx": "The **secondary attack rate** counts susceptible contacts who develop disease within the range of one incubation period after exposure to a primary case, divided by susceptible contacts. The primary case itself is excluded from both counts. Contacts may be household members, neighbours or residents of an institution such as a hostel or barrack.",
+   "say": "Define it precisely. Susceptible contacts falling ill within one incubation period of the first case, divided by susceptible contacts. The first case counts in neither part. Households, neighbourhoods and institutions all supply contact groups.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Element", "Rule"],
+    "rows": [
+     ["Numerator", "Contacts ill within one incubation period"],
+     ["Denominator", "Susceptible contacts exposed"],
+     ["Excluded", "Primary case and immune contacts"]
+    ]
+   }
+  },
+  {
+   "title": "Measles near 90 percent: contagiousness shown",
+   "tx": "**Measles** shows a secondary attack rate near 90 percent among susceptible household contacts, the standard example of extreme contagiousness. A low rate, by contrast, signals poor transmissibility or high background immunity. Because immune contacts dilute the denominator wrongly, teams must record prior disease and vaccination before quoting any household rate.",
+   "say": "One number teaches contagiousness. Measles reaches about ninety percent among susceptible household contacts. Low rates signal weak spread or high background immunity. Record prior disease and vaccination first, or immune contacts corrupt the denominator.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rate near 90 percent",
+     "points": ["Measles in susceptible households", "Extreme contagiousness", "Rapid household saturation"]
+    },
+    "right": {
+     "title": "Low household rate",
+     "points": ["Weak person to person spread", "High background immunity", "Check immune contacts first"]
+    }
+   }
+  },
+  {
+   "title": "Case fatality uses cases as denominator",
+   "tx": "**Case fatality** divides deaths from a disease by cases of the same disease, times 100, reflecting severity or killing power. Japanese encephalitis with 670 deaths among 2241 cases gives about 30 percent. Rabies and AIDS in the pre-treatment era reached 100 percent, while measles in a nourished population may fall below 1 percent.",
+   "say": "Severity takes cases as its denominator. Deaths divided by cases, times one hundred. Six hundred seventy deaths among 2241 encephalitis cases gives about thirty percent. Rabies reached one hundred; nourished measles cases fall below one.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease setting", "Deaths and cases", "Fatality"],
+    "rows": [
+     ["Japanese encephalitis, 2000", "670 of 2241 cases", "About 30 percent"],
+     ["Dengue outbreak, Delhi 1996", "400 of about 10000 cases", "About 4 percent"],
+     ["Rabies after symptoms", "Nearly all cases", "Near 100 percent"]
+    ]
+   }
+  },
+  {
+   "title": "Fatality ratio versus fatality rate language",
+   "tx": "Teachers accept **case fatality ratio** where no time interval is specified: two deaths among 200 measles cases give a ratio of 1 to 100. Fatality shifts between epidemics as agent virulence, host nutrition and care quality change, so one disease carries no fixed value. Stems that omit the period want the ratio wording, not a yearly rate.",
+   "say": "Language matters in stems. Without a stated interval, teachers call it a ratio: two deaths among two hundred measles cases, one to a hundred. Virulence, nutrition and care shift the value between epidemics, so no disease owns a fixed figure.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Preferred wording"],
+    "rows": [
+     ["Deaths over cases, no period stated", "Case fatality ratio"],
+     ["Deaths over cases in a named year", "Case fatality rate for that year"],
+     ["Deaths over total population", "Cause specific death rate, not fatality"]
+    ]
+   }
+  },
+  {
+   "title": "Attack rate versus case fatality traps",
+   "tx": "The classic trap swaps denominators: **attack rate** divides by people exposed, while case fatality divides by people already diseased. A disease can attack few yet kill many of its cases, like rabies after exposure, or attack many yet kill few, like common cold outbreaks. Read the denominator phrase in the stem before reaching for either formula.",
+   "say": "Denominators separate the twins. One divides by people exposed, the other by people already diseased. Rabies attacks few exposed people yet kills nearly every case; colds do the reverse. Read the denominator phrase before choosing a formula.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Attack rate",
+     "points": ["Denominator: people exposed", "Answers: how many fell ill", "Outbreak incidence"]
+    },
+    "right": {
+     "title": "Case fatality",
+     "points": ["Denominator: people diseased", "Answers: how many cases died", "Severity of disease"]
+    }
+   }
+  },
+  {
+   "title": "Spells of sickness and special incidence",
+   "tx": "**Spells of sickness** refine incidence where one person contributes repeated episodes: two common colds in a year count as two spells starting in that period. Special incidence rates name their setting, such as hospital infection rates or school absence episodes. Each variant keeps the same skeleton: new events over population at risk over stated time.",
+   "say": "Repeated illness refines the count. Two colds in one year count as two spells from one person. Hospital and school variants name their setting. Every variant keeps one skeleton: new events, over people at risk, over stated time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "New events counted"},
+     {"id": "b", "label": "Population at risk set"},
+     {"id": "c", "label": "Time period named"},
+     {"id": "d", "label": "Rate expressed per 1000 per year"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Time unit completes every incidence answer",
+   "tx": "An incidence figure without time is incomplete: **16.7 per 1000 per year** answers fully, while 16.7 per 1000 alone does not. Five hundred new cases among 30000 people in one year produce that value. Examiners deduct for the missing unit because rates compare speed, and speed without time is meaningless across studies.",
+   "say": "Finish every rate with its clock. Five hundred new cases among thirty thousand people in a year gives sixteen point seven per thousand per year. Drop the year and the answer fails, because rates compare speed, and speed needs time.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Answer form", "Verdict"],
+    "rows": [
+     ["16.7 per 1000 per year", "Complete, comparable"],
+     ["16.7 per 1000", "Incomplete, no time unit"],
+     ["500 cases", "Count only, not a rate"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
