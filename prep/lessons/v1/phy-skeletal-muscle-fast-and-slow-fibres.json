@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "module": "phy-skeletal-muscle",
+ "subject": "physiology",
+ "title": "Skeletal Muscle Fibre Types, Rigor Mortis, and Contraction Modes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Skeletal muscle fibres divide into distinct physiological classes based on contraction speed, myosin heavy chain isoforms, and metabolic enzymatic machinery. Slow oxidative **Type I fibres**, also called red muscle, are rich in myoglobin, mitochondria, and capillary beds, providing sustained aerobic ATP production for fatigue-resistant postural maintenance such as the soleus muscle.",
+   "say": "Type I slow-twitch fibres are rich in myoglobin and mitochondria, providing sustained aerobic endurance for postural muscles like the soleus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Property",
+     "Type I (Slow Oxidative)",
+     "Type IIa (Fast Oxidative)",
+     "Type IIx/IIb (Fast Glycolytic)"
+    ],
+    "rows": [
+     [
+      "Myosin Heavy Chain",
+      "MHC-beta / slow",
+      "MHC-IIa",
+      "MHC-IIx (human) / IIb"
+     ],
+     [
+      "Contraction Velocity",
+      "Slow (long twitch time)",
+      "Fast",
+      "Very fast (short twitch time)"
+     ],
+     [
+      "Myosin ATPase Activity",
+      "Low",
+      "High",
+      "Very high"
+     ],
+     [
+      "Metabolic Pathway",
+      "Aerobic oxidative phosphorylation",
+      "Oxidative and glycolytic",
+      "Anaerobic glycolysis"
+     ],
+     [
+      "Mitochondrial Density",
+      "Very high",
+      "High",
+      "Low"
+     ],
+     [
+      "Myoglobin & Colour",
+      "Abundant (dark red)",
+      "Abundant (red)",
+      "Low (white/pale)"
+     ],
+     [
+      "Fatigue Resistance",
+      "High (fatigue-resistant)",
+      "Intermediate",
+      "Low (fatigues rapidly)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, **Type II fibres**, or white muscle, are specialized for rapid, powerful contractions. Type IIx fast glycolytic fibres contain abundant glycogen and high-activity myosin ATPase but sparse mitochondria, supporting brief explosive bursts of power that fatigue rapidly, as seen in the gastrocnemius during sprinting.",
+   "say": "Type II fast-twitch fibres have high myosin ATPase activity and rely on glycolysis, producing explosive bursts of speed that fatigue rapidly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I (Red Postural Muscle)",
+     "points": [
+      "Small motor neuron diameter and slow conduction",
+      "High oxidative enzyme activity (succinate dehydrogenase)",
+      "Dense capillary network delivering oxygen",
+      "Adapted for continuous aerobic posture and endurance"
+     ]
+    },
+    "right": {
+     "title": "Type IIx (White Phasic Muscle)",
+     "points": [
+      "Large motor neuron diameter and fast conduction",
+      "High glycolytic enzyme activity (phosphofructokinase)",
+      "Sparse capillaries and rapid lactate accumulation",
+      "Adapted for brief maximal sprint and jumping force"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The death of muscle tissue following somatic death illustrates the fundamental role of ATP in cross-bridge detachment. In **rigor mortis**, post-mortem cessation of respiration stops mitochondrial oxidative phosphorylation, depleting cellular ATP stores. Without ATP, the myosin head cannot dissociate from actin, locking cross-bridges in permanent, rigid physical complexes.",
+   "say": "In rigor mortis, ATP depletion prevents myosin from detaching from actin, locking cross-bridges in rigid, unyielding complexes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "death",
+      "label": "Somatic Death Stops Respiration and Glycogen Stores Deplete"
+     },
+     {
+      "id": "atp",
+      "label": "Mitochondrial ATP Synthesis Ceases and Cellular ATP Falls to Zero"
+     },
+     {
+      "id": "pump",
+      "label": "SERCA Calcium Clearance Fails Allowing Sarcoplasmic Calcium Influx"
+     },
+     {
+      "id": "rigor",
+      "label": "Myosin Cross-Bridges Form but Cannot Detach: Rigor Mortis"
+     }
+    ],
+    "edges": [
+     [
+      "death",
+      "atp"
+     ],
+     [
+      "atp",
+      "pump"
+     ],
+     [
+      "pump",
+      "rigor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rigor mortis develops sequentially, beginning within three to four hours in small facial and neck muscles, progressing to peak generalized muscle rigidity at twelve hours, and remaining established for approximately twenty-four hours. Rigor mortis resolves only when lysosomal **proteolytic enzymes** such as calpains and cathepsins autolyse the structural myofilaments, softening the corpse.",
+   "say": "Rigor mortis peaks around twelve hours and resolves after one to two days as endogenous lysosomal proteases degrade muscle myofilaments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Post-Mortem Stage",
+     "Time Window",
+     "Physiological / Biochemical Mechanism"
+    ],
+    "rows": [
+     [
+      "Onset of Rigor",
+      "3 to 4 hours post-mortem",
+      "ATP levels drop below threshold in small facial muscles"
+     ],
+     [
+      "Peak Generalized Rigor",
+      "12 hours post-mortem",
+      "Complete ATP exhaustion across all skeletal muscle groups"
+     ],
+     [
+      "Plateau Rigor State",
+      "12 to 24 hours post-mortem",
+      "Stable non-dissociating actin-myosin complex"
+     ],
+     [
+      "Secondary Flaccidity",
+      "36 to 48 hours post-mortem",
+      "Autolysis of troponin and Z-discs by calpains and cathepsins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Muscular work is classified into distinct mechanical modes based on external length changes. In **isometric contraction**, muscle generates active tension while its total physical length remains constant against an immovable load. The sarcomeres shorten slightly, stretching the internal series elastic components like tendons and titin, but the overall anatomical muscle length does not change.",
+   "say": "In isometric contraction, the muscle develops tension while total length remains fixed, as cross-bridges stretch internal elastic tendons without external shortening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isometric Contraction",
+     "points": [
+      "Total muscle length remains completely constant",
+      "Sarcomere shortening stretches series elastic elements",
+      "No external physical work performed (Work = Force x Distance = 0)",
+      "Energy converted entirely into heat (activation + maintenance heat)"
+     ]
+    },
+    "right": {
+     "title": "Isotonic Contraction",
+     "points": [
+      "Muscle length changes against a constant external load",
+      "External physical work performed moving a resistance",
+      "Concentric (muscle shortens) or Eccentric (muscle lengthens)",
+      "Tension remains constant during the shortening phase"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **isotonic contraction**, the muscle alters its gross anatomical length while sustaining constant active tension against a movable resistance. Isotonic actions subdivide into concentric contractions, where active tension exceeds load and muscle shortens (biceps curl upward), and eccentric contractions, where external load exceeds active tension and muscle lengthens while contracting (lowering a heavy weight).",
+   "say": "In isotonic contraction, muscle moves a load. Concentric actions shorten the muscle, while eccentric actions lengthen it under load, developing peak force.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stim",
+      "label": "Motor Stimulation Initiates Isometric Tension Development"
+     },
+     {
+      "id": "load",
+      "label": "Internal Tension Rises to Exactly Equal the External Load"
+     },
+     {
+      "id": "short",
+      "label": "Sarcomeres Shorten Moving External Load at Constant Tension"
+     },
+     {
+      "id": "work",
+      "label": "Mechanical Work Delivered: Work = Load x Distance Shortened"
+     }
+    ],
+    "edges": [
+     [
+      "stim",
+      "load"
+     ],
+     [
+      "load",
+      "short"
+     ],
+     [
+      "short",
+      "work"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Eccentric contractions generate the greatest mechanical forces per cross-bridge and are particularly prone to microstructural injury. Forced lengthening of actively contracting sarcomeres ruptures Z-discs and tears sarcolemmal membranes, triggering secondary inflammatory cytokine release and calcium influx that manifests clinically as **delayed-onset muscle soreness** twenty-four to forty-eight hours after unaccustomed downhill running.",
+   "say": "Eccentric lengthening contractions generate high tension that can disrupt Z-discs, causing delayed-onset muscle soreness twenty-four hours after exercise.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-beta-sympathomimetics.webp",
+    "alt": "Myocyte contractile strain and metabolic recovery pathways.",
+    "caption": "Sarcomeric mechanical tension and membrane repair mechanisms in contracting myocytes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The relationship between contraction velocity and external load is formulated by the classic **Hill equation**. Contraction velocity is inversely related to load: with zero external load, shortening velocity reaches an absolute maximum determined by the intrinsic ATPase activity of myosin heads. As load increases, shortening velocity decelerates until velocity becomes zero at maximum isometric force.",
+   "say": "The Hill equation shows that shortening velocity is inversely related to load. Contraction is fastest against zero load and slows as load increases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Force-velocity curve of contracting skeletal muscle.",
+    "caption": "Inverse hyperbolic force-velocity relationship in active skeletal muscle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

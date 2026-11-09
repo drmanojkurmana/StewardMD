@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "phy-skeletal-muscle",
+ "subject": "physiology",
+ "title": "Excitation-Contraction Coupling and Triad Junctions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The physiological process converting an electrical action potential on the sarcolemma into mechanical cross-bridge cycling and force development is **excitation-contraction coupling**. This rapid sequence relies upon a specialized internal membrane network comprising transverse tubules and terminal cisternae of the sarcoplasmic reticulum arranged in precise triad junctions.",
+   "say": "Excitation-contraction coupling converts electrical sarcolemmal action potentials into mechanical force via transverse tubules and sarcoplasmic reticulum triads.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+    "alt": "Sarcolemmal transverse tubule and triad junction ultrastructure.",
+    "caption": "Transverse tubule invaginations and sarcoplasmic reticulum triads in skeletal muscle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Invaginations of the plasma membrane, called transverse tubules, penetrate deep into the myocyte interior at each A-I band junction in mammalian skeletal muscle. Flanked on either side by terminal cisternae of the sarcoplasmic reticulum, this arrangement forms a functional **triad**. Action potentials sweep down the transverse tubules, ensuring simultaneous electrical activation of myofibrils throughout the muscle interior.",
+   "say": "Transverse tubules invaginate at A-I band junctions, flanked by terminal cisternae to form triads that conduct action potentials into the interior.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "spike",
+      "label": "Action Potential Sweeps Down Transverse T-Tubule Membrane"
+     },
+     {
+      "id": "sensor",
+      "label": "Voltage-Sensing DHP Receptors Undergo Conformational Shift"
+     },
+     {
+      "id": "ryr",
+      "label": "Mechanical Coupling Unplugs Ryanodine Receptors (RyR1)"
+     },
+     {
+      "id": "ca",
+      "label": "Massive Calcium Efflux Enters Sarcoplasm from Terminal Cisternae"
+     }
+    ],
+    "edges": [
+     [
+      "spike",
+      "sensor"
+     ],
+     [
+      "sensor",
+      "ryr"
+     ],
+     [
+      "ryr",
+      "ca"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Within the transverse tubule membrane, L-type voltage-gated calcium channels act primarily as voltage sensors, known as **dihydropyridine receptors**. Depolarisation of the T-tubule induces a conformational charge movement within the S4 voltage sensors of the dihydropyridine receptor, shifting its cytoplasmic loops without requiring extracellular calcium entry.",
+   "say": "Dihydropyridine receptors in T-tubules act as voltage sensors, shifting conformation upon depolarisation without requiring extracellular calcium influx.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Skeletal Muscle DHPR (Cav1.1)",
+     "points": [
+      "Acts primarily as an electromechanical voltage sensor",
+      "Mechanically coupled directly to RyR1 foot processes",
+      "Contraction occurs in calcium-free extracellular solution",
+      "No calcium-induced calcium release required for initiation"
+     ]
+    },
+    "right": {
+     "title": "Cardiac Muscle DHPR (Cav1.2)",
+     "points": [
+      "Acts as true functional voltage-gated calcium channel",
+      "Admits trigger extracellular calcium into cytosol",
+      "Requires extracellular calcium entry to activate RyR2",
+      "Classic calcium-induced calcium release (CICR) mechanism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The calcium release channel embedded in the sarcoplasmic reticulum terminal cisterna is the **ryanodine receptor**, specifically the skeletal RyR1 isoform. In skeletal muscle, four dihydropyridine receptors form a tetrad physically coupled to the large cytoplasmic foot process of a single RyR1 channel, mechanically pulling open the channel pore upon T-tubule depolarisation.",
+   "say": "Ryanodine receptors in the sarcoplasmic reticulum are mechanically pulled open by dihydropyridine receptors, flooding the sarcoplasm with stored calcium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ryr",
+      "label": "RyR1 Sarcoplasmic Reticulum Calcium Release Channel"
+     },
+     {
+      "id": "eff",
+      "label": "Rapid Efflux Raises Sarcoplasmic Calcium from 0.1 to 10 Micromolar"
+     },
+     {
+      "id": "diff",
+      "label": "Calcium Diffuses Across Myofilament Lattice to Sarcomeres"
+     },
+     {
+      "id": "bind",
+      "label": "Calcium Binds Troponin C to Initiate Cross-Bridge Attachment"
+     }
+    ],
+    "edges": [
+     [
+      "ryr",
+      "eff"
+     ],
+     [
+      "eff",
+      "diff"
+     ],
+     [
+      "diff",
+      "bind"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mutations in the skeletal ryanodine receptor RyR1 underlie **malignant hyperthermia**. Exposure to volatile halogenated anaesthetics like halothane or depolarising muscle relaxants like succinylcholine triggers uncontrolled, sustained opening of RyR1 channels. Massive sarcoplasmic calcium flooding drives continuous muscle rigidity, hypermetabolism, severe lactic acidosis, and lethal hyperpyrexia, treated specifically with the RyR1 antagonist dantrolene.",
+   "say": "Malignant hyperthermia is caused by RyR1 mutations that trigger massive calcium release upon exposure to volatile anaesthetics, treated with dantrolene.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Normal EC Coupling",
+     "Malignant Hyperthermia"
+    ],
+    "rows": [
+     [
+      "RyR1 Gating",
+      "Controlled electromechanical opening",
+      "Uncontrolled sustained channel opening"
+     ],
+     [
+      "Trigger Agents",
+      "Physiological nerve action potential",
+      "Volatile anaesthetics, succinylcholine"
+     ],
+     [
+      "Sarcoplasmic Calcium",
+      "Transient pulse (100 ms duration)",
+      "Massive, persistent cytosolic flooding"
+     ],
+     [
+      "Metabolic Consequence",
+      "Controlled ATP expenditure",
+      "Severe hyperthermia, rhabdomyolysis, acidosis"
+     ],
+     [
+      "Specific Antidote",
+      "None required",
+      "Intravenous Dantrolene (blocks RyR1)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The regulatory protein complex attached to actin filaments that governs cross-bridge interaction is **troponin**. Troponin comprises three distinct polypeptide subunits: Troponin T anchors the complex to tropomyosin, Troponin I binds actin to inhibit myosin cross-bridge attachment at rest, and Troponin C possesses four calcium-binding EF-hand domains that sense cytosolic calcium surges.",
+   "say": "Troponin regulates contraction through three subunits: Troponin T binds tropomyosin, Troponin I inhibits cross-bridges, and Troponin C binds calcium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Troponin Subunit",
+     "Molecular Mass",
+     "Primary Binding Partner",
+     "Functional Role in Contraction"
+    ],
+    "rows": [
+     [
+      "Troponin C (TnC)",
+      "18 kDa",
+      "Calcium ions (4 binding sites)",
+      "Calcium sensor triggering conformational shift"
+     ],
+     [
+      "Troponin I (TnI)",
+      "23 kDa",
+      "Actin and Troponin C",
+      "Inhibitory subunit blocking myosin-actin binding"
+     ],
+     [
+      "Troponin T (TnT)",
+      "37 kDa",
+      "Tropomyosin and Troponin C/I",
+      "Anchors entire troponin complex along thin filament"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In resting muscle, elongated two-stranded alpha-helical **tropomyosin** polymers lie in the groove of the actin thin filament, sterically blocking myosin-binding sites. When calcium binds Troponin C, a conformational shift pulls Troponin I away from actin, allowing tropomyosin to roll forty degrees deeper into the actin groove, uncovering binding sites for myosin cross-bridge attachment.",
+   "say": "At rest, tropomyosin blocks myosin-binding sites on actin. When calcium binds Troponin C, tropomyosin rolls aside, exposing sites for cross-bridge cycling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rest",
+      "label": "Resting Muscle: Tropomyosin Sterically Blocks Myosin Sites on Actin"
+     },
+     {
+      "id": "tnc",
+      "label": "Cytosolic Calcium Binds Low-Affinity Sites on Troponin C"
+     },
+     {
+      "id": "roll",
+      "label": "Troponin I Detaches Allowing Tropomyosin to Roll Deeper into Actin Groove"
+     },
+     {
+      "id": "bind",
+      "label": "Myosin Head Binds Actin Monomer to Initiate Cross-Bridge Cycle"
+     }
+    ],
+    "edges": [
+     [
+      "rest",
+      "tnc"
+     ],
+     [
+      "tnc",
+      "roll"
+     ],
+     [
+      "roll",
+      "bind"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Muscle relaxation is an active energy-dependent process mediated by the sarcoplasmic endoplasmic reticulum calcium ATPase pump, SERCA. SERCA hydrolyses ATP to pump calcium out of the sarcoplasm back into the terminal cisternae against a thousand-fold gradient, where it is buffered by **calsequestrin**. As cytosolic calcium drops below one hundred nanomoles, troponin resets and muscle relaxes.",
+   "say": "Relaxation requires the SERCA pump to sequester calcium back into the sarcoplasmic reticulum, where calsequestrin buffers it until the next action potential.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Myocyte calcium clearance and sarcoplasmic reticulum uptake.",
+    "caption": "Active sarcoplasmic calcium clearance by SERCA pumps during muscle relaxation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
