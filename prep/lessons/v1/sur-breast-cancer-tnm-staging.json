@@ -1,0 +1,265 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Breast Cancer TNM Staging, Regional Nodal Basins, and Sentinel Node Biopsy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Accurate anatomical staging of invasive mammary carcinoma relies on the international **TNM staging** system formulated by the AJCC. Primary tumour assessment designates lesions measuring up to two centimetres in greatest dimension as T1, lesions greater than two up to five centimetres as T2, and tumours exceeding five centimetres as T3. Any tumour directly involving the chest wall musculature or demonstrating cutaneous infiltration with ulceration, satellite nodules, or inflammatory change is staged as T4 regardless of size.",
+   "say": "Tumour staging classifies lesions up to two centimetres as T1, two to five centimetres as T2, and over five centimetres as T3. Direct extension into the chest wall or skin elevates the lesion to T4.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-tnm_breast.webp",
+    "alt": "Anatomical schematic and reference matrix outlining breast tumour dimensions and regional nodal staging tiers.",
+    "caption": "Breast cancer TNM classification: correlating primary tumour dimensions with progressive regional lymphatic metastasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Regional nodal staging defines the biological spread along axillary pathways. Clinical stage N1 denotes mobile ipsilateral level one and level two axillary lymph nodes. When axillary nodes become matted together or fixed to surrounding deep structures, the disease progresses to stage N2a. Metastasis to ipsilateral internal mammary nodes in the absence of axillary lymphadenopathy also constitutes N2b disease. Stage N3 indicates extensive lymphatic dissemination into the **infraclavicular lymph nodes**, internal mammary nodes with axillary involvement, or supraclavicular nodal basins.",
+   "say": "Regional lymphatic staging evaluates axillary spread. Mobile ipsilateral nodes are classified as N1, while fixed or matted nodes indicate N2. Involvement of infraclavicular or supraclavicular nodes represents N3 disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AJCC N Category",
+     "Anatomical Distribution",
+     "Mobility & Clinical Status"
+    ],
+    "rows": [
+     [
+      "N1",
+      "Level I and II axillary nodes",
+      "Clinically mobile and discrete"
+     ],
+     [
+      "N2a",
+      "Level I and II axillary nodes",
+      "Matted or fixed to chest wall"
+     ],
+     [
+      "N2b",
+      "Internal mammary chain",
+      "Clinically detected without axillary disease"
+     ],
+     [
+      "N3a",
+      "Infraclavicular nodal basin",
+      "Level III apex nodal involvement"
+     ],
+     [
+      "N3c",
+      "Supraclavicular nodal group",
+      "High cervical root lymphatic basin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Berg levels subdivide axillary lymph nodes relative to the borders of the pectoralis minor muscle. Level one includes nodes lying lateral and inferior to the lateral border of the pectoralis minor. Level two nodes lie directly posterior to the muscle belly. Level three nodes lie medial and superior to the medial border of pectoralis minor, extending up to the apex of the axilla. Standard surgical clearance removes levels one and two to preserve apical venous drainage and prevent severe **secondary arm lymphoedema**.",
+   "say": "Axillary nodes are divided into three levels by the pectoralis minor muscle. Standard axillary clearance dissects levels one and two to protect deep neurovascular structures and minimize post-surgical arm lymphedema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Level I: Lateral & Inferior to Pectoralis Minor"
+     },
+     {
+      "id": "l2",
+      "label": "Level II: Deep & Posterior to Muscle Belly"
+     },
+     {
+      "id": "l3",
+      "label": "Level III: Medial & Apical up to Costoclavicular Ligament"
+     },
+     {
+      "id": "cleared",
+      "label": "Routine Surgical Clearance: En Bloc Resection of Levels I and II"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l2",
+      "cleared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic standard for staging clinically node-negative axillae without suspicious lymphadenopathy on pre-operative ultrasound is **sentinel lymph node biopsy**. The underlying anatomical concept posits that lymphatic drainage from a primary parenchymal neoplasm follows an orderly path to one or more primary filtering gateway nodes before passing into the broader basin. Identifying and sampling these sentinel nodes determines pathological nodal involvement while sparing node-negative patients the morbidity of complete axillary node clearance.",
+   "say": "Sentinel lymph node biopsy is the standard diagnostic procedure for clinically node-negative breast cancer. It identifies the first gateway node draining the tumour to confirm whether cancer cells have reached the axilla.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-fig1.webp",
+    "alt": "Medical diagram illustrating the lymphatic drainage network of the breast towards the axillary sentinel node.",
+    "caption": "Sentinel lymph node concept: primary afferent lymphatic channels flowing towards the initial drainage station. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mapping the sentinel station employs a dual-tracer localization technique combining radioactive technetium-99m sulfur colloid with visible blue dye, such as isosulfan blue or patent blue V. Radiocolloid is injected into the peritumoral or subareolar lymphatic plexus several hours before surgery. Intraoperatively, the surgeon uses a handheld gamma detector to identify the zone of maximum transcutaneous radioactivity and visualizes blue-stained lymphatic channels entering the **hot blue sentinel node**.",
+   "say": "Dual tracer mapping combines radiolabelled sulfur colloid and blue dye injected near the tumour. The surgeon uses a handheld gamma detector and direct inspection to identify and excise the sentinel lymph node.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tracer",
+      "label": "Periareolar Injection of Tc-99m Radiocolloid & Blue Dye"
+     },
+     {
+      "id": "transit",
+      "label": "Lymphatic Transit Through Dermal Subareolar Plexus"
+     },
+     {
+      "id": "probe",
+      "label": "Handheld Gamma Counter Detects Transcutaneous Hot Spot"
+     },
+     {
+      "id": "excision",
+      "label": "Selective Node Excision with Ten Percent Hot Background Rule"
+     }
+    ],
+    "edges": [
+     [
+      "tracer",
+      "transit"
+     ],
+     [
+      "transit",
+      "probe"
+     ],
+     [
+      "probe",
+      "excision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every excised node that displays visible blue dye, exhibits radioisotope counts exceeding ten percent of the hottest excised node, or feels palpably abnormal is submitted for frozen section or touch imprint cytology. Routine histological analysis includes haematoxylin and eosin staining combined with **cytokeratin immunohistochemistry**. When macrometastatic deposits larger than two millimetres are absent, complete axillary dissection is safely omitted, drastically reducing rates of wound seroma, sensory numbness, and chronic arm swelling.",
+   "say": "Excised sentinel nodes are analysed using standard histology and cytokeratin stains. If macrometastases larger than two millimetres are absent, full axillary dissection is safely avoided, reducing postoperative complications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sentinel Lymph Node Biopsy",
+     "points": [
+      "Minimally invasive targeted nodal excision",
+      "Identifies early microscopic nodal metastases",
+      "Arm lymphoedema risk under five percent",
+      "Preserves intercostobrachial cutaneous nerves"
+     ]
+    },
+    "right": {
+     "title": "Axillary Node Dissection",
+     "points": [
+      "Complete anatomical clearance of levels I and II",
+      "Removes ten or more regional lymph nodes",
+      "Arm lymphoedema risk fifteen to twenty percent",
+      "Frequent post-surgical numbness and axillary web"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The landmark ACOSOG Z0011 clinical trial established that completion axillary node clearance can be omitted in selected patients undergoing breast-conserving surgery who receive whole-breast irradiation and systemic adjuvant therapy. Eligible candidates must have T1 or T2 tumours, non-palpable axillae, and no more than two positive sentinel nodes with **isolated micrometastatic disease**. In this population, tangential whole-breast radiation ports sufficiently sterilize residual microscopic low-axillary disease without worsening locoregional recurrence.",
+   "say": "Clinical trials show that completion axillary clearance can be avoided in patients undergoing breast conserving surgery with only one or two positive sentinel nodes, provided they receive systemic therapy and whole-breast radiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial Criteria",
+     "Permitted Parameters",
+     "Surgical Action"
+    ],
+    "rows": [
+     [
+      "Tumour Size",
+      "T1 or T2 lesions under 5 cm",
+      "Breast-conserving surgery"
+     ],
+     [
+      "Clinical Node Exam",
+      "Non-palpable clinically negative axilla",
+      "Sentinel node biopsy only"
+     ],
+     [
+      "Positive Sentinel Nodes",
+      "One or two involved nodes",
+      "Omit completion ALND"
+     ],
+     [
+      "Adjuvant Radiotherapy",
+      "Whole-breast tangential field radiation",
+      "Sterilizes low-axillary basin"
+     ],
+     [
+      "Systemic Therapy",
+      "Planned endocrine, chemo, or HER2 therapy",
+      "Prevents distant and regional failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distant metastatic evaluation designates disease spreading beyond regional lymph nodes as M1, automatically categorizing the patient as clinical stage four. Common sites of haematogenous dissemination include skeletal cortical bone, pulmonary parenchyma, hepatic lobes, and central nervous tissue. Elevated alkaline phosphatase, localized bone tenderness, or pulmonary nodules mandate dedicated cross-sectional computed tomography, bone scintigraphy, or **positron emission tomography**. Staging reclassification guides the therapeutic transition from curative intent to systemic disease control.",
+   "say": "Distant metastasis classifies disease as stage four, commonly spreading to bones, lungs, liver, and brain. Detecting distant spread shifts management from curative surgical clearance to systemic palliative control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prim",
+      "label": "Invasive Ductal or Lobular Breast Adenocarcinoma"
+     },
+     {
+      "id": "angio",
+      "label": "Microvascular Infiltration & Haematogenous Dissemination"
+     },
+     {
+      "id": "bone",
+      "label": "Axial Skeleton & Long Bone Cortical Secondaries"
+     },
+     {
+      "id": "viscera",
+      "label": "Pulmonary, Hepatic & Central Nervous System Metastases"
+     },
+     {
+      "id": "pet",
+      "label": "Restaging via Whole-Body PET-CT & Systemic Targeted Therapy"
+     }
+    ],
+    "edges": [
+     [
+      "prim",
+      "angio"
+     ],
+     [
+      "angio",
+      "bone"
+     ],
+     [
+      "angio",
+      "viscera"
+     ],
+     [
+      "bone",
+      "pet"
+     ],
+     [
+      "viscera",
+      "pet"
+     ]
+    ]
+   }
+  }
+ ]
+}

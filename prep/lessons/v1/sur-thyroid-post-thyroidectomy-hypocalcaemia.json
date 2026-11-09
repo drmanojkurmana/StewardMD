@@ -1,0 +1,276 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Post-Thyroidectomy Hypocalcaemia, Chvostek Sign, and Tetany Emergency",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most common early metabolic complication encountered after total or completion thyroidectomy is **post-thyroidectomy hypocalcaemia**. It develops primarily from iatrogenic devascularization, venous congestion, traction injury, or accidental surgical excision of the four parathyroid glands. Transient hypocalcaemia occurs in up to thirty percent of patients within twenty-four to forty-eight hours postoperatively, whereas permanent hypoparathyroidism persists in roughly one to two percent.",
+   "say": "Post-thyroidectomy hypocalcaemia is the most common early metabolic complication of thyroid surgery, arising from parathyroid gland devascularization, handling trauma, or accidental removal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypoparathyroidism-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating hypoparathyroidism, calcium regulation, and clinical signs.",
+    "caption": "Postoperative hypoparathyroidism: impaired PTH release, renal calcium wasting, and acute neuromuscular irritability. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Symptoms of acute neuromuscular excitability emerge as serum ionized calcium drops below normal physiological thresholds. Patients initially experience perioral tingling, circumoral numbness, and paresthesias in the fingertips and toes. Latent neuromuscular irritability can be provoked at the bedside by eliciting **Chvostek sign**. Tapping the facial nerve trunk anterior to the external auditory meatus elicits an involuntary ipsilateral twitch of the facial muscles, particularly the upper lip and angle of the mouth.",
+   "say": "Falling calcium levels produce perioral tingling and numbness in the fingers. Chvostek sign demonstrates neuromuscular irritability as tapping the facial nerve triggers facial twitching.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chvostek Sign (Facial Tap)",
+     "points": [
+      "Taps facial nerve anterior to external ear canal",
+      "Triggers ipsilateral twitch of upper lip and alae nasi",
+      "Present in up to fifteen percent of normal individuals",
+      "High sensitivity for early latent hypocalcaemia"
+     ]
+    },
+    "right": {
+     "title": "Trousseau Sign (Carpal Spasm)",
+     "points": [
+      "Inflates blood pressure cuff twenty mmHg above systolic",
+      "Maintains arterial occlusion for three full minutes",
+      "Induces painful carpal spasm (main d'accoucheur)",
+      "Extremely specific (ninety-four percent) for tetany"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A considerably more sensitive and specific bedside clinical indicator of latent tetany is **Trousseau sign**. To elicit the sign, a sphygmomanometer cuff is inflated on the upper arm to twenty millimetres of mercury above the patient's systolic blood pressure, occluding brachial arterial flow for three full minutes. The induced local ischemia exacerbates nerve membrane hyperexcitability, precipitating painful carpopedal spasm, characterized by flexion at the metacarpophalangeal joints, extension of the interphalangeal joints, and adduction of the thumb.",
+   "say": "Trousseau sign is elicited by inflating a blood pressure cuff above systolic pressure for three minutes. Ischemia triggers painful carpal spasm with thumb adduction, termed obstetrician hand.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cuff",
+      "label": "Inflate Cuff 20 mmHg Above Systolic Pressure"
+     },
+     {
+      "id": "time",
+      "label": "Maintain Arterial Occlusion for 3 Minutes"
+     },
+     {
+      "id": "ischemia",
+      "label": "Hypocalcaemic Axonal Ischemia & Depolarization"
+     },
+     {
+      "id": "spasm",
+      "label": "Involuntary Carpal Spasm (Main d'Accoucheur)"
+     },
+     {
+      "id": "confirm",
+      "label": "Confirms Severe Latent Neuromuscular Tetany"
+     }
+    ],
+    "edges": [
+     [
+      "cuff",
+      "time"
+     ],
+     [
+      "time",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "spasm"
+     ],
+     [
+      "spasm",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Untreated severe hypocalcaemia rapidly escalates into life-threatening generalized neuromuscular tetany. Patients suffer agonizing peripheral muscle cramps, painful carpopedal spasms, hyperreflexia, and bronchospasm. The most lethal manifestations are acute **laryngeal stridor from laryngospasm**, which can rapidly cause complete airway obstruction, and cardiac arrhythmias associated with marked QT interval prolongation on electrocardiography, predisposing to torsades de pointes and sudden ventricular fibrillation.",
+   "say": "Severe hypocalcaemia triggers frank tetany, laryngospasm with acute suffocation, and electrocardiographic QT interval prolongation predisposing to fatal ventricular arrhythmias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Clinical Manifestation of Hypocalcaemia",
+     "Pathophysiological Consequence"
+    ],
+    "rows": [
+     [
+      "Neuromuscular",
+      "Perioral paresthesias, hyperreflexia, painful carpal tetany",
+      "Lowered threshold for axonal membrane spontaneous depolarization"
+     ],
+     [
+      "Respiratory",
+      "Laryngospasm, severe inspiratory stridor, cyanosis",
+      "Involuntary adductor spasm of intrinsic vocal fold muscles"
+     ],
+     [
+      "Cardiovascular",
+      "Prolonged QT interval, T-wave inversion, torsades de pointes",
+      "Delayed myocardial ventricular repolarization due to low extracellular calcium"
+     ],
+     [
+      "Central Nervous",
+      "Irritability, generalized tonic-clonic convulsions, psychosis",
+      "Cerebral cortical neuronal hyperexcitability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate emergency intervention is mandatory for symptomatic tetany, laryngospasm, or severe hypocalcaemia with corrected calcium below seven point five milligrams per decilitre. The therapeutic gold standard is slow intravenous infusion of **ten percent calcium gluconate**. Ten millilitres of ten percent calcium gluconate is diluted in one hundred millilitres of five percent dextrose and infused intravenously over ten to fifteen minutes under continuous electrocardiographic monitoring to prevent bradycardia.",
+   "say": "Acute symptomatic tetany requires immediate slow intravenous infusion of ten milliliters of ten percent calcium gluconate over ten minutes under continuous cardiac monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symptoms",
+      "label": "Acute Symptomatic Tetany or Laryngospasm"
+     },
+     {
+      "id": "iv",
+      "label": "10 mL of 10% Calcium Gluconate IV Over 10 Minutes"
+     },
+     {
+      "id": "ecg",
+      "label": "Continuous Cardiac Telemetry Monitoring"
+     },
+     {
+      "id": "drip",
+      "label": "Continuous IV Calcium Infusion (1 mg/kg/hour)"
+     },
+     {
+      "id": "oral",
+      "label": "Transition to Oral Calcium Carbonate & Calcitriol"
+     }
+    ],
+    "edges": [
+     [
+      "symptoms",
+      "iv"
+     ],
+     [
+      "iv",
+      "ecg"
+     ],
+     [
+      "iv",
+      "drip"
+     ],
+     [
+      "drip",
+      "oral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In clinical practice, calcium gluconate is strongly preferred over calcium chloride for peripheral intravenous administration. While calcium chloride contains three times more elemental calcium than calcium gluconate, accidental extravasation of calcium chloride into subcutaneous tissues causes catastrophic **tissue necrosis and sloughing**. Calcium gluconate is far less caustic to peripheral venous endothelium, making it the safer choice unless wide central venous access is already established.",
+   "say": "Calcium gluconate is preferred over calcium chloride for peripheral infusion because calcium chloride extravasation causes catastrophic full-thickness subcutaneous necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "10% Calcium Gluconate (Preferred)",
+     "points": [
+      "Contains 93 mg elemental calcium per 10 mL ampoule",
+      "Far less irritating to peripheral vascular endothelium",
+      "Safe for peripheral intravenous line administration",
+      "Extravasation rarely causes deep cutaneous ulceration"
+     ]
+    },
+    "right": {
+     "title": "10% Calcium Chloride (Central Only)",
+     "points": [
+      "Contains 272 mg elemental calcium per 10 mL ampoule",
+      "Highly caustic and irritant hypertonic solution",
+      "Restricted to verified central venous catheter lines",
+      "Accidental extravasation causes severe gangrenous sloughing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Once acute tetany resolves, patients are transitioned to maintenance oral calcium supplementation combined with active vitamin D metabolites. Because parathyroid hormone is required in renal tubular cells for the one-alpha-hydroxylation of vitamin D, hypoparathyroid patients cannot metabolize inactive ergocalciferol. Therapy therefore mandates oral **calcitriol administration** (1,25-dihydroxycholecalciferol) combined with high-dose elemental calcium carbonate, aiming to keep serum calcium in the low-normal range between eight point zero and eight point five milligrams per decilitre.",
+   "say": "Maintenance therapy requires oral calcitriol and calcium carbonate. Because parathyroid hormone deficiency prevents native vitamin D activation, oral active calcitriol is indispensable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Agent",
+     "Dosage and Administration",
+     "Therapeutic Mechanism and Target"
+    ],
+    "rows": [
+     [
+      "Calcium Carbonate",
+      "1 to 3 grams elemental calcium daily in divided doses",
+      "Substrates intestinal calcium absorption; requires acidic gastric pH"
+     ],
+     [
+      "Calcitriol (1,25-OH2-D3)",
+      "0.25 to 1.0 micrograms daily",
+      "Bypasses deficient renal 1-alpha-hydroxylase to stimulate gut calcium transport"
+     ],
+     [
+      "Magnesium Sulfate",
+      "Correct concomitant hypomagnesaemia (target >2.0 mg/dL)",
+      "Reverses intracellular magnesium depletion that impairs PTH receptor function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During thyroidectomy, if a parathyroid gland is accidentally excised or found completely devascularized on the thyroid specimen, the surgeon must perform **parathyroid autotransplantation**. The gland is diced into one-millimetre fragments, confirmed by frozen section biopsy to ensure it is not metastatic carcinoma, and implanted into muscular pockets within the sternocleidomastoid muscle or non-dominant forearm brachioradialis. Neovascularization restores endocrine parathyroid function within four to six weeks.",
+   "say": "Devascularized parathyroid glands must be diced and autotransplanted into muscular pockets in the sternocleidomastoid or forearm, restoring hormone production within six weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Devascularized or Inadvertently Excised Parathyroid"
+     },
+     {
+      "id": "frozen",
+      "label": "Confirm Parathyroid Tissue on Frozen Section"
+     },
+     {
+      "id": "dice",
+      "label": "Mince Gland into 1 mm Micro-Fragments on Chilled Saline"
+     },
+     {
+      "id": "pocket",
+      "label": "Implant Fragments into Individual Muscular Pockets"
+     },
+     {
+      "id": "mark",
+      "label": "Close Pocket with Non-Absorbable Suture Clip Marker"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "frozen"
+     ],
+     [
+      "frozen",
+      "dice"
+     ],
+     [
+      "dice",
+      "pocket"
+     ],
+     [
+      "pocket",
+      "mark"
+     ]
+    ]
+   }
+  }
+ ]
+}

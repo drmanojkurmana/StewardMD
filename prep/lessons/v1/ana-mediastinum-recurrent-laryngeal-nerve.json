@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-mediastinum",
+ "subject": "anatomy",
+ "title": "Mediastinal Nerves: Recurrent Laryngeal, Sympathetic Trunk, and Splanchnic Outflow",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The recurrent laryngeal nerves provide motor innervation to all intrinsic muscles of the larynx except the cricothyroid. In the superior mediastinum, the left **recurrent laryngeal nerve** arises from the vagus nerve as it crosses the aortic arch, looping under the arch immediately lateral to the ligamentum arteriosum.",
+   "say": "The recurrent laryngeal nerves innervate all intrinsic laryngeal muscles except cricothyroid. In the chest, the left nerve branches from the vagus, looping beneath the aortic arch lateral to the ligamentum arteriosum.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-laryngeal-nerves.svg",
+    "alt": "Anatomical schematic illustrating asymmetrical trajectories of right and left recurrent laryngeal nerves",
+    "caption": "Asymmetrical looping of recurrent laryngeal nerves beneath subclavian artery and aortic arch. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ascending through the superior mediastinum, the left recurrent laryngeal nerve occupies the tracheo-oesophageal groove. Compression by saccular aneurysms of the aortic arch, hilar lymphadenopathy, or left atrial enlargement in mitral stenosis paralyses the left vocal fold, presenting as hoarseness termed **Ortner syndrome** (cardiovocal syndrome).",
+   "say": "Ascending in the tracheo-oesophageal groove, the left recurrent nerve is vulnerable to mediastinal compression. Aortic aneurysms or left atrial enlargement can compress it, causing hoarseness termed Ortner syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Recurrent Course",
+     "points": [
+      "Arises within thorax at lower aortic arch border",
+      "Hooks beneath ligamentum arteriosum",
+      "Longer mediastinal course (vulnerable to chest masses)",
+      "Supplies cardiac autonomic branches"
+     ]
+    },
+    "right": {
+     "title": "Right Recurrent Course",
+     "points": [
+      "Arises in root of neck at subclavian artery",
+      "Hooks beneath right subclavian artery",
+      "Does not enter superior mediastinum",
+      "Vulnerable during thyroidectomy and subclavian surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The thoracic **sympathetic trunk** descends along the heads of the ribs in the upper thorax, moving onto the anterolateral aspects of the vertebral bodies in the lower thorax. It typically comprises eleven or twelve interconnected ganglia connected to spinal nerves by white and grey rami communicantes.",
+   "say": "The thoracic sympathetic trunk descends across the rib heads, shifting onto vertebral bodies inferiorly. It contains eleven or twelve ganglia linked to intercostal nerves by white and grey rami.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglion Group",
+     "Thoracic Location",
+     "Principal Outflow",
+     "Target Organ System"
+    ],
+    "rows": [
+     [
+      "Stellate Ganglion",
+      "Neck of 1st rib above cupola",
+      "Cervicothoracic sympathetic fibers",
+      "Pupillodilator, head and neck sweat glands"
+     ],
+     [
+      "Upper Thoracic (T2-T4)",
+      "Heads of 2nd to 4th ribs",
+      "Cardiac and pulmonary plexuses",
+      "Accelerates heart rate and bronchodilates"
+     ],
+     [
+      "Greater Splanchnic",
+      "T5 through T9 ganglia",
+      "Pierces crus to coeliac ganglion",
+      "Foregut viscera (stomach, liver, pancreas)"
+     ],
+     [
+      "Lesser Splanchnic",
+      "T10 and T11 ganglia",
+      "Pierces crus to aorticorenal ganglion",
+      "Midgut viscera and renal vasculature"
+     ],
+     [
+      "Least Splanchnic",
+      "T12 ganglion",
+      "Pierces crus to renal plexus",
+      "Renal parenchyma and adrenal medulla"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fusion of the first thoracic sympathetic ganglion with the inferior cervical ganglion forms the **stellate ganglion**, resting on the neck of the first rib. Apical bronchogenic carcinomas (Pancoast tumors) infiltrating this ganglion destroy cervical sympathetic innervation, provoking Horner syndrome: ipsilateral miosis, partial ptosis, and anhidrosis.",
+   "say": "Fusion of the first thoracic and inferior cervical ganglia creates the stellate ganglion on the first rib. Pancoast apical lung tumors infiltrating this structure cause Horner syndrome with ptosis, miosis, and anhidrosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Pancoast-Induced Horner Syndrome",
+    "nodes": [
+     {
+      "id": "tumor",
+      "label": "Apical Superior Sulcus Bronchogenic Neoplasm (Pancoast Tumor)"
+     },
+     {
+      "id": "invade",
+      "label": "Direct Invasion of Stellate Ganglion on Neck of First Rib"
+     },
+     {
+      "id": "interr",
+      "label": "Interruption of Cervical Sympathetic Pupillodilator Fibers"
+     },
+     {
+      "id": "horner",
+      "label": "Triad of Horner Syndrome: Ptosis, Miosis, Facial Anhidrosis"
+     }
+    ],
+    "edges": [
+     [
+      "tumor",
+      "invade"
+     ],
+     [
+      "invade",
+      "interr"
+     ],
+     [
+      "interr",
+      "horner"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The thoracic splanchnic nerves carry preganglionic sympathetic fibres to prevertebral abdominal plexuses. The **greater splanchnic nerve** arises from the fifth to ninth thoracic ganglia, descending obliquely through the posterior mediastinum to pierce the crura of the diaphragm and synapse in the coeliac prevertebral ganglion.",
+   "say": "Thoracic splanchnic nerves transmit preganglionic fibers to abdominal ganglia. The greater splanchnic nerve stems from ganglia T5 to T9, traversing the diaphragm to synapse in the coeliac ganglion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Splanchnic Nerve",
+     "Thoracic Ganglion Roots",
+     "Diaphragmatic Passage",
+     "Terminal Synapse Site"
+    ],
+    "rows": [
+     [
+      "Greater Splanchnic",
+      "T5, T6, T7, T8, T9",
+      "Pierces muscular crus of diaphragm",
+      "Coeliac prevertebral ganglion"
+     ],
+     [
+      "Lesser Splanchnic",
+      "T10 and T11",
+      "Pierces muscular crus of diaphragm",
+      "Aorticorenal and superior mesenteric"
+     ],
+     [
+      "Least Splanchnic",
+      "T12 (lowest ganglion)",
+      "Passes behind medial arcuate ligament",
+      "Renal plexus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Occupying the anterior part of the superior mediastinum and extending into the anterior mediastinum is the **thymus gland**. Highly developed in infancy for T-lymphocyte maturation and immunological self-tolerance, it undergoes post-pubertal involution, being gradually replaced by fibrofatty connective tissue in adult life.",
+   "say": "The thymus gland occupies the anterior part of the superior mediastinum. Essential during infancy for T-cell education, it undergoes involution after puberty, turning into fibrofatty tissue in adults.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-mediastinum-divisions.svg",
+    "alt": "Anatomical schematic showing thymic location in superior and anterior mediastinum",
+    "caption": "Location of the thymus gland spanning superior and anterior mediastinal compartments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In adults, pathological enlargement of the thymus can occur as benign thymic hyperplasia or malignant **thymoma**. Approximately thirty to forty percent of patients with thymoma have concurrent myasthenia gravis, caused by circulating anti-acetylcholine receptor autoantibodies directed against the neuromuscular junction.",
+   "say": "Adult thymic enlargement manifests as thymic hyperplasia or thymoma. Over one-third of patients with thymoma suffer from myasthenia gravis due to autoantibodies against acetylcholine receptors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thymoma Presentation",
+     "points": [
+      "Anterior mediastinal mass on chest CT",
+      "30-40% associated with myasthenia gravis",
+      "Presents with diplopia, ptosis, muscle weakness",
+      "Indication for surgical transsternal thymectomy"
+     ]
+    },
+    "right": {
+     "title": "Retrosternal Goitre",
+     "points": [
+      "Extends downward from cervical thyroid gland",
+      "Superior mediastinal mass compressing trachea",
+      "Presents with stridor, dysphagia, tracheal deviation",
+      "Moves upward on swallowing during fluoroscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical excision of anterior mediastinal thymomas requires careful protection of both **phrenic nerves**, which descend vertically along the lateral margins of the pericardium. Accidental thermal or traction injury to the phrenic nerve provokes immediate diaphragmatic paralysis, compromising postoperative pulmonary function.",
+   "say": "Surgical removal of mediastinal thymomas demands meticulous preservation of both phrenic nerves flanking the pericardium. Inadvertent injury causes diaphragmatic paralysis and postoperative respiratory compromise.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Hazards in Anterior Mediastinal Resection",
+    "nodes": [
+     {
+      "id": "stern",
+      "label": "Median Sternotomy Exposure of Anterior Mediastinum"
+     },
+     {
+      "id": "id",
+      "label": "Identify Both Phrenic Nerves on Lateral Pericardial Borders"
+     },
+     {
+      "id": "dissect",
+      "label": "Meticulous Dissection of Thymoma Clear of Innominate Vein"
+     },
+     {
+      "id": "protect",
+      "label": "Preserves Bilateral Diaphragmatic Motor Function"
+     }
+    ],
+    "edges": [
+     [
+      "stern",
+      "id"
+     ],
+     [
+      "id",
+      "dissect"
+     ],
+     [
+      "dissect",
+      "protect"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "6d10e09f-2cfc-4fff-af9d-f87a4d2d925b",
+  "0e37047c-4621-4741-aaa4-75db07eec846",
+  "c1c1f90c-2982-4ee2-9010-84a669d0ea17"
+ ]
+}

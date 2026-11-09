@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-motor-reflexes",
+  "subject": "physiology",
+  "title": "Golgi Tendon Organs, Polysynaptic Reflexes, and Spinal Shock",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Unlike muscle spindles that lie in parallel with muscle fibers, tension-sensing encapsulated receptors situated at the junction between muscle fibers and tendon fascicles are aligned in series. These encapsulated sense organs are **Golgi tendon organs**, which are exquisitely positioned to monitor active muscle contractile tension rather than passive length changes.",
+      "say": "Golgi tendon organs are encapsulated receptors in series with muscle fibers that monitor muscle tension.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "muscle_tension",
+            "label": "Active Skeletal Muscle Contraction Generates High Longitudinal Tension"
+          },
+          {
+            "id": "tendon_pinch",
+            "label": "Collagen Braids in Tendon Straighten, Pinching Interwoven Nerve Terminals"
+          },
+          {
+            "id": "ib_discharge",
+            "label": "Group Ib Sensory Axons Deform, Firing Volleys Proportional to Active Force"
+          },
+          {
+            "id": "spinal_relay",
+            "label": "Ib Afferents Enter Spinal Cord to Engage Polysynaptic Inhibitory Circuits"
+          }
+        ],
+        "edges": [
+          [
+            "muscle_tension",
+            "tendon_pinch"
+          ],
+          [
+            "tendon_pinch",
+            "ib_discharge"
+          ],
+          [
+            "ib_discharge",
+            "spinal_relay"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When a contracting muscle generates extreme contractile force, sensory group Ib afferents from Golgi tendon organs enter the spinal cord and synapse on inhibitory Ib interneurons. These interneurons release glycine to inhibit the homonymous alpha motor neuron pool, producing sudden relaxation known as the **inverse stretch reflex**, protecting muscle insertions from avulsion.",
+      "say": "The inverse stretch reflex relaxes an intensely contracting muscle to protect tendons from avulsion injury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Muscle Spindle Stretch Reflex",
+          "points": [
+            "Arranged in parallel with extrafusal skeletal muscle fibers",
+            "Monitored by primary group Ia and secondary group II afferents",
+            "Monosynaptic excitatory reflex arc onto homonymous alpha motor neuron",
+            "Functions to maintain muscle length and oppose passive stretching"
+          ]
+        },
+        "right": {
+          "title": "Golgi Tendon Inverse Stretch Reflex",
+          "points": [
+            "Arranged in series with skeletal muscle fibers at musculotendinous junction",
+            "Monitored by sensory group Ib afferent nerve fibers",
+            "Polysynaptic inhibitory reflex arc engaging inhibitory Ib interneurons",
+            "Functions to regulate muscle tension and prevent contractile rupture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In patients with severe upper motor neuron spasticity resulting from corticospinal tract transection, passive limb extension initially meets intense resistance due to hyperactive stretch reflexes. Upon applying persistent forceful pressure, sudden collapse of muscle resistance occurs, creating the classic **clasp-knife phenomenon** mediated by Golgi tendon organ and secondary spindle afferent recruitment.",
+      "say": "The clasp-knife phenomenon shows initial spastic resistance followed by sudden collapse from tension receptors.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/spinal-cord-injury-rehab-fig1.webp",
+        "caption": "Spinal cord injury demonstrating initial flaccidity progressing to severe spasticity and hyperreflexia.",
+        "alt": "Spinal cord injury progression from spinal shock to spasticity"
+      }
+    },
+    {
+      "tx": "Painful or noxious cutaneous stimulation of a limb elicits an automatic protective movement that pulls the threatened extremity away from the offending stimulus. This protective response is the **flexor withdrawal reflex**, a polysynaptic reflex arc wherein cutaneous nociceptive afferents activate chains of spinal interneurons to excite ipsilateral flexor muscles while simultaneously inhibiting ipsilateral extensors.",
+      "say": "The flexor withdrawal reflex is a polysynaptic response pulling an injured limb away from noxious stimuli.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "noxious_pin",
+            "label": "Stepping on Sharp Tack Activates Cutaneous A-Delta and C Nociceptors"
+          },
+          {
+            "id": "interneuron_spread",
+            "label": "Afferents Enter Spinal Cord and Branch Across Multiple Spinal Segments"
+          },
+          {
+            "id": "flexor_excite",
+            "label": "Interneurons Excite Ipsilateral Flexor Alpha Motor Neurons (Hamstrings, Hip)"
+          },
+          {
+            "id": "limb_withdrawal",
+            "label": "Ipsilateral Leg Rapidly Flexes, Withdrawing Foot Upward Away from Pain"
+          }
+        ],
+        "edges": [
+          [
+            "noxious_pin",
+            "interneuron_spread"
+          ],
+          [
+            "interneuron_spread",
+            "flexor_excite"
+          ],
+          [
+            "flexor_excite",
+            "limb_withdrawal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "To prevent loss of balance when an injured limb flexes rapidly off the ground, the withdrawal reflex couples automatically with postural support in the opposite extremity. Commissural interneurons cross the spinal midline to excite contralateral extensor motor neurons, executing the **crossed extensor reflex** that stiffens the opposite leg to bear total body weight.",
+      "say": "The crossed extensor reflex extends the opposite limb across the midline to maintain postural support.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ipsilateral Limb (Withdrawal)",
+          "points": [
+            "Cutaneous pain afferents trigger polysynaptic interneuronal chains",
+            "Excites ipsilateral flexor muscles (hip flexors, knee flexors)",
+            "Inhibits ipsilateral extensor muscles via reciprocal inhibition",
+            "Rapidly lifts injured limb upward away from offending painful object"
+          ]
+        },
+        "right": {
+          "title": "Contralateral Limb (Crossed Extension)",
+          "points": [
+            "Commissural interneurons cross anterior white commissure to opposite horn",
+            "Excites contralateral extensor muscles (quadriceps femoris, gastrocnemius)",
+            "Inhibits contralateral flexor muscles to stabilize knee extension",
+            "Provides solid postural support column to bear entire body weight"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Noxious stimulation typically evokes muscular contractions that outlast the physical duration of the initiating stimulus by hundreds of milliseconds. This prolonged motor output is generated by **reverberating interneuronal circuits** within the spinal grey matter, where closed self-re-exciting neuronal loops maintain repetitive firing until synaptic fatigue or descending inhibition intervenes.",
+      "say": "Reverberating interneuronal loops in the spinal cord generate prolonged afterdischarge following pain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "primary_input",
+            "label": "High-Intensity Sensory Afferent Delivers Brief Synchronous Firing Burst"
+          },
+          {
+            "id": "loop_entry",
+            "label": "Signals Feed into Closed Recurrent Loops of Spinal Excitatory Interneurons"
+          },
+          {
+            "id": "reverberation",
+            "label": "Interneurons Fire Collaterally Back onto Upstream Nodes in Closed Circuit"
+          },
+          {
+            "id": "afterdischarge",
+            "label": "Motor Neurons Discharge Sustained Afterdischarge Continuing Seconds Past Stimulus"
+          }
+        ],
+        "edges": [
+          [
+            "primary_input",
+            "loop_entry"
+          ],
+          [
+            "loop_entry",
+            "reverberation"
+          ],
+          [
+            "reverberation",
+            "afterdischarge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immediate transection or severe mechanical disruption of the spinal cord causes complete loss of all reflex activity, motor power, and sensory awareness below the level of the injury. This profound state of flaccid depression is **spinal shock**, resulting from the sudden cessation of tonic facilitatory descending impulses from higher brainstem and cortical motor centers.",
+      "say": "Spinal shock causes complete loss of reflexes and flaccidity below an acute spinal cord injury.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cauda-equina-syndrome-fig1.webp",
+        "caption": "Lumbosacral nerve root compression illustrating flaccid paralysis and absent segmental reflex arcs.",
+        "alt": "Cauda equina syndrome causing areflexic flaccid paresis and autonomic failure"
+      }
+    },
+    {
+      "tx": "Spinal shock typically persists for days to weeks in humans, during which arterial hypotension, flaccid paralysis, and urinary retention with overflow incontinence dominate. As spinal interneurons upregulate postsynaptic receptors and sprout new synaptic contacts, spinal shock gradually resolves into hyperreflexia, spasticity, and emergence of **mass reflex autonomic storms**.",
+      "say": "After spinal shock resolves, denervation hypersensitivity leads to hyperreflexia and spastic mass reflexes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "acute_transect",
+            "label": "Acute Transection Eliminates Facilitatory Vestibulospinal and Reticulospinal Drive"
+          },
+          {
+            "id": "flaccid_shock",
+            "label": "Motor Neurons Become Deeply Hyperpolarized with Absent Reflexes and Flaccidity"
+          },
+          {
+            "id": "synaptic_sprout",
+            "label": "Spinal Neurons Upregulate Receptors and Undergo Collateral Synaptic Sprouting"
+          },
+          {
+            "id": "spastic_recovery",
+            "label": "Reflexes Return Hyperactive with Clonus, Spasticity, and Mass Autonomic Storms"
+          }
+        ],
+        "edges": [
+          [
+            "acute_transect",
+            "flaccid_shock"
+          ],
+          [
+            "flaccid_shock",
+            "synaptic_sprout"
+          ],
+          [
+            "synaptic_sprout",
+            "spastic_recovery"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

@@ -91,7 +91,7 @@ async function shot(name) {
 // The app's own auth bootstrap may assign window.SMD_AUTH after boot; pin the signed-in stub for the whole run.
 const SIGN_IN = `(function(){var A={currentUser:{uid:"u1",displayName:"Asha Rao",getIdToken:function(){return Promise.resolve("tok-asha");}}}; try{Object.defineProperty(window,"SMD_AUTH",{configurable:true,get:function(){return A;},set:function(){}});}catch(e){window.SMD_AUTH=A;}})(); try{localStorage.setItem("smd_prep_arena_in","1");}catch(e){}`;
 // Speech stubs: speaking ends at once; the recognizer hears "B" the first time and nothing after.
-const SPEECH = `window.SpeechSynthesisUtterance=function(t){this.text=t;}; window.__said=[]; Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__said.push(u.text); setTimeout(function(){u.onend&&u.onend();},20);},cancel:function(){}}});
+const SPEECH = `window.SMD_PREP_VOICE=false; window.SpeechSynthesisUtterance=function(t){this.text=t;}; window.__said=[]; Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__said.push(u.text); setTimeout(function(){u.onend&&u.onend();},20);},cancel:function(){}}});
 window.SpeechRecognition=window.webkitSpeechRecognition=function(){var self=this; this.start=function(){window.__heard=(window.__heard||0)+1; setTimeout(function(){ if (!window.__heardB) { window.__heardB = 1; self.onresult&&self.onresult({results:[[{transcript:"B"}]]}); } self.onend&&self.onend();},30);}; this.stop=function(){};};`;
 
 try {
@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_focus");}catch(e){} indexedDB.deleteDatabase("prep-bank"); ${SIGN_IN} return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-feed]");`, 20000), "Play loads and home shows its section");
-  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep118";`) === true, "all nine Play rows; loader prep118");
+  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep132";`) === true, "all nine Play rows; loader prep132");
   // Header: Close and Search at the same gutter (owner screenshot 2026-10-30: Search sat one slot in from the edge).
   const gut = await ev(`var c=document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f=document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"), m=document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]"); var a=c.getBoundingClientRect(), b=f.getBoundingClientRect(); return JSON.stringify({ l: Math.round(a.left), r: Math.round(innerWidth - b.right), nav: document.getElementById("smdPrep").classList.contains("pn-navon"), menu: m ? getComputedStyle(m).display : "none" });`);
   const g = JSON.parse(gut);
@@ -211,7 +211,7 @@ try {
   ok(await until(`var r=PREP._st.run; return !!r && r.title === "Voice mode" && !!document.getElementById("pvVoice");`, 10000), "voice: a set with the voice bar");
   ok(await until(`var r=PREP._st.run; return r && r.ans[0] === 1;`, 8000), "voice: heard B and answered B");
   ok(await until(`return PREP._st.run.i >= 1;`, 8000), "voice: told the verdict and moved on by itself");
-  ok(await ev(`return window.__said.length >= 2 && /Option A\\./.test(window.__said[0]);`) === true, "voice: read the question and the options aloud");
+  ok(await ev(`return window.__said.length >= 2 && /Option A\\./.test(window.__said.join(" "));`) === true, "voice: read the question and the options aloud");
   await shot("play-voice");
   // The stub hears "B" once only, so question 2 hears nothing: two tries, then "Tap your answer" (no endless loop).
   await until(`return /Tap your answer/.test((document.getElementById("pvVoiceT")||{}).textContent || "");`, 8000);

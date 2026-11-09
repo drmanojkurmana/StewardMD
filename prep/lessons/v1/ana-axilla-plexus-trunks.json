@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "ana-axilla-plexus",
+ "subject": "anatomy",
+ "title": "Brachial Plexus Architecture: Roots, Trunks and Cords",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The somatic motor and sensory innervation of the upper limb is provided by the **brachial plexus**, formed by the ventral rami of the fifth, sixth, seventh, and eighth cervical spinal nerves and the first thoracic spinal nerve (C5-T1). Small contributions can arise from C4 (prefixed plexus) or T2 (postfixed plexus).",
+   "say": "Upper limb innervation is supplied by the brachial plexus, formed by the ventral rami of C5 through T1 spinal nerves. Small contributions may arise from C4 in a prefixed plexus or T2 in a postfixed plexus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-brachial-plexus.svg",
+    "alt": "Brachial plexus schematic: roots, trunks, divisions, cords, and terminal branches",
+    "caption": "Brachial plexus architecture: roots, trunks, divisions, cords, and branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical layout of the brachial plexus is remembered by the classic mnemonic: Remember To Drink Cold Beer, corresponding to Roots, Trunks, Divisions, Cords, and Branches. The five roots emerge between scalenus anterior and scalenus medius in the posterior triangle of the neck, uniting into three **trunks** above the clavicle.",
+   "say": "The layout of the plexus follows five successive stages: Roots, Trunks, Divisions, Cords, and Branches. Five roots emerge between scalene muscles in the neck, uniting into three trunks above the clavicle.",
+   "vis": {
+    "kind": "flow",
+    "title": "Plexus Morphological Progression",
+    "nodes": [
+     {
+      "id": "roots",
+      "label": "5 Roots: C5, C6, C7, C8, T1"
+     },
+     {
+      "id": "trunks",
+      "label": "3 Trunks: Upper, Middle, Lower"
+     },
+     {
+      "id": "div",
+      "label": "6 Divisions: 3 Anterior, 3 Posterior"
+     },
+     {
+      "id": "cords",
+      "label": "3 Cords: Lateral, Posterior, Medial"
+     }
+    ],
+    "edges": [
+     [
+      "roots",
+      "trunks"
+     ],
+     [
+      "trunks",
+      "div"
+     ],
+     [
+      "div",
+      "cords"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Roots C5 and C6 unite to form the **upper trunk**, C7 continues independently as the middle trunk, and C8 and T1 unite to form the lower trunk. Two important nerves arise directly from roots in the neck: the dorsal scapular nerve (C5 to rhomboids) and the long thoracic nerve (C5, C6, C7 to serratus anterior).",
+   "say": "Roots C5 and C6 join to form the upper trunk, C7 continues as the middle trunk, and C8 and T1 form the lower trunk. The dorsal scapular nerve and long thoracic nerve arise directly from roots in the neck.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plexus Level",
+     "Structural Unit",
+     "Constituent Roots",
+     "Key Named Branches"
+    ],
+    "rows": [
+     [
+      "Roots",
+      "Ventral rami",
+      "C5, C6, C7, C8, T1",
+      "Long thoracic nerve, dorsal scapular nerve"
+     ],
+     [
+      "Upper Trunk",
+      "Convergence of C5 and C6",
+      "C5, C6",
+      "Suprascapular nerve, nerve to subclavius"
+     ],
+     [
+      "Middle Trunk",
+      "Direct continuation of C7",
+      "C7",
+      "Zero branches arising directly"
+     ],
+     [
+      "Lower Trunk",
+      "Convergence of C8 and T1",
+      "C8, T1",
+      "Zero branches; passes over first rib"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From the upper trunk arise two branches: the **suprascapular nerve** (C5-C6), which traverses the suprascapular notch beneath the superior transverse scapular ligament to innervate supraspinatus and infraspinatus, and the nerve to subclavius. The middle and lower trunks give off no direct branches in the neck.",
+   "say": "The upper trunk gives off the suprascapular nerve to supraspinatus and infraspinatus, and the nerve to subclavius. The middle and lower trunks give off no direct branches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Supraclavicular Branches",
+     "points": [
+      "Dorsal scapular nerve (C5 to rhomboids)",
+      "Long thoracic nerve of Bell (C5-C7)",
+      "Suprascapular nerve (C5-C6)",
+      "Nerve to subclavius (C5-C6)"
+     ]
+    },
+    "right": {
+     "title": "Infraclavicular Branches",
+     "points": [
+      "Arise exclusively from cords in axilla",
+      "Surround second part of axillary artery",
+      "Supply limb muscle compartments",
+      "Medial, lateral, and posterior cord origins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "As the three trunks pass posterior to the clavicle through the cervicoaxillary canal, each trunk splits into an anterior division and a posterior division. The three **posterior divisions** of all three trunks unite in the axilla to form the single large posterior cord, carrying motor and sensory fibres dedicated to extensor limb compartments.",
+   "say": "Behind the clavicle, each trunk splits into anterior and posterior divisions. All three posterior divisions unite to create the posterior cord, which innervates extensor muscle compartments of the upper limb.",
+   "vis": {
+    "kind": "flow",
+    "title": "Divisions to Cords Assembly",
+    "nodes": [
+     {
+      "id": "ant12",
+      "label": "Anterior Divisions of Upper and Middle"
+     },
+     {
+      "id": "lat",
+      "label": "Lateral Cord (C5, C6, C7)"
+     },
+     {
+      "id": "ant3",
+      "label": "Anterior Division of Lower Trunk"
+     },
+     {
+      "id": "med",
+      "label": "Medial Cord (C8, T1)"
+     }
+    ],
+    "edges": [
+     [
+      "ant12",
+      "lat"
+     ],
+     [
+      "ant3",
+      "med"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anterior divisions of the upper and middle trunks unite to form the **lateral cord** (C5, C6, C7). The anterior division of the lower trunk continues independently as the medial cord (C8, T1). The cords are named strictly according to their anatomical relationship to the second part of the axillary artery deep to pectoralis minor.",
+   "say": "The anterior divisions of the upper and middle trunks form the lateral cord, while the anterior division of the lower trunk forms the medial cord. Cords are named for their position relative to the axillary artery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/brachial-neuritis-fig1.webp",
+    "alt": "Brachial plexus cords surrounding the axillary artery and terminal nerves",
+    "caption": "Topographical cords surrounding the axillary artery in the axilla. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **posterior cord** gives off five branches remembered by the mnemonic STAR: Subscapular upper, Thoracodorsal, Axillary, Radial, and Subscapular lower. The radial nerve is the largest terminal branch of the entire brachial plexus, supplying the triceps brachii, all forearm extensors, and the anatomical snuffbox skin.",
+   "say": "The posterior cord gives off five branches: upper subscapular, thoracodorsal, axillary, radial, and lower subscapular. The radial nerve is the largest terminal branch, innervating all extensor muscles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plexus Cord",
+     "Root Contributions",
+     "Key Non-Terminal Branches",
+     "Major Terminal Branches"
+    ],
+    "rows": [
+     [
+      "Lateral Cord",
+      "C5, C6, C7",
+      "Lateral pectoral nerve",
+      "Musculocutaneous, lateral root of median"
+     ],
+     [
+      "Medial Cord",
+      "C8, T1",
+      "Medial pectoral, medial cutaneous arm/forearm",
+      "Ulnar nerve, medial root of median"
+     ],
+     [
+      "Posterior Cord",
+      "C5, C6, C7, C8, T1",
+      "Upper/lower subscapular, thoracodorsal",
+      "Axillary nerve, radial nerve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The lateral cord gives off the lateral pectoral nerve, the musculocutaneous nerve (supplying coracobrachialis, biceps, and brachialis), and the lateral root of the **median nerve**. The medial cord gives the medial pectoral, medial cutaneous nerves of arm and forearm, the ulnar nerve, and the medial root of the median nerve, which unites with the lateral root in front of the axillary artery.",
+   "say": "The lateral cord gives the lateral pectoral, musculocutaneous, and lateral median root. The medial cord yields medial pectoral, medial cutaneous nerves, the ulnar nerve, and medial median root, which unites with the lateral root over the artery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Terminal Nerve Derivations",
+    "nodes": [
+     {
+      "id": "lat",
+      "label": "Lateral Cord: Musculocutaneous"
+     },
+     {
+      "id": "med",
+      "label": "Medial Cord: Ulnar Nerve"
+     },
+     {
+      "id": "both",
+      "label": "Lateral and Medial Roots Unite"
+     },
+     {
+      "id": "median",
+      "label": "Median Nerve (C5 through T1)"
+     }
+    ],
+    "edges": [
+     [
+      "lat",
+      "both"
+     ],
+     [
+      "med",
+      "both"
+     ],
+     [
+      "both",
+      "median"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

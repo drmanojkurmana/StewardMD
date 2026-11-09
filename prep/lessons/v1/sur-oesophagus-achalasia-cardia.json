@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Achalasia Cardia, Myenteric Plexus Degeneration, and Heller Myotomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "As the primary motor disorder of the esophagus, **achalasia cardia** is defined pathophysiologically by the failure of the lower esophageal sphincter to relax completely upon deglutition, coupled with absent peristalsis throughout the smooth-muscle esophageal body. The condition stems from an autoimmune, inflammatory destruction of inhibitory non-adrenergic, non-cholinergic ganglion cells within the Auerbach myenteric plexus, depleting local nitric oxide and vasoactive intestinal peptide.",
+   "say": "Achalasia cardia is an esophageal motility disorder caused by the loss of inhibitory ganglion cells in Auerbach plexus. This results in absent esophageal peristalsis and failure of the lower sphincter to relax.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-achalasia-cardia.webp",
+    "alt": "Barium swallow radiograph demonstrating a dilated esophageal body tapering into a smooth beak at the cardia.",
+    "caption": "Barium esophagogram in achalasia: progressive esophageal dilatation tapering into a smooth distal beak. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "With the loss of inhibitory nitric oxide signaling, postganglionic cholinergic neurons function unopposed, generating sustained tonic contraction of the circular smooth muscle at the gastroesophageal junction. Patients present with gradual, progressive **dysphagia for both solids and liquids** from the onset of symptoms. Other common clinical manifestations include nocturnal regurgitation of undigested, non-acidic food, unprovoked retrosternal chest pain, chronic cough from microaspiration, and progressive weight loss.",
+   "say": "Unopposed cholinergic stimulation keeps the lower esophageal sphincter tonically contracted. Patients characteristically present with progressive dysphagia for both solids and liquids from the onset.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "auto",
+      "label": "Autoimmune Degeneration of Myenteric Inhibitory Neurons"
+     },
+     {
+      "id": "no",
+      "label": "Severe Depletion of Nitric Oxide & VIP Neurotransmitters"
+     },
+     {
+      "id": "ach",
+      "label": "Unopposed Cholinergic Tonic Circular Muscle Spasm"
+     },
+     {
+      "id": "fail",
+      "label": "Incomplete Deglutitive Lower Esophageal Sphincter Relaxation"
+     },
+     {
+      "id": "symp",
+      "label": "Equal Dysphagia for Solids & Liquids with Food Regurgitation"
+     }
+    ],
+    "edges": [
+     [
+      "auto",
+      "no"
+     ],
+     [
+      "no",
+      "ach"
+     ],
+     [
+      "ach",
+      "fail"
+     ],
+     [
+      "fail",
+      "symp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gold standard diagnostic test for diagnosing achalasia and defining its subtype is **high-resolution manometry**. Manometric criteria require an elevated integrated relaxation pressure exceeding the normal threshold of fifteen millimetres of mercury, confirming incomplete sphincter relaxation, combined with complete aperistalsis. The Chicago classification categorizes achalasia into three subtypes: classical Type I with no pressurization, Type II with pan-esophageal pressurization, and Type III with spastic contractions.",
+   "say": "High-resolution manometry is the gold standard diagnostic investigation for achalasia. It documents an elevated integrated relaxation pressure above fifteen millimeters of mercury and complete esophageal aperistalsis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chicago Subtype",
+     "Manometric Pattern",
+     "Response to Intervention"
+    ],
+    "rows": [
+     [
+      "Type I (Classic)",
+      "Aperistalsis with 100% failed peristalsis, no pressure",
+      "Favourable response to myotomy"
+     ],
+     [
+      "Type II (Compression)",
+      "Pan-esophageal pressurization in >=20% swallows",
+      "Best response to pneumatic dilation & myotomy"
+     ],
+     [
+      "Type III (Spastic)",
+      "Premature spastic contractions in >=20% swallows",
+      "Resistant; best managed with POEM"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Barium esophagography reveals classic diagnostic radiological features. The smooth-muscle esophageal body shows massive luminal dilatation, tortuosity, and loss of primary peristaltic clearing waves. At the gastroesophageal junction, barium narrows into a smooth, symmetrical, conical beak resembling a bird's beak or rat's tail. In advanced end-stage disease, massive redundancy produces a **sigmoid mega-esophagus** that can accommodate more than one litre of retained fluid.",
+   "say": "Barium swallow demonstrates a dilated esophageal body that tapers into a smooth, symmetrical conical beak at the gastroesophageal junction, representing the classic bird's beak sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/achalasia-fig1.webp",
+    "alt": "Medical schematic illustrating the bird's beak sign on barium swallow and high lower esophageal sphincter pressures.",
+    "caption": "Barium swallow in achalasia: classic bird's beak tapering and progressive sigmoid mega-esophagus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Upper gastrointestinal endoscopy is mandatory in every adult presenting with achalasia-like symptoms to rule out **pseudoachalasia**. Pseudoachalasia arises when a malignant neoplasm, such as an adenocarcinoma of the gastric cardia or distal esophagus, infiltrates the myenteric plexus directly. Endoscopic clues suggesting pseudoachalasia include age over sixty years, symptom duration under six months, rapid weight loss, and marked resistance when attempting to advance the endoscope through the cardia.",
+   "say": "Upper endoscopy is essential to rule out pseudoachalasia caused by a tumour at the gastric cardia. Clues include older age, rapid weight loss, and difficulty passing the endoscope through the cardia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Idiopathic Achalasia",
+     "points": [
+      "Younger to middle-aged onset (20 to 50 years)",
+      "Longstanding symptoms (often > 2 years)",
+      "Smooth mucosal surface throughout esophagus",
+      "Endoscope pops easily through gastroesophageal junction"
+     ]
+    },
+    "right": {
+     "title": "Pseudoachalasia (Malignancy)",
+     "points": [
+      "Older patient presentation (> 60 years)",
+      "Rapid onset of profound weight loss (< 6 months)",
+      "Nodular, friable, or ulcerated mucosa at cardia",
+      "Rigid resistance encountered when traversing sphincter"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive surgical intervention of choice for achalasia is the **laparoscopic Heller myotomy**. Under laparoscopic visualization, the surgeon divides the longitudinal and circular muscle fibers of the distal esophagus, leaving the underlying submucosa and mucosa completely intact. The myotomy incision must extend at least five to six centimetres proximally onto the esophagus and two centimetres distally onto the gastric cardia to ensure complete disruption of the high-pressure sphincter zone.",
+   "say": "Laparoscopic Heller myotomy is the primary surgical treatment. The surgeon divides the muscular layers of the distal esophagus and gastric cardia while carefully preserving the underlying mucosal layer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lap",
+      "label": "Laparoscopic Port Placement & Left Lobe Liver Retraction"
+     },
+     {
+      "id": "phreno",
+      "label": "Division of Phrenoesophageal Membrane & Hiatal Mobilization"
+     },
+     {
+      "id": "myo",
+      "label": "Anterior Longitudinal Division of Circular Muscularis Propria"
+     },
+     {
+      "id": "extent",
+      "label": "Myotomy Extends 5 cm onto Esophagus & 2 cm onto Gastric Cardia"
+     },
+     {
+      "id": "leak",
+      "label": "Intraoperative Endoscopic Insufflation to Rule Out Mucosal Leak"
+     }
+    ],
+    "edges": [
+     [
+      "lap",
+      "phreno"
+     ],
+     [
+      "phreno",
+      "myo"
+     ],
+     [
+      "myo",
+      "extent"
+     ],
+     [
+      "extent",
+      "leak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because a complete myotomy permanently abolishes lower esophageal sphincter competence, unprotected patients frequently suffer severe postoperative acid reflux and peptic strictures. Therefore, surgeons routinely combine the Heller myotomy with a **partial anterior Dor fundoplication** or a posterior Toupet wrap. A complete 360-degree Nissen wrap is contraindicated because the denervated, aperistaltic esophageal body cannot overcome the high outflow resistance of a complete wrap.",
+   "say": "Because myotomy destroys sphincter tone, it is always paired with a partial fundoplication like an anterior Dor wrap to prevent severe acid reflux while avoiding post-surgical obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Partial Fundoplication (Dor / Toupet)",
+     "points": [
+      "180-degree anterior or 270-degree posterior wrap",
+      "Protects exposed, vulnerable esophageal mucosa",
+      "Prevents gastroesophageal reflux effectively",
+      "Permits bolus passage through aperistaltic esophagus"
+     ]
+    },
+    "right": {
+     "title": "Complete 360-Degree Nissen Wrap",
+     "points": [
+      "Circumferential fundic wrap around esophagus",
+      "Strictly contraindicated in achalasia patients",
+      "Imposes excessive outflow resistance",
+      "Causes severe intractable postoperative dysphagia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nonsurgical options exist for poor surgical candidates. Graded **pneumatic balloon dilatation** forcefully tears the circular muscle fibers using thirty to forty millimetre non-compliant balloons, providing good relief in sixty to eighty percent of patients, but carries a two percent risk of transmural perforation. Alternatively, intrasphincteric injection of botulinum toxin inhibits acetylcholine release, but its clinical effect wanes within six to twelve months, rendering it a temporary palliative measure.",
+   "say": "Non-surgical alternatives include pneumatic balloon dilation, which tears the circular muscle but risks perforation, and botulinum toxin injection, which provides temporary relief for frail patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Mechanism of Action",
+     "Durability & Major Risks"
+    ],
+    "rows": [
+     [
+      "Laparoscopic Heller Myotomy",
+      "Surgical division of circular muscle layers",
+      "Durable (>90% at 10 yrs); paired with partial wrap"
+     ],
+     [
+      "Pneumatic Balloon Dilation",
+      "Mechanical barotrauma tearing sphincter fibers",
+      "Requires serial sessions; 2% perforation risk"
+     ],
+     [
+      "Botulinum Toxin Injection",
+      "Presynaptic inhibition of acetylcholine release",
+      "Relief lasts 6 to 12 months; produces fibrosis"
+     ],
+     [
+      "Oral Nitrates & CCBs",
+      "Direct relaxation of smooth muscle tone",
+      "Short-lived efficacy; limited by systemic hypotension"
+     ]
+    ]
+   }
+  }
+ ]
+}

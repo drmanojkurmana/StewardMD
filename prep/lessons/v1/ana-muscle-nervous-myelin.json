@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "ana-muscle-nervous",
+ "subject": "anatomy",
+ "title": "Neuron Cytology, Myelination and Peripheral Nerve Sheaths",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The functional cellular unit of nervous tissue is the **neuron**, comprising a receptive cell body (perikaryon or soma), multiple branching dendrites that receive incoming synaptic inputs, and a single conducting axon that propagates action potentials away toward target effector tissues and synapses.",
+   "say": "The basic unit of nervous tissue is the neuron, consisting of a metabolic cell body, multiple branching dendrites that receive inputs, and a single conducting axon that transmits action potentials outward to targets.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-neuron-synapse.webp",
+    "alt": "Neuron anatomy, dendrites, axon hillock, and synaptic terminal",
+    "caption": "Neuron morphology, perikaryon, and synaptic terminal junctions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within the neuronal cytoplasm, intense protein synthesis is evidenced by prominent basophilic clumps designated **Nissl substance** (Nissl bodies), consisting of abundant rough endoplasmic reticulum and free ribosomes. Nissl bodies extend into the proximal dendrites but are conspicuously absent from the axon hillock and axon, which rely on axonal transport.",
+   "say": "Neuronal cytoplasm displays basophilic granules called Nissl substance, composed of rough endoplasmic reticulum and ribosomes. Nissl bodies extend into dendrites but are completely absent from the axon hillock and axon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dendrite Cytology",
+     "points": [
+      "Multiple branching tapering processes",
+      "Contains Nissl bodies and ribosomes",
+      "Covered by synaptic dendritic spines",
+      "Conducts graded potentials toward soma"
+     ]
+    },
+    "right": {
+     "title": "Axon Cytology",
+     "points": [
+      "Single uniform cylindrical process",
+      "Lacks Nissl bodies and Golgi machinery",
+      "Arises from pale conical axon hillock",
+      "Conducts action potentials away from soma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Axons are insulated by a lipid-rich concentric membrane sheath designated **myelin**, which drastically increases electrical membrane resistance and decreases capacitance. In the peripheral nervous system, myelin is formed by Schwann cells, with each Schwann cell myelinating only a single internode of one individual axon.",
+   "say": "Axons are insulated by a lipid-rich coating termed myelin, which increases electrical resistance and reduces capacitance. In the peripheral nervous system, Schwann cells produce myelin, with each cell insulating only one internode of a single axon.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-glia.svg",
+    "alt": "Glial cell classes: Schwann cells, oligodendrocytes, and astrocytes",
+    "caption": "Myelinating glia: Schwann cells in PNS versus oligodendrocytes in CNS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast to peripheral nerves, central nervous system myelination is executed by **oligodendrocytes**. A single oligodendrocyte extends multiple flattened cytoplasmic processes that wrap around and myelinate up to fifty separate neighboring axon internodes within cerebral and spinal white matter tracts.",
+   "say": "In the central nervous system, myelination is performed by oligodendrocytes. A single oligodendrocyte projects multiple cytoplasmic sheets to insulate up to fifty separate axon internodes across nearby nerve tracts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PNS Myelination (Schwann Cell)",
+     "points": [
+      "One Schwann cell coats one axon internode",
+      "Surrounded by an external basal lamina",
+      "Produces endoneurial tube for regeneration",
+      "Targeted in Guillain-Barre syndrome"
+     ]
+    },
+    "right": {
+     "title": "CNS Myelination (Oligodendrocyte)",
+     "points": [
+      "One oligodendrocyte myelinates up to 50 axons",
+      "Lacks an external basal lamina",
+      "Secretes Nogo protein inhibiting regeneration",
+      "Targeted in multiple sclerosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interspersed along the myelinated axon between adjacent glial cells are uninsulated gaps called **nodes of Ranvier**. Characterized by extremely high densities of voltage-gated sodium channels, action potentials do not propagate continuously but leap rapidly from one node to the next in rapid saltatory conduction.",
+   "say": "Along the axon between myelin segments lie uninsulated gaps termed nodes of Ranvier. Packed with high concentrations of voltage-gated sodium channels, these nodes enable action potentials to leap rapidly by saltatory conduction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Saltatory Conduction Mechanics",
+    "nodes": [
+     {
+      "id": "depol",
+      "label": "Action Potential at Node of Ranvier"
+     },
+     {
+      "id": "curr",
+      "label": "Electrotonic Current through Myelinated Axoplasm"
+     },
+     {
+      "id": "jump",
+      "label": "Threshold Depolarisation at Next Node"
+     },
+     {
+      "id": "rapid",
+      "label": "High-Velocity Conduction (up to 120 m/s)"
+     }
+    ],
+    "edges": [
+     [
+      "depol",
+      "curr"
+     ],
+     [
+      "curr",
+      "jump"
+     ],
+     [
+      "jump",
+      "rapid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Axon terminals communicate with target neurons or effector muscle fibres at specialized contact junctions called a **synapse**. Arrival of an action potential opens voltage-gated calcium channels, triggering vesicular exocytosis of neurotransmitters (like acetylcholine or glutamate) across the synaptic cleft to bind post-synaptic receptors.",
+   "say": "Axon terminals communicate across contact junctions called synapses. The arriving action potential opens calcium channels, driving vesicular exocytosis of neurotransmitters across the synaptic cleft to activate receptors on the receiving cell.",
+   "vis": {
+    "kind": "flow",
+    "title": "Synaptic Transmission Steps",
+    "nodes": [
+     {
+      "id": "ap",
+      "label": "Presynaptic Action Potential Arrival"
+     },
+     {
+      "id": "ca",
+      "label": "Voltage-Gated Calcium Channel Influx"
+     },
+     {
+      "id": "exo",
+      "label": "Neurotransmitter Vesicle Exocytosis"
+     },
+     {
+      "id": "post",
+      "label": "Postsynaptic Receptor Depolarisation"
+     }
+    ],
+    "edges": [
+     [
+      "ap",
+      "ca"
+     ],
+     [
+      "ca",
+      "exo"
+     ],
+     [
+      "exo",
+      "post"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A peripheral nerve trunk is protected by three hierarchical connective tissue sheaths. The innermost delicate sheath is the **endoneurium**, consisting of loose reticular and collagenous fibres enclosing each individual nerve fibre and its associated Schwann cell. Capillary pericytes within the endoneurium establish the blood-nerve barrier.",
+   "say": "A peripheral nerve is protected by three connective tissue sheaths. The innermost sleeve is the endoneurium, made of delicate reticular fibres enclosing each nerve fibre and its Schwann cell, maintaining the blood-nerve barrier.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nerve Sheath Layer",
+     "Structural Composition",
+     "Enclosed Unit",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Epineurium",
+      "Dense irregular connective tissue with fat",
+      "Entire peripheral nerve trunk",
+      "Sutured in epineural nerve repair"
+     ],
+     [
+      "Perineurium",
+      "Concentric epithelial-like myofibroblasts",
+      "Individual nerve fascicles",
+      "Primary diffusion and blood-nerve barrier"
+     ],
+     [
+      "Endoneurium",
+      "Delicate loose reticular collagen mesh",
+      "Single axon and Schwann sheath",
+      "Guides sprouting axons during regeneration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nerve fibres are grouped into discrete bundles called fascicles, encircled by the **perineurium**. Comprising concentric layers of flattened squamous myofibroblasts joined by tight junctions, the perineurium acts as an impermeable physiological diffusion barrier. The outermost dense irregular connective tissue sleeve binding all fascicles together into a nerve trunk is the epineurium.",
+   "say": "Nerve fibres are bundled into fascicles wrapped by the perineurium. Formed by concentric layers of cells joined by tight junctions, the perineurium serves as a tough diffusion barrier. The outermost collagenous sheath enveloping the entire nerve is the epineurium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perineurial Barrier Role",
+     "points": [
+      "Isolates endoneurial fluid microenvironment",
+      "Tight junctions prevent toxin entry",
+      "Possesses high tensile elastic resilience",
+      "Preserved in Sunderland grade 2 injury"
+     ]
+    },
+    "right": {
+     "title": "Epineurial Protective Role",
+     "points": [
+      "Cushions nerve trunk against external compression",
+      "Carries major nutrient vasa nervorum",
+      "Loosely anchors nerve in tissue bed",
+      "Surgically approximated during nerve repair"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
