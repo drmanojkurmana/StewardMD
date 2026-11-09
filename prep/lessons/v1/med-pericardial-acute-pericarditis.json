@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "med-pericardial",
+ "subject": "medicine",
+ "title": "Acute pericarditis, pericardial effusion, and cardiac tamponade",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inflammation of the fibroserous sac enclosing the heart presents with distinctive clinical, auscultatory, and electrocardiographic features. Patients presenting with **acute pericarditis** experience sharp, pleuritic retrosternal chest pain that characteristically worsens when lying supine or coughing and eases upon sitting up and leaning forward. The underlying aetiology is predominantly viral or idiopathic in immunocompetent individuals, while tuberculosis, systemic autoimmune connective tissue diseases, uraemia, and malignancy represent important secondary causes.",
+   "say": "Inflammation of the pericardial sac presents with distinctive symptoms and clinical signs. Patients suffering from acute pericarditis report sharp, pleuritic central chest pain that worsens when lying supine and improves on sitting forward. The underlying cause is predominantly viral or idiopathic in healthy hosts, though tuberculosis, autoimmune disease and uraemia represent crucial secondary causes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pericarditic chest pain",
+     "points": [
+      "Sharp and pleuritic character",
+      "Worsened by supine posture and inspiration",
+      "Relieved by sitting forward",
+      "Radiation to left trapezius ridge (phrenic nerve)"
+     ]
+    },
+    "right": {
+     "title": "Ischaemic chest pain",
+     "points": [
+      "Dull, squeezing or crushing pressure",
+      "Unrelated to body posture or respiration",
+      "Triggered by physical exertion or stress",
+      "Radiation to neck, jaw, or left arm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The classical electrocardiographic manifestation of diffuse pericardial inflammation evolves through four stages. Stage one exhibits widespread **saddle-shaped ST elevation** with upward concavity across all limb and precordial leads except aVR and V1. Concurrent PR-segment depression in these leads reflects subepicardial atrial injury, accompanied by reciprocal PR elevation in lead aVR. As inflammation resolves over days to weeks, ST segments normalize before widespread T-wave inversions appear without pathological Q waves.",
+   "say": "The electrocardiographic hallmark of acute pericarditis develops through four characteristic phases. Stage one reveals widespread saddle-shaped ST-segment elevation with upward concavity across almost all leads. Concurrent PR-segment depression indicates atrial injury, accompanied by reciprocal PR elevation in lead aVR. ST segments gradually normalize before diffuse T-wave inversion appears without Q waves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ECG Stage",
+     "ST segment morphology",
+     "PR segment changes",
+     "T wave morphology"
+    ],
+    "rows": [
+     [
+      "Stage 1 (Acute)",
+      "Diffuse concave ST elevation (except aVR)",
+      "PR depression (PR elevation in aVR)",
+      "Upright normal T waves"
+     ],
+     [
+      "Stage 2 (Days)",
+      "ST segments return to isoelectric baseline",
+      "PR segment normalises",
+      "Flattened T waves"
+     ],
+     [
+      "Stage 3 (Subacute)",
+      "Isoelectric baseline",
+      "Normal PR segment",
+      "Diffuse symmetrical T wave inversion"
+     ],
+     [
+      "Stage 4 (Resolution)",
+      "Normal baseline tracing",
+      "Normal PR segment",
+      "Normal upright T waves restored"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Auscultation of the precordium provides pathognomonic physical confirmation of active pericardial inflammation. Auscultating a superficial, scratchy **pericardial rub** is best achieved using the stethoscope diaphragm with the patient leaning forward in full expiration. The rub classically features three components corresponding to atrial systole, ventricular systole, and early diastolic ventricular filling. Because the rub fluctuates rapidly in intensity over hours, frequent serial auscultation is required.",
+   "say": "Careful auscultation provides physical confirmation of active pericardial inflammation. Hearing a superficial, raspy pericardial friction rub is best achieved using the stethoscope diaphragm while the patient sits forward in expiration. The classic friction rub has three components matching atrial contraction, ventricular systole and early ventricular filling. Its intensity fluctuates rapidly over hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inflam",
+      "label": "Fibrinous pericardial inflammation"
+     },
+     {
+      "id": "rubbing",
+      "label": "Friction between visceral and parietal layers"
+     },
+     {
+      "id": "triphasic",
+      "label": "Three sound components: Atrial, systolic, diastolic"
+     },
+     {
+      "id": "pos",
+      "label": "Best heard leaning forward in expiration"
+     }
+    ],
+    "edges": [
+     [
+      "inflam",
+      "rubbing"
+     ],
+     [
+      "rubbing",
+      "triphasic"
+     ],
+     [
+      "triphasic",
+      "pos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exudation of inflammatory fluid into the pericardial space leads to abnormal fluid accumulation. Developing a **pericardial effusion** may remain asymptomatic if fluid accumulates slowly, allowing the compliant parietal pericardium to stretch over weeks to accommodate up to two litres. On chest radiography, large effusions produce symmetric enlargement of the cardiac silhouette with sharp borders, creating the classical water-bottle cardiac configuration. Transthoracic echocardiography is the gold standard for quantifying effusion volume.",
+   "say": "Accumulation of inflammatory fluid within the pericardial cavity produces an effusion. A pericardial effusion can remain silent if fluid collects slowly, allowing the pericardium to stretch and accommodate large volumes. On a plain chest radiograph, massive fluid accumulation produces symmetric globular cardiomegaly, termed the water-bottle heart. Echocardiography is the gold standard to measure volume and hemodynamic effect.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/effusive-constrictive-pericarditis-fig1.webp",
+    "alt": "Diagram illustrating pericardial effusion anatomy and chamber compression.",
+    "caption": "Pericardial effusion, fluid distribution, and anatomical relationships. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When intrapericardial pressure rises to exceed intracardiac chamber filling pressures, life-threatening hemodynamic collapse ensues. Developing acute **cardiac tamponade** restricts systemic venous return and impairs diastolic filling of both ventricles. Because the heart is enclosed within a fixed volume, the two ventricles compete for space, causing reciprocal changes in ventricular filling with respiration. The rate of fluid accumulation is far more critical than absolute volume in precipitating tamponade.",
+   "say": "When fluid pressure inside the pericardium exceeds chamber filling pressures, life-threatening collapse develops. Cardiac tamponade severely impairs venous return and restricts diastolic filling of both ventricles. Because the pericardial volume is constrained, the ventricles compete for intracardiac space, producing ventricular interdependence with respiration. The speed of fluid accumulation is far more critical than total volume.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fluid",
+      "label": "Rapid pericardial fluid accumulation"
+     },
+     {
+      "id": "press",
+      "label": "Intrapericardial pressure exceeds intracardiac pressure"
+     },
+     {
+      "id": "diast",
+      "label": "Diastolic compression of right atrium and ventricle"
+     },
+     {
+      "id": "co",
+      "label": "Profound drop in stroke volume & cardiac output"
+     },
+     {
+      "id": "shock",
+      "label": "Obstructive shock and hemodynamic arrest"
+     }
+    ],
+    "edges": [
+     [
+      "fluid",
+      "press"
+     ],
+     [
+      "press",
+      "diast"
+     ],
+     [
+      "diast",
+      "co"
+     ],
+     [
+      "co",
+      "shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside physical examination in acute cardiac tamponade demonstrates the classic clinical triad described by Claude Beck. Clinicians identify **Beck triad**, comprising arterial hypotension with a narrowed pulse pressure, elevated jugular venous pressure with absent y descent, and muffled or distant heart sounds. Patients present with tachypnoea, cool clammy extremities, and tachycardia as adrenergic mechanisms attempt to maintain cardiac output in the face of severely reduced stroke volume.",
+   "say": "Bedside examination in acute cardiac tamponade reveals the classic diagnostic triad described by Claude Beck. Clinicians identify Beck triad as systemic hypotension with narrow pulse pressure, elevated venous pressure and muffled heart sounds. Patients exhibit cool clammy extremities, tachypnoea and tachycardia as sympathetic tone attempts to maintain cardiac output despite failing stroke volume.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-haemothorax_tamponade.webp",
+    "alt": "Medical illustration comparing findings of hemothorax and cardiac tamponade.",
+    "caption": "Physical findings in cardiac tamponade and obstructive shock. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An exaggerated respiratory variation in systemic arterial blood pressure represents an objective hallmark of tamponade. Detecting **pulsus paradoxus** is defined as an inspiratory fall in systolic blood pressure exceeding ten millimetres of mercury during quiet respiration. Inspiration increases venous return to the right ventricle, but because the rigid pericardium prevents outward expansion, the interventricular septum bulges into the left ventricle, markedly reducing left ventricular stroke volume and systemic arterial pressure.",
+   "say": "An exaggerated respiratory swing in arterial blood pressure serves as an objective marker of tamponade. Detecting pulsus paradoxus is defined as an inspiratory drop in systolic blood pressure greater than ten millimetres of mercury. Inspiration draws blood into the right ventricle, but pericardial compression forces the septum into the left ventricle, reducing left ventricular stroke volume and arterial pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic parameter",
+     "Tamponade finding",
+     "Pathophysiologic mechanism"
+    ],
+    "rows": [
+     [
+      "Systolic blood pressure",
+      "Inspiratory drop > 10 mmHg (Pulsus paradoxus)",
+      "Septal shifting into LV during inspiration"
+     ],
+     [
+      "Jugular venous pulse",
+      "Elevated with loss of y descent",
+      "Impaired early diastolic ventricular filling"
+     ],
+     [
+      "Kussmaul sign",
+      "Absent (usually negative in pure tamponade)",
+      "Inspiratory filling continues despite pressure"
+     ],
+     [
+      "Echocardiogram",
+      "Right atrial and right ventricular diastolic collapse",
+      "Intrapericardial pressure exceeds cavity pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial medical therapy for uncomplicated acute viral or idiopathic pericarditis relies on high-dose anti-inflammatory agents. Administering an **aspirin or ibuprofen** regimen combined with weight-adjusted colchicine for three months significantly accelerates symptom resolution and reduces recurrent pericarditis by fifty percent. Systemic corticosteroids like oral prednisolone are strictly reserved for patients with contraindications to NSAIDs, refractory autoimmune disease, or uraemic pericarditis because steroids increase long-term recurrence rates.",
+   "say": "Initial management for uncomplicated viral or idiopathic pericarditis relies on high-dose anti-inflammatory drugs. Giving aspirin or ibuprofen alongside weight-adjusted colchicine for three months accelerates healing and cuts recurrent pericarditis rates in half. Systemic corticosteroids are restricted to refractory autoimmune cases or contraindications to anti-inflammatory drugs because steroid use increases long-term recurrence rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-line therapy",
+     "points": [
+      "Aspirin 750 to 1000 mg every 8 hours OR",
+      "Ibuprofen 600 mg every 8 hours",
+      "Colchicine 0.5 mg daily (or twice daily) for 3 months",
+      "Gastric protection with proton pump inhibitors"
+     ]
+    },
+    "right": {
+     "title": "Reserved second-line therapy",
+     "points": [
+      "Oral corticosteroids (prednisolone 0.25 to 0.5 mg/kg)",
+      "Indicated only if NSAIDs contraindicated or failed",
+      "Slow tapering over months to avoid rebound",
+      "Higher risk of recurrence compared to NSAIDs"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

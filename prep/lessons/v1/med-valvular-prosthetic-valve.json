@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "med-valvular",
+ "subject": "medicine",
+ "title": "Prosthetic heart valves, valve selection, and rheumatic prophylaxis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Surgical valve replacement restores haemodynamics when native valvular damage becomes irreversible. Selecting a **prosthetic valve** requires balancing mechanical durability against lifelong bleeding risks from mandatory anticoagulation. Mechanical bileaflet prostheses offer exceptional longevity exceeding twenty years, making them ideal for younger patients under fifty. Bioprosthetic valves crafted from bovine pericardium or porcine tissue avoid lifelong anticoagulation but suffer structural valve degeneration over ten to fifteen years.",
+   "say": "Surgical valve replacement helps restore cardiovascular function when severe native valvular disease progresses. Choosing between prosthetic designs balances device durability against lifelong bleeding complications. Mechanical valves last decades, making them suitable for younger individuals. Tissue valves do not need anticoagulation, though structural degeneration occurs over ten to fifteen years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical prostheses",
+     "points": [
+      "Lifelong durability over 20 years",
+      "Mandatory vitamin K antagonist therapy",
+      "High thromboembolism risk if INR subtherapeutic",
+      "Preferred in patients under 50 years"
+     ]
+    },
+    "right": {
+     "title": "Bioprosthetic valves",
+     "points": [
+      "No lifelong oral anticoagulation needed",
+      "Structural valve degeneration in 10 to 15 years",
+      "Lower lifetime bleeding risk",
+      "Preferred in patients over 65 years"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lifelong oral anticoagulation with vitamin K antagonists remains mandatory for all patients with mechanical prostheses. Establishing the target **international normalized ratio** depends on prosthesis location and thrombogenicity. A target range of 2.5 to 3.5 applies to mechanical mitral valves due to lower blood velocity across the mitral orifice. For modern bileaflet mechanical aortic valves without thromboembolic risk factors, a lower target range of 2.0 to 3.0 provides sufficient protection against valve thrombosis.",
+   "say": "Oral anticoagulation with warfarin is compulsory for every mechanical valve recipient. Determining the target ratio depends on valve location and individual risk factors. Mechanical mitral prostheses require a target ratio between two point five and three point five. Bileaflet mechanical aortic valves without complications require a lower range between two and three.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-cardiac-fig1.webp",
+    "alt": "Diagram illustrating prosthetic heart valves and surgical conduits.",
+    "caption": "Prosthetic mechanical and bioprosthetic valve configurations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute deterioration in a patient with a mechanical valve demands immediate investigation to exclude obstructive thrombosis. Development of a new regurgitant murmur or muffled prosthetic clicks signals **prosthetic valve thrombosis**. Inadequate anticoagulation is the primary trigger, allowing platelet-fibrin thrombus or fibrous pannus ingrowth to restrict disc excursion. Emergency transoesophageal echocardiography and fluoroscopy differentiate acute mobile thrombus from dense fibrous tissue, directing urgent thrombolytic therapy or reoperation.",
+   "say": "Sudden clinical deterioration in a mechanical valve recipient requires immediate evaluation. The appearance of a new murmur or lost closing clicks strongly suggests valve thrombosis. Subtherapeutic anticoagulation allows fibrin accumulation or fibrous pannus tissue to immobilise the occluder. Urgent transoesophageal echocardiography determines whether thrombolysis or repeat surgery is indicated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "subinr",
+      "label": "Subtherapeutic INR level"
+     },
+     {
+      "id": "thromb",
+      "label": "Thrombus and pannus deposition"
+     },
+     {
+      "id": "disc",
+      "label": "Restricted leaflet excursion"
+     },
+     {
+      "id": "echo",
+      "label": "Emergency transoesophageal echo"
+     },
+     {
+      "id": "rx",
+      "label": "Targeted thrombolysis or reoperation"
+     }
+    ],
+    "edges": [
+     [
+      "subinr",
+      "thromb"
+     ],
+     [
+      "thromb",
+      "disc"
+     ],
+     [
+      "disc",
+      "echo"
+     ],
+     [
+      "echo",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infective endocarditis involving artificial valves carries substantially higher morbidity than native valve infection. We categorize **prosthetic valve endocarditis** into early and late onset based on the one-year landmark. Early infection occurring within twelve months of surgery typically stems from perioperative contamination with Staphylococcus epidermidis or Staphylococcus aureus. Late infection mirrors native valve endocarditis and predominantly involves viridans streptococci entering through transient bacteremia.",
+   "say": "Artificial valve endocarditis carries substantial morbidity and mortality. Clinicians classify prosthetic valve infection into early and late presentations using a twelve-month cutoff. Early cases arise from intraoperative inoculation with staphylococcal species like Staphylococcus epidermidis. Late infections occur after one year and resemble native valve disease with streptococcal seeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Timing post-surgery",
+     "Predominant pathogen",
+     "Primary source"
+    ],
+    "rows": [
+     [
+      "Early PVE",
+      "Within 12 months",
+      "Staphylococcus epidermidis",
+      "Perioperative surgical contamination"
+     ],
+     [
+      "Late PVE",
+      "Beyond 12 months",
+      "Viridans streptococci",
+      "Community-acquired bacteremia"
+     ],
+     [
+      "Nosocomial",
+      "Hospital admission",
+      "Staphylococcus aureus / Enterococcus",
+      "Intravascular lines and catheters"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing recurrent streptococcal pharyngitis is vital to halt progressive rheumatic carditis. Administering regular **benzathine penicillin prophylaxis** provides reliable secondary prevention against group A beta-haemolytic streptococcal infections. An intramuscular injection of 1.2 million units given every three to four weeks maintains protective serum concentrations. Patients allergic to penicillin receive oral erythromycin or azithromycin daily as an alternative prophylactic regimen.",
+   "say": "Preventing recurrent streptococcal throat infections halts progressive valvular scarring. Regular intramuscular benzathine penicillin provides proven secondary prophylaxis against beta-haemolytic streptococci. Clinicians administer one point two million units intramuscularly every three to four weeks. Patients with documented penicillin allergy take daily oral macrolides instead.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "strep",
+      "label": "Group A streptococcal exposure"
+     },
+     {
+      "id": "inj",
+      "label": "Intramuscular benzathine penicillin G"
+     },
+     {
+      "id": "level",
+      "label": "Sustained bactericidal serum level"
+     },
+     {
+      "id": "halt",
+      "label": "Prevention of recurrent carditis"
+     }
+    ],
+    "edges": [
+     [
+      "strep",
+      "inj"
+     ],
+     [
+      "inj",
+      "level"
+     ],
+     [
+      "level",
+      "halt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Determining the recommended duration of secondary rheumatic prophylaxis depends upon clinical carditis severity and valvular damage. Guidelines define strict **prophylaxis duration criteria** to guide clinical decision making. Rheumatic fever without carditis requires prophylaxis for five years or until twenty-one years of age, whichever is longer. Patients with persistent rheumatic heart disease or prior valve surgery need prophylaxis for ten years or until age forty, and often lifelong.",
+   "say": "Determining how long to continue secondary rheumatic prophylaxis depends on cardiovascular involvement. Guidelines provide specific age and duration milestones. Patients experiencing rheumatic fever without carditis receive penicillin for five years or until age twenty-one. Those with established rheumatic heart disease or previous valve surgery require treatment for ten years or until age forty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rheumatic manifestation",
+     "Minimum treatment duration",
+     "Age milestone cutoff"
+    ],
+    "rows": [
+     [
+      "Rheumatic fever without carditis",
+      "5 years post-attack",
+      "Until age 21 (whichever longer)"
+     ],
+     [
+      "Rheumatic fever with resolved carditis",
+      "10 years post-attack",
+      "Until age 21 (whichever longer)"
+     ],
+     [
+      "Persistent rheumatic heart disease",
+      "10 years post-attack",
+      "Until age 40 or lifelong"
+     ],
+     [
+      "Prosthetic valve surgery",
+      "Lifelong therapy",
+      "Indefinite secondary protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Haemodynamic surveillance following surgical or transcatheter valve implantation requires serial echocardiographic imaging. Evaluating prosthetic **effective orifice area** and transvalvular peak velocities identifies early patient-prosthesis mismatch or structural leaflet degeneration. Bioprosthetic valves develop progressive calcification, leaflet tears, and secondary regurgitation. Regular clinical monitoring identifies subtle exercise intolerance, subclinical haemolytic anaemia, and changes in prosthetic sound quality before overt congestive heart failure develops.",
+   "say": "Long-term surveillance after valve replacement requires systematic echocardiography. Measuring the effective orifice area and transvalvular flow velocities identifies early structural failure or size mismatch. Bioprosthetic leaflets gradually undergo progressive calcification over time. Regular clinical evaluations identify exertional breathlessness, mild mechanical haemolysis and murmur changes before frank cardiac failure emerges.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Auscultation characteristics and phonocardiogram of valvular murmurs.",
+    "caption": "Auscultatory findings and pressure gradients in valvular heart disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients with prosthetic heart valves carry the highest lifetime risk of adverse outcomes from infective endocarditis. Administering targeted **antibiotic prophylaxis** before invasive dental procedures involving gingival manipulation is strictly recommended. A single oral dose of two grams of amoxicillin taken thirty to sixty minutes before the dental intervention effectively prevents bacteremia-induced seeding. Intravenous ampicillin or oral clindamycin serves patients unable to take oral penicillin derivatives.",
+   "say": "Patients with prosthetic valves carry substantial lifetime risk from endocarditis. Giving targeted prophylactic antibiotics before dental procedures involving gingival tissue manipulation is standard care. A single oral dose of two grams of amoxicillin thirty to sixty minutes before the procedure suppresses transient bacteremia. Intravenous regimens are reserved for patients unable to take oral medications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-risk cardiac conditions",
+     "points": [
+      "Prosthetic mechanical or tissue valves",
+      "Transcatheter prosthetic valve implants",
+      "Prior episode of infective endocarditis",
+      "Unrepaired cyanotic congenital heart disease"
+     ]
+    },
+    "right": {
+     "title": "Prophylactic regimen",
+     "points": [
+      "Oral amoxicillin 2 g 30 to 60 min prior",
+      "IV ampicillin 2 g if unable to take oral",
+      "Oral cefalexin or azithromycin if penicillin-allergic",
+      "Indicated only for gingival manipulation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
