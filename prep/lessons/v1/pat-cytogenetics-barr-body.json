@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "pat-cytogenetics",
+  "subject": "pathology",
+  "title": "X-Inactivation, Sex Chromatin, and Molecular Cytogenetics",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "To achieve dosage compensation between males carrying one X chromosome and females carrying two X chromosomes, one X chromosome undergoes transcriptional silencing in every female somatic cell. Compaction of this inactivated X into condensed heterochromatin at the nuclear periphery generates the cytogenetic **Barr body**.",
+      "say": "A Barr body is the condensed, inactivated X chromosome visible against the nuclear membrane.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+        "alt": "Sex chromatin evaluation and cytogenetics in primary amenorrhoea",
+        "caption": "Cytogenetic and sex chromatin evaluation in female gonadal dysgenesis and amenorrhoea."
+      }
+    },
+    {
+      "tx": "Formulated by Mary Lyon, the hypothesis explains that X-inactivation occurs randomly around day sixteen of embryonic development, affects either maternal or paternal X, and remains clonally stable throughout all subsequent mitotic cell divisions. This biological epigenesis is designated as **lyonisation**.",
+      "say": "Lyonization randomly inactivates one X chromosome in early embryogenesis, maintaining dosage balance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "blastocyst_stage",
+            "label": "Early Blastocyst Somatic Cells Contain Two Active X Chromosomes"
+          },
+          {
+            "id": "xist_lncrna",
+            "label": "XIST Non-Coding RNA Coats One X Chromosome in cis"
+          },
+          {
+            "id": "heterochromatin",
+            "label": "DNA Methylation and Histone Deacetylation Compact the Chromosome"
+          },
+          {
+            "id": "clonal_silencing",
+            "label": "Permanent Clonal Inactivation Maintained in All Daughter Cells"
+          }
+        ],
+        "edges": [
+          [
+            "blastocyst_stage",
+            "xist_lncrna"
+          ],
+          [
+            "xist_lncrna",
+            "heterochromatin"
+          ],
+          [
+            "heterochromatin",
+            "clonal_silencing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The number of Barr bodies visible within a somatic cell nucleus invariably equals the total number of X chromosomes minus one. Normal females possess one Barr body, males with Klinefelter syndrome possess one Barr body, while females with Turner syndrome lack a **sex chromatin Barr body** entirely.",
+      "say": "The number of Barr bodies is always one less than the total number of X chromosomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Karyotype Designation",
+          "Phenotypic Sex",
+          "Number of Barr Bodies Observed"
+        ],
+        "rows": [
+          [
+            "46,XY Normal Male",
+            "Normal Male",
+            "Zero Barr Bodies (No Inactive X)"
+          ],
+          [
+            "46,XX Normal Female",
+            "Normal Female",
+            "One Barr Body Present"
+          ],
+          [
+            "45,X Turner Syndrome",
+            "Female with Ovarian Dysgenesis",
+            "Zero Barr Bodies Present"
+          ],
+          [
+            "47,XXY Klinefelter Syndrome",
+            "Male with Testicular Atrophy",
+            "One Barr Body Present"
+          ],
+          [
+            "47,XXX Triple X Syndrome",
+            "Female Phenotype",
+            "Two Barr Bodies Present"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Failure of paired homologous chromosomes to separate during meiosis I, or sister chromatids during meiosis II or early mitosis, generates daughter cells with abnormal chromosome numbers. This fundamental defect in mitotic or meiotic spindle segregation represents **mitotic or meiotic nondisjunction**, predisposing to systemic aneuploidies.",
+      "say": "Nondisjunction is the failure of paired chromosomes or sister chromatids to separate properly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spindle_checkpoint_failure",
+            "label": "Failure of Anaphase Spindle Checkpoint Coordination"
+          },
+          {
+            "id": "unequal_segregation",
+            "label": "Both Chromosome Copies Segregate into a Single Daughter Cell"
+          },
+          {
+            "id": "aneuploid_gametes",
+            "label": "Yields Disomic and Nullisomic Gametes Following Cytokinesis"
+          },
+          {
+            "id": "trisomy_monosomy",
+            "label": "Fertilization Produces Viable Trisomy or Lethal Monosomy"
+          }
+        ],
+        "edges": [
+          [
+            "spindle_checkpoint_failure",
+            "unequal_segregation"
+          ],
+          [
+            "unequal_segregation",
+            "aneuploid_gametes"
+          ],
+          [
+            "aneuploid_gametes",
+            "trisomy_monosomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When post-zygotic mitotic nondisjunction occurs in an early embryonic blastomere, two or more genetically distinct cell populations arise within the same individual. Generating a milder or variable clinical phenotype depending on the proportion of affected tissues, this phenomenon is termed **chromosomal mosaicism**.",
+      "say": "Chromosomal mosaicism arises from post-zygotic mitotic errors, yielding two or more cell lines.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chromosomal-disorders-children-long-case-fig1.webp",
+        "alt": "Phenotypic variability in mosaic chromosomal aneuploidies",
+        "caption": "Mosaic karyotypes often exhibit milder dysmorphic phenotypes and better developmental outcomes."
+      }
+    },
+    {
+      "tx": "Standard metaphase karyotyping cannot resolve submicroscopic chromosomal deletions smaller than five megabases. Modern molecular cytogenetics overcomes this diagnostic limitation by hybridizing fluorescently labeled DNA probes directly onto intact metaphase or interphase chromosomal spreads, an indispensable clinical technique known as **fluorescence in situ hybridization (FISH)**.",
+      "say": "FISH uses fluorophore-labeled DNA probes to detect microdeletions and gene amplifications.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard G-Banded Karyotyping",
+          "points": [
+            "Resolves macroscopic numerical and structural rearrangements over 5 Mb",
+            "Requires actively dividing living cells arrested at metaphase in culture",
+            "Provides complete genome-wide visual assessment of all chromosome pairs",
+            "Turnaround time typically spans seven to fourteen days"
+          ]
+        },
+        "right": {
+          "title": "Fluorescence In Situ Hybridization (FISH)",
+          "points": [
+            "Resolves submicroscopic microdeletions, duplications, and translocations",
+            "Applicable to non-dividing interphase nuclei and formalin-fixed tissues",
+            "Targeted probe assessment requiring prior clinical suspicion of a locus",
+            "Rapid turnaround time providing definitive diagnostic results within 24 hours"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fluorescent probes are engineered to identify specific chromosome regions, whole chromosomes, or locus-specific genes. In clinical oncology, targeted FISH probes detect diagnostic BCR-ABL1 translocations in chronic myeloid leukemia and identify HER2 gene amplification in invasive breast carcinomas, exemplifying **locus-specific FISH probes**.",
+      "say": "Locus-specific FISH probes identify targeted oncogene translocations and gene amplifications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "probe_denaturation",
+            "label": "Thermal Denaturation of Target Nuclear DNA and Labeled Probe"
+          },
+          {
+            "id": "annealing",
+            "label": "Sequence-Specific Annealing to Target Genomic Sequences"
+          },
+          {
+            "id": "fluorescence_microscopy",
+            "label": "Dual-Color Signal Counting to Measure Gene Amplification Ratio"
+          }
+        ],
+        "edges": [
+          [
+            "probe_denaturation",
+            "annealing"
+          ],
+          [
+            "annealing",
+            "fluorescence_microscopy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chromosomal microarray analysis has superseded standard karyotyping as the first-tier diagnostic investigation for unexplained developmental delay, intellectual disability, and congenital anomalies. Comparing patient DNA to reference controls on high-density oligonucleotide microarrays accurately quantifies submicroscopic copy number variants, advancing **molecular cytogenomic profiling**.",
+      "say": "Chromosomal microarray is the gold standard for detecting submicroscopic copy number variations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dna_extraction",
+            "label": "Patient Genomic DNA and Normal Control DNA Extracted"
+          },
+          {
+            "id": "fluorophore_labeling",
+            "label": "Differential Labeling with Cy3 and Cy5 Fluorescent Dyes"
+          },
+          {
+            "id": "chip_hybridization",
+            "label": "Competitive Hybridization to Microarray Containing Millions of Probes"
+          },
+          {
+            "id": "cnv_detection",
+            "label": "Software Detects Submicroscopic Microdeletions and Microduplications"
+          }
+        ],
+        "edges": [
+          [
+            "dna_extraction",
+            "fluorophore_labeling"
+          ],
+          [
+            "fluorophore_labeling",
+            "chip_hybridization"
+          ],
+          [
+            "chip_hybridization",
+            "cnv_detection"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

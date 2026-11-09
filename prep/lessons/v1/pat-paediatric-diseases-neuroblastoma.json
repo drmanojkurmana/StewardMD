@@ -1,0 +1,198 @@
+{
+  "v": 1,
+  "module": "pat-paediatric-diseases",
+  "subject": "pathology",
+  "title": "Paediatric Small Round Blue Cell Tumours and Embryonal Neoplasms",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The most common extracranial solid malignancy of early childhood originates from primordial neural crest cells within the adrenal medulla or sympathetic paravertebral chain. Demonstrating extreme clinical heterogeneity ranging from spontaneous differentiation into benign ganglioneuroma to fulminant metastasis, this neoplasm is **neuroblastoma**.",
+      "say": "Neuroblastoma is an embryonal neural crest tumor arising in adrenal medulla and sympathetic chains.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuroblastoma-fig1.webp",
+        "alt": "Neuroblastoma gross adrenal mass and histopathology with rosettes",
+        "caption": "Adrenal neuroblastoma mass showing sheets of primitive small round blue cells."
+      }
+    },
+    {
+      "tx": "Microscopic evaluation of neuroblastomas reveals sheets of uniform primitive small neuroblasts with round hyperchromatic nuclei and scant cytoplasm embedded within a delicate pink fibrillary background termed neuropil. Concentric arrangement of neuroblasts around central fibrillary neurophil cores defines diagnostic **Homer-Wright rosettes**.",
+      "say": "Homer-Wright rosettes feature primitive neuroblasts encircling a central fibrillary neuropil core.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "primitive_neuroblasts",
+            "label": "Primitive Sympathogonia Display Small Hyperchromatic Nuclei"
+          },
+          {
+            "id": "neuropil_production",
+            "label": "Neuritic Cytoplasmic Processes Extend to Form Delicate Neuropil"
+          },
+          {
+            "id": "radial_clustering",
+            "label": "Tumor Cells Align Radially Around Central Tangle of Cytoplasmic Processes"
+          },
+          {
+            "id": "rosette_formation",
+            "label": "Pathognomonic Homer-Wright Pseudorosettes Characteristic of Neuroblastoma"
+          }
+        ],
+        "edges": [
+          [
+            "primitive_neuroblasts",
+            "neuropil_production"
+          ],
+          [
+            "neuropil_production",
+            "radial_clustering"
+          ],
+          [
+            "radial_clustering",
+            "rosette_formation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most powerful molecular prognostic indicator in neuroblastoma is high-level amplification of the MYCN oncogene on chromosome 2p24, which correlates with advanced stage and poor survival. In contrast, spontaneous regression frequently occurs in infants under eighteen months with special stage 4S **spontaneous neuroblastoma regression**.",
+      "say": "MYCN amplification indicates poor prognosis, whereas infants under eighteen months have better outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favorable Neuroblastoma (Stage 4S / Non-Amplified)",
+          "points": [
+            "Infants under eighteen months of age with localized primary or 4S spread",
+            "Tumor limited to liver, skin, and minimal bone marrow involvement",
+            "Low MYCN copy number without 1p deletion or 17q gain",
+            "High rate of spontaneous regression or differentiation into ganglioneuroma"
+          ]
+        },
+        "right": {
+          "title": "Unfavorable Neuroblastoma (MYCN Amplified)",
+          "points": [
+            "Children over eighteen months with advanced metastatic bone disease",
+            "High-level MYCN amplification (>10 copies) visible on FISH as double minutes",
+            "Frequent concurrent 1p deletion and 11q aberration",
+            "Rapid clinical progression, chemoresistance, and poor long-term survival"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common primary renal malignancy of childhood arises from primitive metanephric blastema between two and five years of age. Presenting typically as a massive, painless, palpable abdominal flank mass that rarely crosses the midline, this embryonal tumor is **Wilms tumour**.",
+      "say": "Wilms tumor is a childhood renal neoplasm with classic triphasic histology.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/solid-wilms-neuroblastoma-brain-fig1.webp",
+        "alt": "Comparison of Wilms tumor renal architecture and neuroblastoma pathology",
+        "caption": "Gross well-demarcated renal Wilms tumor contrasting with invasive calcified adrenal neuroblastoma."
+      }
+    },
+    {
+      "tx": "Classic Wilms tumor demonstrates a characteristic triphasic histology composed of primitive metanephric blastemal cells, mesenchymal spindle cell stroma, and abortive epithelial tubules mimicking embryonic glomeruli. This diagnostic childhood histological combination is designated pathologically as **triphasic Wilms histology**, confirming embryonal renal parenchymal differentiation.",
+      "say": "Triphasic Wilms tumor histology contains blastema, stroma, and abortive epithelial tubules.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Component",
+          "Microscopic Appearance",
+          "Embryological Derivation"
+        ],
+        "rows": [
+          [
+            "Blastemal Component",
+            "Densely Packed Sheets of Primitive Small Blue Cells",
+            "Uncommitted Metanephric Mesenchyme"
+          ],
+          [
+            "Epithelial Component",
+            "Abortive Tubules and Primitive Embryonic Glomeruli",
+            "Induced Metanephric Tubular Epithelium"
+          ],
+          [
+            "Stromal Component",
+            "Spindle Fibroblasts, Myxoid Stroma, Skeletal Muscle",
+            "Undifferentiated Renal Mesenchyme"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic predisposition to Wilms tumor is linked to inactivation of the WT1 tumor suppressor gene on chromosome 11p13. Loss of WT1 occurs in WAGR syndrome and Denys-Drash syndrome, while mutations in the 11p15 WT2 locus cause hemihypertrophy and organomegaly in **Beckwith-Wiedemann syndrome**.",
+      "say": "WT1 on chromosome 11p13 is mutated in WAGR and Denys-Drash syndromes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "wt1_inactivation",
+            "label": "Germline or Somatic Deletion of WT1 on Chromosome 11p13"
+          },
+          {
+            "id": "blastemal_persistence",
+            "label": "Failure of Metanephric Mesenchyme to Undergo Normal Differentiation"
+          },
+          {
+            "id": "nephrogenic_rests",
+            "label": "Persistence of Precancerous Embryonal Nephrogenic Rests"
+          },
+          {
+            "id": "wilms_carcinogenesis",
+            "label": "Secondary Genetic Hits Drive Overt Malignant Transformation"
+          }
+        ],
+        "edges": [
+          [
+            "wt1_inactivation",
+            "blastemal_persistence"
+          ],
+          [
+            "blastemal_persistence",
+            "nephrogenic_rests"
+          ],
+          [
+            "nephrogenic_rests",
+            "wilms_carcinogenesis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most common primary intraocular malignancy of childhood arises from primitive neural retinal precursor cells. Arising via biallelic inactivation or loss of both alleles of the RB1 tumor suppressor gene on chromosome 13q14, this vision-threatening pediatric neoplasm is **retinoblastoma**, presenting with leukocoria.",
+      "say": "Retinoblastoma is an intraocular malignant retinal tumor caused by biallelic RB1 inactivation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/retinoblastoma-fig1.webp",
+        "alt": "Leukocoria white pupillary reflex and retinal Flexner-Wintersteiner rosettes in retinoblastoma",
+        "caption": "Leukocoria white pupillary reflex and ocular tumor growth in childhood retinoblastoma."
+      }
+    },
+    {
+      "tx": "Alfred Knudson formulated his two-hit hypothesis based on mathematical modeling of familial versus sporadic retinoblastoma. Familial cases inherit one germline mutant allele and develop bilateral tumors upon acquiring a second somatic mutation, demonstrating the classical paradigm of the **RB tumor suppressor gene**.",
+      "say": "Knudson's two-hit hypothesis explains inherited bilateral and sporadic unilateral retinoblastoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Familial Retinoblastoma (40%)",
+          "points": [
+            "Inherits one germline mutant RB1 allele from parent or de novo meiotic error",
+            "Every retinal cell already carries the first hit; single second hit triggers tumor",
+            "Typically manifests early in infancy with bilateral and multifocal tumors",
+            "Carries elevated lifetime risk of osteosarcoma and soft tissue sarcomas"
+          ]
+        },
+        "right": {
+          "title": "Sporadic Retinoblastoma (60%)",
+          "points": [
+            "Both normal RB1 alleles present at conception without germline mutation",
+            "Requires two independent somatic mutations in the exact same retinal progenitor",
+            "Manifests later in childhood with solitary, unilateral intraocular tumor",
+            "No increased lifetime predisposition to secondary non-ocular malignancies"
+          ]
+        }
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

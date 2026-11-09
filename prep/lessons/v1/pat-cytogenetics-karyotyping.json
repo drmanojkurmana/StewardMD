@@ -1,0 +1,241 @@
+{
+  "v": 1,
+  "module": "pat-cytogenetics",
+  "subject": "pathology",
+  "title": "Karyotyping, Autosomal Trisomies, and Robertsonian Translocations",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Visualizing and ordering metaphase chromosomes according to length, centromere location, and banding pattern represents the foundational laboratory technique of diagnostic **clinical karyotyping**. Phytohemagglutinin stimulates peripheral blood T-lymphocytes, while colchicine arrests cellular division at metaphase, allowing Giemsa staining to identify structural and numerical aberrations.",
+      "say": "Karyotyping analyzes metaphase chromosome spreads to detect numerical and structural aberrations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lymphocyte_culture",
+            "label": "Phytohemagglutinin Stimulates T-Cell Mitosis in Culture"
+          },
+          {
+            "id": "colchicine_arrest",
+            "label": "Colchicine Disrupts Spindle Apparatus Arresting Cells in Metaphase"
+          },
+          {
+            "id": "giemsa_banding",
+            "label": "Giemsa Staining Visualizes Alternating Light and Dark Bands"
+          },
+          {
+            "id": "karyotypic_analysis",
+            "label": "Ordering Chromosomes into Standard Seven Denver Groups A Through G"
+          }
+        ],
+        "edges": [
+          [
+            "lymphocyte_culture",
+            "colchicine_arrest"
+          ],
+          [
+            "colchicine_arrest",
+            "giemsa_banding"
+          ],
+          [
+            "giemsa_banding",
+            "karyotypic_analysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most frequent chromosomal disorder and leading genetic cause of intellectual disability arises from an extra copy of chromosome 21. Characterized by flat facial profile, oblique palpebral fissures, epicanthic folds, and simian palmar creases, this condition is designated clinically as **Down syndrome**.",
+      "say": "Down syndrome is the most common autosomal aneuploidy, causing distinctive craniofacial and intellectual phenotypes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chromosomal-disorders-children-long-case-fig1.webp",
+        "alt": "Craniofacial and musculoskeletal hallmarks of Down syndrome",
+        "caption": "Clinical craniofacial features, epicanthic folds, and developmental delays in Down syndrome."
+      }
+    },
+    {
+      "tx": "Ninety-five percent of Down syndrome cases result from complete meiotic nondisjunction of homologous maternal chromosome 21 during oogenesis. Strongly correlated with advanced maternal age over thirty-five years, this free, non-translocated chromosomal aneuploidy is designated cytogenetically as constitutive **trisomy 21**, present in every nucleated somatic cell.",
+      "say": "Trisomy 21 usually arises from maternal meiotic nondisjunction during first meiotic division.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "advanced_maternal_age",
+            "label": "Advanced Maternal Age Predisposes to Meiotic Errors"
+          },
+          {
+            "id": "maternal_nondisjunction",
+            "label": "Failure of Homologous Chromosomes 21 to Separate in Meiosis I"
+          },
+          {
+            "id": "disomic_ovum",
+            "label": "Disomic Ovum Fertilized by Normal Monosomic Spermatozoon"
+          },
+          {
+            "id": "standard_trisomy",
+            "label": "Constitutive Free 47,XX,+21 or 47,XY,+21 Down Syndrome"
+          }
+        ],
+        "edges": [
+          [
+            "advanced_maternal_age",
+            "maternal_nondisjunction"
+          ],
+          [
+            "maternal_nondisjunction",
+            "disomic_ovum"
+          ],
+          [
+            "disomic_ovum",
+            "standard_trisomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Approximately four percent of Down syndrome cases arise when the long arm of chromosome 21 fuses to another acrocentric chromosome, typically chromosome 14, with loss of both short arms. This centric fusion is known as a **Robertsonian translocation**, which can be inherited from an asymptomatic balanced carrier parent.",
+      "say": "Robertsonian translocation involves fusion of acrocentric long arms, transmitting familial Down syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Meiotic Nondisjunction (95%)",
+          "points": [
+            "Free extra chromosome resulting in 47,XX,+21 or 47,XY,+21 karyotype",
+            "Arises as a sporadic de novo meiotic error during maternal oogenesis",
+            "Carries negligible recurrence risk in younger mothers without translocations",
+            "Strongly associated with advancing maternal chronological age"
+          ]
+        },
+        "right": {
+          "title": "Robertsonian Translocation (4%)",
+          "points": [
+            "Unbalanced fusion product such as 46,XX,der(14;21)(q10;q10),+21",
+            "Parent may carry asymptomatic balanced 45-chromosome translocation carrier state",
+            "High familial recurrence risk independent of maternal age",
+            "Carrier mother confers approximately 10 to 15 percent recurrence risk to offspring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nearly forty percent of neonates with Down syndrome demonstrate severe congenital cardiac malformations. The most characteristic cardiovascular anomaly involves failure of fusion of the primitive endocardial cushions, producing an **atrioventricular septal defect**, which causes left-to-right shunting and early pulmonary hypertension.",
+      "say": "Endocardial cushion defects producing atrioventricular septal defects are classic cardiac lesions in Down syndrome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-heart-disease-fig1.webp",
+        "alt": "Congenital endocardial cushion and septal defects in Down syndrome",
+        "caption": "Congenital heart defects including atrioventricular canal malformations in Down syndrome."
+      }
+    },
+    {
+      "tx": "The second most frequent autosomal trisomy among liveborn infants involves nondisjunction of chromosome 18. Manifesting with prominent occiput, micrognathia, low-set ears, clenched hands with overlapping index and fifth fingers, rocker-bottom feet, and fatal congenital heart defects, this lethal disorder is **Edwards syndrome**.",
+      "say": "Edwards syndrome, or trisomy 18, presents with overlapping fingers, rocker-bottom feet, and severe lethality.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Autosomal Trisomy",
+          "Chromosomal Aneuploidy",
+          "Distinctive Physical Hallmarks"
+        ],
+        "rows": [
+          [
+            "Down Syndrome",
+            "Trisomy 21 (47,+21)",
+            "Simian Crease, Epicanthic Folds, Endocardial Cushion Defects"
+          ],
+          [
+            "Edwards Syndrome",
+            "Trisomy 18 (47,+18)",
+            "Clenched Overlapping Fingers, Rocker-Bottom Feet, Micrognathia"
+          ],
+          [
+            "Patau Syndrome",
+            "Trisomy 13 (47,+13)",
+            "Microphthalmia, Cleft Lip/Palate, Holoprosencephaly, Polydactyly"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adults with Down syndrome who survive past age forty almost universally develop neuropathological changes identical to Alzheimer disease. Increased gene dosage of amyloid precursor protein located on chromosome 21 drives excessive deposition of cerebral amyloid beta, causing progressive cognitive decline under **Alzheimer neuropathology in trisomy 21**.",
+      "say": "Extra copies of the amyloid precursor protein gene on chromosome 21 drive premature Alzheimer disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "app_gene_dosage",
+            "label": "Three Functional Copies of Amyloid Precursor Protein on Chromosome 21"
+          },
+          {
+            "id": "beta_amyloid_cleavage",
+            "label": "Accelerated Secretase Cleavage Generates Abundant A-Beta-42 Peptides"
+          },
+          {
+            "id": "senile_plaques",
+            "label": "Cerebral Deposition of Diffuse Neuritic Plaques and Neurofibrillary Tangles"
+          },
+          {
+            "id": "early_dementia",
+            "label": "Clinical Onset of Progressive Presenile Dementia by Fifth Decade"
+          }
+        ],
+        "edges": [
+          [
+            "app_gene_dosage",
+            "beta_amyloid_cleavage"
+          ],
+          [
+            "beta_amyloid_cleavage",
+            "senile_plaques"
+          ],
+          [
+            "senile_plaques",
+            "early_dementia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Children with Down syndrome face a ten to twentyfold increased lifetime risk of developing acute leukemias. During early childhood, megakaryoblastic acute myeloid leukemia is particularly prevalent, while older children develop acute lymphoblastic leukemia, illustrating the oncogenic consequences of **trisomy 21 leukemogenesis**.",
+      "say": "Trisomy 21 predisposes children to acute megakaryoblastic leukemia and acute lymphoblastic leukemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gata1_mutations",
+            "label": "Trisomy 21 Collaborates with Acquired Somatic GATA1 Mutations"
+          },
+          {
+            "id": "transient_myelopoiesis",
+            "label": "Neonatal Transient Abnormal Myelopoiesis in Peripheral Blood"
+          },
+          {
+            "id": "secondary_hits",
+            "label": "Acquisition of Secondary Epigenetic and Kinase Oncogenic Hits"
+          },
+          {
+            "id": "acute_megakaryoblastic",
+            "label": "Overt Acute Megakaryoblastic Leukemia (M7 Subtype)"
+          }
+        ],
+        "edges": [
+          [
+            "gata1_mutations",
+            "transient_myelopoiesis"
+          ],
+          [
+            "transient_myelopoiesis",
+            "secondary_hits"
+          ],
+          [
+            "secondary_hits",
+            "acute_megakaryoblastic"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}
