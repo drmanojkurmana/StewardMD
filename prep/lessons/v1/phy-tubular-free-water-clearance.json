@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phy-tubular",
+  "subject": "physiology",
+  "title": "Free Water Clearance, Micturition Reflex, and Cystometrogram",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Quantification of the renal ability to excrete or conserve solute-free water relative to plasma is determined by calculating **free water clearance**. Free water clearance represents the volume of solute-free water cleared from blood plasma per unit time, calculated as total urine flow rate minus osmolar clearance.",
+      "say": "Free water clearance measures the volume of solute-free water excreted or retained by the kidneys each minute.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Osmolar Clearance (Cosm)",
+          "points": [
+            "Formula: Cosm = (Uosm × V) / Posm",
+            "Volume of plasma cleared of total osmoles per minute",
+            "Averages ~2 to 3 mL/min under resting solute intake",
+            "Increases during high solute loading and osmotic diuresis"
+          ]
+        },
+        "right": {
+          "title": "Free Water Clearance (CH2O)",
+          "points": [
+            "Formula: CH2O = V - Cosm",
+            "Represents solute-free water excretion",
+            "Positive in water diuresis (hypo-osmolar urine)",
+            "Negative in antidiuresis (hyperosmolar urine)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When circulating antidiuretic hormone levels are suppressed by acute water loading, the kidneys produce dilute urine with osmolality far below plasma. Under these conditions, the calculation yields a **positive free water clearance**, demonstrating that the nephron is actively eliminating excess solute-free water to defend systemic plasma tonicity.",
+      "say": "A positive free water clearance occurs during water diuresis when dilute urine removes excess water from the body.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hydration State",
+          "Urine Osmolality (Uosm)",
+          "Urine Flow Rate (V)",
+          "Free Water Clearance (CH2O)"
+        ],
+        "rows": [
+          [
+            "Acute Water Diuresis",
+            "50 to 100 mOsm/kg",
+            "High (10 to 15 mL/min)",
+            "Positive (+8 to +12 mL/min)"
+          ],
+          [
+            "Isosthenuria",
+            "~300 mOsm/kg (equals plasma)",
+            "Normal (~1 mL/min)",
+            "Zero (0 mL/min)"
+          ],
+          [
+            "Dehydration (Antidiuresis)",
+            "800 to 1200 mOsm/kg",
+            "Low (0.5 mL/min)",
+            "Negative (-1.0 to -1.5 mL/min)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, during dehydration or hyperosmolar stress, high levels of antidiuretic hormone trigger concentrated urine production with osmolality up to twelve hundred milliosmoles per kilogram. Here, free water clearance becomes negative, termed **negative free water clearance**, indicating conservation of solute-free water within the hypertonic medullary interstitium.",
+      "say": "Negative free water clearance reflects water conservation during dehydration, returning pure water back into blood.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dehyd",
+            "label": "Systemic Dehydration: Plasma Osmolality Rises Above 290 mOsm/kg"
+          },
+          {
+            "id": "adh",
+            "label": "Hypothalamic Osmoreceptors Trigger Posterior Pituitary ADH Secretion"
+          },
+          {
+            "id": "aqp2",
+            "label": "Aquaporin-2 Channels Insert into Medullary Collecting Duct Apical Membrane"
+          },
+          {
+            "id": "reabs",
+            "label": "Free Water Reabsorbed into Interstitium: Yields Hyperosmolar Urine (Negative CH2O)"
+          }
+        ],
+        "edges": [
+          [
+            "dehyd",
+            "adh"
+          ],
+          [
+            "adh",
+            "aqp2"
+          ],
+          [
+            "aqp2",
+            "reabs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical administration of loop or thiazide diuretics impairs the urinary concentrating and diluting capacity of the kidney. Loop diuretics abolish the corticomedullary osmotic gradient, while thiazides inhibit distal diluting segments, causing **impaired free water clearance** that predisposes patients to life-threatening hyponatremia.",
+      "say": "Diuretics disrupt renal concentrating and diluting mechanisms, preventing normal free water clearance and risking electrolyte collapse.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diuretics-antidiuretics-fig1.webp",
+        "alt": "Diuretic classes and nephron transport targets",
+        "caption": "Nephron transport sites of loop, thiazide, and potassium-sparing diuretics in fluid regulation."
+      }
+    },
+    {
+      "tx": "Storage and elimination of urine is coordinated by the spinal **micturition reflex**. As urine collects inside the bladder lumen, progressive passive distension stretches mechanosensory receptors within the detrusor muscle wall, sending afferent sensory signals through pelvic splanchnic nerves to the sacral spinal cord segments S2 through S4.",
+      "say": "Bladder distension activates sensory stretch receptors that send afferent signals through pelvic nerves to sacral spinal segments.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "distend",
+            "label": "Bladder Fills to ~300 to 400 mL: Detrusor Muscle Wall Stretches"
+          },
+          {
+            "id": "pelvic_aff",
+            "label": "Pelvic Nerve Afferents Transmit Sensory Signals to Sacral Cord (S2-S4)"
+          },
+          {
+            "id": "pmc",
+            "label": "Signals Ascend to Pontine Micturition Center (Barrington Nucleus)"
+          },
+          {
+            "id": "parasymp",
+            "label": "Parasympathetic Efferents Contract Detrusor and Relax Internal Urethral Sphincter"
+          }
+        ],
+        "edges": [
+          [
+            "distend",
+            "pelvic_aff"
+          ],
+          [
+            "pelvic_aff",
+            "pmc"
+          ],
+          [
+            "pmc",
+            "parasymp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Voluntary control over voiding is mediated by higher cortical and brainstem centers, specifically the **pontine micturition centre**, or Barrington nucleus. Cortical pathways from the medial frontal lobes tonically inhibit this pontine center until social conditions are appropriate, allowing conscious relaxation of the voluntary external urethral sphincter.",
+      "say": "The pontine micturition centre coordinates voiding, held under tonic voluntary inhibition by the frontal cerebral cortex.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Internal Urethral Sphincter",
+          "points": [
+            "Smooth muscle at bladder neck (involuntary)",
+            "Sympathetic innervation via hypogastric nerve (L1-L2)",
+            "Alpha-1 adrenergic receptors maintain contraction during filling",
+            "Inhibited by parasympathetic pelvic outflow during voiding"
+          ]
+        },
+        "right": {
+          "title": "External Urethral Sphincter",
+          "points": [
+            "Striated voluntary muscle of urogenital diaphragm",
+            "Somatic motor innervation via pudendal nerve (S2-S4)",
+            "Nicotinic cholinergic receptors maintain voluntary continence",
+            "Relaxed consciously under voluntary corticospinal control"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Urodynamic assessment of bladder wall compliance and neuromuscular integrity is performed using a **cystometrogram**. By slowly infusing sterile saline while recording intravesical pressure, the tracing plots four characteristic phases: initial pressure rise, flat compliance plateau during filling, micturition threshold, and active voiding contraction waves.",
+      "say": "A cystometrogram plots intravesical pressure during filling, demonstrating detrusor compliance and contraction thresholds.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cystometrogram Phase",
+          "Volume Range",
+          "Pressure Characteristics",
+          "Physiological Mechanism"
+        ],
+        "rows": [
+          [
+            "Phase Ia (Initial Rise)",
+            "0 to 50 mL",
+            "Rises to ~10 cm H2O",
+            "Initial resting resting wall tension"
+          ],
+          [
+            "Phase Ib (Tonus Limb)",
+            "50 to 400 mL",
+            "Flat plateau (<15 cm H2O)",
+            "Exceptional smooth muscle compliance and Laplace adaptation"
+          ],
+          [
+            "Phase II (Micturition Threshold)",
+            "350 to 450 mL",
+            "Steep upward bend",
+            "Activation of stretch receptors triggers micturition reflex"
+          ],
+          [
+            "Phase III (Voiding Contraction)",
+            "At voiding",
+            "Spikes to 50 to 100 cm H2O",
+            "Active parasympathetic detrusor contraction waves"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Spinal cord transection above the sacral level acutely produces spinal shock with a flaccid, overflow-incontinent atonic bladder. After weeks, automaticity returns, producing an **uninhibited neurogenic bladder** characterized by involuntary hyperreflexic detrusor contractions at low volumes and loss of coordinated voluntary sphincter control.",
+      "say": "Spinal cord lesions produce an uninhibited neurogenic bladder, causing involuntary contractions and detrusor-sphincter dyssynergia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/distal-renal-tubular-acidosis-fig1.webp",
+        "alt": "Renal collecting system and urinary pathophysiology",
+        "caption": "Urinary tract neurogenic dysfunction, collecting system dilation, and tubular metabolic consequences."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

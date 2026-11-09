@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phy-concentration",
+  "subject": "physiology",
+  "title": "Osmoreceptors, Thirst, Diabetes Insipidus, and SIADH",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Homeostatic control of systemic extracellular fluid tonicity is mediated by exquisitely sensitive hypothalamic osmoreceptors located outside the blood-brain barrier. Situated within the **organum vasculosum of the lamina terminalis** and subfornical organ, these specialized sensory neurons detect changes in extracellular fluid osmolality as small as one percent.",
+      "say": "Hypothalamic osmoreceptors in the lamina terminalis detect changes in plasma osmolality as small as one percent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypothalamic Osmoreceptors",
+          "points": [
+            "Located in OVLT and subfornical organ (circumventricular organs)",
+            "Lack blood-brain barrier; directly bathed by systemic arterial blood",
+            "Sensitive to effective osmoles (sodium, mannitol) that draw water",
+            "Insensitive to ineffective osmoles (urea, ethanol) that cross freely"
+          ]
+        },
+        "right": {
+          "title": "Low-Pressure Baroreceptors",
+          "points": [
+            "Located in cardiac atria and pulmonary great veins",
+            "Detect intravascular blood volume expansion or depletion",
+            "Less sensitive than osmoreceptors (requires 8% to 10% volume drop)",
+            "Potently stimulates vasopressin release during massive haemorrhage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When extracellular osmolality rises, water exits osmoreceptor neurons down its osmotic gradient, causing cellular dehydration and shrinkage. Mechanical deformation of stretch-inactivated cation channels depolarizes the membrane, driving axonal projection signals to the supraoptic and paraventricular nuclei to trigger **vasopressin neurosecretion** into the systemic circulation.",
+      "say": "Hypertonicity shrinks osmoreceptors, opening cation channels that trigger vasopressin secretion and stimulate thirst.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hyper",
+            "label": "Plasma Osmolality Rises Above 280 to 285 mOsm/kg Baseline"
+          },
+          {
+            "id": "shrink",
+            "label": "Osmotic Water Egress Causes Shrinkage of OVLT Osmoreceptor Neurons"
+          },
+          {
+            "id": "depol",
+            "label": "Stretch-Inactivated Cation Channels Open, Eliciting Depolarization"
+          },
+          {
+            "id": "release",
+            "label": "Axonal Transport to Posterior Pituitary Releases Stored ADH / Vasopressin"
+          }
+        ],
+        "edges": [
+          [
+            "hyper",
+            "shrink"
+          ],
+          [
+            "shrink",
+            "depol"
+          ],
+          [
+            "depol",
+            "release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Simultaneously, osmoreceptor activation projects to the limbic system and anterior cingulate cortex to stimulate the conscious **sensation of thirst**. The osmotic threshold for thirst is set approximately five milliosmoles higher than that for vasopressin release, ensuring that antidiuretic water retention acts as the first line of defense before drinking behavior is recruited.",
+      "say": "The thirst threshold is set five milliosmoles higher than vasopressin release, mobilizing drinking after antidiuresis begins.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regulatory System",
+          "Osmotic Activation Threshold",
+          "Primary Output Mechanism",
+          "Clinical Protective Role"
+        ],
+        "rows": [
+          [
+            "Vasopressin (ADH) Secretion",
+            "~280 to 285 mOsm/kg",
+            "Posterior pituitary neurosecretion",
+            "Immediate renal free water retention"
+          ],
+          [
+            "Conscious Thirst Sensation",
+            "~290 to 295 mOsm/kg",
+            "Cortical motivation to ingest water",
+            "Restores absolute whole-body water volume"
+          ],
+          [
+            "Hemodynamic Hypovolaemic Drive",
+            "8% to 10% blood volume drop",
+            "Overrides osmotic threshold via baroreceptors",
+            "Preserves cardiac filling during severe shock"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Failure of hypothalamic vasopressin synthesis or secretion produces **central diabetes insipidus**. Driven by idiopathic autoimmune destruction, pituitary surgery, or head trauma, the total absence of antidiuretic hormone prevents collecting duct water reabsorption, resulting in massive polyuria exceeding three to fifteen litres daily and unquenchable polydipsia.",
+      "say": "Central diabetes insipidus is the failure of vasopressin secretion, causing severe polyuria and thirst that responds to desmopressin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central Diabetes Insipidus",
+          "points": [
+            "Deficient hypothalamic synthesis or posterior pituitary release",
+            "Caused by pituitary surgery, trauma, craniopharyngioma, histiocytosis",
+            "Urine osmolality < 300 mOsm/kg despite water deprivation",
+            "Exogenous desmopressin (dDAVP) increases urine osmolality by >50%"
+          ]
+        },
+        "right": {
+          "title": "Nephrogenic Diabetes Insipidus",
+          "points": [
+            "Normal or high circulating ADH; renal collecting duct resistance",
+            "Caused by V2 receptor mutations, lithium toxicity, hypercalcaemia",
+            "Urine osmolality remains < 300 mOsm/kg despite water deprivation",
+            "Exogenous desmopressin produces negligible change (<10% rise)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast to central disease, nephrogenic diabetes insipidus arises from renal tubular unresponsiveness to circulating antidiuretic hormone despite normal or elevated plasma vasopressin levels. Chronic lithium therapy or hypercalcaemia impairs aquaporin-2 trafficking, rendering principal cells completely refractory to **exogenous desmopressin administration** during water deprivation testing.",
+      "say": "Nephrogenic diabetes insipidus features kidney unresponsiveness to vasopressin, often triggered by lithium therapy or hypercalcaemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "deprive",
+            "label": "Standard Water Deprivation Test: Patient Deprived of Fluid for 8 Hours"
+          },
+          {
+            "id": "hypo_u",
+            "label": "Persistent Dilute Urine (Uosm < 300 mOsm/kg) with Rising Plasma Osmolality"
+          },
+          {
+            "id": "ddavp",
+            "label": "Administer 1 to 2 mcg Subcutaneous Desmopressin (Synthetic V2 Agonist)"
+          },
+          {
+            "id": "diff",
+            "label": "Central DI: Uosm Rises >50%; Nephrogenic DI: Uosm Fails to Rise (<10%)"
+          }
+        ],
+        "edges": [
+          [
+            "deprive",
+            "hypo_u"
+          ],
+          [
+            "hypo_u",
+            "ddavp"
+          ],
+          [
+            "ddavp",
+            "diff"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autonomous, unsuppressible oversecretion of vasopressin in the absence of osmotic or hemodynamic triggers constitutes the **syndrome of inappropriate ADH**. Ectopic secretion by small cell lung carcinoma, head trauma, or pulmonary infections causes excessive collecting duct water retention, producing progressive dilutional hyponatraemia.",
+      "say": "SIADH causes excessive water retention and dilutional hyponatraemia, commonly caused by lung cancer, CNS lesions, or drugs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diuretics-antidiuretics-fig1.webp",
+        "alt": "Antidiuretic hormone excess and aquaretic targets",
+        "caption": "Vasopressin hypersecretion, dilutional hyponatremia, and collecting duct hypertonicity in SIADH."
+      }
+    },
+    {
+      "tx": "Despite water retention, patients with SIADH present with **euvolaemic hyponatraemia** without peripheral edema. Expanding blood volume triggers atrial natriuretic peptide release, which enhances renal sodium excretion (natriuresis) while suppressing the renin-aldosterone axis, maintaining a normal extracellular fluid volume at the expense of severe plasma hypo-osmolality.",
+      "say": "SIADH presents as euvolaemic hyponatraemia because secondary natriuresis prevents edema while worsening hyponatremia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "SIADH Presentation",
+          "Clinical Explanation"
+        ],
+        "rows": [
+          [
+            "Serum Sodium ([Na+])",
+            "Markedly Low (< 130 mEq/L)",
+            "Dilutional hyponatraemia from excessive water retention"
+          ],
+          [
+            "Serum Osmolality (Posm)",
+            "Hypo-osmolar (< 275 mOsm/kg)",
+            "Direct consequence of water retention"
+          ],
+          [
+            "Urine Osmolality (Uosm)",
+            "Inappropriately High (> 100 to 300 mOsm)",
+            "V2 activation prevents normal diluting capacity"
+          ],
+          [
+            "Urinary Sodium ([UNa+])",
+            "Elevated (> 40 mEq/L)",
+            "ANP-induced secondary natriuresis prevents volume expansion"
+          ],
+          [
+            "Volume Status",
+            "Clinically Euvolaemic",
+            "Absence of peripheral edema, ascites, or orthostatic hypotension"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Differentiating high-volume urinary flow requires distinguishing water diuresis from **solute osmotic diuresis**. In water diuresis, urine osmolality is low and total solute excretion remains normal; in osmotic diuresis (such as diabetic ketoacidosis or mannitol infusion) high concentrations of unreabsorbed luminal solutes obligate immense water excretion alongside massive electrolyte wasting.",
+      "say": "Osmotic diuresis sheds unreabsorbed solutes like glucose or mannitol that drag water along, unlike pure water diuresis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+        "alt": "Renal electrolyte derangements and acute dialysis",
+        "caption": "Osmotic fluid loss, acute volume contraction, and renal replacement therapy in severe metabolic derangements."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
