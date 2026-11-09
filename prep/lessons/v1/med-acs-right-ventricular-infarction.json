@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "med-acs",
+ "subject": "medicine",
+ "title": "Right ventricular infarction and mechanical complications of MI",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Occlusion of the proximal right coronary artery often causes concomitant **right ventricular infarction**. Patients classically present with a clinical triad of hypotension, clear lung fields, and elevated jugular venous pressure with Kussmaul sign. Because the ischaemic right ventricle acts as a passive conduit dependent on preload, administering vasodilators like nitroglycerin can precipitate profound circulatory collapse. Management requires aggressive volume loading with isotonic saline.",
+   "say": "Occlusion of the proximal right coronary artery frequently impairs the right ventricle. The classic diagnostic triad includes hypotension, clear lungs and elevated jugular venous pressure. Because the ischaemic right ventricle relies heavily on preload, vasodilators cause catastrophic hypotension. Treatment requires volume resuscitation with intravenous normal saline.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical triad",
+     "points": [
+      "Hypotension and shock",
+      "Clear lung auscultation",
+      "Elevated JVP with Kussmaul sign"
+     ]
+    },
+    "right": {
+     "title": "Management priorities",
+     "points": [
+      "Immediate isotonic fluid boluses",
+      "Avoid nitrates, diuretics, morphine",
+      "Early reperfusion with primary PCI"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Electrocardiographic identification of right ventricular ischaemia requires recording **right-sided precordial leads**. Placing lead V4R in the fifth right intercostal space at the midclavicular line provides high sensitivity. ST-segment elevation of 1 mm or greater in V4R confirms acute right ventricular involvement in inferior STEMI. Echocardiography typically demonstrates right ventricular free wall hypokinesis, chamber dilatation, and paradoxically elevated right atrial pressures.",
+   "say": "Detecting right ventricular involvement requires recording right precordial leads. Placing lead V4R in the fifth right intercostal space offers high diagnostic accuracy. ST elevation of one millimetre or more in V4R confirms right ventricular injury in inferior infarcts. Echocardiography shows right ventricular dilatation and wall motion abnormalities."
+  },
+  {
+   "tx": "Sudden clinical deterioration 3 to 5 days following transmural infarction often heralds a **ventricular septal rupture**. Extensive coagulative necrosis weakens the interventricular septum, resulting in an acute left-to-right shunt. Patients develop abrupt cardiogenic shock and a harsh, loud holosystolic murmur with a palpable thrill along the left lower sternal border. Emergent echocardiography confirms the septal defect and guides surgical repair or percutaneous closure.",
+   "say": "Acute deterioration three to five days after infarction frequently signals ventricular septal rupture. Extensive myocardial necrosis weakens the septum, producing a large left-to-right shunt. Patients present in cardiogenic shock with a loud pansystolic murmur and thrill at the sternal border. Urgent echocardiography confirms the defect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanical complication",
+     "Peak timing post-MI",
+     "Key auscultatory finding",
+     "Haemodynamic profile"
+    ],
+    "rows": [
+     [
+      "Ventricular septal rupture",
+      "3 to 5 days",
+      "Harsh holosystolic murmur with thrill",
+      "Biventricular failure, step-up in RV O2"
+     ],
+     [
+      "Papillary muscle rupture",
+      "2 to 7 days",
+      "Soft apical systolic murmur without thrill",
+      "Sudden pulmonary oedema, giant v waves"
+     ],
+     [
+      "Free wall rupture",
+      "3 to 14 days",
+      "Muffled heart sounds (PEA)",
+      "Rapid cardiac tamponade and collapse"
+     ],
+     [
+      "Pseudoaneurysm",
+      "Weeks to months",
+      "Pulsatile precordial mass",
+      "High rupture risk, narrow neck on echo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute rupture of the posteromedial papillary muscle causes catastrophic acute mitral regurgitation. This **papillary muscle rupture** occurs characteristically with inferior STEMI because the posteromedial muscle receives solitary blood supply from the posterior descending artery. Patients deteriorate into flash pulmonary oedema with giant regurgitant v waves in the pulmonary artery wedge tracing, requiring an intra-aortic balloon pump and emergency surgical mitral valve repair.",
+   "say": "Rupture of the posteromedial papillary muscle triggers severe acute mitral regurgitation. This complication complicates inferior infarction because the muscle relies on a single arterial blood supply. Patients develop sudden pulmonary oedema and cardiogenic shock, requiring mechanical circulatory support and urgent mitral surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-acs-reperfusion.svg",
+    "alt": "Algorithm showing acute cardiogenic shock pathways and mechanical support options.",
+    "caption": "Mechanical complication pathways and urgent surgical intervention triage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An autoimmune pleuropericarditis developing 2 to 10 weeks following myocardial necrosis is termed **Dressler syndrome**. Anti-myocardial antibodies provoked by tissue damage cause fever, pleuritic chest discomfort, pericardial friction rub, and elevated inflammatory markers. The electrocardiogram exhibits diffuse concave ST elevation. Management relies on high-dose aspirin or colchicine, while corticosteroids and non-steroidal anti-inflammatory agents are reserved for refractory cases due to myocardial scar healing concerns.",
+   "say": "Delayed autoimmune pericarditis arising weeks after an infarct is known as Dressler syndrome. Circulating antibodies directed against exposed cardiac antigens cause pleuritic chest pain, fever and pericardial friction rubs. High dose aspirin with colchicine represents primary medical therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early peri-infarction pericarditis",
+     "points": [
+      "Occurs within 1 to 3 days post-MI",
+      "Direct transmural inflammation",
+      "Self-limiting with aspirin",
+      "Rarely causes significant effusion"
+     ]
+    },
+    "right": {
+     "title": "Late Dressler syndrome",
+     "points": [
+      "Occurs 2 to 10 weeks post-MI",
+      "Autoimmune mediated pericarditis",
+      "Fever, leukocytosis, high ESR",
+      "Responds well to aspirin and colchicine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bedside risk stratification of acute heart failure in myocardial infarction utilizes the **Killip class** system. Class I represents unheralded infarction without signs of cardiac failure. Class II exhibits mild failure with lung crackles over less than 50% of lung fields or an S3 gallop. Class III denotes frank pulmonary oedema with crackles exceeding 50%. Class IV indicates cardiogenic shock, carrying an in-hospital mortality exceeding 50%.",
+   "say": "Stratifying heart failure severity in acute infarction uses the Killip classification. Class one represents no heart failure signs. Class two presents with basilar crackles or an S3 gallop. Class three denotes acute pulmonary oedema. Class four indicates cardiogenic shock with high mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Killip class",
+     "Clinical examination findings",
+     "Expected in-hospital mortality"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "No pulmonary crackles or S3 gallop",
+      "Under 5%"
+     ],
+     [
+      "Class II",
+      "Basal crackles (<50% lungs), S3 gallop, high JVP",
+      "10% to 20%"
+     ],
+     [
+      "Class III",
+      "Severe pulmonary oedema (>50% crackles)",
+      "35% to 40%"
+     ],
+     [
+      "Class IV",
+      "Cardiogenic shock (hypotension, oliguria)",
+      "Over 50%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-infarction ventricular remodeling can lead to true or false aneurysm formation. A true **ventricular aneurysm** involves a thin, fibrotic, non-contractile segment of full-thickness myocardium, most commonly at the left ventricular apex. It presents with persistent ST-segment elevation weeks after infarction without chest pain, and carries risks of heart failure, refractory ventricular arrhythmias, and apical mural thrombus requiring oral anticoagulation.",
+   "say": "Adverse ventricular remodeling can produce ventricular aneurysms. A true aneurysm involves scarred fibrous myocardium, typically at the cardiac apex. It causes persistent ST elevation without acute ischaemia, alongside ventricular arrhythmias and apical thrombus formation that warrants formal anticoagulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trans",
+      "label": "Large transmural anterior MI"
+     },
+     {
+      "id": "scar",
+      "label": "Apical fibrous scar thinning"
+     },
+     {
+      "id": "aneurysm",
+      "label": "True ventricular aneurysm"
+     },
+     {
+      "id": "st",
+      "label": "Persistent ST-segment elevation"
+     },
+     {
+      "id": "thromb",
+      "label": "Apical mural thrombus and stroke risk"
+     }
+    ],
+    "edges": [
+     [
+      "trans",
+      "scar"
+     ],
+     [
+      "scar",
+      "aneurysm"
+     ],
+     [
+      "aneurysm",
+      "st"
+     ],
+     [
+      "aneurysm",
+      "thromb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vigilant hemodynamic monitoring in the cardiac intensive care unit detects mechanical emergencies early. When new holosystolic murmurs, sudden pulmonary oedema, or refractory hypotension arise, arrange an emergency **transthoracic echocardiogram** immediately. Defining whether acute decompensation stems from papillary muscle avulsion, septal perforation, or right ventricular failure guides urgent mechanical circulatory support and operative intervention.",
+   "say": "Intensive monitoring identifies mechanical infarct complications before fatal collapse. When you detect a new murmur, sudden pulmonary oedema or shock, obtain an emergency echocardiogram immediately. Confirming whether deterioration arises from valve rupture or septal perforation dictates emergency surgical or percutaneous rescue.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "shock",
+      "label": "Sudden post-MI hemodynamic crash"
+     },
+     {
+      "id": "murmur",
+      "label": "New murmur or pulmonary oedema"
+     },
+     {
+      "id": "echo",
+      "label": "Immediate bedside echocardiogram"
+     },
+     {
+      "id": "iabp",
+      "label": "Mechanical support (IABP/Impella)"
+     },
+     {
+      "id": "or",
+      "label": "Emergency surgical repair"
+     }
+    ],
+    "edges": [
+     [
+      "shock",
+      "murmur"
+     ],
+     [
+      "murmur",
+      "echo"
+     ],
+     [
+      "echo",
+      "iabp"
+     ],
+     [
+      "iabp",
+      "or"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

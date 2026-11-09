@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "module": "med-arrhythmias",
+ "subject": "medicine",
+ "title": "Atrial fibrillation, stroke prevention and supraventricular tachycardias",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The most prevalent sustained cardiac arrhythmia in adult medical practice is **atrial fibrillation**. Disorganized atrial electrical activity at 300 to 600 impulses per minute causes erratic ventricular conduction. The surface electrocardiogram demonstrates an irregularly irregular ventricular rhythm, complete absence of distinct P waves, and fibrillatory f waves. In hemodynamically unstable patients with acute pulmonary oedema or shock, immediate synchronized electrical cardioversion is mandatory.",
+   "say": "Atrial fibrillation represents the most frequent sustained arrhythmia encountered in clinical medicine. Chaotic atrial firing at rapid rates produces variable atrioventricular conduction. The ECG reveals an irregularly irregular rhythm and absent P waves. Synchronised electrical cardioversion is required immediately if the patient becomes haemodynamically unstable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Atrial fibrillation",
+     "Atrial flutter"
+    ],
+    "rows": [
+     [
+      "Atrial rate",
+      "300 to 600 bpm (chaotic)",
+      "250 to 350 bpm (regular)"
+     ],
+     [
+      "ECG baseline",
+      "Undulating fibrillatory f waves",
+      "Sawtooth F waves (leads II, III, aVF)"
+     ],
+     [
+      "Ventricular rhythm",
+      "Irregularly irregular",
+      "Regular (2:1 or 4:1 block) or regularised"
+     ],
+     [
+      "Anatomical source",
+      "Pulmonary vein ostia triggers",
+      "Cavotricuspid isthmus re-entry circuit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thromboembolic risk assessment in non-valvular atrial fibrillation relies on the validated **CHA2DS2-VASc** score. Congestive heart failure, hypertension, age 75 or older (2 points), diabetes, previous stroke or TIA (2 points), vascular disease, age 65 to 74, and female sex assign risk weights. Oral anticoagulation is strongly recommended for men with a score of 2 or more, and women with a score of 3 or more.",
+   "say": "Calculating stroke risk in non-valvular atrial fibrillation uses the CHA2DS2-VASc score. Points are assigned for heart failure, hypertension, diabetes, vascular disease, age and previous stroke. Anticoagulation is strongly indicated for men with two or more points, and women with three or more points.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-cha2ds2.svg",
+    "alt": "Diagram illustrating the CHA2DS2-VASc risk score components and anticoagulation thresholds.",
+    "caption": "CHA2DS2-VASc clinical risk stratification and stroke prophylaxis thresholds. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Direct-acting oral anticoagulants provide superior safety profiles compared to vitamin K antagonists. Agents such as apixaban, rivaroxaban, and dabigatran reduce stroke and mortality with significantly less **intracranial haemorrhage** than warfarin. Warfarin remains mandatory for mechanical prosthetic valves and moderate-to-severe rheumatic mitral stenosis, where DOACs are contraindicated. For patients with high bleeding risks, left atrial appendage occlusion offers an effective non-pharmacological alternative.",
+   "say": "Direct oral anticoagulants provide safer thromboembolic prophylaxis than warfarin. Medications like apixaban and rivaroxaban halve the incidence of fatal intracranial bleeding. However, warfarin remains strictly mandatory for mechanical heart valves and rheumatic mitral stenosis, where direct oral agents are contraindicated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DOACs (Apixaban, Rivaroxaban)",
+     "points": [
+      "Fixed dosing without INR monitoring",
+      "Significantly lower intracranial bleed risk",
+      "First line for non-valvular AF"
+     ]
+    },
+    "right": {
+     "title": "Warfarin (VKA)",
+     "points": [
+      "Mandatory in mechanical heart valves",
+      "Mandatory in rheumatic mitral stenosis",
+      "Requires frequent INR monitoring (2.0-3.0)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Macro-re-entrant atrial tachycardia confined to the right atrium defines **atrial flutter**. The re-entrant wave circles counterclockwise around the tricuspid annulus, dependent on slow conduction through the cavotricuspid isthmus. The electrocardiogram characteristically exhibits regular, negative sawtooth flutter waves in inferior leads II, III, and aVF, with a typical atrial rate of 300 bpm and a regular 2:1 conduction producing a ventricular rate of 150 bpm.",
+   "say": "A re-entrant arrhythmia circling the right atrium defines atrial flutter. The circuit traverses the cavotricuspid isthmus at three hundred beats per minute. The ECG reveals distinctive negative sawtooth waves in the inferior leads, typically conducting with two-to-one block to yield a pulse of one hundred and fifty.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cti",
+      "label": "Cavotricuspid isthmus circuit"
+     },
+     {
+      "id": "rate",
+      "label": "Atrial rate 300 bpm"
+     },
+     {
+      "id": "block",
+      "label": "2:1 AV nodal physiological block"
+     },
+     {
+      "id": "vent",
+      "label": "Ventricular rate 150 bpm"
+     },
+     {
+      "id": "saw",
+      "label": "Sawtooth flutter waves in II, III, aVF"
+     }
+    ],
+    "edges": [
+     [
+      "cti",
+      "rate"
+     ],
+     [
+      "rate",
+      "block"
+     ],
+     [
+      "block",
+      "vent"
+     ],
+     [
+      "rate",
+      "saw"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sudden onset of regular, narrow-complex tachycardia originating above the ventricles constitutes **supraventricular tachycardia**. The most common mechanism is atrioventricular nodal re-entrant tachycardia, accounting for 60% of paroxysmal cases. Intranodal dual pathways featuring a slow conducting pathway with a short refractory period and a fast pathway with a long refractory period permit an atrial premature beat to initiate sustained circus movement.",
+   "say": "Abrupt paroxysms of rapid, regular narrow complex tachycardia represent supraventricular tachycardia. The most common mechanism is AV nodal re-entrant tachycardia. Dual electrical pathways within the atrioventricular node permit an early atrial beat to trigger sustained re-entry, producing rapid palpitations in otherwise healthy individuals.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Anatomical diagram of the AV node and cardiac conduction pathways.",
+    "caption": "Dual atrioventricular nodal pathway anatomy in re-entrant tachycardia. [Credit: StewardMD]",
+    "ar": 1.4
+   }
+  },
+  {
+   "tx": "Bedside termination of regular narrow-complex re-entry begins with **vagal manoeuvres**. The modified Valsalva manoeuvre, combining forced expiration into a manometer with immediate supine repositioning and passive leg elevation, achieves successful cardioversion in over 40% of cases. Increased vagal efferent discharge slows conduction velocity and prolongs refractoriness within the atrioventricular node, abruptly extinguishing the re-entrant circuit.",
+   "say": "Terminating regular narrow complex tachycardia begins with vagal manoeuvres. The modified Valsalva technique with passive leg elevation converts over forty percent of episodes. Vagal nerve stimulation prolongs atrioventricular nodal refractoriness, breaking the re-entrant loop and restoring normal sinus rhythm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "svt",
+      "label": "Hemodynamically stable SVT"
+     },
+     {
+      "id": "val",
+      "label": "Modified Valsalva manoeuvre"
+     },
+     {
+      "id": "succ",
+      "label": "Success: Sinus rhythm restored"
+     },
+     {
+      "id": "fail",
+      "label": "Failure: Rapid IV adenosine push"
+     }
+    ],
+    "edges": [
+     [
+      "svt",
+      "val"
+     ],
+     [
+      "val",
+      "succ"
+     ],
+     [
+      "val",
+      "fail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When vagal stimulation fails, the first-line pharmacological treatment of choice is intravenous **adenosine**. Administer 6 mg as an ultra-rapid bolus via a large antecubital vein followed by a brisk saline flush; if unsuccessful, escalate to 12 mg. Adenosine stimulates A1 purinergic receptors in the atrioventricular node, opening potassium channels and causing transient conduction block. Patients must be warned of transient flushing, chest tightness, and a brief sense of impending doom.",
+   "say": "When vagal manoeuvres fail, intravenous adenosine is the definitive drug of choice. Administer six milligrams as a rapid bolus with a saline flush. Adenosine transiently blocks atrioventricular nodal conduction. Warn the patient beforehand about brief facial flushing, chest tightness and impending doom.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dosing step",
+     "Drug dose",
+     "Administration technique",
+     "Expected clinical response"
+    ],
+    "rows": [
+     [
+      "First bolus",
+      "6 mg IV",
+      "Rapid push (<2s) via large vein, 20mL flush",
+      "Transient AV block, terminates AVNRT in 60%"
+     ],
+     [
+      "Second bolus",
+      "12 mg IV",
+      "Given after 1-2 min if SVT persists",
+      "Cumulative conversion rate > 90%"
+     ],
+     [
+      "Third bolus",
+      "12 mg IV",
+      "Given if still refractory",
+      "If fails: consider flutter, atrial tachycardia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive curative management of recurrent symptomatic AVNRT and typical atrial flutter is **catheter ablation**. Radiofrequency energy delivered to the slow pathway near the coronary sinus ostium cures AVNRT with over 95% efficacy and minimal heart block risk. Similarly, cavotricuspid isthmus ablation permanently cures typical atrial flutter. For atrial fibrillation, pulmonary vein isolation effectively reduces arrhythmia burden in symptomatic patients.",
+   "say": "Curative management for recurrent SVT and atrial flutter relies on catheter ablation. Radiofrequency application to the slow pathway near the coronary sinus cures AVNRT in ninety-five percent of cases. Similarly, isthmus ablation cures atrial flutter, while pulmonary vein isolation controls atrial fibrillation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rec",
+      "label": "Recurrent symptomatic SVT / Flutter"
+     },
+     {
+      "id": "ep",
+      "label": "Electrophysiology study"
+     },
+     {
+      "id": "ablate",
+      "label": "Radiofrequency catheter ablation"
+     },
+     {
+      "id": "cure",
+      "label": "Long-term cure without antiarrhythmics"
+     }
+    ],
+    "edges": [
+     [
+      "rec",
+      "ep"
+     ],
+     [
+      "ep",
+      "ablate"
+     ],
+     [
+      "ablate",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

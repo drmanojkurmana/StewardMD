@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-heart-failure",
+ "subject": "medicine",
+ "title": "Heart failure phenotypes, diagnostic criteria and guideline medical therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Cardiac failure is classified into distinct clinical phenotypes based on left ventricular measurement. Heart failure with reduced ejection fraction, termed **HFrEF**, is defined by a left ventricular ejection fraction of 40% or less. This systolic dysfunction stems from ischaemic heart disease, dilated cardiomyopathy, or chronic volume overload, characterized by progressive chamber dilatation and eccentric remodeling that responds to guideline-directed medical therapy.",
+   "say": "Heart failure is categorised into specific phenotypes using ventricular ejection fraction. Heart failure with reduced ejection fraction, termed HFrEF, denotes an ejection fraction of forty percent or less. Progressive chamber enlargement from ischaemic or idiopathic cardiomyopathy characterises this disorder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HFrEF (LVEF <= 40%)",
+     "points": [
+      "Systolic contraction failure",
+      "Chamber dilation and eccentric remodeling",
+      "Clear mortality benefit with quadruplet GDMT"
+     ]
+    },
+    "right": {
+     "title": "HFpEF (LVEF >= 50%)",
+     "points": [
+      "Diastolic filling impairment",
+      "Concentric hypertrophy, normal volumes",
+      "SGLT2 inhibitors improve clinical outcomes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients exhibiting signs of congestion with preserved systolic contraction, diagnose **HFpEF**. Defined by an ejection fraction of 50% or greater alongside structural disease or diastolic dysfunction, heart failure with preserved ejection fraction predominantly affects elderly hypertensive women. Stiff, hypertrophied ventricles exhibit impaired relaxation and elevated filling pressures, requiring cautious diuresis and SGLT2 inhibitor therapy to prevent flash pulmonary oedema.",
+   "say": "Congestion in the setting of normal systolic contraction defines heart failure with preserved ejection fraction. Patients maintain an ejection fraction of fifty percent or higher with diastolic ventricular stiffness. SGLT2 inhibitors and careful diuretic dosing represent the mainstays of clinical therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-cardiomyopathy.svg",
+    "alt": "Diagram comparing dilated cardiomyopathy with eccentric remodeling to hypertrophic and restrictive cardiomyopathy.",
+    "caption": "Structural chamber geometry in systolic and diastolic ventricular dysfunction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Biomarker assessment provides objective confirmation of hemodynamic wall stress. Myocardial stretch stimulates ventricular production of **BNP**, which is cleaved into biologically active B-type natriuretic peptide and an inactive amino-terminal fragment. A plasma BNP below 100 pg/mL or NT-proBNP below 300 pg/mL boasts an exceptional negative predictive value exceeding 95%, reliably excluding acute decompensated heart failure in dyspnoeic emergency patients.",
+   "say": "Biomarker testing provides rapid objective confirmation of cardiac wall stress. Ventricular stretch prompts the release of natriuretic peptides into the circulation. Normal levels possess a ninety-five percent negative predictive value, reliably ruling out acute heart failure in breathless emergency patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biomarker",
+     "Exclusion cutoff (acute)",
+     "Exclusion cutoff (chronic)",
+     "Biological half-life"
+    ],
+    "rows": [
+     [
+      "BNP (active peptide)",
+      "< 100 pg/mL",
+      "< 35 pg/mL",
+      "20 minutes"
+     ],
+     [
+      "NT-proBNP (cleaved fragment)",
+      "< 300 pg/mL",
+      "< 125 pg/mL",
+      "90 to 120 minutes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical bedside diagnosis continues to utilize validated epidemiological systems. The established **Framingham criteria** require the concurrent presence of either two major criteria, or one major criterion with two minor criteria. Major criteria include paroxysmal nocturnal dyspnoea, neck vein distension, pulmonary crackles, radiographic cardiomegaly, acute pulmonary oedema, S3 gallop, elevated venous pressure exceeding 16 cmH2O, and positive abdominojugular reflex.",
+   "say": "Bedside diagnosis uses the established Framingham criteria. Diagnosis requires two major criteria, or one major plus two minor criteria. Major findings include paroxysmal nocturnal dyspnoea, distended neck veins, lung crackles, cardiomegaly and an S3 gallop rhythm on physical examination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major criteria",
+     "points": [
+      "Paroxysmal nocturnal dyspnoea",
+      "Elevated JVP and abdominojugular reflux",
+      "Pulmonary crackles and acute oedema",
+      "S3 gallop rhythm and cardiomegaly"
+     ]
+    },
+    "right": {
+     "title": "Minor criteria",
+     "points": [
+      "Bilateral ankle oedema",
+      "Nocturnal cough and exertional dyspnoea",
+      "Hepatomegaly and pleural effusion",
+      "Tachycardia > 120 bpm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Foundation therapy for HFrEF mandates four pillars of guideline-directed medical therapy. First, **sacubitril-valsartan** combines an angiotensin receptor blocker with a neprilysin inhibitor, preventing degradation of endogenous natriuretic peptides and bradykinin. In the PARADIGM-HF trial, ARNI demonstrated significant mortality and hospitalisation reductions compared to enalapril. A mandatory 36-hour washout period is required when transitioning from an ACE inhibitor to prevent angioedema.",
+   "say": "Treatment of reduced ejection fraction relies on four pillars of medical therapy. Sacubitril-valsartan combines an angiotensin receptor blocker with a neprilysin inhibitor to boost natriuretic peptides. A thirty-six hour washout period is strictly required when switching from an ACE inhibitor to prevent angioedema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Representative agents",
+     "Primary hemodynamic benefit"
+    ],
+    "rows": [
+     [
+      "ARNI / ACEi / ARB",
+      "Sacubitril-valsartan, Enalapril",
+      "Inhibits RAAS and neprilysin; reduces afterload"
+     ],
+     [
+      "Evidence beta-blockers",
+      "Bisoprolol, Carvedilol, Metoprolol succinate",
+      "Reverses adrenergic remodeling, prevents arrhythmia"
+     ],
+     [
+      "MRA antagonists",
+      "Spironolactone, Eplerenone",
+      "Blocks aldosterone; halts myocardial fibrosis"
+     ],
+     [
+      "SGLT2 inhibitors",
+      "Dapagliflozin, Empagliflozin",
+      "Reduces hospitalisation across all EF spectrums"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blocking chronic neurohormonal sympathetic hyperactivation requires evidence-based **beta blockers**. Specifically, carvedilol, bisoprolol, and sustained-release metoprolol succinate reduce mortality by over 30% in stable HFrEF. Initiation must occur at low doses once the patient is euvolemic, titrating every two weeks toward target trial doses. Beta-blockers must never be initiated during episodes of acute decompensation or cardiogenic shock.",
+   "say": "Countering sympathetic hyperactivation requires evidence based beta blockers. Bisoprolol, carvedilol and metoprolol succinate reduce mortality by thirty percent. Start therapy at low doses once the patient is free of congestion, titrating upward gradually. Never start beta blockers during acute decompensated failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symp",
+      "label": "Chronic adrenergic stimulation"
+     },
+     {
+      "id": "tox",
+      "label": "Myocyte apoptosis and fibrosis"
+     },
+     {
+      "id": "bb",
+      "label": "Evidence-based beta-blocker"
+     },
+     {
+      "id": "rem",
+      "label": "Reverse LV remodeling"
+     },
+     {
+      "id": "mort",
+      "label": "30% reduction in mortality"
+     }
+    ],
+    "edges": [
+     [
+      "symp",
+      "tox"
+     ],
+     [
+      "tox",
+      "bb"
+     ],
+     [
+      "bb",
+      "rem"
+     ],
+     [
+      "rem",
+      "mort"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loop diuretics provide symptom relief through volume management. For acute pulmonary congestion, intravenous **loop diuretics** like furosemide promote rapid natriuresis, while mineralocorticoid receptor antagonists like spironolactone block aldosterone-mediated myocardial fibrosis. In refractory congestion, combining loop diuretics with thiazides produces sequential nephron blockade, overcoming diuretic resistance. Concurrently, SGLT2 inhibitors like dapagliflozin lower cardiovascular death and heart failure hospitalisation regardless of diabetic status.",
+   "say": "Diuretics control symptoms by relieving venous congestion. Intravenous furosemide induces prompt natriuresis in acute pulmonary oedema. Spironolactone blocks aldosterone and prevents cardiac fibrosis. Combining loop diuretics with thiazides overcomes severe diuretic resistance, while SGLT2 inhibitors improve survival across all ejection fractions.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-hf-diuretics.svg",
+    "alt": "Diagram showing diuretic actions along the nephron and guideline heart failure pharmacotherapy.",
+    "caption": "Diuretic mechanisms and sequential nephron blockade in acute heart failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Monitor functional status and symptom limitation using the New York Heart Association classification. Routine assessment of **NYHA class** guides advanced heart failure interventions. Patients with persistent class II-III symptoms despite optimal quadruplet medical therapy and a QRS duration exceeding 150 ms with LBBB qualify for cardiac resynchronization therapy. Those with refractory class IV symptoms warrant referral for ventricular assist device implantation or heart transplantation.",
+   "say": "Assess functional capacity and symptom burden using the New York Heart Association classes. Documenting functional class guides device therapy. Patients with persistent symptoms and wide bundle branch block benefit from cardiac resynchronisation therapy. Refractory end stage patients require consideration for mechanical assist devices or transplantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NYHA class",
+     "Functional symptom severity",
+     "Indicated clinical strategy"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "No limitation of ordinary physical activity",
+      "Initiate and titrate 4-pillar GDMT"
+     ],
+     [
+      "Class II",
+      "Slight limitation; comfortable at rest, ordinary activity causes fatigue",
+      "Maximize GDMT, consider SGLT2i"
+     ],
+     [
+      "Class III",
+      "Marked limitation; less than ordinary activity causes fatigue or dyspnoea",
+      "Consider CRT-D if QRS >= 150ms LBBB"
+     ],
+     [
+      "Class IV",
+      "Unable to carry out physical activity; symptoms present at rest",
+      "Inotropes, LVAD, transplant evaluation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

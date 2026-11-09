@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "med-arrhythmias",
+ "subject": "medicine",
+ "title": "Antiarrhythmic pharmacology, cardioversion and sinus node dysfunction",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A potent Class III multichannel blocking antiarrhythmic agent is **amiodarone**. Although classified as a potassium channel blocker prolonging action potential duration, it exhibits electrophysiological properties of all four Vaughan Williams classes, including sodium channel blockade, non-competitive anti-adrenergic action, and weak calcium antagonism. It is the drug of choice for ventricular arrhythmias in severe structural heart disease because it does not depress ventricular ejection fraction.",
+   "say": "Amiodarone is a potent class three multichannel blocking antiarrhythmic agent. While primarily blocking potassium channels, it displays properties across all four drug classes. It is the preferred agent for ventricular arrhythmias in patients with structural heart failure because it preserves systolic function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ system",
+     "Amiodarone adverse effect",
+     "Monitoring strategy"
+    ],
+    "rows": [
+     [
+      "Pulmonary",
+      "Chronic pulmonary fibrosis, pneumonitis",
+      "Annual chest radiograph, PFTs"
+     ],
+     [
+      "Thyroid",
+      "Hypothyroidism (common) or thyrotoxicosis",
+      "Baseline and 6-monthly TSH and free T4"
+     ],
+     [
+      "Hepatic",
+      "Elevated transaminases, chronic cirrhosis",
+      "Baseline and 6-monthly liver enzymes"
+     ],
+     [
+      "Ophthalmologic",
+      "Corneal microdeposits (universal), optic neuropathy",
+      "Slit lamp exam if visual symptoms arise"
+     ],
+     [
+      "Dermatologic",
+      "Blue-grey skin discoloration, photosensitivity",
+      "Advise sun protection and clothing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe multi-organ toxicities mandate strict monitoring during long-term amiodarone therapy. Its high iodine content causes both **amiodarone-induced hypothyroidism** and thyrotoxicosis. Pulmonary toxicity, presenting as subacute dry cough and progressive exertional dyspnoea from pulmonary interstitial fibrosis, is potentially lethal and demands immediate drug cessation. Corneal microdeposits develop in virtually all patients, though rarely impair visual acuity.",
+   "say": "Multi-organ toxicities require strict surveillance during amiodarone therapy. Its high iodine content induces both hypothyroidism and destructive thyrotoxicosis. Pulmonary fibrosis presenting with chronic cough and breathlessness is potentially fatal and demands prompt discontinuation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 thyrotoxicosis",
+     "points": [
+      "Iodine-induced excess synthesis",
+      "Underlying latent Graves or nodule",
+      "Treated with thionamides (carbimazole)"
+     ]
+    },
+    "right": {
+     "title": "Type 2 thyrotoxicosis",
+     "points": [
+      "Destructive chemical thyroiditis",
+      "Occurs in normal thyroid gland",
+      "Treated with oral corticosteroids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency termination of hemodynamically unstable tachyarrhythmias utilizes synchronized **electrical cardioversion**. The defibrillator synchronizes its electrical discharge to the peak of the R wave on the monitor, preventing energy delivery during the vulnerable T-wave repolarisation phase that could trigger ventricular fibrillation. Synchronized shocks are indicated for unstable atrial fibrillation, atrial flutter, ventricular tachycardia with a pulse, and supraventricular tachycardia.",
+   "say": "Terminating unstable tachyarrhythmias requires synchronised electrical cardioversion. The machine synchronises shock delivery with the R wave peak, avoiding the vulnerable T wave repolarisation period. Synchronised cardioversion is used for unstable atrial fibrillation, flutter and monomorphic ventricular tachycardia with a pulse.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-acs-reperfusion.svg",
+    "alt": "Algorithm showing acute tachycardia evaluation and emergency electrical cardioversion pathways.",
+    "caption": "Tachycardia stability assessment and emergency electrical cardioversion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Intrinsic dysfunction of the sinoatrial pacemaker node leading to inadequate heart rates describes **sick sinus syndrome**. Characterized by idiopathic degenerative fibrosis of the sinoatrial node, patients experience sinus bradycardia, sinoatrial exit block, and sinus arrest with prolonged pauses exceeding 3 seconds. Common symptoms include lightheadedness, presyncope, fatigue, and frank Stokes-Adams syncopal attacks.",
+   "say": "Degenerative failure of the sinoatrial pacemaker characterizes sick sinus syndrome. Fibrotic replacement of the sinus node causes sinus bradycardia, sinoatrial block and sinus arrest pauses over three seconds. Patients present with fatigue, dizziness and syncopal episodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Electrocardiographic manifestation",
+     "Diagnostic definition",
+     "Underlying mechanism"
+    ],
+    "rows": [
+     [
+      "Severe sinus bradycardia",
+      "Persistent sinus rate < 50 bpm awake",
+      "Intrinsic nodal automaticity failure"
+     ],
+     [
+      "Sinus arrest",
+      "Absence of atrial P waves > 3 seconds",
+      "Failure of sinus impulse generation"
+     ],
+     [
+      "Sinoatrial exit block",
+      "Pause is exact multiple of normal P-P",
+      "Impulse generated but fails to conduct to atrium"
+     ],
+     [
+      "Tachycardia-bradycardia syndrome",
+      "Alternating AF/SVT and severe bradycardia",
+      "Atrial remodeling with nodal disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A common clinical subtype featuring paroxysmal atrial tachyarrhythmias alternating with profound sinus bradycardia is **tachycardia-bradycardia syndrome**. Atrial fibrillation or atrial flutter runs at rapid rates, but upon spontaneous termination, the diseased sinus node exhibits prolonged sinus arrest before sluggish escape rhythms emerge. Pharmacotherapy is challenging because rate-controlling drugs worsen bradycardic pauses, necessitating pacemaker implantation before antiarrhythmic administration.",
+   "say": "A frequent presentation featuring alternating tachycardias and sinus pauses is tachycardia-bradycardia syndrome. Paroxysmal atrial fibrillation alternates with sinus arrest upon termination. Managing these patients requires permanent pacemaker implantation before starting antiarrhythmic medications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "af",
+      "label": "Paroxysmal atrial fibrillation episode"
+     },
+     {
+      "id": "term",
+      "label": "Spontaneous arrhythmia termination"
+     },
+     {
+      "id": "pause",
+      "label": "Prolonged sinus arrest pause > 3s"
+     },
+     {
+      "id": "syncope",
+      "label": "Stokes-Adams syncopal attack"
+     },
+     {
+      "id": "ppm",
+      "label": "Permanent pacemaker + antiarrhythmics"
+     }
+    ],
+    "edges": [
+     [
+      "af",
+      "term"
+     ],
+     [
+      "term",
+      "pause"
+     ],
+     [
+      "pause",
+      "syncope"
+     ],
+     [
+      "syncope",
+      "ppm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic evaluation of intermittent syncope in suspected sinus node dysfunction relies on **Holter monitoring**. Ambulatory 24-to-48-hour continuous ECG recordings correlate patient symptom diaries with cardiac rhythm strips. In patients with infrequent episodes occurring weeks apart, an external event recorder or subcutaneous implantable loop recorder provides prolonged diagnostic surveillance over up to 3 years.",
+   "say": "Evaluating intermittent syncope in sinus node disease relies on ambulatory Holter monitoring. Continuous recordings correlate recorded symptoms with rhythm strips. For infrequent symptoms occurring weeks apart, an implantable loop recorder offers extended diagnostic monitoring for up to three years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "24-48 hour Holter",
+     "points": [
+      "Continuous recording of every beat",
+      "Best for daily symptoms and palpitations",
+      "Calculates total burden and nocturnal pauses"
+     ]
+    },
+    "right": {
+     "title": "Implantable loop recorder",
+     "points": [
+      "Subcutaneous insertion under local anaesthesia",
+      "Continuous monitoring up to 3 years",
+      "Ideal for unexplained recurrent syncope"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Symptomatic sinus node disease unresponsive to reversible drug withdrawal requires a **permanent pacemaker**. Transvenous dual-chamber pacing (DDD mode) preserves physiological atrioventricular synchrony, minimizes the risk of pacemaker syndrome, and prevents atrial fibrillation compared to ventricular single-chamber pacing. Pacemaker implantation relieves syncope and improves quality of life, although it does not alter underlying all-cause mortality.",
+   "say": "Symptomatic sinus node dysfunction without a reversible cause demands permanent pacemaker implantation. Dual chamber pacing preserves atrioventricular synchrony and prevents pacemaker syndrome. While pacemaker therapy relieves syncope and fatigue, it does not alter underlying mortality.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-avblock.svg",
+    "alt": "Diagram showing pacemaker pacing spikes and capture on ECG.",
+    "caption": "Pacemaker indications, dual-chamber pacing and ECG capture. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Always review medications when assessing bradycardia or conduction delays. Stop beta-blockers, non-dihydropyridine calcium channel blockers, digoxin, and antiarrhythmic agents to confirm whether nodal failure is drug-induced. When persistent symptomatic bradycardia, prolonged pauses, or tachycardia-bradycardia syndrome persist, arrange immediate **electrophysiology** consultation for permanent pacemaker implantation.",
+   "say": "Always check for offending medications in bradycardia. Discontinue beta blockers, verapamil, diltiazem and digoxin to rule out drug-induced nodal depression. When symptomatic bradycardia or long pauses persist, refer promptly for permanent pacemaker implantation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "brady",
+      "label": "Documented symptomatic bradycardia / pause"
+     },
+     {
+      "id": "meds",
+      "label": "Withdraw nodal blocking medications"
+     },
+     {
+      "id": "persist",
+      "label": "Persistent symptoms and pauses"
+     },
+     {
+      "id": "ppm",
+      "label": "Dual-chamber permanent pacemaker"
+     }
+    ],
+    "edges": [
+     [
+      "brady",
+      "meds"
+     ],
+     [
+      "meds",
+      "persist"
+     ],
+     [
+      "persist",
+      "ppm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
