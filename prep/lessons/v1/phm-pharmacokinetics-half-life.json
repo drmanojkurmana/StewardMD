@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "phm-pharmacokinetics",
+  "subject": "pharmacology",
+  "title": "Elimination Half-Life, Total Clearance, and First-Order Drug Kinetics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The time required for the total amount of drug in the body or its plasma concentration to decrease by exactly fifty percent during the elimination phase is designated as the **elimination half-life**. Denoted mathematically as t1/2, this fundamental pharmacokinetic value dictates the required dosing frequency and establishes the precise duration of time necessary to achieve steady-state equilibrium during continuous maintenance therapy.",
+      "say": "Elimination half-life measures the time needed for plasma drug concentration to drop by half, governing dosing intervals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Short half-life drugs (<4 hours)",
+          "points": [
+            "Rapid elimination from circulation",
+            "Examples include penicillin G and lidocaine",
+            "Requires frequent dosing or continuous infusion",
+            "Steady state achieved within 12 to 16 hours"
+          ]
+        },
+        "right": {
+          "title": "Long half-life drugs (>24 hours)",
+          "points": [
+            "Slow elimination and tissue accumulation",
+            "Examples include amiodarone and digoxin",
+            "Supports convenient once-daily or weekly dosing",
+            "Requires days to weeks to reach steady state"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Elimination half-life is a secondary pharmacokinetic parameter derived from two independent physiological variables, the volume of distribution and total body clearance. The relationship is governed by the constant 0.693, the natural logarithm of two, represented by the **half-life equation**: t1/2 equals 0.693 multiplied by volume of distribution, divided by clearance. Consequently, an expansion of fluid volume in heart failure prolongs half-life even when intrinsic organ clearance remains unaltered.",
+      "say": "Half-life is proportional to distribution volume and inversely proportional to clearance, prolonged by fluid overload.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "formula",
+            "label": "t1/2 = (0.693 * Vd) / Clearance"
+          },
+          {
+            "id": "vd",
+            "label": "Expansion of Vd (ascites, oedema) prolongs t1/2"
+          },
+          {
+            "id": "cl",
+            "label": "Reduction of clearance (renal/hepatic failure) prolongs t1/2"
+          },
+          {
+            "id": "adjustment",
+            "label": "Clinician prolongs dosing interval to prevent toxicity"
+          }
+        ],
+        "edges": [
+          [
+            "formula",
+            "vd"
+          ],
+          [
+            "formula",
+            "cl"
+          ],
+          [
+            "vd",
+            "adjustment"
+          ],
+          [
+            "cl",
+            "adjustment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The hypothetical volume of biological fluid completely purged of intact drug per unit of time through all physiological elimination mechanisms constitutes **total body clearance**. Represented as milliliters per minute or liters per hour, total systemic clearance represents the additive sum of individual organ elimination pathways: renal clearance, hepatic metabolic clearance, biliary excretion, and minor pulmonary excretion. Clearance reflects the intrinsic eliminating capacity of the kidneys and liver.",
+      "say": "Total body clearance sums renal, hepatic, and biliary clearance, reflecting the volume of plasma cleared per minute.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clearance pathway",
+          "Primary anatomical organ",
+          "Physiological mechanism",
+          "Clinical assessment parameter"
+        ],
+        "rows": [
+          [
+            "Renal clearance",
+            "Kidneys (glomeruli and tubules)",
+            "Glomerular filtration and active secretion",
+            "Creatinine clearance and eGFR"
+          ],
+          [
+            "Hepatic clearance",
+            "Liver parenchymal hepatocytes",
+            "Phase I and Phase II metabolic conversion",
+            "Child-Pugh and MELD score"
+          ],
+          [
+            "Biliary clearance",
+            "Biliary canaliculi into bile",
+            "Active ABC transport excretion into duodenum",
+            "Serum bilirubin and biliary imaging"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When the rate of drug elimination is directly proportional to the instantaneous plasma drug concentration, the process obeys **first-order kinetics**. Under first-order elimination, a constant fraction or percentage of the drug is eliminated per unit of time, meaning clearance and elimination half-life remain constant across escalating therapeutic doses. Most clinical pharmaceuticals follow first-order kinetics at standard therapeutic plasma concentrations because eliminating enzymes and tubular transport proteins are operating far below their saturation threshold.",
+      "say": "First-order kinetics eliminates a constant fraction of drug per hour, keeping clearance and half-life stable across doses.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-gentamicin.webp",
+        "alt": "First-order kinetics and clearance graph",
+        "caption": "Gentamicin plasma concentration decay curve demonstrating exponential decline characteristic of first-order elimination kinetics."
+      }
+    },
+    {
+      "tx": "Plotting plasma drug concentration against time on standard arithmetic coordinates produces an exponential decay curve that approaches the baseline asymptotically. In contrast, transforming the vertical concentration axis to a logarithmic scale yields a straight downward slope governed by the **elimination rate constant**. This linear semilogarithmic relationship enables clinicians to calculate the elimination rate constant (kel) directly from the slope, where half-life equals zero point six nine three divided by kel.",
+      "say": "Plotting drug concentrations on a logarithmic scale yields a linear slope representing the constant fractional elimination rate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Linear arithmetic plot",
+          "points": [
+            "Curvilinear exponential decay curve",
+            "Slope changes continuously over time",
+            "Visually difficult to extrapolate half-life",
+            "Reflects true fractional concentration decline"
+          ]
+        },
+        "right": {
+          "title": "Semilogarithmic plot",
+          "points": [
+            "Converts exponential curve into straight line",
+            "Constant downward slope equals -kel / 2.303",
+            "Enables precise calculation of elimination rate",
+            "Distinguishes multi-compartment alpha and beta phases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The fraction of drug removed from circulating blood during a single passage through an eliminating organ like the liver is defined as the **extraction ratio**. For high-extraction drugs like lidocaine and propranolol (extraction ratio greater than 0.7), organ clearance is perfusion-limited, depending strictly on hepatic blood flow. Conversely, low-extraction drugs like warfarin and theophylline (extraction ratio less than 0.3) are capacity-limited, depending on intrinsic enzyme activity and unbound drug fraction.",
+      "say": "High extraction drugs depend on organ blood flow for clearance, whereas low extraction drugs depend on metabolic enzymes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Extraction category",
+          "Extraction ratio (ER)",
+          "Primary rate-limiting factor",
+          "Representative clinical drugs"
+        ],
+        "rows": [
+          [
+            "High extraction",
+            "ER > 0.7",
+            "Organ perfusion blood flow rate",
+            "Lidocaine, propranolol, morphine, nitroglycerin"
+          ],
+          [
+            "Intermediate extraction",
+            "ER 0.3 to 0.7",
+            "Combined blood flow and enzyme capacity",
+            "Codeine, nortriptyline, aspirin"
+          ],
+          [
+            "Low extraction",
+            "ER < 0.3",
+            "Intrinsic hepatic enzyme capacity and free fraction",
+            "Warfarin, theophylline, diazepam, phenytoin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Establishing the optimal schedule for administering repeated drug doses balances clinical efficacy against drug accumulation and toxicity, determining the **dosing interval**. For drugs possessing wide therapeutic windows like ampicillin, dosing intervals can exceed the elimination half-life. For toxic agents with narrow safety margins like aminoglycosides, the dosing interval must correspond closely to the half-life, or utilize once-daily extended-interval dosing regimens to ensure complete clearance and avoid ototoxicity and nephrotoxicity.",
+      "say": "Dosing intervals are matched to half-life and safety margins to maintain efficacy while preventing drug accumulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t12",
+            "label": "Measure elimination half-life (t1/2)"
+          },
+          {
+            "id": "window",
+            "label": "Assess therapeutic safety window width"
+          },
+          {
+            "id": "interval",
+            "label": "Select dosing interval matching half-life"
+          },
+          {
+            "id": "regimen",
+            "label": "Implement once-daily or divided-dose schedule"
+          }
+        ],
+        "edges": [
+          [
+            "t12",
+            "window"
+          ],
+          [
+            "window",
+            "interval"
+          ],
+          [
+            "interval",
+            "regimen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For water-soluble pharmaceuticals eliminated unchanged through the urinary tract, progressive reductions in glomerular filtration rate produce proportionate declines in drug clearance. Failure to reduce the maintenance dose or lengthen the dosing interval in renal impairment causes dangerous **drug accumulation**. Serum creatinine and estimated creatinine clearance calculated by the Cockcroft-Gault formula serve as mandatory guides to calibrate daily doses of renally cleared medications including gentamicin, digoxin, and atenolol.",
+      "say": "Impaired glomerular filtration reduces renal drug clearance, demanding dose reductions or wider intervals to avoid toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dose reduction strategy",
+          "points": [
+            "Administer smaller dose at standard interval",
+            "Produces smoother plasma concentrations",
+            "Less peak-to-trough oscillation",
+            "Preferred for drugs needing continuous levels"
+          ]
+        },
+        "right": {
+          "title": "Interval extension strategy",
+          "points": [
+            "Administer standard dose at lengthened interval",
+            "Allows complete washout to safe trough level",
+            "Provides high peak bactericidal efficacy",
+            "Preferred for aminoglycoside once-daily dosing"
+          ]
+        }
+      }
+    }
+  ]
+}
