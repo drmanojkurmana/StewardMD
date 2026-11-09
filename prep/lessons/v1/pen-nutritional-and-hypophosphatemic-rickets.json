@@ -1,154 +1,236 @@
 {
-  "id": "pen-nutritional-and-hypophosphatemic-rickets",
-  "title": "Nutritional vs X-Linked Hypophosphatemic Rickets: PHEX, FGF-23 and Burosumab",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Rickets, Calcium Disorders and Posterior Pituitary",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Nutritional cholecalciferol deficiency provokes secondary hyperparathyroidism and profound hypophosphatemia.",
-      "tx": "Evaluate baseline biochemical derangements by recognizing the classic **Nutritional rickets biochemical profile** on laboratory panels. Nutritional vitamin D deficiency rickets manifests with low or normal serum calcium, low serum phosphate, markedly elevated alkaline phosphatase (> 500-1000 IU/L), elevated PTH, and serum 25(OH)D < 12 ng/mL (30 nmol/L).",
-      "vis": {
-        "kind": "table",
-        "title": "Nutritional Rickets Laboratory Findings",
-        "cols": ["Laboratory Marker", "Measured Value", "Pathophysiological Mechanism"],
-        "rows": [
-          ["Serum 25(OH)D", "< 12 ng/mL (30 nmol/L)", "Severe depletion of cutaneous and dietary cholecalciferol"],
-          ["Alkaline Phosphatase", "> 500-1000 IU/L (elevated)", "Exaggerated unmineralized osteoid and osteoblast activity"],
-          ["Serum Phosphate", "Low / marked hypophosphatemia", "PTH-driven proximal tubular phosphaturia"],
-          ["Serum Calcium", "Low or normal (compensated)", "Secondary hyperparathyroidism restores ionized calcium"]
-        ]
-      }
+ "id": "pen-nutritional-and-hypophosphatemic-rickets",
+ "title": "Nutritional vs X-Linked Hypophosphatemic Rickets: PHEX, FGF-23 and Burosumab",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Rickets, Calcium Disorders and Posterior Pituitary",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Nutritional cholecalciferol deficiency provokes secondary hyperparathyroidism and profound hypophosphatemia.",
+   "tx": "Evaluate baseline biochemical derangements by recognizing the classic **Nutritional rickets biochemical profile** on laboratory panels. Nutritional vitamin D deficiency rickets manifests with low or normal serum calcium, low serum phosphate, markedly elevated alkaline phosphatase (> 500-1000 IU/L), elevated PTH, and serum 25(OH)D < 12 ng/mL (30 nmol/L).",
+   "vis": {
+    "kind": "table",
+    "title": "Nutritional Rickets Laboratory Findings",
+    "cols": [
+     "Laboratory Marker",
+     "Measured Value",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Serum 25(OH)D",
+      "< 12 ng/mL (30 nmol/L)",
+      "Severe depletion of cutaneous and dietary cholecalciferol"
+     ],
+     [
+      "Alkaline Phosphatase",
+      "> 500-1000 IU/L (elevated)",
+      "Exaggerated unmineralized osteoid and osteoblast activity"
+     ],
+     [
+      "Serum Phosphate",
+      "Low / marked hypophosphatemia",
+      "PTH-driven proximal tubular phosphaturia"
+     ],
+     [
+      "Serum Calcium",
+      "Low or normal (compensated)",
+      "Secondary hyperparathyroidism restores ionized calcium"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "High dose oral cholecalciferol supplemented with elemental calcium rapidly promotes growth plate mineralization.",
+   "tx": "Restore total body stores through therapeutic repletion by administering **Stoss therapy high-dose vitamin D** with minerals. Treatment of nutritional rickets is oral cholecalciferol (vitamin D3 2000 IU/day for 12 weeks, or single-day stoss therapy 300,000-600,000 IU) along with elemental calcium carbonate supplementation (500 mg/day) to prevent hungry bone hypocalcemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-d-deficiency-fig1.webp",
+    "alt": "Skeletal diagram and wrist radiograph demonstrating rachitic changes including distal metaphyseal fraying and widened physes.",
+    "caption": "Radiographic and skeletal manifestations of active pediatric rickets."
+   }
+  },
+  {
+   "say": "Inactivating endopeptidase mutations lead to unregulated accumulation of circulating phosphaturic hormone.",
+   "tx": "Identify inherited renal phosphate wasting by investigating **X-linked hypophosphatemic rickets (XLH) genetics** in children. XLH is an X-linked dominant mutation in the PHEX gene (Xp22.1) causing loss of PHEX cleavage and pathological elevation of circulating Fibroblast Growth Factor 23 (FGF-23).",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "phex",
+      "label": "PHEX Gene Inactivating Mutation (Xp22.1)"
+     },
+     {
+      "id": "cleav",
+      "label": "Failure of Physiological FGF-23 Endopeptidase Cleavage"
+     },
+     {
+      "id": "fgf",
+      "label": "Pathological Elevation of Circulating Intact FGF-23"
+     },
+     {
+      "id": "xlh",
+      "label": "X-Linked Hypophosphatemic Rickets (XLH)"
+     }
+    ],
+    "edges": [
+     [
+      "phex",
+      "cleav"
+     ],
+     [
+      "cleav",
+      "fgf"
+     ],
+     [
+      "fgf",
+      "xlh"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Elevated fibroblast growth factor suppresses proximal tubular phosphate transporters and blunts active vitamin D activation.",
+   "tx": "Delineate renal tubular transport failure by measuring **Tubular maximum phosphate reabsorption (TmP/GFR)** indices. FGF-23 downregulates apical sodium-phosphate cotransporters (NaPi-IIa / NaPi-IIc) in the proximal tubule, causing massive renal phosphate wasting with subnormal TmP/GFR and inappropriately normal/low 1,25(OH)2D levels. This defect manifests despite severe systemic hypophosphatemia.",
+   "vis": {
+    "kind": "table",
+    "title": "Renal Actions of Pathological FGF-23 Excess",
+    "cols": [
+     "Renal Target",
+     "Molecular Alteration",
+     "Systemic Consequence"
+    ],
+    "rows": [
+     [
+      "NaPi-IIa / NaPi-IIc",
+      "Internalization and degradation",
+      "Massive urinary phosphate wasting (low TmP/GFR)"
+     ],
+     [
+      "1-Alpha-Hydroxylase",
+      "Enzyme suppression (CYP27B1)",
+      "Inappropriately low or normal calcitriol"
+     ],
+     [
+      "24-Hydroxylase",
+      "Enzyme stimulation (CYP24A1)",
+      "Accelerated catabolism of active vitamin D metabolites"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Targeted monoclonal antibody therapy neutralizes circulating hormone and corrects underlying phosphate homeostatic collapse.",
+   "tx": "Introduce targeted biologic therapy by prescribing the **Burosumab anti-FGF23 monoclonal antibody** in confirmed XLH cases. Burosumab (human anti-FGF23 IgG1 monoclonal antibody, 0.8 mg/kg SC every 2 weeks) normalizes renal phosphate reabsorption, heals rachitic bone lesions, and straightens lower extremity deformities superior to conventional therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bur",
+      "label": "Burosumab (0.8 mg/kg SC Every 2 Weeks)"
+     },
+     {
+      "id": "neut",
+      "label": "Direct Neutralization of Circulating Free FGF-23"
+     },
+     {
+      "id": "napi",
+      "label": "Restoration of Proximal NaPi-IIa/c Transporters"
+     },
+     {
+      "id": "heal",
+      "label": "Healed Rickets, Corrected Deformities & Growth"
+     }
+    ],
+    "edges": [
+     [
+      "bur",
+      "neut"
+     ],
+     [
+      "neut",
+      "napi"
+     ],
+     [
+      "napi",
+      "heal"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Frequent oral phosphate replacement alongside active metabolites risks severe renal calcification and gland hyperplasia.",
+   "tx": "Recognize adverse outcomes of legacy therapy reviewing **Conventional XLH therapy complications** during ongoing surveillance. Conventional therapy requires oral phosphate solutions (40-60 mg/kg/day divided 4-6 times daily) plus calcitriol (20-30 ng/kg/day); carries high risk of secondary/tertiary hyperparathyroidism and medullary nephrocalcinosis. Serial renal ultrasonography and urinary calcium monitoring are mandatory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral Phosphate Solutions (40-60 mg/kg)",
+     "points": [
+      "Divided into 4-6 doses daily around the clock",
+      "Transient spikes in serum phosphate",
+      "Drives secondary hyperparathyroidism"
+     ]
     },
-    {
-      "say": "High dose oral cholecalciferol supplemented with elemental calcium rapidly promotes growth plate mineralization.",
-      "tx": "Restore total body stores through therapeutic repletion by administering **Stoss therapy high-dose vitamin D** with minerals. Treatment of nutritional rickets is oral cholecalciferol (vitamin D3 2000 IU/day for 12 weeks, or single-day stoss therapy 300,000-600,000 IU) along with elemental calcium carbonate supplementation (500 mg/day) to prevent hungry bone hypocalcemia.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Daily Dosing Regimen",
-          "points": [
-            "Oral cholecalciferol 2000 IU/day for 12 weeks",
-            "Elemental calcium carbonate 500 mg/day orally",
-            "Continuous gentle bone mineralization"
-          ]
-        },
-        "right": {
-          "title": "Stoss Single-Day Regimen",
-          "points": [
-            "Single-day stoss therapy 300,000-600,000 IU",
-            "Elemental calcium carbonate 500 mg/day co-administered",
-            "Overcomes medication non-compliance"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Inactivating endopeptidase mutations lead to unregulated accumulation of circulating phosphaturic hormone.",
-      "tx": "Identify inherited renal phosphate wasting by investigating **X-linked hypophosphatemic rickets (XLH) genetics** in children. XLH is an X-linked dominant mutation in the PHEX gene (Xp22.1) causing loss of PHEX cleavage and pathological elevation of circulating Fibroblast Growth Factor 23 (FGF-23).",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "phex", "label": "PHEX Gene Inactivating Mutation (Xp22.1)"},
-          {"id": "cleav", "label": "Failure of Physiological FGF-23 Endopeptidase Cleavage"},
-          {"id": "fgf", "label": "Pathological Elevation of Circulating Intact FGF-23"},
-          {"id": "xlh", "label": "X-Linked Hypophosphatemic Rickets (XLH)"}
-        ],
-        "edges": [
-          ["phex", "cleav"],
-          ["cleav", "fgf"],
-          ["fgf", "xlh"]
-        ]
-      }
-    },
-    {
-      "say": "Elevated fibroblast growth factor suppresses proximal tubular phosphate transporters and blunts active vitamin D activation.",
-      "tx": "Delineate renal tubular transport failure by measuring **Tubular maximum phosphate reabsorption (TmP/GFR)** indices. FGF-23 downregulates apical sodium-phosphate cotransporters (NaPi-IIa / NaPi-IIc) in the proximal tubule, causing massive renal phosphate wasting with subnormal TmP/GFR and inappropriately normal/low 1,25(OH)2D levels. This defect manifests despite severe systemic hypophosphatemia.",
-      "vis": {
-        "kind": "table",
-        "title": "Renal Actions of Pathological FGF-23 Excess",
-        "cols": ["Renal Target", "Molecular Alteration", "Systemic Consequence"],
-        "rows": [
-          ["NaPi-IIa / NaPi-IIc", "Internalization and degradation", "Massive urinary phosphate wasting (low TmP/GFR)"],
-          ["1-Alpha-Hydroxylase", "Enzyme suppression (CYP27B1)", "Inappropriately low or normal calcitriol"],
-          ["24-Hydroxylase", "Enzyme stimulation (CYP24A1)", "Accelerated catabolism of active vitamin D metabolites"]
-        ]
-      }
-    },
-    {
-      "say": "Targeted monoclonal antibody therapy neutralizes circulating hormone and corrects underlying phosphate homeostatic collapse.",
-      "tx": "Introduce targeted biologic therapy by prescribing the **Burosumab anti-FGF23 monoclonal antibody** in confirmed XLH cases. Burosumab (human anti-FGF23 IgG1 monoclonal antibody, 0.8 mg/kg SC every 2 weeks) normalizes renal phosphate reabsorption, heals rachitic bone lesions, and straightens lower extremity deformities superior to conventional therapy.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "bur", "label": "Burosumab (0.8 mg/kg SC Every 2 Weeks)"},
-          {"id": "neut", "label": "Direct Neutralization of Circulating Free FGF-23"},
-          {"id": "napi", "label": "Restoration of Proximal NaPi-IIa/c Transporters"},
-          {"id": "heal", "label": "Healed Rickets, Corrected Deformities & Growth"}
-        ],
-        "edges": [
-          ["bur", "neut"],
-          ["neut", "napi"],
-          ["napi", "heal"]
-        ]
-      }
-    },
-    {
-      "say": "Frequent oral phosphate replacement alongside active metabolites risks severe renal calcification and gland hyperplasia.",
-      "tx": "Recognize adverse outcomes of legacy therapy reviewing **Conventional XLH therapy complications** during ongoing surveillance. Conventional therapy requires oral phosphate solutions (40-60 mg/kg/day divided 4-6 times daily) plus calcitriol (20-30 ng/kg/day); carries high risk of secondary/tertiary hyperparathyroidism and medullary nephrocalcinosis. Serial renal ultrasonography and urinary calcium monitoring are mandatory.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Oral Phosphate Solutions (40-60 mg/kg)",
-          "points": [
-            "Divided into 4-6 doses daily around the clock",
-            "Transient spikes in serum phosphate",
-            "Drives secondary hyperparathyroidism"
-          ]
-        },
-        "right": {
-          "title": "Calcitriol (20-30 ng/kg/day)",
-          "points": [
-            "Replaces suppressed 1,25(OH)2D synthesis",
-            "Increases intestinal calcium absorption",
-            "Frequent nephrocalcinosis on renal ultrasound"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Typical metaphyseal cupping, fraying, and growth plate widening indicate failure of provisional calcification.",
-      "tx": "Identify structural skeletal mineralization failure by examining **Radiographic hallmarks of active rickets** on skeletal surveys. Wrist and knee radiographs demonstrate cupping, fraying (brush-like appearance), widening, and splaying of the metaphysis with increased width of the radiolucent physis (growth plate). Cortical thinning and significant lower extremity bowing also occur.",
-      "vis": {
-        "kind": "table",
-        "title": "Radiological Features of Active Rickets",
-        "cols": ["Anatomical Site", "Radiological Hallmark", "Structural Cause"],
-        "rows": [
-          ["Metaphyseal Edge", "Cupping and fraying (brush-like)", "Disorganized uncalcified osteoid matrix"],
-          ["Growth Plate", "Widened radiolucent physis", "Accumulation of hypertrophic chondrocytes"],
-          ["Shaft / Diaphysis", "Cortical thinning and bowing", "Mechanical yielding to physiological weight-bearing"]
-        ]
-      }
-    },
-    {
-      "say": "Microscopic dental dentin defects permit rapid bacterial invasion and recurrent pulp necrosis.",
-      "tx": "Prevent recurrent orofacial complications by screening for **Dental abscesses in XLH** during regular dental examinations. Patients with XLH develop recurrent spontaneous periapical dental abscesses in non-carious teeth due to impaired dentin mineralization and enlarged pulp chambers, requiring proactive dental sealants.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "mut", "label": "PHEX Defect & Hypophosphatemia"},
-          {"id": "dent", "label": "Impaired Dentin Mineralization & Enlarged Pulp"},
-          {"id": "inv", "label": "Micro-Clefts Permitting Bacterial Pulp Invasion"},
-          {"id": "abs", "label": "Spontaneous Non-Carious Periapical Abscesses"}
-        ],
-        "edges": [
-          ["mut", "dent"],
-          ["dent", "inv"],
-          ["inv", "abs"]
-        ]
-      }
+    "right": {
+     "title": "Calcitriol (20-30 ng/kg/day)",
+     "points": [
+      "Replaces suppressed 1,25(OH)2D synthesis",
+      "Increases intestinal calcium absorption",
+      "Frequent nephrocalcinosis on renal ultrasound"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Typical metaphyseal cupping, fraying, and growth plate widening indicate failure of provisional calcification.",
+   "tx": "Identify structural skeletal mineralization failure by examining **Radiographic hallmarks of active rickets** on skeletal surveys. Wrist and knee radiographs demonstrate cupping, fraying (brush-like appearance), widening, and splaying of the metaphysis with increased width of the radiolucent physis (growth plate). Cortical thinning and significant lower extremity bowing also occur.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-rickets.webp",
+    "alt": "Wrist radiograph of a child with rickets showing classic widening, cupping, and fraying of the distal radial and ulnar metaphyses.",
+    "caption": "Distal radial and ulnar metaphyseal cupping and fraying pathognomonic of rickets."
+   }
+  },
+  {
+   "say": "Microscopic dental dentin defects permit rapid bacterial invasion and recurrent pulp necrosis.",
+   "tx": "Prevent recurrent orofacial complications by screening for **Dental abscesses in XLH** during regular dental examinations. Patients with XLH develop recurrent spontaneous periapical dental abscesses in non-carious teeth due to impaired dentin mineralization and enlarged pulp chambers, requiring proactive dental sealants.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mut",
+      "label": "PHEX Defect & Hypophosphatemia"
+     },
+     {
+      "id": "dent",
+      "label": "Impaired Dentin Mineralization & Enlarged Pulp"
+     },
+     {
+      "id": "inv",
+      "label": "Micro-Clefts Permitting Bacterial Pulp Invasion"
+     },
+     {
+      "id": "abs",
+      "label": "Spontaneous Non-Carious Periapical Abscesses"
+     }
+    ],
+    "edges": [
+     [
+      "mut",
+      "dent"
+     ],
+     [
+      "dent",
+      "inv"
+     ],
+     [
+      "inv",
+      "abs"
+     ]
+    ]
+   }
+  }
+ ]
 }

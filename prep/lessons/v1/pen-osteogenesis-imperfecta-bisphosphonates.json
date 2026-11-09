@@ -1,275 +1,236 @@
 {
-  "id": "pen-osteogenesis-imperfecta-bisphosphonates",
-  "title": "Osteogenesis Imperfecta: Type 1 Collagen Mutations, Sillence Types and Bisphosphonates",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Rickets, Calcium Disorders and Posterior Pituitary",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "The vast majority of osteogenesis imperfecta cases stem from mutations in type one collagen alpha chains.",
-      "tx": "Characterize the classical genetics involving **COL1A1 and COL1A2 dominant genetics** in osteogenesis imperfecta. Over 85-90% of osteogenesis imperfecta is autosomal dominant, caused by mutations in COL1A1 (17q21.33) or COL1A2 (7q21.3) encoding the pro-alpha-1 and pro-alpha-2 chains of type 1 collagen; qualitative glycine substitutions cause severe structural deformity, whereas quantitative null mutations cause milder phenotypes.",
-      "vis": {
-        "kind": "table",
-        "title": "Type 1 Collagen Genetics in Osteogenesis Imperfecta",
-        "cols": [
-          "Gene & Locus",
-          "Encoded Polypeptide",
-          "Mutation Mechanism & Impact"
-        ],
-        "rows": [
-          [
-            "COL1A1 (17q21.33)",
-            "Pro-alpha-1(I) chain",
-            "Null alleles cause mild OI Type I; glycine substitutions cause severe Type II-IV"
-          ],
-          [
-            "COL1A2 (7q21.3)",
-            "Pro-alpha-2(I) chain",
-            "Point mutations disrupt triple helix folding and stability"
-          ],
-          [
-            "Autosomal Recessive (10-15%)",
-            "CRTAP, P3H1, PPIB, FKBP10",
-            "Disrupt 3-hydroxylation complex and molecular chaperones"
-          ]
-        ]
-      }
+ "id": "pen-osteogenesis-imperfecta-bisphosphonates",
+ "title": "Osteogenesis Imperfecta: Type 1 Collagen Mutations, Sillence Types and Bisphosphonates",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Rickets, Calcium Disorders and Posterior Pituitary",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The vast majority of osteogenesis imperfecta cases stem from mutations in type one collagen alpha chains.",
+   "tx": "Characterize the classical genetics involving **COL1A1 and COL1A2 dominant genetics** in osteogenesis imperfecta. Over 85-90% of osteogenesis imperfecta is autosomal dominant, caused by mutations in COL1A1 (17q21.33) or COL1A2 (7q21.3) encoding the pro-alpha-1 and pro-alpha-2 chains of type 1 collagen; qualitative glycine substitutions cause severe structural deformity, whereas quantitative null mutations cause milder phenotypes.",
+   "vis": {
+    "kind": "table",
+    "title": "Type 1 Collagen Genetics in Osteogenesis Imperfecta",
+    "cols": [
+     "Gene & Locus",
+     "Encoded Polypeptide",
+     "Mutation Mechanism & Impact"
+    ],
+    "rows": [
+     [
+      "COL1A1 (17q21.33)",
+      "Pro-alpha-1(I) chain",
+      "Null alleles cause mild OI Type I; glycine substitutions cause severe Type II-IV"
+     ],
+     [
+      "COL1A2 (7q21.3)",
+      "Pro-alpha-2(I) chain",
+      "Point mutations disrupt triple helix folding and stability"
+     ],
+     [
+      "Autosomal Recessive (10-15%)",
+      "CRTAP, P3H1, PPIB, FKBP10",
+      "Disrupt 3-hydroxylation complex and molecular chaperones"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The Sillence classification stratifies osteogenesis imperfecta into four main clinical subtypes based on severity.",
+   "tx": "Classify clinical phenotypes using the **Sillence clinical classification (Types I-IV)** in pediatric practice. Classified into: Type I (mild, non-deforming, blue sclerae, quantitative defect), Type II (perinatal lethal, crumpling long bones, beaded ribs), Type III (progressively deforming, severe short stature), and Type IV (moderate deforming, normal sclerae).",
+   "vis": {
+    "kind": "table",
+    "title": "Sillence Classification of Osteogenesis Imperfecta",
+    "cols": [
+     "Type",
+     "Clinical Severity",
+     "Key Features"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Mild, non-deforming",
+      "Blue sclerae, childhood fractures, adult hearing loss, normal stature"
+     ],
+     [
+      "Type II",
+      "Perinatal lethal",
+      "Extreme bone fragility, crumpled femora, beaded ribs, lethal pulmonary hypoplasia"
+     ],
+     [
+      "Type III",
+      "Progressively deforming",
+      "Severe bone deformity, extreme short stature, triangular facies, scoliosis"
+     ],
+     [
+      "Type IV",
+      "Moderate deforming",
+      "Normal sclerae, recurrent fractures, variable dentinogenesis imperfecta"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Extreme scleral thinning permits underlying choroidal pigment to show through as distinct blue sclerae.",
+   "tx": "Analyze the anatomical basis and diagnostic significance of the **Blue sclerae mechanism** in osteogenesis imperfecta. Blue sclerae result from extreme thinning of scleral collagen fibers, permitting the underlying dark pigmented choroid coat to become visually translucent; while classic in OI Type I, faint blue sclerae can be normal in neonates under 6 months due to physiological scleral thinness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/osteogenesis-imperfecta-type-3-fig1.webp",
+    "alt": "Composite medical illustration of osteogenesis imperfecta showing scleral thinning with blue hue, dentinogenesis imperfecta, and multiple bone fractures with intramedullary rodding.",
+    "caption": "Clinical and radiographic hallmarks of severe osteogenesis imperfecta."
+   }
+  },
+  {
+   "say": "Dentinogenesis imperfecta manifests with discolored, translucent teeth that undergo accelerated attrition.",
+   "tx": "Recognize the dental and radiographic characteristics of **Dentinogenesis imperfecta hallmark** in osteogenesis imperfecta. Dentinogenesis imperfecta manifests with opalescent, amber or blue-gray teeth with accelerated attrition and pulp canal obliteration on dental panoramic radiography; defective type 1 collagen in dentin causes early enamel spalling and rapid dental destruction requiring early prosthodontic crowns.",
+   "vis": {
+    "kind": "table",
+    "title": "Dentinogenesis Imperfecta Diagnostic Characteristics",
+    "cols": [
+     "Feature",
+     "Clinical Appearance",
+     "Pathological Basis"
+    ],
+    "rows": [
+     [
+      "Tooth coloration",
+      "Amber, translucent, yellow-brown or opalescent gray",
+      "Abnormal light diffraction through defective dentin"
+     ],
+     [
+      "Structural wear",
+      "Accelerated coronal attrition and chipping",
+      "Abnormal dentinoenamel junction leading to enamel loss"
+     ],
+     [
+      "Radiography",
+      "Bulbous crowns, cervical constriction, obliteration of pulp canals",
+      "Rapid progressive dentin deposition filling pulp chamber"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Multiple accessory sutural ossicles known as Wormian bones appear classically along the lambdoid suture.",
+   "tx": "Identify the diagnostic significance of **Wormian bones on skull radiographs** in suspected osteogenesis imperfecta. Skull radiographs classically demonstrate >= 10 Wormian bones (mosaic islands of accessory suture ossification > 6 x 4 mm) along the lambdoid suture, serving as an essential skeletal marker to distinguish osteogenesis imperfecta and genetic fragility from non-accidental trauma.",
+   "vis": {
+    "kind": "flow",
+    "title": "Radiological Differentiation in Suspected Bone Fragility",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Child with Multiple Unexplained Fractures"
+     },
+     {
+      "id": "w2",
+      "label": "Skeletal Survey Including Skull Radiograph"
+     },
+     {
+      "id": "w3",
+      "label": ">= 10 Wormian Bones Along Lambdoid Suture"
+     },
+     {
+      "id": "w4",
+      "label": "Confirms Underlying Osteogenesis Imperfecta"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2",
+      "Comprehensive skeletal imaging"
+     ],
+     [
+      "w2",
+      "w3",
+      "Mosaic sutural ossification identified"
+     ],
+     [
+      "w3",
+      "w4",
+      "Refutes non-accidental injury hypothesis"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cyclical intravenous pamidronate reshapes compressed vertebral bodies and significantly reduces childhood fractures.",
+   "tx": "Administer cyclical bisphosphonate protocols following the **Intravenous pamidronate cyclical protocol** developed in Montreal. Cyclical intravenous pamidronate (1.0 mg/kg/day for 3 consecutive days every 3-4 months, cumulative annual dose 9 mg/kg/year) increases lumbar spine BMD Z-scores, reduces fracture rates, and reshapes collapsed vertebrae in growing children with moderate-to-severe osteogenesis imperfecta.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bone-calcium-bisphosphonates-hypercalcaemia-fig1.webp",
+    "alt": "Cellular diagram of bone remodeling illustrating osteoblast-osteoclast coupling, RANK ligand pathway, and osteoclast inhibition by bisphosphonate therapy.",
+    "caption": "Targeted inhibition of osteoclast-mediated bone resorption by cyclical bisphosphonates."
+   }
+  },
+  {
+   "say": "Intravenous zoledronic acid offers a convenient single-day infusion alternative with equivalent therapeutic efficacy.",
+   "tx": "Utilize outpatient bisphosphonate regimens incorporating **Intravenous zoledronic acid infusion** for pediatric OI management. Intravenous zoledronic acid (0.05 mg/kg IV infused over 30-45 minutes every 6 months) provides equivalent bone remineralization with fewer hospital visits compared to multi-day pamidronate; patients require pre-infusion hydration and verification of normal serum calcium and vitamin D.",
+   "vis": {
+    "kind": "compare",
+    "title": "Pamidronate vs Zoledronic Acid Regimens",
+    "left": {
+     "title": "Cyclical Pamidronate",
+     "points": [
+      "3 consecutive days infusion every 3-4 months",
+      "Longest safety record and proven vertebral reshaping",
+      "Requires multi-day hospital or day-care admission"
+     ]
     },
-    {
-      "say": "The Sillence classification stratifies osteogenesis imperfecta into four main clinical subtypes based on severity.",
-      "tx": "Classify clinical phenotypes using the **Sillence clinical classification (Types I-IV)** in pediatric practice. Classified into: Type I (mild, non-deforming, blue sclerae, quantitative defect), Type II (perinatal lethal, crumpling long bones, beaded ribs), Type III (progressively deforming, severe short stature), and Type IV (moderate deforming, normal sclerae).",
-      "vis": {
-        "kind": "table",
-        "title": "Sillence Classification of Osteogenesis Imperfecta",
-        "cols": [
-          "Type",
-          "Clinical Severity",
-          "Key Features"
-        ],
-        "rows": [
-          [
-            "Type I",
-            "Mild, non-deforming",
-            "Blue sclerae, childhood fractures, adult hearing loss, normal stature"
-          ],
-          [
-            "Type II",
-            "Perinatal lethal",
-            "Extreme bone fragility, crumpled femora, beaded ribs, lethal pulmonary hypoplasia"
-          ],
-          [
-            "Type III",
-            "Progressively deforming",
-            "Severe bone deformity, extreme short stature, triangular facies, scoliosis"
-          ],
-          [
-            "Type IV",
-            "Moderate deforming",
-            "Normal sclerae, recurrent fractures, variable dentinogenesis imperfecta"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Extreme scleral thinning permits underlying choroidal pigment to show through as distinct blue sclerae.",
-      "tx": "Analyze the anatomical basis and diagnostic significance of the **Blue sclerae mechanism** in osteogenesis imperfecta. Blue sclerae result from extreme thinning of scleral collagen fibers, permitting the underlying dark pigmented choroid coat to become visually translucent; while classic in OI Type I, faint blue sclerae can be normal in neonates under 6 months due to physiological scleral thinness.",
-      "vis": {
-        "kind": "compare",
-        "title": "Scleral Color in Osteogenesis Imperfecta",
-        "left": {
-          "title": "Blue Sclerae in OI Type I",
-          "points": [
-            "Thinning of collagen bundles in outer sclera",
-            "Dark choroid visible through translucent connective tissue",
-            "Persists lifelong as a hallmark diagnostic feature"
-          ]
-        },
-        "right": {
-          "title": "Normal Sclerae in OI Type IV",
-          "points": [
-            "Relatively thicker collagen architecture",
-            "White sclerae beyond infancy",
-            "Differentiates moderate OI Type IV from mild Type I"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Dentinogenesis imperfecta manifests with discolored, translucent teeth that undergo accelerated attrition.",
-      "tx": "Recognize the dental and radiographic characteristics of **Dentinogenesis imperfecta hallmark** in osteogenesis imperfecta. Dentinogenesis imperfecta manifests with opalescent, amber or blue-gray teeth with accelerated attrition and pulp canal obliteration on dental panoramic radiography; defective type 1 collagen in dentin causes early enamel spalling and rapid dental destruction requiring early prosthodontic crowns.",
-      "vis": {
-        "kind": "table",
-        "title": "Dentinogenesis Imperfecta Diagnostic Characteristics",
-        "cols": [
-          "Feature",
-          "Clinical Appearance",
-          "Pathological Basis"
-        ],
-        "rows": [
-          [
-            "Tooth coloration",
-            "Amber, translucent, yellow-brown or opalescent gray",
-            "Abnormal light diffraction through defective dentin"
-          ],
-          [
-            "Structural wear",
-            "Accelerated coronal attrition and chipping",
-            "Abnormal dentinoenamel junction leading to enamel loss"
-          ],
-          [
-            "Radiography",
-            "Bulbous crowns, cervical constriction, obliteration of pulp canals",
-            "Rapid progressive dentin deposition filling pulp chamber"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Multiple accessory sutural ossicles known as Wormian bones appear classically along the lambdoid suture.",
-      "tx": "Identify the diagnostic significance of **Wormian bones on skull radiographs** in suspected osteogenesis imperfecta. Skull radiographs classically demonstrate >= 10 Wormian bones (mosaic islands of accessory suture ossification > 6 x 4 mm) along the lambdoid suture, serving as an essential skeletal marker to distinguish osteogenesis imperfecta and genetic fragility from non-accidental trauma.",
-      "vis": {
-        "kind": "flow",
-        "title": "Radiological Differentiation in Suspected Bone Fragility",
-        "nodes": [
-          {
-            "id": "w1",
-            "label": "Child with Multiple Unexplained Fractures"
-          },
-          {
-            "id": "w2",
-            "label": "Skeletal Survey Including Skull Radiograph"
-          },
-          {
-            "id": "w3",
-            "label": ">= 10 Wormian Bones Along Lambdoid Suture"
-          },
-          {
-            "id": "w4",
-            "label": "Confirms Underlying Osteogenesis Imperfecta"
-          }
-        ],
-        "edges": [
-          [
-            "w1",
-            "w2",
-            "Comprehensive skeletal imaging"
-          ],
-          [
-            "w2",
-            "w3",
-            "Mosaic sutural ossification identified"
-          ],
-          [
-            "w3",
-            "w4",
-            "Refutes non-accidental injury hypothesis"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Cyclical intravenous pamidronate reshapes compressed vertebral bodies and significantly reduces childhood fractures.",
-      "tx": "Administer cyclical bisphosphonate protocols following the **Intravenous pamidronate cyclical protocol** developed in Montreal. Cyclical intravenous pamidronate (1.0 mg/kg/day for 3 consecutive days every 3-4 months, cumulative annual dose 9 mg/kg/year) increases lumbar spine BMD Z-scores, reduces fracture rates, and reshapes collapsed vertebrae in growing children with moderate-to-severe osteogenesis imperfecta.",
-      "vis": {
-        "kind": "table",
-        "title": "Montreal Pamidronate Protocol Schedule",
-        "cols": [
-          "Age Group",
-          "Daily Dose (IV over 3-4 hours)",
-          "Frequency & Annual Cumulative Dose"
-        ],
-        "rows": [
-          [
-            "Infants < 2 years",
-            "0.5 mg/kg/day x 3 days",
-            "Every 2-3 months; 6-9 mg/kg/year"
-          ],
-          [
-            "Children 2-3 years",
-            "0.75 mg/kg/day x 3 days",
-            "Every 3-4 months; 9 mg/kg/year"
-          ],
-          [
-            "Children > 3 years",
-            "1.0 mg/kg/day x 3 days",
-            "Every 3-4 months; max 9 mg/kg/year"
-          ],
-          [
-            "Acute phase monitor",
-            "Fever, hypocalcemia, myalgias (first infusion)",
-            "Ensure adequate calcium and vitamin D replete"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Intravenous zoledronic acid offers a convenient single-day infusion alternative with equivalent therapeutic efficacy.",
-      "tx": "Utilize outpatient bisphosphonate regimens incorporating **Intravenous zoledronic acid infusion** for pediatric OI management. Intravenous zoledronic acid (0.05 mg/kg IV infused over 30-45 minutes every 6 months) provides equivalent bone remineralization with fewer hospital visits compared to multi-day pamidronate; patients require pre-infusion hydration and verification of normal serum calcium and vitamin D.",
-      "vis": {
-        "kind": "compare",
-        "title": "Pamidronate vs Zoledronic Acid Regimens",
-        "left": {
-          "title": "Cyclical Pamidronate",
-          "points": [
-            "3 consecutive days infusion every 3-4 months",
-            "Longest safety record and proven vertebral reshaping",
-            "Requires multi-day hospital or day-care admission"
-          ]
-        },
-        "right": {
-          "title": "Zoledronic Acid",
-          "points": [
-            "Single 30-45 minute infusion once every 6 months",
-            "0.05 mg/kg dose; higher anti-resorptive potency",
-            "Greater convenience and reduced healthcare burden"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Severe cranial base deformities in osteogenesis imperfecta risk life-threatening brainstem compression.",
-      "tx": "Conduct systematic neurological and radiological **Basilar invagination neurological surveillance** in severely affected children. Severe OI types III and IV are complicated by platybasia and basilar invagination (odontoid protrusion into foramen magnum), requiring cervical spine CT/MRI screening for brainstem compression, progressive myelopathy, lower cranial nerve palsies, or central sleep apnea.",
-      "vis": {
-        "kind": "flow",
-        "title": "Cranial Base Surveillance Protocol in OI Types III and IV",
-        "nodes": [
-          {
-            "id": "b1",
-            "label": "Progressively Deforming OI Types III & IV"
-          },
-          {
-            "id": "b2",
-            "label": "Baseline Lateral Cervical Spine Radiograph / CT"
-          },
-          {
-            "id": "b3",
-            "label": "Measurement of Chamberlain & McGregor Lines"
-          },
-          {
-            "id": "b4",
-            "label": "Neurosurgical Decompression & Posterior Fusion"
-          }
-        ],
-        "edges": [
-          [
-            "b1",
-            "b2",
-            "Routine screening starting at age 5-6"
-          ],
-          [
-            "b2",
-            "b3",
-            "Odontoid migration above cranial lines"
-          ],
-          [
-            "b3",
-            "b4",
-            "If brainstem compression or myelopathy develops"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Zoledronic Acid",
+     "points": [
+      "Single 30-45 minute infusion once every 6 months",
+      "0.05 mg/kg dose; higher anti-resorptive potency",
+      "Greater convenience and reduced healthcare burden"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Severe cranial base deformities in osteogenesis imperfecta risk life-threatening brainstem compression.",
+   "tx": "Conduct systematic neurological and radiological **Basilar invagination neurological surveillance** in severely affected children. Severe OI types III and IV are complicated by platybasia and basilar invagination (odontoid protrusion into foramen magnum), requiring cervical spine CT/MRI screening for brainstem compression, progressive myelopathy, lower cranial nerve palsies, or central sleep apnea.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cranial Base Surveillance Protocol in OI Types III and IV",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Progressively Deforming OI Types III & IV"
+     },
+     {
+      "id": "b2",
+      "label": "Baseline Lateral Cervical Spine Radiograph / CT"
+     },
+     {
+      "id": "b3",
+      "label": "Measurement of Chamberlain & McGregor Lines"
+     },
+     {
+      "id": "b4",
+      "label": "Neurosurgical Decompression & Posterior Fusion"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "Routine screening starting at age 5-6"
+     ],
+     [
+      "b2",
+      "b3",
+      "Odontoid migration above cranial lines"
+     ],
+     [
+      "b3",
+      "b4",
+      "If brainstem compression or myelopathy develops"
+     ]
+    ]
+   }
+  }
+ ]
 }

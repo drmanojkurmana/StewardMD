@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-valvular",
+ "subject": "medicine",
+ "title": "Mitral regurgitation, mitral valve prolapse and surgical indications",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Retrograde systolic blood flow from the left ventricle into the left atrium defines **mitral regurgitation**. Etiologies sort into primary organic defects affecting leaflets or chordae, such as myxomatous degeneration and endocarditis, and secondary functional regurgitation caused by left ventricular dilatation. Auscultation reveals a blowing, high-pitched holosystolic murmur best heard at the apex with radiation to the axilla, often accompanied by a soft S1.",
+   "say": "Retrograde blood flow from the left ventricle into the left atrium defines mitral regurgitation. Causes include degenerative myxomatous disease, endocarditis, and functional ventricular dilatation. Auscultation reveals a blowing pansystolic murmur at the apex radiating to the axilla.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary MR (organic)",
+     "points": [
+      "Intrinsic leaflet or chordal pathology",
+      "Mitral valve prolapse, endocarditis",
+      "Treated primarily with surgical valve repair"
+     ]
+    },
+    "right": {
+     "title": "Secondary MR (functional)",
+     "points": [
+      "Normal leaflets with dilated LV",
+      "Ischemic or dilated cardiomyopathy",
+      "Treated primarily with heart failure GDMT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most common cause of primary mitral incompetence in industrialized nations is **mitral valve prolapse**. Myxomatous degeneration with accumulation of dermatan sulphate within the spongiosa layer weakens leaflet architecture, allowing systolic billowing of leaflets into the left atrium. Patients are frequently asymptomatic young women, though chest tightness, atypical palpitations, and anxiety are commonly reported.",
+   "say": "The leading cause of primary mitral regurgitation in developed countries is mitral valve prolapse. Myxomatous degeneration weakens the leaflet matrix, allowing systolic ballooning into the atrium. Many patients remain asymptomatic, although atypical chest pain and palpitations frequently prompt evaluation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Auscultation diagram showing midsystolic click and late systolic murmur of MVP.",
+    "caption": "Midsystolic click and late systolic murmur of mitral valve prolapse. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Auscultation of mitral valve prolapse demonstrates a high-frequency **midsystolic click** followed by a late systolic murmur. The click corresponds to sudden tensing of slack chordae tendineae as the redundant leaflet billows into the atrium. Manoeuvres that decrease left ventricular volume, such as standing or the Valsalva strain phase, cause earlier prolapse, moving the click and murmur closer to the first heart sound.",
+   "say": "Auscultation of mitral prolapse reveals a crisp midsystolic click and late systolic murmur. The click reflects sudden chordal tension as leaflets billow backward. Manoeuvres that reduce ventricular volume, such as standing or Valsalva, trigger earlier prolapse and shift the click toward the first heart sound.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical manoeuvre",
+     "Left ventricular volume",
+     "Timing of click and murmur"
+    ],
+    "rows": [
+     [
+      "Standing / Valsalva strain",
+      "Decreases LV volume",
+      "Click moves earlier (closer to S1), murmur longer"
+     ],
+     [
+      "Squatting",
+      "Increases LV volume (preload/afterload)",
+      "Click moves later (closer to S2), murmur softer"
+     ],
+     [
+      "Isometric handgrip",
+      "Increases afterload",
+      "Murmur intensifies, click delayed"
+     ],
+     [
+      "Amyl nitrite inhalation",
+      "Decreases afterload",
+      "Murmur softens, click moves earlier"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute mitral regurgitation produces a distinct and life-threatening presentation. Caused by infective endocarditis, trauma, or **papillary muscle rupture** in acute inferior myocardial infarction, the non-compliant left atrium is abruptly exposed to high ventricular systolic pressures. Patients present in severe pulmonary oedema with a soft, decrescendo systolic murmur rather than a classic holosystolic murmur, requiring emergency mechanical support and surgical repair.",
+   "say": "Acute mitral regurgitation represents a life-threatening medical emergency. Sudden chordal or papillary muscle rupture exposes a normal stiff atrium to massive systolic regurgitation. Patients present in flash pulmonary oedema with a soft decrescendo murmur, requiring urgent surgical repair.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chronic severe MR",
+     "points": [
+      "Compliant, dilated left atrium",
+      "Normal or mildly elevated LA pressure",
+      "Loud holosystolic murmur with thrill",
+      "Well-tolerated for years"
+     ]
+    },
+    "right": {
+     "title": "Acute severe MR",
+     "points": [
+      "Small, non-compliant left atrium",
+      "Massive systolic LA pressure spike (giant v waves)",
+      "Soft, decrescendo early systolic murmur",
+      "Rapid flash pulmonary oedema and shock"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic severe regurgitation induces eccentric left ventricular hypertrophy and chamber enlargement. In this compensated phase, the low-impedance regurgitant leak into the left atrium artificially inflates the measured **ejection fraction**. Therefore, an ejection fraction below 60% or a left ventricular end-systolic diameter of 40 mm or greater indicates impending myocardial failure and represents an absolute indication for surgical intervention.",
+   "say": "Chronic severe regurgitation causes progressive left ventricular dilatation. The regurgitant runoff into the low-pressure atrium artificially elevates measured ejection fraction. Consequently, an ejection fraction under sixty percent signals ventricular decompensation and constitutes a clear surgical indication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mr",
+      "label": "Chronic severe mitral regurgitation"
+     },
+     {
+      "id": "vol",
+      "label": "Left ventricular volume overload"
+     },
+     {
+      "id": "dil",
+      "label": "Eccentric LV dilatation"
+     },
+     {
+      "id": "ef",
+      "label": "LVEF <= 60% or LVESD >= 40 mm"
+     },
+     {
+      "id": "surg",
+      "label": "Indication for surgical intervention"
+     }
+    ],
+    "edges": [
+     [
+      "mr",
+      "vol"
+     ],
+     [
+      "vol",
+      "dil"
+     ],
+     [
+      "dil",
+      "ef"
+     ],
+     [
+      "ef",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Whenever anatomically feasible, surgical mitral valve repair is strongly preferred over **valve replacement**. Repair techniques utilizing leaflet resection, artificial chordal implantation, and annuloplasty ring placement preserve subvalvular apparatus continuity, maintain left ventricular geometry, avoid lifelong anticoagulation, and provide superior long-term survival. Replacement with a mechanical or bioprosthetic valve is reserved for extensively destroyed or calcified valves.",
+   "say": "Surgical valve repair is preferred over prosthetic replacement whenever anatomically possible. Annuloplasty ring repair preserves native chordal structures, protects left ventricular geometry, avoids lifelong anticoagulation and improves survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical strategy",
+     "Operative technique",
+     "Clinical advantages",
+     "Limitations"
+    ],
+    "rows": [
+     [
+      "Mitral valve repair",
+      "Annuloplasty ring, neochordae",
+      "Lower operative mortality, no warfarin",
+      "Requires favorable anatomy"
+     ],
+     [
+      "Bioprosthetic replacement",
+      "Porcine or bovine pericardial valve",
+      "No long-term anticoagulation",
+      "Structural valve deterioration in 10-15y"
+     ],
+     [
+      "Mechanical replacement",
+      "Bileaflet tilting disc valve",
+      "Lifelong durability",
+      "Mandatory lifelong warfarin (INR 2.5-3.5)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For inoperable or high-surgical-risk patients with severe symptomatic degenerative or functional regurgitation, **transcatheter edge-to-edge repair** offers an effective minimally invasive option. The MitraClip device is delivered transvenously across the interatrial septum, clipping the anterior and posterior mitral leaflets together to create a double-orifice valve, replicating the surgical Alfieri technique.",
+   "say": "For high risk or inoperable patients with severe regurgitation, transcatheter edge-to-edge repair offers a minimally invasive alternative. The MitraClip device grasps the opposing mitral leaflets, creating a double orifice valve that reduces regurgitation and improves symptoms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Illustration showing percutaneous mitral edge-to-edge repair clip creating double orifice.",
+    "caption": "Percutaneous transcatheter edge-to-edge mitral valve repair. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Regular serial echocardiographic surveillance is essential in all patients with moderate to severe regurgitation. Measure left ventricular dimensions, calculate effective regurgitant orifice area, and monitor pulmonary artery pressures every 6 to 12 months. When symptoms develop, or when asymptomatic left ventricular end-systolic diameter reaches 40 mm, refer promptly to a cardiac surgical **heart team**.",
+   "say": "Serial echocardiography is essential in chronic regurgitation. Measure chamber dimensions, regurgitant volume and pulmonary pressures regularly. Refer patients to the cardiac multidisciplinary team when symptoms appear or when the left ventricular end-systolic diameter reaches forty millimetres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Severe mitral regurgitation"
+     },
+     {
+      "id": "echo",
+      "label": "Serial echo: LVEF and LVESD"
+     },
+     {
+      "id": "thresh",
+      "label": "Symptoms or LVESD >= 40 mm"
+     },
+     {
+      "id": "team",
+      "label": "Heart Team evaluation for repair"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "echo"
+     ],
+     [
+      "echo",
+      "thresh"
+     ],
+     [
+      "thresh",
+      "team"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

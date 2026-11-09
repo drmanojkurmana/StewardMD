@@ -1,265 +1,245 @@
 {
-  "id": "pen-non-classic-cah-and-rare-enzymes",
-  "title": "Non-Classic CAH, 11-Beta and 17-Alpha Hydroxylase Deficiencies: Blood Pressure Signatures",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Adrenal Cortex, CAH and Differences of Sex Development",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Non-classic congenital adrenal hyperplasia is a common cause of premature pubarche and hyperandrogenism.",
-      "tx": "Characterize **Non-classic CAH (NCCAH) genetics and frequency** in children presenting with premature adrenarche. NCCAH is an autosomal recessive condition affecting 1 in 200 to 1 in 1000 individuals (higher in Ashkenazi Jews), caused by mild CYP21A2 missense variants (e.g., p.Val281Leu) retaining 20-50% enzyme activity.",
-      "vis": {
-        "kind": "table",
-        "title": "CYP21A2 Spectrum: Classic vs Non-Classic CAH",
-        "cols": [
-          "CAH Form",
-          "Enzymatic Activity",
-          "Incidence & Phenotype"
-        ],
-        "rows": [
-          [
-            "Salt-wasting classic",
-            "< 1-2% activity",
-            "1 in 15,000; neonatal shock, ambiguous female genitalia"
-          ],
-          [
-            "Simple virilizing classic",
-            "2-5% activity",
-            "1 in 20,000; clitoromegaly, rapid growth, no salt loss"
-          ],
-          [
-            "Non-classic (NCCAH)",
-            "20-50% activity",
-            "1 in 200 to 1 in 1000; late pubarche, severe acne, hirsutism"
-          ]
-        ]
-      }
+ "id": "pen-non-classic-cah-and-rare-enzymes",
+ "title": "Non-Classic CAH, 11-Beta and 17-Alpha Hydroxylase Deficiencies: Blood Pressure Signatures",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Adrenal Cortex, CAH and Differences of Sex Development",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Non-classic congenital adrenal hyperplasia is a common cause of premature pubarche and hyperandrogenism.",
+   "tx": "Characterize **Non-classic CAH (NCCAH) genetics and frequency** in children presenting with premature adrenarche. NCCAH is an autosomal recessive condition affecting 1 in 200 to 1 in 1000 individuals (higher in Ashkenazi Jews), caused by mild CYP21A2 missense variants (e.g., p.Val281Leu) retaining 20-50% enzyme activity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenal-cortex-medulla-steroids-catecholamines-fig1.webp",
+    "alt": "Cross-sectional diagram of the adrenal cortex showing zona glomerulosa, zona fasciculata, and zona reticularis steroidogenic zonation.",
+    "caption": "Adrenal cortex functional zonation separating mineralocorticoid, glucocorticoid, and androgen synthesis."
+   }
+  },
+  {
+   "say": "A standard cosyntropin stimulation test establishes the definitive endocrine diagnosis of non-classic disease.",
+   "tx": "Perform a **Cosyntropin stimulation test in NCCAH** to confirm impaired 21-hydroxylation capacity. Diagnosis of NCCAH is established by a 60-minute cosyntropin (ACTH 250 mcg) stimulation test yielding stimulated 17-OHP > 30 nmol/L (> 1000 ng/dL); basal levels may be normal or mildly elevated.",
+   "vis": {
+    "kind": "table",
+    "title": "17-OHP Cutoffs Post-Cosyntropin (250 mcg)",
+    "cols": [
+     "Diagnostic Category",
+     "Basal 17-OHP",
+     "60-min Stimulated 17-OHP"
+    ],
+    "rows": [
+     [
+      "Normal / Unaffected",
+      "< 2 ng/dL (< 6 nmol/L)",
+      "< 5 ng/mL (< 15 nmol/L)"
+     ],
+     [
+      "Non-classic CAH",
+      "2-10 ng/mL (6-30 nmol/L)",
+      "> 30 nmol/L (> 1000 ng/dL)"
+     ],
+     [
+      "Classic CAH",
+      "> 10-100 ng/mL",
+      "> 100 ng/mL (> 300 nmol/L)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "11-beta hydroxylase deficiency combines adrenal androgen excess with low-renin mineralocorticoid hypertension.",
+   "tx": "Recognize **11-beta-hydroxylase deficiency (CYP11B1) hypertension** in virilized pediatric patients. Deficiency of CYP11B1 (5-8% of CAH) causes accumulation of 11-deoxycorticosterone (DOC, a potent mineralocorticoid) and 11-deoxycortisol, producing severe low-renin hypertension and hypokalemia alongside female virilization. Management relies on oral hydrocortisone replacement to suppress excessive pituitary ACTH secretion and normalize systemic arterial pressures.",
+   "vis": {
+    "kind": "flow",
+    "title": "CYP11B1 Defect Biochemical Cascade",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "CYP11B1 Block (5-8% of CAH)"
+     },
+     {
+      "id": "b2",
+      "label": "Impaired Conversion of 11-DOC to Corticosterone"
+     },
+     {
+      "id": "b3",
+      "label": "Massive DOC & 11-Deoxycortisol Accumulation"
+     },
+     {
+      "id": "b4",
+      "label": "Low-Renin Hypertension & Hypokalemic Alkalosis"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "Loss of 11-beta hydroxylation"
+     ],
+     [
+      "b2",
+      "b3",
+      "Precursor shunting driven by ACTH"
+     ],
+     [
+      "b3",
+      "b4",
+      "High DOC activates mineralocorticoid receptors"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "17-alpha hydroxylase deficiency blocks both cortisol and sex steroid production, causing pubertal failure and hypertension.",
+   "tx": "Identify **17-alpha-hydroxylase deficiency (CYP17A1) sexual infantilism** in adolescents with hypertension and delayed puberty. CYP17A1 deficiency blocks both cortisol and sex steroid production, causing massive mineralocorticoid excess (hypertension, hypokalemia) combined with sexual infantilism in 46,XX and female external genitalia in 46,XY.",
+   "vis": {
+    "kind": "compare",
+    "title": "CYP17A1 Phenotypic Divergence by Karyotype",
+    "left": {
+     "title": "46,XY Genetic Males",
+     "points": [
+      "Complete female external genitalia with blind-ending vagina",
+      "Absent internal female reproductive organs (intact AMH)",
+      "Severe pubertal failure with hypergonadotropic hypogonadism"
+     ]
     },
-    {
-      "say": "A standard cosyntropin stimulation test establishes the definitive endocrine diagnosis of non-classic disease.",
-      "tx": "Perform a **Cosyntropin stimulation test in NCCAH** to confirm impaired 21-hydroxylation capacity. Diagnosis of NCCAH is established by a 60-minute cosyntropin (ACTH 250 mcg) stimulation test yielding stimulated 17-OHP > 30 nmol/L (> 1000 ng/dL); basal levels may be normal or mildly elevated.",
-      "vis": {
-        "kind": "table",
-        "title": "17-OHP Cutoffs Post-Cosyntropin (250 mcg)",
-        "cols": [
-          "Diagnostic Category",
-          "Basal 17-OHP",
-          "60-min Stimulated 17-OHP"
-        ],
-        "rows": [
-          [
-            "Normal / Unaffected",
-            "< 2 ng/dL (< 6 nmol/L)",
-            "< 5 ng/mL (< 15 nmol/L)"
-          ],
-          [
-            "Non-classic CAH",
-            "2-10 ng/mL (6-30 nmol/L)",
-            "> 30 nmol/L (> 1000 ng/dL)"
-          ],
-          [
-            "Classic CAH",
-            "> 10-100 ng/mL",
-            "> 100 ng/mL (> 300 nmol/L)"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "11-beta hydroxylase deficiency combines adrenal androgen excess with low-renin mineralocorticoid hypertension.",
-      "tx": "Recognize **11-beta-hydroxylase deficiency (CYP11B1) hypertension** in virilized pediatric patients. Deficiency of CYP11B1 (5-8% of CAH) causes accumulation of 11-deoxycorticosterone (DOC, a potent mineralocorticoid) and 11-deoxycortisol, producing severe low-renin hypertension and hypokalemia alongside female virilization. Management relies on oral hydrocortisone replacement to suppress excessive pituitary ACTH secretion and normalize systemic arterial pressures.",
-      "vis": {
-        "kind": "flow",
-        "title": "CYP11B1 Defect Biochemical Cascade",
-        "nodes": [
-          {
-            "id": "b1",
-            "label": "CYP11B1 Block (5-8% of CAH)"
-          },
-          {
-            "id": "b2",
-            "label": "Impaired Conversion of 11-DOC to Corticosterone"
-          },
-          {
-            "id": "b3",
-            "label": "Massive DOC & 11-Deoxycortisol Accumulation"
-          },
-          {
-            "id": "b4",
-            "label": "Low-Renin Hypertension & Hypokalemic Alkalosis"
-          }
-        ],
-        "edges": [
-          [
-            "b1",
-            "b2",
-            "Loss of 11-beta hydroxylation"
-          ],
-          [
-            "b2",
-            "b3",
-            "Precursor shunting driven by ACTH"
-          ],
-          [
-            "b3",
-            "b4",
-            "High DOC activates mineralocorticoid receptors"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "17-alpha hydroxylase deficiency blocks both cortisol and sex steroid production, causing pubertal failure and hypertension.",
-      "tx": "Identify **17-alpha-hydroxylase deficiency (CYP17A1) sexual infantilism** in adolescents with hypertension and delayed puberty. CYP17A1 deficiency blocks both cortisol and sex steroid production, causing massive mineralocorticoid excess (hypertension, hypokalemia) combined with sexual infantilism in 46,XX and female external genitalia in 46,XY.",
-      "vis": {
-        "kind": "compare",
-        "title": "CYP17A1 Phenotypic Divergence by Karyotype",
-        "left": {
-          "title": "46,XY Genetic Males",
-          "points": [
-            "Complete female external genitalia with blind-ending vagina",
-            "Absent internal female reproductive organs (intact AMH)",
-            "Severe pubertal failure with hypergonadotropic hypogonadism"
-          ]
-        },
-        "right": {
-          "title": "46,XX Genetic Females",
-          "points": [
-            "Normal infantile female genitalia at birth",
-            "Primary amenorrhea with sexual infantilism and absent thelarche",
-            "Low-renin hypertension with severe hypokalemia"
-          ]
-        }
-      }
-    },
-    {
-      "say": "3-beta hydroxysteroid dehydrogenase deficiency impairs all three steroid pathways in both adrenals and gonads.",
-      "tx": "Evaluate the lesions of **3-beta-hydroxysteroid dehydrogenase deficiency (HSD3B2)** presenting in early infancy. HSD3B2 deficiency impairs all three steroid pathways, producing severe salt wasting, elevated DHEA-to-androstenedione ratio, ambiguous genitalia in 46,XY (undervirilization) and mild virilization in 46,XX. Treatment requires immediate stress-dose glucocorticoid and mineralocorticoid replacement alongside urgent correction of life-threatening electrolyte derangements.",
-      "vis": {
-        "kind": "table",
-        "title": "HSD3B2 Deficiency Phenotype and Steroids",
-        "cols": [
-          "Pathology",
-          "Biochemical Signature",
-          "Clinical Manifestation"
-        ],
-        "rows": [
-          [
-            "Steroid block",
-            "Impaired delta-5 to delta-4 isomerization",
-            "Severe mineralocorticoid, cortisol and androgen deficiency"
-          ],
-          [
-            "Serum markers",
-            "Markedly elevated 17-OH-pregnenolone and DHEA",
-            "Elevated DHEA-to-androstenedione ratio"
-          ],
-          [
-            "Genital anatomy",
-            "Incomplete male virilization / mild female virilization",
-            "Severe neonatal salt-wasting crisis"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Lipoid congenital adrenal hyperplasia disrupts the initial transport of cholesterol into the mitochondria.",
-      "tx": "Recognize the catastrophic collapse in **Congenital lipoid adrenal hyperplasia (StAR mutation)** in neonates. Mutations in steroidogenic acute regulatory protein (StAR) prevent cholesterol entry into mitochondria, producing complete absence of all steroids, fatal neonatal salt-wasting, and female phenotype in all genetic sexes.",
-      "vis": {
-        "kind": "flow",
-        "title": "StAR Defect and Steroidogenic Shutdown",
-        "nodes": [
-          {
-            "id": "s1",
-            "label": "StAR Gene Mutation (8p11.23)"
-          },
-          {
-            "id": "s2",
-            "label": "Failure of Mitochondrial Cholesterol Entry"
-          },
-          {
-            "id": "s3",
-            "label": "Complete Absence of All Steroids"
-          },
-          {
-            "id": "s4",
-            "label": "Fatal Salt-Wasting Crisis & Female External Phenotype"
-          }
-        ],
-        "edges": [
-          [
-            "s1",
-            "s2",
-            "Total loss of lipid transport"
-          ],
-          [
-            "s2",
-            "s3",
-            "Arrest of all steroid pathways"
-          ],
-          [
-            "s3",
-            "s4",
-            "Severe adrenal shock within 2 weeks of life"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "P450 oxidoreductase deficiency couples disordered steroidogenesis with skeletal craniosynostosis.",
-      "tx": "Identify the multi-system syndrome of **P450 oxidoreductase deficiency (Antley-Bixler phenotype)** in infants. POR deficiency impairs multiple microsomal enzymes (CYP21A2, CYP17A1, CYP51A1), causing disordered steroidogenesis alongside skeletal craniosynostosis (Antley-Bixler syndrome) and maternal virilization during pregnancy. Multidisciplinary management is essential to address complex craniofacial remodeling, respiratory stability, and longitudinal pediatric endocrine hormone replacement.",
-      "vis": {
-        "kind": "table",
-        "title": "POR Deficiency: Triad of Clinical Findings",
-        "cols": [
-          "Domain",
-          "Pathology",
-          "Clinical Manifestation"
-        ],
-        "rows": [
-          [
-            "Adrenal / Gonadal",
-            "Impaired CYP17A1 & CYP21A2 electron transfer",
-            "Partial adrenal insufficiency and ambiguous genitalia"
-          ],
-          [
-            "Maternal during pregnancy",
-            "Placental backdoor androgen pathway activation",
-            "Maternal virilization, clitoromegaly, deep voice regressing postpartum"
-          ],
-          [
-            "Skeletal dysplasia",
-            "Defective CYP51A1 (sterol synthesis)",
-            "Craniosynostosis, midface hypoplasia, radioulnar synostosis"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Blood pressure and plasma renin activity definitively distinguish between the two major virilizing forms of CAH.",
-      "tx": "Establish protocolized rules for **Differentiating 21-OH from 11-OH deficiency** in virilized infants. Both 21-OH and 11-OH deficiencies virilize female fetuses; the critical differentiator is blood pressure and renin: 21-OH features hypotension, salt loss, and high renin, whereas 11-OH features hypertension and suppressed renin.",
-      "vis": {
-        "kind": "compare",
-        "title": "Differentiating 21-OH vs 11-OH Deficiencies",
-        "left": {
-          "title": "21-Hydroxylase Deficiency (CYP21A2)",
-          "points": [
-            "Hypotension, salt wasting, and hypovolemic shock",
-            "Hyperkalemia and metabolic acidosis",
-            "Markedly elevated plasma renin activity (high renin)"
-          ]
-        },
-        "right": {
-          "title": "11-Beta-Hydroxylase Deficiency (CYP11B1)",
-          "points": [
-            "Low-renin hypertension from 11-deoxycorticosterone (DOC)",
-            "Hypokalemic metabolic alkalosis",
-            "Suppressed plasma renin activity (low renin)"
-          ]
-        }
-      }
+    "right": {
+     "title": "46,XX Genetic Females",
+     "points": [
+      "Normal infantile female genitalia at birth",
+      "Primary amenorrhea with sexual infantilism and absent thelarche",
+      "Low-renin hypertension with severe hypokalemia"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "3-beta hydroxysteroid dehydrogenase deficiency impairs all three steroid pathways in both adrenals and gonads.",
+   "tx": "Evaluate the lesions of **3-beta-hydroxysteroid dehydrogenase deficiency (HSD3B2)** presenting in early infancy. HSD3B2 deficiency impairs all three steroid pathways, producing severe salt wasting, elevated DHEA-to-androstenedione ratio, ambiguous genitalia in 46,XY (undervirilization) and mild virilization in 46,XX. Treatment requires immediate stress-dose glucocorticoid and mineralocorticoid replacement alongside urgent correction of life-threatening electrolyte derangements.",
+   "vis": {
+    "kind": "table",
+    "title": "HSD3B2 Deficiency Phenotype and Steroids",
+    "cols": [
+     "Pathology",
+     "Biochemical Signature",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Steroid block",
+      "Impaired delta-5 to delta-4 isomerization",
+      "Severe mineralocorticoid, cortisol and androgen deficiency"
+     ],
+     [
+      "Serum markers",
+      "Markedly elevated 17-OH-pregnenolone and DHEA",
+      "Elevated DHEA-to-androstenedione ratio"
+     ],
+     [
+      "Genital anatomy",
+      "Incomplete male virilization / mild female virilization",
+      "Severe neonatal salt-wasting crisis"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Lipoid congenital adrenal hyperplasia disrupts the initial transport of cholesterol into the mitochondria.",
+   "tx": "Recognize the catastrophic collapse in **Congenital lipoid adrenal hyperplasia (StAR mutation)** in neonates. Mutations in steroidogenic acute regulatory protein (StAR) prevent cholesterol entry into mitochondria, producing complete absence of all steroids, fatal neonatal salt-wasting, and female phenotype in all genetic sexes.",
+   "vis": {
+    "kind": "flow",
+    "title": "StAR Defect and Steroidogenic Shutdown",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "StAR Gene Mutation (8p11.23)"
+     },
+     {
+      "id": "s2",
+      "label": "Failure of Mitochondrial Cholesterol Entry"
+     },
+     {
+      "id": "s3",
+      "label": "Complete Absence of All Steroids"
+     },
+     {
+      "id": "s4",
+      "label": "Fatal Salt-Wasting Crisis & Female External Phenotype"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Total loss of lipid transport"
+     ],
+     [
+      "s2",
+      "s3",
+      "Arrest of all steroid pathways"
+     ],
+     [
+      "s3",
+      "s4",
+      "Severe adrenal shock within 2 weeks of life"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "P450 oxidoreductase deficiency couples disordered steroidogenesis with skeletal craniosynostosis.",
+   "tx": "Identify the multi-system syndrome of **P450 oxidoreductase deficiency (Antley-Bixler phenotype)** in infants. POR deficiency impairs multiple microsomal enzymes (CYP21A2, CYP17A1, CYP51A1), causing disordered steroidogenesis alongside skeletal craniosynostosis (Antley-Bixler syndrome) and maternal virilization during pregnancy. Multidisciplinary management is essential to address complex craniofacial remodeling, respiratory stability, and longitudinal pediatric endocrine hormone replacement.",
+   "vis": {
+    "kind": "table",
+    "title": "POR Deficiency: Triad of Clinical Findings",
+    "cols": [
+     "Domain",
+     "Pathology",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Adrenal / Gonadal",
+      "Impaired CYP17A1 & CYP21A2 electron transfer",
+      "Partial adrenal insufficiency and ambiguous genitalia"
+     ],
+     [
+      "Maternal during pregnancy",
+      "Placental backdoor androgen pathway activation",
+      "Maternal virilization, clitoromegaly, deep voice regressing postpartum"
+     ],
+     [
+      "Skeletal dysplasia",
+      "Defective CYP51A1 (sterol synthesis)",
+      "Craniosynostosis, midface hypoplasia, radioulnar synostosis"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Blood pressure and plasma renin activity definitively distinguish between the two major virilizing forms of CAH.",
+   "tx": "Establish protocolized rules for **Differentiating 21-OH from 11-OH deficiency** in virilized infants. Both 21-OH and 11-OH deficiencies virilize female fetuses; the critical differentiator is blood pressure and renin: 21-OH features hypotension, salt loss, and high renin, whereas 11-OH features hypertension and suppressed renin.",
+   "vis": {
+    "kind": "compare",
+    "title": "Differentiating 21-OH vs 11-OH Deficiencies",
+    "left": {
+     "title": "21-Hydroxylase Deficiency (CYP21A2)",
+     "points": [
+      "Hypotension, salt wasting, and hypovolemic shock",
+      "Hyperkalemia and metabolic acidosis",
+      "Markedly elevated plasma renin activity (high renin)"
+     ]
+    },
+    "right": {
+     "title": "11-Beta-Hydroxylase Deficiency (CYP11B1)",
+     "points": [
+      "Low-renin hypertension from 11-deoxycorticosterone (DOC)",
+      "Hypokalemic metabolic alkalosis",
+      "Suppressed plasma renin activity (low renin)"
+     ]
+    }
+   }
+  }
+ ]
 }

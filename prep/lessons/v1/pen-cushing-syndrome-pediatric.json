@@ -1,153 +1,222 @@
 {
-  "id": "pen-cushing-syndrome-pediatric",
-  "title": "Pediatric Cushing Syndrome: Dexamethasone Testing, IPSS and Etiological Localization",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Adrenal Cortex, CAH and Differences of Sex Development",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Progressive upward centile crossing in weight alongside downward centile crossing in height signals hypercortisolemia.",
-      "tx": "Identify pathognomonic growth discordance by evaluating the **Cushing syndrome clinical hallmark in children** on auxological percentiles. The single most specific clinical hallmark of pediatric Cushing syndrome is the combination of rapid progressive weight gain alongside arrest or deceleration of linear growth velocity (crossing height percentiles downward).",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Endogenous Hypercortisolism",
-          "points": [
-            "Rapid upward weight percentile crossing",
-            "Simultaneous growth arrest / height deceleration",
-            "Marked bone age delay on radiography"
-          ]
-        },
-        "right": {
-          "title": "Simple Exogenous Obesity",
-          "points": [
-            "Concordant accelerated linear growth velocity",
-            "Advanced or normal bone age",
-            "Preserved normal height percentile"
-          ]
-        }
-      }
+ "id": "pen-cushing-syndrome-pediatric",
+ "title": "Pediatric Cushing Syndrome: Dexamethasone Testing, IPSS and Etiological Localization",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Adrenal Cortex, CAH and Differences of Sex Development",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Progressive upward centile crossing in weight alongside downward centile crossing in height signals hypercortisolemia.",
+   "tx": "Identify pathognomonic growth discordance by evaluating the **Cushing syndrome clinical hallmark in children** on auxological percentiles. The single most specific clinical hallmark of pediatric Cushing syndrome is the combination of rapid progressive weight gain alongside arrest or deceleration of linear growth velocity (crossing height percentiles downward).",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig1.webp",
+    "alt": "Clinical illustration of pediatric hypercortisolism showing facial rounded plethoric facies, dorsocervical fat pad, truncal obesity, and violaceous abdominal striae.",
+    "caption": "Classic somatic features of pediatric Cushing syndrome."
+   }
+  },
+  {
+   "say": "Iatrogenic steroid exposure remains the overwhelmingly predominant etiology of Cushingoid appearances in clinical practice.",
+   "tx": "Differentiate therapeutic exposure from autonomous production by recognizing **Exogenous glucocorticoid predominance** during pediatric evaluation. Iatrogenic (exogenous) administration of topical, inhaled, or systemic corticosteroids is by far the most common cause of Cushingoid features in children, accompanied by suppressed endogenous ACTH and cortisol levels.",
+   "vis": {
+    "kind": "table",
+    "title": "Exogenous vs Endogenous Cushing Phenotypes",
+    "cols": [
+     "Feature",
+     "Exogenous Glucocorticoids",
+     "Endogenous Hypercortisolemia"
+    ],
+    "rows": [
+     [
+      "Prevalence",
+      "Far more common (> 95% of cases)",
+      "Rare (< 5% of pediatric cases)"
+     ],
+     [
+      "Plasma ACTH",
+      "Profoundly suppressed (< 5 pg/mL)",
+      "Normal, elevated, or autonomous"
+     ],
+     [
+      "Adrenal Size",
+      "Bilateral cortical atrophy",
+      "Bilateral hyperplasia or unilateral tumor"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Biochemical confirmation mandates discordant hypercortisolemia documented across multiple independent screening tests.",
+   "tx": "Establish pathological autonomous secretion using **First-line screening biochemical tests** to confirm hypercortisolemia. Endogenous hypercortisolism is established by >= 2 abnormal screening tests: 24-hour urinary free cortisol (> 3x upper normal limit), midnight salivary cortisol (> 4 nmol/L), or 1-mg overnight dexamethasone suppression test failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig2.webp",
+    "alt": "Diagram of the hypothalamic-pituitary-adrenal axis detailing pituitary ACTH adenoma, ectopic ACTH production, and autonomous adrenal cortical tumors.",
+    "caption": "Etiological mechanisms and neuroendocrine axis regulation in pediatric Cushing syndrome."
+   }
+  },
+  {
+   "say": "Plasma adrenocorticotropin measurement definitively separates primary adrenal pathologies from pituitary or ectopic drivers.",
+   "tx": "Classify underlying pathophysiology through **ACTH-dependent vs ACTH-independent differentiation** from baseline morning blood samples. Morning plasma ACTH differentiates etiology: ACTH < 5 pg/mL indicates primary adrenal disease (adenoma, carcinoma, PPNAD), while ACTH > 15-20 pg/mL indicates ACTH-dependent Cushing disease or ectopic ACTH secretion requiring neuroimaging.",
+   "vis": {
+    "kind": "table",
+    "title": "Etiological Stratification by Morning Plasma ACTH",
+    "cols": [
+     "Plasma ACTH Level",
+     "Underlying Category",
+     "Primary Diagnostic Workup"
+    ],
+    "rows": [
+     [
+      "ACTH < 5 pg/mL",
+      "ACTH-independent (adrenal source)",
+      "High-resolution adrenal CT or MRI scan"
+     ],
+     [
+      "ACTH 5-15 pg/mL",
+      "Indeterminate borderline zone",
+      "Perform CRH stimulation testing"
+     ],
+     [
+      "ACTH > 15-20 pg/mL",
+      "ACTH-dependent (pituitary / ectopic)",
+      "Pituitary contrast MRI & BIPSS"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Age at clinical presentation heavily influences whether pituitary microadenomas or adrenal malignancies predominate.",
+   "tx": "Evaluate age-stratified statistical likelihoods noting **Cushing disease predominance in children > 7 years** of age. In children older than 7 years, ACTH-secreting pituitary adenoma (Cushing disease) causes > 85% of endogenous hypercortisolemia; in infants < 1 year, functioning adrenal tumors dominate with autonomous hormone secretion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Children > 7 Years Old",
+     "points": [
+      "Pituitary microadenoma causes > 85% of cases",
+      "ACTH-dependent Cushing disease",
+      "Treated by transsphenoidal micro-resection"
+     ]
     },
-    {
-      "say": "Iatrogenic steroid exposure remains the overwhelmingly predominant etiology of Cushingoid appearances in clinical practice.",
-      "tx": "Differentiate therapeutic exposure from autonomous production by recognizing **Exogenous glucocorticoid predominance** during pediatric evaluation. Iatrogenic (exogenous) administration of topical, inhaled, or systemic corticosteroids is by far the most common cause of Cushingoid features in children, accompanied by suppressed endogenous ACTH and cortisol levels.",
-      "vis": {
-        "kind": "table",
-        "title": "Exogenous vs Endogenous Cushing Phenotypes",
-        "cols": ["Feature", "Exogenous Glucocorticoids", "Endogenous Hypercortisolemia"],
-        "rows": [
-          ["Prevalence", "Far more common (> 95% of cases)", "Rare (< 5% of pediatric cases)"],
-          ["Plasma ACTH", "Profoundly suppressed (< 5 pg/mL)", "Normal, elevated, or autonomous"],
-          ["Adrenal Size", "Bilateral cortical atrophy", "Bilateral hyperplasia or unilateral tumor"]
-        ]
-      }
-    },
-    {
-      "say": "Biochemical confirmation mandates discordant hypercortisolemia documented across multiple independent screening tests.",
-      "tx": "Establish pathological autonomous secretion using **First-line screening biochemical tests** to confirm hypercortisolemia. Endogenous hypercortisolism is established by >= 2 abnormal screening tests: 24-hour urinary free cortisol (> 3x upper normal limit), midnight salivary cortisol (> 4 nmol/L), or 1-mg overnight dexamethasone suppression test failure.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "sus", "label": "Growth Deceleration + Weight Gain"},
-          {"id": "scr", "label": "Perform >= 2 Screening Tests"},
-          {"id": "tst", "label": "UFC (> 3x) / Salivary (> 4 nmol/L) / 1-mg Dex"},
-          {"id": "conf", "label": "Confirmed Endogenous Hypercortisolism"}
-        ],
-        "edges": [
-          ["sus", "scr"],
-          ["scr", "tst"],
-          ["tst", "conf"]
-        ]
-      }
-    },
-    {
-      "say": "Plasma adrenocorticotropin measurement definitively separates primary adrenal pathologies from pituitary or ectopic drivers.",
-      "tx": "Classify underlying pathophysiology through **ACTH-dependent vs ACTH-independent differentiation** from baseline morning blood samples. Morning plasma ACTH differentiates etiology: ACTH < 5 pg/mL indicates primary adrenal disease (adenoma, carcinoma, PPNAD), while ACTH > 15-20 pg/mL indicates ACTH-dependent Cushing disease or ectopic ACTH secretion requiring neuroimaging.",
-      "vis": {
-        "kind": "table",
-        "title": "Etiological Stratification by Morning Plasma ACTH",
-        "cols": ["Plasma ACTH Level", "Underlying Category", "Primary Diagnostic Workup"],
-        "rows": [
-          ["ACTH < 5 pg/mL", "ACTH-independent (adrenal source)", "High-resolution adrenal CT or MRI scan"],
-          ["ACTH 5-15 pg/mL", "Indeterminate borderline zone", "Perform CRH stimulation testing"],
-          ["ACTH > 15-20 pg/mL", "ACTH-dependent (pituitary / ectopic)", "Pituitary contrast MRI & BIPSS"]
-        ]
-      }
-    },
-    {
-      "say": "Age at clinical presentation heavily influences whether pituitary microadenomas or adrenal malignancies predominate.",
-      "tx": "Evaluate age-stratified statistical likelihoods noting **Cushing disease predominance in children > 7 years** of age. In children older than 7 years, ACTH-secreting pituitary adenoma (Cushing disease) causes > 85% of endogenous hypercortisolemia; in infants < 1 year, functioning adrenal tumors dominate with autonomous hormone secretion.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Children > 7 Years Old",
-          "points": [
-            "Pituitary microadenoma causes > 85% of cases",
-            "ACTH-dependent Cushing disease",
-            "Treated by transsphenoidal micro-resection"
-          ]
-        },
-        "right": {
-          "title": "Infants < 1 Year Old",
-          "points": [
-            "Adrenocortical adenoma or carcinoma dominates",
-            "ACTH-independent autonomous excess",
-            "Treated by adrenalectomy and oncologic staging"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Invasive petrosal venous sinus catheterization confirms central pituitary gradient when pituitary imaging is equivocal.",
-      "tx": "Differentiate pituitary from occult ectopic sources using **Bilateral inferior petrosal sinus sampling (BIPSS)** with CRH administration. When pituitary MRI is normal or equivocal in ACTH-dependent hypercortisolism, BIPSS with CRH stimulation confirms pituitary source if the central-to-peripheral ACTH gradient is >= 2.0 basal or >= 3.0 post-CRH.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "mri", "label": "ACTH-Dependent with Normal/Equivocal Pituitary MRI"},
-          {"id": "bipss", "label": "Bilateral Inferior Petrosal Sinus Sampling + CRH"},
-          {"id": "grad", "label": "Central:Peripheral ACTH Ratio >= 2.0 Basal or >= 3.0 Post-CRH"},
-          {"id": "cd", "label": "Confirmed Pituitary Cushing Disease"}
-        ],
-        "edges": [
-          ["mri", "bipss"],
-          ["bipss", "grad"],
-          ["grad", "cd"]
-        ]
-      }
-    },
-    {
-      "say": "Inactivating regulatory subunit gene variants drive bilateral pigmented micronodular adrenal hyperplasia in syndromic children.",
-      "tx": "Recognize hereditary micronodular adrenal pathology by investigating **Carney complex and PPNAD PRKAR1A genetics** in familial presentations. Primary Pigmented Nodular Adrenocortical Disease (PPNAD) is caused by inactivating mutations in PRKAR1A (17q24.2), manifesting as paradoxical cortisol rise after dexamethasone (Liddle test) and cardiac myxomas.",
-      "vis": {
-        "kind": "table",
-        "title": "PPNAD and Carney Complex Characteristics",
-        "cols": ["Feature", "Molecular / Clinical Finding", "Significance"],
-        "rows": [
-          ["Gene Mutation", "PRKAR1A inactivation on 17q24.2", "Disinhibits protein kinase A signaling cascade"],
-          ["Dexamethasone Test", "Paradoxical rise in urinary free cortisol", "Pathognomonic response during high-dose Liddle test"],
-          ["Extraglandular Features", "Cardiac myxomas, lentigines, schwannomas", "Mandates serial echocardiographic screening"]
-        ]
-      }
-    },
-    {
-      "say": "Postzygotic mosaic activating mutations generate transient nodular adrenal hyperplasia during earliest infancy.",
-      "tx": "Assess rare infantile macronodular hypercortisolemia recognizing **McCune-Albright Cushing syndrome in infants** during clinical surveillance. Infants with McCune-Albright syndrome (mosaic GNAS mutation) can present with ACTH-independent bilateral macronodular adrenal hyperplasia, which often spontaneously regresses as mutant clones exhaust over early childhood.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "mos", "label": "Postzygotic Somatic Mosaic GNAS Mutation"},
-          {"id": "hyper", "label": "Constitutive Gs-Alpha Activation in Adrenal Cortex"},
-          {"id": "macro", "label": "Infantile Bilateral Macronodular Adrenal Hyperplasia"},
-          {"id": "regress", "label": "Spontaneous Regression as Mutant Clones Apoptose"}
-        ],
-        "edges": [
-          ["mos", "hyper"],
-          ["hyper", "macro"],
-          ["macro", "regress"]
-        ]
-      }
+    "right": {
+     "title": "Infants < 1 Year Old",
+     "points": [
+      "Adrenocortical adenoma or carcinoma dominates",
+      "ACTH-independent autonomous excess",
+      "Treated by adrenalectomy and oncologic staging"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Invasive petrosal venous sinus catheterization confirms central pituitary gradient when pituitary imaging is equivocal.",
+   "tx": "Differentiate pituitary from occult ectopic sources using **Bilateral inferior petrosal sinus sampling (BIPSS)** with CRH administration. When pituitary MRI is normal or equivocal in ACTH-dependent hypercortisolism, BIPSS with CRH stimulation confirms pituitary source if the central-to-peripheral ACTH gradient is >= 2.0 basal or >= 3.0 post-CRH.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mri",
+      "label": "ACTH-Dependent with Normal/Equivocal Pituitary MRI"
+     },
+     {
+      "id": "bipss",
+      "label": "Bilateral Inferior Petrosal Sinus Sampling + CRH"
+     },
+     {
+      "id": "grad",
+      "label": "Central:Peripheral ACTH Ratio >= 2.0 Basal or >= 3.0 Post-CRH"
+     },
+     {
+      "id": "cd",
+      "label": "Confirmed Pituitary Cushing Disease"
+     }
+    ],
+    "edges": [
+     [
+      "mri",
+      "bipss"
+     ],
+     [
+      "bipss",
+      "grad"
+     ],
+     [
+      "grad",
+      "cd"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Inactivating regulatory subunit gene variants drive bilateral pigmented micronodular adrenal hyperplasia in syndromic children.",
+   "tx": "Recognize hereditary micronodular adrenal pathology by investigating **Carney complex and PPNAD PRKAR1A genetics** in familial presentations. Primary Pigmented Nodular Adrenocortical Disease (PPNAD) is caused by inactivating mutations in PRKAR1A (17q24.2), manifesting as paradoxical cortisol rise after dexamethasone (Liddle test) and cardiac myxomas.",
+   "vis": {
+    "kind": "table",
+    "title": "PPNAD and Carney Complex Characteristics",
+    "cols": [
+     "Feature",
+     "Molecular / Clinical Finding",
+     "Significance"
+    ],
+    "rows": [
+     [
+      "Gene Mutation",
+      "PRKAR1A inactivation on 17q24.2",
+      "Disinhibits protein kinase A signaling cascade"
+     ],
+     [
+      "Dexamethasone Test",
+      "Paradoxical rise in urinary free cortisol",
+      "Pathognomonic response during high-dose Liddle test"
+     ],
+     [
+      "Extraglandular Features",
+      "Cardiac myxomas, lentigines, schwannomas",
+      "Mandates serial echocardiographic screening"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Postzygotic mosaic activating mutations generate transient nodular adrenal hyperplasia during earliest infancy.",
+   "tx": "Assess rare infantile macronodular hypercortisolemia recognizing **McCune-Albright Cushing syndrome in infants** during clinical surveillance. Infants with McCune-Albright syndrome (mosaic GNAS mutation) can present with ACTH-independent bilateral macronodular adrenal hyperplasia, which often spontaneously regresses as mutant clones exhaust over early childhood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mos",
+      "label": "Postzygotic Somatic Mosaic GNAS Mutation"
+     },
+     {
+      "id": "hyper",
+      "label": "Constitutive Gs-Alpha Activation in Adrenal Cortex"
+     },
+     {
+      "id": "macro",
+      "label": "Infantile Bilateral Macronodular Adrenal Hyperplasia"
+     },
+     {
+      "id": "regress",
+      "label": "Spontaneous Regression as Mutant Clones Apoptose"
+     }
+    ],
+    "edges": [
+     [
+      "mos",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "macro"
+     ],
+     [
+      "macro",
+      "regress"
+     ]
+    ]
+   }
+  }
+ ]
 }

@@ -1,293 +1,268 @@
 {
-  "id": "pen-turner-syndrome-endocrine-management",
-  "title": "Turner Syndrome 45,X: Auxology, High-Dose rhGH, Pubertal Induction and Aortic Surveillance",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Thyroid Disorders, Short Stature and Skeletal Dysplasias",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Turner syndrome affects one in two thousand females and displays diverse cytogenetic arrangements.",
-      "tx": "Characterize the **Karyotypic distribution in Turner syndrome** across affected phenotypic females. Turner syndrome affects 1 in 2000 liveborn females; 45,X monosomy accounts for 45-50%, while mosaicism (45,X/46,XX), isochromosome Xq [46,X,i(Xq)], and ring X chromosomes make up the remainder, influencing variable phenotypic expression.",
-      "vis": {
-        "kind": "table",
-        "title": "Turner Syndrome Cytogenetic Subtypes",
-        "cols": [
-          "Karyotype Pattern",
-          "Proportion (%)",
-          "Distinct Clinical Correlations"
-        ],
-        "rows": [
-          [
-            "Monosomy 45,X",
-            "45-50%",
-            "High frequency of coarctation and lymphedema"
-          ],
-          [
-            "Mosaicism (45,X/46,XX)",
-            "20-25%",
-            "Milder phenotype, potential spontaneous menses"
-          ],
-          [
-            "Isochromosome 46,X,i(Xq)",
-            "10-15%",
-            "Increased frequency of autoimmune thyroiditis"
-          ],
-          [
-            "Ring X / Marker chromosome",
-            "5-10%",
-            "Variable severity based on X-inactivation center"
-          ]
-        ]
-      }
+ "id": "pen-turner-syndrome-endocrine-management",
+ "title": "Turner Syndrome 45,X: Auxology, High-Dose rhGH, Pubertal Induction and Aortic Surveillance",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Thyroid Disorders, Short Stature and Skeletal Dysplasias",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Turner syndrome affects one in two thousand females and displays diverse cytogenetic arrangements.",
+   "tx": "Characterize the **Karyotypic distribution in Turner syndrome** across affected phenotypic females. Turner syndrome affects 1 in 2000 liveborn females; 45,X monosomy accounts for 45-50%, while mosaicism (45,X/46,XX), isochromosome Xq [46,X,i(Xq)], and ring X chromosomes make up the remainder, influencing variable phenotypic expression.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Illustration of phenotypic features in Turner syndrome including webbed neck and bilateral fibrous streak gonads.",
+    "caption": "Somatic features and fibrous streak ovaries in Turner syndrome 45,X."
+   }
+  },
+  {
+   "say": "Screening for Y-chromosome material is essential to identify the elevated risk of malignant gonadal transformation.",
+   "tx": "Mandate **Y-chromosome material screening and gonadectomy** in every girl diagnosed with Turner syndrome. Fluorescence in situ hybridization (FISH) for SRY / Y-chromosome material is mandatory in all Turner patients; presence of cryptic Y material carries a 15-30% risk of gonadoblastoma, requiring prophylactic bilateral gonadectomy to prevent dysgerminoma transformation.",
+   "vis": {
+    "kind": "flow",
+    "title": "SRY Screening and Surgical Prophylaxis",
+    "nodes": [
+     {
+      "id": "y1",
+      "label": "Confirmed Turner Syndrome Karyotype"
+     },
+     {
+      "id": "y2",
+      "label": "FISH / PCR Screening for SRY / Y Material"
+     },
+     {
+      "id": "y3",
+      "label": "Cryptic Y Material Positive"
+     },
+     {
+      "id": "y4",
+      "label": "Bilateral Laparoscopic Gonadectomy"
+     }
+    ],
+    "edges": [
+     [
+      "y1",
+      "y2",
+      "Universal molecular evaluation"
+     ],
+     [
+      "y2",
+      "y3",
+      "Detection in up to 10% of mosaics"
+     ],
+     [
+      "y3",
+      "y4",
+      "15-30% gonadoblastoma risk elimination"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Linear growth failure from SHOX haploinsufficiency is treated with early supraphysiological recombinant growth hormone.",
+   "tx": "Address **SHOX gene haploinsufficiency and rhGH dosing** to optimize adult height outcomes in Turner syndrome. Short stature is caused by haploinsufficiency of the SHOX gene in the pseudoautosomal region (PAR1); rhGH is started early (around age 4-6) at higher doses (0.35-0.375 mg/kg/week) to achieve adult height gain of 5-8 cm, occasionally augmented by somatropin and oxandrolone.",
+   "vis": {
+    "kind": "compare",
+    "title": "Growth Hormone Strategy in Turner Syndrome",
+    "left": {
+     "title": "Therapeutic Principles",
+     "points": [
+      "Initiation around age 4-6 years upon growth deceleration",
+      "High replacement dosing: 0.35-0.375 mg/kg/week (50 mcg/kg/day)",
+      "Cumulative adult height gain of 5-8 cm over projected height"
+     ]
     },
-    {
-      "say": "Screening for Y-chromosome material is essential to identify the elevated risk of malignant gonadal transformation.",
-      "tx": "Mandate **Y-chromosome material screening and gonadectomy** in every girl diagnosed with Turner syndrome. Fluorescence in situ hybridization (FISH) for SRY / Y-chromosome material is mandatory in all Turner patients; presence of cryptic Y material carries a 15-30% risk of gonadoblastoma, requiring prophylactic bilateral gonadectomy to prevent dysgerminoma transformation.",
-      "vis": {
-        "kind": "flow",
-        "title": "SRY Screening and Surgical Prophylaxis",
-        "nodes": [
-          {
-            "id": "y1",
-            "label": "Confirmed Turner Syndrome Karyotype"
-          },
-          {
-            "id": "y2",
-            "label": "FISH / PCR Screening for SRY / Y Material"
-          },
-          {
-            "id": "y3",
-            "label": "Cryptic Y Material Positive"
-          },
-          {
-            "id": "y4",
-            "label": "Bilateral Laparoscopic Gonadectomy"
-          }
-        ],
-        "edges": [
-          [
-            "y1",
-            "y2",
-            "Universal molecular evaluation"
-          ],
-          [
-            "y2",
-            "y3",
-            "Detection in up to 10% of mosaics"
-          ],
-          [
-            "y3",
-            "y4",
-            "15-30% gonadoblastoma risk elimination"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Linear growth failure from SHOX haploinsufficiency is treated with early supraphysiological recombinant growth hormone.",
-      "tx": "Address **SHOX gene haploinsufficiency and rhGH dosing** to optimize adult height outcomes in Turner syndrome. Short stature is caused by haploinsufficiency of the SHOX gene in the pseudoautosomal region (PAR1); rhGH is started early (around age 4-6) at higher doses (0.35-0.375 mg/kg/week) to achieve adult height gain of 5-8 cm, occasionally augmented by somatropin and oxandrolone.",
-      "vis": {
-        "kind": "compare",
-        "title": "Growth Hormone Strategy in Turner Syndrome",
-        "left": {
-          "title": "Therapeutic Principles",
-          "points": [
-            "Initiation around age 4-6 years upon growth deceleration",
-            "High replacement dosing: 0.35-0.375 mg/kg/week (50 mcg/kg/day)",
-            "Cumulative adult height gain of 5-8 cm over projected height"
-          ]
-        },
-        "right": {
-          "title": "Auxological Monitoring",
-          "points": [
-            "Serum IGF-1 maintained within +1 to +2 SDS",
-            "Bone age assessed annually to monitor epiphyseal fusion",
-            "Adjuvant oxandrolone considered in girls > 9-10 years"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Pubertal induction uses low-dose transdermal estradiol to mimic normal breast development and maximize uterine growth.",
-      "tx": "Plan physiologic **Pubertal induction timing with 17-beta estradiol** to support secondary sexual development and bone accretion. Pubertal induction begins around age 11-12 years using transdermal 17-beta estradiol at low initial doses (1/8 to 1/4 adult dose, 3-6 mcg/day patch) with gradual escalation over 2-3 years to mimic normal physiology and maximize uterine growth before introducing progestins.",
-      "vis": {
-        "kind": "flow",
-        "title": "Physiologic Estrogen Replacement Escalation",
-        "nodes": [
-          {
-            "id": "p1",
-            "label": "Age 11-12 years: Start Transdermal 17-beta Estradiol"
-          },
-          {
-            "id": "p2",
-            "label": "Low Starting Dose: 3-6 mcg/day Nocturnal Patch"
-          },
-          {
-            "id": "p3",
-            "label": "Stepwise Escalation over 2-3 years"
-          },
-          {
-            "id": "p4",
-            "label": "Adult Maintenance Dosing (25-50 mcg/day)"
-          }
-        ],
-        "edges": [
-          [
-            "p1",
-            "p2",
-            "Initial Tanner stage 2 induction"
-          ],
-          [
-            "p2",
-            "p3",
-            "Gradual increase every 6-12 months"
-          ],
-          [
-            "p3",
-            "p4",
-            "Full feminization and uterine maturation"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Progestins must be delayed until full breast and uterine development occur to ensure complete ductal maturation.",
-      "tx": "Optimize the **Progestin introduction timing** relative to estrogen progression in Turner management. Oral micronized progesterone (100-200 mg daily for 10-12 days per month) is added only after 2 years of estrogen therapy or when breakthrough vaginal bleeding occurs, ensuring complete breast ductal development and endometrial protection.",
-      "vis": {
-        "kind": "table",
-        "title": "Hormone Replacement Phasing Criteria",
-        "cols": [
-          "Phase",
-          "Endocrine Agent & Dose",
-          "Clinical Goal"
-        ],
-        "rows": [
-          [
-            "Phase 1: Induction",
-            "Transdermal estradiol 3-6 mcg/day",
-            "Tanner II-III thelarche, avoids early bone fusion"
-          ],
-          [
-            "Phase 2: Consolidation",
-            "Estradiol escalated to 12-25 mcg/day",
-            "Uterine length progression on pelvic ultrasound"
-          ],
-          [
-            "Phase 3: Cycling",
-            "Micronized progesterone 100-200 mg x 10-12 days",
-            "Regular withdrawal bleed and endometrial protection"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Left-sided structural cardiovascular anomalies carry severe risk for life-threatening aortic root enlargement and dissection.",
-      "tx": "Screen for **Cardiovascular malformations and aortic dissection** across all pediatric Turner patients. Bicuspid aortic valve (30%) and coarctation of the aorta (12%) are prevalent; aortic size index (ASI = aortic root diameter / BSA) > 2.0 cm/m\u00b2 or aortic root Z-score > 2.5 identifies high risk for fatal aortic dissection, necessitating echocardiography and cardiac magnetic resonance imaging.",
-      "vis": {
-        "kind": "compare",
-        "title": "Aortic Risk Stratification by Aortic Size Index",
-        "left": {
-          "title": "ASI 2.0 to 2.5 cm/m\u00b2",
-          "points": [
-            "Mild-to-moderate aortic root dilation",
-            "Annual cardiovascular surveillance by echocardiography or CMR",
-            "Aggressive blood pressure control targeting < 50th percentile"
-          ]
-        },
-        "right": {
-          "title": "ASI > 2.5 cm/m\u00b2",
-          "points": [
-            "Severe aortic enlargement with critical dissection threat",
-            "Absolute contraindication to pregnancy / assisted reproduction",
-            "Elective prophylactic aortic root replacement consultation"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Congenital structural urinary tract anomalies occur in more than one third of patients, requiring baseline sonography.",
-      "tx": "Perform **Renal malformation screening (horseshoe kidney)** using ultrasound at initial baseline evaluation. Renal ultrasonography is recommended at diagnosis to screen for congenital anomalies (found in 30-40%), most commonly horseshoe kidney (pelvic fusion) and duplicated collecting system, which predispose to recurrent urinary tract infections and pelviureteric junction obstruction.",
-      "vis": {
-        "kind": "table",
-        "title": "Renal Malformations in Turner Syndrome",
-        "cols": [
-          "Renal Anomaly",
-          "Prevalence in Turner (30-40%)",
-          "Clinical Consequence"
-        ],
-        "rows": [
-          [
-            "Horseshoe kidney",
-            "15-20%",
-            "Pelvic fusion, PUJ obstruction and nephrolithiasis"
-          ],
-          [
-            "Duplicated collecting system",
-            "10-15%",
-            "Vesicoureteral reflux and recurrent pyelonephritis"
-          ],
-          [
-            "Renal agenesis / hypoplasia",
-            "3-5%",
-            "Reduced single-kidney functional reserve"
-          ],
-          [
-            "Malrotation",
-            "5-10%",
-            "Altered renal vascular and pelvic anatomy"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Lifelong autoimmune surveillance is essential due to high rates of chronic lymphocytic thyroiditis and enteropathy.",
-      "tx": "Adhere to the protocolized **Autoimmune surveillance schedule** throughout pediatric and adolescent follow-up. Girls with Turner syndrome have high prevalence of Hashimoto thyroiditis (30%) and celiac disease (5-8%), mandating annual thyroid function tests and baseline celiac serology (anti-tTG IgA), alongside monitoring for glucose intolerance and juvenile rheumatoid arthritis.",
-      "vis": {
-        "kind": "flow",
-        "title": "Autoimmune Surveillance Protocol",
-        "nodes": [
-          {
-            "id": "a1",
-            "label": "Annual Physical and Laboratory Evaluation"
-          },
-          {
-            "id": "a2",
-            "label": "Serum TSH, Free T4 and Anti-TPO Antibodies"
-          },
-          {
-            "id": "a3",
-            "label": "Total Serum IgA and Anti-tTG IgA Screening"
-          },
-          {
-            "id": "a4",
-            "label": "Initiate Levothyroxine or Gluten-Free Diet"
-          }
-        ],
-        "edges": [
-          [
-            "a1",
-            "a2",
-            "Annual endocrine screening from age 4"
-          ],
-          [
-            "a1",
-            "a3",
-            "Annual gastrointestinal screen from age 4"
-          ],
-          [
-            "a2",
-            "a4",
-            "If elevated TSH or hypothyroid state"
-          ],
-          [
-            "a3",
-            "a4",
-            "If positive serology confirmed by biopsy"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Auxological Monitoring",
+     "points": [
+      "Serum IGF-1 maintained within +1 to +2 SDS",
+      "Bone age assessed annually to monitor epiphyseal fusion",
+      "Adjuvant oxandrolone considered in girls > 9-10 years"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Pubertal induction uses low-dose transdermal estradiol to mimic normal breast development and maximize uterine growth.",
+   "tx": "Plan physiologic **Pubertal induction timing with 17-beta estradiol** to support secondary sexual development and bone accretion. Pubertal induction begins around age 11-12 years using transdermal 17-beta estradiol at low initial doses (1/8 to 1/4 adult dose, 3-6 mcg/day patch) with gradual escalation over 2-3 years to mimic normal physiology and maximize uterine growth before introducing progestins.",
+   "vis": {
+    "kind": "flow",
+    "title": "Physiologic Estrogen Replacement Escalation",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Age 11-12 years: Start Transdermal 17-beta Estradiol"
+     },
+     {
+      "id": "p2",
+      "label": "Low Starting Dose: 3-6 mcg/day Nocturnal Patch"
+     },
+     {
+      "id": "p3",
+      "label": "Stepwise Escalation over 2-3 years"
+     },
+     {
+      "id": "p4",
+      "label": "Adult Maintenance Dosing (25-50 mcg/day)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Initial Tanner stage 2 induction"
+     ],
+     [
+      "p2",
+      "p3",
+      "Gradual increase every 6-12 months"
+     ],
+     [
+      "p3",
+      "p4",
+      "Full feminization and uterine maturation"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Progestins must be delayed until full breast and uterine development occur to ensure complete ductal maturation.",
+   "tx": "Optimize the **Progestin introduction timing** relative to estrogen progression in Turner management. Oral micronized progesterone (100-200 mg daily for 10-12 days per month) is added only after 2 years of estrogen therapy or when breakthrough vaginal bleeding occurs, ensuring complete breast ductal development and endometrial protection.",
+   "vis": {
+    "kind": "table",
+    "title": "Hormone Replacement Phasing Criteria",
+    "cols": [
+     "Phase",
+     "Endocrine Agent & Dose",
+     "Clinical Goal"
+    ],
+    "rows": [
+     [
+      "Phase 1: Induction",
+      "Transdermal estradiol 3-6 mcg/day",
+      "Tanner II-III thelarche, avoids early bone fusion"
+     ],
+     [
+      "Phase 2: Consolidation",
+      "Estradiol escalated to 12-25 mcg/day",
+      "Uterine length progression on pelvic ultrasound"
+     ],
+     [
+      "Phase 3: Cycling",
+      "Micronized progesterone 100-200 mg x 10-12 days",
+      "Regular withdrawal bleed and endometrial protection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Left-sided structural cardiovascular anomalies carry severe risk for life-threatening aortic root enlargement and dissection.",
+   "tx": "Screen for **Cardiovascular malformations and aortic dissection** across all pediatric Turner patients. Bicuspid aortic valve (30%) and coarctation of the aorta (12%) are prevalent; aortic size index (ASI = aortic root diameter / BSA) > 2.0 cm/m² or aortic root Z-score > 2.5 identifies high risk for fatal aortic dissection, necessitating echocardiography and cardiac magnetic resonance imaging.",
+   "vis": {
+    "kind": "compare",
+    "title": "Aortic Risk Stratification by Aortic Size Index",
+    "left": {
+     "title": "ASI 2.0 to 2.5 cm/m²",
+     "points": [
+      "Mild-to-moderate aortic root dilation",
+      "Annual cardiovascular surveillance by echocardiography or CMR",
+      "Aggressive blood pressure control targeting < 50th percentile"
+     ]
+    },
+    "right": {
+     "title": "ASI > 2.5 cm/m²",
+     "points": [
+      "Severe aortic enlargement with critical dissection threat",
+      "Absolute contraindication to pregnancy / assisted reproduction",
+      "Elective prophylactic aortic root replacement consultation"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Congenital structural urinary tract anomalies occur in more than one third of patients, requiring baseline sonography.",
+   "tx": "Perform **Renal malformation screening (horseshoe kidney)** using ultrasound at initial baseline evaluation. Renal ultrasonography is recommended at diagnosis to screen for congenital anomalies (found in 30-40%), most commonly horseshoe kidney (pelvic fusion) and duplicated collecting system, which predispose to recurrent urinary tract infections and pelviureteric junction obstruction.",
+   "vis": {
+    "kind": "table",
+    "title": "Renal Malformations in Turner Syndrome",
+    "cols": [
+     "Renal Anomaly",
+     "Prevalence in Turner (30-40%)",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Horseshoe kidney",
+      "15-20%",
+      "Pelvic fusion, PUJ obstruction and nephrolithiasis"
+     ],
+     [
+      "Duplicated collecting system",
+      "10-15%",
+      "Vesicoureteral reflux and recurrent pyelonephritis"
+     ],
+     [
+      "Renal agenesis / hypoplasia",
+      "3-5%",
+      "Reduced single-kidney functional reserve"
+     ],
+     [
+      "Malrotation",
+      "5-10%",
+      "Altered renal vascular and pelvic anatomy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Lifelong autoimmune surveillance is essential due to high rates of chronic lymphocytic thyroiditis and enteropathy.",
+   "tx": "Adhere to the protocolized **Autoimmune surveillance schedule** throughout pediatric and adolescent follow-up. Girls with Turner syndrome have high prevalence of Hashimoto thyroiditis (30%) and celiac disease (5-8%), mandating annual thyroid function tests and baseline celiac serology (anti-tTG IgA), alongside monitoring for glucose intolerance and juvenile rheumatoid arthritis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Autoimmune Surveillance Protocol",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Annual Physical and Laboratory Evaluation"
+     },
+     {
+      "id": "a2",
+      "label": "Serum TSH, Free T4 and Anti-TPO Antibodies"
+     },
+     {
+      "id": "a3",
+      "label": "Total Serum IgA and Anti-tTG IgA Screening"
+     },
+     {
+      "id": "a4",
+      "label": "Initiate Levothyroxine or Gluten-Free Diet"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2",
+      "Annual endocrine screening from age 4"
+     ],
+     [
+      "a1",
+      "a3",
+      "Annual gastrointestinal screen from age 4"
+     ],
+     [
+      "a2",
+      "a4",
+      "If elevated TSH or hypothyroid state"
+     ],
+     [
+      "a3",
+      "a4",
+      "If positive serology confirmed by biopsy"
+     ]
+    ]
+   }
+  }
+ ]
 }
