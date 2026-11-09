@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "med-endocarditis",
+ "subject": "medicine",
+ "title": "Infective endocarditis: modified Duke criteria and microbiological etiology",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Infective endocarditis is an infection of the endothelial surface of the heart, predominantly targeting native or prosthetic valves. Formulating an accurate diagnosis relies on the **modified Duke criteria**, which incorporate microbiological, echocardiographic, and physical findings. Definite endocarditis requires two major criteria, one major with three minor criteria, or five minor criteria. This standardized framework ensures rigorous diagnostic classification across both acute and subacute clinical presentations.",
+   "say": "Infective endocarditis represents an infection of the cardiac endocardium, primarily damaging the heart valves. Formulating a diagnosis relies on the modified Duke criteria combining laboratory, imaging and clinical findings. Definite diagnosis requires two major criteria, or one major with three minor, or five minor criteria. This system provides consistent guidance across acute and subacute cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major Duke criteria",
+     "points": [
+      "Typical blood cultures from 2 separate draws",
+      "Persistently positive blood cultures 12 hours apart",
+      "Echocardiographic evidence of endocardial involvement",
+      "New partial dehiscence of prosthetic valve"
+     ]
+    },
+    "right": {
+     "title": "Definite clinical diagnosis",
+     "points": [
+      "2 major criteria satisfied",
+      "1 major plus 3 minor criteria satisfied",
+      "5 minor criteria satisfied",
+      "Histopathological proof from valve tissue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The hallmark pathological finding in endocardial infection is the formation of a macroscopic **vegetation**. Vegetations consist of platelet-fibrin matrices loaded with dense microbial colonies, shielding bacteria from host neutrophils and systemic humoral defenses. Endothelial denudation caused by turbulent intracardiac flow initiates platelet deposition, upon which transient bacteremia seeds microorganisms. Vegetations frequently lead to leaflet perforation, chordal rupture, and dangerous distant embolisation.",
+   "say": "The core pathological finding in endocarditis is the development of an intracardiac vegetation. Vegetations consist of platelet-fibrin complexes harbouring dense bacterial colonies that resist host immune defences. Turbulent blood flow damages the valvular endothelium, allowing transient bacteria to colonise the sterile thrombus. These fragile structures can cause leaflet perforation or embolise to distant vascular beds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "turb",
+      "label": "Turbulent flow and endothelial injury"
+     },
+     {
+      "id": "nbte",
+      "label": "Non-bacterial thrombotic vegetation"
+     },
+     {
+      "id": "bact",
+      "label": "Transient bacteremic colonization"
+     },
+     {
+      "id": "veg",
+      "label": "Infected vegetative mass matures"
+     },
+     {
+      "id": "comp",
+      "label": "Leaflet destruction and embolisation"
+     }
+    ],
+    "edges": [
+     [
+      "turb",
+      "nbte"
+     ],
+     [
+      "nbte",
+      "bact"
+     ],
+     [
+      "bact",
+      "veg"
+     ],
+     [
+      "veg",
+      "comp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Echocardiography is the essential imaging modality for identifying intracardiac vegetations and perivalvular complications. Performing a **transoesophageal echo** provides markedly superior spatial resolution compared to transthoracic imaging, reaching a sensitivity exceeding ninety percent. Transoesophageal imaging is mandatory in suspected prosthetic valve infection, suspected perivalvular root abscess, bacteremia with high-virulence organisms, or when initial transthoracic windows prove non-diagnostic.",
+   "say": "Echocardiography remains the primary imaging modality for detecting endocardial vegetations and structural complications. Performing a transoesophageal echocardiogram offers superior spatial resolution compared to standard surface imaging, with sensitivity exceeding ninety percent. This examination is indicated for prosthetic valves, suspected perivalvular abscesses, high-virulence bacteremia, or equivocal transthoracic studies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ie-fig2.webp",
+    "alt": "Illustration of infective endocarditis vegetations and systemic stigmata.",
+    "caption": "Valvular vegetative lesions and peripheral manifestations of endocarditis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The microbiological spectrum of endocarditis has shifted dramatically, with **Staphylococcus aureus** emerging as the leading global pathogen. This virulent organism rapidly destroys normal native valves without pre-existing structural defects, precipitating acute fulminant sepsis, high fevers, and acute valvular regurgitation. S. aureus is also the predominant cause of right-sided infective endocarditis in people who inject drugs and accounts for most hospital-acquired catheter-related valve infections.",
+   "say": "The microbial spectrum of infective endocarditis has changed, with Staphylococcus aureus becoming the leading organism globally. This aggressive pathogen attacks normal native valves, producing acute heart failure, high spiking fevers and extensive tissue destruction. Staphylococcus aureus is also the predominant cause of right-sided endocarditis in intravenous drug users and hospitalised patients with indwelling lines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Microorganism",
+     "Clinical course",
+     "Typical clinical context",
+     "Valve preference"
+    ],
+    "rows": [
+     [
+      "Staphylococcus aureus",
+      "Acute, rapidly destructive",
+      "IV drug use, vascular catheters",
+      "Tricuspid or native aortic/mitral"
+     ],
+     [
+      "Viridans group streptococci",
+      "Subacute, indolent",
+      "Post-dental procedures, abnormal valves",
+      "Abnormal native mitral/aortic"
+     ],
+     [
+      "Enterococcus faecalis",
+      "Subacute or chronic",
+      "Elderly males, urinary/GI instrumentation",
+      "Aortic or mitral valves"
+     ],
+     [
+      "Staphylococcus epidermidis",
+      "Indolent to destructive",
+      "Prosthetic valves, intracardiac devices",
+      "Prosthetic mechanical/tissue valves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subacute bacterial endocarditis commonly arises from **viridans streptococci**, which inhabit normal human oral cavity flora. Organisms such as Streptococcus sanguinis, Streptococcus mitis, and Streptococcus mutans enter the bloodstream following dental scaling, tooth extraction, or mucosal trauma. These low-virulence streptococci produce extracellular dextrans that bind avidly to fibronectin on damaged valves, producing an indolent clinical syndrome characterized by low-grade fever, fatigue, weight loss, and night sweats.",
+   "say": "Subacute infective endocarditis characteristically arises from viridans streptococci inhabiting the normal oral flora. Species such as Streptococcus sanguinis, mitis and mutans enter the systemic circulation following dental manipulation or mucosal injury. These low-virulence bacteria synthesise dextran, enabling adherence to abnormal cardiac endothelium and generating an indolent syndrome of low-grade fever, malaise and night sweats.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cvs-infection-cyanosis.webp",
+    "alt": "Clinical diagram of endocarditis stigmata and valve lesions.",
+    "caption": "Peripheral stigmata and valvular features of infective endocarditis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Genitourinary and gastrointestinal procedures or infections provide the primary portal of entry for **Enterococcus** faecalis. Enterococcal endocarditis characteristically affects elderly men with prostatic disease or chronic urethral catheterisation, as well as women undergoing obstetric interventions. Enterococci demonstrate intrinsic tolerance to beta-lactam antibiotics, requiring combination therapy with ampicillin plus ceftriaxone or gentamicin to achieve bactericidal synergy and clear persistent intracardiac infection.",
+   "say": "Genitourinary and lower gastrointestinal interventions provide the primary entry route for Enterococcus faecalis. Enterococcal valve infection predominantly affects older men with prostatic enlargement or urinary catheterisation, as well as women following gynaecological procedures. Enterococci exhibit tolerance to beta-lactam monotherapy, necessitating dual treatment with ampicillin and ceftriaxone or gentamicin to achieve reliable bacterial killing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gu",
+      "label": "Urological or colorectal instrumentation"
+     },
+     {
+      "id": "enter",
+      "label": "Enterococcus faecalis bacteremia"
+     },
+     {
+      "id": "tol",
+      "label": "Intrinsic beta-lactam tolerance"
+     },
+     {
+      "id": "synerg",
+      "label": "Ampicillin plus ceftriaxone dual synergy"
+     },
+     {
+      "id": "cure",
+      "label": "Bactericidal eradication of vegetation"
+     }
+    ],
+    "edges": [
+     [
+      "gu",
+      "enter"
+     ],
+     [
+      "enter",
+      "tol"
+     ],
+     [
+      "tol",
+      "synerg"
+     ],
+     [
+      "synerg",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A specialized cluster of fastidious gram-negative bacilli known as the **HACEK** group accounts for approximately two percent of endocarditis cases. Comprising Haemophilus species, Aggregatibacter, Cardiobacterium hominis, Eikenella corrodens, and Kingella kingae, these commensals of the human oropharynx grow slowly in conventional blood cultures. Modern automated culture systems identify HACEK organisms within five days, and third-generation cephalosporins such as intravenous ceftriaxone serve as preferred first-line therapy.",
+   "say": "A distinctive group of fastidious gram-negative bacilli known as HACEK organisms causes around two percent of endocarditis cases. Comprising Haemophilus, Aggregatibacter, Cardiobacterium, Eikenella and Kingella, these normal oral commensals multiply slowly in laboratory media. Modern blood culture systems identify them within five days, and intravenous ceftriaxone represents the standard first-line antimicrobial therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HACEK organism genus",
+     "Oropharyngeal niche",
+     "Key clinical feature",
+     "First-line therapy"
+    ],
+    "rows": [
+     [
+      "Haemophilus / Aggregatibacter",
+      "Dental plaque and gingiva",
+      "Large friable vegetations, embolic events",
+      "Ceftriaxone 2 g daily IV"
+     ],
+     [
+      "Cardiobacterium hominis",
+      "Nasal and oral mucosa",
+      "Subacute aortic valve endocarditis",
+      "Ceftriaxone 2 g daily IV"
+     ],
+     [
+      "Eikenella corrodens",
+      "Periodontal pockets",
+      "Association with human bites / trauma",
+      "Ceftriaxone 2 g daily IV"
+     ],
+     [
+      "Kingella kingae",
+      "Paediatric tonsillar crypts",
+      "Paediatric osteoarticular and valve infections",
+      "Ceftriaxone or ampicillin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistently negative routine blood cultures in a patient with convincing clinical features of valvular infection indicate **culture-negative endocarditis**. Prior empiric antibiotic administration before blood sampling represents the commonest reason for negative cultures. Fastidious intracellular zoonotic pathogens including Coxiella burnetii, Bartonella henselae, and Tropheryma whipplei do not replicate in standard broth media, necessitating targeted serology, polymerase chain reaction assays, or histopathological examination of resected valve tissue.",
+   "say": "Negative blood cultures in a patient showing obvious signs of valvular infection define culture-negative endocarditis. Previous antimicrobial administration before culture collection remains the most frequent cause of sterile bottles. Intracellular pathogens such as Coxiella burnetii, Bartonella and Tropheryma whipplei do not grow on standard agar, requiring serological antibody testing or polymerase chain reaction assays for detection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Endocarditis clinical presentation"
+     },
+     {
+      "id": "neg",
+      "label": "Negative routine blood cultures"
+     },
+     {
+      "id": "abx",
+      "label": "Check prior antibiotic history"
+     },
+     {
+      "id": "sero",
+      "label": "Targeted serology (Coxiella, Bartonella)"
+     },
+     {
+      "id": "pcr",
+      "label": "Valve tissue PCR and histopathology"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "neg"
+     ],
+     [
+      "neg",
+      "abx"
+     ],
+     [
+      "abx",
+      "sero"
+     ],
+     [
+      "sero",
+      "pcr"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
