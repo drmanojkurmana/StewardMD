@@ -1,0 +1,314 @@
+{
+ "v": 1,
+ "id": "cm-air-housing-noise-daylight-factor",
+ "subject": "community-medicine",
+ "module": "cm-air-housing-noise",
+ "title": "Daylight Factor, Noise Induced Hearing Loss, and Ionising Radiation Protection",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Natural illumination and daylight factor",
+   "tx": "Adequate natural daylight inside residential rooms and classrooms prevents visual fatigue, myopia progression, and depressive affect. Lighting engineers quantify indoor natural light using the **daylight factor measurement ratio**, defined as the percentage ratio of daylight illumination at a given reference point on an indoor working plane to simultaneous exterior illumination arriving from an unobstructed hemisphere of overcast sky without direct sunlight.",
+   "say": "The daylight factor measures natural indoor lighting. It is the percentage of outdoor daylight reaching a desk or work surface under an open overcast sky.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indoor illumination point",
+     "points": [
+      "Measured on horizontal working plane",
+      "Usually 0.75 metres above floor",
+      "Must avoid direct glare and reflections"
+     ]
+    },
+    "right": {
+     "title": "Outdoor sky reference",
+     "points": [
+      "Unobstructed overcast sky hemisphere",
+      "Direct sunshine strictly excluded",
+      "Provides baseline ambient standard"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Standards for window area and daylight factors",
+   "tx": "Architectural guidelines enforce minimum daylight factors depending on room function according to **building illumination regulatory standards**. Residential living spaces require a daylight factor of at least one percent, whereas school classrooms, technical drafting studios, and hospital examination suites mandate at least two percent; to achieve these values, window glass area should equal at least ten to twenty percent of total floor area.",
+   "say": "Residential rooms need a daylight factor of at least one percent, while classrooms and clinics require two percent. Window area should equal ten to twenty percent of floor area.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Building space",
+     "Minimum daylight factor",
+     "Window to floor area ratio"
+    ],
+    "rows": [
+     [
+      "Dwellings and bedrooms",
+      "1.0 percent",
+      "At least 1 to 10 (10 percent)"
+     ],
+     [
+      "School classrooms",
+      "2.0 percent",
+      "At least 1 to 5 (20 percent)"
+     ],
+     [
+      "Hospital wards and clinics",
+      "2.0 percent",
+      "At least 1 to 6 (16 percent)"
+     ],
+     [
+      "Precision workshops",
+      "3.0 to 5.0 percent",
+      "At least 1 to 4 (25 percent)"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Physics of sound and the decibel scale",
+   "tx": "Acoustic energy travels as atmospheric pressure fluctuations measured logarithmically on the **decibel sound pressure scale**. Because human auditory perception spans acoustic pressures across six orders of magnitude, sound intensity is expressed as twenty times the common logarithm of the ratio between measured acoustic pressure and the standard reference hearing threshold of twenty micropascals, with an A-weighting network matching human ear sensitivity.",
+   "say": "Sound intensity is measured in decibels using a logarithmic scale. An increase of ten decibels represents a tenfold rise in acoustic energy, mimicking human ear response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Environmental source",
+     "Sound pressure level (dBA)",
+     "Auditory and physiological risk"
+    ],
+    "rows": [
+     [
+      "Faint whisper at 1 metre",
+      "20 to 30 dBA",
+      "Quiet background ambience; calm"
+     ],
+     [
+      "Normal conversational speech",
+      "60 to 65 dBA",
+      "Optimal comfortable acoustic range"
+     ],
+     [
+      "Heavy highway traffic",
+      "80 to 85 dBA",
+      "Threshold for occupational monitoring"
+     ],
+     [
+      "Pneumatic rock drill",
+      "110 to 120 dBA",
+      "Hazardous; rapid cochlear hair cell trauma"
+     ],
+     [
+      "Jet engine takeoff nearby",
+      "130 to 140 dBA",
+      "Acoustic pain threshold; tympanic rupture"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Occupational noise exposure limits",
+   "tx": "To safeguard factory workers from sensory disability, occupational health bodies enforce the **permissible noise exposure limits**. The standard maximum allowable continuous exposure is eighty-five decibels over an eight-hour working shift; under the standard three-decibel halving exchange rule, each three-decibel elevation halves permissible exposure duration, restricting eighty-eight decibels to four hours, ninety-one decibels to two hours, and ninety-four decibels to one hour.",
+   "say": "Workers should not be exposed to more than eighty-five decibels for an eight-hour shift. Every three-decibel increase halves the safe working time to prevent hearing loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "85 dBA: 8 hours maximum shift"
+     },
+     {
+      "id": "d2",
+      "label": "88 dBA: 4 hours maximum shift"
+     },
+     {
+      "id": "d3",
+      "label": "91 dBA: 2 hours maximum shift"
+     },
+     {
+      "id": "d4",
+      "label": "94 dBA: 1 hour maximum shift"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Pathology of noise induced hearing loss",
+   "tx": "Chronic exposure to intense acoustic vibration induces progressive irreversible degeneration of stereocilia and outer hair cells in the organ of Corti. This mechanical and metabolic excitotoxicity produces **noise induced hearing loss progression**, which characteristically begins as a temporary threshold shift that fails to recover over repeated shifts, consolidating into permanent bilateral symmetrical sensorineural deafness with distressing high-pitched subjective tinnitus.",
+   "say": "Intense workplace noise damages sensory hair cells within the cochlea. This starts as temporary muffled hearing and becomes permanent, irreversible hearing loss in both ears.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Temporary threshold shift",
+     "points": [
+      "Metabolic fatigue of hair cells",
+      "Resolves within 16 to 48 hours",
+      "Reversible with quiet rest"
+     ]
+    },
+    "right": {
+     "title": "Permanent threshold shift",
+     "points": [
+      "Irreversible hair cell necrosis",
+      "Permanent sensorineural deafness",
+      "Accompanied by chronic tinnitus"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The pathognomonic 4000 Hz audiometric notch",
+   "tx": "The diagnostic hallmark of early occupational acoustic trauma is the **four-thousand hertz acoustic notch** detected on pure-tone audiometry. Because the anatomical resonance of the external auditory canal amplifies sound frequencies between three and four kilohertz, maximum vibratory shearing strain focuses on the basal turn of the cochlea, producing a sharp dip at four thousand hertz with partial recovery at eight thousand hertz.",
+   "say": "Hearing tests reveal a classic dip at four thousand hertz in noise-exposed workers. This acoustic notch occurs because ear canal resonance concentrates sound damage at this frequency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "External ear resonance amplifies 3 to 4 kHz"
+     },
+     {
+      "id": "a2",
+      "label": "Basal cochlea turn absorbs maximum shear strain"
+     },
+     {
+      "id": "a3",
+      "label": "Audiogram displays sharp V-notch at 4000 Hz"
+     },
+     {
+      "id": "a4",
+      "label": "Recovery at 8000 Hz confirms noise notch"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Physics and units of ionising radiation",
+   "tx": "Medical imaging, radiotherapy, and nuclear installations generate ionising radiation capable of dislodging electrons from biological atoms, quantified using **ionising radiation dosimetry units**. Exposure in air is measured in Roentgens or Coulombs per kilogram, absorbed tissue dose in Grays, and equivalent biological dose in Sieverts, which incorporates radiation weighting factors to account for greater cellular biological effectiveness of alpha particles compared to X-rays.",
+   "say": "Radiation doses are measured using specific scientific units. Gray measures energy absorbed by tissues, while Sievert calculates biological damage by adjusting for radiation type.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dosimetry quantity",
+     "SI unit and symbol",
+     "Older traditional unit",
+     "Conversion factor"
+    ],
+    "rows": [
+     [
+      "Radioactivity",
+      "Becquerel (Bq)",
+      "Curie (Ci)",
+      "1 Ci = 3.7 x 10^10 Bq"
+     ],
+     [
+      "Absorbed dose",
+      "Gray (Gy)",
+      "Rad",
+      "1 Gy = 100 rads"
+     ],
+     [
+      "Equivalent dose",
+      "Sievert (Sv)",
+      "Rem",
+      "1 Sv = 100 rems"
+     ],
+     [
+      "Exposure in air",
+      "Coulomb/kg",
+      "Roentgen (R)",
+      "1 C/kg = 3876 R"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Biological effects of radiation exposure",
+   "tx": "Biological damage from ionizing rays is classified mechanistically into deterministic and stochastic categories under **radiation biological injury classification**. Deterministic effects such as skin erythema, epilation, radiation cataracts, and acute bone marrow aplasia possess a definite threshold dose below which they do not occur; stochastic effects including radiation-induced leukemia, solid malignancies, and gonadal genetic mutations have no threshold, with probability increasing linearly with cumulative dose.",
+   "say": "Radiation causes deterministic effects like skin burns and cataracts above a threshold dose. Cancer and genetic mutations are stochastic risks with no safe threshold dose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deterministic tissue effects",
+     "points": [
+      "Definite threshold dose exists",
+      "Severity increases with dose",
+      "Examples: cataract, skin burns, sterility"
+     ]
+    },
+    "right": {
+     "title": "Stochastic probabilistic effects",
+     "points": [
+      "No threshold dose exists",
+      "Probability increases with dose",
+      "Examples: leukaemia, thyroid cancer"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Occupational radiation protection limits",
+   "tx": "The International Commission on Radiological Protection enforces safety through justification, optimization under the ALARA principle, and **occupational radiation dose limits**. Radiation workers must not exceed twenty millisieverts per year averaged over defined five-year periods, with no single year exceeding fifty millisieverts; for members of the general public, the annual equivalent dose limit is strictly restricted to one millisievert per calendar year.",
+   "say": "Radiation safety follows the principle of keeping exposure as low as reasonably achievable. Workers must not receive more than twenty millisieverts annually over five years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protected population group",
+     "Annual effective dose limit",
+     "Special organ constraints"
+    ],
+    "rows": [
+     [
+      "Occupational radiation workers",
+      "20 mSv/year averaged over 5 yr",
+      "Eye lens: 20 mSv/yr; skin: 500 mSv/yr"
+     ],
+     [
+      "General public members",
+      "1 mSv per calendar year",
+      "Eye lens: 15 mSv/yr; skin: 50 mSv/yr"
+     ],
+     [
+      "Pregnant radiation worker",
+      "1 mSv to abdomen for gestation",
+      "Immediate task reassignment away from beam"
+     ],
+     [
+      "Radiation trainees (aged 16-18)",
+      "6 mSv per calendar year",
+      "Supervised educational training only"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

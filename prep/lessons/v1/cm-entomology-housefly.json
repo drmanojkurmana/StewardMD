@@ -1,0 +1,301 @@
+{
+ "v": 1,
+ "id": "cm-entomology-housefly",
+ "subject": "community-medicine",
+ "module": "cm-entomology",
+ "title": "Mechanical and Biological Vectors: Houseflies, Rat Fleas, and Human Lice",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Morphology of the common housefly",
+   "tx": "The common housefly Musca domestica is a non-biting synanthropic insect characterized by four distinct dark longitudinal stripes across its grey thoracic scutum. As established in **Musca domestica structural morphology**, the insect features a retractable proboscis terminating in fleshy labella traversed by pseudotracheae suited exclusively for liquid suction, while its entire body, legs, and pad-like pulvilli are covered with dense glandular sensory hairs that readily collect faecal bacteria.",
+   "say": "The common housefly has four dark stripes on its back and sponge-like mouthparts. Its hairy legs and sticky footpads trap and carry thousands of disease-causing bacteria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Housefly anatomical traits",
+     "points": [
+      "Four dark longitudinal stripes on thorax",
+      "Sponging mouthparts with pseudotracheae",
+      "Sticky pulvilli on feet secrete mucus",
+      "Breeds in horse manure and human faeces"
+     ]
+    },
+    "right": {
+     "title": "Mechanisms of disease spread",
+     "points": [
+      "Direct mechanical transfer on foot hairs",
+      "Regurgitation of vomit drops onto food",
+      "Defaecation during feeding on food items",
+      "Disseminates enteric pathogens passively"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Transmission mechanisms of houseflies",
+   "tx": "Unlike blood-sucking dipterans that transmit pathogens through biological salivary inoculation, the housefly functions as a dangerous mechanical vector via **housefly mechanical pathogen dissemination**. When feeding on solid food items such as sugar or bread, the fly regurgitates stored digestive fluids from its crop to liquefy the substrate, creating vomit drops loaded with enteric microbes; combined with constant defaecation and mechanical contact, it spreads typhoid, cholera, amoebic dysentery, and trachoma.",
+   "say": "Flies liquefy food by vomiting saliva and stomach fluids onto it before sponging it up. This vomit-drop habit, along with constant defecation, spreads cholera and dysentery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Fly feeds on uncollected human faeces"
+     },
+     {
+      "id": "h2",
+      "label": "Pathogens adhere to foot hairs and crop"
+     },
+     {
+      "id": "h3",
+      "label": "Fly lands on uncovered household food"
+     },
+     {
+      "id": "h4",
+      "label": "Vomit drops and defecation contaminate meal"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Morphology and biology of rat fleas",
+   "tx": "Rat fleas belonging to the genus Xenopsylla are wingless, laterally compressed, brown ectoparasitic insects adapted for moving swiftly through the dense fur of rodent hosts. Characterised by **Xenopsylla flea anatomical features**, they possess powerful saltatorial hind legs enabling impressive leaps, backward-pointing cuticular spines that resist grooming, and piercing-sucking mouthparts through which adult male and female fleas ingest rodent blood to support egg production.",
+   "say": "Rat fleas are flat, wingless insects that jump with powerful back legs. Their bodies are flattened side-to-side and covered with spines to cling tightly to rat fur.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Xenopsylla cheopis (oriental)",
+     "points": [
+      "Spermatheca tail larger than head",
+      "Antepygidial bristle far from margin",
+      "Supreme plague vector in Indian plains"
+     ]
+    },
+    "right": {
+     "title": "Xenopsylla astia (indigenous)",
+     "points": [
+      "Spermatheca tail smaller than head",
+      "Antepygidial bristle close to margin",
+      "Weak vector of bubonic plague"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The blocked flea mechanism in plague",
+   "tx": "When Xenopsylla cheopis feeds on a rodent experiencing high Yersinia pestis bacteraemia, the ingested bacilli produce coagulase that clots blood inside the insect proventriculus under the **blocked flea plague transmission mechanism**. The bacterial biofilm physically occludes the proventricular valve, preventing blood from entering the stomach; starving and desperate, the blocked flea bites repeatedly, regurgitating thousands of virulent plague bacilli directly back into the human puncture wound.",
+   "say": "Plague bacteria multiply and clot blood inside the flea's digestive tract, completely blocking its stomach. Starving fleas bite repeatedly and vomit infectious bacteria into the victim.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Flea ingests Yersinia pestis from rat blood"
+     },
+     {
+      "id": "f2",
+      "label": "Bacilli multiply in proventriculus"
+     },
+     {
+      "id": "f3",
+      "label": "Coagulase triggers clot, blocking digestive valve"
+     },
+     {
+      "id": "f4",
+      "label": "Starving flea regurgitates bacilli into human host"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Surveillance using the Cheopis index",
+   "tx": "Epidemiological monitoring of plague vulnerability in rodent reservoirs relies on trapping domestic rats and computing the **Cheopis index vector threshold**. Defined as the average number of Xenopsylla cheopis fleas collected per individual rodent host examined, a Cheopis index exceeding one point zero indicates high potential for explosive human plague outbreaks should the pathogen enter the local rodent population, requiring urgent indoor residual insecticidal dusting.",
+   "say": "The Cheopis index calculates the average number of oriental rat fleas per trapped rat. An index greater than one warns of high epidemic risk for bubonic plague.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Flea surveillance index",
+     "Mathematical formula",
+     "Epidemiological interpretation"
+    ],
+    "rows": [
+     [
+      "Total flea index",
+      "Total fleas of all species / Total rats examined",
+      "General measure of ectoparasitic infestation"
+     ],
+     [
+      "Cheopis index",
+      "Total Xenopsylla cheopis / Total rats examined",
+      "Values > 1.0 indicate human plague epidemic threat"
+     ],
+     [
+      "Flea percentage",
+      "(Rats infested with fleas / Total rats) x 100",
+      "Proportion of rodent colony harbouring vectors"
+     ],
+     [
+      "Specific flea index",
+      "Count of specific flea species / Total rats",
+      "Evaluates distribution of astia vs brasiliensis"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Human lice taxonomy and morphology",
+   "tx": "Human lice are obligate host-specific, wingless, dorsoventrally flattened ectoparasitic insects divided into three distinct epidemiological forms under **human louse taxonomic classification**. Pediculus humanus capitis infests the scalp hair, Pediculus humanus corporis infests the seams of worn clothing, and Phthirus pubis infests coarse pubic hair; all possess powerful crab-like tarsal claws designed to grasp hair shafts and clothes fibres with exceptional tenacity.",
+   "say": "Human lice are flat, wingless parasites that cling to hairs and clothing seams. They include head lice, body lice, and pubic crab lice, feeding solely on blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Louse subspecies",
+     "Primary ecological habitat",
+     "Medical significance"
+    ],
+    "rows": [
+     [
+      "Pediculus humanus corporis",
+      "Seams of undergarments next to skin",
+      "Sole vector of typhus, trench fever, relapsing fever"
+     ],
+     [
+      "Pediculus humanus capitis",
+      "Hairs of scalp, especially occiput",
+      "Social nuisance, pruritus, secondary pyoderma"
+     ],
+     [
+      "Phthirus pubis (crab louse)",
+      "Coarse pubic, axillary, facial hair",
+      "Sexually transmitted infestation, maculae caeruleae"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Diseases transmitted exclusively by body lice",
+   "tx": "While head and pubic lice cause intense pruritus and secondary impetigo, only the human body louse serves as a biological vector under **louse borne infectious disease transmission**. Pediculus humanus corporis transmits epidemic typhus caused by Rickettsia prowazekii, trench fever caused by Bartonella quintana, and louse-borne epidemic relapsing fever caused by Borrelia recurrentis; typhus is transmitted through infectious faeces scratched into bite wounds, whereas Borrelia is released only when the crushed louse body is rubbed into skin.",
+   "say": "Body lice transmit epidemic typhus, trench fever, and relapsing fever in refugee camps. Typhus spreads when scratching rubs louse faeces into broken skin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epidemic typhus (R. prowazekii)",
+     "points": [
+      "Pathogen excreted in louse faeces",
+      "Transmission via scratching faeces into bite",
+      "Louse dies of ruptured gut within 10 days"
+     ]
+    },
+    "right": {
+     "title": "Epidemic relapsing fever (B. recurrentis)",
+     "points": [
+      "Pathogen confined to louse haemolymph",
+      "Transmission occurs when crushing louse",
+      "Spirochaetes penetrate through abraded skin"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Diagnosis and management of pediculosis",
+   "tx": "Clinical diagnosis involves demonstrating active mobile lice or glistening oval nits firmly cemented to hair shafts or clothing seams. Treatment of scalp and pubic infestation employs **pediculicide therapeutic application protocols**, applying one percent permethrin lotion or zero point five percent malathion to dry hair for ten minutes before rinsing, combined with fine-toothed nit combing and washing all clothing and bed linen in hot water exceeding sixty degrees Celsius.",
+   "say": "Pediculosis is diagnosed by finding live lice or glued egg nits. One percent permethrin lotion kills active lice, while washing clothes in hot water destroys eggs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Visual identification of nits and adult lice"
+     },
+     {
+      "id": "p2",
+      "label": "Apply 1 percent permethrin lotion for 10 minutes"
+     },
+     {
+      "id": "p3",
+      "label": "Repeat treatment after 7 days for newly hatched nymphs"
+     },
+     {
+      "id": "p4",
+      "label": "Launder clothing and bed linen at 60 degrees C"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Integrated suppression of non-mosquito vectors",
+   "tx": "Controlling synanthropic flies, rodent fleas, and body lice requires combining targeted chemical insecticides with **strict environmental sanitation**. For houseflies, eliminating open manure heaps and installing screen doors provides primary defense; for plague prevention, dusting rodent burrows with five percent malathion powder must strictly precede rodent poisoning campaigns to prevent starving fleas from jumping off dead rats onto human hosts.",
+   "say": "Controlling flies and fleas requires good sanitation and insecticides. During plague outbreaks, sanitarians must dust rat burrows with insecticide before killing rats to prevent fleas biting people.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target vector",
+     "Primary environmental intervention",
+     "Chemical insecticide measure"
+    ],
+    "rows": [
+     [
+      "Musca domestica (housefly)",
+      "Prompt manure composting; screened food storage",
+      "Pyrethrum space spray; toxic sugar fly baits"
+     ],
+     [
+      "Xenopsylla cheopis (rat flea)",
+      "Rat-proofing buildings; rubbish clearance",
+      "5 percent malathion powder dusted in rat burrows"
+     ],
+     [
+      "Pediculus corporis (body louse)",
+      "Regular personal bathing; laundry with hot water",
+      "0.5 percent permethrin dusting powder on clothing"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,302 @@
+{
+ "v": 1,
+ "id": "cm-water-horrock-s-apparatus",
+ "subject": "community-medicine",
+ "module": "cm-water",
+ "title": "Water Quality Testing: Horrocks Apparatus, Residual Chlorine, and Coliform Enumeration",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Principles of well water disinfection",
+   "tx": "Disinfection of community dug wells and rural surface water reservoirs requires calculating the precise quantity of bleaching powder needed to neutralise chemical demand and provide germicidal action. Because organic impurities and reducing minerals vary widely between water bodies, arbitrary dosing risks under-chlorination or objectionable taste; determining individual **chlorine demand estimation** ensures complete bacteriological destruction without wasteful chemical excess.",
+   "say": "Disinfecting rural wells requires calculating exact bleaching powder doses. Measuring chlorine demand ensures all pathogens are destroyed while preventing objectionable chemical tastes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Under-chlorination hazards",
+     "points": [
+      "Surviving enteropathogens",
+      "Incomplete oxidation of organics",
+      "Waterborne epidemic transmission"
+     ]
+    },
+    "right": {
+     "title": "Horrocks guided dosing",
+     "points": [
+      "Measures exact demand of source",
+      "Delivers 0.5 mg/L free chlorine",
+      "Guarantees safe drinking water"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Components of Horrocks apparatus",
+   "tx": "The standard field testing kit designed for rural sanitarians is **Horrocks apparatus components**, comprising six white porcelain cups, one marked black cup with an internal circular line, two special zinc measuring spoons holding two grams of bleaching powder, glass stirring rods, and specialised pipettes. Fresh bleaching powder is emulsified inside the black cup before sequential dilution into the numbered white testing vessels.",
+   "say": "Horrocks apparatus includes six white cups, one black mixing cup, two gram zinc spoons, and pipettes. Bleaching powder is prepared in the black cup for systematic dilution.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Apparatus component",
+     "Specifications",
+     "Functional utility in test"
+    ],
+    "rows": [
+     [
+      "White porcelain cups",
+      "Six numbered cups (1 to 6)",
+      "Serial titrations with bleaching solution"
+     ],
+     [
+      "Black mixing cup",
+      "Special cup with internal mark",
+      "Emulsifies 2 g bleaching powder in water"
+     ],
+     [
+      "Zinc measuring spoons",
+      "Standard capacity 2 grams",
+      "Accurately measures dry bleaching powder"
+     ],
+     [
+      "Starch iodide indicator",
+      "Cadmium iodide and starch crystals",
+      "Develops blue colour with free chlorine"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Procedure and dilution technique",
+   "tx": "To execute the field assay, two grams of bleaching powder are crushed with clean water inside the black cup up to its graduation mark. Successive aliquots of clear supernatant are transferred to the six white cups using a graduated pipette, dispensing one drop into cup one up to six drops into cup six, establishing a **serial bleaching dilution series** across identical volumes of sample water.",
+   "say": "Two grams of bleaching powder are mixed in the black cup. Incremental drops from one to six are pipetted into the white cups to create a graduated chemical series.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Crush 2 g powder in black cup"
+     },
+     {
+      "id": "n2",
+      "label": "Fill to mark with sample water"
+     },
+     {
+      "id": "n3",
+      "label": "Pipette 1 to 6 drops into cups"
+     },
+     {
+      "id": "n4",
+      "label": "Stir and incubate for 30 minutes"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Reading the Horrocks endpoint",
+   "tx": "After allowing thirty minutes contact time for oxidation, three drops of starch-iodide indicator solution are added to every cup. The earliest cup displaying a distinct blue coloration indicates satisfaction of immediate chemical demand; reading this **Horrocks apparatus endpoint** dictates that the number on that specific cup corresponds directly to the spoonfuls of bleaching powder required to disinfect four hundred and fifty-five litres of well water.",
+   "say": "Adding starch iodide produces a blue colour once chlorine demand is satisfied. The number on the first blue cup indicates the exact spoonfuls required per hundred gallons.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "First blue cup number",
+     "Spoons of bleaching powder",
+     "Water volume treated"
+    ],
+    "rows": [
+     [
+      "Cup 1",
+      "1 spoon (2 grams)",
+      "455 litres (100 gallons)"
+     ],
+     [
+      "Cup 2",
+      "2 spoons (4 grams)",
+      "455 litres (100 gallons)"
+     ],
+     [
+      "Cup 3",
+      "3 spoons (6 grams)",
+      "455 litres (100 gallons)"
+     ],
+     [
+      "Cup 4",
+      "4 spoons (8 grams)",
+      "455 litres (100 gallons)"
+     ],
+     [
+      "Cup 5",
+      "5 spoons (10 grams)",
+      "455 litres (100 gallons)"
+     ],
+     [
+      "Cup 6",
+      "6 spoons (12 grams)",
+      "455 litres (100 gallons)"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Orthotoluidine test for residual chlorine",
+   "tx": "Public distribution networks evaluate post-treatment protection using the **orthotoluidine test reaction**, wherein orthotoluidine reagent reacts with chlorine in an acidic milieu to yield yellow-coloured holoquinone. Adding reagent to water produces instant yellow within ten seconds representing free chlorine, whereas reading the test after five minutes ambient incubation reflects total residual chlorine including slower chloramine complexes.",
+   "say": "Orthotoluidine reacts with chlorine to form a yellow colour. Reading at ten seconds quantifies free chlorine, while a five minute reading reflects total residual chlorine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ten-second flash reading",
+     "points": [
+      "Measures free available chlorine",
+      "Hypochlorous acid and hypochlorite",
+      "Active bactericidal disinfectant"
+     ]
+    },
+    "right": {
+     "title": "Five-minute reading",
+     "points": [
+      "Measures total residual chlorine",
+      "Includes combined chloramines",
+      "Subject to mineral interference"
+     ]
+    }
+   }
+  },
+  {
+   "title": "OTA test and differential discrimination",
+   "tx": "Because standard orthotoluidine assays suffer false-positive interference from ferric iron, manganese, and nitrites, sanitarians utilise the **orthotoluidine arsenite discrimination** modification. Sodium arsenite added immediately after orthotoluidine halts colour formation by slower reactants, enabling precise mathematical subtraction between three split cuvettes to isolate true free chlorine, combined chloramines, and non-chlorine oxidising contaminants.",
+   "say": "Sodium arsenite stops colour development to prevent false readings from iron and nitrites. Split sample testing accurately isolates free chlorine from combined forms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Three split cuvettes A, B, C"
+     },
+     {
+      "id": "a2",
+      "label": "A: OT + arsenite at 5 sec"
+     },
+     {
+      "id": "a3",
+      "label": "B: Arsenite first + OT"
+     },
+     {
+      "id": "a4",
+      "label": "True free = A minus B"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a1",
+      "a3"
+     ],
+     [
+      "a2",
+      "a4"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Bacteriological indicators of faecal pollution",
+   "tx": "Pathogen isolation from water samples is technically arduous; consequently, public health surveillance relies on **coliform bacterial indicators** whose presence demonstrates human or animal intestinal contamination. Ideal indicators inhabit human faeces in vast densities, survive longer in aquatic environments than enteric pathogens without post-sampling multiplication, and exhibit high susceptibility to standard oxidative disinfection measures.",
+   "say": "Instead of hunting rare pathogens, sanitarians test for coliform bacteria. Abundant intestinal coliforms prove sewage contamination and flag disease risks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thermotolerant faecal coliforms",
+     "points": [
+      "Escherichia coli primary type",
+      "Ferments lactose at 44 degrees C",
+      "Indicates recent human sewage"
+     ]
+    },
+    "right": {
+     "title": "Total environmental coliforms",
+     "points": [
+      "Klebsiella, Citrobacter, Enterobacter",
+      "Soil and vegetation origins",
+      "Ferments lactose at 37 degrees C"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Multiple tube fermentation and MPN determination",
+   "tx": "Quantification of coliform abundance employs multiple tube fermentation yielding the **most probable number estimation**, wherein measured water aliquots are inoculated into MacConkey bile salt lactose broth tubes and incubated at thirty-seven degrees Celsius for forty-eight hours. Producing acid and trapped gas inside Durham vials constitutes a presumptive positive result, translated into statistical counts per hundred millilitres via standard McCrady probability tables.",
+   "say": "Water samples are cultured in MacConkey broth inside Durham tubes. Producing acid and gas confirms fermentation, which is converted to bacterial counts using probability tables.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic stage",
+     "Incubation temperature and time",
+     "Observable diagnostic endpoint"
+    ],
+    "rows": [
+     [
+      "Presumptive coliform test",
+      "MacConkey broth at 37 C for 48 h",
+      "Acid production with gas in Durham tube"
+     ],
+     [
+      "Confirmed faecal coliform test",
+      "Brilliant green bile broth at 44 C",
+      "Turbidity and gas confirmation"
+     ],
+     [
+      "Completed E. coli test",
+      "Eosin methylene blue agar plating",
+      "Green metallic sheen colonies"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "WHO drinking water microbiological standards",
+   "tx": "The World Health Organization mandates strict drinking water thresholds stipulating that treated municipal piped supplies must demonstrate **zero coliform bacteriological standards** across every hundred millilitre sample examined. For unpiped community supplies, occasional total coliforms under ten per hundred millilitres are permissible provided repeat testing is negative and thermotolerant Escherichia coli organisms remain strictly undetectable in all tested volumes.",
+   "say": "Drinking water must contain zero coliform bacteria per hundred millilitres in piped supplies. Finding Escherichia coli proves hazardous contamination requiring immediate boiling or chlorination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Piped treated water",
+     "points": [
+      "0 coliforms per 100 mL",
+      "0 E. coli per 100 mL",
+      "Zero tolerance for enteropathogens"
+     ]
+    },
+    "right": {
+     "title": "Unpiped rural water",
+     "points": [
+      "< 10 coliforms per 100 mL",
+      "0 E. coli per 100 mL",
+      "Never in consecutive samples"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
