@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-foot",
+ "subject": "anatomy",
+ "title": "Plantar Aponeurosis, Longitudinal Arches, and Foot Deformities",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **plantar aponeurosis** is a dense, glistening triangular sheet of deep fascia situated in the central sole of the foot. Attached posteriorly to the medial process of the calcaneal tuberosity, it broadens distally into five longitudinal digital slips that insert into the fibrous flexor sheaths and bases of the proximal phalanges.",
+   "say": "The plantar aponeurosis is a tough fibrous sheet covering the central sole. Attached posteriorly to the calcaneal tuberosity, it splits distally into five digital slips inserting onto the proximal phalanges.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sole-nerves.svg",
+    "alt": "Plantar aponeurosis, plantar muscle layers, and cutaneous nerve distribution of the foot",
+    "caption": "Plantar aponeurosis and architecture of intrinsic muscular layers of the foot. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The plantar aponeurosis functions as a dynamic mechanical tie-rod, acting through the **windlass mechanism** described by Hicks. Dorsiflexion of the toes during terminal stance winds the digital slips around the metatarsal heads, pulling the calcaneus towards the forefoot, elevating the medial longitudinal arch, and converting the foot into a rigid lever for push-off.",
+   "say": "The plantar aponeurosis operates through the windlass mechanism. During toe dorsiflexion at push-off, its slips wind over the metatarsal heads, shortening the tie-rod and stiffening the arch into a rigid propulsion lever.",
+   "vis": {
+    "kind": "flow",
+    "title": "The Windlass Mechanism of Hicks",
+    "nodes": [
+     {
+      "id": "toe",
+      "label": "Metatarsophalangeal Extension (Toe Dorsiflexion) during Push-off"
+     },
+     {
+      "id": "wind",
+      "label": "Plantar Aponeurosis Slips Wind around Metatarsal Heads"
+     },
+     {
+      "id": "shorten",
+      "label": "Distance between Calcaneus and Metatarsal Heads Shortens"
+     },
+     {
+      "id": "rigid",
+      "label": "Medial Arch Rises, Locking Foot into a Rigid Propulsion Lever"
+     }
+    ],
+    "edges": [
+     [
+      "toe",
+      "wind"
+     ],
+     [
+      "wind",
+      "shorten"
+     ],
+     [
+      "shorten",
+      "rigid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microtrauma and repetitive tensile traction at the calcaneal origin of the plantar aponeurosis provoke **plantar fasciitis**, the most common cause of heel pain in adults. Patients report severe, lancinating heel pain with the first steps in the morning or following periods of rest, localized to the anteromedial calcaneal tuberosity.",
+   "say": "Repetitive tensile overload at the calcaneal insertion causes plantar fasciitis. Patients experience sharp heel pain on taking the first morning steps, pinpointed over the anteromedial calcaneus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plantar Fasciitis",
+     "points": [
+      "Maximal tenderness at medial calcaneal process",
+      "Morning start-up pain that eases with walking",
+      "Pain exacerbated by passive toe dorsiflexion",
+      "Traction traction spur on X-ray is secondary"
+     ]
+    },
+    "right": {
+     "title": "Fat Pad Atrophy",
+     "points": [
+      "Degeneration of calcaneal shock-absorbing fat pad",
+      "Central heel pain worsening with walking duration",
+      "Deep aching pain directly over central calcaneus",
+      "Direct correlation with advanced age and steroid shots"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The intrinsic muscles of the sole are arranged in four orderly layers. The first layer consists of abductor hallucis, flexor digitorum brevis, and abductor digiti minimi; the second layer contains the **quadratus plantae** (which aligns the oblique pull of FDL) and four lumbricals; the third layer contains short flexors and adductor hallucis; the fourth contains interossei.",
+   "say": "The muscles of the sole form four layers. The second layer contains quadratus plantae and four lumbricals. Quadratus plantae attaches into flexor digitorum longus to straighten its oblique traction vector.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sole Layer",
+     "Muscular Contents",
+     "Dominant Nerve Supply",
+     "Primary Functional Role"
+    ],
+    "rows": [
+     [
+      "First Layer",
+      "Abductor hallucis, FDB, abductor digiti minimi",
+      "Medial plantar (AH, FDB); lateral plantar (ADM)",
+      "Superficial arch support and digit abduction"
+     ],
+     [
+      "Second Layer",
+      "Quadratus plantae and 4 lumbricals",
+      "Lateral plantar (QP, L2-4); medial plantar (L1)",
+      "Aligns FDL pull and flexes MCP joints"
+     ],
+     [
+      "Third Layer",
+      "Flexor hallucis brevis, adductor hallucis, FDM",
+      "Medial plantar (FHB); lateral plantar (others)",
+      "Toe flexion and transverse arch cohesion"
+     ],
+     [
+      "Fourth Layer",
+      "Plantar interossei (3, PAD) and dorsal (4, DAB)",
+      "Deep branch of lateral plantar nerve",
+      "Adducts and abducts toes around digit 2 axis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The foot architecture incorporates three arches that absorb shock and transmit body weight: the medial longitudinal arch, lateral longitudinal arch, and **transverse arch**. The medial longitudinal arch is the higher and more elastic arch, composed of the calcaneus, talus (keystone), navicular, three cuneiforms, and medial three metatarsals.",
+   "say": "The foot features medial longitudinal, lateral longitudinal, and transverse arches. The medial arch is higher and more elastic, supported by the talar keystone, navicular, cuneiforms, and first three metatarsals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medial Longitudinal Arch",
+     "points": [
+      "Components: calcaneus, talus, navicular, 3 cuneiforms, 3 metatarsals",
+      "Keystone: head of talus",
+      "Primary tie-beam: plantar aponeurosis and spring ligament",
+      "Dynamic sling: tibialis anterior and tibialis posterior"
+     ]
+    },
+    "right": {
+     "title": "Lateral Longitudinal Arch",
+     "points": [
+      "Components: calcaneus, cuboid, 4th and 5th metatarsals",
+      "Keystone: cuboid bone",
+      "Primary tie-beam: long and short plantar ligaments",
+      "Dynamic support: peroneus longus and brevis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The critical ligamentous support of the medial arch is the plantar calcaneonavicular ligament, universally termed the **spring ligament**. Extending from the sustentaculum tali of the calcaneus to the plantar surface of the navicular, it directly cradles the rounded head of the talus, preventing its downward and medial collapse.",
+   "say": "The spring ligament is the primary ligamentous brace of the medial arch. Connecting the sustentaculum tali to the navicular, it forms an elastic socket supporting the head of the talus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/accessory-navicular-syndrome-fig1.webp",
+    "alt": "Anatomy of navicular bone, insertion of posterior tibial tendon, and spring ligament complex",
+    "caption": "Navicular attachment site of tibialis posterior and relationship to the spring ligament. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure of the spring ligament or insufficiency of the tibialis posterior tendon causes flattening of the medial longitudinal arch, designated **pes planus** (flatfoot). Conversely, pathological elevation of the longitudinal arch occurs in pes cavus, seen in hereditary motor sensory neuropathies (Charcot-Marie-Tooth disease) and Friedreich ataxia due to intrinsic-extrinsic muscle imbalance.",
+   "say": "Insufficiency of the spring ligament or tibialis posterior tendon leads to flatfoot, termed pes planus. Conversely, abnormally high arches characterize pes cavus, seen in Charcot-Marie-Tooth disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Deformity",
+     "Pathological Feature",
+     "Underlying Etiology",
+     "Biomechanical Imbalance"
+    ],
+    "rows": [
+     [
+      "Pes Planus (Flatfoot)",
+      "Collapse of medial longitudinal arch",
+      "Tibialis posterior tendon dysfunction",
+      "Talus slides medially and downwards"
+     ],
+     [
+      "Pes Cavus (High Arch)",
+      "Exaggerated longitudinal arch elevation",
+      "Charcot-Marie-Tooth, Friedreich ataxia",
+      "Denervated intrinsics; unopposed peroneus"
+     ],
+     [
+      "Talipes Equinovarus",
+      "Clubfoot: Equinus, Inversion, Varus, Adduction",
+      "Congenital developmental dysplasia",
+      "Shortened tendo calcaneus, tibialis posterior"
+     ],
+     [
+      "Hallux Valgus",
+      "Lateral deviation of great toe at MTP joint",
+      "Ill-fitting footwear, genetic predisposition",
+      "Medial prominence (bunion) on metatarsal 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arterial perfusion of the dorsal foot is delivered by the **dorsalis pedis artery**, the continuation of the anterior tibial artery at the midpoint between the malleoli. Passing along the medial border of the dorsum, its pulsation is palpated against the navicular and cuneiform bones immediately lateral to the tendon of extensor hallucis longus.",
+   "say": "The dorsalis pedis artery delivers blood to the dorsal foot as the continuation of the anterior tibial artery. Its pulse is palpated between the malleoli lateral to the extensor hallucis longus tendon.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dorsalis Pedis Course and Palpation Landmark",
+    "nodes": [
+     {
+      "id": "at",
+      "label": "Anterior Tibial Artery Crosses Anterior Ankle Mortise"
+     },
+     {
+      "id": "rename",
+      "label": "Renamed Dorsalis Pedis Artery Midway between Malleoli"
+     },
+     {
+      "id": "ehl",
+      "label": "Courses Immediately Lateral to Extensor Hallucis Longus"
+     },
+     {
+      "id": "pulse",
+      "label": "Pulsation Palpated Firmly Against Underlying Navicular Bone"
+     }
+    ],
+    "edges": [
+     [
+      "at",
+      "rename"
+     ],
+     [
+      "rename",
+      "ehl"
+     ],
+     [
+      "ehl",
+      "pulse"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "3c1acb1e-131a-4dd2-a721-bccac0f92c20",
+  "ceb94a3d-8a2e-4154-a1b5-bb33f636d5f2",
+  "d078b80e-2fd4-491b-b629-d2c32a84eaf0"
+ ]
+}
