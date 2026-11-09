@@ -1,0 +1,260 @@
+{
+ "key": "ped-acquired-heart-coronary-aneurysm",
+ "v": 1,
+ "module": "ped-acquired-heart",
+ "subject": "paediatrics",
+ "title": "Kawasaki Disease, Coronary Aneurysms and Pediatric SVT",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Acute necrotizing systemic medium-vessel vasculitis predominantly targets infants and toddlers. The foremost cause of acquired pediatric heart disease in developed nations is **Kawasaki disease vasculitis**, typically affecting children between six months and five years of age. Pan-arteritis of medium-sized muscular arteries triggers coronary arterial wall elastin destruction, predisposing up to twenty-five percent of untreated patients to progressive coronary aneurysm formation.",
+   "say": "Kawasaki disease is an acute medium-vessel vasculitis affecting children under five years. It causes pan-arteritis that damages coronary artery walls, predisposing to coronary aneurysms.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-kawasaki.webp",
+    "alt": "Clinical diagnostic criteria and manifestations of acute Kawasaki disease.",
+    "caption": "Diagnostic hallmarks of Kawasaki disease showing conjunctival injection, mucosal changes, rash, and coronary aneurysms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic classification requires fulfilling standardized clinical criteria centered upon protracted fever. Classic diagnosis demands **fever of five days duration** refractory to standard antipyretics, alongside at least four of five principal clinical criteria: bilateral non-exudative conjunctivitis, oral mucosal changes (strawberry tongue, cracked lips), polymorphous exanthem, peripheral extremity induration followed by periungual peeling, and acute non-purulent cervical lymphadenopathy exceeding 1.5 cm.",
+   "say": "Diagnose Kawasaki disease when fever persists for five days with four of five signs: non-exudative red eyes, strawberry tongue, polymorphous rash, swollen hands, and a large cervical node.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Principal Diagnostic Criterion",
+     "Clinical Morphological Landmark",
+     "Specific Diagnostic Rules",
+     "Timing of Appearance"
+    ],
+    "rows": [
+     [
+      "Bulbar conjunctivitis",
+      "Bilateral non-purulent bulbar injection",
+      "Spares limbus around cornea",
+      "Appears within first 48 hours"
+     ],
+     [
+      "Oral mucosal changes",
+      "Erythema, strawberry tongue, lip fissuring",
+      "No pharyngeal ulcers or exudates",
+      "Appears on days 2 to 4"
+     ],
+     [
+      "Polymorphous exanthem",
+      "Diffuse maculopapular, scarlatiniform",
+      "Never vesicular or bullous",
+      "Appears on days 3 to 5"
+     ],
+     [
+      "Extremity alterations",
+      "Indurated edema of hands/feet; peeling",
+      "Periungual desquamation subacutely",
+      "Edema early; peeling weeks 2-3"
+     ],
+     [
+      "Cervical lymphadenopathy",
+      "Unilateral tender cervical node (>=1.5 cm)",
+      "Non-suppurative firm swelling",
+      "Least common criterion (50-70%)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Echocardiographic monitoring evaluates progressive luminal dilatation of the coronary circulation. Untreated vasculitis provokes **coronary artery aneurysm formation**, peaking between two and four weeks after fever onset. Luminal dimensions are classified using body surface area Z-scores: Z-scores between 2.0 and 2.5 indicate dilation, 2.5 to 5.0 indicate small aneurysms, 5.0 to 10.0 represent medium aneurysms, and Z-scores of ten or greater (or absolute diameter >=8 mm) define giant aneurysms.",
+   "say": "Coronary artery aneurysms peak between two and four weeks after fever onset. Giant aneurysms with diameters of eight millimetres or greater carry high risks of thrombosis and myocardial infarction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Small to Medium Aneurysms",
+     "points": [
+      "Z-score between 2.5 and 10.0 (diameter <8 mm)",
+      "Frequently regress over 1 to 2 years",
+      "Low risk of acute thrombotic occlusion",
+      "Maintain daily low-dose antiplatelet aspirin"
+     ]
+    },
+    "right": {
+     "title": "Giant Coronary Aneurysms",
+     "points": [
+      "Z-score >=10.0 or internal diameter >=8 mm",
+      "High risk of rupture, thrombosis, and infarction",
+      "Rarely regress; develop calcification and stenosis",
+      "Requires dual antiplatelet therapy plus anticoagulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prompt biological therapy suppresses coronary inflammation and prevents permanent arterial aneurysms. Administering high-dose **intravenous immunoglobulin IVIG therapy** at a single dose of two grams per kilogram infused over ten to twelve hours within the first ten days of fever onset reduces coronary aneurysm incidence from twenty-five percent to under five percent. High-dose oral aspirin (80 to 100 mg/kg/day) is administered concurrently until the child is afebrile.",
+   "say": "A single infusion of intravenous immunoglobulin at two grams per kilogram given within ten days reduces coronary aneurysm risk below five percent. Combine with high-dose aspirin initially.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Phase",
+     "Pharmacological Regimen",
+     "Administration Details",
+     "Clinical Therapeutic Target"
+    ],
+    "rows": [
+     [
+      "Acute anti-inflammatory phase",
+      "Single-dose IVIG (2 g/kg)",
+      "Infuse over 10 to 12 hours",
+      "Abolish systemic vasculitis & aneurysm risk"
+     ],
+     [
+      "Acute antipyretic phase",
+      "High-dose oral aspirin",
+      "80 to 100 mg/kg/day divided 4 times",
+      "Control fever and inflammation"
+     ],
+     [
+      "Subacute antiplatelet phase",
+      "Low-dose oral aspirin",
+      "3 to 5 mg/kg/day single morning dose",
+      "Prevent coronary platelet aggregation"
+     ],
+     [
+      "Refractory Kawasaki phase",
+      "Second dose IVIG or methylprednisolone",
+      "Pulse steroids or infliximab (anti-TNF)",
+      "Arrest persistent refractory fever"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enteroviral infection of cardiac myocytes provokes fulminant acute congestive heart failure in infants. Viral myocarditis, most commonly triggered by Coxsackievirus B or adenovirus, presents with sudden onset **myocarditis congestive heart failure**, characterized by poor feeding, lethargy, cool extremities, gallop rhythm (S3/S4), and unexplained cardiomegaly. Cardiac troponin I and brain natriuretic peptide (BNP) are elevated, and echocardiography reveals diffuse left ventricular hypokinesia.",
+   "say": "Viral myocarditis from Coxsackievirus causes acute infant heart failure, gallop rhythm, and low ejection fraction. Serum cardiac troponins and brain natriuretic peptide are markedly elevated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Viral Myocarditis Profile",
+     "points": [
+      "Sudden acute heart failure after viral illness",
+      "Elevated cardiac troponin I and NT-proBNP",
+      "Echocardiogram: globally depressed LV ejection (<30%)",
+      "Requires inotropes (milrinone) and ACE inhibitors"
+     ]
+    },
+    "right": {
+     "title": "Dilated Cardiomyopathy Contrast",
+     "points": [
+      "Insidious progressive left ventricular dilation",
+      "Familial genetic mutations (titin, lamin)",
+      "Normal inflammatory markers; absent troponin spike",
+      "Candidate for long-term ventricular assist device"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Re-entrant electrical circuits via accessory conduction pathways provoke paroxysmal rapid narrow-complex tachycardias. The most prevalent symptomatic pathological arrhythmia in pediatrics is **supraventricular tachycardia arrhythmia** (SVT), presenting in infants with sudden heart rates between 220 and 300 beats per minute without beat-to-beat variability. Prolonged uncorrected SVT exceeding twenty-four to forty-eight hours causes secondary congestive heart failure, hepatomegaly, and cardiogenic shock.",
+   "say": "Supraventricular tachycardia causes sudden narrow-complex heart rates of 220 to 300 beats per minute in infants. Prolonged episodes precipitate secondary congestive heart failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Presentation",
+     "ECG Diagnostic Landmark",
+     "Haemodynamic Status",
+     "First-Line Intervention"
+    ],
+    "rows": [
+     [
+      "Stable infant SVT",
+      "Narrow QRS (<0.09s), rate 220-300 bpm, P waves hidden",
+      "Normal perfusion, BP maintained",
+      "Vagal: ice to face; IV Adenosine push"
+     ],
+     [
+      "Unstable infant SVT",
+      "Narrow QRS, severe hypotension, delayed capillary refill",
+      "Decompensated cardiogenic shock",
+      "Synchronized DC cardioversion (0.5-1 J/kg)"
+     ],
+     [
+      "Sinus tachycardia",
+      "Normal P waves preceding every QRS, rate <220",
+      "Underlying dehydration or sepsis",
+      "Treat underlying cause; never use adenosine"
+     ],
+     [
+      "Wolff-Parkinson-White",
+      "Short PR interval, delta wave, wide QRS baseline",
+      "Intermittent paroxysmal SVT",
+      "Avoid digoxin; use beta-blockers/ablation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical vagal maneuvers stimulate parasympathetic slowing of atrioventricular nodal conduction. In haemodynamically stable infants with SVT, initial bedside management applies **vagal stimulation ice application**, placing an ice-water filled plastic bag firmly over the infant's forehead and nose for ten to fifteen seconds to trigger the mammalian dive reflex. Clinicians must never perform ocular pressure in children due to high risks of retinal detachment.",
+   "say": "In stable infants with SVT, apply an ice bag over the nose and forehead for fifteen seconds to trigger the diving reflex. Never apply ocular pressure in children.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Effective Vagal Techniques",
+     "points": [
+      "Crushed ice in plastic bag over face for 10-15 sec",
+      "Triggers mammalian dive reflex slowing AV node",
+      "Valsalva maneuver in older children (blowing into syringe)",
+      "Safe, rapid, non-pharmacological conversion in 50%"
+     ]
+    },
+    "right": {
+     "title": "Dangerous Ineffective Techniques",
+     "points": [
+      "Eyeball/ocular pressure (risks retinal detachment)",
+      "Bilateral carotid sinus massage in young infants",
+      "Immersing infant's entire head into cold water",
+      "Never delay medical pharmacotherapy if vagal fails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Purinergic receptor activation transiently blocks atrioventricular nodal electrical conduction. If vagal maneuvers fail, the pharmacological drug of choice is **rapid intravenous adenosine push**, administered at 0.1 mg/kg (maximum 6 mg) followed immediately by a rapid five-millilitre saline flush through an antecubital vein. Adenosine hyperpolarizes AV nodal tissue, breaking the re-entrant circuit within ten seconds; if the patient is haemodynamically unstable, immediate synchronized cardioversion (0.5 to 1 J/kg) is performed.",
+   "say": "Intravenous adenosine at 0.1 mg/kg rapid push followed by a saline flush terminates SVT by blocking the AV node. Unstable infants require immediate synchronized electrical cardioversion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Agent",
+     "Paediatric Dose & Route",
+     "Mechanism of Action",
+     "Key Administration Rule"
+    ],
+    "rows": [
+     [
+      "Adenosine (1st dose)",
+      "0.1 mg/kg rapid IV bolus (max 6 mg)",
+      "Purinergic A1 receptor AV nodal block",
+      "Use three-way stopcock, proximal IV, rapid flush"
+     ],
+     [
+      "Adenosine (2nd dose)",
+      "0.2 mg/kg rapid IV bolus (max 12 mg)",
+      "Double dose if 1st dose fails at 2 min",
+      "Continuous ECG recording during push"
+     ],
+     [
+      "Amiodarone",
+      "5 mg/kg IV over 20 to 60 minutes",
+      "Class III multi-channel blocker",
+      "Indicated for resistant re-entrant SVT"
+     ],
+     [
+      "Electrical cardioversion",
+      "0.5 to 1.0 J/kg synchronized DC shock",
+      "Simultaneous electrical depolarization",
+      "Mandatory if hypotensive shock is present"
+     ]
+    ]
+   }
+  }
+ ]
+}
