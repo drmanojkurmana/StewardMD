@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "ana-bones-ossification",
+ "subject": "anatomy",
+ "title": "Long Bone Parts and Ossification Centres",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A typical long bone comprises three anatomical segments designated as the epiphysis, metaphysis, and diaphysis. The expanded articular end is termed the **epiphysis**, which ossifies from one or more secondary ossification centres. Covered by avascular articular cartilage, it transmits mechanical loads across synovial articulations and accommodates joint contours without undergoing periosteal bone deposition.",
+   "say": "A long bone consists of three distinct regions known as the epiphysis, metaphysis, and diaphysis. The expanded articular end is the epiphysis, which develops from secondary ossification centres. Covered by smooth articular cartilage, it disperses joint forces during movement.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-bone_tumour_sites.webp",
+    "alt": "Anatomical zones of a long bone showing epiphysis, metaphysis, and diaphysis",
+    "caption": "Long bone architecture displaying the epiphysis, metaphysis, and diaphysis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central tubular shaft of a long bone is called the **diaphysis**, built of dense compact cortical bone enclosing the central medullary marrow cavity. It provides rigid resistance against bending and torsional forces encountered during locomotion. The primary ossification centre appears within this shaft during intrauterine life, initiating endochondral replacement of the pre-existing cartilaginous model.",
+   "say": "The central shaft of a long bone is the diaphysis, composed of thick compact cortical bone surrounding the marrow cavity. It confers high tensile strength against bending forces. The primary ossification centre arises here during fetal life.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epiphysis Characteristics",
+     "points": [
+      "Located at the articular ends",
+      "Spongy cancellous bone interior",
+      "Ossifies from secondary centres",
+      "Covered by articular cartilage"
+     ]
+    },
+    "right": {
+     "title": "Diaphysis Characteristics",
+     "points": [
+      "Forms the central tubular shaft",
+      "Thick compact cortical shell",
+      "Ossifies from primary centre",
+      "Encloses central marrow cavity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interposed between the shaft and the epiphysis lies the transitional zone known as the **metaphysis**, representing the most metabolically active growth region. It contains the epiphyseal growth plate where endochondral chondrocyte proliferation drives longitudinal bone expansion. Because hair-pin capillary loops in this region slow local blood flow, hematogenous osteomyelitis preferentially seeds here in growing children.",
+   "say": "Positioned between the diaphysis and epiphysis lies the metaphysis, the principal engine of longitudinal growth. It houses the epiphyseal plate where cartilage continuously transforms into bone. Sluggish capillary loops make it the classical site for paediatric osteomyelitis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Long Bone Zonal Transition",
+    "nodes": [
+     {
+      "id": "epi",
+      "label": "Epiphysis: Articular End"
+     },
+     {
+      "id": "pl",
+      "label": "Epiphyseal Physis"
+     },
+     {
+      "id": "meta",
+      "label": "Metaphysis: High Turnover"
+     },
+     {
+      "id": "dia",
+      "label": "Diaphysis: Compact Shaft"
+     }
+    ],
+    "edges": [
+     [
+      "epi",
+      "pl"
+     ],
+     [
+      "pl",
+      "meta"
+     ],
+     [
+      "meta",
+      "dia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Longitudinal skeletal lengthening depends entirely on the specialized cartilage layer designated the **epiphyseal plate**, positioned at the junction of epiphysis and metaphysis. Chondrocytes undergo orderly resting, proliferating, hypertrophic, and calcifying stages before osteoblasts replace them with woven bone. Complete bony fusion of this plate with the diaphysis halts further stature growth after adolescence.",
+   "say": "Skeletal lengthening proceeds at the epiphyseal growth plate located at the metaphyseal junction. Organized columns of chondrocytes multiply, enlarge, and calcify before osteoblasts deposit new bone. Fusion of this physis marks the completion of linear growth.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-articular-layers.svg",
+    "alt": "Articular cartilage and growth plate structural zones",
+    "caption": "Cartilage layers and transition zones in developing bone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial site where bone mineralisation begins in the embryonic cartilaginous cylinder is the **primary ossification centre**, typically appearing around the eighth gestational week. Located in the diaphysis, it establishes periosteal collar formation and vascular bud invasion. In almost all long bones, this primary centre becomes active before birth, laying down early calcified trabeculae.",
+   "say": "Initial mineralisation in the embryonic cartilage cylinder begins at the primary ossification centre, generally around the eighth intrauterine week. Located in the shaft, it triggers vascular invasion and osteogenesis. Nearly all long bones show primary centres before birth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ossification Centre",
+     "Usual Location",
+     "Onset of Appearance",
+     "Morphological Role"
+    ],
+    "rows": [
+     [
+      "Primary Centre",
+      "Diaphysis (shaft)",
+      "Intrauterine (week 7 to 8)",
+      "Builds cortical shaft"
+     ],
+     [
+      "Secondary Centre",
+      "Epiphysis (ends)",
+      "Postnatal (mostly)",
+      "Builds articular ends"
+     ],
+     [
+      "Distal Femur",
+      "Lower femoral epiphysis",
+      "Week 36 (fetal maturity)",
+      "Legal sign of viability"
+     ],
+     [
+      "Proximal Tibia",
+      "Upper tibial epiphysis",
+      "At birth or week 40",
+      "Knee joint formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Appearing predominantly after birth, a **secondary ossification centre** develops within the cartilaginous epiphysis to form articulating bone ends. Notable exceptions include the distal femoral epiphysis, which reliably mineralises at thirty-six weeks gestation. Medico-legal postmortems examine this distal femoral centre as decisive objective proof of full-term fetal viability.",
+   "say": "Most secondary ossification centres emerge after birth within the cartilaginous epiphyses. A crucial exception is the distal femur, which calcifies at thirty-six weeks of pregnancy. Forensic pathologists examine this specific centre to verify full-term newborn maturity.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sequence of Endochondral Ossification",
+    "nodes": [
+     {
+      "id": "cart",
+      "label": "Hyaline Cartilage Model"
+     },
+     {
+      "id": "prim",
+      "label": "Primary Centre in Diaphysis"
+     },
+     {
+      "id": "sec",
+      "label": "Secondary Centre in Epiphysis"
+     },
+     {
+      "id": "fuse",
+      "label": "Physeal Plate Fusion"
+     }
+    ],
+    "edges": [
+     [
+      "cart",
+      "prim"
+     ],
+     [
+      "prim",
+      "sec"
+     ],
+     [
+      "sec",
+      "fuse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vascular supply of a growing long bone follows a segmented pattern dictated by the **nutrient artery**, metaphyseal vessels, and periosteal plexuses. The principal nutrient vessel enters obliquely through the nutrient canal, angled away from the growing end in accordance with growth rates. It supplies the inner two-thirds of the cortex and the entire marrow.",
+   "say": "Blood supply to a growing long bone combines the nutrient artery, metaphyseal vessels, and periosteal plexuses. The main nutrient vessel enters through an oblique canal running away from the faster-growing end. It nourishes the medullary cavity and inner cortex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Source",
+     "Target Territory",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Nutrient Artery",
+      "Inner two-thirds of cortex and marrow",
+      "Oblique canal follows growing end rule"
+     ],
+     [
+      "Metaphyseal Vessels",
+      "Metaphyseal trabeculae",
+      "End-arterial loops predispose to infection"
+     ],
+     [
+      "Epiphyseal Vessels",
+      "Epiphyseal bone and articular base",
+      "Disrupted in avascular necrosis"
+     ],
+     [
+      "Periosteal Arteries",
+      "Outer one-third of compact cortex",
+      "Preserved beneath periosteal sleeve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Skeletal maturity is reached when the growth plate is replaced by a radiologically visible **epiphyseal scar**, uniting shaft and articular ends. The direction of the nutrient canal obeys the anatomical dictum: to the elbow I go, from the knee I flee. Knowing which epiphysis fuses last provides precise forensic age estimation in adolescents.",
+   "say": "Skeletal maturity concludes when the growth plate obliterates into a visible epiphyseal scar, uniting shaft and epiphysis. The nutrient canal points toward the elbow and away from the knee. Forensic experts rely on physeal fusion sequences to determine adolescent age.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Limb Growing Ends",
+     "points": [
+      "Shoulder: Upper end of humerus",
+      "Wrist: Lower ends of radius and ulna",
+      "Canal points toward elbow",
+      "Fuses later in late adolescence"
+     ]
+    },
+    "right": {
+     "title": "Lower Limb Growing Ends",
+     "points": [
+      "Knee: Lower femur and upper tibia",
+      "Hip: Upper end of femur",
+      "Canal points away from knee",
+      "Contributes majority of height"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
