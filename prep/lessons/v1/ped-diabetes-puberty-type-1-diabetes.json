@@ -1,0 +1,254 @@
+{
+ "key": "ped-diabetes-puberty-type-1-diabetes",
+ "v": 1,
+ "module": "ped-diabetes-puberty",
+ "subject": "paediatrics",
+ "title": "Pediatric Diabetes and Pubertal Disorders: DKA, Precocious and Delayed Puberty",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Autoimmune destruction of pancreatic beta cells driven by autoantibodies against glutamic acid decarboxylase and islet cells causes absolute insulin deficiency. Peak incidence of **pediatric type 1 diabetes** occurs between five and seven years and during early adolescence. Children present with the classic osmotic triad of polyuria, secondary nocturnal enuresis in a previously toilet-trained child, polydipsia, and rapid weight loss despite polyphagia.",
+   "say": "Type 1 diabetes is an autoimmune beta-cell destruction leading to absolute insulin deficiency. Symptoms include polyuria, new bedwetting, polydipsia, and weight loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dka-fig1.webp",
+    "alt": "Pathophysiological flowchart displaying insulin deficiency, unrestrained lipolysis, ketone generation, and severe dehydration.",
+    "caption": "Metabolic cascades of absolute insulin deficiency leading to ketoacidosis and osmotic dehydration in pediatric diabetes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unrestrained lipolysis and free fatty acid oxidation in the setting of severe insulin deficiency generate toxic beta-hydroxybutyrate and acetoacetate. Up to forty percent of children present initially with **pediatric diabetic ketoacidosis** (DKA), defined by hyperglycemia exceeding two hundred milligrams per decilitre, venous pH below 7.30 or bicarbonate below fifteen milliequivalents per litre, and marked ketonaemia or ketonuria. Children exhibit deep sighing Kussmaul respiration.",
+   "say": "Diabetic ketoacidosis features hyperglycemia over two hundred, venous pH below 7.30, and serum bicarbonate below fifteen. Kussmaul breathing excretes carbon dioxide.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "DKA Severity Category",
+     "Venous pH Threshold",
+     "Serum Bicarbonate Level",
+     "Clinical Manifestations"
+    ],
+    "rows": [
+     [
+      "Mild DKA",
+      "Venous pH between 7.20 and 7.29",
+      "Serum bicarbonate 10 to 14 mEq/L",
+      "Alert, mild dehydration, nausea, vomiting"
+     ],
+     [
+      "Moderate DKA",
+      "Venous pH between 7.10 and 7.19",
+      "Serum bicarbonate 5 to 9 mEq/L",
+      "Kussmaul breathing, tachycardia, lethargy"
+     ],
+     [
+      "Severe DKA",
+      "Venous pH strictly below 7.10",
+      "Serum bicarbonate below 5 mEq/L",
+      "Severe Kussmaul respiration, stupor, shock"
+     ],
+     [
+      "Initial fluid resuscitation",
+      "Isotonic 0.9% normal saline (10 mL/kg)",
+      "Infuse slowly over 1 to 2 hours",
+      "Never give rapid high-pressure boluses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most catastrophic neurological complication of pediatric diabetic ketoacidosis carries significant mortality and long-term morbidity. Typically emerging four to twelve hours into rehydration, **cerebral oedema in DKA** presents with sudden headache, lethargy, declining Glasgow Coma Scale, bradycardia, hypertension, and pupil asymmetry. Immediate therapy mandates intravenous 3% hypertonic saline (five millilitres per kilogram over ten minutes) or intravenous mannitol (0.5 to 1.0 grams per kilogram).",
+   "say": "Cerebral edema during DKA therapy presents with headache, slowing heart rate, and declining consciousness. Administer three percent hypertonic saline or mannitol immediately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cerebral Oedema Warning Signs",
+     "points": [
+      "Sudden severe headache or recurrent vomiting",
+      "Lethargy, confusion, or falling GCS score",
+      "Cushing triad: bradycardia, hypertension, apnea",
+      "Unequal or sluggishly reactive pupils; papilledema"
+     ]
+    },
+    "right": {
+     "title": "Emergency Medical Management",
+     "points": [
+      "Reduce intravenous fluid infusion rate by 50%",
+      "Administer 3% hypertonic saline (5 mL/kg over 10 min)",
+      "Or IV 20% mannitol (0.5 to 1.0 g/kg over 20 min)",
+      "Elevate head of bed to 30 degrees; intubate if comatose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Premature activation of the hypothalamic-pituitary-gonadal axis produces pubertal development before eight years in girls or nine years in boys. In **central precocious puberty**, premature pulsatile secretion of GnRH stimulates LH and FSH secretion, driving gonadal steroidogenesis and secondary sexual maturation. Idiopathic in ninety percent of girls, it is frequently secondary to hypothalamic hamartomas in boys, responding dramatically to continuous long-acting GnRH agonists like leuprolide.",
+   "say": "Central precocious puberty involves premature GnRH release before eight years in girls and nine in boys. Long-acting GnRH agonists halt progression and preserve final adult height.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Precocious Puberty Type",
+     "Hypothalamic-Pituitary Activation",
+     "Basal / Stimulated LH & FSH",
+     "Common Underlying Etiology"
+    ],
+    "rows": [
+     [
+      "Central (GnRH-dependent)",
+      "True activation of HPG axis",
+      "Elevated pubertal LH levels (>0.3-0.5 IU/L)",
+      "Idiopathic in girls (90%); hamartoma in boys (50%)"
+     ],
+     [
+      "Peripheral (GnRH-independent)",
+      "Independent autonomous steroid excess",
+      "Suppressed prepubertal LH & FSH (<0.1 IU/L)",
+      "McCune-Albright, CAH, ovarian/testicular tumors"
+     ],
+     [
+      "Premature thelarche",
+      "Benign isolated breast budding (<2 years)",
+      "Normal prepubertal hormones; bone age normal",
+      "Self-limiting condition; observation only"
+     ],
+     [
+      "Premature adrenarche",
+      "Early adrenal androgen secretion (DHEA-S)",
+      "Isolated pubic/axillary hair without breasting",
+      "Mildly advanced bone age; observe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unique triad of autonomous endocrine hyperfunction, distinctive cutaneous pigmentation, and fibrous osseous lesions arises from somatic mosaic activating mutations. Characterized by post-zygotic GNAS gene mutations, **McCune-Albright syndrome** features peripheral GnRH-independent precocious puberty with recurrent follicular ovarian cysts, large unilateral jagged-border cafe-au-lait skin macules (coast of Maine appearance), and polyostotic fibrous dysplasia with recurrent pathological bone fractures.",
+   "say": "McCune-Albright syndrome features peripheral precocious puberty, jagged coast of Maine cafe-au-lait macules, and fibrous bone dysplasia. It is caused by GNAS mosaic mutations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Diagnostic Triad",
+     "points": [
+      "Autonomous peripheral precocious puberty",
+      "Polyostotic fibrous dysplasia of skeleton",
+      "Large, unilateral jagged caf\u00e9-au-lait pigmentation",
+      "Autonomous hyperthyroidism, Cushing, or acromegaly"
+     ]
+    },
+    "right": {
+     "title": "Distinctive Pigmentary Morphology",
+     "points": [
+      "Coast of Maine: irregular, jagged, ragged margins",
+      "Frequently respects the anatomical midline strictly",
+      "Contrast with NF-1 coast of California (smooth margins)",
+      "Overlying areas of fibrous skeletal dysplasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Absence of secondary sexual maturation by fourteen years in boys or thirteen years in girls warrants clinical investigation. The commonest cause of delayed adolescence is **constitutional delay of growth and puberty** (CDGP), representing a benign physiological variant where family history documents late blooming in parents. Children demonstrate delayed bone age matching height age rather than chronological age, ultimately achieving normal adult height and sexual maturity.",
+   "say": "Constitutional delay of puberty represents late blooming with delayed bone age matching height age. A short course of low-dose testosterone or estrogen jump-starts puberty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Entity",
+     "Serum LH and FSH Gonadotropins",
+     "Bone Age vs Chronological Age",
+     "Long-Term Adult Height Potential"
+    ],
+    "rows": [
+     [
+      "Constitutional delay (CDGP)",
+      "Low prepubertal levels (delayed surge)",
+      "Delayed bone age matches height age",
+      "Normal adult height matching target mid-parental"
+     ],
+     [
+      "Hypergonadotropic hypogonadism",
+      "Elevated LH & FSH (primary gonadal failure)",
+      "Delayed bone age",
+      "Turner syndrome (45,X), Klinefelter (47,XXY)"
+     ],
+     [
+      "Hypogonadotropic hypogonadism",
+      "Low LH & FSH (pituitary/hypothalamus defect)",
+      "Delayed bone age",
+      "Kallmann syndrome (anosmia), craniopharyngioma"
+     ],
+     [
+      "Low-dose priming protocol",
+      "Testosterone depot (50 mg/month x 3-6 mos)",
+      "Accelerates secondary sexual maturation",
+      "Triggers endogenous hypothalamic axis awakening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign proliferation of male glandular breast tissue occurs transiently in up to sixty percent of adolescent boys during puberty. Reversible physiological **pubertal gynaecomastia in boys** arises from a temporary imbalance between circulating estrogens and androgens during Tanner stages two and three, presenting as a tender, discrete, firm subareolar disc of glandular tissue beneath the nipple-areolar complex, resolving spontaneously within one to two years without pharmacological intervention.",
+   "say": "Pubertal gynecomastia affects sixty percent of adolescent boys due to temporary estrogen-androgen imbalance. A tender subareolar disc resolves spontaneously within two years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological Pubertal Gynaecomastia",
+     "points": [
+      "Occurs in Tanner stages II to III (12 to 14 years)",
+      "Discrete, tender, firm subareolar glandular disc",
+      "Diameter usually measures 1 to 4 centimetres",
+      "Reassurance essential; 90% resolves within 2 years"
+     ]
+    },
+    "right": {
+     "title": "Pathological Causes to Exclude",
+     "points": [
+      "Klinefelter syndrome (47,XXY with small firm testes)",
+      "Adrenal or testicular estrogen-secreting tumors",
+      "Exogenous drug exposure (anabolic steroids, marijuana)",
+      "Pseudogynaecomastia: diffuse fatty tissue in obesity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Excessive childhood adiposity accelerates metabolic complications including insulin resistance, dyslipidemia, and systemic hypertension. Driven by sedentary lifestyles and calorie-dense diets, **childhood metabolic syndrome** is defined by central abdominal obesity (waist circumference >=90th percentile) accompanied by two or more criteria: fasting triglycerides >=110 mg/dL, HDL cholesterol <=40 mg/dL, systolic/diastolic blood pressure >=90th percentile, and impaired fasting glucose.",
+   "say": "Childhood metabolic syndrome combines abdominal obesity with dyslipidemia, hypertension, and insulin resistance. Acanthosis nigricans provides a visible cutaneous clue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Parameter",
+     "Pediatric Diagnostic Threshold",
+     "Underlying Pathophysiology",
+     "Clinical Screening Directive"
+    ],
+    "rows": [
+     [
+      "Central abdominal obesity",
+      "Waist circumference >=90th percentile for age",
+      "Visceral fat drives free fatty acid flux",
+      "Measure waist circumference at iliac crest"
+     ],
+     [
+      "Serum triglycerides",
+      "Fasting triglycerides >=110 mg/dL (1.2 mmol/L)",
+      "Hepatic VLDL hypersecretion",
+      "Fasting lipid profile screening"
+     ],
+     [
+      "HDL cholesterol",
+      "Serum HDL <=40 mg/dL (1.03 mmol/L)",
+      "Accelerated HDL clearance in insulin resistance",
+      "Cardiovascular atherogenic risk marker"
+     ],
+     [
+      "Arterial blood pressure",
+      "Systolic or diastolic BP >=90th percentile",
+      "Hyperinsulinemia drives sympathetic tone",
+      "Routine annual blood pressure percentile charting"
+     ]
+    ]
+   }
+  }
+ ]
+}

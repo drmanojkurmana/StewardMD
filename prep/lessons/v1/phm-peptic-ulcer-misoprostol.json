@@ -1,0 +1,260 @@
+{
+  "v": 1,
+  "module": "phm-peptic-ulcer",
+  "subject": "pharmacology",
+  "title": "Antacids, Eradication Regimens, and Potassium-Competitive Acid Blockers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A synthetic methyl ester analogue of prostaglandin E1 specifically indicated for the prevention of NSAID-induced peptic ulcers is **misoprostol**. By activating EP3 receptors on parietal cells, misoprostol couples to inhibitory Gi proteins to suppress adenylyl cyclase, decreasing intracellular cyclic AMP and basal acid secretion. Concurrently, it stimulates epithelial EP2 and EP4 receptors, enhancing mucus and bicarbonate secretion and increasing mucosal blood flow. Its clinical utility is limited by dose-dependent diarrhea and abdominal cramps, and it is strictly contraindicated in pregnancy due to abortifacient actions.",
+      "say": "Misoprostol couples to Gi proteins to suppress acid while enhancing mucosal blood flow and cytoprotection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "miso",
+            "label": "Oral misoprostol administration with meals"
+          },
+          {
+            "id": "parietal",
+            "label": "Activation of parietal EP3 receptors via inhibitory Gi protein"
+          },
+          {
+            "id": "camp",
+            "label": "Suppression of adenylyl cyclase and decreased intracellular cyclic AMP"
+          },
+          {
+            "id": "mucosa",
+            "label": "Stimulation of epithelial EP2/EP4 receptors: enhanced mucus and bicarbonate secretion"
+          }
+        ],
+        "edges": [
+          [
+            "miso",
+            "parietal"
+          ],
+          [
+            "parietal",
+            "camp"
+          ],
+          [
+            "miso",
+            "mucosa"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Weak basic chemical compounds administered to directly neutralize secreted hydrochloric acid within the gastric lumen are **antacids**. Formulated as combinations of magnesium hydroxide (fast-acting, osmotic laxative) and aluminum hydroxide (slow-acting, constipating, astringent), these agents neutralize gastric acid to elevate intragastric pH above 3.5 without altering acid production. This inhibits pepsin proteolytic activity and relieves heartburn symptoms rapidly within minutes. In contrast, systemic absorbable antacids like sodium bicarbonate provoke systemic metabolic alkalosis and fluid retention in heart failure.",
+      "say": "Antacids neutralize luminal hydrochloric acid directly, combining magnesium and aluminum salts to balance bowel habits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Magnesium Hydroxide (Milk of Magnesia)",
+          "points": [
+            "Rapid onset of chemical acid neutralization",
+            "Reacts with gastric acid to form unabsorbed magnesium chloride",
+            "Exerts osmotic laxative effect, predisposing to watery diarrhea",
+            "Contraindicated in severe chronic kidney disease (hypermagnesemia)"
+          ]
+        },
+        "right": {
+          "title": "Aluminum Hydroxide Gel",
+          "points": [
+            "Slow, sustained chemical neutralization of luminal acid",
+            "Forms unabsorbed aluminum chloride complexes, provoking constipation",
+            "Binds dietary phosphate in gut, lowering serum phosphate",
+            "Risk of microcytic anemia and aluminum neurotoxicity in uremia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The classic fourteen-day first-line antimicrobial eradication regimen for gastric and duodenal ulcers colonized by H. pylori is **Helicobacter pylori triple therapy**. Comprising a standard-dose proton pump inhibitor, clarithromycin 500 mg twice daily, and amoxicillin 1000 mg twice daily (or metronidazole in penicillin allergy), this combination achieves bacterial eradication by suppressing acid to optimize antibiotic stability while inhibiting bacterial protein and cell wall synthesis. However, rising global clarithromycin resistance exceeding fifteen percent has shifted first-line recommendations toward bismuth-based quadruple therapy.",
+      "say": "Helicobacter pylori triple therapy combines a proton pump inhibitor, clarithromycin, and amoxicillin for fourteen days.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Eradication regimen",
+          "Regimen components and dosing",
+          "Duration of therapy",
+          "Primary clinical consideration"
+        ],
+        "rows": [
+          [
+            "Clarithromycin triple therapy",
+            "PPI twice daily + Clarithromycin 500 mg + Amoxicillin 1 g",
+            "14 consecutive days",
+            "Only recommended where local clarithromycin resistance <15%"
+          ],
+          [
+            "Bismuth quadruple therapy",
+            "PPI + Bismuth subcitrate + Metronidazole + Tetracycline",
+            "14 consecutive days",
+            "Preferred first-line regimen in high clarithromycin resistance areas"
+          ],
+          [
+            "Concomitant non-bismuth quadruple",
+            "PPI + Amoxicillin 1 g + Clarithromycin 500 mg + Metronidazole",
+            "14 consecutive days",
+            "High eradication rates without requiring heavy metal bismuth salts"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A rare hypergastrinemic disorder caused by a neuroendocrine gastrin-secreting tumor located in the duodenum or pancreas is **Zollinger-Ellison syndrome**. Continuous autonomous release of gastrin hyper-stimulates parietal and enterochromaffin-like cells, causing massive gastric acid hypersecretion with basal acid output exceeding 15 mEq/hr, prominent mucosal rugal hypertrophy, multiple atypical peptic ulcers refractory to standard therapy, and secretory diarrhea with steatorrhea caused by acid inactivation of pancreatic lipase. Medical management requires exceptionally high doses of proton pump inhibitors, often doubling or tripling standard regimens.",
+      "say": "Zollinger-Ellison syndrome causes massive acid hypersecretion from an autonomous gastrinoma, requiring high-dose PPIs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gastrinoma",
+            "label": "Duodenal or pancreatic neuroendocrine gastrinoma"
+          },
+          {
+            "id": "hyper",
+            "label": "Unregulated gastrin hypersecretion into systemic circulation"
+          },
+          {
+            "id": "trophic",
+            "label": "Marked trophic hyperplasia of gastric parietal and ECL cells"
+          },
+          {
+            "id": "ulcer",
+            "label": "Basal acid output >15 mEq/hr: severe refractory peptic ulcers and steatorrhea"
+          }
+        ],
+        "edges": [
+          [
+            "gastrinoma",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "trophic"
+          ],
+          [
+            "trophic",
+            "ulcer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A chronic condition where retrograde transit of acidic gastric contents into the esophagus provokes troublesome symptoms or mucosal breaks, known as **GERD** (gastroesophageal reflux disease). Pathologically driven by transient lower esophageal sphincter relaxations, low resting sphincter pressure, and delayed esophageal acid clearance, reflux of hydrochloric acid and pepsin produces retrosternal pyrosis and acid regurgitation. Long-term acid exposure induces erosive reflux esophagitis, peptic strictures, and premalignant intestinal metaplasia of squamous epithelium known as Barrett esophagus, responding best to step-down proton pump inhibitor regimens.",
+      "say": "GERD causes retrosternal pyrosis from transient sphincter relaxations, predisposing to erosive esophagitis and Barrett esophagus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+        "alt": "Pathophysiology of acid secretion and peptic mucosal injury",
+        "caption": "Gastroduodenal and lower esophageal mucosal defenses illustrating acid aggression and mucosal barrier breakdown in reflux and ulcer disease."
+      }
+    },
+    {
+      "tx": "The physiological resurgence of excessive gastric acid production occurring following the abrupt discontinuation of prolonged proton pump inhibitor therapy is **rebound acid hypersecretion**. During chronic PPI therapy, persistent elevation of intragastric pH removes negative feedback inhibition on antral G-cells, resulting in secondary hypergastrinemia. Circulating gastrin exerts a potent trophic effect, causing marked hyperplasia of histamine-secreting ECL cells and parietal cells. Upon sudden drug withdrawal, these hypertrophied cells generate a surge of acid exceeding baseline levels, causing severe recurrent dyspepsia that mandates gradual dose tapering.",
+      "say": "Abrupt PPI cessation triggers rebound acid hypersecretion because secondary hypergastrinemia induces parietal cell hyperplasia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ppi",
+            "label": "Chronic daily proton pump inhibitor therapy (months to years)"
+          },
+          {
+            "id": "gcell",
+            "label": "Achlorhydria removes negative feedback: secondary hypergastrinemia"
+          },
+          {
+            "id": "hyperplasia",
+            "label": "Trophic hyperplasia of histamine-secreting ECL and parietal cells"
+          },
+          {
+            "id": "rebound",
+            "label": "Abrupt drug cessation unmasks hyperplastic cells: severe acid hypersecretion"
+          }
+        ],
+        "edges": [
+          [
+            "ppi",
+            "gcell"
+          ],
+          [
+            "gcell",
+            "hyperplasia"
+          ],
+          [
+            "hyperplasia",
+            "rebound"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A modern potassium-competitive acid blocker that represents a breakthrough in acid-peptic pharmacology is **vonoprazan**. Unlike traditional proton pump inhibitors, vonoprazan does not require an acidic environment for bioactivation and does not form covalent disulfide bonds. Instead, it acts as a lipophilic weak base that directly, reversibly, and competitively inhibits the potassium-binding site of the H+/K+ ATPase enzyme. Exhibiting a pKa of 9.3, vonoprazan provides an ultra-fast onset of action, achieves near-complete acid suppression from the very first dose, and maintains gastric pH above 4 for twenty-four hours.",
+      "say": "Vonoprazan competitively blocks the potassium-binding site on proton pumps, delivering rapid, 24-hour acid suppression.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vonoprazan (Potassium-Competitive / P-CAB)",
+          "points": [
+            "Direct competitive inhibition of K+ binding site on proton pump",
+            "Acid-independent activation; full efficacy from the first oral dose",
+            "Maintains intragastric pH >4 for 24 hours (superior nocturnal control)",
+            "Superior eradication rates in clarithromycin-resistant H. pylori"
+          ]
+        },
+        "right": {
+          "title": "Omeprazole (Proton Pump Inhibitor)",
+          "points": [
+            "Prodrug requiring acid canaliculus protonation for activation",
+            "Covalent irreversible disulfide bonding with Cys813 residue",
+            "Requires 3 to 5 days of repeated dosing to reach steady-state block",
+            "Maintains intragastric pH >4 for approximately 14 hours daily"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The premalignant histological transformation of the distal esophageal squamous epithelium into specialized columnar epithelium with intestinal goblet cells is **Barrett esophagus**. Arising as a defensive adaptation to chronic, repetitive acid and bile reflux in long-standing GERD, this specialized intestinal metaplasia confers a thirty-to-forty-fold increased risk of developing esophageal adenocarcinoma. Clinical management combines lifelong aggressive acid suppression with high-dose proton pump inhibitors to prevent neoplastic progression alongside periodic surveillance upper gastrointestinal endoscopy with four-quadrant biopsies taken every two centimeters.",
+      "say": "Barrett esophagus is specialized columnar metaplasia from chronic acid reflux that increases esophageal adenocarcinoma risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological surveillance category",
+          "Malignant transformation risk",
+          "Recommended endoscopic surveillance interval",
+          "Clinical therapeutic intervention"
+        ],
+        "rows": [
+          [
+            "Non-dysplastic Barrett esophagus",
+            "Low (0.2% to 0.5% per patient-year)",
+            "High-definition endoscopy every 3 to 5 years",
+            "High-dose maintenance proton pump inhibitor"
+          ],
+          [
+            "Low-grade dysplasia",
+            "Intermediate (0.7% to 1.0% per year)",
+            "Surveillance endoscopy every 6 to 12 months",
+            "Endoscopic radiofrequency ablation or surveillance"
+          ],
+          [
+            "High-grade dysplasia",
+            "High (approx 7% per patient-year)",
+            "Immediate repeat confirmation by expert pathologist",
+            "Endoscopic mucosal resection and radiofrequency ablation"
+          ],
+          [
+            "Intramucosal adenocarcinoma",
+            "Invasive malignancy confined to mucosa",
+            "Staging with endoscopic ultrasound and CT",
+            "Endoscopic submucosal dissection or esophagectomy"
+          ]
+        ]
+      }
+    }
+  ]
+}

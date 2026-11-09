@@ -1,0 +1,250 @@
+{
+    "v": 1,
+    "id": "rad-xray-image-intensifier",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "Fluoroscopic Imaging: Image Intensifiers and Digital Radiography",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Input Phosphor Conversion",
+            "tx": "**Cesium iodide input phosphor** layers serve as the entry surface of an image intensifier tube. Vacuum-deposited as microscopic vertical needles measuring roughly 0.1 to 0.4 millimetres in thickness, the cesium iodide crystal matrix absorbs incoming X-ray photons with high quantum efficiency. These crystalline light pipes channel the resulting visible light photons forward with minimal lateral light dispersion, preserving high spatial resolution.",
+            "say": "Cesium iodide input phosphor layers serve as the entry surface of an image intensifier tube. Vacuum-deposited as microscopic vertical needles measuring roughly 0.1 to 0.4 millimetres in thickness, the cesium iodide crystal matrix absorbs incoming X-ray photons with high quantum efficiency. These crystalline light pipes channel the resulting visible light photons forward with minimal lateral light dispersion, preserving high spatial resolution.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Incident X-ray photons enter tube"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Cesium iodide needles absorb photons"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Channeled blue-green visible light emitted"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Photocathode Photoelectric Emission",
+            "tx": "**Antimony-cesium photocathode** films are bonded directly to the input phosphor screen separated only by a microscopically thin transparent adhesive layer. When visible light photons striking the photocathode are absorbed, free photoelectrons are liberated into the tube vacuum via the photoelectric effect. The number of released photoelectrons remains directly proportional to the intensity of the original X-ray beam.",
+            "say": "Antimony-cesium photocathode films are bonded directly to the input phosphor screen separated only by a microscopically thin transparent adhesive layer. When visible light photons striking the photocathode are absorbed, free photoelectrons are liberated into the tube vacuum via the photoelectric effect. The number of released photoelectrons remains directly proportional to the intensity of the original X-ray beam.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Input Phosphor Stage",
+                    "points": [
+                        "Converts high-energy X-ray photons into visible light",
+                        "Each absorbed X-ray yields thousands of light photons",
+                        "Channeled vertically through cesium iodide needle crystals"
+                    ]
+                },
+                "right": {
+                    "title": "Photocathode Stage",
+                    "points": [
+                        "Converts channeled light into free photoelectrons",
+                        "Operates via photoemissive surface effect",
+                        "Emits electron pattern mirroring anatomical attenuation"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Electron Acceleration and Electrostatic Focusing",
+            "tx": "**Electrostatic focusing lenses** line the inner walls of the evacuated glass envelope. Positively biased with precise electrical voltages, these cylindrical electrodes accelerate photoelectrons across an accelerating potential of 25 to 35 kilovolts. The electrostatic field focuses and inverts the electron paths, condensing the wide image pattern from a 25-centimetre input diameter down to a 2.5-centimetre output diameter.",
+            "say": "Electrostatic focusing lenses line the inner walls of the evacuated glass envelope. Positively biased with precise electrical voltages, these cylindrical electrodes accelerate photoelectrons across an accelerating potential of 25 to 35 kilovolts. The electrostatic field focuses and inverts the electron paths, condensing the wide image pattern from a 25-centimetre input diameter down to a 2.5-centimetre output diameter.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Photoelectrons emitted from wide curved photocathode"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Electrostatic lens field accelerates electrons across 30 kV"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Beam inverts and focuses onto miniature output phosphor"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Output Phosphor and Brightness Gain",
+            "tx": "**Zinc cadmium sulfide output phosphor** screens coated with silver activator receive the accelerated electrons at the anode end. Striking this 2.5-centimetre screen, high-energy electrons generate intense yellow-green visible light. Total brightness gain represents the product of minification gain, derived from the ratio of input to output phosphor surface areas, and flux gain, resulting from electron kinetic acceleration.",
+            "say": "Zinc cadmium sulfide output phosphor screens coated with silver activator receive the accelerated electrons at the anode end. Striking this 2.5-centimetre screen, high-energy electrons generate intense yellow-green visible light. Total brightness gain represents the product of minification gain, derived from the ratio of input to output phosphor surface areas, and flux gain, resulting from electron kinetic acceleration.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Gain Component",
+                    "Mathematical Derivation",
+                    "Typical Numerical Value"
+                ],
+                "rows": [
+                    [
+                        "Minification Gain",
+                        "(Input diameter / Output diameter) squared",
+                        "100 (for 25 cm input and 2.5 cm output)"
+                    ],
+                    [
+                        "Flux Gain",
+                        "Light photons out / Photoelectrons in",
+                        "50 to 100 light photons per electron"
+                    ],
+                    [
+                        "Total Brightness Gain",
+                        "Minification gain multiplied by flux gain",
+                        "5000 to 10000 overall brightness amplification"
+                    ],
+                    [
+                        "Conversion Factor",
+                        "Output candela per m2 / Input mGy per second",
+                        "50 to 200 standard luminance efficiency"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Magnification Mode Trade-Offs",
+            "tx": "**Fluoroscopic magnification mode** is achieved by increasing the positive voltage applied to the electrostatic lenses. This alters electron trajectories so that the focal point moves further from the output phosphor, causing only the central region of the input phosphor to be mapped onto the output screen. While this increases spatial resolution, automatic brightness control systems automatically increase tube current, escalating patient dose.",
+            "say": "Fluoroscopic magnification mode is achieved by increasing the positive voltage applied to the electrostatic lenses. This alters electron trajectories so that the focal point moves further from the output phosphor, causing only the central region of the input phosphor to be mapped onto the output screen. While this increases spatial resolution, automatic brightness control systems automatically increase tube current, escalating patient dose.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Standard Wide Field Mode (25 cm)",
+                    "points": [
+                        "Full input phosphor field visualized",
+                        "Standard spatial resolution (1 to 2 lp/mm)",
+                        "Lowest patient radiation dose"
+                    ]
+                },
+                "right": {
+                    "title": "Magnification Mode (15 cm)",
+                    "points": [
+                        "Only central input area projected to output",
+                        "Enhanced spatial resolution (3 to 4 lp/mm)",
+                        "Dose increases by (D1 / D2) squared to maintain brightness"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Computed Radiography Phosphor Plates",
+            "tx": "**Photostimulable phosphor plates** replace silver halide film in computed radiography systems. Enclosed within a durable cassette, the storage phosphor screen contains europium-activated barium fluorohalide crystals. Incident X-ray photons ionise europium atoms, and liberated electrons become trapped in metastable energy states within the crystal lattice, storing the latent image for hours without noticeable deterioration.",
+            "say": "Photostimulable phosphor plates replace silver halide film in computed radiography systems. Enclosed within a durable cassette, the storage phosphor screen contains europium-activated barium fluorohalide crystals. Incident X-ray photons ionise europium atoms, and liberated electrons become trapped in metastable energy states within the crystal lattice, storing the latent image for hours without noticeable deterioration.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "X-rays ionise BaFX:Eu2+ crystals"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Electrons trapped in metastable F-centres"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Latent electronic image stored stably"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Laser Readout and Optical Erasure",
+            "tx": "**Photostimulated luminescence readout** extracts the latent image inside a dedicated scanner. A focused red helium-neon laser beam scans the phosphor plate in a raster pattern, supplying energy that releases the trapped electrons. As electrons return to ground state, they emit blue-violet light. Photomultiplier tubes collect this light to construct digital pixels, after which intense white light erases residual signals.",
+            "say": "Photostimulated luminescence readout extracts the latent image inside a dedicated scanner. A focused red helium-neon laser beam scans the phosphor plate in a raster pattern, supplying energy that releases the trapped electrons. As electrons return to ground state, they emit blue-violet light. Photomultiplier tubes collect this light to construct digital pixels, after which intense white light erases residual signals.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Process Phase",
+                    "Excitation or Emission",
+                    "Wavelength or Agent"
+                ],
+                "rows": [
+                    [
+                        "Laser Stimulation",
+                        "Monochromatic red light excitation",
+                        "633 nanometres (helium-neon or diode laser)"
+                    ],
+                    [
+                        "Luminescence Emission",
+                        "Blue-violet light emitted by returning electrons",
+                        "390 to 400 nanometres"
+                    ],
+                    [
+                        "Signal Detection",
+                        "Optical light collection and digitization",
+                        "Photomultiplier tube or charge-coupled array"
+                    ],
+                    [
+                        "Plate Erasure",
+                        "Intense broad-spectrum flooding",
+                        "High-intensity white light clears trapped electrons"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Flat-Panel Digital Radiography Systems",
+            "tx": "**Flat-panel digital radiography** detectors eliminate manual cassette handling. Indirect conversion systems use a cesium iodide scintillator to convert X-rays to light, detected by an amorphous silicon photodiode array. In contrast, direct conversion systems employ an amorphous selenium photoconductor that transforms incoming X-rays straight into electron-hole pairs without an intermediate light step, eliminating optical scatter and delivering exceptional spatial resolution.",
+            "say": "Flat-panel digital radiography detectors eliminate manual cassette handling. Indirect conversion systems use a cesium iodide scintillator to convert X-rays to light, detected by an amorphous silicon photodiode array. In contrast, direct conversion systems employ an amorphous selenium photoconductor that transforms incoming X-rays straight into electron-hole pairs without an intermediate light step, eliminating optical scatter and delivering exceptional spatial resolution.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Indirect Flat-Panel (a-Si)",
+                    "points": [
+                        "Cesium iodide scintillator turns X-rays to light",
+                        "Amorphous silicon photodiodes detect light",
+                        "High detective quantum efficiency for general exams"
+                    ]
+                },
+                "right": {
+                    "title": "Direct Flat-Panel (a-Se)",
+                    "points": [
+                        "Amorphous selenium directly yields electron pairs",
+                        "No light spreading occurs across pixels",
+                        "Highest spatial resolution; preferred for mammography"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

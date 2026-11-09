@@ -1,0 +1,212 @@
+{
+ "key": "ped-emergencies-poisoning-paediatric-basic-life",
+ "v": 1,
+ "module": "ped-emergencies-poisoning",
+ "subject": "paediatrics",
+ "title": "Pediatric Emergencies and Toxicology: BLS, Shock, Poisoning, and Envenomation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Cardiopulmonary arrest in children overwhelmingly results from progressive hypoxia and respiratory failure rather than sudden primary cardiac dysrhythmias. Under international guidelines for **paediatric basic life support**, resuscitation follows the C-A-B sequence (Compressions-Airway-Breathing). Chest compressions are delivered at a rate of one hundred to one hundred and twenty per minute, depressing the infant chest by four centimetres and child chest by five centimetres.",
+   "say": "Pediatric cardiopulmonary arrest is usually secondary to respiratory failure. Compress the chest at one hundred to one hundred and twenty per minute to one-third chest depth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resuscitation Parameter",
+     "Infant BLS (<1 Year of Age)",
+     "Child BLS (1 Year to Puberty)",
+     "Compression Rationale"
+    ],
+    "rows": [
+     [
+      "Compression depth",
+      "4 cm (1.5 inches) or 1/3 AP chest diameter",
+      "5 cm (2 inches) or 1/3 AP chest diameter",
+      "Generates optimal coronary perfusion pressure"
+     ],
+     [
+      "Single rescuer ratio",
+      "30 compressions to 2 rescue breaths",
+      "30 compressions to 2 rescue breaths",
+      "Universal single rescuer standard"
+     ],
+     [
+      "Two-rescuer healthcare ratio",
+      "15 compressions to 2 rescue breaths",
+      "15 compressions to 2 rescue breaths",
+      "Optimizes ventilation in asphyxial arrest"
+     ],
+     [
+      "Chest compression technique",
+      "Two-finger technique or two-thumb encircling",
+      "One or two hands on lower half of sternum",
+      "Ensure full chest recoil between compressions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inadequate tissue perfusion failing to deliver oxygen and nutrients to vital organs defines acute shock. Early identification of **compensated versus decompensated pediatric shock** relies on blood pressure: in compensated shock, systemic vascular resistance rises to maintain normal blood pressure despite tachycardia and delayed capillary refill (>2 seconds), whereas hypotension signifies decompensated shock demanding urgent twenty millilitres per kilogram boluses of isotonic crystalloid.",
+   "say": "Compensated shock maintains blood pressure through tachycardia and vasoconstriction. Hypotension indicates decompensated shock, requiring rapid isotonic fluid boluses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensated Shock Features",
+     "points": [
+      "Blood pressure strictly within normal limits",
+      "Resting tachycardia out of proportion to fever",
+      "Delayed capillary refill time (>2 seconds)",
+      "Cool, pale, mottled extremities with weak peripheral pulses"
+     ]
+    },
+    "right": {
+     "title": "Decompensated Shock Hallmarks",
+     "points": [
+      "Systolic hypotension (<70 + 2x age in years)",
+      "Profound lethargy, stupor, or altered sensorium",
+      "Absent peripheral pulses and faint central pulses",
+      "Urgent isotonic fluid resuscitation (10-20 mL/kg)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid initial clinical triage categorizes ill children according to urgency of intervention before complete diagnostic workup. Under WHO Emergency Triage Assessment and Treatment (ETAT), children are triaged for **emergency signs and IMNCI danger signs**, identifying priority cases exhibiting obstructed breathing, severe respiratory distress, central cyanosis, signs of severe shock, coma or convulsions, and severe dehydration with lethargy.",
+   "say": "WHO ETAT triage screens for emergency signs including airway obstruction, central cyanosis, shock, and convulsions. Children with emergency signs receive immediate life-saving care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ETAT Triage Priority",
+     "Clinical Assessment Signs",
+     "Examples of Conditions",
+     "Immediate Mandatory Action"
+    ],
+    "rows": [
+     [
+      "Emergency signs (E)",
+      "Obstructed breathing, central cyanosis, shock, coma",
+      "Foreign body, severe croup, septicaemia, DKA",
+      "Immediate resuscitation; do not wait"
+     ],
+     [
+      "Priority signs (P)",
+      "Tiny infant (<2 mos), high fever, severe pain, respiratory distress",
+      "Severe pneumonia, acute asthma, poisoning",
+      "Rapid assessment, move to front of queue"
+     ],
+     [
+      "Non-urgent signs (U)",
+      "Mild symptoms, chronic illness, healthy checkup",
+      "Mild viral URTI, scabies, tinea",
+      "Standard waiting queue assessment"
+     ],
+     [
+      "IMNCI general danger signs",
+      "Unable to drink/breastfeed, vomits everything, convulsions, lethargy",
+      "Severe malaria, meningitis, severe sepsis",
+      "Immediate referral to inpatient hospital"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accidental ingestion of volatile hydrocarbons in toddlers carries high risks of chemical pulmonary toxicity. In **accidental kerosene ingestion in toddlers**, the low viscosity and high volatility of liquid paraffin allow it to spread across the pharynx and penetrate the bronchial tree. Gastric lavage and emetics are strictly contraindicated, as inducing emesis dramatically increases aspiration risks, leading to necrotizing chemical pneumonitis.",
+   "say": "Never induce vomiting or perform gastric lavage in kerosene ingestion, as aspiration causes chemical pneumonitis. Observe for coughing and respiratory distress.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathophysiological Mechanisms",
+     "points": [
+      "Low viscosity and low surface tension promote airway spread",
+      "Aspiration into alveoli dissolves pulmonary surfactant",
+      "Induces acute necrotizing chemical pneumonitis",
+      "Produces ventilation-perfusion mismatch and hypoxia"
+     ]
+    },
+    "right": {
+     "title": "Contraindicated Clinical Actions",
+     "points": [
+      "Emetics (syrup of ipecac) strictly contraindicated",
+      "Gastric lavage strictly contraindicated",
+      "Activated charcoal has zero efficacy for hydrocarbons",
+      "Observe for 6 hours; obtain chest X-ray if symptomatic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Irreversible organophosphate inhibition of acetylcholinesterase enzymes produces massive cholinergic accumulation across muscarinic and nicotinic synapses. Manifesting with the DUMBELS or SLUDGE syndrome, **pediatric organophosphate poisoning** causes pinpoint constricted pupils, bronchorrhea, bronchospasm, diaphoresis, vomiting, diarrhea, and bradycardia. Immediate treatment requires intravenous atropine titrated to clear pulmonary secretions, followed by pralidoxime.",
+   "say": "Organophosphate poisoning causes pinpoint pupils, severe salivation, and wet lung secretions. Titrate intravenous atropine until lung secretions dry completely.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/organophosphate-fig1.webp",
+    "alt": "Diagram displaying synaptic accumulation of acetylcholine and dual antidotal mechanisms of atropine and pralidoxime.",
+    "caption": "Synaptic mechanism of organophosphate toxicity and pharmacological reversal using atropine and pralidoxime. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Specific pharmacological antidotes reverse life-threatening toxicities when administered rapidly following acute pediatric ingestions. In acute paracetamol overdose, **N-acetylcysteine for paracetamol poisoning** replenishes depleted hepatocellular glutathione pools, neutralizing the hepatotoxic metabolite NAPQI. In acute iron poisoning with serum iron exceeding five hundred micrograms per decilitre, intravenous deferoxamine chelation binds free circulating iron, imparting a vin-rose color to urine.",
+   "say": "Administer N-acetylcysteine within eight hours for paracetamol poisoning to replenish glutathione. Intravenous deferoxamine chelates toxic iron, turning urine a vin-rose color.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-poisoning-antidotes.webp",
+    "alt": "Educational visual displaying antidotes including N-acetylcysteine, deferoxamine, atropine, and naloxone for pediatric poisonings.",
+    "caption": "Specific pediatric antidotes and their clinical indications in acute childhood poisonings. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cardiovascular collapse following Indian red scorpion envenomation arises from massive autonomic catecholamine storm. In **scorpion envenomation and prazosin therapy**, venom blocks voltage-gated potassium channels, releasing floods of epinephrine and norepinephrine. This induces intense alpha-1 receptor vasoconstriction, massive hypertension, acute left ventricular failure, and flash pulmonary edema. Oral prazosin (thirty micrograms per kilogram stat) acts as an essential physiological antidote.",
+   "say": "Indian red scorpion stings trigger an autonomic storm causing hypertension and pulmonary edema. Oral prazosin is a specific alpha-blocker antidote that reverses cardiovascular collapse.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scorpion-sting-fig1.webp",
+    "alt": "Infographic depicting the pathophysiology of scorpion venom autonomic storm, peripheral vasoconstriction, and reversal with prazosin.",
+    "caption": "Pathophysiology of red scorpion venom autonomic storm and therapeutic vasodilatation with prazosin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Neurotoxic elapid and vasculotoxic viperid snake envenomations demand rapid syndromic identification and prompt polyvalent antivenom infusion. In **pediatric snakebite envenomation**, krait and cobra bites cause descending neuroparalysis with bilateral ptosis, diplopia, and respiratory arrest, while viper bites cause coagulopathy and hemotoxic bleeding, detected by the bedside twenty-minute whole blood clotting test (20WBCT), managed with Indian polyvalent antivenom.",
+   "say": "Neurotoxic krait and cobra bites cause ptosis and respiratory failure, while viper bites cause coagulopathy. A non-clotting twenty-minute blood test indicates urgent antivenom infusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Envenomation Syndrome",
+     "Culprit Snake Species",
+     "Classic Clinical Manifestations",
+     "Specific Emergency Intervention"
+    ],
+    "rows": [
+     [
+      "Neurotoxic envenomation",
+      "Common krait (Bungarus), Cobra (Naja)",
+      "Bilateral ptosis, bulbar palsy, respiratory arrest",
+      "ASV + Neostigmine/Atropine test (Cobra)"
+     ],
+     [
+      "Vasculotoxic / Hemotoxic",
+      "Russell viper, Saw-scaled viper",
+      "Local swelling, bleb, uncoagulable blood, bleeding",
+      "ASV based on 20-minute whole blood clotting test"
+     ],
+     [
+      "20-Minute WBCT protocol",
+      "Place 2 mL venous blood in glass tube x 20 min",
+      "Blood remains completely liquid (non-clotting)",
+      "Definitive indicator for initiating ASV therapy"
+     ],
+     [
+      "Polyvalent antivenom (ASV)",
+      "10 vials reconstituted in normal saline IV",
+      "Infuse over 1 hour; repeat if coagulopathy persists",
+      "Epinephrine on standby for anaphylactic reactions"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,295 @@
+{
+    "v": 1,
+    "id": "rad-radiation-protection-gray",
+    "subject": "radiology",
+    "module": "rad-radiation-protection",
+    "title": "Radiation Dosimetry: Absorbed Dose, Equivalent Dose, and Effective Dose",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Radioactivity and Disintegration Rates",
+            "tx": "**Becquerel radioactivity unit** serves as the standard SI measurement of nuclear activity, defined as exactly one spontaneous nuclear transformation or disintegration per second. It replaces the traditional non-SI unit, the curie, which was originally established as the radioactivity emitted by one gram of radium-226 and equals 3.7 multiplied by ten to the tenth becquerels.",
+            "say": "Becquerel radioactivity unit serves as the standard SI measurement of nuclear activity, defined as exactly one spontaneous nuclear transformation or disintegration per second. It replaces the traditional non-SI unit, the curie, which was originally established as the radioactivity emitted by one gram of radium-226 and equals 3.7 multiplied by ten to the tenth becquerels.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Radioactivity Unit",
+                    "Physical Definition",
+                    "Mathematical Conversion"
+                ],
+                "rows": [
+                    [
+                        "Becquerel (Bq)",
+                        "1 nuclear disintegration per second (SI unit)",
+                        "1 Bq = 2.7 multiplied by 10^-11 curies"
+                    ],
+                    [
+                        "Megabecquerel (MBq)",
+                        "10^6 disintegrations per second",
+                        "Standard diagnostic nuclear medicine dosing"
+                    ],
+                    [
+                        "Curie (Ci)",
+                        "Radioactivity of 1 gram radium-226",
+                        "1 Ci = 37 gigabecquerels (3.7 x 10^10 Bq)"
+                    ],
+                    [
+                        "Millicurie (mCi)",
+                        "One-thousandth of a curie",
+                        "1 mCi = 37 megabecquerels (MBq)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Radiation Exposure in Air",
+            "tx": "**Roentgen exposure measurement** quantifies the amount of electrical ionization produced by X-rays or gamma rays in a volume of dry air at standard temperature and pressure. One roentgen generates 2.58 multiplied by ten to the minus fourth coulombs of electrical charge per kilogram of air. Exposure measurements describe only radiation field strength, not energy deposited within human biological tissue.",
+            "say": "Roentgen exposure measurement quantifies the amount of electrical ionization produced by X-rays or gamma rays in a volume of dry air at standard temperature and pressure. One roentgen generates 2.58 multiplied by ten to the minus fourth coulombs of electrical charge per kilogram of air. Exposure measurements describe only radiation field strength, not energy deposited within human biological tissue.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Exposure (Roentgen / C per kg)",
+                    "points": [
+                        "Measures ionization produced exclusively in air",
+                        "Restricted to X-rays and gamma rays below 3 MeV",
+                        "Describes radiation beam strength without tissue absorption"
+                    ]
+                },
+                "right": {
+                    "title": "Absorbed Dose (Gray / rad)",
+                    "points": [
+                        "Measures energy deposited per unit mass of any matter",
+                        "Applicable to all radiation types and all biological tissues",
+                        "Direct physical determinant of biological cellular damage"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Absorbed Radiation Dose",
+            "tx": "**Gray absorbed dose unit** quantifies the physical energy deposited by ionizing radiation per unit mass of matter, defined as one joule of absorbed energy per kilogram of tissue. It supersedes the traditional legacy unit, the rad, which stood for radiation absorbed dose and represented 100 ergs per gram. Exactly one gray equals one hundred rads.",
+            "say": "Gray absorbed dose unit quantifies the physical energy deposited by ionizing radiation per unit mass of matter, defined as one joule of absorbed energy per kilogram of tissue. It supersedes the traditional legacy unit, the rad, which stood for radiation absorbed dose and represented 100 ergs per gram. Exactly one gray equals one hundred rads.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Dose Parameter",
+                    "SI Unit",
+                    "Legacy Unit",
+                    "Conversion Factor"
+                ],
+                "rows": [
+                    [
+                        "Absorbed Dose (D)",
+                        "Gray (Gy = 1 J/kg)",
+                        "Rad (100 ergs/g)",
+                        "1 Gy = 100 rad (1 rad = 10 mGy)"
+                    ],
+                    [
+                        "Equivalent Dose (H)",
+                        "Sievert (Sv = 1 J/kg)",
+                        "Rem (roentgen equivalent man)",
+                        "1 Sv = 100 rem (1 rem = 10 mSv)"
+                    ],
+                    [
+                        "Effective Dose (E)",
+                        "Sievert (Sv)",
+                        "Rem",
+                        "1 Sv = 100 rem"
+                    ],
+                    [
+                        "Exposure (X)",
+                        "Coulomb/kilogram (C/kg)",
+                        "Roentgen (R)",
+                        "1 R = 2.58 x 10^-4 C/kg"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Radiation Weighting Factors",
+            "tx": "**Radiation weighting factor** values normalize different radiation modalities according to their relative biological effectiveness and linear energy transfer. Photons, including diagnostic X-rays and gamma emissions, share a baseline weighting factor of 1. Electrons and beta particles also carry a factor of 1. In contrast, densely ionizing alpha particles and heavy fission fragments carry a factor of 20.",
+            "say": "Radiation weighting factor values normalize different radiation modalities according to their relative biological effectiveness and linear energy transfer. Photons, including diagnostic X-rays and gamma emissions, share a baseline weighting factor of 1. Electrons and beta particles also carry a factor of 1. In contrast, densely ionizing alpha particles and heavy fission fragments carry a factor of 20.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Radiation Type",
+                    "Weighting Factor (wR)",
+                    "Biological Mechanism"
+                ],
+                "rows": [
+                    [
+                        "X-rays and Gamma rays",
+                        "1",
+                        "Low linear energy transfer; sparse ionization tracks"
+                    ],
+                    [
+                        "Electrons, Positrons, Muons",
+                        "1",
+                        "Light charged particles with low track density"
+                    ],
+                    [
+                        "Protons and Charged Pions",
+                        "2",
+                        "Moderate track density and localized DNA damage"
+                    ],
+                    [
+                        "Neutrons (energy dependent)",
+                        "2.5 to 20",
+                        "Nuclear recoil collisions with high biological hazard"
+                    ],
+                    [
+                        "Alpha particles and heavy nuclei",
+                        "20",
+                        "High linear energy transfer; dense double-strand DNA breaks"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Equivalent Dose Calculation",
+            "tx": "**Sievert equivalent dose** quantifies tissue-specific biological damage by multiplying the physical absorbed dose in grays by the radiation weighting factor. Expressed in sieverts, equivalent dose permits direct comparison of biological harm across disparate radiation types. For medical diagnostic X-rays with a weighting factor of 1, an absorbed dose of 1 gray produces an equivalent dose of exactly 1 sievert.",
+            "say": "Sievert equivalent dose quantifies tissue-specific biological damage by multiplying the physical absorbed dose in grays by the radiation weighting factor. Expressed in sieverts, equivalent dose permits direct comparison of biological harm across disparate radiation types. For medical diagnostic X-rays with a weighting factor of 1, an absorbed dose of 1 gray produces an equivalent dose of exactly 1 sievert.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Absorbed dose measured in grays (J/kg)"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Multiply by radiation weighting factor wR"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Equivalent dose obtained in sieverts (Sv)"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Tissue Weighting Factors",
+            "tx": "**Tissue weighting factor distribution** reflects the relative susceptibility of individual organs to radiation-induced stochastic malignancy and hereditary harm, published under ICRP publication 103. Organs with the highest mitotic turnover, including red bone marrow, colon, lung, stomach, and female breast, each carry a weighting factor of 0.12. Across the entire human body, the sum of all tissue weighting factors equals 1.0.",
+            "say": "Tissue weighting factor distribution reflects the relative susceptibility of individual organs to radiation-induced stochastic malignancy and hereditary harm, published under ICRP publication 103. Organs with the highest mitotic turnover, including red bone marrow, colon, lung, stomach, and female breast, each carry a weighting factor of 0.12. Across the entire human body, the sum of all tissue weighting factors equals 1.0.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Organ or Tissue Group",
+                    "Tissue Factor (wT)",
+                    "Cancer and Hereditary Sensitivity"
+                ],
+                "rows": [
+                    [
+                        "Red marrow, Colon, Lung, Stomach, Breast",
+                        "0.12 each (0.60 total)",
+                        "Highest sensitivity to radiation-induced malignancy"
+                    ],
+                    [
+                        "Gonads (Testes and Ovaries)",
+                        "0.08",
+                        "High genetic hereditary mutation susceptibility"
+                    ],
+                    [
+                        "Bladder, Oesophagus, Liver, Thyroid",
+                        "0.04 each (0.16 total)",
+                        "Moderate susceptibility to organ carcinogenesis"
+                    ],
+                    [
+                        "Bone surface, Brain, Salivary glands, Skin",
+                        "0.01 each (0.04 total)",
+                        "Low stochastic susceptibility"
+                    ],
+                    [
+                        "Remainder tissues (14 organs)",
+                        "0.12 collective",
+                        "Pooled risk across remaining somatic structures"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Effective Dose Calculation",
+            "tx": "**Effective dose calculation** estimates the overall stochastic risk to the entire human body when only specific organs are exposed. Calculated by summing the products of equivalent dose and corresponding tissue weighting factor for each irradiated organ, effective dose uses the sievert or millisievert unit. This metric allows clinicians to directly compare patient risk between localized examinations like head CT and general background exposure.",
+            "say": "Effective dose calculation estimates the overall stochastic risk to the entire human body when only specific organs are exposed. Calculated by summing the products of equivalent dose and corresponding tissue weighting factor for each irradiated organ, effective dose uses the sievert or millisievert unit. This metric allows clinicians to directly compare patient risk between localized examinations like head CT and general background exposure.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Calculate equivalent dose per organ (Sv)"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Multiply by specific tissue factor wT"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Sum across all organs to yield effective dose"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Medical Imaging Versus Background Dose",
+            "tx": "**Natural background radiation comparison** places medical diagnostic exposures into realistic clinical perspective. Worldwide average natural background radiation delivers 2.4 to 3.0 millisieverts annually. A standard posteroanterior chest radiograph imparts approximately 0.02 millisieverts, equivalent to roughly three days of natural background. In contrast, an abdominal CT examination imparts 8 to 10 millisieverts, equivalent to three years of background radiation.",
+            "say": "Natural background radiation comparison places medical diagnostic exposures into realistic clinical perspective. Worldwide average natural background radiation delivers 2.4 to 3.0 millisieverts annually. A standard posteroanterior chest radiograph imparts approximately 0.02 millisieverts, equivalent to roughly three days of natural background. In contrast, an abdominal CT examination imparts 8 to 10 millisieverts, equivalent to three years of background radiation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Radiation Source",
+                    "Effective Dose (mSv)",
+                    "Natural Background Equivalent"
+                ],
+                "rows": [
+                    [
+                        "PA Chest Radiograph",
+                        "0.02 mSv",
+                        "3 days of natural background radiation"
+                    ],
+                    [
+                        "Mammography (2 views)",
+                        "0.4 mSv",
+                        "7 weeks of natural background radiation"
+                    ],
+                    [
+                        "Head CT scan",
+                        "2.0 mSv",
+                        "8 to 10 months of natural background radiation"
+                    ],
+                    [
+                        "Abdominal and Pelvic CT",
+                        "8.0 to 10.0 mSv",
+                        "3 to 4 years of natural background radiation"
+                    ],
+                    [
+                        "Annual Global Background",
+                        "2.4 to 3.0 mSv",
+                        "Standard environmental baseline"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

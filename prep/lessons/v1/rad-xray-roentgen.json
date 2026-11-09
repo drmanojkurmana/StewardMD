@@ -1,0 +1,240 @@
+{
+    "v": 1,
+    "id": "rad-xray-roentgen",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "Discovery and Physics of X-rays: Roentgen and Beam Properties",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Roentgen's Serendipitous Discovery",
+            "tx": "**Roentgen discovery of X-rays** occurred on the evening of November 8, 1895, at the University of W\u00fcrzburg. Professor Wilhelm Conrad Roentgen was investigating electrical discharges inside an evacuated Hittorf-Crookes cathode-ray tube wrapped in black cardboard. Across his darkened laboratory, a paper screen coated with barium platinocyanide began fluorescing brightly, revealing invisible, penetrating radiation that he designated X-rays.",
+            "say": "Roentgen discovery of X-rays occurred on the evening of November 8, 1895, at the University of W\u00fcrzburg. Professor Wilhelm Conrad Roentgen was investigating electrical discharges inside an evacuated Hittorf-Crookes cathode-ray tube wrapped in black cardboard. Across his darkened laboratory, a paper screen coated with barium platinocyanide began fluorescing brightly, revealing invisible, penetrating radiation that he designated X-rays.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Cathode tube enclosed in black cardboard"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "High voltage discharge generates rays"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Barium platinocyanide screen fluoresces in dark"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The First Diagnostic Radiograph",
+            "tx": "**First human radiograph** was produced on December 22, 1895, when Roentgen exposed the hand of his wife, Anna Bertha Ludwig. The resulting historic image clearly displayed the phalangeal and metacarpal bones alongside the dense silhouette of her gold wedding ring. This groundbreaking proof of non-destructive internal imaging earned Roentgen the inaugural Nobel Prize in Physics in 1901.",
+            "say": "First human radiograph was produced on December 22, 1895, when Roentgen exposed the hand of his wife, Anna Bertha Ludwig. The resulting historic image clearly displayed the phalangeal and metacarpal bones alongside the dense silhouette of her gold wedding ring. This groundbreaking proof of non-destructive internal imaging earned Roentgen the inaugural Nobel Prize in Physics in 1901.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Historical Milestone",
+                    "Calendar Date",
+                    "Scientific Significance"
+                ],
+                "rows": [
+                    [
+                        "Initial Laboratory Observation",
+                        "November 8, 1895",
+                        "Fluorescence of barium platinocyanide screen"
+                    ],
+                    [
+                        "First Human Skeletal Radiograph",
+                        "December 22, 1895",
+                        "Exposure of Anna Bertha Roentgen hand with ring"
+                    ],
+                    [
+                        "First Formal Publication",
+                        "December 28, 1895",
+                        "On a New Kind of Rays submitted to W\u00fcrzburg Society"
+                    ],
+                    [
+                        "Inaugural Nobel Prize in Physics",
+                        "December 10, 1901",
+                        "Awarded to Wilhelm Conrad Roentgen in Stockholm"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Fundamental Electromagnetic Characteristics",
+            "tx": "**Electromagnetic X-ray spectrum** waves travel in straight lines at the speed of light in vacuum, spanning wavelengths from 0.01 to 10 nanometres with frequencies between 30 petahertz and 30 exahertz. Possessing neither electrical charge nor rest mass, X-ray photons cannot be deflected by magnetic or electrical fields. Their energy is calculated as Planck's constant multiplied by frequency.",
+            "say": "Electromagnetic X-ray spectrum waves travel in straight lines at the speed of light in vacuum, spanning wavelengths from 0.01 to 10 nanometres with frequencies between 30 petahertz and 30 exahertz. Possessing neither electrical charge nor rest mass, X-ray photons cannot be deflected by magnetic or electrical fields. Their energy is calculated as Planck's constant multiplied by frequency.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Wave Property",
+                    "Physical Value",
+                    "Clinical Consequence"
+                ],
+                "rows": [
+                    [
+                        "Velocity in Vacuum",
+                        "3 multiplied by 10^8 metres/second",
+                        "Instantaneous image receptor exposure"
+                    ],
+                    [
+                        "Wavelength Range",
+                        "0.01 to 10 nanometres",
+                        "Atomic-scale penetration through tissue"
+                    ],
+                    [
+                        "Rest Mass and Charge",
+                        "Zero mass and neutral charge",
+                        "Unaffected by external magnetic or electric fields"
+                    ],
+                    [
+                        "Linear Trajectory",
+                        "Strictly straight propagation",
+                        "Creates geometric shadows with distinct penumbra"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Inverse Square Law",
+            "tx": "**Inverse square law calculation** establishes that the intensity of an unattenuated X-ray beam is inversely proportional to the square of the distance from the source. Because photons diverge symmetrically from the focal spot, doubling the distance from 1 metre to 2 metres distributes the identical photon quantity over four times the area, dropping the radiation intensity to exactly one-fourth.",
+            "say": "Inverse square law calculation establishes that the intensity of an unattenuated X-ray beam is inversely proportional to the square of the distance from the source. Because photons diverge symmetrically from the focal spot, doubling the distance from 1 metre to 2 metres distributes the identical photon quantity over four times the area, dropping the radiation intensity to exactly one-fourth.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Distance from Source",
+                    "Relative Intensity Factor",
+                    "Practical Radiation Protection Impact"
+                ],
+                "rows": [
+                    [
+                        "1 metre (baseline)",
+                        "100 percent intensity",
+                        "High scatter zone; operator must wear lead protection"
+                    ],
+                    [
+                        "2 metres (double distance)",
+                        "25 percent intensity (1/4th)",
+                        "Operator stepping back cuts exposure by 75 percent"
+                    ],
+                    [
+                        "3 metres (triple distance)",
+                        "11 percent intensity (1/9th)",
+                        "Safe zone during mobile bedside examinations"
+                    ],
+                    [
+                        "4 metres (quadruple distance)",
+                        "6.25 percent intensity (1/16th)",
+                        "Minimal scatter exposure to ward staff"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Exponential Tissue Attenuation",
+            "tx": "**Exponential attenuation coefficient** values dictate how X-ray beams weaken as they traverse matter, governed by the Beer-Lambert law: intensity equals initial intensity multiplied by e to the power of negative linear attenuation coefficient times thickness. The linear attenuation coefficient reflects the combined probabilities of photoelectric absorption and Compton scattering per centimetre of specific human tissue.",
+            "say": "Exponential attenuation coefficient values dictate how X-ray beams weaken as they traverse matter, governed by the Beer-Lambert law: intensity equals initial intensity multiplied by e to the power of negative linear attenuation coefficient times thickness. The linear attenuation coefficient reflects the combined probabilities of photoelectric absorption and Compton scattering per centimetre of specific human tissue.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Linear Attenuation Coefficient (u)",
+                    "points": [
+                        "Fraction of photons attenuated per unit length (cm-1)",
+                        "Varies directly with physical tissue density",
+                        "Dependent on tissue physical state (ice vs water vs steam)"
+                    ]
+                },
+                "right": {
+                    "title": "Mass Attenuation Coefficient (u/p)",
+                    "points": [
+                        "Linear coefficient divided by density (cm2/g)",
+                        "Independent of physical state or density packing",
+                        "Reflected by atomic composition and photon energy"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Five Basic Radiographic Densities",
+            "tx": "**Five radiographic densities** form the foundation of plain film interpretation, categorized by their distinct degree of photon absorption. Air or gas absorbs the fewest photons and appears dark black. Fat appears dark grey. Fluid, blood, and soft tissue muscle appear medium grey. Bone and calcium absorb substantial photons, appearing bright white, while metal appears intensely opaque radiopaque white.",
+            "say": "Five radiographic densities form the foundation of plain film interpretation, categorized by their distinct degree of photon absorption. Air or gas absorbs the fewest photons and appears dark black. Fat appears dark grey. Fluid, blood, and soft tissue muscle appear medium grey. Bone and calcium absorb substantial photons, appearing bright white, while metal appears intensely opaque radiopaque white.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/practicals/paed-xray-chest-technique.webp",
+                "alt": "Frontal chest radiograph demonstrating contrast between gas in lungs, soft tissue heart shadow, and bone ribs",
+                "caption": "Standard frontal chest film illustrating basic radiographic densities: radiolucent black air in lung fields, grey soft tissue cardiac silhouette, and white radiopaque rib bones."
+            }
+        },
+        {
+            "title": "Compton Scattering Interactions",
+            "tx": "**Compton scattering interaction** dominates at photon energies above 30 kiloelectron volts in soft tissues. An incident photon collides with a loosely bound outer-shell electron, ejecting the electron and deflecting the photon with reduced energy at an oblique angle. Compton scatter accounts for nearly all secondary radiation striking staff members and produces diffuse radiographic fog that degrades image contrast.",
+            "say": "Compton scattering interaction dominates at photon energies above 30 kiloelectron volts in soft tissues. An incident photon collides with a loosely bound outer-shell electron, ejecting the electron and deflecting the photon with reduced energy at an oblique angle. Compton scatter accounts for nearly all secondary radiation striking staff members and produces diffuse radiographic fog that degrades image contrast.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Photon strikes outer valence electron"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Recoil electron ejected from tissue atom"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Scattered photon deflected with lower energy"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Photoelectric Effect and Contrast",
+            "tx": "**Photoelectric effect absorption** occurs when an incoming photon completely transfers its energy to an inner-shell electron, ejecting it as a photoelectron. Because the probability of photoelectric interaction is proportional to the atomic number cubed divided by photon energy cubed, dense osseous structures with effective atomic number 13.8 absorb far more photons than soft tissue with atomic number 7.4.",
+            "say": "Photoelectric effect absorption occurs when an incoming photon completely transfers its energy to an inner-shell electron, ejecting it as a photoelectron. Because the probability of photoelectric interaction is proportional to the atomic number cubed divided by photon energy cubed, dense osseous structures with effective atomic number 13.8 absorb far more photons than soft tissue with atomic number 7.4.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Photoelectric Absorption",
+                    "points": [
+                        "Complete photon absorption by inner orbital electron",
+                        "Proportional to Z cubed divided by energy cubed",
+                        "Provides sharp subject contrast between bone and soft tissue"
+                    ]
+                },
+                "right": {
+                    "title": "Compton Scattering",
+                    "points": [
+                        "Partial energy transfer to outer orbital electron",
+                        "Independent of atomic number; depends on electron density",
+                        "Generates unwanted scatter fog and operator radiation exposure"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}
