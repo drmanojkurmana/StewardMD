@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Alcoholic Hepatitis, Mallory-Denk Bodies, NAFLD, and NASH",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Alcoholic hepatitis inflames a steatotic liver acutely with jaundice, fever, and tender hepatomegaly after heavy drinking, Maddrey and MELD scores grading whether steroids help or harm. That acute on chronic storm is **alcoholic hepatitis severity scoring**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Jaundice within weeks of heavy drinking plus high Maddrey score frames the alcoholic hepatitis steroid question.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Steroids considered",
+          "points": [
+            "Severe Maddrey or MELD range",
+            "Infection excluded and treated first",
+            "Lille response at day seven decides"
+          ]
+        },
+        "right": {
+          "title": "Steroids avoided",
+          "points": [
+            "Active sepsis, bleeding, renal failure",
+            "Nutrition and abstinence support",
+            "Transplant evaluation early selected"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mallory-Denk bodies rope damaged intermediate filaments into eosinophilic hyaline tangles inside ballooned hepatocytes, shared by alcoholic and metabolic steatohepatitis and cholestatic injury alike. The filament tangle is the **Mallory-Denk body of steatohepatitis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Mallory-Denk bodies are filament wreckage in ballooned hepatocytes, not specific to alcohol alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig2.webp",
+        "alt": "Hepatitis overview patterns",
+        "caption": "Hepatitis biopsy patterns spanning steatohepatitis and autoimmune injury."
+      }
+    },
+    {
+      "tx": "Neutrophils satelliting Mallory containing hepatocytes, chicken wire perivenular fibrosis, and steatosis compose alcoholic steatohepatitis histology before cirrhosis seals it. That triad reads **steatohepatitis histology, alcoholic pattern**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation. Pathologists weigh this pattern beside clinical history because neither alone separates the causes reliably.",
+      "say": "Satellitosis around Mallory hepatocytes with chicken wire fibrosis is steatohepatitis under glass.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Alcoholic hepatitis",
+          "Metabolic NASH"
+        ],
+        "rows": [
+          [
+            "History",
+            "Heavy recent drinking",
+            "Obesity, diabetes, lipids"
+          ],
+          [
+            "Histology",
+            "Satellitosis prominent classically",
+            "Similar, cannot separate reliably"
+          ],
+          [
+            "Reversibility lever",
+            "Abstinence absolute",
+            "Weight loss, metabolic control"
+          ],
+          [
+            "Scores used",
+            "Maddrey, MELD, Lille",
+            "Fibrosis stage and cardiometabolic risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-alcoholic fatty liver disease, now metabolic dysfunction associated steatotic liver disease, fills hepatocytes with fat in obesity and diabetes, mostly indolent steatosis, minority inflaming into NASH. That spectrum is **NAFLD (MASLD) from steatosis to NASH**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Fat plus metabolic risk defines the modern name; only the inflamed minority march toward cirrhosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatitis-cirrhosis-and-liver-failure-fig1.webp",
+        "alt": "Hepatitis cirrhosis and liver failure",
+        "caption": "Cirrhosis endpoint shared by alcoholic and metabolic steatohepatitis roads."
+      }
+    },
+    {
+      "tx": "NASH adds ballooning and lobular inflammation to steatosis with perivenular fibrosis staging its prognosis, cardiovascular disease outkilling liver disease in early stages. Fibrosis stage rules: **NASH fibrosis staging and cardiovascular priority**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Stage the fibrosis, treat the heart risk; early NASH patients die cardiovascularly more than hepatically.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Steatosis on imaging or enzymes"
+          },
+          {
+            "id": "b",
+            "label": "Fibrosis score or elastography triage"
+          },
+          {
+            "id": "c",
+            "label": "Weight, diabetes, lipid, pressure therapy"
+          },
+          {
+            "id": "d",
+            "label": "Hepatology if advanced fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Seven to ten percent body weight loss resolves steatohepatitis in most adherent patients, exercise helping independently, while bariatric surgery and metabolic drugs serve selected advanced cases. That prescription is **weight loss therapy thresholds in NASH**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Ten percent weight loss is NASH's most proven drug; prescribe it with the seriousness of one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lifestyle foundation",
+          "points": [
+            "Weight loss graded benefits",
+            "Exercise independent of scale",
+            "Alcohol minimised honestly"
+          ]
+        },
+        "right": {
+          "title": "Added therapies",
+          "points": [
+            "Diabetes and lipid optimisation",
+            "Bariatric evaluation selected",
+            "Trial and approved antifibrotic horizons"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Alcohol abstinence after alcoholic hepatitis decides survival more powerfully than any drug, addiction services therefore joining hepatology from admission rather than discharge leaflets. That integration is **abstinence centred alcoholic liver care**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Abstinence is the only survival drug proven in alcoholic hepatitis; addiction care starts on day one.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Support",
+          "Purpose",
+          "Timing"
+        ],
+        "rows": [
+          [
+            "Thiamine and nutrition",
+            "Prevent Wernicke, refeed safely",
+            "Admission immediately"
+          ],
+          [
+            "Withdrawal monitoring",
+            "Prevent delirium tremens",
+            "First days scored"
+          ],
+          [
+            "Addiction referral",
+            "Sustain abstinence",
+            "Before discharge arranged"
+          ],
+          [
+            "Steroid Lille review",
+            "Stop futile immunosuppression",
+            "Day seven assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Steatosis alone on imaging with normal enzymes still earns fibrosis risk scoring because silent advanced fibrosis hides in diabetes clinics, not liver units. That case finding is **fibrosis case finding in metabolic steatosis**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Normal enzymes never acquit fibrosis in diabetes; score or scan every steatotic liver's stiffness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Steatosis or diabetes risk found"
+          },
+          {
+            "id": "b",
+            "label": "FIB-4 calculated from routine labs"
+          },
+          {
+            "id": "c",
+            "label": "Elastography for indeterminate scores"
+          },
+          {
+            "id": "d",
+            "label": "Hepatology for advanced fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

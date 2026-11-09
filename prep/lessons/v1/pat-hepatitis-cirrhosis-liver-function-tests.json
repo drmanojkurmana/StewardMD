@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-hepatitis-cirrhosis",
+  "subject": "pathology",
+  "title": "Liver Function Tests, Viral and Autoimmune Hepatitis, Interface Hepatitis, and Cirrhosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Liver function tests misnamed still orient injury: transaminases mark hepatocyte damage, alkaline phosphatase and GGT mark cholestasis, while bilirubin, albumin, and prothrombin time judge true function. Pattern before panic is **liver enzyme pattern interpretation**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Hepatocellular, cholestatic, or failing: classify the liver pattern before chasing its cause.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Dominant abnormality",
+          "First differential"
+        ],
+        "rows": [
+          [
+            "Hepatocellular",
+            "ALT AST markedly raised",
+            "Viral, drug, ischaemic, autoimmune"
+          ],
+          [
+            "Cholestatic",
+            "ALP GGT bilirubin raised",
+            "Obstruction, PBC, PSC, drugs"
+          ],
+          [
+            "Synthetic failure",
+            "INR up, albumin down",
+            "Cirrhosis, acute liver failure"
+          ],
+          [
+            "Isolated bilirubin",
+            "Enzymes otherwise normal",
+            "Gilbert, haemolysis review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute viral hepatitis inflames lobules with hepatocyte ballooning, apoptosis Councilman bodies, and spotty necrosis, ALT often exceeding a thousand, usually resolving except hepatitis B and C chronicity paths. That lobular storm is **acute viral hepatitis histology and course**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "ALT in thousands with spotty necrosis is acute viral hepatitis until drugs and ischaemia are excluded.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resolving acute hepatitis",
+          "points": [
+            "Falling enzymes and bilirubin",
+            "Appetite and energy return",
+            "No fibrosis sequelae"
+          ]
+        },
+        "right": {
+          "title": "Chronic evolution",
+          "points": [
+            "HBV or HCV persistence",
+            "Interface activity continues",
+            "Fibrosis staging begins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ground glass hepatocytes pack cytoplasm with hepatitis B surface antigen, confirmed by orcein or immunostaining, marking chronic HBV infection's viral factories under immune tolerance or treatment. The antigen stuffed cell is the **ground glass hepatocyte of chronic hepatitis B**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Ground glass cytoplasm means surface antigen factories; stain it and stage the hepatitis B.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig2.webp",
+        "alt": "Autoimmune hepatitis overview",
+        "caption": "Hepatitis patterns across viral, autoimmune, and chronic liver injury."
+      }
+    },
+    {
+      "tx": "Chronic hepatitis grades necroinflammatory activity and stages fibrosis from portal expansion through bridging to cirrhosis, because stage predicts outcomes and treatment urgency across aetiologies. That dual report is **grade and stage in chronic hepatitis biopsy**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Grade tells how angry, stage tells how scarred; stage writes the prognosis in chronic hepatitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Portal inflammation only"
+          },
+          {
+            "id": "b",
+            "label": "Periportal interface activity spreads"
+          },
+          {
+            "id": "c",
+            "label": "Bridging fibrosis links tracts"
+          },
+          {
+            "id": "d",
+            "label": "Nodules encircled: cirrhosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Interface hepatitis spills inflammation across limiting plate into periportal hepatocytes with plasma cells in autoimmune hepatitis, emperipolesis and rosettes joining its biopsy accent beside high IgG. That border attack is **interface hepatitis of autoimmune liver disease**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Plasma cell rich interface hepatitis plus high IgG means autoimmune hepatitis until serology votes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+        "alt": "Autoimmune hepatitis liver biopsy",
+        "caption": "Autoimmune hepatitis biopsy with interface activity and plasma cells."
+      }
+    },
+    {
+      "tx": "Autoimmune hepatitis divides by antibodies: ANA and smooth muscle in type one, anti-LKM in childhood type two, answering steroids dramatically yet relapsing on withdrawal in most patients. Steroid responsiveness defines **autoimmune hepatitis treatment expectation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Autoimmune hepatitis melts before steroids and returns when they stop; plan years, not weeks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 AIH",
+          "points": [
+            "ANA, SMA antibodies",
+            "Any age, female accent",
+            "Commonest type"
+          ]
+        },
+        "right": {
+          "title": "Type 2 AIH",
+          "points": [
+            "Anti-LKM1 antibodies",
+            "Children and adolescents",
+            "More acute presentations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cirrhosis ends chronic injury roads with bridging fibrosis encircling regenerative nodules, distorting vasculature into portal hypertension and hepatocellular failure simultaneously. That architectural endpoint is **cirrhosis, fibrosis plus regenerative nodules**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Cirrhosis is architecture destroyed: fibrous rings, regenerative nodules, failing function, rising pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatitis-cirrhosis-and-liver-failure-fig1.webp",
+        "alt": "Hepatitis cirrhosis and liver failure portal hypertension",
+        "caption": "Cirrhosis and liver failure with portal hypertension consequences."
+      }
+    },
+    {
+      "tx": "Compensated cirrhosis may hide behind normal examination while decompensation declares through ascites, variceal bleeding, encephalopathy, or jaundice, each reclassifying prognosis and transplant conversations. That threshold is **decompensated cirrhosis events**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "First ascites, bleed, encephalopathy, or jaundice moves cirrhosis into decompensated prognosis territory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Decompensation",
+          "Mechanism accent",
+          "Immediate duty"
+        ],
+        "rows": [
+          [
+            "Ascites",
+            "Portal pressure plus sodium retention",
+            "Paracentesis, albumin logic"
+          ],
+          [
+            "Variceal bleed",
+            "Collateral pressure rupture",
+            "Resuscitate, vasoactive, endoscopy"
+          ],
+          [
+            "Encephalopathy",
+            "Ammonia and inflammation",
+            "Precipitant hunt, lactulose"
+          ],
+          [
+            "Jaundice deepening",
+            "Hepatocellular failure",
+            "Sepsis and drug exclusion"
+          ]
+        ]
+      }
+    }
+  ]
+}

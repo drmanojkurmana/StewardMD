@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Focal Nodular Hyperplasia, Hepatocellular Carcinoma, and AFP",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Focal nodular hyperplasia is a benign regenerative response to vascular anomaly, hepatocytes around a central scar with radiating septa and malformed arteries, needing no treatment once confidently imaged. The scar centred lesion is **focal nodular hyperplasia (FNH)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "A central scar in a young woman's liver lesion reassures toward focal nodular hyperplasia; leave it alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/focal-nodular-hyperplasia-fig1.webp",
+        "alt": "Focal nodular hyperplasia imaging characteristics",
+        "caption": "Focal nodular hyperplasia imaging with central scar and spoke wheel vessels."
+      }
+    },
+    {
+      "tx": "Hepatobiliary contrast MRI separates FNH, retaining contrast in functioning hepatocytes, from adenoma and metastases, sparing biopsies whose bleeding risks exceed diagnostic need. That imaging separation is **hepatobiliary phase MRI in benign liver lesions**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Hepatobiliary contrast lights FNH and darkens adenoma; imaging now retires many liver biopsies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Focal nodular hyperplasia",
+          "points": [
+            "Central scar, spoke wheel arteries",
+            "Retains hepatobiliary contrast",
+            "No treatment, no follow up usually"
+          ]
+        },
+        "right": {
+          "title": "Hepatic adenoma",
+          "points": [
+            "No true central scar",
+            "Risk of bleed and transformation",
+            "Subtype and size management"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatocellular carcinoma rises from cirrhotic soil of hepatitis B and C, alcohol, and metabolic disease, arterially enhancing with venous washout on imaging inside cirrhosis diagnostic without biopsy. That imaging diagnosis is **hepatocellular carcinoma (HCC) in cirrhosis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Arterial enhancement plus washout in a cirrhotic liver diagnoses HCC; biopsy stays sheathed.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "alt": "Hepatocellular carcinoma imaging features",
+        "caption": "Hepatocellular carcinoma imaging with arterial enhancement and washout."
+      }
+    },
+    {
+      "tx": "Alpha fetoprotein supports HCC surveillance and prognosis yet misses many small tumours and rises in flares and pregnancy, so ultrasound surveillance leads and AFP assists rather than replaces imaging. That assistant role is **AFP in hepatocellular carcinoma surveillance**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "AFP assists but never replaces ultrasound surveillance; normal AFP never clears a cirrhotic liver.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tool",
+          "Role in HCC",
+          "Limit"
+        ],
+        "rows": [
+          [
+            "Six monthly ultrasound",
+            "Surveillance backbone in cirrhosis",
+            "Operator and obesity dependent"
+          ],
+          [
+            "AFP",
+            "Adjunct, prognosis, recurrence",
+            "Misses small tumours, false rises"
+          ],
+          [
+            "CT or MRI LI-RADS",
+            "Noninvasive diagnosis in cirrhosis",
+            "Needs cirrhotic context"
+          ],
+          [
+            "Biopsy",
+            "Non cirrhotic or atypical lesions",
+            "Bleeding and seeding considerations"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "HCC staging weaves tumour burden, liver function, and performance into Barcelona Clinic decisions from resection and ablation through chemoembolisation to systemic immunotherapy combinations. That weave is **Barcelona Clinic Liver Cancer (BCLC) staging**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Tumour, liver, patient: BCLC stages all three before any HCC therapy is chosen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "HCC diagnosed by imaging criteria"
+          },
+          {
+            "id": "b",
+            "label": "Liver function and performance graded"
+          },
+          {
+            "id": "c",
+            "label": "BCLC stage assigns therapy family"
+          },
+          {
+            "id": "d",
+            "label": "Transplant criteria assessed in parallel"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatitis B vaccination, antiviral suppression, hepatitis C cure, alcohol and metabolic control prevent HCC upstream while surveillance catches it curable downstream, a two front war. That prevention hierarchy is **hepatocellular carcinoma prevention and surveillance**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Vaccinate, suppress, cure, and surveil: HCC is prevented years before it is treated.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prevent upstream",
+          "points": [
+            "HBV vaccination and antivirals",
+            "HCV direct acting cure",
+            "Alcohol and metabolic control"
+          ]
+        },
+        "right": {
+          "title": "Catch downstream",
+          "points": [
+            "Six monthly cirrhosis surveillance",
+            "Early ablation or resection",
+            "Transplant within criteria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fibrolamellar carcinoma strikes young non cirrhotic livers with large scarred masses and normal AFP, DNAJB1-PRKACA fusion defining it, surgery offering its best hope. The youth variant is **fibrolamellar hepatocellular carcinoma**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "A scarred liver mass in a teenager without cirrhosis suggests fibrolamellar carcinoma; AFP stays silent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Conventional HCC",
+          "Fibrolamellar"
+        ],
+        "rows": [
+          [
+            "Liver soil",
+            "Cirrhosis usual",
+            "Normal liver"
+          ],
+          [
+            "Age accent",
+            "Older, risk factor laden",
+            "Adolescents and young adults"
+          ],
+          [
+            "AFP",
+            "Often raised",
+            "Usually normal"
+          ],
+          [
+            "Defining test",
+            "Imaging in cirrhosis",
+            "DNAJB1-PRKACA fusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Liver lesion in non cirrhotic liver widens differential to metastases, adenoma, FNH, haemangioma, and abscess, metastasis commonest malignancy overall, imaging tempo and primary hunt guiding biopsy. That differential discipline is **focal liver lesion triage by background liver**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Cirrhotic or clean liver changes every lesion's odds; metastases outnumber primaries in clean livers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Focal liver lesion detected"
+          },
+          {
+            "id": "b",
+            "label": "Background liver and history assessed"
+          },
+          {
+            "id": "c",
+            "label": "Contrast imaging characterises pattern"
+          },
+          {
+            "id": "d",
+            "label": "Biopsy only when imaging leaves doubt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

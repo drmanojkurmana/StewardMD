@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-intestine",
+  "subject": "pathology",
+  "title": "Crohn Disease: Skip Lesions and Transmural Granulomas versus Ulcerative Colitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Crohn disease inflames any gut segment from mouth to anus in discontinuous patches, transmurally through the wall into strictures, fistulas, and abscesses, favouring terminal ileum and sparing or involving rectum unpredictably. Discontinuity defines it: **Crohn disease with skip lesions**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Mouth to anus, patchy and transmural: Crohn disease skips, strictures, and fistulises where ulcerative colitis cannot.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+        "alt": "Crohn versus ulcerative colitis comparison",
+        "caption": "Crohn disease versus ulcerative colitis across distribution, depth, and complications."
+      }
+    },
+    {
+      "tx": "Skip lesions leave normal bowel between inflamed segments, a cobblestone mucosa of ulcers between oedematous islands, separated from ulcerative colitis's continuous march upward from rectum. That intervening normality is the **skip lesion pattern of Crohn disease**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Normal bowel between ulcers means skips; ulcerative colitis never leaves healthy gaps from the rectum up.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Crohn pattern",
+          "points": [
+            "Skip areas, any gut segment",
+            "Transmural, strictures and fistulas",
+            "Perianal disease common"
+          ]
+        },
+        "right": {
+          "title": "Ulcerative colitis pattern",
+          "points": [
+            "Continuous from rectum proximally",
+            "Mucosal only, no strictures usual",
+            "Backwash ileitis only exception"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Transmural inflammation explains Crohn complications endoscopically invisible: fissuring ulcers knife into wall, lymphoid aggregates line serosa, fat wraps around bowel, and granulomas form in a minority. Depth creates fistulas: **transmural granulomatous inflammation of Crohn disease**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Crohn disease cuts through the whole wall; that depth is why it fistulises, strictures, and abscesses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Crohn disease",
+          "Ulcerative colitis"
+        ],
+        "rows": [
+          [
+            "Depth",
+            "Transmural",
+            "Mucosa and submucosa"
+          ],
+          [
+            "Granulomas",
+            "Noncaseating in minority",
+            "Absent"
+          ],
+          [
+            "Strictures and fistulas",
+            "Characteristic",
+            "Unusual, think cancer or Crohn"
+          ],
+          [
+            "Toxic megacolon",
+            "Possible",
+            "Classic feared complication"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Noncaseating granulomas support Crohn disease when found away from ruptured crypts, yet their absence never excludes it, and intestinal tuberculosis remains the great granulomatous mimic in endemic regions. Exclusion discipline is **granuloma interpretation in intestinal biopsies**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Granulomas help Crohn disease only after tuberculosis is excluded; absence of granulomas excludes nothing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Crohn granulomas",
+          "points": [
+            "Noncaseating, sparse",
+            "Away from crypt rupture sites",
+            "TB excluded microbiologically"
+          ]
+        },
+        "right": {
+          "title": "Tuberculosis granulomas",
+          "points": [
+            "Caseating, confluent, larger",
+            "AFB and culture sought",
+            "Endemic exposure context"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Perianal fistulas, abscesses, skin tags, and fissures may precede luminal Crohn symptoms by years, so recurrent perianal sepsis in young patients earns ileocolonoscopy and pelvic MRI. That herald is **perianal fistulising Crohn disease presentation**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Recurrent perianal abscesses in a young adult are Crohn disease knocking; scope and image the pelvis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perianal sepsis or fistula recurs"
+          },
+          {
+            "id": "b",
+            "label": "Ileocolonoscopy with biopsies"
+          },
+          {
+            "id": "c",
+            "label": "Pelvic MRI maps fistula anatomy"
+          },
+          {
+            "id": "d",
+            "label": "Combined surgical and biologic therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Smoking doubles Crohn relapse, surgery, and fistula risk while protecting ulcerative colitis paradoxically, making cessation counselling a Crohn therapy equal to drugs. That divergence is **smoking effects in Crohn disease versus ulcerative colitis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Smoking poisons Crohn disease and oddly protects ulcerative colitis; cessation is Crohn treatment itself.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Outcome",
+          "Smoking in Crohn",
+          "Smoking in UC"
+        ],
+        "rows": [
+          [
+            "Flare and surgery risk",
+            "Doubled roughly",
+            "Lower relapse observed"
+          ],
+          [
+            "Cessation effect",
+            "Course improves",
+            "Flares may follow quitting"
+          ],
+          [
+            "Counselling",
+            "Absolute cessation therapy",
+            "Never advise smoking, explain nuance"
+          ],
+          [
+            "Biologic era relevance",
+            "Still worsens outcomes",
+            "Still harms every other organ"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapy escalates from steroids for flares, never maintenance, through immunomodulators to anti-TNF, vedolizumab, ustekinumab, and newer biologics, surgery reserved for strictures, fistulas, and refractory segments. Early effective control embodies **treat to target in Crohn disease**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Steroids rescue Crohn flares but maintain nothing; heal mucosa with steroid free targeted therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-polyps-and-carcinoma-fig1.webp",
+        "alt": "Colorectal polyps and carcinoma patterns",
+        "caption": "Colorectal mucosal patterns separating inflammatory disease from polyp cancer pathways."
+      }
+    },
+    {
+      "tx": "Growth failure and pubertal delay may be childhood Crohn's only announcements beside perianal disease, with iron, B12 from ileal disease, and bone health demanding surveillance. Paediatric vigilance is **growth failure as Crohn disease presentation**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "A child falling off growth centiles with perianal tags needs Crohn exclusion before endocrine blame.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Growth, puberty, perianal review"
+          },
+          {
+            "id": "b",
+            "label": "Faecal calprotectin screens inflammation"
+          },
+          {
+            "id": "c",
+            "label": "Endoscopy and small bowel imaging"
+          },
+          {
+            "id": "d",
+            "label": "Nutrition and therapy restore growth window"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

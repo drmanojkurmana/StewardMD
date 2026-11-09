@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-hepatitis-cirrhosis",
+  "subject": "pathology",
+  "title": "Regenerative Nodules, Portal Hypertension, Encephalopathy, Hepatorenal and Budd-Chiari Syndromes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Regenerative nodules are hepatocyte islands proliferating within fibrous septa, their disorganised plates and distorted vessels defining cirrhosis microscopically beside clinical portal hypertension. That nodular regeneration is the **regenerative nodule of cirrhosis**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Fibrous rings around regenerative nodules are cirrhosis under the microscope; architecture, not enzymes, names it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Compensated cirrhosis",
+          "points": [
+            "No ascites, bleed, or encephalopathy",
+            "Varices may silently exist",
+            "HCC surveillance six monthly"
+          ]
+        },
+        "right": {
+          "title": "Decompensated cirrhosis",
+          "points": [
+            "Ascites, bleeding, encephalopathy, jaundice",
+            "Transplant assessment opens",
+            "Infection vigilance constant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Portal hypertension from increased intrahepatic resistance and splanchnic inflow opens collaterals at oesophagus, umbilicus, rectum, and retroperitoneum while spleen enlarges and ascites forms. That pressure physiology is **portal hypertension and portosystemic collaterals**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Varices, caput, splenomegaly, ascites: portal hypertension writes the same four signatures everywhere.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/decomp-cirrhosis-fig2.webp",
+        "alt": "Portal hypertension portosystemic collaterals",
+        "caption": "Portal hypertension collaterals across varices, spleen, and abdominal wall."
+      }
+    },
+    {
+      "tx": "Hepatic encephalopathy clouds mentation from ammonia and inflammatory mediators bypassing or overwhelming failing hepatocytes, graded from subtle psychometric change through asterixis to coma, precipitants hunted first. That brain liver loop is **hepatic encephalopathy precipitant management**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Encephalopathy means hunt infection, bleeding, constipation, and sedatives before blaming ammonia alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatic-enceph-fig1.webp",
+        "alt": "Hepatic encephalopathy pathophysiology",
+        "caption": "Hepatic encephalopathy pathophysiology from ammonia to cerebral dysfunction."
+      }
+    },
+    {
+      "tx": "Hepatorenal syndrome constricts renal vessels functionally in advanced cirrhosis after albumin and vasoconstrictor exclusion of structural causes, kidneys histologically innocent yet failing by haemodynamics. That functional failure is **hepatorenal syndrome, acute kidney injury phenotype**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Normal kidneys failing in cirrhosis by vasoconstriction: hepatorenal syndrome after albumin challenge excludes others.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatorenal-syndrome-fig1.webp",
+        "alt": "Hepatorenal syndrome pathophysiology",
+        "caption": "Hepatorenal syndrome pathophysiology of splanchnic vasodilation and renal vasoconstriction."
+      }
+    },
+    {
+      "tx": "Budd-Chiari syndrome thromboses hepatic veins or vena cava from myeloproliferative and thrombophilic states, congesting liver into painful hepatomegaly, ascites, and caudate hypertrophy sparing its direct drainage. That outflow block is **Budd-Chiari syndrome, hepatic venous outflow obstruction**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Painful big liver, ascites, spared hypertrophied caudate: Budd-Chiari until hepatic veins are proven open.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Vascular lesion",
+          "Signature"
+        ],
+        "rows": [
+          [
+            "Budd-Chiari",
+            "Hepatic vein or IVC thrombosis",
+            "Caudate hypertrophy, ascites"
+          ],
+          [
+            "Sinusoidal obstruction",
+            "Central venule injury, transplant drugs",
+            "Painful hepatomegaly, weight gain"
+          ],
+          [
+            "Portal vein thrombosis",
+            "Portal inflow block",
+            "Varices without cirrhosis necessarily"
+          ],
+          [
+            "Passive congestion",
+            "Right heart failure transmission",
+            "Nutmeg liver chronically"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Drug induced liver injury mimics every pattern in this lesson, hepatocellular, cholestatic, mixed, steatotic, or vanishing bile ducts, so medication and supplement excavation belongs in every liver workup. That excavation is **drug-induced liver injury (DILI) history discipline**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Herbals and supplements hide in liver histories; excavate them in every unexplained enzyme pattern.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hepatocellular DILI",
+          "points": [
+            "ALT dominant, jaundice ominous",
+            "Hy law prognostic warning",
+            "Stop drug, monitor INR"
+          ]
+        },
+        "right": {
+          "title": "Cholestatic DILI",
+          "points": [
+            "ALP and itch dominant",
+            "Slower resolution months",
+            "Exclude obstruction by imaging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Variceal bleeding management sequences resuscitation, vasoactive drugs, antibiotics, endoscopic banding, and rescue balloon or shunt strategies, transfusion restrained to avoid pressure rebound. That sequence is **acute variceal haemorrhage protocol**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Restrict transfusion, start vasoactives and antibiotics, band early: variceal bleeding protocol in one line.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Resuscitate protectively, large bore access"
+          },
+          {
+            "id": "b",
+            "label": "Vasoactive drug and antibiotics started"
+          },
+          {
+            "id": "c",
+            "label": "Endoscopy with band ligation"
+          },
+          {
+            "id": "d",
+            "label": "Rescue shunt pathways if uncontrolled"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Transplant assessment integrates MELD scoring, frailty, cardiopulmonary fitness, addiction sustained recovery, and hepatocellular carcinoma criteria, while palliative care parallels those not listed. That dual planning is **liver transplant assessment and parallel palliative care**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Assess for transplant and palliate in parallel; hope and honesty share the same clinic visit.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain",
+          "Assessment",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "Severity",
+            "MELD, decompensation history",
+            "Listing priority logic"
+          ],
+          [
+            "Fitness",
+            "Heart, lung, frailty, nutrition",
+            "Operative survivability"
+          ],
+          [
+            "Psychosocial",
+            "Addiction recovery, support network",
+            "Graft stewardship"
+          ],
+          [
+            "Oncology",
+            "HCC within criteria imaging",
+            "Transplant oncology eligibility"
+          ]
+        ]
+      }
+    }
+  ]
+}

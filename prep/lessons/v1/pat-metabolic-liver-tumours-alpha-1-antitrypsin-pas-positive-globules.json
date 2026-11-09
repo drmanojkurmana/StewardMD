@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Alpha-1 Globules, Primary Biliary and Sclerosing Cholangitis, and Hepatic Adenoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Alpha-1 antitrypsin Z protein polymerises inside hepatocyte endoplasmic reticulum as PAS positive diastase resistant globules, injuring liver by retention while lungs suffer from circulating deficiency. Those globules diagnose **hepatic alpha-1 antitrypsin accumulation (PiZZ liver disease)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "PAS positive globules that resist diastase are trapped alpha-1 protein injuring the liver that made it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-phase-proteins-and-serum-electrophoresis-fig1.webp",
+        "alt": "Serum electrophoresis patterns",
+        "caption": "Electrophoresis patterns where alpha-1 deficiency first betrays itself."
+      }
+    },
+    {
+      "tx": "Primary biliary cholangitis autoimmune destroys small intrahepatic ducts in middle aged women with antimitochondrial antibodies, itching, fatigue, and cholestatic enzymes progressing toward biliary cirrhosis. The small duct disease is **primary biliary cholangitis (PBC)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Itching, cholestasis, and antimitochondrial antibodies in a middle aged woman mean primary biliary cholangitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/primary-biliary-cholangitis-fig1.webp",
+        "alt": "Primary biliary cholangitis progressive pathology",
+        "caption": "Primary biliary cholangitis with small duct loss and cholestatic progression."
+      }
+    },
+    {
+      "tx": "Ursodeoxycholic acid improves transplant free survival in PBC when alkaline phosphatase responds, second line obeticholic acid and fibrates serving incomplete responders by biochemical criteria. Response grading is **UDCA response assessment in primary biliary cholangitis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Judge UDCA by alkaline phosphatase response at a year; incomplete responders earn second line therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PBC pattern",
+          "points": [
+            "Small ducts, AMA positive",
+            "Women predominantly",
+            "Florid duct lesions histologically"
+          ]
+        },
+        "right": {
+          "title": "PSC pattern",
+          "points": [
+            "Large ducts, onion skin fibrosis",
+            "Ulcerative colitis association",
+            "Beaded cholangiogram"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Primary sclerosing cholangitis scars intra and extrahepatic ducts into beaded strictures, strongly married to ulcerative colitis, risking cholangiocarcinoma and colorectal cancer surveillance duties. The beaded duct disease is **primary sclerosing cholangitis (PSC)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Beaded ducts plus ulcerative colitis equal primary sclerosing cholangitis; cancers shadow both organs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/primary-sclerosing-cholangitis-fig1.webp",
+        "alt": "Primary sclerosing cholangitis features",
+        "caption": "Primary sclerosing cholangitis with beaded bile duct strictures."
+      }
+    },
+    {
+      "tx": "Dominant PSC strictures dilate endoscopically while new strictures earn brushings and imaging against cholangiocarcinoma, whose early detection remains PSC care's hardest problem. That vigilance is **cholangiocarcinoma surveillance in primary sclerosing cholangitis**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "A new dominant stricture in PSC is cholangiocarcinoma until brushings, imaging, and time acquit it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cholestatic disease",
+          "Duct target",
+          "Antibody or association"
+        ],
+        "rows": [
+          [
+            "Primary biliary cholangitis",
+            "Small intrahepatic ducts",
+            "Antimitochondrial antibody"
+          ],
+          [
+            "Primary sclerosing cholangitis",
+            "Large and small ducts",
+            "Ulcerative colitis, pANCA variable"
+          ],
+          [
+            "IgG4 sclerosing cholangitis",
+            "Ducts plus pancreas",
+            "Steroid responsive, IgG4 raised"
+          ],
+          [
+            "Secondary sclerosing",
+            "Stones, ischaemia, infection",
+            "Cause identifiable"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatic adenoma, benign hepatocyte neoplasm of young women on oestrogen, bleeds or rarely transforms by subtype, HNF1 alpha and beta catenin patterns guiding resection thresholds. Subtype rules management: **hepatic adenoma subtyping and resection thresholds**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Stop oestrogen, subtype the adenoma, resect by size sex and beta catenin; hepatic adenomas obey rules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Observe",
+          "points": [
+            "Small, regressing after oestrogen stop",
+            "Female, no beta catenin activation",
+            "Imaging surveillance"
+          ]
+        },
+        "right": {
+          "title": "Resect",
+          "points": [
+            "Over 5 cm or growing",
+            "Male patients generally",
+            "Beta catenin activated subtype"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Adenoma rupture haemorrhages into liver or peritoneum in pregnancy and large subcapsular lesions, embolisation stabilising before staged resection decisions. That emergency is **ruptured hepatic adenoma management**. Remembering it prevents the commonest errors made with this presentation entirely. Pathologists weigh this pattern beside clinical history because neither alone separates the causes reliably.",
+      "say": "A young woman collapsing with liver haemorrhage may be bleeding from an adenoma; embolise first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute abdomen, liver lesion bleeding"
+          },
+          {
+            "id": "b",
+            "label": "Resuscitation and CT angiography"
+          },
+          {
+            "id": "c",
+            "label": "Embolisation stabilises haemorrhage"
+          },
+          {
+            "id": "d",
+            "label": "Staged resection and oestrogen stopped"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cholestatic pattern synthesis closes the lesson: duct size, antibodies, bowel associations, drug history, and imaging separate PBC, PSC, IgG4 disease, obstruction, and DILI before biopsy. That synthesis is **cholestatic liver pattern workup**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Small duct, large duct, drug, or stone: cholestasis sorts by duct geography before biopsy speaks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cholestatic enzymes confirmed"
+          },
+          {
+            "id": "b",
+            "label": "Ultrasound excludes obstruction"
+          },
+          {
+            "id": "c",
+            "label": "AMA, IgG4, bowel and drug review"
+          },
+          {
+            "id": "d",
+            "label": "MRCP and biopsy by remaining doubt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

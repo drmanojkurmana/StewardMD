@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-colorectal-tumours",
+  "subject": "pathology",
+  "title": "Colorectal Polyps, Adenoma-Carcinoma Sequence, FAP, Lynch, CEA, and Dukes Staging",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hyperplastic polyps, small pale serrated rectosigmoid lesions without dysplasia, are innocuous, while sessile serrated lesions with dysplasia potential demand complete excision and surveillance distinction. Serrated sorting matters: **hyperplastic polyp versus sessile serrated lesion**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Tiny rectal hyperplastic polyps reassure; proximal sessile serrated lesions earn respect and surveillance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyperplastic polyp",
+          "points": [
+            "Small, distal, pale",
+            "No dysplasia",
+            "No added surveillance usually"
+          ]
+        },
+        "right": {
+          "title": "Sessile serrated lesion",
+          "points": [
+            "Proximal, flat, mucus cap",
+            "Braf and methylation pathway",
+            "Surveillance colonoscopy scheduled"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tubular adenomas grow on stalks with low grade dysplasia common, villous adenomas spread sessile carpets secreting mucus and potassium, malignant risk climbing with size, villous share, and high grade dysplasia. That risk ladder is **adenoma malignant potential by size, villousness, grade**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Big, villous, high grade: those three adjectives move an adenoma toward cancer fastest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-polyps-and-carcinoma-fig1.webp",
+        "alt": "Colorectal polyps and carcinoma with familial adenomatous polyposis",
+        "caption": "Colorectal polyps and carcinoma including familial adenomatous polyposis patterns."
+      }
+    },
+    {
+      "tx": "Juvenile polyps hamartomatously bleed in children usually solitarily and benignly, while Peutz-Jeghers polyps with mucocutaneous pigmentation carry wider cancer risks needing kindred surveillance. Pigment plus polyps names **Peutz-Jeghers syndrome surveillance**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Lips pigmented plus hamartomatous polyps mean Peutz-Jeghers; cancers beyond bowel join its surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Polyp",
+          "Nature",
+          "Malignancy meaning"
+        ],
+        "rows": [
+          [
+            "Hyperplastic",
+            "Serrated, no dysplasia",
+            "Innocuous distally"
+          ],
+          [
+            "Tubular adenoma",
+            "Neoplastic, dysplastic",
+            "Risk by size and grade"
+          ],
+          [
+            "Juvenile polyp",
+            "Hamartomatous",
+            "Solitary benign, syndrome if many"
+          ],
+          [
+            "Peutz-Jeghers polyp",
+            "Hamartomatous, arborizing muscle",
+            "Syndrome cancer surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Familial adenomatous polyposis carpets colon with hundreds of adenomas from adolescence after germline APC loss, cancer inevitable without colectomy, Gardner variant adding desmoids, osteomas, and epidermoid cysts. The carpet syndrome is **familial adenomatous polyposis and Gardner syndrome**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Hundreds of adenomas in a teenager mean APC disease; colectomy timing, not polyp watching, prevents cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+        "alt": "Familial adenomatous polyposis clinical and pathological features",
+        "caption": "Familial adenomatous polyposis with hundreds of colonic adenomas."
+      }
+    },
+    {
+      "tx": "Lynch syndrome accelerates adenomas to cancer through mismatch repair failure without polyposis, at younger ages and right sided sites, with endometrial cancer shadowing colorectal risk in families. The fast track is **Lynch syndrome accelerated carcinogenesis**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Lynch cancers arrive young, right sided, and few in polyp number because repair failure accelerates each adenoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FAP pathway",
+          "points": [
+            "Hundreds of adenomas",
+            "APC germline, colectomy prevents",
+            "Desmoid and duodenal vigilance"
+          ]
+        },
+        "right": {
+          "title": "Lynch pathway",
+          "points": [
+            "Few adenomas, fast progression",
+            "Mismatch repair germline",
+            "Short interval colonoscopy, aspirin debated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The adenoma carcinoma sequence steps APC loss, KRAS activation, chromosome 18 losses, and TP53 loss over years, the molecular staircase screening colonoscopy interrupts by polypectomy. That staircase remains the **Vogelstein adenoma-carcinoma sequence**. That is why this detail earns its place in every examination and ward round.",
+      "say": "APC, KRAS, 18q, TP53: the staircase every screening polypectomy interrupts mid climb.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "APC loss initiates adenoma"
+          },
+          {
+            "id": "b",
+            "label": "KRAS grows adenoma size"
+          },
+          {
+            "id": "c",
+            "label": "18q losses advance dysplasia"
+          },
+          {
+            "id": "d",
+            "label": "TP53 loss completes carcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Colorectal adenocarcinoma spreads by direct invasion, lymphatics, portal blood to liver, and peritoneal seeding, presenting by site: right sided anaemia, left sided obstruction, rectal bleeding and tenesmus. Site symptomatology is **colorectal cancer presentation by segment**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Right side bleeds silently into anaemia, left side obstructs, rectum bleeds visibly with tenesmus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Presentation accent",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Right colon",
+            "Iron deficiency, mass, weight loss",
+            "Liquid stool hides bleeding"
+          ],
+          [
+            "Left colon",
+            "Obstruction, altered habit",
+            "Narrower lumen declares earlier"
+          ],
+          [
+            "Rectum",
+            "Visible bleeding, tenesmus",
+            "Digital and endoscopic access"
+          ],
+          [
+            "Any site emergency",
+            "Perforation, obstruction",
+            "Surgery before oncology sequencing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "CEA monitors colorectal cancer recurrence and therapy rather than screening, while Dukes staging's wall depth and node logic survives inside modern TNM teaching for prognosis conversations. Those veterans are **CEA monitoring and Dukes staging legacy in colorectal cancer**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "CEA watches known cancer, never screens for it; Dukes ABCD still teaches wall and node logic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dukes logic",
+          "points": [
+            "A wall confined",
+            "B through wall, nodes clear",
+            "C nodes involved, D distant"
+          ]
+        },
+        "right": {
+          "title": "Modern practice",
+          "points": [
+            "TNM staging formally used",
+            "MSI and RAS biology guide therapy",
+            "CEA trends trigger imaging"
+          ]
+        }
+      }
+    }
+  ]
+}

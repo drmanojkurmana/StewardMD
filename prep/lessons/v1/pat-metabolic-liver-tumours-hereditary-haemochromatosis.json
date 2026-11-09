@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Hereditary Haemochromatosis, HFE, Wilson Disease, and Kayser-Fleischer Rings",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hereditary haemochromatosis lets hepcidin deficiency absorb dietary iron without brakes for decades into liver, pancreas, heart, joints, and skin until cirrhosis, diabetes, and bronze pigmentation assemble. The iron loading disease is **hereditary haemochromatosis of HFE mutation**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Bronze skin, diabetes, arthropathy, and a failing liver in middle age mean iron until ferritin clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-anemia-fig2.webp",
+        "alt": "Systemic iron homeostasis and transport",
+        "caption": "Iron homeostasis whose hepcidin failure loads organs in haemochromatosis."
+      }
+    },
+    {
+      "tx": "HFE mutations, C282Y homozygous chiefly, disable hepcidin signalling so transferrin saturation rises years before ferritin, making saturation the earliest screening signal in families. That early marker is **transferrin saturation in haemochromatosis screening**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Saturation rises first in haemochromatosis; ferritin follows the damage it took years to declare.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Screen positive pattern",
+          "points": [
+            "Transferrin saturation raised",
+            "Ferritin raised with loading",
+            "HFE genotype confirms common type"
+          ]
+        },
+        "right": {
+          "title": "Secondary iron overload",
+          "points": [
+            "Transfusion burden history",
+            "Ferroportin and other genes differ",
+            "Liver iron imaging quantifies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Venesection removes iron pint by pint, normalising life expectancy when started before cirrhosis and diabetes fix their damage, family cascade screening protecting siblings silently loading. That bloodletting therapy is **venesection in hereditary haemochromatosis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Weekly venesection until ferritin falls, then maintenance for life; screen every sibling alongside.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Saturation and ferritin raised"
+          },
+          {
+            "id": "b",
+            "label": "HFE testing and liver staging"
+          },
+          {
+            "id": "c",
+            "label": "Weekly venesection to target ferritin"
+          },
+          {
+            "id": "d",
+            "label": "Maintenance, family cascade screening"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Wilson disease traps copper through ATP7B failure into liver, basal ganglia, and cornea, presenting hepatic or neuropsychiatric in youth with haemolysis during crises. The copper disease is **Wilson disease of ATP7B mutation**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Young liver disease plus tremor or psychiatry means Wilson disease; copper poisons liver and brain together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatitis-cirrhosis-and-liver-failure-fig1.webp",
+        "alt": "Cirrhosis and liver failure patterns",
+        "caption": "Cirrhosis patterns including metabolic copper and iron liver disease."
+      }
+    },
+    {
+      "tx": "Kayser-Fleischer rings deposit copper in Descemet membrane as golden brown corneal rims visible on slit lamp, present in most neuropsychiatric Wilson disease yet often absent in purely hepatic youth. The corneal sign is the **Kayser-Fleischer ring of Wilson disease**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Slit lamp finds Kayser-Fleischer rings; absence never acquits Wilson disease in a cirrhotic teenager.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Wilson pattern",
+          "Caveat"
+        ],
+        "rows": [
+          [
+            "Ceruloplasmin",
+            "Low usually",
+            "Acute phase may normalise"
+          ],
+          [
+            "Urinary copper",
+            "Raised 24 hour excretion",
+            "Collection quality matters"
+          ],
+          [
+            "Kayser-Fleischer rings",
+            "Present neurologic mostly",
+            "Slit lamp required"
+          ],
+          [
+            "Liver copper",
+            "Markedly raised dry weight",
+            "Cholestasis also raises copper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Penicillamine or trientine chelation and zinc blocking absorption decopper Wilson patients, dietary restriction assisting early, transplantation rescuing fulminant presentations with haemolysis. Lifelong decoppering is **Wilson disease chelation and zinc therapy**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Chelate or block copper for life in Wilson disease; stopping therapy invites fulminant relapse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemochromatosis",
+          "points": [
+            "Iron, HFE, hepcidin failure",
+            "Venesection therapy",
+            "Heart, pancreas, joints loaded"
+          ]
+        },
+        "right": {
+          "title": "Wilson disease",
+          "points": [
+            "Copper, ATP7B failure",
+            "Chelation and zinc therapy",
+            "Brain and cornea signed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Low ceruloplasmin misleads in malnutrition, protein loss, and carriers, while high ferritin misleads in inflammation, so metabolic liver diagnoses demand pattern synthesis over single values. That synthesis is **metabolic liver test pattern discipline**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Ceruloplasmin and ferritin both lie under pressure; metabolic diagnoses are patterns, not numbers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Young cirrhosis or unexplained enzymes"
+          },
+          {
+            "id": "b",
+            "label": "Iron and copper patterns screened"
+          },
+          {
+            "id": "c",
+            "label": "Genetics and slit lamp refine"
+          },
+          {
+            "id": "d",
+            "label": "Family cascade screening follows"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Both diseases reward family screening because asymptomatic siblings share genotypes decades before organs declare damage, converting tragedies into venesection or chelation schedules. That prevention is **cascade screening in metabolic liver disease**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Every haemochromatosis or Wilson diagnosis is a family diagnosis; screen siblings before their organs speak.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "First family test",
+          "Prevention offered"
+        ],
+        "rows": [
+          [
+            "Haemochromatosis",
+            "Saturation, ferritin, HFE",
+            "Venesection before damage"
+          ],
+          [
+            "Wilson disease",
+            "Copper studies, ATP7B",
+            "Chelation or zinc early"
+          ],
+          [
+            "Alpha-1 deficiency",
+            "Level and Pi type",
+            "Smoking avoidance absolute"
+          ],
+          [
+            "All three",
+            "Genetic counselling",
+            "Reproductive information"
+          ]
+        ]
+      }
+    }
+  ]
+}
