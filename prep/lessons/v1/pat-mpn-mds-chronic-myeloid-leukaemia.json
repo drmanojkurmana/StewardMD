@@ -1,199 +1,265 @@
 {
   "v": 1,
-  "module": "pat-mpn-mds",
-  "subject": "pathology",
-  "title": "Chronic Myeloid Leukaemia, Polycythaemia Vera, Essential Thrombocythaemia, and Myelofibrosis",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-mpn-mds",
+  "key": null,
+  "title": "Chronic Myeloid Leukaemia, Polycythaemia Vera, Essential Thrombocythaemia, and Myelofibrosis",
   "steps": [
     {
-      "tx": "Chronic myeloid leukaemia expands the whole myeloid series from blasts under five percent to mature neutrophils, with basophilia, eosinophilia, splenomegaly, and the BCR-ABL fusion driving growth independent of normal controls. The t(9;22) disease is **chronic myeloid leukaemia (CML)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "CML shows the full myeloid spectrum with basophilia and a big spleen, all driven by BCR-ABL.",
+      "tx": "Chronic myeloid leukaemia is a clonal myeloproliferative neoplasm originating in pluripotent haematopoietic stem cells, driven by the reciprocal translocation t(9;22)(q34.1;q11.2). This chromosomal rearrangement produces the Philadelphia chromosome, fusing the breakpoint cluster region gene to ABL1. The resulting p210 oncoprotein encodes a constitutively active **BCR-ABL1 tyrosine kinase** that drives massive proliferation of the granulocytic series. Peripheral blood displays marked leukocytosis, a low leukocyte alkaline phosphatase score, and a full spectrum of maturing myeloid precursors.",
+      "say": "Chronic myeloid leukaemia is driven by the Philadelphia chromosome, resulting from a translocation between chromosomes nine and twenty-two that generates the constitutively active BCR-ABL1 tyrosine kinase oncoprotein. This enzyme phosphorylates downstream signalling cascades, causing massive granulocyte proliferation. Peripheral smears characteristically demonstrate prominent leukocytosis with a complete maturation spectrum from myeloblasts to mature neutrophils, accompanied by a characteristically low leukocyte alkaline phosphatase score.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
-        "alt": "Chronic myeloid leukaemia pathogenesis",
+        "alt": "Pathogenesis and blood smear findings in BCR-ABL1 positive chronic myeloid leukaemia",
         "caption": "Chronic myeloid leukaemia pathogenesis driven by BCR-ABL tyrosine kinase."
       }
     },
     {
-      "tx": "Tyrosine kinase inhibitors from imatinib onward suppress the BCR-ABL clone to deep molecular remission, converting CML into a near normal lifespan condition monitored by PCR of fusion transcripts on the international scale. Transcript surveillance embodies **BCR-ABL molecular monitoring in CML**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "PCR of BCR-ABL transcripts every three months is the heartbeat of modern CML care.",
+      "tx": "The discovery of selective small-molecule **tyrosine kinase inhibitor therapy** transformed chronic myeloid leukaemia from a fatal disease into a manageable chronic condition. Agents including imatinib, dasatinib, and nilotinib compete with adenosine triphosphate for the kinase domain binding pocket of BCR-ABL1, inhibiting substrate phosphorylation and inducing leukemic cell apoptosis. Quantitative real-time reverse transcriptase polymerase chain reaction monitors treatment response on the International Scale, aiming for a major molecular response defined as BCR-ABL1 transcripts under 0.1 percent.",
+      "say": "Targeted tyrosine kinase inhibitors like imatinib revolutionized chronic myeloid leukaemia management by binding the ATP-binding pocket of the BCR-ABL1 kinase, shutting down aberrant signaling. Patient response is tracked by quantitative reverse transcriptase PCR from peripheral blood. Achieving a major molecular response, defined as a three-log reduction with BCR-ABL1 transcripts below zero point one percent on the International Scale, predicts excellent long-term progression-free survival.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "TKI therapy begins at diagnosis"
+            "id": "t1",
+            "label": "Oral TKI Induction"
           },
           {
-            "id": "b",
-            "label": "Haematological response in weeks"
+            "id": "t2",
+            "label": "3-Month BCR-ABL1 <=10%"
           },
           {
-            "id": "c",
-            "label": "Cytogenetic then molecular milestones"
+            "id": "t3",
+            "label": "6-Month BCR-ABL1 <=1%"
           },
           {
-            "id": "d",
-            "label": "Deep response may allow treatment free trial"
+            "id": "t4",
+            "label": "12-Month MMR <=0.1%"
+          },
+          {
+            "id": "t5",
+            "label": "Treatment-Free Remission"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "t1",
+            "t2",
+            "Early Milestone"
           ],
           [
-            "b",
-            "c"
+            "t2",
+            "t3",
+            "Cytogenetic Response"
           ],
           [
-            "c",
-            "d"
+            "t3",
+            "t4",
+            "Major Molecular Response"
+          ],
+          [
+            "t4",
+            "t5",
+            "Deep Sustained Response"
           ]
         ]
       }
     },
     {
-      "tx": "Without control, CML marches from chronic phase through accelerated phase with rising blasts and resistance to blast crisis resembling acute leukaemia, a progression kinase inhibitors now make uncommon when adherence holds. The terminal transformation is **blast crisis of CML**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Blast crisis is CML's old ending; adherence to kinase inhibitors is what keeps it rare.",
+      "tx": "Natural progression of untreated chronic myeloid leukaemia follows three distinct stages: chronic phase, accelerated phase, and terminal blast crisis. **Blast crisis transformation** mimics acute leukaemia, diagnosed when myeloblasts or lymphoblasts constitute twenty percent or more of peripheral blood leukocytes or bone marrow nucleated cells, or when extramedullary blast proliferation occurs. Seventy percent of blast crises evolve into acute myeloid leukaemia, while thirty percent present as acute lymphoblastic leukaemia, conclusively demonstrating the pluripotent stem cell origin of CML.",
+      "say": "Without effective therapy, chronic myeloid leukaemia advances from its indolent chronic phase through an accelerated phase into blast crisis. Blast crisis is defined by finding twenty percent or more blasts in the blood or marrow, or by developing extramedullary chloromas. Interestingly, seventy percent of blast crises are myeloid while thirty percent are lymphoblastic, confirming that the Philadelphia translocation originates in a primitive pluripotent haematopoietic stem cell.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Chronic phase",
+          "title": "Chronic Phase CML",
           "points": [
-            "Blasts under ten percent",
-            "TKI highly effective",
-            "Near normal lifespan expected"
+            "Blasts constitute <10% of marrow/blood",
+            "Prominent splenomegaly and leukocytosis",
+            "Easily controlled with oral daily TKIs",
+            "Ten-year overall survival exceeds 85%"
           ]
         },
         "right": {
-          "title": "Accelerated and blast phase",
+          "title": "Blast Crisis Phase CML",
           "points": [
-            "Rising blasts, new cytogenetic clones",
-            "Resistance mutations emerge",
-            "Intensive therapy and transplant considered"
+            "Blasts constitute >=20% of cells",
+            "70% myeloid lineage, 30% lymphoid lineage",
+            "Refractory to first-generation kinase inhibitors",
+            "Requires intensive induction and allogeneic transplant"
           ]
         }
       }
     },
     {
-      "tx": "Polycythaemia vera raises red cell mass with panmyelosis, low erythropoietin, itching after warm showers, erythromelalgia, and thrombosis in unusual veins such as hepatic vein causing Budd-Chiari syndrome. Nearly all carry JAK2 mutation; the disease is **polycythaemia vera (PV)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Aquagenic itching, low erythropoietin, and JAK2 mutation spell polycythaemia vera; hunt its clots in odd veins.",
+      "tx": "Polycythaemia vera is a clonal myeloproliferative neoplasm characterized by autonomous overproduction of red blood cells independent of physiological erythropoietin regulation. Patients manifest symptoms of vascular stasis, thrombotic events such as Budd-Chiari hepatic vein thrombosis, and striking **aquagenic pruritus** provoked by warm bathing due to mast cell degranulation. Diagnostic laboratory evaluation reveals elevated haematocrit exceeding forty-nine percent in men or forty-eight percent in women, panmyelosis with leukocytosis and thrombocytosis, and characteristically suppressed serum erythropoietin levels.",
+      "say": "Polycythaemia vera involves autonomous, unregulated erythropoiesis leading to an expanded red blood cell mass. Blood viscosity rises dramatically, predisposing patients to deep venous and arterial thromboses, including Budd-Chiari syndrome. A classic symptom is aquagenic pruritus, where warm water exposure triggers intense itching from basophil and mast cell histamine release. Markedly low serum erythropoietin with high haematocrit confirms autonomous erythropoiesis.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/polycythaemia-vera-fig1.webp",
-        "alt": "Polycythaemia vera JAK2 features",
+        "alt": "Polycythaemia vera diagnostic features and complications",
         "caption": "Polycythaemia vera with JAK2 driven erythrocytosis and thrombotic risk."
       }
     },
     {
-      "tx": "The JAK2 V617F mutation locks the erythropoietin receptor pathway on in almost all polycythaemia vera and about half of essential thrombocythaemia and primary myelofibrosis, uniting these neoplasms molecularly. The shared driver is **JAK2 V617F mutation**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "JAK2 V617F unites polycythaemia vera, half of thrombocythaemia, and half of myelofibrosis under one switch.",
+      "tx": "Over ninety-five percent of patients with polycythaemia vera carry the somatic **JAK2 V617F mutation** located in exon 14 of the Janus kinase 2 gene. This point mutation substitutes valine with phenylalanine at codon 617 within the JH2 pseudokinase regulatory domain, abolishing auto-inhibitory control and conferring constitutive tyrosine kinase activation. Intracellular signaling cascades downstream of the erythropoietin receptor, including STAT5, AKT, and MAPK, remain permanently active, driving red blood cell proliferation even in the complete absence of circulating erythropoietin.",
+      "say": "The somatic JAK2 V617F mutation is present in more than ninety-five percent of polycythaemia vera cases. By replacing valine with phenylalanine at codon six-seventeen in the autoinhibitory pseudokinase domain, this mutation unlocks permanent kinase activity. Downstream STAT5 signaling fires continuously, driving erythroblast proliferation and survival completely independent of erythropoietin binding.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Disease",
-          "JAK2 V617F frequency",
-          "Dominant lineage"
+          "Myeloproliferative Neoplasm",
+          "JAK2 V617F Mutation",
+          "CALR Exon 9 Mutation",
+          "MPL W515 Mutation"
         ],
         "rows": [
           [
-            "Polycythaemia vera",
-            "Over 95 percent",
-            "Red cells"
+            "Polycythaemia Vera",
+            ">95% positive (exon 12 in 3%)",
+            "Never present",
+            "Never present"
           ],
           [
-            "Essential thrombocythaemia",
-            "About half",
-            "Platelets"
+            "Essential Thrombocythaemia",
+            "50% to 60% positive",
+            "25% to 30% positive",
+            "3% to 5% positive"
           ],
           [
-            "Primary myelofibrosis",
-            "About half",
-            "Fibrotic multilineage"
+            "Primary Myelofibrosis",
+            "55% to 65% positive",
+            "25% to 30% positive",
+            "5% to 8% positive"
           ],
           [
-            "CML",
-            "Absent, BCR-ABL instead",
-            "Granulocytes"
+            "Chronic Myeloid Leukaemia",
+            "Absent (BCR-ABL1 positive)",
+            "Absent",
+            "Absent"
           ]
         ]
       }
     },
     {
-      "tx": "Essential thrombocythaemia sustains platelets above four hundred fifty thousand with giant platelets, thrombotic and paradoxical bleeding risks, and exclusion of reactive causes and other neoplasms before diagnosis. The platelet neoplasm is **essential thrombocythaemia (ET)**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Essential thrombocythaemia clots and, at extreme counts, bleeds; exclude reactive thrombocytosis before naming it.",
+      "tx": "Essential thrombocythaemia is defined by sustained clonal proliferation of the megakaryocytic lineage producing persistent peripheral thrombocytosis exceeding 450,000 per microliter. Bone marrow examination demonstrates marked megakaryocytic hyperplasia characterized by **staghorn giant megakaryocytes** displaying hyperlobated, deeply folded nuclei clustered in loose aggregates without accompanying reticulin fibrosis. Patients paradoxically oscillate between microvascular thrombotic occlusions, such as digital gangrene and transient ischaemic attacks, and mucocutaneous bleeding caused by acquired von Willebrand syndrome at platelet counts exceeding one million.",
+      "say": "Essential thrombocythaemia is characterized by sustained platelet counts above four hundred and fifty thousand per microliter. Bone marrow trephine biopsies show clusters of giant, hyperlobated megakaryocytes resembling staghorn antlers, without significant fibrosis. While microvascular thrombosis and erythromelalgia are common, extreme thrombocytosis above one million platelets per microliter paradoxically causes mucocutaneous bleeding due to acquired von Willebrand factor consumption.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/essential-thrombocythemia-fig1.webp",
-        "alt": "Essential thrombocythemia overview",
+        "alt": "Peripheral blood and bone marrow histology in essential thrombocythaemia",
         "caption": "Essential thrombocythaemia overview with sustained thrombocytosis and thrombotic risk."
       }
     },
     {
-      "tx": "Primary myelofibrosis replaces marrow with reticulin fibrosis driven by abnormal megakaryocytes, forcing blood production into spleen and liver with massive splenomegaly, night sweats, and weight loss. Progressive marrow scarring defines **primary myelofibrosis (PMF)**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Myelofibrosis moves blood production into an enlarging spleen while marrow scars shut; constitutional symptoms follow.",
+      "tx": "Primary myelofibrosis is a clonal stem cell neoplasm in which malignant megakaryocytes secrete excess platelet-derived growth factor and transforming growth factor-beta into the marrow stroma. These fibrogenic cytokines stimulate non-clonal reactive fibroblasts to deposit extensive collagen and reticulin meshworks, causing progressive bone marrow obliteration. Displaced haematopoietic stem cells migrate into the spleen and liver, establishing extensive **extramedullary haematopoiesis** that culminates in massive, symptomatic splenomegaly, severe portal hypertension, and debilitating constitutional cachexia.",
+      "say": "In primary myelofibrosis, clonal megakaryocytes release fibrogenic cytokines, principally PDGF and TGF-beta, stimulating polyclonal fibroblasts to deposit dense collagen throughout the marrow space. As marrow space is obliterated, haematopoiesis escapes to extramedullary sanctuaries in the spleen and liver. Patients present with massive splenomegaly, splenic infarction pain, profound fatigue, and constitutional wasting.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Early prefibrotic phase",
+          "title": "Primary Myelofibrosis",
           "points": [
-            "High counts may mimic ET",
-            "Trephine shows early reticulin",
-            "Symptoms often mild"
+            "Severe reactive marrow fibrosis (reticulin grade 3)",
+            "Massive splenomegaly from extramedullary haematopoiesis",
+            "Prominent leucoerythroblastic peripheral blood smear",
+            "Median survival 5 to 7 years without transplant"
           ]
         },
         "right": {
-          "title": "Overt fibrotic phase",
+          "title": "Essential Thrombocythaemia",
           "points": [
-            "Anaemia, leucoerythroblastic film",
-            "Massive splenomegaly",
-            "Transfusion and JAK inhibitor decisions"
+            "Absent or minimal reticulin fibrosis (grade 0-1)",
+            "Mild to moderate splenomegaly",
+            "Normal red cell and white cell morphology",
+            "Near-normal life expectancy with antiplatelet therapy"
           ]
         }
       }
     },
     {
-      "tx": "When aspiration yields nothing because fibrotic marrow will not surrender cells, the dry tap itself becomes evidence, redirecting diagnosis to the trephine with reticulin staining and molecular studies. That empty aspirate is the **dry tap of marrow fibrosis**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "A dry tap is data, not failure: take the trephine, stain reticulin, and send molecular studies.",
+      "tx": "Extensive stromal collagen deposition in primary myelofibrosis obliterates sinusoidal vascular beds, routinely resulting in a **dry tap on bone marrow aspiration**. Establishing the diagnosis necessitates a trephine core biopsy stained with Gomori silver impregnation to evaluate reticulin fibrosis grade. Peripheral blood examination reveals a classic leucoerythroblastic picture characterized by circulating immature myeloid precursors, nucleated red blood cells, and numerous teardrop poikilocytes (dacrocytes) deformed while squeezing across rigid fibrotic splenic sinusoids.",
+      "say": "Dense stromal fibrosis prevents aspirating liquid marrow, resulting in a classic dry tap that mandates a bone marrow trephine core biopsy. Silver reticulin staining highlights extensive intersecting collagen fibers. The peripheral smear shows a classic leucoerythroblastic picture with myelocytes, nucleated red blood cells, and pathognomonic teardrop poikilocytes deformed as they squeeze out of fibrotic marrow and splenic cords.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Aspiration attempted, dry tap"
+            "id": "d1",
+            "label": "Marrow Aspiration"
           },
           {
-            "id": "b",
-            "label": "Trephine shows reticulin fibrosis"
+            "id": "d2",
+            "label": "Dry Tap Obtained"
           },
           {
-            "id": "c",
-            "label": "Film shows teardrops and precursors"
+            "id": "d3",
+            "label": "Trephine Core Biopsy"
           },
           {
-            "id": "d",
-            "label": "JAK2, CALR, MPL studies complete triage"
+            "id": "d4",
+            "label": "Silver Reticulin Stain"
+          },
+          {
+            "id": "d5",
+            "label": "Grade 3 Fibrosis Confirmed"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "d1",
+            "d2",
+            "Aspiration Attempt"
           ],
           [
-            "b",
-            "c"
+            "d2",
+            "d3",
+            "Mandatory Next Step"
           ],
           [
-            "c",
-            "d"
+            "d3",
+            "d4",
+            "Histological Processing"
+          ],
+          [
+            "d4",
+            "d5",
+            "Diagnostic Confirmation"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which molecular abnormality is present in over 95% of patients diagnosed with polycythaemia vera?",
+      "options": [
+        "JAK2 V617F point mutation in exon 14",
+        "BCR-ABL1 reciprocal translocation t(9;22)",
+        "CALR exon 9 insertion or deletion",
+        "PML-RARA reciprocal translocation t(15;17)"
+      ],
+      "correct": 0,
+      "explain": "The somatic JAK2 V617F mutation in the JH2 pseudokinase domain occurs in >95% of polycythaemia vera cases, producing constitutively active kinase signaling."
+    },
+    {
+      "q": "What morphological finding on peripheral blood film is characteristic of primary myelofibrosis?",
+      "options": [
+        "Teardrop poikilocytes (dacrocytes) and leucoerythroblastic smear",
+        "Hypersegmented neutrophils with macro-ovalocytes",
+        "Target cells with Howell-Jolly bodies",
+        "Bite cells with Heinz bodies"
+      ],
+      "correct": 0,
+      "explain": "Primary myelofibrosis produces a leucoerythroblastic blood picture with teardrop poikilocytes (dacrocytes) caused by distorted release through fibrotic marrow and splenic cords."
+    },
+    {
+      "q": "What blast percentage threshold in the blood or bone marrow defines blast crisis in chronic myeloid leukaemia?",
+      "options": [
+        "20% or higher",
+        "10% or higher",
+        "5% or higher",
+        "50% or higher"
+      ],
+      "correct": 0,
+      "explain": "Blast crisis in CML is diagnosed when blasts constitute 20% or more of peripheral blood white cells or bone marrow nucleated cells, or upon finding extramedullary blast proliferation."
     }
   ]
 }

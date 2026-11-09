@@ -1,207 +1,268 @@
 {
   "v": 1,
-  "module": "pat-non-hodgkin-lymphoma",
-  "subject": "pathology",
-  "title": "BCL2, Diffuse Large B-Cell Lymphoma, Burkitt Starry Sky, and Mantle Cell Lymphoma",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-non-hodgkin-lymphoma",
+  "key": null,
+  "title": "BCL2, Diffuse Large B-Cell Lymphoma, Burkitt Starry Sky, and Mantle Cell Lymphoma",
   "steps": [
     {
-      "tx": "BCL2 guards the mitochondrial apoptosis gate by restraining BAX and BAK, so its overexpression lets damaged lymphocytes survive indefinitely, a founding advantage in follicular lymphoma and a drug target for venetoclax in CLL. The survival protein is **BCL2 (B-cell lymphoma 2)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "BCL2 is the mitochondrial doorman refusing apoptosis; venetoclax finally learned how to dismiss him.",
+      "tx": "The proto-oncogene **BCL2 protein** functions as a vital mitochondrial gatekeeper that suppresses programmed cell death. Located on the outer mitochondrial membrane, BCL2 binds and neutralizes pro-apoptotic multidomain effectors BAX and BAK, preventing mitochondrial outer membrane permeabilization and blocking the release of cytochrome c into the cytosol. In follicular lymphoma, the chromosomal translocation t(14;18)(q32;q21) juxtaposes BCL2 with the immunoglobulin heavy-chain locus enhancer, causing constitutive overexpression of BCL2 that renders germinal centre B-cells resistant to physiological apoptosis.",
+      "say": "The BCL2 proto-oncogene encodes a critical mitochondrial membrane protein that blocks apoptosis. By binding and neutralizing pro-apoptotic effectors like BAX and BAK, BCL2 preserves mitochondrial integrity and halts the release of cytochrome c. When the t(14;18) translocation moves BCL2 under the control of the immunoglobulin heavy chain promoter, germinal center B-cells overexpress BCL2 and acquire an unnatural survival advantage, driving follicular lymphoma.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "BCL2 high states",
+          "title": "Anti-Apoptotic BCL2 Family",
           "points": [
-            "Follicular lymphoma t(14;18)",
-            "CLL dependence, venetoclax sensitive",
-            "Double expressor DLBCL adverse"
+            "Includes BCL2, BCL-XL, and MCL1",
+            "Sequesters pro-apoptotic BAX and BAK",
+            "Maintains mitochondrial membrane potential",
+            "Overexpressed in follicular lymphoma"
           ]
         },
         "right": {
-          "title": "BCL2 low or absent",
+          "title": "Pro-Apoptotic Effectors",
           "points": [
-            "Burkitt lymphoma characteristically negative",
-            "Normal germinal centre dark zone",
-            "Helps separate Burkitt from DLBCL"
+            "Includes BAX, BAK, BIM, and PUMA",
+            "Form pore complexes in outer membrane",
+            "Release cytochrome c to activate caspase 9",
+            "Trigger rapid executioner caspase activation"
           ]
         }
       }
     },
     {
-      "tx": "Diffuse large B cell lymphoma, commonest aggressive lymphoma, grows in sheets effacing nodes within weeks, subdivided by cell of origin into germinal centre and activated B cell types with different biology and trials. The aggressive prototype is **diffuse large B-cell lymphoma (DLBCL)**.",
-      "say": "DLBCL is the common aggressive lymphoma: weeks of growth, R-CHOP backbone, cure genuinely possible.",
+      "tx": "Representing thirty to forty percent of adult non-Hodgkin lymphomas, **diffuse large B-cell lymphoma** is the most common aggressive lymphoid malignancy worldwide. Histological sections reveal diffuse sheets of large, atypical neoplastic lymphoid cells that completely efface normal lymph node architecture, displaying vesicular nuclei, prominent nucleoli, and abundant basophilic cytoplasm. Clinically, patients present with rapidly enlarging nodal masses or symptomatic extranodal disease, most frequently involving the stomach, ileocecal region, central nervous system, Waldeyer ring, or bone.",
+      "say": "Diffuse large B-cell lymphoma is the most common non-Hodgkin lymphoma in adults, accounting for more than thirty percent of cases. Microscopic sections show total architectural obliteration by diffuse sheets of large malignant B-cells with vesicular chromatin and prominent nucleoli. Patients present with rapidly enlarging lymph nodes or aggressive extranodal masses in the gastrointestinal tract, brain, or Waldeyer ring, requiring prompt diagnostic biopsy and immediate treatment.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Subtype",
-          "Origin signature",
-          "Behaviour note"
+          "Molecular Subtype",
+          "Cell of Origin Profile",
+          "Hans Algorithm Markers",
+          "Five-Year Overall Survival"
         ],
         "rows": [
           [
-            "GCB DLBCL",
-            "CD10, BCL6 germinal programme",
-            "Relatively favourable"
+            "Germinal Centre B-cell (GCB)",
+            "CD10+, BCL6+, MUM1 negative",
+            "Derived from normal germinal centre",
+            "75% to 80% with R-CHOP"
           ],
           [
-            "ABC DLBCL",
-            "NF-kB driven, plasmablastic",
-            "Adverse, targeted trials"
+            "Activated B-cell (ABC)",
+            "CD10 negative, MUM1 positive",
+            "Post-germinal centre plasmablastic drive",
+            "50% to 55% with standard R-CHOP"
           ],
           [
-            "Double hit lymphoma",
-            "MYC plus BCL2 or BCL6 rearranged",
-            "Intensive regimens considered"
+            "Double-Hit Lymphoma",
+            "MYC plus BCL2 translocations",
+            "High-grade B-cell lymphoma biology",
+            "Poor (<35% with standard R-CHOP)"
           ],
           [
-            "Primary mediastinal",
-            "Thymic B cell, young women",
-            "Mediastinal mass, Hodgkin overlaps"
+            "Primary Mediastinal B-cell",
+            "Thymic B-cell origin; CD30+, MAL+",
+            "Young females with bulky anterior mass",
+            "Over 80% with dose-adjusted DA-EPOCH-R"
           ]
         ]
       }
     },
     {
-      "tx": "R-CHOP immunochemotherapy cures a majority of DLBCL, with PET response, cell of origin, MYC rearrangements, and international prognostic index refining who needs intensification, salvage transplant, or CAR T cell therapy. The backbone regimen is **R-CHOP for DLBCL**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "R-CHOP cures most DLBCL; PET and genetics decide who needs salvage, transplant, or CAR T cells.",
+      "tx": "The therapeutic cornerstone for diffuse large B-cell lymphoma is **R-CHOP immunochemotherapy**, combining the anti-CD20 chimeric monoclonal antibody rituximab with cyclophosphamide, doxorubicin, vincristine, and prednisolone. Rituximab binds surface CD20, triggering complement-dependent cytotoxicity, antibody-dependent cellular cytotoxicity, and direct apoptosis of neoplastic B-cells. Administered every twenty-one days for six cycles, this regimen achieves durable cures in over sixty-five percent of patients. Interim positron emission tomography after three to four cycles assesses early metabolic response and guides potential treatment consolidation.",
+      "say": "Standard frontline therapy for diffuse large B-cell lymphoma is the R-CHOP regimen, which pairs the anti-CD20 monoclonal antibody rituximab with cyclophosphamide, doxorubicin, vincristine, and oral prednisone. Rituximab tags malignant B-cells for destruction by natural killer cells and complement. Administering six cycles of R-CHOP cures roughly two-thirds of patients. Mid-treatment FDG-PET imaging verifies metabolic response and separates responsive tumors from refractory clones.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Biopsy proves DLBCL, genetics sent"
+            "id": "c1",
+            "label": "Excisional Node Biopsy"
           },
           {
-            "id": "b",
-            "label": "PET-CT stage and IPI assigned"
+            "id": "c2",
+            "label": "DLBCL Confirmed (CD20+)"
           },
           {
-            "id": "c",
-            "label": "R-CHOP cycles with response PET"
+            "id": "c3",
+            "label": "Six Cycles R-CHOP"
           },
           {
-            "id": "d",
-            "label": "Salvage, transplant, or CAR T if relapsed"
+            "id": "c4",
+            "label": "End-of-Treatment PET-CT"
+          },
+          {
+            "id": "c5",
+            "label": "Durable Cure >65%"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "c1",
+            "c2",
+            "Immunohistochemistry"
           ],
           [
-            "b",
-            "c"
+            "c2",
+            "c3",
+            "Every 21 Days"
           ],
           [
-            "c",
-            "d"
+            "c3",
+            "c4",
+            "Metabolic Restaging"
+          ],
+          [
+            "c4",
+            "c5",
+            "Complete Remission (Deauville 1-3)"
           ]
         ]
       }
     },
     {
-      "tx": "Burkitt lymphoma doubles faster than any human tumour, Ki67 near one hundred percent, with medium blasts, lipid vacuoles, and macrophages full of apoptotic debris creating the famous starry sky. That tingible body pattern is the **starry sky appearance of Burkitt lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Starry sky means macrophages eating apoptotic Burkitt cells in the fastest growing human tumour.",
+      "tx": "Burkitt lymphoma is an extraordinarily aggressive B-cell neoplasm boasting the fastest doubling time of any human malignancy, with a cellular proliferation fraction (Ki-67 index) approaching one hundred percent. Histopathological examination demonstrates a classic **starry-sky appearance** produced by a monotonous background sea of intermediate-sized, basophilic neoplastic lymphoid cells interspersed with numerous pale, benign tingible-body macrophages. These active histiocytes ingest abundant apoptotic nuclear debris resulting from the astronomical cell turnover and spontaneous programmed cell death inherent to the tumour.",
+      "say": "Burkitt lymphoma has the shortest doubling time of any human cancer, doubling in volume every twenty-four hours with a Ki-67 proliferation index near one hundred percent. Microscopic inspection demonstrates the pathognomonic starry-sky pattern: dark, uniform basophilic lymphoblasts form a deep blue night sky, while scattered pale tingible-body macrophages packed with swallowed apoptotic nuclear debris shine like bright stars across the tissue.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/burkitt-lymphoma-fig1.webp",
-        "alt": "Burkitt lymphoma histology and clinical features",
+        "alt": "Micrograph of Burkitt lymphoma showing starry-sky pattern with tingible body macrophages",
         "caption": "Burkitt lymphoma with starry sky histology and jaw or abdominal presentation."
       }
     },
     {
-      "tx": "The t(8;14) translocation drives MYC from immunoglobulin heavy chain enhancers in Burkitt lymphoma, with variant light chain translocations sharing the biology, while BCL2 negativity helps separate it from diffuse large B cell lymphoma. The defining lesion is **t(8;14) IGH-MYC of Burkitt lymphoma**.",
-      "say": "MYC under immunoglobulin control plus absent BCL2 separates Burkitt from its DLBCL mimics.",
+      "tx": "Pathogenesis in Burkitt lymphoma centers on the reciprocal **translocation t(8;14)(q24;q32)**, identified in eighty-five percent of cases, or variant translocations t(2;8) and t(8;22). These translocations relocate the c-MYC proto-oncogene from chromosome 8 into juxtaposition with the transcriptionally hyperactive immunoglobulin heavy-chain (IGH) locus on chromosome 14, or light-chain loci. Constitutive overexpression of the MYC transcription factor drives relentless cell cycle progression through G1/S, activates aerobic glycolysis, and accelerates cellular growth while rendering cells exquisitely sensitive to metabolic stress.",
+      "say": "Burkitt lymphoma is driven by translocations involving the MYC proto-oncogene on chromosome eight, most commonly the reciprocal translocation t(8;14) involving the immunoglobulin heavy chain locus. Juxtaposition with the powerful immunoglobulin enhancer causes constant, dysregulated overexpression of the MYC transcription factor. MYC forces resting cells through the cell cycle, promotes aerobic glycolysis, and produces relentless, explosive clonal expansion.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Burkitt lymphoma",
+          "title": "Endemic (African) Burkitt",
           "points": [
-            "MYC rearranged, BCL2 negative",
-            "Ki67 near 100 percent",
-            "Short intensive regimens, CNS prophylaxis"
+            "Peaks at 4 to 7 years in equatorial Africa",
+            "Presents with massive jaw and facial bone tumors",
+            "100% associated with latent Epstein-Barr virus",
+            "Cofactor: chronic Plasmodium falciparum malaria"
           ]
         },
         "right": {
-          "title": "DLBCL",
+          "title": "Sporadic (Western) Burkitt",
           "points": [
-            "MYC variable, BCL2 often positive",
-            "Ki67 high but lower",
-            "R-CHOP backbone therapy"
+            "Older children and young adults worldwide",
+            "Presents with massive ileocecal abdominal tumors",
+            "20% to 30% associated with Epstein-Barr virus",
+            "Frequent ascites and intestinal obstruction"
           ]
         }
       }
     },
     {
-      "tx": "Mantle cell lymphoma wears CD5 like CLL but carries t(11;14) cyclin D1 overexpression, spreads to gut as lymphomatous polyposis, and behaves aggressively despite small cell disguise. Its translocation is **t(11;14) CCND1-IGH of mantle cell lymphoma**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "CD5 positive but CD23 negative with cyclin D1 means mantle cell, and it does not behave gently.",
+      "tx": "Mantle cell lymphoma is an incurable, aggressive B-cell non-Hodgkin lymphoma arising from naïve B-cells within the mantle zones of lymphoid follicles. Neoplastic cells harbor the pathognomonic chromosomal **translocation t(11;14)(q13;q32)**, which translocates the CCND1 gene on chromosome 11 to the immunoglobulin heavy-chain locus on chromosome 14. This rearrangement causes marked overexpression of cyclin D1, which associates with cyclin-dependent kinase 4 to phosphorylate retinoblastoma protein. Neoplastic cells characteristically express CD5, CD19, and SOX11, but lack CD23 expression.",
+      "say": "Mantle cell lymphoma arises from mature B-cells occupying the follicular mantle zone. It is genetically defined by the reciprocal translocation t(11;14), which brings the cyclin D1 gene under the influence of the immunoglobulin heavy chain promoter. Overexpressed cyclin D1 drives uncontrolled G1-to-S cell cycle transition. Flow cytometry reveals a characteristic profile: cells co-express B-cell markers with CD5 and nuclear SOX11, but test negative for CD23, clearly separating them from CLL.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/mantle-cell-lymphoma-fig1.webp",
-        "alt": "Mantle cell lymphoma manifestations",
+        "alt": "Mantle cell lymphoma histology and gross appearance of lymphomatous polyposis in the colon",
         "caption": "Mantle cell lymphoma manifestations including lymphomatous polyposis and nodal disease."
       }
     },
     {
-      "tx": "Tumour lysis prophylaxis precedes Burkitt and high burden DLBCL therapy because chemotherapy can release potassium, phosphate, and uric acid faster than kidneys clear them, collapsing renal function within days. Prevention embodies **tumour lysis syndrome prophylaxis with hydration and rasburicase**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Hydrate and give allopurinol or rasburicase before treating Burkitt; tumour lysis is predictable and preventable.",
+      "tx": "Because aggressive lymphomas like Burkitt and high-burden diffuse large B-cell lymphoma exhibit extreme cell turnover and chemotherapy sensitivity, initiating systemic cytotoxic treatment risks catastrophic **acute tumour lysis syndrome**. Massive intracellular lysis discharges vast quantities of potassium, phosphate, and nucleic acids into the systemic circulation. Catabolism of nucleic acids generates insoluble uric acid crystals that obstruct renal collecting tubules, while hyperphosphataemia precipitates calcium phosphate in renal parenchyma, producing life-threatening hyperkalaemia, severe hypocalcaemia, acute renal failure, and fatal cardiac arrhythmias.",
+      "say": "Tumour lysis syndrome is a medical emergency triggered by the rapid destruction of malignant cells following initiation of chemotherapy. Lysis floods the blood with potassium, phosphate, and nucleic acids. Uric acid crystals precipitate inside renal tubules while hyperphosphataemia drives metastatic calcium phosphate deposition, causing acute kidney injury, severe hypocalcaemic tetany, and lethal ventricular arrhythmias. Prophylaxis with aggressive hydration and rasburicase is mandatory prior to treatment.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Lysis product",
-          "Danger",
-          "Prevention"
+          "Laboratory Abnormality",
+          "Pathophysiological Mechanism",
+          "Clinical Hazard",
+          "Preventative Management"
         ],
         "rows": [
           [
-            "Potassium",
-            "Fatal arrhythmia",
-            "ECG, hydration, monitoring"
+            "Hyperuricaemia",
+            "Catabolism of cellular purine nucleic acids",
+            "Intrarenal uric acid crystal precipitation",
+            "Rasburicase (recombinant urate oxidase)"
           ],
           [
-            "Uric acid",
-            "Crystal nephropathy",
-            "Allopurinol or rasburicase"
+            "Hyperkalaemia",
+            "Release of concentrated intracellular potassium",
+            "Peaked T waves, ventricular fibrillation",
+            "Cardiac monitoring, insulin-dextrose, kayexalate"
           ],
           [
-            "Phosphate",
-            "Calcium phosphate deposition",
-            "Hydration, phosphate binders"
+            "Hyperphosphataemia",
+            "Release of intracellular organic phosphates",
+            "Calcium phosphate precipitation in viscera",
+            "Oral phosphate binders, forced diuresis"
           ],
           [
-            "Creatinine rise",
-            "Acute kidney injury",
-            "Pre-hydration, avoid nephrotoxins"
+            "Hypocalcaemia",
+            "Chemo-precipitation with excess serum phosphate",
+            "Tetany, carpopedal spasm, seizures, long QTc",
+            "Avoid calcium repletion unless symptomatic"
           ]
         ]
       }
     },
     {
-      "tx": "Prognostic indices across aggressive lymphoma combine age, stage, performance, LDH, and extranodal sites into the IPI, still useful beside PET and genetics for counselling and trial stratification. The clinical score is the **International Prognostic Index (IPI)**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Age, stage, LDH, performance, and extranodal sites: the IPI still counsels patients beside modern genetics.",
+      "tx": "Risk stratification and clinical trial design in aggressive non-Hodgkin lymphomas utilize the **International Prognostic Index**, which quantifies patient survival based on five independent baseline adverse parameters. The scoring system assigns one point for age greater than sixty years, Ann Arbor Stage III or IV disease, elevated serum lactate dehydrogenase above normal limits, Eastern Cooperative Oncology Group performance status of 2 or higher, and involvement of more than one extranodal site. Low-risk patients score 0 to 1, while high-risk patients score 4 to 5.",
+      "say": "The International Prognostic Index predicts outcome in patients with aggressive lymphomas such as diffuse large B-cell lymphoma. Clinicians evaluate five simple clinical variables: age over sixty, stage three or four disease, elevated serum lactate dehydrogenase, poor performance status, and more than one extranodal disease site. Patients with zero or one factor achieve excellent five-year survival, while those with four or five risk factors require consideration of intensified regimens.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Limited stage DLBCL",
+          "title": "Low-Risk IPI (0-1 Points)",
           "points": [
-            "Short R-CHOP with or without RT",
-            "Excellent cure rates",
-            "Late toxicity minimised"
+            "Age 60 years or younger",
+            "Stage I or II localized disease",
+            "Normal serum lactate dehydrogenase",
+            "Five-year survival exceeds 80% with R-CHOP"
           ]
         },
         "right": {
-          "title": "Advanced high IPI",
+          "title": "High-Risk IPI (4-5 Points)",
           "points": [
-            "Full course therapy, trials considered",
-            "CNS relapse risk assessed",
-            "Salvage planning from diagnosis"
+            "Age older than 60 years",
+            "Stage III or IV advanced dissemination",
+            "Multiple extranodal visceral sites",
+            "Five-year survival drops below 50%"
           ]
         }
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which chromosomal translocation drives the pathogenesis of Burkitt lymphoma by juxtaposing c-MYC with the immunoglobulin heavy-chain locus?",
+      "options": [
+        "t(8;14)(q24;q32)",
+        "t(11;14)(q13;q32)",
+        "t(14;18)(q32;q21)",
+        "t(11;18)(q21;q21)"
+      ],
+      "correct": 0,
+      "explain": "The reciprocal translocation t(8;14)(q24;q32) moves the c-MYC oncogene on chromosome 8 under the control of the IGH enhancer on chromosome 14, driving Burkitt lymphoma."
+    },
+    {
+      "q": "Which immunophenotypic marker combination distinguishes mantle cell lymphoma from chronic lymphocytic leukaemia?",
+      "options": [
+        "CD5 positive, Cyclin D1 positive, CD23 negative",
+        "CD5 positive, CD23 positive, Cyclin D1 negative",
+        "CD10 positive, BCL2 positive, CD5 negative",
+        "CD103 positive, CD25 positive, CD11c positive"
+      ],
+      "correct": 0,
+      "explain": "Mantle cell lymphoma co-expresses CD5 and Cyclin D1 but is CD23 negative, whereas CLL is CD5 positive and CD23 positive but Cyclin D1 negative."
+    },
+    {
+      "q": "What is the primary mechanism by which BCL2 protein prevents cellular apoptosis in follicular lymphoma?",
+      "options": [
+        "Inhibits BAX and BAK to block mitochondrial cytochrome c release",
+        "Activates executioner caspase 3 and caspase 7 directly",
+        "Promotes Fas death receptor trimerization on the cell membrane",
+        "Phosphorylates and degrades the p53 tumor suppressor protein"
+      ],
+      "correct": 0,
+      "explain": "BCL2 is an anti-apoptotic protein that sequesters pro-apoptotic BAX and BAK, maintaining mitochondrial outer membrane integrity and preventing cytochrome c release."
     }
   ]
 }

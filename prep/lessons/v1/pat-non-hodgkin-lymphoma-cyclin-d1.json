@@ -1,194 +1,244 @@
 {
   "v": 1,
-  "module": "pat-non-hodgkin-lymphoma",
-  "subject": "pathology",
-  "title": "Cyclin D1, MALT Lymphoma, Hairy Cell Leukaemia, Mycosis Fungoides, and Sezary Cells",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-non-hodgkin-lymphoma",
+  "key": null,
+  "title": "Cyclin D1, MALT Lymphoma, Hairy Cell Leukaemia, Mycosis Fungoides, and Sezary Cells",
   "steps": [
     {
-      "tx": "Cyclin D1 partners CDK4 and CDK6 to push cells through the G1 restriction point, and its translocation driven excess in mantle cell lymphoma removes that brake while also marking mantle zone lineage. The G1 accelerator is **cyclin D1 (CCND1)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Cyclin D1 is the G1 accelerator; its excess names mantle cell lymphoma on any panel.",
+      "tx": "Cell cycle progression from the quiescent G1 phase into the DNA-synthetic S phase is tightly controlled by the **cyclin D1 complex**. Encoded by the CCND1 gene on chromosome 11q13, cyclin D1 binds and activates cyclin-dependent kinases CDK4 and CDK6. The activated kinase complex hyperphosphorylates the retinoblastoma protein (RB), causing RB to release the transcription factor E2F. Unbound E2F transactivates genes required for DNA replication, pushing cells irreversibly past the restriction checkpoint into active cell division.",
+      "say": "Cyclin D1 is an indispensable driver of the cell cycle restriction checkpoint. Binding to cyclin-dependent kinases four and six, cyclin D1 forms an active holoenzyme that phosphorylates the retinoblastoma tumor suppressor protein. Phosphorylation forces retinoblastoma to release the E2F transcription factor, which enters the nucleus to initiate transcription of genes required for DNA replication and G1-to-S transition.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Growth signals raise cyclin D1"
+            "id": "k1",
+            "label": "Cyclin D1 & CDK4/6"
           },
           {
-            "id": "b",
-            "label": "CDK4 and CDK6 phosphorylate RB"
+            "id": "k2",
+            "label": "RB Phosphorylation"
           },
           {
-            "id": "c",
-            "label": "E2F released, S phase begins"
+            "id": "k3",
+            "label": "E2F Release"
           },
           {
-            "id": "d",
-            "label": "Translocation locks this on in mantle cell"
+            "id": "k4",
+            "label": "G1-to-S Checkpoint Passage"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "k1",
+            "k2",
+            "Kinase Activation"
           ],
           [
-            "b",
-            "c"
+            "k2",
+            "k3",
+            "Releases Repression"
           ],
           [
-            "c",
-            "d"
+            "k3",
+            "k4",
+            "DNA Synthesis Initiated"
           ]
         ]
       }
     },
     {
-      "tx": "MALT lymphoma grows where chronic antigen stimulation built lymphoid tissue that never belonged: stomach after Helicobacter, salivary gland in Sjogren disease, thyroid in Hashimoto thyroiditis, remaining localised for years. The extranodal entity is **MALT lymphoma (mucosa-associated lymphoid tissue lymphoma)**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "MALT lymphoma grows in lymphoid tissue that inflammation built; remove the antigen and early gastric disease may vanish.",
+      "tx": "Extranodal marginal zone B-cell lymphoma, commonly termed **MALT lymphoma**, develops within mucosal-associated lymphoid tissue that is acquired as a consequence of chronic antigenic stimulation from persistent bacterial infections or autoimmune disorders. The classic paradigm is gastric MALT lymphoma arising within chronic gastritis induced by Helicobacter pylori. Other notable associations include Hashimoto thyroiditis predisposing to thyroid MALT lymphoma and Sjogren syndrome promoting salivary gland marginal zone lymphoma. Histologically, neoplastic marginal zone B-cells infiltrate gastric epithelium to form diagnostic lymphoepithelial lesions.",
+      "say": "Extranodal marginal zone lymphoma, or MALT lymphoma, develops in mucosal tissues that acquire lymphoid tissue in response to chronic persistent antigenic stimulation. The classic example is gastric MALT lymphoma arising in the setting of chronic Helicobacter pylori gastritis. Neoplastic marginal zone B-cells invade gastric glandular structures, creating diagnostic lymphoepithelial lesions. Similar lymphomas arise in the salivary glands in Sjogren syndrome and the thyroid in Hashimoto thyroiditis.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/malt-lymphoma-fig1.webp",
-        "alt": "Gastric MALT lymphoma pathology",
+        "alt": "Histopathology of gastric MALT lymphoma showing lymphoepithelial lesions invading gastric glands",
         "caption": "Gastric MALT lymphoma pathology arising in Helicobacter driven lymphoid tissue."
       }
     },
     {
-      "tx": "Early gastric MALT lymphoma regresses in most patients after Helicobacter eradication antibiotics alone, while t(11;18) API2-MALT1 predicts eradication resistance and directs radiotherapy or systemic therapy instead. Antigen removal therapy is **Helicobacter eradication for gastric MALT lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Eradicate Helicobacter first in gastric MALT; t(11;18) warns that antibiotics alone will not suffice.",
+      "tx": "The discovery that eradicating Helicobacter pylori induces complete pathological remission in seventy to eighty percent of localized gastric MALT lymphomas established a revolutionary paradigm in oncology. However, cases harboring the reciprocal **translocation t(11;18)(q21;q21)** fail to regress after antibiotic therapy. This translocation fuses the apoptosis inhibitor BIRC3 (API2) gene on chromosome 11 with the MALT1 paracaspase gene on chromosome 18, generating an oncoprotein that constitutively activates nuclear factor kappa B downstream signalling, freeing the malignant B-cells from dependence on antigen receptor stimulation.",
+      "say": "Treating early Helicobacter pylori gastritis with triple antibiotic therapy cures gastric MALT lymphoma in nearly eighty percent of patients by removing the chronic antigenic drive. However, cases carrying the chromosomal translocation t(11;18) are completely resistant to antibiotic eradication alone. This translocation fuses API2 with MALT1, creating a chimeric protein that permanently activates NF-kappa-B, rendering tumor survival autonomous of bacterial stimulation.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Eradication responsive",
+          "title": "Antibiotic-Responsive MALT",
           "points": [
-            "H pylori positive, superficial disease",
-            "Regression over months after antibiotics",
-            "Endoscopic surveillance follows"
+            "Lacks t(11;18) chromosomal translocation",
+            "Remains strictly dependent on H. pylori antigen",
+            "75% to 80% achieve complete remission with triple therapy",
+            "Follow-up requires serial surveillance endoscopies"
           ]
         },
         "right": {
-          "title": "Eradication resistant",
+          "title": "Antibiotic-Resistant MALT",
           "points": [
-            "t(11;18) present, deep or nodal disease",
-            "Radiotherapy highly effective locally",
-            "Systemic therapy for disseminated disease"
+            "Carries t(11;18)(q21;q21) BIRC3-MALT1 fusion",
+            "Constitutive autonomous NF-kappa-B activation",
+            "Fails to regress with antibiotic eradication",
+            "Requires radiotherapy, rituximab, or chemotherapy"
           ]
         }
       }
     },
     {
-      "tx": "Hairy cell leukaemia coats B cells in fine cytoplasmic projections, infiltrates marrow with fibrosis causing dry taps, splenomegaly, pancytopenia, and monocytopenia, and melts before cladribine chemotherapy for years. The fried egg marrow disease is **hairy cell leukaemia**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Hairy projections, dry tap, splenomegaly, and absent monocytes: hairy cell leukaemia answers for years to cladribine.",
+      "tx": "Hairy cell leukaemia is an uncommon, indolent B-cell leukaemia that predominantly strikes middle-aged men with a four-to-one male predominance. Patients characteristically present with fatigue, recurrent mycobacterial or fungal infections resulting from profound monocytopenia, and massive splenomegaly, notably lacking peripheral lymphadenopathy. Examination of peripheral blood and bone marrow reveals distinctive mononuclear lymphoid cells featuring round or oval nuclei and abundant pale cytoplasm with fine, hair-like, **filamentous cytoplasmic projections** extending from the cell surface.",
+      "say": "Hairy cell leukaemia is an indolent B-cell disorder with a strong male predilection, typically presenting with massive splenomegaly and pancytopenia. A distinctive clinical hallmark is absolute monocytopenia, predisposing patients to atypical mycobacterial and opportunistic fungal infections. Peripheral smears reveal medium-sized lymphoid cells with delicate, hair-like cytoplasmic projections visible under high-power microscopy, which give the disease its name.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/hairy-cell-leukemia-fig1.webp",
-        "alt": "Hairy cell leukaemia blood film",
+        "alt": "Peripheral blood smear showing a hairy cell with fine circumferential hair-like cytoplasmic projections",
         "caption": "Hairy cell leukaemia blood film with cytoplasmic projections on lymphoid cells."
       }
     },
     {
-      "tx": "Tartrate resistant acid phosphatase staining historically identified hairy cells, now replaced by flow cytometry CD11c, CD25, CD103 and annexin A1 plus BRAF V600E mutation in nearly all classic cases. The molecular signature is **BRAF V600E in hairy cell leukaemia**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "TRAP is history; CD103, annexin A1, and BRAF V600E make the modern hairy cell diagnosis.",
+      "tx": "The molecular driver underlying virtually all cases of hairy cell leukaemia is the somatic **BRAF V600E mutation**, located in exon 15 of the BRAF kinase gene. This mutation locks the kinase in an active conformation, driving continuous MEK-ERK signalling that promotes cell survival and cytokine secretion. Histochemically, hairy cells exhibit strong cytoplasmic positivity for tartrate-resistant acid phosphatase (TRAP). Multiparameter flow cytometry demonstrates a pathognomonic immunophenotype co-expressing mature B-cell antigens CD19 and CD20 with CD11c, CD25, CD103, and annexin A1.",
+      "say": "Nearly one hundred percent of classical hairy cell leukaemia cases harbor the activating BRAF V600E point mutation, which turns on downstream MEK and ERK kinases. Historically, diagnosis relied on cytochemical staining showing tartrate-resistant acid phosphatase positivity in the cytoplasm. Today, flow cytometry confirms the diagnosis by demonstrating intense expression of CD11c, CD25, and CD103 alongside annexin A1 on clonal B-cells.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Test",
-          "Hairy cell result",
-          "Status"
+          "Diagnostic Feature",
+          "Hairy Cell Leukaemia",
+          "Splenic Marginal Zone Lymphoma",
+          "Diagnostic Role"
         ],
         "rows": [
           [
-            "TRAP stain",
-            "Tartrate resistant positive",
-            "Historical, replaced"
+            "BRAF V600E Mutation",
+            "Present in >98% of cases",
+            "Absent",
+            "Pathognomonic molecular marker"
           ],
           [
-            "Flow cytometry",
-            "CD11c, CD25, CD103 bright",
-            "Diagnostic standard"
+            "TRAP Staining",
+            "Strongly positive (tartrate-resistant)",
+            "Negative or weak",
+            "Historic cytochemical confirmation"
           ],
           [
-            "BRAF V600E",
-            "Present in classic disease",
-            "Therapy target in relapse"
+            "Flow Cytometry Markers",
+            "CD11c+, CD25+, CD103+, annexin A1+",
+            "CD11c variable, CD103 negative",
+            "Definitive immunophenotypic seam"
           ],
           [
-            "Marrow biopsy",
-            "Fried egg cells, reticulin fibrosis",
-            "Explains dry tap"
+            "Bone Marrow Aspiration",
+            "Dry tap due to reticulin fibrosis",
+            "Aspirate readily obtained",
+            "Mandates trephine core biopsy"
           ]
         ]
       }
     },
     {
-      "tx": "Mycosis fungoides patches, plaques, and tumours the skin over years as malignant T cells home to epidermis forming Pautrier microabscesses, remaining a dermatological disease long before nodes or blood join. The cutaneous T cell prototype is **mycosis fungoides**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Years of patches and plaques with Pautrier abscesses mean mycosis fungoides; stage decides skin or systemic therapy.",
+      "tx": "Mycosis fungoides is the most frequent form of cutaneous T-cell lymphoma, originating from skin-homing CD4-positive mature memory T-lymphocytes that express cutaneous lymphocyte antigen. The disease follows an indolent evolution over decades, advancing through three recognizable clinical phases: flat erythematous patches, indurated plaques, and raised exophytic cutaneous tumours. Histologically, malignant T-cells demonstrate epidermotropism, migrating into the epidermis to form diagnostic **Pautrier microabscesses**, which represent clusters of atypical lymphocytes with hyperconvoluted cerebriform nuclei situated within the malpighian layer.",
+      "say": "Mycosis fungoides is a primary cutaneous T-cell lymphoma arising from mature CD4 memory T-cells that express cutaneous lymphocyte antigen. It progresses slowly through patch, plaque, and tumor phases over many years. Histological examination shows epidermotropism, where malignant T-cells infiltrate the epidermal layer. Pathologists look for Pautrier microabscesses, which are intraepidermal collections of atypical lymphocytes possessing delicate cerebriform, grooved nuclei.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Patch and plaque stage",
+          "title": "Early Patch and Plaque Stage",
           "points": [
-            "Skin directed therapy suffices",
-            "Pautrier microabscesses on biopsy",
-            "Slow progression over years"
+            "Scaly, erythematous patches in bathing-suit distribution",
+            "Epidermotropism with band-like upper dermal infiltrate",
+            "Atypical lymphocytes lining dermal-epidermal junction",
+            "Managed with skin-directed topical steroids and phototherapy"
           ]
         },
         "right": {
-          "title": "Tumour and erythrodermic stage",
+          "title": "Tumour and Transformation Stage",
           "points": [
-            "Systemic therapy required",
-            "Blood involvement assessed",
-            "Sezary syndrome at extreme"
+            "Raised, ulcerating, indurated dermal nodules",
+            "Diffuse infiltration effacing dermis and subcutis",
+            "Loss of epidermotropism with large-cell transformation",
+            "Requires systemic chemotherapy or brentuximab vedotin"
           ]
         }
       }
     },
     {
-      "tx": "Sezary syndrome completes the cutaneous T cell spectrum with erythroderma, lymphadenopathy, and circulating malignant T cells whose cerebriform nuclei wrinkle like brains on film and electron microscopy. The circulating signature is the **Sezary cell with cerebriform nucleus**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Erythroderma plus cerebriform Sezary cells in blood defines Sezary syndrome, mycosis fungoides' leukaemic counterpart.",
+      "tx": "The leukemic variant of cutaneous T-cell lymphoma is **Sezary syndrome**, defined by a classical clinical triad: generalized exfoliative erythroderma affecting more than eighty percent of total body surface area, generalized lymphadenopathy, and circulating malignant T-cells. Microscopic examination of peripheral blood smears reveals distinctive Sezary cells, which are atypical CD4-positive T-lymphocytes featuring hyperconvoluted, grooved nuclei resembling the gyri and sulci of the cerebral cortex. Diagnosis requires an absolute Sezary cell count exceeding one thousand per microliter.",
+      "say": "Sezary syndrome represents the aggressive, leukemic counterpart of cutaneous T-cell lymphoma. It is clinically recognized by a triad of generalized exfoliative erythroderma covering over eighty percent of body surface area, generalized lymphadenopathy, and circulating leukemic T-cells. Under oil immersion, these Sezary cells exhibit remarkable cerebriform nuclei with folded chromatin that mimics the cerebral cortex. Patients experience severe, debilitating pruritus and secondary skin infections.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/sezary-syndrome-fig1.webp",
-        "alt": "Sezary syndrome manifestations",
+        "alt": "Microscopic view of circulating Sezary cells showing characteristic cerebriform, brain-like nuclear folding",
         "caption": "Sezary syndrome manifestations with erythroderma and circulating cerebriform cells."
       }
     },
     {
-      "tx": "Indolent lymphomas share a management moral: early treatment of asymptomatic disease rarely prolongs life, so staging, symptoms, and tempo, not anxiety, schedule therapy across MALT, hairy cell mimics excluded, and mycosis fungoides. That discipline is **tempo-based indolent lymphoma management**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "In indolent lymphoma, treat tempo and symptoms, not the calendar; watching is an active therapy.",
+      "tx": "Clinical management in lymphoid neoplasms is guided by the fundamental biological division between **indolent and aggressive lymphomas**. Indolent lymphomas, including follicular lymphoma, chronic lymphocytic leukaemia, and marginal zone lymphoma, pursue a prolonged course over many years. Because early systemic treatment does not prolong life, asymptomatic patients are observed until symptoms appear, though disease is rarely cured. Conversely, aggressive lymphomas such as diffuse large B-cell lymphoma and Burkitt lymphoma demand immediate multiagent chemotherapy, which achieves complete cure in the majority.",
+      "say": "Managing non-Hodgkin lymphomas depends on biological aggressiveness. Indolent lymphomas like follicular and marginal zone lymphoma grow slowly and are generally incurable with standard chemotherapy, so asymptomatic patients are safely managed with active surveillance to avoid toxicities. In contrast, aggressive lymphomas like diffuse large B-cell and Burkitt lymphoma grow rapidly and prove fatal within months if untreated, but are highly sensitive to chemotherapy and curable in the majority of patients.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Disease",
-          "First move when asymptomatic",
-          "Treat trigger"
+          "Biological Category",
+          "Representative Entities",
+          "Clinical Tempo and Course",
+          "Primary Therapeutic Intent"
         ],
         "rows": [
           [
-            "Gastric MALT",
-            "Eradicate Helicobacter",
-            "Persistence, deep or nodal spread"
+            "Indolent Lymphomas",
+            "Follicular, CLL/SLL, MALT lymphoma",
+            "Slow progression over years; incurability with chemo",
+            "Active surveillance; symptom palliation"
           ],
           [
-            "Hairy cell",
-            "Observe if counts allow",
-            "Cytopenias, infections, splenomegaly"
+            "Aggressive Lymphomas",
+            "Diffuse large B-cell lymphoma, Mantle cell",
+            "Rapid growth over months; fatal if untreated",
+            "Immediate multiagent chemo with curative intent"
           ],
           [
-            "Mycosis fungoides early",
-            "Skin directed therapy",
-            "Tumour stage, blood involvement"
+            "Highly Aggressive",
+            "Burkitt lymphoma, Lymphoblastic lymphoma",
+            "Explosive growth over weeks; metabolic emergency",
+            "Intensive multiagent chemo plus CNS prophylaxis"
           ],
           [
-            "Follicular lymphoma",
-            "Watch and wait",
-            "Symptoms, bulk, marrow failure"
+            "Cutaneous T-Cell",
+            "Mycosis fungoides, Sezary syndrome",
+            "Protracted evolution; skin-directed therapy first",
+            "Symptom relief; systemic targeted agents"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which point mutation is present in nearly 100% of cases of classical hairy cell leukaemia?",
+      "options": [
+        "BRAF V600E mutation",
+        "JAK2 V617F mutation",
+        "KIT D816V mutation",
+        "MYD88 L265P mutation"
+      ],
+      "correct": 0,
+      "explain": "The BRAF V600E kinase mutation is found in >98% of hairy cell leukaemia cases, activating downstream MEK-ERK signaling and responding to BRAF inhibitors."
+    },
+    {
+      "q": "Which translocation predicts resistance to Helicobacter pylori antibiotic eradication in gastric MALT lymphoma?",
+      "options": [
+        "t(11;18)(q21;q21) fusing BIRC3 and MALT1",
+        "t(14;18)(q32;q21) fusing IGH and BCL2",
+        "t(11;14)(q13;q32) fusing CCND1 and IGH",
+        "t(8;14)(q24;q32) fusing MYC and IGH"
+      ],
+      "correct": 0,
+      "explain": "The t(11;18)(q21;q21) API2-MALT1 fusion generates autonomous NF-kappa-B activation, making the lymphoma independent of H. pylori and resistant to antibiotic monotherapy."
+    },
+    {
+      "q": "What morphological feature characterizes circulating neoplastic cells in Sezary syndrome?",
+      "options": [
+        "Hyperconvoluted, cerebriform nuclei resembling brain gyri",
+        "Multiple needle-shaped Auer rods stacked in faggot bundles",
+        "Perinuclear collar of iron-positive granules on Prussian blue",
+        "Eccentric clock-face chromatin with a prominent perinuclear halo"
+      ],
+      "correct": 0,
+      "explain": "Sezary cells are atypical CD4-positive T-lymphocytes featuring highly folded, cerebriform nuclei that resemble the convolutions of the cerebral cortex."
     }
   ]
 }

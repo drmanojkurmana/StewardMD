@@ -1,223 +1,294 @@
 {
   "v": 1,
-  "module": "pat-acute-leukaemias",
-  "subject": "pathology",
-  "title": "PML-RARA, DIC, Acute Lymphoblastic Leukaemia, TdT, and CD10",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-acute-leukaemias",
+  "key": null,
+  "title": "PML-RARA, DIC, Acute Lymphoblastic Leukaemia, TdT, and CD10",
   "steps": [
     {
-      "tx": "Acute promyelocytic leukaemia begins with the t(15;17) translocation fusing the PML gene to the retinoic acid receptor alpha gene, producing a fusion protein that freezes myeloid maturation at the promyelocyte stage and fills marrow with granule packed cells. The defining fusion is **PML-RARA**, detectable by cytogenetics, FISH, and PCR.",
-      "say": "PML-RARA freezes maturation at the promyelocyte; finding that fusion names acute promyelocytic leukaemia instantly.",
+      "tx": "Acute promyelocytic leukaemia arises from the balanced reciprocal translocation t(15;17)(q22;q12), which fuses the promyelocytic leukaemia gene on chromosome 15 to the retinoic acid receptor alpha gene on chromosome 17. The resulting chimeric **PML-RARA fusion protein** acts as an aberrant transcription factor that binds retinoic acid response elements with abnormally high affinity. This tight recruitment of histone deacetylase complexes represses target gene transcription, halting granulocyte differentiation at the promyelocyte stage.",
+      "say": "The defining abnormality in acute promyelocytic leukaemia is the balanced translocation t(15;17), joining the PML gene on chromosome fifteen with the retinoic acid receptor alpha gene on chromosome seventeen. This chimeric PML-RARA oncoprotein tightly binds corepressors and histone deacetylases, silencing genes essential for granulocyte maturation and locking precursors in the promyelocyte stage.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "t(15;17) fuses PML to RARA"
+            "id": "f1",
+            "label": "Translocation t(15;17)"
           },
           {
-            "id": "b",
-            "label": "Fusion blocks promyelocyte differentiation"
+            "id": "f2",
+            "label": "PML-RARA Oncoprotein"
           },
           {
-            "id": "c",
-            "label": "Granule packed promyelocytes accumulate"
+            "id": "f3",
+            "label": "HDAC Corepressor Recruitment"
           },
           {
-            "id": "d",
-            "label": "DIC and marrow failure present together"
+            "id": "f4",
+            "label": "Transcription Block"
+          },
+          {
+            "id": "f5",
+            "label": "Promyelocyte Maturation Arrest"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "f1",
+            "f2",
+            "Gene Fusion"
           ],
           [
-            "b",
-            "c"
+            "f2",
+            "f3",
+            "Chromatin Binding"
           ],
           [
-            "c",
-            "d"
+            "f3",
+            "f4",
+            "Gene Silencing"
+          ],
+          [
+            "f4",
+            "f5",
+            "Leukemic Clonal Freeze"
           ]
         ]
       }
     },
     {
-      "tx": "The granules of promyelocytes carry procoagulant and fibrinolytic machinery, so patients bleed from disseminated intravascular coagulation with low fibrinogen, raised D-dimer, and consumption of platelets and factors before chemotherapy even begins. Early haemorrhage, especially intracranial, is the killer complication: **DIC of acute promyelocytic leukaemia**.",
-      "say": "APL bleeds before it obstructs: DIC with low fibrinogen is present at diagnosis in most patients.",
+      "tx": "Malignant promyelocytes harbor excessive numbers of abnormal, coalesced primary azurophilic granules that readily stack into bundles of Auer rods termed faggot cells. When these fragile neoplastic cells undergo spontaneous apoptosis or cytotoxic lysis, their granules release tissue factor, annexin II, and microparticles into the circulation. This massive procoagulant discharge triggers severe **disseminated intravascular coagulation**, manifesting as profound consumptive coagulopathy, severe hypofibrinogenemia under one hundred milligrams per deciliter, and life-threatening intracranial haemorrhage.",
+      "say": "Neoplastic promyelocytes are packed with coarse azurophilic granules and needle-like bundles of Auer rods, called faggot cells. These granules carry procoagulant tissue factor and fibrinolytic activators. When blasts rupture, they trigger explosive disseminated intravascular coagulation, causing rapid consumption of platelets and clotting factors with a high risk of fatal intracranial or pulmonary bleeding.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
-        "alt": "Myeloblast with Auer rods",
+        "alt": "Acute promyelocytic leukaemia blast showing multiple stacked Auer rods forming a faggot cell",
         "caption": "Auer rod packed blasts of acute promyelocytic leukaemia, whose granules drive DIC."
       }
     },
     {
-      "tx": "All-trans retinoic acid must start on clinical suspicion, before genetic confirmation returns, because it forces promyelocytes to differentiate and switches off the coagulopathy within days, while arsenic trioxide degrades the fusion protein itself. Waiting for confirmation costs lives; the rule is **ATRA on suspicion in APL**.",
-      "say": "Start ATRA when you suspect APL, not when genetics returns; hours decide who survives the coagulopathy.",
+      "tx": "Pharmacological therapy with **all-trans retinoic acid** directly targets the molecular defect of acute promyelocytic leukaemia. Supraphysiological concentrations of retinoic acid disrupt corepressor binding to the chimeric PML-RARA oncoprotein, inducing its degradation through the ubiquitin-proteasome pathway. When paired synergistically with arsenic trioxide, which binds the PML domain to promote oncoprotein degradation, this dual differentiation therapy induces complete haematological remission in over ninety-five percent of patients without requiring conventional cytotoxic chemotherapy.",
+      "say": "All-trans retinoic acid works by directly binding the mutated retinoic acid receptor alpha component, forcing the release of transcriptional corepressors and promoting degradation of the oncogenic fusion protein. Malignant promyelocytes overcome differentiation arrest and mature into functional neutrophils. Combining all-trans retinoic acid with arsenic trioxide has turned this once lethal disease into the most curable acute leukaemia in adults.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "On suspicion, immediately",
+          "title": "All-Trans Retinoic Acid",
           "points": [
-            "Start ATRA without waiting for genetics",
-            "Support fibrinogen, platelets, factors",
-            "Avoid invasive procedures during DIC"
+            "Binds RARA ligand-binding domain",
+            "Displaces HDAC corepressor complexes",
+            "Induces promyelocyte differentiation",
+            "Oral administration daily"
           ]
         },
         "right": {
-          "title": "After confirmation",
+          "title": "Arsenic Trioxide",
           "points": [
-            "Arsenic trioxide added by risk group",
-            "Monitor differentiation syndrome",
-            "PCR tracks molecular remission"
+            "Binds PML zinc-finger domain",
+            "Induces SUMO-dependent degradation",
+            "Triggers differentiation and apoptosis",
+            "Monitors QTc interval on ECG"
           ]
         }
       }
     },
     {
-      "tx": "Differentiation syndrome complicates ATRA and arsenic success: maturing cells release cytokines producing fever, dyspnoea, infiltrates, effusions, and weight gain, treated by prompt dexamethasone without abandoning the differentiating drugs in most cases. Recognising it early defines **differentiation syndrome of APL therapy**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Fever, breathlessness, and infiltrates during ATRA therapy mean differentiation syndrome; dexamethasone treats it early.",
+      "tx": "Induction therapy with differentiation agents carries a major inflammatory hazard termed **differentiation syndrome**, formerly known as retinoic acid syndrome. As maturing promyelocytes acquire adhesive integrins, they infiltrate capillary beds and release vast cascades of inflammatory cytokines including interleukin-1 beta and tumour necrosis factor. Patients present with unexplained fever, acute dyspnea, weight gain from fluid retention, episodic hypotension, and bilateral pulmonary infiltrates. Prompt administration of high-dose intravenous dexamethasone prevents fatal respiratory failure.",
+      "say": "Differentiation syndrome is a serious complication occurring in up to twenty-five percent of patients treated with retinoic acid or arsenic. As neoplastic blasts mature into neutrophils, they release massive amounts of inflammatory cytokines and express surface integrins that cause them to adhere within the pulmonary microvasculature. Early recognition of fever, dyspnea, and weight gain is vital; immediately start intravenous dexamethasone ten milligrams twice daily.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Feature",
-          "Differentiation syndrome",
-          "Sepsis mimic"
+          "Clinical Feature",
+          "Underlying Mechanism",
+          "Diagnostic Findings",
+          "Immediate Management"
         ],
         "rows": [
           [
-            "Timing",
-            "First two weeks of ATRA or arsenic",
-            "Any time, neutropenia linked"
+            "Unexplained Fever",
+            "Pyrogen cytokine release (IL-1, TNF)",
+            "Temperature >38.5 C without sepsis",
+            "Empiric broad-spectrum antibiotics"
           ],
           [
-            "Signs",
-            "Infiltrates, effusions, weight gain",
-            "Source often identifiable"
+            "Pulmonary Infiltrates",
+            "Endothelial damage and leukocyte plugging",
+            "Bilateral alveolar and interstitial hazing",
+            "Intravenous dexamethasone 10 mg BID"
           ],
           [
-            "Response",
-            "Dexamethasone rapidly",
-            "Antibiotics and source control"
+            "Fluid Overload",
+            "Capillary leak and endothelial permeability",
+            "Weight gain, pleural and pericardial effusion",
+            "Diuretic therapy and fluid restriction"
           ],
           [
-            "Drug handling",
-            "Usually continue ATRA",
-            "Chemotherapy reviewed"
+            "Hypotension",
+            "Systemic inflammatory response vasodilation",
+            "Refractory mean arterial pressure drop",
+            "Hold differentiation agent if severe"
           ]
         ]
       }
     },
     {
-      "tx": "Acute lymphoblastic leukaemia peaks in childhood, where lymphoblasts crowd marrow and blood, spread to meninges and testes, and yet cure rates exceed eighty percent on modern protocols, a triumph of risk stratified chemotherapy. The childhood prototype is **acute lymphoblastic leukaemia (ALL)**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Childhood ALL went from fatal to usually curable through risk stratified protocols and CNS prophylaxis.",
+      "tx": "Childhood **acute lymphoblastic leukaemia** peaks in incidence between two and five years of age, representing the single most common pediatric cancer. Neoplastic lymphoblasts proliferate within the bone marrow cavity, suppressing normal haematopoiesis and causing severe anaemia, granulocytopenia with recurrent infections, and thrombocytopenia presenting with petechiae. Extramedullary involvement produces generalized painless lymphadenopathy, moderate hepatosplenomegaly, and distinctive bone pain resulting from subperiosteal infiltration and cortical thinning visible on plain radiographs.",
+      "say": "Acute lymphoblastic leukaemia is the most frequent malignancy of childhood, showing a sharp incidence peak between two and five years of age. Unchecked blast expansion suppresses normal marrow, presenting with pallor, bleeding, and infections. Extramedullary blast seeding causes generalized lymphadenopathy, hepatosplenomegaly, and exquisite bone pain from subperiosteal infiltration that frequently mimics juvenile idiopathic arthritis.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
-        "alt": "Acute lymphoblastic leukemia features",
+        "alt": "Microscopic view of acute lymphoblastic leukaemia bone marrow aspirate showing monotonous lymphoblasts",
         "caption": "Acute lymphoblastic leukaemia features with lymphoblast expansion and marrow failure."
       }
     },
     {
-      "tx": "Terminal deoxynucleotidyl transferase, the enzyme that inserts random nucleotides while assembling antigen receptors, marks lymphoblasts as immature lymphoid cells and helps separate ALL from mature lymphoid neoplasms and AML. The immaturity marker is **terminal deoxynucleotidyl transferase (TdT)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "TdT stamps lymphoblasts as immature; mature lymphomas have switched that enzyme off.",
+      "tx": "Primitive lymphoid precursors uniquely express **terminal deoxynucleotidyl transferase**, a specialized DNA polymerase that adds template-independent nucleotides to the junctional regions of rearranging immunoglobulin and T-cell receptor genes during V(D)J recombination. Detected by immunohistochemistry or flow cytometry, nuclear expression of this enzyme confirms lymphoid lineage in ninety-five percent of cases. Because mature peripheral B-cells and myeloid precursors lack this enzyme, its identification conclusively separates acute lymphoblastic leukaemia from acute myeloid leukaemia.",
+      "say": "Terminal deoxynucleotidyl transferase is a template-independent DNA polymerase confined to the nuclei of immature lymphoid progenitor cells. During early B-cell and T-cell development, it inserts random non-templated nucleotides during gene recombination to enhance antigen receptor diversity. Nuclear TdT positivity on flow cytometry or immunohistochemistry confirms lymphoid origin and reliably separates acute lymphoblastic leukaemia from acute myeloid leukaemia.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Lymphoblast (ALL)",
+          "title": "TdT Expression",
           "points": [
-            "TdT positive, immature programme",
-            "MPO negative, no Auer rods",
-            "B or T precursor immunophenotype"
+            "Nuclear localization in immature blasts",
+            "Positive in >95% of B-ALL and T-ALL",
+            "Absent in mature B-cells and T-cells",
+            "Diagnostic marker of lymphoblasts"
           ]
         },
         "right": {
-          "title": "Mature lymphoid neoplasm",
+          "title": "Myeloperoxidase Expression",
           "points": [
-            "TdT negative",
-            "Surface immunoglobulin in B lineage",
-            "CLL, follicular, mantle patterns"
+            "Cytoplasmic granular localization",
+            "Enzymatic marker of myeloid lineage",
+            "Positive in AML blasts and promyelocytes",
+            "Never expressed in lymphoblastic leukaemia"
           ]
         }
       }
     },
     {
-      "tx": "CD10, the common ALL antigen first defined on childhood B precursor blasts, identifies the favourable common phenotype and also marks germinal centre lymphomas, showing how one antigen serves different maps at different ages. The antigen is **CD10 (common ALL antigen, CALLA)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "CD10 named common ALL in children and germinal centre lymphomas in adults; context gives it meaning.",
+      "tx": "The majority of childhood B-cell acute lymphoblastic leukaemias express **cluster of differentiation 10**, a cell-surface zinc metalloendopeptidase originally termed common acute lymphoblastic leukaemia antigen (CALLA). Expressed on early pre-B blasts alongside CD19 and cytoplasmic CD22, CD10 positivity defines the common B-ALL immunophenotype. Finding CD10 expression correlates with standard risk and excellent responsiveness to multiagent chemotherapy protocols, contrasting with CD10-negative pro-B leukaemias with KMT2A translocations which carry higher relapse risks.",
+      "say": "Cluster of differentiation ten, historically known as CALLA, is a surface metalloprotease expressed on normal pre-B lymphoblasts and in the vast majority of childhood B-ALL. In flow cytometry, CD10 positivity alongside CD19 and CD79a establishes common pre-B ALL, which carries a superior prognosis compared to primitive CD10-negative pro-B acute leukaemia.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Marker",
-          "Lineage meaning",
-          "Disease use"
+          "B-ALL Subtype",
+          "Defining Immunophenotype",
+          "Genetic Associations",
+          "Clinical Outcome"
         ],
         "rows": [
           [
-            "TdT",
-            "Immature lymphoid",
-            "ALL versus mature lymphoma"
+            "Pro-B ALL",
+            "CD19+, CD79a+, TdT+, CD10 negative",
+            "KMT2A (MLL) rearrangement at 11q23",
+            "High relapse risk, poor prognosis"
           ],
           [
-            "CD10",
-            "Common ALL, germinal centre",
-            "B-ALL phenotype, follicular and Burkitt"
+            "Common B-ALL",
+            "CD19+, CD10+ (CALLA), CD22+, TdT+",
+            "Hyperdiploidy or ETV6-RUNX1",
+            "Excellent prognosis (>90% cure)"
           ],
           [
-            "CD19, CD79a",
-            "B lineage",
-            "B-ALL confirmation"
+            "Pre-B ALL",
+            "CD19+, CD10+, cytoplasmic mu chain+",
+            "TCF3-PBX1 t(1;19) translocation",
+            "Intermediate risk, responsive"
           ],
           [
-            "Cytoplasmic CD3",
-            "T lineage",
-            "T-ALL confirmation"
+            "Mature B-ALL",
+            "Surface immunoglobulin (sIg)+, CD10+",
+            "MYC translocation t(8;14)",
+            "Treated with Burkitt-type regimens"
           ]
         ]
       }
     },
     {
-      "tx": "Central nervous system prophylaxis with intrathecal therapy is non-negotiable in ALL because the meninges shelter blasts from systemic drugs, and testicular relapse historically taught the same sanctuary lesson. Sanctuary site treatment embodies **CNS prophylaxis in acute lymphoblastic leukaemia**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Intrathecal prophylaxis exists because the meninges hide blasts from systemic chemotherapy; never omit it in ALL.",
+      "tx": "The central nervous system serves as an anatomical sanctuary site where systemic chemotherapy concentrations fail to penetrate the blood-brain barrier. Universal **central nervous system prophylaxis** is mandatory for all pediatric and adult acute lymphoblastic leukaemia protocols. Standard management delivers scheduled intrathecal injections of methotrexate, cytarabine, and hydrocortisone initiated during induction and continued throughout consolidation. This aggressive prophylactic strategy reduced central nervous system leukemic relapse rates from over fifty percent down to less than five percent.",
+      "say": "The brain and spinal cord act as sanctuary sites where systemic chemotherapy concentrations are suboptimal due to the blood-brain barrier. Without targeted prophylaxis, over fifty percent of patients eventually suffer central nervous system relapse. Administering prophylactic intrathecal therapy combining methotrexate, cytarabine, and hydrocortisone during induction and consolidation has reduced central nervous system relapse rates below five percent.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Remission induced systemically"
+            "id": "n1",
+            "label": "ALL Induction"
           },
           {
-            "id": "b",
-            "label": "Intrathecal therapy sterilises meninges"
+            "id": "n2",
+            "label": "Diagnostic Lumbar Puncture"
           },
           {
-            "id": "c",
-            "label": "Consolidation and maintenance follow"
+            "id": "n3",
+            "label": "Triple Intrathecal Therapy"
           },
           {
-            "id": "d",
-            "label": "MRD guides intensity throughout"
+            "id": "n4",
+            "label": "Consolidation Regimen"
+          },
+          {
+            "id": "n5",
+            "label": "CNS Remission Maintained"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "n1",
+            "n2",
+            "At Diagnosis"
           ],
           [
-            "b",
-            "c"
+            "n2",
+            "n3",
+            "CSF Cytology Screen"
           ],
           [
-            "c",
-            "d"
+            "n3",
+            "n4",
+            "Scheduled Injections"
+          ],
+          [
+            "n4",
+            "n5",
+            "Relapse <5%"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which translocation and chimeric oncoprotein characterize acute promyelocytic leukaemia (APL)?",
+      "options": [
+        "t(15;17)(q22;q12) producing PML-RARA",
+        "t(8;21)(q22;q22) producing RUNX1-RUNX1T1",
+        "inv(16)(p13q22) producing CBFB-MYH11",
+        "t(9;22)(q34;q11) producing BCR-ABL1"
+      ],
+      "correct": 0,
+      "explain": "Acute promyelocytic leukaemia is defined by the t(15;17) reciprocal translocation that fuses PML on chromosome 15 to RARA on chromosome 17."
+    },
+    {
+      "q": "What is the drug of choice for treating differentiation syndrome occurring during induction with ATRA?",
+      "options": [
+        "Intravenous dexamethasone 10 mg twice daily",
+        "High-dose hydroxyurea 3 grams daily",
+        "Intravenous unfractionated heparin infusion",
+        "Broad-spectrum vancomycin and meropenem"
+      ],
+      "correct": 0,
+      "explain": "Differentiation syndrome is an inflammatory capillary leak phenomenon triggered by cytokine release from maturing promyelocytes, treated immediately with intravenous dexamethasone."
+    },
+    {
+      "q": "Which enzyme functions as a nuclear marker in immature lymphoblasts by adding non-templated nucleotides during V(D)J recombination?",
+      "options": [
+        "Terminal deoxynucleotidyl transferase (TdT)",
+        "Myeloperoxidase (MPO)",
+        "Tartrate-resistant acid phosphatase (TRAP)",
+        "Alkaline phosphatase (ALP)"
+      ],
+      "correct": 0,
+      "explain": "TdT is a nuclear DNA polymerase unique to early lymphoid precursors during V(D)J recombination and is positive in >95% of ALL blasts."
     }
   ]
 }

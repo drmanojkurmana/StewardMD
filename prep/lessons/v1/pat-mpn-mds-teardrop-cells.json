@@ -1,194 +1,244 @@
 {
   "v": 1,
-  "module": "pat-mpn-mds",
-  "subject": "pathology",
-  "title": "Teardrop Cells, CALR, Myelodysplastic Syndromes, and Mastocytosis",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-mpn-mds",
+  "key": null,
+  "title": "Teardrop Cells, CALR, Myelodysplastic Syndromes, and Mastocytosis",
   "steps": [
     {
-      "tx": "Teardrop poikilocytes, red cells pulled into dacrocytes by fibrotic marrow and splenic passage, headline the leucoerythroblastic film of myelofibrosis alongside nucleated red cells and immature white cells. The signature cell is the **teardrop cell (dacrocyte)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Teardrop cells plus nucleated red cells mean the marrow space is occupied; biopsy finds the occupier.",
+      "tx": "Circulating **teardrop poikilocytes**, formally termed dacrocytes, are erythrocytes deformed into pear-shaped or teardrop contours with a single elongated cytoplasmic tail. In primary myelofibrosis, developing erythroid precursors squeeze through dense reticulin collagen networks to enter the sinusoidal circulation. Dacrocytes are also produced during extramedullary haematopoiesis in the spleen, where rigid red cells sustain permanent mechanical plastic deformation while traversing the narrow endothelial slits of splenic cords, signifying distorted stromal architecture.",
+      "say": "Teardrop poikilocytes, or dacrocytes, are distinctive pear-shaped red blood cells bearing a single tapered tail. In primary myelofibrosis, these cells become mechanically distorted as they squeeze through dense fibrous meshworks to enter marrow sinusoids. They also form in the expanded red pulp of the spleen during extramedullary haematopoiesis, as erythrocytes struggle to squeeze through tight endothelial slits into venous sinuses.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/myeloproliferative-and-myelodysplastic-syndromes-fig1.webp",
-        "alt": "Myelofibrosis peripheral smear",
+        "alt": "Peripheral smear showing teardrop cells and leucoerythroblastic picture",
         "caption": "Myelofibrosis peripheral smear with teardrop cells and leucoerythroblastic features."
       }
     },
     {
-      "tx": "Calreticulin mutations, CALR exon 9 insertions and deletions, drive many JAK2 negative thrombocythaemia and myelofibrosis cases by activating the thrombopoietin receptor from inside the cell, completing the driver trio with MPL. The second driver family is **CALR mutation in myeloproliferative neoplasms**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "JAK2 negative does not mean driver negative: CALR and MPL mutations complete the classic trio.",
+      "tx": "Somatic frameshift mutations in exon 9 of the **calreticulin gene** represent the second most common driver mutation in JAK2-negative essential thrombocythaemia and primary myelofibrosis, found in twenty-five to thirty percent of patients. The two predominant alterations comprise a 52-base-pair deletion (type 1) and a 5-base-pair insertion (type 2). Both mutations generate a novel, positively charged C-terminal peptide tail that binds and persistently activates the thrombopoietin receptor (MPL), driving cytokine-independent megakaryopoiesis with lower thrombotic risk than JAK2 mutations.",
+      "say": "Mutations in exon nine of the calreticulin gene, or CALR, occur in roughly one quarter of patients with essential thrombocythaemia and primary myelofibrosis who lack the JAK2 mutation. These frameshift insertions and deletions create an altered positively charged protein tail that physically associates with the thrombopoietin receptor MPL, switching on constitutive megakaryocyte proliferation. Patients harboring CALR mutations generally enjoy lower thrombosis rates and better overall survival than those with JAK2 mutations.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Driver",
-          "Diseases",
-          "Note"
+          "Driver Mutation",
+          "Molecular Mechanism",
+          "Frequency in ET/PMF",
+          "Clinical Implications"
         ],
         "rows": [
           [
             "JAK2 V617F",
-            "PV, ET, PMF",
-            "Commonest driver"
+            "Exon 14 pseudokinase gain of function",
+            "50% to 60%",
+            "Higher haematocrit, increased thrombosis risk"
           ],
           [
-            "CALR exon 9",
-            "ET, PMF",
-            "Absent in PV"
+            "CALR Exon 9",
+            "Frameshift generating mutant C-terminus",
+            "25% to 30%",
+            "Higher platelet counts, lower thrombosis, younger age"
           ],
           [
-            "MPL",
-            "ET, PMF",
-            "Thrombopoietin receptor activation"
+            "MPL W515L/K",
+            "Juxtamembrane domain constitutive firing",
+            "3% to 5%",
+            "Severe anaemia, higher risk of rapid fibrosis"
           ],
           [
-            "Triple negative",
-            "ET, PMF minority",
-            "Worse prognosis in PMF"
+            "Triple Negative",
+            "Absence of JAK2, CALR, and MPL lesions",
+            "8% to 10%",
+            "Poorest overall survival in primary myelofibrosis"
           ]
         ]
       }
     },
     {
-      "tx": "Myelodysplastic syndromes are clonal marrow failures of older adults producing cytopenias despite cellular marrow, because dysplastic precursors die before release, with risk of transformation to acute myeloid leukaemia. Ineffective clonal production defines **myelodysplastic syndromes (MDS)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "MDS is a full marrow that delivers empty blood; dysplasia plus cytopenia plus clonality make the diagnosis.",
+      "tx": "Myelodysplastic syndromes encompass a heterogeneous spectrum of clonal haematopoietic stem cell disorders characterized by **ineffective haematopoiesis** and progressive peripheral blood cytopenias despite a cellular bone marrow. Neoplastic progenitor clones undergo excessive intramedullary apoptosis driven by somatic mutations in spliceosome machinery, epigenetic regulators, and transcriptional factors. Affecting predominantly individuals older than seventy years, these stem cell disorders exhibit a chronic clinical tempo marked by severe transfusion dependency, recurrent bacterial infections, and a thirty percent risk of transformation into acute myeloid leukaemia.",
+      "say": "Myelodysplastic syndromes are clonal stem cell disorders of the elderly characterized by paradoxical marrow findings: bone marrow cellularity is typically hyperplastic, yet peripheral blood shows severe cytopenias. This discrepancy arises from ineffective haematopoiesis, where clonal precursors undergo premature intramedullary apoptosis due to acquired mutations in RNA splicing and epigenetic factors. Patients suffer from refractory anaemia and face a significant risk of transforming into acute myeloid leukaemia.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/myelodysplastic-syndrome-fig1.webp",
-        "alt": "Myelodysplastic syndrome dysplastic cell lineage",
+        "alt": "Microscopic appearance of dysplastic bone marrow in myelodysplastic syndrome",
         "caption": "Myelodysplastic syndrome with dysplastic maturation across cell lineages."
       }
     },
     {
-      "tx": "Pseudo-Pelger-Huet neutrophils, bilobed spectacle nuclei with coarse chromatin, announce dysplasia on film together with hypogranular cytoplasm, ring sideroblasts, and micromegakaryocytes in marrow. The bilobed signature is the **pseudo-Pelger-Huet anomaly of MDS**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Spectacle shaped bilobed neutrophils on film are dysplasia waving; look for MDS behind unexplained cytopenias.",
+      "tx": "Morphological dysplasia across one or more haematopoietic lineages represents the absolute diagnostic prerequisite for myelodysplastic syndromes, requiring abnormalities in at least ten percent of lineage cells. Dysgranulopoiesis produces **pseudo-Pelger-Huet anomaly**, featuring mature neutrophils with hyposegmented, bilobed spectacle or dumbbell-shaped nuclei connected by a thin chromatin bridge, alongside severe cytoplasmic hypogranulation. Dyserythropoiesis displays nuclear budding, multi-nucleation, karyorrhexis, and megaloblastoid maturation unresponsive to vitamin B12, while dysmegakaryopoiesis produces distinctive pawn-ball micromegakaryocytes bearing isolated, unlobated round nuclei.",
+      "say": "Diagnosing myelodysplastic syndrome requires identifying unmistakable dysplasia in at least ten percent of bone marrow cells within a haematopoietic lineage. In the granulocytic series, look for the pseudo-Pelger-Huet anomaly, where neutrophils possess bilobed spectacle nuclei and washed-out hypogranular cytoplasm. In the erythroid series, observe multi-nucleation and nuclear budding. Megakaryocytes display abnormal pawn-ball morphology with solitary, round, unlobated nuclei.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Dysplasia clues",
+          "title": "Dysplastic Hallmarks",
           "points": [
-            "Pseudo-Pelger-Huet neutrophils",
-            "Ring sideroblasts, micromegakaryocytes",
-            "Blasts quantify progression risk"
+            "Pseudo-Pelger-Huet bilobed neutrophils",
+            "Cytoplasmic hypogranulation in granulocytes",
+            "Megaloblastoid erythroid karyorrhexis",
+            "Hypolobated pawn-ball micromegakaryocytes"
           ]
         },
         "right": {
-          "title": "Mimics to exclude",
+          "title": "Reactive Nutritional Changes",
           "points": [
-            "B12 deficiency megaloblastosis",
-            "Drug and alcohol effects",
-            "Copper deficiency, viral suppression"
+            "Hypersegmented neutrophils (>5 lobes)",
+            "Uniform macro-ovalocytic red cells",
+            "Giant hyperlobated megakaryocytes",
+            "Rapidly corrects after B12 or folate replacement"
           ]
         }
       }
     },
     {
-      "tx": "Ring sideroblasts return in MDS as clonal iron trapped mitochondria, especially with SF3B1 mutation, linking morphology to a molecular entity with relatively favourable prognosis when blasts stay low. The mutation defined subtype is **MDS with SF3B1 mutation and ring sideroblasts**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Ring sideroblasts plus SF3B1 mutation now name their own MDS entity with its own prognosis.",
+      "tx": "Perls Prussian blue staining of bone marrow aspirate smears is mandatory to evaluate iron distribution and identify **ring sideroblasts**. Ring sideroblasts are abnormal erythroid precursors containing five or more Prussian blue-positive iron granules that encircle at least one-third of the nuclear circumference. These perinuclear rings represent iron-overloaded mitochondria unable to incorporate iron into protoporphyrin IX due to defective haem synthesis. More than eighty percent of cases with prominent ring sideroblasts carry somatic mutations in the SF3B1 RNA splicing factor gene.",
+      "say": "Prussian blue iron staining of bone marrow aspirates is essential to detect ring sideroblasts. A ring sideroblast is defined as an erythroblast with five or more iron-positive granules encircling at least one-third of the nucleus. Under electron microscopy, these rings are iron-engorged mitochondria trapped around the nucleus due to defective haem synthesis. Strongly correlated with SF3B1 gene mutations, ring sideroblasts confer a more favorable prognosis.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Cytopenias prompt marrow examination"
+            "id": "r1",
+            "label": "Perls Prussian Blue Stain"
           },
           {
-            "id": "b",
-            "label": "Dysplasia and blast count assessed"
+            "id": "r2",
+            "label": "Perinuclear Iron Granules"
           },
           {
-            "id": "c",
-            "label": "Cytogenetics and mutations refine risk"
+            "id": "r3",
+            "label": "SF3B1 Splicing Mutation"
           },
           {
-            "id": "d",
-            "label": "IPSS-M risk assigns treatment intensity"
+            "id": "r4",
+            "label": "MDS with Ring Sideroblasts"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "r1",
+            "r2",
+            "Marrow Microscopy"
           ],
           [
-            "b",
-            "c"
+            "r2",
+            "r3",
+            "Iron-Trapped Mitochondria"
           ],
           [
-            "c",
-            "d"
+            "r3",
+            "r4",
+            "Favorable Subtype Assigned"
           ]
         ]
       }
     },
     {
-      "tx": "Isolated deletion 5q creates a distinctive MDS of older women with macrocytic anaemia, preserved or high platelets, hypolobated megakaryocytes, and exquisite sensitivity to lenalidomide. The cytogenetic entity is **MDS with isolated del(5q)**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Del(5q) MDS in an older woman with high platelets answers beautifully to lenalidomide; genotype chooses the drug.",
+      "tx": "The distinctive **isolated deletion 5q syndrome** constitutes a specific subtype of myelodysplastic syndrome with unique clinicopathological features. Predominantly affecting elderly female patients, it presents with severe refractory macrocytic anaemia, normal or elevated peripheral platelet counts, and striking non-lobated micromegakaryocytes in the bone marrow. Deletion of the critical 5q31-q33 region causes haploinsufficiency of ribosomal protein S14, triggering p53-dependent erythroid apoptosis. Treatment with the immunomodulatory agent lenalidomide reverses cytopenias and induces cytogenetic remission in over sixty percent of patients.",
+      "say": "Isolated 5q deletion is a unique myelodysplastic entity classically seen in older women presenting with severe macrocytic anaemia but preserved or elevated platelet counts. Bone marrow examination reveals abundant hypolobated micromegakaryocytes. Loss of the ribosomal protein S14 gene on chromosome 5q activates p53, arresting red cell maturation. Treating these patients with oral lenalidomide selectively eliminates the mutated clone, yielding durable transfusion independence.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Lower risk MDS",
+          "title": "Isolated Deletion 5q",
           "points": [
-            "Transfusion burden dominates",
-            "ESA, lenalidomide, luspatercept options",
-            "Watchful supportive care valid"
+            "Marked female predominance (older adults)",
+            "Refractory macrocytic anaemia with high platelets",
+            "Hypolobated dwarf micromegakaryocytes",
+            "High sensitivity to oral lenalidomide"
           ]
         },
         "right": {
-          "title": "Higher risk MDS",
+          "title": "High-Risk Complex MDS",
           "points": [
-            "Excess blasts, adverse genetics",
-            "Hypomethylating agents",
-            "Transplant evaluation for eligible"
+            "Three or more cytogenetic abnormalities",
+            "Pancytopenia with severe thrombocytopenia",
+            "Elevated blast percentage in blood and marrow",
+            "Requires hypomethylating agents or transplant"
           ]
         }
       }
     },
     {
-      "tx": "Systemic mastocytosis accumulates clonal mast cells bearing KIT D816V in marrow, skin, gut, and bone, releasing flushing, anaphylaxis, diarrhoea, and osteoporosis, with serum tryptase as its biomarker. The mediator disease is **systemic mastocytosis**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Flushing, anaphylaxis, gut cramps, and high tryptase spell mastocytosis; KIT D816V confirms the clone.",
+      "tx": "Systemic mastocytosis is a rare clonal neoplasm characterized by abnormal accumulation and infiltration of neoplastic mast cells in extracutaneous organs, predominantly the bone marrow, spleen, liver, and gastrointestinal tract. Over ninety percent of adult patients harbor the somatic **KIT D816V mutation** in the receptor tyrosine kinase gene, rendering the receptor constitutively active. Major diagnostic criteria require multifocal dense aggregates of fifteen or more mast cells in marrow core biopsies, supported by baseline serum total tryptase exceeding twenty nanograms per milliliter.",
+      "say": "Systemic mastocytosis is an uncommon clonal disorder where pathological mast cells infiltrate extracutaneous tissues including bone marrow, liver, and intestines. Over ninety percent of adults harbor the activating KIT D816V point mutation, making the stem cell factor receptor permanently active and resistant to imatinib. Major criteria require finding dense infiltrates of fifteen or more mast cells on trephine biopsy, accompanied by elevated baseline serum tryptase exceeding twenty nanograms per milliliter.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/mastocytosis-fig1.webp",
-        "alt": "Mastocytosis pathogenesis and clinical manifestations",
+        "alt": "Bone marrow histology showing multifocal infiltrates of atypical spindle-shaped mast cells",
         "caption": "Mastocytosis pathogenesis and clinical manifestations from clonal mast cell accumulation."
       }
     },
     {
-      "tx": "Distinguishing MPN from MDS and overlap syndromes rests on whether marrow overproduces mature cells, destroys its own dysplastic output, or tragically does both as in MDS-MPN overlap entities. That production question organises **myeloid neoplasm classification at the bedside**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "Ask whether the marrow overproduces, underdelivers, or does both; that answer sorts MPN, MDS, and overlaps.",
+      "tx": "Careful clinicopathological discrimination between myeloproliferative neoplasms, myelodysplastic syndromes, and myelodysplastic/myeloproliferative overlap syndromes is essential for management decisions. Myeloproliferative neoplasms feature hypercellular marrow with effective haematopoiesis producing elevated peripheral cell counts, prominent splenomegaly, and driver mutations in JAK2, CALR, or MPL. In contrast, myelodysplastic syndromes present with **cytopenias from ineffective haematopoiesis**, morphological dysplasia, and risk of acute leukaemia transformation. Overlap disorders like chronic myelomonocytic leukaemia simultaneously exhibit prominent monocytosis alongside multilineage dysplasia.",
+      "say": "Distinguishing myeloproliferative neoplasms from myelodysplastic syndromes centers on peripheral counts and cell maturity. MPNs produce peripheral cytoses through effective marrow hyperplasia driven by JAK2 or CALR mutations. Conversely, MDS causes cytopenias due to ineffective maturation and apoptosis. Overlap conditions like chronic myelomonocytic leukaemia demonstrate both proliferative features like monocytosis exceeding one thousand per microliter and dysplastic morphological defects.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Category",
-          "Marrow behaviour",
-          "Blood result"
+          "Disorder Category",
+          "Peripheral Blood Counts",
+          "Bone Marrow Architecture",
+          "Primary Defining Genetics"
         ],
         "rows": [
           [
-            "MPN",
-            "Overproduction of mature cells",
-            "Counts high"
+            "Myeloproliferative Neoplasm",
+            "Cytoses (elevated RBC, WBC, or platelets)",
+            "Panmyelosis with effective maturation",
+            "JAK2 V617F, CALR exon 9, MPL W515"
           ],
           [
-            "MDS",
-            "Dysplastic ineffective production",
-            "Counts low despite cellular marrow"
+            "Myelodysplastic Syndrome",
+            "Cytopenias (refractory anaemia, cytopenias)",
+            "Dysplasia >=10% of cells; ineffective maturation",
+            "SF3B1, ASXL1, TET2, del(5q)"
           ],
           [
-            "MDS-MPN overlap",
-            "Both proliferation and dysplasia",
-            "Mixed counts, CMML prototype"
+            "MDS/MPN Overlap (CMML)",
+            "Monocytosis >1000/uL with anaemia/neutropenia",
+            "Both proliferative and dysplastic elements",
+            "TET2, SRSF2, ASXL1 mutations"
           ],
           [
-            "Marrow failure",
-            "Empty or replaced marrow",
-            "Pancytopenia, aplasia pattern"
+            "Aplastic Anaemia",
+            "Severe pancytopenia with low reticulocytes",
+            "Markedly hypocellular marrow (>70% fat)",
+            "Immune T-cell mediated destruction"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What morphological feature defines ring sideroblasts on Prussian blue staining of bone marrow aspirates?",
+      "options": [
+        "5 or more iron granules encircling at least one-third of the erythroblast nucleus",
+        "Solitary large iron aggregate situated within the central nucleoplasm",
+        "Aggregates of iron granules coating the exterior cytoplasmic membrane",
+        "Diffuse blue cytoplasmic staining without distinct granules"
+      ],
+      "correct": 0,
+      "explain": "Ring sideroblasts are defined by the presence of 5 or more Prussian blue-positive iron granules forming a collar around one-third or more of the nucleus, representing iron-laden mitochondria."
+    },
+    {
+      "q": "Which molecular driver mutation is identified in over 90% of adult patients with systemic mastocytosis?",
+      "options": [
+        "KIT D816V point mutation",
+        "JAK2 V617F point mutation",
+        "CALR exon 9 52-bp deletion",
+        "BCR-ABL1 translocation"
+      ],
+      "correct": 0,
+      "explain": "The activating point mutation KIT D816V is found in >90% of adult systemic mastocytosis cases and confers resistance to standard imatinib therapy."
+    },
+    {
+      "q": "Which clinical feature is characteristic of the isolated deletion 5q myelodysplastic syndrome?",
+      "options": [
+        "Refractory macrocytic anaemia with preserved or elevated platelet counts in elderly females",
+        "Marked pancytopenia with severe bleeding and ring sideroblasts",
+        "Leukocytosis exceeding 100,000 per microliter with massive splenomegaly",
+        "Rapid transformation to acute myeloid leukaemia within 6 months"
+      ],
+      "correct": 0,
+      "explain": "Isolated del(5q) syndrome classically affects older women, presenting with severe macrocytic anaemia but normal or high platelet counts and hypolobated micromegakaryocytes, responding to lenalidomide."
     }
   ]
 }
