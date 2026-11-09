@@ -1,0 +1,235 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Malaria Laboratory Diagnosis: Smears, RDTs and Parasite Biomarkers",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Light microscopy of Giemsa-stained capillary blood films remains the recognized gold standard for malaria laboratory confirmation. A complete diagnostic evaluation requires preparing both a **thick blood film** and a thin blood film on the same glass slide. Blood should ideally be collected during or immediately after a febrile paroxysm when circulating parasite numbers are highest, prior to administering antimalarial therapy.",
+      "say": "Thick and thin Giemsa stained blood films prepared from fingerprick blood represent the diagnostic gold standard.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antimalarials-act-artesunate-primaquine-prophylaxis-fig1.webp",
+        "alt": "Antimalarial life cycle targets",
+        "caption": "Diagnostic life cycle targets and site of action of blood vs tissue antimalarials [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "The thick film provides twenty to thirty times greater sensitivity than the thin film, concentrating parasites within a smaller visual field. Because the thick film is air-dried without methanol fixation, water in the aqueous Giemsa stain lyses all erythrocytes, leaving a clear field of **dehaemoglobinized red cells** where stained parasites and leukocytes stand out vividly for rapid screening and quantitative counting.",
+      "say": "Water in Giemsa stain lyses un-fixed red cells, concentrating parasites for sensitive detection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thick blood film",
+          "points": [
+            "Prepared by pooling 3 to 4 drops of blood",
+            "Air-dried without alcohol fixation",
+            "Aqueous stain lyses red blood cells",
+            "High sensitivity: detects 5 to 10 parasites/uL"
+          ]
+        },
+        "right": {
+          "title": "Thin blood film",
+          "points": [
+            "Single drop spread to form a feathered monolayer",
+            "Fixed immediately in 100% absolute methanol",
+            "Intact red cell contours and morphology preserved",
+            "Essential for accurate species identification"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast, the thin blood film is fixed immediately in absolute methanol before staining, which preserves intact host erythrocyte architecture, cellular dimensions, and intra-erythrocytic inclusions. Microscopic examination of the feathered edge allows the microscopist to distinguish **parasite speciation** based on red cell enlargement, Schuffner dots, Maurer clefts, and gametocyte contours.",
+      "say": "Methanol fixation preserves red cell morphology, allowing definitive identification of the infecting species.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Smear Type",
+          "Fixation",
+          "Primary Laboratory Purpose"
+        ],
+        "rows": [
+          [
+            "Thick film",
+            "None (air dried only; water lyses RBCs)",
+            "Sensitive detection and parasitaemia quantification"
+          ],
+          [
+            "Thin film",
+            "Fixed in absolute methanol for 1 minute",
+            "Speciation and staging of intracellular parasites"
+          ],
+          [
+            "Field stain",
+            "Ultra-rapid aqueous Romanowsky stain",
+            "Emergency bedside confirmation in under 2 minutes"
+          ],
+          [
+            "Giemsa stain",
+            "Standard 10% buffered Giemsa for 30 minutes",
+            "Definitive reference method with optimal contrast"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Quantifying parasitaemia on the thick film guides clinical severity classification and monitors therapeutic response. The microscopist counts parasites alongside white blood cells until two hundred or five hundred leukocytes are tallied. Assuming an average adult leukocyte count of eight thousand cells per microlitre, the formula yields **parasites per microlitre** of blood, where counts exceeding two hundred thousand indicate severe malaria.",
+      "say": "Counting parasites against two hundred white blood cells yields the absolute parasitaemia per microlitre.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "qc1",
+            "label": "Count asexual parasites and white blood cells simultaneously on thick film"
+          },
+          {
+            "id": "qc2",
+            "label": "Tally parasites until 200 leukocytes have been counted"
+          },
+          {
+            "id": "qc3",
+            "label": "Calculate: (Parasites counted / 200 WBCs) x 8000 = Parasites/microlitre"
+          }
+        ],
+        "edges": [
+          [
+            "qc1",
+            "qc2"
+          ],
+          [
+            "qc2",
+            "qc3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In rural settings and peripheral clinics lacking microscopy infrastructure, immunochromatographic **rapid diagnostic tests** deliver reliable point-of-care results within fifteen minutes. These lateral flow cassettes utilize monoclonal antibodies conjugated to colloidal gold to capture soluble Plasmodium antigens present in whole blood, requiring only a finger-prick blood sample and buffer solution.",
+      "say": "Immunochromatographic rapid diagnostic cassettes detect circulating malarial antigens within fifteen minutes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "RDT Antigen",
+          "Parasite Specificity",
+          "Persistence After Parasite Clearance"
+        ],
+        "rows": [
+          [
+            "Histidine-rich protein 2",
+            "Plasmodium falciparum strictly",
+            "Persists in blood for 2 to 4 weeks after cure"
+          ],
+          [
+            "Parasite LDH (pLDH)",
+            "Species-specific (Pf or Pv) or pan-malarial",
+            "Disappears rapidly within 24 to 48 hours of cure"
+          ],
+          [
+            "Plasmodium aldolase",
+            "Pan-malarial (all human Plasmodium species)",
+            "Clears rapidly following effective therapy"
+          ],
+          [
+            "HRP-2 gene deletion",
+            "pfhrp2/pfhrp3 gene deleted strains",
+            "Produces false-negative HRP-2 RDT results"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most widely used biomarker for falciparum malaria is **histidine-rich protein 2**, an abundant water-soluble protein produced exclusively by asexual blood stages and young gametocytes of Plasmodium falciparum. Because HRP-2 has a prolonged biological half-life, it persists in the patient's bloodstream for two to four weeks after successful therapeutic clearance, precluding its use for monitoring acute treatment response or diagnosing early reinfection.",
+      "say": "Histidine rich protein two persists in blood for weeks, making it unsuitable for monitoring cure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HRP-2 antigen (falciparum)",
+          "points": [
+            "Highly expressed by Plasmodium falciparum only",
+            "High thermal stability in tropical climates",
+            "Persists up to 28 days following parasite clearance",
+            "Susceptible to false negatives from gene deletions"
+          ]
+        },
+        "right": {
+          "title": "Parasite lactate dehydrogenase (pLDH)",
+          "points": [
+            "Produced only by metabolically active live parasites",
+            "Rapidly cleared from blood upon parasite death",
+            "Distinguishes active infection from past treated disease",
+            "Available as pan-malarial or vivax-specific formats"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Conversely, **parasite lactate dehydrogenase** is an active glycolytic enzyme produced only by live, viable parasites. Following successful antimalarial administration, pLDH levels decline precipitously within twenty-four to forty-eight hours in step with parasite killing. A positive pLDH band confirms active ongoing parasitaemia, reliably distinguishing new acute infection from post-treatment antigen persistence.",
+      "say": "Parasite lactate dehydrogenase reflects live viable parasites and disappears quickly after treatment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rdt1",
+            "label": "Patient with treated malaria develops recurrent fever 10 days later"
+          },
+          {
+            "id": "rdt2",
+            "label": "RDT shows positive HRP-2 band but negative pLDH band"
+          },
+          {
+            "id": "rdt3",
+            "label": "Negative pLDH confirms resolved infection; search for alternative fever etiology"
+          }
+        ],
+        "edges": [
+          [
+            "rdt1",
+            "rdt2"
+          ],
+          [
+            "rdt2",
+            "rdt3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An emerging global challenge is the spread of Plasmodium falciparum strains with **pfhrp2 gene deletion**, particularly reported in South America, the Horn of Africa, and parts of India. Parasites lacking this gene do not express HRP-2, yielding false-negative results on conventional HRP-2 cassettes despite heavy parasitaemia. In areas with confirmed gene deletions, national protocols mandate switching to dual-target pLDH-based RDTs.",
+      "say": "Deletions in the pfhrp2 gene cause false-negative rapid tests, necessitating switch to pLDH cassettes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Failure Mechanism",
+          "Clinical Scenario",
+          "Corrective Action"
+        ],
+        "rows": [
+          [
+            "pfhrp2/3 gene deletion",
+            "Severe falciparum fever with false-negative HRP-2 test",
+            "Perform microscopy or switch to pLDH-based RDT"
+          ],
+          [
+            "Prozone effect",
+            "Extremely high parasitaemia (over 5%) blocks antibody lattice",
+            "Dilute blood sample 1:10 and retest on RDT"
+          ],
+          [
+            "Antigen persistence",
+            "Positive test in recently treated patient without fever",
+            "Verify parasite viability via pLDH or thick smear"
+          ],
+          [
+            "Rheumatoid factor",
+            "Cross-linking of conjugate yields false positive",
+            "Confirm with thick and thin blood films"
+          ]
+        ]
+      }
+    }
+  ]
+}
