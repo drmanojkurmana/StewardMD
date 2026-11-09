@@ -1,0 +1,251 @@
+{
+  "v": 1,
+  "module": "phm-antiepileptics",
+  "subject": "pharmacology",
+  "title": "Topiramate, Lacosamide and Vigabatrin: Second Generation Antiepileptics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Topiramate** juggles four mechanisms at once: sodium channel blockade, GABA enhancement, AMPA kainate glutamate antagonism and carbonic anhydrase inhibition, covering focal and generalised tonic clonic seizures, Lennox Gastaut syndrome and migraine prophylaxis. The carbonic anhydrase share explains its metabolic acidosis, kidney stones (1 to 2 percent), paraesthesia and oligohidrosis, while cognitive slowing, word finding difficulty and weight loss earned it unflattering nicknames patients repeat in clinic.",
+      "say": "Topiramate does four jobs and bills in stones, acidosis and lost words; titrate slowly and hydrate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Topiramate territory",
+          "points": [
+            "Focal and generalised tonic clonic seizures",
+            "Lennox Gastaut adjunctive therapy",
+            "Migraine prophylaxis at 50 to 100 mg daily",
+            "Weight loss exploited and endured by turns"
+          ]
+        },
+        "right": {
+          "title": "Topiramate adverse set",
+          "points": [
+            "Cognitive slowing and word finding difficulty",
+            "Paraesthesia, metabolic acidosis, kidney stones",
+            "Oligohidrosis and hyperthermia in children",
+            "Acute angle closure glaucoma rarely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lacosamide** refines sodium channel pharmacology by enhancing slow inactivation rather than the fast inactivation phenytoin grips, a biophysical distinction that may spare physiological firing differently, though bedside superiority remains unproven. Oral and intravenous parity, minimal interactions and twice daily dosing made it a modern focal epilepsy and status epilepticus regular. PR prolongation at higher doses and in cardiac disease is its monitoring footnote, with dizziness and diplopia dose limiting.",
+      "say": "Lacosamide chooses the slow inactivated channel state; watch the PR interval as doses climb.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fast",
+            "label": "Fast inactivation: phenytoin and carbamazepine territory"
+          },
+          {
+            "id": "slow",
+            "label": "Slow inactivation: enhanced selectively by lacosamide"
+          },
+          {
+            "id": "effect",
+            "label": "Pathological high frequency firing damped"
+          },
+          {
+            "id": "pr",
+            "label": "PR prolongation monitored in cardiac patients"
+          }
+        ],
+        "edges": [
+          [
+            "fast",
+            "slow"
+          ],
+          [
+            "slow",
+            "effect"
+          ],
+          [
+            "effect",
+            "pr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vigabatrin** irreversibly inhibits GABA transaminase, the enzyme destroying GABA, so inhibitory transmitter accumulates throughout the brain (suicide inhibition: the enzyme dies with its substrate). It is a first line hero for infantile spasms, particularly with tuberous sclerosis, and a refractory focal epilepsy reserve. The price is retinal: concentric peripheral visual field constriction in roughly a third of chronic users, irreversible, mandating baseline and periodic perimetry that infants cannot perform, the dilemma governing its paediatric use.",
+      "say": "Vigabatrin saves infantile spasms and steals peripheral vision; field testing is part of the prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vigabatrin value",
+          "points": [
+            "Irreversible GABA transaminase inhibition",
+            "First line infantile spasms, especially tuberous sclerosis",
+            "Refractory focal epilepsy adjunct",
+            "No hepatic enzyme interaction burden"
+          ]
+        },
+        "right": {
+          "title": "Vigabatrin price",
+          "points": [
+            "Peripheral visual field constriction, irreversible",
+            "About a third of chronic users affected",
+            "Formal perimetry at baseline and intervals",
+            "Weight gain, sedation and MRI signal changes in infants"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Infantile spasms** are a time critical encephalopathy where vigabatrin and hormonal therapy (ACTH or high dose prednisolone) race the developmental clock, because weeks of spasms cost cognitive outcome measurably. Vigabatrin leads when tuberous sclerosis underlies, hormones otherwise or in combination per protocol, and EEG hypsarrhythmia resolution is tracked alongside clinical spasms. The visual field bargain is accepted because the alternative, uncontrolled spasms, blinds development more certainly.",
+      "say": "In infantile spasms, weeks matter for the brain; vigabatrin's eye risk is weighed against certain developmental loss.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spasm",
+            "label": "Infantile spasms with hypsarrhythmia on EEG"
+          },
+          {
+            "id": "choose",
+            "label": "Vigabatrin (tuberous sclerosis) or hormonal therapy"
+          },
+          {
+            "id": "track",
+            "label": "Spasm freedom and EEG resolution within 2 weeks"
+          },
+          {
+            "id": "eye",
+            "label": "Visual surveillance continues while therapy lasts"
+          }
+        ],
+        "edges": [
+          [
+            "spasm",
+            "choose"
+          ],
+          [
+            "choose",
+            "track"
+          ],
+          [
+            "track",
+            "eye"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Carbonic anhydrase inhibition** links topiramate to zonisamide and acetazolamide across modules: bicarbonate wasting, metabolic acidosis, stone risk from alkaline urine and calcium phosphate precipitation, and paraesthesia as a class accent. Patients are counselled hydration, stone symptoms and sick day awareness when acidosis compounds illness. Children on ketogenic diets stack stone and acidosis risks further, a combination dieticians and neurologists negotiate jointly.",
+      "say": "Acidosis, stones and tingling travel with carbonic anhydrase inhibition wherever it appears.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Shared CA inhibitor effects",
+          "points": [
+            "Metabolic acidosis from bicarbonate wasting",
+            "Calcium phosphate kidney stones",
+            "Paraesthesia of fingers and perioral region",
+            "Appetite suppression and weight loss (topiramate)"
+          ]
+        },
+        "right": {
+          "title": "Counselling set",
+          "points": [
+            "Generous hydration advised",
+            "Stone symptoms reported early",
+            "Bicarbonate checked periodically",
+            "Ketogenic diet co therapy needs joint monitoring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Teratogenicity** continues across this generation: topiramate carries increased oral cleft risk with first trimester exposure, vigabatrin's human data are limited, lacosamide's still accruing, and all sit behind lamotrigine and levetiracetam in pregnancy preference from the previous lesson. Enzyme induction also varies: topiramate induces modestly at higher doses and can lower contraceptive efficacy, while lacosamide and vigabatrin are interaction minimal, often the deciding vote in polypharmacy.",
+      "say": "Pregnancy and polypharmacy both vote against topiramate and for the quiet drugs in this trio.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "preg",
+            "label": "Pregnancy contemplated: audit current agents"
+          },
+          {
+            "id": "switch",
+            "label": "Prefer lamotrigine or levetiracetam where syndrome allows"
+          },
+          {
+            "id": "topi",
+            "label": "Topiramate oral cleft signal weighs against it"
+          },
+          {
+            "id": "contra",
+            "label": "Contraceptive efficacy checked against inducers"
+          }
+        ],
+        "edges": [
+          [
+            "preg",
+            "switch"
+          ],
+          [
+            "switch",
+            "topi"
+          ],
+          [
+            "topi",
+            "contra"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Status epilepticus after second line failure becomes refractory status, where anaesthetic infusions (midazolam, propofol, thiopentone) under EEG control in intensive care take over, and adjunctive enteral agents including lacosamide, topiramate and perampanel are layered by specialists. **Vigabatrin** has no intravenous form and no status role; its absence from that algorithm despite GABAergic power teaches that route and kinetics, not mechanism class alone, assign algorithm places.",
+      "say": "Refractory status belongs to infusions and EEG; vigabatrin, oral only, watches from outside.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Refractory status escalation",
+          "points": [
+            "Continuous EEG in intensive care",
+            "Midazolam, propofol or thiopentone infusion titrated to EEG",
+            "Enteral adjuncts layered by specialists",
+            "Cause hunt: autoimmune, infective, metabolic panels"
+          ]
+        },
+        "right": {
+          "title": "Why some agents sit out",
+          "points": [
+            "Vigabatrin: oral only, slow GABA accumulation",
+            "Topiramate: enteral adjunct, not a loading drug",
+            "Gabapentinoids: no status role at all",
+            "Route and onset assign algorithm positions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Choosing among second generation agents** is phenotype arithmetic: topiramate when migraine or weight argues for it and cognition can pay, lacosamide when interactions and intravenous parity matter and the heart's PR interval allows, vigabatrin where infantile spasms or refractory focal disease justify retinal surveillance. Each was designed to escape phenytoin's kinetic traps, and none entirely escaped adverse effect individuality, which is why follow up asks about words, fields and intervals by drug name.",
+      "say": "Words for topiramate, fields for vigabatrin, PR for lacosamide: follow up is drug specific or it is theatre.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Choose for",
+          "points": [
+            "Topiramate: comorbid migraine, weight concerns",
+            "Lacosamide: polypharmacy, IV parity, status adjunct",
+            "Vigabatrin: infantile spasms, tuberous sclerosis"
+          ]
+        },
+        "right": {
+          "title": "Monitor by name",
+          "points": [
+            "Topiramate: cognition, bicarbonate, stones",
+            "Lacosamide: ECG PR interval, dizziness",
+            "Vigabatrin: visual fields at baseline and intervals"
+          ]
+        }
+      }
+    }
+  ]
+}
