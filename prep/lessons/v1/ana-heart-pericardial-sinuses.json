@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-heart",
+ "subject": "anatomy",
+ "title": "Pericardial Cavity: Transverse and Oblique Sinuses, and Right Atrial Inflow",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The heart and great vessel roots are enclosed by the fibroserous pericardium. The outer fibrous pericardium is a tough unyielding conical sac anchored to the central tendon of the diaphragm, while the inner **serous pericardium** consists of parietal and visceral layers separated by a microscopic lubricating fluid film.",
+   "say": "The heart is enclosed by the fibroserous pericardium. The outer fibrous sac anchors to the central tendon of the diaphragm, while the inner serous membrane contains parietal and visceral layers.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-gross.webp",
+    "alt": "Gross anterior external view of the heart, pericardium, and ascending great vessels",
+    "caption": "Anatomical exterior of the heart illustrating pericardial reflections and great vessel roots. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During embryonic cardiac tube folding, complex reflections of the serous pericardium create two important recesses: the transverse pericardial sinus and the **oblique pericardial sinus**. The transverse sinus is a horizontal passageway separating the arterial outflow vessels anteriorly from the venous inflow vessels posteriorly.",
+   "say": "Cardiac tube looping creates two pericardial spaces: the transverse and oblique sinuses. The transverse sinus runs horizontally between arterial outflows anteriorly and venous inflows posteriorly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transverse Pericardial Sinus",
+     "points": [
+      "Horizontal tunnel behind aorta and pulmonary trunk",
+      "Anterior to superior vena cava and atria",
+      "Subclamping tunnel in cardiac bypass surgery",
+      "Derived from breakdown of dorsal mesocardium"
+     ]
+    },
+    "right": {
+     "title": "Oblique Pericardial Sinus",
+     "points": [
+      "Blind cul-de-sac behind left atrium",
+      "Bounded by 4 pulmonary veins and IVC",
+      "Separates left atrium from oesophagus",
+      "Accommodates left atrial pulsatile expansion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In cardiac surgery, the **transverse pericardial sinus** provides an indispensable surgical landmark for aortic cross-clamping. A surgeon's index finger or vascular clamp passed through the transverse sinus from right to left isolates the ascending aorta and pulmonary trunk anteriorly, allowing total cardiopulmonary bypass arrest.",
+   "say": "In open heart surgery, the transverse sinus serves as the passage for vascular clamping. Passing a clamp through this tunnel isolates the aorta and pulmonary trunk for bypass initiation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Cannulation via Transverse Sinus",
+    "nodes": [
+     {
+      "id": "pericard",
+      "label": "Median Sternotomy and Pericardial Sac Incision"
+     },
+     {
+      "id": "finger",
+      "label": "Finger Introduced Behind Ascending Aorta and Pulmonary Trunk"
+     },
+     {
+      "id": "clamp",
+      "label": "Vascular Clamp Passed Through Transverse Sinus"
+     },
+     {
+      "id": "bypass",
+      "label": "Total Temporary Interruption of Systemic Inflow for Bypass"
+     }
+    ],
+    "edges": [
+     [
+      "pericard",
+      "finger"
+     ],
+     [
+      "finger",
+      "clamp"
+     ],
+     [
+      "clamp",
+      "bypass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **oblique pericardial sinus** is a wide, blind-ending recess situated behind the left atrium. Bounded laterally by the reflections around the four pulmonary veins and inferior vena cava, it separates the posterior wall of the left atrium from the fibrous pericardium and overlying thoracic oesophagus.",
+   "say": "The oblique sinus is a blind pocket behind the left atrium. Bounded by pulmonary veins and the inferior vena cava, it cushions the left atrium against the oesophagus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pericardial Sinus",
+     "Anterior Boundary",
+     "Posterior Boundary",
+     "Embryological Seam"
+    ],
+    "rows": [
+     [
+      "Transverse Sinus",
+      "Ascending aorta and pulmonary trunk",
+      "Superior vena cava, atria",
+      "Breakdown of dorsal mesocardium"
+     ],
+     [
+      "Oblique Sinus",
+      "Posterior wall of left atrium",
+      "Parietal pericardium and oesophagus",
+      "Space between developing pulmonary veins"
+     ],
+     [
+      "Antero-inferior Recess",
+      "Anterior parietal pericardium",
+      "Right ventricle and anterior fat pad",
+      "Pericardiocentesis needle entry route"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid accumulation of fluid in the inextensible pericardial sac creates **cardiac tamponade**. Intrapericardial pressure exceeds diastolic filling pressure, compressing thin-walled right chambers and yielding Beck triad: systemic arterial hypotension, distended non-pulsatile neck veins, and muffled distant heart sounds on cardiac auscultation.",
+   "say": "Sudden fluid accumulation in the rigid pericardial sac causes cardiac tamponade. Rising pressure impedes ventricular filling, producing Beck triad: hypotension, elevated jugular veins, and distant heart sounds.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/pearl-figs/pearl-heart-shunts.svg",
+    "alt": "Hemodynamic pressure tracings and chamber filling mechanics in cardiac tamponade and shunt physiology",
+    "caption": "Hemodynamic consequences of cardiac tamponade and pericardial space constriction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Relief of acute cardiac tamponade requires emergency pericardiocentesis. A needle is inserted through the left infrasternal angle (Larrey point) between the xiphoid process and left seventh costal cartilage at a forty-five-degree angle, directed toward the **left shoulder tip** to avoid coronary and internal thoracic vessels.",
+   "say": "Relief of cardiac tamponade is achieved by emergency pericardiocentesis. A needle enters the infrasternal angle beside the xiphoid at forty-five degrees, aiming toward the left shoulder tip.",
+   "vis": {
+    "kind": "flow",
+    "title": "Subxiphoid Pericardiocentesis Technique",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Puncture Skin at Left Infrasternal Angle beside Xiphoid"
+     },
+     {
+      "id": "angle",
+      "label": "Advance Needle at 45 Degrees Aimed Toward Left Shoulder"
+     },
+     {
+      "id": "pleura",
+      "label": "Passes Inferior to Costomediastinal Pleural Reflection"
+     },
+     {
+      "id": "aspirate",
+      "label": "Aspirate Pericardial Fluid to Restore Ventricular Filling"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "angle"
+     ],
+     [
+      "angle",
+      "pleura"
+     ],
+     [
+      "pleura",
+      "aspirate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic venous return enters the **right atrium** via the superior and inferior venae cavae. The right atrium forms the entire right heart border, receiving deoxygenated blood from the upper body via the valveless SVC and from the lower body via the IVC, guarded by the rudimentary Eustachian valve.",
+   "say": "Venous blood enters the right atrium through the superior and inferior venae cavae. The right atrium forms the right cardiac border, receiving flow from the valveless SVC and the IVC.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superior Vena Cava Entry",
+     "points": [
+      "Enters superior postero-lateral right atrium",
+      "Entirely devoid of valves",
+      "Direct inline flow towards tricuspid orifice",
+      "SA node situated at junction with right auricle"
+     ]
+    },
+    "right": {
+     "title": "Inferior Vena Cava Entry",
+     "points": [
+      "Enters inferior posterior right atrium",
+      "Guarded by crescentic Eustachian valve",
+      "Directs fetal oxygenated blood across foramen ovale",
+      "Rudimentary and non-functional in adults"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Also opening into the postero-inferior right atrium between the IVC orifice and tricuspid valve is the **coronary sinus**, returning sixty percent of myocardial venous blood. Guarded by the semicircular Thebesian valve, it provides a safe retrograde access route for administering cardioplegia during complex aortic valve reconstruction.",
+   "say": "Opening into the right atrium beside the IVC is the coronary sinus, returning sixty percent of cardiac venous flow. Guarded by the Thebesian valve, it is used for retrograde cardioplegia delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous Inflow",
+     "Atrial Orifice Location",
+     "Associated Valvular Fold",
+     "Embryonic Origin"
+    ],
+    "rows": [
+     [
+      "Superior Vena Cava",
+      "Upper posterior wall",
+      "Valveless orifice",
+      "Right common and anterior cardinal veins"
+     ],
+     [
+      "Inferior Vena Cava",
+      "Lower posterior wall",
+      "Eustachian valve (sinus venosus fold)",
+      "Right vitelline and subcardinal veins"
+     ],
+     [
+      "Coronary Sinus",
+      "Between IVC and AV valve",
+      "Thebesian valve fold",
+      "Left horn of sinus venosus"
+     ],
+     [
+      "Anterior Cardiac Veins",
+      "Anterior atrial wall",
+      "Tiny microscopic apertures",
+      "Direct myocardial venous drainage"
+     ],
+     [
+      "Venae Cordis Minimae",
+      "Scattered on all walls",
+      "Thebesian foramina",
+      "Direct microvascular drainage"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "fa0746c5-8e85-448f-bc10-9c9a19880f61",
+  "eb8d94ba-a58a-48d9-aec6-506e97c0b5f3",
+  "97c3a038-d1b1-48d1-abea-8dbc2aaacd9c"
+ ]
+}

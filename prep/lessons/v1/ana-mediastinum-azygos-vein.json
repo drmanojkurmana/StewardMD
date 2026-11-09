@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-mediastinum",
+ "subject": "anatomy",
+ "title": "Posterior Mediastinum: Azygos Venous System, Thoracic Duct, and Oesophagus",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The posterior mediastinum is located posterior to the pericardium and diaphragm between thoracic vertebral bodies T5 through T12. Its primary longitudinal venous channel is the **azygos vein**, which originates in the abdomen at the confluence of the right subcostal and right ascending lumbar veins.",
+   "say": "The posterior mediastinum lies behind the heart between vertebrae T5 and T12. Its chief venous channel is the azygos vein, arising in the abdomen from the right subcostal and ascending lumbar veins.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-mediastinum-divisions.svg",
+    "alt": "Sagittal anatomy of mediastinum illustrating boundaries of the posterior mediastinum",
+    "caption": "Posterior mediastinal compartment situated posterior to the pericardium and diaphragm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ascending along the right side of the vertebral column through the aortic hiatus, the azygos vein arches anteriorly over the root of the right lung at vertebral level T4. It empties directly into the posterior aspect of the **superior vena cava** immediately before the SVC penetrates the fibrous pericardium.",
+   "say": "Ascending through the aortic hiatus, the azygos vein arches forward over the right lung root at level T4. It drains into the superior vena cava just before the pericardium.",
+   "vis": {
+    "kind": "flow",
+    "title": "Course and Termination of Azygos Vein",
+    "nodes": [
+     {
+      "id": "origin",
+      "label": "Confluence of Right Subcostal and Ascending Lumbar Veins"
+     },
+     {
+      "id": "hiatus",
+      "label": "Traverses Aortic Hiatus (T12) on Right Side of Vertebrae"
+     },
+     {
+      "id": "arch",
+      "label": "Arches over Root of Right Lung at Level of T4"
+     },
+     {
+      "id": "svc",
+      "label": "Drains into Posterior Wall of Superior Vena Cava"
+     }
+    ],
+    "edges": [
+     [
+      "origin",
+      "hiatus"
+     ],
+     [
+      "hiatus",
+      "arch"
+     ],
+     [
+      "arch",
+      "svc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On the left side of the posterior mediastinum, venous drainage is handled by the hemiazygos and accessory hemiazygos veins. The **hemiazygos vein** ascends on the left from T12 to T9, where it crosses behind the aorta, oesophagus, and thoracic duct to drain into the azygos vein at vertebral level T9.",
+   "say": "On the left, venous blood is collected by hemiazygos and accessory hemiazygos veins. The hemiazygos vein crosses behind the aorta and oesophagus at T9 to join the azygos vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous Channel",
+     "Spinal Level / Origin",
+     "Cross-over Level",
+     "Terminal Drainage"
+    ],
+    "rows": [
+     [
+      "Azygos Vein",
+      "T12 (subcostal + ascending lumbar)",
+      "Does not cross (stays right)",
+      "Superior vena cava at T4 arch"
+     ],
+     [
+      "Hemiazygos Vein",
+      "T12 (left subcostal + ascending lumbar)",
+      "Crosses to right at T9",
+      "Drains into azygos vein at T9"
+     ],
+     [
+      "Accessory Hemiazygos",
+      "4th to 8th left intercostal veins",
+      "Crosses to right at T8",
+      "Drains into azygos vein at T8"
+     ],
+     [
+      "Left Superior Intercostal",
+      "2nd, 3rd, 4th left intercostal veins",
+      "Does not cross",
+      "Drains into left brachiocephalic vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **thoracic duct** is the largest lymphatic vessel in the body, conveying chyle and lymph from the lower limbs, pelvis, and abdomen. Originating from the cisterna chyli at vertebral level L1/L2, it enters the posterior mediastinum through the aortic hiatus, ascending between the azygos vein and descending aorta.",
+   "say": "The thoracic duct is the largest lymphatic trunk, conveying lymph from the lower body. Originating from the cisterna chyli, it enters through the aortic hiatus and ascends between aorta and azygos vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lower Thoracic Course (T12-T5)",
+     "points": [
+      "Enters through aortic hiatus at T12",
+      "Ascends on right side of vertebral bodies",
+      "Sandwiched between aorta (left) and azygos (right)",
+      "Lies posterior to the oesophagus"
+     ]
+    },
+    "right": {
+     "title": "Upper Thoracic Course (T4-Root of Neck)",
+     "points": [
+      "Crosses vertebral column from right to left at T5",
+      "Ascends along left border of oesophagus",
+      "Arches lateral to left carotid and jugular",
+      "Empties into left internal jugular-subclavian junction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Iatrogenic surgical trauma or penetrating injuries to the posterior mediastinum can lacerate the thoracic duct, causing extravasation of milky chyle into the pleural cavity, designated **chylothorax**. Rupture below the T5 crossover produces a right-sided chylothorax, whereas injury above T5 results in a left-sided chylothorax.",
+   "say": "Surgical trauma to the thoracic duct releases milky chyle into the pleural space, causing chylothorax. Laceration below T5 yields a right-sided chylothorax, while injury above T5 produces a left-sided collection.",
+   "vis": {
+    "kind": "flow",
+    "title": "Thoracic Duct Crossover and Chylothorax Laterality",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Thoracic Duct Ascends on Right of Vertebral Column"
+     },
+     {
+      "id": "cross",
+      "label": "Crosses to Left Behind Oesophagus at Level of T5"
+     },
+     {
+      "id": "low",
+      "label": "Laceration Below T5 Produces Right-sided Chylothorax"
+     },
+     {
+      "id": "high",
+      "label": "Laceration Above T5 Produces Left-sided Chylothorax"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "cross"
+     ],
+     [
+      "cross",
+      "low"
+     ],
+     [
+      "cross",
+      "high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The thoracic oesophagus descends vertically through the posterior mediastinum from the lower border of the cricoid cartilage at C6 down to the gastric cardia at T11. Along its twenty-five-centimetre length, the oesophageal lumen exhibits four distinct **anatomical constrictions** where foreign bodies lodge and caustic strictures preferentially develop.",
+   "say": "The thoracic oesophagus descends twenty-five centimeters from the cricoid cartilage to the stomach. Its lumen has four anatomical constrictions where swallowed foreign bodies lodge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Constriction Level",
+     "Anatomical Compressing Structure",
+     "Distance from Incisors",
+     "Vertebral Level"
+    ],
+    "rows": [
+     [
+      "First Constriction",
+      "Cricopharyngeus muscle (pharyngooesophageal)",
+      "15 cm (6 inches)",
+      "C6 vertebra"
+     ],
+     [
+      "Second Constriction",
+      "Arch of aorta crossing left wall",
+      "22.5 cm (9 inches)",
+      "T4 vertebra"
+     ],
+     [
+      "Third Constriction",
+      "Left main bronchus crossing anteriorly",
+      "27.5 cm (11 inches)",
+      "T5/T6 vertebra"
+     ],
+     [
+      "Fourth Constriction",
+      "Diaphragmatic oesophageal hiatus",
+      "40 cm (16 inches)",
+      "T10 vertebra"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the lower oesophageal sphincter to relax coupled with aperistalsis produces **achalasia cardia**. On barium swallow radiography, marked dilatation of the proximal oesophagus tapers smoothly to a narrow distal beak, classic for the bird-beak or rat-tail deformity resulting from myenteric plexus degeneration.",
+   "say": "Failure of the lower oesophageal sphincter to relax causes achalasia cardia. Barium swallow demonstrates marked oesophageal dilatation tapering to a smooth bird-beak deformity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-achalasia-cardia.webp",
+    "alt": "Barium swallow radiograph demonstrating dilated oesophagus with bird-beak distal narrowing in achalasia",
+    "caption": "Barium swallow examination demonstrating achalasia cardia with classic bird-beak tapering. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Autonomic motor control to the thoracic viscera is delivered by the **vagus nerve** (CN X). Descending behind the pulmonary roots, the left and right vagi break up into the anterior and posterior pulmonary and oesophageal plexuses, before reforming as anterior and posterior vagal trunks to traverse the diaphragmatic hiatus at T10.",
+   "say": "The vagus nerves descend behind the lung roots to form pulmonary and oesophageal plexuses. They reorganize into anterior and posterior vagal trunks to cross the diaphragm at T10.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Vagal Trunk",
+     "points": [
+      "Formed primarily by left vagus nerve",
+      "Travels on anterior surface of oesophagus",
+      "Gives hepatic branches and anterior nerve of Latarjet",
+      "Traverses oesophageal hiatus at T10"
+     ]
+    },
+    "right": {
+     "title": "Posterior Vagal Trunk",
+     "points": [
+      "Formed primarily by right vagus nerve",
+      "Travels on posterior surface of oesophagus",
+      "Gives coeliac branches and posterior nerve of Latarjet",
+      "Gives criminal nerve of Grassi to gastric fundus"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "6d10e09f-2cfc-4fff-af9d-f87a4d2d925b",
+  "0e37047c-4621-4741-aaa4-75db07eec846",
+  "c1c1f90c-2982-4ee2-9010-84a669d0ea17"
+ ]
+}
