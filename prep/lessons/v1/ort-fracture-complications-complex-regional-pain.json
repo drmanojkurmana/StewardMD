@@ -3,182 +3,303 @@
  "id": "ort-fracture-complications-complex-regional-pain",
  "subject": "orthopaedics",
  "module": "ort-fracture-complications",
- "title": "Complex Regional Pain",
+ "title": "Complex Regional Pain Syndrome",
  "minutes": 6,
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Complex regional pain syndrome** anchors this lesson. Recognition of complex regional pain syndrome starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Complex regional pain syndrome gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Complex Regional Pain teaching image.",
-    "caption": "Complex Regional Pain illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Sudeck atrophy** anchors this lesson. The mechanism behind Sudeck atrophy explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Sudeck atrophy gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Complex Regional Pain set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Sudeck atrophy",
-      "Central fact in this lesson"
-     ],
-     [
-      "Avascular necrosis",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Avascular necrosis** anchors this lesson. Clinically, avascular necrosis presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Avascular necrosis gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Complex regional pain syndrome** (CRPS) is a disabling chronic neuro-inflammatory pain condition that develops after bone fractures, soft tissue trauma, or surgical interventions. The syndrome is categorized into two distinct clinical subtypes based on neural status: CRPS type 1 (historically termed Sudeck atrophy or reflex sympathetic dystrophy) occurs in the absence of a verifiable major peripheral nerve lesion. In contrast, CRPS type 2 (historically termed causalgia) develops in the presence of an identifiable major peripheral nerve trunk injury.",
+   "say": "Complex regional pain syndrome is a severe post-traumatic pain condition. Type one occurs without any demonstrable nerve lesion, whereas type two develops directly after injury to a major peripheral nerve trunk.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "CRPS Type 1 (Sudeck Atrophy)",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "No identifiable major nerve injury",
+      "Follows minor sprain, Colles fracture, cast",
+      "Diffuse, non-dermatomal pain distribution",
+      "Accounts for ninety percent of clinical cases"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "CRPS Type 2 (Causalgia)",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Documented major peripheral nerve laceration",
+      "Direct injury to median or sciatic nerve trunks",
+      "Pain concentrated in defined nerve territory",
+      "Intense burning pain and hyperalgesia"
      ]
     }
    }
   },
   {
-   "tx": "**Crush syndrome** anchors this lesson. Investigation choice for crush syndrome follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Crush syndrome gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Pathophysiological mechanisms** driving complex regional pain syndrome involve aberrant neurogenic inflammation, microvascular endothelial dysfunction, and central nervous system sensitization. Trauma triggers exaggerated antidromic axonal reflexes that release substance P and calcitonin gene-related peptide (CGRP) into tissues, producing sustained vasodilatation and protein extravasation. Over time, pathological alpha-adrenoceptor upregulation on nociceptive C-fibres couples the sympathetic nervous system directly to pain pathways, creating sympathetically maintained pain accompanied by cortical somatosensory reorganization.",
+   "say": "Aberrant neurogenic inflammation releases substance P and CGRP, causing persistent redness and swelling. Later, sensory nerves sprout adrenergic receptors, allowing sympathetic activity to directly drive intense pain signals.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoporosis-fig1.webp",
-    "alt": "Complex Regional Pain teaching image.",
-    "caption": "Complex Regional Pain illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Gas gangrene** anchors this lesson. Separation of gas gangrene from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Gas gangrene gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Complex Regional Pain set",
-    "cols": [
-     "Item",
-     "Point"
+    "kind": "flow",
+    "title": "Pathophysiological Cascade in CRPS Evolution",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Tissue Trauma",
+      "sub": "Fracture or crush injury activates nociceptors"
+     },
+     {
+      "id": "p2",
+      "label": "Neurogenic Burst",
+      "sub": "Excess release of substance P and CGRP neuropeptides"
+     },
+     {
+      "id": "p3",
+      "label": "Sympathetic Coupling",
+      "sub": "Adrenergic receptors sprout on sensory C-fibres"
+     },
+     {
+      "id": "p4",
+      "label": "Central Sensitization",
+      "sub": "Dorsal horn wind-up and cortical somatosensory loss"
+     }
     ],
-    "rows": [
+    "edges": [
      [
-      "Gas gangrene",
-      "Central fact in this lesson"
+      "p1",
+      "p2",
+      "Peripheral neuropeptide surge"
      ],
      [
-      "Heterotopic ossification",
-      "Companion fact to revise together"
+      "p2",
+      "p3",
+      "Vascular and autonomic shift"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "p3",
+      "p4",
+      "Chronic neuroplastic change"
      ]
     ]
    }
   },
   {
-   "tx": "**Heterotopic ossification** anchors this lesson. Management of heterotopic ossification follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Heterotopic ossification gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Clinical triad of symptoms** characterising complex regional pain syndrome includes disproportionate continuous pain, autonomic vasomotor/sudomotor instability, and trophic tissue alterations. Patients report excruciating, intractable burning or aching pain that is entirely disproportionate in magnitude and duration to the inciting injury. Autonomic signs manifest as prominent limb swelling, temperature asymmetries exceeding one degree Celsius compared to the healthy contralateral limb, hyperhidrosis, and trophic changes including shiny atrophic skin, altered hair growth, and brittle grooved nails.",
+   "say": "CRPS presents with a classic triad: severe burning pain out of proportion to the injury, autonomic temperature and sweating changes, and trophic alterations like shiny thin skin and brittle nails.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Signs and Symptoms Triad in CRPS",
+    "cols": [
+     "Diagnostic Category",
+     "Patient Symptoms",
+     "Objective Physical Signs"
+    ],
+    "rows": [
+     [
+      "Sensory disturbances",
+      "Continuous burning, throbbing pain",
+      "Hyperalgesia to pinprick, allodynia to light touch"
+     ],
+     [
+      "Vasomotor changes",
+      "Feeling cold or hot sensations",
+      "Skin color asymmetry, temperature gap >1 deg C"
+     ],
+     [
+      "Sudomotor / Edema",
+      "Fluctuating limb swelling, clamminess",
+      "Pitting edema, localized hyperhidrosis"
+     ],
+     [
+      "Motor / Trophic",
+      "Weakness, tremor, stiffness",
+      "Joint contractures, shiny skin, brittle nails"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Budapest diagnostic criteria** endorsed by the International Association for the Study of Pain require continuing pain disproportionate to the inciting event, plus documented symptoms and objective physical signs across four sensory categories. A patient must report at least one symptom in three of four categories (sensory, vasomotor, sudomotor/edema, motor/trophic), and the clinician must objectively demonstrate at least one sign in two of the four categories on physical examination, with no other diagnosis explaining the presentation.",
+   "say": "The Budapest criteria confirm CRPS: pain out of proportion to the injury, with symptoms in three of four categories and objective signs in at least two categories: sensory, vasomotor, sudomotor, and motor or trophic.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Budapest Clinical Criteria",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Continuing disproportionate pain",
+      "Patient reports symptoms in 3 of 4 groups",
+      "Clinician observes signs in 2 of 4 groups",
+      "Excludes alternative neuropathy or infection"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Four Evaluation Categories",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "1. Sensory: hyperesthesia and allodynia",
+      "2. Vasomotor: temperature and color asymmetry",
+      "3. Sudomotor: edema and sweating asymmetry",
+      "4. Motor/Trophic: tremor, dystonia, nail changes"
      ]
     }
    }
   },
   {
-   "tx": "**Complex regional pain syndrome** anchors this lesson. Complications of complex regional pain syndrome are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Complex regional pain syndrome gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Complex Regional Pain teaching image.",
-    "caption": "Complex Regional Pain illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Sudeck atrophy** anchors this lesson. Anchoring Sudeck atrophy beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Sudeck atrophy gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "**Spotty osteopenia** on plain radiographs represents a classic diagnostic radiographic sign of complex regional pain syndrome. Radiographs of the affected hand or foot display patchy, patchy ground-glass subchondral and metaphyseal demineralization, colloquially known as Sudeck atrophy. In triple-phase technetium-99m bone scintigraphy, the delayed mineral phase demonstrates diffuse, asymmetrical, periarticular tracer hyperfixation across multiple small joints of the involved extremity, confirming heightened bone turnover driven by neurovascular shunting.",
+   "say": "Plain X-rays show spotty, patchy osteopenia in the small bones of the hand or foot, known as Sudeck atrophy. A triple-phase bone scan shows diffuse periarticular tracer pooling across all small joints.",
    "vis": {
     "kind": "table",
-    "title": "Complex Regional Pain set",
+    "title": "Imaging and Diagnostic Modalities in CRPS",
     "cols": [
-     "Item",
-     "Point"
+     "Investigation",
+     "Characteristic Finding",
+     "Diagnostic Role"
     ],
     "rows": [
      [
-      "Sudeck atrophy",
-      "Central fact in this lesson"
+      "Plain radiography",
+      "Spotty, patchy subchondral demineralization",
+      "Confirms focal bone loss (Sudeck atrophy)"
      ],
      [
-      "Avascular necrosis",
-      "Companion fact to revise together"
+      "Triple-phase bone scan",
+      "Diffuse periarticular tracer hyperfixation",
+      "High sensitivity in early warm phase (<6 months)"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Thermography",
+      "Skin temperature difference >1.0 degree Celsius",
+      "Documents objective vasomotor dysregulation"
+     ],
+     [
+      "Nerve conduction study",
+      "Normal in type 1; focal axonal defect in type 2",
+      "Differentiates CRPS type 1 from type 2"
      ]
     ]
+   }
+  },
+  {
+   "tx": "**Physical therapy** and early active functional rehabilitation form the mandatory foundation of treatment for complex regional pain syndrome. Graded motor imagery, mirror therapy, and gentle desensitization techniques using progressively coarse fabrics rewire maladaptive cortical representations and diminish central allodynia. Immobility and prolonged splinting must be rigorously avoided because joint rest accelerates muscular atrophy, tendon adhesions, and irreversible fibrous contracture of the limb.",
+   "say": "Physical therapy and active mobilization are the most important treatments. Mirror therapy and graded motor imagery help rewire the brain. Prolonged casting and splinting must be avoided because immobility makes CRPS worse.",
+   "vis": {
+    "kind": "flow",
+    "title": "Multidisciplinary Rehabilitation Ladder in CRPS",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Pain Control",
+      "sub": "Gabapentin, pregabalin, NSAIDs, bisphosphonates"
+     },
+     {
+      "id": "r2",
+      "label": "Graded Imagery",
+      "sub": "Left-right motor recognition and mirror therapy"
+     },
+     {
+      "id": "r3",
+      "label": "Active Loading",
+      "sub": "Gentle weight-bearing and functional daily use"
+     },
+     {
+      "id": "r4",
+      "label": "Interventional Blocks",
+      "sub": "Sympathetic nerve block or spinal cord stimulator"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2",
+      "Window for exercise"
+     ],
+     [
+      "r2",
+      "r3",
+      "Cortical retraining"
+     ],
+     [
+      "r3",
+      "r4",
+      "Refractory progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sympathetic ganglion blocks** provide targeted diagnostic confirmation and therapeutic interruption of sympathetically maintained pain pathways. For upper extremity disease, a local anaesthetic blockade of the cervical sympathetic chain at the stellate ganglion (C6 level) induces temporary Horner syndrome, warming of the hand, and dramatic pain relief. For lower extremity involvement, a lumbar sympathetic block targeting the L2 to L4 prevertebral sympathetic ganglia breaks the autonomic reflex arc, facilitating intensive physical therapy.",
+   "say": "Sympathetic nerve blocks target the autonomic reflex loop: stellate ganglion block for the arm and lumbar sympathetic block for the leg. Successful blockade relieves pain and warms the limb, opening a window for physical therapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Interventional Sympathetic Procedures in CRPS",
+    "cols": [
+     "Procedure",
+     "Anatomical Target",
+     "Confirmation of Successful Block"
+    ],
+    "rows": [
+     [
+      "Stellate ganglion block",
+      "C6 transverse process (Chassaignac tubercle)",
+      "Ipsilateral Horner syndrome, facial anhydrosis"
+     ],
+     [
+      "Lumbar sympathetic block",
+      "Anterolateral L2-L3 vertebral bodies",
+      "Lower limb skin temperature rises >=2.0 deg C"
+     ],
+     [
+      "Spinal cord stimulation",
+      "Dorsal column epidural lead placement",
+      "Refractory CRPS failing medical and block therapy"
+     ],
+     [
+      "Intravenous regional block",
+      "Bier block with bretylium or lidocaine",
+      "Temporary chemical sympathectomy of distal limb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vitamin C** administered at a daily oral dose of five hundred milligrams for fifty consecutive days following distal radius fractures significantly reduces the incidence of complex regional pain syndrome. In prospective randomized trials, ascorbic acid acts as an effective free radical scavenger and antioxidant, dampening post-traumatic microvascular reperfusion injury and neurogenic inflammation. Routine prophylactic vitamin C is now widely recommended following wrist fractures and foot trauma.",
+   "say": "Oral vitamin C at 500 milligrams daily for fifty days following a Colles wrist fracture prevents CRPS by scavenging free radicals and dampening neurogenic inflammation. It is a simple, proven prophylaxis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prophylactic Vitamin C Protocol",
+     "points": [
+      "500 mg daily oral ascorbic acid",
+      "Commenced immediately post-fracture",
+      "Continued for fifty consecutive days",
+      "Reduces CRPS risk by over fifty percent"
+     ]
+    },
+    "right": {
+     "title": "Established Disease Pharmacotherapy",
+     "points": [
+      "Gabapentinoids (pregabalin 150 to 300 mg)",
+      "Intravenous bisphosphonates (alendronate/neridronate)",
+      "Short-course oral prednisone for acute edema",
+      "Topical compounded lidocaine or ketamine"
+     ]
+    }
    }
   }
  ],
  "quiz": [],
  "cards": [
   {
-   "f": "Complex Regional Pain: central fact",
-   "b": "Complex regional pain syndrome is the anchor fact; name it precisely and grade severity."
+   "f": "CRPS type 1 versus type 2: essential distinguishing criterion",
+   "b": "Type 1 occurs without a major nerve lesion; type 2 occurs with a documented major nerve trunk injury."
   },
   {
-   "f": "Complex Regional Pain: discriminator",
-   "b": "Sudeck atrophy separates this topic from its nearest mimics."
+   "f": "Budapest criteria for CRPS: core diagnostic requirement",
+   "b": "Disproportionate pain plus symptoms in 3 of 4 categories and objective signs in 2 of 4 categories."
   },
   {
-   "f": "Complex Regional Pain: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "f": "Distal radius fracture: proven pharmacological prophylaxis against CRPS",
+   "b": "Oral vitamin C 500 mg daily for 50 days post-injury."
   }
  ],
  "keys": [
-  "Complex regional pain syndrome anchors the topic",
-  "Sudeck atrophy is the discriminator",
-  "Name, grade, act and review in order"
+  "CRPS causes disproportionate pain, autonomic instability, and trophic changes after trauma",
+  "Budapest criteria require symptoms and signs across sensory, vasomotor, sudomotor, and motor categories",
+  "Active physical rehabilitation is paramount, and vitamin C prophylaxis reduces post-fracture incidence"
  ]
 }
