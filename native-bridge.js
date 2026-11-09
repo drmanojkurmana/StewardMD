@@ -492,6 +492,9 @@
             if (!current()) return;
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
+            // Ranked alternatives, when the caller wants them (opts.onMatches): the native side already
+            // sends up to maxResults matches; onPartial above keeps the first for existing callers.
+            if (opts.onMatches && data && data.matches && data.matches.length) { try { opts.onMatches(data.matches.map(String)); } catch (e) {} }
           });
           self._modeSub = SP.addListener("recognitionMode", function (data) {
             if (!current()) return;
