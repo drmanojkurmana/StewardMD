@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-bone",
+  "subject": "pathology",
+  "title": "Ewing Sarcoma, CD99, t(11;22), and Chondrosarcoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Ewing sarcoma sheets small round blue cells in diaphyses and flat bones of children, onion skin periosteum, fever and raised inflammatory markers mimicking osteomyelitis dangerously. That round cell tumour is **Ewing sarcoma**. Peak incidence sits in the second decade, and glycogen rich cytoplasm stains PAS positive while the permeative moth eaten pattern on plain films should never be dismissed as infection alone.",
+      "say": "Diaphyseal onion skin lesion plus fever in a child is Ewing sarcoma mimicking infection; biopsy decides.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp",
+        "alt": "Bone lesion patterns Ewing sarcoma",
+        "caption": "Ewing sarcoma diaphyseal lesion patterns among bone tumours."
+      }
+    },
+    {
+      "tx": "CD99 membranous staining supports Ewing sarcoma among small round blue cell tumours while molecular EWSR1 fusion convicts, lymphoblastic lymphoma its closest mimic. That membrane marker is **CD99 in Ewing sarcoma**. CD99 also stains lymphoblastic lymphoma and some other round cell tumours, so a positive membrane blush narrows the field without closing the case on its own.",
+      "say": "CD99 lights Ewing membranes brightly, but fusion testing convicts among round blue mimics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ewing sarcoma",
+          "points": [
+            "CD99 diffuse membranous",
+            "EWSR1 FLT1 fusion",
+            "Diaphysis and flat bones"
+          ]
+        },
+        "right": {
+          "title": "Lymphoblastic lymphoma",
+          "points": [
+            "TdT and lineage markers",
+            "No EWSR1 fusion",
+            "Marrow and node disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The t(11;22) translocation fuses EWSR1 to FLI1 transcription factor in most Ewing sarcomas, founding the Ewing family including peripheral primitive neuroectodermal tumours. That fusion is **EWSR1-FLI1 from t(11;22) in Ewing sarcoma**. Roughly one case in ten uses EWSR1-ERG from t(21;22) instead, and FISH break apart testing for EWSR1 catches both partners when sequencing is unavailable.",
+      "say": "t(11;22) EWSR1 FLI1 is Ewing sarcoma's molecular signature in eighty five percent of cases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Round cell tumour",
+          "Fusion or marker",
+          "Age accent"
+        ],
+        "rows": [
+          [
+            "Ewing sarcoma",
+            "EWSR1 FLI1 t(11;22)",
+            "Children and teens"
+          ],
+          [
+            "Rhabdomyosarcoma alveolar",
+            "PAX FOXO1 fusions",
+            "Young, worse prognosis"
+          ],
+          [
+            "Synovial sarcoma",
+            "SS18 SSX t(X;18)",
+            "Young adults near joints"
+          ],
+          [
+            "Desmoplastic small round",
+            "EWSR1 WT1",
+            "Abdominal serosal masses"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chondrosarcoma cartilages malignant lobules with endochondral ring and arc calcification in pelvis, ribs, and proximal long bones of middle age, surgery its only reliable therapy. That cartilage cancer is **conventional chondrosarcoma**. Endosteal scalloping deeper than two thirds of cortical thickness on imaging favours this malignancy over a quiet enchondroma, especially when new pain appears in a previously silent lesion.",
+      "say": "Rings and arcs calcification in a pelvic cartilage tumour of middle age means chondrosarcoma; cut it widely.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chondrosarcoma-fig1.webp",
+        "alt": "Chondrosarcoma radiographic features",
+        "caption": "Chondrosarcoma radiographic features with chondroid calcification."
+      }
+    },
+    {
+      "tx": "Grading chondrosarcoma by cellularity, nuclear size, and mitoses predicts metastasis, grade one now atypical cartilaginous tumour in limbs behaving locally. That grade language is **chondrosarcoma grading and ACT terminology**. Grade 2 and grade 3 tumours metastasise to lung in a substantial minority, whereas grade 1 lesions in the limbs rarely spread beyond their local compartment.",
+      "say": "Grade writes chondrosarcoma prognosis; grade one limb lesions earn the kinder ACT name.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enchondroma",
+          "points": [
+            "Medullary cartilage benign",
+            "Hands common, pain absent usually",
+            "Ollier and Maffucci multiply risk"
+          ]
+        },
+        "right": {
+          "title": "Chondrosarcoma",
+          "points": [
+            "Pain, growth after maturity",
+            "Endosteal scalloping deep",
+            "Pelvis and proximal sites"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dedifferentiated chondrosarcoma juxtaposes low grade cartilage with high grade sarcoma abruptly, prognosis collapsing to the dedifferentiated component's tempo. That biphasic danger is **dedifferentiated chondrosarcoma**. A biopsy sampling only the bland cartilage half badly understages the patient, so radiology must guide the needle toward the noncartilaginous, lytic focus before treatment is planned.",
+      "say": "One slide kind, next slide savage: dedifferentiated chondrosarcoma follows its worst component's clock.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Round cell or cartilage tumour suspected"
+          },
+          {
+            "id": "b",
+            "label": "Centre planned biopsy with molecular tests"
+          },
+          {
+            "id": "c",
+            "label": "Fusion and grade assign entity"
+          },
+          {
+            "id": "d",
+            "label": "Chemotherapy sensitivity by entity"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ewing chemotherapy responsiveness contrasts chondrosarcoma resistance, making molecular diagnosis therapeutic destiny among bone sarcomas rather than academic label. That divergence is **entity based therapy in bone sarcomas**. Interval compressed vincristine, doxorubicin and cyclophosphamide alternating with ifosfamide and etoposide lifts Ewing survival, while the same drugs add toxicity without gain in conventional chondrosarcoma.",
+      "say": "Ewing melts with chemotherapy, chondrosarcoma ignores it; naming the entity prescribes the strategy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Entity",
+          "Chemo role",
+          "Surgery role"
+        ],
+        "rows": [
+          [
+            "Ewing sarcoma",
+            "Central, interval compressed regimens",
+            "Local control after response"
+          ],
+          [
+            "Osteosarcoma",
+            "MAP around surgery",
+            "Wide limb salvage resection"
+          ],
+          [
+            "Chondrosarcoma",
+            "Minimal conventional role",
+            "Wide excision decisive"
+          ],
+          [
+            "Giant cell tumour",
+            "Denosumab selected",
+            "Curettage or resection by site"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bone tumour staging Enneking blends grade, compartment, and metastasis into surgical margins language shared between radiologist pathologist surgeon. That shared system is **Enneking staging of musculoskeletal tumours**. Stage IIB means high grade, extracompartmental and nonmetastatic, a combination that pushes the surgeon toward the widest planned margin or amputation discussion.",
+      "say": "Grade, compartment, metastasis: Enneking lets every sarcoma specialist speak one margin language.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intracompartmental",
+          "points": [
+            "Tumour confined by bone or fascia",
+            "Wide margins feasible",
+            "Limb salvage likelier"
+          ]
+        },
+        "right": {
+          "title": "Extracompartmental",
+          "points": [
+            "Barriers breached",
+            "Margins widen or amputation",
+            "Local relapse risk climbs"
+          ]
+        }
+      }
+    }
+  ]
+}
