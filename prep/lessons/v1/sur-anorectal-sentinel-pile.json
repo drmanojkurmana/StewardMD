@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "sur-anorectal",
+ "subject": "surgery",
+ "title": "Chronic Anal Fissure and Fistula in Ano",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A hypertrophied, oedematous skin tag situated at the external cutaneous margin of a chronic fissure is the **sentinel pile**. This tag develops as a direct consequence of persistent low-grade lymphatic edema and chronic inflammation provoked by the non-healing fissure. Internally, a corresponding hypertrophied anal papilla emerges at the proximal dentate line, and together with the intervening ulcer, they comprise the classic chronic fissure triad.",
+   "say": "A sentinel pile is a swollen skin tag at the lower edge of a chronic anal fissure that marks longstanding inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-perianal_inspection.webp",
+    "alt": "Diagram illustrating perianal inspection findings including sentinel skin tag at six o'clock, anal fissure, and external fistula openings.",
+    "caption": "Perianal inspection: identifying a posterior midline sentinel pile and fissure ulcer during clinical examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A chronic abnormal hollow epithelialized or granulation-tissue-lined communication connecting the anal canal to the perianal skin is a **fistula in ano**. Patients typically describe persistent or recurrent purulent discharge, serosanguinous drainage, perianal pruritus, and cyclical throbbing pain that temporarily subsides whenever discharge erupts from the external skin orifice. Digital rectal examination reveals a palpable indurated fibrous cord extending from the perineum into the anal canal.",
+   "say": "A fistula in ano is a chronic tract connecting an internal anal opening with an external perianal cutaneous orifice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "crypt",
+      "label": "Obstruction & Infection of Deep Anal Crypt Gland"
+     },
+     {
+      "id": "absc",
+      "label": "Acute Intersphincteric Abscess Formation"
+     },
+     {
+      "id": "track",
+      "label": "Purulent Tracking through Sphincteric Planes"
+     },
+     {
+      "id": "fist",
+      "label": "Rupture & Chronic Epithelialized Fistulous Tract"
+     }
+    ],
+    "edges": [
+     [
+      "crypt",
+      "absc"
+     ],
+     [
+      "absc",
+      "track"
+     ],
+     [
+      "track",
+      "fist"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The universal underlying pathophysiological mechanism accounting for over ninety percent of anal fistulae is the **cryptoglandular hypothesis**. The anal canal contains four to ten branched anal glands whose ducts empty into the crypts of Morgagni at the dentate line. Obstruction of a crypt orifice by fecal matter or debris initiates bacterial stasis and infection, creating an intersphincteric abscess that ruptures into the perineal subcutaneous tissue.",
+   "say": "The cryptoglandular hypothesis explains that anal fistulae originate from obstructed, infected anal crypt glands at the dentate line.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Plane",
+     "Abscess Type",
+     "Clinical Signs",
+     "Resulting Fistula Type"
+    ],
+    "rows": [
+     [
+      "Perianal space",
+      "Perianal abscess",
+      "Fluctuant tender mass at anal verge",
+      "Low simple subcutaneous fistula"
+     ],
+     [
+      "Intersphincteric space",
+      "Intersphincteric abscess",
+      "Severe rectal pain without external erythema",
+      "Intersphincteric fistula (most common)"
+     ],
+     [
+      "Ischioanal space",
+      "Ischiorectal abscess",
+      "Brawny tender swelling in buttock",
+      "Transsphincteric fistula"
+     ],
+     [
+      "Supralevator space",
+      "Supralevator abscess",
+      "Pelvic fullness, pyrexia, high rectal mass",
+      "Suprasphincteric or extrasphincteric"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The venerable clinical rule guiding the anatomical course of an anal fistula tract is **Goodsall rule**. If the external opening lies anterior to a transverse line bisecting the anal canal, the tract runs along a direct, straight radial path into the nearest crypt. Conversely, if the opening lies posterior to the transverse line, the tract tracks along a curved course to enter the posterior midline crypt.",
+   "say": "Goodsall rule states that anterior fistula openings track straight, whereas posterior openings curve toward the posterior midline crypt.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-goodsall_rule.webp",
+    "alt": "Diagram illustrating Goodsall rule with transverse dividing line showing straight anterior tracts and curved posterior tracts.",
+    "caption": "Goodsall rule: anterior openings follow a direct radial path, whereas posterior openings curve to the posterior midline. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The international anatomical classification stratifying fistulae according to their relationship to the external sphincter complex is the **Parks fistula classification**. Intersphincteric fistulae represent forty-five percent of cases, confined between the sphincters. Transsphincteric fistulae penetrate through the external sphincter into the ischioanal fossa. Suprasphincteric fistulae loop over the top of the puborectalis, and extrasphincteric fistulae pass from the rectum outside the entire sphincter mechanism.",
+   "say": "Parks classification stratifies fistulae into intersphincteric, transsphincteric, suprasphincteric, and extrasphincteric types.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parks Type",
+     "Prevalence",
+     "Sphincter Involvement",
+     "Surgical Approach"
+    ],
+    "rows": [
+     [
+      "Intersphincteric",
+      "45% (most common)",
+      "Spares external sphincter completely",
+      "Simple lay-open fistulotomy"
+     ],
+     [
+      "Transsphincteric",
+      "30%",
+      "Traverses external sphincter at variable heights",
+      "Fistulotomy if low; seton or LIFT if high"
+     ],
+     [
+      "Suprasphincteric",
+      "20%",
+      "Arches above puborectalis muscle sling",
+      "Loose draining seton, mucosal advancement flap"
+     ],
+     [
+      "Extrasphincteric",
+      "5%",
+      "Bypasses entire sphincter from rectal wall",
+      "Colostomy, repair rectal defect, treat pelvis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gold standard surgical procedure for low, simple intersphincteric or low transsphincteric fistulae is **fistulotomy**. With the patient in the lithotomy position, a metallic probe is gently guided through the external opening into the anal canal. The overlying tissues and internal sphincter are divided over the grooved director, curetting the chronic granulation tissue to allow the open trench to heal by secondary intention.",
+   "say": "Fistulotomy lays open simple low fistulae over a metallic probe, allowing clean healing by secondary intention.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-fistula-probe-and-director.webp",
+    "alt": "Surgical instruments showing a metallic fistula probe and grooved director used for cannulating and laying open fistulae.",
+    "caption": "Fistula probe and grooved director: used to cannulate and lay open simple anal fistulae during fistulotomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When a complex high transsphincteric fistula traverses substantial external sphincter muscle, surgeons employ **seton placement**. A non-absorbable thread or silicone vessel loop is threaded through the entire fistulous tract and tied loosely to provide continuous drainage, eliminating recurrent sepsis. Alternatively, a tight cutting seton can be tightened sequentially in clinic, slowly dividing the sphincter muscle while inducing concurrent perisphincteric fibrosis.",
+   "say": "A seton loop maintains continuous tract drainage in high fistulae, preventing recurrent abscesses without causing incontinence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "probe",
+      "label": "Gentle Probing of High Transsphincteric Fistula Tract"
+     },
+     {
+      "id": "pass",
+      "label": "Passing Non-Absorbable Suture or Silicone Loop"
+     },
+     {
+      "id": "tie",
+      "label": "Securing Seton Loosely around Enclosed Sphincter"
+     },
+     {
+      "id": "drain",
+      "label": "Continuous Drainage, Sepsis Resolution & Fibrous Maturation"
+     }
+    ],
+    "edges": [
+     [
+      "probe",
+      "pass"
+     ],
+     [
+      "pass",
+      "tie"
+     ],
+     [
+      "tie",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The acute precursor stage that heralds the subsequent development of an anal fistula is a **perianal abscess**. Arising from cryptoglandular infection tracking downward into the subcutaneous tissue adjacent to the anal verge, it presents as a throbbing, exquisitely tender, erythematous swelling. Prompt surgical incision and drainage under local or general anaesthesia is mandatory; antibiotics alone are completely ineffective for drained purulent collections.",
+   "say": "A perianal abscess requires prompt surgical incision and drainage to relieve severe pain and prevent tissue destruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perianal Abscess",
+     "points": [
+      "Superficial subcutaneous collection at anal verge",
+      "Obvious visible swelling, erythema, fluctuance",
+      "Exquisite tenderness during seated posture",
+      "Easily drained via cruciate incision under local"
+     ]
+    },
+    "right": {
+     "title": "Ischiorectal Abscess",
+     "points": [
+      "Deep collection within large ischioanal fossa",
+      "Induration and brawny tenderness on buttock",
+      "High fever, systemic toxicity, leukocytosis",
+      "Requires wide drainage in operating theater"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Accurate preoperative roadmap delineation of complex, recurrent, or Crohn-associated fistulae relies upon high-resolution **pelvic MRI**. T2-weighted and contrast-enhanced sequences clearly demonstrate the primary tract, secondary branching extensions, horseshoe configurations, and occult supralevator abscess cavities relative to the levator ani and sphincter muscles, safeguarding patients against inadvertent sphincter division and permanent fecal incontinence.",
+   "say": "Pelvic MRI provides crucial anatomical mapping of complex and recurrent fistulae, delineating secondary tracts and sphincter anatomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Modality",
+     "Diagnostic Sensitivity",
+     "Strengths",
+     "Key Limitations"
+    ],
+    "rows": [
+     [
+      "Pelvic MRI",
+      "> 95% for complex tracts",
+      "Superb soft-tissue contrast, multiplanar mapping",
+      "High cost, limited availability"
+     ],
+     [
+      "3D Endoanal ultrasound",
+      "85% to 90%",
+      "Clear visualization of internal sphincter disruption",
+      "Operator dependent, cannot visualize high pelvic roof"
+     ],
+     [
+      "Fistulography",
+      "< 50%",
+      "Historical contrast fluoroscopic study",
+      "High false-negative rate, cannot visualize muscles"
+     ],
+     [
+      "Examination under anesthesia",
+      "90% with skilled surgeon",
+      "Allows simultaneous therapeutic intervention",
+      "Requires operating theater and general anesthesia"
+     ]
+    ]
+   }
+  }
+ ]
+}

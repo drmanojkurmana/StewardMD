@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-anorectal",
+ "subject": "surgery",
+ "title": "Haemorrhoids and Anal Fissure",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Pathological enlargement, downward displacement, and vascular engorgement of normal anal cushions produce **haemorrhoids**. These vascular cushions reside within the submucosa of the anal canal at the classic three, seven, and eleven o'clock positions in the lithotomy view. Straining, chronic constipation, and elevated intra-abdominal pressure disrupt the supporting Treitz muscle and elastic framework, leading to painless bright red rectal bleeding coating the stool surface.",
+   "say": "Haemorrhoids represent displaced, engorged anal cushions located at three, seven, and eleven o'clock that bleed painlessly with defecation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-haemorrhoid_grading.webp",
+    "alt": "Cross-sectional anatomical diagram illustrating Goligher internal haemorrhoid grading from grades one through four.",
+    "caption": "Haemorrhoid classification: anatomical grading of internal haemorrhoid prolapse relative to the anal sphincter. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Internal haemorrhoids situated above the dentate line are classified into four distinct severity levels by **Goligher internal haemorrhoid grading**. Grade one haemorrhoids bleed but never prolapse outside the anal canal. Grade two prolapse through the anal verge during defecation but reduce spontaneously. Grade three require manual reduction back into the canal, whereas grade four are permanently prolapsed, non-reducible, and prone to thrombosis and strangulation.",
+   "say": "Goligher staging classifies internal haemorrhoids from grade one bleeding without prolapse to grade four irreducible prolapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Goligher Grade",
+     "Degree of Prolapse",
+     "Clinical Symptoms",
+     "First-Line Management"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "No prolapse beyond anal verge",
+      "Painless bright red bleeding",
+      "Dietary fiber, water, flavonoids"
+     ],
+     [
+      "Grade II",
+      "Prolapses on straining, spontaneous reduction",
+      "Bleeding, mild perianal soiling",
+      "Office rubber band ligation"
+     ],
+     [
+      "Grade III",
+      "Prolapses, requires manual digital reduction",
+      "Bleeding, mucosal discharge, discomfort",
+      "Rubber band ligation or surgery"
+     ],
+     [
+      "Grade IV",
+      "Permanently prolapsed, irreducible",
+      "Severe pain, thrombosis, mucosal ulcer",
+      "Excisional haemorrhoidectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most widely performed outpatient procedural intervention for symptomatic grade two and selected grade three haemorrhoids is **rubber band ligation**. An elastic ligature is deployed around the apex of the redundant vascular cushion at least one centimetre above the dentate line. The band arrests arterial inflow, provoking ischemic necrosis and sloughing within five to seven days while producing scarring that anchors the cushion to the underlying muscularis.",
+   "say": "Rubber band ligation arrests mucosal blood supply above the dentate line, causing ischemic sloughing and scar fixation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "proct",
+      "label": "Proctoscopic Visualization of Redundant Cushion"
+     },
+     {
+      "id": "grasp",
+      "label": "Grasping Mucosa 1 to 2 cm Above Dentate Line"
+     },
+     {
+      "id": "band",
+      "label": "Firing Elastic Ligature around Mucosal Pedicle"
+     },
+     {
+      "id": "slough",
+      "label": "Ischemic Necrosis, Sloughing & Fibrous Fixation"
+     }
+    ],
+    "edges": [
+     [
+      "proct",
+      "grasp"
+     ],
+     [
+      "grasp",
+      "band"
+     ],
+     [
+      "band",
+      "slough"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A non-excisional surgical technique designed to correct mucosal prolapse without creating external perianal wounds is **stapled haemorrhoidopexy**. Known as the Longo procedure, a circular endo-anal stapler excises a circumferential ring of redundant rectal mucosa and submucosa four centimetres above the dentate line. This simultaneously interrupts the superior rectal vascular pedicles and hitches the prolapsed cushions back into their anatomical position with significantly reduced postoperative pain.",
+   "say": "Stapled haemorrhoidopexy excises a mucosal ring above the dentate line, repositioning cushions and reducing postoperative pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stapled Haemorrhoidopexy (Longo)",
+     "points": [
+      "Circumferential mucosal excision above dentate line",
+      "No sensitive perianal skin wounds created",
+      "Significantly lower acute postoperative pain",
+      "Higher long-term recurrence of prolapse"
+     ]
+    },
+    "right": {
+     "title": "Open Excisional Haemorrhoidectomy",
+     "points": [
+      "Direct surgical excision of all three vascular cushions",
+      "Open perineal wounds left to granulate",
+      "Intense acute postoperative anal pain",
+      "Lowest lifetime risk of haemorrhoid recurrence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive surgical gold standard procedure for severe grade four, strangulated, or mixed internal-external haemorrhoids is **open haemorrhoidectomy**. Under the Milligan-Morgan technique, each of the three primary vascular cushions is dissected off the internal anal sphincter up to its vascular pedicle and securely ligated. Crucially, intervening bridges of healthy anoderm and mucous membrane are preserved to prevent postoperative anal stenosis.",
+   "say": "Milligan-Morgan open haemorrhoidectomy excises vascular cushions while preserving mucocutaneous skin bridges to avoid anal canal stenosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-open-haemorrhoidectomy-milligan-morgan.webp",
+    "alt": "Surgical operative view of Milligan-Morgan open excisional haemorrhoidectomy showing triangular skin bridges left between excised cushions.",
+    "caption": "Open haemorrhoidectomy: Milligan-Morgan technique leaving open mucocutaneous bridges between excision sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A longitudinal tear or painful linear ulcer in the squamoepithelial lining of the lower anal canal distal to the dentate line is an **anal fissure**. Over ninety percent of fissures occur in the posterior midline, where the elliptical arrangement of external sphincter fibers leaves the anal wall poorly supported. Passage of hard, bulky scybalous stool tears the fragile anoderm, provoking intense knife-like pain during and after defecation.",
+   "say": "An anal fissure is a tear in the posterior midline anoderm causing intense burning pain during and following defecation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "const",
+      "label": "Passage of Hard Stool or Explosive Diarrhea"
+     },
+     {
+      "id": "tear",
+      "label": "Mechanical Tear in Posterior Midline Anoderm"
+     },
+     {
+      "id": "spasm",
+      "label": "Severe Reflex Spasm of Internal Anal Sphincter"
+     },
+     {
+      "id": "ische",
+      "label": "Local Microvascular Ischemia Preventing Healing"
+     }
+    ],
+    "edges": [
+     [
+      "const",
+      "tear"
+     ],
+     [
+      "tear",
+      "spasm"
+     ],
+     [
+      "spasm",
+      "ische"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The self-perpetuating cycle that converts an acute mucosal tear into a non-healing chronic fissure is **internal anal sphincter spasm**. Pain triggers reflex hypertonicity of the involuntary internal sphincter, elevating resting anal canal pressure well above eighty millimeters of mercury. This muscular spasm compresses the entering posterior microvessels, creating severe relative ischemia at the posterior commissure that arrests epithelial regeneration.",
+   "say": "Internal anal sphincter spasm produces severe local microvascular ischemia, preventing spontaneous healing of the posterior fissure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Anal Fissure",
+     "points": [
+      "Duration under six weeks from onset",
+      "Superficial mucosal tear with fresh red edges",
+      "No visible internal sphincter fibers",
+      "High rate of healing with conservative measures"
+     ]
+    },
+    "right": {
+     "title": "Chronic Anal Fissure",
+     "points": [
+      "Persisting beyond six to eight weeks",
+      "Indurated margins with visible white sphincter fibers",
+      "Features sentinel skin tag and hypertrophied papilla",
+      "Requires chemical or surgical sphincterotomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive surgical procedure of choice for chronic anal fissure refractory to pharmacological therapy is **lateral internal sphincterotomy**. Performed either open or closed, the surgeon carefully divides the distal one-third of the hypertonic internal anal sphincter muscle in the lateral quadrant away from the fissure. This permanently relieves internal sphincter spasm, restores posterior mucosal perfusion, and promotes rapid fissure healing in over ninety-five percent of cases.",
+   "say": "Lateral internal sphincterotomy divides the distal internal sphincter, permanently abolishing spasm and enabling fissure healing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Strategy",
+     "Mechanism of Action",
+     "Success Rate",
+     "Key Complications"
+    ],
+    "rows": [
+     [
+      "Topical diltiazem 2%",
+      "Blocks calcium influx, relaxes sphincter",
+      "65% to 75%",
+      "Local perianal headache, pruritus"
+     ],
+     [
+      "Topical glyceryl trinitrate",
+      "Nitric oxide donor, sphincter relaxation",
+      "50% to 65%",
+      "Severe throbbing headache (up to 40%)"
+     ],
+     [
+      "Botulinum toxin injection",
+      "Inhibits acetylcholine release from nerves",
+      "60% to 75%",
+      "Transient flatus incontinence, hematoma"
+     ],
+     [
+      "Lateral sphincterotomy",
+      "Surgical division of lower internal sphincter",
+      "95% to 98%",
+      "Permanent flatus incontinence (2% to 5%)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The preferred initial conservative medical approach for both acute and chronic fissures is pharmacological **chemical sphincterotomy**. Topical application of two percent diltiazem ointment or 0.2 percent glyceryl trinitrate to the anal margin achieves reversible smooth muscle relaxation of the internal sphincter. This reduces resting anal pressure and enhances posterior blood flow without inducing the permanent sphincter damage associated with surgical cut.",
+   "say": "Chemical sphincterotomy with topical calcium channel blockers relaxes the internal sphincter, achieving high healing rates without permanent incontinence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "top",
+      "label": "Twice Daily Topical 2% Diltiazem or GTN Ointment"
+     },
+     {
+      "id": "relax",
+      "label": "Reversible Internal Anal Sphincter Relaxation"
+     },
+     {
+      "id": "perf",
+      "label": "Restoration of Posterior Commissure Perfusion"
+     },
+     {
+      "id": "heal",
+      "label": "Epithelialization & Complete Fissure Resolution"
+     }
+    ],
+    "edges": [
+     [
+      "top",
+      "relax"
+     ],
+     [
+      "relax",
+      "perf"
+     ],
+     [
+      "perf",
+      "heal"
+     ]
+    ]
+   }
+  }
+ ]
+}

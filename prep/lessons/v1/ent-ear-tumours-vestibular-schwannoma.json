@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ent-ear-tumours-vestibular-schwannoma",
+ "subject": "ent",
+ "module": "ent-ear-tumours",
+ "title": "Vestibular Schwannoma and Cerebellopontine Angle Tumours",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Vestibular schwannoma, historically and inaccurately termed acoustic neuroma, is a benign, slow-growing, encapsulated neoplasm originating from the myelin-forming Schwann cells of the vestibular nerve, most commonly the **inferior vestibular nerve**. It accounts for over eighty-five percent of all neoplasms occupying the cerebellopontine angle, arising inside the internal acoustic meatus near the transition between central and peripheral myelin (Obersteiner-Redlich zone).",
+   "say": "Vestibular schwannoma is a benign Schwann cell tumor arising on the inferior vestibular nerve inside the internal acoustic meatus, representing the most common cerebellopontine angle mass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acoustic-neuroma-fig1.webp",
+    "alt": "Anatomical schematic showing internal acoustic meatus, cerebellopontine angle, and vestibular schwannoma",
+    "caption": "Vestibular schwannoma arising in the internal acoustic meatus and expanding into the cerebellopontine angle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "While the vast majority of vestibular schwannomas present as sporadic, unilateral tumors in the fifth and sixth decades of life, bilateral vestibular schwannomas are pathognomonic for **Neurofibromatosis Type 2**. Caused by a mutation in the tumor suppressor gene NF2 on chromosome 22q12 encoding the protein merlin (schwannomin), affected patients develop multiple meningiomas, ependymomas, juvenile posterior subcapsular cataracts, and bilateral vestibular schwannomas.",
+   "say": "Bilateral vestibular schwannomas are pathognomonic for Neurofibromatosis Type two on chromosome 22, associated with multiple meningiomas and cataracts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sporadic Vestibular Schwannoma",
+     "points": [
+      "Strictly unilateral in 95% of patients.",
+      "Presents in fifth to sixth decades.",
+      "Slow linear growth rate (1 to 2 mm/year).",
+      "No hereditary transmission risk."
+     ]
+    },
+    "right": {
+     "title": "Neurofibromatosis Type 2 (NF2)",
+     "points": [
+      "Bilateral vestibular schwannomas pathognomonic.",
+      "Presents early in adolescents and young adults.",
+      "Multifocal intracranial meningiomas and ependymomas.",
+      "Autosomal dominant mutation on chromosome 22q12."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The earliest and most common presenting symptom of vestibular schwannoma is insidious, asymmetrical, high-frequency sensorineural hearing loss, often accompanied by unilateral high-pitched tinnitus. A defining diagnostic hallmark is **phonemic regression**, where speech discrimination scores are disproportionately depressed out of proportion to pure-tone thresholds. Patients complain bitterly that they can hear that someone is speaking but cannot comprehend words.",
+   "say": "Asymmetric sensorineural hearing loss and unilateral tinnitus are the earliest signs. Disproportionate loss of speech discrimination, termed phonemic regression, is characteristic.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Progression by Vestibular Schwannoma Tumor Size",
+    "cols": [
+     "Stage / Size",
+     "Anatomical Location",
+     "Dominant Neurological Deficit",
+     "Physical Examination Sign"
+    ],
+    "rows": [
+     [
+      "Stage I (Intracanalicular)",
+      "Confined inside meatus (< 10 mm)",
+      "Asymmetric SNHL, tinnitus",
+      "High-frequency pure tone loss"
+     ],
+     [
+      "Stage II (Small CPA)",
+      "CPA cisternal spread (11 to 20 mm)",
+      "Dysequilibrium, Hitselberger sign",
+      "Hypesthesia of posterior canal skin"
+     ],
+     [
+      "Stage III (Medium CPA)",
+      "Touches brainstem (21 to 40 mm)",
+      "Trigeminal loss, facial weakness",
+      "Depressed corneal reflex (CN V)"
+     ],
+     [
+      "Stage IV (Large CPA)",
+      "Brainstem compression (> 40 mm)",
+      "Ataxia, headache, papilledema",
+      "Gait ataxia, raised ICP, hydrocephalus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compressing surrounding neurovascular structures within the cerebellopontine angle generates distinctive physical signs. Sensory hypesthesia over the posterior wall of the external auditory canal, termed **Hitselberger sign**, results from early compression of the sensory cutaneous branch of the facial nerve. As the mass expands beyond two centimetres, compression of the fifth cranial nerve dampens the corneal reflex, providing the earliest clinical sign of trigeminal involvement.",
+   "say": "Hitselberger sign is sensory numbness of the posterior ear canal from facial nerve compression. Larger tumors compress the trigeminal nerve, eliminating the corneal reflex.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ear-and-cpa-tumours-fig1.webp",
+    "alt": "Axial contrast-enhanced T1 MRI showing acoustic neuroma extending from internal auditory meatus into cerebellopontine angle",
+    "caption": "Trumpet-shaped internal acoustic meatus widening and cerebellopontine angle expansion on MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Auditory Brainstem Response (ABR) demonstrates electrophysiological retrocochlear conduction delay. In vestibular schwannoma, the interpeak latency between wave I and wave V is abnormally prolonged beyond four milliseconds. An interaural difference in **wave V latency** exceeding zero point two milliseconds between the healthy and suspect ear is an electrophysiological red flag with over ninety percent sensitivity for acoustic neuroma.",
+   "say": "Auditory brainstem response reveals retrocochlear delay. An interaural wave five latency difference over zero point two milliseconds strongly suggests acoustic neuroma.",
+   "vis": {
+    "kind": "flow",
+    "title": "ABR Diagnostic Cascade for Retrocochlear Lesions",
+    "nodes": [
+     {
+      "id": "ab1",
+      "label": "Asymmetric Pure Tone Loss (>15 dB Over 3 Frequencies)"
+     },
+     {
+      "id": "ab2",
+      "label": "ABR Shows Interaural Wave V Delay > 0.2 ms"
+     },
+     {
+      "id": "ab3",
+      "label": "Gadolinium-Enhanced MRI Cerebellopontine Angle"
+     }
+    ],
+    "edges": [
+     [
+      "ab1",
+      "ab2"
+     ],
+     [
+      "ab2",
+      "ab3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gold standard investigation of choice for diagnosing vestibular schwannoma is gadolinium-enhanced **magnetic resonance imaging** of the brain and internal acoustic meatus. On T1-weighted contrast sequences, the tumor exhibits intense, uniform enhancement with characteristic trumpet-shaped widening of the internal acoustic meatus. On T2-weighted constructive interference in steady state (CISS) sequences, even minute intracanalicular tumors measuring one millimetre are clearly visualized.",
+   "say": "Gadolinium-enhanced MRI is the definitive gold standard. It reveals an intensely enhancing tumor causing characteristic trumpet widening of the internal acoustic canal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vestibular Schwannoma MRI",
+     "points": [
+      "Intensely and uniformly enhancing mass on T1 with gadolinium.",
+      "Centred sharply on internal acoustic meatus.",
+      "Characteristic trumpet-shaped widening of meatus.",
+      "Forms acute angles with petrous bone dura."
+     ]
+    },
+    "right": {
+     "title": "CPA Meningioma MRI",
+     "points": [
+      "Eccentrically placed away from internal acoustic meatus.",
+      "Displays a broad dural base with a dural tail sign.",
+      "Internal acoustic meatus rarely widened.",
+      "Hyperostosis of adjacent temporal bone common."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management options for vestibular schwannoma encompass conservative observation with serial imaging, stereotactic radiosurgery, and microsurgical resection. In small intracanalicular tumors in elderly patients with slow growth, watchful waiting with annual MRI scans is favored. For growing tumors under three centimetres, **stereotactic radiosurgery** (Gamma Knife or CyberKnife) achieves tumor growth arrest in over ninety percent of cases while avoiding cranial nerve surgery.",
+   "say": "Management ranges from serial MRI observation in the elderly to Gamma Knife radiosurgery for tumors under three centimetres, arresting growth without open surgery.",
+   "vis": {
+    "kind": "table",
+    "title": "Management Strategy Algorithm for Vestibular Schwannoma",
+    "cols": [
+     "Treatment Modality",
+     "Primary Clinical Indication",
+     "Main Advantage",
+     "Key Limitation"
+    ],
+    "rows": [
+     [
+      "Wait and scan (Observation)",
+      "Elderly patients, small tumor (< 1 cm)",
+      "Zero operative morbidity",
+      "Tumor may grow, requiring delayed surgery"
+     ],
+     [
+      "Stereotactic radiosurgery",
+      "Growing tumors < 3 cm, medical comorbidities",
+      "Non-invasive, >90% local tumor control",
+      "Does not remove tumor mass; radiation risk"
+     ],
+     [
+      "Microsurgical resection",
+      "Large tumors > 3 cm, brainstem compression",
+      "Complete histological removal",
+      "Risk of facial palsy and permanent deafness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When open microsurgical resection is required, the approach depends on tumor size and hearing status. The **translabyrinthine approach** drills directly through the mastoid and labyrinth into the internal meatus. While it completely sacrifices residual hearing, it provides immediate identification of the facial nerve at the fundus with zero cerebellar retraction. The retrosigmoid and middle cranial fossa approaches are selected when serviceable hearing preservation is attempted.",
+   "say": "The translabyrinthine approach sacrifices hearing to safely identify the facial nerve without brain retraction. The retrosigmoid approach is used when attempting hearing preservation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Approach Selection by Hearing Status",
+    "nodes": [
+     {
+      "id": "sa1",
+      "label": "Vestibular Schwannoma Surgical Candidate"
+     },
+     {
+      "id": "sa2",
+      "label": "Poor/Dead Hearing: Translabyrinthine Approach"
+     },
+     {
+      "id": "sa3",
+      "label": "Serviceable Hearing: Retrosigmoid or Middle Fossa Approach"
+     }
+    ],
+    "edges": [
+     [
+      "sa1",
+      "sa2"
+     ],
+     [
+      "sa1",
+      "sa3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-081",
+  "bk2-ent-082",
+  "bk2-ent-083"
+ ]
+}

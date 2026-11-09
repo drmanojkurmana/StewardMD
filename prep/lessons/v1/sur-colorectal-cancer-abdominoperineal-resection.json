@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-colorectal-cancer",
+ "subject": "surgery",
+ "title": "Advanced Rectal Cancer and Metastatic Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The radical operative procedure indicated for low rectal carcinomas invading or situated within two centimetres of the anal sphincter is **abdominoperineal resection**. Known historically as the Miles procedure, it entails synchronous abdominal and perineal dissection. The lower sigmoid colon, rectum, levator ani muscles, and entire anal canal are excised en bloc, culminating in permanent end sigmoid colostomy and primary perineal wound closure.",
+   "say": "Abdominoperineal resection excises the rectum and anal sphincter complex en bloc, creating a permanent end sigmoid colostomy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-loop-sigmoid-colostomy.webp",
+    "alt": "Surgical creation of a left iliac fossa end colostomy matured through the rectus abdominis muscle.",
+    "caption": "Permanent end colostomy: constructed in the left iliac fossa following radical abdominoperineal resection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The surgical hallmark of curative oncological resection for middle and low rectal cancer is **total mesorectal excision**. Introduced by Professor Bill Heald, this technique mandates intact cylindrical excision of the rectum and the surrounding mesorectum enveloped within its unbroken fascia propria. Avoiding breach of this mesorectal envelope prevents tumor cell spillage, slashing local recurrence rates from thirty percent down to under five percent.",
+   "say": "Total mesorectal excision removes the intact mesorectal envelope, reducing pelvic recurrence rates to under five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "plane",
+      "label": "Identification of Heald Holy Plane of Pelvic Dissection"
+     },
+     {
+      "id": "sharp",
+      "label": "Sharp Scissor Dissection Preserving Mesorectal Fascia"
+     },
+     {
+      "id": "nerve",
+      "label": "Direct Visualization & Sparing of Autonomic Nerves"
+     },
+     {
+      "id": "clear",
+      "label": "Intact Cylindrical Specimen with Clear Radial Margins"
+     }
+    ],
+    "edges": [
+     [
+      "plane",
+      "sharp"
+     ],
+     [
+      "sharp",
+      "nerve"
+     ],
+     [
+      "nerve",
+      "clear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The single strongest local predictor of pelvic cancer recurrence following rectal resection is the **circumferential resection margin**. Measured by the pathologist on sliced gross specimens, CRM represents the shortest distance in millimeters between the deepest advancing tumor front or involved lymph node and the non-peritonealized surgical margin. A clearance of one millimeter or less is defined as a positive CRM, heralding high recurrence risk.",
+   "say": "A circumferential resection margin of one millimeter or less signifies margin involvement and predicts high local recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clear Circumferential Margin (>1 mm)",
+     "points": [
+      "Complete radical mesorectal clearance achieved",
+      "Low pelvic recurrence risk under five percent",
+      "Excellent overall survival outcomes",
+      "Standard adjuvant chemotherapy considered"
+     ]
+    },
+    "right": {
+     "title": "Involved Circumferential Margin (<=1 mm)",
+     "points": [
+      "Tumor cells present within one millimeter of inked margin",
+      "Local recurrence rates exceed twenty-five percent",
+      "Strongest predictor of distant metastatic relapse",
+      "Requires intensive post-surgical adjuvant therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For locally advanced mid and low rectal carcinomas staged as cT3, cT4, or node-positive, the standard standard care is **neoadjuvant chemoradiation**. Delivering pelvic external beam radiotherapy totaling 45 to 50.4 Gray concurrently with 5-fluorouracil or capecitabine downstages primary tumors, shrinks involved lymph nodes, sterilizes microvascular tumor emboli, and substantially increases the likelihood of sphincter-preserving negative-margin resection.",
+   "say": "Neoadjuvant chemoradiation downstages locally advanced rectal tumors, significantly improving negative margin resection and sphincter preservation rates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Radiation Dosing",
+     "Concurrent Chemotherapy",
+     "Surgical Timing"
+    ],
+    "rows": [
+     [
+      "Long-course chemoradiotherapy",
+      "50.4 Gy in 28 daily fractions",
+      "Infusional 5-FU or oral capecitabine",
+      "Surgery 8 to 12 weeks post-radiation"
+     ],
+     [
+      "Short-course radiotherapy",
+      "25 Gy in 5 daily fractions (5 Gy/day)",
+      "None concurrently (chemo in TNT)",
+      "Immediate surgery (1 wk) or delayed (8 wk)"
+     ],
+     [
+      "Total neoadjuvant therapy (TNT)",
+      "Long or short radiation + systemic chemo",
+      "FOLFOX or CAPOX systemic cycles",
+      "Surgery after full systemic delivery"
+     ],
+     [
+      "Watch-and-wait approach",
+      "Follows complete clinical response to TNT",
+      "No immediate radical resection",
+      "Intensive monthly MRI and endoscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A classic radiological appearance diagnostic of advanced circumferential colorectal carcinoma is the **apple core lesion**. On double-contrast barium enema, an annular constricting neoplasm produces severe, short-segment luminal narrowing with sharp overhanging shelf-like borders and eccentric ulcerated channels. This appearance reflects deep circumferential mural infiltration and desmoplastic stromal fibrosis encircling the bowel wall.",
+   "say": "An apple core lesion on barium enema signifies an annular constricting carcinoma with overhanging mucosal shoulders.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-enema-carcinoma-colon.webp",
+    "alt": "Double-contrast barium enema radiograph demonstrating classic annular constricting apple core lesion in the colon.",
+    "caption": "Carcinoma of the colon: classic apple-core sign demonstrating circumferential narrowing with overhanging margins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most frequent site of distant hematogenous dissemination in colorectal cancer is **colorectal liver metastases**. Because venous drainage from the large bowel enters the portal venous circulation directly, up to twenty-five percent of patients harbor synchronous liver metastases at presentation. In selected patients with anatomically resectable disease, radical hepatic metastasectomy achieves five-year survival rates exceeding forty percent.",
+   "say": "Colorectal liver metastases occur via portal venous dissemination, with surgical resection achieving excellent long-term survival in resectable patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prim",
+      "label": "Primary Colorectal Tumor Portal Venous Invasion"
+     },
+     {
+      "id": "seed",
+      "label": "Hepatic Sinusoidal Seeding & Micrometastasis Growth"
+     },
+     {
+      "id": "stag",
+      "label": "High-Resolution Multiphasic Liver MRI & CT Staging"
+     },
+     {
+      "id": "resect",
+      "label": "Oncological Hepatic Metastasectomy with R0 Margins"
+     }
+    ],
+    "edges": [
+     [
+      "prim",
+      "seed"
+     ],
+     [
+      "seed",
+      "stag"
+     ],
+     [
+      "stag",
+      "resect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Determining patient eligibility for hepatic metastasectomy depends on strict **hepatic resection criteria**. Resectability is fundamentally defined not by what is resected, but by the volume and quality of what remains: the future liver remnant must comprise at least twenty percent of total liver volume in healthy parenchyma, or thirty to forty percent in cirrhotic or steatohepatitic livers, preserving two contiguous segments with intact inflow and outflow.",
+   "say": "Liver resection feasibility requires preserving two contiguous functional segments and an adequate future liver remnant volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parenchymal Liver Quality",
+     "Minimum Future Remnant",
+     "Preoperative Optimization",
+     "Resection Feasibility"
+    ],
+    "rows": [
+     [
+      "Normal liver parenchyma",
+      ">= 20% total liver volume",
+      "None required if volume adequate",
+      "Single-stage liver resection"
+     ],
+     [
+      "Post-chemotherapy steatohepatitis",
+      ">= 30% total liver volume",
+      "Interval off chemotherapy (4 to 6 wk)",
+      "Careful segment-oriented resection"
+     ],
+     [
+      "Cirrhotic parenchyma (Child A)",
+      ">= 40% total liver volume",
+      "Portal vein embolization (PVE)",
+      "Staged resection or ALPPS procedure"
+     ],
+     [
+      "Inadequate residual volume",
+      "< 20% remnant volume",
+      "Portal vein embolization to induce hypertrophy",
+      "Re-assess volume via CT volumetry at 4 wk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coordinating multidisciplinary treatment in patients presenting with simultaneous primary tumor and hepatic deposits is **synchronous liver metastases management**. When the primary bowel tumor is asymptomatic, a liver-first reverse approach may be utilized to prevent hepatic tumor progression during rectal neoadjuvant therapy. Conversely, simultaneous combined resection of both primary tumor and liver metastases is feasible for modest, easily accessible liver disease in fit patients.",
+   "say": "Management of synchronous colorectal liver metastases can employ combined simultaneous resection, primary-first, or liver-first reverse strategies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver-First Reverse Approach",
+     "points": [
+      "Indicated when liver burden threatens resectability",
+      "Asymptomatic primary colorectal cancer present",
+      "Resect liver metastases first after neoadjuvant chemo",
+      "Follow with pelvic or colonic resection"
+     ]
+    },
+    "right": {
+     "title": "Primary-First Conventional Approach",
+     "points": [
+      "Indicated for symptomatic, bleeding, or obstructed primary",
+      "Urgent resection of primary colon tumor",
+      "Interval systemic chemotherapy",
+      "Subsequent elective hepatic metastasectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The second most frequent site of distant colorectal metastases is the lungs, where selected patients benefit from **pulmonary metastasectomy**. Surgical wedge resection or anatomical segmentectomy is indicated when the primary colorectal cancer is fully controlled, no extra-thoracic metastases exist, all pulmonary lesions are surgically resectable, and adequate postoperative pulmonary functional reserve remains.",
+   "say": "Surgical resection of isolated colorectal pulmonary metastases provides meaningful survival benefit in patients with controlled primary disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ctrl",
+      "label": "Confirmed Control of Primary Colorectal Carcinoma"
+     },
+     {
+      "id": "iso",
+      "label": "Isolated Resectable Pulmonary Nodules on Chest CT"
+     },
+     {
+      "id": "pft",
+      "label": "Adequate Pulmonary Function Reserve (FEV1 > 1.5 L)"
+     },
+     {
+      "id": "wedge",
+      "label": "VATS or Open Wedge Resection with Clear Margins"
+     }
+    ],
+    "edges": [
+     [
+      "ctrl",
+      "iso"
+     ],
+     [
+      "iso",
+      "pft"
+     ],
+     [
+      "pft",
+      "wedge"
+     ]
+    ]
+   }
+  }
+ ]
+}

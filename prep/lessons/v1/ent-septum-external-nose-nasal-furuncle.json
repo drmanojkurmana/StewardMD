@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-septum-external-nose-nasal-furuncle",
+ "subject": "ent",
+ "module": "ent-septum-external-nose",
+ "title": "Nasal Furuncle, Dangerous Area, and Septal Deviations",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A nasal furuncle is an acute, localized, necrotizing bacterial infection of a hair follicle in the skin of the nasal vestibule, almost universally caused by Staphylococcus aureus following digital trauma or hair plucking. Because the skin of the nasal vestibule is bound tightly to the underlying cartilaginous alae without subcutaneous tissue, inflammatory tension produces excruciating, throbbing pain out of proportion to the size of the **vestibular furuncle**.",
+   "say": "A nasal furuncle is a painful staphylococcal infection of a vestibular hair follicle, typically provoked by hair plucking or picking.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-polyps-fig1.webp",
+    "alt": "Clinical anatomical diagram showing external nasal vestibule, dangerous area of face, and angular vein drainage",
+    "caption": "Anatomical relations of the nasal vestibule and venous drainage into the facial vein. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The external nose and upper lip form the anatomical apex of the **dangerous area of the face**. Venous blood from the nasal vestibule and angular vein communicates directly with the superior ophthalmic vein, which empties directly into the intracranial cavernous venous sinus. Crucially, these facial veins lack valves. Squeezing, pinching, or prematurely incising a nasal furuncle can drive septic bacterial thrombi retrogradely into the cavernous sinus.",
+   "say": "The nose and upper lip form the dangerous area of the face. Valveless facial veins connect to the cavernous sinus, so squeezing a furuncle risks septic thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Retrograde Venous Spread to Cavernous Sinus",
+    "nodes": [
+     {
+      "id": "df1",
+      "label": "Squeezing Vestibular Furuncle"
+     },
+     {
+      "id": "df2",
+      "label": "Retrograde Spread via Valveless Angular & Ophthalmic Veins"
+     },
+     {
+      "id": "df3",
+      "label": "Septic Cavernous Sinus Thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "df1",
+      "df2"
+     ],
+     [
+      "df2",
+      "df3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Septic cavernous sinus thrombosis is a life-threatening neurovascular emergency presenting with high spiking fevers, severe periorbital headache, chemosis, and progressive proptosis. Compression of cranial nerves traversing the cavernous sinus provokes ophthalmoplegia, classically paralyzing the **abducens nerve** (cranial nerve six) first, followed by third and fourth nerve palsies. Treatment requires high-dose intravenous antistaphylococcal antibiotics and therapeutic anticoagulation.",
+   "say": "Cavernous sinus thrombosis presents with fever, eye swelling, proptosis, and eye muscle paralysis, beginning with the sixth cranial nerve.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Progression of Cavernous Sinus Thrombosis",
+    "cols": [
+     "Stage / Feature",
+     "Anatomical Structure Involved",
+     "Dominant Physical Finding",
+     "Diagnostic Modality"
+    ],
+    "rows": [
+     [
+      "Orbital congestion",
+      "Superior ophthalmic vein thrombosis",
+      "Severe chemosis, eyelid edema, proptosis",
+      "Contrast-enhanced CT orbits"
+     ],
+     [
+      "Sixth nerve palsy",
+      "Abducens nerve inside sinus lumen",
+      "Lateral gaze paralysis, horizontal diplopia",
+      "Clinical ocular motility check"
+     ],
+     [
+      "Complete ophthalmoplegia",
+      "Oculomotor (CN III) & Trochlear (CN IV)",
+      "Total eye immobility, dilated fixed pupil",
+      "MR venography empty delta sign"
+     ],
+     [
+      "Trigeminal sensory loss",
+      "Ophthalmic (V1) & Maxillary (V2) nerves",
+      "Forehead and cheek anesthesia, absent reflex",
+      "Facial sensory mapping"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nasal vestibulitis is a diffuse dermatological inflammation of the vestibular skin, often complicated by painful fissures at the mucocutaneous junction. Unlike a focal furuncle, vestibulitis produces widespread erythema, dry honey-colored crusts, and persistent pruritus, frequently triggered by chronic rhinorrhea or occupational dust exposure. Management requires warm saline crust debridement and topical **mupirocin ointment** applied three times daily.",
+   "say": "Nasal vestibulitis is diffuse skin inflammation with crusting and fissures at the nostril margin, managed with crust debridement and topical mupirocin ointment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nasal Furunculosis",
+     "points": [
+      "Focal, localized infection of single hair follicle.",
+      "Exquisite throbbing pain and localized pointing boil.",
+      "Strict contraindication to premature surgical incision.",
+      "Treated with oral antistaphylococcal antibiotics."
+     ]
+    },
+    "right": {
+     "title": "Nasal Vestibulitis",
+     "points": [
+      "Diffuse superficial dermatitis of entire vestibular skin.",
+      "Marked crusting, excoriation, and fissuring.",
+      "Pain is mild; predominant symptom is crusting and itching.",
+      "Treated with topical mupirocin or bacitracin ointment."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rhinophyma is a progressive, disfiguring, hypertrophic end-stage manifestation of acne rosacea involving the lower two-thirds of the external nose. Driven by chronic vasodilatation and tissue hyperplasia, sebaceous glands and surrounding connective tissue undergo massive lobulated expansion, creating a bulbous, purplish, soft-tissue mass. Because bone and cartilage are unaffected, surgical management employs **tangential excision** (shaving) or carbon dioxide laser ablation.",
+   "say": "Rhinophyma is end-stage acne rosacea producing bulbous sebaceous hyperplasia of the nasal tip. It is debulked using surgical shaving or laser ablation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Anatomical schematic showing external nasal cartilages, fibrofatty alar tissue, and sebaceous zones",
+    "caption": "External nasal architecture: lower cartilaginous vault and fibrofatty alar tissue affected in rhinophyma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deviated nasal septum (DNS) is a common structural variation categorized morphologically into C-shaped deviations, S-shaped deviations, localized sharp spurs, and caudal dislocations. A **caudal dislocation** occurs when the inferior border of the septal cartilage slips completely out of the maxillary groove, protruding into one nasal nostril. Aside from nasal obstruction, spurs impacting the turbinates cause facial headaches via sensory trigeminal irritation (Sluder neuralgia).",
+   "say": "Septal deviations include C-shaped curves, S-shaped deviations, spurs, and caudal dislocations where cartilage projects into one nostril, causing airway obstruction and headache.",
+   "vis": {
+    "kind": "table",
+    "title": "Morphological Classification of Septal Deviations",
+    "cols": [
+     "Deviation Type",
+     "Anatomical Configuration",
+     "Airway Impact",
+     "Associated Complications"
+    ],
+    "rows": [
+     [
+      "C-shaped deviation",
+      "Simple unicuspid bend to one side",
+      "Unilateral nasal obstruction",
+      "Compensatory inferior turbinate hypertrophy"
+     ],
+     [
+      "S-shaped deviation",
+      "Bicuspid bend (Opposite directions)",
+      "Severe bilateral nasal obstruction",
+      "Bilateral sinus ostial narrowing"
+     ],
+     [
+      "Septal spur",
+      "Sharp bony/cartilaginous shelf",
+      "Focal airway impaction",
+      "Contact headache (Sluder) and epistaxis"
+     ],
+     [
+      "Caudal dislocation",
+      "Anterior border displaced from groove",
+      "External asymmetry and valve collapse",
+      "Columellar distortion and obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical correction of a symptomatic deviated septum is achieved via septoplasty or classic submucous resection. **Septoplasty** is a conservative, tissue-sparing operation wherein only the most severely deflected cartilage portions are mobilized or reshaped, strictly preserving an L-shaped strut of cartilage measuring at least ten millimetres along the dorsal bridge and caudal margin to maintain nasal tip and bridge support.",
+   "say": "Septoplasty is conservative, preserving a ten-millimetre dorsal and caudal L-strut to safeguard nasal bridge and tip support while straightening the septum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septoplasty (Conservative)",
+     "points": [
+      "Tissue-sparing; corrects only deflected parts.",
+      "Preserves a robust 10-15 mm dorsal and caudal L-strut.",
+      "Can be safely performed in children and adolescents.",
+      "Preserves normal mucoperichondrial elasticity."
+     ]
+    },
+    "right": {
+     "title": "Submucous Resection (SMR)",
+     "points": [
+      "Radical resection of almost entire septal cartilage.",
+      "Strictly contraindicated under age 17-18 (Arrests facial growth).",
+      "High risk of post-op saddle nose and columellar retraction.",
+      "Flaccid, flapping membrane remaining."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Submucous resection (SMR) is a radical operation involving subperichondrial excision of almost the entire quadrilateral cartilage and bony ethmoid/vomer plates between bilateral mucosal flaps. Because aggressive cartilage excision interferes with osteochondral development of the midface, submucous resection is strictly contraindicated in **children under 17 years** of age, as it precipitates irreversible midfacial hypoplasia, saddle nose deformity, and columellar retraction.",
+   "say": "Submucous resection radically excises cartilage and is contraindicated before age seventeen, as it disrupts facial growth, causing saddle nose and columellar collapse.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Complications of Excessive Septal Resection",
+    "nodes": [
+     {
+      "id": "sm1",
+      "label": "Over-Resection of Dorsal or Caudal Cartilage"
+     },
+     {
+      "id": "sm2",
+      "label": "Loss of Structural Nasal Framework Support"
+     },
+     {
+      "id": "sm3",
+      "label": "Saddle Nose Deformity & Columellar Retraction"
+     }
+    ],
+    "edges": [
+     [
+      "sm1",
+      "sm2"
+     ],
+     [
+      "sm2",
+      "sm3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-091",
+  "bk2-ent-092",
+  "bk2-ent-093"
+ ]
+}

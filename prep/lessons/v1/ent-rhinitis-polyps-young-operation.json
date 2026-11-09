@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "id": "ent-rhinitis-polyps-young-operation",
+ "subject": "ent",
+ "module": "ent-rhinitis-polyps",
+ "title": "Nasal Polyps: Antrochoanal, Ethmoidal and Medicamentosa",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Pale stalked outgrowths of swollen sinonasal lining that dangle inside the airway are **nasal polyps**, and patients report blockage, discharge and lost smell. A grey shiny surface, no pain on gentle probing and easy movement distinguish them from turbinate tissue through the speculum. Widespread lining inflammation produces them on both sides, while a single one sided lesion requires scans and tissue diagnosis to exclude neoplasm.",
+   "say": "Pale grape like swellings hanging inside the nose cause blockage, discharge and smell loss. Probing finds them painless and mobile, unlike the red sensitive turbinate beside them. Disease on both sides reflects generalised lining inflammation, while one solitary polyp needs imaging to exclude tumour.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rhinitis-and-nasal-polyps-fig1.webp",
+    "alt": "Endoscope view of a solitary smooth polyp hanging within one nasal passage.",
+    "caption": "Single polyp seen on endoscopy. Image: Michael Hawke MD, CC BY 4.0, Wikimedia Commons.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Ethmoidal polyps** are multiple, bilateral and arise from the ethmoid air cells and middle meatus in adults with chronic rhinosinusitis and often asthma. They bunch like grapes, recur after removal when mucosal disease stays uncontrolled, and respond to intranasal steroids that shrink them measurably. Associated aspirin sensitivity and asthma mark the severe end of this phenotype, needing coordinated respiratory and rhinology care over years.",
+   "say": "Multiple polyps growing from the ethmoid cells on both sides typify adult inflammatory disease. Steroid sprays shrink them measurably, yet regrowth follows whenever lining inflammation stays uncontrolled. Asthma often coexists in these patients, so breathing and nose care proceed together.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-polyps-fig1.webp",
+    "alt": "Sagittal section of nasal cavity showing oedematous polyps arising from the middle meatus and ethmoid sinus.",
+    "caption": "Polyps arising from the middle meatus and ethmoid sinus. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **antrochoanal polyp** is a solitary benign polyp that grows from the maxillary sinus, escapes through the natural or an accessory ostium, and extends backward to hang at the choana. It favours adolescent boys and young men, causes strictly unilateral blockage, and looks like a smooth dumbbell with one lobe in the sinus and one in the nasopharynx. Simple avulsion without clearing the sinus base invites recurrence.",
+   "say": "A single polyp escaping from the maxillary sinus toward the back of the nose affects mainly young males. Blockage stays strictly one sided because only one sinus gives rise to the growth. Removing the nasal part alone invites recurrence, so surgery must clear the sinus origin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antrochoanal-polyp-fig1.webp",
+    "alt": "Sagittal illustration of a dumbbell shaped antrochoanal polyp extending from the maxillary sinus through its ostium into the choana.",
+    "caption": "Dumbbell shaped antrochoanal polyp extending into the choana. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endoscopic surgery removes an antrochoanal polyp completely by widening the maxillary opening and excising the polyp together with its sinus attachment and surrounding diseased lining. Preoperative computed tomography maps the ostium, any accessory opening and the uncinate process so no fragment remains behind. **Recurrence** after complete excision is uncommon, which separates this lesion from diffuse ethmoidal polyposis where regrowth reflects ongoing mucosal disease rather than incomplete removal.",
+   "say": "Complete excision widens the sinus opening and removes the polyp with its attachment inside the sinus. Scanning beforehand maps the drainage opening so that no fragment remains behind. Regrowth stays uncommon after thorough removal, unlike diffuse polyps that return with ongoing inflammation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Antrochoanal polyp: from diagnosis to cure",
+    "nodes": [
+     {
+      "id": "uni",
+      "label": "Unilateral blockage in a young patient"
+     },
+     {
+      "id": "ct",
+      "label": "CT shows maxillary polyp to choana"
+     },
+     {
+      "id": "fess",
+      "label": "Endoscopic excision with sinus base"
+     },
+     {
+      "id": "cure",
+      "label": "Durable cure, low recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "uni",
+      "ct"
+     ],
+     [
+      "ct",
+      "fess"
+     ],
+     [
+      "fess",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diffuse polyposis care escalates from saline irrigation and intranasal steroid, through short oral steroid bursts for severe obstruction, to endoscopic sinus surgery when medicines fail. Surgery opens drainage pathways and improves steroid access rather than removing disease permanently. **Biologic therapy** blocking type two inflammation now serves selected patients with recurrent polyps and asthma in specialist care, after surgery or when surgery is unsuitable.",
+   "say": "Salt water rinses with steroid spray provide the first step for widespread polyps in most patients. Brief steroid tablets reduce severe obstruction, while surgery improves drainage and spray access afterwards. Injected biologic medicines now serve selected patients whose polyps keep returning despite surgery.",
+   "vis": {
+    "kind": "table",
+    "title": "Diffuse polyposis: stepwise treatment ladder",
+    "cols": [
+     "Step",
+     "Treatment",
+     "Goal"
+    ],
+    "rows": [
+     [
+      "One",
+      "Saline irrigation plus steroid spray",
+      "Daily mucosal control"
+     ],
+     [
+      "Two",
+      "Short oral steroid course",
+      "Shrink severe obstruction"
+     ],
+     [
+      "Three",
+      "Endoscopic sinus surgery",
+      "Ventilate sinuses, improve access"
+     ],
+     [
+      "Four",
+      "Biologic therapy in selected cases",
+      "Control recurrent type two disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Young operation** treats severe atrophic rhinitis by suturing the nostril completely closed, usually for about a year, so the crusted mucosa rests away from drying airflow. During closure the lining recovers, crusts diminish and ciliary function partly returns before the nostril is reopened. The modified Young operation leaves a small three to four millimetre opening, preserving some airflow and smell while gaining most of the mucosal benefit.",
+   "say": "Closing the nostril completely lets crusted lining rest away from drying airflow for about a year. Mucosa recovers during that closure period, with crusting and odour diminishing steadily. A modified version leaves a pinhole opening that preserves some airflow and smell.",
+   "vis": null
+  },
+  {
+   "tx": "By contrast, **rhinitis medicamentosa** needs no operation at all: the cure is stopping the topical decongestant that caused rebound vasodilatation and mucosal dependence. Intranasal steroid, saline and occasionally a short oral steroid bridge cover the difficult first week of withdrawal congestion. Counselling matters because patients relapse when they keep a decongestant bottle at home for colds, so disposal and clear written instructions form part of treatment.",
+   "say": "Rebound congestion from spray dependence is a drug effect that resolves without any operation once the decongestant stops. Steroid spray and saline provide support during the difficult first week of withdrawal symptoms. Keeping no decongestant bottle at home prevents the relapse that restarts the whole cycle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Young operation",
+     "points": [
+      "For severe atrophic rhinitis",
+      "Nostril closed about one year",
+      "Mucosa rests and recovers",
+      "Modified form leaves small opening"
+     ]
+    },
+    "right": {
+     "title": "Rhinitis medicamentosa care",
+     "points": [
+      "From decongestant overuse",
+      "Stop the spray completely",
+      "Steroid and saline bridge withdrawal",
+      "No surgery required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Polyp mimics trap the unwary examiner regularly. A hypertrophied inferior turbinate looks pink, feels firm and sensitive, and shrinks with decongestant, while a true polyp looks pale, feels insensate and stays unchanged. **Inverted papilloma** in an older man bleeds, looks fleshy and grows on one side only, so any unilateral fleshy mass earns imaging and biopsy rather than a steroid trial alone.",
+   "say": "Swollen turbinates imitate polyps until colour, sensation and decongestant response separate them clearly. Pink sensitive tissue that shrinks is turbinate, while pale painless tissue is polyp. Fleshy one sided growths in older men need imaging and biopsy, never steroids alone.",
+   "vis": {
+    "kind": "table",
+    "title": "Polyp versus turbinate at examination",
+    "cols": [
+     "Sign",
+     "True polyp",
+     "Inferior turbinate"
+    ],
+    "rows": [
+     [
+      "Colour",
+      "Pale grey and glistening",
+      "Pink or red"
+     ],
+     [
+      "Sensation on probing",
+      "Insensate, painless",
+      "Sensitive and tender"
+     ],
+     [
+      "Mobility",
+      "Mobile, can be moved",
+      "Fixed, bony core felt"
+     ],
+     [
+      "Decongestant effect",
+      "No shrinkage",
+      "Shrinks visibly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Children with bilateral polyps need a different differential from adults, because **cystic fibrosis** and primary ciliary dyskinesia cause polyposis in childhood far more often than isolated allergy does. Sweat chloride testing, immunoglobulin assessment and saccharin or genetic ciliary studies follow paediatric polyps as routine. Adult bilateral polyps instead prompt asthma and aspirin history, since that triad changes both drug choices and surgical planning substantially.",
+   "say": "Polyps in a child point toward cystic fibrosis or ciliary disease rather than simple allergy. Sweat testing and immune assessment therefore follow paediatric polyps as routine practice. Adults instead need careful asthma and aspirin histories because that combination reshapes drug and surgical choices.",
+   "vis": {
+    "kind": "table",
+    "title": "Childhood polyps: associated conditions",
+    "cols": [
+     "Condition",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Cystic fibrosis",
+      "Sweat chloride testing"
+     ],
+     [
+      "Ciliary dyskinesia",
+      "Ciliary studies and genetics"
+     ],
+     [
+      "Immune deficiency",
+      "Immunoglobulin assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histology settles every doubtful polyp, because inflammatory polyps, inverted papilloma and outright malignancy can look deceptively similar through an endoscope. All excised tissue goes for examination without exception in unilateral disease. **Follow up** with endoscopy and symptom scores tracks recurrence early, when steroid optimisation still avoids revision surgery, and smell testing documents the outcome patients care about most in daily life.",
+   "say": "Tissue examination settles every doubtful case because benign and malignant growths can look alike endoscopically. One sided specimens always need histology without exception in careful practice. Regular endoscopic review identifies regrowth early, when stronger medical treatment still avoids another operation.",
+   "vis": {
+    "kind": "table",
+    "title": "Excised polyp pathway",
+    "cols": [
+     "Step",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Excision",
+      "Remove with attachment where relevant"
+     ],
+     [
+      "Histology",
+      "Examine all unilateral tissue"
+     ],
+     [
+      "Follow up",
+      "Endoscopy and symptom scores"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Antrochoanal polyp key features",
+   "b": "Solitary, unilateral, from maxillary sinus to choana, young males; excise with sinus base to prevent recurrence."
+  },
+  {
+   "f": "Ethmoidal polyps key features",
+   "b": "Multiple, bilateral, from ethmoid and middle meatus; linked to chronic rhinosinusitis, asthma and aspirin sensitivity."
+  },
+  {
+   "f": "Polyp versus turbinate",
+   "b": "Polyp: pale, insensate, mobile, no decongestant shrinkage. Turbinate: pink, sensitive, fixed, shrinks."
+  }
+ ],
+ "keys": [
+  "Unilateral polyp always needs imaging and histology",
+  "Antrochoanal polyp: young male, maxillary origin, choanal extension",
+  "Young operation closes the nostril in atrophic rhinitis"
+ ]
+}
