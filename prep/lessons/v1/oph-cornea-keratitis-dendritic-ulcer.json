@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-dendritic-ulcer",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Dendritic Ulcer and Geographic Ulcer",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dendritic ulcer** is branching epithelial ulcer with terminal bulbs staining by fluorescein dye in herpes simplex epithelial keratitis, pathognomonic shape from virus spreading cell to cell along epithelial planes. Dichotomous branching with bulbous ends separates true dendrite from pseudodendrites of zoster or healing lines. Live virus replicates in epithelium, so antiviral therapy without steroid is complete treatment.",
+   "say": "Branching shape together gives herpes epithelial diagnosis at slit lamp with dye in clinic instantly for examiners. Terminal bulbs give true dendrite separation. Antiviral alone gives complete treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/herpes-zoster-ophthalmicus-fig1.webp",
+    "alt": "Herpes eye signs diagram for dendritic epithelial disease comparison.",
+    "caption": "Herpes epithelial disease context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Terminal bulbs** are swollen infected cell clusters at branch ends where virus accumulates, the morphological detail examinations demand beyond branching alone. Rose bengal classically stains infected devitalised edges while fluorescein fills defect floor, dual staining teaching older literature. Modern diagnosis rests on shape, sensation and history without routine viral sampling in typical cases.",
+   "say": "Bulbous ends together give infected cell accumulation evidence at branch tips during slit lamp assessment in clinic. Dual staining gives edge information historically. Typical diagnosis gives clinical sufficiency.",
+   "vis": {
+    "kind": "table",
+    "title": "Dendrite recognition set",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Branching",
+      "Dichotomous tree pattern"
+     ],
+     [
+      "Ends",
+      "Terminal bulbs present"
+     ],
+     [
+      "Sensation",
+      "Reduced in affected cornea"
+     ],
+     [
+      "Stain",
+      "Defect fills, edges devitalised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Geographic ulcer** is enlarged amoeboid epithelial ulcer when dendrite treatment delays or steroid suppresses immunity, allowing viral spread across broad epithelial sheet. It heals slower, scars more and warns every prescriber reviewing prior drops in non healing herpes. Steroid exposure history is therefore asked directly in every dendrite follow up that enlarges.",
+   "say": "Broad amoeboid enlargement together gives geographic ulcer after delay or steroid exposure in herpes follow up in clinic. Steroid history gives direct questioning need. Healing gives slower scar course.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True dendrite simplex",
+     "points": [
+      "Terminal bulbs present",
+      "Branching epithelial defect",
+      "Antiviral alone heals"
+     ]
+    },
+    "right": {
+     "title": "Pseudodendrite mimics",
+     "points": [
+      "No terminal bulbs, raised",
+      "Zoster or healing lines",
+      "Treat underlying cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Debridement historically removed infected epithelium, modern antiviral drops or oral therapy achieving clearance without mechanical trauma in most cases. Oral therapy suits children, bilateral, immunocompromised or drop intolerant patients by systemic levels. **Route choice** follows patient factors, efficacy principle constant across routes in epithelial disease.",
+   "say": "Systemic route together gives alternative clearance in children and immunocompromised herpes patients during treatment in clinic. Mechanical debridement gives historical context currently. Efficacy principle gives route flexibility.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dendrite treatment logic",
+    "nodes": [
+     {
+      "id": "see",
+      "label": "Dendrite with bulbs confirmed"
+     },
+     {
+      "id": "stop",
+      "label": "Stop any steroid drops"
+     },
+     {
+      "id": "anti",
+      "label": "Antiviral by suitable route"
+     },
+     {
+      "id": "heal",
+      "label": "Confirm epithelial healing"
+     }
+    ],
+    "edges": [
+     [
+      "see",
+      "stop"
+     ],
+     [
+      "stop",
+      "anti"
+     ],
+     [
+      "anti",
+      "heal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Healing dendrite leaves ghost dendrite subepithelial opacity and may trigger stromal immune inflammation weeks later needing covered steroid from previous lesson. Patients therefore review after epithelial closure rather than discharge at first comfort. **Post epithelial stromal** flare is scheduled surveillance, not surprise complication, in herpes follow up planning.",
+   "say": "Post epithelial inflammation together gives scheduled surveillance need after dendrite healing in herpes clinics over following weeks. Ghost opacity gives healed evidence at slit lamp. Discharge timing gives flare risk.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Corneal diagram relevant to epithelial healing after dendritic ulcer.",
+    "caption": "Epithelial healing anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recurrent dendrites scar stem cell function at limbus in severe repeated disease and reduce sensation progressively toward neurotrophic failure. Each recurrence therefore counts in prophylaxis decisions from previous lesson. **Sensation decline** over recurrences predicts healing failure before it presents as non healing ulcer.",
+   "say": "Recurrence accumulation together gives sensation decline toward neurotrophic failure in herpes corneas over years of disease in clinic. Counting gives prophylaxis decisions additionally. Healing failure gives prediction value.",
+   "vis": {
+    "kind": "table",
+    "title": "Dendrite course events",
+    "cols": [
+     "Event",
+     "Response"
+    ],
+    "rows": [
+     [
+      "First dendrite",
+      "Antiviral, stop steroid, review"
+     ],
+     [
+      "Enlarging on review",
+      "Ask steroid exposure, oral route"
+     ],
+     [
+      "Frequent recurrences",
+      "Suppression prophylaxis review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contact lens wearers with dendrite stop lenses and never patch, herpes and bacterial superinfection both threatening anaesthetic cornea silently. Atypical branching in lens wearer also considers amoebic pseudodendrite in differential next batch. **Atypical shape** reopens microbiology even in known herpes patients when course deviates.",
+   "say": "Lens cessation together gives superinfection protection in herpes epithelial disease during treatment in clinic always for wearers. Atypical shape gives microbiology reopening need. Course deviation gives differential review.",
+   "vis": {
+    "kind": "table",
+    "title": "Dendrite danger deviations",
+    "cols": [
+     "Deviation",
+     "Think"
+    ],
+    "rows": [
+     [
+      "No bulbs, raised lesion",
+      "Pseudodendrite cause"
+     ],
+     [
+      "Enlarging despite therapy",
+      "Steroid exposure or resistance"
+     ],
+     [
+      "Painless non healing",
+      "Neurotrophic failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: branching bulbs diagnose, steroid enlarges, antiviral heals and stroma follows. Sensation and shape beat routine swabs in typical disease, deviation reopens sampling. **Terminal bulb** phrase is dendrite answer first line in examinations. Sensation testing completes every dendrite assessment before discharge from clinic.",
+   "say": "Branching bulbs together give instant herpes diagnosis at slit lamp in clinic for examiners reliably each time. Steroid avoidance gives harm prevention in epithelium. Surveillance gives stromal timing.",
+   "vis": {
+    "kind": "table",
+    "title": "Dendrite anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Shape",
+      "Branching with terminal bulbs"
+     ],
+     [
+      "Forbidden",
+      "Steroid in epithelial disease"
+     ],
+     [
+      "Aftercare",
+      "Review for stromal flare"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Dendritic ulcer signature",
+   "b": "Branching epithelial defect with terminal bulbs and reduced sensation in herpes simplex keratitis."
+  },
+  {
+   "f": "Geographic ulcer cause",
+   "b": "Delayed treatment or steroid exposure enlarges dendrite into broad amoeboid ulcer."
+  },
+  {
+   "f": "Pseudodendrite split",
+   "b": "Raised lesions without terminal bulbs: zoster, healing lines or amoeba considered."
+  }
+ ],
+ "keys": [
+  "Antiviral alone treats epithelial herpes",
+  "Enlargement asks steroid history first",
+  "Healed dendrite still needs stromal review"
+ ]
+}

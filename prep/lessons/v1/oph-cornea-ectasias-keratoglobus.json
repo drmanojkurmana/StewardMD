@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "oph-cornea-ectasias-keratoglobus",
+ "subject": "ophthalmology",
+ "module": "oph-corneal-degenerations",
+ "title": "Keratoglobus, Pellucid Degeneration and Corneal Dystrophies",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Keratoglobus** thins entire cornea with globular protrusion from limbus to limbus, congenital or acquired, perforating after minor trauma because no normal thickness reserve exists anywhere. It contrasts keratoconus focal cone and pellucid inferior band by geography of thinning. Protective eyewear and guarded graft prognosis dominate counselling from diagnosis.",
+   "say": "Whole cornea thinning together gives globular protrusion with trauma perforation risk in keratoglobus characteristically from childhood onward. Geography gives ectasia separation additionally. Protection gives counselling dominance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/corneal-degenerations-dystrophies-keratoconus-fig1.webp",
+    "alt": "Corneal ectasia composite with keratoconus topography and ectasia signs for comparison.",
+    "caption": "Ectasia geography comparison. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pellucid marginal degeneration** thins inferior peripheral band near limbus with protrusion above the thinned band, against the rule astigmatism and crab claw topography pattern classically. No inflammation, no Fleischer ring and older age separate it from inferior keratoconus variants. Geography again: band below, bulge above, cone apex displaced superiorly to thinning.",
+   "say": "Inferior band thinning together gives pellucid pattern with bulge above band on topography in older patients characteristically. Crab claw gives pattern naming additionally. Quiet course gives degeneration separation.",
+   "vis": {
+    "kind": "table",
+    "title": "Ectasia geography map",
+    "cols": [
+     "Disease",
+     "Thinning geography"
+    ],
+    "rows": [
+     [
+      "Keratoconus",
+      "Focal cone, apex thinnest"
+     ],
+     [
+      "Pellucid degeneration",
+      "Inferior band, bulge above"
+     ],
+     [
+      "Keratoglobus",
+      "Entire cornea limbus to limbus"
+     ],
+     [
+      "Terrien degeneration",
+      "Superior peripheral gutter quiet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fuchs endothelial dystrophy** loses endothelial cells with guttata excrescences, morning corneal oedema clearing by day as pump fails, later permanent haze and bullous pain. Specular counts and pachymetry track failure toward endothelial keratoplasty from previous lesson. Bilateral older female predominance and cataract surgery acceleration complete classic profile.",
+   "say": "Endothelial loss together gives morning oedema clearing daily in Fuchs dystrophy of older patients characteristically over years. Counts give surgical tracking additionally. Endothelial replacement gives end stage care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ectasia group",
+     "points": [
+      "Stromal thinning geography",
+      "Shape changes, endothelium intact",
+      "Cross link or lamellar logic"
+     ]
+    },
+    "right": {
+     "title": "Fuchs dystrophy",
+     "points": [
+      "Endothelial cell loss, guttata",
+      "Morning oedema, thickness rises",
+      "Endothelial keratoplasty logic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Epithelial basement membrane dystrophy gives map dot fingerprint patterns, recurrent erosions waking pain and irregular astigmatism from adhesion failure. Stromal dystrophies deposit granular, lattice amyloid or macular material by layer and inheritance teaching tables. **Layer plus inheritance** organises dystrophy names beyond memorised lists in cornea examinations.",
+   "say": "Layer together with inheritance gives dystrophy organisation beyond name lists in cornea examinations for students systematically. Erosion pain gives epithelial entry additionally. Deposits give stromal separation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dystrophy layer logic",
+    "nodes": [
+     {
+      "id": "epi",
+      "label": "Epithelial adhesion fails, erosions"
+     },
+     {
+      "id": "strom",
+      "label": "Stromal deposits accumulate"
+     },
+     {
+      "id": "endo",
+      "label": "Endothelial pump fails, oedema"
+     },
+     {
+      "id": "surg",
+      "label": "Layer matched surgery"
+     }
+    ],
+    "edges": [
+     [
+      "epi",
+      "strom"
+     ],
+     [
+      "strom",
+      "endo"
+     ],
+     [
+      "endo",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Recurrent corneal erosion** wakes patients with sharp pain from epithelial adhesion failure after minor trauma or basement dystrophy, lubricants, bandage lens and epithelial procedures escalating by recurrence. Morning pain timing is diagnostic history jewel. Stromal puncture or phototherapeutic keratectomy anchors epithelium in refractory cases.",
+   "say": "Waking pain together gives erosion recognition after adhesion failure in dystrophy or trauma history at morning presentation in clinic. Lubrication gives first care additionally. Anchoring procedures give refractory care.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Corneal layer diagram relevant to epithelial adhesion and dystrophy layers.",
+    "caption": "Corneal adhesion layer anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Lattice dystrophy amyloid lines, granular hyaline deposits and macular mucopolysaccharide staining differences give stromal examination tables tied to genetics counselling. Recurrence in grafts occurs because host cells repopulate donor over years in several dystrophies. **Graft recurrence** counselling therefore names dystrophy specifically before keratoplasty consent.",
+   "say": "Deposit type together gives stromal dystrophy naming with genetics counselling in cornea clinics for families over generations. Graft recurrence gives consent specificity additionally. Staining gives laboratory separation historically.",
+   "vis": {
+    "kind": "table",
+    "title": "Stromal dystrophy deposits",
+    "cols": [
+     "Dystrophy",
+     "Deposit teaching"
+    ],
+    "rows": [
+     [
+      "Granular",
+      "Hyaline bread crumb opacities"
+     ],
+     [
+      "Lattice",
+      "Amyloid branching lines"
+     ],
+     [
+      "Macular",
+      "Mucopolysaccharide, severe early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Degenerations versus dystrophies split by inheritance and bilaterality: dystrophies inherited, bilateral, early and layer specific; degenerations acquired, often unilateral asymmetric, age or exposure related like band keratopathy and climatic droplet. **Band keratopathy** calcium at Bowman layer in chronic uveitis or hypercalcaemia chelates or scrapes for comfort and vision.",
+   "say": "Inheritance together with bilaterality gives dystrophy separation from acquired degeneration in cornea teaching for examinations systematically. Calcium band gives chelation care additionally. Exposure history gives degeneration direction.",
+   "vis": {
+    "kind": "table",
+    "title": "Dystrophy versus degeneration",
+    "cols": [
+     "Feature",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Inherited bilateral early",
+      "Dystrophy pattern"
+     ],
+     [
+      "Acquired asymmetric late",
+      "Degeneration pattern"
+     ],
+     [
+      "Calcium band interpalpebral",
+      "Band keratopathy care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: geography separates ectasias, guttata pumps fail at endothelium, erosions wake at epithelium and deposits name stroma. Layer matched surgery repeats graft lesson in dystrophy language. **Limbus to limbus** phrase answers keratoglobus against every focal ectasia. Layer assessment at first presentation therefore writes the surgical plan before deposits or thinning advance further.",
+   "say": "Geography together gives ectasia separation while layer gives dystrophy surgery matching at corneal clinics for patients reliably. Waking pain gives erosion recognition additionally. Whole cornea gives keratoglobus phrase.",
+   "vis": {
+    "kind": "table",
+    "title": "Cornea layer anchors",
+    "cols": [
+     "Layer fails",
+     "Disease phrase"
+    ],
+    "rows": [
+     [
+      "Epithelium adhesion",
+      "Waking erosion pain"
+     ],
+     [
+      "Stroma shape",
+      "Ectasia geography map"
+     ],
+     [
+      "Endothelium pump",
+      "Morning oedema guttata"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Ectasia geography",
+   "b": "Keratoconus focal cone, pellucid inferior band with bulge above, keratoglobus whole cornea, Terrien superior gutter."
+  },
+  {
+   "f": "Fuchs dystrophy course",
+   "b": "Guttata endothelial loss, morning oedema clearing by day, endothelial keratoplasty end stage."
+  },
+  {
+   "f": "Recurrent erosion jewel",
+   "b": "Sharp pain on waking from adhesion failure; lubricants to anchoring procedures by recurrence."
+  }
+ ],
+ "keys": [
+  "Dystrophy inherited bilateral, degeneration acquired",
+  "Keratoglobus perforates after minor trauma",
+  "Dystrophies recur in grafts over years"
+ ]
+}

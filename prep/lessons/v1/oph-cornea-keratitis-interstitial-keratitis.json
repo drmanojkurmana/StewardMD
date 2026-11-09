@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-interstitial-keratitis",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Interstitial Keratitis and Congenital Syphilis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Interstitial keratitis** is stromal inflammation with deep vascularisation without primary epithelial ulceration, classically immune response in congenital syphilis giving bilateral disease in childhood or adolescence. Salmon patch vascular invasion and later ghost vessels mark stages at slit lamp. Systemic cause treatment plus topical suppression protects stroma while infection itself is not active in cornea.",
+   "say": "Stromal inflammation together gives deep vascularisation without primary ulceration in interstitial disease characteristically in youth. Bilateral pattern gives congenital syphilis direction. Systemic treatment gives cause control.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-keratitis-fig1.webp",
+    "alt": "Anterior segment diagram for stromal inflammation comparison in interstitial keratitis.",
+    "caption": "Stromal inflammation comparison. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Hutchinson triad** joins interstitial keratitis with notched Hutchinson incisors and sensorineural deafness in congenital syphilis, three late stigmata from one fetal infection. Dental and hearing companions therefore complete eye assessment when bilateral stromal disease appears in youth. Serology confirms while treatment prevents progression in other systems though corneal vessels may persist as ghosts.",
+   "say": "Teeth together with deafness gives congenital syphilis triad completion at eye presentation in adolescents characteristically. Serology gives confirmation for systemic treatment. Ghost vessels give historical evidence afterward.",
+   "vis": {
+    "kind": "table",
+    "title": "Hutchinson triad",
+    "cols": [
+     "System",
+     "Stigma"
+    ],
+    "rows": [
+     [
+      "Cornea",
+      "Interstitial keratitis bilateral"
+     ],
+     [
+      "Teeth",
+      "Notched incisors, mulberry molars"
+     ],
+     [
+      "Ear",
+      "Sensorineural deafness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Salmon patch** names orange red stromal vascularisation hue during active interstitial inflammation, fading to empty ghost vessels in quiet burnt out cornea visible by retroillumination. Stage reading by vessels full or empty guides suppression duration. Bilateral simultaneous activity strengthens congenital cause over unilateral herpetic stromal disease in differential.",
+   "say": "Vascular hue together gives active stage reading in interstitial disease at slit lamp during follow up in clinic. Empty ghosts give burnt out evidence afterward. Bilaterality gives congenital direction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active interstitial",
+     "points": [
+      "Salmon patch full vessels",
+      "Stromal haze and photophobia",
+      "Suppression active phase"
+     ]
+    },
+    "right": {
+     "title": "Quiet interstitial",
+     "points": [
+      "Ghost empty vessels remain",
+      "Scar by depth and centrality",
+      "Optical rehabilitation stage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Causes beyond syphilis include tuberculosis, herpes, Cogan syndrome with vestibuloauditory symptoms and systemic vasculitides, serology and systemic review directed by company. Cogan adds tinnitus and vertigo to interstitial disease in young adults needing audiology jointly. **Companion symptoms** select serology panel rather than blanket testing in interstitial workup.",
+   "say": "Companion symptoms together give serology selection in interstitial workup at presentation in clinic for young patients. Audiology gives Cogan completion additionally. Blanket testing gives low value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Interstitial workup logic",
+    "nodes": [
+     {
+      "id": "bil",
+      "label": "Bilateral stromal disease found"
+     },
+     {
+      "id": "comp",
+      "label": "Teeth, hearing, systemic review"
+     },
+     {
+      "id": "sero",
+      "label": "Directed serology panel"
+     },
+     {
+      "id": "treat",
+      "label": "Systemic plus topical plan"
+     }
+    ],
+    "edges": [
+     [
+      "bil",
+      "comp"
+     ],
+     [
+      "comp",
+      "sero"
+     ],
+     [
+      "sero",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ghost vessels** persist after inflammation as empty stromal channels that may reperfuse in recurrence, explaining rapid revascularisation in later flares. They are examination evidence of past interstitial disease in quiet corneas presenting for refractive or graft assessment. Prior interstitial history changes graft prognosis counselling because recurrence in graft follows host vessels.",
+   "say": "Empty channels together give past disease evidence in quiet corneas at assessment for surgery in clinic. Reperfusion gives flare speed explanation later. Graft counselling gives history value.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Corneal stromal diagram relevant to ghost vessel assessment after interstitial disease.",
+    "caption": "Stromal ghost vessel anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Topical steroid suppression treats immune stroma while systemic antimicrobial treats cause, dual track repeating herpes stromal logic with different organism. Pressure and cataract monitoring accompany prolonged suppression in children as vernal lesson taught. **Cause plus suppression** phrase writes interstitial prescriptions safely in examinations.",
+   "say": "Dual track together gives cause treatment with stromal suppression in interstitial care at specialist clinics over months. Pressure monitoring gives child safety additionally. Prescription phrase gives examination safety.",
+   "vis": {
+    "kind": "table",
+    "title": "Interstitial dual track",
+    "cols": [
+     "Track",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Systemic antimicrobial",
+      "Underlying congenital infection"
+     ],
+     [
+      "Topical suppression",
+      "Stromal immune inflammation"
+     ],
+     [
+      "Monitoring",
+      "Pressure, cataract, recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unilateral interstitial pattern redirects toward herpes stromal, tuberculosis focal or trauma rather than congenital syphilis default. Laterality therefore triages serology breadth before results return. **Bilateral youth** is congenital until disproved, unilateral any age reopens local viral differential first. Laterality documented at first visit therefore protects patients from repeated undirected testing at every flare.",
+   "say": "Laterality together gives serology breadth triage in interstitial presentations at first clinic assessment for patients. Bilateral youth gives congenital priority direction. Unilateral gives viral reopening.",
+   "vis": {
+    "kind": "table",
+    "title": "Laterality triage",
+    "cols": [
+     "Pattern",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Bilateral adolescent",
+      "Congenital syphilis serology"
+     ],
+     [
+      "Unilateral adult",
+      "Herpes stromal first"
+     ],
+     [
+      "With ear symptoms",
+      "Cogan pathway jointly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: bilateral stroma without ulcer interstitial, salmon active and ghost quiet, triad teeth ear eye. Companions select serology, dual track treats cause and stroma. **No primary ulceration** phrase separates interstitial from infectious ulcer lessons. Directed serology results return to systemic teams for whole patient treatment completion.",
+   "say": "Bilateral stromal pattern together gives interstitial recognition without ulceration at slit lamp in clinic for examiners reliably. Stage vessels give activity reading additionally. Companions give serology selection.",
+   "vis": {
+    "kind": "table",
+    "title": "Interstitial anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Classic cause",
+      "Congenital syphilis bilateral youth"
+     ],
+     [
+      "Active sign",
+      "Salmon patch vessels full"
+     ],
+     [
+      "Quiet sign",
+      "Ghost vessels empty remain"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Hutchinson triad",
+   "b": "Interstitial keratitis, notched incisors and sensorineural deafness in congenital syphilis."
+  },
+  {
+   "f": "Salmon patch versus ghost vessels",
+   "b": "Salmon full vessels mark activity; empty ghost vessels mark burnt out past disease."
+  },
+  {
+   "f": "Interstitial definition split",
+   "b": "Stromal inflammation with deep vessels and no primary epithelial ulceration."
+  }
+ ],
+ "keys": [
+  "Bilateral youth interstitial is congenital syphilis first",
+  "Treat cause systemically and stroma topically",
+  "Ear symptoms add Cogan pathway"
+ ]
+}
