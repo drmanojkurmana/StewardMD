@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-gallbladder-pancreas",
+  "subject": "pathology",
+  "title": "Cholesterol and Pigment Gallstones, Cholecystitis, Porcelain Gallbladder, and Biliary Cancers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cholesterol gallstones crystallise when bile supersaturates with cholesterol, nucleation accelerates, and gallbladder hypomotility lets crystals grow, classically in multiparous women of Western diets yet increasingly universal. Supersaturation starts the **cholesterol gallstone (cholelithiasis)**. Cholesterol stones are often yellow, multiple and radiolucent, so plain radiographs miss most of them while ultrasound detects them readily.",
+      "say": "Supersaturated bile, nucleation, and a lazy gallbladder grow cholesterol stones over years.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bile supersaturated with cholesterol"
+          },
+          {
+            "id": "b",
+            "label": "Crystals nucleate in mucin"
+          },
+          {
+            "id": "c",
+            "label": "Hypomotility lets stones grow"
+          },
+          {
+            "id": "d",
+            "label": "Colic, cholecystitis, or migration follows"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pigment stones split black from haemolysis and cirrhosis, hard calcium bilirubinate in gallbladder, and brown from infected ducts, soft bilirubinate with bacteria and parasites behind oriental cholangiohepatitis. Colour separates chemistry: **black versus brown pigment gallstones**. Brown stones form where bacterial beta glucuronidase deconjugates bilirubin inside ducts, so they recur after gallbladder removal if ducts stay infected.",
+      "say": "Black stones mean haemolysis in the gallbladder; brown stones mean infected bile ducts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Black pigment stones",
+          "points": [
+            "Haemolysis, cirrhosis, ileal disease",
+            "Hard, gallbladder based",
+            "Calcium bilirubinate polymer"
+          ]
+        },
+        "right": {
+          "title": "Brown pigment stones",
+          "points": [
+            "Duct infection, parasites",
+            "Soft, duct based",
+            "Bacterial beta glucuronidase"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Biliary colic hurts steadily in right upper quadrant or epigastrium for under six hours as stone transiently blocks cystic duct, while persistence beyond six hours with fever and Murphy sign declares cholecystitis. Duration separates them: **biliary colic versus acute cholecystitis**. Murphy sign is inspiratory arrest on palpation under the right costal margin, and it is typically absent in simple colic.",
+      "say": "Colic settles within hours; pain beyond six hours with fever and Murphy sign is cholecystitis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Biliary colic",
+          "Acute cholecystitis"
+        ],
+        "rows": [
+          [
+            "Duration",
+            "Under six hours typically",
+            "Beyond six hours persistent"
+          ],
+          [
+            "Fever and WCC",
+            "Absent usually",
+            "Present"
+          ],
+          [
+            "Murphy sign",
+            "Negative",
+            "Positive inspiratory arrest"
+          ],
+          [
+            "Ultrasound",
+            "Stones, thin wall",
+            "Thick wall, pericholecystic fluid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute cholecystitis usually obstructs cystic duct with stone, gallbladder distending, inflaming, and risking gangrene, empyema, and perforation, while acalculous disease stalks critically ill patients. Early laparoscopic removal rules: **acute calculous cholecystitis**. Operating within 72 hours of presentation is preferred, because the inflamed planes dissect more safely before dense fibrosis develops.",
+      "say": "Blocked cystic duct plus infection pressure makes acute cholecystitis; early cholecystectomy is its cure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stone impacts cystic duct"
+          },
+          {
+            "id": "b",
+            "label": "Distension, ischaemia, bacterial growth"
+          },
+          {
+            "id": "c",
+            "label": "Gangrene, empyema, perforation risk"
+          },
+          {
+            "id": "d",
+            "label": "Early laparoscopic cholecystectomy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic cholecystitis scars gallbladder through repeated colic and inflammation, Rokitansky-Aschoff sinuses herniating mucosa through muscular defects into wall, sometimes harbouring bacteria between attacks. Those mucosal outpouchings are **Rokitansky-Aschoff sinuses of chronic cholecystitis**. On sections they appear as small dark clefts diving through a thickened fibrotic wall, not as true glands invading muscle.",
+      "say": "Mucosa herniating through wall defects names Rokitansky-Aschoff sinuses in the scarred gallbladder.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adenomyomatosis-gallbladder-fig1.webp",
+        "alt": "Gallbladder wall with Rokitansky-Aschoff sinuses",
+        "caption": "Gallbladder wall thickening with Rokitansky-Aschoff sinuses diving through the muscle layer in chronic gallbladder disease."
+      }
+    },
+    {
+      "tx": "Porcelain gallbladder calcifies its wall into brittle blue brittleness visible on plain imaging, historically linked to carcinoma strongly enough for prophylactic cholecystectomy discussions now individualised by calcification pattern. The calcified end stage is **porcelain gallbladder**. Complete intramural calcification carries lower cancer risk than selective mucosal calcification, which is the pattern that most worries surgeons.",
+      "say": "A calcified gallbladder wall earns surgical discussion; modern imaging refines its cancer risk by pattern.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Porcelain gallbladder",
+          "points": [
+            "Wall calcification on imaging",
+            "Chronic inflammation end stage",
+            "Cholecystectomy usually advised"
+          ]
+        },
+        "right": {
+          "title": "Gallbladder carcinoma clues",
+          "points": [
+            "Mass replacing gallbladder, liver invasion",
+            "Weight loss, older women",
+            "Stones present in most cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Gallbladder carcinoma hides inside cholecystectomy specimens or presents late invading liver segments four and five, stones and chronic inflammation its soil, porcelain and polyps its warning lesions. Incidental discovery governs **gallbladder carcinoma presentation patterns**. A gallbladder polyp larger than 10 millimetres is usually removed, because neoplastic polyps cluster above that size threshold.",
+      "say": "Most gallbladder cancers are surprises in cholecystectomy specimens or tragedies presenting too late.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk lesion",
+          "Consequence",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Large gallbladder polyp over 1 cm",
+            "Neoplasia concern",
+            "Cholecystectomy advised"
+          ],
+          [
+            "Porcelain gallbladder",
+            "Cancer association debated by pattern",
+            "Surgical referral"
+          ],
+          [
+            "Primary sclerosing cholangitis",
+            "Biliary cancer field",
+            "Gallbladder surveillance"
+          ],
+          [
+            "Anomalous pancreaticobiliary junction",
+            "Reflux carcinogenesis",
+            "Specialist surgical planning"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cholangiocarcinoma scars bile ducts at perihilar Klatskin confluence, intrahepatic, or distal sites from PSC, liver flukes, and chronic duct inflammation, painless jaundice its herald. Classification by anatomy is **cholangiocarcinoma, intrahepatic, perihilar, distal**. Perihilar Klatskin tumours are staged by the Bismuth Corlette system, which describes how far duct confluence involvement extends.",
+      "say": "Painless jaundice with a hilar stricture means Klatskin tumour until brushings and imaging acquit it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cholangiocarcinoma-fig1.webp",
+        "alt": "Cholangiocarcinoma anatomical classification",
+        "caption": "Cholangiocarcinoma anatomical classification across intrahepatic, perihilar, and distal sites."
+      }
+    }
+  ]
+}
