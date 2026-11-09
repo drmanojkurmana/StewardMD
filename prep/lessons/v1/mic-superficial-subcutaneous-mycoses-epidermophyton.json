@@ -1,0 +1,195 @@
+{
+  "v": 1,
+  "module": "mic-superficial-subcutaneous-mycoses",
+  "subject": "microbiology",
+  "title": "Epidermophyton, Mycetoma, Madurella, Actinomycetoma and Chromoblastomycosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Mycetoma** is a chronic implantation infection producing the triad of tumefaction, draining sinuses and grains in discharge. It usually affects the foot after thorn or soil trauma in tropical agricultural workers, the classic Madura foot. Grains are compact colonies of the causative fungus or filamentous bacterium. Longstanding disease destroys soft tissue and bone while remaining surprisingly painless for its size.",
+      "say": "Swelling, sinuses and grains after foot trauma spell mycetoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mycetoma triad",
+          "points": [
+            "Painless subcutaneous swelling",
+            "Multiple draining sinus tracts",
+            "Visible grains in discharge",
+            "Foot most often, hand and back also possible"
+          ]
+        },
+        "right": {
+          "title": "Consequences",
+          "points": [
+            "Deep spread to fascia and bone",
+            "Secondary bacterial infection",
+            "Deformity and disability",
+            "Amputation in neglected late disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Eumycetoma** is caused by true fungi such as Madurella mycetomatis and produces black or pale grains depending on species. Actinomycetoma is caused by aerobic filamentous bacteria such as Nocardia, Streptomyces and Actinomadura with smaller white to red grains. Grain colour and microscopy give early clues, but culture and histopathology define therapy because fungi need antifungals while actinomycetes need prolonged antibacterial combinations.",
+      "say": "Black grains lean fungal and white-yellow lean bacterial, yet culture decides treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mycetoma-fig1.webp",
+        "alt": "Mycetoma clinical presentation",
+        "caption": "Mycetoma presentation with progressive soft tissue induration, multiple draining sinus tracts and pigmented grain discharge [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "**Madurella mycetomatis** is a leading global cause of black-grain eumycetoma in the mycetoma belt across Africa and India. Its grains are hard and dark from melanin-like pigment. Grain examination should wash and crush material between slides, then submit deep biopsy and discharge for bacterial and fungal culture. Surface swabs alone mislead because sinus openings carry ordinary skin bacteria unrelated to the deep grain organism.",
+      "say": "Send grains and deep tissue, never a superficial swab, to diagnose mycetoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Useful specimens",
+          "points": [
+            "Expressed grains picked from discharge",
+            "Deep surgical biopsy",
+            "Crushed grain microscopy",
+            "Separate fungal and bacterial cultures"
+          ]
+        },
+        "right": {
+          "title": "Poor specimens",
+          "points": [
+            "Surface swab of sinus opening",
+            "Formalin only material with no culture sample",
+            "Scant dried discharge",
+            "Samples after prolonged antibiotics without note"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chromoblastomycosis** is a chronic verrucous skin infection after implantation of dematiaceous fungi such as Fonsecaea and Cladophialophora. Lesions evolve from papules into warty cauliflower plaques on legs. Tissue shows brown muriform or sclerotic bodies, also called Medlar bodies: thick-walled round cells divided by septa in two planes that look like copper pennies in histology.",
+      "say": "Copper penny muriform cells in a warty leg plaque mean chromoblastomycosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical course",
+          "points": [
+            "Trauma to exposed leg or foot",
+            "Slow verrucous plaque expansion",
+            "Black dots on surface from fungal elimination",
+            "Lymphoedema and secondary infection late"
+          ]
+        },
+        "right": {
+          "title": "Laboratory",
+          "points": [
+            "KOH shows muriform bodies",
+            "Histology shows pseudoepitheliomatous hyperplasia",
+            "Culture identifies dematiaceous species",
+            "Itraconazole or terbinafine for prolonged periods"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phaeohyphomycosis** is tissue infection by dark-walled fungi appearing as pigmented hyphae rather than muriform bodies, often in immunocompromised hosts and sometimes in brain or sinuses. Chromoblastomycosis and phaeohyphomycosis both involve melanised fungi, but histologic form separates them: muriform cells define chromoblastomycosis, while irregular hyphae and yeast-like forms define phaeohyphomycosis. Melanin contributes to virulence and oxidative defence.",
+      "say": "Muriform cells versus dark hyphae separate two melanised fungal diseases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phaeohyphomycosis features",
+          "points": [
+            "Pigmented brown hyphae in tissues",
+            "Absence of Medlar muriform bodies",
+            "Exophiala and Bipolaris species",
+            "Subcutaneous cysts and brain abscesses"
+          ]
+        },
+        "right": {
+          "title": "Chromoblastomycosis features",
+          "points": [
+            "Thick walled muriform sclerotic cells",
+            "Internal division along vertical septa",
+            "Fonsecaea and Cladophialophora species",
+            "Verrucous hyperkeratotic skin plaques"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Epidermophyton floccosum** belongs in the same superficial module but never causes mycetoma; confusing dermatophyte colonies with grains is an examination trap. The discriminator is depth: dermatophytes live in keratin, whereas mycetoma organisms form grains in subcutaneous tissue with sinus tracts. That depth explains why mycetoma needs imaging for bone involvement and months of therapy rather than a short cream course.",
+      "say": "Keratin surface disease and grain-forming deep disease are managed in different worlds.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "depth",
+            "label": "Keratin only or subcutaneous grains"
+          },
+          {
+            "id": "image",
+            "label": "Image bone if deep swelling"
+          },
+          {
+            "id": "grain",
+            "label": "Classify grain fungus or bacterium"
+          },
+          {
+            "id": "months",
+            "label": "Prolonged targeted therapy and surgery review"
+          }
+        ],
+        "edges": [
+          [
+            "depth",
+            "image"
+          ],
+          [
+            "image",
+            "grain"
+          ],
+          [
+            "grain",
+            "months"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical differentiation of dermatophytoses frequently employs **Wood lamp examination**, where a filtered long-wave ultraviolet beam emitting at three hundred and sixty-five nanometres inspects infected hair shafts in a darkened cubicle. Species belonging to Microsporum, including Microsporum audouinii and canis, emit characteristic bright green-gold fluorescence due to pteridine metabolites. In contrast, hair infections caused by Trichophyton and skin lesions from Epidermophyton do not produce fluorescence.",
+      "say": "Long wave ultraviolet light induces distinctive green fluorescence in Microsporum hair infections.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluorescent species (bright green)",
+          "points": [
+            "Microsporum canis ectothrix capitis",
+            "Microsporum audouinii hair invasion",
+            "Pteridine metabolite light emission",
+            "Tinea versicolor gives pale yellow glow"
+          ]
+        },
+        "right": {
+          "title": "Non-fluorescent dermatophytes",
+          "points": [
+            "Trichophyton tonsurans endothrix hair",
+            "Trichophyton rubrum cutaneous plaques",
+            "Epidermophyton floccosum groin lesions",
+            "Requires fungal culture for confirmation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Subcutaneous inoculation following rose thorn prick or splinter trauma causes **Sporothrix schenckii** infection, giving rise to classic lymphocutaneous sporotrichosis. This thermally dimorphic fungus displays small cigar-shaped budding yeasts in tissue at thirty-seven degrees and delicate daisy-head conidial clusters at twenty-five degrees. Primary erythematous papules ulcerate and produce ascending chains of subcutaneous nodules along lymphatic channels, successfully treated with oral itraconazole.",
+      "say": "Thorny trauma inoculates Sporothrix, forming ascending subcutaneous nodules along regional lymphatic drainage.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sporotrichosis-fig1.webp",
+        "alt": "Sporotrichosis lymphocutaneous nodules",
+        "caption": "Sporotrichosis demonstrating primary inoculative subcutaneous ulcer with ascending secondary nodules along lymphatic channels [Credit: CDC, StewardMD cleared]"
+      }
+    }
+  ]
+}
