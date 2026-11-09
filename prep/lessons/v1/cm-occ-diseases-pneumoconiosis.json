@@ -1,0 +1,276 @@
+{
+  "v": 1,
+  "id": "cm-occ-diseases-pneumoconiosis",
+  "subject": "community-medicine",
+  "module": "cm-occ-diseases",
+  "title": "Pneumoconioses: Silicosis, Asbestosis, Mesothelioma, Byssinosis, and Bagassosis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Pathophysiology and particle size in pneumoconiosis",
+      "tx": "Occupational inhalation of respirable mineral and organic particulates within industrial workplaces produces chronic inflammatory lung disease defined as **occupational pneumoconiosis dust pathology**. While coarse particles exceeding five microns are trapped by nasal vibrissae and tracheobronchial ciliated mucus, respirable particles measuring zero point five to three microns penetrate deep into terminal respiratory bronchioles and alveoli, where alveolar macrophages phagocytose mineral grains and release fibrogenic cytokines.",
+      "say": "Pneumoconiosis is caused by inhaling fine mineral dusts into the lungs. Dust particles between zero point five and three microns reach deep alveoli, triggering irreversible fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Inhalation of 0.5 to 3 micron respirable dust"
+          },
+          {
+            "id": "p2",
+            "label": "Alveolar macrophage phagocytosis of minerals"
+          },
+          {
+            "id": "p3",
+            "label": "Release of fibrogenic TNF-alpha and IL-1"
+          },
+          {
+            "id": "p4",
+            "label": "Fibroblast proliferation and irreversible fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ],
+          [
+            "p3",
+            "p4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Silicosis etiology and high-risk industries",
+      "tx": "The most common and destructive occupational lung disease worldwide is **crystalline silica induced silicosis**, caused by prolonged inhalation of free silicon dioxide dust. High-risk occupations encompass stone quarrying, granite cutting, sandblasting, pottery manufacture, quartz grinding, and slate mining; crystalline silica displays intense cytotoxicity toward alveolar macrophages, causing cellular rupture, secondary enzyme release, and progressive concentric whorled collagenous nodule formation throughout pulmonary parenchyma.",
+      "say": "Silicosis is the most common dust disease, caused by free crystalline silica dust in miners and stonecutters. Silica kills alveolar macrophages, creating hard scar nodules in lungs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High-risk silica industries",
+          "points": [
+            "Stone quarrying and rock cutting",
+            "Sandblasting of metal castings",
+            "Pottery and ceramic factories",
+            "Quartz and agate grinding units"
+          ]
+        },
+        "right": {
+          "title": "Histopathological hallmarks",
+          "points": [
+            "Concentric whorled collagenous nodules",
+            "Polarizing birefringent silica particles",
+            "Obliterative vascular endarteritis",
+            "Progressive conglomerate mass formation"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Radiological features of pulmonary silicosis",
+      "tx": "Chest radiography provides primary surveillance confirmation of occupational dust damage under **silicosis radiological diagnostic criteria**. Plain skiagrams reveal small, rounded, well-circumscribed opacities predominantly distributed across the upper and middle lung lobes, which coalesce in advanced stages into massive fibrotic shadows; a pathognomonic finding is eggshell calcification of hilar and mediastinal lymph nodes, where peripheral rim calcium deposits circumscribe node perimeters.",
+      "say": "Silicosis appears on chest X-rays as scattered round nodules in the upper lungs. A classic sign is eggshell calcification, forming a thin white ring around enlarged lymph nodes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/occupational-lung-disease-fig1.webp",
+        "alt": "Chest radiograph and diagrams illustrating rounded nodules in silicosis compared to lower zone reticular opacities in asbestosis",
+        "caption": "Pneumoconiosis patterns: Upper lobe rounded silicotic nodules versus lower lobe irregular opacities in asbestosis. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Silicotuberculosis and disease complications",
+      "tx": "Inhaled crystalline silica impairs alveolar macrophage phagolysosomal acidification and cellular bactericidal capacity, creating marked susceptibility to **silicotuberculosis secondary mycobacterial infection**. Workers suffering from silicosis carry a three-to-fourfold elevated lifetime risk of contracting pulmonary tuberculosis compared to unexposed populations, with the dual disease accelerating rapid clinical decline, hemoptysis, cavitary destruction, and premature cardiorespiratory failure.",
+      "say": "Silicosis damages lung defenses, drastically increasing the risk of pulmonary tuberculosis. Silicotuberculosis accelerates lung destruction, causing severe coughing, breathlessness, and heart failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical parameter",
+          "Uncomplicated silicosis",
+          "Silicotuberculosis comorbidity"
+        ],
+        "rows": [
+          [
+            "CXR opacities",
+            "Stable upper lobe rounded nodules",
+            "Rapid cavitation, asymmetric infiltrates"
+          ],
+          [
+            "Constitutional symptoms",
+            "Gradual exertional dyspnoea",
+            "Hectic fever, night sweats, weight loss"
+          ],
+          [
+            "Sputum microbiology",
+            "Acid-fast bacilli negative",
+            "Acid-fast bacilli smear and GeneXpert positive"
+          ],
+          [
+            "Clinical prognosis",
+            "Slowly progressive over decades",
+            "Rapid deterioration requiring 6-month ATT"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Asbestosis pathology and lower zone fibrosis",
+      "tx": "Inhalation of hydrated fibrous silicate minerals generates diffuse pulmonary parenchymal scarring designated as **asbestosis diffuse interstitial fibrosis**. Unlike silicosis which dominates the upper lobes, asbestosis selectively affects the lower lung lobes, initiating as peribronchiolar fibrosis that advances into honeycomb architectural destruction; microscopic sputum examination reveals pathognomonic golden-brown dumb-bell shaped asbestos bodies formed by hemosiderin-ferritin protein complexes encrusting central asbestos mineral filaments.",
+      "say": "Asbestos dust causes fibrosis that targets the lower lung lobes. Golden-brown dumbbell-shaped asbestos bodies in sputum confirm asbestos exposure in pipefitters and shipbuilders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Asbestos mineral types",
+          "points": [
+            "Chrysotile (white serpentine fibers)",
+            "Amosite (brown amphibole straight fibers)",
+            "Crocidolite (blue amphibole needle fibers)",
+            "Crocidolite carries greatest oncogenic risk"
+          ]
+        },
+        "right": {
+          "title": "Pulmonary pathology",
+          "points": [
+            "Lower zone reticular interstitial scarring",
+            "Bilateral calcified parietal pleural plaques",
+            "Golden-brown ferruginous asbestos bodies",
+            "Progressive restrictive ventilatory defect"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Malignant pleural and peritoneal mesothelioma",
+      "tx": "Occupational contact with amphibole asbestos fibres carries an established etiologic connection to **malignant mesothelioma neoplastic transformation**, an aggressive malignancy arising from mesothelial lining cells of the pleura, peritoneum, and pericardium. The neoplasm develops after an extraordinary clinical latency period of twenty to forty years following initial workplace exposure, presenting as a thick circumferential fibrous rind encasing the entire lung, independent of cigarette smoking habits.",
+      "say": "Asbestos exposure causes malignant mesothelioma decades after workplace contact. This lethal cancer forms a thick tumour rind around the lungs, completely independent of tobacco smoking.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malignant-pleural-mesothelioma-fig1.webp",
+        "alt": "Thorax anatomical diagram and coronal view showing thick circumferential pleural tumour rind encasing lung parenchyma",
+        "caption": "Malignant pleural mesothelioma: Circumferential tumour rind encasing lung after asbestos exposure. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Byssinosis: cotton dust and Monday chest tightness",
+      "tx": "Textile mill labourers processing raw cotton, flax, sisal, or soft hemp develop an occupational bronchospastic disorder termed **byssinosis textile dust reactivity**. Characteristically triggered by endotoxins derived from Gram-negative bacterial epiphytes contaminating raw cotton bracts, patients experience severe chest tightness and dyspnea on the first working day following the weekend break, famously recognized as Monday morning chest tightness that gradually fades as the work week advances.",
+      "say": "Cotton mill workers suffer from byssinosis caused by bacterial endotoxins in raw cotton dust. They experience acute chest tightness every Monday morning upon returning to the factory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Byssinosis clinical grade",
+          "Symptom timing and severity",
+          "Pulmonary function status"
+        ],
+        "rows": [
+          [
+            "Grade 0",
+            "No occupational respiratory symptoms",
+            "Normal FEV1 over working shift"
+          ],
+          [
+            "Grade 1/2",
+            "Occasional chest tightness on Mondays",
+            "Slight post-shift FEV1 drop (<5 percent)"
+          ],
+          [
+            "Grade 1",
+            "Chest tightness every Monday only",
+            "Reversible Monday FEV1 decline (5 to 10 percent)"
+          ],
+          [
+            "Grade 2",
+            "Tightness on Mondays and other weekdays",
+            "Persistent workday FEV1 decline (>10 percent)"
+          ],
+          [
+            "Grade 3",
+            "Permanent chronic dyspnoea with emphysema",
+            "Irreversible fixed airway obstruction"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Bagassosis and sugarcane fibre inhalation",
+      "tx": "Workers in paper mills and cardboard manufacturing plants utilizing dry sugarcane residue risk developing **bagassosis allergic bronchiolitis**. Bagasse is the dry fibrous pulp remaining after crushing cane for sugar juice, often stored in outdoor stacks where moisture and tropical heat foster prolific colonization by thermophilic actinomycetes, particularly Thermoactinomyces sacchari; inhaling these fungal spores provokes acute hypersensitivity pneumonitis with fever, chills, cough, and diffuse bilateral crepitations.",
+      "say": "Bagassosis occurs in cardboard and paper mill workers handling dry sugarcane pulp. Thermophilic fungi growing on stored sugarcane trigger allergic lung inflammation and breathlessness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Crushed sugarcane pulp stored in warm damp stacks"
+          },
+          {
+            "id": "b2",
+            "label": "Proliferation of Thermoactinomyces sacchari spores"
+          },
+          {
+            "id": "b3",
+            "label": "Dust inhalation during bale opening and shredding"
+          },
+          {
+            "id": "b4",
+            "label": "Acute hypersensitivity pneumonitis and dyspnoea"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ],
+          [
+            "b3",
+            "b4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Prevention and engineering control of dust diseases",
+      "tx": "Because established pneumoconiotic parenchymal fibrosis cannot be cured by pharmacotherapy, public health mandates **industrial dust engineering control hierarchies**. Engineering measures comprise wet drilling to suppress dust generation, enclosing vibrating grinders within sealed exhaust hoods, installing local exhaust ventilation systems with baghouse fabric filters, conducting periodic spirometric screening, and enforcing personal respiratory protective equipment meeting N95 or HEPA efficiency standards.",
+      "say": "Since lung fibrosis is permanent and incurable, prevention is essential. Factories must use wet drilling, local exhaust hoods, regular breathing tests, and high-efficiency dust masks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Control level",
+          "Specific technical intervention",
+          "Protective mechanism"
+        ],
+        "rows": [
+          [
+            "Substitution",
+            "Replace quartz sand with olivine or steel shot",
+            "Eliminates free crystalline silica entirely"
+          ],
+          [
+            "Engineering control",
+            "Wet drilling and local exhaust ventilation",
+            "Captures respirable particles at the source"
+          ],
+          [
+            "Administrative control",
+            "Job rotation and mandatory work pauses",
+            "Reduces cumulative lifetime dust exposure"
+          ],
+          [
+            "Personal protection",
+            "Certified N95 or HEPA half-mask respirators",
+            "Filters respirable particles from inhaled air"
+          ]
+        ]
+      }
+    }
+  ]
+}

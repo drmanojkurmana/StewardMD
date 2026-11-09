@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-international-health-rockefeller-foundation",
+  "subject": "community-medicine",
+  "module": "cm-international-health",
+  "title": "Rockefeller, CARE, Red Cross, Colombo Plan, MDGs, SDGs, Alma-Ata and Astana",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Rockefeller Foundation and Indian public health",
+      "tx": "The **Rockefeller Foundation** seeded modern public health philanthropy: hookworm and yellow fever campaigns, schools of public health, and in India support that helped establish the All India Institute of Hygiene and Public Health, Calcutta (1932), alongside malaria and medical education work. Its model (demonstration, training, handover to government) taught foundations to build institutions rather than run parallel services forever.",
+      "say": "Rockefeller money built institutions, including Calcutta's hygiene institute in 1932. Demonstrate, train, hand over: that was the model.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Rockefeller contribution", "Field"],
+        "rows": [
+          ["Hookworm and yellow fever campaigns", "Disease control demonstrations"],
+          ["Schools of public health", "Training institutions worldwide"],
+          ["All India Institute of Hygiene and Public Health 1932", "Indian public health education"],
+          ["Fellowships for Indian officers", "Leadership pipeline"]
+        ]
+      }
+    },
+    {
+      "title": "CARE: food and development NGO",
+      "tx": "**CARE (Cooperative for Assistance and Relief Everywhere)** began in 1945 shipping food parcels (the original CARE packages) to war torn Europe and evolved into a development organisation working on food security, nutrition, maternal health, and women's empowerment, including long running Indian nutrition and health programmes with state governments. Examinations pair CARE with food and nutrition relief origins.",
+      "say": "CARE started as food parcels in 1945 and grew into nutrition and women's development work. Food relief is its founding fingerprint.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ca1", "label": "1945: CARE food packages to Europe" },
+          { "id": "ca2", "label": "Food aid expands to developing nations" },
+          { "id": "ca3", "label": "Nutrition, health, women empowerment focus" }
+        ],
+        "edges": [["ca1", "ca2"], ["ca2", "ca3"]]
+      }
+    },
+    {
+      "title": "Red Cross and Red Crescent movement",
+      "tx": "The **Red Cross movement** unites the International Committee of the Red Cross (war and armed conflict protection under the Geneva Conventions), the International Federation (disaster relief and national society support), and national societies such as the Indian Red Cross Society (1920) running blood banks, disaster response, and first aid training. Its emblem is legally protected; misuse in conflict is a war crime.",
+      "say": "The Red Cross protects war victims, relieves disasters, and runs blood services. Its emblem carries legal protection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ICRC",
+          "points": ["Armed conflict and war victims", "Guardian of Geneva Conventions", "Neutral confidential humanitarian action"]
+        },
+        "right": {
+          "title": "IFRC and national societies",
+          "points": ["Disaster relief coordination", "Blood banks and first aid (India)", "Community health programmes"]
+        }
+      }
+    },
+    {
+      "title": "Colombo Plan: regional cooperation",
+      "tx": "The **Colombo Plan (1950)** organised cooperative economic and social development in Asia and the Pacific: richer members funded training fellowships, experts, and equipment for poorer members, with health manpower training a steady component. Headquartered in Colombo, Sri Lanka, it exemplifies South South plus donor cooperation that predates modern aid architecture, and examinations place it by year, city, and training mission.",
+      "say": "The Colombo Plan of 1950 funded fellowships and experts across Asia Pacific from Colombo. Training was its currency.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Colombo Plan feature", "Detail"],
+        "rows": [
+          ["Founded", "1950, headquarters Colombo"],
+          ["Membership", "Asia Pacific nations plus donors"],
+          ["Instruments", "Fellowships, experts, equipment"],
+          ["Health relevance", "Manpower training and institutional support"]
+        ]
+      }
+    },
+    {
+      "title": "Millennium Development Goals 2000 to 2015",
+      "tx": "The **Millennium Development Goals** set eight time bound targets for 2015 against 1990 baselines: three were directly health (goal four child mortality, five maternal health, six HIV malaria and other diseases), with poverty, education, gender, water, and partnership goals feeding them. India cut poverty and child deaths substantially yet missed maternal mortality pace, the honest mixed report card examiners expect.",
+      "say": "Eight goals, three directly health: children, mothers, and epidemics. India progressed well except on maternal pace.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "md1", "label": "2000: eight goals, 2015 deadline" },
+          { "id": "md2", "label": "Goals 4, 5, 6 carry health directly" },
+          { "id": "md3", "label": "2015: mixed global report card" }
+        ],
+        "edges": [["md1", "md2"], ["md2", "md3"]]
+      }
+    },
+    {
+      "title": "Sustainable Development Goals 2016 to 2030",
+      "tx": "The **Sustainable Development Goals** widened the frame to seventeen goals and universal (not only developing country) duties for 2030, with goal three (good health and well being) carrying thirteen targets including maternal mortality below seventy per hundred thousand, ending preventable newborn and child deaths, universal health coverage, and noncommunicable disease mortality cut by one third. Interlinkage (no goal alone) is the philosophy examiners quote.",
+      "say": "Seventeen universal goals to 2030; health is goal three with universal coverage inside. No goal succeeds alone.",
+      "vis": {
+        "kind": "table",
+        "cols": ["SDG 3 target", "2030 ambition"],
+        "rows": [
+          ["Maternal mortality", "Below 70 per 100000 live births"],
+          ["Newborn and under five deaths", "End preventable deaths"],
+          ["NCD premature mortality", "Reduce by one third"],
+          ["Universal health coverage", "Financial protection for all"]
+        ]
+      }
+    },
+    {
+      "title": "Alma-Ata declaration 1978",
+      "tx": "At Alma Ata (USSR, 1978) nations declared **primary health care** the key to Health for All by 2000: essential care scientifically sound, socially acceptable, universally accessible with community participation at affordable cost, built on eight elements from education and nutrition to essential drugs. India's National Health Policy 1983 domesticated Alma Ata. Its selective primary care critics (child survival packages) debated comprehensiveness for decades.",
+      "say": "Alma Ata 1978 made primary health care the road to health for all. Community participation and equity were its soul.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alma Ata comprehensive PHC",
+          "points": ["Eight essential elements", "Community participation central", "Equity and social justice framed"]
+        },
+        "right": {
+          "title": "Selective PHC critique",
+          "points": ["Few highest yield interventions first", "GOBI as its flagship package", "Feasibility over comprehensiveness"]
+        }
+      }
+    },
+    {
+      "title": "Astana declaration 2018: PHC renewed",
+      "tx": "Forty years on, the **Astana declaration (2018, Kazakhstan)** recommitted the world to primary health care as the foundation of universal health coverage and the SDGs, adding empowered people and communities, multisectoral action, and integrated services with digital tools. Examinations pair Alma Ata (1978, health for all) with Astana (2018, universal health coverage) as bookends; confusing their years and slogans is the planted error.",
+      "say": "Astana 2018 renewed Alma Ata for the coverage era. 1978 promised health for all; 2018 promises coverage for all.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "aa1", "label": "1978 Alma Ata: PHC for Health for All" },
+          { "id": "aa2", "label": "2015 SDGs demand universal coverage" },
+          { "id": "aa3", "label": "2018 Astana: PHC as UHC foundation" }
+        ],
+        "edges": [["aa1", "aa2"], ["aa2", "aa3"]]
+      }
+    },
+    {
+      "title": "Bilateral and voluntary agencies at a glance",
+      "tx": "Beyond the giants, **bilateral and voluntary health agencies** fill niches: USAID and DANIDA style bilateral aid tied to donor governments, the Ford Foundation (population and rural development in India), SIDA and DANIDA health sector support historically in Indian states, and professional voluntaries (Rotary's polio partnership with WHO and UNICEF). Polio eradication's partnership architecture is the model examination narrative of these actors combined.",
+      "say": "Bilaterals fund governments; foundations fund ideas; Rotary helped finish polio. Partnership architecture is the modern pattern.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Agency type", "Example and niche"],
+        "rows": [
+          ["Bilateral aid", "USAID, DANIDA government to government"],
+          ["Foundations", "Ford (population), Rockefeller (institutions)"],
+          ["Service voluntaries", "Rotary polio partnership role"],
+          ["Professional bodies", "ICMR collaborations, WHO collaborating centres"]
+        ]
+      }
+    }
+  ]
+}
