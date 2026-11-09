@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-onc-principles",
+ "subject": "surgery",
+ "title": "Tumour Staging, Sentinel Nodes and Sarcoma Principles",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Describing cancer extent by tumour size, node spread and distant metastasis is **tumour staging**. The TNM system is used worldwide so teams communicate precisely. Stage determines treatment and prognosis more than any other factor. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Tumour staging by the TNM system describes extent and determines treatment and prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Letter",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "T",
+      "Primary tumour extent"
+     ],
+     [
+      "N",
+      "Node involvement"
+     ],
+     [
+      "M",
+      "Distant metastasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The universal language combining those three elements is the **TNM system**. Numbers after each letter grade severity within the category. Grouping combinations gives stages one to four for most cancers. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "The TNM system grades tumour, nodes and metastasis to group cancers into stages one to four.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "T graded by extent"
+     },
+     {
+      "id": "n1",
+      "label": "N graded by nodes"
+     },
+     {
+      "id": "n2",
+      "label": "M graded by spread"
+     },
+     {
+      "id": "n3",
+      "label": "Overall stage grouped"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first lymph node draining a tumour, whose biopsy predicts the rest, is the **sentinel lymph node**. If it is clear, wider node clearance and its morbidity are avoided. Blue dye and tracer locate it during surgery. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The sentinel node predicts nodal spread, and a clear result avoids wider clearance morbidity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rcc-wilms-urothelial-paraneoplastic-fig1.webp",
+    "alt": "Cancer hallmarks and staging principles.",
+    "caption": "Cancer staging principles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate microscopic examination of tissue during an operation is **frozen section**. It checks margins and diagnoses unexpected findings while the patient is asleep. Accuracy is good but slightly below permanent sections. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Frozen section checks margins during surgery while the patient remains asleep.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Frozen section",
+     "points": [
+      "Result in minutes",
+      "Guides same operation",
+      "Slightly less accurate"
+     ]
+    },
+    "right": {
+     "title": "Permanent section",
+     "points": [
+      "Result in days",
+      "Definitive diagnosis",
+      "Most accurate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Treatment given before the main operation to shrink a tumour is **neoadjuvant therapy**. It can make inoperable tumours resectable and tests tumour sensitivity. Response also predicts prognosis usefully. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Neoadjuvant therapy shrinks tumours before surgery and can make inoperable disease resectable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Name"
+    ],
+    "rows": [
+     [
+      "Before surgery",
+      "Neoadjuvant"
+     ],
+     [
+      "After surgery",
+      "Adjuvant"
+     ],
+     [
+      "Without cure intent",
+      "Palliative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment after complete tumour removal to kill microscopic residue is **adjuvant therapy**. It lowers recurrence when risk is significant. Decisions balance recurrence risk against treatment toxicity for each patient. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Adjuvant therapy after complete removal kills microscopic residue and lowers recurrence risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tumour removed completely"
+     },
+     {
+      "id": "n1",
+      "label": "Recurrence risk estimated"
+     },
+     {
+      "id": "n2",
+      "label": "Adjuvant therapy if worthwhile"
+     },
+     {
+      "id": "n3",
+      "label": "Surveillance follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgery aimed at relieving symptoms rather than curing is **palliative surgery**. Bypassing obstruction or controlling bleeding can transform quality of life. It is chosen when benefits clearly outweigh operative burden. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Palliative surgery relieves obstruction or bleeding to transform quality of life without curing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Curative surgery",
+     "points": [
+      "Removes all disease",
+      "Long operation justified",
+      "Cure intended"
+     ]
+    },
+    "right": {
+     "title": "Palliative surgery",
+     "points": [
+      "Relieves symptoms",
+      "Burden kept low",
+      "Comfort intended"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cancers of connective tissue like fat, muscle and fibrous tissue are **soft tissue sarcomas**. The commonest adult type is liposarcoma, while rhabdomyosarcoma predominates in children. Desmoid tumours grow locally without metastasising, and retroperitoneal sarcomas present late and large, all needing wide excision planning at specialist centres with attention to hereditary syndromes and screening of families.",
+   "say": "Soft tissue sarcomas include liposarcoma and rhabdomyosarcoma and need specialist wide excision planning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cutaneous-angiosarcoma-fig1.webp",
+    "alt": "Cutaneous angiosarcoma as a soft tissue sarcoma example.",
+    "caption": "Soft tissue sarcoma example. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Population testing to find cancer before symptoms is **cancer screening**. Programmes exist for breast, cervix, bowel and lung in defined groups. Screening only helps when treatment of early disease improves outcomes. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Cancer screening finds disease before symptoms in defined groups where early treatment helps.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Population invited"
+     },
+     {
+      "id": "n1",
+      "label": "Test detects early disease"
+     },
+     {
+      "id": "n2",
+      "label": "Treatment offered sooner"
+     },
+     {
+      "id": "n3",
+      "label": "Outcomes improve"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

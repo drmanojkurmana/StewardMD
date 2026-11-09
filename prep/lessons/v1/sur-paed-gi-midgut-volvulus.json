@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-paed-gi",
+ "subject": "surgery",
+ "title": "Midgut Volvulus, Anorectal Malformation and NEC",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Twisting of the whole midgut around its narrow mesenteric base is **midgut volvulus**. Blood flow to most of the bowel is cut at once. Bilious vomiting in a newborn with a tender distended abdomen means theatre immediately. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Midgut volvulus twists the whole midgut and cuts its blood flow, needing immediate theatre.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-obstruction-fig1.webp",
+    "alt": "Midgut volvulus obstruction pattern.",
+    "caption": "Midgut volvulus pattern. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "At surgery the volvulus is untwisted anticlockwise, remembered as **turn back the clock**. Warm packs let questionable bowel declare itself before resection decisions. A second look operation may be planned when viability is doubtful. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Volvulus is untwisted anticlockwise at surgery, with a second look when viability is doubtful.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bowel untwisted anticlockwise"
+     },
+     {
+      "id": "n1",
+      "label": "Warm packs applied"
+     },
+     {
+      "id": "n2",
+      "label": "Viability reassessed"
+     },
+     {
+      "id": "n3",
+      "label": "Second look if doubtful"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of normal anal canal development at birth forms an **anorectal malformation**. The level of the defect and fistula type guide reconstruction. Associated spinal, urinary and cardiac anomalies are common and must be screened. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Anorectal malformation reflects failed anal development and needs screening for associated anomalies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Low defect",
+      "Primary repair often"
+     ],
+     [
+      "High defect",
+      "Colostomy then reconstruction"
+     ],
+     [
+      "All types",
+      "Screen spine and heart"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inflammatory death of bowel wall in premature newborns is **necrotising enterocolitis**. Feeding intolerance, distension and bloody stools develop in sick preterm babies. Gas within the bowel wall on films confirms the diagnosis. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Necrotising enterocolitis kills bowel wall in premature babies and shows gas in the wall.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-caecal-volvulus.webp",
+    "alt": "Volvulus imaging for comparison in bowel emergencies.",
+    "caption": "Bowel volvulus imaging comparison. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Free air and fixed dilated loops in necrotising enterocolitis indicate **perforation**. Most babies are managed with gut rest, antibiotics and support without surgery. Perforation or deterioration despite treatment forces operation. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Perforation in necrotising enterocolitis forces surgery, while most babies manage without it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical course",
+     "points": [
+      "Gut rest and antibiotics",
+      "Most babies",
+      "Supportive care"
+     ]
+    },
+    "right": {
+     "title": "Surgical course",
+     "points": [
+      "Perforation or decline",
+      "Dead bowel removed",
+      "Stoma often needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Short bowel after massive resection leads to dependence on intravenous feeding, called **short bowel syndrome**. Gradual bowel adaptation over months reduces this dependence in many children. Multidisciplinary nutrition teams manage growth carefully. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Short bowel syndrome after massive resection needs long term nutrition team care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Massive bowel lost"
+     },
+     {
+      "id": "n1",
+      "label": "Intravenous nutrition started"
+     },
+     {
+      "id": "n2",
+      "label": "Bowel adapts gradually"
+     },
+     {
+      "id": "n3",
+      "label": "Enteral feeds advance"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Colostomy before definitive anorectal reconstruction protects the repair and is called a **defunctioning stoma**. It also lets distal imaging define the fistula anatomy precisely. Closure follows once reconstruction heals. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "A defunctioning stoma protects anorectal reconstruction and defines fistula anatomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Colostomy",
+      "Protect and define anatomy"
+     ],
+     [
+      "Reconstruction",
+      "Create anal canal"
+     ],
+     [
+      "Closure",
+      "After healing confirmed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bowel continence after anorectal repair depends on sphincter quality and defect level, termed **functional prognosis**. Low defects usually achieve good control, high defects often need bowel management programmes. Honest counselling helps families plan. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Functional prognosis after anorectal repair depends on defect level and sphincter quality.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-sigmoid-volvulus.webp",
+    "alt": "Sigmoid volvulus coffee bean sign for volvulus comparison.",
+    "caption": "Volvulus imaging comparison. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Any newborn failing to pass meconium in twenty four hours needs evaluation for **mechanical obstruction**. Hirschsprung disease, atresia and meconium plug head the list. Rectal examination and plain films start the workup. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Failure to pass meconium in a day needs evaluation for obstruction or Hirschsprung disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "No meconium in 24 hours"
+     },
+     {
+      "id": "n1",
+      "label": "Examination and films"
+     },
+     {
+      "id": "n2",
+      "label": "Cause identified"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical plan made"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

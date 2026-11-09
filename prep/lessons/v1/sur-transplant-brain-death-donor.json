@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-transplant",
+ "subject": "surgery",
+ "title": "Brain Death Donation, Matching and Rejection",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A donor whose brain has irreversibly ceased functioning while the heart still beats is a **brain death donor**. Organs remain perfused with oxygenated blood until retrieval. Strict testing by two doctors confirms brain death before donation proceeds. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "A brain death donor has irreversible brain failure with a beating heart keeping organs perfused.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test area",
+     "Checked"
+    ],
+    "rows": [
+     [
+      "Brainstem reflexes",
+      "All absent"
+     ],
+     [
+      "Apnoea test",
+      "No breathing effort"
+     ],
+     [
+      "Confounders",
+      "Drugs and cold excluded"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A kidney or liver segment given by a healthy volunteer is from a **living donor**. Living donation improves timing and outcomes for kidney transplantation especially. Donor safety assessment is exhaustive because the donor gains no medical benefit. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Living donors give kidneys or liver segments after exhaustive safety assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Volunteer assessed fully"
+     },
+     {
+      "id": "n1",
+      "label": "Risks explained honestly"
+     },
+     {
+      "id": "n2",
+      "label": "Donation proceeds if safe"
+     },
+     {
+      "id": "n3",
+      "label": "Lifelong donor follow up"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tissue typing matching donor and recipient immune markers is **HLA matching**. Better matches reduce rejection and prolong graft survival, most importantly for kidneys. Complete matching is uncommon outside siblings. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "HLA matching reduces rejection and prolongs graft survival, especially for kidneys.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+    "alt": "Acute renal allograft rejection.",
+    "caption": "Transplant rejection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Testing recipient blood against donor cells for preformed antibodies is the **crossmatch**. A positive crossmatch predicts hyperacute rejection and normally blocks transplantation. Virtual crossmatching by antibody screening now often replaces the wet test. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The crossmatch detects preformed antibodies, and a positive result normally blocks transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative crossmatch",
+     "points": [
+      "No donor antibodies",
+      "Transplant proceeds",
+      "Standard risk"
+     ]
+    },
+    "right": {
+     "title": "Positive crossmatch",
+     "points": [
+      "Antibodies present",
+      "Hyperacute risk",
+      "Usually blocked"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immediate graft destruction within minutes by preformed antibodies is **hyperacute rejection**. The graft turns blue and flabby on the table. Modern crossmatching has made it rare. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Hyperacute rejection destroys grafts within minutes through preformed antibodies but is now rare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Preformed antibodies bind"
+     },
+     {
+      "id": "n1",
+      "label": "Complement destroys vessels"
+     },
+     {
+      "id": "n2",
+      "label": "Graft fails immediately"
+     },
+     {
+      "id": "n3",
+      "label": "Prevention by crossmatch"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recipient immune cells attacking the graft over days to months cause **acute cellular rejection**. Rising creatinine in a kidney graft is the usual warning. Pulse steroids reverse most episodes when caught early. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Acute cellular rejection attacks grafts over weeks and usually reverses with pulse steroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-graft-versus-host-disease-fig1.webp",
+    "alt": "Graft versus host disease mechanisms for comparison.",
+    "caption": "Immune graft reactions compared. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Slow scarring and vessel narrowing destroying grafts over years is **chronic rejection**. It resists current treatment and eventually needs retransplantation or dialysis. Good blood pressure control and adherence slow it. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Chronic rejection scars grafts over years and resists treatment, needing eventual retransplantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Hyperacute",
+      "Minutes"
+     ],
+     [
+      "Acute cellular",
+      "Days to months"
+     ],
+     [
+      "Chronic",
+      "Years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A calcineurin inhibitor forming the backbone of most regimens is **tacrolimus**. It suppresses T cell activation powerfully but narrows kidney vessels and raises sugar. Blood levels are monitored to balance rejection against toxicity. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Tacrolimus suppresses T cells as a regimen backbone, with level monitoring balancing toxicity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tacrolimus started"
+     },
+     {
+      "id": "n1",
+      "label": "Levels monitored regularly"
+     },
+     {
+      "id": "n2",
+      "label": "Dose adjusted carefully"
+     },
+     {
+      "id": "n3",
+      "label": "Rejection and toxicity balanced"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Families are approached about donation only after death is confirmed, following **consent principles**. Trained coordinators lead these conversations with time and privacy. Documented donor wishes are always sought and honoured. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Donation consent follows confirmed death, with trained coordinators honouring documented wishes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Opt in systems",
+     "points": [
+      "Consent documented",
+      "Register checked",
+      "Family consulted"
+     ]
+    },
+    "right": {
+     "title": "Family approach",
+     "points": [
+      "After death confirmed",
+      "Coordinator led",
+      "Wishes honoured"
+     ]
+    }
+   }
+  }
+ ]
+}

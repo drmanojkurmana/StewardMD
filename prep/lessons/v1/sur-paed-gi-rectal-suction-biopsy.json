@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "sur-paed-gi",
+ "subject": "surgery",
+ "title": "Rectal Biopsy, Duodenal Atresia and Malrotation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Sampling rectal lining with a suction capsule to check ganglion cells is **rectal suction biopsy**. Absent ganglion cells with thick nerve bundles confirm Hirschsprung disease. It avoids a full thickness biopsy under anaesthesia in most infants. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Rectal suction biopsy confirms Hirschsprung disease by showing absent ganglion cells.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-enema-hirschsprung-disease.webp",
+    "alt": "Contrast enema before rectal biopsy in Hirschsprung disease.",
+    "caption": "Hirschsprung assessment before biopsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complete blockage of the duodenum present at birth is **duodenal atresia**. Babies vomit bile within hours of the first feed. It associates strongly with Down syndrome and other congenital anomalies. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Duodenal atresia blocks the duodenum at birth, causing early bilious vomiting, often with Down syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Vomiting",
+      "Bilious, first day"
+     ],
+     [
+      "Association",
+      "Down syndrome"
+     ],
+     [
+      "Repair",
+      "Duodenal bypass join"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two gas bubbles in stomach and duodenum on a plain film form the **double bubble sign**. No gas beyond them confirms complete obstruction. The film is diagnostic enough to plan surgery after stabilisation. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The double bubble sign shows stomach and duodenal gas with nothing beyond in duodenal atresia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-obstruction-fig1.webp",
+    "alt": "Bowel obstruction imaging patterns.",
+    "caption": "Obstruction imaging patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure of normal bowel rotation and fixation during development is **malrotation**. The narrow mesenteric base lets the whole midgut twist dangerously. Most present in the first month with bilious vomiting. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Malrotation leaves a narrow mesenteric base that lets the midgut twist dangerously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Rotation fails in development"
+     },
+     {
+      "id": "n1",
+      "label": "Mesentery narrowly based"
+     },
+     {
+      "id": "n2",
+      "label": "Twisting risk lifelong"
+     },
+     {
+      "id": "n3",
+      "label": "Bilious vomiting warns"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The operation untwisting the bowel, dividing bands and widening the mesentery is the **Ladd procedure**. The appendix is usually removed because its future position would confuse diagnosis. Bowel is laid in a safe non rotated position. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The Ladd procedure untwists bowel, divides bands and widens the mesentery safely.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-gastrointestinal-emergencies-pyloromyotomy-and-ladd-procedure-fig1.webp",
+    "alt": "Ladd procedure for malrotation.",
+    "caption": "Ladd procedure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bilious vomiting in a newborn is malrotation with volvulus until excluded, a rule of **urgent exclusion**. Upper gastrointestinal contrast shows the abnormal duodenal course. Any delay risks losing the entire midgut. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Bilious vomiting in a newborn is volvulus until excluded because delay risks the entire midgut.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable baby",
+     "points": [
+      "Contrast study urgent",
+      "Confirms rotation",
+      "Planned Ladd procedure"
+     ]
+    },
+    "right": {
+     "title": "Unstable baby",
+     "points": [
+      "Straight to theatre",
+      "Volvulus likely",
+      "Midgut at risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Screening for associated anomalies after duodenal atresia includes cardiac and chromosomal assessment, termed **associated anomaly workup**. Heart defects are the most important to find before anaesthesia. Kidney and vertebral anomalies also occur. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Associated anomaly workup after duodenal atresia checks heart, chromosomes and kidneys before anaesthesia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Check"
+    ],
+    "rows": [
+     [
+      "Heart",
+      "Echocardiography"
+     ],
+     [
+      "Chromosomes",
+      "Down syndrome features"
+     ],
+     [
+      "Kidneys",
+      "Ultrasound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Feeding after duodenal repair often needs patience because the dilated stomach recovers slowly, called **functional delay**. Nasojejunal feeding or intravenous nutrition bridges the gap. Most babies progress to full feeds over weeks. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Functional delay after duodenal repair needs bridging nutrition while the stomach recovers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Repair completed"
+     },
+     {
+      "id": "n1",
+      "label": "Stomach recovers slowly"
+     },
+     {
+      "id": "n2",
+      "label": "Tube feeds bridge gap"
+     },
+     {
+      "id": "n3",
+      "label": "Full feeds achieved"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anorectal anomalies frequently accompany duodenal and rotation problems under the umbrella of **VACTERL association**. Vertebral, cardiac, tracheal, renal and limb defects cluster together. Finding one anomaly mandates searching for others. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "VACTERL association clusters anomalies, so finding one mandates searching for others.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/esophageal-atresia-fig1.webp",
+    "alt": "Oesophageal atresia within associated anomaly patterns.",
+    "caption": "Associated congenital anomalies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

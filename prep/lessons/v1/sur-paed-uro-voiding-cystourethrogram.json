@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-paed-uro",
+ "subject": "surgery",
+ "title": "Vesicoureteric Reflux, Wilms Tumour and Neuroblastoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Imaging the bladder and urethra while the child voids contrast is a **voiding cystourethrogram**. It shows reflux into ureters and outlines the posterior urethra. It is the key test after urinary infection with abnormal ultrasound in young children. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A voiding cystourethrogram images voiding to show reflux and the posterior urethra.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Shown by"
+    ],
+    "rows": [
+     [
+      "Reflux",
+      "Contrast up ureter"
+     ],
+     [
+      "Valves",
+      "Dilated posterior urethra"
+     ],
+     [
+      "Bladder shape",
+      "Outline on filling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Backward flow of urine from bladder to ureter and kidney is graded as **vesicoureteric reflux grading**. Grades run from reflux into ureter only up to grossly dilated tortuous systems. Higher grades scar kidneys more and resolve less often spontaneously. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Vesicoureteric reflux grading runs from ureter only to grossly dilated systems with scarring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Grade one ureter only"
+     },
+     {
+      "id": "n1",
+      "label": "Grade three mild dilatation"
+     },
+     {
+      "id": "n2",
+      "label": "Grade five gross tortuosity"
+     },
+     {
+      "id": "n3",
+      "label": "Scarring risk rises steadily"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest malignant kidney tumour of childhood is the **Wilms tumour**. Also called nephroblastoma, it usually presents as a painless abdominal mass in a three year old. Most are found by parents while bathing the child. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Wilms tumour, or nephroblastoma, presents as a painless abdominal mass in young children.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+    "alt": "Wilms tumour within paediatric urological conditions.",
+    "caption": "Wilms tumour assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Embryonal kidney tissue forming a triphasic tumour defines **nephroblastoma** histology. Blastemal, epithelial and stromal elements mix together. Favourable histology without anaplasia carries an excellent prognosis with modern therapy. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Nephroblastoma mixes three tissue types, and absence of anaplasia predicts excellent prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Resembles"
+    ],
+    "rows": [
+     [
+      "Blastema",
+      "Primitive kidney cells"
+     ],
+     [
+      "Epithelial",
+      "Tubules and glomeruli"
+     ],
+     [
+      "Stroma",
+      "Supporting tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A tumour of sympathetic nerve tissue, often in the adrenal gland, is **neuroblastoma**. It is the commonest solid tumour of infancy outside the brain. Spread to bone and orbit causes periorbital bruising in advanced cases. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Neuroblastoma arises from sympathetic tissue, often adrenal, and spreads to bone and orbit.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-wagr.webp",
+    "alt": "WAGR syndrome linking Wilms tumour predisposition.",
+    "caption": "Wilms predisposition syndromes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Gentle palpation only is the rule for a suspected Wilms mass, called **no vigorous palpation**. Rough handling can rupture the tumour and worsen staging. Cross sectional imaging precedes any operative intervention. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Suspected Wilms masses need gentle palpation only because rupture worsens staging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wilms tumour",
+     "points": [
+      "Kidney origin",
+      "Painless mass",
+      "Rarely crosses midline"
+     ]
+    },
+    "right": {
+     "title": "Neuroblastoma",
+     "points": [
+      "Adrenal origin",
+      "Calcified often",
+      "Crosses midline"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chemotherapy before surgery shrinks large Wilms tumours in many protocols, called **neoadjuvant treatment**. It reduces rupture risk at operation. Staging after resection then guides further therapy intensity. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Neoadjuvant chemotherapy shrinks large Wilms tumours and reduces rupture risk at surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Mass imaged and staged"
+     },
+     {
+      "id": "n1",
+      "label": "Chemotherapy shrinks tumour"
+     },
+     {
+      "id": "n2",
+      "label": "Kidney removed safely"
+     },
+     {
+      "id": "n3",
+      "label": "Further therapy by stage"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Syndromes predisposing to Wilms tumour include WAGR and Beckwith-Wiedemann, grouped as **predisposition syndromes**. Affected children receive regular ultrasound screening of the kidneys. Screening finds tumours while they are small and curable. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Predisposition syndromes like WAGR receive regular kidney ultrasound screening for early Wilms detection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/wagr-syndrome-fig1.webp",
+    "alt": "WAGR syndrome manifestations.",
+    "caption": "WAGR syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Urine infection prevention in high grade reflux may use low dose nightly antibiotics, termed **antibiotic prophylaxis**. Breakthrough infections or new scars push toward surgical correction of reflux. Many low grades resolve as the bladder grows. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Antibiotic prophylaxis protects high grade reflux, while low grades often resolve with growth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "High grade reflux"
+     },
+     {
+      "id": "n1",
+      "label": "Nightly prophylaxis"
+     },
+     {
+      "id": "n2",
+      "label": "Breakthrough infection watched"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery if scarring"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

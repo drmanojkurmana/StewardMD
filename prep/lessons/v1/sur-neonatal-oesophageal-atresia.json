@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "sur-neonatal",
+ "subject": "surgery",
+ "title": "Oesophageal Atresia, Diaphragmatic Hernia and Biliary Atresia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blind ending oesophagus at birth, usually with a fistula to the trachea, is **oesophageal atresia**. Babies drool, choke and cyanose with the first feed. A tube that coils in the upper pouch on film confirms it. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Oesophageal atresia ends the oesophagus blindly with a tracheal fistula, causing choking on first feed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/esophageal-atresia-fig1.webp",
+    "alt": "Oesophageal atresia and fistula anatomy.",
+    "caption": "Oesophageal atresia anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An abnormal connection between trachea and oesophagus is a **tracheo-oesophageal fistula**. Air enters the stomach through it, distending the abdomen. Aspiration through the fistula damages the lungs before repair. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A tracheo-oesophageal fistula lets air into the stomach and fluid into the lungs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tracheoesophageal-fistula-fig1.webp",
+    "alt": "Tracheoesophageal fistula types.",
+    "caption": "Fistula types. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The standard anatomical grouping of atresia types is the **Gross classification**. The commonest type has a blind upper pouch with the lower oesophagus joined to the trachea. Type determines operative approach and difficulty. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The Gross classification groups atresia types, with lower fistula to trachea being commonest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Anatomy"
+    ],
+    "rows": [
+     [
+      "Commonest",
+      "Blind pouch, lower fistula"
+     ],
+     [
+      "Pure atresia",
+      "No fistula, long gap"
+     ],
+     [
+      "H type",
+      "Fistula without atresia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Herniation of abdominal organs into the chest through the diaphragm is **congenital diaphragmatic hernia**. Lung development on that side is stunted, causing severe breathing failure at birth. Gentle ventilation and delayed surgery after stabilisation give best results. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Congenital diaphragmatic hernia pushes organs into the chest and stunts lung development.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Diaphragm defect present"
+     },
+     {
+      "id": "n1",
+      "label": "Organs enter chest"
+     },
+     {
+      "id": "n2",
+      "label": "Lung growth stunted"
+     },
+     {
+      "id": "n3",
+      "label": "Stabilise then repair"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The posterolateral diaphragmatic defect causing most neonatal hernias is the **Bochdalek hernia**. It affects the left side more often. Antenatal ultrasound now detects most cases before delivery. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Bochdalek hernia is the posterolateral diaphragmatic defect, usually left sided and detected antenatally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bochdalek",
+     "points": [
+      "Posterolateral defect",
+      "Neonatal emergency",
+      "Left commoner"
+     ]
+    },
+    "right": {
+     "title": "Morgagni",
+     "points": [
+      "Front defect",
+      "Often silent",
+      "Found later"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bowel herniating through the abdominal wall beside the cord without a covering sac is **gastroschisis**. Exposed bowel needs immediate covering and fluid resuscitation. Return to the abdomen may be staged with a silo. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Gastroschisis exposes bowel without a sac beside the cord and needs immediate covering.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Gastroschisis"
+    ],
+    "rows": [
+     [
+      "Covering",
+      "No sac"
+     ],
+     [
+      "Position",
+      "Beside the cord"
+     ],
+     [
+      "Associations",
+      "Few other anomalies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Midline herniation of organs into the cord within a membrane sac is an **omphalocele**. Also called exomphalos, it associates frequently with heart and chromosomal anomalies. The sac protects contents while staged closure proceeds. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Omphalocele, or exomphalos, herniates organs into the cord sac and associates with other anomalies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastroschisis",
+     "points": [
+      "No sac, bowel exposed",
+      "Few associations",
+      "Urgent covering"
+     ]
+    },
+    "right": {
+     "title": "Omphalocele",
+     "points": [
+      "Sac present",
+      "Many associations",
+      "Staged closure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progressive obliteration of bile ducts causing neonatal cholestasis is **biliary atresia**. Pale stools, dark urine and persistent jaundice beyond two weeks are the warnings. Early surgery before sixty days gives the best chance of bile drainage. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Biliary atresia obliterates bile ducts, causing pale stools and jaundice needing early surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Jaundice persists beyond 2 weeks"
+     },
+     {
+      "id": "n1",
+      "label": "Pale stools noticed"
+     },
+     {
+      "id": "n2",
+      "label": "Atresia confirmed"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery before 60 days"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Joining a loop of intestine directly to the liver hilum to drain bile is the **Kasai portoenterostomy**. Success depends heavily on age at operation. Even successful drainage often progresses to transplant need in later childhood, and associated lesions like sacrococcygeal teratoma, a tumour at the coccyx, and congenital lobar emphysema, overinflation of one lung lobe, need their own planned surgery.",
+   "say": "The Kasai operation drains bile at the liver hilum, with success depending on early operation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Biliary atresia",
+      "Kasai before 60 days"
+     ],
+     [
+      "Sacrococcygeal teratoma",
+      "Excise with coccyx"
+     ],
+     [
+      "Lobar emphysema",
+      "Remove overinflated lobe"
+     ]
+    ]
+   }
+  }
+ ]
+}

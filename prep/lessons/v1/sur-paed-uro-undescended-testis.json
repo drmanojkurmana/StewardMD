@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sur-paed-uro",
+ "subject": "surgery",
+ "title": "Undescended Testis, Hypospadias and Posterior Urethral Valves",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Failure of the testis to reach the scrotum by birth is an **undescended testis**. Most descend spontaneously in the first months, but persisting cases need surgery. Undescended testes carry higher infertility and cancer risks if uncorrected. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "An undescended testis fails to reach the scrotum and needs surgery if it persists.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-undescended_testis.webp",
+    "alt": "Undescended testis examination with milking technique.",
+    "caption": "Undescended testis examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bringing the testis down and fixing it in the scrotum is **orchidopexy**, with timing ideally between six and twelve months. Earlier surgery protects sperm production and lets the testis be examined lifelong. Both reasons make delay beyond infancy unwise. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Orchidopexy ideally happens between six and twelve months to protect fertility and examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Birth to 6 months",
+      "Observe for descent"
+     ],
+     [
+      "6 to 12 months",
+      "Orchidopexy window"
+     ],
+     [
+      "Beyond 1 year",
+      "Operate promptly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fully descended testis that temporarily retracts from cremasteric pull is a **retractile testis**. It can be milked into the scrotum and stays there briefly. No surgery is needed, though annual review watches for ascent. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "A retractile testis milks into the scrotum and stays, needing review but no surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retractile testis",
+     "points": [
+      "Milks down and stays",
+      "No surgery",
+      "Annual review"
+     ]
+    },
+    "right": {
+     "title": "True undescended",
+     "points": [
+      "Cannot reach scrotum",
+      "Surgery needed",
+      "Fertility risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Urethral opening on the underside of the penis is **hypospadias**. The foreskin is hooded dorsally and the penis may curve downward. Circumcision is avoided because the foreskin may be needed for repair. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Hypospadias opens the urethra underneath with a hooded foreskin that must not be circumcised.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+    "alt": "Paediatric urological conditions including hypospadias.",
+    "caption": "Paediatric urology conditions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Membrane folds obstructing the posterior urethra in baby boys are **posterior urethral valves**. They block bladder emptying from before birth, damaging bladder and kidneys. Antenatal ultrasound showing a dilated bladder and keyhole sign warns of them. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Posterior urethral valves obstruct baby boys from before birth and damage kidneys.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Valves block urethra"
+     },
+     {
+      "id": "n1",
+      "label": "Bladder dilates antenatally"
+     },
+     {
+      "id": "n2",
+      "label": "Kidneys damaged progressively"
+     },
+     {
+      "id": "n3",
+      "label": "Valve ablation after birth"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Destroying the valve leaflets endoscopically after stabilisation is **valve ablation**. A catheter drains the bladder first and kidney function is monitored. Bladder dysfunction may persist despite successful ablation and needs lifelong follow up. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Valve ablation destroys the leaflets after drainage, though bladder dysfunction may persist.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Action"
+    ],
+    "rows": [
+     [
+      "First",
+      "Catheter drainage"
+     ],
+     [
+      "Definitive",
+      "Endoscopic ablation"
+     ],
+     [
+      "Long term",
+      "Bladder and kidney follow up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impapable testes on both sides in a newborn need urgent endocrine assessment for **disorders of sex development**. A virilised baby girl with congenital adrenal hyperplasia can mimic this picture. Salt wasting crisis makes this a genuine emergency. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Bilateral impalpable testes in a newborn need urgent assessment for sex development disorders.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unilateral impalpable",
+     "points": [
+      "Planned investigation",
+      "Surgery in infancy",
+      "Routine urgency"
+     ]
+    },
+    "right": {
+     "title": "Bilateral impalpable",
+     "points": [
+      "Endocrine emergency possible",
+      "Salt wasting risk",
+      "Urgent assessment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Testes that ascend out of the scrotum after previously descending are called **ascended testes**. They occur as the cord fails to grow with the child. Orchidopexy is advised once ascent is confirmed. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Ascended testes rise out of the scrotum during growth and need orchidopexy once confirmed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Testis previously descended"
+     },
+     {
+      "id": "n1",
+      "label": "Cord fails to elongate"
+     },
+     {
+      "id": "n2",
+      "label": "Testis ascends"
+     },
+     {
+      "id": "n3",
+      "label": "Orchidopexy performed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ectopic testes come to rest outside the normal descent path, commonly in the perineum or thigh, termed **ectopic testis**. They never descend spontaneously. Surgery repositions them into the scrotum. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Ectopic testes rest outside the descent path and need surgical repositioning.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-scrotal_palpation.webp",
+    "alt": "Scrotal palpation for testicular position.",
+    "caption": "Testicular position palpation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
