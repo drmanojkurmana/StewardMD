@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "id": "psy-psychopathology-pseudohallucination",
+ "subject": "psychiatry",
+ "module": "psy-psychopathology",
+ "title": "Pseudohallucinations and Thought Derailment",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Pseudohallucination** represents an involuntary perceptual phenomenon experienced within subjective internal psychological space, such as inside the head, rather than in external sensory space. While possessing significant vividness, it lacks the substantial sensory quality of a true external perception, and patients often recognize its internal origin.",
+   "say": "A pseudohallucination is experienced within the patient's internal mental space rather than outside. It lacks true external reality and often retains partial insight.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudohallucination",
+     "points": [
+      "Located in internal mental space",
+      "Vivid imagination quality",
+      "Often recognized as self-generated",
+      "Seen in trauma, grief, and personality disorders"
+     ]
+    },
+    "right": {
+     "title": "True Hallucination",
+     "points": [
+      "Located in external physical space",
+      "Solid perceptual reality of true sensation",
+      "Compelling belief in external source",
+      "Characteristic of schizophrenia and delirium"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sensory illusion** occurs when an actual external physical stimulus is misperceived and misinterpreted by the observer. Illusions are common under conditions of reduced sensory illumination, physical exhaustion, heightened fear, or toxic delirium, such as misinterpreting a coiled rope on a dim floor as a dangerous snake.",
+   "say": "An illusion is the misinterpretation of a real external sensory stimulus. Inadequate lighting, intense anxiety, or toxic delirium predisposes to visual illusions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-fig1.webp",
+    "alt": "Delirium clinical pathway, perceptual illusions, and fluctuating consciousness.",
+    "caption": "Delirium clinical pathway illustrating fluctuating consciousness, visual illusions, and sensory misperceptions.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Formal thought disorder** denotes a fundamental disturbance in the structure, logical flow, and linguistic organization of thinking, rather than an error in thought content. It manifests through disorganization of speech syntax and semantic coherence, serving as an objective observable marker of neurocognitive processing breakdowns.",
+   "say": "Formal thought disorder represents an impairment in the organization and flow of ideas. It is detected by listening carefully to speech grammar and semantic connections.",
+   "vis": {
+    "kind": "table",
+    "title": "Formal Thought Disorder Categories",
+    "cols": [
+     "Disorder Category",
+     "Speech Characteristic",
+     "Typical Clinical Syndrome"
+    ],
+    "rows": [
+     [
+      "Derailment",
+      "Ideas slip to unrelated tracks without logic",
+      "Schizophrenia"
+     ],
+     [
+      "Flight of ideas",
+      "Continuous rapid speech with tenuous links",
+      "Bipolar mania"
+     ],
+     [
+      "Tangentiality",
+      "Wanders from question without returning",
+      "Schizophrenia, dementia"
+     ],
+     [
+      "Incoherence",
+      "Word salad with complete loss of syntax",
+      "Severe chronic schizophrenia"
+     ],
+     [
+      "Perseveration",
+      "Repeats same phrase to new questions",
+      "Organic cerebral disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Derailment** or loose associations describes a speech pattern where the train of thought slips from one topic to another that is completely unrelated, without any logical or meaningful connection. The patient transitions across concepts without awareness that the thematic continuity has dissolved, resulting in fragmented communication.",
+   "say": "In derailment, ideas slide from one theme to another completely unrelated topic. The speaker moves between disjointed sentences without realizing the narrative thread is lost.",
+   "vis": {
+    "kind": "flow",
+    "title": "Derailment Communication Breakdown",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Patient initiates speech on initial target topic"
+     },
+     {
+      "id": "n2",
+      "label": "Associative links weaken between semantic concepts"
+     },
+     {
+      "id": "n3",
+      "label": "Speech abruptly slips onto an irrelevant new topic"
+     },
+     {
+      "id": "n4",
+      "label": "Listener cannot trace any meaningful logical connection"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Flight of ideas** features continuous, rapid, pressured speech where thoughts jump rapidly from one idea to another based on superficial associations, rhyming sounds known as clang associations, or sudden distracting environmental stimuli. Unlike schizophrenia derailment, a listener can usually trace the connecting thread.",
+   "say": "Flight of ideas displays rapid, pressured speech where thoughts jump via puns, rhymes, and distractions. Unlike derailment, the superficial connecting links can still be traced.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Flight of Ideas",
+     "points": [
+      "Rapid, pressured speech tempo",
+      "Connecting links are understandable",
+      "Rhymes, puns, and clang associations",
+      "Classic hallmark of manic episodes"
+     ]
+    },
+    "right": {
+     "title": "Derailment (Loose Associations)",
+     "points": [
+      "Variable, often hesitant or flat tempo",
+      "Connecting links are completely obscure",
+      "Idiosyncratic, bizarre conceptual jumps",
+      "Classic hallmark of schizophrenia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Poverty of speech** or alogia reflects a significant quantitative reduction in spontaneous verbal output, characterized by brief, unelaborated, and monosyllabic answers. In contrast, poverty of content of speech involves adequate word volume that conveys virtually no meaningful information due to extreme vagueness and over-generalization.",
+   "say": "Poverty of speech entails a marked restriction in spoken words. Poverty of content features normal word volume that communicates almost no actual meaning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Poverty of Speech (Alogia)",
+     "points": [
+      "Minimal spontaneous speech output",
+      "Short, monosyllabic replies to questions",
+      "Reflects negative symptom deficit",
+      "Underlying reduction in thought generation"
+     ]
+    },
+    "right": {
+     "title": "Poverty of Content",
+     "points": [
+      "Adequate or excessive word volume",
+      "Vague, repetitious, empty phraseology",
+      "Fails to convey concrete information",
+      "Reflects semantic cognitive disorganization"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Overvalued idea** represents a solitary, emotionally charged, understandable belief sustained with disproportionate intensity that dominates the patient's entire lifestyle and actions. Unlike delusions, overvalued ideas are not inherently bizarre or impossible, and lack the unshakeable absolute incorrigibility seen in true psychotic delusions.",
+   "say": "An overvalued idea is an understandable, non-bizarre belief held with excessive emotional passion. It dominates lifestyle choices but lacks the absolute fixity of a delusion.",
+   "vis": {
+    "kind": "table",
+    "title": "Spectrum of Abnormal Beliefs",
+    "cols": [
+     "Belief Category",
+     "Degree of Fixity",
+     "Cultural Consistency",
+     "Clinical Condition"
+    ],
+    "rows": [
+     [
+      "Delusion",
+      "Completely unshakeable, fixed",
+      "Incompatible with background",
+      "Schizophrenia, paranoia"
+     ],
+     [
+      "Overvalued idea",
+      "Firmly held, passionate, non-bizarre",
+      "Understandable in context",
+      "Anorexia, dysmorphophobia"
+     ],
+     [
+      "Obsession",
+      "Recognized as intrusive and irrational",
+      "Ego-dystonic to patient",
+      "Obsessive compulsive disorder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypnagogic hallucinations** are transient perceptual experiences occurring as an individual falls asleep, while hypnopompic hallucinations arise during awakening from sleep. These benign, physiological sensory phenomena occur in normal healthy individuals, although their frequent recurrence accompanies narcolepsy alongside daytime sleepiness and cataplexy.",
+   "say": "Hypnagogic hallucinations occur while falling asleep, and hypnopompic hallucinations occur while awakening. Both are physiological phenomena frequently seen in narcolepsy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sleep Transition Hallucinatory States",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Wakefulness transitions into sleep state onset"
+     },
+     {
+      "id": "n2",
+      "label": "Incomplete cortical sleep-wake switch deactivates gating"
+     },
+     {
+      "id": "n3",
+      "label": "Vivid sensory intrusions emerge in hypnagogic state"
+     },
+     {
+      "id": "n4",
+      "label": "Benign physiological event unless paired with narcoleptic cataplexy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

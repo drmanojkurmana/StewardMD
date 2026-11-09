@@ -1,0 +1,274 @@
+{
+ "v": 1,
+ "id": "psy-classification-mse-icd-11",
+ "subject": "psychiatry",
+ "module": "psy-classification-mse",
+ "title": "Classification Systems and Mental Status Examination",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**International Classification of Diseases 11th Revision** serves as the global diagnostic standard published by the World Health Organization, while the Diagnostic and Statistical Manual of Mental Disorders Fifth Edition Text Revision provides criteria primarily in North America. Both frameworks categorize psychiatric conditions into dimensional and categorical clusters based on validated symptom duration and functional impairment.",
+   "say": "International psychiatric nosology relies on ICD-11 globally and DSM-5-TR in specialized practice. Both classification systems group mental disorders through structured clinical criteria and functional severity thresholds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ICD-11 Framework",
+     "points": [
+      "Published by World Health Organization",
+      "Global public health standard",
+      "Dimensional spectrum approaches",
+      "Streamlined diagnostic thresholds"
+     ]
+    },
+    "right": {
+     "title": "DSM-5-TR System",
+     "points": [
+      "American Psychiatric Association",
+      "Extensive operational research criteria",
+      "Multi-axial heritage removed",
+      "Rigid symptom duration cutoffs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mental status examination** provides a structured cross-sectional clinical evaluation of a patient's psychological functioning at the precise time of the psychiatric interview. Systematic evaluation covers general appearance and behavior, speech characteristics, mood and affect, thought form and content, perceptual abnormalities, cognitive faculties including orientation, and insight into illness.",
+   "say": "The mental status examination systematically documents patient behavior, speech, emotional state, thought processes, perception, and cognitive faculties observed during the interview.",
+   "vis": {
+    "kind": "table",
+    "title": "MSE Systematic Domains",
+    "cols": [
+     "Domain",
+     "Clinical Assessment Target",
+     "Key Observations"
+    ],
+    "rows": [
+     [
+      "Appearance & behavior",
+      "Grooming, hygiene, eye contact, motor activity",
+      "Psychomotor agitation or retardation"
+     ],
+     [
+      "Speech",
+      "Rate, volume, rhythm, coherence",
+      "Pressure of speech or poverty of speech"
+     ],
+     [
+      "Mood and affect",
+      "Sustained emotional tone vs immediate display",
+      "Depressed, euthymic, blunted, labile"
+     ],
+     [
+      "Thought & perception",
+      "Process, content, and sensory experiences",
+      "Delusions, obsessions, hallucinations"
+     ],
+     [
+      "Cognition & insight",
+      "Orientation, memory, judgment, illness awareness",
+      "Six-grade insight classification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**General appearance and psychomotor behavior** provides immediate diagnostic clues regarding personal self-care, nutritional status, level of consciousness, and psychomotor activity. Severe depression classically causes psychomotor retardation with stooped posture and poverty of movement, whereas acute manic episodes present with hyperactive, intrusive behavior and colorful, eccentric attire.",
+   "say": "Initial observation captures dress, personal cleanliness, nutritional status, and movement patterns. Psychomotor slowing characterizes severe depression, whereas mania produces uninhibited motor restlessness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-overview-fig1.webp",
+    "alt": "Mental status and acute cognitive assessment domains.",
+    "caption": "Cognitive assessment domains demonstrating bedside evaluation of orientation, attention, and behavior.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Affective congruence** describes whether an observed emotional expression aligns logically with the patient's stated mood and underlying thought content. Mood denotes a pervasive, sustained emotional climate experienced subjectively, while affect reflects the momentary, observable emotional reactivity manifested through facial expression, vocal pitch, and communicative gestures.",
+   "say": "Mood represents the patient's sustained internal emotional climate, while affect is the examiner's objective observation of momentary emotional expression and responsiveness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subjective Mood",
+     "points": [
+      "Pervasive and sustained emotional state",
+      "Reported directly in patient's words",
+      "Analogous to prevailing seasonal climate",
+      "Assessed across weeks or months"
+     ]
+    },
+    "right": {
+     "title": "Observed Affect",
+     "points": [
+      "Fluctuating momentary emotional display",
+      "Observed through facial cues and tone",
+      "Analogous to daily transient weather",
+      "Evaluated for range, stability, congruence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Insight grading** assesses the patient's awareness of their psychiatric illness, graded systematically across six recognized levels from complete denial to true emotional insight. Grade one denotes complete denial of illness, grade two recognizes need for help while denying sickness, while grade six exhibits true emotional insight enabling treatment adherence.",
+   "say": "Insight progresses through six distinct levels, from complete denial of any illness up to mature emotional understanding that motivates voluntary therapeutic cooperation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Six Grades of Psychiatric Insight",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Grade 1: Complete denial of any illness or disturbance"
+     },
+     {
+      "id": "n2",
+      "label": "Grade 2: Slight awareness of needing help while denying sickness"
+     },
+     {
+      "id": "n3",
+      "label": "Grade 3: Awareness of being sick while attributing it to external causes"
+     },
+     {
+      "id": "n4",
+      "label": "Grade 4: Awareness that illness stems from internal unknown causes"
+     },
+     {
+      "id": "n5",
+      "label": "Grade 5: Intellectual insight with intellectual awareness but no behavioral change"
+     },
+     {
+      "id": "n6",
+      "label": "Grade 6: True emotional insight with therapeutic compliance and lifestyle adaptation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cognitive orientation** testing evaluates awareness of time, place, and person, which is typically preserved in functional psychoses but impaired early in organic delirium and advanced neurocognitive disorders. Attention and concentration are tested through serial sevens subtraction or spelling backwards, assessing frontoparietal working memory circuits.",
+   "say": "Orientation to time, place, and person remains intact in purely functional psychoses but fails in delirium. Serial subtractions and backward spelling assess active working concentration.",
+   "vis": {
+    "kind": "table",
+    "title": "Cognitive Domain Tests",
+    "cols": [
+     "Cognitive Faculty",
+     "Bedside Examination Tool",
+     "Neuroanatomical Substrate"
+    ],
+    "rows": [
+     [
+      "Orientation",
+      "Date, day, hospital ward, city, identity",
+      "Temporoparietal and thalamic networks"
+     ],
+     [
+      "Attention",
+      "Digit span forward, month names backward",
+      "Ascending reticular activating system"
+     ],
+     [
+      "Concentration",
+      "Serial sevens subtraction from 100",
+      "Dorsolateral prefrontal cortex"
+     ],
+     [
+      "Immediate recall",
+      "Three unrelated words repeated immediately",
+      "Auditory cortex and working memory"
+     ],
+     [
+      "Recent memory",
+      "Three words recalled after five minutes",
+      "Hippocampus and medial temporal lobe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Psychiatric interview techniques** employ open-ended exploration followed by targeted closed questioning, maintaining non-judgmental neutrality and empathetic listening to build therapeutic rapport. Clinicians carefully distinguish neurosis, where reality testing remains intact without bizarre hallucinations, from psychosis, where fundamental loss of reality contact and unshakeable delusions dominate.",
+   "say": "The psychiatric interview relies on non-judgmental, empathetic open questioning. Reality testing distinguishes neuroses like anxiety from psychoses like schizophrenia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neurotic Disorders",
+     "points": [
+      "Reality testing remains intact",
+      "Insight is typically preserved",
+      "No delusions or hallucinations",
+      "Distressing anxiety, depression, or obsessions"
+     ]
+    },
+    "right": {
+     "title": "Psychotic Disorders",
+     "points": [
+      "Grossly impaired reality testing",
+      "Insight is lost or significantly impaired",
+      "Delusions and hallucinations present",
+      "Disorganized behavior and social withdrawal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Judgement assessment** evaluates the patient's capacity to comprehend situations realistically, foresee potential consequences, and undertake appropriate constructive actions. Clinicians test personal judgment by discussing social and occupational life decisions, and test hypothetical judgment using standard scenarios such as discovering a stamped envelope on a sidewalk.",
+   "say": "Judgement reflects the capacity to anticipate consequences and choose realistic actions. It is evaluated through life choices and standardized hypothetical scenarios.",
+   "vis": {
+    "kind": "flow",
+    "title": "Judgement Evaluation Pathway",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Present structured hypothetical scenario to patient"
+     },
+     {
+      "id": "n2",
+      "label": "Evaluate logical appraisal and consideration of safety"
+     },
+     {
+      "id": "n3",
+      "label": "Compare with actual real-world decision-making history"
+     },
+     {
+      "id": "n4",
+      "label": "Determine capacity for independent community living and legal decisions"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

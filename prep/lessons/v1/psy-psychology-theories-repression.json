@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "id": "psy-psychology-theories-repression",
+ "subject": "psychiatry",
+ "module": "psy-psychology-theories",
+ "title": "Ego Defence Mechanisms and Psychosocial Stages",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Repression** constitutes the foundational, primary defense mechanism whereby unacceptable instinctual desires, traumatic memories, and intolerable conflicts are involuntarily banished from conscious awareness into the dynamic unconscious. Unlike conscious suppression, repression operates entirely outside voluntary control, requiring continuous metabolic energy expenditure to maintain unconscious containment.",
+   "say": "Repression is the primary defense where distressing thoughts are involuntarily pushed into the unconscious. It operates automatically, distinct from conscious suppression.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/generalized-anxiety-disorder-fig1.webp",
+    "alt": "Neurobiology of anxiety and intrapsychic defense responses.",
+    "caption": "Neurobiological circuits of fear and anxiety that mobilize unconscious psychological defenses.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Projection** is an immature defense mechanism in which an individual attributes their own unacceptable, unacknowledged feelings, impulses, or thoughts onto another person. A patient harboring intense unprovoked hostility toward a colleague denies their own aggressive impulses, firmly insisting that the colleague is actively hostile and vindictive toward them.",
+   "say": "Projection attributes one's own unacceptable feelings onto others. A hostile individual denies their anger and instead claims that everyone around them is hateful.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanics of Projection",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Unacceptable hostile or sexual impulse arises within self"
+     },
+     {
+      "id": "n2",
+      "label": "Conscious recognition threatens severe guilt or anxiety"
+     },
+     {
+      "id": "n3",
+      "label": "Impulse is disowned and projected onto external target"
+     },
+     {
+      "id": "n4",
+      "label": "External target is blamed and perceived as the aggressor"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sublimation** represents the pinnacle of mature defense mechanisms, where unacceptable sexual or aggressive instinctual drives are unconsciously channeled into socially constructive, culturally productive, and creative pursuits. An individual with intense aggressive impulses who becomes a championship boxer or trauma surgeon exemplifies successful, healthy sublimation.",
+   "say": "Sublimation channels unacceptable instinctual drives into productive social achievements. Aggressive energy transformed into athletic excellence or surgery represents mature sublimation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mature Sublimation",
+     "points": [
+      "Channels drives into creative achievements",
+      "Enhances social utility and personal growth",
+      "Fully acceptable to society and ego",
+      "Example: aggressive drives turned into surgery"
+     ]
+    },
+    "right": {
+     "title": "Immature Acting Out",
+     "points": [
+      "Discharges drives through destructive actions",
+      "Bypasses conscious reflection and restraint",
+      "Violates social norms and damages relations",
+      "Example: aggressive drives turned into brawling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Reaction formation** occurs when an unacceptable unconscious impulse is transformed into its diametric conscious opposite, producing exaggerated, rigid, and unnatural behavioral displays. An individual harboring intense unconscious hatred toward a younger sibling manifests ostentatious, smothering over-protectiveness and effusive declarations of love.",
+   "say": "Reaction formation transforms a forbidden feeling into its exact opposite behavior. Unconscious hostility is masked by exaggerated, suffocating displays of affection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unconscious Impulse",
+     "points": [
+      "Repressed unacceptable hostility or resentment",
+      "Threatens to breach conscious awareness",
+      "Triggers signal anxiety and moral guilt",
+      "Hidden completely from self-awareness"
+     ]
+    },
+    "right": {
+     "title": "Conscious Manifestation",
+     "points": [
+      "Exaggerated, rigid, and effusive love",
+      "Compulsive over-protectiveness",
+      "Unnatural, stiff behavioral presentation",
+      "Protests too much upon interrogation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Displacement** shifts an emotional reaction or aggressive impulse from its actual threatening source onto a safer, less dangerous substitute target. A subordinate berated unfairly by an employer cannot safely express rage upward, returning home to yell angrily at a spouse or kick the household pet.",
+   "say": "Displacement redirects anger from a dangerous authority figure to a vulnerable, safe substitute. Yelling at family members after workplace stress illustrates displacement.",
+   "vis": {
+    "kind": "flow",
+    "title": "Displacement Chain of Action",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Severe verbal reprimand received from powerful employer"
+     },
+     {
+      "id": "n2",
+      "label": "Direct confrontation blocked by fear of job termination"
+     },
+     {
+      "id": "n3",
+      "label": "Suppressed emotional rage seeks alternative outlet"
+     },
+     {
+      "id": "n4",
+      "label": "Anger redirected downward against vulnerable domestic target"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Erikson psychosocial stages** propose eight chronological life stages spanning infancy to late adulthood, each characterized by a core developmental psychosocial crisis that must be navigated. Successful resolution fosters an enduring psychological virtue, whereas failure leads to maladaptive psychosocial pathology and character vulnerability.",
+   "say": "Erikson outlined eight life stages from infancy to old age, each centered on a developmental crisis. Overcoming each dilemma builds an enduring psychological virtue.",
+   "vis": {
+    "kind": "table",
+    "title": "Erikson Psychosocial Crises",
+    "cols": [
+     "Life Stage",
+     "Psychosocial Dilemma",
+     "Achieved Virtue"
+    ],
+    "rows": [
+     [
+      "Infancy (0 to 1 yr)",
+      "Trust versus mistrust",
+      "Hope"
+     ],
+     [
+      "Early childhood (1 to 3 yr)",
+      "Autonomy versus shame and doubt",
+      "Will"
+     ],
+     [
+      "Play age (3 to 6 yr)",
+      "Initiative versus guilt",
+      "Purpose"
+     ],
+     [
+      "School age (6 to 12 yr)",
+      "Industry versus inferiority",
+      "Competence"
+     ],
+     [
+      "Adolescence (12 to 18 yr)",
+      "Identity versus role confusion",
+      "Fidelity"
+     ],
+     [
+      "Young adulthood (18 to 35 yr)",
+      "Intimacy versus isolation",
+      "Love"
+     ],
+     [
+      "Middle adulthood (35 to 65 yr)",
+      "Generativity versus stagnation",
+      "Care"
+     ],
+     [
+      "Late adulthood (>65 yr)",
+      "Ego integrity versus despair",
+      "Wisdom"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Identity versus role confusion** represents Erikson's pivotal adolescent crisis, where teenagers must integrate childhood identifications, personal capabilities, and future societal roles into a coherent self-concept. Successful resolution yields the ego virtue of fidelity, whereas failure culminates in prolonged role confusion and delinquency.",
+   "say": "Adolescence tests identity against role confusion. Consolidating a unified sense of self produces fidelity, while failure leaves diffuse uncertainty about life purpose.",
+   "vis": {
+    "kind": "flow",
+    "title": "Adolescent Identity Formation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Physical puberty and cognitive abstract maturation"
+     },
+     {
+      "id": "n2",
+      "label": "Exploration of ideological, vocational, and personal roles"
+     },
+     {
+      "id": "n3",
+      "label": "Integration of disparate self-images into unified identity"
+     },
+     {
+      "id": "n4",
+      "label": "Attainment of fidelity and commitment to adult values"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Generativity versus stagnation** defines the core psychosocial challenge of middle adulthood, revolving around contributing meaningfully to future generations through parenting, teaching, productive professional work, and community leadership. Failure to achieve generative productivity results in self-absorbed stagnation, emotional impoverishment, and psychological desolation.",
+   "say": "Middle adulthood centers on generativity versus stagnation. Guiding the next generation fosters care, whereas self-absorption leads to stagnation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Generative Engagement",
+     "points": [
+      "Active mentorship of younger generations",
+      "Productive professional and societal contribution",
+      "Selfless investment in community longevity",
+      "Culminates in the virtue of care"
+     ]
+    },
+    "right": {
+     "title": "Stagnant Self-Absorption",
+     "points": [
+      "Pervasive self-indulgence and personal boredom",
+      "Lack of psychological growth and contribution",
+      "Early midlife desolation and bitter regret",
+      "Failure to transcend immediate narcissistic needs"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
