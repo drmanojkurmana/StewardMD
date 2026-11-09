@@ -1,223 +1,280 @@
 {
   "v": 1,
-  "module": "pat-valvular-heart",
-  "subject": "pathology",
-  "title": "Mitral Stenosis Fish Mouth, Calcific Aortic Stenosis, Mitral Prolapse, and Infective Endocarditis",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-valvular-heart",
+  "key": null,
+  "title": "Mitral Stenosis Fish Mouth, Calcific Aortic Stenosis, Mitral Prolapse, and Infective Endocarditis",
   "steps": [
     {
-      "tx": "Rheumatic mitral stenosis fuses commissures and thickens leaflets into a fish mouth or buttonhole valve, obstructing left atrial emptying until pulmonary hypertension, atrial fibrillation, and right heart failure follow. The fused orifice is the **fish-mouth mitral stenosis valve**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Fish mouth commissure fusion is rheumatic mitral stenosis; the left atrium pays first, lungs and right heart next.",
+      "tx": "Chronic rheumatic heart disease is the overwhelming cause of acquired mitral stenosis, resulting from post-inflammatory fibrous scarring following acute rheumatic carditis. Decades of chronic fibrous repair cause extensive fibrous thickening and calcification of valve leaflets, diffuse commissural fusion, and severe shortening and chordal fusion. The resulting rigid, non-compliant, funnel-shaped valve resembles a **fish-mouth mitral orifice**, also termed a buttonhole deformity. The normal valve area (four to six square centimeters) narrows below 1.5 square centimeters, obstructing left ventricular inflow.",
+      "say": "Rheumatic carditis is the primary cause of chronic mitral stenosis. Over decades, recurrent inflammation and turbulent flow cause the leaflet commissures to fuse together, the leaflets to thicken and calcify, and the chordae tendineae to shorten into dense cords. Viewed from the left atrium, the scarred, immobile valve orifice looks like the gaping mouth of a fish or a buttonhole, severely restricting diastolic inflow into the left ventricle.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/mitral-stenosis-fig1.webp",
-        "alt": "Mitral stenosis pathophysiology",
+        "alt": "Gross anatomical photograph showing the fish-mouth buttonhole deformity of severe rheumatic mitral stenosis",
         "caption": "Mitral stenosis pathophysiology with left atrial pressure overload and pulmonary consequences."
       }
     },
     {
-      "tx": "Auscultation teaches the lesion: loud first sound, opening snap, and low mid diastolic rumble with presystolic accentuation while sinus rhythm lasts, severity lengthening the murmur and closing the snap interval. That bedside triad is **mitral stenosis auscultatory severity signs**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Loud S1, opening snap, long rumble: closer snap and longer murmur mean tighter mitral stenosis.",
+      "tx": "Severe mitral stenosis imposes an immense haemodynamic upstream pressure burden. The obstruction to diastolic inflow elevates left atrial pressure, causing progressive left atrial dilatation and hypertrophy. Extreme atrial stretching disrupts the cardiac conduction system, triggering atrial fibrillation in over forty percent of patients. Sluggish, turbulent blood flow within the fibrillating atrial appendage promotes **left atrial mural thrombosis**, posing an extreme risk of systemic arterial embolization and embolic stroke. Upstream pulmonary venous congestion produces chronic passive pulmonary hypertension and right ventricular failure.",
+      "say": "The tight mitral orifice prevents blood from entering the left ventricle during diastole, causing left atrial pressure to climb. The left atrium dilates massively, which disrupts conduction pathways and precipitates atrial fibrillation. Stagnant blood in the dilated left atrial appendage readily forms large mural thrombi, making embolic stroke a constant danger. Meanwhile, backward pressure causes pulmonary venous congestion and eventually drives right-sided heart failure.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Tight stenosis clues",
-          "points": [
-            "S1 to opening snap interval short",
-            "Long diastolic rumble",
-            "Pulmonary hypertension signs"
-          ]
-        },
-        "right": {
-          "title": "Milder stenosis clues",
-          "points": [
-            "Snap later after S2",
-            "Short murmur, soft signs",
-            "Symptoms only on exertion or pregnancy"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Calcific aortic stenosis of ageing and bicuspid valves progressively obstructs ejection with exertional dyspnoea, angina, and syncope, whose appearance historically halved survival without valve replacement. The degenerative obstruction is **calcific aortic stenosis of ageing and bicuspid valves**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Dyspnoea, angina, syncope in calcific aortic stenosis once timed survival; replacement rewrites that clock.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Symptom",
-          "Mechanism",
-          "Classic teaching"
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Rheumatic Mitral Stenosis"
+          },
+          {
+            "id": "m2",
+            "label": "Left Atrial Pressure Overload"
+          },
+          {
+            "id": "m3",
+            "label": "Atrial Fibrillation & Mural Thrombus"
+          },
+          {
+            "id": "m4",
+            "label": "Pulmonary Venous Congestion"
+          },
+          {
+            "id": "m5",
+            "label": "Right Ventricular Hypertrophy & Failure"
+          }
         ],
-        "rows": [
+        "edges": [
           [
-            "Exertional dyspnoea",
-            "Raised filling pressures, hypertrophy",
-            "Heart failure heralds decline"
+            "m1",
+            "m2",
+            "Diastolic Inflow Block"
           ],
           [
-            "Angina",
-            "Demand exceeds calcified supply",
-            "Even without epicardial disease"
+            "m2",
+            "m3",
+            "Atrial Wall Stretch"
           ],
           [
-            "Syncope",
-            "Fixed output cannot rise",
-            "Exertional or arrhythmic"
+            "m2",
+            "m4",
+            "Backward Transmission"
           ],
           [
-            "Late signs",
-            "Slow rising pulse, soft A2",
-            "Bedside severity still matters"
+            "m4",
+            "m5",
+            "Reactive Pulmonary Arterial Remodeling"
           ]
         ]
       }
     },
     {
-      "tx": "Mitral valve prolapse billows myxomatous leaflets into the left atrium with a mid systolic click and late murmur, usually benign, occasionally regurgitant, arrhythmic, endocarditis prone, or chordally ruptured. The click murmur valve is **mitral valve prolapse (myxomatous degeneration)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Click then late murmur means prolapse; most live normally, a minority earn surveillance and repair.",
+      "tx": "Calcific aortic stenosis is the most frequent surgical valve lesion in developed nations, presenting in two distinct settings: age-related degenerative wear of a normal trileaflet valve (manifesting in the seventh and eighth decades) or accelerated wear of a **congenitally bicuspid aortic valve** (presenting two decades earlier, in the fifth and sixth decades). Chronic mechanical stress stimulates valvular interstitial cells to undergo osteogenic differentiation. Heaped-up nodular calcified masses of hydroxyapatite deposit within the non-coronary and coronary sinuses of Valsalva, projecting into the lumen without commissural fusion.",
+      "say": "Calcific aortic stenosis is the most common reason for aortic valve replacement. In patients with normal trileaflet valves, it develops from wear-and-tear in their seventies and eighties. In individuals born with a bicuspid aortic valve, abnormal mechanical shear accelerates calcification, causing severe stenosis twenty years earlier. Valvular interstitial cells transform into osteoblast-like cells, depositing rocky mounds of calcium within the sinuses of Valsalva without commissural fusion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calcific Aortic Stenosis",
+          "points": [
+            "Rocky, heaped-up calcium nodules in sinuses of Valsalva",
+            "Leaflet commissures remain completely free and unfused",
+            "Normal or bicuspid congenital architecture",
+            "Affects elderly individuals (70s-80s) or bicuspid (50s-60s)"
+          ]
+        },
+        "right": {
+          "title": "Rheumatic Aortic Stenosis",
+          "points": [
+            "Prominent fibrous fusion of leaflet commissures",
+            "Coexists with rheumatic mitral valve involvement in >95%",
+            "Leaflet edges scarred, thickened, and retracted",
+            "Accompanied by post-inflammatory neovascularization"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mitral valve prolapse, also known as Barlow disease, affects two to three percent of the population. The primary anatomical lesion is **myxomatous leaflet degeneration**, characterized by marked expansion of the middle proteoglycan-rich spongiosa layer and concomitant attenuation of the structural fibrosa layer. The accumulation of loose, basophilic dermatan sulfate ground substance softens the valve tissue. During ventricular systole, the redundant, rubbery leaflet scallops billow or parachute retrogradely into the left atrium, producing a classic mid-systolic click followed by a late systolic murmur.",
+      "say": "Mitral valve prolapse occurs when the structural core of the mitral leaflets undergoes myxomatous degeneration. The central spongiosa layer expands with basophilic glycosaminoglycans while the fibrous backbone weakens. This leaves the leaflets rubbery, enlarged, and loose. During systole, high left ventricular pressure pushes the billowing leaflets backwards into the left atrium like parachutes, creating a characteristic mid-systolic click and late systolic murmur.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/mitral-valve-prolapse-fig1.webp",
-        "alt": "Mitral valve prolapse pathology",
+        "alt": "Micrograph of myxomatous mitral valve prolapse showing expanded, loose basophilic spongiosa layer and attenuated fibrosa",
         "caption": "Mitral valve prolapse pathology with myxomatous leaflet billowing."
       }
     },
     {
-      "tx": "Balloon mitral valvotomy splits fused rheumatic commissures along their natural lines, ideal when leaflets remain pliable without heavy calcification, thrombus, or significant regurgitation, scored echocardiographically beforehand. Patient selection uses the **Wilkins score for mitral valvotomy suitability**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Pliable leaflets, fused commissures, no thrombus: balloon valvotomy splits rheumatic stenosis along its seams.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Severe symptomatic mitral stenosis"
-          },
-          {
-            "id": "b",
-            "label": "Echo: pliability, calcium, regurgitation, thrombus"
-          },
-          {
-            "id": "c",
-            "label": "Balloon valvotomy if favourable"
-          },
-          {
-            "id": "d",
-            "label": "Surgery if anatomy hostile"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "b",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Infective endocarditis seeds damaged or prosthetic valves with bacteraemic organisms forming friable infected vegetations that embolise, destroy leaflets, invade annuli, and declare through fever and new murmurs. Duke criteria organise certainty: **infective endocarditis by modified Duke criteria**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Fever, new murmur, emboli, and positive cultures assemble Duke criteria; echocardiography hunts the vegetation.",
+      "tx": "Although the vast majority of patients with mitral valve prolapse pursue a completely benign, asymptomatic clinical course, a small subset develops serious cardiovascular sequelae. Progressive leaflet stretching and chordal elongation predispose to spontaneous **chordae tendineae rupture**, precipitating acute, severe mitral regurgitation and congestive pulmonary edema. Furthermore, the constant mechanical trauma and endothelial microabrasions on billowing leaflet surfaces create a prime substrate for platelet-fibrin thrombus deposition, predisposing to transient ischemic attacks, ventricular arrhythmias, and secondary infective endocarditis.",
+      "say": "While most people with mitral valve prolapse live normal lives, serious complications can occur. As chordae tendineae stretch over years, they can suddenly snap, causing acute mitral regurgitation and pulmonary edema. The constant chafing of billowing leaflets also damages their endothelial lining, predisposing patients to bacterial seeding and infective endocarditis, or acting as a nidus for microthrombi that embolize to the brain.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Subacute pattern",
+          "title": "Benign Mitral Prolapse Course",
           "points": [
-            "Viridans streptococci, dental source",
-            "Weeks of fever, splenomegaly",
-            "Osler nodes, Janeway lesions teaching"
+            "Asymptomatic mid-systolic click on routine exam",
+            "Normal left ventricular dimensions and ejection fraction",
+            "Trace or mild physiological mitral regurgitation",
+            "Requires reassurance and periodic clinical follow-up"
           ]
         },
         "right": {
-          "title": "Acute pattern",
+          "title": "Severe Complicated Prolapse",
           "points": [
-            "Staphylococcus aureus, devices, injection use",
-            "Days, valve destruction, abscess",
-            "Urgent surgery consultation"
+            "Spontaneous rupture of thinned chordae tendineae",
+            "Acute severe mitral regurgitation with pulmonary edema",
+            "Substrate for bacterial colonization in infective endocarditis",
+            "Requires surgical mitral valve repair or annuloplasty"
           ]
         }
       }
     },
     {
-      "tx": "Blood cultures before antibiotics, at least three sets from separate sites, remain the diagnostic cornerstone whose neglect sterilises the evidence and condemns patients to blind prolonged therapy. Culture discipline is **blood cultures before antibiotics in endocarditis**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Three culture sets before antibiotics whenever endocarditis is possible; sterilised evidence helps nobody.",
+      "tx": "The multi-step pathogenesis of infective endocarditis requires two concurrent pathophysiological events: endothelial surface disruption and transient bacteremia. Valvular endothelial damage caused by turbulent flow or catheters exposes subendothelial collagen, triggering platelet-fibrin deposition to form a sterile, non-bacterial thrombotic endocarditis nidus. When transient bacteremia occurs (following dental manipulation, intravenous drug use, or genitourinary instrumentation), circulating microorganisms adhere to the platelet-fibrin meshwork via bacterial surface adhesins, rapidly multiplying and synthesizing **destructive septic vegetations** that erode underlying leaflet collagen.",
+      "say": "Infective endocarditis develops through a two-step mechanism. First, turbulent blood flow damages valve endothelium, prompting platelets and fibrin to form a sterile clot called non-bacterial thrombotic endocarditis. Second, transient bacteremia occurs from brushing teeth, dental work, or intravenous injections. Bacteria adhere to the sticky platelet-fibrin clot using surface adhesins, proliferating within the protective matrix and releasing enzymes that destroy valve tissue.",
       "vis": {
         "kind": "table",
         "cols": [
-          " organism group",
-          "Typical source",
-          "Pearl"
+          "Pathogenic Step",
+          "Biological Event",
+          "Molecular / Cellular Players",
+          "Clinical Consequence"
         ],
         "rows": [
           [
-            "Viridans streptococci",
-            "Oral cavity",
-            "Subacute native valve disease"
+            "Endothelial Abrasion",
+            "Mechanical trauma from jet turbulence",
+            "Denuded basement membrane, collagen exposure",
+            "Exposes adhesive subendothelial matrix"
           ],
           [
-            "Staphylococcus aureus",
-            "Skin, devices, injection use",
-            "Acute destructive, metastatic abscess"
+            "NBTE Formation",
+            "Sterile platelet and fibrin aggregation",
+            "Platelet glycoprotein Ib, vWF, fibrinogen",
+            "Creates sterile hemostatic nidus on leaflet"
           ],
           [
-            "Enterococci",
-            "Gut and urinary tracts",
-            "Older men, procedures"
+            "Bacterial Colonization",
+            "Circulating bacteria adhere to nidus",
+            "Fibronectin-binding proteins, microbial adhesins",
+            "Bacteria shielded from host phagocytes"
           ],
           [
-            "Culture negative",
-            "Prior antibiotics, fastidious HACEK, zoonoses",
-            "Serology and molecular rescue"
+            "Vegetation Maturation",
+            "Bacterial proliferation and biofilm synthesis",
+            "Fibrin, platelets, bacterial colonies, neutrophils",
+            "Progressive leaflet destruction and ulceration"
           ]
         ]
       }
     },
     {
-      "tx": "Surgery in endocarditis is timed by heart failure from valve destruction, uncontrolled infection or abscess, and embolic prevention in large mobile vegetations, decided by endocarditis teams rather than fever curves. Those triggers are **surgical indications in infective endocarditis**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "Failure, uncontrolled infection, embolism risk: those three, not fever alone, send endocarditis to theatre.",
+      "tx": "Infective endocarditis presents clinically across two classical patterns: acute and subacute forms. **Acute infective endocarditis** is classically caused by virulent pathogens, predominantly Staphylococcus aureus, attacking previously normal heart valves. It produces rapid, fulminant destruction with leaflet perforation, annular ring abscesses, severe acute valvular regurgitation, high remittent fever, and high mortality. Conversely, subacute infective endocarditis is caused by low-virulence oral commensals, primarily Streptococcus viridans, colonizing previously damaged, scarred, or prosthetic valves, pursuing an insidious, protracted febrile course over months.",
+      "say": "Infective endocarditis presents in acute and subacute clinical varieties. Acute endocarditis is driven by highly virulent bacteria like Staphylococcus aureus attacking previously normal valves. It rapidly chews through valve leaflets and valve rings, causing acute heart failure, septic shock, and death within days. In contrast, subacute endocarditis is caused by low-virulence organisms like Streptococcus viridans attacking previously scarred valves, causing low-grade fevers and night sweats over months.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Infective Endocarditis",
+          "points": [
+            "Pathogen: Highly virulent Staphylococcus aureus",
+            "Target: Frequently strikes normal heart valves",
+            "Pathology: Rapid leaflet perforation, annular abscesses",
+            "Clinical tempo: Fulminant course, fatal in days without surgery"
+          ]
+        },
+        "right": {
+          "title": "Subacute Infective Endocarditis",
+          "points": [
+            "Pathogen: Low-virulence Streptococcus viridans",
+            "Target: Prior abnormal valves (rheumatic, bicuspid, prolapse)",
+            "Pathology: Bulky, less invasive vegetations, granulation tissue",
+            "Clinical tempo: Indolent fever, anemia, weight loss over months"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The systemic peripheral stigmata of infective endocarditis are generated by two distinct pathological processes: septic microembolization and circulating immune complex vasculitis. Septic microemboli dislodging from friable vegetations produce non-tender, erythematous, haemorrhagic macules on the palms and soles termed **Janeway lesions**, alongside linear splinter haemorrhages beneath nail beds. In contrast, circulating antigen-antibody complexes deposit in microvessels, activating complement to produce exquisitely painful, nodular erythematous swellings on the pads of fingers and toes termed Osler nodes, oval retinal hemorrhages with pale centers (Roth spots), and glomerulonephritis.",
+      "say": "The classic peripheral signs of endocarditis arise through two different mechanisms: septic emboli and immune complex deposition. Janeway lesions are flat, non-tender red spots on the palms and soles caused by septic microemboli lodging in dermal capillaries. In contrast, Osler nodes are raised, intensely painful nodules on the fingertips caused by immune complexes triggering local vasculitis. Immune complexes also deposit in the eyes to produce Roth spots and in the kidneys to cause focal glomerulonephritis.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Cultures, echo, Duke assessment"
+            "id": "v1",
+            "label": "Friable Valve Vegetation"
           },
           {
-            "id": "b",
-            "label": "Empirical then targeted antibiotics"
+            "id": "v2",
+            "label": "Septic Microemboli"
           },
           {
-            "id": "c",
-            "label": "Daily failure, abscess, embolus review"
+            "id": "v3",
+            "label": "Janeway Lesions & Splinters"
           },
           {
-            "id": "d",
-            "label": "Endocarditis team surgical timing"
+            "id": "v4",
+            "label": "Immune Complex Formation"
+          },
+          {
+            "id": "v5",
+            "label": "Osler Nodes & Roth Spots"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "v1",
+            "v2",
+            "Mechanical Fragmentation"
           ],
           [
-            "b",
-            "c"
+            "v2",
+            "v3",
+            "Capillary Bacterial Emboli (Non-Tender)"
           ],
           [
-            "c",
-            "d"
+            "v1",
+            "v4",
+            "Chronic Antigenemia (IgG/IgM)"
+          ],
+          [
+            "v4",
+            "v5",
+            "Leukocytoclastic Vasculitis (Painful)"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What morphological feature characterizes the mitral valve in severe chronic rheumatic mitral stenosis?",
+      "options": [
+        "Commissural fusion, chordal shortening, and fish-mouth buttonhole deformity",
+        "Heaped-up calcific nodules in the sinuses of Valsalva without commissural fusion",
+        "Myxomatous expansion of the spongiosa layer with leaflet billowing into the left atrium",
+        "Sterile, non-destructive bland vegetations distributed loosely along lines of closure"
+      ],
+      "correct": 0,
+      "explain": "Chronic rheumatic mitral stenosis is defined by leaflet thickening, commissural fusion, and chordal shortening, creating a rigid funnel-shaped fish-mouth or buttonhole orifice."
+    },
+    {
+      "q": "What pathogenic mechanism produces Janeway lesions on the palms and soles in infective endocarditis?",
+      "options": [
+        "Septic microembolization from vegetations producing localized dermal microabscesses",
+        "Deposition of circulating immune complexes in dermal post-capillary venules",
+        "Severe systemic thrombocytopenia causing non-inflammatory petechial extravasation",
+        "Hypersensitivity reaction to empiric beta-lactam antibiotic therapy"
+      ],
+      "correct": 0,
+      "explain": "Janeway lesions are non-tender erythematous macules on the palms and soles caused by septic microemboli from friable endocarditic vegetations."
+    },
+    {
+      "q": "What is the primary histological defect in mitral valve prolapse (Barlow disease)?",
+      "options": [
+        "Expansion of the glycosaminoglycan-rich spongiosa layer with attenuation of the fibrosa",
+        "Obliterative endarteritis of the vasa vasorum with rich plasma cell infiltrates",
+        "Diffuse dystrophic calcification starting at the commissures and extending to the annulus",
+        "Granulomatous Aschoff body formation within the substance of the valve cusps"
+      ],
+      "correct": 0,
+      "explain": "Mitral valve prolapse is caused by myxomatous degeneration: the central proteoglycan-rich spongiosa expands while the fibrous structural core (fibrosa) thins, causing leaflet billowing."
     }
   ]
 }

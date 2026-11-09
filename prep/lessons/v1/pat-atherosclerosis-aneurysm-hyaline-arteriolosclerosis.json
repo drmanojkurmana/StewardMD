@@ -1,207 +1,294 @@
 {
   "v": 1,
-  "module": "pat-atherosclerosis-aneurysm",
-  "subject": "pathology",
-  "title": "Hyaline and Hyperplastic Arteriolosclerosis, Monckeberg Calcification, and Aortic Aneurysm",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-atherosclerosis-aneurysm",
+  "key": null,
+  "title": "Hyaline and Hyperplastic Arteriolosclerosis, Monckeberg Calcification, and Aortic Aneurysm",
   "steps": [
     {
-      "tx": "Chronic hypertension and diabetes leak plasma proteins into arteriole walls and thicken basement membranes until homogeneous pink hyaline narrows lumens of kidney, retina, and brain vessels. That glassy small vessel change is **hyaline arteriolosclerosis**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Hyaline arteriolosclerosis is plasma protein glass in arteriole walls, the slow burn of hypertension and diabetes.",
+      "tx": "Arteriolosclerosis describes pathological thickening and luminal narrowing of small arteries and arterioles, presenting in two distinct morphological patterns. In **hyaline arteriolosclerosis**, observed in chronic benign essential hypertension and long-standing diabetes mellitus, chronic hemodynamic stress causes endothelial injury. Extravasation of circulating plasma proteins into the vessel wall, combined with increased smooth muscle extracellular matrix synthesis, produces homogeneous, glassy, pink hyaline thickening on hematoxylin and eosin staining. The resulting severe luminal narrowing compromises microvascular perfusion, causing downstream ischaemic tissue atrophy, classically in renal nephrosclerosis.",
+      "say": "Arteriolosclerosis affects small arteries and arterioles in two distinct pathological forms. Hyaline arteriolosclerosis is typically seen in elderly patients with benign hypertension or long-standing diabetes mellitus. Chronic hemodynamic pressure damages the endothelium, allowing plasma proteins to leak into the arteriolar wall while smooth muscle cells produce excess matrix. This creates a homogeneous, glassy pink wall thickening that narrows the lumen, causing downstream ischemic atrophy in the kidneys.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Hyaline arteriolosclerosis",
+          "title": "Hyaline Arteriolosclerosis",
           "points": [
-            "Homogeneous pink wall thickening",
-            "Benign hypertension, diabetes, ageing",
-            "Benign nephrosclerosis kidney"
+            "Associated with benign hypertension and diabetes",
+            "Homogeneous, amorphous, glassy pink wall thickening",
+            "Plasma protein leakage with smooth muscle matrix",
+            "Produces diffuse ischemic cortical renal scarring"
           ]
         },
         "right": {
-          "title": "Hyperplastic arteriolosclerosis",
+          "title": "Hyperplastic Arteriolosclerosis",
           "points": [
-            "Onion skin concentric lamination",
-            "Malignant hypertension emergency",
-            "Fibrinoid necrosis accompanies"
+            "Associated with malignant hypertension (BP >200/120)",
+            "Concentric, laminated onion-skin smooth muscle thickening",
+            "Accompanied by fibrinoid necrosis (necrotizing arteriolitis)",
+            "Causes acute renal failure and petechial flea-bitten kidney"
           ]
         }
       }
     },
     {
-      "tx": "Malignant hypertension drives arterioles into concentric smooth muscle hyperplasia resembling onion skin layers, with fibrinoid necrosis in kidney and brain heralding hypertensive emergency. The laminated lesion is **hyperplastic (onion-skin) arteriolosclerosis**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Onion skin arterioles mean malignant hypertension; find fibrinoid necrosis beside them in kidney and retina.",
+      "tx": "Severe, accelerated, or malignant hypertension (diastolic blood pressure exceeding one hundred and twenty millimeters of mercury) triggers **hyperplastic arteriolosclerosis**. Under extreme acute hemodynamic pressures, arterioles respond with marked concentric, laminated proliferation of vascular smooth muscle cells and duplicated basement membranes, creating a classic onion-skin appearance under light microscopy. This hyperplastic remodeling causes progressive, severe luminal obliteration. In malignant nephrosclerosis, the acute severe ischemia stimulates massive renin release from juxtaglomerular apparatuses, establishing a vicious malignant hypertensive cycle.",
+      "say": "Hyperplastic arteriolosclerosis is the histological hallmark of malignant hypertension, where diastolic blood pressure acutely surges above one hundred and twenty millimeters of mercury. Arteriolar smooth muscle cells undergo rapid concentric, laminated hyperplasia, producing a dramatic onion-skin appearance that chokes off the vascular lumen. The severe acute kidney ischemia triggers massive renin secretion, driving blood pressure even higher in a lethal feedback loop.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Feature",
-          "Hyaline type",
-          "Hyperplastic type"
+          "Arteriolosclerosis Type",
+          "Clinical Association",
+          "Microscopic Hallmark",
+          "Primary Pathological Consequence"
         ],
         "rows": [
           [
-            "Setting",
-            "Years of benign hypertension, diabetes",
-            "Malignant hypertension crisis"
+            "Hyaline Arteriolosclerosis",
+            "Chronic benign hypertension, diabetes",
+            "Homogeneous, pink, glassy hyaline wall thickening",
+            "Benign nephrosclerosis with granular renal surface"
           ],
           [
-            "Wall",
-            "Hyaline protein deposition",
-            "Onion skin smooth muscle layers"
+            "Hyperplastic Arteriolosclerosis",
+            "Malignant hypertension (BP >200/120)",
+            "Concentric laminated onion-skin smooth muscle",
+            "Acute renal failure, retinal hemorrhages, papilledema"
           ],
           [
-            "Kidney",
-            "Benign nephrosclerosis, granular surface",
-            "Flea bitten kidney, fibrinoid necrosis"
+            "Necrotizing Arteriolitis",
+            "Malignant hypertension, severe vasculitis",
+            "Bright pink fibrinoid necrosis with thrombosis",
+            "Cortical petechiae (flea-bitten kidney appearance)"
           ],
           [
-            "Urgency",
-            "Chronic risk control",
-            "Emergency pressure lowering"
+            "Monckeberg Sclerosis",
+            "Elderly individuals, non-hypertensive",
+            "Dystrophic calcification of muscular media",
+            "Rigid non-stenotic pipestem peripheral arteries"
           ]
         ]
       }
     },
     {
-      "tx": "Monckeberg medial calcific sclerosis rings muscular artery media with calcium in ageing, diabetes, and kidney disease, stiffening vessels and falsifying ankle pressures without narrowing the lumen or causing ischaemia directly. The medial railroad track is **Monckeberg medial calcification**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Monckeberg calcifies the media, not the lumen; pipes stiffen, ankle pressures lie, flow survives.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Intimal atherosclerosis",
-          "points": [
-            "Plaques narrow lumen",
-            "Ischaemia and thrombosis",
-            "Lipid and inflammation driven"
-          ]
-        },
-        "right": {
-          "title": "Medial Monckeberg calcification",
-          "points": [
-            "Calcified media, lumen spared",
-            "Stiff vessels, false high ankle index",
-            "Ageing, diabetes, CKD mineral disorder"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Abdominal aortic aneurysm dilates the infrarenal aorta beyond three centimetres through atherosclerotic medial destruction, proteolysis, and inflammation, tripling rupture risk as diameter passes five and a half centimetres. Size schedules surveillance and repair: the **abdominal aortic aneurysm (AAA)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Three centimetres names it, five and a half repairs it in most men; diameter is destiny in AAA.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/aaa-fig1.webp",
-        "alt": "Ruptured abdominal aortic aneurysm",
-        "caption": "Abdominal aortic aneurysm and rupture, where diameter predicts catastrophe."
-      }
-    },
-    {
-      "tx": "Ruptured aneurysm announces with abdominal or back pain, hypotension, and a pulsatile mass, a triad often incomplete, while ultrasound confirms size and CT maps repair anatomy in stable patients. Free rupture kills most before hospital. That presentation is **ruptured AAA triad and imaging pathway**.",
-      "say": "Pain, hypotension, pulsatile mass: incomplete triads still demand immediate aneurysm thinking.",
+      "tx": "When malignant hypertension produces sudden catastrophic endothelial necrosis, plasma proteins and clotting factors pool into the damaged vessel wall, precipitating **arteriolar fibrinoid necrosis**. Fibrinoid necrosis appears as bright pink, smudgy, amorphous eosinophilic material with fragmented nuclear debris within the arteriolar wall, termed necrotizing arteriolitis. The thrombotic occlusion and necrosis of interlobular arteries and afferent arterioles cause micro-infarcts and rupture of capillary tufts, producing scattered punctate petechial hemorrhages on the renal subcapsular surface, classically termed a flea-bitten kidney.",
+      "say": "In malignant hypertension, extreme pressure tears endothelial junctions, allowing fibrin and clotting factors to flood the vessel wall. This produces fibrinoid necrosis, where the arteriolar wall transforms into a smudgy, bright pink necrotic zone. Microthrombi occlude afferent arterioles while tiny capillaries rupture, peppering the cortical surface of the kidney with hundreds of pinpoint petechial hemorrhages that resemble flea bites.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Pain with hypotension, aneurysm suspected"
+            "id": "h1",
+            "label": "Malignant Hypertension (BP >200/120)"
           },
           {
-            "id": "b",
-            "label": "Bedside ultrasound confirms aorta dilated"
+            "id": "h2",
+            "label": "Acute Endothelial Rupture"
           },
           {
-            "id": "c",
-            "label": "Stable: CT angiography maps repair"
+            "id": "h3",
+            "label": "Fibrinoid Necrosis & Onion-Skinning"
           },
           {
-            "id": "d",
-            "label": "Unstable: theatre or EVAR without delay"
+            "id": "h4",
+            "label": "Arteriolar Thrombosis"
+          },
+          {
+            "id": "h5",
+            "label": "Flea-Bitten Kidney Appearance"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "h1",
+            "h2",
+            "Acute Severe Pressure Surge"
           ],
           [
-            "b",
-            "c"
+            "h2",
+            "h3",
+            "Plasma Insudation into Wall"
           ],
           [
-            "b",
-            "d"
+            "h3",
+            "h4",
+            "Microvascular Obliteration"
+          ],
+          [
+            "h4",
+            "h5",
+            "Punctate Cortical Petechiae"
           ]
         ]
       }
     },
     {
-      "tx": "Endovascular aneurysm repair seals the sac from inside with stent grafts, sparing open surgery at the price of endoleak surveillance, while open repair suits anatomy and youth where durability counts. Choice individualises **EVAR versus open aneurysm repair**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "EVAR trades operative trauma for lifelong endoleak surveillance; anatomy and age arbitrate the choice.",
+      "tx": "Monckeberg medial calcific sclerosis is an uncommon form of arteriosclerosis characterized by **dystrophic media calcification** within muscular arteries of individuals older than fifty years. Calcium salts deposit as ring-like or plate-like calcifications along the internal elastic lamina and media without accompanying intimal inflammation or lipid deposition. Crucially, because calcium deposits remain strictly confined to the muscular media, the vessel lumen is never narrowed. Vessels become non-distensible, rigid pipestem conduits visible on plain radiographs, producing falsely elevated ankle-brachial index measurements.",
+      "say": "Monckeberg medial calcific sclerosis is a benign finding in elderly patients where calcium salts deposit inside the muscular media and internal elastic lamina of medium-sized arteries. Because the calcification is confined entirely to the media and does not involve the intima, it does not obstruct blood flow. Radiographs show rigid, pipestem calcified arteries, and blood pressure cuffs cannot easily compress the vessel, yielding falsely elevated ankle-brachial index readings.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aaa-fig1.webp",
+        "alt": "Plain radiograph showing calcified arterial wall margins in Monckeberg medial calcific sclerosis",
+        "caption": "Abdominal aortic aneurysm and rupture, where diameter predicts catastrophe."
+      }
+    },
+    {
+      "tx": "The cellular pathogenesis of abdominal aortic aneurysm centers on continuous, **enzymatic extracellular matrix degradation**. Infiltrating macrophages and T-lymphocytes within the adventitia and media release pro-inflammatory cytokines that stimulate production of matrix metalloproteinases, particularly gelatinases MMP-2 and MMP-9. These elastolytic enzymes degrade elastin lamellae and interstitial collagen, compromising tensile strength. Concurrently, smooth muscle cells undergo apoptosis, thinning the media and reducing the vessel capacity to withstand pulsatile pressure, causing progressive expansion.",
+      "say": "Abdominal aortic aneurysms develop when the structural skeleton of the aortic media is enzymatically dissolved. Infiltrating inflammatory cells secrete matrix metalloproteinases, especially MMP-2 and MMP-9, which digest elastin and collagen fibers. Meanwhile, smooth muscle cells die through apoptosis, leaving the media severely thinned. Without its elastic scaffolding, the aorta cannot withstand pulsatile systolic blood pressure, ballooning outwards into an aneurysm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Healthy Aortic Media",
+          "points": [
+            "Concentric, orderly elastic lamellae",
+            "Abundant contractile vascular smooth muscle cells",
+            "Balanced matrix metalloproteinase and TIMP activity",
+            "Maintains high tensile strength and elastic recoil"
+          ]
+        },
+        "right": {
+          "title": "Aneurysmal Aortic Media",
+          "points": [
+            "Severe elastolysis with fragmented, missing lamellae",
+            "Extensive smooth muscle cell apoptosis and depletion",
+            "Massive upregulation of MMP-2 and MMP-9 activity",
+            "Fibrotic, thinned wall vulnerable to rupture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Contrast-enhanced computed tomography angiography serves as the imaging reference standard for evaluating abdominal aortic aneurysms. The examination determines maximal outer-to-outer **transverse aneurysm diameter**, delineates the proximal neck length below renal artery origins, and assesses peripheral vascular tortuosity. Cross-sectional imaging characteristically demonstrates a crescentic, non-enhancing intraluminal mural thrombus lining the aneurysm wall, formed by sluggish, turbulent flow within the expanded sac. Computed tomography angiography determines whether the anatomical morphology satisfies criteria for endovascular aneurysm repair (EVAR).",
+      "say": "Computed tomography angiography is the definitive imaging tool to assess abdominal aortic aneurysms. It measures the precise outer-to-outer diameter, maps the relationship to the renal arteries, and assesses the length of the proximal aortic neck. Scans routinely show a thick, non-enhancing mural thrombus lining the dilated lumen, created by swirling turbulent blood flow. This detailed anatomical road map determines whether the patient can undergo minimally invasive endovascular repair.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/atherosclerosis-hypertension-and-aneurysms-fig1.webp",
-        "alt": "Abdominal aortic aneurysm CT",
+        "alt": "Computed tomography angiography cross-section of abdominal aortic aneurysm showing mural thrombus and residual lumen",
         "caption": "CT anatomy of abdominal aortic aneurysm guiding endovascular versus open repair."
       }
     },
     {
-      "tx": "Thoracic aneurysms follow different masters: hypertension, bicuspid aortic valve, Marfan and Loeys-Dietz connective tissue disease, and tertiary syphilis historically, ascending segments threatening dissection and rupture at smaller sizes. That aetiology split is **thoracic versus abdominal aneurysm causation**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Abdominal means atherosclerosis, thoracic means connective tissue, valve, pressure, or old syphilis.",
+      "tx": "Clinical guidelines establish precise **surgical intervention thresholds** for asymptomatic abdominal aortic aneurysms based on balancing the risk of spontaneous rupture against perioperative procedural mortality. Elective surgical or endovascular repair is indicated when the maximal aneurysm diameter reaches 5.5 centimeters in male patients or 5.0 centimeters in female patients. Regardless of absolute size, repair is also indicated if an aneurysm exhibits rapid expansion exceeding 1.0 centimeter over twelve months or 0.5 centimeters over six months, or whenever an aneurysm becomes symptomatic with back tenderness.",
+      "say": "Deciding when to repair an abdominal aortic aneurysm balances procedural risk against rupture risk. For asymptomatic aneurysms, surgery is recommended when the diameter reaches five point five centimeters in men or five point zero centimeters in women, because the risk of rupture begins to exceed the risk of surgery. Furthermore, any aneurysm expanding rapidly by more than one centimeter in a year, or any aneurysm that develops acute tenderness, warrants prompt intervention.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Site",
-          "Dominant causes",
-          "Pearl"
+          "Clinical Parameter",
+          "Threshold for Intervention",
+          "Annual Rupture Risk",
+          "Management Recommendation"
         ],
         "rows": [
           [
-            "Infrarenal abdominal",
-            "Atherosclerosis, smoking, male sex",
-            "Screen older male smokers"
+            "Diameter <4.0 cm",
+            "Under 4.0 cm",
+            "<1% annual rupture risk",
+            "Ultrasound surveillance every 2 to 3 years"
           ],
           [
-            "Ascending thoracic",
-            "Marfan, bicuspid valve, hypertension",
-            "Dissection risk dominates"
+            "Diameter 4.0 to 5.4 cm",
+            "4.0 to 5.4 cm",
+            "1% to 5% annual rupture risk",
+            "Ultrasound or CT surveillance every 6 to 12 months"
           ],
           [
-            "Descending thoracic",
-            "Atherosclerosis plus hypertension",
-            "Spinal cord ischaemia concern"
+            "Diameter >=5.5 cm (Men)",
+            "5.5 cm or greater",
+            "10% to 20% annual rupture risk",
+            "Elective open repair or EVAR indicated"
           ],
           [
-            "Mycotic aneurysm",
-            "Infected embolus, bacteraemia",
-            "Rapid expansion, fever, source hunt"
+            "Rapid Expansion Rate",
+            ">1.0 cm / yr or >0.5 cm / 6 mo",
+            "Substantially elevated rupture risk",
+            "Urgent vascular surgical evaluation"
           ]
         ]
       }
     },
     {
-      "tx": "Screening men over sixty five who ever smoked with one ultrasound prevents rupture deaths cost effectively, and small aneurysms enter diameter based surveillance intervals rather than immediate surgery. That programme is **population AAA screening and surveillance intervals**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "One ultrasound for older men who smoked prevents rupture deaths; small aneurysms are watched, not cut.",
+      "tx": "A **mycotic aortic aneurysm** is an uncommon infectious aneurysm arising when microorganisms colonize and destroy the arterial wall. Infection originates from septic embolization in infective endocarditis, bacteremic seeding of pre-existing atherosclerotic ulcers (frequently by Salmonella species or Staphylococcus aureus), or direct extension from adjacent suppurative foci like vertebral osteomyelitis. Suppurative bacterial enzymes digest the full thickness of the aortic wall, producing a rapidly expanding, saccular, highly friable pseudoaneurysm that carries a catastrophic risk of early spontaneous perforation and fatal exsanguination.",
+      "say": "A mycotic aneurysm is an infection-driven aneurysm caused by bacteria destroying the arterial wall, rather than by fungi as the historic name implies. Bacteria lodge in the aortic wall from septic emboli in endocarditis, bacteremia from Salmonella or Staphylococcus, or contiguous spread from spinal osteomyelitis. Neutrophil enzymes rapidly dissolve the full thickness of the aorta, forming a fragile, rapidly expanding saccular aneurysm that bursts easily.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Watch",
-          "points": [
-            "Under repair threshold diameter",
-            "Timed ultrasound surveillance",
-            "Smoking cessation, statin, pressure control"
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Bacteremia or Septic Embolus"
+          },
+          {
+            "id": "m2",
+            "label": "Endothelial Seeding"
+          },
+          {
+            "id": "m3",
+            "label": "Transmural Suppuration"
+          },
+          {
+            "id": "m4",
+            "label": "Rapid Wall Weakening"
+          },
+          {
+            "id": "m5",
+            "label": "Mycotic Aneurysm Rupture"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2",
+            "Salmonella / Staph aureus"
+          ],
+          [
+            "m2",
+            "m3",
+            "Acute Neutrophilic Infiltration"
+          ],
+          [
+            "m3",
+            "m4",
+            "Full-Thickness Digestion"
+          ],
+          [
+            "m4",
+            "m5",
+            "Early Catastrophic Hemorrhage"
           ]
-        },
-        "right": {
-          "title": "Repair",
-          "points": [
-            "Threshold reached or rapid growth",
-            "Symptomatic at any size",
-            "EVAR or open by anatomy and fitness"
-          ]
-        }
+        ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which microscopic feature differentiates hyperplastic arteriolosclerosis from hyaline arteriolosclerosis?",
+      "options": [
+        "Concentric, laminated onion-skin proliferation of smooth muscle cells with duplicated basement membranes",
+        "Homogeneous, amorphous, glassy pink proteinaceous thickening of the arteriolar wall",
+        "Dystrophic calcification confined strictly to the internal elastic lamina and media",
+        "Perivascular lymphocytic cuffing around adventitial vasa vasorum"
+      ],
+      "correct": 0,
+      "explain": "Hyperplastic arteriolosclerosis is characterized by concentric, laminated smooth muscle cell proliferation producing an onion-skin appearance, typically seen in malignant hypertension."
+    },
+    {
+      "q": "Why does Monckeberg medial calcific sclerosis produce minimal ischemic clinical consequences in peripheral tissues?",
+      "options": [
+        "Calcification is confined to the muscular media and internal elastic lamina, leaving the lumen uncompromised",
+        "Extensive collateral vascular networks develop around calcified segments within 48 hours",
+        "Calcium deposits spontaneously dissolve during regular physical exercise",
+        "Endothelial cells upregulate nitric oxide synthase to maintain maximal vasodilation"
+      ],
+      "correct": 0,
+      "explain": "Monckeberg medial sclerosis involves dystrophic calcification of the arterial media without intimal inflammation or luminal narrowing, so blood flow is preserved."
+    },
+    {
+      "q": "What pathological mechanism produces the classical flea-bitten kidney appearance in malignant hypertension?",
+      "options": [
+        "Arteriolar fibrinoid necrosis with microthrombi and rupture of capillary tufts causing petechial hemorrhages",
+        "Extensive deposition of IgA immune complexes within the glomerular mesangium",
+        "Retrograde venous stasis following thrombosis of the main renal vein",
+        "Suppurative bacterial microabscesses scattered throughout the renal cortex"
+      ],
+      "correct": 0,
+      "explain": "In malignant hypertension, severe arteriolar fibrinoid necrosis and microvascular thromboses cause focal capillary ruptures, presenting as cortical petechial hemorrhages resembling flea bites."
     }
   ]
 }

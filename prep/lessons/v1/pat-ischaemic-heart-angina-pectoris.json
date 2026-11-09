@@ -1,207 +1,280 @@
 {
   "v": 1,
-  "module": "pat-ischaemic-heart",
-  "subject": "pathology",
-  "title": "Angina, Myocardial Infarction Timeline, Troponin, Rupture, and Dressler Syndrome",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-ischaemic-heart",
+  "key": null,
+  "title": "Angina, Myocardial Infarction Timeline, Troponin, Rupture, and Dressler Syndrome",
   "steps": [
     {
-      "tx": "Angina pectoris is myocardial ischaemia announcing as central pressure pain on exertion or emotion, relieved by rest or nitrates, divided into stable, unstable, and vasospastic Prinzmetal patterns by tempo and trigger. The exertional prototype remains **stable angina pectoris of fixed coronary stenosis**.",
-      "say": "Exertional pressure relieved by rest or nitrate is stable angina; pain at rest rewrites the risk entirely.",
+      "tx": "Angina pectoris manifests as paroxysmal, substernal chest discomfort resulting from transient myocardial ischemia falling short of cellular necrosis. The classical form, **chronic stable angina**, is provoked by physical exertion or emotional stress and relieved within minutes by rest or sublingual nitroglycerin, reflecting a fixed coronary atherosclerotic narrowing of seventy percent or more of cross-sectional luminal area. In contrast, unstable angina presents with crescendo, prolonged, or resting chest pain triggered by acute non-occlusive plaque disruption, signaling an imminent risk of acute myocardial infarction.",
+      "say": "Angina pectoris is transient chest pain caused by myocardial oxygen demand outstripping supply, without causing myocyte death. Stable angina produces predictable chest pressure on exertion that resolves with rest or sublingual nitroglycerin, caused by a fixed atherosclerotic plaque blocking more than seventy percent of the coronary lumen. Unstable angina produces pain at rest or with increasing frequency due to non-occlusive plaque disruption, warning of impending myocardial infarction.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Stable angina",
+          "title": "Chronic Stable Angina",
           "points": [
-            "Predictable exertional trigger",
-            "Fixed severe stenosis",
-            "Risk factor therapy foundation"
+            "Fixed coronary stenosis (>70% cross-sectional area)",
+            "Predictable onset with physical exertion or cold exposure",
+            "Relieved within 5 minutes by rest or nitroglycerin",
+            "Cardiac troponin and CK-MB levels remain normal"
           ]
         },
         "right": {
-          "title": "Unstable patterns",
+          "title": "Unstable Angina (Crescendo)",
           "points": [
-            "Rest, crescendo, or new severe pain",
-            "Plaque disruption with thrombus",
-            "Emergency troponin pathway"
+            "Acute non-occlusive plaque fissure or microthrombus",
+            "Occurs at rest or with minimal physical exertion",
+            "Progressively longer duration and refractory to nitrates",
+            "High immediate risk of evolving into transmural infarction"
           ]
         }
       }
     },
     {
-      "tx": "Myocardial infarction kills cardiomyocytes by coagulative necrosis on a timetable: wavy fibres within hours, neutrophil infiltration through day three, macrophages clearing debris, granulation tissue, then collagen scar over weeks. Dating infarcts follows **myocardial infarction histological timeline**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Wavy fibres, neutrophils, macrophages, granulation, scar: histology dates an infarct like tree rings.",
+      "tx": "Acute transmural myocardial infarction occurs when an occlusive thrombus completely blocks coronary arterial blood flow, initiating a **progressive wavefront of ischaemic necrosis**. Irreversible myocyte injury begins within twenty to thirty minutes in the subendocardium, the zone of highest intramyocardial pressure and poorest perfusion. Over subsequent hours, the zone of coagulative necrosis extends outwards across the ventricular wall toward the epicardium, completing transmural infarction within six hours unless reperfusion therapy with primary percutaneous coronary intervention or thrombolysis halts the wavefront.",
+      "say": "When an occlusive thrombus halts coronary blood flow, myocyte death begins within twenty to thirty minutes in the subendocardial layer, where wall tension is highest and microvascular perfusion is most vulnerable. Over the next six hours, a wavefront of ischemic death marches across the myocardium toward the epicardium. Reopening the occluded artery with emergency percutaneous coronary intervention within the golden first few hours halts this wavefront and rescues viable myocardium.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/ischaemic-heart-disease-and-infarction-fig1.webp",
-        "alt": "Myocardial infarction pathophysiology diagram",
+        "alt": "Diagram showing the wavefront of ischemic myocardial necrosis extending from subendocardium to subepicardium over time",
         "caption": "Myocardial infarction pathophysiology from plaque rupture to necrosis and healing."
       }
     },
     {
-      "tx": "Contraction band necrosis, dense eosinophilic cross bands from calcium flooded hypercontraction, marks reperfusion of infarcted myocardium by thrombolysis, intervention, or resuscitation, distinguishing reperfused from uninterrupted necrosis. The reperfusion signature is **contraction band necrosis of reperfused infarction**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Contraction bands mean blood returned to dying muscle; they are reperfusion's histological receipt.",
+      "tx": "The histopathological evolution of myocardial infarction follows a precise, sequential timeline. During the first four hours, light microscopy appears unremarkable except for wavy myofibers at the periphery. Between four and twelve hours, early coagulative necrosis, interstitial edema, and punctate hemorrhages develop. Between twelve and twenty-four hours, contraction band necrosis and early neutrophilic infiltration appear. Dense **neutrophilic myocardial infiltration** peaks between one and three days, followed by macrophage phagocytosis of necrotic debris between days three and seven, and fibrovascular granulation tissue formation by day ten.",
+      "say": "Pathologists date myocardial infarctions by examining tissue under the microscope. In the first four hours, light microscopy is virtually normal except for wavy fibers. By twelve hours, coagulative necrosis sets in. Between days one and three, dead myocytes lose their nuclei and the tissue is packed with infiltrating neutrophils. Between days three and seven, macrophages clear away necrotic debris, leaving the tissue structurally soft and vulnerable. By two weeks, rich granulation tissue lays down collagen.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Time",
-          "Histology",
-          "Gross"
+          "Time Post-Infarction",
+          "Gross Pathology Appearance",
+          "Light Microscopic Hallmarks",
+          "Primary Clinical Complication"
         ],
         "rows": [
           [
-            "Under 12 hours",
-            "Wavy fibres, early coagulative change",
-            "Often normal appearance"
+            "0 to 4 Hours",
+            "No visible gross alterations",
+            "Wavy myofibers, early cellular edema",
+            "Fatal ventricular fibrillation arrhythmias"
           ],
           [
-            "1 to 3 days",
-            "Dense neutrophil infiltration",
-            "Pale with hyperaemic border"
+            "4 to 24 Hours",
+            "Dark mottling of myocardium",
+            "Coagulative necrosis, contraction bands, neutrophils",
+            "Cardiogenic shock, acute heart failure"
           ],
           [
-            "3 to 14 days",
-            "Macrophages, granulation begins",
-            "Yellow softening, rupture risk"
+            "1 to 3 Days",
+            "Mottling with yellow-tan infarct center",
+            "Loss of myocyte nuclei, dense neutrophilic infiltrate",
+            "Fibrinous pericarditis with friction rub"
           ],
           [
-            "Weeks to months",
-            "Collagen scar matures",
-            "White fibrous scar"
+            "3 to 7 Days",
+            "Hyperemic border with central yellow softening",
+            "Macrophage phagocytosis, early granulation tissue",
+            "Free wall, septal, or papillary muscle rupture"
+          ],
+          [
+            "10 to 14 Days",
+            "Red-grey, depressed, vascular margins",
+            "Well-established granulation tissue, neo-vessels",
+            "Gradual return to light physical activity"
+          ],
+          [
+            "2 Months Onward",
+            "Dense white-grey fibrous collagenous scar",
+            "Acellular dense fibrous collagen scar tissue",
+            "Ventricular aneurysm, chronic congestive failure"
           ]
         ]
       }
     },
     {
-      "tx": "Troponin I and T released from necrotic cardiomyocytes dominate diagnosis with high sensitivity assays detecting injury within hours, while CK-MB helps date reinfarction by its shorter curve and myoglobin rises earliest but nonspecifically. The diagnostic standard is **cardiac troponin in myocardial injury**.",
-      "say": "High sensitivity troponin rules modern chest pain pathways; CK-MB still helps time a second infarct.",
+      "tx": "The biochemical detection of myocardial cell death relies on circulating cardiac biomarkers. **Cardiac troponin I and T** represent the international reference standard, possessing near-absolute myocardial tissue specificity. Troponins begin rising in peripheral blood within two to four hours following infarction, reach peak concentrations between twenty-four and forty-eight hours, and remain elevated for seven to fourteen days. Creatine kinase-MB (CK-MB) rises within four hours and peaks at twenty-four hours, but returns to baseline within forty-eight to seventy-two hours, providing unique clinical utility for diagnosing re-infarction.",
+      "say": "Serum cardiac troponins I and T are the gold standard biomarkers for detecting myocardial necrosis because they are unique to heart muscle. Troponins rise in blood within two to four hours of chest pain onset, peak around twenty-four hours, and remain elevated for up to two weeks. Creatine kinase-MB also rises early but clears within two to three days, making CK-MB the ideal marker to detect early recurrent re-infarction when troponins are still elevated.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/ischemic-heart-disease-fig2.webp",
-        "alt": "Coronary thrombosis drug therapy",
+        "alt": "Graph showing the serum biomarker curves of Troponin I, Troponin T, and CK-MB following acute myocardial infarction",
         "caption": "Coronary thrombosis therapy targets across antiplatelet and anticoagulant pathways."
       }
     },
     {
-      "tx": "Troponin elevation means myocardial injury, not automatically type 1 infarction: supply demand mismatch, myocarditis, pulmonary embolism, sepsis, and kidney failure raise it, demanding type classification before therapy. That taxonomy is **myocardial infarction types one to five**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Troponin accuses injury, not a mechanism; classify type one plaque events against supply demand type two.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Type 1 infarction",
-          "points": [
-            "Plaque rupture or erosion thrombosis",
-            "Antiplatelet, anticoagulant, reperfusion",
-            "Culprit lesion strategy"
-          ]
-        },
-        "right": {
-          "title": "Type 2 injury",
-          "points": [
-            "Tachycardia, hypoxia, anaemia, sepsis",
-            "Treat the supply demand driver",
-            "Troponin pattern supports, context decides"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Free wall rupture, papillary muscle rupture with torrential mitral regurgitation, and septal rupture strike in the macrophage softened window days three to seven, announcing by tamponade or shock after infarction. Mechanical catastrophe timing follows **post-infarction rupture window**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "New shock three to seven days after infarction means rupture until echocardiography proves otherwise.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Complication",
-          "Timing",
-          "Presentation"
-        ],
-        "rows": [
-          [
-            "Free wall rupture",
-            "Days 3 to 7 classic",
-            "Tamponade, electromechanical dissociation"
-          ],
-          [
-            "Papillary rupture",
-            "Days 2 to 7",
-            "Acute pulmonary oedema, murmur may soften"
-          ],
-          [
-            "Septal rupture",
-            "Days 3 to 5",
-            "Harsh murmur, right heart failure"
-          ],
-          [
-            "LV aneurysm",
-            "Weeks later",
-            "Persistent ST elevation, thrombus, failure"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Dressler syndrome autoimmune pericarditis arrives weeks after infarction or cardiac surgery with fever, pleuritic pain, rub, and effusion, answering anti-inflammatory therapy while anticoagulation is handled cautiously. The late pericarditis is **Dressler syndrome (post-myocardial infarction pericarditis)**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Fever and pleuritic pain weeks after infarction mean Dressler syndrome, not automatically a new infarct.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Early post-MI pericarditis",
-          "points": [
-            "Days 1 to 3, infarct adjacent",
-            "Local inflammation over necrosis",
-            "Usually self limited"
-          ]
-        },
-        "right": {
-          "title": "Dressler syndrome",
-          "points": [
-            "Weeks later, autoimmune",
-            "Fever, rub, effusion, pleurisy",
-            "NSAIDs, colchicine, steroids selected"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Reperfusion injury paradoxically kills additionally through oxidative burst, calcium overload, and microvascular obstruction when flow returns, limiting salvage despite opened arteries and motivating conditioning research. That salvage ceiling is **myocardial reperfusion injury and no-reflow**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Opening the artery does not save every cell; reperfusion itself injures through oxidation and microvascular block.",
+      "tx": "Catastrophic mechanical complications of myocardial infarction peak between day three and day seven post-infarction, coinciding with the nadir of myocardial structural tensile strength when macrophage phagocytosis has dissolved necrotic muscle fibers but collagenous granulation tissue has not yet matured. **Ventricular free wall rupture** occurs most commonly in the anterior or lateral left ventricular wall, producing sudden haemopericardium, cardiac tamponade, electromechanical dissociation, and immediate death. Rupture of the interventricular septum creates an acute left-to-right shunt presenting with a new harsh holosystolic murmur.",
+      "say": "Mechanical rupture of the heart is a devastating complication that peaks three to seven days after infarction. At this stage, macrophages have dissolved the necrotic muscle skeleton, but scar tissue has not yet formed, leaving the myocardium as soft as wet tissue paper. Free wall rupture leaks high-pressure blood into the pericardium, causing instant cardiac tamponade and death. Interventricular septal rupture produces an acute left-to-right shunt with biventricular failure and a loud holosystolic murmur.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Plaque rupture occludes artery"
+            "id": "m1",
+            "label": "Transmural Infarction"
           },
           {
-            "id": "b",
-            "label": "Minutes decide salvageable myocardium"
+            "id": "m2",
+            "label": "Day 3-7 Macrophage Infiltration"
           },
           {
-            "id": "c",
-            "label": "Reperfusion by PCI or thrombolysis"
+            "id": "m3",
+            "label": "Maximal Tissue Softening"
           },
           {
-            "id": "d",
-            "label": "Scar, remodelling, surveillance follow"
+            "id": "m4",
+            "label": "Mechanical Free Wall Rupture"
+          },
+          {
+            "id": "m5",
+            "label": "Acute Cardiac Tamponade & Death"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "m1",
+            "m2",
+            "Coagulative Necrosis"
           ],
           [
-            "b",
-            "c"
+            "m2",
+            "m3",
+            "Matrix Proteolysis"
           ],
           [
-            "c",
-            "d"
+            "m3",
+            "m4",
+            "Intraventricular Systolic Pressure"
+          ],
+          [
+            "m4",
+            "m5",
+            "Hemopericardium Compression"
           ]
         ]
       }
+    },
+    {
+      "tx": "Acute rupture of a cardiac papillary muscle is a medical and surgical emergency complicating acute myocardial infarction. The posteromedial papillary muscle is particularly vulnerable because it receives a single blood supply from the posterior descending coronary artery (in contrast to the dual supply of the anterolateral papillary muscle). Rupture precipitates **acute severe mitral regurgitation**, presenting with abrupt pulmonary edema, cardiogenic shock, and a soft systolic murmur. Immediate echocardiography confirms leaflet flail, and emergency surgical valve replacement or repair is required for survival.",
+      "say": "Papillary muscle rupture is an acute surgical catastrophe. The posteromedial papillary muscle is ten times more likely to rupture than the anterolateral muscle because it depends solely on a single blood supply from the posterior descending artery. When it snaps, the mitral valve leaflet flails into the left atrium during systole, producing catastrophic acute mitral regurgitation, flash pulmonary edema, and refractory cardiogenic shock that requires emergency mitral valve replacement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Posteromedial Papillary Muscle",
+          "points": [
+            "Single blood supply from posterior descending artery (RCA)",
+            "High vulnerability to acute rupture in inferior MI",
+            "Produces acute catastrophic mitral regurgitation",
+            "Emergency surgical valve repair required"
+          ]
+        },
+        "right": {
+          "title": "Anterolateral Papillary Muscle",
+          "points": [
+            "Dual blood supply from LAD and circumflex arteries",
+            "Resistant to complete ischemic necrosis and rupture",
+            "Rarely ruptures during anterior myocardial infarction",
+            "Protected by collateral coronary circulation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pericardial involvement following myocardial infarction occurs in two distinct clinical forms. Early post-infarction pericarditis develops on days two to three in twenty percent of transmural infarctions, caused by direct extension of neutrophils and epicardial inflammation, presenting with pleuritic chest pain and a pericardial friction rub. In contrast, **Dressler syndrome pericarditis** emerges two to eight weeks post-infarction as an autoimmune phenomenon, characterized by anti-myocardial antibodies, persistent fever, pleuritis, generalized pericardial friction rub, and pericardial effusions responding to colchicine and anti-inflammatory therapy.",
+      "say": "Pericarditis occurs in two distinct phases after a heart attack. Early pericarditis happens on day two or three as transmural necrosis irritates the overlying epicardium, producing sharp pleuritic pain and a friction rub. Dressler syndrome, by contrast, is a delayed autoimmune reaction appearing weeks or months later. The immune system develops antibodies against heart antigens released during the infarction, producing fever, pleuritis, and pericardial effusion that responds well to colchicine and NSAIDs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Post-MI Pericarditis",
+          "points": [
+            "Onset: Days 2 to 3 following transmural infarction",
+            "Mechanism: Direct extension of epicardial neutrophil inflammation",
+            "Pleuritic pain relieved by sitting forward; friction rub",
+            "Transient, self-limiting with simple analgesia"
+          ]
+        },
+        "right": {
+          "title": "Dressler Syndrome (Late)",
+          "points": [
+            "Onset: 2 to 8 weeks post-myocardial infarction",
+            "Mechanism: Autoimmune anti-myocardial antibodies",
+            "Fever, leukocytosis, pericardial effusion, pleuritis",
+            "Treated targetedly with colchicine and corticosteroids"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Therapeutic restoration of coronary blood flow through thrombolysis or primary percutaneous intervention is essential to salvage myocardium, but paradoxically induces **myocardial reperfusion injury**. Reperfusion floods previously hypoxic myocytes with molecular oxygen, generating massive bursts of reactive oxygen species from xanthine oxidase and mitochondrial respiratory chains. Concurrently, rapid intracellular calcium overload occurs, hypercontracting actin-myosin filaments into pathognomonic contraction bands (contraction band necrosis), while opening mitochondrial permeability transition pores that trigger secondary apoptotic and necrotic cell death.",
+      "say": "While restoring coronary blood flow is vital to save myocardium, reperfusion itself can paradoxically kill borderline cells, a phenomenon known as reperfusion injury. Freshly reoxygenated blood generates massive bursts of free radicals and floods damaged myocytes with calcium ions. Intracellular calcium overload forces hypercontracted myofibrils to freeze into prominent, dense eosinophilic bands called contraction band necrosis, visible under the microscope within minutes of reperfusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Reperfusion Mechanism",
+          "Biochemical Pathway",
+          "Microscopic Histopathology",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Free Radical Generation",
+            "Xanthine oxidase and NADPH oxidase activation",
+            "Endothelial lipid peroxidation and swelling",
+            "No-reflow phenomenon in microcirculation"
+          ],
+          [
+            "Intracellular Calcium Surge",
+            "Massive influx across damaged sarcolemma",
+            "Contraction band necrosis (dense eosinophilic bands)",
+            "Reperfusion ventricular arrhythmias"
+          ],
+          [
+            "Mitochondrial Pore Opening",
+            "Opening of mPTP channels dissipation",
+            "Mitochondrial swelling and cytochrome c release",
+            "Accelerated apoptotic myocyte cell death"
+          ],
+          [
+            "Microvascular Plugging",
+            "Neutrophil adhesion and platelet-fibrin microthrombi",
+            "Capillary occlusion with petechial hemorrhages",
+            "Impaired salvage of ischemic myocardium"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What histological finding characterizes myocardial infarction tissue between 1 and 3 days post-infarction?",
+      "options": [
+        "Loss of myocyte nuclei with dense neutrophilic infiltration throughout necrotic tissue",
+        "Dense white-grey fibrous collagenous scar tissue with minimal cellularity",
+        "Prominent capillary neo-vessels with proliferating fibroblasts and macrophages",
+        "Wavy myofibers at the periphery with intracellular cellular edema alone"
+      ],
+      "correct": 0,
+      "explain": "Between days 1 and 3, necrotic cardiac myocytes exhibit loss of nuclei (coagulative necrosis) and the tissue is densely infiltrated by neutrophils."
+    },
+    {
+      "q": "Why is the posteromedial papillary muscle significantly more vulnerable to ischemic rupture following myocardial infarction than the anterolateral muscle?",
+      "options": [
+        "It receives a single blood supply exclusively from the posterior descending coronary artery",
+        "It experiences higher systolic shear stress from turbulent aortic regurgitant flow",
+        "It contains fewer contractile myofibrils and a higher proportion of loose connective tissue",
+        "It lacks collateral anastomoses from the bronchial and internal mammary arteries"
+      ],
+      "correct": 0,
+      "explain": "The posteromedial papillary muscle has a solitary blood supply from the posterior descending artery (RCA), whereas the anterolateral muscle enjoys dual supply from both LAD and circumflex arteries."
+    },
+    {
+      "q": "What is the primary pathological mechanism of Dressler syndrome occurring weeks following acute myocardial infarction?",
+      "options": [
+        "Autoimmune pericarditis triggered by circulating anti-myocardial antibodies",
+        "Direct bacterial infection of the necrotic epicardium by Staphylococcus epidermidis",
+        "Retrograde extension of coronary atherosclerotic plaque rupture into the pericardial space",
+        "Hydrostatic transudation of fluid resulting from severe acute left ventricular failure"
+      ],
+      "correct": 0,
+      "explain": "Dressler syndrome is an autoimmune pericarditis that develops 2 to 8 weeks after an infarction, mediated by autoantibodies formed against myocardial antigens exposed during necrosis."
     }
   ]
 }

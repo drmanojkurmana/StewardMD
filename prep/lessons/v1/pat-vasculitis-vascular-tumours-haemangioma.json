@@ -1,223 +1,259 @@
 {
   "v": 1,
-  "module": "pat-vasculitis-vascular-tumours",
-  "subject": "pathology",
-  "title": "Haemangiomas, Pyogenic Granuloma, Glomus Tumour, Kaposi Sarcoma, and Angiosarcoma",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-vasculitis-vascular-tumours",
+  "key": null,
+  "title": "Haemangiomas, Pyogenic Granuloma, Glomus Tumour, Kaposi Sarcoma, and Angiosarcoma",
   "steps": [
     {
-      "tx": "Vascular tumours span infantile haemangiomas that proliferate then involute, malformations that grow with the child, and malignant angiosarcomas, separated by GLUT1 staining and clinical tempo. The common infant tumour is the **infantile haemangioma (GLUT1 positive)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Infantile haemangiomas proliferate, plateau, and involute; GLUT1 separates them from malformations.",
+      "tx": "Haemangiomas represent benign vascular neoplasms composed of blood-filled vessels, classified histologically by vessel caliber into capillary and cavernous variants. **Capillary haemangiomas** consist of closely packed, thin-walled capillaries lined by a single layer of cytologically normal endothelial cells, separated by sparse connective tissue stroma, commonly found in the skin, subcutaneous tissues, and oral cavity. In contrast, cavernous haemangiomas feature large, widely dilated, cavernous vascular spaces lined by flattened endothelium, frequently involving deep visceral organs, classically presenting as the most common benign primary neoplasm of the liver.",
+      "say": "Haemangiomas are benign vascular tumors divided into capillary and cavernous types based on vessel size. Capillary haemangiomas consist of tightly packed, thin-walled capillaries lined by normal endothelial cells, typically found in the skin and mouth. Cavernous haemangiomas are composed of large, dilated blood-filled vascular spaces. Cavernous haemangiomas are the most common benign tumor of the liver, appearing as sponge-like, red-blue subcapsular masses.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Infantile haemangioma",
+          "title": "Capillary Haemangioma",
           "points": [
-            "Appears after birth, proliferates",
-            "GLUT1 positive endothelium",
-            "Involutes over years"
+            "Closely packed, thin-walled, small caliber capillaries",
+            "Single layer of uniform cytologically bland endothelium",
+            "Typically superficial (skin, subcutaneous tissue, mucous membranes)",
+            "Benign clinical course without significant hemorrhage risk"
           ]
         },
         "right": {
-          "title": "Vascular malformation",
+          "title": "Cavernous Haemangioma",
           "points": [
-            "Present at birth, grows commensurately",
-            "GLUT1 negative",
-            "Never involutes, may expand"
+            "Large, dilated, cavernous blood-filled vascular channels",
+            "Separated by fibrous connective tissue septa",
+            "Frequently deep visceral (most common benign liver tumor)",
+            "Vulnerable to local thrombosis and traumatic rupture"
           ]
         }
       }
     },
     {
-      "tx": "Propranolol revolutionised complicated infantile haemangiomas threatening vision, airway, or ulcerating skin, shrinking lesions through vasoconstriction and antiangiogenic effects after cardiovascular screening. That first line drug therapy is **propranolol for infantile haemangioma**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Propranolol after screening shrinks threatening infantile haemangiomas; timolol serves small superficial ones.",
+      "tx": "Juvenile haemangioma, commonly termed strawberry haemangioma, is the most common vascular tumour of infancy, occurring in up to five percent of newborns. Presenting at birth or within weeks as bright red, lobulated skin lesions on the face or scalp, **strawberry juvenile haemangiomas** follow a stereotypic natural history. The lesion undergoes rapid proliferative growth during the first year, followed by spontaneous, progressive clinical involution. By age seven, seventy-five to ninety percent regress completely, requiring reassurance.",
+      "say": "Juvenile or strawberry haemangiomas are the most common vascular tumors of infancy, appearing as bright red, bumpy skin nodules on the head and neck. They have a predictable natural course: they grow rapidly during the first year of life, and then undergo slow, spontaneous involution. By age seven to nine, over ninety percent have completely resolved on their own, leaving minimal scarring, so surgery is avoided.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Lesion",
-          "Behaviour",
-          "First thought"
+          "Clinical Phase",
+          "Patient Age Range",
+          "Histological Microscopic Findings",
+          "Clinical Management"
         ],
         "rows": [
           [
-            "Infantile haemangioma",
-            "Proliferate then involute",
-            "Propranolol if complicated"
+            "Proliferative Phase",
+            "0 to 12 Months",
+            "Plump endothelial proliferation, mitotic figures",
+            "Observation; oral propranolol if obstructing vision"
           ],
           [
-            "Cherry angioma",
-            "Tiny adult acquired papules",
-            "Reassurance, cosmetic removal"
+            "Early Involuting Phase",
+            "1 to 4 Years",
+            "Endothelial flattening, vascular lumen dilation",
+            "Reassurance, avoid unnecessary surgical excision"
           ],
           [
-            "Pyogenic granuloma",
-            "Friable rapid red nodule, bleeds",
-            "Excision with histology"
+            "Late Involuted Phase",
+            "5 to 9 Years",
+            "Replacement by fibrofatty connective tissue",
+            "Complete spontaneous clinical resolution in >90%"
           ],
           [
-            "Angiosarcoma",
-            "Bruise like scalp or breast lesion, elderly",
-            "Urgent biopsy, oncology"
+            "Kasabach-Merritt Syndrome",
+            "Infancy (rare)",
+            "Platelet trapping in giant vascular lesion",
+            "Severe consumptive coagulopathy requiring therapy"
           ]
         ]
       }
     },
     {
-      "tx": "Pyogenic granuloma is neither pyogenic nor granuloma but a lobular capillary proliferation erupting after trauma or pregnancy hormones, bleeding profusely from a friable red stalk and recurring if incompletely excised. The misnamed bleeder is **pyogenic granuloma (lobular capillary haemangioma)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "A friable red nodule bleeding after trivial trauma is pyogenic granuloma; excise it and send histology.",
+      "tx": "Lobular capillary haemangioma, historically misnamed **pyogenic granuloma vascular lesion**, is a rapidly growing, benign, polypoid vascular lesion that is neither bacterial in origin nor granulomatous histologically. It presents as an exophytic, red, pedunculated nodule on the skin, gingival mucosa, or lips that bleeds profusely following minor trauma. Histologically, it consists of a lobular proliferation of capillaries embedded in edematous, vascular stroma resembling exuberant granulation tissue. A distinctive clinical variant is granuloma gravidarum (pregnancy tumour), which develops on the gingiva of pregnant women due to hormonal influences.",
+      "say": "A pyogenic granuloma is a misnomer: it is neither caused by pus-forming bacteria nor does it contain granulomas. It is a benign, rapidly growing lobular capillary haemangioma that looks like a red, shiny, bleeding polyp on the gums, lips, or fingers. Under the microscope, it resembles florid granulation tissue with lots of capillaries and edema. A classic form is the pregnancy tumor, which develops on the gingiva during pregnancy under high estrogen levels and frequently regresses after delivery.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Trauma or pregnancy hormone trigger"
-          },
-          {
-            "id": "b",
-            "label": "Rapid friable red papule grows"
-          },
-          {
-            "id": "c",
-            "label": "Profuse bleeding on minor contact"
-          },
-          {
-            "id": "d",
-            "label": "Complete excision and histology"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
+        "kind": "compare",
+        "left": {
+          "title": "Pyogenic Granuloma (Lobular)",
+          "points": [
+            "Rapidly growing, exophytic, pedunculated vascular polyp",
+            "Bleeds profusely following trivial superficial trauma",
+            "Histology: Lobular capillary proliferation in edematous stroma",
+            "Frequent on oral gingiva during pregnancy (granuloma gravidarum)"
           ]
-        ]
+        },
+        "right": {
+          "title": "True Granulation Tissue",
+          "points": [
+            "Physiological reparative tissue during wound healing",
+            "Composed of budding capillary sprouts and fibroblasts",
+            "Infiltrated by chronic macrophages and neutrophils",
+            "Matures progressively into dense fibrous collagen scar"
+          ]
+        }
       }
     },
     {
-      "tx": "Glomus tumours arise from thermoregulatory glomus bodies, classically subungual, with pinpoint pain, cold sensitivity, and tenderness localised by a pinhead, cured by complete excision. The painful nail tumour is the **glomus tumour of the nail unit**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Pinpoint subungual pain with cold agony means glomus tumour; excision cures what imaging hunts.",
+      "tx": "A glomus tumour, also termed glomangioma, is an exquisitely painful, benign mesenchymal neoplasm originating from modified smooth muscle cells of the glomus body. The glomus body is a specialized neuromyoarterial thermoregulatory arteriovenous shunt located in the reticular dermis, most densely concentrated beneath the fingernails. Clinically, a **subungual glomus tumour** appears as a tiny (under one centimeter), bluish-red nodule beneath the nail bed that elicits severe, paroxysmal, excruciating pain triggered by cold temperature exposure. Complete surgical excision is curative, immediately relieving symptoms.",
+      "say": "A glomus tumor is a tiny, exquisitely painful tumor arising from the glomus body, a specialized arteriovenous shunt in the skin that regulates body temperature. It classically develops beneath the fingernail as a tiny, blue-red nodule. The patient experiences agonizing paroxysmal pain when the hand is exposed to cold water or touched lightly. Simple surgical excision cures the tumor and eliminates the pain instantly.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/glomus-tumor-nail-fig1.webp",
-        "alt": "Subungual glomus tumour",
+        "alt": "Clinical photograph and histopathology of a painful subungual glomus tumor beneath the nail bed",
         "caption": "Subungual glomus tumour beneath the nail with classic painful presentation."
       }
     },
     {
-      "tx": "Kaposi sarcoma, driven by human herpesvirus 8 in immunosuppression, paints violaceous patches, plaques, and nodules on skin, mouth, gut, and lung, regressing substantially when HIV therapy restores immunity. The HHV8 tumour is **Kaposi sarcoma in immunosuppression**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Violaceous plaques plus immunosuppression mean Kaposi sarcoma; restoring immunity is its first chemotherapy.",
+      "tx": "Kaposi sarcoma is a low-grade vascular neoplasm driven by infection with **human herpesvirus 8**, also designated Kaposi sarcoma-associated herpesvirus. HHV-8 infects lymphatic and blood vascular endothelial cells, encoding viral oncogenes including v-cyclin and v-FLIP that inhibit apoptosis, promote aberrant angiogenesis, and drive cellular transformation. Kaposi sarcoma presents across four distinct clinical epidemiology settings: chronic classic Mediterranean form in elderly men, aggressive lymphadenopathic endemic African form in children, iatrogenic transplant-associated form responding to immunosuppression reduction, and epidemic AIDS-associated form.",
+      "say": "Kaposi sarcoma is a vascular cancer caused by human herpesvirus 8, also called Kaposi sarcoma-associated herpesvirus. The virus infects endothelial cells, driving cytokine release, angiogenesis, and spindle cell proliferation. It occurs in four epidemiological patterns: classic Mediterranean disease in elderly men, an aggressive lymph-node disease in African children, a transplant-related form seen in organ recipients, and the epidemic form seen in untreated AIDS patients with low CD4 counts.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/kaposi-sarcoma-fig1.webp",
-        "alt": "Kaposi sarcoma violaceous plaques",
+        "alt": "Clinical photograph showing multiple violaceous cutaneous plaques and nodules in Kaposi sarcoma",
         "caption": "Kaposi sarcoma violaceous plaques in advanced immunosuppression."
       }
     },
     {
-      "tx": "Angiosarcoma bruises elderly scalps, irradiated breasts, and chronically lymphoedematous arms with malignant endothelium that metastasises early and answers poorly, demanding wide oncology margins and trials. Stewart-Treves names its lymphoedema form: **angiosarcoma including Stewart-Treves syndrome**. That is why this detail earns its place in every examination and ward round.",
-      "say": "A spreading bruise on an elderly scalp or irradiated breast is angiosarcoma until biopsy acquits it.",
+      "tx": "Cutaneous Kaposi sarcoma evolves sequentially through three distinctive histological and macroscopic stages: patch, plaque, and nodular stages. The patch stage presents as flat pink-purple macules characterized microscopically by irregular, jagged, angulated, thin-walled vascular channels dissecting through the upper dermis around pre-existing vessels. The plaque stage forms raised, violaceous cutaneous plaques composed of expanding spindle cell fascicles. The nodular stage represents **neoplastic spindle cell fascicles**, forming distinct dermal tumours composed of proliferating spindle cells with slit-like vascular spaces containing extravasated erythrocytes and abundant hemosiderin pigment.",
+      "say": "Kaposi sarcoma evolves through three morphological stages. It begins in the patch stage as flat purple macules with jagged, thin-walled vascular slits dissecting around normal vessels. Next, it forms raised, indurated plaques. Finally, in the nodular stage, it forms distinct tumor nodules packed with proliferating spindle cells. Between the spindle cells lie slit-like vascular channels crammed with extravasated red blood cells, which break down into golden-brown hemosiderin pigment.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Benign vascular lesions",
+          "title": "Early Patch / Plaque Stage",
           "points": [
-            "Haemangiomas, pyogenic granuloma",
-            "Circumscribed, expected tempo",
-            "Excision curative"
+            "Flat pink macules evolving into raised purple plaques",
+            "Angulated vascular slits dissecting collagen bundles",
+            "Promontory sign (pre-existing vessels protruding into lumen)",
+            "Extravasated red cells with perivascular hemosiderin"
           ]
         },
         "right": {
-          "title": "Angiosarcoma",
+          "title": "Advanced Nodular Stage",
           "points": [
-            "Infiltrative bruise like spread",
-            "Elderly scalp, radiation, lymphoedema fields",
-            "Early metastasis, guarded prognosis"
+            "Raised, firm, violaceous dermal tumor nodules",
+            "Interlacing fascicles of atypical spindle cells",
+            "Slit-like vascular spaces without formal endothelial lining",
+            "Diagnostic nuclear HHV-8 LANA-1 positivity"
           ]
         }
       }
     },
     {
-      "tx": "Epithelioid haemangioendothelioma and Kaposi sarcoma remind us vascular malignancy grades between haemangioma innocence and angiosarcoma fury, with HHV8 staining and MYC amplification sorting radiation associated cases. Panel discipline is **vascular tumour immunohistochemistry triage**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "HHV8, ERG, CD31, and MYC sort vascular tumours better than appearance alone ever will.",
+      "tx": "Angiosarcoma is a rare, highly aggressive, malignant mesenchymal neoplasm of vascular endothelial cells, striking predominantly older adults in the skin, soft tissues, breast, and liver. Hepatic angiosarcoma is a classical occupational cancer historically linked to industrial exposure to polyvinyl chloride (PVC) monomer, radioactive Thorotrast contrast media, and inorganic arsenic insecticides. Another classical clinical setting is **Stewart-Treves post-mastectomy angiosarcoma**, an aggressive cutaneous angiosarcoma developing within a chronic, non-resolving lymphedematous arm ten to fifteen years following radical mastectomy and axillary lymph node dissection for breast cancer.",
+      "say": "Angiosarcoma is a vicious malignant cancer of endothelial cells that primarily strikes the skin, breast, and liver. Hepatic angiosarcoma is a classic environmental cancer linked to chemical carcinogens like polyvinyl chloride, arsenic, and Thorotrast. Stewart-Treves syndrome describes the development of cutaneous angiosarcoma in a chronically lymphedematous arm years after radical mastectomy and axillary node clearance for breast cancer, presenting as rapidly spreading purple nodules with a dismal prognosis.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Marker",
-          "Supports",
-          "Use"
+          "Angiosarcoma Subtype",
+          "Associated Etiological Agent",
+          "Typical Clinical Presentation",
+          "Microscopic Hallmark"
         ],
         "rows": [
           [
-            "HHV8 LANA",
-            "Kaposi sarcoma",
-            "Separates KS from mimics"
+            "Hepatic Angiosarcoma",
+            "Polyvinyl chloride, Thorotrast, Arsenic",
+            "Abdominal mass, hemoperitoneum, liver failure",
+            "Malignant endothelial cells lining liver sinusoids"
           ],
           [
-            "ERG, CD31",
-            "Endothelial lineage",
-            "Confirms vascular nature"
+            "Stewart-Treves Syndrome",
+            "Chronic post-mastectomy lymphedema",
+            "Multiple purple-black nodules on edematous arm",
+            "Infiltrative pleomorphic vascular channels"
           ],
           [
-            "GLUT1",
-            "Infantile haemangioma",
-            "Versus malformation"
+            "Post-Radiation Angiosarcoma",
+            "Prior ionizing radiation for breast carcinoma",
+            "Cutaneous nodules in radiation field (5-10 yr)",
+            "Atypical hyperchromatic endothelial cells, mitoses"
           ],
           [
-            "MYC amplification",
-            "Radiation associated angiosarcoma",
-            "Prognostic and diagnostic aid"
+            "Cutaneous Scalp Angiosarcoma",
+            "Elderly males (idiopathic)",
+            "Bruise-like spreading purpuric scalp macule",
+            "Dissecting vascular channels, cellular anaplasia"
           ]
         ]
       }
     },
     {
-      "tx": "Bleeding vascular lesions punish blind cautery without histology, because pyogenic granuloma mimics amelanotic melanoma and angiosarcoma mimics bruising, so excised tissue always reaches pathology. That rule is **histology for every excised vascular lesion**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "Every excised red nodule earns histology; melanoma and angiosarcoma both masquerade as benign bleeders.",
+      "tx": "Histological differentiation of angiosarcoma from benign vascular proliferations relies on identifying marked cytological atypia, hyperchromasia, high mitotic activity, and an invasive, dissecting architectural growth pattern. In poorly differentiated angiosarcomas where vascular lumens are absent, immunohistochemical confirmation utilizes **endothelial differentiation immunohistochemical markers**, demonstrating diffuse positivity for CD31 (platelet endothelial cell adhesion molecule 1), CD34, ERG transcription factor, and Factor VIII-related antigen. Angiosarcomas pursue an extraordinarily aggressive clinical course with high local recurrence and early hematogenous pulmonary metastases, carrying five-year overall survival under twenty percent.",
+      "say": "Diagnosing angiosarcoma under the microscope requires finding malignant endothelial features: pleomorphic hyperchromatic cells, frequent mitoses, and infiltrative vascular channels dissecting through tissue planes. In poorly differentiated tumors that look like sheets of undifferentiated carcinoma, immunohistochemistry confirms endothelial origin using CD31 and ERG. Angiosarcomas are aggressive cancers that metastasize early through the blood to the lungs, with five-year survival languishing below twenty percent.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Friable or atypical vascular lesion"
+            "id": "a1",
+            "label": "Poorly Differentiated Soft Tissue Tumor"
           },
           {
-            "id": "b",
-            "label": "Photograph, assess tempo and host"
+            "id": "a2",
+            "label": "Screen Endothelial Markers"
           },
           {
-            "id": "c",
-            "label": "Excise completely where feasible"
+            "id": "a3",
+            "label": "CD31 and ERG Positive"
           },
           {
-            "id": "d",
-            "label": "Histology before reassurance given"
+            "id": "a4",
+            "label": "Confirm Cutaneous Angiosarcoma"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "a1",
+            "a2",
+            "Immunohistochemistry"
           ],
           [
-            "b",
-            "c"
+            "a2",
+            "a3",
+            "Specific antigens"
           ],
           [
-            "c",
-            "d"
+            "a3",
+            "a4",
+            "Vascular origin"
           ]
         ]
       }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What specific human herpesvirus is the established causative etiological agent of all epidemiological forms of Kaposi sarcoma?",
+      "options": [
+        "Human herpesvirus 8 (HHV-8 / KSHV)",
+        "Human herpesvirus 6 (HHV-6)",
+        "Epstein-Barr virus (EBV / HHV-4)",
+        "Cytomegalovirus (CMV / HHV-5)"
+      ],
+      "correct": 0,
+      "explain": "Human herpesvirus 8 (HHV-8), also called Kaposi sarcoma-associated herpesvirus, is the direct oncogenic driver in classic, endemic, transplant, and AIDS-related Kaposi sarcoma."
+    },
+    {
+      "q": "What is the characteristic clinical presentation of a subungual glomus tumour?",
+      "options": [
+        "An exquisitely painful, small, red-blue nodule beneath the fingernail triggered by cold exposure",
+        "A rapidly growing, painless, strawberry-like vascular nodule on the face that regresses by age 7",
+        "Multiple violaceous plaques on the lower extremities in an HIV-positive patient",
+        "A spreading, bruise-like purpuric macule on the scalp of an elderly man"
+      ],
+      "correct": 0,
+      "explain": "Glomus tumors arise from modified smooth muscle cells of the thermoregulatory glomus body under the nail bed, producing severe paroxysmal pain sensitive to cold."
+    },
+    {
+      "q": "What is Stewart-Treves syndrome?",
+      "options": [
+        "Angiosarcoma arising in a chronically lymphedematous upper extremity following radical mastectomy",
+        "Congenital association of cerebellar hemangioblastoma with renal cell carcinoma",
+        "Hepatic angiosarcoma occurring decades after occupational exposure to polyvinyl chloride",
+        "Capillary hemangioma of the liver associated with severe consumptive thrombocytopenia"
+      ],
+      "correct": 0,
+      "explain": "Stewart-Treves syndrome refers to the development of cutaneous angiosarcoma in a chronically lymphedematous arm years after radical mastectomy and axillary lymph node dissection."
     }
   ]
 }

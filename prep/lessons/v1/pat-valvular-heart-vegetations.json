@@ -1,223 +1,273 @@
 {
   "v": 1,
-  "module": "pat-valvular-heart",
-  "subject": "pathology",
-  "title": "Valve Vegetations Compared: Infective, Libman-Sacks, Marantic, and Carcinoid Heart Disease",
-  "minutes": 6,
   "gen": "AI",
-  "quiz": [],
+  "module": "pat-valvular-heart",
+  "key": null,
+  "title": "Valve Vegetations Compared: Infective, Libman-Sacks, Marantic, and Carcinoid Heart Disease",
   "steps": [
     {
-      "tx": "Vegetation describes any valve mass, but its composition separates infected friable growths destroying tissue from sterile platelet fibrin deposits of marantic and Libman-Sacks disease riding intact leaflets. Composition before organism is **vegetation characterisation by pathology**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Ask what a vegetation is made of before asking what grows from it; sterile and infected masses diverge completely.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Vegetation type",
-          "Composition",
-          "Valve damage"
-        ],
-        "rows": [
-          [
-            "Infective",
-            "Organisms, fibrin, platelets, inflammation",
-            "Destructive, perforation, abscess"
-          ],
-          [
-            "Marantic NBTE",
-            "Sterile platelet fibrin, bland",
-            "Leaflet intact, emboli dominate"
-          ],
-          [
-            "Libman-Sacks",
-            "Immune complexes, fibrin, inflammation",
-            "Either surface, regurgitation late"
-          ],
-          [
-            "Lambl excrescence",
-            "Degenerative filamentous fronds",
-            "Ageing, usually incidental"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Libman-Sacks endocarditis of lupus plants sterile verrucous vegetations on either valve surface including undersurfaces, linked to antiphospholipid antibodies, embolising silently more often than destroying acutely. The lupus vegetation remains **Libman-Sacks sterile endocarditis**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Lupus vegetations sit on either surface and embolise quietly; cultures stay negative while antibodies speak.",
+      "tx": "Infective endocarditis is characterized by large, bulky, highly friable, irregular **infective endocarditic vegetations** situated along lines of valve closure that frequently spill onto adjacent mural endocardium and chordae tendineae. Microscopically, the vegetation consists of dense layers of fibrin and aggregated platelets teeming with embedded colonies of viable bacteria or fungi, surrounded by an intense infiltrate of viable and degenerate neutrophils. The invasive microbial enzymes and intense suppurative inflammation directly destroy underlying valve architecture, causing leaflet ulceration, cusp perforation, and rupture of chordae tendineae.",
+      "say": "Infective endocarditis produces bulky, friable, destructive vegetations along the lines of valve closure. Under the microscope, these vegetations are composed of layered platelets and fibrin packed with dense clusters of proliferating bacteria or fungi and necrotic neutrophils. Microbial proteases eat through the leaflet collagen, causing leaflet tears, full-thickness perforations, and ruptured chordae tendineae that lead to acute, severe valvular regurgitation.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Libman-Sacks",
+          "title": "Infective Endocarditis Vegetations",
           "points": [
-            "Lupus, antiphospholipid association",
-            "Either surface, small verrucae",
-            "Sterile cultures"
+            "Bulky, irregular, highly friable masses (up to 2 cm)",
+            "Teeming with proliferating bacterial or fungal colonies",
+            "Causes destructive leaflet perforation and chordal rupture",
+            "High risk of septic emboli producing metastatic abscesses"
           ]
         },
         "right": {
-          "title": "Infective endocarditis",
+          "title": "Non-Bacterial Vegetations (NBTE)",
           "points": [
-            "Fever, positive cultures usual",
-            "Downstream surface, destructive",
-            "Emboli septic, abscess possible"
+            "Small (1 to 5 mm), smooth, bland, sterile nodules",
+            "Composed purely of platelets and fibrin without organisms",
+            "Underlying valve leaflet tissue remains completely undamaged",
+            "High risk of sterile bland ischemic emboli to brain/viscera"
           ]
         }
       }
     },
     {
-      "tx": "Nonbacterial thrombotic endocarditis, marantic endocarditis, deposits sterile platelet fibrin along valve closure lines in cancer, sepsis, antiphospholipid syndrome, and wasting states, embolising to brain, spleen, and kidney without infection signs. The wasting associated lesion is **marantic (nonbacterial thrombotic) endocarditis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Marantic vegetations embolise from cancer and wasting valves while cultures and fever stay silent.",
+      "tx": "Non-bacterial thrombotic endocarditis, historically termed **marantic endocarditis**, is characterized by the deposition of small, bland, sterile thrombi on cardiac valve leaflets. Vegetations measure one to five millimeters in diameter, appearing as smooth, glistening, reddish-brown nodules loosely attached along the lines of closure, most frequently on mitral and aortic valves. Histologically, they consist purely of platelets and fibrin meshworks devoid of microorganisms or significant inflammatory infiltrates. NBTE develops in hypercoagulable states, classically associated with advanced mucinous adenocarcinomas (Trousseau syndrome) and severe debilitating chronic sepsis.",
+      "say": "Non-bacterial thrombotic endocarditis, or marantic endocarditis, presents with small, bland, sterile clots on heart valves. The vegetations are small, smooth nodules that sit along the lines of valve closure, usually on mitral or aortic valves. Crucially, they contain only platelets and fibrin: there are no bacteria and no inflammatory cells. Marantic endocarditis is driven by systemic hypercoagulability, classically in advanced cancer like pancreatic adenocarcinoma, known as Trousseau syndrome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocarditis Type",
+          "Gross Vegetation Morphology",
+          "Microscopic Composition",
+          "Underlying Leaflet Destruction"
+        ],
+        "rows": [
+          [
+            "Infective Endocarditis",
+            "Large, bulky, friable, irregular masses",
+            "Fibrin, platelets, neutrophils, bacterial colonies",
+            "Severe destruction: ulceration, perforation, chordal rupture"
+          ],
+          [
+            "Marantic (NBTE)",
+            "Small (1-5 mm), smooth, glistening, bland",
+            "Pure platelets and fibrin; sterile, no inflammation",
+            "Zero destruction; underlying valve completely intact"
+          ],
+          [
+            "Libman-Sacks (SLE)",
+            "Small (1-4 mm), wart-like, verrucous nodules",
+            "Fibrin, histiocytes, hematoxylin bodies, sterile",
+            "Valvulitis with mucoid degeneration and fibrosis"
+          ],
+          [
+            "Rheumatic Valvulitis",
+            "Tiny (1-2 mm), firm, bead-like, translucent",
+            "Sterile platelet-fibrin verrucae along closure line",
+            "Fibrous commissural fusion and chordal shortening"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Although vegetations in non-bacterial thrombotic endocarditis do not invade or destroy the underlying valve leaflet tissue, they carry a formidable clinical hazard: **systemic arterial embolization**. Because marantic vegetations are attached very loosely to the denuded endothelial surface without eliciting an anchoring inflammatory reaction, they readily detach under arterial hemodynamic shear stress. Fragmented bland emboli travel through systemic circulation to occlude medium and small arteries, causing acute ischemic cerebral infarcts, splenic infarcts, renal cortical infarcts, and acute mesenteric ischemia in cancer patients.",
+      "say": "Even though marantic vegetations do not destroy the heart valve itself, they are dangerous because they are very loosely attached to the leaflet surface. Because there is no inflammatory reaction anchoring them to the valve, the swirling blood easily breaks them off into the arterial stream. These sterile emboli travel to the brain, kidneys, and spleen, causing sudden strokes and wedge-shaped infarcts in patients with advanced cancer.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/mitral-valve-prolapse-fig1.webp",
-        "alt": "Mitral valve prolapse pathology",
+        "alt": "Gross appearance of non-bacterial thrombotic vegetations loosely attached along the mitral valve closure line",
         "caption": "Valve substrate pathology predisposing to vegetation formation and regurgitation."
       }
     },
     {
-      "tx": "Embolic pattern separates sterile from infective sources imperfectly: sterile vegetations shower bland infarcts, infective ones add abscess, mycotic aneurysm, and fever, so cultures, inflammatory markers, and autoimmune serology travel together. That combined hunt is **sterile versus infective vegetation workup**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Bland infarcts suggest sterile vegetations, septic emboli suggest infection; send cultures and serology together.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Vegetation seen on echocardiography"
-          },
-          {
-            "id": "b",
-            "label": "Three culture sets before antibiotics"
-          },
-          {
-            "id": "c",
-            "label": "Lupus, antiphospholipid, malignancy review"
-          },
-          {
-            "id": "d",
-            "label": "Therapy: antibiotics, anticoagulation, or both paths"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Carcinoid heart disease bathes right sided valves in serotonin from liver metastasised midgut tumours, plastering tricuspid and pulmonary valves with fibrous plaques until regurgitation and stenosis fail the right heart. Left valves escape behind lung clearance: **carcinoid heart disease, right sided fibrosis**.",
-      "say": "Flushing diarrhoea plus right valve fibrosis means carcinoid heart disease; the lungs protect the left side.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/mitral-stenosis-fig2.webp",
-        "alt": "Rheumatic mitral stenosis hemodynamic progression",
-        "caption": "Valve haemodynamic progression, contrasting left sided rheumatic disease with right sided carcinoid fibrosis."
-      }
-    },
-    {
-      "tx": "Urinary 5-HIAA and chromogranin confirm carcinoid syndrome biochemically, somatostatin analogues control flushing and diarrhoea, and valve replacement is considered when right heart failure advances despite syndrome control. Biochemical confirmation uses **urinary 5-HIAA in carcinoid syndrome**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Measure urinary 5-HIAA, calm the syndrome with somatostatin analogues, and time valve surgery to right heart failure.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Carcinoid heart",
-          "Rheumatic heart"
-        ],
-        "rows": [
-          [
-            "Valves favoured",
-            "Tricuspid and pulmonary right side",
-            "Mitral then aortic left side"
-          ],
-          [
-            "Lesion style",
-            "Fibrous plaque plastering",
-            "Commissure fusion, calcification"
-          ],
-          [
-            "Systemic clue",
-            "Flushing, diarrhoea, wheeze",
-            "Streptococcal and Jones history"
-          ],
-          [
-            "Key test",
-            "5-HIAA, chromogranin, echo",
-            "Echo morphology, strep serology"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Prosthetic valve endocarditis splits early hospital acquired staphylococcal disease from late community patterns, invades sewing rings into abscess and dehiscence, and usually demands surgical counsel early. The device infection is **prosthetic valve endocarditis**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Fever with a prosthetic valve is endocarditis until proven otherwise, and abscess makes it surgical early.",
+      "tx": "Libman-Sacks endocarditis, also termed verrucous endocarditis, is a sterile, non-infective valvulitis occurring in patients with systemic lupus erythematosus and primary antiphospholipid antibody syndrome. The hallmark lesions are small, one to four millimeter, sterile, wart-like, pink-tan **verrucous Libman-Sacks vegetations**. A pathognomonic diagnostic feature is their atypical anatomical distribution: vegetations develop on both flow and non-flow surfaces of valve leaflets, on the undersurfaces of atrioventricular valves, on chordae tendineae, and on adjacent mural endocardium.",
+      "say": "Libman-Sacks endocarditis is a sterile, wart-like valvular lesion that develops in systemic lupus erythematosus and antiphospholipid syndrome. What makes Libman-Sacks unique is its bizarre distribution: while ordinary endocarditis sits along lines of closure, Libman-Sacks vegetations sprout on both the upper and lower surfaces of valve leaflets, on chordae tendineae, and on the ventricular wall. Microscopically, they show fibrinoid necrosis and distinctive hematoxylin bodies.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Early prosthetic infection",
+          "title": "Libman-Sacks Distribution",
           "points": [
-            "Within months of surgery",
-            "Staphylococci including epidermidis",
-            "Ring abscess, dehiscence common"
+            "Both flow and non-flow surfaces of valve leaflets",
+            "Undersurfaces of atrioventricular valve cusps",
+            "Chordae tendineae and ventricular mural endocardium",
+            "Strongly associated with high-titer antiphospholipid antibodies"
           ]
         },
         "right": {
-          "title": "Late prosthetic infection",
+          "title": "Classic Endocarditis Distribution",
           "points": [
-            "Community organisms as native valves",
-            "Vegetations more visible",
-            "Antibiotics may cure selected cases"
+            "Confined strictly to lines of valve closure",
+            "Atrial surface of atrioventricular valves",
+            "Ventricular surface of semilunar aortic/pulmonary valves",
+            "Dictated by downstream low-pressure vortex flow"
           ]
         }
       }
     },
     {
-      "tx": "Echocardiography escalates from transthoracic to transoesophageal when prostheses, devices, abscess suspicion, or negative images meet high clinical probability, because missing endocarditis costs valves and lives. That escalation rule is **transoesophageal echo in suspected endocarditis**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Prosthetic valve or high suspicion with negative surface echo earns transoesophageal imaging without argument.",
+      "tx": "Carcinoid heart disease is a unique cardiac manifestation occurring in over fifty percent of patients with metastatic neuroendocrine carcinoid tumours of the gastrointestinal tract that have metastasized to the liver. Neoplastic enterochromaffin cells hypersecrete bioactive amines, predominantly serotonin, bradykinin, and prostaglandins, directly into hepatic veins. These humoral mediators stimulate valvular subendothelial smooth muscle cells and fibroblasts to synthesize **plaque-like carcinoid fibrous thickening**, composed of smooth muscle cells embedded in abundant glycosaminoglycan-rich matrix, coating the tricuspid and pulmonary valves.",
+      "say": "Carcinoid heart disease develops when neuroendocrine carcinoid tumors metastasize to the liver, dumping large amounts of serotonin and bradykinin directly into the hepatic veins. These vasoactive mediators bathe the right side of the heart, stimulating fibroblasts to deposit glistening, white fibrous plaques on the tricuspid and pulmonary valves. This causes severe tricuspid regurgitation and pulmonary stenosis, leading to right-sided heart failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig2.webp",
+        "alt": "Gross specimen showing glistening white fibrous plaques coating the tricuspid valve leaflets in carcinoid heart disease",
+        "caption": "Valve haemodynamic progression, contrasting left sided rheumatic disease with right sided carcinoid fibrosis."
+      }
+    },
+    {
+      "tx": "The striking clinical hallmark of carcinoid heart disease is its strict **right-sided valvular predilection**, producing severe tricuspid valve regurgitation and pulmonary valve stenosis while sparing the left side of the heart. As blood traverses pulmonary capillary beds, pulmonary endothelial monoamine oxidase (MAO) and vascular carboxypeptidases rapidly catabolize serotonin and bradykinin into inactive metabolites (such as 5-hydroxyindoleacetic acid, 5-HIAA). Consequently, left-sided valves remain entirely normal unless the patient possesses a right-to-left intracardiac shunt (patent foramen ovale) or primary pulmonary carcinoid tumour.",
+      "say": "Carcinoid heart disease almost exclusively damages the right side of the heart. The explanation is physiological: as blood passes through the lungs, pulmonary endothelial monoamine oxidase metabolizes and inactivates serotonin before it can reach the left heart. Therefore, the mitral and aortic valves are completely spared, unless the patient has a patent foramen ovale allowing serotonin to bypass the pulmonary filter, or has a primary lung carcinoid.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Right-Sided Carcinoid Pathology",
+          "Left-Sided Valve Resistance",
+          "Clinical Explanation"
+        ],
+        "rows": [
+          [
+            "Affected Valves",
+            "Tricuspid and Pulmonary valves",
+            "Mitral and Aortic valves spared",
+            "Direct exposure to hepatic venous serotonin"
+          ],
+          [
+            "Metabolic Inactivation",
+            "Bypassed by hepatic metastases",
+            "Pulmonary endothelial MAO catabolism",
+            "Serotonin converted to inactive 5-HIAA in lungs"
+          ],
+          [
+            "Primary Valvular Lesion",
+            "Tricuspid regurgitation & pulmonary stenosis",
+            "Normal valve leaflet architecture",
+            "Subendocardial glistening fibrous plaques"
+          ],
+          [
+            "Exceptions for Left Heart",
+            "Patent foramen ovale (R-to-L shunt)",
+            "Primary bronchial carcinoid tumour",
+            "Circumvents pulmonary monoamine oxidase filtration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical and microbiological confirmation of infective endocarditis utilizes the **modified Duke diagnostic criteria**, integrating clinical, microbiological, and echocardiographic parameters. Definite infective endocarditis requires two major criteria, one major and three minor criteria, or five minor criteria. The major criteria comprise persistently positive blood cultures with typical microorganisms (such as viridans streptococci, Streptococcus gallolyticus, or Staphylococcus aureus) and echocardiographic evidence of endocardial involvement (oscillating intracardiac mass/vegetation, myocardial ring abscess, or new partial dehiscence of a prosthetic valve).",
+      "say": "We confirm infective endocarditis using the modified Duke criteria. Definite endocarditis requires two major criteria, or one major plus three minor criteria. The two major criteria are persistently positive blood cultures drawn separately with typical organisms like viridans streptococci or Staph aureus, and echocardiographic confirmation of an oscillating vegetation, an annular abscess, or new dehiscence of a prosthetic valve.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "a",
-            "label": "Suspicion raised clinically"
+            "id": "d1",
+            "label": "Suspected Endocarditis (Fever + Murmur)"
           },
           {
-            "id": "b",
-            "label": "Transthoracic echo first"
+            "id": "d2",
+            "label": "Three Blood Culture Sets"
           },
           {
-            "id": "c",
-            "label": "Transoesophageal if prosthesis or doubt"
+            "id": "d3",
+            "label": "Transesophageal Echo (TEE)"
           },
           {
-            "id": "d",
-            "label": "CT or PET imaging for complications selected"
+            "id": "d4",
+            "label": "Check Modified Duke Criteria"
+          },
+          {
+            "id": "d5",
+            "label": "Targeted IV Antimicrobials 4-6 Wks"
           }
         ],
         "edges": [
           [
-            "a",
-            "b"
+            "d1",
+            "d2",
+            "Prior to Antibiotics"
           ],
           [
-            "b",
-            "c"
+            "d1",
+            "d3",
+            "High Sensitivity for Vegetations"
           ],
           [
-            "c",
-            "d"
+            "d2",
+            "d4",
+            "Persistent Bacteremia (Major)"
+          ],
+          [
+            "d3",
+            "d4",
+            "Oscillating Mass (Major)"
+          ],
+          [
+            "d4",
+            "d5",
+            "Fulfills 2 Major or 1 Major + 3 Minor"
           ]
         ]
       }
+    },
+    {
+      "tx": "Successful eradication of infective endocarditis requires four to six weeks of high-dose, parenteral, **bactericidal antimicrobial regimens**. Because microorganisms reside embedded within dense avascular fibrin-platelet vegetations, host phagocytic neutrophils cannot penetrate the lesion, rendering bacteriostatic antibiotics ineffective. Native valve endocarditis caused by viridans streptococci is treated with intravenous aqueous penicillin G or ceftriaxone, often combined with synergistic gentamicin. Staphylococcus aureus native valve endocarditis requires intravenous flucloxacillin or nafcillin for methicillin-sensitive strains, and intravenous vancomycin or daptomycin for MRSA.",
+      "say": "Treating infective endocarditis requires prolonged, intravenous bactericidal antibiotic therapy for four to six weeks. Because bacteria are shielded deep within an avascular fortress of fibrin and platelets, host neutrophils cannot reach them, so bacteriostatic agents fail. Native valve viridans streptococci are treated with penicillin G or ceftriaxone. Staphylococcus aureus requires flucloxacillin, or vancomycin if methicillin-resistant, monitoring blood cultures daily until clearance is confirmed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medical Antimicrobial Therapy",
+          "points": [
+            "Parenteral bactericidal agents for 4 to 6 weeks",
+            "Penicillin G or ceftriaxone for viridans streptococci",
+            "Vancomycin or flucloxacillin for staphylococci",
+            "Monitors daily blood cultures to confirm clearance"
+          ]
+        },
+        "right": {
+          "title": "Indications for Urgent Surgery",
+          "points": [
+            "Acute refractory congestive heart failure",
+            "Persistent bacteremia despite 7-10 days of therapy",
+            "Fungal endocarditis or multi-drug resistant strains",
+            "Annular ring abscess or large mobile vegetation >10 mm"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which anatomical distribution of valvular vegetations is unique to Libman-Sacks endocarditis in systemic lupus erythematosus?",
+      "options": [
+        "Vegetations develop on both flow and non-flow surfaces, chordae tendineae, and mural endocardium",
+        "Vegetations are strictly confined to the lines of closure on the atrial surface of the mitral valve",
+        "Vegetations develop exclusively on the ventricular surface of the aortic and pulmonary valves",
+        "Vegetations are confined strictly to the tricuspid valve leaflets with pulmonary stenosis"
+      ],
+      "correct": 0,
+      "explain": "Libman-Sacks vegetations uniquely appear on both upper and lower surfaces of valve leaflets, on chordae tendineae, and on adjacent mural endocardium, unlike other endocarditis forms."
+    },
+    {
+      "q": "Why is carcinoid heart disease almost exclusively restricted to the right-sided cardiac valves (tricuspid and pulmonary)?",
+      "options": [
+        "Circulating serotonin is catabolized by pulmonary endothelial monoamine oxidase before reaching the left heart",
+        "The left ventricle generates high systolic shear forces that wash away serotonin receptor complexes",
+        "The pulmonary valve possesses specialized serotonin receptors lacking on the aortic valve",
+        "Enterochromaffin tumor cells embolize directly to the right ventricular myocardium alone"
+      ],
+      "correct": 0,
+      "explain": "Pulmonary endothelial cells express monoamine oxidase (MAO), which rapidly metabolizes serotonin into inactive 5-HIAA as blood passes through the lungs, sparing the left-sided valves."
+    },
+    {
+      "q": "What microscopic feature distinguishes non-bacterial thrombotic endocarditis (marantic endocarditis) from infective endocarditis?",
+      "options": [
+        "Sterile vegetations composed purely of platelets and fibrin without inflammatory cells or microorganisms",
+        "Dense colonies of gram-positive cocci embedded in an intense neutrophilic infiltrate",
+        "Granulomatous Aschoff bodies with central fibrinoid necrosis and caterpillar cells",
+        "Large myxomatous collections of basophilic glycosaminoglycans expanding the spongiosa"
+      ],
+      "correct": 0,
+      "explain": "Marantic endocarditis vegetations are sterile, bland thrombi made purely of platelets and fibrin, completely lacking microorganisms or underlying destructive valve inflammation."
     }
   ]
 }
