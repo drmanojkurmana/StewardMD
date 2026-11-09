@@ -1,0 +1,223 @@
+{
+ "key": "ped-preterm-lbw-prematurity",
+ "v": 1,
+ "module": "ped-preterm-lbw",
+ "subject": "paediatrics",
+ "title": "Prematurity, Low Birth Weight and Ballard Gestational Assessment",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Any neonate born before thirty-seven completed weeks of gestation is classified as **preterm birth**. Stratification categorizes extremely preterm as under twenty-eight weeks, very preterm as twenty-eight to thirty-one weeks, moderate preterm as thirty-two to thirty-three weeks, and late preterm as thirty-four to thirty-six completed weeks. Late preterms account for seventy percent of all preterm births.",
+   "say": "Preterm birth is delivery before thirty-seven weeks, categorized from extremely to late preterm.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-definitions.webp",
+    "alt": "Neonatal definitions, gestational age classification and growth curves.",
+    "caption": "Classification of gestational age, birth weight percentiles, and growth curves. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Birth weight definitions classify an infant weighing under twenty-five hundred grams as **low birth weight**. A birth weight under fifteen hundred grams defines very low birth weight, while a weight under one thousand grams defines extremely low birth weight. Low birth weight arises from two distinct physiological pathways: preterm delivery, intrauterine fetal growth restriction, or a combination of both.",
+   "say": "Low birth weight is under twenty-five hundred grams, encompassing both preterm and growth-restricted infants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Weight Category",
+     "Birth Weight Threshold",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Low birth weight (LBW)",
+      "Under 2500 grams",
+      "Increased risk of hypothermia and hypoglycemia"
+     ],
+     [
+      "Very low birth weight (VLBW)",
+      "Under 1500 grams",
+      "High incidence of RDS, IVH, and NEC"
+     ],
+     [
+      "Extremely low birth weight (ELBW)",
+      "Under 1000 grams",
+      "Requires tertiary NICU care and ventilatory support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An infant whose birth weight falls below the tenth percentile for gestational age is classified as **small for gestational age**. While some small infants are constitutionally small and physiologically healthy, others suffer pathological intrauterine growth restriction resulting from maternal vascular disease, severe placental insufficiency, fetal chromosomal aneuploidy, or congenital intrauterine infections.",
+   "say": "Small for gestational age denotes weight below the tenth percentile, encompassing constitutionally small and growth-restricted infants.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SGA (Statistical Definition)",
+     "points": [
+      "Birth weight below 10th percentile",
+      "Includes constitutionally small normal infants",
+      "Based strictly on population growth standards"
+     ]
+    },
+    "right": {
+     "title": "IUGR (Pathological Process)",
+     "points": [
+      "Failure to achieve genetic growth potential",
+      "Demonstrable in utero fetal deceleration",
+      "Associated with abnormal umbilical artery Doppler"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Growth restriction is divided into symmetrical and asymmetrical patterns. In **asymmetrical growth restriction**, late uteroplacental insufficiency compromises liver glycogen storage and abdominal fat while preferentially sparing blood flow to the fetal brain. Consequently, the head circumference remains normal while abdominal circumference and birth weight are severely reduced, resulting in a low Ponderal index.",
+   "say": "Asymmetrical growth restriction spares the head while depleting liver glycogen and abdominal fat.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Symmetrical IUGR",
+     "Asymmetrical IUGR"
+    ],
+    "rows": [
+     [
+      "Timing of insult",
+      "Early first or second trimester",
+      "Late third trimester (after 28 weeks)"
+     ],
+     [
+      "Primary etiology",
+      "Chromosomal defects, TORCH infections",
+      "Uteroplacental insufficiency, preeclampsia"
+     ],
+     [
+      "Brain sparing effect",
+      "Absent (head and body equally small)",
+      "Present (head normal, small abdomen)"
+     ],
+     [
+      "Ponderal index",
+      "Normal Ponderal index",
+      "Low Ponderal index (scrawny appearance)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate clinical estimation of gestational age within forty-eight hours of birth utilizes the **New Ballard score**. By assigning numerical values to six physical and six neurological criteria, the score accurately estimates gestational age between twenty and forty-four weeks within plus or minus two weeks, even in extremely premature neonates.",
+   "say": "The New Ballard score evaluates physical and neurological maturity to assess gestational age.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physical Maturity Criteria",
+     "points": [
+      "Skin texture, opacity, and peeling",
+      "Lanugo distribution over back",
+      "Plantar creases, breast bud, ear cartilage, genitalia"
+     ]
+    },
+    "right": {
+     "title": "Neuromuscular Criteria",
+     "points": [
+      "Resting posture and square window angle",
+      "Arm recoil and popliteal angle",
+      "Scarf sign and heel-to-ear extension"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Physical maturity evaluation focuses on skin texture, sole creases, breast buds, and **external genitalia maturation**. Extremely preterm skin is sticky, gelatinous, and translucent with prominent subcutaneous veins, maturing to parchment-like cracked skin in post-term infants. Plantar creases progress from none at twenty-four weeks, to anterior transverse creases at thirty-two weeks, to full sole creasing at term.",
+   "say": "Skin maturation, anterior sole creases, and descending testes track physical gestational age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gestational Feature",
+     "Preterm (28 to 32 Weeks)",
+     "Full Term (38 to 40 Weeks)"
+    ],
+    "rows": [
+     [
+      "Plantar creases",
+      "Faint red marks, anterior crease only",
+      "Deep creases across anterior two-thirds of sole"
+     ],
+     [
+      "Breast nodule",
+      "Barely perceptible, no raised areola",
+      "Raised areola with 5 to 10 mm glandular bud"
+     ],
+     [
+      "Male genitalia",
+      "Undescended testes, smooth scrotum",
+      "Testes descended into rugated scrotum"
+     ],
+     [
+      "Female genitalia",
+      "Prominent clitoris, gaping labia",
+      "Labia majora completely cover labia minora"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurological testing assesses increasing passive flexor tone as gestation advances. The **square window wrist angle** measures wrist flexibility by flexing the infant's hand toward the volar forearm. In extremely preterm infants, the angle measures ninety degrees, progressively diminishing to zero degrees in full-term infants due to maturing musculoskeletal tone and ligamentous resistance.",
+   "say": "The square window angle diminishes from ninety degrees in preterms to zero degrees at full term.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neuromuscular Sign",
+     "Preterm Response",
+     "Term Response"
+    ],
+    "rows": [
+     [
+      "Square window angle",
+      "90 degrees (immature flexor resistance)",
+      "0 degrees (hand lies flat on forearm)"
+     ],
+     [
+      "Arm recoil",
+      "Slow, incomplete, or absent recoil",
+      "Brisk, immediate flexion to chest"
+     ],
+     [
+      "Popliteal angle",
+      "Wide angle (140 to 180 degrees)",
+      "Resistant acute angle (under 90 degrees)"
+     ],
+     [
+      "Scarf sign",
+      "Elbow easily crosses contralateral axilla",
+      "Elbow cannot cross midline of chest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Premature infants face substantial physiological handicaps resulting from **multi-organ system immaturity**. Surfactant deficiency causes respiratory distress syndrome, an immature subependymal germinal matrix predisposes to intraventricular hemorrhage, poor renal tubular concentrating ability impairs fluid balance, and hepatic enzyme immaturity delays bilirubin clearance and drug metabolism, mandating specialized neonatal intensive care.",
+   "say": "Multi-organ immaturity in preterms causes respiratory failure, intracranial bleeds, and metabolic derangements.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Critical Organ Vulnerabilities",
+     "points": [
+      "Lungs: surfactant deficiency and RDS",
+      "Brain: fragile germinal matrix and IVH risk",
+      "Gut: mucosal ischemia and NEC risk"
+     ]
+    },
+    "right": {
+     "title": "Metabolic Vulnerabilities",
+     "points": [
+      "Impaired glucose homeostasis and hypoglycemia",
+      "Poor non-shivering thermogenesis",
+      "Immature immune system and nosocomial sepsis"
+     ]
+    }
+   }
+  }
+ ]
+}

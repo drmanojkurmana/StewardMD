@@ -1,0 +1,223 @@
+{
+ "key": "ped-neonatal-jaundice-physiological-jaundice",
+ "v": 1,
+ "module": "ped-neonatal-jaundice",
+ "subject": "paediatrics",
+ "title": "Neonatal Jaundice, Kramer Staging and Kernicterus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Yellowish discolouration of the skin and sclera resulting from bilirubin accumulation is **neonatal hyperbilirubinemia**, visible when serum levels exceed five milligrams per deciliter. Neonates possess higher circulating red cell mass with a shortened lifespan of eighty days, combined with immature hepatic uridine diphosphate glucuronosyltransferase enzyme activity and enhanced enterohepatic reabsorption.",
+   "say": "Neonatal jaundice becomes visible at five milligrams per deciliter due to high red cell turnover and immature clearance.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-jaundice.webp",
+    "alt": "Clinical assessment of neonatal jaundice showing Kramer dermal zones and phototherapy.",
+    "caption": "Kramer dermal icterus zones and phototherapy isomerization mechanism. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical differentiation requires separating benign physiological jaundice from pathological hyperbilirubinemia. Classic **physiological neonatal jaundice** appears after twenty-four hours of life, peaks on day three to four at twelve to fifteen milligrams per deciliter in term infants, and completely resolves by ten to fourteen days. The infant remains clinically active, feeds vigorously, and passes normal yellow stools.",
+   "say": "Physiological jaundice appears after twenty-four hours, peaks on day four, and clears by two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Physiological Jaundice",
+     "Pathological Jaundice"
+    ],
+    "rows": [
+     [
+      "Onset of jaundice",
+      "After 24 hours of life (day 2 to 3)",
+      "Within first 24 hours of life"
+     ],
+     [
+      "Rate of bilirubin rise",
+      "Under 5 mg/dL per 24 hours",
+      "Exceeds 5 mg/dL per 24 hours (0.2 mg/dL/hr)"
+     ],
+     [
+      "Peak serum bilirubin",
+      "Under 15 mg/dL in term infants",
+      "Exceeds 15 to 17 mg/dL in term infants"
+     ],
+     [
+      "Duration of jaundice",
+      "Resolves by 10 to 14 days",
+      "Persists beyond 14 days in term (21 days preterm)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside non-invasive visual evaluation relies on **Kramer dermal icterus zones**, assessing cephalocaudal progression under natural daylight. Jaundice advances in an orderly fashion: Zone one covers head and neck (approx 5 mg/dL), Zone two reaches the umbilicus (approx 8 mg/dL), Zone three reaches the knees (approx 12 mg/dL), and Zone five involves the palms and soles (>15 mg/dL).",
+   "say": "Kramer zones track cephalocaudal jaundice progression from five on the face to over fifteen on palms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kramer Zone",
+     "Dermal Region of Jaundice",
+     "Estimated Serum Bilirubin"
+    ],
+    "rows": [
+     [
+      "Zone 1",
+      "Head and neck alone",
+      "4 to 6 mg/dL"
+     ],
+     [
+      "Zone 2",
+      "Upper trunk down to the umbilicus",
+      "6 to 8 mg/dL"
+     ],
+     [
+      "Zone 3",
+      "Lower abdomen and thighs down to knees",
+      "8 to 12 mg/dL"
+     ],
+     [
+      "Zone 4",
+      "Arms and lower legs below knees",
+      "12 to 14 mg/dL"
+     ],
+     [
+      "Zone 5",
+      "Palms of hands and soles of feet",
+      "15 mg/dL or higher (demands urgent testing)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assessing the risk of progressive hyperbilirubinemia utilizes the **Bhutani hour specific nomogram**. By plotting total serum bilirubin against exact postnatal age in hours, the nomogram stratifies infants into low, intermediate, and high-risk zones. Values plotted above the ninety-fifth percentile designate high risk, requiring immediate diagnostic laboratory evaluation, intensified monitoring, and phototherapy.",
+   "say": "The Bhutani nomogram plots hour-specific bilirubin to identify neonates at risk of severe hyperbilirubinemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nomogram Risk Zones",
+     "points": [
+      "High risk zone: above 95th percentile",
+      "High-intermediate: 75th to 95th percentile",
+      "Low risk zone: below 40th percentile"
+     ]
+    },
+    "right": {
+     "title": "Clinical Applications",
+     "points": [
+      "Guides safe discharge timing from nursery",
+      "Determines follow-up schedule within 24 to 48 hours",
+      "Directs threshold for initiating phototherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unconjugated hydrophobic bilirubin crosses the blood-brain barrier when binding capacity is saturated, producing **acute bilirubin encephalopathy**. Phase one manifests with lethargy, poor feeding, and generalized hypotonia. Phase two is characterized by irritability, high-pitched crying, retrocollis, and opisthotonos. Phase three features stupor, apnea, seizures, and death from cardiorespiratory arrest.",
+   "say": "Acute bilirubin encephalopathy progresses from lethargy to hypertonia, retrocollis, and seizures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Phase",
+     "Neurological Signs",
+     "Reversibility"
+    ],
+    "rows": [
+     [
+      "Phase 1 (Early)",
+      "Lethargy, poor suck, loss of Moro, hypotonia",
+      "Fully reversible with immediate exchange transfusion"
+     ],
+     [
+      "Phase 2 (Intermediate)",
+      "High-pitched cry, hypertonia, retrocollis, fever",
+      "Partially reversible, high risk of permanent injury"
+     ],
+     [
+      "Phase 3 (Advanced)",
+      "Pronounced opisthotonos, coma, seizures, apnea",
+      "Irreversible cerebral damage or mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic irreversible neurological sequelae from bilirubin deposition in the basal ganglia is **chronic kernicterus**. Autopsy demonstrates intense yellow staining and neuronal necrosis within the globus pallidus, subthalamic nucleus, and auditory brainstem nuclei. Survivors exhibit choreoathetoid cerebral palsy, sensorineural hearing loss, dental enamel hypoplasia, and upward gaze palsy.",
+   "say": "Chronic kernicterus features choreoathetosis, sensorineural hearing loss, and upward gaze palsy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anatomical Target Nuclei",
+     "points": [
+      "Globus pallidus and subthalamic nuclei",
+      "Auditory brainstem and cochlear nuclei",
+      "Oculomotor cranial nerve nuclei in brainstem"
+     ]
+    },
+    "right": {
+     "title": "Tetrad of Chronic Kernicterus",
+     "points": [
+      "Choreoathetoid cerebral palsy and dystonia",
+      "High-frequency sensorineural deafness",
+      "Impaired vertical upward conjugate gaze"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The primary therapeutic intervention for neonatal hyperbilirubinemia is **narrow spectrum phototherapy**. Blue-green light with wavelengths between 460 and 490 nanometers penetrates skin capillaries, transforming toxic unconjugated 4Z,15Z-bilirubin into configurational and structural photoisomers. The major structural photoisomer is lumirubin, an irreversible water-soluble product excreted rapidly in bile and urine without requiring hepatic glucuronidation.",
+   "say": "Phototherapy converts bilirubin into water-soluble lumirubin, which is excreted without hepatic conjugation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Photochemical Reaction",
+     "Biochemical Product",
+     "Elimination Pathway"
+    ],
+    "rows": [
+     [
+      "Structural isomerization",
+      "Lumirubin (irreversible)",
+      "Rapidly excreted in bile and urine without conjugation"
+     ],
+     [
+      "Configurational isomerization",
+      "4Z,15E-bilirubin (reversible)",
+      "Excreted in bile, can revert to unconjugated bilirubin"
+     ],
+     [
+      "Photo-oxidation",
+      "Small polar pyrrole fragments",
+      "Excreted slowly in urine, minor clinical pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When serum bilirubin reaches critical neurotoxic thresholds or fails to respond to intensive phototherapy, **double volume exchange transfusion** is performed. Removing twice the infant's circulating blood volume replaces eighty-five percent of circulating erythrocytes and lowers serum bilirubin by half. Performed via an umbilical venous catheter, it removes antibody-coated red blood cells and maternal antibodies in hemolytic disease.",
+   "say": "Double volume exchange transfusion replaces eighty-five percent of red cells and removes toxic bilirubin rapidly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Procedural Technique",
+     "points": [
+      "Double circulating volume (160 to 180 mL/kg)",
+      "Aliquots of 5 to 10 mL/kg pushed and pulled",
+      "Infuse 1 mL calcium gluconate per 100 mL blood"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Objectives",
+     "points": [
+      "Halves total circulating serum bilirubin",
+      "Removes maternal isoantibodies (anti-D, anti-A)",
+      "Corrects severe anemia and heart failure"
+     ]
+    }
+   }
+  }
+ ]
+}
