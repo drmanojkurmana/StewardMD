@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-acute-leukaemias",
+  "subject": "pathology",
+  "title": "Acute Myeloid Leukaemia, Auer Rods, and Acute Promyelocytic Leukaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute myeloid leukaemia floods marrow and blood with myeloblasts that crowd out normal production, producing anaemia, infection, and bleeding within weeks, with twenty percent blasts the traditional diagnostic threshold. The blast defined emergency is **acute myeloid leukaemia (AML)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "AML is marrow failure by blast occupation: anaemia, infection, and bleeding arrive together within weeks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-leukemia-fig1.webp",
+        "alt": "Acute myeloid leukaemia pathophysiology",
+        "caption": "Acute myeloid leukaemia pathophysiology with blast expansion and marrow failure."
+      }
+    },
+    {
+      "tx": "Pink needle bundles inside blast cytoplasm, crystallised azurophilic granules, are pathognomonic of myeloid blasts and abundant in promyelocytic leukaemia, instantly separating AML from lymphoblastic disease on a good film. The crystal bundle is the **Auer rod**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "One Auer rod settles myeloid lineage; bundles of them shout promyelocytic leukaemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+        "alt": "Myeloblast with Auer rods",
+        "caption": "Myeloblast with Auer rods, the crystalline signature of acute myeloid leukaemia."
+      }
+    },
+    {
+      "tx": "Myeloperoxidase cytochemistry stains myeloblast granules while lymphoblasts stay negative or show block PAS, a bench separation now refined by flow cytometry immunophenotyping for lineage and genetics. The classic cytochemical stain is **myeloperoxidase (MPO)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Myeloperoxidase positivity marks myeloid blasts; flow cytometry now delivers lineage and genetics together.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AML blasts",
+          "points": [
+            "Auer rods may be present",
+            "Myeloperoxidase positive",
+            "Flow: CD13, CD33, MPO"
+          ]
+        },
+        "right": {
+          "title": "ALL blasts",
+          "points": [
+            "No Auer rods, scant cytoplasm",
+            "Myeloperoxidase negative",
+            "Flow: TdT, B or T lineage markers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acute promyelocytic leukaemia arrests maturation at promyelocytes packed with granules and Auer bundles, releasing procoagulants that cause disseminated intravascular coagulation and lethal early bleeding. Its translocation creates PML-RARA; the emergency subtype is **acute promyelocytic leukaemia (APL)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "APL bleeds by DIC before chemotherapy starts; suspect it on granules and coagulopathy and act the same day.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "t(15;17) creates PML-RARA fusion"
+          },
+          {
+            "id": "b",
+            "label": "Promyelocytes arrest and accumulate"
+          },
+          {
+            "id": "c",
+            "label": "Granules trigger DIC and bleeding"
+          },
+          {
+            "id": "d",
+            "label": "ATRA forces differentiation, arsenic degrades fusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The t(15;17) PML-RARA fusion blocks differentiation until all-trans retinoic acid releases the block and arsenic trioxide degrades the fusion, converting the most lethal acute leukaemia into the most curable. That targeted miracle is **ATRA and arsenic therapy for APL**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "ATRA plus arsenic turned APL from the deadliest to the most curable acute leukaemia; start ATRA on suspicion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Entity",
+          "Genetics",
+          "Treatment pearl"
+        ],
+        "rows": [
+          [
+            "APL",
+            "t(15;17) PML-RARA",
+            "ATRA on suspicion, do not wait"
+          ],
+          [
+            "AML, favourable",
+            "t(8;21), inv(16)",
+            "Chemotherapy sensitive"
+          ],
+          [
+            "AML, adverse",
+            "Complex karyotype, TP53",
+            "Transplant evaluation early"
+          ],
+          [
+            "ALL",
+            "Hyperdiploidy, ETV6-RUNX1 children",
+            "Protocol chemotherapy, CNS prophylaxis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Risk in AML is now genetic: favourable core binding factor changes, intermediate normal karyotypes with mutations such as NPM1 and FLT3, and adverse complex or TP53 disease steer chemotherapy, targeted drugs, and transplant. The steering system is **cytogenetic and molecular AML risk stratification**.",
+      "say": "Genetics, not age alone, now assigns AML risk and decides who earns a transplant in first remission.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favourable risk",
+          "points": [
+            "t(8;21), inv(16), APL",
+            "Chemotherapy based cure likely",
+            "Transplant reserved for relapse"
+          ]
+        },
+        "right": {
+          "title": "Adverse risk",
+          "points": [
+            "Complex karyotype, TP53 mutation",
+            "Relapse despite chemotherapy",
+            "Early allogeneic transplant sought"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Leucostasis in hyperleucocytosis above one hundred thousand blasts sludges lung and brain microcirculation with dyspnoea and confusion, demanding cytoreduction urgency, while tumour lysis threatens kidneys after chemotherapy. The sludging emergency is **leucostasis (symptomatic hyperleucocytosis)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Blasts above one hundred thousand with breathlessness or confusion mean leucostasis; cytoreduce urgently.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Emergency",
+          "Mechanism",
+          "First moves"
+        ],
+        "rows": [
+          [
+            "Leucostasis",
+            "Blast sludging in lung and brain",
+            "Hydroxycarbamide, leukapheresis selected"
+          ],
+          [
+            "DIC of APL",
+            "Promyelocyte procoagulants",
+            "ATRA, fibrinogen and platelet support"
+          ],
+          [
+            "Tumour lysis",
+            "Cell breakdown after therapy",
+            "Hydration, rasburicase, electrolytes"
+          ],
+          [
+            "Febrile neutropenia",
+            "No neutrophil defence",
+            "Cultures, broad spectrum antibiotics fast"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Measurable residual disease by flow or molecular monitoring after remission predicts relapse months before blood counts move, converting follow up into pre-emptive strategy and transplant timing. That surveillance concept is **measurable residual disease (MRD) monitoring**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "MRD surveillance hears relapse whispering months before the blood count shouts; transplant timing follows it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Remission achieved morphologically"
+          },
+          {
+            "id": "b",
+            "label": "MRD measured by flow or PCR"
+          },
+          {
+            "id": "c",
+            "label": "Rising MRD warns of relapse"
+          },
+          {
+            "id": "d",
+            "label": "Pre-emptive therapy or transplant planned"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

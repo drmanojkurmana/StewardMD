@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "pat-megaloblastic",
+  "subject": "pathology",
+  "title": "Macro-Ovalocytes, Subacute Combined Degeneration, and Ineffective Erythropoiesis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Oval macrocytes, red cells both large and oval rather than round, are the red cell signature of megaloblastic marrow, distinguishing it from the round macrocytes of alcohol, liver disease, and hypothyroidism. Their shape on film names them **macro-ovalocytes**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Oval large red cells mean megaloblastic marrow; round large cells point to alcohol, liver, or thyroid instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Megaloblastic macrocytosis",
+          "points": [
+            "Macro-ovalocytes present",
+            "Hypersegmented neutrophils",
+            "Pancytopenia in severe disease"
+          ]
+        },
+        "right": {
+          "title": "Non-megaloblastic macrocytosis",
+          "points": [
+            "Round macrocytes, no hypersegmentation",
+            "Alcohol, liver disease, hypothyroidism",
+            "Drugs: antiretrovirals, metformin context"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "B12 deficiency demyelinates dorsal and lateral columns of the cord, producing symmetrical paraesthesia, loss of vibration and position sense, spastic weakness, and extensor plantars, with cognitive change beside it. Early treatment reverses symptoms, delay fixes them; the cord syndrome is **subacute combined degeneration**.",
+      "say": "Dorsal plus lateral column signs with B12 deficiency spell subacute combined degeneration; treat before it becomes permanent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/b12-deficiency-fig1.webp",
+        "alt": "Subacute combined degeneration pathology in B12 deficiency",
+        "caption": "Subacute combined degeneration of the cord, the neurological emergency of vitamin B12 deficiency."
+      }
+    },
+    {
+      "tx": "Metabolite assays rescue borderline B12 levels: methylmalonic acid accumulates only when B12 dependent conversion fails, while homocysteine rises in both B12 and folate deficiency, so their combination separates the twins. The B12 specific metabolite is **methylmalonic acid**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Methylmalonic acid separates B12 from folate deficiency when serum levels sit in the grey zone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/megaloblastic-anemias-fig2.webp",
+        "alt": "Vitamin B12 and folate metabolism",
+        "caption": "Vitamin B12 and folate metabolism showing methylmalonic acid and homocysteine pathways."
+      }
+    },
+    {
+      "tx": "Homocysteine rises when either vitamin fails to remethylate it to methionine, linking megaloblastic disease to vascular risk discussions, but its diagnostic job here is sensitivity: normal homocysteine argues against both deficiencies. The shared metabolite is **homocysteine**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Homocysteine is the sensitive shared marker; methylmalonic acid is the specific B12 witness beside it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "B12",
+          "Folate",
+          "MMA",
+          "Homocysteine"
+        ],
+        "rows": [
+          [
+            "B12 deficiency",
+            "Low",
+            "Normal",
+            "High",
+            "High"
+          ],
+          [
+            "Folate deficiency",
+            "Normal",
+            "Low",
+            "Normal",
+            "High"
+          ],
+          [
+            "Combined deficiency",
+            "Low",
+            "Low",
+            "High",
+            "High"
+          ],
+          [
+            "Normal",
+            "Normal",
+            "Normal",
+            "Normal",
+            "Normal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Much megaloblastic production never reaches blood: defective precursors undergo apoptosis inside marrow, releasing LDH and indirect bilirubin with a reticulocyte count inappropriately low for the anaemia depth. That intramedullary destruction is **ineffective erythropoiesis**, shared with thalassaemia major. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "High LDH, indirect bilirubin, yet low reticulocytes: the marrow is destroying its own defective output.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "DNA defective precursors proliferate"
+          },
+          {
+            "id": "b",
+            "label": "Precursors apoptose inside marrow"
+          },
+          {
+            "id": "c",
+            "label": "LDH and indirect bilirubin released"
+          },
+          {
+            "id": "d",
+            "label": "Reticulocytes stay inappropriately low"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-megaloblastic macrocytosis must be actively excluded before vitamins are blamed: alcohol directly poisons marrow, liver disease loads red cell membranes with lipid, hypothyroidism slows production, and reticulocytosis itself enlarges mean volume. The umbrella is **non-megaloblastic macrocytosis**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Round macrocytes without hypersegmentation demand alcohol, liver, thyroid, and drug histories before vitamin blame.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Check first",
+          "points": [
+            "Alcohol intake, liver enzymes",
+            "Thyroid function tests",
+            "Drug list: zidovudine, methotrexate"
+          ]
+        },
+        "right": {
+          "title": "Still megaloblastic clues",
+          "points": [
+            "Oval macrocytes, hypersegmentation",
+            "Low B12 or folate, raised MMA",
+            "Glossitis, neurology, pancytopenia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nitrous oxide abuse oxidises B12 into inactivity and can precipitate cord degeneration in young patients with normal serum B12 levels, a modern trap in recreational exposure. Functional deficiency with normal levels defines **nitrous oxide B12 inactivation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Nitrous oxide can paralyse the cord with a normal B12 level; ask young neurology patients about it directly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trap",
+          "Why it misleads",
+          "Rescue"
+        ],
+        "rows": [
+          [
+            "Nitrous oxide abuse",
+            "B12 level normal, function lost",
+            "Stop exposure, replace B12"
+          ],
+          [
+            "Recent transfusion",
+            "Donor cells dilute macrocytes",
+            "Film history, repeat testing"
+          ],
+          [
+            "Folate given first",
+            "Blood improves, cord worsens",
+            "Secure B12 before folate"
+          ],
+          [
+            "Borderline B12 level",
+            "Assay grey zone",
+            "MMA and homocysteine decide"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Response auditing closes the lesson: reticulocytes surge within a week, hypersegmentation fades, LDH falls, and potassium can drop as new cells consume it, while neurology recovers over months if treated early. Failure to respond reopens the diagnosis; that audit is **treatment response review**.",
+      "say": "Reticulocytes in a week prove the diagnosis; absent response means rethink cause, adherence, or a second disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Vitamins replaced, cause addressed"
+          },
+          {
+            "id": "b",
+            "label": "Reticulocyte surge by day seven"
+          },
+          {
+            "id": "c",
+            "label": "Potassium watched during surge"
+          },
+          {
+            "id": "d",
+            "label": "Neurology reviewed over months"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

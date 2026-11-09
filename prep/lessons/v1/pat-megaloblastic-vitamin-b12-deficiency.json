@@ -1,0 +1,228 @@
+{
+  "v": 1,
+  "module": "pat-megaloblastic",
+  "subject": "pathology",
+  "title": "Vitamin B12 Deficiency, Folate Deficiency, and Pernicious Anaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "When DNA synthesis stalls for want of vitamin B12 or folate, cytoplasm matures faster than nucleus, producing large fragile red cell precursors that die in marrow and macrocytes in blood. Hypersegmented neutrophils announce the process on film; the shared morphology is **megaloblastic anaemia**.",
+      "say": "B12 or folate lack stalls DNA synthesis and creates megaloblastic blood: macrocytes plus hypersegmented neutrophils.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/megaloblastic-and-macrocytic-anaemias-fig1.webp",
+        "alt": "Megaloblastic anaemia cytological features",
+        "caption": "Megaloblastic anaemia cytology with macro-ovalocytes and hypersegmented neutrophils."
+      }
+    },
+    {
+      "tx": "Vitamin B12 absorption is a relay: gastric acid frees it from food, intrinsic factor from parietal cells carries it, and ileal receptors absorb the complex, so gastrectomy, ileal disease, and vegan diets each break a different leg. The carrier protein is **intrinsic factor**.",
+      "say": "Acid frees B12, intrinsic factor carries it, and the ileum absorbs it; each step is a separate cause of deficiency.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acid and pepsin free B12 from food"
+          },
+          {
+            "id": "b",
+            "label": "Intrinsic factor binds B12 in duodenum"
+          },
+          {
+            "id": "c",
+            "label": "Ileal receptors absorb the complex"
+          },
+          {
+            "id": "d",
+            "label": "Transcobalamin delivers B12 to marrow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autoimmune destruction of gastric parietal cells removes both acid and intrinsic factor, producing achlorhydria, high gastrin, and B12 malabsorption with associated thyroid and vitiligo autoimmunity. Antibodies against intrinsic factor are highly specific; the disease is **pernicious anaemia**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Pernicious anaemia is autoimmune gastritis destroying parietal cells; intrinsic factor antibodies make the diagnosis specific.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pernicious-anemia-fig1.webp",
+        "alt": "Pernicious anaemia gastric pathology",
+        "caption": "Pernicious anaemia gastric pathology with parietal cell loss and intestinal metaplasia."
+      }
+    },
+    {
+      "tx": "The historical Schilling test traced radiolabelled B12 excretion with and without intrinsic factor to localise malabsorption, and although assays replaced it, its logic still teaches how to think about absorption failure. That staged absorption logic is the **Schilling test principle**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "The Schilling test is historical, but its with and without intrinsic factor logic still teaches absorption thinking.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modern first tests",
+          "points": [
+            "Serum B12 and folate levels",
+            "Methylmalonic acid and homocysteine",
+            "Intrinsic factor and parietal cell antibodies"
+          ]
+        },
+        "right": {
+          "title": "Schilling era logic",
+          "points": [
+            "Labelled B12 excretion measured",
+            "Correction by intrinsic factor localised defect",
+            "Replaced by antibody and metabolite assays"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Neutrophils with six or more nuclear lobes, or more than five percent with five lobes, are the earliest and most sensitive film sign, appearing before anaemia and persisting days into treatment. The sign is the **hypersegmented neutrophil**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Hypersegmented neutrophils appear before the anaemia does; count the lobes on every macrocytic film.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "B12 deficiency",
+          "Folate deficiency"
+        ],
+        "rows": [
+          [
+            "Neurology",
+            "Subacute combined degeneration, neuropathy",
+            "Absent"
+          ],
+          [
+            "Homocysteine",
+            "Raised",
+            "Raised"
+          ],
+          [
+            "Methylmalonic acid",
+            "Raised",
+            "Normal"
+          ],
+          [
+            "Onset speed",
+            "Years of stores, slow",
+            "Months of stores, faster"
+          ],
+          [
+            "Pregnancy concern",
+            "Less central",
+            "Neural tube defect prevention"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Folate deficiency arrives faster because stores last months, not years: poor diet, alcohol, pregnancy demand, haemolysis, and antifolate drugs such as methotrexate and trimethoprim dominate its causes. Neural tube prevention made periconception folate public health; the vitamin is **folate (vitamin B9)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Folate stores last months, B12 stores last years; that clock separates their histories at the bedside.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Folate deficiency causes",
+          "points": [
+            "Poor diet, alcohol excess",
+            "Pregnancy and haemolysis demand",
+            "Methotrexate, trimethoprim blockade"
+          ]
+        },
+        "right": {
+          "title": "B12 deficiency causes",
+          "points": [
+            "Pernicious anaemia, gastrectomy",
+            "Ileal Crohn disease or resection",
+            "Strict vegan diet, metformin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Never give folate alone to an undifferentiated megaloblastic patient, because the blood may improve while B12 neurology worsens silently toward irreversible cord damage. Check B12 first or treat both; that safety rule is **folate masking of B12 deficiency**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Folate alone can fix the blood while the cord rots; always secure B12 status first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Megaloblastic anaemia confirmed"
+          },
+          {
+            "id": "b",
+            "label": "Measure B12, folate, metabolites"
+          },
+          {
+            "id": "c",
+            "label": "Replace B12 first or both together"
+          },
+          {
+            "id": "d",
+            "label": "Watch potassium and reticulocyte surge"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Treatment matches cause: intramuscular hydroxocobalamin reloads B12 regardless of absorption, high dose oral therapy works by passive diffusion, and folate repletion follows B12 security with reticulocytosis within a week. Lifelong replacement follows pernicious anaemia; the principle is **cause-matched vitamin replacement**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Inject B12 when absorption is broken, refill folate after B12 is safe, and expect reticulocytes within a week.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Scenario",
+          "Replacement route",
+          "Monitoring"
+        ],
+        "rows": [
+          [
+            "Pernicious anaemia",
+            "Intramuscular hydroxocobalamin lifelong",
+            "Blood count, neurology review"
+          ],
+          [
+            "Dietary B12 lack",
+            "High dose oral cobalamin",
+            "Levels and diet review"
+          ],
+          [
+            "Folate deficiency",
+            "Oral folic acid after B12 secured",
+            "Haemoglobin response"
+          ],
+          [
+            "Pregnancy prevention",
+            "Periconception folic acid",
+            "Public health supplementation"
+          ]
+        ]
+      }
+    }
+  ]
+}

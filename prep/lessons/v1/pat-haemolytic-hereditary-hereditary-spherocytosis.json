@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-haemolytic-hereditary",
+  "subject": "pathology",
+  "title": "Hereditary Spherocytosis, Elliptocytosis, and G6PD Deficiency",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Red cells losing membrane surface through defective spectrin, ankyrin, band 3, or protein 4.2 become spherical, rigid, and doomed to splenic destruction, producing anaemia, jaundice, splenomegaly, and pigment gallstones. The commonest inherited membrane defect is **hereditary spherocytosis**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Membrane loss makes spheres, spheres cannot squeeze through the spleen, and haemolysis with gallstones follows.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Spectrin or ankyrin defect weakens membrane"
+          },
+          {
+            "id": "b",
+            "label": "Surface area lost as microvesicles"
+          },
+          {
+            "id": "c",
+            "label": "Spherocytes trapped in splenic cords"
+          },
+          {
+            "id": "d",
+            "label": "Extravascular haemolysis and splenomegaly"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Spherocytes look dense and perfectly round without central pallor, mean corpuscular haemoglobin concentration rises, and reticulocytes climb as marrow compensates, while a family history of splenectomy or cholecystectomy whispers the diagnosis. The film cell is the **spherocyte**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Dense round cells without pallor plus a family history of spleen or gallbladder surgery whisper spherocytosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hereditary spherocytosis",
+          "points": [
+            "Spherocytes, high MCHC",
+            "Negative direct Coombs test",
+            "Family history, splenomegaly"
+          ]
+        },
+        "right": {
+          "title": "Warm autoimmune haemolysis",
+          "points": [
+            "Spherocytes also occur",
+            "Positive direct Coombs test",
+            "Autoimmune associations, steroid response"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Spherocytes cannot swell safely in hypotonic saline because their surface to volume ratio is already spent, so they lyse at higher salt concentrations than normal cells, the basis of the classic osmotic fragility curve. The test demonstrating it is the **osmotic fragility test**.",
+      "say": "Osmotic fragility is increased because spherocytes have no spare membrane with which to swell.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Hereditary spherocytosis",
+          "Comment"
+        ],
+        "rows": [
+          [
+            "Osmotic fragility",
+            "Increased, especially incubated",
+            "Classic but labour intensive"
+          ],
+          [
+            "EMA binding test",
+            "Reduced fluorescence",
+            "Modern preferred screen"
+          ],
+          [
+            "Direct Coombs test",
+            "Negative",
+            "Separates warm autoimmune disease"
+          ],
+          [
+            "Family and film review",
+            "Often diagnostic together",
+            "First step in children"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Eosin-5-maleimide binding to band 3 falls when membrane proteins are missing, and its flow cytometric reduction now screens for spherocytosis more reliably than fragility testing in most laboratories. The modern screen is the **EMA binding test**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Reduced EMA binding on flow cytometry is the modern screen that replaced osmotic fragility in most centres.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hemolytic-anemia-fig2.webp",
+        "alt": "Haemolysis types and Coombs testing",
+        "caption": "Haemolysis classification and Coombs testing used to separate inherited membrane defects from immune haemolysis."
+      }
+    },
+    {
+      "tx": "Elliptical red cells from spectrin self association defects cause hereditary elliptocytosis, usually a silent film finding, while its severe pyropoikilocytosis variant fragments cells at fever temperatures in infancy. The elongated signature cell is the **elliptocyte**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Elliptocytes are usually an incidental film finding; only the severe infantile pyropoikilocytosis variant haemolyses hard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spherocytosis",
+          "points": [
+            "Surface area loss, spheres",
+            "Splenic destruction dominates",
+            "Splenectomy highly effective"
+          ]
+        },
+        "right": {
+          "title": "Elliptocytosis",
+          "points": [
+            "Spectrin association defect, ellipses",
+            "Usually no anaemia",
+            "Severe variant fragments with fever"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Glucose-6-phosphate dehydrogenase deficiency removes the red cell's only glutathione defence, so oxidant drugs, fava beans, naphthalene, and infections precipitate episodic haemolysis in otherwise healthy, usually male, patients. Between episodes the blood count is normal; the enzyme is **G6PD (glucose-6-phosphate dehydrogenase)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "G6PD deficiency haemolyses in oxidant storms and hides between them; test after recovery or you may miss it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/g6pd-deficiency-fig1.webp",
+        "alt": "G6PD deficiency blocked enzyme step",
+        "caption": "G6PD deficiency blocked enzyme step in the pentose phosphate pathway of the red cell."
+      }
+    },
+    {
+      "tx": "Splenectomy cures the haemolysis of spherocytosis at the price of lifelong encapsulated organism risk, so folate support, vaccination, antibiotic strategy, and gallbladder assessment precede the decision, often deferred beyond early childhood. The definitive but risk carrying step is **splenectomy in spherocytosis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Splenectomy stops the haemolysis but buys lifelong sepsis risk; vaccinate first and delay beyond early childhood when possible.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm diagnosis, assess severity"
+          },
+          {
+            "id": "b",
+            "label": "Folate, vaccinations, gallbladder imaging"
+          },
+          {
+            "id": "c",
+            "label": "Splenectomy for severe or complicated disease"
+          },
+          {
+            "id": "d",
+            "label": "Lifelong infection precautions after surgery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Parvovirus B19 arrests red cell production for a week, trivial in normal hosts but catastrophic when red cell lifespan is already twenty days, producing aplastic crisis with vanishing reticulocytes. Any chronic haemolysis plus sudden pallor demands that thought: **aplastic crisis of chronic haemolysis**.",
+      "say": "Sudden pallor with absent reticulocytes in chronic haemolysis is parvovirus aplastic crisis until proven otherwise.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Crisis",
+          "Mechanism",
+          "Film clue"
+        ],
+        "rows": [
+          [
+            "Aplastic crisis",
+            "Parvovirus B19 stops production",
+            "Reticulocytes vanish"
+          ],
+          [
+            "Haemolytic crisis",
+            "Haemolysis accelerates",
+            "Reticulocytes surge, jaundice deepens"
+          ],
+          [
+            "Splenic sequestration",
+            "Spleen traps blood acutely",
+            "Sudden splenic enlargement, falling Hb"
+          ],
+          [
+            "Megaloblastic crisis",
+            "Folate exhausted by turnover",
+            "Hypersegmentation appears"
+          ]
+        ]
+      }
+    }
+  ]
+}

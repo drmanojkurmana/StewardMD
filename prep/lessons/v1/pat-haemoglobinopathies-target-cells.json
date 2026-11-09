@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-haemoglobinopathies",
+  "subject": "pathology",
+  "title": "Target Cells, Hair-on-End Skull, Alpha Thalassaemia, HbH, and Hb Barts",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Target cells carry excess membrane relative to haemoglobin, the bullseye centre forming where haemoglobin pools, and they appear in thalassaemias, haemoglobin C disease, liver disease, and after splenectomy. The bullseye cell is the **target cell (codocyte)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Target cells mean membrane excess: thalassaemia, haemoglobin C, liver disease, or no spleen.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Target cells prominent",
+          "points": [
+            "Thalassaemias, HbC disease",
+            "Liver disease, splenectomy",
+            "Membrane lipid excess physiology"
+          ]
+        },
+        "right": {
+          "title": "Do not confuse with",
+          "points": [
+            "Spherocytes: membrane lost, opposite problem",
+            "Stomatocytes: mouth shaped pallor",
+            "Acanthocytes: spiked, liver and abetalipoproteinaemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Marrow expansion in severe thalassaemia thickens the skull diplo\u00eb into perpendicular trabeculae likened to hair standing on end, with frontal bossing and maxillary overgrowth producing the classic facies. The radiological sign is the **hair-on-end skull** appearance. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Hair-on-end skull is marrow expansion written in bone; effective transfusion prevents the facies developing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Expansion effect",
+          "Disease clue"
+        ],
+        "rows": [
+          [
+            "Skull",
+            "Hair-on-end diplo\u00eb",
+            "Thalassaemia major, severe haemolysis"
+          ],
+          [
+            "Face",
+            "Frontal bossing, maxillary hypertrophy",
+            "Chipmunk facies of thalassaemia"
+          ],
+          [
+            "Long bones",
+            "Thin cortices, Erlenmeyer flask shapes",
+            "Marrow hyperplasia states"
+          ],
+          [
+            "Spleen and liver",
+            "Extramedullary haematopoiesis masses",
+            "Myelofibrosis, thalassaemia intermedia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alpha thalassaemia deletes alpha genes one by one from the four available: one deletion silent, two trait, three leaves beta tetramers called HbH with chronic haemolysis, and four is lethal in utero. Gene counting predicts phenotype in **alpha thalassaemia**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Count the deleted alpha genes: one silent, two trait, three HbH disease, four hydrops fetalis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alpha-thalassemia-fig1.webp",
+        "alt": "Alpha thalassaemia hematology and hemoglobin pattern",
+        "caption": "Alpha thalassaemia gene deletions and their haemoglobin patterns from silent carrier to hydrops."
+      }
+    },
+    {
+      "tx": "HbH, a tetramer of beta chains, is unstable, precipitates with brilliant cresyl blue as golf ball inclusions, oxidises membranes, and haemolyses moderately with splenomegaly. The beta tetramer disease is **HbH disease** of three gene deletion alpha thalassaemia. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "HbH inclusions look like golf balls under cresyl blue; three deleted alpha genes produce chronic haemolysis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HbH disease (3 deletions)",
+          "points": [
+            "Beta4 tetramers, inclusions",
+            "Moderate haemolysis, splenomegaly",
+            "Avoid oxidants, folate support"
+          ]
+        },
+        "right": {
+          "title": "Hb Barts hydrops (4 deletions)",
+          "points": [
+            "Gamma4 tetramers cannot release oxygen",
+            "Severe fetal anaemia, hydrops",
+            "Intrauterine transfusion or lethal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hb Barts, gamma chain tetramers of the fetus, binds oxygen so avidly it never releases it to tissues, so four gene deletion fetuses drown in hydrops from high output failure and profound anaemia. The lethal fetal haemoglobin is **Hb Barts (gamma4)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Hb Barts never lets go of oxygen; four alpha deletions therefore kill the fetus by tissue suffocation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Four alpha genes deleted"
+          },
+          {
+            "id": "b",
+            "label": "Gamma chains form Hb Barts tetramers"
+          },
+          {
+            "id": "c",
+            "label": "Oxygen bound but never released"
+          },
+          {
+            "id": "d",
+            "label": "Hydrops fetalis and fetal death"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Newborn alpha trait shows Hb Barts in cord blood percentages that betray gene number, while adults show only microcytosis with normal HbA2, separating alpha trait from beta trait at the bench. Cord blood Barts percentage performs **alpha thalassaemia newborn grading**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Normal HbA2 with microcytosis separates alpha trait from beta trait; cord blood Barts grades the newborn.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alpha genes deleted",
+          "Name",
+          "Hb pattern"
+        ],
+        "rows": [
+          [
+            "One",
+            "Silent carrier",
+            "Normal film, normal fractions"
+          ],
+          [
+            "Two",
+            "Alpha trait",
+            "Microcytosis, normal HbA2, Barts at birth"
+          ],
+          [
+            "Three",
+            "HbH disease",
+            "HbH inclusions, haemolysis"
+          ],
+          [
+            "Four",
+            "Hb Barts hydrops",
+            "Gamma4, lethal without intervention"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Couple screening prevents thalassaemia major births: both partners microcytic triggers fraction analysis and DNA studies, with prenatal or preimplantation diagnosis offered when both carry severe traits. The public health programme is **thalassaemia couple screening**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Screen couples, not just patients: two carriers together earn DNA studies and prenatal choices.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
+        "alt": "Blood smear sickle cell anaemia",
+        "caption": "Haemoglobinopathy blood film patterns guiding couple screening and diagnosis."
+      }
+    },
+    {
+      "tx": "Intermedia phenotypes punish rigid labels: alpha trait coinherited with sickle disease softens sickling, while beta thalassaemia intermedia patients may transfuse only in pregnancy, infection, or growth failure. Genotype plus clinical course together assign **thalassaemia intermedia management**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Coinheritance rewrites severity; manage the patient in front of you, not the textbook label.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modifiers that soften",
+          "points": [
+            "Alpha trait with sickle disease",
+            "High HbF persistence genes",
+            "Milder beta plus mutations"
+          ]
+        },
+        "right": {
+          "title": "Modifiers that worsen",
+          "points": [
+            "Extra alpha genes with beta trait",
+            "Iron loading, splenectomy risks",
+            "Coinherited G6PD deficiency"
+          ]
+        }
+      }
+    }
+  ]
+}
