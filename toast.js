@@ -37,12 +37,14 @@
   }
   // Toward the entry edge tracks 1:1; against it, damped (moves less the further you pull).
   function dampen(dy) { return dy >= 0 ? dy : -Math.sqrt(-dy) * 3; }
+  // Exit duration seeded with swipe speed (px/ms): a flick leaves fast, a slow drag keeps the default.
+  function exitMs(dy, dt) { var v = dy / Math.max(1, dt); return v > 0.5 ? 90 : v > 0.2 ? 120 : EXIT_MS; }
   // Stack slot (0 = front) -> look. Slots past the cap are queued: hidden, timers held.
   function slot(i) {
     if (i >= MAX_VISIBLE) return { y: -(MAX_VISIBLE - 1) * 9, s: 1 - (MAX_VISIBLE - 1) * 0.05, o: 0, vis: false };
     return { y: -i * 9, s: 1 - i * 0.05, o: i === 0 ? 1 : 1 - i * 0.18, vis: true };
   }
-  var seam = { duration: duration, step: step, swipeDismiss: swipeDismiss, dampen: dampen, slot: slot };
+  var seam = { duration: duration, step: step, swipeDismiss: swipeDismiss, dampen: dampen, slot: slot, exitMs: exitMs };
   if (typeof module !== "undefined" && module.exports) module.exports = seam;
   if (typeof window === "undefined") return;
 
@@ -140,10 +142,11 @@
     clearTimeout(it.timer);
     it.dragging = false;
     it.el.style.pointerEvents = "none";
-    setTrans(it, EXIT_MS);                         // exit faster than enter; retargets mid-flight
+    var ms = it._exitMs || EXIT_MS;
+    setTrans(it, ms);                         // exit faster than enter; retargets mid-flight
     it.el.style.transform = still() ? tf("0px", 1) : tf(OFF, 1);
     it.el.style.opacity = "0";
-    setTimeout(function () { if (it.el.parentNode) it.el.parentNode.removeChild(it.el); }, EXIT_MS + 60);
+    setTimeout(function () { if (it.el.parentNode) it.el.parentNode.removeChild(it.el); }, ms + 60);
     layout();
   }
 
@@ -166,7 +169,7 @@
       try { el.releasePointerCapture(e.pointerId); } catch (x) {}
       var dy = e.clientY - y0;
       it.dragging = false;
-      if (!cancelled && swipeDismiss(dy, Date.now() - t0, el.offsetHeight)) dismiss(it);   // exits from where the finger left it
+      if (!cancelled && swipeDismiss(dy, Date.now() - t0, el.offsetHeight)) { it._exitMs = exitMs(dy, Date.now() - t0); dismiss(it); }   // exits from where the finger left it, at its speed
       else { setTrans(it, ENTER_MS); layout(); }
     }
     el.addEventListener("pointerup", function (e) { end(e, false); });

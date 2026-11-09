@@ -27,7 +27,7 @@
   try { if (localStorage.getItem("smd_az_scrub") === "0") return; } catch (e) {}
   window.SMD_AZ_SEAM = seam;
 
-  var strip = null, bubble = null, curIdx = -1, timer = 0;
+  var strip = null, bubble = null, curIdx = -1, timer = 0, stripRect = null;
 
   // The chip row on screen: a container whose visible children are >=20 single-letter A-Z buttons.
   function findChips() {
@@ -54,11 +54,11 @@
     strip = document.createElement("div");
     strip.setAttribute("aria-hidden", "true");
     strip.style.cssText = "position:fixed;right:max(2px,env(safe-area-inset-right,0px));top:50%;transform:translate(8px,-50%);opacity:0;transition:opacity .2s linear,transform .28s cubic-bezier(.32,.72,0,1);z-index:2147482200;" +
-      "display:flex;flex-direction:column;align-items:center;padding:6px 0;width:22px;touch-action:none;-webkit-user-select:none;user-select:none;border-radius:11px;" +
+      "display:flex;flex-direction:column;align-items:center;padding:6px 0;width:44px;touch-action:none;-webkit-user-select:none;user-select:none;border-radius:11px;" +
       "background:rgba(120,130,140,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:none";
     ABC.forEach(function (L) {
       var s = document.createElement("div"); s.textContent = L; s.dataset.l = L;
-      s.style.cssText = "font:700 9.5px/13px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--v3-primary,#0F766E);height:13px;width:22px;text-align:center";
+      s.style.cssText = "font:700 9.5px/13px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--v3-primary,#0F766E);height:13px;width:44px;text-align:center";
       strip.appendChild(s);
     });
     bubble = document.createElement("div");
@@ -69,11 +69,12 @@
     var id = null;
     strip.addEventListener("pointerdown", function (e) {
       id = e.pointerId; try { strip.setPointerCapture(id); } catch (x) {}
+      stripRect = strip.getBoundingClientRect();   // cached for the whole scrub: no layout read per move
       strip.style.background = "rgba(120,130,140,.26)"; pick(e.clientY, true);
     });
     strip.addEventListener("pointermove", function (e) { if (e.pointerId === id) pick(e.clientY, false); });
     var end = function (e) {
-      if (e.pointerId !== id) return; id = null;
+      if (e.pointerId !== id) return; id = null; stripRect = null;
       strip.style.background = "rgba(120,130,140,.14)"; bubble.style.opacity = "0";
       clearTimeout(dwell); if (curIdx >= 0) commit(ABC[curIdx]);
       curIdx = -1;
@@ -100,7 +101,7 @@
   }
   function pick(y, first) {
     var ch = findChips(); if (!ch) return;
-    var r = strip.getBoundingClientRect(), have = ABC.map(function (L) { return !!ch.map[L]; });
+    var r = stripRect || strip.getBoundingClientRect(), have = ABC.map(function (L) { return !!ch.map[L]; });
     var i = nearest(indexAt(y, r.top + 6, r.height - 12, ABC.length), have);
     if (i < 0 || (i === curIdx && !first)) return;
     curIdx = i;

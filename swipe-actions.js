@@ -73,13 +73,18 @@
 
   var open = null;    // { row, tray, w, timer }
   var swallowUntil = 0, g = null;
+  var springStop = null;
+  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
 
   function closeOpen(animate) {
     var o = open; if (!o) return; open = null;
     clearInterval(o.timer);
+    stopSpring();
     var row = o.row, S = window.SMD_SPRING;
-    var done = function () { row.style.transform = ""; row.style.willChange = ""; row.style.transition = ""; o.tray.remove(); };
-    if (animate && S && !S.reduced() && row.isConnected) S.animate({ from: -o.w, to: 0, stiffness: 420, damping: 36, onUpdate: function (x) { row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(o.w, -x); }, onDone: done });
+    var cur = parseFloat((/translate3d\((-?[\d.]+)px/.exec(row.style.transform) || [0, -o.w])[1]);
+    if (isNaN(cur)) cur = -o.w;
+    var done = function () { springStop = null; row.style.transform = ""; row.style.willChange = ""; row.style.transition = ""; o.tray.remove(); };
+    if (animate && S && !S.reduced() && row.isConnected) springStop = S.animate({ from: cur, to: 0, velocity: 0, stiffness: 420, damping: 36, onUpdate: function (x) { row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(o.w, -x); }, onDone: done });
     else done();
   }
   function clip(w, revealed) { return "inset(0 0 0 " + Math.max(0, w - Math.max(0, revealed)) + "px)"; }
@@ -108,6 +113,7 @@
   }
 
   document.addEventListener("touchstart", function (e) {
+    stopSpring();
     if (e.touches.length !== 1) { g = null; return; }
     var t = e.target, x = e.touches[0].clientX;
     if (open && !(open.tray.contains(t))) { if (!open.row.contains(t)) closeOpen(true); }
@@ -116,7 +122,8 @@
     if (x < 28 || x > innerWidth - 6) return;
     var row = rowFor(t); if (!row || inHScroller(row)) return;
     var acts = actionsOf(row); if (!acts.length) return;
-    var base = open && open.row === row ? -open.w : 0;
+    var curX = parseFloat((/translate3d\((-?[\d.]+)px/.exec(row.style.transform) || [0, 0])[1]) || 0;
+    var base = open && open.row === row ? curX : 0;
     g = { row: row, acts: acts, x0: x, y0: e.touches[0].clientY, active: false, dead: false, base: base, w: trayWidth(acts.length, row.getBoundingClientRect().width), v: 0, lx: x, lt: performance.now(), dx: 0 };
     row.addEventListener("touchmove", onMove, { passive: false });
   }, { passive: true, capture: true });
@@ -158,12 +165,13 @@
     var upd = function (x) { st.row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(st.w, Math.min(st.w, -x)); };
     if (lock && !st.base) { try { window.SMD_HAPTICS && SMD_HAPTICS.medium(); } catch (x) {} }
     var fin = function () {
+      springStop = null;
       if (!lock) { if (open === o) { open = null; } st.row.style.transform = ""; st.row.style.willChange = ""; st.row.style.transition = ""; o.tray.remove(); return; }
       // Open: close itself if the row is re-rendered away or moves (scroll / layout change).
       var r0 = st.row.getBoundingClientRect().top;
       o.timer = setInterval(function () { if (!st.row.isConnected || Math.abs(st.row.getBoundingClientRect().top - r0) > 2) closeOpen(false); }, 250);
     };
-    if (S) S.animate({ from: cur, to: to, velocity: st.v, stiffness: 420, damping: 36, onUpdate: upd, onDone: fin });
+    if (S) springStop = S.animate({ from: cur, to: to, velocity: st.v, stiffness: 420, damping: 36, onUpdate: upd, onDone: fin });
     else { upd(to); fin(); }
   }
   document.addEventListener("touchend", release, { capture: true });

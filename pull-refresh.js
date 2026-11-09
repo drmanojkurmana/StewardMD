@@ -77,8 +77,10 @@
   }
 
   /* ---- gesture ---- */
-  var g = null, busy = false;
+  var g = null, busy = false, springStop = null;
+  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
   document.addEventListener("touchstart", function (e) {
+    stopSpring();
     if (g || busy || e.touches.length !== 1) return;
     var t = e.target; if (!t || !t.closest || t.closest("input,textarea,select,[contenteditable],canvas,[data-no-ptr]")) return;
     var sc = scrollerOf(t); if (!sc || sc.scrollTop > 0) return;
@@ -87,7 +89,7 @@
     if (lr.bottom >= innerHeight - 2 && lr.top > innerHeight * 0.06 && lr.height < innerHeight - 4) return;
     var fn = actionFor(sc); if (!fn) return;
     g = { sc: sc, fn: fn, y0: e.touches[0].clientY, x0: e.touches[0].clientX, on: false, dead: false, pull: 0, armed: false,
-          top: sc.getBoundingClientRect().top };
+          tr: window.SMD_SPRING ? SMD_SPRING.tracker() : null, top: sc.getBoundingClientRect().top };
     sc.addEventListener("touchmove", move, { passive: false });
   }, { passive: true, capture: true });
 
@@ -102,6 +104,7 @@
     }
     if (e.cancelable) e.preventDefault();
     g.pull = resist(dy);
+    if (g.tr) g.tr.add(g.pull, e.timeStamp || Date.now());
     g.sc.style.transform = "translate3d(0," + g.pull + "px,0)";
     drawSpinner(g.top, g.pull, false);
     var over = triggered(g.pull);
@@ -112,7 +115,7 @@
   function springTo(st, to, v, done) {
     var S = window.SMD_SPRING;
     var put = function (x) { st.sc.style.transform = x ? "translate3d(0," + x + "px,0)" : ""; drawSpinner(st.top, x, to === HOLD); if (to === 0 && spin) spin.style.opacity = String(Math.min(1, x / TRIGGER)); };
-    if (S) S.animate({ from: st.pull, to: to, velocity: v || 0, stiffness: 340, damping: 32, onUpdate: function (x) { st.pull = x; put(x); }, onDone: function () { st.pull = to; put(to); if (done) done(); } });
+    if (S) springStop = S.animate({ from: st.pull, to: to, velocity: v || 0, stiffness: 340, damping: 32, onUpdate: function (x) { st.pull = x; put(x); }, onDone: function () { springStop = null; st.pull = to; put(to); if (done) done(); } });
     else { st.pull = to; put(to); if (done) done(); }
   }
   function release() {
@@ -120,9 +123,10 @@
     if (!st) return;
     st.sc.removeEventListener("touchmove", move, { passive: false });
     if (!st.on) return;
-    if (!triggered(st.pull)) { springTo(st, 0, 0, function () { st.sc.style.willChange = ""; st.sc.style.transition = ""; }); return; }
+    var v = st.tr ? st.tr.velocity() : 0;
+    if (!triggered(st.pull)) { springTo(st, 0, v, function () { st.sc.style.willChange = ""; st.sc.style.transition = ""; }); return; }
     busy = true;
-    springTo(st, HOLD, 0);
+    springTo(st, HOLD, v);
     var t0 = Date.now(), finished = false, mo = null, quiet = 0;
     function finish() {
       if (finished) return; finished = true;

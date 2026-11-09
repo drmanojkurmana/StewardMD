@@ -131,15 +131,19 @@
   /* ---- drag ---- */
   if (off("smd_sheet_drag")) return;
   var g = null;    // active gesture
+  var springStop = null;   // stop fn of an in-flight release spring: a new touch catches the sheet where it is
+  function stopSpring() { if (springStop) { try { springStop(); } catch (x) {} springStop = null; } }
 
   document.addEventListener("touchstart", function (e) {
+    stopSpring();
     if (g || e.touches.length !== 1) { if (g) g.sheet.removeEventListener("touchmove", onMove, { passive: false }); g = null; return; }
     var t = e.target;
     if (!t || !t.closest || t.closest(NO_DRAG)) return;
     var sheet = findSheet(t); if (!sheet) return;
     var sr = sheet.getBoundingClientRect(), y = e.touches[0].clientY;
     var sc = scrollerIn(t, sheet);
-    g = { sheet: sheet, y0: y, x0: e.touches[0].clientX, h: sr.height, handle: y - sr.top < HANDLE_ZONE,
+    var curY = parseFloat((/translate3d\(0,\s*(-?[\d.]+)px/.exec(sheet.style.transform) || [0, 0])[1]) || 0;
+    g = { sheet: sheet, y0: y, x0: e.touches[0].clientX, h: sr.height, handle: y - sr.top < HANDLE_ZONE, base: curY,
           sc: sc, active: false, dead: false, dy: 0, tr: window.SMD_SPRING ? SMD_SPRING.tracker() : null, dismiss: null };
     // Non-passive touchmove ONLY on this sheet and only for this touch: a document-wide non-passive
     // listener makes iOS WebKit wait on JS before every scroll in the app (see prep.js, same lesson).
@@ -163,7 +167,7 @@
     if (e.cancelable) e.preventDefault();
     g.dy = dy;
     if (g.tr) g.tr.add(dy, e.timeStamp || Date.now());
-    paint(g, rubber(dy));
+    paint(g, g.base + rubber(dy));
   }
 
   function paint(st, y) {
@@ -181,9 +185,9 @@
     var st = g; g = null;
     if (st) st.sheet.removeEventListener("touchmove", onMove, { passive: false });
     if (!st || !st.active) return;
-    var v = st.tr ? st.tr.velocity() : 0, y = rubber(st.dy);
+    var v = st.tr ? st.tr.velocity() : 0, y = st.base + rubber(st.dy), totalDy = st.base + st.dy;
     var S = window.SMD_SPRING;
-    if (shouldDismiss(st.dy, v, st.h)) {
+    if (shouldDismiss(totalDy, v, st.h)) {
       var finish = function () {
         // Leave the sheet parked off-screen while the app closes it, then hand styling back to CSS.
         try { st.dismiss.close(); } catch (x) {}
@@ -192,12 +196,12 @@
           if (depthOn) syncDepth();
         }); });
       };
-      if (S) S.animate({ from: y, to: st.h + 20, velocity: Math.max(v, 900), stiffness: 300, damping: 38,
-                         onUpdate: function (x) { paint(st, x); }, onDone: finish });
+      if (S) springStop = S.animate({ from: y, to: st.h + 20, velocity: Math.max(v, 900), stiffness: 300, damping: 38,
+                         onUpdate: function (x) { paint(st, x); }, onDone: function () { springStop = null; finish(); } });
       else finish();
     } else {
       var back = function () { st.sheet.style.transform = ""; st.sheet.style.transition = ""; cleanup(st); if (depthOn) setDepth(0, false); };
-      if (S) S.animate({ from: y, to: 0, velocity: v, stiffness: 420, damping: 34, onUpdate: function (x) { paint(st, x); }, onDone: back });
+      if (S) springStop = S.animate({ from: y, to: 0, velocity: v, stiffness: 420, damping: 34, onUpdate: function (x) { paint(st, x); }, onDone: function () { springStop = null; back(); } });
       else back();
     }
   }
