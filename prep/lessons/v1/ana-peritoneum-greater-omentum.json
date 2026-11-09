@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-peritoneum",
+ "subject": "anatomy",
+ "title": "Peritoneal Cavity: Greater and Lesser Omentum, Lesser Sac, and Epiploic Foramen",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The peritoneum is an extensive serous membrane lining the abdominal cavity and reflecting over internal viscera. The prominent quadric-laminar peritoneal fold suspended from the greater curvature of the stomach and transverse colon is the **greater omentum**, draping like an apron over the small intestinal coils.",
+   "say": "The peritoneum lines the abdomen and covers its organs. Suspended from the greater curvature of the stomach and transverse colon, the four-layered greater omentum drapes like an apron over the small intestine.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-indirect-inguinal-hernial-sac.webp",
+    "alt": "Peritoneal anatomy illustrating omental folding and peritoneal sac relationships",
+    "caption": "Peritoneal reflections and architecture of greater omentum and visceral mesenteries. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Richly endowed with macrophages, fat cells, and milky spots of lymphoid tissue, the greater omentum exhibits remarkable autonomous mobility toward sites of intra-abdominal inflammation. Wrapping around inflamed appendices or perforated ulcers, it walls off infection, earning its title as the **policeman of the abdomen**.",
+   "say": "Rich in macrophages and lymphoid spots, the greater omentum migrates toward sites of inflammation. Wrapping around perforated ulcers or inflamed appendices, it seals infection as the policeman of the abdomen.",
+   "vis": {
+    "kind": "flow",
+    "title": "Protective Omental Defense Mechanism",
+    "nodes": [
+     {
+      "id": "focus",
+      "label": "Acute Visceral Perforation or Appendiceal Inflammation"
+     },
+     {
+      "id": "chemo",
+      "label": "Peritoneal Cytokines and Chemotactic Signals Released"
+     },
+     {
+      "id": "migrate",
+      "label": "Greater Omentum Migrates and Wraps Around Infected Focus"
+     },
+     {
+      "id": "adhere",
+      "label": "Fibrinous Adhesions Wall Off Infection into Local Abscess"
+     }
+    ],
+    "edges": [
+     [
+      "focus",
+      "chemo"
+     ],
+     [
+      "chemo",
+      "migrate"
+     ],
+     [
+      "migrate",
+      "adhere"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Connecting the lesser curvature of the stomach and first two centimetres of the duodenum to the liver is the **lesser omentum**. It is divided into two distinct components: the thin, transparent hepatogastric ligament stretching to the stomach, and the thicker, free right-sided hepatoduodenal ligament containing the portal triad.",
+   "say": "The lesser omentum connects the liver to the lesser curvature of the stomach and duodenum. It consists of the thin hepatogastric ligament and the thick hepatoduodenal ligament containing the portal triad.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatogastric Ligament",
+     "points": [
+      "Thin, translucent membranous sheet",
+      "Extends from porta hepatis to lesser curvature",
+      "Contains right and left gastric vessels",
+      "Contains gastric lymph nodes and vagal twigs"
+     ]
+    },
+    "right": {
+     "title": "Hepatoduodenal Ligament",
+     "points": [
+      "Thick, fibrous free right margin of lesser omentum",
+      "Extends from porta hepatis to first part of duodenum",
+      "Contains portal triad: bile duct, hepatic artery, portal vein",
+      "Forms anterior boundary of epiploic foramen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The free right margin of the lesser omentum borders the **epiploic foramen** (foramen of Winslow), the solitary natural anatomical communication linking the greater peritoneal sac with the lesser sac (omental bursa). Measuring three centimetres in vertical height, it readily admits a surgeon's index finger.",
+   "say": "The free right border of the lesser omentum frames the epiploic foramen of Winslow. Measuring three centimeters, this opening is the only natural communication between greater and lesser peritoneal sacs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Foramen Margin",
+     "Anatomical Boundary Structure",
+     "Surgical Signpost",
+     "Vessel Contained"
+    ],
+    "rows": [
+     [
+      "Anterior Margin",
+      "Free border of hepatoduodenal ligament",
+      "Site of Pringle maneuver vascular clamp",
+      "Portal triad (bile duct, hepatic artery, portal vein)"
+     ],
+     [
+      "Posterior Margin",
+      "Inferior vena cava covered by peritoneum",
+      "Rests on T12-L1 vertebral bodies",
+      "Directly touches anterior wall of IVC"
+     ],
+     [
+      "Superior Margin",
+      "Caudate process of the liver",
+      "Roof of the foramen opening",
+      "Inferior visceral surface of liver"
+     ],
+     [
+      "Inferior Margin",
+      "First part of the duodenum and portal vein",
+      "Lower horizontal lip of foramen",
+      "Superior horizontal duodenal border"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hepatic trauma with catastrophic hemorrhage, the surgeon compresses the hepatoduodenal ligament between thumb and index finger within the epiploic foramen, executing the **Pringle maneuver**. This cross-clamps the hepatic artery and portal vein, arresting all hepatic inflow to identify arterial parenchymal lacerations.",
+   "say": "In severe liver trauma, compressing the hepatoduodenal ligament through the epiploic foramen performs the Pringle maneuver. Clamping the hepatic artery and portal vein temporarily arrests hepatic inflow.",
+   "vis": {
+    "kind": "flow",
+    "title": "Execution of the Pringle Maneuver",
+    "nodes": [
+     {
+      "id": "index",
+      "label": "Surgeon Inserts Left Index Finger into Epiploic Foramen"
+     },
+     {
+      "id": "oppose",
+      "label": "Thumb Opposed Anteriorly against Hepatoduodenal Ligament"
+     },
+     {
+      "id": "compress",
+      "label": "Vascular Clamp Compresses Hepatic Artery and Portal Vein"
+     },
+     {
+      "id": "arrest",
+      "label": "Arrests Hepatic Inflow; Bleeding from IVC Persists if Venous"
+     }
+    ],
+    "edges": [
+     [
+      "index",
+      "oppose"
+     ],
+     [
+      "oppose",
+      "compress"
+     ],
+     [
+      "compress",
+      "arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Situated entirely posterior to the stomach and lesser omentum is the **lesser sac** (omental bursa), an extensive irregular peritoneal cleft. Its posterior wall is formed by the peritoneum covering the pancreas, left kidney, left suprarenal gland, and abdominal aorta, collectively known as the stomach bed.",
+   "say": "Behind the stomach and lesser omentum lies the lesser sac or omental bursa. Its posterior wall covers the pancreas, left kidney, suprarenal gland, and aorta, forming the stomach bed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Wall of Lesser Sac",
+     "points": [
+      "Peritoneum covering posterior gastric wall",
+      "Posterior two layers of greater omentum",
+      "Hepatogastric and hepatoduodenal ligaments",
+      "Caudate lobe of liver superiorly"
+     ]
+    },
+    "right": {
+     "title": "Posterior Wall (Stomach Bed)",
+     "points": [
+      "Anterior surface of body and tail of pancreas",
+      "Upper pole of left kidney and suprarenal gland",
+      "Splenic artery coursing tortuously along pancreas",
+      "Site where acute pancreatitis causes pseudocysts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most dependent peritoneal space in a supine patient is the **hepatorenal pouch** of Morison, situated in the right upper quadrant between the inferior surface of the liver and the anterior surface of the right kidney. Pathological fluid, blood from splenic trauma, or bile accumulates here before spilling over the right paracolic gutter into the pelvis.",
+   "say": "The lowest space in a supine patient is the hepatorenal pouch of Morison between liver and right kidney. Traumatic blood or pus collects here first before spilling down the paracolic gutter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peritoneal Recess",
+     "Anatomical Location",
+     "Drainage Gravity Path",
+     "Ultrasound Detection"
+    ],
+    "rows": [
+     [
+      "Morison Pouch (Hepatorenal)",
+      "Between right liver lobe and right kidney",
+      "Dependent gutter in supine posture",
+      "FAST exam right upper quadrant window"
+     ],
+     [
+      "Splenorenal Recess",
+      "Between spleen and left kidney",
+      "Pools perisplenic bleeding",
+      "FAST exam left upper quadrant window"
+     ],
+     [
+      "Rectovesical / Pouch of Douglas",
+      "Pelvic floor between rectum and bladder/uterus",
+      "Most dependent in erect and semi-Fowler",
+      "FAST exam suprapubic window"
+     ],
+     [
+      "Subphrenic Spaces",
+      "Between diaphragm and liver domes",
+      "Separated by falciform ligament",
+      "Subphrenic abscess after gastric perforation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside trauma evaluation employs the focused assessment with sonography for trauma (FAST) protocol. The primary acoustic acoustic window inspects the hepatorenal pouch of Morison, where even one hundred milliliters of hemoperitoneum appears as an anechoic dark stripe between liver and **kidney parenchyma**, mandating immediate exploratory intervention.",
+   "say": "The FAST ultrasound exam searches first in Morison pouch for free fluid. As little as one hundred milliliters of blood appears as a dark stripe between liver and kidney, directing emergency surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-abdomen.webp",
+    "alt": "Abdominal imaging demonstrating peritoneal fluid collections and gas under diaphragm",
+    "caption": "Radiographic and sonographic detection of free peritoneal fluid and gas collections. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "4b202811-14cb-4088-b18b-e3d1b5dea501",
+  "b92e71f8-4654-48a5-a23d-c3d939e40ff6",
+  "406fd27f-5c84-4863-a5e4-0cb1388ca73c"
+ ]
+}

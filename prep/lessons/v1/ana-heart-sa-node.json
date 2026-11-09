@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-heart",
+ "subject": "anatomy",
+ "title": "Cardiac Conduction System: SA Node, AV Node, and Purkinje Transmission",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The electrical pacemaking and coordinated activation of the heart is governed by the cardiac conducting system. The primary physiological pacemaker is the **sinuatrial node** (SA node), an elongated horseshoe-shaped mass of specialized subepicardial cardiomyocytes situated at the junction of the superior vena cava and right atrium in the sulcus terminalis.",
+   "say": "Cardiac activation is driven by specialized conduction tissue. The primary pacemaker is the sinuatrial node, located in the sulcus terminalis at the junction of the SVC and right atrium.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Anatomical pathway of cardiac conducting system: SA node, internodal tracts, AV node, bundle of His",
+    "caption": "Trajectory of the cardiac conducting system from sinuatrial node to Purkinje fibers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The SA node possesses the highest intrinsic automaticity in the heart (sixty to one hundred depolarizations per minute), driven by hyperpolarization-activated cyclic nucleotide-gated **funny channels** (If). It receives blood supply from the sinuatrial nodal artery, which arises from the right coronary artery in sixty percent of individuals and from the circumflex in forty percent.",
+   "say": "The SA node has the fastest intrinsic rate of sixty to one hundred beats per minute, driven by pacemaker funny currents. It is nourished by the SA nodal artery from the RCA in sixty percent of individuals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Conduction Component",
+     "Anatomical Location",
+     "Intrinsic Firing Rate",
+     "Arterial Supply Source"
+    ],
+    "rows": [
+     [
+      "Sinuatrial (SA) Node",
+      "SVC-right atrial junction in sulcus terminalis",
+      "60 to 100 depolarizations/min",
+      "RCA in 60%; LCx in 40%"
+     ],
+     [
+      "Atrioventricular (AV) Node",
+      "Koch triangle in postero-inferior septum",
+      "40 to 60 depolarizations/min",
+      "RCA in 85% (at crux); LCx in 15%"
+     ],
+     [
+      "Bundle of His",
+      "Penetrates central fibrous body into septum",
+      "30 to 40 depolarizations/min",
+      "Dual: AV nodal branch and LAD septals"
+     ],
+     [
+      "Purkinje Fibers",
+      "Subendocardial ventricular network",
+      "20 to 30 depolarizations/min",
+      "Respective coronary branch beds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac action potentials spread from the SA node across the atrial musculature and through three preferential internodal tracts: anterior (Bachmann), middle (Wenckebach), and posterior (Thorel). Bachmann bundle also sends a muscular branch to the left atrium, ensuring synchronized **biatrial contraction**.",
+   "say": "Action potentials spread from the SA node through atrial muscle and internodal tracts of Bachmann, Wenckebach, and Thorel. Bachmann bundle extends to the left atrium for coordinated contraction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Atrial Conduction Propagation",
+    "nodes": [
+     {
+      "id": "sa",
+      "label": "SA Node Generates Spontaneous Action Potential"
+     },
+     {
+      "id": "bachmann",
+      "label": "Bachmann Bundle Conducts to Left Atrial Myocardium"
+     },
+     {
+      "id": "internodal",
+      "label": "Wenckebach and Thorel Tracts Convey Impulse to AV Node"
+     },
+     {
+      "id": "atria",
+      "label": "Synchronous Biatrial Mechanical Depolarization (P Wave)"
+     }
+    ],
+    "edges": [
+     [
+      "sa",
+      "bachmann"
+     ],
+     [
+      "sa",
+      "internodal"
+     ],
+     [
+      "bachmann",
+      "atria"
+     ],
+     [
+      "internodal",
+      "atria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **atrioventricular node** (AV node) lies subendocardially in the postero-inferior interatrial septum within the triangle of Koch. Bounded by the tendon of Todaro superiorly, the tricuspid valve septal leaflet anteriorly, and the orifice of the coronary sinus posteriorly, Koch triangle is the critical landmark during electrophysiological ablations.",
+   "say": "The AV node lies in the triangle of Koch on the interatrial septum. Formed by the tendon of Todaro, tricuspid septal leaflet, and coronary sinus, this triangle guides catheter ablation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Triangle of Koch Boundaries",
+     "points": [
+      "Superior: Tendon of Todaro (subendocardial fold)",
+      "Anterior: Base of tricuspid septal leaflet",
+      "Posterior: Margin of coronary sinus orifice",
+      "Apex: Penetrating atrioventricular bundle"
+     ]
+    },
+    "right": {
+     "title": "Clinical Electrophysiology",
+     "points": [
+      "AV node resides in base of triangle",
+      "Slow pathway ablation for AVNRT performed near base",
+      "Fast pathway ablation avoided to prevent heart block",
+      "Tendon of Todaro merges into central fibrous body"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conduction velocity slows dramatically within the AV node (0.05 meters per second), creating a physiological **AV nodal delay** of approximately one hundred milliseconds (reflected on the ECG as the PR segment). This critical delay permits complete atrial emptying into the ventricles before ventricular systole commences.",
+   "say": "Conduction slows dramatically in the AV node to produce a hundred-millisecond delay. Reflected as the PR segment on an ECG, this pause ensures complete ventricular filling before systole.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hemodynamic Role of AV Nodal Delay",
+    "nodes": [
+     {
+      "id": "depol",
+      "label": "Atrial Depolarization Impinges on Compact AV Node"
+     },
+     {
+      "id": "delay",
+      "label": "Slow Conduction Velocity Imposes 100 ms Delay (PR Interval)"
+     },
+     {
+      "id": "filling",
+      "label": "Atrial Kick Completes End-Diastolic Ventricular Filling"
+     },
+     {
+      "id": "systole",
+      "label": "Rapid Purkinje Wave Initiates Coordinated Ventricular Systole"
+     }
+    ],
+    "edges": [
+     [
+      "depol",
+      "delay"
+     ],
+     [
+      "delay",
+      "filling"
+     ],
+     [
+      "filling",
+      "systole"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **atrioventricular bundle** of His is the sole muscular and electrical bridge traversing the insulating central fibrous body of the heart. Penetrating into the postero-inferior border of the membranous interventricular septum, it bifurcates at the crest of the muscular septum into right and left bundle branches.",
+   "say": "The bundle of His is the only muscular bridge through the heart's fibrous skeleton. Passing through the membranous septum, it divides at the muscular crest into right and left bundle branches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Bundle Branch (RBB)",
+     "points": [
+      "Slender, compact cylindrical cord",
+      "Traverses right septal surface beneath endocardium",
+      "Enters moderator band to reach anterior papillary",
+      "Terminates in right ventricular Purkinje plexus"
+     ]
+    },
+    "right": {
+     "title": "Left Bundle Branch (LBB)",
+     "points": [
+      "Broad, flat ribbon-like sheet",
+      "Divides into left anterior and posterior fascicles",
+      "Anterior fascicle is thin and prone to hemiblock",
+      "Posterior fascicle is thick with dual blood supply"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Terminal ramifications of the bundle branches form the **Purkinje fibers**, large specialized glycogen-rich conductive myocytes that transmit action potentials at four meters per second. This rapid velocity ensures near-instantaneous activation of the ventricular myocardium from endocardium to epicardium and from apex to base, creating maximal ejection efficiency.",
+   "say": "Terminal bundle branches form Purkinje fibers, delivering rapid conduction at four meters per second. This speed produces synchronized ventricular activation from apex to base.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-gross.webp",
+    "alt": "Anatomical cross section of ventricles showing Purkinje subendocardial arborization",
+    "caption": "Subendocardial Purkinje arborization driving coordinated apex-to-base ventricular contraction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An accessory anomalous atrioventricular conduction pathway bypassing the AV node is termed the bundle of Kent, provoking **Wolff-Parkinson-White syndrome**. Rapid unhindered bypass conduction causes ventricular pre-excitation, characterized on electrocardiography by a shortened PR interval (under 120 ms), a slurred delta wave on the QRS upstroke, and paroxysmal supraventricular tachycardias.",
+   "say": "An accessory pathway bypassing the AV node is termed the bundle of Kent, causing Wolff-Parkinson-White syndrome. This bypass creates ventricular pre-excitation with a short PR interval and delta waves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pre-excitation Feature",
+     "Anatomical Pathway",
+     "ECG Manifestation",
+     "Arrhythmia Hazard"
+    ],
+    "rows": [
+     [
+      "Bundle of Kent (WPW)",
+      "Accessory AV bypass tract through annulus",
+      "Short PR interval, wide QRS with delta wave",
+      "Atrial fibrillation with rapid conduction / VF"
+     ],
+     [
+      "James Bundle (LGL)",
+      "Atrio-Hisian accessory tract",
+      "Short PR interval, normal QRS configuration",
+      "Paroxysmal supraventricular tachycardia"
+     ],
+     [
+      "Mahaim Fibres",
+      "Nodoventricular or fasciculoventricular",
+      "Normal PR interval, wide QRS with delta wave",
+      "Antidromic atrioventricular re-entrant tachycardia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "fa0746c5-8e85-448f-bc10-9c9a19880f61",
+  "eb8d94ba-a58a-48d9-aec6-506e97c0b5f3",
+  "97c3a038-d1b1-48d1-abea-8dbc2aaacd9c"
+ ]
+}

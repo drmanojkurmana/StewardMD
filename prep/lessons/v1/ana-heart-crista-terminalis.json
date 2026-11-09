@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-heart",
+ "subject": "anatomy",
+ "title": "Internal Cardiac Architecture: Crista Terminalis, Moderator Band, and Valves",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The interior of the right atrium is divided into two embryologically distinct zones by a vertical muscular ridge termed the **crista terminalis**. The smooth-walled posterior part (sinus venarum) derives from the absorbed embryonic sinus venosus, while the trabeculated anterior part represents the true primitive atrium.",
+   "say": "The interior of the right atrium is split into two zones by the crista terminalis. The smooth posterior sinus venarum comes from the sinus venosus, while the ridged anterior part represents the original atrium.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-gross.webp",
+    "alt": "Internal anatomy of right atrium showing crista terminalis, pectinate muscles, and fossa ovalis",
+    "caption": "Interior of the right atrium showing the crista terminalis demarcation and pectinate muscles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Externally, the crista terminalis corresponds to a shallow groove on the right atrial surface designated the **sulcus terminalis**. From the crista terminalis, parallel muscular ridges known as musculi pectinati (pectinate muscles) run horizontally forward into the right auricle, resembling the teeth of a comb.",
+   "say": "Externally, the crista terminalis corresponds to the sulcus terminalis. Internally, parallel pectinate muscles branch off the crista into the right auricle like teeth of a comb.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sinus Venarum (Posterior)",
+     "points": [
+      "Smooth, thin-walled posterior chamber",
+      "Derived from absorbed right horn of sinus venosus",
+      "Receives superior and inferior venae cavae",
+      "Receives coronary sinus orifice"
+     ]
+    },
+    "right": {
+     "title": "Atrium Proper (Anterior)",
+     "points": [
+      "Rough, trabeculated muscular chamber",
+      "Derived from embryonic primitive atrium",
+      "Contains prominent pectinate muscular ridges",
+      "Expands into triangular right auricle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "On the interatrial septum lies an oval depression, the **fossa ovalis**, representing the closed fetal foramen ovale. Bounded superiorly and anteriorly by a prominent muscular crescentic rim termed the limbus fossae ovalis (annulus ovalis), its floor is derived from the embryonic septum primum while the limbus derives from septum secundum.",
+   "say": "The interatrial septum features the fossa ovalis, marking the site of the fetal foramen ovale. Its floor comes from septum primum, encircled by the limbus derived from septum secundum.",
+   "vis": {
+    "kind": "flow",
+    "title": "Embryological Derivation of Interatrial Septum",
+    "nodes": [
+     {
+      "id": "primum",
+      "label": "Septum Primum Grows Toward Endocardial Cushions"
+     },
+     {
+      "id": "secundum",
+      "label": "Septum Secundum Develops to Right with Foramen Ovale"
+     },
+     {
+      "id": "birth",
+      "label": "Neonatal Left Atrial Pressure Rises, Forcing Flap Closed"
+     },
+     {
+      "id": "fossa",
+      "label": "Floor Becomes Fossa Ovalis; Rim Becomes Limbus"
+     }
+    ],
+    "edges": [
+     [
+      "primum",
+      "secundum"
+     ],
+     [
+      "secundum",
+      "birth"
+     ],
+     [
+      "birth",
+      "fossa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The right ventricle is characterized by coarse muscular trabeculae carneae and a curved muscular bundle termed the **moderator band** (septomarginal trabecula). Extending from the muscular interventricular septum to the base of the anterior papillary muscle, it carries the right bundle branch of the cardiac conducting system.",
+   "say": "The right ventricle features muscular trabeculae and the moderator band. Spanning from the septum to the anterior papillary muscle, it carries the right bundle branch to prevent ventricular overdistension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Right Ventricle Feature",
+     "Anatomical Location",
+     "Functional Component",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Inflow Tract",
+      "Postero-inferior chamber",
+      "Heavily trabeculated with trabeculae carneae",
+      "Accommodates high compliance volume loading"
+     ],
+     [
+      "Outflow Tract (Infundibulum)",
+      "Supero-anterior smooth cone",
+      "Smooth cone of conus arteriosus",
+      "Leads directly to pulmonary semilunar valve"
+     ],
+     [
+      "Moderator Band",
+      "Septum to anterior papillary base",
+      "Transmits right bundle branch",
+      "Accelerates conduction to anterior wall"
+     ],
+     [
+      "Supraventricular Crest",
+      "Between inflow and infundibulum",
+      "Arched muscular ridge",
+      "Directs inflow smoothly toward pulmonary trunk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Both ventricles contain **papillary muscles** projecting from the ventricular walls, anchored to the free margins and ventricular surfaces of atrioventricular valve cusps by tough fibrous cords called chordae tendineae. Papillary muscle contraction during ventricular systole tightens the chordae, preventing valve cusp eversion into the atria.",
+   "say": "Papillary muscles anchor to atrioventricular valve leaflets through chordae tendineae. During ventricular contraction, they pull the chordae taut to prevent valve cusps from prolapsing into the atria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Ventricle Papillary Muscles",
+     "points": [
+      "Three muscles: anterior, posterior, septal",
+      "Anterior papillary is largest, receives moderator band",
+      "Tether tricuspid valve cusps",
+      "Septal papillary arises directly from septum"
+     ]
+    },
+    "right": {
+     "title": "Left Ventricle Papillary Muscles",
+     "points": [
+      "Two robust muscles: anterolateral and posteromedial",
+      "Much thicker to withstand high left ventricular pressure",
+      "Tether bicuspid (mitral) valve leaflets",
+      "Posteromedial muscle has solitary RCA blood supply"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The posteromedial papillary muscle of the left ventricle is vulnerable to ischemic rupture following myocardial infarction because it receives a solitary blood supply from the **posterior descending artery**. In contrast, the anterolateral papillary muscle receives a dual blood supply from both the left anterior descending and circumflex arteries.",
+   "say": "The posteromedial papillary muscle is vulnerable to rupture after a myocardial infarction because it relies on a single blood supply from the posterior descending artery. Anterolateral papillary muscle has dual perfusion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Acute Mitral Regurgitation",
+    "nodes": [
+     {
+      "id": "mi",
+      "label": "Inferior Wall Myocardial Infarction from RCA Occlusion"
+     },
+     {
+      "id": "ischemia",
+      "label": "Solitary Perfusion of Posteromedial Papillary Muscle Fails"
+     },
+     {
+      "id": "rupture",
+      "label": "Acute Papillary Muscle Necrosis and Rupture"
+     },
+     {
+      "id": "mr",
+      "label": "Massive Acute Mitral Regurgitation and Flash Pulmonary Edema"
+     }
+    ],
+    "edges": [
+     [
+      "mi",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "rupture"
+     ],
+     [
+      "rupture",
+      "mr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The heart valves comprise two atrioventricular valves and two semilunar valves. The **tricuspid valve** possesses anterior, posterior, and septal cusps, while the bicuspid (mitral) valve has anterior and posterior leaflets. The aortic and pulmonary valves each contain three crescentic semilunar cusps with central fibrous nodules and lateral lunules.",
+   "say": "The heart contains two atrioventricular valves and two semilunar valves. The tricuspid valve has three cusps and the mitral has two, while aortic and pulmonary valves each possess three semilunar leaflets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cardiac Valve",
+     "Number of Cusps",
+     "Cusp Designations",
+     "Pressure Withstood"
+    ],
+    "rows": [
+     [
+      "Tricuspid Valve",
+      "Three cusps",
+      "Anterior, posterior, septal",
+      "Low right ventricular systolic pressure (25 mmHg)"
+     ],
+     [
+      "Mitral Valve (Bicuspid)",
+      "Two cusps",
+      "Anterior (aortic) and posterior (mural)",
+      "High left ventricular systolic pressure (120 mmHg)"
+     ],
+     [
+      "Pulmonary Valve",
+      "Three semilunar",
+      "Anterior, right, left",
+      "Low pulmonary diastolic pressure (10 mmHg)"
+     ],
+     [
+      "Aortic Valve",
+      "Three semilunar",
+      "Right coronary, left coronary, non-coronary",
+      "High systemic aortic diastolic pressure (80 mmHg)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrical insulation between atria and ventricles is provided by the dense collagenous **fibrous skeleton** of the heart. Consisting of four fibrous rings surrounding the valvular orifices, the right and left fibrous trigones, and the membranous septum, it provides structural anchorage for valve leaflets and prevents chaotic electrical conduction.",
+   "say": "The fibrous skeleton provides electrical insulation between atria and ventricles. Formed by four collagenous rings and two trigones, it anchors the valve leaflets and prevents chaotic electrical transmission.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Anatomical schematic showing fibrous cardiac skeleton insulating atria from ventricles",
+    "caption": "Fibrous skeleton of the heart providing mechanical valve support and electrical insulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "fa0746c5-8e85-448f-bc10-9c9a19880f61",
+  "eb8d94ba-a58a-48d9-aec6-506e97c0b5f3",
+  "97c3a038-d1b1-48d1-abea-8dbc2aaacd9c"
+ ]
+}
