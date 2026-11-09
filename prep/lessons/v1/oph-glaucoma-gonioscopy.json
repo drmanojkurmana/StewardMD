@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-gonioscopy",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Gonioscopy and Angle Assessment",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Gonioscopy** views anterior chamber angle through contact mirror lens overcoming corneal total internal reflection, grading openness and identifying synechiae, recession, neovascularisation and pigment. It classifies every glaucoma mechanism and is mandatory before laser or surgery selection. Dark room and narrow beam avoid pupil constriction falsely opening angle during assessment.",
+   "say": "Mirror viewing together gives angle classification in every glaucoma at diagnosis clinics for adults without exception. Technique conditions gives validity additionally. Mechanism gives laser direction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/angle-recession-glaucoma-fig1.webp",
+    "alt": "Angle recession gonioscopy view with widened ciliary band after trauma.",
+    "caption": "Gonioscopy angle view. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Angle structures from anterior to posterior are Schwalbe line, trabecular meshwork pigmented, scleral spur white and ciliary body band grey brown, memorised as orientation ladder. Deepest visible structure grades openness in Shaffer system next lesson. **Scleral spur** remains anchor landmark separating meshwork from ciliary band in orientation.",
+   "say": "Structure ladder together gives gonioscopy orientation at slit lamp during angle assessment in glaucoma clinics for adults. Spur gives anchor value additionally. Deepest structure gives grading input.",
+   "vis": {
+    "kind": "table",
+    "title": "Angle ladder anterior to posterior",
+    "cols": [
+     "Order",
+     "Structure"
+    ],
+    "rows": [
+     [
+      "First",
+      "Schwalbe line"
+     ],
+     [
+      "Second",
+      "Trabecular meshwork pigmented"
+     ],
+     [
+      "Third",
+      "Scleral spur white"
+     ],
+     [
+      "Fourth",
+      "Ciliary body band"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Indentation gonioscopy** presses cornea to push aqueous into angle separating appositional contact that opens from synechial adhesion that stays closed in angle closure assessment. This dynamic manoeuvre decides iridotomy versus synechial chronicity management. Static grade without indentation therefore underdiagnoses closure mechanism completeness.",
+   "say": "Dynamic pressing together gives apposition separation in angle closure at gonioscopy clinics for acute and chronic cases. Static grade gives incompleteness additionally. Manoeuvre gives iridotomy logic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Appositional closure",
+     "points": [
+      "Opens on indentation",
+      "Iridotomy may relieve"
+     ]
+    },
+    "right": {
+     "title": "Synechial closure",
+     "points": [
+      "Stays closed adherent",
+      "Chronic damage pathway"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Angle recession after blunt trauma widens ciliary band by ciliary body tear, glaucoma risk lifelong in injured eye needing annual pressure surveillance. Pigment dispersion and pseudoexfoliation deposit patterns give secondary open angle clues on meshwork and lens from capsule lessons. **Secondary signs** therefore read during same gonioscopy that grades openness.",
+   "say": "Secondary signs together give cause reading during gonioscopy in glaucoma assessment at trauma follow up clinics. Recession gives lifelong surveillance additionally. Deposits give pattern value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Gonioscopy examination flow",
+    "nodes": [
+     {
+      "id": "dark",
+      "label": "Dark room narrow beam"
+     },
+     {
+      "id": "grade",
+      "label": "Grade deepest structure seen"
+     },
+     {
+      "id": "indent",
+      "label": "Indent if closure suspected"
+     },
+     {
+      "id": "cause",
+      "label": "Read secondary signs"
+     }
+    ],
+    "edges": [
+     [
+      "dark",
+      "grade"
+     ],
+     [
+      "grade",
+      "indent"
+     ],
+     [
+      "indent",
+      "cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neovascular angle** vessels crossing scleral spur into meshwork signal ischaemic drive from diabetes or vein occlusion toward neovascular glaucoma emergency in secondary batch. Finding angle vessels therefore triggers retinal ischaemia hunt same visit. Gonioscopy in diabetic eye disease therefore is pressure prevention, not formality.",
+   "say": "Angle vessels together give ischaemia hunt trigger in diabetic gonioscopy at glaucoma clinics for adults with retinopathy. Retinal drive gives cause direction additionally. Prevention gives examination value.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pigmentary-glaucoma-fig1.webp",
+    "alt": "Pigmentary glaucoma pathophysiology with trabecular pigment on gonioscopy relevance.",
+    "caption": "Trabecular secondary signs. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Blood in Schlemm canal from raised episcleral venous pressure in fistula lesson returns as gonioscopic venous sign, angle otherwise open. Plateau iris configuration flat plane with steep closure on indentation imaging by ultrasound biomicroscopy where gonioscopy ambiguous. **Imaging adjuncts** therefore resolve mechanism where mirror view equivocal.",
+   "say": "Imaging adjuncts together give mechanism resolution where gonioscopy equivocal in angle closure at tertiary clinics for difficult cases. Canal blood gives venous clue additionally. Plateau gives configuration value.",
+   "vis": {
+    "kind": "table",
+    "title": "Gonioscopy secondary reads",
+    "cols": [
+     "Read",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Recession widened band",
+      "Trauma lifelong surveillance"
+     ],
+     [
+      "Vessels crossing spur",
+      "Retinal ischaemia hunt"
+     ],
+     [
+      "Blood in canal",
+      "Venous pressure elevation"
+     ],
+     [
+      "Dense pigment band",
+      "Dispersion or exfoliation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paediatric gonioscopy under anaesthesia in congenital glaucoma finds trabeculodysgenesis and Barkan membrane concepts guiding goniotomy approach. Adult technique awake therefore adapts to infant theatre assessment in congenital lists. **Age adaptation** keeps gonioscopy mandatory across lifespan glaucoma. Adult gonioscopy findings therefore translate directly into infant theatre planning where congenital disease is suspected.",
+   "say": "Age adaptation together gives gonioscopy continuity in congenital glaucoma at theatre assessment for infants with buphthalmos. Membrane concepts give goniotomy direction additionally. Mandatory status gives lifespan value.",
+   "vis": {
+    "kind": "table",
+    "title": "Gonioscopy conditions",
+    "cols": [
+     "Condition",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Dark room",
+      "Avoid pupil opening artefact"
+     ],
+     [
+      "Narrow beam",
+      "Avoid light through pupil"
+     ],
+     [
+      "Indentation ready",
+      "Closure mechanism split"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: mirror overcomes reflection, spur anchors ladder, indentation splits apposition and secondary signs share sitting. Angle vessels hunt retina, recession surveils lifelong. **Deepest structure seen** is gonioscopy data sentence in every glaucoma record, not open or closed shorthand alone. Training therefore signs off gonioscopy competence before independent glaucoma clinics in modern programmes.",
+   "say": "Deepest structure together gives gonioscopy data quality in glaucoma records at diagnosis clinics for adults reliably each time. Indentation gives mechanism additionally. Secondary gives cause completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Gonioscopy anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Anchor landmark",
+      "Scleral spur white band"
+     ],
+     [
+      "Dynamic test",
+      "Indentation splits closure type"
+     ],
+     [
+      "Mandatory status",
+      "Every new glaucoma case"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Angle ladder",
+   "b": "Schwalbe line, trabecular meshwork, scleral spur, ciliary body band anterior to posterior."
+  },
+  {
+   "f": "Indentation gonioscopy",
+   "b": "Opens appositional closure, synechial stays closed; decides closure mechanism."
+  },
+  {
+   "f": "Angle vessels action",
+   "b": "Hunt retinal ischaemia same visit toward neovascular glaucoma prevention."
+  }
+ ],
+ "keys": [
+  "Dark narrow beam prevents false opening",
+  "Recession needs lifelong pressure checks",
+  "Record deepest structure, not shorthand"
+ ]
+}

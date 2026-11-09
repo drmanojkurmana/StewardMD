@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-open-angle-glaucoma",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Primary Open Angle Glaucoma",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Primary open angle glaucoma** is chronic bilateral optic neuropathy with open angle, raised or statistically normal pressure and no secondary cause, insidiously asymptomatic until advanced field loss. Risk rises with age, family history, myopia, thin cornea and African ancestry in epidemiology teaching. Screening therefore targets disc and field in risk groups rather than pressure alone in populations.",
+   "say": "Chronic open angle neuropathy together gives silent field loss until advanced stages in adults characteristically over years. Risk groups give screening targeting additionally. Pressure alone gives insufficient detection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-open-angle-glaucoma-fig1.webp",
+    "alt": "Open angle glaucoma progression diagram with disc and field changes.",
+    "caption": "Open angle progression. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Outflow resistance at juxtacanalicular meshwork raises pressure gradually without angle closure anatomy, gonioscopy open to ciliary band in primary disease. Diurnal fluctuation may exceed office snapshot, home or phasing assessment selected where damage and office pressure disagree. **Open on gonioscopy** phrase therefore completes primary open angle diagnosis triad with disc and field.",
+   "say": "Meshwork resistance together gives gradual pressure rise with open anatomy in primary disease at gonioscopy in clinic. Diurnal variation gives phasing value additionally. Triad gives diagnosis completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Primary open angle triad",
+    "cols": [
+     "Element",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Disc field",
+      "Glaucomatous damage pattern"
+     ],
+     [
+      "Gonioscopy",
+      "Angle open, no secondary cause"
+     ],
+     [
+      "Pressure",
+      "Raised or normal, risk lever"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progression analysis by serial fields and disc imaging separates stable treated disease from progressing despite office target, events versus trend analysis in modern software. Disc haemorrhage flags active progression risk needing target revision. **Trend over snapshot** therefore manages open angle longitudinally in follow up clinics.",
+   "say": "Serial trend together gives progression separation beyond office snapshots in open angle follow up at glaucoma clinics over years. Haemorrhage gives revision flag additionally. Event analysis gives software support.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable treated",
+     "points": [
+      "Fields flat serially",
+      "No new disc haemorrhage"
+     ]
+    },
+    "right": {
+     "title": "Progressing disease",
+     "points": [
+      "Trend slope worsening",
+      "Haemorrhage or notch new"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Medical therapy first line in most primary open angle, laser trabeculoplasty increasingly initial where available, surgery for progression or intolerance by target logic. Adherence and drop technique decide real world efficacy more than molecule novelty between visits. **Technique observation** at follow up therefore corrects pseudo failure before escalation labelling.",
+   "say": "Technique observation together gives pseudo failure correction in open angle follow up at glaucoma clinics for adults on drops. Adherence gives efficacy reality additionally. Laser gives initial alternative option.",
+   "vis": {
+    "kind": "flow",
+    "title": "Open angle escalation logic",
+    "nodes": [
+     {
+      "id": "target",
+      "label": "Target pressure set by damage"
+     },
+     {
+      "id": "med",
+      "label": "Drops or laser initial"
+     },
+     {
+      "id": "trend",
+      "label": "Trend progression reviewed"
+     },
+     {
+      "id": "surg",
+      "label": "Surgery if target failed"
+     }
+    ],
+    "edges": [
+     [
+      "target",
+      "med"
+     ],
+     [
+      "med",
+      "trend"
+     ],
+     [
+      "trend",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal tension variant damages at consistently normal pressures needing lower targets and vascular risk review, sleep apnoea and nocturnal hypotension in history taking. Collaborative care with physicians avoids systemic hypotension overtreatment undermining optic perfusion. **Perfusion context** therefore completes normal tension assessment beyond eye numbers.",
+   "say": "Perfusion context together gives normal tension completion beyond eye numbers at joint assessment for adults with damage. Sleep history gives review value additionally. Hypotension gives overtreatment caution.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Optic nerve anatomy relevant to normal tension glaucoma assessment.",
+    "caption": "Normal tension nerve assessment. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Family screening first degree relatives by age thresholds finds undiagnosed disease because inheritance strong and symptoms absent until late. Cascade screening therefore follows every new primary diagnosis as service routine. **Relative invitation** letter is glaucoma prevention intervention in open angle programmes.",
+   "say": "Cascade invitation together gives family detection in open angle programmes at screening services for relatives of patients. Inheritance gives invitation value additionally. Silence gives late presentation risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Open angle risk set",
+    "cols": [
+     "Risk",
+     "Action"
+    ],
+    "rows": [
+     [
+      "First degree relative",
+      "Cascade screening invitation"
+     ],
+     [
+      "Thin central cornea",
+      "Risk and reading correction"
+     ],
+     [
+      "Disc haemorrhage",
+      "Lower target, closer trend"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Advanced disease with split fixation threatens reading vision from small progression, targets lowest and surveillance closest in this group. Quality of life and falls risk enter advanced glaucoma counselling beyond field numbers. **Split fixation** therefore escalates care intensity disproportionate to pressure reading alone.",
+   "say": "Split fixation together gives intensity escalation in advanced open angle at glaucoma clinics for elderly adults. Reading threat gives counselling depth additionally. Falls gives quality context.",
+   "vis": {
+    "kind": "table",
+    "title": "Stage intensity map",
+    "cols": [
+     "Stage",
+     "Intensity"
+    ],
+    "rows": [
+     [
+      "Early damage",
+      "Standard target, annual trend"
+     ],
+     [
+      "Progressing moderate",
+      "Lower target, laser or surgery"
+     ],
+     [
+      "Split fixation advanced",
+      "Lowest target, closest review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: open angle silent bilateral, trend manages, family cascades and perfusion contexts normal tension. Disc haemorrhage lowers target, technique failure mimics drug failure. **Asymptomatic until advanced** phrase justifies screening economics in open angle teaching across populations. Family history therefore appears in every new glaucoma clerking as a screening action, not background detail.",
+   "say": "Silent course together gives screening justification in open angle teaching at examinations for students reliably in population health. Trend gives longitudinal law additionally. Technique gives pseudo failure lesson.",
+   "vis": {
+    "kind": "table",
+    "title": "Open angle anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Presentation",
+      "Silent until advanced field loss"
+     ],
+     [
+      "Management unit",
+      "Trend against individual target"
+     ],
+     [
+      "Family action",
+      "Cascade screening relatives"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Primary open angle triad",
+   "b": "Glaucomatous disc field damage, open gonioscopy without secondary cause, pressure as lever."
+  },
+  {
+   "f": "Disc haemorrhage action",
+   "b": "Flags progression risk; lower target and closer trend surveillance."
+  },
+  {
+   "f": "Normal tension completion",
+   "b": "Lower targets plus perfusion, sleep apnoea and nocturnal hypotension review."
+  }
+ ],
+ "keys": [
+  "Trend manages open angle, snapshots mislead",
+  "Observe drop technique before escalating",
+  "Cascade screening follows every diagnosis"
+ ]
+}

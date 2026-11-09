@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-trabeculectomy",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Trabeculectomy and Bleb Management",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Trabeculectomy** creates guarded fistula from anterior chamber under scleral flap to subconjunctival bleb bypassing trabecular resistance to episcleral absorption. Antimetabolite application improves patency by limiting scar at cost of thin bleb complications. It remains benchmark for low target pressures in progressing glaucoma despite tube and minimally invasive alternatives.",
+   "say": "Guarded fistula together gives low target achievement in progressing glaucoma at surgical centres for adults failing medical control. Antimetabolite gives patency trade additionally. Benchmark gives comparison status.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-open-angle-glaucoma-fig1.webp",
+    "alt": "Glaucoma progression diagram relevant to trabeculectomy target decisions.",
+    "caption": "Trabeculectomy target context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Bleb** morphology diffuse posterior low bleb desired, cystic thin avascular bleb leaks and infects, scarred flat bleb fails pressure. Bleb grading at follow up therefore directs massage, suture adjustment, needling or revision decisions. Seidel testing detects leak where hypotony or infection suspected in thin blebs.",
+   "say": "Bleb grading together gives follow up decisions in trabeculectomy clinics for operated adults over months. Thin cystic gives leak danger additionally. Flat scar gives failure direction.",
+   "vis": {
+    "kind": "table",
+    "title": "Bleb morphology map",
+    "cols": [
+     "Morphology",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Diffuse low posterior",
+      "Desired functioning bleb"
+     ],
+     [
+      "Thin cystic avascular",
+      "Leak and infection risk"
+     ],
+     [
+      "Flat scarred vascular",
+      "Failing pressure control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blebitis and bleb related endophthalmitis late infections enter through thin bleb years after surgery, red painful eye in trabeculectomy patient therefore emergency with bleb examination first. Patient education lifelong therefore repeats surgery discharge at every glaucoma visit. **Bleb red eye** phrase therefore outranks routine conjunctivitis triage in operated patients.",
+   "say": "Bleb priority together gives emergency triage in trabeculectomy patients at eye casualty for red painful presentations. Lifelong education gives repetition additionally. Routine gives dangerous delay contrast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": " functioning bleb course",
+     "points": [
+      "Diffuse bleb, target met",
+      "Routine bleb grading visits"
+     ]
+    },
+    "right": {
+     "title": "Bleb emergency course",
+     "points": [
+      "Red pain, milky bleb fluid",
+      "Endophthalmitis pathway urgent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hypotony after overfiltration gives shallow chamber, choroidal effusion and maculopathy folds needing flap revision or resuturing where vision threatened. Early suture releasable techniques titrate flow postoperatively balancing hypotony against scar failure. **Flow titration** therefore structures first month trabeculectomy follow up intensively.",
+   "say": "Flow titration together gives first month intensity in trabeculectomy follow up at surgical clinics for operated adults. Hypotony gives revision trigger additionally. Balance gives suture logic.",
+   "vis": {
+    "kind": "flow",
+    "title": "Trabeculectomy follow up flow",
+    "nodes": [
+     {
+      "id": "bleb",
+      "label": "Bleb and pressure graded"
+     },
+     {
+      "id": "flow",
+      "label": "Suture flow titrated"
+     },
+     {
+      "id": "needle",
+      "label": "Needling scar if failing"
+     },
+     {
+      "id": "rev",
+      "label": "Revision or tube if failed"
+     }
+    ],
+    "edges": [
+     [
+      "bleb",
+      "flow"
+     ],
+     [
+      "flow",
+      "needle"
+     ],
+     [
+      "needle",
+      "rev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antimetabolite application intraoperatively and postoperative antimetabolite injections modulate wound healing, thin bleb and hypotony as price of patency in high scar risk. Young, uveitic and previously operated conjunctiva scar more needing modulation most. **Scar risk** therefore writes antimetabolite dose before incision in trabeculectomy planning.",
+   "say": "Scar risk together gives antimetabolite planning in trabeculectomy at preoperative clinics for high risk adults. Thin price gives counselling additionally. Conjunctiva gives dose input.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Subconjunctival anatomy diagram relevant to bleb filtration assessment.",
+    "caption": "Bleb filtration anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure by subconjunctival fibrosis over months managed needling with antimetabolite, revision surgery or drainage device by conjunctiva and target needs from next lesson. Virgin conjunctiva preservation by drop choices years earlier therefore pays at filtration failure options. **Conjunctiva capital** phrase links chronic drop and surgery modules economically.",
+   "say": "Conjunctiva capital together gives failure options in trabeculectomy follow up at surgical clinics for operated adults. Needling gives scar rescue additionally. Preservation gives earlier lesson payoff.",
+   "vis": {
+    "kind": "table",
+    "title": "Bleb failure ladder",
+    "cols": [
+     "Stage",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Early flow low",
+      "Suture release or massage"
+     ],
+     [
+      "Scarring months",
+      "Needling with modulation"
+     ],
+     [
+      "Failed bleb",
+      "Revision or drainage device"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cataract acceleration after trabeculectomy and bleb interaction with later cataract surgery route planning need combined sequencing in progressing lens opacity. Phaco through clear cornea preserving bleb superiorly therefore planned jointly. **Combined planning** prevents filtration sacrifice for lens rehabilitation in operated glaucoma patients.",
+   "say": "Combined planning together gives bleb preservation in later cataract surgery at joint clinics for operated glaucoma adults. Corneal route gives superior protection additionally. Sequencing gives outcome value.",
+   "vis": {
+    "kind": "table",
+    "title": "Trabeculectomy counselling set",
+    "cols": [
+     "Counsel item",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Lifelong bleb infection flags",
+      "Late endophthalmitis risk"
+     ],
+     [
+      "Intensive first month visits",
+      "Flow titration window"
+     ],
+     [
+      "Cataract acceleration",
+      "Future lens planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: guarded fistula bleb bypass, morphology grades function, thin bleb infects late and hypotony maculopathises early. Antimetabolite trades scar for thinness, needling rescues fibrosis. **Bleb patient red eye** is emergency bleb examination before drops in all settings. Bleb clinics therefore keep urgent access slots for operated patients reporting redness at any interval.",
+   "say": "Bleb examination together gives emergency priority in operated glaucoma at eye casualty for red presentations reliably. Morphology gives function additionally. Titration gives early logic completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Trabeculectomy anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Desired bleb",
+      "Diffuse low posterior functioning"
+     ],
+     [
+      "Danger bleb",
+      "Thin cystic leaking infecting"
+     ],
+     [
+      "First month task",
+      "Titrate flow against scar"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Trabeculectomy principle",
+   "b": "Guarded scleral flap fistula to subconjunctival bleb bypassing meshwork for low targets."
+  },
+  {
+   "f": "Bleb emergency",
+   "b": "Red painful eye in bleb patient is blebitis or endophthalmitis until bleb examined urgently."
+  },
+  {
+   "f": "Antimetabolite trade",
+   "b": "Less scar and better patency against thin bleb leak, hypotony and late infection."
+  }
+ ],
+ "keys": [
+  "Bleb morphology directs follow up decisions",
+  "Preserve conjunctiva years before filtration",
+  "Hypotony maculopathy needs flow revision"
+ ]
+}
