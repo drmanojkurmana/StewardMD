@@ -1,0 +1,255 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Nissen Fundoplication, Barrett Oesophagus, and Antireflux Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The gold standard surgical therapy for severe, refractory gastroesophageal reflux disease is the **laparoscopic Nissen fundoplication**. This procedure mobilizes the gastric fundus and wraps it 360 degrees circumferentially around the lower intra-abdominal esophagus. Indications include persistent reflux symptoms despite optimal medical therapy, intolerance to lifetime proton pump inhibitor medication, large hiatal hernias, and severe extra-esophageal manifestations such as aspiration asthma and chronic laryngitis.",
+   "say": "Laparoscopic Nissen fundoplication is the benchmark anti-reflux operation, wrapping the gastric fundus 360 degrees around the lower esophagus to restore sphincter competence and stop acid reflux.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gastroesophageal-reflux-disease-fig1.webp",
+    "alt": "Medical diagram illustrating gastroesophageal reflux, barrier disruption, and fundoplication repair.",
+    "caption": "Anti-reflux surgery: restoring the lower esophageal sphincter high-pressure zone via fundic wrapping. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Before offering anti-reflux surgery, objective physiological testing is mandatory to confirm abnormal acid exposure and evaluate esophageal motility. Upper endoscopy assesses for mucosal erosions and hiatal hernia. Quantitative **24-hour ambulatory pH monitoring** is the gold standard for verifying pathological acid reflux, documented by a total acid exposure time greater than six percent or an elevated composite DeMeester score exceeding fourteen point seven.",
+   "say": "Preoperative evaluation requires 24-hour ambulatory pH monitoring to prove pathological acid reflux, defined by an elevated DeMeester score above fourteen point seven or excessive acid exposure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "endo",
+      "label": "Upper Endoscopy: Visualise Erosive Oesophagitis & Hiatal Defect"
+     },
+     {
+      "id": "ph",
+      "label": "Ambulatory pH-Impedance: Confirms DeMeester Score > 14.7"
+     },
+     {
+      "id": "mano",
+      "label": "High-Resolution Manometry: Confirms Normal Esophageal Peristalsis"
+     },
+     {
+      "id": "barium",
+      "label": "Barium Swallow: Outlines Anatomy, Hiatus & Short Esophagus"
+     },
+     {
+      "id": "surg",
+      "label": "Multidisciplinary Clearance for Laparoscopic Fundoplication"
+     }
+    ],
+    "edges": [
+     [
+      "endo",
+      "ph"
+     ],
+     [
+      "ph",
+      "mano"
+     ],
+     [
+      "mano",
+      "barium"
+     ],
+     [
+      "barium",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative high-resolution manometry is essential to exclude underlying esophageal motor disorders like achalasia or severe ineffective esophageal motility. A patient with poor esophageal peristaltic reserve who receives a tight 360-degree wrap will suffer severe, intractable postoperative dysphagia. If esophageal motility is significantly impaired, the surgeon avoids a complete Nissen wrap and selects a partial fundoplication instead, such as a **posterior Toupet 270-degree wrap**.",
+   "say": "High-resolution manometry ensures the esophagus has sufficient peristaltic strength to push food through the wrap. Patients with poor motility receive a partial Toupet wrap instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Nissen (360-Degree)",
+     "points": [
+      "Circumferential fundic wrap around esophagus",
+      "Highest efficacy for reflux symptom control",
+      "Requires robust preoperative esophageal peristalsis",
+      "Higher incidence of post-surgical gas-bloat"
+     ]
+    },
+    "right": {
+     "title": "Partial Toupet (270-Degree)",
+     "points": [
+      "Posterior wrap sutured to crura and esophagus",
+      "Leaves anterior esophageal wall open",
+      "Preferred when esophageal motility is impaired",
+      "Lower incidence of post-surgical gas-bloat"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The operative technique of a floppy Nissen fundoplication follows precise principles to prevent postoperative complications. The surgeon divides the short gastric vessels to fully mobilize the fundus, ensuring a tension-free wrap. A large fifty to sixty French bougie is placed intraluminally across the gastroesophageal junction during suturing. Constructing a short wrap measuring only **one and a half to two centimetres** around the calibrated bougie prevents the distressing complications of gas-bloat and dysphagia.",
+   "say": "A floppy Nissen wrap requires dividing the short gastric vessels, sizing the wrap over a large bougie, and keeping the wrap short, between one and a half and two centimeters in length.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "short",
+      "label": "Division of Short Gastric Vessels to Fully Mobilize Gastric Fundus"
+     },
+     {
+      "id": "hiatus",
+      "label": "Posterior Cruroraphy to Reapproximate Diaphragmatic Pillars"
+     },
+     {
+      "id": "bougie",
+      "label": "Intraluminal Placement of 50 to 60 French Calibrating Bougie"
+     },
+     {
+      "id": "wrap",
+      "label": "Creation of Tension-Free 1.5 to 2 cm Floppy 360-Degree Wrap"
+     },
+     {
+      "id": "suture",
+      "label": "Non-Absorbable Sutures Incorporating Anterior Esophageal Wall"
+     }
+    ],
+    "edges": [
+     [
+      "short",
+      "hiatus"
+     ],
+     [
+      "hiatus",
+      "bougie"
+     ],
+     [
+      "bougie",
+      "wrap"
+     ],
+     [
+      "wrap",
+      "suture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A common complication of complete 360-degree fundoplication is **gas-bloat syndrome**. Because the tight wrap acts as a one-way valve, it prevents the patient from venting swallowed intragastric air through belching or vomiting. Patients experience severe postprandial fullness, epigastric distension, and increased flatus. Careful patient counseling regarding eating habits, avoiding carbonated beverages, and meticulous intraoperative floppy wrap construction substantially mitigate this adverse effect.",
+   "say": "Gas-bloat syndrome develops when a tight wrap prevents belching, trapping swallowed air in the stomach. Constructing a floppy wrap and avoiding carbonated drinks minimizes this problem.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Postoperative Complication",
+     "Underlying Mechanism",
+     "Prevention & Management"
+    ],
+    "rows": [
+     [
+      "Gas-Bloat Syndrome",
+      "One-way valve blocks belching",
+      "Dietary modifications, avoid carbonated drinks"
+     ],
+     [
+      "Early Dysphagia",
+      "Postoperative tissue edema at hiatus",
+      "Liquid diet for 2 weeks; usually self-limiting"
+     ],
+     [
+      "Late Persistent Dysphagia",
+      "Overly tight wrap or slipped wrap",
+      "Endoscopic balloon dilation or surgical revision"
+     ],
+     [
+      "Slipped Nissen",
+      "Wrap migrates onto stomach",
+      "Reoperation with crural repair and gastropexy"
+     ],
+     [
+      "Pneumothorax",
+      "Pleural tear during hiatal dissection",
+      "Evacuate air with catheter; chest drain if needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic acid and bile reflux over many years drives the development of **Barrett oesophagus**, a premier premalignant condition. Pathologically, it is defined by the metaplastic replacement of normal stratified squamous epithelium of the distal esophagus by specialized intestinal-type columnar epithelium containing mucin-secreting goblet cells. This metaplastic transformation represents a physiological adaptation to chronic acidic exposure, but carries an increased risk of progression to esophageal adenocarcinoma.",
+   "say": "Barrett esophagus develops when chronic acid reflux causes the normal squamous lining of the distal esophagus to be replaced by intestinal-type columnar epithelium with goblet cells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diseases-of-esophagus-fig2.webp",
+    "alt": "Histopathological and endoscopic diagram showing the transition from normal squamous mucosa to Barrett columnar metaplasia.",
+    "caption": "Barrett oesophagus: metaplastic transformation from squamous epithelium to mucinous columnar cells. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endoscopic inspection of Barrett esophagus utilizes the standardized **Prague C and M criteria**. The circumferential extent (C) measures the continuous circular length of columnar mucosa above the gastroesophageal junction, while the maximal extent (M) records the highest reaching columnar tongue. Four-quadrant jumbo biopsies are obtained every one to two centimetres following the Seattle protocol to detect early dysplasia. Chromoendoscopy or narrow-band imaging highlights mucosal architectural irregularities to guide targeted biopsies.",
+   "say": "Endoscopy grades Barrett esophagus using the Prague criteria, measuring circumferential and maximal length. Four-quadrant biopsies taken every two centimeters screen for dysplasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Circumferential Extent (C)",
+     "points": [
+      "Measures continuous circular columnar sleeve",
+      "Distance from GE junction to circumferential top",
+      "Recorded in centimetres (e.g., C2)",
+      "Guides ablation surface planning"
+     ]
+    },
+    "right": {
+     "title": "Maximal Extent (M)",
+     "points": [
+      "Measures highest reaching columnar mucosal tongue",
+      "Distance from GE junction to highest tip",
+      "Recorded in centimetres (e.g., M5)",
+      "Identifies focal areas requiring targeted biopsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The management of Barrett esophagus depends on the histological degree of dysplasia. Non-dysplastic Barrett esophagus is managed with acid suppression and endoscopic surveillance every three to five years. When confirmed low-grade or high-grade dysplasia is identified, endoscopic eradication therapy is recommended. Focal nodular lesions are excised via **endoscopic mucosal resection** for precise pathological staging, followed by circumferential radiofrequency ablation of the remaining flat Barrett segment.",
+   "say": "Non-dysplastic Barrett esophagus requires surveillance every three to five years. Dysplastic Barrett is treated with endoscopic mucosal resection of raised nodules and radiofrequency ablation of flat mucosa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Grade",
+     "Clinical Intervention",
+     "Surveillance Schedule"
+    ],
+    "rows": [
+     [
+      "No Dysplasia",
+      "Optimized PPI therapy",
+      "Endoscopic surveillance every 3 to 5 years"
+     ],
+     [
+      "Low-Grade Dysplasia",
+      "Expert pathology review & RFA",
+      "Surveillance every 6 to 12 months if untreated"
+     ],
+     [
+      "High-Grade Dysplasia",
+      "Endoscopic resection (EMR) + RFA",
+      "Surveillance every 3 months during ablation"
+     ],
+     [
+      "Intramucosal Carcinoma",
+      "Endoscopic mucosal resection (EMR)",
+      "Staging CT/EUS; surveillance every 3 months"
+     ],
+     [
+      "Submucosal Invasion",
+      "Multidisciplinary staging & surgery",
+      "Surgical esophagectomy consideration"
+     ]
+    ]
+   }
+  }
+ ]
+}
