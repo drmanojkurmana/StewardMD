@@ -52,13 +52,22 @@
 
   function build() {
     strip = document.createElement("div");
+    strip.id = "smdAzStrip";
     strip.setAttribute("aria-hidden", "true");
+    // Visible strip stays 22px; the ::before hitbox (injected below) makes the touch area 44px wide.
     strip.style.cssText = "position:fixed;right:max(2px,env(safe-area-inset-right,0px));top:50%;transform:translate(8px,-50%);opacity:0;transition:opacity .2s linear,transform .28s cubic-bezier(.32,.72,0,1);z-index:2147482200;" +
-      "display:flex;flex-direction:column;align-items:center;padding:6px 0;width:44px;touch-action:none;-webkit-user-select:none;user-select:none;border-radius:11px;" +
+      "display:flex;flex-direction:column;align-items:center;padding:6px 0;width:22px;touch-action:none;-webkit-user-select:none;user-select:none;border-radius:11px;" +
       "background:rgba(120,130,140,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:none";
+    try {
+      if (!document.getElementById("smdAzStripCss")) {
+        var hs = document.createElement("style"); hs.id = "smdAzStripCss";
+        hs.textContent = "#smdAzStrip::before{content:\"\";position:absolute;top:0;bottom:0;left:-11px;right:-11px}";
+        (document.head || document.documentElement).appendChild(hs);
+      }
+    } catch (e) {}
     ABC.forEach(function (L) {
       var s = document.createElement("div"); s.textContent = L; s.dataset.l = L;
-      s.style.cssText = "font:700 9.5px/13px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--v3-primary,#0F766E);height:13px;width:44px;text-align:center";
+      s.style.cssText = "font:700 9.5px/13px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--v3-primary,#0F766E);height:13px;width:22px;text-align:center";
       strip.appendChild(s);
     });
     bubble = document.createElement("div");

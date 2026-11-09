@@ -2923,31 +2923,97 @@
      taps the sheet's own scrim, so each module closes it its own way (focus return included). Touch and pen only; a
      sheet scrolled into its content scrolls first; form fields never start a drag. Transform and opacity only. */
   function bindSheetDrag() {
-    var g = null, flight = null;   // flight: in-flight WAAPI dismiss, cancelled when the sheet is caught again
+    var g = null, flight = null, held = null;   // flight: in-flight WAAPI dismiss {a,sa,d,timer}; held: a caught settle {d,y,id,kind}
     var rm = function () { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
     var scrolled = function (t, sh) { for (var n = t; n && n !== sh.parentNode; n = n.parentNode) if (n.scrollTop > 0) return true; return false; };
     var put = function (d, y) {
       d.y = y; d.sh.style.transform = "translateY(" + y.toFixed(1) + "px)";
       if (d.scrim) d.scrim.style.opacity = String(Math.max(0, Math.min(1, 1 - y / (d.h * 1.1))).toFixed(3));
     };
+    // The sheet's painted Y right now (a running animation overrides the inline style).
+    var paintedY = function (sh) {
+      try {
+        var tr = G.getComputedStyle(sh).transform;
+        if (tr && tr !== "none") {
+          if (tr.indexOf("matrix3d(") === 0) return parseFloat(tr.slice(9, -1).split(",")[13]) || 0;
+          var m = /matrix\(([^)]+)\)/.exec(tr); if (m) return parseFloat(m[1].split(",")[5]) || 0;
+          var tp = /translateY\((-?[\d.]+)%\)/.exec(tr); if (tp) return (sh.offsetHeight || 400) * parseFloat(tp[1]) / 100;
+        }
+      } catch (x) {}
+      var pi = /translateY\((-?[\d.]+)px\)/.exec(sh.style.transform || ""); return pi ? parseFloat(pi[1]) || 0 : 0;
+    };
+    // Dismiss flight from fromY to off-screen; close() runs exactly once (finish or the
+    // fallback timer). A deliberate catch clears `flight` first, so neither path can fire.
+    var flyDismiss = function (d, fromY) {
+      var close = function () { if (d.scrim && d.scrim.isConnected) d.scrim.click(); };
+      if (rm() || !d.sh.animate) return close();
+      var ms = Math.round(Math.max(140, Math.min(260, (d.h - fromY) / Math.max(d.v || 0, 1.4)))), a, sa = null;
+      try {
+        a = d.sh.animate([{ transform: "translateY(" + fromY.toFixed(1) + "px)" }, { transform: "translateY(100%)" }], { duration: ms, easing: "cubic-bezier(.32, .72, 0, 1)", fill: "forwards" });
+        if (d.scrim) sa = d.scrim.animate([{ opacity: d.scrim.style.opacity || 1 }, { opacity: 0 }], { duration: ms, easing: "ease-out", fill: "forwards" });
+      } catch (x) { return close(); }
+      var f = { a: a, sa: sa, d: d, timer: 0 };
+      var once = function () { if (flight !== f) return; flight = null; G.clearTimeout(f.timer); close(); };
+      f.timer = G.setTimeout(once, ms + 80);
+      a.onfinish = once; a.oncancel = function () {};
+      flight = f;
+    };
+    // Hold the in-flight dismiss where it visually is; the scrim keeps its painted opacity.
+    var holdFlight = function (id) {
+      var f = flight; if (!f) return null;
+      flight = null; G.clearTimeout(f.timer);
+      var y = paintedY(f.d.sh), sop = null;
+      try { if (f.d.scrim) sop = G.getComputedStyle(f.d.scrim).opacity; } catch (x) {}
+      try { if (f.a.commitStyles) f.a.commitStyles(); } catch (x) {}
+      try { f.a.cancel(); } catch (x) {}
+      if (f.sa) { try { if (f.sa.commitStyles) f.sa.commitStyles(); } catch (x) {} try { f.sa.cancel(); } catch (x) {} }
+      if (f.d.scrim && sop !== null && sop !== undefined) f.d.scrim.style.opacity = sop;
+      f.d.sh.style.transform = "translateY(" + y.toFixed(1) + "px)";
+      return { d: f.d, y: y, id: id, kind: "dismiss" };
+    };
+    var resumeHeld = function (h) {
+      if (h.kind === "dismiss") { flyDismiss(h.d, h.y); return; }
+      var from = "translateY(" + h.y.toFixed(1) + "px)";
+      if (h.d.scrim) h.d.scrim.style.opacity = "";
+      if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(h.d.sh, from, "translateY(0px)"))) h.d.sh.style.transform = "";
+    };
     root.addEventListener("pointerdown", function (e) {
-      if (flight) { try { if (flight.commitStyles) flight.commitStyles(); } catch (x) {} try { flight.cancel(); } catch (x) {} flight = null; }
+      if (flight) {
+        var fsh = flight.d.sh;
+        if (!e.target || !fsh.contains(e.target)) return;      // touch elsewhere: the dismiss finishes normally
+        held = holdFlight(e.pointerId);
+      }
       if (g || e.pointerType === "mouse" || !e.target.closest) return;
       var sh = e.target.closest(".pn-sheet-wrap > .pn-sheet");
-      if (!sh || e.target.closest("input, select, textarea, label")) return;
-      g = { sh: sh, id: e.pointerId, x0: e.clientX, y0: e.clientY, y: 0, v: 0, on: false, top: !!e.target.closest(".pn-grab") || !scrolled(e.target, sh), h: sh.offsetHeight || 400, t0: Date.now(), hist: [], scrim: sh.parentNode.querySelector(".pn-scrim") };
+      if (!sh || e.target.closest("input, select, textarea, label")) return;   // a parked catch resumes on pointerup
+      var base = 0;
+      if (held && held.d.sh === sh) base = held.y;
+      else if (held) { var stale = held; held = null; resumeHeld(stale); }
+      else {
+        // Catch a snap-back settle (PREP_MOTION) the same way: freeze where it is painted.
+        try {
+          var ans = sh.getAnimations ? sh.getAnimations() : [];
+          if (ans.length) {
+            var y0 = paintedY(sh);
+            ans.forEach(function (an) { try { if (an.commitStyles) an.commitStyles(); } catch (x) {} try { an.cancel(); } catch (x) {} });
+            if (y0) { base = y0; held = { d: { sh: sh, scrim: sh.parentNode.querySelector(".pn-scrim"), h: sh.offsetHeight || 400, v: 0 }, y: y0, id: e.pointerId, kind: "back" }; sh.style.transform = "translateY(" + y0.toFixed(1) + "px)"; }
+          }
+        } catch (x) {}
+      }
+      g = { sh: sh, id: e.pointerId, x0: e.clientX, y0: e.clientY, y: base, base: base, v: 0, on: false, caught: !!held, top: !!e.target.closest(".pn-grab") || !scrolled(e.target, sh), h: sh.offsetHeight || 400, t0: Date.now(), hist: [], scrim: sh.parentNode.querySelector(".pn-scrim") };
     });
     root.addEventListener("pointermove", function (e) {
       if (!g || e.pointerId !== g.id) return;
       var dy = e.clientY - g.y0, dx = e.clientX - g.x0, now = Date.now();
       if (!g.on) {
         if (Math.abs(dy) < 8 && Math.abs(dx) < 8) return;
-        if (!g.top || dy < 0 || Math.abs(dx) > Math.abs(dy)) { g = null; return; }
+        if (!g.top || dy < 0 || Math.abs(dx) > Math.abs(dy)) { g = null; return; }   // a parked catch resumes on pointerup
         g.on = true; g.sh.classList.add("pn-drag");
+        if (g.caught) { g.caught = false; held = null; }   // the drag decides now
         try { g.sh.setPointerCapture(g.id); } catch (x) {}
       }
       g.hist.push([now, e.clientY]); while (g.hist.length > 2 && now - g.hist[0][0] > 100) g.hist.shift();
-      put(g, dy >= 0 ? dy : -(-dy * 0.55 * g.h) / (g.h + 0.55 * -dy) * 0.4);
+      put(g, (g.base || 0) + (dy >= 0 ? dy : -(-dy * 0.55 * g.h) / (g.h + 0.55 * -dy) * 0.4));
     });
     // Without this the page would claim a downward drag at the top of a scrolling sheet as an overscroll. Native pass 2:
     // the non-passive touchmove sits on each sheet, not on the whole overlay. On iOS a non-passive touch listener makes
@@ -2960,6 +3026,13 @@
     Array.prototype.forEach.call(root.querySelectorAll(":scope > .pn-sheet-wrap"), arm);
     if (G.MutationObserver) new G.MutationObserver(function (ms) { ms.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, arm); }); }).observe(root, { childList: true });
     var end = function (e) {
+      if (held && e.pointerId === held.id && (!g || e.pointerId !== g.id || !g.on)) {
+        // Tap / lost axis lock on a caught sheet: resume the original settle and completion.
+        var h = held; held = null;
+        if (g && e.pointerId === g.id) g = null;
+        resumeHeld(h);
+        return;
+      }
       if (!g || e.pointerId !== g.id) return;
       var d = g; g = null;
       if (!d.on) return;
@@ -2967,17 +3040,9 @@
       // Release speed over the last 100 ms of movement; a window under 16 ms is too short to trust, so the whole drag.
       var h0 = d.hist[0], h1 = d.hist[d.hist.length - 1], now = Date.now();
       d.v = h0 && h1[0] - h0[0] >= 16 ? (h1[1] - h0[1]) / (h1[0] - h0[0]) : d.y / Math.max(16, now - d.t0);
-      var close = function () { if (d.scrim && d.scrim.isConnected) d.scrim.click(); };
       if (e.type === "pointerup" && d.y > 0 && (d.y > Math.min(160, d.h * 0.3) || d.v > 0.5)) {
         if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("light");
-        if (rm() || !d.sh.animate) return close();
-        var ms = Math.round(Math.max(140, Math.min(260, (d.h - d.y) / Math.max(d.v, 1.4)))), a;
-        try {
-          a = flight = d.sh.animate([{ transform: "translateY(" + d.y.toFixed(1) + "px)" }, { transform: "translateY(100%)" }], { duration: ms, easing: "cubic-bezier(.32, .72, 0, 1)", fill: "forwards" });
-          if (d.scrim) d.scrim.animate([{ opacity: d.scrim.style.opacity || 1 }, { opacity: 0 }], { duration: ms, easing: "ease-out", fill: "forwards" });
-        } catch (x) { return close(); }
-        var once = function () { if (once.done || flight !== a) return; once.done = 1; flight = null; close(); };
-        a.onfinish = once; a.oncancel = function () { once.done = 1; }; G.setTimeout(once, ms + 80);
+        flyDismiss(d, d.y);
         return;
       }
       var from = "translateY(" + d.y.toFixed(1) + "px)";
