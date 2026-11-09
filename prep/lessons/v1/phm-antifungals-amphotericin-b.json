@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antifungals",
+  "subject": "pharmacology",
+  "title": "Antifungals I: Amphotericin B, Flucytosine and the Azoles",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Amphotericin B**, a polyene macrolide, binds **ergosterol** (the fungal membrane sterol humans replace with cholesterol) and assembles pores that leak the cell to death, fungicidal across yeasts, moulds and dimorphic fungi. Conventional deoxycholate amphotericin earned its 'amphoterrible' nickname honestly; **liposomal amphotericin** hides the drug in lipid spheres that fungi and reticuloendothelial cells take up preferentially, cutting nephrotoxicity several fold and becoming the default where kidneys or budgets matter most.",
+      "say": "Amphotericin punches ergosterol pores; liposomes deliver the punch to fungi and spare the kidney.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antifungals-azoles-amphotericin-echinocandins-fig1.webp",
+        "alt": "Antifungal drug mechanisms diagram showing ergosterol targets for polyenes and azoles and glucan for echinocandins",
+        "caption": "Antifungal mechanisms on one membrane: polyene pores, azole synthesis blockade and echinocandin wall attack."
+      }
+    },
+    {
+      "tx": "**Nephrotoxicity** is amphotericin's dose limiter by renal vasoconstriction and tubular injury: creatinine climbs in a third to a half on conventional drug, with potassium and magnesium wasting, renal tubular acidosis and anaemia in train. Salt loading before doses, liposomal substitution, alternate day strategies historically, and electrolyte replacement protocols are its mitigations; azotaemia usually reverses, cumulative grams write the permanent fraction.",
+      "say": "Salt load, choose liposomal, replace potassium and magnesium; creatinine is the course's speedometer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amphotericin injury pattern",
+          "points": [
+            "Rising creatinine after several doses",
+            "Potassium and magnesium wasting",
+            "Distal tubular acidosis and polyuria",
+            "Normocytic anaemia with chronicity"
+          ]
+        },
+        "right": {
+          "title": "Mitigation bundle",
+          "points": [
+            "Saline loading where cardiac status allows",
+            "Liposomal formulation preferred",
+            "Electrolytes replaced proactively",
+            "Nephrotoxin co therapy audited daily"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Infusion reactions (fever, rigors, headache within hours, cytokine mediated) are premedicated with paracetamol, antihistamines and meperidine for rigors, and usually wane across the first week. **Flucytosine**, amphotericin's cryptococcal partner, enters fungi and converts to fluorouracil sabotaging RNA and DNA, never used alone because resistance erupts in days, dosed by levels and renal function with marrow and hepatic toxicity (its fluorouracil leakage) counted weekly.",
+      "say": "Premedicate the shake, partner cryptococcus with flucytosine, and never let flucytosine travel alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "premed",
+            "label": "Paracetamol and antihistamine before infusion"
+          },
+          {
+            "id": "rigor",
+            "label": "Rigors treated, rate reviewed"
+          },
+          {
+            "id": "flucy",
+            "label": "Flucytosine partnered in cryptococcal disease"
+          },
+          {
+            "id": "levels",
+            "label": "Flucytosine levels, counts and liver reviewed"
+          }
+        ],
+        "edges": [
+          [
+            "premed",
+            "rigor"
+          ],
+          [
+            "rigor",
+            "flucy"
+          ],
+          [
+            "flucy",
+            "levels"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fluconazole**, the triazole blocking 14 alpha demethylase in ergosterol synthesis, is the pharmacokinetic gentleman: complete oral bioavailability, CSF penetration half of serum, once daily dosing, covering Candida (except krusei intrinsically and glabrata dose dependently), Cryptococcus maintenance and coccidioides, while missing moulds entirely. Its CYP inhibition (2C9, 2C19, 3A4 moderate) raises warfarin, phenytoin and sulfonylurea levels predictably.",
+      "say": "Fluconazole is the reliable oral azole that reaches CSF and ignores moulds; warfarin respects it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluconazole territory",
+          "points": [
+            "Candida albicans and most yeasts",
+            "Cryptococcal consolidation and maintenance",
+            "Coccidioidal disease",
+            "Prophylaxis in defined immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Fluconazole gaps",
+          "points": [
+            "No mould activity (Aspergillus, Mucor)",
+            "Candida krusei intrinsically resistant",
+            "Glabrata susceptibility dose dependent",
+            "Resistance rises with prophylaxis exposure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Itraconazole** widens to Aspergillus and the endemic dimorphic fungi (histoplasma, blastomyces, sporothrix) with erratic capsule absorption (acid and food dependent) that its solution and SUBA formulations and drug levels exist to tame. It is a potent CYP3A4 inhibitor and negative inotrope (heart failure fence), with hypokalaemia, hypertension and oedema from mineralocorticoid like effects on longer courses.",
+      "say": "Itraconazole covers dimorphics and Aspergillus at absorption's whim; levels and heart failure govern it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Itraconazole territory",
+          "points": [
+            "Aspergillus second line and prophylaxis",
+            "Histoplasmosis, blastomycosis, sporotrichosis",
+            "Chromoblastomycosis and dermatophyte salvage",
+            "Levels guide erratic absorption"
+          ]
+        },
+        "right": {
+          "title": "Itraconazole fences",
+          "points": [
+            "Avoid in ventricular dysfunction",
+            "Strong CYP3A4 inhibition both directions",
+            "Hypokalaemia and oedema on long courses",
+            "Acid suppression defeats capsule absorption"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Voriconazole** owns invasive aspergillosis first line with nonlinear, CYP2C19 genotype swung kinetics (ultrarapid metabolisers fail, poor metabolisers poison) making therapeutic drug monitoring near mandatory, and a neuro ocular adverse signature: transient visual disturbance in a third, hallucinations, encephalopathy at high levels, photosensitivity with skin cancer on chronic immunosuppression, and periostitis with fluoride excess on long courses.",
+      "say": "Voriconazole cures aspergillosis by level, not by dose; eyes, brain and skin report its excess.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "load",
+            "label": "Loading then maintenance voriconazole"
+          },
+          {
+            "id": "level",
+            "label": "Trough level targeted (about 1 to 5.5 mg/L)"
+          },
+          {
+            "id": "gene",
+            "label": "CYP2C19 extremes explained by genotype"
+          },
+          {
+            "id": "adjust",
+            "label": "Dose adjusted to level and toxicity"
+          }
+        ],
+        "edges": [
+          [
+            "load",
+            "level"
+          ],
+          [
+            "level",
+            "gene"
+          ],
+          [
+            "gene",
+            "adjust"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Posaconazole** stretches the triazole spectrum furthest (Aspergillus, Mucorales activity unlike voriconazole, broad yeasts) in delayed release tablets and intravenous forms that fixed its suspension's absorption lottery, serving salvage mould disease and high risk prophylaxis (AML induction, graft versus host) with level monitoring. **Isavuconazole** matches voriconazole's aspergillosis with fewer QT (it shortens), visual and hepatic effects at premium cost and mucor activity included.",
+      "say": "Posaconazole reaches mucor where voriconazole cannot; isavuconazole polishes the tolerability ledger.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Posaconazole",
+          "points": [
+            "Broadest azole: moulds including Mucorales",
+            "Prophylaxis in AML and GVHD",
+            "Delayed release tablet absorption reliable",
+            "Levels monitored, CYP3A4 inhibition strong"
+          ]
+        },
+        "right": {
+          "title": "Isavuconazole",
+          "points": [
+            "Aspergillosis and mucormycosis licensed",
+            "QT shortening rather than prolongation",
+            "Fewer visual and neuro effects",
+            "Prodrug (isavuconazonium) intravenous option"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Azole stewardship assembles** the lesson: species and susceptibility before species blind courses (Candida glabrata and krusei arithmetic), levels for itraconazole, voriconazole and posaconazole, interaction audits on every chart (azoles are CYP royalty), QT stacking reviewed, and duration and step down (intravenous to oral fluconazole in candidemia once susceptible and stable) protocolised. Resistance in Candida auris and azole resistant Aspergillus fumigatus (environmental fungicide driven) is the horizon these habits defend.",
+      "say": "Name the species, check the level, audit the chart; azole resistance is grown in clinics and fields alike.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prescribing discipline",
+          "points": [
+            "Species identification before prolonged therapy",
+            "Therapeutic drug monitoring for mould azoles",
+            "CYP and QT interaction audit",
+            "Step down and stop dates documented"
+          ]
+        },
+        "right": {
+          "title": "Resistance horizon",
+          "points": [
+            "Candida auris multidrug outbreaks",
+            "Azole resistant Aspergillus from environmental azoles",
+            "Glabrata echinocandin resistance emerging",
+            "Antifungal stewardship mirrors antibiotic programmes"
+          ]
+        }
+      }
+    }
+  ]
+}

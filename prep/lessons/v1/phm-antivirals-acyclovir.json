@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antivirals",
+  "subject": "pharmacology",
+  "title": "Antivirals: Acyclovir Family, Influenza and Hepatitis Agents, Sofosbuvir, Tenofovir and Newer Drugs",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Acyclovir** is selective by two locks: herpesvirus thymidine kinase phosphorylates it a hundred fold faster than host enzymes, and viral DNA polymerase prefers the triphosphate, which chain terminates without a 3 prime hydroxyl. **Valacyclovir**, its valine ester prodrug, triples oral bioavailability for zoster and suppression dosing. Resistance by thymidine kinase mutation in immunocompromised hosts sends foscarnet in as the kinase independent rescue.",
+      "say": "Acyclovir wakes only inside herpes infected cells and stops their DNA mid sentence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/herpes-simplex-fig2.webp",
+        "alt": "HSV latency and acyclovir action diagram showing viral thymidine kinase activation",
+        "caption": "HSV latency and acyclovir activation by viral thymidine kinase, the selectivity engine of this family."
+      }
+    },
+    {
+      "tx": "**Ganciclovir** extends the nucleoside to cytomegalovirus (phosphorylated by viral UL97 kinase), owning CMV retinitis, colitis and pneumonitis treatment and transplant prophylaxis at marrow's expense (neutropenia its dose limiter, zidovudine combination forbidden fruit), while **valganciclovir** oralises it. **Foscarnet** blocks polymerase pyrophosphate exchange directly (no kinase needed, TK resistant herpes and CMV covered) billing kidneys and calcium, and **cidofovir** arrives pre phosphorylated with probenecid and saline bodyguards against its nephrotoxicity.",
+      "say": "Ganciclovir treats CMV and taxes marrow; foscarnet and cidofovir rescue resistance and tax kidneys.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CMV armamentarium",
+          "points": [
+            "Valganciclovir oral and ganciclovir IV: first line",
+            "Neutropenia dose limiting, counts monitored",
+            "Prophylaxis in transplant risk strata",
+            "Maribavir and letermovir: modern niches"
+          ]
+        },
+        "right": {
+          "title": "Rescue agents",
+          "points": [
+            "Foscarnet: kinase independent, nephro and calcium toxic",
+            "Cidofovir: weekly, probenecid and saline escorted",
+            "Resistance guided switching by genotype",
+            "Ophthalmology and viral load surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Influenza antivirals race replication's 48 hour peak: **oseltamivir** (oral neuraminidase inhibitor, five days treatment, prophylaxis dosing) and **zanamivir** (inhaled, asthma cautioned) block viral release, while **baloxavir** caps the polymerase acidic endonuclease in a single dose with resistance (I38 substitutions) watched. **Amantadine** from the Parkinson lessons retired here by universal M2 resistance, a resistance obituary examinations keep current.",
+      "say": "Neuraminidase inhibitors free trapped virus badly and baloxavir stops its copying once; amantadine has left the building.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antivirals-herpes-hepatitis-flu-covid-fig1.webp",
+        "alt": "Antiviral drug cellular action targets diagram for herpes, hepatitis, influenza and COVID drugs",
+        "caption": "Antiviral targets across herpes, hepatitis, influenza and COVID agents in this and the HIV lessons."
+      }
+    },
+    {
+      "tx": "**Ribavirin**, a guanosine analogue with promiscuous mechanisms, survives in aerosolised RSV history, hepatitis C legacy combinations and viral haemorrhagic fever protocols, billing haemolytic anaemia in grams and absolute teratogenicity with six month contraception both sexes after exposure. Its breadth is its examination charm and its bedside burden, and interferon alpha beside it (next) built the pre 2014 hepatitis world both have now vacated.",
+      "say": "Ribavirin haemolyses and teratogenises; six months of contraception outlive its last dose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ribavirin niches",
+          "points": [
+            "Severe RSV in defined immunocompromised hosts",
+            "Lassa and haemorrhagic fever protocols",
+            "Hepatitis C historical combinations",
+            "Inhaled and oral forms by indication"
+          ]
+        },
+        "right": {
+          "title": "Ribavirin burdens",
+          "points": [
+            "Dose dependent haemolytic anaemia",
+            "Teratogenicity: two contraceptive methods, both sexes",
+            "Six month washout after exposure",
+            "Thyroid and psychiatric effects with interferon history"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatitis C was cured pharmacologically in a decade: **sofosbuvir** (NS5B nucleotide polymerase inhibitor, pangenotypic backbone) plus NS5A inhibitors **ledipasvir** or **velpatasvir** (the latter pangenotypic in sofosbuvir velpatasvir single tablets) cure over 95 percent in eight to twelve weeks, with HBV reactivation screening before starting and amiodarone bradycardia interaction as the famous traps. Interferon alpha's flu, marrow, thyroid and depression ledger is now the control arm of history.",
+      "say": "Sofosbuvir plus an NS5A partner cures hepatitis C in twelve weeks; screen hepatitis B first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "genotype",
+            "label": "HCV confirmed, fibrosis and HBV screen completed"
+          },
+          {
+            "id": "daa",
+            "label": "Sofosbuvir based pangenotypic regimen 8 to 12 weeks"
+          },
+          {
+            "id": "svr",
+            "label": "Sustained virological response checked at 12 weeks post"
+          },
+          {
+            "id": "hcc",
+            "label": "Cirrhosis surveillance continues after cure"
+          }
+        ],
+        "edges": [
+          [
+            "genotype",
+            "daa"
+          ],
+          [
+            "daa",
+            "svr"
+          ],
+          [
+            "svr",
+            "hcc"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatitis B is suppressed, not yet cured: **tenofovir** (disoproxil or alafenamide fumarates) and **entecavir** (potent nucleoside in treatment naive patients) hold viral loads undetectable with resistance barriers lamivudine never had, while interferon alpha offers finite courses for selected patients chasing surface antigen loss. Stopping rules are specialist territory because flares after cessation can decompensate cirrhosis, and tenofovir doubles as HIV backbone in the next lessons with renal and bone accounting attached.",
+      "say": "Tenofovir and entecavir suppress hepatitis B indefinitely; stopping is a specialist decision with flare risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HBV suppression",
+          "points": [
+            "Tenofovir (TDF or TAF) or entecavir first line",
+            "High resistance barriers, indefinite therapy usual",
+            "Renal and bone monitoring by tenofovir form",
+            "Surface antigen loss uncommon, celebrated"
+          ]
+        },
+        "right": {
+          "title": "Interferon alpha legacy",
+          "points": [
+            "Finite courses, selected non cirrhotic patients",
+            "Flu like, marrow, thyroid and mood toxicities",
+            "Surface antigen loss highest with interferon",
+            "Largely historical beside direct antivirals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "COVID antivirals divided by timing: **remdesivir** (intravenous nucleotide polymerase inhibitor, early inpatient and three day outpatient courses) and **nirmatrelvir** ritonavir (Paxlovid, oral protease inhibition within five days, its ritonavir boosting importing the HIV lesson's interaction empire wholesale into general practice), with molnupiravir behind efficacy and mutagenesis fences. Early administration is the whole pharmacology; late antivirals chase a fire already inflammatory.",
+      "say": "COVID antivirals are a five day race; ritonavir's interactions run the Paxlovid consultation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early outpatient window",
+          "points": [
+            "Nirmatrelvir ritonavir within 5 days of symptoms",
+            "Interaction audit before the first dose",
+            "Three day remdesivir infusion alternative",
+            "Molnupiravir behind efficacy and pregnancy fences"
+          ]
+        },
+        "right": {
+          "title": "Hospital territory",
+          "points": [
+            "Remdesivir in oxygen requiring early disease",
+            "Immunomodulators own the later inflammatory phase",
+            "Thromboprophylaxis protocols accompany",
+            "Antivirals late alone do not rescue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acyclovir's practical liturgy** closes the lesson: intravenous hydration and infusion rates against crystal nephropathy, neurotoxicity in renal accumulation mimicking encephalitis it treats (the cruellest differential), dosing by ideal body weight and renal bands, and herpes encephalitis empiricism that never waits for PCR confirmation because hours cost neurons. Suppressive therapy transforms genital herpes recurrence and HSV prophylaxis in immunosuppression into once or twice daily quiet.",
+      "say": "Hydrate, dose by kidney, never wait for PCR in encephalitis; acyclovir toxicity can impersonate its indication.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Herpes encephalitis suspected clinically"
+          },
+          {
+            "id": "start",
+            "label": "Intravenous acyclovir started immediately with fluids"
+          },
+          {
+            "id": "pcr",
+            "label": "CSF PCR and imaging follow, never precede"
+          },
+          {
+            "id": "review",
+            "label": "Renal function and neurology reviewed daily"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "start"
+          ],
+          [
+            "start",
+            "pcr"
+          ],
+          [
+            "pcr",
+            "review"
+          ]
+        ]
+      }
+    }
+  ]
+}
