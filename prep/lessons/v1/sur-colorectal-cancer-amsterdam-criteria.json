@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-colorectal-cancer",
+ "subject": "surgery",
+ "title": "Colorectal Cancer Diagnosis, Staging, and Resection",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The established clinical screening framework formulated to identify kindreds with hereditary non-polyposis colorectal cancer is the **Amsterdam II criteria**. This consensus definition follows the memorable three-two-one mnemonic rule: at least three relatives with histologically verified Lynch-associated cancers, spanning across two successive generations, with at least one relative being a first-degree relation to the other two, and at least one cancer diagnosed before age fifty.",
+   "say": "The Amsterdam II criteria identify Lynch syndrome families based on three affected relatives across two generations with one diagnosed before age fifty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amsterdam II Criteria Component",
+     "Diagnostic Requirement",
+     "Rationale",
+     "Clinical Action"
+    ],
+    "rows": [
+     [
+      "Relative count",
+      "At least 3 relatives with Lynch-related cancers",
+      "Confirms familial cluster",
+      "Perform genetic pedigrees"
+     ],
+     [
+      "First-degree connection",
+      "One relative is first-degree to the other two",
+      "Excludes coincidental unrelated cases",
+      "Screen nuclear family"
+     ],
+     [
+      "Successive generations",
+      "At least 2 successive generations affected",
+      "Confirms dominant vertical transmission",
+      "Surveillance across age groups"
+     ],
+     [
+      "Early-onset age",
+      "At least 1 relative diagnosed before age 50",
+      "Reflects accelerated carcinogenesis",
+      "Offer germline MMR testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A high-molecular-weight cell-surface glycoprotein widely tracked in colorectal oncology is **carcinoembryonic antigen**. While CEA lacks sufficient diagnostic sensitivity and specificity for general population cancer screening, it serves as an indispensable baseline prognostic biomarker before surgical intervention. Elevated preoperative serum levels exceeding five nanograms per milliliter correlate with advanced disease stage, and persistent postoperative elevation signifies incomplete surgical resection or occult metastases.",
+   "say": "Carcinoembryonic antigen is an essential baseline tumor marker used for assessing surgical clearance and monitoring for disease recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Role in Cancer Surveillance",
+     "points": [
+      "Serial measurement every 3 to 6 months post-resection",
+      "Doubling time indicates liver or retroperitoneal recurrence",
+      "Triggers diagnostic CT imaging and colonoscopy",
+      "Enables early salvage metastasectomy"
+     ]
+    },
+    "right": {
+     "title": "Limitations in Primary Screening",
+     "points": [
+      "Normal in fifty percent of localized early cancers",
+      "Elevated in benign hepatitis, pancreatitis, and IBD",
+      "Substantially increased in chronic cigarette smokers",
+      "Cannot replace optical colonoscopy for diagnosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The historic anatomical classification system established in 1932 to grade colorectal tumor spread is **Dukes staging system**. Dukes A signifies carcinoma confined entirely to the bowel wall without breaching the muscularis propria. Dukes B denotes direct tumor extension through the muscularis propria into perirectal tissues, Dukes C designates regional lymph node metastasis, and Astler-Coller modified Dukes D encompasses distant hematogenous metastatic spread.",
+   "say": "The Dukes staging system classifies colorectal cancer into stages A through D based on mural invasion and nodal involvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dukes Stage",
+     "Modern TNM Equivalent",
+     "Anatomical Extent of Tumor",
+     "Five-Year Survival"
+    ],
+    "rows": [
+     [
+      "Dukes A",
+      "Stage I (T1-T2, N0, M0)",
+      "Tumor confined to submucosa or muscularis propria",
+      "> 90%"
+     ],
+     [
+      "Dukes B",
+      "Stage II (T3-T4, N0, M0)",
+      "Penetration through muscularis into serosa / fat",
+      "70% to 80%"
+     ],
+     [
+      "Dukes C",
+      "Stage III (Any T, N1-N2, M0)",
+      "Regional mesenteric lymph node involvement",
+      "45% to 65%"
+     ],
+     [
+      "Dukes D",
+      "Stage IV (Any T, Any N, M1)",
+      "Distant visceral metastases (liver, lung, peritoneum)",
+      "10% to 15%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern oncological management utilizes the standardized international **TNM staging system**. Primary tumor depth is categorized from T1 invading the submucosa, T2 invading the muscularis propria, T3 penetrating through the muscularis into subserosa, to T4 directly perforating the visceral peritoneum or invading adjacent organs. Regional nodal status N1 involves one to three regional nodes, whereas N2 denotes four or more positive mesenteric nodes.",
+   "say": "TNM staging categorizes colorectal carcinoma based on mural depth of invasion, regional lymph node spread, and distant metastases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "depth",
+      "label": "T Category: Depth of Wall Invasion (T1 to T4)"
+     },
+     {
+      "id": "nodes",
+      "label": "N Category: Regional Lymph Nodes (N0, N1, N2)"
+     },
+     {
+      "id": "mets",
+      "label": "M Category: Distant Metastatic Spread (M0 vs M1)"
+     },
+     {
+      "id": "plan",
+      "label": "Overall Stage Grouping & Multidisciplinary Therapy"
+     }
+    ],
+    "edges": [
+     [
+      "depth",
+      "nodes"
+     ],
+     [
+      "nodes",
+      "mets"
+     ],
+     [
+      "mets",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive radical curative oncological resection performed for neoplasms of the caecum and ascending colon is **right hemicolectomy**. The operative procedure removes the terminal ten to fifteen centimetres of ileum, the caecum, ascending colon, and proximal transverse colon en bloc with their intact mesenteric envelope. Intestinal continuity is subsequently re-established using a primary end-to-side or side-to-side ileocolic anastomosis.",
+   "say": "Right hemicolectomy resects the terminal ileum, caecum, ascending colon, and proximal transverse colon with their supplying lymphatic vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-colon-fungating-caecum.webp",
+    "alt": "Macroscopic surgical resection specimen of a fungating adenocarcinoma of the caecum excised during a right hemicolectomy.",
+    "caption": "Resected caecal carcinoma: en bloc right hemicolectomy specimen encompassing terminal ileum and ascending colon. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Crucial to the oncological adequacy of a right hemicolectomy is central **ileocolic vascular ligation**. The ileocolic artery and right colic artery are meticulously isolated and ligated at their exact anatomical take-off from the superior mesenteric vessels. High vascular pedicle ligation guarantees radical lymphadenectomy, ensuring the harvest of at least twelve regional mesenteric lymph nodes necessary for accurate pathological staging.",
+   "say": "Central high ligation of the ileocolic artery at its origin ensures radical clearance of draining mesenteric lymph nodes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mob",
+      "label": "Lateral Peritoneal Mobilization along Line of Toldt"
+     },
+     {
+      "id": "duod",
+      "label": "Identification & Protection of Second Part of Duodenum"
+     },
+     {
+      "id": "vsc",
+      "label": "High Ligation of Ileocolic & Right Colic Arteries"
+     },
+     {
+      "id": "resect",
+      "label": "En Bloc Resection & Primary Ileocolic Anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "mob",
+      "duod"
+     ],
+     [
+      "duod",
+      "vsc"
+     ],
+     [
+      "vsc",
+      "resect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resection of malignant tumors situated within the distal transverse colon, splenic flexure, or descending colon requires a **left hemicolectomy**. The surgical technique entails full mobilization of the splenic flexure, dividing the gastrocolic and splenocolic ligaments with extreme care to avoid iatrogenic splenic capsular tear. High ligation of the left colic artery and inferior mesenteric vein provides radical lymphatic clearance before colorectal anastomosis.",
+   "say": "Left hemicolectomy mobilizes the splenic flexure and ligates the left colic vessels to resect descending colonic malignancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Hemicolectomy",
+     "points": [
+      "Indicated for caecal and ascending colon tumors",
+      "Ligation of ileocolic and right colic vessels",
+      "Low risk of anastomotic leak (1% to 2%)",
+      "Primary ileotransverse anastomosis fashioned"
+     ]
+    },
+    "right": {
+     "title": "Left Hemicolectomy",
+     "points": [
+      "Indicated for splenic flexure and descending tumors",
+      "Ligation of left colic artery and IMV",
+      "Requires careful splenic flexure mobilization",
+      "Colorectal anastomosis with higher leak risk (3% to 6%)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The primary sphincter-sparing surgical intervention indicated for upper and middle rectal adenocarcinoma is **anterior resection**. The surgeon mobilizes the rectum down to the pelvic floor, achieving a clear distal intramural surgical margin of at least two centimetres. Intestinal continuity is restored using a circular end-to-end stapling instrument, fashioning a low colorectal or coloanal anastomosis without permanent stoma.",
+   "say": "Anterior resection excises the upper or middle rectum and restores continuity with a circular stapled colorectal anastomosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-colon-annular.webp",
+    "alt": "Surgical pathology specimen showing clear proximal and distal resection margins around a rectal neoplasm.",
+    "caption": "Resected rectal carcinoma: achieving adequate distal and circumferential resection margins during anterior resection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Meticulous sharp surgical dissection within the avascular holy plane of Heald defines the **total mesorectal excision plane**. This embryological plane separates the visceral mesorectal fascia enveloping the rectum and lymph nodes from the somatic parietal pelvic fascia. Staying strictly within this plane ensures complete en bloc clearance of perirectal lymphatics while protecting the pelvic autonomic hypogastric nerves, preventing postoperative erectile dysfunction and urinary retention.",
+   "say": "Sharp dissection along the mesorectal plane ensures complete lymphatic eradication while preserving pelvic autonomic nerves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Nerve Plexus",
+     "Anatomical Location",
+     "Functional Innervation",
+     "Surgical Injury Deficit"
+    ],
+    "rows": [
+     [
+      "Superior hypogastric plexus",
+      "Aortic bifurcation / promontory",
+      "Sympathetic ejaculation control",
+      "Retrograde ejaculation in males"
+     ],
+     [
+      "Hypogastric nerves",
+      "Lateral pelvic sidewalls",
+      "Sympathetic internal sphincter tone",
+      "Loss of resting anal continence"
+     ],
+     [
+      "Pelvic splanchnic nerves (S2-S4)",
+      "Deep pelvic floor / posterolateral",
+      "Parasympathetic erectile function",
+      "Complete erectile impotence"
+     ],
+     [
+      "Inferior hypogastric plexus",
+      "Lateral ligaments of rectum",
+      "Parasympathetic bladder detrusor",
+      "Atonic neurogenic urinary retention"
+     ]
+    ]
+   }
+  }
+ ]
+}
