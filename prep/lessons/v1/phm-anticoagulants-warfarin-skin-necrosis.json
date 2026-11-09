@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-anticoagulants",
+  "subject": "pharmacology",
+  "title": "Warfarin Skin Necrosis, Heparin Induced Thrombocytopenia and Dabigatran Reversal",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Warfarin skin necrosis** strikes within three to ten days of initiation, when protein C depletion outruns factor II depletion and dermal microvasculature thromboses: painful red plaques on breasts, buttocks, thighs and other fatty areas blister, haemorrhage and necrose. Protein C deficiency, large loading doses and absent heparin bridging stack the risk. Treatment stops warfarin, gives vitamin K and therapeutic heparin, replaces protein C where available, and involves surgical and haematology teams early.",
+      "say": "Painful plaques on fatty skin in the first week of warfarin are necrosis until excluded; stop, reverse, heparinise.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Warfarin started, protein C falls within hours"
+          },
+          {
+            "id": "thromb",
+            "label": "Dermal microvascular thrombosis in fatty areas"
+          },
+          {
+            "id": "plaque",
+            "label": "Painful red plaques blister and necrose, days 3 to 10"
+          },
+          {
+            "id": "treat",
+            "label": "Stop warfarin, vitamin K, therapeutic heparin, protein C"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "thromb"
+          ],
+          [
+            "thromb",
+            "plaque"
+          ],
+          [
+            "plaque",
+            "treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The platelet factor 4 (PF4) heparin complex becomes an antigen in susceptible patients, and IgG antibodies against it activate platelets through Fc receptors: this is **heparin induced thrombocytopenia** (HIT), a paradox where an anticoagulant causes thrombosis in 30 to 50 percent of untreated cases. Platelets typically fall by more than half between days 5 and 14 after exposure, counting from the first heparin day including flushes, catheter coatings and prophylactic doses.",
+      "say": "HIT is an antibody that turns heparin into a clotting trigger; count from day zero and respect days five to fourteen.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heparin-induced-thrombocytopenia-fig1.webp",
+        "alt": "Heparin induced thrombocytopenia mechanism diagram showing PF4 heparin antibodies activating platelets, with 4Ts scoring",
+        "caption": "PF4 heparin antibody mechanism and 4Ts assessment in heparin induced thrombocytopenia."
+      }
+    },
+    {
+      "tx": "Clinical probability is scored before laboratory testing with the **4Ts**: degree of thrombocytopenia, timing of the fall, thrombosis or other sequelae, and other causes for the count. Low scores reliably exclude HIT and spare patients unnecessary treatment changes; intermediate and high scores mandate stopping all heparin immediately and starting a non heparin anticoagulant while confirmatory testing proceeds, because waiting for the laboratory amid active HIT invites the thrombosis the score predicted.",
+      "say": "Score the four Ts first: low means look elsewhere, intermediate or high means stop heparin and anticoagulate differently now.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "The 4Ts domains",
+          "points": [
+            "Thrombocytopenia: fall over 50 percent, nadir above 20",
+            "Timing: days 5 to 14 after first exposure",
+            "Thrombosis: new venous or arterial events, skin necrosis",
+            "Other causes: sepsis, drugs, dilution excluded or not"
+          ]
+        },
+        "right": {
+          "title": "Acting on the score",
+          "points": [
+            "Low (0 to 3): HIT unlikely, continue and investigate others",
+            "Intermediate (4 to 5): stop heparin, start alternative, test",
+            "High (6 to 8): treat as HIT while confirming",
+            "Never wait for confirmatory results to stop heparin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Thrombosis** in HIT favours veins over arteries roughly four to one: deep vein thrombosis and pulmonary embolism lead, with adrenal haemorrhagic infarction from adrenal vein thrombosis, cerebral sinus thrombosis, limb artery occlusion and warfarin venous limb gangrene as signature disasters. Bilateral adrenal infarction presenting with abdominal pain and collapse in a heparinised patient with falling platelets is HIT until proven otherwise, an examination vignette worth its own memory hook.",
+      "say": "Venous clots lead in HIT; adrenal infarction with collapse is its theatrical presentation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common HIT thromboses",
+          "points": [
+            "Deep vein thrombosis and pulmonary embolism",
+            "Catheter and circuit thrombosis",
+            "Recurrent clots despite therapeutic heparin levels",
+            "Skin necrosis at injection sites"
+          ]
+        },
+        "right": {
+          "title": "Signature catastrophes",
+          "points": [
+            "Adrenal vein thrombosis with haemorrhagic infarction",
+            "Cerebral venous sinus thrombosis",
+            "Limb arterial occlusion threatening amputation",
+            "Venous limb gangrene when warfarin overlaps HIT"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment inverts every reflex: stop all heparin including flushes, never start warfarin during the acute phase (its protein C fall causes venous limb gangrene), never transfuse platelets into the antibody fire, and anticoagulate with a direct thrombin inhibitor such as **argatroban** or with fondaparinux or a DOAC in stable patients per local protocol. Warfarin may join only after platelets recover above 150 and overlaps the alternative agent for at least five days.",
+      "say": "Stop everything heparin, ban warfarin and platelet transfusions acutely, and anticoagulate with argatroban or fondaparinux.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Intermediate or high 4Ts score"
+          },
+          {
+            "id": "stop",
+            "label": "Stop all heparin: infusions, prophylaxis, flushes, coatings"
+          },
+          {
+            "id": "alt",
+            "label": "Start argatroban, fondaparinux or DOAC per protocol"
+          },
+          {
+            "id": "later",
+            "label": "Warfarin only after platelets exceed 150, with overlap"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "stop"
+          ],
+          [
+            "stop",
+            "alt"
+          ],
+          [
+            "alt",
+            "later"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dabigatran**, the oral direct thrombin inhibitor opening the next lesson's family, owns the first specific DOAC antidote: idarucizumab, a monoclonal antibody fragment binding dabigatran with affinity hundreds of times its affinity for thrombin. Five grams intravenously normalises clotting within minutes in bleeding or pre surgical patients. Its existence reshaped dabigatran prescribing for patients at bleeding risk, though cost and stocking decide real world availability at 3 am.",
+      "say": "Idarucizumab vacuums dabigatran in minutes; it was the first DOAC antidote and changed prescribing confidence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Idarucizumab facts",
+          "points": [
+            "Monoclonal fragment binding free and thrombin bound dabigatran",
+            "5 g intravenously in two 2.5 g boluses",
+            "Normalises diluted thrombin time within minutes",
+            "Indications: life threatening bleeding, urgent procedures"
+          ]
+        },
+        "right": {
+          "title": "Around the antidote",
+          "points": [
+            "Dabigatran is dialysable, unlike factor Xa inhibitors",
+            "Activated charcoal if ingestion within hours",
+            "Thrombotic risk returns as anticoagulation lifts",
+            "Recheck for rebound dabigatran at 12 to 24 hours in renal failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Two skin necroses bookend this module and separate neatly by drug and day: heparin skin necrosis at injection sites is a HIT manifestation from local microthrombosis, while **warfarin skin necrosis** favours fatty areas in the first week from protein C depletion. Both demand stopping the culprit and therapeutic anticoagulation with the other family, a symmetry examinations exploit by swapping the vignette details and watching which mechanism the candidate reaches for.",
+      "say": "Injection site necrosis says HIT, fatty area necrosis in week one says warfarin protein C; the treatments cross over.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heparin skin necrosis",
+          "points": [
+            "At subcutaneous injection sites",
+            "A HIT presentation with platelet fall",
+            "Stop heparin, start non heparin anticoagulant",
+            "Confirm with 4Ts and PF4 testing"
+          ]
+        },
+        "right": {
+          "title": "Warfarin skin necrosis",
+          "points": [
+            "Breasts, buttocks, thighs in days 3 to 10",
+            "Protein C falls before factor II",
+            "Stop warfarin, vitamin K, therapeutic heparin",
+            "Protein C concentrate where available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prevention** is mundane and effective: use the lowest heparin exposure that does the job, prefer LMWH where appropriate (HIT risk several fold lower than unfractionated), record a baseline platelet count and recheck during the danger window in higher risk patients, and document heparin allergy prominently after any HIT episode. Future exposure avoidance includes catheter flushes and heparin bonded lines, details that kill quietly when the allergy banner is missing.",
+      "say": "Baseline platelets, day five to fourteen vigilance, and an unmissable allergy banner prevent most HIT disasters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline platelet count before heparin exposure"
+          },
+          {
+            "id": "window",
+            "label": "Recheck during days 5 to 14 in at risk patients"
+          },
+          {
+            "id": "fall",
+            "label": "Fall over 50 percent triggers 4Ts scoring"
+          },
+          {
+            "id": "banner",
+            "label": "Confirmed HIT documented as a prominent allergy"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "window"
+          ],
+          [
+            "window",
+            "fall"
+          ],
+          [
+            "fall",
+            "banner"
+          ]
+        ]
+      }
+    }
+  ]
+}

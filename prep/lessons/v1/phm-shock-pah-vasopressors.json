@@ -1,0 +1,163 @@
+{
+  "v": 1,
+  "module": "phm-shock-pah",
+  "subject": "pharmacology",
+  "title": "Vasopressors in Shock and Pulmonary Arterial Hypertension Drugs",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Vasopressors** are chosen by shock physiology, not habit: noradrenaline's alpha 1 constriction with modest beta 1 support suits distributive septic shock, phenylephrine's pure alpha squeeze suits vasodilatation with tachyarrhythmia, and adrenaline covers anaphylaxis and refractory states. The matching principle is examinable every time: define the defect (vasodilatation, pump failure or both), then pick the receptor profile that repairs it while monitoring the organ perfusion the number is meant to serve.",
+      "say": "Name the defect first, then choose the receptor; the blood pressure number is a servant, not the goal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Distributive defect",
+          "points": [
+            "Vasodilatation dominates: septic, anaphylactic, neurogenic",
+            "Noradrenaline first line in septic shock",
+            "Vasopressin added as second agent",
+            "Phenylephrine when tachyarrhythmia limits others"
+          ]
+        },
+        "right": {
+          "title": "Pump defect with vasodilatation",
+          "points": [
+            "Cardiogenic shock needs inotropy plus pressure",
+            "Noradrenaline preferred over dopamine in trials",
+            "Dobutamine added for low output features",
+            "Dopamine's arrhythmia burden retired it from default use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In septic shock **noradrenaline** started early, peripherally through a good proximal cannula while central access is arranged, restores vascular tone and improves outcomes compared with delaying for central lines. Targets centre on a mean arterial pressure of 65 mmHg, individualised upward in chronic hypertension and judged against mentation, urine output and lactate clearance. Vasopressin at a fixed low dose is the standard second agent, sparing noradrenaline dose and its adrenergic costs.",
+      "say": "Noradrenaline early, mean pressure sixty five, perfusion judged at the bedside; vasopressin joins second.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sepsis", "label": "Septic shock: fluids given, pressure still low" },
+          { "id": "norad", "label": "Noradrenaline started, peripherally if needed" },
+          { "id": "map", "label": "Titrate to MAP 65 with perfusion markers" },
+          { "id": "vaso", "label": "Add fixed dose vasopressin as second agent" }
+        ],
+        "edges": [["sepsis", "norad"], ["norad", "map"], ["map", "vaso"]]
+      }
+    },
+    {
+      "tx": "Non catecholamine **vasopressin** constricts through V1a receptors, works in acidosis where catecholamine receptors blunt, and lacks arrhythmogenic beta effects, but pure afterload without inotropy can drop cardiac output when the ventricle is weak. Its relative deficiency in septic shock justified replacement style dosing. Ischaemic digits, skin and gut are its dose ceiling warnings, shared with any intense vasoconstriction pushed beyond the perfusion it was meant to rescue.",
+      "say": "Vasopressin squeezes without the arrhythmia price, but watch digits and gut when doses climb.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vasopressin advantages",
+          "points": [
+            "V1a constriction independent of adrenergic receptors",
+            "Effective in acidosis where catecholamines fade",
+            "No direct tachyarrhythmia drive",
+            "Catecholamine sparing in septic shock"
+          ]
+        },
+        "right": {
+          "title": "Vasopressin cautions",
+          "points": [
+            "Pure afterload can lower cardiac output",
+            "Digital, skin and splanchnic ischaemia at high dose",
+            "Hyponatraemia from V2 effects at higher doses",
+            "Not an inotrope substitute in cardiogenic shock"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pure alpha 1 agonist **phenylephrine** raises pressure without touching heart rate or contractility, even slowing the heart reflexly, which suits vasodilatory states complicated by tachyarrhythmia and dynamic outflow obstruction. The same purity harms when output is the problem, because afterload rises against a weak ventricle. Intranasal and ophthalmic cousins decongest and dilate pupils respectively, a reminder that receptor geography, not the molecule's name, writes the indication list.",
+      "say": "Phenylephrine is pressure without pulse; perfect for vasodilatation with tachycardia, wrong for a failing pump.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "phenyl", "label": "Phenylephrine bolus or infusion started" },
+          { "id": "alpha", "label": "Alpha 1 vasoconstriction raises systemic resistance" },
+          { "id": "reflex", "label": "Baroreflex slows heart rate reflexly" },
+          { "id": "fit", "label": "Best fit: vasodilatation with tachyarrhythmia" }
+        ],
+        "edges": [["phenyl", "alpha"], ["alpha", "reflex"], ["reflex", "fit"]]
+      }
+    },
+    {
+      "tx": "The phrase **renal dose dopamine** belongs in a museum: low dose dopamine does increase urine output transiently by natriuresis, but trials showed no protection against kidney failure, dialysis or death, while arrhythmias and digital ischaemia accumulated. Dopamine's dose ladder (dopaminergic, then beta, then alpha dominance) remains elegant examination material, and its surviving roles are symptomatic bradycardia where alternatives lag. Kidneys are protected by perfusion pressure and avoiding nephrotoxins, not by a dopaminergic drizzle.",
+      "say": "Renal dose dopamine makes urine, not renal protection; retire the phrase and keep the ladder for examinations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "The dopamine ladder (theory)",
+          "points": [
+            "Low dose: dopaminergic renal and mesenteric effects",
+            "Mid dose: beta 1 inotropy and chronotropy dominate",
+            "High dose: alpha 1 vasoconstriction takes over",
+            "Receptor overlap makes the ladder blurry in patients"
+          ]
+        },
+        "right": {
+          "title": "What trials actually found",
+          "points": [
+            "More urine, same kidney failure and mortality",
+            "More arrhythmias than noradrenaline in shock meta analyses",
+            "Digital and gut ischaemia at vasoconstrictor doses",
+            "Modern role: bradycardia bridge, not renal protection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pulmonary arterial hypertension therapy targets three endothelial pathways at once: endothelin, nitric oxide and prostacyclin. Endothelin receptor antagonists **bosentan** (dual ETA and ETB, hepatotoxic with monthly liver tests and teratogenicity) and ambrisentan (ETA selective, kinder liver profile) block the lung's dominant vasoconstrictor and proliferative signal. Both demand pregnancy prevention programmes because endothelin signalling sculpts the developing fetus, and bosentan's CYP induction slashes contraceptive and sildenafil levels.",
+      "say": "Endothelin blockers open the lung's tightest fist; liver tests and pregnancy prevention are the admission price.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/persistent-pulmonary-hypertension-fig1.webp",
+        "alt": "Persistent pulmonary hypertension pathophysiology diagram showing vasoconstriction and vascular remodelling",
+        "caption": "Pulmonary hypertension pathophysiology, with the endothelin, nitric oxide and prostacyclin pathways that modern therapy targets."
+      }
+    },
+    {
+      "tx": "The nitric oxide pathway is served twice: **sildenafil** and tadalafil block phosphodiesterase 5, which is abundant in pulmonary vasculature, prolonging cyclic GMP vasodilatation with convenient oral dosing, while **riociguat** stimulates soluble guanylate cyclase directly, sensitising it to nitric oxide and working even when endothelium fails. Riociguat uniquely also serves inoperable chronic thromboembolic disease, is strongly teratogenic, and must never combine with PDE5 inhibitors lest pressure collapse from stacked cyclic GMP.",
+      "say": "Sildenafil guards cyclic GMP, riociguat manufactures its signal; never stack them, and both forbid pregnancy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PDE5 inhibitors in PAH",
+          "points": [
+            "Sildenafil three times daily or tadalafil once daily",
+            "Prolong endogenous nitric oxide signalling",
+            "Headache, flushing and visual tint reported",
+            "Absolutely no concurrent nitrates"
+          ]
+        },
+        "right": {
+          "title": "Riociguat (sGC stimulator)",
+          "points": [
+            "Direct soluble guanylate cyclase stimulation",
+            "Also licensed in inoperable thromboembolic hypertension",
+            "Teratogenic: strict pregnancy prevention",
+            "Contraindicated with PDE5 inhibitors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prostacyclin replacement is the heavyweight division: continuous intravenous **epoprostenol** transformed survival in severe disease but demands a permanent central line and pump, where interruption for minutes can rebound fatally; inhaled iloprost and oral or inhaled treprostinil trade potency for practicality, oral **selexipag** agonises the prostacyclin receptor selectively with trial outcome benefit, and subcutaneous treprostinil's infusion site pain writes its own adherence story. Combination therapy across all three pathways, started early, is modern standard for most risk strata.",
+      "say": "Prostacyclins are the heavy artillery: lifesaving, logistically brutal, and never interrupted casually.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "risk", "label": "Risk stratification at diagnosis and follow up" },
+          { "id": "oral", "label": "Oral combination: endothelin blocker plus PDE5 inhibitor" },
+          { "id": "prost", "label": "Add prostacyclin pathway agent as risk demands" },
+          { "id": "parenteral", "label": "Intravenous epoprostenol for high risk disease" }
+        ],
+        "edges": [["risk", "oral"], ["oral", "prost"], ["prost", "parenteral"]]
+      }
+    }
+  ]
+}
