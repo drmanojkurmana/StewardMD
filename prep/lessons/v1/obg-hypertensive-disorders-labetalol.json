@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-hypertensive-disorders",
+ "subject": "obstetrics-gynaecology",
+ "title": "Labetalol, Nifedipine, Aspirin and Chronic Hypertension in Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The combined alpha and beta blocker first choice for severe hypertension in pregnancy is **labetalol**. Given intravenously in escalating boluses, it lowers pressure smoothly without reducing placental flow. Asthma and bradycardia are its main contraindications. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Labetalol is first choice for severe pregnancy hypertension given in escalating intravenous boluses.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-labetalol.webp",
+    "alt": "Labetalol in pregnancy hypertension.",
+    "caption": "Labetalol. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The calcium channel blocker used orally for acute severe hypertension and tocolysis is **nifedipine**. Immediate release capsules act within twenty minutes for pressure control. The same drug relaxes the uterus in preterm labour at different dosing. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Nifedipine lowers severe pressure orally within twenty minutes and also relaxes the uterus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use",
+     "Form"
+    ],
+    "rows": [
+     [
+      "Severe hypertension",
+      "Oral immediate release"
+     ],
+     [
+      "Tocolysis",
+      "Oral loading then maintenance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Daily low dose aspirin from twelve weeks preventing pre-eclampsia is **low dose aspirin prophylaxis**. One hundred fifty milligrams at night is the dose supported by major trials. It works only when started before placental development completes. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Low dose aspirin prophylaxis at night from twelve weeks prevents pre-eclampsia in high risk women.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "High risk identified"
+     },
+     {
+      "id": "n1",
+      "label": "Aspirin from 12 weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Taken at night"
+     },
+     {
+      "id": "n3",
+      "label": "Stopped near 36 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypertension present before pregnancy or before twenty weeks is **chronic hypertension**. Superimposed pre-eclampsia complicates a quarter of cases and can be hard to recognise. Methyldopa, labetalol and nifedipine are the safe maintenance drugs. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Chronic hypertension predates twenty weeks and a quarter develop superimposed pre-eclampsia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chronic",
+     "points": [
+      "Before 20 weeks",
+      "Baseline protein may exist",
+      "Long term drugs"
+     ]
+    },
+    "right": {
+     "title": "Gestational",
+     "points": [
+      "After 20 weeks",
+      "No proteinuria",
+      "Resolves postnatally"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reversible brain swelling causing headache, seizures and visual loss in severe hypertension is **posterior reversible encephalopathy**. Imaging shows posterior white matter oedema. Pressure control and magnesium usually reverse it completely, hence the name. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Posterior reversible encephalopathy swells the posterior brain and usually reverses with pressure control.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preeclampsia-fig1.webp",
+    "alt": "Severe pre-eclampsia cerebral effects.",
+    "caption": "Severe hypertension effects. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Methyldopa remains the drug with the longest fetal safety record for maintenance, termed the **safety standard**. Its slower onset makes it useless for acute severe hypertension. Sedation and positive Coombs tests are its quirks. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Methyldopa has the longest fetal safety record but acts too slowly for acute severe hypertension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Methyldopa",
+      "Maintenance, safest record"
+     ],
+     [
+      "Labetalol",
+      "Acute and maintenance"
+     ],
+     [
+      "Nifedipine",
+      "Acute oral and maintenance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs forbidden in pregnancy for hypertension include ACE inhibitors and angiotensin blockers, classed **fetotoxic antihypertensives**. They cause fetal renal failure and skull defects. Women conceiving on them switch immediately at the positive test. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "ACE inhibitors are fetotoxic and women switch immediately at a positive pregnancy test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Positive test on ACE inhibitor"
+     },
+     {
+      "id": "n1",
+      "label": "Drug stopped same day"
+     },
+     {
+      "id": "n2",
+      "label": "Safe alternative started"
+     },
+     {
+      "id": "n3",
+      "label": "Fetal kidneys monitored"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe hypertension needs treatment within thirty to sixty minutes to prevent stroke, following **acute treatment targets**. The goal is a controlled fall to under one sixty over one ten, not normalisation. Over rapid falls compromise placental perfusion. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Acute treatment targets a controlled fall within the hour, not normalisation of pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/eclampsia-fig1.webp",
+    "alt": "Severe hypertension emergency management.",
+    "caption": "Severe hypertension care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "White coat and masked hypertension distort clinic readings, resolved by **ambulatory monitoring**. Twenty four hour or home measurements guide true drug need in pregnancy increasingly. This avoids both overtreatment and missed chronic disease. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Ambulatory monitoring resolves white coat effects and guides true drug need in pregnancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "White coat",
+     "points": [
+      "High in clinic only",
+      "Normal at home",
+      "Observe closely"
+     ]
+    },
+    "right": {
+     "title": "Masked",
+     "points": [
+      "Normal in clinic",
+      "High at home",
+      "Treat as chronic"
+     ]
+    }
+   }
+  }
+ ]
+}

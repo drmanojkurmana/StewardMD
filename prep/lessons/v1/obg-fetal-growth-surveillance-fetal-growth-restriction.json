@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "obg-fetal-growth-surveillance",
+ "subject": "obstetrics-gynaecology",
+ "title": "Fetal Growth Restriction and Umbilical Artery Doppler",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Failure of a fetus to reach its growth potential from placental insufficiency is **fetal growth restriction**. It differs from constitutional smallness, though both appear as small measurements. Stillbirth and neonatal complications concentrate in the truly restricted group. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fetal growth restriction fails growth potential from placental insufficiency, unlike constitutional smallness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Restricted",
+     "Constitutionally small"
+    ],
+    "rows": [
+     [
+      "Doppler",
+      "Abnormal",
+      "Normal"
+     ],
+     [
+      "Parents",
+      "Any size",
+      "Small"
+     ],
+     [
+      "Risk",
+      "High",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early even slowing of head and body from chronic undernutrition before twenty eight weeks gives **symmetric IUGR** in older terminology. Causes include chromosomal, infectious and severe early placental disease. Modern practice describes timing and Doppler pattern instead. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Symmetric IUGR slows head and body evenly from early chronic causes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Symmetric",
+     "points": [
+      "Head and body small",
+      "Early onset",
+      "Chromosomal or infection"
+     ]
+    },
+    "right": {
+     "title": "Asymmetric",
+     "points": [
+      "Head spared",
+      "Late onset",
+      "Placental insufficiency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Head sparing late growth failure from placental insufficiency is **asymmetric IUGR**. Blood is redistributed to brain at the expense of liver and fat stores. Abdominal circumference falls first while head growth persists. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Asymmetric IUGR spares the head while abdominal growth falls from placental failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Placenta fails late"
+     },
+     {
+      "id": "n1",
+      "label": "Blood redirected to brain"
+     },
+     {
+      "id": "n2",
+      "label": "Abdomen growth falls"
+     },
+     {
+      "id": "n3",
+      "label": "Head growth persists"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Placental resistance reflected in the umbilical waveform is measured by **umbilical artery Doppler**. Rising resistance reduces diastolic flow progressively. It is the primary surveillance tool in growth restriction. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Umbilical artery Doppler reflects placental resistance as the primary surveillance tool.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Growth restriction Doppler surveillance.",
+    "caption": "Growth surveillance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complete disappearance of forward flow in diastole is **absent end-diastolic flow**. It signals advanced placental disease and high stillbirth risk within days to weeks. Delivery timing balances this against prematurity by gestation. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Absent end-diastolic flow signals advanced placental disease needing delivery timing decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Waveform",
+     "Severity"
+    ],
+    "rows": [
+     [
+      "Normal diastolic flow",
+      "Mild"
+     ],
+     [
+      "Absent end diastolic",
+      "Advanced"
+     ],
+     [
+      "Reversed end diastolic",
+      "Most severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flow actually reversing in diastole, the gravest umbilical pattern, is **reversed flow**. At early gestations it may prompt immediate delivery discussions at viability limits. Ductus venosus changes refine timing further. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Reversed flow is the gravest umbilical pattern and may prompt delivery at viability limits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Diastolic flow absent"
+     },
+     {
+      "id": "n1",
+      "label": "Flow reverses"
+     },
+     {
+      "id": "n2",
+      "label": "Venous Doppler worsens"
+     },
+     {
+      "id": "n3",
+      "label": "Delivery decided"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain sparing redistribution lowering middle cerebral resistance is the **cerebroplacental ratio** concept. A low ratio signals fetal adaptation to hypoxia. It adds prediction in late growth restriction where umbilical flow may stay normal. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "The cerebroplacental ratio detects brain sparing in late growth restriction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "Fetal growth and metabolic context.",
+    "caption": "Fetal growth context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serial growth scans every two to three weeks track velocity because single measurements mislead, following **interval growth assessment**. Crossing centiles downward confirms restriction better than one small reading. Fluid volume trends accompany the biometry. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Interval growth assessment tracks velocity because single small measurements mislead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Single small scan",
+     "points": [
+      "May be constitutional",
+      "Dates may err",
+      "Rescan interval"
+     ]
+    },
+    "right": {
+     "title": "Falling velocity",
+     "points": [
+      "True restriction",
+      "Doppler checked",
+      "Delivery planned"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Delivery is the only treatment, timed to maximise maturity before stillbirth, the principle of **timed delivery**. Steroids and magnesium precede early deliveries. Growth restriction at term needs delivery by thirty seven to thirty eight weeks even with normal Doppler. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Timed delivery balances maturity against stillbirth, with term restriction delivered by thirty eight weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Restriction confirmed"
+     },
+     {
+      "id": "n1",
+      "label": "Doppler stratifies risk"
+     },
+     {
+      "id": "n2",
+      "label": "Steroids if preterm"
+     },
+     {
+      "id": "n3",
+      "label": "Delivery at threshold"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

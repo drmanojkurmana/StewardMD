@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "obg-aph",
+ "subject": "obstetrics-gynaecology",
+ "title": "DIC, Vasa Praevia and Placenta Accreta Spectrum",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Widespread clotting activation consuming platelets and factors until bleeding erupts is **DIC**. Disseminated intravascular coagulation in obstetrics follows abruption, sepsis, embolism and dead fetus retention. Treating the cause plus replacing components is the twin strategy. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "DIC consumes clotting factors after abruption or sepsis and needs cause treatment plus replacement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "In DIC"
+    ],
+    "rows": [
+     [
+      "Platelets",
+      "Falling"
+     ],
+     [
+      "Fibrinogen",
+      "Low"
+     ],
+     [
+      "D dimer",
+      "Very high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal vessels running in membranes across the internal os are **vasa praevia**. They tear when membranes rupture, exsanguinating the fetus within minutes. Antenatal diagnosis by targeted scan converts a catastrophe into a planned caesarean. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Vasa praevia tears fetal vessels at membrane rupture and exsanguinates the fetus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Vessels cross the os"
+     },
+     {
+      "id": "n1",
+      "label": "Membranes rupture"
+     },
+     {
+      "id": "n2",
+      "label": "Fetal bleeding begins"
+     },
+     {
+      "id": "n3",
+      "label": "Emergency caesarean"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal haemorrhage from torn vasa praevia is historically called **Benckiser haemorrhage**. A small volume of vaginal blood with immediate fetal heart collapse is the signature. The mother stays well while the fetus bleeds to death. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Benckiser haemorrhage bleeds the fetus from torn vasa while the mother stays well.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vasa praevia bleed",
+     "points": [
+      "Fetal blood",
+      "Fetal heart collapses",
+      "Mother well"
+     ]
+    },
+    "right": {
+     "title": "Praevia bleed",
+     "points": [
+      "Maternal blood",
+      "Mother may shock",
+      "Fetus usually well"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Placenta growing into uterine muscle without its normal cleavage plane forms **placenta accreta spectrum**. Previous caesarean plus praevia is the classic setup. Undiagnosed cases cause the most torrential haemorrhage in obstetrics. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Placenta accreta spectrum grows into muscle without a cleavage plane after caesarean scars.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placenta-praevia-fig1.webp",
+    "alt": "Accreta risk with praevia over scar.",
+    "caption": "Accreta spectrum risk. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnosis before delivery transforms outcomes, so high risk women get a dedicated **accreta scan**. Loss of the clear zone, bladder wall interruption and placental lacunae are ultrasound markers. MRI clarifies parametrial and bladder invasion. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A dedicated accreta scan seeks clear zone loss and bladder interruption in high risk women.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "On ultrasound"
+    ],
+    "rows": [
+     [
+      "Clear zone",
+      "Lost"
+     ],
+     [
+      "Lacunae",
+      "Vascular lakes"
+     ],
+     [
+      "Bladder line",
+      "Interrupted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Planned caesarean hysterectomy leaving the placenta undisturbed is the standard for major accreta, termed **planned hysterectomy**. Attempting placental removal first provokes uncontrollable bleeding. Cell salvage, interventional radiology and massive transfusion stand ready. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Planned hysterectomy leaving the placenta undisturbed is standard for major accreta.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Accreta diagnosed antenatally"
+     },
+     {
+      "id": "n1",
+      "label": "Planned caesarean in centre"
+     },
+     {
+      "id": "n2",
+      "label": "Placenta left undisturbed"
+     },
+     {
+      "id": "n3",
+      "label": "Hysterectomy performed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibrinogen is the first factor to fall and the best guide in obstetric DIC, a principle of **fibrinogen first**. Levels under two grams per litre predict severe haemorrhage. Concentrate or cryoprecipitate restores it fastest. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Fibrinogen first falls earliest in obstetric DIC and levels under two predict severity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "DIC haemorrhage assessment.",
+    "caption": "DIC assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rotational thromboelastometry at the bedside guides component therapy in real time, called **viscoelastic testing**. It shows clot strength and fibrinolysis within minutes. Targeted products replace blind ratio based transfusion increasingly. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Viscoelastic testing guides component therapy in real time at the bedside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Viscoelastic guided",
+     "points": [
+      "Targeted products",
+      "Minutes to result",
+      "Less waste"
+     ]
+    },
+    "right": {
+     "title": "Fixed ratio",
+     "points": [
+      "Empirical packs",
+      "Simpler logistics",
+      "More waste"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Velamentous cord insertion and succenturiate lobes predispose to vasa praevia, grouped as **anatomical predispositions**. Targeted transvaginal colour Doppler at the anomaly scan finds vessels over the os. Elective caesarean at thirty four to thirty six weeks follows diagnosis. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Velamentous insertion predisposes to vasa praevia needing elective caesarean after diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placental-abruption-fig1.webp",
+    "alt": "Placental and vessel abnormalities.",
+    "caption": "Vessel abnormalities. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "obg-rh-isoimmunisation",
+ "subject": "obstetrics-gynaecology",
+ "title": "Rh Alloimmunisation, Anti-D, MCA Doppler and Hydrops",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A mother lacking the Rh D antigen carrying a positive fetus risks sensitisation as an **Rh negative mother**. Fetal cells entering her circulation at delivery or bleeding events trigger antibody formation. Later positive pregnancies then face haemolytic disease. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "An Rh negative mother sensitises to fetal positive cells at delivery or bleeding events.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rh-isoimmunization-fig1.webp",
+    "alt": "Rh isoimmunisation pathophysiology and management.",
+    "caption": "Rh isoimmunisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The process of mounting antibodies against fetal red cell antigens is **alloimmunisation**. Once sensitised, antibodies cross the placenta and destroy fetal red cells progressively. Anti D remains commonest, with Kell and c also important. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Alloimmunisation destroys fetal red cells progressively once antibodies form and cross.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody",
+     "Importance"
+    ],
+    "rows": [
+     [
+      "Anti D",
+      "Commonest, severe"
+     ],
+     [
+      "Anti Kell",
+      "Suppresses red cell production"
+     ],
+     [
+      "Anti c",
+      "Can be severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pooled human antibody given to clear fetal cells before sensitisation is **anti-D immunoglobulin**. Routine doses follow birth, sensitising events and routinely at twenty eight weeks in many programmes. It must be given within seventy two hours for full effect. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Anti-D immunoglobulin clears fetal cells and must be given within seventy two hours.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-anti-d-immunoglobulin.webp",
+    "alt": "Anti-D immunoglobulin prophylaxis.",
+    "caption": "Anti-D prophylaxis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Counting fetal cells in maternal blood to size the fetomaternal haemorrhage is the **Kleihauer-Betke test**. Acid elution leaves fetal cells stained while maternal cells ghost. Large counts demand extra anti-D doses. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The Kleihauer-Betke test counts fetal cells to size extra anti-D dosing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Maternal sample taken"
+     },
+     {
+      "id": "n1",
+      "label": "Acid elution performed"
+     },
+     {
+      "id": "n2",
+      "label": "Fetal cells counted"
+     },
+     {
+      "id": "n3",
+      "label": "Extra anti-D calculated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Detecting antibodies coating red cells or free in serum uses Coombs testing, with the **indirect Coombs test** for maternal serum. It screens and identifies the antibody specificity at booking and twenty eight weeks. Titres then track levels in sensitised women. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The indirect Coombs test screens maternal serum antibodies at booking and twenty eight weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indirect Coombs",
+     "points": [
+      "Maternal serum",
+      "Finds free antibody",
+      "Screening"
+     ]
+    },
+    "right": {
+     "title": "Direct Coombs",
+     "points": [
+      "Babys cells",
+      "Finds coated cells",
+      "After birth"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Serial antibody concentration guiding surveillance intensity is the **antibody titre**. Critical thresholds trigger fetal Doppler surveillance rather than invasive testing. Titres predict poorly in subsequent affected pregnancies, where Doppler rules. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Antibody titres trigger Doppler surveillance but predict poorly after a first affected pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Guide"
+    ],
+    "rows": [
+     [
+      "First sensitised pregnancy",
+      "Titre thresholds"
+     ],
+     [
+      "Later pregnancies",
+      "MCA Doppler directly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood speed in the fetal middle cerebral artery rising with anaemia is measured as **MCA peak systolic velocity Doppler**. Above one point five multiples of the median predicts moderate to severe anaemia. It has replaced amniocentesis for haemolytic disease surveillance. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "MCA Doppler above one point five median predicts fetal anaemia non invasively.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rh-isoimmunization-and-fetal-hydrops-fig1.webp",
+    "alt": "Rh isoimmunisation and fetal hydrops.",
+    "caption": "Fetal hydrops. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe fetal anaemia causing heart failure with fluid in multiple body cavities is **hydrops fetalis**. Skin oedema, ascites and effusions appear on ultrasound. Immune hydrops from alloimmunisation is now rarer than non immune causes thanks to anti-D. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Hydrops fetalis is heart failure from severe anaemia with fluid in multiple cavities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Red cells destroyed"
+     },
+     {
+      "id": "n1",
+      "label": "Severe anaemia develops"
+     },
+     {
+      "id": "n2",
+      "label": "Heart failure follows"
+     },
+     {
+      "id": "n3",
+      "label": "Hydrops on scan"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transfusing blood directly into the umbilical vein treats fetal anaemia before birth by **intrauterine transfusion**. O negative, irradiated, concentrated blood is given under ultrasound guidance. Repeated transfusions carry the fetus to viable delivery, guided historically by the Liley chart of fluid bilirubin and now by Doppler, while erythroblastosis fetalis names the newborn disease with immature red cells flooding the circulation.",
+   "say": "Intrauterine transfusion treats fetal anaemia directly through the umbilical vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Use"
+    ],
+    "rows": [
+     [
+      "MCA Doppler",
+      "Detect anaemia"
+     ],
+     [
+      "Cordocentesis",
+      "Confirm and transfuse"
+     ],
+     [
+      "Liley chart",
+      "Historical fluid bilirubin"
+     ]
+    ]
+   }
+  }
+ ]
+}

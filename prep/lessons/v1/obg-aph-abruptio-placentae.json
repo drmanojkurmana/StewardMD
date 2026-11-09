@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "obg-aph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Abruptio Placentae: Concealed Haemorrhage and Couvelaire Uterus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Premature separation of a normally sited placenta before delivery is **abruptio placentae**. It causes painful bleeding, a tense tender uterus and fetal distress or death. Hypertension and trauma are leading associations. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Abruptio placentae separates the placenta early, causing painful bleeding and fetal distress.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placental-abruption-fig1.webp",
+    "alt": "Placental abruption mechanisms and presentations.",
+    "caption": "Placental abruption. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bleeding trapped behind the placenta with little or nothing visible outside is **concealed haemorrhage**. Shock seems out of proportion to visible loss because litres hide behind the placenta. The uterus feels woody hard and larger than dates. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Concealed haemorrhage hides litres behind the placenta with shock out of proportion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Visible blood"
+    ],
+    "rows": [
+     [
+      "Revealed",
+      "Most escapes vaginally"
+     ],
+     [
+      "Concealed",
+      "Trapped behind placenta"
+     ],
+     [
+      "Mixed",
+      "Both components"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood dissecting into the uterine muscle and under the serosa, seen at caesarean, is the **Couvelaire uterus**. The purple bruised uterus usually still contracts after delivery. It is not by itself an indication for hysterectomy. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Couvelaire uterus bruises the muscle purple with blood but usually still contracts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Blood behind placenta"
+     },
+     {
+      "id": "n1",
+      "label": "Dissects into muscle"
+     },
+     {
+      "id": "n2",
+      "label": "Purple uterus at surgery"
+     },
+     {
+      "id": "n3",
+      "label": "Usually contracts after"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal outcome depends on separation extent, with complete separation causing **intrauterine death**. The retroplacental clot interrupts all exchange. Live fetuses need immediate delivery, usually caesarean, alongside maternal resuscitation. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Complete separation causes intrauterine death, and live fetuses need immediate delivery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fetus alive",
+     "points": [
+      "Immediate caesarean usually",
+      "Resuscitate mother",
+      "Senior team"
+     ]
+    },
+    "right": {
+     "title": "Fetus dead",
+     "points": [
+      "Vaginal delivery preferred",
+      "Correct coagulopathy",
+      "Avoid surgery if possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Abruption consumes clotting factors and triggers disseminated coagulation, so **coagulation screening** is urgent. Fibrinogen falls earliest and predicts severity. Blood products including fibrinogen concentrate restore haemostasis. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Coagulation screening in abruption tracks fibrinogen, which falls earliest and predicts severity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Abruption emergency assessment.",
+    "caption": "Abruption assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A tender, irritable uterus contracting almost continuously is described as **uterine hypertonus**. The baseline tone stays high between contractions, starving the fetus. Tocodynamometry shows this pattern clearly. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Uterine hypertonus keeps baseline tone high and starves the fetus between contractions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "In abruption"
+    ],
+    "rows": [
+     [
+      "Uterus",
+      "Tense, tender, woody"
+     ],
+     [
+      "Pain",
+      "Constant"
+     ],
+     [
+      "Bleeding",
+      "Dark, may be concealed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cocaine use, smoking, hypertension and abdominal trauma head the list of **abruption risk factors**. Previous abruption recurs in about one in ten next pregnancies. Pre-eclampsia management reduces but does not abolish the risk. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Abruption risk factors include hypertension, trauma, smoking and previous abruption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Risk factors present"
+     },
+     {
+      "id": "n1",
+      "label": "Placental vessels diseased"
+     },
+     {
+      "id": "n2",
+      "label": "Separation triggered"
+     },
+     {
+      "id": "n3",
+      "label": "Bleeding revealed or concealed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the fetus is dead and mother stable, vaginal delivery avoids surgery through a coagulopathic field, following **vaginal preference**. Amniotomy and oxytocin expedite labour. Coagulopathy is corrected in parallel with blood products. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Vaginal preference avoids surgery through a coagulopathic field when the fetus is dead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dead fetus, stable mother",
+     "points": [
+      "Vaginal delivery",
+      "Correct coagulopathy",
+      "Amniotomy helps"
+     ]
+    },
+    "right": {
+     "title": "Live fetus",
+     "points": [
+      "Caesarean",
+      "Immediate",
+      "Resuscitation parallel"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After abruption delivery, atonic bleeding threatens because blood soaked muscle contracts poorly, termed **postpartum atony risk**. Active third stage management and uterotonics are mandatory. Fibrinogen is rechecked in recovery. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Postpartum atony risk follows abruption because blood soaked muscle contracts poorly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placenta-praevia-fig1.webp",
+    "alt": "Placental disorders and haemorrhage planning.",
+    "caption": "Haemorrhage planning. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

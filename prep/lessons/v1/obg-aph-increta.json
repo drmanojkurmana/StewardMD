@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "obg-aph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Placenta Increta, Percreta and the Caesarean Scar",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Placental villi invading deep into myometrium but not through it form **placenta increta**. It is the middle grade of the accreta spectrum between superficial accreta and full thickness percreta. Bleeding risk rises steeply with depth. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Placenta increta invades deep into myometrium as the middle grade of accreta spectrum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Depth"
+    ],
+    "rows": [
+     [
+      "Accreta",
+      "On muscle surface"
+     ],
+     [
+      "Increta",
+      "Into muscle"
+     ],
+     [
+      "Percreta",
+      "Through wall, into bladder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Villi penetrating the full uterine wall and into bladder or bowel form **placenta percreta**. It is the rarest and deadliest grade, often needing bladder surgery. Multidisciplinary teams including urology plan these deliveries. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Placenta percreta penetrates the full wall into bladder and needs multidisciplinary surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placenta-praevia-fig1.webp",
+    "alt": "Percreta within accreta spectrum grades.",
+    "caption": "Accreta grades. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Each additional caesarean multiplies accreta risk when praevia overlies the scar, a **dose response risk**. With praevia, risk climbs from a few percent after one caesarean to over half after four. This arithmetic drives primary caesarean prevention. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Accreta risk climbs steeply with each caesarean when praevia overlies the scar.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "One caesarean, low risk"
+     },
+     {
+      "id": "n1",
+      "label": "Two, rising risk"
+     },
+     {
+      "id": "n2",
+      "label": "Four, over half affected"
+     },
+     {
+      "id": "n3",
+      "label": "Prevention at first caesarean"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of decidual formation over the scar removes the normal barrier, explaining the **scar decidua defect**. Trophoblast meets myometrium directly and anchors into it. The same defect underlies caesarean scar ectopic pregnancy. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The scar decidua defect lets trophoblast anchor directly into myometrium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal bed",
+     "points": [
+      "Decidua separates placenta",
+      "Clean delivery plane"
+     ]
+    },
+    "right": {
+     "title": "Scar bed",
+     "points": [
+      "No decidua",
+      "Villi anchor in muscle",
+      "No plane"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conservative management leaving the placenta in situ to resorb suits selected stable cases, termed **conservative accreta care**. Methotrexate is no longer favoured, and delayed interval hysterectomy remains common. Infection and delayed haemorrhage shadow this approach for months. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Conservative accreta care leaves the placenta to resorb in selected stable cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Approach",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Planned hysterectomy",
+      "Major accreta, family complete"
+     ],
+     [
+      "Conservative in situ",
+      "Stable, fertility desired"
+     ],
+     [
+      "Stepwise devascularisation",
+      "Resource variable settings"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Focal accreta in a small area may allow resection and uterine reconstruction, called **focal resection**. One finger and triple P procedures formalise this in specialist hands. Successful cases preserve fertility with acceptable blood loss. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Focal resection reconstructs the uterus for small accreta areas in specialist hands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Focal area identified"
+     },
+     {
+      "id": "n1",
+      "label": "Placenta and muscle excised"
+     },
+     {
+      "id": "n2",
+      "label": "Uterus reconstructed"
+     },
+     {
+      "id": "n3",
+      "label": "Fertility preserved"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative balloon catheters or post delivery embolisation reduce pelvic flow as **radiological adjuncts**. Evidence for routine balloons is mixed, so centres individualise. Their presence never substitutes for surgical readiness. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Radiological adjuncts reduce pelvic flow but never substitute for surgical readiness.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Accreta delivery planning.",
+    "caption": "Accreta planning. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Massive transfusion protocols activate early with senior haematology involvement in planned accreta surgery, following **anticipated haemorrhage protocol**. Cell salvage is safe and routine in modern obstetric haemorrhage. Tranexamic acid within three hours improves survival. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Anticipated haemorrhage protocol activates massive transfusion and tranexamic acid early.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Planned case",
+     "points": [
+      "Blood in room",
+      "Cell salvage running",
+      "Calm sequence"
+     ]
+    },
+    "right": {
+     "title": "Undiagnosed case",
+     "points": [
+      "Chaotic resuscitation",
+      "Higher morbidity",
+      "Emergency hysterectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Counselling after accreta covers recurrence and future pregnancy honestly, termed **future risk counselling**. Recurrence approaches one in five, and many advise against further pregnancy after percreta with bladder repair. Psychological support follows a traumatic delivery. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Future risk counselling after accreta covers recurrence approaching one in five.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/placental-abruption-fig1.webp",
+    "alt": "Accreta counselling context.",
+    "caption": "Accreta counselling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
