@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "obg-multiple-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Twin-Twin Transfusion, TRAP, Conjoined and Locked Twins",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Unbalanced blood sharing through placental vessel connections in monochorionic twins causes **twin-twin transfusion syndrome**. The donor twin shrinks with no fluid while the recipient overloads with excess fluid and heart strain. It complicates about one in ten monochorionic pregnancies. It typically declares between 16 and 26 weeks, and untreated severe disease loses most babies.",
+   "say": "Twin-twin transfusion unbalances blood sharing, shrinking the donor and overloading the recipient.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/twin-twin-transfusion-syndrome-fig1.webp",
+    "alt": "TTTS pathophysiology and laser photocoagulation.",
+    "caption": "TTTS and laser treatment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fetoscopic laser sealing of the connecting placental vessels is **laser ablation** for transfusion syndrome. Performed at sixteen to twenty six weeks in specialist centres, it treats the cause directly. Survival of at least one twin reaches eighty percent in modern series. Amnioreduction was the older treatment; laser roughly doubles intact survival compared with draining fluid alone.",
+   "say": "Laser ablation seals connecting vessels and saves at least one twin in eighty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "TTTS staged by scan"
+     },
+     {
+      "id": "n1",
+      "label": "Fetoscopy at specialist centre"
+     },
+     {
+      "id": "n2",
+      "label": "Vessels laser sealed"
+     },
+     {
+      "id": "n3",
+      "label": "Both circulations separated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "One twin pumping blood to a headless, heartless partner through reversed flow is the **TRAP sequence**. Twin reversed arterial perfusion burdens the normal pumps heart with both circulations. Occluding the abnormal twins cord saves the pump twin. The acardiac twin is perfused backwards through an artery to artery connection and often grows an oedematous trunk without a head.",
+   "say": "TRAP sequence burdens the normal twin pumping for a heartless partner.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Twin",
+     "State"
+    ],
+    "rows": [
+     [
+      "Pump twin",
+      "Normal, heart strained"
+     ],
+     [
+      "TRAP twin",
+      "No heart or head"
+     ],
+     [
+      "Treatment",
+      "Occlude abnormal cord"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Twins joined at chest, abdomen or head from very late splitting are **conjoined twins**. Prognosis depends on shared organs, especially heart and liver. Multidisciplinary planning from diagnosis decides separability and timing. Splitting after day thirteen is incomplete, giving conjoined twins in about one in fifty thousand births.",
+   "say": "Conjoined twins join at chest or abdomen and prognosis depends on shared organs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thoracopagus",
+     "points": [
+      "Joined at chest",
+      "Heart often shared",
+      "Separation hardest"
+     ]
+    },
+    "right": {
+     "title": "Omphalopagus",
+     "points": [
+      "Joined at abdomen",
+      "Liver shared",
+      "Separation feasible often"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interlocking where the first breech twins head is trapped by the second twins descending head is **locked twins**. It is rare and usually involves a breech first twin with vertex second. Emergency manoeuvres or caesarean resolve the impaction. The Zavanelli manoeuvre, pushing the second head up, is described for the rare locked twin emergency.",
+   "say": "Locked twins interlock breech and vertex heads, usually needing emergency caesarean.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Breech first descends"
+     },
+     {
+      "id": "n1",
+      "label": "Vertex second head descends"
+     },
+     {
+      "id": "n2",
+      "label": "Heads lock at brim"
+     },
+     {
+      "id": "n3",
+      "label": "Emergency delivery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight difference over twenty percent between twins defines **discordant growth**. It may reflect transfusion imbalance or one twins placental insufficiency. The smaller twins Doppler studies drive delivery timing. Discordance is calculated from the larger twin weight: difference divided by the larger, times one hundred.",
+   "say": "Discordant growth over twenty percent needs Doppler driven delivery timing for the smaller twin.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Twin growth surveillance.",
+    "caption": "Twin growth checks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The old rule that twinning frequency follows one in eighty to the power of litter size is **Hellin law**. It predicted triplets at one in eighty squared historically. Assisted conception has broken its assumptions in modern practice. Hellin law gives triplets at one in about 6400 and quadruplets near one in five hundred thousand.",
+   "say": "Hellin law predicted multiples by powers of eighty before assisted conception changed rates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pregnancy",
+     "Hellin prediction"
+    ],
+    "rows": [
+     [
+      "Twins",
+      "1 in 80"
+     ],
+     [
+      "Triplets",
+      "1 in 80 squared"
+     ],
+     [
+      "Quadruplets",
+      "1 in 80 cubed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quintero staging grades transfusion syndrome by fluid, bladder, Doppler and hydrops findings, termed **Quintero staging**. Stage guides urgency of laser referral. Rapid progression can occur between fortnightly scans. Stage one has fluid imbalance only; stage two loses the donor bladder; stage five is death of one or both twins.",
+   "say": "Quintero staging grades transfusion severity and guides laser referral urgency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stage one fluid only"
+     },
+     {
+      "id": "n1",
+      "label": "Stage two bladder absent"
+     },
+     {
+      "id": "n2",
+      "label": "Stage three Doppler abnormal"
+     },
+     {
+      "id": "n3",
+      "label": "Stage four hydrops, five death"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selective growth restriction in monochorionic twins without transfusion is managed by **Doppler based timing**. Umbilical waveforms classify the pattern and its risks. Delivery balances the restricted twins danger against prematurity for both. Umbilical artery waveform types one to three grade selective restriction and predict deterioration in the smaller twin.",
+   "say": "Selective growth restriction uses Doppler patterns to time delivery for both twins.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/twin-twin-transfusion-syndrome-fig1.webp",
+    "alt": "Monochorionic complications and Doppler.",
+    "caption": "Monochorionic Doppler. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
