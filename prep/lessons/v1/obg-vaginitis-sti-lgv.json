@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "obg-vaginitis-sti",
+ "subject": "obstetrics-gynaecology",
+ "title": "LGV, Donovanosis and Tropical Genital Ulcer Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Invasive L1 to L3 chlamydia serovars causing lymphatic disease are the agents of **LGV** proper. Unlike mucosal D to K serovars, they invade nodes and rectum. Proctocolitis in men who have sex with men is its modern face in cities. The primary ulcer heals unnoticed in days, so most patients present later with nodes or rectal symptoms rather than the sore itself.",
+   "say": "LGV invasive serovars invade nodes and rectum unlike mucosal chlamydia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serovars",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "D to K",
+      "Mucosal cervicitis"
+     ],
+     [
+      "L1 to L3",
+      "LGV invasive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nodes matted above and below the inguinal ligament crease form the **groove sign**. It appears in a minority but is nearly pathognomonic when seen. Bubo aspiration through healthy skin prevents sinus formation. Fluctuant buboes need aspiration, never incision, because incised buboes drain for months through chronic sinuses that heal badly.",
+   "say": "The groove sign is formed by nodes above and below the inguinal ligament in LGV.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Painless ulcer missed"
+     },
+     {
+      "id": "n1",
+      "label": "Buboes enlarge"
+     },
+     {
+      "id": "n2",
+      "label": "Groove sign appears"
+     },
+     {
+      "id": "n3",
+      "label": "Aspiration prevents sinus"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rectal LGV mimics inflammatory bowel disease with bloody discharge and strictures, termed **LGV proctocolitis**. Biopsy and chlamydia typing separate it from Crohn disease. Twenty one days doxycycline, not seven, is required. Short course doxycycline cures mucosal chlamydia but fails invasive LGV, which is the commonest prescribing trap in proctitis.",
+   "say": "LGV proctocolitis mimics Crohn disease and needs twenty one days doxycycline.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "LGV proctocolitis assessment.",
+    "caption": "LGV assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Late LGV destroys perineal lymphatics causing genital elephantiasis and rectal strictures as **tertiary disease**. Esthiomene names the female genital ulceration and swelling complex. Surgery reconstructs only after infection is cured. Elephantiasis follows years of lymphatic blockage, and late strictures may need dilatation or diversion long after organisms are dead.",
+   "say": "Tertiary LGV causes elephantiasis and strictures needing cure before reconstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Secondary",
+     "points": [
+      "Buboes, groove sign",
+      "Antibiotics cure"
+     ]
+    },
+    "right": {
+     "title": "Tertiary",
+     "points": [
+      "Strictures, elephantiasis",
+      "Surgery after cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Donovan bodies, bipolar staining rods inside macrophages, diagnose **donovanosis** on crush preparation. The beefy granuloma bleeds easily and spreads by autoinoculation. Pseudoelephantiasis follows chronic untreated disease. The painless beefy ulcer that bleeds on contact and ignores standard antibiotics should always raise donovanosis in tropical practice.",
+   "say": "Donovan bodies inside macrophages diagnose donovanosis on crush preparation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/trichomoniasis-fig1.webp",
+    "alt": "Genital ulcer organism morphology.",
+    "caption": "Ulcer organisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Azithromycin weekly until complete healing, usually over three weeks, treats donovanosis as **prolonged azithromycin**. Stopping early relapses because organisms clear slowly. Sexual contacts within sixty days are treated. Healing is judged clinically because no test of cure exists, so review continues until every ulcer has fully epithelialised.",
+   "say": "Prolonged azithromycin until healed treats donovanosis because organisms clear slowly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Azithromycin",
+      "Weekly till healed"
+     ],
+     [
+      "Doxycycline",
+      "Twice daily alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tropical ulcer diseases cluster where HIV prevalence is high, and each ulcer is an HIV portal, termed **ulcer HIV synergy**. Every genital ulcer consultation includes HIV testing and prevention offer. Healing ulcers reduces transmission measurably. Ulcer disease and HIV amplify each other in both directions, which is why syphilis testing joins HIV testing at the same visit.",
+   "say": "Ulcer HIV synergy bundles HIV testing into every genital ulcer consultation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Ulcer assessed"
+     },
+     {
+      "id": "n1",
+      "label": "HIV test offered"
+     },
+     {
+      "id": "n2",
+      "label": "Syndrome treated"
+     },
+     {
+      "id": "n3",
+      "label": "Prevention counselled"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fixed drug free intervals after treatment with test of cure where feasible form **follow up discipline**. LGV buboes resolve slowly over weeks despite cure. Persistent masses earn imaging for abscess rather than more antibiotics blindly. Slow node resolution alone is not treatment failure, since inflamed nodes settle over weeks after the organisms have been killed.",
+   "say": "Follow up discipline images persistent LGV masses for abscess rather than blind antibiotics.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pelvic-inflammatory-disease-fig1.webp",
+    "alt": "Pelvic lymphatic infection context.",
+    "caption": "Lymphatic infection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extragenital LGV and donovanosis at oral and rectal sites follow sexual networks, needing **site based screening**. Symptoms dictate swab sites beyond the genitals. Partner notification spans the same network. Extragenital disease hides in plain sight as throat or rectal infection, and site sampling follows the exposure history, not assumptions.",
+   "say": "Site based screening swabs oral and rectal sites by sexual network in ulcer disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genital only screen",
+     "points": [
+      "Misses extragenital"
+     ]
+    },
+    "right": {
+     "title": "Network based",
+     "points": [
+      "Sites by exposure",
+      "Partners notified"
+     ]
+    }
+   }
+  }
+ ]
+}

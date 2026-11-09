@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-vaginitis-sti",
+ "subject": "obstetrics-gynaecology",
+ "title": "Syndromic STI Management, LGV and Genital Ulcer Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Lymphogranuloma venereum from invasive chlamydia L serovars causes painless ulcer then buboes, abbreviated **LGV**. The groove sign of nodes above and below the inguinal ligament is classic. Doxycycline for twenty one days is treatment. LGV needs prolonged doxycycline unlike mucosal chlamydia, so naming the syndrome correctly decides duration before any test result returns.",
+   "say": "LGV causes painless ulcer then buboes with the groove sign, treated by doxycycline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Primary",
+      "Painless ulcer, missed"
+     ],
+     [
+      "Secondary",
+      "Painful buboes, groove sign"
+     ],
+     [
+      "Tertiary",
+      "Strictures, elephantiasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genital ulcer differential spans herpes, syphilis, chancroid, LGV and donovanosis as the **ulcer pentad**. Pain separates herpes and chancroid from painless syphilis and LGV ulcers. Syndromic kits cover the likely pair locally. Pain remains the fastest bedside separator: herpes and chancroid hurt, while syphilis, LGV and donovanosis typically do not.",
+   "say": "The ulcer pentad separates painful herpes and chancroid from painless syphilis ulcers.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Genital ulcer assessment.",
+    "caption": "Ulcer assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A painless indurated ulcer with rubbery nodes, the chancre of primary syphilis, is the **Hunterian chancre**. It heals spontaneously while infection disseminates. Serology may lag, so dark ground or PCR helps early. A chancre that heals alone reassures falsely, because spirochaetes have already seeded the blood and secondary disease follows within weeks.",
+   "say": "The Hunterian chancre is painless and indurated, healing while infection disseminates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Painless ulcer appears"
+     },
+     {
+      "id": "n1",
+      "label": "Rubbery nodes"
+     },
+     {
+      "id": "n2",
+      "label": "Serology catches up"
+     },
+     {
+      "id": "n3",
+      "label": "Penicillin cures"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painful soft ulcers with undermined edges and suppurative nodes form **chancroid**. Haemophilus ducreyi causes it in tropical settings. Single dose azithromycin or ceftriaxone treats, with HIV testing bundled. Chancroid nodes suppurate and rupture through skin, unlike the firm rubbery nodes of syphilis that never point or discharge.",
+   "say": "Chancroid gives painful soft ulcers with suppurative nodes in tropical settings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chancroid",
+     "points": [
+      "Painful, soft",
+      "Suppurative nodes"
+     ]
+    },
+    "right": {
+     "title": "Syphilis chancre",
+     "points": [
+      "Painless, indurated",
+      "Rubbery nodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Beefy red friable granuloma without pain or nodes is **donovanosis**. Klebsiella granulomatis shows Donovan bodies in macrophages on crush smear. Weeks of azithromycin until healed is standard. Donovanosis ignores single dose regimens entirely, and stopping before complete healing guarantees relapse from organisms surviving deep in macrophages.",
+   "say": "Donovanosis gives beefy painless granulomas with Donovan bodies on smear.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/trichomoniasis-fig1.webp",
+    "alt": "STI morphology contrast.",
+    "caption": "STI contrast. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recurrent painful vesicles healing without scar are genital **herpes simplex**. Suppressive antivirals reduce recurrence and transmission. Most transmission occurs during asymptomatic shedding, counselling must stress. Suppressive therapy suits frequent recurrence, and counselling must separate infectivity during lesions from the smaller risk between attacks.",
+   "say": "Genital herpes recurs painfully and transmits mostly during asymptomatic shedding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Episodic 5 days",
+      "Infrequent attacks"
+     ],
+     [
+      "Daily suppression",
+      "Frequent or partner protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Expedited partner therapy giving patients medicine for partners accelerates control as **partner therapy**. Legal frameworks vary, but partner slips and kits achieve similar ends. Index patients are retested at three months for reinfection. Retesting catches reinfection rather than failure in most repeat positives, because partner reinfection outnumbers drug resistance heavily.",
+   "say": "Partner therapy accelerates STI control, with index retesting at three months.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Index treated"
+     },
+     {
+      "id": "n1",
+      "label": "Partner medicine or slip"
+     },
+     {
+      "id": "n2",
+      "label": "Both abstain a week"
+     },
+     {
+      "id": "n3",
+      "label": "Retest at 3 months"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk assessment, counselling, condoms, screening and vaccination bundle into **comprehensive STI care**. The five Cs of consent, confidentiality, counselling, correct results and contact tracing structure quality. Syndromic kits sit inside, not instead of, this bundle. Kits treat syndromes well but cannot find asymptomatic infection, which is why screening runs beside syndromic care, never inside it.",
+   "say": "Comprehensive STI care bundles counselling, condoms and contact tracing around kits.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-vaginosis-fig1.webp",
+    "alt": "STI microscopy bundle.",
+    "caption": "STI bundle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Antimicrobial resistance in gonorrhoea forces culture surveillance behind syndromic kits, termed **resistance surveillance**. Treatment failures are reported and cultured nationally. Dual therapy eras ended as ceftriaxone monotherapy took over at higher doses. Rising cephalosporin resistance is the reason every persistent discharge after a kit earns culture rather than a second blind kit.",
+   "say": "Resistance surveillance involves culture of gonorrhoea treatment failures behind syndromic kits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Syndromic era",
+     "points": [
+      "Kits by syndrome",
+      "Resistance tracked separately"
+     ]
+    },
+    "right": {
+     "title": "Test directed",
+     "points": [
+      "Culture and sensitivity",
+      "Where laboratories allow"
+     ]
+    }
+   }
+  }
+ ]
+}
