@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-adaptations-accumulations",
+  "subject": "pathology",
+  "title": "Cellular Adaptations: Hypertrophy, Hyperplasia, Atrophy, and Metaplasia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "When cells experience altered physiological demands or non-lethal pathological stresses, they achieve a new steady state through cellular adaptations. An increase in the size of individual cells resulting in overall organ enlargement is **hypertrophy**, driven by enhanced synthesis of structural proteins and functional organelles rather than cell division.",
+      "say": "Hypertrophy is an increase in individual cell size without cell division, expanding total organ volume.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypertrophic-cardiomyopathy-fig1.webp",
+        "caption": "Severe concentric left ventricular myocardial hypertrophy resulting from sustained pressure overload.",
+        "alt": "Myocardial hypertrophy demonstrating thick ventricular wall architecture"
+      }
+    },
+    {
+      "tx": "Hypertrophy occurs primarily in non-dividing, terminally differentiated permanent tissues that cannot undergo mitotic division. In response to chronic arterial hypertension or aortic valve stenosis, working ventricular cardiomyocytes undergo **pathological cardiac hypertrophy**, synthesizing additional sarcomeres in parallel to increase wall thickness and withstand mechanical wall tension.",
+      "say": "Terminally differentiated cardiac myocytes respond to hypertension with hypertrophy, adding sarcomeres in parallel.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pressure_load",
+            "label": "Chronic Systemic Hypertension Elevates Left Ventricular Systolic Wall Stress"
+          },
+          {
+            "id": "mechano_transduce",
+            "label": "Integrin Sensors Transduce Mechanical Stretch via Calcineurin and GATA4"
+          },
+          {
+            "id": "fetal_gene_switch",
+            "label": "Reactivation of Fetal Gene Program (ANP, Beta-MHC, Skeletal Actin)"
+          },
+          {
+            "id": "myocyte_enlarge",
+            "label": "Assembly of Parallel Sarcomeres Thickens Left Ventricular Wall Concentrically"
+          }
+        ],
+        "edges": [
+          [
+            "pressure_load",
+            "mechano_transduce"
+          ],
+          [
+            "mechano_transduce",
+            "fetal_gene_switch"
+          ],
+          [
+            "fetal_gene_switch",
+            "myocyte_enlarge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In tissues capable of mitotic division, an increase in tissue mass is achieved through an increase in the actual number of cells. Termed **hyperplasia**, this adaptive proliferation is driven by growth factors and stem cell recruitment, often occurring concurrently with hypertrophy in responsive tissues like the gravid uterus during pregnancy.",
+      "say": "Hyperplasia increases the absolute number of cells in mitotic tissues, driven by growth factor signals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypertrophy Characteristics",
+          "points": [
+            "Increase in cell size and mass without increase in cell number",
+            "Occurs in permanent non-dividing tissues (skeletal muscle, cardiac myocytes)",
+            "Driven by mechanical stretch, growth factors, and vasoactive peptides",
+            "Limited by capillary perfusion and mitochondrial energy capacity"
+          ]
+        },
+        "right": {
+          "title": "Hyperplasia Characteristics",
+          "points": [
+            "Increase in absolute number of cells derived from stem cell proliferation",
+            "Occurs exclusively in labile and stable mitotic tissues (glands, liver, bone marrow)",
+            "Driven by growth factor receptor stimulation and hormonal surges",
+            "Reversible when the initiating hormonal or chemical stimulus ceases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pathological hyperplasia occurs when excessive or uncoordinated hormonal stimulation or growth factor production drives abnormal cell proliferation. In aging men, excessive local accumulation of dihydrotestosterone stimulates stromal and glandular cellular proliferation within the periurethral transition zone, producing **benign prostatic hyperplasia**.",
+      "say": "Benign prostatic hyperplasia is an androgen-driven increase in cell number that compresses the urethra.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/benign-prostatic-hyperplasia-fig1.webp",
+        "caption": "Gross cross-section of enlarged prostate displaying nodular transition-zone hyperplasia compressing the urethra.",
+        "alt": "Benign prostatic hyperplasia nodular expansion compressing prostatic urethra"
+      }
+    },
+    {
+      "tx": "Reduction in cell size and substance resulting in decreased tissue mass is atrophy. Whether caused by decreased workload, loss of innervation, diminished blood supply, or inadequate nutrition, **pathological atrophy** results from a coordinated shift where intracellular protein degradation exceeds protein synthesis.",
+      "say": "Atrophy is a reduction in cell size and functional mass when protein degradation outpaces synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "atrophy_stimulus",
+            "label": "Disuse, Denervation, or Ischemia Halts Anabolic mTOR Signaling Cascades"
+          },
+          {
+            "id": "ubiquitin_tag",
+            "label": "E3 Ubiquitin Ligases Covalently Tag Cytoskeletal Proteins with Ubiquitin"
+          },
+          {
+            "id": "proteasome_cut",
+            "label": "26S Proteasomes Recognize Tagged Proteins, Degrading Them into Small Peptides"
+          },
+          {
+            "id": "autophagy_vacuole",
+            "label": "Autophagy Concurrently Digests Unused Organelles, Leaving Lipofuscin Pigment"
+          }
+        ],
+        "edges": [
+          [
+            "atrophy_stimulus",
+            "ubiquitin_tag"
+          ],
+          [
+            "ubiquitin_tag",
+            "proteasome_cut"
+          ],
+          [
+            "proteasome_cut",
+            "autophagy_vacuole"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A principal biochemical pathway driving muscle wasting and cell shrinkage in atrophy is the ubiquitin-proteasome system. Cytosolic and myofibrillar proteins are conjugated to multiple ubiquitin molecules by ubiquitin ligases, targeting them for rapid enzymatic destruction within the barrel-shaped **26S proteasome complex**.",
+      "say": "The ubiquitin-proteasome pathway flags proteins with ubiquitin for destruction inside 26S proteasomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ubiquitin-Proteasome Pathway",
+          "points": [
+            "Degrades cytosolic, nuclear, and myofibrillar proteins",
+            "Requires sequential cascade of E1, E2, and E3 ubiquitin ligase enzymes",
+            "Polyubiquitinated substrates threaded into 26S catalytic proteasome core",
+            "Rapidly elevated by glucocorticoids and inflammatory cytokines in cachexia"
+          ]
+        },
+        "right": {
+          "title": "Autophagic Degradation",
+          "points": [
+            "Degrades large cellular components, aggregates, and entire organelles",
+            "Sequestration into autophagosomes followed by lysosomal fusion",
+            "Digests senescent mitochondria (mitophagy) and endoplasmic reticulum",
+            "Leaves indigestible cross-linked lipid debris termed lipofuscin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A reversible adaptive replacement of one adult differentiated cell type by another adult cell type capable of withstanding environmental stress represents metaplasia. Arising through reprogramming of local tissue stem cells rather than direct transdifferentiation, **squamous metaplasia** replaces delicate ciliated respiratory columnar epithelium with tough stratified squamous epithelium in chronic cigarette smokers.",
+      "say": "Metaplasia is a reversible switch of one adult cell type for another better suited to stress.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Squamous Metaplasia (Respiratory)",
+          "points": [
+            "Delicate pseudostratified ciliated columnar cells replaced by stratified squamous",
+            "Induced by chronic chemical and thermal irritation from cigarette smoke",
+            "Provides superior protective barrier against physical mechanical injury",
+            "Loss of mucus secretion and mucociliary clearance increases infection risk"
+          ]
+        },
+        "right": {
+          "title": "Columnar Metaplasia (Barrett Oesophagus)",
+          "points": [
+            "Stratified squamous epithelium of lower oesophagus replaced by columnar",
+            "Induced by chronic exposure to acidic refluxed gastric juice and bile",
+            "Contains mucin-secreting goblet cells (intestinal metaplasia)",
+            "Conveys thirty- to forty-fold elevated risk of oesophageal adenocarcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "While metaplasia confers temporary survival advantages against chronic noxious irritants, the adapted tissue loses specialized physiological functions such as ciliary clearance or mucosal secretion. If the chronic predisposing irritation persists indefinitely, metaplastic epithelium can undergo progressive genetic mutations that transform it into **dysplasia and malignant carcinoma**.",
+      "say": "Persistent stress causes metaplastic tissue to acquire mutations, progressing to dysplasia and cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "normal_tissue",
+            "label": "Normal Differentiated Epithelium Subjected to Relentless Toxic Exposure"
+          },
+          {
+            "id": "adaptive_metaplasia",
+            "label": "Stem Cell Reprogramming Generates Stress-Tolerant Metaplastic Epithelium"
+          },
+          {
+            "id": "atypical_dysplasia",
+            "label": "Uncontrolled Proliferation and Genetic Hits Produce Disordered Dysplasia"
+          },
+          {
+            "id": "invasive_cancer",
+            "label": "Breach of Basement Membrane Establishes Frank Invasive Carcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "normal_tissue",
+            "adaptive_metaplasia"
+          ],
+          [
+            "adaptive_metaplasia",
+            "atypical_dysplasia"
+          ],
+          [
+            "atypical_dysplasia",
+            "invasive_cancer"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
