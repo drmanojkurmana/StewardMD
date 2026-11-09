@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phm-adrenergic-agonists",
+  "subject": "pharmacology",
+  "title": "Central Alpha-2 Agonists, Short-Acting Beta-2 Agonists, and Adrenergic Receptors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A centrally acting imidazoline derivative that suppresses sympathetic outflow from the brainstem is **clonidine**. As a selective agonist at presynaptic alpha-2 adrenergic receptors and non-adrenergic imidazoline I1 receptors in the nucleus tractus solitarius and rostral ventrolateral medulla, clonidine diminishes systemic release of norepinephrine. This decreases peripheral vascular resistance, slows heart rate, reduces cardiac output, and dampens sympathetic withdrawal symptoms.",
+      "say": "Clonidine stimulates brainstem presynaptic alpha-2 receptors to suppress sympathetic outflow and lower blood pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-clonidine.webp",
+        "alt": "Clonidine presynaptic alpha-2 receptor mechanism",
+        "caption": "Presynaptic alpha-2 adrenergic stimulation in the brainstem inhibiting central norepinephrine release and sympathetic tone."
+      }
+    },
+    {
+      "tx": "The gold-standard short-acting selective beta-2 adrenergic agonist for rapid relief of acute bronchospasm is **salbutamol**. Also designated albuterol, it selectively stimulates beta-2 adrenergic receptors coupled to Gs proteins on bronchial smooth muscle. Activation of adenylyl cyclase generates cyclic adenosine monophosphate (cAMP), activating protein kinase A to reduce intracellular calcium and phosphorylate myosin light chain kinase, yielding rapid airway smooth muscle relaxation within five minutes.",
+      "say": "Salbutamol selectively stimulates bronchial beta-2 receptors, elevating cyclic AMP to relax airway smooth muscle.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-beta-sympathomimetics.webp",
+        "alt": "Beta sympathomimetic smooth muscle relaxation",
+        "caption": "Beta-2 adrenergic receptor stimulation driving cyclic AMP production and smooth muscle relaxation."
+      }
+    },
+    {
+      "tx": "The functional architecture of the sympathetic nervous system is dictated by **alpha1 alpha2 beta1 beta2 receptors**. Alpha-1 receptors couple to Gq proteins, activating phospholipase C to trigger vascular and pupillary contraction. Alpha-2 receptors couple to Gi proteins, inhibiting adenylyl cyclase to suppress neurotransmitter release. Beta-1 receptors couple to Gs in the heart to accelerate contractility, while beta-2 receptors stimulate smooth muscle relaxation in bronchi and blood vessels.",
+      "say": "Adrenergic receptors divide into Gq-coupled alpha-1, Gi-coupled alpha-2, and Gs-coupled beta subtypes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Receptor subtype",
+          "G-protein coupling",
+          "Second messenger",
+          "Primary anatomical distribution",
+          "Physiological response"
+        ],
+        "rows": [
+          [
+            "Alpha-1",
+            "Gq",
+            "IP3 and DAG increase",
+            "Vascular smooth muscle, iris dilator",
+            "Arteriolar vasoconstriction, mydriasis"
+          ],
+          [
+            "Alpha-2",
+            "Gi",
+            "cAMP decrease",
+            "Presynaptic adrenergic terminals, CNS",
+            "Inhibition of norepinephrine release"
+          ],
+          [
+            "Beta-1",
+            "Gs",
+            "cAMP increase",
+            "Sinoatrial node, myocardium, juxtaglomerular cells",
+            "Positive inotropy, chronotropy, renin release"
+          ],
+          [
+            "Beta-2",
+            "Gs",
+            "cAMP increase",
+            "Bronchial and uterine smooth muscle, liver",
+            "Bronchodilation, tocolysis, glycogenolysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The endogenous biosynthetic pathway for sympathetic neurotransmitters constitutes sequential enzymatic **catecholamine synthesis**. Beginning with amino acid tyrosine, tyrosine hydroxylase catalyzes the rate-limiting conversion to L-DOPA. DOPA decarboxylase rapidly synthesizes dopamine, which is transported into storage vesicles where dopamine beta-hydroxylase generates norepinephrine. In adrenal medullary chromaffin cells, phenylethanolamine N-methyltransferase transfers a methyl group to yield adrenaline.",
+      "say": "Catecholamine synthesis begins with tyrosine, converted by rate-limiting tyrosine hydroxylase down to adrenaline.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tyr",
+            "label": "L-Tyrosine substrate"
+          },
+          {
+            "id": "th",
+            "label": "Tyrosine hydroxylase (Rate-limiting step)"
+          },
+          {
+            "id": "dopa",
+            "label": "L-DOPA converted by DOPA decarboxylase"
+          },
+          {
+            "id": "da",
+            "label": "Dopamine converted by dopamine beta-hydroxylase to norepinephrine"
+          }
+        ],
+        "edges": [
+          [
+            "tyr",
+            "th"
+          ],
+          [
+            "th",
+            "dopa"
+          ],
+          [
+            "dopa",
+            "da"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intracellular enzymatic degradation of free catecholamines in mitochondria is catalyzed by **monoamine oxidase**. Existing in two distinct isoforms, MAO-A preferentially metabolizes serotonin, norepinephrine, and dietary tyramine in the gut and liver, while MAO-B preferentially degrades dopamine and phenylethylamine in platelets and striatum. Non-selective inhibition elevates synaptic catecholamine levels but creates acute vulnerabilities to hypertensive crises following tyramine ingestion.",
+      "say": "Monoamine oxidase breaks down intracellular catecholamines, with MAO-A targeting serotonin and noradrenaline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Monoamine oxidase A (MAO-A)",
+          "points": [
+            "Substrates: Serotonin, norepinephrine, tyramine",
+            "Inhibitor: Moclobemide (reversible RIMA)",
+            "Location: Intestinal mucosa, liver, adrenergic nerves",
+            "Therapeutic focus: Depression and anxiety disorders"
+          ]
+        },
+        "right": {
+          "title": "Monoamine oxidase B (MAO-B)",
+          "points": [
+            "Substrates: Dopamine, phenylethylamine, benzylamine",
+            "Inhibitor: Selegiline, rasagiline",
+            "Location: Basal ganglia striatum, astrocytes, platelets",
+            "Therapeutic focus: Parkinson disease neuroprotection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Abrupt cessation of prolonged high-dose clonidine therapy can trigger a life-threatening crisis known as **clonidine withdrawal syndrome**. Over weeks of exposure, chronic central alpha-2 agonism causes down-regulation of alpha-2 receptors alongside compensatory up-regulation of peripheral alpha-1 and beta receptors. Sudden drug discontinuation unmasks massive sympathetic discharge, triggering severe headache, tremors, anxiety, tachycardia, and catastrophic rebound hypertension.",
+      "say": "Abrupt clonidine discontinuation unleashes massive sympathetic rebound hypertension and severe tachycardia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chron",
+            "label": "Chronic clonidine therapy downregulates central alpha-2"
+          },
+          {
+            "id": "abrupt",
+            "label": "Abrupt omission of oral or patch clonidine dose"
+          },
+          {
+            "id": "surge",
+            "label": "Massive uninhibited sympathetic catecholamine storm"
+          },
+          {
+            "id": "reb",
+            "label": "Malignant rebound hypertension and tachyarrhythmias"
+          }
+        ],
+        "edges": [
+          [
+            "chron",
+            "abrupt"
+          ],
+          [
+            "abrupt",
+            "surge"
+          ],
+          [
+            "surge",
+            "reb"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The centrally acting alpha-2 agonist preferred for managing chronic hypertension in pregnancy is **alpha-methyldopa**. Functioning as a prodrug, methyldopa crosses the blood-brain barrier and is metabolized by DOPA decarboxylase and dopamine beta-hydroxylase into alpha-methylnorepinephrine. This false transmitter stimulates central inhibitory alpha-2 receptors, reducing sympathetic outflow without compromising uteroplacental blood flow or causing fetal malformations.",
+      "say": "Methyldopa is converted into alpha-methylnorepinephrine in the brain, safely lowering blood pressure during pregnancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Methyldopa",
+          "Clonidine"
+        ],
+        "rows": [
+          [
+            "Chemical nature",
+            "Amino acid analog prodrug",
+            "Imidazoline derivative active drug"
+          ],
+          [
+            "Active metabolite",
+            "Alpha-methylnorepinephrine",
+            "Unchanged parent drug"
+          ],
+          [
+            "Primary clinical role",
+            "First-line chronic hypertension in pregnancy",
+            "Resistant hypertension, opioid withdrawal, ADHD"
+          ],
+          [
+            "Idiosyncratic toxicity",
+            "Coombs-positive hemolytic anemia, drug hepatitis",
+            "Severe xerostomia, sedation, rebound hypertension"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Long-acting beta-2 agonists combined with inhaled corticosteroids for maintenance therapy in persistent asthma include **salmeterol and formoterol**. Salmeterol possesses a long lipophilic aliphatic tail that anchors into the cell membrane near the beta-2 receptor, providing slow-onset bronchodilation lasting over twelve hours. Formoterol exhibits faster onset within two to three minutes while maintaining twelve-hour bronchodilation, enabling its use in single-inhaler maintenance and reliever therapy (SMART).",
+      "say": "Salmeterol and formoterol provide 12-hour bronchodilation, with formoterol acting fast enough for reliever therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Salmeterol",
+          "points": [
+            "Highly lipophilic with slow onset (15 to 30 min)",
+            "Duration of bronchodilation: 12 hours",
+            "Strictly maintenance only; never for acute asthma",
+            "Co-prescribed with fluticasone propionate"
+          ]
+        },
+        "right": {
+          "title": "Formoterol",
+          "points": [
+            "Moderate lipophilicity with rapid onset (2 to 3 min)",
+            "Duration of bronchodilation: 12 hours",
+            "Approved for both maintenance and acute relief (SMART)",
+            "Co-prescribed with budesonide"
+          ]
+        }
+      }
+    }
+  ]
+}
