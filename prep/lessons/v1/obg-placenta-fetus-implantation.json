@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "obg-placenta-fetus",
+ "subject": "obstetrics-gynaecology",
+ "title": "Implantation, Decidua and Trophoblast",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Embedding of the blastocyst into the prepared uterine lining is **implantation**. It occurs about six to ten days after fertilisation, usually on the posterior upper uterine wall. Successful implantation starts the intimate exchange between mother and embryo that sustains pregnancy. Implantation finishes about ten days after fertilisation, and the missing period follows roughly four days later.",
+   "say": "Implantation embeds the blastocyst in the uterine lining six to ten days after fertilisation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fertilisation in tube"
+     },
+     {
+      "id": "n1",
+      "label": "Blastocyst reaches uterus"
+     },
+     {
+      "id": "n2",
+      "label": "Embedding in lining"
+     },
+     {
+      "id": "n3",
+      "label": "Exchange with mother begins"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The endometrium transformed by progesterone to receive the embryo is the **decidua**. Decidual cells store nutrients and restrain trophoblast invasion to a safe depth. The part beneath the embryo, capsular part and opposite wall part are named by position. Decidua basalis beneath the embryo forms the maternal part of the placenta, while capsularis stretches over it.",
+   "say": "The decidua is progesterone transformed lining that nourishes the embryo and restrains invasion depth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Position"
+    ],
+    "rows": [
+     [
+      "Basalis",
+      "Beneath embryo"
+     ],
+     [
+      "Capsularis",
+      "Covering embryo"
+     ],
+     [
+      "Parietalis",
+      "Opposite wall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The outer cell layer of the blastocyst that invades and forms placenta is the **trophoblast**. It differentiates into an inner cytotrophoblast and outer syncytiotrophoblast layer. The syncytial layer secretes human chorionic gonadotropin into maternal blood. Syncytiotrophoblast has no cell borders, so maternal blood bathes a single continuous surface across all villi.",
+   "say": "Trophoblast forms the placenta, and its syncytial layer secretes pregnancy hormone into maternal blood.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hcg.webp",
+    "alt": "Human chorionic gonadotropin physiology.",
+    "caption": "Pregnancy hormone from trophoblast. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Finger like projections of trophoblast into maternal blood spaces are **chorionic villi**. Primary villi gain a mesodermal core, then fetal vessels, becoming tertiary villi. Their vast surface performs gas, nutrient and waste exchange for the fetus. Secondary villi gain the mesodermal core at about day 16, and tertiary villi carry fetal capillaries by day 21.",
+   "say": "Chorionic villi project into maternal blood and their vast surface exchanges gases and nutrients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Primary villi form"
+     },
+     {
+      "id": "n1",
+      "label": "Mesoderm core enters"
+     },
+     {
+      "id": "n2",
+      "label": "Fetal vessels develop"
+     },
+     {
+      "id": "n3",
+      "label": "Exchange surface matures"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maternal blood reaches the intervillous space through remodelled **spiral arteries**. Trophoblast converts these vessels into wide, low resistance channels. Failure of this conversion underlies pre-eclampsia and fetal growth restriction later. Remodelling should reach the inner third of the myometrium by 20 weeks, converting a high resistance into a low resistance circuit.",
+   "say": "Trophoblast remodels spiral arteries into wide channels, and failure underlies pre-eclampsia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal conversion",
+     "points": [
+      "Wide low resistance vessels",
+      "Generous placental flow",
+      "Healthy growth"
+     ]
+    },
+    "right": {
+     "title": "Failed conversion",
+     "points": [
+      "Narrow high resistance vessels",
+      "Poor placental flow",
+      "Pre-eclampsia risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Implantation outside the uterus, most often in the tube, produces an **ectopic implantation**. The tube cannot expand like the uterus, so rupture and internal bleeding follow. Any missed period with pain and bleeding needs this exclusion. Ninety five percent of ectopic pregnancies sit in the tube, most often in its ampullary part.",
+   "say": "Ectopic implantation outside the uterus risks rupture and internal bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ectopic-pregnancy-fig1.webp",
+    "alt": "Ectopic pregnancy implantation sites.",
+    "caption": "Implantation sites including ectopic. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The hormone maintaining the corpus luteum in early pregnancy is produced by **syncytiotrophoblast secretion**. Rising levels rescue progesterone production until the placenta takes over at about ten weeks. This luteoplacental shift explains why corpus luteum removal after that time is tolerated. The shift completes by ten to twelve weeks, after which the placenta makes enough progesterone alone.",
+   "say": "Syncytiotrophoblast hormone rescues the corpus luteum until the placenta takes over at ten weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Weeks",
+     "Progesterone source"
+    ],
+    "rows": [
+     [
+      "Up to 7",
+      "Corpus luteum mainly"
+     ],
+     [
+      "7 to 10",
+      "Shift ongoing"
+     ],
+     [
+      "After 10",
+      "Placenta mainly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Controlled invasion depth depends on a balance between trophoblast and decidua termed **invasion regulation**. Too shallow gives poor placentation, too deep gives placenta accreta spectrum. Both extremes cause major pregnancy complications. Placenta accreta spectrum is commoner after caesarean birth, where scar tissue replaces normal decidua.",
+   "say": "Invasion regulation balances placentation, with shallow causing poor flow and deep causing accreta.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Trophoblast invades"
+     },
+     {
+      "id": "n1",
+      "label": "Decidua restrains depth"
+     },
+     {
+      "id": "n2",
+      "label": "Balance achieved normally"
+     },
+     {
+      "id": "n3",
+      "label": "Extremes cause disease"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding at implantation can mimic a light period, known as **implantation bleeding**. It is scanty and occurs around the expected period date. Persistent or painful bleeding in early pregnancy always needs assessment. It affects about a third of women, and hCG testing stays negative because no implantation has yet occurred that cycle.",
+   "say": "Implantation bleeding is scanty spotting, while persistent painful bleeding needs assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Implantation spotting",
+     "points": [
+      "Scanty, brief",
+      "No pain",
+      "Around period date"
+     ]
+    },
+    "right": {
+     "title": "Concerning bleeding",
+     "points": [
+      "Heavier or painful",
+      "May be ectopic",
+      "Needs assessment"
+     ]
+    }
+   }
+  }
+ ]
+}

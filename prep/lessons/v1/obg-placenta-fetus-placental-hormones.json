@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "obg-placenta-fetus",
+ "subject": "obstetrics-gynaecology",
+ "title": "Placental Hormones: hCG and Human Placental Lactogen",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The placenta functions as a temporary endocrine gland producing **placental hormones**. These maintain pregnancy, adapt maternal metabolism and prepare breasts for feeding. Their levels follow characteristic patterns used in screening and diagnosis. Relaxin from the corpus luteum softens the cervix and pelvic ligaments, peaking in the first trimester.",
+   "say": "The placenta acts as a temporary endocrine gland adapting maternal metabolism for pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hormone",
+     "Main role"
+    ],
+    "rows": [
+     [
+      "hCG",
+      "Maintains corpus luteum"
+     ],
+     [
+      "hPL",
+      "Insulin resistance"
+     ],
+     [
+      "Progesterone",
+      "Uterine quiescence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The glycoprotein hormone detected by every pregnancy test is **human chorionic gonadotropin**. Produced by syncytiotrophoblast, it doubles about every forty eight hours in early viable pregnancy. Its beta subunit is what tests specifically measure. Levels roughly double every 48 hours until about eight weeks, then the rise slows before the peak.",
+   "say": "Human chorionic gonadotropin from syncytiotrophoblast is what every pregnancy test measures.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hcg.webp",
+    "alt": "Human chorionic gonadotropin and corpus luteum signalling.",
+    "caption": "hCG signalling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Peak hCG occurs at about ten weeks then falls to a plateau, a pattern called the **hCG curve**. Abnormally slow rise suggests ectopic or failing pregnancy. Very high levels occur in molar pregnancy and multiple gestation. A level above 100,000 international units per litre with a snowstorm scan appearance points to a complete mole.",
+   "say": "The hCG curve peaks at ten weeks, and slow rise suggests ectopic or failing pregnancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Rise doubles every 48 hours"
+     },
+     {
+      "id": "n1",
+      "label": "Peak near 10 weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Fall to plateau"
+     },
+     {
+      "id": "n3",
+      "label": "Abnormal patterns warn"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The placental hormone promoting maternal insulin resistance and lipolysis is **human placental lactogen**. It spares glucose for the fetus by making maternal tissues use fat instead. Its level reflects placental mass and function. By term the placenta secretes about a gram a day, and low levels once served as a warning of placental failure.",
+   "say": "Human placental lactogen creates insulin resistance to spare glucose for the fetus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "hCG",
+     "points": [
+      "Early pregnancy hormone",
+      "Peaks at 10 weeks",
+      "Test target"
+     ]
+    },
+    "right": {
+     "title": "hPL",
+     "points": [
+      "Later metabolic hormone",
+      "Insulin resistance",
+      "Reflects placental mass"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Placental progesterone maintains uterine quietness throughout pregnancy, a state of **myometrial quiescence**. It also develops breast alveoli and suppresses maternal immune rejection of the fetus. Withdrawal near term in many animals triggers labour, though human mechanisms differ. Progesterone also relaxes gut smooth muscle, which is why constipation and reflux worsen as levels climb.",
+   "say": "Progesterone maintains uterine quiescence, develops breasts and suppresses fetal rejection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Effect",
+     "Site"
+    ],
+    "rows": [
+     [
+      "Quiescence",
+      "Uterus"
+     ],
+     [
+      "Alveolar growth",
+      "Breast"
+     ],
+     [
+      "Immune suppression",
+      "Maternal system"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The main oestrogen of pregnancy made jointly by placenta and fetus is **oestriol**. Its production needs fetal adrenal precursors, so levels reflect fetal wellbeing. It rises steadily toward term and prepares the uterus for labour. The fetal adrenal supplies dehydroepiandrosterone sulphate, so a dead or anencephalic fetus gives strikingly low oestriol.",
+   "say": "Oestriol is made jointly by fetus and placenta, so it reflects fetal wellbeing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fetal adrenal precursor"
+     },
+     {
+      "id": "n1",
+      "label": "Placental conversion"
+     },
+     {
+      "id": "n2",
+      "label": "Oestriol rises to term"
+     },
+     {
+      "id": "n3",
+      "label": "Uterus prepared for labour"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excessive hCG explains several early pregnancy features through its weak thyroid action, termed **hCG thyroid stimulation**. It contributes to hyperemesis gravidarum severity. Twin and molar pregnancies exaggerate both hormone level and symptoms. Graves disease antibodies can mimic this effect, so a suppressed TSH in pregnancy still needs antibody testing where indicated.",
+   "say": "Excess hCG weakly stimulates the thyroid and worsens hyperemesis in twin and molar pregnancies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/choriocarcinoma-fig1.webp",
+    "alt": "Choriocarcinoma pathway with very high hCG.",
+    "caption": "Very high hCG states. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Falling hCG after delivery or miscarriage is followed to zero in **trophoblast surveillance**. Persistent or rising levels after molar evacuation signal gestational trophoblastic neoplasia. Contraception is advised during surveillance to avoid confusing a new pregnancy. Surveillance uses weekly hCG until three normal values, then monthly checks for six months after a complete mole.",
+   "say": "Trophoblast surveillance follows hCG to zero after molar evacuation to detect neoplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Molar evacuation done"
+     },
+     {
+      "id": "n1",
+      "label": "Weekly hCG measured"
+     },
+     {
+      "id": "n2",
+      "label": "Fall to zero expected"
+     },
+     {
+      "id": "n3",
+      "label": "Rise signals neoplasia"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Placental corticotropin releasing hormone rising toward term forms part of the **placental clock**. It is thought to time labour by stimulating fetal adrenal output. Abnormal timing links to preterm and post term labour patterns. Oestrogen rises in step with this hormone, and preterm birth follows when the placental signal fires early.",
+   "say": "The placental clock uses rising releasing hormone to help time labour near term.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Signal",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Placental CRH rises",
+      "Fetal adrenal stimulated"
+     ],
+     [
+      "Cortisol increases",
+      "Maturation promoted"
+     ],
+     [
+      "Term approaches",
+      "Labour readiness"
+     ]
+    ]
+   }
+  }
+ ]
+}
