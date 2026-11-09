@@ -1,0 +1,149 @@
+{
+  "v": 1,
+  "id": "cm-data-presentation-qualitative-data",
+  "subject": "community-medicine",
+  "module": "cm-data-presentation",
+  "title": "Types of Data, Measurement Scales, and the Histogram Family",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Qualitative versus quantitative data",
+      "tx": "**Qualitative data** sort observations into categories without numerical magnitude: blood group, sex, disease present or absent, and occupation. Quantitative data count or measure: haemoglobin, weight, pulse rate, and number of children. The distinction decides everything downstream, because means and standard deviations belong only to quantitative data, while proportions and chi square tests serve qualitative data.",
+      "say": "Qualitative data count heads in categories; quantitative data measure amounts. Pick the type first and the statistics choose themselves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Qualitative (categorical)",
+          "points": ["Blood group, sex, religion", "Counted as frequencies and percents", "Summarised by mode and proportions"]
+        },
+        "right": {
+          "title": "Quantitative (numerical)",
+          "points": ["Weight, haemoglobin, income", "Summarised by mean and median", "Tested with t tests and correlation"]
+        }
+      }
+    },
+    {
+      "title": "Nominal and ordinal scales",
+      "tx": "Categorical data split further: the **nominal scale of measurement** names unordered groups (blood group, district, marital status), while the ordinal scale ranks ordered grades without fixed gaps (pain mild moderate severe, socioeconomic class, cancer stage). Only counting and the mode suit nominal data; ordinal data add medians and percentiles but still forbid means, a hierarchy examinations test with scale identification stems.",
+      "say": "Nominal names groups; ordinal ranks them. You may average neither, though ordinal data allow a median.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Scale", "Example and permitted summary"],
+        "rows": [
+          ["Nominal", "Blood group; mode and percentages only"],
+          ["Ordinal", "Pain grades; median and percentiles added"],
+          ["Interval", "Temperature Celsius; mean permitted, no true zero"],
+          ["Ratio", "Weight, income; all statistics, true zero"]
+        ]
+      }
+    },
+    {
+      "title": "Interval and ratio scales",
+      "tx": "The **interval scale** spaces values equally but lacks a true zero (Celsius temperature, calendar year, intelligence quotient), so ratios mislead: twenty degrees is not twice as hot as ten. The ratio scale adds a genuine zero (weight, height, income, pulse), unlocking ratios, coefficients of variation, and geometric means. Most clinical measurements are ratio scale, which is why full parametric statistics apply.",
+      "say": "Interval scales lack a true zero, so never double them. Ratio scales like weight have real zero and allow every statistic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interval scale",
+          "points": ["Equal gaps, arbitrary zero", "Celsius, IQ, calendar dates", "Means yes, ratios no"]
+        },
+        "right": {
+          "title": "Ratio scale",
+          "points": ["Equal gaps, true zero", "Weight, height, haemoglobin", "Means and ratios both valid"]
+        }
+      }
+    },
+    {
+      "title": "Discrete versus continuous variables",
+      "tx": "Quantitative variables divide into **discrete and continuous variables**: discrete values count whole events with gaps (number of pregnancies, heart rate as beats counted, family size), while continuous values measure along an unbroken scale limited only by instrument precision (blood pressure, birth weight, serum cholesterol). Grouping continuous data into class intervals creates the frequency tables from which histograms and polygons are drawn.",
+      "say": "Discrete counts jump in whole numbers; continuous measures flow. Blood pressure is continuous, pregnancies are discrete.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Variable", "Discrete or continuous"],
+        "rows": [
+          ["Number of children", "Discrete"],
+          ["Birth weight in grams", "Continuous"],
+          ["Episodes of diarrhoea", "Discrete"],
+          ["Mid upper arm circumference", "Continuous"]
+        ]
+      }
+    },
+    {
+      "title": "Frequency distribution tables",
+      "tx": "Raw measurements become readable through a **frequency distribution table**: class intervals of equal width (five or ten units for most biological data), tally counts per class, and columns for relative frequency, percentage, and cumulative frequency. Five to fifteen classes balance detail against clutter. The cumulative column converts directly into percentiles and the ogive curve drawn two steps later.",
+      "say": "Group data into five to fifteen equal classes with counts and cumulative totals. That one table feeds every chart that follows.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fd1", "label": "Choose equal class intervals" },
+          { "id": "fd2", "label": "Tally counts, add cumulative column" },
+          { "id": "fd3", "label": "Draw histogram, polygon, or ogive" }
+        ],
+        "edges": [["fd1", "fd2"], ["fd2", "fd3"]]
+      }
+    },
+    {
+      "title": "Histogram: area is frequency",
+      "tx": "The **histogram in data presentation** draws adjacent bars over continuous class intervals with no gaps, because the variable itself has no gaps; bar area (not merely height) represents frequency, which matters when class widths differ. It displays shape, centre, spread, skewness, and outliers of quantitative data and is the first picture drawn for any new dataset in a thesis or outbreak report.",
+      "say": "Histogram bars touch because the variable is continuous. Its shape reveals centre, spread, and skew at a glance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Histogram",
+          "points": ["Continuous data, bars joined", "Area represents frequency", "Shows skewness and outliers"]
+        },
+        "right": {
+          "title": "Bar chart (next lesson)",
+          "points": ["Categorical data, bars separated", "Height represents frequency", "Compares groups, not shape"]
+        }
+      }
+    },
+    {
+      "title": "Frequency polygon and curve",
+      "tx": "Joining the midpoints of histogram bar tops gives the **frequency polygon**, extended to meet the axis at both ends so its enclosed area equals the histogram's. Smoothing the polygon with more data yields the frequency curve, whose bell, skewed, and bimodal silhouettes preview the normal distribution lesson. Polygons beat histograms when two distributions (cases versus controls) must overlap on one axis.",
+      "say": "The polygon joins histogram midpoints and compares two groups elegantly. Smoothed fully, it becomes the familiar frequency curve.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fp1", "label": "Mark midpoint of each class top" },
+          { "id": "fp2", "label": "Join points, anchor both ends to axis" },
+          { "id": "fp3", "label": "Overlay second group for comparison" }
+        ],
+        "edges": [["fp1", "fp2"], ["fp2", "fp3"]]
+      }
+    },
+    {
+      "title": "Cumulative frequency and the ogive",
+      "tx": "Plotting cumulative frequency against class boundaries draws the **ogive (cumulative frequency curve)**, an S shaped rise from zero to total. Dropping verticals from the ogive reads medians and quartiles directly: the value at half the total is the median, at one quarter and three quarters the quartiles. Less than and more than ogives crossing each other intersect exactly at the median, a favourite examination construction.",
+      "say": "The ogive reads medians and quartiles straight off the graph. Where less than and more than ogives cross sits the median.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Ogive reading", "Gives"],
+        "rows": [
+          ["At 50 percent of total", "Median"],
+          ["At 25 and 75 percent", "First and third quartiles"],
+          ["Crossing of two ogives", "Median confirmed graphically"],
+          ["Steep middle segment", "Most observations concentrated centrally"]
+        ]
+      }
+    },
+    {
+      "title": "Choosing the summary by scale",
+      "tx": "A closing discipline links scale to statistic in **summarising data by measurement scale**: nominal data take counts, percentages, and mode; ordinal data add median and percentiles; skewed quantitative data prefer median with interquartile range; symmetric quantitative data earn mean with standard deviation. Writing a mean blood group or averaging pain grades in a thesis draws examiner fire precisely because it breaks this ladder.",
+      "say": "Mode for nominal, median for ordinal and skewed, mean for symmetric numbers. Match the summary to the scale every time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Categorical summaries",
+          "points": ["Counts and percentages", "Mode for nominal data", "Median for ordinal grades"]
+        },
+        "right": {
+          "title": "Numerical summaries",
+          "points": ["Mean and SD if symmetric", "Median and IQR if skewed", "Range for quick spread"]
+        }
+      }
+    }
+  ]
+}

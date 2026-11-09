@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-demography-gross-reproduction-rate",
+  "subject": "community-medicine",
+  "module": "cm-demography",
+  "title": "Gross and Net Reproduction Rates, SRS, and the Population Pyramid",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Gross reproduction rate",
+      "tx": "Daughters only, because daughters become the next mothers: the **gross reproduction rate** averages the number of daughters a newborn girl would bear in her lifetime if she survived all reproductive years at current age specific rates. It equals the total fertility rate multiplied by the proportion of female births (about zero point four eight eight). Mortality is ignored, which the net rate then corrects.",
+      "say": "Gross reproduction rate counts daughters per woman assuming nobody dies. Multiply total fertility by the female share of births to get it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "g1", "label": "Take age specific fertility rates" },
+          { "id": "g2", "label": "Count female births only" },
+          { "id": "g3", "label": "Sum across 15 to 49, survival assumed" }
+        ],
+        "edges": [["g1", "g2"], ["g2", "g3"]]
+      }
+    },
+    {
+      "title": "Net reproduction rate as replacement index",
+      "tx": "Adjusting the gross rate for deaths of girls and women before and during reproductive life gives the **net reproduction rate**, the true replacement index of demography. A value of one means each woman exactly replaces herself with one surviving daughter; above one the population grows across generations, below one it shrinks. India's net rate hovers near one, consistent with fertility at replacement.",
+      "say": "Net reproduction rate of one means exact replacement. It asks whether today's mothers leave behind one surviving daughter each.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gross reproduction rate",
+          "points": ["Daughters per woman", "Assumes zero mortality to age 49", "Always higher than net rate"]
+        },
+        "right": {
+          "title": "Net reproduction rate",
+          "points": ["Daughters surviving to replace mother", "Uses life table survival", "One means exact replacement"]
+        }
+      }
+    },
+    {
+      "title": "Sample Registration System design",
+      "tx": "India's **Sample Registration System** runs continuous dual recording in sampled villages and urban blocks: a local recorder lists every birth and death, and an independent supervisor re enumerates each half year, with unmatched events field verified. This dual record system yields annual birth, death, infant mortality, and fertility rates for states, filling the decade long silence between two censuses.",
+      "say": "The Sample Registration System records vital events twice through two independent channels. Matching the lists produces India's annual birth and death rates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "s1", "label": "Local recorder lists births and deaths" },
+          { "id": "s2", "label": "Supervisor re enumerates half yearly" },
+          { "id": "s3", "label": "Unmatched events verified in field" }
+        ],
+        "edges": [["s1", "s2"], ["s2", "s3"]]
+      }
+    },
+    {
+      "title": "Anatomy of the population pyramid",
+      "tx": "Stacked horizontal bars of males and females by five year age groups form the **population pyramid**, whose silhouette diagnoses demographic stage at a glance: a broad based triangle means high fertility, a barrel means stationary numbers, and a top heavy urn means decline. India's pyramid shows a narrowing base under a still wide childhood trunk, the portrait of fertility transition in progress.",
+      "say": "Pyramid shape tells the story: triangle for growth, barrel for stability, urn for decline. India's base is narrowing as fertility falls.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Pyramid shape", "Demographic meaning"],
+        "rows": [
+          ["Expansive triangle", "High births, many children, rapid growth"],
+          ["Constrictive narrowing base", "Fertility falling, growth slowing"],
+          ["Stationary barrel", "Births match deaths, zero growth"],
+          ["Top heavy urn", "Deaths exceed births, population decline"]
+        ]
+      }
+    },
+    {
+      "title": "Expansive versus constrictive pyramids",
+      "tx": "Textbooks contrast the **expansive pyramid of developing populations** (wide base, concave sides, pointed apex from high mortality) with the constrictive pyramid of ageing societies (base narrower than the middle, convex sides, blunt top). Developing country pyramids also show a youth bulge and a dented working age male side where migration removes men, both features visible in Gulf linked Indian states.",
+      "say": "Developing pyramids are wide based triangles. Ageing societies narrow at the base and bulge in the middle and top.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expansive pyramid",
+          "points": ["Very wide base of children", "Rapid taper to pointed apex", "High dependency on workers"]
+        },
+        "right": {
+          "title": "Constrictive pyramid",
+          "points": ["Base narrower than middle", "Bulge of elderly at top", "High old age dependency"]
+        }
+      }
+    },
+    {
+      "title": "Sex ratio read from the pyramid",
+      "tx": "Because boys slightly outnumber girls at birth (about one hundred five males per hundred females) but females survive better at older ages, the **sex structure across the pyramid** flips with height: male surplus at the base, near balance in middle ages, and female surplus among the elderly. A missing wedge of young adult males signals out migration, while missing girls at the base expose sex selective practices.",
+      "say": "More boys are born, yet more women survive to old age. Missing young women at the base reveal sex selection; missing men suggest migration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "x1", "label": "Base: about 105 boys per 100 girls" },
+          { "id": "x2", "label": "Middle: ratios approach balance" },
+          { "id": "x3", "label": "Apex: women outnumber men" }
+        ],
+        "edges": [["x1", "x2"], ["x2", "x3"]]
+      }
+    },
+    {
+      "title": "Life table survival behind the net rate",
+      "tx": "The survival column of a **life table in demography** converts a synthetic cohort of one hundred thousand births into survivors at each age under current mortality, supplying the survival weights that turn gross into net reproduction. Life expectancy at birth reads from the same table's person years column, which is why fertility and mortality statistics share one mathematical household in every demography examination.",
+      "say": "Life tables supply the survival weights for the net reproduction rate. The same table also yields life expectancy at birth.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Life table column", "Meaning"],
+        "rows": [
+          ["qx", "Probability of dying in the age interval"],
+          ["lx", "Survivors to exact age x from 100000 births"],
+          ["Lx", "Person years lived in the interval"],
+          ["ex", "Life expectancy remaining at age x"]
+        ]
+      }
+    },
+    {
+      "title": "Eligible couples and couple protection rate",
+      "tx": "Programme managers track the **eligible couple** (a married woman aged fifteen to forty nine with her husband) as the unit of family planning work, conventionally about one hundred fifty to one hundred eighty per thousand population. The couple protection rate estimates the share protected by sterilisation, intrauterine devices, pills, and condoms combined, and the unmet need for contraception captures couples wanting to space or limit without using any method.",
+      "say": "Eligible couples are the family planning denominator, roughly one hundred sixty per thousand people. Couple protection rate merges all methods in use.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "e1", "label": "Register every eligible couple" },
+          { "id": "e2", "label": "Record method used or unmet need" },
+          { "id": "e3", "label": "Compute couple protection rate" }
+        ],
+        "edges": [["e1", "e2"], ["e2", "e3"]]
+      }
+    },
+    {
+      "title": "Choosing between reproduction rates",
+      "tx": "An examination stem asking whether the population will replace itself wants the **net reproduction rate**, one mentioning daughters without mortality wants the gross rate, and one using all births per thousand mid year population wants the crude birth rate. Remember the ladder: total fertility counts children, gross counts daughters, net counts surviving daughters, each step narrower and more prognostic than the last.",
+      "say": "Children, daughters, surviving daughters: that ladder separates total fertility, gross, and net rates. Replacement questions always mean the net rate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Counts children or births",
+          "points": ["Crude birth rate per 1000 population", "General fertility rate per 1000 women", "Total fertility rate per woman lifetime"]
+        },
+        "right": {
+          "title": "Counts daughters",
+          "points": ["Gross rate ignores mortality", "Net rate applies life table survival", "Net rate of 1 means replacement"]
+        }
+      }
+    }
+  ]
+}
