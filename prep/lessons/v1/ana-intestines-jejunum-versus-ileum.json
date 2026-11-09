@@ -1,0 +1,251 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-intestines",
+ "subject": "anatomy",
+ "title": "Small Intestine: Jejunum versus Ileum, Vascular Arcades, and Appendix",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The mesenteric small intestine measures approximately six meters in length, extending from the duodenojejunal flexure to the ileocaecal valve. The proximal two-fifths (2.5 meters) constitutes the **jejunum**, situated predominantly in the left upper quadrant, while the distal three-fifths (3.5 meters) forms the ileum in the right lower quadrant.",
+   "say": "The small intestine measures six meters from the duodenojejunal flexure to the ileocaecal valve. The proximal two-fifths is the jejunum in the left upper quadrant, while the distal three-fifths forms the ileum.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix-abdomen-auscultation.jpg",
+    "alt": "Anatomical quadrants showing jejunal distribution in LUQ and ileal distribution in RLQ",
+    "caption": "Topographical quadrants distinguishing jejunal coils in LUQ from ileal loops in RLQ. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating jejunum from ileum is an essential surgical skill during emergency bowel resection. The jejunum possesses a thicker, more muscular and hypervascular wall, a wider lumen, and prominent circular mucosal folds called **plicae circulares** (valvulae conniventes), which are tall, closely packed, and readily palpable.",
+   "say": "Distinguishing jejunum from ileum is vital during laparotomy. The jejunum has a thicker, redder wall, wider lumen, and prominent circular plicae circulares that are easily felt through the wall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jejunum Characteristics",
+     "points": [
+      "Location: left upper quadrant and umbilical",
+      "Wall: thick, heavy, hyperemic, and fleshy",
+      "Lumen: wider (approx 4 cm diameter)",
+      "Mucosa: prominent, closely packed plicae circulares"
+     ]
+    },
+    "right": {
+     "title": "Ileum Characteristics",
+     "points": [
+      "Location: right lower quadrant and pelvis",
+      "Wall: thin, light, pale, and collapsible",
+      "Lumen: narrower (approx 2.5 to 3 cm diameter)",
+      "Mucosa: sparse plicae; prominent Peyer patches"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The architecture of the mesenteric vasculature provides the most definitive distinction between small bowel loops. In the jejunal mesentery, the branches of the superior mesenteric artery form only one or two simple **arterial arcades**, giving rise to long, straight, parallel terminal vessels termed vasa recta.",
+   "say": "Mesenteric vascular patterns offer the most reliable surgical distinction. The jejunal mesentery features only one or two simple arterial arcades giving off long, straight vasa recta.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jejunal Mesenteric Pattern",
+     "points": [
+      "Only 1 or 2 simple arterial arcades",
+      "Vasa recta are long, straight, and distinct",
+      "Mesenteric fat is sparse near the bowel wall",
+      "Clear, translucent fat-free peritoneal windows"
+     ]
+    },
+    "right": {
+     "title": "Ileal Mesenteric Pattern",
+     "points": [
+      "3 to 5 complex, short cascading arcades",
+      "Vasa recta are short, narrow, and crowded",
+      "Mesenteric fat extends completely onto bowel serosa",
+      "Opaque, fat-laden mesentery without windows"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast, the ileal mesentery exhibits three, four, or five complex tiers of short cascading arterial arcades with very short **vasa recta**. Furthermore, mesenteric fat encroaches completely onto the antimesenteric border of the ileum, obliterating the translucent peritoneal windows seen in the jejunum.",
+   "say": "In contrast, the ileal mesentery contains multiple tiers of crowded arcades with very short vasa recta. Fat encroaches completely onto the ileal wall, leaving no translucent windows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Jejunal Small Bowel",
+     "Ileal Small Bowel",
+     "Diagnostic Method"
+    ],
+    "rows": [
+     [
+      "Arterial Arcades",
+      "1 to 2 simple arcades",
+      "3 to 5 complex tiered arcades",
+      "Transillumination of mesentery"
+     ],
+     [
+      "Vasa Recta Length",
+      "Long (3 to 4 cm)",
+      "Short (1 cm or less)",
+      "Direct measurement at laparotomy"
+     ],
+     [
+      "Mesenteric Windows",
+      "Translucent, clear windows present",
+      "Opaque, obscured by fat creep",
+      "Held up against operating room lights"
+     ],
+     [
+      "Peyer Patches",
+      "Absent or microscopic",
+      "Prominent macroscopic oval aggregates",
+      "Antimesenteric mucosal inspection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aggregations of unencapsulated subepithelial lymphoid follicles termed **Peyer patches** predominate in the antimesenteric mucosa of the terminal ileum. Serving as antigen-sampling centers for mucosal IgA production, they represent the primary site of infection in typhoid fever, where Salmonella Typhi causes mucosal ulceration and bowel perforation.",
+   "say": "Peyer patches are aggregated lymphoid follicles along the antimesenteric border of the terminal ileum. They serve as mucosal immune centers and are the primary site of ulceration and perforation in typhoid fever.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Typhoid Ileal Perforation",
+    "nodes": [
+     {
+      "id": "ingest",
+      "label": "Ingestion of Salmonella enterica serovar Typhi"
+     },
+     {
+      "id": "invade",
+      "label": "Penetrates M Cells into Antimesenteric Peyer Patches"
+     },
+     {
+      "id": "hyper",
+      "label": "Macrophage Proliferation Causes Hypertrophy and Necrosis"
+     },
+     {
+      "id": "perforate",
+      "label": "Longitudinal Ulceration and Free Peritonitis at Day 14-21"
+     }
+    ],
+    "edges": [
+     [
+      "ingest",
+      "invade"
+     ],
+     [
+      "invade",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "perforate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The terminal ileum enters the large intestine at the **ileocaecal junction**, guarded by the ileocaecal valve (valvula coli) consisting of upper and lower horizontal lips. The valve prevents retrograde reflux of fecal contents from the bacteria-dense caecum into the relatively sterile ileum.",
+   "say": "The terminal ileum empties into the caecum at the ileocaecal valve. Its two horizontal lips prevent retrograde reflux of bacteria-laden colonic contents into the sterile small intestine.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-abdomen.webp",
+    "alt": "Abdominal radiograph showing ileocaecal gas patterns and small bowel valvulae conniventes",
+    "caption": "Radiographic anatomy of the ileocaecal region and small bowel loops. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The vermiform appendix arises from the posteromedial wall of the caecum approximately two centimetres below the ileocaecal junction, where the three longitudinal taeniae coli converge. The anatomical position of the appendiceal tip varies widely, with the **retrocaecal position** being the most frequent (65%), followed by the pelvic position (30%).",
+   "say": "The vermiform appendix arises from the posteromedial caecum where the three taeniae coli unite. The retrocaecal position is the most common at sixty-five percent, followed by the pelvic position at thirty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Appendix Position",
+     "Frequency Percentage",
+     "Clock Face Location",
+     "Clinical Presentation Clue"
+    ],
+    "rows": [
+     [
+      "Retrocaecal / Retrocolic",
+      "65% (most common)",
+      "12 o'clock behind caecum",
+      "Silent peritonitis; positive psoas stretch sign"
+     ],
+     [
+      "Pelvic",
+      "30% (second most common)",
+      "4 o'clock over pelvic brim",
+      "Diarrhea, dysuria, rectal tenderness on PR"
+     ],
+     [
+      "Subcaecal",
+      "2% of population",
+      "6 o'clock below caecum",
+      "Classical right iliac fossa tenderness"
+     ],
+     [
+      "Pre-ileal",
+      "1% of population",
+      "10 o'clock anterior to ileum",
+      "Early peritonitis; high fever, vomiting"
+     ],
+     [
+      "Post-ileal",
+      "0.5% of population",
+      "11 o'clock behind ileum",
+      "Difficult diagnosis; early obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surface projection of the base of the appendix corresponds to **McBurney point**, located at the junction of the lateral third and medial two-thirds of a line drawn from the anterior superior iliac spine to the umbilicus. Maximum tenderness at McBurney point reflects somatic peritoneal irritation in acute appendicitis.",
+   "say": "The base of the appendix lies at McBurney point, one-third of the way along the line from the right ASIS to the umbilicus. Sharp localized tenderness here indicates acute appendicitis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Evolution of Appendiceal Pain from Visceral to Somatic",
+    "nodes": [
+     {
+      "id": "obstruct",
+      "label": "Fecalith or Lymphoid Hyperplasia Obstructs Appendiceal Lumen"
+     },
+     {
+      "id": "visceral",
+      "label": "Intraluminal Distension Stimulates T10 Afferents: Periumbilical Ache"
+     },
+     {
+      "id": "inflam",
+      "label": "Full-thickness Transmural Inflammation Reaches Parietal Peritoneum"
+     },
+     {
+      "id": "somatic",
+      "label": "Sharp, Well-localized Somatic Pain Pinpointed to McBurney Point"
+     }
+    ],
+    "edges": [
+     [
+      "obstruct",
+      "visceral"
+     ],
+     [
+      "visceral",
+      "inflam"
+     ],
+     [
+      "inflam",
+      "somatic"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "59f63253-8911-4deb-a386-a6bc11fa2488",
+  "0ea4ed34-d02e-49ac-943e-81c9e7b819a6",
+  "2a22a227-c81c-4d09-8232-62aebd967118"
+ ]
+}

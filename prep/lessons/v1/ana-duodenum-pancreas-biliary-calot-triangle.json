@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-duodenum-pancreas-biliary",
+ "subject": "anatomy",
+ "title": "Biliary Tree Topography: Calot Triangle, Cystic Artery, and Bile Ducts",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The extrahepatic biliary apparatus conducts bile from the liver into the duodenum. Right and left hepatic ducts emerge from the porta hepatis and unite to form the **common hepatic duct**, which is joined on its right side by the tortuous cystic duct from the gallbladder to form the common bile duct.",
+   "say": "The extrahepatic biliary apparatus transports bile into the duodenum. Right and left hepatic ducts join to form the common hepatic duct, which unites with the cystic duct to create the common bile duct.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-cholelithiasis-solitary-cholesterol-stone.webp",
+    "alt": "Opened cholecystectomy specimen demonstrating gallstone in gallbladder with cystic duct insertion",
+    "caption": "Surgical anatomy of the gallbladder and cystic duct insertion into the biliary tree. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The primary surgical triangle in biliary surgery is the hepatobiliary triangle of **Calot**. In its modern surgical definition, its boundaries are: superiorly the inferior visceral surface of the liver, medially the common hepatic duct, and laterally the cystic duct. Traversing this triangle is the cystic artery and the cystic lymph node of Lund.",
+   "say": "The hepatobiliary triangle of Calot is the primary landmark in gallbladder surgery. Bounded by the liver surface, common hepatic duct, and cystic duct, it contains the cystic artery and Lund lymph node.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Calot Triangle Boundary",
+     "Anatomical Structure",
+     "Spatial Position",
+     "Surgical Warning"
+    ],
+    "rows": [
+     [
+      "Superior Boundary",
+      "Inferior visceral surface of liver segment V",
+      "Roof of dissection",
+      "Avoid deep parenchymal liver injury"
+     ],
+     [
+      "Medial Boundary",
+      "Common hepatic duct",
+      "Medial margin",
+      "Mistaking CHD for cystic duct causes duct transection"
+     ],
+     [
+      "Lateral Boundary",
+      "Cystic duct",
+      "Lateral margin",
+      "Trace directly from gallbladder infundibulum"
+     ],
+     [
+      "Internal Content",
+      "Cystic artery (usually from right hepatic)",
+      "Traverses upper triangle",
+      "Must achieve critical view of safety before clipping"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laparoscopic cholecystectomy mandates achieving the **critical view of safety** (Strasberg) before clipping or dividing any tubular structure. The hepatocystic triangle must be cleared of all fat and fibrous tissue, the lower third of the gallbladder dissected off the cystic plate, and exactly two structures (cystic duct and cystic artery) seen entering the gallbladder.",
+   "say": "Laparoscopic cholecystectomy requires achieving the critical view of safety before clipping. Dissecting the triangle to display only cystic duct and artery entering the gallbladder prevents bile duct transection.",
+   "vis": {
+    "kind": "flow",
+    "title": "Three Criteria for Critical View of Safety",
+    "nodes": [
+     {
+      "id": "clear",
+      "label": "Clear Hepatocystic Triangle of All Fat and Areolar Tissue"
+     },
+     {
+      "id": "plate",
+      "label": "Dissect Lowest 1/3 of Gallbladder Off the Liver Bed (Cystic Plate)"
+     },
+     {
+      "id": "two",
+      "label": "Confirm Exactly Two Structures (Duct and Artery) Enter Gallbladder"
+     },
+     {
+      "id": "clip",
+      "label": "Safe Application of Clips and Division of Target Structures"
+     }
+    ],
+    "edges": [
+     [
+      "clear",
+      "plate"
+     ],
+     [
+      "plate",
+      "two"
+     ],
+     [
+      "two",
+      "clip"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cystic artery** is classically a solitary branch arising from the right hepatic artery within Calot triangle. However, anatomical variations occur in twenty-five percent of individuals: the right hepatic artery may course through Calot triangle as a tortuous Moynihan caterpillar loop, predisposing it to accidental ligation.",
+   "say": "The cystic artery usually arises from the right hepatic artery in Calot triangle. Variations occur in a quarter of patients, such as a tortuous caterpillar loop of the right hepatic artery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Cystic Artery (75%)",
+     "points": [
+      "Arises from right hepatic artery in Calot triangle",
+      "Passes posterior to common hepatic duct",
+      "Divides into superficial and deep branches",
+      "Lies superior and medial to cystic duct"
+     ]
+    },
+    "right": {
+     "title": "Moynihan Caterpillar Loop (15%)",
+     "points": [
+      "Right hepatic artery loops downward into Calot triangle",
+      "Resembles an oversized cystic artery",
+      "Accidental ligation causes right liver lobe ischemia",
+      "Gives very short stubby cystic artery branch"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **common bile duct** (choledochus) measures approximately 7.5 centimetres (3 inches) in length with a normal lumen diameter of under six millimetres. It is divided into four anatomical segments: supraduodenal (in hepatoduodenal ligament), retroduodenal (behind first part), infraduodenal (in pancreatic groove), and intraduodenal (in duodenal wall).",
+   "say": "The common bile duct is roughly three inches long with a diameter under six millimeters. It consists of supraduodenal, retroduodenal, infraduodenal, and intraduodenal segments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CBD Segment",
+     "Anatomical Relationships",
+     "Surgical Landmark",
+     "Clinical Pathology"
+    ],
+    "rows": [
+     [
+      "Supraduodenal Part",
+      "In right free border of lesser omentum",
+      "Anterior to portal vein, right of hepatic artery",
+      "Standard site for open choledochotomy / exploration"
+     ],
+     [
+      "Retroduodenal Part",
+      "Behind 1st part of duodenum",
+      "Anterior to IVC; gastroduodenal artery to its left",
+      "Eroded by posterior duodenal ulcer"
+     ],
+     [
+      "Infraduodenal Part",
+      "Groove on posterior surface of pancreatic head",
+      "Embedded in pancreatic parenchyma",
+      "Compressed by carcinoma of the pancreatic head"
+     ],
+     [
+      "Intraduodenal Part",
+      "Oblique course through medial duodenal wall",
+      "Surrounded by sphincter of Oddi",
+      "Impacted gallstones provoke biliary colic / jaundice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the fourth (ascending) part of the duodenum, the duodenojejunal flexure is suspended from the posterior abdominal wall by a fibromuscular band termed the **ligament of Treitz** (suspensory muscle of the duodenum). Originating from the right crus of the diaphragm around the coeliac trunk, it marks the boundary between upper and lower gastrointestinal bleeding.",
+   "say": "The duodenojejunal junction is suspended by the ligament of Treitz, descending from the right crus of the diaphragm. It defines the anatomical border between upper and lower gastrointestinal bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Gastrointestinal Bleed",
+     "points": [
+      "Arises proximal to ligament of Treitz",
+      "Presents with hematemesis or melena",
+      "Sources: peptic ulcers, varices, Mallory-Weiss tears",
+      "Evaluated by esophagogastroduodenoscopy (EGD)"
+     ]
+    },
+    "right": {
+     "title": "Lower Gastrointestinal Bleed",
+     "points": [
+      "Arises distal to ligament of Treitz",
+      "Presents with hematochezia or maroon stool",
+      "Sources: diverticulosis, angiodysplasia, polyps",
+      "Evaluated by colonoscopy or CT angiography"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The third part of the duodenum crosses the midline between the abdominal aorta posteriorly and the superior mesenteric artery anteriorly. Narrowing of the aortomesenteric angle from severe weight loss or prolonged supine casting compresses the duodenum, precipitating **superior mesenteric artery syndrome** (Wilkie syndrome) with recurrent bilious vomiting.",
+   "say": "The third duodenum passes between the aorta and superior mesenteric artery. Acute weight loss narrows this aortomesenteric angle, producing superior mesenteric artery syndrome with bilious vomiting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of SMA (Wilkie) Syndrome",
+    "nodes": [
+     {
+      "id": "loss",
+      "label": "Severe Rapid Weight Loss Depletes Retroperitoneal Mesenteric Fat"
+     },
+     {
+      "id": "angle",
+      "label": "Aortomesenteric Angle Narrows from Normal 45-60 to <20 Degrees"
+     },
+     {
+      "id": "clamp",
+      "label": "SMA Compresses Transverse Third Part of Duodenum Against Aorta"
+     },
+     {
+      "id": "vomit",
+      "label": "Postprandial Epigastric Pain, Duodenal Obstruction, Bilious Vomiting"
+     }
+    ],
+    "edges": [
+     [
+      "loss",
+      "angle"
+     ],
+     [
+      "angle",
+      "clamp"
+     ],
+     [
+      "clamp",
+      "vomit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gallstones impacting in the gallbladder neck (Hartmann pouch) or cystic duct can cause chronic extrinsic compression and inflammatory erosion into the adjacent common hepatic duct, a rare syndrome known as **Mirizzi syndrome**. Patients present with recurrent acute cholecystitis complicated by obstructive jaundice and dilated intrahepatic ducts on cholangiography.",
+   "say": "Gallstones impacted in Hartmann pouch can compress or erode the adjacent common hepatic duct, causing Mirizzi syndrome. This produces cholecystitis with obstructive jaundice.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-cholelithiasis-pigment-stones.webp",
+    "alt": "Pathology jar of bisected gallbladder showing cholelithiasis stones",
+    "caption": "Cholelithiasis showing multiple gallstones capable of producing biliary obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "0fd9ea6b-15ed-4a1d-a21d-97f10e8e63b2",
+  "ee20f7ae-f555-42ac-944a-4554f1bc421d",
+  "affeace2-1170-4ede-9005-bc9a5d1f3dc7"
+ ]
+}

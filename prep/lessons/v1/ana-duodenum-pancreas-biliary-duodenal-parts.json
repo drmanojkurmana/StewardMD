@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-duodenum-pancreas-biliary",
+ "subject": "anatomy",
+ "title": "Duodenum and Pancreas: C-Loop Relations, Pancreatic Ducts, and Ampulla",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The duodenum is the shortest, widest, and most fixed segment of the small intestine, measuring twenty-five centimetres (ten inches) in length. Curving in a C-shaped loop around the head of the pancreas, it is anatomically partitioned into **four distinct parts**: superior, descending, horizontal, and ascending.",
+   "say": "The duodenum is a C-shaped loop twenty-five centimeters long surrounding the head of the pancreas. It is divided into four parts: superior, descending, horizontal, and ascending.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-meal-duodenal-ulcer.webp",
+    "alt": "Barium meal radiograph showing duodenal cap, C-loop, and mucosal architecture",
+    "caption": "Barium meal radiograph demonstrating the duodenal C-loop and duodenal cap. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The first (superior) part is two inches long, extending from the pylorus to the neck of the gallbladder. Its initial 2.5 centimetres (the **duodenal cap** or bulb) is completely intraperitoneal and mobile, while the remaining part is retroperitoneal. The duodenal cap is the most common site of peptic ulcer disease.",
+   "say": "The first part extends two inches from the pylorus. Its initial inch forms the mobile duodenal cap inside the peritoneum, representing the most common site for peptic ulcers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First Part (Duodenal Cap)",
+     "points": [
+      "Length: 2 inches (5 cm); ascends right and back",
+      "First inch is intraperitoneal, suspended by omenta",
+      "Smooth mucosal wall lacking plicae circulares",
+      "Commonest site for peptic ulcer perforation"
+     ]
+    },
+    "right": {
+     "title": "Second Part (Descending)",
+     "points": [
+      "Length: 3 inches (7.5 cm); descends along L1-L3",
+      "Entirely retroperitoneal, fixed against right kidney",
+      "Rich in prominent circular plicae circulares",
+      "Receives common bile duct and pancreatic duct"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The second (descending) part of the duodenum descends vertically along the right border of vertebrae L1 to L3. Its posteromedial wall receives the union of the common bile duct and main pancreatic duct at the **ampulla of Vater** (hepatopancreatic ampulla), which opens into the duodenal lumen on the summit of the major duodenal papilla.",
+   "say": "The descending second part runs beside vertebrae L1 to L3. Its medial wall receives the bile duct and pancreatic duct at the ampulla of Vater, opening at the major duodenal papilla.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Duodenal Papilla",
+     "Opening Ducts",
+     "Duodenal Wall Position",
+     "Distance from Pylorus"
+    ],
+    "rows": [
+     [
+      "Major Duodenal Papilla",
+      "Ampulla of Vater (bile + main pancreatic)",
+      "Posteromedial wall of 2nd part",
+      "8 to 10 cm distal to pylorus"
+     ],
+     [
+      "Minor Duodenal Papilla",
+      "Accessory pancreatic duct of Santorini",
+      "Anteromedial wall of 2nd part",
+      "2 cm proximal to major papilla"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The flow of bile and pancreatic juice into the duodenum is controlled by the **sphincter of Oddi**, a complex intrinsic smooth muscle sphincter surrounding the hepatopancreatic ampulla and terminal ducts. Cholecystokinin (CCK) released by duodenal endocrine I-cells during meals relaxes this sphincter while stimulating gallbladder contraction.",
+   "say": "Flow through the ampulla is regulated by the sphincter of Oddi. Cholecystokinin released by duodenal I-cells relaxes this sphincter while contracting the gallbladder to release bile.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hormonal Regulation of Biliary Discharge",
+    "nodes": [
+     {
+      "id": "fat",
+      "label": "Fatty Chyme Enters Duodenal Lumen from Stomach"
+     },
+     {
+      "id": "cck",
+      "label": "Duodenal Endocrine I-Cells Secrete Cholecystokinin (CCK)"
+     },
+     {
+      "id": "contract",
+      "label": "CCK Stimulates Gallbladder Smooth Muscle Contraction"
+     },
+     {
+      "id": "relax",
+      "label": "Sphincter of Oddi Relaxes, Discharging Bile and Enzymes"
+     }
+    ],
+    "edges": [
+     [
+      "fat",
+      "cck"
+     ],
+     [
+      "cck",
+      "contract"
+     ],
+     [
+      "contract",
+      "relax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pancreas possesses two ductal systems originating from distinct embryonic buds. The **main pancreatic duct** of Wirsung derives from the ventral duct and distal dorsal duct, traversing the entire length of the gland to join the bile duct, while the accessory duct of Santorini drains the upper anterior head directly.",
+   "say": "The pancreas has two ducts. The main duct of Wirsung runs the length of the gland to join the bile duct, while the accessory duct of Santorini drains the upper head into the minor papilla.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Main Duct of Wirsung",
+     "points": [
+      "Formed by ventral duct and distal dorsal duct",
+      "Runs from tail through body to head (herringbone)",
+      "Unites with common bile duct at ampulla of Vater",
+      "Opens at major duodenal papilla"
+     ]
+    },
+    "right": {
+     "title": "Accessory Duct of Santorini",
+     "points": [
+      "Derived from proximal portion of dorsal duct",
+      "Drains upper anterior portion of pancreatic head",
+      "Bypasses the common bile duct completely",
+      "Opens at minor duodenal papilla 2 cm higher"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The head of the pancreas is cradled in the C-loop of the duodenum, giving off a hook-like projection from its lower left border termed the **uncinate process**. The uncinate process passes posterior to the superior mesenteric artery and vein, making it a critical anatomical plane during pancreaticoduodenectomy (Whipple procedure).",
+   "say": "The head of the pancreas gives off the hook-shaped uncinate process from its lower border. It wraps behind the superior mesenteric vessels, forming a critical dissection plane in Whipple surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-pancreatitis-and-pancreaticoduodenectomy-fig1.webp",
+    "alt": "Anatomical schematic of pancreatic head, uncinate process, and pancreaticoduodenectomy resection margins",
+    "caption": "Head of the pancreas and uncinate process relationship to superior mesenteric vessels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The third (horizontal) part of the duodenum measures three inches long, crossing horizontally in front of the IVC, aorta, and L3 vertebra. Passing directly anterior to it are the **superior mesenteric vessels** and the root of the mesentery, predisposing it to vascular compression syndromes.",
+   "say": "The third part of the duodenum runs horizontally across the aorta and IVC at L3. The superior mesenteric vessels cross directly in front of it inside the root of the mesentery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Duodenal Part",
+     "Length in Inches",
+     "Vertebral Level",
+     "Anterior and Posterior Relations"
+    ],
+    "rows": [
+     [
+      "First Part",
+      "2 inches (5 cm)",
+      "L1 (transpyloric)",
+      "Anterior: liver, gallbladder; Posterior: gastroduodenal art, portal vein"
+     ],
+     [
+      "Second Part",
+      "3 inches (7.5 cm)",
+      "L1 to L3 (descending)",
+      "Anterior: transverse colon; Posterior: right kidney, IVC"
+     ],
+     [
+      "Third Part",
+      "3 inches (7.5 cm)",
+      "L3 (horizontal)",
+      "Anterior: superior mesenteric vessels; Posterior: aorta, IVC"
+     ],
+     [
+      "Fourth Part",
+      "2 inches (5 cm)",
+      "L3 to L2 (ascending)",
+      "Anterior: transverse mesocolon; Posterior: left psoas, renal vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe acute pancreatitis triggers autodigestion of pancreatic parenchyma and retroperitoneal fat by prematurely activated trypsin and lipase, causing extensive **fat saponification** and peripancreatic fluid collections. Extravasation of hemoperitoneum into the flanks produces Turner sign, while tracking into the umbilicus produces Cullen sign.",
+   "say": "Acute pancreatitis triggers autodigestion by activated enzymes, causing fat saponification and retroperitoneal edema. Hemorrhage tracking into flanks causes Grey Turner sign, while peri-umbilical bruising yields Cullen sign.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiological Cascade of Acute Pancreatitis",
+    "nodes": [
+     {
+      "id": "trigger",
+      "label": "Gallstone Impaction in Ampulla or Alcohol Toxicity"
+     },
+     {
+      "id": "trypsin",
+      "label": "Premature Intracellular Activation of Trypsinogen to Trypsin"
+     },
+     {
+      "id": "lipase",
+      "label": "Trypsin Activates Lipase, Elastase, and Complement Cascades"
+     },
+     {
+      "id": "sapon",
+      "label": "Fat Saponification, Microvascular Thrombosis, Tissue Necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "trigger",
+      "trypsin"
+     ],
+     [
+      "trypsin",
+      "lipase"
+     ],
+     [
+      "lipase",
+      "sapon"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "0fd9ea6b-15ed-4a1d-a21d-97f10e8e63b2",
+  "ee20f7ae-f555-42ac-944a-4554f1bc421d",
+  "affeace2-1170-4ede-9005-bc9a5d1f3dc7"
+ ]
+}
