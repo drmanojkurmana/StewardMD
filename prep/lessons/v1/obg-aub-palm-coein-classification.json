@@ -1,0 +1,277 @@
+{
+ "v": 1,
+ "id": "obg-aub-palm-coein-classification",
+ "subject": "obstetrics-gynaecology",
+ "module": "obg-aub",
+ "title": "PALM-COEIN Classification",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**PALM-COEIN classification** established by the International Federation of Gynecology and Obstetrics (FIGO) standardizes the terminology and diagnostic categorization of abnormal uterine bleeding in non-pregnant reproductive-age women. The system replaces obsolete, ill-defined clinical terms including menorrhagia, metrorrhagia, and dysfunctional uterine bleeding. The framework divides etiologies into two broad groups: the PALM group comprising structural, visually or histologically demonstrable lesions, and the COEIN group comprising non-structural, non-anatomical functional disorders.",
+   "say": "The FIGO PALM-COEIN classification categorizes abnormal uterine bleeding in reproductive-age women. PALM covers structural anatomical lesions like polyps and fibroids, while COEIN covers non-structural issues like ovulatory and bleeding disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-fig1.webp",
+    "alt": "Diagram illustrating the FIGO PALM-COEIN classification framework.",
+    "caption": "FIGO PALM-COEIN classification schema categorizing structural and functional causes of bleeding. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Structural etiologies** under the PALM acronym encompass discrete anatomical pathologies that can be evaluated using pelvic imaging and histological examination: Polyp (AUB-P), Adenomyosis (AUB-A), Leiomyoma (AUB-L), and Malignancy or hyperplasia (AUB-M). Endometrial and endocervical polyps cause irregular spotting and heavy menstrual loss. Adenomyosis produces enlarged, tender, globular uterine enlargement with severe dysmenorrhoea. Malignancy mandates histological exclusion in all women over age forty-five or with chronic unopposed estrogen exposure.",
+   "say": "The PALM acronym represents structural causes: Polyp, Adenomyosis, Leiomyoma, and Malignancy. Adenomyosis causes a tender, symmetrically enlarged uterus with severe pain, while polyps cause intermenstrual spotting.",
+   "vis": {
+    "kind": "table",
+    "title": "Structural PALM Components and Characteristics",
+    "cols": [
+     "Category",
+     "Pathological Entity",
+     "Primary Diagnostic Modality"
+    ],
+    "rows": [
+     [
+      "AUB-P",
+      "Endometrial and endocervical polyps",
+      "Saline infusion sonography / hysteroscopy"
+     ],
+     [
+      "AUB-A",
+      "Adenomyosis (myometrial invasion)",
+      "Transvaginal ultrasound / pelvic MRI"
+     ],
+     [
+      "AUB-L",
+      "Leiomyoma (uterine fibroids)",
+      "FIGO subclassification (Types 0 to 8)"
+     ],
+     [
+      "AUB-M",
+      "Malignancy and atypical hyperplasia",
+      "Pipelle biopsy / hysteroscopic curettage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**FIGO leiomyoma subclassification** system stratifies uterine fibroids into nine anatomical categories based on their relationship to the endometrium and uterine serosa. Submucosal fibroids directly distort the uterine cavity: type 0 is entirely pedunculated intracavitary; type 1 is sessile with less than fifty percent intramural extension; and type 2 is sessile with fifty percent or more intramural extension. Other types include intramural (types 3 and 4), subserosal (types 5 to 7), and cervical or parasitic (type 8).",
+   "say": "FIGO subclassifies fibroids into nine types. Submucosal types zero, one, and two directly distort the endometrial cavity and produce the heaviest bleeding, whereas subserosal types five, six, and seven cause pelvic pressure.",
+   "vis": {
+    "kind": "flow",
+    "title": "FIGO Submucosal Leiomyoma Anatomy",
+    "nodes": [
+     {
+      "id": "f0",
+      "label": "Type 0 Fibroid",
+      "sub": "Pedunculated entirely within uterine cavity"
+     },
+     {
+      "id": "f1",
+      "label": "Type 1 Fibroid",
+      "sub": "Sessile with under 50% intramural extension"
+     },
+     {
+      "id": "f2",
+      "label": "Type 2 Fibroid",
+      "sub": "Sessile with 50% or greater intramural depth"
+     },
+     {
+      "id": "f3",
+      "label": "Type 3 to 8",
+      "sub": "Intramural, subserosal, or cervical fibroids"
+     }
+    ],
+    "edges": [
+     [
+      "f0",
+      "f1",
+      "Increasing depth"
+     ],
+     [
+      "f1",
+      "f2",
+      "Myometrial extension"
+     ],
+     [
+      "f2",
+      "f3",
+      "Cavity departure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Non-structural etiologies** under the COEIN acronym represent systemic, functional, or medical disorders lacking a macroscopic structural lesion: Coagulopathy (AUB-C), Ovulatory dysfunction (AUB-O), Endometrial primary disorders (AUB-E), Iatrogenic causes (AUB-I), and Not otherwise classified (AUB-N). Patients can simultaneously possess both structural and functional abnormalities, recorded in a composite matrix where each category is assigned a 0 for absent, 1 for present, or question mark for unexamined.",
+   "say": "The COEIN group covers non-structural causes: Coagulopathy, Ovulatory dysfunction, Endometrial mechanisms, Iatrogenic interventions, and Not classified. A patient can have both structural and functional causes concurrently.",
+   "vis": {
+    "kind": "table",
+    "title": "Non-Structural COEIN Categories and Examples",
+    "cols": [
+     "Category",
+     "Pathological Mechanism",
+     "Common Clinical Example"
+    ],
+    "rows": [
+     [
+      "AUB-C",
+      "Systemic haemostatic defect",
+      "von Willebrand disease, immune thrombocytopenia"
+     ],
+     [
+      "AUB-O",
+      "Chronic anovulation or luteal defect",
+      "Polycystic ovary syndrome, perimenopause"
+     ],
+     [
+      "AUB-E",
+      "Primary endothelin/PGF2a dysregulation",
+      "Predictable heavy menses with normal cavity"
+     ],
+     [
+      "AUB-I",
+      "Pharmacological interference",
+      "Copper IUD, anticoagulants, progestins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ovulatory dysfunction** (AUB-O) represents the single most common cause of abnormal uterine bleeding during the extremes of reproductive life, notably post-menarcheal adolescence and perimenopause, as well as in polycystic ovary syndrome. Absence of regular ovulation deprives the endometrium of cyclic progesterone exposure. Sustained, unopposed estrogen drives continuous endometrial glandular proliferation, leading to an excessively thick, structurally fragile endometrium that outgrows its vascular supply and sheds unpredictably in prolonged, irregular, profuse bleeding episodes.",
+   "say": "Ovulatory dysfunction causes unpredictable, heavy bleeding because the lack of progesterone allows unopposed estrogen to thicken the endometrium until it breaks down irregularly. It is classical in adolescents and PCOS patients.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Anovulatory Bleeding (AUB-O)",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Chronic Anovulation",
+      "sub": "Absence of mature corpus luteum formation"
+     },
+     {
+      "id": "o2",
+      "label": "Progesterone Deficit",
+      "sub": "Continuous unopposed circulating estrogen"
+     },
+     {
+      "id": "o3",
+      "label": "Endometrial Outgrowth",
+      "sub": "Fragile, hyperplastic, poorly vascularized tissue"
+     },
+     {
+      "id": "o4",
+      "label": "Asynchronous Shedding",
+      "sub": "Prolonged, heavy, uncoordinated hemorrhage"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2",
+      "Corpus luteum absent"
+     ],
+     [
+      "o2",
+      "o3",
+      "Sustained proliferation"
+     ],
+     [
+      "o3",
+      "o4",
+      "Vascular collapse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Coagulopathy screening** (AUB-C) is positive when a woman presents with heavy menstrual bleeding since menarche, plus one major or two minor haemostatic criteria. Major criteria include a history of postpartum haemorrhage, surgery-related bleeding, or bleeding associated with dental procedures. Minor criteria include epistaxis more than twice monthly, frequent gum bleeding, or recurrent bruising greater than five centimetres without trauma. The most frequent inherited cause is von Willebrand disease, affecting one percent of the general population.",
+   "say": "Screen for bleeding disorders in any woman with heavy menses since menarche. Positive screens feature postpartum hemorrhage, surgical bleeding, or frequent epistaxis. von Willebrand disease is the most common underlying cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "AUB-C Positive Screening Criteria",
+     "points": [
+      "Heavy bleeding starting at menarche",
+      "History of postpartum haemorrhage",
+      "Surgery or dental extraction bleeding",
+      "Two or more episodes of bruising or epistaxis"
+     ]
+    },
+    "right": {
+     "title": "Laboratory Workup Required",
+     "points": [
+      "Complete blood count and ferritin",
+      "Prothrombin time and activated PTT",
+      "von Willebrand factor antigen and activity",
+      "Platelet aggregation studies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Saline infusion sonohysterography** dramatically elevates the diagnostic specificity of pelvic ultrasonography for structural intracavitary lesions. Under sterile speculum visualization, a fine catheter is threaded through the cervix, and five to ten millilitres of sterile saline is instilled to gently distend the endometrial cavity during real-time transvaginal scanning. Saline sonography distinguishes flexible, broad-based endometrial polyps from firm, submucosal leiomyomas, and precisely maps myometrial invasion depth to determine whether hysteroscopic resection is surgically feasible.",
+   "say": "Saline sonohysterography distends the uterine cavity with fluid during an ultrasound scan. It clearly separates soft endometrial polyps from tough submucosal fibroids, helping the surgeon decide if hysteroscopic resection is possible.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-and-palm-coein-classification-fig1.webp",
+    "alt": "Diagram comparing uterine intracavitary structural etiologies.",
+    "caption": "Diagnostic discrimination of intracavitary polyps and submucosal leiomyomas using saline sonohysterography. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Stepped medical therapy** is indicated for non-structural bleeding (COEIN) and structural lesions awaiting definitive surgery. For acute heavy bleeding, high-dose oral tranexamic acid one gram three times daily reduces menstrual blood loss by fifty percent through lysine-binding fibrinolysis inhibition. For chronic control, the 52 mg levonorgestrel intrauterine system provides the single most effective non-surgical medical therapy, decreasing menstrual blood volume by over ninety percent within six months, with combined oral contraceptives serving as an effective alternative.",
+   "say": "First-line medical treatment for non-structural bleeding includes oral tranexamic acid during menses to inhibit fibrinolysis, or insertion of a 52-milligram levonorgestrel intrauterine system, which reduces blood loss by ninety percent.",
+   "vis": {
+    "kind": "table",
+    "title": "First-Line Medical Therapies for Abnormal Uterine Bleeding",
+    "cols": [
+     "Pharmacological Agent",
+     "Mechanism of Hemostatic Action",
+     "Expected Blood Loss Reduction"
+    ],
+    "rows": [
+     [
+      "Levonorgestrel IUS (52 mg)",
+      "Profound endometrial stromal decidualization",
+      "90% to 95% reduction at 6 months"
+     ],
+     [
+      "Oral tranexamic acid",
+      "Reversible anti-fibrinolytic lysine blockade",
+      "40% to 55% reduction during menses"
+     ],
+     [
+      "Mefenamic acid (NSAID)",
+      "Inhibits cyclooxygenase and PGE2 synthesis",
+      "25% to 35% reduction in flow and pain"
+     ],
+     [
+      "Combined oral contraceptives",
+      "Suppresses HPO axis, thins endometrium",
+      "40% to 50% predictable cyclic reduction"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "FIGO PALM-COEIN: fundamental biological distinction",
+   "b": "PALM represents structural anatomical lesions; COEIN represents non-structural functional disorders."
+  },
+  {
+   "f": "FIGO fibroid classification: definition of Type 0 leiomyoma",
+   "b": "Completely pedunculated, intracavitary submucosal fibroid."
+  },
+  {
+   "f": "Medical management of AUB: single most effective non-surgical therapy",
+   "b": "52 mg levonorgestrel-releasing intrauterine system (reduces blood loss by over 90%)."
+  }
+ ],
+ "keys": [
+  "PALM-COEIN standardizes abnormal uterine bleeding into structural and non-structural etiologies",
+  "Submucosal fibroids distort the cavity and provoke the heaviest bleeding episodes",
+  "Medical therapy centers on tranexamic acid and the levonorgestrel-releasing intrauterine system"
+ ]
+}

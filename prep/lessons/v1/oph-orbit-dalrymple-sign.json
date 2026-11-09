@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "id": "oph-orbit-dalrymple-sign",
+ "subject": "ophthalmology",
+ "module": "oph-orbit",
+ "title": "Thyroid Eye Signs, Orbital Cellulitis and Cavernous Thrombosis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dalrymple sign** is widened palpebral fissure from upper lid retraction in thyroid eye disease, showing superior scleral rim in primary gaze. It pairs with von Graefe lid lag on downgaze and Kocher stare to form bedside thyroid eye trio. Retraction mechanics combine levator inflammation, sympathetic tone and later fibrosis, explaining persistence after inflammation settles.",
+   "say": "Widened fissure with superior scleral show gives Dalrymple sign in thyroid disease bedside. Lag and stare give bedside trio completion. Fibrosis gives persistence after activity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-orbitopathy-fig1.webp",
+    "alt": "Thyroid eye features with lid retraction and widened fissure in orbitopathy.",
+    "caption": "Eyelid retraction and extraocular muscle enlargement in thyroid eye disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Orbital cellulitis** gives painful proptosis with restricted movements, chemosis, fever and vision threat from ethmoid source, separated from preseptal disease by postseptal signs exactly as Chandler staging teaches. Ophthalmology contribution is hourly vision, colour and pupil charting alongside imaging. Any deterioration converts antibiotics trial to drainage without debate.",
+   "say": "Painful proptosis together with movement restriction gives postseptal cellulitis emergency pattern always in children and adults. Vision charting gives monitoring alongside imaging on an hourly basis. Deterioration gives drainage conversion immediately in care.",
+   "vis": {
+    "kind": "table",
+    "title": "Postseptal warning set",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Pain on movement",
+      "Orbital involvement present"
+     ],
+     [
+      "Colour desaturation",
+      "Optic nerve suffering"
+     ],
+     [
+      "Pupillary defect",
+      "Urgent drainage assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cavernous sinus thrombosis** gives bilateral chemosis, proptosis and multiple cranial nerve palsies with septic fever from valveless venous spread, the bilateral sign separating it from unilateral abscess. Third, fourth, first trigeminal divisions and sixth nerves fail in cavernous company, sixth often earliest from medial position. Source control in sinus or face plus critical care antibiotics form immediate response.",
+   "say": "Bilateral eye involvement gives cavernous thrombosis separation from unilateral abscess clinically. Sixth nerve gives earliest palsy by medial position. Source control gives immediate response need.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Orbit sections relevant to venous congestion and cavernous spread assessment.",
+    "caption": "Orbital venous congestion anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Noordhoff and Werner classifications historically graded thyroid eye changes from no signs through soft tissue, proptosis, muscle, corneal and sight loss steps, remembered by NOSPECS mnemonic. Modern activity severity systems replaced it for treatment, but examinations still quote its sequence. **Sight loss last** in sequence warns that waiting for vision change misses earlier treatment windows entirely.",
+   "say": "Historical grading gives sign sequence from none to sight loss stepwise memorably. Modern systems give treatment decisions currently in clinics. Vision change gives late window warning.",
+   "vis": {
+    "kind": "table",
+    "title": "NOSPECS sequence memory",
+    "cols": [
+     "Order",
+     "Stage"
+    ],
+    "rows": [
+     [
+      "Early",
+      "No signs to soft tissue"
+     ],
+     [
+      "Middle",
+      "Proptosis and muscle"
+     ],
+     [
+      "Late",
+      "Cornea then sight loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exposure keratopathy from retraction plus proptosis ulcerates cornea inferiorly where closure fails, escalating lubrication to tarsorrhaphy as in lagophthalmos lesson. Thyroid exposure adds lagophthalmos on sleep even with good daytime blink compensation. **Moisture protection** at night is prescribed explicitly, not assumed from daytime comfort.",
+   "say": "Retraction with proptosis gives inferior exposure ulceration where closure fails overnight. Night protection gives explicit prescription beyond daytime comfort. Tarsorrhaphy gives ulcer escalation endpoint."
+  },
+  {
+   "tx": "Inferior rectus fibrosis restricts elevation giving diplopia pattern most characteristic of thyroid disease, while superior involvement is rarer. Restrictive strabismus forced duction positivity separates it from paretic diplopia in palsy lessons. **Restriction versus palsy** testing therefore decides thyroid muscle surgery versus nerve workup in diplopia clinics.",
+   "say": "Inferior rectus fibrosis gives elevation restriction diplopia characteristically in thyroid eye disease during motility assessment. Forced duction testing gives restriction separation from nerve palsy clearly. Mechanism testing gives surgery direction decisions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diplopia mechanism test",
+    "nodes": [
+     {
+      "id": "dup",
+      "label": "Diplopia pattern charted"
+     },
+     {
+      "id": "forced",
+      "label": "Forced duction tested"
+     },
+     {
+      "id": "rest",
+      "label": "Restriction: thyroid pathway"
+     },
+     {
+      "id": "palsy",
+      "label": "Free: nerve palsy pathway"
+     }
+    ],
+    "edges": [
+     [
+      "dup",
+      "forced"
+     ],
+     [
+      "forced",
+      "rest"
+     ],
+     [
+      "forced",
+      "palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoking worsens thyroid eye severity and treatment response, cessation counselling being therapy rather than lifestyle decoration in every visit. Radioiodine thyroid treatment may flare eye disease without steroid cover in susceptible patients, endocrinology coordination preventing it. **Eye thyroid sequencing** conversations happen before thyroid ablation, not after proptosis worsens.",
+   "say": "Smoking gives severity worsening needing cessation therapy at visits always in thyroid disease. Ablation flare gives steroid cover coordination need. Sequencing conversation precedes thyroid treatment.",
+   "vis": {
+    "kind": "table",
+    "title": "Thyroid eye visit checklist",
+    "cols": [
+     "Domain",
+     "Check"
+    ],
+    "rows": [
+     [
+      "Lids and surface",
+      "Retraction, exposure staining"
+     ],
+     [
+      "Nerve",
+      "Colour, fields, disc"
+     ],
+     [
+      "Muscles",
+      "Diplopia chart, restriction"
+     ],
+     [
+      "Habits",
+      "Smoking cessation progress"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise thyroid and infective orbit teaching together: Dalrymple sign widens the fissure, von Graefe sign lags on downgaze, bilateral involvement means cavernous thrombosis, and inferior rectus fibrosis restricts elevation characteristically. Postseptal pain needs urgent imaging, colour vision monitors the nerve, and smoking modifies severity at every stage. **NOSPECS sequence** ends in sight loss, so treatment windows open far earlier.",
+   "say": "Named lid signs together give thyroid bedside recognition instantly in clinic examinations for students. Bilateral involvement gives venous thrombosis direction without waiting for imaging. Restriction testing gives diplopia mechanism in thyroid disease.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Dalrymple sign",
+   "b": "Widened fissure with superior scleral show from lid retraction in thyroid eye disease."
+  },
+  {
+   "f": "Cavernous thrombosis split",
+   "b": "Bilateral chemosis and palsies versus unilateral orbital abscess; sixth nerve often earliest."
+  },
+  {
+   "f": "Thyroid diplopia mechanism",
+   "b": "Restrictive inferior rectus fibrosis, forced duction positive, not nerve palsy."
+  }
+ ],
+ "keys": [
+  "Sight loss is last in thyroid sequence, treat earlier",
+  "Postseptal signs own vision charting hourly",
+  "Smoking cessation is thyroid eye therapy"
+ ]
+}

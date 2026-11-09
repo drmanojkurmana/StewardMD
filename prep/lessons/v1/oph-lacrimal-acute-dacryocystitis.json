@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "id": "oph-lacrimal-acute-dacryocystitis",
+ "subject": "ophthalmology",
+ "module": "oph-lacrimal",
+ "title": "Dacryocystitis and Lacrimal Surgery",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acute dacryocystitis** is painful lacrimal sac infection from nasolacrimal stasis, a tender red swelling below medial canthus with watering, discharge and sometimes sac abscess pointing or fistula. Pressure over sac expresses discharge through puncta in chronic disease, while acute disease forbids probing until infection settles. Antibiotics and drainage of pointing abscess precede any duct surgery in acute phase.",
+   "say": "Sac infection gives painful medial swelling with watering and discharge acutely in adults. Chronic pressure gives discharge expression through puncta on examination. Duct surgery follows infection settlement always."
+  },
+  {
+   "tx": "**Chronic dacryocystitis** gives painless watering with mucoid reflux and recurrent conjunctivitis from stagnant sac reservoir, a surgical disease because drops never clear obstructed drainage. Dacryocystography or nasal endoscopy localises block level before bypass. Mucocele of sac is its fluctuant painless expansion above medial tendon in long standing obstruction.",
+   "say": "Painless watering with mucoid reflux gives chronic sac reservoir disease surgically. Block localisation gives bypass planning before operation. Drops give no cure in obstruction.",
+   "vis": {
+    "kind": "table",
+    "title": "Dacryocystitis phases",
+    "cols": [
+     "Phase",
+     "Pattern and action"
+    ],
+    "rows": [
+     [
+      "Acute",
+      "Painful, antibiotics, no probing"
+     ],
+     [
+      "Chronic",
+      "Painless reflux, plan bypass"
+     ],
+     [
+      "Mucocele",
+      "Fluctuant sac expansion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dacryocystorhinostomy** bypasses obstructed duct by anastomosing sac directly to nasal mucosa through bony ostium, external skin or endoscopic nasal routes sharing success principles. Silicone intubation stents selected cases with canalicular disease or small sacs. Failure analysis revisits ostium size, position and nasal pathology before revision labelling.",
+   "say": "Sac to nose bypass gives drainage restoration after duct obstruction surgically. Route choice gives similar success principles in modern practice. Failure analysis gives revision planning.",
+   "vis": {
+    "kind": "flow",
+    "title": "Watering bypass pathway",
+    "nodes": [
+     {
+      "id": "block",
+      "label": "Confirm duct block level"
+     },
+     {
+      "id": "bypass",
+      "label": "Sac to nose anastomosis"
+     },
+     {
+      "id": "stent",
+      "label": "Stent selected cases"
+     },
+     {
+      "id": "test",
+      "label": "Test patency at follow up"
+     }
+    ],
+    "edges": [
+     [
+      "block",
+      "bypass"
+     ],
+     [
+      "bypass",
+      "stent"
+     ],
+     [
+      "stent",
+      "test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Punctal plugs** conserve tears in dry eye by blocking canalicular drainage temporarily or permanently, while canalicular stenosis needs reconstruction rather than plugs. Plug extrusion and canaliculitis are its complications, canaliculitis giving pouting punctum with concretions needing canaliculotomy. Level diagnosis, punctum canaliculus sac or duct, therefore precedes every lacrimal intervention in adults as in infants.",
+   "say": "Drainage blocking gives tear conservation in dry eye by punctal plugs temporarily. Canaliculitis gives pouting punctum needing surgical opening of the canaliculus. Level diagnosis is required before intervention always."
+  },
+  {
+   "tx": "**Sjogren syndrome** returns as lacrimal gland autoimmune destruction giving aqueous dry eye with parotid enlargement and systemic features, managed jointly with rheumatology. **Dacryoadenitis** inflames gland itself, viral self limited or bacterial suppurative in superotemporal swelling, separating gland disease from sac disease by quadrant anatomy in one examination move.",
+   "say": "Autoimmune gland destruction gives aqueous deficiency with systemic company in Sjogren disease. Gland inflammation gives superotemporal swelling separation from sac disease. Quadrant anatomy gives localisation instantly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Orbit diagram with superotemporal lacrimal gland region and orbital contents.",
+    "caption": "Lacrimal gland quadrant anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Neonatal dacryocystitis is the emergency exception to infant massage pathways, with sac swelling, fever and spreading cellulitis in first weeks needing intravenous therapy and urgent probing consideration. Adult acute disease similarly watches for orbital spread medially through thin bone. **Fistula formation** after spontaneous drainage leaves epithelialised track needing excision with bypass at definitive surgery.",
+   "say": "Newborn sac infection gives emergency pattern needing systemic therapy urgently always. Medial spread gives orbital risk in acute sac disease. Fistula excision is part of bypass surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gland disease superotemporal",
+     "points": [
+      "Dacryoadenitis swelling above",
+      "Dry eye autoimmune company",
+      "Medical and systemic care"
+     ]
+    },
+    "right": {
+     "title": "Sac disease medial low",
+     "points": [
+      "Dacryocystitis swelling below tendon",
+      "Watering and reflux company",
+      "Bypass surgical care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Canalicular laceration repair in trauma stents canaliculus over silicone to prevent watering for life, upper and lower both repaired though lower carries most drainage teaching. Medial lid injuries therefore need lacrimal assessment before cosmetic closure labelling. **Bicanalicular intubation** splints both passages around nose in complex medial repairs.",
+   "say": "Canalicular repair gives drainage preservation after medial lid trauma during surgical repair. Lacrimal assessment is required before cosmetic closure in medial injuries. Silicone stenting gives patency protection during healing.",
+   "vis": {
+    "kind": "table",
+    "title": "Lacrimal level interventions",
+    "cols": [
+     "Level blocked",
+     "Intervention"
+    ],
+    "rows": [
+     [
+      "Punctum",
+      "Punctoplasty or plug logic"
+     ],
+     [
+      "Canaliculus",
+      "Stent repair or reconstruction"
+     ],
+     [
+      "Duct",
+      "Bypass anastomosis surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise lacrimal surgery teaching across ages: acute sac infection forbids probing until antibiotics settle inflammation, chronic sac obstruction needs bypass anastomosis for cure, gland disease sits superotemporal while sac disease sits below the medial tendon. Level diagnosis before instrument choice repeats from infant probing to adult bypass without exception. **Reflux on pressure** is the chronic sac signature that acute tenderness cannot safely demonstrate at examination.",
+   "say": "Phase together with quadrant gives lacrimal localisation at examination simply and reliably in adults and infants. Level assessment gives instrument choice in every drainage operation that is planned. Bypass anastomosis gives the chronic cure principle in obstruction.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Acute dacryocystitis rule",
+   "b": "Antibiotics first, never probe acutely; bypass surgery after infection settles."
+  },
+  {
+   "f": "DCR principle",
+   "b": "Anastomose sac to nasal mucosa through bony ostium bypassing obstructed duct."
+  },
+  {
+   "f": "Gland versus sac quadrant",
+   "b": "Gland superotemporal (dacryoadenitis, Sjogren); sac below medial tendon (dacryocystitis)."
+  }
+ ],
+ "keys": [
+  "Chronic sac disease is surgical, drops never cure block",
+  "Neonatal sac infection is an emergency",
+  "Diagnose drainage level before intervening"
+ ]
+}

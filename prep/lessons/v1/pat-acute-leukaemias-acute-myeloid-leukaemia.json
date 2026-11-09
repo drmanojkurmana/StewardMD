@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "id": "pat-acute-leukaemias-acute-myeloid-leukaemia",
+ "subject": "pathology",
+ "module": "pat-acute-leukaemias",
+ "title": "Acute Myeloid Leukaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "An **acute myeloid leukaemia** represents a clonal hematopoietic stem cell malignancy characterized by blocked myeloid differentiation and uncontrolled proliferation. Accumulating immature myeloid precursors progressively replace normal bone marrow elements, causing severe pancytopenia. Diagnostic criteria established by the World Health Organization mandate a minimum threshold of twenty percent myeloid blast cells in the peripheral blood or bone marrow aspirate.",
+   "say": "Acute myeloid leukaemia is a malignant stem cell disorder where differentiation freezes at an immature blast stage. Clonal blasts crowd out the bone marrow, triggering severe anaemia, infection, and bleeding. The World Health Organization defines AML by finding at least twenty percent myeloid blasts in the blood or bone marrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear showing large myeloblast with fine chromatin and prominent Auer rod.",
+    "caption": "Myeloblast with delicate chromatin, prominent nucleoli, and pathognomonic Auer rod.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic morphological finding is the presence of **Auer rods** within blast cytoplasm. These needle-shaped, pink-red crystalline structures represent fused, aggregated primary azurophilic granules containing abundant myeloperoxidase and lysosomal enzymes. Their identification conclusively establishes myeloid lineage, ruling out acute lymphoblastic leukaemia. Multiple stacked Auer rods, termed faggot cells, are characteristic of acute promyelocytic leukaemia.",
+   "say": "Auer rods are the defining microscopic hallmark of myeloid blasts. These red crystalline needles form from fused azurophilic granules packed with myeloperoxidase. Finding even a single Auer rod proves the leukaemia is myeloid and rules out ALL. Stacks of numerous Auer rods, called faggot cells, are classic in acute promyelocytic leukaemia.",
+   "vis": {
+    "kind": "table",
+    "title": "Myeloid versus Lymphoid Blast Differentiation",
+    "cols": [
+     "Feature",
+     "Myeloblast (AML)",
+     "Lymphoblast (ALL)"
+    ],
+    "rows": [
+     [
+      "Cell size and cytoplasm",
+      "Large (15 to 20 um) with moderate cytoplasm",
+      "Small to medium with scant cytoplasm"
+     ],
+     [
+      "Nuclear chromatin",
+      "Delicate, fine, lace-like dispersed chromatin",
+      "Coarse, clumped, dense chromatin pattern"
+     ],
+     [
+      "Nucleoli",
+      "2 to 5 prominent distinct nucleoli",
+      "1 to 2 indistinct or small nucleoli"
+     ],
+     [
+      "Auer rods",
+      "Present in 30 to 50 percent; pathognomonic",
+      "Strictly absent"
+     ],
+     [
+      "Myeloperoxidase (MPO)",
+      "Positive in >= 3 percent of blasts",
+      "Consistently negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cytochemical confirmation relies on **myeloperoxidase staining**, which produces dark brown-black cytoplasmic granulation in at least three percent of blasts. Sudan Black B parallels myeloperoxidase by staining intracellular lipids within granulocytic granules. Nonspecific esterase (alpha-naphthyl acetate esterase) staining displays intense cytoplasmic positivity in monocytic leukaemia subtypes, which is completely inhibited by the addition of sodium fluoride.",
+   "say": "Cytochemistry confirms myeloid identity. Myeloperoxidase staining reacts with primary granules, producing black deposits in myeloid blasts. Sudan Black B gives identical positive staining. For acute monocytic leukaemia, nonspecific esterase turns the cytoplasm bright red, and this reaction is completely blocked by adding sodium fluoride.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Granulocytic Markers",
+     "points": [
+      "Myeloperoxidase strongly positive",
+      "Sudan Black B stains granule lipids",
+      "Chloroacetate esterase positive",
+      "CD13, CD33, and CD117 positive"
+     ]
+    },
+    "right": {
+     "title": "Monocytic Markers",
+     "points": [
+      "Nonspecific esterase (NSE) positive",
+      "Fluoride inhibition of NSE staining",
+      "CD14 and CD64 positive by flow cytometry",
+      "Associated with gingival hyperplasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In acute promyelocytic leukaemia (APL), the defining cytogenetic abnormality is the **PML-RARA translocation** t(15;17)(q22;q12). This reciprocal translocation fuses the PML gene on chromosome 15 to the retinoic acid receptor alpha gene on chromosome 17. The resulting chimeric oncoprotein blocks promyelocytic differentiation. These patients present with catastrophic disseminated intravascular coagulation caused by the release of procoagulant granule contents.",
+   "say": "Acute promyelocytic leukaemia carries the balanced translocation t(15;17), fusing PML on chromosome fifteen with RARA on chromosome seventeen. This chimeric protein arrests promyelocyte maturation. Patients frequently present with explosive disseminated intravascular coagulation from procoagulant granule release, making APL an urgent medical emergency.",
+   "vis": {
+    "kind": "table",
+    "title": "Recurrent Cytogenetic Subtypes of AML",
+    "cols": [
+     "Cytogenetic Abnormality",
+     "Fusion Genes Involved",
+     "FAB Category",
+     "Prognostic Category"
+    ],
+    "rows": [
+     [
+      "t(15;17)(q22;q12)",
+      "PML-RARA fusion",
+      "APL (AML M3)",
+      "Favourable with targeted ATRA and ATO"
+     ],
+     [
+      "t(8;21)(q22;q22)",
+      "RUNX1-RUNX1T1 (AML1-ETO)",
+      "AML with maturation (M2)",
+      "Favourable; high complete remission rate"
+     ],
+     [
+      "inv(16)(p13.1q22)",
+      "CBFB-MYH11 fusion",
+      "Acute myelomonocytic (M4eo)",
+      "Favourable; abnormal marrow eosinophils"
+     ],
+     [
+      "11q23 abnormalities",
+      "KMT2A (MLL) gene rearrangements",
+      "Acute monoblastic (M5)",
+      "Adverse; associated with prior topoisomerase II inhibitors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted induction therapy for acute promyelocytic leukaemia pairs **all-trans retinoic acid** with arsenic trioxide, producing durable cures without conventional cytotoxic chemotherapy. Pharmacological concentrations of retinoic acid overcome the chimeric block, forcing malignant promyelocytes to differentiate into mature, short-lived neutrophils. Differentiation syndrome, characterized by fever, respiratory distress, and pulmonary infiltrates, is treated promptly with intravenous dexamethasone.",
+   "say": "Treat acute promyelocytic leukaemia with all-trans retinoic acid and arsenic trioxide. ATRA forces malignant promyelocytes to complete differentiation into mature neutrophils, curing over ninety percent of patients. Watch for differentiation syndrome, where expanding neutrophils flood the lungs with cytokines; treat it immediately with intravenous dexamethasone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ATRA Mechanism",
+     "points": [
+      "Forces terminal myeloid maturation",
+      "Degrades PML-RARA fusion oncoprotein",
+      "Resolves coagulopathy within 48 to 72 hours",
+      "Curative without cytotoxic chemotherapy"
+     ]
+    },
+    "right": {
+     "title": "Differentiation Syndrome",
+     "points": [
+      "Unexplained fever and weight gain",
+      "Pulmonary infiltrates and pleuropericardial effusions",
+      "Episodic hypotension and acute renal failure",
+      "Immediate therapy with intravenous dexamethasone"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which morphological structure in blast cytoplasm conclusively confirms myeloid rather than lymphoid leukaemia?",
+   "options": [
+    "Auer rod",
+    "Dohle body",
+    "Russell body",
+    "Birbeck granule"
+   ],
+   "correct": 0,
+   "explain": "Auer rods are needle-shaped crystalline inclusions of fused azurophilic granules containing myeloperoxidase, pathognomonic of myeloblasts in AML."
+  },
+  {
+   "q": "What reciprocal chromosomal translocation defines acute promyelocytic leukaemia (AML M3)?",
+   "options": [
+    "t(15;17)(q22;q12)",
+    "t(8;21)(q22;q22)",
+    "t(9;22)(q34;q11)",
+    "t(11;14)(q13;q32)"
+   ],
+   "correct": 0,
+   "explain": "The t(15;17)(q22;q12) translocation fuses PML on chromosome 15 with RARA on chromosome 17, creating the chimeric oncoprotein responsive to ATRA."
+  }
+ ]
+}

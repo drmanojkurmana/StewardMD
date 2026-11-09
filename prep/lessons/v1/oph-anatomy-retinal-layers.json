@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-anatomy-retinal-layers",
+ "subject": "ophthalmology",
+ "module": "oph-anatomy",
+ "title": "Retinal Layers",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **retinal layers** stack ten histological layers from pigment epithelium outside to internal limiting membrane inside, with light passing through transparent inner layers to reach photoreceptors last. This inverted design works because inner retina is transparent and pigment epithelium nourishes outer retina from choroid. Layer knowledge localises disease: outer lesions disturb photoreceptors, inner lesions disturb ganglion output to brain.",
+   "say": "Ten histological layers stack together from pigment epithelium outside to internal limiting membrane inside. Light reaches photoreceptors last after passing through transparent inner layers. Layer anatomy therefore localises retinal disease functionally during assessment."
+  },
+  {
+   "tx": "From outside inward the sequence is pigment epithelium, photoreceptor rods and cones, external limiting membrane, outer nuclear layer, outer plexiform layer, inner nuclear layer, inner plexiform layer, ganglion cell layer, nerve fibre layer and internal limiting membrane. **Outer nuclear layer** holds photoreceptor cell bodies, while inner nuclear layer holds bipolar, horizontal and amacrine bodies, a symmetry that helps memory.",
+   "say": "The outer nuclear layer holds photoreceptor bodies while the inner nuclear layer holds bipolar bodies. Plexiform layers between them have the synapses that relay the signal inward. Sequence memory is based on the outside inward order of the retina.",
+   "vis": {
+    "kind": "table",
+    "title": "Retinal layers outside to inside",
+    "cols": [
+     "Order",
+     "Layer"
+    ],
+    "rows": [
+     [
+      "Outer group",
+      "Pigment epithelium, photoreceptors, outer nuclear"
+     ],
+     [
+      "Middle group",
+      "Outer plexiform, inner nuclear, inner plexiform"
+     ],
+     [
+      "Inner group",
+      "Ganglion cells, nerve fibres, limiting membrane"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **retinal pigment epithelium** phagocytoses shed photoreceptor discs daily, recycles visual pigment, absorbs stray light and pumps fluid from subretinal space to keep retina attached. Its failure produces drusen, atrophy and detachment predisposition across macular diseases. Barrier function of its tight junctions forms the outer blood retinal barrier, paired with retinal vascular endothelium as the inner barrier.",
+   "say": "Pigment epithelium has daily recycling of shed discs and continuous fluid pumping to maintain retinal attachment. Failure therefore gives drusen, atrophy and detachment predisposition across macular diseases. Tight junctions between its cells form the outer blood barrier.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pigment epithelium daily work",
+    "nodes": [
+     {
+      "id": "shed",
+      "label": "Photoreceptors shed discs"
+     },
+     {
+      "id": "phag",
+      "label": "Epithelium phagocytoses discs"
+     },
+     {
+      "id": "rec",
+      "label": "Visual pigment recycled"
+     },
+     {
+      "id": "pump",
+      "label": "Fluid pumped, retina attached"
+     }
+    ],
+    "edges": [
+     [
+      "shed",
+      "phag"
+     ],
+     [
+      "phag",
+      "rec"
+     ],
+     [
+      "rec",
+      "pump"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Photoreceptors** divide labour: about one hundred twenty million rods serve dim light and periphery without colour, while six million cones serve daylight, colour and central acuity concentrated at fovea. Phototransduction converts light to graded potentials without action potentials, a graded system refined by horizontal and amacrine lateral processing. Rod disease night blinds first, cone disease day blinds and colour blinds first.",
+   "say": "Rods serve dim light and peripheral vision while cones serve daylight colour and central acuity. Graded potentials replace action potentials during phototransduction in the outer retina. Rod disease therefore gives night blindness first while cone disease gives day blindness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rods",
+     "points": [
+      "Dim light and periphery",
+      "No colour vision",
+      "Failure night blinds first"
+     ]
+    },
+    "right": {
+     "title": "Cones",
+     "points": [
+      "Daylight, colour and acuity",
+      "Concentrated at fovea",
+      "Failure day and colour blinds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bipolar cells relay photoreceptor signal to **ganglion cells**, whose axons form nerve fibre layer, exit at optic disc and carry the only retinal output as action potentials to brain. Amacrine and horizontal cells modulate laterally in plexiform layers, sharpening contrast before output. Retinal detachment separates photoreceptors from pigment epithelium at the subretinal plane, starving outer retina while inner retina survives on retinal vessels.",
+   "say": "Ganglion cell axons together give the sole retinal output to the brain as action potentials along the nerve. Lateral cells in the plexiform layers give contrast sharpening before any output leaves the eye. Detachment gives starvation of the outer retina selectively while inner retina survives on retinal vessels.",
+   "vis": {
+    "kind": "table",
+    "title": "Detachment layer logic",
+    "cols": [
+     "Plane",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Subretinal split",
+      "Photoreceptors starved"
+     ],
+     [
+      "Inner survival",
+      "Retinal vessels sustain"
+     ],
+     [
+      "Repair goal",
+      "Reappose pigment contact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dual circulation matches layers: choroid supplies outer retina including photoreceptors, retinal vessels supply inner retina to inner nuclear layer. Central retinal artery occlusion therefore pales inner retina while outer survives initially, producing cherry red spot at fovea where inner layers are absent. **Cherry red spot** is thus a layer sign, not merely a colour description memorised blindly.",
+   "say": "The choroid supplies outer retina while retinal vessels supply the inner layers separately. Arterial occlusion therefore pales inner retina while the foveal cherry spot remains visible. Layer circulation explains this classic sign mechanically for examinations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/retinal-artery-occlusion-fig1.webp",
+    "alt": "Fundus photograph showing diffuse retinal opacification, attenuated retinal vessels, and a cherry-red spot at the fovea.",
+    "caption": "Retinal opacification and cherry-red spot in central retinal artery occlusion. Image: 18mlk7, CC BY-SA 4.0.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **external limiting membrane** is not a true membrane but a junctional belt between photoreceptors and Muller cells, whose integrity on optical coherence tomography predicts visual recovery after macular surgery. Muller cells span full retinal thickness as structural and metabolic scaffolding. Tomography layer bands have turned histology into daily clinic language, so layer names are read on scans, not only slides.",
+   "say": "Junctional belt integrity on tomography gives prediction of visual recovery after macular surgery in many patients. Muller cells span the full retinal thickness as structural and metabolic scaffolding. Scan bands have made histology part of daily clinic language.",
+   "vis": {
+    "kind": "table",
+    "title": "Layer signs on tomography",
+    "cols": [
+     "Band",
+     "Meaning when lost"
+    ],
+    "rows": [
+     [
+      "Ellipsoid zone",
+      "Photoreceptor injury, poor recovery"
+     ],
+     [
+      "External limiting membrane",
+      "Structural failure, guarded prognosis"
+     ],
+     [
+      "Nerve fibre layer thinning",
+      "Ganglion loss in glaucoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical localisation by layer runs outer to inner in practice. Pigment and photoreceptor disease gives night or colour symptoms with outer scan loss, bipolar and inner nuclear disease splits tomography in vascular and inflammatory patterns, and ganglion loss thins nerve fibre in glaucoma. **Visual field** shape then confirms layer prediction, scotoma depth matching the injured stratum functionally.",
+   "say": "Outer retinal disease gives night or colour symptoms together with outer scan loss on tomography. Ganglion cell loss gives thinning of the nerve fibre layer in glaucoma patterns progressively. Field defect depth gives functional confirmation of the layer prediction.",
+   "vis": null
+  },
+  {
+   "tx": "Layer summary for examinations is circulation plus output. Choroid feeds outside, retinal vessels feed inside, rods night, cones day, ganglion cells output. Detachment splits at subretinal plane, cherry spot exposes foveal thinness and tomography bands grade photoreceptor health. **Ten layers** learned as three functional groups survive longer than rote sequence alone in applied questions.",
+   "say": "Circulation together with output gives organisation of ten layers into three functional groups for memory. Detachment gives subretinal splitting of photoreceptors while the cherry spot exposes foveal thinness. Tomography bands give grading of photoreceptor health during follow up.",
+   "vis": {
+    "kind": "table",
+    "title": "Retina functional groups",
+    "cols": [
+     "Group",
+     "Job"
+    ],
+    "rows": [
+     [
+      "Outer",
+      "Capture light, pigment support"
+     ],
+     [
+      "Middle",
+      "Relay and sharpen signal"
+     ],
+     [
+      "Inner",
+      "Output to brain via ganglion axons"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Retinal layer order",
+   "b": "Pigment epithelium, photoreceptors, outer nuclear, outer plexiform, inner nuclear, inner plexiform, ganglion, nerve fibre, limiting membrane."
+  },
+  {
+   "f": "Cherry red spot layer logic",
+   "b": "Inner retina pales after arterial occlusion while choroid fed fovea stays red where inner layers are absent."
+  },
+  {
+   "f": "Pigment epithelium jobs",
+   "b": "Phagocytoses discs, recycles pigment, pumps fluid for attachment, forms outer blood barrier."
+  }
+ ],
+ "keys": [
+  "Choroid feeds outer retina, retinal vessels feed inner",
+  "Ganglion axons are the only retinal output",
+  "Detachment splits photoreceptors from pigment epithelium"
+ ]
+}

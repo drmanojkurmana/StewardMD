@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "id": "oph-anatomy-orbital-walls",
+ "subject": "ophthalmology",
+ "module": "oph-anatomy",
+ "title": "Orbital Walls and Annulus of Zinn",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **orbital walls** form a bony pyramid from seven bones that protects the globe while leaving medial and inferior walls paper thin. The medial wall, lamina papyracea of ethmoid, fractures into ethmoid sinuses, while the floor over maxillary sinus gives way in blowout injuries. Roof separates orbit from anterior cranial fossa and lateral wall from temporal fossa, so each wall predicts a distinct injury pattern.",
+   "say": "Seven bones together form a protective pyramid whose medial and inferior walls are remarkably thin. These thin walls are prone to fracture into adjacent sinuses after trauma characteristically. Each orbital wall has a distinct injury pattern during clinical assessment."
+  },
+  {
+   "tx": "The **annulus of Zinn** is the common tendinous ring at the orbital apex from which the four rectus muscles arise, encircling the optic canal and middle superior orbital fissure. Structures inside the ring include optic nerve, ophthalmic artery and third and sixth nerves, while the trochlear nerve and frontal division pass outside. Apex lesions therefore split clinically by ring anatomy into vision threatening and sparing patterns.",
+   "say": "A common tendinous ring at the orbital apex gives origin to the four rectus muscles. The optic nerve passes inside the ring together with the third and sixth cranial nerves. Apex lesions therefore separate into vision threatening and vision sparing patterns anatomically.",
+   "vis": {
+    "kind": "table",
+    "title": "Annulus of Zinn contents",
+    "cols": [
+     "Position",
+     "Structures"
+    ],
+    "rows": [
+     [
+      "Inside ring",
+      "Optic nerve, ophthalmic artery, third and sixth nerves"
+     ],
+     [
+      "Outside ring",
+      "Trochlear nerve, frontal and lacrimal divisions"
+     ],
+     [
+      "Clinical split",
+      "Inside lesions threaten vision early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superior orbital fissure transmits third, fourth, ophthalmic trigeminal and sixth nerves with ophthalmic veins, so fissure syndromes palsy eye movements and forehead sensation while sparing vision initially. Optic canal involvement adds visual loss and upgrades the lesion to orbital apex syndrome. **Vision sparing** in a multiple nerve palsy therefore localises to fissure, while vision loss localises to apex, a distinction examinations repeat.",
+   "say": "Fissure lesions palsy movements and forehead sensation while vision is spared initially. Canal involvement adds visual loss and indicates apex syndrome. Vision status localises apex versus fissure lesions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superior orbital fissure syndrome",
+     "points": [
+      "Multiple movement palsies",
+      "Forehead sensory loss",
+      "Vision spared initially"
+     ]
+    },
+    "right": {
+     "title": "Orbital apex syndrome",
+     "points": [
+      "Fissure signs plus visual loss",
+      "Optic nerve involved",
+      "Emergency imaging required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The orbital floor blowout and medial wall fracture both decompress the orbit into sinuses, sometimes protecting the globe at the cost of muscle entrapment and enophthalmos. Children trapdoor fractures need urgent release, as in the ENT trauma lesson, while adult defects declare by double vision and sunken globe. **Computed tomography** in coronal plane gives the operative map for both walls in one acquisition.",
+   "say": "Floor and medial fractures together give decompression of the orbit into adjacent sinuses at the cost of entrapment. Childhood trapdoor injury therefore needs urgent release for muscle salvage before ischaemia. Coronal scanning gives the operative map for both walls.",
+   "vis": {
+    "kind": "table",
+    "title": "Blowout assessment",
+    "cols": [
+     "Sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Child trapdoor",
+      "Urgent release"
+     ],
+     [
+      "Diplopia adult",
+      "CT and ophthalmology"
+     ],
+     [
+      "Enophthalmos",
+      "Operative map review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Orbital compartments explain emergency canthotomy: the orbit is a closed box where haemorrhage raises pressure until retinal perfusion fails, and releasing lateral canthal tendon vents the box. Rising pain, proptosis, tense globe and visual loss after trauma or surgery define compartment syndrome. **Lateral canthotomy** at the bedside saves vision while awaiting theatre, so anatomy of the lateral wall becomes emergency knowledge, not trivia.",
+   "say": "Closed box pressure from orbital haemorrhage threatens retinal perfusion after trauma or surgery. Tense proptosis with visual loss therefore defines compartment syndrome during clinical examination. Bedside canthal release saves vision while theatre is prepared.",
+   "vis": {
+    "kind": "flow",
+    "title": "Orbital compartment response",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Orbital haemorrhage expands"
+     },
+     {
+      "id": "press",
+      "label": "Pressure threatens retina"
+     },
+     {
+      "id": "canth",
+      "label": "Release lateral canthus"
+     },
+     {
+      "id": "theatre",
+      "label": "Definitive theatre care"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "press"
+     ],
+     [
+      "press",
+      "canth"
+     ],
+     [
+      "canth",
+      "theatre"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Periorbita lines the walls and continues as optic nerve sheath intracranially, which is why subperiosteal abscess lifts it cleanly and meningitis risk accompanies apex infection. At the orbital margin it thickens into arcus marginalis, the surgical landmark for anterior approaches. **Subperiosteal collections** from ethmoid sinusitis collect medially under this layer, linking wall anatomy to the Chandler staging already covered in ENT.",
+   "say": "Bony lining continues as optic sheath and explains clean subperiosteal lifting. Medial collections follow ethmoid infection under this layer. Wall anatomy links directly to orbital complication staging."
+  },
+  {
+   "tx": "The nasolacrimal duct drains through the medial inferior orbit to the inferior meatus, so medial wall surgery and dacryocystorhinostomy share anatomical hazards including angular vessels and ethmoid air cells. Epiphora after medial fracture or surgery signals duct injury until lacrimal assessment proves otherwise. **Syringing and probing** localise obstruction level before any reconstructive bypass is planned.",
+   "say": "Tear drainage passes through the medial orbit toward the inferior meatus of the nose. Watering after medial injury therefore indicates duct damage until lacrimal assessment proves otherwise. Obstruction level localisation always precedes bypass planning in clinic.",
+   "vis": {
+    "kind": "table",
+    "title": "Wall injury patterns",
+    "cols": [
+     "Wall",
+     "Typical injury consequence"
+    ],
+    "rows": [
+     [
+      "Medial lamina",
+      "Ethmoid entry, medial abscess route"
+     ],
+     [
+      "Floor",
+      "Blowout, muscle entrapment"
+     ],
+     [
+      "Roof",
+      "Cranial fossa communication risk"
+     ],
+     [
+      "Lateral",
+      "Canthotomy vent site"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Orbital apex crowding by thyroid muscle enlargement, tumour or infection compresses the optic nerve where no expansion room exists, producing dyschromatopsia before acuity falls in many compressive cases. Colour testing therefore monitors apex disease more sensitively than acuity charts alone. **Decompression surgery** removes medial and floor bone to create expansion room when steroids fail compressive optic neuropathy.",
+   "say": "Apex crowding compresses optic nerve without expansion room available. Colour loss precedes acuity loss in compressive disease monitoring. Bone removal creates expansion room surgically.",
+   "vis": null
+  },
+  {
+   "tx": "Examination anchors for the orbit are four walls, one ring and two syndromes. Thin walls fracture medially and inferiorly, the ring splits apex contents, fissure spares vision and apex takes it. Compartment pressure vents laterally at the bedside. **Colour vision** is the apex monitor that acuity cannot replace in compressive disease surveillance.",
+   "say": "Four walls together with one ring and two syndromes give a complete organisation of orbital anatomy for examinations. Fissure lesions are vision sparing while apex involvement removes vision through optic nerve injury. Colour testing has greater sensitivity than acuity for optic compression.",
+   "vis": {
+    "kind": "table",
+    "title": "Orbit examination anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Thinnest walls",
+      "Medial lamina and floor"
+     ],
+     [
+      "Ring contents",
+      "Optic nerve inside annulus"
+     ],
+     [
+      "Vision split",
+      "Fissure spares, apex loses"
+     ],
+     [
+      "Emergency vent",
+      "Lateral canthotomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Annulus of Zinn contents",
+   "b": "Inside: optic nerve, ophthalmic artery, third and sixth nerves. Outside: trochlear and frontal divisions."
+  },
+  {
+   "f": "Fissure versus apex syndrome",
+   "b": "Fissure palsies spare vision; apex adds optic nerve visual loss and needs emergency imaging."
+  },
+  {
+   "f": "Orbital compartment rescue",
+   "b": "Bedside lateral canthotomy vents the closed orbit while awaiting theatre."
+  }
+ ],
+ "keys": [
+  "Medial and floor walls are thinnest and fracture first",
+  "Vision loss localises to orbital apex",
+  "Colour loss monitors optic compression earliest"
+ ]
+}

@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-herpes-simplex-keratitis",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Herpes Simplex Keratitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Herpes simplex keratitis** reactivates latent virus from trigeminal ganglion down corneal nerves, producing epithelial, stromal and endothelial disease layers with different treatments. Recurrence follows fever, stress, ultraviolet or steroid exposure in susceptible corneas. Reduced corneal sensation is bedside clue separating viral from bacterial pain patterns, sensation lost where bacterial ulcer screams.",
+   "say": "Ganglion reactivation together gives recurrent corneal disease by layer in herpes simplex keratitis characteristically. Reduced sensation gives bedside separation from bacterial pain. Layer gives treatment difference."
+  },
+  {
+   "tx": "Epithelial disease gives dendritic ulcer next lesson, stromal disease gives immune infiltrate and oedema beneath intact or ulcerated epithelium, endothelial disease gives disciform oedema with keratic precipitates localised below. **Layer classification** therefore precedes antiviral versus steroid decisions, same virus opposite drugs by depth. Misclassification is classic harm: steroid on dendrite enlarges geographic ulcer.",
+   "say": "Layer classification together gives opposite drug decisions in herpes disease at slit lamp assessment in clinic. Steroid on epithelium gives geographic enlargement harm. Depth assessment precedes prescribing always.",
+   "vis": {
+    "kind": "table",
+    "title": "Herpes layers and logic",
+    "cols": [
+     "Layer",
+     "Disease logic"
+    ],
+    "rows": [
+     [
+      "Epithelial dendrite",
+      "Live virus, antiviral, no steroid"
+     ],
+     [
+      "Stromal immune",
+      "Inflammation, steroid with cover"
+     ],
+     [
+      "Endothelial disciform",
+      "Oedema patch, steroid with cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disciform keratitis** is round endothelial oedema disc with folds and precipitates confined below oedema, usually immune mediated after epithelial episodes. Pressure may rise from trabeculitis company needing pressure therapy parallel. Disc shape and sensation loss together separate it from bacterial abscess round infiltrates with epithelial defect and severe pain.",
+   "say": "Round oedema disc together gives endothelial herpes pattern at slit lamp in clinic assessment characteristically. Sensation loss gives separation from bacterial abscess. Pressure company gives parallel therapy need.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Disciform herpes",
+     "points": [
+      "Round oedema, sensation reduced",
+      "Precipitates below disc only",
+      "Steroid with antiviral cover"
+     ]
+    },
+    "right": {
+     "title": "Bacterial abscess",
+     "points": [
+      "Infiltrate with epithelial defect",
+      "Severe pain, sensation normal",
+      "Scrape and fortified therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neurotrophic ulcer after repeated herpes or zoster leaves anaesthetic cornea failing to heal despite quiet inflammation, managed by lubrication, lid closure strategies and growth promoting therapies in specialist care. Painless non healing defect is its paradox presentation. **Sensation testing** with wisp before staining belongs to every non healing ulcer workup in cornea clinics.",
+   "say": "Anaesthetic failure together gives painless non healing defect paradox in neurotrophic disease at follow up in clinic. Sensation testing gives workup completion in ulcers. Closure strategies give healing support.",
+   "vis": {
+    "kind": "flow",
+    "title": "Herpes recurrence pathway",
+    "nodes": [
+     {
+      "id": "lat",
+      "label": "Ganglion latency established"
+     },
+     {
+      "id": "trig",
+      "label": "Trigger reactivates virus"
+     },
+     {
+      "id": "layer",
+      "label": "Layer disease declared"
+     },
+     {
+      "id": "treat",
+      "label": "Layer matched therapy"
+     }
+    ],
+    "edges": [
+     [
+      "lat",
+      "trig"
+     ],
+     [
+      "trig",
+      "layer"
+     ],
+     [
+      "layer",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prophylactic oral antiviral suppression serves frequently recurrent or grafted herpes corneas where each recurrence scars cumulatively toward transplantation. Suppression duration reviews yearly with renal and adherence context. **Recurrence counting** therefore belongs in cornea history as formally as ulcer size charting in acute visits.",
+   "say": "Suppression therapy together gives recurrence prevention in frequently relapsing herpes corneas at specialist review over years. Recurrence counting gives history formality in clinics. Graft protection gives suppression indication additionally."
+  },
+  {
+   "tx": "Zoster keratitis by nasociliary nerve gives Hutchinson sign vesicles on nose tip predicting ocular involvement, uveitis and stromal disease in immunocompromised elderly. Vaccination prevention and early systemic therapy windows separate zoster pathways from simplex recurrence management. **Nose tip vesicles** remain highest yield external sign in herpes eye triage.",
+   "say": "Nose tip vesicles together give ocular involvement prediction in zoster triage at presentation in emergency clinics always. Early systemic therapy gives window value. Vaccination gives prevention additionally.",
+   "vis": {
+    "kind": "table",
+    "title": "Simplex versus zoster clues",
+    "cols": [
+     "Feature",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Recurrent dendrite youth",
+      "Simplex pattern first"
+     ],
+     [
+      "Dermatomal vesicles elderly",
+      "Zoster pattern first"
+     ],
+     [
+      "Nose tip vesicles",
+      "Ocular zoster likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Steroid cover principle: immune stromal or endothelial disease needs steroid for vision, live epithelial disease needs antiviral alone, every steroid course in herpes cornea carries antiviral cover against reactivation. Cover continues while steroid tapers and shortly beyond in protocols. **Cover phrase** is prescription safety sentence examinations quote.",
+   "say": "Cover principle together gives steroid safety in herpes cornea prescribing at every clinic visit without exception. Epithelial disease gives antiviral alone direction. Taper duration gives cover duration.",
+   "vis": {
+    "kind": "table",
+    "title": "Herpes prescribing safety",
+    "cols": [
+     "Situation",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Dendrite present",
+      "Antiviral, steroid forbidden"
+     ],
+     [
+      "Stromal immune active",
+      "Steroid plus antiviral cover"
+     ],
+     [
+      "Frequent recurrence",
+      "Suppression review yearly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: sensation lost, layers decide drugs, disciform rounds and nose tip warns. Steroid harms epithelium, helps stroma with cover, scars count toward prophylaxis. **Geographic enlargement** after steroid is preventable harm history in every herpes clerking. Recurrence counting in the history therefore decides suppression before the next scar forms.",
+   "say": "Sensation loss together gives herpes direction while layer gives drug decision at slit lamp in clinic reliably. Cover gives steroid safety in immune disease. Recurrence counting gives prophylaxis timing.",
+   "vis": {
+    "kind": "table",
+    "title": "Herpes anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Sensation reduced",
+      "Viral over bacterial pattern"
+     ],
+     [
+      "Dendrite active",
+      "No steroid allowed"
+     ],
+     [
+      "Stroma inflamed",
+      "Steroid only with cover"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Herpes layer drug rule",
+   "b": "Epithelial dendrite antiviral without steroid; stromal or endothelial steroid only with antiviral cover."
+  },
+  {
+   "f": "Disciform keratitis",
+   "b": "Round endothelial oedema disc with precipitates below and reduced sensation."
+  },
+  {
+   "f": "Hutchinson sign",
+   "b": "Nose tip vesicles by nasociliary nerve predict ocular zoster involvement."
+  }
+ ],
+ "keys": [
+  "Reduced sensation separates viral ulcers",
+  "Steroid on dendrite causes geographic ulcer",
+  "Recurrences scar cumulatively to graft"
+ ]
+}

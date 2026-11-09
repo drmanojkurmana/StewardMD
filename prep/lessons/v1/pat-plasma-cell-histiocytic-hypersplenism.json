@@ -1,0 +1,294 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-plasma-cell-histiocytic",
+  "key": null,
+  "title": "Hypersplenism, Splenomegaly, and Thymoma-Associated Syndromes",
+  "steps": [
+    {
+      "tx": "The clinical syndrome of **hypersplenism** is defined by a classical clinicopathological triad: enlargement of the spleen (splenomegaly), reduction of one or more peripheral blood cell lineages (anaemia, leukopenia, thrombocytopenia), and compensatory hypercellularity of the bone marrow. The enlarged splenic reticuloendothelial filter excessively destroys circulating blood cells or sequesters them within congested red pulp sinusoids. A definitive diagnostic criterion is the complete haematological correction of all peripheral cytopenias following therapeutic surgical splenectomy, proving splenic hyperfunction.",
+      "say": "Hypersplenism is a clinical syndrome defined by three features: splenomegaly, peripheral cytopenias affecting one or more blood lineages, and compensatory marrow hyperplasia. The expanded splenic vascular bed excessively filters, pools, and destroys normal blood elements. A key diagnostic criterion is that surgical removal of the enlarged spleen completely corrects the peripheral cytopenias, confirming the spleen was the culprit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypersplenism Syndrome",
+          "points": [
+            "Splenomegaly with peripheral cytopenias",
+            "Marrow hypercellularity showing compensatory hyperplasia",
+            "Cytopenias completely resolve after splenectomy",
+            "Mechanisms: splenic pooling, sequestration, phagocytosis"
+          ]
+        },
+        "right": {
+          "title": "Primary Bone Marrow Failure",
+          "points": [
+            "Cytopenias secondary to intrinsic marrow hypoplasia",
+            "Hypocellular marrow with fat replacement (>70%)",
+            "Splenomegaly is typically absent",
+            "Splenectomy fails to correct blood counts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Under normal physiological conditions, the human spleen stores roughly thirty percent of the total circulating platelet pool and minimal red blood cells. In massive splenomegaly, **splenic platelet pooling** expands enormously, sequestering up to eighty to ninety percent of total body platelets within sluggish, congested venous sinuses. Simultaneously, red cells become trapped within the acidic, hypoglycaemic cords of Billroth, where prolonged transit time exhausts erythrocyte ATP reserves, reduces membrane deformability, and exposes cells to premature phagocytosis by resident cordal macrophages.",
+      "say": "A healthy spleen normally sequesters about one third of the body's platelets. When the spleen enlarges massively, its vascular capacity expands, trapping up to ninety percent of all platelets inside the red pulp. Red blood cells spend prolonged transit times in the hypoxic, glucose-depleted cords of Billroth, exhausting their energy reserves, losing membrane flexibility, and falling prey to hungry splenic macrophages.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Splenic Enlargement"
+          },
+          {
+            "id": "s2",
+            "label": "Vascular Stasis in Cords"
+          },
+          {
+            "id": "s3",
+            "label": "ATP Depletion & Spheroid Change"
+          },
+          {
+            "id": "s4",
+            "label": "Macrophage Phagocytosis"
+          },
+          {
+            "id": "s5",
+            "label": "Peripheral Cytopenias (Hypersplenism)"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2",
+            "Red Pulp Congestion"
+          ],
+          [
+            "s2",
+            "s3",
+            "Hypoxia & Acidosis"
+          ],
+          [
+            "s3",
+            "s4",
+            "Loss of Deformability"
+          ],
+          [
+            "s4",
+            "s5",
+            "Consumption & Sequestration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Massive splenomegaly is clinically defined when the lower edge of the spleen crosses the abdominal midline or extends past the umbilicus into the right lower quadrant, corresponding to an anatomical spleen weight exceeding one thousand grams. The differential diagnosis of **massive splenomegaly causes** is narrow and high-yield for examinations. Primary myelofibrosis and chronic myeloid leukaemia represent the leading myeloproliferative etiologies, followed by chronic visceral leishmaniasis (kala-azar), hyperreactive malarial splenomegaly, Gaucher disease (lysosomal glucocerebrosidase deficiency), and splenic marginal zone lymphoma.",
+      "say": "Massive splenomegaly occurs when the spleen crosses the umbilicus into the right lower quadrant, weighing over one thousand grams. The differential is very specific: in haematology, think of primary myelofibrosis and chronic myeloid leukaemia. In infectious disease, chronic visceral leishmaniasis and hyperreactive malarial splenomegaly are classic. In metabolic storage disorders, Gaucher disease produces colossal splenomegaly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease Category",
+          "Specific Etiology",
+          "Pathophysiological Mechanism",
+          "Diagnostic Hallmark"
+        ],
+        "rows": [
+          [
+            "Myeloproliferative",
+            "Primary Myelofibrosis",
+            "Extramedullary haematopoiesis in red pulp",
+            "Teardrop cells, dry tap, reticulin fibrosis"
+          ],
+          [
+            "Myeloproliferative",
+            "Chronic Myeloid Leukaemia",
+            "Massive granulocytic infiltration of cords",
+            "BCR-ABL1 translocation, low LAP score"
+          ],
+          [
+            "Infectious Parasitic",
+            "Visceral Leishmaniasis (Kala-Azar)",
+            "Reticuloendothelial hyperplasia in red pulp",
+            "LD bodies inside splenic macrophages"
+          ],
+          [
+            "Lysosomal Storage",
+            "Gaucher Disease (Type 1)",
+            "Accumulation of glucocerebroside in histiocytes",
+            "Wrinkled tissue paper Gaucher cells"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following surgical splenectomy or functional autosplenectomy in sickle cell anaemia, peripheral blood smears display distinctive morphological erythrocyte abnormalities reflecting lost splenic culling and pitting functions. Pathognomonic **Howell-Jolly nuclear remnants** appear as small, round, smooth, dark purple-black nuclear DNA fragments within circulating red cells. Pappenheimer bodies (siderotic iron granules) and Heinz bodies (denatured oxidized haemoglobin) persist, alongside target cells and acanthocytes resulting from excess unculled cell membrane lipids, accompanied by baseline leukocytosis and reactive thrombocytosis.",
+      "say": "When the spleen is removed or undergoes autosplenectomy, the blood smear reveals the loss of splenic culling and pitting. The classic hallmark is the Howell-Jolly body, a smooth, round, purple nuclear DNA remnant inside red cells that the spleen normally plucks out. You will also see Pappenheimer iron granules, target cells with redundant membranes, and persistent mild leukocytosis and thrombocytosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Post-Splenectomy Smear Signs",
+          "points": [
+            "Howell-Jolly bodies (retained DNA remnants)",
+            "Pappenheimer bodies (iron granules on Prussian blue)",
+            "Target cells and acanthocytes (excess membrane)",
+            "Persistent baseline thrombocytosis (>400,000/uL)"
+          ]
+        },
+        "right": {
+          "title": "Normal Splenic Culling Function",
+          "points": [
+            "Pits intraerythrocytic inclusions without destroying cell",
+            "Culled aged or rigid erythrocytes in cords of Billroth",
+            "Maintains normal smooth biconcave erythrocyte disc",
+            "Regulates circulating platelet pool to roughly 70%"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Thymoma is the most common primary neoplasm of the anterior mediastinum in adult patients, originating from thymic epithelial cells rather than lymphoid elements. Histologically classified by the World Health Organization into types A, AB, B1, B2, and B3 based on epithelial atypia and proportion of non-neoplastic immature T-lymphocytes, thymomas are characterized biologically by local invasiveness into the pericardium, great vessels, and pleura. Approximately one-third of **anterior mediastinal thymomas** are discovered incidentally on chest radiography, while another third present with compressive respiratory symptoms.",
+      "say": "Thymomas are the most frequent anterior mediastinal tumors in adults, arising from neoplastic thymic epithelial cells interspersed with benign, non-clonal immature T-lymphocytes. The WHO classifies them from benign-behaving type A through increasingly aggressive type B subtypes to thymic carcinomas. While thirty percent are discovered incidentally on imaging, another third cause chest pain, cough, or superior vena cava compression.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thymoma-fig1.webp",
+        "alt": "Computed tomography scan and histopathology of anterior mediastinal thymoma",
+        "caption": "Thymoma histology, the anterior mediastinal tumour linked to myasthenia gravis."
+      }
+    },
+    {
+      "tx": "Thymomas demonstrate a striking, unique propensity for generating paraneoplastic autoimmune disorders through aberrant intratumoural T-cell positive and negative selection. Thirty to forty-five percent of thymoma patients develop **myasthenia gravis paraneoplasia**, mediated by autoantibodies against post-synaptic nicotinic acetylcholine receptors (anti-AChR) at the neuromuscular junction, presenting with fluctuating ptosis, diplopia, and proximal muscle weakness. Thymomas fail to express the autoimmune regulator (AIRE) protein and express abnormal major histocompatibility complexes, discharging autoreactive T-cell clones into the systemic circulation.",
+      "say": "Thymomas are famous for driving severe autoimmune paraneoplastic syndromes. The most common is myasthenia gravis, occurring in up to forty-five percent of thymoma patients. Because neoplastic thymic epithelium fails to express the AIRE gene properly, self-reactive T-cells escape negative selection and enter the periphery, stimulating B-cells to produce pathogenic autoantibodies against post-synaptic acetylcholine receptors at the motor endplate.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/good-syndrome-fig1.webp",
+        "alt": "Clinical and laboratory features of thymoma-associated autoimmune and immunodeficiency syndromes",
+        "caption": "Good syndrome linking thymoma to hypogammaglobulinaemia and opportunistic infection."
+      }
+    },
+    {
+      "tx": "Approximately five percent of thymoma cases associate with **pure red cell aplasia**, an acquired autoimmune disorder characterized by severe isolated failure of erythropoiesis. Autoantibodies or cytotoxic T-cells selectively destroy early erythroid colony-forming units (CFU-E) or neutralise circulating erythropoietin. Patients present with severe normocytic normochromic anaemia, absolute reticulocytopenia under one percent, normal white blood cell counts, and normal platelet counts. Bone marrow examination confirms the diagnosis by demonstrating profound erythroid hypoplasia with less than five percent erythroblasts alongside intact granulocytic and megakaryocytic lineages.",
+      "say": "Pure red cell aplasia is a rare autoimmune complication of thymoma where cytotoxic T-cells or autoantibodies selectively attack erythroid precursors in the bone marrow. Patients present with profound normocytic anaemia and absolute reticulocytopenia, while platelet and white cell counts remain normal. Bone marrow examination proves the diagnosis, showing a virtually total absence of red cell precursors amidst preserved granulocytes and megakaryocytes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Pure Red Cell Aplasia",
+          "Aplastic Anaemia",
+          "Myelodysplastic Syndrome"
+        ],
+        "rows": [
+          [
+            "Peripheral Blood Profile",
+            "Severe isolated anaemia; reticulocytes <1%",
+            "Pancytopenia (anaemia, neutropenia, platelets)",
+            "Bicytopenia or pancytopenia; macrocytosis"
+          ],
+          [
+            "Bone Marrow Erythroblasts",
+            "Virtually absent (<5% of nucleated cells)",
+            "Markedly reduced or absent",
+            "Hypercellular with prominent dyserythropoiesis"
+          ],
+          [
+            "Granulocytes & Platelets",
+            "Normal counts and normal morphology",
+            "Severely reduced; hypocellular marrow",
+            "Dysplastic morphology (pseudo-Pelger-Huet)"
+          ],
+          [
+            "Primary Associations",
+            "Thymoma, Parvovirus B19, autoimmune",
+            "Idiopathic, drugs, toxins, viral hepatitis",
+            "Age >70 years, prior chemotherapy, radiation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The concurrence of thymoma with adult-onset immunodeficiency defines **Good syndrome immunodeficiency**, an uncommon condition marked by profound humoral and cellular immune defects. Patients present in their fourth to sixth decades with paradoxical combination of thymoma, severe hypogammaglobulinaemia, marked reduction or total absence of circulating B-lymphocytes, and inverted CD4-to-CD8 T-cell ratios. Clinically, patients suffer recurrent, severe sinopulmonary encapsulated bacterial infections, chronic diarrhoea caused by Giardia lamblia, and opportunistic fungal or viral infections including cytomegalovirus and mucocutaneous candidiasis.",
+      "say": "Good syndrome is a distinct adult-onset immunodeficiency seen in patients with thymoma. It is characterized by severe hypogammaglobulinaemia, a near total absence of circulating peripheral B-cells, and an inverted CD4-to-CD8 T-cell ratio. Patients develop severe, recurrent sinopulmonary bacterial infections, persistent Giardia diarrhoea, and opportunistic viral and fungal infections. Thymectomy does not reverse the immunodeficiency, so patients require lifelong immunoglobulin replacement.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g1",
+            "label": "Anterior Mediastinal Thymoma"
+          },
+          {
+            "id": "g2",
+            "label": "Absence of Peripheral B-Cells"
+          },
+          {
+            "id": "g3",
+            "label": "Severe Hypogammaglobulinaemia"
+          },
+          {
+            "id": "g4",
+            "label": "Recurrent Sinopulmonary Sepsis"
+          },
+          {
+            "id": "g5",
+            "label": "Lifelong IVIG Replacement Required"
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2",
+            "Marrow Maturation Arrest"
+          ],
+          [
+            "g2",
+            "g3",
+            "Failure of Antibody Synthesis"
+          ],
+          [
+            "g3",
+            "g4",
+            "Encapsulated Bacteria (Strep, Haemophilus)"
+          ],
+          [
+            "g4",
+            "g5",
+            "Thymectomy Does Not Reverse Defect"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What morphological red blood cell inclusion represents a nuclear DNA remnant pathognomonic of lost splenic culling function?",
+      "options": [
+        "Howell-Jolly body",
+        "Heinz body",
+        "Pappenheimer body",
+        "Dohle body"
+      ],
+      "correct": 0,
+      "explain": "Howell-Jolly bodies are smooth, round purple remnants of nuclear DNA that appear in red blood cells following splenectomy or autosplenectomy."
+    },
+    {
+      "q": "Which triad of clinical and laboratory features defines the diagnosis of hypersplenism?",
+      "options": [
+        "Splenomegaly, peripheral cytopenias, and compensatory bone marrow hypercellularity",
+        "Splenomegaly, thrombocytosis exceeding 1,000,000 / uL, and marrow reticulin fibrosis",
+        "Splenic infarction, elevated serum ferritin, and absolute reticulocytopenia",
+        "Hypertension, splenomegaly, and hypogammaglobulinaemia"
+      ],
+      "correct": 0,
+      "explain": "Hypersplenism is defined by splenomegaly, reduction in one or more peripheral blood cell lines, compensatory bone marrow hyperplasia, and correction of cytopenias by splenectomy."
+    },
+    {
+      "q": "What immunodeficiency disorder is classically associated with an anterior mediastinal thymoma, marked B-cell lymphopenia, and severe hypogammaglobulinaemia?",
+      "options": [
+        "Good syndrome",
+        "Wiskott-Aldrich syndrome",
+        "Severe combined immunodeficiency (SCID)",
+        "DiGeorge syndrome"
+      ],
+      "correct": 0,
+      "explain": "Good syndrome is an adult-onset immunodeficiency defined by the combination of thymoma, hypogammaglobulinaemia, and profound deficiency or absence of circulating B-lymphocytes."
+    }
+  ]
+}

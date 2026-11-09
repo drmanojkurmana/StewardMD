@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "id": "oph-orbit-dermoid-cyst",
+ "subject": "ophthalmology",
+ "module": "oph-orbit",
+ "title": "Dermoid Cyst, Enophthalmos and Exophthalmometry",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dermoid cyst** is congenital choristoma from ectoderm trapped at suture lines, classically superotemporal at frontozygomatic suture, a smooth painless childhood swelling slowly enlarging without inflammation. Deep orbital dermoids present later with proptosis, superficial ones as brow lumps in infants. Complete excision without rupture prevents keratin granulomatous inflammation that complicates spilled contents.",
+   "say": "Suture line trapping together gives congenital brow swelling in childhood dermoid characteristically at presentation in clinic. Superotemporal location gives classic site recognition for examiners. Intact excision gives rupture prevention need in surgery."
+  },
+  {
+   "tx": "**Enophthalmos** is sunken globe from expanded orbital volume after fracture, fat atrophy or silent sinus syndrome, opposite sign to proptosis measured by same instrument. Late blowout enophthalmos follows fat herniation and scar contraction despite early swelling masking it. Volume restoration by floor reconstruction follows measurement after oedema settles, timing shared with ENT trauma teaching.",
+   "say": "Sunken globe together gives volume expansion sign opposite to proptosis in measurement terms at exophthalmometry in clinic. Fracture herniation gives late enophthalmos after swelling settlement over weeks. Reconstruction follows settled measurement in planning.",
+   "vis": {
+    "kind": "table",
+    "title": "Globe position opposites",
+    "cols": [
+     "Sign",
+     "Volume logic"
+    ],
+    "rows": [
+     [
+      "Proptosis",
+      "Contents expanded, globe forward"
+     ],
+     [
+      "Enophthalmos",
+      "Volume expanded, globe sunken"
+     ],
+     [
+      "Pseudo both",
+      "Lid or fellow eye illusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hertel exophthalmometer** measures corneal apex distance from lateral orbital rim by mirrored prisms, normal roughly twelve to twenty one millimetres with asymmetry beyond two millimetres significant. Base setting must record for serial comparability, same instrument same base at follow up. It quantifies proptosis and enophthalmos in one number language for thyroid and trauma clinics jointly.",
+   "say": "Prism measurement gives corneal position number from lateral rim objectively in clinic. Asymmetry beyond two millimetres gives significance threshold teaching. Serial base recording gives comparability."
+  },
+  {
+   "tx": "Superficial dermoid excision through brow or lid crease incision removes intact cyst with its suture attachment, imaging reserved for deep, atypical or recurrent lesions. Rupture during surgery needs copious irrigation and contents clearance to limit granuloma. **Dumbbell dermoid** through suture into temporal fossa needs imaging before surprise extension converts simple lump surgery into deep dissection.",
+   "say": "Brow incision gives superficial intact removal in typical childhood dermoid surgery. Deep or recurrent lesions give imaging requirement before surgery. Rupture irrigation gives granuloma limitation.",
+   "vis": {
+    "kind": "table",
+    "title": "Deep dermoid precautions",
+    "cols": [
+     "Situation",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Deep or recurrent",
+      "Image before surgery"
+     ],
+     [
+      "Rupture spill",
+      "Irrigate contents fully"
+     ],
+     [
+      "Dumbbell extension",
+      "Plan deep dissection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paediatric orbital swelling differential by age and tempo: dermoid slow superficial, rhabdomyosarcoma rapid deep, cellulitis febrile painful, haemangioma infantile with skin signs. Capillary haemangioma of infancy around orbit risks amblyopia by ptosis or induced astigmatism even when small. **Amblyopia risk** escalates any periocular infant mass beyond cosmetic observation regardless of benign histology.",
+   "say": "Age together with tempo gives paediatric swelling sorting before imaging in clinic practically. Infant mass gives amblyopia risk escalation beyond cosmesis. Rapid deep growth gives malignancy pathway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermoid pattern child",
+     "points": [
+      "Slow painless brow lump",
+      "Suture line superotemporal",
+      "Intact excision elective"
+     ]
+    },
+    "right": {
+     "title": "Malignant pattern child",
+     "points": [
+      "Rapid deep proptosis weeks",
+      "Systemic oncology pathway",
+      "Urgent biopsy staging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Silent sinus syndrome gives spontaneous enophthalmos from maxillary atelectasis pulling floor down in adults without trauma, cured by sinus ventilation with floor support decisions. It teaches volume logic purely: orbit expands inward, globe sinks without any mass. **No trauma history** separates it from fracture enophthalmos in adult presentations.",
+   "say": "Sinus atelectasis together gives spontaneous globe sinking without trauma in adults characteristically during orbit assessment in clinic. Volume logic gives a pure teaching example of enophthalmos here. Ventilation treatment gives cause correction in care.",
+   "vis": {
+    "kind": "flow",
+    "title": "Enophthalmos cause logic",
+    "nodes": [
+     {
+      "id": "hist",
+      "label": "Trauma history assessed"
+     },
+     {
+      "id": "vol",
+      "label": "Orbital volume expanded"
+     },
+     {
+      "id": "cause",
+      "label": "Fracture or sinus cause imaged"
+     },
+     {
+      "id": "recon",
+      "label": "Volume restoration planned"
+     }
+    ],
+    "edges": [
+     [
+      "hist",
+      "vol"
+     ],
+     [
+      "vol",
+      "cause"
+     ],
+     [
+      "cause",
+      "recon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exophthalmometry pitfalls include rim asymmetry after fracture making Hertel invalid, substituted by imaging globe position relative to rim lines. Naugle type instruments reference forehead and cheek where lateral rim lost. **Instrument validity** questioning is part of measurement, numbers without base and rim context mislead serial thyroid decisions.",
+   "say": "Rim loss gives Hertel invalidity needing imaging substitution in trauma follow up. Context recording gives serial validity in thyroid decisions. Numbers alone give misleading trends.",
+   "vis": {
+    "kind": "table",
+    "title": "Measurement pitfalls",
+    "cols": [
+     "Pitfall",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Fractured lateral rim",
+      "Image globe position instead"
+     ],
+     [
+      "Base changed serially",
+      "Record base every visit"
+     ],
+     [
+      "Lid retraction illusion",
+      "Record lids separately"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors organise globe position teaching across ages: suture line dermoid excises intact, expanded orbital volume sinks the globe as enophthalmos, and Hertel numbers need base recording for validity. Childhood tempo separates benign brow lumps from malignant deep proptosis, while adult sinking without trauma suggests silent sinus disease. **Two millimetre asymmetry** is the significance threshold quoted across orbit clinics.",
+   "say": "Suture location gives dermoid recognition while volume logic gives sinking explanation completely for examinations. Two millimetre asymmetry gives the significance threshold in orbit clinics. Tempo with age gives paediatric sorting reliably.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Dermoid classic site and rule",
+   "b": "Superotemporal frontozygomatic suture in children; excise intact without rupture."
+  },
+  {
+   "f": "Hertel significance",
+   "b": "Normal about twelve to twenty one millimetres; asymmetry beyond two millimetres significant, record base."
+  },
+  {
+   "f": "Silent sinus enophthalmos",
+   "b": "Maxillary atelectasis expands orbit and sinks globe without trauma in adults."
+  }
+ ],
+ "keys": [
+  "Enophthalmos is expanded volume, proptosis expanded contents",
+  "Infant periocular mass risks amblyopia",
+  "Invalid rim invalidates Hertel numbers"
+ ]
+}

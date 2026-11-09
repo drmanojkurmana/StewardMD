@@ -1,0 +1,266 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-acute-leukaemias",
+  "key": null,
+  "title": "Philadelphia Chromosome in ALL, t(12;21), FAB and WHO Classification, Flow Cytometry",
+  "steps": [
+    {
+      "tx": "The reciprocal translocation t(9;22)(q34;q11) produces the Philadelphia chromosome, fusing the BCR gene on chromosome 22 to the ABL1 kinase gene on chromosome 9. In acute lymphoblastic leukaemia, this translocation yields either a 190 kilodalton or 210 kilodalton chimeric oncoprotein displaying constitutive tyrosine kinase activity. **Philadelphia-positive ALL** occurs in roughly three percent of pediatric cases but rises to thirty percent in adult patients, historically conveying a dismal prognosis that mandates targeted tyrosine kinase inhibitors.",
+      "say": "The Philadelphia chromosome arises from a reciprocal translocation between chromosomes nine and twenty-two, producing the BCR-ABL1 fusion oncogene. In acute lymphoblastic leukaemia, the resulting chimeric tyrosine kinase drives uncontrolled blast proliferation. While uncommon in children, it occurs in nearly thirty percent of adults with B-ALL. Adding tyrosine kinase inhibitors like imatinib or dasatinib to induction chemotherapy has dramatically improved what was historically a devastating prognosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+        "alt": "BCR-ABL1 translocation and molecular pathogenesis",
+        "caption": "BCR-ABL pathogenesis, the Philadelphia fusion shared by CML and Philadelphia-positive ALL."
+      }
+    },
+    {
+      "tx": "The cryptic translocation t(12;21)(p13;q22) fuses the ETV6 (TEL) transcription factor on chromosome 12 with the RUNX1 (AML1) gene on chromosome 21. Because this structural rearrangement cannot be resolved by conventional metaphase cytogenetics, detection requires fluorescence in situ hybridization or reverse transcriptase polymerase chain reaction. **ETV6-RUNX1 fusion** defines the single most frequent genetic subtype of childhood B-cell acute lymphoblastic leukaemia, accounting for twenty-five percent of cases and conferring an exceptionally favorable long-term cure rate.",
+      "say": "The translocation between chromosomes twelve and twenty-one creates the ETV6-RUNX1 fusion oncoprotein. This rearrangement is completely invisible on standard metaphase karyotyping and requires molecular testing such as FISH or PCR for detection. It accounts for one quarter of all pediatric B-ALL diagnoses and confers an excellent prognosis, allowing clinicians to achieve durable cure rates exceeding ninety percent while minimizing regimen toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Philadelphia t(9;22)",
+          "points": [
+            "Adult predominance up to 30%",
+            "BCR-ABL1 fusion oncoprotein",
+            "Adverse baseline prognosis",
+            "Requires tyrosine kinase inhibitors"
+          ]
+        },
+        "right": {
+          "title": "ETV6-RUNX1 t(12;21)",
+          "points": [
+            "Pediatric peak at 25%",
+            "Cryptic on routine karyotype",
+            "Excellent chemotherapy response",
+            "Low relapse risk with standard protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historic French-American-British classification separated acute lymphoblastic leukaemia into three morphological categories based on blast size, cytoplasmic volume, nuclear chromatin, and prominent nucleoli. The **FAB classification** designated small uniform blasts with scanty cytoplasm as L1, larger heterogeneous pleomorphic blasts as L2, and large blasts displaying intense cytoplasmic basophilia with striking lipid vacuoles as L3. Modern hematopathology has retired this morphological division because it fails to predict biological behavior or therapeutic response.",
+      "say": "The French-American-British classification originally categorized lymphoblastic blasts by microscopic appearance alone. Small uniform blasts were designated L1, larger pleomorphic cells were called L2, and deeply basophilic cells with lipid vacuoles represented L3. We have retired this morphological system because cytogenetic abnormalities and immunophenotype dictate clinical behavior far more accurately than cell size or shape.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FAB Subtype",
+          "Blast Morphology",
+          "Cytoplasm",
+          "Modern Equivalent"
+        ],
+        "rows": [
+          [
+            "L1",
+            "Small, uniform cells with regular round nuclei",
+            "Scanty, light blue",
+            "Pediatric B-ALL or T-ALL"
+          ],
+          [
+            "L2",
+            "Large, heterogeneous pleomorphic blasts",
+            "Variable, moderate volume",
+            "Adult acute lymphoblastic leukaemia"
+          ],
+          [
+            "L3",
+            "Large, uniform blasts with prominent nucleoli",
+            "Deeply basophilic with lipid vacuoles",
+            "Burkitt lymphoma or leukaemia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The modern World Health Organization framework categorizes lymphoid neoplasms primarily by lineage commitment and defining recurrent genetic abnormalities. The updated **WHO classification** stratifies B-lymphoblastic leukaemia into distinct biological entities according to ploidy, such as hyperdiploidy with more than fifty chromosomes, and specific gene fusions including KMT2A rearrangements or BCR-ABL1. This genetic taxonomy directly dictates risk-adapted chemotherapy intensity, identifying patients who require early allogeneic stem cell transplantation versus those cured with gentler antimetabolite backbones.",
+      "say": "Modern WHO diagnostic guidelines define acute lymphoblastic leukaemia by combining immunophenotype with recurrent cytogenetic mutations. Instead of relying on cell size, cases are catalogued by structural rearrangements such as KMT2A translocations or numerical gains like hyperdiploidy. This molecular framework underpins risk stratification, guiding the intensity of induction chemotherapy and determining which patients need allogeneic stem cell transplantation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favorable Genetics",
+          "points": [
+            "Hyperdiploidy over 50 chromosomes",
+            "ETV6-RUNX1 t(12;21) rearrangement",
+            "Low minimal residual disease post-induction",
+            "De-escalated therapy prevents toxicity"
+          ]
+        },
+        "right": {
+          "title": "Unfavorable Genetics",
+          "points": [
+            "Hypodiploidy under 44 chromosomes",
+            "KMT2A rearrangement at 11q23",
+            "BCR-ABL1 Philadelphia translocation",
+            "Mandates intensified therapy or transplant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnostic confirmation of acute lymphoblastic leukaemia requires multiparameter flow cytometric immunophenotyping to establish cell lineage and developmental arrest stage. **Flow cytometry immunophenotyping** analyzes blast populations passing through laser interrogation after incubation with fluorochrome-conjugated monoclonal antibodies. In addition to assigning B-cell or T-cell lineage, flow cytometry identifies aberrant surface antigen expression that establishes a patient-specific immunophenotypic fingerprint used to monitor minimal residual disease during and after induction therapy.",
+      "say": "Multiparameter flow cytometry is essential to confirm leukaemia lineage and assess maturation arrest. Suspensions of bone marrow aspirate are labeled with fluorescent antibodies against cluster of differentiation antigens and interrogated by lasers. Flow cytometry proves whether blasts are B-cell or T-cell in origin, identifies aberrant cross-lineage markers, and establishes a specific immunophenotypic fingerprint to track minimal residual disease down to one leukemic cell in ten thousand normal cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+        "alt": "Flow cytometry scatter plot and immunophenotypic gating in acute lymphoblastic leukaemia",
+        "caption": "Acute lymphoblastic leukaemia, whose diagnosis now rests on flow cytometry lineage panels."
+      }
+    },
+    {
+      "tx": "A subset of acute leukaemias demonstrates blasts co-expressing definitive markers of more than one lineage or containing distinct blast populations belonging to separate myeloid and lymphoid lineages. Rigorous criteria define **mixed phenotype acute leukaemia** by requiring myeloperoxidase or monocytic differentiation markers paired with strong cytoplasmic CD3 for T-lineage or bright CD19 with CD79a for B-lineage. These rare biphenotypic or bilineage leukaemias carry an adverse prognosis and require combined induction protocols.",
+      "say": "Mixed phenotype acute leukaemia is diagnosed when leukemic blasts satisfy strict criteria for two or more distinct lineages simultaneously. For example, blasts may express strong myeloid myeloperoxidase alongside cytoplasmic CD3 for T-cells, or bright CD19 and CD79a for B-cells. These hybrid leukaemias do not fit neatly into lymphoid or myeloid categories, display high resistance to single-lineage regimens, and generally warrant early consideration of allogeneic stem cell transplantation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lineage",
+          "Primary Defining Marker",
+          "Secondary Supporting Markers",
+          "Diagnostic Role"
+        ],
+        "rows": [
+          [
+            "Myeloid",
+            "Myeloperoxidase (MPO) by flow or cytochemistry",
+            "Monocytic markers: CD14, CD64, NSE",
+            "Confirms myeloid commitment"
+          ],
+          [
+            "T-Lymphoid",
+            "Cytoplasmic CD3 (cyCD3)",
+            "CD2, CD5, CD7, CD1a",
+            "Mandatory proof of T-cell lineage"
+          ],
+          [
+            "B-Lymphoid",
+            "Strong CD19 with another B-marker",
+            "CD79a, cytoplasmic CD22, CD10",
+            "Establishes B-cell commitment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical and biological features determine baseline risk in childhood acute lymphoblastic leukaemia according to established National Cancer Institute criteria. Standard-risk disease encompasses children aged one to nine years presenting with a baseline peripheral white blood cell count under fifty thousand per microliter. In contrast, **genetic risk stratification** assigns high-risk status to infants under one year, patients ten years of age or older, presenting counts above fifty thousand, or cytogenetic lesions including hypodiploidy and KMT2A fusions.",
+      "say": "Risk stratification in childhood acute lymphoblastic leukaemia balances clinical variables against molecular cytogenetics. The standard-risk group includes children between one and nine years old presenting with a white blood cell count under fifty thousand per microliter. High-risk status is assigned to older children, infants, or patients harboring aggressive chromosomal changes such as hypodiploidy or KMT2A translocations, prompting immediate escalation of chemotherapy protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Diagnostic Workup"
+          },
+          {
+            "id": "n2",
+            "label": "Age & WBC Triage"
+          },
+          {
+            "id": "n3",
+            "label": "Cytogenetic Panel"
+          },
+          {
+            "id": "n4",
+            "label": "Standard Risk Protocol"
+          },
+          {
+            "id": "n5",
+            "label": "Intensified Therapy"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2",
+            "Clinical"
+          ],
+          [
+            "n1",
+            "n3",
+            "Molecular"
+          ],
+          [
+            "n2",
+            "n4",
+            "1-9 yr, WBC <50k"
+          ],
+          [
+            "n3",
+            "n4",
+            "ETV6-RUNX1"
+          ],
+          [
+            "n2",
+            "n5",
+            "Age >=10 or WBC >=50k"
+          ],
+          [
+            "n3",
+            "n5",
+            "BCR-ABL1 or KMT2A"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adults diagnosed with acute lymphoblastic leukaemia historically achieved inferior cure rates compared with pediatric cohorts due to higher frequencies of adverse cytogenetics, poor chemotherapy tolerance, and increased treatment-related mortality. Modern regimens utilize **paediatric-inspired protocols** featuring dose-intensified asparaginase, vincristine, and dexamethasone, combined with minimal residual disease monitoring and early targeted agents. This strategic shift has elevated five-year event-free survival in young adults from thirty percent toward seventy percent, bridging suitable candidates to curative allogeneic transplantation.",
+      "say": "Historically, adults with acute lymphoblastic leukaemia suffered poor outcomes, with long-term survival lingering below forty percent. Adopting intensive pediatric-inspired chemotherapy regimens that deliver higher cumulative doses of non-myelosuppressive drugs like L-asparaginase, vincristine, and corticosteroids has revolutionized adult management. When paired with real-time minimal residual disease monitoring and tyrosine kinase inhibitors, these protocols substantially improve event-free survival in adolescents and young adults.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Historical Adult Approach",
+          "points": [
+            "Myelosuppressive chemotherapy backbone",
+            "Early consolidation with toxic alkylators",
+            "Five-year survival under 40%",
+            "High induction mortality from sepsis"
+          ]
+        },
+        "right": {
+          "title": "Pediatric-Inspired Strategy",
+          "points": [
+            "Dose-intensified asparaginase and steroids",
+            "Extended non-myelosuppressive maintenance",
+            "Survival exceeds 65% in young adults",
+            "Universal minimal residual disease tracking"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which chromosomal translocation is cryptic on routine metaphase karyotype and confers an excellent prognosis in childhood B-ALL?",
+      "options": [
+        "t(12;21)(p13;q22) fusing ETV6 and RUNX1",
+        "t(9;22)(q34;q11) fusing BCR and ABL1",
+        "t(4;11)(q21;q23) fusing KMT2A and AFF1",
+        "t(1;19)(q23;p13) fusing TCF3 and PBX1"
+      ],
+      "correct": 0,
+      "explain": "The t(12;21)(p13;q22) rearrangement creates the ETV6-RUNX1 fusion gene, is cryptic on conventional karyotyping (requiring FISH or RT-PCR), and confers a favorable prognosis."
+    },
+    {
+      "q": "Which molecular marker is mandatory to establish T-lymphoid lineage commitment in acute leukaemia?",
+      "options": [
+        "Cytoplasmic CD3 (cyCD3)",
+        "Surface CD19",
+        "Myeloperoxidase (MPO)",
+        "CD10 (CALLA)"
+      ],
+      "correct": 0,
+      "explain": "Cytoplasmic CD3 is the single lineage-defining marker for T-cells; surface CD3 may be absent on immature lymphoblasts, but cytoplasmic CD3 is consistently expressed."
+    },
+    {
+      "q": "According to NCI criteria, which feature categorizes a child with acute lymphoblastic leukaemia as high risk?",
+      "options": [
+        "Initial peripheral white blood cell count of 75,000 per microliter",
+        "Age four years at initial presentation",
+        "Presence of the ETV6-RUNX1 translocation",
+        "Initial peripheral white blood cell count of 15,000 per microliter"
+      ],
+      "correct": 0,
+      "explain": "NCI high-risk criteria include age under 1 year or 10 years and older, or an initial white blood cell count of 50,000 per microliter or higher."
+    }
+  ]
+}

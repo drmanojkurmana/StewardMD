@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "id": "oph-anatomy-surface-ectoderm-derivatives",
+ "subject": "ophthalmology",
+ "module": "oph-anatomy",
+ "title": "Surface Ectoderm Derivatives of the Eye",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Surface ectoderm derivatives** in the eye are lens, corneal epithelium, conjunctival epithelium, eyelid epidermis and lacrimal gland epithelium, all from the outer embryonic layer. Lens placode induction by optic vesicle contact is the classic embryological interaction that starts lens formation. Failure patterns differ by layer origin, so derivative mapping predicts which structures share congenital absence or dysplasia syndromes.",
+   "say": "Lens together with corneal and conjunctival epithelia is derived from surface ectoderm embryologically. Optic vesicle contact gives induction of lens placode formation in the classic interaction. Layer origin therefore gives prediction of shared congenital patterns across structures."
+  },
+  {
+   "tx": "The **lens placode** thickens where optic vesicle meets surface ectoderm, invaginates into a lens pit and pinches off as lens vesicle before optic cup completes. Primary lens fibres fill the vesicle posteriorly, secondary fibres add lifelong at equator under anterior epithelium. Vesicle separation failure leaves anterior segment dysgenesis patterns that link lens and corneal opacity congenitally.",
+   "say": "Primary lens fibres give filling of the vesicle while secondary fibres add shells lifelong. Placode invagination gives lens vesicle formation after contact induction. Separation failure gives a link between lens opacity with corneal opacity congenitally.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lens formation sequence",
+    "nodes": [
+     {
+      "id": "plac",
+      "label": "Lens placode thickens"
+     },
+     {
+      "id": "pit",
+      "label": "Lens pit invaginates"
+     },
+     {
+      "id": "ves",
+      "label": "Lens vesicle separates"
+     },
+     {
+      "id": "fib",
+      "label": "Fibres fill and add lifelong"
+     }
+    ],
+    "edges": [
+     [
+      "plac",
+      "pit"
+     ],
+     [
+      "pit",
+      "ves"
+     ],
+     [
+      "ves",
+      "fib"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Corneal epithelium renews from limbal stem cells at the corneoscleral junction, whose failure produces conjunctivalisation, vascular pannus and persistent defects after chemical injury. **Limbal stem deficiency** is therefore a surface ectoderm renewal disease treated by stem transplantation principles. The epithelium itself is non keratinised stratified squamous continuous with conjunctiva at limbus embryologically and anatomically.",
+   "say": "Limbal stem cells give continuous renewal of the corneal epithelium throughout adult life. Failure therefore gives vascular pannus together with persistent epithelial defects after injury. Stem transplantation gives treatment for renewal failure in clinic.",
+   "vis": {
+    "kind": "table",
+    "title": "Surface ectoderm derivatives",
+    "cols": [
+     "Derivative",
+     "Adult structure"
+    ],
+    "rows": [
+     [
+      "Lens placode",
+      "Lens epithelium and fibres"
+     ],
+     [
+      "Surface epithelium",
+      "Cornea and conjunctiva"
+     ],
+     [
+      "Invaginations",
+      "Lacrimal gland, eyelid glands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Eyelid development fuses the surface ectoderm folds temporarily in fetal life, then reopens before birth, failure giving cryptophthalmos spectrum. Meibomian and other lid glands bud from this epithelium, explaining shared sebaceous pathology later. **Coloboma of lid** follows fusion or migration faults distinct from optic fissure coloboma of neuroectoderm, and examinations separate them by layer.",
+   "say": "Fetal eyelid fusion normally reopens before birth during development of the face. Lid glands bud from surface epithelium during the same embryological period. Lid coloboma differs from optic fissure coloboma by layer.",
+   "vis": {
+    "kind": "table",
+    "title": "Lid development faults",
+    "cols": [
+     "Fault",
+     "Result"
+    ],
+    "rows": [
+     [
+      "Fusion failure",
+      "Cryptophthalmos spectrum"
+     ],
+     [
+      "Gland budding",
+      "Lid gland pathology"
+     ],
+     [
+      "Fissure fault",
+      "Surface coloboma type"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lacrimal gland budding from superotemporal conjunctival fornix ectoderm explains accessory gland distribution and why dacryoadenitis favours that quadrant clinically. Nasolacrimal drainage, by contrast, develops from an ectodermal cord between maxillary and nasal processes that canalises late, failure giving congenital duct obstruction. **Crigler massage** over the sac exploits this canalisation biology in infants before probing.",
+   "say": "Superotemporal budding gives lacrimal gland position together with its inflammation site clinically. Duct cord canalisation failure gives obstruction of tear drainage in the infant eye. Sac massage gives exploitation of canalisation biology before probing."
+  },
+  {
+   "tx": "Clinical surface disease maps back to derivatives: lens opacity is cataract, corneal epithelial failure is surface disease, lacrimal failure is dry eye and lid gland failure is blepharitis. Each shares stem or secretory renewal biology rather than vascular anatomy. **Congenital cataract** timing questions ask which fibre generation was forming when insult occurred, dating rubella or metabolic injury embryologically.",
+   "say": "Derivative mapping gives organisation of cataract, surface disease, dry eye and lid disease biologically together. Fibre generation timing gives dating of congenital cataract insults during embryological assessment. Renewal biology gives unity to superficial failures across derivatives.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surface derivative failure",
+     "points": [
+      "Cataract from lens fibres",
+      "Pannus from limbal failure",
+      "Dryness from lacrimal failure"
+     ]
+    },
+    "right": {
+     "title": "Non surface failure",
+     "points": [
+      "Retina from neuroectoderm",
+      "Uvea from mesoderm crest mix",
+      "Sclera from mesenchyme"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Aniridia and anterior segment dysgenesis blur simple layer teaching because signalling genes pattern multiple derivatives together, yet layer mapping still predicts examination associations. Peters anomaly joins corneal opacity with lens adhesion from vesicle separation failure. **Embryological mechanism** rather than adult anatomy explains why lens and cornea fail together in that syndrome specifically.",
+   "say": "Signalling genes give patterning of multiple derivatives together in anterior segment dysgenesis syndromes. Vesicle separation failure gives a join between corneal opacity with lens adhesion mechanically. Embryological mechanism therefore gives explanation of combined failure specifically.",
+   "vis": null
+  },
+  {
+   "tx": "Surface summary is placode, epithelium and buds. Placode gives lens, epithelium gives cornea and conjunctiva with limbal renewal, buds give lacrimal and lid glands with duct canalisation. Failures present as cataract, pannus, dry eye and infant watering in derivative order. **Layer first thinking** converts congenital eye lists into predictable patterns for examinations.",
+   "say": "Placode, epithelium and gland buds together give complete organisation of surface derivatives for examinations. Derivative failures give presentations in predictable order during clinical assessment. Layer first thinking gives conversion of congenital lists into patterns.",
+   "vis": {
+    "kind": "table",
+    "title": "Surface failure presentations",
+    "cols": [
+     "Derivative fails",
+     "Presentation"
+    ],
+    "rows": [
+     [
+      "Lens vesicle",
+      "Congenital cataract patterns"
+     ],
+     [
+      "Limbal stems",
+      "Pannus and persistent defects"
+     ],
+     [
+      "Duct canalisation",
+      "Infant watering eye"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Surface ectoderm eye derivatives",
+   "b": "Lens, corneal and conjunctival epithelium, eyelid skin and lacrimal epithelium."
+  },
+  {
+   "f": "Peters anomaly mechanism",
+   "b": "Lens vesicle separation failure joining corneal opacity with lens adhesion."
+  },
+  {
+   "f": "Limbal stem failure",
+   "b": "Conjunctivalisation with vascular pannus and persistent epithelial defects."
+  }
+ ],
+ "keys": [
+  "Optic vesicle contact induces lens placode",
+  "Limbal stems renew cornea lifelong",
+  "Infant watering is failed duct canalisation"
+ ]
+}

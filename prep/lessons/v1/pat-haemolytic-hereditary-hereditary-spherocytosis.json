@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "id": "pat-haemolytic-hereditary-hereditary-spherocytosis",
+ "subject": "pathology",
+ "module": "pat-haemolytic-hereditary",
+ "title": "Hereditary Spherocytosis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **hereditary spherocytosis** represents the most common inherited hemolytic anaemia in individuals of Northern European descent, transmitted primarily as an autosomal dominant trait in seventy-five percent of cases. It arises from genetic mutations in erythrocyte membrane skeletal proteins, most frequently ankyrin-1 (ANK1, fifty percent), Band 3 (SLC4A1, twenty percent), beta-spectrin (SPTB), or protein 4.2.",
+   "say": "Hereditary spherocytosis is the most common inherited hemolytic anaemia in Northern Europeans, usually passed down as an autosomal dominant trait. It is caused by mutations in red blood cell membrane skeleton proteins, most commonly ankyrin, band three, or beta-spectrin, leading to unstable cell architecture.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hereditary-haemolytic-anaemias-fig1.webp",
+    "alt": "Peripheral blood smear composite showing uniform microspherocytes in hereditary spherocytosis.",
+    "caption": "Characteristic uniform microspherocytes lacking central pallor in hereditary spherocytosis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The fundamental cellular defect involves disruption of vertical protein interactions linking the inner spectrin cytoskeleton to the lipid bilayer. Defective ankyrin or band 3 causes uncoupling, leading to spontaneous membrane instability and shedding of lipid-containing microvesicles. Because intracellular volume remains unchanged while surface area diminishes, the red cell is forced to assume a rigid **spherical morphology**.",
+   "say": "The mutation weakens the vertical scaffolding that anchors the spectrin skeleton to the lipid bilayer. The unanchored membrane sheds tiny vesicles. As the cell loses surface membrane without losing water or hemoglobin, it loses its flexible biconcave shape and is forced into a rigid sphere.",
+   "vis": {
+    "kind": "table",
+    "title": "Membrane Skeletal Proteins and Mutation Frequencies",
+    "cols": [
+     "Protein Component",
+     "Gene Locus",
+     "Structural Role",
+     "Frequency in HS"
+    ],
+    "rows": [
+     [
+      "Ankyrin-1",
+      "ANK1 (8p11)",
+      "Anchors spectrin beta-chain to Band 3 anion exchanger",
+      "50 percent of cases"
+     ],
+     [
+      "Band 3",
+      "SLC4A1 (17q21)",
+      "Major transmembrane anion exchanger (AE1)",
+      "20 to 25 percent"
+     ],
+     [
+      "Beta-spectrin",
+      "SPTB (14q23)",
+      "Forms heterodimers with alpha-spectrin",
+      "15 to 20 percent"
+     ],
+     [
+      "Protein 4.2",
+      "EPB42 (15q15)",
+      "Stabilizes ankyrin-Band 3 association",
+      "5 percent (recessive in Japan)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extravascular hemolysis occurs exclusively in the spleen due to mechanical entrapment within the **cords of Billroth**. To re-enter the general circulation, flexible normal erythrocytes deform to squeeze through narrow endothelial slits measuring under two to three micrometers. Rigid microspherocytes cannot deform, becoming trapped in the hypoxic, acidic, hypoglycemic splenic red pulp where splenic macrophages rapidly destroy them.",
+   "say": "Spherocytes meet their demise in the spleen. To get back into the bloodstream, red cells must deform and squeeze through tiny two-micrometer slits in the splenic cords of Billroth. Rigid spherocytes cannot squeeze through, become trapped in the acidic red pulp, and are devoured by splenic macrophages.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Splenic Cord Trapping",
+     "points": [
+      "Inter-endothelial slits measure only 2 to 3 um",
+      "Spherocytes lack membrane deformability",
+      "Lactic acidosis and glucose depletion",
+      "Extravascular phagocytosis by cord macrophages"
+     ]
+    },
+    "right": {
+     "title": "Clinical Presentation Triad",
+     "points": [
+      "Fluctuating jaundice (unconjugated bilirubin)",
+      "Splenomegaly on physical examination",
+      "Mild to moderate chronic anaemia",
+      "Pigment calcium bilirubinate gallstones"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The laboratory diagnosis is established by the **eosin-5-maleimide binding** test (EMA binding) using flow cytometry. Eosin-5-maleimide binds covalently to the extracellular loops of Band 3 protein; spherocytes exhibit significantly reduced mean fluorescence intensity compared to control erythrocytes, achieving sensitivity and specificity exceeding ninety-five percent. Concurrently, an incubated osmotic fragility test demonstrates premature lysis in hypotonic saline.",
+   "say": "The flow cytometric EMA binding test is the modern diagnostic gold standard. The dye binds to band three on the red cell surface. Because spherocytes have lost membrane surface area and band three, their fluorescence drops dramatically. Traditional osmotic fragility testing also shows that spherocytes burst prematurely in hypotonic saline.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Testing Modalities",
+    "cols": [
+     "Laboratory Assay",
+     "Methodology",
+     "Diagnostic Finding",
+     "Diagnostic Accuracy"
+    ],
+    "rows": [
+     [
+      "EMA binding test",
+      "Flow cytometry with eosin-5-maleimide",
+      "Decreased mean fluorescence intensity",
+      "Sensitivity > 95%, specificity > 95%"
+     ],
+     [
+      "Osmotic fragility test",
+      "Lysis in serial hypotonic NaCl solutions",
+      "Curve shifted to right (early lysis)",
+      "High false-negative rate if mild"
+     ],
+     [
+      "Direct antiglobulin (DAT)",
+      "Coombs reagent anti-IgG and C3d",
+      "Negative (rules out warm AIHA)",
+      "Essential to exclude autoimmune cause"
+     ],
+     [
+      "MCHC parameter",
+      "Automated haematology analyzer",
+      "Elevated MCHC > 36 g/dL (cellular dehydration)",
+      "Highly specific screening clue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management of moderate to severe disease is **curative splenectomy**, which completely halts extravascular hemolysis, normalizes erythrocyte lifespan, and prevents recurrent calcium bilirubinate gallstones. Splenectomy is deliberately deferred until after six years of age to minimize post-splenectomy sepsis, accompanied by preoperative vaccination against Streptococcus pneumoniae, Neisseria meningitidis, and Haemophilus influenzae, with long-term prophylactic penicillin.",
+   "say": "Splenectomy is curative for hereditary spherocytosis. Removing the spleen does not fix the genetic membrane defect, but it eliminates the slaughterhouse, normalizing red cell survival and curing jaundice. Wait until the child is at least six years old, and vaccinate thoroughly against encapsulated bacteria to avoid fatal post-splenectomy sepsis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Splenectomy Benefits",
+     "points": [
+      "Cures chronic extravascular hemolysis",
+      "Normalizes hemoglobin concentration",
+      "Prevents calcium bilirubinate gallstones",
+      "Eliminates painful splenic infarctions"
+     ]
+    },
+    "right": {
+     "title": "Infectious Complications",
+     "points": [
+      "Overwhelming post-splenectomy infection (OPSI)",
+      "Encapsulated bacteria (S. pneumoniae, N. meningitidis)",
+      "Preoperative vaccination mandatory",
+      "Lifelong daily oral penicillin prophylaxis"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which flow cytometric test is considered the modern gold standard for diagnosing hereditary spherocytosis?",
+   "options": [
+    "Eosin-5-maleimide (EMA) binding test",
+    "CD55 and CD59 expression flow cytometry",
+    "Direct antiglobulin Coombs agglutination test",
+    "Ham acid haemolysis test"
+   ],
+   "correct": 0,
+   "explain": "The eosin-5-maleimide (EMA) binding test measures band 3 fluorescence on red blood cells via flow cytometry, offering superior sensitivity and specificity for hereditary spherocytosis."
+  },
+  {
+   "q": "Why is the direct antiglobulin (Coombs) test performed when spherocytes are observed on a blood smear?",
+   "options": [
+    "To distinguish hereditary spherocytosis (negative) from warm autoimmune haemolytic anaemia (positive)",
+    "To measure the intracellular concentration of glucose-6-phosphate dehydrogenase",
+    "To detect bacterial endotoxin adherence to the lipid bilayer",
+    "To assess the severity of intravascular complement-mediated lysis"
+   ],
+   "correct": 0,
+   "explain": "Both conditions present with prominent microspherocytes on blood film; a negative Coombs test confirms hereditary spherocytosis, while a positive test identifies warm AIHA."
+  }
+ ]
+}
