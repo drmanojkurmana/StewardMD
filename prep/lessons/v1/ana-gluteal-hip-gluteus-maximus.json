@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-gluteal-hip",
+ "subject": "anatomy",
+ "title": "Gluteal Region: Musculature, Sciatic Foramina, and Sacral Plexus Outflow",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The gluteus maximus is the largest and heaviest muscle in the human body, serving as the chief extensor of the hip joint. Arising from the posterior gluteal line of the ilium, sacrum, and sacrotuberous ligament, its superficial three-quarters insert into the **iliotibial tract**, while the deep quarter inserts into the gluteal tuberosity of the femur.",
+   "say": "The gluteus maximus is the largest muscle in the body and acts as the primary hip extensor. Arising from the ilium and sacrotuberous ligament, three quarters insert into the iliotibial tract while the deep fibers insert into the gluteal tuberosity.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-lumbar-plexus.svg",
+    "alt": "Lumbar and sacral plexus origin of lower extremity motor and sensory nerves",
+    "caption": "Plexus contributions forming motor innervation to the pelvic girdle and lower limb. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Innervation to the gluteus maximus is derived exclusively from the **inferior gluteal nerve** (L5, S1, S2). The muscle is primarily recruited during forceful activities requiring hip extension from a flexed posture, such as rising from a low chair, climbing stairs, or sprinting, rather than during steady level walking.",
+   "say": "The gluteus maximus is supplied exclusively by the inferior gluteal nerve, roots L5 through S2. It is called into action during forceful hip extension such as rising from a seated position, climbing stairs, or sprinting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gluteal Muscle",
+     "Nerve Supply",
+     "Insertion Site",
+     "Primary Biomechanical Role"
+    ],
+    "rows": [
+     [
+      "Gluteus Maximus",
+      "Inferior gluteal nerve (L5-S2)",
+      "Iliotibial tract and gluteal tuberosity",
+      "Powerful hip extension and lateral rotation"
+     ],
+     [
+      "Gluteus Medius",
+      "Superior gluteal nerve (L4-S1)",
+      "Lateral surface of greater trochanter",
+      "Hip abduction and pelvic stabilization"
+     ],
+     [
+      "Gluteus Minimus",
+      "Superior gluteal nerve (L4-S1)",
+      "Anterior border of greater trochanter",
+      "Hip abduction and medial rotation"
+     ],
+     [
+      "Tensor Fasciae Latae",
+      "Superior gluteal nerve (L4-S1)",
+      "Iliotibial tract into Gerdy tubercle",
+      "Tenses IT band and assists hip abduction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep to gluteus maximus lie the gluteus medius and **gluteus minimus**, both innervated by the superior gluteal nerve (L4, L5, S1). Inserting onto the greater trochanter of the femur, they act as primary hip abductors. During the single-leg stance phase of gait, they contract forcefully to prevent the unsupported pelvis from sagging downward.",
+   "say": "Gluteus medius and minimus lie deep to gluteus maximus and receive innervation from the superior gluteal nerve. Inserting onto the greater trochanter, they abduct the hip and stabilize the pelvis during single leg stance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gluteus Maximus Action",
+     "points": [
+      "Innervated by inferior gluteal nerve",
+      "Powerful hip extensor and lateral rotator",
+      "Active in stair climbing and running",
+      "Relaxed during quiet level walking"
+     ]
+    },
+    "right": {
+     "title": "Medius and Minimus Action",
+     "points": [
+      "Innervated by superior gluteal nerve",
+      "Powerful hip abductors and medial rotators",
+      "Vital for pelvi-femoral stability during gait",
+      "Prevents contralateral pelvic drop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The greater sciatic notch of the hip bone is converted into the **greater sciatic foramen** by the sacrotuberous and sacrospinous ligaments. Traversing the centre of this foramen is the piriformis muscle, which arises from the middle three pelvic sacral vertebrae and inserts into the upper border of the greater trochanter.",
+   "say": "The sacrotuberous and sacrospinous ligaments convert the greater sciatic notch into the greater sciatic foramen. The piriformis muscle passes through its center, arising from the sacrum and inserting into the greater trochanter.",
+   "vis": {
+    "kind": "flow",
+    "title": "Compartmentalization of Greater Sciatic Foramen",
+    "nodes": [
+     {
+      "id": "foramen",
+      "label": "Greater Sciatic Foramen Formed by Sacral Ligaments"
+     },
+     {
+      "id": "piriformis",
+      "label": "Piriformis Muscle Traverses and Divides the Opening"
+     },
+     {
+      "id": "supra",
+      "label": "Suprapiriform Space: Superior Gluteal Vessels and Nerve"
+     },
+     {
+      "id": "infra",
+      "label": "Infrapiriform Space: Sciatic, Pudendal, and Inferior Gluteal"
+     }
+    ],
+    "edges": [
+     [
+      "foramen",
+      "piriformis"
+     ],
+     [
+      "piriformis",
+      "supra"
+     ],
+     [
+      "piriformis",
+      "infra"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The suprapiriform compartment transmits only the **superior gluteal nerve** and vessels. Emergence of these vessels above piriformis makes them vulnerable to injury during surgical posterior approaches to the hip. The nerve courses between gluteus medius and minimus, branching to supply both muscles and tensor fasciae latae.",
+   "say": "The suprapiriform compartment transmits solely the superior gluteal vessels and nerve. Emerging above the piriformis, the nerve travels between gluteus medius and minimus to innervate both along with tensor fasciae latae.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Foramen Compartment",
+     "Structures Transmitted",
+     "Destination / Target",
+     "Vulnerability"
+    ],
+    "rows": [
+     [
+      "Suprapiriform Space",
+      "Superior gluteal nerve and vessels",
+      "Gluteus medius, minimus, TFL",
+      "Posterior hip arthroplasty dissection"
+     ],
+     [
+      "Infrapiriform Space",
+      "Sciatic nerve (thickest nerve in body)",
+      "Posterior thigh, leg, foot",
+      "Intramuscular injection in medial gluteus"
+     ],
+     [
+      "Infrapiriform Space",
+      "Inferior gluteal nerve and vessels",
+      "Gluteus maximus exclusively",
+      "Traction injury during hip dislocation"
+     ],
+     [
+      "Infrapiriform Space",
+      "Pudendal nerve and internal pudendal vessels",
+      "Crosses ischial spine into lesser foramen",
+      "Compression during pelvic trauma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The infrapiriform compartment transmits the **sciatic nerve**, inferior gluteal nerve and vessels, posterior femoral cutaneous nerve, nerve to obturator internus, nerve to quadratus femoris, and pudendal internal neurovascular bundle. The sciatic nerve is the largest nerve in the body, consisting of tibial and common peroneal divisions.",
+   "say": "The infrapiriform compartment transmits the sciatic nerve, inferior gluteal neurovascular bundle, pudendal structures, and deep rotator nerves. The sciatic nerve is the largest nerve in the body, containing tibial and common peroneal divisions.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-leg-nerve-injuries.svg",
+    "alt": "Course of sciatic, tibial, and common peroneal nerves in lower extremity",
+    "caption": "Anatomical trajectory of the sciatic nerve and its major branches into the leg. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pudendal nerve and internal pudendal vessels exit through the infrapiriform space, cross over the **ischial spine** and sacrospinous ligament, and immediately re-enter the pelvis through the lesser sciatic foramen into the pudendal canal. This hairpin course makes transvaginal pudendal nerve block achievable by palpating the ischial spine.",
+   "say": "The pudendal nerve and vessels emerge through the infrapiriform space, cross the ischial spine, and re-enter the pelvis through the lesser sciatic foramen. This path allows precise transvaginal pudendal nerve block by palpating the ischial spine.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pudendal Neurovascular Loop",
+    "nodes": [
+     {
+      "id": "pelvis",
+      "label": "Originates from Sacral Plexus (S2, S3, S4) in Pelvis"
+     },
+     {
+      "id": "exit",
+      "label": "Exits Greater Sciatic Foramen below Piriformis"
+     },
+     {
+      "id": "cross",
+      "label": "Crosses Posterior Surface of Ischial Spine"
+     },
+     {
+      "id": "enter",
+      "label": "Enters Lesser Sciatic Foramen into Pudendal Canal"
+     }
+    ],
+    "edges": [
+     [
+      "pelvis",
+      "exit"
+     ],
+     [
+      "exit",
+      "cross"
+     ],
+     [
+      "cross",
+      "enter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safe intramuscular injections into the gluteal region require strict anatomical targeting to avoid the sciatic nerve and superior gluteal vessels. Injections are placed strictly into the **upper outer quadrant** of the buttock, or into the ventrogluteal site of Hochstetter between the anterior superior iliac spine and the iliac tubercle.",
+   "say": "Safe gluteal intramuscular injections must be placed in the upper outer quadrant of the buttock or the ventrogluteal region. This placement avoids catastrophic needle injury to the sciatic nerve and superior gluteal vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Outer Quadrant",
+     "points": [
+      "Subcutaneous fat overlying gluteus medius",
+      "Free of major motor nerve trunks",
+      "Far removed from sciatic nerve course",
+      "Traditional dorsogluteal safe zone"
+     ]
+    },
+    "right": {
+     "title": "Dangerous Inner and Lower Quadrants",
+     "points": [
+      "Lower inner quadrant: contains sciatic nerve",
+      "Upper inner quadrant: superior gluteal vessels",
+      "Direct needle puncture causes axonal necrosis",
+      "Permanent foot drop and leg paralysis"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "06d144a1-e855-4a14-afbe-26b76a7e7450",
+  "329451cf-941a-42dd-b9c0-60bf68a7c1ca",
+  "8b8cbdfa-75d9-4642-a0de-7b7c4a9ed2da"
+ ]
+}

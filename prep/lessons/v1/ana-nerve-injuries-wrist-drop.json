@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-nerve-injuries",
+ "subject": "anatomy",
+ "title": "Radial and Ulnar Nerve Injuries: Wrist Drop and Claw Hand",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **radial nerve** originates from the posterior cord of the brachial plexus with root values C5 through T1. Passing through the triangular interval, it winds obliquely across the posterior surface of the humerus within the spiral groove alongside the profunda brachii artery. Midshaft humeral fractures frequently contuse or lacerate the nerve in this vulnerable bony groove.",
+   "say": "Originating from the posterior cord of the brachial plexus, the radial nerve carries roots C5 through T1. It spirals across the back of the humerus inside the radial groove together with the profunda brachii artery. Fractures of the humeral midshaft commonly injure the nerve in this location.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-nerve-injuries-and-deformities-fig1.webp",
+    "alt": "Peripheral nerve injuries showing radial wrist drop, ulnar clawing, and median thenar wasting",
+    "caption": "Characteristic motor deformities resulting from major upper limb peripheral nerve injuries. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Injury to the radial nerve within the spiral groove produces classic **wrist drop** and finger drop due to paralysis of all wrist and finger extensors. The triceps brachii is typically spared because its branches arise proximal to the spiral groove. Patients exhibit sensory loss over the anatomical snuffbox and first dorsal web space.",
+   "say": "Lesions within the spiral groove produce wrist drop and finger drop because all wrist and finger extensors lose innervation. Triceps brachii remains functional because motor branches to the long and medial heads arise higher. Sensation is lost over the first dorsal web space.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spiral Groove Injury (Low)",
+     "points": [
+      "Fracture of humeral shaft",
+      "Triceps extension preserved",
+      "Wrist drop and finger drop present",
+      "Snuffbox sensory deficit"
+     ]
+    },
+    "right": {
+     "title": "Axillary Radial Injury (High)",
+     "points": [
+      "Crutch compression or Saturday night palsy",
+      "Complete triceps paralysis",
+      "Total loss of elbow extension",
+      "Extensive posterior arm numbness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The ulnar nerve arises from the medial cord with root values C8 and T1, traversing behind the medial epicondyle into the forearm. Complete low ulnar nerve injury at the wrist causes characteristic **claw hand** deformity (main en griffe). The metacarpophalangeal joints hyperextend while interphalangeal joints flex, most severely in the ring and little fingers.",
+   "say": "Arising from the medial cord, the ulnar nerve traverses behind the medial epicondyle and enters the forearm. A low lesion at the wrist causes claw hand deformity, marked by metacarpophalangeal hyperextension and interphalangeal flexion of the fourth and fifth digits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Deformity Feature",
+     "Anatomical Basis",
+     "Involved Muscles",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "MCP Hyperextension",
+      "Unopposed extensor digitorum",
+      "Extensor digitorum communis",
+      "Dorsal subluxation of base"
+     ],
+     [
+      "PIP and DIP Flexion",
+      "Paralysis of intrinsic hand muscles",
+      "Loss of lumbrical 3 and 4 action",
+      "Flexor digitorum profundus pulls"
+     ],
+     [
+      "Digit Predilection",
+      "Median nerve lumbricals spare digits 2 and 3",
+      "Lumbricals 1 and 2 intact",
+      "Ring and small finger clawing"
+     ],
+     [
+      "Hypothenar Wasting",
+      "Loss of hypothenar motor supply",
+      "ADM, ODM, and FBM atrophy",
+      "Flattening of medial palm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The severity of finger clawing exhibits the paradoxical phenomenon known as the **ulnar paradox**. High ulnar nerve lesions at the elbow produce milder claw deformity than low wrist lesions. This occurs because high lesions denervate the medial half of flexor digitorum profundus, preventing vigorous interphalangeal flexion in the fourth and fifth digits.",
+   "say": "The ulnar paradox describes how high nerve lesions at the elbow produce less striking clawing than low lesions at the wrist. Denervation of the flexor digitorum profundus eliminates the powerful flexion force at distal interphalangeal joints, making the visual claw milder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low Ulnar Lesion (Wrist)",
+     "points": [
+      "FDP medial half fully functional",
+      "Interossei and lumbricals 3 and 4 paralysed",
+      "Unopposed FDP flexes DIP joints severely",
+      "Marked, obvious clawing deformity"
+     ]
+    },
+    "right": {
+     "title": "High Ulnar Lesion (Elbow)",
+     "points": [
+      "FDP medial half denervated and flaccid",
+      "Interossei and medial lumbricals paralysed",
+      "No active DIP flexion force",
+      "Milder visual claw deformity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bedside evaluation of ulnar motor function utilizes **Froment sign** to test adductor pollicis innervation. When the patient pinches a piece of paper between thumb and index finger against resistance, adductor pollicis weakness forces compensatory acute flexion of the thumb interphalangeal joint by flexor pollicis longus, innervated by the anterior interosseous nerve.",
+   "say": "Clinical evaluation uses Froment sign to assess adductor pollicis strength. When holding a piece of paper between thumb and index finger, weakness forces compensatory flexion of the thumb interphalangeal joint via flexor pollicis longus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of Froment Sign",
+    "nodes": [
+     {
+      "id": "denerv",
+      "label": "Ulnar Nerve Palsy Denervates Adductor Pollicis"
+     },
+     {
+      "id": "pinch",
+      "label": "Patient Attempts Lateral Key Pinch on Paper"
+     },
+     {
+      "id": "comp",
+      "label": "Flexor Pollicis Longus Compensates via AIN"
+     },
+     {
+      "id": "flex",
+      "label": "Acute Thumb Interphalangeal Joint Flexion"
+     }
+    ],
+    "edges": [
+     [
+      "denerv",
+      "pinch"
+     ],
+     [
+      "pinch",
+      "comp"
+     ],
+     [
+      "comp",
+      "flex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe median nerve injury at or above the wrist leads to **ape thumb** deformity (simian hand). Paralysis of abductor pollicis brevis and opponens pollicis allows the unopposed adductor pollicis, supplied by the deep branch of the ulnar nerve, to pull the thumb flat into the plane of the palm beside the index finger.",
+   "say": "Median nerve injury at the wrist produces ape thumb deformity. Paralysis of thenar abductors and opponens permits unopposed adductor pollicis to pull the thumb into the plane of the palm, eliminating rotational grasp.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Ape Thumb Deformity",
+     "Claw Hand Deformity",
+     "Wrist Drop Deformity"
+    ],
+    "rows": [
+     [
+      "Injured Nerve",
+      "Median nerve",
+      "Ulnar nerve",
+      "Radial nerve"
+     ],
+     [
+      "Level of Injury",
+      "Wrist or distal forearm",
+      "Wrist or cubital tunnel",
+      "Spiral groove of humerus"
+     ],
+     [
+      "Key Muscle Loss",
+      "Abductor pollicis brevis",
+      "Lumbricals 3 and 4, interossei",
+      "Extensor carpi radialis and ulnaris"
+     ],
+     [
+      "Resting Posture",
+      "Thumb rotated into palm plane",
+      "MCP extended, IP flexed (digits 4-5)",
+      "Flaccid wrist and MCP flexion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wasting of intrinsic hand muscles accompanies chronicity, producing guttering between metacarpal shafts due to dorsal and palmar interosseous atrophy. All dorsal and palmar interossei are innervated by the deep branch of the ulnar nerve, tested by active **finger abduction** (dorsal interossei, DAB) and active finger adduction (palmar interossei, PAD).",
+   "say": "Chronic ulnar palsy causes dorsal guttering across metacarpal spaces from interosseous muscle atrophy. The deep branch of the ulnar nerve supplies all interossei, assessed clinically by active finger abduction and adduction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Testing Intrinsic Hand Muscles",
+    "nodes": [
+     {
+      "id": "dab",
+      "label": "DAB: Dorsal Interossei Abduct Digits from Axis"
+     },
+     {
+      "id": "pad",
+      "label": "PAD: Palmar Interossei Adduct Digits toward Axis"
+     },
+     {
+      "id": "card",
+      "label": "Card Test: Grip Paper between Adjacent Fingers"
+     },
+     {
+      "id": "paralysis",
+      "label": "Inability to Resist Withdrawal Confirms Deficit"
+     }
+    ],
+    "edges": [
+     [
+      "dab",
+      "card"
+     ],
+     [
+      "pad",
+      "card"
+     ],
+     [
+      "card",
+      "paralysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic vasculitis or nerve infarction can produce isolated peripheral neuropathies affecting multiple major trunks sequentially. Mononeuritis multiplex frequently manifests with sequential radial nerve wrist drop and peroneal nerve foot drop, demonstrating asymmetric **vasa nervorum** thrombosis requiring immediate high-dose immunosuppression to preserve peripheral axonal integrity.",
+   "say": "Systemic vasculitis can trigger mononeuritis multiplex, producing sequential focal nerve palsies such as radial wrist drop and peroneal foot drop. Ischemia of the vasa nervorum causes axonal necrosis that mandates systemic therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mononeuritis-multiplex-fig1.webp",
+    "alt": "Microscopic and anatomical representation of vasa nervorum vasculitis producing wrist drop and foot drop",
+    "caption": "Vasculitic infarction of vasa nervorum leading to multifocal motor and sensory nerve palsies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "3f42d365-4000-8000-3f42-d36512345678",
+  "3c42ceac-4000-8000-3c42-ceac12345678",
+  "3d42d03f-4000-8000-3d42-d03f12345678"
+ ]
+}

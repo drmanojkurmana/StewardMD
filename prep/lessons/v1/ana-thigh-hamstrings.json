@@ -1,0 +1,251 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-thigh",
+ "subject": "anatomy",
+ "title": "Posterior Thigh: Hamstrings, Profunda Femoris, and Cruciate Anastomosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The posterior compartment of the thigh contains the **hamstring muscles**, comprising semimembranosus, semitendinosus, the long head of biceps femoris, and the ischial part of adductor magnus. To qualify as a true hamstring, a muscle must arise from the ischial tuberosity, span both hip and knee joints, and receive tibial nerve innervation.",
+   "say": "The posterior thigh contains the hamstring muscles: semimembranosus, semitendinosus, biceps femoris long head, and ischial adductor magnus. True hamstrings arise from the ischial tuberosity, span two joints, and receive tibial nerve innervation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hamstring Muscle",
+     "Proximal Origin",
+     "Distal Insertion",
+     "Innervation Branch"
+    ],
+    "rows": [
+     [
+      "Semitendinosus",
+      "Ischial tuberosity (common tendon)",
+      "Upper medial surface of tibia (pes anserinus)",
+      "Tibial division of sciatic nerve (L5-S2)"
+     ],
+     [
+      "Semimembranosus",
+      "Ischial tuberosity (superolateral area)",
+      "Groove on medial condyle of tibia",
+      "Tibial division of sciatic nerve (L5-S2)"
+     ],
+     [
+      "Biceps Femoris (Long Head)",
+      "Ischial tuberosity (inferomedial area)",
+      "Head of fibula (embraces LCL)",
+      "Tibial division of sciatic nerve (L5-S2)"
+     ],
+     [
+      "Biceps Femoris (Short Head)",
+      "Linea aspera and lateral supracondylar line",
+      "Head of fibula with long head",
+      "Common peroneal division of sciatic (L5-S2)"
+     ],
+     [
+      "Adductor Magnus (Hamstring)",
+      "Ischial tuberosity and ramus",
+      "Adductor tubercle of femur",
+      "Tibial division of sciatic nerve (L4)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The short head of the biceps femoris is not a morphological hamstring. It arises from the lateral lip of the linea aspera and lateral supracondylar line of the femur, crosses only the knee joint, and is innervated by the **common peroneal nerve**. The combined biceps tendon inserts onto the head of the fibula, split by the fibular collateral ligament.",
+   "say": "The short head of biceps femoris is not a true hamstring because it originates from the femur and crosses only the knee. It receives innervation from the common peroneal nerve and inserts with the long head onto the fibular head.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Hamstring Components",
+     "points": [
+      "Arise from ischial tuberosity",
+      "Cross both hip and knee joints",
+      "Innervated by tibial division of sciatic nerve",
+      "Extend hip and flex knee"
+     ]
+    },
+    "right": {
+     "title": "Biceps Femoris Short Head",
+     "points": [
+      "Arises from femoral shaft (linea aspera)",
+      "Crosses only the knee joint",
+      "Innervated by common peroneal division",
+      "Pure knee flexor and lateral rotator"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Muscular branches of the **profunda femoris artery** (deep artery of the thigh) provide the chief arterial supply to all compartments of the thigh. Arising from the lateral aspect of the femoral artery approximately 3.5 centimetres distal to the inguinal ligament, it descends behind the adductor longus close to the femur.",
+   "say": "The profunda femoris artery is the main arterial trunk supplying the thigh musculature. Originating three and a half centimeters below the inguinal ligament, it descends behind adductor longus close to the femur.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/femoropopliteal-tibial-revascularisation-fig1.webp",
+    "alt": "Angiographic illustration of profunda femoris, superficial femoral, and popliteal arterial channels",
+    "caption": "Femoropopliteal arterial anatomy showing profunda femoris branching and collateral pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Near its origin, the profunda femoris gives off the medial and lateral circumflex femoral arteries. Distally, it terminates by giving off **four perforating arteries** that pierce the aponeurosis of adductor magnus near the linea aspera, forming a longitudinal anastomotic arterial chain supplying the posterior hamstring compartment.",
+   "say": "Near its root, the profunda gives off circumflex femoral arteries before terminating as four perforators. These perforating vessels pierce adductor magnus along the linea aspera, forming a vital collateral chain in the hamstrings.",
+   "vis": {
+    "kind": "flow",
+    "title": "Perforating Arterial Cascade in Posterior Thigh",
+    "nodes": [
+     {
+      "id": "prof",
+      "label": "Profunda Femoris Descends Posterior to Adductor Longus"
+     },
+     {
+      "id": "perf",
+      "label": "Gives Off Four Successive Perforating Arteries"
+     },
+     {
+      "id": "pierce",
+      "label": "Pierce Adductor Magnus Close to Linea Aspera"
+     },
+     {
+      "id": "chain",
+      "label": "Form Continuous Longitudinal Anastomosis to Popliteal"
+     }
+    ],
+    "edges": [
+     [
+      "prof",
+      "perf"
+     ],
+     [
+      "perf",
+      "pierce"
+     ],
+     [
+      "pierce",
+      "chain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the level of the lesser trochanter, an essential collateral vascular crossway is formed known as the **cruciate anastomosis**. This anastomosis links branches of the internal iliac artery with branches of the external iliac and femoral systems, maintaining lower limb perfusion if the superficial femoral or external iliac artery is occluded.",
+   "say": "At the lesser trochanter, the cruciate anastomosis bridges the internal and external iliac systems. This collateral network maintains perfusion to the lower extremity if the femoral or external iliac artery becomes blocked.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cruciate Anastomosis Limb",
+     "Contributing Artery",
+     "Parent Arterial System",
+     "Orientation at Trochanter"
+    ],
+    "rows": [
+     [
+      "Superior Limb",
+      "Descending branch of Inferior Gluteal",
+      "Internal iliac artery",
+      "Enters from above"
+     ],
+     [
+      "Inferior Limb",
+      "Ascending branch of First Perforating",
+      "Profunda femoris (femoral)",
+      "Ascends from below"
+     ],
+     [
+      "Transverse Medial Limb",
+      "Transverse branch of Medial Circumflex",
+      "Profunda femoris (femoral)",
+      "Enters from medial side"
+     ],
+     [
+      "Transverse Lateral Limb",
+      "Transverse branch of Lateral Circumflex",
+      "Profunda femoris (femoral)",
+      "Enters from lateral side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The trochanteric anastomosis complements the cruciate network, situated in the trochanteric fossa of the femur. Receiving ascending branches from medial and lateral circumflex femoral arteries and the superior gluteal artery, it is the primary distributor of retinacular branches supplying the **femoral head**.",
+   "say": "The trochanteric anastomosis lies in the trochanteric fossa, fed by ascending circumflex femoral branches and the superior gluteal artery. It supplies the essential retinacular vessels that nourish the femoral head.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-femoral-head-supply.svg",
+    "alt": "Trochanteric anastomosis and retinacular branches to the femoral head",
+    "caption": "Trochanteric arterial anastomosis contributing ascending branches to the femoral head. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Distally, the femoral vessels pass through the **adductor hiatus**, a tendinous gap in the aponeurotic insertion of adductor magnus. Traversing this hiatus transitions the femoral artery and vein from the anterior compartment into the popliteal fossa, where they become renamed the popliteal artery and popliteal vein.",
+   "say": "Distally, femoral vessels pass through the adductor hiatus in adductor magnus. Crossing this opening transitions the vessels into the popliteal fossa, where they are designated the popliteal artery and vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Within Adductor Canal",
+     "points": [
+      "Femoral artery and vein accompanied by saphenous nerve",
+      "Enclosed in aponeurotic canal beneath sartorius",
+      "Anterior compartment vascular supply",
+      "Saphenous nerve exits through canal roof"
+     ]
+    },
+    "right": {
+     "title": "Beyond Adductor Hiatus",
+     "points": [
+      "Artery and vein enter popliteal fossa",
+      "Renamed popliteal artery and popliteal vein",
+      "Joined by tibial nerve from posterior compartment",
+      "Saphenous nerve does not enter popliteal fossa"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute hamstring strain frequently affects the musculotendinous junction during the terminal swing phase of high-speed sprinting, when the muscles undergo forceful eccentric contraction to decelerate knee extension. Avulsion fractures of the **ischial tuberosity** occur in adolescent sprinters when the common hamstring tendon violently pulls away its secondary ossification centre.",
+   "say": "Hamstring tears frequently occur during sprinting when the muscle eccentrically decelerates knee extension. In adolescent athletes, violent contraction can avulse the secondary ossification center of the ischial tuberosity.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of Hamstring Avulsion",
+    "nodes": [
+     {
+      "id": "sprint",
+      "label": "Terminal Swing Phase of High-Velocity Sprinting"
+     },
+     {
+      "id": "ecc",
+      "label": "Maximal Eccentric Contraction Decelerates Leg Extension"
+     },
+     {
+      "id": "avulse",
+      "label": "Excessive Traction Tears Ischial Apophysis or Tendon"
+     },
+     {
+      "id": "rehab",
+      "label": "Intense Buttock Pain and Loss of Knee Flexion Strength"
+     }
+    ],
+    "edges": [
+     [
+      "sprint",
+      "ecc"
+     ],
+     [
+      "ecc",
+      "avulse"
+     ],
+     [
+      "avulse",
+      "rehab"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "900888a8-f2c5-477d-bf9d-bc53bf03a01e",
+  "03377881-e8fe-4817-9e0f-bcac552dd332",
+  "1e781a9f-e894-4ef3-8063-98222e23a450"
+ ]
+}
