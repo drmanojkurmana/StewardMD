@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "id": "ort-malignant-bone-tumours-enneking-staging",
+ "subject": "orthopaedics",
+ "module": "ort-malignant-bone-tumours",
+ "title": "Enneking Staging System",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **Enneking staging system**, formulated by William F. Enneking in 1980 and adopted by the Musculoskeletal Tumor Society, provides the universal surgical staging framework for primary bone and soft tissue sarcomas. The system is based on three objective parameters: the surgical histological grade (G), the local anatomical compartment site (T), and the presence or absence of regional or distant metastases (M).",
+   "say": "William Enneking created the MSTS surgical staging system in 1980 for bone and soft tissue sarcomas. It relies on three parameters: tumor grade, anatomical site, and metastases. It predicts oncologic behavior and directly dictates the surgical margin needed to cure the patient.",
+   "vis": {
+    "kind": "table",
+    "title": "Enneking Staging Parameters",
+    "cols": [
+     "Parameter",
+     "Designation",
+     "Clinical Definition",
+     "Key Determinants"
+    ],
+    "rows": [
+     [
+      "Surgical Grade",
+      "G0, G1, G2",
+      "Biological aggressiveness",
+      "Mitotic rate, pleomorphism, necrosis"
+     ],
+     [
+      "Anatomical Site",
+      "T1, T2",
+      "Local anatomical extent",
+      "Intracompartmental vs extracompartmental"
+     ],
+     [
+      "Metastatic Status",
+      "M0, M1",
+      "Distant systemic dissemination",
+      "Regional lymph nodes or lung metastases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **surgical histological grade** stratifies tumors into low grade (G1) versus high grade (G2). Low-grade lesions exhibit low mitotic frequency, moderate cellularity, and mature matrix, with a metastatic risk under ten percent. High-grade sarcomas display severe cytological pleomorphism, abundant atypical mitoses, extensive necrosis, and carry a systemic metastatic propensity exceeding seventy percent, demanding aggressive systemic chemotherapy alongside wide resection.",
+   "say": "Tumors are graded as G1 low-grade or G2 high-grade. Low-grade sarcomas have few mitoses and well-differentiated cells with a low metastatic risk. High-grade sarcomas have bizarre pleomorphic nuclei, abundant mitoses, and necrosis, carrying a high risk of lung metastases that requires multi-agent chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low Grade (G1)",
+     "points": [
+      "Low mitotic activity (<5 per 10 HPF)",
+      "Well differentiated matrix production",
+      "Minimal cellular pleomorphism",
+      "Metastatic risk under 10 percent"
+     ]
+    },
+    "right": {
+     "title": "High Grade (G2)",
+     "points": [
+      "High mitotic rate (>10 per 10 HPF)",
+      "Severe pleomorphism and atypia",
+      "Spontaneous coagulative necrosis",
+      "Metastatic risk exceeds 70 percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The anatomical site parameter differentiates between **intracompartmental** (T1) and extracompartmental (T2) extensions. An anatomical compartment is bounded by natural barriers resistant to tumor infiltration, such as dense cortical bone, unperforated periosteum, fascial septa, or joint cartilage. A T1 tumor remains contained entirely within its originating bone or muscle compartment, whereas a T2 tumor has breached these barriers to invade adjacent spaces.",
+   "say": "Anatomical site is classified as T1 intracompartmental or T2 extracompartmental. Natural barriers like thick cortical bone, intact periosteum, and fascial envelopes constrain tumor spread. If the tumor stays contained inside its originating compartment, it is T1. If it breaks through into loose neurovascular spaces, it becomes T2.",
+   "vis": {
+    "kind": "table",
+    "title": "Compartmental Boundaries and Classification",
+    "cols": [
+     "Classification",
+     "Defining Boundary",
+     "Anatomical Examples",
+     "Prognostic Impact"
+    ],
+    "rows": [
+     [
+      "T1 Intracompartmental",
+      "Contained within anatomical barriers",
+      "Intraosseous cortex, quadriceps sheath",
+      "Lower risk of local recurrence"
+     ],
+     [
+      "T2 Extracompartmental",
+      "Breached fascia or cortical bone",
+      "Popliteal space, femoral triangle",
+      "Requires wider surgical margins"
+     ],
+     [
+      "True Compartment",
+      "Resistant physical boundary",
+      "Bone cortex, joint capsule, fascia lata",
+      "Blocks direct tumor extension"
+     ],
+     [
+      "Extracompartmental space",
+      "Lacks fascial boundary",
+      "Axilla, groin, retroperitoneum",
+      "Sarcomas here are T2 by definition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Enneking system groups malignant tumors into three clinical stages. Stage I comprises low-grade tumors without metastases, subdivided into Stage IA (G1, T1, M0) and Stage IB (G1, T2, M0). Stage II comprises high-grade malignancies without metastases, divided into Stage IIA (G2, T1, M0) and **Stage IIB** (G2, T2, M0). Stage III encompasses any tumor with regional or distant metastases (M1), regardless of local grade or size.",
+   "say": "Stages are organized logically. Stage one represents low-grade tumors, split into one A inside the compartment and one B outside. Stage two represents high-grade tumors, split into two A inside and two B extending outside. Stage three includes any sarcoma that has metastasized to lymph nodes or distant organs, regardless of grade.",
+   "vis": {
+    "kind": "table",
+    "title": "Complete Enneking Staging Grid",
+    "cols": [
+     "Enneking Stage",
+     "Grade (G)",
+     "Site / Compartment (T)",
+     "Metastases (M)"
+    ],
+    "rows": [
+     [
+      "Stage IA",
+      "Low grade (G1)",
+      "Intracompartmental (T1)",
+      "None (M0)"
+     ],
+     [
+      "Stage IB",
+      "Low grade (G1)",
+      "Extracompartmental (T2)",
+      "None (M0)"
+     ],
+     [
+      "Stage IIA",
+      "High grade (G2)",
+      "Intracompartmental (T1)",
+      "None (M0)"
+     ],
+     [
+      "Stage IIB",
+      "High grade (G2)",
+      "Extracompartmental (T2)",
+      "None (M0)"
+     ],
+     [
+      "Stage III",
+      "Any grade (G1 or G2)",
+      "Any site (T1 or T2)",
+      "Distant metastasis (M1)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enneking correlated this staging system directly with required **surgical margins**. An intralesional margin debulks tumor from within its pseudocapsule. A marginal excision passes through the reactive inflammatory pseudocapsule, leaving microscopic satellites behind. A wide margin removes the tumor en bloc surrounded by a continuous cuff of healthy normal tissue. A radical margin removes the entire anatomical compartment from origin to insertion.",
+   "say": "Enneking defined four surgical margins. Intralesional means cutting through the tumor itself. Marginal means shelling it out through its reactive capsule, which leaves microscopic cells behind. Wide means removing the tumor with a cuff of normal tissue. Radical means removing the entire anatomical compartment from its origin to its insertion.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgical Margins and Local Recurrence",
+    "cols": [
+     "Surgical Margin",
+     "Dissection Plane",
+     "Microscopic Residual Tumor",
+     "Local Recurrence Rate"
+    ],
+    "rows": [
+     [
+      "Intralesional",
+      "Cuts directly through tumor",
+      "Macroscopic tumor left behind",
+      "Near 100 percent recurrence"
+     ],
+     [
+      "Marginal",
+      "Through reactive zone / capsule",
+      "Leaves satellite micro-metastases",
+      "30 to 50 percent recurrence"
+     ],
+     [
+      "Wide margin",
+      "Through healthy tissue beyond capsule",
+      "Zero residual tumor",
+      "Under 5 to 10 percent with chemotherapy"
+     ],
+     [
+      "Radical margin",
+      "Entire anatomical compartment excised",
+      "Completely clear margin",
+      "Under 3 percent recurrence"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What are the three core parameters defining the Enneking surgical staging system?",
+   "options": [
+    "Surgical Grade (G), Anatomical Site (T), and Metastasis (M)",
+    "Tumour Diameter (T), Node Number (N), and Histology (H)",
+    "Patient Age (A), Compartment Volume (V), and Margin (M)",
+    "Mitotic Index (MI), Bone Loss (B), and Soft Tissue (S)"
+   ],
+   "correct": 0,
+   "explain": "The Enneking musculoskeletal staging system is defined by Surgical Grade (G0-G2), Anatomical Site/Compartment (T1-T2), and Metastases (M0-M1)."
+  },
+  {
+   "q": "A high-grade osteosarcoma that has breached the femoral cortex into the vastus lateralis without distant metastases is classified as:",
+   "options": [
+    "Stage IIB",
+    "Stage IIA",
+    "Stage IB",
+    "Stage III"
+   ],
+   "correct": 0,
+   "explain": "High grade (G2), extracompartmental cortical breach (T2), and absence of distant metastases (M0) defines Enneking Stage IIB."
+  }
+ ]
+}
