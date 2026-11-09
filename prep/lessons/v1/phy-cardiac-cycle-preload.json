@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-cardiac-cycle",
+ "subject": "physiology",
+ "title": "Determinants of Cardiac Output, Inotropy, and Fick Principle",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The total volume of blood pumped by each ventricle into the systemic or pulmonary circulation per minute is the **cardiac output**. Equal to stroke volume multiplied by heart rate, normal cardiac output measures approximately five litres per minute in a resting seventy-kilogram adult, indexing to three point zero litres per minute per square metre as the cardiac index.",
+   "say": "Cardiac output is stroke volume multiplied by heart rate, normally five litres per minute at rest, regulated by preload, afterload, inotropy, and heart rate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pre",
+      "label": "Preload (End-Diastolic Myocyte Stretch)"
+     },
+     {
+      "id": "aft",
+      "label": "Afterload (Vascular Resistance Opposing Ejection)"
+     },
+     {
+      "id": "ino",
+      "label": "Contractility (Inotropic Calcium State)"
+     },
+     {
+      "id": "sv",
+      "label": "Stroke Volume (mL/beat) x Heart Rate (bpm) = Cardiac Output (L/min)"
+     }
+    ],
+    "edges": [
+     [
+      "pre",
+      "sv"
+     ],
+     [
+      "aft",
+      "sv"
+     ],
+     [
+      "ino",
+      "sv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The degree of stretch exerted on ventricular myocytes immediately prior to active contraction represents **preload**. Preload is clinically indexed by left ventricular end-diastolic volume or end-diastolic pressure. Governed by total blood volume, venous capacitance, and skeletal muscle pump activity, increased preload augments stroke volume via the Frank-Starling mechanism.",
+   "say": "Preload is the myocardial stretch at the end of diastole, indexed by end-diastolic volume and governed by venous return and circulating blood volume.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Venous return, central venous pressure, and preload determinants.",
+    "caption": "Preload regulation by venous return, circulating blood volume, and capacitance vessels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mechanical load or resistance against which the ventricle must contract to eject blood is **afterload**. In the left ventricle, afterload is determined by systemic vascular resistance, aortic compliance, and left ventricular wall stress formulated by Laplace law. Elevating afterload, as in arterial hypertension or aortic stenosis, decreases stroke volume and increases myocardial oxygen demand.",
+   "say": "Afterload is the resistance opposing ventricular ejection, determined by systemic vascular resistance and wall stress, elevated in hypertension and stenosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preload (Volume Load)",
+     "points": [
+      "Tension in ventricular wall at end of diastole",
+      "Determined by venous return and total blood volume",
+      "Increases stroke volume via Frank-Starling law",
+      "Reduced by venodilators (nitroglycerine)"
+     ]
+    },
+    "right": {
+     "title": "Afterload (Pressure Load)",
+     "points": [
+      "Tension in ventricular wall during active ejection",
+      "Determined by systemic vascular resistance and aortic impedance",
+      "Decreases stroke volume and prolongs isovolumetric phase",
+      "Reduced by pure arteriolar dilators (hydralazine, ACE inhibitors)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "According to **Laplace law**, ventricular wall stress is directly proportional to intraventricular systolic pressure multiplied by internal chamber radius, divided by twice the myocardial wall thickness. Consequently, chronic pressure overload in aortic stenosis triggers concentric ventricular hypertrophy, thickening the myocyte wall to normalize wall stress, whereas chamber dilation in heart failure maladaptively escalates wall stress.",
+   "say": "Laplace law dictates that wall stress equals pressure times radius divided by twice the wall thickness. Concentric hypertrophy thickens walls to normalize stress.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Systolic Pressure (P) x Internal Radius (r)"
+     },
+     {
+      "id": "h",
+      "label": "Divided by 2 x Ventricular Wall Thickness (h)"
+     },
+     {
+      "id": "stress",
+      "label": "Calculates Myocardial Wall Tension (Stress = P x r / 2h)"
+     },
+     {
+      "id": "adapt",
+      "label": "Concentric Hypertrophy Increases Thickness (h) to Preserve Normal Stress"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "stress"
+     ],
+     [
+      "h",
+      "stress"
+     ],
+     [
+      "stress",
+      "adapt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The intrinsic contractile strength of the myocardium independent of alterations in preload and afterload is **contractility**, or inotropy. Positive inotropic agents such as adrenaline and digoxin increase intracellular calcium transients, accelerating cross-bridge cycling and shifting the Frank-Starling curve upward and to the left, generating larger stroke volumes from any given end-diastolic volume.",
+   "say": "Contractility is the intrinsic strength of contraction independent of preload or afterload, shifted upward by beta-agonists and digitalis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig1.webp",
+    "alt": "Ventricular function curves illustrating positive and negative inotropic shifts.",
+    "caption": "Contractility shifts in ventricular performance curves under inotropic stimulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The gold-standard physiological method for measuring cardiac output in humans is based on the **Fick principle**. Formulated by Adolf Fick, the principle states that the total uptake or release of a substance by an organ equals the blood flow through the organ multiplied by the arteriovenous concentration difference of that substance across the organ.",
+   "say": "The Fick principle calculates cardiac output: oxygen consumption divided by the arteriovenous oxygen concentration difference across the pulmonary circulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vo2",
+      "label": "Measure Whole-Body Oxygen Consumption (VO2): ~250 mL/min"
+     },
+     {
+      "id": "art",
+      "label": "Sample Arterial Oxygen Content (CaO2): ~200 mL O2 per Litre"
+     },
+     {
+      "id": "ven",
+      "label": "Sample Pulmonary Mixed Venous Oxygen (CvO2): ~150 mL O2 per Litre"
+     },
+     {
+      "id": "co",
+      "label": "Cardiac Output = VO2 / (CaO2 - CvO2) = 250 / 50 = 5.0 L/min"
+     }
+    ],
+    "edges": [
+     [
+      "vo2",
+      "co"
+     ],
+     [
+      "art",
+      "co"
+     ],
+     [
+      "ven",
+      "co"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Applying the Fick principle to cardiac output requires measuring whole-body oxygen consumption via spirometry, alongside arterial oxygen content from a peripheral artery and mixed venous oxygen content sampled from the pulmonary artery via a Swan-Ganz catheter. In an adult consuming two hundred and fifty millilitres of oxygen with an arteriovenous oxygen difference of fifty millilitres per litre, **pulmonary blood flow** equals five litres per minute.",
+   "say": "Applying Fick: 250 mL oxygen consumed divided by a 50 mL arteriovenous oxygen difference yields a cardiac output of five litres per minute.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measurement Parameter",
+     "Sampling Site / Instrument",
+     "Typical Normal Adult Value"
+    ],
+    "rows": [
+     [
+      "Oxygen Consumption (VO2)",
+      "Spirometer / Douglas bag gas analysis",
+      "250 mL O2 per minute"
+     ],
+     [
+      "Systemic Arterial Oxygen (CaO2)",
+      "Radial or femoral arterial cannula",
+      "200 mL O2/L blood (19 to 20 vol%)"
+     ],
+     [
+      "Mixed Venous Oxygen (CvO2)",
+      "Pulmonary artery (Swan-Ganz catheter)",
+      "150 mL O2/L blood (14 to 15 vol%)"
+     ],
+     [
+      "Arteriovenous Oxygen Difference",
+      "Mathematical difference (CaO2 - CvO2)",
+      "50 mL O2 per litre of blood"
+     ],
+     [
+      "Calculated Cardiac Output",
+      "Cardiac Output = VO2 / (CaO2 - CvO2)",
+      "5.0 litres per minute"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In clinical practice, cardiac output is frequently measured via **thermodilution**. A known volume of cold saline is injected into the right atrium through a pulmonary artery catheter, and a thermistor at the catheter tip records downstream temperature changes in the pulmonary artery. The area under the resulting temperature-time curve is inversely proportional to cardiac output.",
+   "say": "Thermodilution injects cold saline into the right atrium and records temperature downstream; the area under the curve is inversely proportional to cardiac output.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct Fick Method",
+     "points": [
+      "Gold standard physiological accuracy",
+      "Requires true steady-state oxygen consumption",
+      "Invasive arterial and pulmonary artery blood sampling",
+      "Unimpaired by tricuspid regurgitation"
+     ]
+    },
+    "right": {
+     "title": "Thermodilution Method",
+     "points": [
+      "Rapid, repeatable bedside measurement",
+      "Uses cold saline indicator rather than oxygen",
+      "Stewart-Hamilton mathematical curve integration",
+      "Inaccurate in severe tricuspid regurgitation or intracardiac shunts"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

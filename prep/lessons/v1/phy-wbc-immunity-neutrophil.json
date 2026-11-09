@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "phy-wbc-immunity",
+ "subject": "physiology",
+ "title": "Leukocytes, Phagocytosis, and Innate versus Adaptive Immunity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "White blood cells or leukocytes represent the mobile cellular defense system of the human organism, maintaining a normal peripheral concentration between four thousand and eleven thousand cells per microlitre. Produced in the bone marrow and lymphoid organs through **leucopoiesis**, leukocytes divide morphologically into granular granulocytes and non-granular agranulocytes.",
+   "say": "Leukocytes comprise the mobile defense system, numbering 4,000 to 11,000 per microlitre, produced through leucopoiesis and divided into granulocytes and agranulocytes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Leukocyte Class",
+     "Differential Percentage",
+     "Absolute Count (/uL)",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Neutrophils",
+      "40 to 75 percent",
+      "2000 to 7500",
+      "Acute bacterial phagocytosis"
+     ],
+     [
+      "Lymphocytes",
+      "20 to 45 percent",
+      "1000 to 4000",
+      "Humoral and cellular adaptive immunity"
+     ],
+     [
+      "Monocytes",
+      "2 to 10 percent",
+      "200 to 800",
+      "Tissue macrophages and antigen presentation"
+     ],
+     [
+      "Eosinophils",
+      "1 to 6 percent",
+      "50 to 500",
+      "Parasitic defence and allergic modulation"
+     ],
+     [
+      "Basophils",
+      "0 to 1 percent",
+      "10 to 100",
+      "Histamine and heparin release in hypersensitivity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The frontline cellular responders to acute bacterial invasion are polymorphonuclear **neutrophils**, comprising sixty percent of circulating leukocytes. Characterized by segmented three-to-five-lobed nuclei and neutral-staining granules containing myeloperoxidase and lysozyme, neutrophils leave the circulation by diapedesis, migrating up chemical concentration gradients toward bacterial formyl peptides in directed chemotaxis.",
+   "say": "Neutrophils are the primary bacterial responders, possessing multilobed nuclei and microbicidal granules that migrate toward bacterial peptides via chemotaxis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mar",
+      "label": "Endothelial Selectin Rolling and Integrin Marginating"
+     },
+     {
+      "id": "dia",
+      "label": "Diapedesis Extravasation Across Postcapillary Venules"
+     },
+     {
+      "id": "chem",
+      "label": "Chemotaxis Up Concentration Gradient (C5a, LTB4, IL-8)"
+     },
+     {
+      "id": "phag",
+      "label": "Phagocytic Engulfment of Opsonised Bacteria"
+     }
+    ],
+    "edges": [
+     [
+      "mar",
+      "dia"
+     ],
+     [
+      "dia",
+      "chem"
+     ],
+     [
+      "chem",
+      "phag"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Internalisation of pathogenic microbes into intracellular phagosomes is termed **phagocytosis**. Opsonisation by immunoglobulin G and complement fragment C3b marks targets for rapid ingestion. Inside the phagolysosome, membrane-bound NADPH oxidase generates superoxide free radicals in a respiratory burst, while myeloperoxidase converts hydrogen peroxide and chloride into hypochlorous acid to destroy microbial pathogens.",
+   "say": "Phagocytosis ingests opsonised microbes into phagolysosomes, where NADPH oxidase generates a respiratory burst of superoxide and hypochlorous acid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oxygen-Dependent Killing",
+     "points": [
+      "NADPH oxidase generates superoxide radicals",
+      "Superoxide dismutase forms hydrogen peroxide",
+      "Myeloperoxidase produces hypochlorous acid (bleach)",
+      "Defective in chronic granulomatous disease"
+     ]
+    },
+    "right": {
+     "title": "Oxygen-Independent Killing",
+     "points": [
+      "Lysozyme hydrolyses bacterial peptidoglycan walls",
+      "Lactoferrin chelates vital bacterial iron",
+      "Defensins create permeable pores in microbial membranes",
+      "Acid hydrolases digest degraded microbial fragments"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Eosinophils and basophils mediate specialized inflammatory responses. **Eosinophils** defend against large metazoan helminthic parasites by releasing major basic protein, eosinophil cationic protein, and histaminase. Basophils and tissue mast cells express high-affinity Fc-epsilon receptors for immunoglobulin E; allergen cross-linking triggers degranulation of preformed histamine, leukotrienes, and heparin, driving acute anaphylaxis.",
+   "say": "Eosinophils combat helminthic parasites with major basic protein, while basophils bind IgE to release histamine and heparin during allergic reactions.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-dec.webp",
+    "alt": "Eosinophil activation and parasitic microbicidal defense.",
+    "caption": "Eosinophil degranulation and leukocyte cytotoxic mechanisms against pathogens. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Circulating monocytes migrate into tissues to differentiate into resident **tissue macrophages**, forming the reticuloendothelial system. Macrophages act as professional antigen-presenting cells, processing foreign proteins and presenting peptide fragments on major histocompatibility complex (MHC) class II molecules to helper CD4-positive T lymphocytes, releasing interleukin-1 and tumor necrosis factor to orchestrate systemic fever and acute-phase responses.",
+   "say": "Monocytes mature into tissue macrophages, acting as antigen-presenting cells that display peptides on MHC class II to activate helper T cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ing",
+      "label": "Macrophage Ingests and Degrades Foreign Microbial Protein"
+     },
+     {
+      "id": "mhc",
+      "label": "Peptide Antigen Loaded onto MHC Class II Heterodimer"
+     },
+     {
+      "id": "tcr",
+      "label": "Presentation to CD4+ T Cell Receptor with Co-Stimulation (B7-CD28)"
+     },
+     {
+      "id": "cyt",
+      "label": "Cytokine Secretion (IL-1, TNF) Amplifies Adaptive Immune Response"
+     }
+    ],
+    "edges": [
+     [
+      "ing",
+      "mhc"
+     ],
+     [
+      "mhc",
+      "tcr"
+     ],
+     [
+      "tcr",
+      "cyt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immunity divides into immediate antigen-independent innate mechanisms and delayed, antigen-specific **adaptive immunity**. Adaptive immunity relies upon lymphocytes: T lymphocytes mediate cellular immunity via cytotoxic CD8-positive cells and helper CD4-positive cells, whereas B lymphocytes differentiate into antibody-secreting plasma cells, providing humoral immunity and long-lived immunological memory.",
+   "say": "Adaptive immunity provides antigen-specific memory through T lymphocytes mediating cellular immunity and B-cell-derived plasma cells secreting antibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Innate Immunity",
+     "points": [
+      "Immediate response (minutes to hours)",
+      "Non-specific pattern recognition receptors (Toll-like)",
+      "No immunological memory upon repeated exposure",
+      "Components: Neutrophils, macrophages, NK cells, complement"
+     ]
+    },
+    "right": {
+     "title": "Adaptive Immunity",
+     "points": [
+      "Delayed primary response (days to weeks)",
+      "Exquisitely antigen-specific (somatic VDJ recombination)",
+      "Robust long-lived memory with accelerated recall",
+      "Components: T cells, B cells, plasma cells, antibodies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Antibodies or immunoglobulins are Y-shaped glycoproteins consisting of two identical heavy chains and two identical light chains. The five major **immunoglobulin classes** serve specialized tasks: IgM serves as the pentameric primary response antibody, IgG is the abundant secondary monomer that crosses the placenta, IgA protects mucosal surfaces as a dimer, IgE binds mast cells, and IgD serves as a naïve B-cell receptor.",
+   "say": "Immunoglobulins divide into five classes: IgM for primary response, IgG crossing the placenta, dimeric secretory IgA, allergy-mediating IgE, and receptor IgD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Structure",
+     "Serum Percentage",
+     "Distinguishing Physiological Role"
+    ],
+    "rows": [
+     [
+      "IgG",
+      "Monomer",
+      "75 to 80 percent",
+      "Crosses placenta, secondary response, opsonisation"
+     ],
+     [
+      "IgA",
+      "Dimer with secretory piece",
+      "10 to 15 percent",
+      "Mucosal protection, tears, saliva, colostrum"
+     ],
+     [
+      "IgM",
+      "Pentamer with J-chain",
+      "5 to 10 percent",
+      "Primary immune response, potent complement fixer"
+     ],
+     [
+      "IgE",
+      "Monomer",
+      "< 0.01 percent",
+      "Binds mast cells and basophils; type I hypersensitivity"
+     ],
+     [
+      "IgD",
+      "Monomer",
+      "< 0.5 percent",
+      "Antigen receptor on mature naïve B lymphocytes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The humoral antimicrobial cascade in plasma is the **complement** system, activated through classical, lectin, or alternative pathways. All three pathways converge on C3 convertase, cleaving C3 into C3a and C3b. C3b functions as a potent opsonin, C3a and C5a act as inflammatory anaphylatoxins that recruit leukocytes, and terminal components C5b through C9 assemble the membrane attack complex to lyse target pathogens.",
+   "say": "The complement system converges on C3 cleavage. C3b opsonises bacteria, C3a and C5a recruit leukocytes, and the C5b-9 complex lyses microbial membranes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anemia-of-chronic-disease-fig1.webp",
+    "alt": "Immune system signaling and bone marrow reticuloendothelial clearance.",
+    "caption": "Reticuloendothelial immune clearance and leukocyte differentiation pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

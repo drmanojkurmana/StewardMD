@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "module": "phy-haemostasis",
+ "subject": "physiology",
+ "title": "Coagulation Cascade, Clotting Factors, and PT/aPTT Tests",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Secondary haemostasis reinforces the primary platelet plug through a sequential enzymatic cascade of circulating plasma proenzymes called **clotting factors**. Synthesized primarily in the liver as inactive zymogens, each activated serine protease factor cleaves and activates the downstream proenzyme in an amplifying cascade that culminates in the conversion of fibrinogen into an insoluble fibrin clot.",
+   "say": "Secondary haemostasis generates fibrin via a cascade of circulating clotting factors, where each activated enzyme cleaves the next zymogen in the pathway.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/coagulation-cascade-and-anticoagulants-fig1.webp",
+    "alt": "Intrinsic, extrinsic, and common pathways of the coagulation cascade.",
+    "caption": "Enzymatic cascade pathways of secondary haemostasis leading to fibrin clot formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Coagulation in vivo is initiated through the **extrinsic pathway** when vascular injury exposes extravascular subendothelial Tissue Factor (thromboplastin). Tissue Factor binds circulating Factor VII in the presence of calcium, forming an active TF-VIIa complex that directly cleaves Factor X into Factor Xa, while concurrently activating Factor IX of the intrinsic pathway.",
+   "say": "In vivo coagulation is initiated by the extrinsic pathway, where exposed Tissue Factor binds Factor VII to activate Factor X and Factor IX.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tf",
+      "label": "Vascular Damage Exposes Subendothelial Tissue Factor (TF)"
+     },
+     {
+      "id": "f7",
+      "label": "Tissue Factor Binds Circulating Factor VII to Form TF-VIIa Complex"
+     },
+     {
+      "id": "x",
+      "label": "TF-VIIa Complex Directly Activates Factor X to Factor Xa"
+     },
+     {
+      "id": "amp",
+      "label": "Concurrently Cleaves Factor IX Linking to Intrinsic Amplification"
+     }
+    ],
+    "edges": [
+     [
+      "tf",
+      "f7"
+     ],
+     [
+      "f7",
+      "x"
+     ],
+     [
+      "f7",
+      "amp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **intrinsic pathway** operates through contact activation and amplifies thrombin generation. Contact of Factor XII with negatively charged subendothelial surfaces activates Factor XIIa with prekallikrein and high-molecular-weight kininogen. Factor XIIa activates Factor XI, which activates Factor IX. Factor IXa then pairs with its cofactor Factor VIIIa on platelet phosphatidylserine surfaces to form the tenase complex, activating Factor X.",
+   "say": "The intrinsic pathway amplifies clotting: Factor XII activates XI, which activates IX. Factor IXa and cofactor VIIIa assemble the tenase complex to activate Factor X.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway Step",
+     "Active Enzyme",
+     "Cofactor",
+     "Phospholipid/Ion Requirement",
+     "Substrate"
+    ],
+    "rows": [
+     [
+      "Intrinsic Tenase Complex",
+      "Factor IXa",
+      "Factor VIIIa",
+      "Platelet PS membrane and Ca2+",
+      "Factor X -> Xa"
+     ],
+     [
+      "Extrinsic Tenase Complex",
+      "Factor VIIa",
+      "Tissue Factor",
+      "Cellular membrane and Ca2+",
+      "Factor X -> Xa"
+     ],
+     [
+      "Prothrombinase Complex",
+      "Factor Xa",
+      "Factor Va",
+      "Platelet PS membrane and Ca2+",
+      "Prothrombin -> Thrombin"
+     ],
+     [
+      "Fibrin Polymerization",
+      "Thrombin (IIa)",
+      "None required",
+      "Soluble plasma environment",
+      "Fibrinogen -> Fibrin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Both intrinsic and extrinsic pathways converge on the **common pathway** at the activation of Factor X. Factor Xa binds its non-enzymatic protein cofactor Factor Va on the platelet membrane in the presence of calcium ions, assembling the prothrombinase complex. This complex cleaves prothrombin (Factor II) into active thrombin, increasing the catalytic rate three hundred thousand-fold.",
+   "say": "Both pathways converge at Factor Xa, which pairs with cofactor Va on platelets to form the prothrombinase complex, cleaving prothrombin into thrombin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "xa",
+      "label": "Factor Xa Binds Factor Va on Platelet Phosphatidylserine"
+     },
+     {
+      "id": "pro",
+      "label": "Prothrombinase Complex Cleaves Prothrombin (Factor II)"
+     },
+     {
+      "id": "throm",
+      "label": "Burst of Active Thrombin (Factor IIa) Released into Plasma"
+     },
+     {
+      "id": "fib",
+      "label": "Thrombin Cleaves Fibrinogen and Activates XIII, V, VIII, and XI"
+     }
+    ],
+    "edges": [
+     [
+      "xa",
+      "pro"
+     ],
+     [
+      "pro",
+      "throm"
+     ],
+     [
+      "throm",
+      "fib"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Active **thrombin** exerts multiple vital actions in haemostasis. It cleaves fibrinopeptides A and B from soluble hexameric fibrinogen, producing fibrin monomers that spontaneously polymerize through hydrogen bonds. Thrombin also activates Factor XIII, an active transglutaminase that forms covalent cross-links between fibrin chains, and fires positive feedback loops activating Factors V, VIII, and XI.",
+   "say": "Thrombin converts fibrinogen into fibrin, activates Factor XIII to cross-link the clot, and reinforces the cascade by activating Factors V, VIII, and XI.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/haemostasis-platelets-cascade-fibrinolysis-fig1.webp",
+    "alt": "Thrombin generation burst and fibrin polymerization mechanisms.",
+    "caption": "Thrombin generation and cross-linked fibrin clot formation in secondary haemostasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Laboratory evaluation of the extrinsic and common pathways is measured by the **prothrombin time** (PT). Citrated platelet-poor plasma is incubated with recombinant tissue factor, phospholipids, and calcium, timing fibrin strand formation. Normal PT is eleven to thirteen seconds. To standardize oral warfarin monitoring across disparate reagents, results are converted into the International Normalized Ratio (INR).",
+   "say": "Prothrombin time evaluates the extrinsic pathway by adding tissue factor and calcium, normally 11 to 13 seconds, standardized for warfarin monitoring as the INR.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prothrombin Time (PT / INR)",
+     "points": [
+      "Assesses extrinsic and common pathways (VII, X, V, II, I)",
+      "Reagent: Tissue factor, phospholipid, and calcium",
+      "Monitors oral vitamin K antagonists (warfarin)",
+      "Prolonged in liver disease, vitamin K lack, and DIC"
+     ]
+    },
+    "right": {
+     "title": "Activated Partial Thromboplastin Time (aPTT)",
+     "points": [
+      "Assesses intrinsic and common pathways (XII, XI, IX, VIII, X, V, II, I)",
+      "Reagent: Surface activator (silica/kaolin), phospholipid, and calcium",
+      "Monitors unfractionated intravenous heparin therapy",
+      "Prolonged in Haemophilia A, Haemophilia B, and lupus anticoagulant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The intrinsic and common coagulation pathways are evaluated by the **aPTT**. Citrated plasma is incubated with a contact surface activator such as silica, celite, or kaolin alongside partial thromboplastin (phospholipid), followed by calcium re-addition. Normal aPTT ranges between thirty and forty seconds, serving as the standard clinical monitor for unfractionated heparin therapy.",
+   "say": "The aPTT evaluates the intrinsic pathway using a contact surface activator and phospholipid, normally 30 to 40 seconds, used to monitor unfractionated heparin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coagulation Profile Pattern",
+     "Bleeding Time",
+     "PT / INR",
+     "aPTT",
+     "Clinical Diagnosis"
+    ],
+    "rows": [
+     [
+      "Haemophilia A / B",
+      "Normal",
+      "Normal",
+      "Prolonged",
+      "Deficiency of Factor VIII (A) or IX (B)"
+     ],
+     [
+      "Warfarin / Vitamin K Deficiency",
+      "Normal",
+      "Prolonged",
+      "Prolonged (mild)",
+      "Impaired synthesis of II, VII, IX, X"
+     ],
+     [
+      "Von Willebrand Disease",
+      "Prolonged",
+      "Normal",
+      "Prolonged (mild)",
+      "Defective adhesion and secondary FVIII drop"
+     ],
+     [
+      "Severe Thrombocytopenia",
+      "Prolonged",
+      "Normal",
+      "Normal",
+      "Primary platelet plug defect"
+     ],
+     [
+      "Disseminated Intravascular Coagulation",
+      "Prolonged",
+      "Prolonged",
+      "Prolonged",
+      "Consumptive coagulopathy with low fibrinogen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A specialized test assessing primary vascular-platelet plug formation in vivo is the **bleeding time**, traditionally measured via the Ivy method with a standardized forearm incision. Normal bleeding time is two to nine minutes. Bleeding time is prolonged by thrombocytopenia, von Willebrand disease, and antiplatelet drugs like aspirin, but remains strictly normal in uncomplicated haemophilia.",
+   "say": "Bleeding time evaluates platelet-vessel interaction, normally two to nine minutes. It is prolonged in thrombocytopenia and aspirin use, but normal in haemophilia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Platelet Disorders (Primary)",
+     "points": [
+      "Mucocutaneous bleeding (petechiae, purpura, epistaxis)",
+      "Prolonged bleeding time (> 9 minutes)",
+      "Normal PT/INR and normal aPTT",
+      "Immediate onset of bleeding following minor trauma"
+     ]
+    },
+    "right": {
+     "title": "Coagulation Factor Deficiencies (Secondary)",
+     "points": [
+      "Deep tissue bleeding (haemarthrosis, intramuscular haematoma)",
+      "Normal bleeding time; abnormal PT or aPTT",
+      "Delayed onset of bleeding (hours after trauma)",
+      "Requires replacement of specific missing clotting factors"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
