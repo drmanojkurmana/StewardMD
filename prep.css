@@ -1129,7 +1129,9 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 /* Landscape iPad runner: the question (and its image) on the left, options and feedback on the right. The stem stays
    in view while the answer side scrolls. Floats keep today's markup and reading order. */
 @media (orientation: landscape) and (min-width: 900px) {
-  .pn-root .pn-run:not(.pn-battle) > * { max-width: 1040px; }
+  /* Questions use the whole iPad width (owner 2026-11-09): side gutters only past 1280 px, instead of the 960 px column. */
+  .pn-root .pn-body.pn-run:not(.pn-battle) { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1280px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1280px) / 2)); }
+  .pn-root .pn-run:not(.pn-battle) > * { max-width: 1280px; }
   .pn-root > .pn-qprog { max-width: 1072px; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw { --pn-ql: 50%; display: flow-root; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw:has(> .pn-yq-fig, > .pn-stack) { --pn-ql: 56%; }
