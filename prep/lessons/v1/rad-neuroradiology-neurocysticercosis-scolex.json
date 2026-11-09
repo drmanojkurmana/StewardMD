@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-neuroradiology-neurocysticercosis-scolex",
+ "subject": "radiology",
+ "module": "rad-neuroradiology",
+ "title": "Neurocysticercosis Scolex, Stages and Tram Track Calcification",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Hole with dot is the scolex",
+   "tx": "**Neurocysticercosis** shows a cystic lesion with an eccentric bright nodule inside it, the hole with dot appearance of the larval scolex, pathognomonic on MRI. The pictured MRI spectrum moves from vesicular cysts through enhancing rings to calcified granulomas. Seizures are the commonest presentation in endemic regions, and a lesion with a visible scolex needs no biopsy because the parasite head is the diagnosis itself.",
+   "say": "Neurocysticercosis shows a cyst with an eccentric nodule inside it, the hole with dot appearance of the larval scolex, pathognomonic on MRI. The pictured spectrum moves from vesicular cysts to calcified granulomas. A lesion with a visible scolex needs no biopsy because the parasite head is the diagnosis.",
+   "vis": {"kind": "image", "src": "v1/kb/media/neurocysticercosis-fig1.webp", "alt": "MRI images showing neurocysticercosis cysts with scolex across stages.", "caption": "Neurocysticercosis MRI spectrum with scolex. Illustration: StewardMD."}
+  },
+  {
+   "title": "Four stages of the cyst",
+   "tx": "**Vesicular stage** cysts hold a living larva, follow fluid signal, show the scolex and cause no oedema or enhancement, so patients are often asymptomatic. Colloidal vesicular stage is the dying larva: the fluid turns turbid, the wall enhances and oedema erupts, producing seizures. Granulomatous nodular stage shrinks the lesion into an enhancing nodule, and calcified stage leaves a small calcified granuloma that can still fire seizures around gliosis.",
+   "say": "Vesicular cysts hold a living larva, follow fluid signal and cause no oedema. Colloidal stage is the dying larva: wall enhances, oedema erupts and seizures follow. Granulomatous stage shrinks into an enhancing nodule, and calcified stage leaves a granuloma that can still fire seizures.",
+   "vis": {"kind": "table", "cols": ["Stage", "Wall enhancement", "Oedema"], "rows": [["Vesicular", "None", "None"], ["Colloidal vesicular", "Ring appears", "Marked"], ["Granulomatous nodular", "Solid nodule", "Falling"], ["Calcified", "None", "None, gliosis only"]]}
+  },
+  {
+   "title": "Steroids before antiparasitics",
+   "tx": "**Antiparasitic therapy** with albendazole or praziquantel kills larvae and can worsen oedema and seizures as cysts die, so corticosteroids start first or alongside in parenchymal disease. Calcified lesions hold dead parasites and get no antiparasitic benefit, only antiseizure treatment. Ocular and spinal disease and untreated hydrocephalus forbid antiparasitics until specialists clear them, because dying cysts in those sites destroy vision, cord or fluid pathways.",
+   "say": "Antiparasitic therapy kills larvae and can worsen oedema as cysts die, so corticosteroids start first or alongside. Calcified lesions hold dead parasites and get only antiseizure treatment. Ocular and spinal disease forbid antiparasitics until specialists clear them, because dying cysts there destroy vision or cord.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stage the lesions"}, {"id": "b", "label": "Steroids started"}, {"id": "c", "label": "Albendazole added"}, {"id": "d", "label": "Seizure cover continued"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Subarachnoid racemose disease",
+   "tx": "**Racemose cysticercosis** grows grape like cyst clusters in the basal cisterns and sylvian fissures without a scolex, because the larva proliferates membranes instead of forming one head. It blocks fluid pathways into hydrocephalus and wraps arteries into vasculitic infarcts. Imaging shows multilobulated fluid signal masses filling cisterns, and treatment leans on steroids, prolonged antiparasitics and shunting rather than the short courses used for single parenchymal cysts.",
+   "say": "Racemose cysticercosis grows grape like cyst clusters in the basal cisterns without a scolex. It blocks fluid pathways into hydrocephalus and wraps arteries into vasculitic infarcts. Treatment leans on steroids, prolonged antiparasitics and shunting rather than short courses for single parenchymal cysts.",
+   "vis": {"kind": "compare", "left": {"title": "Parenchymal cysts", "points": ["Scolex visible", "Four neat stages", "Seizures dominant", "Short antiparasitic course"]}, "right": {"title": "Racemose cisternal", "points": ["No scolex", "Grape like clusters", "Hydrocephalus and infarcts", "Prolonged therapy, shunt"]}}
+  },
+  {
+   "title": "Calcified granuloma versus tuberculoma",
+   "tx": "**Calcified granuloma** of healed cysticercosis is a small round calcification under 10 mm with gliosis and no oedema at rest, reactivating oedema around it during some seizures. Calcified tuberculomas run larger, cluster with meningitis history and sit beside other ring lesions in different stages. CT catches calcification that MRI susceptibility only hints at, so a seizure workup in endemic regions still earns one CT pass for calcified stages.",
+   "say": "Calcified granuloma of healed cysticercosis is a small calcification under ten millimetres with gliosis and no resting oedema. Calcified tuberculomas run larger and cluster with meningitis history. CT catches calcification MRI only hints at, so seizure workups still earn one CT pass.",
+   "vis": {"kind": "table", "cols": ["Feature", "Healed cysticercosis", "Calcified tuberculoma"], "rows": [["Size", "Under 10 mm typical", "Often larger"], ["Company kept", "Cysts in other stages", "Meningitis signs"], ["Scolex in siblings", "Often found", "Never"], ["Oedema at rest", "Absent", "Variable"]]}
+  },
+  {
+   "title": "Tram track calcification",
+   "tx": "**Tram track calcification** draws parallel wavy lines along a gyrus in Sturge Weber syndrome, calcified cortex under a leptomeningeal angioma that follows the port wine stain territory. The paired lines are the two banks of a sulcus calcifying together, best seen on CT, with underlying brain atrophy and an enlarged choroid plexus on the same side. Seizures and glaucoma complete the syndrome the calcification announces.",
+   "say": "Tram track calcification draws parallel wavy lines along a gyrus in Sturge Weber syndrome, calcified cortex under a leptomeningeal angioma. The paired lines are two banks of a sulcus calcifying together, with underlying atrophy. Seizures and glaucoma complete the syndrome the calcification announces.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Leptomeningeal angioma"}, {"id": "b", "label": "Cortex below calcifies"}, {"id": "c", "label": "Sulcus banks form tram track"}, {"id": "d", "label": "Atrophy and seizures follow"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Other calcification patterns sort themselves",
+   "tx": "**Intracranial calcification** sorts by pattern: periventricular nodules in tuberous sclerosis, basal ganglia symmetry in metabolic disease and Fahr syndrome, pineal and habenular as normal age findings, and tumour calcification in oligodendroglioma and meningioma. Physiological calcification grows with age in choroid plexus and dura. A calcified lesion in a child is pathological far more often than the identical density in a seventy year old, so age sets the alarm threshold.",
+   "say": "Intracranial calcification sorts by pattern: periventricular nodules in tuberous sclerosis, basal ganglia symmetry in metabolic disease, tumour calcification in oligodendroglioma and meningioma. Physiological calcification grows with age. A calcified lesion in a child is pathological far more often than in a seventy year old.",
+   "vis": {"kind": "compare", "left": {"title": "Usually physiological", "points": ["Pineal and habenular", "Choroid plexus", "Falx and dura with age", "Symmetric basal ganglia in elderly"]}, "right": {"title": "Pathological patterns", "points": ["Periventricular nodules", "Tram track gyrus", "Calcified granulomas", "Any calcification in a young child"]}}
+  },
+  {
+   "title": "Imaging the seizure patient in endemic areas",
+   "tx": "**Seizure imaging** in cysticercosis regions pairs MRI for scolex and stages with CT for calcified endpoints, because treatment forks on stage, not on lesion count. A single enhancing lesion in a child is most often a dying cyst or tuberculoma, and follow up imaging at three to six months showing resolution spares biopsy. Lesions that grow, cross compartments or develop solid enhancing nodules leave the granuloma pathway and earn tissue diagnosis.",
+   "say": "Seizure imaging in endemic regions pairs MRI for scolex and stages with CT for calcified endpoints, because treatment forks on stage. A single enhancing lesion in a child is most often a dying cyst or tuberculoma, and resolution at three to six months spares biopsy. Growing lesions earn tissue diagnosis.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "MRI stages the cysts"}, {"id": "b", "label": "CT counts calcified lesions"}, {"id": "c", "label": "Steroid covered therapy"}, {"id": "d", "label": "Follow up proves resolution"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}
