@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-picorna-enteric",
+  "subject": "microbiology",
+  "title": "Rotavirus, Norovirus, Astrovirus and Enteric Adenovirus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Rotavirus** is a non-enveloped, triple-layered virus with eleven segments of double-stranded RNA. It infects mature small intestinal villus enterocytes, causing malabsorption and toxin-like NSP4 mediated secretion. Before vaccination it was the leading cause of severe dehydrating diarrhoea in infants and toddlers worldwide. Oral live vaccines markedly reduced hospitalisations where coverage is high.",
+      "say": "Rotavirus destroys absorptive villus tips and adds NSP4 secretion to dehydration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Disease pattern",
+          "points": [
+            "Vomiting precedes watery diarrhoea",
+            "Fever and dehydration in infants",
+            "Seasonal peaks in cooler months historically",
+            "Adults usually milder from prior immunity"
+          ]
+        },
+        "right": {
+          "title": "Vaccine effect",
+          "points": [
+            "Live oral vaccines mimic natural protection",
+            "Greatest impact on severe disease",
+            "Small intussusception risk monitored",
+            "Strict upper age limits in many schedules"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Norovirus** is a small non-enveloped single-stranded RNA calicivirus and the classic cause of explosive vomiting outbreaks in cruise ships, schools, hospitals and care homes. It has a low infectious dose, environmental persistence, multiple genotypes and short-lived strain-specific immunity. People can shed before symptoms and after recovery, allowing outbreaks to propagate despite cleaning unless disinfection targets non-enveloped viruses.",
+      "say": "Norovirus wins by tiny dose, hard shell and vomiting aerosols in closed settings.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Outbreak clues",
+          "points": [
+            "Sudden vomiting in many people",
+            "Short incubation around twelve to forty eight hours",
+            "Diarrhoea and cramps for one to three days",
+            "Secondary household spread is common"
+          ]
+        },
+        "right": {
+          "title": "Control clues",
+          "points": [
+            "Soap and water preferred for hands",
+            "Chlorine based environmental disinfection",
+            "Exclude food handlers while ill and after",
+            "Cohort staff and patients in institutions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Astrovirus** is a star-shaped non-enveloped RNA virus named for surface morphology. It usually causes milder watery diarrhoea in young children, older adults and immunocompromised people. Disease can be prolonged and severe when cellular immunity is poor. It is detected in multiplex gastrointestinal PCR panels, but a positive panel result still needs clinical correlation because shedding and co-detections occur.",
+      "say": "Astrovirus is usually a milder childhood diarrhoea that becomes prolonged in immunosuppression.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typical course",
+          "points": [
+            "Watery diarrhoea and low grade fever",
+            "Less vomiting than norovirus",
+            "Short course in healthy children",
+            "Winter seasonality in temperate settings"
+          ]
+        },
+        "right": {
+          "title": "Testing caution",
+          "points": [
+            "PCR panels may detect low levels",
+            "Multiple pathogens can appear together",
+            "Prolonged shedding in immunocompromise",
+            "Hydration remains the treatment endpoint"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Enteric adenoviruses** types 40 and 41 are non-enveloped DNA viruses causing prolonged watery diarrhoea in young children. Unlike respiratory adenoviruses, they grow poorly in routine cell culture and are detected antigenically or molecularly. Illness may last longer than rotavirus and can be severe in immunocompromised children. Types are species F adenoviruses, a useful taxonomy point for stool panel interpretation.",
+      "say": "Adenovirus 40 and 41 are the gut-adapted species F causes of lingering infant diarrhoea.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical features",
+          "points": [
+            "Watery diarrhoea often over a week",
+            "Low grade fever and vomiting",
+            "Infants and toddlers predominantly",
+            "Can persist in immunodeficiency"
+          ]
+        },
+        "right": {
+          "title": "Diagnosis",
+          "points": [
+            "Stool antigen for types 40 and 41",
+            "Multiplex PCR in modern panels",
+            "Not reliably isolated in routine culture",
+            "Exclude bacterial and parasitic causes when prolonged"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Across viral gastroenteritis, **rehydration saves lives** and antibiotics do not help. Oral rehydration solution exploits sodium-glucose co-transport, while intravenous fluids are reserved for shock, failed oral replacement or severe electrolyte disturbance. Antiemetics may support oral intake in selected children. Zinc supplementation is used for childhood diarrhoea in many low-resource guidelines because it shortens illness and reduces subsequent episodes.",
+      "say": "Fluids, not antimicrobials, are the universal treatment for viral diarrhoea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "assess",
+            "label": "Assess dehydration and shock"
+          },
+          {
+            "id": "oral",
+            "label": "Oral rehydration and ongoing losses"
+          },
+          {
+            "id": "iv",
+            "label": "IV fluids if shock or oral failure"
+          },
+          {
+            "id": "feed",
+            "label": "Resume age appropriate feeding"
+          }
+        ],
+        "edges": [
+          [
+            "assess",
+            "oral"
+          ],
+          [
+            "oral",
+            "iv"
+          ],
+          [
+            "iv",
+            "feed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The key differentiator among these agents is **epidemiologic tempo**: rotavirus traditionally hospitalises infants over days, norovirus explodes through institutions in hours, astrovirus is milder and adenovirus lingers. Stool PCR panels identify them simultaneously, changing infection control more than individual therapy. In a hospital outbreak, notify infection prevention before results return if vomiting cases cluster.",
+      "say": "Cluster pattern tells infection control what to do before the stool panel returns.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fast cluster",
+          "points": [
+            "Norovirus vomiting dominant",
+            "Multiple staff and patients quickly",
+            "Environmental disinfection urgent",
+            "Ward closure may be required"
+          ]
+        },
+        "right": {
+          "title": "Slower paediatric pattern",
+          "points": [
+            "Rotavirus severe infant dehydration",
+            "Adenovirus prolonged individual course",
+            "Astrovirus milder seasonal cases",
+            "Cohorting and hand hygiene still essential"
+          ]
+        }
+      }
+    }
+  ]
+}
