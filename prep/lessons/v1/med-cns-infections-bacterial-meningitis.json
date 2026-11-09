@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-cns-infections",
+ "subject": "medicine",
+ "title": "Acute Bacterial Meningitis: Clinical Signs, CSF, and Empiric Therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A life-threatening medical emergency characterised by acute purulent inflammation of the leptomeninges and subarachnoid space is **bacterial meningitis**. Pathogens colonise the nasopharynx, cross mucosal barriers into the bloodstream, and invade the subarachnoid space across the blood-brain barrier, triggering an intense host neutrophilic inflammatory response, cerebral oedema, and raised intracranial pressure.",
+   "say": "A life-threatening medical emergency characterized by acute purulent inflammation of the leptomeninges is bacterial meningitis. Pathogens colonise the nasopharynx, cross into the bloodstream, and invade the subarachnoid space, triggering an intense neutrophilic response, cerebral edema, and raised intracranial pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-meningitis-fig1.webp",
+    "alt": "Purulent leptomeningeal exudate and clinical signs in acute bacterial meningitis.",
+    "caption": "Subarachnoid neutrophilic exudate and vascular congestion in bacterial meningitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic clinical triad of acute bacterial meningitis consists of high fever, altered mental status, and marked nuchal rigidity. Physical examination elicits meningeal signs resulting from inflammatory stretching of hypersensitive spinal nerve roots, including resistance to passive neck flexion and involuntary thigh and knee flexion upon passive neck bending, recognized as the **Brudzinski sign**.",
+   "say": "The classic clinical triad of acute bacterial meningitis consists of high fever, altered mental status, and marked nuchal rigidity. Physical examination elicits meningeal signs including the Brudzinski sign, where passive neck flexion induces involuntary flexion of the hips and knees.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kernig Sign",
+     "points": [
+      "Patient supine with hip and knee flexed to 90 degrees",
+      "Attempted extension of the knee meets resistance",
+      "Pain in hamstring muscles from spinal root stretch",
+      "Positive when extension angle is < 135 degrees"
+     ]
+    },
+    "right": {
+     "title": "Brudzinski Sign",
+     "points": [
+      "Patient supine with legs fully extended",
+      "Examiner passively flexes the patient's neck",
+      "Involuntary reciprocal flexion of bilateral hips and knees",
+      "Reflects meningeal traction on lumbosacral roots"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The overall leading bacterial aetiology across all adult age groups is **Streptococcus pneumoniae** (pneumococcus), responsible for over fifty percent of community-acquired cases. Pneumococcal meningitis frequently arises secondary to contiguous spread from acute otitis media, mastoiditis, or sinusitis, and carries the highest mortality and neurological complication rate among all bacterial forms.",
+   "say": "The overall leading bacterial cause across all adult age groups is Streptococcus pneumoniae, responsible for over half of community-acquired cases. Pneumococcal meningitis frequently arises from otitis media or sinusitis, carrying the highest mortality and complication rate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Population",
+     "Dominant Bacterial Pathogens",
+     "Empiric Antibiotic Regimen"
+    ],
+    "rows": [
+     [
+      "Neonates (< 1 month)",
+      "Streptococcus agalactiae (GBS), E. coli, Listeria",
+      "Ampicillin + Cefotaxime OR Gentamicin"
+     ],
+     [
+      "Children and Adults (1 mo - 50 yr)",
+      "Streptococcus pneumoniae, Neisseria meningitidis",
+      "Ceftriaxone + Vancomycin + Dexamethasone"
+     ],
+     [
+      "Older Adults (> 50 yr) / Immunocompromised",
+      "S. pneumoniae, N. meningitidis, Listeria monocytogenes",
+      "Ceftriaxone + Vancomycin + Ampicillin + Dexamethasone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In adolescents and young adults residing in close quarters (dormitories, military barracks), an explosive bacterial meningitis is caused by the Gram-negative diplococcus **Neisseria meningitidis** (meningococcus). Fulminant meningococcaemia precipitates petechial and purpuric skin eruptions, disseminated intravascular coagulation, bilateral adrenal haemorrhagic necrosis (Waterhouse-Friderichsen syndrome), and rapid septic shock.",
+   "say": "In adolescents and young adults residing in close quarters, an explosive bacterial meningitis is caused by the Gram-negative diplococcus Neisseria meningitidis. Fulminant meningococcaemia precipitates petechial and purpuric skin eruptions, DIC, bilateral adrenal haemorrhage, and rapid septic shock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "men",
+      "label": "Meningococcal Endotoxaemia"
+     },
+     {
+      "id": "purp",
+      "label": "Cutaneous Petechiae & Purpura Fulminans"
+     },
+     {
+      "id": "adren",
+      "label": "Waterhouse-Friderichsen Adrenal Collapse"
+     }
+    ],
+    "edges": [
+     [
+      "men",
+      "purp"
+     ],
+     [
+      "purp",
+      "adren"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency lumbar puncture provides definitive diagnostic cerebrospinal fluid analysis (**CSF analysis**). In acute bacterial meningitis, CSF exhibits marked pleocytosis with thousands of polymorphonuclear neutrophils (frequently over one thousand cells per microlitre), profound hypoglycorrhachia (CSF to serum glucose ratio under 0.4), and markedly elevated CSF protein exceeding one-hundred milligrams per decilitre.",
+   "say": "Emergency lumbar puncture provides definitive cerebrospinal fluid analysis. In acute bacterial meningitis, spinal fluid demonstrates marked pleocytosis with over one thousand neutrophils per microlitre, marked hypoglycorrhachia with a glucose ratio under 0.4, and elevated protein.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-proc-csf-disease.webp",
+    "alt": "Cerebrospinal fluid profile comparison across bacterial, viral, and fungal meningitis.",
+    "caption": "Diagnostic CSF biochemical and cytological differentiation in meningitis types. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Before performing lumbar puncture, cranial computed tomography must be obtained only if specific risk factors for herniation exist: focal neurological deficits, new-onset seizures, papilloedema, severely depressed consciousness (GCS under ten), or immunocompromised state. Crucially, when CT imaging is required, empiric blood cultures and intravenous **antibiotics** must never be delayed pending imaging results.",
+   "say": "Before performing lumbar puncture, cranial computed tomography is required only if specific herniation risk factors exist: focal deficits, seizures, papilloedema, coma, or immunocompromise. When imaging is required, empiric blood cultures and antibiotics must never be delayed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Suspected Bacterial Meningitis"
+     },
+     {
+      "id": "scr",
+      "label": "Screen for Focal Deficits, Papilloedema, Coma"
+     },
+     {
+      "id": "imm",
+      "label": "Immediate Blood Cultures + IV Ceftriaxone / Vanco"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "scr"
+     ],
+     [
+      "scr",
+      "imm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The empiric bactericidal antibiotic backbone for community-acquired bacterial meningitis in immunocompetent adults is high-dose intravenous **ceftriaxone** (two grams every twelve hours) combined with vancomycin (to cover penicillin-resistant pneumococci). Ceftriaxone provides excellent CSF penetration, broad Gram-negative coverage, and potent killing against both Streptococcus pneumoniae and Neisseria meningitidis.",
+   "say": "The empiric bactericidal antibiotic backbone for community-acquired bacterial meningitis in adults is high-dose intravenous ceftriaxone combined with vancomycin. Ceftriaxone provides excellent CSF penetration, broad Gram-negative coverage, and potent killing against pneumococcus and meningococcus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Normal Adult CSF",
+     "Acute Bacterial Meningitis",
+     "Aseptic / Viral Meningitis"
+    ],
+    "rows": [
+     [
+      "Opening Pressure",
+      "100 to 200 mm H2O",
+      "Markedly elevated (> 250 mm H2O)",
+      "Normal to mildly elevated"
+     ],
+     [
+      "White Blood Cell Count",
+      "< 5 cells / uL (all lymphs)",
+      "1,000 to 10,000 / uL (> 80% PMNs)",
+      "50 to 500 / uL (predominantly lymphs)"
+     ],
+     [
+      "CSF to Serum Glucose",
+      "> 0.6 (or > 45 mg/dL)",
+      "Profoundly low (< 0.4, often < 20)",
+      "Normal (> 0.6)"
+     ],
+     [
+      "Total CSF Protein",
+      "15 to 45 mg/dL",
+      "Markedly elevated (100 to 500 mg/dL)",
+      "Mildly elevated (50 to 100 mg/dL)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients older than fifty years, pregnant women, neonates, and immunocompromised hosts, impaired cell-mediated immunity predisposing to rhombencephalitis and meningitis caused by **Listeria monocytogenes** mandates the immediate addition of intravenous ampicillin (two grams every four hours) to the empiric regimen, as cephalosporins possess zero intrinsic activity against Listeria.",
+   "say": "In patients older than fifty years, pregnant women, neonates, and immunocompromised hosts, cell-mediated vulnerability to Listeria monocytogenes mandates the addition of intravenous ampicillin to the empiric regimen, as cephalosporins possess no activity against Listeria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Special Pathogen",
+     "High-Risk Host Population",
+     "Mandatory Therapeutic Agent"
+    ],
+    "rows": [
+     [
+      "Listeria monocytogenes",
+      "Age > 50, pregnancy, alcoholism, cirrhosis",
+      "Add IV Ampicillin (cephalosporins are inactive)"
+     ],
+     [
+      "Pseudomonas aeruginosa",
+      "Post-neurosurgical, CSF shunt, penetrating trauma",
+      "Switch to IV Meropenem OR Cefepime + Vancomycin"
+     ],
+     [
+      "Close Contacts Prophylaxis",
+      "Household and oral contacts of Meningococcus",
+      "Single oral dose Rifampicin, Ciprofloxacin, or Ceftriaxone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 140"
+}
