@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-submandibular-tongue",
+ "subject": "anatomy",
+ "title": "Tongue Musculature, Genioglossus, and Dual Innervation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The tongue is a mobile muscular organ situated in the oral cavity and oropharynx, divided into symmetrical right and left halves by a median fibrous septum. Its substance is composed of eight pairs of muscles: four intrinsic muscles that alter its shape, and four **extrinsic muscles** that alter its position in space, anchoring it to the mandible, hyoid, styloid process, and palate.",
+   "say": "Divided by a median fibrous septum, the tongue comprises four intrinsic muscles altering shape and four extrinsic muscles governing spatial positioning and movement.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-hypoglossal.svg",
+    "alt": "Anatomical schematic showing extrinsic and intrinsic muscles of the tongue and the hypoglossal nerve",
+    "caption": "Motor innervation of the tongue muscles via the hypoglossal nerve (CN XII). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The four intrinsic muscles are confined entirely to the tongue without any bony attachments: superior longitudinal, inferior longitudinal, transverse, and vertical muscles. The **superior longitudinal** muscle curves the tip and edges of the tongue upward, rendering the dorsal surface concave, while the inferior longitudinal curves the tip downward. Transverse fibres narrow the tongue, and vertical fibres flatten it.",
+   "say": "Four intrinsic muscles lack bony attachments: superior and inferior longitudinal, transverse, and vertical. They coordinate to flatten, curl, narrow, and shape the tongue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intrinsic Muscle",
+     "Fibre Orientation",
+     "Functional Tongue Shaping Action"
+    ],
+    "rows": [
+     [
+      "Superior longitudinal",
+      "Submucosal longitudinal sheet on dorsum",
+      "Shortens tongue and turns tip and margins upwards (concave dorsum)"
+     ],
+     [
+      "Inferior longitudinal",
+      "Longitudinal band on ventral surface",
+      "Shortens tongue and curls tip downwards (convex dorsum)"
+     ],
+     [
+      "Transverse muscle",
+      "Radiates laterally from median septum to lateral margins",
+      "Narrows and elongates the tongue"
+     ],
+     [
+      "Vertical muscle",
+      "Descends vertically from dorsum to ventral surface",
+      "Flattens and broadens the tongue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The four extrinsic muscles arise from surrounding skeletal structures to insert into the tongue: genioglossus, hyoglossus, styloglossus, and palatoglossus. The **genioglossus** is a massive fan-shaped muscle arising from the superior mental spine (genial tubercle) of the symphysis menti. Its posterior fibres project the tongue forward out of the mouth, earning its designation as the safety muscle of the tongue.",
+   "say": "Genioglossus arises from the mental spine of the mandible. Its posterior fibres protrude the tongue forward, acting as the critical safety muscle that prevents airway asphyxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genioglossus (Safety Muscle)",
+     "points": [
+      "Arises from superior genial tubercle of mandible",
+      "Fans backward into entire length of tongue and hyoid",
+      "Protrudes the tongue and depresses the central dorsum",
+      "Tonic contraction prevents tongue falling backward into pharynx"
+     ]
+    },
+    "right": {
+     "title": "Hyoglossus & Styloglossus",
+     "points": [
+      "Hyoglossus: Arises from greater cornu of hyoid; depresses tongue",
+      "Styloglossus: Arises from styloid process; retracts and elevates tongue",
+      "Palatoglossus: Arises from palatine aponeurosis; elevates posterior tongue",
+      "Coordinate swallowing and food bolus propulsion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During general anaesthesia or loss of consciousness, relaxation of genioglossus permits the massive tongue base to fall backward against the posterior pharyngeal wall, producing complete airway occlusion. Anaesthetists execute a **jaw thrust** or chin lift to pull the mandible forward, which pulls the genial tubercles and genioglossus forward to clear the oropharyngeal airway.",
+   "say": "Loss of genioglossus tone during anesthesia allows the tongue to fall backward and occlude the pharynx. A jaw thrust pulls the genial spines forward to open the airway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Loss of Consciousness (Loss of resting motor tone in genioglossus muscle)"
+     },
+     {
+      "id": "a2",
+      "label": "Posterior Tongue Displacement (Weight of tongue falls against posterior pharyngeal wall)"
+     },
+     {
+      "id": "a3",
+      "label": "Complete Airway Occlusion (Immediate mechanical inspiratory obstruction and hypoxia)"
+     },
+     {
+      "id": "a4",
+      "label": "Jaw Thrust Maneuver (Forward traction on mandibular angles draws tongue forward via genial spines)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "All intrinsic and extrinsic muscles of the tongue are innervated by the hypoglossal nerve (cranial nerve XII), with a single solitary exception: **palatoglossus**, which is innervated by the cranial accessory nerve via the pharyngeal plexus (CN X). In unilateral hypoglossal nerve palsy, when the patient protrudes the tongue, the active contralateral genioglossus pushes the tongue towards the paralysed side.",
+   "say": "The hypoglossal nerve innervates all tongue muscles except palatoglossus, which is supplied by the vagus. In hypoglossal palsy, protruding the tongue deviates it toward the paralyzed side.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Unilateral Left CN XII Palsy (Denervation and atrophy of left genioglossus)"
+     },
+     {
+      "id": "h2",
+      "label": "Tongue Protrusion Attempt (Patient instructed to stick out tongue)"
+     },
+     {
+      "id": "h3",
+      "label": "Unopposed Right Drive (Normal right genioglossus contracts unopposed)"
+     },
+     {
+      "id": "h4",
+      "label": "Ipsilateral Deviation (Tongue points toward the affected, paralysed left side)"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sensory innervation of the tongue is divided into anterior two-thirds and posterior one-third by the V-shaped sulcus terminalis. Over the anterior two-thirds (derived from first pharyngeal arch lingual swellings), general somatic sensation (pain, touch, temperature) is carried by the **lingual nerve** (V3), whereas special visceral taste sensation is carried by the chorda tympani (CN VII).",
+   "say": "The anterior two-thirds receives dual sensory supply: lingual nerve V3 conveys general somatic sensation, while chorda tympani from the facial nerve conveys taste.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tongue Territory",
+     "Embryological Origin",
+     "General Sensation",
+     "Special Taste Sensation"
+    ],
+    "rows": [
+     [
+      "Anterior 2/3 (Oral part)",
+      "First pharyngeal arch (tuberculum impar & lateral swellings)",
+      "Lingual nerve (CN V3)",
+      "Chorda tympani (CN VII via lingual)"
+     ],
+     [
+      "Posterior 1/3 (Pharyngeal part)",
+      "Third pharyngeal arch (cranial part of hypobranchial eminence)",
+      "Glossopharyngeal nerve (CN IX)",
+      "Glossopharyngeal nerve (CN IX)"
+     ],
+     [
+      "Valvate papillae (circumvallate)",
+      "Situated anterior to sulcus terminalis",
+      "Glossopharyngeal nerve (CN IX)",
+      "Glossopharyngeal nerve (CN IX)"
+     ],
+     [
+      "Vallecula and epiglottic base",
+      "Fourth pharyngeal arch",
+      "Internal laryngeal nerve (CN X)",
+      "Internal laryngeal nerve (CN X)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Over the posterior one-third of the tongue (derived from the third pharyngeal arch), the glossopharyngeal nerve (cranial nerve IX) supplies BOTH general sensation and special taste sensation. Remarkably, the large **circumvallate papillae**, although situated immediately anterior to the sulcus terminalis in the presulcal territory, are innervated entirely by the glossopharyngeal nerve.",
+   "say": "The glossopharyngeal nerve supplies both general sensation and taste to the posterior third. It also innervates the large circumvallate papillae in front of the sulcus terminalis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Two-Thirds (Presulcal)",
+     "points": [
+      "Derived from first pharyngeal arch",
+      "General sensation: Lingual nerve (trigeminal V3)",
+      "Taste: Chorda tympani (facial VII)",
+      "Covered by filiform, fungiform, and foliate papillae"
+     ]
+    },
+    "right": {
+     "title": "Posterior One-Third (Postsulcal)",
+     "points": [
+      "Derived from third pharyngeal arch",
+      "General sensation AND taste: Glossopharyngeal (IX)",
+      "Supplies circumvallate papillae situated anterior to sulcus",
+      "Contains lymphoid nodules of the lingual tonsil"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lymphatic drainage of the tongue features marked bilateral cross-drainage that dictates surgical margins in oral malignancy. The tip drains bilaterally into the submental nodes. The lateral margins drain into ipsilateral submandibular nodes. The central dorsum drains bilaterally into deep cervical nodes, including the prominent **jugulodigastric node** (sentinel node of the palatine tonsil and tongue).",
+   "say": "Extensive midline cross-drainage characterizes tongue lymphatics. The tip drains to submental nodes, lateral margins to submandibular, and the posterior third to jugulodigastric nodes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-tonsil-relations.svg",
+    "alt": "Anatomical schematic tracing lymphatic drainage from tongue sectors to deep cervical lymph nodes",
+    "caption": "Lymphatic drainage routes of the tongue and oral floor culminating in the jugulodigastric and jugulo-omohyoid chains. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

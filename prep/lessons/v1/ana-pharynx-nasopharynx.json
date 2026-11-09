@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pharynx",
+ "subject": "anatomy",
+ "title": "Nasopharynx, Pharyngeal Tonsils, and Eustachian Tube Anatomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The pharynx is a wide, fibromuscular funnel approximately twelve centimetres in length extending from the base of the skull to the lower border of the cricoid cartilage (C6), where it continues as the oesophagus. It is divided topographically into three distinct parts: the **nasopharynx** behind the nasal cavities, the oropharynx behind the oral cavity, and the laryngopharynx behind the larynx.",
+   "say": "Extending from the skull base to C6, the twelve-centimetre pharynx divides into nasopharynx, oropharynx, and laryngopharynx before continuing as the esophagus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Gross anatomical sagittal section of the human head showing nasal cavity, nasopharynx, and pharyngeal wall",
+    "caption": "Sagittal anatomy of the upper respiratory tract displaying the nasopharynx and nasal choanae. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The nasopharynx is the purely respiratory upper segment of the pharynx, situated behind the posterior nasal apertures (choanae) above the level of the soft palate. Unlike the lower segments, its walls are rigid and non-collapsible. The roof and posterior wall form a continuous sloping surface resting on the basilar part of the occipital bone and the **sphenoid sinus**.",
+   "say": "Positioned behind the nasal choanae above the soft palate, the nasopharynx has rigid non-collapsible walls. It functions purely as an open respiratory conduit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nasopharynx (Respiratory)",
+     "points": [
+      "Lined by pseudostratified ciliated columnar epithelium",
+      "Communicates anteriorly with nasal cavity via choanae",
+      "Walls supported by rigid skull base and pharyngobasilar fascia",
+      "Never collapses during normal respiration"
+     ]
+    },
+    "right": {
+     "title": "Oropharynx and Laryngopharynx (Digestive)",
+     "points": [
+      "Lined by non-keratinised stratified squamous epithelium",
+      "Communicates with oral cavity and laryngeal inlet",
+      "Muscular walls undergo coordinated peristaltic collapse",
+      "Conducts both food boluses and respiratory air"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the mucous membrane of the roof and posterior wall of the nasopharynx lies the pharyngeal tonsil, a prominent collection of unencapsulated subepithelial lymphoid tissue. When pathologically hypertrophied in young children, this tissue is designated **adenoids**. Marked adenoidal hypertrophy obstructs the posterior choanae, compelling mouth breathing, snoring, and a characteristic adenoid facies.",
+   "say": "In the roof of the nasopharynx lies the pharyngeal tonsil, called adenoids when enlarged. Severe hypertrophy obstructs nasal airflow, producing mouth breathing and adenoid facies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Chronic Respiratory Infections (Frequent viral and bacterial antigenic stimulation)"
+     },
+     {
+      "id": "a2",
+      "label": "Adenoid Hypertrophy (Marked lymphoid follicular expansion in nasopharyngeal roof)"
+     },
+     {
+      "id": "a3",
+      "label": "Choanal Obstruction (Obliteration of posterior nasal airway forces chronic mouth breathing)"
+     },
+     {
+      "id": "a4",
+      "label": "Adenoid Facies (Elongated face, open mouth, high-arched palate, and crowded incisors)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On each lateral wall of the nasopharynx, approximately one centimetre behind the inferior nasal concha, lies the triangular pharyngeal opening of the auditory tube (Eustachian tube). Overhanging the orifice superiorly and posteriorly is a firm crescentic elevation called the **torus tubarius**, produced by the underlying cartilaginous end of the tube.",
+   "say": "One centimetre behind the inferior concha lies the auditory tube orifice. The cartilaginous end of the tube bulges as the prominent torus tubarius overhanging the opening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lateral Wall Landmark",
+     "Anatomical Structure",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Pharyngeal orifice of auditory tube",
+      "Opening 1 cm behind inferior concha",
+      "Equalises atmospheric pressure across tympanic membrane"
+     ],
+     [
+      "Torus tubarius",
+      "Prominence of tubal cartilage",
+      "Overhangs tubal orifice; mucosal tubal tonsil guards opening"
+     ],
+     [
+      "Salpingopharyngeal fold",
+      "Vertical fold descending from torus",
+      "Contains salpingopharyngeus muscle; elevates pharynx on swallowing"
+     ],
+     [
+      "Pharyngeal recess (Rosenmuller fossa)",
+      "Deep slit-like depression behind torus",
+      "Most frequent primary site of origin for nasopharyngeal carcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediately behind the torus tubarius and salpingopharyngeal fold lies a deep, slit-like peritoneal depression designated the pharyngeal recess (fossa of Rosenmuller). The **fossa of Rosenmuller** is of paramount oncological importance as the standard site of origin for nasopharyngeal carcinoma, which can invade the skull base through foramen lacerum to involve cranial nerves.",
+   "say": "Behind the torus tubarius lies the fossa of Rosenmuller. This deep lateral recess represents the most common site of origin for nasopharyngeal carcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Fossa of Rosenmuller (Occult origin site of Epstein-Barr virus-associated carcinoma)"
+     },
+     {
+      "id": "r2",
+      "label": "Auditory Tube Obstruction (Early conductive hearing loss and unilateral serous otitis media)"
+     },
+     {
+      "id": "r3",
+      "label": "Superior Skull Base Invasion (Erosion through foramen lacerum into cavernous sinus)"
+     },
+     {
+      "id": "r4",
+      "label": "Trotter Triad (Unilateral deafness, trigeminal neuralgia, and palatal immobility)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adenoid hypertrophy frequently occludes the pharyngeal opening of the auditory tube. Because the auditory tube cannot ventilate the tympanic cavity, oxygen is absorbed by mucosal capillaries, creating negative middle ear pressure. This transudates serous fluid into the middle ear, producing **otitis media with effusion** (glue ear), the commonest cause of conductive deafness in childhood.",
+   "say": "Enlarged adenoids block the Eustachian tube orifice. Trapped air is absorbed, creating negative pressure that draws fluid into the middle ear to produce glue ear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patent Auditory Tube",
+     "points": [
+      "Tensor veli palatini opens lumen on deglutition",
+      "Equalises middle ear pressure with atmosphere",
+      "Drains physiological mucus secretions into nasopharynx",
+      "Tympanic membrane vibrates freely with acoustic sound waves"
+     ]
+    },
+    "right": {
+     "title": "Obstructed Auditory Tube (Adenoids)",
+     "points": [
+      "Mechanical occlusion of tubal orifice",
+      "Negative middle ear pressure retracts tympanic membrane",
+      "Serous fluid accumulates in middle ear (glue ear)",
+      "Produces conductive hearing impairment and speech delay"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The muscular wall of the pharynx is constructed from three external circular constrictor muscles and three internal longitudinal elevators. The **superior constrictor** is a quadrilateral sheet arising from the pterygoid hamulus, pterygomandibular raphe, and mylohyoid line, sweeping backwards to insert into the median pharyngeal raphe and pharyngeal tubercle on the occipital bone.",
+   "say": "The pharyngeal wall features three circular constrictors. The superior constrictor arises from the pterygoid hamulus, pterygomandibular raphe, and mandible to insert into the occipital bone.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pharyngeal-gaps.svg",
+    "alt": "Anatomical schematic showing the three pharyngeal constrictor muscles and their intervening neurovascular gaps",
+    "caption": "Overlapping muscular hierarchy of the superior, middle, and inferior pharyngeal constrictors. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Above the upper concave border of the superior constrictor muscle lies the sinus of Morgagni, an anatomical gap closed by the dense pharyngobasilar fascia. Passing through this **sinus of Morgagni** to reach the nasopharynx are four key structures: the cartilaginous auditory tube, the levator veli palatini muscle, the ascending palatine artery, and the ascending pharyngeal artery.",
+   "say": "Above the superior constrictor, the sinus of Morgagni transmits the auditory tube, levator veli palatini, and ascending palatine vessels through the pharyngobasilar fascia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharyngeal Gap",
+     "Muscular Boundaries",
+     "Transmitted Conduits"
+    ],
+    "rows": [
+     [
+      "Gap 1 (Sinus of Morgagni)",
+      "Above superior constrictor (below skull base)",
+      "Auditory tube, levator veli palatini, ascending palatine artery"
+     ],
+     [
+      "Gap 2",
+      "Between superior and middle constrictors",
+      "Stylopharyngeus muscle, glossopharyngeal nerve (CN IX)"
+     ],
+     [
+      "Gap 3",
+      "Between middle and inferior constrictors",
+      "Internal laryngeal nerve, superior laryngeal artery"
+     ],
+     [
+      "Gap 4",
+      "Below inferior constrictor (into esophagus)",
+      "Recurrent laryngeal nerve, inferior laryngeal artery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}
