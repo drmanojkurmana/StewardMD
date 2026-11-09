@@ -1,0 +1,254 @@
+{
+ "key": "ped-fluids-electrolytes-maintenance-fluid",
+ "v": 1,
+ "module": "ped-fluids-electrolytes",
+ "subject": "paediatrics",
+ "title": "Pediatric Fluid and Electrolyte Homeostasis: Holliday-Segar and Acid-Base",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Daily maintenance water requirements in children correlate directly with physiological caloric expenditure rather than body weight alone. Under the classic **Holliday-Segar formula for maintenance fluids**, children require one hundred millilitres per kilogram for the first ten kilograms, fifty millilitres per kilogram for the second ten kilograms (eleven to twenty kilograms), and twenty millilitres per kilogram for each kilogram exceeding twenty kilograms.",
+   "say": "Calculate maintenance fluids using the Holliday-Segar rule: one hundred mL per kg for the first ten kilos, fifty for the next ten, and twenty for each kilo above twenty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Body Weight Tier",
+     "Daily Fluid Requirement (Holliday-Segar)",
+     "Hourly Infusion Rate Shortcut",
+     "Example Calculation (25 kg Child)"
+    ],
+    "rows": [
+     [
+      "First 10 kg (1 to 10 kg)",
+      "100 mL/kg/day",
+      "4 mL/kg/hour",
+      "10 kg x 100 mL = 1,000 mL/day"
+     ],
+     [
+      "Second 10 kg (11 to 20 kg)",
+      "Add 50 mL/kg/day for each kg over 10",
+      "Add 2 mL/kg/hour for each kg over 10",
+      "10 kg x 50 mL = 500 mL/day"
+     ],
+     [
+      "Each kg above 20 kg (>20 kg)",
+      "Add 20 mL/kg/day for each kg over 20",
+      "Add 1 mL/kg/hour for each kg over 20",
+      "5 kg x 20 mL = 100 mL/day (Total 1,600 mL)"
+     ],
+     [
+      "Electrolyte additives",
+      "Sodium: 2 to 3 mEq/kg/day; Potassium: 1 to 2 mEq/kg/day",
+      "Added after confirming adequate urine output",
+      "Isotonic fluids prevent hospital hyponatremia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contemporary pediatric fluid practice has shifted definitively away from historical hypotonic solutions to eliminate preventable iatrogenic morbidity. Modern international guidelines mandate utilizing **isotonic intravenous maintenance fluids** containing physiological sodium concentrations (such as 0.9% normal saline in five percent dextrose or Plasma-Lyte 148), because hospitalized children frequently secrete non-osmotic antidiuretic hormone, placing them at severe risk of fatal dilutional hyponatraemic encephalopathy.",
+   "say": "Use isotonic fluids like normal saline in five percent dextrose for maintenance. Hypotonic solutions cause fatal hospital-acquired hyponatremic encephalopathy due to ADH release.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modern Practice: Isotonic Fluids",
+     "points": [
+      "0.9% normal saline + 5% dextrose (154 mEq/L Na)",
+      "Or balanced crystalloid (Plasma-Lyte / Ringer lactate)",
+      "Completely prevents iatrogenic hospital hyponatraemia",
+      "Recommended standard of care in all pediatric guidelines"
+     ]
+    },
+    "right": {
+     "title": "Obsolete Practice: Hypotonic Fluids",
+     "points": [
+      "Historical 0.18% or 0.45% saline solutions",
+      "Excess free water rapidly enters brain cells",
+      "Non-osmotic ADH (pain, nausea, surgery) retains water",
+      "Provoked fatal cerebral edema, seizures, and herniation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid shifts in extracellular sodium osmolality produce severe neurological injury secondary to cellular swelling or shrinkage. In acute symptomatic hyponatremia with seizures, emergency administration of **hypertonic three percent saline** (three to five millilitres per kilogram over ten to twenty minutes) rapidly raises serum sodium by three to five milliequivalents, aborting cerebral herniation. Conversely, chronic hyponatremia must not be corrected faster than ten to twelve milliequivalents per day.",
+   "say": "Treat symptomatic hyponatremic seizures with three to five mL per kg of three percent hypertonic saline. Correct chronic hyponatremia slowly to prevent osmotic demyelination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Symptomatic Hyponatraemia",
+     "points": [
+      "Serum sodium drops acutely below 120-125 mEq/L",
+      "Presents with lethargy, vomiting, seizures, coma",
+      "Give 3% hypertonic saline (3-5 mL/kg over 15 min)",
+      "Rapidly shrinks swollen brain astrocytes to stop herniation"
+     ]
+    },
+    "right": {
+     "title": "Osmotic Demyelination Syndrome Risk",
+     "points": [
+      "Excessively rapid correction of chronic hyponatremia",
+      "Brain astrocytes cannot synthesize organic osmolytes quickly",
+      "Leads to central pontine and extrapontine myelinolysis",
+      "Strict correction speed limit: <10 to 12 mEq/L in 24 hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Elevation of extracellular potassium concentration disrupts cardiac membrane potential, threatening lethal ventricular arrhythmias. The earliest electrocardiographic manifestation of **hyperkalaemia on electrocardiogram** is tall, symmetrical, narrow, peaked T waves, followed by PR interval prolongation, flattening of P waves, widening of the QRS complex into a sine-wave pattern, and fatal ventricular fibrillation or asystole as serum potassium exceeds 7.0 mEq/L.",
+   "say": "Hyperkalemia causes tall peaked T waves, followed by QRS widening and fatal sine-wave arrest. Intravenous calcium gluconate stabilizes cardiac membranes immediately.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Electrocardiogram rhythm strips displaying progressive stages of hyperkalemic toxicity from peaked T waves to sine-wave arrest.",
+    "caption": "Sequential electrocardiographic changes of hyperkalemic cardiotoxicity and immediate membrane stabilization protocols. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate therapeutic management of severe hyperkalemic cardiotoxicity follows a clear sequential triad: stabilize, shift, and eliminate. Intravenous ten percent **calcium gluconate stabilizes myocardium** (0.5 mL/kg over five to ten minutes) by antagonizing the electrophysiological membrane depolarizing effect of potassium, followed by potassium-shifting therapies (insulin-dextrose infusion, salbutamol nebulization) and elimination via loop diuretics, potassium binders, or acute hemodialysis.",
+   "say": "Treat hyperkalemia with IV calcium gluconate for membrane stabilization, then shift potassium with insulin-dextrose or salbutamol, and eliminate with diuretics or dialysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Step",
+     "Pharmacological Agent & Dose",
+     "Onset & Duration of Effect",
+     "Mechanistic Action"
+    ],
+    "rows": [
+     [
+      "Membrane stabilization",
+      "10% Calcium gluconate (0.5 mL/kg IV over 5-10 min)",
+      "Onset: 1-3 minutes; lasts 30-60 min",
+      "Stabilizes threshold potential; protects heart"
+     ],
+     [
+      "Intracellular shifting (Beta)",
+      "Salbutamol nebulization (2.5-5 mg)",
+      "Onset: 15-30 minutes; lasts 2 hours",
+      "Beta-2 activation stimulates Na-K ATPase pump"
+     ],
+     [
+      "Intracellular shifting (Insulin)",
+      "Regular insulin (0.1 U/kg) + 25% Dextrose (2 mL/kg)",
+      "Onset: 15-30 minutes; lasts 4-6 hours",
+      "Insulin drives potassium into cells with glucose"
+     ],
+     [
+      "Potassium elimination",
+      "Furosemide (1-2 mg/kg) or Sodium polystyrene",
+      "Onset: 1 to 2 hours; permanent removal",
+      "Renal excretion or gastrointestinal resin binding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calculating the serum anion gap differentiates metabolic acidosis caused by unmeasured acid accumulation from bicarbonate-wasting disorders. Determining the **serum anion gap in metabolic acidosis** utilizing the formula: sodium minus the sum of chloride and bicarbonate (normal range eight to twelve milliequivalents per litre) divides acidosis into high anion gap acidosis (DKA, lactic acidosis, uremia, toxic ingestions) and normal anion gap acidosis (diarrhea, RTA).",
+   "say": "The serum anion gap is sodium minus chloride and bicarbonate, normally eight to twelve. High gap indicates DKA, lactic acidosis, or toxins; normal gap indicates diarrhea or RTA.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Acidosis Category",
+     "Serum Anion Gap Value",
+     "Pathophysiological Mechanism",
+     "Classic Pediatric Examples"
+    ],
+    "rows": [
+     [
+      "High anion gap acidosis",
+      "Anion gap >12 mEq/L (Often >20 mEq/L)",
+      "Accumulation of unmeasured organic acids",
+      "DKA (ketoacids), Sepsis (lactate), Inborn errors (organic)"
+     ],
+     [
+      "Normal anion gap acidosis",
+      "Anion gap normal (8 to 12 mEq/L)",
+      "Loss of bicarbonate replaced by chloride (hyperchloraemic)",
+      "Severe acute diarrhoea, Renal tubular acidosis"
+     ],
+     [
+      "MUDPILES mnemonic",
+      "Methanol, Uremia, DKA, Paraldehyde, Iron/INH, Lactic, Ethylene glycol, Salicylates",
+      "Systematic review of high anion gap toxins",
+      "Guides targeted toxicological screening"
+     ],
+     [
+      "Serum delta ratio",
+      "Delta AG divided by Delta HCO3-",
+      "Differentiates mixed acid-base disorders",
+      "Identifies concurrent metabolic alkalosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systematic step-wise evaluation of arterial blood gas parameters identifies primary respiratory versus metabolic disorders and compensatory adequacy. Interpreting **arterial blood gas interpretation** begins by assessing pH (acidaemia <7.35, alkalaemia >7.45), followed by identifying primary directional changes in PaCO2 (respiratory) and HCO3- (metabolic), and verifying whether secondary compensatory changes fall within physiologically expected mathematical boundaries.",
+   "say": "Evaluate blood gases systematically: pH determines acidemia or alkalemia, PaCO2 reflects respiratory status, and bicarbonate indicates metabolic components.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Acid-Base Disturbances",
+     "points": [
+      "Metabolic acidosis: low pH, low HCO3-, compensatory low PaCO2",
+      "Metabolic alkalosis: high pH, high HCO3-, compensatory high PaCO2",
+      "Respiratory acidosis: low pH, high PaCO2, compensatory high HCO3-",
+      "Respiratory alkalosis: high pH, low PaCO2, compensatory low HCO3-"
+     ]
+    },
+    "right": {
+     "title": "Winter Formula for Compensation",
+     "points": [
+      "Expected PaCO2 in metabolic acidosis = (1.5 x HCO3-) + 8 +/- 2",
+      "If measured PaCO2 > expected: concurrent respiratory acidosis",
+      "If measured PaCO2 < expected: concurrent respiratory alkalosis",
+      "Detects complex mixed triple acid-base disturbances"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Depression of ionized serum calcium concentration increases peripheral nerve and neuromuscular membrane excitability. Clinically manifesting with neuromuscular tetany, **pediatric acute hypocalcaemia** presents with perioral paresthesias, positive Chvostek sign (facial nerve tapping induces twitching of ipsilateral facial muscles), Trousseau sign (carpal spasm induced by inflating a sphygmomanometer cuff), laryngospasm causing stridor, and prolonged QTc interval on electrocardiogram.",
+   "say": "Hypocalcemia causes neuromuscular tetany with positive Chvostek and Trousseau signs, laryngospasm, and prolonged QTc intervals. Treat with IV calcium gluconate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical / ECG Sign",
+     "Elicitation Technique / Finding",
+     "Underlying Pathophysiology",
+     "Emergency Clinical Action"
+    ],
+    "rows": [
+     [
+      "Chvostek sign",
+      "Tapping facial nerve anterior to tragus",
+      "Facial muscle twitching (angle of mouth / nose)",
+      "Check ionized serum calcium immediately"
+     ],
+     [
+      "Trousseau sign",
+      "Inflate BP cuff >systolic pressure x 3 minutes",
+      "Carpal spasm: flexion of wrist & MCP joints",
+      "More specific than Chvostek for hypocalcaemia"
+     ],
+     [
+      "Prolonged QTc interval",
+      "QTc interval exceeds 440-460 milliseconds",
+      "Delayed myocardial repolarization from low calcium",
+      "Continuous cardiac telemetry monitoring"
+     ],
+     [
+      "Intravenous calcium rescue",
+      "10% Calcium gluconate (1-2 mL/kg over 10 min)",
+      "Dilute in 5% dextrose; monitor heart rate",
+      "Bradycardia alert: stop infusion immediately"
+     ]
+    ]
+   }
+  }
+ ]
+}

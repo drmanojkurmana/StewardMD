@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-hepatitis-viruses",
+  "subject": "microbiology",
+  "title": "Hepatitis Genotypes, Delta Agent and Hepatitis E",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "HBV **genotypes A to J** differ geographically and can influence HBeAg seroconversion, disease patterns and interferon response, but nucleos(t)ide therapy is selected mainly by DNA, ALT, fibrosis and resistance history. HCV genotype mattered more historically than with pangenotypic regimens. A genotype result must therefore be read in the treatment era, not memorised as if interferon still ruled.",
+      "say": "HBV genotype informs prognosis more than routine antiviral choice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HBV genotypes",
+          "points": [
+            "A in northern Europe and Africa subregions",
+            "B and C common in Asia",
+            "D widespread including India and Mediterranean",
+            "Can influence interferon response"
+          ]
+        },
+        "right": {
+          "title": "Treatment drivers",
+          "points": [
+            "HBV DNA and ALT",
+            "Cirrhosis and fibrosis stage",
+            "Pregnancy and immunosuppression plans",
+            "Prior lamivudine resistance history"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatitis D virus** is a defective satellite RNA virus that needs HBsAg to package and transmit. It can coinfect simultaneously with HBV or superinfect a chronic carrier. Superinfection often causes severe acute hepatitis and accelerates chronic liver disease. Every HBsAg-positive patient, especially with disproportionately severe disease or risk exposure, should be considered for anti-HDV testing with HDV RNA confirmation.",
+      "say": "Delta cannot travel alone; it steals the hepatitis B surface coat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Coinfection",
+          "points": [
+            "HBV and HDV acquired together",
+            "Can be severe but often resolves with HBV",
+            "Anti HBc IgM helps show acute HBV",
+            "Chronicity follows HBV outcome"
+          ]
+        },
+        "right": {
+          "title": "Superinfection",
+          "points": [
+            "HDV infects established HBsAg carrier",
+            "Often abrupt severe flare",
+            "High progression to chronic delta hepatitis",
+            "Anti HBc IgM usually not dominant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **delta agent** carries the smallest known human viral genome, a circular negative-sense RNA encoding delta antigen. It replicates independently but cannot form infectious particles without HBsAg. HDV suppresses HBV replication in many patients, so low HBV DNA does not mean mild liver disease. Bulevirtide blocks viral entry in some health systems, while HBV vaccination prevents delta by preventing its helper.",
+      "say": "Prevent hepatitis B and hepatitis D loses its vehicle.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnosis",
+          "points": [
+            "Anti HDV screening in HBsAg positive patients",
+            "HDV RNA confirms active replication",
+            "Delta antigen mainly early or tissue based",
+            "Test again if exposure or flare suggests"
+          ]
+        },
+        "right": {
+          "title": "Management principles",
+          "points": [
+            "Vaccinate susceptible contacts against HBV",
+            "Assess HBV DNA and liver fibrosis",
+            "Specialist therapy such as bulevirtide where licensed",
+            "Pegylated interferon historical or selected use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatitis E virus** is a faecal-oral RNA virus causing acute hepatitis in outbreaks from contaminated water, with zoonotic genotypes also linked to undercooked pork and game in high-income settings. Most cases resolve, but fulminant failure risk rises in pregnancy. Chronic HEV occurs in immunosuppressed transplant recipients, especially genotype 3, and may need reduction of immunosuppression or ribavirin.",
+      "say": "HEV is waterborne and acute for most, fulminant in pregnancy and chronic in transplant hosts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Genotypes 1 and 2",
+          "points": [
+            "Human waterborne epidemics",
+            "Asia and Africa outbreaks",
+            "Severe disease in pregnancy",
+            "No established chronicity in immunocompetent hosts"
+          ]
+        },
+        "right": {
+          "title": "Genotypes 3 and 4",
+          "points": [
+            "Zoonotic foodborne infection",
+            "Pigs and wild boar reservoirs",
+            "Chronic infection after transplantation",
+            "Neurologic manifestations including neuralgic amyotrophy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Anti-HEV IgM supports recent HEV infection while **HEV RNA** confirms infection in immunosuppression and chronicity. Cross-reactivity and variable assay sensitivity mean negative early tests do not always exclude disease. In transplant hepatitis, drug toxicity and rejection are differentials, but HEV RNA should not be forgotten because chronic viral hepatitis can progress to cirrhosis silently.",
+      "say": "In a transplant patient with hepatitis, HEV RNA belongs on the request form.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tests",
+          "points": [
+            "Anti HEV IgM for acute immunocompetent disease",
+            "HEV RNA in blood or stool",
+            "RNA persistence defines chronicity with duration",
+            "Liver enzymes do not identify the virus"
+          ]
+        },
+        "right": {
+          "title": "Pitfalls",
+          "points": [
+            "Serology assays vary",
+            "IgG may reflect remote exposure",
+            "Immunosuppressed patients may seroconvert poorly",
+            "Repeat molecular testing if suspicion remains"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A hepatitis alphabet review must anchor routes: **A and E are enteric**, B, C and D are blood and body-fluid associated, with D dependent on B. A and E do not ordinarily cause chronic infection in immunocompetent hosts; B, C and D can. This route and chronicity grid predicts screening, vaccination and pregnancy interventions better than memorising each virus as an isolated island.",
+      "say": "A and E enter by gut; B, C and D travel with blood, and D rides on B.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "route",
+            "label": "Faecal oral or blood borne"
+          },
+          {
+            "id": "chronic",
+            "label": "Can it persist"
+          },
+          {
+            "id": "vaccine",
+            "label": "Vaccine available for A and B"
+          },
+          {
+            "id": "action",
+            "label": "Match screening and prevention"
+          }
+        ],
+        "edges": [
+          [
+            "route",
+            "chronic"
+          ],
+          [
+            "chronic",
+            "vaccine"
+          ],
+          [
+            "vaccine",
+            "action"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Candida albicans, Germ Tube, Thrush, Vaginitis and Candidaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Candida albicans** is a commensal yeast of mouth, gut and vagina that becomes pathogenic when mucosa, immunity or microbiota are disturbed. The germ tube test identifies presumptive C. albicans: yeast incubated in serum at 37 degrees produces true hyphal outgrowths without constriction within two to three hours. Candida dubliniensis can also be germ-tube positive, a classic refinement.",
+      "say": "A germ tube in serum names presumptive Candida albicans within hours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/candidiasis-fig1.webp",
+        "alt": "Candida albicans blastospores and pseudohyphae",
+        "caption": "Candida albicans budding oval blastoconidia and elongated pseudohyphae demonstrated in clinical exudate [Credit: Ajay Kumar, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "**Oral candidiasis** or thrush forms removable white plaques on tongue and buccal mucosa over an erythematous base, unlike leukoplakia which cannot be scraped off. It signals antibiotics, inhaled steroids, diabetes or cellular immune defects; new thrush in an adult warrants HIV and glucose assessment. Angular cheilitis and denture stomatitis are related Candida syndromes in moist oral niches.",
+      "say": "Thrush scrapes off and bleeds slightly; leukoplakia stays fixed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Candida thrush",
+          "points": [
+            "Curd-like white plaques",
+            "Removable with gauze",
+            "Burning and altered taste",
+            "KOH shows pseudohyphae and budding yeast"
+          ]
+        },
+        "right": {
+          "title": "Differentials",
+          "points": [
+            "Leukoplakia fixed white patch",
+            "Lichen planus lacy Wickham striae",
+            "Hairy leukoplakia on lateral tongue in HIV",
+            "Aphthous ulcers are discrete and painful"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vulvovaginal candidiasis** causes itching, burning and thick curdy discharge with vaginal erythema, typically without odour and with normal vaginal pH, separating it from bacterial vaginosis and trichomoniasis. Recurrent disease means four or more episodes yearly and requires culture for non-albicans species and diabetes review. Azoles treat uncomplicated episodes; oral fluconazole is avoided in pregnancy in favour of topical therapy.",
+      "say": "Itch, curd and normal pH name Candida in vaginal discharge.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Candida pattern",
+          "points": [
+            "Pruritus dominant",
+            "Thick white discharge",
+            "pH usually below four point five",
+            "Pseudohyphae on saline or KOH"
+          ]
+        },
+        "right": {
+          "title": "Other vaginitis",
+          "points": [
+            "Bacterial vaginosis fishy thin discharge",
+            "Trichomonas frothy and motile trichomonads",
+            "Raised pH favours BV or trichomonas",
+            "Mixed infection is common"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Candidaemia** is Candida in blood, usually from central venous catheters, abdominal surgery, broad-spectrum antibiotics, parenteral nutrition or neutropenia. Blood cultures miss a substantial fraction of invasive candidiasis, so persistent fever in a high-risk ICU patient needs ophthalmology, catheter review, repeat cultures and empiric echinocandin consideration. Candida in blood is never dismissed as contamination because endocarditis, endophthalmitis and deep seeding follow.",
+      "say": "Candida growing from blood always demands action, never a contamination label.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risk stack",
+          "points": [
+            "Central line and parenteral nutrition",
+            "Recent abdominal surgery or leak",
+            "Broad spectrum antibiotics",
+            "Neutropenia or transplant immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Response",
+          "points": [
+            "Start echinocandin in most ICU candidaemia",
+            "Remove or replace central catheter where feasible",
+            "Dilated eye examination",
+            "Repeat cultures until clearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chromogenic Candida media** and MALDI-TOF mass spectrometry speed species identification by colony colour or protein fingerprint, while germ tube and chlamydospore formation on cornmeal agar remain low-cost albicans clues. Species matters because Candida krusei is intrinsically fluconazole resistant, Candida glabrata has dose-dependent or resistant azole patterns, and Candida parapsilosis has higher echinocandin MICs linked to its FKS sequence.",
+      "say": "In Candida, the species name predicts the resistance trap.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Identification",
+          "points": [
+            "Germ tube for albicans group",
+            "Chlamydospores on cornmeal agar",
+            "Chromogenic agar colony colours",
+            "MALDI TOF for rapid species"
+          ]
+        },
+        "right": {
+          "title": "Resistance clues",
+          "points": [
+            "Krusei intrinsically fluconazole resistant",
+            "Glabrata azole resistance increasing",
+            "Parapsilosis higher echinocandin MIC",
+            "Auris may resist all three major classes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Beta glucan is a **pan-fungal blood marker** raised in many invasive Candida, Aspergillus and Pneumocystis infections but absent or low in cryptococcosis and mucormycosis because their walls expose less of it. It supports, never proves, invasive candidiasis and has false positives from haemodialysis membranes, gauze and some blood products. Culture and clinical syndrome remain the arbiters of therapy.",
+      "say": "Beta glucan broadens fungal suspicion but cannot name the fungus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "risk",
+            "label": "ICU catheter antibiotic risk"
+          },
+          {
+            "id": "culture",
+            "label": "Blood cultures and biomarkers"
+          },
+          {
+            "id": "species",
+            "label": "Species plus susceptibility"
+          },
+          {
+            "id": "source",
+            "label": "Remove line search eye and heart seeding"
+          }
+        ],
+        "edges": [
+          [
+            "risk",
+            "culture"
+          ],
+          [
+            "culture",
+            "species"
+          ],
+          [
+            "species",
+            "source"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive species confirmation of Candida albicans on Dalmau cornmeal agar with Tween-80 relies on demonstrating thick-walled **chlamydospores** formed terminally on pseudohyphae. Incubation under a coverslip at twenty-five degrees restricts oxygen, stimulating robust pseudohyphal elongation and clusters of spherical refractile survival chlamydospores. Among medical yeasts, only Candida albicans and Candida dubliniensis routinely form these diagnostic terminal chlamydospores.",
+      "say": "Terminal chlamydospores develop on cornmeal agar with Tween under coverslip microaerophilic conditions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Species",
+          "Germ Tube Test",
+          "Chlamydospores on Cornmeal"
+        ],
+        "rows": [
+          [
+            "Candida albicans",
+            "Positive within 2-3 hours",
+            "Positive terminal chlamydospores"
+          ],
+          [
+            "Candida dubliniensis",
+            "Positive within 2-3 hours",
+            "Positive, often in pairs or triplets"
+          ],
+          [
+            "Candida tropicalis",
+            "Negative",
+            "Negative, long branching pseudohyphae"
+          ],
+          [
+            "Candida glabrata",
+            "Negative",
+            "Negative, only small budding yeasts"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In invasive candidiasis or candidal septic shock in neutropenic hosts, **echinocandin antifungals** including caspofungin, micafungin, and anidulafungin serve as first-line empiric agents over fluconazole. Echinocandins non-competitively inhibit 1,3-beta-D-glucan synthase, halting cell wall biosynthesis and causing fungicidal lysis of Candida species. Transition to oral fluconazole occurs only after blood cultures clear and antimicrobial susceptibility testing confirms azole sensitivity.",
+      "say": "Echinocandins target beta glucan synthase to provide fungicidal bactericidal killing in candidal sepsis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Blood cultures grow yeast from central line"
+          },
+          {
+            "id": "e2",
+            "label": "Initiate empiric IV echinocandin (caspofungin or micafungin)"
+          },
+          {
+            "id": "e3",
+            "label": "Step down to oral fluconazole after species identification and clearance"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2"
+          ],
+          [
+            "e2",
+            "e3"
+          ]
+        ]
+      }
+    }
+  ]
+}

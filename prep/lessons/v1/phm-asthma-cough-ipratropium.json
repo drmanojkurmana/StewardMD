@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phm-asthma-cough",
+  "subject": "pharmacology",
+  "title": "Inhaled Anticholinergics, Corticosteroid Pharmacodynamics, and Controller Therapeutics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The quaternary ammonium derivative of atropine formulated for inhalation that acts as a short-acting muscarinic receptor antagonist is **ipratropium** bromide. By competitively blocking postganglionic muscarinic M3 receptors on bronchial smooth muscle and submucosal glands, ipratropium inhibits vagally mediated bronchoconstriction and reduces watery mucus secretion. Because it carries a permanent positive quaternary charge, ipratropium exhibits minimal systemic absorption and cannot cross the blood-brain barrier, avoiding central anticholinergic toxicity while delivering bronchodilation within fifteen minutes lasting four to six hours.",
+      "say": "Ipratropium is an inhaled quaternary anticholinergic that blocks M3 receptors without crossing the blood-brain barrier.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ipra",
+            "label": "Inhaled ipratropium bromide aerosol administration"
+          },
+          {
+            "id": "m3",
+            "label": "Competitive blockade of airway smooth muscle M3 muscarinic receptors"
+          },
+          {
+            "id": "gq",
+            "label": "Inhibition of Gq-mediated IP3 generation and calcium influx"
+          },
+          {
+            "id": "relax",
+            "label": "Bronchial smooth muscle relaxation and decreased submucosal mucus secretion"
+          }
+        ],
+        "edges": [
+          [
+            "ipra",
+            "m3"
+          ],
+          [
+            "m3",
+            "gq"
+          ],
+          [
+            "gq",
+            "relax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A long-acting muscarinic antagonist characterized by functional kinetic selectivity for M3 receptors and a prolonged twenty-four-hour duration of bronchodilation is **tiotropium** bromide. Delivered once daily via dry powder inhaler or soft-mist inhaler, tiotropium binds M1, M2, and M3 receptors, but dissociates over thirty times more slowly from M1 and M3 receptors than from presynaptic inhibitory M2 autoreceptors. This prolonged kinetic receptor blockade provides sustained improvement in forced expiratory volume, reduces pulmonary hyperinflation, and decreases hospital exacerbation frequency in chronic obstructive pulmonary disease.",
+      "say": "Tiotropium dissociates slowly from M3 receptors, providing once-daily bronchodilation and reducing COPD exacerbations.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-proc-dpi.webp",
+        "alt": "Dry powder inhaler device showing capsule chamber and mouthpiece",
+        "caption": "Dry powder inhaler breath-actuated mechanism designed for once-daily maintenance delivery of tiotropium in chronic obstructive airway disease."
+      }
+    },
+    {
+      "tx": "The most effective long-term controller medications for suppressing underlying airway inflammation in persistent bronchial asthma are **inhaled corticosteroids**. Delivered directly to bronchial target tissues, agents like beclomethasone, fluticasone, and budesonide bind intracellular glucocorticoid receptors. The activated receptor complex translocates to the nucleus to recruit histone deacetylases, switching off transcription of pro-inflammatory cytokine genes including interleukin-4, interleukin-5, and interleukin-13. This suppresses eosinophil survival and mucosal edema while upregulating beta-2 adrenergic receptor expression to prevent tachyphylaxis.",
+      "say": "Inhaled corticosteroids recruit histone deacetylases to switch off inflammatory cytokine genes and prevent asthma exacerbations.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-exac-fig1.webp",
+        "alt": "Airway histopathology during severe acute asthma exacerbation",
+        "caption": "Bronchial cross-section comparing normal patent airway against acute asthma exacerbation showing mucosal edema, inflammatory infiltrates, and lumen occlusion."
+      }
+    },
+    {
+      "tx": "The non-halogenated glucocorticoid characterized by high topical anti-inflammatory potency, extensive hepatic first-pass clearance, and reversible intracellular fatty acid esterification is **budesonide**. Following pulmonary inhalation, budesonide is conjugated with cellular fatty acids to form lipophilic oleate and palmitate esters. These intracellular esters act as a slowly releasing tissue reservoir, prolonging its local anti-inflammatory residency in bronchial mucosa while minimizing systemic glucocorticoid exposure and hypothalamic-pituitary-adrenal axis suppression. It is available as dry powder inhalers, metered-dose inhalers, and pediatric nebulizer suspension.",
+      "say": "Budesonide forms intracellular fatty acid esters in airway tissues, creating a sustained local steroid reservoir.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Budesonide (Intracellular Esterification)",
+          "points": [
+            "Forms reversible intracellular fatty acid esters (oleate, palmitate)",
+            "Prolonged local mucosal residency via slow ester hydrolysis",
+            "90% hepatic first-pass inactivation of swallowed portion",
+            "Formulated for nebulization and SMART combination regimens"
+          ]
+        },
+        "right": {
+          "title": "Fluticasone Propionate (Fluorinated Steroid)",
+          "points": [
+            "High direct lipophilicity and high glucocorticoid receptor affinity",
+            "Extensive 99% hepatic first-pass metabolism",
+            "Minimal oral bioavailability of swallowed drug fraction",
+            "Twice-daily maintenance therapy in moderate-to-severe asthma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most frequent local adverse complication associated with high-dose maintenance therapy with inhaled corticosteroids is **oropharyngeal candidiasis**. Caused by aerosol drug impaction on the posterior pharyngeal wall and local mucosal immunosuppression, Candida albicans proliferates as curdy white pseudomembranous plaques. Concurrent steroid-induced adductor vocal cord myopathy triggers reversible dysphonia. Both complications are dramatically prevented by utilizing a large-volume spacer device and instructing the patient to perform mouth rinsing and gargling with water followed by spitting immediately after every inhalation.",
+      "say": "Oropharyngeal candidiasis and dysphonia are common local steroid side effects prevented by mouth rinsing and spacers.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inhaled steroid complication",
+          "Underlying pathophysiologic mechanism",
+          "Clinical manifestation",
+          "Effective preventive measure"
+        ],
+        "rows": [
+          [
+            "Oropharyngeal candidiasis",
+            "Local pharyngeal mucosal immunosuppression",
+            "Curdy white scraping plaques and sore throat",
+            "Post-inhalation mouth rinsing, gargling, and spacer use"
+          ],
+          [
+            "Dysphonia (hoarseness)",
+            "Steroid-induced bilateral vocal cord myopathy",
+            "Breathy hoarse voice quality during speech",
+            "Dose reduction or switching to prodrug ciclesonide"
+          ],
+          [
+            "Linear growth velocity deceleration",
+            "Mild transient systemic hypothalamic suppression",
+            "Small reduction in first-year childhood growth",
+            "Titration to lowest effective controller dose"
+          ],
+          [
+            "Ocular cataracts and glaucoma",
+            "Systemic absorption with high-dose chronic therapy",
+            "Posterior subcapsular lens opacities",
+            "Annual ophthalmologic slit-lamp surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The modern on-site activated corticosteroid engineered specifically to eliminate oropharyngeal candidiasis and systemic toxicity is **ciclesonide**. Administered as an inactive prodrug via metered-dose inhaler, ciclesonide remains inert during transit through the mouth and pharynx. Only upon reaching the lower respiratory tract is it cleaved by endogenous airway esterases into its active metabolite, desisobutyryl-ciclesonide, which exhibits a hundred-fold higher glucocorticoid receptor affinity. The swallowed portion undergoes extensive plasma protein binding and complete hepatic clearance, sparing systemic organs from glucocorticoid excess.",
+      "say": "Ciclesonide is an inhaled prodrug activated exclusively by airway esterases, sparing the oropharynx from candidiasis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prodrug",
+            "label": "Inhalation of inactive ciclesonide prodrug"
+          },
+          {
+            "id": "throat",
+            "label": "Inert during oropharyngeal transit: zero local candidiasis"
+          },
+          {
+            "id": "esterase",
+            "label": "Cleavage by lower bronchial esterases to desisobutyryl-ciclesonide"
+          },
+          {
+            "id": "target",
+            "label": "Potent pulmonary anti-inflammatory action with 99% plasma protein binding"
+          }
+        ],
+        "edges": [
+          [
+            "prodrug",
+            "throat"
+          ],
+          [
+            "throat",
+            "esterase"
+          ],
+          [
+            "esterase",
+            "target"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The highly effective synergistic maintenance regimen combining a long-acting muscarinic antagonist with a long-acting beta-2 agonist is **dual bronchodilation therapy**. Combining tiotropium with olodaterol, or umeclidinium with vilanterol, achieves simultaneous cholinergic parasympathetic inhibition and beta-2 adrenergic sympathetic stimulation. Because muscarinic and adrenergic pathways operate via distinct non-overlapping intracellular cascades, this combination produces greater improvement in forced expiratory volume, exercise tolerance, and dyspnea reduction in stable COPD than either monotherapy alone.",
+      "say": "Dual bronchodilation combines LAMA and LABA to target distinct autonomic pathways, maximizing airway caliber in COPD.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dual LAMA / LABA Therapy",
+          "points": [
+            "Simultaneous muscarinic M3 blockade and beta-2 stimulation",
+            "Superior improvements in trough FEV1 and lung deflation",
+            "More effective exacerbation reduction than monotherapy",
+            "Preferred first-line maintenance in symptomatic COPD"
+          ]
+        },
+        "right": {
+          "title": "Triple Therapy (LAMA / LABA / ICS)",
+          "points": [
+            "Adds inhaled corticosteroid to dual bronchodilators",
+            "Indicated in COPD with frequent exacerbations or blood eosinophils >300",
+            "Significant mortality reduction documented in landmark trials",
+            "Higher risk of bacterial community-acquired pneumonia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The short-course oral corticosteroid intervention mandated for rapid resolution of acute severe asthma exacerbations and status asthmaticus is a **systemic glucocorticoid burst**. Administering oral prednisolone or methylprednisolone at 40 to 50 mg daily for five to seven days restores responsiveness to beta-2 agonists within four to six hours, decreases microvascular leakage, and halts eosinophil and neutrophil airway infiltration. Because treatment is limited to under ten days, it does not cause hypothalamic-pituitary-adrenal axis suppression and does not require a prolonged dose taper.",
+      "say": "A short-course systemic glucocorticoid burst reverses severe asthma exacerbations without suppressing the adrenal axis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Emergency intervention",
+          "Pharmacological agent and dose",
+          "Route of delivery",
+          "Primary therapeutic objective"
+        ],
+        "rows": [
+          [
+            "Rapid bronchodilation",
+            "Salbutamol 2.5 to 5.0 mg plus ipratropium 0.5 mg",
+            "Oxygen-driven nebulization every 20 minutes",
+            "Reverses acute smooth muscle bronchospasm"
+          ],
+          [
+            "Systemic anti-inflammatory",
+            "Prednisolone 40 to 50 mg or IV hydrocortisone 100 mg",
+            "Oral tablet or intravenous bolus",
+            "Restores beta-receptor sensitivity and halts edema"
+          ],
+          [
+            "Membrane stabilization",
+            "Magnesium sulfate 2.0 grams",
+            "Intravenous infusion over 20 minutes",
+            "Inhibits smooth muscle calcium influx in severe crises"
+          ],
+          [
+            "Hypoxemia correction",
+            "Humidified supplemental oxygen",
+            "Nasal cannula or face mask",
+            "Maintains arterial oxygen saturation between 93% and 95%"
+          ]
+        ]
+      }
+    }
+  ]
+}

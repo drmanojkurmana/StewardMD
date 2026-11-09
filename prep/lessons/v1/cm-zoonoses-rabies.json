@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-zoonoses-rabies",
+ "subject": "community-medicine",
+ "module": "cm-zoonoses",
+ "title": "Rabies Epidemiology: Exposure Categories and Wound Management",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Rabies virus pathogenesis and fatality",
+   "tx": "The bullet-shaped neurotropic Lyssavirus causing **rabies encephalitis** is transmitted in the saliva of rabid mammals through transdermal animal bites, scratches or mucosal contamination. Once inoculated into muscle tissue, the virus binds to nicotinic acetylcholine receptors at the neuromuscular junction, entering unmyelinated peripheral nerve endings and ascending centripetally via retrograde axoplasmic transport into the spinal cord and brainstem, carrying a near hundred percent case fatality.",
+   "say": "Rabies is a bullet-shaped virus transmitted in animal saliva. It travels up peripheral nerves to the brain, producing fatal encephalitis once clinical symptoms appear.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rabies-fig1.webp",
+    "alt": "Histopathology diagram of rabies virus encephalitis showing intracytoplasmic Negri bodies in neurons",
+    "caption": "Pathology and signs of rabies including Negri bodies in pyramidal hippocampal neurons and axonal transport. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Animal vectors and Indian epidemiology",
+   "tx": "In India, free-roaming domestic and stray dogs account for approximately ninety-six to ninety-seven percent of all human rabies fatalities, maintaining intense **canine rabies** transmission in urban and rural environments. Cats, monkeys, wild jackals, foxes and wolves transmit the remainder of infections; in contrast, bites from rodents, squirrels, rabbits and domestic livestock exceptionally rarely transmit rabies, obviating post-exposure prophylaxis unless the biting animal demonstrated confirmed clinical madness.",
+   "say": "Stray dogs cause ninety-six percent of human rabies deaths in India. Wild jackals, foxes and monkeys also transmit the virus, whereas domestic rodents and squirrels do not spread rabies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Animal species", "Share of Indian rabies cases", "Prophylaxis requirement"],
+    "rows": [
+     ["Stray and pet dogs", "96 to 97 percent of all cases", "Immediate wound care and full PEP required"],
+     ["Domestic cats", "1 to 2 percent of human cases", "Immediate wound care and full PEP required"],
+     ["Monkeys, foxes, jackals", "Under 1 percent, high risk", "Treat as Category III with vaccine and RIG"],
+     ["Rats, mice, squirrels", "Negligible to zero transmission", "Clean wound; routine rabies PEP not indicated"]
+    ]
+   }
+  },
+  {
+   "title": "Wound categorisation: WHO classification",
+   "tx": "Emergency triage follows the standard **WHO exposure categories** to determine appropriate prophylaxis following potential animal contact. Category I exposures involve touching, feeding animals or licks on intact healthy skin, carrying zero transmission risk and requiring no vaccination. Category II exposures comprise minor scratches, abrasions without bleeding, or nibbling of uncovered skin, demanding immediate wound washing and completion of a modern rabies vaccination course.",
+   "say": "Category one exposures involve touching animals on intact skin and require no shots. Category two covers minor scratches without bleeding, demanding immediate wound washing and vaccination.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Exposure class", "Defining animal contact", "Mandatory intervention"],
+    "rows": [
+     ["Category I", "Touching, feeding, licks on intact skin", "Wash exposed skin; no vaccine or RIG needed"],
+     ["Category II", "Minor scratches or abrasions without bleeding", "Immediate wound washing + full vaccine series"],
+     ["Category III", "Single or multiple bites with bleeding, mucosal contact", "Wound washing + full vaccine series + local RIG"]
+    ]
+   }
+  },
+  {
+   "title": "Category III bite management mandates",
+   "tx": "Severe exposures constitute a **category III bite**, defined by any transdermal bite or scratch that breaches the epidermis and draws blood, any licking of broken skin, mucous membrane contamination by saliva, or any unprovoked contact with wild carnivores and bats. These high-risk presentations demand an immediate three-step management protocol: thorough wound toilet, full active vaccination, and immediate infiltration of rabies immunoglobulin into and around all wound margins.",
+   "say": "Any animal bite that draws blood is a category three exposure. It demands immediate soap and water washing, a complete vaccine series, and rabies immunoglobulin injected around the wound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Category III exposure verified"},
+     {"id": "b", "label": "Immediate 15-minute soap and water wound wash"},
+     {"id": "c", "label": "Active vaccine series started on day 0"},
+     {"id": "d", "label": "Rabies immunoglobulin infiltrated into all wounds"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Immediate local wound washing",
+   "tx": "The single most effective intervention for preventing clinical rabies is immediate **wound toilet**, which washes away and inactivates inoculated viral particles before they enter local peripheral nerve endings. All bite wounds and scratches must be flushed vigorously under running tap water with soap or detergent for at least fifteen minutes, followed by povidone-iodine or alcohol; suturing is strictly avoided or delayed to prevent driving virus deeper into nerves.",
+   "say": "Washing the bite under running water with soap for fifteen minutes physically removes the virus. Never stitch an animal bite immediately, because needles push virus deeper into nerves.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Wound care action", "Recommended standard technique", "Clinical rationale"],
+    "rows": [
+     ["Running water flush", "Vigorous soap and tap water for >= 15 min", "Mechanically dislodges saliva and viral load"],
+     ["Antiseptic virucide", "Povidone-iodine 5% or 70% alcohol", "Destroys viral lipid envelope chemically"],
+     ["Primary wound closure", "Strictly prohibited; avoid early sutures", "Prevents inoculating virus into deep nerve branches"],
+     ["Tetanus and antibiotic", "Td booster and amoxicillin-clavulanate", "Prevents tetanus and polymicrobial wound sepsis"]
+    ]
+   }
+  },
+  {
+   "title": "Post-exposure prophylaxis rationale",
+   "tx": "The life-saving success of modern **post-exposure prophylaxis** exploits the unusually long incubation period of rabies, which typically spans one to three months as the virus ascends peripheral nerves. Active vaccination stimulates host B lymphocytes to generate high titres of virus-neutralising antibodies, reaching protective thresholds of zero point five international units per millilitre before the slowly advancing pathogen can access the blood-brain barrier.",
+   "say": "Because rabies takes weeks to travel along nerves to the brain, vaccines administered promptly after a bite induce protective neutralising antibodies before the virus can reach the central nervous system.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Slow viral centripetal ascent",
+     "points": ["Travels along axoplasm at 12 to 24 mm/day", "Hidden inside protected neural pathways", "Takes weeks to reach spinal cord and brain"]
+    },
+    "right": {
+     "title": "Active antibody induction",
+     "points": ["Vaccine triggers IgG by day 7 to 14", "Antibody titre exceeds 0.5 IU/ml", "Neutralises virus before brain invasion"]
+    }
+   }
+  },
+  {
+   "title": "Intradermal rabies vaccination protocol",
+   "tx": "To overcome vaccine shortages and high costs, national policy adopted the **intradermal rabies vaccine** protocol across all government hospitals and primary health facilities. Modern cell culture vaccines or purified chick embryo cell vaccines are injected as zero point one millilitres intradermally over both deltoid muscles, cutting total required vaccine volume by sixty to eighty percent while generating equivalent or superior protective neutralising antibody titres.",
+   "say": "Injecting small zero point one millilitre doses intradermally into both deltoid muscles reduces vaccine costs by eighty percent while giving identical protection to intramuscular shots.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intradermal route (public health)",
+     "points": ["0.1 ml injected over two deltoid sites", "Uses 0.2 ml total volume per clinic visit", "Reduces procurement expenditure by 80%"]
+    },
+    "right": {
+     "title": "Intramuscular route (private sector)",
+     "points": ["Full 0.5 ml or 1.0 ml vial per dose", "Single deltoid site per clinic visit", "Higher financial burden per patient"]
+    }
+   }
+  },
+  {
+   "title": "National Rabies Control Programme",
+   "tx": "Under the One Health approach, the **National Rabies Control Programme** addresses human prophylaxis and animal reservoirs in a coordinated strategy. The human health component guarantees free modern tissue culture vaccines and rabies immunoglobulin in public emergency departments, while the animal health division implements mass dog anti-rabies vaccination drives and surgical animal birth control to achieve seventy percent herd immunity in street dog populations.",
+   "say": "The National Rabies Control Programme coordinates free human vaccines with mass street dog vaccination and sterilisation, aiming to stop transmission across species.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Universal free PEP in public hospitals"},
+     {"id": "b", "label": "Mass dog vaccination reaching 70% coverage"},
+     {"id": "c", "label": "Animal birth control and stray management"},
+     {"id": "d", "label": "Interruption of canine rabies transmission"}
+    ],
+    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Elimination goal and Rabies Free India",
+   "tx": "Aligned with the global target of **zero human rabies deaths** by 2030, the national action plan mobilises communities to eliminate dog-mediated rabies through digital bite registries, community awareness and rapid response teams. Health workers teach children never to provoke sleeping or feeding dogs, ensure mandatory bite reporting under national disease surveillance, and mandate post-exposure prophylaxis for every vulnerable exposed bite victim.",
+   "say": "India is working toward zero human rabies deaths by 2030. Achieving this goal requires digital reporting of all animal bites, school education, and guaranteed access to vaccines and immunoglobulin.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Action pillar", "Operational component", "Strategic outcome"],
+    "rows": [
+     ["Universal PEP access", "Free intradermal vaccine and RIG at PHCs", "Zero preventable deaths from dog bites"],
+     ["Canine vaccination", "70% coverage of stray and pet dog herds", "Eliminates animal virus transmission cycle"],
+     ["Surveillance and reporting", "Mandatory notification of human and dog cases", "Rapid investigation and containment of clusters"],
+     ["Community education", "Safe behavior around dogs and immediate washing", "Early presentation for medical management"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

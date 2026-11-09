@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phm-antimuscarinics",
+  "subject": "pharmacology",
+  "title": "Ophthalmic Antimuscarinics and Urological Bladder Antispasmodics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Diagnostic evaluation of the optical fundus requires rapid, reversible pupillary dilation achieved through topical **tropicamide**. As a synthetic tertiary amine antimuscarinic eyedrop, tropicamide provides rapid onset of mydriasis within twenty to thirty minutes and produces mild cycloplegia. Complete visual recovery occurs within four to six hours, allowing adult patients to resume normal reading and driving much faster than with any alternative antimuscarinic agent.",
+      "say": "Tropicamide eyedrops produce swift pupillary dilation that resolves fully within six hours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ophthalmic drug",
+          "Mydriasis peak",
+          "Cycloplegia depth",
+          "Complete recovery duration"
+        ],
+        "rows": [
+          [
+            "Tropicamide",
+            "20 to 30 min",
+            "Mild to moderate",
+            "4 to 6 hours"
+          ],
+          [
+            "Cyclopentolate",
+            "30 to 60 min",
+            "Deep and reliable",
+            "24 hours"
+          ],
+          [
+            "Homatropine",
+            "40 to 60 min",
+            "Moderate",
+            "1 to 3 days"
+          ],
+          [
+            "Atropine",
+            "30 to 40 min",
+            "Profound and prolonged",
+            "7 to 12 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accurate cycloplegic refraction in children and young adults necessitates reliable ciliary muscle paralysis using **cyclopentolate**. Because pediatric accommodation is exceptionally powerful, tropicamide fails to abolish resting tone completely; cyclopentolate eyedrops produce intense cycloplegia and mydriasis peaking at forty minutes. Recovery is accomplished within twenty-four hours, avoiding the prolonged week-long visual incapacity associated with topical ophthalmic atropine instillations.",
+      "say": "Cyclopentolate provides deep cycloplegia essential for accurate pediatric glasses prescriptions with 24-hour recovery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cyclopentolate",
+          "points": [
+            "Produces deep, reliable ciliary paralysis",
+            "Optimal for pediatric cycloplegic refraction",
+            "Complete visual recovery within 24 hours",
+            "Transient behavioral restlessness in young children"
+          ]
+        },
+        "right": {
+          "title": "Tropicamide",
+          "points": [
+            "Produces rapid mydriasis with weaker cycloplegia",
+            "Preferred for routine adult fundus examination",
+            "Complete visual recovery within 4 to 6 hours",
+            "Minimal systemic behavioral side effects"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Managing inflammatory anterior uveitis and preventing pathological iris synechiae formation is accomplished using topical **homatropine**. By paralyzing the inflamed, spasming ciliary body and pupillary sphincter, homatropine relieves intense photophobia and ocular pain. Concurrently, producing moderate pupillary dilation breaks existing adhesions and prevents newly forming posterior synechiae between the posterior iris and anterior lens capsule during acute iridocyclitis episodes.",
+      "say": "Homatropine eyedrops relieve ciliary muscle spasm pain and prevent inflammatory iris adhesions in anterior uveitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "uv",
+            "label": "Anterior uveitis and ciliary muscle spasm"
+          },
+          {
+            "id": "hom",
+            "label": "Topical homatropine instillation"
+          },
+          {
+            "id": "rel",
+            "label": "Ciliary paralysis relieves deep ocular ache"
+          },
+          {
+            "id": "syn",
+            "label": "Pupil dilation prevents posterior synechiae"
+          }
+        ],
+        "edges": [
+          [
+            "uv",
+            "hom"
+          ],
+          [
+            "hom",
+            "rel"
+          ],
+          [
+            "hom",
+            "syn"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Symptomatic treatment of overactive bladder and urge incontinence frequently utilizes the mixed-action tertiary amine **oxybutynin**. In addition to competitive postjunctional M3 muscarinic receptor antagonism on detrusor smooth muscle, oxybutynin possesses direct papaverine-like musculotropic relaxant action and local anesthetic properties. Because extensive hepatic first-pass metabolism generates active metabolite N-desethyloxybutynin, systemic anticholinergic dry mouth and constipation are common with immediate-release oral tablets.",
+      "say": "Oxybutynin relaxes bladder detrusor muscle through M3 receptor antagonism and direct musculotropic action.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-oxybutynin.webp",
+        "alt": "Bladder detrusor with M3 blockade relaxing smooth muscle",
+        "caption": "Pharmacologic antagonism of bladder detrusor M3 muscarinic receptors promoting smooth muscle relaxation in overactive bladder."
+      }
+    },
+    {
+      "tx": "Superior pharmacological tolerability in urge urinary incontinence is offered by competitive muscarinic antagonists like **tolterodine**. Developed with greater functional selectivity for bladder detrusor smooth muscle over salivary gland tissue, tolterodine significantly diminishes the incidence and intensity of xerostomia compared to immediate-release oxybutynin. It is converted via hepatic CYP2D6 into an active 5-hydroxymethyl metabolite that contributes substantially to sustained daily therapeutic efficacy.",
+      "say": "Tolterodine targets bladder detrusor receptors with reduced dry mouth compared to immediate-release oxybutynin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bladder antimuscarinic",
+          "Selectivity",
+          "Salivary side effect risk",
+          "Formulation options"
+        ],
+        "rows": [
+          [
+            "Oxybutynin IR",
+            "Non-selective M1/M2/M3",
+            "Very high dry mouth (active N-desethyl metabolite)",
+            "Oral immediate-release tablets"
+          ],
+          [
+            "Oxybutynin ER / Patch",
+            "Non-selective M1/M2/M3",
+            "Low to moderate dry mouth (bypasses hepatic CYP)",
+            "Once-daily tablet, transdermal patch, topical gel"
+          ],
+          [
+            "Tolterodine",
+            "Functional bladder selectivity",
+            "Low to moderate dry mouth",
+            "Immediate-release and extended-release capsules"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Instillation of topical ophthalmic antimuscarinics in individuals with shallow anterior chambers can provoke blinding **angle-closure glaucoma**. Pharmacological relaxation of the pupillary sphincter dilates the pupil, causing peripheral iris tissue to bunch up in the anterior chamber angle. This physical crowding blocks aqueous humor access to the trabecular meshwork, causing acute intraocular pressure elevation, corneal edema, excruciating peri-orbital agony, and optic nerve damage.",
+      "say": "Mydriatic pupil dilation can trigger acute angle-closure glaucoma in patients with shallow anterior eye chambers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+        "alt": "Acute angle-closure glaucoma pathophysiology",
+        "caption": "Pupillary dilation leading to iris crowding, iridocorneal angle obstruction, and acute intraocular pressure elevation."
+      }
+    },
+    {
+      "tx": "Paralysis of the circular ciliary muscle fibers during antimuscarinic exposure results in loss of ocular accommodation termed **cycloplegia**. Under normal parasympathetic tone, ciliary contraction loosens suspensory zonular tension, allowing the crystalline lens to assume a convex spherical curvature for near vision. Antimuscarinics block M3 receptors, keeping the ciliary muscle relaxed, zonules taut, lens flattened, and near vision completely blurred.",
+      "say": "Cycloplegia paralyzes the ciliary muscle, flattening the lens and causing severe near-vision blurring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m3b",
+            "label": "Antimuscarinic M3 blockade at ciliary muscle"
+          },
+          {
+            "id": "rel",
+            "label": "Ciliary muscle fibers relax completely"
+          },
+          {
+            "id": "zon",
+            "label": "Suspensory zonular fibers pull taut"
+          },
+          {
+            "id": "lens",
+            "label": "Lens flattens: Inability to focus on near objects"
+          }
+        ],
+        "edges": [
+          [
+            "m3b",
+            "rel"
+          ],
+          [
+            "rel",
+            "zon"
+          ],
+          [
+            "zon",
+            "lens"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When anticholinergic medications trigger intolerable salivary hyposecretion, dry eyes, or cognitive sluggishness, clinicians switch therapy to avoid **antimuscarinic dry mouth**. The selective beta-3 adrenergic receptor agonist mirabegron provides an alternative mechanism by activating Gs-coupled adenylyl cyclase pathways in bladder detrusor smooth muscle, inducing physiological relaxation during the storage phase without interfering with muscarinic cholinergic transmission anywhere in salivary or ocular tissues.",
+      "say": "Mirabegron activates beta-3 adrenergic receptors to relax the bladder without causing anticholinergic dry mouth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Muscarinic antagonists (Oxybutynin)",
+          "points": [
+            "Inhibit parasympathetic M3 contractility",
+            "Prominent salivary hyposecretion and xerostomia",
+            "Risk of triggering closed-angle glaucoma",
+            "Potential cognitive impairment in elderly"
+          ]
+        },
+        "right": {
+          "title": "Beta-3 agonists (Mirabegron)",
+          "points": [
+            "Stimulate sympathetic beta-3 detrusor relaxation",
+            "Virtually devoid of dry mouth or constipation",
+            "Safe in controlled glaucoma and elderly cognition",
+            "Requires monitoring for hypertension"
+          ]
+        }
+      }
+    }
+  ]
+}

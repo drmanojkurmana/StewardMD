@@ -1,0 +1,299 @@
+{
+    "v": 1,
+    "id": "rad-ct-mri-hounsfield-units",
+    "subject": "radiology",
+    "module": "rad-ct-mri",
+    "title": "Computed Tomography Principles: Hounsfield Units, Generations, and Helical CT",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "The Hounsfield Unit Scale",
+            "tx": "**Hounsfield unit scale** quantifies tissue radiodensity relative to distilled water. Formulated by Sir Godfrey Hounsfield, the CT number is calculated as 1000 multiplied by the linear attenuation coefficient of tissue minus that of water, divided by that of water. Distilled water serves as the central anchor at 0 HU, air measures minus 1000 HU, and dense cortical bone reaches plus 1000 HU.",
+            "say": "Hounsfield unit scale quantifies tissue radiodensity relative to distilled water. Formulated by Sir Godfrey Hounsfield, the CT number is calculated as 1000 multiplied by the linear attenuation coefficient of tissue minus that of water, divided by that of water. Distilled water serves as the central anchor at 0 HU, air measures minus 1000 HU, and dense cortical bone reaches plus 1000 HU.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Measure tissue linear attenuation coefficient"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Subtract water attenuation baseline"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Divide by water coefficient and multiply by 1000"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Assign standardized Hounsfield unit integer"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Biological Tissue CT Numbers",
+            "tx": "**Tissue CT attenuation values** characterize human pathology through numerical ranges. Acute clotted hematoma measures 50 to 80 HU due to concentrated globin proteins, distinguishing it from circulating unclotted blood at 30 to 45 HU. Simple serous fluid measures 0 to 15 HU, subcutaneous and retroperitoneal adipose tissue measures minus 50 to minus 100 HU, and normal aerated lung parenchyma measures minus 700 to minus 900 HU.",
+            "say": "Tissue CT attenuation values characterize human pathology through numerical ranges. Acute clotted hematoma measures 50 to 80 HU due to concentrated globin proteins, distinguishing it from circulating unclotted blood at 30 to 45 HU. Simple serous fluid measures 0 to 15 HU, subcutaneous and retroperitoneal adipose tissue measures minus 50 to minus 100 HU, and normal aerated lung parenchyma measures minus 700 to minus 900 HU.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Tissue or Fluid Substance",
+                    "Typical Hounsfield Unit Range",
+                    "Diagnostic Clinical Significance"
+                ],
+                "rows": [
+                    [
+                        "Air",
+                        "Minus 1000 HU",
+                        "Pneumothorax, bowel gas, pneumoperitoneum"
+                    ],
+                    [
+                        "Lung Parenchyma",
+                        "Minus 700 to Minus 900 HU",
+                        "Emphysema, normal aeration vs ground-glass opacity"
+                    ],
+                    [
+                        "Adipose Tissue (Fat)",
+                        "Minus 50 to Minus 100 HU",
+                        "Lipoma, angiomyolipoma, retroperitoneal fat stranding"
+                    ],
+                    [
+                        "Water / Simple Serous Fluid",
+                        "0 to 15 HU",
+                        "Simple cysts, cerebrospinal fluid, ascites"
+                    ],
+                    [
+                        "Circulating Blood",
+                        "30 to 45 HU",
+                        "Vascular lumen on unenhanced CT"
+                    ],
+                    [
+                        "Acute Clotted Blood",
+                        "50 to 80 HU",
+                        "Hyperdense acute subdural or epidural haematoma"
+                    ],
+                    [
+                        "Soft Tissue (Liver, Muscle)",
+                        "40 to 60 HU",
+                        "Solid parenchymal organ baseline"
+                    ],
+                    [
+                        "Dense Cortical Bone",
+                        "Plus 1000 to Plus 3000 HU",
+                        "Cortical bone, teeth, surgical metallic clips"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "First and Second Generation CT",
+            "tx": "**Translate-rotate CT geometry** defined the earliest scanners developed in the 1970s. First-generation units used a single pencil beam coupled to one or two sodium iodide detectors, translating across the patient before indexing by one degree, requiring 4.5 to 5 minutes per slice. Second-generation scanners introduced a narrow 10-degree fan beam with a linear detector array of up to 30 detectors, reducing scan time to 18 seconds.",
+            "say": "Translate-rotate CT geometry defined the earliest scanners developed in the 1970s. First-generation units used a single pencil beam coupled to one or two sodium iodide detectors, translating across the patient before indexing by one degree, requiring 4.5 to 5 minutes per slice. Second-generation scanners introduced a narrow 10-degree fan beam with a linear detector array of up to 30 detectors, reducing scan time to 18 seconds.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "First-Generation Scanners (1972)",
+                    "points": [
+                        "Single pencil beam with 1 or 2 detectors",
+                        "Translate-rotate motion with 1-degree steps",
+                        "Scan time of 4.5 to 5 minutes per single slice"
+                    ]
+                },
+                "right": {
+                    "title": "Second-Generation Scanners (1975)",
+                    "points": [
+                        "Narrow 10-degree fan beam with up to 30 detectors",
+                        "Translate-rotate motion with larger angular steps",
+                        "Scan time reduced to approximately 18 seconds per slice"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Third and Fourth Generation Architecture",
+            "tx": "**Rotate-rotate CT design** characterizes third-generation systems, where a wide 40 to 50-degree fan beam and curved detector array rotate synchronously around the patient in under one second. A malfunctioning detector creates circular ring artefacts. Fourth-generation scanners overcame ring artefacts by placing the X-ray tube rotating inside a continuous stationary 360-degree ring of thousands of fixed detectors, though at higher mechanical cost.",
+            "say": "Rotate-rotate CT design characterizes third-generation systems, where a wide 40 to 50-degree fan beam and curved detector array rotate synchronously around the patient in under one second. A malfunctioning detector creates circular ring artefacts. Fourth-generation scanners overcame ring artefacts by placing the X-ray tube rotating inside a continuous stationary 360-degree ring of thousands of fixed detectors, though at higher mechanical cost.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Third Generation (Rotate-Rotate)",
+                    "points": [
+                        "Tube and curved detector rotate synchronously",
+                        "Scan time under 0.3 seconds; dominant modern architecture",
+                        "Susceptible to ring artefacts if single detector drifts"
+                    ]
+                },
+                "right": {
+                    "title": "Fourth Generation (Rotate-Stationary)",
+                    "points": [
+                        "Rotating tube inside fixed 360-degree detector ring",
+                        "Completely immune to detector ring artefacts",
+                        "High cost and complex geometry limited adoption"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Helical Volumetric Acquisition",
+            "tx": "**Helical spiral CT acquisition** was made possible by electromechanical slip-ring technology, which eliminated winding high-tension cables and enabled continuous gantry rotation. As the X-ray tube spins continuously, the patient couch feeds smoothly through the gantry bore at constant velocity. This traces an uninterrupted helical path through the patient, creating a seamless volumetric data set that prevents respiratory misregistration between adjacent slices.",
+            "say": "Helical spiral CT acquisition was made possible by electromechanical slip-ring technology, which eliminated winding high-tension cables and enabled continuous gantry rotation. As the X-ray tube spins continuously, the patient couch feeds smoothly through the gantry bore at constant velocity. This traces an uninterrupted helical path through the patient, creating a seamless volumetric data set that prevents respiratory misregistration between adjacent slices.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Slip rings enable continuous 360-degree tube rotation"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Patient couch feeds continuously through gantry bore"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Helical path captures seamless volumetric data set"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Multiplanar reformation generates coronal and sagittal views"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Helical Pitch Dynamics",
+            "tx": "**Helical scan pitch** defines the relationship between patient table movement and X-ray beam collimation, calculated as table advancement per 360-degree rotation divided by total beam collimation width. A pitch of 1.0 represents contiguous scanning. A pitch below 1.0 overlaps adjacent data loops, improving longitudinal z-axis resolution at the cost of higher patient dose, whereas a pitch above 1.0 accelerates coverage.",
+            "say": "Helical scan pitch defines the relationship between patient table movement and X-ray beam collimation, calculated as table advancement per 360-degree rotation divided by total beam collimation width. A pitch of 1.0 represents contiguous scanning. A pitch below 1.0 overlaps adjacent data loops, improving longitudinal z-axis resolution at the cost of higher patient dose, whereas a pitch above 1.0 accelerates coverage.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pitch Setting",
+                    "Geometric Relationship",
+                    "Radiation Dose Impact",
+                    "Clinical Utility"
+                ],
+                "rows": [
+                    [
+                        "Pitch < 1.0 (e.g. 0.7)",
+                        "Overlapping data loops",
+                        "Higher radiation exposure",
+                        "CT angiography, fine temporal bone, coronary imaging"
+                    ],
+                    [
+                        "Pitch = 1.0",
+                        "Contiguous adjacent loops",
+                        "Baseline standard exposure",
+                        "Standard diagnostic chest and abdominal CT"
+                    ],
+                    [
+                        "Pitch > 1.0 (e.g. 1.5)",
+                        "Extended non-overlapping helix",
+                        "Reduced radiation dose",
+                        "Rapid trauma survey, uncooperative or pediatric patients"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Window Width Contrast Modulation",
+            "tx": "**Window width contrast control** manages the displayed greyscale contrast on diagnostic monitors. While CT detectors capture thousands of discrete attenuation levels, human vision discerns only 16 to 32 shades of grey. Window width sets the total span of Hounsfield units mapped across display greyscale from black to white. Narrow window widths dramatically enhance contrast between tissues possessing nearly identical densities.",
+            "say": "Window width contrast control manages the displayed greyscale contrast on diagnostic monitors. While CT detectors capture thousands of discrete attenuation levels, human vision discerns only 16 to 32 shades of grey. Window width sets the total span of Hounsfield units mapped across display greyscale from black to white. Narrow window widths dramatically enhance contrast between tissues possessing nearly identical densities.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Narrow Window Width (WW 80)",
+                    "points": [
+                        "Spans small range of Hounsfield units",
+                        "Steep greyscale slope accentuates subtle density differences",
+                        "Standard brain window distinguishes grey and white matter"
+                    ]
+                },
+                "right": {
+                    "title": "Wide Window Width (WW 1500)",
+                    "points": [
+                        "Spans wide range of Hounsfield units",
+                        "Gentle slope accommodates extreme tissue disparities",
+                        "Standard bone and lung windows visualize trabeculae and vessels"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Window Level Midpoint Selection",
+            "tx": "**Window level center** positions the central midpoint of the displayed greyscale range at the exact attenuation value of the tissue under clinical examination. Attenuation values falling below the window floor display as pure black, while those above the ceiling display as pure white. Radiologists select window level plus 35 HU for brain parenchyma, minus 600 HU for aerated lung, and plus 400 HU for bone.",
+            "say": "Window level center positions the central midpoint of the displayed greyscale range at the exact attenuation value of the tissue under clinical examination. Attenuation values falling below the window floor display as pure black, while those above the ceiling display as pure white. Radiologists select window level plus 35 HU for brain parenchyma, minus 600 HU for aerated lung, and plus 400 HU for bone.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Diagnostic Window Preset",
+                    "Window Level (Center)",
+                    "Window Width (Span)",
+                    "Clinical Anatomical Target"
+                ],
+                "rows": [
+                    [
+                        "Brain Window",
+                        "+35 HU",
+                        "80 HU",
+                        "Cerebral cortex, basal ganglia, acute infarct and oedema"
+                    ],
+                    [
+                        "Subdural Window",
+                        "+75 HU",
+                        "150 HU",
+                        "Subacute haematoma against adjacent hyperdense calvarium"
+                    ],
+                    [
+                        "Soft Tissue (Abdomen)",
+                        "+40 HU",
+                        "350 HU",
+                        "Liver parenchyma, spleen, kidneys, pancreas, lymph nodes"
+                    ],
+                    [
+                        "Lung Window",
+                        "-600 HU",
+                        "1500 HU",
+                        "Bronchovascular bundles, nodules, emphysema, ground glass"
+                    ],
+                    [
+                        "Bone Window",
+                        "+400 to +500 HU",
+                        "1500 to 2000 HU",
+                        "Cortical architecture, fractures, trabecular destruction"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

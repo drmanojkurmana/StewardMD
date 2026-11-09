@@ -1,0 +1,144 @@
+{
+  "v": 1,
+  "id": "cm-geriatric-geriatrics",
+  "subject": "community-medicine",
+  "module": "cm-geriatric",
+  "title": "Geriatric Health: Ageing, Dependency, NPHCE, and Palliative Care",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Geriatrics versus gerontology",
+      "tx": "**Geriatrics** is the clinical branch that diagnoses and treats diseases of old age, while gerontology studies the ageing process itself across biology, psychology, and society. Senescence means the progressive decline in physiological reserve with age, which narrows the margin between coping and crisis during any acute illness. India counts a person as elderly at sixty years and above for most welfare and health programmes.",
+      "say": "Geriatrics treats the sick old person; gerontology studies ageing itself. In India, sixty years and above defines the elderly for health services.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Geriatrics (clinical)",
+          "points": ["Multimorbidity assessment", "Frailty, falls, and dementia care", "Rational prescribing in old age"]
+        },
+        "right": {
+          "title": "Gerontology (science of ageing)",
+          "points": ["Biology of senescence", "Psychology and sociology of ageing", "Retirement and social security research"]
+        }
+      }
+    },
+    {
+      "title": "How fast India is ageing",
+      "tx": "Falling fertility and rising survival are expanding the elderly share of India's population, and the **old age dependency ratio** (persons aged sixty and above per hundred persons aged fifteen to fifty nine) climbs steadily with it, projected to roughly double by mid century. The ageing index compares elders per hundred children under fifteen. More elders living longer means chronic disease care must move from hospitals into homes and primary care.",
+      "say": "India's elderly share is growing fast as births fall and survival rises. Dependency ratios tell planners how many workers support each retired elder.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Indicator", "Definition"],
+        "rows": [
+          ["Old age dependency ratio", "Age 60 plus per 100 persons aged 15 to 59"],
+          ["Ageing index", "Age 65 plus per 100 children aged 0 to 14"],
+          ["Elderly proportion", "Share of age 60 plus in total population"],
+          ["Life expectancy at 60", "Average years remaining at age sixty"]
+        ]
+      }
+    },
+    {
+      "title": "Health problems of the elderly",
+      "tx": "The typical elder carries several chronic conditions at once: hypertension, diabetes, osteoarthritis, cataract, hearing loss, chronic lung disease, and depression overlap in the pattern called **multimorbidity in old age**. Acute illness often presents atypically, with confusion instead of fever and falls instead of chest pain. Sensory loss isolates the elder socially, and bereavement, retirement, and financial dependence deepen depression that families misread as normal ageing.",
+      "say": "Elders rarely have one disease; they have five interacting ones. Confusion, falls, and withdrawal often replace the textbook symptoms in this age group.",
+      "vis": {
+        "kind": "table",
+        "cols": ["System", "Common elderly problems"],
+        "rows": [
+          ["Cardiometabolic", "Hypertension, diabetes, coronary disease, stroke"],
+          ["Musculoskeletal", "Osteoarthritis, osteoporosis, fractures after falls"],
+          ["Sensory", "Cataract, glaucoma, presbycusis (age related hearing loss)"],
+          ["Mental health", "Depression, dementia, loneliness after bereavement"]
+        ]
+      }
+    },
+    {
+      "title": "Falls: causes and prevention",
+      "tx": "One in three elders falls each year, and **falls in the elderly** arise from interacting intrinsic factors (weak muscles, poor vision, postural hypotension, sedative drugs) and extrinsic hazards (loose rugs, dark stairs, slippery bathrooms). A single fall can fracture the hip and end independent living. Assessment therefore reviews medicines, checks lying and standing blood pressure, tests gait and balance, and corrects the home environment.",
+      "say": "Falls come from weak legs, dizzy medicines, bad eyesight, and unsafe homes together. Review drugs, blood pressure on standing, gait, and the bathroom.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intrinsic causes",
+          "points": ["Sarcopenia and poor balance", "Postural drop in blood pressure", "Sedatives and multiple medicines", "Cataract and uncorrected refraction"]
+        },
+        "right": {
+          "title": "Extrinsic causes",
+          "points": ["Loose carpets and clutter", "Poor lighting on stairs", "Slippery bathroom floors", "Ill fitting footwear"]
+        }
+      }
+    },
+    {
+      "title": "Dementia in old age",
+      "tx": "Progressive loss of memory and other cognitive domains severe enough to disturb daily life defines **dementia in the elderly**, with Alzheimer disease the commonest cause and vascular dementia second. Lewy body disease adds fluctuating attention, vivid visual hallucinations, and spontaneous parkinsonism. Delirium, by contrast, starts abruptly with clouded consciousness during acute illness and demands a search for infection, dehydration, or drug toxicity.",
+      "say": "Dementia creeps in slowly and erases independence; delirium strikes suddenly during illness. Lewy body dementia brings hallucinations and parkinsonian stiffness.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dementia-with-lewy-bodies-fig1.webp",
+        "alt": "Illustration of coronal brain atrophy, substantia nigra pallor, and a neuronal Lewy body in dementia with Lewy bodies",
+        "caption": "Dementia with Lewy bodies: brain atrophy, nigral pallor, and Lewy body histology. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Functional assessment and the Katz index",
+      "tx": "Management follows function, not diagnosis count, so clinicians grade independence in **activities of daily living** (bathing, dressing, toileting, transferring, continence, and feeding) using the Katz index, and grade complex tasks such as cooking, shopping, and handling money as instrumental activities. A falling score predicts hospitalisation and mortality better than disease labels and directs physiotherapy, aids, home help, and family counselling.",
+      "say": "Ask what the elder can still do alone. The Katz index scores six basic activities, and losing them predicts decline better than any disease list.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Domain", "Example item"],
+        "rows": [
+          ["Basic activities (Katz)", "Bathing, dressing, toileting, feeding"],
+          ["Instrumental activities", "Cooking, shopping, medicines, money"],
+          ["Mobility", "Timed walking, chair rise, stair use"],
+          ["Cognition and mood", "Memory screen, depression questions"]
+        ]
+      }
+    },
+    {
+      "title": "NPHCE: the national elderly programme",
+      "tx": "The **National Programme for Health Care of the Elderly** builds geriatric services into the public system: dedicated elderly clinics at primary and community health centres, ten bedded geriatric wards at district hospitals, and regional geriatric centres for training and referral. Community workers screen elders at home for hypertension, diabetes, disability, and depression, and physiotherapy plus rehabilitative aids form part of the package.",
+      "say": "NPHCE puts elderly clinics in primary care and geriatric wards in district hospitals. Community screening finds hypertension, disability, and depression at home.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "g1", "label": "Home screening by community health worker" },
+          { "id": "g2", "label": "Elderly clinic at PHC and CHC level" },
+          { "id": "g3", "label": "District geriatric ward and regional centre" }
+        ],
+        "edges": [["g1", "g2"], ["g2", "g3"]]
+      }
+    },
+    {
+      "title": "Social security and legal protection",
+      "tx": "Income security rests on instruments of **social security for the elderly**: the Indira Gandhi National Old Age Pension Scheme for poor elders, contributory pensions for workers, health insurance concessions, and travel and tax benefits. The Maintenance and Welfare of Parents and Senior Citizens Act 2007 obliges children to maintain parents and lets tribunals order monthly support, while also protecting elderly property from neglectful transfer.",
+      "say": "Pensions, insurance, and the 2007 Maintenance Act protect the elder's income and dignity. Children have a legal duty to maintain their parents.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Economic support",
+          "points": ["National old age pension for the poor", "Subsidised health insurance schemes", "Concessions in travel and banking"]
+        },
+        "right": {
+          "title": "Legal protection",
+          "points": ["Maintenance tribunals order family support", "Protection against property grabbing", "State old age homes for the destitute"]
+        }
+      }
+    },
+    {
+      "title": "Palliative care at the end of life",
+      "tx": "When cure is no longer possible, **palliative care in geriatrics** relieves pain, breathlessness, nausea, and fear while supporting the family, and it applies alongside disease treatment rather than only in the final days. India's programme integrates palliative care into primary health care with home visits, oral morphine access through recognised institutions, and training of nurses and community workers in end of life communication.",
+      "say": "Palliative care controls pain and breathlessness and supports the family. It starts alongside treatment, not only when death is near.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "p1", "label": "Assess pain and other symptoms" },
+          { "id": "p2", "label": "Treat with stepwise analgesia and support" },
+          { "id": "p3", "label": "Home based care with family involvement" }
+        ],
+        "edges": [["p1", "p2"], ["p2", "p3"]]
+      }
+    }
+  ]
+}

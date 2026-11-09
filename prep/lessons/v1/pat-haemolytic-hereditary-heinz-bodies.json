@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "id": "pat-haemolytic-hereditary-heinz-bodies",
+ "subject": "pathology",
+ "module": "pat-haemolytic-hereditary",
+ "title": "Heinz Bodies and G6PD Deficiency",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **Heinz body** represents an insoluble intracellular inclusion formed by denatured, oxidized hemoglobin molecules that precipitate within erythrocytes subjected to oxidative stress. Heinz bodies develop prominently in glucose-6-phosphate dehydrogenase (G6PD) deficiency, unstable hemoglobinopathies, and following exposure to oxidant chemicals such as dapsone, primaquine, or sulfonamides. The precipitated globin chains attach covalently to the inner erythrocyte membrane.",
+   "say": "Heinz bodies are dark clumps of denatured, oxidized hemoglobin that precipitate inside red blood cells under oxidative attack. They are the hallmark of G6PD deficiency and unstable hemoglobins, provoked by oxidant drugs like primaquine or dapsone, or fava beans. The oxidized globin clumps stick tightly to the inner red cell membrane.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rbc-metabolism-and-g6pd-deficiency-fig1.webp",
+    "alt": "Diagram of erythrocyte metabolism showing the hexose monophosphate shunt, NADPH generation, and Heinz body formation.",
+    "caption": "Hexose monophosphate shunt, glutathione reduction, and oxidative Heinz body precipitation.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The biochemical defect in G6PD deficiency disrupts the **hexose monophosphate shunt**, the sole physiological source of reduced nicotinamide adenine dinucleotide phosphate (NADPH) in mature red cells. NADPH is essential for glutathione reductase to regenerate reduced glutathione from oxidized glutathione. Reduced glutathione detoxifies intracellular hydrogen peroxide and free radicals; when exhausted, oxidative cross-linking oxidizes sulfhydryl groups on globin chains.",
+   "say": "Red blood cells depend entirely on the hexose monophosphate shunt to produce NADPH, powered by the enzyme G6PD. NADPH keeps glutathione in its reduced, active state so it can neutralize dangerous hydrogen peroxide. Without G6PD, oxidant stress rapidly consumes glutathione, allowing oxygen radicals to cross-link and precipitate hemoglobin.",
+   "vis": {
+    "kind": "table",
+    "title": "Enzymatic Defense and Oxidative Damage Cascade",
+    "cols": [
+     "Metabolic Step",
+     "Enzyme / Molecule",
+     "Physiological Function",
+     "Consequence of G6PD Defect"
+    ],
+    "rows": [
+     [
+      "HMP shunt rate-limiter",
+      "Glucose-6-Phosphate Dehydrogenase",
+      "Converts G6P to 6-phosphogluconate; makes NADPH",
+      "Total failure of NADPH generation under oxidative load"
+     ],
+     [
+      "Glutathione regeneration",
+      "Glutathione reductase",
+      "Uses NADPH to convert GSSG back to GSH",
+      "Severe depletion of reduced intracellular glutathione (GSH)"
+     ],
+     [
+      "Peroxide scavenging",
+      "Glutathione peroxidase",
+      "Converts toxic H2O2 into water using GSH",
+      "Unchecked peroxide oxidizes sulfhydryl groups on globin"
+     ],
+     [
+      "End-stage precipitation",
+      "Denatured oxidized haemoglobin",
+      "Insoluble Heinz body formation",
+      "Membrane rigidity and splenic bite-cell formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical diagnostic rule is that Heinz bodies are completely invisible on routine Romanowsky, Wright, or Giemsa blood stains. Visualization requires **supravital staining** with basic dyes such as crystal violet, brilliant cresyl blue, or new methylene blue. Under supravital staining, Heinz bodies appear as distinct, dark purple-blue round granules measuring one to two micrometers, typically positioned adjacent to the inner cell membrane.",
+   "say": "Remember this absolute exam rule: Heinz bodies are invisible on standard Wright or Giemsa stains. You can only see them by ordering a supravital stain using crystal violet or brilliant cresyl blue. Under supravital stain, they appear as dark round granules clinging to the inner edge of the cell membrane.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heinz Bodies (Supravital)",
+     "points": [
+      "Composed of denatured, precipitated hemoglobin",
+      "Visible only with crystal violet or methyl violet",
+      "Located peripherally against the membrane",
+      "Associated with G6PD deficiency and oxidant drugs"
+     ]
+    },
+    "right": {
+     "title": "Howell-Jolly Bodies (Wright)",
+     "points": [
+      "Composed of residual nuclear DNA fragments",
+      "Readily visible on routine Wright-Giemsa stain",
+      "Single, dark round eccentrically placed dot",
+      "Associated with hyposplenism and autosplenectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "As Heinz-body-laden erythrocytes traverse the splenic cords of Billroth, macrophages pluck out the rigid inclusions along with an adjacent rim of cell membrane, generating pathognomonic **bite cells and blister cells**. Bite cells (degmacytes) display semicircular marginal defects resembling an apple bite. Blister cells feature a translucent peripheral vacuole where hemoglobin has retracted, predisposing the damaged erythrocyte to intravascular and extravascular hemolysis.",
+   "say": "As red cells squeeze into the spleen, macrophages bite out the rigid Heinz bodies, creating bite cells or degmacytes that look like an apple with a clean bite taken out of the side. Blister cells form when the membrane pulls away from the retracted hemoglobin, forming a fragile clear bubble that bursts easily.",
+   "vis": {
+    "kind": "table",
+    "title": "Erythrocyte Morphological Sequelae",
+    "cols": [
+     "Erythrocyte Variant",
+     "Diagnostic Eponym",
+     "Morphological Appearance",
+     "Pathological Origin"
+    ],
+    "rows": [
+     [
+      "Bite cell",
+      "Degmacyte",
+      "Semicircular smooth scooped-out margin",
+      "Splenic macrophage excision of Heinz body"
+     ],
+     [
+      "Blister cell",
+      "Eccentrocytes / hemighosts",
+      "Hemoglobin condensed to one side with clear veil",
+      "Oxidative membrane-cytoplasm separation"
+     ],
+     [
+      "Microspherocyte",
+      "Dense spherical red cell",
+      "Small, dark sphere lacking central pallor",
+      "Post-splenic remodeling of partially bitten cells"
+     ],
+     [
+      "Ghost cell",
+      "Acellular red cell shadow",
+      "Extremely pale membranous outline",
+      "Acute intravascular osmotic lysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A major diagnostic trap involves testing G6PD enzyme levels during an acute hemolytic crisis. Because reticulocytes and young erythrocytes possess relatively normal **enzyme levels**, testing immediately after hemolysis yields a false-negative result, as older enzyme-deficient erythrocytes have already lysed. The diagnostic assay must be repeated two to three months following the acute episode once erythropoiesis returns to a steady-state baseline.",
+   "say": "Never measure G6PD enzyme levels during an acute hemolytic crisis. The oldest, most deficient red cells have just been destroyed, leaving behind young reticulocytes that have normal enzyme activity. Testing during a crisis will give a false-normal result. Wait two to three months after the crisis settles before testing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Crisis Pitfall",
+     "points": [
+      "Oldest, enzyme-deficient cells already lysed",
+      "Compensatory reticulocytosis with young cells",
+      "Reticulocytes possess higher G6PD activity",
+      "Yields false-negative normal enzyme assay"
+     ]
+    },
+    "right": {
+     "title": "Convalescent Testing",
+     "points": [
+      "Perform assay 8 to 12 weeks post-hemolysis",
+      "Steady-state erythrocyte age distribution",
+      "Accurately reflects true basal G6PD level",
+      "Screen family members and provide drug avoidance list"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which special staining technique is mandatory to visualize Heinz bodies in peripheral blood?",
+   "options": [
+    "Supravital staining with crystal violet or brilliant cresyl blue",
+    "Routine Romanowsky or Wright-Giemsa staining",
+    "Prussian blue Perl staining for ferric iron",
+    "Periodic acid-Schiff (PAS) staining for glycogen"
+   ],
+   "correct": 0,
+   "explain": "Heinz bodies are invisible on standard Wright-Giemsa stains and require supravital basic stains like crystal violet, brilliant cresyl blue, or new methylene blue."
+  },
+  {
+   "q": "Why can measuring G6PD enzyme activity during an acute hemolytic episode produce a false-negative result?",
+   "options": [
+    "Young circulating reticulocytes contain higher levels of G6PD enzyme than aged cells",
+    "Circulating free hemoglobin directly catalyzes the G6PD enzymatic reaction",
+    "Oxidant drugs bind and artificially activate the G6PD apoenzyme",
+    "Splenic macrophages secrete massive quantities of G6PD into serum"
+   ],
+   "correct": 0,
+   "explain": "During acute haemolysis, the older, severely G6PD-deficient red cells lyse first, leaving younger reticulocytes with near-normal enzyme levels, masking the underlying deficiency."
+  }
+ ]
+}

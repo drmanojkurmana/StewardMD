@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxia-hanging",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxia",
+ "title": "Hanging, Ligature Marks and Typical Hanging",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Hanging defined by body weight",
+   "tx": "**Hanging** is asphyxia caused by suspension of the body by a ligature encircling the neck, where the constricting force is the weight of the body itself. That force separates hanging from strangulation, where an external force tightens the ligature. In complete hanging no part touches the ground. In partial hanging the toes, feet or body rest on a surface and only the weight of head, chest and arms, together five to six kilograms of head weight alone, does the work.",
+   "say": "Body weight tightening the noose makes it hanging, and even partial suspension with feet grounded can kill.",
+   "vis": {"kind": "table", "cols": ["Form", "Suspension", "Constricting force"], "rows": [["Complete hanging", "Body fully off ground", "Whole body weight"], ["Partial hanging", "Toes or body supported", "Head, chest and arm weight"], ["Typical hanging", "Knot at occiput", "Symmetric upward ligature"], ["Atypical hanging", "Knot at side or front", "Asymmetric ligature course"]]}
+  },
+  {
+   "title": "Typical and atypical hanging by knot",
+   "tx": "Knot position names the pattern in **typical versus atypical hanging**. In typical hanging the ligature runs from the midline above the thyroid cartilage symmetrically upward on both sides to the occiput, with the knot over the central back of the neck. Any other knot site, right side, left side or front, makes the hanging atypical. The knot usually sits higher than the rest of the ligature after suspension because the body drags it upward.",
+   "say": "An occipital knot with a symmetric rise is typical hanging; a knot anywhere else makes the case atypical.",
+   "vis": {"kind": "compare", "left": {"title": "Typical hanging", "points": ["Knot over the occiput", "Ligature rises symmetrically", "Runs above thyroid cartilage", "Deepest groove at the front"]}, "right": {"title": "Atypical hanging", "points": ["Knot at side or front", "Asymmetric ligature rise", "Groove deepest opposite knot", "Posterior depth limited by spine"]}}
+  },
+  {
+   "title": "How much tension blocks each structure",
+   "tx": "Neck structures yield at very different loads, the classic ladder of **ligature tension thresholds**. Two kilograms of tension closes the jugular veins. Four to five kilograms blocks the carotid arteries and produces cerebral anaemia with coma in ten to fifteen seconds. Fifteen kilograms blocks the trachea. Twenty kilograms is needed for the vertebral arteries, protected inside the cervical vertebrae. These figures explain why venous congestion dominates in most suicidal hangings.",
+   "say": "Two kilos stops jugulars, five stops carotids, fifteen the trachea and twenty the vertebrals, so veins fail first.",
+   "vis": {"kind": "table", "cols": ["Structure blocked", "Tension needed", "Clinical result"], "rows": [["Jugular veins", "About 2 kg", "Venous congestion of head"], ["Carotid arteries", "4 to 5 kg", "Coma in ten to fifteen seconds"], ["Trachea", "About 15 kg", "Air hunger and struggle"], ["Vertebral arteries", "About 20 kg", "Rarely blocked by ligature"]]}
+  },
+  {
+   "title": "Causes of death in hanging",
+   "tx": "Death in hanging is usually mixed, led by **combined asphyxia and venous congestion**. Pure asphyxia follows when the ligature forces the tongue root against the pharynx and folds the epiglottis over the larynx. A chin side knot can block veins while arteries still flow, flooding the head. A nape knot cutting both arterial and venous flow gives cerebral anaemia with few asphyxial signs. Reflex vagal inhibition and cervical fracture complete the list.",
+   "say": "Most hangings die of asphyxia married to venous congestion, while a nape knot starves the brain with few asphyxial signs.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Ligature tightens around neck"}, {"id": "b", "label": "Veins block before arteries"}, {"id": "c", "label": "Airway closes by tongue root"}, {"id": "d", "label": "Congestion plus asphyxia kill"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "The ligature mark of hanging",
+   "tx": "The **ligature mark** is the most important and specific sign of death from hanging. It is an oblique furrow rising toward the knot, deepest opposite the point of suspension, pale at first and later yellow brown and parchment like. Its depth grows with body weight, proportion suspended, narrowness of the ligature and length of suspension. A narrow ligature cuts a deep groove; a broad one may leave only a superficial mark, or none if cut down quickly.",
+   "say": "An oblique pale groove climbing to the knot is hanging's signature, deeper with narrow ligatures and longer suspension.",
+   "vis": {"kind": "compare", "left": {"title": "Hanging mark", "points": ["Oblique, rises to the knot", "Interrupted at the knot site", "Above thyroid cartilage usually", "Pale, later yellow brown"]}, "right": {"title": "Strangulation mark preview", "points": ["Transverse, encircles fully", "Usually mid or low neck", "Prominent front and sides", "Bruising at knot or crossover"]}}
+  },
+  {
+   "title": "Preserving the ligature and knot",
+   "tx": "Before removal, describe the **ligature material, width, texture, application and knot type**, and check that the mark matches the material and that it could bear the body's weight and jerk. Rope, cord, wire, belts, bedsheets, scarves, dhotis, sarees and sacred threads are all recorded in suicidal hangings. Remove the noose by cutting away from the knot and tying the cut ends with string or wire, so the knot survives intact as evidence.",
+   "say": "Cut the noose away from its knot and tie the ends, because the preserved knot may be the best evidence in the case.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Describe material and knot in place"}, {"id": "b", "label": "Match mark pattern to material"}, {"id": "c", "label": "Cut ligature away from knot"}, {"id": "d", "label": "Tie cut ends, retain the knot"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Symptoms and fatal period",
+   "tx": "Witnessed hangings begin with flashes of light, ringing in the ears and intense mental confusion, then **loss of consciousness within fifteen seconds** with a thin rope, which is why hanging is regarded as relatively painless. Convulsions and violent struggling follow, the face distorts and turns livid, respiration stops before the heart, which may beat for ten to fifteen minutes more. The usual fatal period is three to five minutes when asphyxia does the work.",
+   "say": "Consciousness fades in fifteen seconds, breathing stops before the heart, and death usually completes in three to five minutes.",
+   "vis": {"kind": "table", "cols": ["Stage", "Timing", "Feature"], "rows": [["First sensations", "Seconds", "Flashes, ringing, confusion"], ["Unconsciousness", "Within 15 seconds", "Cannot self rescue after this"], ["Convulsive stage", "Minutes", "Livid face, struggling"], ["Respiratory arrest", "3 to 5 minutes usual", "Heart beats ten to fifteen more"]]}
+  },
+  {
+   "title": "Delayed deaths after hanging",
+   "tx": "Survivors of the drop can die days later from **delayed complications of hanging**: aspiration pneumonia, infection, pulmonary oedema, laryngeal oedema, hypoxic encephalopathy, brain infarction, brain abscess and cerebral softening. Those who recover fully may still carry hemiplegia, epileptiform convulsions, amnesia or dementia. A patient cut down alive therefore needs airway protection and neurological observation, not discharge after the neck mark is photographed.",
+   "say": "Aspiration, laryngeal swelling and hypoxic brain injury kill days later, so cut down survivors need admission and observation.",
+   "vis": {"kind": "compare", "left": {"title": "Delayed fatal complications", "points": ["Aspiration pneumonia", "Laryngeal and pulmonary oedema", "Hypoxic encephalopathy", "Brain abscess or softening"]}, "right": {"title": "Survivor sequelae", "points": ["Hemiplegia", "Epileptiform convulsions", "Amnesia or dementia", "Cervical cellulitis, parotitis"]}}
+  },
+  {
+   "title": "Suicidal, homicidal and accidental hanging",
+   "tx": "Most hangings are suicidal, a few accidental, and homicidal hanging of a healthy adult is rare because suspension needs control of the victim, under **manner of hanging assessment**. Points favouring suicide include a reachable suspension point, a ligature from the victim's own belongings, no defence injuries and a scene without disturbance. A slipped ligature can leave a double impression joined by fine abrasions, which must not be misread as two separate strangulation marks.",
+   "say": "Reachable anchor, own ligature and a quiet scene favour suicide, and a slipped noose explains double marks without homicide.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check anchor reach and scene"}, {"id": "b", "label": "Match ligature to belongings"}, {"id": "c", "label": "Look for defence injuries"}, {"id": "d", "label": "Weigh suicide against staging"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

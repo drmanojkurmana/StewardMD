@@ -1,0 +1,189 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Nosocomial Infection, Device Bundles and Needle Stick Injury",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nosocomial infection** (hospital acquired, healthcare associated) names infection neither present nor incubating at admission, conventionally appearing 48 hours or more after admission or within defined windows after discharge and procedures. The big four by device and site: catheter associated urinary infection, central line bloodstream infection, ventilator associated pneumonia and surgical site infection, each with bundle prevention and per thousand device days surveillance rates.",
+      "say": "Count infections per device days and prevention becomes a bundle, not a hope.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "The big four",
+          "points": [
+            "CAUTI: catheter days denominator",
+            "CLABSI: central line days",
+            "VAP and VAE: ventilator days",
+            "SSI: per hundred procedures by class"
+          ]
+        },
+        "right": {
+          "title": "Surveillance grammar",
+          "points": [
+            "Standard definitions (NHSN style)",
+            "Device utilisation ratios tracked",
+            "Unit level feedback and benchmarking",
+            "Post discharge SSI capture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Catheter bundles** work by subtraction and maintenance discipline: insert only for defined indications with sterile technique and closed drainage, keep bag below bladder without floor contact, review necessity daily and remove at the first honest opportunity (nurse led removal prompts), because every catheter day purchases biofilm time for uropathogens ascending inside and outside the lumen.",
+      "say": "The best catheter care is yesterday's removal decision.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "indicate", "label": "Defined indication and sterile insertion" },
+          { "id": "maintain", "label": "Closed system, bag below bladder, securement" },
+          { "id": "review", "label": "Daily necessity review documented" },
+          { "id": "remove", "label": "Prompt removal, alternatives offered" }
+        ],
+        "edges": [["indicate", "maintain"], ["maintain", "review"], ["review", "remove"]]
+      }
+    },
+    {
+      "tx": "**Central line bundles** combine insertion maximal barrier precautions, chlorhexidine skin antisepsis, site selection avoiding femoral where possible, and maintenance (scrub the hub, dressing integrity, line necessity review), the Michigan Keystone programme having shown such bundles collapse bloodstream rates toward zero across whole states. Blood culture technique (paired sets, skin preparation, volume) decides whether CLABSI data mean anything.",
+      "say": "Scrub the hub, drape the patient, question the line daily: bundle steps are unglamorous and decisive.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Insertion bundle",
+          "points": [
+            "Hand hygiene and maximal sterile barrier",
+            "Chlorhexidine alcohol skin prep",
+            "Subclavian or jugular preference guided by risk",
+            "Checklist with empowered observer"
+          ]
+        },
+        "right": {
+          "title": "Maintenance bundle",
+          "points": [
+            "Hub disinfection before every access",
+            "Transparent dressing changed when damp or lifting",
+            "Tubing and fluid change schedules",
+            "Daily necessity and early removal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ventilator bundles** elevate the head end 30 to 45 degrees, wake and breathe patients daily (sedation interruption with spontaneous breathing trials), give peptic ulcer and thrombosis prophylaxis by risk, oral chlorhexidine traditions (now debated by outcome data), and subglottic suction endotracheal tubes in selected units, each element arguing that pneumonia prevention is positioning and liberation, not antibiotics.",
+      "say": "Raise the bed, wake the patient, trial the breath: pneumonia prevention is posture and liberation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bundle elements",
+          "points": [
+            "Head up 30 to 45 degrees",
+            "Daily sedation interruption and breathing trial",
+            "Oral care protocols",
+            "Early mobilisation partnerships"
+          ]
+        },
+        "right": {
+          "title": "Definitions evolving",
+          "points": [
+            "VAP clinical diagnosis subjectivity",
+            "Ventilator associated events (VAE) surveillance",
+            "Subglottic suction tube niches",
+            "Antibiotics treat, bundles prevent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Surgical site infection** prevention spans the perioperative arc: preoperative bathing, clipping not shaving, antibiotic prophylaxis within the hour before incision and stopped within a day, glycaemic and temperature control, oxygenation debates, and wound class stratification (clean to dirty) that makes rates comparable. Organisms mirror the incision's neighbourhood: staphylococci for skin, enterics for bowel.",
+      "say": "Prophylaxis timed to the incision hour and stopped by tomorrow is SSI prevention's antibiotic sentence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prevention arc",
+          "points": [
+            "Clip, do not shave; bath preoperatively",
+            "Prophylactic antibiotic within 60 minutes (vancomycin longer)",
+            "Normothermia and glucose control",
+            "Prophylaxis not continued beyond 24 hours"
+          ]
+        },
+        "right": {
+          "title": "SSI grammar",
+          "points": [
+            "Superficial, deep and organ space classes",
+            "Wound classes clean to dirty stratify risk",
+            "30 day surveillance (90 for implants)",
+            "Feedback to surgeons changes rates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Needle stick injury** management runs on minutes and serology: wash immediately (no squeezing rituals or bleach), report and document, source patient tested with consent for HIV, hepatitis B and C, exposed worker's hepatitis B immunity verified, HIV post exposure prophylaxis within 72 hours (ideally under 2, three drug 28 days), hepatitis B immunoglobulin by immunity status, and follow up testing scheduled before the worker leaves the department.",
+      "say": "Wash, report, test the source, start PEP inside 72 hours; the clock is the protocol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "wash", "label": "Wash wound, flush mucosae, no bleach" },
+          { "id": "report", "label": "Report and source risk assessment" },
+          { "id": "pep", "label": "HIV PEP within 72 hours, HBV by immunity" },
+          { "id": "follow", "label": "Follow up serology and adherence support" }
+        ],
+        "edges": [["wash", "report"], ["report", "pep"], ["pep", "follow"]]
+      }
+    },
+    {
+      "tx": "**Transmission precautions** layer over standard precautions by syndrome: contact (gowns, gloves, dedicated equipment for MRSA, C difficile, Candida auris), droplet (surgical masks within two metres for influenza and meningococcus), airborne (fit tested respirators and negative pressure for tuberculosis, measles, varicella), prescribed empirically at triage before diagnoses confirm, because waiting for certainty infects the waiting room.",
+      "say": "Isolate by syndrome at the door; confirmation refines, never initiates, precautions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Precaution tiers",
+          "points": [
+            "Standard: every patient, every time",
+            "Contact: gown gloves, single room priority",
+            "Droplet: mask and spatial separation",
+            "Airborne: respirator, negative pressure"
+          ]
+        },
+        "right": {
+          "title": "Empiric triggers",
+          "points": [
+            "Vesicular rash: airborne plus contact",
+            "Undifferentiated meningitis: droplet",
+            "Diarrhoea outbreak: contact plus soap",
+            "Cough with TB risk: airborne immediately"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Infection control structure** (hospital infection control committee, infection control nurses per beds, microbiology laboratory partnership, antimicrobial stewardship sibling from the pharmacology lessons) owns surveillance, outbreak investigation (line lists, epidemic curves, molecular typing), policy and audit. Outbreaks are declared on data, investigated by hypothesis and ended by sustained zero, not by optimism.",
+      "say": "Line list, epidemic curve, hypothesis, intervention: outbreaks end on sustained data.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Outbreak method",
+          "points": [
+            "Case definition and line listing",
+            "Epidemic curve by onset time",
+            "Environmental and staff sampling by hypothesis",
+            "Typing links cases molecularly"
+          ]
+        },
+        "right": {
+          "title": "Standing machinery",
+          "points": [
+            "Infection control committee and nurses",
+            "Laboratory alerts for sentinel organisms",
+            "Hand hygiene and device audits",
+            "Education cycles for all cadres"
+          ]
+        }
+      }
+    }
+  ]
+}

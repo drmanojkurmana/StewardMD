@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "id": "cm-blindness-definition-of-blindness",
+ "subject": "community-medicine",
+ "module": "cm-blindness",
+ "title": "Blindness Control: NPCBVI, Cataract Backlog and Vision 2020",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Standard definitions of blindness and visual impairment",
+   "tx": "To align national standards with the World Health Organization, India modified its statutory **definition of blindness** to visual acuity of less than three-sixtieths in the better eye with best possible correction, or constriction of the visual field to less than ten degrees around central fixation. Visual acuity between six-eighteen and six-sixtieths denotes moderate visual impairment, while less than six-sixtieths down to three-sixtieths reflects severe visual impairment.",
+   "say": "Blindness is defined as vision worse than three over sixty in the better eye with glasses, or visual field under ten degrees. Vision between six-eighteen and six-sixtieths is visual impairment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cataract-fig1.webp",
+    "alt": "Clinical photographs showing nuclear, cortical and posterior subcapsular cataract types and ocular signs",
+    "caption": "Cataract types: Nuclear sclerosis, cortical spokes and posterior subcapsular opacification of the crystalline lens. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "National Programme for Control of Blindness and Visual Impairment",
+   "tx": "Launched as a fully centrally sponsored scheme, the **NPCBVI program framework** coordinates public ophthalmic infrastructure across all Indian states and union territories. The programme focuses on decentralised eye care by upgrading primary health centres with vision centres, training ophthalmic assistants, conducting mobile eye screening in remote villages, providing free spectacles to poor schoolchildren, and reimbursing non-governmental hospitals performing high-volume charitable cataract surgeries.",
+   "say": "The National Programme for Control of Blindness establishes vision centres at primary clinics, conducts village eye screening camps, and provides free cataract surgeries and spectacles.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Healthcare tier", "Institutional eye unit", "Primary service delivered"],
+    "rows": [
+     ["Primary level", "Vision Centre at CHC / PHC", "Refraction, spectacle dispensing, telemedicine"],
+     ["Secondary level", "District Hospital Eye Unit", "High-volume IOL cataract surgery, glaucoma care"],
+     ["Tertiary level", "Regional Institute of Ophthalmology", "Corneal grafting, vitreo-retinal surgery, training"],
+     ["Community level", "Mobile eye screening camps", "Case identification and referral transport"]
+    ]
+   }
+  },
+  {
+   "title": "Clearing the immense cataract backlog",
+   "tx": "Senile cataract accounts for approximately sixty-six percent of all avoidable blindness in India, creating a formidable **cataract backlog clearance** challenge for public health authorities. Clearing this accumulation requires performing over six to seven million intraocular lens surgeries annually, transitioning completely from outdated intracapsular cataract extraction to modern sutureless manual small incision cataract surgery (SICS) and phacoemulsification with posterior chamber intraocular lens implantation.",
+   "say": "Cataracts cause two-thirds of avoidable blindness in India. Clearing the backlog requires seven million surgeries each year using modern small-incision techniques with artificial lens implants.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Village screening by ophthalmic assistant"},
+     {"id": "b", "label": "Transportation to base surgical hospital"},
+     {"id": "c", "label": "Manual small incision cataract surgery with IOL"},
+     {"id": "d", "label": "Post-operative eye drop kit and return transport"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Surgical techniques: manual SICS versus phacoemulsification",
+   "tx": "In community eye camps, **manual small incision cataract surgery** represents the most cost-effective and dependable high-volume surgical technique. The surgeon constructs a self-sealing sclero-corneal tunnel, expresses the intact cataractous nucleus hydrodynamically without sutures, and inserts a rigid polymethylmethacrylate intraocular lens into the capsular bag, achieving rapid visual rehabilitation equivalent to expensive ultrasonic phacoemulsification at a fraction of the cost.",
+   "say": "Manual small incision cataract surgery delivers excellent visual recovery at low cost in high-volume camps. The surgeon removes the clouded lens through a self-sealing tunnel and inserts an artificial lens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cataract-lens-surgery-fig1.webp",
+    "alt": "Surgical illustration comparing manual small-incision cataract surgery and phacoemulsification with intraocular lens placement",
+    "caption": "Cataract surgery: Sclero-corneal tunnel construction, nucleus extraction, and posterior chamber intraocular lens placement. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Uncorrected refractive errors and school eye screening",
+   "tx": "The second leading cause of visual impairment across India is **uncorrected refractive error**, particularly uncorrected myopia in growing schoolchildren and presbyopia in working adults. To prevent amblyopia and scholastic failure, the national programme mandates annual school eye screening, where trained primary schoolteachers test visual acuity using Snellen charts, referring children failing the six-nine line to optometrists for free prescription spectacles.",
+   "say": "Uncorrected refractive errors blur vision for millions of schoolchildren and adults. Annual vision screening by schoolteachers identifies children needing glasses, providing spectacles free of charge.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Primary schoolteacher screens with Snellen chart"},
+     {"id": "b", "label": "Children failing 6/9 line identified"},
+     {"id": "c", "label": "Refraction by visiting optometrist"},
+     {"id": "d", "label": "Free customized spectacles dispensed"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Corneal blindness, trachoma and vitamin A",
+   "tx": "Excluding cataract and refractive error, **corneal blindness causes** account for nearly one percent of blindness, primarily resulting from childhood xerophthalmia due to vitamin A deficiency, ophthalmia neonatorum, infectious bacterial and fungal corneal ulcers, and historical trachoma scarring. Community prevention combines routine biannual vitamin A prophylaxis in preschool children with promoting the five clean practices during delivery to eliminate gonococcal eye contamination in newborns.",
+   "say": "Corneal blindness arises from childhood vitamin A deficiency, eye ulcers, birth infections and trachoma scarring. Routine vitamin A syrup and clean childbirth practices prevent corneal loss.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Corneal pathology", "Primary epidemiological cause", "Public health preventive measure"],
+    "rows": [
+     ["Keratomalacia / Bitot spots", "Severe vitamin A deficiency in under-fives", "Biannual vitamin A prophylaxis (total 9 doses)"],
+     ["Ophthalmia neonatorum", "Maternal gonorrhoea / chlamydia at delivery", "Antenatal screening, clean birth, erythromycin ointment"],
+     ["Infectious corneal ulcer", "Agricultural ocular trauma from vegetative matter", "Protective farm eyewear, early topical natamycin / antibiotics"],
+     ["Trachomatous scarring", "Chlamydia trachomatis serovars A, B, Ba, C", "SAFE strategy, facial hygiene, mass azithromycin"]
+    ]
+   }
+  },
+  {
+   "title": "Vision 2020: The Right to Sight global initiative",
+   "tx": "India joined the international coalition **Vision 2020 initiative**, a collaborative global campaign launched by the World Health Organization and the International Agency for the Prevention of Blindness to eliminate avoidable blindness by the year 2020. The strategy established disease-specific targets, integrated comprehensive eye care into universal primary healthcare networks, strengthened national human resources for health, and expanded equitable rural eye hospital infrastructure.",
+   "say": "The Vision 2020 Right to Sight campaign was launched to eliminate avoidable blindness. It built rural eye care networks, trained eye surgeons and integrated eye health into general clinics.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vision 2020 pillar", "Core focus area", "Long-term public health goal"],
+    "rows": [
+     ["Disease control", "Target cataract, refractive error, glaucoma, trachoma", "Eliminate preventable causes of sight loss"],
+     ["Human resource development", "Train ophthalmologists, optometrists, vision technicians", "Ensure 1 mid-level ophthalmic worker per 50,000 population"],
+     ["Infrastructure strengthening", "Upgrade district eye units and primary vision centres", "Equitable geographic access to modern eye technology"],
+     ["Advocacy and partnerships", "Collaborate with non-governmental hospital trusts", "Maximize surgical volume and public awareness"]
+    ]
+   }
+  },
+  {
+   "title": "Rapid assessment of avoidable blindness surveys",
+   "tx": "To measure blindness prevalence and evaluate cataract surgical coverage without conducting costly whole-population censuses, epidemiologists conduct **rapid assessment of avoidable blindness** surveys. Using standardized cluster sampling of adults aged fifty years and older, field teams examine fifty clusters of fifty individuals using portable torches and pinholes, recording visual acuity and pinpointing barriers that prevent elderly villagers from accessing surgical care.",
+   "say": "Rapid assessment surveys screen adults aged fifty and older in sampled village clusters. The survey accurately measures blindness rates and identifies why villagers have not had cataract surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Random selection of 50 village clusters"},
+     {"id": "b", "label": "Enrolment of 50 adults aged >= 50 years per cluster"},
+     {"id": "c", "label": "Standardized visual acuity and lens examination"},
+     {"id": "d", "label": "Calculation of cataract surgical coverage and barriers"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Hospital corneal retrieval and eye donation",
+   "tx": "Restoring vision to individuals with corneal scarring requires expanding **hospital cornea retrieval programs**, operating through certified community eye banks and grief counsellors stationed in hospital trauma centers. Corneal tissue must be harvested within six hours of death under aseptic conditions using whole-globe enucleation or in-situ corneoscleral button excision, followed by storage in McCarey-Kaufman or Optisol medium for lamellar or penetrating keratoplasty.",
+   "say": "Eye banks rely on hospital retrieval programmes where grief counsellors support families with donation. Donated corneas must be retrieved within six hours of death to restore sight.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Grief counsellor approaches bereaved family"},
+     {"id": "b", "label": "Aseptic corneal excision within 6 hours of death"},
+     {"id": "c", "label": "Preservation in MK medium or Optisol at 4 deg C"},
+     {"id": "d", "label": "Penetrating or endothelial keratoplasty transplant"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

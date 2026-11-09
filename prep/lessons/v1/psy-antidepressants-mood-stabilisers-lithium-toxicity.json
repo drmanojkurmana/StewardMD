@@ -1,0 +1,208 @@
+{
+    "v": 1,
+    "id": "psy-antidepressants-mood-stabilisers-lithium-toxicity",
+    "subject": "psychiatry",
+    "module": "psy-antidepressants-mood-stabilisers",
+    "title": "Mood Stabilisers: Lithium, Valproate, Carbamazepine, and Lamotrigine",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Lithium Therapeutic Monitoring",
+            "tx": "**Therapeutic drug monitoring of lithium** requires strict standardized trough blood sampling exactly 12 hours after the preceding nighttime dose once steady state is attained at four to five days. The therapeutic window for acute bipolar mania is 0.8 to 1.2 mEq/L, whereas maintenance therapy targets 0.6 to 0.8 mEq/L, because lithium exhibits an exceptionally narrow margin of safety.",
+            "say": "Therapeutic drug monitoring of lithium requires strict standardized trough blood sampling exactly 12 hours after the preceding nighttime dose once steady state is attained at four to five days. The therapeutic window for acute bipolar mania is 0.8 to 1.2 mEq/L, whereas maintenance therapy targets 0.6 to 0.8 mEq/L, because lithium exhibits an exceptionally narrow margin of safety.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+                "alt": "Therapeutic drug monitoring intervals and renal handling pathways for lithium",
+                "caption": "Therapeutic drug monitoring intervals and renal handling pathways for lithium"
+            }
+        },
+        {
+            "title": "Chronic Lithium Adverse Effects",
+            "tx": "**Adverse sequelae of chronic lithium** therapy involve thyroid and renal function due to cellular accumulation. Inhibition of thyroid hormone synthesis causes primary hypothyroidism and goitre in up to 20 percent of patients. In the collecting ducts, lithium blunts aquaporin-2 expression, inducing nephrogenic diabetes insipidus with polyuria and polydipsia, which responds characteristically to the epithelial sodium channel blocker amiloride.",
+            "say": "Adverse sequelae of chronic lithium therapy involve thyroid and renal function due to cellular accumulation. Inhibition of thyroid hormone synthesis causes primary hypothyroidism and goitre in up to 20 percent of patients. In the collecting ducts, lithium blunts aquaporin-2 expression, inducing nephrogenic diabetes insipidus with polyuria and polydipsia, which responds characteristically to the epithelial sodium channel blocker amiloride.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Thyroid Sequelae",
+                    "points": [
+                        "Hypothyroidism, goitre, elevated TSH",
+                        "treat with levothyroxine replacement without discontinuing lithium"
+                    ]
+                },
+                "right": {
+                    "title": "Renal Sequelae",
+                    "points": [
+                        "Nephrogenic diabetes insipidus, impaired urinary concentration",
+                        "treat with amiloride to block collecting duct uptake"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Lithium Toxicity Presentation",
+            "tx": "**Severity grading of lithium toxicity** correlates directly with circulating serum concentrations: mild toxicity (1.5 to 2.0 mEq/L) causes coarse hand tremor, gastrointestinal nausea, diarrhoea, and mild ataxia. Moderate toxicity (2.0 to 2.5 mEq/L) produces hyperreflexia, muscular fasciculations, slurred dysarthric speech, and progressive confusion. Severe toxicity (>2.5 mEq/L) precipitates grand mal seizures, generalized myoclonus, cardiovascular collapse, and irreversible cerebellar damage.",
+            "say": "Severity grading of lithium toxicity correlates directly with circulating serum concentrations: mild toxicity (1.5 to 2.0 mEq/L) causes coarse hand tremor, gastrointestinal nausea, diarrhoea, and mild ataxia. Moderate toxicity (2.0 to 2.5 mEq/L) produces hyperreflexia, muscular fasciculations, slurred dysarthric speech, and progressive confusion. Severe toxicity (greater than 2.5 mEq/L) precipitates grand mal seizures, generalized myoclonus, cardiovascular collapse, and irreversible cerebellar damage.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Serum Lithium Level",
+                    "Clinical Severity",
+                    "Neurological and Systemic Signs",
+                    "Recommended Intervention"
+                ],
+                "rows": [
+                    [
+                        "1.5 to 2.0 mEq/L",
+                        "Mild toxicity",
+                        "Coarse tremor, vomiting, diarrhoea, unsteady gait",
+                        "Withhold lithium and give IV 0.9% saline"
+                    ],
+                    [
+                        "2.0 to 2.5 mEq/L",
+                        "Moderate toxicity",
+                        "Myoclonus, hyperreflexia, ataxia, confusion",
+                        "Aggressive hydration and monitor urine output"
+                    ],
+                    [
+                        ">2.5 mEq/L",
+                        "Severe toxicity",
+                        "Seizures, delirium, coma, cardiac arrhythmias",
+                        "Prepare for emergency hemodialysis"
+                    ],
+                    [
+                        ">4.0 mEq/L",
+                        "Life-threatening",
+                        "Irreversible cerebellar atrophy, multiorgan failure",
+                        "Mandatory immediate hemodialysis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Emergency Management of Lithium Toxicity",
+            "tx": "**Hemodialysis indications in lithium poisoning** include any serum level exceeding 4.0 mEq/L regardless of symptoms, or any level surpassing 2.5 mEq/L accompanied by severe neurotoxicity, hemodynamic instability, or renal impairment. Because lithium is an uncharged single monovalent cation with negligible protein binding and a small volume of distribution, it is cleared with exquisite efficiency during hemodialysis.",
+            "say": "Hemodialysis indications in lithium poisoning include any serum level exceeding 4.0 mEq/L regardless of symptoms, or any level surpassing 2.5 mEq/L accompanied by severe neurotoxicity, hemodynamic instability, or renal impairment. Because lithium is an uncharged single monovalent cation with negligible protein binding and a small volume of distribution, it is cleared with exquisite efficiency during hemodialysis.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Serum lithium >4.0 mEq/L or >2.5 with coma"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Infuse intravenous 0.9% normal saline"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Initiate emergency hemodialysis"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Monitor for post-dialysis rebound elevation"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Sodium Valproate Pharmacology",
+            "tx": "**Pharmacological actions of sodium valproate** center on increasing central brain gamma-aminobutyric acid (GABA) concentrations through inhibition of GABA transaminase and succinic semialdehyde dehydrogenase, alongside voltage-gated sodium channel blockade. Valproate serves as first-line therapy for acute bipolar mania, mixed affective states, and rapid cycling bipolar disorder, targeting serum trough concentrations between 50 and 100 micrograms per milliliter.",
+            "say": "Pharmacological actions of sodium valproate center on increasing central brain gamma-aminobutyric acid (GABA) concentrations through inhibition of GABA transaminase and succinic semialdehyde dehydrogenase, alongside voltage-gated sodium channel blockade. Valproate serves as first-line therapy for acute bipolar mania, mixed affective states, and rapid cycling bipolar disorder, targeting serum trough concentrations between 50 and 100 micrograms per milliliter.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/practicals/paed-drug-valproate.webp",
+                "alt": "Sodium valproate syrup formulation used in neuropsychiatric dosing and mood stabilization",
+                "caption": "Sodium valproate syrup formulation used in neuropsychiatric dosing and mood stabilization"
+            }
+        },
+        {
+            "title": "Valproate Toxicity Profile",
+            "tx": "**Valproate teratogenicity and toxicities** encompass serious hepatic necrosis, acute hemorrhagic pancreatitis, dose-dependent thrombocytopenia, weight gain, and cosmetic alopecia. In utero exposure carries a 1 to 2 percent risk of neural tube defects like spina bifida and meningomyelocele, as well as congenital cardiac anomalies. Patients presenting with lethargy and vomiting must be evaluated for hyperammonemic encephalopathy, which is treated with oral L-carnitine.",
+            "say": "Valproate teratogenicity and toxicities encompass serious hepatic necrosis, acute hemorrhagic pancreatitis, dose-dependent thrombocytopenia, weight gain, and cosmetic alopecia. In utero exposure carries a 1 to 2 percent risk of neural tube defects like spina bifida and meningomyelocele, as well as congenital cardiac anomalies. Patients presenting with lethargy and vomiting must be evaluated for hyperammonemic encephalopathy, which is treated with oral L-carnitine.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Organ Toxicities",
+                    "points": [
+                        "Fulminant hepatic failure, acute pancreatitis, thrombocytopenia",
+                        "monitor LFTs and platelets regularly"
+                    ]
+                },
+                "right": {
+                    "title": "Teratogenic Spectrum",
+                    "points": [
+                        "Neural tube defects (spina bifida aperta), craniofacial dysmorphism, long-term neurodevelopmental delay"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Carbamazepine Adverse Profile",
+            "tx": "**Adverse reactions to carbamazepine** include hepatic cytochrome P450 CYP3A4 auto-induction, necessitating upward dose titration after several weeks of initiation. Clinicians must screen for the HLA-B*1502 allele in populations of Asian ancestry to avert catastrophic Stevens-Johnson syndrome and toxic epidermal necrolysis. Other classic adverse features include agranulocytosis, aplastic anaemia, hyponatremia due to syndrome of inappropriate antidiuretic hormone secretion, and cerebellar nystagmus.",
+            "say": "Adverse reactions to carbamazepine include hepatic cytochrome P450 CYP3A4 auto-induction, necessitating upward dose titration after several weeks of initiation. Clinicians must screen for the HLA-B*1502 allele in populations of Asian ancestry to avert catastrophic Stevens-Johnson syndrome and toxic epidermal necrolysis. Other classic adverse features include agranulocytosis, aplastic anaemia, hyponatremia due to syndrome of inappropriate antidiuretic hormone secretion, and cerebellar nystagmus.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/practicals/paed-drug-carbamazepine.webp",
+                "alt": "Carbamazepine tablet packaging illustrating therapeutic anticonvulsant and mood stabilizer dosing",
+                "caption": "Carbamazepine tablet packaging illustrating therapeutic anticonvulsant and mood stabilizer dosing"
+            }
+        },
+        {
+            "title": "Lamotrigine Dosing and Rash",
+            "tx": "**Slow dose titration of lamotrigine** is mandatory when treating bipolar depression maintenance to avoid life-threatening mucocutaneous reactions. Concomitant sodium valproate inhibits lamotrigine glucuronidation, effectively doubling its elimination half-life and demanding that lamotrigine starting doses be halved. In contrast, enzyme inducers like carbamazepine accelerate lamotrigine clearance, requiring substantially higher maintenance doses.",
+            "say": "Slow dose titration of lamotrigine is mandatory when treating bipolar depression maintenance to avoid life-threatening mucocutaneous reactions. Concomitant sodium valproate inhibits lamotrigine glucuronidation, effectively doubling its elimination half-life and demanding that lamotrigine starting doses be halved. In contrast, enzyme inducers like carbamazepine accelerate lamotrigine clearance, requiring substantially higher maintenance doses.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Coadministered Agent",
+                    "Metabolic Interaction",
+                    "Effect on Lamotrigine Level",
+                    "Required Dosing Adjustment"
+                ],
+                "rows": [
+                    [
+                        "Valproate Cotherapy",
+                        "Inhibition of UDP-glucuronosyltransferase",
+                        "Doubles lamotrigine plasma half-life",
+                        "Halve the starting dose and titrate every 2 weeks"
+                    ],
+                    [
+                        "Carbamazepine Cotherapy",
+                        "Induction of hepatic glucuronidation",
+                        "Halves lamotrigine plasma half-life",
+                        "Double the standard titration dose and target"
+                    ],
+                    [
+                        "Oral Contraceptive Estrogen",
+                        "Enhances glucuronide clearance",
+                        "Significantly drops lamotrigine levels",
+                        "Increase lamotrigine dose during active pill weeks"
+                    ],
+                    [
+                        "Monotherapy Baseline",
+                        "Unimpeded hepatic glucuronidation",
+                        "Standard predictable clearance",
+                        "Standard 25 mg daily starting dose schedule"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

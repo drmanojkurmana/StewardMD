@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-respiratory-rna-viruses",
+  "subject": "microbiology",
+  "title": "Mumps, Parainfluenza, RSV and Nipah Virus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Mumps virus** is a paramyxovirus spread by respiratory droplets and saliva. It classically causes painful parotid swelling, sometimes bilateral, with fever and malaise. Many infections are subclinical. Complications include aseptic meningitis, encephalitis, pancreatitis, hearing loss and orchitis after puberty. Two-dose MMR greatly reduced disease, though waning immunity can permit outbreaks in close-contact young adult settings.",
+      "say": "Mumps is parotitis plus a systemic virus that can reach meninges, pancreas and testes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic features",
+          "points": [
+            "Parotid pain and swelling",
+            "Ear lobe lifted outward in marked swelling",
+            "Pain with acidic foods",
+            "Other salivary glands may be involved"
+          ]
+        },
+        "right": {
+          "title": "Complications",
+          "points": [
+            "Aseptic meningitis",
+            "Sensorineural deafness, usually unilateral",
+            "Postpubertal orchitis",
+            "Pancreatitis and oophoritis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Parainfluenza viruses** are paramyxoviruses and major causes of croup, especially type 3 in infants and type 1 in older toddlers. Barking cough, hoarseness and inspiratory stridor reflect subglottic swelling. They also cause bronchiolitis, pneumonia and severe disease after transplantation. Unlike influenza they lack the same segmented genome machinery and do not undergo antigenic shift.",
+      "say": "Parainfluenza narrows the toddler subglottic airway into a bark and stridor.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type patterns",
+          "points": [
+            "Type 1: biennial autumn croup outbreaks historically",
+            "Type 2: croup less predictably",
+            "Type 3: bronchiolitis and pneumonia in infants",
+            "Type 4: often milder respiratory illness"
+          ]
+        },
+        "right": {
+          "title": "Croup signs",
+          "points": [
+            "Barking brassy cough",
+            "Inspiratory stridor",
+            "Steeple sign possible on imaging, imaging usually unnecessary",
+            "Nebulised adrenaline and dexamethasone for moderate severe cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Respiratory syncytial virus** is a pneumovirus with fusion protein F that forms syncytia and is the leading cause of bronchiolitis in infants. Prematurity, chronic lung disease, congenital heart disease and immunodeficiency increase severity. Older adults also develop serious RSV. Diagnosis uses molecular tests; management is oxygen and feeding support, while monoclonal antibodies and new vaccines protect defined risk groups.",
+      "say": "RSV fills infant small airways with debris and air trapping; support oxygenation first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infant bronchiolitis",
+          "points": [
+            "Coryza followed by wheeze and crackles",
+            "Poor feeding and apnoea in young infants",
+            "Hyperinflation from air trapping",
+            "Most need supportive rather than antiviral care"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "Nirsevimab long acting monoclonal for infants in programmes",
+            "Palivizumab for selected high risk infants historically/currently",
+            "Maternal RSV vaccine in some schedules",
+            "Older adult RSV vaccines available in some regions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nipah virus** is a henipavirus carried by fruit bats, transmitted through contaminated date palm sap, intermediate pig amplification historically and close contact with patients. Human disease causes febrile encephalitis and respiratory illness with high case fatality in outbreaks. Relapsed encephalitis can occur months later. There is no licensed human vaccine or specific antiviral of proven standard efficacy, so surveillance and exposure control dominate.",
+      "say": "Nipah turns bat ecology into febrile encephalitis with outbreak-level fatality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exposure routes",
+          "points": [
+            "Raw date palm sap contaminated by bats",
+            "Contact with infected pigs in the Malaysian outbreak",
+            "Caregiving exposure to respiratory secretions",
+            "Bat roost and food contamination"
+          ]
+        },
+        "right": {
+          "title": "Disease features",
+          "points": [
+            "Fever and headache progressing to encephalitis",
+            "Segmental myoclonus and autonomic dysfunction",
+            "Severe pneumonia in some outbreaks",
+            "Relapsed encephalitis months later"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Human metapneumovirus resembles RSV clinically and is another pneumovirus causing bronchiolitis, pneumonia and exacerbations in older or immunocompromised people. **Respiratory multiplex PCR** can detect it alongside RSV, parainfluenza and influenza, but detection does not always prove causation in upper airway samples. Age, season and syndrome determine interpretation.",
+      "say": "Metapneumovirus is the RSV-like second pneumovirus on modern multiplex panels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Similarities to RSV",
+          "points": [
+            "Bronchiolitis in young children",
+            "Winter seasonality",
+            "Severe disease in transplant recipients",
+            "No routine specific antiviral"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "PCR is principal diagnostic method",
+            "Codetection is common",
+            "Lower respiratory sample stronger in pneumonia",
+            "Infection control follows standard and droplet precautions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mumps diagnosis uses **buccal swab PCR** early and IgM serology with clinical context. Because vaccinated people can have attenuated IgM responses, PCR matters in outbreaks. Infected patients should be isolated for five days after parotitis onset in many guidelines. A third MMR dose can be used during outbreaks in defined high risk groups when public health authorities recommend it.",
+      "say": "In vaccinated mumps, buccal PCR catches cases that IgM may miss.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "swelling",
+            "label": "Parotitis or compatible complication"
+          },
+          {
+            "id": "buccal",
+            "label": "Massage parotid and collect buccal swab"
+          },
+          {
+            "id": "pcr",
+            "label": "Mumps RT PCR and serology"
+          },
+          {
+            "id": "isolate",
+            "label": "Droplet precautions and notification"
+          }
+        ],
+        "edges": [
+          [
+            "swelling",
+            "buccal"
+          ],
+          [
+            "buccal",
+            "pcr"
+          ],
+          [
+            "pcr",
+            "isolate"
+          ]
+        ]
+      }
+    }
+  ]
+}

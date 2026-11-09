@@ -1,0 +1,170 @@
+{
+  "v": 1,
+  "module": "pat-male-genital",
+  "subject": "pathology",
+  "title": "Testicular Teratoma, Leydig Cell Tumour, BPH, Prostate Cancer Gleason, PSA, and Penile Cancer",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **postpubertal teratoma** can contain cartilage, gut-type glands, skin and neural tissue from all three germ layers, yet still metastasise even when every element looks mature. Prepubertal teratomas behave benignly, so age flips the meaning of identical histology. Teratoma also resists chemotherapy because differentiated tissues divide slowly, leaving surgical resection as the answer for residual masses after chemotherapy.",
+      "say": "Mature teratoma in a child forgives; the same looks after puberty can metastasise and ignore chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prepubertal teratoma",
+          "points": [
+            "Mature tissues, benign course",
+            "Surgery curative usually",
+            "No GCNIS association"
+          ]
+        },
+        "right": {
+          "title": "Postpubertal teratoma",
+          "points": [
+            "Metastasis possible any maturity",
+            "Chemotherapy resistant element",
+            "Surgical resection of residuals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Precocious puberty in a boy, or gynaecomastia in a man, beside a small testicular mass suggests a **Leydig cell tumour**, a sex cord stromal neoplasm that secretes androgens or oestrogens. Eosinophilic cytoplasm may contain rod-shaped Reinke crystals. About one in ten behaves malignantly, and size over 5 cm, necrosis and vascular invasion are the worrying histological features.",
+      "say": "Precocious puberty or gynaecomastia beside a testicular mass thinks Leydig cell tumour and its Reinke crystals.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/testicular-germ-cell-tumor-fig1.webp",
+        "alt": "Testicular germ cell tumor pathology sex cord stromal context",
+        "caption": "Testicular tumours including sex cord stromal Leydig cell neoplasms."
+      }
+    },
+    {
+      "tx": "**Benign prostatic hyperplasia** grows nodular glands and stroma in the transition zone hugging the urethra, which explains why urinary obstruction dominates while equally large glands elsewhere stay silent. Dihydrotestosterone drives growth with age. PSA rises simply because more glandular tissue produces it, so a raised value in a big smooth prostate does not by itself diagnose cancer.",
+      "say": "Transition zone nodules strangle the urethra in BPH; cancer prefers the peripheral zone instead.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/benign-prostatic-hyperplasia-fig1.webp",
+        "alt": "Normal and BPH prostate",
+        "caption": "Benign prostatic hyperplasia enlarging the transition zone around urethra."
+      }
+    },
+    {
+      "tx": "**Gleason grading** scores prostate cancer purely by gland architecture, ignoring nuclear atypia. Well formed discrete glands are pattern 3, fused or cribriform glands pattern 4, and sheets or single cells with no gland formation pattern 5. The commonest plus the worst pattern give the score, grouped into Grade Groups 1 to 5. A basal cell layer is absent around malignant glands.",
+      "say": "Gleason grades gland architecture, not cell atypia; pattern four and five rewrite prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Grade group",
+          "Gleason patterns",
+          "Temperament"
+        ],
+        "rows": [
+          [
+            "Grade group 1",
+            "3 plus 3",
+            "Active surveillance often"
+          ],
+          [
+            "Grade group 2",
+            "3 plus 4",
+            "Favourable intermediate"
+          ],
+          [
+            "Grade group 3",
+            "4 plus 3",
+            "Unfavourable intermediate"
+          ],
+          [
+            "Grade groups 4 to 5",
+            "8 to 10 totals",
+            "High risk multimodal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Multiparametric **MRI before biopsy** now triages men with a raised PSA, sparing many a biopsy and reducing detection of indolent cancers. Targeted cores sample the visible lesion plus systematic cores around it. Men with low risk disease, Grade Group 1 and low PSA density, can enter active surveillance with serial PSA, MRI and repeat biopsies instead of immediate radical treatment.",
+      "say": "MRI triage and surveillance discipline PSA's overdiagnosis; not every detected prostate cancer needs treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+        "alt": "Normal versus BPH prostate and PSA context",
+        "caption": "Prostate enlargement and PSA interpretation across benign and malignant disease."
+      }
+    },
+    {
+      "tx": "When prostate cancer reaches bone it usually provokes new bone formation, producing dense **osteoblastic metastases** in pelvis, lumbar spine and ribs that look sclerotic white on plain films. New back pain in an older man with a hard prostate therefore needs PSA testing and urgent cord compression assessment if leg weakness or sphincter change appears. Alkaline phosphatase climbs as osteoblasts lay down bone.",
+      "say": "Sclerotic axial metastases in an older man mean prostate primary until PSA and biopsy acquit it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BPH clues",
+          "points": [
+            "Smooth enlarged gland",
+            "Obstructive voiding years",
+            "PSA by volume explained"
+          ]
+        },
+        "right": {
+          "title": "Cancer clues",
+          "points": [
+            "Hard nodule on examination",
+            "Bone pain, weight loss late",
+            "MRI lesion targeted biopsy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Penile squamous cell carcinoma** hides under a non-retractile foreskin as a chronic ulcer or warty growth, linked to phimosis, lichen sclerosus, smoking and HPV 16. It spreads first to inguinal nodes, and nodal status overwhelms primary tumour features as the determinant of survival. A foreskin that will not retract in an older man must be inspected, not repeatedly creamed.",
+      "say": "Nonretractile foreskin hiding an ulcer in an older man means penile cancer until biopsy acquits it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/penile-cancer-fig1.webp",
+        "alt": "Penile cancer presentation and spread",
+        "caption": "Penile cancer presentation with inguinal nodal spread patterns."
+      }
+    },
+    {
+      "tx": "Alpha blockers such as tamsulosin relax prostatic smooth muscle and improve flow within days, but they do not shrink the gland. **Finasteride** and other 5-alpha reductase inhibitors cut prostate volume by about a quarter over six months, halve PSA readings, and suit larger glands. Remembering that PSA halving matters, because a rising adjusted PSA on finasteride still needs cancer evaluation.",
+      "say": "Relax the outlet fast, shrink the gland slowly: BPH drugs divide labour exactly that way.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Symptoms and flow assessed, cancer excluded"
+          },
+          {
+            "id": "b",
+            "label": "Alpha blocker for dynamic tone"
+          },
+          {
+            "id": "c",
+            "label": "5-alpha inhibitor if gland large"
+          },
+          {
+            "id": "d",
+            "label": "Procedures for retention or complications"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

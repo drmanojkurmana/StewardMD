@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "id": "cm-leprosy-leprosy",
+ "subject": "community-medicine",
+ "module": "cm-leprosy",
+ "title": "Leprosy Diagnosis: Ridley-Jopling Classification and MDT Protocols",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Mycobacterium leprae and clinical spectrum",
+   "tx": "The acid-fast obligate intracellular bacillus Mycobacterium leprae causes **Hansen disease**, primarily infecting Schwann cells of peripheral nerves and macrophages of the skin. The clinical disease manifests across a wide immunopathological spectrum defined by the Ridley-Jopling classification, spanning from high cell-mediated immunity in polar tuberculoid leprosy to absent cell-mediated immunity and massive bacterial replication in polar lepromatous leprosy.",
+   "say": "Mycobacterium leprae invades nerve Schwann cells and skin macrophages. The disease spans a wide spectrum, from polar tuberculoid with strong immunity to polar lepromatous with no immunity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leprosy-fig2.webp",
+    "alt": "Diagram illustrating the Ridley-Jopling immunopathological spectrum of leprosy from tuberculoid to lepromatous",
+    "caption": "Leprosy Ridley-Jopling spectrum: Cell-mediated immunity gradient from TT to LL with bacterial load shifts. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Paucibacillary versus multibacillary case definition",
+   "tx": "For programmatic chemotherapy, the World Health Organization classifies patients into **paucibacillary leprosy** versus multibacillary disease based on clinical lesion count and slit skin smear examination. A patient presenting with one to five hypopigmented skin patches with definite sensory loss and at most one thickened peripheral nerve trunk is diagnosed as paucibacillary, provided all slit skin smear sites test completely negative for acid-fast bacilli.",
+   "say": "Patients with one to five skin patches, impaired sensation and at most one enlarged nerve are classified as paucibacillary, provided their skin smears show no bacilli.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paucibacillary (PB) leprosy",
+     "points": ["1 to 5 skin lesions with sensory loss", "At most 1 peripheral nerve involved", "Slit skin smear negative at all sites"]
+    },
+    "right": {
+     "title": "Multibacillary (MB) leprosy",
+     "points": ["6 or more skin lesions", "2 or more peripheral nerves enlarged", "Slit skin smear positive at any site"]
+    }
+   }
+  },
+  {
+   "title": "Multibacillary disease features and slit skin smears",
+   "tx": "Patients exhibiting six or more skin patches, symmetric diffuse infiltration, multiple enlarged nerve trunks or any positive smear site are classified as having **multibacillary leprosy**. Histopathology shows histiocytes packed with clumps of viable bacilli termed globi, accompanied by dermal thinned grenz zones; left untreated, chronic bacillary accumulation causes diffuse skin thickening, madarosis, leonine facies, saddle-nose collapse and bilateral symmetric peripheral nerve damage.",
+   "say": "Six or more skin lesions, multiple nerve thickenings or any positive smear site defines multibacillary disease. Heavy bacterial replication leads to facial infiltration and nerve loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leprosy-fig1.webp",
+    "alt": "Micrograph of lepromatous leprosy histology showing foamy histiocytes packed with globi of acid-fast bacilli",
+    "caption": "Lepromatous leprosy: Dermal foamy Virchow cells containing dense intracellular globi of Mycobacterium leprae. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Standard multidrug therapy blister packs",
+   "tx": "To prevent rifampicin resistance and guarantee cure, national guidelines supply pre-packaged **MDT blister packs** colour-coded for age and classification: green for paucibacillary adults and pink for multibacillary adults. Each calendar blister pack contains precisely twenty-eight days of medication divided into supervised monthly components taken at the clinic and self-administered daily components taken at home, eliminating prescribing errors in rural centres.",
+   "say": "Multidrug therapy comes in pre-packaged blister packs: green for paucibacillary and pink for multibacillary cases. Blister cards separate monthly supervised pills from daily home doses.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Blister pack type", "Colour code", "Regimen duration", "Target classification"],
+    "rows": [
+     ["PB Adult Blister", "Green card", "6 blister packs within 9 months", "Paucibacillary patients >= 15 years"],
+     ["MB Adult Blister", "Pink card", "12 blister packs within 18 months", "Multibacillary patients >= 15 years"],
+     ["PB Child Blister", "Green card (small)", "6 blister packs within 9 months", "Paucibacillary children 10 to 14 years"],
+     ["MB Child Blister", "Pink card (small)", "12 blister packs within 18 months", "Multibacillary children 10 to 14 years"]
+    ]
+   }
+  },
+  {
+   "title": "Rifampicin as the bactericidal backbone",
+   "tx": "The macrocyclic antibiotic **rifampicin bactericidal action** serves as the powerhouse of multidrug therapy, destroying ninety-nine point nine percent of viable Mycobacterium leprae within a single supervised monthly oral dose of six hundred milligrams. Because its powerful bactericidal kill renders patients non-infectious within seventy-two hours of the first dose, monthly supervision ensures complete adherence while preventing monotherapy and subsequent secondary drug resistance.",
+   "say": "A single monthly dose of six hundred milligrams of rifampicin kills over ninety-nine percent of living bacilli within three days, rapidly rendering the patient non-infectious to others.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Supervised monthly dose of 600 mg rifampicin"},
+     {"id": "b", "label": "99.9% bacillary destruction in 72 hours"},
+     {"id": "c", "label": "Immediate loss of community transmission"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Dapsone component and compliance",
+   "tx": "The synthetic sulfone **dapsone bacteriostatic inhibition** forms the daily oral partner in multidrug therapy, administered at one hundred milligrams daily for adults to inhibit bacterial folate synthesis by competing with para-aminobenzoic acid. Regular ingestion prevents the selection of rifampicin-resistant mutants; patients are cautioned regarding mild dose-dependent haemolysis and advised to report immediately if jaundice, dark urine or high fever develop.",
+   "say": "Patients take one hundred milligrams of dapsone daily at home to block bacterial folate synthesis. Dapsone prevents resistance from developing against the powerful monthly rifampicin.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug agent", "Administration schedule", "Adult dosage", "Supervision status"],
+    "rows": [
+     ["Rifampicin", "Once monthly (Day 1)", "600 mg (two 300 mg capsules)", "Directly observed by health worker"],
+     ["Dapsone", "Daily (Days 1 to 28)", "100 mg single oral tablet", "Self-administered daily at home"],
+     ["Clofazimine (in MB)", "Once monthly + daily", "300 mg supervised + 50 mg daily", "Monthly supervised, daily home ingestion"]
+    ]
+   }
+  },
+  {
+   "title": "Paucibacillary treatment duration and cure",
+   "tx": "The treatment schedule for paucibacillary disease requires completing **six blister packs** within a maximum allowable window of nine months, providing six supervised monthly doses of rifampicin along with daily dapsone. Upon completing six full blister cards, the patient is officially discharged from active treatment as cured; residual hypo-pigmented patches often require additional months to fade completely as host skin architecture normalises.",
+   "say": "Paucibacillary patients take six blister packs over nine months. Once completed, they are discharged as cured, though skin discoloration can take several months to fade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Initiate PB treatment: Green blister pack"},
+     {"id": "b", "label": "Complete 6 blister cards within 9 months"},
+     {"id": "c", "label": "Official discharge: Treatment completed cure"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Multibacillary treatment duration and follow-up",
+   "tx": "For multibacillary infection, the treatment regimen requires completing **twelve blister packs** within a maximum period of eighteen months, combining monthly supervised rifampicin and clofazimine with daily dapsone and clofazimine. Even after achieving microbiological cure, dead disintegrated bacterial antigens clear slowly from the tissues over several years, requiring annual clinical surveillance to monitor for late lepra reactions or disease relapse.",
+   "say": "Multibacillary cases complete twelve blister packs within eighteen months. Because dead bacterial debris clears very slowly, patients undergo yearly check-ups to monitor for reactions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PB treatment completion",
+     "points": ["6 blister cards in 9 months", "Rifampicin + Dapsone only", "Discharged with self-care counseling"]
+    },
+    "right": {
+     "title": "MB treatment completion",
+     "points": ["12 blister cards in 18 months", "Rifampicin + Dapsone + Clofazimine", "Annual follow-up for 5 years"]
+    }
+   }
+  },
+  {
+   "title": "Triple-drug regimen unified update",
+   "tx": "Under revised national and global guidance, many programmes have transitioned to a **unified MDT regimen**, administering the three-drug combination of rifampicin, dapsone and clofazimine to all leprosy patients, adjusting only duration between six months for paucibacillary cases and twelve months for multibacillary cases. This unified approach prevents inadvertent under-treatment of multibacillary patients misclassified by lesion counts in primary clinics.",
+   "say": "Modern guidelines often give all three drugs to every patient, varying only duration from six months for mild cases to twelve months for heavy disease to prevent undertreatment.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Classification", "Unified drugs prescribed", "Recommended duration"],
+    "rows": [
+     ["Paucibacillary (PB)", "Rifampicin + Dapsone + Clofazimine", "6 months of therapy (6 blister packs)"],
+     ["Multibacillary (MB)", "Rifampicin + Dapsone + Clofazimine", "12 months of therapy (12 blister packs)"],
+     ["Relapse / Refractory", "Second-line ofloxacin / minocycline", "24 months under specialist supervision"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

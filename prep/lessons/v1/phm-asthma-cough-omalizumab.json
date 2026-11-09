@@ -1,0 +1,247 @@
+{
+  "v": 1,
+  "module": "phm-asthma-cough",
+  "subject": "pharmacology",
+  "title": "Biologic Controllers, Targeted PDE4 Inhibitors, and Centrally Acting Antitussives",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The recombinant humanized IgG1-kappa monoclonal antibody that binds selectively to the constant Fc region of free human immunoglobulin E is **omalizumab**. By binding only to free circulating IgE and not to IgE already bound to high-affinity Fc-epsilon-RI receptors on mast cells and basophils, omalizumab prevents antigen-induced cross-linking and subsequent degranulation without triggering anaphylaxis itself. In addition, it downregulates Fc-epsilon-RI receptor expression on basophils and dendritic cells over several months, indicated for moderate-to-severe allergic asthma with elevated baseline serum IgE.",
+      "say": "Omalizumab neutralizes free circulating IgE to prevent mast cell degranulation and downregulate surface IgE receptors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "omali",
+            "label": "Subcutaneous omalizumab administration (dose based on weight and IgE)"
+          },
+          {
+            "id": "free_ige",
+            "label": "Selective binding to C-epsilon-3 domain of free circulating IgE"
+          },
+          {
+            "id": "block",
+            "label": "Inhibition of IgE binding to high-affinity Fc-epsilon-RI receptors"
+          },
+          {
+            "id": "downreg",
+            "label": "Downregulation of mast cell receptor density and blunting of allergen response"
+          }
+        ],
+        "edges": [
+          [
+            "omali",
+            "free_ige"
+          ],
+          [
+            "free_ige",
+            "block"
+          ],
+          [
+            "block",
+            "downreg"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A humanized monoclonal antibody directed specifically against human interleukin-5 that halts eosinophil maturation and recruitment is **mepolizumab**. Administered subcutaneously once every four weeks at 100 mg, mepolizumab neutralizes circulating interleukin-5, depriving eosinophils of their primary survival, differentiation, and trafficking cytokine. This results in profound and sustained reductions in blood and tissue eosinophil counts, dramatically reducing asthma exacerbation rates, emergency department visits, and maintenance oral corticosteroid requirements in patients with severe refractory eosinophilic asthma phenotype.",
+      "say": "Mepolizumab neutralizes interleukin-5 to deplete eosinophils and reduce severe asthma exacerbations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anti-IL-5 Ligand Antibody (Mepolizumab)",
+          "points": [
+            "Binds and neutralizes circulating interleukin-5 cytokine directly",
+            "Deprives eosinophils of survival and bone marrow maturation signal",
+            "Administered as 100 mg subcutaneous injection every 4 weeks",
+            "Substantially reduces oral corticosteroid maintenance burden"
+          ]
+        },
+        "right": {
+          "title": "Anti-IL-5 Receptor Antibody (Benralizumab)",
+          "points": [
+            "Binds specifically to the IL-5R-alpha receptor on eosinophils",
+            "Afucosylated Fc domain recruits NK cells for ADCC lysis",
+            "Produces near-complete depletion of circulating eosinophils in 24 hours",
+            "Administered subcutaneously every 8 weeks following induction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The orally active, selective non-xanthine phosphodiesterase-4 inhibitor approved specifically for maintenance therapy in severe chronic obstructive pulmonary disease is **roflumilast**. Because PDE4 is the predominant cyclic AMP-metabolizing enzyme in inflammatory leukocytes, roflumilast elevates intracellular cyclic AMP, suppressing leukocyte activation, chemotaxis, and release of pro-inflammatory mediators. Indicated for severe COPD associated with chronic bronchitis and frequent exacerbations, its common adverse effects include nausea, diarrhea, decreased appetite, and significant weight loss, alongside rare psychiatric disturbances like anxiety and depression.",
+      "say": "Roflumilast selectively inhibits PDE4 to suppress leukocyte inflammation and exacerbations in severe chronic bronchitis COPD.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Airway mucosal inflammatory pathways and target sites for PDE4 inhibitors",
+        "caption": "Airway mucosa inflammatory cell signaling detailing phosphodiesterase-4 cyclic AMP degradation pathways and biologic receptor targets."
+      }
+    },
+    {
+      "tx": "The prototypical natural phenanthrene opioid alkaloid that functions as an effective centrally acting antitussive is **codeine** (methylmorphine). Ingested orally in antitussive doses of 10 to 20 mg, codeine penetrates the central nervous system to stimulate mu-opioid receptors within the medullary cough center, raising the threshold for cough reflex initiation. While highly effective for exhausting dry, non-productive nocturnal cough, codeine produces dose-dependent sedation, constipation, nausea, respiratory depression, and potential abuse liability, and is bioactivated to morphine via polymorphic CYP2D6 enzymes.",
+      "say": "Codeine suppresses the medullary cough center via mu-opioid receptors, but causes constipation and sedation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Opioid Antitussive (Codeine)",
+          "points": [
+            "Stimulates central medullary mu-opioid receptors directly",
+            "Produces significant sedation, respiratory depression, constipation",
+            "Bioactivated to morphine via polymorphic hepatic CYP2D6",
+            "Carries definite abuse potential and physical dependence risk"
+          ]
+        },
+        "right": {
+          "title": "Non-Opioid Antitussive (Dextromethorphan)",
+          "points": [
+            "Blocks NMDA receptors and stimulates sigma-1 receptors",
+            "Negligible sedation, zero respiratory depression or constipation",
+            "Lacks analgesic activity or classical opioid receptor binding",
+            "Minimal abuse liability at standard recommended oral doses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The synthetic d-isomer of the codeine analogue levorphanol that provides potent centrally acting antitussive efficacy without opioid analgesia or respiratory depression is **dextromethorphan**. Acting as an antagonist at N-methyl-D-aspartate receptors and an agonist at sigma-1 receptors within the brainstem medullary cough center, dextromethorphan elevates the sensory cough threshold equivalent to codeine. Because it lacks affinity for classical mu or kappa opioid receptors, it does not cause constipation, respiratory suppression, or physical dependence at therapeutic doses, making it the preferred non-narcotic cough suppressant.",
+      "say": "Dextromethorphan acts on NMDA and sigma-1 receptors to suppress dry cough without opioid bowel or respiratory risks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dxm",
+            "label": "Oral dextromethorphan administration"
+          },
+          {
+            "id": "bbb",
+            "label": "Crosses blood-brain barrier into brainstem medullary nuclei"
+          },
+          {
+            "id": "sigma",
+            "label": "Sigma-1 receptor agonism and NMDA receptor antagonism"
+          },
+          {
+            "id": "cough",
+            "label": "Elevation of sensory cough threshold and cessation of dry hacking cough"
+          }
+        ],
+        "edges": [
+          [
+            "dxm",
+            "bbb"
+          ],
+          [
+            "bbb",
+            "sigma"
+          ],
+          [
+            "sigma",
+            "cough"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A unique peripherally acting non-opioid antitussive chemically related to the local anesthetic tetracaine is **benzonatate**. Ingested as liquid-filled gelatin perles, benzonatate acts locally in the respiratory tract by anesthetizing stretch receptors located within the vagal sensory afferents of the bronchial tree, lungs, and pleura. This dampens the afferent limb of the cough reflex triggered by deep breathing or mucosal irritation. The capsules must be swallowed whole without chewing; biting or crushing the perles causes rapid oral and oropharyngeal anesthesia, choking, and rare laryngospasm.",
+      "say": "Benzonatate anesthetizes airway stretch receptors peripherally, but chewing the capsule risks dangerous oropharyngeal numbness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peripherally Acting Antitussive (Benzonatate)",
+          "points": [
+            "Chemically related to ester local anesthetic tetracaine",
+            "Anesthetizes stretch receptors on vagal pulmonary afferents",
+            "Zero central nervous system or medullary cough suppression",
+            "Must be swallowed whole; chewing triggers oropharyngeal choking"
+          ]
+        },
+        "right": {
+          "title": "Centrally Acting Antitussives (Codeine, Dextromethorphan)",
+          "points": [
+            "Cross blood-brain barrier into dorsal brainstem nuclei",
+            "Raise threshold of central medullary cough coordination center",
+            "Effective regardless of whether stimulus is peripheral or central",
+            "Available as oral liquids, syrups, and conventional tablets"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A humanized monoclonal antibody directed against the alpha subunit of the interleukin-5 receptor that induces direct eosinophil apoptosis is **benralizumab**. Engineered with an afucosylated Fc region that enhances binding affinity to Fc-gamma-RIIIa receptors on natural killer cells by over fifty-fold, benralizumab recruits natural killer cells to destroy eosinophils and basophils via antibody-dependent cellular cytotoxicity. Administered subcutaneously every eight weeks following induction, it achieves complete depletion of blood eosinophils within twenty-four hours in severe eosinophilic asthma.",
+      "say": "Benralizumab recruits natural killer cells to destroy eosinophils via antibody-dependent cellular cytotoxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "benra",
+            "label": "Subcutaneous benralizumab administration"
+          },
+          {
+            "id": "bind",
+            "label": "High-affinity binding to IL-5R-alpha on eosinophils and basophils"
+          },
+          {
+            "id": "nk",
+            "label": "Afucosylated Fc domain engages Fc-gamma-RIIIa on natural killer cells"
+          },
+          {
+            "id": "lysis",
+            "label": "Antibody-dependent cellular cytotoxicity: complete eosinophil apoptosis in 24 hours"
+          }
+        ],
+        "edges": [
+          [
+            "benra",
+            "bind"
+          ],
+          [
+            "bind",
+            "nk"
+          ],
+          [
+            "nk",
+            "lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A distinct clinical syndrome characterized by the classic Samter triad of bronchial asthma, recurrent nasal polyposis, and acute bronchospasm following cyclooxygenase-1 inhibition is **aspirin-exacerbated respiratory disease** (AERD). In susceptible individuals, inhibition of COX-1 shunts arachidonic acid entirely into the 5-lipoxygenase pathway, while concurrently depleting protective prostaglandin E2, which normally restrains 5-lipoxygenase. This provokes massive, unregulated synthesis of cysteinyl leukotrienes, triggering violent bronchospasm, profuse rhinorrhea, conjunctival injection, and facial flushing within thirty to ninety minutes of NSAID ingestion.",
+      "say": "AERD shunts arachidonic acid to leukotrienes during COX-1 inhibition, triggering severe asthma flares and rhinorrhea.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical feature",
+          "Pathophysiologic mechanism",
+          "Management strategy"
+        ],
+        "rows": [
+          [
+            "Severe bronchospasm",
+            "Massive cysteinyl leukotriene surge contracting smooth muscle",
+            "High-dose leukotriene modifiers (montelukast, zileuton)"
+          ],
+          [
+            "Recurrent nasal polyposis",
+            "Persistent eosinophilic mucosal inflammation and remodeling",
+            "Topical nasal corticosteroids and surgical polypectomy"
+          ],
+          [
+            "Cross-reactive NSAID attacks",
+            "Any potent COX-1 inhibitor (ibuprofen, diclofenac, naproxen)",
+            "Strict avoidance of COX-1 inhibitors; acetaminophen up to 500 mg"
+          ],
+          [
+            "Aspirin desensitization",
+            "Gradual daily escalation downregulating leukotriene receptors",
+            "Daily maintenance aspirin protocol under specialist care"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-clostridia-anaerobes",
+  "subject": "microbiology",
+  "title": "Clostridium botulinum, Botulism and Clostridioides difficile",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Clostridium botulinum** is an anaerobic spore former whose botulinum neurotoxins (types A to G, proteases cleaving SNARE fusion proteins at cholinergic terminals) cause flaccid paralysis: foodborne (preformed toxin in canned and fermented foods), infant (gut colonisation from honey and dust), wound, iatrogenic and inhalational forms, symmetric descending weakness with autonomic dryness and clear mind.",
+      "say": "Descending flaccid paralysis, dry mouth, clear sensorium: botulism until excluded.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Botulism portrait",
+          "points": [
+            "Cranial nerves first: diplopia, ptosis, dysarthria",
+            "Descending symmetric flaccidity",
+            "Dry mouth, ileus, urinary retention, dilated pupils variable",
+            "Afebrile, sensation and consciousness spared"
+          ]
+        },
+        "right": {
+          "title": "Botulism forms",
+          "points": [
+            "Foodborne preformed toxin",
+            "Infant intestinal toxaemia",
+            "Wound (injection drug use)",
+            "Iatrogenic cosmetic and therapeutic overdose"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Botulinum toxin mechanism** mirrors tetanus backwards: light chain proteases cleave SNAP25, syntaxin or VAMP at peripheral cholinergic synapses, acetylcholine vesicles cannot fuse, neuromuscular and autonomic transmission fails. Same enzyme family, different trafficking address, opposite clinical sign: spastic versus flaccid. Duration follows the toxin serotype, with type A generally producing longer paralysis than type E in foodborne outbreaks.",
+      "say": "Tetanus cuts brakes in the cord, botulinum cuts the accelerator at the muscle: flaccid wins.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SNARE targets",
+          "points": [
+            "Types A and E: SNAP25",
+            "B, D, F, G: VAMP synaptobrevin",
+            "C: syntaxin and SNAP25",
+            "Recovery by terminal sprouting weeks to months"
+          ]
+        },
+        "right": {
+          "title": "Mirror tetanus",
+          "points": [
+            "Both dichain zinc proteases",
+            "Botulinum stays peripheral, tetanus retrograde central",
+            "Flaccid versus spastic paralysis",
+            "Antitoxins neutralise unbound only (both)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Botulism management** is antitoxin early (equine heptavalent BAT through public health, human BIG for infants) after specimens drawn but never delayed by them, airway and ventilation vigilance (vital capacity trending), no antibiotics needed in foodborne (aminoglycosides worsen block) except wound botulism debridement and penicillin traditions, immediate notification.",
+      "say": "Call public health for antitoxin before weakness reaches the diaphragm; aminoglycosides deepen the block.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Descending paralysis recognised"
+          },
+          {
+            "id": "specimen",
+            "label": "Serum, stool and food saved"
+          },
+          {
+            "id": "antitoxin",
+            "label": "Antitoxin via public health urgently"
+          },
+          {
+            "id": "airway",
+            "label": "Ventilation watch, ICU, no aminoglycosides"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "specimen"
+          ],
+          [
+            "specimen",
+            "antitoxin"
+          ],
+          [
+            "antitoxin",
+            "airway"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Infant botulism** colonises immature gut flora (honey the famous but minority source, soil dust majority): constipation first, poor feeding, weak cry, floppy baby with ptosis, descending hypotonia, human botulism immune globulin (BabyBIG) shortening hospital stay, antibiotics avoided (lysis may release toxin) and honey forbidden under twelve months by rule.",
+      "say": "Constipated, floppy, weak cry: infant botulism; no honey under one year is its public slogan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infant portrait",
+          "points": [
+            "Age weeks to 12 months",
+            "Constipation sentinel",
+            "Poor suck, weak cry, head lag",
+            "Descending hypotonia and respiratory failure"
+          ]
+        },
+        "right": {
+          "title": "Infant answers",
+          "points": [
+            "BabyBIG human immune globulin",
+            "Supportive intensive care mainstay",
+            "Avoid antibiotics and honey",
+            "Stool toxin and organism testing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Foodborne botulism sources** (home canned low acid vegetables, fermented fish and marine foods, garlic oil, foil wrapped potatoes held warm) share anaerobic spore germination in preserved food, toxin odourless and tasteless often, boiling food ten minutes destroys toxin while spores demand pressure canning science (121 degrees schedules by food).",
+      "say": "Pressure can low acid food correctly or spores will can toxin instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic vehicles",
+          "points": [
+            "Home canned vegetables and meats",
+            "Fermented fish (type E traditions)",
+            "Herb oils and baked potatoes held",
+            "Restaurant sauce outbreaks (large batch holding)"
+          ]
+        },
+        "right": {
+          "title": "Kitchen rules",
+          "points": [
+            "Pressure canning times by acidity",
+            "Boil home canned foods 10 minutes before tasting traditions",
+            "Bulging cans discarded unopened or tasted never",
+            "Refrigerate oils and leftovers promptly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clostridioides difficile** is the spore forming anaerobe of antibiotic disrupted gut: toxins A (enterotoxin) and B (cytotoxin) glucosylate Rho GTPases collapsing colonocyte cytoskeletons, pseudomembranous colitis, binary toxin in epidemic 027 strains, diagnosed by two step algorithms (GDH plus toxin, NAAT arbitration), never by NAAT alone in formed stool.",
+      "say": "Antibiotics clear the field, spores germinate, toxins melt the colon lining.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CDI portrait",
+          "points": [
+            "Watery diarrhoea after antibiotics (clindamycin, cephalosporins, fluoroquinolones)",
+            "Pseudomembranes on endoscopy",
+            "Ileus and megacolon in fulminant",
+            "Recurrence in fifth of patients"
+          ]
+        },
+        "right": {
+          "title": "Testing discipline",
+          "points": [
+            "Only unformed stool tested",
+            "GDH plus toxin EIA, NAAT arbitrates discordance",
+            "NAAT alone overcalls colonisation",
+            "No test of cure, no repeat within days"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CDI therapy and recurrence** (fidaxomicin preferred where available, vancomycin oral standard, metronidazole legacy mild, bezlotoxumab monoclonal against toxin B in high recurrence risk, faecal microbiota and live biotherapeutics for multiple recurrences) plus spore infection control (soap, hypochlorite, isolation) complete the pharmacology module's debt.",
+      "say": "Treat the colon, spare the microbiome, wash spores off with soap: CDI in three clauses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment ladder",
+          "points": [
+            "Stop provoking antibiotics where possible",
+            "Fidaxomicin or oral vancomycin first line",
+            "Fulminant: vancomycin plus IV metronidazole, surgery consult",
+            "Bezlotoxumab adjunct in high recurrence risk"
+          ]
+        },
+        "right": {
+          "title": "Recurrence answers",
+          "points": [
+            "Tapered pulsed vancomycin traditions",
+            "Fidaxomicin extended pulse",
+            "Faecal microbiota for multiple recurrences",
+            "Isolation and hypochlorite cleaning spores"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Botulinum as medicine** (onabotulinum and kin at picogram doses) treats dystonia, spasticity, chronic migraine, hyperhidrosis and bladder overactivity by the same SNARE cleavage, adverse spread causing dysphagia and weakness, immunogenicity with frequent high doses, black box distant spread. Poison and drug differ by dose and address, Paracelsus in a vial.",
+      "say": "Picograms at the right muscle are therapy; micrograms in food are catastrophe.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Therapeutic map",
+          "points": [
+            "Type A products, type B alternative",
+            "Units not interchangeable between brands",
+            "Duration 3 months by sprouting",
+            "Antibody resistance with high frequent doses"
+          ]
+        },
+        "right": {
+          "title": "Safety fences",
+          "points": [
+            "Dysphagia after cervical injections",
+            "Avoid aminoglycoside synergy",
+            "Myasthenia and Lambert Eaton caution",
+            "Cosmetic: brow and lid ptosis temporary"
+          ]
+        }
+      }
+    }
+  ]
+}

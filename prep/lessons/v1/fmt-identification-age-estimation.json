@@ -1,0 +1,318 @@
+{
+ "v": 1,
+ "id": "fmt-identification-age-estimation",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Skeletal Age Estimation, Ossification Centres and Epiphyseal Fusion",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Medicolegal significance of chronological age estimation",
+   "tx": "In forensic practice, accurate **medicolegal skeletal age estimation** is crucial for resolving questions of criminal culpability, victim consent, and civil entitlement. The law establishes vital statutory age thresholds: absolute criminal immunity (doli incapax) under seven years, juvenile justice protection under eighteen years, sexual consent thresholds under the POCSO Act, voting rights at eighteen, marriage eligibility, and exemption from capital punishment.",
+   "say": "Age estimation is critical in criminal law, establishing juvenile status under eighteen, sexual consent limits under POCSO, voting eligibility, and criminal liability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age milestone",
+     "Statutory threshold",
+     "Medicolegal consequence"
+    ],
+    "rows": [
+     [
+      "Below 7 years",
+      "Section 20 BNS (old 82 IPC)",
+      "Absolute criminal immunity (doli incapax)"
+     ],
+     [
+      "7 to 12 years",
+      "Section 21 BNS (old 83 IPC)",
+      "Immunity unless sufficient maturity is proven"
+     ],
+     [
+      "Below 18 years",
+      "Juvenile Justice Act / POCSO",
+      "Juvenile trial procedures; invalid sexual consent"
+     ],
+     [
+      "18 years and above",
+      "Majority Act / Representation of People",
+      "Adult criminal trial, legal marriage for females, voting"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Biological indicators: Teeth, secondary sexual features and bones",
+   "tx": "To determine chronological age across growth phases, forensic examiners deploy the **triad of age estimation indicators**, combining physical development, dental eruption patterns, and radiological epiphyseal fusion. Secondary sexual characteristics evaluated via Tanner staging offer useful benchmarks during puberty, while dental eruption timelines determine age from infancy to twenty-one years. Radiological skeletal fusion provides the most reliable age estimates up to twenty-five years.",
+   "say": "Forensic age estimation combines three parameters: secondary sexual development, dental eruption schedules, and radiological epiphyseal bone fusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "General physical examination and Tanner staging"
+     },
+     {
+      "id": "b",
+      "label": "Dental charting: Deciduous and permanent eruption"
+     },
+     {
+      "id": "c",
+      "label": "Radiographs of wrist, elbow, pelvis, and sternal clavicle"
+     },
+     {
+      "id": "d",
+      "label": "Synthesis into probabilistic medicolegal age bracket"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Primary ossification centres present in the newborn infant",
+   "tx": "In infanticide and fetal maturity inquiries, identifying the **neonatal ossification maturity centres** confirms whether an abandoned infant reached full-term viability. The calcaneum ossifies at the fifth intrauterine month, followed by the talus at the seventh month. Critically, the lower femoral epiphyseal centre (B\u00e9clard centre) appears at thirty-six to thirty-eight gestational weeks, while the upper tibial centre appears at forty weeks.",
+   "say": "In newborn remains, the lower femoral ossification centre appears at thirty-six weeks and the upper tibial centre at birth, proving full-term fetal maturity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ossification centre",
+     "Gestational / post-natal age",
+     "Medicolegal importance"
+    ],
+    "rows": [
+     [
+      "Calcaneum",
+      "5th intrauterine month",
+      "Confirms viable intrauterine development"
+     ],
+     [
+      "Talus",
+      "7th intrauterine month",
+      "Confirms premature viability threshold"
+     ],
+     [
+      "Lower end of femur (B\u00e9clard)",
+      "36 to 38 intrauterine weeks",
+      "Definitive evidence of near-term maturity"
+     ],
+     [
+      "Upper end of tibia",
+      "40 weeks (at birth)",
+      "Confirms full-term gestation in infanticide cases"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The radiological sequence of carpal bone ossification",
+   "tx": "During childhood, the chronological **carpal bone ossification sequence** in wrist radiographs allows accurate age determination from birth through early puberty. The eight carpal bones calcify in predictable succession: capitate (two to three months), hamate (three to four months), triquetral (three years), lunate (four to five years), scaphoid (five to six years), trapezium (six years), trapezoid (six to seven years), and pisiform (ten to twelve years).",
+   "say": "Carpal bones appear in sequence: capitate and hamate in infancy, followed by triquetral, lunate, scaphoid, trapezium, trapezoid, and finally pisiform at age ten to twelve.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+    "alt": "Frontal radiograph illustration of paediatric wrist showing labelled carpal ossification centres",
+    "caption": "Radiological carpal bone sequence: Capitate and hamate appear first in infancy, followed chronologically through childhood by the triquetral, lunate, scaphoid, trapezium, trapezoid, and pisiform. Credit: Mikael H\u00e4ggstr\u00f6m."
+   }
+  },
+  {
+   "title": "Epiphyseal fusion around the elbow joint",
+   "tx": "Between the ages of fourteen and seventeen years, the **elbow epiphyseal fusion chronology** provides the most sensitive forensic indicator for adolescent age determination. The capitulum, trochlea, and lateral epicondyle fuse together and unite with the distal humerus shaft between fourteen and sixteen years. The conjoined head of the radius and olecranon process fuse at fifteen to seventeen years, while the medial epicondyle completes fusion by seventeen years.",
+   "say": "Around the elbow, the capitulum and trochlea fuse to the humerus between fourteen and sixteen years, while the medial epicondyle completes fusion by age seventeen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Elbow epiphysis",
+     "Age of fusion (Indian standard)",
+     "Medicolegal landmark"
+    ],
+    "rows": [
+     [
+      "Capitulum and trochlea to humerus",
+      "14 to 16 years",
+      "Marks mid-adolescent pubertal growth acceleration"
+     ],
+     [
+      "Head of radius and olecranon",
+      "15 to 17 years",
+      "Corroborates adolescent age in child labour disputes"
+     ],
+     [
+      "Medial epicondyle to humerus",
+      "16 to 17 years",
+      "Crucial threshold approaching legal age of consent"
+     ],
+     [
+      "Complete elbow joint union",
+      "By 17 years",
+      "Rules out individuals under 14 years of age"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Epiphyseal fusion around the wrist joint",
+   "tx": "To determine whether an adolescent has achieved the critical age of eighteen years, evaluating **distal radius and ulna fusion** is essential. Radiographs of the non-dominant wrist demonstrate that the distal epiphyseal plates of the radius and ulna begin fusing around seventeen years, achieving complete osseous obliteration between eighteen and nineteen years in females, and eighteen and twenty years in males.",
+   "say": "The distal radius and ulna epiphyses fuse between eighteen and twenty years, serving as the prime radiological boundary for establishing adult majority.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Wrist radiograph demonstrates clear open radioulnar epiphyseal gaps (Under 17 years)"
+     },
+     {
+      "id": "b",
+      "label": "Partial bridging and narrowing of growth plate margin (17 to 18 years)"
+     },
+     {
+      "id": "c",
+      "label": "Complete bony trabecular union with faint epiphyseal scar (18 to 19 years)"
+     },
+     {
+      "id": "d",
+      "label": "Total osseous obliteration establishing legal majority (19 to 20 years)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Pelvic ossification centres and the Risser sign",
+   "tx": "In late adolescence, radiological examination of the pelvis focuses on the **iliac crest epiphyseal fusion**, widely known as the Risser sign. The cartilaginous apophysis appears anteriorly at fourteen to sixteen years, progressively ossifies across the iliac crest, and completely fuses with the ilium between nineteen and twenty-one years. Meanwhile, the ischiopubic rami unite at seven to eight years, and the triradiate cartilage fuses at fifteen.",
+   "say": "The iliac crest apophysis appears at fourteen to sixteen years and fuses completely by nineteen to twenty-one years, helping date late adolescent maturation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pelvic anatomical landmark",
+     "Age of appearance / fusion",
+     "Medicolegal value"
+    ],
+    "rows": [
+     [
+      "Ischiopubic rami fusion",
+      "7 to 8 years",
+      "Differentiates early childhood from primary school age"
+     ],
+     [
+      "Triradiate acetabular cartilage",
+      "14 to 16 years",
+      "Correlates with onset of puberty and growth spurts"
+     ],
+     [
+      "Iliac crest apophysis appearance",
+      "14 to 16 years (Risser stage 1)",
+      "Marks adolescent skeletal maturation progression"
+     ],
+     [
+      "Iliac crest complete fusion",
+      "19 to 21 years (Risser stage 5)",
+      "Confirms individual has passed the age of eighteen"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The medial clavicle and spheno-occipital synchondrosis",
+   "tx": "For dating young adults between twenty and twenty-five years, the **sternal clavicular epiphyseal fusion** serves as the final and most authoritative long-bone indicator in the human skeleton. The secondary ossification centre at the medial sternal end of the clavicle appears between eighteen and twenty years, commences fusion at twenty-one, and completes bony consolidation by twenty-five years. Simultaneously, the cranial spheno-occipital synchondrosis fuses between eighteen and twenty-one.",
+   "say": "The medial end of the clavicle is the last long bone to fuse, starting at twenty-one and finishing by twenty-five years, dating young adults accurately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Appearance of sternal clavicular secondary centre (18 to 20 years)"
+     },
+     {
+      "id": "b",
+      "label": "Commencement of fusion across clavicular epiphyseal plate (21 to 22 years)"
+     },
+     {
+      "id": "c",
+      "label": "Advanced bridging with persisting epiphyseal notch (23 to 24 years)"
+     },
+     {
+      "id": "d",
+      "label": "Complete osseous union without epiphyseal line (25 years and older)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Formulating the probabilistic medicolegal age report",
+   "tx": "When issuing a formal certificate, the medical officer must adhere to the **probabilistic age margin doctrine**, recognizing that biological maturation varies across populations due to nutrition, genetics, and climate. Rather than certifying an inflexible single calendar year, the forensic examiner must express the clinical opinion as an age range with a margin of plus or minus one to two years, summarizing dental, physical, and radiological findings.",
+   "say": "Forensic age opinions must always be stated as an age range with a plus-minus margin of one to two years, accounting for nutritional and biological variation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Report parameter",
+     "Required documentation",
+     "Legal requirement"
+    ],
+    "rows": [
+     [
+      "Clinical physical findings",
+      "Height, weight, secondary sexual Tanner stage",
+      "Establishes general biological development"
+     ],
+     [
+      "Dental eruption chart",
+      "Erupted teeth recorded with caries status",
+      "Provides dental developmental age estimate"
+     ],
+     [
+      "Radiological epiphyseal status",
+      "Specific fusion stages across key joints",
+      "Establishes skeletal maturation bracket"
+     ],
+     [
+      "Final age conclusion",
+      "Stated as range with +/- 1-2 years margin",
+      "Court accepts range to avoid miscarriages of justice"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

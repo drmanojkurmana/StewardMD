@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-streptococcus",
+  "subject": "microbiology",
+  "title": "Streptolysin O, ASO Titres and Rheumatic Fever Serology",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Streptolysin O** is pyogenes' oxygen labile, cholesterol binding cytolysin (inactive when oxidised, restored by reducing agents), haemolysing red cells subsurface in agar stabs and killing leukocytes, strongly immunogenic, so its antibody (ASO) becomes the retrospective infection marker. Streptolysin S, oxygen stable and surface carried, makes the surface beta zone and is not antigenic.",
+      "say": "O hides from oxygen and advertises to antibody; S works the surface silently.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Streptolysin O",
+          "points": [
+            "Oxygen labile, thiol activated",
+            "Subsurface haemolysis in stabs and anaerobic incubation",
+            "Strongly immunogenic (ASO measured)",
+            "Cholesterol inhibited, cardiotoxic in models"
+          ]
+        },
+        "right": {
+          "title": "Streptolysin S",
+          "points": [
+            "Oxygen stable, serum carried",
+            "Surface beta haemolysis on aerobic plates",
+            "Non immunogenic",
+            "Leukotoxic in tissues"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **ASO titre** (antistreptolysin O) rises one to three weeks after pyogenes infection, peaks around three to five, and fades over months, upper limits varying by age and geography (200 to 300 Todd units traditions), a single high or rising paired titre supporting recent infection in rheumatic fever and glomerulonephritis workups, never diagnosing active infection alone.",
+      "say": "ASO is last month's streptococcus in numbers; it supports sequelae, not sore throats.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ASO kinetics",
+          "points": [
+            "Rise 1 to 3 weeks, peak 3 to 5 weeks",
+            "Skin infection raises ASO poorly (cholesterol in skin binds SLO)",
+            "Upper limits age and region adjusted",
+            "Rising paired titres strongest evidence"
+          ]
+        },
+        "right": {
+          "title": "Partner antibodies",
+          "points": [
+            "Anti DNase B: better after skin infection, GN workhorse",
+            "Anti hyaluronidase older panels",
+            "Streptozyme agglutination screen heritage",
+            "Two antibodies raise sensitivity in sequelae panels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rheumatic fever** follows pharyngitis after a latent two to three weeks: immune cross reaction (M protein and streptococcal antigens against heart valve, myocardium, joints, brain basal ganglia, skin) producing Jones criteria carditis, migratory polyarthritis, chorea, erythema marginatum and nodules, with ASO or anti DNase B evidencing the antecedent infection.",
+      "say": "Two weeks after the throat, antibodies attack heart and joints by mistaken identity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Jones majors",
+          "points": [
+            "Carditis (valvulitis, mitral first)",
+            "Migratory polyarthritis",
+            "Sydenham chorea (late, alone sufficient)",
+            "Erythema marginatum and subcutaneous nodules"
+          ]
+        },
+        "right": {
+          "title": "Evidence stack",
+          "points": [
+            "ASO or anti DNase B elevation",
+            "Raised ESR and CRP (minors with fever, arthralgia)",
+            "ECG PR prolongation (minor)",
+            "Prior rheumatic history changes criteria (recurrence pathways)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Molecular mimicry** mechanises rheumatic fever: antibodies and T cells against streptococcal M and carbohydrate epitopes cross react with valve myosin, tropomyosin and laminin, valve endothelium upregulates adhesion, and recurrent episodes scar valves toward rheumatic heart disease, prevented by penicillin prophylaxis adherence, the module's most consequential prescription.",
+      "say": "Prevent the next streptococcal throat and the valve stops accumulating scars.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "throat", "label": "Group A pharyngitis in susceptible host" },
+          { "id": "mimic", "label": "Cross reactive antibodies and T cells form" },
+          { "id": "valve", "label": "Valve inflammation heals with scarring" },
+          { "id": "proph", "label": "Benzathine penicillin prevents recurrence scarring" }
+        ],
+        "edges": [["throat", "mimic"], ["mimic", "valve"], ["valve", "proph"]]
+      }
+    },
+    {
+      "tx": "**Secondary prophylaxis** after rheumatic fever is benzathine penicillin G injections every three to four weeks for years graded by carditis severity (without carditis five years or to 21, with carditis longer, residual valve disease longest), allergy alternatives macrolide, adherence systems (registers, recall, pain mitigation) deciding its real effectiveness in endemic programmes.",
+      "say": "Monthly benzathine for years is valve insurance; registers and recall pay the premiums.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Duration grammar",
+          "points": [
+            "No carditis: 5 years or age 21, longer greater",
+            "Carditis no residual: 10 years or 21",
+            "Residual valve disease: 10 years or 40, sometimes life",
+            "Local guidelines calibrate by risk"
+          ]
+        },
+        "right": {
+          "title": "Adherence machinery",
+          "points": [
+            "Disease registers and recall systems",
+            "Injection pain strategies (lignocaine traditions debated)",
+            "Oral penicillin twice daily less reliable fallback",
+            "Missed doses trigger outreach"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**ASO false trails** include liver disease and hyperlipidaemia falsely elevating, early antibiotics blunting rises, immunodeficiency silencing, and healthy schoolchildren carrying high baselines in endemic regions, which is why cut offs are population percentiles (80th) and trends outrank single results in every guideline.",
+      "say": "Endemic children run high ASO at baseline; trends and partners beat single numbers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "False highs and lows",
+          "points": [
+            "High baseline in tropical schoolchildren",
+            "Liver disease interference traditions",
+            "Antibiotics and steroids blunt response",
+            "Skin infection: ASO low, anti DNase B answers"
+          ]
+        },
+        "right": {
+          "title": "Sequelae panels",
+          "points": [
+            "Order ASO plus anti DNase B together",
+            "Throat culture often negative by sequelae time",
+            "ESR, CRP and ECG accompany",
+            "Echo finds subclinical carditis modern criteria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Streptolysin O in the laboratory** still works: ASO measured by latex agglutination or nephelometry standardised in IU, Todd unit heritage, with quality systems less romantic than the toxin itself. The assay's longevity (1930s principle) beside MALDI benches marks serology's two speeds in one laboratory.",
+      "say": "A 1930s toxin antibody measured by nephelometry still decides rheumatic workups.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Assay forms",
+          "points": [
+            "Latex agglutination screening titres",
+            "Nephelometric quantitation IU per ml",
+            "Todd units historical conversion",
+            "Paired sera in same run ideally"
+          ]
+        },
+        "right": {
+          "title": "Ordering wisdom",
+          "points": [
+            "Not for acute pharyngitis decisions",
+            "For rheumatic fever and GN evidence",
+            "Interpret with anti DNase B",
+            "Document timing from illness onset"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Other streptococcal antibodies** (anti DNase B foremost) share this lesson because sequelae clinics order them together: anti DNase B peaks later (six to eight weeks) and answers skin infection where ASO fails, together lifting evidence sensitivity above 90 percent after true infections when both are measured.",
+      "say": "Order both antibodies; skin infections answer DNase B while throats answer both.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anti DNase B",
+          "points": [
+            "Rises after skin and throat infection",
+            "Peaks 6 to 8 weeks",
+            "GN serology workhorse",
+            "Persists months like ASO"
+          ]
+        },
+        "right": {
+          "title": "Panel interpretation",
+          "points": [
+            "Either raised: recent infection likely",
+            "Both negative: argues against recent pyogenes",
+            "Timing from suspected infection stated",
+            "Culture and clinical criteria complete Jones"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phm-absorption-routes",
+  "subject": "pharmacology",
+  "title": "Oral, Sublingual, Transdermal, and Parenteral Administration Routes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Most common and convenient method of drug delivery involves ingestion through the gastrointestinal tract, recognized as the **oral route**. Absorption occurs primarily across the expansive surface of the small intestinal villi via passive non-ionic diffusion. Major limitations include variable gastrointestinal motility, potential degradation by acidic gastric juice or digestive enzymes, emesis in uncooperative patients, and extensive first-pass metabolism in the intestinal mucosa and liver before reaching systemic circulation.",
+      "say": "Oral administration is the safest and most convenient route, though absorption varies with gastric motility and liver metabolism.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Oral route",
+          "Intravenous route"
+        ],
+        "rows": [
+          [
+            "Onset of action",
+            "Slow and variable (30-90 min)",
+            "Instantaneous (seconds)"
+          ],
+          [
+            "Bioavailability",
+            "Variable to low (<100%)",
+            "Complete (100%)"
+          ],
+          [
+            "First-pass hepatic metabolism",
+            "Extensive for many drugs",
+            "Completely bypassed"
+          ],
+          [
+            "Patient self-administration",
+            "Safe, convenient, painless",
+            "Requires trained technique"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lipid-soluble, non-irritating drugs placed beneath the tongue undergo rapid transcellular absorption across non-keratinized stratified squamous oral mucosa via the **sublingual route**. Venous blood draining the buccal floor and sublingual plexus flows directly into the internal jugular veins and superior vena cava. This vascular pathway completely bypasses the hepatic portal system, preventing hepatic first-pass degradation and delivering rapid clinical effects in acute angina pectoris with nitroglycerin.",
+      "say": "Placing nitroglycerin sublingually allows direct drainage into the superior vena cava, bypassing hepatic first-pass breakdown.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mucosa",
+            "label": "Sublingual non-keratinized mucosa"
+          },
+          {
+            "id": "venous",
+            "label": "Deep lingual and facial veins"
+          },
+          {
+            "id": "svc",
+            "label": "Internal jugular and superior vena cava"
+          },
+          {
+            "id": "coronary",
+            "label": "Systemic circulation and coronary arteries"
+          }
+        ],
+        "edges": [
+          [
+            "mucosa",
+            "venous"
+          ],
+          [
+            "venous",
+            "svc"
+          ],
+          [
+            "svc",
+            "coronary"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adhesive medicated skin patches deliver potent lipid-soluble molecules continuously across the hydrophobic stratum corneum into dermal capillary plexuses via the **transdermal route**. This route provides constant zero-order systemic absorption over one to seven days, avoiding hepatic first-pass breakdown and abolishing peak-and-trough plasma oscillations. Common formulations include fentanyl patches for chronic malignant pain, nitroglycerin for stable angina, and scopolamine for motion sickness prophylaxis.",
+      "say": "Transdermal patches deliver sustained drug levels across the stratum corneum over days without hepatic first-pass breakdown.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-con-transdermal-patch.webp",
+        "alt": "Transdermal patch formulation",
+        "caption": "Transdermal skin patch providing constant rate systemic drug absorption across the epidermal stratum corneum into dermal capillaries."
+      }
+    },
+    {
+      "tx": "Direct injection of a sterile aqueous solution into a peripheral or central vein constitutes the **intravenous route**. Bioavailability is instantaneous and complete at one hundred percent, allowing precise dosage titration and immediate therapeutic effects during medical emergencies like cardiac arrest or status epilepticus. Critical hazards include acute hypersensitivity reactions, thrombophlebitis at the cannulation site, fluid overload, and irreversible drug effects once introduced into the vascular tree.",
+      "say": "Intravenous administration provides immediate one hundred percent bioavailability for acute emergencies, though toxicity cannot be recalled.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-tub-peripheral-iv-cannula.webp",
+        "alt": "Peripheral intravenous cannulas",
+        "caption": "Standard peripheral intravenous cannulas used for emergency vascular access and continuous intravenous fluid and drug infusions."
+      }
+    },
+    {
+      "tx": "Direct injection of medications into the spinal subarachnoid space via lumbar puncture at the L3-L4 or L4-L5 vertebral interspace defines the **intrathecal route**. This specialized technique bypasses the blood-brain barrier and blood-cerebrospinal fluid barrier, delivering high regional drug concentrations into the cerebrospinal fluid while minimizing systemic toxicity. Clinical applications include bupivacaine for spinal anaesthesia, methotrexate for meningeal leukaemia prophylaxis, and baclofen infusion for intractable spinal spasticity.",
+      "say": "Administering drugs intrathecally delivers high cerebrospinal fluid concentrations across the blood-brain barrier for spinal anaesthesia and leukaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intrathecal injection",
+          "points": [
+            "Enters subarachnoid space directly",
+            "Mixes with cerebrospinal fluid",
+            "Bypasses blood-brain barrier",
+            "Lower dose needed for spinal block"
+          ]
+        },
+        "right": {
+          "title": "Epidural injection",
+          "points": [
+            "Enters space outside dura mater",
+            "Does not puncture arachnoid membrane",
+            "Requires higher drug volume",
+            "Gradual segmental sensory blockade"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Parenteral administration into loose connective tissue below the dermis or deep into vascular skeletal muscle provides reliable absorption via the **intramuscular route**. Aqueous solutions absorb rapidly within ten to thirty minutes, whereas insoluble repository suspensions and oily preparations dissolve slowly over weeks to months. The depot formulation of benzathine penicillin G maintains bactericidal treponemal levels for up to four weeks, while irritant drugs administered subcutaneously precipitate tissue necrosis and sterile abscesses.",
+      "say": "Intramuscular injections yield predictable absorption and support repository depot formulations like benzathine penicillin for prolonged protection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parenteral route",
+          "Needle angle",
+          "Maximum typical volume",
+          "Tissue depth target"
+        ],
+        "rows": [
+          [
+            "Intradermal",
+            "10 to 15 degrees",
+            "0.1 to 0.2 mL",
+            "Dermal papillary layer"
+          ],
+          [
+            "Subcutaneous",
+            "45 to 90 degrees",
+            "1.0 to 2.0 mL",
+            "Hypodermic adipose tissue"
+          ],
+          [
+            "Intramuscular",
+            "90 degrees",
+            "2.0 to 5.0 mL",
+            "Deep vascular skeletal muscle"
+          ],
+          [
+            "Intravenous",
+            "25 degrees",
+            "Continuous large volume",
+            "Lumen of peripheral vein"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Volatile gases and aerosolized particles delivered directly to the respiratory bronchial tree utilize the **inhalation route**. The vast alveolar surface area of nearly one hundred square meters and high pulmonary blood flow ensure instantaneous gas exchange, making it ideal for volatile general anaesthetics like sevoflurane. Topical application to skin, conjunctiva, and mucous membranes achieves localized anti-inflammatory or antimicrobial effects while curbing unwanted systemic drug exposure.",
+      "say": "Inhalation delivers rapid systemic absorption across the vast alveolar capillary surface area or selective local bronchial bronchodilation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "aerosol",
+            "label": "Aerosolized drug inhalation"
+          },
+          {
+            "id": "deposition",
+            "label": "Alveolar membrane deposition"
+          },
+          {
+            "id": "diffusion",
+            "label": "Alveolar-capillary diffusion"
+          },
+          {
+            "id": "systemic",
+            "label": "Pulmonary venous return and systemic distribution"
+          }
+        ],
+        "edges": [
+          [
+            "aerosol",
+            "deposition"
+          ],
+          [
+            "deposition",
+            "diffusion"
+          ],
+          [
+            "diffusion",
+            "systemic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Choosing the optimal mode of drug administration depends on critical physical-chemical properties, systemic stability, and patient-specific clinical requirements. The primary governing consideration remains the **therapeutic urgency** of the underlying medical emergency versus chronic maintenance convenience. Unconscious, vomiting, or uncooperative patients necessitate parenteral routes, whereas stable chronic illnesses like hypertension or diabetes mellitus prioritize painless, self-administered oral tablets or subcutaneous pen devices to ensure long-term patient compliance.",
+      "say": "Selecting the appropriate route balances clinical urgency and patient consciousness against chronic convenience and formulation stability.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Emergency acute routes",
+          "points": [
+            "Immediate bioavailability required",
+            "Intravenous or sublingual preferred",
+            "Independent of patient cooperation",
+            "Allows continuous dosage titration"
+          ]
+        },
+        "right": {
+          "title": "Chronic maintenance routes",
+          "points": [
+            "Convenience and compliance prioritized",
+            "Oral or transdermal preferred",
+            "Cost-effective outpatient regimens",
+            "Minimal risk of local infection"
+          ]
+        }
+      }
+    }
+  ]
+}

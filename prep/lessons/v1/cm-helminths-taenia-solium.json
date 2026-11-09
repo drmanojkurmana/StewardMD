@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "id": "cm-helminths-taenia-solium",
+ "subject": "community-medicine",
+ "module": "cm-helminths",
+ "title": "Taenia Solium: Tapeworm, Cysticercosis and Seizures",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Two diseases from one worm",
+   "tx": "**Taenia solium** causes two entirely different illnesses depending on which stage a human swallows: eating cystic larvae in undercooked pork produces the adult intestinal tapeworm, taeniasis, while swallowing eggs from human faecal contamination produces tissue cysticercosis in muscle, eye and brain. The direction of ingestion decides the disease, a favourite examination hinge.",
+   "say": "Larvae in pork give a gut worm; eggs from faeces give tissue cysts. Same species, opposite doors, different diseases. Examiners build stems on that hinge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/taeniasis-fig1.webp",
+    "alt": "Taenia solium and saginata tapeworm life cycle and clinical features",
+    "caption": "Taeniasis: adult tapeworm in the intestine from undercooked measly meat. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Measly pork and the intestinal carrier",
+   "tx": "**Taeniasis** itself is often silent or mildly uncomfortable, noticed when motile proglottid segments crawl from the anus or appear in stool, each gravid segment packed with eggs. The human carrier is the dangerous link for everyone nearby, shedding eggs that faeco oral spread delivers to family members, food consumers and the carrier's own tissues.",
+   "say": "The gut carrier feels little yet sheds egg packed segments daily. Household cysticercosis starts at this kitchen table. Treat carriers for their family's sake.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Taeniasis"],
+    "rows": [
+     ["Acquired by", "Cystic larvae in undercooked pork"],
+     ["Site", "Adult worm, small intestine"],
+     ["Symptoms", "Often none, segments noticed"],
+     ["Danger", "Egg shedding to contacts"]
+    ]
+   }
+  },
+  {
+   "title": "Neurocysticercosis and adult onset seizures",
+   "tx": "**Neurocysticercosis** is among the commonest preventable causes of adult onset epilepsy in endemic regions: larvae encyst in brain parenchyma, stay silent while viable, then provoke seizures, headache and focal deficits as they degenerate and inflammation surrounds them. Calcified granulomas mark the burnt out stage on imaging years later.",
+   "say": "Cysts sleep in brain, seizures start when they die and inflame. Adult onset epilepsy in endemic country demands this thought. Calcified granulomas close the story.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cysticercosis-fig1.webp",
+    "alt": "Cysticercosis cysts in tissue including neurocysticercosis imaging",
+    "caption": "Cysticercosis: tissue cysts, including brain lesions that present with seizures. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Imaging stages: vesicular to calcified",
+   "tx": "**Cyst stages** on imaging march predictably: vesicular cysts with a visible scolex, the hole with dot sign and little inflammation, then colloidal degenerating cysts with ring enhancement and oedema, granulomatous nodules, and finally calcified scars. Seizures cluster around degeneration, so the scan stage explains both symptoms and treatment danger.",
+   "say": "Dot inside a cyst, then ring with swelling, then calcified scar. Symptoms bloom at degeneration. Stage on scan dictates whether antiparasitic drugs help or harm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Vesicular cyst, scolex visible"},
+     {"id": "b", "label": "Degenerating, ring and oedema"},
+     {"id": "c", "label": "Granulomatous nodule"},
+     {"id": "d", "label": "Calcified scar"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Eyes first: the rule before treatment",
+   "tx": "**Ocular examination** precedes any antiparasitic therapy, because cysts inside the eye must be removed surgically; killing them medically unleashes inflammation that blinds. The same steroid cover logic protects the brain: antiparasitic drugs are given under corticosteroid protection with antiepileptic therapy established, in hospital, never as a casual outpatient prescription.",
+   "say": "Examine eyes before any cyst killing drug; intraocular cysts come out surgically. Steroids first, seizure cover ready, hospital setting. Casual prescriptions blind and convulse.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Before treatment", "Reason"],
+    "rows": [
+     ["Dilated eye examination", "Exclude intraocular cysts"],
+     ["Corticosteroid started", "Blunt degeneration inflammation"],
+     ["Antiepileptic cover", "Seizures during treatment"],
+     ["Hospital setting", "Observe deterioration"]
+    ]
+   }
+  },
+  {
+   "title": "Calcified cysts: no antiparasitic role",
+   "tx": "**Calcified lesions** contain dead parasites, so albendazole or praziquantel offer nothing and treatment becomes antiepileptic drugs, often for at least two years after the last seizure, with tapering guided by imaging and seizure freedom. Perilesional oedema flares around calcifications explain some breakthrough seizures and may need steroid pulses.",
+   "say": "Calcified means dead; antiparasitics retire. Seizure medicines carry two quiet years before tapering. Flares of oedema around scars explain late breakthroughs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Viable or degenerating cyst",
+     "points": ["Antiparasitic may help", "Steroid cover mandatory", "Hospital initiation", "Eye check first"]
+    },
+    "right": {
+     "title": "Calcified cyst",
+     "points": ["Parasite already dead", "No antiparasitic benefit", "Antiepileptics mainstay", "Taper after seizure freedom"]
+    }
+   }
+  },
+  {
+   "title": "Solium versus saginata",
+   "tx": "**Taenia saginata** from undercooked beef shares the intestinal carrier state but its eggs do not cause human cysticercosis, the single distinction that makes solium a public health emergency and saginata a lesser one. Species identification rests on proglottid uterine branch counts or scolex hooks, solium armed with hooklets, saginata unarmed.",
+   "say": "Beef worm never cysts humans; pork worm does. Armed scolex and fewer uterine branches name solium. That one difference drives control urgency.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Solium versus saginata"],
+    "rows": [
+     ["Intermediate host", "Pig versus cattle"],
+     ["Human cysticercosis", "Solium yes, saginata no"],
+     ["Scolex", "Armed hooks versus unarmed"],
+     ["Public health weight", "Solium far greater"]
+    ]
+   }
+  },
+  {
+   "title": "Control: pigs, pork, toilets and hands",
+   "tx": "**Control points** ring the whole cycle: confine pigs away from human faeces, inspect and condemn measly pork, cook pork thoroughly or freeze adequately, treat human carriers, build toilets and wash hands so eggs never reach mouths or pig feed. Veterinary vaccination and treatment of pigs add newer tools in elimination pilots.",
+   "say": "Confine pigs, inspect pork, cook through, treat carriers, toilets and handwashing everywhere. Break any link and the cycle starves; programmes press all links at once.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Link", "Intervention"],
+    "rows": [
+     ["Pig access to faeces", "Confined pig rearing"],
+     ["Measly pork", "Meat inspection, thorough cooking"],
+     ["Human carrier", "Detect and treat"],
+     ["Eggs to mouths", "Toilets, handwashing"]
+    ]
+   }
+  },
+  {
+   "title": "Seizure history taking in endemic areas",
+   "tx": "**History clues** in a new adult seizure case include household tapeworm carriers, pork consumption patterns, prior subcutaneous nodules, family epilepsy clustering and residence or travel in endemic belts. Serology supports but imaging decides. Every confirmed case triggers household screening thought, because the egg source usually eats at the same table.",
+   "say": "New adult seizures: ask pork, carriers, nodules, household seizures. Screen the table, not just the patient. The source of eggs usually shares the roof.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Ask about", "Points toward"],
+    "rows": [
+     ["Segments passed by family", "Household carrier source"],
+     ["Pork habits", "Taeniasis exposure"],
+     ["Skin nodules", "Subcutaneous cysts"],
+     ["Family seizures", "Shared egg exposure"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

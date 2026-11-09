@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-healthcare-delivery-first-referral-unit",
+  "subject": "community-medicine",
+  "module": "cm-healthcare-delivery",
+  "title": "First Referral Units, District Hospitals, Committees, and Community Health Officers",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "What makes a first referral unit",
+      "tx": "A **first referral unit (FRU)** is a facility (usually CHC, sub district, or district hospital) equipped round the clock for comprehensive emergency obstetric care: caesarean section, anaesthesia, blood transfusion, and newborn resuscitation, staffed by obstetrician, anaesthetist, and paediatric support. A facility earns FRU status by function demonstrated (surgeries actually performed, blood actually issued), not by signboard declaration.",
+      "say": "An FRU proves itself by caesareans done and blood issued at 2 a.m., not by its name board.",
+      "vis": {
+        "kind": "table",
+        "cols": ["FRU requirement", "Why it is non negotiable"],
+        "rows": [
+          ["Obstetrician plus anaesthetist", "Caesarean capability round the clock"],
+          ["Functional operation theatre", "Emergency surgery without referral delay"],
+          ["Blood storage or bank linkage", "Haemorrhage kills fastest"],
+          ["Newborn care corner or SNCU link", "Simultaneous baby resuscitation"]
+        ]
+      }
+    },
+    {
+      "title": "Emergency obstetric care signal functions",
+      "tx": "Facilities are graded by **emergency obstetric care signal functions**: basic EmOC gives parenteral antibiotics, oxytocics, anticonvulsants, manual placenta removal, retained product removal, assisted vaginal delivery, and newborn resuscitation, while comprehensive EmOC adds caesarean and transfusion. Process indicators (met need, caesarean rate five to fifteen percent band, case fatality below one percent) audit whether FRUs actually save the women who reach them.",
+      "say": "Basic obstetric care has seven signal functions; comprehensive adds surgery and blood. Fatality under one percent grades success.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Basic EmOC (7 functions)",
+          "points": ["Antibiotics, oxytocics, anticonvulsants", "Placenta and product removal", "Assisted delivery, newborn resuscitation"]
+        },
+        "right": {
+          "title": "Comprehensive EmOC (plus 2)",
+          "points": ["Caesarean section capability", "Blood transfusion capability", "FRU designation at this level"]
+        }
+      }
+    },
+    {
+      "title": "District hospital as secondary anchor",
+      "tx": "The **district hospital** anchors secondary care for five to thirty lakh population with multi specialty inpatient, surgical, laboratory, imaging, blood bank, intensive care, and special newborn care services, plus public health units for surveillance in newer designs. It trains nurses and paramedics, hosts the district programme management unit's clinical counterpart, and absorbs bypassed primary care, for better and worse.",
+      "say": "The district hospital is the secondary anchor and training hub. It also absorbs everyone who bypasses below.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "dh1", "label": "CHCs and PHCs refer upward" },
+          { "id": "dh2", "label": "District hospital treats and stabilises" },
+          { "id": "dh3", "label": "Tertiary referral for super specialty needs" }
+        ],
+        "edges": [["dh1", "dh2"], ["dh2", "dh3"]]
+      }
+    },
+    {
+      "title": "Village Health Sanitation and Nutrition Committee",
+      "tx": "The **Village Health Sanitation and Nutrition Committee (VHSNC)** unites panchayat representatives, the ASHA, ANM, anganwadi worker, and community members to plan village health action with an annual untied fund (conventionally ten thousand rupees): sanitation drives, health day organisation, referral transport pooling, and monitoring of local services. It is decentralised planning with money attached, however modest.",
+      "say": "The village committee plans sanitation and health days with its own small untied fund. Decentralisation with money attached.",
+      "vis": {
+        "kind": "table",
+        "cols": ["VHSNC element", "Detail"],
+        "rows": [
+          ["Chair", "Panchayat representative (sarpanch side)"],
+          ["Member secretary", "ASHA of the village"],
+          ["Untied fund", "About 10000 rupees yearly"],
+          ["Core tasks", "Health days, sanitation, referral support"]
+        ]
+      }
+    },
+    {
+      "title": "Rogi Kalyan Samiti and Jan Arogya Samiti",
+      "tx": "Facilities mirror village committees through the **Rogi Kalyan Samiti (hospital management society)**, a registered body of officials and community representatives that spends user fees, donations, and grants on repairs, amenities, and gap filling with local speed, while Jan Arogya Samitis now govern wellness centres similarly. Audit and social accountability provisions guard these flexible funds from the leakages flexibility invites.",
+      "say": "Rogi Kalyan Samitis let hospitals fix local problems fast with their own funds. Flexibility demands audit beside it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "VHSNC (village)",
+          "points": ["Village health planning", "Untied fund about 10000 yearly", "ASHA as member secretary"]
+        },
+        "right": {
+          "title": "Rogi Kalyan Samiti (facility)",
+          "points": ["Hospital amenities and repairs", "User fees and grants managed locally", "Jan Arogya Samiti at HWC level"]
+        }
+      }
+    },
+    {
+      "title": "Community health officer revisited: team hub",
+      "tx": "Inside the wellness centre the **community health officer as team leader** converts referrals into continuity: screening camps identify hypertensives, the CHO initiates protocol therapy, the PHC doctor confirms by teleconsultation or visit, and ASHAs follow adherence at home. This hub and spoke continuity, not episodic camps, is what comprehensive primary care means operationally for noncommunicable disease control.",
+      "say": "The CHO hub finds, starts, and follows chronic patients with doctor backup. Continuity replaces camp episodic care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ct1", "label": "Screening identifies risk at HWC" },
+          { "id": "ct2", "label": "CHO protocol care, doctor tele backup" },
+          { "id": "ct3", "label": "ASHA adherence follow up at home" }
+        ],
+        "edges": [["ct1", "ct2"], ["ct2", "ct3"]]
+      }
+    },
+    {
+      "title": "Referral transport: 108 and Janani express ideas",
+      "tx": "Referral fails without wheels, so states run **emergency referral transport** (108 ambulances, Janani express style maternity transport, boat and bike ambulances by terrain) integrated with FRU readiness alerts. Response time, drop back home for delivered mothers, and inter facility transfer protocols are audited as fiercely as clinical skills, because the second delay (reaching care) remains India's most lethal delay in remote blocks.",
+      "say": "Ambulances are clinical equipment on wheels. The second delay, reaching care, still kills most in remote areas.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Transport element", "Audit measure"],
+        "rows": [
+          ["Call to arrival time", "Response time by district"],
+          ["Free maternity transport", "Pickup plus drop back home"],
+          ["Inter facility transfer", "Stabilisation and pre alert to FRU"],
+          ["Terrain variants", "Boat, bike, and 4x4 ambulances"]
+        ]
+      }
+    },
+    {
+      "title": "Quality systems: NQAS, LaQshya, Kayakalp",
+      "tx": "Three sister initiatives grade facilities in **national quality assurance in health facilities**: NQAS certifies departments against standards checklists, LaQshya certifies labour rooms and maternity theatres for respectful safe childbirth, and Kayakalp awards cleanliness, hygiene, and infection control in public facilities. Certification cycles (assessment, gap funding, reassessment) convert quality from slogan into scored, funded work.",
+      "say": "NQAS certifies quality, LaQshya certifies labour rooms, Kayakalp rewards cleanliness. Scores unlock funds and pride.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Certification track",
+          "points": ["NQAS department standards", "LaQshya labour room quality", "Internal then external assessment"]
+        },
+        "right": {
+          "title": "Cleanliness track",
+          "points": ["Kayakalp annual scoring", "Swachh hospital competitions", "Infection control audits"]
+        }
+      }
+    },
+    {
+      "title": "Exam traps: referral system vocabulary",
+      "tx": "Closing fingerprints for **first referral unit examination questions**: FRU equals comprehensive EmOC (caesarean plus blood), signal functions seven plus two, VHSNC fund ten thousand with ASHA secretary, CHO leads the wellness centre, CHC serves four PHCs as first referral on paper. Stems describing a CHC without anaesthetist expect the answer that it is not a functional FRU, however labelled.",
+      "say": "No anaesthetist or blood means no functional FRU. Examiners test function over labels every time.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "et1", "label": "Check caesarean plus transfusion capability" },
+          { "id": "et2", "label": "Only then call it a functional FRU" },
+          { "id": "et3", "label": "Audit by surgeries and case fatality" }
+        ],
+        "edges": [["et1", "et2"], ["et2", "et3"]]
+      }
+    }
+  ]
+}

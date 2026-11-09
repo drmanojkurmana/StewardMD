@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-cardiovascular-boot-shaped-heart",
+ "subject": "radiology",
+ "module": "rad-cardiovascular",
+ "title": "Boot Shaped Heart, Egg on String and Snowman Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Boot shape means Fallot physiology",
+   "tx": "**Boot shaped heart**, the coeur en sabot, combines an upturned cardiac apex with a concave pulmonary bay. Right ventricular hypertrophy lifts the apex upward like a boot toe, while the narrowed right ventricular outflow and small pulmonary artery hollow out the left upper border. The same film shows pulmonary oligaemia, so the boot plus dark lung fields in a cyanosed child names tetralogy of Fallot before echocardiography.",
+   "say": "Boot shaped heart combines an upturned apex with a concave pulmonary bay. Right ventricular hypertrophy lifts the apex like a boot toe, while the narrowed outflow hollows the left upper border. Dark oligaemic lung fields beside the boot in a cyanosed child name tetralogy of Fallot before echocardiography.",
+   "vis": {"kind": "image", "src": "v1/kb/media/tetralogy-of-fallot-fig1.webp", "alt": "Illustration of tetralogy of Fallot cardiac defects with boot shaped heart radiograph.", "caption": "Tetralogy of Fallot defects with boot shaped heart on radiograph. Illustration: StewardMD."}
+  },
+  {
+   "title": "Four defects behind the boot",
+   "tx": "**Tetralogy components** are a ventricular septal defect, an overriding aorta, right ventricular outflow obstruction and right ventricular hypertrophy. The film only shows two of them directly: the hypertrophy lifting the apex and the small pulmonary artery emptying the bay. Severity follows the outflow obstruction, because tighter obstruction drives more right to left shunt, deeper cyanosis and earlier presentation in the newborn period.",
+   "say": "Tetralogy components are a ventricular septal defect, an overriding aorta, right ventricular outflow obstruction and right ventricular hypertrophy. The film shows two directly: hypertrophy lifting the apex and the small pulmonary artery emptying the bay. Severity follows the outflow obstruction, driving more right to left shunt and deeper cyanosis.",
+   "vis": {"kind": "table", "cols": ["Component", "Seen on film", "Effect"], "rows": [["Ventricular septal defect", "No, echo finding", "Shunt pathway"], ["Overriding aorta", "Wide aorta sometimes", "Receives both outputs"], ["Outflow obstruction", "Concave pulmonary bay", "Sets cyanosis depth"], ["Right ventricular hypertrophy", "Upturned apex", "Makes the boot toe"]]}
+  },
+  {
+   "title": "Congenital film patterns compared",
+   "tx": "**Cardiac silhouettes** on paediatric chest films compress complex anatomy into named shapes that examiners love. The pictured set lines up classic silhouettes beside their vascularity, separating cyanotic lesions with oligaemia from those with plethora. Reading shape and lung blood flow together halves the differential before any measurement: boot with dark lungs is Fallot, snowman with wet lungs is anomalous pulmonary venous return.",
+   "say": "Cardiac silhouettes on paediatric films compress complex anatomy into named shapes. The pictured set lines up classic silhouettes beside their vascularity, separating cyanotic lesions with oligaemia from those with plethora. Reading shape and lung blood flow together halves the differential before any measurement is taken.",
+   "vis": {"kind": "image", "src": "clinix/media/skills/skill-ix-paed-cxr_chd.webp", "alt": "Chest radiographs and heart overlays demonstrating classic congenital cardiac silhouettes and vascularity.", "caption": "Classic congenital heart silhouettes and lung vascularity on chest radiographs. Illustration: StewardMD."}
+  },
+  {
+   "title": "Egg on string in transposition",
+   "tx": "**Egg on string sign** shows an egg shaped heart lying on its side with a narrow string like superior mediastinum in transposition of the great arteries. The narrow pedicle appears because the aorta and pulmonary artery stack front to back instead of side by side, losing their normal width, and thymic stress involution thins it further. Pulmonary plethora completes the picture in a deeply cyanosed newborn.",
+   "say": "Egg on string sign shows an egg shaped heart on its side with a narrow string like superior mediastinum in transposition of the great arteries. The pedicle narrows because aorta and pulmonary artery stack front to back, losing normal width. Pulmonary plethora completes the picture in a deeply cyanosed newborn.",
+   "vis": {"kind": "compare", "left": {"title": "Transposition film", "points": ["Egg shaped heart", "Narrow vascular pedicle", "Pulmonary plethora", "Cyanosed newborn"]}, "right": {"title": "Fallot film", "points": ["Boot shaped heart", "Concave pulmonary bay", "Pulmonary oligaemia", "Cyanosis after newborn period"]}}
+  },
+  {
+   "title": "Snowman from anomalous veins",
+   "tx": "**Snowman sign**, also called figure of eight, forms in supracardiac total anomalous pulmonary venous connection. The dilated vertical vein, innominate vein and superior vena cava build the snowman head above an enlarged heart forming the body. All four pulmonary veins drain into that channel instead of the left atrium, so the right heart carries the entire venous return and the lungs show plethora with pulmonary oedema when obstructed.",
+   "say": "Snowman sign forms in supracardiac total anomalous pulmonary venous connection. Dilated vertical, innominate and caval veins build the head above an enlarged heart forming the body. All four pulmonary veins drain into that channel instead of the left atrium, so the right heart carries the entire venous return.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Veins join vertical vein"}, {"id": "b", "label": "Innominate vein dilates"}, {"id": "c", "label": "Snowman head forms"}, {"id": "d", "label": "Heart forms the body"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Figure of three and rib notching",
+   "tx": "**Figure of 3 sign** outlines the aorta in coarctation: the dilated segment above the narrowing, the waist at the coarctation and the post stenotic dilatation below stack into a figure three on the frontal film. The same obstruction erodes the inferior borders of the third to eighth ribs, where enlarged intercostal collaterals pulse against bone. Rib notching spares the first two ribs because their arteries arise above the narrowing.",
+   "say": "Figure of three sign outlines the aorta in coarctation: dilatation above, the waist at the narrowing and dilatation below stack into a three. The same obstruction erodes the inferior borders of ribs three to eight, where enlarged collaterals pulse against bone. The first two ribs are spared because their arteries arise above.",
+   "vis": {"kind": "table", "cols": ["Sign", "Structure", "Lesion"], "rows": [["Figure of 3", "Aortic contour", "Coarctation"], ["Rib notching", "Inferior ribs 3 to 8", "Intercostal collaterals"], ["Boot shape", "Apex and pulmonary bay", "Tetralogy of Fallot"], ["Snowman", "Mediastinal veins", "Anomalous venous return"]]}
+  },
+  {
+   "title": "Water bottle and egg shapes in adults",
+   "tx": "**Water bottle heart** describes the flask shaped, globally enlarged silhouette of a large pericardial effusion, with sharp borders because fluid, not myocardium, sets the edge. The heart still shows a normal cardiothoracic shape inside on echocardiography. In adults an egg shaped calcified mass beside the heart instead suggests a pericardial cyst or loculated effusion, and tamponade physiology, not silhouette size, decides the urgency of drainage.",
+   "say": "Water bottle heart describes the flask shaped enlarged silhouette of a large pericardial effusion, with sharp borders because fluid sets the edge. Echocardiography still shows a normal shaped heart inside. Tamponade physiology, not silhouette size, decides the urgency of drainage when pressure rises.",
+   "vis": {"kind": "compare", "left": {"title": "Pericardial effusion", "points": ["Flask or water bottle shape", "Sharp cardiac borders", "Normal heart inside on echo", "Tamponade decides urgency"]}, "right": {"title": "Dilated cardiomyopathy", "points": ["Globular enlarged heart", "Pulmonary oedema signs", "Chamber enlargement on echo", "Left ventricular failure story"]}}
+  },
+  {
+   "title": "Plethora versus oligaemia sorts cyanosis",
+   "tx": "**Pulmonary vascularity** is the second half of every congenital film read. Plethora shows enlarged central and peripheral vessels reaching the outer third of lung in left to right shunts and transposition. Oligaemia shows small hila and dark, underfilled lungs in Fallot and pulmonary atresia. Pairing vascularity with silhouette separates lesions that share cyanosis: egg on string is wet, boot is dry, and that split drives the first echocardiography questions.",
+   "say": "Pulmonary vascularity is the second half of every congenital film read. Plethora shows enlarged vessels reaching the outer third in left to right shunts and transposition. Oligaemia shows small hila and dark underfilled lungs in Fallot. Egg on string is wet, boot is dry, and that split drives the first echo questions.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Cyanosed child film"}, {"id": "b", "label": "Wet lungs: transposition group"}, {"id": "c", "label": "Dry lungs: Fallot group"}, {"id": "d", "label": "Echo confirms anatomy"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  }
+ ]
+}

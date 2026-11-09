@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-mechanical-injuries-laceration",
+ "subject": "forensic-medicine",
+ "module": "fmt-mechanical-injuries",
+ "title": "Lacerations, Split Lacerations and Incised Wounds",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A laceration is a blunt tear",
+   "tx": "A **laceration** is a tear or split of skin, mucosa, muscle or internal organs produced when blunt force crushes or stretches tissue beyond its elasticity. Blows from blunt objects, falls on hard surfaces, machinery and traffic accidents cause them. Localised tissue is displaced by impact, traction forces build, and the tissue rips. Most lacerations need a firm base such as bone acting as an anvil under the skin.",
+   "say": "Blunt force tears tissue past its elastic limit, usually by pinning skin against bone, and that tear is a laceration.",
+   "vis": {"kind": "table", "cols": ["Feature", "Laceration", "Incised wound"], "rows": [["Agent", "Blunt object or fall", "Sharp edged weapon"], ["Margins", "Irregular, ragged, undermined", "Clean cut and everted"], ["Bridging", "Tissue bridges in the depth", "No bridging at all"], ["Bleeding", "Less, vessels crushed", "Profuse, vessels sliced"]]}
+  },
+  {
+   "title": "Split lacerations over bone",
+   "tx": "Crushing skin between two hard objects produces a **split laceration**, the classic scalp wound where tissue is trapped between skull and ground or a blunt weapon. Splits are not undermined, and they show tissue bridges in their depths. One blow over the side of the head can split skin at the parietal prominence, the ear and the jaw together. The surrounding margins usually carry abrasion and bruising from the flatter part of the weapon.",
+   "say": "Skin crushed against skull splits open like a burst seam, bridges and all, which is why scalp wounds mislead beginners.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blunt object strikes the scalp"}, {"id": "b", "label": "Skin pinned against the skull"}, {"id": "c", "label": "Skin splits along the crush line"}, {"id": "d", "label": "Bridges remain across the depth"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Incised looking lacerations, the great mimic",
+   "tx": "Over the scalp, eyebrows, cheek bones, jaw, iliac crest, perineum and shin, skin lies so close to bone that blunt splitting yields an **incised looking wound** with deceptively sharp margins. A fall on a flexed knee or elbow, broken glass or a sharp stone can do the same. The giveaway lies in the depth: bridging fibres, crushed hair bulbs and marginal bruising betray blunt force however clean the edge appears.",
+   "say": "A sharp looking edge over bone can still be blunt, so judge the wound by its bridges and bruising, not its edge.",
+   "vis": {"kind": "compare", "left": {"title": "Incised looking laceration", "points": ["Sites tight over bone", "Tissue bridges in depth", "Hair bulbs crushed", "Margins carry bruising"]}, "right": {"title": "True incised wound", "points": ["Any site, made by an edge", "Structures cut cleanly through", "Hair bulbs sliced neatly", "No marginal bruising"]}}
+  },
+  {
+   "title": "Stretch, avulsion and tear lacerations",
+   "tx": "Three further patterns complete the family. **Stretch lacerations** follow overstretching of fixed skin and peel a flap that can point along the direction of a running over vehicle. **Avulsion** shears skin off its attachments by grinding force, called flaying when a lorry wheel strips a limb. Plain **tears** come from irregular semi sharp objects such as car door handles and run deeper at the start than at the end.",
+   "say": "Stretch peels a flap, avulsion shears skin off its base, and a simple tear starts deep where the object first caught.",
+   "vis": {"kind": "table", "cols": ["Type", "Mechanism", "Clue left behind"], "rows": [["Split", "Crush against bone", "Bridges, no undermining"], ["Stretch", "Overstretch of fixed skin", "Flap shows vehicle direction"], ["Avulsion", "Shearing grind of a wheel", "Flaying of skin from muscle"], ["Tear", "Irregular semi sharp object", "Deeper at the starting point"]]}
+  },
+  {
+   "title": "Tissue bridges settle the diagnosis",
+   "tx": "The single most reliable sign inside any open wound is the **tissue bridge**: strands of nerve, vessel and elastic fibre that survive in the depth because tissues of different strength tear at different rates. Lacerations show them; incised wounds never do, because a blade divides everything cleanly. Hair bulbs are crushed in laceration and cut in incised wounds, and foreign matter such as grit is commonly driven into a laceration.",
+   "say": "Bridging strands across the depth prove blunt tearing, since a blade would have divided every strand in its path.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Open the wound and inspect depth"}, {"id": "b", "label": "Look for strands crossing the gap"}, {"id": "c", "label": "Bridges present means laceration"}, {"id": "d", "label": "Clean division means incised wound"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Why lacerations bleed less, except on the scalp",
+   "tx": "Crushed and irregularly torn arteries retract and clot quickly, so **haemorrhage from a laceration** is usually slight compared with a clean cut of the same depth. The scalp breaks the rule: its temporal arteries are bound down firmly in dense tissue, cannot contract, and bleed freely. Multiple skin lacerations can still combine to cause shock and death, and laceration of an internal organ can bleed fatally into a cavity.",
+   "say": "Torn vessels seal themselves better than cut ones, except in the scalp where bound down arteries keep bleeding.",
+   "vis": {"kind": "compare", "left": {"title": "Less bleeding expected", "points": ["Arteries crushed and retracted", "Clot forms readily in tears", "Typical limb laceration", "Bleeding mainly capillary"]}, "right": {"title": "Heavy bleeding possible", "points": ["Scalp temporal arteries fixed", "Internal organ laceration", "Many wounds adding together", "Fat embolism from crushed tissue"]}}
+  },
+  {
+   "title": "Characters of a true incised wound",
+   "tx": "An **incised wound** is a clean cut from a sharp edged instrument such as a knife, razor or sickle, and it is longer than it is deep. Margins are clean cut, well defined and usually everted, free of bruising and abrasion. The wound is spindle shaped from central retraction, wider than the blade that made it, and it bleeds profusely because vessels are sliced open and cannot contract when completely divided.",
+   "say": "A true cut is longer than deep, clean edged, spindle shaped and bleeds freely because sliced vessels cannot close.",
+   "vis": {"kind": "table", "cols": ["Character", "Incised wound finding", "Reason"], "rows": [["Margins", "Clean, everted, no bruising", "Edge divides without crushing"], ["Shape", "Spindle shaped, gaping centre", "Tissue retraction is maximal centrally"], ["Length", "Greater than width and depth", "Blade drawn across the surface"], ["Bleeding", "Profuse, may spurt", "Cut artery cannot retract"]]}
+  },
+  {
+   "title": "Head and tail of an incised wound",
+   "tx": "Pressure is greatest where the blade first bites, so an incised wound is deepest at its start, the **head of the wound**, and shallows toward its end. As the knife leaves the skin it scores a superficial scratch called **tailing of the wound**. Tailing therefore points along the direction of the cut. A blade entering obliquely bevels one margin and undermines the other, showing the side from which the blade approached.",
+   "say": "Deep head and shallow tailing end show both the direction of the cut and where the blade first struck.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blade bites deepest at the head"}, {"id": "b", "label": "Cut shallows along its course"}, {"id": "c", "label": "Tailing scratch marks the exit"}, {"id": "d", "label": "Direction of stroke is established"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Circumstances written in wound patterns",
+   "tx": "Combinations tell the story: the same weapon can bruise with one blow, lacerate with the next and abrade with a third under **combined blunt injury patterns**. Punching splits lips and blackens eyes; kicking and stamping add footwear patterns and can fracture ribs or injure abdominal organs through the body wall. Homicidal lacerations favour the head. Suicidal lacerations are rare, exposed and mostly on the same side of the body.",
+   "say": "Mixed abrasion, bruise and tear patterns plus their sites separate punching, stamping, falls and homicidal blows.",
+   "vis": {"kind": "table", "cols": ["Pattern", "Likely mechanism", "Sites favoured"], "rows": [["Split lips, black eye", "Punching with a fist", "Face and bony points"], ["Shoe print, rib fractures", "Kicking or stamping", "Trunk of a fallen victim"], ["Multiple head lacerations", "Homicidal blunt blows", "Scalp and face"], ["Same side exposed tears", "Rare suicidal laceration", "Accessible body surface"]]}
+  }
+ ],
+ "quiz": []
+}

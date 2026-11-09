@@ -1,0 +1,254 @@
+{
+ "key": "ped-childhood-infections-childhood-tuberculosis",
+ "v": 1,
+ "module": "ped-childhood-infections",
+ "subject": "paediatrics",
+ "title": "Childhood Tuberculosis, Mantoux Testing and Paediatric HIV",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Primary tuberculous infection in paediatric hosts differs fundamentally from post-primary adult disease. In children, **childhood pulmonary tuberculosis** represents primary progressive disease following inhalation of aerosolized Mycobacterium tuberculosis from an adult contact. Rather than upper lobe apical cavitation, young children develop the primary Ghon complex, consisting of a peripheral subpleural parenchymal focus, regional lymphangitis, and massive hilar lymphadenopathy, with high risks of haematogenous dissemination.",
+   "say": "Childhood tuberculosis presents as primary disease with a subpleural Ghon focus and marked hilar lymphadenopathy rather than apical cavities. Paucibacillary infection carries high dissemination risks.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pulmonary-tb-fig2.webp",
+    "alt": "Pathology of primary Ghon complex versus adult cavitary tuberculosis.",
+    "caption": "Primary Ghon complex showing subpleural parenchymal focus and caseating hilar lymphadenopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Delayed-type hypersensitivity testing provides objective evidence of tuberculous infection. The **Mantoux tuberculin test** involves intradermal injection of 0.1 mL of purified protein derivative (5 TU) into the volar forearm, producing a discrete wheal that is measured across its transverse induration at forty-eight to seventy-two hours. An induration of ten millimetres or greater is positive in healthy children, whereas five millimetres or greater is positive in children with HIV, severe malnutrition, or household contacts.",
+   "say": "The Mantoux test measures transverse induration at forty-eight to seventy-two hours. Ten millimetres is positive in healthy children, while five millimetres is positive in HIV or malnutrition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Induration Threshold",
+     "Target Paediatric Population",
+     "Immunological Meaning",
+     "Clinical Decision"
+    ],
+    "rows": [
+     [
+      ">=5 mm induration",
+      "HIV-infected, SAM, close household contacts",
+      "Positive tuberculin reaction",
+      "Initiate TB treatment or IPT prophylaxis"
+     ],
+     [
+      ">=10 mm induration",
+      "All other children (BCG-vaccinated or not)",
+      "Positive tuberculin reaction",
+      "Investigate for active disease vs LTBI"
+     ],
+     [
+      "Zero induration (Anergy)",
+      "Disseminated miliary TB, severe SAM, measles",
+      "False negative due to severe immune suppression",
+      "Does not exclude active tuberculosis"
+     ],
+     [
+      "Erythema without induration",
+      "Any child",
+      "Negative test reaction",
+      "Measure only palpable raised induration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because young children swallow sputum, specialized specimen collection recovers swallowed bronchial secretions. Performing **early morning gastric aspirates** on three consecutive mornings before the child awakens or feeds recovers overnight swallowed respiratory mucus from the stomach. Gastric lavage fluid is immediately neutralized with sodium bicarbonate and subjected to cartridge-based nucleic acid amplification testing (CBNAAT / GeneXpert MTB/RIF) to confirm Mycobacterium tuberculosis and detect rifampicin resistance.",
+   "say": "Early morning gastric aspirates collected on three consecutive mornings recover swallowed sputum in young children. Neutralized fluid is tested with GeneXpert for tuberculosis and rifampicin resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastric Aspirate Technique",
+     "points": [
+      "Collect early morning before child wakes or feeds",
+      "Aspirate overnight gastric mucus via nasogastric tube",
+      "Immediate neutralization with sodium bicarbonate",
+      "Repeat across 3 consecutive days for maximum yield"
+     ]
+    },
+    "right": {
+     "title": "Sputum Induction Technique",
+     "points": [
+      "Nebulization with 3% hypertonic saline",
+      "Chest physiotherapy and vibratory percussion",
+      "Suctioning or expectoration of deep sputum",
+      "Equivalent diagnostic yield to gastric aspirates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First-line paediatric chemotherapy utilizes weight-banded fixed-dose combination formulations. Standard treatment for **pediatric pulmonary tuberculosis** consists of a two-month intensive phase with four drugs: isoniazid (H), rifampicin (R), pyrazinamide (Z), and ethambutol (E), followed by a four-month continuation phase with isoniazid, rifampicin, and ethambutol (2HRZE / 4HRE). Daily administration using dispersible, flavoured tablets dramatically enhances compliance and prevents treatment failure.",
+   "say": "Treat paediatric pulmonary tuberculosis with two months of four drugs: isoniazid, rifampicin, pyrazinamide, and ethambutol, followed by four months of three drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "First-Line Anti-TB Drug",
+     "Paediatric Daily Dose",
+     "Mechanism of Action",
+     "Key Toxicities to Monitor"
+    ],
+    "rows": [
+     [
+      "Isoniazid (H)",
+      "10 mg/kg (range 7-15)",
+      "Inhibits mycolic acid cell wall synthesis",
+      "Hepatotoxicity, peripheral neuropathy (add B6)"
+     ],
+     [
+      "Rifampicin (R)",
+      "15 mg/kg (range 10-20)",
+      "Inhibits DNA-dependent RNA polymerase",
+      "Orange urine/tears, hepatitis, enzyme induction"
+     ],
+     [
+      "Pyrazinamide (Z)",
+      "35 mg/kg (range 30-40)",
+      "Disrupts mycobacterial membrane energy",
+      "Hepatotoxicity, hyperuricaemia, arthralgia"
+     ],
+     [
+      "Ethambutol (E)",
+      "20 mg/kg (range 15-25)",
+      "Inhibits arabinosyl transferase",
+      "Optic neuritis, red-green colour blindness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vertical mother-to-child transmission represents the overwhelming source of pediatric retroviral infection. Effective **prevention of vertical HIV transmission** (PMTCT) requires maternal lifelong triple-drug antiretroviral therapy (tenofovir, lamivudine, dolutegravir) initiated during antenatal care to achieve complete viral suppression. The infant receives prophylactic oral zidovudine and nevirapine for six to twelve weeks, which reduces mother-to-child transmission rates to under two percent.",
+   "say": "Preventing vertical HIV transmission requires maternal lifelong triple antiretroviral therapy. The infant receives oral zidovudine and nevirapine for six to twelve weeks, dropping transmission under two percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal PMTCT Interventions",
+     "points": [
+      "Lifelong triple ART (TLD) regardless of CD4 count",
+      "Aim for viral suppression (HIV RNA <50 copies/mL)",
+      "Safe obstetric practices avoiding scalp electrodes",
+      "Exclusive breastfeeding with strict maternal ART"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Prophylaxis Protocol",
+     "points": [
+      "Oral zidovudine plus nevirapine for 6 weeks",
+      "Extended to 12 weeks if high maternal viral load",
+      "Early virological DNA-PCR testing at 6 weeks",
+      "Cotrimoxazole preventive therapy from 6 weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transplacental maternal IgG antibodies necessitate early molecular virological assays in infants. Because maternal antibodies persist in infant serum for up to eighteen months, standard antibody ELISA tests cannot diagnose infant infection. Definitive early infant diagnosis requires **HIV DNA PCR testing** at six weeks of age, followed by repeat testing at six months and six weeks after complete cessation of breastfeeding, confirming infection only when viral nucleic acid is directly detected.",
+   "say": "Maternal antibodies persist for eighteen months, making antibody tests unreliable in infants. Early diagnosis requires HIV DNA PCR testing at six weeks of life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Testing Schedule",
+     "Diagnostic Methodology",
+     "Target Analyte",
+     "Clinical Action"
+    ],
+    "rows": [
+     [
+      "6 weeks of age",
+      "Dried blood spot (DBS) DNA-PCR",
+      "HIV proviral DNA in infant leukocytes",
+      "If positive, confirm immediately; start ART"
+     ],
+     [
+      "6 months of age",
+      "Dried blood spot (DBS) DNA-PCR",
+      "HIV proviral DNA in infant leukocytes",
+      "Second surveillance virological check"
+     ],
+     [
+      "6 weeks post-weaning",
+      "Dried blood spot (DBS) DNA-PCR",
+      "HIV proviral DNA in infant leukocytes",
+      "Confirms absence of breastfeeding transmission"
+     ],
+     [
+      "18 months of age",
+      "Standard rapid antibody test (ELISA)",
+      "Anti-HIV antibodies in serum",
+      "Confirms clearance of maternal IgG"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Universal antibiotic prophylaxis prevents lethal opportunistic pulmonary infections in exposed infants. Beginning at six weeks of age, all HIV-exposed infants receive daily **cotrimoxazole prophylaxis** (trimethoprim-sulfamethoxazole) to protect against Pneumocystis jirovecii pneumonia, toxoplasmosis, and severe bacterial pneumonias. Prophylaxis is continued uninterrupted until the child is confirmed HIV-uninfected after complete cessation of all breastfeeding, or continued indefinitely if the child is infected.",
+   "say": "Daily cotrimoxazole prophylaxis begins at six weeks for all HIV-exposed infants to prevent Pneumocystis pneumonia. It continues until HIV infection is definitively excluded after weaning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cotrimoxazole Prophylaxis (CPT)",
+     "points": [
+      "Initiated at 6 weeks of age in all exposed infants",
+      "Protects against Pneumocystis jirovecii and malaria",
+      "Significantly reduces infant all-cause mortality",
+      "Continue until HIV transmission is fully excluded"
+     ]
+    },
+    "right": {
+     "title": "Isoniazid Preventive Therapy (IPT)",
+     "points": [
+      "Administered to child TB household contacts",
+      "Isoniazid (10 mg/kg daily) for 6 months",
+      "Routinely given to HIV-infected children without TB",
+      "Prevents primary active tuberculous progression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid initiation of combination antiretroviral therapy restores immunocompetence and normal growth. All infants and children confirmed with HIV require immediate **pediatric antiretroviral therapy** regardless of CD4 count or clinical staging. Preferred first-line regimens utilize weight-banded dolutegravir dispersible tablets combined with two nucleoside reverse transcriptase inhibitors (abacavir plus lamivudine), which rapidly suppresses viral load and allows immune reconstitution.",
+   "say": "Start antiretroviral therapy immediately upon HIV diagnosis regardless of CD4 count. Preferred first-line therapy combines dolutegravir with abacavir and lamivudine dispersible tablets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiretroviral Class",
+     "Specific Agent",
+     "Mechanism of Action",
+     "Paediatric Formulation Advantage"
+    ],
+    "rows": [
+     [
+      "Integrase strand transfer (INSTI)",
+      "Dolutegravir (DTG)",
+      "Blocks viral DNA integration into host genome",
+      "High genetic barrier, dispersible 10 mg tablet"
+     ],
+     [
+      "Nucleoside reverse transcriptase",
+      "Abacavir (ABC)",
+      "Chain termination of viral DNA synthesis",
+      "Once daily, well tolerated, minimal toxicity"
+     ],
+     [
+      "Nucleoside reverse transcriptase",
+      "Lamivudine (3TC)",
+      "Chain termination of viral DNA synthesis",
+      "Synergistic combination with abacavir"
+     ],
+     [
+      "Protease inhibitor (PI/r)",
+      "Lopinavir/ritonavir (LPV/r)",
+      "Inhibits viral protease maturation",
+      "Alternative regimen; bitter granules"
+     ]
+    ]
+   }
+  }
+ ]
+}

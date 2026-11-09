@@ -1,0 +1,72 @@
+{
+ "v": 1,
+ "id": "fmt-forensic-psychiatry-mcnaughten-rule",
+ "subject": "forensic-medicine",
+ "module": "fmt-forensic-psychiatry",
+ "title": "McNaughten Rule, Criminal Responsibility and Mental Health Law",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "McNaughten rule: right and wrong",
+   "tx": "The **McNaughten rule** excuses an accused who, from unsoundness of mind at the moment of the act, did not know the nature of the act or that it was wrong, carried in India by section 22 of the Bharatiya Nyaya Sanhita, formerly section 84 of the Penal Code. A person who knew his act was wrong stays fully responsible even if mental illness left him unable to refrain. Only intellectual capacity is tested; emotion and will are ignored, the rule's great defect.",
+   "say": "Know the act and know it is wrong, and McNaughten holds you responsible, however ill or impulsive you were.",
+   "vis": {"kind": "table", "cols": ["McNaughten limb", "Question asked", "If answer is no"], "rows": [["Nature of act", "Did he know what he was doing", "Not responsible"], ["Wrongfulness", "Did he know it was wrong", "Not responsible"], ["Control of impulse", "Could he stop himself", "Still responsible"], ["Emotional state", "How did he feel", "Not considered"]]}
+  },
+  {
+   "title": "Judging the deluded accused as if the delusion were real",
+   "tx": "A person acting under a delusion is judged **as though the delusionary facts were real**. If he kills believing the victim is about to kill him, he acts in self defence and bears no responsibility. If he kills believing the victim is a wild animal, he never knew the act's nature. If he believes he is the State Executioner ordered to execute, he is exempt. If he kills for revenge against imagined ruin of character and fortune, he stays responsible, because revenge killing is unlawful even then.",
+   "say": "Pretend the delusion is true and judge again: self defence excuses, mistaken animal excuses, revenge never does.",
+   "vis": {"kind": "compare", "left": {"title": "Excused if delusion were real", "points": ["Victim about to kill him", "Victim believed a wild animal", "Acting as State Executioner", "No knowledge of wrong act"]}, "right": {"title": "Still responsible", "points": ["Revenge for imagined ruin", "Knew killing was wrong", "Act unlawful even if true", "Delusion changes nothing legal"]}}
+  },
+  {
+   "title": "Durham rule and Currens rule",
+   "tx": "Two American successors widened the test. The **Durham rule of 1954** held an accused not responsible if his unlawful act was the product of mental disease or mental defect; its vague words product, disease and defect freed almost anyone with any abnormality and it was discarded in eighteen years. The **Currens rule of 1961** asked instead whether mental disease destroyed the capacity to regulate conduct to the requirements of the law, a volitional test.",
+   "say": "Durham blamed the disease for the act and collapsed as too broad, while Currens asked whether conduct could be regulated at all.",
+   "vis": {"kind": "table", "cols": ["Rule", "Year", "Test applied"], "rows": [["McNaughten", "1843", "Knew nature and wrongness"], ["Durham", "1954", "Act was product of disease"], ["Currens", "1961", "Capacity to regulate conduct"], ["Irresistible impulse", "New Hampshire", "Could not restrain the act"]]}
+  },
+  {
+   "title": "Irresistible impulse and the ALI test",
+   "tx": "The **irresistible impulse test** excuses an accused who knew the act and its wrongness but whose free will was destroyed by mental disease so he could not restrain himself; courts ask unanswerably whether the impulse was irresistible or the offender merely weak, so it never stands alone. The **American Law Institute test of 1972** combines both limbs: lacking substantial capacity to appreciate criminality or to conform conduct to law, excluding abnormality shown only by repeated antisocial conduct.",
+   "say": "Irresistible impulse adds the broken brake to McNaughten's broken compass, and the ALI test merges both with substantial capacity.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Knew act and wrongness"}, {"id": "b", "label": "Could the will restrain it"}, {"id": "c", "label": "Impulse test if will destroyed"}, {"id": "d", "label": "ALI test merges both limbs"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Delusion, hallucination and illusion",
+   "tx": "Three symptoms must never be confused in **psychopathology for courts**. A delusion is a fixed false belief held against evidence and reason, such as persecution or grandeur. A hallucination is a perception without any object, hearing voices with no speaker. An illusion is a misinterpretation of a real stimulus, taking a rope for a snake. Each is recorded in the patient's own words with examples, because legal consequences turn on what the accused believed and perceived at the time.",
+   "say": "Delusion is false belief, hallucination is perception without an object, illusion is a real object misread.",
+   "vis": {"kind": "compare", "left": {"title": "Delusion and hallucination", "points": ["Delusion: belief against evidence", "Hallucination: voice without speaker", "Both may drive an offence", "Record patient's exact words"]}, "right": {"title": "Illusion", "points": ["Real stimulus present", "Misinterpreted by senses", "Rope taken for a snake", "Common and often harmless"]}}
+  },
+  {
+   "title": "Lucid interval in insanity and head injury",
+   "tx": "A **lucid interval** is a period of normal mental function between episodes of insanity, during which the person can make a valid will and is responsible for crimes. In head injury the same words mean the temporary recovery between initial concussion and extradural compression, usually hours. Confusing the two in a report corrupts both opinions. Persons can execute valid wills during a psychiatric lucid interval, and testamentary capacity is judged exactly at the moment of execution.",
+   "say": "Lucid interval means sanity between attacks in psychiatry and waking before compression in head injury, and both allow valid acts.",
+   "vis": {"kind": "table", "cols": ["Setting", "Lucid interval means", "Legal effect"], "rows": [["Insanity", "Normal period between episodes", "Will and responsibility valid"], ["Extradural bleed", "Recovery before compression", "Seen in thirty to forty percent"], ["Testamentary capacity", "Sound mind at execution", "Will stands if proved"], ["Criminal act in interval", "Mind normal at the time", "Fully responsible"]]}
+  },
+  {
+   "title": "Testamentary and civil responsibility",
+   "tx": "**Testamentary capacity** requires that the testator understand the nature of making a will, the extent of the property and the claims of those who might expect to benefit, free of any disorder poisoning affections or perverting judgement. **Civil responsibility** extends the same logic to contracts, marriage and voting, each judged at the moment of the act. A will made in a lucid interval by a person who otherwise suffers insanity can be perfectly valid.",
+   "say": "A valid will needs understanding of act, property and claimants at that moment, which a lucid interval can fully supply.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Understands making a will"}, {"id": "b", "label": "Knows extent of property"}, {"id": "c", "label": "Knows natural claimants"}, {"id": "d", "label": "No delusion distorts the gift"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Criminal responsibility and fitness to stand trial",
+   "tx": "Responsibility is judged at the offence; fitness is judged at the trial, in **two separate mental state questions**. An accused unfit to plead cannot understand the proceedings, consult his lawyer with rational understanding or assist his defence, and trial waits. Unsoundness is pleaded in bar of conviction for the time of the crime, in bar of trial for the present, and in bar of capital punishment for the condemned prisoner. The interval between crime and examination steadily degrades retrospective opinion.",
+   "say": "Sanity at the crime and fitness at the trial are different questions, and every month between act and examination weakens retrospective certainty.",
+   "vis": {"kind": "compare", "left": {"title": "At the offence", "points": ["McNaughten applied here", "Defence proves unsoundness", "Retrospective inference needed", "Error grows with interval"]}, "right": {"title": "At the trial", "points": ["Understands the proceedings", "Can instruct his lawyer", "Can assist his own defence", "Judged on present state"]}}
+  },
+  {
+   "title": "Mental Healthcare Act 2017 and restraint",
+   "tx": "The **Mental Healthcare Act 2017** guarantees rights of persons with mental illness: access to care, community living, protection from cruel treatment, confidentiality, and advance directives and nominated representatives. **Restraint of the mentally ill** is permitted only to prevent immediate harm, for the shortest time, recorded and reported, never as punishment or convenience. Admission and discharge follow independent and supported categories with review boards, replacing the older lunacy framework that forensic reports still cite historically.",
+   "say": "The 2017 Act gives rights, advance directives and review boards, and restraint survives only as a brief safety measure on record.",
+   "vis": {"kind": "table", "cols": ["Act feature", "Entitlement", "Forensic relevance"], "rows": [["Advance directive", "Choices recorded while well", "Respected in later care"], ["Nominated representative", "Chosen decision supporter", "Involved in admissions"], ["Restraint limits", "Only to prevent harm, recorded", "Never punitive or convenient"], ["Review boards", "Oversight of admissions", "Rights based framework"]]}
+  },
+  {
+   "title": "Malingering and automatism",
+   "tx": "**Malingering** is deliberate feigning of illness for an obvious external gain such as escaping trial or punishment, detected by inconsistency, exaggeration and behaviour that vanishes under observation. **Automatism** is complex apparently purposeful conduct without conscious control and with later amnesia, from epilepsy, concussion, hypoglycaemia or somnambulism; Indian law has no special provision for it. Sleep walking and sleep drunkenness defendants are not held responsible where genuine, which makes witnessed history decisive.",
+   "say": "Malingering performs illness for gain and collapses under observation, while true automatism acts without awareness or memory.",
+   "vis": {"kind": "compare", "left": {"title": "Malingering clues", "points": ["Obvious external gain", "Inconsistent exaggerated symptoms", "Normal when unobserved", "Rare symptoms presented dramatically"]}, "right": {"title": "Automatism causes", "points": ["Epilepsy and concussion", "Hypoglycaemia attacks", "Somnambulism episodes", "Amnesia for the conduct"]}}
+  }
+ ],
+ "quiz": []
+}

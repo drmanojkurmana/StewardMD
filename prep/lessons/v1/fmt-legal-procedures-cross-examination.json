@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-legal-procedures-cross-examination",
+ "subject": "forensic-medicine",
+ "module": "fmt-legal-procedures",
+ "title": "Court Procedures: Cross-Examination, Hostile Witness and Conduct Money",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Purpose and statutory scope of cross-examination",
+   "tx": "In the adversarial justice system, the rigorous **cross-examination legal procedure** is conducted by the adverse party or defense counsel immediately following the examination-in-chief. Its statutory objective is to test the veracity, clinical accuracy, and impartiality of the witness, uncover underlying biases, detect diagnostic errors, expose gaps in professional qualifications, and elicit admissions that support the defense theory of the case.",
+   "say": "Cross-examination is conducted by defense counsel to test the accuracy, memory, and credibility of the doctor, and to uncover mistakes or alternative explanations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cross-examination objective",
+     "Defense strategy",
+     "Clinician defence"
+    ],
+    "rows": [
+     [
+      "Testing clinical accuracy",
+      "Queries measurements and margins",
+      "Rely on written contemporaneous autopsy notes"
+     ],
+     [
+      "Probing alternative causes",
+      "Suggests accidental or natural etiology",
+      "Provide objective anatomical reasons rejecting alternatives"
+     ],
+     [
+      "Challenging expertise",
+      "Questions experience with weapon types",
+      "State professional qualifications and experience calmly"
+     ],
+     [
+      "Detecting bias",
+      "Alleges police pressure or collusion",
+      "Maintain strict clinical neutrality and scientific truth"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Use of leading questions during cross-examination",
+   "tx": "Unlike the strict restrictions governing examination-in-chief, a fundamental **leading questions cross-examination right** is granted to the cross-examining counsel under Section 146 BSA. The defense advocate is legally entitled to ask suggestive questions, confront the medical officer with contrary textbook passages, challenge weapon compatibility, and attempt to corner the expert into admitting that traumatic findings could match accidental falls or secondary postmortem artefacts.",
+   "say": "Defense lawyers can freely use leading questions during cross-examination to suggest alternative scenarios and challenge the doctor's conclusions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Examination-in-chief",
+     "points": [
+      "Conducted by calling public prosecutor",
+      "Leading questions strictly prohibited",
+      "Presents positive prosecution case",
+      "Establishes report authenticity"
+     ]
+    },
+    "right": {
+     "title": "Cross-examination",
+     "points": [
+      "Conducted by adverse defense advocate",
+      "Leading questions freely permitted",
+      "Challenges consistency and accuracy",
+      "Explores alternative explanations"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Confrontation with medical textbooks and treatises",
+   "tx": "During rigorous cross-examination, counsel frequently utilizes the **authoritative medical treatise confrontation** technique to impeach an expert's testimony. The advocate reads aloud conflicting passages from standard forensic textbooks such as Taylor or Reddy and asks if the witness agrees. The clinician should verify the context, check the textbook edition, acknowledge established variations in wound biology, and defend findings using direct anatomical evidence.",
+   "say": "Lawyers may read textbook passages that contradict your testimony. Always confirm the textbook context and explain why the case findings justify your conclusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Defense counsel reads passage from medical text"
+     },
+     {
+      "id": "b",
+      "label": "Doctor requests to inspect book title and edition"
+     },
+     {
+      "id": "c",
+      "label": "Doctor analyzes biological context of published quote"
+     },
+     {
+      "id": "d",
+      "label": "Doctor explains anatomical facts justifying personal opinion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Re-examination and its strict procedural boundaries",
+   "tx": "Following the conclusion of cross-examination, the calling party may initiate **re-examination procedural clarification** to address any confusing matters or distorted statements emerging from defense questioning. The prosecutor cannot introduce entirely new clinical topics during re-examination without express permission from the judge; if a new matter is permitted, the defense receives an automatic right to cross-examine again on that specific point.",
+   "say": "Re-examination allows the prosecutor to clarify points confused during cross-examination. No new topics may be raised without the judge's permission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Defense concludes cross-examination"
+     },
+     {
+      "id": "b",
+      "label": "Prosecutor identifies ambiguities needing clarification"
+     },
+     {
+      "id": "c",
+      "label": "Re-examination questions confined strictly to explained matters"
+     },
+     {
+      "id": "d",
+      "label": "If new matter admitted, defense cross-examines again"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Definition and declaration of a hostile witness",
+   "tx": "When a witness displays unexpected hostility or resiles from prior recorded statements, the court may declare a **hostile witness procedural status** under Section 157 BSA. A hostile witness is one who demonstrates an unwillingness to speak the truth, colludes with the opposing party, or contradicts earlier statements recorded during police or magistrate investigations, damaging the case of the party who called them.",
+   "say": "A hostile witness turns against the party that summoned them, contradicting prior statements. The court allows the calling party to cross-examine their own witness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Witness behaviour",
+     "Judicial response",
+     "Consequence on trial"
+    ],
+    "rows": [
+     [
+      "Contradicts prior statement",
+      "Prosecutor applies to declare witness hostile",
+      "Permits prosecutor to cross-examine witness"
+     ],
+     [
+      "Conceals material facts",
+      "Court grants leave under Section 157 BSA",
+      "Leading questions can be asked by own party"
+     ],
+     [
+      "Collusion with accused",
+      "Credibility impeached on the record",
+      "Testimony scrutinized with extreme caution"
+     ],
+     [
+      "Partial truthfulness",
+      "Court sifts reliable testimony",
+      "Truthful portions can still support conviction"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Cross-examination of one's own witness under Section 157 BSA",
+   "tx": "Once the presiding judge formally declares a witness hostile, the **cross-examination of own witness** becomes legally permissible for the party who called them. The public prosecutor gains the immediate procedural right to put leading questions, confront the witness with their signed police statement under Section 180 BNSS, probe potential financial or social inducements, and impeach their personal credibility before the bench.",
+   "say": "Declaring a witness hostile allows the calling lawyer to ask leading questions and confront them with earlier statements to expose perjury or corruption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Witness retracts prior statement in witness box"
+     },
+     {
+      "id": "b",
+      "label": "Prosecutor requests court to treat witness as hostile"
+     },
+     {
+      "id": "c",
+      "label": "Judge grants permission under Section 157 BSA"
+     },
+     {
+      "id": "d",
+      "label": "Prosecutor puts leading questions and impeaches credibility"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Evidentiary value of hostile witness testimony",
+   "tx": "Under settled Supreme Court jurisprudence, the **hostile witness evidentiary value** is not automatically discarded or rendered completely void. The trial judge applies the doctrine of severability, carefully sifting the grain from the chaff. Any portion of the hostile witness's deposition that remains corroborated by independent clinical records, forensic ballistics, or credible eyewitness testimony remains fully admissible to sustain a conviction.",
+   "say": "Testimony from a hostile witness is not automatically thrown out. Reliable parts that match medical and scene evidence can still be accepted by the court.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Outdated common law view",
+     "points": [
+      "Entire deposition rejected as contaminated",
+      "Hostile witness treated as total liar",
+      "No portion usable by either party",
+      "Prosecution case frequently collapsed"
+     ]
+    },
+    "right": {
+     "title": "Modern Indian jurisprudence",
+     "points": [
+      "Doctrine of severability applied",
+      "Reliable corroborated portions accepted",
+      "Can support either prosecution or defense",
+      "Judge sifts truth from falsehood"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Concept and rules of conduct money in civil litigation",
+   "tx": "Under the Code of Civil Procedure, the statutory **conduct money expense tender** represents a payment offered to a witness in civil litigation to cover reasonable travel expenses, lodging, and conveyance between their residence and the courtroom. In civil suits, a medical witness cannot be compelled to attend or held in contempt unless adequate conduct money has been deposited in court and tendered in advance.",
+   "say": "Conduct money covers travel and lodging for a witness in civil cases. A doctor cannot be forced to attend civil court unless conduct money is paid in advance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Litigation category",
+     "Conduct money requirement",
+     "Failure to tender effect"
+    ],
+    "rows": [
+     [
+      "Civil suit (e.g. compensation claim)",
+      "Mandatory advance tender under Order 16 CPC",
+      "Doctor not obliged to attend court"
+     ],
+     [
+      "Criminal case (police prosecution)",
+      "No advance conduct money payable",
+      "Doctor must attend; TA/DA reimbursed later"
+     ],
+     [
+      "Workmen compensation tribunal",
+      "Covered under specialized labor statutes",
+      "Expenses determined by statutory tribunal scale"
+     ],
+     [
+      "Private civil dispute",
+      "Paid by private party issuing subpoena",
+      "Covers actual travel and subsistence cost"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Criminal trial travel allowances versus conduct money",
+   "tx": "A vital distinction exists between civil conduct money and **criminal court travel reimbursement** provided to government medical officers. In criminal proceedings, no conduct money is payable in advance; the medical officer is legally mandated to obey the summons regardless of advance funds. Following the completion of testimony, the court nazarat reimburses traveling allowance and daily allowance according to established government civil service rules.",
+   "say": "In criminal cases, doctors must attend court without advance money. Travel and daily allowances are reimbursed after giving testimony according to government rates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doctor receives criminal court witness summons"
+     },
+     {
+      "id": "b",
+      "label": "Mandatory attendance without demanding advance fees"
+     },
+     {
+      "id": "c",
+      "label": "Delivery of expert testimony and cross-examination"
+     },
+     {
+      "id": "d",
+      "label": "Court nazir issues attendance certificate and TA/DA claim"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

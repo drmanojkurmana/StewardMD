@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "id": "ort-shoulder-elbow-conditions-frozen-shoulder",
+ "subject": "orthopaedics",
+ "module": "ort-shoulder-elbow-conditions",
+ "title": "Frozen Shoulder",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Adhesive capsulitis** of the shoulder, commonly termed frozen shoulder, is a painful and debilitating condition characterised by progressive fibrosis, thickening, and contracture of the glenohumeral joint capsule. Histological examination reveals fibroblastic and myofibroblastic proliferation with dense type I and III collagen deposition, resembling Dupuytren contracture. Contracture prominently involves the coracohumeral ligament and rotator interval capsule, reducing intra-articular glenohumeral volume from normal fifteen to twenty milliliters down to under five milliliters.",
+   "say": "Adhesive capsulitis is characterized by severe contracture and fibrosis of the glenohumeral capsule, primarily involving the rotator interval and coracohumeral ligament. Joint volume shrinks dramatically from twenty millilitres down to less than five millilitres.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adhesive-capsulitis-fig1.webp",
+    "alt": "Anatomical illustration of adhesive capsulitis showing contracted glenohumeral capsule.",
+    "caption": "Glenohumeral joint capsule thickening, obliterative fibrosis of the axillary fold, and rotator interval contracture. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Diabetes mellitus** is the most potent predisposing systemic risk factor for frozen shoulder, with affected diabetic individuals exhibiting a five-fold higher prevalence ranging from ten to twenty percent. Diabetic patients frequently experience bilateral involvement, more severe pain, and resistance to standard conservative physical therapy. Other established predisposing conditions include hypothyroidism, hyperthyroidism, Dupuytren disease, Parkinson disease, recent myocardial infarction, and prolonged shoulder immobilization following breast surgery, clavicle fracture, or cerebrovascular accident.",
+   "say": "Diabetes mellitus increases the risk of frozen shoulder up to five-fold, with up to twenty percent of diabetic patients affected. Other common associations include thyroid disorders and prolonged shoulder immobility following stroke or chest surgery.",
+   "vis": {
+    "kind": "table",
+    "title": "Systemic and Local Risk Factors for Frozen Shoulder",
+    "cols": [
+     "Risk Factor",
+     "Clinical Association",
+     "Impact on Clinical Course"
+    ],
+    "rows": [
+     [
+      "Diabetes mellitus (Type 1 and 2)",
+      "10% to 20% prevalence, often bilateral",
+      "Prolonged duration, higher risk of surgical need"
+     ],
+     [
+      "Thyroid disorders",
+      "Hypothyroidism and hyperthyroidism",
+      "Increased capsular inflammatory reactivity"
+     ],
+     [
+      "Dupuytren diathesis",
+      "Palmar fascial fibromatosis",
+      "Shared myofibroblast-driven fibrotic pathology"
+     ],
+     [
+      "Prolonged immobility",
+      "Post-mastectomy or stroke hemiparesis",
+      "Secondary capsular stiffness and contracture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Freezing stage** represents the initial painful phase of adhesive capsulitis, typically lasting from two to nine months. Patients present with an insidious onset of severe, diffuse, aching shoulder pain that characteristically worsens at night, severely disrupting sleep and preventing the patient from lying on the affected side. As the inflammatory synovitis progresses, joint stiffness gradually begins to develop, and attempts at rapid or unexpected movements provoke excruciating, sharp muscle spasms.",
+   "say": "The freezing phase lasts between two and nine months, dominated by severe night pain that stops the patient sleeping on the affected side. As capsular inflammation intensifies, the shoulder gradually begins to lose motion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Clinical Stages of Adhesive Capsulitis",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Stage 1: Freezing",
+      "sub": "2 to 9 months: severe night pain, progressive stiffness"
+     },
+     {
+      "id": "s2",
+      "label": "Stage 2: Frozen",
+      "sub": "4 to 12 months: pain subsides, marked global motion loss"
+     },
+     {
+      "id": "s3",
+      "label": "Stage 3: Thawing",
+      "sub": "12 to 42 months: slow spontaneous recovery of movement"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Synovitis subsides, fibrosis consolidates"
+     ],
+     [
+      "s2",
+      "s3",
+      "Gradual collagen remodeling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Frozen stage** is the second clinical phase, persisting for four to twelve months, during which resting pain gradually decreases but joint stiffness becomes profound and fixed. The dominant finding is global restriction of both active and passive glenohumeral motion. External rotation with the arm held at the side is characteristically the earliest and most severely restricted movement, followed by abduction and internal rotation, severely impairing activities such as dressing and combing hair.",
+   "say": "During the frozen stage, lasting four to twelve months, severe resting pain subsides but dense stiffness locks the joint. Passive external rotation with the elbow tucked by the side is lost first, followed by abduction and internal rotation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Frozen Shoulder Pattern",
+     "points": [
+      "Equal loss of active and passive motion",
+      "External rotation restricted first and worst",
+      "Dense capsular end-feel on passive stress",
+      "Normal plain radiograph of joint space"
+     ]
+    },
+    "right": {
+     "title": "Rotator Cuff Tear Pattern",
+     "points": [
+      "Active motion restricted by pain or weakness",
+      "Passive range of motion fully preserved",
+      "Weakness on resisted abduction or rotation",
+      "High-riding humeral head in massive tears"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Passive range of motion** testing is the cardinal physical examination maneuver that definitively distinguishes frozen shoulder from rotator cuff disease. In adhesive capsulitis, both active and passive movements are equally restricted in a capsular pattern with an abrupt, firm, unyielding mechanical end-feel. In contrast, patients with rotator cuff tears or subacromial impingement have limited active elevation due to muscle weakness or pain, but demonstrate near-normal passive range of motion.",
+   "say": "Testing passive movement is the single most important clinical discriminator. If active elevation is limited but passive motion is full, suspect a rotator cuff tear. If both active and passive external rotation are mechanically blocked, the diagnosis is frozen shoulder.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Discrimination in Painful Stiff Shoulder",
+    "cols": [
+     "Clinical Parameter",
+     "Adhesive Capsulitis",
+     "Full-Thickness Rotator Cuff Tear"
+    ],
+    "rows": [
+     [
+      "Active movement",
+      "Globally restricted in all planes",
+      "Restricted active elevation and rotation"
+     ],
+     [
+      "Passive movement",
+      "Equally restricted with firm end-feel",
+      "Preserved passive range of motion"
+     ],
+     [
+      "External rotation at 0 deg",
+      "Markedly restricted (under 30 degrees)",
+      "Normal passive external rotation"
+     ],
+     [
+      "Resisted motor power",
+      "Maintained power within available range",
+      "Focal weakness (drop arm, belly press)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corticosteroid injection** into the glenohumeral joint provides rapid, clinically meaningful pain relief and accelerates functional recovery when administered during the early freezing stage. Under ultrasound guidance or anatomical landmark navigation, forty milligrams of methylprednisolone or triamcinolone combined with local anaesthetic suppresses acute capsular synovitis. Early intra-articular steroid delivery interrupts the inflammatory cascade, aborts nocturnal sleep disruption, and creates an essential therapeutic window for patient compliance with gentle rehabilitation.",
+   "say": "Intra-articular steroid injection placed into the glenohumeral joint during the early painful freezing stage markedly reduces pain and night-waking. Suppressing capsular inflammation opens an invaluable window for active physical therapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Stepped Management of Adhesive Capsulitis",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Early Freezing Stage",
+      "sub": "Intra-articular steroid and gentle pendular exercise"
+     },
+     {
+      "id": "t2",
+      "label": "Frozen Stage",
+      "sub": "Stretching physiotherapy within pain limits"
+     },
+     {
+      "id": "t3",
+      "label": "Hydrodilatation",
+      "sub": "High-volume saline capsular distension"
+     },
+     {
+      "id": "t4",
+      "label": "Surgical Release",
+      "sub": "Arthroscopic capsulotomy for refractory stiffness"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2",
+      "Pain controlled"
+     ],
+     [
+      "t2",
+      "t3",
+      "Persistent stiffness > 6 mo"
+     ],
+     [
+      "t3",
+      "t4",
+      "Refractory contracture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydrodilatation** or high-volume capsular distension is an effective minimally invasive interventional radiological procedure indicated for persistent stage 2 capsular contracture. Under fluoroscopic or ultrasound guidance, the glenohumeral joint is accessed and injected with thirty to fifty milliliters of normal saline, local anaesthetic, and corticosteroid until the contracted capsule distends and ruptures. Controlled hydraulic rupture, particularly of the contracted subscapularis bursa and axillary fold, immediately increases joint compliance and restores passive excursion.",
+   "say": "Hydrodilatation uses ultrasound or fluoroscopy to pump thirty to fifty millilitres of sterile saline and steroids into the tight capsule until it bursts. This hydraulic distension ruptures fibrotic adhesions and immediately improves passive range of motion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydrodilatation Distension",
+     "points": [
+      "Awake outpatient radiological procedure",
+      "Controlled fluid volume capsular rupture",
+      "Avoids general anaesthetic risks",
+      "No risk of iatrogenic humeral fracture"
+     ]
+    },
+    "right": {
+     "title": "Manipulation Under Anaesthesia",
+     "points": [
+      "Requires general anaesthesia or nerve block",
+      "Mechanical rupture through forceful levering",
+      "Risk of spiral proximal humerus fracture",
+      "Risk of labral tearing or rotator cuff rupture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Arthroscopic capsular release** represents the surgical standard of care for refractory frozen shoulder that fails six to nine months of dedicated conservative management and image-guided injections. Through standard posterior and anterior portals, the surgeon systematically transects the thickened rotator interval capsule, the contracted coracohumeral ligament, and the anterior, inferior, and posterior glenohumeral capsule. Care is taken around the six-o-clock position to avoid iatrogenic injury to the axillary nerve traversing adjacent to the inferior capsular pouch.",
+   "say": "Arthroscopic capsular release is the surgical procedure of choice for stubborn stiffness. The surgeon cuts the tight rotator interval and cirumferentially divides the capsule, taking extreme care at the inferior border to avoid injuring the axillary nerve.",
+   "vis": {
+    "kind": "table",
+    "title": "Arthroscopic Capsulotomy Steps and Safety",
+    "cols": [
+     "Capsular Zone",
+     "Operative Action",
+     "Key Anatomical Hazard"
+    ],
+    "rows": [
+     [
+      "Rotator interval",
+      "Excise thickened coracohumeral ligament",
+      "Preserve biceps tendon and subscapularis"
+     ],
+     [
+      "Anterior capsule",
+      "Divide down to superior subscapularis edge",
+      "Avoid straying medial to glenoid rim"
+     ],
+     [
+      "Inferior capsule (6 oclock)",
+      "Transect axillary pouch close to glenoid",
+      "High risk to adjacent axillary nerve"
+     ],
+     [
+      "Postoperative protocol",
+      "Immediate full passive mobilization",
+      "Prevent early capsular re-adhesion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Frozen shoulder: cardinal physical sign distinguishing from cuff tear",
+   "b": "Equal restriction of both active and passive glenohumeral movement in a capsular pattern."
+  },
+  {
+   "f": "Adhesive capsulitis: earliest and most severely restricted movement",
+   "b": "External rotation with the arm by the side, followed by abduction and internal rotation."
+  },
+  {
+   "f": "Inferior capsular release: primary neurological structure at risk",
+   "b": "Axillary nerve coursing just inferior to the axillary pouch at the 6-o-clock position."
+  }
+ ],
+ "keys": [
+  "Adhesive capsulitis causes progressive fibrotic contracture of the glenohumeral capsule and rotator interval",
+  "Equal loss of active and passive external rotation separates frozen shoulder from rotator cuff tear",
+  "Management steps through steroid injections, physiotherapy, hydrodilatation, and arthroscopic release"
+ ]
+}

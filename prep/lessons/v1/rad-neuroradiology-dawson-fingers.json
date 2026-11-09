@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-neuroradiology-dawson-fingers",
+ "subject": "radiology",
+ "module": "rad-neuroradiology",
+ "title": "Dawson Fingers, Multiple Sclerosis MRI and Dural Tail Sign",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Dawson fingers point from ventricles",
+   "tx": "**Dawson fingers** are ovoid multiple sclerosis plaques stretched along medullary veins, pointing radially away from the lateral ventricles like fingers on sagittal FLAIR images. The pictured sclerosis set shows the periventricular and callosal pattern that separates demyelination from the round, randomly angled white spots of small vessel disease. Plaques also favour the corpus callosum undersurface, juxtacortical U fibres, posterior fossa and cord, the four territories dissemination in space is counted from.",
+   "say": "Dawson fingers are ovoid sclerosis plaques stretched along medullary veins, pointing away from the lateral ventricles on sagittal FLAIR. The pictured set shows the periventricular pattern separating demyelination from small vessel spots. Plaques favour callosal undersurface, juxtacortical fibres, posterior fossa and cord.",
+   "vis": {"kind": "image", "src": "v1/kb/media/ms-fig1.webp", "alt": "Illustration of multiple sclerosis plaques including periventricular Dawson finger pattern.", "caption": "Multiple sclerosis plaque distribution with Dawson fingers. Illustration: StewardMD."}
+  },
+  {
+   "title": "Callosal and juxtacortical clues",
+   "tx": "**Callososeptal interface** plaques line the undersurface of the corpus callosum as small dots and dashes, a surface small vessel disease spares because its lesions avoid the callosum. Juxtacortical plaques touch cortex and bend U fibres, which ischaemic spots also spare by staying deep. Those two spared surfaces are the fastest discriminator on a crowded white matter scan in a young adult with transient neurological symptoms.",
+   "say": "Callososeptal plaques line the undersurface of the corpus callosum, a surface small vessel disease spares. Juxtacortical plaques touch cortex and bend U fibres, which ischaemic spots spare by staying deep. Those two spared surfaces are the fastest discriminator on a crowded white matter scan in a young adult.",
+   "vis": {"kind": "compare", "left": {"title": "Sclerosis pattern", "points": ["Dawson fingers radial ovoids", "Callosal undersurface involved", "Juxtacortical U fibre lesions", "Posterior fossa and cord plaques"]}, "right": {"title": "Small vessel pattern", "points": ["Round deep white spots", "Corpus callosum spared", "U fibres spared", "Older, hypertensive patient"]}}
+  },
+  {
+   "title": "Dissemination in space and time",
+   "tx": "**Dissemination in space** needs lesions in at least two of four territories: periventricular, cortical or juxtacortical, infratentorial and spinal cord. Dissemination in time is proven by one enhancing and one non enhancing lesion together, or a new lesion on follow up, or oligoclonal bands standing in for time in current criteria. One good MRI with contrast therefore can complete a diagnosis that once waited for a second clinical attack.",
+   "say": "Dissemination in space needs lesions in two of four territories: periventricular, juxtacortical, infratentorial and cord. Dissemination in time is proven by enhancing and non enhancing lesions together, a new lesion on follow up, or oligoclonal bands. One good MRI can complete a diagnosis that once waited for a second attack.",
+   "vis": {"kind": "table", "cols": ["Territory", "Lesion example", "Counts toward"], "rows": [["Periventricular", "Dawson fingers", "Space"], ["Juxtacortical", "U fibre plaque", "Space"], ["Infratentorial", "Pontine plaque", "Space"], ["Spinal cord", "Short peripheral lesion", "Space"]]}
+  },
+  {
+   "title": "Active plaques enhance briefly",
+   "tx": "**Gadolinium enhancement** marks a plaque for roughly two to six weeks while its blood brain barrier leaks, then fades even though the T2 scar stays forever. Counting enhancing versus silent plaques on one scan stages disease activity and predicts near term relapses. Black holes, chronic T1 dark plaques, mark destroyed axons and accumulate with disability, so T1 burden quietly grades the destructive side of the disease.",
+   "say": "Gadolinium enhancement marks a plaque for roughly two to six weeks while its barrier leaks, then fades though the T2 scar stays. Counting enhancing versus silent plaques stages activity. Black holes, chronic T1 dark plaques, mark destroyed axons and accumulate with disability.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "New plaque barrier leaks"}, {"id": "b", "label": "Enhancement 2 to 6 weeks"}, {"id": "c", "label": "T2 scar persists"}, {"id": "d", "label": "Some become black holes"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Cord lesions are short and peripheral",
+   "tx": "**Spinal cord plaques** in sclerosis run short, under two vertebral segments, sit peripherally in lateral and posterior columns and occupy part of the cord cross section. Longitudinally extensive lesions spanning three or more segments instead point to neuromyelitis optica spectrum disorder, which also attacks the optic nerves severely and carries aquaporin 4 antibodies. That length rule on one sagittal image reroutes the entire antibody and treatment pathway.",
+   "say": "Spinal cord plaques in sclerosis run short, under two segments, sit peripherally and occupy part of the cross section. Lesions spanning three or more segments point to neuromyelitis optica spectrum disorder with aquaporin antibodies instead. That length rule on one image reroutes the entire treatment pathway.",
+   "vis": {"kind": "compare", "left": {"title": "Sclerosis cord lesion", "points": ["Under two segments", "Peripheral wedge", "Partial cross section", "Brain plaques accompany"]}, "right": {"title": "Neuromyelitis lesion", "points": ["Three segments or more", "Central cord", "Optic neuritis severe", "Aquaporin 4 antibodies"]}}
+  },
+  {
+   "title": "Dural tail belongs to meningioma",
+   "tx": "**Dural tail sign** is a tapering rim of enhancing dura trailing from a dural based mass, the meningioma signature on post contrast MRI. The tail is reactive dura and tumour nests together, so surgeons resect it with the mass. Meningiomas also calcify, expand the diploic space with hyperostosis in the overlying skull and sit in parasagittal, convexity and sphenoid wing sites, often found incidentally in older women.",
+   "say": "Dural tail sign is a tapering rim of enhancing dura trailing from a dural based mass, the meningioma signature. The tail is reactive dura and tumour together, so surgeons resect it with the mass. Meningiomas also calcify and thicken the overlying skull, often found incidentally in older women.",
+   "vis": {"kind": "table", "cols": ["Meningioma clue", "Imaging form", "Meaning"], "rows": [["Dural tail", "Tapering dural enhancement", "Resect with mass"], ["Hyperostosis", "Thickened overlying skull", "Slow growing irritation"], ["Calcification", "Dense foci in mass", "Psammomatous change"], ["Dural base", "Broad flat attachment", "Extra axial origin"]]}
+  },
+  {
+   "title": "Extra axial versus intra axial",
+   "tx": "**Extra axial signs** place a mass outside brain: a cerebrospinal fluid cleft between mass and cortex, displaced pial vessels, a broad dural base and buckled white matter pushed inward. Intra axial tumours instead expand cortex, lack a fluid cleft and infiltrate white matter tracts. That single compartment call halves the differential before enhancement pattern is even judged, meningioma and schwannoma outside, glioma and metastasis inside.",
+   "say": "Extra axial signs place a mass outside brain: a fluid cleft, displaced pial vessels, a broad dural base and buckled white matter. Intra axial tumours expand cortex and infiltrate tracts instead. That compartment call halves the differential before enhancement is judged.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Look for fluid cleft"}, {"id": "b", "label": "Cleft present: extra axial"}, {"id": "c", "label": "No cleft: intra axial"}, {"id": "d", "label": "Pattern narrows the list"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  },
+  {
+   "title": "Optic neuritis and the first scan",
+   "tx": "**Optic neuritis** inflames the optic nerve with pain on eye movement and central vision loss, and the same MRI that shows the swollen enhancing nerve surveys the brain for silent plaques. A normal brain MRI after optic neuritis carries a far lower later sclerosis risk than one already carrying periventricular lesions. Reporting both nerve and brain burden in the first study sets counselling, follow up rhythm and early disease modifying therapy discussions.",
+   "say": "Optic neuritis inflames the optic nerve with pain on eye movement and central vision loss, and the same MRI surveys the brain for silent plaques. A normal brain scan carries far lower later sclerosis risk than one already carrying lesions. Reporting both burdens sets counselling and early therapy discussions.",
+   "vis": {"kind": "compare", "left": {"title": "Higher later risk", "points": ["Periventricular plaques present", "Dawson fingers seen", "Oligoclonal bands positive", "Early therapy discussed"]}, "right": {"title": "Lower later risk", "points": ["Brain MRI clean", "Isolated optic nerve lesion", "Bands negative", "Watchful follow up"]}}
+  }
+ ]
+}

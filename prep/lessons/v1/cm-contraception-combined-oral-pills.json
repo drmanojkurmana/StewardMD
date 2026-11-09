@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "id": "cm-contraception-combined-oral-pills",
+  "subject": "community-medicine",
+  "module": "cm-contraception",
+  "title": "Combined Oral Contraceptives and Mala-N in the National Programme",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "How combined pills work",
+      "tx": "**Combined oral contraceptive pills** pair a low dose estrogen (usually ethinyl estradiol twenty to thirty micrograms) with a progestogen to suppress the luteinising hormone surge and ovulation, thicken cervical mucus against sperm, and thin the endometrium. Ovulation suppression is the dominant mechanism, so missed pills near the hormone free interval endanger efficacy more than mid pack misses.",
+      "say": "Combined pills mainly stop ovulation by suppressing the hormone surge. Missed pills around the pill free week are the riskiest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "o1", "label": "Estrogen plus progestogen absorbed daily" },
+          { "id": "o2", "label": "LH surge and ovulation suppressed" },
+          { "id": "o3", "label": "Mucus thickens, endometrium thins" }
+        ],
+        "edges": [["o1", "o2"], ["o2", "o3"]]
+      }
+    },
+    {
+      "title": "Mala-N and Mala-D in India",
+      "tx": "The national programme supplies **Mala-N oral contraceptive pills** free of cost, each strip holding twenty one hormonal tablets (levonorgestrel with ethinyl estradiol) plus seven brown iron tablets for the pill free week, while Mala-D is the same formulation sold at a nominal price through social marketing. The iron week maintains the daily habit and treats anaemia, a thoughtful Indian programme detail examiners reward.",
+      "say": "Mala-N is free in government supply: twenty one hormone pills plus seven iron pills. The iron week keeps the habit and fights anaemia.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Strip segment", "Contents and purpose"],
+        "rows": [
+          ["Days 1 to 21", "Levonorgestrel plus ethinyl estradiol tablets"],
+          ["Days 22 to 28", "Ferrous fumarate (iron) tablets"],
+          ["Next strip", "Start immediately, no gap"],
+          ["Mala-D variant", "Same drug, socially marketed price"]
+        ]
+      }
+    },
+    {
+      "title": "Starting rules and missed pills",
+      "tx": "Start on day one to five of the cycle for immediate protection; later starts need seven days of backup under standard **missed pill management rules**. One missed pill means take it as soon as remembered and continue. Two or more missed in week one or three requires emergency contraception consideration, seven days of condoms, and skipping the pill free interval when the miss falls in week three.",
+      "say": "One missed pill: take it now and carry on. Several missed pills need condoms for seven days and sometimes emergency contraception.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "One pill missed",
+          "points": ["Take as soon as remembered", "Take next pill at usual time", "No backup method needed"]
+        },
+        "right": {
+          "title": "Two or more missed",
+          "points": ["Take latest pill, discard others", "Condoms for seven days", "Consider emergency contraception"]
+        }
+      }
+    },
+    {
+      "title": "Absolute contraindications (category 4)",
+      "tx": "World Health Organization category four (unacceptable risk) bars combined pills in **combined pill contraindications**: age thirty five or above smoking fifteen or more cigarettes daily, current breast cancer, severe hypertension, migraine with aura, past venous thromboembolism or stroke, decompensated liver disease, and the first twenty one days postpartum. Category three conditions such as controlled hypertension or gall bladder disease need expert balancing rather than routine supply.",
+      "say": "Smoking after thirty five, migraine with aura, past clots, and current breast cancer forbid combined pills. Blood pressure must be checked before supply.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Category 4 bar", "Reason"],
+        "rows": [
+          ["Age 35 plus heavy smoking", "Arterial thrombosis and infarction risk"],
+          ["Migraine with aura", "Ischaemic stroke risk"],
+          ["Past venous thromboembolism", "Recurrent clot risk with estrogen"],
+          ["Current breast cancer", "Hormone sensitive tumour growth"]
+        ]
+      }
+    },
+    {
+      "title": "Non contraceptive benefits",
+      "tx": "Regular pill use delivers **non contraceptive benefits of combined pills**: lighter, regular, less painful periods, less anaemia, fewer ovarian and endometrial cancers (protection persisting years after stopping), fewer benign breast and ovarian cysts, and improvement in acne and premenstrual symptoms. Against these stand small rises in venous clot risk, gall stones, and (with long use in human papillomavirus carriers) cervical cancer promotion.",
+      "say": "Pills lighten periods and protect against ovarian and endometrial cancer for years. The price is a small clotting risk that screening controls.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benefits",
+          "points": ["Regular light painless cycles", "Less ovarian and endometrial cancer", "Less anaemia and pelvic infection sequelae"]
+        },
+        "right": {
+          "title": "Risks to screen",
+          "points": ["Venous thromboembolism", "Hypertension emergence", "Gall bladder disease"]
+        }
+      }
+    },
+    {
+      "title": "Drug interactions that cause failure",
+      "tx": "Enzyme inducing drugs (rifampicin, phenytoin, carbamazepine, phenobarbitone, and the herbal St John's wort) accelerate estrogen breakdown and cause **oral contraceptive failure by drug interaction**, demanding a non oral method or higher dose specialist regimens. Broad spectrum antibiotics other than rifampicin no longer need backup under current guidance, a reversal of older textbook advice that examinations now test explicitly.",
+      "say": "Rifampicin and epilepsy drugs make pills fail. Ordinary antibiotics do not, despite what older textbooks said.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Interacting drug", "Action"],
+        "rows": [
+          ["Rifampicin (TB therapy)", "Use non oral method"],
+          ["Phenytoin, carbamazepine", "Use non oral method"],
+          ["Amoxicillin, doxycycline", "No extra precaution needed"],
+          ["St John's wort (herbal)", "Avoid or add barrier method"]
+        ]
+      }
+    },
+    {
+      "title": "Warning signs: ACHES",
+      "tx": "Every pill user learns the **ACHES warning signs of pill complications**: Abdominal pain (liver or gall bladder), Chest pain (pulmonary embolism or infarction), Headache severe (stroke or migraine), Eye problems (retinal thrombosis), and Severe leg pain (deep vein thrombosis). Any one mandates stopping the pill and urgent evaluation the same day, a counselling script printed on Indian programme flip books.",
+      "say": "Teach ACHES: abdominal, chest, head, eye, and severe leg pain. Any one means stop the pill and seek urgent care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "a1", "label": "User reports an ACHES symptom" },
+          { "id": "a2", "label": "Stop pill, same day evaluation" },
+          { "id": "a3", "label": "Switch to non hormonal method" }
+        ],
+        "edges": [["a1", "a2"], ["a2", "a3"]]
+      }
+    },
+    {
+      "title": "Progestogen only pills for lactation",
+      "tx": "Where estrogen is unsafe, the **progestogen only pill** (minipill) thickens cervical mucus within hours and suits breastfeeding mothers, smokers above thirty five, and women with migraine or clot history, at the cost of strict three hour timing discipline and irregular bleeding. Lactational amenorrhoea itself protects reliably for six months when the baby is exclusively breastfed and periods have not returned.",
+      "say": "The minipill suits breastfeeding mothers and women barred from estrogen. It demands same time dosing within a three hour window.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Combined pill",
+          "points": ["Estrogen plus progestogen", "Regular withdrawal bleeds", "Not in early breastfeeding"]
+        },
+        "right": {
+          "title": "Progestogen only pill",
+          "points": ["No estrogen, lactation safe", "Irregular bleeding common", "Three hour timing discipline"]
+        }
+      }
+    },
+    {
+      "title": "Follow up schedule for pill users",
+      "tx": "Programme **follow up of oral pill users** checks blood pressure at three months then annually, asks about ACHES symptoms, bleeding pattern, missed pills, new medicines, and smoking, and resupplies strips without insisting on pelvic examination. Healthy users can receive a year's supply at once, since continuation, not medical ritual, is what keeps the Pearl index low in real communities.",
+      "say": "Recheck blood pressure and warning symptoms, then resupply generously. Easy continuation beats repeated clinic hurdles for real world efficacy.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Follow up item", "Interval"],
+        "rows": [
+          ["Blood pressure", "At 3 months, then yearly"],
+          ["ACHES symptom review", "Every resupply visit"],
+          ["New drug interaction check", "Whenever medicines change"],
+          ["Strip resupply", "Up to one year at a time"]
+        ]
+      }
+    }
+  ]
+}
