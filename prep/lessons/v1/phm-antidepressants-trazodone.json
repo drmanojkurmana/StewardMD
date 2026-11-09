@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antidepressants",
+  "subject": "pharmacology",
+  "title": "Trazodone, MAO Inhibitors and Cheese Reaction, Esketamine, Serotonin Syndrome and Vortioxetine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Trazodone** antagonises 5 HT2A receptors and weakly inhibits reuptake, with strong H1 and alpha 1 blockade making low doses (25 to 100 mg) a widely used hypnotic and antidepressant doses (150 mg plus) a sedating alternative where SSRIs fail sexually or agitate. Its signature rare catastrophe is priapism from alpha blockade, a urological emergency every male patient deserves warned about. Postural hypotension and next day sedation discipline its elderly use.",
+      "say": "Trazodone at low dose is a sleeping tablet with an antidepressant passport; warn every man about priapism.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trazodone profile",
+          "points": [
+            "5 HT2A antagonism plus weak reuptake inhibition",
+            "Low dose hypnotic, higher dose antidepressant",
+            "Minimal sexual dysfunction",
+            "Sedation and postural hypotension dose related"
+          ]
+        },
+        "right": {
+          "title": "Trazodone warnings",
+          "points": [
+            "Priapism: rare, warn and document",
+            "Orthostasis in the elderly and volume depleted",
+            "Active metabolite mCPP can be anxiogenic",
+            "QT effects modest, combinations audited"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Monoamine oxidase inhibitors** (phenelzine, tranylcypromine, isocarboxazid) irreversibly disable the enzyme that destroys serotonin, noradrenaline and dopamine in nerve terminals, producing antidepressant power reserved for resistant and atypical depression under specialist care. Because the enzyme must be resynthesised, effects persist two weeks after stopping, governing every washout in the previous lesson. Moclobemide's reversible MAO A selectivity softens, without abolishing, the dietary and interaction fences.",
+      "say": "MAO inhibitors are irreversible, powerful and fenced; specialists drive them and washouts obey the two week rule.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "maoi",
+            "label": "Monoamine oxidase irreversibly inhibited"
+          },
+          {
+            "id": "mono",
+            "label": "Serotonin, noradrenaline and dopamine accumulate"
+          },
+          {
+            "id": "persist",
+            "label": "Enzyme resynthesis takes about 2 weeks after stopping"
+          },
+          {
+            "id": "fences",
+            "label": "Dietary and drug interaction fences persist equally"
+          }
+        ],
+        "edges": [
+          [
+            "maoi",
+            "mono"
+          ],
+          [
+            "mono",
+            "persist"
+          ],
+          [
+            "persist",
+            "fences"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **cheese reaction** is the fence's electric wire: dietary tyramine, normally destroyed by gut MAO A, reaches the circulation intact on an MAO inhibitor, storms into sympathetic terminals and ejects stored noradrenaline wholesale, producing hypertensive crisis with thunderclap headache, palpitations and stroke risk within minutes of aged cheese, cured meats, tap beers or fermented foods. Treatment is alpha blockade (phentolamine) or calcium channel vasodilatation with monitored care, never beta blockade first lest unopposed alpha worsens the surge.",
+      "say": "Tyramine on an MAO inhibitor is a noradrenaline bomb; treat with alpha blockade, never beta first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cheese reaction sequence",
+          "points": [
+            "Tyramine rich food eaten on irreversible MAOI",
+            "Gut MAO A disabled: tyramine absorbed intact",
+            "Sympathetic noradrenaline ejected wholesale",
+            "Hypertensive crisis within minutes to hours"
+          ]
+        },
+        "right": {
+          "title": "Prevention and treatment",
+          "points": [
+            "Dietary education and wallet cards carried",
+            "Sympathomimetic cold remedies also forbidden",
+            "Phentolamine or vasodilator therapy monitored",
+            "Fences continue 2 weeks after the last dose"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Serotonin syndrome** is serotonergic excess on a clinical triad: mental state change (agitation, confusion), autonomic hyperactivity (hyperthermia, tachycardia, diarrhoea) and neuromuscular hyperactivity (clonus, hyperreflexia, tremor) that outranks rigidity. Hunter's criteria centre spontaneous or inducible clonus. Culprits are combinations: SSRI with MAOI, tramadol, linezolid, triptans debated, methylene blue, or overdose. It evolves in hours, unlike NMS's days, and clonus versus lead pipe separates the two at the bedside.",
+      "say": "Clonus, heat and agitation within hours of a serotonergic stack is serotonin syndrome until excluded.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+        "alt": "SSRI and lithium action mechanisms diagram at the synapse",
+        "caption": "Serotonergic mechanisms whose excess, usually from combinations, produces serotonin syndrome."
+      }
+    },
+    {
+      "tx": "Serotonin syndrome management stops every serotonergic agent, sedates with benzodiazepines (which blunt hyperactivity and heat generation), cools aggressively, and escalates to paralysis and ventilation when temperature defies sedation, because muscle activity makes the heat. **Cyproheptadine**, a 5 HT2A antagonist, is the oral adjunct where available; antipsychotics are avoided (dopamine blockade muddies the NMS differential and some add serotonergic baggage), and physostigmine and bromocriptine are contraindicated relics.",
+      "say": "Stop the stack, sedate, cool, paralyse if needed; cyproheptadine assists and antipsychotics confuse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stop",
+            "label": "Stop all serotonergic agents immediately"
+          },
+          {
+            "id": "sedate",
+            "label": "Benzodiazepine sedation titrated to activity"
+          },
+          {
+            "id": "cool",
+            "label": "Aggressive cooling, fluids, monitor temperature"
+          },
+          {
+            "id": "paralyse",
+            "label": "Paralysis and ventilation if hyperthermia persists"
+          }
+        ],
+        "edges": [
+          [
+            "stop",
+            "sedate"
+          ],
+          [
+            "sedate",
+            "cool"
+          ],
+          [
+            "cool",
+            "paralyse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Esketamine**, the S enantiomer of ketamine as a supervised nasal spray, antagonises NMDA receptors and lifts treatment resistant depression within hours to days rather than weeks, through glutamate burst and synaptogenesis hypotheses. Dissociation, sedation, pressure rises and abuse potential confine it to certified clinics with post dose observation, on top of an oral antidepressant, for resistant disease or acute suicidal ideation reduction. It rewrote the monoamine only story of antidepressant time course.",
+      "say": "Esketamine works in hours through glutamate, inside a clinic, with dissociation watched for two of them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Esketamine profile",
+          "points": [
+            "NMDA antagonism, glutamate mediated rapid effect",
+            "Treatment resistant depression adjunct",
+            "Nasal spray in certified settings with observation",
+            "Onset hours to days, maintenance scheduled"
+          ]
+        },
+        "right": {
+          "title": "Esketamine safeguards",
+          "points": [
+            "Dissociation and sedation monitored about 2 hours",
+            "Blood pressure measured around dosing",
+            "Abuse and bladder toxicity surveillance",
+            "Never a take home first line antidepressant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vortioxetine** styles itself multimodal: reuptake inhibition plus direct receptor actions (5 HT3 antagonism, 5 HT7 antagonism, 5 HT1A agonism among them) marketed toward cognitive symptoms of depression, with nausea as its plain toll and a generally SSRI like safety body. Whether multimodality outperforms its cousins clinically remains debated, but its examination value is taxonomic: not every serotonergic drug is a pure SSRI, and receptor garnishes explain adverse effect accents across this whole module.",
+      "say": "Vortioxetine garnishes reuptake blockade with receptor actions; nausea remains, purity does not.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vortioxetine actions",
+          "points": [
+            "Serotonin reuptake inhibition at core",
+            "5 HT3 and 5 HT7 antagonism, 5 HT1A agonism",
+            "Cognitive symptom claims studied",
+            "Nausea the commonest adverse effect"
+          ]
+        },
+        "right": {
+          "title": "Class context",
+          "points": [
+            "Trazodone and mirtazapine similarly receptor led",
+            "Vilazodone pairs reuptake with 5 HT1A partial agonism",
+            "Receptor profiles predict adverse accents",
+            "Efficacy differences between agents remain modest"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Augmentation and resistance logic** closes the module: confirm diagnosis, adherence, dose and duration; switch within or across classes; then augment with lithium, atypical antipsychotics (aripiprazole, quetiapine), liothyronine in specialist hands, esketamine or ECT for severe resistant disease, each step documented against rating scales rather than impressions. Half of antidepressant success is choreography, and this lesson's interactions (serotonin syndrome, cheese reaction, washouts) police every transition.",
+      "say": "Measure, switch, augment, escalate; every transition respects the washout fences behind you.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "verify",
+            "label": "Verify diagnosis, adherence, dose and duration"
+          },
+          {
+            "id": "switch",
+            "label": "Switch within or across class with washouts"
+          },
+          {
+            "id": "augment",
+            "label": "Augment: lithium, atypical, esketamine per protocol"
+          },
+          {
+            "id": "ect",
+            "label": "ECT for severe, psychotic or refractory depression"
+          }
+        ],
+        "edges": [
+          [
+            "verify",
+            "switch"
+          ],
+          [
+            "switch",
+            "augment"
+          ],
+          [
+            "augment",
+            "ect"
+          ]
+        ]
+      }
+    }
+  ]
+}

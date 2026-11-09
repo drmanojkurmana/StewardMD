@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antidepressants",
+  "subject": "pharmacology",
+  "title": "SSRIs and Venlafaxine: Fluoxetine, Sertraline, Escitalopram, Paroxetine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Selective serotonin reuptake inhibitors block the serotonin transporter (SERT), raising synaptic serotonin within hours while antidepressant benefit accrues over two to six weeks as autoreceptors desensitise and downstream plasticity adapts, the lag patients must be counselled into surviving. **Fluoxetine**, sertraline, escitalopram and paroxetine share the mechanism and differ in half life, interactions and discontinuation manners, which is where prescribing individuality lives in this class.",
+      "say": "Transporters block today, mood lifts in weeks; choose the SSRI by its half life and interaction manners.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+        "alt": "SSRI and lithium action mechanisms diagram at the synapse",
+        "caption": "Serotonin transporter blockade at the synapse, the shared opening move of every SSRI in this lesson."
+      }
+    },
+    {
+      "tx": "**Fluoxetine** is the long distance runner: parent half life of days and norfluoxetine metabolite of one to two weeks, forgiving missed doses, self tapering on cessation, and haunting CYP2D6 substrates (and tamoxifen activation, and MAO inhibitor washouts of five weeks) long after the last capsule. That tail made it the original weekly formulation candidate and the switch destination when discontinuation symptoms plague shorter agents.",
+      "say": "Fluoxetine never really leaves quickly: forgiving for adherence, unforgiving for interactions and washouts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluoxetine conveniences",
+          "points": [
+            "Active metabolite half life 1 to 2 weeks",
+            "Missed doses barely register",
+            "Discontinuation symptoms rare, self tapering",
+            "Useful switch target for discontinuation prone patients"
+          ]
+        },
+        "right": {
+          "title": "Fluoxetine complications",
+          "points": [
+            "Potent CYP2D6 inhibition for weeks after stopping",
+            "Five week washout before MAO inhibitors",
+            "Tamoxifen activation blocked via CYP2D6",
+            "Activating early: anxiety and insomnia in some"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sertraline** balances a middle half life, modest interactions and the class's best cardiac safety dossier after myocardial infarction, becoming the default where hearts and polypharmacy argue, with dose dependent diarrhoea as its signature toll. **Escitalopram**, the S enantiomer of citalopram, offers clean pharmacology with dose dependent QT prolongation capped by age; citalopram's QT ceiling (40 mg, 20 mg over 65 years) is the stricter parent rule examiners quote.",
+      "say": "Sertraline for hearts and drug lists, escitalopram for cleanliness, QT ceilings respected in the family.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sertraline",
+          "points": [
+            "Post myocardial infarction safety evidence",
+            "Fewer CYP interactions than fluoxetine or paroxetine",
+            "Diarrhoea dose related and characteristic",
+            "Broad anxiety disorder licences"
+          ]
+        },
+        "right": {
+          "title": "Escitalopram and citalopram",
+          "points": [
+            "Escitalopram: S enantiomer, well tolerated",
+            "Dose dependent QT prolongation both agents",
+            "Citalopram capped at 40 mg, 20 mg over age 65",
+            "Hepatic impairment lowers ceilings further"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Paroxetine** is the class's difficult relation: shortest half life with no active metabolite (discontinuation symptoms fiercest), strongest CYP2D6 inhibition beside fluoxetine, anticholinergic and sedative ballast, weight gain, and the clearest teratogenic signal (first trimester cardiac malformations) that moved it down pregnancy preference lists. It remains effective, particularly for anxiety spectra, but new starts choose it last in most modern formularies for these cumulative reasons.",
+      "say": "Paroxetine works and misbehaves on every axis that matters; start it last, stop it slowest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "short",
+            "label": "Shortest half life, no active metabolite"
+          },
+          {
+            "id": "miss",
+            "label": "Missed doses trigger discontinuation symptoms within days"
+          },
+          {
+            "id": "taper",
+            "label": "Taper over weeks, liquid formulations help"
+          },
+          {
+            "id": "alt",
+            "label": "Fluoxetine switch absorbs difficult withdrawals"
+          }
+        ],
+        "edges": [
+          [
+            "short",
+            "miss"
+          ],
+          [
+            "miss",
+            "taper"
+          ],
+          [
+            "taper",
+            "alt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Shared SSRI adverse grammar**: early nausea, headache and activation or jitteriness in week one (start low in panic), sexual dysfunction in a third to a half (the leading reason for silent discontinuation, asked about directly), hyponatraemia via SIADH in the elderly, increased bleeding with NSAIDs and anticoagulants because platelets cannot load serotonin, and discontinuation syndromes graded by half life. Most early effects fade by week two, which the first review exists to testify.",
+      "say": "Ask about sex, sodium and bruising by name; week one nausea usually leaves before the mood arrives.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early and transient",
+          "points": [
+            "Nausea, headache, jitteriness in week one",
+            "Usually settle by the second week",
+            "Start low in panic disorder",
+            "Sleep disturbance either direction"
+          ]
+        },
+        "right": {
+          "title": "Persistent and structural",
+          "points": [
+            "Sexual dysfunction until dose or agent changes",
+            "Hyponatraemia risk in elderly and diuretic users",
+            "Bleeding risk stacked with NSAIDs and anticoagulants",
+            "Discontinuation symptoms on abrupt stopping"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Venlafaxine** graduates from SSRI to SNRI (serotonin noradrenaline reuptake inhibitor) as dose climbs beyond 150 mg, recruiting noradrenergic analgesia and activation, with dose dependent hypertension demanding pressure monitoring, the class's most abrupt discontinuation syndrome (its half life is five hours), and sweating, tremor and sexual effects in train. Desvenlafaxine is its active metabolite sold directly, metabolism simplified. In overdose venlafaxine seizes and prolongs QT more readily than SSRIs, a toxicology distinction worth its step.",
+      "say": "Venlafaxine earns its second letter above 150 mg, and charges hypertension and a brutal discontinuation for it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Venlafaxine profile",
+          "points": [
+            "Serotonin only at low dose, SNRI beyond 150 mg",
+            "Dose dependent blood pressure elevation",
+            "Worst in class discontinuation syndrome",
+            "Extended release smooths peaks, not withdrawal"
+          ]
+        },
+        "right": {
+          "title": "Prescribing discipline",
+          "points": [
+            "Blood pressure at baseline and after increases",
+            "Taper in small decrements over weeks",
+            "Overdose: seizures and QT effects exceed SSRIs",
+            "Avoid abrupt cessation perioperatively without planning"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Switching and stopping** obey washout physics: cross tapering is safe among most SSRIs and SNRIs, but MAO inhibitors demand two weeks after most (five after fluoxetine) before starting and two weeks after stopping before an SSRI begins, because serotonin syndrome (next lessons) is the collision being avoided. Discontinuation symptoms (dizziness, electric shock sensations, irritability, flu like malaise) are physiology, not addiction, and reinstatement relieves them within a day, proving the taper merely needs lengthening.",
+      "say": "Washouts guard against serotonin syndrome; discontinuation zaps mean slow the taper, not restart forever.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "plan",
+            "label": "Switch planned: check half lives and MAO involvement"
+          },
+          {
+            "id": "wash",
+            "label": "Washout 2 weeks, 5 after fluoxetine, before MAOI"
+          },
+          {
+            "id": "cross",
+            "label": "Cross taper permitted among SSRIs and SNRIs carefully"
+          },
+          {
+            "id": "taper",
+            "label": "Final taper slowed over weeks to months"
+          }
+        ],
+        "edges": [
+          [
+            "plan",
+            "wash"
+          ],
+          [
+            "plan",
+            "cross"
+          ],
+          [
+            "cross",
+            "taper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pregnancy and adolescence** frame the class's public controversies: untreated depression carries its own obstetric risks, SSRIs as a class show small absolute increases in persistent pulmonary hypertension of the newborn late in pregnancy, paroxetine carries the cardiac signal above, and neonatal adaptation syndrome (jitteriness, feeding difficulty) follows late exposure transiently. Adolescent prescribing carries suicidality warnings from trial meta analyses, mandating close early follow up whichever agent, fluoxetine best evidenced, is chosen.",
+      "say": "Weigh untreated illness beside small absolute drug risks, and follow adolescents weekly at the start.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pregnancy arithmetic",
+          "points": [
+            "Untreated depression: relapse and obstetric risks",
+            "Paroxetine first trimester cardiac signal",
+            "Late exposure: neonatal adaptation, transient",
+            "Small persistent pulmonary hypertension absolute increase"
+          ]
+        },
+        "right": {
+          "title": "Adolescent safeguards",
+          "points": [
+            "Fluoxetine best evidenced in youth depression",
+            "Suicidality warning class wide in labelling",
+            "Weekly early follow up and family briefing",
+            "Combined psychological therapy where available"
+          ]
+        }
+      }
+    }
+  ]
+}
