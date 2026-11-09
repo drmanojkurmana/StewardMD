@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-membrane-potentials",
+ "subject": "physiology",
+ "title": "Nernst Equation, Goldman Equation, and Resting Potential",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The electrical potential difference across a cell membrane when an individual permeant ion reaches electrochemical equilibrium is calculated by the **Nernst equation**. At equilibrium, the electrical force pulling the ion in one direction precisely balances the chemical diffusion force driving it down its concentration gradient, resulting in zero net transmembrane ionic flux.",
+   "say": "The Nernst equation calculates the equilibrium potential for a single ion, where electrical forces exactly balance chemical concentration gradients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ion",
+     "Extracellular (mmol/L)",
+     "Intracellular (mmol/L)",
+     "Equilibrium Potential (ENernst)"
+    ],
+    "rows": [
+     [
+      "Potassium (K+)",
+      "4.0 to 4.5",
+      "140 to 150",
+      "-90 to -94 mV"
+     ],
+     [
+      "Sodium (Na+)",
+      "140 to 145",
+      "10 to 14",
+      "+60 to +65 mV"
+     ],
+     [
+      "Chloride (Cl-)",
+      "105 to 110",
+      "4 to 10",
+      "-70 to -85 mV"
+     ],
+     [
+      "Calcium (Ca2+)",
+      "2.4 (1.2 ionized)",
+      "0.0001 (100 nM)",
+      "+120 to +130 mV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For a univalent cation at human body temperature of thirty-seven degrees Celsius, the equation simplifies mathematically. The equilibrium potential equals sixty-one multiplied by the logarithm to base ten of extracellular concentration divided by intracellular concentration. For potassium, with high intracellular concentration, the resulting **equilibrium potential** is negative ninety-four millivolts.",
+   "say": "At body temperature, the simplified Nernst equation multiplies sixty-one by the log of external over internal concentration, yielding minus 94 millivolts for potassium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "grad",
+      "label": "Chemical Gradient: High Intracellular Potassium Promotes Efflux"
+     },
+     {
+      "id": "charg",
+      "label": "Potassium Efflux Leaves Impermeant Protein Anions Inside Cell"
+     },
+     {
+      "id": "elec",
+      "label": "Interior Negativity Builds Electrical Gradient Opposing Further Efflux"
+     },
+     {
+      "id": "eq",
+      "label": "Equilibrium Potential Reached at -94 mV Where Net Flux is Zero"
+     }
+    ],
+    "edges": [
+     [
+      "grad",
+      "charg"
+     ],
+     [
+      "charg",
+      "elec"
+     ],
+     [
+      "elec",
+      "eq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because biological membranes are permeable to multiple ionic species simultaneously, resting potential cannot be predicted by the Nernst equation alone. The **Goldman equation**, also known as the Goldman-Hodgkin-Katz voltage equation, calculates membrane potential by factoring the concentrations and relative permeabilities of sodium, potassium, and chloride ions across the bilayer.",
+   "say": "Because membranes are permeable to multiple ions, resting potential is calculated by the Goldman equation, weighting each ion by its relative permeability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nernst Equation",
+     "points": [
+      "Applies to a single permeant ion species",
+      "Assumes membrane is solely permeable to that ion",
+      "Calculates individual equilibrium potential (Ex)",
+      "Independent of membrane permeability coefficients"
+     ]
+    },
+    "right": {
+     "title": "Goldman Equation",
+     "points": [
+      "Applies to multi-ionic physiological systems",
+      "Weights sodium, potassium, and chloride concentrations",
+      "Multiplies concentrations by relative permeabilities (P)",
+      "Calculates actual resting membrane potential (Vm)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In resting excitable tissues such as skeletal muscle fibres and large peripheral nerve axons, the **resting membrane potential** measures approximately negative seventy to negative ninety millivolts. Because the resting membrane permeability to potassium is fifty to one hundred times greater than its permeability to sodium, resting potential rests close to the potassium equilibrium potential.",
+   "say": "Resting membrane potential lies between minus 70 and minus 90 millivolts. Because resting potassium permeability is far greater than sodium, potential sits close to potassium equilibrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Excitable Tissue",
+     "Resting Membrane Potential",
+     "Dominant Resting Channel",
+     "Relative PK : PNa"
+    ],
+    "rows": [
+     [
+      "Large peripheral nerve axon",
+      "-70 mV",
+      "K2P two-pore potassium leak channels",
+      "100 : 1"
+     ],
+     [
+      "Skeletal muscle fibre",
+      "-90 mV",
+      "Inward rectifier Kir and K2P leak",
+      "100 : 1"
+     ],
+     [
+      "Ventricular cardiac myocyte",
+      "-85 to -90 mV",
+      "Inward rectifier Kir2.1 (IK1)",
+      "100 : 1"
+     ],
+     [
+      "SA nodal pacemaker cell",
+      "-55 to -60 mV",
+      "Funny channels and transient calcium",
+      "Variable cyclic permeability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The specialized non-gated channels providing high resting potassium conductance are called **potassium leak channels**, belonging to the two-pore domain K2P family. These channels remain constitutively open at negative membrane potentials, allowing continuous passive efflux of potassium ions down their steep concentration gradient, maintaining interior electrical negativity.",
+   "say": "Potassium leak channels remain constitutively open at resting voltages, allowing continuous potassium efflux that sustains intracellular negativity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "leak",
+      "label": "K2P Leak Channels Remain Open at Rest"
+     },
+     {
+      "id": "eff",
+      "label": "Continuous Outward Potassium Efflux Down Gradient"
+     },
+     {
+      "id": "pol",
+      "label": "Polarises Membrane Toward Potassium Equilibrium Potential"
+     },
+     {
+      "id": "rmp",
+      "label": "Establishes Baseline Resting Potential Near -70 to -90 mV"
+     }
+    ],
+    "edges": [
+     [
+      "leak",
+      "eff"
+     ],
+     [
+      "eff",
+      "pol"
+     ],
+     [
+      "pol",
+      "rmp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The distribution of permeant electrolytes across the plasma membrane is also influenced by large, non-diffusible intracellular protein anions. This phenomenon, known as the **Gibbs-Donnan equilibrium**, forces an unequal distribution of diffusible ions: intracellular cations exceed extracellular cations to balance fixed protein negative charges, creating an internal osmotic pressure that must be counteracted by active sodium pumping.",
+   "say": "Fixed intracellular protein anions create a Gibbs-Donnan equilibrium, skewing diffusible ion distribution and demanding active sodium pumping to prevent osmotic swelling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fixed Intracellular Anions",
+     "points": [
+      "Proteins, organic phosphates, nucleic acids",
+      "Trapped inside cell (cannot cross lipid membrane)",
+      "Carry multiple net negative charges at physiological pH",
+      "Retain diffusible potassium and exclude chloride"
+     ]
+    },
+    "right": {
+     "title": "Osmotic Consequence",
+     "points": [
+      "Total intracellular particle count increases",
+      "Generates inward osmotic water driving force",
+      "Counterbalanced by Na-K ATPase pumping sodium out",
+      "Pump failure causes Gibbs-Donnan osmotic lysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Changes in extracellular potassium concentration exert profound effects on resting membrane potential. In **hyperkalaemia**, elevated extracellular potassium narrows the concentration gradient, shifting potassium equilibrium potential to less negative values. This partially depolarises resting excitable cells, initially increasing excitability but ultimately inactivating voltage-gated sodium channels and causing cardiac arrest in diastole.",
+   "say": "Hyperkalaemia reduces the potassium concentration gradient, depolarising the resting membrane and inactivating sodium channels, threatening diastolic cardiac arrest.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Cardiac electrophysiology and ECG alterations in hyperkalaemia.",
+    "caption": "Hyperkalaemia narrowing the potassium gradient and depolarising resting cardiac membranes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency medical management of severe hyperkalaemia targets membrane electrical stability before lowering potassium stores. Administering intravenous **calcium gluconate** immediately antagonizes hyperkalaemia-induced membrane depolarisation. Calcium raises the threshold potential of cardiac myocytes, restoring the normal separation between resting potential and threshold to prevent fatal ventricular arrhythmias.",
+   "say": "Intravenous calcium gluconate stabilizes cardiac membranes in severe hyperkalaemia by raising the threshold potential, preventing fatal ventricular arrhythmias.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-emergency-correction.webp",
+    "alt": "Emergency intravenous calcium stabilization of excitable membranes.",
+    "caption": "Membrane potential stabilization with intravenous calcium in acute hyperkalaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
