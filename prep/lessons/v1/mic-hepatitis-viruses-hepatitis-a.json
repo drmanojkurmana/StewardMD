@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-hepatitis-viruses",
+  "subject": "microbiology",
+  "title": "Hepatitis A, Hepatitis B Markers, HBsAg, HBeAg and Anti-HBc IgM",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Hepatitis A virus** is a non-enveloped picornavirus spread faecal-orally through contaminated water, food and close contact. It causes acute hepatitis only, never chronic carriage. Children often have silent infection, while adults develop fever, nausea, jaundice and marked transaminase elevation. Anti-HAV IgM marks acute infection; total anti-HAV or IgG indicates past infection or vaccination. Effective vaccines exist.",
+      "say": "HAV is acute and faecal-oral; IgM makes the current diagnosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HAV course",
+          "points": [
+            "Incubation about two to six weeks",
+            "Faecal shedding greatest before jaundice",
+            "Fulminant failure is rare",
+            "No chronic hepatitis or carrier state"
+          ]
+        },
+        "right": {
+          "title": "Serology",
+          "points": [
+            "Anti HAV IgM positive in acute disease",
+            "Anti HAV IgG persists for protection",
+            "Vaccination produces IgG without IgM pattern",
+            "Household contacts may need vaccine or immunoglobulin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatitis B virus** is an enveloped partially double-stranded DNA hepadnavirus with reverse transcription. **HBsAg** is surface antigen and the screening marker of current infection. Anti-HBs is protective antibody after recovery or vaccination. Anti-HBc indicates natural exposure at some time; its IgM form supports acute infection, while total anti-HBc persists after resolved disease.",
+      "say": "HBsAg says infected now; anti-HBc says naturally exposed sometime.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HBsAg present",
+          "points": [
+            "Current HBV infection",
+            "Acute versus chronic decided by duration and IgM",
+            "HBV DNA quantifies replication",
+            "Test HBeAg and anti HBe for phase"
+          ]
+        },
+        "right": {
+          "title": "HBsAg absent",
+          "points": [
+            "Anti HBs alone suggests vaccine immunity",
+            "Anti HBc plus anti HBs suggests resolved natural infection",
+            "Isolated anti HBc needs careful interpretation",
+            "Occult infection may require HBV DNA in special settings"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HBeAg** marks high viral replication and infectivity in many HBV phases, while anti-HBe seroconversion often accompanies lower replication. HBeAg-negative chronic hepatitis can still have high DNA from precore or basal core promoter variants. HBV DNA is therefore the direct replication measure; HBeAg status alone must never be used to declare disease inactive without DNA and ALT.",
+      "say": "HBeAg is a replication clue, but HBV DNA gives the actual load.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HBeAg positive",
+          "points": [
+            "Usually high HBV DNA",
+            "High infectivity in blood exposure",
+            "May be immune tolerant or immune active by ALT",
+            "Mother to child transmission risk rises"
+          ]
+        },
+        "right": {
+          "title": "Anti HBe positive",
+          "points": [
+            "Can be inactive carriage with low DNA",
+            "Can be HBeAg negative active hepatitis",
+            "Serial ALT and DNA separate the two",
+            "Fibrosis assessment influences treatment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anti-HBc IgM** is the best serologic marker of acute hepatitis B when HBsAg may already be disappearing in the window period. In chronic infection flare, anti-HBc IgM can also be detectable at lower levels, so clinical and quantitative context matters. Isolated anti-HBc can reflect resolved infection with waned anti-HBs, false positivity, occult HBV or the acute window.",
+      "say": "Anti-HBc IgM rescues acute HBV diagnosis when HBsAg has just vanished.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute HBV pattern",
+          "points": [
+            "HBsAg positive or recently cleared",
+            "Anti HBc IgM strongly positive",
+            "ALT often very high",
+            "Anti HBs appears during recovery"
+          ]
+        },
+        "right": {
+          "title": "Chronic HBV pattern",
+          "points": [
+            "HBsAg persists beyond six months",
+            "Total anti HBc positive",
+            "Anti HBc IgM usually negative or low",
+            "Phase defined by DNA, ALT and HBeAg"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The infectious **Dane particle** is the complete 42-nanometre HBV virion, while infected serum contains far more noninfectious spherical and tubular HBsAg particles. That excess explains why HBsAg tests are sensitive screening tools. HBV DNA integrated into hepatocyte genomes and covalently closed circular DNA in nuclei make sterilising cure difficult even when plasma DNA becomes undetectable on therapy.",
+      "say": "Most HBsAg particles are empty decoys around a minority of infectious Dane particles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Particles",
+          "points": [
+            "Dane particle contains DNA and core",
+            "Spheres and filaments are HBsAg only",
+            "HBcAg is not ordinarily free in serum",
+            "HBeAg is a secreted processed core product"
+          ]
+        },
+        "right": {
+          "title": "Persistence",
+          "points": [
+            "cccDNA persists in hepatocyte nucleus",
+            "Integrated HBV DNA can produce HBsAg",
+            "Functional cure means sustained HBsAg loss",
+            "Immunosuppression can reactivate occult infection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A safe hepatitis screen records **HBsAg, anti-HBs and anti-HBc** where status matters because one marker alone leaves dangerous ambiguity, particularly before immunosuppression. Vaccinated responders show isolated anti-HBs. Resolved infection carries reactivation risk with potent B-cell depletion even if HBsAg is negative, so anti-HBc positivity changes prophylaxis decisions.",
+      "say": "Three HBV markers prevent the commonest interpretation and reactivation errors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "HBsAg, anti HBs, anti HBc"
+          },
+          {
+            "id": "dna",
+            "label": "HBV DNA if infected or occult risk"
+          },
+          {
+            "id": "stage",
+            "label": "ALT, HBeAg and fibrosis staging"
+          },
+          {
+            "id": "protect",
+            "label": "Vaccinate contacts and plan prophylaxis"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "dna"
+          ],
+          [
+            "dna",
+            "stage"
+          ],
+          [
+            "stage",
+            "protect"
+          ]
+        ]
+      }
+    }
+  ]
+}
