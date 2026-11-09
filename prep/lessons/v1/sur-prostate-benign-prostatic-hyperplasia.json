@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "sur-prostate",
+ "subject": "surgery",
+ "title": "Benign Prostatic Hyperplasia and Prostate Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Non cancerous growth of the prostate transition zone with age is **benign prostatic hyperplasia**. The enlarged gland squeezes the urethra and obstructs urine flow. Prevalence rises steadily after fifty years of age. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Benign prostatic hyperplasia grows with age and squeezes the urethra to obstruct urine flow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+    "alt": "Normal prostate compared with benign prostatic hyperplasia.",
+    "caption": "Benign prostatic hyperplasia narrowing the urethra. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Symptoms of poor storage and emptying from the lower urinary tract are grouped as **lower urinary tract symptoms**. They include frequency, urgency, night urination, weak stream and incomplete emptying. Severity does not always match prostate size. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Lower urinary tract symptoms include frequency, weak stream and night urination, and severity varies with size.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-ipss_prostate.webp",
+    "alt": "International prostate symptom score table with severity bands.",
+    "caption": "Symptom scoring in prostatic enlargement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The standard seven question symptom questionnaire is the **IPSS score**. International Prostate Symptom Score grades symptoms as mild, moderate or severe. It helps decide treatment and tracks response over time. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The IPSS score grades prostate symptoms as mild, moderate or severe and tracks response to treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Score",
+     "Severity"
+    ],
+    "rows": [
+     [
+      "0 to 7",
+      "Mild"
+     ],
+     [
+      "8 to 19",
+      "Moderate"
+     ],
+     [
+      "20 to 35",
+      "Severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs that relax smooth muscle in the prostate and bladder neck are **alpha blockers**. They improve flow within days but do not shrink the gland. Light headedness and abnormal ejaculation are recognised effects. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Alpha blockers relax prostate muscle and improve flow within days without shrinking the gland.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Alpha blocker started"
+     },
+     {
+      "id": "n1",
+      "label": "Neck muscle relaxes"
+     },
+     {
+      "id": "n2",
+      "label": "Flow improves in days"
+     },
+     {
+      "id": "n3",
+      "label": "Gland size unchanged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A drug that blocks conversion of testosterone to its stronger form is **finasteride**. By lowering dihydrotestosterone it slowly shrinks the prostate over months. It works best in larger glands and reduces retention risk. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Finasteride blocks testosterone conversion and slowly shrinks larger prostates over months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alpha blockers",
+     "points": [
+      "Relax muscle",
+      "Work within days",
+      "No size change"
+     ]
+    },
+    "right": {
+     "title": "Finasteride",
+     "points": [
+      "Blocks hormone conversion",
+      "Shrinks gland slowly",
+      "Best for large glands"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Endoscopic shaving of prostate tissue through the urethra is **TURP**. Transurethral resection of the prostate remains the reference operation for obstruction. Chips of tissue are washed out and sent for examination. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Transurethral resection shaves prostate tissue through the urethra and remains the reference operation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+    "alt": "Prostate anatomy relevant to transurethral resection.",
+    "caption": "Prostate anatomy for transurethral surgery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dilution of blood sodium by absorbed irrigation fluid during prostate surgery is the **TURP syndrome**. It causes confusion, visual disturbance and heart strain in severe cases. Modern bipolar resection with saline irrigation has greatly reduced this risk. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "TURP syndrome dilutes blood sodium through absorbed irrigation fluid, though saline bipolar surgery reduced it greatly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "TURP syndrome"
+    ],
+    "rows": [
+     [
+      "Cause",
+      "Fluid absorption"
+     ],
+     [
+      "Blood test",
+      "Low sodium"
+     ],
+     [
+      "Symptoms",
+      "Confusion, visual change"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examination of the prostate through the rectum is the **digital rectal examination**. A smooth enlarged gland with a preserved central groove favours benign growth. Hard nodules or asymmetry raise concern for cancer and need further tests. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Digital rectal examination finds a smooth enlarged gland in benign growth, while hard nodules suggest cancer.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-dre_surgical.webp",
+    "alt": "Digital rectal examination technique and findings.",
+    "caption": "Digital rectal examination of the prostate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Retention, recurrent infection, stones or kidney damage from obstruction are **absolute indications** for prostate surgery. Drugs are tried first when symptoms alone are the problem. Shared decision making weighs bother against surgical risks. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Retention, infection, stones or kidney damage mandate surgery, while symptoms alone usually start with drugs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe complication present"
+     },
+     {
+      "id": "n1",
+      "label": "Surgery indicated clearly"
+     },
+     {
+      "id": "n2",
+      "label": "Symptoms only, no complication"
+     },
+     {
+      "id": "n3",
+      "label": "Drugs tried first"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

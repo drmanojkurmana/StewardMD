@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "sur-peritoneum",
+ "subject": "surgery",
+ "title": "Acute Abdomen and Generalised Peritonitis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Sudden severe abdominal pain that may need an operation is grouped under the term **acute abdomen**. Common causes include perforation, obstruction, appendicitis, cholecystitis and a leaking aneurysm. Careful history, examination and early resuscitation run together while the cause is being found. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The acute abdomen groups sudden painful abdominal emergencies together while resuscitation and diagnosis proceed side by side.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-peritonitis_signs.webp",
+    "alt": "Examination signs of peritonitis including rebound tenderness.",
+    "caption": "Peritonitis signs: guarding and rebound tenderness on examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inflammation of the peritoneum spreading across the whole abdomen is **generalised peritonitis**. The patient lies still, breathes shallowly and has a rigid, tender abdomen with absent bowel sounds. Movement, coughing and gentle percussion all worsen the pain. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Generalised peritonitis makes the abdomen rigid and silent, and the patient lies still because any movement hurts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Peritoneal contamination"
+     },
+     {
+      "id": "n1",
+      "label": "Widespread inflammation"
+     },
+     {
+      "id": "n2",
+      "label": "Rigid tender abdomen"
+     },
+     {
+      "id": "n3",
+      "label": "Absent bowel sounds"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Free gas inside the peritoneal cavity from a perforated hollow organ is called **pneumoperitoneum**. Air rises to the highest point, so an erect chest film shows it under the diaphragm. A perforated peptic ulcer is the classic cause in adults. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Pneumoperitoneum means free gas from a perforated organ, and an erect chest film shows it under the diaphragm.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pneumoperitoneum-gas-under-diaphragm.webp",
+    "alt": "Erect chest film showing gas under the diaphragm.",
+    "caption": "Gas under the diaphragm on an erect film after perforation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The crescent of free air seen below the diaphragm is described as **air under the diaphragm**. Even a small crescent matters when the history fits perforation. If the patient cannot stand, a left lateral decubitus film can show free air over the liver instead.",
+   "say": "Air under the diaphragm, even a thin crescent, strongly suggests perforation when the history fits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "View",
+     "Patient position",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Erect chest film",
+      "Standing",
+      "Air under diaphragm"
+     ],
+     [
+      "Left lateral decubitus",
+      " Lying on left side",
+      "Air over liver edge"
+     ],
+     [
+      "Supine abdomen",
+      "Lying flat",
+      "Rigler sign may appear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A pocket of pus collecting beneath the diaphragm after abdominal sepsis is a **subphrenic abscess**. It causes swinging fever, hiccups and shoulder tip pain days after surgery or perforation. Ultrasound or computed tomography guides needle drainage in most cases. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A subphrenic abscess causes swinging fever and hiccups after abdominal sepsis, and image guided drainage treats most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Abdominal sepsis or surgery"
+     },
+     {
+      "id": "n1",
+      "label": "Pus collects under diaphragm"
+     },
+     {
+      "id": "n2",
+      "label": "Swinging fever and hiccups"
+     },
+     {
+      "id": "n3",
+      "label": "Image guided drainage"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pus collecting in the pouch of Douglas or pelvis forms a **pelvic abscess**. Patients report pelvic pressure, frequent loose stools and a boggy tender swelling felt on rectal examination. Drainage is usually through the rectum or under image guidance. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Pelvic abscesses cause pelvic pressure and loose stools, with a boggy swelling felt on rectal examination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subphrenic abscess",
+     "points": [
+      "Above the pelvis",
+      "Hiccups and shoulder pain",
+      "Drain under image guidance"
+     ]
+    },
+    "right": {
+     "title": "Pelvic abscess",
+     "points": [
+      "Lowest peritoneal pocket",
+      "Loose stools, pelvic pressure",
+      "Drain rectally or by image"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Peritoneal infection by Mycobacterium tuberculosis produces **tuberculous peritonitis**. It presents slowly with fever, weight loss, ascites and vague abdominal pain, often without an emergency. Ascitic fluid study and peritoneal biopsy usually confirm the diagnosis. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Tuberculous peritonitis develops slowly with fever, weight loss and ascites rather than as a sudden emergency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Pyogenic peritonitis",
+     "Tuberculous peritonitis"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Hours",
+      "Weeks"
+     ],
+     [
+      "Pain",
+      "Severe, rigid abdomen",
+      "Vague, doughy abdomen"
+     ],
+     [
+      "Fluid",
+      "Pus",
+      "Straw coloured ascites"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fluid resuscitation, antibiotics and analgesia given early form the base of **initial resuscitation**. A nasogastric tube eases vomiting, and a urinary catheter tracks urine output. These steps stabilise the patient while imaging and theatre are arranged. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Early fluids, antibiotics, analgesia, a stomach tube and a catheter stabilise the patient while theatre is arranged.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Intravenous fluids started"
+     },
+     {
+      "id": "n1",
+      "label": "Antibiotics and analgesia given"
+     },
+     {
+      "id": "n2",
+      "label": "Nasogastric tube and catheter placed"
+     },
+     {
+      "id": "n3",
+      "label": "Imaging and theatre arranged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Opening the abdomen to find and treat the cause is an **exploratory laparotomy**. Surgeons control contamination, wash out pus and remove dead tissue. When the diagnosis is clear and the patient is suitable, keyhole surgery may achieve the same goals. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Exploratory laparotomy controls contamination and removes dead tissue, though keyhole surgery suits selected patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Laparotomy",
+     "points": [
+      "Open operation",
+      "Full access to abdomen",
+      "Best when diagnosis unclear"
+     ]
+    },
+    "right": {
+     "title": "Laparoscopy",
+     "points": [
+      "Keyhole operation",
+      "Smaller wounds, faster recovery",
+      "Best when diagnosis is likely"
+     ]
+    }
+   }
+  }
+ ]
+}

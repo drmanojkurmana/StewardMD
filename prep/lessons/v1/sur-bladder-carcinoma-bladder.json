@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "sur-bladder",
+ "subject": "surgery",
+ "title": "Carcinoma Bladder: Presentation and Treatment",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The commonest bladder cancer arising from the inner lining is **transitional cell carcinoma**. It lines the whole urinary tract, so tumours can appear in bladder, ureter and kidney pelvis. Smoking is the strongest risk factor. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Transitional cell carcinoma lines the whole urinary tract, and smoking remains its strongest risk factor.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urooncology-bladder-kidney-testis-fig1.webp",
+    "alt": "Bladder tumour seen at cystoscopy.",
+    "caption": "Bladder tumour seen through a cystoscope. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Visible blood in urine without any pain is **painless haematuria**. It is the presenting feature in most bladder cancers and always needs investigation. Even one episode in an older adult should not be dismissed. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Painless visible blood in urine presents most bladder cancers and always needs investigation, even once.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Blood seen in urine"
+     },
+     {
+      "id": "n1",
+      "label": "No pain felt"
+     },
+     {
+      "id": "n2",
+      "label": "Cystoscopy arranged"
+     },
+     {
+      "id": "n3",
+      "label": "Cancer excluded or found"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Workers exposed to industrial dyes and rubber chemicals face risk from **aromatic amines**. These substances concentrate in urine and damage the bladder lining over years. Long latency means cancers appear decades after exposure. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Aromatic amines from dye and rubber work concentrate in urine and cause bladder cancer decades later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Tobacco smoke",
+      "Strongest common risk"
+     ],
+     [
+      "Aromatic amines",
+      "Dye and rubber workers"
+     ],
+     [
+      "Cyclophosphamide",
+      "Drug related risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic infection with the water snail parasite causes **Schistosoma haematobium** bladder disease. Years of inflammation drive the lining toward squamous cancer rather than the usual type. It remains important in parts of Africa and the Middle East. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Schistosoma haematobium causes chronic bladder inflammation that drives squamous cancer in endemic regions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Usual bladder cancer",
+     "points": [
+      "Transitional cell type",
+      "Smoking related",
+      "Papillary growth"
+     ]
+    },
+    "right": {
+     "title": "Schistosomal cancer",
+     "points": [
+      "Squamous cell type",
+      "Chronic parasite inflammation",
+      "Endemic regions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A bladder cancer made of flat keratin producing cells is **squamous carcinoma bladder**. It follows chronic irritation from stones, catheters or parasites. It tends to be muscle invasive when found. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Squamous carcinoma of the bladder follows chronic irritation and tends to invade muscle when found.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Squamous cancer"
+    ],
+    "rows": [
+     [
+      "Cause",
+      "Chronic irritation"
+     ],
+     [
+      "Behaviour",
+      "Often muscle invasive"
+     ],
+     [
+      "Regions",
+      "Schistosomiasis areas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endoscopic removal of a bladder tumour through the urethra is **TURBT**. Transurethral resection of bladder tumour both diagnoses and stages the disease. Muscle in the specimen tells whether invasion has occurred. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Transurethral resection removes bladder tumours for diagnosis and staging, with muscle showing invasion depth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Scope through urethra"
+     },
+     {
+      "id": "n1",
+      "label": "Tumour resected in pieces"
+     },
+     {
+      "id": "n2",
+      "label": "Muscle sampled for depth"
+     },
+     {
+      "id": "n3",
+      "label": "Stage guides next treatment"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Live tuberculosis vaccine washed into the bladder to prevent recurrence is **intravesical BCG**. It provokes a local immune attack on tumour cells after resection of high risk surface tumours. Flu like symptoms and bladder irritation are common effects. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Intravesical BCG provokes a local immune attack after resection of high risk surface bladder tumours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Intravesical BCG",
+      "High risk surface tumour"
+     ],
+     [
+      "Intravesical chemotherapy",
+      "Lower risk recurrence"
+     ],
+     [
+      "Cystectomy",
+      "Muscle invasive disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tumours limited to the lining without muscle invasion are called **non muscle invasive** cancers. They recur often but progress less frequently. Regular cystoscopic surveillance catches recurrence early. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Non muscle invasive cancers recur often but progress less, so regular cystoscopy surveillance catches them early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bladder-cancer-fig1.webp",
+    "alt": "Urothelial carcinoma sites and types across the urinary tract.",
+    "caption": "Urothelial carcinoma: sites and types across the urinary tract. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cancer growing into the bladder muscle layer is **muscle invasive bladder cancer**. It can spread to nodes and distant organs, so radical treatment is needed. Chemotherapy before surgery improves survival in suitable patients. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Muscle invasive bladder cancer can spread widely, so radical treatment with chemotherapy is needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surface cancer",
+     "points": [
+      "Lining only",
+      "Resect and watch",
+      "Recurs often"
+     ]
+    },
+    "right": {
+     "title": "Muscle invasive cancer",
+     "points": [
+      "Muscle involved",
+      "Radical treatment",
+      "Spread risk high"
+     ]
+    }
+   }
+  }
+ ]
+}

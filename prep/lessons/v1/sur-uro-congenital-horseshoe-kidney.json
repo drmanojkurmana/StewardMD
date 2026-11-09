@@ -1,0 +1,289 @@
+{
+ "v": 1,
+ "module": "sur-uro-congenital",
+ "subject": "surgery",
+ "title": "Congenital Anomalies of the Urinary Tract",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fusion of the lower poles of the two kidneys across the midline forms a **horseshoe kidney**. The joined isthmus lies in front of the great vessels and stops the kidneys rising to their normal level. Most people never know they have one unless a scan is done.",
+   "say": "A horseshoe kidney joins both lower poles across the midline, and most people only discover it on a scan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Fusion",
+      "Lower poles joined"
+     ],
+     [
+      "Position",
+      "Lower than normal"
+     ],
+     [
+      "Symptoms",
+      "Usually none"
+     ],
+     [
+      "Risks",
+      "Stones and obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete failure of one kidney to develop is called **renal agenesis**. The opposite kidney grows larger to compensate and usually gives normal function. Bilateral agenesis is incompatible with life because no urine fills the amniotic sac. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Renal agenesis leaves one kidney absent, and the other grows larger to keep overall function normal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "One kidney fails to develop"
+     },
+     {
+      "id": "n1",
+      "label": "Opposite kidney enlarges"
+     },
+     {
+      "id": "n2",
+      "label": "Single kidney does the work"
+     },
+     {
+      "id": "n3",
+      "label": "Function usually normal"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A kidney lying outside its normal loin position is an **ectopic kidney**. It most often sits in the pelvis and may be found during pelvic examination or scanning. Ectopic kidneys drain poorly and are prone to stones and infection. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "An ectopic kidney sits in the pelvis instead of the loin and is prone to stones and infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ectopic kidney",
+     "points": [
+      "Born in wrong position",
+      "Often pelvic",
+      "Poor drainage, stones"
+     ]
+    },
+    "right": {
+     "title": "Crossed ectopia",
+     "points": [
+      "Kidney crosses midline",
+      "May fuse with other side",
+      "Often silent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Two separate collecting systems draining one kidney form a **duplex system**. The upper part often drains into an abnormal low opening while the lower part tends to reflux. Many duplex systems cause no trouble and need no treatment. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "A duplex system gives one kidney two drainage systems, though many cause no trouble at all.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Common problem"
+    ],
+    "rows": [
+     [
+      "Upper moiety",
+      "Obstruction, ectopic opening"
+     ],
+     [
+      "Lower moiety",
+      "Reflux of urine"
+     ],
+     [
+      "Whole kidney",
+      "Often normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A balloon like swelling of the lower ureter inside the bladder is a **ureterocele**. It can block urine flow and cause infection, especially in children with duplex systems. Small ones may only need observation while obstructing ones need endoscopic opening. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A ureterocele balloons inside the bladder and can block urine flow, especially in children with duplex systems.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lower ureter balloons"
+     },
+     {
+      "id": "n1",
+      "label": "Urine flow blocked"
+     },
+     {
+      "id": "n2",
+      "label": "Infection may follow"
+     },
+     {
+      "id": "n3",
+      "label": "Endoscopic opening if obstructing"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Narrowing where the renal pelvis joins the ureter is **pelviureteric junction obstruction**. It causes loin pain after drinking large volumes and slowly stretches the kidney. Untreated obstruction gradually destroys kidney tissue. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Pelviureteric junction obstruction narrows the kidney outlet, causing loin pain after drinks and slow kidney damage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-intravenous-urogram-hydronephrosis.webp",
+    "alt": "Intravenous urogram showing hydronephrosis from pelviureteric junction obstruction.",
+    "caption": "Hydronephrosis on urogram from junction obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The standard operation that removes the narrowed segment and rejoins the ureter widely is the **Anderson-Hynes pyeloplasty**. It creates a funnel shaped, dependent drainage path for urine. Success rates are high in both children and adults. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Anderson-Hynes pyeloplasty removes the narrowed segment and rebuilds a wide funnel for urine drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Narrowed segment removed"
+     },
+     {
+      "id": "n1",
+      "label": "Ureter spatulated widely"
+     },
+     {
+      "id": "n2",
+      "label": "Funnel shaped join created"
+     },
+     {
+      "id": "n3",
+      "label": "Dependent drainage restored"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A nuclear medicine scan that tracks tracer washout from the kidney is the **DTPA renogram**. Poor washout that improves after a water pill suggests a drainage problem rather than a dead kidney. It also tells how much each kidney contributes. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "A DTPA renogram tracks tracer washout and shows both drainage and each kidney share of function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Renogram finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Good washout",
+      "No obstruction"
+     ],
+     [
+      "Slow washout, improves with diuretic",
+      "Dilatation without block"
+     ],
+     [
+      "Slow washout, no improvement",
+      "True obstruction likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A ureter passing behind the inferior vena cava is a **retrocaval ureter**. The vein compresses it and causes right sided kidney swelling. Surgery divides and rejoins the ureter in front of the vein to restore drainage. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "A retrocaval ureter passes behind the great vein, gets compressed, and needs surgical rejoining in front.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retrocaval ureter",
+     "points": [
+      "Ureter behind vena cava",
+      "Right kidney swells",
+      "Surgery rejoins in front"
+     ]
+    },
+    "right": {
+     "title": "Megaureter",
+     "points": [
+      "Ureter widely dilated",
+      "May reflux or obstruct",
+      "Treatment depends on function"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gross underdevelopment of the bladder with exposed mucosa at birth is **bladder exstrophy**. It occurs with epispadias, where the urethra opens on the upper surface of the penis. Early surgical closure and later reconstruction aim to protect kidneys and continence. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Bladder exstrophy exposes the bladder at birth with epispadias, and staged surgery protects kidneys and continence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Bladder exstrophy",
+      "Bladder exposed at birth"
+     ],
+     [
+      "Epispadias",
+      "Urethra opens dorsally"
+     ],
+     [
+      "Cloacal exstrophy",
+      "Bowel also exposed"
+     ]
+    ]
+   }
+  }
+ ]
+}

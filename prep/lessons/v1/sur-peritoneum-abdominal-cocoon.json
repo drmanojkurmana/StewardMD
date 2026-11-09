@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "sur-peritoneum",
+ "subject": "surgery",
+ "title": "Abdominal Cocoon, Carcinomatosis and Retroperitoneal Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Encasement of small bowel loops inside a thick fibrous membrane is called an **abdominal cocoon**. Patients present with repeated episodes of intestinal obstruction, weight loss and a vague abdominal mass. Computed tomography shows clustered bowel loops wrapped in a membrane. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "An abdominal cocoon wraps small bowel in a fibrous membrane and causes repeated bouts of obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Recurrent obstruction, weight loss"
+     ],
+     [
+      "Examination",
+      "Vague central mass"
+     ],
+     [
+      "CT scan",
+      "Clustered loops in a membrane"
+     ],
+     [
+      "Treatment",
+      "Careful membrane excision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgery for an abdominal cocoon centres on careful **membrane excision**. The fibrous sheet is peeled away and the bowel freed without resection whenever possible. Aggressive dissection risks bowel injury, so patience matters more than speed in this operation. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Cocoon surgery means patiently peeling the membrane away and freeing bowel without resection whenever possible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Clustered bowel in membrane"
+     },
+     {
+      "id": "n1",
+      "label": "Careful membrane excision"
+     },
+     {
+      "id": "n2",
+      "label": "Bowel freed loop by loop"
+     },
+     {
+      "id": "n3",
+      "label": "Resection only if bowel damaged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Widespread seeding of cancer across the peritoneal surface is termed **peritoneal carcinomatosis**. It commonly comes from stomach, colon, ovarian or appendiceal cancers and causes ascites with progressive obstruction. The extent of seeding guides whether aggressive treatment is worthwhile. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Peritoneal carcinomatosis seeds cancer across the peritoneum, causing ascites and obstruction from gut or ovarian primaries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary cancer",
+     "Typical spread"
+    ],
+    "rows": [
+     [
+      "Stomach",
+      "Peritoneum and ovaries"
+     ],
+     [
+      "Colon",
+      "Peritoneum and liver"
+     ],
+     [
+      "Ovary",
+      "Peritoneum and ascites"
+     ],
+     [
+      "Appendix",
+      "Pseudomyxoma peritonei"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Heated chemotherapy washed through the abdomen during surgery is known as **HIPEC**. It follows complete removal of visible peritoneal tumour in selected patients. The heat increases drug effect on microscopic deposits while limiting exposure to the rest of the body. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "HIPEC washes heated chemotherapy through the abdomen after visible tumour removal to treat microscopic deposits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Visible tumour removed"
+     },
+     {
+      "id": "n1",
+      "label": "Heated chemotherapy circulated"
+     },
+     {
+      "id": "n2",
+      "label": "Microscopic deposits treated"
+     },
+     {
+      "id": "n3",
+      "label": "Reserved for selected patients"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thick fibrous tissue growing around the aorta and ureters is **retroperitoneal fibrosis**. It slowly squeezes the ureters and causes kidney obstruction with vague back pain. Steroids often shrink the tissue, and stents or surgery free trapped ureters. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Retroperitoneal fibrosis wraps the aorta and ureters, slowly obstructing the kidneys until steroids or stents relieve it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/retroperitoneal-fibrosis-fig1.webp",
+    "alt": "Retroperitoneal fibrosis surrounding the aorta and ureters.",
+    "caption": "Retroperitoneal fibrosis: fibrous tissue encases aorta and ureters. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A fluid filled sac arising within the mesentery is a **mesenteric cyst**. Many cause no symptoms and are found on scans done for other reasons. Large cysts cause pain or obstruction and are removed completely to prevent recurrence. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Mesenteric cysts often cause no symptoms, though large ones cause pain or obstruction and need complete removal.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-mesenteric_omental_cyst.webp",
+    "alt": "Mesenteric and omental cyst examination showing Tillaux triad mobility.",
+    "caption": "Mesenteric cyst: mobility across the mesenteric attachment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bleeding into the rectus sheath below the arcuate line forms a **rectus sheath haematoma**. It follows coughing, straining or anticoagulant use and causes a painful abdominal wall swelling. The swelling stays palpable when the patient tenses the abdominal muscles. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "A rectus sheath haematoma causes a painful wall swelling that stays palpable when the muscles are tensed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rectus sheath haematoma",
+     "points": [
+      "Abdominal wall swelling",
+      "Stays palpable on tensing",
+      "Often after coughing or anticoagulants"
+     ]
+    },
+    "right": {
+     "title": "Intra abdominal mass",
+     "points": [
+      "Inside the cavity",
+      "Hidden when muscles tense",
+      "Moves with organs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Separation of the two rectus muscles without a true fascial defect is **divarication of recti**. It appears as a midline ridge when the patient sits up and is common after pregnancy. Because there is no narrow neck, strangulation does not occur and surgery is cosmetic only.",
+   "say": "Divarication of recti is a harmless midline separation after pregnancy, with no neck and no strangulation risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Rectus muscles separated"
+     },
+     {
+      "id": "n1",
+      "label": "Midline ridge on sitting up"
+     },
+     {
+      "id": "n2",
+      "label": "No fascial defect"
+     },
+     {
+      "id": "n3",
+      "label": "Reassurance, surgery rarely needed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A scoring system that maps tumour spread across abdominal regions is the **peritoneal cancer index**. Surgeons use it to judge whether complete tumour removal is feasible. High scores usually mean surgery with heated chemotherapy is unlikely to help. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The peritoneal cancer index maps tumour spread and helps judge whether complete removal is realistically feasible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index result",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Low score",
+      "Complete removal may be possible"
+     ],
+     [
+      "Moderate score",
+      "Selected patients may benefit"
+     ],
+     [
+      "High score",
+      "Surgery unlikely to help"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-urolithiasis",
+ "subject": "surgery",
+ "title": "Flexible Stone Surgery, Stents and Expulsive Therapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Flexible scope surgery performed backwards up the ureter into the kidney is **RIRS**. Retrograde intrarenal surgery uses a bendable scope and laser to dust kidney stones without any skin cut. It suits stones that shock waves cannot clear. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Retrograde intrarenal surgery threads a bendable scope into the kidney and lasers stones without any skin cut.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urinary-stones-eswl-urs-pcnl-fig1.webp",
+    "alt": "Endoscopic and shock wave options for kidney stones.",
+    "caption": "Flexible endoscopic stone surgery inside the kidney. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A soft tube left inside the ureter with coils at both ends is a **DJ stent**. The double J stent keeps urine flowing past swelling or fragments after stone surgery. It is removed weeks later with a telescope through the bladder. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "A double J stent keeps urine flowing after stone surgery and comes out weeks later through the bladder.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stent placed after surgery"
+     },
+     {
+      "id": "n1",
+      "label": "Urine flows past swelling"
+     },
+     {
+      "id": "n2",
+      "label": "Fragments pass safely"
+     },
+     {
+      "id": "n3",
+      "label": "Stent removed endoscopically"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug treatment that helps a small ureteric stone pass on its own is **medical expulsive therapy**. It combines pain relief, fluids and sometimes a relaxing drug for the ureter. Most stones under five millimetres pass without any procedure. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Medical expulsive therapy helps small stones pass with pain relief and fluids, and most tiny stones pass alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stone size",
+     "Likely course"
+    ],
+    "rows": [
+     [
+      "Under 5 mm",
+      "Usually passes alone"
+     ],
+     [
+      "5 to 10 mm",
+      "May need help"
+     ],
+     [
+      "Over 10 mm",
+      "Procedure usually needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The alpha blocker most used to relax the lower ureter and help stones pass is **tamsulosin**. By easing ureteric spasm it can shorten the time to stone passage. It may cause light headedness when standing quickly. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Tamsulosin relaxes the lower ureter to help stones pass, though it can cause light headedness on standing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alpha-blockers-pharmacology-fig1.webp",
+    "alt": "Alpha blocker mechanism relaxing smooth muscle.",
+    "caption": "Alpha blockers relax ureteric smooth muscle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A stone forming inside the bladder itself is a **vesical calculus**. Bladder stones usually follow poor emptying from prostate enlargement or a foreign body. They cause frequency, interrupted stream and blood at the end of urination. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "A vesical calculus forms inside a poorly emptying bladder and causes frequency with an interrupted stream.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bladder empties poorly"
+     },
+     {
+      "id": "n1",
+      "label": "Urine stagnates"
+     },
+     {
+      "id": "n2",
+      "label": "Stone forms inside bladder"
+     },
+     {
+      "id": "n3",
+      "label": "Frequency and interrupted stream"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Open removal of a large bladder stone through a suprapubic cut is **cystolithotomy**. Most bladder stones today are crushed endoscopically instead. The cause of poor emptying, often the prostate, must also be treated or stones return. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Cystolithotomy removes large bladder stones openly, but the cause of poor emptying must also be treated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic crushing",
+     "points": [
+      "Through the urethra",
+      "Most bladder stones",
+      "No abdominal cut"
+     ]
+    },
+    "right": {
+     "title": "Open cystolithotomy",
+     "points": [
+      "Suprapubic cut",
+      "Very large stones",
+      "Treat prostate cause too"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A kidney swollen with urine because its outflow is blocked shows **hydronephrosis**. Ultrasound first shows the stretched collecting system. Long standing obstruction thins the kidney tissue and reduces function. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Hydronephrosis means a kidney swollen with trapped urine, and long obstruction thins its tissue.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-intravenous-urogram-hydronephrosis.webp",
+    "alt": "Urogram showing a hydronephrotic kidney.",
+    "caption": "Hydronephrosis: swollen kidney from blocked outflow. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fever in a patient with an obstructed kidney signals an **obstructed infected kidney**. This combination can progress to severe sepsis within hours. Urgent drainage plus antibiotics takes priority over definitive stone removal. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Fever with an obstructed kidney can become severe sepsis within hours, so urgent drainage comes first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Blocked kidney plus fever"
+     },
+     {
+      "id": "n1",
+      "label": "Sepsis risk is high"
+     },
+     {
+      "id": "n2",
+      "label": "Antibiotics and urgent drainage"
+     },
+     {
+      "id": "n3",
+      "label": "Stone surgery postponed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pain relief for ureteric colic works best with anti inflammatory drugs, a principle called **stepwise analgesia**. These drugs reduce ureteric spasm and pressure as well as pain. Opioids are reserved for pain that simpler drugs cannot control. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Anti inflammatory drugs relieve colic best by reducing ureteric pressure, with opioids kept in reserve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "First",
+      "Anti inflammatory drug"
+     ],
+     [
+      "Second",
+      "Add simple analgesic"
+     ],
+     [
+      "Third",
+      "Opioid if still severe"
+     ]
+    ]
+   }
+  }
+ ]
+}

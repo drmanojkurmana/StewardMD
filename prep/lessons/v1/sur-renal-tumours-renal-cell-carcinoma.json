@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sur-renal-tumours",
+ "subject": "surgery",
+ "title": "Renal Cell Carcinoma and Benign Renal Tumours",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The commonest malignant kidney tumour in adults is **renal cell carcinoma**. It arises from the lining cells of the kidney tubules and grows silently for years. Many cases are now found by chance on scans done for other reasons. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Renal cell carcinoma is the commonest adult kidney cancer and many cases now appear by chance on scans.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-renal-cell-carcinoma.webp",
+    "alt": "Renal cell carcinoma specimen showing clear cell tumour.",
+    "caption": "Renal cell carcinoma: clear cell tumour of the kidney. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The commonest microscopic type, with cells full of clear looking glycogen and fat, is **clear cell carcinoma**. It links strongly to loss of the von Hippel-Lindau gene on chromosome 3. This loss drives blood vessel growth within the tumour. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Clear cell carcinoma follows von Hippel-Lindau gene loss, which drives rich blood vessel growth in the tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Clear cell",
+      "Commonest, VHL gene loss"
+     ],
+     [
+      "Papillary",
+      "Finger like growth pattern"
+     ],
+     [
+      "Chromophobe",
+      "Pale cells, better outlook"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loose blood in urine, loin pain and a palpable mass together form the **classic triad**. All three appear together in only a minority of patients, usually with advanced disease. Any painless visible blood in urine still needs full investigation. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The classic triad of blood in urine, loin pain and a mass appears together in only a minority of patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Painless blood in urine"
+     },
+     {
+      "id": "n1",
+      "label": "Loin pain develops"
+     },
+     {
+      "id": "n2",
+      "label": "Mass becomes palpable"
+     },
+     {
+      "id": "n3",
+      "label": "Often advanced disease"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A left sided varicocele that does not empty on lying down suggests **left varicocele** from tumour blocking the left renal vein. Tumour can grow as a cord inside the vein toward the heart. This venous growth changes staging and surgical planning. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "A left varicocele that stays full on lying down warns of tumour blocking the left renal vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple varicocele",
+     "points": [
+      "Empties on lying down",
+      "Usually harmless",
+      "Common in young men"
+     ]
+    },
+    "right": {
+     "title": "Tumour related varicocele",
+     "points": [
+      "Stays full on lying down",
+      "Vein blocked by tumour",
+      "Needs kidney imaging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extra red blood cell production driven by tumour erythropoietin is **paraneoplastic polycythaemia**. Renal cancers also cause fever, weight loss and high calcium without any spread. These general effects are called paraneoplastic syndromes. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Paraneoplastic polycythaemia comes from tumour made erythropoietin, one of several general effects of kidney cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Polycythaemia",
+      "Erythropoietin production"
+     ],
+     [
+      "High calcium",
+      "Parathyroid related protein"
+     ],
+     [
+      "Fever",
+      "Tumour cytokines"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reversible liver test disturbance without liver spread is called **Stauffer syndrome**. Blood tests improve after the kidney tumour is removed. Its presence does not by itself mean cancer has spread to the liver. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Stauffer syndrome disturbs liver tests without liver spread, and tests improve after the tumour is removed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Kidney tumour present"
+     },
+     {
+      "id": "n1",
+      "label": "Liver tests disturbed"
+     },
+     {
+      "id": "n2",
+      "label": "No liver metastases"
+     },
+     {
+      "id": "n3",
+      "label": "Tests normalise after surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An inherited condition with kidney cancers and cysts in many organs is **von Hippel-Lindau** disease. Affected people develop tumours in the kidney, adrenal gland, pancreas and back of the eye. Family screening finds lesions early. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Von Hippel-Lindau disease causes kidney cancers with tumours in the adrenal, pancreas and eye, so families need screening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tuberous-sclerosis-complex-fig1.webp",
+    "alt": "Tuberous sclerosis complex features including renal angiomyolipomas.",
+    "caption": "Inherited tumour syndromes affecting the kidney. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complete removal of the kidney with its surrounding fat is a **radical nephrectomy**. It remains standard for large tumours confined to the kidney. The adrenal gland is removed only when involved or at high risk. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Radical nephrectomy removes the kidney with surrounding fat and stays standard for large confined tumours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/renal-cell-carcinoma-and-nephron-sparing-surgery-fig1.webp",
+    "alt": "Partial nephrectomy for renal carcinoma preserving kidney tissue.",
+    "caption": "Nephron sparing surgery for suitable kidney tumours. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Removal of only the tumour with a margin of normal tissue is a **partial nephrectomy**. It preserves kidney function and suits small tumours, single kidneys and bilateral disease. Warm ischaemia time is kept short to protect the remaining kidney. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Partial nephrectomy removes only the tumour to preserve kidney function in small or bilateral disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Radical nephrectomy",
+     "points": [
+      "Whole kidney removed",
+      "Large tumours",
+      "Simpler operation"
+     ]
+    },
+    "right": {
+     "title": "Partial nephrectomy",
+     "points": [
+      "Tumour only removed",
+      "Kidney function preserved",
+      "Small or bilateral tumours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A targeted drug blocking blood vessel growth signals used in advanced disease is **sunitinib**. Modern treatment often pairs such drugs with immune therapy. Benign fat and muscle tumours called angiomyolipomas, linked to tuberous sclerosis, usually need treatment only when large or bleeding, while simple round oncocytomas may only need surveillance.",
+   "say": "Sunitinib blocks vessel growth in advanced cancer, while benign angiomyolipomas usually need treatment only when large.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Nature"
+    ],
+    "rows": [
+     [
+      "Angiomyolipoma",
+      "Benign, fat and vessels"
+     ],
+     [
+      "Oncocytoma",
+      "Benign, may observe"
+     ],
+     [
+      "Clear cell carcinoma",
+      "Malignant, needs surgery"
+     ]
+    ]
+   }
+  }
+ ]
+}
