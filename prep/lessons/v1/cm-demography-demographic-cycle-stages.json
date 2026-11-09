@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "id": "cm-demography-demographic-cycle-stages",
+  "subject": "community-medicine",
+  "module": "cm-demography",
+  "title": "Demographic Cycle, Census, Sex Ratio, and Dependency Ratio",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The five stages of the demographic cycle",
+      "tx": "Populations move through five stages as birth and death rates shift, a sequence called the **demographic cycle**. Stage one pairs high births with high deaths, stage two keeps births high while deaths fall, stage three lowers births with deaths already low, stage four balances low births against low deaths, and stage five lets deaths exceed births. India sits in late stage three.",
+      "say": "The demographic cycle has five stages. India is in late stage three, where births are falling but population momentum still pushes growth.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Stage", "Birth and death pattern"],
+        "rows": [
+          ["1: High stationary", "High birth rate, high death rate, no growth"],
+          ["2: Early expanding", "Births high, deaths falling, rapid growth"],
+          ["3: Late expanding", "Births falling, deaths low, growth slows"],
+          ["4: Low stationary", "Low births, low deaths, near zero growth"],
+          ["5: Declining", "Deaths exceed births, population shrinks"]
+        ]
+      }
+    },
+    {
+      "title": "Census 2011 as the demographic backbone",
+      "tx": "The **Census of India 2011** counted one point two one billion people with a decadal growth of seventeen point seven percent, density of three hundred eighty two per square kilometre, and overall sex ratio of nine hundred forty three females per thousand males. The census runs every ten years, with a houselisting phase followed by population enumeration, and it remains the denominator source for almost every health rate.",
+      "say": "Census 2011 counted one hundred twenty one crore people. Its sex ratio of nine hundred forty three guides every denominator a health manager uses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "c1", "label": "Houselisting and housing census phase" },
+          { "id": "c2", "label": "Population enumeration of every person" },
+          { "id": "c3", "label": "Tables published for planning denominators" }
+        ],
+        "edges": [["c1", "c2"], ["c2", "c3"]]
+      }
+    },
+    {
+      "title": "Sex ratio and child sex ratio",
+      "tx": "The **sex ratio in India** expresses females per thousand males; nine hundred forty three overall in 2011 hides a worse child sex ratio of nine hundred nineteen for ages zero to six years. Sex selective abortion drives the child deficit in prosperous northwest states, while Kerala records a favourable one thousand eighty four. A falling child sex ratio is treated as a social emergency indicator.",
+      "say": "Overall sex ratio was nine hundred forty three, but the child sex ratio fell to nine hundred nineteen. That gap exposes sex selective abortion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Overall sex ratio",
+          "points": ["943 females per 1000 males in 2011", "Kerala highest at 1084", "Reflects survival across all ages"]
+        },
+        "right": {
+          "title": "Child sex ratio (0 to 6 years)",
+          "points": ["919 girls per 1000 boys in 2011", "Falling for five decades", "Lowest in Haryana and Punjab"]
+        }
+      }
+    },
+    {
+      "title": "Dependency ratio explained",
+      "tx": "The **dependency ratio** divides the dependent population (children under fifteen plus elders above sixty four, or above fifty nine in Indian usage) by the working age population, multiplied by one hundred. A high ratio means each worker supports more non earners. India's demographic dividend describes the decades when the working age share bulges and dependency falls, opening a window for savings and growth if jobs and skills follow.",
+      "say": "Dependency ratio counts dependents per hundred workers. India's dividend window opened as the working age share rose and dependency fell.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "d1", "label": "Count under 15 plus elderly dependents" },
+          { "id": "d2", "label": "Divide by population aged 15 to 59" },
+          { "id": "d3", "label": "Multiply by 100 for the ratio" }
+        ],
+        "edges": [["d1", "d2"], ["d2", "d3"]]
+      }
+    },
+    {
+      "title": "Growth rate and doubling time",
+      "tx": "The **annual population growth rate** equals the crude birth rate minus the crude death rate plus net migration, expressed per hundred population; India's rate has fallen below one percent in recent Sample Registration System reports. At one percent growth a population doubles in about seventy years by the rule of seventy, while two percent halves that interval to thirty five years, an arithmetic every planner should carry mentally.",
+      "say": "Growth rate is births minus deaths plus migration. Divide seventy by the growth rate to get the doubling time in years.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Growth rate", "Doubling time"],
+        "rows": [
+          ["0.5 percent a year", "About 140 years"],
+          ["1 percent a year", "About 70 years"],
+          ["2 percent a year", "About 35 years"],
+          ["3 percent a year", "About 23 years"]
+        ]
+      }
+    },
+    {
+      "title": "Population momentum",
+      "tx": "Even at replacement fertility, a young population keeps growing for decades because large cohorts enter reproductive ages; this built in force is **population momentum**. India will therefore add people until mid century despite a total fertility rate already near two point zero. Momentum explains why family welfare effort must continue after fertility targets are met, shifting focus to spacing, ageing, and urban services.",
+      "say": "Momentum keeps numbers rising after fertility falls. A young age structure guarantees decades of growth that services must absorb.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "With momentum",
+          "points": ["Huge young cohorts reach parenthood", "Births stay numerous for decades", "Population peaks only mid century"]
+        },
+        "right": {
+          "title": "Without momentum",
+          "points": ["Age structure already old", "Births fall as soon as fertility falls", "Population stabilises quickly"]
+        }
+      }
+    },
+    {
+      "title": "Density and urbanisation pressures",
+      "tx": "Census density rose to three hundred eighty two persons per square kilometre in 2011, and the **urban population share in India** reached thirty one percent, with towns multiplying from five thousand one hundred sixty one to seven thousand nine hundred thirty five in one decade. Crowded cities strain water, sanitation, housing, and disease surveillance, shifting the health agenda toward urban primary care under the National Urban Health Mission.",
+      "say": "Nearly one third of Indians lived in towns by 2011. Urban crowding now drives demand for water, sanitation, and city primary care.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Census measure 2011", "Value"],
+        "rows": [
+          ["Total population", "121 crore"],
+          ["Density", "382 persons per square kilometre"],
+          ["Urban share", "31.1 percent"],
+          ["Decadal growth", "17.7 percent"]
+        ]
+      }
+    },
+    {
+      "title": "Age and sex composition uses",
+      "tx": "Planners read the **age sex composition of a population** to site schools, maternity services, and geriatric clinics: a broad base demands immunisation and nutrition posts, while a bulging middle demands jobs and noncommunicable disease screening. Median age summarises youthfulness in one number; India's median near twenty eight years contrasts with ageing societies above forty, shaping very different service mixes.",
+      "say": "Age structure tells you what to build: schools and vaccines for the young, screening and elder care where the bulge has moved up.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "a1", "label": "Read base, middle, and top of structure" },
+          { "id": "a2", "label": "Match services to dominant age groups" },
+          { "id": "a3", "label": "Project needs ten years forward" }
+        ],
+        "edges": [["a1", "a2"], ["a2", "a3"]]
+      }
+    },
+    {
+      "title": "Exam traps in demography basics",
+      "tx": "Examiners repeatedly test the **demographic gap** (the difference between birth and death rates that drives stage two explosion) against near neighbours: sex ratio uses females per thousand males in India but males per hundred females in many Western texts, dependency uses the working age denominator, and census (a stock count at one moment) differs from the Sample Registration System (continuous dual recording of births and deaths).",
+      "say": "Watch the denominators. Indian sex ratio counts females per thousand males, and the demographic gap between births and deaths powers stage two growth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Census",
+          "points": ["Complete count every ten years", "Stock at one reference moment", "Denominator for all rates"]
+        },
+        "right": {
+          "title": "Sample Registration System",
+          "points": ["Continuous dual recording in samples", "Annual birth and death rates", "Flow between two censuses"]
+        }
+      }
+    }
+  ]
+}

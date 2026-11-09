@@ -1,0 +1,256 @@
+{
+  "v": 1,
+  "module": "mic-intestinal-protozoa",
+  "subject": "microbiology",
+  "title": "Free-Living Amoebae: Naegleria fowleri and Acanthamoeba keratitis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Amphizoic or **free-living amoebae** are environmental protozoa that proliferate naturally in soil and warm freshwater without requiring a definitive mammalian host. Unlike parasitic intestinal amoebae, they opportunistically invade human tissues through the olfactory neuroepithelium, corneal microtrauma, or respiratory tract, producing fulminant meningoencephalitis, chronic granulomatous encephalitis, and vision-threatening corneal ulceration.",
+      "say": "Environmental free-living amoebae opportunistically invade brain and corneal tissues from warm freshwater.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Naegleria fowleri",
+          "points": [
+            "Acute primary amoebic meningoencephalitis (PAM)",
+            "Entry: nasal cribriform plate via warm freshwater",
+            "Course: fulminant death within 3 to 7 days",
+            "Host: healthy immunocompetent children and swimmers"
+          ]
+        },
+        "right": {
+          "title": "Acanthamoeba species",
+          "points": [
+            "Granulomatous amoebic encephalitis (GAE) and keratitis",
+            "Entry: corneal contact lens wear or skin abrasions",
+            "Course: subacute chronic progression over weeks",
+            "Host: contact lens users or immunocompromised hosts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The thermophilic amoeboflagellate **Naegleria fowleri**, popularly called the brain-eating amoeba, thrives in warm freshwater lakes, geothermal hot springs, and inadequately chlorinated swimming pools at temperatures between thirty-five and forty-six degrees Celsius. It exists in three stages: an environmental cyst, an invasive amoeboid trophozoite with lobose pseudopodia, and a temporary pear-shaped biflagellate form induced by hypotonic conditions.",
+      "say": "Thermophilic Naegleria thrives in warm lakes, transforming between amoeboid and biflagellate stages.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Life Cycle Stage",
+          "Morphology",
+          "Biological Function"
+        ],
+        "rows": [
+          [
+            "Trophozoite (amoeboid)",
+            "10-20 microns, eruptive lobopodia",
+            "Invasive, feeding stage in human brain"
+          ],
+          [
+            "Flagellate form",
+            "Pear-shaped with two anterior flagella",
+            "Swimming transit form in low ionic fluids"
+          ],
+          [
+            "Cyst form",
+            "Round with thick smooth double wall",
+            "Survival stage in cold dry environmental soil"
+          ],
+          [
+            "Encephalitic stage",
+            "Only amoeboid trophozoites in brain",
+            "Cysts never form in human tissue in vivo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infection occurs when swimming, diving, or nasal irrigation with unsterile tap water forces water deep into the nasal cavity. Trophozoites penetrate the olfactory neuroepithelium and traverse the **cribriform plate** along olfactory nerve fila into the subarachnoid space. This rapid direct intracranial invasion bypasses the blood-brain barrier, seeding the olfactory bulbs and frontal lobes.",
+      "say": "Amoebae penetrate the nasal olfactory mucosa and cross the cribriform plate directly into the frontal lobes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nf1",
+            "label": "Warm freshwater forced into nasal vault during diving or irrigation"
+          },
+          {
+            "id": "nf2",
+            "label": "Trophozoites attach to olfactory neuroepithelium and penetrate cribriform plate"
+          },
+          {
+            "id": "nf3",
+            "label": "Rapid necrotizing invasion of olfactory bulbs and basal frontal cortex"
+          }
+        ],
+        "edges": [
+          [
+            "nf1",
+            "nf2"
+          ],
+          [
+            "nf2",
+            "nf3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within days, patients develop fulminant **primary amoebic meningoencephalitis**, characterized by severe frontal headache, high fever, altered smell and taste, nuchal rigidity, and intracranial hypertension. The clinical picture mimics acute bacterial meningitis, but deterioration is precipitous, with brain herniation and mortality exceeding ninety-seven percent occurring within three to seven days of symptom onset.",
+      "say": "Primary amoebic meningoencephalitis causes rapidly fatal necrotizing encephalitis resembling bacterial meningitis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "CSF Finding in Naegleria PAM",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Gross appearance",
+            "Turbid, purulent, often distinctly haemorrhagic",
+            "Severe necrotizing tissue destruction"
+          ],
+          [
+            "Cell count",
+            "Marked neutrophil pleocytosis (hundreds to thousands)",
+            "Acute severe polymorphonuclear inflammation"
+          ],
+          [
+            "Biochemical panel",
+            "Markedly elevated protein, severely depressed glucose",
+            "Parallels bacterial pyogenic meningitis"
+          ],
+          [
+            "Wet mount microscopy",
+            "Active motile amoebic trophozoites with lobopodia",
+            "Definitive diagnosis; cysts are completely absent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immediate diagnosis requires examining a fresh, warm, uncentrifuged cerebrospinal fluid wet mount under light microscopy with reduced illumination. Actively motile trophozoites display sluggish directional movement with blunt, eruptive **lobopodia**. Only trophozoites are seen in cerebrospinal fluid and brain tissue; encystment never occurs inside human host tissues during active Naegleria infection.",
+      "say": "Warm cerebrospinal fluid wet preparations reveal live motile trophozoites extending blunt lobopodia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dx1",
+            "label": "Lumbar puncture yields purulent, haemorrhagic CSF with high opening pressure"
+          },
+          {
+            "id": "dx2",
+            "label": "Examine fresh unchilled CSF wet mount immediately under light microscopy"
+          },
+          {
+            "id": "dx3",
+            "label": "Identify live amoeboid trophozoites with prominent single karyosomes"
+          }
+        ],
+        "edges": [
+          [
+            "dx1",
+            "dx2"
+          ],
+          [
+            "dx2",
+            "dx3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast, species of Acanthamoeba and Balamuthia mandrillaris produce subacute **granulomatous amoebic encephalitis** in immunocompromised individuals. Infection spreads haematogenously from primary skin ulcers or lower respiratory tract lesions, progressing insidiously over weeks to months. Brain histopathology demonstrates focal granulomatous necrotizing vasculitis containing both amoebic trophozoites and double-walled wrinkled cysts.",
+      "say": "Acanthamoeba causes subacute granulomatous encephalitis in immunocompromised hosts, showing both cysts and trophozoites.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acanthamoeba histology in brain",
+          "points": [
+            "Both trophozoites and cysts present in tissue",
+            "Polygonal double-walled cysts with star-like exocyst",
+            "Chronic granulomatous necrotizing vasculitis",
+            "Multinucleated giant cells and lymphocytes"
+          ]
+        },
+        "right": {
+          "title": "Naegleria histology in brain",
+          "points": [
+            "Trophozoites only; cysts never present in tissue",
+            "Rapid polymorphonuclear neutrophilic necrosis",
+            "Diffuse liquefactive hemorrhagic necrosis",
+            "Absent granulomatous or giant cell reaction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A highly distinctive clinical entity is **Acanthamoeba keratitis**, a painful chronic corneal infection predominantly affecting contact lens wearers who use non-sterile tap water for lens washing or swim while wearing lenses. Patients experience excruciating ocular pain out of proportion to early clinical findings. Slit-lamp biomicroscopy reveals pathognomonic radial keratoneuritis along corneal nerve branches and classic late ring infiltrates.",
+      "say": "Contact lens exposure to tap water causes severe keratitis with radial keratoneuritis and ring infiltrates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Keratitis Sign",
+          "Diagnostic Mechanism",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Extreme ocular pain",
+            "Amoebae track along corneal nerves (radial keratoneuritis)",
+            "Pain disproportionate to initial mild slit-lamp signs"
+          ],
+          [
+            "Ring infiltrate",
+            "Immune complex and inflammatory cell stromal ring",
+            "Pathognomonic late sign mimicking fungal keratitis"
+          ],
+          [
+            "Corneal scraping",
+            "Calcofluor white or non-nutrient agar with E. coli lawn",
+            "Demonstrates polygonal double-walled star-shaped cysts"
+          ],
+          [
+            "Confocal microscopy",
+            "In vivo demonstration of highly refractile cysts in stroma",
+            "Rapid non-invasive optical biopsy confirms diagnosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Culturing corneal scrapings on **non-nutrient agar** seeded with an Escherichia coli bacterial lawn demonstrates amoebic viability through visible trailing tracks produced as trophozoites graze on bacteria. For keratitis, topical biguanides such as polyhexamethylene biguanide or chlorhexidine combined with propamidine isethionate represent first-line medical therapy, while surviving Naegleria encephalitis requires high-dose amphotericin B alongside miltefosine and targeted therapeutic hypothermia.",
+      "say": "Non-nutrient agar with bacterial lawns reveals clearing tracks; topical biguanides clear corneal amoebic cysts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Acanthamoeba keratitis: topical biguanide (PHMB or chlorhexidine) eye drops"
+          },
+          {
+            "id": "rx2",
+            "label": "Naegleria meningoencephalitis: IV and intrathecal amphotericin B plus miltefosine"
+          },
+          {
+            "id": "rx3",
+            "label": "Adjuvant critical care: induced hypothermia to arrest cerebral oedema"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    }
+  ]
+}

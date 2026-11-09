@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-kerley-b-lines",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Kerley B Lines, Bat Wing Oedema and Deep Sulcus Sign",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Kerley B lines are thickened septa",
+   "tx": "**Kerley B lines** are short horizontal white lines, 1 to 2 cm long, reaching the pleura at the lung bases at right angles to it. Each line is one interlobular septum thickened by fluid or cells, the plain film face of septal thickening that high resolution CT shows directly. Smooth symmetric thickening favours pulmonary oedema, while nodular asymmetric thickening favours lymphangitic tumour spread.",
+   "say": "Kerley B lines are short horizontal white lines, one to two centimetres long, reaching the pleura at the lung bases at right angles to it. Each line is one interlobular septum thickened by fluid or cells. Smooth symmetric thickening favours pulmonary oedema, while nodular asymmetric thickening favours lymphangitic tumour spread.",
+   "vis": {"kind": "compare", "left": {"title": "Smooth and symmetric", "points": ["Pulmonary oedema", "Both bases together", "Thin uniform lines", "Resolves with diuresis"]}, "right": {"title": "Nodular and asymmetric", "points": ["Lymphangitic tumour spread", "One lung worse", "Beaded irregular septa", "Persists despite diuresis"]}}
+  },
+  {
+   "title": "Stages of cardiac failure on film",
+   "tx": "**Pulmonary wedge pressure** stages map neatly onto chest film signs. Between 13 and 18 millimetres of mercury blood redistributes to upper lobes, called cephalisation, with an enlarging heart. From 18 to 25 interstitial oedema adds Kerley lines, peribronchial cuffing and hazy central vessels. Above 25 alveolar oedema floods airspaces into fluffy confluent opacity, usually with pleural effusions layering at the bases.",
+   "say": "Pulmonary wedge pressure stages map neatly onto chest film signs. Between thirteen and eighteen, blood redistributes to upper lobes, called cephalisation. From eighteen to twenty five, interstitial oedema adds Kerley lines and peribronchial cuffing. Above twenty five, alveolar oedema floods airspaces into fluffy opacity, usually with pleural effusions at the bases.",
+   "vis": {"kind": "table", "cols": ["Stage", "Wedge pressure", "Film signs"], "rows": [["Redistribution", "13 to 18 mmHg", "Cephalisation, big heart"], ["Interstitial oedema", "18 to 25 mmHg", "Kerley lines, cuffing"], ["Alveolar oedema", "Above 25 mmHg", "Fluffy opacity, effusions"], ["Chronic failure", "Variable", "Septal lines persist"]]}
+  },
+  {
+   "title": "Heart failure floods the alveoli",
+   "tx": "**Cardiogenic oedema** begins when a failing left ventricle raises pulmonary venous pressure until fluid crosses into interstitium and then alveoli. The illustration contrasts a normal alveolus with the flooded, stiff alveolus of acute failure, matching the film progression from septal lines to confluent shadowing. Kerley lines therefore mark the interstitial stage, appearing before airspace flooding makes the patient severely breathless at rest.",
+   "say": "Cardiogenic oedema begins when a failing left ventricle raises pulmonary venous pressure until fluid crosses into interstitium and then alveoli. The illustration contrasts a normal alveolus with the flooded alveolus of acute failure. Kerley lines mark the interstitial stage, appearing before airspace flooding makes the patient severely breathless at rest.",
+   "vis": {"kind": "image", "src": "v1/kb/media/heart-failure-fig1.webp", "alt": "Illustration of left ventricular failure causing pulmonary venous congestion and alveolar flooding.", "caption": "Left ventricular failure causing pulmonary congestion and alveolar flooding. Illustration: StewardMD."}
+  },
+  {
+   "title": "Peribronchial cuffing and fissure fluid",
+   "tx": "**Peribronchial cuffing** shows bronchi end on as white rings with thick walls because oedema collects in the loose tissue around airways and vessels. Fluid also fills the fissures, thickening the horizontal fissure line, and blurs central vessel margins that are crisp on a dry film. Together with Kerley lines and upper lobe diversion, cuffing completes the interstitial oedema set even before alveoli flood.",
+   "say": "Peribronchial cuffing shows bronchi end on as white rings with thick walls because oedema collects around airways and vessels. Fluid also thickens the fissures and blurs central vessel margins that are crisp on a dry film. With Kerley lines and upper lobe diversion, cuffing completes the interstitial oedema set before alveoli flood.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Venous pressure rises"}, {"id": "b", "label": "Septal lines appear"}, {"id": "c", "label": "Cuffing and fissure fluid"}, {"id": "d", "label": "Alveoli flood"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Bat wing alveolar oedema",
+   "tx": "**Bat wing opacity** is confluent alveolar oedema hugging both hila and sparing the lung periphery and apices, named for its winged shape. It floods quickly in acute left ventricular failure, fluid overload and neurogenic oedema after head injury. The spared clear rim at the chest wall separates bat wing oedema from bilateral pneumonia, which more often patches the periphery and shows air bronchograms with fever.",
+   "say": "Bat wing opacity is confluent alveolar oedema hugging both hila and sparing the lung periphery and apices, named for its winged shape. It floods quickly in acute ventricular failure, fluid overload and neurogenic oedema. The spared clear rim separates it from bilateral pneumonia, which patches the periphery and shows air bronchograms with fever.",
+   "vis": {"kind": "compare", "left": {"title": "Bat wing oedema", "points": ["Perihilar confluent white", "Periphery spared", "Kerley lines at bases", "Effusions common"]}, "right": {"title": "Bilateral pneumonia", "points": ["Patchy peripheral opacity", "Air bronchograms", "Fever and raised markers", "No septal line set"]}}
+  },
+  {
+   "title": "Effusions complete the failure picture",
+   "tx": "**Pleural effusion** in cardiac failure layers first at the bases, blunting costophrenic angles and forming a meniscus that climbs the chest wall. The pictured radiograph shows a dense lower zone opacity with that concave meniscus, typical of fluid rather than collapse. Bilateral effusions with Kerley lines and an enlarged heart make cardiogenic oedema far more likely than infection, guiding diuretic treatment before antibiotics.",
+   "say": "Pleural effusion in cardiac failure layers first at the bases, blunting costophrenic angles and forming a meniscus climbing the chest wall. The pictured radiograph shows dense lower zone opacity with that concave meniscus, typical of fluid rather than collapse. Bilateral effusions with Kerley lines and an enlarged heart favour cardiogenic oedema.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp", "alt": "Erect chest radiograph showing dense lower zone opacity with meniscus and blunted costophrenic angle from pleural effusion.", "caption": "Pleural effusion with meniscus and blunted costophrenic angle on erect chest radiograph. Credit: RCR2 case via StewardMD library."}
+  },
+  {
+   "title": "Deep sulcus sign of pneumothorax",
+   "tx": "**Deep sulcus sign** betrays a pneumothorax on a supine film, where free air collects at the front and deepens the costophrenic sulcus into a long dark finger. Supine air cannot rise to the apex, so the classic visceral pleural line hides. An abnormally sharp diaphragm outline and a hyperlucent upper abdomen join the clue set, and any one of them earns an erect film or ultrasound before a drain decision.",
+   "say": "Deep sulcus sign betrays a pneumothorax on a supine film, where free air collects at the front and deepens the costophrenic sulcus into a long dark finger. Supine air cannot rise to the apex, so the classic pleural line hides. A sharp diaphragm outline and bright upper abdomen join the clue set.",
+   "vis": {"kind": "table", "cols": ["Supine sign", "What shows", "Cause"], "rows": [["Deep sulcus", "Long dark costophrenic finger", "Air collects anteriorly"], ["Sharp diaphragm", "Over crisp dome outline", "Air outlines diaphragm"], ["Hyperlucent abdomen", "Bright upper abdomen", "Subpulmonic air"], ["Visible fissures", "Both fissure walls seen", "Air on both sides"]]}
+  },
+  {
+   "title": "Kerley A and C lines",
+   "tx": "**Kerley A lines** run longer, 2 to 6 cm, sweeping obliquely from hilum toward the upper lobes without reaching pleura, while Kerley C describes a fine reticular network across both lungs. Examiners ask Kerley B most often because basal horizontal lines touching pleura are unmistakable. All three share one mechanism, thickened interlobular septa, so the letter changes with line length and location, not with the underlying fluid or tumour.",
+   "say": "Kerley A lines run longer, two to six centimetres, sweeping obliquely from hilum toward upper lobes without reaching pleura, while Kerley C describes a fine network across both lungs. Examiners ask Kerley B most often because basal horizontal lines touching pleura are unmistakable. All three share one mechanism, thickened interlobular septa.",
+   "vis": {"kind": "compare", "left": {"title": "Kerley A lines", "points": ["2 to 6 cm long", "Oblique from hilum", "Upper lobe direction", "Never reach pleura"]}, "right": {"title": "Kerley B and C", "points": ["B: 1 to 2 cm basal lines", "B reaches pleura at right angles", "C: fine reticular network", "All are thickened septa"]}}
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-sexual-offences-voyeurism",
+ "subject": "forensic-medicine",
+ "module": "fmt-sexual-offences",
+ "title": "Voyeurism, Necrophilia, Stalking and the Hymen Question",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Voyeurism as an offence",
+   "tx": "**Voyeurism**, formerly section 354C of the Penal Code and now in the Bharatiya Nyaya Sanhita, punishes watching or capturing the image of a woman engaged in a private act where she would reasonably expect not to be observed, and disseminating such an image. Punishment runs from one to three years with fine on first conviction and three to seven years for repeat offences. Recording devices and their storage media are the core evidence and are seized, sealed and imaged.",
+   "say": "Watching or recording a private act is voyeurism, one to three years at first and three to seven on repetition.",
+   "vis": {"kind": "table", "cols": ["Voyeurism element", "Example", "Evidence"], "rows": [["Watching a private act", "Peeping into a bathroom", "Witness and scene evidence"], ["Capturing an image", "Hidden camera recording", "Device and media seized"], ["Disseminating image", "Sharing the recording", "Transmission records"], ["Repeat offence", "Second conviction", "Three to seven years"]]}
+  },
+  {
+   "title": "Stalking and sexual harassment",
+   "tx": "**Stalking** is following a woman and contacting or attempting contact repeatedly despite clear disinterest, or monitoring her internet, email or electronic communication, punished with up to three years on first offence. **Sexual harassment** covers physical contact with sexual overtures, demands for sexual favours, sexually coloured remarks and showing pornography, with one to five years. Assault to disrobe carries three to seven years. These are conduct offences proved by messages and witnesses, not medical findings.",
+   "say": "Repeated following after refusal is stalking, and demands, remarks and pornography shown make sexual harassment in law.",
+   "vis": {"kind": "compare", "left": {"title": "Stalking pattern", "points": ["Following despite refusal", "Repeated contact attempts", "Monitoring electronic communication", "Up to three years first offence"]}, "right": {"title": "Harassment pattern", "points": ["Contact with sexual overtures", "Demands for sexual favours", "Sexually coloured remarks", "Pornography shown, one to five years"]}}
+  },
+  {
+   "title": "Necrophilia",
+   "tx": "**Necrophilia** is sexual attraction to or intercourse with a dead body. It reaches the mortuary when a body in custody shows evidence of interference, which is why mortuary access, body identification checks and documentation of the body's condition on receipt and release matter. Any suspicion is escalated immediately to the medical superintendent and police with the body preserved untouched for examination, because the offence desecrates the dead and devastates families.",
+   "say": "Interference with a dead body is necrophilia, prevented by mortuary custody discipline and investigated the moment it is suspected.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Body condition documented on receipt"}, {"id": "b", "label": "Access restricted and logged"}, {"id": "c", "label": "Interference suspected, body frozen as found"}, {"id": "d", "label": "Superintendent and police informed at once"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Bestiality and buccal coitus in the old scheme",
+   "tx": "The unnatural offences list also holds **bestiality**, sexual intercourse with an animal, and **buccal coitus**, oral sex, alongside sodomy and tribadism, which is sexual contact between females. These were historically prosecuted under the unnatural offences section regardless of consent; modern courts have read down criminalisation of consensual adult acts in private. The examiner's task in an animal case is veterinary liaison, injury care and sample preservation, exactly as in other sexual examinations.",
+   "say": "Bestiality and oral acts sat in the old unnatural list, and modern examination still centres on care, samples and liaison.",
+   "vis": {"kind": "table", "cols": ["Offence term", "Meaning", "Examination focus"], "rows": [["Sodomy", "Anal intercourse", "Anal swabs and injury"], ["Tribadism", "Female to female contact", "History and injury care"], ["Bestiality", "Intercourse with animal", "Veterinary liaison, samples"], ["Buccal coitus", "Oral intercourse", "Oral swabs where relevant"]]}
+  },
+  {
+   "title": "The hymen: anatomy, not a verdict",
+   "tx": "The **hymen** is a fold of mucous membrane at the vaginal orifice whose shape varies naturally: annular, crescentic, septate, cribriform or imperforate. It can stretch without tearing, and it can tear from causes other than intercourse. A glass rod passed through the hymenal orifice was an old examination trick, and the two finger test for laxity stands banned. No hymenal finding proves or excludes intercourse, and reports must state appearances without concluding virginity.",
+   "say": "Hymens vary naturally and stretch without tearing, so no hymen finding can prove or disprove intercourse in any report.",
+   "vis": {"kind": "compare", "left": {"title": "Normal hymen variants", "points": ["Annular or crescentic fold", "Septate or cribriform forms", "Imperforate, needing surgery", "Stretches without tearing"]}, "right": {"title": "Forbidden conclusions", "points": ["Virginity certified from hymen", "Two finger laxity testing", "Habituated opinions", "Morality language in reports"]}}
+  },
+  {
+   "title": "Signs used, and misused, for recent intercourse",
+   "tx": "Evidence of **recent sexual intercourse** rests on laboratory and injury findings together: spermatozoa or seminal constituents in swabs, fresh genital injury with bleeding and swelling, and associated body injuries or torn clothing matching the account. Each decays on its own clock, spermatozoa fastest. A normal genital examination after a delay is fully compatible with the alleged assault and must be written that way, because absence of injury never excludes rape in law or in fact.",
+   "say": "Fresh injury plus seminal evidence supports recent intercourse, and a normal delayed examination excludes nothing at all.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Swabs taken at earliest hour"}, {"id": "b", "label": "Spermatozoa sought in laboratory"}, {"id": "c", "label": "Fresh injuries documented"}, {"id": "d", "label": "Normal findings still consistent"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Trafficking of persons",
+   "tx": "**Trafficking** recruits, transports, harbours, transfers or receives a person by threats, force, abduction, fraud, deception, abuse of power or inducement for exploitation, including prostitution and other sexual exploitation, slavery and forced labour. Punishment runs seven to ten years and higher for children and repeat offences. Survivors reaching clinics need the same examination discipline plus safeguarding, because the trafficker may be the person who brought them in as a relative.",
+   "say": "Trafficking moves people by force, fraud or inducement into exploitation, so verify who truly speaks for the survivor.",
+   "vis": {"kind": "table", "cols": ["Trafficking act", "Means used", "Exploitation"], "rows": [["Recruiting or transporting", "Threats, force, abduction", "Prostitution or slavery"], ["Harbouring or receiving", "Fraud or deception", "Forced labour"], ["Abuse of power", "Inducement or payment", "Sexual exploitation"], ["Child victim", "Any means suffices", "Highest punishment band"]]}
+  },
+  {
+   "title": "Indecent assault and examination restraint",
+   "tx": "**Indecent assault** covers sexual touching and molestation short of the penetrative offences, frequently in child and workplace complaints. The medical contribution is a careful injury and trace evidence survey with minimal examination of children: inspect, photograph with consent, swab where indicated, and avoid repeated internal examinations that retraumatise. Chaperoning, a support person of the child's choice and a single coordinated examination with police and paediatric teams are the standard.",
+   "say": "For molestation complaints, one gentle coordinated examination with a support person replaces repeated invasive examinations.",
+   "vis": {"kind": "compare", "left": {"title": "Good practice", "points": ["Single coordinated examination", "Support person of choice present", "Photographs only with consent", "Swabs targeted, not routine invasive"]}, "right": {"title": "Harmful practice", "points": ["Repeated internal examinations", "Examination without chaperone", "Virginity opinions demanded", "Delay while arranging specialists"]}}
+  },
+  {
+   "title": "Writing sexual offence reports",
+   "tx": "Every examination in this module closes with the same discipline of **neutral medicolegal reporting**: facts found, samples taken, treatment given, and an opinion confined to consistency between findings and history. Words such as habituated, loose or promiscuous are prohibited judgements, not findings. Negative findings are recorded as carefully as positive ones, and the chain of custody form travels with every sealed sample so the laboratory evidence survives cross examination.",
+   "say": "Report facts, samples and consistency only, ban moral adjectives, and keep the custody chain unbroken for every sample.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Facts and findings recorded"}, {"id": "b", "label": "Samples sealed and labelled"}, {"id": "c", "label": "Opinion limited to consistency"}, {"id": "d", "label": "Custody form travels with samples"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

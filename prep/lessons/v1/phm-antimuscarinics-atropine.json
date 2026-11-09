@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "phm-antimuscarinics",
+  "subject": "pharmacology",
+  "title": "Atropine, Scopolamine, Quaternary Anticholinergics, and Inhaled Antimuscarinics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Extracted from Atropa belladonna and Datura stramonium, the prototype tertiary amine competitive muscarinic antagonist is **atropine**. As a racemic mixture of d-hyoscyamine and l-hyoscyamine, only the levorotatory isomer exhibits potent pharmacologic activity. Atropine competitively occupies postganglionic muscarinic receptors across autonomic parasympathetic effector cells, preventing acetylcholine binding and blocking secretomotor, cardiac, and smooth muscle responses without discriminating between M1, M2, or M3 subtypes.",
+      "say": "Atropine competitively blocks muscarinic receptors throughout the body, suppressing secretions and speeding heart rate.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anticholinergic-toxidrome-fig1.webp",
+        "alt": "Anticholinergic toxidrome clinical features",
+        "caption": "Systemic manifestations of competitive muscarinic blockade by atropine: tachycardia, dry mucosa, and dilated pupils."
+      }
+    },
+    {
+      "tx": "The naturally occurring belladonna alkaloid exhibiting prominent central nervous system depression is **scopolamine**. Also designated hyoscine, scopolamine crosses lipid blood-brain barriers much more rapidly than atropine. At therapeutic doses, it induces sedation, drowsiness, amnesia, and suppresses vestibular inputs in the brainstem, making transdermal scopolamine patches applied behind the ear the most effective prophylactic medication for preventing motion sickness.",
+      "say": "Scopolamine readily enters the brain to provide sedation and prevent vestibular motion sickness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Scopolamine",
+          "points": [
+            "Tertiary alkaloid with high lipophilicity",
+            "Prominent central CNS depression and amnesia",
+            "Powerful vestibular suppressant for motion sickness",
+            "Formulated as 72-hour transdermal patch"
+          ]
+        },
+        "right": {
+          "title": "Atropine",
+          "points": [
+            "Tertiary alkaloid with moderate lipophilicity",
+            "Mild CNS excitation at therapeutic doses",
+            "Weak vestibular anti-motion sickness efficacy",
+            "Administered intravenously, orally, or as eyedrops"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Visceral gastrointestinal and genitourinary antispasmodic therapy without central sedative side effects relies on **hyoscine butylbromide**. Introducing a quaternary butyl moiety prevents passive transport across lipid membranes and the blood-brain barrier. Consequently, hyoscine butylbromide acts locally on muscarinic receptors and intramural autonomic ganglia within smooth muscle walls of the stomach, intestine, bile ducts, and ureters to relieve agonizing abdominal cramping.",
+      "say": "Hyoscine butylbromide possesses a quaternary nitrogen that confines antispasmodic relief to visceral smooth muscle.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Compound",
+          "Structure",
+          "CNS penetration",
+          "Primary clinical usage"
+        ],
+        "rows": [
+          [
+            "Scopolamine (Hyoscine)",
+            "Tertiary alkaloid",
+            "Extensive (sedation, amnesia)",
+            "Motion sickness prophylaxis"
+          ],
+          [
+            "Hyoscine butylbromide",
+            "Quaternary derivative",
+            "Negligible (peripherally restricted)",
+            "Gastrointestinal and renal colic spasms"
+          ],
+          [
+            "Homatropine methylbromide",
+            "Quaternary derivative",
+            "Negligible (peripherally restricted)",
+            "Gastric ulcer and bowel hypermotility"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During induction and emergence from general anesthesia, the preferred intravenous quaternary antimuscarinic agent is **glycopyrrolate**. Possessing a completely ionized quaternary ammonium structure, glycopyrrolate is devoid of central nervous system penetration, eliminating the risk of central anticholinergic delirium and postoperative cognitive dysfunction. Anesthesiologists administer glycopyrrolate to abolish vagal bradycardia, dry salivary secretions preoperatively, and counter muscarinic side effects during anticholinesterase-mediated neuromuscular blockade reversal.",
+      "say": "Glycopyrrolate blocks peripheral vagal bradycardia and dry secretions during anesthesia without causing confusion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glycopyrrolate in anesthesia",
+          "points": [
+            "Quaternary amine; zero blood-brain barrier crossing",
+            "Zero postoperative confusion or delirium",
+            "More potent antisialagogue than atropine",
+            "Smooth, stable heart rate acceleration profile"
+          ]
+        },
+        "right": {
+          "title": "Atropine in anesthesia",
+          "points": [
+            "Tertiary amine; penetrates cerebral tissues",
+            "Can cause postoperative cognitive delirium",
+            "Less potent salivary drying action",
+            "Prone to causing abrupt sinus tachycardia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Short-acting bronchodilation in chronic obstructive pulmonary disease and acute asthma exacerbations is achieved using inhaled **ipratropium**. As a quaternary derivative of atropine administered through metered-dose inhalers or wet nebulization, ipratropium blocks M3 muscarinic receptors on bronchial smooth muscle, preventing vagally mediated bronchoconstriction. Because quaternary ionization prevents systemic mucosal absorption, systemic antimuscarinic side effects like dry mouth and urinary retention remain negligible.",
+      "say": "Inhaled ipratropium blocks bronchial muscarinic receptors to dilate airways without systemic toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inhaled antimuscarinic",
+          "Duration of action",
+          "Receptor kinetics",
+          "Clinical usage"
+        ],
+        "rows": [
+          [
+            "Ipratropium bromide",
+            "4 to 6 hours",
+            "Rapid dissociation from all M subtypes",
+            "Acute COPD and asthma exacerbation rescue"
+          ],
+          [
+            "Tiotropium bromide",
+            "24 hours",
+            "Slow dissociation from M3 and M1",
+            "Once-daily maintenance in stable COPD and asthma"
+          ],
+          [
+            "Aclidinium bromide",
+            "12 hours",
+            "Rapid plasma esterase hydrolysis",
+            "Twice-daily maintenance therapy in COPD"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Long-acting, once-daily maintenance therapy in chronic obstructive pulmonary disease relies on inhaled **tiotropium**. Tiotropium binds with high affinity to M1, M2, and M3 muscarinic receptors but dissociates exceptionally slowly from M3 smooth muscle receptors while dissociating more rapidly from inhibitory presynaptic M2 autoreceptors. This kinetic selectivity yields sustained, 24-hour bronchodilation, decreases hyperinflation, improves exercise endurance, and significantly reduces acute COPD exacerbation hospital admissions.",
+      "say": "Tiotropium dissociates very slowly from bronchial M3 receptors, providing 24-hour maintenance bronchodilation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inh",
+            "label": "Inhaled dry powder tiotropium"
+          },
+          {
+            "id": "m3",
+            "label": "Binding to airway M3 muscarinic receptors"
+          },
+          {
+            "id": "slow",
+            "label": "Prolonged receptor residence half-life (> 30 h)"
+          },
+          {
+            "id": "bd",
+            "label": "Sustained 24-hour smooth muscle bronchodilation"
+          }
+        ],
+        "edges": [
+          [
+            "inh",
+            "m3"
+          ],
+          [
+            "m3",
+            "slow"
+          ],
+          [
+            "slow",
+            "bd"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The cardiovascular responses to systemic antimuscarinics follow a distinct dose-dependent biphasic pattern known as **therapeutic doses of atropine**. Low intravenous doses under 0.5 milligrams paradoxically slow the heart rate through central vagal nucleus stimulation or presynaptic M1 autoreceptor blockade. Higher therapeutic doses exceeding one milligram competitively block cardiac sinoatrial M2 muscarinic receptors, abolishing parasympathetic tone and producing marked, dose-dependent sinus tachycardia.",
+      "say": "Low-dose atropine transiently slows heart rate, whereas therapeutic doses block cardiac M2 receptors to cause tachycardia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Atropine dose",
+          "Target receptor / site",
+          "Cardiac and systemic effect"
+        ],
+        "rows": [
+          [
+            "0.5 mg (Low dose)",
+            "Presynaptic M1 vagal autoreceptors",
+            "Paradoxical mild bradycardia, dry mouth"
+          ],
+          [
+            "1.0 mg (Therapeutic)",
+            "Sinoatrial node M2 receptors",
+            "Sinus tachycardia, thirst, mild mydriasis"
+          ],
+          [
+            "2.0 mg (High dose)",
+            "Extensive systemic muscarinic receptors",
+            "Marked tachycardia, loss of accommodation, dry flushed skin"
+          ],
+          [
+            "5.0 mg or more",
+            "Central and peripheral saturation",
+            "Anticholinergic delirium, ataxia, severe hyperthermia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic antimuscarinic therapy carries rigid clinical contraindications classified under **anticholinergic precautions**. In patients with shallow anterior eye chambers, atropinic pupil dilation bunches the iris peripheral margin against the trabecular meshwork, precipitating acute angle-closure glaucoma. In elderly males with benign prostatic hyperplasia, detrusor relaxation combined with trigone contraction causes acute, agonizing urinary retention requiring emergent urethral catheterization.",
+      "say": "Antimuscarinic drugs are strictly contraindicated in angle-closure glaucoma and severe urinary outflow obstruction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Underlying condition",
+          "Pathological risk",
+          "Mechanism of adverse interaction"
+        ],
+        "rows": [
+          [
+            "Narrow-angle glaucoma",
+            "Acute IOP surge and blindness",
+            "Mydriasis crowds iris into iridocorneal drainage angle"
+          ],
+          [
+            "Benign prostatic hyperplasia",
+            "Acute urinary retention",
+            "Inhibition of detrusor contraction via M3 blockade"
+          ],
+          [
+            "Reflux esophagitis",
+            "Worsening acid regurgitation",
+            "Lower esophageal sphincter tone reduction and delayed gastric emptying"
+          ],
+          [
+            "Toxigenic bowel infection",
+            "Toxic megacolon dilatation",
+            "Paralysis of intestinal peristalsis trapping bacterial toxins"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-valvular-heart",
+  "key": null,
+  "title": "Rheumatic Fever: Aschoff Bodies, Anitschkow Cells, Jones Criteria, and MacCallum Plaque",
+  "steps": [
+    {
+      "tx": "Acute rheumatic fever is an acute, immunologically mediated multi-system inflammatory disease occurring two to three weeks following an untreated pharyngeal infection with Group A beta-hemolytic Streptococcus pyogenes. Pathogenesis is driven by **molecular mimicry autoantibody cross-reactivity**: streptococcal M protein and group-specific carbohydrate antigens share structural homology with human host proteins. Antibodies and activated CD4-positive T-cells directed against streptococcal epitopes cross-react with cardiac myosin, sarcolemmal proteins, and valvular laminin, triggering immune-mediated cytotoxic tissue damage.",
+      "say": "Acute rheumatic fever is not a direct bacterial infection of the heart, but an autoimmune complication occurring weeks after Group A streptococcal pharyngitis. The bacterial M protein structurally mimics human cardiac proteins like myosin and laminin. Antibodies and T-cells raised to fight the throat infection mistakenly cross-react with cardiac myocytes and valve endothelium, unleashing autoimmune inflammation that affects all three layers of the heart.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Streptococcal Immunogen",
+          "points": [
+            "Group A beta-hemolytic Streptococcus pyogenes",
+            "Surface alpha-helical coiled-coil M protein",
+            "Group-specific cell wall carbohydrate antigen",
+            "Occurs strictly after pharyngitis (never after skin impetigo)"
+          ]
+        },
+        "right": {
+          "title": "Human Host Cross-Reactive Target",
+          "points": [
+            "Cardiac alpha-myosin and sarcolemmal membrane proteins",
+            "Valvular endothelial surface laminin and vimentin",
+            "Neuronal cell-surface gangliosides in basal ganglia",
+            "Synovial fluid proteoglycan matrix in joints"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The pathognomonic histological lesion of acute rheumatic carditis is the **myocardial Aschoff body**, a focal granulomatous inflammatory focus situated within the interstitial connective tissue, predominantly adjacent to small coronary arterioles. An Aschoff body exhibits three concentric zones: a central core of hypereosinophilic fibrinoid collagen necrosis, a rich surrounding cellular cuff of lymphocytes, plasma cells, and Anitschkow cells, and occasional multinucleated Aschoff giant cells. Over months to years, Aschoff bodies undergo progressive fibrous replacement, leaving delicate spindle-shaped interstitial collagen scars.",
+      "say": "The diagnostic microscopic hallmark of rheumatic carditis is the Aschoff body, a tiny granuloma found within the myocardial interstitial connective tissue. Each Aschoff body has a central core of fibrinoid collagen necrosis surrounded by lymphocytes, plasma cells, multinucleated Aschoff giant cells, and distinctive Anitschkow cells. Finding Aschoff bodies confirms acute rheumatic carditis beyond doubt; over time, they heal into delicate fibrous scars.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a1",
+            "label": "Group A Streptococcal Pharyngitis"
+          },
+          {
+            "id": "a2",
+            "label": "Molecular Mimicry & Cross-Reactivity"
+          },
+          {
+            "id": "a3",
+            "label": "Fibrinoid Collagen Necrosis"
+          },
+          {
+            "id": "a4",
+            "label": "Aschoff Body Formation"
+          },
+          {
+            "id": "a5",
+            "label": "Interstitial Myocardial Fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "a1",
+            "a2",
+            "M Protein Antibodies"
+          ],
+          [
+            "a2",
+            "a3",
+            "Cardiomyocyte & Endothelial Damage"
+          ],
+          [
+            "a3",
+            "a4",
+            "Anitschkow Cells & Lymphocyte Cuff"
+          ],
+          [
+            "a4",
+            "a5",
+            "Chronic Healing & Scarring"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Search the myocardial interstitium on this section for a small granulomatous focus. At its centre sit large activated macrophages whose nuclei, cut lengthways, show chromatin gathered into a thin wavy central ribbon like a caterpillar. Those **Anitschkow cells** inside an Aschoff body are the microscopic signature pathologists require before calling rheumatic carditis proven on tissue.",
+      "say": "In this Aschoff body the central macrophages show wavy caterpillar chromatin in their nuclei. Those Anitschkow cells are the microscopic signature of rheumatic carditis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m108-pat-valvular-heart-rheumatic-fever.webp",
+        "alt": "Aschoff body histology showing Anitschkow caterpillar cells within rheumatic myocarditis",
+        "caption": "Aschoff body histology showing Anitschkow caterpillar cells within rheumatic myocarditis. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The distinctive cellular hallmark within an Aschoff body is the **caterpillar Anitschkow cell**, an activated, specialized cardiac histiocyte. Under light microscopy, Anitschkow cells possess abundant amphophilic cytoplasm and a distinctive vesicular nucleus containing a central ribbon-like wavy stripe of condensed chromatin with delicate radiating fibrils, resembling a caterpillar in longitudinal section. When cut in transverse cross-section, the condensed central chromatin dot surrounded by a clear halo produces an owl-eye appearance, separating these reactive histiocytes from neoplastic Reed-Sternberg cells.",
+      "say": "Anitschkow cells are specialized macrophages pathognomonic of rheumatic fever. When viewed longitudinally, the nucleus displays a slender, wavy ribbon of chromatin in the center with delicate lateral projections, perfectly mimicking a crawling caterpillar. If the cell happens to be sliced in cross-section, the central chromatin appears as a round dot surrounded by a clear halo, creating an owl-eye appearance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anitschkow Cell (Longitudinal)",
+          "points": [
+            "Central slender, wavy, undulating ribbon of chromatin",
+            "Delicate lateral fibrils radiating to nuclear membrane",
+            "Resembles a crawling caterpillar under light microscopy",
+            "Specialized reactive cardiac macrophage lineage"
+          ]
+        },
+        "right": {
+          "title": "Anitschkow Cell (Cross-Section)",
+          "points": [
+            "Central dense dot of condensed chromatin",
+            "Prominent clear zone of nucleoplasm around chromatin",
+            "Resembles a classic owl-eye or target appearance",
+            "Can coalesce into multinucleated Aschoff giant cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acute rheumatic fever characteristically causes **acute rheumatic pancarditis**, inflaming all three layers of the cardiac wall simultaneously. Pericardial involvement produces a classic bread-and-butter serofibrinous pericardial exudate with friction rub. Myocardial involvement, marked by interstitial Aschoff bodies, weakens contractility, causing sinus tachycardia, conduction delay with prolonged PR interval, and acute congestive heart failure. Endocardial involvement manifests as acute valvulitis, where fibrin and platelets deposit along lines of valve closure, forming tiny, sterile, one-to-two millimeter verrucous vegetations that cause transient systolic and diastolic murmurs.",
+      "say": "Rheumatic fever classically inflames all three layers of the heart at once, producing pancarditis. In the pericardium, a shaggy fibrinous exudate coats the heart like two slices of buttered bread pulled apart. In the myocardium, diffuse inflammation weakens contractility, producing heart failure and conduction blocks. In the endocardium, valve inflammation causes tiny, sterile, bead-like verrucous vegetations to line up along the edges of the valve leaflets.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cardiac Layer",
+          "Rheumatic Pathology",
+          "Gross / Microscopic Hallmark",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Pericardium",
+            "Acute serofibrinous pericarditis",
+            "Shaggy bread-and-butter fibrinous exudate",
+            "Pleuritic chest pain, pericardial friction rub"
+          ],
+          [
+            "Myocardium",
+            "Myocarditis with Aschoff bodies",
+            "Interstitial Aschoff bodies, Anitschkow cells",
+            "Resting tachycardia, prolonged PR, heart failure"
+          ],
+          [
+            "Endocardium",
+            "Acute verrucous valvulitis",
+            "Tiny (1-2 mm) sterile verrucae on closure lines",
+            "New apical holosystolic or mid-diastolic murmurs"
+          ],
+          [
+            "Subendocardium",
+            "Left atrial mural endocarditis",
+            "MacCallum plaque in posterior left atrium",
+            "Irregular subendocardial fibrous patch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A unique macroscopic lesion of acute rheumatic endocarditis is the **subendocardial MacCallum plaque**, located within the posterior wall of the left atrium, immediately superior to the posterior mitral valve leaflet. Severe rheumatic mitral valvulitis produces acute mitral regurgitation; the resulting high-velocity regurgitant jet stream continuously impinges against the posterior atrial endocardium. The chronic mechanical trauma, combined with underlying immune endocardial inflammation, produces an irregular, thickened, wrinkled, map-like subendocardial patch that subsequently becomes fibrous and calcified.",
+      "say": "A MacCallum plaque is a distinctive, corrugated patch of thickened endocardium found on the posterior wall of the left atrium, just above the mitral valve. It develops when rheumatic mitral valvulitis causes mitral regurgitation: the backward regurgitant jet stream strikes the atrial wall under high pressure. This chronic mechanical impact, combined with rheumatic inflammation, causes the subendocardium to scar into a rough, wrinkled fibrous plate.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig2.webp",
+        "alt": "Gross anatomical specimen of left atrium showing corrugated MacCallum plaque on the posterior wall above the mitral valve",
+        "caption": "Rheumatic mitral disease haemodynamic progression from carditis to stenosis."
+      }
+    },
+    {
+      "tx": "Clinical diagnosis of acute rheumatic fever utilizes the **revised Jones criteria**, requiring evidence of antecedent Group A streptococcal infection (elevated anti-streptolysin O titer >200 IU/mL, positive anti-DNase B, or positive rapid antigen test) combined with either two major criteria, or one major and two minor criteria. The five major criteria comprise: migratory Polyarthritis of large joints, Pancarditis, Sydenham chorea (rapid involuntary movements), Subcutaneous nodules over bony prominences, and Erythema marginatum (non-pruritic serpiginous evanescent rash with clear centers).",
+      "say": "We diagnose acute rheumatic fever using the revised Jones criteria. Patients must have proof of recent streptococcal infection, such as an elevated ASO titer or anti-DNase B, paired with either two major criteria, or one major and two minor criteria. Remember the classic major criteria with the mnemonic JONES: Joints for migratory polyarthritis, O for carditis shaped like a heart, Nodules under the skin, Erythema marginatum, and Sydenham chorea.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Jones Category",
+          "Specific Clinical / Laboratory Criteria",
+          "Diagnostic Requirement",
+          "Clinical Description"
+        ],
+        "rows": [
+          [
+            "Major Criteria",
+            "Carditis (clinical or subclinical on echo)",
+            "Any 2 Major OR 1 Major + 2 Minor",
+            "Pancarditis with new murmur or valve dysfunction"
+          ],
+          [
+            "Major Criteria",
+            "Migratory Polyarthritis of large joints",
+            "Requires proof of recent GAS",
+            "Swollen, tender knees, ankles, wrists, elbows"
+          ],
+          [
+            "Major Criteria",
+            "Sydenham Chorea (St. Vitus dance)",
+            "Sufficient alone for diagnosis",
+            "Rapid, uncoordinated, purposeless choreiform jerks"
+          ],
+          [
+            "Major Criteria",
+            "Erythema Marginatum",
+            "Classic dermatological sign",
+            "Evanescent, non-pruritic, ring-like serpiginous rash"
+          ],
+          [
+            "Major Criteria",
+            "Subcutaneous Fibrous Nodules",
+            "Over extensor tendons / joints",
+            "Firm, painless, non-tender nodules over prominences"
+          ],
+          [
+            "Minor Criteria",
+            "Fever, Arthralgia, high ESR/CRP, long PR",
+            "Used in combination with Major",
+            "Systemic inflammatory phase markers"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The late anatomical legacy of acute rheumatic fever is chronic rheumatic heart disease, resulting from cumulative, progressive fibrous repair over decades. Valvular involvement follows a strict, predictable anatomical hierarchy: the **mitral valve alone** is affected in sixty-five to seventy percent of cases, combined mitral and aortic valve disease occurs in twenty-five percent, tricuspid valve involvement occurs rarely in under five percent, and the pulmonary valve is virtually never involved, reflecting higher left-sided intracardiac pressures.",
+      "say": "Chronic rheumatic heart disease develops decades after the acute fever as repetitive turbulence causes cumulative scarring. Valvular involvement follows a strict hierarchy dominated by the left side of the heart. The mitral valve is involved in virtually all cases, being affected alone in seventy percent and in combination with the aortic valve in twenty-five percent. The low-pressure right-sided valves are largely spared: tricuspid disease is rare, and the pulmonary valve is practically never affected.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-stenosis-fig1.webp",
+        "alt": "Pathological specimen showing chronic rheumatic mitral valve with commissural fusion, chordal shortening, and calcification",
+        "caption": "Rheumatic mitral stenosis pathophysiology, the late valve legacy prophylaxis prevents."
+      }
+    },
+    {
+      "tx": "Because recurrent episodes of Group A streptococcal pharyngitis trigger immunological reactivation and dramatically accelerate chronic valvular destruction, **secondary antibiotic prophylaxis** is mandatory for all confirmed cases. Standard management requires intramuscular injections of long-acting benzathine penicillin G (1.2 million units) administered every three to four weeks. In patients with documented rheumatic carditis and residual valvular disease, prophylaxis is continued for at least ten years after the last acute episode or until forty years of age, and sometimes lifelong for high-risk occupations.",
+      "say": "Preventing recurrent streptococcal pharyngitis is the most important intervention in rheumatic heart disease, because each new throat infection reactivates carditis and severely worsens valvular damage. Patients receive secondary prophylaxis with intramuscular benzathine penicillin G every three to four weeks. In patients with permanent valve disease, prophylaxis continues for at least ten years or until age forty, ensuring the heart is protected throughout their adult life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rheumatic Fever with Carditis & Valve Damage",
+          "points": [
+            "Highest lifetime risk of progressive stenosis",
+            "Prophylaxis duration: At least 10 years or until age 40",
+            "Often requires lifelong prophylaxis if severe",
+            "Intramuscular benzathine penicillin G every 3-4 weeks"
+          ]
+        },
+        "right": {
+          "title": "Rheumatic Fever without Carditis",
+          "points": [
+            "Low risk of long-term valvular deformation",
+            "Prophylaxis duration: 5 years or until age 21",
+            "Can discontinue once low-risk age reached",
+            "Standard oral penicillin or monthly intramuscular injection"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What pathognomonic microscopic myocardial lesion confirms the histological diagnosis of acute rheumatic carditis?",
+      "options": [
+        "Aschoff body containing central fibrinoid necrosis and Anitschkow cells",
+        "Caseating granuloma with Langhans multinucleated giant cells",
+        "Non-caseating sarcoidal granuloma with asteroid and Schaumann bodies",
+        "Suppurative microabscess packed with Staphylococcus aureus colonies"
+      ],
+      "correct": 0,
+      "explain": "The Aschoff body is pathognomonic of acute rheumatic carditis, containing central fibrinoid necrosis surrounded by lymphocytes, plasma cells, and caterpillar-like Anitschkow cells."
+    },
+    {
+      "q": "What is the microscopic appearance of an Anitschkow cell cut in longitudinal section?",
+      "options": [
+        "Slender, wavy central ribbon of chromatin with radiating fibrils resembling a caterpillar",
+        "Large binucleated giant cell with owl-eye inclusion-like eosinophilic nucleoli",
+        "Small cleaved lymphocyte with deep nuclear cleft and scanty cytoplasm",
+        "Signet-ring morphology with peripheral crescentic nucleus compressed by mucin"
+      ],
+      "correct": 0,
+      "explain": "In longitudinal section, the chromatin of an Anitschkow cell forms a central wavy ribbon with radiating lateral fibrils resembling a caterpillar."
+    },
+    {
+      "q": "What is a MacCallum plaque in the context of chronic rheumatic heart disease?",
+      "options": [
+        "A corrugated, irregular subendocardial fibrous patch on the posterior wall of the left atrium",
+        "A calcified atheromatous plaque at the bifurcation of the left anterior descending artery",
+        "A bulky, friable vegetation ulcerating the ventricular surface of the aortic valve",
+        "A dense fibrous scar replacing the posteromedial papillary muscle of the left ventricle"
+      ],
+      "correct": 0,
+      "explain": "A MacCallum plaque is an irregular patch of subendocardial thickening on the posterior wall of the left atrium, caused by the chronic trauma of a regurgitant jet stream from rheumatic mitral valvulitis."
+    }
+  ]
+}

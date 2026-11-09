@@ -1,0 +1,266 @@
+{
+  "v": 1,
+  "id": "cm-occ-diseases-farmer-s-lung",
+  "subject": "community-medicine",
+  "module": "cm-occ-diseases",
+  "title": "Occupational Hazards: Farmers Lung, Coal Workers Anthracosis, Lead Poisoning, and Industrial Cancers",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Etiology and immunology of farmer's lung",
+      "tx": "Agricultural workers handling mouldy hay, damp straw, or stored silage risk developing **farmers lung extrinsic allergic alveolitis**. Inadequate ventilation in storage barns allows heat-tolerant actinomycetes, predominantly Saccharopolyspora rectivirgula formerly known as Micropolyspora faeni, to proliferate in moist organic forage; inhaling high concentrations of these fungal spores triggers a combined type III immune-complex and type IV cell-mediated hypersensitivity reaction within peripheral lung parenchyma.",
+      "say": "Farmer's lung is an allergic lung disease caused by breathing mouldy hay dust. Thermophilic actinomycetes growing in damp hay trigger immune inflammation inside alveolar air sacs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Etiological exposure",
+          "points": [
+            "Mouldy hay and decaying silage grains",
+            "Saccharopolyspora rectivirgula spores",
+            "Spore diameter 1 to 2 microns",
+            "High-temperature barn storage"
+          ]
+        },
+        "right": {
+          "title": "Immunological mechanism",
+          "points": [
+            "Type III Arthus immune complexes",
+            "Type IV delayed cell-mediated response",
+            "Serum precipitating IgG antibodies",
+            "Non-caseating alveolar granulomas"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Clinical presentation and phases of farmer's lung",
+      "tx": "The disease manifests in distinct acute and chronic presentations under **farmers lung clinical evolution phases**. In the acute phase, severe chills, high fever, non-productive cough, and tightness in the chest erupt four to eight hours following antigen exposure, resolving within forty-eight hours if exposure halts; repeated seasonal re-exposure leads to chronic disease marked by progressive exertional breathlessness, anorexia, weight loss, and irreversible upper-lobe interstitial pulmonary fibrosis.",
+      "say": "Acute farmer's lung causes fever, cough, and chest tightness four to eight hours after handling mouldy hay. Repeated exposure causes chronic lung scarring and permanent breathlessness.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical phase",
+          "Onset after exposure",
+          "Dominant signs and pathology"
+        ],
+        "rows": [
+          [
+            "Acute phase",
+            "4 to 8 hours post-inhalation",
+            "High fever, chills, dyspnoea, crepitations"
+          ],
+          [
+            "Subacute phase",
+            "Weeks of insidious exposure",
+            "Productive cough, fatigue, weight loss"
+          ],
+          [
+            "Chronic phase",
+            "Months to years of re-exposure",
+            "Severe breathlessness, clubbing, honeycombing"
+          ],
+          [
+            "Management",
+            "Immediate antigen avoidance",
+            "Oral corticosteroids for severe acute attacks"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Anthracosis and coal workers pneumoconiosis",
+      "tx": "Underground coal mining exposes workers to heavy concentrations of carbonaceous coal dust containing variable silica fractions, producing **coal workers anthracosis pneumoconiosis**. Inhaled carbon particles accumulate around respiratory bronchioles forming distinct coal macules enveloped by delicate reticulin fibers and focal focal emphysema; simple coal workers pneumoconiosis remains largely asymptomatic, but high cumulative dust burdens can progress into Progressive Massive Fibrosis with extensive fibro-anthracotic masses.",
+      "say": "Coal miners inhale carbon dust, forming black coal macules throughout the lungs. In severe cases, these coal spots coalesce into massive black fibrotic scars that destroy breathing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coal-workers-pneumoconiosis-fig1.webp",
+        "alt": "Gross anatomical pathology of lung showing extensive black anthracotic pigmentation and upper lobe progressive massive fibrosis conglomeration",
+        "caption": "Severe coal workers' pneumoconiosis: Dense black anthracotic pigment and upper-lobe progressive massive fibrosis. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Caplan syndrome: rheumatoid coal miners",
+      "tx": "A recognized immunological complication occurring in coal miners and quarry workers with rheumatoid arthritis is **Caplan syndrome rheumatoid pneumoconiosis**. Described by Anthony Caplan, this autoimmune phenotype presents as multiple rounded, discrete, well-defined peripheral pulmonary nodules measuring zero point five to five centimetres in diameter developing rapidly on chest skiagrams; histologically, the nodules exhibit necrobiotic central rheumatoid necrosis surrounded by an intense border of dust-laden macrophages.",
+      "say": "Caplan syndrome strikes coal miners who have rheumatoid arthritis. Round, sharp lung nodules appear rapidly on chest X-rays, showing rheumatoid inflammation around black coal dust.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical characteristics",
+          "points": [
+            "Underlying rheumatoid arthritis diathesis",
+            "Circulating rheumatoid factor positive",
+            "Subcutaneous rheumatoid skin nodules",
+            "Occurs in coal, silica, asbestos workers"
+          ]
+        },
+        "right": {
+          "title": "Radiological findings",
+          "points": [
+            "Multiple bilateral rounded nodules (0.5 to 5 cm)",
+            "Peripheral subpleural lung distribution",
+            "Develops rapidly over weeks",
+            "May cavitate or develop calcification"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Occupational lead exposure and toxic kinetics",
+      "tx": "Inhalation of lead fumes and ingestion of inorganic lead dust in battery manufacturing, lead smelting, brass foundries, shipbreaking, and spray painting produce **occupational plumbism toxicokinetics**. Absorbed lead binds ninety-nine percent to erythrocyte membranes before depositing into soft tissues and displacing calcium within cortical bones, possessing an elimination half-life of thirty days in circulating blood but persisting for over twenty years in skeletal mineral hydroxyapatite reserves.",
+      "say": "Lead poisoning occurs in battery factories and paint shops. Lead binds to red blood cells and deposits into bones, where it remains trapped for more than twenty years.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Inhalation of lead fumes or dust ingestion"
+          },
+          {
+            "id": "l2",
+            "label": "99 percent binding to erythrocyte membranes"
+          },
+          {
+            "id": "l3",
+            "label": "Soft tissue distribution: kidney, brain, liver"
+          },
+          {
+            "id": "l4",
+            "label": "Long-term skeletal sequestration (half-life > 20 yr)"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ],
+          [
+            "l3",
+            "l4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Clinical hallmarks of occupational lead poisoning",
+      "tx": "Chronic heavy lead toxicity impairs multiple physiological systems characterized by **plumbism classic clinical hallmarks**. Patients suffer from severe abdominal cramps termed lead colic, persistent constipation, peripheral motor neuropathy causing bilateral wrist drop from radial nerve axonal degeneration, and encephalopathy; physical examination classically reveals a pathognomonic Burtonian line, presenting as a purplish-blue line along the gingival margin produced by lead sulfide precipitation from oral anaerobic bacteria.",
+      "say": "Lead poisoning causes severe stomach cramps, wrist drop from nerve damage, and anaemia. A blue-purple Burtonian line often appears on the gums along the teeth.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Body system",
+          "Pathological mechanism",
+          "Clinical physical sign"
+        ],
+        "rows": [
+          [
+            "Oral cavity",
+            "Lead sulfide precipitation with oral H2S",
+            "Burtonian blue line on gingival margins"
+          ],
+          [
+            "Peripheral nerves",
+            "Axonal demyelination of radial nerve",
+            "Bilateral wrist drop and finger extensor palsy"
+          ],
+          [
+            "Gastrointestinal",
+            "Spasm of smooth muscle arterioles",
+            "Severe lead colic, obstinate constipation"
+          ],
+          [
+            "Central nervous",
+            "Cerebral capillary edema and gliosis",
+            "Encephalopathy, tremors, insomnia, delirium"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Heme biosynthesis inhibition and basophilic stippling",
+      "tx": "Lead disrupts cellular heme synthesis by inhibiting delta-aminolevulinic acid dehydratase and mitochondrial ferrochelatase, causing accumulation of delta-ALA and coproporphyrin in urine. Furthermore, lead inhibits pyrimidine-5-prime-nucleotidase, preventing ribosomal RNA degradation in reticulocytes and producing **basophilic stippling of erythrocytes**, visualized on Wright-stained peripheral smears as coarse dark blue punctate basophilic granules distributed throughout microcytic hypochromic red blood cells.",
+      "say": "Lead blocks enzymes that make hemoglobin, causing anaemia. It leaves dark blue dots called basophilic stippling inside red blood cells, which is visible on a standard blood smear.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/environmental-and-nutritional-pathology-fig1.webp",
+        "alt": "Microscopic view of peripheral blood smear showing multiple red blood cells with coarse dark blue granular basophilic stippling",
+        "caption": "Lead poisoning hematology: Basophilic stippling of red blood cells caused by lead inhibition of pyrimidine-5-nucleotidase. Credit: StewardMD."
+      }
+    },
+    {
+      "title": "Biological monitoring and chelation protocols",
+      "tx": "Workplace surveillance of lead-exposed personnel evaluates biological action levels under **lead biological monitoring guidelines**. Whole blood lead levels exceeding thirty micrograms per deciliter mandate immediate removal from high-exposure stations; severe plumbism with blood concentrations above seventy micrograms per deciliter or neurological deficits demands aggressive chelation using calcium disodium edetate, intramuscular dimercaprol British anti-Lewisite, or oral dimercaptosuccinic acid succimer to accelerate urinary lead clearance.",
+      "say": "Lead workers are monitored by checking blood lead levels. Levels above thirty micrograms warrant workplace removal, while severe cases require chelation therapy with calcium EDTA.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surveillance marker",
+          "Biological threshold",
+          "Required workplace action"
+        ],
+        "rows": [
+          [
+            "Blood lead level (BLL)",
+            "> 30 micrograms/dL",
+            "Immediate mandatory removal from lead station"
+          ],
+          [
+            "Urinary coproporphyrin",
+            "> 150 micrograms/L",
+            "Flags biochemical enzyme inhibition in marrow"
+          ],
+          [
+            "Urinary delta-ALA",
+            "> 5 mg/L",
+            "Sensitive marker of early metabolic toxicity"
+          ],
+          [
+            "Chelation threshold",
+            "> 70 micrograms/dL or colic",
+            "Inpatient IV CaNa2-EDTA or oral DMSA succimer"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Occupational carcinogens and bladder cancer",
+      "tx": "Workplace exposure to chemical mutagens is responsible for eight to ten percent of all human malignancies categorized as **occupational chemical carcinogenic hazards**. Historical exposure of textile and chemical dye workers to aromatic amines, including 2-naphthylamine, benzidine, and 4-aminobiphenyl, causes transitional cell carcinoma of the urinary bladder after twenty years of latency; similarly, chimney sweeps exposed to coal soot polycyclic hydrocarbons develop scrotal squamous cell carcinoma.",
+      "say": "Chemical dyes like benzidine and 2-naphthylamine cause bladder cancer in industrial dye workers after decades of latency. Regular urine screenings detect early malignant cells.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Occupational carcinogen",
+          "Industrial workplace source",
+          "Target organ malignancy"
+        ],
+        "rows": [
+          [
+            "2-Naphthylamine and benzidine",
+            "Synthetic chemical dyes, rubber factory",
+            "Transitional cell bladder carcinoma"
+          ],
+          [
+            "Coal soot and coal tar",
+            "Chimney sweeping, coke oven plants",
+            "Scrotal squamous cell carcinoma (Pott)"
+          ],
+          [
+            "Arsenic and chromates",
+            "Pesticide manufacturing, metal plating",
+            "Bronchogenic lung carcinoma, skin cancer"
+          ],
+          [
+            "Vinyl chloride monomer",
+            "Polyvinyl chloride (PVC) manufacturing",
+            "Hepatic angiosarcoma"
+          ]
+        ]
+      }
+    }
+  ]
+}

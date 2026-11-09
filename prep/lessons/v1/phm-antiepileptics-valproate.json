@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antiepileptics",
+  "subject": "pharmacology",
+  "title": "Broad Spectrum Agents: Valproate, Ethosuximide, Lamotrigine and Levetiracetam",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Valproate** refuses a single mechanism, enhancing GABA (synthesis up, degradation down), blocking sodium channels and T type calcium currents modestly, which adds up to the broadest spectrum in the cabinet: focal, generalised tonic clonic, absence, myoclonic and photosensitive epilepsies plus bipolar mania and migraine prophylaxis. That breadth made it first choice for generalised epilepsies for decades, until its teratogenicity ledger, detailed shortly, rewrote prescribing for women and girls.",
+      "say": "Valproate does a little of everything and treats almost every seizure type; its pregnancy ledger is the counterweight.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-valproate.webp",
+        "alt": "Valproate sodium channel blockade and T type calcium inhibition illustration",
+        "caption": "Valproate's combined sodium, T type calcium and GABA actions behind its broad seizure spectrum. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Valproate inhibits** rather than induces: it blocks lamotrigine glucuronidation (doubling its half life and rash risk unless doses are halved), raises phenobarbital and free phenytoin levels, and is itself displaced from albumin by phenytoin in a two way tangle. Its own adverse set includes weight gain, tremor, hair loss, thrombocytopenia, hyperammonaemic encephalopathy even with normal liver tests, pancreatitis, and dose related hepatotoxicity worst in children under two on polytherapy with metabolic disease.",
+      "say": "Valproate the inhibitor doubles lamotrigine and can poison liver and ammonia handling; know the list cold.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Valproate interactions",
+          "points": [
+            "Lamotrigine levels double: halve the lamotrigine dose",
+            "Phenobarbital sedation deepened by inhibition",
+            "Free phenytoin rises while total misleads",
+            "Carbapenem antibiotics collapse valproate levels: avoid"
+          ]
+        },
+        "right": {
+          "title": "Valproate adverse set",
+          "points": [
+            "Weight gain, tremor, hair loss and thrombocytopenia",
+            "Hyperammonaemic encephalopathy with normal liver tests",
+            "Pancreatitis and dose related hepatotoxicity",
+            "Polycystic ovary associations debated, monitored"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "No antiepileptic teratogenicity exceeds **valproate**: neural tube defects in 1 to 2 percent, major malformations approaching 10 percent at higher doses, and dose dependent IQ reduction with autism spectrum increase in exposed children. Regulators therefore fence it behind pregnancy prevention programmes, specialist reviews and signed risk acknowledgements for women of childbearing potential, reserving it where alternatives genuinely fail. Preconception neurology review, not abrupt cessation (seizures endanger both lives), is the safe choreography.",
+      "say": "Valproate in pregnancy is the most teratogenic prescription in the cabinet; plan around it before conception.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "woman",
+            "label": "Woman of childbearing potential needs antiepileptic therapy"
+          },
+          {
+            "id": "alt",
+            "label": "Prefer lamotrigine or levetiracetam where efficacy allows"
+          },
+          {
+            "id": "ppp",
+            "label": "Valproate only with pregnancy prevention programme and review"
+          },
+          {
+            "id": "folate",
+            "label": "High dose folate and specialist shared care if exposed"
+          }
+        ],
+        "edges": [
+          [
+            "woman",
+            "alt"
+          ],
+          [
+            "alt",
+            "ppp"
+          ],
+          [
+            "ppp",
+            "folate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ethosuximide** is the narrowest drug in the cabinet and proud of it: selective T type calcium channel blockade in thalamocortical circuits abolishes the 3 per second spike wave of typical absence seizures and does essentially nothing else. It remains first choice for uncomplicated childhood absence, with valproate or lamotrigine added when tonic clonic seizures coexist. Nausea, hiccups and headache are its tolls; rare blood dyscrasias and lupus like reactions complete the list.",
+      "say": "Ethosuximide treats absence and only absence, by closing the thalamic T channel that paces it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typical absence and ethosuximide",
+          "points": [
+            "3 Hz spike wave thalamocortical rhythm",
+            "T type calcium blockade abolishes the pacemaker",
+            "First choice in pure childhood absence epilepsy",
+            "No protection against tonic clonic seizures"
+          ]
+        },
+        "right": {
+          "title": "When absence has company",
+          "points": [
+            "Tonic clonic seizures coexist: valproate covers both",
+            "Lamotrigine broader but slower to titrate",
+            "Sodium channel blockers can aggravate absence",
+            "EEG confirms the syndrome before narrowing therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lamotrigine** stabilises sodium channels and dampens glutamate release, covering focal and generalised seizures including absence, with a mood stabilising career in bipolar depression prevention. Its defining hazard is rash escalating to Stevens Johnson syndrome, governed by titration speed: start low, rise slowly, halve everything beside valproate, double beside inducers. It is among the preferred agents in pregnancy for its relatively favourable malformation profile, with dose surveillance as clearance climbs across gestation.",
+      "say": "Lamotrigine is broad, mood friendly and pregnancy preferred; titrate slowly or the skin objects.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Lamotrigine started at low dose"
+          },
+          {
+            "id": "slow",
+            "label": "Escalation over weeks to maintenance"
+          },
+          {
+            "id": "adjust",
+            "label": "Halve with valproate, double with inducers"
+          },
+          {
+            "id": "rash",
+            "label": "Any rash early: stop and assess for Stevens Johnson"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "slow"
+          ],
+          [
+            "slow",
+            "adjust"
+          ],
+          [
+            "adjust",
+            "rash"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Levetiracetam** binds synaptic vesicle protein SV2A, modulating neurotransmitter release by a mechanism still being fully mapped, and in practice behaves as the modern broad spectrum utility player: focal and generalised seizures, intravenous status second line equality, minimal interactions, renal dosing, and no level monitoring in routine care. Its adverse signature is behavioural: irritability, agitation and depression in a tenth or more of patients, occasionally therapy ending, with pyridoxine sometimes tried in mitigation.",
+      "say": "Levetiracetam interacts with almost nothing and irritates a noticeable minority; ask about mood at every review.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levetiracetam conveniences",
+          "points": [
+            "SV2A binding, oral and intravenous equivalence",
+            "No hepatic enzyme induction or inhibition",
+            "Renal dose adjustment, elderly friendly",
+            "Status epilepticus second line trial equality"
+          ]
+        },
+        "right": {
+          "title": "Levetiracetam costs",
+          "points": [
+            "Irritability, agitation and low mood in a tenth plus",
+            "Somnolence and dizziness early",
+            "Brivaracetam cousin markets cleaner behaviour",
+            "Switch rather than endure behavioural toxicity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Juvenile myoclonic epilepsy** assembles the prescribing morality play: lifelong generalised epilepsy where valproate outperforms, lamotrigine can aggravate myoclonus in some, levetiracetam serves broadly, and sodium channel blockers like carbamazepine frankly worsen both myoclonus and absence. Syndrome diagnosis before drug selection is therefore not academic decoration; the wrong mechanism matched to an unrecognised syndrome manufactures seizures the clinic then chases with doses.",
+      "say": "Name the syndrome first: carbamazepine worsens myoclonic epilepsy that valproate or levetiracetam would calm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Generalised epilepsy choices",
+          "points": [
+            "Valproate most efficacious, teratogenicity fenced",
+            "Levetiracetam broad and interaction free",
+            "Lamotrigine covers absence, may aggravate myoclonus",
+            "Ethosuximide for absence alone"
+          ]
+        },
+        "right": {
+          "title": "Aggravators to avoid",
+          "points": [
+            "Carbamazepine and phenytoin worsen absence and myoclonus",
+            "Gabapentin and pregabalin ineffective in generalised syndromes",
+            "Vigabatrin and tiagabine aggravate absence",
+            "Syndrome misclassification is the root error"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pregnancy prescribing** across the lesson resolves to a league table examinations love: lamotrigine and levetiracetam carry the lowest major malformation rates near background, carbamazepine and phenytoin sit intermediate, valproate stands alone at the top and is avoided wherever possible, and folate supplementation, monotherapy at the lowest effective dose, and level monitoring through pregnancy's clearance swings bind the whole strategy together.",
+      "say": "Lamotrigine and levetiracetam safest, valproate worst, folate and monotherapy for everyone in between.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "plan",
+            "label": "Preconception review: syndrome, drug and dose audit"
+          },
+          {
+            "id": "folate",
+            "label": "Folate supplementation before conception"
+          },
+          {
+            "id": "monitor",
+            "label": "Levels monitored as pregnancy clearance rises"
+          },
+          {
+            "id": "post",
+            "label": "Postpartum dose tapered back within days"
+          }
+        ],
+        "edges": [
+          [
+            "plan",
+            "folate"
+          ],
+          [
+            "folate",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "post"
+          ]
+        ]
+      }
+    }
+  ]
+}

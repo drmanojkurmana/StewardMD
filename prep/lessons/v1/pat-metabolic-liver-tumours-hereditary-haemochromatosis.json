@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Hereditary Haemochromatosis, HFE, Wilson Disease, and Kayser-Fleischer Rings",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hereditary haemochromatosis lets hepcidin deficiency absorb dietary iron without brakes for decades into liver, pancreas, heart, joints, and skin until cirrhosis, diabetes, and bronze pigmentation assemble. Perls Prussian blue paints hepatocyte iron blue with a periportal gradient, and the second and third metacarpophalangeal joints ache early from chondrocalcinosis; together those clues separate **hereditary haemochromatosis** from transfusional loading, where macrophages rather than hepatocytes fill first.",
+      "say": "Bronze skin, diabetes, arthropathy, and a failing liver in middle age mean iron until ferritin clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hemochromatosis-fig1.webp",
+        "alt": "Haemochromatosis iron overload pathophysiology, histology, laboratory findings, and organ injury",
+        "caption": "Haemochromatosis iron overload: pathophysiology, Perls stained liver histology, laboratory pattern, and organ injury."
+      }
+    },
+    {
+      "tx": "HFE mutations, C282Y homozygous chiefly, disable hepcidin signalling so transferrin saturation rises years before ferritin, making saturation the earliest screening signal in families. A fasting **transferrin saturation** above 45 percent earns HFE genotyping, yet many C282Y homozygotes never load significantly, especially women protected for years by menstrual losses, so genotype alone never starts venesection without biochemical evidence of accumulation.",
+      "say": "Saturation rises first in haemochromatosis; ferritin follows the damage it took years to declare.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Screen positive pattern",
+          "points": [
+            "Transferrin saturation raised",
+            "Ferritin raised with loading",
+            "HFE genotype confirms common type"
+          ]
+        },
+        "right": {
+          "title": "Secondary iron overload",
+          "points": [
+            "Transfusion burden history",
+            "Ferroportin and other genes differ",
+            "Liver iron imaging quantifies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Venesection removes iron pint by pint, normalising life expectancy when started before cirrhosis and diabetes fix their damage, family cascade screening protecting siblings silently loading. Each 500 millilitre unit carries away roughly 250 milligrams of iron, weekly sessions continue until ferritin reaches 50 to 100 micrograms per litre, and maintenance **venesection** then holds that range for life while arthropathy, sadly, often keeps progressing regardless.",
+      "say": "Weekly venesection until ferritin falls, then maintenance for life; screen every sibling alongside.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Saturation and ferritin raised"
+          },
+          {
+            "id": "b",
+            "label": "HFE testing and liver staging"
+          },
+          {
+            "id": "c",
+            "label": "Weekly venesection to target ferritin"
+          },
+          {
+            "id": "d",
+            "label": "Maintenance, family cascade screening"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Wilson disease traps copper through ATP7B failure into liver, basal ganglia, and cornea, presenting hepatic or neuropsychiatric in youth with haemolysis during crises. The defective ATP7B pump normally loads copper onto ceruloplasmin and expels surplus into bile, so its failure produces the paradox of copper drowning tissues while circulating **ceruloplasmin** runs low; presentation before age five or after forty remains possible but uncommon.",
+      "say": "Young liver disease plus tremor or psychiatry means Wilson disease; copper poisons liver and brain together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/wilsons-disease-fig1.webp",
+        "alt": "Wilson disease copper overload showing corneal ring, cirrhotic liver, and basal ganglia changes",
+        "caption": "Wilson disease copper overload: corneal Kayser-Fleischer ring, cirrhotic liver, and basal ganglia injury."
+      }
+    },
+    {
+      "tx": "Kayser-Fleischer rings deposit copper in Descemet membrane as golden brown corneal rims visible on slit lamp, present in most neuropsychiatric Wilson disease yet often absent in purely hepatic youth. The ring starts at the upper corneal pole and may need gonioscopy when faint, while a blue green lunule at the nail base and sunflower cataract belong to the same copper signature; a genuine **Kayser-Fleischer ring** fades slowly once decoppering therapy gains control.",
+      "say": "Slit lamp finds Kayser-Fleischer rings; absence never acquits Wilson disease in a cirrhotic teenager.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Wilson pattern",
+          "Caveat"
+        ],
+        "rows": [
+          [
+            "Ceruloplasmin",
+            "Low usually",
+            "Acute phase may normalise"
+          ],
+          [
+            "Urinary copper",
+            "Raised 24 hour excretion",
+            "Collection quality matters"
+          ],
+          [
+            "Kayser-Fleischer rings",
+            "Present neurologic mostly",
+            "Slit lamp required"
+          ],
+          [
+            "Liver copper",
+            "Markedly raised dry weight",
+            "Cholestasis also raises copper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Penicillamine or trientine chelation and zinc blocking absorption decopper Wilson patients, dietary restriction assisting early, transplantation rescuing fulminant presentations with haemolysis. Zinc induces intestinal metallothionein that traps dietary copper inside shed enterocytes, suiting maintenance or presymptomatic siblings, while **penicillamine** can paradoxically worsen neurology during its first weeks, one reason trientine often opens treatment when tremor and dysarthria already dominate the picture.",
+      "say": "Chelate or block copper for life in Wilson disease; stopping therapy invites fulminant relapse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemochromatosis",
+          "points": [
+            "Iron, HFE, hepcidin failure",
+            "Venesection therapy",
+            "Heart, pancreas, joints loaded"
+          ]
+        },
+        "right": {
+          "title": "Wilson disease",
+          "points": [
+            "Copper, ATP7B failure",
+            "Chelation and zinc therapy",
+            "Brain and cornea signed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Low ceruloplasmin misleads in malnutrition, protein loss, and carriers, while high ferritin misleads in inflammation, so metabolic liver diagnoses demand pattern synthesis over single values. Ceruloplasmin behaves as an acute phase reactant, so active hepatitis can drag a truly low value into the normal band; pairing it with 24 hour urinary copper and exchangeable copper ratios rescues **Wilson disease** cases that one misleading number nearly dismissed.",
+      "say": "Ceruloplasmin and ferritin both lie under pressure; metabolic diagnoses are patterns, not numbers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Young cirrhosis or unexplained enzymes"
+          },
+          {
+            "id": "b",
+            "label": "Iron and copper patterns screened"
+          },
+          {
+            "id": "c",
+            "label": "Genetics and slit lamp refine"
+          },
+          {
+            "id": "d",
+            "label": "Family cascade screening follows"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Both diseases reward family screening because asymptomatic siblings share genotypes decades before organs declare damage, converting tragedies into venesection or chelation schedules. Autosomal recessive inheritance gives each sibling a one in four chance of the same disease, so screening begins in childhood for Wilson families, and **cascade screening** that finds a presymptomatic brother converts his future from emergency transplantation toward a simple daily zinc tablet.",
+      "say": "Every haemochromatosis or Wilson diagnosis is a family diagnosis; screen siblings before their organs speak.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "First family test",
+          "Prevention offered"
+        ],
+        "rows": [
+          [
+            "Haemochromatosis",
+            "Saturation, ferritin, HFE",
+            "Venesection before damage"
+          ],
+          [
+            "Wilson disease",
+            "Copper studies, ATP7B",
+            "Chelation or zinc early"
+          ],
+          [
+            "Alpha-1 deficiency",
+            "Level and Pi type",
+            "Smoking avoidance absolute"
+          ],
+          [
+            "All three",
+            "Genetic counselling",
+            "Reproductive information"
+          ]
+        ]
+      }
+    }
+  ]
+}

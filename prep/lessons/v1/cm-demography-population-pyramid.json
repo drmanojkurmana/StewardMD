@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-demography-population-pyramid",
+ "subject": "community-medicine",
+ "module": "cm-demography",
+ "title": "Population Pyramids, Demographic Transition and Dependency Ratios",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Reading a pyramid in ten seconds",
+   "tx": "A **population pyramid** stacks percent of males (left) and females (right) by 5-year age groups, youngest at base. Shape is diagnosis: broad base with rapid taper means high fertility and mortality (expansive), straight sides mean stationary replacement, and a bulging middle with narrow base means constrictive ageing. India's pyramid is bottom-heavy but its base has begun shrinking.",
+   "say": "Base first, then taper. Broad and narrowing fast: expansive youth. Straight sides: stationary. Bulging middle, pinched base: ageing. India's base stays broad yet has begun to shrink, the transition made visible.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Shape", "Name", "Population story"],
+    "rows": [
+     ["Broad base, fast taper", "Expansive", "High fertility and mortality"],
+     ["Straighter sides", "Stationary", "Replacement fertility, low mortality"],
+     ["Narrow base, bulging middle", "Constrictive", "Ageing, below-replacement fertility"]
+    ]
+   }
+  },
+  {
+   "title": "Demographic transition in five stages",
+   "tx": "The **demographic transition** walks from high stationary (birth and death both high) through early expanding (deaths fall first), late expanding (births fall), low stationary (both low), to declining (births below deaths). India sits in late expanding nationally with southern states ahead. Deaths always fall first; that lag is the population explosion's entire mechanism.",
+   "say": "Deaths fall first; births follow late. That lag through expanding stages is the explosion's whole mechanism. India stands late-expanding nationally, southern states a stage ahead. Five stages, one ordering rule.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "High stationary: both rates high"},
+     {"id": "b", "label": "Early expanding: deaths fall"},
+     {"id": "c", "label": "Late expanding: births fall"},
+     {"id": "d", "label": "Low stationary, then declining"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Dependency ratio: workers carrying non-workers",
+   "tx": "The **dependency ratio** divides dependents (0 to 14 plus 65 and above) by the working age population (15 to 64), times 100. Young dependency dominates India's ratio today; old-age dependency climbs as transition proceeds. The ratio prices schools versus pensions in budgets more honestly than total population ever does.",
+   "say": "Dependents over workers, times one hundred. India's burden is young today and ages steadily. Budgets price schools against pensions from this ratio, never from raw population totals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Young dependency",
+     "points": ["Children 0 to 14 dominate", "School and immunisation demand", "Falls as fertility declines"]
+    },
+    "right": {
+     "title": "Old-age dependency",
+     "points": ["65 and above growing", "Pension and chronic care demand", "Rises as transition matures"]
+    }
+   }
+  },
+  {
+   "title": "Demographic dividend: the window",
+   "tx": "The **demographic dividend** opens when working-age share bulges while dependency falls, offering accelerated growth if jobs, skills and health meet the cohort. It is a window, not an entitlement: unemployed bulges convert dividend into unrest in the cautionary literature. India's window spans roughly the mid-2000s to mid-2050s in common projections, peaking state by state at different decades.",
+   "say": "A bulge can pay or explode. Workers swelling while dependents shrink offers growth only where jobs, skills and health meet them. India's window runs decades wide, peaking state by state on different clocks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Dividend requires", "Failure looks like"],
+    "rows": [
+     ["Jobs at cohort scale", "Educated unemployment"],
+     ["Skills matched to markets", "Credential without employment"],
+     ["Healthy working years", "NCD-disabled workforce"]
+    ]
+   }
+  },
+  {
+   "title": "Sex ratio and its distortions",
+   "tx": "**Sex ratio** (females per 1000 males in Indian convention) reads 943 in Census 2011 nationally while child sex ratio (0 to 6 years) fell to 919, accusing sex selection despite overall improvement; NFHS rounds report ratios at birth separately. Kerala's favourable ratios against northern deficits map development and son preference simultaneously on one indicator.",
+   "say": "Females per thousand males: nine forty three overall in 2011, child ratio nine nineteen and falling then. One indicator maps development and son preference simultaneously, state by state.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Sex selection before birth"},
+     {"id": "b", "label": "Child sex ratio distorted"},
+     {"id": "c", "label": "Marriage market squeeze decades later"},
+     {"id": "d", "label": "PCPNDT enforcement and social change respond"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Life expectancy and the mortality transition",
+   "tx": "**Life expectancy** at birth rose in India from about 32 years in 1951 to 69.4 in recent programme ledgers, 37 years added across the family welfare era, while crude death rate fell from 23 to about 6. Epidemiologic transition rides alongside: infections recede, non-communicable and injury shares climb, and dual burden defines the middle passage India occupies.",
+   "say": "Thirty two to sixty nine years across seven decades; death rates quartered. Infections recede while chronic disease and injuries climb, the dual burden of the middle passage India now occupies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "1951", "Recent ledger"],
+    "rows": [
+     ["Life expectancy", "About 32 years", "About 69.4 years"],
+     ["Crude death rate", "23 per 1000", "About 6 per 1000"],
+     ["Crude birth rate", "40.8 per 1000", "19.5 per 1000 (2020)"]
+    ]
+   }
+  },
+  {
+   "title": "Stable, stationary and growing populations",
+   "tx": "A **stationary population** has birth equal to death with no migration (zero growth), a stable population grows at constant rate with fixed structure, and exponential doubling time follows the rule of 70 divided by growth percent. Census decadal growth fell from 21.54 (2001) to 17.64 percent (2011) in the ledger, deceleration examiners quote as transition evidence.",
+   "say": "Vocabulary closes the set. Stationary means births equal deaths; stable means constant growth structure; doubling follows seventy over growth percent. Decadal growth decelerating across censuses evidences transition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stationary",
+     "points": ["Birth rate equals death rate", "Zero population growth", "Constant size, ageing structure"]
+    },
+    "right": {
+     "title": "Stable and growing",
+     "points": ["Constant growth rate and structure", "Doubling time 70 over rate percent", "Decadal growth still decelerating in India"]
+    }
+   }
+  },
+  {
+   "title": "Migration bends pyramids locally",
+   "tx": "**Migration** carves pyramids at working ages: male out-migration hollows origin districts' young adult bars (feminised villages, remittance economies) while destination cities bulge with young men. Census place-of-birth and last-residence streams quantify it. Local health planning ignoring migration misjudges denominators for immunisation, maternity and NCD registers alike.",
+   "say": "Migration carves the middle bars. Origin villages feminise and age; destination cities bulge young and male. Denominators ignoring movement corrupt every register from immunisation to NCD follow-up.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stream", "Pyramid effect"],
+    "rows": [
+     ["Male labour out-migration", "Origin: hollowed young male bars"],
+     ["City in-migration", "Destination: bulging young adults"],
+     ["Marriage migration (women)", "Redistributes young female bars"]
+    ]
+   }
+  },
+  {
+   "title": "From pyramid to service planning",
+   "tx": "**Planning reads pyramids forward**: today's 0 to 4 bar is the school cohort in 5 years and the reproductive cohort in 20; today's bulge is tomorrow's hypertension register. Facility norms per population silently assume structures; ageing districts need chronic care where young districts need maternity beds, from the same norm rupees.",
+   "say": "Read bars as future queues. Toddlers become school cohorts, then parents, then hypertension registers. Ageing districts buy chronic care with the same norm rupees young districts spend on maternity beds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Age structure mapped today"},
+     {"id": "b", "label": "Cohorts projected forward"},
+     {"id": "c", "label": "Service demand forecast by age"},
+     {"id": "d", "label": "Facilities and staff planned to match"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

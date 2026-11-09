@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-local-anaesthetics",
+  "subject": "pharmacology",
+  "title": "Ester versus Amide, Sodium Channel Blockade, Adrenaline, Neuraxial Techniques and Lipid Rescue",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "One benzene ring, one intermediate chain, one amine: local anaesthetics differ by the chain's link, **ester or amide**, and that bond decides metabolism and allergy. Esters (procaine, chloroprocaine, cocaine, tetracaine; one i in the generic name's older convention) are hydrolysed in plasma to PABA allergens. Amides (lignocaine, bupivacaine, ropivacaine, prilocaine; two i's) are hepatic, longer lived, and almost never truly allergenic. The spelling mnemonic survives because it works.",
+      "say": "One i, ester and plasma; two i's, amide and liver. The bond writes the biography.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Esters",
+          "points": [
+            "Procaine, chloroprocaine, cocaine, benzocaine, tetracaine",
+            "Plasma cholinesterase hydrolysis, short action",
+            "PABA metabolite: the allergy family",
+            "Atypical cholinesterase prolongs their action"
+          ]
+        },
+        "right": {
+          "title": "Amides",
+          "points": [
+            "Lignocaine, bupivacaine, ropivacaine, prilocaine, mepivacaine",
+            "Hepatic metabolism, longer action",
+            "True allergy rare; preservatives usually blamed",
+            "Accumulate in liver failure and low output states"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sodium channel blockade** is use dependent: the drug crosses the membrane uncharged, protonates inside, and binds the channel's inner pore preferentially when it is open or inactivated, so rapidly firing pain fibres accumulate block faster than quiet fibres. Small myelinated A delta and unmyelinated C pain fibres succumb before touch and motor fibres, producing the ordered loss: pain, temperature, touch, proprioception, motor. Acidosis in infected tissue ionises drug outside cells and defeats the block, which is why abscesses resist infiltration.",
+      "say": "Firing fibres block first and pain leaves first; acid tissue traps the drug outside and defeats it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Uncharged drug crosses the nerve membrane"
+          },
+          {
+            "id": "proton",
+            "label": "Protonated form binds inner sodium channel pore"
+          },
+          {
+            "id": "use",
+            "label": "Open and inactivated channels bind best: use dependence"
+          },
+          {
+            "id": "order",
+            "label": "Pain, temperature, touch, then motor function lost"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "proton"
+          ],
+          [
+            "proton",
+            "use"
+          ],
+          [
+            "use",
+            "order"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Adrenaline with local anaesthetic** constricts vessels at the injection site, slowing vascular uptake so the block lasts 30 to 50 percent longer, peak plasma levels fall, and the surgical field bleeds less; its tachycardia also betrays accidental intravascular test doses in epidural practice. Concentrations of 1:200,000 (5 microgram per ml) are typical. End arterial territories, digits, penis, ears and nose in compromised circulation, forbid or caution its use lest vasoconstriction ischaemically amputate what the block was meant to serve.",
+      "say": "Adrenaline keeps the drug local and longer; keep it away from end arteries that have no collateral mercy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adrenaline gains",
+          "points": [
+            "Duration extended by a third to a half",
+            "Peak plasma levels and toxicity risk fall",
+            "Drier surgical field",
+            "Intravascular test dose signal in epidurals"
+          ]
+        },
+        "right": {
+          "title": "Adrenaline prohibitions",
+          "points": [
+            "Digits, penis and end arterial territories traditionally",
+            "Compromised flaps and grafts",
+            "Uncontrolled thyrotoxicosis and phaeochromocytoma caution",
+            "Cocaine anaesthetised tissue: catecholamine synergy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spinal anaesthesia** injects a small dose into cerebrospinal fluid at lumbar level for dense, rapid, reliable block below the chosen height: hyperbaric bupivacaine with glucose sinks under gravity to sculpt the level by positioning. Its signature complication is sympathetic blockade with hypotension and bradycardia, managed with fluids and vasopressors, and post dural puncture headache from cerebrospinal fluid leak, prevented by fine pencil point needles and treated by epidural blood patch when conservative measures fail.",
+      "say": "A millilitre in the CSF blocks everything below it; pressure and headache are the prices to manage.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-ana-spinal_inject_aftercare.webp",
+        "alt": "Spinal needle layers, cerebrospinal fluid confirmation, injection and monitoring steps",
+        "caption": "Spinal injection layers, CSF confirmation and aftercare, the technique delivering small dose dense neuraxial blockade. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Epidural** technique parks drug outside the dura where larger volumes bathe nerve roots segmentally, giving a band of analgesia that can be topped up through a catheter for days: labour analgesia, thoracic perioperative care and cancer pain are its empires. Onset is slower and patchier than spinal, motor block lighter at analgesic concentrations, and the catheter adds abscess, haematoma and migration risks that anticoagulation timing rules exist to police.",
+      "say": "Epidurals trade spinal speed for a catheter's endurance; anticoagulant timing guards the space it lives in.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spinal profile",
+          "points": [
+            "Small dose, onset in minutes, dense block",
+            "Single shot duration fixed by agent choice",
+            "Hypotension from sympathetic blockade prominent",
+            "Post dural puncture headache the signature late cost"
+          ]
+        },
+        "right": {
+          "title": "Epidural profile",
+          "points": [
+            "Larger dose, onset over 15 to 20 minutes, segmental band",
+            "Catheter permits days of titrated analgesia",
+            "Test dose detects intrathecal or intravascular placement",
+            "Haematoma and abscess risks govern anticoagulant windows"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cardiotoxicity** is bupivacaine's dark signature because its high lipid solubility and slow dissociation from cardiac sodium channels, combined with potassium and calcium channel effects, produce arrhythmias and contractile collapse resistant to standard resuscitation. Pregnancy increases sensitivity, acidosis and hypoxia amplify binding, and prevention is pure technique: aspiration, incremental dosing, test doses, ultrasound visualisation and dose ceilings. Ropivacaine and levobupivacaine were engineered specifically to widen this margin.",
+      "say": "Bupivacaine grips the heart's channels and will not let go; technique is the only reliable prevention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iv",
+            "label": "Accidental intravascular bupivacaine bolus"
+          },
+          {
+            "id": "grip",
+            "label": "Slow dissociation from cardiac sodium channels"
+          },
+          {
+            "id": "arr",
+            "label": "Refractory arrhythmias and contractile collapse"
+          },
+          {
+            "id": "lipid",
+            "label": "Lipid emulsion plus prolonged CPR offers recovery"
+          }
+        ],
+        "edges": [
+          [
+            "iv",
+            "grip"
+          ],
+          [
+            "grip",
+            "arr"
+          ],
+          [
+            "arr",
+            "lipid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intravenous **lipid emulsion** (20 percent Intralipid) rescues local anaesthetic systemic toxicity by two mechanisms: a lipid sink that extracts lipophilic drug from plasma and tissues down its gradient, and direct cardiotonic and metabolic support to the poisoned myocardium. Dosing is a 1.5 ml per kg bolus with infusion, repeatable to a ceiling near 12 ml per kg, started early in cardiovascular collapse and continued through prolonged resuscitation while standard measures proceed around it.",
+      "say": "Lipid emulsion sponges the drug out of the heart and feeds it meanwhile; start it early, not as a eulogy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lipid rescue protocol",
+          "points": [
+            "20 percent lipid emulsion stocked wherever blocks happen",
+            "Bolus 1.5 ml per kg, then infusion 15 ml per kg per hour",
+            "Repeat bolus and double infusion if unstable",
+            "Continue CPR prolonged: recovery can take an hour"
+          ]
+        },
+        "right": {
+          "title": "Around the lipid",
+          "points": [
+            "Stop injecting, call for help, airway and 100 percent oxygen",
+            "Benzodiazepines for seizures; avoid propofol in collapse",
+            "Adrenaline in small doses; avoid vasopressin and calcium blockers",
+            "Consider cardiopulmonary bypass where available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Additives** refine blocks beyond adrenaline: clonidine and dexmedetomidine prolong neuraxial and peripheral blocks through alpha 2 mechanisms, opioids in the epidural space synergise segmentally, bicarbonate alkalinisation speeds onset by raising the uncharged fraction, and dexamethasone perineurally extends peripheral blocks by hours through debated mechanisms. Each additive imports its own adverse signature, so the plain agent's dose ceiling arithmetic from the previous lesson never leaves the calculation.",
+      "say": "Additives tune duration and onset; none of them repeals the maximum dose arithmetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common additives",
+          "points": [
+            "Adrenaline: duration and intravascular signal",
+            "Clonidine or dexmedetomidine: prolongation, sedation cost",
+            "Bicarbonate: faster onset by alkalinisation",
+            "Dexamethasone perineural: hours of extension"
+          ]
+        },
+        "right": {
+          "title": "Additive discipline",
+          "points": [
+            "Preservative free preparations for neuraxial use",
+            "Each additive's adverse effects owned and monitored",
+            "Local anaesthetic ceiling dose unchanged",
+            "Evidence graded per block type, not assumed"
+          ]
+        }
+      }
+    }
+  ]
+}

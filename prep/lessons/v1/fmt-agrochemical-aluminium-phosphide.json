@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-agrochemical-aluminium-phosphide",
+ "subject": "forensic-medicine",
+ "module": "fmt-agrochemical",
+ "title": "Aluminium Phosphide and Phosphine Poisoning",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Celphos tablets liberate phosphine",
+   "tx": "**Aluminium phosphide** is a solid fumigant pesticide, insecticide and rodenticide sold in India as white three gram tablets, Celphos, Alphos, Quickphos and Phostoxin, each liberating one gram of phosphine on contact with moisture, a reaction accelerated by stomach hydrochloric acid. It is widely used as a grain preservative and carries a garlicky odour. Non toxic phosphite and hypophosphite residues remain in the grain. Half a gram, one to three tablets, is the fatal dose.",
+   "say": "One three gram grain tablet makes a gram of phosphine in the stomach, and half a gram of the salt can kill.",
+   "vis": {"kind": "table", "cols": ["AlP feature", "Detail", "Point"], "rows": [["Tablet", "3 g, white, fumigant brands", "One gram phosphine each"], ["Trigger", "Moisture, faster with stomach acid", "Garlicky odour"], ["Fatal dose", "0.5 g, one to three tablets", "Death often within 24 hours"], ["Residue in grain", "Phosphite, hypophosphite", "Non toxic remains"]]}
+  },
+  {
+   "title": "Phosphine blocks cellular respiration",
+   "tx": "**Phosphine** is rapidly absorbed from gut and lungs by simple diffusion and acts as a systemic poison on all organs, inhibiting respiratory chain enzymes by preferential inhibition of cytochrome oxidase, with cytotoxic action on heart, vessels, lungs, liver and kidney. Some aluminium phosphide is absorbed and metabolised in the liver, releasing phosphine slowly and prolonging symptoms. Phosphine oxidises slowly to oxyacids excreted in urine as hypophosphite, and some leaves unchanged through the lungs.",
+   "say": "Phosphine strangles the electron transport chain in every organ, and slow hepatic release stretches the poisoning out.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tablet meets stomach moisture"}, {"id": "b", "label": "Phosphine gas liberated"}, {"id": "c", "label": "Cytochrome oxidase inhibited"}, {"id": "d", "label": "Heart, lung, liver and kidney fail"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ingestion: gut first, then shock and myocarditis",
+   "tx": "Mild ingestion gives nausea, vomiting, headache and abdominal pain with usual recovery. Moderate and severe **aluminium phosphide ingestion** is early, progressive and mostly fatal: retrosternal pain with vomiting and diarrhoea, then hypotension, shock, arrhythmias, myocarditis, pericarditis and acute congestive failure, cough, dyspnoea, cyanosis, pulmonary oedema and respiratory failure, jaundice and hepatitis, renal failure, and headache, restlessness and altered sensorium. The majority die within twenty four hours, most in the first hours.",
+   "say": "Retrosternal pain, collapsing pressure, arrhythmia and pulmonary oedema kill most severe cases inside the first day.",
+   "vis": {"kind": "compare", "left": {"title": "Cardiovascular collapse", "points": ["Hypotension and shock", "Arrhythmias and myocarditis", "Pericarditis possible", "Acute heart failure"]}, "right": {"title": "Other organ failure", "points": ["Pulmonary oedema, cyanosis", "Jaundice and hepatitis", "Renal failure", "Restlessness, altered sensorium"]}}
+  },
+  {
+   "title": "Inhaled phosphine in fumigation accidents",
+   "tx": "**Inhaled phosphine** at low exposure irritates mucous membranes with dizziness, easy fatigue, chest tightness, nausea, vomiting, diarrhoea and headache. Moderate toxicity adds ataxia, numbness, paraesthesia, tremors, diplopia, jaundice, muscular weakness, incoordination and paralysis. Severe exposure causes adult respiratory distress syndrome, arrhythmias, heart failure, pulmonary oedema, convulsions and coma, with concentrations of four hundred to six hundred parts per million fatal within an hour and illness severe above nought point three parts per million.",
+   "say": "Fumigation workers inhale the same poison: chest tightness first, then ataxia, then lungs and heart failing together.",
+   "vis": {"kind": "table", "cols": ["Exposure", "Phosphine picture", "Guide"], "rows": [["Mild", "Irritation, fatigue, headache", "Remove from source"], ["Moderate", "Ataxia, tremors, jaundice", "Observe closely"], ["Severe", "ARDS, arrhythmia, coma", "Intensive support"], ["0.3 ppm in air", "Severe illness threshold", "Ventilate fumigated spaces"]]}
+  },
+  {
+   "title": "No specific antidote: support is treatment",
+   "tx": "There is **no specific antidote for phosphine**, so treatment is removal from exposure, airway and ventilatory support, correction of shock and arrhythmias, and management of pulmonary oedema and metabolic acidosis. Gastric lavage with potassium permanganate has been used to oxidise phosphide early, with charcoal by some protocols, but outcome is decided by cardiovascular support in an intensive unit. The garlicky odour, tablet history and refractory shock together justify immediate escalation without waiting for laboratory confirmation.",
+   "say": "Support the heart and lungs and treat shock early, because no antidote exists and laboratory proof must never delay care.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Remove from exposure at once"}, {"id": "b", "label": "Secure airway, ventilate"}, {"id": "c", "label": "Treat shock and arrhythmias"}, {"id": "d", "label": "Manage oedema and acidosis"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Silver nitrate test for phosphine",
+   "tx": "Bedside confirmation uses the **silver nitrate paper test**: filter paper impregnated with silver nitrate held over the mouth, gastric contents or lavage fluid blackens in the presence of phosphine, which reduces the silver. Breath and vomit carry the garlicky odour that first suggests the test. Samples for chemical analysis are preserved remembering phosphine oxidises and escapes, so gastric contents and tablets recovered from the scene are sealed promptly and the container is retained with the history.",
+   "say": "Silver nitrate paper blackened by breath or gastric fluid confirms phosphine while the garlic smell still hangs in the air.",
+   "vis": {"kind": "compare", "left": {"title": "Bedside evidence", "points": ["Garlicky odour of breath", "Silver nitrate paper blackens", "Tablet history from family", "Refractory shock pattern"]}, "right": {"title": "Laboratory discipline", "points": ["Seal gastric contents promptly", "Retain scene tablets and container", "Phosphine escapes on standing", "Record fumigant brand and dose"]}}
+  },
+  {
+   "title": "Postmortem findings in phosphide death",
+   "tx": "At autopsy, **aluminium phosphide death** shows garlicky odour on opening the stomach, congested and oedematous lungs, a flabby myocardium with subendocardial haemorrhages in some cases, congested liver and kidneys and froth at the air passages from pulmonary oedema. Greyish tablet residue may remain in the stomach in early deaths. Because phosphine is a gas, viscera analysis must be requested quickly and specifically, or the poison will have oxidised beyond detection by the time routine toxicology runs.",
+   "say": "Garlic on opening the stomach and oedematous lungs mark the death, and toxicology must chase a gas before it vanishes.",
+   "vis": {"kind": "table", "cols": ["Autopsy site", "Phosphide finding", "Action"], "rows": [["Stomach", "Garlicky odour, grey residue", "Seal contents at once"], ["Lungs", "Congested, oedematous, frothy", "Weigh and photograph"], ["Heart", "Flabby, subendocardial bleeds", "Section and sample"], ["Samples", "Request phosphine urgently", "Gas oxidises quickly"]]}
+  },
+  {
+   "title": "Circumstances: suicide, storage accidents",
+   "tx": "**Circumstances of aluminium phosphide poisoning** are dominated by suicidal ingestion of grain tablets in farming households and accidental inhalation during fumigation of grain stores, ships and homes, with children exposed in treated premises. Its ready availability in three gram tablets, rapid lethality and lack of antidote make it a leading suicidal poison in northern India. Prevention is packaging, locked storage, post fumigation ventilation discipline and restriction of loose tablet sales.",
+   "say": "Suicide by grain tablet and fumigation accidents in stores make nearly all phosphide cases, so storage discipline prevents them.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tablets stored with grain"}, {"id": "b", "label": "Suicidal ingestion or inhalation"}, {"id": "c", "label": "Rapid cardiovascular collapse"}, {"id": "d", "label": "Prevention by locked storage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Carbamates, the reversible cousins",
+   "tx": "**Carbamate insecticides** inhibit the same cholinesterase reversibly, decarbamylating spontaneously within hours, so poisoning is shorter and oximes are usually unnecessary while atropine remains the mainstay. Pyrethroids, the other farm family, prolong sodium channel opening with low mammalian toxicity, causing dermatitis, paraesthesia and, in large doses, convulsions, and are treated symptomatically with atropine and oximes contraindicated. Sorting the farm poison by family at the door decides whether the oxime clock is even running.",
+   "say": "Carbamates reverse within hours and need atropine alone, pyrethroids need support only, and neither wants oximes.",
+   "vis": {"kind": "compare", "left": {"title": "Carbamates", "points": ["Reversible enzyme inhibition", "Shorter clinical course", "Atropine mainstay", "Oximes usually unnecessary"]}, "right": {"title": "Pyrethroids", "points": ["Sodium channel prolonged open", "Dermatitis and paraesthesia", "Convulsions in large doses", "Atropine and oximes contraindicated"]}}
+  }
+ ],
+ "quiz": []
+}

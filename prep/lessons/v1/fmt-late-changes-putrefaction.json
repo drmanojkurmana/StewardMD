@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-late-changes-putrefaction",
+ "subject": "forensic-medicine",
+ "module": "fmt-late-changes",
+ "title": "Putrefaction, Marbling, Adipocere and Mummification",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Autolysis comes before bacterial putrefaction",
+   "tx": "Decomposition combines sterile self digestion with bacterial decay, and **autolysis** starts the process. After death, cell membranes leak and lysosomal hydrolases digest the tissue from inside without any bacterial help. The lining of the intestine, adrenal medulla and pancreas autolyse within hours. Heat speeds autolysis, freezing stops it, and the earliest visible hint is a whitish cloudy cornea. Putrefaction then takes over as gut bacteria spread.",
+   "say": "Self digestion by leaked enzymes begins first, and bacterial decay follows once gut organisms spread through the body.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Membranes leak after death"}, {"id": "b", "label": "Lysosomal enzymes digest tissue"}, {"id": "c", "label": "Pancreas and adrenal medulla soften early"}, {"id": "d", "label": "Bacterial putrefaction then dominates"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "The first green patch over the caecum",
+   "tx": "In a body lying in air, the **greenish discolouration over the right iliac fossa** is usually the first external sign of putrefaction. Hydrogen sulphide from the fluid, bacteria rich caecum converts haemoglobin into sulphmethaemoglobin in the overlying skin. It appears in 12 to 18 hours in summer and in one to two days in winter. Internally the same green stain shows under the liver where bowel touches it.",
+   "say": "Green skin over the caecum, from sulphmethaemoglobin, opens putrefaction at twelve to eighteen hours in summer.",
+   "vis": {"kind": "table", "cols": ["Colour stage", "Chemistry", "Typical timing"], "rows": [["Green over caecum", "Sulphmethaemoglobin forms", "12 to 18 hours in summer"], ["Spread over trunk", "Patches join and darken", "Next one to two days"], ["Purple to dark blue", "Further haemoglobin breakdown", "Two to three days"], ["Near black skin", "Advanced pigment change", "Three to four days"]]}
+  },
+  {
+   "title": "Marbling along the superficial veins",
+   "tx": "Haemolysed blood stains the walls of superficial veins and infiltrates outward, producing **marbling of the skin** in a branching tree like pattern. Look over the roots of the limbs, thighs, sides of the abdomen, shoulders, chest and neck. The staining starts at about 24 hours and becomes prominent at 36 to 48 hours. Its linear network follows veins, which separates marbling from the blotchy dependent staining of lividity.",
+   "say": "A branching vein pattern that turns prominent by thirty six to forty eight hours is marbling, not bruising.",
+   "vis": {"kind": "compare", "left": {"title": "Marbling features", "points": ["Branching linear network", "Follows superficial veins", "Greenish brown or purplish red", "Prominent at 36 to 48 hours"]}, "right": {"title": "Lividity features", "points": ["Blotchy dependent patches", "Follows gravity, not veins", "Blanches early, fixes later", "Absent on pressure areas"]}}
+  },
+  {
+   "title": "Gas formation and the postmortem purge",
+   "tx": "Bacterial gases including hydrogen sulphide, methane and ammonia collect from 18 to 36 hours and bloat the face, genitals and abdomen in **gaseous swelling of putrefaction**. Pressure forces bloodstained froth from the mouth and nostrils, the so called postmortem purge. Students must not read that purge as bleeding from an antemortem injury. Gas also lifts the epidermis into blisters at 18 to 24 hours, first on the dependent trunk and thighs.",
+   "say": "Gas bloats the body and pushes froth from the mouth, and that purge must never be called an injury bleed.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Gas forms in bowel at 12 to 18 hours"}, {"id": "b", "label": "Blisters rise on dependent skin"}, {"id": "c", "label": "Face and genitals bloat by 36 hours"}, {"id": "d", "label": "Froth purges from mouth and nostrils"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Order in which organs putrefy",
+   "tx": "Soft, bloody organs close to bowel bacteria decay first, while fibrous structures resist, giving a predictable **order of putrefaction of organs**. The larynx and trachea lead, then stomach, intestines, pancreas and spleen, then liver and lungs, then brain, heart, kidneys and bladder, with prostate and virgin uterus near the end. Skin, muscle, tendon and bone come last. A foamy honeycombed liver reflects gas forming clostridia inside the parenchyma.",
+   "say": "Airway and gut decay first and the virgin uterus and prostate resist longest, so organ state helps order events.",
+   "vis": {"kind": "table", "cols": ["Putrefies early", "Putrefies late", "Reason"], "rows": [["Larynx and trachea", "Prostate and virgin uterus", "Mucosa exposed to air and bacteria"], ["Stomach, gut, spleen", "Kidneys and bladder", "Blood rich and near bowel flora"], ["Liver and lungs", "Skin, muscle and tendon", "Fibrous tissue resists enzymes"], ["Brain and heart", "Bone", "Dense structure decays slowest"]]}
+  },
+  {
+   "title": "What speeds and slows putrefaction",
+   "tx": "Decay runs fastest between 21 and 38 degrees Celsius and roughly doubles with each ten degree rise, illustrating how **temperature governs putrefaction rate** above all external factors. It stops below zero and above 48 degrees. Moist still air and heavy clothing hasten it, while deep burial in dry sandy soil delays it. Septicaemia, peritonitis and anasarca accelerate decay from inside; wasting disease, anaemia and carbolic acid poisoning retard it.",
+   "say": "Warmth, moisture and sepsis speed decay, while freezing, deep dry burial and wasting disease hold it back.",
+   "vis": {"kind": "compare", "left": {"title": "Decay accelerates", "points": ["Temperature 21 to 38 degrees", "Moist still air and clothing", "Septicaemia or gas gangrene", "Fat body retaining heat"]}, "right": {"title": "Decay is delayed", "points": ["Freezing or heat above 48 degrees", "Deep grave in dry sand", "Anaemia and wasting disease", "Carbolic acid or strychnine death"]}}
+  },
+  {
+   "title": "Casper dictum for air, water and earth",
+   "tx": "The classic comparison of media is **Casper dictum**: a body decomposes in air twice as rapidly as in water and eight times as rapidly as in earth, giving the ratio one, two, eight. Reddy cautions that the variation is so wide that the rule has little practical value. In water, change shows first on the face because the floating body hangs face down with the head dependent and congested.",
+   "say": "Air, water and earth decay in the ratio one, two and eight, though real cases stray widely from that rule.",
+   "vis": {"kind": "table", "cols": ["Medium", "Relative decay speed", "First changes seen"], "rows": [["Air", "Fastest, taken as one", "Green patch over caecum"], ["Water", "About half the air rate", "Face and neck first"], ["Earth burial", "About one eighth the air rate", "Delayed by depth and coffin"], ["Warm fresh water", "Faster than cold salt water", "Sewage water speeds it further"]]}
+  },
+  {
+   "title": "Adipocere, the soapy modification",
+   "tx": "In a warm, moist, anaerobic setting, body fat hydrolyses and hydrogenates into **adipocere**, a whitish soapy mass of palmitic, stearic and hydroxystearic acids combined with calcium and ammonium. Clostridial lecithinase drives the change and water is essential. Fresh adipocere is soft and moist; old samples turn dry, hard and brittle, float in water and burn with a faint yellow flame. Faces and buttocks are favourite sites.",
+   "say": "Wet warmth turns fat into soapy adipocere that preserves features, beginning in India within four to five days.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Fat meets water and anaerobes"}, {"id": "b", "label": "Hydrolysis frees fatty acids"}, {"id": "c", "label": "Acids form insoluble soaps"}, {"id": "d", "label": "Firm adipocere preserves the part"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Mummification and why both modifications matter",
+   "tx": "Dry moving air produces the opposite modification, **mummification**, where tissues dehydrate, shrink and turn rusty brown, leathery and brittle, stretched tight over cheek bones and hips. The body may lose 60 to 70 percent of its weight over three months to a year. Both modifications preserve injuries and facial features, so identity and cause of death may still be judged long after ordinary decay would have erased them.",
+   "say": "Dry air shrivels the body into a light leathery mummy, and like adipocere it keeps wounds readable for months.",
+   "vis": {"kind": "compare", "left": {"title": "Adipocere setting", "points": ["Warm, moist and anaerobic", "Immersion or damp burial", "Preserves face and wounds", "May persist for decades"]}, "right": {"title": "Mummification setting", "points": ["Dry or warmed moving air", "Shallow grave in sandy soil", "Skin tight over bony points", "Body loses most of its weight"]}}
+  }
+ ],
+ "quiz": []
+}

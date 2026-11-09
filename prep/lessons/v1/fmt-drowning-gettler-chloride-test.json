@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-drowning-gettler-chloride-test",
+ "subject": "forensic-medicine",
+ "module": "fmt-drowning",
+ "title": "Gettler Chloride Test, Emphysema Aquosum and Washerwoman Hands",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Gettler test compares the two sides of the heart",
+   "tx": "The **Gettler chloride test** compares chloride in blood from the right and left sides of the heart, normally almost equal at about 600 milligrams per 100 millilitres. In fresh water drowning, absorbed water dilutes the blood reaching the left heart, and left sided chloride falls by up to fifty percent. In sea water drowning, haemoconcentration raises left sided chloride by thirty to forty percent. A twenty five percent difference is taken as significant.",
+   "say": "Left heart chloride halved means fresh water, raised by a third means sea water, and twenty five percent is the significant gap.",
+   "vis": {"kind": "table", "cols": ["Drowning medium", "Left heart chloride", "Mechanism"], "rows": [["Fresh water", "Falls up to 50 percent", "Water absorbed, blood diluted"], ["Sea water", "Rises 30 to 40 percent", "Fluid lost to alveoli, blood concentrated"], ["No drowning", "About 600 mg percent both sides", "No dilution gradient"], ["Significant gap", "25 percent difference", "Threshold for a positive test"]]}
+  },
+  {
+   "title": "Why the Gettler test is doubted",
+   "tx": "Reddy labels the Gettler test of doubtful value under **Gettler test limitations**, and the reasons are practical. Chloride shifts begin changing the moment circulation stops, samples mix during removal of the heart, and other deaths disturb electrolytes too. The test cannot separate drowning from postmortem immersion with confidence. Modern examiners treat it as historical supporting evidence at most and never let it override froth, lung findings and the investigation.",
+   "say": "Doubtful on its own, the chloride gap only supports a drowning opinion already built on lungs, froth and history.",
+   "vis": {"kind": "compare", "left": {"title": "Test weaknesses", "points": ["Values shift after death", "Chambers mix at removal", "Other deaths disturb chloride", "Cannot exclude immersion artefact"]}, "right": {"title": "Stronger companions", "points": ["Fine froth in air passages", "Emphysema aquosum lungs", "Grasped weeds in hands", "Diatoms in bone marrow"]}}
+  },
+  {
+   "title": "Strontium and magnesium refinements",
+   "tx": "Two later blood markers refine the same idea in **serum strontium in sea water drowning**. Strontium rises in drowning blood in inverse relation to the volume aspirated and helps separate drowning from postmortem immersion; left to right heart strontium differences always exceed seventy five micrograms per litre in sea water cases. Magnesium on the left side exceeds the right by more than 1.25 milligrams per thousand millilitres in salt water drowning. Plasma specific gravity falls on the left in drowning generally.",
+   "say": "Strontium and magnesium gradients sharpen the old chloride idea for sea water, yet they remain supporting tests only.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sample both heart chambers"}, {"id": "b", "label": "Compare chloride first"}, {"id": "c", "label": "Add strontium and magnesium"}, {"id": "d", "label": "Weigh with autopsy signs, never alone"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Emphysema aquosum examined closely",
+   "tx": "At the table, **emphysema aquosum** lungs announce themselves before sectioning. They are voluminous and ballooned, meet each other in the midline, carry rib grooves on their lateral surfaces and feel doughy, pitting under finger pressure. They do not collapse when removed from the chest and each cut portion keeps its shape with crepitus. Squeezing yields little froth in fresh water cases because the foam locks the air spaces shut.",
+   "say": "Ballooned lungs meeting in the midline, grooved by ribs and pitting like dough, are emphysema aquosum at first sight.",
+   "vis": {"kind": "table", "cols": ["Examination point", "Drowning lung", "Normal lung"], "rows": [["Volume", "Ballooned, meets midline", "Collapses on opening chest"], ["Surface", "Rib grooves laterally", "Smooth surface"], ["Consistency", "Doughy, pits on pressure", "Spongy and elastic"], ["On section", "Crepitus, shape retained", "Collapses flat"]]}
+  },
+  {
+   "title": "Oedema aquosum, flooding without froth",
+   "tx": "When the victim is unconscious at entry, the lungs simply flood without the struggling that whips foam, producing **oedema aquosum**. There are no columns of froth in the airways even though the lungs are waterlogged. This variant explains drownings with heavy wet lungs but clean bronchi, typically where drink, drugs, injury or immersion syndrome removed consciousness first. Its absence of froth must not be read as absence of drowning.",
+   "say": "An unconscious victim floods quietly without froth columns, so wet lungs with clean airways still fit drowning.",
+   "vis": {"kind": "compare", "left": {"title": "Emphysema aquosum", "points": ["Conscious struggle precedes", "Froth columns in airways", "Lungs ballooned and doughy", "Rib grooves present"]}, "right": {"title": "Oedema aquosum", "points": ["Unconscious at entry", "Flooding without froth", "Lungs waterlogged only", "Froth absence explained"]}}
+  },
+  {
+   "title": "Washerwoman hands and feet",
+   "tx": "**Washerwoman hands** are the sodden, bleached, wrinkled swelling of palm and sole epidermis after prolonged immersion, met already as an immersion artefact. The change proves duration in water, not drowning, because it develops after death as readily as during life. After two to four days the epidermis may strip off like a glove. That glove still carries ridge detail early on, so it should be dried, preserved and sent for fingerprint comparison.",
+   "say": "Wrinkled bleached palms prove time in water rather than drowning, and the peeled glove can still yield fingerprints.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Skin immersed for hours"}, {"id": "b", "label": "Epidermis swells and bleaches"}, {"id": "c", "label": "Palms wrinkle like a washerwoman"}, {"id": "d", "label": "Glove peels, preserve for prints"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Weeds, sand and mud in the hands",
+   "tx": "Material clenched in the hands carries more weight than material on the skin in **grasped evidence from water**. Weeds, sand or mud firmly grasped, ideally fixed by cadaveric spasm, show the victim reached and clutched at the bottom or bank while alive. The same weeds lying loose on an open palm may have drifted there after death. Record the material, match it to the scene substrate, and keep it with the case property.",
+   "say": "Clutched weeds matched to the river bed prove a live struggle; loose debris on an open palm proves nothing.",
+   "vis": {"kind": "compare", "left": {"title": "Evidentiary grasping", "points": ["Material locked by spasm", "Matches bed or bank material", "Photographed in place", "Retained as case property"]}, "right": {"title": "Incidental contact", "points": ["Material rests loosely", "Open palm, relaxed fingers", "Deposited by current", "No struggle inferred"]}}
+  },
+  {
+   "title": "Signs that will not be found",
+   "tx": "Several expected findings are absent for defined reasons, collected as **negative findings in drowning**. Petechial haemorrhages on lung surfaces are absent or very rare because trapped air and water compress the interalveolar vessels. In vagal immersion deaths every reliable sign is missing. In dry drowning the appearances are those of asphyxia alone. A delayed postmortem erases froth and lung signs within hours, which is why recovery time belongs in every report.",
+   "say": "Missing lung petechiae fit drowning physiology, and missing everything fits vagal death or delay, so record recovery time always.",
+   "vis": {"kind": "table", "cols": ["Absent finding", "Reason", "Interpretation"], "rows": [["Lung surface petechiae", "Vessels compressed by water", "Consistent with drowning"], ["All reliable signs", "Vagal arrest at entry", "Consider immersion syndrome"], ["Froth columns", "Unconscious flooding", "Oedema aquosum pattern"], ["Any signs at all", "Delayed examination", "Diagnosis by exclusion"]]}
+  },
+  {
+   "title": "Certifying drowning honestly",
+   "tx": "The closing discipline of this module is **honest drowning certification**. Reddy's reliable six, froth outside, grasped weeds, froth inside, waterlogged lungs, water in stomach and bowel, and diatoms in tissues, together make a strong case. With some present, certify drowning and name the signs. With none present but a compelling history, consistent with drowning is defensible. With neither, undetermined protects the innocent better than a guessed drowning.",
+   "say": "Name the signs you found, write consistent with drowning when history alone carries it, and undetermined when neither speaks.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Count the reliable six signs"}, {"id": "b", "label": "Several present, certify drowning"}, {"id": "c", "label": "None, strong history, consistent with"}, {"id": "d", "label": "Neither, certify undetermined"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

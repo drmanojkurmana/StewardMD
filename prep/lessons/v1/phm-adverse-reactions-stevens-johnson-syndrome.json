@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "module": "phm-adverse-reactions",
+  "subject": "pharmacology",
+  "title": "Stevens-Johnson Syndrome, G6PD Deficiency Hemolysis, Slow Acetylation, and Malignant Hyperthermia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Severe cutaneous adverse drug reactions represent life-threatening Type IV cell-mediated hypersensitivity syndromes marked by extensive epidermal necrosis and mucosal sloughing. The classic spectrum comprises **Stevens-Johnson syndrome** and toxic epidermal necrolysis, distinguished strictly by the total percentage of body surface area involved. Stevens-Johnson syndrome involves less than ten percent epidermal detachment, toxic epidermal necrolysis involves greater than thirty percent detachment, while detachment between ten and thirty percent is classified as SJS/TEN overlap.",
+      "say": "Stevens-Johnson syndrome involves less than ten percent body surface detachment, whereas toxic epidermal necrolysis exceeds thirty percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome classification",
+          "Epidermal detachment extent",
+          "Mucosal involvement",
+          "Mortality rate"
+        ],
+        "rows": [
+          [
+            "Stevens-Johnson syndrome (SJS)",
+            "< 10% total body surface area",
+            "Severe involvement of 2+ mucosal sites (oral, ocular, genital)",
+            "Approx 5% to 10%"
+          ],
+          [
+            "SJS / TEN overlap",
+            "10% to 30% body surface area",
+            "Widespread mucosal erosion with confluent purpuric macules",
+            "Approx 15% to 25%"
+          ],
+          [
+            "Toxic epidermal necrolysis (TEN)",
+            "> 30% total body surface area",
+            "Full-thickness epidermal sheet sloughing resembling extensive burns",
+            "Approx 30% to 50%"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pathophysiologically, culprit drug metabolites presented on specific human leukocyte antigen molecules activate drug-specific cytotoxic CD8 T-lymphocytes and natural killer cells. These immune effectors release massive quantities of granulysin, soluble Fas ligand, and perforin/granzyme B, inducing extensive apoptosis of basal keratinocytes and dermo-epidermal junction cleaving. High-risk culprit medications include sulfonamides, aromatic antiepileptics such as carbamazepine and phenytoin, lamotrigine, allopurinol, and nevirapine, illustrating lethal **cutaneous drug eruptions**.",
+      "say": "Cytotoxic T cells and granulysin drive keratinocyte apoptosis in SJS and TEN, triggered by drugs like carbamazepine and allopurinol.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sjs-ten-fig1.webp",
+        "alt": "Stevens-Johnson syndrome and TEN pathophysiology",
+        "caption": "Cutaneous pathophysiology of Stevens-Johnson syndrome demonstrating cytotoxic CD8 T-lymphocyte and granulysin-mediated apoptosis of basal keratinocytes with full-thickness epidermal detachment."
+      }
+    },
+    {
+      "tx": "The most common hereditary red blood cell enzymopathy worldwide is **G6PD deficiency**, an X-linked recessive genetic disorder impairing the first committed step of the hexose monophosphate shunt. Because erythrocytes lack mitochondria and nuclei, the pentose phosphate pathway serves as their exclusive source of nicotinamide adenine dinucleotide phosphate. Impaired NADPH generation prevents glutathione reductase from maintaining protective cellular pools of reduced glutathione, leaving red blood cell membranes vulnerable to oxidative damage.",
+      "say": "X-linked G6PD deficiency impairs erythrocyte NADPH synthesis, depleting reduced glutathione needed to counteract oxidative drug injury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g6p",
+            "label": "Glucose-6-phosphate substrate"
+          },
+          {
+            "id": "g6pd",
+            "label": "G6PD enzyme (blocked/deficient)"
+          },
+          {
+            "id": "nadph",
+            "label": "Impaired NADPH generation"
+          },
+          {
+            "id": "gsh",
+            "label": "Depleted reduced glutathione (GSH)"
+          }
+        ],
+        "edges": [
+          [
+            "g6p",
+            "g6pd"
+          ],
+          [
+            "g6pd",
+            "nadph"
+          ],
+          [
+            "nadph",
+            "gsh"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When patients with G6PD deficiency are exposed to oxidant xenobiotics, hydrogen peroxide and reactive oxygen species accumulate, oxidizing haemoglobin sulfhydryl groups and causing globin chain precipitation into insoluble Heinz bodies. As erythrocytes traverse splenic cords, macrophages pluck out Heinz bodies, creating characteristic bite cells or degmacytes seen on peripheral blood smears. Key offending oxidative pharmaceuticals that precipitate acute **drug-induced hemolysis** include primaquine, dapsone, cotrimoxazole, nitrofurantoin, and rasburicase.",
+      "say": "Oxidant drugs precipitate haemoglobin into Heinz bodies in G6PD deficiency, resulting in splenic bite cell formation and acute haemolysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/g6pd-deficiency-fig1.webp",
+        "alt": "G6PD deficiency enzymatic block and haemolysis",
+        "caption": "Glucose-6-phosphate dehydrogenase metabolic pathway blockade in red blood cells impairing glutathione reduction and precipitating acute drug-induced haemolysis."
+      }
+    },
+    {
+      "tx": "Genetically determined variations in hepatic N-acetyltransferase 2 activity divide patient populations into rapid and **slow acetylators**. In slow acetylators, deficient cytosolic NAT2 enzyme activity impedes the Phase II synthetic inactivation of aromatic amine and hydrazine drugs, leading to high parent drug accumulation. Clinical consequences include marked susceptibility to isoniazid-induced peripheral neuropathy, dapsone-induced methemoglobinemia, and a heightened risk of drug-induced systemic lupus erythematosus following chronic hydralazine or procainamide therapy.",
+      "say": "Slow acetylators carry deficient NAT2 activity, accumulating drugs and developing peripheral neuropathy from isoniazid and drug-induced lupus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Slow acetylators (NAT2 recessive)",
+          "points": [
+            "Homozygous recessive NAT2 genotype",
+            "Prolonged plasma half-life of isoniazid",
+            "High susceptibility to peripheral neuropathy",
+            "Increased risk of hydralazine-induced lupus"
+          ]
+        },
+        "right": {
+          "title": "Rapid acetylators (NAT2 dominant)",
+          "points": [
+            "Homozygous or heterozygous dominant genotype",
+            "Rapid hepatic clearance of parent drug",
+            "Requires higher therapeutic doses of isoniazid",
+            "Higher conversion to hepatotoxic acetylhydrazine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "An unexpected, hypermetabolic pharmacogenetic crisis triggered during general anaesthesia is **malignant hyperthermia**. This life-threatening autosomal dominant skeletal muscle channelopathy is caused primarily by missense mutations in the ryanodine receptor gene on chromosome 19. Upon exposure to volatile halogenated inhalation anaesthetics such as halothane, isoflurane, or the depolarizing neuromuscular blocker succinylcholine, the mutated RYR1 calcium release channel locks in a persistent open state, flooding the sarcoplasm with uncontrolled calcium.",
+      "say": "Malignant hyperthermia is an autosomal dominant RYR1 channelopathy triggered by volatile anaesthetics and succinylcholine, causing calcium flooding.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+        "alt": "Malignant hyperthermia and anaesthesia action sites",
+        "caption": "Sarcoplasmic ryanodine receptor calcium channel dysregulation in malignant hyperthermia triggered by volatile general anaesthetics and treated with intravenous dantrolene."
+      }
+    },
+    {
+      "tx": "Uncontrolled sarcoplasmic calcium flooding drives continuous, uncoupled actin-myosin cross-bridge cycling and accelerates sarcoplasmic reticulum calcium-ATPase consumption. This hypermetabolic storm consumes vast adenosine triphosphate stores and generates massive metabolic heat, manifesting as generalised masseter muscle spasm, unexplained hypercapnia on capnography, severe mixed metabolic-respiratory acidosis, and rapid temperature escalation exceeding forty-two degrees Celsius. Rhabdomyolysis releases potassium and myoglobin, risking fatal hyperkalaemic cardiac arrest and acute **myoglobinuric renal failure**.",
+      "say": "Intracellular hypermetabolism produces masseter spasm, extreme hypercapnia, severe acidosis, hyperthermia, and fatal hyperkalaemic cardiac arrest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trigger",
+            "label": "Inhaled anaesthetic or succinylcholine exposure"
+          },
+          {
+            "id": "calcium",
+            "label": "Massive sarcoplasmic RYR1 calcium efflux"
+          },
+          {
+            "id": "hypermetabolism",
+            "label": "Sustained muscle contracture & ATP depletion"
+          },
+          {
+            "id": "crisis",
+            "label": "Extreme hyperthermia, hypercapnia & rhabdomyolysis"
+          }
+        ],
+        "edges": [
+          [
+            "trigger",
+            "calcium"
+          ],
+          [
+            "calcium",
+            "hypermetabolism"
+          ],
+          [
+            "hypermetabolism",
+            "crisis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emergency management of malignant hyperthermia requires immediate cessation of all triggering volatile agents and succinylcholine, hyperventilation with one hundred percent oxygen, and swift administration of **intravenous dantrolene**. Dantrolene acts directly on skeletal muscle by binding the RYR1 channel, blocking sarcoplasmic calcium release and arresting the hypermetabolic crisis. Concurrently, clinicians actively cool the patient with iced intravenous saline, correct hyperkalaemia with calcium gluconate and insulin-dextrose, and promote diuresis to avert acute tubular necrosis.",
+      "say": "Treatment mandates immediate anaesthetic cessation, high-flow oxygen, active cooling, and rapid administration of intravenous dantrolene.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intervention step",
+          "Therapeutic action",
+          "Clinical rationale",
+          "Specific drug or measure"
+        ],
+        "rows": [
+          [
+            "Trigger cessation",
+            "Discontinue inhalational agent & succinylcholine",
+            "Halts further channel stimulation",
+            "Switch to clean non-triggering TIVA (propofol)"
+          ],
+          [
+            "Specific antidote",
+            "Administer IV dantrolene sodium",
+            "Directly blocks RYR1 channel calcium release",
+            "Initial bolus 2.5 mg/kg IV, repeat up to 10 mg/kg"
+          ],
+          [
+            "Ventilatory support",
+            "Hyperventilate with 100% pure oxygen",
+            "Flushes massive carbon dioxide excess",
+            "High minute ventilation via clean tubing"
+          ],
+          [
+            "Metabolic correction",
+            "Manage hyperkalaemia and acidosis",
+            "Prevents fatal cardiac dysrhythmias",
+            "IV sodium bicarbonate, insulin with 50% dextrose"
+          ]
+        ]
+      }
+    }
+  ]
+}

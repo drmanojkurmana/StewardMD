@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-contraception-chhaya",
+  "subject": "community-medicine",
+  "module": "cm-contraception",
+  "title": "Centchroman (Chhaya), Antara Injectable, and Emergency Contraception",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Centchroman: India's own weekly pill",
+      "tx": "**Centchroman (ormeloxifene)**, marketed in the programme as Chhaya, is a non steroidal selective estrogen receptor modulator developed at the Central Drug Research Institute, Lucknow. It prevents implantation by dyssynchronising endometrial development without suppressing ovulation in most cycles. The schedule is twice weekly for the first three months, then once weekly, a rhythm Indian women manage without daily pill fatigue.",
+      "say": "Chhaya is India's weekly non hormonal pill. It blocks implantation by changing the uterine lining, not by stopping ovulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ch1", "label": "Twice weekly tablets for 3 months" },
+          { "id": "ch2", "label": "Then one tablet every week" },
+          { "id": "ch3", "label": "Endometrium kept out of phase for implantation" }
+        ],
+        "edges": [["ch1", "ch2"], ["ch2", "ch3"]]
+      }
+    },
+    {
+      "title": "Chhaya: suitability and cautions",
+      "tx": "Because it contains no steroid hormones, **centchroman suitability** extends to many women who cannot take estrogen, but it is avoided in polycystic ovarian disease, cervical hyperplasia, chronic liver or kidney disease, and lactation in the first six months under programme guidance. The signature side effect is delayed cycles and occasional scanty periods, which counselling must preview to prevent panic discontinuation.",
+      "say": "Chhaya avoids steroid side effects, but delayed periods are common. Warn women beforehand and avoid it in polycystic ovaries and liver disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Good candidates",
+          "points": ["Women wanting spacing without hormones", "Those forgetting daily pills", "Couples awaiting a long acting method"]
+        },
+        "right": {
+          "title": "Avoid in",
+          "points": ["Polycystic ovarian disease", "Chronic liver or kidney disease", "Cervical hyperplasia history"]
+        }
+      }
+    },
+    {
+      "title": "Antara: the quarterly injectable",
+      "tx": "**Antara injectable contraception** is depot medroxyprogesterone acetate one hundred fifty milligrams given intramuscularly every three months (with a two week grace window) under the national programme. It suppresses ovulation, thickens cervical mucus, and thins endometrium. Amenorrhoea builds over months of use, fertility returns after a median delay of about ten months from the last injection, and bone density dips reversibly during use.",
+      "say": "Antara is a three monthly injection. Periods fade with use, and fertility returns about ten months after the last dose.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Antara feature", "Programme fact"],
+        "rows": [
+          ["Dose and route", "150 mg intramuscular, every 3 months"],
+          ["Grace period", "Up to 2 weeks late without backup"],
+          ["Bleeding pattern", "Irregular early, amenorrhoea later"],
+          ["Fertility return", "Median about 10 months after last dose"]
+        ]
+      }
+    },
+    {
+      "title": "Implants and other hormonal options",
+      "tx": "Subdermal **contraceptive implants** (single rod etonogestrel systems working three years, and two rod levonorgestrel systems working five) sit in the same long acting family as injectables but need trained insertion and removal. Their typical use Pearl index rivals sterilisation because user action ends at insertion. Irregular bleeding, not weight or mood mythology, is the leading reason for early removal requests.",
+      "say": "Implants work for three to five years with sterilisation level efficacy. Irregular bleeding is the main complaint to counsel about.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Injectable (Antara)",
+          "points": ["Clinic visit every 3 months", "Private, no pelvic procedure", "Delayed fertility return"]
+        },
+        "right": {
+          "title": "Implant",
+          "points": ["One procedure for 3 to 5 years", "Minor arm procedure to remove", "Immediate fertility return"]
+        }
+      }
+    },
+    {
+      "title": "Emergency contraception: levonorgestrel pill",
+      "tx": "After unprotected intercourse, the **levonorgestrel emergency contraceptive pill** (one point five milligrams single dose) delays ovulation and works best within twenty four hours, remaining licensed to seventy two hours with falling efficacy. It does not interrupt an established pregnancy and is not an abortifacient. The programme brand Ezy Pill and similar tablets are available free at public facilities and over the counter in pharmacies.",
+      "say": "The emergency pill delays ovulation and works best in the first day, up to three days. It cannot end an established pregnancy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "em1", "label": "Unprotected intercourse occurs" },
+          { "id": "em2", "label": "Levonorgestrel 1.5 mg as early as possible" },
+          { "id": "em3", "label": "Start regular contraception immediately" }
+        ],
+        "edges": [["em1", "em2"], ["em2", "em3"]]
+      }
+    },
+    {
+      "title": "Emergency options ranked",
+      "tx": "Ranked by efficacy, **emergency contraception options** place the copper intrauterine device first (over ninety nine percent, usable to five days, then continuing as long term contraception), ulipristal acetate second (to one hundred twenty hours, prescription), and levonorgestrel third (to seventy two hours, over the counter). The older Yuzpe combined regimen survives only where dedicated products are unavailable, burdened by nausea and vomiting.",
+      "say": "Copper device beats every emergency pill and keeps protecting for ten years. Ulipristal reaches five days; levonorgestrel reaches three.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Emergency method", "Window and rank"],
+        "rows": [
+          ["Copper IUCD", "Up to 5 days, most effective"],
+          ["Ulipristal acetate 30 mg", "Up to 120 hours"],
+          ["Levonorgestrel 1.5 mg", "Up to 72 hours"],
+          ["Yuzpe regimen", "Fallback only, high nausea"]
+        ]
+      }
+    },
+    {
+      "title": "What emergency pills cannot do",
+      "tx": "Emergency tablets do not protect against later acts in the same cycle, do not harm an existing pregnancy, and do not affect future fertility; repeated use signals an unmet need for regular contraception, which is the real **counselling after emergency contraception**. Vomiting within two hours of levonorgestrel needs a repeat dose with an antiemetic, and enzyme inducing drugs reduce pill efficacy, favouring the copper device.",
+      "say": "One emergency dose covers one act only. Use the visit to start a regular method instead of repeating emergencies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Emergency pill does",
+          "points": ["Delays or blocks ovulation", "Covers the single past act", "Bridges to a regular method"]
+        },
+        "right": {
+          "title": "Emergency pill does not",
+          "points": ["End an implanted pregnancy", "Protect later acts this cycle", "Damage future fertility"]
+        }
+      }
+    },
+    {
+      "title": "Newer programme methods at a glance",
+      "tx": "India's expanded basket now spans **modern spacing methods in the national programme**: Chhaya weekly pills, Antara quarterly injections, postpartum intrauterine devices, and implants in phased districts, alongside condoms, pills, and sterilisations. The Mission Parivar Vikas districts with total fertility above three received intensified supply, newlywed kits, and counselling first, an equity targeting examiners cite as model programme design.",
+      "say": "The basket now includes weekly pills, quarterly injections, and postpartum devices. High fertility districts got intensified Mission Parivar Vikas support.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Method", "User action needed"],
+        "rows": [
+          ["Chhaya (centchroman)", "Weekly tablet"],
+          ["Antara (DMPA)", "Injection every 3 months"],
+          ["Postpartum IUCD", "None after insertion"],
+          ["Implant", "None for 3 to 5 years"]
+        ]
+      }
+    },
+    {
+      "title": "Exam traps across hormonal methods",
+      "tx": "Classic traps separate look alikes: **centchroman versus combined pill differences** include non steroidal action, weekly dosing, implantation blockade rather than ovulation suppression, and delayed periods rather than withdrawal bleeds. Depot medroxyprogesterone delays fertility return while implants and devices do not, and levonorgestrel emergency pills lose to copper devices on both window and efficacy despite easier access.",
+      "say": "Chhaya blocks implantation weekly without steroids. Only the injectable delays fertility return among the long acting reversible methods.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "tr1", "label": "Weekly non steroidal tablet: Chhaya" },
+          { "id": "tr2", "label": "Quarterly injection, slow return: Antara" },
+          { "id": "tr3", "label": "Emergency champion: copper device" }
+        ],
+        "edges": [["tr1", "tr2"], ["tr2", "tr3"]]
+      }
+    }
+  ]
+}

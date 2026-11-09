@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-respiratory-rna-viruses",
+  "subject": "microbiology",
+  "title": "Influenza Virus, Haemagglutinin, Neuraminidase, H1N1 and H5N1",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Influenza viruses** are enveloped, segmented, negative sense RNA orthomyxoviruses. **Haemagglutinin** binds sialic acid and mediates entry; **neuraminidase** cleaves sialic acid to release progeny and penetrate mucus. Influenza A infects humans and animals and causes pandemics; B mainly circulates in humans; C is usually mild. Subtypes are named by HA and NA, such as H1N1 and H3N2.",
+      "say": "HA gets influenza in, NA gets it out, and both name the subtype.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemagglutinin",
+          "points": [
+            "Binds sialic acid receptors",
+            "Membrane fusion after endosomal acidification",
+            "Principal neutralising antibody target",
+            "Eighteen subtypes known in animal reservoirs"
+          ]
+        },
+        "right": {
+          "title": "Neuraminidase",
+          "points": [
+            "Releases virions from infected cells",
+            "Prevents aggregation in mucus",
+            "Target of oseltamivir and zanamivir",
+            "Eleven subtypes described"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**H1N1** caused the 1918 pandemic and re-emerged as a swine-origin pandemic virus in 2009, after which it became a seasonal lineage. **H5N1** is a highly pathogenic avian influenza with sporadic severe human infections after bird exposure but limited sustained human transmission so far. The public health fear is adaptation or reassortment that adds efficient human spread to avian virulence.",
+      "say": "H1N1 proved pandemic spread; H5N1 warns through severe zoonotic spillover.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pandemic 2009 H1N1",
+          "points": [
+            "Swine origin reassortant",
+            "Younger people disproportionately affected",
+            "Pregnancy and obesity increased severe risk",
+            "Now part of seasonal vaccines"
+          ]
+        },
+        "right": {
+          "title": "H5N1 spillover",
+          "points": [
+            "Poultry and wild bird reservoir",
+            "Severe pneumonia and multiorgan disease",
+            "Exposure history is vital",
+            "Sustained human transmission remains uncommon"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Influenza illness begins abruptly with fever, myalgia, headache, sore throat and cough after a short incubation. Primary viral pneumonia can progress rapidly, while secondary bacterial pneumonia follows with **Staphylococcus aureus**, Streptococcus pneumoniae or Haemophilus influenzae. Children may develop otitis media or croup; older adults and pregnant or chronically ill patients suffer most exacerbations and cardiovascular complications.",
+      "say": "A biphasic fever after influenza should raise secondary bacterial pneumonia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uncomplicated course",
+          "points": [
+            "Abrupt systemic symptoms",
+            "Dry cough and myalgia",
+            "Fever improves over several days",
+            "Cough and fatigue can linger"
+          ]
+        },
+        "right": {
+          "title": "Complicated course",
+          "points": [
+            "Progressive dyspnoea and hypoxaemia",
+            "Recrudescent fever after initial improvement",
+            "Purulent sputum suggests bacterial superinfection",
+            "Myocarditis, encephalitis and rhabdomyolysis rarely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rapid molecular assays and multiplex PCR are preferred for hospital diagnosis because antigen tests miss many infections. **Neuraminidase inhibitors** oseltamivir and zanamivir are most effective early but are still used in hospitalised or severe disease after forty eight hours. Baloxavir inhibits cap-dependent endonuclease and truncates viral replication. Adamantanes are generally obsolete for influenza A because resistance is widespread.",
+      "say": "In severe influenza, treat on suspicion and do not let a negative rapid antigen test overrule PCR-level concern.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnostics",
+          "points": [
+            "RT PCR most sensitive",
+            "Rapid molecular assays suit urgent decisions",
+            "Antigen tests have limited sensitivity",
+            "Sample nasopharynx early for best yield"
+          ]
+        },
+        "right": {
+          "title": "Antivirals",
+          "points": [
+            "Oseltamivir oral neuraminidase inhibitor",
+            "Zanamivir inhaled; avoid in reactive airway caution",
+            "Baloxavir single dose in eligible outpatients",
+            "Peramivir intravenous option in some systems"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Annual **influenza vaccination** is updated for antigenic drift and remains the central prevention measure. Live attenuated intranasal, inactivated, recombinant and cell-based vaccines cover different age and risk groups. Vaccine effectiveness varies by match and season but protection against intensive care and death can persist even when infection occurs. Healthcare worker vaccination reduces patient exposure and staff outbreak disruption.",
+      "say": "Even imperfect influenza vaccines reduce severe outcomes and hospital pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "surveil",
+            "label": "Global strain surveillance"
+          },
+          {
+            "id": "select",
+            "label": "Vaccine strains selected"
+          },
+          {
+            "id": "produce",
+            "label": "Egg, cell or recombinant production"
+          },
+          {
+            "id": "protect",
+            "label": "Seasonal population protection"
+          }
+        ],
+        "edges": [
+          [
+            "surveil",
+            "select"
+          ],
+          [
+            "select",
+            "produce"
+          ],
+          [
+            "produce",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Human airway epithelium predominantly displays alpha 2,6 linked sialic acids, whereas avian viruses prefer **alpha 2,3** receptors deeper in the respiratory tract and in birds' intestines. This receptor distribution helps explain why avian viruses may cause severe lower respiratory disease yet transmit inefficiently by cough. Mutations or reassortment changing receptor binding are monitored as pandemic risk markers.",
+      "say": "Receptor geography explains both avian influenza severity and poor human transmission.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Human adapted",
+          "points": [
+            "Alpha 2,6 sialic acid upper airway",
+            "Efficient cough transmission",
+            "Seasonal H1 and H3 viruses",
+            "Antigenic drift maintains circulation"
+          ]
+        },
+        "right": {
+          "title": "Avian adapted",
+          "points": [
+            "Alpha 2,3 receptors in bird gut and human deep lung",
+            "Severe pneumonia after high exposure",
+            "Upper airway replication less efficient",
+            "Genetic monitoring for host adaptation"
+          ]
+        }
+      }
+    }
+  ]
+}

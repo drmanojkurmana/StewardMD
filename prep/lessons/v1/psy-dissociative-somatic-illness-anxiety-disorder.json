@@ -1,0 +1,272 @@
+{
+ "v": 1,
+ "id": "psy-dissociative-somatic-illness-anxiety-disorder",
+ "subject": "psychiatry",
+ "module": "psy-dissociative-somatic",
+ "title": "Illness Anxiety, Factitious Disorder, and Malingering",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Illness anxiety disorder**, historically termed hypochondriasis, is characterized by preoccupation with having or acquiring a serious, undiagnosed medical illness, despite minimal or absent somatic symptoms. If physical sensations are present, they are normal physiological variants, such as harmless borborygmi, interpreted as catastrophic malignant disease.",
+   "say": "Illness anxiety disorder involves persistent preoccupation with harboring a serious undiagnosed disease, despite minimal or absent somatic symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Illness Anxiety Disorder",
+     "points": [
+      "Somatic symptoms absent or very mild",
+      "Preoccupation with the idea of being sick",
+      "High anxiety regarding medical diagnoses",
+      "Excessive checking or complete doctor avoidance"
+     ]
+    },
+    "right": {
+     "title": "Somatic Symptom Disorder",
+     "points": [
+      "Prominent, distressing physical symptoms present",
+      "Focus is on the distress caused by the pain",
+      "Chronic pain, fatigue, and bowel complaints",
+      "Seeks medical relief for physical sensations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Care-seeking versus care-avoidant subtypes** characterize patients with illness anxiety disorder based on their health utilization behaviors. Care-seeking individuals repeatedly schedule medical appointments, consult multiple specialists, and request invasive imaging; care-avoidant individuals avoid doctors and hospitals due to overwhelming terror that lethal cancer will be diagnosed.",
+   "say": "Illness anxiety divides into care-seeking patients who demand endless scans and care-avoidant patients who fearfully shun all hospitals.",
+   "vis": {
+    "kind": "table",
+    "title": "Illness Anxiety Behavioral Phenotypes",
+    "cols": [
+     "Phenotype",
+     "Behavioral Pattern",
+     "Clinical Pitfall"
+    ],
+    "rows": [
+     [
+      "Care-seeking type",
+      "Frequent clinic visits, doctor shopping, repeat MRIs",
+      "Iatrogenic harm from unnecessary invasive procedures"
+     ],
+     [
+      "Care-avoidant type",
+      "Avoids all medical appointments, clinics, and testing",
+      "Delay in diagnosing genuine emergent medical illness"
+     ],
+     [
+      "Reassurance trap",
+      "Repeated reassurance provides relief for hours only",
+      "Reassurance reinforces compulsive health checking"
+     ],
+     [
+      "Internet cyberchondria",
+      "Compulsive searching of medical symptom databases",
+      "Escalates catastrophic interpretation of normal body signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Factitious disorder**, also designated Munchausen syndrome when severe, is characterized by the intentional falsification, fabrication, or self-induction of physical or psychological signs or symptoms. The individual presents themselves as ill, injured, or impaired, with the sole deceptive motive of assuming the sick role.",
+   "say": "Factitious disorder involves deliberate fabrication or induction of illness to assume the patient role, without external financial incentives.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Factitious Disorder",
+     "points": [
+      "Deliberate deception and symptom fabrication",
+      "Primary psychological motive: sick role adoption",
+      "Absence of external financial or legal gain",
+      "Willingness to undergo painful invasive surgery"
+     ]
+    },
+    "right": {
+     "title": "Malingering Presentation",
+     "points": [
+      "Deliberate exaggeration or feigning of disease",
+      "Motivated purely by tangible external incentives",
+      "Avoids military duty, prison, or gains money",
+      "Refuses painful or risky medical procedures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Methods of symptom fabrication in factitious disorder** demonstrate remarkable medical sophistication, including contaminating urine samples with feces to simulate sepsis, injecting insulin to induce hypoglycaemia, or manipulating clinical thermometers. Patients frequently possess medical backgrounds, exhibit multiple abdominal laparotomy scars (gridiron abdomen), and wander between hospitals under pseudonyms.",
+   "say": "Factitious patients fabricate illness by contaminating urine, injecting insulin, or tampering with thermometers, often displaying multiple surgical scars.",
+   "vis": {
+    "kind": "table",
+    "title": "Common Factitious Mechanisms",
+    "cols": [
+     "Simulated Condition",
+     "Deceptive Fabrication Technique",
+     "Diagnostic Confirmation"
+    ],
+    "rows": [
+     [
+      "Recurrent polymicrobial sepsis",
+      "Self-injection of saliva or feces into intravenous lines",
+      "Polymicrobial blood cultures with oral/fecal flora"
+     ],
+     [
+      "Surreptitious hypoglycaemia",
+      "Exogenous insulin administration",
+      "Low C-peptide paired with high serum insulin"
+     ],
+     [
+      "Factitious haematuria",
+      "Adding finger-prick blood to clean urine specimen",
+      "Cystoscopy normal; supervised clean-catch specimen clear"
+     ],
+     [
+      "Unexplained skin ulcers",
+      "Application of caustic chemicals or mechanical scratching",
+      "Lesions confined to areas reachable by dominant hand"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Factitious disorder imposed on another**, historically termed Munchausen syndrome by proxy or medical child abuse, involves a perpetrator fabricating or inducing physical illness in another vulnerable person, typically a mother harming her young child. The perpetrator deceptively presents the victim as sick, seeking attention as a devoted caregiver.",
+   "say": "Factitious disorder imposed on another involves a caregiver fabricating illness in a child to gain attention, constituting severe child abuse.",
+   "vis": {
+    "kind": "flow",
+    "title": "Medical Child Abuse Investigation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Child with bizarre, recurrent illness resolving only when mother is absent"
+     },
+     {
+      "id": "n2",
+      "label": "Mother appears remarkably calm, medically knowledgeable, and refuses to leave"
+     },
+     {
+      "id": "n3",
+      "label": "Implement covert video surveillance or strict supervised nursing separation"
+     },
+     {
+      "id": "n4",
+      "label": "Immediate child protection notification and legal separation to prevent fatality"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malingering** is not a mental disorder, but a calculated behavior defined as the intentional production of false or grossly exaggerated physical or psychological symptoms motivated entirely by external incentives. Secondary gains driving malingering include evading military conscription or criminal prosecution, obtaining financial disability compensation, or securing hospital shelter.",
+   "say": "Malingering is the intentional feigning of illness motivated by external rewards like disability money, dodging criminal charges, or avoiding work.",
+   "vis": {
+    "kind": "table",
+    "title": "Differential Framework Across Somatic Deceptions",
+    "cols": [
+     "Category",
+     "Symptom Production",
+     "Conscious Motivation",
+     "External Incentive"
+    ],
+    "rows": [
+     [
+      "Somatic symptom disorder",
+      "Unconscious / Genuine",
+      "Unconscious psychological distress",
+      "Absent"
+     ],
+     [
+      "Conversion disorder",
+      "Unconscious / Genuine",
+      "Unconscious stress resolution",
+      "Absent"
+     ],
+     [
+      "Factitious disorder",
+      "Conscious / Fabricated",
+      "Internal sick role adoption",
+      "Absent"
+     ],
+     [
+      "Malingering",
+      "Conscious / Fabricated",
+      "External tangible rewards",
+      "Present (Money, legal escape)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secondary gain versus primary gain** delineates the psychological rewards operating in somatic conditions. Primary gain, characteristic of conversion disorder, refers to the internal reduction of psychological conflict achieved by converting distress into physical symptoms; secondary gain refers to external advantages gained from being sick, such as disability payments.",
+   "say": "Primary gain resolves internal psychological conflict through somatic conversion. Secondary gain provides external benefits like financial disability payments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Gain",
+     "points": [
+      "Internal emotional conflict resolution",
+      "Anxiety kept outside conscious awareness",
+      "Characteristic of conversion disorder",
+      "Operates outside conscious awareness"
+     ]
+    },
+    "right": {
+     "title": "Secondary Gain",
+     "points": [
+      "Tangible external real-world benefits",
+      "Exemption from work and family obligations",
+      "Monetary disability and insurance claims",
+      "Consciously exploited in malingering"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Detection of malingering** relies on clinical suspicion aroused by marked discrepancy between claimed disability and objective findings, lack of cooperation during diagnostic evaluations, and presence of antisocial personality disorder. Specialized forced-choice psychological tests, such as the Test of Memory Malingering, reveal performance significantly worse than chance.",
+   "say": "Malingering is suspected when claims clash with objective exams. Specialized forced-choice testing reveals scores worse than random chance.",
+   "vis": {
+    "kind": "table",
+    "title": "Malingering Warning Indicators",
+    "cols": [
+     "Clinical Domain",
+     "Observed Behavior",
+     "Diagnostic Implication"
+    ],
+    "rows": [
+     [
+      "Medicolegal context",
+      "Referred by attorney or pending criminal trial",
+      "High index of suspicion for feigned symptoms"
+     ],
+     [
+      "Clinical discrepancy",
+      "Claims total blindness yet avoids colliding with furniture",
+      "Direct physical evidence contradicts symptom report"
+     ],
+     [
+      "Cooperation level",
+      "Refuses standard tests or acts uncooperatively",
+      "Fear of objective detection and exposure"
+     ],
+     [
+      "Memory testing",
+      "Scores below fifty percent on two-alternative forced-choice test",
+      "Active intent to fail; worse than pure random guessing"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

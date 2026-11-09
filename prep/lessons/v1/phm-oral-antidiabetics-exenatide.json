@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-oral-antidiabetics",
+  "subject": "pharmacology",
+  "title": "GLP 1 Receptor Agonists and Tirzepatide: Exenatide, Liraglutide, Semaglutide",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Exenatide**, synthetic exendin 4 from Gila monster venom, resists DPP 4 beheading and opened the GLP 1 receptor agonist class: glucose dependent insulin secretion, glucagon suppression, slowed gastric emptying and central satiety in one peptide. Twice daily injections before meals taught the class's manners (nausea front loaded, dose escalation over weeks), and its extended release weekly suspension proved patients would trade daily needles for weekly ones when efficacy followed.",
+      "say": "Exenatide proved a venom peptide could run glucose, stomach and appetite from one receptor.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GLP 1 agonist actions",
+          "points": [
+            "Glucose dependent insulin secretion",
+            "Glucagon suppressed when glucose is high",
+            "Gastric emptying slowed, postprandial peaks blunted",
+            "Central satiety: intake and weight fall"
+          ]
+        },
+        "right": {
+          "title": "Class adverse grammar",
+          "points": [
+            "Nausea and vomiting early, dose escalation mitigates",
+            "Gastroparesis and ileus cautions",
+            "Pancreatitis warnings debated, counsel symptoms",
+            "Gallbladder events and heart rate rise modestly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Liraglutide**, fatty acid chained to albumin for a 13 hour half life and daily injection, delivered the class's first cardiovascular outcome victory (LEADER: fewer major events and cardiovascular deaths in high risk type 2 diabetes) and a licensed obesity dose above its diabetes dose. Its daily rhythm and outcome pedigree kept it prescribed long after weekly rivals arrived, particularly where cardiovascular indications are written into the choice.",
+      "say": "Liraglutide made GLP 1 a cardiovascular drug, not only a glucose drug, and proved it daily.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lira",
+            "label": "Liraglutide daily injection, albumin bound"
+          },
+          {
+            "id": "esc",
+            "label": "Weekly dose escalation against nausea"
+          },
+          {
+            "id": "glu",
+            "label": "HbA1c and weight fall over months"
+          },
+          {
+            "id": "cv",
+            "label": "Cardiovascular outcomes benefit in high risk diabetes"
+          }
+        ],
+        "edges": [
+          [
+            "lira",
+            "esc"
+          ],
+          [
+            "esc",
+            "glu"
+          ],
+          [
+            "glu",
+            "cv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Semaglutide** stretched the half life to a week (weekly injection) and then abolished the needle for many with an oral daily formulation riding an absorption enhancer on an empty stomach ritual. STEP and SUSTAIN programmes delivered weight losses of 10 to 15 percent and HbA1c falls nearing 2 percent, numbers that reorganised obesity medicine. Retinopathy signals with rapid HbA1c improvement in high risk eyes and dose dependent nausea discipline its escalation.",
+      "say": "Semaglutide made weekly, then daily oral, GLP 1 therapy powerful enough to rebuild obesity practice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Semaglutide forms",
+          "points": [
+            "Weekly subcutaneous: diabetes and obesity doses",
+            "Oral daily: empty stomach, small sip, 30 minute fast",
+            "Weight loss 10 to 15 percent in obesity trials",
+            "Cardiovascular outcome benefit in type 2 diabetes"
+          ]
+        },
+        "right": {
+          "title": "Escalation discipline",
+          "points": [
+            "Monthly dose steps against gastrointestinal tolerance",
+            "Nausea usually peaks after each increase",
+            "Eye review where retinopathy and rapid falls meet",
+            "Stop before elective anaesthesia per aspiration guidance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tirzepatide** adds GIP receptor agonism to GLP 1 (a twincretin), and the duet outperformed either alone in SURPASS and SURMOUNT programmes: HbA1c falls beyond 2 percent and weight losses approaching 20 percent in obesity trials, resetting what pharmacotherapy may promise before bariatric surgery. Its adverse grammar remains gastrointestinal and dose paced; whether GIP agonism or antagonism is the ideal partner stays mechanistically argued even as outcomes accumulate.",
+      "say": "Tirzepatide duets GLP 1 with GIP and out loses every predecessor; the stomach still sets the tempo.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tirz",
+            "label": "Weekly tirzepatide, dual GIP and GLP 1 agonism"
+          },
+          {
+            "id": "esc",
+            "label": "Escalation every 4 weeks against tolerance"
+          },
+          {
+            "id": "weight",
+            "label": "Weight loss approaching surgical ranges in trials"
+          },
+          {
+            "id": "watch",
+            "label": "Pancreatitis symptoms and gallbladder vigilance counselled"
+          }
+        ],
+        "edges": [
+          [
+            "tirz",
+            "esc"
+          ],
+          [
+            "esc",
+            "weight"
+          ],
+          [
+            "weight",
+            "watch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **GLP 1 agonist** class rules for examinations assemble cleanly: never combine with DPP 4 inhibitors (same axis, no additive gain), expect hypoglycaemia only when insulin or sulfonylureas ride along (reduce those first), warn of nausea and dose pacing, avoid in personal or family medullary thyroid carcinoma or MEN 2 (rodent C cell signal in labelling), and plan perioperative fasting because delayed gastric emptying aspirates.",
+      "say": "No gliptin partner, reduce the sulfonylurea first, and respect the stomach before every anaesthetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prescribing rules",
+          "points": [
+            "Never combine with DPP 4 inhibitors",
+            "Reduce sulfonylurea or insulin to avert hypoglycaemia",
+            "Escalate monthly, counsel nausea honestly",
+            "Oral contraceptive absorption: backup advised after dose rises"
+          ]
+        },
+        "right": {
+          "title": "Exclusions and alerts",
+          "points": [
+            "Medullary thyroid carcinoma or MEN 2 history",
+            "Prior serious pancreatitis: caution and counsel",
+            "Severe gastroparesis: avoid",
+            "Perioperative aspiration planning with anaesthesia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cardiovascular and kidney outcome** trials redrew the diabetes map around this class and the SGLT2 inhibitors next lesson: in type 2 diabetes with established cardiovascular disease or high risk, a GLP 1 agonist with outcome benefit (liraglutide, semaglutide, dulaglutide) is indicated independent of HbA1c, because the events prevented outnumber the glucose points argued. Prescribing by glucose alone after these trials is practising a previous decade's medicine.",
+      "say": "After the outcome trials, these drugs are prescribed for hearts at any HbA1c the patient happens to have.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Outcome proven choices",
+          "points": [
+            "Liraglutide, semaglutide, dulaglutide: event reduction",
+            "Indication independent of baseline HbA1c",
+            "Stroke reduction signals across meta analyses",
+            "Weight and pressure dividends accompany"
+          ]
+        },
+        "right": {
+          "title": "Choosing against SGLT2 rivals",
+          "points": [
+            "Heart failure and kidney progression: SGLT2 leads",
+            "Stroke and weight predominance: GLP 1 argues first",
+            "Many patients earn both sequentially",
+            "Needle acceptance and cost arbitrate locally"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Obesity pharmacotherapy beyond diabetes** borrows the same agents at higher doses (semaglutide 2.4 mg weekly, tirzepatide obesity dosing, liraglutide 3 mg daily historically), with discontinuation regain as the honest footnote: most weight returns within a year of stopping in follow up studies, reframing obesity as chronic relapsing disease needing maintenance therapy rather than a course of injections. Muscle mass preservation (protein, resistance training) joins the prescription as lean mass shares the losses.",
+      "say": "Stop the drug and most weight returns; prescribe maintenance and muscle protection, not a course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Obesity dose GLP 1 therapy started with lifestyle programme"
+          },
+          {
+            "id": "loss",
+            "label": "Weight falls over 12 to 18 months to plateau"
+          },
+          {
+            "id": "maintain",
+            "label": "Maintenance dosing, protein and resistance training"
+          },
+          {
+            "id": "stop",
+            "label": "Stopping predicts regain: chronic disease framing"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "loss"
+          ],
+          [
+            "loss",
+            "maintain"
+          ],
+          [
+            "maintain",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Practical titration closes the** lesson: start exenatide, liraglutide, semaglutide or tirzepatide at initiation doses that are deliberately subtherapeutic, climb every four weeks as nausea permits, never chase HbA1c faster than the stomach allows, and reduce or hold for intolerable gastrointestinal effects rather than abandoning the class at the first wave. Antiemetic crutches are brief; dose patience is the actual antiemetic.",
+      "say": "The titration schedule is the treatment; nausea management is calendar management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Titration habits",
+          "points": [
+            "Initiation doses are tolerance doses, not therapy",
+            "Escalate every 4 weeks as tolerated",
+            "Smaller, slower meals reduce nausea",
+            "Hold a step rather than abandoning for transient nausea"
+          ]
+        },
+        "right": {
+          "title": "Counselling script",
+          "points": [
+            "Nausea peaks days after each increase",
+            "Fullness arrives early: stop eating sooner",
+            "Vomiting or severe abdominal pain: seek care",
+            "Weight and HbA1c judged at maintenance, not initiation"
+          ]
+        }
+      }
+    }
+  ]
+}

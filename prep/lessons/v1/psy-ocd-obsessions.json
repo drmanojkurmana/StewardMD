@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "id": "psy-ocd-obsessions",
+ "subject": "psychiatry",
+ "module": "psy-ocd",
+ "title": "Obsessive-Compulsive Disorder Phenomenology and Related Conditions",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Obsessions** are defined as recurrent, persistent, intrusive, and unwanted thoughts, urges, or images that enter consciousness repeatedly and cause marked anxiety or psychological distress. The individual recognizes that these mental intrusions are products of their own mind, actively attempting to ignore, suppress, or neutralize them.",
+   "say": "Obsessions are persistent, intrusive thoughts or urges recognized as products of one's own mind that provoke marked anxiety and distress.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/obsessive-compulsive-disorder-fig1.webp",
+    "alt": "Cortico-striato-thalamo-cortical circuit dysregulation and compulsive ritual cycle in OCD",
+    "caption": "Cortico-striato-thalamo-cortical circuit dysregulation and compulsive ritual cycle in OCD.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Compulsions** are repetitive overt behaviors, such as hand washing, ordering, or checking, or covert mental acts, such as praying or counting, that a person feels driven to perform. Compulsions are executed strictly in response to an obsession, or according to rigid rules, aiming to alleviate anxiety.",
+   "say": "Compulsions are repetitive physical or mental rituals performed to neutralize obsession-induced anxiety or prevent a dreaded catastrophe.",
+   "vis": {
+    "kind": "flow",
+    "title": "The OCD Symptom Cycle",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Intrusive obsession generates intense distress and guilt"
+     },
+     {
+      "id": "n2",
+      "label": "Compulsive physical or mental ritual performed"
+     },
+     {
+      "id": "n3",
+      "label": "Transient reduction in subjective anxiety"
+     },
+     {
+      "id": "n4",
+      "label": "Negative reinforcement cements compulsion and invites next obsession"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ego-dystonic nature of OCD** distinguishes obsessive thoughts from delusions and personality traits: the patient experiences the intrusive ideas as alien to their authentic self, irrational, and deeply distressing. In contrast, ego-syntonic conditions, such as obsessive-compulsive personality disorder, feature rigid perfectionism that the patient views as completely rational.",
+   "say": "OCD symptoms are ego-dystonic because patients recognize their thoughts as irrational and distressing, unlike ego-syntonic personality rigidity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "OCD (Ego-Dystonic)",
+     "points": [
+      "Intrusive thoughts felt as foreign and repulsive",
+      "Patient recognizes rituals are senseless",
+      "Severe internal psychological distress",
+      "Seeks medical help to eliminate symptoms"
+     ]
+    },
+    "right": {
+     "title": "OCPD (Ego-Syntonic)",
+     "points": [
+      "Perfectionism viewed as purposeful and correct",
+      "No insight that behavior is unreasonable",
+      "Blames others for disorganization",
+      "Pervasive across lifelong personality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Contamination obsessions and cleaning compulsions** represent the most common OCD symptom dimension, presenting with paralyzing fears of bodily secretions, germs, chemicals, or radiation. Patients spend hours engaged in ritualistic hand scrubbing with boiling water or harsh antiseptics, resulting in severe irritant contact dermatitis.",
+   "say": "Contamination fears and repetitive cleaning constitute the most frequent OCD subtype, often causing severe irritant skin dermatitis.",
+   "vis": {
+    "kind": "table",
+    "title": "OCD Symptom Dimensions",
+    "cols": [
+     "Obsessive Theme",
+     "Accompanying Compulsion",
+     "Typical Functional Trap"
+    ],
+    "rows": [
+     [
+      "Contamination",
+      "Hand washing, surface wiping, shower rituals",
+      "Refusing to touch doorknobs; skin excoriation"
+     ],
+     [
+      "Pathological doubt",
+      "Checking door locks, stoves, electrical switches",
+      "Lateness to work; returning home multiple times"
+     ],
+     [
+      "Symmetry & order",
+      "Arranging items in pairs, precise alignment",
+      "Hours spent positioning desktop utensils"
+     ],
+     [
+      "Taboo sexual / aggressive",
+      "Mental neutralizing, silent prayers, counting",
+      "Profound shame, guilt, and social withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Checking compulsions and pathological doubt** arise from an unshakeable conviction that an omitted action will cause catastrophic harm, such as leaving a gas burner on and burning down the house. Patients check locks and electrical appliances dozens of times in rigid sequences, unable to trust their visual memory.",
+   "say": "Pathological doubt drives checking rituals where patients repeatedly inspect locks and gas valves, unable to trust their own perceptual memory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Checking Phenomenology",
+     "points": [
+      "Driven by pathological uncertainty and doubt",
+      "Exaggerated sense of personal responsibility",
+      "Fear of being directly liable for catastrophe",
+      "Memory distrust despite verified checking"
+     ]
+    },
+    "right": {
+     "title": "Symmetry Phenomenology",
+     "points": [
+      "Driven by an internal sense of 'not just right'",
+      "Desire for visual balance and order",
+      "Compulsive rearranging and precise alignment",
+      "Absence of catastrophic harm ideation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hoarding disorder** is characterized by persistent difficulty discarding or parting with possessions regardless of their actual value, driven by a perceived need to save items and distress associated with discarding them. Accumulation clutters active living areas to the point where sleeping, cooking, or walking becomes impossible.",
+   "say": "Hoarding disorder involves persistent inability to discard valueless items, severely cluttering living quarters and creating major domestic hazards.",
+   "vis": {
+    "kind": "table",
+    "title": "Hoarding Disorder Evaluation",
+    "cols": [
+     "Criterion",
+     "Clinical Feature",
+     "Domestic Hazard"
+    ],
+    "rows": [
+     [
+      "Possession retention",
+      "Indiscriminate saving of mail, boxes, wrappers",
+      "Rooms filled from floor to ceiling"
+     ],
+     [
+      "Discard distress",
+      "Acute emotional anxiety when throwing trash away",
+      "Refusal of municipal waste removal services"
+     ],
+     [
+      "Space compromise",
+      "Kitchens, beds, and hallways rendered unusable",
+      "Severe fire hazard and insect infestation"
+     ],
+     [
+      "Insight level",
+      "Often poor or absent; ego-syntonic saving",
+      "Rejection of family cleanup interventions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Body dysmorphic disorder** involves intense preoccupation with one or more perceived defects or flaws in physical appearance that are completely unnoticeable or appear slight to others. Patients engage in repetitive behaviors such as mirror checking, excessive grooming, skin picking, or seeking unnecessary cosmetic surgical procedures.",
+   "say": "Body dysmorphic disorder causes intense distress over minor or unnoticeable appearance flaws, prompting repetitive mirror checking and cosmetic surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preoccupations",
+     "points": [
+      "Facial blemishes, nose shape, skin pores",
+      "Thinning hair or balding patterns",
+      "Muscle dysmorphia (perceived small frame)",
+      "Breast or genital symmetry concerns"
+     ]
+    },
+    "right": {
+     "title": "Repetitive Behaviors",
+     "points": [
+      "Compulsive mirror gazing or mirror avoidance",
+      "Extensive camouflaging with heavy makeup",
+      "Seeking repeated cosmetic surgery",
+      "Constant reassurance seeking from others"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Neurobiology of OCD** centers on hyperactivity within orbitofronto-striato-thalamic circuits, linking the orbitofrontal cortex, anterior cingulate gyrus, and caudate nucleus. Functional imaging demonstrates elevated metabolic activity in these loops, which normalizes following successful treatment with high-dose serotonergic antidepressants or cognitive behavioral therapy.",
+   "say": "OCD involves hyperactive metabolic loops between the orbitofrontal cortex, anterior cingulate, and caudate nucleus that normalize after successful therapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Corticostriatal Circuitry in OCD",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Orbitofrontal cortex detects error & generates worry signal"
+     },
+     {
+      "id": "n2",
+      "label": "Caudate nucleus fails to filter intrusive error signals"
+     },
+     {
+      "id": "n3",
+      "label": "Thalamus discharges continuous alarm to sensory cortex"
+     },
+     {
+      "id": "n4",
+      "label": "Compulsive ritual attempts to reset dysfunctional loop"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

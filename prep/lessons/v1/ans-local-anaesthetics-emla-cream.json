@@ -1,0 +1,300 @@
+{
+    "v": 1,
+    "id": "ans-local-anaesthetics-emla-cream",
+    "subject": "anaesthesia",
+    "module": "ans-local-anaesthetics",
+    "title": "Topical Anaesthesia: EMLA Cream, Prilocaine Methaemoglobinaemia, and Cocaine",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Eutectic Mixture Properties of EMLA",
+            "tx": "**Eutectic mixture of local anaesthetics formulation** (EMLA) combines 2.5 percent crystalline lignocaine and 2.5 percent crystalline prilocaine in a 1:1 ratio by weight. When these two solid local anaesthetics are mixed together at room temperature, their combined melting point plummets to 18 degrees Celsius (well below individual melting points of 68C for lignocaine and 38C for prilocaine), melting into a high-concentration liquid oil droplets emulsion.",
+            "say": "Eutectic mixture of local anaesthetics formulation (EMLA) combines 2.5 percent crystalline lignocaine and 2.5 percent crystalline prilocaine in a 1:1 ratio by weight. When these two solid local anaesthetics are mixed together at room temperature, their combined melting point plummets to 18 degrees Celsius (well below individual melting points of 68C for lignocaine and 38C for prilocaine), melting into a high-concentration liquid oil droplets emulsion.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physical Component",
+                    "Pure Solid Melting Point",
+                    "Eutectic Mixture Formulation",
+                    "Cutaneous Penetration Depth"
+                ],
+                "rows": [
+                    [
+                        "Pure Lignocaine Crystals",
+                        "68 degrees Celsius",
+                        "2.5 percent by weight",
+                        "Solitary solid penetrates stratum corneum poorly"
+                    ],
+                    [
+                        "Pure Prilocaine Crystals",
+                        "38 degrees Celsius",
+                        "2.5 percent by weight",
+                        "Solitary solid penetrates stratum corneum poorly"
+                    ],
+                    [
+                        "Combined Eutectic Mixture",
+                        "18 degrees Celsius (oil liquid)",
+                        "Homogeneous liquid droplet emulsion",
+                        "Penetrates intact stratum corneum up to 5 mm"
+                    ],
+                    [
+                        "Occlusive Dressing Requirement",
+                        "Tegaderm polyurethane film",
+                        "Maintains hydration and skin contact",
+                        "Demands 60 minutes for dermal venipuncture"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "EMLA Depth and Timing",
+            "tx": "**Cutaneous penetration kinetics of EMLA** demand application under an airtight occlusive dressing for a minimum of 60 minutes to achieve adequate dermal analgesia (reaching a depth of 3 to 4 millimeters, sufficient for intravenous cannulation and venipuncture). For split-thickness skin graft harvesting or deep dermatological excision, application must be extended to 120 minutes to achieve 5 millimeters of anaesthetic depth.",
+            "say": "Cutaneous penetration kinetics of EMLA demand application under an airtight occlusive dressing for a minimum of 60 minutes to achieve adequate dermal analgesia (reaching a depth of 3 to 4 millimeters, sufficient for intravenous cannulation and venipuncture). For split-thickness skin graft harvesting or deep dermatological excision, application must be extended to 120 minutes to achieve 5 millimeters of anaesthetic depth.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Apply thick layer (1 to 2 g/10 cm2) of EMLA cream to intact skin"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Cover with occlusive polyurethane transparent dressing"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Wait 60 minutes for venipuncture (120 minutes for skin graft)"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Wipe cream completely; painless vascular cannulation within 1-2 hours"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Prilocaine and Ortho-Toluidine Metabolism",
+            "tx": "**Prilocaine hepatic metabolism into ortho-toluidine** occurs via hepatic microsomal amidases, cleaving prilocaine into carbon dioxide, n-propylalanine, and ortho-toluidine (o-toluidine). Ortho-toluidine is a potent oxidizing agent that oxidizes normal ferrous iron (Fe2+) in haemoglobin into ferric iron (Fe3+), forming methaemoglobin, which cannot bind or transport oxygen, shifting the oxygen-haemoglobin dissociation curve sharply to the left.",
+            "say": "Prilocaine hepatic metabolism into ortho-toluidine occurs via hepatic microsomal amidases, cleaving prilocaine into carbon dioxide, n-propylalanine, and ortho-toluidine (o-toluidine). Ortho-toluidine is a potent oxidizing agent that oxidizes normal ferrous iron (Fe2+) in haemoglobin into ferric iron (Fe3+), forming methaemoglobin, which cannot bind or transport oxygen, shifting the oxygen-haemoglobin dissociation curve sharply to the left.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Ferrous Haemoglobin (Fe2+)",
+                    "points": [
+                        "Normal physiological state of circulating iron atoms",
+                        "Reversibly binds molecular oxygen for systemic delivery",
+                        "Maintains normal sigmoidal oxygen dissociation curve"
+                    ]
+                },
+                "right": {
+                    "title": "Oxidized Methaemoglobin (Fe3+)",
+                    "points": [
+                        "Formed by ortho-toluidine oxidation of heme iron",
+                        "Incapable of binding molecular oxygen for tissue release",
+                        "Locks remaining heme subunits, shifting curve to the left"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Clinical Methaemoglobinaemia Features",
+            "tx": "**Clinical signs of methaemoglobinaemia** manifest when methaemoglobin levels surpass 10 to 15 percent, producing slate-grey cyanosis unresponsive to 100 percent supplemental oxygen, alongside characteristically dark chocolate-brown arterial blood that fails to turn bright red upon exposure to air. Above 30 to 50 percent, patients develop severe headache, fatigue, tachycardia, confusion, lactic acidosis, and cardiac arrest.",
+            "say": "Clinical signs of methaemoglobinaemia manifest when methaemoglobin levels surpass 10 to 15 percent, producing slate-grey cyanosis unresponsive to 100 percent supplemental oxygen, alongside characteristically dark chocolate-brown arterial blood that fails to turn bright red upon exposure to air. Above 30 to 50 percent, patients develop severe headache, fatigue, tachycardia, confusion, lactic acidosis, and cardiac arrest.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "MetHb Percentage",
+                    "Visual and Arterial Blood Signs",
+                    "Cardiorespiratory Symptoms",
+                    "Pulse Oximetry Behavior"
+                ],
+                "rows": [
+                    [
+                        "10 to 20 percent",
+                        "Slate-grey perioral and nailbed cyanosis",
+                        "Asymptomatic or mild fatigue",
+                        "Falsely reads approximately 85 percent SpO2"
+                    ],
+                    [
+                        "20 to 30 percent",
+                        "Dark chocolate-brown blood on filter paper",
+                        "Dyspnoea, tachypnoea, headache, dizziness",
+                        "Locked at 85 percent regardless of PaO2"
+                    ],
+                    [
+                        "30 to 50 percent",
+                        "Profound generalized cyanosis",
+                        "Tachycardia, confusion, lethargy, syncope",
+                        "Locked at 85 percent; severe tissue hypoxia"
+                    ],
+                    [
+                        "Exceeds 60 to 70 percent",
+                        "Terminal circulatory failure",
+                        "Coma, seizures, arrhythmias, cardiac arrest",
+                        "Refractory shock; requires exchange transfusion"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Methylene Blue Antidote Protocol",
+            "tx": "**Methylene blue emergency antidote protocol** acts as an exogenous electron donor: within erythrocytes, NADPH-methaemoglobin reductase converts methylene blue into leucomethylene blue, which non-enzymatically reduces ferric iron (Fe3+) back to normal ferrous iron (Fe2+). Intravenous methylene blue is administered at 1 to 2 milligrams per kilogram of a 1 percent solution slowly over five minutes, reversing cyanosis within 15 to 30 minutes.",
+            "say": "Methylene blue emergency antidote protocol acts as an exogenous electron donor: within erythrocytes, NADPH-methaemoglobin reductase converts methylene blue into leucomethylene blue, which non-enzymatically reduces ferric iron (Fe3+) back to normal ferrous iron (Fe2+). Intravenous methylene blue is administered at 1 to 2 milligrams per kilogram of a 1 percent solution slowly over five minutes, reversing cyanosis within 15 to 30 minutes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify chocolate-brown blood and SpO2 locked at 85%"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Administer IV methylene blue 1 to 2 mg/kg over 5 minutes"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "NADPH-dependent reduction to active leucomethylene blue"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Reduces ferric Fe3+ back to functional ferrous Fe2+ in 20 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "G6PD Deficiency Contraindication",
+            "tx": "**Methylene blue contraindication in G6PD deficiency** represents a critical clinical trap: glucose-6-phosphate dehydrogenase (G6PD) deficient erythrocytes cannot generate the NADPH cofactor required by NADPH-methaemoglobin reductase to reduce methylene blue into its active leucomethylene blue form. Administering methylene blue in G6PD deficiency is completely ineffective and triggers catastrophic severe acute haemolysis.",
+            "say": "Methylene blue contraindication in G6PD deficiency represents a critical clinical trap: glucose-6-phosphate dehydrogenase (G6PD) deficient erythrocytes cannot generate the NADPH cofactor required by NADPH-methaemoglobin reductase to reduce methylene blue into its active leucomethylene blue form. Administering methylene blue in G6PD deficiency is completely ineffective and triggers catastrophic severe acute haemolysis.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Erythrocyte G6PD Function",
+                    "points": [
+                        "Hexose monophosphate shunt generates abundant NADPH",
+                        "NADPH-methaemoglobin reductase activates methylene blue",
+                        "Rapid, safe enzymatic reduction of methaemoglobin"
+                    ]
+                },
+                "right": {
+                    "title": "G6PD Deficiency State",
+                    "points": [
+                        "Total absence of cellular NADPH reducing equivalents",
+                        "Methylene blue acts as an unbuffered oxidant drug",
+                        "Triggers massive intravascular Heinz body acute haemolytic crisis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Cocaine Unique Vasoconstrictive Ester",
+            "tx": "**Cocaine unique pharmacology** makes it the only naturally occurring local anaesthetic possessing intrinsic vasoconstrictor properties. An amino-ester alkaloid extracted from Erythroxylum coca, cocaine blocks neuronal voltage-gated sodium channels while simultaneously inhibiting the presynaptic reuptake transporter for norepinephrine and dopamine, leaving excess catecholamines in the synaptic cleft.",
+            "say": "Cocaine unique pharmacology makes it the only naturally occurring local anaesthetic possessing intrinsic vasoconstrictor properties. An amino-ester alkaloid extracted from Erythroxylum coca, cocaine blocks neuronal voltage-gated sodium channels while simultaneously inhibiting the presynaptic reuptake transporter for norepinephrine and dopamine, leaving excess catecholamines in the synaptic cleft.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Action",
+                    "Biochemical Receptor Mechanism",
+                    "Clinical Benefit in ENT Surgery",
+                    "Systemic Toxicity Danger"
+                ],
+                "rows": [
+                    [
+                        "Local Anaesthesia",
+                        "Blocks voltage-gated sodium channels",
+                        "Profound mucosal surface analgesia",
+                        "Neurotoxicity in excessive doses"
+                    ],
+                    [
+                        "Intrinsic Vasoconstriction",
+                        "Inhibits presynaptic noradrenaline reuptake",
+                        "Shrinks nasal turbinates and stops bleeding",
+                        "Severe hypertension and coronary vasospasm"
+                    ],
+                    [
+                        "Dopaminergic Euphoria",
+                        "Inhibits presynaptic dopamine transporter (DAT)",
+                        "Central stimulation and mood elevation",
+                        "High abuse liability and psychological dependence"
+                    ],
+                    [
+                        "Maximal Safe Dose",
+                        "Capped at 1.5 to 3.0 mg/kg (max 150-200 mg)",
+                        "Preserves mucosal hemostatic advantage",
+                        "Toxic doses trigger myocardial infarction and seizures"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cocaine Cardiovascular Complications",
+            "tx": "**Cardiovascular crisis from cocaine toxicity** produces severe coronary artery vasospasm, acute ST-elevation myocardial infarction, malignant ventricular arrhythmias, and intracranial haemorrhage resulting from massive adrenergic stimulation. Beta-blockers are strictly contraindicated in acute cocaine toxicity because beta-receptor blockade leaves alpha-1 adrenergic vasoconstriction completely unopposed, precipitating catastrophic malignant hypertensive crisis.",
+            "say": "Cardiovascular crisis from cocaine toxicity produces severe coronary artery vasospasm, acute ST-elevation myocardial infarction, malignant ventricular arrhythmias, and intracranial haemorrhage resulting from massive adrenergic stimulation. Beta-blockers are strictly contraindicated in acute cocaine toxicity because beta-receptor blockade leaves alpha-1 adrenergic vasoconstriction completely unopposed, precipitating catastrophic malignant hypertensive crisis.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Cocaine blocks presynaptic norepinephrine reuptake"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Massive accumulation of norepinephrine stimulates alpha-1 receptors"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Severe coronary vasoconstriction and malignant hypertension"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Treat with IV phentolamine, labetalol, or nitroglycerin; never pure beta-blockers"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

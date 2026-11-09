@@ -1,0 +1,179 @@
+{
+  "v": 1,
+  "module": "phm-contraceptives-uterine",
+  "subject": "pharmacology",
+  "title": "Uterine Drugs: Oxytocin, Carboprost, Methylergometrine, Tocolytics and Postpartum Haemorrhage",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Oxytocin** contracts the pregnant uterus through Gq coupled receptors whose density climbs through gestation, given by titrated infusion for induction and augmentation (receptor desensitisation punishes marathon infusions) and by bolus plus infusion against postpartum haemorrhage from atony, the commonest cause of maternal death it prevents. Rapid bolus hypotension and tachycardia, and antidiuretic water intoxication with high volume hypotonic infusions, are its engineered in adverse effects.",
+      "say": "Oxytocin by infusion respects its receptors; boluses drop pressure and litres of fluid retain water.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-oxytocin.webp",
+        "alt": "Oxytocin acting on uterus, breast and kidney illustration",
+        "caption": "Oxytocin at uterus, breast and kidney, the drug that induces labour and prevents postpartum haemorrhage. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Carboprost** (15 methyl prostaglandin F2 alpha) rescues atony unresponsive to oxytocin by direct myometrial FP receptor contraction, intramuscularly (never intravenously) in 250 microgram doses, forbidden in asthma because F prostaglandins bronchoconstrict, and taxing the gut with vomiting and diarrhoea plus fever that impersonates infection. Its asthma fence and methylergometrine's hypertension fence are the paired contraindications every obstetric examination recites.",
+      "say": "Carboprost squeezes the uterus and the bronchi together; asthma closes its door absolutely.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-carboprost.webp",
+        "alt": "Carboprost stimulating FP prostanoid receptors in myometrium illustration",
+        "caption": "Carboprost at myometrial FP receptors, second line against atonic postpartum haemorrhage. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Methylergometrine** (ergometrine), an ergot alkaloid, produces sustained tetanic uterine contraction valuable after delivery and dangerous before it (trapped placenta, uterine rupture, fetal entrapment), with serotonergic and adrenergic vasoconstriction that forbids it in hypertension, preeclampsia and cardiac disease and can stroke or infarct the vulnerable. It is stored protected from light and heat, given intramuscularly or slowly intravenously in emergencies, and never antenatally.",
+      "say": "Ergometrine clamps the uterus tetanically after delivery only, and hypertension absolutely forbids it.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-methylergometrine.webp",
+        "alt": "Methylergometrine serotonergic and adrenergic activation causing uterine contraction illustration",
+        "caption": "Methylergometrine's serotonergic and adrenergic uterine contraction, with its hypertensive dangers. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Postpartum haemorrhage** assembles the lesson in guideline order under the four Ts (tone, trauma, tissue, thrombin): uterotonics in sequence (oxytocin first, ergometrine and carboprost by fence, misoprostol where cold chains fail), tranexamic acid within three hours from the coagulation module, resuscitation and transfusion in parallel, and mechanical then surgical escalation (balloon tamponade, compression sutures, arterial ligation, hysterectomy) without pharmacological delay at any rung.",
+      "say": "Tone first with the drug sequence, tranexamic inside three hours, hands and theatre without waiting for permission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "recognise",
+            "label": "Haemorrhage recognised, call for help, massage"
+          },
+          {
+            "id": "oxy",
+            "label": "Oxytocin infusion, bladder emptied, placenta checked"
+          },
+          {
+            "id": "second",
+            "label": "Ergometrine or carboprost by contraindication fence"
+          },
+          {
+            "id": "txa",
+            "label": "Tranexamic acid within 3 hours, transfusion and theatre in parallel"
+          }
+        ],
+        "edges": [
+          [
+            "recognise",
+            "oxy"
+          ],
+          [
+            "oxy",
+            "second"
+          ],
+          [
+            "second",
+            "txa"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tocolytics** buy 48 hours, not a pregnancy: their evidence based purpose is completing antenatal corticosteroids and in utero transfer, not stopping preterm birth indefinitely, which no agent achieves. Choice is adverse effect arbitration among the candidates in the following steps, with contraindications (infection, abruption, fetal compromise, preeclampsia) that convert delay into danger when ignored. Maintenance tocolysis beyond the acute course lacks outcome support almost universally.",
+      "say": "Tocolysis buys two days for steroids and transfer; promising more is prescribing fiction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "What tocolysis achieves",
+          "points": [
+            "Delay of 48 hours in many threatened preterm labours",
+            "Steroid course completed inside the window",
+            "Transfer to neonatal intensive care centres",
+            "No proven long term prolongation"
+          ]
+        },
+        "right": {
+          "title": "When tocolysis is forbidden",
+          "points": [
+            "Chorioamnionitis or intrauterine infection",
+            "Abruption or significant antepartum haemorrhage",
+            "Fetal compromise or lethal anomaly",
+            "Severe preeclampsia requiring delivery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ritodrine**, the beta 2 agonist prototype, relaxes myometrium and the mother's whole adrenergic economy with it: tachycardia, tremor, hypokalaemia, hyperglycaemia and pulmonary oedema (especially with steroids, twins and fluids) that demoted it behind kinder agents wherever stocked. Its pharmacology survives in examinations and in salbutamol's obstetric cousin use where alternatives are absent, always with fluid restriction and pulse ceilings as the safety grammar.",
+      "say": "Ritodrine relaxes uterus and maternal physiology indiscriminately; pulmonary oedema wrote its demotion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Beta agonist tocolysis",
+          "points": [
+            "Beta 2 myometrial relaxation",
+            "Maternal tachycardia and tremor expected",
+            "Hypokalaemia and hyperglycaemia monitored",
+            "Fluid restriction guards against pulmonary oedema"
+          ]
+        },
+        "right": {
+          "title": "Why alternatives displaced it",
+          "points": [
+            "Pulmonary oedema with steroids and twins",
+            "Cardiac arrhythmia and ischaemia reports",
+            "Nifedipine and atosiban kinder at equal delay",
+            "Survives where formularies are thin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nifedipine tocolysis** borrows the calcium channel from hypertension: oral loading then maintenance relaxes myometrium with maternal flushing, headache and transient hypotension as acceptable rent, avoiding sublingual crashing (cardiovascular lesson's warning) and cautioning with magnesium co therapy. It is the commonest tocolytic in much of the world for cost and oral convenience, with trial comparisons favouring it over beta agonists on tolerability at equal delay.",
+      "say": "Nifedipine by mouth, never sublingual, is the world's pragmatic tocolytic: cheap, oral and kinder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "assess",
+            "label": "Threatened preterm labour, no contraindication to delay"
+          },
+          {
+            "id": "nif",
+            "label": "Oral nifedipine loading then maintenance"
+          },
+          {
+            "id": "steroid",
+            "label": "Antenatal corticosteroids completed in window"
+          },
+          {
+            "id": "transfer",
+            "label": "In utero transfer if birth still threatens"
+          }
+        ],
+        "edges": [
+          [
+            "assess",
+            "nif"
+          ],
+          [
+            "nif",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "transfer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Atosiban**, an oxytocin receptor antagonist designed for the uterus, delivers tocolysis with the cleanest maternal adverse profile in the class (nausea and injection reactions against the beta agonists' systemic storm) at intravenous cost that confines it to formularies that can pay. Magnesium sulfate crosses over from eclampsia as a historical tocolytic now valued more for fetal neuroprotection before early preterm birth, a role reversal examinations increasingly prefer to its abandoned tocolysis.",
+      "say": "Atosiban blocks oxytocin's receptor politely and expensively; magnesium's modern gift is the fetal brain, not the uterus.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-atosiban.webp",
+        "alt": "Atosiban oxytocin receptor antagonist illustration for tocolysis",
+        "caption": "Atosiban antagonising the oxytocin receptor, the best tolerated tocolytic where cost permits. Credit: StewardMD."
+      }
+    }
+  ]
+}

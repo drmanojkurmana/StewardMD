@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-health-indicators-pqli",
+ "subject": "community-medicine",
+ "module": "cm-health-indicators",
+ "title": "PQLI, DALY, QALY and HALE: Composite Measures of Health",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The three PQLI components",
+   "tx": "The **Physical Quality of Life Index** combines infant mortality, life expectancy at age one and literacy into one score. Each component is scaled from 0 for the worst defined performance to 100 for the best, then averaged with equal weight. Notice the trap: life expectancy enters at age one, not at birth, and income enters nowhere in this index.",
+   "say": "Three ingredients make this index: infant mortality, life expectancy at age one, and literacy. Each scores between zero and one hundred, and the average gives the final value. Remember, income plays no part here, and the survival measure starts at age one.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Scale", "Weight"],
+    "rows": [
+     ["Infant mortality rate", "0 to 100, lower deaths score higher", "One third"],
+     ["Life expectancy at age one", "0 to 100, longer life scores higher", "One third"],
+     ["Literacy rate", "0 to 100, higher literacy scores higher", "One third"]
+    ]
+   }
+  },
+  {
+   "title": "What PQLI deliberately leaves out",
+   "tx": "**Per capita income** is excluded from PQLI on purpose, to show that money alone does not buy health. Oil rich states with high incomes have recorded modest PQLI values, while Kerala and Sri Lanka achieved high values on low incomes. The index therefore measures results of social policy, such as schooling and child survival, rather than economic growth itself.",
+   "say": "Leaving income out is deliberate. Rich oil states have scored modestly, while Kerala and Sri Lanka scored high on low incomes. So this index grades social policy results like schooling and child survival, not the size of the economy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High income, modest PQLI pattern",
+     "points": ["Oil revenue raises income fast", "Child survival lags behind wealth", "Literacy gains take a generation"]
+    },
+    "right": {
+     "title": "Low income, high PQLI pattern",
+     "points": ["Kerala and Sri Lanka pattern", "Schooling reaches girls early", "Child survival improves first"]
+    }
+   }
+  },
+  {
+   "title": "HDI side by side with PQLI",
+   "tx": "The **Human Development Index** uses life expectancy at birth, mean and expected years of schooling, and gross national income per capita, scaled from 0 to 1 as a geometric mean. Keep the contrast sharp: PQLI runs 0 to 100 with literacy and no income, while HDI runs 0 to 1 with schooling years and income included.",
+   "say": "Place the two indices side by side. One runs from zero to one hundred, uses literacy, and excludes income. The other runs from zero to one, uses schooling years, and includes national income per person. Examiners swap these features to catch you.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "PQLI", "HDI"],
+    "rows": [
+     ["Range", "0 to 100", "0 to 1"],
+     ["Survival measure", "Life expectancy at age one", "Life expectancy at birth"],
+     ["Education measure", "Literacy rate", "Mean and expected schooling"],
+     ["Income included", "No", "Yes, GNI per capita"]
+    ]
+   }
+  },
+  {
+   "title": "Years of life lost inside DALY",
+   "tx": "**Years of life lost** count premature mortality: each death contributes the years between the age at death and a standard life expectancy. A death at age 30 against a standard near 75 therefore contributes about 45 lost years. This mortality half of the burden measure rewards programmes that prevent early deaths, such as road safety and maternal care.",
+   "say": "First half of the burden idea counts early deaths. Subtract age at death from a standard life expectancy, and the gap is the loss. Dying at thirty against a standard near seventy five loses about forty five years. Preventing early deaths shrinks this half fastest.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Death at age", "Standard expectancy 75", "Years lost"],
+    "rows": [
+     ["30 years", "75 years", "45 years"],
+     ["60 years", "75 years", "15 years"],
+     ["74 years", "75 years", "1 year"]
+    ]
+   }
+  },
+  {
+   "title": "Years lived with disability inside DALY",
+   "tx": "**Years lived with disability** count nonfatal burden: incident cases multiplied by average duration and a severity weight from 0 for perfect health to 1 for death. Depression and musculoskeletal pain score heavily here while killing few people. Adding the two parts gives the full burden figure used to rank diseases for budgets and research.",
+   "say": "Second half counts living with illness. Multiply new cases by duration and by a severity weight between zero and one. Depression scores high here despite few deaths. Add both halves and you can rank diseases for budgets.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Deaths at each age"},
+     {"id": "b", "label": "Years of life lost"},
+     {"id": "c", "label": "Cases times duration times weight"},
+     {"id": "d", "label": "Years lived with disability"},
+     {"id": "e", "label": "Total burden in DALYs"}
+    ],
+    "edges": [["a", "b"], ["b", "e"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "One DALY in plain words",
+   "tx": "One **DALY** equals one lost year of healthy life, whether lost to early death or to years spent disabled. A person who lives to 70 but suffers an incapacitating stroke at 65 loses about five such years. Global rankings built on this unit pushed mental illness up the priority list, since psychiatric conditions cause much disability but few recorded deaths.",
+   "say": "Translate the unit plainly. One unit means one healthy year lost, by early death or by disability. A stroke at sixty five in someone living to seventy loses roughly five. Rankings on this unit lifted mental illness up the priority list.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lost to early death",
+     "points": ["Road deaths in young adults", "Maternal deaths", "Fatal infections in children"]
+    },
+    "right": {
+     "title": "Lost to disability",
+     "points": ["Depression over many years", "Musculoskeletal pain", "Stroke disability after survival"]
+    }
+   }
+  },
+  {
+   "title": "QALY and the utility weight",
+   "tx": "A **QALY** values each year of life by quality: one year in perfect health scores 1, death scores 0, and health states between carry fractions judged by patients. Half a year at utility 0.5 equals 0.25 of the unit. Planners divide programme cost by units gained to compare unlike interventions, from dialysis to vaccination, on one scale.",
+   "say": "Here quality adjusts quantity. A year in perfect health scores one, death scores zero, and states between take fractions. Half a year at half quality equals a quarter unit. Dividing cost by units gained compares dialysis with vaccination on one scale.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Utility", "Units gained"],
+    "rows": [
+     ["One year in perfect health", "1.0", "1.0"],
+     ["One year at half quality", "0.5", "0.5"],
+     ["Half year in perfect health", "1.0", "0.5"],
+     ["Death", "0.0", "0.0"]
+    ]
+   }
+  },
+  {
+   "title": "HALE, the healthy years a newborn expects",
+   "tx": "**Health adjusted life expectancy** starts from life expectancy at birth, then subtracts the equivalent years spent in poor health, giving years expected in full health. It replaced the older label disability adjusted life expectancy for the same idea. Countries can share similar total longevity yet differ by many healthy years, which exposes the hidden cost of chronic disease.",
+   "say": "Start from life expectancy at birth, then subtract years spent in poor health. What remains is the healthy span a newborn can expect. Two countries with equal longevity can differ by many healthy years, exposing the cost of chronic disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Life expectancy at birth",
+     "points": ["Counts all years lived", "Ignores health during those years", "Rises as deaths fall"]
+    },
+    "right": {
+     "title": "Health adjusted expectancy",
+     "points": ["Counts years in full health", "Penalises years with disability", "Falls when chronic disease rises"]
+    }
+   }
+  },
+  {
+   "title": "Picking the right index in a question stem",
+   "tx": "Stems hide the answer in small phrases: **literacy with infant mortality** signals PQLI, schooling years with income signals HDI, and years lost to disability signals DALY. Quality weighting signals QALY, while years expected in full health signals HALE. Read for those fingerprints before doing any arithmetic, because most errors here are identification errors, not calculation errors.",
+   "say": "Learn the fingerprints. Literacy beside infant mortality points to the first index. Schooling years beside income points to the second. Years lost, quality weights and full health years each point to their own measure. Identify first, calculate second.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stem fingerprint", "Index wanted"],
+    "rows": [
+     ["Literacy plus infant mortality, 0 to 100", "PQLI"],
+     ["Schooling years plus income, 0 to 1", "HDI"],
+     ["Years lost to death and disability", "DALY"],
+     ["Years expected in full health", "HALE"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

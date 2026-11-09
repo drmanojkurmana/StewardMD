@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-arboviral-dengue",
+ "subject": "community-medicine",
+ "module": "cm-arboviral",
+ "title": "Dengue: Phases, Warning Signs and Fluid Judgement",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Four serotypes, one dangerous second act",
+   "tx": "**Dengue virus** circulates as four serotypes, DENV 1 to 4, spread by Aedes aegypti; recovery gives lifelong protection to that serotype but only brief cover against others. A second infection with a different serotype carries the highest risk of severe disease through antibody dependent enhancement, where non neutralising antibody helps virus enter cells more efficiently.",
+   "say": "Four serotypes, lifelong cover to one, brief to others. Second infections with a new serotype risk enhancement and severe disease. Serotype history shapes prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Serotypes", "DENV 1, 2, 3 and 4"],
+     ["Vector", "Aedes aegypti mainly"],
+     ["Repeat infection", "Risk rises with new serotype"],
+     ["Mechanism", "Antibody dependent enhancement"]
+    ]
+   }
+  },
+  {
+   "title": "The day biting mosquito",
+   "tx": "**Aedes aegypti** bites in daytime with peaks in early morning and late afternoon, breeds in stored clean water in drums, coolers, tyres and flower pots around homes, flies only a few hundred metres, and rests indoors. Dengue is therefore a neighbourhood disease of water storage habits, and source reduction within homes outperforms fogging streets.",
+   "say": "Day biting, home breeding in stored water, flying only streets away. Dengue maps to household water habits. Emptying containers beats fogging roads every season.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trait", "Control meaning"],
+    "rows": [
+     ["Daytime biting", "Nets protect infants, not nights"],
+     ["Clean stored water breeding", "Weekly container emptying"],
+     ["Short flight range", "Household and street focus"],
+     ["Indoor resting", "Targeted indoor measures"]
+    ]
+   }
+  },
+  {
+   "title": "Febrile phase: breakbone beginnings",
+   "tx": "The **febrile phase** opens abruptly after four to ten days of incubation with high fever, severe headache, retro orbital pain, muscle and joint pains nicknamed breakbone fever, flushing and a positive tourniquet tendency as capillaries grow fragile. Leukopenia and falling platelets begin here, while the patient still looks deceptively stable to an unwary triage eye.",
+   "say": "Abrupt fever, pain behind the eyes, breakbone aches, flushing skin. Platelets start falling while the patient looks stable. Stability in phase one proves nothing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Febrile phase"],
+    "rows": [
+     ["Onset", "Abrupt high fever"],
+     ["Pain", "Retro orbital, muscle, joints"],
+     ["Skin", "Flushing, later rash"],
+     ["Counts", "Leukopenia, platelets falling"]
+    ]
+   }
+  },
+  {
+   "title": "Critical phase: when fever falls, danger rises",
+   "tx": "The **critical phase** begins around defervescence, usually days three to seven, when capillary permeability peaks for twenty four to forty eight hours and plasma leaks into pleural and peritoneal spaces. Haematocrit climbs as platelets bottom out. Families celebrate the falling fever precisely when leakage can tip the patient into shock, the central dengue paradox.",
+   "say": "Fever falls, leakage peaks. Twenty four to forty eight hours of plasma escape as haematocrit climbs. The celebrated defervescence is the dangerous doorway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fever defervesces day 3 to 7"},
+     {"id": "b", "label": "Capillary leak peaks 24 to 48 h"},
+     {"id": "c", "label": "Haematocrit rises, platelets fall"},
+     {"id": "d", "label": "Recovery or shock declared"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Warning signs that move the patient",
+   "tx": "**Warning signs** demand same day assessment and usually admission: severe abdominal pain, persistent vomiting, fluid accumulation, mucosal bleeding, lethargy or restlessness, liver enlargement beyond two centimetres, and a rising haematocrit with rapidly falling platelets. Any one of them converts home care into observed care in programme guidance.",
+   "say": "Belly pain, stubborn vomiting, bleeding gums, restlessness, big liver, climbing haematocrit. One sign moves the patient into observation. Do not negotiate with the list.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Warning sign", "Action"],
+    "rows": [
+     ["Severe abdominal pain", "Admit and assess today"],
+     ["Persistent vomiting", "Admit, intravenous access"],
+     ["Mucosal bleeding", "Observe, repeat counts"],
+     ["Rising haematocrit, falling platelets", "Admit for critical phase"]
+    ]
+   }
+  },
+  {
+   "title": "Shock: narrow pulse pressure first",
+   "tx": "**Dengue shock** announces itself with a narrowing pulse pressure of twenty millimetres of mercury or less, cold extremities, rapid thready pulse and restlessness before systolic pressure collapses. Compensated shock hides behind a normal looking blood pressure number, so pulse pressure and perfusion, not systolic alone, drive emergency fluid decisions.",
+   "say": "Pulse pressure narrows to twenty or less while systolic still pretends normality. Cold hands and restlessness shout earlier. Treat perfusion, not the flattering number.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensated shock",
+     "points": ["Pulse pressure 20 or less", "Cold peripheries, fast pulse", "Systolic still maintained", "Immediate fluid bolus"]
+    },
+    "right": {
+     "title": "Hypotensive shock",
+     "points": ["Systolic fallen or unrecordable", "Profound lethargy", "Bleeding often present", "Aggressive resuscitation"]
+    }
+   }
+  },
+  {
+   "title": "Fluids: measured, oral first, intravenous with judgement",
+   "tx": "**Oral rehydration** carries febrile patients without warning signs, with explicit return instructions and daily review as defervescence approaches. Intravenous crystalloid is titrated in warning sign and shock care against haematocrit, urine output and perfusion, then stopped promptly in recovery when leaked plasma reabsorbs, because continued pouring at that point floods lungs.",
+   "say": "Oral fluids and daily review without warning signs. Intravenous titrated to haematocrit and urine, stopped when reabsorption begins. Yesterday's rescue becomes today's overload.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Phase", "Fluid stance"],
+    "rows": [
+     ["Febrile, no signs", "Oral fluids, daily review"],
+     ["Warning signs", "Judicious IV crystalloid"],
+     ["Shock", "Rapid bolus, reassess"],
+     ["Recovery", "Stop IV, watch overload"]
+    ]
+   }
+  },
+  {
+   "title": "Tests by illness day",
+   "tx": "**NS1 antigen** confirms dengue in the first five days of fever, while IgM antibody becomes reliable after day five, so ordering both blindly on day two wastes money and confuses families. Platelet counts alone never decide transfusion; bleeding, shock and counts together do, and prophylactic platelet transfusion for a number is discouraged.",
+   "say": "NS1 in the first five days, IgM after. Never transfuse platelets for a number alone. Bleeding and shock, with counts, make that decision.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Illness day", "Useful test"],
+    "rows": [
+     ["Days 1 to 5", "NS1 antigen"],
+     ["After day 5", "IgM antibody"],
+     ["Daily in critical phase", "Haematocrit trend"],
+     ["Any day", "Platelets with clinical picture"]
+    ]
+   }
+  },
+  {
+   "title": "Prevention: containers, indices and vaccines",
+   "tx": "**Source reduction** on a weekly dry day, lids on storage vessels, temephos where permitted, and larval indices such as the Breteau index above five signalling high transmission risk, form routine municipal control. Vaccines have restricted, serostatus dependent roles in a few countries and are not part of India's programme, leaving vector and water habits as the defence.",
+   "say": "Weekly dry days, lidded storage, Breteau index watched above five. Vaccines play no Indian programme role yet. Water habits remain the national defence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Marker"],
+    "rows": [
+     ["Weekly dry day", "Containers emptied and scrubbed"],
+     ["Breteau index", "Over 5 means high risk"],
+     ["Lids and temephos", "Storage water protected"],
+     ["Vaccine", "Not in national programme"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

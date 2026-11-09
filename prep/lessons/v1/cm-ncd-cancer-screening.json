@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-ncd-cancer-screening",
+ "subject": "community-medicine",
+ "module": "cm-ncd",
+ "title": "Cancer Screening in India: Oral, Breast and Cervical under NPCDCS",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why these three cancers",
+   "tx": "**Oral, breast and cervical cancers** lead India's screenable burden and share programme-friendly traits: visible or palpable precancerous phases, cheap frontline tests deliverable by trained non-specialists, and curative early treatment. Health and wellness centres screen adults 30 years and above for exactly this trio under the national NCD programme's population-based screening arm.",
+   "say": "Three cancers fit community screening: mouth you can see, breast you can feel, cervix you can stain. Shared traits are visible precursors, cheap frontline tests and curative early treatment above age thirty.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cancer", "Frontline screen", "Precancer found"],
+    "rows": [
+     ["Oral", "Visual oral examination", "Leukoplakia, erythroplakia, submucous fibrosis"],
+     ["Breast", "Clinical breast examination", "Lump and skin change"],
+     ["Cervical", "Visual inspection with acetic acid", "Acetowhite precancerous lesions"]
+    ]
+   }
+  },
+  {
+   "title": "Oral cancer: tobacco writes the risk",
+   "tx": "**Oral screening** targets tobacco and areca nut users hardest: white patches that do not scrape off (leukoplakia), red velvety patches (erythroplakia, higher malignant potential), and stiffening submucous fibrosis limiting mouth opening. Any ulcer beyond 2 weeks, indurated patch or neck node in a chewer is referred, not watched, because Indian oral cancer presents late by habit.",
+   "say": "Chewers carry the risk. White un-scrapable patches, red velvety patches, stiffening mouths. Ulcers past two weeks in tobacco users get referred, never watched, because late presentation is the Indian pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Refer now",
+     "points": ["Ulcer beyond 2 weeks", "Red or speckled patch", "Restricted mouth opening"]
+    },
+    "right": {
+     "title": "Counsel and review",
+     "points": ["Fresh tobacco staining only", "Traumatic ulcer healing in days", "No patch, no induration"]
+    }
+   }
+  },
+  {
+   "title": "Breast: clinical examination and awareness",
+   "tx": "**Clinical breast examination** by trained workers finds lumps, skin dimpling, nipple retraction or discharge and axillary nodes, while breast self-awareness teaches women their normal so change gets reported early. Mammography serves diagnostic and high-risk roles rather than mass screening in Indian resource logic. Triple assessment (clinical, imaging, biopsy) settles referred lumps.",
+   "say": "Hands before machines here. Trained examination plus self-awareness finds change early; mammography serves diagnosis and high risk, not mass camps. Referred lumps settle by triple assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Clinical breast examination"},
+     {"id": "b", "label": "Lump or change found"},
+     {"id": "c", "label": "Imaging at referral centre"},
+     {"id": "d", "label": "Biopsy completes triple assessment"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Cervical: VIA in one visit",
+   "tx": "**Visual inspection with acetic acid** whitens precancerous cervix for same-visit ablation (cryotherapy or thermal ablation) where protocols permit, collapsing screen-and-treat into one contact. HPV DNA testing is the more sensitive primary test entering programmes where laboratory logistics allow, with self-sampling extending reach. Cytology needs laboratories and repeat visits India historically struggled to complete.",
+   "say": "One visit can screen and treat. Acetic acid whitens precancer for same-day ablation; HPV DNA testing is entering where laboratories allow, even self-collected. Cytology's repeat visits historically leaked patients.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Programme trait"],
+    "rows": [
+     ["VIA", "Immediate result, same-visit treatment"],
+     ["HPV DNA", "Most sensitive, laboratory dependent"],
+     ["Pap cytology", "Needs lab plus repeat visits"]
+    ]
+   }
+  },
+  {
+   "title": "HPV vaccination: primary prevention joins",
+   "tx": "**HPV vaccination** of girls 9 to 14 years prevents the infection behind most cervical cancer, complementing screening of older women who missed vaccine eras. Screening never retires after vaccination begins; cohorts age into risk for decades. The pair (vaccinate young, screen adults) is the elimination strategy's stated arithmetic toward incidence under 4 per 100000.",
+   "say": "Vaccinate the young, screen adults, for decades both. HPV vaccine at nine to fourteen prevents the cause; screening catches what vaccine eras missed. Elimination arithmetic needs the pair running together.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaccination arm",
+     "points": ["Girls 9 to 14 years", "Prevents causal infection", "Benefits arrive in decades"]
+    },
+    "right": {
+     "title": "Screening arm",
+     "points": ["Women 30 years and above", "Finds existing precancer", "Benefits arrive immediately"]
+    }
+   }
+  },
+  {
+   "title": "Screening intervals and ages in programme wording",
+   "tx": "**Population-based screening** under NPCDCS covers adults 30 to 65 years at roughly 5-year intervals for the three cancers through HWCs and screening camps, with community-based assessment checklists (CBAC) scoring risk at household level first. Positive screens travel defined referral pathways to district diagnosis, because screening without assured diagnosis repeats the Wilson-Jungner violation.",
+   "say": "Thirty to sixty five, about five-yearly, household risk scored first. Positive screens travel assured referral pathways. Screening without guaranteed diagnosis violates the oldest screening criterion in the book.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "CBAC risk scoring at household"},
+     {"id": "b", "label": "Screening at HWC or camp"},
+     {"id": "c", "label": "Positives referred by pathway"},
+     {"id": "d", "label": "Diagnosis and treatment at district"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "False reassurance and interval cancers",
+   "tx": "**Interval cancers** arising between negative screens expose test sensitivity limits and fast biology, so programmes audit them rather than hiding them. A negative screen is a risk reduction with an expiry date, counselled exactly that way. Overcalling benign findings floods biopsy services; undercalling forfeits the programme's moral contract with the screened.",
+   "say": "Negatives expire. Cancers between screens expose sensitivity limits and get audited openly. Counselled honestly, a negative is dated risk reduction. Flooding biopsies and missing cancers both break the contract.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Failure", "Programme answer"],
+    "rows": [
+     ["Interval cancer after negative", "Audit test and interval policy"],
+     ["False positives flooding referral", "Retrain, second-reader review"],
+     ["Positive never diagnosed", "Pathway tracking by name"]
+    ]
+   }
+  },
+  {
+   "title": "Tobacco control behind oral screening",
+   "tx": "**Tobacco control** (taxation, pack warnings, smoke-free laws under COTPA, cessation support) is oral cancer's primordial layer; screening without it mops a leaking tap. Gutkha bans by food safety route in states illustrate policy creativity examiners reward. Cessation brief advice at every NCD contact converts screening visits into prevention visits twice over.",
+   "say": "Screening mops; tobacco policy fixes the tap. Taxes, warnings, smoke-free law and cessation advice form the primordial layer. Every screening contact doubles as a cessation contact by design.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Policy layer (COTPA)",
+     "points": ["Taxation and pack warnings", "Smoke-free public places", "Advertising restrictions"]
+    },
+    "right": {
+     "title": "Clinic layer",
+     "points": ["Brief cessation advice", "Oral examination of users", "Referral of suspicious patches"]
+    }
+   }
+  },
+  {
+   "title": "Registry and survival monitoring",
+   "tx": "**Cancer registries** (population-based where functional) convert screening activity into incidence, stage-shift and survival evidence: successful programmes show stage migration toward early disease before mortality moves. Hospital registries alone flatter results by case mix. Stage at diagnosis is therefore the screening programme's first honest report card.",
+   "say": "Stage tells the truth first. Successful screening migrates diagnoses earlier before mortality budges. Population registries audit that shift; hospital series flatter by case mix. Demand stage data before celebration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Screening activity rises"},
+     {"id": "b", "label": "Early stage share rises"},
+     {"id": "c", "label": "Treatment success improves"},
+     {"id": "d", "label": "Mortality falls last"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

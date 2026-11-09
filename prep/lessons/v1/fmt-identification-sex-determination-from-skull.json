@@ -1,0 +1,291 @@
+{
+ "v": 1,
+ "id": "fmt-identification-sex-determination-from-skull",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Sex Determination from Skull, Pelvis and Dactylography",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Forensic hierarchy and accuracy in skeletal sex determination",
+   "tx": "When skeletonized or mutilated human remains are discovered, determining biological sex represents the cornerstone of personal identification. Forensic anthropologists follow a well-defined **skeletal sex determination accuracy hierarchy**: the pelvis alone yields ninety-five percent accuracy, the cranium alone provides ninety to ninety-two percent accuracy, the pelvis and skull combined achieve ninety-eight percent, and the complete skeleton provides ninety-nine to one hundred percent certainty.",
+   "say": "The pelvis alone determines skeletal sex with ninety-five percent accuracy, the skull gives ninety percent, and both together yield ninety-eight percent certainty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Skeletal element",
+     "Diagnostic sex accuracy",
+     "Primary anatomical dimorphism"
+    ],
+    "rows": [
+     [
+      "Entire adult skeleton",
+      "99 to 100 percent",
+      "Overall robusticity, joint dimensions and pelvic morphology"
+     ],
+     [
+      "Pelvis and skull combined",
+      "98 percent",
+      "Subpubic angle plus supraorbital and mastoid features"
+     ],
+     [
+      "Pelvis alone (os coxae)",
+      "95 percent",
+      "Greater sciatic notch width and pelvic inlet contours"
+     ],
+     [
+      "Skull alone (cranium)",
+      "90 to 92 percent",
+      "Supraorbital ridge prominence, mastoid size and palate"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Cranial morphological dimorphism: Vault and supraorbital ridges",
+   "tx": "In osteological examination, **cranial sexual dimorphism characteristics** distinguish male and female crania through architectural mass and muscle markings. Male skulls are heavier, larger, and more rugged, displaying prominent sloping foreheads with pronounced supraorbital ridges and blunt orbital margins. In contrast, female skulls are smaller and smoother, characterized by vertical frontal bones with prominent parietal eminences, smooth supraorbital glabellae, and sharp superior orbital margins.",
+   "say": "Male skulls are larger and rugged with prominent brow ridges and sloping foreheads, whereas female skulls are smoother with vertical foreheads and sharp orbital rims.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Male cranium",
+     "points": [
+      "Large, heavy, rugged bone architecture",
+      "Prominent supraorbital ridges (glabella)",
+      "Sloping, receding forehead contour",
+      "Blunt, rounded superior orbital margins"
+     ]
+    },
+    "right": {
+     "title": "Female cranium",
+     "points": [
+      "Small, light, gracile bone architecture",
+      "Smooth, inconspicuous supraorbital area",
+      "Vertical forehead with distinct frontal eminences",
+      "Sharp, thin superior orbital margins"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Mastoid process, occipital protuberance and mandibular features",
+   "tx": "The base and lower jaw display distinct dimorphism through **mastoid and mandibular sexual landmarks**. The male mastoid process is massive and broad; when rested on a flat table, the male skull rests stably on its mastoid processes. Male skulls exhibit prominent external occipital protuberances (inion hooks), square chins, and flared mandibular gonial angles, whereas female mastoids are small, occipital bones smooth, and chins pointed or rounded.",
+   "say": "Male skulls have large mastoid processes that rest flat on a table, prominent occipital hooks, and square jaws with flared gonial angles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inspection of mastoid process size and projection"
+     },
+     {
+      "id": "b",
+      "label": "Table rest test: Male rests on mastoids, female on condyles"
+     },
+     {
+      "id": "c",
+      "label": "Evaluation of external occipital protuberance inion hook"
+     },
+     {
+      "id": "d",
+      "label": "Assessment of mandibular mental protuberance and gonial eversion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Pelvic sexual dimorphism and reproductive adaptation",
+   "tx": "Reflecting evolutionary adaptation for childbearing, the **pelvic sexual dimorphism architecture** offers the most definitive skeletal evidence of sex. The female pelvis is broad, shallow, and spacious, featuring an open cylindrical cavity that facilitates fetal passage. Conversely, the male pelvis is heavy, deep, conical, and narrow, featuring prominent muscular crests and robust sacroiliac joint articulations designed for bipedal locomotion.",
+   "say": "The female pelvis is wide, shallow, and cylindrical for childbearing, while the male pelvis is narrow, deep, conical, and heavily built.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-pelvimetry.webp",
+    "alt": "Diagram showing pelvic shapes, subpubic angle, and pelvic inlet variations between male and female pelvis",
+    "caption": "Pelvic sexual dimorphism: The female gynecoid pelvis demonstrates a wide obtuse subpubic angle, spacious circular inlet, and wide greater sciatic notch compared to the narrow male android pelvis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Pelvic inlet contours and subpubic arch morphology",
+   "tx": "Diagnostic differentiation focuses on the **subpubic angle and pelvic inlet** contours. In females, the subpubic angle is obtuse and rounded, exceeding eighty to ninety degrees to form a broad inverted U-shaped arch. In males, the subpubic arch is acute and V-shaped, measuring sixty to seventy degrees. Furthermore, the female pelvic inlet is transversely oval or circular, whereas the male inlet is heart-shaped (android).",
+   "say": "The female subpubic arch forms a wide U-shape over eighty-five degrees with an oval inlet, while the male arch forms a narrow V-shape under seventy degrees.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Male pelvis (Android)",
+     "points": [
+      "Subpubic angle: Acute V-shape (60-70 degrees)",
+      "Pelvic inlet: Heart-shaped / wedge-shaped",
+      "Obturator foramen: Large, oval shape",
+      "Acetabulum: Large, directed laterally"
+     ]
+    },
+    "right": {
+     "title": "Female pelvis (Gynecoid)",
+     "points": [
+      "Subpubic angle: Obtuse U-shape (80-90+ degrees)",
+      "Pelvic inlet: Broad, transversely oval / circular",
+      "Obturator foramen: Small, triangular shape",
+      "Acetabulum: Small, directed anterolaterally"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The greater sciatic notch and preauricular sulcus",
+   "tx": "On the posterior ilium, the **greater sciatic notch index** serves as a vital dimorphic criterion. The female notch is broad, spacious, and shallow, forming an angle of approximately sixty degrees with a high width-to-depth index. The male notch is narrow and deep, forming an acute angle under thirty degrees. Adjacent to the notch, a deep preauricular paraglenoid sulcus commonly indents the female ilium, representing ligamentous remodeling from pregnancy.",
+   "say": "The greater sciatic notch is wide and shallow in females, and narrow and deep in males. A deep preauricular groove reflects pregnancy and female pelvic anatomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Posterior view of isolated os coxae iliac bone"
+     },
+     {
+      "id": "b",
+      "label": "Measurement of greater sciatic notch width and depth"
+     },
+     {
+      "id": "c",
+      "label": "Calculation of sciatic notch index (Female > 4.5, Male < 4.0)"
+     },
+     {
+      "id": "d",
+      "label": "Identification of preauricular sulcus of paraglenoid"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Washburn ischiopubic index and sacral dimorphism",
+   "tx": "Anthropologists employ the quantitative **Washburn ischiopubic index formula** to establish sex objectively. Calculated by dividing pubic length by ischial length and multiplying by one hundred, females score between ninety and one hundred, whereas males score below eighty-four. Concurrently, the female sacrum is short, broad, and curved predominantly in its lower third, compared to the long, narrow, evenly curved male sacrum.",
+   "say": "The Washburn index divides pubic by ischial length: females score over ninety, while males score under eighty-four. Female sacra are shorter and broader.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sacropelvic index",
+     "Male threshold",
+     "Female threshold"
+    ],
+    "rows": [
+     [
+      "Washburn ischiopubic index",
+      "Under 84 (short pubis)",
+      "Over 90 (long, elongated pubis)"
+     ],
+     [
+      "Sacral breadth-to-length index",
+      "Under 100 (narrow, long sacrum)",
+      "Over 100 (broad, flat sacrum)"
+     ],
+     [
+      "Chilotic index",
+      "Sacral segment dominant",
+      "Pelvic segment dominant"
+     ],
+     [
+      "Pelvic cavity depth",
+      "Deep and funnel-shaped",
+      "Shallow and wide cylinder"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sex determination through fingerprint epidermal ridge density",
+   "tx": "When skin fragments or decomposed hands survive, **fingerprint epidermal ridge density** provides dermatoglyphic clues to biological sex. Because females possess finer dermal papillary ridges, they exhibit significantly higher ridge density within a defined area compared to males. Counting ridges within a standard twenty-five-square-millimeter upper radial quadrant reveals over thirteen to fourteen ridges in females, compared to eleven to twelve ridges in males.",
+   "say": "Fingerprint ridge density aids sex determination: females have finer ridges with over thirteen ridges per standard square, compared to under twelve in males.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Male dermatoglyphics",
+     "points": [
+      "Coarser, wider epidermal papillary ridges",
+      "Lower ridge density (< 12 ridges / 25 mm\u00b2)",
+      "Larger thumbprint contact surface area",
+      "Predominance of whorls in certain populations"
+     ]
+    },
+    "right": {
+     "title": "Female dermatoglyphics",
+     "points": [
+      "Finer, narrower epidermal papillary ridges",
+      "Higher ridge density (> 13-14 ridges / 25 mm\u00b2)",
+      "Smaller overall print surface dimension",
+      "Higher frequency of arches and loops"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Cellular sex chromatin and Barr body demonstration",
+   "tx": "In fresh tissue fragments, dental pulp, or mucosal smears, cytogeneticists confirm genetic sex through **sex chromatin Barr body demonstration**. In females (XX), the inactive condensed X chromosome appears as a dark, plano-convex, Feulgen-positive mass measuring one micron against the inner nuclear membrane of interphase cells in twenty to sixty percent of nuclei, whereas male cells (XY) possess fewer than two percent Barr bodies.",
+   "say": "Barr bodies represent condensed inactive X chromosomes, found in over twenty percent of female nuclei in dental pulp or skin, and absent in normal males.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Extraction of cellular sample from buccal mucosa, skin or tooth pulp"
+     },
+     {
+      "id": "b",
+      "label": "Fixation and staining with cresyl violet or Feulgen reagent"
+     },
+     {
+      "id": "c",
+      "label": "Microscopic screening under 100x oil immersion lens"
+     },
+     {
+      "id": "d",
+      "label": "Quantification: > 20% Barr bodies confirms female biological sex"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

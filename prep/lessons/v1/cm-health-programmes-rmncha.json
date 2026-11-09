@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-health-programmes-rmncha",
+ "subject": "community-medicine",
+ "module": "cm-health-programmes",
+ "title": "RMNCHA: Continuum of Care across Reproductive, Maternal, Newborn, Child and Adolescent Health",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The continuum: 5 by 5 thinking",
+   "tx": "**RMNCHA** organises services along two continuums at once: life stages (adolescence, pregnancy, childbirth, newborn, childhood) and delivery platforms (home, community, facility levels), popularised as the 5x5 matrix. Interventions gain value chained: adolescent nutrition improves pregnancy, skilled birth improves newborn survival, immunisation protects the childhood the newborn becomes.",
+   "say": "Two continuums cross. Life stages run horizontally, home to facility vertically, in the five by five matrix. Chained interventions compound: fed adolescents become safer mothers whose newborns survive to immunise.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Life stage", "Signature interventions"],
+    "rows": [
+     ["Adolescence", "Iron, nutrition, menstrual and mental health"],
+     ["Pregnancy", "Antenatal care, Td, IFA, screening"],
+     ["Childbirth and newborn", "Skilled delivery, essential newborn care"],
+     ["Childhood", "Immunisation, nutrition, IMNCI care"]
+    ]
+   }
+  },
+  {
+   "title": "Janani Suraksha and Janani Shishu Suraksha",
+   "tx": "**Janani Suraksha Yojana** pays conditional cash for institutional delivery (higher for rural low-performing-state mothers in classic design) while Janani Shishu Suraksha Karyakram removes all user charges: free delivery including caesarean, drugs, diagnostics, diet, blood and transport for mother and sick newborn. Together they attack the three delays' financial joint.",
+   "say": "Cash plus free care attack cost delays together. One pays mothers to deliver institutionally; the other zeroes delivery, drug, diet, blood and transport bills for mother and sick newborn.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "JSY (demand side)",
+     "points": ["Cash incentive for institutional delivery", "ASHA incentive linked", "BPL and state categories historically"]
+    },
+    "right": {
+     "title": "JSSK (supply side)",
+     "points": ["Zero user charges guaranteed", "Free drugs, diet, blood, transport", "Mother and sick newborn covered"]
+    }
+   }
+  },
+  {
+   "title": "LaQshya and quality around birth",
+   "tx": "**LaQshya** certifies labour rooms and maternity operation theatres against quality checklists (infrastructure, respectful care, clinical protocols, infection control), because institutional quantity without quality plateaued outcomes. Dakshata trains providers in evidence-based intrapartum practices beside it. Maternal death surveillance and response audits every death for system lessons in the same quality turn.",
+   "say": "Quantity plateaued; quality followed. Labour room certification, provider skills training and death audits reviewing every maternal loss. Institutional delivery rates alone stopped being the success metric.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Institutional deliveries rise (JSY)"},
+     {"id": "b", "label": "Outcomes plateau without quality"},
+     {"id": "c", "label": "LaQshya certifies labour rooms"},
+     {"id": "d", "label": "Death audits feed corrections"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Newborn machinery: SNCU, NBSU, NBCC",
+   "tx": "**Newborn care units** tier by acuity: newborn care corners in every delivery room (radiant warmer, resuscitation), stabilisation units at first referral level, and special newborn care units at district hospitals for sick and low birth weight babies, with Kangaroo Mother Care wards attached. Home-based newborn care covers the community leg after discharge.",
+   "say": "Warmth tiers by sickness. Every delivery room holds a care corner; stabilisation units and district special care units take the sick and small. Kangaroo care and home visits complete the chain.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Unit", "Level", "Handles"],
+    "rows": [
+     ["NBCC", "Every delivery point", "Resuscitation, warmth at birth"],
+     ["NBSU", "FRU level", "Stabilisation of sick newborns"],
+     ["SNCU", "District hospital", "Sick and low birth weight care"]
+    ]
+   }
+  },
+  {
+   "title": "RBSK: screening children 0 to 18",
+   "tx": "**Rashtriya Bal Swasthya Karyakram** screens children birth to 18 years for the 4 Ds: defects at birth, diseases, deficiencies and developmental delays including disability, through mobile health teams visiting Anganwadis and schools, with district early intervention centres treating what screening finds. Screening without the treatment leg would repeat the classic programme error.",
+   "say": "Four Ds, birth to eighteen. Defects, diseases, deficiencies, delays screened by mobile teams at Anganwadis and schools, treated at district early intervention centres. The treatment leg is built in, deliberately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Mobile team screens at AWC or school"},
+     {"id": "b", "label": "4D condition identified"},
+     {"id": "c", "label": "Referral card issued"},
+     {"id": "d", "label": "DEIC confirms and treats free"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Adolescence: RKSK and weekly iron",
+   "tx": "**Rashtriya Kishor Swasthya Karyakram** serves 10 to 19 year olds through adolescent-friendly clinics, peer educators, and weekly iron folic acid supplementation (WIFS, blue tablets in schools and Anganwadis) against anaemia, adding menstrual health, mental health, substance use and injury to the historically nutrition-only frame. Anaemia in adolescent girls is pregnancy risk pre-loaded.",
+   "say": "Adolescence got its own programme. Friendly clinics, peer educators, weekly blue iron tablets against anaemia, menstrual and mental health included. Anaemic girls become high-risk mothers; the chain starts here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Delivers"],
+    "rows": [
+     ["WIFS", "Weekly iron folic acid, schools and AWCs"],
+     ["AFHC clinics", "Confidential adolescent services"],
+     ["Peer educators", "Village-level health dialogue"],
+     ["Menstrual hygiene scheme", "Sanitary product access"]
+    ]
+   }
+  },
+  {
+   "title": "IMNCI: classifying the sick child",
+   "tx": "**Integrated Management of Neonatal and Childhood Illness** classifies sick children by colour-coded danger-sign logic (pink hospital referral, yellow facility treatment, green home care) for pneumonia, diarrhoea, malaria, measles, malnutrition and young infant illness, using syndromic algorithms designed for first-contact workers. Its charts hang in the earlier Park IMCI spreads of this set's reading.",
+   "say": "Colours classify sick children. Pink refers, yellow treats on site, green manages at home, across pneumonia, diarrhoea, malaria, measles and malnutrition. Syndromic charts put specialist logic in first-contact hands.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pink and yellow",
+     "points": ["Danger signs present: refer urgently", "Specific treatment started at facility", "Pre-referral dose given"]
+    },
+    "right": {
+     "title": "Green",
+     "points": ["No danger signs", "Home fluids, feeding counsel", "Clear return precautions"]
+    }
+   }
+  },
+  {
+   "title": "Family planning inside RMNCHA",
+   "tx": "**Family planning** anchors the continuum's spacing logic: postpartum IUCD within 48 hours of delivery, interval methods, injectable contraception in the public basket, sterilisation services, and Mission Parivar Vikas intensifying high-fertility districts. Unmet need and spacing under 3 years are the indicators counsellors quote, because birth spacing is maternal and newborn prevention simultaneously.",
+   "say": "Spacing is prevention twice over. Postpartum devices before discharge, injectables in the basket, intensified districts where fertility runs high. Under-three-year spacing protects mother and next newborn together.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Moment", "Method offered"],
+    "rows": [
+     ["Within 48 hours of delivery", "Postpartum IUCD"],
+     ["Interval, any contact", "Pills, injectable, IUCD, condoms"],
+     ["Completed family", "Sterilisation services"],
+     ["High fertility districts", "Mission Parivar Vikas intensity"]
+    ]
+   }
+  },
+  {
+   "title": "Targets the continuum is judged by",
+   "tx": "**Outcome targets** discipline the strategy: maternal mortality below 100 per 100000 live births in national goals of the last decade (India reached the low hundreds and below in recent SRS rounds), infant mortality toward 28 and under-five toward 23 in demographic goal wording, total fertility at replacement 2.1 (national NFHS already at 2.0). Process coverage without outcome movement fails the audit.",
+   "say": "Outcomes audit the continuum. Maternal deaths below one hundred, infant and under-five targets in the twenties, fertility at replacement already nationally reached. Coverage without outcome movement fails.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Coverage indicators rise"},
+     {"id": "b", "label": "Quality certification spreads"},
+     {"id": "c", "label": "MMR, IMR, U5MR fall"},
+     {"id": "d", "label": "Equity gaps audited by group"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,240 @@
+{
+ "key": "ped-oncology-langerhans-cell-histiocytosis",
+ "v": 1,
+ "module": "ped-oncology",
+ "subject": "paediatrics",
+ "title": "Pediatric Histiocytic and Metabolic Emergencies: LCH and Tumour Lysis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Clonal proliferation of specialized bone-marrow derived myeloid precursor dendritic cells produces granulomatous tissue destruction. Driven by somatic activating mutations in the MAPK pathway (predominantly BRAF V600E in sixty percent), **Langerhans cell histiocytosis** (LCH) manifests with destructive osteolytic bone lesions, refractory seborrheic skin rashes, and organ dysfunction. The disease spectrum ranges from solitary eosinophilic granuloma to disseminated multisystem Letterer-Siwe disease.",
+   "say": "Langerhans cell histiocytosis is driven by activating BRAF V600E mutations. It causes punched-out osteolytic bone lesions, seborrheic dermatitis, and organ infiltration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LCH Clinical Spectrum",
+     "points": [
+      "Single system LCH: unifocal bone lesion (eosinophilic granuloma)",
+      "Hand-Schuller-Christian triad: bone lesions, exophthalmos, DI",
+      "Multisystem LCH (Letterer-Siwe): infants <2 yrs, organ failure",
+      "Risk organ involvement (liver, spleen, bone marrow)"
+     ]
+    },
+    "right": {
+     "title": "Classic Clinical Signs",
+     "points": [
+      "Punched-out osteolytic skull lesions without sclerosis",
+      "Refractory seborrheic dermatitis over scalp and diaper area",
+      "Floating teeth due to alveolar bone osteolysis",
+      "Central diabetes insipidus from pituitary stalk infiltration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Biopsy of involved bone or skin tissue demonstrates pathognomonic immunohistochemical and ultrastructural markers. Histopathological sections demonstrate clonal histiocytes with grooved, indented, coffee-bean nuclei in an inflammatory background rich in eosinophils. Neoplastic cells demonstrate strong membrane positivity for **CD1a and Langerin CD207**, while transmission electron microscopy reveals rod-shaped pentalaminar cytoplasmic inclusion organelles with a dilated vesicular end, termed Birbeck granules.",
+   "say": "Langerhans cells display coffee-bean grooved nuclei staining positive for CD1a and Langerin. Electron microscopy reveals tennis-racket shaped Birbeck granules.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Pathology Marker",
+     "Microscopic / Ultrastructural Feature",
+     "Diagnostic Specificity",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Langerin (CD207)",
+      "C-type lectin involved in Birbeck granule formation",
+      "100% specific for Langerhans cells",
+      "Gold standard immunohistochemical marker"
+     ],
+     [
+      "CD1a glycoprotein",
+      "Non-classical antigen-presenting surface protein",
+      "High sensitivity across all LCH lesions",
+      "Routine confirmatory diagnostic panel"
+     ],
+     [
+      "Birbeck granules",
+      "Rod-shaped pentalaminar tennis-racket organelles",
+      "Pathognomonic electron microscopic feature",
+      "Historical gold standard; replaced by Langerin"
+     ],
+     [
+      "BRAF V600E mutation",
+      "Activating point mutation in BRAF kinase",
+      "Present in 60% of pediatric LCH lesions",
+      "Target for molecular therapy (dabrafenib)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk-stratified systemic chemotherapy tailored to organ involvement achieves durable disease control and prevents reactivation. In single-system unifocal bone disease, curettage or intralesional methylprednisolone injection is curative. In multisystem disease, **vinblastine and prednisolone for LCH** administered over twelve months serves as standard initial therapy, achieving high response rates. Targeted BRAF inhibitors like dabrafenib are reserved for refractory cases harboring BRAF mutations.",
+   "say": "Single bone lesions respond to curettage or steroid injection. Multisystem disease requires twelve months of vinblastine and prednisolone chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treatment Stratification Guidelines",
+     "points": [
+      "Unifocal bone LCH: curettage or observation",
+      "Multifocal bone / Multisystem: 12 months chemotherapy",
+      "Induction: weekly vinblastine (6 mg/m2) + oral prednisolone",
+      "Continuation: 3-weekly vinblastine + daily 6-MP"
+     ]
+    },
+    "right": {
+     "title": "Risk Organ Prognostic Impact",
+     "points": [
+      "Involvement of liver, spleen, or bone marrow defines high risk",
+      "High mortality (>20%) if risk organs fail to respond at 6 wks",
+      "Reactivation rates reach 30 to 50% after stopping therapy",
+      "Late permanent consequences: diabetes insipidus, neurodegeneration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Catastrophic release of massive intracellular contents following cytotoxic lysis of rapidly proliferating blast cells constitutes an oncological emergency. Most commonly encountered during induction therapy for acute lymphoblastic leukemia or Burkitt lymphoma, **pediatric tumour lysis syndrome** (TLS) results from the rapid breakdown of malignant cells, flooding the circulation with nucleic acids, potassium, and phosphorus beyond renal excretory capacity.",
+   "say": "Tumour lysis syndrome occurs when massive breakdown of tumor cells releases intracellular contents. It causes hyperkalemia, hyperuricemia, hyperphosphatemia, and hypocalcemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tumour-lysis-syndrome-fig1.webp",
+    "alt": "Diagram of metabolic derangements in tumor lysis syndrome including hyperkalemia, hyperuricemia, hyperphosphatemia, and hypocalcemia.",
+    "caption": "Metabolic derangements and end-organ consequences of pediatric tumour lysis syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic laboratory framework established by Cairo and Bishop identifies the metabolic hallmarks of cellular lysis. Confirming **laboratory tumour lysis syndrome criteria** requires demonstrating two or more of the following metabolic abnormalities within three days before or seven days after initiating chemotherapy: serum uric acid >=8.0 mg/dL, potassium >=6.0 mEq/L, phosphorus >=6.5 mg/dL, and calcium <=7.0 mg/dL.",
+   "say": "Cairo-Bishop criteria require two or more derangements: uric acid over eight, potassium over six, phosphorus over 6.5, or calcium under seven. Clinical TLS includes renal failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Abnormality",
+     "Cairo-Bishop Diagnostic Cutoff",
+     "Pathophysiological Mechanism",
+     "Clinical Life-Threatening Consequence"
+    ],
+    "rows": [
+     [
+      "Hyperkalaemia",
+      "Serum potassium >=6.0 mEq/L (or 25% increase)",
+      "Lysis of intracellular potassium stores",
+      "Fatal cardiac arrhythmias, ventricular arrest"
+     ],
+     [
+      "Hyperuricaemia",
+      "Serum uric acid >=8.0 mg/dL (or 25% increase)",
+      "Purine nucleic acid catabolism by xanthine oxidase",
+      "Uric acid crystal nephropathy, anuric AKI"
+     ],
+     [
+      "Hyperphosphataemia",
+      "Serum phosphorus >=6.5 mg/dL (or 25% increase)",
+      "Malignant lymphoblasts contain 4x normal phosphate",
+      "Calcium phosphate precipitation in renal tubules"
+     ],
+     [
+      "Hypocalcaemia",
+      "Serum calcium <=7.0 mg/dL (or 25% decrease)",
+      "Secondary to massive phosphate binding",
+      "Tetany, carpopedal spasm, seizures, long QTc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Precipitation of insoluble uric acid crystals and calcium phosphate complexes within renal collecting tubules produces acute oliguric renal failure. In severe **acute kidney injury from tumour lysis**, uric acid crystallizes in the acidic environment of distal nephrons, obstructing tubular outflow. Concurrently, high calcium-phosphate product exceeding sixty milligrams-squared per decilitre-squared precipitates metastatic calcium phosphate crystals, causing irreversible tubulointerstitial nephrocalcinosis.",
+   "say": "Uric acid and calcium phosphate crystals precipitate within renal tubules, causing acute tubular obstruction. A calcium-phosphate product over sixty precipitates crystals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uric Acid Crystal Nephropathy",
+     "points": [
+      "Uric acid pKa is 5.4; highly insoluble in acidic urine",
+      "Crystallizes within distal tubules and collecting ducts",
+      "Urine uric acid to creatinine ratio >1.0",
+      "Reversible with aggressive hydration and rasburicase"
+     ]
+    },
+    "right": {
+     "title": "Calcium Phosphate Precipitation",
+     "points": [
+      "Severe hyperphosphataemia drives systemic calcium binding",
+      "Calcium x phosphate product >60 mg2/dL2 triggers precipitation",
+      "Insoluble in alkaline urine (urinary alkalinization dangerous)",
+      "Leads to irreversible calcific acute tubular necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Aggressive intravenous hyperhydration without added potassium expands intravascular volume and enhances urinary excretion of solutes. Pre-chemotherapy prophylactic management utilizes **hyperhydration in tumour lysis**, administering intravenous fluids at three thousand millilitres per square metre per day (or two to three times maintenance) without potassium additives, targeting high urine output exceeding one hundred millilitres per square metre per hour with specific gravity below 1.010.",
+   "say": "Hyperhydration at three thousand millilitres per square metre daily without potassium promotes solute clearance. Target a high urine output exceeding four to five mL per kilogram per hour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Preventive Strategy",
+     "Protocol & Dosing Target",
+     "Mechanism of Protection",
+     "Critical Precaution / Avoidance"
+    ],
+    "rows": [
+     [
+      "Intravenous hyperhydration",
+      "3,000 mL/m2/day of isotonic fluid (no potassium)",
+      "Flushes tubular lumen, prevents crystal sludging",
+      "Never add potassium to intravenous fluids"
+     ],
+     [
+      "Target urine output",
+      ">=100 mL/m2/hr (or >=4-5 mL/kg/hr)",
+      "Maintains rapid solute transit time",
+      "Use furosemide only after volume repletion"
+     ],
+     [
+      "Avoid urinary alkalinization",
+      "Maintain normal physiological urine pH (6.5-7.0)",
+      "Alkalinization precipitates calcium phosphate",
+      "Sodium bicarbonate is no longer recommended"
+     ],
+     [
+      "Electrolyte monitoring",
+      "Serum potassium, Ca, PO4, uric acid every 4-6 hrs",
+      "Enables preemptive intervention before crisis",
+      "Continuous telemetry monitoring for peaked T waves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recombinant urate oxidase enzymes rapidly convert insoluble uric acid into highly soluble allantoin metabolites. In high-risk leukemia and lymphoma patients, **recombinant rasburicase for hyperuricaemia** (0.2 mg/kg intravenously over thirty minutes) clears circulating uric acid within four hours by metabolizing it into allantoin, which is five to ten times more soluble than uric acid. Rasburicase is strictly contraindicated in patients with G6PD deficiency due to methemoglobinemia.",
+   "say": "Rasburicase converts insoluble uric acid into soluble allantoin within four hours. It is contraindicated in G6PD deficiency due to risks of severe methemoglobinemia and hemolysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rasburicase (Recombinant Urate Oxidase)",
+     "points": [
+      "Directly cleaves existing uric acid into soluble allantoin",
+      "Rapidly reduces uric acid within 4 hours",
+      "Drug of choice in established hyperuricaemia and high risk",
+      "Contraindicated in G6PD deficiency (causes severe hemolysis)"
+     ]
+    },
+    "right": {
+     "title": "Allopurinol (Xanthine Oxidase Inhibitor)",
+     "points": [
+      "Inhibits xanthine oxidase; prevents new uric acid synthesis",
+      "Does not metabolize pre-existing circulating uric acid",
+      "Used only for low or intermediate risk TLS prophylaxis",
+      "Leads to xanthine accumulation and potential xanthine stones"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-bone",
+  "subject": "pathology",
+  "title": "Osteochondroma, Osteosarcoma, Codman Triangle, Giant Cell Tumour, and Soap Bubble Lesions",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Osteochondroma grows cartilage capped bony outgrowths from metaphyses away from joints in adolescents, solitary or hereditary multiple, malignant transformation rare and cartilage cap thickness judged. That exostosis is **osteochondroma (exostosis)**. A cartilage cap thicker than about 2 cm in a skeletally mature adult raises concern for secondary chondrosarcoma, while thin caps in growing teenagers are expected and reassuring.",
+      "say": "A bony stalk with cartilage cap pointing away from joint is osteochondroma, commonest benign bone tumour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/benign-bone-tumours-age-site-margin-fig1.webp",
+        "alt": "Benign bone tumour types age site margin",
+        "caption": "Benign bone tumour patterns by age, site, and margin."
+      }
+    },
+    {
+      "tx": "Osteosarcoma manufactures malignant osteoid in adolescent metaphyses around knee, sunburst spicules and Codman triangle periosteal lifting on films, lungs first metastatic home. That osteoid cancer is **conventional osteosarcoma of adolescence**. Serum alkaline phosphatase and lactate dehydrogenase add prognostic weight at diagnosis, and chest CT is mandatory because skip lesions and lung deposits change the surgical plan.",
+      "say": "Knee metaphysis pain, sunburst film, teenage patient: osteosarcoma until MRI and biopsy stage it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp",
+        "alt": "Bone lesion Xray patterns osteosarcoma Ewing Paget",
+        "caption": "Bone lesion radiographic patterns across osteosarcoma, Ewing sarcoma, and Paget disease."
+      }
+    },
+    {
+      "tx": "Codman triangle forms when tumour lifts periosteum faster than it ossifies, a radiographic triangle at lesion margins shared by infection and Ewing tumours too. That periosteal sign is the **Codman triangle**. Seeing it should trigger urgent MRI of the whole affected bone plus chest imaging, because the sign flags an aggressive process even before histology names it.",
+      "say": "Codman triangle means periosteum outrun, by tumour or infection; it accuses speed, not identity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Osteosarcoma film",
+          "points": [
+            "Metaphyseal, sunburst osteoid cloud",
+            "Codman triangle, wide transition",
+            "Adolescent knee region"
+          ]
+        },
+        "right": {
+          "title": "Ewing film",
+          "points": [
+            "Diaphyseal, onion skin layers",
+            "Moth eaten permeative",
+            "Younger child, fever mimic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Giant cell tumour of bone lyses epiphyses of young adults expansile soap bubble to subchondral plate, locally aggressive, rarely metastasising, denosumab shrinking selected. That epiphyseal lytic tumour is **giant cell tumour of bone**. Histology shows osteoclast like giant cells spread evenly among mononuclear stromal cells, and the stromal cells, not the giant cells, carry the H3F3A mutation.",
+      "say": "Soap bubble lysis reaching joint surface in a thirty year old is giant cell tumour territory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Age and site",
+          "Film signature"
+        ],
+        "rows": [
+          [
+            "Osteosarcoma",
+            "Teens, metaphysis knee",
+            "Sunburst, Codman triangle"
+          ],
+          [
+            "Giant cell tumour",
+            "20 to 40, epiphysis",
+            "Soap bubble to subchondral bone"
+          ],
+          [
+            "Chondroblastoma",
+            "Teens, epiphysis",
+            "Lytic with calcification"
+          ],
+          [
+            "Aneurysmal bone cyst",
+            "Teens, expansile",
+            "Fluid fluid levels MRI"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Soap bubble describes expansile multiloculated lytic remodelling in giant cell tumour and aneurysmal bone cysts, radiographic poetry requiring histological prose. That pattern is the **soap bubble appearance of expansile bone lesions**. Fluid fluid levels on MRI point more toward aneurysmal bone cyst, which can also arise secondarily inside a giant cell tumour and mislead sampling.",
+      "say": "Soap bubble films narrow the list; biopsy writes the actual diagnosis every time.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bone pain or incidental lesion"
+          },
+          {
+            "id": "b",
+            "label": "Xray zone, margin, periosteum read"
+          },
+          {
+            "id": "c",
+            "label": "MRI extent, staged biopsy planned"
+          },
+          {
+            "id": "d",
+            "label": "Limb salvage oncology surgery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biopsy tract planning in bone sarcoma is oncological surgery itself because contaminated compartments amputate limb salvage options, so referral precedes biopsy always. That law is **sarcoma biopsy only at treating centre**. The biopsy tract must lie in line with the future resection incision so the entire contaminated track can be excised en bloc at definitive surgery.",
+      "say": "Never biopsy a suspected bone sarcoma outside the treating centre; the tract becomes tumour territory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Refer first",
+          "points": [
+            "Imaging at sarcoma centre",
+            "Planned tract excised later",
+            "Limb salvage preserved"
+          ]
+        },
+        "right": {
+          "title": "Biopsy casually",
+          "points": [
+            "Compartments contaminated",
+            "Amputation risk rises",
+            "Margins compromised"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Osteosarcoma chemotherapy methotrexate doxorubicin cisplatin around limb salvage surgery, necrosis percentage after neoadjuvant therapy prognosticating powerfully. That response grade is **histological necrosis after osteosarcoma chemotherapy**. At least 90 percent tumour necrosis after neoadjuvant MAP marks a good responder, while poor necrosis predicts higher relapse risk despite complete resection.",
+      "say": "Ninety percent necrosis after chemotherapy is osteosarcoma's strongest good omen at resection.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/soft-tissue-sarcoma-fig1.webp",
+        "alt": "Bone sarcoma radiographic signs",
+        "caption": "Bone sarcoma radiographic signs including periosteal reactions."
+      }
+    },
+    {
+      "tx": "Secondary osteosarcoma arises in Paget bone, irradiated fields, and retinoblastoma survivors decades later, older patients' new pain in Pagetic bone earning biopsy. That transformation is **secondary osteosarcoma in Paget disease and radiation**. Germline RB1 loss explains the retinoblastoma link, and radiation associated tumours typically appear after a latency well beyond five years in the treated field.",
+      "say": "New pain in Pagetic bone is sarcoma until biopsy acquits it, however familiar Paget pain feels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Predisposing soil",
+          "Sarcoma",
+          "Latency accent"
+        ],
+        "rows": [
+          [
+            "Paget disease",
+            "Osteosarcoma elderly",
+            "Years of pagetic change"
+          ],
+          [
+            "Radiation field",
+            "Osteo and soft tissue sarcomas",
+            "Decade plus"
+          ],
+          [
+            "RB germline",
+            "Osteosarcoma adolescence",
+            "Survivorship screening"
+          ],
+          [
+            "Bone infarcts, implants",
+            "Undifferentiated sarcomas rare",
+            "Case vigilance"
+          ]
+        ]
+      }
+    }
+  ]
+}

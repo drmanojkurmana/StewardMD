@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-central-tendency-coefficient-of-variation",
+  "subject": "community-medicine",
+  "module": "cm-central-tendency",
+  "title": "Coefficient of Variation, Interquartile Range, and Percentiles",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Coefficient of variation defined",
+      "tx": "The **coefficient of variation** divides the standard deviation by the mean and multiplies by one hundred, expressing spread as a percentage of the average. Being unit free, it compares variability across unlike quantities: height against weight, haemoglobin against cholesterol, or two laboratory assays in different units. Below five percent suggests tight consistency in most biological and assay contexts, though context always judges.",
+      "say": "Coefficient of variation is standard deviation as a percent of the mean. No units, so unlike quantities become comparable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "cv1", "label": "Take standard deviation and mean" },
+          { "id": "cv2", "label": "Divide SD by mean" },
+          { "id": "cv3", "label": "Multiply by 100 for percent" }
+        ],
+        "edges": [["cv1", "cv2"], ["cv2", "cv3"]]
+      }
+    },
+    {
+      "title": "Comparing two series with CV",
+      "tx": "The classic use is **comparing variability with coefficient of variation**: infants' weights (mean five kilograms, SD one) vary relatively more than adults' (mean sixty, SD six), because twenty percent beats ten percent despite the smaller absolute SD. Examination stems giving two means with two SDs in different units are always CV questions wearing a disguise, and the larger CV names the more variable series.",
+      "say": "A small SD can still mean large relative spread. Convert both series to CV and the larger percentage wins.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Series", "Mean, SD, and CV"],
+        "rows": [
+          ["Infant weight", "5 kg, SD 1 kg, CV 20 percent"],
+          ["Adult weight", "60 kg, SD 6 kg, CV 10 percent"],
+          ["Verdict", "Infants relatively more variable"],
+          ["Rule", "Compare CV, never raw SD, across units"]
+        ]
+      }
+    },
+    {
+      "title": "CV in laboratory quality control",
+      "tx": "Laboratories live by the **coefficient of variation in quality control**: daily control samples yield within run and between run CVs, plotted on Levey Jennings charts with warning and rejection limits at two and three standard deviations. A rising CV exposes reagent decay, pipetting drift, or instrument failure before patient results suffer. Glucose assays target CVs under about three percent in accredited laboratories.",
+      "say": "Labs track CV daily on control charts. A drifting CV betrays a failing assay before patients are harmed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Healthy assay",
+          "points": ["Low stable CV, under 3 to 5 percent", "Controls inside 2 SD limits", "Results released confidently"]
+        },
+        "right": {
+          "title": "Failing assay",
+          "points": ["Rising CV over days", "Controls breaching 3 SD", "Halt, recalibrate, repeat controls"]
+        }
+      }
+    },
+    {
+      "title": "Quartiles divide into four",
+      "tx": "Ordered data quartered by **quartiles in descriptive statistics** place the first quartile (twenty fifth percentile) below which a quarter of values lie, the median as second quartile, and the third quartile at seventy five percent. Quartiles need only ordering, never normality, which is why growth monitoring, income reporting, and hospital stay summaries quote them where means would lie under skew.",
+      "say": "Quartiles cut ordered data into quarters. The median is simply the second quartile.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "q1", "label": "Order all values ascending" },
+          { "id": "q2", "label": "Q1 at 25 percent, median at 50" },
+          { "id": "q3", "label": "Q3 at 75 percent completes quartiles" }
+        ],
+        "edges": [["q1", "q2"], ["q2", "q3"]]
+      }
+    },
+    {
+      "title": "Interquartile range in depth",
+      "tx": "The **interquartile range** (third quartile minus first) captures the central half of any distribution and defines box plot fences: values beyond one point five interquartile ranges from the box edges count as outliers, beyond three as extremes. In skewed length of stay data (median four days, IQR two to seven), the IQR communicates typical variation honestly where a standard deviation inflated by one hundred day stays would mislead managers.",
+      "say": "Interquartile range is Q3 minus Q1, the middle half. Beyond one point five times it from the box lie outliers.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Box plot landmark", "Value"],
+        "rows": [
+          ["Lower box edge", "First quartile (25th percentile)"],
+          ["Upper box edge", "Third quartile (75th percentile)"],
+          ["Box height", "Interquartile range"],
+          ["Fences", "1.5 times IQR beyond box edges"]
+        ]
+      }
+    },
+    {
+      "title": "Percentiles and centile charts",
+      "tx": "Generalising quartiles, **percentiles (centiles)** mark the value below which a stated percent of observations fall: the ninetieth percentile blood pressure, the third percentile weight flagging undernutrition on growth charts. The median is the fiftieth percentile. Percentile reference ranges (third to ninety seventh) define growth chart channels used daily in anganwadis and paediatric clinics across India.",
+      "say": "A child on the third weight percentile has ninety seven percent of peers heavier. Centiles turn one measurement into a standing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Percentile uses",
+          "points": ["Growth chart channels", "Reference ranges for tests", "Cut offs for undernutrition screening"]
+        },
+        "right": {
+          "title": "Percentile traps",
+          "points": ["Not a percent score in an exam", "Depends on reference population", "Crossing channels matters more than one point"]
+        }
+      }
+    },
+    {
+      "title": "Semi interquartile range",
+      "tx": "Half the interquartile range forms the **semi interquartile range (quartile deviation)**, an older spread measure centred on the median: quartile deviation equals (Q3 minus Q1) divided by two. It appears in legacy Indian textbooks and examinations beside probable error of older literature. Recognising it as simply half the IQR prevents the panic this antique term intends to provoke.",
+      "say": "Quartile deviation is just half the interquartile range. Old name, simple idea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "si1", "label": "Find Q3 minus Q1 (the IQR)" },
+          { "id": "si2", "label": "Divide by two" },
+          { "id": "si3", "label": "Report as quartile deviation around median" }
+        ],
+        "edges": [["si1", "si2"], ["si2", "si3"]]
+      }
+    },
+    {
+      "title": "Relative versus absolute dispersion",
+      "tx": "All unit free measures (coefficient of variation, quartile coefficient built from quartiles) belong to **relative measures of dispersion**, while range, IQR, and standard deviation in original units are absolute measures. Absolute measures answer how much in grams or days; relative measures answer how much compared with the average or across populations. Examination lists asking which is relative expect coefficient of variation first.",
+      "say": "Absolute spread carries units; relative spread is a pure percentage. Coefficient of variation heads the relative family.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Family", "Members"],
+        "rows": [
+          ["Absolute (with units)", "Range, IQR, mean deviation, SD"],
+          ["Relative (unit free)", "Coefficient of variation, quartile coefficient"],
+          ["Cross unit comparison", "Only relative measures allowed"],
+          ["Same unit comparison", "Either family acceptable"]
+        ]
+      }
+    },
+    {
+      "title": "Worked examination pattern",
+      "tx": "The repeated **coefficient of variation examination pattern** gives two groups with means and standard deviations and asks which is more variable or more consistent: compute both CVs, award variability to the higher and consistency to the lower. A second pattern asks the measure comparing spread across different units (answer CV) or the middle fifty percent spread (answer IQR). Both dissolve once definitions are reflexes.",
+      "say": "Two means, two SDs, different units: compute CVs. Higher CV varies more; lower CV is more consistent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stem asks more variable",
+          "points": ["Compute CV for both groups", "Higher CV is more variable", "Ignore raw SD comparison"]
+        },
+        "right": {
+          "title": "Stem asks more consistent",
+          "points": ["Same CV computation", "Lower CV is more consistent", "State both CV values as proof"]
+        }
+      }
+    }
+  ]
+}

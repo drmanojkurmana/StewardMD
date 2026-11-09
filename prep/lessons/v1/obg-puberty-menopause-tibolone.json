@@ -1,0 +1,291 @@
+{
+ "v": 1,
+ "id": "obg-puberty-menopause-tibolone",
+ "subject": "obstetrics-gynaecology",
+ "module": "obg-puberty-menopause",
+ "title": "Tibolone",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Tibolone** is a synthetic 19-nortestosterone steroid derivative classified as a selective tissue estrogenic activity regulator (STEAR), used for managing postmenopausal symptoms. Following oral ingestion, tibolone itself is biologically inert, functioning as a prodrug. In vivo, it is rapidly converted into three active steroid metabolites: 3-alpha-hydroxy-tibolone, 3-beta-hydroxy-tibolone, and the delta-4-isomer. These metabolites display tissue-specific affinities for estrogen, progesterone, and androgen nuclear receptors, conferring distinct organ-selective pharmacological effects.",
+   "say": "Tibolone is a synthetic steroid that acts as a selective tissue regulator. It breaks down into three metabolites that exert estrogenic, progestogenic, and androgenic actions depending on the specific target organ.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tibolone.webp",
+    "alt": "Diagram illustrating tissue-selective metabolic actions of tibolone.",
+    "caption": "Tissue-selective estrogenic, progestogenic, and androgenic actions of tibolone metabolites. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Tissue-selective activity** allows tibolone to provide the clinical benefits of combined hormone replacement therapy within a single molecule. In bone, brain, and the cardiovascular system, the 3-alpha and 3-beta-hydroxy metabolites bind estrogen receptors, preventing osteoclastic bone resorption and suppressing hypothalamic thermoregulatory hot flushes. In the endometrium, the delta-4 isomer acts directly as a potent progestogen and inhibits local sulfatase enzymes, completely preventing estrogenic glandular proliferation and avoiding uterine bleeding.",
+   "say": "Tibolone acts like estrogen in bone and brain to prevent fractures and hot flushes. But in the uterus, its delta-four metabolite acts as a progestin, stopping the lining from thickening and avoiding bleeding.",
+   "vis": {
+    "kind": "table",
+    "title": "Target Organ Actions of Tibolone Metabolites",
+    "cols": [
+     "Target Organ",
+     "Dominant Active Metabolite",
+     "Clinical Pharmacological Effect"
+    ],
+    "rows": [
+     [
+      "Skeletal bone",
+      "3-alpha and 3-beta-hydroxy isomers",
+      "Estrogenic: inhibits osteoclasts, preserves BMD"
+     ],
+     [
+      "Hypothalamus",
+      "3-alpha and 3-beta-hydroxy isomers",
+      "Estrogenic: abolishes vasomotor flushes"
+     ],
+     [
+      "Endometrium",
+      "Delta-4 isomer and local sulfatase block",
+      "Progestogenic: induces atrophy, prevents bleeding"
+     ],
+     [
+      "Liver and brain",
+      "Delta-4 isomer (androgenic)",
+      "Lowers SHBG, enhances free testosterone and libido"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endometrial safety** represents a major clinical advantage of tibolone over conventional estrogen-alone therapy in postmenopausal women with an intact uterus. In endometrial stromal and glandular cells, the delta-4 isomer stimulates 17-beta-hydroxysteroid dehydrogenase type 2, which converts active estradiol into weaker estrone, while simultaneously inhibiting steroid sulfatase. Consequently, the endometrium remains completely atrophic. Tibolone induces amenorrhoea in over ninety percent of women, eliminating the need for a separate progestin tablet.",
+   "say": "Tibolone keeps the endometrium atrophic by inhibiting local estrogen production and acting as a progestin. Over ninety percent of women remain completely amenorrhoeic, avoiding annoying withdrawal bleeds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tibolone Endometrial Action",
+     "points": [
+      "Inhibits local endometrial steroid sulfatase",
+      "Converts local estradiol to weaker estrone",
+      "Induces stable atrophic amenorrhoea in 90%",
+      "Safe without adding separate progestin"
+     ]
+    },
+    "right": {
+     "title": "Conventional Estrogen Alone",
+     "points": [
+      "Unmitigated endometrial proliferation",
+      "High hazard of atypical glandular hyperplasia",
+      "30% to 40% risk of adenocarcinoma",
+      "Strictly contraindicated in intact uterus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bone mineral density** is preserved and fracture risk reduced by tibolone, as demonstrated in the landmark Long-term Intervention on Fractures with Tibolone (LIFT) trial. Administered at 1.25 or 2.5 milligrams daily, tibolone significantly increases bone density at the lumbar spine and femoral neck, reducing the risk of new vertebral fractures by forty-five percent and non-vertebral fractures by twenty-six percent. It represents an effective second-line therapeutic option for postmenopausal osteopenia and osteoporosis in symptomatic women.",
+   "say": "Tibolone increases bone mineral density and slashes vertebral fracture risk by forty-five percent. It is an effective option for postmenopausal osteoporosis in women who also suffer from hot flushes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Skeletal Antiresorptive Cascade of Tibolone",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Oral Tibolone",
+      "sub": "Conversion to 3-alpha/beta-hydroxy metabolites"
+     },
+     {
+      "id": "b2",
+      "label": "Osteoblast Binding",
+      "sub": "Estrogen receptor alpha activation on bone cells"
+     },
+     {
+      "id": "b3",
+      "label": "RANKL Suppression",
+      "sub": "Reduces osteoclast recruitment and bone resorption"
+     },
+     {
+      "id": "b4",
+      "label": "Fracture Reduction",
+      "sub": "45% reduction in clinical vertebral fractures"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "Systemic delivery"
+     ],
+     [
+      "b2",
+      "b3",
+      "Paracrine signaling"
+     ],
+     [
+      "b3",
+      "b4",
+      "Structural preservation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Libido and sexual function** improve significantly with tibolone, distinguishing it from conventional hormone replacement regimens. The delta-4 isomer binds directly to androgen receptors in the central nervous system. Furthermore, tibolone moderately suppresses hepatic synthesis of sex hormone-binding globulin, decreasing SHBG levels by up to fifty percent and significantly elevating circulating free, biologically active testosterone. This unique androgenic profile enhances sexual desire, arousal, satisfaction, and psychological mood.",
+   "say": "Tibolone uniquely improves libido and sexual desire because its androgenic metabolite lowers SHBG, freeing up active testosterone in the bloodstream to boost mood and sexual satisfaction.",
+   "vis": {
+    "kind": "table",
+    "title": "Androgenic Effects on Sexual Function and Lipid Profile",
+    "cols": [
+     "Physiological Marker",
+     "Tibolone Response",
+     "Clinical Outcome"
+    ],
+    "rows": [
+     [
+      "Sex hormone-binding globulin",
+      "Suppressed by 50%",
+      "Elevates free circulating testosterone"
+     ],
+     [
+      "Sexual arousal and desire",
+      "Marked clinical improvement",
+      "Superior to conventional HRT for low libido"
+     ],
+     [
+      "High-density lipoprotein (HDL)",
+      "Moderate reduction (androgenic)",
+      "Monitor in high-risk cardiovascular patients"
+     ],
+     [
+      "Serum triglycerides",
+      "Reduced by 20% to 30%",
+      "Favourable profile in hypertriglyceridaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stroke risk** was confirmed as a major adverse safety outcome in the LIFT trial, which was terminated prematurely due to an excess of ischaemic cerebrovascular events. In postmenopausal women aged sixty years and older, tibolone increased the relative risk of ischaemic stroke by 2.2-fold compared to placebo. Consequently, tibolone is strictly contraindicated in women aged sixty and older, those with pre-existing cerebrovascular disease, or individuals with multiple cardiovascular risk factors.",
+   "say": "The LIFT trial was halted early because tibolone doubled the risk of ischaemic stroke in women aged sixty and older. Never prescribe tibolone to women over sixty or those with stroke risk factors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute Contraindications",
+     "points": [
+      "Age sixty years or older",
+      "Prior stroke, TIA, or cardiovascular disease",
+      "Personal history of breast cancer (LIBERATE trial)",
+      "Active or recurrent venous thromboembolism"
+     ]
+    },
+    "right": {
+     "title": "Appropriate Clinical Candidates",
+     "points": [
+      "Postmenopausal women under age sixty",
+      "At least 12 months since final menses",
+      "Bothersome flushes combined with low libido",
+      "Intact uterus seeking bleed-free therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Breast cancer recurrence** was documented in the randomized LIBERATE trial evaluating tibolone in postmenopausal breast cancer survivors suffering from vasomotor flushes. The trial was halted prematurely when tibolone demonstrated an unacceptable 1.4-fold increase in the hazard of breast cancer recurrence. Although tibolone exhibits low mammographic breast density in healthy women, a history of breast cancer or any estrogen-sensitive malignancy remains an absolute contraindication to its clinical use.",
+   "say": "The LIBERATE study showed that tibolone significantly increases the recurrence of breast cancer in survivors. Any personal history of breast cancer is an absolute contraindication to taking tibolone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Oncological Risk Stratification for Tibolone",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Candidate Screening",
+      "sub": "Assess personal cancer and stroke history"
+     },
+     {
+      "id": "c2",
+      "label": "Prior Breast Cancer",
+      "sub": "LIBERATE trial showed 1.4x recurrence hazard"
+     },
+     {
+      "id": "c3",
+      "label": "Absolute Contraindication",
+      "sub": "Switch to non-hormonal SSRIs or gabapentin"
+     },
+     {
+      "id": "c4",
+      "label": "Healthy Candidate",
+      "sub": "Standard 2.5 mg daily oral prescribing"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Cancer positive"
+     ],
+     [
+      "c2",
+      "c3",
+      "High oncological risk"
+     ],
+     [
+      "c1",
+      "c4",
+      "Cancer negative, age <60"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Twelve months of amenorrhoea** must elapse before initiating tibolone in women undergoing natural menopause. Because tibolone exerts weak progestogenic activity that cannot overcome high, erratic endogenous estrogen surges characteristic of early perimenopause, starting it too early produces unpredictable, irregular breakthrough vaginal bleeding. Standard adult dosing is 2.5 milligrams orally once daily, swallowed with water at the same time each day without cyclical interruptions.",
+   "say": "Wait until at least twelve months have passed since the last period before starting tibolone. Prescribing it during early perimenopause causes irregular breakthrough bleeding because erratic natural estrogens override it.",
+   "vis": {
+    "kind": "table",
+    "title": "Prescribing Rules and Dosing for Tibolone",
+    "cols": [
+     "Clinical Parameter",
+     "Standard Recommendation",
+     "Underlying Rationale"
+    ],
+    "rows": [
+     [
+      "Timing of initiation",
+      "At least 12 months after last natural menses",
+      "Prevents irregular breakthrough bleeding"
+     ],
+     [
+      "Standard adult dose",
+      "2.5 mg orally once daily continuous",
+      "Maintains continuous symptom and bone protection"
+     ],
+     [
+      "Surgical menopause",
+      "May be initiated immediately post-oophorectomy",
+      "No residual endogenous estrogen surges exist"
+     ],
+     [
+      "Treatment duration",
+      "Re-evaluate annually; keep under 5 years",
+      "Balances fracture benefits against stroke risks"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Tibolone: classification and active metabolite classes",
+   "b": "Selective tissue estrogenic regulator (STEAR) with estrogenic, progestogenic, and androgenic metabolites."
+  },
+  {
+   "f": "Tibolone LIFT trial: primary safety reason for early termination",
+   "b": "2.2-fold increased risk of ischaemic stroke in women aged 60 and older."
+  },
+  {
+   "f": "Tibolone initiation rule: mandatory timing after natural menopause",
+   "b": "At least 12 months of amenorrhoea must elapse to prevent irregular breakthrough bleeding."
+  }
+ ],
+ "keys": [
+  "Tibolone is a STEAR whose metabolites exert tissue-selective estrogen, progestogen, and androgen effects",
+  "It relieves flushes, preserves bone density, and enhances libido without causing uterine bleeding",
+  "It is contraindicated over age 60 due to doubled stroke risk, and in breast cancer survivors"
+ ]
+}

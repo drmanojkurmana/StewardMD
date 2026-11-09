@@ -1,0 +1,216 @@
+{
+ "key": "ped-growth-short-stature",
+ "v": 1,
+ "module": "ped-growth",
+ "subject": "paediatrics",
+ "title": "Short Stature, Constitutional Delay and Endocrine Assessment",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A standing height or recumbent length falling more than two standard deviations below the population mean for age and sex (< -2 SD), or below the third percentile, defines **pediatric short stature**. Initial diagnostic triage requires distinguishing physiological non-pathological normal variants from serious systemic, nutritional, skeletal, and endocrine disorders.",
+   "say": "Short stature is defined as height falling below minus two standard deviations or the third percentile.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-length-height-mph.webp",
+    "alt": "Height and length measurement tools used for evaluating short stature.",
+    "caption": "Stadiometer height assessment and calculation of mid-parental target height. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most common physiological normal variant in clinical practice is **constitutional delay of growth and puberty**. Often referred to as late bloomers, these children exhibit normal birth weights followed by deceleration of linear growth in the first two years of life, after which they track steadily along or just below the third percentile with normal annual growth velocity.",
+   "say": "Constitutional delay features delayed bone age and delayed puberty with final normal adult height.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Constitutional Delay (CDGP)",
+     "Familial Short Stature (FSS)"
+    ],
+    "rows": [
+     [
+      "Family history",
+      "Delayed puberty, late maternal menarche",
+      "Short parents, normal timing of puberty"
+     ],
+     [
+      "Annual growth velocity",
+      "Normal (5 to 6 cm/year in childhood)",
+      "Normal (5 to 6 cm/year in childhood)"
+     ],
+     [
+      "Bone age status",
+      "Significantly delayed (matches height age)",
+      "Normal (matches chronological age)"
+     ],
+     [
+      "Pubertal onset",
+      "Delayed onset and late growth spurt",
+      "Normal, timely pubertal development"
+     ],
+     [
+      "Final adult height",
+      "Reaches normal mid-parental target height",
+      "Short adult stature, matches short parents"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In constitutional delay, radiographic determination of **skeletal bone age** reveals marked delay compared to chronological age, perfectly matching the child's height age. Because the epiphyseal growth plates remain open longer, growth continues into late adolescence, enabling patients to experience a late pubertal growth spurt and achieve their full genetic target height.",
+   "say": "Bone age is delayed in constitutional delay, allowing prolonged linear growth and normal adult height.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bone Age Determination",
+     "points": [
+      "Left hand and wrist plain radiograph",
+      "Evaluated via Greulich and Pyle atlas",
+      "Assesses epiphyseal ossification centers"
+     ]
+    },
+    "right": {
+     "title": "Clinical Implications in CDGP",
+     "points": [
+      "Bone age is delayed by 2 to 4 years",
+      "Epiphyseal fusion occurs late",
+      "Preserves final adult height potential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Children with **familial short stature** track along or parallel to the lower percentiles because of polygenic inheritance from short parents. Their bone age is completely normal and matches their chronological age, puberty occurs at the expected chronological timing, and their final adult height remains short but strictly within their calculated mid-parental height target range.",
+   "say": "Familial short stature features normal bone age, timely puberty, and adult height matching short parents.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Familial Short Stature Profile",
+     "points": [
+      "Height velocity is normal for age",
+      "Bone age equals chronological age",
+      "Puberty occurs at normal expected age"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Confirmation",
+     "points": [
+      "Short parents confirmed on measurement",
+      "Child height falls within mid-parental range",
+      "Reassuring, non-pathological normal variant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Initial physical examination requires distinguishing proportionate from **disproportionate short stature**. By calculating the ratio of upper body segment to lower segment and comparing arm span to standing height, clinicians identify skeletal dysplasias. Achondroplasia presents with rhizomelic limb shortening, large head with frontal bossing, and a markedly elevated upper-to-lower segment ratio.",
+   "say": "Disproportionate short stature with rhizomelic shortening and frontal bossing indicates achondroplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Body Proportion",
+     "Normal at Birth",
+     "Normal at 10 Years",
+     "Disproportionate Dysplasia"
+    ],
+    "rows": [
+     [
+      "Upper to lower ratio (US:LS)",
+      "1.7 to 1.0 (longer trunk)",
+      "1.0 to 1.0 (equal trunk and legs)",
+      "Persistently elevated (short limbs in achondroplasia)"
+     ],
+     [
+      "Arm span vs height",
+      "Arm span 2.5 cm less than height",
+      "Arm span equals standing height",
+      "Arm span significantly shorter than standing height"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Isolated pituitary failure of somatotroph secretion causes **growth hormone deficiency**. Affected children exhibit severe growth deceleration with annual height velocity dropping below four centimeters per year, normal body proportions, increased subcutaneous truncal adiposity, cherubic doll-like facial features with midfacial hypoplasia, micropenis in males, and delayed bone age.",
+   "say": "Growth hormone deficiency presents with slow growth velocity, truncal adiposity, and delayed bone age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Step",
+     "Laboratory Investigation",
+     "Diagnostic Interpretation"
+    ],
+    "rows": [
+     [
+      "Screening biomarker",
+      "Serum IGF-1 and IGFBP-3",
+      "Reflects integrated GH secretion; low levels suggest deficiency"
+     ],
+     [
+      "Provocative testing",
+      "Clonidine or glucagon stimulation",
+      "Peak GH below 7 to 10 ng/mL on two separate tests confirms diagnosis"
+     ],
+     [
+      "Pituitary imaging",
+      "Contrast-enhanced brain MRI",
+      "Visualizes anterior pituitary hypoplasia or ectopic posterior pituitary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In any female presenting with unexplained short stature, clinicians must maintain high suspicion for **Turner syndrome**. Arising from complete or partial loss of an X chromosome (45,XO), affected girls may lack obvious dysmorphic stigmata like webbed neck or cubitus valgus. Mandatory chromosomal karyotyping is required in any short female with growth velocity failure.",
+   "say": "Turner syndrome must be excluded by chromosomal karyotyping in any short female with growth failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Physical Signs",
+     "points": [
+      "Short stature (loss of SHOX gene)",
+      "Webbed neck and low posterior hairline",
+      "Broad shield chest with widely spaced nipples"
+     ]
+    },
+    "right": {
+     "title": "Cardiovascular and Ovarian Pathology",
+     "points": [
+      "Coarctation of the aorta and bicuspid aortic valve",
+      "Ovarian dysgenesis (streak gonads)",
+      "Primary amenorrhoea and hypergonadotropic hypogonadism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recombinant human **growth hormone therapy** is the definitive medical management for proven growth hormone deficiency, Turner syndrome, chronic renal insufficiency, and Prader-Willi syndrome. Administered as daily subcutaneous injections, therapy accelerates linear growth velocity, normalizes adult height, increases lean muscle mass, and is continued until epiphyseal plates fuse.",
+   "say": "Daily subcutaneous recombinant growth hormone accelerates linear growth until epiphyseal plates fuse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Approved Indication",
+     "Recommended GH Dose",
+     "Clinical Monitoring Parameter"
+    ],
+    "rows": [
+     [
+      "Growth hormone deficiency",
+      "0.025 to 0.035 mg/kg/day SC",
+      "Serial height velocity and serum IGF-1 levels"
+     ],
+     [
+      "Turner syndrome",
+      "0.045 to 0.050 mg/kg/day SC",
+      "Blood pressure, scoliosis, and thyroid function"
+     ],
+     [
+      "Chronic kidney disease",
+      "0.045 to 0.050 mg/kg/day SC",
+      "Renal osteodystrophy and serum creatinine"
+     ]
+    ]
+   }
+  }
+ ]
+}

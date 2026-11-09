@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-drowning-drowning",
+ "subject": "forensic-medicine",
+ "module": "fmt-drowning",
+ "title": "Drowning: Wet, Dry and Secondary Drowning",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Drowning needs only nose and mouth submerged",
+   "tx": "**Drowning** is asphyxia from aspiration of fluid into the air passages after submersion in water or other fluid, and complete submersion is unnecessary: covering the nose and mouth alone for long enough can kill. About one hundred fifty thousand persons die this way each year worldwide. Persons under drugs or drink, infants and epileptics can drown face down in a puddle or ditch, which investigators must remember at shallow scenes.",
+   "say": "Nose and mouth under water is enough to drown, so a face down body in a shallow puddle is a drowning scene.",
+   "vis": {"kind": "table", "cols": ["Element", "Detail", "Forensic point"], "rows": [["Definition", "Fluid aspirated into airways", "Asphyxia is the mechanism"], ["Submersion needed", "Nose and mouth only", "Shallow water can kill"], ["At risk scenes", "Puddles, ditches, baths", "Drink, drugs, epilepsy, infancy"], ["World burden", "About 150000 deaths yearly", "Common medicolegal problem"]]}
+  },
+  {
+   "title": "The struggle sequence of submersion",
+   "tx": "A falling person sinks, rises by buoyancy, and breathes until rising carbon dioxide forces an inevitable inhalation of water in the **submersion struggle sequence**. Crying out and struggling inhale more water, coughing expels air, vomiting may add aspirated stomach contents, and cerebral hypoxia becomes irreversible between three and ten minutes in warm water. Consciousness is usually lost within three minutes of submersion. Cold water can trigger a reflex deep inhalation on entry.",
+   "say": "Rising carbon dioxide forces a fatal breath of water, consciousness goes in three minutes, and warm water brain injury follows by ten.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Victim sinks then surfaces"}, {"id": "b", "label": "Breath held while struggling"}, {"id": "c", "label": "Carbon dioxide forces inhalation"}, {"id": "d", "label": "Hypoxia becomes irreversible"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Wet drowning, primary drowning",
+   "tx": "In **wet drowning**, also called primary or typical drowning, water is inhaled into the lungs and the victim suffers severe chest pain before death within minutes of submersion from cardiac arrest or ventricular fibrillation. This is the great majority pattern. The lungs fill, froth forms, and the blood chemistry shifts according to whether the water was fresh or salt, as later steps detail. Hyperkalaemia plays only a minor part in the fatal arrhythmia.",
+   "say": "Wet drowning floods the lungs and stops the heart within minutes, and it is the pattern behind most drowning deaths.",
+   "vis": {"kind": "compare", "left": {"title": "Wet drowning", "points": ["Water enters the lungs", "Severe chest pain reported", "Death within minutes", "Froth and flooded lungs found"]}, "right": {"title": "Dry drowning preview", "points": ["Water kept out of lungs", "Sustained laryngeal spasm", "Ten to twenty percent of cases", "Asphyxial appearances only"]}}
+  },
+  {
+   "title": "Dry drowning and laryngeal spasm",
+   "tx": "In **dry drowning**, inrushing water into the nasopharynx or larynx triggers immediate sustained laryngeal spasm, so water never enters the lungs and death is purely asphyxial. Thick mucus, foam and froth may plug the larynx. It accounts for ten to twenty percent of immersions and is commoner in children and in adults under alcohol or sedative hypnotics. Rescued victims of this type sometimes report panoramic memories and pleasant dreams without distress.",
+   "say": "A locked larynx keeps water out in ten to twenty percent of immersions, especially in children and the sedated.",
+   "vis": {"kind": "table", "cols": ["Drowning type", "Water in lungs", "Share of cases"], "rows": [["Wet or primary", "Inhaled freely", "The large majority"], ["Dry", "Excluded by laryngospasm", "Ten to twenty percent"], ["Secondary", "Inhaled, death delayed", "About twenty percent of rescued"], ["Immersion syndrome", "Death before aspiration", "One to two percent"]]}
+  },
+  {
+   "title": "Secondary drowning after rescue",
+   "tx": "**Secondary drowning**, the post immersion or near drowning syndrome, strikes victims resuscitated after submersion who survive at least twenty four hours by definition, then deteriorate. Hypoxaemia, brain damage, electrolyte disturbance, pulmonary oedema, haemoglobinuria, sepsis, metabolic acidosis, chemical pneumonitis, cerebral oedema and arrhythmias develop. Death follows from half an hour to several hours after rescue in about twenty percent, and five to ten percent of survivors keep serious neurological damage.",
+   "say": "Rescued victims can drown secondarily hours later from oedema and pneumonitis, so every near drowning earns admission.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Victim rescued and revived"}, {"id": "b", "label": "Lung injury declares itself"}, {"id": "c", "label": "Oedema, pneumonitis, acidosis"}, {"id": "d", "label": "Delayed death or brain damage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Fresh water versus salt water physiology",
+   "tx": "The inhaled water's tonicity drives opposite blood shifts in **fresh and salt water drowning**. Fresh water is absorbed fast, two and a half litres or more in three minutes, raising blood volume by half, diluting and haemolysing blood with hyponatraemia and hyperkalaemia. Sea water draws fluid into the alveoli, concentrating the blood instead. Inhaled volumes beyond about twenty two millilitres per kilogram of sea water leave little chance of survival.",
+   "say": "Fresh water dilutes and haemolyses the blood while sea water concentrates it, and both shifts strain the heart oppositely.",
+   "vis": {"kind": "compare", "left": {"title": "Fresh water inhaled", "points": ["Absorbed into circulation fast", "Blood volume up fifty percent", "Haemodilution and haemolysis", "Sodium falls, potassium rises"]}, "right": {"title": "Sea water inhaled", "points": ["Fluid drawn into alveoli", "Blood concentrates instead", "Chloride load rises", "Smaller fatal volume needed"]}}
+  },
+  {
+   "title": "Froth at mouth and nostrils",
+   "tx": "The best known external sign is **fine white froth at the mouth and nostrils**, whipped from air, water, mucus and surfactant by the struggle to breathe. It refills after wiping while the process continues and is also found filling the air passages inside. Froth is one of Reddy's reliable signs, alongside weeds or sand grasped in the hands, voluminous waterlogged lungs, water in stomach and intestines, and diatoms in tissues.",
+   "say": "Fine white froth that refills after wiping, outside and inside the airways, heads the reliable signs of drowning.",
+   "vis": {"kind": "table", "cols": ["Reliable sign", "Where seen", "Strength"], "rows": [["Fine white froth", "Mouth, nose, air passages", "Strong supportive sign"], ["Weeds grasped in hands", "Clenched fists", "Shows live entry to water"], ["Waterlogged lungs", "Heavy, doughy, pitting", "Strong supportive sign"], ["Diatoms in tissues", "Bone marrow, organs", "Proves circulation while immersed"]]}
+  },
+  {
+   "title": "Washerwoman hands and cadaveric spasm in water",
+   "tx": "Immersion macerates palms and soles and can also preserve a **cadaveric spasm grasp** of weeds, grass or sand at the moment of death. That grasp, already met in the entomology lesson as washerwoman change's companion, indicates the victim was alive on entering the water, because only a living hand closes in spasm around river weeds. Bodies recovered quickly should have the hands photographed and the grasped material retained before transport destroys it.",
+   "say": "Weeds locked in a spasm grip prove the victim entered water alive, so photograph and keep what the hands hold.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Dying hand grasps weeds"}, {"id": "b", "label": "Cadaveric spasm fixes the grip"}, {"id": "c", "label": "Photograph hands on recovery"}, {"id": "d", "label": "Retain grasped material as evidence"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Drowning is a diagnosis of exclusion",
+   "tx": "All drowning tests are unreliable, and the autopsy diagnosis can be minimal, obscure or absent, making **drowning a diagnosis of exclusion** built on history and investigation. When findings are negative the honest certificate reads consistent with drowning, or even undetermined. Signs fade within hours of recovery delay, putrefaction in water begins in the head, neck and chest, and a body removed from water then decomposes with great speed.",
+   "say": "Certify drowning from the whole investigation, accept consistent with drowning when signs are gone, and examine recovered bodies fast.",
+   "vis": {"kind": "compare", "left": {"title": "Fresh body evidence", "points": ["Froth and grasped weeds", "Waterlogged ballooned lungs", "Water in stomach and bowel", "Diatoms recoverable"]}, "right": {"title": "Delayed body problems", "points": ["Signs fade within hours", "Head and neck putrefy first", "Rapid decay after removal", "Diagnosis left to exclusion"]}}
+  }
+ ],
+ "quiz": []
+}

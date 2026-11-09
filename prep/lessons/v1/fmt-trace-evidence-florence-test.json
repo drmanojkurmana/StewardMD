@@ -1,0 +1,320 @@
+{
+ "v": 1,
+ "id": "fmt-trace-evidence-florence-test",
+ "subject": "forensic-medicine",
+ "module": "fmt-trace-evidence",
+ "title": "Trace Evidence: Semen Crystal Tests, Hair Microscopy and Locard Principle",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Microcrystalline semen assays: The Florence test",
+   "tx": "When microscopes fail to identify spermatozoa in aged stains, microcrystalline assays assist in detecting seminal chemical constituents. The historic **Florence test choline periodide assay** detects choline, a degradation product of lecithin secreted by the seminal vesicles. A drop of stain extract is treated with Florence reagent (potassium iodide and iodine in water). Under microscopy, dark brown, rhombic, needle-shaped, or lance-shaped crystals of choline periodide appear promptly.",
+   "say": "The Florence test mixes stain extract with iodine solution, precipitating dark brown needle-shaped crystals of choline periodide if semen is present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dried stain scrapings placed on glass slide"
+     },
+     {
+      "id": "b",
+      "label": "Addition of Florence reagent (iodine + potassium iodide in water)"
+     },
+     {
+      "id": "c",
+      "label": "Coverslip applied immediately without heating"
+     },
+     {
+      "id": "d",
+      "label": "Precipitation of brown rhombic choline periodide crystals"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Barberio test for seminal spermine",
+   "tx": "Complementing choline testing, the **Barberio test spermine picrate assay** identifies spermine, a polyamine base secreted in high quantities by the human prostate gland. The unknown stain extract is treated with a saturated aqueous or alcoholic solution of picric acid. Under microscopic examination, characteristic yellowish, slender, needle-shaped, rhomboid, or feather-like crystals of spermine picrate precipitate, providing supportive evidence of prostatic fluid.",
+   "say": "The Barberio test treats stain extract with picric acid, forming yellow feather-like crystals of spermine picrate from prostatic secretions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Florence test",
+     "points": [
+      "Reagent: Iodine and potassium iodide in water",
+      "Detects choline derived from seminal vesicle lecithin",
+      "Forms dark brown, rhombic, lance-shaped needles",
+      "Can cross-react with other choline-rich tissues"
+     ]
+    },
+    "right": {
+     "title": "Barberio test",
+     "points": [
+      "Reagent: Saturated aqueous or alcoholic picric acid",
+      "Detects spermine secreted by prostatic epithelium",
+      "Forms bright yellow, slender, feather-like needles",
+      "Specific to prostatic secretions in animal biology"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Forensic hair structure: Cuticle, cortex and medulla",
+   "tx": "Hair frequently transfers between victim and assailant during violent sexual assaults and struggles. In forensic trichology, the **trichological hair microscopic architecture** comprises three concentric cylindrical layers: the outer protective cuticle composed of overlapping keratinized scales, the intermediate cortex containing melanin pigment granules and cortical fusi that provide tensile strength, and the central core medulla containing cellular debris and air spaces.",
+   "say": "Hair consists of three layers: an outer scaled cuticle, a middle pigment-filled cortex, and a central core channel called the medulla.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hair anatomical layer",
+     "Structural composition",
+     "Forensic identification value"
+    ],
+    "rows": [
+     [
+      "Cuticle (outer layer)",
+      "Overlapping keratinised scales (imbricate in humans)",
+      "Distinguishes human hair from animal pelt scales"
+     ],
+     [
+      "Cortex (middle layer)",
+      "Dense spindle-shaped cells packed with melanin",
+      "Determines natural hair color, diameter, and mechanical strength"
+     ],
+     [
+      "Medulla (central canal)",
+      "Central axial cellular channel or air column",
+      "Medullary index definitively separates human from animal hair"
+     ],
+     [
+      "Hair bulb / root",
+      "Proximal dermal follicle attachment",
+      "Provides nucleated cells for STR nuclear DNA profiling"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Human versus animal hair: The medullary index",
+   "tx": "The most definitive criterion distinguishing human from animal hair is the **medullary index mathematical ratio**, calculated by dividing the transverse diameter of the central medulla by the total diameter of the hair shaft. In human hair, the medulla is narrow, fragmented, or absent, yielding a medullary index of less than zero-point-three. In animal hair, the medulla is wide, continuous, and structured, producing an index exceeding zero-point-five.",
+   "say": "The medullary index separates human from animal hair: human hair has an index under 0.3, while animal hair has a wide medulla over 0.5.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Human hair",
+     "points": [
+      "Medullary index: Under 0.3 (narrow medulla)",
+      "Medulla: Fragmented, interrupted, or absent",
+      "Cuticular scales: Imbricate, flattened, non-protruding",
+      "Pigment granules: Concentrated toward peripheral cortex"
+     ]
+    },
+    "right": {
+     "title": "Animal hair",
+     "points": [
+      "Medullary index: Over 0.5 (wide medulla)",
+      "Medulla: Broad, continuous, patterned (ladder/lattice)",
+      "Cuticular scales: Coronal, spinous, prominent petals",
+      "Pigment granules: Concentrated centrally around medulla"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Hair growth phases: Anagen, catagen and telogen",
+   "tx": "Forensic scientists examine the proximal root to determine the **follicular hair growth phase**, establishing whether hair was forcibly pulled or naturally shed. The anagen phase represents active mitotic growth (eighty-five percent of scalp hairs), possessing an elongated, nucleated follicular sheath rich in nuclear DNA. The catagen phase marks regression, while the telogen phase represents the resting club hair that sheds naturally without attached follicular tissue.",
+   "say": "Anagen hairs are actively growing and carry nucleated root sheaths for DNA testing, while telogen resting hairs shed naturally without DNA-rich roots.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anagen phase (Active growth for 2 to 6 years, rich DNA sheath)"
+     },
+     {
+      "id": "b",
+      "label": "Catagen phase (Transitional involution spanning 2 to 3 weeks)"
+     },
+     {
+      "id": "c",
+      "label": "Telogen phase (Resting club hair lasting 3 to 4 months)"
+     },
+     {
+      "id": "d",
+      "label": "Shedding / replacement: Telogen hair falls with smooth bulb"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Forensic differentiation between forcibly pulled and naturally shed hair",
+   "tx": "In physical assault cases, microscopists analyze the **forcibly extracted hair root morphology** to determine violence. Naturally shed hairs entering the telogen phase possess clean, dry, club-shaped bulbs devoid of attached cellular sheaths or blood. In contrast, hairs forcibly torn from a victim's scalp during physical violence display stretched, ruptured root sheaths, sheared cortical margins, irregular follicular tags, and adhering blood droplets.",
+   "say": "Naturally shed hairs have smooth, clean club roots. Forcibly pulled hairs have torn root sheaths, stretched bulbs, and attached blood droplets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Naturally shed hair",
+     "points": [
+      "Smooth, dry, club-shaped root bulb",
+      "Absence of attached follicular cellular tag",
+      "No cortical distortion or sheath rupture",
+      "Contains minimal nuclear DNA (mtDNA only)"
+     ]
+    },
+    "right": {
+     "title": "Forcibly extracted hair",
+     "points": [
+      "Distorted, stretched, or fractured root bulb",
+      "Attached viable outer follicular root sheath",
+      "Adhering blood droplets and dermal cells",
+      "Excellent source for nuclear STR profiling"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Forensic textile fiber classification",
+   "tx": "Transfer of clothing threads during struggles provides critical corroborative evidence via **forensic textile fiber analysis**. Fibers divide into natural fibers (vegetable cotton with twisted ribbon morphology, animal wool with surface scales, protein silk) and synthetic polymers (nylon, polyester, acrylic, polypropylene). Forensic examiners analyze fiber diameter, longitudinal striations, cross-sectional geometry, and dye spectrophotometry to match crime scene threads against suspect clothing.",
+   "say": "Clothing fibers transfer during struggles. Examiners analyze natural fibers like cotton and wool, and synthetic polymers like nylon, matching weave and color.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fiber category",
+     "Source / polymer",
+     "Microscopic diagnostic feature"
+    ],
+    "rows": [
+     [
+      "Vegetable natural",
+      "Cotton (cellulose)",
+      "Flattened, twisted ribbon-like convolutions"
+     ],
+     [
+      "Animal natural",
+      "Sheep wool (keratin)",
+      "Prominent overlapping surface scales; crimped"
+     ],
+     [
+      "Protein natural",
+      "Bombyx silk (fibroin)",
+      "Smooth, triangular cross-section with high sheen"
+     ],
+     [
+      "Synthetic polymer",
+      "Polyester / Nylon / Rayon",
+      "Uniform cylinder; specific cross-sections (trilobal)"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Locard exchange principle in physical evidence",
+   "tx": "Underpinning all physical trace evidence recovery, the fundamental **Locard exchange principle axiom** formulated by French criminologist Edmond Locard holds that 'every contact leaves a trace'. Whenever two entities come into physical contact during a violent crime, there is a mutual, reciprocal transfer of physical material: the perpetrator leaves fibers, blood, or hairs at the scene, while carrying away carpet fibers, soil, or victim biology.",
+   "say": "Locard's exchange principle states that every contact leaves a trace: a criminal leaves evidence at the scene and takes trace materials away.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perpetrator and victim engage in physical struggle"
+     },
+     {
+      "id": "b",
+      "label": "Mutual mechanical contact between clothing, hair, and surfaces"
+     },
+     {
+      "id": "c",
+      "label": "Reciprocal transfer: Hair, fibers, blood, and skin cells exchanged"
+     },
+     {
+      "id": "d",
+      "label": "Forensic recovery links suspect directly to victim and scene"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Chain of custody and crime scene preservation",
+   "tx": "To ensure that recovered trace evidence withstands rigorous judicial scrutiny, maintaining an unbroken **trace evidence chain of custody** is legally mandatory. Forensic technicians must photograph trace items in situ, collect hairs and fibers using clean tweezers into separate paper envelopes, apply tamper-evident seals, and record every custodian who handles the evidence from the crime scene to the forensic science laboratory.",
+   "say": "Trace evidence must be photographed, collected with clean tweezers into sealed paper envelopes, and tracked through a strict chain of custody.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "In-situ macro photography of trace evidence with metric scale"
+     },
+     {
+      "id": "b",
+      "label": "Careful collection with clean tweezers into primary paper druggist fold"
+     },
+     {
+      "id": "c",
+      "label": "Placement in tamper-evident sealed outer evidence envelope"
+     },
+     {
+      "id": "d",
+      "label": "Signed chain-of-custody log documenting every handler"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

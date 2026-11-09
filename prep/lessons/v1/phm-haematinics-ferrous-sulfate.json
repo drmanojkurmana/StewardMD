@@ -1,0 +1,163 @@
+{
+  "v": 1,
+  "module": "phm-haematinics",
+  "subject": "pharmacology",
+  "title": "Haematinics: Iron, B12, Folate and Haematopoietic Growth Factors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Oral **ferrous sulfate** remains the reference iron salt: cheap, effective and limited mainly by gastrointestinal tolerance, with roughly 65 mg of elemental iron per 325 mg tablet absorbed best in the ferrous state on an empty stomach. Vitamin C and gastric acid aid uptake while tea, calcium, antacids and proton pump inhibitors obstruct it, so timing around food and other tablets is pharmacology, not fussiness. Alternate day dosing exploits hepcidin rhythms and may absorb better than daily divided doses.",
+      "say": "Ferrous iron, empty stomach, away from tea and antacids; alternate days can beat daily for absorption.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-anemia-fig2.webp",
+        "alt": "Systemic iron homeostasis and transport diagram showing absorption, transferrin transport and hepcidin control",
+        "caption": "Iron homeostasis and transport, the system oral and parenteral iron preparations feed."
+      }
+    },
+    {
+      "tx": "Parenteral iron bypasses absorption failure, intolerance, ongoing losses and the need for rapid repletion: **iron sucrose** in small repeated doses, ferric carboxymaltose in large single infusions, and older iron dextran, which uniquely demands a test dose for its higher anaphylaxis history. Modern complexes release iron slowly to transferrin, making serious reactions rare, though hypophosphataemia follows repeated ferric carboxymaltose through FGF23 effects. Haemoglobin rises over two to four weeks whichever route refills the stores.",
+      "say": "Vein iron skips the gut argument; carboxymaltose gives grams at once, dextran keeps its test dose tradition.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral iron territory",
+          "points": [
+            "Ferrous sulfate, fumarate and gluconate salts",
+            "Absorption blocked by tea, calcium and acid suppression",
+            "Nausea, constipation and black stools limit adherence",
+            "Best for stable patients who absorb and tolerate"
+          ]
+        },
+        "right": {
+          "title": "Parenteral iron territory",
+          "points": [
+            "Malabsorption, intolerance or ongoing heavy losses",
+            "Ferric carboxymaltose: large single dose infusions",
+            "Iron sucrose: smaller repeated doses, dialysis staple",
+            "Iron dextran: test dose for anaphylaxis history"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The iron chelator **desferrioxamine** (deferoxamine) binds ferric iron for urinary and biliary excretion in transfusional overload of thalassaemia and in acute iron poisoning, where shock and metabolic acidosis make chelation urgent. Given by slow infusion because rapid injection provokes hypotension, its chronic use costs hearing, vision and growth plate surveillance, and it notoriously feeds Yersinia and mucormycosis by donating them captured iron. Oral deferasirox and deferiprone now carry most chronic chelation.",
+      "say": "Desferrioxamine traps iron for excretion in poisoning and overload; infuse slowly and remember it feeds certain fungi.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "overload", "label": "Iron overload or acute iron poisoning" },
+          { "id": "chel", "label": "Desferrioxamine binds ferric iron in tissues and plasma" },
+          { "id": "excrete", "label": "Ferrioxamine excreted in urine (vin rose) and bile" },
+          { "id": "watch", "label": "Monitor hearing, vision and growth on chronic therapy" }
+        ],
+        "edges": [["overload", "chel"], ["chel", "excrete"], ["excrete", "watch"]]
+      }
+    },
+    {
+      "tx": "**Vitamin B12** (cobalamin, given as cyanocobalamin or hydroxocobalamin) cofactors methionine synthase and methylmalonyl CoA mutase, so deficiency produces megaloblastic anaemia plus subacute combined degeneration of the cord, glossitis and neuropsychiatric features that folate cannot fix. Absorption needs intrinsic factor and terminal ileum, so pernicious anaemia, gastrectomy and ileal disease demand intramuscular replacement, typically loading doses then three monthly maintenance for life when the cause is irreversible.",
+      "say": "B12 protects cord as well as marrow; when absorption is broken, injections for life are the prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "B12 deficiency clues",
+          "points": [
+            "Megaloblastic anaemia with hypersegmented neutrophils",
+            "Subacute combined degeneration: dorsal and lateral columns",
+            "Glossitis, cognitive and psychiatric features",
+            "Raised methylmalonic acid and homocysteine"
+          ]
+        },
+        "right": {
+          "title": "Replacement logic",
+          "points": [
+            "Intramuscular when absorption is the defect",
+            "High dose oral can work by passive diffusion",
+            "Neurological disease: urgent, frequent loading",
+            "Treat before folate to avoid masking, below"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Folic acid** treats megaloblastic anaemia of pregnancy, malnutrition, malabsorption and antifolate drugs, and periconception supplementation prevents neural tube defects, the public health triumph of this vitamin. The trap is giving folate alone in undiagnosed megaloblastic anaemia: the blood corrects while B12 neurology silently worsens, so B12 is excluded or treated first. **Folinic acid** (leucovorin) is reduced folate that bypasses dihydrofolate reductase, rescuing marrow from methotrexate and potentiating fluorouracil in oncology regimens.",
+      "say": "Folate fixes the blood picture and can hide B12 cord damage; folinic acid is the version that bypasses methotrexate's block.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mega", "label": "Megaloblastic anaemia diagnosed" },
+          { "id": "b12check", "label": "Exclude or treat B12 deficiency first" },
+          { "id": "folate", "label": "Folic acid repletes folate stores safely" },
+          { "id": "folinic", "label": "Folinic acid reserved for antifolate rescue and oncology" }
+        ],
+        "edges": [["mega", "b12check"], ["b12check", "folate"], ["folate", "folinic"]]
+      }
+    },
+    {
+      "tx": "Recombinant **erythropoietin** (epoetin) and its long acting cousin darbepoetin, with a half life stretched roughly threefold by extra carbohydrate, replace the renal hormone missing in chronic kidney disease anaemia. Iron stores must be replete first or the marrow cannot answer; haemoglobin targets stay deliberately subnormal (about 10 to 11.5 g per dl) because trials chasing normality bought strokes and clots. Hypertension and pure red cell aplasia from anti erythropoietin antibodies are the named hazards.",
+      "say": "Replace the kidney's hormone, feed iron first, and aim below normal; chasing normal haemoglobin harmed patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Epoetin and darbepoetin use",
+          "points": [
+            "Chronic kidney disease anaemia the core indication",
+            "Iron stores repleted before and during therapy",
+            "Darbepoetin dosed weekly to monthly by design",
+            "Haemoglobin target deliberately subnormal"
+          ]
+        },
+        "right": {
+          "title": "Hazards to police",
+          "points": [
+            "Hypertension and accelerated rises in haemoglobin",
+            "Thromboembolism when targets overshoot",
+            "Pure red cell aplasia from antibodies, rare",
+            "Cancer use restricted by mortality signals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Colony stimulating factors industrialise marrow lineages: **filgrastim** (G CSF, granulocyte colony stimulating factor) shortens chemotherapy neutropenia and mobilises stem cells for harvest, its pegylated form pegfilgrastim stretching one injection across a cycle; sargramostim (GM CSF) broadens to monocytes at the price of capillary leak and fever. Bone pain from an expanding marrow is the everyday adverse effect, splenic rupture the rare catastrophe behind left shoulder tip pain warnings.",
+      "say": "Filgrastim marches neutrophils back after chemotherapy; bone pain is expected, shoulder tip pain is the alarm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "chemo", "label": "Chemotherapy induced neutropenia risk" },
+          { "id": "gcsf", "label": "Filgrastim or pegfilgrastim given after chemotherapy" },
+          { "id": "recover", "label": "Neutrophil recovery shortens, febrile neutropenia falls" },
+          { "id": "pain", "label": "Bone pain common; splenic rupture rare but warned" }
+        ],
+        "edges": [["chemo", "gcsf"], ["gcsf", "recover"], ["recover", "pain"]]
+      }
+    },
+    {
+      "tx": "Thrombopoiesis has its own pharmacology: oprelvekin (interleukin 11) historically raised platelets amid fluid retention and atrial arrhythmias, while thrombopoietin receptor agonists **romiplostim** (weekly injection) and eltrombopag (oral, chelates with food cations) transformed immune thrombocytopenia by ordering the marrow to manufacture platelets rather than suppressing their destruction. Overshoot thrombocytosis, marrow reticulin and rebound thrombocytopenia on stopping write their monitoring rules, and eltrombopag adds liver enzyme surveillance.",
+      "say": "Romiplostim and eltrombopag order more platelets instead of defending existing ones; titrate to safe, not normal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thrombopoietin agonists",
+          "points": [
+            "Romiplostim weekly subcutaneous injection",
+            "Eltrombopag oral, empty stomach away from cations",
+            "Target platelets above 50, not normalisation",
+            "Rebound fall below baseline on abrupt stopping"
+          ]
+        },
+        "right": {
+          "title": "Older and adjacent agents",
+          "points": [
+            "Oprelvekin (IL 11): fluid retention, arrhythmias, largely historical",
+            "Eltrombopag also serves aplastic anaemia and hepatitis C settings",
+            "Liver enzymes monitored on eltrombopag",
+            "Thrombosis risk rises as counts overshoot"
+          ]
+        }
+      }
+    }
+  ]
+}

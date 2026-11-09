@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-spirochaetes",
+  "subject": "microbiology",
+  "title": "Treponema pallidum, VDRL, RPR and TPHA in Syphilis",
+  "minutes": 7,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Treponema pallidum** subspecies pallidum is a thin motile spirochaete causing syphilis. Its delicate outer membrane and slow growth make routine culture impractical, so diagnosis relies on lesion molecular testing or dark ground examination and staged serology. Primary disease forms a painless indurated chancre with regional nodes, which heals spontaneously while systemic dissemination has already begun and infection persists untreated.",
+      "say": "A painless chancre is only the visible entrance of an already systemic treponemal infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Organism properties",
+          "points": [
+            "Thin spiral with endoflagella between membranes",
+            "Too thin for ordinary Gram stain resolution",
+            "Slow division about thirty hours",
+            "Cannot be grown in ordinary cell free media"
+          ]
+        },
+        "right": {
+          "title": "Primary syphilis",
+          "points": [
+            "Painless indurated ulcer",
+            "Rubbery regional lymphadenopathy",
+            "Highly infectious lesion exudate",
+            "Heals without treatment while infection continues"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**VDRL** and **RPR** are nontreponemal tests detecting antibody to cardiolipin lecithin cholesterol antigen released from damaged host cells and treponemes. They are reported quantitatively, become reactive after early primary infection, often peak in secondary syphilis, and usually decline after treatment. The tests are sensitive screening tools but biologically nonspecific, so pregnancy, autoimmune disease and other infections can generate false positives.",
+      "say": "VDRL and RPR titres track activity and treatment response, not treponemal identity by themselves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "VDRL",
+          "points": [
+            "Microscopic flocculation on slide",
+            "Requires serum preparation and rotation",
+            "Used for CSF testing in neurosyphilis assessment",
+            "Quantitative titres permit follow up"
+          ]
+        },
+        "right": {
+          "title": "RPR",
+          "points": [
+            "Cardiolipin antigen with carbon particles",
+            "Visible macroscopic clumping",
+            "Rapid card formats available",
+            "Not ordinarily used on CSF"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**TPHA** detects antibodies against Treponema pallidum antigens using sensitised red cells that agglutinate in positive serum. Treponemal tests such as TPHA, TPPA and immunoassays usually remain positive for life, including after successful treatment. They confirm treponemal exposure but cannot distinguish active disease, previous treated infection or reinfection without clinical findings and nontreponemal titre change.",
+      "say": "Treponemal positivity proves encounter, while nontreponemal titre movement argues activity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treponemal tests",
+          "points": [
+            "TPHA uses haemagglutination",
+            "TPPA uses gelatin particle agglutination",
+            "EIA and chemiluminescence automate screening",
+            "Usually persist lifelong after infection"
+          ]
+        },
+        "right": {
+          "title": "Algorithms",
+          "points": [
+            "Traditional starts nontreponemal then confirms treponemal",
+            "Reverse starts treponemal immunoassay then quantitative RPR",
+            "Discordant results need second treponemal test",
+            "Lesion PCR or dark field helps early seronegative disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **prozone phenomenon** can make undiluted serum falsely negative in non treponemal flocculation when antibody is present in overwhelming excess. This matters especially in florid secondary syphilis, pregnancy and HIV. The laboratory must dilute the sample when clinical suspicion is high. A fourfold change in quantitative titre, using the same test and preferably the same laboratory, is the meaningful threshold for treatment response or reinfection.",
+      "say": "If secondary syphilis looks obvious but RPR is negative, ask for dilution to exclude prozone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "high",
+            "label": "Very high antibody concentration"
+          },
+          {
+            "id": "block",
+            "label": "Lattice formation blocked undiluted"
+          },
+          {
+            "id": "dilute",
+            "label": "Serial dilution restores reaction"
+          },
+          {
+            "id": "titre",
+            "label": "Endpoint titre reported quantitatively"
+          }
+        ],
+        "edges": [
+          [
+            "high",
+            "block"
+          ],
+          [
+            "block",
+            "dilute"
+          ],
+          [
+            "dilute",
+            "titre"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary syphilis produces widespread mucocutaneous lesions including palms and soles, condylomata lata, mucous patches, moth eaten alopecia and generalised lymphadenopathy. Tertiary disease can cause gummas, cardiovascular aortitis and neurosyphilis syndromes. **Congenital syphilis** results from transplacental spread and can produce Hutchinson teeth, interstitial keratitis, eighth nerve deafness, frontal bossing and periostitis. Stage determines manifestations, infectiousness and benzathine penicillin schedule.",
+      "say": "Palms and soles make secondary syphilis visible, while staging determines follow up and partner action.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Secondary clues",
+          "points": [
+            "Non itchy rash includes palms and soles",
+            "Moist condylomata are highly infectious",
+            "Patchy alopecia can mimic fungal disease",
+            "Systemic symptoms and hepatitis may occur"
+          ]
+        },
+        "right": {
+          "title": "Late clues",
+          "points": [
+            "Gummatous destructive lesions",
+            "Aortitis and aortic regurgitation",
+            "Tabes dorsalis and general paresis historically",
+            "Ocular and otosyphilis can occur at any stage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early syphilis serology may be negative during the first days of a chancre, so direct detection has unique value. **Dark ground microscopy** can show characteristic thin corkscrew motility from genital lesions, but oral lesions are confounded by commensal treponemes. PCR where available can detect T pallidum in lesion swabs and selected specimens. Sampling should occur before antibiotics whenever urgent treatment can still follow immediately.",
+      "say": "A seronegative chancre needs direct testing or repeat serology rather than reassurance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct methods",
+          "points": [
+            "Dark ground from moist genital lesion",
+            "PCR detects T pallidum DNA",
+            "Direct fluorescent antibody in selected laboratories",
+            "Avoid oral lesions for dark ground interpretation"
+          ]
+        },
+        "right": {
+          "title": "Serology timing",
+          "points": [
+            "Treponemal tests may turn positive earlier",
+            "RPR can lag behind lesion onset",
+            "Repeat testing captures seroconversion",
+            "HIV coinfection requires careful follow up"
+          ]
+        }
+      }
+    }
+  ]
+}

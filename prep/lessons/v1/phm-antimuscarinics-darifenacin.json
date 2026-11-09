@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "phm-antimuscarinics",
+  "subject": "pharmacology",
+  "title": "Selective M3 Antagonists, Belladonna Poisoning, and Anticholinergic Toxidrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Minimizing central cognitive impairment and cardiac tachycardia during overactive bladder treatment led to development of **darifenacin**. Demonstrating high nanomolar selectivity for M3 muscarinic receptors over M1 and M2 subtypes, darifenacin suppresses uninhibited detrusor contractions without interfering with cardiac nodal conduction. Furthermore, low lipid permeability and active P-glycoprotein efflux at the blood-brain barrier prevent cerebral entry, preserving cognitive performance in elderly patients.",
+      "say": "Darifenacin selectively inhibits M3 bladder receptors while P-glycoprotein efflux shields the brain from cognitive decline.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Urological drug",
+          "Subtype selectivity",
+          "CNS penetration",
+          "Cardiovascular safety"
+        ],
+        "rows": [
+          [
+            "Darifenacin",
+            "Highly selective M3 antagonist",
+            "Excluded by P-glycoprotein (cognitive safe)",
+            "Negligible cardiac M2 action"
+          ],
+          [
+            "Solifenacin",
+            "Selective M3 over M2",
+            "Low CNS penetration",
+            "Minimal tachycardia; monitor QT interval"
+          ],
+          [
+            "Fesoterodine",
+            "Non-selective active 5-HMT",
+            "Moderate CNS penetration",
+            "Standard monitoring for antimuscarinic tachycardia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accidental ingestion of jimsonweed seeds, Datura stramonium, or deadly nightshade fruit culminates in severe **belladonna poisoning**. Toxic tropane alkaloids competitively block muscarinic receptors throughout the peripheral nervous system and neuraxis. Clinical signs are immortalized in the classic medical teaching rhyme: blind as a bat from mydriasis, mad as a hatter from delirium, red as a beet from cutaneous vasodilation, hot as a hare from anhidrosis, and dry as a bone.",
+      "say": "Belladonna poisoning causes extreme pupillary dilation, delirium, burning fever, and parchment-dry skin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anticholinergic-toxidrome-fig1.webp",
+        "alt": "Anticholinergic toxidrome features",
+        "caption": "Classic signs of belladonna alkaloid poisoning: wide mydriasis, dry flushed skin, hyperthermia, and delirium."
+      }
+    },
+    {
+      "tx": "Loss of parasympathetic pupillary constriction results in maximal, non-reactive pupillary dilation recognized as **mydriasis**. Atropinic agents competitively block postjunctional M3 muscarinic receptors on circular pupillary sphincter muscle fibers, leaving the sympathetic radial dilator pupillae unopposed. In belladonna poisoning, pupils appear fixed, widely dilated, and unresponsive to bright penlight illumination, producing severe photophobia and distorted visual glare.",
+      "say": "Competitive blockade of pupillary sphincter M3 receptors allows unopposed radial muscle dilation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antimuscarinic mydriasis",
+          "points": [
+            "Blocks circular sphincter pupillae M3 receptors",
+            "Accompanied by profound ciliary cycloplegia",
+            "Fixed to light; near accommodation lost",
+            "Reversed by physostigmine or pilocarpine"
+          ]
+        },
+        "right": {
+          "title": "Sympathomimetic mydriasis",
+          "points": [
+            "Stimulates radial dilator pupillae alpha-1 receptors",
+            "Ciliary accommodation remains intact",
+            "Light reflex partially preserved",
+            "Reversed by thymoxamine or dapiprazole"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Paralysis of the ciliary muscle accompanying severe belladonna alkaloid toxicity produces prolonged, unyielding **cycloplegia**. Because the parasympathetic innervation governing the circular ciliary muscle is completely shut down, patients lose the dynamic ability to increase crystalline lens curvature. Consequently, visual near points recede dramatically, rendering patients unable to read printed text, inspect mobile screens, or perform fine hand tasks.",
+      "say": "Cycloplegia freezes the ciliary muscle, flattening the lens and eliminating near-focus capability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tox",
+            "label": "Tropane alkaloid poisoning"
+          },
+          {
+            "id": "cil",
+            "label": "Complete ciliary muscle M3 paralysis"
+          },
+          {
+            "id": "zon",
+            "label": "Zonular tension flattens crystalline lens"
+          },
+          {
+            "id": "blur",
+            "label": "Severe near-vision blur and accommodation loss"
+          }
+        ],
+        "edges": [
+          [
+            "tox",
+            "cil"
+          ],
+          [
+            "cil",
+            "zon"
+          ],
+          [
+            "zon",
+            "blur"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Profound suppression of salivary, bronchial, and pharyngeal secretions produces agonizing, parchment-like **dry mouth**. Salivary acinar cells rely almost exclusively on parasympathetic M3 receptor stimulation to drive watery, enzyme-rich secretion; muscarinic antagonists halt fluid transport entirely. Poisoned patients present with extreme thirst, a cracked dry tongue, difficult painful swallowing, hoarse speech, and loss of mucosal antimicrobial defense.",
+      "say": "Antimuscarinic blockade arrests salivary acinar fluid secretion, causing severe xerostomia and painful swallowing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Secretory gland",
+          "Innervation",
+          "Effect of antimuscarinic blockade",
+          "Clinical consequence"
+        ],
+        "rows": [
+          [
+            "Salivary glands",
+            "Parasympathetic M3",
+            "Abolishes watery saliva output",
+            "Parchment-like xerostomia, dysphagia"
+          ],
+          [
+            "Tracheobronchial glands",
+            "Parasympathetic M3",
+            "Suppresses mucosal fluid lining",
+            "Viscous mucous plugs, dry cough"
+          ],
+          [
+            "Lacrimal glands",
+            "Parasympathetic M3",
+            "Diminishes tear production",
+            "Keratoconjunctivitis sicca, gritty eye sensation"
+          ],
+          [
+            "Gastric parietal cells",
+            "Parasympathetic M1",
+            "Reduces basal acid volume",
+            "Minimal clinical impact on digestion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thermoregulatory collapse in belladonna toxicity is precipitated by pharmacological cessation of sweating, producing **anhidrotic hyperpyrexia**. Sympathetic cholinergic fibers innervate eccrine sweat glands via postganglionic muscarinic receptors; atropine blocks these receptors completely. In warm ambient climates or agitated states, evaporative heat dissipation ceases entirely, driving core body temperatures above 41 degrees Celsius and triggering life-threatening multisystem heatstroke.",
+      "say": "Blocking muscarinic sweat glands abolishes evaporative cooling, driving core temperature into dangerous heatstroke.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "block",
+            "label": "Muscarinic blockade of eccrine sweat glands"
+          },
+          {
+            "id": "anhid",
+            "label": "Complete cessation of perspiration (Anhidrosis)"
+          },
+          {
+            "id": "evap",
+            "label": "Loss of evaporative cutaneous heat dissipation"
+          },
+          {
+            "id": "fever",
+            "label": "Anhidrotic hyperpyrexia and heatstroke (> 41\u00b0C)"
+          }
+        ],
+        "edges": [
+          [
+            "block",
+            "anhid"
+          ],
+          [
+            "anhid",
+            "evap"
+          ],
+          [
+            "evap",
+            "fever"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Specific pharmacological reversal of life-threatening central and peripheral anticholinergic toxicity requires intravenous **physostigmine**. Unlike quaternary neostigmine, tertiary amine physostigmine crosses the blood-brain barrier to raise synaptic acetylcholine concentrations across cerebral synapses, clearing anticholinergic delirium and terminating dangerous supraventricular tachyarrhythmias within minutes. Clinicians administer 1 to 2 milligrams slowly over five minutes with continuous electrocardiographic monitoring.",
+      "say": "Intravenous physostigmine enters the central nervous system to reverse anticholinergic delirium and coma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physostigmine antidote",
+          "points": [
+            "Tertiary amine crossing blood-brain barrier",
+            "Reverses central delirium, hallucinations, coma",
+            "Reverses peripheral tachycardia and mydriasis",
+            "Must infuse slowly to avoid heart block"
+          ]
+        },
+        "right": {
+          "title": "Neostigmine limitations",
+          "points": [
+            "Quaternary ammonium compound",
+            "Completely excluded from cerebral tissues",
+            "Incapable of treating central toxic delirium",
+            "Ineffective as antidote for belladonna coma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Severe central nervous system antimuscarinic intoxication manifests as agitated delirium and frank **anticholinergic psychosis**. Patients experience vivid visual hallucinations of insects or threads, repetitive picking at bedclothes termed carphologia, incoherent speech, disorientation, and paranoid agitation. In massive overdoses, central excitation gives way to generalized seizures, medullary respiratory depression, flaccid coma, and cardiovascular collapse.",
+      "say": "Central muscarinic blockade drives agitated delirium, hallucinations, purposeless picking, and coma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxicity phase",
+          "Clinical features",
+          "Pathophysiological basis"
+        ],
+        "rows": [
+          [
+            "Mild toxicity",
+            "Restlessness, insomnia, mild confusion",
+            "Cortical cholinergic transmission suppression"
+          ],
+          [
+            "Moderate toxicity",
+            "Agitation, visual hallucinations, carphologia",
+            "Limbic and frontoparietal cholinergic deficit"
+          ],
+          [
+            "Severe intoxication",
+            "Delirium, hyperpyretic seizures, coma",
+            "Widespread cerebral and brainstem receptor paralysis"
+          ]
+        ]
+      }
+    }
+  ]
+}

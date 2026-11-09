@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "id": "cm-entomology-anopheles",
+ "subject": "community-medicine",
+ "module": "cm-entomology",
+ "title": "Mosquito Vectors and Sandflies: Morphology, Breeding, and Disease Transmission",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Morphology and resting posture of Anopheles",
+   "tx": "The genus Anopheles serves as the exclusive biological vector of human malaria parasites throughout the world. Field identification relies on the **Anopheles resting posture characteristics**, wherein the adult mosquito rests with its proboscis, head, thorax, and abdomen held in a single unbroken straight line inclined at an angle of forty-five degrees to the resting surface, possessing spotted wings and maxillary palps that are as long as the proboscis in both sexes.",
+   "say": "Anopheles mosquitoes transmit malaria. Adults rest at a sharp forty-five degree angle with their body in a straight line, marked by spotted wings and long palps.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anopheles adult morphology",
+     "points": [
+      "Rests at 45 degree angle to wall",
+      "Body held in unbroken straight line",
+      "Wings spotted with dark and pale scales",
+      "Palps equal in length to proboscis"
+     ]
+    },
+    "right": {
+     "title": "Culicine adult morphology",
+     "points": [
+      "Rests parallel with hunchbacked posture",
+      "Proboscis angled downward from body",
+      "Wings unspotted and clear",
+      "Female palps shorter than proboscis"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Anopheles life cycle and breeding habitats",
+   "tx": "Female Anopheline mosquitoes deposit boat-shaped eggs singly on water surfaces, each egg equipped with lateral air floats that maintain buoyancy. Larvae develop without a breathing siphon tube, floating horizontally just beneath the surface tension film where they breathe atmospheric oxygen through dorsal spiracles and anchor using **Anopheles palmate abdominal hairs**; species such as Anopheles culicifacies breed in clean rural irrigation channels while Anopheles stephensi breeds in urban overhead masonry water tanks.",
+   "say": "Anopheles lays eggs with side floats. The larvae lack siphon tubes, resting flat beneath the water surface where palmate hairs keep them anchored while breathing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Boat-shaped eggs with lateral floats"
+     },
+     {
+      "id": "a2",
+      "label": "Horizontal surface larvae without siphon"
+     },
+     {
+      "id": "a3",
+      "label": "Comma-shaped active pupal stage"
+     },
+     {
+      "id": "a4",
+      "label": "Adult vector of Plasmodium species"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Morphology and diseases of Culex mosquitoes",
+   "tx": "The genus Culex is distinguished by adult mosquitoes resting with a distinct hunchbacked posture parallel to walls, possessing unspotted wings and blunt female abdominal tips. Females lay hundreds of cigar-shaped eggs glued together in floating rafts on stagnant, polluted water collections; the larvae hang downward at an angle using a long, slender breathing siphon, acting as the primary **Culex quinquefasciatus filarial vector** transmitting Wuchereria bancrofti, while Culex tritaeniorhynchus breeds in paddy fields transmitting Japanese encephalitis virus.",
+   "say": "Culex mosquitoes rest with a hunchback posture parallel to walls. They breed in dirty drains, laying eggs in rafts. They spread lymphatic filariasis and Japanese encephalitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Culex vector species",
+     "Preferred breeding habitat",
+     "Transmitted human disease"
+    ],
+    "rows": [
+     [
+      "Culex quinquefasciatus",
+      "Dirty drains, septic tanks, sewage puddles",
+      "Bancroftian lymphatic filariasis"
+     ],
+     [
+      "Culex tritaeniorhynchus",
+      "Flooded rural rice paddies, shallow ponds",
+      "Japanese encephalitis virus"
+     ],
+     [
+      "Culex vishnui",
+      "Irrigated agricultural fields, marshes",
+      "Japanese encephalitis, West Nile fever"
+     ],
+     [
+      "Culex gelidus",
+      "Vegetated ponds with organic waste",
+      "Japanese encephalitis transmission"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Aedes aegypti morphology and behavior",
+   "tx": "Readily recognized by brilliant silver-white lyre-shaped markings on the dorsal scutum and white bands across leg tarsi, **Aedes aegypti tiger mosquito morphology** makes it conspicuous in domestic premises. Unlike nocturnal biters, Aedes bites aggressively during daylight hours with peaks after sunrise and before sunset; females lay drought-resistant cigar-shaped eggs singly on damp walls of artificial domestic containers including discarded vehicle tires, open plastic drums, desert coolers, and flower vases.",
+   "say": "Aedes aegypti has white stripes on its body and legs like a tiger. It bites during daylight hours and breeds inside household water containers, tires, and desert coolers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aedes aegypti characteristics",
+     "points": [
+      "Silver-white lyre marking on thorax",
+      "Banded black and white legs",
+      "Day-biting domestic habit",
+      "Drought-resistant desiccation-proof eggs"
+     ]
+    },
+    "right": {
+     "title": "Transmitted arboviral diseases",
+     "points": [
+      "Dengue fever and hemorrhagic fever",
+      "Chikungunya arthritic fever",
+      "Yellow fever flavivirus",
+      "Zika virus congenital microcephaly"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Aedes larval characteristics and larval indices",
+   "tx": "Aedes larvae possess a short, barrel-shaped breathing siphon through which they hang nearly perpendicular to the water surface, exhibiting a hyperactive serpentine swimming motion when disturbed. Surveillance of community arboviral risk utilizes **Aedes larval stegomyia indices** including the House Index, which records the percentage of houses with positive breeding containers, the Container Index, and the Breteau Index, where counts exceeding twenty containers per hundred houses warn of imminent dengue outbreaks.",
+   "say": "Aedes larvae have short, barrel siphons and dart quickly when disturbed. Sanitarians calculate the Breteau Index to predict dengue outbreaks when container counts exceed safe limits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aedes surveillance index",
+     "Formula definition",
+     "Dengue outbreak threshold"
+    ],
+    "rows": [
+     [
+      "House Index (HI)",
+      "(Houses with larvae / Total inspected) x 100",
+      "Value > 5 percent flags transmission risk"
+     ],
+     [
+      "Container Index (CI)",
+      "(Containers with larvae / Total inspected) x 100",
+      "Value > 10 percent indicates proliferation"
+     ],
+     [
+      "Breteau Index (BI)",
+      "(Positive containers / 100 houses inspected)",
+      "Value > 20 indicates high epidemic potential"
+     ],
+     [
+      "Pupal Index (PI)",
+      "(Total pupae collected / 100 houses inspected)",
+      "Correlates directly with adult mosquito density"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mansonia mosquito biology and host plants",
+   "tx": "The genus Mansonia comprises large, dark brown mosquitoes with heavily speckled wings and legs, famous for an obligate ecological dependence on floating aquatic vegetation such as Pistia stratiotes water lettuce. Females deposit star-shaped egg clusters glued underneath submerged plant leaves; developing larvae and pupae possess a saw-toothed breathing siphon that pierces the air-bearing root tissues of aquatic plants under **Mansonia plant root respiration**, transmitting Brugia malayi subperiodic filariasis.",
+   "say": "Mansonia mosquitoes depend entirely on floating water plants like Pistia. Their larvae pierce plant roots with serrated siphons to breathe oxygen, transmitting Brugian filariasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Adult lays star egg cluster on Pistia leaf"
+     },
+     {
+      "id": "m2",
+      "label": "Larva hatches and pierces plant root with siphon"
+     },
+     {
+      "id": "m3",
+      "label": "Derives oxygen directly from plant aerenchyma"
+     },
+     {
+      "id": "m4",
+      "label": "Weeding Pistia mechanically destroys larvae"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Morphology of the Phlebotomus sandfly",
+   "tx": "Sandflies belonging to the genus Phlebotomus are tiny, hairy, moth-like dipteran insects measuring only one point five to three millimetres in length. Characterized by **Phlebotomus sandfly structural features**, they possess long delicate legs, heavily hirsute bodies, and prominent lanceolate wings held erect in a distinct V-shape over the abdomen when at rest, flying in short, silent, jerky hops along dark corners of earthen cattle sheds.",
+   "say": "Sandflies are tiny, hairy insects that hop along dark corners of mud houses. They hold their wings upright in a V-shape and measure only two to three millimetres.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sandfly morphological traits",
+     "points": [
+      "1.5 to 3.0 mm length; densely hairy",
+      "Lanceolate wings held erect in V-shape",
+      "Short jerky hopping flight",
+      "Breeds in damp organic soil and cracks"
+     ]
+    },
+    "right": {
+     "title": "Vector role in Indian public health",
+     "points": [
+      "Phlebotomus argentipes: Kala-azar",
+      "Phlebotomus papatasi: Sandfly fever",
+      "Transmits Leishmania donovani protozoa",
+      "Highly susceptible to indoor DDT spray"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Diseases transmitted by sandflies",
+   "tx": "In the Gangetic plains of Bihar, Jharkhand, and West Bengal, Phlebotomus argentipes serves as the principal biological vector of Leishmania donovani under **sandfly transmitted protozoal disease pathways**. Female sandflies ingest amastigotes during nocturnal blood meals, which transform into flagellated promastigotes inside the insect midgut and migrate forward to the pharynx; during subsequent bites, promastigotes are inoculated into human hosts, causing visceral leishmaniasis characterized by prolonged fever, hepatosplenomegaly, pancytopenia, and hypergammaglobulinemia.",
+   "say": "Female sandflies bite at night, transmitting Leishmania parasites that cause kala-azar. Patients develop chronic fever, massive enlargement of the spleen and liver, and severe anaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Sandfly ingests intracellular amastigotes"
+     },
+     {
+      "id": "s2",
+      "label": "Midgut transformation to flagellated promastigotes"
+     },
+     {
+      "id": "s3",
+      "label": "Forward migration blocks pharynx and proboscis"
+     },
+     {
+      "id": "s4",
+      "label": "Inoculation triggers visceral leishmaniasis"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Vector control strategies for dipterans",
+   "tx": "Controlling mosquito and sandfly vectors requires integrating chemical, biological, and environmental tactics under **national vector-borne disease control programs**. Indoor residual spraying with DDT or synthetic pyrethroids targets resting adults, while introducing larvivorous Gambusia affinis and Poecilia reticulata guppy fish into wells and ornamental pools provides self-sustaining biological predation; for sandflies, filling wall cracks with lime plaster eliminates the damp microhabitats essential for larval development.",
+   "say": "Vector control combines indoor insecticide spraying with environmental cleanup. Adding larvivorous fish to ponds eats mosquito larvae, while plastering cracked walls controls sandfly breeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vector dipteran",
+     "Primary chemical intervention",
+     "Environmental and biological control"
+    ],
+    "rows": [
+     [
+      "Anopheles species",
+      "Indoor residual spraying with synthetic pyrethroid",
+      "Gambusia fish in wells; water drainage"
+     ],
+     [
+      "Culex species",
+      "Temephos (Abate) larvicide in drains",
+      "Underground drainage and sewage maintenance"
+     ],
+     [
+      "Aedes aegypti",
+      "Pyrethrum fogging during active outbreaks",
+      "Weekly dry day; emptying water containers"
+     ],
+     [
+      "Phlebotomus sandfly",
+      "Indoor residual DDT spray up to 6 feet",
+      "Plastering mud cracks; cattle shed cleaning"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

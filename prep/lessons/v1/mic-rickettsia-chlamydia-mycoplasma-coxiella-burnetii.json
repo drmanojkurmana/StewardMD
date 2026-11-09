@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Coxiella burnetii, Q Fever and Chlamydia trachomatis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Coxiella burnetii** is a highly infectious obligate intracellular bacterium that forms a resistant small cell variant in animal birth products, manure and dust. Inhalation causes **Q fever**, often after exposure to sheep, goats or cattle parturition. The acute illness usually produces fever, headache, myalgia, hepatitis or atypical pneumonia. Infective dose can be extremely low, making it a major laboratory biosafety organism.",
+      "say": "Q fever begins by inhaling Coxiella from birth products and contaminated farm dust.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exposure clues",
+          "points": [
+            "Lambing, kidding or calving",
+            "Abattoir and veterinary work",
+            "Manure, straw and farm dust",
+            "Windborne spread beyond immediate animal contact"
+          ]
+        },
+        "right": {
+          "title": "Resistance",
+          "points": [
+            "Small cell variant resists drying",
+            "Survives in the environment for long periods",
+            "Routine culture is dangerous and unnecessary",
+            "BSL 3 containment for propagation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Coxiella undergoes **phase variation**: phase I organisms with full lipopolysaccharide are highly virulent, while phase II forms arise after passage and have truncated lipopolysaccharide. Serology exploits this distinction. Acute Q fever usually shows dominant phase II IgG, whereas chronic Q fever develops very high phase I IgG, often in endocarditis or vascular infection. Phase terminology therefore describes antigenic form, not illness week.",
+      "say": "High phase I IgG points toward chronic Q fever; dominant phase II response fits acute disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Q fever",
+          "points": [
+            "Self limited febrile illness in many cases",
+            "Hepatitis or pneumonia pattern",
+            "Phase II IgG and IgM response",
+            "Blood PCR can help before seroconversion"
+          ]
+        },
+        "right": {
+          "title": "Chronic Q fever",
+          "points": [
+            "Culture negative endocarditis is classic",
+            "Vascular graft or aneurysm infection",
+            "High phase I IgG titre",
+            "Needs prolonged doxycycline plus hydroxychloroquine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic Q fever can remain silent until **prosthetic valve endocarditis**, infected aneurysm or pregnancy complications occur. Echocardiography may underestimate vegetations, so PET CT is often useful. Treatment is prolonged because Coxiella persists in acidic intracellular vacuoles; hydroxychloroquine raises vacuolar pH and improves doxycycline activity. Serologic and clinical monitoring continue long after symptoms resolve.",
+      "say": "Chronic Q fever needs prolonged combination therapy guided by phase I antibody trends.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risk settings",
+          "points": [
+            "Prosthetic or damaged heart valves",
+            "Vascular grafts and aneurysms",
+            "Immunosuppression",
+            "Pregnancy can trigger relapse risk"
+          ]
+        },
+        "right": {
+          "title": "Monitoring",
+          "points": [
+            "Phase I IgG should fall with control",
+            "PET CT finds vascular and valve foci",
+            "Drug levels and eye monitoring may be needed",
+            "Relapse can occur after premature cessation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chlamydia trachomatis** is another obligate intracellular organism but follows a biphasic developmental cycle. The infectious elementary body enters epithelial cells and converts into the replicating reticulate body within an inclusion. Serovars A to C cause trachoma, D to K cause genital and neonatal infection, and L1 to L3 cause lymphogranuloma venereum. Diagnosis generally uses nucleic acid amplification testing rather than culture.",
+      "say": "Trachoma, genital chlamydia and LGV differ mainly by C trachomatis serovar and tissue invasion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serovar groups",
+          "points": [
+            "A to C: trachoma",
+            "D to K: cervicitis, urethritis, PID and neonatal disease",
+            "L1 to L3: invasive lymphogranuloma venereum",
+            "All share elementary and reticulate body cycle"
+          ]
+        },
+        "right": {
+          "title": "Typical tests",
+          "points": [
+            "NAAT from urine or genital swab",
+            "Rectal and pharyngeal NAAT where validated",
+            "Culture reserved for special legal or research cases",
+            "Point of care assays still require quality assessment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Genital **C trachomatis** infection is often asymptomatic but can cause cervicitis, urethritis, pelvic inflammatory disease, tubal infertility, ectopic pregnancy, epididymitis and reactive arthritis. Screening sexually active young people and treating partners prevents reinfection and complications. A NAAT positive result should prompt testing for gonorrhoea, syphilis and HIV, partner notification, abstinence until treatment completion and retesting for reinfection.",
+      "say": "Silent chlamydia can still scar fallopian tubes, so screening and partner therapy are prevention.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Consequences",
+          "points": [
+            "Pelvic inflammatory disease",
+            "Tubal factor infertility",
+            "Ectopic pregnancy risk",
+            "Increased HIV acquisition and transmission risk"
+          ]
+        },
+        "right": {
+          "title": "Control steps",
+          "points": [
+            "Test symptomatic patients and risk groups",
+            "Treat partners from the lookback interval",
+            "Avoid sex until therapy and partner treatment complete",
+            "Retest at about three months for reinfection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Trachoma** remains a blinding disease of poverty and limited water access. Repeated childhood C trachomatis infection causes follicular conjunctivitis, conjunctival scarring, entropion and trichiasis, then corneal opacity. The SAFE strategy combines surgery for trichiasis, antibiotics such as mass azithromycin, facial cleanliness and environmental improvement. A single exposure matters less than the cycle of reinfection in crowded households.",
+      "say": "Trachoma blinds through repeated infections, scarring and inward turning lashes abrading the cornea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "infection",
+            "label": "Repeated childhood infection"
+          },
+          {
+            "id": "scar",
+            "label": "Conjunctival scarring"
+          },
+          {
+            "id": "trichiasis",
+            "label": "Entropion and trichiasis"
+          },
+          {
+            "id": "blind",
+            "label": "Corneal opacity unless corrected"
+          }
+        ],
+        "edges": [
+          [
+            "infection",
+            "scar"
+          ],
+          [
+            "scar",
+            "trichiasis"
+          ],
+          [
+            "trichiasis",
+            "blind"
+          ]
+        ]
+      }
+    }
+  ]
+}
