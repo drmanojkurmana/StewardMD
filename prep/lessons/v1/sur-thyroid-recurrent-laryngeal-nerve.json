@@ -1,0 +1,271 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Laryngeal Nerve Preservation in Thyroidectomy: Recurrent and Superior",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Iatrogenic nerve injury during thyroid surgery carries devastating legal, functional, and life-threatening respiratory consequences. The surgeon must safeguard two critical pairs of nerves during every cervical intervention: the **recurrent laryngeal nerve** and the external branch of the superior laryngeal nerve. Meticulous anatomical knowledge, visual identification, and gentle handling without traction or thermal diathermy are mandatory to prevent permanent vocal fold paralysis.",
+   "say": "Thyroid surgery requires meticulous identification of both the recurrent laryngeal nerve and the external branch of the superior laryngeal nerve to avoid permanent vocal paralysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vocal-cord-paralysis-fig1.webp",
+    "alt": "Anatomical schematic showing recurrent laryngeal nerve pathways and vocal cord paralysis positions.",
+    "caption": "Laryngeal innervation: vagus nerve branching into recurrent laryngeal nerves and vocal fold paralysis patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The right and left recurrent laryngeal nerves exhibit asymmetric embryological trajectories. The right nerve loops around the right subclavian artery and ascends obliquely in the neck toward the tracheoesophageal groove. The left nerve loops under the aortic arch distal to the ligamentum arteriosum, ascending more vertically and deeply within the **left tracheoesophageal groove**. Consequently, the left nerve is better protected, while the right nerve exhibits greater anatomical variability.",
+   "say": "The right recurrent nerve loops around the subclavian artery and ascends obliquely, while the left nerve loops under the aorta, ascending vertically in the tracheoesophageal groove.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Recurrent Laryngeal Nerve",
+     "points": [
+      "Loops around right subclavian artery (4th aortic arch)",
+      "Ascends obliquely from lateral to medial in the neck",
+      "Crosses inferior thyroid artery branches with high variability",
+      "More vulnerable to stretch injury during medial traction"
+     ]
+    },
+    "right": {
+     "title": "Left Recurrent Laryngeal Nerve",
+     "points": [
+      "Loops around the aortic arch (6th aortic arch remnant)",
+      "Ascends vertically and deeply in tracheoesophageal groove",
+      "More deeply seated and protected throughout its course",
+      "Longer intrathoracic pathway subject to mediastinal pathology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A critical anatomical relationship exists between the recurrent laryngeal nerve and the inferior thyroid artery near the lower pole of the thyroid gland. The nerve may pass anterior to, posterior to, or intermingle directly between the branching divisions of the artery. To prevent accidental nerve injury or ischemic devascularization, surgeons strictly avoid mass ligation of the main trunk of the **inferior thyroid artery**, ligating its terminal branches individually on the true thyroid capsule.",
+   "say": "The recurrent laryngeal nerve weaves intimately around branches of the inferior thyroid artery. Mass ligation of the main artery trunk is avoided, dividing branches directly on the capsule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Relationship",
+     "Relative Frequency",
+     "Surgical Implications During Lobe Mobilization"
+    ],
+    "rows": [
+     [
+      "Nerve Posterior to Artery",
+      "Approximately fifty percent of cases",
+      "Safest configuration; nerve remains protected in deep tracheoesophageal bed"
+     ],
+     [
+      "Nerve Anterior to Artery",
+      "Approximately twenty-five to thirty percent",
+      "Nerve is elevated superficial to vessels; highly vulnerable during initial mobilization"
+     ],
+     [
+      "Nerve Intermingled Between Branches",
+      "Approximately twenty percent of cases",
+      "Demands individual skeletonization of terminal arterial twigs directly on capsule"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most perilous anatomical zone for the recurrent laryngeal nerve occurs at its point of entry into the larynx, adjacent to the posterolateral thyroid lobe. Here, the nerve is tethered firmly within the condensed fascial **ligament of Berry**, also known as the lateral suspensory ligament of the thyroid. In over twenty-five percent of individuals, the nerve passes directly through the substance of the ligament, demanding sharp micro-dissection to avoid traction avulsion or thermal diathermy burns.",
+   "say": "The ligament of Berry is the most dangerous zone, where the nerve is firmly bound to the thyroid capsule. Sharp micro-dissection is essential to prevent traction or heat injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "groove",
+      "label": "Identify Nerve Low in Tracheoesophageal Groove"
+     },
+     {
+      "id": "trace",
+      "label": "Trace Cephalad Toward Cricoid Cartilage"
+     },
+     {
+      "id": "berry",
+      "label": "Approach Suspensory Ligament of Berry"
+     },
+     {
+      "id": "sharp",
+      "label": "Sharp Cold Dissection Sparing Monopolar Cautery"
+     },
+     {
+      "id": "entry",
+      "label": "Safely Enter Larynx Deep to Inferior Constrictor"
+     }
+    ],
+    "edges": [
+     [
+      "groove",
+      "trace"
+     ],
+     [
+      "trace",
+      "berry"
+     ],
+     [
+      "berry",
+      "sharp"
+     ],
+     [
+      "sharp",
+      "entry"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The physiological consequences of recurrent laryngeal nerve injury depend on whether the insult is unilateral or bilateral. Unilateral injury paralyzes the ipsilateral intrinsic vocal muscles, fixing the vocal fold in a **paramedian vocal cord position** due to the unopposed adductor action of the cricothyroid muscle. Patients present with hoarseness, vocal fatigue, and a characteristic bovine cough lacking explosive glottic closure, but retain an adequate respiratory airway.",
+   "say": "Unilateral nerve injury leaves the vocal cord in a paramedian position, causing hoarseness and a weak bovine cough, but typically preserves an adequate breathing airway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unilateral Recurrent Nerve Injury",
+     "points": [
+      "Paralyzed cord assumes paramedian position near midline",
+      "Normal contralateral cord compensates over several months",
+      "Breathy voice, hoarseness, and weak bovine cough",
+      "Adequate airway; does not cause stridor or acute suffocation"
+     ]
+    },
+    "right": {
+     "title": "Bilateral Recurrent Nerve Injury",
+     "points": [
+      "Both vocal cords fall into paramedian position near midline",
+      "Complete failure of vocal cord abduction during inspiration",
+      "Acute severe airway obstruction, asphyxiation, and loud stridor",
+      "Requires immediate emergency re-intubation or tracheostomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In catastrophic contrast, acute bilateral recurrent laryngeal nerve injury constitutes a medical and surgical emergency. Because both cords assume the paramedian position, the glottic aperture is reduced to a narrow vertical chink. During inspiration, negative subglottic pressure sucks the flaccid vocal folds together, causing acute **bilateral abductor vocal cord paralysis**. Patients develop profound inspiratory stridor, cyanosis, and acute suffocation upon extubation, demanding immediate re-intubation or emergency tracheostomy.",
+   "say": "Bilateral nerve damage leaves both cords closed near the midline. During inspiration, cords are sucked together, causing immediate airway obstruction that mandates urgent intubation or tracheostomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "injury",
+      "label": "Bilateral Recurrent Laryngeal Nerve Transection"
+     },
+     {
+      "id": "paramedian",
+      "label": "Both Vocal Cords Positioned Paramedian at Midline"
+     },
+     {
+      "id": "extubate",
+      "label": "Extubation in Operating Theater"
+     },
+     {
+      "id": "stridor",
+      "label": "Immediate High-Pitched Inspiratory Stridor & Retraction"
+     },
+     {
+      "id": "emergency",
+      "label": "Immediate Re-Intubation or Surgical Tracheostomy"
+     }
+    ],
+    "edges": [
+     [
+      "injury",
+      "paramedian"
+     ],
+     [
+      "paramedian",
+      "extubate"
+     ],
+     [
+      "extubate",
+      "stridor"
+     ],
+     [
+      "stridor",
+      "emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Equally important is safeguarding the **external branch of the superior laryngeal nerve**, which descends along the inferior constrictor muscle to provide motor innervation exclusively to the cricothyroid muscle. As the tensor of the vocal folds, the cricothyroid elongates and tightens the cords, regulating vocal pitch. The nerve travels in intimate proximity to the superior thyroid vascular pedicle within the avascular space of Reeve, making it vulnerable during superior pole mobilization.",
+   "say": "The external branch of the superior laryngeal nerve innervates the cricothyroid muscle to control vocal pitch. It runs intimately alongside the superior thyroid artery pedicle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cernea Classification",
+     "Anatomical Relationship to Superior Thyroid Pole",
+     "Surgical Vulnerability During Ligation"
+    ],
+    "rows": [
+     [
+      "Cernea Type 1",
+      "Nerve crosses superior thyroid vessels >1 cm above upper pole",
+      "Safest anatomy; nerve is distant from standard pedicle ligation level"
+     ],
+     [
+      "Cernea Type 2A",
+      "Nerve crosses superior thyroid vessels <1 cm above upper pole",
+      "Moderate risk; requires careful retraction of superior pole"
+     ],
+     [
+      "Cernea Type 2B",
+      "Nerve crosses vessels below the upper border of thyroid pole",
+      "Extremely high risk (20% of patients); nerve easily entrapped in vascular clamps"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To completely prevent iatrogenic injury to the external branch of the superior laryngeal nerve, surgeons execute individual low ligation of the superior thyroid vessels directly upon the thyroid capsule. Iatrogenic injury to this nerve paralyzes the cricothyroid muscle, resulting in a **husky voice with loss of high pitch**. Patients cannot produce high-frequency vocal registers, experience rapid vocal fatigue during prolonged speaking, and lose singing range, a disastrous complication for vocalists and professional speakers.",
+   "say": "Ligating superior thyroid vessels individually on the capsule protects the nerve. Injury paralyzes the cricothyroid, causing voice fatigue and permanent loss of high pitch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "retract",
+      "label": "Retract Superior Thyroid Pole Caudally & Laterally"
+     },
+     {
+      "id": "reeve",
+      "label": "Open Avascular Space of Reeve Medially"
+     },
+     {
+      "id": "skeletonize",
+      "label": "Skeletonize Superior Thyroid Artery Branches"
+     },
+     {
+      "id": "capsular",
+      "label": "Ligate Individual Vessels Directly on Thyroid Capsule"
+     },
+     {
+      "id": "preserve",
+      "label": "Preserves Cricothyroid Tensor Motor Function"
+     }
+    ],
+    "edges": [
+     [
+      "retract",
+      "reeve"
+     ],
+     [
+      "reeve",
+      "skeletonize"
+     ],
+     [
+      "skeletonize",
+      "capsular"
+     ],
+     [
+      "capsular",
+      "preserve"
+     ]
+    ]
+   }
+  }
+ ]
+}
