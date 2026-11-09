@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-zoonoses-updated-thai-red-cross-regimen",
+ "subject": "community-medicine",
+ "module": "cm-zoonoses",
+ "title": "Rabies Post-Exposure Regimens: Intradermal Protocols and Immunoglobulin",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Intradermal schedule: Updated Thai Red Cross regimen",
+   "tx": "The standard post-exposure vaccination protocol in Indian public hospitals is the **Updated Thai Red Cross regimen**, an evidence-based two-site intradermal schedule. On each of four scheduled clinic visits, specifically days zero, three, seven and twenty-eight, the patient receives zero point one millilitres of reconstituted vaccine intradermally at two distinct anatomical sites, creating a pale raised bleb over both the left and right deltoids.",
+   "say": "The Updated Thai Red Cross schedule gives two intradermal injections on days zero, three, seven and twenty-eight. A small pale bleb is raised over both deltoid muscles at each visit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clinic visit", "Day of schedule", "Number of injection sites", "Volume per site"],
+    "rows": [
+     ["First visit", "Day 0", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
+     ["Second visit", "Day 3", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
+     ["Third visit", "Day 7", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
+     ["Fourth visit", "Day 28", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"]
+    ]
+   }
+  },
+  {
+   "title": "Intramuscular Essen regimen comparison",
+   "tx": "In private clinical practice, physicians frequently administer the five-dose intramuscular **Essen regimen**, injecting one full reconstituted vial of zero point five or one point zero millilitres into the deltoid muscle on days zero, three, seven, fourteen and twenty-eight. Intramuscular injections into the gluteal area are strictly prohibited because thick subcutaneous gluteal fat slows vascular absorption and significantly impairs the neutralising antibody response.",
+   "say": "The intramuscular Essen regimen injects a full vial into the shoulder on days zero, three, seven, fourteen and twenty-eight. Gluteal injections are forbidden because buttocks fat blunts antibody production.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intradermal (2-site TRC)",
+     "points": ["4 clinic visits (days 0, 3, 7, 28)", "Uses 0.2 ml total vaccine per visit", "Total volume 0.8 ml across therapy"]
+    },
+    "right": {
+     "title": "Intramuscular (5-dose Essen)",
+     "points": ["5 clinic visits (days 0, 3, 7, 14, 28)", "Uses 1 full vial (0.5 to 1.0 ml) per visit", "Total volume 2.5 to 5.0 ml across therapy"]
+    }
+   }
+  },
+  {
+   "title": "Rabies immunoglobulin: equine versus human",
+   "tx": "In Category III bites, administering **rabies immunoglobulin** provides immediate passive neutralising antibodies at the wound site, bridging the critical seven to ten-day immunological gap before active vaccine antibodies appear in circulation. Equine rabies immunoglobulin is administered at forty international units per kilogram body weight, whereas human rabies immunoglobulin is administered at twenty international units per kilogram without requiring prior skin sensitivity testing.",
+   "say": "Rabies immunoglobulin provides immediate protection during the first week before vaccine antibodies develop. The dose is twenty units per kilogram for human product and forty for equine.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Immunoglobulin product", "Origin source", "Recommended dosage", "Skin test requirement"],
+    "rows": [
+     ["Equine RIG (ERIG)", "Hyperimmunised horse serum", "40 IU per kilogram body weight", "Skin testing no longer routinely required"],
+     ["Human RIG (HRIG)", "Purified human plasma donors", "20 IU per kilogram body weight", "No sensitivity test needed; zero serum sickness"],
+     ["Monoclonal antibodies", "Recombinant rabies mAbs", "Per manufacturer guidelines (3.3 mg/kg)", "Synthetic consistency; no animal biological risk"]
+    ]
+   }
+  },
+  {
+   "title": "Immunoglobulin infiltration technique",
+   "tx": "Proper administration technique mandates thorough **wound infiltration**, injecting as much of the weight-calculated immunoglobulin dose as anatomically safe directly into and around the depths and margins of every bite wound. If the wound is small or extensive, the calculated volume may be diluted with sterile normal saline to ensure complete infiltration, with any leftover product injected intramuscularly at a site distant from the vaccine.",
+   "say": "Inject as much immunoglobulin as possible directly into and around all the animal bite wounds. Any remaining medication is given as an intramuscular shot far from the vaccine arm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Calculate total RIG dose by body weight"},
+     {"id": "b", "label": "Infiltrate thoroughly into all bite wounds"},
+     {"id": "c", "label": "Inject any surplus IM distant from vaccine"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Re-exposure protocol in previously vaccinated individuals",
+   "tx": "When a person with documented prior completion of a full pre-exposure or post-exposure rabies course experiences a new animal bite, the protocol for **re-exposure vaccination** requires immediate soap-and-water wound washing. Rabies immunoglobulin is never administered because memory B cells respond immediately, requiring only two booster vaccine doses on day zero and day three (one site intradermally or one dose intramuscularly) to restore immunity.",
+   "say": "Patients previously vaccinated against rabies need only two booster shots on days zero and three after a new bite. They never receive immunoglobulin because their immune memory wakes up rapidly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unimmunised individual",
+     "points": ["Full 4-visit ID or 5-dose IM series", "Mandatory RIG infiltration for Category III", "Takes 7 to 10 days to produce antibodies"]
+    },
+    "right": {
+     "title": "Documented prior vaccinee",
+     "points": ["Only 2 booster doses on days 0 and 3", "Immunoglobulin is strictly not required", "Anamnestic IgG surge within 48 to 72 hours"]
+    }
+   }
+  },
+  {
+   "title": "Pre-exposure prophylaxis indications and schedule",
+   "tx": "High-risk occupational cohorts receive **pre-exposure prophylaxis** to establish baseline immunity before potential occupational exposure. Designated candidates include veterinarians, dog catchers, animal handlers, wildlife sanctuary rangers, and laboratory technicians handling live Lyssavirus cultures, receiving zero point one millilitres of vaccine intradermally at one site (or one intramuscular dose) on days zero, seven, and twenty-one or twenty-eight.",
+   "say": "Veterinarians, animal handlers and rabies laboratory workers receive pre-exposure vaccination on days zero, seven, and twenty-one. This protects against unrecognised exposures.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Target occupational group", "Pre-exposure vaccination schedule", "Post-exposure action if bitten"],
+    "rows": [
+     ["Veterinarians and animal handlers", "Days 0, 7, and 21 or 28 (0.1 ml ID)", "Two booster doses on days 0 and 3; no RIG"],
+     ["Rabies laboratory scientists", "Days 0, 7, and 21 or 28 + regular titres", "Booster if virus neutralising titre < 0.5 IU/ml"],
+     ["Wildlife park rangers and travelers", "Days 0, 7, and 21 or 28", "Two booster doses on days 0 and 3; no RIG"]
+    ]
+   }
+  },
+  {
+   "title": "Leptospirosis zoonosis and transmission ecology",
+   "tx": "Another dangerous zoonotic infection striking agrarian and urban populations is **leptospirosis transmission**, caused by spirochaetes of the species Leptospira interrogans. Pathogenic leptospires colonize the proximal renal tubules of reservoir animals, primarily domestic rats and cattle, shedding viable bacteria into animal urine that contaminates monsoon rainwater puddles, sewer overflows, flooded paddy fields and waterlogged urban roads, penetrating abraded human skin.",
+   "say": "Leptospirosis is a bacterial infection spread through rat and cattle urine. During monsoon floods, spirochaetes in waterlogged streets enter the body through small cuts in the skin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Rodent renal carrier sheds leptospires in urine"},
+     {"id": "b", "label": "Monsoon floodwater and mud contamination"},
+     {"id": "c", "label": "Entry via abraded skin or conjunctiva"},
+     {"id": "d", "label": "Systemic endothelial damage and vasculitis"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Severe leptospirosis and Weil disease",
+   "tx": "While ninety percent of leptospirosis presentations run a self-limiting anicteric febrile illness, ten percent progress to severe icteric disease known as **Weil disease**. Manifestations include severe hepatic jaundice, acute oliguric renal failure from interstitial nephritis, severe thrombocytopenia with haemorrhagic diathesis, and life-threatening pulmonary haemorrhage; prominent bilateral conjunctival suffusion without purulent discharge serves as a pathognomonic diagnostic clue.",
+   "say": "Severe leptospirosis, or Weil disease, causes jaundice, kidney failure, bleeding and lung haemorrhage. Bloodshot red eyes without any pus provide an essential diagnostic clue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anicteric leptospirosis (90%)",
+     "points": ["Sudden fever, headache and calf myalgia", "Prominent conjunctival suffusion", "Complete recovery without renal failure"]
+    },
+    "right": {
+     "title": "Severe Weil disease (10%)",
+     "points": ["Deep jaundice and acute kidney failure", "Pulmonary alveolar haemorrhage", "High case fatality requiring intensive dialysis"]
+    }
+   }
+  },
+  {
+   "title": "Chemoprophylaxis and post-flood outbreak response",
+   "tx": "During widespread monsoon inundations and urban floods, disaster management protocols provide **doxycycline chemoprophylaxis** to rescue workers, sanitation personnel and agricultural labourers wading through contaminated waters. A prophylactic dose of two hundred milligrams of oral doxycycline is given once weekly during periods of high exposure, while confirmed clinical cases receive prompt therapeutic regimens of intravenous penicillin G or ceftriaxone.",
+   "say": "Rescue workers and flood victims take two hundred milligrams of doxycycline once weekly to prevent leptospirosis. Severe cases are treated in hospital with intravenous penicillin or ceftriaxone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clinical setting", "Antibiotic regimen", "Administration guidance"],
+    "rows": [
+     ["High-risk flood exposure", "Oral doxycycline 200 mg once weekly", "Continue weekly throughout exposure period"],
+     ["Mild anicteric illness", "Oral doxycycline 100 mg twice daily", "7-day course taken after food"],
+     ["Severe Weil disease", "Intravenous crystalline penicillin G", "1.5 million units IV every 6 hours for 7 days"],
+     ["Penicillin allergic severe case", "Intravenous ceftriaxone 1 g daily", "7-day course with hemodynamic monitoring"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

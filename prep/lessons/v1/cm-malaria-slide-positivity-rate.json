@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "id": "cm-malaria-slide-positivity-rate",
+ "subject": "community-medicine",
+ "module": "cm-malaria",
+ "title": "Malaria Case Finding: Indices and Artemisinin Combination Therapy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Slide positivity rate in outbreak detection",
+   "tx": "In community fever surveillance, the **slide positivity rate** quantifies the proportion of examined blood smears demonstrating Plasmodium trophozoites or gametocytes, expressed as positive slides divided by total slides examined times one hundred. A sudden doubling of this metric above seasonal baselines alerts epidemiologists to localized focal transmission, prompting immediate indoor residual spraying, mass blood surveys and antimalarial replenishment.",
+   "say": "A sudden jump in slide positivity rate above historical seasonal levels exposes an emerging outbreak. Epidemiologists respond with contact tracing, indoor spraying and extra drug supplies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Blood smear collection from fever cases"},
+     {"id": "b", "label": "Slide positivity rate exceeds baseline"},
+     {"id": "c", "label": "Immediate focal spray and drug mobilization"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Annual blood examination rate as a validity filter",
+   "tx": "Public health officers validate low case incidence by auditing the **annual blood examination rate**, which reflects surveillance intensity across the sub-centre population over twelve months. If an administrative block reports zero cases but exhibits an examination rate below five percent, transmission is concealed by negligent case finding; true low endemicity can only be claimed when the annual rate exceeds ten percent.",
+   "say": "Low case numbers mean nothing if the annual blood examination rate stays below ten percent. Weak screening conceals transmission, while robust screening proves true interruption.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inadequate screening (ABER < 10%)",
+     "points": ["Few fever cases tested", "Apparent zero cases is an artifact", "Undetected silent transmission continues"]
+    },
+    "right": {
+     "title": "Adequate screening (ABER >= 10%)",
+     "points": ["Robust active and passive testing", "Low case counts reflect true suppression", "Meets national verification benchmark"]
+    }
+   }
+  },
+  {
+   "title": "Peripheral blood smear examination standards",
+   "tx": "Microscopic diagnosis depends on the gold-standard **thick and thin smear** prepared on a single glass slide from finger-prick capillary blood. The thick smear dehaemoglobinises red cells to concentrate parasites twenty to thirty-fold for rapid detection, whereas the methanol-fixed thin smear preserves red blood cell architecture, enabling differential identification between the delicate rings of Plasmodium falciparum and enlarged, amoeboid vivax trophozoites.",
+   "say": "A thick smear dehaemoglobinises red cells to concentrate parasites for detection. A thin smear fixes cell shape, allowing pathologists to distinguish falciparum from vivax.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mixed-malaria-fig1.webp",
+    "alt": "Microscopic smear showing ring forms of Plasmodium falciparum and amoeboid forms of Plasmodium vivax",
+    "caption": "Ring forms and gametocytes of Plasmodium falciparum alongside amoeboid trophozoites of Plasmodium vivax. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "First-line chemotherapy: artemisinin combination therapy",
+   "tx": "National malaria guidelines mandate **artemisinin-based combination therapy** for all confirmed cases of uncomplicated Plasmodium falciparum malaria to ensure rapid biomass reduction and forestall resistance emergence. Artemisinin derivatives rapidly destroy intraerythrocytic asexual stages within two hours, while their slower-clearing partner drugs eliminate remaining residual parasites over subsequent weeks, preventing recrudescence and curing the host completely.",
+   "say": "Artemisinin combinations destroy billions of parasites within hours, while their slower partner drugs clear residual parasites over several weeks, preventing recrudescence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Artemisinin component",
+     "points": ["Rapidly kills circulating ring forms", "Resolves fever within 24 to 48 hours", "Short plasma half-life of hours"]
+    },
+    "right": {
+     "title": "Partner drug component",
+     "points": ["Eliminates residual surviving parasites", "Maintains inhibitory blood levels for weeks", "Prevents selection of resistant mutants"]
+    }
+   }
+  },
+  {
+   "title": "Regional ACT policies across India",
+   "tx": "The national program stratifies **artemisinin partner regimens** by geographic resistance patterns across the country. In northeastern states where antifolate resistance mutations are widespread, artemether-lumefantrine given over three days serves as the exclusive first-line combination, whereas in the remainder of India, co-formulated oral artesunate combined with sulfadoxine-pyrimethamine remains the designated first-line therapy for uncomplicated falciparum infections.",
+   "say": "Artemether-lumefantrine is the first-line choice in northeastern states due to antifolate resistance. Artesunate with sulfadoxine-pyrimethamine is used across the rest of the country.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Geographic region", "Designated first-line ACT", "Underlying pharmacological rationale"],
+    "rows": [
+     ["Northeastern states", "Artemether plus lumefantrine", "High prevalence of dhfr and dhps mutations"],
+     ["Rest of India", "Artesunate plus sulfadoxine-pyrimethamine", "Efficacy preserved across central and southern belts"],
+     ["Severe malaria (All India)", "Intravenous artesunate", "Rapid systemic parenteral parasite clearance"]
+    ]
+   }
+  },
+  {
+   "title": "Artesunate combination dosing and administration",
+   "tx": "For non-pregnant adults outside the northeast, **artesunate dosing** delivers four milligrams per kilogram body weight once daily for three consecutive days, combined with a single therapeutic dose of sulfadoxine twenty-five milligrams per kilogram and pyrimethamine one point two five milligrams per kilogram on day one. To destroy infectious sexual stages, a single dose of primaquine is added on day two.",
+   "say": "Patients take artesunate daily for three days, with a single dose of sulfadoxine and pyrimethamine on day one. A single primaquine dose follows on day two to kill gametocytes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Day of therapy", "Drug administered", "Daily adult dosage"],
+    "rows": [
+     ["Day 1", "Artesunate + Sulfadoxine-Pyrimethamine", "Artesunate 200 mg + SP 3 tablets (1500/75 mg)"],
+     ["Day 2", "Artesunate + Primaquine", "Artesunate 200 mg + Primaquine 45 mg base"],
+     ["Day 3", "Artesunate alone", "Artesunate 200 mg single oral dose"]
+    ]
+   }
+  },
+  {
+   "title": "Severe malaria management with intravenous artesunate",
+   "tx": "When danger signs or vital organ dysfunction appear, clinical protocols require emergency **intravenous artesunate** at two point four milligrams per kilogram administered immediately at zero, twelve and twenty-four hours, continuing once daily until the patient tolerates oral fluids. Intravenous artesunate demonstrates superior survival over intravenous quinine in randomised clinical trials, eliminating cardiac arrhythmia risks and hypoglycaemic complications.",
+   "say": "Intravenous artesunate is given immediately at zero, twelve and twenty-four hours for severe malaria. It improves survival over quinine and avoids life-threatening arrhythmias.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Hour 0: IV artesunate 2.4 mg/kg"},
+     {"id": "b", "label": "Hour 12: IV artesunate 2.4 mg/kg"},
+     {"id": "c", "label": "Hour 24: IV artesunate 2.4 mg/kg"},
+     {"id": "d", "label": "Switch to full oral ACT when alert"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Sulfadoxine-pyrimethamine resistance monitoring",
+   "tx": "National research institutes conduct longitudinal **antimalarial therapeutic efficacy monitoring** across sentinel surveillance districts to detect emerging drug insensitivity. Point mutations in the dihydropteroate synthase and dihydrofolate reductase genes confer resistance to sulfadoxine-pyrimethamine, while kelch-13 propeller gene mutations herald artemisinin tolerance; whenever treatment failure rates exceed ten percent, the national technical committee updates the designated first-line drug.",
+   "say": "Sentinel laboratories monitor parasite genes for mutations in dhfr, dhps and kelch-13. If treatment failure in an area exceeds ten percent, the national drug policy changes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Surveillance marker", "Target gene", "Clinical significance"],
+    "rows": [
+     ["Antifolate resistance", "Plasmodium dhfr and dhps", "Predicts sulfadoxine-pyrimethamine failure"],
+     ["Artemisinin tolerance", "Kelch-13 propeller domain", "Associated with delayed parasite clearance"],
+     ["Policy change trigger", "In vivo failure >= 10%", "Mandates shift to alternative combination"]
+    ]
+   }
+  },
+  {
+   "title": "Treatment monitoring and parasite clearance",
+   "tx": "Clinical response evaluation requires structured **parasitological cure assessment** on days three, seven, fourteen and twenty-eight following therapy initiation. Early treatment failure is diagnosed if danger signs emerge or parasitaemia persists on day three, whereas late treatment failure represents parasite recurrence between days seven and twenty-eight, distinguishing true treatment refractoriness from reinfection through molecular genotyping of parasite polymorphic loci.",
+   "say": "Follow patients with blood smears on days three, seven, fourteen and twenty-eight. Parasites remaining on day three signal treatment failure, demanding second-line therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Response outcome", "Defining clinical finding", "Action required"],
+    "rows": [
+     ["Early treatment failure", "Parasitaemia on day 3 with axillary fever", "Switch to alternative second-line ACT"],
+     ["Late treatment failure", "Parasites reappear between days 7 and 28", "Molecular testing and rescue chemotherapy"],
+     ["Adequate response", "Total parasite clearance through day 28", "Discharge with documented cure"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
