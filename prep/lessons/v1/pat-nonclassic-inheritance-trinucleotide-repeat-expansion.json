@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "pat-nonclassic-inheritance",
+  "subject": "pathology",
+  "title": "Trinucleotide Repeat Diseases, Genetic Anticipation, and Fragile X Syndrome",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Certain inherited neurological and neuromuscular disorders depart from standard Mendelian rules due to dynamic mutations characterized by unstable expansions of repetitive three-nucleotide sequences. During parent gametogenesis, DNA replication slippage expands these unstable repeats, defining the dynamic mutational mechanism of **trinucleotide repeat expansion**.",
+      "say": "Trinucleotide repeat expansions are dynamic mutations that expand during gametogenesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "normal_repeats",
+            "label": "Stable Baseline Number of Triplet Repeats in Healthy Alleles"
+          },
+          {
+            "id": "premutation_allele",
+            "label": "Intermediate Premutation Allele Becomes Meiotically Unstable"
+          },
+          {
+            "id": "replication_slippage",
+            "label": "Strand Slippage During DNA Polymerase Meiotic Replication"
+          },
+          {
+            "id": "full_mutation",
+            "label": "Massive Triplet Expansion Manifests as Overt Clinical Disease"
+          }
+        ],
+        "edges": [
+          [
+            "normal_repeats",
+            "premutation_allele"
+          ],
+          [
+            "premutation_allele",
+            "replication_slippage"
+          ],
+          [
+            "replication_slippage",
+            "full_mutation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "As unstable triplet repeats expand progressively across successive generations within an affected family pedigree, clinical symptoms appear at an earlier age and express with increasing phenotypic severity. This classic non-Mendelian generational acceleration and worsening of disease is known as **genetic anticipation**.",
+      "say": "Genetic anticipation describes the earlier onset and greater severity of disease in successive generations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Static Mendelian Mutation",
+          "points": [
+            "Point mutation or deletion remains identical in size across generations",
+            "Consistent age of clinical disease onset among affected family members",
+            "Recurrence risk adheres strictly to constant 50% or 25% Mendelian ratios",
+            "No generational acceleration of disease severity or organ involvement"
+          ]
+        },
+        "right": {
+          "title": "Dynamic Trinucleotide Expansion",
+          "points": [
+            "Triplet repeat copy number increases progressively during meiosis",
+            "Manifests progressive genetic anticipation with earlier onset in offspring",
+            "Severity of clinical phenotype correlates directly with repeat tract length",
+            "Parental sex of transmission dictates expansion propensity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common inherited form of intellectual disability in biological males arises from dynamic CGG triplet expansion in the 5-prime untranslated region of the FMR1 gene on chromosome Xq27.3. Characterized by macroorchidism, long face, large everted ears, and autistic features, this disorder is **fragile X syndrome**.",
+      "say": "Fragile X syndrome is caused by CGG triplet expansion in FMR1, causing intellectual disability.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/fragile-x-syndrome-fig1.webp",
+        "alt": "FMR1 CGG repeat expansion and transcriptional silencing in Fragile X",
+        "caption": "CGG repeat expansion leading to hypermethylation and silencing of the FMR1 gene."
+      }
+    },
+    {
+      "tx": "In fragile X syndrome, expansion beyond two hundred CGG repeats triggers extensive DNA hypermethylation of adjacent CpG islands in the FMR1 promoter. Transcriptional silencing abolishes synthesis of fragile X mental retardation protein, an RNA-binding chaperone required for synaptic pruning, during **FMR1 epigenetic silencing**.",
+      "say": "Hypermethylation of expanded CGG repeats silences FMR1, abolishing FMRP synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cgg_expansion",
+            "label": "CGG Triplet Repeats Expand Beyond 200 in Maternal Oogenesis"
+          },
+          {
+            "id": "cpg_methylation",
+            "label": "DNA Methyltransferases Hypermethylate Cytosines in Promoter"
+          },
+          {
+            "id": "transcriptional_arrest",
+            "label": "Heterochromatin Formation Shuts Down FMR1 Gene Transcription"
+          },
+          {
+            "id": "loss_of_fmrp",
+            "label": "Absence of FMRP Impairs Dendritic Spine Synaptic Pruning"
+          }
+        ],
+        "edges": [
+          [
+            "cgg_expansion",
+            "cpg_methylation"
+          ],
+          [
+            "cpg_methylation",
+            "transcriptional_arrest"
+          ],
+          [
+            "transcriptional_arrest",
+            "loss_of_fmrp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Huntington disease represents the prototypic polyglutamine trinucleotide repeat disorder. Autosomal dominant CAG repeat expansion in the coding exon of the HTT gene on chromosome 4p16.3 produces a mutant huntingtin protein that aggregates within medium spiny striatal neurons, causing chorea and dementia in **Huntington disease**.",
+      "say": "Huntington disease is a CAG polyglutamine disorder causing selective caudate striatal atrophy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/huntington-disease-fig1.webp",
+        "alt": "Huntington disease neuropathology showing caudate and putamen atrophy",
+        "caption": "Bilateral atrophy of the caudate nucleus and putamen resulting from mutant huntingtin neurotoxicity."
+      }
+    },
+    {
+      "tx": "Paternal transmission of the mutant HTT allele during male spermatogenesis exhibits marked instability, resulting in dramatic CAG expansions in offspring. Inheriting high repeat numbers exceeding sixty CAG repeats precipitates juvenile-onset Huntington disease, an illustration of **paternal anticipation in Huntington**, causing early chorea and rigidity.",
+      "say": "CAG repeats expand predominantly during paternal spermatogenesis, accelerating disease onset.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "paternal_meiosis",
+            "label": "Unstable CAG Triplet Slippage During Male Spermatogenesis"
+          },
+          {
+            "id": "massive_expansion",
+            "label": "CAG Repeat Count Jumps Dramatically from 45 to Over 70"
+          },
+          {
+            "id": "juvenile_onset",
+            "label": "Presents with Severe Rigidity, Seizures, and Death in Adolescence"
+          }
+        ],
+        "edges": [
+          [
+            "paternal_meiosis",
+            "massive_expansion"
+          ],
+          [
+            "massive_expansion",
+            "juvenile_onset"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most common adult muscular dystrophy results from CTG repeat expansion in the 3-prime untranslated region of the DMPK gene on chromosome 19q13.3. Characterized by sustained muscle contraction after voluntary movement, frontal balding, cataracts, and testicular atrophy, this disorder is **myotonic dystrophy**.",
+      "say": "Myotonic dystrophy involves CTG expansion in DMPK, causing impaired muscle relaxation and cataracts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trinucleotide Disease",
+          "Triplet Repeat Sequence",
+          "Gene Locus & Expansion Location"
+        ],
+        "rows": [
+          [
+            "Fragile X Syndrome",
+            "CGG Repeat Expansion",
+            "FMR1 Gene on Xq27.3; 5-Prime Untranslated Region"
+          ],
+          [
+            "Huntington Disease",
+            "CAG Repeat Expansion",
+            "HTT Gene on 4p16.3; Polyglutamine Exonic Coding Region"
+          ],
+          [
+            "Myotonic Dystrophy",
+            "CTG Repeat Expansion",
+            "DMPK Gene on 19q13.3; 3-Prime Untranslated Region"
+          ],
+          [
+            "Friedreich Ataxia",
+            "GAA Repeat Expansion",
+            "FXN Gene on 9q21.1; Intron 1 Heterochromatin Silencing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Distinct from triplet expansions, certain genomic loci undergo parent-of-origin specific epigenetic inactivation through differential DNA methylation. This selective transcriptional silencing of either the maternal or paternal allele represents **genomic imprinting**, ensuring that only one functional parental allele is expressed in diploid cells.",
+      "say": "Genomic imprinting silences either the maternal or paternal allele via parent-specific DNA methylation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gametogenesis_erasure",
+            "label": "Previous Epigenetic Imprints Erased in Primordial Germ Cells"
+          },
+          {
+            "id": "de_novo_imprinting",
+            "label": "De Novo Sex-Specific DNA Methylation Imprinted During Gametogenesis"
+          },
+          {
+            "id": "zygotic_transmission",
+            "label": "Stably Maintained Following Fertilization in Somatic Tissues"
+          },
+          {
+            "id": "monoallelic_expression",
+            "label": "Exclusive Expression of Non-Imprinted Unmethylated Parental Allele"
+          }
+        ],
+        "edges": [
+          [
+            "gametogenesis_erasure",
+            "de_novo_imprinting"
+          ],
+          [
+            "de_novo_imprinting",
+            "zygotic_transmission"
+          ],
+          [
+            "zygotic_transmission",
+            "monoallelic_expression"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Immune Complex-Mediated Tissue Injury, Vasculitis, and the Arthus Reaction",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Tissue damage caused by the deposition of soluble antigen-antibody aggregates in blood vessel walls and tissues defines **Type III immune complex hypersensitivity**. Unlike Type II reactions targeting fixed cellular antigens, Type III complexes form in circulation and deposit in filter beds such as glomeruli, synovium, and skin.",
+      "say": "Type III hypersensitivity involves circulating soluble immune complexes depositing in microvascular beds.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "complex_formation",
+            "label": "Soluble Antigen Combines with IgG or IgM in Systemic Circulation"
+          },
+          {
+            "id": "vascular_deposition",
+            "label": "Circulating Immune Complexes Deposit in High-Pressure Filter Beds"
+          },
+          {
+            "id": "complement_activation",
+            "label": "Classical Complement Pathway Triggers C5a Anaphylatoxin Release"
+          },
+          {
+            "id": "necrotizing_vasculitis",
+            "label": "Neutrophilic Infiltration and Fibrinoid Vascular Wall Necrosis"
+          }
+        ],
+        "edges": [
+          [
+            "complex_formation",
+            "vascular_deposition"
+          ],
+          [
+            "vascular_deposition",
+            "complement_activation"
+          ],
+          [
+            "complement_activation",
+            "necrotizing_vasculitis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pathogenic potential of immune complexes depends critically on the antigen-to-antibody molar ratio. Large complexes formed in antibody excess are rapidly cleared by splenic macrophages, whereas medium-sized complexes formed in slight antigen excess escape reticuloendothelial clearance, representing highly dangerous **pathogenic immune complexes**.",
+      "say": "Medium-sized complexes formed in slight antigen excess evade macrophage clearance and deposit in vessels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Large Complexes (Antibody Excess)",
+          "points": [
+            "Forms when antibody concentration greatly exceeds circulating antigen",
+            "Extensive crosslinking produces large, insoluble multimeric aggregates",
+            "Rapidly bound by erythrocyte CR1 receptors and cleared by liver/spleen",
+            "Rarely persist long enough to deposit within capillary vessel walls"
+          ]
+        },
+        "right": {
+          "title": "Medium Complexes (Slight Antigen Excess)",
+          "points": [
+            "Forms when circulating antigen slightly exceeds antibody levels",
+            "Remain soluble in blood and evade mononuclear phagocytic surveillance",
+            "Deposit extensively in renal glomeruli, synovial joints, and dermal venules",
+            "Trigger protracted complement activation and severe tissue necrosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Once deposited within vascular walls, immune complexes trigger the classical complement cascade, generating potent anaphylatoxins C3a and C5a. These fragments increase vascular permeability and recruit neutrophils, which release lysosomal elastase and reactive oxygen species, producing destructive transmural **fibrinoid vascular necrosis**.",
+      "say": "Complement activation by trapped complexes recruits neutrophils, causing fibrinoid necrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/urticarial-vasculitis-fig1.webp",
+        "alt": "Fibrinoid necrosis and leukocytoclastic vasculitis from immune complex deposition",
+        "caption": "Neutrophilic infiltration and fibrinoid necrosis of postcapillary venules in immune complex vasculitis."
+      }
+    },
+    {
+      "tx": "Systemic administration of a large foreign protein dose, such as horse anti-thymocyte globulin, induces an acute illness seven to ten days later as circulating antibodies form. Manifesting with fever, generalized urticaria, arthralgias, lymphadenopathy, and proteinuria, this prototypical condition is **acute serum sickness**.",
+      "say": "Acute serum sickness is a systemic Type III reaction causing fever, arthritis, and rash.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "foreign_protein_injection",
+            "label": "Administration of Foreign Serum Antigen (e.g. Antivenom, ATG)"
+          },
+          {
+            "id": "antibody_production",
+            "label": "Primary Immune Response Generates Specific IgG by Days 7 to 10"
+          },
+          {
+            "id": "circulating_complexes",
+            "label": "Formation of Soluble Immune Complexes in Slight Antigen Excess"
+          },
+          {
+            "id": "systemic_syndrome",
+            "label": "Fever, Polyarthritis, Urticaria, and Glomerulonephritis Manifest"
+          }
+        ],
+        "edges": [
+          [
+            "foreign_protein_injection",
+            "antibody_production"
+          ],
+          [
+            "antibody_production",
+            "circulating_complexes"
+          ],
+          [
+            "circulating_complexes",
+            "systemic_syndrome"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "All four types of hypersensitivity participate in human immunopathology through distinct immunological mechanisms. Systemic anaphylaxis illustrates Type I, Goodpasture syndrome illustrates Type II, acute serum sickness illustrates Type III, while contact dermatitis illustrates Type IV, summarized across the **Gell and Coombs classification**.",
+      "say": "The Gell and Coombs system categorizes hypersensitivity into Types I through IV.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergy-anaphylaxis-immunodeficiency-long-case-fig1.webp",
+        "alt": "Gell and Coombs classification of hypersensitivity reactions types I to IV",
+        "caption": "Comprehensive immunological mechanisms of Gell and Coombs hypersensitivity reactions Types I through IV."
+      }
+    },
+    {
+      "tx": "Local cutaneous tissue necrosis induced by experimental intradermal injection of an antigen into a previously hyperimmunized animal represents the **Arthus reaction**. High levels of circulating IgG diffuse into skin venules, meeting injected antigen in situ to form precipitates that cause local hemorrhagic vascular thrombosis.",
+      "say": "The Arthus reaction is a localized Type III necrotizing vasculitis caused by in situ complex precipitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "antigen_injection",
+            "label": "Intradermal Injection of Antigen into Previously Sensitized Host"
+          },
+          {
+            "id": "in_situ_precipitation",
+            "label": "Circulating IgG Diffuses into Dermis, Forming In Situ Complexes"
+          },
+          {
+            "id": "c5a_neutrophil_surge",
+            "label": "Local Complement Activation Recruits Dense Neutrophilic Infiltrate"
+          },
+          {
+            "id": "thrombotic_necrosis",
+            "label": "Platelet Aggregation, Vessel Wall Fibrinoid Necrosis, and Ulceration"
+          }
+        ],
+        "edges": [
+          [
+            "antigen_injection",
+            "in_situ_precipitation"
+          ],
+          [
+            "in_situ_precipitation",
+            "c5a_neutrophil_surge"
+          ],
+          [
+            "c5a_neutrophil_surge",
+            "thrombotic_necrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical analogues of the Arthus reaction occur following repeated booster vaccinations or inhalation of aerosolized organic antigens. Farmer lung and pigeon breeder disease represent extrinsic allergic alveolitis driven by immune complex formation within alveolar septa, recognized clinically as **hypersensitivity pneumonitis**.",
+      "say": "Hypersensitivity pneumonitis is a pulmonary Type III and IV reaction to inhaled organic dusts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypersensitivity-pneumonitis-fig1.webp",
+        "alt": "Hypersensitivity pneumonitis alveolar septal immune complex and granulomatous inflammation",
+        "caption": "Alveolar septal inflammation and poorly formed granulomas in chronic hypersensitivity pneumonitis."
+      }
+    },
+    {
+      "tx": "On histological evaluation of skin biopsies in Type III cutaneous vasculitis, abundant nuclear dust derived from fragmented, apoptotic neutrophils scatters throughout inflamed vessel walls. This microscopic fragmentation of neutrophilic karyorrhectic debris in postcapillary dermal venules is diagnostic of **leukocytoclastic vasculitis**, typically accompanied by extravasated red blood cells.",
+      "say": "Leukocytoclastic vasculitis features fragmented neutrophil nuclear debris around postcapillary venules.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Arthus Reaction",
+          "Delayed Hypersensitivity (Type IV)"
+        ],
+        "rows": [
+          [
+            "Primary Effector",
+            "Circulating IgG Antibodies and In Situ Complexes",
+            "Sensitized CD4+ and CD8+ T-Lymphocytes"
+          ],
+          [
+            "Time Course",
+            "Peaks Within 4 to 12 Hours Post-Injection",
+            "Peaks at 24 to 72 Hours (Delayed Onset)"
+          ],
+          [
+            "Histopathology",
+            "Neutrophilic Infiltration and Fibrinoid Necrosis",
+            "Perivascular Mononuclear Histiocytes and Lymphocytes"
+          ],
+          [
+            "Complement Involvement",
+            "Essential Activation of Classical C1q Pathway",
+            "No Direct Role for Humoral Complement Activation"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

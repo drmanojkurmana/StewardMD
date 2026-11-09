@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Antibody-Mediated Cytotoxicity, Goodpasture Syndrome, and Receptor Autoimmunity",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Hypersensitivity reactions mediated by IgG or IgM antibodies directed against fixed antigen targets on cell surfaces or within extracellular matrix components are classified as **Type II antibody-mediated hypersensitivity**. Tissue damage occurs through complement activation, Fc receptor-mediated phagocytosis, antibody-dependent cellular cytotoxicity, or receptor functional disruption.",
+      "say": "Type II hypersensitivity involves IgG or IgM antibodies binding fixed cell-surface or matrix antigens.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fixed_antigen",
+            "label": "Fixed Intrinsic or Chemically Modified Antigen on Surface"
+          },
+          {
+            "id": "antibody_binding",
+            "label": "Pathogenic IgG or IgM Antibodies Bind Surface Antigen In Situ"
+          },
+          {
+            "id": "effector_engagement",
+            "label": "Complement Activation or Fc-Receptor Phagocytic Recruitment"
+          },
+          {
+            "id": "tissue_lysis",
+            "label": "Target Cell Lysis, Opsonization, or Chronic Tissue Inflammation"
+          }
+        ],
+        "edges": [
+          [
+            "fixed_antigen",
+            "antibody_binding"
+          ],
+          [
+            "antibody_binding",
+            "effector_engagement"
+          ],
+          [
+            "effector_engagement",
+            "tissue_lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Binding of IgG antibodies to cell surface antigens exposes their Fc domains to circulating C1q, activating the classical complement cascade. Deposition of opsonin C3b facilitates splenic macrophage ingestion, while terminal assembly of the membrane attack complex punches lytic holes, driving **complement-dependent cytotoxicity**.",
+      "say": "Antibody binding activates classical complement, causing C3b opsonization and MAC-mediated lysis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type II Mechanism",
+          "Effector Molecules / Cells",
+          "Clinical Disease Prototype"
+        ],
+        "rows": [
+          [
+            "Complement-Mediated Lysis",
+            "C1q, C3b Opsonin, Membrane Attack Complex",
+            "ABO Incompatible Hemolytic Transfusion Reactions"
+          ],
+          [
+            "Phagocytosis via Fc Receptors",
+            "Splenic Macrophage FcgR, Reticuloendothelial Clearance",
+            "Immune Thrombocytopenic Purpura, Autoimmune Hemolytic Anemia"
+          ],
+          [
+            "Neutrophil Matrix Activation",
+            "Frustrated Phagocytosis, Proteases, ROS",
+            "Goodpasture Anti-GBM Disease, Pemphigus Vulgaris"
+          ],
+          [
+            "Receptor Dysfunction",
+            "Agonistic or Blocking Antibodies to Receptors",
+            "Graves Disease (Agonist), Myasthenia Gravis (Antagonist)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Circulating IgG autoantibodies directed against Rh blood group antigens on erythrocyte membranes coat red cells without triggering immediate intravascular lysis. Splenic cord macrophages recognize erythrocyte-bound IgG via surface Fc-gamma receptors, phagocytosing membrane fragments to produce rigid microspherocytes in **warm autoimmune hemolytic anemia**.",
+      "say": "IgG-coated red cells undergo partial phagocytosis in splenic cords, producing microspherocytes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/warm-autoimmune-hemolytic-anemia-fig1.webp",
+        "alt": "Autoimmune hemolytic anemia with spherocytes and Coombs test positivity",
+        "caption": "Extravascular splenic destruction of IgG-coated erythrocytes in warm autoimmune hemolytic anemia."
+      }
+    },
+    {
+      "tx": "In immune thrombocytopenia, pathogenic IgG autoantibodies typically target platelet surface glycoprotein IIb/IIIa or Ib/IX complexes. Opsonized circulating platelets undergo premature receptor-mediated phagocytic clearance by splenic and hepatic macrophages, precipitating isolated profound thrombocytopenia, petechiae, and mucosal bleeding characteristic of **immune thrombocytopenic purpura (ITP)**.",
+      "say": "Anti-glycoprotein IIb/IIIa autoantibodies cause splenic macrophage clearance of platelets in ITP.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/itp-fig1.webp",
+        "alt": "Anti-glycoprotein autoantibody destruction of platelets in immune thrombocytopenia",
+        "caption": "Splenic macrophage clearance of autoantibody-coated platelets causing severe thrombocytopenia."
+      }
+    },
+    {
+      "tx": "The classical prototype of antibody-mediated basement membrane injury involves autoantibodies directed against the non-collagenous NC1 domain of the alpha-3 chain of type IV collagen. Concurrently attacking glomerular and pulmonary alveolar capillary basement membranes, this life-threatening autoimmune disorder is **Goodpasture syndrome**.",
+      "say": "Goodpasture syndrome involves anti-alpha-3 type IV collagen antibodies attacking lungs and kidneys.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/goodpasture-fig1.webp",
+        "alt": "Anti-GBM disease showing pulmonary alveolar hemorrhage and crescentic glomerulonephritis",
+        "caption": "Linear IgG deposition on glomerular basement membranes and severe alveolar hemorrhage in Goodpasture."
+      }
+    },
+    {
+      "tx": "Direct immunofluorescence microscopy of diagnostic renal biopsy specimens in Goodpasture syndrome reveals continuous, uninterrupted linear ribbon-like deposition of IgG and complement C3 along capillary loops. This pathognomonic pattern of **linear basement membrane immunofluorescence** contrasts sharply with irregular granular immune complex deposits.",
+      "say": "Linear ribbon-like IgG immunofluorescence along basement membranes is pathognomonic of Goodpasture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Linear In Situ Pattern (Type II)",
+          "points": [
+            "Antibodies bind evenly along fixed intrinsic basement membrane antigens",
+            "Produces smooth, continuous, ribbon-like linear immunofluorescence",
+            "Pathognomonic of anti-GBM disease and Goodpasture syndrome",
+            "Induces rapidly progressive crescentic necrotizing glomerulonephritis"
+          ]
+        },
+        "right": {
+          "title": "Granular Immune Complex Pattern (Type III)",
+          "points": [
+            "Circulating antigen-antibody complexes deposit irregularly in vessel walls",
+            "Produces coarse, discontinuous, lumpy-bumpy granular immunofluorescence",
+            "Seen in lupus nephritis, post-streptococcal GN, and membranous nephropathy",
+            "Distribution depends on complex size, charge, and hemodynamics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In Goodpasture syndrome, anti-GBM antibodies activate the classical complement cascade, generating chemotactic peptides C3a and C5a. Recruited neutrophils adhere to basement membranes and attempt phagocytosis; unable to engulf the continuous matrix, they release lysosomal proteases and reactive oxygen species during **frustrated phagocytosis**.",
+      "say": "Neutrophils adhering to basement membranes release proteases via frustrated phagocytosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "anti_gbm_binding",
+            "label": "Anti-Type IV Collagen IgG Binds Glomerular Basement Membrane"
+          },
+          {
+            "id": "complement_fixation",
+            "label": "C1q Activation Releases Potent Chemotactic Fragment C5a"
+          },
+          {
+            "id": "neutrophil_recruitment",
+            "label": "Neutrophils Engage Antibody Fc Domains via Surface FcgR"
+          },
+          {
+            "id": "matrix_destruction",
+            "label": "Frustrated Phagocytosis Releases Elastase Producing Crescentic Necrosis"
+          }
+        ],
+        "edges": [
+          [
+            "anti_gbm_binding",
+            "complement_fixation"
+          ],
+          [
+            "complement_fixation",
+            "neutrophil_recruitment"
+          ],
+          [
+            "neutrophil_recruitment",
+            "matrix_destruction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antibodies can directly alter cell physiology without causing cell death or recruitment of inflammatory cells. In Graves disease, autoantibodies bind and stimulate the thyroid-stimulating hormone receptor, driving hyperthyroidism, while in myasthenia gravis, antibodies block and downregulate acetylcholine receptors, causing **antibody-mediated receptor dysfunction**.",
+      "say": "Antibodies can stimulate or block physiological receptors without destroying the target cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pathogenic_antibody",
+            "label": "Synthesis of High-Affinity IgG Directed Against Cell Receptors"
+          },
+          {
+            "id": "receptor_binding",
+            "label": "Antibody Binds Extracellular Hormone or Neurotransmitter Pocket"
+          },
+          {
+            "id": "functional_modulation",
+            "label": "Constitutive Activation (Graves) or Receptor Internalization (Myasthenia)"
+          },
+          {
+            "id": "endocrine_paralysis",
+            "label": "Produces Endocrine Hyperthyroidism or Post-Synaptic Muscle Weakness"
+          }
+        ],
+        "edges": [
+          [
+            "pathogenic_antibody",
+            "receptor_binding"
+          ],
+          [
+            "receptor_binding",
+            "functional_modulation"
+          ],
+          [
+            "functional_modulation",
+            "endocrine_paralysis"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}
