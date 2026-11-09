@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-metabolism-excretion",
+  "subject": "pharmacology",
+  "title": "Glucuronidation, Acetylation, and Hofmann Elimination Pathways",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hepatic drug biotransformation converts lipophilic xenobiotics into polar, water-soluble metabolites for renal or biliary excretion. While Phase I reactions introduce functional polar groups through oxidation, reduction, or hydrolysis, Phase II pathways involve synthetic conjugation of endogenous substrates to facilitate elimination. The most prevalent and quantitatively significant Phase II metabolic pathway in humans is **glucuronidation**, catalysed by microsomal UDP-glucuronosyltransferases located within the endoplasmic reticulum of hepatocytes and intestinal enterocytes.",
+      "say": "Glucuronidation represents the most common Phase II synthetic pathway, attaching glucuronic acid to xenobiotics in the endoplasmic reticulum.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase II conjugation pathway",
+          "Endogenous donor substrate",
+          "Transferase enzyme family",
+          "Subcellular location"
+        ],
+        "rows": [
+          [
+            "Glucuronidation",
+            "UDP-glucuronic acid",
+            "UDP-glucuronosyltransferase (UGT)",
+            "Microsomal (endoplasmic reticulum)"
+          ],
+          [
+            "Sulfation",
+            "PAPS (3'-phosphoadenosine-5'-phosphosulfate)",
+            "Sulfotransferase (SULT)",
+            "Cytosolic"
+          ],
+          [
+            "Acetylation",
+            "Acetyl coenzyme A",
+            "N-acetyltransferase (NAT1, NAT2)",
+            "Cytosolic"
+          ],
+          [
+            "Glutathione conjugation",
+            "Reduced glutathione (GSH)",
+            "Glutathione S-transferase (GST)",
+            "Cytosolic and microsomal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conjugation by UDP-glucuronosyltransferase requires the activated cofactor uridine diphosphate glucuronic acid to attach a glucuronosyl moiety to hydroxyl, carboxyl, amino, or sulfhydryl groups. This enzymatic transformation yields inactive, water-soluble glucuronide conjugates that are actively excreted into bile or urine. Clinically prominent substrates undergoing extensive glucuronidation include paracetamol, morphine, chloramphenicol, and endogenous **bilirubin conjugation**, whose hepatic clearance relies heavily on the UGT1A1 isoenzyme.",
+      "say": "Active cofactor uridine diphosphate glucuronic acid transfers to drug functional groups, producing water-soluble excretion products.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/the-hyperbilirubinemias-fig1.webp",
+        "alt": "Hepatic glucuronidation and bilirubin metabolism",
+        "caption": "Hepatic bilirubin metabolism and glucuronide conjugation by UDP-glucuronosyltransferase, the microsomal enzyme system mediating Phase II drug glucuronidation."
+      }
+    },
+    {
+      "tx": "Deficient glucuronidation capacity in premature neonates leads to severe toxicity because hepatic expression of UDP-glucuronosyltransferase matures slowly over the first few months of life. When chloramphenicol is administered to neonates with immature UGT activity, unconjugated drug accumulates and inhibits mitochondrial protein synthesis. This results in vomiting, hypothermia, progressive cyanosis, and fatal circulatory collapse known as **gray baby syndrome**, necessitating strict dose reduction or alternative antimicrobial selection.",
+      "say": "Immature neonatal UDP-glucuronosyltransferase activity causes chloramphenicol accumulation, resulting in the life-threatening gray baby syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neonatal hepatic vulnerability",
+          "points": [
+            "Low UGT1A1 enzyme expression",
+            "Impaired chloramphenicol clearance",
+            "Toxic mitochondrial inhibition",
+            "Ashen-grey cyanosis and vascular collapse"
+          ]
+        },
+        "right": {
+          "title": "Adult hepatic clearance",
+          "points": [
+            "Mature microsomal UGT capacity",
+            "Rapid glucuronide conjugation",
+            "Predictable renal and biliary excretion",
+            "Normal systemic clearance kinetics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cytosolic conjugation transferring an acetyl group from acetyl coenzyme A onto aromatic amine or hydrazine functional groups is termed **acetylation**. This reaction is mediated by hepatic N-acetyltransferase isoenzymes, predominantly NAT2, and generates acetylated metabolites that are frequently less soluble in acidic urine than the parent compound. In humans, genetic polymorphisms in the NAT2 gene determine distinct metabolic phenotypes categorized as rapid or slow acetylators.",
+      "say": "Cytosolic N-acetyltransferase uses acetyl coenzyme A to metabolize hydrazine and aromatic amine compounds like isoniazid.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "drug",
+            "label": "Aromatic amine or hydrazine drug"
+          },
+          {
+            "id": "nat2",
+            "label": "Hepatic cytosolic NAT2 enzyme"
+          },
+          {
+            "id": "metabolite",
+            "label": "N-acetylated excretion metabolite"
+          }
+        ],
+        "edges": [
+          [
+            "drug",
+            "nat2"
+          ],
+          [
+            "nat2",
+            "metabolite"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Approximately fifty percent of Indian and Caucasian populations are homozygous for recessive NAT2 alleles and are classified as **slow acetylators**. When treated with standard doses of isoniazid, slow acetylators achieve prolonged plasma concentrations and elevated toxicity, manifesting as peripheral neuropathy caused by pyridoxine depletion. Furthermore, slow acetylator status predisposes individuals to hydralazine-induced and procainamide-induced systemic lupus erythematosus characterized by circulating anti-histone antibodies.",
+      "say": "Slow acetylators accumulate parent drugs like isoniazid, heightening risks of peripheral neuropathy and drug-induced lupus erythematosus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Acetylator phenotype",
+          "NAT2 genotype",
+          "Plasma drug half-life",
+          "Characteristic clinical complications"
+        ],
+        "rows": [
+          [
+            "Slow acetylator",
+            "Homozygous recessive alleles",
+            "Prolonged (approx 3 hours for isoniazid)",
+            "Isoniazid neuropathy, hydralazine lupus, dapsone toxicity"
+          ],
+          [
+            "Rapid acetylator",
+            "Homozygous or heterozygous dominant",
+            "Shortened (approx 1 hour for isoniazid)",
+            "Therapeutic failure, isoniazid hepatotoxicity from reactive acetylhydrazine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapeutic paracetamol administration primarily undergoes Phase II glucuronidation and sulfation to non-toxic water-soluble conjugates. However, a minor fraction of paracetamol is oxidized by CYP2E1 into the highly reactive, electrophilic intermediate N-acetyl-p-benzoquinone imine. Hepatocytes detoxify this toxic intermediate through conjugation with **reduced glutathione**, but when high doses deplete hepatic glutathione stores below thirty percent of normal, NAPQI covalently binds liver proteins causing centrilobular hepatic necrosis.",
+      "say": "Depletion of hepatic reduced glutathione allows reactive paracetamol metabolites to bind hepatocellular proteins and cause acute hepatic necrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-paracetamol.webp",
+        "alt": "Paracetamol metabolism pathways",
+        "caption": "Paracetamol metabolism illustrating predominant Phase II glucuronidation and sulfation, with toxic NAPQI generation occurring when conjugation pathways saturate."
+      }
+    },
+    {
+      "tx": "Spontaneous, non-enzymatic molecular cleavage occurring directly within plasma and interstitial fluid at physiological pH and body temperature is designated **Hofmann elimination**. This quaternary ammonium degradation process proceeds independently of hepatic microsomal metabolism and renal clearance mechanisms. Because it relies exclusively on ambient chemical conditions rather than organ perfusion or enzymatic capacity, clearance remains constant even during profound organ shutdown.",
+      "say": "Hofmann elimination cleaves molecules non-enzymatically at physiological pH and temperature without hepatic or renal clearance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "parent",
+            "label": "Atracurium quaternary ammonium"
+          },
+          {
+            "id": "cleavage",
+            "label": "Spontaneous non-enzymatic cleavage"
+          },
+          {
+            "id": "products",
+            "label": "Laudanosine and monoquaternary alcohol"
+          }
+        ],
+        "edges": [
+          [
+            "parent",
+            "cleavage"
+          ],
+          [
+            "cleavage",
+            "products"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The prototypic neuromuscular blocking agent undergoing spontaneous Hofmann elimination is **atracurium**, which degrades alongside ester hydrolysis into laudanosine and acidic fragments. The purified cis-isomer cisatracurium undergoes predominantly Hofmann degradation and produces substantially lower laudanosine concentrations, reducing potential epileptogenic central nervous system stimulation. Both agents serve as neuromuscular blockers of choice in patients suffering from end-stage renal disease or acute fulminant hepatic failure.",
+      "say": "Atracurium and cisatracurium undergo Hofmann elimination, making them ideal muscle relaxants in renal and hepatic failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atracurium and cisatracurium",
+          "points": [
+            "Spontaneous Hofmann degradation",
+            "Unaffected by renal or hepatic failure",
+            "Duration of block remains predictable",
+            "Metabolite laudanosine crosses blood-brain barrier"
+          ]
+        },
+        "right": {
+          "title": "Vecuronium and rocuronium",
+          "points": [
+            "Hepatic metabolism and biliary excretion",
+            "Partial renal tubular elimination",
+            "Prolonged neuromuscular blockade in liver disease",
+            "Minimal risk of central nervous system excitation"
+          ]
+        }
+      }
+    }
+  ]
+}

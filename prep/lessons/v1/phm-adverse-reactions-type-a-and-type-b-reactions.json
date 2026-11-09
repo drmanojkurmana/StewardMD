@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phm-adverse-reactions",
+  "subject": "pharmacology",
+  "title": "Type A and Type B Adverse Drug Reactions, Idiosyncrasy, Teratogenicity, and Drug Allergy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Unintended, noxious responses occurring at doses normally employed in humans for prophylaxis, diagnosis, or therapy are classified by Rawlins and Thompson into distinct pathophysiological categories. The vast majority of clinical adverse events belong to **Type A and type B reactions**, representing predictable dose-dependent versus unpredictable idiosyncratic categories. Type A (Augmented) reactions represent exaggerated expressions of normal pharmacological actions, accounting for eighty percent of all adverse reactions with high morbidity but relatively low mortality.",
+      "say": "Adverse drug reactions divide into Type A dose-dependent augmented effects and Type B unpredictable bizarre reactions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ADR Category",
+          "Pathophysiological mechanism",
+          "Dose dependency",
+          "Clinical example"
+        ],
+        "rows": [
+          [
+            "Type A (Augmented)",
+            "Predictable extension of known pharmacology",
+            "Directly dose-dependent",
+            "Bleeding from warfarin, bradycardia from beta-blockers"
+          ],
+          [
+            "Type B (Bizarre)",
+            "Unpredictable immune allergy or pharmacogenetics",
+            "Dose-independent (microgram triggers)",
+            "Anaphylaxis from penicillin, SJS from carbamazepine"
+          ],
+          [
+            "Type C (Chronic)",
+            "Cumulative tissue toxicity over prolonged exposure",
+            "Time and cumulative dose dependent",
+            "Adrenal suppression from prednisolone, analgesic nephropathy"
+          ],
+          [
+            "Type D (Delayed)",
+            "Manifests long after drug cessation",
+            "Variable latency",
+            "Teratogenicity from thalidomide, secondary malignancies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In stark contrast to predictable Type A toxicities, Type B reactions are completely independent of normal therapeutic pharmacology and can be triggered by minute trace amounts of drug. Commonly displaying severe morbidity and high mortality, Type B adverse events encompass immunological drug hypersensitivity, idiosyncratic reactions, and malignant hyperthermia. Because they exhibit no dose dependency and cannot be predicted from standard preclinical animal screening, clinical management demands immediate permanent **drug discontinuation**.",
+      "say": "Type B bizarre reactions are dose-independent, carry high mortality, and require immediate permanent drug discontinuation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type A (Augmented) ADRs",
+          "points": [
+            "Predictable from known pharmacology",
+            "Dose-dependent severity and incidence",
+            "Managed by dosage reduction",
+            "High incidence; low case mortality"
+          ]
+        },
+        "right": {
+          "title": "Type B (Bizarre) ADRs",
+          "points": [
+            "Unpredictable from pharmacology",
+            "Dose-independent; trace exposures trigger event",
+            "Requires permanent drug cessation",
+            "Lower incidence; high case fatality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Immunologically mediated adverse responses involving prior sensitization and antigen-specific antibodies or T-lymphocytes are classified as **drug allergy**. Most pharmaceutical compounds have molecular weights below one thousand daltons and are too small to act as complete immunogens independently. Instead, they function as reactive chemical haptens, binding covalently to endogenous tissue proteins to form immunogenic drug-protein conjugates that stimulate Gell and Coombs Type I, II, III, or IV hypersensitivity cascades.",
+      "say": "Low-molecular-weight drugs act as haptens, binding carrier proteins to trigger Gell and Coombs hypersensitivity reactions.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergy-anaphylaxis-immunodeficiency-long-case-fig1.webp",
+        "alt": "Gell and Coombs hypersensitivity classification",
+        "caption": "Gell and Coombs classification of immunological hypersensitivity reactions underlying Type B drug allergies from immediate IgE anaphylaxis to delayed cell-mediated dermatitis."
+      }
+    },
+    {
+      "tx": "When a sensitized patient encounters a drug allergen, pre-formed IgE antibodies crosslink high-affinity Fc-epsilon receptors on basophils and mast cells, triggering explosive degranulation. Massive systemic release of histamine, tryptase, leukotrienes, and platelet-activating factor produces acute bronchospasm, laryngeal oedema, widespread urticaria, and cardiovascular collapse. This severe life-threatening manifestation of **anaphylactic drug shock** necessitates immediate intramuscular injection of adrenaline into the anterolateral thigh to counteract vasodilation and bronchial constriction.",
+      "say": "IgE crosslinking on mast cells triggers explosive histamine release in anaphylaxis, requiring immediate intramuscular adrenaline in the anterolateral thigh.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/drug-allergy-fig1.webp",
+        "alt": "Drug allergy pathophysiology and hapten binding",
+        "caption": "Pathophysiology of drug allergy showing low-molecular-weight hapten conjugation with tissue proteins triggering immune receptor recognition and inflammatory mediator release."
+      }
+    },
+    {
+      "tx": "Genetically determined abnormal reactivity to a chemical compound that is not mediated by the immune system is designated **idiosyncrasy**. These qualitative abnormalities occur exclusively in individuals carrying specific metabolic enzyme deficiencies or atypical receptors. Classical examples include barbiturate-induced acute porphyria in patients with latent hepatic porphyria, succinylcholine-induced prolonged apnoea in individuals with atypical plasma pseudocholinesterase, and severe haemolytic crisis following primaquine in glucose-6-phosphate dehydrogenase deficiency.",
+      "say": "Idiosyncrasy represents genetically determined abnormal reactivity unrelated to immune mechanisms, such as primaquine haemolysis in G6PD deficiency.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Idiosyncratic reaction",
+          "Culprit drug trigger",
+          "Underlying genetic defect",
+          "Pathophysiological outcome"
+        ],
+        "rows": [
+          [
+            "Acute intermittent porphyria",
+            "Barbiturates, sulfonamides",
+            "Porphobilinogen deaminase deficiency",
+            "Heme enzyme induction, porphyrin accumulation, severe abdominal pain and neurosis"
+          ],
+          [
+            "Prolonged muscular paralysis",
+            "Succinylcholine, mivacurium",
+            "Atypical plasma pseudocholinesterase (BCHE)",
+            "Failure to hydrolyse neuromuscular blocker, prolonged apnoea"
+          ],
+          [
+            "Acute oxidative haemolysis",
+            "Primaquine, dapsone, rasburicase",
+            "Glucose-6-phosphate dehydrogenase deficiency",
+            "Erythrocyte glutathione depletion, Heinz bodies, intravascular haemolysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adverse drug exposure that induces structural malformations or permanent functional deficits in the developing fetus during intrauterine gestation is termed **teratogenicity**. Susceptibility is strictly dependent upon gestational timing: exposure during blastogenesis within the first two weeks yields an all-or-none phenomenon of death or complete recovery. The critical period of maximum vulnerability occurs during organogenesis between gestational days eighteen and fifty-five, when organ systems form and are susceptible to catastrophic anatomical disruption.",
+      "say": "Teratogenic vulnerability peaks during organogenesis between days eighteen and fifty-five post-conception, causing severe anatomical malformations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "blastogenesis",
+            "label": "Days 0 to 17: Pre-differentiation (All-or-none: death or survival)"
+          },
+          {
+            "id": "organogenesis",
+            "label": "Days 18 to 55: Organogenesis (Maximum teratogenic risk)"
+          },
+          {
+            "id": "histogenesis",
+            "label": "Day 56 to term: Foetogenesis (Growth retardation & functional defects)"
+          }
+        ],
+        "edges": [
+          [
+            "blastogenesis",
+            "organogenesis"
+          ],
+          [
+            "organogenesis",
+            "histogenesis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most notorious historical teratogenic disaster occurred in the late 1950s following widespread marketing of **thalidomide** as a sedative and antiemetic for morning sickness. Ingested during days twenty to thirty-six of gestation, thalidomide caused catastrophic limb reduction anomalies known as phocomelia, alongside external ear absence, cardiac septal defects, and intestinal atresia. Modern molecular investigations demonstrate that thalidomide binds cereblon, an E3 ubiquitin ligase component, promoting aberrant degradation of embryonic transcription factors essential for limb bud outgrowth.",
+      "say": "Thalidomide binding to cereblon causes phocomelia seal-limb defects during organogenesis, catalyzing modern international drug safety laws.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thalidomide teratogenicity",
+          "points": [
+            "Inhibits limb outgrowth during days 20 to 36",
+            "Binds cereblon E3 ubiquitin ligase",
+            "Phocomelia (seal-like rudimentary limbs)",
+            "Spurred modern drug regulatory legislation"
+          ]
+        },
+        "right": {
+          "title": "Valproate teratogenicity",
+          "points": [
+            "Interferes with folate and histone acetylation",
+            "Exposure during neural tube closure (day 28)",
+            "Spina bifida and meningomyelocele",
+            "Characteristic fetal valproate facial syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systematic postmarketing surveillance and adverse event reporting are essential for detecting rare, delayed, and unexpected drug toxicities in real-world clinical practice. The World Health Organization coordinates global safety monitoring through the Uppsala Monitoring Centre, collecting spontaneous individual case safety reports. Clinicians utilize causality assessment algorithms such as the **Naranjo algorithm** to determine whether an adverse clinical event is causally related to drug administration based on rechallenge and dechallenge responses.",
+      "say": "The Naranjo algorithm and WHO Uppsala Monitoring Centre provide standardized frameworks for assessing drug causality in adverse events.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Naranjo algorithm score",
+          "Causality category",
+          "Key contributing criteria",
+          "Regulatory action implication"
+        ],
+        "rows": [
+          [
+            "Score 9 or higher",
+            "Definite ADR",
+            "Positive rechallenge, specific antagonist response, toxic drug level",
+            "Immediate mandatory pharmacovigilance report"
+          ],
+          [
+            "Score 5 to 8",
+            "Probable ADR",
+            "Follows plausible temporal sequence, improves on dechallenge",
+            "Product label warning update consideration"
+          ],
+          [
+            "Score 1 to 4",
+            "Possible ADR",
+            "Could be explained by disease or co-medication",
+            "Safety database signal detection entry"
+          ],
+          [
+            "Score 0 or less",
+            "Doubtful ADR",
+            "Implausible timing or negative dechallenge",
+            "Unrelated concurrent medical event"
+          ]
+        ]
+      }
+    }
+  ]
+}
