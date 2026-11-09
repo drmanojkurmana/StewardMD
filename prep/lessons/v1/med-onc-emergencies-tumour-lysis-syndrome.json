@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-onc-emergencies",
+ "subject": "medicine",
+ "title": "Oncological Emergencies: TLS, Hypercalcaemia, and SVC Obstruction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A life-threatening metabolic emergency resulting from massive, rapid release of intracellular ions and nucleic acid metabolic breakdown products into the systemic circulation following cytotoxic chemotherapy for high-grade haematological malignancies is **tumour lysis syndrome** (TLS). Classically triggered in Burkitt lymphoma and acute lymphoblastic leukaemia, rapid lysis overwhelms renal excretory capacity.",
+   "say": "A life-threatening metabolic emergency resulting from rapid release of intracellular contents into the bloodstream following cytotoxic chemotherapy is tumour lysis syndrome. Classically seen in Burkitt lymphoma and acute leukaemia, rapid cell breakdown overwhelms renal excretory capacity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tumour-lysis-syndrome-fig1.webp",
+    "alt": "Metabolic hallmarks, ionic derangements, and acute renal failure in tumour lysis syndrome.",
+    "caption": "Hyperuricaemia, hyperkalaemia, hyperphosphataemia, and acute renal failure in TLS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The laboratory diagnostic definition of tumour lysis syndrome under the Cairo-Bishop classification requires two or more metabolic derangements occurring within three days before or seven days after chemotherapy: hyperkalaemia (potassium over six millimoles per litre), hyperphosphataemia (phosphate over 4.5 milligrams per decilitre), **hyperuricaemia** (uric acid over eight milligrams per decilitre), and secondary hypocalcaemia (calcium under seven).",
+   "say": "The laboratory diagnosis of tumour lysis syndrome under Cairo-Bishop criteria requires two or more metabolic derangements: hyperkalaemia above six, hyperphosphataemia above 4.5, hyperuricaemia above eight, and secondary hypocalcaemia under seven milligrams per decilitre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Cairo-Bishop Diagnostic Threshold",
+     "Primary Pathological Hazard"
+    ],
+    "rows": [
+     [
+      "Hyperkalaemia",
+      "Serum Potassium >= 6.0 mmol/L (or 25% increase)",
+      "Fatal cardiac ventricular arrhythmias and asystole"
+     ],
+     [
+      "Hyperphosphataemia",
+      "Serum Phosphate >= 4.5 mg/dL (or 25% increase)",
+      "Calcium phosphate precipitation in renal tubules"
+     ],
+     [
+      "Hyperuricaemia",
+      "Serum Uric Acid >= 8.0 mg/dL (or 25% increase)",
+      "Acute uric acid nephropathy and obstructive AKI"
+     ],
+     [
+      "Hypocalcaemia",
+      "Corrected Calcium <= 7.0 mg/dL (or 25% decrease)",
+      "Tetany, carpopedal spasm, seizures, QT prolongation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Catabolism of cellular purine nucleic acids yields insoluble uric acid, which precipitates within acidic distal renal tubules, causing acute obstructive nephropathy. The preferred recombinant urate oxidase enzyme for prophylaxis and treatment of established high-risk hyperuricaemia is **rasburicase**. Rasburicase enzymatically cleaves uric acid into allantoin, an inactive metabolite that is ten times more water-soluble.",
+   "say": "Catabolism of nucleic acids yields insoluble uric acid, which precipitates in distal tubules, causing obstructive kidney failure. The preferred recombinant urate oxidase enzyme for treating severe hyperuricaemia is rasburicase, which converts uric acid into highly water-soluble allantoin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pur",
+      "label": "Purine Nucleic Acid Breakdown"
+     },
+     {
+      "id": "allop",
+      "label": "Allopurinol Blocks Xanthine Oxidase (Inhibits New Uric Acid)"
+     },
+     {
+      "id": "rasb",
+      "label": "Rasburicase Degrades Existing Uric Acid into Soluble Allantoin"
+     }
+    ],
+    "edges": [
+     [
+      "pur",
+      "allop"
+     ],
+     [
+      "allop",
+      "rasb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common metabolic life-threatening complication of cancer is **hypercalcaemia of malignancy**, occurring in up to thirty percent of advanced tumours. The dominant mechanism in eighty percent of cases is humoral hypercalcaemia mediated by tumour secretion of parathyroid hormone-related protein (PTHrP) by squamous cell carcinomas (lung, head and neck, esophagus), which stimulates osteoclasts and renal tubular calcium reabsorption.",
+   "say": "The most common metabolic life-threatening complication of cancer is hypercalcaemia of malignancy. The dominant mechanism in eighty percent of cases is tumour secretion of parathyroid hormone-related protein by squamous cell carcinomas, which accelerates osteoclast bone resorption.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Associated Malignancies",
+     "Biochemical Laboratory Profile"
+    ],
+    "rows": [
+     [
+      "Humoral (PTHrP Secretion)",
+      "Squamous cell (lung, cervix), renal cell, breast",
+      "Elevated PTHrP, suppressed intact PTH, low 1,25-Vit D"
+     ],
+     [
+      "Osteolytic Metastases",
+      "Breast carcinoma, Multiple Myeloma",
+      "Normal PTHrP, suppressed intact PTH, high bone turnover"
+     ],
+     [
+      "1,25-Vit D (Calcitriol) Excess",
+      "Hodgkin and Non-Hodgkin Lymphomas",
+      "Elevated 1,25-(OH)2-D3, suppressed intact PTH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute emergency management of severe hypercalcaemia (serum calcium exceeding fourteen milligrams per decilitre) requires aggressive intravenous volume expansion with normal isotonic saline (two-hundred to five-hundred millilitres per hour) to restore renal glomerular filtration and promote urinary calcium excretion. Once euvolemic, long-term suppression of osteoclast-mediated bone resorption is achieved with intravenous **zoledronic acid**.",
+   "say": "Acute management of severe hypercalcaemia requires aggressive intravenous volume expansion with normal saline to restore glomerular filtration and promote calciuresis. Once volume is restored, long-term suppression of osteoclastic bone resorption is achieved with intravenous zoledronic acid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sal",
+      "label": "Aggressive IV Isotonic Saline (3-4 L/day)"
+     },
+     {
+      "id": "calc",
+      "label": "Subcutaneous Calcitonin (Rapid Bridge for 48 hr)"
+     },
+     {
+      "id": "bis",
+      "label": "IV Zoledronic Acid (4 mg) Halts Osteoclasts"
+     }
+    ],
+    "edges": [
+     [
+      "sal",
+      "calc"
+     ],
+     [
+      "calc",
+      "bis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extrinsic compression or intravascular invasion of the thin-walled superior vena cava by mediastinal malignancies (small cell lung cancer, non-small cell lung cancer, non-Hodgkin lymphoma) produces **superior vena cava syndrome**. Patients present with dyspnoea, facial and neck swelling, dilated collateral venous networks across the anterior chest wall, and a positive Pemberton sign upon elevating both arms above the head.",
+   "say": "Extrinsic compression of the superior vena cava by mediastinal tumours produces superior vena cava syndrome. Patients present with dyspnea, facial and neck edema, prominent collateral veins across the chest wall, and facial flushing upon raising both arms, termed Pemberton sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/svc-obstruction-fig1.webp",
+    "alt": "Anatomical compression and venous collateral network in superior vena cava obstruction.",
+    "caption": "Mediastinal compression of the superior vena cava and chest wall collateral pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency management of superior vena cava syndrome depends on the clinical stability and underlying histology. In severe airway compromise or cerebral oedema, urgent endovascular superior vena cava **stenting** provides immediate symptomatic decompression within twenty-four to forty-eight hours, while chemosensitive tumours like small cell lung carcinoma or lymphoma respond rapidly to systemic chemotherapy.",
+   "say": "Emergency management of superior vena cava syndrome depends on clinical stability. In severe airway compromise, urgent endovascular superior vena cava stenting provides immediate symptomatic relief, while chemosensitive tumours like small cell lung cancer respond rapidly to chemotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "obst",
+      "label": "Severe SVC Compression with Stridor / Cerebral Edema"
+     },
+     {
+      "id": "stent",
+      "label": "Emergency Endovascular SVC Stenting"
+     },
+     {
+      "id": "rad",
+      "label": "Targeted Radiotherapy OR Systemic Chemotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "obst",
+      "stent"
+     ],
+     [
+      "stent",
+      "rad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extremely elevated circulating blast counts exceeding one-hundred thousand cells per microlitre in acute myeloid leukaemia trigger intravascular microvascular plugging and tissue hypoxemia, designated as **leukostasis**. Manifesting as acute respiratory failure, headache, blurred vision, and intracranial haemorrhage, treatment mandates emergency cytoreduction using oral hydroxyurea, aggressive hydration, and urgent induction chemotherapy.",
+   "say": "Extremely elevated blast counts exceeding one-hundred thousand in acute myeloid leukaemia cause microvascular plugging and tissue hypoxemia, designated as leukostasis. Presenting with respiratory distress, visual blurring, and stroke risk, treatment requires emergency cytoreduction with hydroxyurea.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oncological Emergency",
+     "Pathophysiological Mechanism",
+     "Immediate First-Line Intervention"
+    ],
+    "rows": [
+     [
+      "Tumour Lysis Syndrome",
+      "Massive intracellular ion / purine release",
+      "Aggressive hydration + IV Rasburicase"
+     ],
+     [
+      "Hypercalcaemia of Malignancy",
+      "PTHrP mediated osteoclastic resorption",
+      "IV Normal Saline + IV Zoledronic acid"
+     ],
+     [
+      "Superior Vena Cava Syndrome",
+      "Mediastinal venous outflow compression",
+      "Head elevation, endovascular stenting, RT"
+     ],
+     [
+      "Leukostasis Syndrome",
+      "Leukaemic blast sludging (WBC > 100k)",
+      "Oral Hydroxyurea + urgent induction chemotherapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 104"
+}

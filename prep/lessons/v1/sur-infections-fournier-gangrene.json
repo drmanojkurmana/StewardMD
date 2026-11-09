@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sur-infections",
+ "subject": "surgery",
+ "title": "Fournier Gangrene, Gas Gangrene, and Clostridial Myonecrosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A fulminant form of necrotising fasciitis involving the male external genitalia and perineum is designated as **Fournier gangrene**. First recognized by Jean-Alfred Fournier in 1883, the infection most commonly arises from anorectal disease, urogenital trauma, or cutaneous perineal breaks. It occurs with predilection in men between fifty and seventy years of age with predisposing comorbidities, particularly diabetes mellitus, chronic alcoholism, cirrhosis, and immunosuppressive conditions.",
+   "say": "Fournier gangrene is a severe necrotising infection of the perineum and external genitalia. It arises from anorectal or urogenital infections, predominantly affecting men with diabetes or alcoholism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source of Infection",
+     "Primary Anatomical Trigger",
+     "Microbial Characteristics"
+    ],
+    "rows": [
+     [
+      "Anorectal origin (30-50%)",
+      "Perianal abscess, ischiorectal fistula, rectal tear",
+      "Mixed colonic flora, Bacteroides, E. coli"
+     ],
+     [
+      "Urogenital origin (20-40%)",
+      "Urethral stricture, catheter trauma, periurethral extravasation",
+      "Pseudomonas, Klebsiella, enterococci, Proteus"
+     ],
+     [
+      "Cutaneous origin (20%)",
+      "Hidradenitis suppurativa, scrotal scratch, insect bite",
+      "Staphylococcus aureus, Streptococcus pyogenes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rapid anatomical spread of Fournier gangrene follows well-defined continuous fascial layers. Bacterial proliferation begins in the perineum along Colles fascia, spreading anteriorly into the scrotum and penis along Dartos fascia, and ascending onto the anterior abdominal wall along **Scarpa fascia**. Notably, the testes are classically spared from necrosis because their arterial supply arises directly from the abdominal aorta and courses through the retroperitoneum independently of perineal fascia.",
+   "say": "Infection spreads along Colles, Dartos, and Scarpa fascia onto the abdominal wall. Remarkably, the testes are spared because their vascular supply arises directly from the abdominal aorta.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "colles",
+      "label": "Perineal focus: initial necrosis along Colles fascia"
+     },
+     {
+      "id": "dartos",
+      "label": "Scrotum and penis: anterior extension along Dartos fascia"
+     },
+     {
+      "id": "scarpa",
+      "label": "Abdominal wall: superior spread along Scarpa fascia"
+     },
+     {
+      "id": "testes",
+      "label": "Testes spared: protected by independent testicular arteries"
+     }
+    ],
+    "edges": [
+     [
+      "colles",
+      "dartos"
+     ],
+     [
+      "dartos",
+      "scarpa"
+     ],
+     [
+      "dartos",
+      "testes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microbiological examination of debrided tissue in Fournier gangrene reveals a synergistic **polymicrobial infection** combining obligate anaerobes and facultative aerobes. Aerobic bacteria consume tissue oxygen and produce catalase and superoxide dismutase, creating an ideal hypoxic environment for anaerobic proliferation. Anaerobic bacteria release heparinase, collagenase, and hyaluronidase, which digest extracellular connective tissue and trigger extensive microvascular thrombosis of subcutaneous nutrient vessels.",
+   "say": "Fournier gangrene features synergistic polymicrobial flora where aerobes consume oxygen, allowing anaerobes to thrive. Bacterial enzymes trigger microvascular thrombosis and rapid tissue necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aerobic Microorganisms",
+     "points": [
+      "Escherichia coli, Klebsiella, Proteus",
+      "Consume localized oxygen rapidly",
+      "Produce enzymes that break down barriers",
+      "Drive high early fever and leukocytosis"
+     ]
+    },
+    "right": {
+     "title": "Anaerobic Microorganisms",
+     "points": [
+      "Bacteroides fragilis, Clostridium species",
+      "Produce heparinase causing vessel thrombosis",
+      "Release lecithinase and volatile fatty acids",
+      "Produce foul odor and tissue crepitus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical presentation begins with scrotal discomfort and fever, progressing within hours to severe pain, tense oedema, and cutaneous erythema. As microvascular thrombosis starves the skin of perfusion, necrotic black patches and bullae appear, representing advanced **gangrenous necrosis**. Gentle palpation frequently elicits subcutaneous crepitus from bacterial gas production. A foul-smelling dishwater discharge drains from necrotic tissue as systemic septic shock rapidly develops.",
+   "say": "Patients present with scrotal pain and erythema, which rapidly progresses to black necrotic skin patches and crepitus. Microvascular thrombosis leads to gangrenous tissue shedding and septic shock.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-wet-gangrene-foot.webp",
+    "alt": "Wet gangrene specimen displaying swollen putrefied tissue.",
+    "caption": "Wet gangrenous necrosis displaying extensive tissue liquefaction and discoloration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Management mandates aggressive fluid resuscitation, correction of electrolyte disturbances, and immediate broad-spectrum intravenous antibiotics combining a carbapenem, vancomycin, and **clindamycin**. Clindamycin is especially valuable because it acts directly on bacterial ribosomes to suppress the synthesis of lethal bacterial exotoxins. Emergency surgical exploration must never be delayed for imaging; surgeons perform radical debridement of all necrotic scrotal skin and devitalised fascia until healthy bleeding tissue is exposed.",
+   "say": "Treatment requires aggressive fluid resuscitation and broad-spectrum antibiotics, including clindamycin to shut down bacterial toxin synthesis. Emergency surgical debridement must proceed immediately without delay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "res",
+      "label": "Rapid fluid resuscitation and broad-spectrum IV antimicrobials"
+     },
+     {
+      "id": "deb",
+      "label": "Emergency radical debridement of necrotic scrotum and perineum"
+     },
+     {
+      "id": "foley",
+      "label": "Suprapubic catheter or diverting stoma if sphincter involved"
+     },
+     {
+      "id": "recon",
+      "label": "Delayed scrotal reconstruction or testicular thigh pockets"
+     }
+    ],
+    "edges": [
+     [
+      "res",
+      "deb"
+     ],
+     [
+      "deb",
+      "foley"
+     ],
+     [
+      "foley",
+      "recon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A distinct and fulminant soft tissue emergency characterized by rapidly advancing muscular necrosis is **gas gangrene**, also termed clostridial myonecrosis. Typically following deep, contaminated crush injuries, open compound fractures, or contaminated agricultural trauma, infection develops within one to three days. Patients experience sudden, excruciating wound pain that appears strikingly disproportionate to early physical signs, accompanied by tachycardia, pallor, and profound apprehension.",
+   "say": "Gas gangrene is a life-threatening clostridial infection of skeletal muscle following contaminated crush injuries. Patients suffer excruciating pain disproportionate to initial physical signs alongside systemic toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Necrotising Fasciitis",
+     "points": [
+      "Involves skin, subcutaneous fat, and fascia",
+      "Skeletal muscle is completely spared",
+      "Polymicrobial or Group A Streptococcus",
+      "Spreads along anatomical fascial planes"
+     ]
+    },
+    "right": {
+     "title": "Clostridial Myonecrosis",
+     "points": [
+      "Primarily invades and destroys skeletal muscle",
+      "Muscle fails to bleed or contract with stimulus",
+      "Driven by Clostridium perfringens",
+      "Profound systemic haemolysis and toxaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The principal causative organism in over eighty percent of gas gangrene cases is the Gram-positive, anaerobic, spore-forming bacillus **Clostridium perfringens**. C. perfringens produces lethal alpha-toxin, a zinc metalloenzyme possessing phospholipase C and sphingomyelinase activities. Alpha-toxin hydrolyzes cell membrane phospholipids, causing widespread capillary endothelial destruction, platelet aggregation, and catastrophic intravascular haemolysis that rapidly precipitates acute renal failure and refractory shock.",
+   "say": "Clostridium perfringens causes over eighty percent of gas gangrene cases. Its lethal alpha-toxin destroys host cell membranes and triggers widespread intravascular haemolysis and circulatory collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clostridial Toxin",
+     "Biochemical Activity",
+     "Pathophysiological Impact"
+    ],
+    "rows": [
+     [
+      "Alpha-toxin (lecithinase)",
+      "Phospholipase C membrane lysis",
+      "Myonecrosis, capillary destruction, massive haemolysis"
+     ],
+     [
+      "Theta-toxin (perfringolysin O)",
+      "Cholesterol-dependent cytolysin",
+      "Direct myocardial depression, vascular leukostasis"
+     ],
+     [
+      "Kappa-toxin (collagenase)",
+      "Proteolytic enzyme",
+      "Rapid breakdown of connective tissue scaffolds"
+     ],
+     [
+      "Hyaluronidase",
+      "Ground substance degradation",
+      "Facilitates rapid anatomical spread through tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upon surgical inspection, the affected muscle appears swollen, dull red or cooked-meat brown, and completely fails to bleed or contract upon gentle forceps stimulation or electrocautery. Examination of tissue fluid reveals abundant Gram-positive rods with a conspicuous absence of intact neutrophils, as toxins destroy host leukocytes. Radical surgical excision of all non-viable muscle, high-dose intravenous penicillin G, and consideration of adjuvant **hyperbaric oxygen** are crucial to halt this lethal disease.",
+   "say": "Involved muscle appears dull brown and fails to contract or bleed when stimulated. Radical surgical excision of dead muscle, high-dose penicillin, and hyperbaric oxygen are vital to save life.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-dry-gangrene-foot.webp",
+    "alt": "Mummified gangrene specimen showing tissue devitalisation.",
+    "caption": "Devitalised tissue pathology demonstrating complete loss of muscular perfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 7"
+}

@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "sur-wound-healing",
+ "subject": "surgery",
+ "title": "Chronic Ulcers, Marjolin Ulcer, and Negative Pressure Wound Therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Wounds that fail to progress through orderly stages of repair within three months are classified as a **chronic ulcer**. Chronic wounds remain arrested in a self-perpetuating inflammatory cycle characterized by elevated levels of matrix metalloproteinases, degraded extracellular scaffolding, and senescent, unresponsive dermal fibroblasts. The most prevalent chronic lower extremity ulcers include venous stasis ulcers, arterial ischemic ulcers, and neuropathic diabetic foot lesions.",
+   "say": "Wounds that fail to heal within three months are classified as chronic ulcers. These lesions remain trapped in an inflammatory state where excess proteases degrade tissue matrix faster than cells can synthesize it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ulcer Etiology",
+     "Typical Anatomical Location",
+     "Clinical Ulcer Base Appearance",
+     "Peripheral Vascular Pulses"
+    ],
+    "rows": [
+     [
+      "Venous stasis ulcer",
+      "Gaiter area (above medial malleolus)",
+      "Shallow, irregular, pink granulation, wet",
+      "Normal palpable peripheral pulses"
+     ],
+     [
+      "Arterial ischemic ulcer",
+      "Distal toes, heel, bony prominences",
+      "Punched-out, deep, pale, dry, necrotic slough",
+      "Absent or diminished pedal pulses"
+     ],
+     [
+      "Neuropathic ulcer",
+      "Plantar aspect of metatarsal heads",
+      "Deep, painless, surrounded by thick callus",
+      "Palpable pulses with sensory neuropathy"
+     ],
+     [
+      "Decubitus pressure ulcer",
+      "Sacrum, greater trochanter, ischium",
+      "Full thickness crater with undermining edges",
+      "Dependent on patient repositioning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant transformation arising within long-standing, chronic, non-healing cutaneous scars is designated as a **Marjolin ulcer**. First described following burn cicatrices, this aggressive malignancy can also develop within chronic osteomyelitis sinus tracts, longstanding venous stasis ulcers, and irradiated skin. The typical latency interval between initial cutaneous injury and malignant transformation spans twenty to thirty years, though accelerated cases can arise within months.",
+   "say": "A Marjolin ulcer is an aggressive cutaneous malignancy arising within long-standing burn scars or chronic sinus tracts. The transformation typically occurs after twenty to thirty years of persistent inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "burn",
+      "label": "Full-thickness thermal burn or chronic draining osteomyelitis"
+     },
+     {
+      "id": "scar",
+      "label": "Avascular, unstable scar with recurrent breakdown over decades"
+     },
+     {
+      "id": "mut",
+      "label": "Chronic irritation drives malignant epithelial dysplasia"
+     },
+     {
+      "id": "mal",
+      "label": "Invasive squamous cell carcinoma breaks through scar base"
+     }
+    ],
+    "edges": [
+     [
+      "burn",
+      "scar"
+     ],
+     [
+      "scar",
+      "mut"
+     ],
+     [
+      "mut",
+      "mal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classical clinical hallmark of Marjolin transformation is sudden growth, foul odor, bleeding, or induration with a characteristic **everted edge**. While chronic venous ulcers feature shallow sloping borders, malignant transformation produces exuberant exophytic vegetative tissue or an invasive ulcer with rolled, everted margins. Multiple full-thickness incisional punch or wedge biopsies taken from the suspicious indurated margin are mandatory to establish the histological diagnosis.",
+   "say": "Malignant transformation is marked by sudden rapid growth, bleeding, and rolled everted edges. Clinicians must perform full-thickness biopsies of suspicious edges to confirm histological diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign Chronic Ulcer",
+     "points": [
+      "Flat or sloping ulcer borders",
+      "Stable size without sudden vegetation",
+      "Thin, uniform serous exudate",
+      "Responds gradually to compression therapy"
+     ]
+    },
+    "right": {
+     "title": "Marjolin Malignant Ulcer",
+     "points": [
+      "Raised, rolled, or everted margins",
+      "Rapid enlargement with exophytic masses",
+      "Foul bloody discharge and new severe pain",
+      "Destroys underlying deep fascial planes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histologically, the vast majority of Marjolin ulcers represent well to moderately differentiated **squamous cell carcinoma**, although basal cell carcinoma and malignant melanoma occasionally arise. Marjolin squamous carcinomas exhibit a far more aggressive clinical course than de novo skin cancers. Because the surrounding scar tissue is dense, avascular, and lacks normal lymphatic networks, tumor emboli frequently bypass local barriers to metastasize early to regional lymph nodes once malignant cells breach the fibrotic scar capsule.",
+   "say": "Most Marjolin ulcers are squamous cell carcinomas. Because the dense fibrotic scar lacks normal lymphatic defenses, breaching cells metastasize rapidly to regional lymph nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Characteristic",
+     "De Novo Squamous Cell Carcinoma",
+     "Marjolin Scar Carcinoma"
+    ],
+    "rows": [
+     [
+      "Predisposing background",
+      "Solar-damaged skin (actinic keratosis)",
+      "Chronic burn cicatrices, osteomyelitis sinuses"
+     ],
+     [
+      "Biological aggression",
+      "Slow local invasion, late metastasis",
+      "Rapid local destruction and early nodal spread"
+     ],
+     [
+      "Regional node involvement",
+      "< 5% at initial presentation",
+      "Up to 30% to 40% positive regional nodes"
+     ],
+     [
+      "Five-year overall survival",
+      "> 85% with surgical excision",
+      "40% to 60% due to advanced recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management of a confirmed Marjolin ulcer requires **wide local excision** with at least two-centimetre three-dimensional clear margins extending down to deep investing muscular fascia or periosteum. If underlying bone exhibits cortical invasion on cross-sectional computed tomography, segmental bone resection or limb amputation becomes necessary. Regional lymph node dissection is indicated for clinically palpable or cytologically proven nodal metastases.",
+   "say": "Definitive management demands wide local excision with at least two centimetre margins down to deep fascia. Palpable regional lymphadenopathy requires formal lymph node dissection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bx",
+      "label": "Edge wedge biopsy confirms invasive squamous cell carcinoma"
+     },
+     {
+      "id": "stg",
+      "label": "CT/MRI staging: assess deep bone invasion and nodal status"
+     },
+     {
+      "id": "wle",
+      "label": "Wide local excision with >= 2 cm margin down to deep fascia"
+     },
+     {
+      "id": "rec",
+      "label": "Defect reconstruction via split skin graft or local flap"
+     }
+    ],
+    "edges": [
+     [
+      "bx",
+      "stg"
+     ],
+     [
+      "stg",
+      "wle"
+     ],
+     [
+      "wle",
+      "rec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In preparing complex chronic wounds or post-excision tissue deficits for grafting, clinicians utilize **negative pressure wound therapy**. This modality applies subatmospheric pressure ranging from negative seventy-five to negative one hundred and twenty-five millimetres of mercury across the wound bed using open-cell polyurethane foam and an adhesive occlusive drape. The subatmospheric force continuously evacuates inhibitory interstitial oedema, clears excessive wound exudate, and reduces the local bacterial bioburden.",
+   "say": "Negative pressure wound therapy applies subatmospheric suction across open wounds using polyurethane foam. It evacuates tissue oedema, removes inflammatory exudate, and accelerates granulation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+    "alt": "Debridement and preparation of wound bed for negative pressure therapy.",
+    "caption": "Surgical preparation of open wound bed prior to subatmospheric therapy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "At the cellular level, negative pressure creates **macrostrain and microstrain** across the tissue bed. Macrostrain exerts physical suction that draws the wound margins inward, reducing the three-dimensional surface area of the defect. Microstrain exerts cellular micro-deformation across fibroblast and endothelial cell membranes, activating mechanotransduction pathways that upregulate vascular endothelial growth factor, stimulate rapid angiogenesis, and produce exuberant, healthy pink granulation tissue within days.",
+   "say": "Negative pressure exerts macrostrain that draws margins inward, and microstrain that stretches cell membranes. This mechanotransduction upregulates growth factors and accelerates angiogenesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Macrostrain Effects",
+     "points": [
+      "Physical centripetal contraction of wound borders",
+      "Evacuates third-space fluid and reduces dead space",
+      "Directly removes toxic matrix metalloproteinases",
+      "Decompresses compressed microvasculature"
+     ]
+    },
+    "right": {
+     "title": "Microstrain Effects",
+     "points": [
+      "Physical stretching of cellular membranes",
+      "Triggers intracellular phosphorylation cascades",
+      "Upregulates VEGF, FGF, and collagen synthesis",
+      "Drives robust granulation tissue formation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Handling delicate tissues and securing sponges during complex wound care requires appropriate surgical forceps like **toothed dissecting forceps**. Often termed tissue forceps, these instruments feature fine interdigitating teeth at their tips that grasp tough subcutaneous fascia and skin securely without crushing adjacent capillaries. Once robust granulation tissue covers the wound floor under negative pressure, surgeons can safely proceed with definitive split-thickness skin grafting.",
+   "say": "Grasping skin margins during wound debridement requires toothed dissecting forceps. These instruments grip tissue securely without crushing capillaries, preparing beds for definitive skin grafts.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-toothed-dissecting-forceps.webp",
+    "alt": "Toothed dissecting tissue forceps.",
+    "caption": "Toothed dissecting forceps for secure tissue handling during wound debridement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 6, 16"
+}

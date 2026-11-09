@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "sur-wound-healing",
+ "subject": "surgery",
+ "title": "Factors Delaying Wound Healing and Suture Materials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Normal wound repair requires adequate vascular perfusion, cellular energy substrates, and meticulous tissue handling. Multiple systemic and local **factors delaying healing** can arrest the biological cascade in a prolonged, unproductive inflammatory state. Local hindrances include wound infection, tissue ischaemia, foreign bodies, prior ionizing radiation, and excessive suture tension, whereas systemic deterrents encompass diabetes mellitus, severe malnutrition, advanced age, and chronic glucocorticoid use.",
+   "say": "Normal repair requires adequate vascular supply and nutritional substrates. Local factors such as infection and ischaemia, combined with systemic issues like diabetes and malnutrition, delay wound closure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Key Risk Factors",
+     "Cellular Impact",
+     "Clinical Mitigation"
+    ],
+    "rows": [
+     [
+      "Local tissue factors",
+      "Infection, hematoma, severe tension, devitalised tissue",
+      "Bacterial proteases degrade collagen matrix",
+      "Sharp debridement, drainage, tension-free closure"
+     ],
+     [
+      "Vascular perfusion",
+      "Peripheral arterial disease, smoking, vasoconstriction",
+      "Tissue hypoxia halts neutrophil bacterial clearance",
+      "Oxygenation, smoking cessation, revascularisation"
+     ],
+     [
+      "Metabolic state",
+      "Uncontrolled hyperglycemia (HbA1c > 8%)",
+      "Impaired leukocyte chemotaxis and phagocytosis",
+      "Strict perioperative glycemic control (insulin)"
+     ],
+     [
+      "Nutritional deficit",
+      "Hypoalbuminaemia (< 3 g/dL), zinc and vitamin C loss",
+      "Impaired collagen hydroxylation and matrix crosslinking",
+      "Enteral nutritional supplementation and vitamins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Among pharmacological agents, systemic corticosteroids severely impair all phases of wound repair by inhibiting macrophage migration, suppressing transforming growth factor beta, and halting capillary angiogenesis. Systemic **vitamin A** administration reversibly counteracts corticosteroid-induced wound healing impairment. Given orally or topically at ten to twenty-five thousand international units daily, vitamin A stimulates lysosomal enzyme release and reactivates dormant macrophage signaling without blunting systemic anti-inflammatory benefits.",
+   "say": "Systemic corticosteroids arrest wound repair by suppressing macrophages and halting capillary growth. Administering vitamin A restores macrophage signaling and overcomes steroid-induced healing inhibition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Corticosteroid Effects",
+     "points": [
+      "Inhibits macrophage recruitment and activation",
+      "Downregulates collagen synthesis and TGF-beta",
+      "Blunts early inflammatory and proliferative phases",
+      "Significantly increases wound dehiscence risk"
+     ]
+    },
+    "right": {
+     "title": "Vitamin A Reversal",
+     "points": [
+      "Reactivates monocyte and macrophage function",
+      "Stimulates fibroplasia and collagen deposition",
+      "Restores epithelialisation across incision",
+      "Does not reverse chemotherapy-induced deficits"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Selecting appropriate **suture materials** is essential for maintaining mechanical tissue apposition until the biological wound develops sufficient intrinsic tensile strength. Sutures are classified according to their physical structure as monofilament or braided multifilament, and according to their biological degradation profile as absorbable or non-absorbable. Monofilament threads pass smoothly through delicate tissue with minimal friction, whereas braided threads offer superior knot security but harbor bacteria within their interstitial crevices.",
+   "say": "Suture selection depends on tensile demands and biological degradation. Monofilament sutures pass smoothly through tissue with low infection risk, whereas braided filaments provide superior handling and knot security.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-suture-materials.webp",
+    "alt": "Suture materials comparative illustration and structural classification.",
+    "caption": "Surgical suture materials displaying monofilament and multifilament characteristics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sutures that undergo biological degradation and lose their tensile strength within sixty days are designated as **absorbable sutures**. Natural catgut is derived from purified bovine submucosa and degraded enzymatically by tissue phagocytes, inducing considerable inflammation. In modern practice, synthetic polymers such as polyglactin 910 and polyglycolic acid are preferred, as they undergo predictable, non-inflammatory hydrolytic degradation while maintaining fifty percent tensile strength at two to three weeks.",
+   "say": "Absorbable sutures lose tensile strength within sixty days. Modern synthetic sutures like polyglactin break down via predictable hydrolysis, producing minimal tissue reaction compared to traditional catgut.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Suture Polymer",
+     "Structural Filament",
+     "50% Tensile Strength Time",
+     "Complete Hydrolysis Absorption",
+     "Common Use"
+    ],
+    "rows": [
+     [
+      "Polyglactin 910 (Vicryl)",
+      "Braided synthetic",
+      "14 to 21 days",
+      "60 to 90 days",
+      "Subcutaneous fat, bowel anastomosis"
+     ],
+     [
+      "Polydioxanone (PDS)",
+      "Monofilament synthetic",
+      "28 to 35 days",
+      "180 to 210 days",
+      "Abdominal wall fascia, biliary duct"
+     ],
+     [
+      "Poliglecaprone 25 (Monocryl)",
+      "Monofilament synthetic",
+      "7 to 10 days",
+      "90 to 120 days",
+      "Subcuticular skin closure, urinary bladder"
+     ],
+     [
+      "Plain surgical catgut",
+      "Collagenous twisted",
+      "4 to 7 days",
+      "10 to 14 days",
+      "Rapid mucosal repair, scrotal skin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Among synthetic non-absorbable monofilaments, **polypropylene** represents the premier material for vascular and fascial surgery. Composed of an extruded stereoisomer of polypropylene polymer, this thread possesses an exceptionally smooth hydrophobic surface that glides through fragile arterial endothelium without drag. Polypropylene generates negligible foreign-body tissue reaction and maintains its baseline tensile strength indefinitely within human tissue, resisting hydrolytic and enzymatic breakdown.",
+   "say": "Polypropylene is an inert non-absorbable monofilament ideal for vascular anastomoses and abdominal wall repair. It glides smoothly without drag and preserves permanent tensile strength in tissues.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polypropylene (Prolene)",
+     "points": [
+      "Synthetic monofilament polymer",
+      "Indefinite permanent tensile strength",
+      "Negligible foreign-body tissue reactivity",
+      "Gold standard for vascular anastomoses and hernia mesh"
+     ]
+    },
+    "right": {
+     "title": "Surgical Silk",
+     "points": [
+      "Natural protein multifilament braid",
+      "Loses tensile strength over 1 to 2 years",
+      "Pronounced foreign-body inflammatory reaction",
+      "High capillary action potentiating infection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Precise suture placement demands suitable surgical instruments, prominently including the **Mayo-Hegar needle holder**. This instrument features cross-hatched tungsten carbide jaw inserts designed to grip curved surgical needles firmly without twisting or slipping during deep fascial bites. Surgeons place the needle clamp two-thirds of the distance from the needle point to prevent structural bending, passing the curved needle perpendicular to the tissue plane.",
+   "say": "Surgical suturing requires proper instrumentation, notably the Mayo-Hegar needle holder. Its tungsten carbide jaws grip curved needles firmly at the two-thirds position to ensure controlled tissue passage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-mayo-hegar-needle-holder.webp",
+    "alt": "Mayo-Hegar surgical needle holder.",
+    "caption": "Mayo-Hegar needle holder with cross-hatched jaws for secure needle handling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Closing high-tension abdominal wall incisions requires careful adherence to the **Jenkins rule** of wound closure. To prevent postoperative incisional herniation and burst abdomen, the suture length should measure at least four times the total length of the wound incision. Continuous bites of slow-absorbing monofilament like polydioxanone must be taken at least one centimetre from the cut fascial edge and placed one centimetre apart without excessive strangulating tension.",
+   "say": "Closing abdominal fascia requires adherence to the Jenkins rule, using a suture length at least four times the wound length. Sutures are placed one centimetre from the edge and spaced one centimetre apart.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rule",
+      "label": "Measure wound length: prepare 4-to-1 suture-to-wound length ratio"
+     },
+     {
+      "id": "bite",
+      "label": "Take 10 mm bites from cut linea alba or anterior rectus sheath"
+     },
+     {
+      "id": "space",
+      "label": "Advance 10 mm between consecutive continuous suture passes"
+     },
+     {
+      "id": "tens",
+      "label": "Maintain gentle tension to appose edges without tissue necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "rule",
+      "bite"
+     ],
+     [
+      "bite",
+      "space"
+     ],
+     [
+      "space",
+      "tens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When severe malnutrition, wound contamination, or prolonged shock compromise tissue integrity, **wound dehiscence** can result. This complication manifests typically between postoperative days five and eight as sudden serosanguinous pink fluid leakage from the operative dressing. Prompt recognition of this warning sign is critical; acute dehiscence can lead to full-thickness fascial separation with bowel evisceration, requiring immediate sterile covering and urgent return to the operating room for repair.",
+   "say": "Wound dehiscence typically presents between days five and eight with sudden serosanguinous fluid soaking the dressing. Recognizing this warning sign allows prompt surgical re-closure before bowel evisceration occurs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Incisional Hernia (Late)",
+     "Acute Burst Abdomen (Early)"
+    ],
+    "rows": [
+     [
+      "Timing of onset",
+      "Months to years following surgery",
+      "Postoperative day 5 to 10"
+     ],
+     [
+      "Clinical presentation",
+      "Painless expansile bulge with cough impulse",
+      "Profuse salmon-pink discharge, exposed viscera"
+     ],
+     [
+      "Skin bridge",
+      "Intact, stretched overlying skin",
+      "Completely parted skin and separated fascia"
+     ],
+     [
+      "Immediate management",
+      "Elective repair with sublay synthetic mesh",
+      "Emergency resuscitation and operative closure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 6"
+}

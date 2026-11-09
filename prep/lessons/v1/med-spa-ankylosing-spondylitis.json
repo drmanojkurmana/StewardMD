@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "med-spa",
+ "subject": "medicine",
+ "title": "Spondyloarthropathies and Ankylosing Spondylitis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A chronic inflammatory arthritis of the axial skeleton characterized by pathological new bone formation and ligamentous ossification defines **ankylosing spondylitis**. Strongly associated with human leukocyte antigen HLA-B27, misfolding of HLA-B27 heavy chains triggers endoplasmic reticulum stress and excessive activation of the interleukin-23/interleukin-17 cytokine axis. Young men present with inflammatory back pain featuring insidious onset before age forty, morning stiffness lasting over thirty minutes, and relief with physical exercise rather than rest. Night pain waking the patient during the second half of the night is characteristic.",
+   "say": "A chronic inflammatory arthritis of the axial skeleton characterized by pathological new bone formation and ligamentous ossification defines ankylosing spondylitis. Strongly associated with HLA-B27, misfolding of heavy chains triggers endoplasmic reticulum stress and activation of the interleukin-23/interleukin-17 axis. Young men present with inflammatory back pain featuring insidious onset, morning stiffness over thirty minutes, and improvement with exercise. Night pain waking the patient is characteristic.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ankylosing-spondylitis-fig1.webp",
+    "alt": "Whole-body magnetic resonance imaging showing bilateral active sacroiliitis and spinal enthesitis.",
+    "caption": "Axial MRI demonstrating bilateral subchondral bone marrow oedema in active sacroiliitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic hallmark and earliest radiographic manifestation of axial spondyloarthritis affects the articulation between the sacrum and ilium. Demonstrating bilateral symmetrical **sacroiliitis** on plain pelvic radiographs or magnetic resonance imaging fulfills modified New York diagnostic criteria. Early radiographic changes display pseudo-widening of the joint space from subchondral bone resorption, followed by subchondral sclerosis, erosions, and eventual complete bony ankylosis. Magnetic resonance imaging with short tau inversion recovery (STIR) sequences detects active subchondral bone marrow oedema years before structural changes appear on conventional plain radiography.",
+   "say": "The diagnostic hallmark and earliest radiographic manifestation of axial spondyloarthritis affects the articulation between the sacrum and ilium. Demonstrating bilateral symmetrical sacroiliitis on plain radiography or MRI fulfills diagnostic criteria. Early changes display pseudo-widening from subchondral resorption, followed by sclerosis, erosions, and complete bony ankylosis. MRI STIR sequences detect active bone marrow oedema years before structural changes appear on plain radiographs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sacroiliitis Grade",
+     "Radiographic Appearance on Plain X-Ray",
+     "MRI STIR Characteristic",
+     "Clinical Classification"
+    ],
+    "rows": [
+     [
+      "Grade 0",
+      "Normal joint architecture",
+      "Normal bone marrow signal",
+      "Non-radiographic axial SpA (if STIR+)"
+     ],
+     [
+      "Grade 1",
+      "Suspicious changes, blurred margins",
+      "Early subchondral bone marrow oedema",
+      "Active inflammatory phase"
+     ],
+     [
+      "Grade 2",
+      "Minimal sclerosis with minor erosions",
+      "Confluent bone marrow oedema + capsulitis",
+      "Radiographic axial SpA (Ankylosing Spondylitis)"
+     ],
+     [
+      "Grade 3",
+      "Definite sclerosis, severe erosions, joint narrowing",
+      "Structural fat metaplasia & sclerosis",
+      "Advanced structural damage"
+     ],
+     [
+      "Grade 4",
+      "Complete bony ankylosis (fusion)",
+      "Quiescent fibrous / bony bridge",
+      "End-stage fused sacroiliac joint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic inflammation at the insertions of the anulus fibrosus into vertebral bodies stimulates progressive osteogenic syndesmophyte formation. Progressive calcification of the anterior and lateral spinal ligaments produces thin, vertical, delicate syndesmophytes that bridge adjacent vertebral bodies, resulting in complete spinal fusion termed **bamboo spine**. Vertebrae lose their normal anterior concavity, acquiring a squared appearance on lateral radiographs. Complete ankylosis makes the rigid spine brittle like a chalk stick, predisposing patients to catastrophic transvertebral fractures and epidural haematomas after minor low-energy falls.",
+   "say": "Chronic inflammation at the insertions of the anulus fibrosus into vertebral bodies stimulates progressive syndesmophyte formation. Progressive ossification of spinal ligaments produces thin, vertical syndesmophytes that bridge adjacent vertebral bodies, producing complete spinal fusion termed bamboo spine. Vertebrae lose their anterior concavity, becoming squared on lateral radiographs. This complete fusion makes the spine brittle, predisposing patients to catastrophic fractures after minor falls.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ankylosing-spondylitis-fig2.webp",
+    "alt": "Anatomical schematic and spinal radiograph showing bamboo spine and syndesmophyte formation.",
+    "caption": "Progressive intervertebral syndesmophyte bridging and anterior longitudinal ligament ossification producing bamboo spine. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Objective clinical assessment of spinal mobility and lumbar flexion restriction utilizes a simple standardised bedside measurement. Performing the **modified schober test** requires marking the lumbosacral junction (level of the dimples of Venus) and a point ten centimetres cephalad while the patient stands erect. The patient bends forward maximally with knees fully extended. Normal lumbar spinal flexion increases the distance between the two marks by more than five centimetres (total distance > 15 cm). An expansion of less than four centimetres indicates significant lumbar hypomobility, reflecting active or structural ankylosing spondylitis.",
+   "say": "Objective clinical assessment of spinal mobility and lumbar flexion restriction utilizes a simple bedside measurement. Performing the modified schober test requires marking the lumbosacral junction and a point ten centimetres cephalad while the patient stands erect. The patient then bends forward maximally with knees extended. Normal lumbar flexion increases the distance between the two marks by more than five centimetres. An expansion under four centimetres indicates significant lumbar restriction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stand",
+      "label": "Patient Stands Erect: Mark Lumbosacral Dimples of Venus (L5-S1)"
+     },
+     {
+      "id": "mark",
+      "label": "Mark Second Point Exactly 10 cm Cephalad"
+     },
+     {
+      "id": "flex",
+      "label": "Patient Bends Forward Maximally with Knees Straight"
+     },
+     {
+      "id": "eval",
+      "label": "Measure New Distance: Normal Increase > 5 cm (Abnormal < 4 cm)"
+     }
+    ],
+    "edges": [
+     [
+      "stand",
+      "mark"
+     ],
+     [
+      "mark",
+      "flex"
+     ],
+     [
+      "flex",
+      "eval"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inflammation localized to the anatomical insertion sites of tendons, ligaments, and joint capsules into bone represents the primary pathological lesion. Pathognomonic **enthesitis** characteristically targets the insertion of the Achilles tendon and plantar fascia into the calcaneus, producing severe, debilitating heel pain. Furthermore, acute anterior uveitis (iritis) represents the commonest extra-articular manifestation, striking thirty percent of patients. Presenting unilaterally with acute ocular pain, photophobia, blurred vision, and ciliary flush, prompt administration of topical corticosteroid and cycloplegic mydriatic eye drops prevents posterior synechiae formation and permanent visual loss.",
+   "say": "Inflammation localized to the anatomical insertion sites of tendons and ligaments into bone represents the primary pathological lesion. Pathognomonic enthesitis characteristically targets the Achilles tendon and plantar fascia insertions into the calcaneus, producing severe heel pain. Furthermore, acute anterior uveitis represents the commonest extra-articular manifestation, presenting unilaterally with eye pain, photophobia, and redness. Topical corticosteroids and cycloplegic drops prevent synechiae formation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Extra-Articular Domain",
+     "Clinical Manifestation",
+     "Anatomical Target",
+     "Therapeutic Management"
+    ],
+    "rows": [
+     [
+      "Ophthalmic",
+      "Acute Anterior Uveitis (Iritis)",
+      "Iris and ciliary body (Unilateral)",
+      "Topical Prednisolone + Cyclopentolate drops"
+     ],
+     [
+      "Cardiovascular",
+      "Aortic Regurgitation & Heart Block",
+      "Aortic root fibrosis, AV conduction node",
+      "Echocardiography, aortic valve replacement"
+     ],
+     [
+      "Pulmonary",
+      "Apical fibrocavitary disease",
+      "Upper pulmonary lobes (Bilateral)",
+      "Screen for secondary Aspergillus fumigatus fungus ball"
+     ],
+     [
+      "Neurological",
+      "Cauda Equina Syndrome",
+      "Thecal sac dural ectasia / arachnoiditis",
+      "MRI lumbosacral spine, surgical decompression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A chronic inflammatory seronegative arthritis occurring in up to thirty percent of individuals with cutaneous psoriasis exhibits diverse clinical phenotypes. In **psoriatic arthritis**, patients develop asymmetric oligoarthritis, symmetrical polyarthritis mimicking rheumatoid arthritis, or distal interphalangeal (DIP) predominant disease paired with prominent nail dystrophy (pitting, onycholysis, oil-drop discoloration). Concurrently, diffuse soft-tissue tenosynovitis of entire digits produces sausage-like fingers or toes, termed dactylitis. Severe joint destruction with extensive periarticular osteolysis and telescoping digits (arthritis mutilans) produces the pathognomonic pencil-in-cup deformity on hand plain radiographs.",
+   "say": "A chronic inflammatory seronegative arthritis occurring in up to thirty percent of patients with cutaneous psoriasis exhibits diverse clinical phenotypes. In psoriatic arthritis, patients develop asymmetric oligoarthritis, distal interphalangeal predominant disease, and nail pitting. Concurrently, diffuse tenosynovitis of entire digits produces sausage-like fingers termed dactylitis. Severe joint osteolysis producing telescoping digits generates the pathognomonic pencil-in-cup deformity on hand radiographs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psoriatic Arthritis",
+     "points": [
+      "DIP joint involvement commonest",
+      "Nail changes: Pitting, onycholysis, oil-drop sign",
+      "Dactylitis ('sausage digits') and enthesitis",
+      "Radiology: 'Pencil-in-cup' deformity, periostitis",
+      "Serology: Rheumatoid Factor & anti-CCP negative"
+     ]
+    },
+    "right": {
+     "title": "Rheumatoid Arthritis",
+     "points": [
+      "MCP and PIP joints; DIP joints strictly spared",
+      "Nails strictly normal",
+      "True dactylitis absent",
+      "Radiology: Marginal bony erosions, osteopenia",
+      "Serology: RF and anti-CCP positive in 80%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acute sterile inflammatory asymmetric oligoarthritis developing one to four weeks following a gastrointestinal or genitourinary infection defines **reactive arthritis**. Historically termed Reiter syndrome, the classic triad comprises non-gonococcal urethritis, acute conjunctivitis, and asymmetric arthritis (can't see, can't pee, can't climb a tree). Common antecedent triggers include Chlamydia trachomatis genital infection, or enteritis caused by Salmonella, Shigella, Yersinia, or Campylobacter. Cutaneous manifestations include keratoderma blennorrhagica (hyperkeratotic pustular palmoplantar plaques) and circinate balanitis. Over eighty percent of affected individuals carry the HLA-B27 allele.",
+   "say": "An acute sterile inflammatory asymmetric oligoarthritis developing several weeks following a mucosal infection defines reactive arthritis. Historically termed Reiter syndrome, the classic triad comprises urethritis, conjunctivitis, and asymmetric arthritis. Antecedent triggers include Chlamydia trachomatis genital infection or enteritis caused by Salmonella, Shigella, or Campylobacter. Cutaneous signs include keratoderma blennorrhagica on the soles and circinate balanitis, strongly associated with HLA-B27.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infectious Trigger Site",
+     "Common Microbial Pathogens",
+     "Clinical Latency Period",
+     "Typical Extra-Articular Triad Feature"
+    ],
+    "rows": [
+     [
+      "Genitourinary",
+      "Chlamydia trachomatis, Ureaplasma",
+      "1 to 3 Weeks post-exposure",
+      "Dysuria, sterile urethritis, cervicitis"
+     ],
+     [
+      "Gastrointestinal (Enteric)",
+      "Salmonella, Shigella, Campylobacter, Yersinia",
+      "1 to 4 Weeks post-diarrhoea",
+      "Asymmetrical inflammatory oligoarthritis"
+     ],
+     [
+      "Ophthalmic",
+      "Immune-mediated sterile inflammation",
+      "Concurrent with arthritis",
+      "Bilateral mucopurulent conjunctivitis"
+     ],
+     [
+      "Dermatological",
+      "Keratoderma blennorrhagica, Circinate balanitis",
+      "Concurrent with arthritis",
+      "Pustular hyperkeratosis of palms and soles"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted biologic monoclonal antibodies neutralizing interleukin-17A achieved remarkable therapeutic efficacy in ankylosing spondylitis and psoriatic arthritis. Administering subcutaneous **secukinumab** or ixekizumab directly binds and neutralizes IL-17A homodimers, blunting synovial enthesial inflammation, halting bone formation, and resolving cutaneous psoriasis. Indicated for active axial spondyloarthritis failing first-line non-steroidal anti-inflammatory drugs (NSAIDs) or TNF inhibitors, IL-17A inhibitors deliver rapid pain relief and functional improvement. Because IL-17A mediates mucosal antifungal defence, patients exhibit an increased incidence of mild mucocutaneous candidiasis and must be screened for inflammatory bowel disease exacerbation.",
+   "say": "Targeted biologic monoclonal antibodies neutralizing interleukin-17A achieved remarkable therapeutic efficacy in ankylosing spondylitis and psoriatic arthritis. Administering subcutaneous secukinumab directly binds and neutralizes IL-17A, blunting enthesial inflammation, slowing abnormal bone formation, and clearing cutaneous psoriasis. Indicated for axial disease failing first-line NSAIDs or TNF inhibitors, IL-17 inhibitors deliver rapid pain relief. Adverse risks include mucocutaneous candidiasis and potential exacerbation of inflammatory bowel disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hla",
+      "label": "HLA-B27 / ER Stress Triggers IL-23 / IL-17 Inflammatory Cascade"
+     },
+     {
+      "id": "secu",
+      "label": "Subcutaneous Secukinumab Directly Neutralizes IL-17A Cytokine"
+     },
+     {
+      "id": "bone",
+      "label": "Suppresses Enthesitis & Halts Osteoblast Syndesmophyte Growth"
+     },
+     {
+      "id": "relief",
+      "label": "Rapid Relief of Inflammatory Back Pain & Peripheral Arthritis"
+     }
+    ],
+    "edges": [
+     [
+      "hla",
+      "secu"
+     ],
+     [
+      "secu",
+      "bone"
+     ],
+     [
+      "bone",
+      "relief"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

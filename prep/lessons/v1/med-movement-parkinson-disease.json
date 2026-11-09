@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-movement",
+ "subject": "medicine",
+ "title": "Parkinson Disease: Clinical Features, Pathology, and Levodopa",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A progressive neurodegenerative movement disorder characterised by striatal dopamine depletion resulting from loss of dopaminergic neurons in the substantia nigra pars compacta is **Parkinson disease**. The clinical diagnosis is anchored by the cardinal motor sign of bradykinesia combined with either resting tremor or muscular rigidity, typically beginning asymmetrically in one limb.",
+   "say": "A progressive neurodegenerative movement disorder characterized by striatal dopamine depletion from loss of dopaminergic neurons in the substantia nigra is Parkinson disease. Diagnosis is anchored by the cardinal sign of bradykinesia combined with resting tremor or rigidity, typically beginning asymmetrically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/parkinsons-disease-fig1.webp",
+    "alt": "Basal ganglia circuitry and dopaminergic degeneration in Parkinson disease.",
+    "caption": "Substantia nigra degeneration and basal ganglia circuitry in Parkinson disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The absolute mandatory motor sign required for the clinical diagnosis of Parkinson disease is **bradykinesia**, defined as slowness of movement initiation paired with progressive reduction in amplitude and speed during repetitive motor actions. It is evaluated through rapid repetitive finger tapping, hand opening and closing, and foot tapping, manifesting functionally as micrographia, hypomimia (masked facies), and soft hypophonic speech.",
+   "say": "The absolute mandatory motor sign required for the diagnosis of Parkinson disease is bradykinesia, defined as slowness of movement initiation with progressive reduction in speed during repetitive actions. It is evaluated through finger tapping, manifesting as micrographia and masked facies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "snc",
+      "label": "Nigrostriatal Dopamine Loss"
+     },
+     {
+      "id": "gpi",
+      "label": "Internal Globus Pallidus Disinhibition"
+     },
+     {
+      "id": "brady",
+      "label": "Thalamocortical Suppression & Bradykinesia"
+     }
+    ],
+    "edges": [
+     [
+      "snc",
+      "gpi"
+     ],
+     [
+      "gpi",
+      "brady"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A low-frequency four to six Hertz involuntary oscillatory movement present when the extremity is completely relaxed and supported against gravity is a **resting tremor**. Classically presenting as a pill-rolling movement between thumb and index finger, the tremor is typically asymmetrical at onset, dampens or disappears during purposeful voluntary target movements, and worsens during mental arithmetic or contralateral limb movements.",
+   "say": "A four to six Hertz involuntary oscillatory movement present when the extremity is completely relaxed is a resting tremor. Classically presenting as a pill-rolling movement between thumb and index finger, it is asymmetrical at onset, dampens during purposeful movements, and worsens during mental stress.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parkinsonian Resting Tremor",
+     "points": [
+      "Frequency 4 to 6 Hz; present at complete rest",
+      "Asymmetrical pill-rolling motion of hands",
+      "Suppressed during active voluntary movement",
+      "Accompanied by bradykinesia and rigidity"
+     ]
+    },
+    "right": {
+     "title": "Essential Postural / Action Tremor",
+     "points": [
+      "Frequency 8 to 12 Hz; present during posture/action",
+      "Symmetrical bilateral hands and often head tremor",
+      "Worsens at end of goal-directed reaching",
+      "Improves with alcohol and beta-blockers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Velocity-independent increased resistance to passive movement throughout the entire range of motion across a joint is termed rigidity. In Parkinson disease, the coexistence of underlying subclinical tremor superimposed on heightened muscular tone produces the classic **cogwheel rigidity**, felt as a rhythmic, ratchet-like clicking resistance during passive flexion and extension of the wrist or elbow.",
+   "say": "Velocity-independent increased resistance to passive movement throughout the full range of motion is termed rigidity. In Parkinson disease, the coexistence of subclinical tremor superimposed on heightened tone produces cogwheel rigidity, felt as a ratchet-like resistance during passive joint manipulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tone Abnormality",
+     "Physiological Type",
+     "Characteristic Physical Examination Finding"
+    ],
+    "rows": [
+     [
+      "Cogwheel Rigidity",
+      "Basal ganglia extrapyramidal",
+      "Ratchet-like rhythmic interruptions; equal in flexors and extensors"
+     ],
+     [
+      "Lead-Pipe Rigidity",
+      "Basal ganglia extrapyramidal",
+      "Smooth, uniform, sustained plastic resistance without tremor"
+     ],
+     [
+      "Spasticity",
+      "Corticospinal pyramidal tract",
+      "Velocity-dependent; clasp-knife catch; preferential in arm flexors/leg extensors"
+     ],
+     [
+      "Gegenhalten (Paratonia)",
+      "Frontal lobe dysfunction",
+      "Resistance proportional to examiner force; patient unable to relax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathological hallmark of Parkinson disease is selective progressive degeneration of pigmented dopaminergic projection neurons within the **substantia nigra** pars compacta. Clinical motor symptoms manifest only after sixty to eighty percent of nigral dopaminergic neurons and striatal dopamine terminals are irreversibly destroyed.",
+   "say": "The pathological hallmark of Parkinson disease is selective progressive degeneration of pigmented dopaminergic neurons within the substantia nigra pars compacta. Clinical motor symptoms manifest only after sixty to eighty percent of nigral dopaminergic terminals are irreversibly destroyed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/parkinsons-disease-fig2.webp",
+    "alt": "Dopamine synthesis, synaptic vesicular transport, and receptor pharmacology.",
+    "caption": "Levodopa decarboxylation, dopamine transporter recycling, and receptor signaling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surviving nigral neurons exhibit spherical, eosinophilic intracytoplasmic inclusions composed predominantly of aggregated, misfolded, insoluble alpha-synuclein protein, universally recognised as **Lewy bodies**. Pathology spreads in an ascending rostral sequence from the dorsal motor nucleus of the vagus and olfactory bulb into the brainstem and cerebral cortex.",
+   "say": "Surviving nigral neurons exhibit spherical eosinophilic intracytoplasmic inclusions composed of aggregated alpha-synuclein, recognized as Lewy bodies. Pathology spreads in an ascending sequence from the vagal dorsal nucleus and olfactory bulb into the brainstem and cerebral cortex.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "syn",
+      "label": "Alpha-Synuclein Misfolding"
+     },
+     {
+      "id": "lewy",
+      "label": "Intracytoplasmic Lewy Bodies"
+     },
+     {
+      "id": "dop",
+      "label": "Progressive Dopaminergic Cell Apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "syn",
+      "lewy"
+     ],
+     [
+      "lewy",
+      "dop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most potent and universally effective pharmacological treatment for symptomatic Parkinson disease is the metabolic dopamine precursor **levodopa** (L-DOPA). Because dopamine cannot cross the blood-brain barrier, levodopa is administered orally and transported across the brain capillary endothelium via the large neutral amino acid transporter, where cerebral aromatic L-amino acid decarboxylase synthesises active dopamine.",
+   "say": "The most effective pharmacological treatment for symptomatic Parkinson disease is the metabolic dopamine precursor levodopa. Because dopamine cannot cross the blood-brain barrier, levodopa is transported into the brain via amino acid transporters, where cerebral decarboxylase synthesises active dopamine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Class",
+     "Representative Drug",
+     "Primary Mechanism in Parkinson Disease"
+    ],
+    "rows": [
+     [
+      "Dopamine Precursor",
+      "Levodopa (L-DOPA)",
+      "Crosses BBB; converted to dopamine by central DOPA decarboxylase"
+     ],
+     [
+      "Peripheral DDCI",
+      "Carbidopa / Benserazide",
+      "Inhibits peripheral decarboxylation; prevents nausea & arrhythmia"
+     ],
+     [
+      "COMT Inhibitor",
+      "Entacapone / Opicapone",
+      "Blocks peripheral breakdown; prolongs levodopa plasma half-life"
+     ],
+     [
+      "MAO-B Inhibitor",
+      "Selegiline / Rasagiline",
+      "Inhibits central dopamine enzymatic breakdown in striatum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To prevent peripheral conversion of levodopa to dopamine outside the central nervous system, levodopa is invariably co-formulated with a peripheral dopa decarboxylase inhibitor such as **carbidopa**. Carbidopa cannot penetrate the blood-brain barrier; by selectively blocking peripheral decarboxylation, it increases the proportion of levodopa entering the brain while preventing peripheral dopaminergic side effects like severe nausea, vomiting, and orthostatic hypotension.",
+   "say": "To prevent peripheral conversion of levodopa outside the central nervous system, levodopa is co-formulated with a peripheral dopa decarboxylase inhibitor such as carbidopa. Carbidopa cannot penetrate the blood-brain barrier, preventing peripheral nausea while increasing central levodopa availability.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "comb",
+      "label": "Oral Levodopa + Carbidopa"
+     },
+     {
+      "id": "per",
+      "label": "Peripheral Decarboxylase Blockade by Carbidopa"
+     },
+     {
+      "id": "cent",
+      "label": "Maximal Levodopa Crosses BBB to Form Central Dopamine"
+     }
+    ],
+    "edges": [
+     [
+      "comb",
+      "per"
+     ],
+     [
+      "per",
+      "cent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 427"
+}

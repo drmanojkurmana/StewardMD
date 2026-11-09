@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "med-lymphoma",
+ "subject": "medicine",
+ "title": "Hodgkin Lymphoma and Staging",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A unique lymphoid neoplasm characterized by a sparse population of neoplastic clonal B cells residing within a massive reactive inflammatory background defines **hodgkin lymphoma**. Exhibiting a bimodal age distribution peaking in young adults (age 20 to 35) and older adults (over 55), patients present with painless, rubbery cervical or supraclavicular lymphadenopathy. Constitutional B symptoms, present in one-third of patients, include unexplained fever exceeding 38°C (occasionally cyclical Pel-Ebstein fever), drenching night sweats, and unintentional loss of over ten percent body weight, carrying negative prognostic implications.",
+   "say": "A unique lymphoid neoplasm characterized by a sparse population of neoplastic B cells residing within a massive reactive background defines hodgkin lymphoma. Exhibiting a bimodal age distribution, patients present with painless, rubbery cervical or supraclavicular lymphadenopathy. Constitutional B symptoms include unexplained fever, drenching night sweats, and unintentional weight loss exceeding ten percent, carrying negative prognostic implications.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hodgkin-lymphoma-fig1.webp",
+    "alt": "Lymph node histopathology showing classic Reed-Sternberg cells surrounded by reactive lymphocytes.",
+    "caption": "Histological section of lymph node demonstrating diagnostic binucleated Reed-Sternberg cells. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histopathological examination of an excisional lymph node biopsy demonstrates pathognomonic multinucleated giant cells originating from germinal center B lymphocytes. Identifying classic **reed-sternberg cells** establishes the diagnosis, featuring a giant bi-lobed or multinucleated cell with prominent inclusion-like eosinophilic nucleoli resembling owl eyes. Although the malignant cells comprise less than one percent of the tumour mass, they secrete cytokines (IL-5, IL-6, IL-10, TGF-beta) that recruit a dense reactive inflammatory infiltrate composed of T cells, eosinophils, plasma cells, and histiocytes.",
+   "say": "Histopathological examination of an excisional lymph node biopsy demonstrates pathognomonic multinucleated giant cells originating from germinal center B lymphocytes. Identifying classic reed-sternberg cells establishes the diagnosis, featuring giant binucleated cells with prominent nucleoli resembling owl eyes. Malignant cells secrete cytokines that recruit a dense inflammatory infiltrate composed of lymphocytes, eosinophils, and histiocytes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Reed-Sternberg Cell",
+     "points": [
+      "Large binucleated or bilobed giant cell",
+      "Prominent inclusion-like 'owl-eye' nucleoli",
+      "Originates from crippled germinal center B cell",
+      "Immunophenotype: CD15+, CD30+, Pax-5 weak",
+      "Negative for CD20 and CD45 in classical types"
+     ]
+    },
+    "right": {
+     "title": "Popcorn Cell (LP Cell)",
+     "points": [
+      "Multilobed 'popcorn' nuclear contours",
+      "Seen in Nodular Lymphocyte Predominant HL",
+      "Preserves active B-cell receptor program",
+      "Immunophenotype: CD20+, CD79a+, CD45+",
+      "Negative for CD15 and CD30"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immunohistochemical profiling provides the definitive seam for classifying Hodgkin lymphoma and distinguishing it from non-Hodgkin lymphomas. Classic Reed-Sternberg cells display intense cell-surface and Golgi-zone positivity for **cd30** (Ki-1 antigen) and CD15 (Leu-M1), while lacking the common leukocyte antigen CD45. CD20 expression is typically absent or weak. In contrast, nodular lymphocyte predominant Hodgkin lymphoma displays lymphocytic and histiocytic (LP) popcorn cells that are strongly positive for CD20, CD79a, and CD45, while consistently negative for CD15 and CD30.",
+   "say": "Immunohistochemical profiling provides the definitive seam for classifying Hodgkin lymphoma and distinguishing it from non-Hodgkin lymphomas. Classic Reed-Sternberg cells display intense positivity for cd30 and cd15, while lacking common leukocyte antigen CD45. CD20 expression is typically absent or weak. In contrast, nodular lymphocyte predominant Hodgkin lymphoma displays popcorn cells that are positive for CD20 and negative for CD15 and CD30.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Subtype",
+     "Malignant Cell Morphology",
+     "Diagnostic Immunophenotype",
+     "Clinical Frequency & Behaviour"
+    ],
+    "rows": [
+     [
+      "Nodular Sclerosis (cHL)",
+      "Lacunar Reed-Sternberg variants, collagen bands",
+      "CD30+, CD15+, CD20-",
+      "65-70% (Young females, mediastinal mass)"
+     ],
+     [
+      "Mixed Cellularity (cHL)",
+      "Classic diagnostic binucleated RS cells",
+      "CD30+, CD15+, CD20-",
+      "20-25% (Older males, EBV positive 70%)"
+     ],
+     [
+      "Lymphocyte-Rich (cHL)",
+      "Occasional classic RS cells, abundant small B cells",
+      "CD30+, CD15+, CD20-",
+      "5% (Favourable clinical prognosis)"
+     ],
+     [
+      "Lymphocyte-Depleted (cHL)",
+      "Abundant pleomorphic RS cells, sparse background",
+      "CD30+, CD15+, CD20-",
+      "1% (Elderly, advanced stage, poor prognosis)"
+     ],
+     [
+      "Nodular Lymphocyte Predominant",
+      "Popcorn cells (LP cells) in large nodules",
+      "CD20+, CD45+, CD30-, CD15-",
+      "5% (Indolent, late recurrences, CD20 targeted)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical staging according to the modified Lugano classification guides therapeutic intensity and determines overall clinical prognosis. Derived from the classic **ann arbor staging** system, stage I denotes involvement of a single lymph node region; stage II involves two or more lymph node regions on the same side of the diaphragm; stage III involves nodal stations on both sides of the diaphragm; and stage IV indicates diffuse or disseminated involvement of one or more extralymphatic organs such as the bone marrow, liver, or lungs.",
+   "say": "Anatomical staging according to the modified Lugano classification guides therapeutic intensity and determines overall clinical prognosis. Derived from the classic ann arbor staging system, stage one denotes a single lymph node region; stage two involves multiple nodal groups on the same side of the diaphragm; stage three involves lymph nodes on both sides of the diaphragm; and stage four indicates disseminated extranodal disease in organs such as liver or bone marrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hodgkin-lymphoma-reed-sternberg-and-staging-fig1.webp",
+    "alt": "Anatomical diagram of Ann Arbor staging classification for Hodgkin lymphoma.",
+    "caption": "Anatomical Ann Arbor staging system stratifying lymph node stations relative to the diaphragm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "First-line combination chemotherapy for classic Hodgkin lymphoma has achieved remarkable long-term cure rates exceeding eighty-five percent. The gold-standard frontline protocol is the **abvd regimen**, comprising doxorubicin (Adriamycin), bleomycin, vinblastine, and dacarbazine administered on days 1 and 15 of a 28-day cycle. Early-stage favourable disease receives two to four cycles with involved-site radiation therapy, whereas advanced-stage disease receives six cycles. Bleomycin induces dose-dependent pulmonary toxicity and interstitial pneumonitis, necessitating baseline pulmonary function testing with carbon monoxide diffusing capacity (DLCO).",
+   "say": "First-line combination chemotherapy for classic Hodgkin lymphoma has achieved remarkable long-term cure rates exceeding eighty-five percent. The gold-standard frontline protocol is the abvd regimen, comprising doxorubicin, bleomycin, vinblastine, and dacarbazine. Early-stage disease receives two to four cycles with involved radiation, whereas advanced disease receives six cycles. Bleomycin carries risks of pulmonary fibrosis, requiring baseline lung function testing with diffusing capacity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chemotherapy Agent",
+     "Pharmacological Class",
+     "Primary Mechanism",
+     "Key Organ-Specific Adverse Effect"
+    ],
+    "rows": [
+     [
+      "Adriamycin (Doxorubicin)",
+      "Anthracycline",
+      "Topoisomerase II inhibitor / Free radicals",
+      "Dose-dependent irreversible cardiotoxicity"
+     ],
+     [
+      "Bleomycin",
+      "Antitumour Antibiotic",
+      "Free radical DNA strand cleavage",
+      "Pulmonary interstitial fibrosis & pneumonitis"
+     ],
+     [
+      "Vinblastine",
+      "Vinca Alkaloid",
+      "Microtubule polymerization inhibition",
+      "Peripheral sensory neuropathy & myelosuppression"
+     ],
+     [
+      "Dacarbazine",
+      "Alkylating Agent",
+      "DNA cross-linking and methylation",
+      "Severe emetogenicity and myelosuppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fluorodeoxyglucose positron emission tomography integrated with computed tomography represents the standard imaging modality for initial staging and response assessment. Intercalated during therapy, an interim **pet-ct scan** performed after two cycles of chemotherapy evaluates metabolic response using the five-point Deauville criteria. Patients achieving a Deauville score of 1 to 3 (FDG uptake less than or equal to liver uptake) have achieved complete metabolic response, permitting safe bleomycin de-escalation to prevent pulmonary toxicity, whereas non-responders require escalation to intensive regimens like escalated BEACOPP.",
+   "say": "Positron emission tomography integrated with computed tomography represents the standard imaging modality for staging and response assessment. Intercalated during therapy, an interim pet-ct scan performed after two cycles evaluates metabolic response using Deauville criteria. Patients achieving a Deauville score of one to three have achieved complete metabolic response, allowing bleomycin omission to protect lung function, while refractory disease warrants intensified therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "base",
+      "label": "Baseline Staging PET-CT: Document FDG-Avid Disease"
+     },
+     {
+      "id": "cycle",
+      "label": "Administer 2 Cycles of Frontline ABVD Chemotherapy"
+     },
+     {
+      "id": "pet2",
+      "label": "Interim PET-CT (Deauville 1-3: Complete Metabolic Response)"
+     },
+     {
+      "id": "deesc",
+      "label": "Omit Bleomycin (AVD): Eliminate Pulmonary Toxicity"
+     }
+    ],
+    "edges": [
+     [
+      "base",
+      "cycle"
+     ],
+     [
+      "cycle",
+      "pet2"
+     ],
+     [
+      "pet2",
+      "deesc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Relapsed or primary refractory Hodgkin lymphoma responds favorably to antibody-drug conjugates and immune checkpoint inhibitors. The antibody-drug conjugate **brentuximab vedotin** links an anti-CD30 monoclonal antibody to the antimicrotubule toxin monomethyl auristatin E (MMAE). Upon binding CD30 on Reed-Sternberg cells, the conjugate is internalized, selectively releasing MMAE and inducing cell cycle arrest. Furthermore, because classic Hodgkin lymphoma frequently exhibits chromosome 9p24.1 amplification driving overexpression of programmed death ligands (PD-L1 and PD-L2), anti-PD-1 checkpoint inhibitors like nivolumab deliver outstanding response rates in relapsed disease.",
+   "say": "Relapsed or refractory Hodgkin lymphoma responds favorably to targeted antibody-drug conjugates and checkpoint inhibitors. The antibody-drug conjugate brentuximab vedotin delivers an antimicrotubule agent selectively into CD30-expressing Reed-Sternberg cells. Furthermore, because classic Hodgkin lymphoma exhibits frequent PD-L1 overexpression, anti-PD-1 checkpoint inhibitors such as nivolumab deliver outstanding response rates in relapsed or refractory disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brentuximab Vedotin",
+     "points": [
+      "Anti-CD30 monoclonal antibody conjugate",
+      "Delivers auristatin E (microtubule poison)",
+      "Internalized by classic Reed-Sternberg cells",
+      "Used in frontline advanced HL and relapsed disease",
+      "Adverse risk: Peripheral sensory neuropathy"
+     ]
+    },
+    "right": {
+     "title": "Nivolumab / Pembrolizumab",
+     "points": [
+      "Anti-PD-1 immune checkpoint inhibitors",
+      "Overcomes 9p24.1 PD-L1 immune evasion",
+      "Reactivates exhausted antitumour cytotoxic T cells",
+      "High response rates in multiply relapsed disease",
+      "Adverse risk: Immune-related endocrinopathies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term survivorship in Hodgkin lymphoma mandates vigilance for late treatment-related toxicities occurring decades after curative chemo-radiotherapy. Second primary malignancies, particularly female breast cancer following mantle chest radiation and acute myeloid leukaemia after alkylating agents, represent the leading causes of late non-relapse mortality. Female patients irradiated before age thirty require annual **breast screening** with contrast MRI starting eight to ten years post-treatment or at age twenty-five. Accelerated coronary artery disease, valvular calcification, and hypothyroidism also mandate routine cardiovascular and thyroid function monitoring.",
+   "say": "Long-term survivorship in Hodgkin lymphoma mandates vigilance for late treatment-related toxicities occurring decades after curative therapy. Second primary malignancies, particularly female breast cancer following mantle radiation and acute myeloid leukaemia, represent the leading causes of late mortality. Female patients irradiated before age thirty require annual breast screening with contrast MRI starting eight years post-treatment. Radiation-induced coronary disease and hypothyroidism also require ongoing surveillance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Late Treatment Complication",
+     "Causative Therapeutic Exposure",
+     "Screening Modality",
+     "Surveillance Schedule"
+    ],
+    "rows": [
+     [
+      "Secondary Breast Cancer",
+      "Mediastinal / Mantle Radiotherapy",
+      "Annual Contrast Breast MRI + Mammogram",
+      "Start 8-10 yr post-radiation or age 25"
+     ],
+     [
+      "Coronary Artery Disease",
+      "Cardiac irradiation + Anthracyclines",
+      "Stress echocardiography / CT angiography",
+      "Every 5-10 yr starting 10 yr post-radiation"
+     ],
+     [
+      "Primary Hypothyroidism",
+      "Cervical / Neck Radiotherapy",
+      "Annual Serum TSH and Free T4",
+      "Annually lifelong"
+     ],
+     [
+      "Secondary AML / MDS",
+      "Alkylating agents / Topoisomerase inhibitors",
+      "Annual complete blood count",
+      "Peak incidence 3-7 yr post-treatment"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-aldo-pheo",
+ "subject": "medicine",
+ "title": "Primary Aldosteronism and Mineralocorticoid Hypertension",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Autonomous hypersecretion of mineralocorticoids independent of the renin-angiotensin-aldosterone axis represents the commonest cause of surgically curable secondary hypertension. Classically recognized as **conn syndrome**, primary aldosteronism accounts for five to ten percent of all hypertensive presentations. Excessive aldosterone acts on mineralocorticoid receptors in the distal nephron, stimulating epithelial sodium channels and driving sodium retention, plasma volume expansion, systemic arterial hypertension, and renal potassium and hydrogen ion wasting. Notably, over fifty percent of patients present with normal serum potassium, proving hypokalaemia is not mandatory.",
+   "say": "Autonomous hypersecretion of mineralocorticoids independent of the renin-angiotensin axis represents the most common cause of curable secondary hypertension. Classically recognized as conn syndrome, primary aldosteronism accounts for ten percent of hypertensive presentations. Excessive aldosterone stimulates epithelial sodium channels, driving sodium retention, hypertension, and potassium wasting. Notably, over half of modern patients present with normal serum potassium, demonstrating that hypokalaemia is not mandatory.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aldosterone-producing-adenoma-fig1.webp",
+    "alt": "Pathology and cellular mechanisms of aldosterone-producing adrenal adenoma in Conn syndrome.",
+    "caption": "Adrenal cortical adenoma secreting autonomous aldosterone and driving mineralocorticoid hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial biochemical screening step for suspected autonomous mineralocorticoid excess relies on paired hormonal assessment under standardized conditions. Calculating the morning plasma **aldosterone renin ratio** (ARR) serves as the primary screening tool worldwide. Testing is performed in mid-morning in seated, ambulating patients with replete potassium, ideally having paused interfering antihypertensive medications including mineralocorticoid antagonists and beta-blockers. An ARR exceeding twenty to thirty (with plasma aldosterone concentration exceeding fifteen nanograms per decilitre and suppressed plasma renin activity) establishes a positive screen, warranting confirmatory oral salt loading or intravenous saline suppression testing.",
+   "say": "The initial biochemical screening step for suspected mineralocorticoid excess relies on paired hormonal assessment under standardized conditions. Calculating the morning plasma aldosterone renin ratio serves as the primary screening tool worldwide. Testing is performed in seated patients with normal potassium, after pausing interfering medications like spironolactone. An ratio exceeding twenty to thirty with plasma aldosterone over fifteen nanograms per decilitre establishes a positive screen, warranting confirmatory suppression testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Screening: Seated morning Plasma Aldosterone Concentration / Renin Activity (ARR)"
+     },
+     {
+      "id": "cut",
+      "label": "ARR > 20-30 with PAC > 15 ng/dL: Highly positive screening test"
+     },
+     {
+      "id": "confirm",
+      "label": "Confirmatory: IV Saline infusion test (PAC fails to suppress < 5 ng/dL)"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "cut"
+     ],
+     [
+      "cut",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing unilateral aldosterone-producing adenoma from bilateral idiopathic adrenal hyperplasia is essential to determine whether surgical or medical management is indicated. Performing bilateral **adrenal vein sampling** (AVS) represents the undisputed gold standard for lateralizing autonomous hormone secretion. Because adrenal microadenomas are frequently too small for computed tomography, and non-functioning adrenal incidentalomas are common, CT imaging alone is unreliable. During AVS, catheters cannulate both adrenal veins; a cortisol-corrected aldosterone ratio exceeding four to one between the dominant and non-dominant gland confirms unilateral disease.",
+   "say": "Distinguishing unilateral aldosterone-producing adenoma from bilateral adrenal hyperplasia is essential to determine whether surgery or medical therapy is indicated. Performing bilateral adrenal vein sampling represents the gold standard for lateralizing hormone secretion. Because microadenomas are frequently missed on computed tomography and non-functioning incidentalomas are common, CT imaging alone is unreliable. During sampling, a cortisol-corrected aldosterone ratio exceeding four to one confirms unilateral disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unilateral Adenoma (Conn Syndrome)",
+     "points": [
+      "Accounts for 35% of primary aldosteronism",
+      "Severe hypokalaemia and marked aldosterone excess",
+      "AVS lateralization ratio > 4:1 to dominant side",
+      "Definitive treatment: Laparoscopic adrenalectomy (cure ~70%)"
+     ]
+    },
+    "right": {
+     "title": "Bilateral Idiopathic Hyperplasia",
+     "points": [
+      "Accounts for 60% of primary aldosteronism",
+      "Often normokalaemic with moderate hypertension",
+      "AVS demonstrates bilateral symmetric secretion",
+      "Definitive treatment: Lifelong medical mineralocorticoid blockade"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted competitive antagonism of mineralocorticoid receptors forms the foundation of non-surgical pharmacological therapy for bilateral adrenal hyperplasia. Administering oral **spironolactone**, a non-selective mineralocorticoid receptor antagonist, blocks renal epithelial sodium channel transcription, halting potassium and hydrogen ion excretion while normalizing blood pressure. However, its concurrent antagonism of androgen receptors and agonism of progesterone receptors frequently causes painful gynaecomastia, erectile dysfunction, and menstrual irregularities. In patients experiencing intolerable antiandrogenic side effects, eplerenone provides a selective mineralocorticoid receptor blocker with minimal affinity for sex steroid receptors.",
+   "say": "Targeted competitive antagonism of mineralocorticoid receptors forms the foundation of non-surgical therapy for bilateral adrenal hyperplasia. Administering oral spironolactone blocks renal epithelial sodium channel activation, halting potassium wasting while normalizing blood pressure. However, its antagonism of androgen receptors frequently causes painful gynaecomastia and erectile dysfunction. In patients with antiandrogenic side effects, eplerenone provides a selective blocker with minimal sex steroid affinity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Receptor Selectivity",
+     "Primary Advantages",
+     "Key Adverse Effects"
+    ],
+    "rows": [
+     [
+      "Spironolactone",
+      "Non-selective MR antagonist",
+      "Potent, inexpensive, once-daily dosing",
+      "Gynaecomastia, breast tenderness, impotence"
+     ],
+     [
+      "Eplerenone",
+      "Selective MR antagonist",
+      "No antiandrogenic side effects",
+      "Twice-daily dosing, less potent, higher cost"
+     ],
+     [
+      "Amiloride",
+      "Direct ENaC channel blocker",
+      "Potassium-sparing diuretic alternative",
+      "Hyperkalaemia, mild gastrointestinal upset"
+     ],
+     [
+      "Laparoscopic Adrenalectomy",
+      "Surgical curative resection",
+      "Definitive cure for unilateral adenoma",
+      "Transient post-op hypoaldosteronism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unique monogenic autosomal dominant form of mineralocorticoid hypertension resolves completely with physiological glucocorticoid administration. Designated as **glucocorticoid-remediable aldosteronism** (GRA, or familial hyperaldosteronism type 1), this condition arises from an unequal genetic crossover event creating a chimeric gene. The regulatory promoter of the 11-beta-hydroxylase gene (CYP11B1), normally driven by ACTH, fuses with the coding sequence of aldosterone synthase (CYP11B2). Consequently, aldosterone synthesis becomes ectopic, autonomous, and driven entirely by pituitary ACTH rather than angiotensin. Administering low-dose dexamethasone suppresses pituitary ACTH, completely switching off the chimeric gene and curing the hypertension.",
+   "say": "A unique monogenic form of mineralocorticoid hypertension resolves completely with glucocorticoid administration. Designated as glucocorticoid-remediable aldosteronism, this condition arises from a genetic crossover event creating a chimeric gene. The regulatory promoter of 11-beta-hydroxylase, driven by ACTH, fuses with the coding sequence of aldosterone synthase. Consequently, aldosterone synthesis is driven by pituitary ACTH. Administering low-dose dexamethasone suppresses ACTH, completely turning off the chimeric gene and normalizing blood pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cross",
+      "label": "Chimeric gene: CYP11B1 (ACTH promoter) + CYP11B2 (Aldosterone synthase)"
+     },
+     {
+      "id": "acth",
+      "label": "Pituitary ACTH drives ectopic, unregulated aldosterone synthesis"
+     },
+     {
+      "id": "dex",
+      "label": "Low-dose Dexamethasone suppresses ACTH -> Complete biochemical cure"
+     }
+    ],
+    "edges": [
+     [
+      "cross",
+      "acth"
+     ],
+     [
+      "acth",
+      "dex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autonomous hyperaldosteronism inflicts direct **aldosterone-driven vasculopathy** on target organs beyond simple blood pressure elevation. Compared with age- and blood-pressure-matched essential hypertensives, individuals with primary aldosteronism suffer significantly higher rates of left ventricular hypertrophy, myocardial infarction, stroke, and atrial fibrillation. Mineralocorticoid receptors expressed in cardiac myocytes and vascular endothelial cells trigger reactive oxygen species generation, vascular collagen deposition, and myocardial fibrosis. Establishing rapid biochemical cure via unilateral laparoscopic adrenalectomy or spironolactone arrests progressive vascular stiffness.",
+   "say": "Autonomous hyperaldosteronism inflicts direct fibro-inflammatory damage on target organs beyond blood pressure elevation. Compared with matched essential hypertensives, individuals with primary aldosteronism suffer significantly higher rates of left ventricular hypertrophy, myocardial infarction, stroke, and atrial fibrillation. Mineralocorticoid receptors in myocytes and endothelial cells trigger collagen deposition and myocardial fibrosis. Establishing rapid biochemical cure via surgery or spironolactone arrests vascular stiffness and reverses cardiac remodeling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aldosterone-Driven Vasculopathy",
+     "points": [
+      "Direct cardiac myocyte mineralocorticoid activation",
+      "Perivascular and interstitial myocardial fibrosis",
+      "Accelerated carotid intimal-medial thickening",
+      "High incidence of stroke and atrial fibrillation"
+     ]
+    },
+    "right": {
+     "title": "Clinical Reversal with Treatment",
+     "points": [
+      "Normalization of blood pressure and serum potassium",
+      "Regression of left ventricular concentric hypertrophy",
+      "Improvement in glomerular hyperfiltration and proteinuria",
+      "Significant reduction in cardiovascular morbidity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laparoscopic adrenalectomy achieves complete surgical and biochemical cure in the vast majority of patients with confirmed unilateral disease. Undergoing unilateral total **adrenalectomy** normalizes hypokalaemia in nearly one hundred percent of patients and cures or markedly improves systemic hypertension in over seventy percent. Postoperatively, because the contralateral zona glomerulosa has been chronically suppressed by autonomous aldosterone, transient hypoaldosteronism can occur, requiring potassium monitoring and temporary mineralocorticoid replacement if hyperkalaemia develops during surgical recovery.",
+   "say": "Laparoscopic adrenalectomy achieves complete surgical and biochemical cure in the vast majority of patients with confirmed unilateral disease. Undergoing unilateral total adrenalectomy normalizes hypokalaemia in nearly all patients and cures or improves hypertension in over seventy percent. Postoperatively, because the contralateral adrenal has been chronically suppressed, transient hypoaldosteronism can occur, requiring potassium monitoring if hyperkalaemia develops during recovery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aldosteronism-pheochromocytoma-long-case-fig1.webp",
+    "alt": "Surgical and pathological specimen evaluation of unilateral adrenal cortical adenoma and phaeochromocytoma.",
+    "caption": "Surgical pathology and diagnostic distinction between adrenal adenoma and phaeochromocytoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A structured clinical pathway prevents diagnostic missteps and optimizes therapeutic outcomes in secondary hypertension screening. Screening for primary aldosteronism is explicitly recommended for all hypertensive patients with spontaneous or diuretic-induced hypokalaemia, refractory hypertension resistant to three antihypertensive agents, severe hypertension exceeding 150/100, adrenal incidentaloma, or a family history of early-onset stroke. Rigorous adherence to standardized **diagnostic criteria** ensures appropriate curative surgical selection while providing targeted mineralocorticoid receptor blockade for bilateral hyperplasia.",
+   "say": "A structured clinical pathway prevents diagnostic missteps and optimizes therapeutic outcomes in secondary hypertension screening. Screening for primary aldosteronism is recommended for hypertensive patients with hypokalaemia, refractory hypertension, adrenal incidentaloma, or a family history of early stroke. Rigorous adherence to standardized diagnostic criteria ensures appropriate curative surgical selection while providing targeted medical therapy for bilateral hyperplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Screening: Morning seated Aldosterone Renin Ratio (ARR)"
+     },
+     {
+      "id": "confirm",
+      "label": "Confirmation: Saline infusion test or oral salt loading"
+     },
+     {
+      "id": "sub",
+      "label": "Subtype: Adrenal CT scan + Bilateral Adrenal Vein Sampling (AVS)"
+     },
+     {
+      "id": "rx",
+      "label": "Unilateral: Laparoscopic adrenalectomy | Bilateral: Spironolactone / Eplerenone"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "confirm"
+     ],
+     [
+      "confirm",
+      "sub"
+     ],
+     [
+      "sub",
+      "rx"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

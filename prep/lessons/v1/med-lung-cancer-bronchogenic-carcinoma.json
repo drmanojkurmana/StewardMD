@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-lung-cancer",
+ "subject": "medicine",
+ "title": "Bronchogenic carcinoma: histological subtypes, molecular targets, and clinical staging",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Malignant transformation of bronchial mucosal epithelium constitutes the leading cause of worldwide cancer-related mortality. Cigarette smoking drives over eighty-five percent of all cases of **bronchogenic carcinoma**, with risk proportional to cumulative pack-year exposure. Primary lung tumors are broadly dichotomized into non-small cell lung cancer (85% of cases) and small cell lung cancer (15% of cases). Secondary risk factors include occupational radon, asbestos, and silica exposure. Implementing annual low-dose CT screening in high-risk individuals aged fifty to eighty with a twenty pack-year smoking history significantly reduces cancer-specific mortality.",
+   "say": "Malignant transformation of bronchial epithelium represents the leading cause of cancer mortality globally. Cigarette smoking accounts for the vast majority of bronchogenic carcinoma cases. Tumors are broadly categorized into non-small cell and small cell lung cancers. Annual low-dose computed tomography screening in high-risk smokers significantly lowers lung cancer mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-small cell lung cancer (NSCLC)",
+     "points": [
+      "Accounts for 85% of lung malignancies",
+      "Subtypes: adenocarcinoma & squamous carcinoma",
+      "Surgical resection viable in early stages",
+      "Targetable oncogenic driver mutations common"
+     ]
+    },
+    "right": {
+     "title": "Small cell lung cancer (SCLC)",
+     "points": [
+      "Accounts for 15% of lung malignancies",
+      "Neuroendocrine origin with rapid doubling time",
+      "Early widespread hematogenous dissemination",
+      "Treated primarily with chemotherapy & radiation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histological classification governs systemic therapeutic algorithms and clinical prognosis. Peripheral pulmonary lesions in non-smokers and women characteristically represent **adenocarcinoma**, staining positive for thyroid transcription factor 1 (TTF-1) and cytokeratin 7. Conversely, central cavitating hilar masses with keratin pearls and intercellular bridges represent squamous cell carcinoma, linked tightly to smoking and expressing p40 and p63. High-grade neuroendocrine small cell lung cancer arises centrally from Kulchitsky cells, exhibiting dense sheets of small cells with crushed nuclei, nuclear molding, and paraneoplastic secretion.",
+   "say": "Histological classification guides clinical therapy and dictates systemic prognosis. Peripheral lesions in non-smokers typically represent adenocarcinoma expressing TTF-1. Centrally located cavitating tumors displaying keratin pearls indicate squamous cell carcinoma linked to smoking. Central neuroendocrine small cell lung cancer displays small round cells with dark nuclei and frequent paraneoplastic secretion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological subtype",
+     "Typical anatomical site",
+     "Diagnostic immunohistochemistry",
+     "Clinical characteristics"
+    ],
+    "rows": [
+     [
+      "Adenocarcinoma",
+      "Peripheral pulmonary parenchyma",
+      "TTF-1 and Napsin A positive",
+      "Most common in non-smokers; targetable mutations"
+     ],
+     [
+      "Squamous cell carcinoma",
+      "Central endobronchial hilar mass",
+      "p40 and p63 positive",
+      "Cavitating lesions; hypercalcemia via PTHrP"
+     ],
+     [
+      "Small cell carcinoma",
+      "Central peribronchial mass",
+      "Synaptophysin & chromogranin",
+      "Paraneoplastic SIADH, Cushing, Lambert-Eaton"
+     ],
+     [
+      "Bronchial carcinoid",
+      "Central or peripheral neuroendocrine",
+      "Low Ki-67 (< 2%), Chromogranin",
+      "Indolent low-grade neuroendocrine tumor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Identification of actionable oncogenic driver alterations has revolutionized systemic management of advanced non-small cell adenocarcinoma. Testing for activating **EGFR mutation** (exon 19 deletion or exon 21 L858R point mutation) directs first-line targeted therapy with third-generation tyrosine kinase inhibitors like osimertinib. Similarly, chromosomal inversion creating an EML4-ALK rearrangement occurs in younger non-smokers, predicting exquisite sensitivity to targeted ALK inhibitors such as alectinib or brigatinib. Routine molecular profiling also tests for ROS1 fusions, BRAF V600E, KRAS G12C, and programmed death-ligand 1 (PD-L1) expression.",
+   "say": "Identifying actionable driver alterations has transformed the treatment of advanced adenocarcinoma. Testing for activating EGFR mutations guides first-line therapy using tyrosine kinase inhibitors like osimertinib. Similarly, detecting ALK rearrangements in younger non-smokers predicts dramatic response to targeted ALK inhibitors like alectinib. Routine molecular panels also screen for ROS1 fusions and PD-L1 expression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biopsy",
+      "label": "Histological confirmation of adenocarcinoma"
+     },
+     {
+      "id": "panel",
+      "label": "Comprehensive next-generation molecular sequencing"
+     },
+     {
+      "id": "egfr",
+      "label": "EGFR mutation detected -> Osimertinib targeted TKI"
+     },
+     {
+      "id": "alk",
+      "label": "ALK rearrangement detected -> Alectinib targeted TKI"
+     }
+    ],
+    "edges": [
+     [
+      "biopsy",
+      "panel"
+     ],
+     [
+      "panel",
+      "egfr"
+     ],
+     [
+      "panel",
+      "alk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Apical superior pulmonary sulcus neoplasms produce a distinct clinical constellation through direct regional neurovascular invasion. Growing as a **Pancoast tumour**, the apical carcinoma invades the inferior trunk of the brachial plexus (C8-T1 nerve roots) and the paravertebral sympathetic ganglion chain. Patients present with severe shoulder and scapular pain radiating along the ulnar nerve distribution, accompanied by intrinsic hand muscle atrophy. Sympathetic chain destruction produces ipsilateral Horner syndrome, characterized by unilateral partial ptosis, pupillary miosis, facial anhidrosis, and apparent enophthalmos.",
+   "say": "Apical superior sulcus tumors generate a distinct clinical presentation through local invasion of chest structures. Developing as a Pancoast tumour, the malignancy infiltrates the lower brachial plexus and paravertebral sympathetic chain. Patients suffer from severe shoulder pain radiating down the ulnar border of the arm with hand wasting. Sympathetic disruption causes ipsilateral Horner syndrome with ptosis, miosis and facial anhidrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brachial plexus compression",
+     "points": [
+      "Invades C8 and T1 ventral nerve roots",
+      "Severe constant shoulder and arm pain",
+      "Paresthesias along ulnar forearm and hand",
+      "Weakness and atrophy of intrinsic hand muscles"
+     ]
+    },
+    "right": {
+     "title": "Horner syndrome features",
+     "points": [
+      "Partial ptosis (superior tarsal muscle paralysis)",
+      "Pupillary miosis (loss of dilator pupillae)",
+      "Ipsilateral facial anhidrosis (sweat loss)",
+      "Apparent enophthalmos on inspection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "External compression or intraluminal thrombosis of the thin-walled superior vena cava causes acute thoracic venous engorgement. Developing **superior vena cava obstruction** presents with facial fullness, periorbital edema, plethoric neck engorgement, and prominent dilated superficial collateral venous channels across the upper chest wall. Raising both arms above the head for sixty seconds accentuates facial congestion and cyanosis (positive Pemberton sign). Small cell lung cancer and squamous carcinoma represent the commonest malignant etiologies, managed urgently with endovascular stent placement, systemic dexamethasone, and emergency radiation therapy or chemotherapy.",
+   "say": "External compression or thrombosis of the superior vena cava triggers prominent venous engorgement. Developing superior vena cava obstruction produces facial fullness, neck swelling and dilated superficial veins across the anterior chest. Raising both arms causes facial congestion, known as a positive Pemberton sign. Small cell cancer represents the commonest malignant cause, requiring urgent stenting and steroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/svc-obstruction-fig1.webp",
+    "alt": "Clinical features and collateral venous pathways in superior vena cava obstruction.",
+    "caption": "Vascular collaterals and facial congestion in superior vena cava obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Incidental detection of discrete parenchymal lesions requires systematic radiologic risk stratification. Evaluating a **solitary pulmonary nodule** (a round opacification <= 30 mm surrounded by normal lung without associated lymphadenopathy) begins by assessing size, border characteristics, and presence of calcification. Smooth, concentric, laminated, or 'popcorn' calcifications signify benign lesions such as tuberculomas or hamartomas. Conversely, nodules larger than eight millimetres with corona radiata, spiculation, subsolid ground-glass components, or rapid volume doubling times carry high malignant probability, mandating PET-CT scanning or transthoracic needle biopsy.",
+   "say": "Incidental detection of discrete pulmonary nodules mandates methodical risk assessment. Evaluating a solitary pulmonary nodule begins by reviewing size, margin morphology and calcification patterns. Concentric or popcorn calcifications indicate benign hamartomas or granulomas. In contrast, nodules larger than eight millimeters with spiculated margins or ground-glass features suggest malignancy, requiring positron emission tomography or needle biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nodule feature",
+     "Benign radiological characteristics",
+     "Malignant radiological characteristics"
+    ],
+    "rows": [
+     [
+      "Lesion size",
+      "< 6 mm diameter (extremely low risk)",
+      "> 8 to 20 mm (high risk of carcinoma)"
+     ],
+     [
+      "Edge morphology",
+      "Smooth, sharply circumscribed margin",
+      "Spiculated, lobulated, corona radiata"
+     ],
+     [
+      "Calcification",
+      "Central, concentric, popcorn, or laminated",
+      "Eccentric, stippled, or absent calcification"
+     ],
+     [
+      "Doubling time",
+      "< 30 days (infection) or > 400 days (benign)",
+      "Volume doubling between 30 and 400 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Well-differentiated pulmonary neuroendocrine tumors exhibit an indolent clinical course with excellent surgical cure rates. Arising from pulmonary neuroendocrine Kulchitsky cells, **bronchial carcinoid** tumors typically present in young adults as vascular, polypoid, central endobronchial masses. Patients present with recurrent localized pneumonia, unprovoked hemoptysis, and persistent wheezing often misdiagnosed as asthma. Carcinoid syndrome occurs in under five percent of cases due to hepatic clearance of serotonin. Typical carcinoids demonstrate fewer than two mitoses per two square millimetres without necrosis, treated definitively by lung-sparing parenchymal surgical resection.",
+   "say": "Well-differentiated pulmonary neuroendocrine tumors display an indolent biological course. Arising from bronchial neuroendocrine cells, a bronchial carcinoid presents as a vascular central endobronchial mass in younger adults. Patients present with persistent wheeze, recurrent pneumonia and hemoptysis. Carcinoid syndrome is rare without liver metastases. Typical carcinoids display minimal mitosis and are cured by surgical resection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "origin",
+      "label": "Bronchial Kulchitsky neuroendocrine cell"
+     },
+     {
+      "id": "mass",
+      "label": "Vascular polypoid endobronchial tumor"
+     },
+     {
+      "id": "sx",
+      "label": "Hemoptysis, persistent wheeze, & recurrent pneumonia"
+     },
+     {
+      "id": "rx",
+      "label": "Bronchoplastic sleeve resection (curative)"
+     }
+    ],
+    "edges": [
+     [
+      "origin",
+      "mass"
+     ],
+     [
+      "mass",
+      "sx"
+     ],
+     [
+      "sx",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate anatomical staging dictates surgical resectability and multimodal treatment choices. Utilizing the TNM system for non-small cell **lung cancer staging** assesses primary tumor diameter and invasion depth (T), ipsilateral versus contralateral hilar and mediastinal lymph node involvement (N), and distant metastatic spread (M). Stages I and II (absence of mediastinal nodal metastases) are managed with primary surgical lobectomy and mediastinal lymph node dissection. Stage III with ipsilateral mediastinal nodal involvement (N2) warrants concurrent chemoradiotherapy, whereas Stage IV metastatic disease receives targeted inhibitor therapy or systemic chemoimmunotherapy.",
+   "say": "Precise anatomical staging determines surgical operability and systemic treatment selection. Utilizing the TNM classification for non-small cell lung cancer staging evaluates tumor size, mediastinal nodal spread and distant metastases. Early stages without nodal disease undergo curative surgical lobectomy. Stage three disease with mediastinal lymph node metastases receives concurrent chemoradiation, whereas stage four metastatic disease receives targeted drugs or immunotherapy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-carcinoma-oesophagus.webp",
+    "alt": "Thoracic imaging showing anatomical boundaries and mediastinal tumor encroachment.",
+    "caption": "Mediastinal and thoracic tumor staging evaluation and local invasiveness. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

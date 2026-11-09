@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "med-copd",
+ "subject": "medicine",
+ "title": "COPD phenotypes, emphysema pathology, and GOLD staging",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic obstructive pulmonary disease is a preventable, treatable disorder characterized by persistent, non-reversible airflow limitation. Clinicians define **chronic bronchitis** clinically as the presence of a chronic productive cough on most days for at least three consecutive months in each of two successive years, provided other pulmonary causes are excluded. Cigarette smoke and biomass fuel exposure drive goblet cell metaplasia, submucosal gland hypertrophy, and excessive airway mucus hypersecretion with mucosal inflammation.",
+   "say": "Chronic obstructive pulmonary disease is a preventable disorder characterized by persistent, non-reversible airflow limitation. Clinicians define chronic bronchitis clinically as productive cough occurring on most days for three consecutive months over two successive years. Tobacco smoke and biomass fuels produce goblet cell metaplasia, gland enlargement and excessive mucus hypersecretion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-obstructive-pulmonary-disease-fig1.webp",
+    "alt": "Pathological comparison of normal lung architecture and COPD airway destruction.",
+    "caption": "Airway narrowing, mucus hypersecretion, and alveolar septal breakdown in COPD. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast to the clinical definition of bronchitis, structural destruction of the gas-exchanging units defines pulmonary emphysema. Pathologically, developing **pulmonary emphysema** involves abnormal, permanent enlargement of the airspaces distal to the terminal bronchioles, accompanied by destruction of alveolar walls without obvious fibrosis. Loss of alveolar elastic recoil reduces radial traction on small conducting airways, leading to premature expiratory dynamic collapse, severe gas trapping, and lung hyperinflation.",
+   "say": "In contrast to bronchitis, structural destruction of gas-exchanging units defines pulmonary emphysema. Pathologically, developing pulmonary emphysema involves permanent enlargement of airspaces distal to terminal bronchioles, with alveolar wall breakdown. Loss of elastic recoil diminishes radial traction on airways, producing dynamic collapse during expiration and severe air trapping.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Centriacinar emphysema",
+     "points": [
+      "Destruction of proximal respiratory bronchioles",
+      "Upper lung zone predominance",
+      "Directly caused by cigarette smoking",
+      "Normal distal alveolar ducts initially spared"
+     ]
+    },
+    "right": {
+     "title": "Panacinar emphysema",
+     "points": [
+      "Uniform destruction of entire acinar unit",
+      "Lower lung zone predominance",
+      "Classically caused by alpha-1 antitrypsin deficiency",
+      "Involves respiratory bronchioles to alveoli"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histopathological classification divides emphysema according to the anatomical subsegment of the acinus destroyed. Cigarette smoking classically induces **centriacinar emphysema**, where inflammation targets the proximal respiratory bronchioles while sparing distal alveolar sacs, predominantly affecting the upper lung lobes. Conversely, panacinar emphysema destroys the entire acinus uniformly from respiratory bronchiole to terminal alveolus, exhibiting marked predilection for the lung bases.",
+   "say": "Histopathological classification divides emphysema by the anatomical part of the acinus destroyed. Cigarette smoking causes centriacinar emphysema, where inflammation damages proximal respiratory bronchioles while sparing distal alveoli, predominantly affecting upper lung lobes. Conversely, panacinar emphysema destroys the entire acinus uniformly, displaying predilection for the lung bases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "smoke",
+      "label": "Cigarette smoke & oxidant stress"
+     },
+     {
+      "id": "neutro",
+      "label": "Neutrophil elastase & matrix metalloproteinase release"
+     },
+     {
+      "id": "imbal",
+      "label": "Protease-antiprotease enzymatic imbalance"
+     },
+     {
+      "id": "elastin",
+      "label": "Degradation of alveolar elastin framework"
+     },
+     {
+      "id": "emphy",
+      "label": "Centriacinar upper-lobe emphysematous destruction"
+     }
+    ],
+    "edges": [
+     [
+      "smoke",
+      "neutro"
+     ],
+     [
+      "neutro",
+      "imbal"
+     ],
+     [
+      "imbal",
+      "elastin"
+     ],
+     [
+      "elastin",
+      "emphy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genetic vulnerability to uninhibited serine protease activity drives premature early-onset basal emphysema in non-smokers. Inheriting homozygous **alpha-1 antitrypsin deficiency** (SERPINA1 PiZZ genotype) deprives lung tissue of its primary endogenous inhibitor of neutrophil elastase. Unopposed enzymatic digestion destroys lower-lobe alveolar walls, causing symptomatic panacinar emphysema in the third or fourth decade. Intravenous augmentation therapy with purified human alpha-1 antitrypsin slows emphysema progression in confirmed deficient individuals.",
+   "say": "Genetic vulnerability to uninhibited protease activity causes early-onset basal emphysema in non-smokers. Inheriting homozygous alpha-1 antitrypsin deficiency deprives lung tissue of its protective elastase inhibitor. Unopposed enzymatic digestion destroys lower-lobe alveoli, producing panacinar emphysema by the fourth decade. Intravenous alpha-1 antitrypsin replacement therapy helps reduce emphysema progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genotype variant",
+     "Serum AAT level (% normal)",
+     "Emphysema risk",
+     "Clinical recommendation"
+    ],
+    "rows": [
+     [
+      "PiMM (Normal)",
+      "100% (20 to 53 micromol/L)",
+      "Normal baseline risk",
+      "No specific medical intervention required"
+     ],
+     [
+      "PiMZ (Carrier)",
+      "50% to 60% of normal",
+      "Slightly increased if heavy smoker",
+      "Smoking avoidance counselling"
+     ],
+     [
+      "PiSZ (Compound)",
+      "30% to 40% of normal",
+      "Moderate risk in smokers",
+      "Serial spirometric surveillance"
+     ],
+     [
+      "PiZZ (Deficient)",
+      "10% to 15% (< 11 micromol/L)",
+      "Severe early-onset panacinar emphysema",
+      "Augmentation therapy with purified AAT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stratifying the severity of airflow limitation in COPD utilizes standardized post-bronchodilator spirometric cutoffs. The international **GOLD classification** stages obstruction following inhaled bronchodilator in patients with an FEV1/FVC ratio under 0.70. GOLD 1 (mild) represents FEV1 of eighty percent or higher of predicted. GOLD 2 (moderate) spans fifty to seventy-nine percent. GOLD 3 (severe) encompasses thirty to forty-nine percent, while GOLD 4 (very severe) denotes FEV1 under thirty percent predicted.",
+   "say": "Stratifying the severity of airflow limitation in chronic obstructive pulmonary disease uses standardized post-bronchodilator spirometric thresholds. The international classification stages obstruction in patients with a ratio under point seventy. Stage one indicates mild disease with FEV1 eighty percent or higher. Stage two ranges from fifty to seventy-nine percent. Stage three ranges from thirty to forty-nine percent, while stage four indicates values under thirty percent.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-gold-bode.svg",
+    "alt": "GOLD staging and BODE prognostic index in chronic obstructive pulmonary disease.",
+    "caption": "GOLD spirometric staging and multidimensional BODE prognostic index. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Quantifying patient-reported breathlessness during routine daily activities guides comprehensive symptom assessment. Utilizing the modified Medical Research Council (**mMRC dyspnoea**) scale grades exertional limitation from zero to four. Grade zero represents breathlessness only with strenuous exercise. Grade one indicates dyspnoea when hurrying or walking up a slight hill. Grade two causes walking slower than contemporaries on level ground. Grade three stops for breath after walking one hundred metres, and grade four prevents leaving home.",
+   "say": "Measuring patient-reported breathlessness during routine daily tasks guides clinical assessment. Using the modified Medical Research Council dyspnoea scale grades exertional limitation from zero to four. Grade zero describes breathlessness only with strenuous exertion. Grade one indicates dyspnoea when hurrying uphill. Grade two causes walking slower than peers on level ground, while grade four prevents leaving home.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "mMRC Grade",
+     "Exertional dyspnoea description",
+     "Functional impact on mobility"
+    ],
+    "rows": [
+     [
+      "Grade 0",
+      "Dyspnoea only with strenuous physical exercise",
+      "No limitation in routine daily walking"
+     ],
+     [
+      "Grade 1",
+      "Short of breath when hurrying or walking up a slight hill",
+      "Mild exertional limitation"
+     ],
+     [
+      "Grade 2",
+      "Walks slower than contemporaries or stops when walking at own pace",
+      "Moderate limitation on level ground"
+     ],
+     [
+      "Grade 3",
+      "Stops for breath after walking 100 metres or a few minutes",
+      "Severe functional walking limitation"
+     ],
+     [
+      "Grade 4",
+      "Too breathless to leave house or breathless when dressing/undressing",
+      "Very severe debilitating functional limitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-acting bronchodilators form the therapeutic foundation of maintenance pharmacotherapy across all symptomatic COPD categories. Prescribing once-daily **tiotropium**, a long-acting muscarinic antagonist (LAMA), provides sustained twenty-four-hour bronchodilation by selectively dissociating slowly from muscarinic M3 receptors. In large randomized clinical trials, tiotropium significantly improves trough FEV1, enhances health-related quality of life, reduces hyperinflation, and proves superior to long-acting beta agonists in reducing moderate-to-severe exacerbation rates.",
+   "say": "Long-acting bronchodilators form the therapeutic foundation of maintenance treatment across all symptomatic categories. Prescribing once-daily tiotropium delivers sustained twenty-four-hour bronchodilation by blocking muscarinic receptors. In randomized trials, tiotropium improves lung function, enhances quality of life, reduces gas trapping and proves superior to beta-agonists in lowering exacerbation rates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lama",
+      "label": "Tiotropium inhalation once daily"
+     },
+     {
+      "id": "m3",
+      "label": "Selective sustained blockade of muscarinic M3 receptors"
+     },
+     {
+      "id": "tone",
+      "label": "Suppresses baseline cholinergic bronchomotor tone"
+     },
+     {
+      "id": "trap",
+      "label": "Decreases dynamic hyperinflation & gas trapping"
+     },
+     {
+      "id": "out",
+      "label": "Improves exertional tolerance & cuts exacerbations"
+     }
+    ],
+    "edges": [
+     [
+      "lama",
+      "m3"
+     ],
+     [
+      "m3",
+      "tone"
+     ],
+     [
+      "tone",
+      "trap"
+     ],
+     [
+      "trap",
+      "out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initiating **dual bronchodilator therapy** with different mechanisms of action achieves greater lung expansion than escalating monotherapy. Combining a LAMA with a LABA (such as tiotropium-olodaterol or umeclidinium-vilanterol) provides maximal smooth muscle relaxation. Inhaled corticosteroids are reserved exclusively as add-on therapy for patients with frequent exacerbations and elevated blood eosinophil counts exceeding three hundred cells per microlitre, because inhaled steroids increase the risk of bacterial pneumonia in COPD.",
+   "say": "Combining bronchodilators with different mechanisms provides greater airflow improvement than increasing monotherapy doses. Combining a muscarinic antagonist with a long-acting beta agonist produces maximal smooth muscle relaxation. Inhaled corticosteroids are reserved as add-on treatment for patients with frequent exacerbations and blood eosinophils over three hundred, because steroids increase pneumonia risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LAMA + LABA dual therapy",
+     "points": [
+      "First-line maintenance for symptomatic patients",
+      "Dual cholinergic and adrenergic bronchodilation",
+      "Maximal reduction in lung hyperinflation",
+      "No increased risk of bacterial pneumonia"
+     ]
+    },
+    "right": {
+     "title": "Triple therapy (ICS + LAMA + LABA)",
+     "points": [
+      "Indicated if frequent exacerbations (>= 2/year)",
+      "Indicated if blood eosinophils >= 300 cells/microL",
+      "Reduces all-cause mortality in severe COPD",
+      "Carries increased risk of bacterial pneumonia"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

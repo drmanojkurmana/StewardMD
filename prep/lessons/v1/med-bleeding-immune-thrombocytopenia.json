@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "med-bleeding",
+ "subject": "medicine",
+ "title": "Platelet Disorders and Thrombocytopenias",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An acquired autoimmune bleeding disorder characterized by isolated thrombocytopenia in the absence of systemic illness defines **immune thrombocytopenia** (ITP). Autoreactive IgG antibodies directed against platelet membrane glycoproteins GPIIb/IIIa or GPIb/IX opsonize circulating platelets, promoting their premature clearance by Fc-gamma receptors on splenic macrophages. Concurrently, autoantibodies inhibit megakaryocyte thrombopoiesis in the bone marrow. Patients present with dry mucosal bleeding, petechiae, purpura, and epistaxis. Splenomegaly is absent; bone marrow examination demonstrates normal or increased megakaryocytes, and first-line therapy relies on corticosteroids and intravenous immunoglobulin.",
+   "say": "An acquired autoimmune bleeding disorder characterized by isolated thrombocytopenia in the absence of systemic illness defines immune thrombocytopenia. Autoreactive IgG antibodies directed against platelet membrane glycoproteins opsonize circulating platelets, promoting their premature clearance by splenic macrophages. Concurrently, autoantibodies impair megakaryocyte platelet production. Patients present with petechiae, purpura, and epistaxis without splenomegaly. First-line therapy relies on oral corticosteroids and intravenous immunoglobulin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "anti",
+      "label": "Anti-GPIIb/IIIa Autoantibodies Bind Platelets"
+     },
+     {
+      "id": "spleen",
+      "label": "Splenic Macrophage Phagocytosis via Fc-gamma Receptors"
+     },
+     {
+      "id": "marrow",
+      "label": "Megakaryocyte Platelet Shedding Impaired in Marrow"
+     },
+     {
+      "id": "itp",
+      "label": "Isolated Severe Thrombocytopenia (< 30,000/mcL)"
+     }
+    ],
+    "edges": [
+     [
+      "anti",
+      "spleen"
+     ],
+     [
+      "anti",
+      "marrow"
+     ],
+     [
+      "spleen",
+      "itp"
+     ],
+     [
+      "marrow",
+      "itp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A severe, life-threatening thrombotic microangiopathy mediated by impaired cleavage of ultra-large von Willebrand factor multimers characterizes **thrombotic thrombocytopenic purpura** (TTP). Severely deficient plasma activity of the metalloproteinase ADAMTS13 allows unconstrained ultra-large VWF multimers to anchor to vascular endothelial surfaces. High-shear microvascular flow unfolds these multimers, triggering spontaneous platelet aggregation and disseminated microvascular thrombosis. Affected patients classically exhibit the diagnostic pentad: microangiopathic haemolytic anaemia with schistocytes, severe thrombocytopenia, fluctuating neurological deficits, fever, and renal dysfunction. Prompt initiation of therapeutic plasma exchange is life-saving.",
+   "say": "A severe thrombotic microangiopathy mediated by impaired cleavage of ultra-large von Willebrand factor multimers characterizes thrombotic thrombocytopenic purpura. Severely deficient plasma activity of the metalloproteinase ADAMTS13 allows ultra-large multimers to anchor to endothelium. High-shear flow triggers spontaneous platelet aggregation and microvascular thrombosis. Patients exhibit microangiopathic haemolytic anaemia, severe thrombocytopenia, neurological deficits, fever, and renal dysfunction, requiring emergent plasma exchange.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acquired-thrombotic-thrombocytopenic-purpura-fig1.webp",
+    "alt": "Pathophysiological schematic of ADAMTS13 deficiency, ultra-large VWF multimer accumulation, and microvascular thrombosis.",
+    "caption": "ADAMTS13 deficiency permitting ultra-large VWF multimers to trigger disseminated platelet thrombi. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Quantifying plasma zinc metalloproteinase activity provides the definitive biochemical confirmation of thrombotic thrombocytopenic purpura. Demonstrating severe **adamts13 deficiency**, defined by enzyme activity below ten percent of normal, confirms TTP. In acquired TTP, autoantibodies (inhibitors) against ADAMTS13 neutralize enzymatic function, whereas congenital TTP (Upshaw-Schulman syndrome) stems from homozygous or compound heterozygous ADAMTS13 gene mutations. Calculating the PLASMIC score stratifies clinical probability prior to receiving ADAMTS13 results. Emergent treatment requires daily therapeutic plasma exchange to replace the enzyme and remove inhibitors, paired with corticosteroids and caplacizumab.",
+   "say": "Quantifying plasma metalloproteinase activity provides the definitive biochemical confirmation of thrombotic thrombocytopenic purpura. Demonstrating severe adamts13 deficiency below ten percent confirms TTP. In acquired TTP, inhibitory autoantibodies neutralize enzymatic function, whereas congenital disease stems from genetic mutations. Calculating the PLASMIC score predicts deficiency before laboratory results arrive. Emergent management requires daily therapeutic plasma exchange to replenish the enzyme, paired with corticosteroids and caplacizumab.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TTP (ADAMTS13 < 10%)",
+     "points": [
+      "Severe ADAMTS13 metalloproteinase deficiency",
+      "Ultra-large VWF multimers drive platelet thrombi",
+      "Coagulation assays (PT, aPTT, Fibrinogen): Normal",
+      "Prominent neurological symptoms common",
+      "Management: Immediate Plasma Exchange + Caplacizumab"
+     ]
+    },
+    "right": {
+     "title": "DIC (Consumptive Coagulopathy)",
+     "points": [
+      "Systemic tissue factor release and thrombin burst",
+      "Fibrin microthrombi consume clotting factors",
+      "Coagulation assays: Markedly prolonged PT & aPTT",
+      "Fibrinogen depleted (< 100 mg/dL), D-dimer high",
+      "Management: Treat underlying sepsis, FFP / Cryo"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An immune-mediated prothrombotic drug reaction triggered by heparin exposure causes paradoxical venous and arterial thrombosis despite profound thrombocytopenia. Developing **heparin-induced thrombocytopenia** (HIT type 2) involves IgG autoantibodies directed against complexes of platelet factor 4 (PF4) and polyanionic heparin. These IgG-PF4-heparin complexes bind platelet Fc-gamma-RIIa receptors, triggering massive platelet activation, thrombin generation, and microparticle release. Thrombocytopenia typically develops five to ten days after initiating heparin, dropping by over fifty percent. Management mandates immediate cessation of all heparin formulations and prompt initiation of alternative non-heparin anticoagulants like argatroban or fondaparinux.",
+   "say": "An immune-mediated prothrombotic drug reaction triggered by heparin exposure causes paradoxical venous and arterial thrombosis despite thrombocytopenia. Developing heparin-induced thrombocytopenia involves IgG antibodies targeting complexes of platelet factor 4 and heparin. These complexes cross-link platelet Fc receptors, triggering massive platelet activation and thrombin generation. Thrombocytopenia typically develops five to ten days post-heparin. Management mandates stopping all heparin and initiating non-heparin anticoagulants such as argatroban.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hep",
+      "label": "Heparin Exposure (Unfractionated > LMWH)"
+     },
+     {
+      "id": "pf4",
+      "label": "IgG Antibodies Form Against Heparin-PF4 Complexes"
+     },
+     {
+      "id": "fc",
+      "label": "Platelet Fc-gamma-RIIa Cross-linking & Thrombin Burst"
+     },
+     {
+      "id": "thromb",
+      "label": "Paradoxical Severe Thrombosis (DVT, PE, Arterial)"
+     }
+    ],
+    "edges": [
+     [
+      "hep",
+      "pf4"
+     ],
+     [
+      "pf4",
+      "fc"
+     ],
+     [
+      "fc",
+      "thromb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An autosomal recessive bleeding disorder of platelet aggregation stems from qualitative or quantitative defects in the integrin alpha-IIb-beta-3 receptor complex. In **glanzmann thrombasthenia**, genetic mutations in ITGA2B or ITGB3 eliminate functional fibrinogen receptor complexes on the platelet membrane. While platelet count and morphology are strictly normal, platelets fail to bind circulating fibrinogen to form intercellular platelet plugs. Platelet aggregometry demonstrates completely absent aggregation in response to all physiological agonists (ADP, collagen, epinephrine, thrombin), whereas ristocetin-induced agglutination is uniquely preserved because glycoprotein Ib-IX complexes remain intact.",
+   "say": "An autosomal recessive bleeding disorder of platelet aggregation stems from qualitative or quantitative defects in the integrin alpha-IIb-beta-3 receptor complex. In glanzmann thrombasthenia, mutations eliminate functional fibrinogen receptor complexes on the platelet membrane. While platelet count and morphology are normal, platelets cannot bind fibrinogen to form platelet plugs. Aggregometry shows absent aggregation to physiological agonists, while ristocetin-induced agglutination is uniquely preserved.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Platelet Function Disorder",
+     "Defective Platelet Glycoprotein",
+     "Platelet Morphology / Count",
+     "Aggregometry: Agonists vs Ristocetin"
+    ],
+    "rows": [
+     [
+      "Glanzmann Thrombasthenia",
+      "GPIIb/IIIa (Integrin alpha-IIb-beta-3)",
+      "Normal count & size",
+      "Absent to ADP/Collagen; Normal to Ristocetin"
+     ],
+     [
+      "Bernard-Soulier Syndrome",
+      "GPIb/IX/V Complex (VWF receptor)",
+      "Thrombocytopenia, Giant platelets",
+      "Normal to ADP/Collagen; Absent to Ristocetin"
+     ],
+     [
+      "Von Willebrand Disease",
+      "Plasma VWF protein deficiency",
+      "Normal count & size",
+      "Normal to ADP/Collagen; Impaired to Ristocetin"
+     ],
+     [
+      "Uraemic Thrombopathy",
+      "Dialyzable toxic metabolites",
+      "Normal count & size",
+      "Broadly blunted; Corrects with DDAVP / Dialysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An inherited autosomal recessive bleeding disorder characterized by defective platelet adhesion features giant platelets and moderate thrombocytopenia. In **bernard-soulier syndrome**, mutations in GP1BA, GP1BB, or GP9 disrupt the glycoprotein Ib-IX-V receptor complex, preventing platelet binding to subendothelial von Willebrand factor at sites of vascular injury. Peripheral blood smear examination characteristically reveals giant platelets approaching the diameter of normal erythrocytes. In platelet aggregometry, agglutination is completely absent in response to ristocetin and does not correct with normal plasma, distinguishing it from von Willebrand disease where addition of normal plasma restores agglutination.",
+   "say": "An inherited bleeding disorder characterized by defective platelet adhesion features giant platelets and moderate thrombocytopenia. In bernard-soulier syndrome, mutations in the glycoprotein Ib-IX-V complex prevent platelet binding to subendothelial von Willebrand factor. Peripheral blood smear examination characteristically reveals giant platelets approaching the diameter of red blood cells. Platelet agglutination is absent with ristocetin and does not correct with normal plasma, distinguishing it from von Willebrand disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bernard-soulier-syndrome-fig1.webp",
+    "alt": "Peripheral blood smear displaying giant platelets in Bernard-Soulier syndrome.",
+    "caption": "Peripheral blood film demonstrating giant platelets Approaching erythrocyte diameter in Bernard-Soulier. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Platelet aggregometry utilizing light transmission represents the gold-standard diagnostic modality for characterizing qualitative platelet functional disorders. By measuring light transmission through platelet-rich plasma following exposure to various agonists, **platelet aggregometry** differentiates specific receptor defects. ADP, collagen, and arachidonic acid evaluate activation pathways, while ristocetin induces VWF-dependent agglutination via GPIb. In aspirin-induced platelet dysfunction, arachidonic acid aggregation is completely extinguished due to irreversible cyclooxygenase-1 inhibition, while ADP-induced aggregation shows absence of the secondary release wave, confirming drug-induced functional defect.",
+   "say": "Platelet aggregometry utilizing light transmission represents the gold-standard diagnostic modality for characterizing qualitative platelet functional disorders. By measuring light transmission through platelet-rich plasma following exposure to agonists, aggregometry differentiates specific receptor defects. In aspirin-induced dysfunction, arachidonic acid aggregation is extinguished due to irreversible cyclooxygenase inhibition, while ADP aggregation shows loss of the secondary wave, confirming drug-induced defect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glanzmann Thrombasthenia Pattern",
+     "points": [
+      "Absent response to ADP",
+      "Absent response to Collagen",
+      "Absent response to Epinephrine & Thrombin",
+      "Normal agglutination to Ristocetin",
+      "Defect: GPIIb/IIIa receptor (Fibrinogen binding)"
+     ]
+    },
+    "right": {
+     "title": "Bernard-Soulier Pattern",
+     "points": [
+      "Normal aggregation to ADP",
+      "Normal aggregation to Collagen",
+      "Normal aggregation to Epinephrine & Thrombin",
+      "Absent agglutination to Ristocetin",
+      "Defect: GPIb/IX/V receptor (VWF adhesion)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Second-line therapeutic strategies for refractory immune thrombocytopenia target thrombopoietin receptor stimulation and splenic B-cell depletion. Administering oral **eltrombopag** or subcutaneous romiplostim stimulates thrombopoietin receptors (c-MPL) on bone marrow megakaryocytes, markedly increasing platelet production. Concurrently, the anti-CD20 monoclonal antibody rituximab depletes autoreactive B lymphocytes, reducing autoantibody synthesis. In patients failing medical therapies, laparoscopic splenectomy removes the primary anatomical site of platelet destruction and antibody production, providing durable long-term remissions in sixty to seventy percent of refractory cases.",
+   "say": "Second-line therapeutic strategies for refractory immune thrombocytopenia target thrombopoietin receptor stimulation and splenic B-cell depletion. Administering oral eltrombopag or subcutaneous romiplostim stimulates thrombopoietin receptors on megakaryocytes, substantially increasing platelet production. Rituximab depletes autoreactive B lymphocytes, reducing autoantibody production. In patients failing medical therapies, laparoscopic splenectomy provides durable long-term remissions in most refractory cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Symptomatic ITP with Bleeding / Platelets < 30,000/mcL"
+     },
+     {
+      "id": "line1",
+      "label": "First-Line: Oral Dexamethasone / Prednisone + IVIG"
+     },
+     {
+      "id": "line2",
+      "label": "Second-Line: TPO Receptor Agonists (Eltrombopag) / Rituximab"
+     },
+     {
+      "id": "surg",
+      "label": "Refractory Chronic ITP: Laparoscopic Splenectomy"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "line1"
+     ],
+     [
+      "line1",
+      "line2"
+     ],
+     [
+      "line2",
+      "surg"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

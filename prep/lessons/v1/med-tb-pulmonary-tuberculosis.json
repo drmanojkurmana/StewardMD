@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "med-tb",
+ "subject": "medicine",
+ "title": "Pulmonary tuberculosis: pathogenesis, diagnosis, and initial therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inhalation of microscopic aerosolized droplet nuclei transmits **pulmonary tuberculosis** through the respiratory tract. Inhaled bacilli of Mycobacterium tuberculosis reach the terminal pulmonary alveoli, where they are engulfed by resident alveolar macrophages. Surviving intracellular mycobacteria inhibit phagolysosomal fusion through cell wall lipoarabinomannan and cord factor trehalose dimycolate. The initial primary parenchymal infection triggers a localized inflammatory response, which either resolves spontaneously or progresses to active caseating pulmonary disease depending on host cell-mediated immune competence.",
+   "say": "Inhaled aerosol droplets transmit pulmonary tuberculosis into the terminal alveoli. Bacilli are ingested by alveolar macrophages where they resist intracellular destruction. Mycobacteria block phagolysosomal fusion using specialized cell wall lipids. The initial infection either resolves spontaneously or develops into active disease depending on cell-mediated immunity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "droplet",
+      "label": "Aerosol droplet inhalation"
+     },
+     {
+      "id": "alveoli",
+      "label": "Alveolar macrophage ingestion"
+     },
+     {
+      "id": "block",
+      "label": "Phagolysosomal fusion blockade"
+     },
+     {
+      "id": "inflam",
+      "label": "Localised primary pulmonary focus"
+     }
+    ],
+    "edges": [
+     [
+      "droplet",
+      "alveoli"
+     ],
+     [
+      "alveoli",
+      "block"
+     ],
+     [
+      "block",
+      "inflam"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antigen presentation stimulates cluster of differentiation four positive T helper lymphocytes to produce interferon gamma and tumor necrosis factor alpha. Recruited macrophages transform into specialized epithelioid cells and multinucleated Langhans giant cells, establishing **granuloma formation** to wall off persistent mycobacterial organisms. Central avascular necrosis generates cheese-like caseous debris within the granulomatous core. Caseating lesions may undergo liquefaction, cavity formation, or fibrous encapsulation with dystrophic calcification that persists as a dormant bacterial reservoir for decades.",
+   "say": "Antigen presentation drives helper T lymphocytes to release interferon gamma and tumor necrosis factor. Recruited macrophages convert into epithelioid cells and multinucleated Langhans giant cells, creating granuloma formation that circumscribes bacilli. Central necrosis forms caseous debris. These granulomas can cavitate or calcify into dormant reservoirs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tuberculosis-long-case-fig2.webp",
+    "alt": "Tuberculous caseating granuloma histology showing multinucleated giant cells and central necrosis.",
+    "caption": "Histopathologic architecture of tuberculous caseating granuloma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Symptomatic reactivation or progressive primary tuberculosis generates classic constitutional and respiratory complaints. Developing **chronic cough** lasting longer than two weeks, often accompanied by mucoid or hemoptysis-streaked sputum, represents the cardinal clinical presentation requiring diagnostic investigation. Systemic manifestations include low-grade fever with characteristic evening temperature spikes, drenching night sweats, anorexia, and progressive unintended weight loss. Physical examination often demonstrates apical post-tussive crepitations, bronchial breath sounds, or signs of consolidation over affected pulmonary segments.",
+   "say": "Clinical disease typically causes persistent respiratory complaints and constitutional symptoms. Developing chronic cough lasting over two weeks represents the primary indication for diagnostic evaluation. Patients suffer from evening fever spikes, night sweats, anorexia and weight loss. Physical chest examination reveals apical post-tussive crackles or localized consolidation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom domain",
+     "Characteristic manifestation",
+     "Diagnostic clinical relevance"
+    ],
+    "rows": [
+     [
+      "Respiratory symptom",
+      "Productive cough > 2 weeks",
+      "Primary screening criterion for active TB"
+     ],
+     [
+      "Constitutional sign",
+      "Evening pyrexia and night sweats",
+      "Systemic cytokine release from granulomas"
+     ],
+     [
+      "Metabolic feature",
+      "Anorexia with weight loss",
+      "TNF-alpha mediated cachexia state"
+     ],
+     [
+      "Vascular complication",
+      "Hemoptysis or streaked sputum",
+      "Cavitation and erosion of bronchial arteries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct microscopic visualization of acid-fast bacilli in respiratory secretions establishes initial bacteriological confirmation. Examining **sputum AFB** using carbolfuchsin-based Ziehl-Neelsen staining or fluorescent auramine-O microscopy requires at least two samples, typically one on-the-spot specimen and one early morning sample. Mycobacterial cell walls retain red carbolfuchsin dye despite decolorization with twenty percent sulfuric acid and acid alcohol. While sputum smear microscopy is rapid and inexpensive, it requires at least five thousand to ten thousand bacilli per millilitre for positive detection.",
+   "say": "Microscopic visualization of acid-fast organisms in sputum confirms mycobacterial infection. Examining sputum AFB via Ziehl-Neelsen or fluorescent staining requires two specimens including an early morning sample. Mycobacteria retain red dye against acid decolorization. Microscopy is fast but requires substantial bacterial loads for detection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ziehl-Neelsen staining",
+     "points": [
+      "Light microscopy using bright carbolfuchsin",
+      "Decolorization with 20% sulfuric acid",
+      "Methylene blue counterstaining",
+      "Requires 5000 to 10000 bacilli/mL"
+     ]
+    },
+    "right": {
+     "title": "Auramine-O fluorescence",
+     "points": [
+      "Fluorescent microscopy excitation",
+      "Higher sensitivity than brightfield smear",
+      "Rapid examination under lower magnification",
+      "Preferred for high-throughput laboratory screening"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Automated real-time polymerase chain reaction provides rapid, simultaneous mycobacterial identification and resistance profiling. Performing a **GeneXpert** molecular assay (CBNAAT) amplifies the rpoB gene region of Mycobacterium tuberculosis within two hours, detecting bacterial deoxyribonucleic acid directly from uncentrifuged sputum. Crucially, the cartridge assay detects mutations in the eighty-one base-pair rifampicin resistance-determining region, serving as a reliable surrogate for multidrug resistance. GeneXpert exhibits superior analytical sensitivity compared to sputum microscopy, especially in smear-negative disease and immunocompromised hosts.",
+   "say": "Automated real-time polymerase chain reaction accelerates diagnosis and drug susceptibility screening. Performing a GeneXpert cartridge test amplifies mycobacterial genes within two hours directly from raw sputum. Crucially, it identifies mutations conferring rifampicin resistance. The molecular assay delivers high sensitivity even in smear-negative individuals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sample",
+      "label": "Sputum sample loading into cartridge"
+     },
+     {
+      "id": "lysis",
+      "label": "Ultrasonic cell lysis & DNA release"
+     },
+     {
+      "id": "pcr",
+      "label": "rpoB gene PCR amplification"
+     },
+     {
+      "id": "res",
+      "label": "TB detection & rifampicin resistance profile"
+     }
+    ],
+    "edges": [
+     [
+      "sample",
+      "lysis"
+     ],
+     [
+      "lysis",
+      "pcr"
+     ],
+     [
+      "pcr",
+      "res"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluating host immunological reactivity identifies individuals with immunological sensitization from prior exposure. Interpreting the **Mantoux test** involves intradermal injection of five tuberculin units of purified protein derivative, measuring transverse induration forty-eight to seventy-two hours later. An induration exceeding five millimetres indicates positive reactivity in human immunodeficiency virus infection, whereas ten millimetres applies to high-risk clinical populations. Conversely, the IGRA (interferon gamma release assay) measures interferon-gamma production by T cells exposed to specific antigens ESAT-6 and CFP-10, remaining unaffected by prior BCG vaccination.",
+   "say": "Assessing host immunity detects sensitization from prior mycobacterial exposure. Interpreting the Mantoux test requires measuring cutaneous induration two to three days after tuberculin injection. Induration thresholds differ between immunocompromised and standard populations. In contrast, blood interferon gamma release assays distinguish true infection from BCG vaccination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Target analyte",
+     "BCG interference",
+     "Clinical utility"
+    ],
+    "rows": [
+     [
+      "Mantoux (PPD) test",
+      "Delayed cutaneous hypersensitivity",
+      "Frequent false-positives",
+      "Field screening and contact tracing"
+     ],
+     [
+      "IGRA (QuantiFERON)",
+      "In vitro IFN-gamma secretion",
+      "No false-positives from BCG",
+      "Confirmation in vaccinated individuals"
+     ],
+     [
+      "Sputum microscopy",
+      "Acid-fast bacilli morphology",
+      "No interference",
+      "Active infectious disease confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standardized short-course chemotherapy regimens prevent disease progression, relapse, and acquired antimicrobial resistance. Under the modern **NTEP regimen**, newly diagnosed drug-susceptible pulmonary tuberculosis is treated with daily weight-banded fixed-dose combinations. The intensive phase comprises two months of isoniazid, rifampicin, pyrazinamide, and ethambutol, which rapidly eliminates actively dividing bacilli and halts transmission. The subsequent four-month continuation phase utilizes isoniazid, rifampicin, and ethambutol to sterilize persistent bacilli, ensuring complete bacteriological cure and reducing recurrence risk.",
+   "say": "Standardized short-course chemotherapy prevents disease progression and resistance. Under the national NTEP regimen, susceptible tuberculosis receives weight-based fixed-dose combination tablets. The two-month intensive phase combines four drugs to eliminate rapidly dividing bacilli. The four-month continuation phase uses three drugs to clear persistent organisms.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-tb-dots.webp",
+    "alt": "DOTS tuberculosis treatment categories and fixed-dose combinations.",
+    "caption": "NTEP fixed-dose combination antitubercular therapy categories. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inhibiting mycobacterial cell wall synthesis underpins first-line bactericidal treatment and preventive chemotherapy. Prescribing daily **isoniazid** rapidly destroys intracellular and extracellular dividing bacilli by inhibiting mycolic acid biosynthesis following prodrug activation by the bacterial catalase-peroxidase enzyme KatG. Major adverse effects include hepatic transaminase elevation, clinical hepatitis, and peripheral sensory neuropathy caused by competitive interference with pyridoxal 5-phosphate metabolism. Co-prescribing prophylactic pyridoxine (vitamin B6) prevents neurotoxicity in high-risk patients, including malnourished, diabetic, pregnant, or alcoholic individuals.",
+   "say": "Inhibiting cell wall mycolic acid synthesis is the core mechanism of first-line therapy. Prescribing daily isoniazid rapidly kills dividing bacilli after bacterial KatG enzyme activation. Significant toxicities include drug-induced hepatitis and peripheral neuropathy resulting from pyridoxine depletion. Giving supplemental vitamin B6 prevents nerve injury in vulnerable patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isoniazid pharmacology",
+     "points": [
+      "Prodrug activated by bacterial KatG",
+      "Inhibits InhA mycolic acid synthesis",
+      "Rapid early bactericidal clearance",
+      "Depletes coenzyme pyridoxal phosphate"
+     ]
+    },
+    "right": {
+     "title": "Toxicity prevention",
+     "points": [
+      "Routine baseline liver enzyme testing",
+      "Pyridoxine 10 to 25 mg daily co-prescription",
+      "Immediate cessation if transaminases rise > 5x",
+      "Avoidance of concurrent alcohol intake"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "med-localisation",
+ "subject": "medicine",
+ "title": "Lateral Medullary Syndrome and Cranial Nerve Palsies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Infarction of the posterolateral medulla due to thromboembolic occlusion of the intracranial vertebral artery or posterior inferior cerebellar artery (PICA) produces **Wallenberg syndrome**. In sharp contrast to medial medullary stroke, lateral medullary infarction selectively spares the descending corticospinal motor pyramids, preserving limb strength while destroying multiple sensory nuclei, sympathetic pathways, and lower cranial nerve connections.",
+   "say": "Infarction of the posterolateral medulla due to occlusion of the vertebral artery or posterior inferior cerebellar artery produces Wallenberg syndrome. Lateral medullary infarction selectively spares the descending motor pyramids, preserving limb strength while destroying sensory nuclei, descending sympathetics, and cranial nerve connections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/brainstem-and-alternating-syndromes-fig1.webp",
+    "alt": "Cross-sectional anatomy of lateral medullary infarction in Wallenberg syndrome.",
+    "caption": "Posterolateral medullary anatomy and involved structures in Wallenberg syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The sensory signature of lateral medullary syndrome is a striking dissociated, crossed sensory deficit. Ischaemic injury to the spinal trigeminal nucleus and tract abolishes pain and temperature sensation across the ipsilateral hemiface. Simultaneously, damage to the traversing spinothalamic tract causes loss of pain and temperature sensation over the contralateral trunk and limbs, confirming an alternating **crossed sensory loss**.",
+   "say": "The sensory signature of lateral medullary syndrome is a striking dissociated crossed sensory deficit. Injury to the spinal trigeminal tract abolishes pain and temperature over the ipsilateral face. Simultaneously, destruction of the spinothalamic tract causes loss of pain and temperature over the contralateral body.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ipsilateral Facial Sensory Loss",
+     "points": [
+      "Spinal trigeminal nucleus and tract",
+      "Abolished pain and thermal discrimination",
+      "Impaired ipsilateral corneal reflex",
+      "Sensation spared over contralateral face"
+     ]
+    },
+    "right": {
+     "title": "Contralateral Body Sensory Loss",
+     "points": [
+      "Traversing spinothalamic tract",
+      "Abolished pain and thermal discrimination",
+      "Affects contralateral arm, trunk, and leg",
+      "Light touch and proprioception preserved"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Motor innervation of the larynx, pharynx, and upper palate originates within the specialised lower motor neuron pool termed the **nucleus ambiguus**. In lateral medullary infarction, ischaemic injury to this nucleus impairs ninth and tenth cranial nerve efferents, causing acute palatal droop with uvular deviation away from the lesion, intractable dysphagia, nasal regurgitation of fluids, and prominent hoarse dysphonia.",
+   "say": "Motor innervation of the larynx, pharynx, and palate originates within the specialized lower motor neuron pool termed the nucleus ambiguus. In lateral medullary infarction, injury to this nucleus impairs cranial nerves nine and ten, causing acute palatal droop, intractable dysphagia, nasal regurgitation, and hoarse dysphonia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "amb",
+      "label": "Nucleus Ambiguus Infarct"
+     },
+     {
+      "id": "eff",
+      "label": "Impaired CN IX / X Efferents"
+     },
+     {
+      "id": "dys",
+      "label": "Severe Dysphagia & Dysphonia"
+     }
+    ],
+    "edges": [
+     [
+      "amb",
+      "eff"
+     ],
+     [
+      "eff",
+      "dys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interruption of descending first-order sympathetic axons travelling through the dorsolateral brainstem tegmentum produces an ipsilateral **Horner syndrome**. Clinical signs include mild upper eyelid ptosis from denervation of the superior tarsal muscle, pupillary miosis that is more pronounced in dim illumination, and ipsilateral facial anhidrosis with cutaneous flushing resulting from loss of sympathetic sudomotor tone.",
+   "say": "Interruption of descending sympathetic axons travelling through the dorsolateral brainstem produces an ipsilateral Horner syndrome. Clinical signs include mild upper eyelid ptosis, pupillary miosis more pronounced in dim light, and ipsilateral facial anhidrosis with cutaneous flushing from loss of sympathetic tone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Sign",
+     "Denervated Muscle or Structure",
+     "Physiological Consequence"
+    ],
+    "rows": [
+     [
+      "Partial Ptosis",
+      "Superior tarsal muscle (Müller muscle)",
+      "Mild 1-2 mm drooping of upper eyelid"
+     ],
+     [
+      "Pupillary Miosis",
+      "Pupillary dilator muscle",
+      "Asymmetric constriction, marked in dim light"
+     ],
+     [
+      "Facial Anhidrosis",
+      "Facial sweat glands & vascular smooth muscle",
+      "Loss of sweating and increased cutaneous warmth"
+     ],
+     [
+      "Apparent Enophthalmos",
+      "Orbitalis smooth muscle",
+      "Illusion of sunken globe from narrowed fissure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peripheral dysfunction of cranial nerves in the brainstem or periphery presents with specific deficits based on their anatomical course. A complete **third nerve palsy** manifests with ptosis, an eye resting down and out, and an unreactive dilated pupil when parasympathetic pupillomotor fibres are compressed by an expanding posterior communicating artery aneurysm, requiring immediate emergency vascular neuroimaging.",
+   "say": "Peripheral dysfunction of cranial nerves presents with specific deficits based on their anatomical course. A complete third nerve palsy manifests with ptosis, an eye resting down and out, and a dilated pupil when pupillomotor fibres are compressed by a posterior communicating artery aneurysm, requiring urgent neuroimaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical (Compressive) CN III Palsy",
+     "points": [
+      "Dilated, unreactive pupil (early)",
+      "External compression of superficial parasympathetics",
+      "Posterior communicating artery aneurysm hazard",
+      "Mandates emergency CT angiography"
+     ]
+    },
+    "right": {
+     "title": "Medical (Ischaemic) CN III Palsy",
+     "points": [
+      "Pupil-sparing (normal reactive pupil)",
+      "Microvascular ischaemia of central nerve core",
+      "Common in diabetes mellitus and hypertension",
+      "Resolves spontaneously over several months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acute, idiopathic peripheral lower motor neuron paralysis of the seventh cranial nerve is universally designated as **Bell palsy**. Patients present with abrupt unilateral facial weakness involving all muscle groups on that side. Critical physical signs include inability to wrinkle the ipsilateral forehead, failure of complete eyelid closure (lagophthalmos), upward globe rotation upon attempted closure (Bell phenomenon), and angle of mouth drooping.",
+   "say": "An acute idiopathic peripheral lower motor neuron paralysis of the seventh cranial nerve is designated as Bell palsy. Patients present with abrupt unilateral facial weakness involving all muscle groups on that side. Critical signs include inability to wrinkle the forehead, incomplete eyelid closure, and drooping of the mouth angle.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn7-facial.webp",
+    "alt": "Physical examination and clinical signs of facial nerve palsy.",
+    "caption": "Examination of facial nerve motor branches and peripheral Bell palsy signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The fundamental neurological distinction in facial weakness rests on distinguishing upper from lower motor neuron distribution. Upper motor neuron lesions (such as hemispheric cortical stroke) spare the forehead due to bilateral corticobulbar innervation of the upper facial nucleus. Conversely, lower motor neuron lesions like Bell palsy paralyse the entire ipsilateral hemiface, including the **frontalis** muscle, causing total loss of forehead furrowing.",
+   "say": "The fundamental neurological distinction in facial weakness rests on distinguishing upper from lower motor neuron distribution. Upper motor neuron lesions spare the forehead due to bilateral corticobulbar innervation of the upper facial nucleus. Conversely, lower motor neuron lesions paralyse the entire hemiface, including the frontalis muscle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bells-palsy-fig1.webp",
+    "alt": "Comparison between upper motor neuron and lower motor neuron facial nerve palsy.",
+    "caption": "Forehead-sparing in central lesions versus total hemifacial weakness in Bell palsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Therapeutic management of acute Bell palsy mandates early intervention with a seven-day course of high-dose oral **prednisolone** initiated within seventy-two hours of symptom onset to reduce perineural oedema within the rigid facial canal. Adjunctive corneal lubrication with artificial tears and nighttime eye taping is mandatory to prevent exposure keratitis, corneal ulceration, and permanent visual loss from incomplete blinking.",
+   "say": "Therapeutic management of acute Bell palsy mandates early intervention with high-dose oral prednisolone started within seventy-two hours of symptom onset to reduce edema within the facial canal. Aggressive corneal lubrication and nighttime eye taping are essential to prevent exposure keratitis and corneal ulceration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Measure",
+     "Dosage / Regimen",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Oral Corticosteroids",
+      "Prednisolone 60 mg/day for 7 days",
+      "Decreases neural inflammation and accelerates recovery"
+     ],
+     [
+      "Eye Protection",
+      "Carbomer gel / lubricating drops by day",
+      "Prevents corneal desiccation and exposure keratitis"
+     ],
+     [
+      "Nighttime Shielding",
+      "Protective moisture chamber or eye tape",
+      "Maintains eyelid closure during sleep"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 434"
+}

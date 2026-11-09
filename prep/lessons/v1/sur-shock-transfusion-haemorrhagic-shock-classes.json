@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "module": "sur-shock-transfusion",
+ "subject": "surgery",
+ "title": "Haemorrhagic Shock Classification and Permissive Hypotension",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Uncontrolled acute blood loss produces inadequate cellular perfusion, tissue hypoxia, and anaerobic metabolism, defining traumatic **haemorrhagic shock**. Haemorrhage represents the leading cause of preventable early mortality in surgical trauma patients worldwide. Compensatory sympathetic activation triggers profound peripheral arteriolar vasoconstriction and tachycardia to maintain critical coronary and cerebral perfusion pressures, temporarily masking significant systemic hypovolaemia until homeostatic mechanisms fail.",
+   "say": "Haemorrhagic shock is the leading cause of preventable trauma death. Sympathetic vasoconstriction and tachycardia temporarily sustain cerebral and coronary perfusion until blood loss overwhelms compensatory capacity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Pathophysiology and classification of haemorrhagic shock.",
+    "caption": "Pathophysiological progression of haemorrhagic shock and physiological compensation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "To guide clinical assessment and rapid volume resuscitation, Advanced Trauma Life Support establishes four discrete **haemorrhagic shock classes** for an average seventy-kilogram adult. Class I haemorrhage involves loss of up to fifteen percent of circulating blood volume, corresponding to less than seven hundred and fifty millilitres. Class I shock presents with normal resting heart rate, preserved systolic blood pressure, normal pulse pressure, and normal urine output exceeding thirty millilitres per hour.",
+   "say": "ATLS categorizes acute bleeding into four shock classes. Class one shock involves loss of under fifteen percent of blood volume, presenting with normal vital signs and adequate urine output.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Class I Shock",
+     "Class II Shock",
+     "Class III Shock",
+     "Class IV Shock"
+    ],
+    "rows": [
+     [
+      "Blood volume lost (%)",
+      "< 15% (< 750 mL)",
+      "15% to 30% (750 to 1500 mL)",
+      "30% to 40% (1500 to 2000 mL)",
+      "> 40% (> 2000 mL)"
+     ],
+     [
+      "Heart rate (beats/min)",
+      "< 100",
+      "100 to 120",
+      "120 to 140",
+      "> 140 (or extreme bradycardia)"
+     ],
+     [
+      "Blood pressure",
+      "Normal",
+      "Normal systolic",
+      "Decreased systolic",
+      "Severe hypotension"
+     ],
+     [
+      "Pulse pressure",
+      "Normal",
+      "Narrowed (elevated diastolic)",
+      "Markedly narrowed",
+      "Barely perceptible"
+     ],
+     [
+      "Respiratory rate (/min)",
+      "14 to 20",
+      "20 to 30",
+      "30 to 40",
+      "> 35 (laboured)"
+     ],
+     [
+      "Urine output (mL/hr)",
+      "> 30",
+      "20 to 30",
+      "5 to 15",
+      "Negligible / anuria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When acute blood loss reaches fifteen to thirty percent, corresponding to seven hundred and fifty to fifteen hundred millilitres, the patient enters **Class II shock**. The earliest physiological indicator is mild sinus tachycardia exceeding one hundred beats per minute. Systolic blood pressure is sustained by compensatory arteriolar constriction, but diastolic pressure rises, producing a classic narrowed pulse pressure. Concurrently, mild tachypnoea, peripheral cutaneous vasoconstriction, and modest oliguria develop.",
+   "say": "Class two shock corresponds to fifteen to thirty percent blood loss. It manifests with sinus tachycardia and a narrowed pulse pressure as compensatory vasoconstriction preserves systolic pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Class I Shock",
+     "points": [
+      "Blood loss under 750 mL (< 15%)",
+      "Heart rate under 100 beats per minute",
+      "Normal systolic and pulse pressure",
+      "Urine output maintained above 30 mL/hr"
+     ]
+    },
+    "right": {
+     "title": "Class II Shock",
+     "points": [
+      "Blood loss 750 to 1500 mL (15% to 30%)",
+      "Tachycardia 100 to 120 beats per minute",
+      "Narrowed pulse pressure with cool skin",
+      "Urine output declines to 20 to 30 mL/hr"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A loss of thirty to forty percent of total blood volume precipitates **Class III shock**, marking a critical transition from compensated to uncompensated hypovolaemia. Compensatory mechanisms can no longer sustain end-organ perfusion; systolic blood pressure drops precipitously, heart rate exceeds one hundred and twenty beats per minute, and urine output plummets to five to fifteen millilitres per hour. Class III shock mandates immediate blood component transfusion alongside definitive surgical haemorrhage control.",
+   "say": "Class three shock marks uncompensated shock with thirty to forty percent blood loss. Systolic pressure drops, heart rate exceeds one hundred and twenty, and immediate blood transfusion is mandatory.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loss",
+      "label": "Acute blood loss exceeds 1500 mL (30% to 40% of total volume)"
+     },
+     {
+      "id": "comp",
+      "label": "Exhaustion of sympathetic vasoconstriction and venous capacitance"
+     },
+     {
+      "id": "hypo",
+      "label": "Systemic hypotension, severe tachycardia (> 120 bpm), and oliguria"
+     },
+     {
+      "id": "trans",
+      "label": "Mandatory immediate packed red blood cell transfusion and surgery"
+     }
+    ],
+    "edges": [
+     [
+      "loss",
+      "comp"
+     ],
+     [
+      "comp",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "trans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When acute blood loss exceeds forty percent, corresponding to over two litres in an adult, the patient enters immediately life-threatening **Class IV shock**. Patients present with profound hypotension, extreme tachycardia or agonal bradycardia, cold mottled extremities, and complete anuria. Consciousness is severely depressed, progressing to stupor or coma. Immediate emergency operative or angiographic intervention and massive balanced transfusion are necessary to avert imminent cardiac arrest.",
+   "say": "Class four shock involves massive bleeding exceeding forty percent of blood volume. Patients present with profound hypotension, cold mottled skin, anuria, and coma, facing imminent cardiac arrest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mental Status",
+     "Clinical Examination Sign",
+     "Physiological Reserve",
+     "Resuscitation Mandate"
+    ],
+    "rows": [
+     [
+      "Class I: Slightly anxious",
+      "Warm extremities, brisk capillary refill",
+      "Full intact physiological reserve",
+      "Crystalloid trial or watchful waiting"
+     ],
+     [
+      "Class II: Mildly anxious",
+      "Cool pale extremities, mild delayed refill",
+      "Compensating via vasoconstriction",
+      "Balanced crystalloid resuscitation"
+     ],
+     [
+      "Class III: Anxious / confused",
+      "Cold clammy skin, mottled knees",
+      "Decompensating rapidly",
+      "Immediate packed red blood cells"
+     ],
+     [
+      "Class IV: Lethargic / comatose",
+      "Ashen grey, absent peripheral pulses",
+      "Near circulatory collapse",
+      "Massive transfusion protocol activation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with active, uncontained torso haemorrhage, aggressive early crystalloid resuscitation is dangerous. Infusing large volumes of fluid elevates hydrostatic vascular pressure, dilutes clotting factors, and washes away newly formed, fragile platelet plugs, an adverse phenomenon termed popping the clot. Modern trauma protocols emphasize **permissive hypotension**, maintaining a lower systolic blood pressure of eighty to ninety millimetres of mercury until surgical haemostasis is achieved.",
+   "say": "Aggressive crystalloid infusion increases pressure and dislodges early platelet plugs, worsening bleeding. Permissive hypotension targets a systolic pressure of eighty to ninety millimetres until surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aggressive Normotensive Resuscitation",
+     "points": [
+      "Forces systolic BP to 120 mmHg with fluids",
+      "Dislodges early platelet and fibrin clots",
+      "Causes profound dilutional coagulopathy",
+      "Worsens internal bleeding and mortality"
+     ]
+    },
+    "right": {
+     "title": "Permissive Hypotension",
+     "points": [
+      "Targets systolic BP 80 to 90 mmHg (MAP 50-60)",
+      "Sustains vital cerebral and coronary perfusion",
+      "Preserves early haemostatic thrombi intact",
+      "Restricts crystalloids to minimal volumes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinicians must recognize critical contraindications to permissive hypotension. In patients suffering severe **traumatic brain injury**, cerebral perfusion pressure depends directly on mean arterial pressure. Allowing systemic hypotension below ninety millimetres of mercury in traumatic brain injury causes catastrophic secondary ischaemic brain damage and doubles mortality. In these patients, systolic blood pressure must be rigorously maintained at or above one hundred and ten millimetres of mercury.",
+   "say": "Permissive hypotension is strictly contraindicated in severe traumatic brain injury. In head-injured patients, cerebral perfusion requires maintaining systolic blood pressure at or above one hundred and ten.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Assess trauma patient: verify Glasgow Coma Scale and pupil reactivity"
+     },
+     {
+      "id": "tbi",
+      "label": "Isolated penetrating torso trauma vs concomitant severe TBI"
+     },
+     {
+      "id": "hypo",
+      "label": "No TBI: target permissive hypotension (systolic BP 80 to 90 mmHg)"
+     },
+     {
+      "id": "normo",
+      "label": "TBI present: maintain systolic BP >= 110 mmHg to preserve CPP"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "tbi"
+     ],
+     [
+      "tbi",
+      "hypo"
+     ],
+     [
+      "tbi",
+      "normo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During emergency laparotomy, surgeons achieve rapid mechanical vascular control using specialized instruments like **haemostatic forceps**. Applying clamps across bleeding mesenteric vessels or clamping the hepatoduodenal ligament halts exsanguinating blood loss while anesthesia teams catch up with blood transfusion. Achieving definitive mechanical source control remains the absolute prerequisite for successfully resuscitating severe haemorrhagic shock.",
+   "say": "Surgeons use haemostatic forceps during emergency laparotomy to control bleeding vessels directly. Prompt mechanical source control is essential to restore perfusion during massive haemorrhage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-spencer-wells-artery-forceps.webp",
+    "alt": "Surgical haemostatic forceps for vascular clamping.",
+    "caption": "Haemostatic forceps applied to bleeding vessels during damage control laparotomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 4"
+}
