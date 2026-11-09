@@ -1,0 +1,196 @@
+{
+ "key": "obg-endometrial-cancer-postmenopausal-bleeding",
+ "v": 1,
+ "module": "obg-endometrial-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Postmenopausal Bleeding, Uterine Staging and Sarcomas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Spontaneous genital tract bleeding occurring twelve months or more following the final menstrual period is **postmenopausal bleeding**. While senile endometrial atrophy causes the majority of episodes, approximately ten percent of patients harbor underlying endometrial carcinoma. Prompt transvaginal ultrasonography and histological sampling are mandatory to exclude invasive neoplastic disease.",
+   "say": "Postmenopausal bleeding requires prompt investigation because one in ten cases harbors endometrial cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology",
+     "Proportion of Cases",
+     "Diagnostic Approach"
+    ],
+    "rows": [
+     [
+      "Endometrial atrophy",
+      "60 to 70 percent",
+      "Thin stripe on TVS below 4 mm"
+     ],
+     [
+      "Endometrial polyp",
+      "10 to 15 percent",
+      "Saline sonohysterography or hysteroscopy"
+     ],
+     [
+      "Endometrial carcinoma",
+      "10 percent",
+      "Pipelle or hysteroscopic biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line noninvasive triage employs pelvic ultrasonography to measure the double-layer **endometrial thickness threshold**. An endometrial stripe equal to or less than four millimeters in a postmenopausal woman provides a ninety-nine percent negative predictive value for carcinoma. Any stripe exceeding four millimeters or presenting focal irregularity mandates histological tissue acquisition.",
+   "say": "A four millimeter endometrial stripe threshold effectively excludes carcinoma when uniformly thin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stripe 4 mm or Less",
+     "points": [
+      "Negative predictive value over 99 percent",
+      "Carcinoma risk below 1 percent",
+      "Expectant observation if bleeding ceases"
+     ]
+    },
+    "right": {
+     "title": "Stripe Greater Than 4 mm",
+     "points": [
+      "Endometrial biopsy indicated",
+      "Pipelle outpatient suction biopsy",
+      "Hysteroscopy if stripe irregular"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Office-based sampling of the endometrium using a flexible polyethylene **suction Pipelle curette** yields diagnostic tissue without requiring general anesthesia. The device creates internal negative pressure when the internal piston is retracted, aspirating tissue fragments through an apical orifice. If outpatient sampling proves insufficient or bleeding recurs, formal hysteroscopy with curettage is performed.",
+   "say": "Pipelle aspiration provides accurate outpatient endometrial sampling with high patient tolerance.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-endometrial_sampling.webp",
+    "alt": "Endometrial biopsy technique using a Pipelle suction curette.",
+    "caption": "Office endometrial sampling technique using a flexible Pipelle catheter. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An aggressive prototype of type two uterine carcinoma is **uterine serous carcinoma**, accounting for under ten percent of cases but over forty percent of cancer deaths. Arising from endometrial intraepithelial carcinoma in atrophic endometrium, it exhibits diffuse TP53 mutations, extensive lymphatic permeation, and an early propensity for transperitoneal dissemination mimicking ovarian carcinoma.",
+   "say": "Uterine serous carcinoma is an aggressive high grade tumor with high rates of intra-abdominal metastasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Characteristic",
+     "Serous Carcinoma",
+     "Endometrioid Carcinoma"
+    ],
+    "rows": [
+     [
+      "Precursor",
+      "Endometrial intraepithelial carcinoma",
+      "Atypical hyperplasia"
+     ],
+     [
+      "p53 immunohistochemistry",
+      "Abnormal mutant overexpressed or null",
+      "Normal wild type pattern"
+     ],
+     [
+      "Spread pattern",
+      "Peritoneal exfoliation, nodal",
+      "Myometrial invasion, lymphatic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern operative management relies on strict **surgical FIGO staging**, dividing uterine malignancies based on pathological organ extent. Stage one tumors remain limited to the uterus, subdivided into stage 1A with less than half myometrial invasion and stage 1B with half or greater invasion. Stage three represents regional pelvic and para-aortic lymph node involvement.",
+   "say": "FIGO staging divides uterine cancer by depth of myometrial invasion and lymph node spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Anatomical Boundary",
+     "Subdivision"
+    ],
+    "rows": [
+     [
+      "Stage IA",
+      "Confined to endometrium or inner half myometrium",
+      "Under 50 percent depth"
+     ],
+     [
+      "Stage IB",
+      "Invades half or more of myometrium",
+      "50 percent or deeper"
+     ],
+     [
+      "Stage II",
+      "Cervical stromal connective tissue",
+      "No extrauterine extension"
+     ],
+     [
+      "Stage III",
+      "Local adnexal or nodal metastasis",
+      "IIIA serosa, IIIC lymph nodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant mesenchymal tumors of the uterine corpus are classified as **uterine sarcoma variants**, distinct from epithelial adenocarcinomas. Unlike endometrial cancers, sarcomas arise de novo within the myometrial smooth muscle or endometrial stroma rather than from premalignant hyperplastic glands. They demonstrate aggressive haematogenous metastasis, notably to the pulmonary parenchyma, liver, and skeleton.",
+   "say": "Uterine sarcomas are uncommon mesenchymal malignancies characterized by haematogenous dissemination.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-figo-uterine-sarcoma.webp",
+    "alt": "FIGO staging diagrams for uterine sarcomas.",
+    "caption": "FIGO anatomical stages for uterine sarcomas and leiomyosarcomas. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most prevalent primary uterine smooth muscle malignancy is **uterine leiomyosarcoma**, which typically manifests as a solitary, bulky, soft, and fleshy intramural mass with extensive central necrosis. Microscopic confirmation requires the Stanford triad: marked cytological atypia, coagulative tumor cell necrosis, and a mitotic index exceeding ten mitoses per ten high-power fields.",
+   "say": "Leiomyosarcoma is diagnosed histologically by severe nuclear atypia, coagulative necrosis, and frequent mitoses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stanford Triad Criteria",
+     "points": [
+      "Diffuse moderate to severe cytological atypia",
+      "Coagulative tumor cell necrosis",
+      "Mitotic count over 10 per 10 HPF"
+     ]
+    },
+    "right": {
+     "title": "Benign Leiomyoma",
+     "points": [
+      "Uniform spindle cells without atypia",
+      "Infarction necrosis without viable border",
+      "Mitotic count under 5 per 10 HPF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A highly lethal biphasic neoplasm composed of both malignant epithelial and malignant mesenchymal elements is **uterine carcinosarcoma**. Previously designated malignant mixed Müllerian tumor, monoclonal genetic studies prove it represents a metaplastic, dedifferentiated epithelial carcinoma. Treatment follows high-risk epithelial protocols including surgical staging followed by platinum-based combination chemotherapy.",
+   "say": "Carcinosarcoma is a dedifferentiated epithelial carcinoma containing both epithelial and sarcomatous clones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumor Component",
+     "Histological Manifestation",
+     "Therapeutic Implication"
+    ],
+    "rows": [
+     [
+      "Epithelial element",
+      "High grade serous or clear cell",
+      "Drives nodal and peritoneal spread"
+     ],
+     [
+      "Heterologous mesenchyme",
+      "Chondrosarcoma, rhabdomyosarcoma",
+      "Indicates sarcomatous dedifferentiation"
+     ]
+    ]
+   }
+  }
+ ]
+}

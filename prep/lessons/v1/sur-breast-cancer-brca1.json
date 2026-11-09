@@ -1,0 +1,317 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Hereditary Breast Cancer, BRCA Mutations, and Risk-Reducing Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Approximately five to ten percent of all breast cancers are directly attributable to inherited germline genetic mutations, designated **hereditary breast and ovarian cancer syndrome**. The vast majority of identifiable hereditary cases stem from autosomal dominant mutations in the tumor suppressor genes BRCA1, located on chromosome 17q21, and BRCA2, located on chromosome 13q12. Identifying these genetic alterations fundamentally changes surgical decision-making and cancer prevention.",
+   "say": "Hereditary breast cancer accounts for up to ten percent of cases, caused primarily by autosomal dominant mutations in the BRCA1 and BRCA2 tumor suppressor genes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene Parameter",
+     "BRCA1 Gene",
+     "BRCA2 Gene"
+    ],
+    "rows": [
+     [
+      "Chromosomal Location",
+      "Chromosome 17q21.31",
+      "Chromosome 13q12.3"
+     ],
+     [
+      "Normal Cellular Function",
+      "Homologous recombination DNA double-strand break repair",
+      "Binds RAD51 to coordinate homologous recombination repair"
+     ],
+     [
+      "Lifetime Breast Cancer Risk",
+      "65% to 85% by age seventy",
+      "45% to 70% by age seventy"
+     ],
+     [
+      "Lifetime Ovarian Cancer Risk",
+      "40% to 50% by age seventy",
+      "15% to 25% by age seventy"
+     ],
+     [
+      "Associated Male & Non-Breast Cancers",
+      "Low male breast cancer risk; prostate and pancreatic cancer",
+      "High male breast cancer risk (6-8%); pancreatic and melanoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normally, BRCA1 and BRCA2 proteins play an essential role in preserving genomic integrity through the repair of double-strand DNA breaks via **homologous recombination DNA repair**. When a cellular chromosome suffers a double-strand break, BRCA1 coordinates cell cycle checkpoint arrest while BRCA2 recruits the RAD51 recombinase to mediate error-free repair using the sister chromatid as a template. In cells lacking functional BRCA proteins, DNA breaks are forced into error-prone end-joining pathways, accumulating lethal oncogenic mutations.",
+   "say": "BRCA proteins repair DNA double-strand breaks through homologous recombination. Loss of BRCA function forces error-prone repair, driving genomic instability and malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "break",
+      "label": "Ionizing Radiation or ROS Inflicts DNA Double-Strand Break"
+     },
+     {
+      "id": "brca",
+      "label": "BRCA1 Recruits Checkpoint Kinases & Forms Repair Complex"
+     },
+     {
+      "id": "rad51",
+      "label": "BRCA2 Loads RAD51 Recombinase onto Single-Stranded DNA"
+     },
+     {
+      "id": "homology",
+      "label": "Error-Free Homologous Recombination Using Sister Chromatid"
+     },
+     {
+      "id": "mutant",
+      "label": "BRCA Deficiency Triggers Error-Prone Non-Homologous End Joining"
+     }
+    ],
+    "edges": [
+     [
+      "break",
+      "brca"
+     ],
+     [
+      "brca",
+      "rad51"
+     ],
+     [
+      "rad51",
+      "homology"
+     ],
+     [
+      "brca",
+      "mutant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Breast cancers arising in women carrying BRCA1 mutations display unique, aggressive pathological hallmarks. Over seventy percent of BRCA1-associated breast cancers are **triple-negative breast cancer**, lacking expression of estrogen receptors, progesterone receptors, and HER2/neu amplification. Histologically, they represent high-grade invasive ductal carcinomas with pushing borders, extensive geographic necrosis, prominent lymphocytic infiltration, and p53 mutations, behaving aggressively in young women.",
+   "say": "BRCA1-associated breast cancers are typically high-grade triple-negative cancers lacking estrogen, progesterone, and HER2 receptors, presenting at a young age.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BRCA1-Associated Carcinoma",
+     "points": [
+      "Over 70% are triple-negative (ER-, PR-, HER2-)",
+      "Basal-like phenotype expressing cytokeratins 5/6 and 14",
+      "High histological grade with central necrosis and mitoses",
+      "Extremely low incidence of male breast cancer"
+     ]
+    },
+    "right": {
+     "title": "BRCA2-Associated Carcinoma",
+     "points": [
+      "Predominantly hormone receptor positive (ER+, PR+)",
+      "Luminal phenotype similar to sporadic breast cancers",
+      "Moderate to high histological grade without basal markers",
+      "Accounts for over fifty percent of hereditary male breast cancers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For unaffected women who test positive for a pathogenic BRCA mutation, high-risk screening protocols begin at twenty-five years of age. Because high breast density in young women severely limits mammography, annual **screening breast MRI** with dynamic gadolinium enhancement is the mandatory modality of choice from age twenty-five. At age thirty, annual digital mammography is alternated with annual MRI every six months, ensuring continuous high-sensitivity surveillance to detect tumors at a non-palpable stage.",
+   "say": "Unaffected BRCA mutation carriers start annual breast MRI screening at age twenty-five. From age thirty, MRI alternates with mammography every six months for continuous surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "carrier",
+      "label": "Positive Pathogenic BRCA1 or BRCA2 Mutation Confirmed"
+     },
+     {
+      "id": "age25",
+      "label": "Age 25 to 29: Annual High-Field Contrast Breast MRI Only"
+     },
+     {
+      "id": "age30",
+      "label": "Age 30+: Alternate Annual Mammography & MRI Every 6 Months"
+     },
+     {
+      "id": "counsel",
+      "label": "Discuss Risk-Reducing Surgical Prophylaxis Options"
+     },
+     {
+      "id": "ovary",
+      "label": "Pelvic Transvaginal Ultrasound & CA-125 Screening"
+     }
+    ],
+    "edges": [
+     [
+      "carrier",
+      "age25"
+     ],
+     [
+      "age25",
+      "age30"
+     ],
+     [
+      "age30",
+      "counsel"
+     ],
+     [
+      "carrier",
+      "ovary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most effective surgical intervention for reducing breast cancer risk in BRCA mutation carriers is **bilateral risk-reducing mastectomy**. Removing over ninety-five to ninety-eight percent of breast parenchymal tissue reduces the lifetime incidence of breast cancer by more than ninety percent. Surgeons perform either total skin-sparing mastectomy or nipple-sparing mastectomy through hidden inframammary incisions, followed by immediate autologous or implant-based breast reconstruction.",
+   "say": "Bilateral risk-reducing mastectomy removes over ninety-five percent of breast tissue, cutting cancer risk by more than ninety percent. Immediate reconstruction restores breast form.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mastectomy Technique",
+     "Skin & Nipple Envelope Preservation",
+     "Oncological Risk Reduction & Aesthetics"
+    ],
+    "rows": [
+     [
+      "Skin-Sparing Mastectomy",
+      "Excises nipple-areola complex and biopsy scars; preserves skin envelope",
+      "Reduces cancer risk >90%; ideal for immediate reconstructed breast shaping"
+     ],
+     [
+      "Nipple-Sparing Mastectomy",
+      "Preserves entire skin envelope and intact native nipple-areola complex",
+      "Superior cosmetic outcome; requires sub-nipple frozen section margin clearance"
+     ],
+     [
+      "Simple Total Mastectomy",
+      "Resects entire skin island, nipple-areola, and all breast parenchyma",
+      "Leaves flat chest wall; utilized when immediate reconstruction is declined"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because screening modalities for ovarian cancer (pelvic ultrasound and CA-125) fail to detect early epithelial ovarian cancers, the standard of care for all BRCA mutation carriers who have completed childbearing is **risk-reducing bilateral salpingo-oophorectomy**. Complete surgical removal of both fallopian tubes and ovaries is recommended between thirty-five and forty years for BRCA1 carriers, and between forty and forty-five years for BRCA2 carriers, reducing ovarian cancer risk by ninety percent.",
+   "say": "Bilateral salpingo-oophorectomy is recommended by age forty for BRCA1 and forty-five for BRCA2, cutting ovarian cancer risk by ninety percent and lowering breast cancer risk in premenopausal women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bilateral Salpingo-Oophorectomy (BSO)",
+     "points": [
+      "Removes entire ovaries and fallopian tubes up to the uterine cornu",
+      "Recommended at age 35-40 in BRCA1; age 40-45 in BRCA2",
+      "Reduces lifetime ovarian and fallopian cancer risk by 90%",
+      "Concurrently reduces breast cancer risk by 50% if premenopausal"
+     ]
+    },
+    "right": {
+     "title": "Bilateral Salpingectomy Alone (Experimental)",
+     "points": [
+      "Removes fallopian tubes while temporarily preserving ovaries",
+      "Aims to prevent tubal origin high-grade serous carcinomas",
+      "Delays surgical premature menopause and cardiovascular risks",
+      "Does not replace BSO as definitive standard guideline of care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Careful histopathological examination of salpingo-oophorectomy specimens in BRCA carriers reveals that the majority of pelvic serous malignancies actually originate within the fimbriated ends of the fallopian tubes as **serous tubal intraepithelial carcinoma**. Pathologists employ the Sectioning and Extensively Examining the Fimbriated End (SEE-FIM) protocol, performing thin serial sections through the entire fallopian tube to detect microscopic intraepithelial lesions.",
+   "say": "Ovarian cancers in BRCA carriers usually arise within the fallopian tube fimbriae as serous tubal intraepithelial carcinoma, detected on fine serial sectioning under the SEE-FIM protocol.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bso",
+      "label": "Laparoscopic Bilateral Salpingo-Oophorectomy Performed"
+     },
+     {
+      "id": "seefim",
+      "label": "Pathology Implements SEE-FIM Extensive Sectioning Protocol"
+     },
+     {
+      "id": "fimbria",
+      "label": "Examine Longitudinal Sections of Fimbriated Tubal Ends"
+     },
+     {
+      "id": "stic",
+      "label": "Identify Occult Serous Tubal Intraepithelial Carcinoma (STIC)"
+     },
+     {
+      "id": "stage",
+      "label": "Occult Lesions Identified in 3-5% of Asymptomatic Carriers"
+     }
+    ],
+    "edges": [
+     [
+      "bso",
+      "seefim"
+     ],
+     [
+      "seefim",
+      "fimbria"
+     ],
+     [
+      "fimbria",
+      "stic"
+     ],
+     [
+      "stic",
+      "stage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In medical oncology, the defect in homologous recombination repair in BRCA-mutant tumors confers unique pharmacological sensitivity to targeted therapies. Utilizing the concept of synthetic lethality, **poly ADP-ribose polymerase inhibitors**, such as olaparib and talazoparib, block the base excision repair pathway for single-strand DNA breaks. Normal host cells repair the resulting double-strand breaks via intact homologous recombination, but BRCA-deficient tumor cells cannot, triggering catastrophic chromosomal collapse and apoptosis.",
+   "say": "PARP inhibitors exploit synthetic lethality in BRCA-mutant cancers by blocking single-strand repair. Normal cells survive, but BRCA-deficient cancer cells undergo catastrophic apoptosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "parpi",
+      "label": "PARP Inhibitor (Olaparib) Blocks Single-Strand Break Repair"
+     },
+     {
+      "id": "fork",
+      "label": "Replication Fork Collapse Converts Blunder into Double-Strand Break"
+     },
+     {
+      "id": "normal",
+      "label": "Normal Host Cells: Repaired via Intact Homologous Recombination"
+     },
+     {
+      "id": "tumor",
+      "label": "BRCA-Mutant Tumor: Defective Homologous Recombination"
+     },
+     {
+      "id": "death",
+      "label": "Synthetic Lethality: Massive Chromosomal Collapse & Cell Death"
+     }
+    ],
+    "edges": [
+     [
+      "parpi",
+      "fork"
+     ],
+     [
+      "fork",
+      "normal"
+     ],
+     [
+      "fork",
+      "tumor"
+     ],
+     [
+      "tumor",
+      "death"
+     ]
+    ]
+   }
+  }
+ ]
+}

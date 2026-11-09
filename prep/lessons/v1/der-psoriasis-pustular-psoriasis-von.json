@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "der-psoriasis-pustular-psoriasis-von",
+ "subject": "dermatology",
+ "module": "der-psoriasis",
+ "title": "Pustular Psoriasis and Acral Variants",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Generalized pustular psoriasis** of von Zumbusch is an acute, potentially life-threatening dermatologic emergency. Patients present with sudden eruption of widespread fiery erythema studded with hundreds of tiny, discrete, sterile pustules that rapidly coalesce into lakes of pus. Waves of new pustules coincide with high-spiking chills.",
+   "say": "Generalized pustular psoriasis can evolve abruptly in patients with stable plaque disease or arise de novo. The sterile pustules spread within hours over widespread erythematous skin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/psoriasis-fig1.webp",
+    "alt": "Psoriatic nail pitting and plaque changes.",
+    "caption": "Psoriasis clinical manifestations showing nail changes and underlying plaque architecture.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Spongiform pustules of Kogoj** define the classic histopathologic hallmark of pustular psoriasis. Activated neutrophils migrate upward into the spinous layer of the epidermis, collecting within necrotic, thinned keratinocytes to form multilocular microabscesses. In the upper stratum corneum, larger neutrophilic collections form Munro microabscesses without secondary bacterial infection.",
+   "say": "Histology demonstrates Kogoj spongiform pustules in the spinous stratum, where neutrophils gather within degenerate epidermal cells. The pustule contents remain sterile on routine microbiological culture.",
+   "vis": {
+    "kind": "table",
+    "title": "Histologic Psoriasis Features",
+    "cols": [
+     "Structure",
+     "Histopathologic Sign",
+     "Cellular Infiltrate"
+    ],
+    "rows": [
+     [
+      "Spinous layer",
+      "Spongiform pustules of Kogoj",
+      "Neutrophils in spinous cells"
+     ],
+     [
+      "Stratum corneum",
+      "Munro microabscesses",
+      "Neutrophils in parakeratotic layer"
+     ],
+     [
+      "Papillary dermis",
+      "Tortuous capillaries",
+      "Dilated looping vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic toxicity** frequently accompanies acute generalized pustular flare-ups, including high fever, tachycardia, marked neutrophilic leukocytosis, and elevated inflammatory markers. Widespread cutaneous vasodilation disrupts thermoregulation and accelerates fluid loss, leading to dehydration, hypoalbuminemia, and severe hypocalcemia requiring intensive inpatient supportive care.",
+   "say": "Severe constitutional upset accompanies extensive von Zumbusch eruptions. Dehydration, electrolyte disturbances including dangerous hypocalcemia, and impaired temperature regulation demand early inpatient monitoring.",
+   "vis": {
+    "kind": "flow",
+    "title": "Von Zumbusch Systemic Cascades",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Diffuse cutaneous inflammation with capillary dilation"
+     },
+     {
+      "id": "n2",
+      "label": "Accelerated fluid loss and protein transudation"
+     },
+     {
+      "id": "n3",
+      "label": "Hypoalbuminemia with peripheral edema and hypocalcemia"
+     },
+     {
+      "id": "n4",
+      "label": "High output circulatory stress requiring intensive stabilization"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic corticosteroid withdrawal** represents the most notorious triggering event for precipitating generalized pustular psoriasis. Other established triggers include acute upper respiratory infections, hypocalcemia, pregnancy known as impetigo herpetiformis, and strong irritating topical therapies. Clinicians must avoid prescribing oral steroids for routine plaque psoriasis.",
+   "say": "Oral corticosteroid withdrawal is the classic trigger for converting ordinary plaque psoriasis into fulminant pustular disease. Infection and pregnancy can also incite sudden generalized eruptions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Provoking Triggers",
+     "points": [
+      "Systemic steroid cessation",
+      "Hypocalcemia",
+      "Impetigo herpetiformis in pregnancy",
+      "Intercurrent severe infection"
+     ]
+    },
+    "right": {
+     "title": "Preventive Principles",
+     "points": [
+      "Avoid oral steroids in plaque disease",
+      "Monitor serum calcium levels",
+      "Screen for occult septic foci",
+      "Taper immunosuppression cautiously"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acitretin** serves as the premier first-line oral retinoid for generalized pustular psoriasis in non-pregnant adults. Unlike plaque psoriasis where retinoids act slowly, pustular lesions often clear within days of starting therapy. In unstable patients with hemodynamic collapse, rapid-acting biologic agents such as infliximab or cyclosporine provide life-saving control.",
+   "say": "Acitretin is a preferred first-line agent because pustular disease responds promptly to retinoids. When rapid control is critical, cyclosporine or infliximab provides prompt systemic relief.",
+   "vis": {
+    "kind": "table",
+    "title": "Pustular Psoriasis Medical Regimens",
+    "cols": [
+     "Therapeutic Class",
+     "Primary Agent",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Oral retinoid",
+      "Acitretin",
+      "Rapid pustule resolution, non-pregnant"
+     ],
+     [
+      "Calcineurin inhibitor",
+      "Cyclosporine",
+      "Fast rescue in severe toxicity"
+     ],
+     [
+      "Anti-TNF biologic",
+      "Infliximab",
+      "Refractory disease, prompt response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Palmoplantar pustulosis** represents a chronic, localized form of pustular psoriasis restricted to the palms and soles, historically designated the Barber type. Crops of sterile, yellow pustules emerge on an erythematous, scaling base, eventually drying into dark brown crusts. Strong associations exist with cigarette smoking and sternoclavicular hyperostosis.",
+   "say": "Palmoplantar pustulosis produces recurrent crops of yellow pustules restricted to the volar skin. Most affected individuals are active tobacco smokers with resistant bilateral acral eruptions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Barber Pustulosis Progression",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Erythematous volar plaques develop on palms and soles"
+     },
+     {
+      "id": "n2",
+      "label": "Crops of sterile intraepidermal pustules erupt"
+     },
+     {
+      "id": "n3",
+      "label": "Pustules desquamate into brown macules and crusts"
+     },
+     {
+      "id": "n4",
+      "label": "Chronic relapsing cycle driven by persistent acral stress"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acrodermatitis continua of Hallopeau** constitutes an uncommon, chronic, painful variant characterized by sterile pustules starting at the tips of the distal digits. The eruption preferentially targets the nail bed and periungual folds, progressively destroying the nail matrix to cause permanent anonychia and osteolysis of the terminal phalanges.",
+   "say": "Acrodermatitis continua of Hallopeau begins around distal finger and toe nails. Persistent local inflammation causes nail destruction and can erode underlying terminal phalanx bone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acrodermatitis-continua-of-hallopeau-fig1.webp",
+    "alt": "Clinical and radiographic findings of acrodermatitis continua of Hallopeau.",
+    "caption": "Acrodermatitis continua of Hallopeau with distal digit pustules and underlying phalangeal osteolysis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Spesolimab** represents an innovative targeted monoclonal antibody blocking the interleukin-36 receptor approved specifically for generalized pustular psoriasis flares. Mutations in the IL36RN gene, which encodes the interleukin-36 receptor antagonist, underlie many hereditary pustular cases, confirming IL-36 pathway hyperactivation as the primary pathogenic driver.",
+   "say": "Monoclonal blockade of the interleukin-36 receptor produces rapid clearance of pustules during acute flares. Genetic loss of the IL-36 receptor antagonist confirms this cytokine pathway as the driving mechanism.",
+   "vis": {
+    "kind": "flow",
+    "title": "Interleukin-36 Inflammatory Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "IL36RN deficiency or inflammatory stimulus"
+     },
+     {
+      "id": "n2",
+      "label": "Unrestrained IL-36 receptor activation on keratinocytes"
+     },
+     {
+      "id": "n3",
+      "label": "Massive chemokine synthesis attracting neutrophils"
+     },
+     {
+      "id": "n4",
+      "label": "Epidermal pustule formation aborted by spesolimab blockade"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

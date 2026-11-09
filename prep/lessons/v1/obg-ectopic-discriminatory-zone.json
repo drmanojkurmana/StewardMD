@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "obg-ectopic",
+ "subject": "obstetrics-gynaecology",
+ "title": "Discriminatory Zone, hCG Doubling and Methotrexate Criteria",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The hormone level above which a normal intrauterine sac should always be visible on transvaginal scan is the **discriminatory zone**. Around fifteen hundred to two thousand units, absence of a sac strongly suggests ectopic or failing pregnancy. It must never be used as a single rigid cutoff.",
+   "say": "The discriminatory zone is the hCG level where an intrauterine sac should always be seen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding above zone",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Sac seen",
+      "Intrauterine pregnancy"
+     ],
+     [
+      "No sac",
+      "Ectopic or failing likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Healthy early pregnancies raise hormone levels by at least half in two days, termed **beta-hCG doubling** behaviour. Slower rise occurs in most ectopics and failing pregnancies. A single value, however high or low, locates nothing by itself. A rise under 35 percent in 48 hours is now treated as suspicious, because viable pregnancies almost always rise faster early on.",
+   "say": "Beta-hCG doubling by half in two days marks healthy early pregnancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "First hCG measured"
+     },
+     {
+      "id": "n1",
+      "label": "Repeat at 48 hours"
+     },
+     {
+      "id": "n2",
+      "label": "Rise over 50 percent reassuring"
+     },
+     {
+      "id": "n3",
+      "label": "Slow rise warns"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fluid collection in the uterus mimicking a sac in ectopic pregnancy is a **pseudogestational sac**. It lacks the yolk sac and double decidual ring of a true sac. Mistaking it delays ectopic diagnosis dangerously. It usually sits centrally in the cavity, unlike the eccentrically placed true sac with its double ring.",
+   "say": "A pseudogestational sac mimics a true sac but lacks yolk sac and double ring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True sac",
+     "points": [
+      "Yolk sac present",
+      "Double decidual ring",
+      "Eccentric in decidua"
+     ]
+    },
+    "right": {
+     "title": "Pseudosac",
+     "points": [
+      "No yolk sac",
+      "Single layer",
+      "Central fluid collection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Strict size, hormone and clinical limits for drug treatment form **methotrexate criteria**. Typically an unruptured mass under three and a half centimetres, hormone below fifteen hundred to five thousand by protocol, and no fetal cardiac activity qualify. Haemodynamic stability and reliable follow up are absolute requirements.",
+   "say": "Methotrexate criteria require small unruptured mass, limited hormone and reliable follow up.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-methotrexate.webp",
+    "alt": "Methotrexate for ectopic pregnancy.",
+    "caption": "Methotrexate treatment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Opening the tube and removing the pregnancy while preserving the tube is **salpingostomy**. It suits women whose other tube is absent or damaged. Persistent trophoblast in about one in ten needs hormone follow up afterwards. Follow up hCG on days four and seven, then weekly, continues until negative to catch that persistent trophoblast.",
+   "say": "Salpingostomy preserves the tube and needs hormone follow up for persistent trophoblast.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operation",
+     "Tube"
+    ],
+    "rows": [
+     [
+      "Salpingostomy",
+      "Preserved"
+     ],
+     [
+      "Salpingectomy",
+      "Removed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Day four to day seven hormone fall predicts methotrexate success, called the **day 4 to 7 rule**. A fall of fifteen percent or more between those days predicts resolution. Failure prompts a second dose or surgery. A second dose is needed in about 15 percent, and surgery follows if levels still refuse to fall.",
+   "say": "The day 4 to 7 rule predicts methotrexate success by a fifteen percent hormone fall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Methotrexate given day 1"
+     },
+     {
+      "id": "n1",
+      "label": "hCG day 4 measured"
+     },
+     {
+      "id": "n2",
+      "label": "hCG day 7 measured"
+     },
+     {
+      "id": "n3",
+      "label": "Fall over 15 percent succeeds"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy of unknown location is the working label when scan shows nothing, termed **PUL**. Hormone trends plus repeat scanning sort most into intrauterine, ectopic or failing categories. Safety netting for rupture symptoms accompanies every PUL discharge. About a third of PULs end as failing pregnancies, a third as intrauterine, and roughly one in ten as ectopic.",
+   "say": "Pregnancy of unknown location is sorted by hormone trends and repeat scanning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ectopic-pregnancy-fig1.webp",
+    "alt": "Ectopic locations in pregnancy of unknown location.",
+    "caption": "Unknown location workup. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Methotrexate is avoided with breastfeeding, liver or kidney disease, blood disorders and inability to follow up, listed as **contraindications**. A coexisting wanted intrauterine pregnancy also forbids it absolutely. Heterotopic risk after assisted conception needs special vigilance. An intrauterine pregnancy seen on scan forbids methotrexate unless heterotopic pregnancy is being treated by specialists.",
+   "say": "Methotrexate contraindications include liver disease and coexisting wanted intrauterine pregnancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suitable",
+     "points": [
+      "Stable, small mass",
+      "Low hormone",
+      "Follow up assured"
+     ]
+    },
+    "right": {
+     "title": "Unsuitable",
+     "points": [
+      "Ruptured or unstable",
+      "High hormone",
+      "Cannot follow up"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rupture can still occur during methotrexate treatment, so women receive strict **rupture precautions**. Severe pain, dizziness or shoulder pain means immediate attendance. Activity and intercourse restrictions apply until hormone resolution. Women are told to avoid alcohol and folic acid supplements during treatment, because both interfere with methotrexate.",
+   "say": "Rupture precautions warn methotrexate patients that severe pain means immediate attendance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Treatment started"
+     },
+     {
+      "id": "n1",
+      "label": "Precautions explained in writing"
+     },
+     {
+      "id": "n2",
+      "label": "Pain means attend now"
+     },
+     {
+      "id": "n3",
+      "label": "Follow up until negative"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

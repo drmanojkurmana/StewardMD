@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "sur-bile-duct",
+ "subject": "surgery",
+ "title": "Klatskin Tumours, Courvoisier Law, and Biliary Bypass",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A cholangiocarcinoma arising specifically at the junction of the right and left hepatic ducts at the liver hilum is named a **Klatskin tumour**. First comprehensively characterized by Gerald Klatskin in 1965, these perihilar neoplasms typically present with painless progressive obstructive jaundice. Despite their indolent slow growth and late distant metastasis, Klatskin tumours cause profound morbidity through early circumferential ductal infiltration and hepatic lobar atrophy.",
+   "say": "A Klatskin tumour is a perihilar cholangiocarcinoma located at the main hepatic duct confluence, presenting with progressive obstructive jaundice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholangiocarcinoma-fig1.webp",
+    "alt": "Anatomical diagram demonstrating the exact location of a Klatskin tumour at the confluence of the right and left hepatic ducts.",
+    "caption": "Klatskin tumour: perihilar cholangiocarcinoma situated at the bifurcation of the common hepatic duct. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In patients presenting with obstructive jaundice, physical examination of the abdomen provides vital diagnostic insight described by **Courvoisier law**. Courvoisier stated that in the presence of painless jaundice, a palpable, non-tender, enlarged gallbladder indicates that the obstruction is unlikely to be due to a gallstone. Instead, this finding strongly points to an extrinsic malignant obstruction of the lower common bile duct, such as pancreatic head carcinoma.",
+   "say": "Courvoisier law states that painless jaundice with an enlarged palpable gallbladder suggests malignant distal obstruction rather than gallstone disease.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-courvoisier_sign.webp",
+    "alt": "Clinical illustration demonstrating Courvoisier sign: palpable distended gallbladder in distal malignant biliary obstruction versus shrunken gallbladder in cholelithiasis.",
+    "caption": "Courvoisier sign: non-tender palpable gallbladder in periampullary malignancy contrasting with a fibrotic gallbladder in chronic stones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The physiological rationale underlying Courvoisier law is that chronic cholelithiasis provokes recurrent mural inflammation and dense fibrous scarring, rendering the gallbladder shrunken and non-distensible when an impacted stone causes downstream jaundice. Conversely, a previously normal, elastic gallbladder dilates massively under high downstream hydrostatic pressure. However, in a proximal **Klatskin lesion**, the gallbladder is collapsed and non-palpable because the tumour obstructs bile inflow above the cystic duct.",
+   "say": "In Klatskin tumours, the gallbladder remains collapsed and impalpable because the malignant block is situated proximal to the cystic duct entry.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Distal Malignancy (Courvoisier +)",
+     "points": [
+      "Pancreatic head adenocarcinoma, ampullary cancer",
+      "Obstruction distal to cystic duct insertion",
+      "Downstream pressure distends elastic gallbladder",
+      "Gallbladder is palpably enlarged and non-tender"
+     ]
+    },
+    "right": {
+     "title": "Hilar Tumour (Klatskin / Courvoisier -)",
+     "points": [
+      "Perihilar Klatskin cholangiocarcinoma",
+      "Obstruction proximal to cystic duct insertion",
+      "Bile cannot enter gallbladder lumen",
+      "Gallbladder is flaccid, empty, and impalpable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Radiological staging of a Klatskin tumour relies on high-resolution contrast-enhanced computed tomography and magnetic resonance cholangiopancreatography. Imaging characteristically reveals marked dilatation of intrahepatic bile ducts that abruptly terminate at the hilum, accompanied by a small, collapsed gallbladder and normal-calibre distal common bile duct. Long-standing unilateral portal vein invasion by tumour provokes the classic radiological sign of ipsilateral **lobar atrophy** with contralateral compensatory hypertrophy.",
+   "say": "Cross-sectional imaging reveals dilated intrahepatic ducts terminating at the hilum with a collapsed gallbladder, often showing lobar atrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "invade",
+      "label": "Unilateral Hilar Portal Vein & Ductal Invasion"
+     },
+     {
+      "id": "atrophy",
+      "label": "Ipsilateral Hepatic Parenchymal Atrophy"
+     },
+     {
+      "id": "hyper",
+      "label": "Contralateral Lobar Compensatory Hypertrophy"
+     },
+     {
+      "id": "scissure",
+      "label": "Distortion and Shift of the Hepatic Scissurae"
+     }
+    ],
+    "edges": [
+     [
+      "invade",
+      "atrophy"
+     ],
+     [
+      "atrophy",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "scissure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative assessment of resectability requires evaluating future liver remnant volume. When an extended hemihepatectomy is planned and the anticipated remnant volume is less than thirty to forty percent, preoperative ipsilateral **portal vein embolization** is performed. Embolizing the portal branch to the tumour-bearing lobe redirects total portal venous inflow into the future remnant, stimulating significant parenchymal hypertrophy within four to six weeks.",
+   "say": "Portal vein embolization stimulates compensatory hypertrophy of the future liver remnant before major hepatectomy for perihilar tumours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Mechanism",
+     "Target Remnant Volume",
+     "Time to Surgery"
+    ],
+    "rows": [
+     [
+      "Portal Vein Embolization (PVE)",
+      "Percutaneous occlusion of tumour-side portal branch",
+      "Increases future remnant by 8% to 12%",
+      "4 to 6 weeks"
+     ],
+     [
+      "Dual Vein Embolization (PVE + HVE)",
+      "Simultaneous portal and hepatic vein occlusion",
+      "Accelerates remnant hypertrophy",
+      "2 to 3 weeks"
+     ],
+     [
+      "ALPPS Procedure",
+      "In situ liver split with portal ligation",
+      "Rapid massive hypertrophy",
+      "7 to 10 days (two stages)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive surgical reconstruction restoring bilioenteric continuity following resection of a Klatskin tumour or major common bile duct transection is a **hepaticojejunostomy**. An isolated forty-to-sixty centimetre Roux-en-Y limb of proximal jejunum is brought through the transverse mesocolon into the right upper quadrant. End-to-side mucosa-to-mucosa anastomoses are constructed between the cut hepatic duct orifices and the antimesenteric border of the jejunum.",
+   "say": "Hepaticojejunostomy restores biliary drainage by creating a tension-free mucosa-to-mucosa anastomosis between hepatic ducts and a Roux-en-Y jejunal loop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Complete En Bloc Resection of Tumour & Caudate Lobe"
+     },
+     {
+      "id": "roux",
+      "label": "Preparation of 50 cm Retrocolic Roux-en-Y Jejunal Loop"
+     },
+     {
+      "id": "anast",
+      "label": "Tension-Free Mucosa-to-Mucosa Anastomosis (PDS Suture)"
+     },
+     {
+      "id": "jejun",
+      "label": "End-to-Side Jejunojejunostomy Restoring Bowel Continuity"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "roux"
+     ],
+     [
+      "roux",
+      "anast"
+     ],
+     [
+      "anast",
+      "jejun"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To ensure long-term patency and prevent devastating late anastomotic strictures, the hepaticojejunostomy must be constructed completely without tension using fine absorbable monofilament sutures such as polydioxanone. The wide Roux limb prevents retrograde reflux of enteric contents and bacteria into the intrahepatic biliary tree, thereby averting chronic recurrent **cholangitis** and secondary biliary cirrhosis.",
+   "say": "Using an adequate fifty-centimetre Roux limb prevents enteric reflux into the biliary tree, protecting against recurrent cholangitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Roux-en-Y Loop (Preferred)",
+     "points": [
+      "50 cm isolated defunctionalized jejunal limb",
+      "Eliminates enterobiliary reflux effectively",
+      "Dramatically lower incidence of cholangitis",
+      "Gold standard for benign and malignant reconstructions"
+     ]
+    },
+    "right": {
+     "title": "Loop Hepaticojejunostomy",
+     "points": [
+      "Simple undivided loop of jejunum",
+      "Severe reflux of food and enteric enzymes",
+      "Frequent recurrent ascending cholangitis",
+      "Largely abandoned in modern surgical practice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients with unresectable Klatskin tumours suffering from intractable jaundice and pruritus, palliative surgical bypass can be established via segment three **cholangiojejunostomy**, historically known as the Round procedure. Because the bile duct draining Couinaud segment three runs a consistent superficial horizontal course in the umbilical fissure, it can be anastomosed to a Roux loop without dissecting the obstructed, hostile tumour at the liver hilum.",
+   "say": "Segment three cholangiojejunostomy bypasses hilar obstruction by anastomosing the segment three duct in the umbilical fissure to a Roux jejunal loop.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Palliative Modality",
+     "Indications",
+     "Key Advantages",
+     "Potential Complications"
+    ],
+    "rows": [
+     [
+      "Bilateral Metallic Stents (PTBD/ERCP)",
+      "Unresectable hilar tumour, high operative risk",
+      "Minimally invasive, avoids laparotomy",
+      "Tumour ingrowth, stent occlusion, cholangitis"
+     ],
+     [
+      "Segment III Bypass",
+      "Unresectable tumour discovered at laparotomy",
+      "Durable lifetime biliary drainage",
+      "Invasive procedure, limited to left lobe drainage"
+     ],
+     [
+      "Photodynamic Therapy",
+      "Locally advanced perihilar disease",
+      "Destroys intraluminal tumour tissue",
+      "Skin photosensitivity, requires repeated sessions"
+     ]
+    ]
+   }
+  }
+ ]
+}

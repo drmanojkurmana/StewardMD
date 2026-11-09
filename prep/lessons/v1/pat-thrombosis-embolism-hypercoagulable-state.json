@@ -1,0 +1,197 @@
+{
+  "v": 1,
+  "module": "pat-thrombosis-embolism",
+  "subject": "pathology",
+  "title": "Venous Thromboembolism, Pulmonary Embolism, and Paradoxical Emboli",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Primary and secondary predisposing conditions can systematically disrupt the physiological balance between prothrombotic mechanisms and natural anticoagulant cascades. When prolonged immobilization, advanced malignancy, or oral contraceptive therapy tilts hemostatic homeostasis toward widespread intravascular clotting, the patient enters an active clinical **hypercoagulable state** requiring rigorous thromboprophylaxis.",
+      "say": "Immobilization, cancer, and elevated estrogens create a hypercoagulable state favoring thrombosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stasis_or_estrogen",
+            "label": "Venous Stasis, Major Surgery, or High Estrogen States"
+          },
+          {
+            "id": "anticoagulant_drop",
+            "label": "Decreased Antithrombin III and Protein C/S Activity"
+          },
+          {
+            "id": "prothrombin_surge",
+            "label": "Elevated Tissue Factor and Clotting Factor Synthesis"
+          },
+          {
+            "id": "hypercoagulable",
+            "label": "Clinically Active Systemic Hypercoagulable State"
+          }
+        ],
+        "edges": [
+          [
+            "stasis_or_estrogen",
+            "anticoagulant_drop"
+          ],
+          [
+            "anticoagulant_drop",
+            "prothrombin_surge"
+          ],
+          [
+            "prothrombin_surge",
+            "hypercoagulable"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "More than ninety percent of clinically significant venous emboli originate from large deep veins of the lower extremities above the knee level. Sluggish blood flow within valve pockets of femoral and popliteal conduits initiates occlusive thrombus propagation, producing unilateral leg swelling and calf pain characteristic of **deep vein thrombosis**.",
+      "say": "Deep vein thrombosis typically originates within popliteal and femoral veins above the knee.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dvt-fig1.webp",
+        "alt": "Venous valve sinus stasis leading to deep vein thrombosis",
+        "caption": "Venous valve sinus stasis leading to deep vein thrombosis within lower extremity conduits."
+      }
+    },
+    {
+      "tx": "Fragmentation and detachment of a propagating lower extremity thrombus releases a mobile clot into the inferior vena cava, passing through right cardiac chambers into pulmonary arteries. Impacting pulmonary arterial bifurcations, this life-threatening vascular complication is designated as a **pulmonary embolism**.",
+      "say": "Detached deep vein thrombi travel through the right heart to occlude pulmonary arterial beds.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/deep-venous-thrombosis-and-pulmonary-fig1.webp",
+        "alt": "Thromboembolism originating in deep veins and lodging in pulmonary vasculature",
+        "caption": "Embolic transport of deep vein thrombi into pulmonary arterial branching networks."
+      }
+    },
+    {
+      "tx": "When a massive venous thromboembolus lodges directly across the main bifurcation of the pulmonary artery trunk, it occludes outflow into both left and right pulmonary arterial trees simultaneously. This catastrophic anatomical obstruction represents a **saddle embolus**, immediately causing profound electromechanical dissociation and sudden death.",
+      "say": "A saddle embolus straddles the pulmonary artery bifurcation, causing immediate circulatory collapse.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pe-fig1.webp",
+        "alt": "Gross saddle embolus obstructing the main pulmonary artery bifurcation",
+        "caption": "Massive saddle embolus lodging at the main bifurcation of the pulmonary trunk."
+      }
+    },
+    {
+      "tx": "Abrupt mechanical obstruction of over sixty percent of pulmonary arterial vasculature causes an acute surge in pulmonary vascular resistance and right ventricular afterload. Rapid right ventricular dilatation, wall hypokinesis, and severe tricuspid regurgitation define life-threatening **acute cor pulmonale**, manifesting as acute systemic hypotension and jugular venous distension.",
+      "say": "Acute cor pulmonale results from massive pulmonary vascular obstruction causing right ventricular failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pe-fig2.webp",
+        "alt": "Acute right ventricular strain pattern in massive pulmonary embolism",
+        "caption": "Right ventricular strain and severe hemodynamic mismatch following acute pulmonary embolism."
+      }
+    },
+    {
+      "tx": "Under unusual physiological circumstances, elevated right atrial pressure enables a venous embolus to bypass pulmonary filtration by traversing an intracardiac patent foramen ovale or atrial septal defect. Entering left heart chambers, this **paradoxical embolism** gains access to systemic arterial circulation, causing stroke or limb ischemia.",
+      "say": "Paradoxical emboli cross an atrial defect into the left heart, producing systemic arterial infarction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dvt_fragment",
+            "label": "DVT Thrombus Fragment Ascends into Right Atrium"
+          },
+          {
+            "id": "septal_defect",
+            "label": "Crosses Patent Foramen Ovale or Atrial Septal Defect"
+          },
+          {
+            "id": "systemic_artery",
+            "label": "Enters Left Ventricle and Is Ejected into Systemic Aorta"
+          },
+          {
+            "id": "infarction",
+            "label": "Cerebral Stroke or Acute Peripheral Limb Ischemia"
+          }
+        ],
+        "edges": [
+          [
+            "dvt_fragment",
+            "septal_defect"
+          ],
+          [
+            "septal_defect",
+            "systemic_artery"
+          ],
+          [
+            "systemic_artery",
+            "infarction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because lungs receive dual vascular supplies from pulmonary and bronchial arteries, occlusion of small peripheral pulmonary branches rarely causes infarction in healthy individuals. However, when baseline cardiopulmonary failure compromises bronchial circulation, peripheral pulmonary arterial occlusion generates a wedge-shaped, hemorrhagic **pulmonary infarction**.",
+      "say": "Pulmonary infarction produces a wedge-shaped hemorrhagic lung consolidation when dual circulation fails.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Non-Infarcting Small PE",
+          "Hemorrhagic Pulmonary Infarct"
+        ],
+        "rows": [
+          [
+            "Circulatory Status",
+            "Intact Bronchial Artery Collateral Perfusion",
+            "Underlying Congestive Heart Failure or Shock"
+          ],
+          [
+            "Gross Appearance",
+            "Transient Atelectasis Without Tissue Necrosis",
+            "Subpleural Wedge-Shaped Hemorrhagic Consolidation"
+          ],
+          [
+            "Clinical Signs",
+            "Transient Dyspnea and Tachypnea",
+            "Pleuritic Chest Pain, Hemoptysis, Pleural Friction Rub"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Preventing deep venous thrombosis in hospitalized, surgical, or immobile patients dramatically decreases pulmonary embolism mortality. Standard regimens incorporate intermittent pneumatic calf compression alongside pharmacological anticoagulation using unfractionated or low-molecular-weight heparin, forming the foundation of modern hospital **thromboprophylaxis** protocols across diverse inpatient surgical services.",
+      "say": "Hospital thromboprophylaxis pairs pneumatic compression with anticoagulation to prevent fatal emboli.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "risk_assessment",
+            "label": "Clinical Stratification of Surgical and Medical DVT Risk"
+          },
+          {
+            "id": "mechanical_therapy",
+            "label": "Graduated Compression Stockings and Pneumatic Devices"
+          },
+          {
+            "id": "anticoagulation",
+            "label": "Low-Molecular-Weight Heparin Inhibits Factor Xa and Thrombin"
+          },
+          {
+            "id": "prevention",
+            "label": "Successful Prevention of Deep Vein Clot Formation and Embolism"
+          }
+        ],
+        "edges": [
+          [
+            "risk_assessment",
+            "mechanical_therapy"
+          ],
+          [
+            "mechanical_therapy",
+            "anticoagulation"
+          ],
+          [
+            "anticoagulation",
+            "prevention"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "id": "psy-dissociative-somatic-dissociative-amnesia",
+ "subject": "psychiatry",
+ "module": "psy-dissociative-somatic",
+ "title": "Dissociative and Functional Neurological Symptom Disorders",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dissociative amnesia** involves an inability to recall important personal autobiographical information, usually of a traumatic or stressful nature, that is inconsistent with ordinary forgetfulness. Memory loss is typically localized to a specific traumatic event or selective for certain aspects, while procedural and semantic memory remains intact.",
+   "say": "Dissociative amnesia is the inability to recall personal autobiographical trauma, far exceeding ordinary forgetfulness while procedural memory remains preserved.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dissociative Amnesia",
+     "points": [
+      "Loss of episodic autobiographical memory",
+      "Triggered by overwhelming psychological trauma",
+      "Procedural memory and general intellect intact",
+      "Reversible with supportive psychotherapy"
+     ]
+    },
+    "right": {
+     "title": "Organic Cerebral Amnesia",
+     "points": [
+      "Prominent anterograde memory encoding deficits",
+      "Ribot law: older memories preserved over recent",
+      "Accompanied by disorientation and confabulation",
+      "Identifiable hippocampal or diencephalic lesion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dissociative fugue** is a specialized specifier of dissociative amnesia characterized by sudden, unexpected, purposeful travel away from home or customary workplace, accompanied by amnesia for one's identity. Patients may assume a completely new identity and occupation during the fugue state, waking with total amnesia for the journey.",
+   "say": "Dissociative fugue involves sudden purposeful travel away from home with loss of identity, sometimes assuming a new persona before spontaneous recovery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dissociative Fugue Trajectory",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Severe psychological crisis, financial disaster, or military trauma"
+     },
+     {
+      "id": "n2",
+      "label": "Sudden purposeful travel away from home with identity amnesia"
+     },
+     {
+      "id": "n3",
+      "label": "Establishment of new social identity or transient vagrancy"
+     },
+     {
+      "id": "n4",
+      "label": "Abrupt return of original identity with amnesia for fugue period"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dissociative identity disorder**, formerly multiple personality disorder, is characterized by the presence of two or more distinct personality states or alters that recurrently take control of the individual's behavior. Each identity exhibits distinct names, mannerisms, voices, and memories, linked etiologically to severe, chronic childhood abuse.",
+   "say": "Dissociative identity disorder features two or more distinct personality states alternating executive control, strongly linked to severe childhood trauma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Features",
+     "points": [
+      "Two or more distinct personality states (alters)",
+      "Recurrent gaps in everyday autobiographical memory",
+      "Severe childhood physical or sexual trauma history",
+      "Not caused by substance intoxication or seizures"
+     ]
+    },
+    "right": {
+     "title": "Psychotherapeutic Goals",
+     "points": [
+      "Establish therapeutic alliance and safety",
+      "Trauma processing across distinct alters",
+      "Integration of alters into a unified identity",
+      "Development of adaptive emotional coping"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Conversion disorder**, designated functional neurological symptom disorder, presents with one or more symptoms of altered voluntary motor or sensory function that are clinically incompatible with recognized neurological or medical conditions. Common manifestations include psychogenic non-epileptic seizures, functional paraplegia, aphonia, blindness, and sensory anaesthesia.",
+   "say": "Conversion disorder involves motor or sensory deficits incompatible with neurological pathology, such as functional paralysis or non-epileptic seizures.",
+   "vis": {
+    "kind": "table",
+    "title": "Conversion Presentations & Signs",
+    "cols": [
+     "Clinical Deficit",
+     "Functional Neurological Sign",
+     "Physiological Finding"
+    ],
+    "rows": [
+     [
+      "Leg paresis",
+      "Positive Hoover sign",
+      "Involuntary contralateral hip extension preserved"
+     ],
+     [
+      "Blindness",
+      "Preserved pupillary light reflex",
+      "Avoidance of obstacles; normal visual evoked potentials"
+     ],
+     [
+      "Aphonia",
+      "Intact vocal cord adduction during coughing",
+      "Cough produces loud sound; unable to whisper words"
+     ],
+     [
+      "Sensory loss",
+      "Exact midline splitting sensory loss",
+      "Cutaneous nerves overlap across midline anatomically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**La belle indifference** is an historical clinical sign classically associated with conversion disorder, wherein the patient displays an incongruous, serene lack of concern or anxiety regarding their severe physical disability, such as sudden paraplegia. However, modern diagnostic criteria do not rely on it due to low specificity.",
+   "say": "La belle indifference describes an unusual lack of emotional distress despite sudden physical paralysis, though modern criteria do not require it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Historical Concept",
+     "points": [
+      "Serene cheerfulness despite sudden paralysis",
+      "Attributed to primary gain reducing conflict",
+      "Popularized in classical psychoanalytic literature",
+      "Previously considered pathognomonic for hysteria"
+     ]
+    },
+    "right": {
+     "title": "Modern Clinical Reality",
+     "points": [
+      "Present in under thirty percent of conversion cases",
+      "Also seen in severe organic illnesses (anosognosia)",
+      "Excluded from DSM-5 diagnostic criteria",
+      "Diagnosis demands positive neurological signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pseudoseizures**, or psychogenic non-epileptic seizures, mimic epileptic convulsions but lack epileptiform discharges on concurrent electroencephalography. Characteristic features include tightly closed eyes resistant to opening, side-to-side head thrashing, out-of-phase limb movements, pelvic thrusting, preserved pupillary light reflexes, and absence of post-ictal prolactin elevation.",
+   "say": "Pseudoseizures mimic epilepsy but feature closed eyes resisting opening, pelvic thrusting, intact pupillary reflexes, and normal ictal EEG.",
+   "vis": {
+    "kind": "table",
+    "title": "Epileptic vs Non-Epileptic Seizures",
+    "cols": [
+     "Feature",
+     "Epileptic Tonic-Clonic",
+     "Psychogenic Non-Epileptic"
+    ],
+    "rows": [
+     [
+      "Eyes during attack",
+      "Open, rolled upward or tonic gaze",
+      "Tightly squeezed closed; resists manual opening"
+     ],
+     [
+      "Ictal motor pattern",
+      "Synchronous tonic-clonic rhythm",
+      "Asynchronous thrashing, head shaking, pelvic thrusts"
+     ],
+     [
+      "Ictal EEG tracing",
+      "Spike-and-wave epileptiform discharges",
+      "Normal background rhythm with muscle artifact"
+     ],
+     [
+      "Post-ictal state",
+      "Stupor, confusion, tongue bite, prolactin rise",
+      "Rapid orientation, tearfulness, normal prolactin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hoover sign** provides definitive objective neurological validation of functional lower extremity weakness. The examiner places hands beneath both heels while asking the patient to lift the paralyzed leg; in functional weakness, the examiner detects involuntary downward pressure beneath the 'paralyzed' heel when the healthy leg is flexed.",
+   "say": "Hoover sign tests functional leg paresis: involuntary downward pressure from the weak heel is detected when the patient flexes the opposite healthy leg.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hoover Sign Examination Steps",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Examiner places both hands beneath the patient's heels in supine position"
+     },
+     {
+      "id": "n2",
+      "label": "Instruct patient to elevate the paretic leg (weak downward push detected)"
+     },
+     {
+      "id": "n3",
+      "label": "Instruct patient to flex the contralateral healthy leg against resistance"
+     },
+     {
+      "id": "n4",
+      "label": "Positive sign: involuntary normal downward push felt beneath the paretic heel"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Somatic symptom disorder** is diagnosed when an individual suffers from one or more distressing physical symptoms, accompanied by disproportionate, persistent thoughts, high anxiety, and excessive time devoted to health concerns. Unlike conversion disorder, the primary diagnostic emphasis is not medical unexplainedness, but the excessive psychological distress.",
+   "say": "Somatic symptom disorder focuses on excessive anxiety and disproportionate thoughts devoted to physical symptoms, lasting at least six months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Somatic Symptom Disorder",
+     "points": [
+      "Distressing somatic pain or gastrointestinal signs",
+      "Disproportionate thoughts regarding symptom gravity",
+      "High health-related anxiety and clinic visits",
+      "Symptom duration exceeding six months"
+     ]
+    },
+    "right": {
+     "title": "Conversion Disorder",
+     "points": [
+      "Acute neurological motor or sensory deficits",
+      "Incompatibility with recognized neuroanatomy",
+      "Evaluated using objective signs like Hoover test",
+      "Strong association with acute stress precipitants"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,165 @@
+{
+ "key": "ped-newborn-care-neonatal-resuscitation-programme",
+ "v": 1,
+ "module": "ped-newborn-care",
+ "subject": "paediatrics",
+ "title": "Neonatal Resuscitation Programme, Golden Minute and Ventilation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Every birth requires rapid triage by asking whether the infant is born at term, breathes or cries actively, and displays good muscle tone. If any response is negative, resuscitation immediately begins under a radiant warmer. The critical initial sixty seconds of life constitute the **golden minute standard**, during which initial drying, positioning, and initiation of positive pressure ventilation must occur if breathing remains absent.",
+   "say": "The golden minute requires completing drying, positioning, and initiating ventilation within sixty seconds if breathing is absent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-initial-steps.webp",
+    "alt": "Initial steps of neonatal resuscitation under a radiant warmer.",
+    "caption": "Initial drying, stimulation, and airway positioning under a radiant warmer. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Initial delivery room care focuses on preventing rapid conductive and evaporative heat loss. The neonate is placed on a prewarmed towel under a radiant warmer and dried completely. The head is maintained in a neutral **sniffing position airway**, avoiding hyperflexion or hyperextension that occludes the narrow cartilaginous trachea. Gentle bulb suctioning is reserved strictly for secretions that mechanically obstruct the airway.",
+   "say": "Maintaining a neutral sniffing position prevents tracheal collapse while unnecessary suctioning is avoided.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Optimal Airway Alignment",
+     "points": [
+      "Neutral sniffing head position",
+      "Slight neck extension",
+      "Towel roll under shoulders if needed"
+     ]
+    },
+    "right": {
+     "title": "Airway Hazards",
+     "points": [
+      "Neck hyperflexion collapses soft pharynx",
+      "Hyperextension narrows subglottic lumen",
+      "Vigorous suctioning triggers vagal bradycardia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Standard newborn physiological evaluation at one and five minutes uses the **Apgar scoring system**, grading heart rate, respiratory effort, muscle tone, reflex irritability, and skin color from zero to two. While valuable for tracking physiological transition and assessing response to resuscitation, clinicians must never delay active resuscitation to calculate the one-minute Apgar score.",
+   "say": "Apgar scores assess overall neonatal transition, but resuscitation must never wait for an Apgar score.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-apgar.webp",
+    "alt": "Clinical chart of the neonatal Apgar scoring criteria.",
+    "caption": "Apgar scoring table grading five physiological signs at one and five minutes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When an infant remains apneic, gasping, or has a heart rate below one hundred beats per minute, **bag and mask ventilation** is initiated immediately. Delivering forty to sixty breaths per minute, positive pressure ventilation represents the single most crucial step in neonatal resuscitation. Resuscitation of term infants begins with twenty-one percent room air, reserving supplemental oxygen for persistent desaturation.",
+   "say": "Positive pressure ventilation at forty to sixty breaths per minute is the cornerstone of newborn resuscitation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-bag-mask.webp",
+    "alt": "Bag and mask ventilation technique and corrective ventilation steps.",
+    "caption": "Positive pressure ventilation technique and MR SOPA corrective steps. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "If chest rise is inadequate or heart rate does not increase, the clinician systematically implements the **MR SOPA ventilation corrective steps**. These comprise Mask readjustment, Repositioning the head into a sniffing position, Suctioning the mouth and nose, Opening the mouth, Pressure increase in graduated increments up to thirty centimeters of water, and establishing an Alternative airway.",
+   "say": "The MR SOPA corrective sequence troubleshoots ineffective bag-mask ventilation before escalating interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Corrective Step",
+     "Surgical / Clinical Action",
+     "Intended Objective"
+    ],
+    "rows": [
+     [
+      "M and R",
+      "Mask readjustment and Reposition head",
+      "Eliminates face seal leak and airway kinking"
+     ],
+     [
+      "S and O",
+      "Suction mouth and nose, Open mouth",
+      "Clears secretions and reduces pharyngeal resistance"
+     ],
+     [
+      "P and A",
+      "Pressure increase and Alternative airway",
+      "Overcomes high airway resistance or intubates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pulse oximetry targets during transition reflect gradual physiological oxygenation. The sensor is applied to the **pre-ductal right wrist** or palm to measure arterial blood supplying the carotid arteries before ductal shunting. Target pre-ductal saturation climbs steadily: sixty to sixty-five percent at one minute, seventy to seventy-five percent at three minutes, and eighty-five to ninety-five percent by ten minutes.",
+   "say": "Pre-ductal right hand pulse oximetry guides titrated oxygen delivery during neonatal transition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time Post-Birth",
+     "Target Pre-Ductal SpO2",
+     "Physiological Transition"
+    ],
+    "rows": [
+     [
+      "1 minute",
+      "60 to 65 percent",
+      "Immediate post-delivery hypoxemia"
+     ],
+     [
+      "3 minutes",
+      "70 to 75 percent",
+      "Rising pulmonary blood flow"
+     ],
+     [
+      "5 minutes",
+      "80 to 85 percent",
+      "Establishment of functional residual capacity"
+     ],
+     [
+      "10 minutes",
+      "85 to 95 percent",
+      "Stable physiological neonatal saturation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If the heart rate remains below sixty beats per minute despite thirty seconds of effective positive pressure ventilation that moves the chest, **synchronized chest compressions** are started. Compressions are coordinated with positive pressure ventilation at a three to one ratio, delivering ninety compressions and thirty breaths per minute to achieve one hundred and twenty total events per minute.",
+   "say": "Chest compressions are coordinated at a three to one ratio with ventilation when heart rate is below sixty.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-chest-compression.webp",
+    "alt": "Two-thumb chest compression technique in a newborn manikin.",
+    "caption": "Two-thumb encircling-hands chest compression technique on the lower sternum. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The superior method for delivering compressions is the **two thumb encircling hands technique**. Both thumbs press on the lower third of the sternum, directly below an imaginary line connecting the nipples, while fingers encircle the thorax to support the spine. Compressions depress the sternum by one-third of the anterior-posterior diameter of the chest, allowing full recoil between cycles.",
+   "say": "The two-thumb encircling technique compresses the lower sternum by one-third of the chest depth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Two-Thumb Method Advantages",
+     "points": [
+      "Superior peak systolic blood pressure",
+      "More consistent compression depth",
+      "Less operator fatigue during prolonged cycles"
+     ]
+    },
+    "right": {
+     "title": "Two-Finger Alternative",
+     "points": [
+      "Index and middle finger on sternum",
+      "Leaves umbilical access unobstructed",
+      "Less effective coronary perfusion pressure"
+     ]
+    }
+   }
+  }
+ ]
+}

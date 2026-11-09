@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "pat-cns-non-neoplastic",
+  "subject": "pathology",
+  "title": "Meningitis, Cerebral Abscess, Alzheimer Disease, Parkinson Disease, and Prion Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Infection of the leptomeninges and cerebrospinal fluid in the subarachnoid space elicits acute purulent inflammation. Common bacterial agents include Streptococcus pneumoniae in elderly adults, Neisseria meningitidis in young adults with petechial rash, and Group B Streptococcus in neonates. That condition is **meningitis**. Macroscopically, purulent yellow-white exudate coats the cerebral sulci and base of the brain. Lumbar puncture demonstrates markedly elevated opening pressure, neutrophilic pleocytosis, marked protein elevation, and profound reduction in CSF glucose compared to serum levels.",
+      "say": "Acute bacterial meningitis covers the leptomeninges in purulent exudate, with CSF demonstrating neutrophils, high protein, and low glucose.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Bacterial meningitis",
+          "Viral meningitis"
+        ],
+        "rows": [
+          [
+            "Predominant cell",
+            "Neutrophils (>1000/mcL)",
+            "Lymphocytes (<500/mcL)"
+          ],
+          [
+            "Protein level",
+            "Markedly elevated (>100 mg/dL)",
+            "Normal to mildly elevated"
+          ],
+          [
+            "Glucose level",
+            "Markedly reduced (<40% serum)",
+            "Normal glucose ratio"
+          ],
+          [
+            "Opening pressure",
+            "Markedly elevated",
+            "Normal or slightly raised"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Discrete localized collections of liquefactive necrosis within brain parenchyma arise from direct sinus or middle ear spread, or haematogenous dissemination from pulmonary infections. Histologically, a central necrotic core of liquefied neutrophils is surrounded by a vascular granulation tissue zone, an active collagenous fibrous capsule elaborated by fibroblasts, and surrounding reactive gemistocytic astrocytes. That space-occupying lesion is a **cerebral abscess**. Marked vasogenic oedema surrounds the fibrous capsule, carrying significant risk of transtentorial herniation if lumbar puncture is performed.",
+      "say": "Cerebral abscess consists of a central liquefactive core encircled by a collagenous rim and reactive astrocytic gliosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cerebral abscess",
+          "points": [
+            "Central liquefactive pus",
+            "Collagenous rim from fibroblasts",
+            "Septic or haematogenous focus",
+            "Rapid perifocal vasogenic oedema"
+          ]
+        },
+        "right": {
+          "title": "Necrotic glioblastoma",
+          "points": [
+            "Pseudopalisading tumour cells",
+            "Malignant astrocytic nuclei",
+            "Microvascular proliferation",
+            "Infiltrative brain margin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common neurodegenerative cause of progressive dementia in older adults exhibits cortical atrophy with prominent widening of cerebral sulci and narrowing of gyri, most pronounced in the frontal, temporal, and parietal lobes. Ventricular enlargement secondary to brain tissue loss produces hydrocephalus ex vacuo. That disorder is **Alzheimer disease**. Pathogenesis centres on abnormal cleavage of amyloid precursor protein by beta-secretase and gamma-secretase enzymes, generating hydrophobic amyloid-beta forty-two peptides that aggregate into neurotoxic oligomers and extracellular amyloid plaques.",
+      "say": "Alzheimer disease causes progressive cortical atrophy and dementia driven by amyloid precursor protein cleavage into amyloid-beta plaques.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alzheimers-disease-fig2.webp",
+        "alt": "Alzheimer disease neuropathology",
+        "caption": "Brain gross comparison showing cortical atrophy with sulcal widening alongside microscopic extracellular amyloid plaques and neurofibrillary tangles."
+      }
+    },
+    {
+      "tx": "Microscopic examination of the cerebral cortex and hippocampus in Alzheimer disease identifies extracellular senile plaques containing central amyloid-beta cores surrounded by dystrophic neuritic processes. Intracellularly, tau protein becomes hyperphosphorylated, dissociates from axonal microtubules, and polymerizes into paired helical filaments that form flame-shaped fibrillary bundles. These structures are **neurofibrillary tangles**. The burden and anatomical distribution of neurofibrillary tangles correlate directly with the severity of cognitive impairment, reflecting progressive synaptic dysfunction and neuronal death.",
+      "say": "Neurofibrillary tangles consist of hyperphosphorylated tau paired helical filaments whose density directly correlates with clinical cognitive decline.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cleavage",
+            "label": "Abeta42 peptide generation"
+          },
+          {
+            "id": "plaques",
+            "label": "Extracellular senile plaques"
+          },
+          {
+            "id": "tau",
+            "label": "Tau hyperphosphorylation"
+          },
+          {
+            "id": "tangles",
+            "label": "Intracellular neurofibrillary tangles"
+          }
+        ],
+        "edges": [
+          [
+            "cleavage",
+            "plaques"
+          ],
+          [
+            "plaques",
+            "tau"
+          ],
+          [
+            "tau",
+            "tangles"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Movement disorder characterized by resting tremor, cogwheel muscular rigidity, bradykinesia, and festinating gait results from selective loss of pigmented dopaminergic neurons. Macroscopic inspection reveals striking pallor of the substantia nigra pars compacta and locus coeruleus due to loss of neuromelanin pigment. The clinical condition is **Parkinson disease**. Degeneration of the nigrostriatal dopaminergic pathway disrupts basal ganglia motor loops, disinhibiting the subthalamic nucleus and globus pallidus interna to suppress cortical motor activation.",
+      "say": "Parkinson disease results from degeneration of pigmented dopaminergic neurons in the substantia nigra pars compacta, causing resting tremor and rigidity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/parkinsons-disease-fig1.webp",
+        "alt": "Parkinson disease neuropathology",
+        "caption": "Anatomical section showing substantia nigra depigmentation alongside histological appearance of intracytoplasmic Lewy bodies with clear halos."
+      }
+    },
+    {
+      "tx": "Surviving dopaminergic neurons in the substantia nigra contain single or multiple round, intracytoplasmic, eosinophilic inclusions surrounded by a distinct clear halo. The diagnostic inclusion bodies are **Lewy bodies**. Immunohistochemical staining reveals these inclusions are composed of aggregated, insoluble alpha-synuclein protein complexed with ubiquitin. In dementia with Lewy bodies, alpha-synuclein aggregates spread widely throughout the cerebral cortex and limbic system, manifesting with early visual hallucinations, fluctuating attention, and concurrent parkinsonian motor signs.",
+      "say": "Lewy bodies are intracytoplasmic alpha-synuclein inclusions with pale halos in neuromelanin-containing substantia nigra neurons.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Parkinson disease dementia",
+          "Dementia with Lewy bodies"
+        ],
+        "rows": [
+          [
+            "Onset sequence",
+            "Motor signs precede dementia >1 year",
+            "Dementia precedes or within 1 year of motor"
+          ],
+          [
+            "Hallucinations",
+            "Late, often drug-induced",
+            "Early, detailed visual hallucinations"
+          ],
+          [
+            "Cognitive course",
+            "Slow progressive decline",
+            "Prominent fluctuating alertness"
+          ],
+          [
+            "Pathological spread",
+            "Brainstem ascending to cortex",
+            "Widespread cortical and limbic Lewy bodies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autoimmune demyelinating disease of the central nervous system presents in young women with relapsing-remitting neurological deficits separated in time and space. T-cell mediated inflammation directed against myelin basic protein produces sharply circumscribed, glassy, grey-tan demyelinating plaques in periventricular white matter, optic nerves, and spinal cord. That disease is **multiple sclerosis**. Microscopic examination of active plaques reveals perivascular lymphocytic cuffing, myelin destruction with relative axon preservation, and lipid-laden foamy macrophages. Cerebrospinal fluid electrophoresis shows diagnostic oligoclonal immunoglobulin bands.",
+      "say": "Multiple sclerosis is an autoimmune demyelinating disease producing periventricular white matter plaques and CSF oligoclonal bands.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Active MS plaque",
+          "points": [
+            "Ongoing myelin breakdown",
+            "Abundant foamy macrophages",
+            "Perivascular lymphocytic cuffing",
+            "Axons relatively preserved"
+          ]
+        },
+        "right": {
+          "title": "Inactive MS plaque",
+          "points": [
+            "Complete myelin loss",
+            "Diminished inflammatory cells",
+            "Dense fibrillary astrocytic gliosis",
+            "Irreversible axonal dropout"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rapidly progressive fatal dementia accompanied by startle-induced myoclonus, ataxia, and periodic sharp wave complexes on electroencephalography occurs without fever or inflammatory CSF changes. That neurodegenerative prion disease is **Creutzfeldt-Jakob**. The underlying mechanism involves post-translational conformational change of normal alpha-helical cellular prion protein PrPC into an insoluble beta-sheet-rich, protease-resistant isoform termed PrPSc. Histopathology shows widespread spongiform change consisting of fine microscopic vacuolation within neuronal cytoplasm and neuropil, accompanied by severe neuronal loss and reactive astrogliosis.",
+      "say": "Creutzfeldt-Jakob disease is a rapidly fatal prion encephalopathy characterized by cerebral spongiform vacuolation and startle myoclonus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Category",
+          "Creutzfeldt-Jakob feature",
+          "Diagnostic test"
+        ],
+        "rows": [
+          [
+            "Clinical triad",
+            "Rapid dementia, myoclonus, ataxia",
+            "Neurological examination"
+          ],
+          [
+            "Histopathology",
+            "Spongiform vacuolation in cortex",
+            "Brain biopsy showing vacuolated neuropil"
+          ],
+          [
+            "CSF biomarker",
+            "Surrogate marker for rapid death",
+            "CSF 14-3-3 protein elevation"
+          ],
+          [
+            "EEG hallmark",
+            "Biphasic and triphasic complexes",
+            "Periodic synchronous sharp wave discharges"
+          ]
+        ]
+      }
+    }
+  ]
+}

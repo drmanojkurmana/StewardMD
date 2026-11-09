@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-prenatal-screening",
+ "subject": "obstetrics-gynaecology",
+ "title": "Neural Tube Defects and the PCPNDT Act",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Failure of the neural tube to close in the first month forms **neural tube defects**. Anencephaly and spina bifida are the main types, varying from lethal to surgically correctable. Folic acid before conception prevents the majority. Closure finishes by day 28 after conception, before most women know they are pregnant.",
+   "say": "Neural tube defects follow failed closure in the first month and folic acid prevents most.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
+    "alt": "Folic acid preventing neural tube defects.",
+    "caption": "Folate prevention. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Periconceptional folic acid supplementation is the proven preventive, termed **folate prophylaxis**. Four hundred micrograms daily suits most women, with higher doses after a previous affected pregnancy. Starting after the missed period is too late for this purpose. Women with diabetes or on valproate are offered 5 milligrams instead of the standard 400 micrograms.",
+   "say": "Folate prophylaxis must start before conception because the tube closes in the first month.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "General",
+      "400 micrograms daily"
+     ],
+     [
+      "Previous affected child",
+      "4 to 5 milligrams daily"
+     ],
+     [
+      "Timing",
+      "Before conception to 12 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Open spina bifida leaks alpha fetoprotein into fluid and blood, enabling **biochemical detection**. Raised maternal serum AFP triggers detailed ultrasound of the spine. The lemon and banana skull signs accompany open defects on scanning. The lemon sign is a scalloped frontal skull, and the banana sign a cerebellum wrapped tightly around the brainstem.",
+   "say": "Open spina bifida raises AFP and shows lemon and banana skull signs on scan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Open defect leaks AFP"
+     },
+     {
+      "id": "n1",
+      "label": "Serum level raised"
+     },
+     {
+      "id": "n2",
+      "label": "Targeted spine scan"
+     },
+     {
+      "id": "n3",
+      "label": "Defect characterised"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Indian law prohibiting sex determination and regulating ultrasound use is the **PCPNDT Act**. Pre-Conception and Pre-Natal Diagnostic Techniques legislation mandates registration, records and prohibits disclosure of fetal sex. Violations carry imprisonment and licence loss. Form F documentation for every scan is the record inspectors audit, and missing forms draw penalties.",
+   "say": "The PCPNDT Act prohibits sex determination and strictly regulates prenatal ultrasound use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Requirement",
+     "Under the Act"
+    ],
+    "rows": [
+     [
+      "Machine registration",
+      "Mandatory"
+     ],
+     [
+      "Record keeping",
+      "Form F for scans"
+     ],
+     [
+      "Sex disclosure",
+      "Prohibited"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anencephaly, absence of the cranial vault, is uniformly lethal and termed a **lethal anomaly**. Early ultrasound diagnosis allows couples timely choices. Supportive counselling and birth planning respect family values throughout. Polyhydramnios often follows because the fetus cannot swallow, and labour planning centres on comfort care.",
+   "say": "Anencephaly is a lethal anomaly diagnosed early by ultrasound for timely choices.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anencephaly",
+     "points": [
+      "No cranial vault",
+      "Uniformly lethal",
+      "Early diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Spina bifida",
+     "points": [
+      "Spinal defect",
+      "Variable disability",
+      "Surgery after birth"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recurrence after one affected pregnancy is about one in twenty, quoted as **recurrence risk**. High dose folate starts before the next conception. Detailed scanning at sixteen to eighteen weeks targets the spine and skull. The quoted recurrence is about 3 percent after one affected child and 10 percent after two.",
+   "say": "Recurrence risk after an affected pregnancy is about one in twenty, needing high dose folate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/folate-deficiency-fig1.webp",
+    "alt": "Folate deficiency context for neural defects.",
+    "caption": "Folate context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Valproate and other folate antagonists raise neural tube risk as **teratogenic exposures**. Women needing them require specialist preconception planning. Alternative medicines or high dose folate may reduce the risk. Carbamazepine carries a smaller risk near one percent, and folate cover is still advised.",
+   "say": "Valproate raises neural tube risk and needs specialist preconception planning.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Medicine reviewed preconception"
+     },
+     {
+      "id": "n1",
+      "label": "Alternatives considered"
+     },
+     {
+      "id": "n2",
+      "label": "High dose folate started"
+     },
+     {
+      "id": "n3",
+      "label": "Early targeted scanning"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Closed spinal defects covered by skin do not raise AFP and are called **closed defects**. They escape serum screening and many escape routine scanning too. Most present later with orthopaedic or bladder problems. Spina bifida occulta at L5 or S1 is a common normal variant found on X ray in a tenth of adults.",
+   "say": "Closed defects hide under skin, escape AFP screening, and present later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "AFP"
+    ],
+    "rows": [
+     [
+      "Open spina bifida",
+      "Raised"
+     ],
+     [
+      "Closed defect",
+      "Normal"
+     ],
+     [
+      "Anencephaly",
+      "Raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal surgery for selected open spina bifida improves outcomes in trial settings, an evolving field of **in utero repair**. It trades prematurity risk against reduced shunt need and better leg function. Only specialised centres offer it after strict selection. The MOMS trial showed ventriculoperitoneal shunt need fell from about 82 to 40 percent with fetal repair.",
+   "say": "In utero repair improves selected spina bifida outcomes at specialised centres.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fetal surgery",
+     "points": [
+      "Better leg outcomes",
+      "Prematurity risk",
+      "Strict selection"
+     ]
+    },
+    "right": {
+     "title": "Postnatal surgery",
+     "points": [
+      "Standard care",
+      "Shunt often needed",
+      "Widely available"
+     ]
+    }
+   }
+  }
+ ]
+}

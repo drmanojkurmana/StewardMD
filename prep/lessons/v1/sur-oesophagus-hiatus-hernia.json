@@ -1,0 +1,255 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Hiatus Hernia Variants, Paraoesophageal Defects, and Strangulation Emergencies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A hiatus hernia occurs when elements of the abdominal cavity, most commonly the stomach, herniate through the esophageal hiatus of the diaphragm into the posterior mediastinum. The normal anatomical barrier relies on the muscular diaphragmatic crura, the phrenoesophageal membrane, and the intra-abdominal segment of the esophagus. Progressive attenuation of the **phrenoesophageal membrane** combined with chronic elevated intra-abdominal pressure predisposes to diaphragmatic hiatal widening and visceral migration.",
+   "say": "A hiatus hernia develops when abdominal structures, predominantly the stomach, herniate through a widened diaphragmatic hiatus into the chest due to weakening of the phrenoesophageal membrane.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gastroesophageal-reflux-disease-fig1.webp",
+    "alt": "Anatomical diagram of the diaphragmatic crura, phrenoesophageal membrane, and gastroesophageal junction.",
+    "caption": "Hiatal anatomy: normal anchoring mechanisms versus diaphragmatic crural widening and visceral herniation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diaphragmatic hiatal hernias are categorized into four distinct anatomical types. **Type I sliding hiatus hernia** accounts for over ninety percent of all cases. It occurs when circumferential laxity of the phrenoesophageal ligament allows the gastroesophageal junction and gastric cardia to slide upward into the posterior mediastinum. This disrupts the flap valve mechanism of the angle of His, predisposing the patient to chronic gastroesophageal reflux disease.",
+   "say": "Type one sliding hernia accounts for ninety percent of cases, where the gastroesophageal junction slides upward into the chest. This disrupts the anti-reflux barrier and promotes acid reflux.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I (Sliding Hernia)",
+     "points": [
+      "Over 90% of all hiatal hernia cases",
+      "Gastroesophageal junction migrates above diaphragm",
+      "Phrenoesophageal membrane circumferentially lax",
+      "Primary presentation is severe acid reflux"
+     ]
+    },
+    "right": {
+     "title": "Type II (Pure Paraoesophageal)",
+     "points": [
+      "Less than 5% of all hiatal cases",
+      "Gastroesophageal junction remains in normal abdomen",
+      "Gastric fundus herniates alongside the esophagus",
+      "Carries high risk of mechanical volvulus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **Type II paraoesophageal hernia**, also termed a rolling hernia, the gastroesophageal junction remains securely anchored in its normal intra-abdominal position by the phrenoesophageal ligament. However, a localized defect in the anterior or lateral hiatus allows the gastric fundus to roll upward into the mediastinum adjacent to the esophagus. Because the junction remains intact, acid reflux is rare; instead, patients present with mechanical fullness, early satiety, or postprandial chest tightness.",
+   "say": "In type two rolling hernias, the gastroesophageal junction stays below the diaphragm while the gastric fundus herniates alongside the esophagus, causing postprandial fullness rather than reflux.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/esophageal-motility-gerd-and-esophagectomy-fig1.webp",
+    "alt": "Anatomical schematic showing sliding hernia versus rolling paraoesophageal hernia.",
+    "caption": "Paraoesophageal hernia: upward herniation of the gastric fundus alongside a fixed lower esophageal junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "More extensive anatomical defects represent Type III and Type IV hernias. Type III mixed hernias incorporate elements of both sliding and rolling defects, where both the gastroesophageal junction and gastric fundus lie within the thoracic cavity. Type IV giant hiatal hernias feature a massive diaphragmatic defect permitting migration of additional viscera, such as the omentum, transverse colon, or spleen, producing a **thoracic stomach**.",
+   "say": "Type three mixed hernias involve both the junction and fundus migrating into the chest, while type four giant hernias allow other abdominal organs like the colon or spleen to enter the thorax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "Gastroesophageal Junction",
+     "Herniated Structures",
+     "Clinical Risk Profile"
+    ],
+    "rows": [
+     [
+      "Type I (Sliding)",
+      "Displaced into thorax",
+      "Gastric cardia only",
+      "Severe acid reflux, Barrett oesophagus"
+     ],
+     [
+      "Type II (Rolling)",
+      "Normal intra-abdominal position",
+      "Gastric fundus herniates",
+      "Incarceration, gastric volvulus"
+     ],
+     [
+      "Type III (Mixed)",
+      "Displaced into thorax",
+      "GEJ and fundus together",
+      "Reflux and mechanical obstruction"
+     ],
+     [
+      "Type IV (Giant)",
+      "Displaced into thorax",
+      "Stomach plus colon, spleen, omentum",
+      "Respiratory compromise, bowel obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical mechanical complication of large paraoesophageal hernias is **acute gastric volvulus**. Torsion most commonly occurs along the organoaxial axis, where the stomach rotates around its long axis connecting the cardia and pylorus. The classic clinical presentation is defined by Borchardt triad: severe epigastric pain and distension, retching without the ability to vomit, and complete inability to advance a nasogastric tube into the gastric lumen.",
+   "say": "Acute gastric volvulus is a surgical emergency characterized by Borchardt triad: sudden severe epigastric pain, retching without vomiting, and inability to pass a nasogastric tube.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vol",
+      "label": "Torsion of Intrathoracic Stomach (Organoaxial or Mesenteroaxial)"
+     },
+     {
+      "id": "obs",
+      "label": "Closed-Loop Obstruction of Cardia & Pyloric Outflow"
+     },
+     {
+      "id": "triad",
+      "label": "Borchardt Triad: Epigastric Pain, Retching, Failed NG Tube"
+     },
+     {
+      "id": "isch",
+      "label": "Impaired Venous Outflow, Mucosal Ischaemia & Gangrene"
+     },
+     {
+      "id": "surg",
+      "label": "Emergent Laparotomy/Laparoscopy, Derotation & Gastropexy"
+     }
+    ],
+    "edges": [
+     [
+      "vol",
+      "obs"
+     ],
+     [
+      "obs",
+      "triad"
+     ],
+     [
+      "triad",
+      "isch"
+     ],
+     [
+      "isch",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic occult gastrointestinal bleeding in patients with large hiatal hernias frequently arises from **Cameron lesions**. These are linear mucosal erosions or superficial ulcerations situated on the crests of gastric mucosal folds at the diaphragmatic pinch point. Repeated diaphragmatic respiratory motion causes mechanical rubbing and localized ischemia as the mucosal folds slide across the hiatus, producing chronic iron-deficiency anemia that responds to surgical hiatal repair.",
+   "say": "Cameron lesions are linear gastric mucosal ulcers occurring at the diaphragmatic pinch point. Repeated respiratory friction leads to chronic occult blood loss and iron deficiency anemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cameron Mucosal Lesions",
+     "points": [
+      "Linear ulcers on mucosal folds at hiatus",
+      "Caused by mechanical rubbing against crura",
+      "Presents with iron-deficiency anemia",
+      "Cured by surgical reduction and crural repair"
+     ]
+    },
+    "right": {
+     "title": "Peptic Gastric Ulcer",
+     "points": [
+      "Deep mucosal ulcer in antrum or lesser curve",
+      "Driven by H. pylori and NSAID mucosal injury",
+      "Presents with postprandial epigastric pain",
+      "Responds to antibiotics and acid suppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Asymptomatic sliding hernias require no surgery, but symptomatic or large paraoesophageal hernias warrant elective laparoscopic repair to prevent strangulation. The procedure begins with complete reduction of the stomach back into the peritoneal cavity and careful dissection of the **hernia sac** away from mediastinal structures. The surgeon mobilizes the esophagus into the abdomen to achieve at least two to three centimetres of intra-abdominal esophageal length without tension.",
+   "say": "Surgical repair involves reducing the stomach back into the abdomen, excising the mediastinal hernia sac, and mobilizing the distal esophagus to ensure adequate intra-abdominal length.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "red",
+      "label": "Reduction of Herniated Stomach & Viscera into Abdomen"
+     },
+     {
+      "id": "sac",
+      "label": "Complete Dissection & Excision of Mediastinal Hernia Sac"
+     },
+     {
+      "id": "mob",
+      "label": "Circumferential Esophageal Mobilization to Gain Intra-Abdominal Length"
+     },
+     {
+      "id": "cru",
+      "label": "Posterior Cruroraphy Using Pledged Non-Absorbable Sutures"
+     },
+     {
+      "id": "wrap",
+      "label": "Construction of Concomitant 360-Degree or Partial Fundoplication"
+     }
+    ],
+    "edges": [
+     [
+      "red",
+      "sac"
+     ],
+     [
+      "sac",
+      "mob"
+     ],
+     [
+      "mob",
+      "cru"
+     ],
+     [
+      "cru",
+      "wrap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diaphragmatic defect is closed by performing a **posterior cruroraphy**, approximating the right and left diaphragmatic crural pillars posterior to the esophagus using interrupted non-absorbable sutures. In large defects where primary closure risks excessive tension, prosthetic or biological mesh can reinforce the repair. Finally, because mobilizing the hiatus destroys natural anti-reflux barriers, surgeons routinely perform a concomitant fundoplication to prevent postoperative gastroesophageal reflux.",
+   "say": "The diaphragmatic crura are approximated posterior to the esophagus with non-absorbable sutures, sometimes reinforced with mesh, followed by an anti-reflux fundoplication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operative Step",
+     "Surgical Technique",
+     "Key Anatomical Objective"
+    ],
+    "rows": [
+     [
+      "Sac Excision",
+      "Dissection from mediastinal pleura",
+      "Prevents seroma and hernia recurrence"
+     ],
+     [
+      "Esophageal Length",
+      "Mediastinal mobilization up to aortic arch",
+      "Ensures >= 2 to 3 cm of intra-abdominal esophagus"
+     ],
+     [
+      "Cruroraphy",
+      "Interrupted 0-silk or Ethibond sutures",
+      "Closes hiatal defect without constricting esophagus"
+     ],
+     [
+      "Mesh Reinforcement",
+      "U-shaped biological or PTFE mesh patch",
+      "Reduces recurrence in giant > 5 cm defects"
+     ],
+     [
+      "Fundoplication",
+      "Nissen or Toupet fundic wrap",
+      "Restores physiological anti-reflux barrier"
+     ]
+    ]
+   }
+  }
+ ]
+}

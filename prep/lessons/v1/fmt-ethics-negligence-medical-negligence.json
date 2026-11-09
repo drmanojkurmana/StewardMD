@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "id": "fmt-ethics-negligence-medical-negligence",
+ "subject": "forensic-medicine",
+ "module": "fmt-ethics-negligence",
+ "title": "Medical Negligence: Tort, Bolam Test, Res Ipsa Loquitur and Vicarious Liability",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Legal definition and essential elements of negligence",
+   "tx": "In medical jurisprudence, actionable **medical negligence tort liability** represents the breach of a legal duty of care owed by a clinician to a patient, directly resulting in unintended harm, injury, or death. To substantiate clinical negligence before a civil court or consumer forum, the plaintiff must successfully establish the classical four Ds: Duty of care, Dereliction of duty, Direct causation, and quantifiable Damage.",
+   "say": "Medical negligence is the breach of a duty of care causing damage. The patient must prove all four Ds: duty, dereliction, direct causation, and actual damage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Duty of care established upon accepting patient"
+     },
+     {
+      "id": "b",
+      "label": "Dereliction: Breach of accepted standard of care"
+     },
+     {
+      "id": "c",
+      "label": "Direct causation linking breach to clinical complication"
+     },
+     {
+      "id": "d",
+      "label": "Measurable physical, psychological or financial damage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Civil negligence versus criminal medical negligence",
+   "tx": "A vital jurisdictional distinction separates **civil versus criminal negligence** standards applied to medical professionals. Civil negligence involves ordinary failure to exercise reasonable competence, requiring proof by a preponderance of probabilities and resulting in financial compensation. Conversely, criminal negligence under Section 106(1) BNS demands gross negligence, reckless indifference, or callous disregard for patient safety (mens rea) beyond reasonable doubt.",
+   "say": "Civil negligence involves ordinary failure of care leading to financial compensation. Criminal negligence requires gross, reckless disregard for life to justify prosecution.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Civil medical negligence",
+     "points": [
+      "Adjudicated in civil courts or consumer commissions",
+      "Standard of proof: Preponderance of probability",
+      "Involves ordinary error or lack of reasonable care",
+      "Remedy is monetary compensation for damages"
+     ]
+    },
+    "right": {
+     "title": "Criminal medical negligence",
+     "points": [
+      "Tried under Section 106(1) BNS in criminal court",
+      "Standard of proof: Beyond all reasonable doubt",
+      "Demands gross negligence or reckless indifference",
+      "Remedy is criminal imprisonment or penal fine"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The Supreme Court Jacob Mathew landmark ruling",
+   "tx": "To prevent malicious harassment of physicians, the **Jacob Mathew criminal guidelines** established by the Supreme Court of India provide robust procedural safeguards against automatic arrests. The apex court ruled that a doctor cannot be prosecuted under criminal law for a mere clinical misadventure, error of judgment, or unexpected accident, requiring independent expert medical board certification of gross recklessness before police register an FIR.",
+   "say": "The Jacob Mathew judgment protects doctors from unfair arrest for honest clinical errors, requiring an independent medical board opinion before police file criminal charges.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient death alleged to arise from clinical negligence"
+     },
+     {
+      "id": "b",
+      "label": "Police prohibited from arresting doctor or filing instant FIR"
+     },
+     {
+      "id": "c",
+      "label": "Case referred to independent government medical board"
+     },
+     {
+      "id": "d",
+      "label": "Criminal FIR registered only if board confirms gross negligence"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The standard of care: The Bolam test and Bolitho qualification",
+   "tx": "The international legal benchmark establishing professional standard of care is the **Bolam test standard benchmark**, derived from Bolam v Friern Hospital Management Committee. Under this doctrine, a doctor is not negligent if acting in accordance with a practice accepted as proper by a responsible body of medical peers skilled in that field. The subsequent Bolitho qualification mandates that the peer practice must also withstand logical analysis.",
+   "say": "Under the Bolam test, a doctor is not negligent if following an accepted medical practice supported by responsible peers, provided that practice has a logical scientific basis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Legal doctrine",
+     "Jurisprudential origin",
+     "Core standard of evaluation"
+    ],
+    "rows": [
+     [
+      "Bolam test (1957)",
+      "English Queen's Bench ruling",
+      "Practice supported by a responsible body of medical men"
+     ],
+     [
+      "Bolitho qualification (1997)",
+      "House of Lords decision",
+      "Peer opinion must be logical, defensible and risk-aware"
+     ],
+     [
+      "Indian adoption",
+      "Supreme Court in Jacob Mathew",
+      "Standard of ordinary skilled practitioner, not highest specialist"
+     ],
+     [
+      "Error of judgment",
+      "Settled judicial consensus",
+      "Reasonable error between two viable options is not negligence"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The evidentiary doctrine of res ipsa loquitur",
+   "tx": "In blatant negligence claims, the **res ipsa loquitur legal maxim** (meaning 'the thing speaks for itself') shifts the legal burden of proof onto the defendant physician. When an accident is of a kind that does not occur in ordinary course without negligence, and the agency is under the doctor's exclusive control, the court presumes negligence unless the practitioner proves otherwise.",
+   "say": "Res ipsa loquitur means the thing speaks for itself. It applies to obvious surgical blunders, shifting the burden onto the doctor to explain why they were not negligent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Obvious medical mishap occurs during hospital procedure"
+     },
+     {
+      "id": "b",
+      "label": "Accident could not happen without gross failure of care"
+     },
+     {
+      "id": "c",
+      "label": "Court invokes res ipsa loquitur doctrine"
+     },
+     {
+      "id": "d",
+      "label": "Burden shifts to hospital to disprove clinical negligence"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Classic examples invoking res ipsa loquitur",
+   "tx": "Courts invoke the doctrine in undeniable surgical catastrophes representing the **classical res ipsa loquitur examples**, where expert witnesses are unnecessary to demonstrate dereliction of care. Typical judicial scenarios include leaving surgical sponges, artery forceps, or gauze inside the peritoneal cavity (gossypiboma), amputating the incorrect limb, administering a lethal mismatched blood transfusion, operating on the wrong patient, or burning an anesthetized patient with electrocautery plates.",
+   "say": "Leaving sponges inside the abdomen, operating on the wrong side, or transfusing mismatched blood are classic examples where negligence speaks for itself.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical mishap",
+     "Mechanism of failure",
+     "Legal consequence"
+    ],
+    "rows": [
+     [
+      "Retained surgical sponge (Gossypiboma)",
+      "Failure of surgical count protocol",
+      "Immediate presumption of operating team negligence"
+     ],
+     [
+      "Wrong-site limb amputation",
+      "Failure of pre-operative marking checklist",
+      "Gross civil liability and disciplinary erasure"
+     ],
+     [
+      "ABO mismatched transfusion fatality",
+      "Failure of bedside recipient verification",
+      "Severe hospital and laboratory staff liability"
+     ],
+     [
+      "Diathermy plate electrical burn",
+      "Defective return electrode placement",
+      "Res ipsa loquitur applied against theatre staff"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Vicarious liability and hospital responsibilities",
+   "tx": "Under the principle of **hospital vicarious liability doctrine** (respondeat superior, or 'let the master answer'), an employer hospital is held legally and financially liable for the negligent acts or omissions committed by its employees, including resident doctors, staff nurses, pharmacists, and radiographers, during the course of their employment. The hospital management cannot escape financial compensation by deflecting blame onto subordinate salaried personnel.",
+   "say": "Hospitals are vicariously liable for negligent mistakes made by their staff during employment, ensuring injured patients receive compensation from the hospital.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Employed nurse or resident administers incorrect medication"
+     },
+     {
+      "id": "b",
+      "label": "Patient suffers severe injury or fatal anaphylaxis"
+     },
+     {
+      "id": "c",
+      "label": "Patient files claim against hospital and employee"
+     },
+     {
+      "id": "d",
+      "label": "Hospital held vicariously liable to pay compensation damages"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The captain of the ship doctrine and operating theatre liability",
+   "tx": "In surgical jurisprudence, the traditional **captain of the ship doctrine** held that the chief operating surgeon exercised absolute supreme authority over the entire operating theatre team, remaining personally liable for every mistake committed by scrub nurses, assistants, or technicians. Modern judicial decisions have largely modified this concept, recognizing that anesthesiologists, perfusionists, and nursing staff act as independent professionals holding specialized individual liability.",
+   "say": "The captain of the ship doctrine historically made surgeons liable for all theatre mistakes. Today, courts recognize anesthetists and nurses as independently accountable professionals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Historical captain of ship view",
+     "points": [
+      "Surgeon personally liable for sponge counts",
+      "Anesthesia errors blamed on head surgeon",
+      "Theatre staff treated as mere surgical servants",
+      "Surgeon held all liability burdens"
+     ]
+    },
+    "right": {
+     "title": "Modern operating team liability",
+     "points": [
+      "Anesthesiologist independently accountable",
+      "Surgeon focuses on surgical operative field",
+      "Scrub nurse liable for instrument count protocol",
+      "Hospital shares vicarious responsibility"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Clinical risk management and defensive medical practice",
+   "tx": "To defend against unmerited litigation, strict adherence to **clinical risk management documentation** represents the physician's greatest safeguard. Maintaining clear, legible, contemporaneous clinical records, obtaining thorough informed consent with specific risk notes, requesting appropriate diagnostic investigations, instituting surgical safety checklists, and maintaining open communication with patients and families effectively prevent clinical misunderstandings and defeat claims of negligence.",
+   "say": "Meticulous contemporaneous documentation, signed informed consent, and open patient communication are the best safeguards against medical malpractice lawsuits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thorough legible clinical documentation of every visit"
+     },
+     {
+      "id": "b",
+      "label": "Implementation of WHO surgical safety checklist"
+     },
+     {
+      "id": "c",
+      "label": "Transparent communication regarding treatment complications"
+     },
+     {
+      "id": "d",
+      "label": "Robust legal defence established through medical records"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

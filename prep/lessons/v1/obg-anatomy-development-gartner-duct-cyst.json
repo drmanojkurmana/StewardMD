@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-anatomy-development",
+ "subject": "obstetrics-gynaecology",
+ "title": "Gartner Duct Cyst and Imperforate Hymen",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A cyst of the mesonephric duct remnant in the anterolateral vaginal wall is a **Gartner duct cyst**. Most are small, silent and found incidentally. Large ones distort the urethra and associate with ipsilateral renal anomalies. Bartholin cysts sit posterolateral at the lower vagina; a high anterolateral cyst is Gartner until disproved.",
+   "say": "Gartner duct cysts sit in the anterolateral vaginal wall from mesonephric remnants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Gartner cyst"
+    ],
+    "rows": [
+     [
+      "Wall",
+      "Anterolateral vagina"
+     ],
+     [
+      "Origin",
+      "Mesonephric remnant"
+     ],
+     [
+      "Associations",
+      "Renal anomalies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fusion of the hymen without perforation trapping menstrual blood at puberty is an **imperforate hymen**. Cyclic pain, primary amenorrhoea and a bulging bluish membrane diagnose it. Cruciate incision drains haematocolpos completely. Urinary retention from the mass effect is the presentation that brings many girls to emergency care.",
+   "say": "Imperforate hymen traps menstrual blood behind a bulging bluish membrane.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Puberty, cyclic pain"
+     },
+     {
+      "id": "n1",
+      "label": "No menstrual flow"
+     },
+     {
+      "id": "n2",
+      "label": "Bluish bulging membrane"
+     },
+     {
+      "id": "n3",
+      "label": "Cruciate incision drains"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing Gartner cyst from Bartholin cyst depends on position, anterolateral high versus posterolateral low, termed **cyst localisation**. Skene duct cysts sit near the urethral meatus instead. Excision is reserved for symptomatic lesions. Marsupialisation is the treatment for a Bartholin abscess, while simple Gartner cysts are excised only when symptomatic.",
+   "say": "Cyst localisation separates high anterolateral Gartner from low posterolateral Bartholin cysts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gartner",
+     "points": [
+      "High anterolateral",
+      "Mesonephric remnant"
+     ]
+    },
+    "right": {
+     "title": "Bartholin",
+     "points": [
+      "Low posterolateral",
+      "Blocked gland duct"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Blood collected in the vagina behind an obstruction is **haematocolpos**. It can reach a litre and compress bladder causing retention. Ultrasound shows the fluid level and the obstructing membrane or septum. Volumes can reach a litre and compress bladder causing retention.",
+   "say": "Haematocolpos collects blood in the vagina and can cause urinary retention.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Haematocolpos assessment.",
+    "caption": "Haematocolpos. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Further accumulation into uterus and tubes gives haematometra and haematosalpinx as **ascending collections**. Retrograde spill may seed endometriosis in delayed cases. Early drainage prevents these sequelae entirely. Haematosalpinx can rupture into the peritoneum and mimic an ectopic pregnancy in a teenager.",
+   "say": "Ascending collections fill uterus and tubes when haematocolpos is neglected.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Name"
+    ],
+    "rows": [
+     [
+      "Vagina",
+      "Haematocolpos"
+     ],
+     [
+      "Uterus",
+      "Haematometra"
+     ],
+     [
+      "Tubes",
+      "Haematosalpinx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ectopic ureter opening into a Gartner cyst causes continuous dribbling incontinence in girls, a classic **ectopic ureter association**. Normal voiding continues alongside the constant leak. Imaging finds the duplicated system responsible. The duplicated system often has a poorly functioning upper moiety, which surgery may remove with its ureter.",
+   "say": "Ectopic ureter into a Gartner cyst causes continuous dribbling with normal voiding.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-intravenous-urogram-hydronephrosis.webp",
+    "alt": "Duplicated system urogram.",
+    "caption": "Duplicated system. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgery for imperforate hymen excises a disc of membrane rather than simple puncture, following **cruciate excision** technique. Simple puncture reseals and risks ascending infection. The excised edge is marsupialised to stay open. The membrane edges are stitched open so the opening cannot seal shut again as it heals.",
+   "say": "Cruciate excision marsupialises the hymen edge because simple puncture reseals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Membrane identified"
+     },
+     {
+      "id": "n1",
+      "label": "Cruciate incision made"
+     },
+     {
+      "id": "n2",
+      "label": "Blood drained fully"
+     },
+     {
+      "id": "n3",
+      "label": "Edges marsupialised"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Never aspirate a presumed haematocolpos blindly because a septum or cervix may intervene, a **no blind aspiration** rule. Examination under anaesthesia with ultrasound guidance defines anatomy first. Wrong level surgery creates strictures. Examination under anaesthesia comes first, because a high septum mistaken for hymen leads to surgery at the wrong level.",
+   "say": "No blind aspiration of haematocolpos because septum level must be defined first.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Defined anatomy",
+     "points": [
+      "EUA plus scan",
+      "Correct level surgery"
+     ]
+    },
+    "right": {
+     "title": "Blind aspiration",
+     "points": [
+      "Infection seeded",
+      "Stricture created"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After drainage, patency is checked at follow up and fertility prognosis is excellent, termed **post drainage review**. Adhesion of the incised membrane is the main early complication. Most girls menstruate normally thereafter. Most girls menstruate normally thereafter and fertility prognosis is excellent, though stenosis can recur at the incision.",
+   "say": "Post drainage review checks patency, and fertility prognosis is excellent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-fig1.webp",
+    "alt": "Outflow tract anomaly context.",
+    "caption": "Outflow anomalies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-colorectal-cancer",
+ "subject": "surgery",
+ "title": "Colorectal Carcinoma and Molecular Carcinogenesis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "One of the most prevalent gastrointestinal malignancies globally is **colorectal carcinoma**. Arising predominantly from pre-existing adenomatous polyps within the large bowel mucosa, this malignancy exhibits distinct clinical patterns based on anatomical location. Right-sided colon cancers typically present insidiously with occult bleeding, profound iron deficiency anemia, and palpable mass, whereas left-sided and rectosigmoid neoplasms present with annular constriction, altered bowel habits, and hematochezia.",
+   "say": "Colorectal carcinoma presents with iron deficiency anemia on the right and obstructive bowel changes on the left.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-colon-annular.webp",
+    "alt": "Gross pathology specimen of an annular constricting carcinoma of the sigmoid colon showing circumferential luminal narrowing.",
+    "caption": "Annular carcinoma of the sigmoid colon: circumferential napkin-ring constriction causing progressive bowel obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The stepwise accumulation of genetic and epigenetic alterations driving mucosal neoplasia is the **adenoma-carcinoma sequence**. Described by Fearon and Vogelstein, this classic chromosomal instability pathway spans ten to fifteen years. Normal colonic epithelium progresses sequentially through aberrant crypt foci, small tubular adenomas, large dysplastic tubulovillous adenomas, and ultimately into invasive adenocarcinoma through cumulative oncogenic mutations.",
+   "say": "The adenoma-carcinoma sequence outlines the decade-long molecular transformation from normal colonic epithelium into invasive adenocarcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "norm",
+      "label": "Normal Colonic Mucosa (APC Mutation)"
+     },
+     {
+      "id": "aden",
+      "label": "Early Adenoma Formation (KRAS Activation)"
+     },
+     {
+      "id": "dysp",
+      "label": "Advanced Dysplastic Adenoma (SMAD4 Loss)"
+     },
+     {
+      "id": "ca",
+      "label": "Invasive Colorectal Carcinoma (p53 Inactivation)"
+     }
+    ],
+    "edges": [
+     [
+      "norm",
+      "aden"
+     ],
+     [
+      "aden",
+      "dysp"
+     ],
+     [
+      "dysp",
+      "ca"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The critical initial gatekeeper event triggering the chromosomal instability pathway is **APC gene inactivation**. Bi-allelic loss of this tumor suppressor gene located on chromosome 5q21 impairs ubiquitin-mediated degradation of cytosolic beta-catenin. Beta-catenin subsequently translocates into the cell nucleus, where it binds TCF-4 transcription factors to continuously activate proto-oncogenes including c-MYC and cyclin D1, stimulating unchecked cellular proliferation.",
+   "say": "Inactivation of the APC gatekeeper gene initiates neoplastic transformation by driving beta-catenin nuclear accumulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Molecular Stage",
+     "Target Gene",
+     "Chromosome Locus",
+     "Biological Consequence"
+    ],
+    "rows": [
+     [
+      "Gatekeeper initiation",
+      "APC loss of function",
+      "5q21",
+      "Uncontrolled beta-catenin signaling"
+     ],
+     [
+      "Intermediate expansion",
+      "KRAS proto-oncogene activation",
+      "12p12",
+      "Autonomous MAP kinase growth signals"
+     ],
+     [
+      "Late progression",
+      "SMAD4 / DCC deletion",
+      "18q21",
+      "Loss of TGF-beta growth inhibition"
+     ],
+     [
+      "Malignant conversion",
+      "TP53 gene mutation",
+      "17p13",
+      "Resistance to apoptosis and genomic chaos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Activating missense mutations occurring in approximately forty percent of colorectal carcinomas involve the **KRAS proto-oncogene**. Situated on chromosome 12p12, point mutations in codons twelve and thirteen produce a permanently active GTP-bound Ras protein. This autonomous intracellular signaling bypasses upstream epidermal growth factor receptor activation, conferring intrinsic resistance to anti-EGFR targeted monoclonal antibody therapies such as cetuximab and panitumumab.",
+   "say": "KRAS mutations produce constitutively active intracellular signaling, rendering colorectal tumors resistant to anti-EGFR monoclonal antibody therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "KRAS Wild-Type Tumors",
+     "points": [
+      "Preserved normal GTPase hydrolysis activity",
+      "Downstream signaling depends on upstream EGFR",
+      "Responsive to cetuximab and panitumumab",
+      "First-line targeted biological option"
+     ]
+    },
+    "right": {
+     "title": "KRAS Mutant Tumors",
+     "points": [
+      "Constitutively active GTP-bound Ras protein",
+      "Downstream cascade active without EGFR binding",
+      "No benefit from anti-EGFR antibody treatment",
+      "Requires alternative systemic regimens"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most common hereditary colorectal cancer predisposition syndrome is **Lynch syndrome**. Inherited in an autosomal dominant fashion, this disorder is caused by germline mutations in DNA mismatch repair genes, predominantly MLH1, MSH2, MSH6, and PMS2. Affected individuals develop colorectal cancers at an early age, typically between forty and fifty years, showing a strong predilection for the proximal right colon.",
+   "say": "Lynch syndrome is an autosomal dominant mismatch repair deficiency syndrome causing early-onset, right-sided colorectal carcinomas.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-colon-fungating-caecum.webp",
+    "alt": "Gross pathological specimen of a fungating exophytic carcinoma of the caecum characteristic of right-sided colorectal cancer.",
+    "caption": "Fungating caecal carcinoma: characteristic bulky, exophytic lesion typical of right-sided colon cancers in Lynch syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Defective DNA mismatch repair machinery produces the distinctive molecular phenotype designated as **microsatellite instability**. Failure to correct replication slippage errors generates length variations within repetitive short mono- and dinucleotide tracts throughout the genome. MSI-high colorectal neoplasms exhibit abundant tumor-infiltrating lymphocytes, medullary histological features, mucinous differentiation, and an exceptional therapeutic response to programmed death-1 immune checkpoint inhibitors.",
+   "say": "Microsatellite instability reflects defective DNA mismatch repair, resulting in high mutation burdens and excellent responses to immunotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mmr",
+      "label": "Germline or Epigenetic MMR Gene Inactivation"
+     },
+     {
+      "id": "slip",
+      "label": "Unrepaired DNA Replication Polymerase Slippage"
+     },
+     {
+      "id": "msi",
+      "label": "Hypermutation & Microsatellite Length Alterations"
+     },
+     {
+      "id": "neo",
+      "label": "Abundant Neoantigens & Marked T-Cell Infiltration"
+     }
+    ],
+    "edges": [
+     [
+      "mmr",
+      "slip"
+     ],
+     [
+      "slip",
+      "msi"
+     ],
+     [
+      "msi",
+      "neo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A broad spectrum of non-colonic neoplasms recognized as **HNPCC extracolonic cancers** frequently develops in Lynch syndrome carriers. Endometrial adenocarcinoma is the most common extracolonic malignancy in female carriers, followed closely by ovarian epithelial tumors. Additional heightened cancer risks encompass transitional cell carcinoma of the renal pelvis and ureter, gastric adenocarcinoma, small bowel adenocarcinoma, biliary tract malignancies, and sebaceous skin adenomas in Muir-Torre variant.",
+   "say": "Extracolonic Lynch malignancies include endometrial, ovarian, upper urinary tract, and gastric adenocarcinomas, requiring dedicated organ surveillance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Associated Malignancy",
+     "Lifetime Risk in Lynch",
+     "Surveillance Modality"
+    ],
+    "rows": [
+     [
+      "Uterus",
+      "Endometrial adenocarcinoma",
+      "40% to 60% in women",
+      "Annual transvaginal US and endometrial biopsy"
+     ],
+     [
+      "Ovary",
+      "Epithelial ovarian carcinoma",
+      "10% to 12%",
+      "Prophylactic hysterectomy and bilateral salpingo-oophorectomy"
+     ],
+     [
+      "Stomach",
+      "Gastric adenocarcinoma",
+      "5% to 10%",
+      "Upper endoscopy with H. pylori eradication"
+     ],
+     [
+      "Urinary tract",
+      "Transitional cell carcinoma",
+      "5% to 8%",
+      "Annual urinalysis and upper tract imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The simultaneous presentation of two or more independent primary colorectal malignancies is termed **synchronous colorectal neoplasms**. Found in approximately three to five percent of newly diagnosed colorectal cancer cases, synchronous lesions mandate complete preoperative total colonoscopic evaluation. When obstructing left-sided tumors preclude full preoperative colonoscopy, intraoperative colonoscopy or complete postoperative examination within three to six months is essential.",
+   "say": "Synchronous colorectal cancers occur in up to five percent of patients, mandating complete colonoscopic clearance of the remaining bowel.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Synchronous Colorectal Cancer",
+     "points": [
+      "Two distinct tumors detected at presentation",
+      "Separated by intervening normal bowel mucosa",
+      "Higher incidence in Lynch syndrome and IBD",
+      "May alter surgical plan to subtotal colectomy"
+     ]
+    },
+    "right": {
+     "title": "Metachronous Colorectal Cancer",
+     "points": [
+      "New primary tumor arising > 6 months post-resection",
+      "Represents de novo neoplasia or missed synchronous lesion",
+      "Prevented by strict postoperative colonoscopy surveillance",
+      "Treated by re-resection of affected segment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The final critical genetic event facilitating the transition from adenoma to invasive carcinoma is **p53 tumor suppressor loss**. Mutation or deletion of the TP53 gene on chromosome 17p13 disables the cell's central guardian of the genome. Cells lose the capacity for cell cycle arrest at the G1/S checkpoint in response to DNA damage, failing to activate Bax-mediated apoptotic pathways and promoting chromosomal chaos and metastasis.",
+   "say": "Inactivation of the p53 guardian gene prevents damaged cells from undergoing apoptosis, driving invasive carcinoma conversion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dna",
+      "label": "Oncogenic Stress & Severe Intracellular DNA Damage"
+     },
+     {
+      "id": "p53",
+      "label": "Inactivating TP53 Gene Mutation or Deletion"
+     },
+     {
+      "id": "noap",
+      "label": "Failure of G1/S Cell Cycle Arrest & Apoptosis"
+     },
+     {
+      "id": "inv",
+      "label": "Aneuploidy, Invasive Adenocarcinoma & Metastasis"
+     }
+    ],
+    "edges": [
+     [
+      "dna",
+      "p53"
+     ],
+     [
+      "p53",
+      "noap"
+     ],
+     [
+      "noap",
+      "inv"
+     ]
+    ]
+   }
+  }
+ ]
+}

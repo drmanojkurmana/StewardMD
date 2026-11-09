@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-autoimmune",
+  "subject": "pathology",
+  "title": "Sjogren Syndrome, Anti-Ro, and Systemic Sclerosis Serology",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic lymphocytic attack on lacrimal and salivary glands leaves a middle aged woman with gritty dry eyes, a dry mouth that makes swallowing biscuits difficult, dental caries, and recurrent parotid swelling. When this sicca syndrome occurs alone it is primary disease; with rheumatoid arthritis or lupus it is secondary **Sjogren syndrome**.",
+      "say": "Dry eyes, dry mouth, dental caries, and swollen parotids in a middle aged woman should bring Sjogren syndrome to mind.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sj-gren-s-disease-fig1.webp",
+        "alt": "Sjogren syndrome gland autoimmunity and manifestations",
+        "caption": "Sjogren syndrome gland autoimmunity with ocular, oral, and systemic manifestations."
+      }
+    },
+    {
+      "tx": "Antibodies against Ro and La ribonucleoproteins support the diagnosis and identify patients at risk of extraglandular disease and, in pregnancy, neonatal lupus with congenital heart block. Because anti-Ro can cross the placenta, a positive **anti-Ro antibody** in a pregnant patient triggers fetal cardiac monitoring even when maternal symptoms are mild.",
+      "say": "Anti-Ro supports Sjogren syndrome and matters in pregnancy because it can cause congenital heart block in the baby.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sicca symptoms prompt Schirmer and salivary assessment"
+          },
+          {
+            "id": "b",
+            "label": "Anti-Ro and anti-La serology obtained"
+          },
+          {
+            "id": "c",
+            "label": "Labial salivary gland biopsy if seronegative"
+          },
+          {
+            "id": "d",
+            "label": "Focus score confirms lymphocytic sialadenitis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Labial minor salivary gland biopsy showing focal lymphocytic sialadenitis with a focus score of at least one focus per four square millimetres anchors classification when antibodies are absent. The same chronic B cell stimulation explains hypergammaglobulinemia and the markedly raised lifetime risk of **MALT lymphoma** arising in salivary tissue.",
+      "say": "A labial gland biopsy with focal lymphocytic sialadenitis confirms seronegative cases, and lifelong lymphoma vigilance is required.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glandular disease",
+          "points": [
+            "Keratoconjunctivitis sicca, positive Schirmer test",
+            "Xerostomia, caries, parotid enlargement",
+            "Pilocarpine and saliva substitutes help"
+          ]
+        },
+        "right": {
+          "title": "Extraglandular disease",
+          "points": [
+            "Arthralgia, fatigue, vasculitic rash",
+            "Interstitial lung and renal tubular disease",
+            "Raised MALT lymphoma risk needs follow up"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic sclerosis replaces glandular dryness with vascular and fibrotic disease: Raynaud phenomenon, sclerodactyly, telangiectasia, interstitial lung disease, and pulmonary hypertension dominate its two clinical subsets. Diffuse cutaneous disease progresses rapidly with truncal skin thickening, while limited disease advances slowly; the fibrosing multisystem disorder is **systemic sclerosis**.",
+      "say": "Systemic sclerosis combines Raynaud phenomenon with skin thickening and fibrotic lung, gut, and kidney disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-sclerosis-fig1.webp",
+        "alt": "Systemic sclerosis clinical features and capillaroscopy",
+        "caption": "Systemic sclerosis clinical features with sclerodactyly and nailfold capillaroscopy change."
+      }
+    },
+    {
+      "tx": "Antibody against topoisomerase I, historically Scl-70, marks diffuse cutaneous systemic sclerosis and predicts progressive interstitial lung disease, so a positive result intensifies lung monitoring with serial physiology and imaging. Examiners expect you to pair diffuse disease and lung fibrosis with **anti-Scl-70 antibody**, formally anti-topoisomerase I.",
+      "say": "Anti-Scl-70, against topoisomerase I, flags diffuse systemic sclerosis with a high risk of interstitial lung disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antibody",
+          "Subset",
+          "Predicted risk"
+        ],
+        "rows": [
+          [
+            "Anti-topoisomerase I (Scl-70)",
+            "Diffuse cutaneous",
+            "Progressive interstitial lung disease"
+          ],
+          [
+            "Anticentromere",
+            "Limited cutaneous",
+            "Pulmonary arterial hypertension"
+          ],
+          [
+            "Anti-RNA polymerase III",
+            "Diffuse, rapid skin change",
+            "Scleroderma renal crisis"
+          ],
+          [
+            "Anti-Ro and anti-La",
+            "Sjogren syndrome",
+            "Neonatal lupus in offspring"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Scleroderma renal crisis, abrupt hypertension with rapidly rising creatinine and microangiopathic haemolysis, historically killed most diffuse disease patients before angiotensin converting enzyme inhibitors transformed survival. Any new hypertension in systemic sclerosis is therefore an emergency treated immediately with an **ACE inhibitor**, continued even if dialysis becomes necessary.",
+      "say": "New hypertension in systemic sclerosis means renal crisis until proven otherwise; start an ACE inhibitor immediately.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "New hypertension detected in diffuse disease"
+          },
+          {
+            "id": "b",
+            "label": "Check creatinine, blood film, urinalysis urgently"
+          },
+          {
+            "id": "c",
+            "label": "Start and uptitrate ACE inhibitor without delay"
+          },
+          {
+            "id": "d",
+            "label": "Dialysis support if needed; do not stop ACE inhibition"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Supportive care in Sjogren syndrome protects the organs autoimmunity dries out: preservative free tear substitutes and punctal plugs for eyes, meticulous dental fluoride for mouth, and pilocarpine or cevimeline to stimulate residual gland function. Systemic immunosuppression is reserved for vasculitis, lung, kidney, or neurological disease, summarised as **sicca-directed supportive care** for most patients.",
+      "say": "Most Sjogren care is meticulous eye and dental protection plus secretagogues; immunosuppression is kept for systemic disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sicca care for most patients",
+          "points": [
+            "Tear substitutes, saliva substitutes, fluoride",
+            "Pilocarpine stimulates residual glands",
+            "Annual review for lymphoma symptoms"
+          ]
+        },
+        "right": {
+          "title": "Immunosuppression when systemic",
+          "points": [
+            "Vasculitis, lung, kidney, nerve disease",
+            "Steroids plus steroid sparing agents",
+            "Rituximab for selected severe disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Placing the two diseases side by side sharpens both: Sjogren is a lymphocytic exocrinopathy with lymphoma risk, while systemic sclerosis is a vasculopathic fibrosis with lung and renal crises. Antibodies do the sorting at the bedside, anti-Ro for the first and topoisomerase or centromere antibodies for the second; that sorting skill is **autoantibody-guided classification**.",
+      "say": "Let the antibody sort the syndrome: Ro for Sjogren, topoisomerase and centromere for the systemic sclerosis subsets.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Question",
+          "Sjogren syndrome",
+          "Systemic sclerosis"
+        ],
+        "rows": [
+          [
+            "Dominant process",
+            "Lymphocytic gland destruction",
+            "Vasculopathy and fibrosis"
+          ],
+          [
+            "Signature antibody",
+            "Anti-Ro, anti-La",
+            "Anti-Scl-70 or anticentromere"
+          ],
+          [
+            "Feared complication",
+            "MALT lymphoma",
+            "Renal crisis, lung fibrosis, PAH"
+          ],
+          [
+            "Everyday care",
+            "Eye and dental protection",
+            "Blood pressure and lung surveillance"
+          ]
+        ]
+      }
+    }
+  ]
+}

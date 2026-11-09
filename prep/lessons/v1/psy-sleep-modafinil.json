@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "id": "psy-sleep-modafinil",
+ "subject": "psychiatry",
+ "module": "psy-sleep",
+ "title": "Parasomnias, Obstructive Sleep Apnoea, and Sleep Therapeutics",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Modafinil** serves as the first-line wakefulness-promoting pharmacological agent for excessive daytime sleepiness in narcolepsy, obstructive sleep apnoea, and shift work sleep disorder. Acting primarily as a selective dopamine reuptake inhibitor while indirectly activating hypothalamic orexin and histamine systems, modafinil carries significantly lower abuse liability than traditional stimulants.",
+   "say": "Modafinil promotes daytime alertness in narcolepsy by selectively blocking dopamine reuptake and activating hypothalamic orexin, with low abuse risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modafinil Profile",
+     "points": [
+      "Selective dopamine transporter (DAT) block",
+      "Activates tuberomammillary histamine neurons",
+      "Promotes clean wakefulness without euphoria",
+      "Minimal cardiovascular sympathomimetic strain"
+     ]
+    },
+    "right": {
+     "title": "Traditional Stimulants",
+     "points": [
+      "Dextroamphetamine & methylphenidate",
+      "Massive monoamine release and reuptake block",
+      "High risk of euphoria, tolerance, and addiction",
+      "Severe tachycardia and arterial hypertension"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Obstructive sleep apnoea**, abbreviated OSA, is characterized by repetitive complete cessation (apnoea) or partial reduction (hypopnoea) of upper pharyngeal airflow during sleep, caused by muscular pharyngeal collapse despite persistent respiratory effort. It produces daytime sleepiness, morning headaches, loud snoring, and secondary polycythaemia.",
+   "say": "Obstructive sleep apnoea features repetitive pharyngeal collapse with loud snoring and daytime sleepiness, diagnosed when the AHI exceeds five per hour.",
+   "vis": {
+    "kind": "table",
+    "title": "Apnoea-Hypopnoea Index (AHI) Strata",
+    "cols": [
+     "AHI Events Per Hour",
+     "Severity Classification",
+     "Primary Management Strategy"
+    ],
+    "rows": [
+     [
+      "< 5 events/hr",
+      "Normal physiological sleep",
+      "Sleep hygiene and weight maintenance"
+     ],
+     [
+      "5 to 14 events/hr",
+      "Mild OSA",
+      "Positional therapy, weight loss, mandibular splints"
+     ],
+     [
+      "15 to 29 events/hr",
+      "Moderate OSA",
+      "Continuous positive airway pressure (CPAP) therapy"
+     ],
+     [
+      ">= 30 events/hr",
+      "Severe OSA",
+      "Mandatory nocturnal CPAP; evaluate bariatric surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Continuous positive airway pressure**, abbreviated CPAP, serves as the definitive non-surgical gold standard treatment for moderate to severe obstructive sleep apnoea. A bedside pneumatic pump delivers pressurized ambient air through a nasal or facial mask, pneumatically splinting the collapsible pharyngeal airway open throughout inspiration and expiration.",
+   "say": "Continuous positive airway pressure splints the pharynx open with pressurized air, eliminating apnoeas, oxygen desaturations, and daytime sleepiness.",
+   "vis": {
+    "kind": "flow",
+    "title": "CPAP Therapeutic Mechanism",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Nocturnal loss of pharyngeal dilator muscle tone triggers airway collapse"
+     },
+     {
+      "id": "n2",
+      "label": "CPAP machine delivers constant positive pneumatic air pressure"
+     },
+     {
+      "id": "n3",
+      "label": "Pharyngeal airway splinted open, preventing apnoea and desaturation"
+     },
+     {
+      "id": "n4",
+      "label": "Restoration of continuous deep sleep and reduction of cardiac risk"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Somnambulism**, or sleepwalking, is an arousal parasomnia arising from slow-wave NREM stage N3 sleep, most commonly encountered in children between four and eight years of age. Individuals initiate complex motor behaviors, such as walking or dressing, while displaying blank staring eyes and total amnesia for the episode.",
+   "say": "Somnambulism is an NREM stage N3 parasomnia where patients walk with open, unseeing eyes during deep sleep, with total amnesia upon waking.",
+   "vis": {
+    "kind": "table",
+    "title": "NREM Parasomnia Spectrum",
+    "cols": [
+     "Parasomnia",
+     "Sleep Stage & Timing",
+     "Clinical Features & Safety"
+    ],
+    "rows": [
+     [
+      "Somnambulism (Sleepwalking)",
+      "NREM Stage N3 (First third of night)",
+      "Complex motor ambulation; unarousable; secure doors & windows"
+     ],
+     [
+      "Sleep terrors (Night terrors)",
+      "NREM Stage N3 (First third of night)",
+      "Piercing scream; intense autonomic panic; zero dream recall"
+     ],
+     [
+      "Confusional arousals",
+      "NREM Stage N3 (First third of night)",
+      "Disorientation in bed; slurred speech; no ambulation or terror"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Night terrors versus nightmares** represents a critical clinical differential in pediatric and adult sleep psychiatry. Night terrors arise from deep NREM stage N3 sleep during the first third of the night, featuring autonomic terror and amnesia; nightmares arise from REM sleep during the final third, with vivid dream recall.",
+   "say": "Night terrors occur in early N3 sleep with autonomic panic and amnesia. Nightmares occur in late REM sleep with vivid dream recall and alertness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Night Terrors (NREM Stage N3)",
+     "points": [
+      "Occurs during the first third of the night",
+      "Piercing vocal scream and autonomic panic",
+      "Patient is glassy-eyed and unarousable",
+      "Total amnesia for the event in the morning"
+     ]
+    },
+    "right": {
+     "title": "Nightmares (REM Sleep)",
+     "points": [
+      "Occurs during the final third of the night",
+      "Wakes up immediately alert and oriented",
+      "Vivid, detailed narrative dream recall",
+      "Autonomic arousal is mild to moderate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**REM sleep behaviour disorder**, abbreviated RBD, is characterized by the loss of normal electromyographic muscle atonia during REM sleep, resulting in vigorous, violent dream-enacting behaviors. Patients punch, kick, or leap from bed while dreaming of being attacked, frequently injuring themselves or bed partners.",
+   "say": "REM sleep behaviour disorder involves loss of normal dream atonia, causing violent dream enactment. It strongly predicts future Parkinson disease.",
+   "vis": {
+    "kind": "table",
+    "title": "RBD Neurodegenerative Link",
+    "cols": [
+     "Parameter",
+     "Clinical Finding",
+     "Long-Term Prognosis"
+    ],
+    "rows": [
+     [
+      "Diagnostic hallmark",
+      "Loss of REM muscle atonia on chin/tibialis EMG",
+      "Polysomnography confirms motor activity during REM"
+     ],
+     [
+      "Alpha-synucleinopathy link",
+      "Over 80% develop neurodegenerative parkinsonism",
+      "Strong prodromal marker for Parkinson disease or DLB"
+     ],
+     [
+      "Latent interval",
+      "Precedes motor parkinsonism by 10 to 15 years",
+      "Provides crucial window for neuroprotective trials"
+     ],
+     [
+      "Drug of choice",
+      "Clonazepam (0.5 to 1.0 mg) or high-dose melatonin",
+      "Suppresses dream enactment and restores safety"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Restless legs syndrome**, also known as Willis-Ekbom disease, is a sensorimotor disorder characterized by an irresistible urge to move the legs, accompanied by uncomfortable creeping sensations. Symptoms occur predominantly at rest, worsen in the evening, and achieve immediate, temporary relief with physical movement.",
+   "say": "Restless legs syndrome involves an irresistible urge to move the legs at rest with evening worsening, linked to brain iron deficiency and dopamine dysfunction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Restless Legs Diagnostic URGE Criteria",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "U: Urge to move legs, usually with uncomfortable sensations"
+     },
+     {
+      "id": "n2",
+      "label": "R: Rest triggers or worsens symptoms (sitting or lying down)"
+     },
+     {
+      "id": "n3",
+      "label": "G: Gets better with movement (walking, stretching, rubbing)"
+     },
+     {
+      "id": "n4",
+      "label": "E: Evening or night worsening of symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Circadian rhythm sleep-wake disorders** involve a chronic misalignment between an individual's endogenous circadian sleep-wake pacemaker and external societal schedules. Delayed sleep phase syndrome features sleep onset delayed until 3 to 6 AM with waking at noon; advanced sleep phase syndrome features evening sleepiness by 7 PM.",
+   "say": "Circadian disorders misalign internal sleep timing with society, such as delayed sleep phase where sleep is delayed until early morning hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Delayed Sleep Phase Syndrome",
+     "points": [
+      "Common in adolescents and young adults",
+      "Sleep onset typically between 2 AM and 6 AM",
+      "Severe difficulty waking for school or morning work",
+      "Treated with evening melatonin & morning bright light"
+     ]
+    },
+    "right": {
+     "title": "Advanced Sleep Phase Syndrome",
+     "points": [
+      "Common in elderly populations",
+      "Sleep onset between 6 PM and 9 PM",
+      "Awakening early morning between 2 AM and 5 AM",
+      "Treated with evening bright light therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

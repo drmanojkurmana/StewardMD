@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "sur-bile-duct",
+ "subject": "surgery",
+ "title": "Cholangitis and Bile Duct Injury",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Acute suppurative infection of the biliary tree occurring in the setting of complete or partial ductal obstruction is termed acute **ascending cholangitis**. Biliary stasis promotes massive bacterial proliferation, while high intraluminal pressure disrupts the protective tight junctions of hepatic sinusoids. This disruption permits virulent bacteria to translocate directly into the systemic circulation, driving rapid progression from local biliary infection to fulminant bacteremia and septic shock.",
+   "say": "Acute ascending cholangitis develops when biliary obstruction elevates ductal pressure, driving bacterial translocation across hepatic sinusoids into the bloodstream.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-t-tube-cholangiogram.webp",
+    "alt": "Postoperative T-tube cholangiogram showing contrast opacifying common bile duct, intrahepatic ducts, and free flow into the duodenum.",
+    "caption": "T-tube cholangiography: postoperative radiological surveillance of biliary tree decompression and ductal patency. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic clinical presentation of acute ascending cholangitis was described in the nineteenth century by Jean-Martin Charcot as **Charcot triad**. This pathognomonic diagnostic triad consists of intermittent high spiking fever accompanied by rigors, right upper quadrant abdominal pain, and fluctuating jaundice. Charcot triad is present in approximately fifty to seventy percent of patients presenting with acute bacterial cholangitis.",
+   "say": "Charcot triad describes the classic presentation of acute cholangitis: spiking fever with rigors, right upper quadrant pain, and jaundice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fever",
+      "label": "1. Spiking High Fever with Rigors (Bacteremia)"
+     },
+     {
+      "id": "pain",
+      "label": "2. Right Upper Quadrant Pain (Capsular & Ductal Distension)"
+     },
+     {
+      "id": "jaundice",
+      "label": "3. Obstructive Jaundice (Conjugated Hyperbilirubinaemia)"
+     },
+     {
+      "id": "triad",
+      "label": "Classic Charcot Triad of Acute Cholangitis Established"
+     }
+    ],
+    "edges": [
+     [
+      "fever",
+      "triad"
+     ],
+     [
+      "pain",
+      "triad"
+     ],
+     [
+      "jaundice",
+      "triad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with untreated severe suppurative cholangitis, rapidly escalating intraluminal pressure produces systemic hemodynamic collapse and encephalopathy. The addition of septic hypotension and altered mental status or confusion to Charcot triad forms the ominous **Reynolds pentad**. Reynolds pentad indicates advanced septic shock requiring immediate aggressive intensive care resuscitation and emergency biliary decompression.",
+   "say": "Reynolds pentad adds septic hypotension and altered mental status to Charcot triad, signalling fulminant suppurative cholangitis and septic shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Charcot Triad",
+     "points": [
+      "Fever with rigors",
+      "Right upper quadrant pain",
+      "Obstructive jaundice",
+      "Present in 50% to 70% of cases"
+     ]
+    },
+    "right": {
+     "title": "Reynolds Pentad",
+     "points": [
+      "All three features of Charcot triad",
+      "Septic shock / hypotension",
+      "Altered mental status / confusion",
+      "Signifies fulminant suppurative sepsis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management of acute ascending cholangitis begins with vigorous crystalloid resuscitation, correction of electrolyte disturbances, and immediate intravenous broad-spectrum antimicrobial therapy covering Gram-negative bacilli and anaerobes. For severe cholangitis or patients manifesting Reynolds pentad, emergency **biliary decompression** within twelve to twenty-four hours is mandatory. This is achieved preferentially via emergency ERCP with sphincterotomy and biliary stent placement.",
+   "say": "Acute cholangitis mandates urgent intravenous antibiotics and emergency biliary decompression, preferentially via ERCP stenting or sphincterotomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decompression Route",
+     "Primary Indication",
+     "Key Advantages",
+     "Potential Limitations"
+    ],
+    "rows": [
+     [
+      "Endoscopic (ERCP)",
+      "First-line therapy for almost all cases",
+      "Internal drainage, non-surgical, stones can be cleared",
+      "Difficult if altered gastric anatomy (e.g. Roux-en-Y)"
+     ],
+     [
+      "Percutaneous (PTBD)",
+      "Failed ERCP, proximal hilar obstruction",
+      "Direct access to intrahepatic ducts",
+      "External drainage bag, coagulopathy caution"
+     ],
+     [
+      "Open Surgical T-Tube",
+      "Failed ERCP and PTBD in septic patient",
+      "Direct visual decompression of common duct",
+      "Highest operative morbidity and mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dreaded technical misadventure occurring during laparoscopic cholecystectomy is an iatrogenic **bile duct injury**. The incidence of bile duct injury rose during the initial adoption of laparoscopic techniques to 0.4 to 0.6 percent, compared to 0.1 percent in open surgery. The overwhelming majority of major injuries stem from the classic visual misidentification illusion, wherein the common bile duct is mistaken for the cystic duct.",
+   "say": "Iatrogenic bile duct injury occurs in about zero-point-five percent of laparoscopic cholecystectomies, primarily caused by misidentifying the common duct as the cystic duct.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholecystitis-critical-view-and-biliary-injury-fig1.webp",
+    "alt": "Anatomical schematic showing classic laparoscopic visual illusion leading to transection and excision of the common bile duct.",
+    "caption": "Bile duct injury: classic misidentification error leading to clipping and transection of the common bile duct. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The universally accepted classification system for categorizing laparoscopic biliary injuries is the **Strasberg classification**. Extending the earlier Bismuth system, Strasberg categorizes injuries from type A through type E. Type A consists of simple bile leaks from small minor ducts such as the cystic duct or duct of Luschka in the liver bed. Type B represents partial occlusion of an aberrant right sectoral hepatic duct.",
+   "say": "The Strasberg classification categorizes biliary injuries from type A minor leaks through type E major common bile duct transections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strasberg Type",
+     "Anatomical Nature of Injury",
+     "Clinical Consequence",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Type A",
+      "Cystic duct leak or duct of Luschka leak",
+      "Localised biloma or low-output leak",
+      "ERCP biliary stenting (sphincterotomy)"
+     ],
+     [
+      "Type B",
+      "Occlusion of aberrant right sectoral duct",
+      "Segmental liver atrophy, silent",
+      "Observation or resection if symptomatic"
+     ],
+     [
+      "Type C",
+      "Transection of aberrant right sectoral duct",
+      "Persistent high-volume bile leak",
+      "Duct reimplantation or embolization"
+     ],
+     [
+      "Type D",
+      "Lateral partial tear of major bile duct",
+      "Combined bile leak and stenosis",
+      "Primary repair over T-tube or stenting"
+     ],
+     [
+      "Type E (E1-E5)",
+      "Major circumferential transection of CBD",
+      "Complete obstruction and peritonitis",
+      "Roux-en-Y hepaticojejunostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Types C, D, and E represent progressively more severe injuries. Strasberg type C involves complete transection of an aberrant right sectoral duct without ligation, leading to persistent bile peritonitis. Type D involves a lateral partial tear of a major bile duct. Strasberg **type E injury** encompasses complete circumferential transection of the main biliary ductal tree, subdivided into E1 through E5 based on the Bismuth level relative to the hepatic confluence.",
+   "say": "Strasberg type D indicates a lateral duct tear, while type E represents complete circumferential transection of the main bile duct.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strasberg Type A-D",
+     "points": [
+      "Minor or partial ductal disruptions",
+      "Type A: cystic duct or Luschka leak",
+      "Type B: clipped aberrant sectoral duct",
+      "Type C: transected aberrant sectoral duct",
+      "Type D: lateral incision of common duct"
+     ]
+    },
+    "right": {
+     "title": "Strasberg Type E (Major)",
+     "points": [
+      "Circumferential transection of common duct",
+      "E1: CBD stump > 2 cm below confluence",
+      "E2: CBD stump < 2 cm below confluence",
+      "E3: transection at the hepatic confluence",
+      "E4: destruction of the hilar confluence",
+      "E5: involves aberrant right sectoral branch"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When a major Strasberg type E ductal transection is recognized intraoperatively or postoperatively, primary end-to-end ductal anastomosis must never be attempted because ischemic tension invariably leads to catastrophic stricture. The definitive gold standard reconstruction is an end-to-side **hepaticojejunostomy**. A forty-to-sixty centimetre retrocolic Roux-en-Y jejunal loop is mobilized to construct a tension-free, well-vascularized mucosa-to-mucosa biliary-enteric anastomosis.",
+   "say": "Major bile duct transections require reconstruction with a Roux-en-Y hepaticojejunostomy to avoid the severe strictures that plague end-to-end duct repairs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "injury",
+      "label": "Recognition of Strasberg Type E Bile Duct Transection"
+     },
+     {
+      "id": "drain",
+      "label": "Wide External Drainage & Transfer to Specialist HPB Unit"
+     },
+     {
+      "id": "prep",
+      "label": "Nutritional Optimization & Resolution of Sepsis"
+     },
+     {
+      "id": "recon",
+      "label": "Definitive Roux-en-Y Hepaticojejunostomy Reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "injury",
+      "drain"
+     ],
+     [
+      "drain",
+      "prep"
+     ],
+     [
+      "prep",
+      "recon"
+     ]
+    ]
+   }
+  }
+ ]
+}

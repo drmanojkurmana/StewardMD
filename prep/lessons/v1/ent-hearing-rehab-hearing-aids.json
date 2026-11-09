@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-hearing-rehab-hearing-aids",
+ "subject": "ent",
+ "module": "ent-hearing-rehab",
+ "title": "Hearing Aids, Cochlear Implants, and Auditory Rehabilitation",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Acoustic hearing aids represent the primary non-invasive management modality for mild to severe sensorineural and conductive hearing impairment. Every acoustic hearing aid consists of four basic electroacoustic components: a microphone that converts acoustic waves into electrical signals, an amplifier that magnifies signal power, a **receiver** (miniature loudspeaker) that converts electrical signals back into acoustic sound, and a battery power supply.",
+   "say": "Acoustic hearing aids combine four components: a microphone converting sound to electricity, an amplifier, a receiver converting electricity back to sound, and a battery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn8-hearing.webp",
+    "alt": "Audiological rehabilitation display showing behind-the-ear hearing aids, bone-anchored aids, and cochlear implants",
+    "caption": "Auditory rehabilitation modalities spanning acoustic hearing aids, bone-anchored processors, and cochlear implants. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hearing aid styles range from traditional Behind-The-Ear devices to custom in-the-ear and invisible-in-the-canal models. A **bone-anchored hearing aid** (BAHA) bypasses the external and middle ear by coupling an external sound processor to a titanium fixture surgically osseointegrated into the temporal bone. Vibrational energy travels via skull bone conduction directly to both cochleae, indicated in congenital aural atresia, chronic draining ears, and single-sided deafness.",
+   "say": "Bone-anchored hearing aids use an osseointegrated titanium implant to transmit vibrations directly to the cochlea, ideal for canal atresia, chronic draining ears, or single-sided deafness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Air-Conduction Hearing Aids (BTE/ITE)",
+     "points": [
+      "Delivers amplified acoustic sound into ear canal.",
+      "Requires an open, non-draining external meatus.",
+      "Requires an intact, mobile middle ear mechanism.",
+      "First-line option for sensorineural presbycusis."
+     ]
+    },
+    "right": {
+     "title": "Bone-Anchored Hearing Aid (BAHA)",
+     "points": [
+      "Directly vibrates temporal bone via osseointegrated post.",
+      "Completely bypasses diseased or absent canal and ossicles.",
+      "Ideal for congenital canal atresia and open mastoid cavities.",
+      "Indicated for single-sided deafness (Transcranial routing)."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients with bilateral severe-to-profound sensorineural deafness who derive minimal benefit from hearing aids, a **cochlear implant** restores hearing by bypassing non-functioning hair cells to stimulate spiral ganglion neurons directly. An external sound processor captures acoustic sound, encodes it into electrical pulses, and transmits it transcutaneously via a radiofrequency coil to an internal receiver-stimulator embedded under the scalp.",
+   "say": "Cochlear implants bypass damaged hair cells to stimulate spiral ganglion neurons directly. An external processor transmits electrical signals to an internal receiver under the scalp.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sudden-sensorineural-hearing-loss-fig1.webp",
+    "alt": "Anatomical schematic showing cochlear implant electrode array threaded into scala tympani through round window",
+    "caption": "Cochlear implant electrode array positioned inside the scala tympani of the basal cochlear turn. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During surgery, a flexible multi-channel electrode array is inserted through a posterior tympanotomy directly into the **scala tympani** of the cochlea via the round window membrane. The electrodes stimulate the tonotopically organized spiral ganglion fibres along the modiolus: apical electrodes transmit low frequencies while basal electrodes convey high frequencies, allowing post-lingually deafened adults to achieve open-set speech recognition and phone conversation.",
+   "say": "The multi-channel electrode array is placed into the scala tympani through the round window. Tonotopic stimulation allows deafened patients to understand conversational speech.",
+   "vis": {
+    "kind": "flow",
+    "title": "Signal Processing Arc in Cochlear Implantation",
+    "nodes": [
+     {
+      "id": "ci1",
+      "label": "External Microphone & Digital Sound Processor"
+     },
+     {
+      "id": "ci2",
+      "label": "Transcutaneous Radiofrequency Coil Transmission"
+     },
+     {
+      "id": "ci3",
+      "label": "Scala Tympani Array Tonotopic Ganglion Stimulation"
+     }
+    ],
+    "edges": [
+     [
+      "ci1",
+      "ci2"
+     ],
+     [
+      "ci2",
+      "ci3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the cochlear nerves have been bilaterally destroyed by trauma or surgical resection of bilateral vestibular schwannomas in Neurofibromatosis Type 2, a cochlear implant cannot function. In these individuals, an **auditory brainstem implant** (ABI) is indicated. A flat multi-electrode paddle is placed directly into the lateral recess of the fourth ventricle against the dorsal cochlear nucleus, restoring sound awareness and environmental alerting.",
+   "say": "When cochlear nerves are destroyed in Neurofibromatosis Type two, an auditory brainstem implant places electrodes on the cochlear nucleus in the fourth ventricle to restore sound awareness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cochlear Implant (CI)",
+     "points": [
+      "Electrodes placed in scala tympani of cochlea.",
+      "Requires intact, functional cochlear nerve (CN VIII).",
+      "Achieves excellent open-set conversational speech.",
+      "Universal standard for severe to profound SNHL."
+     ]
+    },
+    "right": {
+     "title": "Auditory Brainstem Implant (ABI)",
+     "points": [
+      "Paddle placed on cochlear nucleus in fourth ventricle.",
+      "Bypasses both the cochlea and the eighth cranial nerve.",
+      "Restores environmental sound awareness and rhythm.",
+      "Primary indication is bilateral NF2 vestibular schwannomas."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Universal neonatal hearing screening evaluates all newborns prior to hospital discharge using the 1-3-6 benchmark rule: screen by one month of age, confirm diagnosis by three months, and initiate audiological intervention by **six months of age**. Screening combines transient evoked otoacoustic emissions with automated auditory brainstem response, identifying congenital sensorineural hearing loss in one to three of every one thousand live births.",
+   "say": "Universal newborn screening follows the 1-3-6 rule: screen by one month, diagnose by three months, and intervene by six months to ensure normal spoken language development.",
+   "vis": {
+    "kind": "table",
+    "title": "High-Risk Factors for Congenital Neonatal Hearing Loss",
+    "cols": [
+     "Category",
+     "Clinical Risk Factor",
+     "Pathological Target",
+     "Screening Recommendation"
+    ],
+    "rows": [
+     [
+      "Perinatal infections",
+      "TORCH pathogens (CMV, Rubella)",
+      "Viral labyrinthitis, strial necrosis",
+      "Diagnostic ABR at birth"
+     ],
+     [
+      "Neonatal intensive care",
+      "Prematurity < 32 weeks, ECMO, hypoxia",
+      "Hypoxic cochlear and neural injury",
+      "Mandatory automated ABR"
+     ],
+     [
+      "Hyperbilirubinemia",
+      "Kernicterus requiring exchange transfusion",
+      "Auditory neuropathy, brainstem nuclei",
+      "Automated ABR (OAE may be normal)"
+     ],
+     [
+      "Craniofacial anomalies",
+      "Microtia, cleft palate, ear pits",
+      "Conductive and inner ear dysplasia",
+      "Comprehensive audiological assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Auditory neuropathy spectrum disorder is a unique sensorineural hearing condition characterized by normal, functioning outer hair cells coupled with abnormal or absent neural transmission along the eighth cranial nerve. Audiological evaluation reveals present, robust **otoacoustic emissions** and cochlear microphonics, but an absent or severely degraded auditory brainstem response, presenting clinically with profound speech perception deficits out of proportion to pure-tone thresholds.",
+   "say": "Auditory neuropathy shows present otoacoustic emissions alongside absent auditory brainstem responses. Patients struggle with severe speech clarity deficits despite near-normal pure-tone thresholds.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic Fingerprint of Auditory Neuropathy",
+    "nodes": [
+     {
+      "id": "an1",
+      "label": "Present Otoacoustic Emissions (Normal Hair Cells)"
+     },
+     {
+      "id": "an2",
+      "label": "Absent / Desynchronized Auditory Brainstem Response"
+     },
+     {
+      "id": "an3",
+      "label": "Severe Speech Incomprehension Out of Proportion to Threshold"
+     }
+    ],
+    "edges": [
+     [
+      "an1",
+      "an2"
+     ],
+     [
+      "an2",
+      "an3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tinnitus is the phantom auditory perception of sound in the absence of an external acoustic stimulus, classified as subjective (audible only to the patient) or objective (audible to the examiner, such as vascular bruits or palatal myoclonus). Management combines acoustic sound therapy with **tinnitus retraining therapy**, which pairs low-level broadband sound generators with directive educational counseling to induce habituation within subcortical auditory and limbic networks.",
+   "say": "Tinnitus is phantom sound perception. Tinnitus retraining therapy pairs directive counseling with white-noise sound generators to habituate the brain, reducing awareness and emotional distress.",
+   "vis": {
+    "kind": "table",
+    "title": "Etiological Classification of Tinnitus",
+    "cols": [
+     "Tinnitus Variety",
+     "Audibility to Examiner",
+     "Common Underlying Causes",
+     "Therapeutic Approach"
+    ],
+    "rows": [
+     [
+      "Subjective (Sensorineural)",
+      "Patient only (95% of cases)",
+      "Presbycusis, noise trauma, Meniere disease",
+      "Sound masking, counseling, hearing aids"
+     ],
+     [
+      "Objective (Pulsatile)",
+      "Examiner can auscultate bruit",
+      "Glomus tumour, dural AV fistula, carotid stenosis",
+      "Angiography and surgical/endovascular repair"
+     ],
+     [
+      "Objective (Clicking)",
+      "Audible rhythmic clicking sound",
+      "Palatal myoclonus, stapedius tendon spasm",
+      "Botulinum toxin injection into palate"
+     ],
+     [
+      "Objective (Blowing)",
+      "Synchronous with respiration",
+      "Patulous Eustachian tube",
+      "Cauterization of tubal orifice"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-071",
+  "bk2-ent-072",
+  "bk2-ent-073"
+ ]
+}

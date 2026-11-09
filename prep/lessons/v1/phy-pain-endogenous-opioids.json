@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-pain",
+  "subject": "physiology",
+  "title": "Endogenous Opioids, Descending Pain Control, and Thermoreception",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The central nervous system possesses powerful intrinsic analgesic networks capable of suppressing pain transmission at the spinal level. These mechanisms rely upon naturally synthesized peptide ligands known as **endogenous opioids**, which derive from three major genetically distinct polypeptide precursor molecules: pro-opiomelanocortin, proenkephalin, and prodynorphin.",
+      "say": "Endogenous opioids are naturally synthesized peptides derived from three distinct genetic precursors.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/opioid-use-disorder-fig1.webp",
+        "caption": "Opioid receptor distribution across central analgesic and reward neurocircuitry.",
+        "alt": "Endogenous opioid peptide processing and receptor binding distribution"
+      }
+    },
+    {
+      "tx": "Endogenous opioid peptides mediate their analgesic actions through specific seven-transmembrane G-protein-coupled receptors classified as mu, delta, and kappa. Binding of beta-endorphin or enkephalin to the **mu-opioid receptor** inhibits adenylyl cyclase, closes presynaptic voltage-gated calcium channels, and opens postsynaptic inwardly rectifying potassium channels, hyperpolarizing pain-relaying neurons.",
+      "say": "Mu-opioid receptors inhibit calcium influx presynaptically and open potassium channels postsynaptically.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Presynaptic Opioid Actions",
+          "points": [
+            "Coupled to Gi/o heterotrimeric guanine nucleotide binding proteins",
+            "Inhibits presynaptic N-type voltage-gated calcium channels",
+            "Blocks calcium-dependent exocytosis of glutamate and substance P",
+            "Prevents nociceptive neurotransmitter release into synaptic cleft"
+          ]
+        },
+        "right": {
+          "title": "Postsynaptic Opioid Actions",
+          "points": [
+            "Activates G-protein-coupled inwardly rectifying potassium channels (GIRK)",
+            "Promotes rapid outward potassium flux along electrochemical gradient",
+            "Hyperpolarizes second-order spinothalamic projection neurons",
+            "Elevates threshold required to fire ascending nociceptive action potentials"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Electrical stimulation of specific brainstem structures produces profound analgesia without impairing tactile or proprioceptive sensation. This descending analgesic system originates within the midbrain **periaqueductal grey matter**, which surrounds the cerebral aqueduct of Sylvius and receives rich inputs from the frontal cortex, amygdala, and ascending spinomesencephalic pain tracts.",
+      "say": "The midbrain periaqueductal grey triggers descending pathways that strongly inhibit spinal pain transmission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "limbic_drive",
+            "label": "Cortical, Hypothalamic, and Amygdaloid Projections Excite Periaqueductal Grey (PAG)"
+          },
+          {
+            "id": "pag_relay",
+            "label": "PAG Enkephalinergic Neurons Inhibit GABAergic Interneurons, Disinhibiting Output"
+          },
+          {
+            "id": "rostral_medulla",
+            "label": "Excitatory Projections Travel to Rostral Ventromedial Medulla (Nucleus Raphe Magnus)"
+          },
+          {
+            "id": "serotonin_path",
+            "label": "Serotonergic Fibers Descend Dorsolateral Funiculus to Spinal Dorsal Horn"
+          }
+        ],
+        "edges": [
+          [
+            "limbic_drive",
+            "pag_relay"
+          ],
+          [
+            "pag_relay",
+            "rostral_medulla"
+          ],
+          [
+            "rostral_medulla",
+            "serotonin_path"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Axons descending from the periaqueductal grey synapse within the rostral ventromedial medulla, specifically targeting the **nucleus raphe magnus**. Neurons of the raphe magnus send serotonergic projections down the spinal dorsolateral funiculus to terminate in the superficial dorsal horn, where they excite enkephalin-releasing interneurons to suppress incoming nociceptive signals.",
+      "say": "Nucleus raphe magnus sends descending serotonergic fibers to activate spinal enkephalinergic interneurons.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "raphe_descend",
+            "label": "Serotonergic and Noradrenergic Axons Descend Dorsolateral Spinal Cord"
+          },
+          {
+            "id": "substantia_gel",
+            "label": "Axons Synapse in Rexed Laminae II and III (Substantia Gelatinosa)"
+          },
+          {
+            "id": "enkephalin_burst",
+            "label": "Local Enkephalinergic Interneurons Release Met-Enkephalin and Leu-Enkephalin"
+          },
+          {
+            "id": "pain_quench",
+            "label": "Inhibits Presynaptic C Fibers and Postsynaptic Spinothalamic Projection Neurons"
+          }
+        ],
+        "edges": [
+          [
+            "raphe_descend",
+            "substantia_gel"
+          ],
+          [
+            "substantia_gel",
+            "enkephalin_burst"
+          ],
+          [
+            "enkephalin_burst",
+            "pain_quench"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In parallel with the midline serotonergic descending pathway, noradrenergic neurons located in the dorsolateral pontine tegmentum contribute powerfully to spinal antinociception. Cells within the **locus coeruleus** project descending axons to the dorsal horn, where norepinephrine release binds alpha-two adrenergic receptors to hyperpolarize projection neurons and blunt pain transmission.",
+      "say": "Locus coeruleus noradrenergic fibers bind alpha-two receptors in the dorsal horn to suppress pain.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/fibromyalgia-fig1.webp",
+        "caption": "Widespread central pain processing demonstrating deficits in descending inhibitory noradrenergic circuits.",
+        "alt": "Central pain sensitization and failure of descending noradrenergic inhibition"
+      }
+    },
+    {
+      "tx": "Following focal cutaneous tissue trauma, the uninjured surrounding skin exhibits heightened sensitivity to subsequent mechanical stimuli. Termed **primary versus secondary hyperalgesia**, primary hyperalgesia occurs directly within the injured tissue due to peripheral receptor sensitization, whereas secondary hyperalgesia arises in adjacent uninjured tissue through dorsal horn central sensitization.",
+      "say": "Primary hyperalgesia is peripheral sensitization at the wound, while secondary hyperalgesia is central spinal sensitization.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Hyperalgesia",
+          "points": [
+            "Confined strictly to the site of tissue injury and burn",
+            "Driven by local inflammatory soup (bradykinin, PGE2, histamine)",
+            "Decreased activation threshold of peripheral nociceptors",
+            "Responds to both thermal and mechanical stimuli"
+          ]
+        },
+        "right": {
+          "title": "Secondary Hyperalgesia",
+          "points": [
+            "Extends into normal undamaged tissue surrounding the injury",
+            "Driven by spinal dorsal horn neuroplasticity (central sensitization)",
+            "Low-threshold A-beta mechanoreceptors evoke perceived pain (allodynia)",
+            "Characteristically responds to mechanical, not thermal, stimuli"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cutaneous temperature is monitored across the body surface by specialized bare nerve endings that respond differentially to warm and cool environmental shifts. These **thermoreceptors** exhibit continuous tonic firing at static skin temperatures, increasing their discharge rate rapidly when skin temperature changes before adapting partially to maintain a steady firing plateau.",
+      "say": "Cutaneous thermoreceptors monitor temperature through distinct cold and warm receptors with steady resting discharges.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thermal_range",
+            "label": "Skin Temperature Fluctuates Within Normal Physiological Range (15-45 C)"
+          },
+          {
+            "id": "trp_gating",
+            "label": "Temperature-Sensitive TRP Ion Channels Gated by Thermal Energy Changes"
+          },
+          {
+            "id": "dynamic_peak",
+            "label": "Sudden Temperature Shift Evokes Intense Dynamic Phase Frequency Burst"
+          },
+          {
+            "id": "static_plateau",
+            "label": "Receptors Adapt to Slower Static Firing Plateau Signaling Maintained Temperature"
+          }
+        ],
+        "edges": [
+          [
+            "thermal_range",
+            "trp_gating"
+          ],
+          [
+            "trp_gating",
+            "dynamic_peak"
+          ],
+          [
+            "dynamic_peak",
+            "static_plateau"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cold and warmth detection relies upon distinct sensory afferent populations expressing different transient receptor potential ion channels. Cold receptors, mediated by thin A-delta and C fibers expressing TRPM8, fire maximally around twenty-five degrees Celsius, whereas warm receptors, mediated exclusively by unmyelinated C fibers expressing TRPV3 and TRPV4, fire between **thirty and forty-three degrees Celsius**.",
+      "say": "Cold receptors peak at twenty-five degrees, while warm receptors fire between thirty and forty-three degrees Celsius.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cold Thermoreceptors",
+          "points": [
+            "Outnumber warm receptors by 4 to 10-fold across human skin",
+            "Conducted via thinly myelinated A-delta and unmyelinated C fibers",
+            "Mediated by menthol-sensitive TRPM8 and TRPA1 channels",
+            "Operate between 10 and 38 C, peaking around 25 to 30 C"
+          ]
+        },
+        "right": {
+          "title": "Warm Thermoreceptors",
+          "points": [
+            "Less numerous, distributed more sparsely across cutaneous surface",
+            "Conducted exclusively over unmyelinated C nerve fibers",
+            "Mediated by heat-sensitive TRPV3 and TRPV4 cation channels",
+            "Operate between 30 and 45 C, peaking around 42 to 43 C"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

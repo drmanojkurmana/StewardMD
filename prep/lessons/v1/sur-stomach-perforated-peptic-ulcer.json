@@ -1,0 +1,272 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Perforated Peptic Ulcer, Graham Patch Omentopexy, and Gastric Outlet Obstruction",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Peptic ulcer perforation represents one of the most common acute abdominal surgical emergencies. Perforations occur primarily in ulcers situated on the anterior wall of the first part of the duodenum (D1) or the anterior prepyloric gastric antrum. In contrast, posterior duodenal ulcers rarely perforate into the peritoneal cavity; instead, they erode into the **gastroduodenal artery**, precipitating massive upper gastrointestinal haematemesis and hypovolaemic shock.",
+   "say": "Perforated peptic ulcers typically occur on the anterior duodenal wall, while posterior ulcers erode into the gastroduodenal artery, causing massive gastrointestinal bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peptic-ulcer-disease-and-related-fig1.webp",
+    "alt": "Anatomical schematic showing anterior duodenal ulcer perforation versus posterior erosion into the gastroduodenal artery.",
+    "caption": "Peptic ulcer complications: anterior duodenal perforation versus posterior arterial erosion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The sudden rupture of an anterior peptic ulcer releases acidic gastric secretions, bile, and pancreatic enzymes directly into the greater peritoneal sac, inducing intense chemical peritonitis. Patients experience immediate, agonizing, knife-like epigastric pain that rapidly generalizes throughout the abdomen. On physical examination, the abdomen is intensely tender with involuntary muscle guarding and rigid palpation, classically described as **board-like rigidity**.",
+   "say": "Perforation leaks acidic gastric juice and bile into the peritoneum, causing severe chemical peritonitis with sudden agonizing pain and board-like abdominal rigidity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "perf",
+      "label": "Transmural Ulcer Erosion on Anterior Duodenal Wall"
+     },
+     {
+      "id": "leak",
+      "label": "Extravasation of Hydrochloric Acid, Pepsin & Bile"
+     },
+     {
+      "id": "chem",
+      "label": "Severe Acute Chemical Peritoneal Irritation"
+     },
+     {
+      "id": "rig",
+      "label": "Involuntary Reflex Spasm Producing Board-Like Rigidity"
+     },
+     {
+      "id": "bact",
+      "label": "Transition at 12 Hours to Bacterial Peritonitis & Sepsis"
+     }
+    ],
+    "edges": [
+     [
+      "perf",
+      "leak"
+     ],
+     [
+      "leak",
+      "chem"
+     ],
+     [
+      "chem",
+      "rig"
+     ],
+     [
+      "rig",
+      "bact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Percussion of the abdomen reveals obliteration of normal hepatic dullness, caused by free gas escaping from the perforated viscus and gathering between the anterior surface of the liver and the abdominal wall. An erect chest radiograph confirms the diagnosis in roughly seventy-five percent of cases by demonstrating **pneumoperitoneum**, visible as a crescent of free gas beneath the right hemidiaphragm. If the patient is too unstable to sit erect, a left lateral decubitus radiograph demonstrates free air over the liver.",
+   "say": "Erect chest radiography reveals free gas under the right hemidiaphragm in seventy-five percent of cases. Percussion confirms loss of normal liver dullness due to intraperitoneal air.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peptic-ulcer-fig1.webp",
+    "alt": "Erect chest radiograph demonstrating a subdiaphragmatic crescent of free air in perforated peptic ulcer.",
+    "caption": "Pneumoperitoneum: free subdiaphragmatic gas confirming hollow viscus perforation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When plain radiographs are equivocal, non-contrast or contrast-enhanced computed tomography of the abdomen is the diagnostic investigation of choice, achieving sensitivity exceeding ninety-eight percent for detecting tiny retroperitoneal or subhepatic micro-pneumoperitoneum bubbles. Immediate pre-operative resuscitation prioritizes vigorous intravenous crystalloid rehydration, broad-spectrum intravenous antibiotics covering enteric gram-negative bacilli and anaerobes, high-dose intravenous proton pump inhibitors, and nasogastric decompression via a **large-bore Ryle tube**.",
+   "say": "CT of the abdomen is the most sensitive test for detecting subtle free air. Resuscitation requires intravenous fluids, broad-spectrum antibiotics, high-dose PPIs, and nasogastric suction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resuscitation Element",
+     "Therapeutic Action",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Nasogastric Tube",
+      "Continuous low intermittent suction",
+      "Evacuates gastric contents and limits peritoneal leak"
+     ],
+     [
+      "Intravenous Crystalloids",
+      "Balanced salt solution rehydration",
+      "Restores intravascular volume lost to third-spacing"
+     ],
+     [
+      "IV Antibiotics",
+      "Third-generation cephalosporin + metronidazole",
+      "Treats polymicrobial enteric bacterial peritonitis"
+     ],
+     [
+      "IV Proton Pump Inhibitor",
+      "Bolus 80 mg followed by 8 mg/hr infusion",
+      "Suppresses acid production and halts chemical injury"
+     ],
+     [
+      "Urinary Catheter",
+      "Continuous monitoring of urine output",
+      "Surrogate marker for end-organ perfusion (>0.5 mL/kg/hr)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive surgical standard for closing an anterior perforated peptic ulcer is the **Graham patch omentopexy**, performed via open laparotomy or laparoscopy. In the original Graham technique, the surgeon places three or four full-thickness absorbable sutures across the perforation without tying them, lays a vascularized pedicle of viable greater omentum over the defect, and ties the sutures gently across the omental buttress to create an airtight seal.",
+   "say": "Surgical closure is achieved using a Graham patch omentopexy. A vascularized pedicle of greater omentum is tied over the perforation to produce an airtight, healing seal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lap",
+      "label": "Upper Midline Laparotomy or Diagnostic Laparoscopy"
+     },
+     {
+      "id": "id",
+      "label": "Identification of Anterior Duodenal or Prepyloric Perforation"
+     },
+     {
+      "id": "sut",
+      "label": "Placement of Interrupted Full-Thickness 2-0 Silk or Vicryl Sutures"
+     },
+     {
+      "id": "omen",
+      "label": "Transposition of Well-Vascularized Greater Omental Pedicle"
+     },
+     {
+      "id": "seal",
+      "label": "Knot Tying Across Omentum Followed by Warm Saline Peritoneal Lavage"
+     }
+    ],
+    "edges": [
+     [
+      "lap",
+      "id"
+     ],
+     [
+      "id",
+      "sut"
+     ],
+     [
+      "sut",
+      "omen"
+     ],
+     [
+      "omen",
+      "seal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A modern variation is the modified Cellan-Jones technique, in which the perforation edges are primarily approximated before securing the omental pedicle. Crucially, any perforated gastric ulcer must undergo a **wedge excision biopsy** of its margins before repair, because up to ten percent of apparently benign perforated gastric ulcers harbour an underlying malignant adenocarcinoma. Duodenal ulcers almost never harbor malignancy, so routine biopsy is not required.",
+   "say": "Perforated gastric ulcers must always be biopsied to rule out underlying gastric carcinoma, whereas duodenal ulcers are almost universally benign and do not require biopsy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perforated Duodenal Ulcer",
+     "points": [
+      "Located on anterior D1 duodenal bulb",
+      "Malignancy risk virtually zero percent",
+      "Routine ulcer margin biopsy not required",
+      "Graham patch omentopexy is curative"
+     ]
+    },
+    "right": {
+     "title": "Perforated Gastric Ulcer",
+     "points": [
+      "Located on antrum or lesser gastric curve",
+      "Underlying adenocarcinoma in up to 10%",
+      "Full-thickness margin biopsy mandatory",
+      "May require formal partial gastrectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following successful surgical repair, all patients must receive eradication therapy for Helicobacter pylori and complete a six- to eight-week course of oral proton pump inhibitors. In the era of potent acid suppression and H. pylori eradication, acid-reducing procedures like truncal vagotomy are obsolete in emergency ulcer surgery. Repeat endoscopy at eight weeks is mandatory for all gastric ulcers to verify **complete mucosal ulcer healing**.",
+   "say": "Postoperative management requires Helicobacter pylori eradication and proton pump inhibitors. Gastric ulcers require repeat endoscopy at eight weeks to ensure complete healing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Postoperative Protocol",
+     "Clinical Timing",
+     "Target Outcome"
+    ],
+    "rows": [
+     [
+      "H. pylori Triple/Quadruple Therapy",
+      "Initiated once oral intake tolerated",
+      "Eliminates organism and prevents future relapse"
+     ],
+     [
+      "Oral PPI Therapy",
+      "Daily high-dose PPI for 8 weeks",
+      "Facilitates complete mucosal re-epithelialization"
+     ],
+     [
+      "Repeat Upper Endoscopy",
+      "6 to 8 weeks post-surgery for gastric ulcers",
+      "Rules out missed gastric malignancy"
+     ],
+     [
+      "Avoid NSAID / Steroid Use",
+      "Indefinite avoidance or gastroprotection",
+      "Eliminates major exogenous ulcerogenic triggers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Another classic mechanical complication of chronic, untreated peptic ulcer disease is **gastric outlet obstruction**. Decades of recurrent ulceration, inflammation, and scarring lead to dense fibrous stenosis of the pyloric channel or duodenal bulb. Patients present with persistent non-bilious vomiting containing undigested food eaten hours earlier, visible left-to-right gastric peristaltic waves, and an audible succussion splash heard over the epigastrium more than four hours after a meal.",
+   "say": "Gastric outlet obstruction arises from chronic peptic scarring at the pylorus. It presents with non-bilious vomiting of undigested food and an audible epigastric succussion splash.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "chron",
+      "label": "Chronic Recurrent Duodenal or Channel Peptic Ulceration"
+     },
+     {
+      "id": "fib",
+      "label": "Transmural Cicatrization, Edema & Fibrous Stenosis"
+     },
+     {
+      "id": "stasis",
+      "label": "Gastric Atony & Massive Dilation with Undigested Meals"
+     },
+     {
+      "id": "vomit",
+      "label": "Recurrent Non-Bilious Vomiting & Epigastric Succussion Splash"
+     },
+     {
+      "id": "alk",
+      "label": "Development of Hypokalaemic Hypochloraemic Metabolic Alkalosis"
+     }
+    ],
+    "edges": [
+     [
+      "chron",
+      "fib"
+     ],
+     [
+      "fib",
+      "stasis"
+     ],
+     [
+      "stasis",
+      "vomit"
+     ],
+     [
+      "vomit",
+      "alk"
+     ]
+    ]
+   }
+  }
+ ]
+}

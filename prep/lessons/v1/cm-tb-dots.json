@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-tb-dots",
+ "subject": "community-medicine",
+ "module": "cm-tb",
+ "title": "Tuberculosis Control: NTEP, Daily Regimens and Elimination Targets",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "From control programme to elimination mission",
+   "tx": "India's programme evolved from the National Tuberculosis Control Programme through RNTCP's DOTS strategy into the **National Tuberculosis Elimination Programme**, renamed in 2020 with elimination ambition ahead of global timelines. Core machinery persists across names: quality microscopy and molecular diagnosis, standardised treatment, drug supply without interruption, and recording that follows every patient to outcome.",
+   "say": "Names evolved; machinery persisted. Control programme, DOTS era, then elimination programme from 2020. Quality diagnosis, standardised treatment, unbroken drug supply and outcome recording carry across every rebranding.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Era", "Defining shift"],
+    "rows": [
+     ["NTCP (1962 onward)", "District programme, long regimens"],
+     ["RNTCP and DOTS", "Observed standardised short course"],
+     ["NTEP (2020 onward)", "Elimination target, daily FDC, molecular first"]
+    ]
+   }
+  },
+  {
+   "title": "Airborne transmission and the granuloma",
+   "tx": "The diagram traces **airborne spread**: droplet nuclei from a sputum-positive patient inhaled to alveoli, granuloma containment, then latency or progression. About a tenth of infected immunocompetent people develop disease across a lifetime, half of them soon after infection. HIV collapses that arithmetic to roughly a tenth per year.",
+   "say": "Follow the nuclei. Inhaled bacilli meet granuloma containment; most infections sleep for life. Lifetime progression near a tenth in healthy hosts becomes a tenth yearly with HIV, the coinfection engine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/latent-tuberculosis-fig1.webp",
+    "alt": "Tuberculosis progression diagram showing airborne transmission, granuloma formation and latency versus active disease.",
+    "caption": "Airborne transmission, granuloma containment, latency and progression. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Diagnosis: molecular first",
+   "tx": "**CBNAAT and Truenat** molecular tests anchor modern diagnosis, detecting bacilli and rifampicin resistance within hours from sputum, while smear microscopy (Ziehl-Neelsen or LED fluorescence) grades infectiousness. Presumptive TB means cough of 2 weeks or more, fever, weight loss or haemoptysis in programme wording, triggering testing without waiting for radiology.",
+   "say": "Molecular first now. Nucleic acid tests confirm bacilli and rifampicin resistance in hours; smears grade infectiousness. Two weeks of cough, fever, weight loss or blood triggers testing on suspicion alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Presumptive TB identified"},
+     {"id": "b", "label": "Molecular test (CBNAAT or Truenat)"},
+     {"id": "c", "label": "Rifampicin result same day"},
+     {"id": "d", "label": "Regimen assigned, notification done"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Daily fixed-dose treatment, two phases",
+   "tx": "**Daily FDC treatment** for drug-sensitive TB runs 2 months of isoniazid, rifampicin, pyrazinamide and ethambutol, then 4 months of isoniazid, rifampicin and ethambutol, dosed by weight bands in fixed-dose combinations. Intermittent thrice-weekly DOTS belongs to history. Adherence support now mixes observation, digital tools and family supervision by patient choice.",
+   "say": "Daily combinations replaced intermittent dots-watching. Two months of four drugs, four months of three, by weight band. Adherence support follows patient choice now, digital tools beside human observation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Phase", "Drugs", "Duration"],
+    "rows": [
+     ["Intensive", "H, R, Z, E daily FDC", "2 months"],
+     ["Continuation", "H, R, E daily FDC", "4 months"],
+     ["Dosing basis", "Weight bands", "Whole course"]
+    ]
+   }
+  },
+  {
+   "title": "Drug-resistant TB pathways",
+   "tx": "**Drug-resistant disease** branches by pattern: isoniazid mono-resistance takes modified regimens, while MDR and RR-TB take shorter all-oral bedaquiline-containing regimens (with eligibility screening) or longer individualised courses, delamanid conditionally approved beside them. Every rifampicin-resistant result routes to drug-resistant TB centres; treating MDR with first-line drugs manufactures further resistance.",
+   "say": "Resistance branches the road. Isoniazid-only resistance modifies first-line therapy; multidrug resistance takes shorter all-oral bedaquiline regimens or longer custom courses in specialist centres. First-line drugs against MDR manufacture worse resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drug-sensitive pathway",
+     "points": ["2 HRZE plus 4 HRE daily", "Decentralised treatment", "Outcomes in standard cohorts"]
+    },
+    "right": {
+     "title": "Drug-resistant pathway",
+     "points": ["Bedaquiline-containing oral regimens", "DR-TB centre supervision", "Longer follow-up, resistance testing"]
+    }
+   }
+  },
+  {
+   "title": "Test and treat, find actively",
+   "tx": "The **National Strategic Plan 2017-25** formalised test-and-treat universality, active case finding in vulnerable groups (contacts, slums, prisons, diabetics, people with HIV), private sector engagement with mandatory notification, and nutritional support payments to patients. Detect, treat, prevent, build became the four stated pillars examiners quote verbatim.",
+   "say": "Strategy widened past clinics. Active finding in vulnerable groups, mandatory notification including private practice, nutritional support, universal testing. Detect, treat, prevent, build: quote the pillars verbatim.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pillar", "Programme action"],
+    "rows": [
+     ["Detect", "Active case finding, molecular network"],
+     ["Treat", "Free daily FDC, adherence support"],
+     ["Prevent", "Contact evaluation, preventive therapy"],
+     ["Build", "Private engagement, surveillance systems"]
+    ]
+   }
+  },
+  {
+   "title": "Outcomes and cohort language",
+   "tx": "**Treatment outcomes** speak a fixed dialect: cured (bacteriologically confirmed, negative at end), treatment completed, failed, died, lost to follow-up, and not evaluated, reported as cohorts. Regimen changed marks drug resistance found mid-course. Nikshay, the case-based digital system, carries each patient's record across facilities and triggers nutritional support payments.",
+   "say": "Outcomes speak a fixed dialect: cured, completed, failed, died, lost, not evaluated, in cohorts. The digital record follows patients across facilities and releases nutritional support. Loose outcome language loses marks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Patient notified in Nikshay"},
+     {"id": "b", "label": "Treatment and follow-up recorded"},
+     {"id": "c", "label": "Outcome assigned at course end"},
+     {"id": "d", "label": "Cohort analysed by district"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Preventive therapy and infection control",
+   "tx": "**TB preventive treatment** follows exclusion of active disease in household contacts (especially under-fives and people with HIV) and other risk groups per eligibility, because treating latency prevents tomorrow's transmitters. Facilities practise airborne infection control: fast-tracking coughers, ventilation, respirators for staff in high-risk areas, separation of presumptive cases.",
+   "say": "Treat latency to prevent transmitters. Contacts, young children and HIV-positive persons first, active disease excluded beforehand. Facilities add airborne discipline: fast-tracked coughers, ventilation, respirators, separation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Setting", "Prevention action"],
+    "rows": [
+     ["Household contacts", "Evaluate, preventive therapy if eligible"],
+     ["Under-five contacts", "Highest priority after exclusion"],
+     ["Health facilities", "Cough triage, ventilation, respirators"]
+    ]
+   }
+  },
+  {
+   "title": "Indices: prevalence, incidence, ARTI",
+   "tx": "**Epidemiological indices** track the programme: prevalence and incidence of infection and disease, annual risk of TB infection from tuberculin surveys, and mortality. The national prevalence survey of 2019-21 re-measured burden directly. Styblo's rule linking infection risk to smear-positive incidence belongs to the classical teaching stems still quote.",
+   "say": "Indices audit ambition. Infection risk from tuberculin surveys, disease prevalence from national measurement, mortality trends. Classical rules linking infection risk to infectious incidence still anchor teaching stems.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infection indices",
+     "points": ["Prevalence of infection", "Annual risk of infection", "Tuberculin survey based"]
+    },
+    "right": {
+     "title": "Disease indices",
+     "points": ["Prevalence and incidence of disease", "Mortality rate", "Notification and cohort rates"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

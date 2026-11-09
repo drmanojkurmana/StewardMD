@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-nose-anatomy-agger-nasi",
+ "subject": "ent",
+ "module": "ent-nose-anatomy",
+ "title": "Sinonasal Variants, Olfaction, and Mucociliary Function",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "High-resolution computed tomography of the paranasal sinuses regularly identifies anatomical variants that predispose to sinus obstruction or present hazards during endoscopic sinus surgery. The **agger nasi cell** represents the most anterior ethmoidal air cell, situated beneath the frontal process of the maxilla anterior and superior to the insertion of the middle turbinate. An excessively pneumatized agger nasi cell encroaches upon and obstructs the narrow frontal sinus drainage recess.",
+   "say": "The agger nasi cell is the most anterior ethmoid cell. When hyperpneumatized, it narrows the frontal recess and blocks frontal sinus drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Coronal CT and anatomical schematic showing agger nasi, Haller cells, and Onodi cells",
+    "caption": "Anatomical ethmoidal variants: agger nasi, infraorbital Haller cells, and sphenoethmoidal Onodi cells. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Haller cells, or infraorbital ethmoid cells, are anterior ethmoidal air cells that pneumatize along the medial orbital floor and roof of the maxillary sinus. Positioned along the inferolateral margin of the ethmoidal infundibulum, an enlarged **Haller cell** directly compresses and narrows the primary natural ostium of the maxillary sinus, predisposing to recurrent ipsilateral maxillary sinusitis.",
+   "say": "Haller cells pneumatize along the orbital floor. An enlarged Haller cell compresses the maxillary sinus ostium, triggering recurrent maxillary sinusitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Agger Nasi Cell",
+     "points": [
+      "Most anterior ethmoidal air cell.",
+      "Located anterior and superior to middle turbinate.",
+      "Forms anterior wall of the frontal recess.",
+      "Hyperpneumatization causes frontal sinusitis."
+     ]
+    },
+    "right": {
+     "title": "Haller Cell (Infraorbital)",
+     "points": [
+      "Ethmoidal cell pneumatizing along orbital floor.",
+      "Located below the ethmoid bulla in infundibulum.",
+      "Forms lateral wall of the infundibulum.",
+      "Hyperpneumatization causes maxillary sinusitis."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The Onodi cell, or sphenoethmoidal air cell, is the most posterior ethmoidal cell that pneumatizes superiorly and laterally around the anterior wall of the sphenoid sinus. The paramount surgical danger of an **Onodi cell** is its intimate relationship with the optic nerve and internal carotid artery, which frequently bulge naked into its lateral wall. An unaware endoscopic surgeon mistaking an Onodi cell for the sphenoid sinus can lacerate the carotid or transect the optic nerve, causing fatal hemorrhage or blindness.",
+   "say": "An Onodi cell is a posterior ethmoid cell wrapping around the sphenoid. The optic nerve and carotid artery bulge into its wall, creating high surgical risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Critical Surgical Hazards of Ethmoidal Anatomical Variants",
+    "cols": [
+     "Anatomical Variant",
+     "Anatomical Location",
+     "Adjacent Endangered Structure",
+     "Surgical Catastrophe"
+    ],
+    "rows": [
+     [
+      "Onodi cell",
+      "Posterosuperior to sphenoid sinus",
+      "Optic nerve (CN II) & Internal carotid",
+      "Irreversible blindness or fatal exsanguination"
+     ],
+     [
+      "Haller cell",
+      "Infraorbital ethmoid / maxillary roof",
+      "Lamina papyracea & Medial rectus",
+      "Orbital hematoma or diplopia"
+     ],
+     [
+      "Keros type III cribriform",
+      "Deep olfactory fossa (> 8 mm depth)",
+      "Thin lateral cribriform lamella",
+      "Intracranial entry and CSF rhinorrhoea"
+     ],
+     [
+      "Dehiscent carotid",
+      "Sphenoid sinus lateral wall",
+      "Internal carotid artery (No bone coat)",
+      "Uncontrollable arterial hemorrhage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Development of the paranasal sinuses follows strict chronological milestones during human growth. The maxillary sinus and ethmoid sinuses are present at birth as rudimentary fluid-filled cavities, visible radiologically by four to five months of life. The sphenoid sinus begins significant pneumatization around the age of two to three years. The **frontal sinus** appears latest, beginning development from an anterior ethmoidal cell around five to six years and completing growth after puberty.",
+   "say": "Maxillary and ethmoid sinuses are present at birth. The sphenoid begins pneumatization around age three, while the frontal sinus develops latest, around age six.",
+   "vis": {
+    "kind": "flow",
+    "title": "Chronological Milestones of Paranasal Sinus Development",
+    "nodes": [
+     {
+      "id": "sd1",
+      "label": "At Birth: Rudimentary Maxillary & Ethmoid Cavities Present"
+     },
+     {
+      "id": "sd2",
+      "label": "Age 2 to 3 Years: Sphenoid Sinus Pneumatizes Posteriorly"
+     },
+     {
+      "id": "sd3",
+      "label": "Age 5 to 6 Years: Frontal Sinus Ascends into Frontal Bone"
+     }
+    ],
+    "edges": [
+     [
+      "sd1",
+      "sd2"
+     ],
+     [
+      "sd2",
+      "sd3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The nasal cycle is a normal physiological phenomenon characterized by rhythmic, alternating congestion and decongestion of the nasal venous capacitance vessels in the inferior and middle turbinates. Regulated by autonomic tone, the hypothalamus coordinates alternating sympathetic vasoconstriction and parasympathetic vasodilation every two to six hours. Total **nasal airflow resistance** remains constant, so healthy individuals are unaware of the cyclic shift.",
+   "say": "The nasal cycle alternates turbinate swelling and shrinkage every two to six hours under autonomic control, keeping overall airway resistance steady.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sympathetic Dominance (Decongestion)",
+     "points": [
+      "Noradrenaline-mediated vasoconstriction.",
+      "Venous sinusoids within turbinates collapse.",
+      "Nasal airway widens dramatically.",
+      "Airflow increases through that patent nasal cavity."
+     ]
+    },
+    "right": {
+     "title": "Parasympathetic Dominance (Congestion)",
+     "points": [
+      "Acetylcholine-mediated vasodilation.",
+      "Venous erectile tissue engorges with blood.",
+      "Turbinate swells into the nasal airway.",
+      "Mucociliary gland secretion increases."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Specialized olfactory neuroepithelium is confined to the olfactory cleft in the roof of the nasal cavity, spanning the cribriform plate of the ethmoid, the superior septum, and the superior turbinate. The neuroepithelium contains bipolar **olfactory sensory neurons**, supporting sustentacular cells, and basal stem cells capable of lifetime neurogenesis. Odorants dissolve in mucosal secretions and bind G-protein-coupled olfactory receptors, projecting through the cribriform plate to the olfactory bulb.",
+   "say": "Bipolar olfactory neurons in the nasal roof detect odorants, projecting unmyelinated axons through the cribriform plate directly to the olfactory bulb.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sinus-drainage.svg",
+    "alt": "Anatomical schematic showing olfactory cleft, cribriform plate, and paranasal sinus relations",
+    "caption": "Olfactory cleft neuroepithelium in the cranial roof of the nasal cavity. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Respiratory pseudostratified ciliated columnar epithelium lines the vast majority of the nasal cavity and paranasal sinuses. Specialized goblet cells and submucosal seromucinous glands secrete a protective bipartite mucus blanket comprising a superficial viscous gel layer that traps inhaled particulates and a deep serous sol layer in which cilia beat freely. Coordinated ciliary beating drives continuous **mucociliary clearance** toward the nasopharynx at a rate of one centimetre per minute.",
+   "say": "Ciliated respiratory epithelium drives a protective mucus blanket toward the nasopharynx at one centimetre per minute, filtering and clearing inhaled particles.",
+   "vis": {
+    "kind": "flow",
+    "title": "Two-Layer Architecture of the Mucociliary Blanket",
+    "nodes": [
+     {
+      "id": "mc1",
+      "label": "Superficial Viscous Gel Layer (Traps Particulates & Pathogens)"
+     },
+     {
+      "id": "mc2",
+      "label": "Deep Serous Sol Layer (Low Viscosity Fluid for Ciliary Beat)"
+     },
+     {
+      "id": "mc3",
+      "label": "Metachronal Ciliary Wave Propels Mucus toward Nasopharynx"
+     }
+    ],
+    "edges": [
+     [
+      "mc1",
+      "mc2"
+     ],
+     [
+      "mc2",
+      "mc3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Within the paranasal sinuses, mucociliary clearance is genetically programmed to beat exclusively toward each sinus natural anatomical ostium, regardless of gravity or surgical fenestrations. In the maxillary sinus, mucus clears in a spiral starburst pattern along the sinus floor, lateral wall, and roof to reach the natural ostium high on the medial wall. A surgical opening made in the inferior meatus (Caldwell-Luc) does not divert this natural **mucociliary transport pathway**.",
+   "say": "Sinus mucus is genetically programmed to beat toward the natural ostium. In the maxillary sinus, cilia sweep mucus upward against gravity to exit through the natural ostium.",
+   "vis": {
+    "kind": "table",
+    "title": "Paranasal Sinus Mucociliary Clearance Routes",
+    "cols": [
+     "Sinus Cavity",
+     "Natural Drainage Ostium",
+     "Ciliary Beat Pattern",
+     "Surgical Relevance"
+    ],
+    "rows": [
+     [
+      "Maxillary sinus",
+      "High in middle meatus (Infundibulum)",
+      "Sweeps upward against gravity",
+      "Inferior meatal antrostomy ignored"
+     ],
+     [
+      "Frontal sinus",
+      "Anteromedial floor into frontal recess",
+      "Ascends lateral wall, descends medial",
+      "Frontal recess patency required"
+     ],
+     [
+      "Sphenoid sinus",
+      "Sphenoethmoidal recess (High wall)",
+      "Flows toward ostium above floor",
+      "Requires enlargement of natural ostium"
+     ],
+     [
+      "Ethmoid air cells",
+      "Individual drainage into meatuses",
+      "Short pathways toward respective clefts",
+      "Cell exenteration restores aeration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "eea26863-25c5-4d9f-9686-9729b52844ee",
+  "be3a80ac-fbf4-45d0-bd90-18828dd778b6",
+  "d9fd9e84-1da5-4da9-9260-139f03d20034"
+ ]
+}

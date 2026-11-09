@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-general-anaesthetics",
+  "subject": "pharmacology",
+  "title": "Inhaled Anaesthetics: Halothane, Isoflurane, Sevoflurane, Desflurane, Nitrous Oxide and MAC",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Volatile anaesthetics are dosed in **MAC** (minimum alveolar concentration), the alveolar concentration at one atmosphere preventing movement in half of patients after surgical incision, the anaesthetic ED50 that lets potencies be compared on one scale. MAC falls with age, hypothermia, opioids, pregnancy and acute alcohol intoxication, and rises in infants, hyperthermia and chronic alcohol use. Additivity means half a MAC of each of two agents approximates one MAC together.",
+      "say": "MAC is the common currency of inhaled potency; age, temperature and opioids move the exchange rate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MAC landmarks (young adult)",
+          "points": [
+            "Desflurane about 6 percent, sevoflurane about 2 percent",
+            "Isoflurane about 1.2 percent, halothane about 0.75 percent",
+            "Nitrous oxide about 104 percent: impossible alone at sea level",
+            "MAC awake roughly a third of MAC for incision"
+          ]
+        },
+        "right": {
+          "title": "MAC modifiers",
+          "points": [
+            "Lower: age, hypothermia, opioids, pregnancy, acute alcohol",
+            "Higher: infancy, hyperthermia, chronic alcohol, hypernatraemia",
+            "Additive between inhaled agents and nitrous oxide",
+            "MAC BAR (blocking autonomic response) exceeds MAC"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Halothane**, the potent prototype (MAC 0.75), smooth and non pungent enough for inhalational induction in children historically, sensitises the myocardium to catecholamines so adrenaline infiltrations provoke ventricular arrhythmias, depresses contractility and respiration dose dependently, and relaxes uterus usefully and hazardously by turns. Its metabolism of about 20 percent, highest of the volatiles, underlies its immune hepatitis in the next lessons. Modern practice retired it where successors are stocked.",
+      "say": "Halothane is potent and pleasant and sensitises the heart to adrenaline; that trilogy retired it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+        "alt": "General anaesthesia sites of action diagram for inhaled and intravenous agents",
+        "caption": "Sites of action of inhaled and intravenous general anaesthetics, the shared stage for this module's agents."
+      }
+    },
+    {
+      "tx": "**Isoflurane** (MAC 1.2) trades halothane's smoothness for pungency that forbids inhalational induction, then repays with minimal metabolism (0.2 percent), cardiovascular stability and coronary vasodilatation gentle enough for cardiac surgery tradition. **Sevoflurane** (MAC 2) is non pungent and sweet smelling, the modern inhalational induction agent for children, with low blood solubility for fast in and out; its soda lime degradation product compound A frightened rats more than patients, with fresh gas flow guidance as the residue.",
+      "say": "Isoflurane is stable and pungent, sevoflurane is sweet and swift; induction belongs to sevoflurane now.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Isoflurane",
+          "points": [
+            "MAC about 1.2 percent, pungent, no mask induction",
+            "Minimal metabolism, organ friendly",
+            "Vasodilatation with preserved cardiac output",
+            "Workhorse maintenance agent for decades"
+          ]
+        },
+        "right": {
+          "title": "Sevoflurane",
+          "points": [
+            "MAC about 2 percent, non pungent and well tolerated",
+            "Agent of choice for paediatric inhalational induction",
+            "Low blood gas solubility: rapid induction and emergence",
+            "Compound A with soda lime: use adequate fresh gas flows"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Desflurane** (MAC 6) is the least potent and least blood soluble volatile, giving the fastest emergence and minute to minute control prized in long cases and obesity, at the price of pungency, airway irritation with coughing and laryngospasm on induction, sympathetic surges when concentrations jump quickly, and a heated vaporiser because it boils near room temperature. Its greenhouse potency also makes it the environmental villain of the family in modern theatre audits.",
+      "say": "Desflurane wakes fastest and irritates most; titrate it gently and expect the vaporiser to be warm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Lowest blood solubility of the volatiles"
+          },
+          {
+            "id": "fast",
+            "label": "Alveolar and brain tensions track the dial within minutes"
+          },
+          {
+            "id": "wake",
+            "label": "Fastest emergence and recovery room turnover"
+          },
+          {
+            "id": "irrit",
+            "label": "Airway pungency forbids inhalational induction"
+          }
+        ],
+        "edges": [
+          [
+            "low",
+            "fast"
+          ],
+          [
+            "fast",
+            "wake"
+          ],
+          [
+            "low",
+            "irrit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Nitrous oxide**, MAC near 104 percent, can never reach surgical anaesthesia alone at atmospheric pressure, yet at 50 to 70 percent it contributes analgesia, anxiolysis (Entonox in labour and procedures) and half a MAC of anaesthetic sparing. It diffuses into air filled spaces faster than nitrogen leaves, expanding bowel, pneumothorax, middle ear and intracranial air, and oxidises vitamin B12's cobalt, inactivating methionine synthase with prolonged or repeated exposure. Diffusion hypoxia on discontinuation closes the next lesson.",
+      "say": "Nitrous oxide is an analgesic partner, never a solo anaesthetic, and it inflates every air pocket it meets.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrous oxide contributions",
+          "points": [
+            "Analgesia and anxiolysis at 50 percent (Entonox)",
+            "Second gas effect speeding volatile uptake (next lesson)",
+            "MAC sparing for co administered volatiles",
+            "Minimal cardiovascular and respiratory depression"
+          ]
+        },
+        "right": {
+          "title": "Nitrous oxide hazards",
+          "points": [
+            "Expands bowel, pneumothorax, middle ear and air emboli",
+            "Inactivates vitamin B12 with prolonged exposure",
+            "Diffusion hypoxia when stopped abruptly",
+            "Supports combustion and pollutes theatre air"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "All potent volatiles trigger **malignant hyperthermia** in genetically susceptible ryanodine receptor mutants: uncontrolled sarcoplasmic calcium release, rigidity, hypercapnia out of proportion, hyperthermia late, and death without dantrolene. Succinylcholine shares the trigger list; propofol, opioids, nitrous oxide and non depolarising relaxants are safe. Theatre readiness (dantrolene stocked, vapour free machines) is a systems obligation that examinations test as management, not trivia.",
+      "say": "Volatiles and succinylcholine trigger malignant hyperthermia; dantrolene and a vapour free machine are the rescue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trigger",
+            "label": "Volatile or succinylcholine in susceptible muscle"
+          },
+          {
+            "id": "calcium",
+            "label": "Ryanodine receptor calcium release runs away"
+          },
+          {
+            "id": "signs",
+            "label": "Rigidity, soaring CO2, acidosis, then hyperthermia"
+          },
+          {
+            "id": "dant",
+            "label": "Stop trigger, dantrolene, cooling and intensive care"
+          }
+        ],
+        "edges": [
+          [
+            "trigger",
+            "calcium"
+          ],
+          [
+            "calcium",
+            "signs"
+          ],
+          [
+            "signs",
+            "dant"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardiovascular signatures** separate the family at the bedside: halothane depresses contractility and sensitises to arrhythmias, isoflurane and sevoflurane vasodilate with reflex heart rate preservation, desflurane adds sympathetic spikes on rapid increases, and all blunt hypoxic pulmonary vasoconstriction modestly and depress respiration with a characteristic rapid shallow pattern and lost CO2 responsiveness. Coronary steal by isoflurane, long feared in theory, proved clinically negligible at ordinary doses.",
+      "say": "Halothane weakens and sensitises, the ethers dilate, desflurane surges; all of them quiet the breathing drive.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac profiles",
+          "points": [
+            "Halothane: contractility down, catecholamine arrhythmias",
+            "Isoflurane and sevoflurane: vasodilatation, output preserved",
+            "Desflurane: sympathetic surges with rapid rises",
+            "All: dose dependent respiratory depression"
+          ]
+        },
+        "right": {
+          "title": "Organ footnotes",
+          "points": [
+            "Uterine relaxation dose dependent across volatiles",
+            "Cerebral vasodilatation raises intracranial pressure modestly",
+            "Halothane hepatitis and sevoflurane compound A histories",
+            "Trigger free technique for malignant hyperthermia families"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Choosing a volatile** is applied pharmacokinetics: sevoflurane to induce children and maintain most lists, desflurane where rapid precise emergence pays (obesity, neurosurgery, long cases), isoflurane as the economical stable veteran, nitrous oxide as analgesic partner where its expansion hazards permit, and halothane remembered for its hepatitis and arrhythmia examinations. The next lesson formalises the solubility physics (blood gas partition coefficients) that predicts each agent's speed.",
+      "say": "Match the agent to the airway, the abdomen and the clock; the physics lesson next explains why those matches work.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Speed ranking (fastest first)",
+          "points": [
+            "Desflurane: lowest blood solubility",
+            "Sevoflurane: close second, induction friendly",
+            "Isoflurane: intermediate",
+            "Halothane: slower and most tissue soluble"
+          ]
+        },
+        "right": {
+          "title": "Choice anchors",
+          "points": [
+            "Children's mask induction: sevoflurane",
+            "Obesity and rapid turnover: desflurane",
+            "Cardiac stability tradition: isoflurane",
+            "Examination hazards: halothane hepatitis, arrhythmias"
+          ]
+        }
+      }
+    }
+  ]
+}

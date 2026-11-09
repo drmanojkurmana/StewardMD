@@ -1,0 +1,294 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Radioiodine Ablation, Whole-Body Scintigraphy, and Thyroglobulin",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Following total thyroidectomy for differentiated thyroid carcinomas, systemic management incorporates **radioiodine remnant ablation** utilizing the radioactive isotope iodine-131. Radioiodine ablation achieves three vital oncological objectives: it destroys microscopic residual normal thyroid parenchyma in the thyroid bed, eliminates occult micrometastases in regional lymph nodes or distant organs, and facilitates subsequent long-term disease surveillance by rendering serum thyroglobulin an extraordinarily sensitive tumor marker.",
+   "say": "Radioiodine-131 ablation is administered after total thyroidectomy to eliminate microscopic residual thyroid tissue, destroy occult metastases, and enable precise thyroglobulin surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "total",
+      "label": "Total Thyroidectomy with R0 Resection"
+     },
+     {
+      "id": "stim",
+      "label": "TSH Elevation (>30 mIU/L) via rhTSH or Withdrawal"
+     },
+     {
+      "id": "i131",
+      "label": "Oral Administration of Iodine-131 Capsule"
+     },
+     {
+      "id": "uptake",
+      "label": "Sodium-Iodide Symporter (NIS) Uptake & Beta Irradiation"
+     },
+     {
+      "id": "ablation",
+      "label": "Complete Destruction of Residual Thyroid & Micrometastases"
+     }
+    ],
+    "edges": [
+     [
+      "total",
+      "stim"
+     ],
+     [
+      "stim",
+      "i131"
+     ],
+     [
+      "i131",
+      "uptake"
+     ],
+     [
+      "uptake",
+      "ablation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The physical mechanism of therapeutic radioiodine relies on targeted radiation emission. Ingested iodine-131 is actively concentrated into thyroid follicular cells via the basolateral sodium-iodide symporter. Decay of iodine-131 releases short-range **beta particles for tissue destruction**, with a path length of zero point five to two millimetres, delivering lethal ionizing radiation exclusively to thyroid cells while sparing adjacent parathyroid glands, trachea, and recurrent nerves.",
+   "say": "Iodine-131 enters follicular cells via sodium-iodide symporters. Emitted beta particles travel only one to two millimeters, delivering lethal radiation while sparing neighboring neck structures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Beta Radiation (Therapeutic)",
+     "points": [
+      "High-energy electron particles (mean energy 192 keV)",
+      "Short tissue penetration depth of 0.5 to 2.0 millimetres",
+      "Delivers localized cytotoxic ionizing radiation to tumor DNA",
+      "Responsible for 90% of biological therapeutic radiation dose"
+     ]
+    },
+    "right": {
+     "title": "Gamma Radiation (Diagnostic)",
+     "points": [
+      "High-energy electromagnetic photons (peak energy 364 keV)",
+      "Long tissue penetration that escapes the patient's body",
+      "Detected externally by gamma scintillation cameras",
+      "Enables whole-body scintigraphic imaging and dosimetry"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For thyroid cells to avidly internalize radioiodine, circulating thyroid-stimulating hormone must be markedly elevated above thirty milli-international units per litre. High TSH upregulates the transcription and cell membrane density of the sodium-iodide symporter. Historically, this state required **thyroid hormone withdrawal** for four to six weeks, plunging the post-operative patient into severe, disabling clinical hypothyroidism accompanied by profound fatigue, hypothermia, depression, and periorbital edema.",
+   "say": "Radioiodine uptake requires a TSH level above thirty. Historically achieved by stopping thyroid hormone for six weeks, this plunged patients into debilitating clinical hypothyroidism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thyroid Hormone Withdrawal (THW)",
+     "points": [
+      "Withholds levothyroxine for 4-6 weeks postoperatively",
+      "Endogenous TSH climbs secondary to severe pituitary feedback",
+      "Causes profound clinical hypothyroid morbidity and cognitive slowing",
+      "Inexpensive; may stimulate aggressive tumor growth during wait"
+     ]
+    },
+    "right": {
+     "title": "Recombinant Human TSH (rhTSH)",
+     "points": [
+      "Administers two intramuscular injections of thyrotropin alfa",
+      "Elevates TSH rapidly while patient continues levothyroxine",
+      "Maintains normal euthyroid metabolic state and quality of life",
+      "Preferred standard protocol in American Thyroid Association guidelines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern endocrine guidelines prefer preparing patients with **recombinant human TSH**, known commercially as thyrotropin alfa. The patient receives two sequential intramuscular injections of zero point nine milligrams of recombinant human TSH on consecutive days while continuing daily levothyroxine therapy. This approach generates a rapid, robust peak in serum TSH sufficient to activate sodium-iodide symporters while completely preserving normal euthyroid physiological function, avoiding the distressing morbidity of hormone withdrawal.",
+   "say": "Recombinant human TSH provides the modern alternative, delivering two intramuscular injections on consecutive days. It stimulates iodine uptake while patients stay fully euthyroid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "day1",
+      "label": "Day 1: rhTSH 0.9 mg Intramuscular Injection (Euthyroid)"
+     },
+     {
+      "id": "day2",
+      "label": "Day 2: rhTSH 0.9 mg Intramuscular Injection"
+     },
+     {
+      "id": "day3",
+      "label": "Day 3: Oral Therapeutic Iodine-131 Capsule Ingested"
+     },
+     {
+      "id": "day5",
+      "label": "Day 5: Measure Stimulated Thyroglobulin Level"
+     },
+     {
+      "id": "day7",
+      "label": "Day 7: Post-Therapy Diagnostic Whole-Body Scan"
+     }
+    ],
+    "edges": [
+     [
+      "day1",
+      "day2"
+     ],
+     [
+      "day2",
+      "day3"
+     ],
+     [
+      "day3",
+      "day5"
+     ],
+     [
+      "day5",
+      "day7"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Approximately five to seven days following radioiodine administration, the patient undergoes a post-therapy **diagnostic whole-body scan** using a dual-head gamma camera. The scan visualizes the anatomical biodistribution of radioactive iodine throughout the body. While expected physiological uptake occurs in salivary glands, stomach, and bladder, the scan detects pathological focal uptake in cervical lymph node basins, mediastinum, lungs, or skeleton, uncovering distant metastatic foci.",
+   "say": "A post-therapy whole-body scan five to seven days after treatment tracks iodine distribution, uncovering hidden metastases in the neck, lungs, and skeleton.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Territory",
+     "Scintigraphic Uptake Pattern",
+     "Pathological or Physiological Interpretation"
+    ],
+    "rows": [
+     [
+      "Thyroid Bed",
+      "Faint localized uptake in lower anterior neck",
+      "Expected benign surgical remnant tissue undergoing ablation"
+     ],
+     [
+      "Salivary & Stomach",
+      "Diffuse symmetric uptake in parotids and gastric mucosa",
+      "Normal physiological excretion via salivary and gastric sodium-iodide symporters"
+     ],
+     [
+      "Lateral Neck Levels",
+      "Focal intense asymmetric tracer concentrations",
+      "Metastatic papillary or follicular cancer in cervical lymph nodes"
+     ],
+     [
+      "Lungs & Bones",
+      "Diffuse bilateral miliary lung pattern or focal bone lesions",
+      "Hematogenous distant metastases amenable to targeted radioiodine therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the long-term surveillance of differentiated thyroid carcinoma, serum thyroglobulin represents the most sensitive tumor marker. Synthesized exclusively by thyroid follicular cells, serum thyroglobulin should drop to undetectable levels (<0.2 ng/mL) following successful total thyroidectomy and radioiodine ablation. A **stimulated thyroglobulin test**, measured when TSH is elevated above thirty mIU/L, possesses extraordinary sensitivity; rising stimulated levels unmask minute locoregional recurrences long before structural imaging becomes abnormal.",
+   "say": "Serum thyroglobulin is synthesized only by thyroid cells. Following total thyroidectomy and ablation, it becomes undetectable; rising levels unmask minute cancer recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suppressed Thyroglobulin",
+     "points": [
+      "Measured while patient takes daily levothyroxine (TSH suppressed)",
+      "Routine outpatient surveillance marker checked every 6 to 12 months",
+      "Target level is undetectable (<0.2 ng/mL in disease-free patients)",
+      "Rising values warrant further stimulated evaluation"
+     ]
+    },
+    "right": {
+     "title": "Stimulated Thyroglobulin",
+     "points": [
+      "Measured following rhTSH administration or hormone withdrawal",
+      "High TSH stimulates any residual follicular cancer to secrete Tg",
+      "Target level is <1.0 ng/mL following successful radioiodine ablation",
+      "Levels >2.0 ng/mL predict persistent or recurrent thyroid cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A critical laboratory requirement in evaluating thyroglobulin is simultaneous measurement of **anti-thyroglobulin autoantibodies**. Present in up to twenty-five percent of thyroid cancer patients, circulating anti-thyroglobulin antibodies bind to serum thyroglobulin, causing false-negative readings in immunometric assays. In antibody-positive patients, liquid chromatography-tandem mass spectrometry is utilized, and rising antibody titers over serial intervals are treated as a surrogate marker of active disease.",
+   "say": "Anti-thyroglobulin antibodies interfere with laboratory tests, falsely lowering thyroglobulin readings. In antibody-positive patients, mass spectrometry or serial antibody titers monitor recurrence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Assay Interference Mechanism",
+     "Clinical Monitoring Strategy"
+    ],
+    "rows": [
+     [
+      "Standard Immunoassay (IMA)",
+      "Autoantibodies bind epitopes, causing falsely low or undetectable Tg",
+      "Unreliable in presence of elevated anti-Tg antibody titers"
+     ],
+     [
+      "LC-MS/MS Mass Spectrometry",
+      "Peptide digestion eliminates antibody steric hindrance",
+      "Gold standard assay for accurate thyroglobulin quantification"
+     ],
+     [
+      "Serial Anti-Tg Titers",
+      "Disappearance of antibodies parallels complete tumor clearance",
+      "Rising antibody titers serve as a direct surrogate marker of cancer relapse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following successful ablation, patients are maintained on lifelong levothyroxine therapy to achieve targeted **TSH suppression therapy**. Because thyroid-stimulating hormone acts as a potent growth factor promoting follicular cell proliferation, suppressing pituitary TSH with supraphysiological levothyroxine reduces recurrence rates. High-risk patients are suppressed below zero point one milli-international units per litre, while low-risk disease-free patients are transitioned to a physiological euthyroid range to avoid long-term osteopenia and atrial fibrillation.",
+   "say": "Patients receive levothyroxine to suppress pituitary TSH below zero point one, removing the hormonal growth signal that fuels thyroid cancer recurrence while monitoring for osteopenia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "Assess ATA Postoperative Risk of Recurrence"
+     },
+     {
+      "id": "high",
+      "label": "High-Risk Category: Maintain TSH < 0.1 mIU/L"
+     },
+     {
+      "id": "low",
+      "label": "Low-Risk Disease-Free: TSH Target 0.5 to 2.0 mIU/L"
+     },
+     {
+      "id": "monitor",
+      "label": "Annual Neck Ultrasound & Serum Thyroglobulin"
+     },
+     {
+      "id": "safety",
+      "label": "Monitor Bone Mineral Density & Cardiac Rhythm"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "high"
+     ],
+     [
+      "risk",
+      "low"
+     ],
+     [
+      "high",
+      "monitor"
+     ],
+     [
+      "low",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "safety"
+     ]
+    ]
+   }
+  }
+ ]
+}

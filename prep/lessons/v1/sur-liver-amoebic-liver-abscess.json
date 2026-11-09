@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "module": "sur-liver",
+ "subject": "surgery",
+ "title": "Amoebic Liver Abscess, Pyogenic Infection, and Hydatid Cyst PAIR Therapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Hepatic abscesses are classified pathogenetically into amoebic and pyogenic etiologies. An **amoebic liver abscess** represents the most common extraintestinal manifestation of invasive amoebiasis, caused by the protozoan parasite Entamoeba histolytica. Following ingestion of mature cysts in contaminated water, trophozoites colonize the colon, penetrate the colonic mucosa, and travel via the portal venous tributaries to seed the hepatic parenchyma.",
+   "say": "An amoebic liver abscess is the most common extraintestinal complication of Entamoeba histolytica, spreading from colonic ulcers through the portal vein into the liver.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amoebic-liver-abscess-fig1.webp",
+    "alt": "Medical diagram illustrating the lifecycle of Entamoeba histolytica, colonic mucosal invasion, and portal transit to the liver.",
+    "caption": "Amoebic liver abscess: portal venous dissemination of Entamoeba histolytica trophozoites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Amoebic liver abscesses occur predominantly in young to middle-aged adult males and are solitary in over seventy-five percent of cases, showing a marked anatomical predilection for the posterior superior aspect of the right hepatic lobe (segments seven and eight). Aspiration of an amoebic abscess yields characteristic odorless, sterile fluid classically described as **anchovy sauce pus**, composed of liquefied necrotic hepatocytes, blood, and proteinaceous debris.",
+   "say": "Amoebic abscesses are typically solitary and located in the right hepatic lobe. Aspiration yields thick, odorless anchovy sauce pus containing liquefied necrotic liver tissue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amoebic Liver Abscess",
+     "points": [
+      "Younger adult males (20 to 45 years)",
+      "Usually solitary in right lobe (75 to 80%)",
+      "Aspirate is sterile, odorless anchovy sauce pus",
+      "Serum amoebic serology positive (>90%)"
+     ]
+    },
+    "right": {
+     "title": "Pyogenic Liver Abscess",
+     "points": [
+      "Older demographics with biliary disease",
+      "Frequently multiple bilobar abscesses",
+      "Aspirate is foul-smelling purulent bacterial pus",
+      "Positive bacterial blood and pus cultures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Microscopic examination of the central necrotic aspirate rarely demonstrates active protozoa. Instead, viable E. histolytica trophozoites reside exclusively in the **advancing peripheral abscess wall**, where active enzymatic tissue destruction occurs. Serum indirect hemagglutination or enzyme-linked immunosorbent assay serology is positive in over ninety percent of patients. In contrast to intestinal amoebiasis, stool examination demonstrates cysts or trophozoites in less than fifteen percent of hepatic cases.",
+   "say": "Trophozoites reside in the active outer rim of the cavity, so the central fluid rarely shows amoebae. Serum serology confirms the diagnosis in over ninety percent of patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inv",
+      "label": "Trophozoites Invade Interlobular Portal Venules"
+     },
+     {
+      "id": "nec",
+      "label": "Trophozoite Gal/GalNAc Lectin Triggers Hepatocyte Apoptosis"
+     },
+     {
+      "id": "liquefy",
+      "label": "Coagulative Necrosis Liquefies into Anchovy Sauce Core"
+     },
+     {
+      "id": "periph",
+      "label": "Active Trophozoites Multiply in Peripheral Granulation Wall"
+     },
+     {
+      "id": "serol",
+      "label": "Host Immune Response Yields High Serum IgG Antibody Titres"
+     }
+    ],
+    "edges": [
+     [
+      "inv",
+      "nec"
+     ],
+     [
+      "nec",
+      "liquefy"
+     ],
+     [
+      "liquefy",
+      "periph"
+     ],
+     [
+      "periph",
+      "serol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The mainstay of therapy for uncomplicated amoebic liver abscess is medical, utilizing oral or intravenous metronidazole (seven hundred and fifty milligrams thrice daily for ten days) or tinidazole, which achieves clinical cure in over ninety percent of patients. Following nitroimidazole therapy, every patient must receive a luminal cysticidal agent such as **diloxanide furoate or paromomycin** to eradicate asymptomatic colon cysts and prevent late recurrent invasive disease.",
+   "say": "Metronidazole or tinidazole cures over ninety percent of amoebic abscesses. Patients must then receive an oral luminal agent like diloxanide furoate to eliminate colon cysts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Phase",
+     "Pharmacological Agent",
+     "Treatment Goal"
+    ],
+    "rows": [
+     [
+      "Tissue Amoebicide",
+      "Metronidazole (750 mg TID x 10 days)",
+      "Kills active trophozoites within hepatic parenchyma"
+     ],
+     [
+      "Alternative Tissue Agent",
+      "Tinidazole (2 g once daily x 5 days)",
+      "Shorter duration tissue eradication with fewer GI side effects"
+     ],
+     [
+      "Luminal Amoebicide",
+      "Diloxanide furoate (500 mg TID x 10 days)",
+      "Destroys asymptomatic cysts within colonic lumen"
+     ],
+     [
+      "Alternative Luminal Agent",
+      "Paromomycin (25 to 35 mg/kg/day x 7 days)",
+      "Non-absorbed aminoglycoside clearing luminal carriage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Percutaneous needle aspiration or catheter drainage is not routinely required for small amoebic abscesses, but is strictly indicated under specific high-risk scenarios. These include failure of clinical response after forty-eight to seventy-two hours of medical therapy, massive abscesses exceeding ten centimetres in diameter, imminent risk of rupture, diagnostic uncertainty, and **left hepatic lobe abscesses**, which carry a catastrophic risk of rupturing into the adjacent pericardial cavity.",
+   "say": "Needle aspiration is indicated if symptoms fail to improve after three days, for giant abscesses over ten centimeters, or for left lobe lesions risking rupture into the pericardium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Indication for Aspiration",
+     "Pathological Rationale",
+     "Procedural Technique"
+    ],
+    "rows": [
+     [
+      "Left Lobe Abscess",
+      "High risk of rupture into pericardium",
+      "Ultrasound-guided catheter drainage"
+     ],
+     [
+      "Size > 10 cm (Giant Abscess)",
+      "Impending intraperitoneal or pleural rupture",
+      "Percutaneous pigtail catheter placement"
+     ],
+     [
+      "Refractory Sepsis (> 72 hrs)",
+      "Possible secondary bacterial superinfection",
+      "Diagnostic aspirate with culture and gram stain"
+     ],
+     [
+      "Uncertain Diagnosis",
+      "Exclude pyogenic abscess or necrotic tumor",
+      "Fine needle aspiration for cytology and microbiology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, a **pyogenic liver abscess** is caused by bacterial infection, most commonly polymicrobial enteric flora including Escherichia coli, Klebsiella pneumoniae, Enterococcus, and anaerobes like Bacteroides. Infections arise from ascending cholangitis secondary to gallstones, pylephlebitis from diverticulitis or appendicitis, systemic bacteremia, or direct trauma. Unlike amoebic lesions, pyogenic abscesses are typically multiple, present with swinging fevers and jaundice, and mandate early percutaneous catheter drainage.",
+   "say": "Pyogenic liver abscesses are bacterial infections arising from biliary disease or appendicitis, presenting with swinging fevers. They require broad-spectrum antibiotics and catheter drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/liver-abscess-fig1.webp",
+    "alt": "Anatomical schematic showing routes of pyogenic liver infection including biliary, portal, and arterial spread.",
+    "caption": "Pyogenic liver abscess: bacterial seeding via the biliary tree, portal pylephlebitis, or systemic arteries. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Another crucial parasitic cystic entity of the liver is hydatid disease, a zoonosis caused by the larval tapeworm stage of **Echinococcus granulosus**. Dogs serve as definitive hosts harbouring adult tapeworms, while sheep serve as intermediate hosts. Following ingestion of tapeworm eggs, oncospheres penetrate the duodenal mucosa and enter the portal circulation to seed the liver. The parasite forms a unilocular cyst surrounded by an outer host pericyst, an acellular laminated membrane, and an inner germinal layer producing brood capsules.",
+   "say": "Hydatid disease is caused by the larval tapeworm Echinococcus granulosus. Cysts develop an outer fibrous pericyst, middle laminated membrane, and inner germinal layer producing scolices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dog",
+      "label": "Ingestion of Food/Water Contaminated with Dog Feces Containing Eggs"
+     },
+     {
+      "id": "hatch",
+      "label": "Hexacanth Embryo Hatches in Duodenum & Penetrates Mucosa"
+     },
+     {
+      "id": "portal",
+      "label": "Venous Transit via Portal System to Liver Microcirculation"
+     },
+     {
+      "id": "cyst",
+      "label": "Slow Expansion of Unilocular Hydatid Cyst (1 to 2 cm per year)"
+     },
+     {
+      "id": "layers",
+      "label": "Formation of Pericyst, Laminated Ectocyst & Germinal Endocyst"
+     }
+    ],
+    "edges": [
+     [
+      "dog",
+      "hatch"
+     ],
+     [
+      "hatch",
+      "portal"
+     ],
+     [
+      "portal",
+      "cyst"
+     ],
+     [
+      "cyst",
+      "layers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For suitable non-calcified hydatid cysts lacking internal daughter cysts, a minimally invasive alternative to surgical pericystectomy is the **PAIR procedure**. Under ultrasound guidance, the interventionalist performs Puncture of the cyst, Aspiration of internal hydatid fluid, Injection of a scolicidal agent such as twenty percent hypertonic saline or ninety-five percent ethanol left in the cavity for fifteen minutes to sterilize the germinal lining, followed by complete Re-aspiration, all under oral albendazole coverage.",
+   "say": "The PAIR procedure punctures the hydatid cyst, aspirates fluid, injects a scolicidal agent like hypertonic saline for fifteen minutes, and re-aspirates the cavity under albendazole cover.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PAIR Step",
+     "Operative Action",
+     "Clinical Safety Rule"
+    ],
+    "rows": [
+     [
+      "Puncture (P)",
+      "Transhepatic ultrasound-guided needle entry",
+      "Traverse normal liver parenchyma to prevent spillage"
+     ],
+     [
+      "Aspiration (A)",
+      "Evacuate central hydatid fluid",
+      "Analyze for biliary communication (Bilichek test)"
+     ],
+     [
+      "Injection (I)",
+      "Instill 20% hypertonic saline or 95% ethanol",
+      "Never inject scolicide if cyst communicates with bile ducts"
+     ],
+     [
+      "Re-aspiration (R)",
+      "Complete evacuation of scolicide after 15 min",
+      "Prevents systemic chemical toxicity and cyst rupture"
+     ],
+     [
+      "Albendazole",
+      "Oral coverage 400 mg BID x 1 month",
+      "Inactivates spilled protoscolices and prevents anaphylaxis"
+     ]
+    ]
+   }
+  }
+ ]
+}

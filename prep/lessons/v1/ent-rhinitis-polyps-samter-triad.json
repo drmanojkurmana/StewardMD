@@ -1,0 +1,261 @@
+{
+ "v": 1,
+ "id": "ent-rhinitis-polyps-samter-triad",
+ "subject": "ent",
+ "module": "ent-rhinitis-polyps",
+ "title": "Samter Triad, Steroid Therapy and Rhinolith",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Samter triad** links three findings in one patient: chronic rhinosinusitis with nasal polyps, asthma, and respiratory reactions to aspirin and other non steroidal anti inflammatory drugs. Ingesting such a drug can trigger violent rhinorrhoea, conjunctival injection, periorbital swelling and bronchospasm within minutes to hours. The combination matters because routine analgesic choices become dangerous and polyp regrowth after surgery runs high without specific control.",
+   "say": "Polyps, asthma and aspirin reactions together form a triad that changes everyday prescribing. Taking a routine painkiller can provoke streaming eyes, facial swelling and wheeze within hours. Recognising the pattern protects patients, because standard analgesics become dangerous for them.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aspirin-exacerbated-respiratory-disease-fig1.webp",
+    "alt": "Diagram of the Samter triad showing nasal polyps, asthma and anti inflammatory analgesic reactions in aspirin exacerbated respiratory disease.",
+    "caption": "Samter triad: polyps, asthma and anti inflammatory drug reactions. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mechanism centres on **arachidonic acid** metabolism shunted away from protective prostaglandin toward excess cysteinyl leukotrienes when cyclo oxygenase one is blocked. Leukotrienes drive eosinophilic inflammation, mucosal oedema and bronchoconstriction, explaining why polyps grow aggressively and asthma destabilises together. Baseline urinary leukotriene excretion runs high even without drug exposure, so the airway stays primed for reactions at all times.",
+   "say": "Blocking one enzyme pathway floods the airway with leukotrienes that swell lining and constrict bronchi. Those chemicals remain elevated even between reactions and keep the airway permanently primed. Aggressive polyp growth with unstable asthma therefore develops together in such patients.",
+   "vis": {
+    "kind": "table",
+    "title": "Leukotriene pathway in Samter triad",
+    "cols": [
+     "Step",
+     "Event"
+    ],
+    "rows": [
+     [
+      "COX 1 blocked",
+      "Protective prostaglandin falls"
+     ],
+     [
+      "Shunt",
+      "Arachidonic acid to leukotrienes"
+     ],
+     [
+      "Result",
+      "Oedema, polyps, bronchospasm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Strict avoidance of aspirin and cross reacting analgesics forms the first prescription, with simple analgesia in modest doses and selective cyclo oxygenase two inhibitors as safer alternatives for most patients. Every drug chart, discharge summary and allergy alert must record the sensitivity prominently. **Leukotriene modifiers** add control of both nasal and bronchial symptoms, although they never replace intranasal steroids as the base therapy.",
+   "say": "Avoiding aspirin and related painkillers forms the first and most important prescription. Simple analgesia in modest doses gives a safer alternative for most affected patients. Leukotriene blocking tablets add nasal and chest control, although steroid spray remains the base therapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Analgesic choices in aspirin sensitivity",
+    "cols": [
+     "Drug group",
+     "Advice"
+    ],
+    "rows": [
+     [
+      "Aspirin and traditional painkillers of the same class",
+      "Avoid completely"
+     ],
+     [
+      "Simple analgesia, modest dose",
+      "Usually tolerated, observe first dose"
+     ],
+     [
+      "Selective COX 2 inhibitors",
+      "Often tolerated, specialist advice"
+     ],
+     [
+      "Opioid analgesics",
+      "No cross reaction expected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selected patients undergo **aspirin desensitisation**, where escalating supervised doses induce temporary tolerance that daily aspirin then maintains without interruption. Desensitisation slows polyp regrowth, reduces sinus operations and steroid courses, and improves smell in suitable candidates with recurrent disease. Interruption for more than a day or two loses tolerance, so adherence counselling and perioperative planning with the specialist team become essential parts of the protocol.",
+   "say": "Graduated supervised dosing can induce tolerance that daily aspirin then maintains continuously. Selected patients gain slower polyp regrowth, fewer operations and better smell afterwards. Missing doses for a couple of days removes tolerance, so adherence counselling is essential.",
+   "vis": {
+    "kind": "flow",
+    "title": "Aspirin desensitisation pathway",
+    "nodes": [
+     {
+      "id": "sel",
+      "label": "Select recurrent polyp patient"
+     },
+     {
+      "id": "esc",
+      "label": "Escalate doses under supervision"
+     },
+     {
+      "id": "tol",
+      "label": "Tolerance achieved"
+     },
+     {
+      "id": "main",
+      "label": "Daily aspirin maintained"
+     }
+    ],
+    "edges": [
+     [
+      "sel",
+      "esc"
+     ],
+     [
+      "esc",
+      "tol"
+     ],
+     [
+      "tol",
+      "main"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intranasal corticosteroids** remain the safest long term controllers of polyp size and symptoms, delivered as spray, drops or high volume steroid irrigation that reaches operated sinus cavities. Drops instilled head down or rinses after surgery coat the ethmoid region far better than spray alone. Long term use at standard doses has minimal systemic absorption, so growth suppression and bone concerns that limit oral steroids do not apply to topical therapy.",
+   "say": "Steroid delivered inside the nose controls polyp size safely over the long term. Drops placed head down or rinses after surgery coat the sinus region far better than spray. Standard topical doses absorb minimally, avoiding the systemic harms that limit steroid tablets.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-polyps-fig1.webp",
+    "alt": "Sagittal section of nasal cavity showing oedematous polyps arising from the middle meatus and ethmoid sinus, the target region for topical steroid therapy.",
+    "caption": "Polyps of the middle meatus and ethmoid, the target for topical steroids. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Short **oral corticosteroid** courses shrink large obstructing polyps rapidly, restore smell temporarily and create a window for surgery or topical therapy to take over. Benefits fade within weeks to months, so repeated courses accumulate harm including hyperglycaemia, hypertension, mood change, bone loss and cataract. Clinicians therefore record cumulative exposure, limit frequency, and escalate to surgery or biologics instead of prescribing endless steroid tablets for recurring obstruction.",
+   "say": "Brief steroid tablet courses shrink obstructing polyps quickly and restore smell temporarily. Benefits fade within months while harms accumulate with every repeated course prescribed. Surgery or biologic therapy should therefore replace endless tablets for recurring obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intranasal steroids",
+     "points": [
+      "Daily long term controller",
+      "Minimal systemic absorption",
+      "Drops or rinses reach sinuses best",
+      "Safe maintenance after surgery"
+     ]
+    },
+    "right": {
+     "title": "Oral steroid bursts",
+     "points": [
+      "Rapid shrinkage and smell return",
+      "Benefit fades in weeks to months",
+      "Cumulative metabolic and bone harm",
+      "Reserve for severe obstruction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **rhinolith** is a calcified stone that forms around a long retained intranasal foreign body or inspissated secretion, usually in the floor of the nose of a child or an adult with forgotten childhood insertion. Unilateral foul discharge, blockage and occasional bleeding persist for years until endoscopy reveals a hard gritty grey mass. Computed tomography confirms calcification and excludes bony or dental mimics before removal.",
+   "say": "Stones can grow slowly around a forgotten bead or button battery remnant inside the nose. One sided foul discharge persisting for years should prompt endoscopic inspection for such a mass. Scanning confirms calcification and excludes bony mimics before removal proceeds.",
+   "vis": {
+    "kind": "table",
+    "title": "Rhinolith workup",
+    "cols": [
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Unilateral foul discharge",
+      "Suspect retained foreign body"
+     ],
+     [
+      "Hard gritty mass",
+      "Calcified stone on endoscopy"
+     ],
+     [
+      "CT calcification",
+      "Confirms before removal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Removal of a rhinolith happens under anaesthesia with endoscopic guidance, crushing large stones in situ when they cannot pass the nostril whole. The underlying cavity is inspected for septal perforation, mucosal ulceration and retained fragments after extraction. **Foreign body** history should be asked sensitively in every unilateral foul discharge, because embarrassment hides the diagnosis for years in adults who inserted objects as children.",
+   "say": "Large stones need crushing under anaesthesia before the fragments can leave through the nostril. Inspecting the cavity afterwards excludes septal injury and any retained fragment left behind. Sensitive questioning about childhood insertion uncovers histories that embarrassment hid for years.",
+   "vis": {
+    "kind": "table",
+    "title": "Withdrawal week support",
+    "cols": [
+     "Measure",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Stop decongestant",
+      "Removes cause of rebound"
+     ],
+     [
+      "Steroid spray and saline",
+      "Bridge congestion"
+     ],
+     [
+      "Written plan",
+      "Prevents relapse at home"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Polyp follow up after any treatment tracks smell, blockage scores and endoscopic appearance at intervals matched to severity. Early regrowth caught on endoscopy responds to intensified topical therapy, leukotriene blockade review and aspirin strategy revision in sensitive patients. **Revision surgery** waits until maximal medical therapy has genuinely failed, because operating on uncontrolled inflammation guarantees recurrence and wastes the surgical window that good preparation creates.",
+   "say": "Scheduled endoscopic review tracks regrowth while medical adjustment can still reverse it. Early recurrence needs stronger topical therapy and review of leukotriene or aspirin strategy. Repeat surgery waits for genuine medical failure, since operating through uncontrolled inflammation guarantees regrowth.",
+   "vis": {
+    "kind": "table",
+    "title": "Samter triad: long term control checklist",
+    "cols": [
+     "Domain",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Analgesia",
+      "Avoid NSAIDs, record allergy alert"
+     ],
+     [
+      "Nose",
+      "Daily topical steroid, saline rinse"
+     ],
+     [
+      "Chest",
+      "Optimise asthma control jointly"
+     ],
+     [
+      "Selected cases",
+      "Desensitisation or biologic therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examination synthesis for this module runs in one chain. Polyps plus asthma must trigger an aspirin history, aspirin history must trigger analgesic alerts, and recurrent polyps despite surgery must trigger desensitisation or biologic referral. Unilateral foul discharge must trigger foreign body and rhinolith thinking. **Documentation** of sensitivity in every record protects the patient in emergency departments where analgesics are given quickly.",
+   "say": "Finding polyps with asthma should always prompt a direct question about aspirin reactions. Recording that sensitivity prominently protects the patient wherever analgesics are prescribed quickly. One sided foul discharge completes the chain by prompting a search for stone or foreign body.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Samter triad components",
+   "b": "Nasal polyps with chronic rhinosinusitis, asthma, and aspirin or NSAID respiratory sensitivity."
+  },
+  {
+   "f": "Aspirin desensitisation benefit",
+   "b": "Slows polyp regrowth, reduces operations and steroid courses; tolerance lost if aspirin stopped for over a day or two."
+  },
+  {
+   "f": "Rhinolith presentation",
+   "b": "Chronic unilateral foul discharge and blockage around a calcified stone on a retained foreign body; remove under anaesthesia."
+  }
+ ],
+ "keys": [
+  "Samter triad: polyps, asthma, aspirin sensitivity",
+  "Topical steroids are the safe long term polyp controller",
+  "Unilateral foul discharge: think foreign body and rhinolith"
+ ]
+}

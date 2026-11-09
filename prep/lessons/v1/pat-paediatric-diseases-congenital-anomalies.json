@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-paediatric-diseases",
+  "subject": "pathology",
+  "title": "Perinatal Pathology, Neonatal Respiratory Distress, and Fetal Hydrops",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Morphological structural defects present at birth resulting from intrinsic developmental abnormalities, extrinsic mechanical forces, or environmental insults are categorized as **congenital anomalies**. True malformations arise from intrinsically abnormal developmental processes, deformations from extrinsic mechanical compression, and disruptions from secondary extrinsic tissue destruction.",
+      "say": "Congenital anomalies encompass intrinsic malformations, mechanical deformations, and destructive disruptions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Malformation (Intrinsic Error)",
+          "points": [
+            "Primary morphogenetic defect during organogenesis (weeks 3 to 8)",
+            "Intrinsic developmental arrest or abnormal embryonic tissue patterning",
+            "Examples include ventricular septal defect, polydactyly, and cleft lip",
+            "Often carries high recurrence risk in subsequent pregnancies"
+          ]
+        },
+        "right": {
+          "title": "Disruption (Extrinsic Destruction)",
+          "points": [
+            "Secondary destructive breakdown of a previously normally developing structure",
+            "Arises from extrinsic vascular insults, ischemic necrosis, or mechanical bands",
+            "Classic example is amniotic band syndrome causing digital amputations",
+            "Carries virtually zero recurrence risk in future pregnancies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Maternal exposure to harmful chemical, physical, or microbial agents during embryonic organogenesis causes severe structural fetal malformations. The critical period of maximum vulnerability and susceptibility to **teratogens** spans the third through eighth gestational weeks, when embryonic germ layers differentiate into primordial organ systems.",
+      "say": "Teratogens exert their most devastating structural damage during embryonic weeks three to eight.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Teratogenic Agent",
+          "Critical Exposure Window",
+          "Characteristic Fetal Anomalies"
+        ],
+        "rows": [
+          [
+            "Thalidomide",
+            "Weeks 4 to 7 Post-Conception",
+            "Phocomelia, Amelia, Congenital Heart and Ear Defects"
+          ],
+          [
+            "Fetal Alcohol Syndrome",
+            "First and Second Trimesters",
+            "Microcephaly, Smooth Philtrum, Thin Upper Lip, VSD"
+          ],
+          [
+            "Isotretinoin (Retinoids)",
+            "First Trimester Organogenesis",
+            "Craniofacial Dysmorphism, Microtia, Conotruncal Heart Defects"
+          ],
+          [
+            "Valproic Acid",
+            "Neural Tube Closure (Days 20 to 28)",
+            "Meningomyelocele, Spina Bifida, Hypospadias, Cleft Palate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maternal transplacental transmission of diverse microbial pathogens during pregnancy produces characteristic, overlapping constellations of severe chronic fetal injury. Clinical hallmarks including microcephaly, intracranial calcifications, chorioretinitis, sensorineural deafness, congenital cardiac malformations, and extensive hepatosplenomegaly are categorized collectively under the diagnostic clinical acronym **TORCH infections**.",
+      "say": "TORCH infections cross the placenta, causing intracranial calcifications, cataracts, and deafness.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infections-pregnancy-torch-hiv-hepatitis-fig1.webp",
+        "alt": "Transplacental maternal transmission of TORCH infectious pathogens",
+        "caption": "Congenital transplacental transmission of TORCH pathogens leading to multisystem fetal injury."
+      }
+    },
+    {
+      "tx": "The leading cause of respiratory failure in preterm infants born before twenty-eight weeks gestation results from a deficiency of pulmonary dipalmitoylphosphatidylcholine. Immature type II pneumocytes fail to lower alveolar surface tension, producing diffuse atelectasis and alveolar hyaline membranes in **neonatal respiratory distress syndrome**.",
+      "say": "Neonatal RDS results from surfactant deficiency in immature type two pneumocytes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-mechanics-and-surfactant-fig1.webp",
+        "alt": "Pulmonary surface tension and surfactant deficiency mechanics in RDS",
+        "caption": "Pulmonary compliance failure and alveolar collapse resulting from developmental surfactant deficiency."
+      }
+    },
+    {
+      "tx": "Synthesized by granular type II pneumocytes and stored within intracellular lamellar bodies, pulmonary **surfactant** consists predominantly of dipalmitoylphosphatidylcholine complexed with surfactant proteins A, B, C, and D, which drastically reduces surface tension and prevents end-expiratory alveolar collapse across changing lung volumes.",
+      "say": "Surfactant reduces alveolar surface tension, preventing end-expiratory microatelectasis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "premature_delivery",
+            "label": "Delivery Prior to 28 Gestational Weeks with Immature Type II Cells"
+          },
+          {
+            "id": "surfactant_deficiency",
+            "label": "Inadequate Dipalmitoylphosphatidylcholine in Alveolar Fluid"
+          },
+          {
+            "id": "high_surface_tension",
+            "label": "High Surface Tension Causes Widespread Progressive Microatelectasis"
+          },
+          {
+            "id": "hyaline_membrane",
+            "label": "Plasma Extravasation and Necrotic Debris Form Eosinophilic Hyaline Membranes"
+          }
+        ],
+        "edges": [
+          [
+            "premature_delivery",
+            "surfactant_deficiency"
+          ],
+          [
+            "surfactant_deficiency",
+            "high_surface_tension"
+          ],
+          [
+            "high_surface_tension",
+            "hyaline_membrane"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe ischemic and inflammatory necrosis of the neonatal intestinal mucosa primarily affects premature infants following the introduction of enteral feeding. Translocation of gas-producing bacteria into ischemic bowel walls produces diagnostic pneumatosis intestinalis, the pathognomonic clinical hallmark of **necrotising enterocolitis**, threatening bowel perforation.",
+      "say": "Necrotizing enterocolitis causes ischemic bowel gangrene and pneumatosis intestinalis in preterms.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prematurity_hypoxia",
+            "label": "Premature Immature Intestinal Mucosa Subjected to Hypoperfusion"
+          },
+          {
+            "id": "enteral_formula",
+            "label": "Enteral Formula Feeding Provides Substrate for Bacterial Proliferation"
+          },
+          {
+            "id": "mucosal_necrosis",
+            "label": "Transmural Ischemic Bowel Gangrene with Pneumatosis Intestinalis"
+          },
+          {
+            "id": "perforation",
+            "label": "Pneumoperitoneum, Abdominal Sepsis, and High Surgical Mortality"
+          }
+        ],
+        "edges": [
+          [
+            "prematurity_hypoxia",
+            "enteral_formula"
+          ],
+          [
+            "enteral_formula",
+            "mucosal_necrosis"
+          ],
+          [
+            "mucosal_necrosis",
+            "perforation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The unexpected sudden death of an infant under one year of age that remains unexplained after thorough case investigation, complete autopsy, and death scene examination is defined as **sudden infant death syndrome (SIDS)**, strongly associated with prone sleeping position and maternal smoking.",
+      "say": "Sudden infant death syndrome is unexplained infant death linked to prone sleep and sleep environment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vulnerable_infant",
+            "label": "Underlying Brainstem Serotonergic Delayed Homeostatic Arousal"
+          },
+          {
+            "id": "critical_developmental_period",
+            "label": "Critical Window of Autonomic Maturation (2 to 4 Months)"
+          },
+          {
+            "id": "exogenous_stressors",
+            "label": "Prone Sleep Position, Soft Bedding, and Passive Tobacco Exposure"
+          },
+          {
+            "id": "asphyxia_death",
+            "label": "Failure of Arousal Following Thermal Stress and Hypercapnia"
+          }
+        ],
+        "edges": [
+          [
+            "vulnerable_infant",
+            "critical_developmental_period"
+          ],
+          [
+            "critical_developmental_period",
+            "exogenous_stressors"
+          ],
+          [
+            "exogenous_stressors",
+            "asphyxia_death"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe generalized fetal edema characterized by fluid accumulation in at least two visceral compartments, such as ascites, pleural effusion, or pericardial fluid, represents **hydrops fetalis**. Historical immune hydrops from maternal Rh isoimmunization has been largely replaced by non-immune hydrops caused by cardiovascular malformations and chromosomal aneuploidies.",
+      "say": "Hydrops fetalis causes generalized fetal anasarca from immune hemolysis or heart failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rh-isoimmunization-and-fetal-hydrops-fig1.webp",
+        "alt": "Fetal hydrops and severe anasarca secondary to Rh isoimmunization",
+        "caption": "Severe generalized fetal anasarca and ascites resulting from Rh erythroblastosis fetalis."
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

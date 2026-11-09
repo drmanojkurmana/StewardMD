@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "id": "cm-cvd-coronary-heart-disease-risk-factors",
+ "subject": "community-medicine",
+ "module": "cm-cvd",
+ "title": "Cardiovascular Epidemiology: Risk Factors, Hypertension and Stroke",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Coronary heart disease risk factors and Asian phenotype",
+   "tx": "Cardiovascular diseases represent the leading cause of adult mortality in India, driven by the unique South Asian phenotype marked by premature onset, elevated body fat percentage at lower body mass index, central visceral adiposity and high prevalence of **coronary heart disease risk factors**. Major modifiable drivers include cigarette smoking, bidis and smokeless tobacco use, atherogenic dyslipidaemia with high triglycerides and low HDL, hypertension, diabetes mellitus and physical inactivity.",
+   "say": "Heart attacks strike Indians a decade earlier than Western populations due to central belly fat, diabetes, high blood pressure, tobacco smoking and low protective HDL cholesterol.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk factor category", "Specific epidemiological driver", "Population impact in India"],
+    "rows": [
+     ["Modifiable behavioral", "Tobacco smoking, bidis, high salt, inactivity", "Accounts for over 50% of preventable CVD events"],
+     ["Metabolic markers", "Hypertension, diabetes mellitus, central obesity", "High prevalence in both urban and rural cohorts"],
+     ["Lipid abnormalities", "High triglycerides, low HDL, elevated Lp(a)", "Classic atherogenic dyslipidaemic South Asian pattern"],
+     ["Non-modifiable", "Advancing age, male sex, strong family history", "Determines baseline baseline genetic susceptibility"]
+    ]
+   }
+  },
+  {
+   "title": "Hypertension classification and diagnostic criteria",
+   "tx": "Clinical and community guidelines establish **hypertension classification** based on standardised blood pressure readings taken after five minutes of seated rest, using an appropriately sized arm cuff. Normal adult blood pressure is defined as systolic below one hundred and twenty millimetres of mercury and diastolic below eighty; Stage 1 hypertension spans one hundred and thirty to one hundred and thirty-nine systolic or eighty to eighty-nine diastolic.",
+   "say": "Normal blood pressure is under one hundred and twenty over eighty. Stage one hypertension begins at one hundred and thirty systolic or eighty diastolic on repeated resting measurements.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Blood pressure category", "Systolic range (mmHg)", "Diastolic range (mmHg)"],
+    "rows": [
+     ["Normal blood pressure", "Less than 120", "and Less than 80"],
+     ["Elevated blood pressure", "120 to 129", "and Less than 80"],
+     ["Stage 1 Hypertension", "130 to 139", "or 80 to 89"],
+     ["Stage 2 Hypertension", "140 or higher", "or 90 or higher"],
+     ["Hypertensive crisis", "Higher than 180", "and/or Higher than 120"]
+    ]
+   }
+  },
+  {
+   "title": "The rule of halves in community hypertension",
+   "tx": "In public health epidemiology, hypertension is famously characterized by the **rule of halves**, which illustrates substantial attrition across the clinical care pathway. Roughly half of individuals with hypertension in the population are unaware of their condition; of those diagnosed, only half receive medical treatment; and of those receiving pharmacotherapy, only half achieve adequate target blood pressure control, leaving the vast majority at risk.",
+   "say": "The rule of halves shows that half of hypertensive people do not know they have it. Half of those who know never take medicine, and only half of treated patients achieve normal pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Total population with hypertension (100%)"},
+     {"id": "b", "label": "Diagnosed and aware of condition (50%)"},
+     {"id": "c", "label": "Initiated on antihypertensive drugs (25%)"},
+     {"id": "d", "label": "Adequately controlled at target pressure (12.5%)"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Dietary salt intake and population reduction",
+   "tx": "Excessive sodium intake drives sustained arterial vasoconstriction, with Indian surveys revealing daily consumption exceeding ten grams, more than double the World Health Organization target of **dietary salt restriction** below five grams daily (equivalent to two grams of sodium or one level teaspoon). Population-wide salt reduction through consumer food reformulation, front-of-pack warning labels, and community awareness represents one of the most cost-effective non-communicable disease interventions.",
+   "say": "Indians consume over ten grams of salt each day, more than twice the recommended five-gram limit. Cutting daily salt intake lowers blood pressure across the entire community.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Current Indian salt intake",
+     "points": ["Average 9 to 11 grams daily per person", "Sourced from added table salt, pickles, papads", "Drives high rates of strokes and heart failure"]
+    },
+    "right": {
+     "title": "WHO target recommendation",
+     "points": ["Less than 5 grams salt daily (<2 g sodium)", "Equivalent to one level teaspoon per day", "Prevents millions of cardiovascular deaths"]
+    }
+   }
+  },
+  {
+   "title": "Stroke epidemiology: ischaemic versus haemorrhagic",
+   "tx": "Uncontrolled hypertension acts as the pre-eminent modifiable risk factor for **cerebrovascular stroke**, precipitating both cerebral ischaemia from thromboembolism and primary intracerebral haemorrhage from ruptured Charcot-Bouchard microaneurysms in lenticulostriate arterioles. Ischaemic strokes account for roughly seventy-five to eighty percent of cases, while primary intracerebral haemorrhage accounts for the remaining twenty to twenty-five percent, exhibiting higher acute case fatality in lower socioeconomic rural settings.",
+   "say": "Hypertension is the primary cause of stroke, causing brain clots in three-quarters of patients and burst bleeding vessels in the rest. High blood pressure control directly prevents strokes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischaemic stroke (75-80%)",
+     "points": ["Thromboembolic cerebral artery occlusion", "Tissue plasminogen activator window < 4.5 hrs", "Associated with atrial fibrillation, carotid atheroma"]
+    },
+    "right": {
+     "title": "Haemorrhagic stroke (20-25%)",
+     "points": ["Rupture of small penetrating brain arterioles", "Sudden severe headache and rapid coma", "Directly caused by long-standing high blood pressure"]
+    }
+   }
+  },
+  {
+   "title": "Acute stroke care and the golden window",
+   "tx": "Recognizing early stroke signs through the FAST algorithm (Face drooping, Arm weakness, Speech difficulty, Time to call emergency) is vital because intravenous thrombolysis must occur within the narrow **thrombolytic time window** of four point five hours from symptom onset. Primary health centres stabilize airway and blood pressure before transferring patients to district stroke units equipped with non-contrast computed tomography, avoiding premature antihypertensive over-treatment that reduces cerebral perfusion.",
+   "say": "Remember the FAST signs: face droop, arm weakness and slurred speech. Clot-dissolving treatment must be given within four and a half hours, making immediate hospital transfer essential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Sudden onset of FAST neurological deficits"},
+     {"id": "b", "label": "Immediate emergency transfer to stroke center"},
+     {"id": "c", "label": "Emergency non-contrast head CT scan"},
+     {"id": "d", "label": "IV tissue plasminogen activator within 4.5 hours"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Rheumatic fever: streptococcal pharyngitis trigger",
+   "tx": "In school-aged children, untreated Group A beta-haemolytic streptococcal pharyngitis provokes **acute rheumatic fever**, an autoimmune non-suppurative post-infectious illness triggered by molecular mimicry between streptococcal M protein and human cardiac myosin, synovium and basal ganglia. Symptoms erupt two to three weeks following pharyngitis, presenting with migratory polyarthritis of large joints, carditis, Sydenham chorea, subcutaneous nodules and erythema marginatum in overcrowded, impoverished rural homes.",
+   "say": "Untreated bacterial sore throat in children can trigger rheumatic fever through molecular mimicry. Antibodies attacking the bacteria mistakenly damage heart valves, joints and brain cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Group A streptococcal throat infection"},
+     {"id": "b", "label": "Antibodies against streptococcal M protein"},
+     {"id": "c", "label": "Molecular cross-reactivity with human tissues"},
+     {"id": "d", "label": "Carditis, migratory polyarthritis, chorea"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Revised Jones criteria for rheumatic fever diagnosis",
+   "tx": "Clinical confirmation requires fulfilling the **revised Jones criteria**, demanding evidence of preceding streptococcal infection (elevated anti-streptolysin O titre or positive throat culture) alongside either two major criteria, or one major plus two minor criteria. Major criteria comprise carditis, migratory polyarthritis, Sydenham chorea, erythema marginatum and subcutaneous nodules; minor criteria include fever, arthralgia, prolonged PR interval on electrocardiogram and elevated erythrocyte sedimentation rate.",
+   "say": "Diagnosing rheumatic fever requires evidence of recent streptococcal infection plus two major Jones criteria, or one major criterion with two minor criteria like fever and joint pain.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Major Jones Criteria", "Minor Jones Criteria", "Evidence of Streptococcal Infection"],
+    "rows": [
+     ["Carditis (clinical or subclinical echo)", "Fever (>= 38.5 degrees C)", "Elevated ASO titre (> 200 IU/ml)"],
+     ["Migratory polyarthritis (large joints)", "Arthralgia (joint pain without swelling)", "Positive throat swab culture for Group A Strep"],
+     ["Sydenham chorea (involuntary movements)", "Elevated ESR (>= 60 mm) or CRP (>= 3.0 mg/dl)", "Recent scarlet fever episode"],
+     ["Erythema marginatum (serpiginous rash)", "Prolonged PR interval on electrocardiogram", "Positive rapid streptococcal antigen test"],
+     ["Subcutaneous nodules (over extensor tendons)", "Leukocytosis on complete blood count", "Documented laboratory confirmation mandatory"]
+    ]
+   }
+  },
+  {
+   "title": "Primary prevention: treating streptococcal sore throat",
+   "tx": "The cornerstone of preventing rheumatic fever is **primary streptococcal prevention**, ensuring prompt antibiotic eradication of Group A streptococci within nine days of sore throat onset. A single intramuscular injection of benzathine penicillin G at one point two million units for older children and adults (or oral penicillin V for ten days) completely eliminates pharyngeal streptococci, preventing initial episodes of acute rheumatic carditis entirely.",
+   "say": "Treating a streptococcal sore throat with a single injection of benzathine penicillin or oral penicillin for ten days cures the infection and stops rheumatic fever from ever starting.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Patient category", "First-line antibiotic regimen", "Alternative if penicillin-allergic"],
+    "rows": [
+     ["Children < 27 kg", "Benzathine penicillin G 600,000 IU IM", "Oral azithromycin 12 mg/kg daily for 5 days"],
+     ["Children >= 27 kg and adults", "Benzathine penicillin G 1,200,000 IU IM", "Oral erythromycin or azithromycin 500 mg daily"],
+     ["Oral penicillin alternative", "Phenoxymethylpenicillin for 10 days", "Oral cephalexin or clindamycin"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

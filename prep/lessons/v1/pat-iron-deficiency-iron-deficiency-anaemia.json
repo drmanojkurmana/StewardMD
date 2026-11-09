@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "module": "pat-iron-deficiency",
+  "subject": "pathology",
+  "title": "Iron Deficiency Anaemia: Ferritin, Transferrin Saturation, and Mentzer Index",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Iron deficiency evolves silently: stores empty first, then iron deficient erythropoiesis, then microcytic anaemia, so a normal haemoglobin never excludes depleted stores in a bleeding or pregnant patient. The storage protein whose serum level mirrors those stores is **serum ferritin**, low values proving deficiency.",
+      "say": "Ferritin falls before haemoglobin does; a normal haemoglobin never excludes empty iron stores.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-and-microcytic-anaemias-fig1.webp",
+        "alt": "Iron deficiency blood film microcytosis",
+        "caption": "Iron deficiency blood film with microcytic hypochromic red cells and pencil cells."
+      }
+    },
+    {
+      "tx": "Transferrin saturation reports iron actually available to marrow: serum iron divided by total iron binding capacity falls below fifteen percent in deficiency while binding capacity rises as the liver makes more transferrin. The availability ratio is **transferrin saturation**, complementing ferritin when inflammation confuses it.",
+      "say": "Transferrin saturation below fifteen percent means the marrow is starved of iron today, whatever the stores claim.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Iron deficiency",
+          "Anaemia of chronic disease"
+        ],
+        "rows": [
+          [
+            "Ferritin",
+            "Low",
+            "Normal or high"
+          ],
+          [
+            "Serum iron",
+            "Low",
+            "Low"
+          ],
+          [
+            "TIBC",
+            "High",
+            "Low or normal"
+          ],
+          [
+            "Transferrin saturation",
+            "Low, under 15 percent",
+            "Low or borderline"
+          ],
+          [
+            "Soluble transferrin receptor",
+            "High",
+            "Normal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Let this picture correct the one that follows in the lesson. Koilonychia is only a late nail clue, while the disease itself is written in the blood: small pale red cells produced because marrow has run out of iron. Keeping the whole picture of **iron deficiency anaemia** in view stops a single spoon shaped nail from carrying the entire diagnosis.",
+      "say": "Spoon nails are only a late clue. Iron deficiency anaemia itself is written in small pale red cells made by marrow that has run out of iron, and that whole picture matters more than one nail.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m973-pat-iron-deficiency-iron-deficiency-anaemia.webp",
+        "alt": "Iron deficiency anaemia picture showing microcytic hypochromic red cells from empty iron stores",
+        "caption": "Iron deficiency anaemia picture showing microcytic hypochromic red cells from empty iron stores. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The blood film narrates chronicity: microcytic hypochromic cells with pencil forms, anisopoikilocytosis, and a raised red cell distribution width as new small cells mix with older normal ones. Spoon shaped koilonychia nails and angular cheilitis complete the bedside picture of **iron deficiency anaemia**.",
+      "say": "Pencil cells, high RDW, spoon nails, and sore mouth corners narrate iron deficiency before any laboratory speaks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/koilonychia-fig1.webp",
+        "alt": "Koilonychia anatomy and peripheral smear",
+        "caption": "Koilonychia spoon nails with peripheral smear features of iron deficiency."
+      }
+    },
+    {
+      "tx": "Ferritin lies upward as an acute phase reactant, so inflammation, infection, liver disease, and malignancy can mask deficiency behind a normal value, prompting saturation, soluble receptor, or marrow iron assessment. Perls Prussian blue on marrow remains the reference standard; the stain is **Perls Prussian blue** for storage iron.",
+      "say": "Inflammation inflates ferritin dishonestly; when the story disagrees, trust saturation or stain the marrow with Perls blue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ferritin trustworthy",
+          "points": [
+            "No inflammation, CRP normal",
+            "Low ferritin proves deficiency",
+            "High ferritin excludes simple deficiency"
+          ]
+        },
+        "right": {
+          "title": "Ferritin confounded",
+          "points": [
+            "Active inflammation or liver disease",
+            "Add transferrin saturation and CRP",
+            "Soluble transferrin receptor clarifies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In children, the Mentzer index, mean cell volume divided by red cell count, separates iron deficiency, index above thirteen, from thalassaemia trait, below thirteen, as a free first approximation before iron studies and haemoglobin analysis. The bedside ratio is the **Mentzer index**.",
+      "say": "Mentzer index above thirteen favours iron deficiency, below thirteen favours thalassaemia trait; confirm both properly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Microcytic anaemia identified"
+          },
+          {
+            "id": "b",
+            "label": "Mentzer index: MCV divided by red cell count"
+          },
+          {
+            "id": "c",
+            "label": "Above 13: iron studies first"
+          },
+          {
+            "id": "d",
+            "label": "Below 13: haemoglobin analysis for trait"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Finding deficiency is half the duty; finding its source is the other half, because gastrointestinal blood loss from ulcers, malignancy, angiodysplasia, or hookworm explains most adult cases, with menstrual loss and malabsorption behind the rest. Iron replacement without source hunting misses cancers; that hunt is **iron deficiency source investigation**.",
+      "say": "Replace the iron, but hunt the leak; adult iron deficiency is gastrointestinal blood loss until proven otherwise.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Source category",
+          "Examples",
+          "First investigation"
+        ],
+        "rows": [
+          [
+            "GI blood loss",
+            "Cancer, ulcer, angiodysplasia, hookworm",
+            "Endoscopy, colonoscopy, stool studies"
+          ],
+          [
+            "Gynaecological",
+            "Menorrhagia, fibroids",
+            "History, pelvic imaging"
+          ],
+          [
+            "Malabsorption",
+            "Coeliac disease, gastrectomy",
+            "Coeliac serology, B12 and folate"
+          ],
+          [
+            "Demand",
+            "Pregnancy, growth, blood donation",
+            "History usually suffices"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral ferrous salts remain first line, taken away from tea, calcium, and acid suppression, with intravenous iron for intolerance, malabsorption, ongoing loss, or late pregnancy urgency. A haemoglobin rise of about ten grams per litre in two to four weeks confirms response; the monitored milestone is **haemoglobin response**.",
+      "say": "Expect haemoglobin up ten grams per litre within a month on iron; no rise means adherence, absorption, or ongoing loss problems.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral iron succeeds when",
+          "points": [
+            "Gut absorption intact",
+            "Loss slower than replacement",
+            "Taken away from tea and calcium"
+          ]
+        },
+        "right": {
+          "title": "Intravenous iron preferred when",
+          "points": [
+            "Malabsorption or intolerance",
+            "Ongoing heavy loss",
+            "Late pregnancy or preoperative urgency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pica, craving ice, clay, or raw rice, restless legs, and glossitis broaden recognition beyond pallor, especially in pregnancy and childhood where development suffers silently. Asking directly about cravings costs nothing and clinches suspicion; the craving syndrome is **pica of iron deficiency**.",
+      "say": "Ask about ice, clay, or raw rice cravings; pica and restless legs often announce iron deficiency before pallor does.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clue",
+          "Where to look",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "Koilonychia",
+            "Fingernails spooned",
+            "Chronic severe deficiency"
+          ],
+          [
+            "Angular cheilitis, glossitis",
+            "Mouth corners, smooth tongue",
+            "Epithelial iron enzyme failure"
+          ],
+          [
+            "Pica",
+            "Ask about ice, clay, rice",
+            "Classic craving of deficiency"
+          ],
+          [
+            "Restless legs",
+            "Evening leg discomfort",
+            "Dopamine pathway iron need"
+          ]
+        ]
+      }
+    }
+  ]
+}

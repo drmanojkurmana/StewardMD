@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Gastric Cancer Stigmata, Distant Metastasis, and D2 Gastrectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Gastric adenocarcinoma frequently presents at an advanced stage due to insidious, non-specific early symptoms. As the disease breaches anatomical barriers, it spreads via direct extension, lymphatic channels, haematogenous circulation, and transcoelomic shedding throughout the peritoneal cavity. Physical examination may reveal classic eponymic physical signs that denote **incurable metastatic disease** and preclude curative radical resection.",
+   "say": "Gastric cancer often presents at an advanced stage. Classic physical signs of distant metastasis indicate unresectable disease and rule out curative surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-malignancy_stigmata.webp",
+    "alt": "Clinical illustration showing distant physical signs of gastric malignancy including supraclavicular, umbilical, and pelvic stigmata.",
+    "caption": "Eponymic stigmata of metastatic gastric carcinoma: lymphatic, umbilical, and transcoelomic dissemination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most famous peripheral lymphatic sign of advanced abdominal malignancy is the **Virchow node**, also known as Troisier sign. It presents as a firm, non-tender, enlarged lymph node in the left supraclavicular fossa, situated between the sternal and clavicular heads of the sternocleidomastoid muscle. Metastatic tumour emboli from the stomach ascend through the thoracic duct, which drains directly into the left subclavian vein, depositing malignant cells in this sentinel node.",
+   "say": "Virchow node is a firm left supraclavicular lymph node caused by tumor emboli ascending the thoracic duct, representing Troisier sign of metastatic spread.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prim",
+      "label": "Primary Infiltrating Gastric Adenocarcinoma"
+     },
+     {
+      "id": "cistern",
+      "label": "Subdiaphragmatic Lymphatic Flow into Cisterna Chyli"
+     },
+     {
+      "id": "duct",
+      "label": "Ascent Through Thoracic Duct in Posterior Mediastinum"
+     },
+     {
+      "id": "subclavian",
+      "label": "Drainage into Confluence of Left Subclavian & Internal Jugular Veins"
+     },
+     {
+      "id": "virchow",
+      "label": "Metastatic Seeding into Left Supraclavicular Virchow Node"
+     }
+    ],
+    "edges": [
+     [
+      "prim",
+      "cistern"
+     ],
+     [
+      "cistern",
+      "duct"
+     ],
+     [
+      "duct",
+      "subclavian"
+     ],
+     [
+      "subclavian",
+      "virchow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transcoelomic shedding of malignant cells across the peritoneal cavity into the female pelvis results in a **Krukenberg tumour**. This represents bilateral metastatic ovarian enlargement originating characteristically from gastric signet ring cell adenocarcinoma. Histopathology reveals dense cellular ovarian stroma packed with mucin-secreting signet ring cells. Dissemination occurs through peritoneal surface shedding or retrograde lymphatic permeation along the broad ligament.",
+   "say": "A Krukenberg tumour is bilateral metastatic ovarian cancer containing signet ring cells, typically arising from transcoelomic shedding of gastric adenocarcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Krukenberg Metastasis",
+     "points": [
+      "Over 80% present with bilateral ovarian masses",
+      "Predominantly signet ring cell gastric origin",
+      "Transcoelomic drop or retrograde lymphatic spread",
+      "Carries dismal prognosis requiring systemic therapy"
+     ]
+    },
+    "right": {
+     "title": "Primary Ovarian Epithelial Cancer",
+     "points": [
+      "Frequently unilateral in early stages",
+      "Serous or mucinous cystadenocarcinoma",
+      "Arises de novo from ovarian surface epithelium",
+      "Responsive to cytoreductive surgery and platinum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Other pathognomonic physical signs of advanced gastric malignancy include the Sister Mary Joseph nodule, representing cutaneous metastasis to the umbilicus via lymphatic channels in the falciform ligament or remnants of the vitelline duct. Digital rectal examination may detect a **Blumer shelf**, a rigid peritoneal deposit palpable anteriorly in the rectovesical or rectouterine pouch of Douglas. Additionally, left axillary lymphadenopathy is known as Irish node.",
+   "say": "Other classic signs include umbilical metastasis known as Sister Mary Joseph nodule, a palpable pelvic deposit called Blumer shelf, and left axillary Irish nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Sign",
+     "Anatomical Location",
+     "Mechanism of Dissemination"
+    ],
+    "rows": [
+     [
+      "Virchow Node (Troisier)",
+      "Left supraclavicular fossa",
+      "Ascending thoracic duct lymphatic spread"
+     ],
+     [
+      "Sister Mary Joseph Nodule",
+      "Umbilical cutaneous ring",
+      "Infiltration via falciform ligament remnants"
+     ],
+     [
+      "Krukenberg Tumour",
+      "Bilateral ovaries",
+      "Transcoelomic shedding of signet ring cells"
+     ],
+     [
+      "Blumer Shelf",
+      "Pouch of Douglas (Rectal shelf)",
+      "Peritoneal gravitation into dependent pelvic floor"
+     ],
+     [
+      "Irish Node",
+      "Left axillary lymph node",
+      "Cutaneous thoracic lymphatic drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In localized, operable gastric carcinoma, radical curative surgery requires complete macroscopic and microscopic tumour resection combined with an extended regional lymphadenectomy. The international oncological standard is the **D2 gastrectomy**. Japanese and European randomized trials have demonstrated that D2 lymphadenectomy achieves superior locoregional control and significantly reduces long-term cancer recurrence compared with limited D1 perigastric lymph node dissection.",
+   "say": "The international standard for operable gastric cancer is a D2 gastrectomy, providing extended lymphadenectomy that reduces local recurrence and improves long-term survival.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-stomach-ulcerative.webp",
+    "alt": "Surgical pathology specimen of a radical gastrectomy with en bloc attached regional nodal chains.",
+    "caption": "Curative radical gastrectomy: en bloc excision of the stomach and regional lymphatic stations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Regional gastric lymph nodes are numbered systematically into sixteen stations. A D1 dissection removes only the perigastric stations immediately adjacent to the stomach wall, comprising stations one to six along the greater and lesser curvatures. In contrast, a D2 dissection excises all D1 perigastric stations plus the **extra-perigastric nodal stations** along the branches of the celiac axis, including the left gastric artery, common hepatic artery, celiac axis, and splenic artery.",
+   "say": "D1 dissection removes perigastric stations one to six along the stomach curves, while D2 adds stations along the celiac axis branches, including left gastric, hepatic, and splenic arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymph Node Tier",
+     "Station Numbers",
+     "Anatomical Distribution"
+    ],
+    "rows": [
+     [
+      "D1 (Perigastric)",
+      "Stations 1 to 6",
+      "Cardia, lesser curve, greater curve, suprapyloric, infrapyloric"
+     ],
+     [
+      "D2 (Celiac Branches)",
+      "Station 7",
+      "Left gastric artery trunk"
+     ],
+     [
+      "D2 (Celiac Branches)",
+      "Station 8a / 8p",
+      "Common hepatic artery (anterior and posterior)"
+     ],
+     [
+      "D2 (Celiac Branches)",
+      "Station 9",
+      "Celiac axis trunk"
+     ],
+     [
+      "D2 (Celiac Branches)",
+      "Stations 10 & 11",
+      "Splenic hilum and splenic artery"
+     ],
+     [
+      "D2 (Hepatic)",
+      "Station 12a",
+      "Hepatoduodenal ligament (hepatic artery proper)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "International guidelines dictate that an adequate D2 lymphadenectomy requires the harvest and pathological examination of at least **fifteen to sixteen lymph nodes** to ensure accurate nodal staging. In earlier surgical eras, routine splenectomy and distal pancreatectomy were performed to clear stations ten and eleven, but this caused excessive morbidity and mortality. In modern practice, spleen and pancreas preservation is standard unless there is direct malignant invasion.",
+   "say": "An adequate D2 gastrectomy requires examining at least fifteen to sixteen lymph nodes. The spleen and pancreas are preserved unless directly invaded by the tumour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modern D2 Gastrectomy",
+     "points": [
+      "Excision of stations 1 through 12a",
+      "Meticulous preservation of spleen and pancreas",
+      "Examines minimum 15 to 16 lymph nodes",
+      "Low operative mortality in experienced centers"
+     ]
+    },
+    "right": {
+     "title": "Historical Extended Surgery",
+     "points": [
+      "Routine splenectomy and distal pancreatectomy",
+      "High incidence of pancreatic fistula and abscess",
+      "Elevated postoperative pulmonary morbidity",
+      "No survival benefit over organ-sparing D2"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The extent of gastric resection is determined by the anatomical location and Lauren histology of the tumour. Distal antral tumours are managed with a **subtotal distal gastrectomy**, preserving the gastric fundus to maintain quality of life, provided a five-centimetre proximal clear margin is achievable. Conversely, proximal gastric cancers, lesions involving the body or cardia, and all diffuse-type tumours or linitis plastica mandate a total gastrectomy with Roux-en-Y reconstruction.",
+   "say": "Distal tumours are treated with subtotal gastrectomy with a five-centimeter margin, while proximal tumours and diffuse variants mandate a total gastrectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loc",
+      "label": "Assessment of Tumour Location & Histological Subtype"
+     },
+     {
+      "id": "dist",
+      "label": "Distal Antral Tumour (Intestinal Type)"
+     },
+     {
+      "id": "sub",
+      "label": "Subtotal Gastrectomy with 5 cm Proximal Clear Margin"
+     },
+     {
+      "id": "prox",
+      "label": "Proximal Body / Cardia / Diffuse / Linitis Plastica"
+     },
+     {
+      "id": "tot",
+      "label": "Total Gastrectomy with Roux-en-Y Esophagojejunostomy"
+     }
+    ],
+    "edges": [
+     [
+      "loc",
+      "dist"
+     ],
+     [
+      "dist",
+      "sub"
+     ],
+     [
+      "loc",
+      "prox"
+     ],
+     [
+      "prox",
+      "tot"
+     ]
+    ]
+   }
+  }
+ ]
+}

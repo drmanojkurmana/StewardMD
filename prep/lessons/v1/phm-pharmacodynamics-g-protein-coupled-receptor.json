@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phm-pharmacodynamics",
+  "subject": "pharmacology",
+  "title": "G-Protein Coupled Receptors, Ligand-Gated Ion Channels, Tyrosine Kinase, and Nuclear Receptors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cellular communication and pharmacological responses are coordinated through four major receptor superfamilies classified by molecular structure and signal transduction speed. The most versatile and numerically abundant superfamily targeted by clinical pharmaceuticals is the **G-protein coupled receptor** family, also termed serpentine or seven-transmembrane spanning receptors. These membrane proteins traverse the phospholipid bilayer seven times and transmit extracellular ligand signals through intracellular heterotrimeric guanine nucleotide-binding regulatory proteins composed of alpha, beta, and gamma subunits.",
+      "say": "G-protein coupled receptors traverse the cell membrane seven times, coupling to heterotrimeric G-proteins to regulate intracellular enzymes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Receptor superfamily",
+          "Membrane topology",
+          "Signal transduction mechanism",
+          "Typical response time"
+        ],
+        "rows": [
+          [
+            "Ligand-gated ion channel",
+            "Oligomeric transmembrane pore (4-5 subunits)",
+            "Direct channel gating with ion flux",
+            "Milliseconds (1-10 ms)"
+          ],
+          [
+            "G-protein coupled receptor",
+            "Seven transmembrane alpha-helices",
+            "Heterotrimeric G-protein secondary messenger cascades",
+            "Seconds to minutes"
+          ],
+          [
+            "Enzymatic / Tyrosine kinase",
+            "Single transmembrane pass with intracellular kinase",
+            "Receptor dimerization and autophosphorylation",
+            "Minutes to hours"
+          ],
+          [
+            "Nuclear / Intracellular receptor",
+            "Intracellular zinc-finger transcription factor",
+            "Modulation of gene transcription and protein synthesis",
+            "Hours to days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ligand binding to a GPCR induces a conformational shift that catalyzes the exchange of guanosine diphosphate for guanosine triphosphate on the G-alpha subunit, triggering dissociation from beta-gamma dimers. Based on their alpha subunit isoforms, GPCRs divide into distinct functional classes: Gs stimulates adenylyl cyclase to elevate intracellular cyclic AMP, Gi inhibits adenylyl cyclase and opens inward-rectifier potassium channels, while Gq activates phospholipase C-beta to generate inositol trisphosphate and diacylglycerol, illustrating diverse **intracellular signaling pathways**.",
+      "say": "Activated GPCRs exchange GDP for GTP, activating Gs, Gi, or Gq pathways to control cyclic AMP and calcium messengers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sympathomimetics-adrenergic-agonists-fig1.webp",
+        "alt": "G-protein coupled receptor signaling architecture",
+        "caption": "Transmembrane G-protein coupled receptor architecture illustrating heterotrimeric Gs, Gi, and Gq protein coupling to adenylyl cyclase and phospholipase C effectors."
+      }
+    },
+    {
+      "tx": "Rapid synaptic neurotransmission operating on a millisecond timescale is mediated by the **ligand-gated ion channel** family, also known as ionotropic receptors. These multimeric protein complexes form an aqueous central pore that opens instantaneously upon agonist binding, permitting selective inward or outward flux of sodium, potassium, chloride, or calcium ions down electrochemical gradients. Archetypal examples include the nicotinic acetylcholine receptor, the inhibitory GABA-A receptor gating chloride influx, and the 5-HT3 serotonin receptor.",
+      "say": "Ligand-gated ion channels open central aqueous pores in milliseconds upon agonist binding to allow rapid transmembrane ion flow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "agonist",
+            "label": "Agonist neurotransmitter binding"
+          },
+          {
+            "id": "conformation",
+            "label": "Allosteric channel pore opening"
+          },
+          {
+            "id": "flux",
+            "label": "Transmembrane ion flux (Na+, Cl-, Ca2+)"
+          },
+          {
+            "id": "polarization",
+            "label": "Rapid membrane potential shift"
+          }
+        ],
+        "edges": [
+          [
+            "agonist",
+            "conformation"
+          ],
+          [
+            "conformation",
+            "flux"
+          ],
+          [
+            "flux",
+            "polarization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Receptors possessing intrinsic enzymatic activity or directly recruiting cytosolic kinases regulate metabolic homeostasis, cellular growth, and differentiation over minutes to hours. The quintessential catalytic superfamily is the **tyrosine kinase receptor** class, characterized by an extracellular ligand-binding domain, a single hydrophobic transmembrane helix, and an intracellular protein kinase domain. Upon agonist binding by polypeptide growth factors, two monomeric receptor chains undergo non-covalent dimerization, activating intrinsic tyrosine kinase activity and initiating reciprocal autophosphorylation of cytoplasmic tyrosine residues.",
+      "say": "Tyrosine kinase receptors dimerize upon ligand binding, undergoing autophosphorylation to initiate intracellular phosphorylation cascades.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tyrosine kinase receptors (RTKs)",
+          "points": [
+            "Intrinsic enzymatic tyrosine kinase domain",
+            "Receptor dimerization upon ligand binding",
+            "Autophosphorylation of intracellular tyrosine residues",
+            "Insulin receptor, epidermal growth factor receptor"
+          ]
+        },
+        "right": {
+          "title": "Cytokine receptor superfamily",
+          "points": [
+            "Lacks intrinsic enzymatic activity",
+            "Recruits cytosolic Janus kinases (JAKs)",
+            "Phosphorylates STAT transcription factors",
+            "Growth hormone, erythropoietin, interferon receptors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Phosphorylated tyrosine residues on activated RTKs recruit intracellular adaptor proteins containing src homology 2 domains, initiating crucial downstream kinase cascades. The Mitogen-Activated Protein Kinase pathway, comprising sequential activation of Ras, Raf, MEK, and ERK kinases, orchestrates gene expression governing cellular proliferation. In contrast, the phosphatidylinositol 3-kinase and protein kinase B (Akt) cascade mediates anabolic metabolic responses, most notably insulin-stimulated translocation of **glucose transporter type 4** storage vesicles to skeletal muscle and adipocyte plasma membranes.",
+      "say": "Activated tyrosine kinase cascades stimulate Akt and MAPK pathways, driving cellular growth and GLUT4 glucose transporter membrane translocation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Downstream kinase cascade",
+          "Key signaling intermediates",
+          "Cellular physiological effect",
+          "Target disease or therapeutic agent"
+        ],
+        "rows": [
+          [
+            "Ras-Raf-MEK-ERK pathway",
+            "Grb2, SOS, Ras GTPase, Raf-1, MEK1/2, ERK1/2",
+            "Cellular proliferation, survival, gene transcription",
+            "Targeted oncology inhibitors (dabrafenib, trametinib)"
+          ],
+          [
+            "PI3K-Akt-mTOR pathway",
+            "IRS-1, PI3K, PIP3, Akt/PKB, mTOR complex",
+            "Anabolic metabolism, protein synthesis, GLUT4 recruitment",
+            "Insulin pharmacology, immunosuppressive mTOR blockers (sirolimus)"
+          ],
+          [
+            "JAK-STAT pathway",
+            "JAK1/2/3, Tyk2, STAT1-6 transcription factors",
+            "Inflammatory gene activation, hematopoiesis",
+            "Janus kinase inhibitors (tofacitinib, baricitinib)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bacterial pathogens exploit GPCR regulatory cycles to induce severe clinical pathology by permanently arresting alpha subunit nucleotide turnover. The enterotoxin produced by Vibrio cholerae catalyzes irreversible NAD-dependent ADP-ribosylation of the Gs-alpha subunit, inactivating its intrinsic GTPase enzymatic activity. Locked in a constitutively active GTP-bound conformation, Gs-alpha produces uninterrupted adenylyl cyclase stimulation, triggering massive intestinal epithelial cyclic AMP accumulation and active chloride secretion responsible for the watery diarrhoea of **cholera toxin toxicity**.",
+      "say": "Cholera toxin locks the Gs alpha subunit in an active GTP state, causing relentless cyclic AMP accumulation and secretory diarrhoea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cholera-fig1.webp",
+        "alt": "Cholera toxin ADP-ribosylation of Gs alpha",
+        "caption": "ADP-ribosylation of the heterotrimeric Gs alpha subunit by bacterial cholera toxin, causing irreversible adenylyl cyclase activation and persistent cyclic AMP generation."
+      }
+    },
+    {
+      "tx": "Hydrophobic hormones and vitamins that diffuse freely across the plasma membrane bind intracellular proteins designated as the **nuclear receptor** superfamily. Located primarily in the cytoplasm or nucleoplasm, unbound nuclear receptors exist in an inactive state complexed with inhibitory chaperone proteins including heat shock protein 90. Upon ligand binding, heat shock proteins dissociate, enabling receptor monomers to homodimerize or heterodimerize with the retinoid X receptor and translocate into the nucleus.",
+      "say": "Lipophilic hormones bind nuclear receptors, displacing heat shock proteins and exposing zinc-finger DNA binding domains.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lipophilic",
+            "label": "Lipophilic steroid diffusion"
+          },
+          {
+            "id": "hsp",
+            "label": "Hsp90 chaperone dissociation"
+          },
+          {
+            "id": "dimer",
+            "label": "Receptor dimerization & nuclear entry"
+          },
+          {
+            "id": "dna",
+            "label": "HRE binding & gene transcription"
+          }
+        ],
+        "edges": [
+          [
+            "lipophilic",
+            "hsp"
+          ],
+          [
+            "hsp",
+            "dimer"
+          ],
+          [
+            "dimer",
+            "dna"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within the nucleus, the zinc-finger motifs of activated receptor dimers bind directly to specific palindromic hormone response elements situated in target gene promoter regions. By recruiting coactivator or corepressor chromatin-modifying complexes, nuclear receptors alter messenger RNA transcription rates and subsequent protein translation. Because this genomic mechanism requires de novo RNA synthesis and protein assembly, responses initiated by corticosteroids, thyroid hormones, and **oestrogen receptors** exhibit a characteristic latency of several hours and persist long after drug clearance.",
+      "say": "Nuclear receptors bind hormone response elements to modulate messenger RNA transcription, explaining the delayed onset and prolonged effect of steroids.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I steroid receptors",
+          "points": [
+            "Cytoplasmic localization complexed to Hsp90",
+            "Glucocorticoid and mineralocorticoid receptors",
+            "Form homodimers upon ligand binding",
+            "Bind inverted repeat hormone response elements"
+          ]
+        },
+        "right": {
+          "title": "Type II non-steroid receptors",
+          "points": [
+            "Retained within nucleus bound to DNA",
+            "Thyroid hormone, vitamin D, and PPAR receptors",
+            "Form heterodimers with retinoid X receptor (RXR)",
+            "Bind direct repeat response elements"
+          ]
+        }
+      }
+    }
+  ]
+}

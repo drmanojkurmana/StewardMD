@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ent-tonsils-adenoids-peritonsillar-abscess",
+ "subject": "ent",
+ "module": "ent-tonsils-adenoids",
+ "title": "Peritonsillar Abscess, Adenoids and Sleep Disordered Breathing",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Peritonsillar abscess**, called quinsy, is pus collected between the tonsil capsule and superior constrictor after tonsillitis, usually in adolescents and young adults with one sided disease. Severe unilateral throat pain, drooling, trismus, muffled hot potato voice and uvula deviation away from the swelling form the classic presentation. The patient sits forward, refuses swallowing and looks toxic, which separates quinsy from simple tonsillitis at the doorway.",
+   "say": "Pus between tonsil capsule and constrictor muscle gives severe one sided throat pain with drooling. Trismus with muffled voice and uvula deviation indicates quinsy at examination. Toxic appearance with refusal to swallow separates abscess from simple tonsillitis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tonsils-and-adenoids-fig1.webp",
+    "alt": "Composite showing peritonsillar abscess with uvula deviation, adenoid hypertrophy and unilateral tonsil enlargement.",
+    "caption": "Peritonsillar abscess with uvula deviation. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Examination in quinsy is limited by **trismus** from pterygoid irritation, so inspection needs gentleness and good light without forcing the mouth open. The soft palate bulges forward on the affected side, the tonsil is displaced downward and medially, and the uvula swings away. Neck nodes are tender and enlarged, ear pain is referred to the ipsilateral side, and dehydration from odynophagia is the rule rather than the exception.",
+   "say": "Jaw spasm limits examination and needs gentle inspection without forced opening. The soft palate bulge displaces tonsil downward while the uvula deviates away. Referred ear pain with dehydration completes the typical clinical picture.",
+   "vis": {
+    "kind": "table",
+    "title": "Quinsy examination findings",
+    "cols": [
+     "Finding",
+     "Explanation"
+    ],
+    "rows": [
+     [
+      "Trismus",
+      "Pterygoid irritation limits opening"
+     ],
+     [
+      "Uvula deviation",
+      "Pushed away from abscess side"
+     ],
+     [
+      "Hot potato voice",
+      "Palatal swelling muffles speech"
+     ],
+     [
+      "Referred otalgia",
+      "Shared glossopharyngeal pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment combines resuscitation, intravenous antibiotics and drainage, because antibiotics alone rarely sterilise an established collection quickly enough. **Needle aspiration** at the point of maximum bulge confirms pus and often drains adequately, while incision and drainage or immediate tonsillectomy serve larger or recurrent collections. Airway assessment precedes every intervention since rupture or swelling can obstruct suddenly in an exhausted patient.",
+   "say": "Antibiotics alone rarely resolve an established collection and drainage is usually required. Needle aspiration confirms pus and often provides adequate drainage initially. Airway assessment precedes every intervention because sudden obstruction remains possible.",
+   "vis": {
+    "kind": "flow",
+    "title": "Quinsy management sequence",
+    "nodes": [
+     {
+      "id": "air",
+      "label": "Assess airway and hydrate"
+     },
+     {
+      "id": "abx",
+      "label": "Intravenous antibiotics"
+     },
+     {
+      "id": "asp",
+      "label": "Aspirate at maximum bulge"
+     },
+     {
+      "id": "drain",
+      "label": "Incise or remove tonsil if needed"
+     }
+    ],
+    "edges": [
+     [
+      "air",
+      "abx"
+     ],
+     [
+      "abx",
+      "asp"
+     ],
+     [
+      "asp",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The aspiration point is taught anatomically: the junction of soft and hard palate above the tonsil, at the greatest palatal bulge, avoiding deep or lateral passes toward the carotid sheath. Ultrasound or computed tomography helps when trismus prevents inspection, the patient is a child, or a deep neck collection is suspected instead. **Bilateral quinsy** is rare and raises immune compromise in the differential diagnosis.",
+   "say": "Aspiration targets the greatest palatal bulge above the tonsil under direct vision. Deep lateral passes risk the carotid sheath and need careful avoidance always. Imaging provides help when jaw spasm prevents adequate inspection.",
+   "vis": {
+    "kind": "table",
+    "title": "Aspiration safety points",
+    "cols": [
+     "Point",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Greatest palatal bulge above tonsil"
+     ],
+     [
+      "Direction",
+      "Avoid deep lateral passes"
+     ],
+     [
+      "Imaging",
+      "Helps when inspection is limited"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adenoid facies** is the long term facial signature of childhood adenoid obstruction: elongated face, open mouth posture, dull vacant expression, pinched nose, crowded upper teeth and high arched palate. It develops because chronic mouth breathing alters facial growth vectors during development. Early relief of obstruction allows partial normalisation, which is why persistent obstruction is treated as a growth issue and not merely a noise issue.",
+   "say": "Years of mouth breathing produce an elongated open mouthed face with crowded teeth. Altered facial growth during development explains the characteristic appearance fully. Early relief allows partial normalisation of growth afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adenoid-hypertrophy-fig1.webp",
+    "alt": "Sagittal head illustration with enlarged adenoid obstructing the nasopharynx and Eustachian tube orifice in a child.",
+    "caption": "Adenoid hypertrophy obstructing the nasopharynx. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Adenoidectomy** indications include obstructive sleep apnoea, recurrent otitis media with effusion and hearing loss, chronic rhinosinusitis driven by adenoid biofilm and persistent nasal obstruction with facies change. Modern endoscopic assisted removal under vision reduces residual tissue and bleeding compared with blind curettage alone. The operation is commonly combined with tonsillectomy when both structures obstruct, shortening total anaesthetic exposure for the child.",
+   "say": "Obstruction with apnoea, ear effusion and sinus disease gives the main indications for adenoid removal. Removal under vision reduces residual tissue and bleeding compared with blind curettage. Combined tonsil surgery shortens total anaesthetic exposure for the child.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Operate for obstruction",
+     "points": [
+      "Witnessed apnoea or sleep study positive",
+      "Persistent mouth breathing with facies change",
+      "Effusion with hearing loss",
+      "Chronic sinus disease from adenoid reservoir"
+     ]
+    },
+    "right": {
+     "title": "Observe without surgery",
+     "points": [
+      "Mild snoring without apnoea",
+      "No hearing or growth effect",
+      "Symptoms improving with age",
+      "Medical therapy still succeeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Rose position** with head extension and shoulder support is shared by tonsil and adenoid surgery and is examined alongside the Boyle Davis gag that maintains access. Blood and secretions drain away from the larynx in this posture, and suction keeps the field clear. After surgery the child recovers in the lateral position with airway observation, because blood swallowing hides ongoing bleeding until vomiting or tachycardia reveals it.",
+   "say": "Head extension with shoulder support gives access for combined tonsil and adenoid surgery. Blood drains away from the larynx in this posture during dissection. Lateral recovery positioning with observation detects hidden bleeding after surgery.",
+   "vis": null
+  },
+  {
+   "tx": "**Infectious mononucleosis** returns here as the great imitator of quinsy and tonsillitis in adolescents, but bilateral disease, generalised nodes, splenomegaly and atypical lymphocytes separate it. Peritonsillar swelling in glandular fever usually reflects lymphoid hypertrophy rather than drainable pus, so aspiration yields no collection. Steroids enter care only for airway threat or severe systemic features, with haematology aware of rare splenic and hepatic complications.",
+   "say": "Glandular fever imitates quinsy in adolescents but disease is bilateral with generalised nodes present. Splenomegaly with atypical lymphocytes separates viral hypertrophy from drainable pus clearly. Steroids are reserved for airway threat or severe systemic features.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/infectious-mononucleosis-fig1.webp",
+    "alt": "Clinical features diagram of infectious mononucleosis with generalised lymphadenopathy, splenomegaly and pharyngitis.",
+    "caption": "Infectious mononucleosis systemic features. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complications of untreated quinsy include parapharyngeal spread, descending mediastinitis, internal jugular thrombosis and airway loss, each converting a local abscess into a life threatening emergency. Worsening neck swelling, chest pain, spiking fever or respiratory distress after initial improvement signals such spread. **Contrast imaging** of neck and chest then replaces blind re aspiration, and drainage moves to theatre with thoracic support available.",
+   "say": "Untreated abscess spreads to deep neck spaces and descends toward the chest cavity. Worsening swelling with chest pain or spiking fever indicates deep spread. Contrast imaging replaces repeat aspiration and drainage moves to theatre.",
+   "vis": {
+    "kind": "table",
+    "title": "Quinsy danger progression",
+    "cols": [
+     "Warning sign",
+     "Likely spread"
+    ],
+    "rows": [
+     [
+      "Enlarging neck swelling",
+      "Parapharyngeal extension"
+     ],
+     [
+      "Chest pain and breathlessness",
+      "Descending mediastinitis"
+     ],
+     [
+      "Spiking fever with rigors",
+      "Jugular venous thrombosis"
+     ],
+     [
+      "Stridor or exhaustion",
+      "Impending airway loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interval tonsillectomy after quinsy is offered when attacks recur, the abscess was large, or further tonsillitis follows, while a single drained abscess without history sometimes observes. The decision balances anaesthetic risk against recurrence probability in the individual patient. **Documentation** of aspiration pus, organisms and antibiotic response guides that later decision and any allergy labelling, so the acute record is written with the interval operation already in mind.",
+   "say": "Later tonsil removal follows recurrence, large abscess size or further tonsillitis episodes. A single drained abscess without history sometimes needs observation only afterwards. Acute records guide later decisions and need complete documentation.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Quinsy classic signs",
+   "b": "Unilateral pain, drooling, trismus, hot potato voice, uvula deviated away, palatal bulge; treat with antibiotics plus aspiration or drainage."
+  },
+  {
+   "f": "Adenoid facies",
+   "b": "Elongated face, open mouth, dull expression, crowded teeth and high arched palate from chronic mouth breathing."
+  },
+  {
+   "f": "Quinsy spread warnings",
+   "b": "Enlarging neck swelling, chest pain, spiking fever or stridor means deep spread; image neck and chest and drain in theatre."
+  }
+ ],
+ "keys": [
+  "Uvula deviates away from a peritonsillar abscess",
+  "Trismus in quinsy comes from pterygoid irritation",
+  "Bilateral swelling in an adolescent suggests glandular fever, not pus"
+ ]
+}

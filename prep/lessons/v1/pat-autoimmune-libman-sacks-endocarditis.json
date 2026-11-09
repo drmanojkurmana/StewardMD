@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-autoimmune",
+  "subject": "pathology",
+  "title": "Libman-Sacks Endocarditis, Wire Loop Lesions, and Drug-Induced Lupus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Sterile verrucous vegetations of fibrin and immune complexes can grow on either surface of the mitral and aortic valves in lupus, causing regurgitation and occasionally embolising to brain or viscera. Unlike infective endocarditis there is no organism and blood cultures stay negative; this culture negative valvular lesion is **Libman-Sacks endocarditis**.",
+      "say": "Libman-Sacks endocarditis gives sterile valve vegetations in lupus, with negative blood cultures unlike infective endocarditis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Libman-Sacks endocarditis",
+          "points": [
+            "Sterile fibrin and immune complex vegetations",
+            "Either valve surface, mitral commonest",
+            "Blood cultures negative, linked to antiphospholipid antibodies"
+          ]
+        },
+        "right": {
+          "title": "Infective endocarditis",
+          "points": [
+            "Infected vegetations with organisms",
+            "Leaflet downstream surface, destructive",
+            "Positive cultures, fever, embolic sepsis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In the kidney, subendothelial immune complex deposits thicken capillary walls until silver stains outline rigid loops resembling bent wire, the classic light microscopic image of diffuse proliferative lupus nephritis. Electron microscopy confirms large subendothelial deposits, and pathologists name these rigid thickened loops **wire loop lesions**.",
+      "say": "Wire loop lesions are thickened glomerular capillary walls stuffed with subendothelial immune complexes in proliferative lupus nephritis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lupus-nephritis-fig1.webp",
+        "alt": "Lupus nephritis glomerular histology",
+        "caption": "Lupus nephritis histology with glomerular hypercellularity and capillary wall thickening from immune complex deposits."
+      }
+    },
+    {
+      "tx": "Antiphospholipid antibodies frequently accompany lupus valve disease and add arterial and venous thrombosis, recurrent fetal loss, and thrombocytopenia to the clinical picture. When these antibodies persist with clinical events the overlap is classified as **antiphospholipid syndrome**, and its valve vegetations and thrombosis explain many strokes in young lupus patients.",
+      "say": "Antiphospholipid antibodies link lupus valve vegetations to thrombosis and recurrent pregnancy loss.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antibody test",
+          "What it detects",
+          "Clinical weight"
+        ],
+        "rows": [
+          [
+            "Lupus anticoagulant",
+            "Prolonged aPTT not corrected by mixing",
+            "Strongest predictor of thrombosis"
+          ],
+          [
+            "Anticardiolipin IgG",
+            "Cardiolipin binding antibody",
+            "Supports classification when persistent"
+          ],
+          [
+            "Anti-beta2 glycoprotein I",
+            "Cofactor antibody",
+            "Confirms triple positivity risk"
+          ],
+          [
+            "Persistence rule",
+            "Positive twice, twelve weeks apart",
+            "Transient infection positives excluded"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Certain drugs, classically procainamide, hydralazine, isoniazid, and minocycline, break tolerance in slow acetylators and produce fever, arthralgia, serositis, and rash months after starting therapy. Kidney and brain are characteristically spared, symptoms resolve on withdrawal, and the syndrome is **drug-induced lupus**.",
+      "say": "Drug induced lupus favours slow acetylators on procainamide or hydralazine, and it characteristically spares kidney and brain.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/drug-induced-lupus-fig1.webp",
+        "alt": "Drug induced lupus manifestations",
+        "caption": "Clinical manifestations of drug induced lupus, dominated by fever, arthralgia, rash, and serositis."
+      }
+    },
+    {
+      "tx": "The serological fingerprint separating drug induced from idiopathic lupus is antibody against histones, present in most drug induced cases, while anti-dsDNA and hypocomplementemia are usually absent. Acetylator status explains susceptibility because slow acetylators accumulate the parent drug, and the discriminating antibody is the **anti-histone antibody**.",
+      "say": "Anti-histone antibody with absent anti-dsDNA points to drug induced rather than idiopathic lupus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drug-induced lupus",
+          "points": [
+            "Anti-histone antibody typical",
+            "Kidney and CNS usually spared",
+            "Resolves weeks after drug withdrawal"
+          ]
+        },
+        "right": {
+          "title": "Idiopathic SLE",
+          "points": [
+            "Anti-dsDNA and anti-Smith occur",
+            "Nephritis and CNS disease common",
+            "Chronic relapsing course needs therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Management of Libman-Sacks disease treats the underlying lupus activity, adds anticoagulation when thrombosis or definite antiphospholipid syndrome supervenes, and reserves valve surgery for severe symptomatic regurgitation or recurrent emboli. Antiplatelet therapy alone is insufficient after an arterial event, so established thrombotic disease commits the patient to long term **warfarin anticoagulation**.",
+      "say": "Treat lupus activity, and after thrombosis commit to long term warfarin rather than antiplatelet therapy alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Echocardiography finds sterile vegetations"
+          },
+          {
+            "id": "b",
+            "label": "Test antiphospholipid antibodies twice"
+          },
+          {
+            "id": "c",
+            "label": "Control lupus activity with immunosuppression"
+          },
+          {
+            "id": "d",
+            "label": "Warfarin after thrombosis; surgery if severe valve failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Stopping the culprit drug is both the diagnostic test and the treatment in drug induced lupus: fever and serositis fade over weeks, although ANA may remain positive for years and should not prompt unnecessary steroids. Short courses of anti-inflammatory drugs cover the settling period, and rechallenge is avoided because the syndrome recurs faster; the decisive intervention is **drug withdrawal**.",
+      "say": "Withdraw the drug and watch symptoms settle over weeks; a lingering ANA alone does not need steroids.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Relative risk",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "Procainamide",
+            "Highest classic risk",
+            "Slow acetylators, anti-histone positive"
+          ],
+          [
+            "Hydralazine",
+            "High, dose related",
+            "Also causes ANCA vasculitis"
+          ],
+          [
+            "Isoniazid",
+            "ANA common, disease rare",
+            "Most positives never develop lupus"
+          ],
+          [
+            "Minocycline",
+            "Younger patients, hepatitis overlap",
+            "Check liver enzymes and ANA"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Together these three topics reward one habit: always ask which antibody, which organ pattern, and which drug history explain a lupus like illness before escalating immunosuppression. Wire loops mean proliferative nephritis needing treatment, sterile vegetations mean embolic risk, and a new drug means withdrawal first; that organising habit is **pattern-based lupus reasoning**.",
+      "say": "You should ask which antibody, which organ pattern, and which drug history explains the illness; those three answers organise every lupus like presentation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treat actively",
+          "points": [
+            "Wire loop proliferative nephritis",
+            "Sterile vegetations with embolism",
+            "Falling complement, rising dsDNA"
+          ]
+        },
+        "right": {
+          "title": "Withdraw and watch",
+          "points": [
+            "New procainamide or hydralazine exposure",
+            "Anti-histone positive, dsDNA negative",
+            "No kidney or CNS involvement"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-heart",
+ "subject": "anatomy",
+ "title": "Cardiac Topography: Auscultation Areas, Coronary Arteries, and Venous Sinus",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Auscultation of heart sounds and murmurs does not occur directly over anatomical valve orifices, but rather downstream along the path of acoustic sound transmission through blood flow. The four classical **auscultation areas** are the aortic, pulmonary, tricuspid, and mitral valve areas.",
+   "say": "Heart sounds and murmurs are auscultated downstream from the valve orifices along acoustic flow vectors. The four classic areas are the aortic, pulmonary, tricuspid, and mitral auscultation spots.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cvs-murmur.webp",
+    "alt": "Anatomical chest wall auscultation sites: aortic, pulmonary, tricuspid, and mitral areas",
+    "caption": "Anatomical surface landmarks for bedside auscultation of heart sounds and murmurs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **aortic area** is located at the second right intercostal space immediately adjacent to the sternal border, where aortic ejection sounds transmit along the ascending aorta. The pulmonary area lies opposite at the second left intercostal space parasternally, capturing pulmonary valve closure (P2) and systolic ejection murmurs.",
+   "say": "The aortic area sits in the second right intercostal space beside the sternum. The pulmonary area lies opposite in the second left intercostal space, capturing pulmonary valve closure sounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Auscultation Site",
+     "Chest Wall Location",
+     "Acoustic Transmission Vector",
+     "Key Murmurs Evaluated"
+    ],
+    "rows": [
+     [
+      "Aortic Area",
+      "2nd right intercostal space parasternally",
+      "Upward transmission along ascending aorta",
+      "Aortic stenosis systolic ejection murmur"
+     ],
+     [
+      "Pulmonary Area",
+      "2nd left intercostal space parasternally",
+      "Upward transmission along pulmonary trunk",
+      "Pulmonary stenosis and P2 split evaluation"
+     ],
+     [
+      "Erb Point (3rd L)",
+      "3rd left intercostal space parasternally",
+      "Downstream regurgitant jet into LV",
+      "Aortic regurgitation early diastolic murmur"
+     ],
+     [
+      "Tricuspid Area",
+      "4th/5th left intercostal space parasternally",
+      "Directly overlying right ventricular inflow",
+      "Tricuspid regurgitation pansystolic murmur"
+     ],
+     [
+      "Mitral (Apex) Area",
+      "5th left intercostal space, midclavicular line",
+      "Cardiac apex / left ventricular cavity",
+      "Mitral stenosis rumble and MR pansystolic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arterial perfusion of the myocardium is delivered by the right and **left coronary arteries**, arising from the anterior and left posterior aortic sinuses of Valsalva immediately above the aortic valve cusps. Myocardial perfusion occurs almost exclusively during diastole, when ventricular muscular contraction ceases and aortic backpressure fills the coronary ostia.",
+   "say": "Coronary arteries arise from aortic sinuses of Valsalva above the aortic valve. Myocardial blood flow occurs during diastole, when ventricular relaxation allows aortic backpressure to perfuse the coronary beds.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acs-fig1.webp",
+    "alt": "Anatomical schematic of coronary arteries, branching pattern, and acute coronary syndrome thrombosis",
+    "caption": "Coronary arterial circulation and sites of atherosclerotic luminal occlusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The left coronary artery divides rapidly into the circumflex branch and the **left anterior descending artery** (LAD). The LAD courses in the anterior interventricular groove, supplying the anterior two-thirds of the interventricular septum, anterior left ventricular wall, and cardiac apex. Due to its frequent occlusive thrombosis, it is clinically termed the widow-maker.",
+   "say": "The left coronary artery divides into the circumflex and left anterior descending arteries. The LAD supplies the anterior septum and apex, earning the name widow-maker due to fatal infarctions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Anterior Descending (LAD)",
+     "points": [
+      "Courses in anterior interventricular groove",
+      "Supplies anterior 2/3 of interventricular septum",
+      "Supplies anterior wall of left ventricle and apex",
+      "Occlusion causes extensive anterior STEMI (V1-V4)"
+     ]
+    },
+    "right": {
+     "title": "Left Circumflex Artery (LCx)",
+     "points": [
+      "Courses in left atrioventricular groove",
+      "Gives obtuse marginal branches",
+      "Supplies lateral and posterior left ventricular wall",
+      "Occlusion causes lateral STEMI (I, aVL, V5, V6)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The right coronary artery (RCA) runs in the right atrioventricular groove, giving off the conus artery, the sinuatrial nodal artery (in 60% of individuals), the right marginal branch, and the atrioventricular nodal artery. In eighty-five percent of the population, it terminates by giving off the **posterior descending artery**.",
+   "say": "The right coronary artery courses in the atrioventricular groove, supplying the SA node in sixty percent and the AV node. In eighty-five percent of individuals, it yields the posterior descending artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branch of RCA",
+     "Origin / Trajectory",
+     "Supplied Myocardial Territory",
+     "Clinical Consequence of Blockage"
+    ],
+    "rows": [
+     [
+      "Sinuatrial Nodal Branch",
+      "Early branch in AV groove (60%)",
+      "SA node in terminal crest",
+      "Sinus bradycardia and sick sinus syndrome"
+     ],
+     [
+      "Right Marginal Branch",
+      "Runs along inferior acute heart margin",
+      "Anterior and diaphragmatic right ventricle",
+      "Right ventricular infarction"
+     ],
+     [
+      "AV Nodal Branch",
+      "At crux of heart opposite crux (80%)",
+      "Atrioventricular node in Koch triangle",
+      "Complete heart block in inferior STEMI"
+     ],
+     [
+      "Posterior Descending",
+      "Posterior interventricular groove",
+      "Posterior 1/3 of septum, inferior wall",
+      "Inferior STEMI (leads II, III, aVF)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coronary arterial dominance is determined by the arterial origin of the posterior descending artery (PDA). In a **right-dominant circulation** (85% of people), the PDA arises from the right coronary artery; in a left-dominant circulation (10%), it arises from the circumflex branch; in co-dominance (5%), both arteries contribute.",
+   "say": "Coronary dominance depends on which artery gives off the posterior descending artery. In right dominance, seen in eighty-five percent of people, it stems from the RCA; in left dominance, from the circumflex.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Dominance (85%)",
+     "points": [
+      "PDA arises from distal right coronary artery",
+      "RCA supplies inferior wall and posterior septum",
+      "AV node supplied by right coronary artery",
+      "Inferior infarction provokes AV block"
+     ]
+    },
+    "right": {
+     "title": "Left Dominance (10%)",
+     "points": [
+      "PDA arises from left circumflex artery",
+      "LCx supplies entire posterior ventricular wall",
+      "AV node supplied by left circumflex",
+      "Extensive territory vulnerable to left main disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Venous drainage of the heart empties predominantly into the **coronary sinus**, a wide venous channel situated in the posterior atrioventricular groove. Measuring two to three centimetres in length, it receives the great cardiac vein (accompanying LAD), middle cardiac vein (accompanying PDA), and small cardiac vein (accompanying right marginal).",
+   "say": "Venous blood collects in the coronary sinus inside the posterior atrioventricular groove. It receives the great, middle, and small cardiac veins, emptying directly into the right atrium.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tributaries of the Coronary Sinus",
+    "nodes": [
+     {
+      "id": "great",
+      "label": "Great Cardiac Vein (Accompanies LAD in Anterior Groove)"
+     },
+     {
+      "id": "middle",
+      "label": "Middle Cardiac Vein (Accompanies PDA in Posterior Groove)"
+     },
+     {
+      "id": "small",
+      "label": "Small Cardiac Vein (Accompanies Marginal Branch of RCA)"
+     },
+     {
+      "id": "sinus",
+      "label": "Coronary Sinus (Drains Directly into Right Atrium)"
+     }
+    ],
+    "edges": [
+     [
+      "great",
+      "sinus"
+     ],
+     [
+      "middle",
+      "sinus"
+     ],
+     [
+      "small",
+      "sinus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anterior cardiac veins drain the anterior right ventricular wall, bypassing the coronary sinus to empty directly across the anterior atrial wall into the right atrium. Microscopic **Thebesian veins** (venae cordis minimae) open directly into all four cardiac chambers, creating tiny physiological shunts directly into ventricular lumina.",
+   "say": "Anterior cardiac veins empty directly into the right atrium. Tiny Thebesian veins open into all four chambers, providing microvascular drainage straight into the heart cavities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous System",
+     "Origin Territory",
+     "Terminal Destination",
+     "Physiological Trajectory"
+    ],
+    "rows": [
+     [
+      "Coronary Sinus",
+      "Left ventricle, septum, apex",
+      "Right atrium via Thebesian valve",
+      "Transports 60% of total myocardial drainage"
+     ],
+     [
+      "Anterior Cardiac Veins",
+      "Anterior surface of right ventricle",
+      "Right atrium via small apertures",
+      "Bypasses the coronary sinus completely"
+     ],
+     [
+      "Venae Cordis Minimae",
+      "Subendocardial capillary bed",
+      "All 4 cardiac chambers directly",
+      "Minute physiological right-to-left shunt in left heart"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "fa0746c5-8e85-448f-bc10-9c9a19880f61",
+  "eb8d94ba-a58a-48d9-aec6-506e97c0b5f3",
+  "97c3a038-d1b1-48d1-abea-8dbc2aaacd9c"
+ ]
+}

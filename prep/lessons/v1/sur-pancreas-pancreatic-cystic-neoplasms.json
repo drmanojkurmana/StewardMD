@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Cystic Pancreatic Neoplasms and Annular Pancreas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "With the widespread utilization of cross-sectional abdominal imaging, primary **pancreatic cystic neoplasms** are increasingly identified as incidental findings in asymptomatic individuals. These true neoplasms are lined by an epithelial layer and are broadly divided into serous cystadenomas, mucinous cystic neoplasms, intraductal papillary mucinous neoplasms, and solid pseudopapillary neoplasms. Accurate preoperative differentiation is crucial to distinguish benign entities from lesions possessing high malignant potential.",
+   "say": "Pancreatic cystic neoplasms are true epithelial-lined cysts that require differentiation between benign lesions and premalignant mucinous tumours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mucinous-cystic-neoplasm-pancreas-fig1.webp",
+    "alt": "Pathological diagram showing distinctive multilocular appearance of mucinous cystic neoplasm with ovarian-type stroma.",
+    "caption": "Mucinous cystic neoplasm: thick-walled multilocular lesion with characteristic ovarian-type stroma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Accounting for thirty percent of cystic tumours, **serous cystadenoma** is a completely benign neoplasm that exhibits an overwhelming female preponderance. Microscopic examination demonstrates numerous tiny, microcystic spaces lined by glycogen-rich, cuboidal epithelium that stains strongly with periodic acid-Schiff. Cross-sectional imaging reveals a classic honeycomb or sponge-like cluster of microcysts with a pathognomonic central calcified stellate scar.",
+   "say": "Serous cystadenoma is a benign multilocular lesion of glycogen-rich cuboidal cells, showing a characteristic central stellate calcified scar.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serous Cystadenoma",
+     "points": [
+      "Virtually zero malignant potential",
+      "Microcystic, honeycomb architecture",
+      "Glycogen-rich cuboidal epithelium (PAS +)",
+      "Central calcified stellate scar"
+     ]
+    },
+    "right": {
+     "title": "Mucinous Cystic Neoplasm",
+     "points": [
+      "Significant premalignant potential (up to 30%)",
+      "Macrocystic, unilocular or multilocular",
+      "Mucin-producing tall columnar epithelium",
+      "Pathognomonic ovarian-like stroma (PR/ER +)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In sharp contrast, a **mucinous cystic neoplasm** carries substantial premalignant potential, with invasive carcinoma present in ten to thirty percent of resected specimens. These thick-walled macrocystic tumours occur almost exclusively in middle-aged women and predominate in the pancreatic body and tail. The pathognomonic histopathological hallmark is the presence of subepithelial ovarian-type stroma expressing progesterone and estrogen receptors beneath mucin-secreting columnar cells.",
+   "say": "Mucinous cystic neoplasms occur in female patients in the pancreatic body or tail, featuring diagnostic ovarian-type stroma and malignant potential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Serous Cystadenoma",
+     "Mucinous Cystic Neoplasm",
+     "Side-Branch IPMN"
+    ],
+    "rows": [
+     [
+      "Gender Predilection",
+      "Female (75%)",
+      "Exclusively Female (95%)",
+      "Equal male-to-female ratio"
+     ],
+     [
+      "Pancreatic Location",
+      "Anywhere (head, body, tail)",
+      "Body and Tail (90%)",
+      "Head and Uncinate process (70%)"
+     ],
+     [
+      "Ductal Communication",
+      "None",
+      "None",
+      "Direct communication with main duct"
+     ],
+     [
+      "Fluid CEA Level",
+      "Very low (< 5 ng/mL)",
+      "Markedly elevated (> 192 ng/mL)",
+      "Elevated (> 192 ng/mL)"
+     ],
+     [
+      "Malignant Risk",
+      "Negligible",
+      "High (mandatory resection)",
+      "Variable (Fukuoka guidelines)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Another common mucin-producing neoplasm is intraductal papillary mucinous neoplasm, which communicates directly with the pancreatic ductal system. Divided into main-duct, branch-duct, and mixed varieties, main-duct lesions carry an alarming malignant risk exceeding sixty percent, warranting prompt surgical resection. Conversely, asymptomatic branch-duct IPMNs lacking high-risk stigmata such as jaundice, enhancing mural nodules, or duct dilatation above ten millimetres can be monitored with serial **magnetic resonance imaging**.",
+   "say": "Intraductal papillary mucinous neoplasms communicate with pancreatic ducts, with main-duct lesions carrying high cancer risks warranting resection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "type",
+      "label": "IPMN Subtyping: Main-Duct vs Branch-Duct Variety"
+     },
+     {
+      "id": "stigmata",
+      "label": "Check High-Risk Stigmata: Jaundice, Nodule, Duct > 10 mm"
+     },
+     {
+      "id": "resect",
+      "label": "High-Risk Present: Formal Oncological Resection"
+     },
+     {
+      "id": "surv",
+      "label": "Worrisome Only: EUS Surveillance & Serial MRI"
+     }
+    ],
+    "edges": [
+     [
+      "type",
+      "stigmata"
+     ],
+     [
+      "stigmata",
+      "resect"
+     ],
+     [
+      "stigmata",
+      "surv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unique embryological developmental malformation that encircles and compresses the second part of the duodenum is **annular pancreas**. This anomaly results from failure of the ventral pancreatic bud to complete its normal clockwise rotation behind the duodenum during the seventh week of gestation. Instead, the bifid ventral bud remains fixed anteriorly, stretching a ring of normal pancreatic tissue circumferentially around the descending duodenum.",
+   "say": "Annular pancreas develops from abnormal migration of the ventral pancreatic bud, forming a ring of pancreatic tissue encircling the duodenum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/annular-pancreas-fig1.webp",
+    "alt": "Infant abdominal radiograph demonstrating double bubble sign of duodenal obstruction in neonatal annular pancreas.",
+    "caption": "Annular pancreas: neonatal duodenal obstruction with classic double bubble appearance on abdominal radiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In neonates, annular pancreas presents with non-bilious or bilious vomiting shortly after birth depending on whether the duodenal ring encircles above or below the ampulla of Vater. Plain abdominal radiographs characteristically demonstrate the pathognomonic **double bubble sign**, representing gas distending the stomach and the dilated first part of the duodenum, with complete absence of gas throughout the distal gastrointestinal tract.",
+   "say": "Neonatal annular pancreas presents with vomiting and shows a double bubble sign on plain abdominal X-ray.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "defect",
+      "label": "Failure of Ventral Pancreatic Bud Migration"
+     },
+     {
+      "id": "ring",
+      "label": "Fibro-Glandular Ring Encircles Second Part of Duodenum"
+     },
+     {
+      "id": "obstruct",
+      "label": "Neonatal High Mechanical Duodenal Obstruction"
+     },
+     {
+      "id": "xray",
+      "label": "Erect Radiograph: Pathognomonic Double Bubble Sign"
+     }
+    ],
+    "edges": [
+     [
+      "defect",
+      "ring"
+     ],
+     [
+      "ring",
+      "obstruct"
+     ],
+     [
+      "obstruct",
+      "xray"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "While acute duodenal obstruction manifests in neonates, nearly fifty percent of annular pancreas cases remain asymptomatic until adulthood. Adult patients typically present in their thirties to fifties with postprandial fullness, recurrent peptic ulcer disease, acute pancreatitis, or chronic gastric outlet obstruction. Upper gastrointestinal contrast studies and magnetic resonance cholangiopancreatography establish the diagnosis by showing extrinsic concentric **duodenal narrowing** encircled by pancreatic ductal branches.",
+   "say": "Adult annular pancreas manifests as postprandial fullness, peptic ulceration, or recurrent pancreatitis secondary to chronic duodenal narrowing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neonatal Presentation",
+     "points": [
+      "Presents in first days of life",
+      "Persistent vomiting (bilious or non-bilious)",
+      "Associated with Down syndrome (Trisomy 21)",
+      "Radiological double bubble sign"
+     ]
+    },
+    "right": {
+     "title": "Adult Presentation",
+     "points": [
+      "Presents in fourth to fifth decades",
+      "Epigastric pain and gastric outlet obstruction",
+      "Recurrent acute pancreatitis in the annulus",
+      "Peptic ulceration proximal to constriction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical management of annular pancreas strictly forbids direct division or resection of the encircling pancreatic ring because it shares its blood supply with the duodenal wall and contains major tributary ducts. Division invariably provokes catastrophic pancreatic fistulas, acute pancreatitis, or duodenal necrosis. Instead, surgical relief is accomplished through bypass of the obstructed segment using a **duodenoduodenostomy** or side-to-side duodenojejunostomy.",
+   "say": "Direct division of the annular ring is avoided due to fistula hazards, requiring duodenoduodenostomy bypass to relieve obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Bypass",
+     "Anatomical Configuration",
+     "Target Patient",
+     "Key Advantage"
+    ],
+    "rows": [
+     [
+      "Diamond Duodenoduodenostomy",
+      "Transverse-to-longitudinal duodenal anastomosis",
+      "Neonates and infants",
+      "Anatomical, preserves physiological transit"
+     ],
+     [
+      "Duodenojejunostomy",
+      "Side-to-side anastomosis to proximal jejunum",
+      "Adults with scarred, immobile duodenum",
+      "Bypasses rigid diseased duodenal segment"
+     ],
+     [
+      "Gastrojejunostomy",
+      "Stomach to jejunum with vagotomy",
+      "Adults with concomitant severe ulceration",
+      "Simple to construct, requires acid reduction"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "obg-endometriosis-adenomyosis",
+ "subject": "obstetrics-gynaecology",
+ "title": "Endometriosis and Adenomyosis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Endometrial glands and stroma outside the uterus causing pain and infertility form **endometriosis**. Retrograde menstruation is the leading theory, with immune and genetic contributions. Lesions stud the ovaries, peritoneum and deep pelvis. Lesions favour the ovaries, pouch of Douglas and uterosacral ligaments where refluxed menstrual blood pools longest in the dependent pelvis.",
+   "say": "Endometriosis implants endometrial tissue outside the uterus causing pain and infertility.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dysmenorrhea-fig1.webp",
+    "alt": "Dysmenorrhoea types including endometriosis.",
+    "caption": "Endometriosis pain. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endometrium invading the myometrium with muscle hypertrophy is **adenomyosis**. Heavy painful periods with a globular tender uterus are its signature. It coexists with endometriosis and fibroids frequently. An enlarged globular uterus with a thickened junctional zone on imaging separates adenomyosis from a fibroid uterus that keeps its normal shape.",
+   "say": "Adenomyosis invades myometrium causing heavy painful periods with globular uterus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adenomyosis-fig1.webp",
+    "alt": "Uterine adenomyosis on MRI.",
+    "caption": "Adenomyosis MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Blood filled ovarian cysts with thick brown contents are endometriomas, called **chocolate cysts**. They distort ovarian anatomy and reserve. Surgery balances cyst removal against reserve damage carefully. Endometriomas rarely resolve with hormones alone because the cyst wall keeps bleeding into itself with every cycle, refilling the chocolate fluid.",
+   "say": "Chocolate cysts are ovarian endometriomas distorting anatomy and reserve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Lesion"
+    ],
+    "rows": [
+     [
+      "Ovary",
+      "Endometrioma"
+     ],
+     [
+      "Peritoneum",
+      "Powder burn deposits"
+     ],
+     [
+      "Deep",
+      "Rectovaginal nodules"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pain starting before periods, deep dyspareunia and painful defecation form the **endometriosis pain triad**. Severity of pain correlates poorly with lesion burden. Central sensitisation explains persistent pain after lesion treatment. Pain that begins before bleeding and peaks with it points to implants, while pain only during flow fits primary dysmenorrhoea better.",
+   "say": "The pain triad involves pain before periods with dyspareunia and painful defecation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pain before periods"
+     },
+     {
+      "id": "n1",
+      "label": "Deep dyspareunia"
+     },
+     {
+      "id": "n2",
+      "label": "Painful defecation"
+     },
+     {
+      "id": "n3",
+      "label": "Triad suggests endometriosis"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep infiltrating disease over five millimetres invades bowel, bladder and ureters as **deep endometriosis**. MRI maps it for multidisciplinary surgery. Hormonal suppression controls many without surgery. Ureteric involvement threatens silent kidney loss, so renal imaging joins pelvic mapping whenever deep disease touches the parametrium.",
+   "say": "Deep endometriosis invades bowel and bladder, mapped by MRI for surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-diagnostic_laparoscopy_gynae.webp",
+    "alt": "Laparoscopy for endometriosis.",
+    "caption": "Laparoscopy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hormonal suppression with pills, progestogens or GnRH analogues is first line for pain, termed **medical suppression**. NSAIDs accompany it. Surgery follows medical failure, fertility need or suspicious masses. Suppression relieves pain only while it continues, and symptoms commonly return after stopping, which shapes honest counselling about long term plans.",
+   "say": "Medical suppression is first line for endometriosis pain with NSAIDs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical first",
+     "points": [
+      "Pain controlled",
+      "Fertility delayed"
+     ]
+    },
+    "right": {
+     "title": "Surgery",
+     "points": [
+      "Medical failure",
+      "Fertility sought",
+      "Suspicious mass"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infertility in endometriosis arises from adhesions, ovarian damage and hostile pelvic environment as **multifactorial infertility**. Mild disease still reduces fecundity measurably. IVF bypasses most mechanisms effectively. Even minimal disease lowers monthly conception rates through inflammatory peritoneal fluid that impairs sperm, egg and embryo alike.",
+   "say": "Endometriosis infertility is multifactorial and IVF bypasses most mechanisms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Adhesions",
+      "Tube distortion"
+     ],
+     [
+      "Endometrioma",
+      "Reserve loss"
+     ],
+     [
+      "Inflammation",
+      "Hostile environment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adenomyosis treatment mirrors fibroid strategies from LNG IUS to hysterectomy, graded as **adenomyosis ladder**. Focal adenomyomas can be excised rarely. Embolisation helps selected diffuse disease. Diffuse adenomyosis of the whole uterus answers hysterectomy best, while focal disease in a young woman may justify conservative excision.",
+   "say": "Treatment for adenomyosis ranges from the LNG IUS to hysterectomy by severity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-fig1.webp",
+    "alt": "Adenomyosis within AUB ladder.",
+    "caption": "Adenomyosis ladder. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnosis is increasingly clinical and imaging based without mandatory surgery, following **clinical diagnosis shift**. Empiric treatment starts on symptoms and examination. This shortens the historic seven year diagnostic delay. Imaging visible endometriomas and deep nodules now support diagnosis, reserving surgery for treatment, doubt or fertility rather than proof alone.",
+   "say": "Clinical diagnosis shift starts empiric treatment without mandatory surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Symptoms suggest"
+     },
+     {
+      "id": "n1",
+      "label": "Imaging supports"
+     },
+     {
+      "id": "n2",
+      "label": "Treatment started"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery if fails"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

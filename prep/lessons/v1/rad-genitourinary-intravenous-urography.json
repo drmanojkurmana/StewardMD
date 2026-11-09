@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-genitourinary-intravenous-urography",
+ "subject": "radiology",
+ "module": "rad-genitourinary",
+ "title": "Intravenous Urography, CT Urography and Urethrograms",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "IVU follows contrast excretion",
+   "tx": "**Intravenous urography** films the kidneys as injected contrast is filtered and concentrated, showing a nephrogram of the parenchyma then a pyelogram of calyces, pelvis, ureters and bladder. The pictured urogram shows hydronephrosis, where dilated calyces club and the pelvis balloons above a downstream block. CT urography has replaced most IVU work, but the excretion logic still explains every delayed film the examiner shows.",
+   "say": "Intravenous urography films the kidneys as injected contrast is concentrated, showing a nephrogram then a pyelogram of calyces, pelvis and ureters. The pictured urogram shows hydronephrosis, where calyces club above a downstream block. CT urography replaced most IVU work, but the excretion logic still explains delayed films.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-intravenous-urogram-hydronephrosis.webp", "alt": "Intravenous urogram showing hydronephrosis with dilated clubbed calyces and renal pelvis.", "caption": "Hydronephrosis on intravenous urogram with clubbed calyces. Credit: StewardMD library."}
+  },
+  {
+   "title": "Hydronephrosis grading on imaging",
+   "tx": "**Hydronephrosis** dilatation starts in the renal pelvis, then blunts the calyceal fornices, clubs the calyces and finally thins the cortex in chronic obstruction. Ultrasound grades follow the same march from pelvic fullness to cortical loss. Dilatation alone does not prove obstruction, because pregnancy, diuresis and a refluxing system also fill the pelvis, so a renogram or delayed excretion phase separates plumbing from blockage.",
+   "say": "Hydronephrosis dilatation starts in the renal pelvis, then blunts calyceal fornices, clubs the calyces and finally thins the cortex. Ultrasound grades follow the same march. Dilatation alone does not prove obstruction, because pregnancy and diuresis also fill the pelvis, so delayed excretion separates plumbing from blockage.",
+   "vis": {"kind": "table", "cols": ["Stage", "Calyces", "Cortex"], "rows": [["Pelvic fullness", "Sharp fornices", "Normal"], ["Moderate dilatation", "Clubbed calyces", "Normal"], ["Severe dilatation", "Ballooned, fused", "Thinning begins"], ["End stage obstruction", "Thin rim sac", "Cortical loss"]]}
+  },
+  {
+   "title": "Spider leg and drooping lily",
+   "tx": "**Spider leg calyces** splay around multiple renal cysts in autosomal dominant polycystic kidney disease, the calyces stretching long and thin between cysts on urography. Drooping lily instead describes a duplex kidney whose obstructed, non functioning upper moiety pushes the functioning lower moiety down and out like a drooping flower. Both signs name duplex and cystic anatomy from one excretion film, a favourite examiner pairing.",
+   "say": "Spider leg calyces splay around multiple cysts in polycystic kidney disease, stretching long and thin between cysts. Drooping lily describes a duplex kidney whose obstructed upper moiety pushes the functioning lower moiety down like a drooping flower. Both signs name cystic and duplex anatomy from one excretion film.",
+   "vis": {"kind": "compare", "left": {"title": "Spider leg pattern", "points": ["Stretched thin calyces", "Multiple bilateral cysts", "Enlarged kidneys", "Polycystic disease"]}, "right": {"title": "Drooping lily pattern", "points": ["Lower moiety pushed down", "Upper moiety not seen", "Duplex collecting system", "Weigert Meyer anatomy"]}}
+  },
+  {
+   "title": "Cobra head and bladder signs",
+   "tx": "**Cobra head sign** is a ureterocele bulging into the bladder, contrast filling its head with a thin radiolucent halo for the sac wall. In adults it usually sits on a single system orthotopic ureter, while in children it joins the ectopic upper moiety of a duplex kidney. A bladder filling defect in the same film needs the opposite workup: clot moves, tumour stays fixed to the wall and enhances.",
+   "say": "Cobra head sign is a ureterocele bulging into the bladder, contrast filling its head with a thin lucent halo for the sac wall. In children it joins the ectopic upper moiety of a duplex kidney. A bladder filling defect needs the opposite workup: clot moves, tumour stays fixed and enhances.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Ureter ends in bladder sac"}, {"id": "b", "label": "Contrast fills the head"}, {"id": "c", "label": "Lucent halo outlines wall"}, {"id": "d", "label": "Cobra head named"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "MCU and RGU divide the urethra",
+   "tx": "**Micturating cystourethrogram** fills the bladder and films voiding, the study for posterior urethral valves, vesicoureteric reflux grading and bladder neck behaviour in children. Retrograde urethrogram instead injects from the meatus to map the anterior urethra, strictures and false passages in adult men after trauma or infection. The two studies meet at the posterior urethra, so reports state which side of it each contrast column proved.",
+   "say": "Micturating cystourethrogram fills the bladder and films voiding, the study for posterior urethral valves and reflux grading in children. Retrograde urethrogram injects from the meatus to map the anterior urethra and strictures in adult men. The two studies meet at the posterior urethra.",
+   "vis": {"kind": "table", "cols": ["Study", "Direction", "Best for"], "rows": [["Micturating cystourethrogram", "Bladder outward on voiding", "Valves, reflux, bladder neck"], ["Retrograde urethrogram", "Meatus inward", "Anterior strictures, trauma"], ["CT urography", "Kidney excretion phases", "Tumours, stones, anatomy"], ["MR urography", "Fluid signal, no radiation", "Children, pregnancy, obstruction"]]}
+  },
+  {
+   "title": "Staghorn and sponge kidney stones",
+   "tx": "**Staghorn calculus** casts the renal pelvis and branches into calyces like antlers, built from struvite laid down during infection with urease splitting bacteria such as Proteus. Medullary sponge kidney instead clusters tiny calcifications in dilated medullary tubules, painting a bunch of grapes or paintbrush blush on excretion films. Both calcify visibly on plain film, while uric acid stones stay radiolucent there and need CT or ultrasound to appear.",
+   "say": "Staghorn calculus casts the renal pelvis and calyces like antlers, built from struvite during infection with urease splitting bacteria such as Proteus. Medullary sponge kidney clusters tiny calcifications painting a bunch of grapes on excretion films. Uric acid stones stay radiolucent on plain film and need CT.",
+   "vis": {"kind": "compare", "left": {"title": "Staghorn calculus", "points": ["Casts pelvis and calyces", "Struvite infection stone", "Proteus and urease", "Often needs percutaneous removal"]}, "right": {"title": "Medullary sponge kidney", "points": ["Tiny medullary calcifications", "Bunch of grapes blush", "Recurrent small stones", "Often incidental"]}}
+  },
+  {
+   "title": "Papillary necrosis ring sign",
+   "tx": "**Papillary necrosis** sloughs the renal papilla tip, leaving contrast to fill the cavity as a ring or lobster claw around the detached fragment. The cause list is taught as POSTCARDS: pyelonephritis, obstruction, sickle cell disease, tuberculosis, cirrhosis, analgesic abuse, renal vein thrombosis and diabetes, with systemic vasculitis completing some versions. Diabetes with infection is the commonest ward pairing, and the sloughed papilla can itself obstruct the ureter.",
+   "say": "Papillary necrosis sloughs the papilla tip, leaving contrast to fill the cavity as a ring around the detached fragment. Causes include pyelonephritis, obstruction, sickle cell disease, tuberculosis, analgesic abuse and diabetes. The sloughed papilla can itself obstruct the ureter, and diabetes with infection is the commonest pairing.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Papilla tip necroses"}, {"id": "b", "label": "Tip sloughs off"}, {"id": "c", "label": "Contrast rings the cavity"}, {"id": "d", "label": "Fragment may obstruct"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "HSG and testicular Doppler",
+   "tx": "**Hysterosalpingography** injects contrast through the cervix to outline the uterine cavity and prove tubal spill into the peritoneum during infertility workup, best timed after menstruation and before ovulation. Testicular Doppler answers the opposite emergency: absent intratesticular flow supports torsion needing theatre within hours, while increased flow with epididymal swelling supports epididymitis treated medically. Both studies change management the same day, which is why they survive every newer modality.",
+   "say": "Hysterosalpingography injects contrast through the cervix to outline the uterine cavity and prove tubal spill during infertility workup. Testicular Doppler answers the emergency: absent flow supports torsion needing theatre within hours, while increased flow supports epididymitis treated medically. Both change management the same day.",
+   "vis": {"kind": "table", "cols": ["Study", "Positive finding", "Action"], "rows": [["Hysterosalpingography", "No peritoneal spill", "Tubal factor pathway"], ["Testicular Doppler", "Absent testicular flow", "Emergency exploration"], ["Testicular Doppler", "Increased epididymal flow", "Epididymitis treatment"], ["Bladder ultrasound", "Post void residue high", "Outlet obstruction workup"]]}
+  }
+ ]
+}

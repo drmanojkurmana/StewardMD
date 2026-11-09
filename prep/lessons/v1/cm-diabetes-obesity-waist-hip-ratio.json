@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "id": "cm-diabetes-obesity-waist-hip-ratio",
+ "subject": "community-medicine",
+ "module": "cm-diabetes-obesity",
+ "title": "Anthropometric Indices: Waist-Hip Ratio, Broca Index and Body Fat",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Central adiposity and hypothalamic regulation",
+   "tx": "The regulation of systemic energy balance involves complex **hypothalamic appetite circuitry**, where leptin from adipose stores and ghrelin from the gastric fundus modulate arcuate nucleus pro-opiomelanocortin and neuropeptide Y neurons. In central obesity, chronic hyperinsulinaemia and leptin resistance disrupt satiety signalling, driving preferential accumulation of metabolically active visceral adipose tissue around mesenteric vessels and abdominal organs.",
+   "say": "Appetite hormones like leptin and ghrelin balance calorie intake in the brain. In obesity, leptin resistance disrupts fullness signals, driving visceral fat accumulation in the abdomen.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/obesity-fig1.webp",
+    "alt": "Diagram showing hypothalamic appetite regulation, leptin signaling, and neuroendocrine pathways in obesity",
+    "caption": "Obesity: Hypothalamic arcuate nucleus regulation of hunger and satiety via POMC and NPY/AgRP neurons. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Waist-hip ratio as a cardiovascular predictor",
+   "tx": "While generalised body weight correlates with joint strain, the **waist-hip ratio measurement** provides a vastly superior marker for cardiovascular disease mortality and metabolic syndrome. Calculated as waist circumference divided by maximum hip circumference, the World Health Organization defines significant central obesity at a ratio greater than zero point nine zero in men and greater than zero point eight five in women.",
+   "say": "Waist-hip ratio is calculated by dividing waist circumference by hip circumference. A ratio exceeding zero point nine in men or zero point eight five in women signals high heart disease risk.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Gender category", "Normal waist-hip ratio", "Central obesity threshold"],
+    "rows": [
+     ["Adult males", "0.90 or less", "Greater than 0.90 (high metabolic danger)"],
+     ["Adult females", "0.85 or less", "Greater than 0.85 (high metabolic danger)"],
+     ["Clinical significance", "Peripheral gynoid fat distribution", "Visceral android apple-shaped fat distribution"]
+    ]
+   }
+  },
+  {
+   "title": "Standardized waist circumference measurement",
+   "tx": "Because ratio calculations can mask concurrent visceral and peripheral weight gain, standalone **waist circumference measurement** offers a simpler and more reliable field screening tool for visceral fat. Measured at the midpoint between the lower palpable margin of the lowest rib and the top of the iliac crest in the mid-axillary line at end-expiration, action thresholds for Asian Indians are set at ninety centimetres for men and eighty centimetres for women.",
+   "say": "Measure waist size midway between the lowest rib and hip bone at gentle expiration. A waist over ninety centimetres in Indian men or eighty centimetres in women signals dangerous visceral fat.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Anthropometric threshold", "Asian Indian cut-off", "Action required"],
+    "rows": [
+     ["Male waist circumference", ">= 90 cm (35.4 inches)", "Intensify physical activity and diet restriction"],
+     ["Female waist circumference", ">= 80 cm (31.5 inches)", "Screen for diabetes, dyslipidaemia and hypertension"],
+     ["Measurement standard", "Midpoint between rib cage and iliac crest", "Ensure tape is parallel to floor at end-expiration"]
+    ]
+   }
+  },
+  {
+   "title": "Quetelet index: body mass index formula",
+   "tx": "The most widely utilized epidemiological index of general adiposity is the **Quetelet index calculation**, universally known as the body mass index. Formulated by Adolphe Quetelet, it is computed as an individual's weight in kilograms divided by the square of their height in metres; while it provides a convenient population-level metric, it cannot distinguish lean muscle mass from adipose tissue in athletes.",
+   "say": "The Quetelet index, or body mass index, divides body weight in kilograms by height in metres squared. It estimates overall body size but cannot distinguish dense muscle from fat.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Parameter", "Formula specification", "Units of measurement"],
+    "rows": [
+     ["Quetelet Index (BMI)", "Weight / (Height x Height)", "Kilograms per square metre (kg/m2)"],
+     ["Normal Indian range", "18.5 to 22.9 kg/m2", "Lowered for high percentage body fat"],
+     ["Underweight category", "Less than 18.5 kg/m2", "Indicates chronic energy deficiency"],
+     ["Obesity category", "25.0 kg/m2 or higher", "Triggers structured weight management"]
+    ]
+   }
+  },
+  {
+   "title": "Broca index for ideal body weight",
+   "tx": "A historic clinical shortcut frequently utilized for rapid bedside estimation of ideal weight is the **Broca index estimation**. For adult men, ideal body weight in kilograms is estimated as standing height in centimetres minus one hundred; for adult women, the formula subtracts one hundred and five (or height minus one hundred times zero point nine), providing a quick target for patient weight-loss goals.",
+   "say": "The Broca index estimates ideal weight by subtracting one hundred from standing height in centimetres for men, or one hundred and five for women. It gives a simple bedside weight goal.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Demographic group", "Broca formula", "Example (Height 170 cm)"],
+    "rows": [
+     ["Adult males", "Height (cm) - 100", "170 - 100 = 70 kg ideal body weight"],
+     ["Adult females", "Height (cm) - 105", "170 - 105 = 65 kg ideal body weight"],
+     ["Clinical utility", "Fast bedside estimation", "Used to calculate daily basal calorie targets"]
+    ]
+   }
+  },
+  {
+   "title": "Corpulence index and Ponderal index",
+   "tx": "To better account for three-dimensional body volume in taller and shorter subjects, anthropometrists utilize the **Corpulence index formula**, also known as the Rohrer index or Ponderal index. Calculated as body weight in kilograms divided by height in metres cubed (or height divided by the cube root of weight), it provides superior assessment of body proportionality in paediatric growth monitoring, foetal intrauterine growth restriction, and neonatal body symmetry.",
+   "say": "The Corpulence index divides weight by height cubed. By considering volume instead of area, it accurately assesses body proportionality in newborn infants and growing children.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quetelet Index (BMI)",
+     "points": ["Weight / Height squared (kg/m2)", "Two-dimensional surface area model", "Overestimates fatness in very tall adults"]
+    },
+    "right": {
+     "title": "Corpulence Index (Rohrer)",
+     "points": ["Weight / Height cubed (kg/m3)", "Three-dimensional volume model", "Ideal for neonatal and paediatric body build"]
+    }
+   }
+  },
+  {
+   "title": "Skinfold thickness and subcutaneous fat measurement",
+   "tx": "Direct clinical quantification of subcutaneous adipose reserves relies on **skinfold thickness calliper measurement**, using calibrated spring-loaded callipers such as the Harpenden or Holtain callipers exerting a constant pressure of ten grams per square millimetre. Measurements are typically obtained over the triceps, biceps, subscapular and suprailiac sites on the non-dominant arm, with triceps skinfold exceeding twenty millimetres in men or thirty in women denoting obesity.",
+   "say": "Calibrated callipers pinch skinfolds on the triceps, shoulder blade and abdomen to measure body fat. A triceps skinfold over twenty millimetres in men indicates excess fat reserves.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Skinfold measurement site", "Anatomical location", "Standard normal values"],
+    "rows": [
+     ["Triceps skinfold", "Midpoint between acromion and olecranon", "12 mm (men), 20 mm (women)"],
+     ["Biceps skinfold", "Midpoint of anterior upper arm over biceps", "5 mm (men), 8 mm (women)"],
+     ["Subscapular skinfold", "Just below inferior angle of scapula at 45 deg", "15 mm (men), 18 mm (women)"],
+     ["Suprailiac skinfold", "Just above iliac crest in mid-axillary line", "12 mm (men), 16 mm (women)"]
+    ]
+   }
+  },
+  {
+   "title": "Densitometry and bioelectrical impedance",
+   "tx": "Advanced laboratory methods assess body composition through **bioelectrical impedance analysis**, measuring the opposition to a painless, low-voltage alternating electric current passing through bodily tissues. Because lean body mass contains water and electrolytes that conduct electricity freely while fat acts as an insulator, the machine computes total body water, fat-free mass, and percentage body fat, establishing that healthy adult body fat should remain below twenty-five percent in men.",
+   "say": "Bioelectrical impedance sends a gentle current through the body. Because water in muscle conducts electricity while fat resists it, the device precisely calculates total body fat percentage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lean tissue (muscle, organs)",
+     "points": ["High water and electrolyte content", "Low electrical impedance (conducts freely)", "Accurately represents fat-free mass"]
+    },
+    "right": {
+     "title": "Adipose tissue (body fat)",
+     "points": ["Low water and lipid-rich content", "High electrical impedance (insulator)", "Used to derive total body fat percentage"]
+    }
+   }
+  },
+  {
+   "title": "Comprehensive obesity management hierarchy",
+   "tx": "Clinical management of obesity structures interventions through a stepped **obesity management hierarchy** beginning with dietary calorie deficits of five hundred to one thousand kilocalories daily and regular physical exercise. Pharmacotherapy with orlistat or GLP-1 receptor agonists like liraglutide is considered for BMI exceeding twenty-seven with comorbidities, while bariatric metabolic surgery is indicated for Asian Indians with BMI exceeding thirty-five, or thirty-two point five with severe uncontrolled diabetes.",
+   "say": "Obesity care starts with cutting five hundred calories daily and exercising. Medications are added if BMI exceeds twenty-seven, while bariatric surgery is offered for BMI over thirty-two point five.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Dietary deficit of 500 kcal/day + exercise"},
+     {"id": "b", "label": "BMI >= 27 with co-morbidities: Pharmacotherapy"},
+     {"id": "c", "label": "BMI >= 32.5 with diabetes: Bariatric surgery"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

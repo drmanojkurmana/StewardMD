@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "obg-endometriosis-adenomyosis",
+ "subject": "obstetrics-gynaecology",
+ "title": "Diagnostic Laparoscopy and Endometriosis Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Direct inspection of the pelvis through a camera is **diagnostic laparoscopy**. It remains the reference standard for peritoneal endometriosis. Biopsy of atypical lesions confirms histology. A normal pelvis at laparoscopy excludes peritoneal disease but never excludes adenomyosis inside the muscle or disease hidden behind dense adhesions.",
+   "say": "Diagnostic laparoscopy is the reference standard for diagnosing peritoneal endometriosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-diagnostic_laparoscopy_gynae.webp",
+    "alt": "Diagnostic laparoscopy in gynaecology.",
+    "caption": "Laparoscopy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Powder burn black lesions, red flame lesions and clear vesicles are the visual vocabulary of **lesion appearances**. Subtle lesions in young women are red and clear predominantly. Photodocumentation records the map. Red lesions bleed and implant actively, while black lesions mark older burnt out disease, so colour guides both staging and excision choices.",
+   "say": "Lesion appearances range from powder burn black to clear vesicles in the young.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colour",
+     "Age of lesion"
+    ],
+    "rows": [
+     [
+      "Clear vesicles",
+      "Early, young"
+     ],
+     [
+      "Red flame",
+      "Active"
+     ],
+     [
+      "Black powder burn",
+      "Old"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Staging by the revised American system scores implants and adhesions into four stages, termed **rASRM staging**. Stage correlates with anatomy far better than pain. It guides fertility prognosis mainly. Minimal disease with severe pain and advanced disease without pain are both common, which is why pain scores never substitute for staging.",
+   "say": "rASRM staging scores anatomy for fertility prognosis, not pain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Implants scored"
+     },
+     {
+      "id": "n1",
+      "label": "Adhesions scored"
+     },
+     {
+      "id": "n2",
+      "label": "Stage one to four"
+     },
+     {
+      "id": "n3",
+      "label": "Fertility counselled"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excision cuts lesions out with margins while ablation vaporises surfaces, debated as **excision versus ablation**. Excision gives histology and suits deep disease. Ovarian endometrioma cystectomy strips the wall, balancing recurrence against reserve. Cystectomy lowers recurrence more than drainage or ablation alone, but every strip removes follicles, so reserve testing precedes repeat ovarian surgery.",
+   "say": "Excision versus ablation debates histology and depth against simplicity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-gestrinone.webp",
+    "alt": "Hormonal suppression after surgery.",
+    "caption": "Suppression. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Postoperative hormonal suppression delays recurrence, termed **secondary prevention**. It is omitted only when pregnancy is sought immediately. Combined pills or LNG IUS are usual vehicles. Suppression also treats microscopic residual implants that surgery cannot see, and it doubles as contraception while recovery and healing complete.",
+   "say": "Secondary prevention with hormones reduces recurrence after endometriosis surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pregnancy sought",
+     "points": [
+      "No suppression",
+      "Attempt immediately"
+     ]
+    },
+    "right": {
+     "title": "Not sought",
+     "points": [
+      "Suppress long term",
+      "Recurrence delayed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Multidisciplinary surgery with colorectal and urology teams handles deep disease as **MDT surgery**. Bowel shaving, disc excision or segmental resection escalate by depth. Stoma consent is routine for rectal surgery. Rectal involvement changes consent, bowel preparation and theatre planning, so preoperative imaging must map depth before the team is booked.",
+   "say": "MDT surgery involves colorectal and urology teams for deep bowel endometriosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Depth",
+     "Bowel technique"
+    ],
+    "rows": [
+     [
+      "Serosal",
+      "Shaving"
+     ],
+     [
+      "Muscular",
+      "Disc excision"
+     ],
+     [
+      "Full thickness",
+      "Segmental resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Negative laparoscopy in chronic pelvic pain redirects care to pain medicine and pelvic floor, following **negative scope pathway**. It is a result, not a failure. Central sensitisation therapy then leads. Bladder, bowel and ureteric disease are still excluded at a negative scope, and that exclusion itself ends years of diagnostic uncertainty.",
+   "say": "A negative scope is a result that leads care towards pain medicine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dysmenorrhea-fig1.webp",
+    "alt": "Chronic pelvic pain pathways.",
+    "caption": "Pain pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endometriosis of the abdominal wall scar after caesarean presents as a cyclical painful lump, termed **scar endometriosis**. Wide excision cures it. It proves implantation theory in a single lesion. Scar lesions grow slowly outside the pelvis and spare the peritoneum, so they present to general surgeons as often as gynaecologists.",
+   "say": "Scar endometriosis lumps cyclically in caesarean scars and wide excision cures it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Caesarean scar lump"
+     },
+     {
+      "id": "n1",
+      "label": "Pain cycles monthly"
+     },
+     {
+      "id": "n2",
+      "label": "Wide excision"
+     },
+     {
+      "id": "n3",
+      "label": "Cured"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thoracic endometriosis causing cyclical haemoptysis or pneumothorax is the rare **catamenial syndrome**. Right sided pneumothorax recurring with periods is its signature. Hormonal suppression plus pleural surgery combine. Attacks cluster on the right because peritoneal fluid circulates up the right paracolic gutter carrying refluxed endometrial cells to the diaphragm.",
+   "say": "Catamenial syndrome involves thoracic endometriosis causing pneumothorax that recurs with periods.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/catamenial-pneumothorax-fig1.webp",
+    "alt": "Catamenial pneumothorax: diaphragmatic defects and endometrial implants.",
+    "caption": "Catamenial pneumothorax: diaphragmatic defects and endometrial implants. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phm-hypolipidaemics",
+  "subject": "pharmacology",
+  "title": "Statins and Partners: Atorvastatin, Rosuvastatin, Ezetimibe and Fibrates",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Competitive inhibition of **HMG CoA reductase**, the rate limiting enzyme converting HMG CoA to mevalonate in hepatic cholesterol synthesis, is the shared first move of every statin. Starved of internal cholesterol, the hepatocyte displays more LDL (low density lipoprotein) receptors, blood LDL cholesterol falls by 30 to over 50 percent depending on intensity, and plaque biology calms. Evening dosing suited short half life founders; modern long acting agents forgive any hour.",
+      "say": "Block the liver's cholesterol factory and it hangs out more LDL receptors; that is the whole statin trick.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cholesterol-biosynthesis-and-statins-fig1.webp",
+        "alt": "Cholesterol biosynthesis pathway showing HMG CoA reductase and the point of statin blockade",
+        "caption": "The cholesterol synthesis pathway with HMG CoA reductase, the enzyme every statin competitively inhibits."
+      }
+    },
+    {
+      "tx": "**Atorvastatin** offers high intensity lowering at 40 to 80 mg with active metabolites extending its effect across the day, making it the post acute coronary syndrome default in most protocols. **Rosuvastatin** is the most potent milligram for milligram, hydrophilic and renally handled in part, with dose ceilings in severe kidney impairment and in patients of Asian ancestry where exposure runs higher. Both are CYP3A4 neighbours to respect: atorvastatin directly, rosuvastatin mainly through transporters.",
+      "say": "Atorvastatin is the post infarct default; rosuvastatin is strongest per milligram with kidney and ancestry dose ceilings.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atorvastatin",
+          "points": [
+            "High intensity at 40 to 80 mg daily",
+            "Active metabolites prolong the effect",
+            "CYP3A4 substrate: inhibitor interactions matter",
+            "Default after acute coronary syndrome"
+          ]
+        },
+        "right": {
+          "title": "Rosuvastatin",
+          "points": [
+            "Greatest LDL fall per milligram",
+            "Hydrophilic, partly renally cleared",
+            "Dose ceilings in severe renal impairment",
+            "Higher exposure in Asian ancestry patients"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Muscle complaints span a ladder from common benign myalgia to **myopathy** with creatine kinase rises, and at the cliff edge, rhabdomyolysis with myoglobinuric kidney failure, rare at roughly one in a hundred thousand patient years. Risk climbs with high doses, kidney or liver disease, hypothyroidism, vitamin D deficiency and interacting drugs that raise statin levels. Most muscle pain on statins in blinded rechallenge proves unrelated, yet the ladder must be climbed respectfully every time.",
+      "say": "Muscle pain is common and usually innocent; weakness with dark urine is the emergency end of the ladder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ache",
+            "label": "Myalgia without weakness or enzyme rise"
+          },
+          {
+            "id": "myopathy",
+            "label": "Symptoms plus creatine kinase over ten times normal"
+          },
+          {
+            "id": "rhabdo",
+            "label": "Rhabdomyolysis: myoglobin, dark urine, kidney injury"
+          },
+          {
+            "id": "act",
+            "label": "Stop statin, hydrate, treat kidney injury, investigate cause"
+          }
+        ],
+        "edges": [
+          [
+            "ache",
+            "myopathy"
+          ],
+          [
+            "myopathy",
+            "rhabdo"
+          ],
+          [
+            "rhabdo",
+            "act"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The interaction that writes examination questions pairs statins with CYP3A4 inhibitors: clarithromycin, azole antifungals and protease inhibitors can multiply simvastatin and atorvastatin levels into the rhabdomyolysis zone, while **gemfibrozil** blocks statin glucuronidation and uptake transporters with the same endpoint. Fenofibrate lacks that interaction and is the fibrate permitted beside a statin. Grapefruit juice in quantity joins the inhibitor list from the diet side.",
+      "say": "Clarithromycin or gemfibrozil on top of a statin is how rhabdomyolysis case reports begin; fenofibrate is the safe fibrate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dangerous statin partners",
+          "points": [
+            "Clarithromycin and erythromycin (CYP3A4)",
+            "Itraconazole and other azole antifungals",
+            "Gemfibrozil via transporter and glucuronidation blockade",
+            "Ciclosporin raising most statin levels"
+          ]
+        },
+        "right": {
+          "title": "Safer combinations",
+          "points": [
+            "Fenofibrate beside a statin when triglycerides demand",
+            "Azithromycin lacks meaningful CYP3A4 inhibition",
+            "Ezetimibe adds lowering without muscle interaction",
+            "Pause the statin through short interacting courses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Blocking the NPC1L1 cholesterol transporter in the jejunal brush border, **ezetimibe** stops dietary and biliary cholesterol entering the body, lowering LDL by about 18 percent alone and adding a similar slice on top of a statin. The IMPROVE IT trial converted that arithmetic into modest outcome benefit after acute coronary syndromes. It causes no muscle toxicity of its own, which makes it the polite first partner when a statin alone misses target or tolerance caps the dose.",
+      "say": "Ezetimibe locks the gut door cholesterol uses; eighteen percent alone, and more stacked on a statin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "npc",
+            "label": "NPC1L1 transporter blocked in jejunal brush border"
+          },
+          {
+            "id": "absorb",
+            "label": "Dietary and biliary cholesterol absorption falls"
+          },
+          {
+            "id": "liver",
+            "label": "Liver cholesterol delivery drops, LDL receptors rise"
+          },
+          {
+            "id": "ldl",
+            "label": "LDL cholesterol falls about 18 percent alone"
+          }
+        ],
+        "edges": [
+          [
+            "npc",
+            "absorb"
+          ],
+          [
+            "absorb",
+            "liver"
+          ],
+          [
+            "liver",
+            "ldl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fibrates activate the nuclear receptor PPAR alpha, switching on lipoprotein lipase and fatty acid oxidation genes so triglycerides fall by up to half while HDL (high density lipoprotein) rises modestly. **Fenofibrate** suits diabetic dyslipidaemia and severe hypertriglyceridaemia threatening pancreatitis; **gemfibrozil** shares the class effect but owns the statin interaction. Fibrates also raise creatinine reversibly, displace warfarin from albumin, and increase cholesterol excretion into bile, nudging gallstone risk upward over years.",
+      "say": "Fibrates are triglyceride drugs through PPAR alpha; fenofibrate partners statins, gemfibrozil must not.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fenofibrate",
+          "points": [
+            "Triglycerides down up to 50 percent, HDL up modestly",
+            "Permitted beside statins with monitoring",
+            "Reversible creatinine rise confuses kidney charts",
+            "Diabetic retinopathy progression slowed in trials"
+          ]
+        },
+        "right": {
+          "title": "Gemfibrozil",
+          "points": [
+            "Similar triglyceride and HDL effects",
+            "Blocks statin clearance: rhabdomyolysis risk",
+            "Never combine with simvastatin",
+            "Warfarin effect potentiated by albumin displacement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Statin intolerance**, real or perceived, follows a discipline before the label sticks: exclude hypothyroidism and vitamin D deficiency, check interacting drugs, dechallenge until symptoms settle, then rechallenge the same or a different statin at lower or alternate day dosing exploiting long half lives. Most patients tolerate some regimen, and the truly intolerant graduate to ezetimibe, bempedoic acid and PCSK9 therapy from the next lesson. Documenting the exact drug, dose and symptom protects future prescribers from repeating the experiment blindly.",
+      "say": "Dechallenge, fix the mimics, rechallenge cleverly; most statin intolerance dissolves under that discipline.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "symptom",
+            "label": "Muscle symptoms reported on a statin"
+          },
+          {
+            "id": "exclude",
+            "label": "Exclude thyroid, vitamin D and interaction causes"
+          },
+          {
+            "id": "dech",
+            "label": "Dechallenge, then structured rechallenge"
+          },
+          {
+            "id": "alt",
+            "label": "Alternate day, different statin, or non statin pathway"
+          }
+        ],
+        "edges": [
+          [
+            "symptom",
+            "exclude"
+          ],
+          [
+            "exclude",
+            "dech"
+          ],
+          [
+            "dech",
+            "alt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Beyond LDL, statins carry **pleiotropic** claims: improved endothelial function, plaque stabilisation, anti inflammatory and antithrombotic signals that track with high sensitivity CRP falls in trials. Whether these add beyond LDL lowering itself remains debated, but the clinical translation is settled: intensity follows absolute cardiovascular risk, therapy is lifelong after events, and stopping for minor enzyme ripples forfeits protection. Liver failure from statins is vanishingly rare; routine enzyme monitoring beyond baseline faded from guidelines.",
+      "say": "Whatever the pleiotropy debate, intensity follows risk and the prescription is for life after an event.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-hypercholesterolemia-fig1.webp",
+        "alt": "Familial hypercholesterolaemia pathway and clinical signs including tendon xanthomata",
+        "caption": "Familial hypercholesterolaemia, the genetic extreme where high intensity statin therapy starts early and partners join quickly."
+      }
+    }
+  ]
+}

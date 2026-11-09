@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-tissue-repair",
+  "subject": "pathology",
+  "title": "Healing by Secondary Intention, Wound Contraction, and Keloid Scars",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "When tissue loss is extensive, such as in large open skin wounds, deep thermal burns, extensive ulcerations, or infected surgical dehiscence, the opposing margins cannot be simple re-approximated. The repair process is designated **healing by secondary intention**, which requires massive granulation tissue ingrowth and substantial wound contraction.",
+      "say": "Healing by secondary intention occurs in large open wounds requiring extensive granulation and contraction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thermal-burns-fig1.webp",
+        "caption": "Extensive deep dermal burn defect undergoing prolonged healing by secondary intention.",
+        "alt": "Deep partial-thickness burn healing by secondary intention and granulation tissue"
+      }
+    },
+    {
+      "tx": "Healing by secondary intention differs from primary intention in three fundamental pathological respects. Secondary healing features a more intense, protracted inflammatory reaction to clear extensive cellular debris, generates much larger volumes of **edematous granulation tissue**, and involves prominent physical wound contraction mediated by specialized contractile cells.",
+      "say": "Secondary healing generates large volumes of granulation tissue and relies on physical wound contraction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Intention (First Intention)",
+          "points": [
+            "Clean, uninfected surgical incision with approximated edges (sutures)",
+            "Minimal parenchymal tissue loss and minimal cell death",
+            "Small fibrin clot; rapid re-epithelialization across narrow defect",
+            "Negligible wound contraction; heals with a fine, hairline linear scar"
+          ]
+        },
+        "right": {
+          "title": "Secondary Intention (Second Intention)",
+          "points": [
+            "Large open tissue defect (infarction, deep ulcer, burn, abscess cavity)",
+            "Extensive necrotic tissue debris and intense inflammatory reaction",
+            "Massive formation of granulation tissue to fill the large crater defect",
+            "Prominent myofibroblastic wound contraction; leaves large, irregular scar"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Physical wound contraction reduces the surface area of large open defects by up to seventy to eighty percent over several weeks. This vital mechanical closure is driven by **differentiated myofibroblasts**, which develop intracellular bundles of contractile alpha-smooth muscle actin filaments and anchor to surrounding extracellular matrix via specialized fibronexi.",
+      "say": "Myofibroblasts expressing alpha-smooth muscle actin pull wound margins together, reducing defect size.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tgf_presents",
+            "label": "High Interstitial Concentrations of Active Transforming Growth Factor-Beta"
+          },
+          {
+            "id": "myofibroblast_switch",
+            "label": "Resting Tissue Fibroblasts Differentiate into Contractile Myofibroblasts"
+          },
+          {
+            "id": "actin_assembly",
+            "label": "Assemble Cytoplasmic Stress Fibers Containing Alpha-Smooth Muscle Actin"
+          },
+          {
+            "id": "centripetal_pull",
+            "label": "Cells Contract Centripetally Across Fibronexi, Pulling Wound Margins Together"
+          }
+        ],
+        "edges": [
+          [
+            "tgf_presents",
+            "myofibroblast_switch"
+          ],
+          [
+            "myofibroblast_switch",
+            "actin_assembly"
+          ],
+          [
+            "actin_assembly",
+            "centripetal_pull"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "If wound contraction occurs excessively over flexion creases, joints, or circumferential burns, severe functional impairment ensues. Termed a **wound contracture**, pathological shortening and inelasticity of the resulting fibrous scar tissue produces permanent joint immobilization, digital deformities, and severe mechanical disfigurement.",
+      "say": "Excessive myofibroblastic contraction over joints produces disabling, inelastic wound contractures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physiological Wound Contraction",
+          "points": [
+            "Centripetal closure reducing original open wound area by 70-80%",
+            "Facilitates epithelial closure over large traumatic tissue defects",
+            "Terminates when wound edges meet and contact inhibition occurs",
+            "Myofibroblasts undergo programmed apoptosis once closure is complete"
+          ]
+        },
+        "right": {
+          "title": "Pathological Cicatricial Contracture",
+          "points": [
+            "Exaggerated, persistent myofibroblastic contraction of dense scar",
+            "Develops commonly over palms, soles, axillae, neck, and flexion creases",
+            "Frequently complicates severe full-thickness thermal scalds and burns",
+            "Severely restricts joint range of motion, requiring surgical release"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The mechanical recovery of tensile strength in a healing wound progresses slowly over many months. At the time of suture removal at one week, wound breaking strength is only ten percent of normal; it climbs to twenty-five percent at four weeks, and plateaus at approximately **seventy to eighty percent of uninjured strength** by three months.",
+      "say": "Sutured wounds possess only ten percent strength at one week, plateauing at eighty percent by three months.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "week_one",
+            "label": "Sutures Removed at Day 7 to 10: Tensile Strength Only 10% of Normal Skin"
+          },
+          {
+            "id": "month_one",
+            "label": "Rapid Type I Collagen Deposition Boosts Strength to ~25% at 4 Weeks"
+          },
+          {
+            "id": "month_three",
+            "label": "Collagen Fibril Cross-Linking and Matrix Remodeling Plateaus at 70-80%"
+          },
+          {
+            "id": "strength_ceiling",
+            "label": "Surgically Healed Cutaneous Wounds Never Regain 100% of Original Strength"
+          }
+        ],
+        "edges": [
+          [
+            "week_one",
+            "month_one"
+          ],
+          [
+            "month_one",
+            "month_three"
+          ],
+          [
+            "month_three",
+            "strength_ceiling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Abnormalities in wound healing can manifest as inadequate scar formation leading to wound dehiscence, or excessive repair producing exuberant fibroblastic masses. When collagen synthesis proceeds excessively but remains confined strictly within the original anatomical borders of the wound, the raised lesion represents a **hypertrophic scar**, which typically regresses over time.",
+      "say": "A hypertrophic scar is raised from excess collagen but remains confined within the original wound borders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypertrophic Scar Features",
+          "points": [
+            "Excessive collagen deposition developing rapidly within weeks of injury",
+            "Remains strictly confined within the original physical borders of the wound",
+            "Composed predominantly of parallel, organized type III collagen bundles",
+            "Often regresses spontaneously over months; frequently crosses flexion creases"
+          ]
+        },
+        "right": {
+          "title": "Keloid Scar Features",
+          "points": [
+            "Excessive collagen deposition developing months after minor cutaneous trauma",
+            "Grows aggressively beyond the original boundaries into adjacent normal tissue",
+            "Composed of thick, disorganized, hyalinized, glassy type I collagen ropes",
+            "Does not regress spontaneously; exhibits high recurrence rate after excision"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast to hypertrophic scars, keloids represent exuberant scar tissue that extends well beyond the original boundaries of the injury without regressing. Histologically, a **keloid scar** is packed with thick, broad, wavy, intensely hyalinized, glassy collagen bundles with a marked genetic predisposition in individuals of African and Asian ancestry.",
+      "say": "Keloids grow beyond the original wound margins and feature broad, hyalinized collagen bundles.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/keloid-fig1.webp",
+        "caption": "Exuberant, raised cutaneous keloid scar demonstrating aggressive invasion beyond original surgical margins.",
+        "alt": "Cutaneous keloid exhibiting prominent expansion into adjacent dermis"
+      }
+    },
+    {
+      "tx": "Keloids characteristically predilect the earlobes, upper chest, shoulders, and deltoid regions following piercing, lacerations, or severe acne. Surgical excision of a keloid alone is notoriously prone to **recurrence at high rates**, requiring multimodal adjuvant management with intralesional corticosteroid triamcinolone injections, silicone sheeting, and topical pressure dressings.",
+      "say": "Keloids frequently recur after simple excision, requiring adjuvant intralesional corticosteroid injections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "minor_trauma",
+            "label": "Minor Ear Piercing, Laceration, or Acne Cyst in Genetically Predisposed Patient"
+          },
+          {
+            "id": "smad_unrestrained",
+            "label": "Dysregulated Fibroblasts Exhibit Unrestrained Autocrine TGF-Beta/Smad Output"
+          },
+          {
+            "id": "keloid_growth",
+            "label": "Massive Synthesis of Broad Hyalinized Collagen Invades Normal Adjacent Skin"
+          },
+          {
+            "id": "corticosteroid_therapy",
+            "label": "Intralesional Triamcinolone Injections Inhibit Collagen Gene Transcription"
+          }
+        ],
+        "edges": [
+          [
+            "minor_trauma",
+            "smad_unrestrained"
+          ],
+          [
+            "smad_unrestrained",
+            "keloid_growth"
+          ],
+          [
+            "keloid_growth",
+            "corticosteroid_therapy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

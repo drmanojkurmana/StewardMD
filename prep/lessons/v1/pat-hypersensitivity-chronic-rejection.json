@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Chronic Rejection and Graft Versus Host Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Months to years after transplantation, many grafts slowly lose function through concentric arterial intimal thickening, interstitial fibrosis, and tubular atrophy that no drug reliably reverses. Immune injury from low grade antibody and T cell activity combines with drug toxicity, hypertension, and recurrent disease in this process, universally known as **chronic rejection**.",
+      "say": "Chronic rejection is the slow, largely irreversible scarring that limits long term graft survival in every organ.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Repeated low grade immune and nonimmune injury"
+          },
+          {
+            "id": "b",
+            "label": "Concentric intimal thickening narrows graft arteries"
+          },
+          {
+            "id": "c",
+            "label": "Interstitial fibrosis and tubular atrophy advance"
+          },
+          {
+            "id": "d",
+            "label": "Slow functional decline toward graft failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Each organ declares chronic rejection in its own dialect: transplant glomerulopathy with double contours in kidney, cardiac allograft vasculopathy in heart, vanishing bile duct syndrome in liver, and bronchiolitis obliterans in lung. Recognising the organ specific pattern matters because retransplantation is often the only definitive option, and the shared vascular lesion is concentric **allograft vasculopathy**.",
+      "say": "Kidney, heart, liver, and lung each show a characteristic chronic pattern, but concentric arterial narrowing unites them all.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ",
+          "Chronic rejection pattern",
+          "Clinical clue"
+        ],
+        "rows": [
+          [
+            "Kidney",
+            "Transplant glomerulopathy, double contours",
+            "Proteinuria with slow creatinine rise"
+          ],
+          [
+            "Heart",
+            "Diffuse cardiac allograft vasculopathy",
+            "Silent ischaemia, graft dysfunction"
+          ],
+          [
+            "Liver",
+            "Vanishing bile duct syndrome",
+            "Cholestasis with duct loss on biopsy"
+          ],
+          [
+            "Lung",
+            "Bronchiolitis obliterans syndrome",
+            "Progressive airflow obstruction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic antibody mediated injury deserves special attention because donor specific antibodies, often arising after under-immunosuppression or nonadherence, drive transplant glomerulopathy years before failure. C4d may be negative in late disease, so modern Banff criteria accept antibody interaction with endothelium shown by transcripts or microvascular inflammation; the driver remains persistent **donor-specific antibody**.",
+      "say": "Late donor specific antibodies quietly drive transplant glomerulopathy, which is why adherence is graft protection.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/primary-immunodeficiency-transplant-rejection-gvhd-fig1.webp",
+        "alt": "Transplant rejection and graft versus host disease overview",
+        "caption": "Rejection and graft versus host disease mechanisms compared across transplant settings."
+      }
+    },
+    {
+      "tx": "Prevention outperforms treatment in chronic rejection: adequate maintenance immunosuppression, blood pressure and lipid control, cytomegalovirus prophylaxis, and early treatment of acute episodes all slow the decline. Calcineurin inhibitor nephrotoxicity itself causes striped interstitial fibrosis, forcing a constant balance that clinicians manage as **immunosuppression optimisation** rather than simple dose escalation.",
+      "say": "There is no rescue drug for chronic rejection, so prevention through balanced immunosuppression and risk factor control is everything.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "What accelerates chronic rejection",
+          "points": [
+            "Repeated acute rejection episodes",
+            "Donor specific antibody formation",
+            "Nonadherence and under-immunosuppression",
+            "Hypertension, lipids, CMV infection"
+          ]
+        },
+        "right": {
+          "title": "What slows it down",
+          "points": [
+            "Steady therapeutic drug levels",
+            "Early biopsy and treatment of episodes",
+            "Blood pressure and lipid control",
+            "Adherence support at every visit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Graft versus host disease reverses the direction of attack: immunocompetent donor T cells in a stem cell or, rarely, solid organ graft recognise the immunosuppressed recipient as foreign and attack host tissues. Billingham requirements, a graft containing immune cells, an immunocompromised host, and histoincompatibility, define the setup for **graft-versus-host disease**.",
+      "say": "In graft versus host disease the graft attacks the host, because donor T cells see recipient tissues as foreign.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Donor graft carries mature T lymphocytes"
+          },
+          {
+            "id": "b",
+            "label": "Host conditioning damages gut and releases cytokines"
+          },
+          {
+            "id": "c",
+            "label": "Donor T cells expand against host antigens"
+          },
+          {
+            "id": "d",
+            "label": "Skin, gut, and liver injury follows"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute graft versus host disease, classically within one hundred days of haematopoietic stem cell transplantation, targets skin with a maculopapular rash, gut with profuse secretory diarrhoea, and liver with cholestasis. Skin biopsy shows vacuolar interface change and apoptotic keratinocytes, and severity grading of these three organs guides the urgency of **systemic corticosteroids** as first line therapy.",
+      "say": "Rash, profuse diarrhoea, and cholestasis within a hundred days of stem cell transplant should make you think of acute graft versus host disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ",
+          "Acute GVHD manifestation",
+          "Staging clue"
+        ],
+        "rows": [
+          [
+            "Skin",
+            "Maculopapular rash, may blister",
+            "Body surface area involved"
+          ],
+          [
+            "Gut",
+            "Secretory diarrhoea, pain, ileus",
+            "Daily stool volume"
+          ],
+          [
+            "Liver",
+            "Cholestatic jaundice",
+            "Serum bilirubin level"
+          ],
+          [
+            "Overall",
+            "Grade I to IV by organ stages",
+            "Grade guides steroid urgency"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic graft versus host disease resembles autoimmunity, with scleroderma like skin tightening, dry eyes and mouth, bronchiolitis, and fasciitis appearing later, often after acute disease. It reflects disordered immune reconstitution with B cell involvement, responds more slowly to treatment, and remains a leading cause of late transplant mortality through infection and **bronchiolitis obliterans**.",
+      "say": "Chronic graft versus host disease mimics autoimmunity with tight skin, sicca symptoms, and lung involvement months later.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute GVHD",
+          "points": [
+            "Usually within 100 days of HSCT",
+            "Rash, diarrhoea, cholestasis",
+            "Donor cytotoxic T cell driven"
+          ]
+        },
+        "right": {
+          "title": "Chronic GVHD",
+          "points": [
+            "Later onset, autoimmune-like features",
+            "Sclerodermatous skin, sicca, lung disease",
+            "T and B cell dysregulation, fibrotic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The same donor T cells that cause graft versus host disease also kill residual leukaemia, a beneficial effect clinicians deliberately preserve when tapering immunosuppression or giving donor lymphocyte infusions. Balancing cure against toxicity is the central art of allogeneic transplantation, and that beneficial antitumour effect is called the **graft-versus-leukemia effect**.",
+      "say": "Donor T cells also attack residual leukaemia; that graft versus leukaemia benefit is why tapering immunosuppression can itself treat relapse.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/organ-transplantation-immunobiology-rejection-and-renal-allograft-fig1.webp",
+        "alt": "Renal allograft rejection mechanisms",
+        "caption": "Renal allograft rejection mechanisms, including the chronic vascular injury that drives late graft loss."
+      }
+    }
+  ]
+}

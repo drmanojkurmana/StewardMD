@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "id": "cm-arboviral-kyasanur-forest-disease",
+ "subject": "community-medicine",
+ "module": "cm-arboviral",
+ "title": "Arboviral Threats: Kyasanur Forest Disease, Yellow Fever and Zika",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Kyasanur forest disease: history and vector",
+   "tx": "First identified in 1957 in Karnataka, **Kyasanur Forest disease** is a tick-borne haemorrhagic fever caused by a member of the Flaviviridae family, maintained in a sylvatic cycle involving forest rodents, shrews and birds. The principal vector is the hard tick Haemaphysalis spinigera; epizootic deaths among black-faced langurs and bonnet macaques routinely precede human outbreaks, earning the disease its popular title of monkey fever.",
+   "say": "Kyasanur Forest disease is a tick-borne viral haemorrhagic fever first recognized in Karnataka. Monkey deaths in the jungle serve as a reliable sentinel warning before human cases emerge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/kyasanur-forest-disease-fig1.webp",
+    "alt": "Diagram showing Kyasanur Forest Disease transmission cycle involving ticks, monkeys and human cases",
+    "caption": "Clinical and epidemiological features of Kyasanur Forest Disease including tick vector and sylvatic cycle. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Clinical course and biphasic presentation of KFD",
+   "tx": "Following an incubation period of three to eight days, patients develop a **biphasic fever** beginning with abrupt high chills, severe frontal headache, conjunctival suffusion, severe myalgia and gastrointestinal symptoms. Approximately ten to twenty percent experience a secondary phase after one to two weeks, manifesting with meningismus, mental confusion, tremors and motor unsteadiness, carrying a three to five percent overall case fatality rate.",
+   "say": "Kyasanur Forest disease produces high fever, headache and muscle pains, followed in some patients by a second phase with neck stiffness, mental confusion and tremors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Tick bite transmission in forest"},
+     {"id": "b", "label": "Phase 1: High fever, chills, myalgia"},
+     {"id": "c", "label": "Afebrile window of 1 to 2 weeks"},
+     {"id": "d", "label": "Phase 2: Encephalitic tremors and confusion"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "KFD prevention and formalin-inactivated vaccine",
+   "tx": "Preventive strategies in endemic forest fringe villages combine personal barrier protection with targeted **KFD vaccination** using a formalin-inactivated tissue culture vaccine. Forest workers receive two doses one month apart, followed by annual boosters, while applying diethyltoluamide or dimethyl phthalate repellent oil to exposed legs and arms to prevent tick attachment when collecting dry firewood or grazing livestock.",
+   "say": "Forest workers in endemic areas receive the inactivated tissue culture vaccine with annual boosters, and apply repellent oils to bare limbs before entering the jungle.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Preventive intervention", "Target group or schedule", "Protective mechanism"],
+    "rows": [
+     ["KFD vaccine primary series", "Two doses 1 month apart in endemic belts", "Induces neutralizing antiviral IgG"],
+     ["Annual booster vaccine", "Administered before peak dry season", "Maintains protective antibody titres"],
+     ["DEET / DMP repellents", "Applied to limbs before forest entry", "Prevents Haemaphysalis tick attachment"],
+     ["Pyrethroid dust application", "Around cattle sheds and forest trails", "Controls questing tick nymphs"]
+    ]
+   }
+  },
+  {
+   "title": "Yellow fever: global threat and Indian quarantine",
+   "tx": "Although absent from India, the lethal mosquito-borne flavivirus causing **yellow fever quarantine** poses a permanent threat because abundant competent vectors, specifically Aedes aegypti, populate every Indian state. Strict port health and airport quarantine regulations enforce the International Health Regulations, requiring all travellers arriving from or transiting through endemic zones in tropical Africa and South America to present a valid international certificate.",
+   "say": "Yellow fever does not exist in India, but our vast Aedes mosquito population could sustain an epidemic. Strict airport quarantine prevents importation from Africa and South America.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/yellow-fever-fig1.webp",
+    "alt": "Pathology illustration of yellow fever showing hepatic Councilman bodies and vascular injury",
+    "caption": "Pathology and clinical progression of yellow fever including hepatic necrosis, Councilman bodies and jaundice. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Yellow fever 17D vaccine regulations",
+   "tx": "Travellers bound for endemic territories receive the live attenuated **17D yellow fever vaccine**, which confers lifelong clinical immunity from a single subcutaneous dose of zero point five millilitres. Under international travel law, the certificate becomes valid ten days after primary vaccination; travellers arriving without documentation are placed in mosquito-proof isolation quarantine at the port of entry for up to six days.",
+   "say": "The 17D yellow fever vaccine provides lifelong protection ten days after injection. Arriving without this certificate leads to mandatory six-day quarantine in a mosquito-screened room.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Travel parameter", "International Health Regulation rule", "Underlying clinical purpose"],
+    "rows": [
+     ["Vaccine platform", "Live attenuated 17D strain", "High immunogenicity with single shot"],
+     ["Certificate validity onset", "10 days post-vaccination", "Allows protective neutralizing antibodies to form"],
+     ["Certificate duration", "Valid for life of the traveller", "Lifelong immunological memory confirmed"],
+     ["Quarantine detention", "Up to 6 days from departure", "Matches maximum human incubation period"]
+    ]
+   }
+  },
+  {
+   "title": "Zika virus: transmission routes and vector",
+   "tx": "Discovered in Uganda and recently detected across multiple Indian states, the **Zika virus** is a flavivirus transmitted primarily through daytime bites of Aedes aegypti and Aedes albopictus mosquitoes. Unlike most arboviruses, Zika also spreads through unprotected sexual intercourse due to prolonged viral shedding in seminal fluid, as well as through transplacental fetal infection, blood product transfusion and solid organ transplantation.",
+   "say": "Zika virus is spread by daytime-biting Aedes mosquitoes, but it also transmits through sexual intercourse, blood transfusions and across the placenta to the unborn fetus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Daytime Aedes mosquito bite"},
+     {"id": "b", "label": "Viraemic human bloodstream"},
+     {"id": "c", "label": "Sexual transmission via seminal fluid"},
+     {"id": "d", "label": "Transplacental fetal infection"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Congenital Zika syndrome and microcephaly",
+   "tx": "While adult infection typically causes mild maculopapular rash, low fever and non-purulent conjunctivitis, maternal infection during pregnancy precipitates **congenital Zika syndrome**. The virus displays tropism for neural progenitor cells, causing severe fetal microcephaly, cerebral cortical thinning, subcortical calcifications, macular retinal pigment mottling, congenital clubfoot and arthrogryposis, leading to severe neurodevelopmental deficits and lifelong disability.",
+   "say": "Zika infection in a pregnant mother attacks fetal brain cells. It causes severe microcephaly, brain calcifications, eye damage and joint deformities.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult clinical illness",
+     "points": ["Low-grade fever and arthralgia", "Maculopapular rash and conjunctivitis", "Self-limiting within 7 days"]
+    },
+    "right": {
+     "title": "Congenital Zika syndrome",
+     "points": ["Disproportionate severe microcephaly", "Intracranial calcifications and brain loss", "Arthrogryposis and retinal scarring"]
+    }
+   }
+  },
+  {
+   "title": "Chandipura virus: acute encephalitis in children",
+   "tx": "In western and central India, the sandfly-borne **Chandipura virus**, a vesiculovirus of the Rhabdoviridae family, triggers explosive seasonal outbreaks of rapidly fatal acute encephalitis syndrome in children under fifteen years of age. Spread primarily by Phlebotomus sandflies during the monsoon, the virus causes rapid cerebral oedema with sudden fever, vomiting, altered sensorium and convulsions, carrying a case fatality exceeding fifty percent.",
+   "say": "Chandipura virus is carried by sandflies and strikes children under fifteen years old. It causes rapidly progressive brain swelling, convulsions and a fatality rate exceeding fifty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Chandipura epidemiology", "Clinical significance"],
+    "rows": [
+     ["Viral classification", "Rhabdoviridae family, Vesiculovirus genus", "RNA virus with neurotropic virulence"],
+     ["Insect vector", "Phlebotomus sandfly species", "Breeds in mud walls and cattle stalls"],
+     ["Target demographic", "Children under fifteen years old", "High vulnerability to rapid brain oedema"],
+     ["Case fatality", "Between 50 and 70 percent", "Requires immediate airway and anti-oedema care"]
+    ]
+   }
+  },
+  {
+   "title": "Syndromic surveillance for acute arboviral fevers",
+   "tx": "District surveillance units monitor unusual clusters through **syndromic outbreak response** protocols under the Integrated Health Information Platform. When cases of acute encephalitis or unexplained haemorrhagic fever appear, teams collect serum, cerebrospinal fluid and acute-phase swabs for multiplex real-time polymerase chain reaction testing, while simultaneously launching insecticide spraying and larval elimination to abort local community spread.",
+   "say": "Public health squads investigate clusters of encephalitis or unexplained bleeding fevers, sending spinal fluid and blood for molecular testing while spraying insecticides to stop the spread.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cluster identification via IHIP"},
+     {"id": "b", "label": "CSF and blood molecular RT-PCR"},
+     {"id": "c", "label": "Immediate vector knockdown and larval control"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

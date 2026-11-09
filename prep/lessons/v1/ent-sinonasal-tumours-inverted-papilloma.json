@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "id": "ent-sinonasal-tumours-inverted-papilloma",
+ "subject": "ent",
+ "module": "ent-sinonasal-tumours",
+ "title": "Inverted Papilloma and Sinonasal Malignancy",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Inverted papilloma** is a benign but locally aggressive sinonasal tumour where surface epithelium grows inward into underlying stroma instead of outward, most often from the lateral nasal wall and middle meatus of middle aged men. Unilateral blockage and blood stained discharge dominate, with a fleshy reddish polyp like mass on endoscopy. Despite benign histology it recurs after incomplete removal and harbours squamous carcinoma in a minority of cases.",
+   "say": "Epithelium growing inward rather than outward forms this locally aggressive benign tumour of the lateral nasal wall. Middle aged men present with one sided blockage and blood stained discharge typically. Incomplete removal leads to recurrence, and occasional cancer change gives the tumour its clinical importance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-cavity-and-paranasal-sinuses-fig1.webp",
+    "alt": "Coronal and sagittal diagrams of nasal cavity and paranasal sinuses showing sinus anatomy, sinusitis, polyps and inverted papilloma of the lateral nasal wall.",
+    "caption": "Lateral nasal wall anatomy showing the inverted papilloma site. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Imaging separates inverted papilloma planning into bony and soft tissue questions. Computed tomography shows the mass, bony remodeling and the likely attachment site marked by focal hyperostosis, while magnetic resonance shows a convoluted cerebriform pattern that distinguishes tumour from trapped secretions. **Attachment site** identification is the surgical key, because drilling the bone beneath the pedicle is what prevents the otherwise common recurrence.",
+   "say": "Bone scanning reveals the attachment point marked by focal thickening beneath the tumour pedicle. Magnetic resonance displays a folded cerebriform pattern separating tumour from trapped secretions clearly. Drilling bone beneath the attachment prevents the recurrence that simple avulsion invites.",
+   "vis": {
+    "kind": "table",
+    "title": "Inverted papilloma imaging roles",
+    "cols": [
+     "Test",
+     "Shows"
+    ],
+    "rows": [
+     [
+      "CT scan",
+      "Attachment hyperostosis, bone change"
+     ],
+     [
+      "MRI scan",
+      "Cerebriform tumour pattern"
+     ],
+     [
+      "Endoscopy",
+      "Fleshy unilateral mass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On magnetic resonance, an inverted papilloma shows a **cerebriform pattern** of alternating curving bands. Those stripes reflect orderly columns of epithelium folded into stroma, a texture retained secretions cannot imitate. Trapped mucus behind an obstructed sinus stays uniformly bright instead. Reading this pattern lets the surgeon map tumour extent, hunt the attachment site and plan complete endoscopic removal before theatre.",
+   "say": "Magnetic resonance displays a folded cerebriform pattern separating tumour from trapped secretions clearly. Bone scanning reveals the attachment point marked by focal thickening beneath the tumour pedicle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m59-ent-sinonasal-tumours-inverted-papilloma.webp",
+    "alt": "MRI of the nasal cavity showing a folded cerebriform pattern of alternating bright and dark bands inside an inverted papilloma mass.",
+    "caption": "Alternating stripes on magnetic resonance give the tumour its folded brain-like look and separate it from bright trapped secretions beside it. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Complete endoscopic excision with drilling of the attachment bone has replaced external approaches for most inverted papillomas, reserving medial maxillectomy variants for extensive maxillary involvement. All tissue undergoes histology because synchronous **squamous cell carcinoma** occurs in roughly one in ten cases and changes follow up completely. Long endoscopic surveillance continues for years since late recurrences at the drilled site still occur after apparently successful surgery.",
+   "say": "Endoscopic removal with drilling of the attachment bone cures most patients without external incisions. Histology remains mandatory because about one case in ten harbours synchronous cancer unexpectedly. Surveillance continues for years since late recurrence still follows apparently successful surgery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Inverted papilloma: curative pathway",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Unilateral fleshy nasal mass"
+     },
+     {
+      "id": "img",
+      "label": "CT and MRI map attachment site"
+     },
+     {
+      "id": "exc",
+      "label": "Excise and drill attachment bone"
+     },
+     {
+      "id": "surv",
+      "label": "Years of endoscopic surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "img"
+     ],
+     [
+      "img",
+      "exc"
+     ],
+     [
+      "exc",
+      "surv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Carcinoma of the maxilla** is usually squamous carcinoma presenting late with cheek swelling, loose upper teeth, palatal ulcer, epistaxis, orbital displacement or numbness of the cheek from infraorbital nerve invasion. Dental symptoms mislead first consultations toward tooth extraction, losing months before imaging. Tumour above an imaginary plane from medial canthus to mandibular angle, the Ohngren line, carries worse prognosis than tumour below it.",
+   "say": "Maxillary cancer presents late with cheek swelling, loose teeth, palate ulcer or cheek numbness. Dental misdirection toward extraction loses precious months before imaging finally reveals tumour. Disease above the canthus to jaw angle plane carries the worse prognosis.",
+   "vis": {
+    "kind": "table",
+    "title": "Olfactory neuroblastoma facts",
+    "cols": [
+     "Aspect",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Origin",
+      "Olfactory epithelium of vault"
+     ],
+     [
+      "Extension",
+      "Dumbbell through cribriform plate"
+     ],
+     [
+      "Follow up",
+      "Late recurrence, prolonged review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Ohngren line** runs from the medial canthus of the eye to the angle of the mandible, dividing maxillary tumours into anteroinferior lesions with better prognosis and posterosuperior lesions with worse prognosis. Posterosuperior growth reaches orbit, pterygoid region and skull base early, limiting complete excision. Staging computed tomography and magnetic resonance together map bone destruction, orbital invasion and perineural spread before any treatment decision.",
+   "say": "Maxillary cancer presents late with cheek swelling, loose teeth, palate ulcer or cheek numbness. Dental misdirection toward extraction loses precious months before imaging reveals tumour. Disease above the canthus to jaw angle plane has the worse prognosis.",
+   "vis": {
+    "kind": "table",
+    "title": "Maxillary carcinoma by Ohngren division",
+    "cols": [
+     "Region",
+     "Behaviour",
+     "Prognosis"
+    ],
+    "rows": [
+     [
+      "Anteroinferior",
+      "Presents earlier, resectable",
+      "Better"
+     ],
+     [
+      "Posterosuperior",
+      "Orbit and skull base spread",
+      "Worse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Olfactory neuroblastoma**, also called esthesioneuroblastoma, arises from olfactory epithelium high in the nasal vault and presents with unilateral blockage, epistaxis and smell loss, sometimes with a dumbbell extension through the cribriform plate into the anterior cranial fossa. Hyams grading stratifies tumour differentiation and behaviour. Treatment combines craniofacial or endoscopic resection with radiotherapy, and late recurrence even after a decade demands prolonged follow up.",
+   "say": "Tumours of smell epithelium high in the vault cause blockage, bleeding and smell loss together. Dumbbell extension through the sieve plate into the cranial cavity complicates resection planning. Late recurrence after a decade makes prolonged follow up essential here.",
+   "vis": {
+    "kind": "table",
+    "title": "Rhinoscleroma stages",
+    "cols": [
+     "Stage",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Catarrhal",
+      "Crusting and discharge"
+     ],
+     [
+      "Granulomatous",
+      "Nodules, Hebra nose begins"
+     ],
+     [
+      "Sclerotic",
+      "Woody stenosis and scarring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rhinosporidiosis** is a chronic granulomatous infection of nose and conjunctiva, endemic around stagnant pond bathing in South Asia, producing a friable red polypoidal mass studded with white dots that bleeds profusely on touch. The white dots are mature sporangia packed with endospores, diagnostic on histology. Complete excision with electrocoagulation of the base plus adjunct antibacterial therapy reduces the otherwise stubborn tendency to recur.",
+   "say": "Pond bathing in endemic regions precedes a friable red nasal mass dotted with white spots. Those spots are spore filled sacs that confirm diagnosis under the microscope immediately. Excision with base cautery plus adjunct antibacterial therapy reduces stubborn recurrence afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rhinoscleroma-fig1.webp",
+    "alt": "Sagittal head cross section and histology showing granulomatous nasal mass disease with characteristic cells, illustrating chronic granulomatous sinonasal infection.",
+    "caption": "Chronic granulomatous nasal disease with characteristic histology. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Rhinoscleroma** is the contrasting chronic granuloma, caused by Klebsiella rhinoscleromatis, progressing through catarrhal, granulomatous and sclerotic stages to a woody hard Hebra nose with nasal stenosis. Histology shows large vacuolated Mikulicz cells containing the bacilli within macrophages, a finding examiners link directly to this disease. Prolonged antibiotics including fluoroquinolones or tetracyclines, with surgery for late scarring stenosis, form the treatment backbone.",
+   "say": "Bacterial granuloma slowly hardens the external nose through catarrhal, lumpy and scarred stages sequentially. Large vacuolated cells stuffed with bacilli confirm diagnosis on biopsy sections characteristically. Prolonged antibiotics treat active disease while surgery relieves late stenotic scarring.",
+   "vis": null
+  },
+  {
+   "tx": "Any unilateral sinonasal mass pathway converges on the same safe sequence: endoscopy, cross sectional imaging, then biopsy, with biopsy deferred when imaging suggests vascular tumour or encephalocele. **Epistaxis severity** never justifies blind packing over a mass without imaging, because tumour bleeding recurs until the lesion itself is treated. Neck nodes, orbital signs and cranial nerve deficits complete staging at first presentation.",
+   "say": "Every one sided mass follows endoscopy, imaging and then biopsy in that safe order. Vascular lesions defer biopsy until imaging excludes dangerous bleeding or brain herniation risks. Nodes, orbit and cranial nerves complete staging at first presentation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inverted papilloma",
+     "points": [
+      "Benign, epithelium inverts into stroma",
+      "Cerebriform pattern on MRI",
+      "Drill attachment to cure",
+      "Carcinoma in about one in ten"
+     ]
+    },
+    "right": {
+     "title": "Inflammatory polyp",
+     "points": [
+      "Oedematous lining, no invasion",
+      "Shrinks with steroids",
+      "Usually bilateral",
+      "No malignant potential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prognostic anchors close this lesson. Inverted papilloma recurs from its attachment, maxillary cancer worsens above the Ohngren line, and olfactory neuroblastoma recurs late from the vault. Granulomas separate by organism and cell: sporangia for rhinosporidiosis, Mikulicz cells for rhinoscleroma. **Multidisciplinary planning** with radiology, pathology and oncology precedes definitive surgery for every malignant sinonasal case without exception.",
+   "say": "Attachment drilling, prognostic planes and vault origin anchor the tumour facts worth retaining. Sporangia and vacuolated cells separate the two chronic granulomas under the microscope reliably. Multidisciplinary planning precedes definitive surgery for every malignant case without exception.",
+   "vis": {
+    "kind": "table",
+    "title": "Unilateral mass safe sequence",
+    "cols": [
+     "Order",
+     "Step"
+    ],
+    "rows": [
+     [
+      "First",
+      "Endoscopy of both cavities"
+     ],
+     [
+      "Second",
+      "CT and MRI imaging"
+     ],
+     [
+      "Third",
+      "Biopsy unless vascular lesion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Inverted papilloma cure point",
+   "b": "Excise completely and drill the bone at the attachment site; cerebriform MRI pattern; carcinoma in about one in ten."
+  },
+  {
+   "f": "Ohngren line",
+   "b": "Medial canthus to angle of mandible; posterosuperior maxillary tumours have worse prognosis."
+  },
+  {
+   "f": "Rhinosporidiosis versus rhinoscleroma cells",
+   "b": "Rhinosporidiosis: sporangia with endospores, pond exposure. Rhinoscleroma: Mikulicz cells with Klebsiella rhinoscleromatis."
+  }
+ ],
+ "keys": [
+  "Unilateral mass: image before biopsy, always histology after excision",
+  "Inverted papilloma recurs from its attachment site",
+  "Posterosuperior maxillary cancer carries worse prognosis"
+ ]
+}

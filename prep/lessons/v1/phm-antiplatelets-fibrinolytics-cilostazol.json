@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiplatelets-fibrinolytics",
+  "subject": "pharmacology",
+  "title": "Cilostazol, Glycoprotein IIb IIIa Blockers, Vorapaxar and Streptokinase",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Selective phosphodiesterase 3 inhibition in platelets and vascular smooth muscle makes **cilostazol** both antiplatelet and vasodilator, a pairing that found its home in intermittent claudication, where it extends pain free walking distance modestly, and in Asian stroke prevention practice. Headache, palpitations and diarrhoea are its tolls, and because PDE3 inhibition mirrors the inodilator class that worsened heart failure survival, cilostazol is contraindicated in heart failure of any severity.",
+      "say": "Cilostazol walks claudicants further and is banned in heart failure by its PDE3 pedigree.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cilostazol profile",
+          "points": [
+            "PDE3 inhibition: antiplatelet plus vasodilatation",
+            "Intermittent claudication walking distance improved",
+            "Headache, diarrhoea and palpitations common",
+            "Contraindicated in heart failure of any grade"
+          ]
+        },
+        "right": {
+          "title": "Prescribing cautions",
+          "points": [
+            "CYP3A4 and CYP2C19 inhibitors raise levels",
+            "Take on an empty stomach, food spikes absorption",
+            "Trial of 3 months judged by walking distance",
+            "Stop if no functional gain accrues"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The glycoprotein IIb IIIa complex is the platelet's final common receptor for fibrinogen cross linking, so blocking it produces the most complete platelet paralysis pharmacology offers. **Abciximab**, a chimeric antibody fragment, binds for days and can trigger immune thrombocytopenia; small molecules eptifibatide (a peptide) and tirofiban (a non peptide) wear off within hours of stopping, suiting their catheter laboratory and high risk acute coronary niches.",
+      "say": "Block IIb IIIa and platelets cannot cross link at all; antibody lasts days, small molecules hours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/haemostasis-platelets-cascade-fibrinolysis-fig1.webp",
+        "alt": "Mechanisms of haemostasis and fibrinolysis diagram showing platelet aggregation via glycoprotein IIb IIIa",
+        "caption": "Platelet aggregation through glycoprotein IIb IIIa fibrinogen bridging, the final step abciximab, eptifibatide and tirofiban block."
+      }
+    },
+    {
+      "tx": "**Modern restraint** shrunk this class from routine to rescue: bailout for heavy thrombus burden, slow flow or thrombotic complications during intervention, and selected upstream use where potent oral P2Y12 loading has not yet landed. Bleeding, thrombocytopenia (including a pseudothrombocytopenia laboratory artefact with abciximab) and the availability of faster oral agents wrote that demotion. Renal dosing governs eptifibatide and tirofiban infusions; platelet counts are checked within hours of starting any of the three.",
+      "say": "IIb IIIa blockers are now bailout tools, not openers; check platelets within hours of starting.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thrombus",
+            "label": "Heavy thrombus or slow flow during intervention"
+          },
+          {
+            "id": "gpi",
+            "label": "Glycoprotein IIb IIIa blocker bolus and infusion"
+          },
+          {
+            "id": "plt",
+            "label": "Platelet count checked within 2 to 6 hours"
+          },
+          {
+            "id": "bleed",
+            "label": "Bleeding surveillance at access and retroperitoneum"
+          }
+        ],
+        "edges": [
+          [
+            "thrombus",
+            "gpi"
+          ],
+          [
+            "gpi",
+            "plt"
+          ],
+          [
+            "plt",
+            "bleed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Protease activated receptor 1 (PAR 1) carries thrombin's signal to the platelet surface, and **vorapaxar** blocks it, adding a fourth antiplatelet pathway beside COX, P2Y12 and IIb IIIa. Trials in prior infarction and peripheral disease showed fewer ischaemic events bought with more major bleeding including intracranial haemorrhage, banning it after stroke or TIA and confining it to a narrow secondary prevention shelf. Its effective half life of days makes bleeding management purely supportive.",
+      "say": "Vorapaxar blocks thrombin's own platelet receptor; benefit narrow, bleeding long, prior stroke banned.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vorapaxar facts",
+          "points": [
+            "PAR 1 antagonism: a fourth antiplatelet pathway",
+            "Prior infarction or peripheral arterial disease studied",
+            "Once daily oral dosing, effect lasts days",
+            "Added to aspirin with or without clopidogrel in trials"
+          ]
+        },
+        "right": {
+          "title": "Vorapaxar exclusions",
+          "points": [
+            "Prior stroke, TIA or intracranial bleeding: contraindicated",
+            "Major and intracranial bleeding increased",
+            "No specific reversal; supportive care only",
+            "Strong CYP3A4 partners avoided"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "From platelets to fibrin: **streptokinase**, a streptococcal protein, complexes with plasminogen and converts other plasminogen molecules to plasmin wholesale, dissolving fibrin but also shredding circulating fibrinogen and factors in a systemic lytic state. Cheap and historically transformative in myocardial infarction and massive pulmonary embolism, it is antigenic: prior exposure or recent streptococcal infection raises neutralising antibodies and allergy including anaphylaxis, barring readministration for at least a year and practically for life.",
+      "say": "Streptokinase dissolves clots and fibrinogen alike, and the immune system remembers it; never give it twice.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiplatelets-dapt-fibrinolytics-txa-fig1.webp",
+        "alt": "Antiplatelet, fibrinolytic and tranexamic acid target mechanisms diagram",
+        "caption": "Fibrinolytic targets on the same map as antiplatelet agents, with streptokinase activating plasminogen systemically."
+      }
+    },
+    {
+      "tx": "**Streptokinase's systemic lysis** contrasts with the fibrin specificity engineered into alteplase and successors in the next lesson: streptokinase drops fibrinogen for a day or more, prolongs every clotting time and bleeds accordingly, while its low price keeps it on formularies where newer agents are unaffordable. Hypotension during infusion from bradykinin generation is managed by slowing the rate. When it is the only lytic available, its contraindication list, recent bleeding, surgery, stroke and uncontrolled hypertension, deserves slow reading.",
+      "say": "Cheap, antigenic and indiscriminate: streptokinase where nothing else is stocked, with its contraindications read slowly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Streptokinase lytic state",
+          "points": [
+            "Systemic plasmin generation, fibrinogen consumed",
+            "Clotting times prolonged for 24 hours or more",
+            "Hypotension during infusion, slow the rate",
+            "Allergy and anaphylaxis with prior exposure"
+          ]
+        },
+        "right": {
+          "title": "Before any lytic, exclude",
+          "points": [
+            "Prior intracranial bleeding or recent stroke",
+            "Recent major surgery, trauma or bleeding",
+            "Severe uncontrolled hypertension",
+            "Active bleeding or known bleeding disorder"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "One **comparison** fixes the antiplatelet hierarchy by completeness: aspirin and P2Y12 blockers mute activation signals, cilostazol raises the intracellular brake cyclic AMP, vorapaxar silences thrombin's receptor, and IIb IIIa blockers abolish aggregation itself downstream of every signal. Bleeding risk climbs in roughly that order, which is why the strongest agents live in monitored laboratories and the weakest protect populations for decades.",
+      "say": "Signal blockers for populations, aggregation blockers for laboratories; bleeding climbs with completeness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "signal",
+            "label": "Activation signals: thromboxane, ADP, thrombin PAR1"
+          },
+          {
+            "id": "brake",
+            "label": "Intracellular brake: cyclic AMP raised by PDE inhibitors"
+          },
+          {
+            "id": "aggregate",
+            "label": "Final aggregation: IIb IIIa fibrinogen bridging"
+          },
+          {
+            "id": "bleed",
+            "label": "Bleeding risk rises toward the final common step"
+          }
+        ],
+        "edges": [
+          [
+            "signal",
+            "aggregate"
+          ],
+          [
+            "brake",
+            "aggregate"
+          ],
+          [
+            "aggregate",
+            "bleed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Perioperative sorting** of this lesson's agents follows offset speed: cilostazol stopped two days before high risk surgery, IIb IIIa small molecules within hours by infusion design, abciximab's platelet bound effect lasting days, and vorapaxar effectively irreversible across a surgical week. Elective operations on recent vorapaxar or abciximab are postponed where anatomy allows, and neuraxial anaesthesia observes the longest windows in the anaesthetist's tables.",
+      "say": "Offset speed writes the surgical calendar: hours for small molecules, days for abciximab and vorapaxar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Shorter offsets",
+          "points": [
+            "Eptifibatide and tirofiban: hours after infusion stops",
+            "Cilostazol: stop about 2 days before high risk surgery",
+            "Ticagrelor (previous lesson): 3 to 5 days",
+            "Aspirin: usually continued perioperatively"
+          ]
+        },
+        "right": {
+          "title": "Longer offsets",
+          "points": [
+            "Abciximab: platelet bound effect over days",
+            "Vorapaxar: functional effect across about a week",
+            "Clopidogrel and prasugrel: 5 and 7 days respectively",
+            "Neuraxial windows are the strictest of all"
+          ]
+        }
+      }
+    }
+  ]
+}

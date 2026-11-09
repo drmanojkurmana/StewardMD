@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoeal-food-poisoning",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoeal",
+ "title": "Food Poisoning: Incubation Clues and Outbreak Investigation",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The meal everyone shared",
+   "tx": "**Food poisoning** is acute gastroenteritis acquired from contaminated food or drink, typically striking a group who shared a meal within a characteristic incubation window. The shared exposure plus timetable is the diagnostic engine: list who ate what and when illness began, and the organism often names itself before any stool result returns.",
+   "say": "Shared meal, grouped illness, clock running. Food histories and onset times name organisms faster than laboratories. Start with the menu and the seating list.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Yield"],
+    "rows": [
+     ["Who ate which item", "Food specific attack rates"],
+     ["Onset hours after meal", "Incubation signature"],
+     ["Dominant symptom", "Vomiting versus diarrhoea split"],
+     ["Others ill elsewhere", "Commercial source suspicion"]
+    ]
+   }
+  },
+  {
+   "title": "One to six hours: preformed toxin",
+   "tx": "**Staphylococcal food poisoning** erupts one to six hours after eating, with violent vomiting dominant, because Staphylococcus aureus toxin was already formed in the kept warm food and survives reheating. Bacillus cereus emetic type from reheated fried rice mirrors it. Antibiotics are useless; support and fluids carry the short, dramatic course.",
+   "say": "Vomiting within six hours means toxin preformed in the food. Staph in kept dishes, cereus in reheated rice. Reheating cannot save food already poisoned.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Organism", "Signature"],
+    "rows": [
+     ["Staphylococcus aureus", "1 to 6 h, vomiting dominant"],
+     ["Bacillus cereus emetic", "Reheated fried rice, vomiting"],
+     ["Course", "12 to 24 hours, self limited"],
+     ["Treatment", "Fluids and support only"]
+    ]
+   }
+  },
+  {
+   "title": "Six to seventy two hours: living organisms",
+   "tx": "**Salmonella and Campylobacter** illnesses incubate longer, roughly six to seventy two hours, with fever, cramps and diarrhoea dominant as organisms invade or inflame the gut after ingestion. Eggs, poultry, unpasteurised milk and cross contaminated boards recur in histories. Most cases need fluids alone; antibiotics reserve for invasive or high risk disease.",
+   "say": "Longer incubation with fever and cramps means living organisms at work. Ask eggs, poultry, raw milk. Fluids treat most; antibiotics wait for invasion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preformed toxin",
+     "points": ["Onset 1 to 6 hours", "Vomiting dominant", "Fever usually absent", "Very short course"]
+    },
+    "right": {
+     "title": "Infection type",
+     "points": ["Onset 6 to 72 hours", "Diarrhoea and fever dominant", "Cramps prominent", "Course of days"]
+    }
+   }
+  },
+  {
+   "title": "Botulism: the neurological outlier",
+   "tx": "**Botulism** breaks the gastroenteritis pattern: home preserved low acid foods deliver toxin that causes descending symmetrical paralysis with dry mouth, double vision, dysphagia and respiratory failure, often with little fever or diarrhoea. It is a public health emergency needing antitoxin, airway readiness and immediate notification, never a watch and wait diagnosis.",
+   "say": "Descending paralysis, dry mouth, double vision after home preserves: botulism until proven otherwise. Antitoxin, airway, notify today. This one never waits.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Meaning"],
+    "rows": [
+     ["Diplopia, dysphagia", "Cranial nerve onset"],
+     ["Descending weakness", "Toxin pattern"],
+     ["Dry mouth", "Autonomic involvement"],
+     ["Home preserved food", "Exposure clue"]
+    ]
+   }
+  },
+  {
+   "title": "Food specific attack rates",
+   "tx": "The **attack rate table** cross tabulates illness against each food item eaten or skipped, and the item with high illness among eaters and near zero among non eaters accuses itself. Dose response, more eaten more ill, strengthens the charge. This two by two arithmetic is the beating heart of every outbreak report.",
+   "say": "Ill among eaters, well among skippers, sicker with bigger helpings. That arithmetic accuses a dish before cultures return. Build the table at the first visit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "List all attendees and foods"},
+     {"id": "b", "label": "Tabulate ill by item eaten"},
+     {"id": "c", "label": "Compare eaters versus non eaters"},
+     {"id": "d", "label": "Accuse item, sample remnants"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Samples before the clean up",
+   "tx": "**Sample discipline** decides whether laboratories can confirm the table's accusation: refrigerate leftover food, collect stool and vomitus from early cases, note batch and purchase details for commercial items, and stop further sale or service of suspect stock. Well meant kitchen clean ups destroy more outbreak evidence than any delay in testing.",
+   "say": "Refrigerate leftovers, sample early cases, freeze the suspect stock from sale. Evidence first, clean up second. Kitchens scrub away proof with the best intentions.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sample", "Handling"],
+    "rows": [
+     ["Leftover food", "Refrigerate, do not discard"],
+     ["Stool and vomitus", "Early cases, sterile containers"],
+     ["Commercial item", "Batch and purchase record"],
+     ["Suspect stock", "Stop sale pending results"]
+    ]
+   }
+  },
+  {
+   "title": "Chemical and natural food toxins",
+   "tx": "**Non bacterial causes** widen the differential: mushroom toxins with delayed liver failure, scombroid histamine flushing from spoiled fish within minutes, heavy metals leaching into acidic drinks from vessels, pesticide contamination, and plant toxins such as argemone in mustard oil causing epidemic dropsy. A negative stool culture never closes an investigation alone.",
+   "say": "Minutes and flushing mean scombroid; days and jaundice after mushrooms mean hepatotoxins; dropsy points to argemone oil. Negative cultures leave chemistry unanswered.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Agent", "Clue"],
+    "rows": [
+     ["Scombroid", "Flushing minutes after fish"],
+     ["Mushroom toxins", "Delayed liver failure"],
+     ["Argemone oil", "Epidemic dropsy, oedema"],
+     ["Metal leaching", "Acidic drink in reactive vessel"]
+    ]
+   }
+  },
+  {
+   "title": "Prevention in kitchens that feed crowds",
+   "tx": "**Food safety discipline** for mass cooking rests on cook thoroughly, serve hot or refrigerate fast, separate raw and cooked, wash hands and boards, and exclude ill food handlers. The two hour room temperature rule for cooked food, rapid cooling in shallow trays and reheating to steaming throughout prevent the toxin forming head start.",
+   "say": "Hot held hot, cold held cold, raw away from cooked, ill handlers sent home. Two hours at room temperature is the toxin clock ticking.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rule", "Prevents"],
+    "rows": [
+     ["Serve hot or chill fast", "Toxin formation window"],
+     ["Separate raw and cooked", "Cross contamination"],
+     ["Exclude ill handlers", "Staph and norovirus seeding"],
+     ["Reheat to steaming", "Vegetative organisms, not toxins"]
+    ]
+   }
+  },
+  {
+   "title": "Notification and the report that prevents seconds",
+   "tx": "**Outbreak reporting** moves the same day to food safety and public health authorities when a commercial premises, institution kitchen or public event is implicated, because the next service repeats the exposure. The written report preserves the attack rate table, samples taken, control measures and handler exclusions, closing only after a symptom free interval passes.",
+   "say": "Commercial kitchen implicated means same day notification; tomorrow's service is the second outbreak. Write the table, the samples, the exclusions. Close after silence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cluster recognised"},
+     {"id": "b", "label": "Authorities notified same day"},
+     {"id": "c", "label": "Kitchen controlled, handlers excluded"},
+     {"id": "d", "label": "Report closed after silent interval"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

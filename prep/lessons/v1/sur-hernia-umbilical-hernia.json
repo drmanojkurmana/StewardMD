@@ -1,0 +1,258 @@
+{
+ "v": 1,
+ "module": "sur-hernia",
+ "subject": "surgery",
+ "title": "Umbilical and Uncommon Abdominal Wall Hernias",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A protrusion of peritoneum and bowel through the umbilical ring in an adult is an **umbilical hernia**. Unlike the common infant hernia that usually closes on its own, an adult umbilical hernia often follows raised abdominal pressure from obesity, pregnancy or ascites. The neck is often narrow, so these hernias carry a real risk of becoming stuck and strangulated.",
+   "say": "Adult umbilical hernias follow raised abdominal pressure and often need repair because the narrow neck can trap bowel.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/umbilical-hernia-fig1.webp",
+    "alt": "Umbilical hernia protruding through the umbilical ring.",
+    "caption": "Umbilical hernia: bowel protrudes through the umbilical ring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A hernia that appears through a previous surgical scar is called an **incisional hernia**. It develops where the fascial closure has weakened, and risk rises with wound infection, obesity, smoking and early heavy strain. Large incisional hernias may contain much of the bowel, a situation surgeons call loss of domain.",
+   "say": "Incisional hernias come through old scars, and very large ones can hold so much bowel that surgeons call it loss of domain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/incisional-hernia-fig1.webp",
+    "alt": "Incisional hernia through a previous abdominal scar with mesh repair.",
+    "caption": "Incisional hernia: herniation through a weakened surgical scar. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Repair of a large incisional hernia usually reinforces the wall with a **prosthetic mesh**. Placing mesh behind the muscle layer gives a wide overlap and lower recurrence than stitching the edges together under tension. Component separation techniques release muscle layers so the midline can close over the mesh.",
+   "say": "Mesh placed behind the muscle, sometimes with component separation, repairs large incisional hernias with fewer recurrences.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Wide fascial defect in old scar"
+     },
+     {
+      "id": "n1",
+      "label": "Mesh placed behind muscle layer"
+     },
+     {
+      "id": "n2",
+      "label": "Component separation if midline will not close"
+     },
+     {
+      "id": "n3",
+      "label": "Tension free repair with low recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rare hernia through the semilunar line at the edge of the rectus muscle is a **Spigelian hernia**. Because the sac spreads beneath the external oblique sheet, there may be pain with little visible swelling. Ultrasound or computed tomography usually confirms the diagnosis when examination is uncertain.",
+   "say": "Spigelian hernias hide under the external oblique, so imaging often makes the diagnosis when examination is unclear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hernia",
+     "Site",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Spigelian",
+      "Semilunar line",
+      "Pain with little swelling"
+     ],
+     [
+      "Obturator",
+      "Obturator canal",
+      "Thigh pain in thin elderly women"
+     ],
+     [
+      "Lumbar",
+      "Lumbar triangle",
+      "Flank swelling after surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Passage of the hernia through the obturator canal produces an **obturator hernia**. It is seen mostly in thin elderly women and often presents as small bowel obstruction without a visible lump. Pain shooting down the inner thigh when the leg is moved is a helpful bedside clue.",
+   "say": "Obturator hernias affect thin elderly women and often present only as bowel obstruction with inner thigh pain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Thin elderly woman"
+     },
+     {
+      "id": "n1",
+      "label": "Small bowel obstruction"
+     },
+     {
+      "id": "n2",
+      "label": "Pain down inner thigh"
+     },
+     {
+      "id": "n3",
+      "label": "Obturator hernia until proved otherwise"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A hernia in which only part of the bowel wall is trapped is called a **Richter hernia**. Because the lumen stays partly open, obstruction may be absent while the trapped wall quietly becomes gangrenous. This is why a painful groin lump with tenderness always deserves urgent surgical review.",
+   "say": "In a Richter hernia only part of the bowel wall is trapped, so gangrene can develop without full obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Richter hernia",
+     "points": [
+      "Part of bowel wall trapped",
+      "Lumen partly open",
+      "Obstruction may be absent",
+      "Gangrene still possible"
+     ]
+    },
+    "right": {
+     "title": "Complete hernia",
+     "points": [
+      "Whole bowel loop trapped",
+      "Lumen fully blocked",
+      "Vomiting and distension",
+      "Obstruction dominates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When an organ forms part of the hernia sac wall itself, surgeons call it a **sliding hernia**. The caecum, sigmoid colon or bladder commonly slides in this way. Recognising it matters because opening the sac carelessly can injure the organ that forms its wall.",
+   "say": "In a sliding hernia the caecum, colon or bladder forms part of the sac wall, so careless opening can injure it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sliding organ",
+     "Side",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Caecum",
+      "Right",
+      "Bowel injury if sac opened"
+     ],
+     [
+      "Sigmoid colon",
+      "Left",
+      "Bowel injury if sac opened"
+     ],
+     [
+      "Bladder",
+      "Either",
+      "Urinary leak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most symptomatic abdominal wall hernias are treated by **elective hernia repair**. Repair may be open or laparoscopic, with mesh for most adult hernias. Operating before strangulation occurs is far safer than emergency surgery in an obstructed, unwell patient. Mesh repair lowers recurrence compared with suture repair in larger defects, but mesh is avoided when gangrenous bowel contaminates the field.",
+   "say": "Elective repair, usually with mesh, is far safer than waiting for strangulation and emergency surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Symptomatic hernia"
+     },
+     {
+      "id": "n1",
+      "label": "Fitness and consent assessed"
+     },
+     {
+      "id": "n2",
+      "label": "Open or laparoscopic mesh repair"
+     },
+     {
+      "id": "n3",
+      "label": "Early mobilisation after surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A hernia whose contents cannot be pushed back but whose blood supply remains intact is an **irreducible hernia**. It needs prompt assessment because irreducibility often precedes obstruction and strangulation. Forceful attempts to push it back are unsafe and can return gangrenous bowel into the abdomen.",
+   "say": "An irreducible hernia needs prompt assessment, and forceful pushing back is unsafe because gangrenous bowel may return inside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Irreducible hernia",
+     "points": [
+      "Cannot be pushed back",
+      "Blood supply intact",
+      "Needs prompt review",
+      "No forceful reduction"
+     ]
+    },
+    "right": {
+     "title": "Strangulated hernia",
+     "points": [
+      "Blood supply cut off",
+      "Severe pain and tenderness",
+      "Emergency operation",
+      "Bowel resection may be needed"
+     ]
+    }
+   }
+  }
+ ]
+}

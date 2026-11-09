@@ -13,13 +13,16 @@
   "use strict";
   var RX = /^(loading|fetching|syncing|preparing)\b[^]{0,50}?(…|\.\.\.|\.|&hellip;)?$/i;
   function isPlaceholderText(t) { t = String(t || "").replace(/\s+/g, " ").trim(); return t.length >= 7 && t.length <= 60 && RX.test(t); }
-  var seam = { isPlaceholderText: isPlaceholderText };
+  // Wider wording, only ever used for a placeholder alone on its screen. Needs an ellipsis so titles like "Getting started" stay.
+  var WIDE = /^(?:(?:building|generating|opening|starting|connecting|getting|analy[sz]ing|creating|setting up|checking|waking|warming)\b[^]{0,50}?(?:…|\.\.\.)|(?:please wait|one moment|just a moment)\b[^]{0,40})$/i;
+  function isWideText(t) { t = String(t || "").replace(/\s+/g, " ").trim(); return t.length >= 7 && t.length <= 60 && WIDE.test(t); }
+  var seam = { isPlaceholderText: isPlaceholderText, isWideText: isWideText };
   if (typeof module !== "undefined" && module.exports) module.exports = seam;
   if (typeof window === "undefined") return;
   try { if (localStorage.getItem("smd_skeletons") === "0") return; } catch (e) {}
   window.SMD_SKEL_SEAM = seam;
 
-  var HOST = "smd-skel-host";
+  var HOST = "smd-skel-host", LD_SRC = "smd-ld-src";
   var css =
     "." + HOST + "{--sk:rgba(120,130,140,.16);--sh:rgba(255,255,255,.55);color:transparent!important;text-shadow:none!important;" +
     "min-height:144px;border-radius:12px;position:relative;overflow:hidden;" +
@@ -33,6 +36,7 @@
     "body.dark ." + HOST + ",body.v3-dark ." + HOST + "{--sk:rgba(255,255,255,.08);--sh:rgba(255,255,255,.07)}" +
     "@media (prefers-color-scheme:dark){html:not([data-theme=light]) body:not(.light) ." + HOST + "{--sk:rgba(255,255,255,.08);--sh:rgba(255,255,255,.07)}}" +
     "@keyframes smdSkel{to{background-position:250% 0,4px 14px,56px 18px,56px 38px}}" +
+    "." + LD_SRC + "{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)}" +
     "@media (prefers-reduced-motion:reduce){." + HOST + "{animation:none}}";
   var st = document.createElement("style"); st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
@@ -40,17 +44,65 @@
   var hosts = [];
   function reduced() { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   function eligible(el) {
-    if (!el || el.nodeType !== 1 || el.classList.contains(HOST)) return false;
+    if (!el || el.nodeType !== 1 || el.classList.contains(HOST) || el.closest("." + LD_SRC)) return false;
     if (el.closest("button,a,option,select,label,input,textarea,[role=button],[class*='skel'],[data-no-skel]")) return false;
-    if (el.children.length > 2 || !isPlaceholderText(el.textContent)) return false;
+    var wide = !isPlaceholderText(el.textContent);
+    if (el.children.length > 2 || (wide && !isWideText(el.textContent))) return false;
     var cs = getComputedStyle(el);
     if (cs.display.indexOf("inline") === 0 || cs.position === "fixed") return false;
-    return el.getBoundingClientRect().width >= 160;
+    if (el.getBoundingClientRect().width < 160) return false;
+    return !wide || (!!window.SMD_LOADER && aloneOnScreen(el));
   }
-  function mark(el) { el.classList.add(HOST); el.setAttribute("aria-busy", "true"); hosts.push({ el: el, parent: el.parentElement }); }
+  // A placeholder alone on its screen gets the 3D loader and a fact instead of rows; everything else keeps the rows.
+  function aloneOnScreen(el) {
+    var own = el.textContent.replace(/\s+/g, "").length, r = el, p;
+    while ((p = r.parentElement) && p !== document.body) {
+      var t = p.textContent;
+      if (t.length > 3000 || t.replace(/\s+/g, "").length - own > 160) break;
+      r = p;
+    }
+    return r.getBoundingClientRect().height >= 280;
+  }
+  function mark(el) {
+    var ld = null;
+    if (window.SMD_LOADER && aloneOnScreen(el)) {
+      ld = addLoader(el);
+    }
+    el.classList.add(ld ? LD_SRC : HOST); el.setAttribute("aria-busy", "true");
+    hosts.push({ el: el, parent: el.parentElement, ld: ld });
+  }
+  function addLoader(el) {
+    var box = document.createElement("div"); box.innerHTML = window.SMD_LOADER.html();
+    return el.parentNode.insertBefore(box.firstChild, el.nextSibling);
+  }
+  // Hand-built skeletons and bare spinners that are alone on their screen get the loader too.
+  var BUSY = '[class*="skel"],[class*="shimmer"],[class*="-spin"],[class*="spinner"],[class*="-loading"],.oph-load,.ex-load,.kel-load';
+  var REAL = "img,video,canvas,input,textarea,select,button,a,iframe,[role=button]";
+  function quiet(el) {
+    var t = el.textContent;
+    if (t.length > 600 || el.querySelector(REAL) || el.matches(REAL)) return false;
+    return !t.trim() || isPlaceholderText(t) || isWideText(t);
+  }
+  function floating(el) { var p = getComputedStyle(el).position; return p === "fixed" || p === "absolute"; }
+  function scanBusy(root) {
+    if (!window.SMD_LOADER || (root.textContent || "").length > 1200) return;
+    var list = root.querySelectorAll(BUSY), all = root.matches(BUSY) ? [root] : [], i;
+    for (i = 0; i < list.length && i < 60; i++) all.push(list[i]);
+    for (i = 0; i < all.length; i++) {
+      var b = all[i], p;
+      if (!b.isConnected || !b.getClientRects().length || !quiet(b) || b.closest("[data-no-skel],.smd-ld-cover,#smdBootSplash,." + LD_SRC + ",." + HOST)) continue;
+      while ((p = b.parentElement) && p !== document.body && quiet(p) && !floating(p)) b = p;
+      if (floating(b) || getComputedStyle(b).display.indexOf("inline") === 0 || b.getBoundingClientRect().width < 160 || !aloneOnScreen(b)) continue;
+      var ld = addLoader(b);
+      b.classList.add(LD_SRC); b.setAttribute("aria-busy", "true");
+      hosts.push({ el: b, parent: b.parentElement, ld: ld, busy: true });
+    }
+  }
+  function dropLoader(h) { if (h.ld && h.ld.parentNode) h.ld.parentNode.removeChild(h.ld); }
   function scan(root) {
     if (!root || root.nodeType !== 1) return;
-    var tc = root.textContent; if (!tc || tc.length > 4000 || !/load|fetch|sync|prepar/i.test(tc)) return;
+    scanBusy(root);
+    var tc = root.textContent; if (!tc || tc.length > 4000 || !/load|fetch|sync|prepar|build|generat|open|start|connect|get|analy|creat|setting|check|wak|warm|wait|moment/i.test(tc)) return;
     if (eligible(root)) { mark(root); return; }
     var all = root.getElementsByTagName("*");
     for (var i = 0; i < all.length && i < 400; i++) if (eligible(all[i])) mark(all[i]);
@@ -73,10 +125,12 @@
       var h = hosts[k];
       if (!h.el.isConnected) {
         hosts.splice(k, 1);
+        dropLoader(h);
         if (h.parent && h.parent.isConnected && touched.indexOf(h.parent) < 0) touched.push(h.parent);
-      } else if (!isPlaceholderText(h.el.textContent)) {
+      } else if (h.busy ? (!h.el.getClientRects().length || !(h.el.matches(BUSY) || h.el.querySelector(BUSY))) : !(isPlaceholderText(h.el.textContent) || isWideText(h.el.textContent))) {
         hosts.splice(k, 1);
-        h.el.classList.remove(HOST); h.el.removeAttribute("aria-busy");
+        dropLoader(h);
+        h.el.classList.remove(HOST, LD_SRC); h.el.removeAttribute("aria-busy");
         fadeIn(h.el);
       }
     }
@@ -87,7 +141,7 @@
   });
   function start() {
     scan(document.body);
-    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["class"] });
   }
   if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
 })();

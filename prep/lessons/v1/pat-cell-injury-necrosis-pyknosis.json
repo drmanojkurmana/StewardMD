@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-cell-injury-necrosis",
+  "subject": "pathology",
+  "title": "Nuclear Changes in Necrosis, Mitochondrial Pores, and Calcium Influx",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The definitive morphological hallmark proving that an injured cell has suffered irreversible death is the dissolution of its nucleus. In necrotic cells, endonucleases and non-specific deoxyribonucleases degrade chromatin, initiating an orderly sequence of three nuclear changes designated **pyknosis, karyorrhexis, and karyolysis**.",
+      "say": "Nuclear breakdown in necrosis progresses through pyknosis, karyorrhexis, and karyolysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tuberculous-meningitis-fig1.webp",
+        "caption": "Extensive necrotizing meningeal exudate displaying chromatin destruction and cell death.",
+        "alt": "Tuberculous necrotizing inflammation demonstrating dense chromatin degeneration"
+      }
+    },
+    {
+      "tx": "The initial nuclear alteration in irreversible cell death is nuclear condensation and shrinkage. Termed **pyknosis**, progressive chromatin compaction transforms the nucleus into a small, dense, intensely basophilic, structureless solid mass, reflecting loss of normal chromatin architecture and profound acidification of the nucleoplasm.",
+      "say": "Pyknosis is nuclear shrinkage into a small, dense, intensely basophilic mass.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "acidic_nucleoplasm",
+            "label": "Intracellular Lactic Acid Lowers Nucleoplasmic pH Below 6.5"
+          },
+          {
+            "id": "chromatin_pack",
+            "label": "Chromatin Fibers Condense and Aggregate into Insoluble Masses"
+          },
+          {
+            "id": "nuclear_shrink",
+            "label": "Nuclear Volume Shrinks by Over 50%, Becoming Intensely Hyperchromatic"
+          },
+          {
+            "id": "pyknotic_marker",
+            "label": "Small Dark Pyknotic Mass Provides Distinct Histological Signature"
+          }
+        ],
+        "edges": [
+          [
+            "acidic_nucleoplasm",
+            "chromatin_pack"
+          ],
+          [
+            "chromatin_pack",
+            "nuclear_shrink"
+          ],
+          [
+            "nuclear_shrink",
+            "pyknotic_marker"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following initial nuclear compaction and shrinkage, the pyknotic nucleus undergoes destructive structural disintegration and fragmentation. During **karyorrhexis**, calcium-dependent nuclear endonucleases cleave the condensed chromatin into numerous small, irregular, basophilic granules that scatter widely throughout the cytoplasm as the nuclear envelope breaks down completely.",
+      "say": "Karyorrhexis fragments the shrunken pyknotic nucleus into scattered basophilic chromatin granules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pyknosis Characteristics",
+          "points": [
+            "Marked shrinkage and condensation of nuclear size",
+            "Extreme basophilic dark staining with hematoxylin",
+            "Nuclear membrane remains intact around the shrunken core",
+            "Represents the initial structural phase of necrotic nuclear death"
+          ]
+        },
+        "right": {
+          "title": "Karyorrhexis Characteristics",
+          "points": [
+            "Complete fragmentation of the condensed pyknotic nucleus",
+            "Nuclear envelope ruptures and dissolves into vesicles",
+            "Basophilic chromatin particulate dust scatters into cytoplasm",
+            "Cleaved by calcium-dependent endonucleases into random fragments"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The final stage of necrotic nuclear demise is the progressive enzymatic fading and complete disappearance of basophilic chromatin staining. Designated **karyolysis**, active lysosomal deoxyribonucleases degrade the fragmented nuclear DNA, causing the nucleus to fade into a faint shadow before dissolving completely within one to two days.",
+      "say": "Karyolysis dissolves nuclear chromatin completely through DNase action, leaving an anucleate cell.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dnase_release",
+            "label": "Acidic Lysosomal Deoxyribonucleases (DNase) Leak into Cytoplasm"
+          },
+          {
+            "id": "dna_hydrolysis",
+            "label": "Enzymatic Hydrolysis Digests Phosphodiester Backbone of DNA"
+          },
+          {
+            "id": "basophilia_fades",
+            "label": "Nuclear Basophilic Hematoxylin Staining Gradually Fades and Clears"
+          },
+          {
+            "id": "anucleate_shadow",
+            "label": "Cell Becomes Entirely Anucleate, Forming Characteristic Necrotic Ghost"
+          }
+        ],
+        "edges": [
+          [
+            "dnase_release",
+            "dna_hydrolysis"
+          ],
+          [
+            "dna_hydrolysis",
+            "basophilia_fades"
+          ],
+          [
+            "basophilia_fades",
+            "anucleate_shadow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A critical molecular mechanism precipitating irreversible cell death is opening of high-conductance protein channels in the inner mitochondrial membrane. Termed the **mitochondrial permeability transition pore**, this channel consists of cyclophilin D, adenine nucleotide translocator, and voltage-dependent anion channels, whose opening dissipates the essential mitochondrial proton gradient.",
+      "say": "Opening of mitochondrial permeability transition pores collapses the proton gradient, ending ATP production.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-retinal-necrosis-fig1.webp",
+        "caption": "Severe retinal tissue necrosis displaying rapid cellular lysis and structural organelle dissolution.",
+        "alt": "Acute retinal parenchymal necrosis and loss of cellular structure"
+      }
+    },
+    {
+      "tx": "Opening of the mitochondrial permeability transition pore causes the inner mitochondrial membrane potential to collapse instantly from minus one hundred and eighty millivolts to zero. Without a proton-motive force, **ATP synthesis terminates**, water and solutes rush into the mitochondrial matrix, and the swelling organelle ruptures its outer membrane.",
+      "say": "Mitochondrial membrane potential collapse terminates ATP synthesis and causes osmotic matrix swelling.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intact Mitochondrial Membrane",
+          "points": [
+            "Maintains -180 mV electrical gradient across inner membrane",
+            "Proton-motive force drives ATP synthase (Complex V) rotation",
+            "Retains cytochrome c within intermembrane space",
+            "Permeability transition pores remain closed under cyclophilin D control"
+          ]
+        },
+        "right": {
+          "title": "Permeability Transition Pore Opening",
+          "points": [
+            "Triggered by cytosolic calcium excess, oxidative stress, and ATP loss",
+            "Immediate collapse of inner membrane electrical gradient to zero",
+            "Uncontrolled osmotic influx drives high-amplitude matrix swelling",
+            "Ruptures outer membrane, releasing pro-apoptotic factors into cytosol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rupture of the outer mitochondrial membrane releases intermembrane proteins into the cytosol, most critically cytochrome c and second mitochondria-derived activator of caspases. In the cytosol, released **cytochrome c** binds apoptotic protease activating factor-one, activating downstream caspase cascades if sufficient ATP remains, or contributing to necrotic collapse.",
+      "say": "Mitochondrial outer membrane rupture discharges cytochrome c into the cytoplasm, triggering caspases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "matrix_swelling",
+            "label": "Continuous Solute Influx Over-Expands Inner Mitochondrial Matrix"
+          },
+          {
+            "id": "outer_rupture",
+            "label": "Tense Outer Membrane Tears, Discharging Intermembrane Contents"
+          },
+          {
+            "id": "cyt_c_release",
+            "label": "Cytochrome C, SMAC/DIABLO, and Apoptosis-Inducing Factor Enter Cytosol"
+          },
+          {
+            "id": "caspase_trigger",
+            "label": "Cytochrome C Initiates Intrinsic Apoptotic Pathway via Apaf-1 Binding"
+          }
+        ],
+        "edges": [
+          [
+            "matrix_swelling",
+            "outer_rupture"
+          ],
+          [
+            "outer_rupture",
+            "cyt_c_release"
+          ],
+          [
+            "cyt_c_release",
+            "caspase_trigger"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A profound biochemical consequence of severe membrane damage is the accumulation of insoluble amorphous mineral deposits within dead tissue. In irreversible coagulative necrosis, massive calcium influx into structurally disrupted mitochondria precipitates as dense **flocculent mitochondrial densities**, serving as an ultrastructural confirmation of irreversible cell death.",
+      "say": "Flocculent amorphous densities in damaged mitochondria provide definitive ultrastructural proof of cell death.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "calcium_avalanche",
+            "label": "Massive Influx of Extracellular Calcium Invades Injured Cytosol"
+          },
+          {
+            "id": "phosphate_chelate",
+            "label": "Calcium Chelates with Inorganic Phosphates in De-energized Matrix"
+          },
+          {
+            "id": "amorphous_density",
+            "label": "Forms Insoluble Large Amorphous Densities Visible on Electron Microscopy"
+          },
+          {
+            "id": "ultrastructural_proof",
+            "label": "Confirms Cell has Passed Beyond the Reversible Injury Threshold"
+          }
+        ],
+        "edges": [
+          [
+            "calcium_avalanche",
+            "phosphate_chelate"
+          ],
+          [
+            "phosphate_chelate",
+            "amorphous_density"
+          ],
+          [
+            "amorphous_density",
+            "ultrastructural_proof"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-vision",
+  "subject": "physiology",
+  "title": "Phototransduction, Visual Pathways, and Pupillary Light Reflexes",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The neural retina contains two distinct photoreceptor classes specialized for scotopic and photopic vision. More than one hundred million elongated **rods** contain the photosensitive pigment rhodopsin, displaying extreme light sensitivity that enables monochromatic vision in dim starlight, whereas three million conical cones mediate sharp visual acuity and color discrimination in daylight.",
+      "say": "Rods contain rhodopsin for sensitive night vision, while cones mediate daylight color vision and sharp acuity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/retinal-detachment-fig1.webp",
+        "caption": "Separation of neurosensory retina from retinal pigment epithelium disrupting photoreceptor outer segment renewal.",
+        "alt": "Neurosensory retinal detachment separating photoreceptors from choroidal perfusion"
+      }
+    },
+    {
+      "tx": "In complete darkness, photoreceptor outer segments maintain high intracellular cyclic guanosine monophosphate concentrations that keep cyclic-nucleotide-gated cation channels persistently open. Inward sodium flux constitutes the **dark current**, which keeps the photoreceptor resting membrane potential partially depolarized at minus forty millivolts, driving continuous tonic glutamate release.",
+      "say": "In darkness, cGMP keeps cation channels open to produce the dark current, depolarizing photoreceptors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dark_cgmp",
+            "label": "High Basal Guanylyl Cyclase Activity Maintains Plentiful Intracellular cGMP"
+          },
+          {
+            "id": "cng_channels",
+            "label": "cGMP Binds and Opens Cyclic-Nucleotide-Gated Non-Selective Cation Channels"
+          },
+          {
+            "id": "inward_sodium",
+            "label": "Continuous Inward Sodium Influx (Dark Current) Depolarizes Cell to -40 mV"
+          },
+          {
+            "id": "tonic_glutamate",
+            "label": "Depolarized Terminal Keeps Cav Channels Open, Continually Releasing Glutamate"
+          }
+        ],
+        "edges": [
+          [
+            "dark_cgmp",
+            "cng_channels"
+          ],
+          [
+            "cng_channels",
+            "inward_sodium"
+          ],
+          [
+            "inward_sodium",
+            "tonic_glutamate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Absorption of a single photon of light by rhodopsin isomerizes its eleven-cis-retinal chromophore into all-trans-retinal within picoseconds. This conformational change activates metarhodopsin two, which binds the heterotrimeric G-protein **transducin**, triggering the fastest and most sensitive biochemical amplification cascade known in human physiology.",
+      "say": "Light isomerizes eleven-cis-retinal to all-trans-retinal, activating transducin and triggering phototransduction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "photon_absorb",
+            "label": "Photon Strikes 11-Cis-Retinal Chromophore Nested Inside Opsin Pocket"
+          },
+          {
+            "id": "photoisomer",
+            "label": "Photochemical Isomerization Straightens Chromophore into All-Trans-Retinal"
+          },
+          {
+            "id": "metarhodopsin",
+            "label": "Opsin Undergoes Rapid Conformational Shift into Active Metarhodopsin II"
+          },
+          {
+            "id": "transducin_gtp",
+            "label": "Metarhodopsin II Exchanges GDP for GTP on Hundreds of G-Protein Transducin Units"
+          }
+        ],
+        "edges": [
+          [
+            "photon_absorb",
+            "photoisomer"
+          ],
+          [
+            "photoisomer",
+            "metarhodopsin"
+          ],
+          [
+            "metarhodopsin",
+            "transducin_gtp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Activated alpha subunits of transducin stimulate cyclic GMP phosphodiesterase, which rapidly hydrolyzes cyclic GMP into five-prime guanosine monophosphate. As cyclic GMP levels crash, cyclic-nucleotide-gated channels close, halting the dark current and causing the photoreceptor membrane to **hyperpolarize to minus seventy millivolts**, shutting off baseline glutamate release.",
+      "say": "Phosphodiesterase hydrolyzes cGMP, closing cation channels and hyperpolarizing the photoreceptor.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Photoreceptor in Darkness",
+          "points": [
+            "Transducin and phosphodiesterase remain in inactive basal state",
+            "Intracellular cGMP concentration is high (~10 to 20 micromolar)",
+            "Outer segment cation channels remain open (inward dark current)",
+            "Membrane depolarized (-40 mV); tonic glutamate release onto bipolar cells"
+          ]
+        },
+        "right": {
+          "title": "Photoreceptor in Light",
+          "points": [
+            "Transducin activates phosphodiesterase, hydrolyzing cGMP to 5'-GMP",
+            "Intracellular cGMP concentrations fall precipitously within milliseconds",
+            "Cation channels close; sodium entry halts while potassium leaks out",
+            "Membrane hyperpolarizes (-70 mV); glutamate release ceases completely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Human color perception relies upon the brain comparing inputs from three distinct cone populations expressing opsins tuned to different wavelengths. Defined as the **trichromatic theory of color vision**, S-cones detect short blue wavelengths at 420 nm, M-cones detect green wavelengths at 530 nm, and L-cones detect long red wavelengths at 560 nm.",
+      "say": "Trichromatic theory explains color vision via short blue, medium green, and long red wavelength cones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Photopic Cone System",
+          "points": [
+            "Concentrated densely in fovea centralis; negligible convergence (1:1 with bipolar)",
+            "Operates in bright daylight illumination; low light sensitivity",
+            "Three distinct cone pigments (erythrolabe, chlorolabe, cyanolabe)",
+            "Mediates high visual spatial acuity and trichromatic color vision"
+          ]
+        },
+        "right": {
+          "title": "Scotopic Rod System",
+          "points": [
+            "Distributed across peripheral retina; completely absent in central fovea",
+            "Massive convergence (hundreds of rods converge onto single ganglion cell)",
+            "Single photopigment (rhodopsin) maximizing photon capture sensitivity",
+            "Enables monochromatic vision in dim darkness with poor spatial acuity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Axons of retinal ganglion cells form the optic nerve, converging at the optic chiasm where fibers from nasal hemiretinas decussate while temporal hemiretinal fibers remain uncrossed. Axons travel in optic tracts to synapse in the **lateral geniculate nucleus** of the thalamus, projecting via optic radiations to primary visual cortex in the calcarine sulcus.",
+      "say": "Nasal retinal fibers decussate at the chiasm, while temporal fibers stay uncrossed on their way to the thalamus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amblyopia-fig1.webp",
+        "alt": "Illustration of visual pathways showing lateral geniculate nucleus and visual cortex suppression",
+        "caption": "Illustration of visual pathways showing lateral geniculate nucleus and visual cortex suppression. Illustration: StewardMD original. [Alt: Axial view of the pediatric visual pathway showing optic chiasm, lateral geniculate nucleus, and cortical suppression, with an occlusion patching inset.]",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Shining light into one eye elicits brisk bilateral pupillary constriction. Retinal ganglion afferents travel via the optic nerve and tract to synapse in the midbrain pretectal nucleus, which sends bilateral projections to both **Edinger-Westphal nuclei**, sending parasympathetic oculomotor fibers to contract the pupillary sphincter muscles bilaterally.",
+      "say": "Light shines into one eye and pretectal fibers project bilaterally to both Edinger-Westphal nuclei.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "light_afferent",
+            "label": "Light Stimulates Retinal Ganglion Cells, Traveling in Optic Nerve (CN II)"
+          },
+          {
+            "id": "pretectal_synapse",
+            "label": "Afferents Bypass LGN to Synapse in Pretectal Nuclei of Midbrain"
+          },
+          {
+            "id": "bilateral_ew",
+            "label": "Pretectal Neurons Send Bilateral Projections to Both Edinger-Westphal Nuclei"
+          },
+          {
+            "id": "ciliary_ganglion",
+            "label": "Preganglionic CN III Fibers Synapse in Ciliary Ganglia to Constrict Sphincters"
+          }
+        ],
+        "edges": [
+          [
+            "light_afferent",
+            "pretectal_synapse"
+          ],
+          [
+            "pretectal_synapse",
+            "bilateral_ew"
+          ],
+          [
+            "bilateral_ew",
+            "ciliary_ganglion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Shifting visual focus from a distant object to a nearby reading target engages a synchronized three-part physiological triad known as the **near accommodation response**. Mediated by cortical visual pathways, parasympathetic output contracts the ciliary muscle to round the lens for near focus, constricts the pupil to sharpen depth of field, and converges the visual axes via medial recti.",
+      "say": "The near response triad contracts the ciliary muscle for lens rounding, constricts pupils, and converges the eyes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ciliary Muscle Contraction (Accommodation)",
+          "points": [
+            "Parasympathetic stimulation via short ciliary nerves contracts ciliary ring",
+            "Relieves tension on suspensory zonular fibers (zonules of Zinn)",
+            "Intrinsic elasticity allows crystalline lens to round and thicken",
+            "Increases anterior lens curvature and refractive power for close objects"
+          ]
+        },
+        "right": {
+          "title": "Pupillary Constriction and Convergence",
+          "points": [
+            "Parasympathetic miosis sharpens depth of field and eliminates aberrations",
+            "Bilateral medial rectus activation converges visual axes onto near plane",
+            "Cortically mediated response requiring primary visual cortex and frontal eye fields",
+            "Dissociated in Argyll Robertson pupil: responds to near target but not light"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

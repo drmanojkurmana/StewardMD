@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-male-reproductive",
+ "subject": "anatomy",
+ "title": "Epididymis, Vas Deferens, Prostate Lobes, and Male Urethral Segments",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The epididymis is a tightly coiled, crescentic tube approximately six metres in uncoiled length applied to the posterolateral border of the testis. It consists of an expanded head (caput) receiving efferent ductules, a central body (corpus), and a tapered tail (cauda). The **epididymis** provides the microenvironment where spermatozoa acquire forward progressive motility and fertilising capability.",
+   "say": "Curving along the posterolateral testis, the six-metre coiled epididymis features a head, body, and tail. In this microenvironment, immature spermatozoa mature and develop forward motility.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Head / Caput (Receives 12-20 efferent ductules from rete testis)"
+     },
+     {
+      "id": "e2",
+      "label": "Body / Corpus (Pseudostratified columnar epithelium with long, non-motile stereocilia)"
+     },
+     {
+      "id": "e3",
+      "label": "Tail / Cauda (Primary reservoir for mature spermatozoa; continuous with vas deferens)"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous with the tail of the epididymis is the vas deferens (ductus deferens), a muscular tube forty-five centimetres in length. On palpation through the scrotal neck, the **vas deferens** feels characteristically hard and cord-like because of its exceptionally thick smooth muscle coat and minute star-shaped lumen, distinguishing it from adjacent spermatic cord vessels.",
+   "say": "Measuring forty-five centimetres, the vas deferens feels cord-like on palpation due to its thick muscularis. It conveys sperm from the epididymis to the ejaculatory duct.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-vasectomy.webp",
+    "alt": "Surgical procedure diagram of male vasectomy showing isolation and division of the vas deferens",
+    "caption": "Surgical isolation and luminal transection of the bilateral vas deferens for permanent contraception. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During bilateral vasectomy, the surgeon isolates each vas deferens in the upper scrotum under local anaesthesia. A segment is excised, and the ends are ligated or cauterised. Because mature spermatozoa remain stored within the **ampulla** of the vas and seminal vesicles, patients remain fertile until clearance is verified by azoospermia on repeat semen analysis after three months.",
+   "say": "Vasectomy interrupts the vas deferens in the upper scrotum. Because viable sperm persist in the ampulla and vesicles, sterility requires confirmation by semen analysis at three months.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Surgical Isolation (Vas palpated at neck of scrotum, isolated from cord vessels)"
+     },
+     {
+      "id": "v2",
+      "label": "Bilateral Resection and Interposition (Excision of 1 cm segment and fascial interposition)"
+     },
+     {
+      "id": "v3",
+      "label": "Post-Vasectomy Clearance (Persistent stored sperm in ampullae require ~20 ejaculates to clear)"
+     },
+     {
+      "id": "v4",
+      "label": "Confirmed Azoospermia (Negative semen analysis at 12 weeks confirms sterility)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The prostate is an inverted conical fibromuscular gland situated beneath the urinary bladder, traversed by the prostatic urethra and paired ejaculatory ducts. Anatomically, the **prostate gland** is traditionally described as possessing five lobes: anterior lobe (isthmus), posterior lobe, middle (median) lobe, and right and left lateral lobes.",
+   "say": "Encircling the urethra below the bladder neck, the prostate presents an inverted conical shape. Anatomists describe anterior, posterior, median, and paired lateral lobes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Lobe",
+     "Relation to Urethra",
+     "Pathological Significance"
+    ],
+    "rows": [
+     [
+      "Anterior lobe (Isthmus)",
+      "Lies anterior to the prostatic urethra",
+      "Fibromuscular tissue devoid of glandular acini; rarely develops disease"
+     ],
+     [
+      "Middle (Median) lobe",
+      "Wedge of gland between urethra and ejaculatory ducts",
+      "Projects into bladder neck; enlargement causes ball-valve urinary obstruction"
+     ],
+     [
+      "Posterior lobe",
+      "Lies posterior to urethra and below ejaculatory ducts",
+      "Easily palpated on digital rectal examination; frequent primary carcinoma site"
+     ],
+     [
+      "Lateral lobes (paired)",
+      "Flank the prostatic urethra on either side",
+      "Forms the major glandular bulk; commonly expands in benign prostatic hyperplasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In modern urological pathology, the zonal anatomy of McNeal replaces lobar descriptions because diseases respect strict histological zones. The **peripheral zone** constitutes seventy percent of glandular volume, occupying the posterior and apical aspects; it is the site of origin for over seventy percent of prostate adenocarcinomas and is readily palpable on digital rectal examination.",
+   "say": "McNeal zonal anatomy divides the prostate into peripheral, central, and transition zones. The peripheral zone forms seventy percent of the gland and spawns most cancers.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-prostate-zones.svg",
+    "alt": "Anatomical cross section of prostate gland showing peripheral zone, central zone, and transition zone",
+    "caption": "McNeal zonal architecture of the prostate displaying peripheral, transition, and central zones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast, the transition zone surrounds the proximal pre-prostatic urethra and comprises five percent of the gland in young men. This specific zone undergoes prominent nodular stromal and glandular proliferation under dihydrotestosterone stimulation, forming **benign prostatic hyperplasia** (BPH). Because it immediately hugs the urethra, BPH presents early with bladder outlet obstructive symptoms.",
+   "say": "The transition zone wraps around the proximal urethra. Androgen-driven expansion of this zone produces benign prostatic hyperplasia with classic urinary hesitancy and weak stream.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transition Zone (McNeal)",
+     "points": [
+      "Surrounds the pre-prostatic proximal urethra",
+      "Site of origin for 95% of benign prostatic hyperplasia",
+      "Presents early with obstructive lower urinary tract symptoms",
+      "Treated surgically via transurethral resection (TURP)"
+     ]
+    },
+    "right": {
+     "title": "Peripheral Zone (McNeal)",
+     "points": [
+      "Forms the posteroinferior and outer glandular shell",
+      "Site of origin for 70 to 80% of prostate cancers",
+      "Palpable as nodularity or induration on DRE",
+      "Biopsied transrectally under ultrasound guidance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The male urethra is approximately twenty centimetres long, divided into four topographical segments: pre-prostatic (1 cm), prostatic (3 cm), membranous (2 cm), and spongy or penile (15 cm). The **prostatic urethra** is the widest and most dilatable portion, featuring the urethral crest, prostatic sinuses receiving acinar ducts, and the colliculus seminalis (verumontanum).",
+   "say": "Measuring twenty centimetres, the male urethra comprises pre-prostatic, prostatic, membranous, and spongy segments. The prostatic segment contains the colliculus seminalis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "Pre-prostatic Urethra (1 cm through bladder neck; internal urethral sphincter prevents retrograde ejaculation)"
+     },
+     {
+      "id": "u2",
+      "label": "Prostatic Urethra (3 cm through prostate; contains verumontanum, utricle, and ejaculatory orifices)"
+     },
+     {
+      "id": "u3",
+      "label": "Membranous Urethra (2 cm through deep pouch; encircled by external voluntary sphincter; least dilatable)"
+     },
+     {
+      "id": "u4",
+      "label": "Spongy / Penile Urethra (15 cm within corpus spongiosum; expands into navicular fossa at glans)"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ],
+     [
+      "u3",
+      "u4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The membranous urethra is the shortest, least distensible, and most vulnerable portion of the entire conduit. Passing through the perineal membrane within the deep perineal pouch, it is completely encircled by the striated fibers of the **external urethral sphincter**. Pelvic fracture shear injuries characteristically transect the urethra at this fixed puboprostatic junction.",
+   "say": "Passing through the deep perineal pouch, the narrow membranous urethra is encircled by the external sphincter. Shear forces in pelvic fractures characteristically rupture this junction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urethral Segment",
+     "Length",
+     "Surrounding Sphincter",
+     "Vulnerability to Trauma"
+    ],
+    "rows": [
+     [
+      "Pre-prostatic",
+      "1.0 cm",
+      "Internal sphincter (sympathetic smooth muscle)",
+      "Incompetence after bladder neck incision causes retrograde ejaculation"
+     ],
+     [
+      "Prostatic",
+      "3.0 cm",
+      "Glandular stroma",
+      "Obstructed by BPH; resected during TURP"
+     ],
+     [
+      "Membranous",
+      "1.5 to 2.0 cm",
+      "External sphincter (somatic voluntary skeletal muscle)",
+      "Transected in pelvic fracture distraction injuries"
+     ],
+     [
+      "Spongy (bulbous)",
+      "15.0 cm",
+      "Bulbospongiosus muscle and erectile tissue",
+      "Ruptured by straddle injury against the inferior pubic rami"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "a246e3a3-23d8-4d13-8842-adddb441c211",
+  "cf89682a-4aa2-4c7a-bffe-bb819022bd22",
+  "e60f51ab-3827-4ddd-9649-a6d601b9682c"
+ ]
+}

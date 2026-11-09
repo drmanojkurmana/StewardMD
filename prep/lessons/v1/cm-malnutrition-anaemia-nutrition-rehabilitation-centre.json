@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "id": "cm-malnutrition-anaemia-nutrition-rehabilitation-centre",
+ "subject": "community-medicine",
+ "module": "cm-malnutrition-anaemia",
+ "title": "Nutritional Interventions: Rehabilitation Centres and Anemia Mukt Bharat",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Nutrition Rehabilitation Centres: inpatient care",
+   "tx": "Established at district and sub-district hospitals, the **Nutrition Rehabilitation Centre facility** provides specialized inpatient therapeutic care for children suffering from severe acute malnutrition with medical complications or failed appetite tests. A typical fourteen-day admission provides round-the-clock medical stabilization, therapeutic feeding with starter formula F-75 and catch-up formula F-100, sensory stimulation, and structured maternal counselling to prevent nutritional relapse after discharge.",
+   "say": "Nutrition Rehabilitation Centres admit severely malnourished children with infections for two weeks, feeding them therapeutic milk formulas and teaching mothers how to prepare nutritious home meals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Stabilisation phase: F-75 formula (Days 1 to 2)"},
+     {"id": "b", "label": "Transition phase: Increase feeds gradually (Days 3 to 7)"},
+     {"id": "c", "label": "Rehabilitation phase: F-100 and catch-up growth"},
+     {"id": "d", "label": "Discharge when weight-for-height >= -2 SD"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The ten steps of malnutrition management",
+   "tx": "Inpatient therapy adheres strictly to the standardized **ten steps of management**, divided into stabilization (days one to seven) and rehabilitation (weeks two to six). The critical first forty-eight hours focus on preventing and treating hypothermia, managing hypoglycemia with ten percent glucose, treating dehydration without intravenous fluid overload using ReSoMal (oral rehydration solution for malnutrition), restoring electrolyte balance with potassium and magnesium, and initiating broad-spectrum antibiotics.",
+   "say": "The ten steps begin by keeping the child warm, correcting low blood sugar, treating dehydration with specialized ReSoMal, fixing electrolytes, and giving broad-spectrum antibiotics.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step in management", "Phase of protocol", "Clinical action taken"],
+    "rows": [
+     ["1. Prevent hypoglycemia", "Stabilisation (Day 1-2)", "10% glucose feed immediately; feed every 2 hours"],
+     ["2. Prevent hypothermia", "Stabilisation (Day 1-2)", "Kangaroo mother care; maintain room temp 28-32 C"],
+     ["3. Treat dehydration", "Stabilisation (Day 1-2)", "Oral ReSoMal slowly; avoid standard IV saline"],
+     ["4. Correct electrolytes", "Stabilisation (Day 1-7)", "Give potassium and magnesium; zero extra sodium"],
+     ["5. Treat infection", "Stabilisation (Day 1-7)", "Routine ampicillin and gentamicin to all cases"],
+     ["6. Correct micronutrients", "Stabilisation & Rehab", "Vitamin A, zinc, copper; delay iron until week 2"]
+    ]
+   }
+  },
+  {
+   "title": "Cautious feeding: F-75 versus F-100 formulas",
+   "tx": "During the initial stabilization phase, children are fed **F-75 starter therapeutic formula**, providing seventy-five kilocalories and zero point nine grams of protein per one hundred millilitres, designed to support basic cellular respiration without overwhelming fragile hepatic and renal capacities. Once appetite returns and oedema subsides, the child transitions to F-100 formula, providing one hundred kilocalories and two point nine grams of protein per decilitre to drive rapid catch-up growth.",
+   "say": "Children start on low-protein F-75 milk to prevent liver and heart failure. Once swelling clears and hunger returns, they switch to high-protein F-100 milk for rapid catch-up growth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "F-75 Starter formula",
+     "points": ["75 kcal and 0.9 g protein / 100 ml", "Low sodium, low osmolarity formula", "Stabilises metabolism without heart failure"]
+    },
+    "right": {
+     "title": "F-100 Catch-up formula",
+     "points": ["100 kcal and 2.9 g protein / 100 ml", "High energy, high protein density", "Drives rapid weight gain (> 10 g/kg/day)"]
+    }
+   }
+  },
+  {
+   "title": "Refeeding syndrome danger in early recovery",
+   "tx": "Clinicians must guard against the lethal threat of **refeeding syndrome**, which arises when aggressive high-carbohydrate feedings are introduced too rapidly into a severely malnourished child. Surging insulin drives phosphate, potassium and magnesium intracellularly to support glycolysis and protein synthesis, producing severe hypophosphataemia, cardiac arrhythmias, acute congestive heart failure and sudden death, requiring slow, gradual calorie advancement.",
+   "say": "Feeding too much food too fast triggers refeeding syndrome. Surging insulin pulls potassium and phosphate out of the blood, causing fatal heart failure and sudden collapse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Rapid excessive carbohydrate feeding"},
+     {"id": "b", "label": "Sudden insulin secretion surge"},
+     {"id": "c", "label": "Severe intracellular shift of phosphate and potassium"},
+     {"id": "d", "label": "Profound hypophosphataemia, arrhythmia, heart failure"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Standard haemoglobin cut-offs for anaemia",
+   "tx": "Accurate clinical and community triage requires applying the established **WHO haemoglobin cut-offs** to diagnose and grade anaemia severity across diverse demographic cohorts. Anaemia is defined as haemoglobin below eleven grams per decilitre in pregnant women and children under five years, below eleven point five in children aged five to eleven, below twelve in non-pregnant adult women, and below thirteen grams per decilitre in adult men.",
+   "say": "Anaemia means haemoglobin below eleven grams per decilitre in pregnant mothers and young children, below twelve in non-pregnant women, and below thirteen in adult men.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Population group", "Normal threshold (g/dl)", "Mild anaemia", "Moderate anaemia", "Severe anaemia"],
+    "rows": [
+     ["Children 6-59 months", ">= 11.0 g/dl", "10.0 to 10.9", "7.0 to 9.9", "Less than 7.0 g/dl"],
+     ["Children 5-11 years", ">= 11.5 g/dl", "11.0 to 11.4", "8.0 to 10.9", "Less than 8.0 g/dl"],
+     ["Non-pregnant women (>=15)", ">= 12.0 g/dl", "11.0 to 11.9", "8.0 to 10.9", "Less than 8.0 g/dl"],
+     ["Pregnant women", ">= 11.0 g/dl", "10.0 to 10.9", "7.0 to 9.9", "Less than 7.0 g/dl"],
+     ["Adult men (>= 15 years)", ">= 13.0 g/dl", "11.0 to 12.9", "8.0 to 10.9", "Less than 8.0 g/dl"]
+    ]
+   }
+  },
+  {
+   "title": "Anemia Mukt Bharat operational architecture",
+   "tx": "To reduce anaemia prevalence across India by three percentage points annually, the comprehensive **Anemia Mukt Bharat strategy** mobilises an intensified institutional network. Interventions combine prophylactic iron-folic acid supplementation, biannual deworming, testing and treatment at point of care using digital haemoglobinometers, mandatory food fortification of ration rice, and extensive behavior change communication promoting iron-rich dietary practices.",
+   "say": "The Anemia Mukt Bharat initiative tests blood with digital meters, dispenses iron tablets across age groups, deworms children twice a year, and fortifies ration rice with iron.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Point-of-care digital hemoglobin testing"},
+     {"id": "b", "label": "Age-stratified IFA supplementation"},
+     {"id": "c", "label": "Biannual school and Anganwadi deworming"},
+     {"id": "d", "label": "Fortified rice distribution via PDS"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Goitre survey methodology and endemicity grading",
+   "tx": "To determine whether a district requires targeted iodine intervention, epidemiologists conduct an **endemic goitre survey** among schoolchildren aged six to twelve years, examining thirty clusters of forty children using clinical thyroid palpation. Total Goitre Rate (TGR) combines Grade 1 (palpable thyroid lobes larger than the child's thumb terminal phalanx) and Grade 2 (visible goitre with neck in neutral position); TGR exceeding five percent confirms endemicity.",
+   "say": "Goitre surveys palpate thyroid glands in schoolchildren aged six to twelve. If more than five percent of surveyed children have an enlarged thyroid, the district is declared endemic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Goitre Grade", "Clinical palpation finding", "Visibility"],
+    "rows": [
+     ["Grade 0", "No goitre palpable or visible", "Thyroid lobes smaller than child's thumb"],
+     ["Grade 1", "Thyroid palpable but not visible in neutral neck", "Enlarged lobes match or exceed thumb phalanx"],
+     ["Grade 2", "Goitre clearly visible with neck in normal position", "Distinct neck mass visible from a distance"],
+     ["Total Goitre Rate (TGR)", "Sum of Grade 1 + Grade 2 percentages", "Benchmark > 5% defines endemic iodine deficiency"]
+    ]
+   }
+  },
+  {
+   "title": "National Iodine Deficiency Disorders Control Programme",
+   "tx": "The centrally assisted **NIDDCP operational mandate** enforces the production, transportation, and consumption of adequately iodised salt across India. The programme monitors salt samples using spot testing kits, conducts periodic resurveys every five years to validate goitre decline, and supports state health departments with dedicated iodine monitoring laboratories that test urinary iodine excretion to ensure biological sufficiency.",
+   "say": "The National Iodine Deficiency Disorders Control Programme tests salt quality across market shops and homes, verifying urine iodine levels to ensure complete eradication of cretinism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Universal production of iodised salt (30 ppm)"},
+     {"id": "b", "label": "Household salt testing by ASHA using test kits"},
+     {"id": "c", "label": "Urinary iodine excretion monitoring (100-200 mcg/L)"},
+     {"id": "d", "label": "District goitre resurveys every five years"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Double fortified salt: iron plus iodine",
+   "tx": "To tackle the dual epidemics of iron deficiency anaemia and iodine deficiency simultaneously, food technologists formulated **double fortified salt innovation**, which incorporates both potassium iodate and microencapsulated ferrous fumarate or ferric pyrophosphate into standard crystalline salt. Delivered through school meals and Anganwadi centres, it supplies one hundred percent of daily iodine and roughly thirty percent of daily iron requirements without altering taste or appearance.",
+   "say": "Double fortified salt incorporates both iodine and microencapsulated iron into table salt. Distributing this salt through school lunches tackles anaemia and goitre simultaneously.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard iodised salt",
+     "points": ["Contains potassium iodate only", "Prevents goitre and cretinism", "Has no effect on nutritional anaemia"]
+    },
+    "right": {
+     "title": "Double fortified salt (DFS)",
+     "points": ["Contains potassium iodate + encapsulated iron", "Prevents both goitre and iron deficiency anaemia", "Supplies 30% of daily iron needs safely"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

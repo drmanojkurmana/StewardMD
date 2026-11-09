@@ -1,0 +1,235 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Malaria Microscopy: Schuffner Dots, Maurer Clefts and Gametocytes",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Definitive speciation of malaria parasites relies on analyzing morphological alterations within the host erythrocyte alongside distinct developmental stages on Giemsa-stained thin blood films. While Plasmodium vivax causes marked host cell enlargement and characteristic stippling called **Schuffner dots**, Plasmodium falciparum infects normal-sized erythrocytes, displaying coarse Maurer clefts and distinctive crescentic gametocytes.",
+      "say": "Erythrocyte enlargement, cytoplasmic stippling, and gametocyte contours definitively separate the four malaria species.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mixed-malaria-fig1.webp",
+        "alt": "Plasmodium falciparum and vivax smear comparison",
+        "caption": "Comparative thin blood smear showing enlarged vivax cells vs falciparum ring forms [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Erythrocytes parasitized by Plasmodium vivax become noticeably enlarged, pale, and distorted in shape as the amoeboid trophozoite matures. The red cell cytoplasm develops numerous fine, evenly distributed, pinkish-red granules designated **Schuffner stippling**. These stipples represent membrane caveola-vesicle complexes induced by the intracellular parasite to traffic transport proteins across the host membrane.",
+      "say": "Fine pink-red Schuffner dots stipple the pale, enlarged red blood cells infected by Plasmodium vivax.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Species",
+          "Host Erythrocyte Size",
+          "Diagnostic Cytoplasmic Stippling"
+        ],
+        "rows": [
+          [
+            "Plasmodium vivax",
+            "Enlarged, pale, oval or distorted",
+            "Schuffner dots (numerous fine pink-red granules)"
+          ],
+          [
+            "Plasmodium ovale",
+            "Enlarged, oval, fimbriated ragged edges",
+            "James dots (similar to Schuffner dots, prominent)"
+          ],
+          [
+            "Plasmodium falciparum",
+            "Normal size and colour unchanged",
+            "Maurer clefts (sparse coarse irregular red spots)"
+          ],
+          [
+            "Plasmodium malariae",
+            "Normal or slightly contracted",
+            "Ziemann dots (rare fine pale pink stippling)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In sharp contrast, erythrocytes harboring Plasmodium falciparum retain normal cellular dimensions and normochromic coloration. Stained thin films reveal fewer, larger, coarse, irregular, dark-red or mauve markings termed **Maurer clefts**. These clefts represent membranous lamellar structures originating from the parasite that function as sorting organelles to export PfEMP1 adhesion proteins toward the erythrocyte surface membrane.",
+      "say": "Coarse, irregular Maurer clefts appear in normal-sized erythrocytes to export falciparum adhesins.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Schuffner dots (vivax)",
+          "points": [
+            "Evenly dispersed, fine, uniform pink dots",
+            "Present throughout entire enlarged red cell",
+            "Appear early in young trophozoite stage",
+            "Reflect membrane caveola trafficking complexes"
+          ]
+        },
+        "right": {
+          "title": "Maurer clefts (falciparum)",
+          "points": [
+            "Sparse, coarse, irregular dark-red markings",
+            "Found in normal-sized host red cells",
+            "Appear in older trophozoite stages",
+            "Lamellar organelles that assemble PfEMP1 knobs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The early trophozoite of Plasmodium falciparum displays a thin, delicate blue cytoplasmic ring encircling a central vacuole with one or two tiny red chromatin dots. Multiple ring forms within a single erythrocyte occur commonly. A classic morphological feature is the **accol\u00e9 form** or appliqu\u00e9 form, where the delicate ring trophozoite is perched flattened along the extreme outer cytoplasmic margin of the erythrocyte.",
+      "say": "Delicate falciparum rings frequently show double chromatin dots and peripheral accol\u00e9 positions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rg1",
+            "label": "Merozoite invades erythrocyte and rounds into a ring trophozoite"
+          },
+          {
+            "id": "rg2",
+            "label": "Delicate ring forms double chromatin beads (headphone appearance)"
+          },
+          {
+            "id": "rg3",
+            "label": "Marginal flattening forms accol\u00e9 or appliqu\u00e9 peripheral appearance"
+          }
+        ],
+        "edges": [
+          [
+            "rg1",
+            "rg2"
+          ],
+          [
+            "rg2",
+            "rg3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mature sexual stages of Plasmodium falciparum possess a pathognomonic **banana-shaped gametocyte** morphology, often described as crescentic or sausage-shaped. Measuring nine to fourteen micrometres, they stretch the host erythrocyte so extensively that the surrounding red cell envelope is reduced to a pale, barely discernible rim. In contrast, all other human Plasmodium species produce spherical, round gametocytes.",
+      "say": "Crescentic or banana-shaped gametocytes are uniquely diagnostic for Plasmodium falciparum.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Falciparum gametocytes",
+          "points": [
+            "Crescentic, banana-shaped or sausage-shaped",
+            "Dark hemozoin pigment concentrated centrally",
+            "Male macrogametocyte is broader with loose chromatin",
+            "Persist in circulation for weeks after cure"
+          ]
+        },
+        "right": {
+          "title": "Vivax gametocytes",
+          "points": [
+            "Large spherical or globular contour",
+            "Fills nearly the entire enlarged red cell",
+            "Evenly scattered golden-brown hemozoin pigment",
+            "Rapidly cleared following standard chloroquine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A unique morphologic hallmark of Plasmodium malariae is the **band form trophozoite**. As the parasite matures across quartan cycles, its cytoplasm stretches across the diameter of the un-enlarged red blood cell like a broad horizontal ribbon with coarse dark-brown hemozoin pigment scattered along the margins. The mature schizont contains six to twelve merozoites arranged symmetrically around central pigment, creating a daisy head or rosette appearance.",
+      "say": "Plasmodium malariae forms broad horizontal band trophozoites and rosette schizonts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Plasmodium Species",
+          "Schizont Merozoite Count",
+          "Schizont Arrangement"
+        ],
+        "rows": [
+          [
+            "Plasmodium vivax",
+            "12 to 24 merozoites",
+            "Irregular cluster filling enlarged red cell"
+          ],
+          [
+            "Plasmodium falciparum",
+            "8 to 24 merozoites",
+            "Rare in blood; sequestered in deep capillaries"
+          ],
+          [
+            "Plasmodium malariae",
+            "6 to 12 merozoites",
+            "Symmetrical daisy-head or rosette arrangement"
+          ],
+          [
+            "Plasmodium ovale",
+            "4 to 16 merozoites",
+            "Loosely arranged inside oval fimbriated cell"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During schizogony, intra-erythrocytic parasites ingest host haemoglobin into food vacuoles, catabolizing globin and converting toxic toxic free haem into an insoluble crystalline polymer named **hemozoin**. This insoluble crystalline pigment, also known as malaria pigment, appears as dark brown to black birefringent granules within trophozoites, schizonts, and host monocytes that ingest ruptured parasitic debris.",
+      "say": "Digestion of haemoglobin yields crystalline brown hemozoin pigment, visible in parasites and macrophages.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hz1",
+            "label": "Trophozoite ingests host red cell haemoglobin via cytostome"
+          },
+          {
+            "id": "hz2",
+            "label": "Globin cleaved for nutrition; free toxic haem released"
+          },
+          {
+            "id": "hz3",
+            "label": "Biocrystallization produces insoluble, non-toxic hemozoin crystals"
+          }
+        ],
+        "edges": [
+          [
+            "hz1",
+            "hz2"
+          ],
+          [
+            "hz2",
+            "hz3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Although gametocytes do not cause clinical fever or red cell lysis, they represent the essential infective form transmitted to the mosquito vector. Because standard artemisinin regimens do not rapidly eliminate mature stage-five falciparum gametocytes, the World Health Organization recommends co-administering a single low dose of **primaquine gametocytocide** on day one of treatment in low-transmission areas to block community transmission.",
+      "say": "A single low dose of primaquine destroys mature falciparum gametocytes to block mosquito transmission.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Stage Targeted",
+          "Clinical Objective"
+        ],
+        "rows": [
+          [
+            "Artemisinin derivatives",
+            "Asexual blood schizonts & early gametocytes",
+            "Rapid clinical cure and symptom resolution"
+          ],
+          [
+            "Single low-dose primaquine",
+            "Mature stage V falciparum gametocytes",
+            "Transmission blocking to Anopheles mosquitoes"
+          ],
+          [
+            "14-day primaquine",
+            "Dormant hepatic vivax/ovale hypnozoites",
+            "Anti-relapse radical cure (requires G6PD testing)"
+          ],
+          [
+            "Chloroquine",
+            "Asexual erythrocytic schizonts only",
+            "Cure for chloroquine-sensitive P. vivax strains"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Gastric Adenocarcinoma, Lauren Classification, and Linitis Plastica",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Gastric adenocarcinoma represents one of the leading causes of cancer-related mortality worldwide. The fundamental histological framework guiding clinical and biological understanding is the **Lauren classification**, which categorizes gastric carcinoma into two distinct major histological subtypes: intestinal type and diffuse type. These two variants exhibit markedly different epidemiological trends, genetic profiles, pathogenetic mechanisms, and clinical prognoses.",
+   "say": "The Lauren classification divides gastric adenocarcinoma into two primary histological subtypes: intestinal and diffuse, which differ in their epidemiology, genetics, and clinical behaviour.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-stomach-linitis-plastica.webp",
+    "alt": "Gross pathology photograph of an excised total gastrectomy specimen showing linitis plastica.",
+    "caption": "Gastric adenocarcinoma: macroscopic appearance of diffuse infiltration versus localized polypoid disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **intestinal type adenocarcinoma** is characterized by cohesive malignant cells that organize into distinct tubular and glandular architectural structures, resembling colon cancer. It predominates in older male patients, occurs in high-incidence endemic regions, and strongly correlates with environmental triggers including chronic Helicobacter pylori infection, cigarette smoking, high dietary salt, and nitrates found in preserved foods.",
+   "say": "Intestinal type gastric cancer forms cohesive glandular structures, affects older men, and is linked to environmental risk factors like Helicobacter pylori, high dietary salt, and tobacco.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hp",
+      "label": "Chronic Helicobacter Pylori Gastritis"
+     },
+     {
+      "id": "atrophy",
+      "label": "Progressive Chronic Atrophic Gastritis"
+     },
+     {
+      "id": "meta",
+      "label": "Specialized Intestinal Metaplasia"
+     },
+     {
+      "id": "dys",
+      "label": "Low-Grade to High-Grade Gastric Epithelial Dysplasia"
+     },
+     {
+      "id": "ca",
+      "label": "Invasive Well-Differentiated Intestinal Adenocarcinoma"
+     }
+    ],
+    "edges": [
+     [
+      "hp",
+      "atrophy"
+     ],
+     [
+      "atrophy",
+      "meta"
+     ],
+     [
+      "meta",
+      "dys"
+     ],
+     [
+      "dys",
+      "ca"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathogenetically, intestinal gastric carcinoma develops along the classic Correa cascade of multistep mucosal transformation: progressing from chronic active gastritis to multifocal atrophic gastritis, followed by intestinal metaplasia, dysplasia, and ultimately invasive adenocarcinoma. Microsatellite instability and mutations in the TP53 and APC tumour suppressor genes are frequent molecular drivers. Because it forms discrete, well-differentiated masses, the intestinal variant carries a **more favorable prognosis**.",
+   "say": "Intestinal gastric cancer follows the Correa cascade from atrophic gastritis and intestinal metaplasia to dysplasia and cancer, generally carrying a more favourable prognosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intestinal Subtype",
+     "points": [
+      "Cohesive cells forming distinct glands",
+      "Associated with H. pylori and Correa cascade",
+      "More common in older men and endemic regions",
+      "Better overall five-year survival rates"
+     ]
+    },
+    "right": {
+     "title": "Diffuse Subtype",
+     "points": [
+      "Poorly cohesive, discohesive single cells",
+      "Driven by CDH1 E-cadherin germline mutations",
+      "Equal gender ratio, younger patient presentation",
+      "Poor prognosis with rapid transmural invasion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conversely, the **diffuse type adenocarcinoma** is composed of poorly cohesive, discohesive single cells or small clusters that infiltrate deeply through the submucosa and muscular layers without forming glandular structures. It exhibits an equal male-to-female ratio, affects significantly younger patients, is not associated with H. pylori or atrophic gastritis, and has a strong genetic predisposition linked to germline or somatic mutations in the CDH1 tumour suppressor gene.",
+   "say": "Diffuse gastric cancer consists of discohesive cells infiltrating the gastric wall without gland formation. It affects younger patients equally across genders and is driven by CDH1 mutations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mut",
+      "label": "Germline or Somatic Inactivation of CDH1 Gene"
+     },
+     {
+      "id": "ecadh",
+      "label": "Complete Loss of E-Cadherin Cell Adhesion Protein"
+     },
+     {
+      "id": "disc",
+      "label": "Malignant Epithelial Cells Become Discohesive & Infiltrative"
+     },
+     {
+      "id": "signet",
+      "label": "Intracellular Mucin Accumulation Forms Signet Ring Cells"
+     },
+     {
+      "id": "spread",
+      "label": "Extensive Submucosal Infiltration & Transmural Extension"
+     }
+    ],
+    "edges": [
+     [
+      "mut",
+      "ecadh"
+     ],
+     [
+      "ecadh",
+      "disc"
+     ],
+     [
+      "disc",
+      "signet"
+     ],
+     [
+      "signet",
+      "spread"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The loss of E-cadherin expression abolishes calcium-dependent intercellular adhesion, allowing tumour cells to permeate widely. Histopathologically, the defining microscopic hallmark of diffuse gastric carcinoma is the **signet ring cell**. Abundant intracytoplasmic mucin vacuoles expand within the malignant cell, compressing and displacing the hyperchromatic nucleus eccentrically against the cytoplasmic cell membrane, giving it the appearance of a jeweler's signet ring.",
+   "say": "Loss of E-cadherin allows single cells to infiltrate widely. The hallmark signet ring cell shows intracellular mucin pushing the nucleus to the periphery like a signet ring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Intestinal Subtype",
+     "Diffuse Subtype"
+    ],
+    "rows": [
+     [
+      "Microscopic Architecture",
+      "Cohesive glands and tubular lumens",
+      "Discohesive single cells and sheets"
+     ],
+     [
+      "Defining Cell Morphology",
+      "Columnar epithelial cells",
+      "Signet ring cells with eccentric nuclei"
+     ],
+     [
+      "Molecular Alteration",
+      "p53, APC, microsatellite instability",
+      "Loss of E-cadherin (CDH1 mutation)"
+     ],
+     [
+      "Spread Pattern",
+      "Haematogenous to liver and lung",
+      "Transmural, lymphatic, and peritoneal"
+     ],
+     [
+      "Demographics",
+      "Older male predominance",
+      "Younger patients, equal gender ratio"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When diffuse adenocarcinoma permeates widely throughout the entire gastric wall, it elicits an intense, pervasive desmoplastic stromal fibrous reaction known as **linitis plastica**, colloquially termed leather bottle stomach. The gastric wall becomes massively thickened, rigid, and completely undistensible, destroying normal mucosal rugal folds. Patients present with early satiety, severe postprandial fullness, inability to finish a regular meal, and marked weight loss.",
+   "say": "Diffuse infiltration induces severe fibrous thickening of the gastric wall called linitis plastica, or leather bottle stomach, leading to early satiety and severe weight loss.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-meal-carcinoma-stomach.webp",
+    "alt": "Barium meal radiograph showing a rigid, contracted, non-distensible stomach in linitis plastica.",
+    "caption": "Linitis plastica on barium meal: rigid, contracted gastric lumen resembling a leather bottle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Barium meal esophagogastroduodenography in linitis plastica demonstrates a tubular, non-distensible, rigid stomach that fails to expand upon effervescent gas insufflation, exhibiting a classic lead pipe appearance. On endoscopy, the mucosa may appear deceptively normal or mildly erythematous because the malignancy infiltrates predominantly within the submucosal and muscular layers. Standard superficial mucosal biopsies frequently yield false-negative results, obligating **deep unroofing jump biopsies**.",
+   "say": "Barium studies in linitis plastica show a contracted, rigid stomach with a lead-pipe appearance. Because the cancer lies deep in the wall, deep jump biopsies are required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Mucosal Biopsy",
+     "points": [
+      "Samples only surface epithelium",
+      "High false-negative rate in linitis plastica",
+      "Misses submucosal malignant streaming",
+      "Can delay life-saving cancer diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Deep Jumbo / Jump Biopsy",
+     "points": [
+      "Bite-on-bite technique or strip EMR",
+      "Harvests muscularis mucosae & submucosa",
+      "Identifies hidden signet ring cells",
+      "Provides definitive histopathological proof"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because diffuse carcinoma spreads sub-mucosally far beyond the visible macroscopic margins, partial gastrectomy carries a high risk of positive surgical margins. The surgical procedure of choice for linitis plastica or diffuse-type cancer is a **total gastrectomy with D2 lymphadenectomy**, achieving at least six to eight centimetres of macroscopic proximal and distal clear margin. Alimentary reconstruction is performed using a Roux-en-Y esophagojejunostomy.",
+   "say": "Diffuse gastric cancer infiltrates extensively beneath the mucosa, requiring a total gastrectomy with D2 lymphadenectomy and Roux-en-Y reconstruction to ensure clear margins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Confirmed Diffuse Adenocarcinoma or Linitis Plastica"
+     },
+     {
+      "id": "tot",
+      "label": "Complete En Bloc Total Gastrectomy Including Omentum"
+     },
+     {
+      "id": "d2",
+      "label": "Formal D2 Lymphadenectomy Clearing Stations 1 to 12a"
+     },
+     {
+      "id": "roux",
+      "label": "Roux-en-Y Reconstruction with 50 cm Antiperistaltic Jejunal Limb"
+     },
+     {
+      "id": "anast",
+      "label": "Circular Stapled End-to-Side Esophagojejunostomy Anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "tot"
+     ],
+     [
+      "tot",
+      "d2"
+     ],
+     [
+      "d2",
+      "roux"
+     ],
+     [
+      "roux",
+      "anast"
+     ]
+    ]
+   }
+  }
+ ]
+}

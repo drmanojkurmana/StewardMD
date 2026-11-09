@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "phm-beta-blockers",
+  "subject": "pharmacology",
+  "title": "Combined Alpha-Beta Antagonists, Ultrashort Agents, and Antiarrhythmics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A dual-action adrenergic antagonist providing combined non-selective beta and selective alpha-1 blockade is **labetalol**. Administered orally or by repeated intravenous bolus infusions, labetalol exhibits a beta-to-alpha blocking potency ratio of 3:1 orally and 7:1 intravenously. By blocking vascular alpha-1 receptors, labetalol reduces systemic vascular resistance, while concurrent beta-blockade prevents reflex tachycardia, making it the premier intravenous agent for hypertensive emergencies and preeclampsia.",
+      "say": "Labetalol combines beta and alpha-1 blockade, lowering blood pressure without triggering reflex tachycardia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical scenario",
+          "Route of delivery",
+          "Hemodynamic action",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "Hypertensive emergency",
+            "Intravenous bolus (20 to 80 mg)",
+            "Rapid reduction in systemic vascular resistance",
+            "Smooth blood pressure drop without tachycardia"
+          ],
+          [
+            "Severe preeclampsia in pregnancy",
+            "Intravenous or oral",
+            "Reduces maternal blood pressure safely",
+            "Preserves uteroplacental and fetal perfusion"
+          ],
+          [
+            "Acute aortic dissection",
+            "Intravenous infusion",
+            "Decreases shear stress (dP/dt) and pressure",
+            "First-line together with sodium nitroprusside"
+          ],
+          [
+            "Perioperative hypertension",
+            "Intravenous titration",
+            "Controls sudden intraoperative surges",
+            "Rapid onset and titratable recovery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The premier ultra-short-acting cardioselective beta-1 adrenergic receptor antagonist is **esmolol**. Formulated as an ester for continuous intravenous titration, esmolol exhibits an exceptionally rapid onset of action within two minutes and an ultra-short elimination half-life of nine minutes. This transient duration results from rapid hydrolysis by cytosolic red blood cell esterases, independent of renal or hepatic clearance mechanisms.",
+      "say": "Esmolol is an ultra-short-acting beta blocker broken down by red blood cell esterases in nine minutes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "esm",
+            "label": "Intravenous esmolol infusion"
+          },
+          {
+            "id": "b1",
+            "label": "Rapid cardioselective beta-1 receptor blockade"
+          },
+          {
+            "id": "rbc",
+            "label": "Hydrolysis by cytosolic erythrocyte esterases"
+          },
+          {
+            "id": "inact",
+            "label": "Inactive acid metabolite: Elimination half-life 9 minutes"
+          }
+        ],
+        "edges": [
+          [
+            "esm",
+            "b1"
+          ],
+          [
+            "b1",
+            "rbc"
+          ],
+          [
+            "rbc",
+            "inact"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A non-selective beta blocker uniquely possessing Class III potassium channel blocking antiarrhythmic activity is **sotalol**. Administered as a racemic mixture, l-sotalol exerts non-selective beta-adrenergic antagonism, while both d-sotalol and l-sotalol block rapid delayed rectifier potassium currents (IKr). This blocks repolarization, prolongs cardiac ventricular action potential duration, and lengthens the corrected QT interval, making it effective for maintaining sinus rhythm in atrial fibrillation while carrying torsades de pointes risk.",
+      "say": "Sotalol combines non-selective beta blockade with Class III potassium channel blockade, prolonging the QT interval.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sotalol (Class II + Class III)",
+          "points": [
+            "Blocks beta-1 and beta-2 adrenergic receptors",
+            "Inhibits rapid delayed rectifier potassium channel (IKr)",
+            "Prolongs ventricular action potential and QT interval",
+            "Carries significant risk of torsades de pointes ventricular tachycardia"
+          ]
+        },
+        "right": {
+          "title": "Standard beta blockers (Class II)",
+          "points": [
+            "Block beta-1 or beta-2 receptors without channel block",
+            "No direct inhibition of potassium currents",
+            "Shorten or have no effect on cardiac QT interval",
+            "Virtually zero risk of torsades de pointes arrhythmias"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A non-selective beta blocker with significant partial agonist intrinsic sympathomimetic activity is **pindolol**. In resting baseline states with low sympathetic tone, pindolol stimulates beta-1 and beta-2 receptors mildly, preventing profound resting bradycardia and maintaining peripheral blood flow. However, during exercise or high sympathetic stress, it competitively blocks high concentrations of endogenous catecholamines, blunting excessive tachycardic surges.",
+      "say": "Pindolol possesses intrinsic sympathomimetic activity, acting as a partial agonist to prevent severe resting bradycardia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pindolol (With ISA)",
+          "points": [
+            "Partial agonist at beta-1 and beta-2 receptors",
+            "Minimal drop in resting heart rate and cardiac output",
+            "Lower incidence of cold extremities and Raynaud symptoms",
+            "Not recommended following acute myocardial infarction"
+          ]
+        },
+        "right": {
+          "title": "Propranolol (Without ISA)",
+          "points": [
+            "Pure competitive antagonist; zero intrinsic activity",
+            "Causes marked resting bradycardia and cardiac slowdown",
+            "Exacerbates peripheral vascular vasospasm and cold hands",
+            "Proven mortality reduction in secondary post-MI prevention"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The pharmacological property whereby a beta-blocker exerts partial agonism is designated **intrinsic sympathomimetic activity**. Agents with ISA, such as pindolol and acebutolol, activate adenylyl cyclase to a minor degree while preventing full stimulation by epinephrine. Because they cause less resting myocardial depression, they are preferred in patients prone to symptomatic resting sinus bradycardia or peripheral vascular vasospasm.",
+      "say": "Intrinsic sympathomimetic activity provides mild baseline receptor stimulation to protect against severe bradycardia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological class",
+          "Beta blocker agents",
+          "Intrinsic sympathomimetic activity (ISA)",
+          "Clinical suitability"
+        ],
+        "rows": [
+          [
+            "Non-selective with ISA",
+            "Pindolol",
+            "High partial agonist activity",
+            "Hypertensives with resting bradycardia"
+          ],
+          [
+            "Cardioselective with ISA",
+            "Acebutolol, celiprolol",
+            "Moderate partial agonist activity",
+            "Mild reactive airway disease with bradycardia"
+          ],
+          [
+            "Non-selective without ISA",
+            "Propranolol, timolol, nadolol",
+            "Zero ISA (Pure competitive blockers)",
+            "Secondary post-MI prophylaxis, variceal bleeding"
+          ],
+          [
+            "Cardioselective without ISA",
+            "Metoprolol, atenolol, bisoprolol",
+            "Zero ISA (Pure competitive blockers)",
+            "Heart failure, stable angina, post-infarction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Managing life-threatening acute aortic dissection mandates immediate pharmacological reduction of vascular shear stress using **esmolol in aortic dissection**. Dissection propagations correlate directly with the left ventricular ejection velocity (dP/dt). Clinicians rapidly infuse intravenous esmolol to reduce heart rate below sixty beats per minute and blunt contractility before administering vasodilators like sodium nitroprusside, preventing reflex catecholamine surges from tearing the dissecting aortic flap.",
+      "say": "Intravenous esmolol blunts left ventricular shearing forces before vasodilators are given in acute aortic dissection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tear",
+            "label": "Intimal flap tear in ascending or descending aorta"
+          },
+          {
+            "id": "esm",
+            "label": "Intravenous esmolol bolus and infusion titrated to HR < 60 bpm"
+          },
+          {
+            "id": "shear",
+            "label": "Blunting of dP/dt reduces aortic wall shearing stress"
+          },
+          {
+            "id": "vaso",
+            "label": "Add vasodilator (Nitroprusside) to lower systolic BP < 120 mmHg"
+          }
+        ],
+        "edges": [
+          [
+            "tear",
+            "esm"
+          ],
+          [
+            "esm",
+            "shear"
+          ],
+          [
+            "shear",
+            "vaso"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The management of polymorphic ventricular tachycardia associated with congenital or acquired long QT syndrome relies on **beta blockers in long QT syndrome**. Propranolol and nadolol dampen sympathetic triggers and heart rate accelerations that precipitate malignant torsades de pointes arrhythmias. In congenital long QT syndromes (LQTS types 1 and 2), long-acting non-selective beta blockers represent definitive first-line therapy, drastically reducing syncope and aborted cardiac arrest.",
+      "say": "Non-selective beta blockers like nadolol and propranolol prevent torsades de pointes in long QT syndrome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Long QT syndrome subtype",
+          "Mutated ion channel",
+          "Sympathetic trigger",
+          "Beta-blocker efficacy"
+        ],
+        "rows": [
+          [
+            "LQTS Type 1 (LQT1)",
+            "KCNQ1 (Slow potassium current IKs)",
+            "Swimming, physical exertion, emotional stress",
+            "Highly protective (> 90% event reduction)"
+          ],
+          [
+            "LQTS Type 2 (LQT2)",
+            "KCNH2 (Rapid potassium current IKr)",
+            "Sudden auditory alarms, emotional shock",
+            "Moderately protective; nadolol preferred"
+          ],
+          [
+            "LQTS Type 3 (LQT3)",
+            "SCN5A (Late persistent sodium current INa)",
+            "Resting bradycardia, sleep",
+            "Less effective; sodium channel blockers added"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Toxicity and overdose from massive ingestions of beta-adrenergic antagonists require rescue therapy using **intravenous glucagon**. Because severe beta-blocker overdose causes refractory bradycardia, cardiogenic shock, and high-degree heart block resistant to catecholamines, glucagon bypasses adrenergic receptors completely. Glucagon binds specific myocardial G protein-coupled glucagon receptors, stimulating adenylyl cyclase directly to elevate intracellular cAMP, restoring myocardial contractility and heart rate.",
+      "say": "Intravenous glucagon bypasses blocked beta receptors to raise cyclic AMP and restore cardiac contractility.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adrenergic catecholamines (Blocked)",
+          "points": [
+            "Act via surface beta-1 adrenergic receptors",
+            "Incapable of binding due to massive antagonist saturation",
+            "Ineffective at reversing severe beta blocker overdose",
+            "Escalating doses risk severe peripheral vasoconstriction"
+          ]
+        },
+        "right": {
+          "title": "Intravenous glucagon (Rescue pathway)",
+          "points": [
+            "Binds distinct cardiac glucagon receptors",
+            "Directly activates Gs protein and adenylyl cyclase",
+            "Generates intracellular cyclic AMP independently",
+            "First-line antidote for refractory beta-blocker shock"
+          ]
+        }
+      }
+    }
+  ]
+}

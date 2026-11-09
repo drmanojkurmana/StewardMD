@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-menstrual-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Endometrial Dating, Progesterone and Oestradiol",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Histological ageing of the endometrium by gland and stroma criteria is **endometrial dating**. Noyes criteria once diagnosed luteal phase defects from biopsies lagging two or more days. Modern practice doubts its reproducibility and rarely biopsies for it. Biopsy two days behind dates on two cycles was the old rule; interobserver agreement proved too poor to keep it.",
+   "say": "Endometrial dating by Noyes criteria historically diagnosed luteal phase defects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature dated",
+     "Structure"
+    ],
+    "rows": [
+     [
+      "Gland secretion",
+      "Glands"
+     ],
+     [
+      "Stromal oedema",
+      "Stroma"
+     ],
+     [
+      "Predecidua",
+      "Around vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The hormone of the luteal phase preparing implantation and sustaining early pregnancy is **progesterone**. It also raises basal temperature by half a degree. Its withdrawal, not oestrogen fall, triggers menstrual shedding. Its thermogenic effect lifts basal body temperature by about 0.3 to 0.5 degrees Celsius after ovulation.",
+   "say": "Progesterone sustains the luteal phase and its withdrawal triggers shedding.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-progesterone.webp",
+    "alt": "Progesterone luteal action.",
+    "caption": "Progesterone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The principal ovarian oestrogen driving proliferation and feedback is **oestradiol**. Granulosa aromatisation produces it from theca androgens. Sustained levels above threshold for fifty hours flip feedback positive. Levels near 200 picograms per millilitre sustained for about fifty hours flip the feedback switch.",
+   "say": "Oestradiol drives proliferation and flips feedback positive when sustained.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Granulosa aromatises"
+     },
+     {
+      "id": "n1",
+      "label": "Oestradiol climbs"
+     },
+     {
+      "id": "n2",
+      "label": "Threshold sustained 50 hours"
+     },
+     {
+      "id": "n3",
+      "label": "LH surge triggered"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serum progesterone below ovulatory thresholds in a timed sample proves **anovulation**. Causes span thyroid, prolactin, PCOS and hypothalamic suppression. Each has a specific remedy restoring ovulation. A level under 3 nanograms per millilitre in the mid luteal sample is the usual anovulatory cut off.",
+   "say": "Timed low progesterone proves anovulation from thyroid, prolactin or PCOS causes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Hormones proving ovulation.",
+    "caption": "Ovulation hormones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endometrial biopsy now serves cancer and hyperplasia exclusion, not infertility dating, a shift called **biopsy repurposing**. Pipelle sampling in clinic replaced inpatient curettage. Indications centre on abnormal bleeding over forty five or persistent at any age. Sampling is also triggered by postmenopausal bleeding, where a thickness over 4 millimetres earns a biopsy.",
+   "say": "Biopsy repurposing targets cancer exclusion by pipelle rather than infertility dating.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Historical",
+     "points": [
+      "Luteal defect dating",
+      "Infertility workup"
+     ]
+    },
+    "right": {
+     "title": "Modern",
+     "points": [
+      "Cancer exclusion",
+      "Abnormal bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progesterone resistance in endometriosis blunts secretory transformation despite normal levels, termed **progesterone resistance**. Receptor and inflammatory changes mediate it. It may contribute to implantation failure in that disease. It helps explain why some endometriosis patients respond poorly to progestogen treatment alone.",
+   "say": "Progesterone resistance blunts secretory change in endometriosis despite normal levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Endometriosis lesions",
+      "Progestin resistance"
+     ],
+     [
+      "Eutopic endometrium",
+      "Implantation effects debated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oestradiol priming induces progesterone receptors, without which progesterone cannot act, the rule of **oestrogen priming**. This sequence explains why the phases must occur in order. Skipping proliferation makes secretory change impossible. Two cell theory underpins this: theca makes androgen, granulosa needs oestrogen priming to answer progesterone later.",
+   "say": "Oestrogen priming induces progesterone receptors, so phase order is obligatory.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Oestrogen proliferates"
+     },
+     {
+      "id": "n1",
+      "label": "Receptors induced"
+     },
+     {
+      "id": "n2",
+      "label": "Progesterone acts"
+     },
+     {
+      "id": "n3",
+      "label": "Secretory change"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exogenous progestogens given cyclically protect the endometrium in anovulatory women, termed **progestogen protection**. Twelve to fourteen days monthly provokes organised withdrawal bleeds. It prevents hyperplasia from unopposed oestrogen. Unopposed oestrogen for over a year without progestogen measurably raises hyperplasia and cancer rates.",
+   "say": "Progestogen protection prevents hyperplasia in anovulatory women with organised withdrawal.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Endometrial protection prescribing.",
+    "caption": "Endometrial protection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dating pregnancies by last period assumes day fourteen ovulation, an assumption broken by **follicular variability** again. Irregular cycles therefore need ultrasound dating. This links menstrual physiology directly to antenatal accuracy. Cycle lengths outside 21 to 35 days make calendar dating unreliable enough to need a scan date.",
+   "say": "Follicular variability breaks last period dating, so irregular cycles need ultrasound.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Regular 28 days",
+     "points": [
+      "LMP dating reliable"
+     ]
+    },
+    "right": {
+     "title": "Irregular cycles",
+     "points": [
+      "Ultrasound dating required"
+     ]
+    }
+   }
+  }
+ ]
+}

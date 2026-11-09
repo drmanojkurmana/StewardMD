@@ -1,0 +1,230 @@
+{
+  "v": 1,
+  "module": "mic-intestinal-protozoa",
+  "subject": "microbiology",
+  "title": "Intestinal Coccidia, Balantidium coli and Trichomonas vaginalis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The foodborne coccidian **Cyclospora cayetanensis** causes prolonged, relapsing, watery diarrhoea associated with foreign travel or consuming imported contaminated produce such as raspberries and basil. Freshly excreted fecal oocysts are unsporulated and non-infectious, requiring one to two weeks in warm soil to mature into infective double-walled cysts, precluding direct person-to-person transmission.",
+      "say": "Contaminated berries transmit unsporulated Cyclospora oocysts that require environmental soil maturation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/protozoal-intestinal-infections-and-tricho-fig1.webp",
+        "alt": "Pathogenic protozoa morphological features",
+        "caption": "Morphologic spectrum of intestinal coccidia, Balantidium coli, and Trichomonas [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "On fecal microscopy stained with modified Ziehl-Neelsen, Cyclospora appears as spherical oocysts measuring eight to ten micrometres in diameter, exactly twice the diameter of Cryptosporidium. They display variable acid-fastness, ranging from dark magenta to unstained glassy **ghost oocysts**. Crucially, under epifluorescence microscopy with ultraviolet illumination at three hundred and sixty-five nanometres, they exhibit bright neon-blue autofluorescence.",
+      "say": "Eight to ten micrometre oocysts exhibit variable acid-fast staining and vivid neon blue ultraviolet autofluorescence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cyclospora cayetanensis",
+          "points": [
+            "Size: 8 to 10 micrometres diameter",
+            "Variable acid fastness with pale ghost forms",
+            "Neon blue autofluorescence under 365 nm UV",
+            "First-line treatment: cotrimoxazole"
+          ]
+        },
+        "right": {
+          "title": "Cystoisospora belli",
+          "points": [
+            "Size: large ellipsoidal 20 to 33 micrometres",
+            "Uniformly strongly acid-fast pink oocysts",
+            "Bright green to yellow UV autofluorescence",
+            "Causes marked peripheral blood eosinophilia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The large coccidian **Cystoisospora belli**, historically called Isospora belli, is an opportunistic cause of profuse watery diarrhoea and malabsorption in immunocompromised patients with acquired immunodeficiency syndrome. Fecal wet preparations demonstrate massive, elongated, spindle-shaped or ellipsoidal oocysts measuring twenty to thirty-three micrometres, each containing a single central granular sporoblast.",
+      "say": "Large spindle-shaped Cystoisospora oocysts cause severe chronic malabsorptive diarrhoea in HIV infection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Coccidian Species",
+          "Oocyst Shape & Size",
+          "Fluorescence & Eosinophilia"
+        ],
+        "rows": [
+          [
+            "Cryptosporidium",
+            "Small spherical 4-6 microns",
+            "No autofluorescence; no eosinophilia"
+          ],
+          [
+            "Cyclospora",
+            "Medium spherical 8-10 microns",
+            "Blue autofluorescence; minimal eosinophilia"
+          ],
+          [
+            "Cystoisospora",
+            "Large ellipsoidal 20-33 microns",
+            "Green autofluorescence; marked eosinophilia"
+          ],
+          [
+            "Sarcocystis",
+            "Paired sporocysts 10-15 microns",
+            "Found in muscular sarcocysts or stool"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A unique haematological hallmark that distinguishes Cystoisospora from other intestinal protozoal pathogens is prominent **peripheral blood eosinophilia**. Most protozoal enteritides run their course without eliciting systemic allergic or eosinophilic responses. In cystoisosporiasis, tissue invasion of the lamina propria stimulates interleukin-5 release, prompting eosinophil counts to exceed fifteen percent of total leukocytes.",
+      "say": "Intestinal mucosal invasion triggers interleukin five release, causing prominent peripheral blood eosinophilia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "is1",
+            "label": "Ingested Cystoisospora oocyst invades jejunal lamina propria"
+          },
+          {
+            "id": "is2",
+            "label": "Intense mucosal inflammation triggers T-cell interleukin-5 secretion"
+          },
+          {
+            "id": "is3",
+            "label": "Bone marrow releases eosinophils, generating diagnostic peripheral eosinophilia"
+          }
+        ],
+        "edges": [
+          [
+            "is1",
+            "is2"
+          ],
+          [
+            "is2",
+            "is3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The treatment of choice for both Cyclospora cayetanensis and Cystoisospora belli is oral **trimethoprim-sulfamethoxazole**, which provides rapid microbiological clearance and resolution of diarrhoea. In patients with human immunodeficiency virus, chronic secondary prophylaxis with cotrimoxazole is necessary to prevent frequent post-treatment relapses. For sulpha-allergic individuals, oral ciprofloxacin serves as a secondary alternative.",
+      "say": "Trimethoprim-sulfamethoxazole is curative for both Cyclospora and Cystoisospora, with ciprofloxacin as alternative.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathogen",
+          "Primary Therapy",
+          "Secondary Prophylaxis"
+        ],
+        "rows": [
+          [
+            "Cyclospora",
+            "Trimethoprim-sulfamethoxazole DS twice daily for 7 days",
+            "Cotrimoxazole three times weekly if HIV positive"
+          ],
+          [
+            "Cystoisospora",
+            "Trimethoprim-sulfamethoxazole DS four times daily for 10 days",
+            "Maintenance cotrimoxazole until CD4 over 200"
+          ],
+          [
+            "Sulpha allergy",
+            "Oral ciprofloxacin 500 mg twice daily",
+            "Alternative maintenance with ciprofloxacin"
+          ],
+          [
+            "Nitazoxanide",
+            "Second-line alternative with variable response",
+            "Not routinely recommended for prophylaxis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The giant ciliated protozoan **Balantidium coli** is the largest protozoan and the only ciliate known to infect humans. Pigs serve as the principal natural reservoir, and infection spreads through ingestion of porcine fecal cysts. Trophozoites measure fifty to one hundred micrometres, display rapid rotary tumbling motility driven by cilia, and harbor a prominent kidney-shaped macronucleus alongside a contractile vacuole.",
+      "say": "Swine handlers risk infection by giant ciliated Balantidium, recognizable by its kidney-shaped macronucleus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Balantidium coli trophozoite",
+          "points": [
+            "Largest protozoan parasite (50 to 100 microns)",
+            "Covered uniformly with rows of motile cilia",
+            "Large kidney-shaped or bean-shaped macronucleus",
+            "Secretes hyaluronidase to invade colonic submucosa"
+          ]
+        },
+        "right": {
+          "title": "Clinical manifestations",
+          "points": [
+            "Severe dysentery resembling amoebiasis",
+            "Deep mucosal ulcerations with ragged edges",
+            "Tetracycline is the therapeutic drug of choice",
+            "Intestinal perforation carries high mortality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The sexually transmitted flagellate **Trichomonas vaginalis** exists exclusively as a motile trophozoite, lacking any cyst stage in its life cycle. The pear-shaped organism possesses four anterior flagella and an undulating membrane extending half the length of the cell, generating characteristic rapid jerky, twitching motility on immediate saline wet mount examination of vaginal secretions.",
+      "say": "Trichomonas lacks a cyst stage, moving with jerky twitching motility powered by four flagella.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Characteristic Finding"
+        ],
+        "rows": [
+          [
+            "Life cycle stages",
+            "Trophozoite only; no cyst stage exists"
+          ],
+          [
+            "Locomotion style",
+            "Jerky, non-directional twitching motility on saline mount"
+          ],
+          [
+            "Vaginal discharge",
+            "Profuse, frothy, thin, greenish-yellow with foul odour"
+          ],
+          [
+            "Vaginal pH",
+            "Elevated markedly above 4.5, typically between 5.0 and 6.0"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients present with a profuse, malodorous, frothy, greenish-yellow vaginal discharge accompanied by severe pruritus and dysuria. Colposcopic examination reveals punctate mucosal haemorrhages over the cervix and upper vagina, termed the **strawberry cervix** or colpitis macularis. Treatment requires single-dose oral metronidazole or tinidazole, and treating sexual partners simultaneously is mandatory to avoid ping-pong reinfection.",
+      "say": "Punctate cervical petechiae create a strawberry cervix; both sexual partners must receive metronidazole.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tr1",
+            "label": "Identify frothy greenish-yellow discharge and elevated vaginal pH over 4.5"
+          },
+          {
+            "id": "tr2",
+            "label": "Demonstrate motile trichomonads on immediate normal saline wet mount"
+          },
+          {
+            "id": "tr3",
+            "label": "Administer single 2g oral metronidazole to both index patient and sexual partner"
+          }
+        ],
+        "edges": [
+          [
+            "tr1",
+            "tr2"
+          ],
+          [
+            "tr2",
+            "tr3"
+          ]
+        ]
+      }
+    }
+  ]
+}

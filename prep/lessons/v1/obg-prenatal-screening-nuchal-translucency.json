@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-prenatal-screening",
+ "subject": "obstetrics-gynaecology",
+ "title": "Nuchal Translucency and First Trimester Screening",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fluid thickness behind the fetal neck measured at eleven to fourteen weeks is **nuchal translucency**. Enlarged measurement raises the chance of Down syndrome and heart defects. It must be measured with the fetus in a precise neutral position. Above 3.5 millimetres the chance of a chromosomal or structural problem rises steeply even before blood results return.",
+   "say": "Nuchal translucency measures neck fluid at eleven to fourteen weeks and flags chromosome risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-prenatal-screening-gen1.webp",
+    "alt": "First trimester ultrasound marks nuchal translucency caliper placement between inner skin and soft tissue.",
+    "caption": "First trimester ultrasound marks nuchal translucency caliper placement between inner skin and soft tissue. Nuchal translucency measurement and trisomy 21 risk curve. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Two blood markers combined with nuchal measurement in the first trimester form the **double marker** combined test. Pregnancy associated plasma protein and free beta hCG patterns shift in Down syndrome. Age related background risk is modified by these results. In Down syndrome PAPP-A falls to about half normal while free beta hCG roughly doubles.",
+   "say": "The double marker combined test uses two blood markers with nuchal measurement in the first trimester.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "In Down syndrome"
+    ],
+    "rows": [
+     [
+      "PAPP-A",
+      "Low"
+     ],
+     [
+      "Free beta hCG",
+      "High"
+     ],
+     [
+      "Nuchal fluid",
+      "Increased"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three second trimester blood markers screening for Down syndrome form the **triple test**. Alpha fetoprotein and unconjugated oestriol fall while hCG rises in affected pregnancies. It has largely been replaced by more accurate tests where available. Adding inhibin A makes the quadruple test, which replaced the triple test in most second trimester programmes.",
+   "say": "The triple test uses three second trimester markers and has been replaced by more accurate tests.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Blood sample taken"
+     },
+     {
+      "id": "n1",
+      "label": "Three markers measured"
+     },
+     {
+      "id": "n2",
+      "label": "Risk calculated with age"
+     },
+     {
+      "id": "n3",
+      "label": "Diagnostic test offered if high"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening gives a probability, never a diagnosis, a distinction of **screen positive risk**. A result like one in fifty means most such pregnancies are still normal. Only chorionic villus sampling or amniocentesis confirms the karyotype. A one in 250 cut off is a common screen positive threshold, set by each programme rather than by biology.",
+   "say": "Screening gives probability never diagnosis, and only invasive testing confirms the karyotype.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Screening test",
+     "points": [
+      "Probability estimate",
+      "No miscarriage risk",
+      "Offered to all"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic test",
+     "points": [
+      "Definite karyotype",
+      "Small miscarriage risk",
+      "Offered when indicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Increased nuchal fluid with normal chromosomes prompts detailed heart scanning, termed **cardiac follow up**. Structural heart disease accounts for much of the residual risk. Resolution of fluid by twenty weeks improves the outlook considerably. A measurement above the 99th centile earns fetal echocardiography even when chromosomes return normal.",
+   "say": "Increased nuchal fluid with normal chromosomes prompts detailed fetal heart scanning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chromosomal-disorders-children-long-case-fig1.webp",
+    "alt": "Down syndrome clinical features.",
+    "caption": "Chromosomal disorder features. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Timing is strict because nuchal measurement is only valid within the **eleven to fourteen week window**. Crown-rump length between forty five and eighty four millimetres defines it. Outside this window, second trimester strategies take over. A fetus curled in extension can add a millimetre falsely, so the neutral position rule protects accuracy.",
+   "say": "Nuchal measurement is valid only between eleven and fourteen weeks by crown-rump length.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Window"
+    ],
+    "rows": [
+     [
+      "Gestation",
+      "11 to 13+6 weeks"
+     ],
+     [
+      "CRL",
+      "45 to 84 mm"
+     ],
+     [
+      "After window",
+      "Serum or NIPT routes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absent nasal bone and abnormal ductus venosus flow add accuracy as **additional markers**. They refine risk in expert hands during the same scan. Their misuse by untrained operators worsens rather than improves screening. Absent nasal bone appears in about two thirds of Down syndrome fetuses and under 3 percent of normal ones.",
+   "say": "Additional markers like nasal bone refine screening risk in expert hands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Nuchal measured"
+     },
+     {
+      "id": "n1",
+      "label": "Nasal bone assessed"
+     },
+     {
+      "id": "n2",
+      "label": "Blood markers added"
+     },
+     {
+      "id": "n3",
+      "label": "Combined risk issued"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Counselling before screening explains choices without directing decisions, following **non directive counselling**. Couples must know beforehand that results may lead to offers of invasive testing. Consent for screening should always be explicit, not assumed. Screening offered without this counselling produces most complaints, even when the test itself performed correctly.",
+   "say": "Non directive counselling explains screening choices and invasive offers before consent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Informed choice",
+     "points": [
+      "Options explained",
+      "Couple decides",
+      "Consent explicit"
+     ]
+    },
+    "right": {
+     "title": "Assumed screening",
+     "points": [
+      "Test done routinely",
+      "Results surprise",
+      "Consent absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Detection rates for combined first trimester screening approach ninety percent at a five percent screen positive rate, summarised as **screening performance**. Cell free DNA testing performs still better and is displacing it as primary screening in many systems. NIPT detection for Down syndrome exceeds 99 percent, which is why combined screening is becoming a backup route.",
+   "say": "Combined screening detects about ninety percent, while cell free DNA performs still better.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Detection"
+    ],
+    "rows": [
+     [
+      "Combined first trimester",
+      "About 90 percent"
+     ],
+     [
+      "Quadruple test",
+      "About 80 percent"
+     ],
+     [
+      "Cell free DNA",
+      "Over 99 percent for Down"
+     ]
+    ]
+   }
+  }
+ ]
+}

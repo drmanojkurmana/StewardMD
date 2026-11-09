@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Paget Disease of the Nipple, Inflammatory Breast Carcinoma, and Aggressive Variants",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Presenting as an uncommon clinical manifestation of breast cancer, **Paget disease of the nipple** accounts for one to four percent of all mammary malignancies. It presents as an erythematous, scaling, eczematous, or ulcerated lesion centered on the nipple that gradually expands outward to involve the surrounding areola. Patients frequently report burning, pruritus, or serosanguinous nipple discharge, and the condition is easily mistaken for benign contact dermatitis.",
+   "say": "Paget disease of the nipple presents as an eczematous, scaling, or ulcerated lesion on the nipple that spreads outward to the areola. It causes itching and burning, often mimicking benign eczema.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-breast_inspection.webp",
+    "alt": "Clinical examination illustration demonstrating nipple ulceration and cutaneous breast inspection findings.",
+    "caption": "Nipple eczema versus Paget disease: unilateral persistent ulceration mandates full-thickness punch biopsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A critical diagnostic rule distinguishes benign nipple eczema from malignant Paget disease: benign eczema typically presents bilaterally and begins on the areola while sparing the central nipple, whereas Paget disease is almost invariably unilateral, originates directly on the nipple, and subsequently spreads to the areolar skin. Any chronic eczematoid lesion of the nipple that fails to resolve within three weeks of topical steroid therapy mandates an immediate **full-thickness punch biopsy** of the nipple.",
+   "say": "Benign eczema affects the areola bilaterally, whereas Paget disease is unilateral and begins directly on the nipple. Any nipple lesion that fails to heal with topical steroids requires a punch biopsy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign Mammary Eczema",
+     "points": [
+      "Frequently bilateral and symmetrical",
+      "Originates on areola, often sparing nipple",
+      "Responds rapidly to topical corticosteroids",
+      "No underlying parenchymal breast mass"
+     ]
+    },
+    "right": {
+     "title": "Paget Disease of the Nipple",
+     "points": [
+      "Almost exclusively unilateral presentation",
+      "Originates on nipple and spreads outward",
+      "Fails to heal with topical corticosteroid therapy",
+      "Over 90% harbour underlying ductal malignancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histopathological examination reveals large, rounded intraepidermal cells with pale, vacuolated cytoplasm, pleomorphic hyperchromatic nuclei, and prominent nucleoli, designated as **malignant Paget cells**. These cells infiltrate the stratified squamous epithelium of the nipple epidermis either singly or in small clusters. Paget cells express epithelial markers and stain strongly positive for mucicarmine, periodic acid-Schiff, low-molecular-weight cytokeratins, and frequently show intense HER2 oncoprotein overexpression.",
+   "say": "Punch biopsy reveals large intraepidermal Paget cells with clear cytoplasm and prominent nuclei. These cells express epithelial markers, stain positive for mucicarmine, and frequently overexpress HER2.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biop",
+      "label": "Full-Thickness Punch Biopsy of Persistent Nipple Lesion"
+     },
+     {
+      "id": "hist",
+      "label": "Intraepidermal Infiltration by Atypical Pale Paget Cells"
+     },
+     {
+      "id": "stain",
+      "label": "Positive Staining with Mucicarmine, PAS & Cytokeratin 7"
+     },
+     {
+      "id": "her2",
+      "label": "Frequent Immunoreactivity for HER2/neu Oncoprotein"
+     },
+     {
+      "id": "im",
+      "label": "Bilateral Diagnostic Mammography & Breast MRI"
+     }
+    ],
+    "edges": [
+     [
+      "biop",
+      "hist"
+     ],
+     [
+      "hist",
+      "stain"
+     ],
+     [
+      "stain",
+      "her2"
+     ],
+     [
+      "her2",
+      "im"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Over ninety-five percent of patients with Paget disease harbour an underlying breast carcinoma. Approximately half present with a palpable mass, which usually represents an invasive ductal carcinoma, whereas patients without a palpable mass typically harbour extensive central **ductal carcinoma in situ**. Preoperative evaluation requires bilateral diagnostic mammography, breast ultrasound, and dynamic contrast-enhanced magnetic resonance imaging to detect occult multicentric disease throughout the remaining breast tissue.",
+   "say": "Nearly all patients with Paget disease have an underlying malignancy. Palpable lesions usually represent invasive cancer, while non-palpable presentations commonly indicate central ductal carcinoma in situ.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Presentation",
+     "Underlying Pathology",
+     "Recommended Surgical Approach"
+    ],
+    "rows": [
+     [
+      "Palpable Mass Present",
+      "Invasive ductal carcinoma (~95%)",
+      "Mastectomy or wide excision + ALND/SLNB"
+     ],
+     [
+      "No Palpable Mass",
+      "Ductal carcinoma in situ (~90%)",
+      "Central lumpectomy + radiotherapy or mastectomy"
+     ],
+     [
+      "Multicentric Lesions",
+      "Extensive synchronous carcinoma",
+      "Total mastectomy with sentinel node biopsy"
+     ],
+     [
+      "Recurrent Disease",
+      "Local recurrence after lumpectomy",
+      "Salvage total mastectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most lethal and rapidly progressive variant of locally advanced breast malignancy is **inflammatory breast carcinoma**, classified as T4d disease. It presents acutely with diffuse erythema, warmth, generalized induration, and marked breast enlargement developing over a period of weeks. A characteristic cutaneous hallmark is the appearance of peau d'orange dimpling, where cutaneous lymphedema accentuates dermal hair follicles, giving the skin the texture of an orange peel.",
+   "say": "Inflammatory breast cancer is a rapidly progressive malignancy presenting with sudden breast enlargement, warmth, redness, and peau d'orange skin dimpling caused by obstructed dermal lymphatic drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-breast-mastectomy.webp",
+    "alt": "Clinical photograph of advanced breast cancer demonstrating widespread skin erythema and peau d'orange induration.",
+    "caption": "Inflammatory breast carcinoma: pervasive cutaneous erythema, edema, and classic peau d'orange dimpling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The distinctive clinical features of inflammatory carcinoma do not stem from true infectious inflammation, but rather from widespread occlusion of superficial dermal lymphatic vessels by malignant cell aggregates. To confirm the diagnosis, the clinician performs a skin punch biopsy to demonstrate **dermal lymphatic invasion**. Microscopic plugs of high-grade tumour cells distending dermal lymphatic spaces explain both the rapid spread and the profound cutaneous edema that characterizes this aggressive entity.",
+   "say": "The redness and swelling of inflammatory breast cancer arise from tumour cells blocking superficial dermal lymphatic vessels. Punch biopsy of the skin confirms these dermal lymphatic tumor emboli.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inv",
+      "label": "Rapid Proliferation of High-Grade Invasive Mammary Carcinoma"
+     },
+     {
+      "id": "emboli",
+      "label": "Tumour Emboli Extensively Occlude Dermal Lymphatics"
+     },
+     {
+      "id": "edema",
+      "label": "Severe Cutaneous Lymphedema Producing Peau d'Orange"
+     },
+     {
+      "id": "eryth",
+      "label": "Widespread Erythema Involving Over One-Third of Breast"
+     },
+     {
+      "id": "punch",
+      "label": "Diagnostic Skin Punch Biopsy Demonstrates Lymphatic Plugs"
+     }
+    ],
+    "edges": [
+     [
+      "inv",
+      "emboli"
+     ],
+     [
+      "emboli",
+      "edema"
+     ],
+     [
+      "emboli",
+      "eryth"
+     ],
+     [
+      "eryth",
+      "punch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because inflammatory breast cancer presents with diffuse breast redness and warmth, it is frequently misdiagnosed as acute bacterial mastitis or breast abscess. However, inflammatory carcinoma occurs in non-lactating women, lacks localized fluctuance, and does not respond to antibiotic therapy. Any presumptive case of acute mastitis that fails to resolve completely following a one-week course of antibiotics warrants urgent **radiological and histopathological evaluation** to rule out underlying inflammatory carcinoma.",
+   "say": "Inflammatory breast cancer is often mistaken for mastitis, but occurs in non-lactating women and fails to improve with antibiotics. Lack of response to antibiotics mandates rapid imaging and skin biopsy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Bacterial Mastitis",
+     "points": [
+      "Typically occurs during lactation",
+      "Fever, leukocytosis, and localized pain",
+      "Fluctuance present if abscess forms",
+      "Resolves completely with targeted antibiotics"
+     ]
+    },
+    "right": {
+     "title": "Inflammatory Carcinoma",
+     "points": [
+      "Occurs in non-lactating postmenopausal women",
+      "Painless diffuse enlargement and peau d'orange",
+      "Axillary lymphadenopathy frequently palpable",
+      "Fails to respond to antibiotic courses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Primary upfront surgical resection is strictly contraindicated in inflammatory breast cancer, as surgical margins are universally positive and result in rapid chest wall recurrence. Standard management follows a structured trimodality protocol beginning with intensive **anthracycline-based neoadjuvant chemotherapy**. Following clinical downstaging, the patient undergoes a modified radical mastectomy, followed by adjuvant post-mastectomy radiation therapy, hormone therapy, and targeted anti-HER2 biological agents.",
+   "say": "Upfront surgery is contraindicated in inflammatory breast cancer. Treatment requires trimodality management starting with neoadjuvant chemotherapy, followed by modified radical mastectomy and chest wall radiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Step",
+     "Treatment Modality",
+     "Oncological Goal"
+    ],
+    "rows": [
+     [
+      "Step 1: Neoadjuvant",
+      "Doxorubicin, cyclophosphamide & taxanes",
+      "Downstage dermal tumour emboli"
+     ],
+     [
+      "Step 2: Targeted Therapy",
+      "Trastuzumab and pertuzumab if HER2+",
+      "Enhance pathological complete response"
+     ],
+     [
+      "Step 3: Surgery",
+      "Modified radical mastectomy",
+      "Resect residual locoregional parenchymal disease"
+     ],
+     [
+      "Step 4: Radiotherapy",
+      "High-dose post-mastectomy chest wall radiation",
+      "Sterilize residual microscopic dermal margins"
+     ],
+     [
+      "Step 5: Maintenance",
+      "Endocrine and targeted biological maintenance",
+      "Prevent distant metastatic progression"
+     ]
+    ]
+   }
+  }
+ ]
+}

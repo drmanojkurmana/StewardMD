@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-cranial-nerves",
+ "subject": "anatomy",
+ "title": "Cranial Parasympathetic Ganglia: Ciliary, Pterygopalatine, Submandibular, and Otic",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The autonomic innervation of the head and neck features four peripheral parasympathetic ganglia: the ciliary, pterygopalatine, submandibular, and otic ganglia. In each ganglion, preganglionic parasympathetic fibres conveyed by cranial nerves III, VII, or IX form synapses with postganglionic secretomotor or pupillomotor neurons. Each **cranial ganglion** is topographically suspended from a branch of the trigeminal nerve.",
+   "say": "Four parasympathetic ganglia govern head and neck autonomic functions: ciliary, pterygopalatine, submandibular, and otic. Each is suspended from a trigeminal division.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ciliary-ganglion.svg",
+    "alt": "Anatomical schematic showing roots and branches of the four cranial parasympathetic ganglia",
+    "caption": "Comparative layout of the four cranial parasympathetic ganglia and their trigeminal associations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The ciliary ganglion is situated in the posterior orbit, topographically suspended from the nasociliary branch of the ophthalmic nerve (CN V1). Its parasympathetic preganglionic fibres originate in the Edinger-Westphal nucleus of the midbrain, travelling via the **oculomotor nerve** (inferior division). Postganglionic axons traverse short ciliary nerves to innervate the sphincter pupillae (miosis) and ciliaris muscle.",
+   "say": "Suspended from the ophthalmic nerve V1, the ciliary ganglion receives oculomotor parasympathetics from Edinger-Westphal. Short ciliary nerves carry postganglionics to constrict the pupil.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Edinger-Westphal Nucleus (Rostral midbrain preganglionic parasympathetics)"
+     },
+     {
+      "id": "c2",
+      "label": "Oculomotor Nerve (Inferior division carries motor root to ganglion)"
+     },
+     {
+      "id": "c3",
+      "label": "Ciliary Ganglion (SYNAPSE of parasympathetic postganglionic neurons)"
+     },
+     {
+      "id": "c4",
+      "label": "Short Ciliary Nerves (Innervate sphincter pupillae and ciliaris muscle)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pterygopalatine ganglion (sphenopalatine ganglion) is the largest of the four ganglia, situated deeply in the pterygopalatine fossa, topographically suspended from the maxillary nerve (CN V2). Its parasympathetic preganglionic fibres arise in the **lacrimatory nucleus** of the facial nerve, travelling via the greater petrosal nerve and vidian nerve of the pterygoid canal.",
+   "say": "Suspended from the maxillary nerve V2, the pterygopalatine ganglion receives facial parasympathetics via the greater petrosal nerve. It innervates the lacrimal gland and nasal mucosa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglion Feature",
+     "Ciliary Ganglion",
+     "Pterygopalatine Ganglion"
+    ],
+    "rows": [
+     [
+      "Topographical association",
+      "Ophthalmic nerve (nasociliary branch V1)",
+      "Maxillary nerve (pterygopalatine branches V2)"
+     ],
+     [
+      "Cranial preganglionic input",
+      "Oculomotor nerve (CN III)",
+      "Facial nerve (CN VII via greater petrosal nerve)"
+     ],
+     [
+      "Central brainstem nucleus",
+      "Edinger-Westphal nucleus in midbrain",
+      "Superior salivatory / lacrimatory nucleus in pons"
+     ],
+     [
+      "Target effector organs",
+      "Sphincter pupillae (miosis) and ciliaris",
+      "Lacrimal gland, nasal, palatine, and pharyngeal mucosal glands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postganglionic secretomotor fibres from the pterygopalatine ganglion hitchhike on adjacent nerves to reach their target viscera. Fibres destined for the lacrimal gland travel through the zygomatic nerve (V2) and pass via a communicating branch to the **lacrimal nerve** (V1). Other branches supply the mucin-secreting glands of the nasal cavity, paranasal sinuses, nasopharynx, and palate.",
+   "say": "Postganglionic secretomotor axons hitchhike via zygomatic and lacrimal nerves to reach the lacrimal gland, and via palatine nerves to moisten the palate and nose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Pterygopalatine Ganglion (Postganglionic secretomotor synthesis)"
+     },
+     {
+      "id": "p2",
+      "label": "Zygomatic Nerve V2 (Conveys fibres across inferior orbital fissure)"
+     },
+     {
+      "id": "p3",
+      "label": "Communicating Anastomosis (Postganglionics transfer to lacrimal nerve V1)"
+     },
+     {
+      "id": "p4",
+      "label": "Lacrimal Gland Secretion (Stimulates serous tear secretion)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The submandibular ganglion is suspended from the lower border of the lingual nerve (mandibular V3) on the hyoglossus muscle. Its preganglionic input originates in the superior salivatory nucleus, travelling via the chorda tympani of the **facial nerve**. Postganglionic axons supply secretomotor innervation to the submandibular and sublingual salivary glands.",
+   "say": "Suspended from the lingual nerve V3, the submandibular ganglion receives facial parasympathetics from chorda tympani, driving salivation in the submandibular and sublingual glands.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-frey.svg",
+    "alt": "Anatomical schematic tracing the parasympathetic pathway of the submandibular and otic ganglia",
+    "caption": "Comparative parasympathetic pathways of the submandibular ganglion and otic ganglion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The otic ganglion is situated in the infratemporal fossa immediately below foramen ovale, topographically suspended from the medial aspect of the trunk of the mandibular nerve (CN V3). Its preganglionic parasympathetic fibres arise in the **inferior salivatory nucleus** of the medulla, conveyed via the tympanic branch of the glossopharyngeal nerve (CN IX) and lesser petrosal nerve.",
+   "say": "Resting below foramen ovale on the mandibular trunk, the otic ganglion receives glossopharyngeal parasympathetics via the lesser petrosal nerve, supplying the parotid gland.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglion Feature",
+     "Submandibular Ganglion",
+     "Otic Ganglion"
+    ],
+    "rows": [
+     [
+      "Topographical association",
+      "Lingual nerve (mandibular division V3)",
+      "Main trunk of mandibular nerve (V3)"
+     ],
+     [
+      "Cranial preganglionic input",
+      "Facial nerve (CN VII via chorda tympani)",
+      "Glossopharyngeal nerve (CN IX via lesser petrosal)"
+     ],
+     [
+      "Central brainstem nucleus",
+      "Superior salivatory nucleus in pons",
+      "Inferior salivatory nucleus in medulla"
+     ],
+     [
+      "Target effector organs",
+      "Submandibular and sublingual salivary glands",
+      "Parotid salivary gland (via auriculotemporal nerve)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postganglionic secretomotor fibres leaving the otic ganglion join the auriculotemporal nerve to enter the substance of the parotid gland. Crucially, motor fibres from the nerve to medial pterygoid pass directly through the **otic ganglion** without synapsing, emerging to provide motor innervation to tensor tympani in the middle ear and tensor veli palatini in the soft palate.",
+   "say": "Postganglionics join the auriculotemporal nerve to reach the parotid gland. Somatic motor fibres pass through without synapsing to supply tensor tympani and tensor veli palatini.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Synapsing Parasympathetic Pathway",
+     "points": [
+      "Lesser petrosal nerve conveys preganglionics",
+      "Synapse strictly with multipolar ganglionic neurons",
+      "Postganglionics join auriculotemporal nerve (V3)",
+      "Stimulate watery amylase-rich parotid saliva"
+     ]
+    },
+    "right": {
+     "title": "Non-Synapsing Pass-Through Fibres",
+     "points": [
+      "Motor root from nerve to medial pterygoid (V3)",
+      "Sympathetic postganglionics from middle meningeal plexus",
+      "Pass directly through ganglion without interruption",
+      "Innervate tensor veli palatini and tensor tympani"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The organization of the four cranial parasympathetic ganglia reveals a fundamental architectural symmetry. Every ganglion is structurally associated with a division of the trigeminal nerve (V1, V2, or V3) which provides somatic sensory fibres and acts as a mechanical distributor for postganglionic axons, but the **preganglionic motor drive** is supplied exclusively by cranial nerves III, VII, or IX.",
+   "say": "All four ganglia associate topographically with trigeminal divisions for postganglionic distribution, but their preganglionic parasympathetic drivers derive from cranial nerves three, seven, and nine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ganglion",
+     "Trigeminal Host",
+     "Preganglionic CN",
+     "Primary Secretomotor Target"
+    ],
+    "rows": [
+     [
+      "Ciliary",
+      "Ophthalmic (V1)",
+      "Oculomotor (III)",
+      "Pupillary sphincter and ciliaris (accommodation)"
+     ],
+     [
+      "Pterygopalatine",
+      "Maxillary (V2)",
+      "Facial (VII)",
+      "Lacrimal gland, nasal and palatal mucosa"
+     ],
+     [
+      "Submandibular",
+      "Mandibular (V3)",
+      "Facial (VII)",
+      "Submandibular and sublingual salivary glands"
+     ],
+     [
+      "Otic",
+      "Mandibular (V3)",
+      "Glossopharyngeal (IX)",
+      "Parotid salivary gland"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

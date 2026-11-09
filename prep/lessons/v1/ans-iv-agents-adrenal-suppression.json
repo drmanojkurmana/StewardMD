@@ -1,0 +1,284 @@
+{
+    "v": 1,
+    "id": "ans-iv-agents-adrenal-suppression",
+    "subject": "anaesthesia",
+    "module": "ans-iv-agents",
+    "title": "Adrenal Suppression, Alpha-2 Agonist Dexmedetomidine, and Midazolam",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Etomidate Adrenal Enzyme Blockade",
+            "tx": "**Adrenal suppression by etomidate** results from potent, dose-dependent, reversible inhibition of 11-beta-hydroxylase (CYP11B1), the mitochondrial cytochrome P450 enzyme converting 11-deoxycortisol to cortisol and 11-deoxycorticosterone to corticosterone in the adrenal cortex. A single induction bolus of 0.3 mg/kg suppresses cortisol and aldosterone synthesis for 24 to 48 hours, rendering patients unresponsive to adrenocorticotropic hormone (ACTH) stimulation.",
+            "say": "Adrenal suppression by etomidate results from potent, dose-dependent, reversible inhibition of 11-beta-hydroxylase (CYP11B1), the mitochondrial cytochrome P450 enzyme converting 11-deoxycortisol to cortisol and 11-deoxycorticosterone to corticosterone in the adrenal cortex. A single induction bolus of 0.3 mg/kg suppresses cortisol and aldosterone synthesis for 24 to 48 hours, rendering patients unresponsive to adrenocorticotropic hormone (ACTH) stimulation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Biochemical Pathway",
+                    "Normal Adrenal Function",
+                    "Etomidate Enzyme Inhibition",
+                    "Clinical Endocrine Outcome"
+                ],
+                "rows": [
+                    [
+                        "11-Beta-Hydroxylase (CYP11B1)",
+                        "Converts 11-deoxycortisol into active cortisol",
+                        "Direct non-competitive enzymatic blockade",
+                        "Severe blunting of physiological stress cortisol surge"
+                    ],
+                    [
+                        "11-Deoxycorticosterone Conversion",
+                        "Synthesizes mineralocorticoid aldosterone",
+                        "Enzymatic inhibition blunts aldosterone production",
+                        "Transient impairment of renal sodium conservation"
+                    ],
+                    [
+                        "ACTH Stimulation Test Response",
+                        "Sharp doubling of serum cortisol levels",
+                        "Flat refractory response across 24 to 48 hours",
+                        "Iatrogenic primary adrenocortical insufficiency"
+                    ],
+                    [
+                        "ICU Infusion Mortality Hazard",
+                        "Continuous sedation maintenance",
+                        "Cumulative adrenal shutdown",
+                        "Historically quadrupled septic shock mortality"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "ICU Septic Shock Controversy",
+            "tx": "**Etomidate mortality hazard in septic shock** was first uncovered when continuous ICU etomidate infusions quadrupled mortality in trauma and intensive care patients due to total adrenocortical exhaustion. Even a single induction bolus for emergency intubation in septic shock significantly increases vasopressor dependency and 28-day mortality, leading international sepsis guidelines to strongly recommend ketamine over etomidate.",
+            "say": "Etomidate mortality hazard in septic shock was first uncovered when continuous ICU etomidate infusions quadrupled mortality in trauma and intensive care patients due to total adrenocortical exhaustion. Even a single induction bolus for emergency intubation in septic shock significantly increases vasopressor dependency and 28-day mortality, leading international sepsis guidelines to strongly recommend ketamine over etomidate.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Etomidate in Septic Shock",
+                    "points": [
+                        "Abolishes essential physiological stress cortisol secretion",
+                        "Blunts vascular responsiveness to endogenous catecholamines",
+                        "Prolongs required duration of high-dose noradrenaline infusions"
+                    ]
+                },
+                "right": {
+                    "title": "Ketamine Alternative in Sepsis",
+                    "points": [
+                        "Zero adrenal enzyme inhibition; preserves endogenous cortisol",
+                        "Maintains systemic hemodynamics through sympathetic tone",
+                        "Favoured induction agent in emergency septic intubation"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Dexmedetomidine Receptor Selectivity",
+            "tx": "**Dexmedetomidine alpha-2 receptor selectivity** exhibits an extraordinary 1,600:1 selectivity ratio for alpha-2 over alpha-1 adrenergic receptors, making it eight times more selective than clonidine (220:1 ratio). Dexmedetomidine acts predominantly on presynaptic alpha-2A receptors in the locus coeruleus of the brainstem, inhibiting adenylate cyclase and terminating neuronal noradrenaline release, generating biomimetic non-rapid eye movement (NREM stage 2) sleep.",
+            "say": "Dexmedetomidine alpha-2 receptor selectivity exhibits an extraordinary 1,600:1 selectivity ratio for alpha-2 over alpha-1 adrenergic receptors, making it eight times more selective than clonidine (220:1 ratio). Dexmedetomidine acts predominantly on presynaptic alpha-2A receptors in the locus coeruleus of the brainstem, inhibiting adenylate cyclase and terminating neuronal noradrenaline release, generating biomimetic non-rapid eye movement (NREM stage 2) sleep.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Parameter",
+                    "Dexmedetomidine",
+                    "Clonidine",
+                    "Midazolam"
+                ],
+                "rows": [
+                    [
+                        "Alpha-2 to Alpha-1 Selectivity Ratio",
+                        "1,600 to 1 (extremely selective)",
+                        "220 to 1 (moderately selective)",
+                        "Zero adrenergic activity (GABA-A)"
+                    ],
+                    [
+                        "Primary Anatomical Target",
+                        "Locus coeruleus in pons",
+                        "Medullary vasomotor center",
+                        "Subcortical and cortical GABA-A receptors"
+                    ],
+                    [
+                        "Sedation Quality",
+                        "Cooperative 'arousable' sedation",
+                        "Sedation with significant dry mouth",
+                        "Anterograde amnesia with cloudy sensorium"
+                    ],
+                    [
+                        "Respiratory Drive Impact",
+                        "Zero clinically meaningful depression",
+                        "Minimal respiratory depression",
+                        "Dose-dependent respiratory depression"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cooperative Sedation Mechanics",
+            "tx": "**Cooperative sedation with dexmedetomidine** provides a calm, tranquil state from which patients can be immediately awakened by verbal commands, perform complex cognitive tasks or neurological examinations, and smoothly transition back into sleep once stimulation ceases. Because ventilation is spared, it serves as the premier sedative for awake fiberoptic intubation, awake craniotomy brain mapping, and non-invasive ventilation weaning.",
+            "say": "Cooperative sedation with dexmedetomidine provides a calm, tranquil state from which patients can be immediately awakened by verbal commands, perform complex cognitive tasks or neurological examinations, and smoothly transition back into sleep once stimulation ceases. Because ventilation is spared, it serves as the premier sedative for awake fiberoptic intubation, awake craniotomy brain mapping, and non-invasive ventilation weaning.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Infuse dexmedetomidine 0.5 to 1 mcg/kg over 10 minutes"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Presynaptic alpha-2 activation in locus coeruleus"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Induce physiological NREM sleep without respiratory depression"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Patient awakens instantly upon gentle verbal command"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Biphasic Hemodynamic Response",
+            "tx": "**Biphasic blood pressure response of dexmedetomidine** occurs during rapid intravenous loading boluses: initial stimulation of peripheral vascular smooth muscle alpha-2B receptors produces transient vasoconstriction and hypertension, triggering reflex baroreceptor bradycardia. Subsequently, as central presynaptic alpha-2A sympatholysis dominates in the locus coeruleus, sustained moderate hypotension and bradycardia ensue, mandating slow loading infusions over 10 to 15 minutes.",
+            "say": "Biphasic blood pressure response of dexmedetomidine occurs during rapid intravenous loading boluses: initial stimulation of peripheral vascular smooth muscle alpha-2B receptors produces transient vasoconstriction and hypertension, triggering reflex baroreceptor bradycardia. Subsequently, as central presynaptic alpha-2A sympatholysis dominates in the locus coeruleus, sustained moderate hypotension and bradycardia ensue, mandating slow loading infusions over 10 to 15 minutes.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Initial Peripheral Phase (Minutes 1 to 3)",
+                    "points": [
+                        "Direct activation of vascular alpha-2B receptors",
+                        "Transient systemic vasoconstriction and hypertension",
+                        "Reflex vagal bradycardia mediated by aortic baroreceptors"
+                    ]
+                },
+                "right": {
+                    "title": "Subsequent Central Phase (Minutes 5 to 60)",
+                    "points": [
+                        "Central sympatholysis via locus coeruleus alpha-2A agonism",
+                        "Sustained moderate drop in systemic vascular resistance",
+                        "Mild sinus bradycardia responding to glycopyrrolate if severe"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Opioid and Anaesthetic Sparing",
+            "tx": "**Opioid-sparing analgesia of dexmedetomidine** stems from stimulation of alpha-2 receptors located in the substantia gelatinosa of the spinal cord dorsal horn, blunting primary afferent nociceptive neurotransmitter release. Co-administration slashes intraoperative volatile anaesthetic MAC requirements by up to 50 percent and reduces postoperative opioid consumption, diminishing opioid-induced respiratory depression and bowel ileus.",
+            "say": "Opioid-sparing analgesia of dexmedetomidine stems from stimulation of alpha-2 receptors located in the substantia gelatinosa of the spinal cord dorsal horn, blunting primary afferent nociceptive neurotransmitter release. Co-administration slashes intraoperative volatile anaesthetic MAC requirements by up to 50 percent and reduces postoperative opioid consumption, diminishing opioid-induced respiratory depression and bowel ileus.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Surgical Clinical Area",
+                    "Standard Protocol",
+                    "Adjunctive Dexmedetomidine Effect",
+                    "Primary Clinical Advantage"
+                ],
+                "rows": [
+                    [
+                        "Volatile Maintenance (MAC)",
+                        "1.0 MAC sevoflurane requirement",
+                        "Reduces requirement down to 0.5 to 0.6 MAC",
+                        "Accelerates emergence; stable hemodynamics"
+                    ],
+                    [
+                        "Postoperative Opioid Dosing",
+                        "High-dose intravenous morphine PCA",
+                        "Slashes opioid demands by 30 to 50 percent",
+                        "Prevents opioid hypoventilation and constipation"
+                    ],
+                    [
+                        "Awake Craniotomy Mapping",
+                        "Propofol-remifentanil conscious sedation",
+                        "Cooperative speech and motor testing",
+                        "Zero respiratory depression during skull opening"
+                    ],
+                    [
+                        "ICU Delirium Prophylaxis",
+                        "Benzodiazepine continuous infusions",
+                        "Halves the incidence of ICU delirium",
+                        "Shortens mechanical ventilation duration"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Midazolam Water Solubility Transition",
+            "tx": "**Midazolam pH-dependent ring opening** gives it unique physical properties: at an acidic ampoule pH under 4.0, its imidazole ring remains open, rendering midazolam completely water-soluble and eliminating the need for organic solvent vehicles like propylene glycol, preventing venous thrombophlebitis. Upon injection into physiological blood at pH 7.4, the imidazole ring spontaneously snaps closed, converting midazolam into a highly lipophilic molecule that crosses the blood-brain barrier rapidly.",
+            "say": "Midazolam pH-dependent ring opening gives it unique physical properties: at an acidic ampoule pH under 4.0, its imidazole ring remains open, rendering midazolam completely water-soluble and eliminating the need for organic solvent vehicles like propylene glycol, preventing venous thrombophlebitis. Upon injection into physiological blood at pH 7.4, the imidazole ring spontaneously snaps closed, converting midazolam into a highly lipophilic molecule that crosses the blood-brain barrier rapidly.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Midazolam in acidic vial (pH <4.0) has open imidazole ring"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Water-soluble solution causes zero venous injection pain"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Injection into physiological bloodstream (pH 7.4)"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Ring closes spontaneously; lipophilic molecule enters brain in 60s"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Flumazenil Specific Antidote",
+            "tx": "**Flumazenil competitive benzodiazepine antagonism** selectively binds the benzodiazepine recognition site on the GABA-A receptor, competitively displacing midazolam, diazepam, and lorazepam without intrinsic agonist efficacy. Administered intravenously in titrated increments of 0.1 to 0.2 mg every minute (up to 1 mg), flumazenil reverses sedation within two minutes, but its short elimination half-life (under one hour) means resedation can recur after longer-acting benzodiazepines wear off.",
+            "say": "Flumazenil competitive benzodiazepine antagonism selectively binds the benzodiazepine recognition site on the GABA-A receptor, competitively displacing midazolam, diazepam, and lorazepam without intrinsic agonist efficacy. Administered intravenously in titrated increments of 0.1 to 0.2 mg every minute (up to 1 mg), flumazenil reverses sedation within two minutes, but its short elimination half-life (under one hour) means resedation can recur after longer-acting benzodiazepines wear off.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Flumazenil Pharmacokinetics",
+                    "points": [
+                        "Rapid competitive displacement at GABA-A receptor site",
+                        "Elimination half-life of only 50 to 60 minutes",
+                        "Risk of recurrence of sedation as long-acting sedatives persist"
+                    ]
+                },
+                "right": {
+                    "title": "Precaution in Chronic Dependence",
+                    "points": [
+                        "Strictly contraindicated in chronic benzodiazepine users",
+                        "Precipitates acute withdrawal seizures and autonomic crisis",
+                        "Contraindicated in concurrent tricyclic antidepressant overdose"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

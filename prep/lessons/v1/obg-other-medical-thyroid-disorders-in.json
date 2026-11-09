@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "obg-other-medical",
+ "subject": "obstetrics-gynaecology",
+ "title": "Thyroid Disease, Epilepsy, SLE and Thrombosis in Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Inadequate thyroid hormone in pregnancy impairing fetal brain development is maternal **hypothyroidism**. Levothyroxine requirements rise by a third, so dose increases at the positive test. Stimulating hormone targets are trimester specific, tightest early. A thyroid stimulating hormone above 4 in the first trimester usually earns treatment even without symptoms.",
+   "say": "Hypothyroidism in pregnancy needs levothyroxine increased by a third at the positive test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trimester",
+     "TSH aim"
+    ],
+    "rows": [
+     [
+      "First",
+      "Under 2.5"
+     ],
+     [
+      "Second and third",
+      "Under 3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Replacement hormone identical to natural thyroxine, safe throughout pregnancy, is **levothyroxine**. It does not cross harmfully and treats mother and fetus together. Iron and calcium supplements must be spaced hours away from it. Levothyroxine dose rises by about 30 percent, often two extra tablets a week from the positive test.",
+   "say": "Levothyroxine safely replaces thyroid hormone, spaced hours from iron and calcium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Dose increased at test"
+     },
+     {
+      "id": "n1",
+      "label": "TSH checked monthly"
+     },
+     {
+      "id": "n2",
+      "label": "Dose titrated"
+     },
+     {
+      "id": "n3",
+      "label": "Pre pregnancy dose after birth"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Epilepsy in pregnancy** is managed mostly before conception, by reviewing drugs and folate together. Valproate carries the highest malformation and developmental risk, so alternatives are substituted wherever seizure control allows. Folic acid five milligrams daily replaces the standard low dose for women on enzyme-inducing medicines. Most women then deliver vaginally with unchanged seizure frequency, needing only a plan for missed doses during labour.",
+   "say": "Epilepsy in pregnancy needs folate and drug review, avoiding valproate where possible. Most women deliver normally with unchanged seizures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m624-obg-other-medical-thyroid-disorders-in.webp",
+    "alt": "Pregnancy care diagram for epilepsy showing high dose folic acid tablets, a reviewed seizure medicine list and a valproate warning symbol before conception.",
+    "caption": "Planning swaps harmful medicines and starts five milligrams of folic acid early, keeping seizures controlled while protecting the developing brain. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Seizure disorders complicating pregnancy need folate and drug review as **epilepsy in pregnancy**. Most women deliver normally with unchanged seizures. Valproate is avoided wherever alternatives control seizures adequately. Folic acid 5 milligrams daily replaces the standard dose for women on enzyme inducing seizure medicines.",
+   "say": "Epilepsy in pregnancy needs folate and drug review, avoiding valproate where possible.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Medical disorders in pregnancy care.",
+    "caption": "Medical disorders care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Autoimmune multisystem disease flaring in pregnancy and harming placenta is **SLE** in pregnancy. Anti Ro antibodies can cause fetal heart block, checked by serial scans. Hydroxychloroquine is continued because stopping invites flares. Congenital heart block affects about 2 percent of anti Ro positive pregnancies and is screened by weekly heart checks from 16 weeks.",
+   "say": "SLE in pregnancy risks placental harm and fetal heart block from anti Ro antibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quiescent 6 months",
+     "points": [
+      "Conception advised",
+      "Best outcomes"
+     ]
+    },
+    "right": {
+     "title": "Active disease",
+     "points": [
+      "Defer pregnancy",
+      "Flare and loss risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inherited or acquired clotting tendency raising thrombosis and placental risk is **thrombophilia**. Antiphospholipid syndrome is the acquired form proven to benefit from treatment. Inherited thrombophilias mainly guide thrombosis prevention, not miscarriage treatment. Aspirin plus heparin is proven for antiphospholipid syndrome, not for inherited thrombophilia with miscarriage alone.",
+   "say": "Thrombophilia raises clotting risk, with antiphospholipid syndrome the treatable acquired form.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Acquired",
+      "Antiphospholipid syndrome"
+     ],
+     [
+      "Inherited",
+      "Factor V Leiden"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Venous thromboembolism** remains a leading direct cause of maternal death, so breathlessness in pregnancy is embolism until excluded. Compression Doppler of the leg veins finds deep thrombosis without radiation and is the first test when leg symptoms exist. CT pulmonary angiography shows clot as a filling defect within the pulmonary arteries when the chest is the problem. Low molecular weight heparin treats both safely.",
+   "say": "Venous thromboembolism is a leading maternal killer, prevented by risk scored heparin. Sudden breathlessness in pregnancy is embolism until excluded.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m590-obg-other-medical-thyroid-disorders-in.webp",
+    "alt": "Leg vein Doppler and chest CT pulmonary angiogram pair showing clot in a deep leg vein and a filling defect inside a pulmonary artery in pregnancy.",
+    "caption": "Imaging proves venous thromboembolism at either end of the journey, from calf and thigh veins to the pulmonary arteries. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Clots in leg veins or lungs, the leading direct killer of mothers in developed countries, are **venous thromboembolism**. Risk scoring at booking assigns prophylactic heparin to high risk women. Sudden breathlessness in pregnancy is embolism until excluded. Low molecular weight heparin replaces warfarin in pregnancy because it does not cross the placenta.",
+   "say": "Venous thromboembolism is a leading maternal killer, prevented by risk scored heparin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/deep-venous-thrombosis-and-pulmonary-fig1.webp",
+    "alt": "Venous thromboembolism: leg vein thrombus embolising to the pulmonary artery.",
+    "caption": "Venous thromboembolism: leg vein thrombus embolising to the pulmonary artery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Overactive thyroid in pregnancy, usually Graves disease, risks fetal thyrotoxicosis through **thyroid stimulating antibodies**. Propylthiouracil is preferred in the first trimester, carbimazole later. Both cross the placenta, so the lowest effective dose is used. The fetal thyroid starts working near 12 weeks, so maternal antibodies matter from the second trimester onward.",
+   "say": "Graves disease antibodies can overstimulate the fetal thyroid across the placenta.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Graves diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "Antibodies measured"
+     },
+     {
+      "id": "n2",
+      "label": "Lowest drug dose"
+     },
+     {
+      "id": "n3",
+      "label": "Fetal heart watched"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid storm precipitated by labour or infection is a life threatening decompensation of **hyperthyroidism**. Beta blockade, thionamides, iodine and steroids follow a strict sequence. Senior endocrine and critical care help is summoned early. Iodine is given after the thionamide, at least an hour later, or it becomes substrate for more hormone.",
+   "say": "Thyroid storm in labour needs sequenced blockade and critical care help early.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Controlled hyperthyroid",
+     "points": [
+      "Lowest dose thionamide",
+      "Fetal monitoring",
+      "Planned delivery"
+     ]
+    },
+    "right": {
+     "title": "Thyroid storm",
+     "points": [
+      "Emergency sequence",
+      "Critical care",
+      "Multidisciplinary"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Postpartum thyroiditis affects one in twenty women within a year of delivery, an autoimmune **postpartum thyroiditis**. A thyrotoxic phase flips to hypothyroid before most recover. It predicts permanent hypothyroidism in later years. Half present first with the hypothyroid phase and are misread as postnatal depression without a blood test.",
+   "say": "Postpartum thyroiditis flips from thyrotoxic to hypothyroid phases within a year of delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Thyrotoxic",
+      "1 to 4 months"
+     ],
+     [
+      "Hypothyroid",
+      "4 to 8 months"
+     ],
+     [
+      "Recovery",
+      "By 12 months usually"
+     ]
+    ]
+   }
+  }
+ ]
+}

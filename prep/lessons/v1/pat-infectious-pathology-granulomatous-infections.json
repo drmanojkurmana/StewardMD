@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "module": "pat-infectious-pathology",
+  "subject": "pathology",
+  "title": "Granulomatous Infections and Viral Inclusion Bodies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Granulomatous infections organise macrophages into epithelioid clusters with multinucleated giant cells because the organism resists ordinary killing, and necrosis at the centre separates caseating tuberculosis and fungal disease from the tight naked granulomas of sarcoidosis. The tissue pattern itself is **granulomatous inflammation**.",
+      "say": "Granulomas form when macrophages cannot kill what they have eaten; caseation points toward tuberculosis and fungi.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-and-granulomatous-inflammation-fig1.webp",
+        "alt": "Caseating granuloma histopathologic structure",
+        "caption": "Caseating granuloma histopathology with central necrosis, epithelioid cells, and giant cells."
+      }
+    },
+    {
+      "tx": "Leprosy spans a spectrum set by cell mediated immunity: tuberculoid disease forms tight granulomas with few bacilli and anaesthetic patches, while lepromatous disease drowns foamy macrophages in bacilli with symmetric nerve and skin involvement. Ridley Jopling classification maps this **leprosy spectrum** for treatment duration.",
+      "say": "Strong immunity gives tuberculoid leprosy with few bacilli; weak immunity gives lepromatous disease teeming with them.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/leprosy-fig1.webp",
+        "alt": "Lepromatous leprosy histology",
+        "caption": "Lepromatous leprosy histology with foamy macrophages packed with acid fast bacilli."
+      }
+    },
+    {
+      "tx": "Viruses sign their work inside cells: rabies leaves eosinophilic Negri bodies in hippocampal neurons, measles fuses cells into Warthin-Finkeldey giants, and herpesviruses mould nuclei with ground glass chromatin. Reading these signatures names the virus from the slide; they are **viral inclusion bodies**.",
+      "say": "Negri bodies mean rabies, Warthin-Finkeldey giants mean measles; inclusions let the slide name the virus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inclusion",
+          "Virus or disease",
+          "Site"
+        ],
+        "rows": [
+          [
+            "Negri bodies",
+            "Rabies",
+            "Hippocampal and Purkinje neurons"
+          ],
+          [
+            "Warthin-Finkeldey cells",
+            "Measles",
+            "Lymphoid tissue giant cells"
+          ],
+          [
+            "Owl eye cells",
+            "Cytomegalovirus",
+            "Enlarged cells, intranuclear inclusion"
+          ],
+          [
+            "Cowdry type A bodies",
+            "Herpes simplex, varicella",
+            "Neurons and epithelial nuclei"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Use this atlas as a spotter guide at the microscope. A pink Negri body sits inside a hippocampal neuron, an enlarged cell carries the owl eye inclusion of cytomegalovirus, herpes leaves a Cowdry A body, and measles produces a multinucleated Warthin Finkeldey giant cell. Naming the **viral inclusion body** correctly often names the virus behind the illness.",
+      "say": "This atlas lines up a Negri body, an owl eye cytomegalovirus cell, a Cowdry A body and a Warthin Finkeldey giant cell. Naming the viral inclusion body often names the virus itself.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m88-pat-infectious-pathology-granulomatous-infections.webp",
+        "alt": "Viral inclusion body atlas showing a Negri body, an owl eye cytomegalovirus cell, a Cowdry A body and a Warthin Finkeldey giant cell",
+        "caption": "Viral inclusion body atlas showing a Negri body, an owl eye cytomegalovirus cell, a Cowdry A body and a Warthin Finkeldey giant cell. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Cytomegalovirus enlarges infected endothelial and epithelial cells until a basophilic intranuclear inclusion ringed by halo resembles an owl eye, devastating retina, colon, and lung in advanced immunosuppression. Tissue PCR and immunostains confirm what the **owl eye inclusion** suggests. Ganciclovir treatment and immune restoration decide outcomes once the diagnosis is secured histologically.",
+      "say": "The owl eye cell is cytomegalovirus until proven otherwise, devastating retina, colon, and lung when immunity collapses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intranuclear inclusions",
+          "points": [
+            "CMV owl eye, herpes Cowdry A",
+            "Nuclear moulding and margination",
+            "Immunostain confirms the virus"
+          ]
+        },
+        "right": {
+          "title": "Cytoplasmic inclusions",
+          "points": [
+            "Rabies Negri bodies",
+            "Molluscum Henderson-Paterson bodies",
+            "Location itself is a diagnostic clue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Malakoplakia and other defective killing states show macrophages that ingest bacteria but cannot digest them, leaving targetoid Michaelis-Gutmann bodies containing iron and calcium in bladder, kidney, and gut lesions. The pathognomonic targetoid body is the **Michaelis-Gutmann body**. Escherichia coli is the organism most often recovered from these indigestible intracellular meals.",
+      "say": "Michaelis-Gutmann bodies reveal macrophages that swallowed bacteria but failed to digest them: malakoplakia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Macrophage ingests bacteria normally"
+          },
+          {
+            "id": "b",
+            "label": "Lysosomal digestion fails"
+          },
+          {
+            "id": "c",
+            "label": "Iron and calcium encrust residual bodies"
+          },
+          {
+            "id": "d",
+            "label": "Michaelis-Gutmann bodies mark malakoplakia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Caseation must still be proven microbiologically: Ziehl-Neelsen stains mycobacteria, auramine fluorescence speeds screening, culture and nucleic acid tests speciate, and granulomas alone never licence treatment without seeking organisms. The acid fast stain remains **Ziehl-Neelsen staining** in daily practice. Sarcoidosis remains a diagnosis of exclusion even when its granulomas look textbook perfect.",
+      "say": "Granulomas suggest, stains and cultures prove; never treat tuberculosis on architecture alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Caseating granuloma",
+          "points": [
+            "Tuberculosis until proven otherwise",
+            "Fungal infection second",
+            "AFB stain, culture, NAAT mandatory"
+          ]
+        },
+        "right": {
+          "title": "Non-caseating granuloma",
+          "points": [
+            "Sarcoidosis, Crohn, foreign body",
+            "Organisms still excluded first",
+            "Clinical correlation decides"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fungal granulomas add their own morphology: broad ribbon hyphae of mucor invade vessels, candida forms pseudohyphae, and encapsulated cryptococcus fills meninges in advanced HIV. Silver and PAS stains display these walls when routine sections hide them; the silver method is **GMS staining**.",
+      "say": "When fungi hide on routine sections, GMS silver and PAS stains make their walls impossible to miss.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organism pattern",
+          "Morphology",
+          "Favourite stain or test"
+        ],
+        "rows": [
+          [
+            "Mucorales",
+            "Broad ribbon hyphae, right angle branches",
+            "GMS, tissue culture"
+          ],
+          [
+            "Candida",
+            "Yeasts with pseudohyphae",
+            "PAS, Gram stain"
+          ],
+          [
+            "Cryptococcus",
+            "Encapsulated yeasts, narrow budding",
+            "Mucicarmine, cryptococcal antigen"
+          ],
+          [
+            "Aspergillus",
+            "Septate hyphae, acute angle branches",
+            "GMS, galactomannan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The clinical synthesis is disciplined: pattern first, organism hunt second, immune context third, because the same granuloma means tuberculosis in one host and sarcoidosis in another. That ordering protects patients from steroid disasters in occult infection; it is **granuloma diagnostic discipline**.",
+      "say": "Pattern, organism hunt, immune context: that order prevents steroids being poured onto undiagnosed tuberculosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Describe the granuloma pattern"
+          },
+          {
+            "id": "b",
+            "label": "Stain, culture, and test for organisms"
+          },
+          {
+            "id": "c",
+            "label": "Weigh host immunity and exposures"
+          },
+          {
+            "id": "d",
+            "label": "Treat infection before immunosuppression"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "id": "oph-physiology-visual-acuity",
+ "subject": "ophthalmology",
+ "module": "oph-physiology",
+ "title": "Visual Acuity, Colour Vision and Dark Adaptation",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Visual acuity** measures spatial resolution as the smallest optotype detail resolved, recorded as test distance over the distance at which that detail subtends standard angle. Snellen notation six over sixty means the patient reads at six metres what standard eye reads at sixty. Acuity is foveal function, so macular disease drops it while peripheral field disease spares it until late.",
+   "say": "Resolution measurement gives recording of the smallest optotype detail resolved at the test distance accurately. Snellen fractions give comparison of patient distance together with standard eye distance. Foveal function therefore gives determination of measured acuity clinically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m174-oph-physiology-visual-acuity.webp",
+    "alt": "Visual angle optics diagram of an optotype, its stroke subtending one minute of arc and the whole letter five minutes at the testing distance.",
+    "caption": "An optotype stroke is shown subtending one minute of arc while the whole letter subtends five minutes at the standard testing distance. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The **Snellen chart** sizes letters so each whole letter subtends five minutes and each stroke one minute at its designated distance, making acuity a minimum angle of resolution measurement. Illumination, contrast and crowding standardisation decide validity as much as letter size. Children and illiterate patients use picture, tumbling E or Landolt C equivalents that preserve the same angular logic without alphabet knowledge.",
+   "say": "Letter sizing is based on five minute whole letter and one minute stroke angles precisely. Standard illumination together with contrast gives validation of the measurement conditions used. Non alphabet charts give identical angular logic for children and illiterate patients.",
+   "vis": {
+    "kind": "table",
+    "title": "Acuity recording equivalents",
+    "cols": [
+     "System",
+     "Normal anchor"
+    ],
+    "rows": [
+     [
+      "Snellen metres",
+      "Six over six"
+     ],
+     [
+      "Snellen feet",
+      "Twenty over twenty"
+     ],
+     [
+      "LogMAR",
+      "Zero, lower is better"
+     ],
+     [
+      "Decimal",
+      "One point zero"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**LogMAR** charts score by letter on equal logarithmic steps, giving interval data that research and low vision trials require instead of ordinal Snellen lines. Each letter read earns credit, and negative scores beat standard normal. Conversion fluency matters because trial eligibility and legal blindness definitions quote different systems across countries and decades of literature.",
+   "say": "Logarithmic letter scoring gives interval data suitable for research trials together accurately. Per letter credit gives refinement of low vision measurement far more sensitively. System conversion fluency gives support to literature reading across countries.",
+   "vis": {
+    "kind": "table",
+    "title": "LogMAR advantages",
+    "cols": [
+     "Feature",
+     "Benefit"
+    ],
+    "rows": [
+     [
+      "Equal steps",
+      "Interval data"
+     ],
+     [
+      "Letter credit",
+      "Low vision sensitivity"
+     ],
+     [
+      "Negative scores",
+      "Better than standard quantified"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Colour vision** begins in three cone classes with overlapping spectral sensitivities whose comparison by opponent processing builds colour perception. Red green defects dominate congenital disease in males through X linked opsin genes, while acquired blue yellow defects signal optic nerve or drug toxicity earlier. Ishihara plates screen red green confusion using number and vanishing designs that colour deficient observers read differently.",
+   "say": "Three cone classes together with opponent comparison build colour perception during normal physiology. Congenital red green defects occur predominantly in males through X linked inheritance. Acquired blue defects signal optic nerve disease earlier.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/achromatopsia-fig1.webp",
+    "alt": "Foveal cone anatomy diagram relating cone classes to colour vision function.",
+    "caption": "Foveal cone photoreceptors and trichromatic versus monochromatic comparison. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **Ishihara chart** uses pseudoisochromatic plates where numbers formed by hue differ from background dots of matched brightness, so luminance cheating fails. It screens but does not grade severity or detect blue defects, needing anomaloscope or arrangement tests for occupational decisions. Testing needs daylight illumination and each eye separately, because acquired unilateral defects localise disease that binocular testing hides.",
+   "say": "Hue formed numbers together with matched brightness prevent luminance cheating during plate testing. Screening detects red green defects without grading severity or blue loss. Separate eye testing localises acquired disease accurately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Congenital colour defect",
+     "points": [
+      "Red green, X linked males",
+      "Bilateral symmetric, stable",
+      "Normal acuity usually"
+     ]
+    },
+    "right": {
+     "title": "Acquired colour defect",
+     "points": [
+      "Blue yellow often, any sex",
+      "Unilateral or asymmetric",
+      "Signals nerve or drug disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dark adaptation** is sensitivity recovery in darkness as cones plateau quickly then rods slowly regenerate rhodopsin to far lower thresholds, producing the biphasic adaptation curve with rod cone break. Dietary pigment precursor deficiency and rod dystrophies delay or abolish the rod limb while cone plateau survives initially. Night blindness history is therefore quantified, not merely recorded, when rod disease is suspected.",
+   "say": "Biphasic sensitivity recovery gives fast cone plateau followed by slow rod limb afterward. Rod disease delays the second limb selectively during adaptation testing. Night symptoms therefore need quantified adaptation assessment.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dark adaptation curve logic",
+    "nodes": [
+     {
+      "id": "cone",
+      "label": "Cone plateau quickly"
+     },
+     {
+      "id": "break",
+      "label": "Rod cone break point"
+     },
+     {
+      "id": "rod",
+      "label": "Rod limb regenerates slowly"
+     },
+     {
+      "id": "thresh",
+      "label": "Final rod threshold reached"
+     }
+    ],
+    "edges": [
+     [
+      "cone",
+      "break"
+     ],
+     [
+      "break",
+      "rod"
+     ],
+     [
+      "rod",
+      "thresh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rhodopsin** regeneration through the visual cycle in pigment epithelium resupplies bleached rods, linking dark adaptation to the same epithelium whose failure causes macular disease. Retinal, the retinal pigment precursor, cycles between photoreceptor and epithelium with each bleach and regeneration. Dietary deficiency therefore night blinds reversibly before structural degeneration, a public health sequence examinations join to xerophthalmia teaching.",
+   "say": "Visual cycle regeneration resupplies bleached rods continuously through the pigment epithelium together. Dietary deficiency night blinds reversibly before structural damage develops later. Epithelium biology links adaptation with macular disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Night blindness separation",
+    "cols": [
+     "Cause",
+     "Adaptation pattern"
+    ],
+    "rows": [
+     [
+      "Dietary pigment precursor deficiency",
+      "Delayed rod limb, reversible early"
+     ],
+     [
+      "Rod dystrophy",
+      "Rod limb abolished progressively"
+     ],
+     [
+      "Cone disease",
+      "Day symptoms dominate instead"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pinhole acuity separates refractive blur from media or macular loss at triage: improvement predicts optical correction benefit, non improvement directs disease workup. Near acuity and contrast testing add function that distance letters miss in cataract and macular disease. **Best corrected acuity** is the only acuity quoted for legal and trial definitions, unaided values being refractive history rather than visual disability.",
+   "say": "Pinhole improvement gives prediction of optical correction benefit during rapid triage in clinic together. Non improvement gives direction toward disease workup instead of refraction attempts afterward. Best corrected values give the definition of legal visual disability formally.",
+   "vis": null
+  },
+  {
+   "tx": "Physiology anchors are angle, cones and curve. Acuity is minimum angle, colour is cone comparison, adaptation is rhodopsin regeneration over time. Ishihara screens red green, LogMAR grades by letter and pinhole triages blur in seconds. **Monocular testing** protects every conclusion, because binocular scores hide unilateral disease completely.",
+   "say": "Angle, cone comparison and regeneration curve together give complete organisation of visual physiology for examinations. Screening and grading systems serve entirely different clinical purposes together in practice. Monocular testing gives protection to every conclusion from binocular masking.",
+   "vis": {
+    "kind": "table",
+    "title": "Visual physiology anchors",
+    "cols": [
+     "Test",
+     "Measures"
+    ],
+    "rows": [
+     [
+      "Snellen or LogMAR",
+      "Foveal resolution"
+     ],
+     [
+      "Ishihara plates",
+      "Red green screening"
+     ],
+     [
+      "Adaptometry",
+      "Rod regeneration over time"
+     ],
+     [
+      "Pinhole",
+      "Refractive versus disease blur"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Snellen angle logic",
+   "b": "Whole letter five minutes, stroke one minute at designated distance; six over sixty reads at six what standard reads at sixty."
+  },
+  {
+   "f": "Ishihara limits",
+   "b": "Screens red green defects only; no severity grade and no blue defect detection, test each eye in daylight."
+  },
+  {
+   "f": "Dark adaptation break",
+   "b": "Cone plateau then rod cone break then slow rhodopsin rod limb; rod disease loses the second limb."
+  }
+ ],
+ "keys": [
+  "LogMAR scores by letter, lower is better",
+  "Acquired colour loss localises nerve disease",
+  "Pinhole improvement means refractive blur"
+ ]
+}

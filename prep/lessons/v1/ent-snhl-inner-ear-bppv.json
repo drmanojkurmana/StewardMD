@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "id": "ent-snhl-inner-ear-bppv",
+ "subject": "ent",
+ "module": "ent-snhl-inner-ear",
+ "title": "BPPV, Epley Manoeuvre, and Peripheral Vestibular Syndromes",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Benign paroxysmal positional vertigo is the single most common cause of peripheral vestibular vertigo in adults, characterized by brief, violent paroxysms of rotational vertigo triggered by changes in head position relative to gravity. In over eighty-five percent of cases, it involves the **posterior semicircular canal** because its dependent anatomical orientation makes it the most gravitationally vulnerable receptacle for displaced particles.",
+   "say": "Benign paroxysmal positional vertigo is the most common cause of peripheral vertigo. The posterior canal is involved in eighty-five percent of cases due to its dependent position.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/enlarged-vestibular-aqueduct-fig1.webp",
+    "alt": "Anatomical schematic showing semicircular canals, utricle, and displaced canaliths in the posterior canal",
+    "caption": "Semicircular canal anatomy showing otoconia debris displaced into the posterior semicircular canal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The biophysical mechanism in over ninety percent of cases is canalithiasis, wherein dense calcium carbonate otoconia crystals dislodge from the utricular macula and float freely within the endolymph of a semicircular canal. When the head moves into the plane of the canal, gravity pulls the canalith pack downward like a piston, creating hydrodynamic endolymph drag that deflects the **cupula ampullaris** and stimulates acute vertigo.",
+   "say": "In canalithiasis, dislodged calcium carbonate crystals float in the canal endolymph. Gravitational movement of these crystals deflects the cupula, triggering vertigo.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biomechanical Mechanism of Canalithiasis",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Otoconia Dislodge from Utricular Macula"
+     },
+     {
+      "id": "c2",
+      "label": "Head Tilt Induces Gravitational Canalith Plunge"
+     },
+     {
+      "id": "c3",
+      "label": "Hydrodynamic Drag Deflects Cupula Triggering Vertigo"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Dix-Hallpike test is the definitive diagnostic gold standard for posterior canal BPPV. The seated patient is rapidly lowered supine with the head extended thirty degrees and rotated forty-five degrees toward the affected side. A positive test elicits a burst of geotropic torsional **upbeating nystagmus** displaying a latency of two to twenty seconds, a duration under sixty seconds, and fatigue upon immediate repeated positioning.",
+   "say": "The Dix-Hallpike test elicits torsional upbeating nystagmus with a brief latency, duration under one minute, and fatigue upon immediate repetition.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Hallmarks of Posterior Canal BPPV on Dix-Hallpike",
+    "cols": [
+     "Diagnostic Feature",
+     "Typical Clinical Finding",
+     "Biomechanical Explanation"
+    ],
+    "rows": [
+     [
+      "Latency",
+      "2 to 20 seconds delay before onset",
+      "Time required for heavy otolith pack to begin moving"
+     ],
+     [
+      "Nystagmus direction",
+      "Torsional upbeating toward lower ear",
+      "Vector matches posterior canal ampullary nerve excitation"
+     ],
+     [
+      "Duration",
+      "10 to 45 seconds (< 60 seconds)",
+      "Otoconia reach the lowest dependent point and stop"
+     ],
+     [
+      "Fatiguability",
+      "Nystagmus attenuates on repeat testing",
+      "Otolith crystals disperse along the canal wall"
+     ],
+     [
+      "Reversal on sitting",
+      "Nystagmus beats in opposite direction",
+      "Endolymph current reverses as patient returns upright"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management of posterior canal canalithiasis is achieved through the **Epley manoeuvre**, a standardized four-stage canalith repositioning procedure. By sequentially rotating the head through ninety-degree increments from affected supine to opposite side-lying and sitting, gravity rolls the free-floating otolith particles out of the posterior canal through the common crus and back into the utricle, where they are reabsorbed by macrophages.",
+   "say": "The Epley manoeuvre rolls loose otoconia out of the posterior semicircular canal and back into the utricle through sequential ninety-degree head rotations.",
+   "vis": {
+    "kind": "flow",
+    "title": "Four Stages of the Epley Repositioning Manoeuvre",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Position 1: Dix-Hallpike Position (Head Turned 45 Deg to Affected Ear)"
+     },
+     {
+      "id": "e2",
+      "label": "Position 2: Head Rotated 90 Deg to Opposite Side"
+     },
+     {
+      "id": "e3",
+      "label": "Position 3: Roll onto Shoulder (Face 45 Deg Down) Then Sit Up"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Horizontal semicircular canal BPPV accounts for ten to fifteen percent of cases, diagnosed using the supine roll test (Pagnini-McClure test). Turning the head laterally while supine elicits purely horizontal nystagmus, classified as geotropic (beating toward the ground, indicating canalithiasis) or apogeotropic (beating toward the ceiling, indicating cupulolithiasis). Treatment employs the **Barbecue roll manoeuvre**, rolling the patient three hundred and sixty degrees horizontally.",
+   "say": "Horizontal canal BPPV produces purely horizontal nystagmus on the supine roll test. It is treated using the barbecue roll manoeuvre to return crystals to the utricle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Geotropic Horizontal BPPV",
+     "points": [
+      "Nystagmus beats TOWARD the ground on both turns.",
+      "Caused by free-floating canalithiasis in horizontal canal.",
+      "Affected ear is the side with more intense nystagmus.",
+      "Treated with 360-degree Barbecue roll or Gufoni manoeuvre."
+     ]
+    },
+    "right": {
+     "title": "Apogeotropic Horizontal BPPV",
+     "points": [
+      "Nystagmus beats AWAY from ground toward ceiling.",
+      "Caused by otoconia adhering directly to cupula (Cupulolithiasis).",
+      "Affected ear is the side with less intense nystagmus.",
+      "Requires conversion manoeuvres to free adhered crystals."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vestibular neuritis is an acute, prolonged vestibular syndrome caused by viral inflammation of the superior vestibular nerve, commonly linked to herpes simplex reactivation. Patients present with sudden, incapacitating rotational vertigo, severe nausea, vomiting, and gait unsteadiness lasting several days without auditory symptoms. Spontaneous horizontal-torsional nystagmus beats toward the healthy ear, and the head impulse test reveals an abnormal **catch-up saccade**.",
+   "say": "Vestibular neuritis causes days of severe vertigo and nausea without hearing loss. Spontaneous nystagmus beats toward the healthy ear, with an abnormal head impulse test.",
+   "vis": {
+    "kind": "table",
+    "title": "Differentiating Common Peripheral Vestibular Disorders",
+    "cols": [
+     "Disorder",
+     "Vertigo Attack Duration",
+     "Auditory Symptoms Present",
+     "Pathognomonic Examination Sign"
+    ],
+    "rows": [
+     [
+      "BPPV",
+      "Seconds (< 60 seconds)",
+      "None (Normal hearing)",
+      "Dix-Hallpike positional nystagmus"
+     ],
+     [
+      "Meniere disease",
+      "20 minutes to 12 hours",
+      "Fluctuating hearing loss, roaring tinnitus",
+      "Low-frequency sensory loss, SP/AP > 0.4"
+     ],
+     [
+      "Vestibular neuritis",
+      "Continuous for 2 to 7 days",
+      "None (Normal hearing)",
+      "Catch-up saccade on head impulse test"
+     ],
+     [
+      "Labyrinthitis",
+      "Continuous for days to weeks",
+      "Profound acute hearing loss",
+      "Spontaneous nystagmus + dead inner ear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute vestibular neuritis is treated symptomatically during the initial forty-eight hours with vestibular suppressants such as dimenhydrinate, ondansetron, and oral corticosteroids. Suppressants must be discontinued after two to three days because prolonged vestibular sedation retards central nervous system vestibular compensation. Prompt initiation of tailored **vestibular rehabilitation exercises** (Cawthorne-Cooksey exercises) accelerates central neural adaptation and restores postural balance.",
+   "say": "Vestibular sedatives should be stopped after forty-eight hours to allow central compensation. Early Cawthorne-Cooksey balance exercises accelerate brainstem recovery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Management Timeline for Acute Vestibular Neuritis",
+    "nodes": [
+     {
+      "id": "vn1",
+      "label": "Days 1 to 2: Short-Term Antiemetics & Oral Prednisolone"
+     },
+     {
+      "id": "vn2",
+      "label": "Day 3: Discontinue Vestibular Sedatives"
+     },
+     {
+      "id": "vn3",
+      "label": "Weeks 1 to 6: Cawthorne-Cooksey Vestibular Rehabilitation"
+     }
+    ],
+    "edges": [
+     [
+      "vn1",
+      "vn2"
+     ],
+     [
+      "vn2",
+      "vn3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A positive **fistula sign** betrays an abnormal opening between the middle ear and the perilymph space. Pressing the tragus or delivering loud sound changes pressure in the canal, and that pressure reaches the inner ear through the leak. The patient sways or develops nystagmus for a few seconds. Causes include cholesteatoma eroding the lateral semicircular canal and rupture of a window membrane after straining.",
+   "say": "A perilymph fistula leaks inner ear fluid through the oval or round window after straining or barotrauma. Pressure changes or sneezing then provoke vertigo, shown by the fistula sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m916-ent-snhl-inner-ear-bppv.webp",
+    "alt": "Inner ear diagram showing a perilymph leak at the round window, with pressure on the ear canal provoking vertigo and nystagmus as the fistula sign.",
+    "caption": "Pressure transmitted through a window leak moves inner ear fluid, so pressing on the ear or loud sound triggers brief vertigo. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "A perilymph fistula is an abnormal communication between the perilymphatic inner ear spaces and the middle ear cleft, arising through rupture of the oval or round window membrane following barotrauma, vigorous nose-blowing, heavy lifting, or head trauma. Patients experience fluctuating sensorineural hearing loss, tinnitus, and episodic vertigo provoked by physical straining or sneezing, producing a positive **fistula sign** on pneumatic otoscopy.",
+   "say": "A perilymph fistula leaks inner ear fluid through the oval or round window after straining or barotrauma, provoking vertigo during pressure changes or sneezing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sensorineural-loss-and-inner-ear-fig1.webp",
+    "alt": "Anatomical schematic showing round window niche, oval window annular ligament, and perilymph leakage",
+    "caption": "Perilymph fistula leaking fluid from the vestibule into the middle ear through round or oval window breaches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-051",
+  "bk2-ent-052",
+  "bk2-ent-053"
+ ]
+}

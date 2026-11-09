@@ -1,0 +1,214 @@
+{
+  "v": 1,
+  "module": "phy-male",
+  "subject": "physiology",
+  "title": "Dihydrotestosterone, 5-Alpha Reductase, and Male Differentiation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Although testosterone is the principal circulating androgen in males, its biological potency is amplified in specific target tissues through enzymatic conversion into **dihydrotestosterone**. Dihydrotestosterone binds the intracellular androgen receptor with twofold greater affinity and dissociates fivefold more slowly than testosterone.",
+      "say": "Dihydrotestosterone binds androgen receptors twice as tightly as testosterone, amplifying androgen signals in target tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Testosterone Direct Actions",
+          "points": [
+            "Differentiation of internal Wolffian duct structures (epididymis, vas)",
+            "Skeletal muscle hypertrophy and nitrogen retention at puberty",
+            "Stimulation of erythropoiesis in bone marrow",
+            "Deepening of vocal cords and pubertal growth spurt"
+          ]
+        },
+        "right": {
+          "title": "Dihydrotestosterone (DHT) Actions",
+          "points": [
+            "Differentiation of external male genitalia (penis, scrotum)",
+            "Prostate gland growth and secretory development",
+            "Temporal hairline recession and male pattern baldness",
+            "Sebaceous gland activity and pubertal acne"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The enzymatic conversion of testosterone to dihydrotestosterone is catalyzed in target tissues by the microsomal enzyme **five-alpha reductase**. This key enzyme irreversibly reduces the double bond between carbons four and five on the A-ring of the steroid nucleus using NADPH as an essential electron donor.",
+      "say": "Five-alpha reductase converts testosterone into dihydrotestosterone in the prostate, skin, and hair follicles.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Isozyme",
+          "Tissue Distribution",
+          "Optimum pH",
+          "Primary Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Type 1 5-Alpha Reductase",
+            "Skin, sebaceous glands, liver",
+            "Neutral to alkaline (~7.5)",
+            "Involved in adult sebum production and acne"
+          ],
+          [
+            "Type 2 5-Alpha Reductase",
+            "Urogenital tissue, prostate, genital skin",
+            "Acidic (~5.5)",
+            "Required for fetal external male differentiation; target in BPH"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During embryonic development, male sexual differentiation depends upon coordinated hormonal secretion by the fetal testes. Fetal Leydig cell testosterone drives the stabilization and morphological differentiation of the **internal Wolffian duct structures**, including the embryonic epididymides, paired vasa deferentia, and seminal vesicles.",
+      "say": "Testosterone differentiates internal Wolffian structures, while anti-Mullerian hormone regresses female internal ducts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sry_gene",
+            "label": "SRY Gene on Y Chromosome Directs Primitive Gonadal Ridge to Differentiate into Testis"
+          },
+          {
+            "id": "sertoli_amh",
+            "label": "Sertoli Cells Secrete Anti-Müllerian Hormone (AMH) -> Regresses Müllerian Ducts"
+          },
+          {
+            "id": "leydig_testo",
+            "label": "Leydig Cells Secrete Testosterone -> Differentiates Wolffian Ducts (Vas, Epididymis)"
+          },
+          {
+            "id": "dht_ext",
+            "label": "5-Alpha Reductase Converts Testosterone to DHT -> Differentiates External Genitalia"
+          }
+        ],
+        "edges": [
+          [
+            "sry_gene",
+            "sertoli_amh"
+          ],
+          [
+            "sry_gene",
+            "leydig_testo"
+          ],
+          [
+            "leydig_testo",
+            "dht_ext"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Simultaneously, Sertoli cells secrete anti-Müllerian hormone, causing regression of the paramesonephric Müllerian ducts. In the external urogenital sinus and genital tubercle, local five-alpha reductase converts testosterone to dihydrotestosterone, driving development of the **external male genitalia**, including the penis, penile urethra, and scrotum.",
+      "say": "Local conversion to DHT differentiates external male genitalia like the penis, scrotum, and prostate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Internal Duct Differentiation",
+          "points": [
+            "Mediated directly by high local concentrations of Testosterone",
+            "Wolffian duct develops into epididymis, vas deferens, seminal vesicles",
+            "Independent of 5-alpha reductase activity",
+            "Preserved in 5-alpha reductase deficiency"
+          ]
+        },
+        "right": {
+          "title": "External Genital Virilization",
+          "points": [
+            "Strictly dependent upon Dihydrotestosterone (DHT)",
+            "Genital tubercle expands to form glans and shaft of penis",
+            "Urogenital folds fuse to enclose penile urethra",
+            "Labioscrotal swellings fuse in the midline to form the scrotum"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Inherited autosomal recessive deficiency of type 2 five-alpha reductase produces **five-alpha reductase deficiency**, a classic cause of 46,XY differences of sex development. Affected infants are born with ambiguous or female-appearing external genitalia alongside normal male internal Wolffian structures and non-palpable undescended testes.",
+      "say": "Five-alpha reductase deficiency causes female-appearing genitalia at birth, virilizing dramatically into male form at puberty.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "birth",
+            "label": "Infant Born with Ambiguous Genitalia (Clitoromegaly, Bifid Scrotum, Blind Vaginal Pouch)"
+          },
+          {
+            "id": "internal",
+            "label": "Internal Anatomy: Normal Male Vasa Deferentia and Epididymides (Testosterone-Driven)"
+          },
+          {
+            "id": "puberty",
+            "label": "Pubertal Surge of Pituitary LH Produces Massive Elevation of Circulating Testosterone"
+          },
+          {
+            "id": "virilize",
+            "label": "Type 1 5-Alpha Reductase and High Testosterone Drive Dramatic Virilization and Penile Growth"
+          }
+        ],
+        "edges": [
+          [
+            "birth",
+            "internal"
+          ],
+          [
+            "internal",
+            "puberty"
+          ],
+          [
+            "puberty",
+            "virilize"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At puberty, the massive surge in pituitary luteinizing hormone produces exceptionally high circulating testosterone levels that engage androgen receptors directly and undergo conversion via hepatic type 1 five-alpha reductase. Consequently, patients undergo dramatic **pubertal male virilization**, marked by phallic elongation, deepening voice, and testicular descent.",
+      "say": "Massive pubertal testosterone surges virilize patients with five-alpha reductase deficiency, triggering phallic enlargement.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/androgen-deficiency-aging-male-fig1.webp",
+        "alt": "Androgen receptor signaling and 5-alpha reductase deficiency",
+        "caption": "Androgen metabolism, 5-alpha reductase pathways, and disorders of male sexual differentiation."
+      }
+    },
+    {
+      "tx": "In adult men, dihydrotestosterone promotes benign hyperplasia of glandular and stromal elements in the prostatic transition zone, causing **benign prostatic hyperplasia**. Progressively compressing the prostatic urethra, benign prostatic hyperplasia causes lower urinary tract symptoms, including weak stream, nocturia, urinary hesitancy, and incomplete emptying.",
+      "say": "In older men, DHT stimulates prostate stromal growth, causing benign prostatic hyperplasia and urinary obstruction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/benign-prostatic-hyperplasia-fig1.webp",
+        "alt": "Benign prostatic hyperplasia: enlarged prostate compared with normal.",
+        "caption": "Benign prostatic hyperplasia: enlarged prostate compared with normal. [Credit: StewardMD]"
+      }
+    },
+    {
+      "tx": "Pharmacological inhibition of five-alpha reductase with **finasteride and dutasteride** slashes circulating and intraprostatic dihydrotestosterone concentrations by seventy to ninety percent. By eliminating the trophic DHT stimulus, these agents induce prostatic epithelial apoptosis, shrinking prostate volume by twenty-five percent and halting androgenic alopecia.",
+      "say": "Finasteride blocks five-alpha reductase, shrinking enlarged prostates by a quarter and halting male pattern baldness.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological Agent",
+          "Enzyme Specificity",
+          "Percentage DHT Suppression",
+          "Primary Clinical Indications"
+        ],
+        "rows": [
+          [
+            "Finasteride",
+            "Selective Type 2 5-Alpha Reductase Inhibitor",
+            "~70% serum DHT reduction",
+            "Benign prostatic hyperplasia (5 mg) and androgenetic alopecia (1 mg)"
+          ],
+          [
+            "Dutasteride",
+            "Dual Type 1 and Type 2 Inhibitor",
+            ">90% serum DHT reduction",
+            "Refractory BPH and marked prostatic enlargement"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

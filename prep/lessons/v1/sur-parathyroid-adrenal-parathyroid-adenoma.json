@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "module": "sur-parathyroid-adrenal",
+ "subject": "surgery",
+ "title": "Parathyroid Adenoma, Sestamibi Scintigraphy, and Focused Parathyroidectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Autonomous oversecretion of parathyroid hormone produces the endocrine syndrome known as primary hyperparathyroidism. In over eighty-five percent of cases, primary hyperparathyroidism is caused by a benign, solitary **parathyroid adenoma**. Parathyroid gland four-gland hyperplasia accounts for ten to twelve percent, multiple adenomas occur in three to four percent, and parathyroid carcinoma develops in less than one percent. Adenomas arise predominantly from mutations in the cyclin D1 gene or MEN1 tumor suppressor.",
+   "say": "A solitary parathyroid adenoma causes over eighty-five percent of primary hyperparathyroidism cases, while four-gland hyperplasia accounts for ten to twelve percent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-hyperparathyroidism-and-pheochromocytoma-fig1.webp",
+    "alt": "Medical schematic illustrating primary hyperparathyroidism, parathyroid adenoma localization, and adrenal pathology.",
+    "caption": "Surgical endocrinology: solitary parathyroid adenoma, Sestamibi localization, and minimally invasive parathyroidectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The biochemical hallmark of primary hyperparathyroidism is persistent hypercalcaemia in the presence of inappropriately elevated or non-suppressed intact parathyroid hormone. While modern patients frequently present with asymptomatic hypercalcaemia detected on routine biochemical screening, classical untreated disease manifests with the traditional surgical mnemonic **bones, stones, abdominal groans, and psychic moans**. Skeletal involvement produces subperiosteal bone resorption, osteoporosis, and bone cysts termed osteitis fibrosa cystica.",
+   "say": "Primary hyperparathyroidism is diagnosed by hypercalcaemia with inappropriately high parathyroid hormone. Classical untreated disease presents as bones, stones, abdominal groans, and psychiatric moans.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classic Mnemonic",
+     "Organ System Manifestation",
+     "Underlying Pathophysiology"
+    ],
+    "rows": [
+     [
+      "Bones",
+      "Osteitis fibrosa cystica, subperiosteal resorption, brown tumors",
+      "PTH-mediated osteoclast activation and accelerated skeletal demineralization"
+     ],
+     [
+      "Stones",
+      "Recurrent nephrolithiasis, nephrocalcinosis, renal colic",
+      "Hypercalciuria exceeding tubular reabsorption capacity precipitating calcium oxalate"
+     ],
+     [
+      "Abdominal Groans",
+      "Peptic ulcer disease, acute pancreatitis, constipation",
+      "Hypercalcaemia stimulates gastrin secretion and activates pancreatic enzymes"
+     ],
+     [
+      "Psychic Moans",
+      "Lethargy, depression, memory loss, cognitive decline",
+      "Hypercalcaemic neurotoxicity depressing central nervous system excitability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative imaging in primary hyperparathyroidism is designed strictly for surgical localization to facilitate minimally invasive exploration, never to diagnose hyperparathyroidism, which is established biochemically. The preeminent radionuclide imaging modality is **technetium-99m sestamibi scintigraphy**. Sestamibi is concentrated by mitochondria within both thyroid and parathyroid tissue, but is washed out rapidly from thyroid parenchyma while being selectively retained within the hyperactive, oxyphil-rich mitochondria of parathyroid adenomas.",
+   "say": "Preoperative imaging localizes the adenoma for targeted surgery. Sestamibi scintigraphy washes out rapidly from normal thyroid but is retained in the mitochondria of parathyroid adenomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inject",
+      "label": "Intravenous Injection of Tc-99m Sestamibi"
+     },
+     {
+      "id": "early",
+      "label": "Early Phase (15 Min): Diffuse Thyroid & Parathyroid Uptake"
+     },
+     {
+      "id": "washout",
+      "label": "Differential Rapid Washout from Normal Thyroid Tissue"
+     },
+     {
+      "id": "delayed",
+      "label": "Delayed Phase (2 Hours): Persistent Focal Retention in Adenoma"
+     },
+     {
+      "id": "spect",
+      "label": "SPECT-CT Multiplanar 3D Localization"
+     }
+    ],
+    "edges": [
+     [
+      "inject",
+      "early"
+     ],
+     [
+      "early",
+      "washout"
+     ],
+     [
+      "washout",
+      "delayed"
+     ],
+     [
+      "delayed",
+      "spect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Combining technetium-99m sestamibi SPECT-CT with high-resolution neck ultrasound constitutes the gold standard dual-modality localization algorithm, achieving concordance in over eighty-five percent of patients. On ultrasonography, a parathyroid adenoma presents as an oval, sharply circumscribed, markedly **hypoechoic nodule with peripheral vascular arc** situated immediately posterior to the thyroid lobe. For discordant cases, four-dimensional computed tomography (4D-CT) provides definitive multiplanar anatomical localization.",
+   "say": "Combining Sestamibi scintigraphy with high-resolution ultrasound provides eighty-five percent localization accuracy. Four-dimensional CT resolves discordant cases by mapping vascular perfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Technetium-99m Sestamibi SPECT",
+     "points": [
+      "Functional mitochondrial metabolic tracer imaging",
+      "Superb for identifying ectopic adenomas in mediastinum",
+      "Delayed phase retention confirms parathyroid origin",
+      "Limited resolution in small (<500 mg) adenomas"
+     ]
+    },
+    "right": {
+     "title": "Four-Dimensional CT (4D-CT)",
+     "points": [
+      "Multiphasic contrast imaging (non-contrast, arterial, venous)",
+      "Parathyroid adenomas show rapid arterial wash-in and wash-out",
+      "Exceptional spatial resolution for reoperative neck surgery",
+      "Delivers higher radiation dose to the thyroid bed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When preoperative imaging convincingly localizes a solitary adenoma, the surgeon performs a **minimally invasive parathyroidectomy**. Through a focused two-to-three-centimetre incision over the localized quadrant, the adenoma is mobilized and excised while preserving the remaining three normal parathyroid glands. Compared to historical four-gland bilateral neck exploration, focused parathyroidectomy significantly reduces operative duration, postoperative pain, and risk of recurrent laryngeal nerve injury.",
+   "say": "Minimally invasive parathyroidectomy excises the localized adenoma through a small focused incision, reducing surgical trauma and recovery time compared to open four-gland exploration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "concord",
+      "label": "Concordant Sestamibi & Ultrasound Localization"
+     },
+     {
+      "id": "incision",
+      "label": "Focused 2 cm Unilateral Skin Crease Incision"
+     },
+     {
+      "id": "dissect",
+      "label": "Dissect Posterior to Thyroid Lobe & Identify RLN"
+     },
+     {
+      "id": "excise",
+      "label": "En Bloc Excision of Enlarged Parathyroid Adenoma"
+     },
+     {
+      "id": "iopth",
+      "label": "Draw Rapid Intraoperative Parathyroid Hormone Assay"
+     }
+    ],
+    "edges": [
+     [
+      "concord",
+      "incision"
+     ],
+     [
+      "incision",
+      "dissect"
+     ],
+     [
+      "dissect",
+      "excise"
+     ],
+     [
+      "excise",
+      "iopth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The technological keystone ensuring curative success during focused parathyroidectomy is rapid **intraoperative parathyroid hormone monitoring**. Because parathyroid hormone possesses an exceptionally brief serum half-life of merely three to five minutes, successful excision of the hyperfunctioning adenoma is followed by a precipitous decline in circulating intact PTH. Peripheral venous blood samples are drawn at baseline prior to incision, immediately upon gland excision, and at five and ten minutes post-excision.",
+   "say": "Because parathyroid hormone has a half-life of under five minutes, successfully removing the adenoma triggers a rapid fall in circulating PTH measured in the operating room.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid Intraoperative PTH Assay",
+     "points": [
+      "Utilizes point-of-care chemiluminescent immunometric assay",
+      "Reports definitive quantitative hormone levels within 15 minutes",
+      "Assesses systemic hormonal clearance in real time",
+      "Confirms complete surgical cure before patient wakes"
+     ]
+    },
+    "right": {
+     "title": "Frozen Section Histology",
+     "points": [
+      "Examines structural cellular composition under microscope",
+      "Distinguishes parathyroid tissue from lymph node or thyroid",
+      "Cannot differentiate an adenoma from multiglandular hyperplasia",
+      "Does not confirm biochemical cure or absence of second adenoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical cure is validated in the operating theater using the established **Miami criterion for parathyroidectomy**. The Miami criterion dictates that a drop in intraoperative intact parathyroid hormone of fifty percent or greater from the highest pre-incision or pre-excision baseline value, measured ten minutes after gland resection, confirms complete excision of all hyperfunctioning tissue. If the PTH level fails to drop by fifty percent, the surgeon immediately converts the procedure to bilateral four-gland exploration.",
+   "say": "Under the Miami criterion, a drop in parathyroid hormone exceeding fifty percent ten minutes after excision confirms surgical cure. Failure to drop dictates four-gland bilateral exploration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "baseline",
+      "label": "Baseline Pre-Excision PTH Drawn (e.g., 200 pg/mL)"
+     },
+     {
+      "id": "excise",
+      "label": "Adenoma Resected (Minute 0)"
+     },
+     {
+      "id": "minute10",
+      "label": "Draw 10-Minute Post-Excision Peripheral PTH Sample"
+     },
+     {
+      "id": "miami",
+      "label": "Calculate Percentage Drop: (200 - 45) / 200 = 77.5%"
+     },
+     {
+      "id": "cure",
+      "label": "PTH Drop > 50%: Confirms Complete Cure & Conclude Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "baseline",
+      "excise"
+     ],
+     [
+      "excise",
+      "minute10"
+     ],
+     [
+      "minute10",
+      "miami"
+     ],
+     [
+      "miami",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following successful parathyroidectomy in patients with severe, longstanding osteitis fibrosa cystica, sudden withdrawal of high parathyroid hormone triggers **hungry bone syndrome**. Characterized by profound, prolonged hypocalcaemia and hypophosphataemia, avid remineralization of demineralized skeletal matrix ravenously consumes circulating calcium and phosphate. Management demands aggressive, continuous intravenous calcium infusion, active calcitriol, and oral calcium carbonate for weeks until bone remineralization equilibrates.",
+   "say": "Hungry bone syndrome develops after surgery in severe bone disease when demineralized skeleton rapidly absorbs circulating calcium and phosphate, requiring aggressive calcium therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Hungry Bone Syndrome",
+     "Hypoparathyroidism from Ischemia"
+    ],
+    "rows": [
+     [
+      "Serum Calcium",
+      "Profound, protracted hypocalcaemia lasting weeks",
+      "Transient or permanent hypocalcaemia"
+     ],
+     [
+      "Serum Phosphate",
+      "Markedly suppressed hypophosphataemia (absorbed by bone)",
+      "Elevated hyperphosphataemia (loss of renal PTH phosphaturia)"
+     ],
+     [
+      "Serum Alkaline Phosphatase",
+      "Extremely elevated (reflects intense osteoblastic remineralization)",
+      "Normal or slightly decreased"
+     ],
+     [
+      "Therapeutic Requirement",
+      "Massive calcium infusions and high-dose oral calcitriol",
+      "Standard oral calcium and low-dose calcitriol titration"
+     ]
+    ]
+   }
+  }
+ ]
+}

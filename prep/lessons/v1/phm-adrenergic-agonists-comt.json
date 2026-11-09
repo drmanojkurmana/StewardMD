@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "phm-adrenergic-agonists",
+  "subject": "pharmacology",
+  "title": "Catecholamine Metabolism, Adrenergic Storage Depletion, and Epinephrine Reversal",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Extracellular enzymatic inactivation of circulating and released catecholamines is catalyzed by **catechol-O-methyltransferase**. Operating primarily in liver, kidney, and postsynaptic glial tissues, COMT transfers a methyl group from S-adenosylmethionine to the meta-hydroxyl group of catecholamines. Epinephrine and norepinephrine are methylated to metanephrine and normetanephrine, which undergo subsequent oxidative deamination by monoamine oxidase to form vanillylmandelic acid (VMA) excreted in urine.",
+      "say": "COMT methylates extracellular catecholamines, converting them into metanephrines and urinary VMA.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ne",
+            "label": "Circulating norepinephrine and epinephrine"
+          },
+          {
+            "id": "comt",
+            "label": "COMT transfers methyl group from S-adenosylmethionine"
+          },
+          {
+            "id": "meta",
+            "label": "Normetanephrine and metanephrine generated"
+          },
+          {
+            "id": "vma",
+            "label": "MAO deamination yields urinary vanillylmandelic acid (VMA)"
+          }
+        ],
+        "edges": [
+          [
+            "ne",
+            "comt"
+          ],
+          [
+            "comt",
+            "meta"
+          ],
+          [
+            "meta",
+            "vma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Irreversible depletion of vesicular monoamine stores was historically achieved with the Rauwolfia serpentina alkaloid **reserpine**. By binding tightly to vesicular monoamine transporter-2 (VMAT2) in synaptic vesicle membranes, reserpine blocks vesicular packaging of dopamine, norepinephrine, and serotonin. Unpackaged monoamines leak into the cytoplasm, where mitochondrial monoamine oxidase degrades them completely, causing profound central and peripheral sympathetic tone depletion.",
+      "say": "Reserpine blocks vesicular VMAT2 transporters, leaving monoamines exposed to destruction by mitochondrial MAO.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reserpine mechanism",
+          "points": [
+            "Irreversible VMAT2 transporter blockade",
+            "Depletes dopamine, norepinephrine, serotonin",
+            "Slow onset requiring days to deplete stores",
+            "Causes severe clinical depression and suicidality"
+          ]
+        },
+        "right": {
+          "title": "Guanethidine mechanism",
+          "points": [
+            "Enters terminals via NET to displace norepinephrine",
+            "Concentrates in vesicles and prevents release",
+            "Does not cross blood-brain barrier",
+            "Produces severe postural orthostatic hypotension"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The definitive first-line emergency pharmacology for acute life-threatening systemic hypersensitivity is directed against **anaphylaxis**. Allergen cross-linking of surface IgE on sensitized mast cells and basophils triggers catastrophic systemic mediator exocytosis. Administering intramuscular adrenaline promptly stimulates vascular alpha-1 receptors to reverse peripheral vasodilation and laryngeal edema, cardiac beta-1 receptors to sustain myocardial output, and beta-2 receptors to halt bronchospasm.",
+      "say": "Adrenaline is the life-saving treatment for anaphylaxis, reversing vasodilation, airway closure, and mediator release.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaphylaxis-fig1.webp",
+        "alt": "Anaphylaxis pathophysiology and mediator release",
+        "caption": "Systemic mast cell degranulation triggering airway edema and circulatory collapse in severe anaphylaxis."
+      }
+    },
+    {
+      "tx": "The classic pharmacological phenomenon demonstrating dual alpha and beta receptor actions in vascular beds is **Dale's vasomotor reversal**. When adrenaline is administered alone, its alpha-1 vasoconstrictor action dominates over beta-2 vasodilation, producing an overall rise in mean arterial pressure. However, when adrenaline is administered after pretreatment with a competitive alpha-adrenergic blocker, the alpha-1 vasoconstriction is blocked, unmasking unopposed beta-2 arteriolar vasodilation and causing blood pressure to plunge.",
+      "say": "Epinephrine reversal shows that blocking alpha-1 receptors unmasks beta-2 vasodilation, causing blood pressure to drop.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "alone",
+            "label": "Adrenaline alone: Alpha-1 vasoconstriction overrides Beta-2 (BP rises)"
+          },
+          {
+            "id": "block",
+            "label": "Pretreatment with alpha-blocker (Phenoxybenzamine or Phentolamine)"
+          },
+          {
+            "id": "re-inj",
+            "label": "Adrenaline re-injected: Alpha-1 receptors completely blocked"
+          },
+          {
+            "id": "rev",
+            "label": "Unopposed Beta-2 vasodilation: Blood pressure paradoxically falls"
+          }
+        ],
+        "edges": [
+          [
+            "alone",
+            "block"
+          ],
+          [
+            "block",
+            "re-inj"
+          ],
+          [
+            "re-inj",
+            "rev"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Catecholamine-producing chromaffin tumors arising from the adrenal medulla present with paroxysmal hypertension in **pheochromocytoma**. Tumors autonomously synthesize and release excessive floods of norepinephrine, epinephrine, and dopamine, precipitating episodic severe headaches, diaphoresis, and palpitations. Definitive preoperative medical stabilization requires establishing non-competitive alpha-adrenergic blockade for at least ten to fourteen days before initiating beta-blocker therapy to prevent paradoxical hypertensive crises.",
+      "say": "Preoperative pheochromocytoma requires alpha blockade before beta blockade to prevent lethal hypertensive crises.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pheochromocytoma-fig2.webp",
+        "alt": "Phaeochromocytoma catecholamine excess and blockade sequence",
+        "caption": "Preoperative management of pheochromocytoma mandating irreversible alpha blockade prior to introducing beta antagonists."
+      }
+    },
+    {
+      "tx": "The mandatory pharmacological rule in pheochromocytoma management mandates **alpha blockade before beta blockade**. If a beta-blocker is administered prematurely without adequate preceding alpha-adrenergic blockade, blockade of vasodilatory beta-2 receptors leaves circulating tumor catecholamines to stimulate vascular alpha-1 receptors unopposed. This precipitates catastrophic peripheral vasoconstriction, malignant hypertensive emergencies, acute pulmonary edema, and intracerebral hemorrhage.",
+      "say": "Never give a beta blocker first in pheochromocytoma, as unopposed alpha-1 vasoconstriction causes fatal hypertension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Correct sequence (Alpha first)",
+          "points": [
+            "Initiate phenoxybenzamine or prazosin first",
+            "Expands contracted vascular intravascular volume",
+            "Controls paroxysmal blood pressure surges",
+            "Add beta blocker 3 days prior to control tachycardia"
+          ]
+        },
+        "right": {
+          "title": "Fatal error (Beta first)",
+          "points": [
+            "Blocks vasodilatory beta-2 vascular receptors",
+            "Leaves vascular alpha-1 receptors unopposed",
+            "Massive surge in total peripheral resistance",
+            "Precipitates acute pulmonary edema and stroke"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnostic biochemical confirmation of pheochromocytoma relies on laboratory quantification of **plasma and urinary metanephrines**. Because intratumoral catecholamine-O-methyltransferase continuously converts stored norepinephrine and epinephrine into normetanephrine and metanephrine independent of episodic exocytosis, free plasma metanephrines offer greater than ninety-five percent diagnostic sensitivity. Twenty-four-hour urinary collections quantifying fractionated metanephrines and vanillylmandelic acid provide robust confirmatory evidence.",
+      "say": "Quantifying free plasma and urinary metanephrines provides the most sensitive diagnostic confirmation of pheochromocytoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biochemical marker",
+          "Origin / pathway",
+          "Diagnostic sensitivity",
+          "False-positive triggers"
+        ],
+        "rows": [
+          [
+            "Plasma free metanephrines",
+            "Continuous intratumoral COMT methylation",
+            "97% (Highest screening sensitivity)",
+            "Severe physical stress, acetaminophen"
+          ],
+          [
+            "24-h urinary fractionated metanephrines",
+            "Renal excretion of conjugated metanephrines",
+            "95% (High confirmatory specificity)",
+            "Tricyclic antidepressants, levodopa"
+          ],
+          [
+            "24-h urinary vanillylmandelic acid",
+            "End-stage oxidative deamination by MAO",
+            "65 to 75% (Lower sensitivity)",
+            "Caffeine, vanilla, bananans, citrus fruit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inhibition of central and peripheral COMT is utilized in Parkinson disease therapy using **entacapone and tolcapone**. By preventing the peripheral O-methylation of administered levodopa into 3-O-methyldopa, entacapone prolongs the plasma elimination half-life of levodopa and augments brain delivery, eliminating motor end-of-dose wearing-off fluctuations. Tolcapone inhibits both peripheral and central brain COMT but requires liver function monitoring due to rare fulminant hepatotoxicity.",
+      "say": "COMT inhibitors prevent levodopa breakdown to smooth out motor wearing-off fluctuations in Parkinson disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entacapone",
+          "points": [
+            "Inhibits peripheral COMT enzymes exclusively",
+            "Does not cross the blood-brain barrier",
+            "Administered alongside each levodopa dose",
+            "No hepatic toxicity monitoring required"
+          ]
+        },
+        "right": {
+          "title": "Tolcapone",
+          "points": [
+            "Inhibits both peripheral and central brain COMT",
+            "Readily crosses into the central nervous system",
+            "More potent motor symptom stabilization",
+            "Black box warning for acute fatal hepatotoxicity"
+          ]
+        }
+      }
+    }
+  ]
+}

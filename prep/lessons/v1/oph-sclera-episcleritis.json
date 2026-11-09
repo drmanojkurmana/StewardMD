@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "id": "oph-sclera-episcleritis",
+ "subject": "ophthalmology",
+ "module": "oph-sclera",
+ "title": "Episcleritis, Scleritis and Staphyloma",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Episcleritis** inflames superficial episcleral tissue giving sectoral redness, mild irritation and no pain or vision effect, blanching with topical vasoconstrictor and usually self limited. Simple and nodular forms settle over weeks, recurrence prompting limited systemic review. Its benign tempo separates it from scleritis at first presentation in red eye clinics.",
+   "say": "Superficial inflammation together gives sectoral redness without pain in episcleritis characteristically during red eye assessment in clinic. Blanching gives bedside separation additionally. Self limitation gives usual course.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scleritis-episcleritis-staphyloma-fig1.webp",
+    "alt": "Ophthalmic diagrams illustrating deep scleral, episcleral, and conjunctival plexuses alongside a cross section of scleral thinning with anterior uveal staphyloma.",
+    "caption": "Episcleral and scleral vascular plexuses and anterior scleral thinning. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Scleritis** inflames full scleral thickness with severe boring pain radiating to jaw, tenderness, violaceous hue not blanching, and systemic vasculitis association in many cases. Anterior diffuse, nodular and necrotising forms grade severity while posterior scleritis mimics orbital disease with pain on movement. Necrotising disease threatens perforation and needs systemic immunosuppression urgently.",
+   "say": "Full thickness inflammation together gives boring pain with violaceous hue in scleritis characteristically during urgent assessment in clinic. Systemic association gives joint review need. Necrosis gives perforation threat.",
+   "vis": {
+    "kind": "table",
+    "title": "Episcleritis versus scleritis",
+    "cols": [
+     "Feature",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Mild, blanches, no pain",
+      "Episcleritis pattern"
+     ],
+     [
+      "Boring pain, violaceous, tender",
+      "Scleritis pattern"
+     ],
+     [
+      "Necrosis or thinning",
+      "Systemic escalation urgent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phenylephrine blanching test separates superficial episcleral vessels that whiten from deep scleral plexus that persists, bedside physiology still taught despite modern imaging. Daylight colour reading violaceous versus bright red supports the split before drops. **Blanch test** therefore remains red eye examination vocabulary.",
+   "say": "Vasoconstrictor blanching together gives superficial separation at bedside in red eye clinics for painful presentations in adults. Daylight hue gives supporting weight additionally. Deep persistence gives scleritis direction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Episcleritis pattern",
+     "points": [
+      "Sectoral bright redness",
+      "Blanches with drops",
+      "No pain, vision normal"
+     ]
+    },
+    "right": {
+     "title": "Scleritis pattern",
+     "points": [
+      "Violaceous deep hue",
+      "No blanching, boring pain",
+      "Systemic workup needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Scleromalacia perforans** necrotises sclera painlessly in long standing rheumatoid disease, yellow necrotic patches thinning without inflammation drama, perforation surprisingly rare despite name. Its painless necrosis contrasts painful necrotising scleritis with inflammation in same systemic family. Quiet thinning still needs systemic control and ocular protection counselling.",
+   "say": "Painless necrosis together gives scleromalacia pattern in rheumatoid disease during rheumatology eye review over years. Quiet thinning gives protection need additionally. Systemic control gives backbone care.",
+   "vis": {
+    "kind": "flow",
+    "title": "Painful red eye scleral sorting",
+    "nodes": [
+     {
+      "id": "pain",
+      "label": "Pain severity assessed"
+     },
+     {
+      "id": "blanch",
+      "label": "Blanching test performed"
+     },
+     {
+      "id": "epi",
+      "label": "Superficial episcleritis route"
+     },
+     {
+      "id": "scler",
+      "label": "Deep scleritis systemic route"
+     }
+    ],
+    "edges": [
+     [
+      "pain",
+      "blanch"
+     ],
+     [
+      "blanch",
+      "epi"
+     ],
+     [
+      "blanch",
+      "scler"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Staphyloma** is scleral ectasia lined by uveal tissue bulging where sclera thins, anterior after scleritis or surgery, posterior in pathological myopia at fundus. Anterior bluish bulge near limbus follows necrotising history, posterior staphyloma explains myopic fundus architecture. Bulge plus history therefore localises previous scleral failure geographically.",
+   "say": "Scleral ectasia together gives uveal lined bulge where thinning failed in staphyloma after scleritis or myopia in clinic. History gives geography explanation additionally. Posterior form gives myopic architecture."
+  },
+  {
+   "tx": "Posterior scleritis gives pain, tenderness, disc swelling, exudative detachment and T sign fluid around optic nerve on ultrasound, mimicking orbital cellulitis without sinus source. B scan therefore investigates painful proptosis with normal sinuses toward scleral cause. **T sign** is ultrasound answer examinations pair with posterior scleritis.",
+   "say": "Posterior inflammation together gives painful orbital mimicry without sinus source in scleritis assessment by ultrasound in clinic. Fluid sign gives diagnostic support additionally. Sinus normality gives redirection value.",
+   "vis": {
+    "kind": "table",
+    "title": "Scleritis forms",
+    "cols": [
+     "Form",
+     "Threat"
+    ],
+    "rows": [
+     [
+      "Diffuse anterior",
+      "Systemic association review"
+     ],
+     [
+      "Necrotising",
+      "Perforation, urgent suppression"
+     ],
+     [
+      "Posterior",
+      "Detachment mimic, T sign"
+     ],
+     [
+      "Scleromalacia",
+      "Painless rheumatoid thinning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic associations rheumatoid arthritis, granulomatosis and inflammatory bowel disease direct serology and joint clinics, ocular severity sometimes leading systemic diagnosis. Steroids and immunosuppression treat scleritis systemically, topical therapy insufficient for deep disease depth. **Deep disease** phrase justifies systemic route in scleritis prescriptions.",
+   "say": "Systemic association together gives joint clinic direction in scleritis care at hospital review for adults with recurrence. Topical insufficiency gives systemic justification additionally. Serology gives directed value.",
+   "vis": {
+    "kind": "table",
+    "title": "Scleritis systemic links",
+    "cols": [
+     "Association",
+     "Review"
+    ],
+    "rows": [
+     [
+      "Rheumatoid disease",
+      "Joint activity assessment"
+     ],
+     [
+      "Granulomatosis pattern",
+      "ANCA directed workup"
+     ],
+     [
+      "Bowel inflammation",
+      "Gastroenterology company"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: blanch superficial settles, boring violaceous systemises, painless rheumatoid necrotises quietly and posterior signs ultrasound. Staphyloma bulges where sclera failed previously by site history. **Pain severity** is scleral triage first question in red eye with normal vision. Daylight examination and blanch testing together protect patients from systemic therapy given for benign superficial disease.",
+   "say": "Pain severity together gives scleral triage first in red eye assessment at emergency clinics for adults reliably each time. Blanching gives superficial split additionally. History gives staphyloma geography.",
+   "vis": {
+    "kind": "table",
+    "title": "Scleral anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Blanches, painless",
+      "Episcleritis benign course"
+     ],
+     [
+      "Boring, violaceous",
+      "Scleritis systemic route"
+     ],
+     [
+      "Fluid T sign",
+      "Posterior scleritis ultrasound"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Episcleritis versus scleritis split",
+   "b": "Episcleritis blanches, painless, self limited; scleritis boring violaceous pain, no blanch, systemic workup."
+  },
+  {
+   "f": "Scleromalacia perforans",
+   "b": "Painless scleral necrosis in rheumatoid disease despite dramatic thinning; perforation rare."
+  },
+  {
+   "f": "Posterior scleritis sign",
+   "b": "Painful orbital mimic with T sign fluid around optic nerve on B scan."
+  }
+ ],
+ "keys": [
+  "Deep scleral disease needs systemic therapy",
+  "Staphyloma marks previous scleral failure",
+  "Pain triages scleral red eye first"
+ ]
+}

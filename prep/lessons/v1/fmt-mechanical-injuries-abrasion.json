@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-mechanical-injuries-abrasion",
+ "subject": "forensic-medicine",
+ "module": "fmt-mechanical-injuries",
+ "title": "Abrasions, Patterned Abrasions and Contusions",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "An abrasion destroys epidermis only",
+   "tx": "An **abrasion** is a destruction of skin that usually involves only the superficial epidermis, caused by friction against a rough surface. Nails, thorns, teeth and dragging on the ground are common agents. The raw surface exudes lymph and blood that dry into a protective scab. Abrasions bleed slightly, heal rapidly and leave no scar, yet large ones over a wide area can cause severe pain and appreciable bleeding.",
+   "say": "An abrasion scrapes only the epidermis, seals itself with a scab, and heals quickly without leaving a scar.",
+   "vis": {"kind": "table", "cols": ["Feature", "Abrasion finding", "Why it matters"], "rows": [["Depth", "Epidermis mainly, skin is 1.6 mm", "No scar on healing"], ["Bleeding", "Slight, from dermal points", "Deep spots mean dermis reached"], ["Healing", "Rapid, from the periphery", "Age can be estimated"], ["Surface", "Lymph and blood scab", "Scab colour changes daily"]]}
+  },
+  {
+   "title": "Scratches and fingernail marks",
+   "tx": "A **scratch or linear abrasion** has length but no real width, made by a pointed object gouging across skin. Epidermis heaps up in front of the moving point, leaving a clean start and tags at the end that reveal direction. Fingernail abrasions run one to two millimetres wide and half to one centimetre long. Crescentic nail scratches on the neck suggest throttling; scratches around the mouth suggest smothering.",
+   "say": "Epidermis piled at the end of a scratch shows which way the point travelled, and neck crescents point to throttling.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Pointed object crosses the skin"}, {"id": "b", "label": "Epidermis scrapes ahead of it"}, {"id": "c", "label": "Clean area at the start"}, {"id": "d", "label": "Tags heap up at the end"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Grazes, brush burns and road accidents",
+   "tx": "The commonest type is the **graze or sliding abrasion**, produced when skin moves against a rough surface, classically in road accidents. Uneven longitudinal grooves show the direction of force, broad at one end and narrow at the other. Violent tangential rubbing over a large area makes a brush burn or gravel rash, seen in motorcyclists and ejected passengers. A glancing kick with a boot produces the same picture.",
+   "say": "Grazes carry parallel grooves from road contact, and their widening end tells you the direction of the slide.",
+   "vis": {"kind": "compare", "left": {"title": "Graze features", "points": ["Longitudinal parallel grooves", "Epidermis heaped at groove ends", "Denuded start, serrated edges", "Typical of road accidents"]}, "right": {"title": "Brush burn features", "points": ["Large area tangential rubbing", "Called gravel rash when gritty", "Seen in motorcyclists", "May lack serous ooze entirely"]}}
+  },
+  {
+   "title": "Pressure and impact abrasions",
+   "tx": "Force near ninety degrees to skin gives **pressure abrasions** when movement is slight and directed inward, and **impact abrasions** when a rough object strikes at a right angle. The ligature mark of hanging and bite marks are pressure abrasions. An impact abrasion sits slightly depressed unless underlying bruising bulges it. A radiator grille, headlamp rim or tyre tread can print itself on skin down to trapped road dirt and paint flakes.",
+   "say": "Right angle force prints the object onto skin, from ligature marks and bite marks to a full tyre tread pattern.",
+   "vis": {"kind": "table", "cols": ["Type", "Force direction", "Classic example"], "rows": [["Scratch", "Tangential, pointed", "Fingernail crescent on neck"], ["Graze", "Tangential, broad surface", "Road accident sliding injury"], ["Pressure abrasion", "Inward, minimal movement", "Ligature mark and bite mark"], ["Impact abrasion", "Right angle strike", "Tyre tread imprint on back"]]}
+  },
+  {
+   "title": "Patterned abrasions identify the weapon",
+   "tx": "Impact and pressure abrasions that reproduce the shape of the causative object earn the name **patterned abrasions**. Bicycle chain links, coarse fabric weave, rope spirals, electric wires and serrated knives all leave readable signatures. A multi thonged whip leaves a series of parallel linear abrasions. Because the pattern can connect wound to weapon, photograph it with a scale before anything is cleaned or covered in the mortuary.",
+   "say": "A patterned abrasion is a signature of the object that made it, so photograph it with a scale before cleaning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Patterned object strikes at right angle"}, {"id": "b", "label": "Ridges abrade the epidermis"}, {"id": "c", "label": "Skin dips into pattern cavities"}, {"id": "d", "label": "Scaled photograph links weapon to wound"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ageing an abrasion by its scab",
+   "tx": "Healing marches through colour stages that give the **age of an abrasion** within useful limits. Fresh abrasions look bright red. At twelve to twenty four hours, lymph and blood dry into a bright red scab. The scab turns reddish brown at two to three days and dark brown to black at four to seven days as epithelium grows beneath it. After seven days the scab dries, shrinks and falls, leaving a depigmented patch.",
+   "say": "Bright red, then reddish brown, then dark brown scab dates an abrasion across its first week of healing.",
+   "vis": {"kind": "table", "cols": ["Age", "Scab appearance", "Microscopy"], "rows": [["Fresh", "Bright red surface", "No cellular reaction yet"], ["12 to 24 hours", "Bright red dry scab", "Polymorphs infiltrate by 12 hours"], ["2 to 3 days", "Reddish brown scab", "Epithelial regrowth at margins"], ["4 to 7 days", "Dark brown to black", "Granulation tissue at 5 to 8 days"]]}
+  },
+  {
+   "title": "Contusion, blood inside intact skin",
+   "tx": "A **contusion or bruise** is an effusion of blood into tissues from ruptured venules and arterioles under blunt force, with the skin surface usually intact. Fists, sticks, stones, hammers and shod feet are typical agents. Extravasated blood spreads diffusely, so margins stay blurred, and a large vessel leak builds a tumour like haematoma. Fine mottled bruises are petechiae; larger confluent ones are ecchymoses. The centre often looks lighter where impact pushed blood outward.",
+   "say": "A bruise is blood leaked into tissue under unbroken skin, blurred at the edges and lighter in its centre.",
+   "vis": {"kind": "compare", "left": {"title": "Bruise behaviour", "points": ["Blood diffuses through tissue spaces", "Margins blurred, swelling tender", "Slightly larger than the weapon face", "Centre paler from outward push"]}, "right": {"title": "Where bruises hide", "points": ["Scalp bruise is felt, not seen", "Deep bruise surfaces late", "Dark skin hides colour change", "Yielding weapons may leave none"]}}
+  },
+  {
+   "title": "Patterned bruises and delayed bruises",
+   "tx": "Bruises can carry the shape of the weapon as **patterned contusions**: a whip leaves twin lines with a pale gap, and straps, belts and chains leave their own widths. Two exam traps matter. A bruise may appear one to two days after injury as deep blood tracks outward, and gravity can shift blood so the bruise surfaces away from the impact site. Neither delay nor displacement changes the causative blow.",
+   "say": "Twin whip lines and belt widths pattern a bruise, and a bruise surfacing late or downhill still belongs to its blow.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blunt blow ruptures small vessels"}, {"id": "b", "label": "Blood pools in deep tissue first"}, {"id": "c", "label": "Colour reaches skin in a day or two"}, {"id": "d", "label": "Gravity may shift the visible site"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Medicolegal value of surface injuries",
+   "tx": "Abrasions earn their keep through **site, pattern and age evidence**. They mark the point of impact and direction of force, and they may be the only external sign of a serious internal injury beneath. Dirt, grease or sand inside an open abrasion connects the injury to the scene. Abrasions on the face of an assailant indicate struggle, while a conscious faller abrades the palms and an alcoholic falling backward strikes the occiput.",
+   "say": "Surface scrapes record impact point, direction and scene material, and palm abrasions separate a conscious fall from collapse.",
+   "vis": {"kind": "table", "cols": ["Finding", "Interpretation", "Setting"], "rows": [["Crescents on neck", "Fingernails in throttling", "Manual strangulation"], ["Scrapes around mouth", "Hand pressed in smothering", "Suffocation assault"], ["Palmar abrasions", "Hands thrown out in a fall", "Conscious faller"], ["Occiput abrasion", "Backward fall without saving", "Alcoholic collapse"]]}
+  }
+ ],
+ "quiz": []
+}

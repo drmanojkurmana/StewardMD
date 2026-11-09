@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-nhm-schemes-national-health-mission",
+  "subject": "community-medicine",
+  "module": "cm-nhm-schemes",
+  "title": "National Health Mission, Ayushman Bharat, PM-JAY, and Quality Schemes",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "National Health Mission: NRHM plus NUHM",
+      "tx": "The **National Health Mission** unites the National Rural Health Mission (2005) and the National Urban Health Mission (2013) under one umbrella of flexible financing to states, community processes (ASHA, committees), infrastructure, and programme integration. Its architecture (state and district health missions, programme implementation plans, untied funds) replaced rigid centrally sponsored schemes with state planned, centrally supported action.",
+      "say": "The Health Mission merges rural and urban missions into flexible state planned funding. Community processes are its soul.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "nh1", "label": "NRHM 2005 transforms rural systems" },
+          { "id": "nh2", "label": "NUHM 2013 adds urban primary care" },
+          { "id": "nh3", "label": "NHM umbrella funds state PIPs" }
+        ],
+        "edges": [["nh1", "nh2"], ["nh2", "nh3"]]
+      }
+    },
+    {
+      "title": "RMNCH+A: the continuum strategy",
+      "tx": "**RMNCH+A** strings reproductive, maternal, newborn, child, and adolescent health into one continuum across life stages and across home, community, and facility levels, adding adolescents (the plus A) and linkages (home based newborn care to facility SNCUs, nutrition to health) that vertical programmes missed. Its five by five matrix (five themes, five levels) is a favourite framework question in programme examinations.",
+      "say": "RMNCH+A links life stages from adolescence to motherhood and places from home to hospital. The plus A added adolescents.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Continuum axis", "Contents"],
+        "rows": [
+          ["Across life stages", "Adolescent, pregnancy, birth, newborn, child"],
+          ["Across care levels", "Home, community, primary, referral"],
+          ["Signature additions", "Adolescent health, home newborn care"],
+          ["Delivery platforms", "ASHA, anganwadi, HWC, FRU chain"]
+        ]
+      }
+    },
+    {
+      "title": "Ayushman Bharat: two pillars",
+      "tx": "**Ayushman Bharat** rests on two pillars announced in 2018: health and wellness centres (now Ayushman Arogya Mandirs) delivering comprehensive primary care free at the doorstep, and the Pradhan Mantri Jan Arogya Yojana purchasing hospitalisation cover for poor families. Prevention and primary care reduce illness; insurance prevents its cost from impoverishing: the pairing is the policy logic examinations ask candidates to articulate.",
+      "say": "Two pillars: wellness centres for primary care, PM-JAY insurance for hospital costs. One prevents illness, one prevents poverty from it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Arogya Mandirs (supply side)",
+          "points": ["Comprehensive primary care free", "Sub centre and PHC upgrades", "NCD screening and teleconsultation"]
+        },
+        "right": {
+          "title": "PM-JAY (demand side)",
+          "points": ["Hospitalisation cover for poor families", "Cashless at empanelled hospitals", "Portable across states"]
+        }
+      }
+    },
+    {
+      "title": "PM-JAY: design essentials",
+      "tx": "**Pradhan Mantri Jan Arogya Yojana (PM-JAY)** provides five lakh rupees per family per year of cashless secondary and tertiary hospitalisation to deprivation and occupationally identified families (over ten crore families from SECC 2011 criteria), portable nationally at public and empanelled private hospitals, with pre authorisation, package rates, and grievance systems run by the National Health Authority and state agencies on trust or insurance modes.",
+      "say": "Five lakh per family per year, cashless, portable, for over ten crore poor families. Packages and pre authorisation run the system.",
+      "vis": {
+        "kind": "table",
+        "cols": ["PM-JAY feature", "Design fact"],
+        "rows": [
+          ["Cover", "5 lakh per family per year, floater"],
+          ["Eligibility", "SECC 2011 deprivation and occupation lists"],
+          ["Portability", "Treatment anywhere in India"],
+          ["Payment", "Package rates, pre authorisation, claims audit"]
+        ]
+      }
+    },
+    {
+      "title": "Ayushman Arogya Mandir services",
+      "tx": "Renamed **Ayushman Arogya Mandirs**, wellness centres deliver twelve packages of comprehensive primary care (pregnancy, child, communicable and noncommunicable disease, mental health, eye, ENT, oral, elderly, emergency, and palliative basics) with free essential drugs and diagnostics lists, population enumeration, and community health officer led teams. Their NCD population based screening of adults above thirty is the largest such exercise attempted anywhere.",
+      "say": "Arogya Mandirs promise twelve free primary care packages near home. Screening every adult above thirty anchors the NCD battle.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "am1", "label": "Enumerate population, screen above 30" },
+          { "id": "am2", "label": "Protocol care and free drugs at HWC" },
+          { "id": "am3", "label": "Referral and teleconsultation linkage" }
+        ],
+        "edges": [["am1", "am2"], ["am2", "am3"]]
+      }
+    },
+    {
+      "title": "ABDM: digital health backbone",
+      "tx": "The **Ayushman Bharat Digital Mission (ABDM)** builds interoperable digital rails: ABHA health IDs for citizens, health facility and professional registries, and consent based record sharing (the health information exchange consent manager). Its promise is portable records ending repeated investigations; its tensions are privacy, digital exclusion, and data quality, which policy questions expect candidates to balance rather than cheerlead.",
+      "say": "ABDM gives every citizen a health ID and portable records with consent. Privacy and exclusion are its honest tensions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Digital promise",
+          "points": ["ABHA ID links records lifelong", "Facilities and professionals registered", "Consent based sharing across providers"]
+        },
+        "right": {
+          "title": "Digital cautions",
+          "points": ["Privacy and data protection duties", "Offline poor risk exclusion", "Garbage records in, garbage out"]
+        }
+      }
+    },
+    {
+      "title": "Untied funds, incentives, and local flexibility",
+      "tx": "Mission financing trusts the periphery with **untied funds** (annual grants to sub centres, PHCs, committees, and Rogi Kalyan Samitis spendable on local priorities without line item permission) and ASHA performance incentives per verified task. Kayakalp awards, free drugs and diagnostics initiatives, and NQAS certification grants layer quality incentives atop. The design bet: local discretion plus audit outperforms central micro control.",
+      "say": "Untied funds trust local judgement for local gaps. Incentives pay ASHAs per task; audits guard both flexibilities.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Flexibility instrument", "Level"],
+        "rows": [
+          ["Untied fund", "Sub centre, PHC, VHSNC yearly grants"],
+          ["Rogi Kalyan Samiti funds", "Facility amenities and repairs"],
+          ["ASHA incentives", "Per task: delivery escort, immunisation sessions"],
+          ["Kayakalp and NQAS awards", "Facility quality recognition grants"]
+        ]
+      }
+    },
+    {
+      "title": "Free drugs and diagnostics initiatives",
+      "tx": "Out of pocket spending collapses only when shelves are stocked, so the **free essential drugs and free diagnostics initiatives** fund state essential drug lists (hundreds of molecules at primary level), centralised procurement corporations on the Tamil Nadu model, and guaranteed laboratory panels at each facility tier. Stock out audits and prescription audits complete the loop; a prescription leaving the campus to private pharmacies is the initiative's failure signature.",
+      "say": "Free drugs and tests attack out of pocket costs at the shelf. Stock outs sending patients outside mark failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fd1", "label": "Essential drug list by facility level" },
+          { "id": "fd2", "label": "Pooled procurement, stocked shelves" },
+          { "id": "fd3", "label": "Free dispensing, stock out audited" }
+        ],
+        "edges": [["fd1", "fd2"], ["fd2", "fd3"]]
+      }
+    },
+    {
+      "title": "Exam traps across NHM and Ayushman",
+      "tx": "Final fingerprints for **National Health Mission examination questions**: NRHM 2005, NUHM 2013, NHM umbrella thereafter; PM-JAY five lakh family floater from SECC lists, wellness centres as the supply pillar; ASHA incentive paid (not salaried); untied funds at every level; National Health Authority runs PM-JAY. Stems swapping the two Ayushman pillars or dating NUHM with NRHM are planted errors awaiting alert candidates.",
+      "say": "Rural 2005, urban 2013, insurance five lakh, wellness centres supply care. Keep pillars and dates unswapped.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dates and structures",
+          "points": ["NRHM 2005, NUHM 2013", "NHM umbrella, state PIP funding", "NHA administers PM-JAY"]
+        },
+        "right": {
+          "title": "Numbers and status",
+          "points": ["PM-JAY 5 lakh per family yearly", "ASHA incentive based activist", "Untied funds at periphery levels"]
+        }
+      }
+    }
+  ]
+}

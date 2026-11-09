@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phm-histamine",
+  "subject": "pharmacology",
+  "title": "Histamine Receptor Dynamics, Triple Response of Lewis, and Classic Antihistamines",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The Gq protein-coupled histamine receptor subtype mediating acute allergic manifestations, smooth muscle spasm, and pruritus is the **H1 receptor**. Upon agonist binding, H1 activates phospholipase C, generating inositol trisphosphate and diacylglycerol to mobilize intracellular calcium. This triggers bronchial and intestinal smooth muscle constriction, stimulates sensory nerve endings to evoke severe itching, and stimulates endothelial nitric oxide release to increase microvascular permeability and vasodilation. Selective inverse agonists of this receptor abort acute allergic rhinoconjunctivitis, urticarial eruptions, and systemic anaphylactoid manifestations.",
+      "say": "The H1 receptor mobilizes calcium via Gq signaling to drive bronchoconstriction, pruritus, and increased vascular permeability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hist",
+            "label": "Histamine binds to endothelial and smooth muscle H1 receptors"
+          },
+          {
+            "id": "gq",
+            "label": "Gq protein activation of phospholipase C-beta"
+          },
+          {
+            "id": "ip3",
+            "label": "IP3 generation and intracellular calcium mobilization"
+          },
+          {
+            "id": "resp",
+            "label": "Smooth muscle contraction, endothelial gap formation, and sensory pruritus"
+          }
+        ],
+        "edges": [
+          [
+            "hist",
+            "gq"
+          ],
+          [
+            "gq",
+            "ip3"
+          ],
+          [
+            "ip3",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Gs protein-coupled receptor subtype that regulates gastric acid secretion and myocardial chronotropy is the **H2 receptor**. Located prominently on parietal cells of the gastric mucosa, cardiac myocytes, and vascular smooth muscle, H2 stimulation activates adenylyl cyclase, raising cyclic AMP. This directly energizes the apical proton pump to secrete hydrochloric acid into the stomach lumen, while increasing cardiac contractility and producing vascular relaxation. Pharmacological antagonism with cimetidine, ranitidine, and famotidine suppresses basal and food-stimulated acid secretion in peptic ulcer disease.",
+      "say": "H2 receptors stimulate adenylate cyclase and cyclic AMP to drive gastric parietal cell acid secretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "H1 Receptor (Allergic / Vascular)",
+          "points": [
+            "Coupled to Gq protein and phospholipase C",
+            "Increases IP3, DAG, and intracellular calcium",
+            "Bronchoconstriction and sensory pruritus",
+            "Blocked by diphenhydramine and cetirizine"
+          ]
+        },
+        "right": {
+          "title": "H2 Receptor (Gastric / Cardiac)",
+          "points": [
+            "Coupled to Gs protein and adenylyl cyclase",
+            "Increases cyclic AMP and protein kinase A",
+            "Stimulates gastric acid secretion and heart rate",
+            "Blocked by famotidine and cimetidine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The classic vascular sequence elicited by intradermal histamine injection or mechanical injury to human skin is the **triple response of Lewis**. Initiated within twenty seconds by direct capillary and venular dilation producing a localized red spot, it is followed by axon-reflex arteriolar vasodilation spreading outward as a bright red irregular flare. Finally, increased venular endothelial permeability allows transudation of fluid into the dermis, generating a pale circumscribed central wheal with intense itching. This triad serves as the classic clinical demonstration of mast cell autacoid release.",
+      "say": "The triple response of Lewis consists of a red spot, axon-reflex flare, and a pale exudative wheal.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-urticaria-fig1.webp",
+        "alt": "Microscopic and cutaneous changes in acute urticaria",
+        "caption": "Histopathologic skin section showing mast cell degranulation, microvascular engorgement, and dermal edema characteristic of the urticarial wheal."
+      }
+    },
+    {
+      "tx": "The prototypical first-generation ethanolamine H1 antihistamine possessing potent sedative and central anticholinergic properties is **diphenhydramine**. Because of its high lipid solubility, diphenhydramine crosses the blood-brain barrier to block tuberomammillary histaminergic wakefulness pathways, causing marked somnolence and psychomotor impairment. Furthermore, peripheral muscarinic receptor antagonism provides antiemetic benefit in motion sickness and drug-induced parkinsonism, but causes dry mouth, urinary retention, and blurred vision. It is widely used in acute dystonic extrapyramidal reactions induced by typical antipsychotics.",
+      "say": "Diphenhydramine is a sedating ethanolamine antihistamine that crosses the brain to relieve dystonias and motion sickness.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "First-generation agent",
+          "Chemical drug class",
+          "Sedative potency rating",
+          "Anticholinergic activity"
+        ],
+        "rows": [
+          [
+            "Diphenhydramine",
+            "Ethanolamine",
+            "High (pronounced drowsiness)",
+            "Marked (useful in parkinsonism)"
+          ],
+          [
+            "Promethazine",
+            "Phenothiazine",
+            "Very high (prolonged sedation)",
+            "High (potent antiemetic)"
+          ],
+          [
+            "Chlorpheniramine",
+            "Alkylamine",
+            "Moderate (daytime tolerance)",
+            "Low to negligible"
+          ],
+          [
+            "Hydroxyzine",
+            "Piperazine",
+            "High (central anxiolysis)",
+            "Moderate (antipruritic)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A potent, long-acting phenothiazine derivative with prominent antihistaminic, anticholinergic, antiemetic, and alpha-adrenergic blocking activities is **promethazine**. Providing sedation lasting eight to twelve hours, promethazine is clinically indicated for pre-anesthetic medication, motion sickness, hyperemesis gravidarum, and severe acute urticaria. Administered intravenously, extreme caution is mandatory because perivascular extravasation or intra-arterial injection triggers severe chemical endarteritis, thrombosis, tissue necrosis, and gangrene. Furthermore, promethazine is strictly contraindicated in children under two years due to fatal respiratory depression.",
+      "say": "Promethazine provides long-lasting sedation and antiemetic control, but extravasation causes devastating tissue gangrene.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/urticaria-angioedema-fig1.webp",
+        "alt": "Pathophysiological pathways in urticaria and angioedema",
+        "caption": "Comparison of mast cell histamine-mediated and bradykinin-mediated pathways governing microvascular permeability and tissue edema."
+      }
+    },
+    {
+      "tx": "A widely prescribed alkylamine class first-generation H1 antagonist distinguished by high antihistaminic potency and moderate central sedation is **chlorpheniramine**. Exhibiting minimal autonomic anticholinergic side effects compared to ethanolamines, it remains a standard component in multi-drug formulations for allergic rhinitis, upper respiratory catarrh, and pruritic dermatoses. Chlorpheniramine provides reliable symptom relief with acceptable daytime psychomotor tolerance in adults. However, in pediatric accidental poisonings, central nervous excitation can supersede sedation, triggering hyperpyrexia, agitation, tremors, and paradoxical tonic-clonic convulsions.",
+      "say": "Chlorpheniramine is an alkylamine antihistamine with lower anticholinergic burden, but toxic overdoses provoke seizures in children.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alkylamines (Chlorpheniramine)",
+          "points": [
+            "Low molecular weight and high H1 potency",
+            "Moderate sedation with less daytime impairment",
+            "Negligible muscarinic anticholinergic side effects",
+            "Standard daytime choice in allergic rhinitis"
+          ]
+        },
+        "right": {
+          "title": "Ethanolamines (Diphenhydramine)",
+          "points": [
+            "High sedative potential and motor slowing",
+            "Marked central and peripheral anticholinergic block",
+            "Significant dry mouth, blurred vision, retention",
+            "Preferred for nighttime allergy and motion sickness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The active carboxylated metabolite of the first-generation piperazine hydroxyzine representing a transition to second-generation agents is **cetirizine**. Possessing a polar zwitterionic carboxylic acid group, cetirizine exhibits reduced penetration across the blood-brain barrier, thereby producing substantially less sedation and psychomotor slowing than older drugs. However, among second-generation antihistamines, cetirizine retains the highest incidence of mild residual drowsiness, affecting approximately ten percent of patients. Its rapid onset within thirty minutes makes it highly effective for acute allergic urticaria.",
+      "say": "Cetirizine is a zwitterionic second-generation antihistamine with rapid action and low, though non-zero, sedation rates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hydro",
+            "label": "Hydroxyzine parent piperazine compound"
+          },
+          {
+            "id": "carboxy",
+            "label": "Hepatic oxidation to carboxylic acid metabolite: Cetirizine"
+          },
+          {
+            "id": "charge",
+            "label": "Polar zwitterion formation at physiologic pH"
+          },
+          {
+            "id": "bbb",
+            "label": "Reduced blood-brain barrier transit with preserved peripheral H1 blockade"
+          }
+        ],
+        "edges": [
+          [
+            "hydro",
+            "carboxy"
+          ],
+          [
+            "carboxy",
+            "charge"
+          ],
+          [
+            "charge",
+            "bbb"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The completely non-sedating second-generation H1 antagonist that represents the active carboxylic acid metabolite of terfenadine is **fexofenadine**. Because of its zwitterionic structure and avid substrate affinity for P-glycoprotein efflux pumps, fexofenadine is completely excluded from the central nervous system, producing zero sedation even at supratherapeutic doses. Crucially, unlike its parent drug terfenadine, fexofenadine does not block cardiac delayed rectifier potassium channels (IKr) and cannot precipitate QT interval prolongation or fatal torsades de pointes when co-administered with CYP3A4 inhibitors.",
+      "say": "Fexofenadine is a non-sedating antihistamine pumped out of the brain by P-glycoprotein without causing cardiac arrhythmias.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Second-generation agent",
+          "Active metabolite relationship",
+          "Sedative potential",
+          "Cardiac QT interval prolongation risk"
+        ],
+        "rows": [
+          [
+            "Fexofenadine",
+            "Active metabolite of terfenadine",
+            "Completely absent (0%)",
+            "None (does not block IKr potassium channels)"
+          ],
+          [
+            "Loratadine",
+            "Parent drug (converted to desloratadine)",
+            "Very low (negligible)",
+            "None at recommended therapeutic dosing"
+          ],
+          [
+            "Cetirizine",
+            "Active metabolite of hydroxyzine",
+            "Low to moderate (approx 10%)",
+            "None documented"
+          ],
+          [
+            "Levocetirizine",
+            "Active R-enantiomer of cetirizine",
+            "Low (approx 5% to 8%)",
+            "None documented"
+          ]
+        ]
+      }
+    }
+  ]
+}

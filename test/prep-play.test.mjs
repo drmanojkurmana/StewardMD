@@ -38,6 +38,235 @@ test("voice: letters, words, ordinals, option text, commands; noise gives null",
   assert.equal(P.parseVoice("e", o), null, "E is not an option of four");
 });
 
+test("voice: risky letter words count only as the whole utterance or after a strong cue", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  // Whole utterances (risky homophones included).
+  for (const [t, k] of [["eight", 0], ["hey", 0], ["aye", 0], ["bee", 1], ["bea", 1], ["pee", 1], ["p", 1], ["see", 2], ["sea", 2], ["she", 2], ["cee", 2], ["si", 2], ["dee", 3], ["the", 3], ["t", 3], ["tee", 3], ["to", 1], ["too", 1], ["for", 3], ["be", 1]])
+    assert.deepEqual(P.parseVoice(t, o), { k }, t);
+  // After a strong cue.
+  for (const [t, k] of [["option see", 2], ["answer is the", 3], ["letter a", 0], ["choice for", 3]])
+    assert.deepEqual(P.parseVoice(t, o), { k }, t);
+  // Never mid-sentence: these are ordinary English, not answers.
+  for (const t of ["it is a beta blocker", "a beta blocker", "to the kidney", "for the kidney", "i think she", "i think eight", "the kidney is a thing", "see the patient first"])
+    assert.equal(P.parseVoice(t, o), null, t);
+  // "for metformin" names the option itself, never D.
+  assert.deepEqual(P.parseVoice("for metformin", o), { k: 1 });
+  assert.deepEqual(P.parseVoice("to metformin", o), { k: 1 });
+});
+
+test("voice: natural phrases, joined forms, repeats, numbers", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  for (const [t, k] of [["I'll go with B", 1], ["I think C", 2], ["my answer would be D", 3], ["definitely A", 0], ["B please", 1], ["it's option C", 2],
+    ["option number two", 1], ["A A", 0], ["B B", 1], ["optionb", 1], ["option-b", 1], ["b.", 1], ["(b)", 1], ["a)", 0], ["B?", 1],
+    ["two", 1], ["the fifth", 4], ["3", 2], ["go with bee", 1], ["say dee", 3]])
+    assert.deepEqual(P.parseVoice(t, o.concat("Sitagliptin").slice(0, t === "the fifth" ? 5 : 4)), { k }, t);
+});
+
+test("voice: ambiguity, corrections, commands inside options, fuzzy option words", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  assert.equal(P.parseVoice("A or B", o), null);
+  assert.equal(P.parseVoice("not A", o), null);
+  assert.equal(P.parseVoice("not metformin", o), null);
+  assert.deepEqual(P.parseVoice("B no wait C", o), { k: 2 });
+  assert.equal(P.parseVoice("B no wait", o), null);
+  // An option containing a command word is an answer, not a command.
+  assert.deepEqual(P.parseVoice("stop codon", ["Stop codon", "Metformin", "Glibenclamide", "Acarbose"]), { k: 0 });
+  assert.deepEqual(P.parseVoice("next", o), { cmd: "skip" });
+  assert.deepEqual(P.parseVoice("again", o), { cmd: "repeat" });
+  // Recogniser splits and near-misses on long drug names.
+  assert.deepEqual(P.parseVoice("met forming", o), { k: 1 });
+  assert.deepEqual(P.parseVoice("glibinclamide", o), { k: 2 });
+  // A tie between option texts is no answer.
+  assert.equal(P.parseVoice("metformin acarbose", o), null);
+  // Alternatives: a letter match anywhere in rank order beats the first alternative.
+  assert.equal(P.pickAlternative(["zzz words", "see", "bee"], o), "see");
+  assert.equal(P.pickAlternative(["hmm", "option d"], o), "option d");
+  assert.equal(P.pickAlternative(["hmm", "more words"], o), "hmm");
+  assert.equal(P.pickAlternative([], o), "");
+});
+
+test("voice: exact words beat fuzzy near-names; not-options, skipped cue letters, risky cue words", () => {
+  const O = ["Hypokalemia", "Hyperkalemia", "Metformin", "Not indicated"];
+  const B = ["Beta blocker", "Calcium channel blocker", "Liver", "Insulin therapy"];
+  // Exact matching wins first: hypo/hyper (and ileum/ilium) are within fuzzy distance of each other.
+  assert.deepEqual(P.parseVoice("hyperkalemia", O), { k: 1 });
+  assert.deepEqual(P.parseVoice("hypokalemia", O), { k: 0 });
+  assert.deepEqual(P.parseVoice("ileum", ["Ileum", "Ilium", "Liver", "Kidney"]), { k: 0 });
+  assert.deepEqual(P.parseVoice("ilium", ["Ileum", "Ilium", "Liver", "Kidney"]), { k: 1 });
+  // An option whose own words contain "not" wins when matched exactly; other negations still give null.
+  assert.deepEqual(P.parseVoice("not indicated", O), { k: 3 });
+  assert.equal(P.parseVoice("not metformin", O), null);
+  // Skipping after a cue ran out of words: the last skipped word is the candidate.
+  assert.deepEqual(P.parseVoice("option be", B), { k: 1 });
+  assert.deepEqual(P.parseVoice("answer be", B), { k: 1 });
+  assert.deepEqual(P.parseVoice("answer is be", B), { k: 1 });
+  // A risky word after a cue followed by more words is not a letter; the option's own words decide.
+  assert.deepEqual(P.parseVoice("answer is the liver", B), { k: 2 });
+  assert.deepEqual(P.parseVoice("the answer is to give insulin therapy", B), { k: 3 });
+  assert.deepEqual(P.parseVoice("the answer is a beta blocker", B), { k: 0 }, "from the option words, not the article");
+  assert.deepEqual(P.parseVoice("option a is correct", B), { k: 0 }, "a closing phrase keeps the risky letter");
+});
+
+test("voice: stale alternatives never answer; a partial commits only from its top-ranked text", () => {
+  const B = ["Beta blocker", "Calcium channel blocker", "Liver", "Insulin therapy"];
+  // The wrong-answer bug: this final text alone is no answer. Only bolting on a stale partial alternative
+  // ("a") made pickAlternative return "a" and record A; finals now use only their own event's alternatives.
+  assert.equal(P.parseVoice("a kidney problem I think", B), null);
+  assert.equal(P.pickAlternative(["a kidney problem I think"], B), "a kidney problem I think");
+  // A partial's lower-ranked alternative must not commit: the top text "a beta" never settles into A,
+  // even though the lower alternative "a" on its own would.
+  let v = P.partialVote(null, "a beta", B, 0);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "a beta", B, 10000);
+  assert.deepEqual(v, { seen: null, commit: null });
+});
+
+test("voice: settle timing: bare letters fast, everything else that parses slow, whole-text compare", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  const B = ["Beta blocker", "Calcium channel blocker", "Liver", "Insulin therapy"];
+  // A risky word as the whole utterance settles slowly, not at PARTIAL_MS.
+  let v = P.partialVote(null, "the", o, 0);
+  v = P.partialVote(v.seen, "the", o, P.PARTIAL_MS);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "the", o, P.SETTLE_MS);
+  assert.deepEqual(v.commit, { k: 3 });
+  // A phrase and option words settle at SETTLE_MS; a whole-utterance command commits at PARTIAL_MS.
+  for (const [t, opts, want] of [["I'll go with B", o, { k: 1 }], ["metformin", o, { k: 1 }]]) {
+    v = P.partialVote(null, t, opts, 0);
+    v = P.partialVote(v.seen, t, opts, P.SETTLE_MS - 1);
+    assert.equal(v.commit, null, t);
+    v = P.partialVote(v.seen, t, opts, P.SETTLE_MS);
+    assert.deepEqual(v.commit, want, t);
+  }
+  v = P.partialVote(null, "skip", o, 0);
+  v = P.partialVote(v.seen, "skip", o, P.PARTIAL_MS - 1);
+  assert.equal(v.commit, null, "skip waits for the fast settle");
+  v = P.partialVote(v.seen, "skip", o, P.PARTIAL_MS);
+  assert.deepEqual(v.commit, { cmd: "skip" }, "a whole-utterance command commits at PARTIAL_MS");
+  // A change restarts the clock even when the parsed letter stays the same: "a" then "a beta blocker".
+  v = P.partialVote(null, "a", B, 0);
+  v = P.partialVote(v.seen, "a beta blocker", B, 400);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "a beta blocker", B, 400 + P.SETTLE_MS - 1);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "a beta blocker", B, 400 + P.SETTLE_MS);
+  assert.deepEqual(v.commit, { k: 0 });
+  // A transcript that stops parsing clears the vote; one that never parses keeps waiting.
+  v = P.partialVote(null, "b", o, 0);
+  v = P.partialVote(v.seen, "hmm let me think", o, 100);
+  assert.deepEqual(v, { seen: null, commit: null });
+  assert.deepEqual(P.partialVote(null, "hmm", o, 0), { seen: null, commit: null });
+});
+
+test("voice: the prompt follows the real option count; partials commit only a held standalone letter", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  assert.equal(P.choicePrompt(4), "say A, B, C or D");
+  assert.equal(P.choicePrompt(5), "say A, B, C, D or E");
+  assert.equal(P.choicePrompt(2), "say A or B");
+  // "a beta blocker" must never lock in A from its first word.
+  let v = P.partialVote(null, "a", o, 0);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "a beta blocker", o, 600);
+  assert.deepEqual(v, { seen: null, commit: null });
+  // A standalone B commits only after it has stayed unchanged for PARTIAL_MS.
+  v = P.partialVote(null, "b", o, 1000);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "b", o, 1000 + P.PARTIAL_MS - 1);
+  assert.equal(v.commit, null);
+  v = P.partialVote(v.seen, "b", o, 1000 + P.PARTIAL_MS);
+  assert.deepEqual(v.commit, { k: 1 });
+  // A changed letter restarts the hold.
+  v = P.partialVote({ k: 1, at: 0 }, "c", o, 1000);
+  assert.equal(v.commit, null);
+  assert.deepEqual(v.seen, { k: 2, text: "c", at: 1000, ms: P.PARTIAL_MS });
+  assert.equal(P.standaloneLetter("i think b", o), null, "a phrase is not a standalone partial");
+  assert.equal(P.standaloneLetter("option b", o), 1);
+});
+
+test("voice: reading the option: a unique word, numbers, single letters, Greek, wrappers, ties", () => {
+  const BB = ["Beta blocker", "Calcium channel blocker", "Liver", "Insulin therapy"];
+  // A word found in only one option is enough; a shared word picks nothing.
+  assert.deepEqual(P.parseVoice("beta", BB), { k: 0 });
+  assert.deepEqual(P.parseVoice("calcium", BB), { k: 1 });
+  assert.deepEqual(P.parseVoice("channel", BB), { k: 1 });
+  assert.equal(P.parseVoice("blocker", BB), null);
+  // Numbers count, as digits or words, on both sides.
+  const DOSE = ["5 mg", "10 mg", "25%"];
+  for (const [t, k] of [["five mg", 0], ["five", 0], ["10", 1], ["ten", 1], ["twenty five", 2], ["25 percent", 2]]) assert.deepEqual(P.parseVoice(t, DOSE), { k }, t);
+  assert.equal(P.parseVoice("mg", DOSE), null, "a shared unit alone picks nothing");
+  // Single letters an option needs, and a spelled-out acronym.
+  const VIT = ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"];
+  assert.deepEqual(P.parseVoice("vitamin D", VIT), { k: 3 });
+  assert.deepEqual(P.parseVoice("vitamin b", VIT), { k: 1 });
+  assert.equal(P.parseVoice("vitamin", VIT), null);
+  assert.deepEqual(P.parseVoice("a c e inhibitor", ["ACE inhibitor", "Beta blocker", "Calcium channel blocker", "Liver"]), { k: 0 });
+  // Greek and hyphens normalise on both sides.
+  const GR = ["\u03b2 blocker", "\u03b1 blocker", "Liver", "Kidney"];
+  assert.deepEqual(P.parseVoice("beta blocker", GR), { k: 0 });
+  assert.deepEqual(P.parseVoice("alpha blocker", GR), { k: 1 });
+  assert.deepEqual(P.parseVoice("\u03b2 blocker", GR), { k: 0 });
+  assert.deepEqual(P.parseVoice("beta-blocker", BB), { k: 0 });
+  // Wrappers do not stop a match; identical or fully tied options give null; fuzzy needs one clear winner.
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  assert.deepEqual(P.parseVoice("I think beta", BB), { k: 0 });
+  assert.deepEqual(P.parseVoice("metformin is the answer", o), { k: 1 });
+  assert.deepEqual(P.parseVoice("metformin please", o), { k: 1 });
+  assert.equal(P.parseVoice("metformin", ["Metformin", "Metformin", "Liver", "Kidney"]), null, "identical options");
+  assert.equal(P.parseVoice("liver kidney", ["Liver", "Kidney", "Metformin", "Acarbose"]), null, "a full tie");
+  assert.deepEqual(P.parseVoice("metformn", o), { k: 1 }, "a fuzzy match with one clear winner");
+});
+
+test("voice: spoken letter forms: A for apple, bare example words, NATO", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"], o5 = o.concat("Sitagliptin");
+  for (const [t, opts, k] of [["A for apple", o, 0], ["B for ball", o, 1], ["C for cat", o, 2], ["D for dog", o, 3], ["E for elephant", o5, 4],
+    ["apple", o, 0], ["ball", o, 1], ["cat", o, 2], ["dog", o, 3], ["elephant", o5, 4],
+    ["alpha", o, 0], ["bravo", o, 1], ["charlie", o, 2], ["delta", o, 3], ["echo", o5, 4]])
+    assert.deepEqual(P.parseVoice(t, opts), { k }, t);
+  assert.deepEqual(P.parseVoice("A for apple", o), { k: 0 }, "never D from the for homophone");
+  // An option containing the word wins over the bare letter form.
+  assert.deepEqual(P.parseVoice("cat", ["Metformin", "Cat scratch disease", "Glibenclamide", "Acarbose"]), { k: 1 });
+  assert.deepEqual(P.parseVoice("alpha", ["Metformin", "Alpha blocker", "Glibenclamide", "Acarbose"]), { k: 1 });
+  assert.equal(P.parseVoice("I like apple", o), null, "a bare example word counts only as the whole utterance");
+});
+
+test("voice: common commands in natural phrasing; containing sentences never fire", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  for (const t of ["repeat", "repeat that", "repeat the question", "repeat please", "say again", "say that again", "read again", "read it again", "again", "one more time", "once more", "come again", "pardon", "sorry what", "can you repeat", "could you repeat that", "what was the question", "REPEAT Please"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "repeat" }, t);
+  for (const t of ["skip", "skip this", "skip it", "skip question", "skip this one", "next", "next question", "next one", "pass", "move on", "go next", "I don't know", "don't know", "no idea", "please skip this one"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "skip" }, t);
+  for (const t of ["stop", "stop voice", "stop voice mode", "stop listening", "stop reading", "voice off", "exit voice", "quit", "end voice mode"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "stop" }, t);
+  for (const t of ["slower", "go slower", "slow down", "read slower"]) assert.deepEqual(P.parseVoice(t, o), { cmd: "slower" }, t);
+  for (const t of ["faster", "go faster", "speed up", "read faster"]) assert.deepEqual(P.parseVoice(t, o), { cmd: "faster" }, t);
+  for (const t of ["the next step is surgery", "stop the drug", "next patient please", "pass the salt", "repeat the dose slowly"])
+    assert.equal(P.parseVoice(t, o), null, t);
+  assert.deepEqual(P.parseVoice("I don't know but maybe metformin", o), { k: 1 }, "the option's words win, no skip fires");
+});
+
+test("voice: option-B wording, heard text and the slow-rate watchdog", () => {
+  assert.equal(P.listenText(4), "Listening\u2026 say option A to D, or read it");
+  assert.equal(P.listenText(5), "Listening\u2026 say option A to E, or read it");
+  assert.equal(P.missSay(4), "Sorry, say option A to D, or read the option.");
+  assert.equal(P.missHeard("bee", 4), "Heard \u201Cbee\u201D. Say option A to D, or read it");
+  assert.equal(P.missHeard("", 4), "Nothing heard. Say option A to D, or read it");
+  assert.ok(P.sayWatchdogMs("hello world", 0.75) > P.sayWatchdogMs("hello world", 1), "a slow rate gets a longer watchdog");
+});
+
+test("voice: Phonon vs system choice, watchdog and option chunk joining", () => {
+  assert.equal(P.voiceChoice(null), "system");
+  assert.equal(P.voiceChoice({ available: false, state: "ready", usable: true }), "system");
+  assert.equal(P.voiceChoice({ available: true, state: "error", usable: true }), "system");
+  assert.equal(P.voiceChoice({ available: true, state: "ready", usable: false }), "system", "too slow: system from the first word");
+  assert.equal(P.voiceChoice({ available: true, state: "ready", usable: true }), "phonon");
+  assert.equal(P.voiceChoice({ available: true, state: "downloading", usable: false }), "wait");
+  assert.equal(P.voiceChoice({ available: true, state: "none", usable: false }), "wait");
+  assert.ok(P.sayWatchdogMs("short") < P.sayWatchdogMs("a much longer sentence that takes a while to read aloud"));
+  assert.ok(P.sayWatchdogMs("x".repeat(5000)) <= 60000, "watchdog is capped");
+  assert.deepEqual(P.joinOptionChunks(["Stem.", "Option B.", "Metformin."]), ["Stem.", "Option B. Metformin."]);
+  assert.deepEqual(P.joinOptionChunks(["Option A. Insulin."]), ["Option A. Insulin."]);
+});
+
 test("freezes: earned with 50 beyond the goal once a day, at most 2", () => {
   const s = { days: { 100: 79 }, goal: 30 };
   assert.equal(P.earnFreeze(s, 100, 30), false);

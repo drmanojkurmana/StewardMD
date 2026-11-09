@@ -1,0 +1,316 @@
+{
+ "v": 1,
+ "id": "cm-air-housing-noise-comfort-zone",
+ "subject": "community-medicine",
+ "module": "cm-air-housing-noise",
+ "title": "Thermal Comfort Zones, Heat Stress Syndromes, and Housing Standards",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Defining the human comfort zone",
+   "tx": "The microclimatic range within which individuals maintain normal body temperature through basal vasomotor tone without experiencing conscious thermal distress is defined as the **human thermal comfort zone**. For sedentary persons wearing standard light clothing in tropical Indian climates, this optimal comfort band corresponds to a corrected effective temperature of twenty to twenty-five degrees Celsius, differing slightly between winter and summer months due to physiological acclimatisation.",
+   "say": "The thermal comfort zone is the temperature range where people feel comfortable without sweating or shivering. In warm Indian climates, this corresponds to twenty to twenty-five degrees Celsius.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tropical Indian comfort zone",
+     "points": [
+      "Corrected ET 20 to 25 degrees C",
+      "Relative humidity 30 to 65 percent",
+      "Air velocity 0.15 to 0.5 metres/sec"
+     ]
+    },
+    "right": {
+     "title": "Temperate climate comfort zone",
+     "points": [
+      "Corrected ET 18 to 22 degrees C",
+      "Requires indoor artificial heating",
+      "Lower baseline sweat threshold"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Pathophysiology of heat stress disorders",
+   "tx": "When ambient heat load exceeds convective and evaporative cutaneous heat dissipation, progressive systemic decompensation triggers distinct **heat stress clinical syndromes**. Prolonged heavy exertion in hot, unventilated spaces leads to painful involuntary skeletal muscle contractions termed heat cramps, driven by rapid hypotonic fluid intake replacing massive sweat sodium losses without adequate dietary salt replenishment.",
+   "say": "Excessive heat causes painful muscle spasms known as heat cramps. These occur when workers sweat heavily and drink plain water without replacing lost sodium chloride salts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Underlying pathophysiology",
+     "Key clinical manifestation"
+    ],
+    "rows": [
+     [
+      "Heat cramps",
+      "Hyponatraemia from pure water rehydration",
+      "Painful spasms in calf and abdominal muscles"
+     ],
+     [
+      "Heat syncope",
+      "Peripheral cutaneous venous pooling",
+      "Postural dizziness and transient collapse"
+     ],
+     [
+      "Heat exhaustion",
+      "Severe dehydration and salt depletion",
+      "Profuse sweating, hypotension, tachycardia"
+     ],
+     [
+      "Heat stroke",
+      "Thermoregulatory failure at hypothalamic level",
+      "Core temp > 40 C, hot dry skin, delirium"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Differentiating heat exhaustion and heat stroke",
+   "tx": "Distinguishing between moderate and catastrophic hyperthermic emergencies requires rigorous **heat emergency differential diagnosis**. Heat exhaustion features preserved hypothalamic thermoregulation where patients exhibit profuse perspiration, cool clammy pale skin, subnormal or moderately elevated body temperature, and profound orthostatic weakness; conversely, heat stroke constitutes a medical emergency marked by hypothalamic thermoregulatory failure, core body temperatures exceeding forty degrees Celsius, anhidrotic hot dry skin, and encephalopathy.",
+   "say": "Heat exhaustion presents with heavy sweating and cool skin from salt and water loss. Heat stroke is fatal if untreated, marked by dry skin, high fever, and delirium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heat exhaustion",
+     "points": [
+      "Hypothalamic center intact",
+      "Profuse sweating, cool clammy skin",
+      "Core temperature under 39 degrees C",
+      "Responds to rest and saline rehydration"
+     ]
+    },
+    "right": {
+     "title": "Classic heat stroke",
+     "points": [
+      "Hypothalamic failure and collapse",
+      "Dry, red, burning hot skin (anhidrosis)",
+      "Core temperature above 40 degrees C",
+      "Requires aggressive ice-water immersion"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Emergency management of classical heat stroke",
+   "tx": "Suspected heat stroke demands immediate triage and rapid evaporative or conductive body cooling under the **emergency heat stroke protocol**. The victim must be moved to shade, stripped of clothing, sprayed with tepid water while fanning vigorously, or immersed in chilled water until rectal temperature drops safely below thirty-nine degrees Celsius; active convective cooling takes precedence over antipyretic drugs, which are entirely ineffective against non-pyrogenic environmental hyperthermia.",
+   "say": "Heat stroke treatment requires urgent physical cooling with fans, cold sprays, or ice water immersion. Standard fever medications do not work because body temperature rises from environment heat.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Triage: core temperature > 40 C + confusion"
+     },
+     {
+      "id": "t2",
+      "label": "Immediate cold water immersion or evaporative spray"
+     },
+     {
+      "id": "t3",
+      "label": "Continuous rectal temperature monitoring"
+     },
+     {
+      "id": "t4",
+      "label": "Halt cooling at 38.8 C to avoid hypothermic rebound"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Floor space criteria for overcrowding",
+   "tx": "Dwellings with excessive population density facilitate transmission of airborne droplets and skin infections, evaluated using the **overcrowding floor area standard**. Under standard public health statutes, two persons require at least one hundred and ten square feet of clear floor area, one and a half persons require ninety square feet, one person requires seventy square feet, and a half person requires fifty square feet, below which overcrowding is legally established.",
+   "say": "Overcrowding spreads respiratory infections. Public health standards require at least one hundred and ten square feet for two people, seventy square feet for one, and fifty for children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Floor space available",
+     "Maximum permitted occupants",
+     "Legal housing status"
+    ],
+    "rows": [
+     [
+      "110 square feet or more",
+      "2 persons",
+      "Acceptable living space"
+     ],
+     [
+      "90 to 109 square feet",
+      "1.5 persons",
+      "Acceptable for 1 adult + 1 child"
+     ],
+     [
+      "70 to 89 square feet",
+      "1 person",
+      "Single adult occupancy only"
+     ],
+     [
+      "50 to 69 square feet",
+      "0.5 person (child)",
+      "Restricted child occupancy only"
+     ],
+     [
+      "Under 50 square feet",
+      "0 persons",
+      "Legally overcrowded habitat"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Room allocation standards for overcrowding",
+   "tx": "In addition to area measurements, municipal building codes enforce occupant density rules based on **room count overcrowding regulations**. Standard criteria dictate that one habitable room may accommodate at most two persons, two rooms accommodate three persons, three rooms accommodate five persons, four rooms accommodate seven persons, and five rooms accommodate ten persons, with an allowance of two additional persons for every further room.",
+   "say": "Housing codes also judge overcrowding by counting rooms. One room accommodates two people, two rooms house three, three rooms house five, and four rooms accommodate seven.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Number of habitable rooms",
+     "Permitted occupants",
+     "Increment rule"
+    ],
+    "rows": [
+     [
+      "1 room",
+      "2 persons",
+      "Baseline minimum dwelling"
+     ],
+     [
+      "2 rooms",
+      "3 persons",
+      "+1 person for second room"
+     ],
+     [
+      "3 rooms",
+      "5 persons",
+      "+2 persons for third room"
+     ],
+     [
+      "4 rooms",
+      "7 persons",
+      "+2 persons for fourth room"
+     ],
+     [
+      "5 or more rooms",
+      "10 persons",
+      "+2 persons per additional room"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sex segregation and counting rules",
+   "tx": "Statutory definitions also assess bedroom distribution under the **sex separation overcrowding rule**, which establishes legal overcrowding if any two individuals over nine years of age of opposite sexes, who are not living together as husband and wife, are compelled to sleep in the same room. For all calculation formulas, infants under twelve months are ignored entirely, while children aged one to nine years count as half a person.",
+   "say": "Housing regulations require separate sleeping rooms for persons of opposite sexes over nine years of age, unless married. Infants under one year are excluded from occupancy calculations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Age accounting rules",
+     "points": [
+      "Infant < 12 months: 0 units",
+      "Child 1 to 9 years: 0.5 unit",
+      "Adult >= 10 years: 1.0 unit"
+     ]
+    },
+    "right": {
+     "title": "Privacy separation mandate",
+     "points": [
+      "Applies at age 10 years and above",
+      "Opposite sexes must have separate rooms",
+      "Prevents moral and social strain"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Principles of sanitary housing design",
+   "tx": "A healthful home environment demands adequate natural illumination, cross ventilation, dry foundations, and structural barriers against dampness according to **sanitary housing structural criteria**. Residential plots must occupy elevated ground away from breeding swamps and industrial dust sources, with buildings covering no more than one-third of rural plots or two-thirds of urban plots, leaving surrounding setback spaces for unobstructed sunlight and air circulation.",
+   "say": "Sanitary homes require elevated dry land, open setbacks, and good natural lighting. Buildings should not cover more than one-third to two-thirds of the plot to ensure ventilation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Dry elevated site with open setbacks"
+     },
+     {
+      "id": "h2",
+      "label": "Damp-proof course foundation barrier"
+     },
+     {
+      "id": "h3",
+      "label": "Window area minimum 10 percent of floor"
+     },
+     {
+      "id": "h4",
+      "label": "Separate sanitary latrine and clean water tap"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Health consequences of substandard housing",
+   "tx": "Residence in damp, dark, overcrowded tenements produces measurable physical, psychological, and social morbidity defined as **substandard housing disease burden**. Stagnant indoor air promotes rapid dissemination of Mycobacterium tuberculosis, influenza, and meningococcal meningitis, while persistent wall dampness encourages Aspergillus mould sporulation, exacerbating pediatric bronchial asthma and chronic rhinitis.",
+   "say": "Dark, unventilated, damp houses spread airborne diseases like tuberculosis and flu. Mould growth from damp walls provokes severe pediatric asthma and chronic allergies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Housing deficiency",
+     "Environmental mechanism",
+     "Associated clinical pathology"
+    ],
+    "rows": [
+     [
+      "Overcrowding and poor ventilation",
+      "Droplet aerosol persistence",
+      "Tuberculosis, measles, influenza"
+     ],
+     [
+      "Damp walls and floors",
+      "Fungal sporulation and house dust mites",
+      "Allergic rhinitis, childhood asthma"
+     ],
+     [
+      "Inadequate window illumination",
+      "Survival of vegetative bacteria",
+      "Vitamin D deficiency, depressive mood"
+     ],
+     [
+      "Absence of sanitary latrine",
+      "Faecal contamination of yard soil",
+      "Hookworm, ascariasis, viral enteritis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

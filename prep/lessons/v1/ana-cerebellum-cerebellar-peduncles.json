@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ana-cerebellum-cerebellar-peduncles",
+ "subject": "anatomy",
+ "module": "ana-cerebellum",
+ "title": "Cerebellar Peduncles and Functional Architecture",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The cerebellum occupies the posterior cranial fossa beneath the tentorium cerebelli and coordinates voluntary motor activity without initiating movement. Three paired bundles of nerve fibres known as **cerebellar peduncles** connect the cerebellum to the brainstem. The superior peduncle links to the midbrain, the massive middle peduncle connects to the pons, and the inferior peduncle attaches to the medulla oblongata.",
+   "say": "Connecting to the brainstem through three paired peduncles, the cerebellum coordinates voluntary motor movement. The superior peduncle connects to the midbrain, middle to pons, and inferior to medulla.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cerebellar-nuclei.svg",
+    "alt": "Anatomical schematic showing cerebellar peduncles, deep cerebellar nuclei, and brainstem attachments",
+    "caption": "Three paired cerebellar peduncles connecting the cerebellar hemispheres to the midbrain, pons, and medulla. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Phylogenetically and functionally, the cerebellum is divided into three distinct zones that govern balance, posture, and skilled motor planning. The primitive archicerebellum corresponds to the **flocculonodular lobe**, which receives vestibular input to control equilibrium. The paleocerebellum comprises the anterior lobe and vermis, whereas the neocerebellum forms the extensive lateral hemispheres governing skilled fine motor coordination.",
+   "say": "Functionally divided into three zones, the cerebellum includes the primitive flocculonodular lobe for balance, the anterior paleocerebellum for muscle tone, and lateral neocerebellar hemispheres for skilled movements.",
+   "vis": {
+    "kind": "table",
+    "title": "Functional Subdivisions of the Cerebellum",
+    "cols": [
+     "Zone",
+     "Anatomical Lobe",
+     "Afferent Source",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Archicerebellum",
+      "Flocculonodular lobe",
+      "Vestibular system",
+      "Equilibrium and balance"
+     ],
+     [
+      "Paleocerebellum",
+      "Anterior lobe and vermis",
+      "Spinocerebellar tracts",
+      "Muscle tone and posture"
+     ],
+     [
+      "Neocerebellum",
+      "Posterior lobe hemispheres",
+      "Pontocerebellar fibres",
+      "Voluntary motor planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cerebellar cortex possesses a uniform three-layered histological architecture containing five neuronal cell types. The middle layer is uniquely occupied by giant pyriform **Purkinje cells**, whose extensive dendritic arborizations ascend into the superficial molecular layer. Purkinje cells represent the sole efferent projection from the cerebellar cortex, releasing inhibitory gamma-aminobutyric acid onto the deep cerebellar nuclei.",
+   "say": "Purkinje cells form the middle cortical layer with large dendritic trees. They represent the sole inhibitory projection out of the cerebellar cortex onto deep nuclei.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-cerebellar-circuit.svg",
+    "alt": "Histological schematic of cerebellar cortex layers showing Purkinje cells, granule cells, and deep nuclei",
+    "caption": "Three-layered cerebellar cortical microcircuit showing Purkinje neurons providing the sole inhibitory output. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Afferent input to the cerebellar cortex arrives through two distinct axonal varieties known as climbing fibres and mossy fibres. Arising exclusively from the contralateral inferior olivary nucleus, each **climbing fibre** climbs and synapses directly onto a single Purkinje cell to generate powerful all-or-none complex spikes. Mossy fibres originate from all other sensory sources and terminate on granule cells.",
+   "say": "Climbing fibres originate solely from the inferior olive to make direct excitatory synapses on Purkinje cells. Mossy fibres originate from all other sources to synapse on granule cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Climbing Fibres",
+     "points": [
+      "Originate solely from contralateral inferior olive.",
+      "Wrap directly around single Purkinje dendrites.",
+      "Generate powerful complex action potentials."
+     ]
+    },
+    "right": {
+     "title": "Mossy Fibres",
+     "points": [
+      "Originate from spinal cord and pontine nuclei.",
+      "Terminate within cerebellar glomeruli on granule cells.",
+      "Produce high-frequency simple spikes."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Four paired deep cerebellar nuclei reside embedded within the subcortical white matter, arranged from lateral to medial. The largest and most lateral is the crumpled **dentate nucleus**, which projects via the superior peduncle to the thalamus. Medial to the dentate lie the emboliform and globose nuclei (together forming the nucleus interpositus), while the fastigial nucleus sits most medially near the midline.",
+   "say": "Four deep nuclei reside in white matter from lateral to medial: the prominent crumpled dentate nucleus, emboliform and globose nuclei, and the midline fastigial nucleus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lateral to Medial Organization of Deep Cerebellar Nuclei",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Dentate Nucleus"
+     },
+     {
+      "id": "n2",
+      "label": "Interpositus (Emboliform/Globose)"
+     },
+     {
+      "id": "n3",
+      "label": "Fastigial Nucleus"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lesions affecting the cerebellar hemispheres produce clinical motor deficits on the ipsilateral side of the body due to double crossing of descending tracts. The cardinal sign is **cerebellar ataxia**, characterized by awkward uncoordinated limb movements, an unsteady broad-based reeling gait, dysmetria (past-pointing on finger-nose testing), and dysdiadochokinesia (impaired performance of rapid alternating movements).",
+   "say": "Ipsilateral deficits follow hemispheric damage because motor pathways cross twice. Patients present with limb ataxia, unsteady broad-based gait, dysmetria, and dysdiadochokinesia.",
+   "vis": {
+    "kind": "table",
+    "title": "Cardinal Clinical Signs of Cerebellar Dysfunction",
+    "cols": [
+     "Physical Sign",
+     "Clinical Description",
+     "Diagnostic Examination"
+    ],
+    "rows": [
+     [
+      "Dysmetria",
+      "Past-pointing and overshoot",
+      "Finger to nose test"
+     ],
+     [
+      "Dysdiadochokinesia",
+      "Impaired rapid alternate motion",
+      "Rapid pronation-supination test"
+     ],
+     [
+      "Intention Tremor",
+      "Tremor crescendo toward target",
+      "Targeted reaching assessment"
+     ],
+     [
+      "Ataxic Gait",
+      "Broad-based reeling lurching walk",
+      "Tandem heel-to-toe walking"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unlike parkinsonian resting tremors that diminish during movement, cerebellar lesions produce a kinetic **intention tremor** that increases in amplitude as the limb approaches a targeted object. Patients also display scanning staccato speech with explosive dysarthria, marked muscular hypotonia with pendular knee jerks, and coarse horizontal nystagmus with the fast phase beating toward the side of the lesion.",
+   "say": "Kinetic intention tremors worsen near targets, accompanied by scanning dysarthric speech, pendular deep tendon reflexes from hypotonia, and gaze-evoked horizontal nystagmus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Evaluation of Cerebellar Limb Signs",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Targeted Reaching"
+     },
+     {
+      "id": "c2",
+      "label": "Intention Tremor Emerges"
+     },
+     {
+      "id": "c3",
+      "label": "Dysmetria at Endpoint"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mass lesions or swelling in the posterior cranial fossa carry the catastrophic risk of cerebellar tonsillar herniation through the foramen magnum. The inferomedial **cerebellar tonsils** are forced downward into the cervical spinal canal, directly compressing the vital respiratory and cardiovascular centres of the medulla oblongata, rapidly causing bradycardia, respiratory arrest, and brainstem death.",
+   "say": "Swelling in the posterior fossa risks downward tonsillar herniation through the foramen magnum. Herniated cerebellar tonsils compress medullary cardiovascular and respiratory centres.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Tonsillar Herniation",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Posterior Fossa Mass"
+     },
+     {
+      "id": "h2",
+      "label": "Downward Tonsil Herniation"
+     },
+     {
+      "id": "h3",
+      "label": "Medullary Centre Compression"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "a130a243-4000-8000-a130-a24312345678",
+  "a230a3d6-4000-8000-a230-a3d612345678",
+  "a330a569-4000-8000-a330-a56912345678"
+ ]
+}

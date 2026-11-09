@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-other-dna-viruses",
+  "subject": "microbiology",
+  "title": "Smallpox, Variola, Vaccinia, Molluscum and Monkeypox",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Smallpox** was caused by variola major and variola minor, large brick-shaped double-stranded DNA orthopoxviruses replicating in the cytoplasm. Disease began with high fever and prostration, then a centrifugal rash concentrated on face and extremities, with lesions evolving synchronously from macules to pustules and scabs. Variola major killed roughly a third of unvaccinated patients, whereas variola minor was much less lethal.",
+      "say": "Synchronous centrifugal pustules after a toxic prodrome were the smallpox signature.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Smallpox features",
+          "points": [
+            "Severe febrile prodrome before rash",
+            "Lesions in the same stage at one site",
+            "Centrifugal distribution",
+            "Pitted scars in survivors"
+          ]
+        },
+        "right": {
+          "title": "Chickenpox contrast",
+          "points": [
+            "Milder prodrome",
+            "Lesions at multiple stages together",
+            "Centripetal truncal concentration",
+            "Superficial lesions with little scarring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vaccinia virus** is the vaccine virus used to eradicate smallpox; it is related to, but distinct from, variola and cowpox. Edward Jenner's cowpox observation led to vaccination, and the WHO intensified campaign used surveillance and ring vaccination to interrupt the last chains. Smallpox was declared eradicated in 1980. Vaccinia can itself cause progressive infection in immunocompromised people and eczema vaccinatum in eczema.",
+      "say": "Vaccinia vaccinated the world; variola only survives officially in tightly held reference stocks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eradication tools",
+          "points": [
+            "Humans were the only reservoir",
+            "Clinically recognisable disease",
+            "Effective heat-stable vaccine",
+            "Surveillance and ring vaccination"
+          ]
+        },
+        "right": {
+          "title": "Vaccine complications",
+          "points": [
+            "Progressive vaccinia in cellular immune defects",
+            "Eczema vaccinatum",
+            "Myopericarditis with some modern vaccines",
+            "Accidental autoinoculation, including ocular"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Guarnieri bodies** are cytoplasmic inclusion bodies and viral factories in poxvirus-infected epithelial cells. Molluscum bodies in molluscum contagiosum are large cytoplasmic inclusions that push the nucleus aside. These morphologic findings reflect poxvirus cytoplasmic replication, an exception to the nuclear replication expected of many DNA viruses. PCR and clinical morphology now dominate diagnosis.",
+      "say": "Poxviruses build cytoplasmic factories whose inclusions were early diagnostic landmarks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Poxvirus biology",
+          "points": [
+            "Large double stranded DNA genome",
+            "Replicates in cytoplasm",
+            "Carries many transcription enzymes",
+            "Brick shaped virion with complex structure"
+          ]
+        },
+        "right": {
+          "title": "Inclusion clues",
+          "points": [
+            "Guarnieri bodies in variola and vaccinia lesions",
+            "Molluscum bodies in epidermal cells",
+            "Inclusions are supportive, not species proof",
+            "PCR is preferred where available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Molluscum contagiosum** causes pearly dome-shaped papules with central umbilication, usually in children, swimmers and people with eczema; genital lesions in adults may be sexually transmitted. Immunocompromised patients can develop giant or widespread lesions. Diagnosis is clinical. Lesions often resolve spontaneously, but therapy may be used for symptoms, spread, immune status or patient preference.",
+      "say": "Umbilicted pearly papules are molluscum until an immunocompromised presentation widens the differential.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typical lesions",
+          "points": [
+            "Flesh coloured dome papules",
+            "Central dell or umbilication",
+            "Koebner-like spread by scratching",
+            "Eczema around lesions is common"
+          ]
+        },
+        "right": {
+          "title": "Escalate when",
+          "points": [
+            "Very large or numerous lesions",
+            "Eyelid lesions with conjunctivitis",
+            "New widespread disease in suspected immune suppression",
+            "Genital lesions need STI assessment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Monkeypox**, now usually called mpox, is an orthopoxvirus zoonosis with clades differing in severity and epidemiology. The global clade IIb outbreak from 2022 spread mainly through close skin and mucosal contact in sexual networks, often with few lesions concentrated genitally, perianally or orally. It should not be assumed to be exclusively sexually transmitted; close contact is the key exposure mechanism.",
+      "say": "Mpox spreads by close lesion contact, and lesion distribution may be local rather than classic centrifugal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contemporary presentation",
+          "points": [
+            "One or few painful lesions may dominate",
+            "Rectal pain and proctitis",
+            "Fever and lymphadenopathy variable",
+            "Lymphadenopathy historically helped distinguish from smallpox"
+          ]
+        },
+        "right": {
+          "title": "Sampling",
+          "points": [
+            "Swab lesion roof, fluid or crust vigorously",
+            "PCR from lesion material is preferred",
+            "Blood PCR is less sensitive",
+            "Use infection precautions for lesion drainage and laundry"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Suspected **orthopoxvirus** infection requires immediate infection-control and public-health coordination because smallpox remains a high-consequence differential. Lesion PCR, clade testing and exposure history distinguish mpox; tecovirimat use is specialist and indication-specific. Vaccines based on modified vaccinia Ankara can be used pre- or post-exposure in risk groups. Ordinary clinicians should not attempt viral culture of suspected variola material.",
+      "say": "For a possible high-consequence poxvirus, isolate, notify and use reference PCR pathways.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "recognise",
+            "label": "Compatible pox lesions and exposure history"
+          },
+          {
+            "id": "isolate",
+            "label": "Cover lesions and institute precautions"
+          },
+          {
+            "id": "notify",
+            "label": "Notify infection control and public health"
+          },
+          {
+            "id": "pcr",
+            "label": "Reference lesion PCR and clade testing"
+          }
+        ],
+        "edges": [
+          [
+            "recognise",
+            "isolate"
+          ],
+          [
+            "isolate",
+            "notify"
+          ],
+          [
+            "notify",
+            "pcr"
+          ]
+        ]
+      }
+    }
+  ]
+}

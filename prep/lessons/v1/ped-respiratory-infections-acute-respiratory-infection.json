@@ -1,0 +1,218 @@
+{
+ "key": "ped-respiratory-infections-acute-respiratory-infection",
+ "v": 1,
+ "module": "ped-respiratory-infections",
+ "subject": "paediatrics",
+ "title": "Acute Respiratory Infections, IMNCI Pneumonia Triage and Bronchiolitis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Standardized community triage algorithms classify acute respiratory infections based on objective respiratory signs. Under World Health Organization and IMNCI guidelines, clinical assessment of **acute respiratory infection** begins by counting the child's respiratory rate for one full minute while the child is calm and quiet. Tachypnoea and chest indrawing serve as sensitive, validated markers of lower respiratory tract infection, identifying children requiring antibiotic therapy.",
+   "say": "Under IMNCI guidelines, assess respiratory infections by counting the respiratory rate for a full minute while the child is quiet. Fast breathing and chest indrawing identify pneumonia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bronchiolitis-fig1.webp",
+    "alt": "Infant with respiratory distress showing tachypnoea, subcostal retractions, and nasal flaring.",
+    "caption": "Signs of lower respiratory distress in an infant illustrating chest indrawing and nasal flaring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Age-stratified physiological thresholds define abnormal breathing rates across pediatric developmental stages. Standard **fast breathing cutoffs** for pneumonia triage specify sixty breaths per minute or more for infants under two months of age, fifty breaths per minute or more for infants aged two to eleven months, and forty breaths per minute or more for young children aged twelve to fifty-nine months. Breathing rates meeting these cut-offs warrant diagnosis and treatment for pneumonia.",
+   "say": "Fast breathing cutoffs are sixty breaths per minute under two months, fifty breaths from two to eleven months, and forty breaths from twelve to fifty-nine months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Age Bracket",
+     "Normal Resting Respiratory Rate",
+     "Fast Breathing (Tachypnoea) Threshold",
+     "IMNCI Clinical Action"
+    ],
+    "rows": [
+     [
+      "Under 2 months",
+      "30 to 50 breaths per minute",
+      "60 breaths per minute or more",
+      "Treat as Possible Serious Bacterial Infection"
+     ],
+     [
+      "2 to 11 months",
+      "25 to 40 breaths per minute",
+      "50 breaths per minute or more",
+      "Classify as Pneumonia; start oral amoxicillin"
+     ],
+     [
+      "12 to 59 months",
+      "20 to 30 breaths per minute",
+      "40 breaths per minute or more",
+      "Classify as Pneumonia; start oral amoxicillin"
+     ],
+     [
+      "5 years and older",
+      "15 to 20 breaths per minute",
+      "30 breaths per minute or more",
+      "Clinical assessment for consolidation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dynamic inward movement of the bony chest wall signifies substantial pulmonary compliance reduction. The physical finding of **subcostal chest indrawing**, defined as inward retraction of the lower ribs and epigastrium during inspiration, indicates severe work of breathing and lung stiffness. Under updated IMNCI guidelines, chest indrawing in children aged two to fifty-nine months without general danger signs is classified as pneumonia, treatable with oral amoxicillin.",
+   "say": "Subcostal chest indrawing occurs when the lower chest wall moves inward on inspiration. It reflects reduced lung compliance and increased work of breathing in pneumonia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Lower Chest Indrawing",
+     "points": [
+      "Lower bony chest wall moves inward during inspiration",
+      "Persistent when child is calm and not feeding",
+      "Indicates reduced pulmonary compliance in pneumonia"
+     ]
+    },
+    "right": {
+     "title": "Intercostal Sucking (Not Indrawing)",
+     "points": [
+      "Retraction of soft intercostal spaces only",
+      "Common in mild upper airway congestion",
+      "Does not meet definition of true chest indrawing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recognizing system-wide danger markers identifies children requiring urgent emergency hospitalization. Under IMNCI triage, the presence of **general danger signs** mandates immediate classification as severe pneumonia: inability to drink or breastfeed, vomiting everything, convulsions during the present illness, lethargy, or unconsciousness. Other critical emergency signs include central cyanosis, oxygen saturation below ninety percent, or stridor in a calm child, requiring parenteral antibiotics and oxygen.",
+   "say": "General danger signs include inability to feed, vomiting everything, convulsions, lethargy, or unconsciousness. Any danger sign with pneumonia requires immediate hospital admission and IV antibiotics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IMNCI Clinical Category",
+     "Defining Physical Signs",
+     "Recommended Antimicrobial Therapy",
+     "Care Setting"
+    ],
+    "rows": [
+     [
+      "Severe Pneumonia",
+      "Chest indrawing or fast breathing PLUS any danger sign",
+      "IV Ampicillin (50 mg/kg) + Gentamicin (7.5 mg/kg)",
+      "Immediate inpatient hospital admission"
+     ],
+     [
+      "Pneumonia",
+      "Fast breathing OR chest indrawing, NO danger signs",
+      "Oral Amoxicillin (40 mg/kg/dose BD for 5 days)",
+      "Outpatient home care with follow-up"
+     ],
+     [
+      "No Pneumonia (Cough/Cold)",
+      "No fast breathing, no chest indrawing, no danger signs",
+      "Zero antibiotics; home supportive care",
+      "Home care; counsel on danger signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-dose oral aminopenicillins achieve optimal pulmonary tissue penetration against Streptococcus pneumoniae. First-line outpatient treatment for non-severe pneumonia utilizes **oral amoxicillin dosing** at forty to forty-five milligrams per kilogram per dose twice daily (eighty to ninety mg/kg/day total) for five completed days. This high-dose regimen overcomes intermediate penicillin resistance in pneumococci while maintaining excellent tolerability and low rates of adverse gastrointestinal effects.",
+   "say": "High-dose oral amoxicillin at forty milligrams per kilogram twice daily for five days is first-line treatment for pneumonia, overcoming intermediate pneumococcal resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line Outpatient Therapy",
+     "points": [
+      "Oral amoxicillin 80 to 90 mg/kg/day divided twice daily",
+      "Continue for 5 completed days",
+      "Review in 48 hours for clinical improvement",
+      "Safe, effective, well-tolerated dispersible tablet"
+     ]
+    },
+    "right": {
+     "title": "Treatment Failure at 48 Hours",
+     "points": [
+      "Worsening tachypnoea or emergence of danger signs",
+      "Switch to second-line oral co-amoxiclav",
+      "Or refer for parenteral ceftriaxone or ampicillin",
+      "Investigate for empyema or viral bronchiolitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Viral bronchiolitis causes extensive inflammatory obstruction of small peripheral airways in infants. The most prevalent cause of acute lower respiratory infection in infants under two years is **Respiratory Syncytial Virus bronchiolitis**, peaking between two and six months of age. RSV proliferates within ciliated bronchiolar epithelium, causing necrosis, peribronchiolar lymphocytic infiltration, and mucus plugging, resulting in widespread hyperinflation, air trapping, and patchy atelectasis.",
+   "say": "RSV bronchiolitis strikes infants under two years, peaking at two to six months. Necrosis of bronchiolar cells and mucus plugging cause air trapping, wheezing, and fine crackles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cap-fig1.webp",
+    "alt": "Pathology of viral bronchiolitis showing airway epithelial necrosis and alveolar exudate.",
+    "caption": "Bronchiolar epithelial plugging, hyperinflation, and patchy subsegmental atelectasis in acute bronchiolitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physical examination in acute bronchiolitis demonstrates generalized hyperinflation and mixed adventitious sounds. Following a two-day viral coryzal prodrome, the infant develops tachypnoea, intercostal and subcostal retractions, prominent **expiratory wheezing and fine crackles**, and an increased anterior-posterior chest diameter. Hyperinflation displaces the liver and spleen downward, while chest radiographs reveal flattened diaphragms, hyperlucent lung fields, and prominent peribronchial cuffing.",
+   "say": "Bronchiolitis features tachypnoea, chest retractions, expiratory wheezing, and fine crackles. Chest X-rays show flattened diaphragms and hyperlucent overinflated lung fields.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Signs of Bronchiolitis",
+     "points": [
+      "Tachypnoea and prominent intercostal retractions",
+      "Bilateral expiratory wheezing and fine inspiratory rales",
+      "Depressed liver edge secondary to hyperinflation",
+      "Chest X-ray shows flattened diaphragmatic domes"
+     ]
+    },
+    "right": {
+     "title": "Evidence-Based Supportive Care",
+     "points": [
+      "Humidified supplemental oxygen to maintain SpO2 >=92%",
+      "Gentle nasal saline drops and suctioning",
+      "Adequate enteral hydration via small frequent feeds",
+      "Avoid routine bronchodilators, steroids, and antibiotics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Monoclonal antibody passive prophylaxis protects vulnerable preterm infants against severe viral disease. High-risk infants, including those born before thirty-five weeks gestation or with haemodynamically significant congenital heart disease, receive seasonal **palivizumab passive prophylaxis**, a humanized monoclonal antibody directed against the RSV fusion protein. Monthly intramuscular injections during the local epidemic season neutralize viral entry and decrease hospitalization rates by fifty percent.",
+   "say": "Palivizumab monoclonal antibody against RSV fusion protein protects high-risk preterm infants. Monthly injections during the viral season reduce hospital admissions by half.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention Category",
+     "Specific Medical Treatment",
+     "Evidence-Based Recommendation",
+     "Clinical Outcome Rationale"
+    ],
+    "rows": [
+     [
+      "Oxygen therapy",
+      "Humidified nasal cannula oxygen",
+      "Recommended for SpO2 <92%",
+      "Corrects ventilation-perfusion mismatch"
+     ],
+     [
+      "Airway suctioning",
+      "Gentle nasal bulb/catheter aspiration",
+      "Recommended prior to feeding",
+      "Relieves obligate nasal airway resistance"
+     ],
+     [
+      "Bronchodilators & steroids",
+      "Salbutamol, nebulized budesonide",
+      "Not routinely recommended",
+      "Ineffective for mechanical bronchiolar plugs"
+     ],
+     [
+      "Passive immunoprophylaxis",
+      "Palivizumab (15 mg/kg IM monthly)",
+      "Indicated in high-risk preterms",
+      "Halves RSV ICU hospital admissions"
+     ]
+    ]
+   }
+  }
+ ]
+}

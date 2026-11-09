@@ -1115,13 +1115,14 @@
     wardsynq: function () { if (window.WARD && WARD.open) WARD.open(); else toast("Inpatient ward loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
-    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
-    ophthalmos: function () { if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
+    atlas: function () { modHold("ATLAS"); if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
+    ophthalmos: function () { modHold("OPHTHALMOS"); if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
     // Tokós stays shut when its kill switch is set, whatever the entry (tile, stewardmd://tokos, MaiK tool chip):
     // a quiet no-op, like SURGX/CliniX/PGLOG, decided by the same eligible() that hides the tile.
     tokos: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "tokos"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("TOKOS");
       if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
     },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): same quiet no-op when its flag is off.
@@ -1131,12 +1132,14 @@
       if (!t || !homeToolEligible(t)) return;
       opts = opts && typeof opts === "object" ? opts : undefined;
       if (opts && window.PREP && PREP.isOpen && PREP.isOpen() && PREP.close) PREP.close();
+      modHold("PREP");
       if (window.PREP && PREP.open) PREP.open(opts); else toast("PrepNucleus loading…");
     },
     // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
     narke: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("NARKE");
       if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anaesthetica loading…");
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
@@ -1144,6 +1147,7 @@
     kardia: function (opts) {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "kardia"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("KARDIA");
       if (window.KARDIA && KARDIA.open) KARDIA.open(opts); else toast("Kardia loading…");
     },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
@@ -1254,7 +1258,7 @@
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
-    paywall: function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("home-banner"); return; } } catch (e) {} toast("Plans loading\u2026"); },
+    aboutfacts: function () { if (window.openAbout) openAbout("facts"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { try { window.SMD_dictateMaik(); } catch (e) { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); } },
@@ -1262,14 +1266,14 @@
       // FundX is gated by the Experimental Access framework (one code = one device, server-verified).
       // Debug builds + a valid activation open it directly; otherwise the access gate is shown. If the
       // framework failed to load, fall back to opening directly so the tile is never bricked.
-      function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
+      function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} modHold("FUNDX"); if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("fundx", openFundx); return; } } catch (e) {}
       openFundx();
     },
     kardiox: function () {
       // KardiQ X AI — opened from its Clinical-Tools tile (the big home hero was replaced by this tile).
       // Gated by Experimental Access like FundX; opens directly if the framework isn't loaded.
-      function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
+      function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} modHold("KARDIOX"); if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
       openKardiox();
     },
@@ -1282,7 +1286,7 @@
     thorex: function () {
       // ThoreX AI — opened from its Clinical-Tools tile, sibling of KardiQ X above.
       // Gated by Experimental Access like FundX/KardiQ X; opens directly if the framework isn't loaded.
-      function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
+      function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} modHold("THOREX"); if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
     },
@@ -1291,7 +1295,7 @@
       // SKNX.open() by SKNX.isOn() (flag AND (access code OR early-access plan)); when the flag is on
       // but access is missing, open() shows the SMD_XACCESS code gate itself. The tile goes through
       // SMD_XACCESS.gate first, like the other three, so the code gate precedes the beta notice.
-      function openSknx() { if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…"); }
+      function openSknx() { modHold("SKNX"); if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("sknx", openSknx); return; } } catch (e) {}
       openSknx();
     },
@@ -2289,6 +2293,14 @@
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Which antibiotic to start", defOn: false },
     { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Your local resistance", defOn: false },
   ];
+  // Big learning and imaging modules open behind the hearts loader so their first load is hidden. Bedside tools stay instant.
+  function modHold(name) {
+    try {
+      var m = window[name];
+      if (!window.SMD_LOADER || !m || !m.open || (m.isOpen && m.isOpen())) return;
+      SMD_LOADER.hold(2400, function () { var t = window[name]; if (t && t.close) t.close(); }, function () { var t = window[name]; return !!(t && t.isOpen && t.isOpen()); });
+    } catch (e) {}
+  }
   function homeToolByAct(a) {
     if (a === "connect") a = "agentconnect";
     for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i];
@@ -2832,7 +2844,7 @@
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + svg("hrfCapsule", "hrf-ic") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + svg("hrfCalc", "hrf-ic") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + (pro ? '' : ' data-act="paywall" role="button" tabindex="0" aria-label="StewardMD Pro — see plans"') + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + ' data-act="aboutfacts" role="button" tabindex="0" aria-label="StewardMD facts and milestones"' + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
         '<div class="rnav-qrow hrf-qrow">' +
           '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + svg("hrfVirus", "hrf-ic") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("hrfFlask", "hrf-ic") + '<span>Antibiogram</span></button>' +
@@ -2851,7 +2863,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
         '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + svg("hrfHome", "hrf-tab-ic") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + svg("hrfFolder", "hrf-tab-ic") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("tile", { size: 43 }) : svg("hrfSparkle", "hrf-sparkle")) + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + '<img class="hrf-maik-mark" src="/assets/maik-mark-white.webp" width="46" height="46" alt="" draggable="false">' + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
       '</nav>' +
@@ -2995,12 +3007,11 @@
       try { hydrateRnav(); } catch (e) {}
       // The banner is a section with role="button" (its content is not phrasing content),
       // so Enter/Space are wired here; a native button would swallow the block markup.
-      try { var _bn = root.querySelector("#hrfBanner"); if (_bn) _bn.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && _bn.getAttribute("data-act") === "paywall") { e.preventDefault(); ACT.paywall(); } }); } catch (e) {}
+      try { var _bn = root.querySelector("#hrfBanner"); if (_bn) _bn.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && _bn.getAttribute("data-act") === "aboutfacts") { e.preventDefault(); ACT.aboutfacts(); } }); } catch (e) {}
       // Tier can land after first paint: keep the Pro chip and the banner's tap honest.
       try { window.addEventListener("smd:tier", function () {
-        var pro = isProV4(), chip = document.getElementById("hrfProChip"), bn = document.getElementById("hrfBanner");
+        var pro = isProV4(), chip = document.getElementById("hrfProChip");
         if (chip) chip.hidden = !pro;
-        if (bn) { if (pro) { bn.removeAttribute("data-act"); bn.removeAttribute("role"); bn.removeAttribute("tabindex"); bn.removeAttribute("aria-label"); } else { bn.setAttribute("data-act", "paywall"); bn.setAttribute("role", "button"); bn.setAttribute("tabindex", "0"); bn.setAttribute("aria-label", "StewardMD Pro — see plans"); } }
       }); } catch (e) {}
     } else if (homeV4On()) {
       root.classList.add("hv4"); root.innerHTML = homeV4Markup();
@@ -4866,34 +4877,20 @@
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
   }
   function aboutFactsHTML() {
-    // BUG-023: curated, non-duplicative verified facts + a dedicated chronological milestones
-    // timeline. Figures are COUNTED from the repository, not estimated — if one stops being
-    // true, change the code or change the number.
-    return '<span class="smd-ab-badge">By the numbers</span>' +
-      '<ul class="smd-facts">' +
-      '<li><span class="fn">4,804</span> searchable conditions: 140 with full diagnostic reasoning plus 4,664 reference conditions, each with a reference panel and condition-specific management.</li>' +
-      '<li><span class="fn">1,466+</span> drug monographs in structured &quot;gold&quot; format.</li>' +
-      '<li><span class="fn">405</span> bedside clinical calculators at MDCalc scale, every formula executed &amp; checked.</li>' +
-      '<li><span class="fn">124</span> cancer protocols across <span class="fn">65</span> OncoTree guidelines, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
-      '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
-      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
-      '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
-      '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources: ICMR AMRSN 2024 national and GIMSR hospital resistance rates.</li>' +
-      '<li><span class="fn">3</span> native apps — iPhone, Android and Apple Watch — from a single clinical engine, plus an installable web app.</li>' +
-      '<li><span class="fn">100%</span> on-device core engines: the full engine runs locally and works with no signal at the bedside.</li>' +
-      '<li><span class="fn">0</span> doses hallucinated. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
-      '</ul>' +
-      '<div class="smd-modal-section" style="margin-top:18px">Verified Milestones</div>' +
-      '<ul class="smd-facts">' +
-      '<li><span class="fn">Jul 2026</span> Genesis of StewardMD and the Stanford antimicrobial stewardship framework.</li>' +
-      '<li><span class="fn">Aug 2026</span> Knowledge base expansion (internal medicine and paediatrics); Apple Watch Code Blue assistant; iOS &amp; Android native apps.</li>' +
-      '<li><span class="fn">Early Sep 2026</span> KardioX ECG AI and FundX retinal preview; 400+ MDCalc clinical calculators; doctor NMC verification gate.</li>' +
-      '<li><span class="fn">Mid Sep 2026</span> Comprehensive OncoTree guidelines &amp; 124 chemo protocols; WardSynQ inpatient digital twin.</li>' +
-      '<li><span class="fn">Sep 2026</span> Universal Search, Scribe 1.8 ambient multilingual documentation, and EMR integration.</li>' +
-      '</ul>' +
-      '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
-      '<p>StewardMD is one of the most content-dense clinical decision tools ever built — now shipping as native iPhone, Android and Apple Watch apps as well as an installable web app, all driven by one hand-authored engine. Every syndrome, drug, calculator and reasoning rule runs on-device, so it works fully offline at the bedside. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
-      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD, Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
+    // Numbers are counted from the repository and CI (2026-11-09). The two headline claims are the owner's own wording.
+    var stats = [["1.3M+", "lines of code"], ["15,390", "automated tests"], ["8,287", "commits since June 2026"], ["4,804", "searchable conditions, 140 with full diagnostic reasoning"], ["1,466+", "drug monographs in gold format"], ["2,100+", "exam lessons in PrepNucleus"], ["405", "bedside calculators, every formula executed and checked"], ["124", "cancer protocols across 65 OncoTree guidelines"], ["51", "infective syndromes with full stewardship rationale"], ["47 × 23", "antibiotics by organisms in the coverage grid"], ["15", "insulins across 7 classes, arithmetic shown line by line"], ["13", "dedicated electrolyte analysis engines"], ["5", "platforms from one engine: iPhone, iPad, Android, Apple Watch and web"], ["100%", "core engines run on the device, with no signal needed"], ["0", "doses hallucinated: validated code computes every number"]];
+    var miles = [["Jun 2026", "First line of code."], ["Jul 2026", "Stanford antimicrobial stewardship framework becomes the clinical core."], ["Aug 2026", "Knowledge base expands across internal medicine and paediatrics. Apple Watch Code Blue assistant. iOS and Android native apps."], ["Early Sep 2026", "KardioX ECG AI, FundX retinal preview, 400+ calculators and NMC doctor verification."], ["Mid Sep 2026", "OncoTree guidelines with 124 chemotherapy protocols. WardSynQ inpatient digital twin."], ["Late Sep 2026", "Universal Search, Scribe ambient multilingual documentation, EMR integration and Tokós for obstetrics and gynaecology."], ["Oct 2026", "MaiK runs on the phone itself for everyone. Ophthalmós, Narkē anaesthesia and Kardia echo join the specialty library."], ["Nov 2026", "PrepNucleus passes 2,100 lessons, and StewardMD crosses 8,000 commits and 15,000 automated tests."]];
+    var extra = [["Built by a practising physician", "An Internal Medicine doctor designs and engineers it, case by case at the bedside."], ["AI fills the form, code does the maths", "Every dose comes from validated logic a clinician can read, or it is not shown."], ["Every antibiotic choice is explainable", "The reasoning behind each recommendation is on screen, not inside a black box."], ["Works when the signal does not", "The clinical engine and MaiK keep running with no internet on the ward."]];
+    return '<div class="smd-fx-hero">' +
+        '<div class="smd-fx-claim"><b>India\u2019s first offline medical AI</b><span>MaiK answers on the phone itself, with no internet.</span></div>' +
+        '<div class="smd-fx-claim"><b>India\u2019s most coded medical app</b><span>More than 1.3 million lines, written and tested in under five months.</span></div>' +
+      '</div>' +
+      '<ul class="smd-fx-list">' + extra.map(function (x) { return '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }).join("") + '</ul>' +
+      '<h3 class="smd-fx-h">By the numbers</h3>' +
+      '<dl class="smd-fx-stats">' + stats.map(function (x) { return '<div><dt>' + x[0] + '</dt><dd>' + x[1] + '</dd></div>'; }).join("") + '</dl>' +
+      '<h3 class="smd-fx-h">Milestones</h3>' +
+      '<ol class="smd-fx-time">' + miles.map(function (x) { return '<li><time>' + x[0] + '</time><p>' + x[1] + '</p></li>'; }).join("") + '</ol>' +
+      '<p class="smd-fx-sign">Engineered and curated by Dr. Manoj Kumar Kurmana, MD, Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
   }
   function enhanceAbout() {
     var modal = document.getElementById("aboutModal"); if (!modal) return;
@@ -4902,9 +4899,9 @@
     while (body.firstChild) aboutPanel.appendChild(body.firstChild); // move existing About content into its panel
     var nav = document.createElement("div"); nav.className = "smd-ab-tabs";
     nav.innerHTML = '<button class="smd-ab-tab on" data-t="about" type="button">About</button>' +
-      '<button class="smd-ab-tab" data-t="ack" type="button">Acknowledgements</button>' +
-      '<button class="smd-ab-tab" data-t="version" type="button">Version history</button>' +
-      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>';
+      '<button class="smd-ab-tab" data-t="ack" type="button">Credits</button>' +
+      '<button class="smd-ab-tab" data-t="version" type="button">Versions</button>' +
+      '<button class="smd-ab-tab" data-t="facts" type="button">Facts</button>';
     var vPanel = document.createElement("div"); vPanel.className = "smd-ab-panel"; vPanel.setAttribute("data-tab", "version"); vPanel.style.display = "none"; vPanel.innerHTML = aboutVersionHTML();
     var fPanel = document.createElement("div"); fPanel.className = "smd-ab-panel"; fPanel.setAttribute("data-tab", "facts"); fPanel.style.display = "none"; fPanel.innerHTML = aboutFactsHTML();
     var aPanel = document.createElement("div"); aPanel.className = "smd-ab-panel"; aPanel.setAttribute("data-tab", "ack"); aPanel.style.display = "none"; aPanel.innerHTML = ackHTML();
@@ -10387,7 +10384,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     { id: "contrast", name: "High-Contrast", accent: "#00463d", paper: "#ffffff" }
   ];
   var FONTS = [
-    { id: "plex", name: "IBM Plex Sans", web: null },
+    { id: "plex", name: "Default", web: null },
     { id: "system", name: "System", web: null },
     { id: "arial", name: "Arial", web: null },
     { id: "serif", name: "Serif", web: null },

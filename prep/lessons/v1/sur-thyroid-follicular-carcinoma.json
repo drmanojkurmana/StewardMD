@@ -1,0 +1,300 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Follicular Thyroid Carcinoma, Capsular Invasion, and Vascular Spread",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Accounting for ten to fifteen percent of all thyroid malignancies, **follicular thyroid carcinoma** is the second most common epithelial thyroid cancer. It exhibits an increased relative incidence in geographical goitre belts where severe dietary iodine deficiency is endemic. Follicular carcinoma occurs in an older patient cohort than papillary cancer, typically presenting between forty and sixty years of age as a slow-growing, painless, solitary thyroid nodule with smooth rubbery contours.",
+   "say": "Follicular thyroid carcinoma is the second most common thyroid cancer, seen frequently in iodine-deficient goiter belts among adults in their forties and fifties.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Follicular Carcinoma",
+     "points": [
+      "Endemic in dietary iodine-deficient geographical belts",
+      "Affects older adult demographic between 40 and 60 years",
+      "Cytology cannot distinguish cancer from benign adenoma",
+      "Dominant route of dissemination is hematogenous (vascular)"
+     ]
+    },
+    "right": {
+     "title": "Papillary Carcinoma",
+     "points": [
+      "Prevalent in iodine-sufficient regions and irradiated necks",
+      "Affects younger female demographic between 20 and 40 years",
+      "Easily diagnosed on cytology by pathognomonic nuclei",
+      "Dominant route of dissemination is lymphatic to neck nodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The central diagnostic dilemma in thyroid surgery is that fine-needle aspiration cytology cannot distinguish a benign follicular adenoma from a follicular thyroid carcinoma. Both lesions demonstrate identical cytological aspirates characterized by crowded microfollicles and uniform follicular epithelial cells devoid of papillary nuclear features. Establishing a definitive diagnosis of malignancy mandates histological identification of full-thickness **capsular invasion** or angioinvasion on formal histological paraffin sections.",
+   "say": "Needle aspiration cannot distinguish follicular adenoma from carcinoma. Cancer is defined strictly by demonstrating capsular invasion or blood vessel infiltration on formal histological sectioning.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fna",
+      "label": "FNAC Shows Crowded Microfollicular Pattern"
+     },
+     {
+      "id": "bethesda4",
+      "label": "Reported as Bethesda IV (Follicular Neoplasm)"
+     },
+     {
+      "id": "lobectomy",
+      "label": "Perform Diagnostic Hemithyroidectomy"
+     },
+     {
+      "id": "paraffin",
+      "label": "Serial Paraffin Sectioning of Fibrous Capsule"
+     },
+     {
+      "id": "hallmark",
+      "label": "Look for Transcapsular Penetration or Angioinvasion"
+     }
+    ],
+    "edges": [
+     [
+      "fna",
+      "bethesda4"
+     ],
+     [
+      "bethesda4",
+      "lobectomy"
+     ],
+     [
+      "lobectomy",
+      "paraffin"
+     ],
+     [
+      "paraffin",
+      "hallmark"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histological proof of capsular invasion requires demonstrating malignant follicular cells penetrating completely through the entire thickness of the fibrous tumor capsule into surrounding normal thyroid parenchyma. Partial capsular penetration or mushroom-shaped outpouchings that do not completely breach the outer capsule boundary are insufficient to diagnose malignancy. Pathologists examine multiple perpendicular sections across the entire tumor circumference, as **transcapsular penetration** may be focal and confined to a single microscopic field.",
+   "say": "Capsular invasion requires tumor cells to penetrate completely through the entire thickness of the capsule into normal thyroid tissue. Incomplete invasion is considered benign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Full-Thickness Capsular Invasion",
+     "points": [
+      "Tumor cells penetrate completely through the fibrous capsule",
+      "Malignant cells infiltrate adjacent normal thyroid parenchyma",
+      "Defines true minimally invasive follicular carcinoma",
+      "Carries five percent risk of late distant metastasis"
+     ]
+    },
+    "right": {
+     "title": "Incomplete Capsular Penetration",
+     "points": [
+      "Tumor cells indent or penetrate partially into the capsule",
+      "No communication with extratumoral thyroid parenchyma",
+      "Classified strictly as a benign follicular adenoma",
+      "Completely cured by diagnostic lobectomy alone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing benign follicular adenoma from follicular thyroid carcinoma requires histological proof of capsular or vascular invasion. Complete **transcapsular penetration invasion** demonstrates malignant follicular epithelial cells traversing the entire thickness of the fibrous capsule into the extratumoral thyroid parenchyma. Because this invasion can be focal, extensive histological sampling of the tumor-capsule interface is essential.",
+   "say": "Transcapsular penetration invasion distinguishes follicular thyroid carcinoma from benign adenoma by demonstrating tumor cells breaching the full thickness of the fibrous capsule.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-thyroid-lymphoma-niftp-rair-gen1.webp",
+    "alt": "Paired histology comparing NIFTP with intact capsule against carcinoma with capsular and vascular invasion.",
+    "caption": "Paired histology comparing NIFTP with intact capsule against carcinoma with capsular and vascular invasion Histology contrasting NIFTP without invasion and invasive follicular carcinoma. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Equally critical is the identification of **vascular invasion**, also known as angioinvasion. True angioinvasion is diagnosed only when tumor cells penetrate through a vessel wall located within or immediately outside the fibrous capsule, accompanied by tumor cells adherent to the endothelium or enveloped in an organized fibrin thrombus. Simple free-floating tumor cells inside vascular lumina represent surgical or slicing artifacts and must not be misinterpreted as true biological vascular invasion.",
+   "say": "Angioinvasion requires tumor cells to penetrate vessel walls in the capsule, accompanied by an endothelial-adherent thrombus. Floating cells without thrombus are dismissed as processing artifacts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Criterion",
+     "Diagnostic Requirement for Malignancy",
+     "Artifactual Pitfall"
+    ],
+    "rows": [
+     [
+      "Vessel Location",
+      "Veins situated within or immediately beyond the fibrous capsule",
+      "Intratumoral capillaries are excluded from angioinvasion scoring"
+     ],
+     [
+      "Endothelial Adhesion",
+      "Tumor cells must be attached to the vessel wall or covered by thrombus",
+      "Unattached floating cells in vessel lumen represent gross cutting artifact"
+     ],
+     [
+      "Vascular Wall Breach",
+      "Disruption of internal elastic lamina confirmed by Verhoeff stain",
+      "Perivascular tumor compression without true luminal penetration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The World Health Organization classifies follicular thyroid carcinoma into three distinct prognostic categories based on the extent of invasive behavior. Minimally invasive follicular carcinoma displays only focal capsular invasion without angioinvasion. Encapsulated angioinvasive follicular carcinoma exhibits capsular penetration with vascular invasion, further subdivided into focal invasion (fewer than four vessels) and extensive invasion. The most aggressive variant is **widely invasive follicular carcinoma**, characterized by extensive sheet-like infiltration.",
+   "say": "Follicular carcinoma is classified as minimally invasive, encapsulated angioinvasive, or widely invasive. Widely invasive tumors exhibit extensive bone and soft tissue invasion with high mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Subtype",
+     "Invasive Criteria",
+     "Metastatic Risk and Prognosis"
+    ],
+    "rows": [
+     [
+      "Minimally Invasive",
+      "Focal capsular penetration without any vascular invasion",
+      "Excellent prognosis; distant metastases occur in under 3-5%"
+     ],
+     [
+      "Encapsulated Angioinvasive",
+      "Vascular invasion present (focal <4 vessels vs extensive >=4 vessels)",
+      "Moderate risk; extensive angioinvasion carries 30-50% metastasis rate"
+     ],
+     [
+      "Widely Invasive",
+      "Widespread invasion of thyroid, extrathyroidal muscle, and blood vessels",
+      "Dismal prognosis; frequent lethal metastases and high cancer mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because follicular carcinoma possesses an affinity for venous angioinvasion, its dominant metastatic pathway is **hematogenous dissemination**. Malignant follicular cells travel via the inferior thyroid veins and internal jugular system directly into the systemic circulation. Distant metastases develop in ten to twenty percent of patients, with the lungs and skeleton representing the most frequent sites of colonization. In stark contrast to papillary cancer, regional cervical lymph node metastasis is exceedingly rare.",
+   "say": "Follicular carcinoma metastasizes through blood vessels into the lungs and bones. Unlike papillary carcinoma, regional neck lymph node spread is exceptionally rare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "invade",
+      "label": "Tumor Invades Capsular Veins (Angioinvasion)"
+     },
+     {
+      "id": "venous",
+      "label": "Efferent Drainage via Thyroid Venous System"
+     },
+     {
+      "id": "pulmonary",
+      "label": "First Capillary Bed: Pulmonary Parenchymal Metastases"
+     },
+     {
+      "id": "arterial",
+      "label": "Systemic Arterial Seeding to Axial Skeleton"
+     },
+     {
+      "id": "bone",
+      "label": "Osteolytic Hypervascular Bony Metastases"
+     }
+    ],
+    "edges": [
+     [
+      "invade",
+      "venous"
+     ],
+     [
+      "venous",
+      "pulmonary"
+     ],
+     [
+      "pulmonary",
+      "arterial"
+     ],
+     [
+      "arterial",
+      "bone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Skeletal metastases from follicular thyroid carcinoma present unique clinical features. They manifest as purely **osteolytic pulsating metastases**, classically lodging in the flat bones of the axial skeleton, such as the skull, sternum, ribs, pelvis, and lumbar vertebrae. Because follicular metastases preserve thyroid follicular architecture with avid neo-vascularity, they form warm, highly vascular bone lesions exhibiting an audible bruit or palpable pulsation, often presenting with pathological fractures.",
+   "say": "Bony metastases are osteolytic and highly vascular, often exhibiting palpable pulsations and bruits. They affect axial flat bones like the skull, ribs, and pelvis, causing pathological fractures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Skeletal Metastases in FTC",
+     "Pathophysiological Explanation"
+    ],
+    "rows": [
+     [
+      "Radiographic Appearance",
+      "Purely lytic bone destruction without blastic sclerosis",
+      "Stimulation of osteoclast-mediated osteolysis by tumor factors"
+     ],
+     [
+      "Vascular Pulsation",
+      "Palpable expansion, systolic thrill, and loud bruit",
+      "Profound intratumoral arteriovenous shunting and neo-angiogenesis"
+     ],
+     [
+      "Avidity for Radioiodine",
+      "Accumulates radioactive iodine on whole-body scintigraphy",
+      "Retains functional sodium-iodide symporter (NIS) expression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of follicular carcinoma depends on pathological risk stratification following initial diagnostic lobectomy. If histology reveals widely invasive carcinoma, extensive vascular invasion with four or more invaded vessels, or tumors larger than four centimetres, the patient must undergo a **completion thyroidectomy**. Total surgical ablation of all native thyroid tissue is mandatory to facilitate post-operative radioactive iodine therapy (I-131) and enable long-term disease surveillance with serum thyroglobulin.",
+   "say": "When histology confirms widely invasive carcinoma, large tumors, or vascular invasion, completion thyroidectomy is performed to prepare the patient for radioactive iodine therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Diagnostic Lobectomy Specimen Assessed"
+     },
+     {
+      "id": "risk",
+      "label": "Pathology Shows Extensive Angioinvasion (>=4 Vessels) or >4 cm"
+     },
+     {
+      "id": "complete",
+      "label": "Completion Thyroidectomy of Contralateral Lobe"
+     },
+     {
+      "id": "i131",
+      "label": "High-Dose I-131 Radioiodine Therapy"
+     },
+     {
+      "id": "cure",
+      "label": "Serum Thyroglobulin Surveillance & TSH Suppression"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "risk"
+     ],
+     [
+      "risk",
+      "complete"
+     ],
+     [
+      "complete",
+      "i131"
+     ],
+     [
+      "i131",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ]
+}

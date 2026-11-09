@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-vaginitis-sti",
+ "subject": "obstetrics-gynaecology",
+ "title": "Trichomoniasis, Strawberry Cervix and Syndromic Management",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Flagellated protozoan infection causing frothy green discharge and intense itch is **trichomoniasis**. The cervix shows punctate haemorrhages called colpitis macularis. Unlike bacterial vaginosis it is frankly sexually transmitted, so partners are treated. Bacterial vaginosis raises pH without inflammation, while trichomoniasis inflames, which is why discharge with itch and soreness favours trichomonas.",
+   "say": "Trichomoniasis causes frothy green discharge and partners are treated.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/trichomoniasis-fig1.webp",
+    "alt": "Trichomoniasis morphology and colposcopic appearance.",
+    "caption": "Trichomoniasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The spotted strawberry appearance of the cervix and vaginal walls in trichomoniasis is the **strawberry cervix**. Visible in only a minority on naked eye, colposcopy reveals it more. Its presence is specific though insensitive. Colposcopy magnifies the punctate haemorrhages into view, but absence of spotting never excludes infection when discharge and itch are present.",
+   "say": "Strawberry cervix is a specific but insensitive sign of trichomoniasis on examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Sensitivity"
+    ],
+    "rows": [
+     [
+      "Strawberry cervix",
+      "Low, specific"
+     ],
+     [
+      "Frothy discharge",
+      "Moderate"
+     ],
+     [
+      "Wet mount motile trichomonads",
+      "Moderate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Motile pear shaped organisms with flagella on saline microscopy diagnose trichomoniasis as **wet mount diagnosis**. Sensitivity falls quickly as the slide cools. Nucleic acid testing is the sensitive modern standard. Saline microscopy must happen beside the patient because trichomonads stop moving within minutes as the preparation cools and dries.",
+   "say": "Wet mount diagnosis sees motile trichomonads and must be read while warm.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/protozoal-intestinal-infections-and-tricho-fig1.webp",
+    "alt": "Protozoal morphology including trichomonads.",
+    "caption": "Protozoa morphology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Single two gram metronidazole or seven day courses treat trichomoniasis, with **partner treatment** mandatory. Seven day courses cure more women in trials. Abstinence until both partners complete prevents ping pong reinfection. Treating the woman alone fails whenever her partner remains infected, so both complete treatment before intercourse resumes.",
+   "say": "Partner treatment is mandatory in trichomoniasis to prevent ping pong reinfection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Woman treated"
+     },
+     {
+      "id": "n1",
+      "label": "Partner treated simultaneously"
+     },
+     {
+      "id": "n2",
+      "label": "Abstinence till complete"
+     },
+     {
+      "id": "n3",
+      "label": "Retest at 3 months"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treating symptom patterns with preset drug kits without laboratory diagnosis is **syndromic management**. It dominates STI care where laboratories are scarce. Its weakness is overtreatment and missed asymptomatic infection. Kits cure most symptomatic disease at first contact, and their cost is treating some uninfected women and missing silent infections.",
+   "say": "Syndromic management involves preset drug kits for symptom patterns without laboratory diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Syndromic",
+     "points": [
+      "Immediate, cheap",
+      "Overtreats, misses silent"
+     ]
+    },
+    "right": {
+     "title": "Aetiological",
+     "points": [
+      "Test directed",
+      "Needs laboratory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Colour coded kits for urethral discharge, vaginal discharge and genital ulcer standardise syndromic care as **kit based therapy**. Each kit bundles antibiotics, partner slips and condoms. National programmes audit kit use for resistance drift. Colour coding removes prescribing hesitation at busy clinics, and stock control of kits becomes part of programme quality.",
+   "say": "Kit based therapy involves antibiotics, partner slips and condoms grouped by syndrome colour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Kit covers"
+    ],
+    "rows": [
+     [
+      "Vaginal discharge",
+      "Vaginitis plus cervicitis"
+     ],
+     [
+      "Genital ulcer",
+      "Syphilis plus herpes cover"
+     ],
+     [
+      "Lower abdominal pain",
+      "PID regimen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trichomoniasis raises HIV acquisition and shedding, an **HIV interaction** justifying routine HIV testing. Every STI consultation offers HIV, syphilis and hepatitis screening as a bundle. The infection is a marker of network risk, not just individual risk. Every trichomonas diagnosis therefore triggers offers of HIV and syphilis testing, because one sexually transmitted infection predicts others.",
+   "say": "HIV interaction bundles HIV and syphilis screening into every STI consultation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "STI screening bundle.",
+    "caption": "STI screening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In pregnancy trichomoniasis associates with preterm birth, and treatment is metronidazole after counselling, termed **pregnancy treatment**. Partner treatment prevents reinfection through pregnancy. Symptomatic relief is the clearest benefit. Symptomatic women gain clear relief from treatment in pregnancy, and partner treatment protects the remaining weeks from reinfection.",
+   "say": "Pregnancy treatment uses metronidazole with partner treatment preventing reinfection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Symptomatic in pregnancy"
+     },
+     {
+      "id": "n1",
+      "label": "Metronidazole given"
+     },
+     {
+      "id": "n2",
+      "label": "Partner treated"
+     },
+     {
+      "id": "n3",
+      "label": "Preterm risk addressed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent symptoms after treatment prompt resistance testing and adherence review as **treatment failure workup**. True metronidazole resistance is uncommon and managed at reference centres with high dose or alternative nitroimidazoles. Reference centres rescue most resistant cases with prolonged high dose regimens, after reinfection and poor adherence are excluded.",
+   "say": "Treatment failure workup reviews adherence before invoking uncommon resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common",
+     "points": [
+      "Reinfection from partner",
+      "Non adherence"
+     ]
+    },
+    "right": {
+     "title": "Rare",
+     "points": [
+      "True resistance",
+      "Reference centre care"
+     ]
+    }
+   }
+  }
+ ]
+}

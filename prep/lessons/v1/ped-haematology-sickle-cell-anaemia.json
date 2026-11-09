@@ -1,0 +1,226 @@
+{
+ "key": "ped-haematology-sickle-cell-anaemia",
+ "v": 1,
+ "module": "ped-haematology",
+ "subject": "paediatrics",
+ "title": "Pediatric Hemolytic and Bleeding Disorders: Sickle Cell, G6PD, and ITP",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Autosomal recessive point mutation substituting valine for glutamic acid at codon six of the beta-globin gene alters hemoglobin solubility. Under conditions of hypoxia, acidosis, or dehydration, **homozygous sickle cell anaemia** (HbSS) leads to polymerization of deoxy-hemoglobin S into rigid insoluble polymers. This distorts red blood cells into classic crescent or sickle shapes, precipitating microvascular occlusion and chronic hemolytic anemia.",
+   "say": "Sickle cell anemia results from a point mutation substituting valine for glutamic acid. Hypoxia promotes hemoglobin polymerization, deforming red cells into rigid sickles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sickle-cell-disease-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating microvascular occlusion, erythrocyte sickling, and vaso-occlusive pain crises.",
+    "caption": "Polymerization of sickle hemoglobin producing microvascular occlusion and acute vaso-occlusive crisis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Microvascular occlusion by rigid sickle erythrocytes produces ischemic tissue necrosis and excruciating pain. In infants between six months and two years, the earliest clinical manifestation is **acute dactylitis or hand-foot syndrome**, presenting with symmetrical painful swelling of the dorsal hands and feet. In older children, recurrent vaso-occlusive bone crises affect the humerus, femur, and vertebrae, requiring aggressive hydration and opioid analgesia.",
+   "say": "Hand-foot syndrome with painful swelling of hands and feet is the earliest manifestation in infants. Hydration and opioid analgesia are key in vaso-occlusive crises.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Acute Crisis Phenotype",
+     "Pathophysiological Trigger / Mechanism",
+     "Clinical Manifestations",
+     "Emergency Medical Management"
+    ],
+    "rows": [
+     [
+      "Vaso-occlusive pain crisis",
+      "Microvascular sludging and bone marrow ischemia",
+      "Excruciating bone, joint, or back pain",
+      "IV hydration, NSAIDs, scheduled opioids"
+     ],
+     [
+      "Acute chest syndrome",
+      "Pulmonary microvascular sickling / fat emboli",
+      "Fever, tachypnoea, chest pain, new infiltrate",
+      "Oxygen, ceftriaxone, simple/exchange transfusion"
+     ],
+     [
+      "Splenic sequestration crisis",
+      "Sudden massive pooling of RBCs in spleen",
+      "Rapidly enlarging spleen, profound shock",
+      "Emergency packed RBC transfusion"
+     ],
+     [
+      "Aplastic crisis",
+      "Parvovirus B19 erythroid progenitor arrest",
+      "Reticulocytopenia (<0.1%), severe pallor",
+      "Supportive transfusion until marrow recovers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autosomal dominant erythrocyte membrane skeletal protein mutations cause premature splenic destruction of spheroidal red blood cells. Arising from mutations in ankyrin or spectrin, **pediatric hereditary spherocytosis** leads to deficiency of membrane skeletal scaffolding, producing loss of lipid surface area. Spherocytes lose normal biconcave deformability, becoming trapped and destroyed within the splenic cords of Billroth, causing splenomegaly, jaundice, and pigmented gallstones.",
+   "say": "Hereditary spherocytosis involves ankyrin or spectrin defects, causing red cells to become spheroidal and rigid. Splenic destruction produces splenomegaly and gallstones.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hereditary Spherocytosis Features",
+     "points": [
+      "Autosomal dominant inheritance (75% of cases)",
+      "Deficiency of ankyrin (most common) or spectrin",
+      "Splenomegaly, fluctuating jaundice, and anemia",
+      "High mean corpuscular hemoglobin concentration (MCHC >36%)"
+     ]
+    },
+    "right": {
+     "title": "Confirmatory Laboratory Testing",
+     "points": [
+      "Peripheral smear: microspherocytes without central pallor",
+      "Eosin-5-maleimide (EMA) binding test on flow cytometry",
+      "Increased osmotic fragility in hypotonic saline solutions",
+      "Coombs test is strictly negative (non-immune hemolysis)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "X-linked recessive enzymatic deficiency impairs generation of reduced glutathione required to neutralize intracellular oxidative stress. The most prevalent red cell enzymopathy worldwide is **glucose-6-phosphate dehydrogenase deficiency** (G6PD deficiency), where exposure to fava beans, infections, or oxidant drugs (dapsone, primaquine, rasburicase, nitrofurantoin) triggers acute intravascular hemolysis. Peripheral smears demonstrate bite cells and Heinz bodies containing denatured hemoglobin precipitates.",
+   "say": "G6PD deficiency is an X-linked enzymopathy causing hemolytic crises after oxidative exposure like fava beans or primaquine. Blood smears show bite cells and Heinz bodies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/g6pd-deficiency-fig1.webp",
+    "alt": "Biochemical pathway diagram depicting G6PD enzyme catalysis of NADP to NADPH and protection of erythrocyte glutathione.",
+    "caption": "Biochemical role of G6PD in generating NADPH and reduced glutathione to protect red cells against oxidant stress. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Post-viral autoantibody-mediated platelet clearance produces acute mucocutaneous bleeding in previously healthy toddlers. Typically emerging one to three weeks following a viral illness, **pediatric immune thrombocytopenic purpura** (ITP) involves IgG anti-platelet autoantibodies directed against glycoproteins IIb/IIIa. Splenic macrophages clear antibody-coated platelets, causing isolated severe thrombocytopenia (platelet counts frequently falling below twenty thousand per microlitre) with completely normal physical examination otherwise.",
+   "say": "Immune thrombocytopenic purpura presents with sudden petechiae and purpura in a well toddler following a viral infection. Platelets are low, but the rest of the exam is normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ITP Clinical Presentation",
+     "points": [
+      "Sudden onset petechiae, purpura, and epistaxis",
+      "Toddler is otherwise active, playful, and well",
+      "Absence of hepatosplenomegaly or lymphadenopathy",
+      "Isolated thrombocytopenia with normal Hb and WBC"
+     ]
+    },
+    "right": {
+     "title": "Evidence-Based Management",
+     "points": [
+      "Observation if bleeding is minor (skin only)",
+      "Oral prednisolone (2-4 mg/kg/day for 4 days)",
+      "Or intravenous immunoglobulin (IVIG 0.8-1 g/kg single dose)",
+      "Over 80% achieve complete spontaneous recovery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "X-linked recessive coagulopathies impair the intrinsic coagulation pathway cascade. Deficiencies of **Factor VIII in haemophilia A** (eighty-five percent of cases) and Factor IX in haemophilia B produce severe bleeding phenotypes in affected males. The hallmark is recurrent, spontaneous hemarthroses affecting large weight-bearing joints (knees, ankles, elbows), intramuscular haematomas, and prolonged bleeding following minor surgical trauma or dental extraction.",
+   "say": "Haemophilia A is an X-linked Factor VIII deficiency, while haemophilia B is Factor IX deficiency. Deep hemarthroses and muscle bleeds are typical, with an isolated prolonged aPTT.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemophilia Severity Level",
+     "Coagulation Factor Activity Level",
+     "Typical Clinical Bleeding Phenotype",
+     "Treatment Protocol Target"
+    ],
+    "rows": [
+     [
+      "Severe haemophilia (<1%)",
+      "Factor VIII / IX activity <1% (<0.01 IU/mL)",
+      "Spontaneous hemarthroses and muscle bleeds",
+      "Prophylactic factor replacement (target >1%)"
+     ],
+     [
+      "Moderate haemophilia (1-5%)",
+      "Factor VIII / IX activity 1 to 5%",
+      "Bleeding after minor trauma or mild injury",
+      "On-demand factor infusion for bleeds"
+     ],
+     [
+      "Mild haemophilia (5-40%)",
+      "Factor VIII / IX activity 5 to 40%",
+      "Bleeding only after major surgery or trauma",
+      "Preoperative factor or DDAVP in haemophilia A"
+     ],
+     [
+      "Coagulation laboratory",
+      "Isolated prolonged activated partial thromboplastin time (aPTT)",
+      "Normal prothrombin time (PT) and bleeding time",
+      "Mixing study corrects immediately with normal plasma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluation of coagulation screening tests identifies intrinsic coagulation defects while ruling out platelet and extrinsic pathway anomalies. In hemophilia, the **activated partial thromboplastin time is prolonged** (aPTT), while the prothrombin time (PT), thrombin time, platelet count, and bleeding time are completely normal. Coagulation factor assays confirm the specific deficiency, guiding on-demand and prophylactic recombinant factor replacement therapy.",
+   "say": "An isolated prolonged aPTT with normal prothrombin time and platelet count points to hemophilia. Specific factor assays confirm either Factor VIII or Factor IX deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Screening Coagulation Profile",
+     "points": [
+      "Activated partial thromboplastin time (aPTT): markedly prolonged",
+      "Prothrombin time (PT / INR): completely normal",
+      "Thrombin time (TT): completely normal",
+      "Platelet count and morphology: completely normal"
+     ]
+    },
+    "right": {
+     "title": "Replacement Therapy Guidelines",
+     "points": [
+      "Each unit/kg of Factor VIII raises plasma level by 2%",
+      "Each unit/kg of Factor IX raises plasma level by 1%",
+      "Target 100% factor activity for CNS bleeds or major surgery",
+      "Emicizumab (bispecific antibody) for Factor VIII prophylaxis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Development of neutralizing alloantibodies against infused clotting factor represents the most challenging complication of hemophilia therapy. Occurring in thirty percent of boys with severe hemophilia A, **Factor VIII inhibitor antibodies** neutralize infused factor concentrates, rendering standard replacement ineffective. Patients with high-titer inhibitors require bypass agents such as recombinant activated factor VII (rFVIIa) or activated prothrombin complex concentrate (FEIBA), alongside immune tolerance induction.",
+   "say": "Factor VIII inhibitors develop in thirty percent of boys with severe hemophilia A. Bypass agents like recombinant factor seven and emicizumab manage bleeding in inhibitor patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inhibitor Management Strategy",
+     "Therapeutic Agent Used",
+     "Mechanism of Action",
+     "Clinical Indication"
+    ],
+    "rows": [
+     [
+      "Bypass agent: rFVIIa (NovoSeven)",
+      "Recombinant activated Factor VII (90 mcg/kg)",
+      "Directly activates Factor X on platelet surface",
+      "Acute hemarthrosis with high-titer inhibitors"
+     ],
+     [
+      "Bypass agent: FEIBA",
+      "Activated prothrombin complex concentrate",
+      "Bypasses Factor VIII/IX intrinsic pathway",
+      "Major bleeding in patients with inhibitors"
+     ],
+     [
+      "Immune tolerance induction (ITI)",
+      "Daily high-dose Factor VIII infusions",
+      "Induces antigen-specific immunological tolerance",
+      "Eradicates inhibitors in 70% of pediatric cases"
+     ],
+     [
+      "Bispecific antibody: Emicizumab",
+      "Subcutaneous monoclonal antibody (Hemlibra)",
+      "Bridges activated Factor IX and Factor X",
+      "Routine weekly/monthly bleeding prophylaxis"
+     ]
+    ]
+   }
+  }
+ ]
+}

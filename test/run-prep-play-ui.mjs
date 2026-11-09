@@ -91,7 +91,7 @@ async function shot(name) {
 // The app's own auth bootstrap may assign window.SMD_AUTH after boot; pin the signed-in stub for the whole run.
 const SIGN_IN = `(function(){var A={currentUser:{uid:"u1",displayName:"Asha Rao",getIdToken:function(){return Promise.resolve("tok-asha");}}}; try{Object.defineProperty(window,"SMD_AUTH",{configurable:true,get:function(){return A;},set:function(){}});}catch(e){window.SMD_AUTH=A;}})(); try{localStorage.setItem("smd_prep_arena_in","1");}catch(e){}`;
 // Speech stubs: speaking ends at once; the recognizer hears "B" the first time and nothing after.
-const SPEECH = `window.SpeechSynthesisUtterance=function(t){this.text=t;}; window.__said=[]; Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__said.push(u.text); setTimeout(function(){u.onend&&u.onend();},20);},cancel:function(){}}});
+const SPEECH = `window.SMD_PREP_VOICE=false; window.SpeechSynthesisUtterance=function(t){this.text=t;}; window.__said=[]; Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__said.push(u.text); setTimeout(function(){u.onend&&u.onend();},20);},cancel:function(){}}});
 window.SpeechRecognition=window.webkitSpeechRecognition=function(){var self=this; this.start=function(){window.__heard=(window.__heard||0)+1; setTimeout(function(){ if (!window.__heardB) { window.__heardB = 1; self.onresult&&self.onresult({results:[[{transcript:"B"}]]}); } self.onend&&self.onend();},30);}; this.stop=function(){};};`;
 
 try {
@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_focus");}catch(e){} indexedDB.deleteDatabase("prep-bank"); ${SIGN_IN} return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-feed]");`, 20000), "Play loads and home shows its section");
-  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep118";`) === true, "all nine Play rows; loader prep118");
+  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep134";`) === true, "all nine Play rows; loader prep134");
   // Header: Close and Search at the same gutter (owner screenshot 2026-10-30: Search sat one slot in from the edge).
   const gut = await ev(`var c=document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f=document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"), m=document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]"); var a=c.getBoundingClientRect(), b=f.getBoundingClientRect(); return JSON.stringify({ l: Math.round(a.left), r: Math.round(innerWidth - b.right), nav: document.getElementById("smdPrep").classList.contains("pn-navon"), menu: m ? getComputedStyle(m).display : "none" });`);
   const g = JSON.parse(gut);
@@ -209,17 +209,46 @@ try {
   // ---- voice mode (stubbed speech and recognizer that hears "B")
   await home(); await click("#smdPrep [data-act=v-voice]");
   ok(await until(`var r=PREP._st.run; return !!r && r.title === "Voice mode" && !!document.getElementById("pvVoice");`, 10000), "voice: a set with the voice bar");
+  ok(await ev(`var b=[].slice.call(document.querySelectorAll("#pvVoice .pv-vbtns button")); return b.length===3 && b.every(function(x){ return x.getBoundingClientRect().height>=43; }) && b[0].offsetTop===b[1].offsetTop && b[1].offsetTop===b[2].offsetTop;`) === true, "voice bar: speed, Repeat and Stop voice on one row, each 44 px");
   ok(await until(`var r=PREP._st.run; return r && r.ans[0] === 1;`, 8000), "voice: heard B and answered B");
   ok(await until(`return PREP._st.run.i >= 1;`, 8000), "voice: told the verdict and moved on by itself");
-  ok(await ev(`return window.__said.length >= 2 && /Option A\\./.test(window.__said[0]);`) === true, "voice: read the question and the options aloud");
+  ok(await ev(`return window.__said.length >= 2 && /Option A\\./.test(window.__said.join(" "));`) === true, "voice: read the question and the options aloud");
   await shot("play-voice");
   // The stub hears "B" once only, so question 2 hears nothing: two tries, then "Tap your answer" (no endless loop).
   await until(`return /Tap your answer/.test((document.getElementById("pvVoiceT")||{}).textContent || "");`, 8000);
   const sorry = await ev(`return window.__said.filter(function(t){ return /^Sorry/.test(t); }).length;`);
   await sleep(1500);
   ok(sorry === 1 && await ev(`return window.__said.filter(function(t){ return /^Sorry/.test(t); }).length;`) === 1, "voice: hears nothing twice, then waits for a tap (" + sorry + " sorry)");
+  ok(/say option A to D/.test(await ev(`return window.__said.filter(function(t){ return /^Sorry/.test(t); }).join(" ");`)), "voice: the spoken miss prompt steers to option A to D");
+  // Repeat after "Tap your answer": re-reads the question (more speech) and listens again.
+  const saidBeforeRepeat = await ev(`return window.__said.length;`);
+  await click("#smdPrep [data-act=v-voicerepeat]");
+  ok(await until(`return window.__said.length > ${saidBeforeRepeat};`, 6000), "voice: Repeat re-reads after Tap your answer");
+  await until(`return /Tap your answer/.test((document.getElementById("pvVoiceT")||{}).textContent || "");`, 10000);
+  // Stop voice: the bar stays as Voice off with Start voice (no Repeat), across re-renders and answer taps.
+  const runIds = await ev(`var r=PREP._st.run; return r.items.map(function(x){return x.id;}).join(",");`);
   await click("#smdPrep [data-act=v-voicestop]");
-  ok(await until(`return !document.getElementById("pvVoice") && !PREP_PLAY._p.voice;`, 3000), "voice: Stop voice ends it");
+  ok(await until(`return !!document.getElementById("pvVoice") && /Voice off/.test(document.getElementById("pvVoice").textContent) && !!document.querySelector("#pvVoice [data-act=v-voicestart]") && !document.querySelector("#pvVoice [data-act=v-voicerepeat]") && !PREP_PLAY._p.voice;`, 3000), "voice: Stop voice leaves Voice off with Start voice");
+  await ev(`PREP._host.rerender(); return 1;`);
+  ok(await ev(`return /Voice off/.test(document.getElementById("pvVoice").textContent);`) === true, "voice: Voice off survives a re-render");
+  // Speed in the off state saves the lessons' shared rate and survives a re-render.
+  await click("#smdPrep [data-act=v-voicespeed]");
+  ok(await store(`s.lsp && s.lsp.r === 1.25`) === true && /1\.25x/.test(await text("#pvVoice [data-act=v-voicespeed]")), "voice: speed button saves the shared rate (1.25x)");
+  await ev(`PREP._host.rerender(); return 1;`);
+  ok(/1\.25x/.test(await text("#pvVoice [data-act=v-voicespeed]")), "voice: speed label persists across a re-render");
+  const ansBeforeStart = await ev(`var r=PREP._st.run; return r.ans.join(",");`);
+  await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]').click(); return 1;`);
+  ok(await ev(`return /Voice off/.test(document.getElementById("pvVoice").textContent);`) === true, "voice: Voice off survives an answer tap");
+  // Start voice resumes the same run and questions, answers kept, and carries on with feedback.
+  const saidBeforeStart = await ev(`return window.__said.length;`);
+  await click("#smdPrep [data-act=v-voicestart]");
+  ok(await ev(`return !!PREP_PLAY._p.voice && !!document.querySelector("#pvVoice [data-act=v-voicerepeat]") && !!document.querySelector("#pvVoice [data-act=v-voicestop]");`) === true, "voice: Start voice resumes with Repeat and Stop voice");
+  const runIdsAfter = await ev(`var r=PREP._st.run; return r.items.map(function(x){return x.id;}).join(",");`);
+  ok(runIdsAfter === runIds, "voice: the same questions after restart");
+  ok(await ev(`var r=PREP._st.run; return r.ans.join(",").indexOf(${JSON.stringify(ansBeforeStart.split(",")[0])}) === 0 && r.ans[0] === 1;`) === true, "voice: earlier answers kept after restart");
+  ok(await until(`return window.__said.length > ${saidBeforeStart} || PREP._st.run.i >= 2;`, 8000), "voice: restart continues with feedback on the answered question");
+  await click("#smdPrep [data-act=v-voicestop]");
+  ok(await until(`return /Voice off/.test(document.getElementById("pvVoice").textContent);`, 3000), "voice: Stop voice again leaves Voice off");
 
   // ---- focus
   await home(); await click("#smdPrep [data-act=v-focus]");

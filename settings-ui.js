@@ -100,16 +100,59 @@
     controls.innerHTML = '<label class="settings-search"><span>Find a setting</span><input type="search" placeholder="Search" autocomplete="off" spellcheck="false"></label><p class="settings-results" role="status" aria-live="polite" hidden></p>';
     intro.insertAdjacentElement('afterend', controls);
     var input = controls.querySelector('input'), status = controls.querySelector('[role=status]'), active = 'All'; input.value = lastView.query;
+    // iPad: a sidebar of sections beside one detail pane, as in iPadOS Settings. Narrow windows keep the single list.
+    var split = document.documentElement.classList.contains('smd-tablet') ? window.matchMedia('(min-width: 768px)') : null;
+    function splitOn() { return !!split && split.matches; }
+    var acct = groups.filter(function (g) { return g.getAttribute('data-title') === 'Account'; })[0];
+    var sections = groups.filter(function (g) { return g !== acct; }), sideNav = null, detailHead = null;
+    var SECTION = {
+      'Preferences': ['#8e8e93', '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>', 'Notifications, appearance and your connected devices.'],
+      'Software Update': ['#34c759', '<path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 5v6h-6"/>', 'Keep StewardMD up to date on this device.'],
+      'Advanced': ['#636366', '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>', 'Clinical engine settings for this device.'],
+      'AI & voice': ['#5856d6', '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>', 'Choose how images, dictation and MaiK answers are processed.'],
+      'Experimental': ['#ff9500', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>', 'Optional tools, research features and beta access.']
+    };
+    function tileHtml(name) { var c = SECTION[name] || SECTION.Advanced; return '<span class="settings-tile" style="background:' + c[0] + '" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + c[1] + '</svg></span>'; }
+    if (split) {
+      if (!sections.some(function (g) { return g.getAttribute('data-title') === lastView.category; })) lastView.category = sections.length ? sections[0].getAttribute('data-title') : 'All';
+      active = lastView.category;
+      var aside = document.createElement('aside'); aside.className = 'settings-sidebar';
+      sideNav = document.createElement('nav'); sideNav.className = 'settings-sidenav'; sideNav.setAttribute('aria-label', 'Settings sections');
+      sections.forEach(function (g) {
+        var name = g.getAttribute('data-title'), b = document.createElement('button'), t = document.createElement('span');
+        b.type = 'button'; b.setAttribute('data-section', name); b.innerHTML = tileHtml(name); t.textContent = name; b.appendChild(t);
+        b.addEventListener('click', function () { active = name; input.value = ''; apply(); root.scrollTop = 0; });
+        sideNav.appendChild(b);
+      });
+      aside.appendChild(large); aside.appendChild(controls);
+      if (acct) aside.appendChild(acct);
+      aside.appendChild(sideNav);
+      body.insertBefore(aside, body.firstChild);
+      detailHead = document.createElement('div'); detailHead.className = 'settings-detail-head';
+      aside.insertAdjacentElement('afterend', detailHead);
+      if (split.addEventListener) split.addEventListener('change', apply);
+    }
+    function paintSplit(q) {
+      if (!split) return;
+      root.toggleAttribute('data-searching', !!q);
+      Array.prototype.forEach.call(sideNav.children, function (b) { if (!q && b.getAttribute('data-section') === active) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+      detailHead.hidden = !!q || !splitOn();
+      if (detailHead.hidden) return;
+      var c = SECTION[active] || SECTION.Advanced, h = document.createElement('h3'), p = document.createElement('p');
+      h.textContent = active; p.textContent = c[2]; detailHead.innerHTML = tileHtml(active); detailHead.appendChild(h); detailHead.appendChild(p);
+    }
     function apply() {
       var q = input.value.trim().toLowerCase(), count = 0;
       lastView = { category: active, query: input.value };
       groups.forEach(function (g) {
-        var match = (!q && (active === 'All' || active === g.getAttribute('data-title'))) || (q && (g.textContent.toLowerCase() + ' ' + (g.getAttribute('data-search') || '') + ' ' + Array.prototype.map.call(g.querySelectorAll('[data-search]'), function (n) { return n.getAttribute('data-search'); }).join(' ')).indexOf(q) !== -1);
+        if (g === acct && splitOn()) { g.hidden = false; return; }
+        var match = (!q && (!splitOn() || active === g.getAttribute('data-title'))) || (q && (g.textContent.toLowerCase() + ' ' + (g.getAttribute('data-search') || '') + ' ' + Array.prototype.map.call(g.querySelectorAll('[data-search]'), function (n) { return n.getAttribute('data-search'); }).join(' ')).indexOf(q) !== -1);
         g.hidden = !match;
         if (match) count++;
         Array.prototype.forEach.call(g.querySelectorAll('details'), function (d) { if (q) { if (!d.hasAttribute('data-search-open')) d.setAttribute('data-search-open', String(d.open)); d.open = match; } else if (d.hasAttribute('data-search-open')) { d.open = d.getAttribute('data-search-open') === 'true'; d.removeAttribute('data-search-open'); } });
       });
       status.hidden = !q; status.textContent = count ? count + ' matching section' + (count === 1 ? '' : 's') : 'No matching settings. Try “theme”, “voice” or “clinical”.';
+      paintSplit(q);
     }
     Array.prototype.forEach.call(body.querySelectorAll('.sbr-sec'), function (heading) { heading.setAttribute('role', 'heading'); heading.setAttribute('aria-level', '3'); });
     apply();

@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-nose-sinuses",
+ "subject": "anatomy",
+ "title": "Maxillary Sinus: Antral Architecture, High Ostium, and Caldwell-Luc",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The maxillary sinus (antrum of Highmore) is the largest of the four pairs of paranasal air sinuses, occupying the body of the maxilla. Pyramidal in shape, the **maxillary sinus** possesses an average volume of fifteen millilitres. Its base faces medially towards the lateral wall of the nasal cavity, while its apex points laterally into the zygomatic process of the maxilla.",
+   "say": "Occupying the body of the maxilla, the fifteen-millilitre maxillary sinus is the largest paranasal cavity. Its medial base forms part of the lateral nasal wall.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Gross anatomical dissection of maxilla and lateral nasal wall showing maxillary antrum of Highmore",
+    "caption": "Gross architectural anatomy of the maxillary sinus and its relations to the orbit and palate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The boundaries of the maxillary sinus reflect critical relationships with surrounding structures. The roof of the sinus forms the floor of the orbit, traversed by the infraorbital canal. The floor is formed by the **alveolar process** of the maxilla, lying approximately 1.25 centimetres below the level of the nasal floor in adults, closely related to the roots of the first and second molars.",
+   "say": "The sinus roof forms the orbital floor, housing the infraorbital nerve. The alveolar floor sits below the nasal floor, closely related to maxillary molar roots.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sinus Boundary",
+     "Anatomical Structure",
+     "Clinical Pathology"
+    ],
+    "rows": [
+     [
+      "Roof (superior wall)",
+      "Orbital plate of maxilla (infraorbital canal)",
+      "Sinus carcinoma erodes upward into orbit, causing proptosis and diplopia"
+     ],
+     [
+      "Floor (inferior wall)",
+      "Alveolar process (1st and 2nd molars, 2nd premolar)",
+      "Periapical dental abscess can erode upward, precipitating odontogenic sinusitis"
+     ],
+     [
+      "Medial wall (base)",
+      "Lateral wall of nasal cavity (inferior and middle meatuses)",
+      "Site of natural high ostium opening into middle meatus hiatus semilunaris"
+     ],
+     [
+      "Anterior wall",
+      "Facial surface of maxilla (canine fossa)",
+      "Thin bone incised during the Caldwell-Luc antrostomy approach"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extraction of an upper first or second molar tooth can fracture the thin intervening bony plate, creating an abnormal oroantral fistula. Bacterial flora from the oral cavity enter the antrum through the **oroantral communication**, establishing foul-smelling anaerobic maxillary sinusitis. Air escapes through the dental socket during Valsalva maneuvers, and fluids regurgitate into the nose while drinking.",
+   "say": "Molar tooth extraction can breach the thin sinus floor, creating an oroantral fistula. Oral bacteria enter the cavity, generating foul-smelling anaerobic sinusitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Maxillary Molar Extraction (Pneumatized sinus floor closely hugs divergent roots)"
+     },
+     {
+      "id": "e2",
+      "label": "Bony Floor Perforation (Fracture of 1 mm bone lamella tears Schneiderian mucosa)"
+     },
+     {
+      "id": "e3",
+      "label": "Oroantral Fistula Established (Direct passage linking oral cavity and maxillary antrum)"
+     },
+     {
+      "id": "e4",
+      "label": "Anaerobic Maxillary Sinusitis (Purulent discharge, foul breath, and nasal regurgitation)"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drainage of the maxillary sinus depends on the natural ostium situated high on its medial wall. Opening into the posterior part of the hiatus semilunaris in the middle meatus, this **high ostium** lies immediately beneath the orbital roof. Because gravity cannot empty the cavity in the erect position, clearance relies entirely on spiral ciliary beating toward the ostium.",
+   "say": "Located near the orbital roof, the maxillary ostium opens into the middle meatus. Clearance relies entirely on active ciliary beating against gravitational resistance.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sinus-drainage.svg",
+    "alt": "Anatomical schematic tracing paranasal sinus drainage pathways and the high ostium of the maxillary sinus",
+    "caption": "Ostial drainage pathways of the maxillary sinus opening into the hiatus semilunaris of the middle meatus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When viral rhinitis causes inflammatory mucosal oedema, the narrow ostiomeatal complex is readily obstructed. Retained secretions within the closed sinus become infected, causing acute maxillary sinusitis. The patient presents with throbbing pain over the cheek, tenderness over the **canine fossa**, and toothache referred to the upper dentition via the superior alveolar branches of the maxillary nerve.",
+   "say": "Mucosal swelling occludes the ostium, causing acute sinusitis. Patients experience cheek tenderness and referred dental pain via the superior alveolar nerves.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maxillary Sinusitis",
+     "points": [
+      "Pain and tenderness over maxillary cheek and canine fossa",
+      "Pain referred to upper molar and premolar teeth (CN V2)",
+      "Pain characteristically worsens upon bending forward",
+      "Purulent rhinorrhoea drains from middle meatus"
+     ]
+    },
+    "right": {
+     "title": "Frontal Sinusitis",
+     "points": [
+      "Pain and tenderness over forehead and supraorbital notch",
+      "Pain referred via supraorbital nerve (CN V1)",
+      "Exhibits office headache rhythm (peaks at midday)",
+      "Erosion of anterior table causes Pott puffy tumour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The frontal, ethmoidal, and sphenoidal sinuses surround the maxillary antrum. The frontal sinuses lie between the inner and outer tables of the frontal bone, draining via the frontonasal duct into the middle meatus. The anterior and middle ethmoidal cells also open into the middle meatus, while the **posterior ethmoidal** air cells open into the superior meatus.",
+   "say": "Frontal and anterior ethmoid sinuses drain into the middle meatus. Posterior ethmoidal air cells empty into the superior meatus, while the sphenoid sinus enters the sphenoethmoidal recess.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Paranasal Sinus",
+     "Cranial Bone Location",
+     "Meatal Drainage Destination"
+    ],
+    "rows": [
+     [
+      "Maxillary sinus",
+      "Body of maxilla",
+      "Hiatus semilunaris of middle meatus (high ostium)"
+     ],
+     [
+      "Frontal sinus",
+      "Squamous frontal bone",
+      "Frontonasal duct into infundibulum of middle meatus"
+     ],
+     [
+      "Anterior ethmoidal",
+      "Ethmoid bone labyrinth",
+      "Infundibulum of middle meatus"
+     ],
+     [
+      "Middle ethmoidal",
+      "Ethmoid bone labyrinth",
+      "Summit of bulla ethmoidalis in middle meatus"
+     ],
+     [
+      "Posterior ethmoidal",
+      "Ethmoid bone labyrinth",
+      "Superior meatus beneath superior concha"
+     ],
+     [
+      "Sphenoidal sinus",
+      "Body of sphenoid bone",
+      "Sphenoethmoidal recess above superior concha"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Caldwell-Luc operation is an open surgical procedure designed to access the maxillary sinus and excise chronically diseased, hyperplastic mucosa. The surgeon makes a transverse sublabial gingivobuccal incision, stripping the periosteum to expose the canine fossa. An osteotomy window is trephined through the thin **anterior wall** of the maxilla above the premolar root apices.",
+   "say": "The Caldwell-Luc operation enters the sinus through a sublabial incision into the canine fossa. A counter-drainage window is fashioned into the inferior meatus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Sublabial Incision (Transverse mucosal cut above premolars in gingivobuccal sulcus)"
+     },
+     {
+      "id": "c2",
+      "label": "Canine Fossa Trephination (Window cut through anterior maxillary bone into antrum)"
+     },
+     {
+      "id": "c3",
+      "label": "Mucosal Clearance (Diseased polypoid mucosa, fungi, or foreign body debrided)"
+     },
+     {
+      "id": "c4",
+      "label": "Inferior Antrostomy (Intranasal counter-drainage window punched into inferior meatus)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To ensure dependable dependent drainage following the Caldwell-Luc procedure, an intranasal antrostomy window is punched through the medial sinus wall into the inferior meatus. This creates permanent dependent drainage along the nasal floor, bypassing the dysfunctional **ciliary clearance** and obstructed natural ostium in the middle meatus.",
+   "say": "Fashioning an inferior meatus antrostomy bypasses the high natural ostium. Gravity drains postoperative secretions directly into the floor of the nose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural Middle Meatal Drainage",
+     "points": [
+      "Ostium sits high beneath orbital roof",
+      "Gravity opposes drainage in upright posture",
+      "Requires active, undamaged ciliary transport",
+      "Restored by functional endoscopic sinus surgery (FESS)"
+     ]
+    },
+    "right": {
+     "title": "Caldwell-Luc Inferior Antrostomy",
+     "points": [
+      "Surgically fashioned opening in inferior meatus",
+      "Gravity drains cavity continuously in upright posture",
+      "Compensates for permanent mucociliary loss",
+      "Historically standard for intractable chronic antral disease"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

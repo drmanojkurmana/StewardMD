@@ -1,0 +1,145 @@
+{
+  "v": 1,
+  "id": "cm-central-tendency-standard-normal-deviate",
+  "subject": "community-medicine",
+  "module": "cm-central-tendency",
+  "title": "Standard Normal Deviate (Z Score) and Standard Error of the Mean",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The standard normal deviate (z score)",
+      "tx": "The **standard normal deviate (z score)** re expresses any value as its distance from the mean in standard deviation units: z equals (value minus mean) divided by standard deviation. The transformed distribution has mean zero and standard deviation one, so a z of plus two always means the ninety seventh to ninety eighth percentile, whatever the original units were.",
+      "say": "Z counts standard deviations from the mean. Plus two always means near the ninety eighth percentile.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "z1", "label": "Subtract the mean from the value" },
+          { "id": "z2", "label": "Divide by the standard deviation" },
+          { "id": "z3", "label": "Read percentile from standard normal table" }
+        ],
+        "edges": [["z1", "z2"], ["z2", "z3"]]
+      }
+    },
+    {
+      "title": "Using the standard normal table",
+      "tx": "The **standard normal distribution table** tabulates area (probability) between the mean and any z, or beyond it, depending on the table's convention, the single most misread object in undergraduate statistics. Area between mean and z of one is zero point three four one three; doubling gives the sixty eight percent band. Tail areas give p values for z tests later in this module.",
+      "say": "Area from mean to z one is about thirty four percent. Double it for the familiar sixty eight percent band.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Z value", "Area from mean to z"],
+        "rows": [
+          ["1.00", "34.13 percent"],
+          ["1.96", "47.50 percent"],
+          ["2.00", "47.72 percent"],
+          ["3.00", "49.87 percent"]
+        ]
+      }
+    },
+    {
+      "title": "Z scores in growth monitoring",
+      "tx": "World Health Organization growth standards report **z scores in growth monitoring (weight for age, height for age, weight for height)**: values below minus two define underweight, stunting, or wasting (moderate), and below minus three define severe forms. Z language replaces percentiles in programme data because deficits average and compare cleanly across ages, sexes, and districts in survey analysis.",
+      "say": "Below minus two z is moderate undernutrition; below minus three is severe. Programmes speak z, not percentiles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Moderate undernutrition",
+          "points": ["Z between minus 3 and minus 2", "Supplementary feeding and follow up", "Watch for slide toward severe"]
+        },
+        "right": {
+          "title": "Severe undernutrition",
+          "points": ["Z below minus 3", "Therapeutic feeding protocols", "Screen for infection and oedema"]
+        }
+      }
+    },
+    {
+      "title": "Standard error of the mean",
+      "tx": "Repeated samples of size n from one population give means that scatter with standard deviation equal to the **standard error of the mean**: population SD divided by root n (sample SD substituted in practice). Quadrupling sample size halves the standard error. This shrinking precision measure, not the raw SD, builds confidence intervals and powers every test of means in the significance lesson.",
+      "say": "Standard error is SD divided by root n. Four times the sample halves the error.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "se1", "label": "Take sample standard deviation" },
+          { "id": "se2", "label": "Divide by square root of n" },
+          { "id": "se3", "label": "Result: precision of the sample mean" }
+        ],
+        "edges": [["se1", "se2"], ["se2", "se3"]]
+      }
+    },
+    {
+      "title": "Standard error of proportion",
+      "tx": "For percentages the parallel formula gives the **standard error of a proportion**: root of p times q divided by n, where q is one hundred minus p (or one minus p in fractions). It sizes prevalence surveys: estimating fifty percent prevalence within five percent needs about three hundred eighty four subjects at ninety five percent confidence, the most reused sample size number in community medicine examinations.",
+      "say": "Proportion error is root of p q over n. Fifty percent plus minus five needs about three hundred eighty four people.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Survey aim", "Approximate n (95 percent, plus minus 5)"],
+        "rows": [
+          ["Prevalence near 50 percent", "384"],
+          ["Prevalence near 20 percent", "246"],
+          ["Prevalence near 10 percent", "138"],
+          ["Tighter plus minus 3 at 50 percent", "1067"]
+        ]
+      }
+    },
+    {
+      "title": "Standard error of difference",
+      "tx": "Comparing two means or proportions needs the **standard error of the difference**: the root of the sum of the two squared standard errors (for independent groups). The observed difference divided by this error gives a z (or t) whose table area becomes the p value. Nearly every comparative statistic in journal abstracts is this one ratio wearing different clothes.",
+      "say": "Difference divided by its standard error gives the test statistic. That ratio is the engine of comparative statistics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "df1", "label": "Square each group's standard error" },
+          { "id": "df2", "label": "Add, take root: SE of difference" },
+          { "id": "df3", "label": "Difference over SE gives z or t" }
+        ],
+        "edges": [["df1", "df2"], ["df2", "df3"]]
+      }
+    },
+    {
+      "title": "SD versus SE in journal reading",
+      "tx": "Authors report **standard deviation versus standard error in papers** for different claims: SD describes how patients vary, SE (or confidence intervals) describes how precisely the mean is known. Error bars drawn with SE look deceptively tight; examiners ask which describes the population (SD) and which shrinks with n (SE) so reliably that the pair functions as a free mark when truly understood.",
+      "say": "SD describes patients; SE describes precision of the mean. Only the SE shrinks as samples grow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard deviation",
+          "points": ["Scatter of individuals", "Stable as n grows", "Builds reference ranges"]
+        },
+        "right": {
+          "title": "Standard error",
+          "points": ["Scatter of sample means", "Shrinks with root n", "Builds confidence intervals"]
+        }
+      }
+    },
+    {
+      "title": "Relative standard error and precision targets",
+      "tx": "Dividing the standard error by the estimate gives the **relative standard error (coefficient of variation of the estimate)**, used to judge survey quality: large surveys demand relative errors under about ten percent for headline indicators. It also explains why rare events (maternal deaths in small districts) produce unstable rates needing multi year pooling, a planning lesson hidden inside a formula.",
+      "say": "Relative error judges whether an estimate is trustworthy. Rare events in small areas swing wildly without pooling.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Estimate setting", "Precision lesson"],
+        "rows": [
+          ["National prevalence survey", "Relative SE small, publish yearly"],
+          ["District maternal deaths", "Counts tiny, pool 3 to 5 years"],
+          ["Rare disease cluster", "Rates unstable, report counts too"],
+          ["Large n, common event", "Confidence interval narrow and useful"]
+        ]
+      }
+    },
+    {
+      "title": "Exam stems: z, SD, and SE separated",
+      "tx": "Final separation drill for **z score and standard error questions**: how many SDs a child lies below the reference mean (z score), scatter of individual values (SD), precision of a survey mean (SE), and sample size for a prevalence survey (SE of proportion inverted). Each phrase maps to exactly one formula; writing the map before computing prevents the annual harvest of swapped answers.",
+      "say": "Distance in SDs is z; scatter of people is SD; precision of means is SE. Name it before you compute it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ex1", "label": "Stem about one value: z score" },
+          { "id": "ex2", "label": "Stem about individuals: SD" },
+          { "id": "ex3", "label": "Stem about a mean or survey: SE" }
+        ],
+        "edges": [["ex1", "ex2"], ["ex2", "ex3"]]
+      }
+    }
+  ]
+}

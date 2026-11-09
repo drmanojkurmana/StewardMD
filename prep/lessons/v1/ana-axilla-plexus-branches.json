@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "ana-axilla-plexus",
+ "subject": "anatomy",
+ "title": "Upper Trunk Traction and Long Thoracic Neuropathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Brachial plexus injuries follow distinct clinical syndromes depending on whether traction tears upper or lower nerve roots. Injury to the upper trunk of the brachial plexus (C5-C6) produces **Erb palsy** (Erb-Duchenne paralysis), typically caused by excessive widening of the angle between the head and shoulder during difficult vertex delivery or a motorcycle fall landing on the shoulder.",
+   "say": "Plexus injuries produce distinct patterns depending on whether upper or lower roots tear. Damage to the upper trunk at C5-C6 causes Erb palsy, usually resulting from widening of the head-shoulder angle during shoulder dystocia or a motorcycle crash.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/shoulder-dystocia-fig1.webp",
+    "alt": "Shoulder dystocia traction mechanism causing upper trunk brachial plexus stretch",
+    "caption": "Excessive traction on the fetal head during delivery precipitating Erb palsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical junction where C5 and C6 roots unite to form the upper trunk and give origin to the suprascapular nerve and nerve to subclavius before splitting into anterior and posterior divisions is termed **Erb point**. Traumatic traction avulses or ruptures nerve fascicles at this vulnerable confluence, paralyzing muscles innervated by C5 and C6.",
+   "say": "The junction where C5 and C6 roots meet to form the upper trunk and give off the suprascapular nerve is Erb point. Forceful traction avulses fascicles at this junction, paralyzing muscles supplied by C5 and C6.",
+   "vis": {
+    "kind": "flow",
+    "title": "Six-Way Confluence at Erb Point",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "C5 Ventral Root"
+     },
+     {
+      "id": "r2",
+      "label": "C6 Ventral Root"
+     },
+     {
+      "id": "pt",
+      "label": "Erb Point Confluence"
+     },
+     {
+      "id": "b1",
+      "label": "Suprascapular and Subclavius Nerves"
+     },
+     {
+      "id": "b2",
+      "label": "Anterior and Posterior Divisions"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "pt"
+     ],
+     [
+      "r2",
+      "pt"
+     ],
+     [
+      "pt",
+      "b1"
+     ],
+     [
+      "pt",
+      "b2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In Erb palsy, paralysis affects the abductors and lateral rotators of the shoulder (deltoid, supraspinatus, infraspinatus), flexors of the elbow (biceps brachii, brachialis, brachioradialis), and supinators of the forearm (supinator, biceps). The unopposed action of intact adductors, medial rotators, and pronators forces the limb into the classic **waiter tip deformity**.",
+   "say": "In Erb palsy, paralysis strikes shoulder abductors and lateral rotators, elbow flexors, and supinators. Unopposed adductors, medial rotators, and pronators lock the limb in the characteristic waiter tip position.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paralyzed Muscles in Erb Palsy",
+     "points": [
+      "Deltoid and supraspinatus (loss of abduction)",
+      "Infraspinatus and teres minor (loss of lateral rotation)",
+      "Biceps brachii and brachialis (loss of elbow flexion)",
+      "Supinator and biceps (loss of forearm supination)"
+     ]
+    },
+    "right": {
+     "title": "Resulting Deformity (Waiter Tip)",
+     "points": [
+      "Arm hangs adducted by the side",
+      "Arm is medially rotated at shoulder",
+      "Elbow is fully extended",
+      "Forearm is pronated with palm facing backward"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sensory loss in Erb palsy affects the cutaneous patch over the lower deltoid (supplied by the axillary nerve) and the lateral border of the arm and forearm (C5-C6 dermatomes via the lateral cutaneous nerve of the forearm). Biceps and **brachioradialis reflexes** are completely abolished, while finger and intrinsic hand movements are entirely preserved.",
+   "say": "Sensory loss in Erb palsy affects the outer shoulder and lateral forearm. Biceps and brachioradialis reflexes are absent, while finger and intrinsic hand movements remain completely normal.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-brachial-plexus.svg",
+    "alt": "Upper trunk roots C5-C6 and peripheral sensory cutaneous distribution",
+    "caption": "C5-C6 distribution and peripheral motor innervation targets. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Arising directly from the C5, C6, and C7 roots in the neck is the **long thoracic nerve of Bell**, which descends vertically along the lateral thoracic wall on the superficial surface of the serratus anterior muscle. Its superficial anatomical position in the axilla makes it exceptionally vulnerable to iatrogenic transection during axillary lymph node dissection for breast carcinoma.",
+   "say": "Arising from C5, C6, and C7 roots, the long thoracic nerve of Bell descends along the chest wall on the surface of serratus anterior. Its exposed position makes it vulnerable to surgical injury during axillary lymph node dissection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Long Thoracic Nerve",
+     "points": [
+      "Derived from C5, C6, C7 roots",
+      "Descends on external surface of serratus anterior",
+      "Injured in axillary clearance or radical mastectomy",
+      "Causes classic winged scapula deformity"
+     ]
+    },
+    "right": {
+     "title": "Thoracodorsal Nerve",
+     "points": [
+      "Derived from posterior cord (C6, C7, C8)",
+      "Descends with subscapular vessels to latissimus dorsi",
+      "Injured during subscapular lymph node dissection",
+      "Weakens arm adduction and pull-up climbing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Paralysis of the serratus anterior from long thoracic nerve injury impairs protraction and upward rotation of the scapula, presenting clinically as a **winged scapula**. When the patient pushes both hands forward against a wall, the medial border and inferior angle of the scapula project prominently backward away from the thoracic rib cage.",
+   "say": "Paralysis of serratus anterior produces a winged scapula. Because the muscle can no longer anchor the shoulder blade against the thorax, pushing forward against a wall causes the medial border and inferior angle to project backward.",
+   "vis": {
+    "kind": "flow",
+    "title": "Winged Scapula Biomechanics",
+    "nodes": [
+     {
+      "id": "nerve",
+      "label": "Long Thoracic Nerve Iatrogenic Transection"
+     },
+     {
+      "id": "paral",
+      "label": "Serratus Anterior Muscle Paralysis"
+     },
+     {
+      "id": "push",
+      "label": "Patient Pushes Against Wall"
+     },
+     {
+      "id": "wing",
+      "label": "Medial Scapular Border Lifts off Thorax"
+     }
+    ],
+    "edges": [
+     [
+      "nerve",
+      "paral"
+     ],
+     [
+      "paral",
+      "push"
+     ],
+     [
+      "push",
+      "wing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serratus anterior is the chief muscle required for overhead abduction of the arm above ninety degrees, rotating the glenoid cavity upward. Injury to the **thoracodorsal nerve** (C6, C7, C8) from the posterior cord paralyzes latissimus dorsi, impairing powerful arm adduction, medial rotation, and backward extension, severely compromising climbing and crutch-walking.",
+   "say": "Serratus anterior rotates the glenoid upward for overhead abduction above ninety degrees. Injury to the thoracodorsal nerve paralyzes latissimus dorsi, impairing powerful arm adduction and extension needed for climbing or crutch use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peripheral Nerve",
+     "Plexus Origin",
+     "Innervated Muscle",
+     "Clinical Hallmark of Lesion"
+    ],
+    "rows": [
+     [
+      "Long Thoracic Nerve",
+      "Roots C5, C6, C7",
+      "Serratus anterior",
+      "Winged scapula on pushing against wall"
+     ],
+     [
+      "Thoracodorsal Nerve",
+      "Posterior cord (C6-C8)",
+      "Latissimus dorsi",
+      "Weakness in pull-ups, adduction"
+     ],
+     [
+      "Suprascapular Nerve",
+      "Upper trunk (C5-C6)",
+      "Supraspinatus, infraspinatus",
+      "Loss of initial 15 degree abduction"
+     ],
+     [
+      "Axillary Nerve",
+      "Posterior cord (C5-C6)",
+      "Deltoid, teres minor",
+      "Loss of abduction beyond 15 degrees, badge loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The axillary lymph nodes are arranged in five anatomical groups: anterior (pectoral), posterior (subscapular), lateral (along axillary vein), central (in axillary fat), and apical (at cervicoaxillary apex). The anterior nodes lie along the **lateral thoracic artery**, receiving seventy-five percent of breast drainage and representing the earliest site of nodal metastasis in breast cancer.",
+   "say": "Axillary lymph nodes comprise five groups: anterior, posterior, lateral, central, and apical. The anterior nodes lie along the lateral thoracic artery, receiving the bulk of breast lymph and representing the primary site of cancer spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymph Node Group",
+     "Anatomical Location",
+     "Primary Afferent Drainage",
+     "Efferent Pathway"
+    ],
+    "rows": [
+     [
+      "Anterior (Pectoral)",
+      "Lower border of pectoralis minor",
+      "Breast, anterior body wall above umbilicus",
+      "Central axillary nodes"
+     ],
+     [
+      "Posterior (Subscapular)",
+      "Lower margin of posterior axillary wall",
+      "Posterior scapular and dorsal body wall",
+      "Central axillary nodes"
+     ],
+     [
+      "Lateral Group",
+      "Medial to upper axillary vein",
+      "Entire upper limb (except cephalic track)",
+      "Central and apical nodes"
+     ],
+     [
+      "Central Group",
+      "Embedded in fat of axillary base",
+      "Receives from anterior, posterior, and lateral",
+      "Apical axillary nodes"
+     ],
+     [
+      "Apical Group",
+      "Behind clavipectoral fascia at apex",
+      "Drains all groups, plus cephalic vein nodes",
+      "Subclavian lymph trunk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-male",
+  "subject": "physiology",
+  "title": "Semen Parameters, Erection, Ejaculation, and Puberty",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Ejaculated human semen is a complex composite suspension comprising spermatozoa suspended within secretions contributed sequentially by accessory male sex glands. In a healthy adult ejaculate volume of two to five millilitres, spermatozoa account for less than ten percent of total volume, while the **seminal vesicles contribute sixty percent**.",
+      "say": "Semen combines sperm with secretions from seminal vesicles, the prostate, and bulbourethral glands.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Accessory Gland",
+          "Percentage of Ejaculate",
+          "Fluid Characteristics",
+          "Key Biochemical Components"
+        ],
+        "rows": [
+          [
+            "Seminal Vesicles",
+            "~60% to 70%",
+            "Thick, yellowish, alkaline fluid",
+            "Fructose (energy for sperm), prostaglandins, semenogelin"
+          ],
+          [
+            "Prostate Gland",
+            "~20% to 30%",
+            "Thin, milky, slightly acidic fluid",
+            "Citric acid, zinc, acid phosphatase, Prostate-Specific Antigen (PSA)"
+          ],
+          [
+            "Bulbourethral (Cowper)",
+            "~5%",
+            "Clear, viscous mucus pre-ejaculate",
+            "Neutralizes residual acidic urine in urethra; lubricates glans"
+          ],
+          [
+            "Testes / Epididymides",
+            "~5% to 10%",
+            "Concentrated sperm suspension",
+            "20 to 150 million spermatozoa per millilitre"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secretions from the seminal vesicles are rich in fructose, which serves as the principal metabolic energy substrate fueling sperm flagellar motility. They also contain **seminal vesicle prostaglandins**, which react with cervical mucus to facilitate sperm penetration and stimulate reverse peristaltic contractions of the female uterus.",
+      "say": "Seminal vesicles provide fructose for sperm energy and prostaglandins that trigger reverse uterine contractions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Seminal Vesicle Secretion",
+          "points": [
+            "Fructose provides primary nutrient substrate for sperm ATP generation",
+            "Prostaglandins stimulate female reproductive tract contractions",
+            "Semenogelin forms initial protective coagulum after ejaculation",
+            "Alkaline pH protects sperm from acidic vaginal secretions"
+          ]
+        },
+        "right": {
+          "title": "Prostatic Secretion",
+          "points": [
+            "Prostate-Specific Antigen (PSA) serine protease cleaves semenogelin",
+            "Liquefies coagulum within 15 to 30 minutes to liberate motile sperm",
+            "Zinc exerts antibacterial actions defending against pelvic infections",
+            "Citrate serves as an osmotic buffer for seminal plasma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Evaluation of male fertility is standardized by the World Health Organization **semen analysis parameters**. A normal fertile ejaculate requires a semen volume exceeding one point five millilitres, a total sperm count exceeding thirty-nine million, progressive forward motility in over thirty-two percent of cells, and normal morphology in over four percent.",
+      "say": "Standard semen parameters require over thirty-nine million sperm, normal volume, and progressive forward motility.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Lower Reference Limit (WHO 6th Ed)",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Ejaculate Volume",
+            "≥ 1.5 mL",
+            "Low volume indicates retrograde ejaculation or duct obstruction"
+          ],
+          [
+            "Sperm Concentration",
+            "≥ 15 million / mL",
+            "Oligozoospermia (< 15M/mL); Azoospermia (0 sperm)"
+          ],
+          [
+            "Total Sperm Count",
+            "≥ 39 million per ejaculate",
+            "Total functional gamete output per insemination"
+          ],
+          [
+            "Progressive Motility",
+            "≥ 32% (or ≥ 40% total)",
+            "Asthenozoospermia (impaired flagellar propulsion)"
+          ],
+          [
+            "Normal Morphology",
+            "≥ 4% (Tygerberg strict criteria)",
+            "Teratozoospermia (abnormal head/tail morphology)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Penile tumescence and erection are mediated by the parasympathetic nervous system via pelvic splanchnic nerves (S2 through S4). Postganglionic parasympathetic terminals and vascular endothelial cells release **endothelial nitric oxide**, which diffuses into cavernosal vascular smooth muscle to activate soluble guanylyl cyclase, generating cyclic GMP.",
+      "say": "Penile erection is a parasympathetic reflex where nitric oxide elevates cyclic GMP to dilate cavernosal arterioles.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "erotic",
+            "label": "Psychogenic or Tactile Stimulation Activates Sacral Parasympathetics (S2-S4)"
+          },
+          {
+            "id": "no_rel",
+            "label": "Non-Adrenergic Non-Cholinergic (NANC) Terminals Release Nitric Oxide (NO)"
+          },
+          {
+            "id": "cgmp_rise",
+            "label": "NO Activates Soluble Guanylyl Cyclase -> Intracellular Cyclic GMP Rises"
+          },
+          {
+            "id": "vasodil",
+            "label": "Cavernosal Arteriolar Dilation Fills Sinusoids, Compressing Venous Drainage (Erection)"
+          }
+        ],
+        "edges": [
+          [
+            "erotic",
+            "no_rel"
+          ],
+          [
+            "no_rel",
+            "cgmp_rise"
+          ],
+          [
+            "cgmp_rise",
+            "vasodil"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accumulating cyclic GMP reduces intracellular free calcium, relaxing helical cavernosal arterioles and trabecular smooth muscle fibers. Blood rushes into the paired corpora cavernosa, engorging sinusoidal spaces and compressing subtunical venules against the non-distensible tunica albuginea, trapping blood to produce **rigid penile erection**.",
+      "say": "Engorgement of cavernosal sinusoids compresses emissary veins against the tunica albuginea, trapping blood for rigidity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Penile Erection (Parasympathetic)",
+          "points": [
+            "Pelvic splanchnic nerves (S2-S4 nervi erigentes)",
+            "Releases Nitric Oxide, elevating cyclic GMP",
+            "Arteriolar dilation fills sinusoidal cavernosal spaces",
+            "Veno-occlusive mechanism compresses subtunical venules"
+          ]
+        },
+        "right": {
+          "title": "Ejaculation (Sympathetic & Somatic)",
+          "points": [
+            "Hypogastric sympathetic nerves (L1-L2) mediate emission",
+            "Alpha-1 adrenergic receptors contract vas deferens and prostate",
+            "Internal bladder neck sphincter closes to prevent retrograde flow",
+            "Somatic pudendal nerve (S2-S4) drives rhythmic bulbospongiosus spasms"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intracellular cyclic GMP is normally degraded and inactivated by the localized enzyme phosphodiesterase type 5. Oral phosphodiesterase inhibitors like sildenafil, tadalafil, and vardenafil competitively block this enzyme, sustaining high cyclic GMP levels in response to physiological sexual arousal, effectively treating **erectile dysfunction**.",
+      "say": "Sildenafil blocks PDE5, preventing cyclic GMP breakdown to treat erectile dysfunction effectively.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+        "alt": "Penile erectile physiology and PDE5 pharmacology",
+        "caption": "Corpus cavernosum hemodynamics, nitric oxide signaling, and PDE5 inhibitor mechanisms."
+      }
+    },
+    {
+      "tx": "Ejaculation comprises two discrete phases: emission and expulsion. Emission is a sympathetic reflex (L1 through L2) contracting the vasa deferentia, seminal vesicles, and prostate to propel semen into the posterior urethra, while alpha-one sympathetic tone contracts the **internal bladder neck sphincter**, preventing retrograde ejaculation.",
+      "say": "Emission is a sympathetic reflex that loads semen into the urethra while closing the bladder neck to stop retrograde flow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "emission",
+            "label": "Sympathetic Surge (L1-L2) Contracts Smooth Muscle of Vas and Accessory Glands"
+          },
+          {
+            "id": "sphincter",
+            "label": "Alpha-1 Receptors Tightly Close Internal Bladder Neck Sphincter"
+          },
+          {
+            "id": "urethra_fill",
+            "label": "Semen Propelled into Prostatic Urethra, Triggering Afferent Sensory Signals"
+          },
+          {
+            "id": "expulsion",
+            "label": "Somatic Pudendal Nerve (S2-S4) Drives Rhythmic Bulbospongiosus Spasms (Expulsion)"
+          }
+        ],
+        "edges": [
+          [
+            "emission",
+            "sphincter"
+          ],
+          [
+            "sphincter",
+            "urethra_fill"
+          ],
+          [
+            "urethra_fill",
+            "expulsion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The onset of male puberty is initiated by the reactivation of pulsatile hypothalamic gonadotropin-releasing hormone secretion, driven by **kisspeptin signaling**. Awakening of the hypothalamic-pituitary-gonadal axis produces nocturnal gonadotropin surges, testicular enlargement beyond four millilitres (the earliest sign of male puberty), and secondary sexual virilization.",
+      "say": "Male puberty is triggered by hypothalamic kisspeptin stimulating pulsatile GnRH, with testicular enlargement being the first sign.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/androgen-deficiency-aging-male-fig1.webp",
+        "alt": "Male pubertal maturation and androgen deficiency",
+        "caption": "Hypothalamic kisspeptin-GnRH pulse activation, pubertal testicular enlargement, and secondary virilization."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

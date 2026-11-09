@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "obg-maternal-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Renal and Respiratory Changes: GFR, Glycosuria and Alkalosis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Kidney filtration rate rises by about fifty percent from early pregnancy, termed **GFR increase**. Creatinine and urea therefore fall, and non pregnant reference ranges mislead. A creatinine normal outside pregnancy may signal renal impairment within it. A creatinine of 90 micromoles per litre, normal outside pregnancy, already signals renal impairment by 20 weeks.",
+   "say": "GFR increase lowers creatinine in pregnancy, so non pregnant ranges mislead clinicians.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Pregnancy change"
+    ],
+    "rows": [
+     [
+      "Creatinine",
+      "Falls"
+     ],
+     [
+      "Urea",
+      "Falls"
+     ],
+     [
+      "Uric acid",
+      "Falls early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Glucose appearing in urine despite normal blood sugar in pregnancy is **physiological glycosuria**. Increased filtration and reduced tubular reabsorption spill glucose intermittently. It does not diagnose diabetes, though blood testing follows if suspected. Dipstick glucose in pregnancy therefore triggers a blood test rather than a diabetes label on its own.",
+   "say": "Physiological glycosuria spills glucose with normal blood sugar and does not diagnose diabetes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological glycosuria",
+     "points": [
+      "Normal blood glucose",
+      "Intermittent spill",
+      "No treatment"
+     ]
+    },
+    "right": {
+     "title": "Diabetic glycosuria",
+     "points": [
+      "High blood glucose",
+      "Persistent spill",
+      "Needs management"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progesterone driven over breathing lowers carbon dioxide, producing compensated **respiratory alkalosis**. Arterial carbon dioxide settles near thirty millimetres of mercury. This gradient helps fetal carbon dioxide excretion across the placenta. Bicarbonate falls to about 18 to 22 millimoles per litre as the kidney compensates for the low carbon dioxide.",
+   "say": "Respiratory alkalosis from progesterone over breathing helps fetal carbon dioxide excretion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Progesterone stimulates breathing"
+     },
+     {
+      "id": "n1",
+      "label": "Carbon dioxide falls"
+     },
+     {
+      "id": "n2",
+      "label": "Kidneys compensate"
+     },
+     {
+      "id": "n3",
+      "label": "Gradient aids fetus"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Breathing volume per breath rises by forty percent while rate stays similar, an increase in **tidal volume**. Oxygen consumption rises by a fifth to meet fetal and maternal needs. Breathlessness on exertion is common and usually physiological. Minute ventilation rises by up to 50 percent, and progesterone is the driver of that over breathing.",
+   "say": "Tidal volume rises forty percent, and exertional breathlessness is usually physiological in pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Change"
+    ],
+    "rows": [
+     [
+      "Tidal volume",
+      "Up 40 percent"
+     ],
+     [
+      "Respiratory rate",
+      "Unchanged"
+     ],
+     [
+      "Oxygen consumption",
+      "Up 20 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Functional residual capacity** is the air left in the lungs after a quiet breath out, and pregnancy steadily shrinks it. The enlarging uterus pushes the diaphragm up by about four centimetres, compressing the lung bases. Chest expansion through increased rib flare partly compensates, and residual volume itself barely changes. The smaller oxygen reservoir explains why breathlessness worsens lying flat and why desaturation develops faster during apnoea.",
+   "say": "The uterus pushes the diaphragm up and reduces functional residual capacity near term. Supine breathlessness worsens from this mechanical effect.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m633-obg-maternal-physiology-gfr-increase.webp",
+    "alt": "Side diagram of late pregnancy showing the enlarged uterus pushing the diaphragm upward, shrinking the resting lung volume labelled functional residual capacity.",
+    "caption": "Elevation of the diaphragm by the gravid uterus leaves less air in the chest at rest, explaining supine breathlessness near term. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The enlarging uterus pushes the diaphragm up by four centimetres, reducing **functional residual capacity**. Supine breathlessness worsens near term from this mechanical effect. Chest expansion compensates through increased rib flare. Residual volume changes little, so total lung capacity falls only about 5 percent despite the raised diaphragm.",
+   "say": "The uterus pushes the diaphragm up and reduces functional residual capacity near term.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Pregnancy inspection and respiratory assessment.",
+    "caption": "Pregnancy respiratory changes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Urinary tract dilatation, right greater than left, predisposes to infection, a change of **collecting system dilatation**. Progesterone relaxation plus ureteric compression at the pelvic brim cause it. Asymptomatic bacteriuria therefore progresses to pyelonephritis more often. Untreated asymptomatic bacteriuria leads to pyelonephritis in up to 30 percent of pregnant women, versus about one percent when treated.",
+   "say": "Collecting system dilatation predisposes pregnant women to pyelonephritis from bacteriuria.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Ureters dilate, right more"
+     },
+     {
+      "id": "n1",
+      "label": "Urine stagnates"
+     },
+     {
+      "id": "n2",
+      "label": "Bacteriuria ascends"
+     },
+     {
+      "id": "n3",
+      "label": "Pyelonephritis risk rises"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Plasma osmolality falls by ten units as thirst and antidiuretic thresholds reset, termed **osmolality resetting**. Sodium settles slightly lower than outside pregnancy. These shifts are normal and need no correction. Serum sodium settling near 135 millimoles per litre is expected and should not trigger fluid restriction.",
+   "say": "Osmolality resetting lowers sodium slightly in normal pregnancy without needing correction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Change"
+    ],
+    "rows": [
+     [
+      "Osmolality",
+      "Down 10"
+     ],
+     [
+      "Sodium",
+      "Down 4 to 5"
+     ],
+     [
+      "Thresholds",
+      "Reset lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mild breathlessness at rest with normal oxygen levels is usually physiological, distinguished as **physiological dyspnoea**. Sudden breathlessness with chest pain or low saturation means embolism or cardiac disease until excluded. The threshold for investigation stays low. Dyspnoea that wakes a woman lying flat, orthopnoea, is never physiological and needs cardiac assessment the same day.",
+   "say": "Physiological dyspnoea is mild with normal saturation, while sudden breathlessness needs exclusion of embolism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological",
+     "points": [
+      "Gradual, exertional",
+      "Normal saturation",
+      "Reassure"
+     ]
+    },
+    "right": {
+     "title": "Pathological",
+     "points": [
+      "Sudden, painful",
+      "Low saturation",
+      "Investigate urgently"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Kidney size increases by a centimetre and renal plasma flow rises even more than filtration, summarised as **renal enlargement**. These changes reverse over weeks after delivery. Persistent abnormality beyond three months needs non pregnancy evaluation. The right kidney and ureter dilate more than the left because the sigmoid colon cushions the left ureter at the pelvic brim.",
+   "say": "Renal enlargement reverses after delivery, and persistence beyond three months needs evaluation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Fundal height examination in pregnancy care.",
+    "caption": "Pregnancy care examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

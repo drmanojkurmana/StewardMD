@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "ana-pectoral-breast",
+ "subject": "anatomy",
+ "title": "Pectoral Girdle Muscles and Breast Lymphatic Drainage",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The anterior chest wall is dominated by the **pectoralis major**, a massive fan-shaped muscle possessing clavicular and sternocostal heads. The clavicular head arises from the medial half of the clavicle, while the sternocostal head arises from the sternum and upper six costal cartilages. Both heads converge into a U-shaped bilaminar tendon inserting into the lateral lip of the bicipital groove.",
+   "say": "The anterior chest wall is dominated by the pectoralis major, featuring clavicular and sternocostal heads. The clavicular head arises from the medial clavicle and the sternocostal head from the sternum and ribs. Both insert into the lateral lip of the bicipital groove.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-breast-sagittal.svg",
+    "alt": "Pectoral muscles, clavipectoral fascia, retromammary space, and breast sagittal section",
+    "caption": "Pectoral musculature and anatomical relationships of the female breast. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Innervated by both lateral and medial pectoral nerves, the pectoralis major acts as a powerful adductor and medial rotator of the arm, while its clavicular fibres assist in arm flexion. Deep to pectoralis major lies **pectoralis minor**, arising from ribs three, four, and five and inserting into the coracoid process, innervated by the medial pectoral nerve.",
+   "say": "Supplied by lateral and medial pectoral nerves, pectoralis major adducts and medially rotates the humerus. Deep to it lies pectoralis minor, arising from ribs three to five and inserting into the coracoid process, supplied by the medial pectoral nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pectoralis Major",
+     "points": [
+      "Superficial massive muscular fan",
+      "Dual nerve supply: Lateral and medial pectoral",
+      "Inserts into lateral lip of bicipital groove",
+      "Adducts, medially rotates, and flexes arm"
+     ]
+    },
+    "right": {
+     "title": "Pectoralis Minor",
+     "points": [
+      "Deep triangular stabilizing muscle",
+      "Innervated purely by medial pectoral nerve",
+      "Inserts onto the coracoid process of scapula",
+      "Depresses shoulder and tilts scapula anteriorly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Suspended between the clavicle and the upper border of pectoralis minor is the **clavipectoral fascia**, which splits to enclose subclavius above and pectoralis minor below. This fascia is pierced by four distinct neurovascular structures: the cephalic vein, the thoracoacromial artery, the lateral pectoral nerve, and lymphatic trunks draining the infraclavicular nodes.",
+   "say": "Stretching from the clavicle to pectoralis minor is the clavipectoral fascia. This tough sheet is pierced by four structures: the cephalic vein, thoracoacromial artery, lateral pectoral nerve, and lymphatic trunks draining toward the axilla.",
+   "vis": {
+    "kind": "flow",
+    "title": "Structures Piercing Clavipectoral Fascia",
+    "nodes": [
+     {
+      "id": "vein",
+      "label": "Cephalic Vein (Enters Axillary Vein)"
+     },
+     {
+      "id": "art",
+      "label": "Thoracoacromial Artery Branches"
+     },
+     {
+      "id": "nerve",
+      "label": "Lateral Pectoral Nerve (Motor to Major)"
+     },
+     {
+      "id": "lymph",
+      "label": "Infraclavicular Efferent Lymphatics"
+     }
+    ],
+    "edges": [
+     [
+      "vein",
+      "art"
+     ],
+     [
+      "art",
+      "nerve"
+     ],
+     [
+      "nerve",
+      "lymph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The female breast extends vertically from the second to the sixth rib, and transversely from the lateral sternal border to the midaxillary line. Its superolateral extension pierces the deep axillary fascia through the foramen of Langer into the axilla as the **axillary tail of Spence**. It rests upon deep pectoral fascia separated by the retromammary space.",
+   "say": "The female breast spans from the second to sixth rib and from the sternal edge to the midaxillary line. Its superolateral extension penetrates the axillary fascia as the axillary tail of Spence. It glides over deep pectoral fascia across the retromammary space.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-breast-lymph.svg",
+    "alt": "Breast quadrants, axillary lymph node levels I, II, and III, and internal mammary nodes",
+    "caption": "Breast quadrants, axillary lymph nodes, and internal mammary drainage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The glandular parenchyma is suspended from the overlying dermis by strong fibrous bands designated **suspensory ligaments of Cooper**. Malignant infiltration of these ligaments by breast carcinoma causes pathological shortening that pulls the overlying skin inward, creating the characteristic clinical sign of localized skin dimpling or tethering.",
+   "say": "Glandular lobules are suspended from skin by fibrous suspensory ligaments of Cooper. Infiltration of these bands by breast cancer causes retraction, pulling the skin inward to produce localized dimpling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cooper Ligament Infiltration",
+     "points": [
+      "Tumour cells invade fibrous suspensory bands",
+      "Fibrotic shortening tethers dermis",
+      "Produces localized skin dimpling",
+      "Accentuated by moving pectoralis major"
+     ]
+    },
+    "right": {
+     "title": "Dermal Lymphatic Obstruction",
+     "points": [
+      "Carcinoma emboli occlude subdermal lymphatics",
+      "Severe cutaneous lymphedema develops",
+      "Hair follicles remain tethered to deep dermis",
+      "Produces classic Peau d'orange appearance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When malignant tumor emboli block the subdermal lymphatic plexus, localized cutaneous edema develops while hair follicles remain tethered by sweat gland ducts, producing the pitted orange-peel texture known as **peau d orange**. Cancer invasion into the main lactiferous ducts behind the areola triggers fibrous ductal contraction, presenting clinically as nipple retraction.",
+   "say": "When tumour emboli plug subdermal lymphatics, skin lymphedema develops around tethered hair follicles, yielding the pitted peau d orange texture. Malignant invasion of lactiferous ducts pulls the nipple inward, causing nipple retraction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cutaneous Signs in Breast Cancer",
+    "nodes": [
+     {
+      "id": "tum",
+      "label": "Invasive Ductal Carcinoma"
+     },
+     {
+      "id": "coop",
+      "label": "Cooper Ligament Invasion -> Skin Dimpling"
+     },
+     {
+      "id": "lymph",
+      "label": "Dermal Lymphatic Block -> Peau d'Orange"
+     },
+     {
+      "id": "duct",
+      "label": "Lactiferous Duct Invasion -> Nipple Retraction"
+     }
+    ],
+    "edges": [
+     [
+      "tum",
+      "coop"
+     ],
+     [
+      "tum",
+      "lymph"
+     ],
+     [
+      "tum",
+      "duct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lymphatic drainage of the breast is paramount in staging carcinoma: seventy-five percent drains laterally into the **axillary lymph nodes**, twenty percent drains medially into internal mammary nodes along the internal thoracic artery, and five percent drains into posterior intercostal nodes. Surgical staging categorizes axillary nodes into three levels relative to the pectoralis minor muscle.",
+   "say": "Seventy-five percent of breast lymph drains into axillary nodes, twenty percent passes to internal mammary nodes, and five percent enters posterior intercostal channels. Axillary lymph nodes are classified into three surgical levels relative to pectoralis minor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Axillary Level",
+     "Relation to Pectoralis Minor",
+     "Constituent Node Groups",
+     "Surgical Clearance"
+    ],
+    "rows": [
+     [
+      "Level I",
+      "Lateral to lateral border of pectoralis minor",
+      "Anterior (pectoral), lateral, posterior (subscapular)",
+      "Routinely cleared in axillary dissection"
+     ],
+     [
+      "Level II",
+      "Deep (posterior) to pectoralis minor",
+      "Central axillary group, interpectoral Rotter nodes",
+      "Cleared in standard level I and II dissection"
+     ],
+     [
+      "Level III",
+      "Medial to medial border of pectoralis minor",
+      "Apical (subclavicular) axillary group",
+      "Cleared in advanced nodal involvement"
+     ],
+     [
+      "Internal Mammary",
+      "Parasternal spaces along internal thoracic artery",
+      "Parasternal lymph node chain",
+      "Monitored in medial quadrant tumours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Level I nodes lie lateral to pectoralis minor; Level II nodes lie directly posterior to pectoralis minor; Level III nodes lie medial to pectoralis minor beneath the clavicle. To minimize morbidity from extensive axillary lymphadenectomy, clinicians perform a **sentinel node biopsy** by injecting radiotracer or blue dye into the periareolar plexus, mapping the first draining station node.",
+   "say": "Level one nodes lie lateral to pectoralis minor, level two sit deep to it, and level three sit medial. To avoid unnecessary axillary clearance, surgeons perform sentinel node biopsy using blue dye or radiotracer to identify the first draining node.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sentinel Node Mapping Cascade",
+    "nodes": [
+     {
+      "id": "inj",
+      "label": "Periareolar Injection of Blue Dye / Technetium"
+     },
+     {
+      "id": "drain",
+      "label": "Rapid Transit to Level I Sentinel Node"
+     },
+     {
+      "id": "biop",
+      "label": "Intraoperative Sentinel Node Excision"
+     },
+     {
+      "id": "histo",
+      "label": "Frozen Section: Negative Spares Axilla"
+     }
+    ],
+    "edges": [
+     [
+      "inj",
+      "drain"
+     ],
+     [
+      "drain",
+      "biop"
+     ],
+     [
+      "biop",
+      "histo"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

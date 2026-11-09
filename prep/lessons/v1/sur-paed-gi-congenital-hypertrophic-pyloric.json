@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sur-paed-gi",
+ "subject": "surgery",
+ "title": "Hypertrophic Pyloric Stenosis and Intussusception",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Thickening of the pylorus muscle blocking stomach emptying in young infants is **congenital hypertrophic pyloric stenosis**. It typically appears at two to eight weeks with forceful non bilious vomiting after feeds. The hungry baby loses weight and becomes dehydrated with low chloride and potassium.",
+   "say": "Hypertrophic pyloric stenosis blocks stomach emptying at two to eight weeks with forceful non bilious vomiting.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pyloric-stenosis-fig1.webp",
+    "alt": "Hypertrophic pyloric stenosis pathology.",
+    "caption": "Hypertrophic pyloric stenosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The firm pylorus felt in the right upper abdomen during a test feed is the **olive mass**. Feeling it confirms the diagnosis clinically, though ultrasound is now usual. The thickened muscle measures over four millimetres on ultrasound criteria. Ultrasound needs muscle thickness at least 4 millimetres and channel length at least 16 millimetres to call it positive.",
+   "say": "The olive mass felt during a test feed confirms pyloric stenosis clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Investigation",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Test feed",
+      "Olive mass felt"
+     ],
+     [
+      "Ultrasound",
+      "Muscle over 4 mm thick"
+     ],
+     [
+      "Blood gas",
+      "Low chloride alkalosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Splitting the thickened pylorus muscle lengthwise without cutting mucosa is **Ramstedt pyloromyotomy**. Fluids and salts are corrected before surgery, never rushed as an emergency operation. Feeding usually resumes within hours of the procedure. Blood tests classically show low chloride, low potassium and a metabolic alkalosis, the pattern to correct before theatre.",
+   "say": "Ramstedt pyloromyotomy splits the thickened muscle after fluids and salts are corrected first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-gastrointestinal-emergencies-pyloromyotomy-and-ladd-procedure-fig1.webp",
+    "alt": "Pyloromyotomy and Ladd procedure for malrotation.",
+    "caption": "Pyloromyotomy operation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Telescoping of one bowel segment into the next is **intussusception**. It peaks between six months and two years, causing colicky pain, vomiting and a sausage shaped abdominal mass. Most cases have no lead point in this age group. The child draws up the legs with each spasm, then lies exhausted between attacks, a rhythm parents describe well.",
+   "say": "Intussusception telescopes bowel in infants, causing colicky pain and a sausage shaped mass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intussusception-fig1.webp",
+    "alt": "Intussusception anatomy and ultrasound appearance.",
+    "caption": "Intussusception anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ultrasound shows concentric bowel rings described as the **target sign**. This confirms intussusception quickly without radiation. Air or fluid enema under imaging guidance is then attempted for reduction. Doughnut and pseudokidney describe the same rings, and a normal scan during a pain free interval does not exclude it.",
+   "say": "The target sign on ultrasound confirms intussusception before guided enema reduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Colicky pain episodes"
+     },
+     {
+      "id": "n1",
+      "label": "Ultrasound target sign"
+     },
+     {
+      "id": "n2",
+      "label": "Enema reduction attempted"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery if reduction fails"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correcting dehydration and salt loss before pyloromyotomy follows the rule of **resuscitation first**. The metabolic alkalosis from vomiting hydrochloric acid must settle. Operating on a depleted baby risks anaesthetic complications. Chloride below 100 millimoles per litre and bicarbonate still high mean resuscitation is not finished, however well the baby looks.",
+   "say": "Resuscitation first corrects alkalosis before pyloromyotomy because depleted babies risk anaesthetic complications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before surgery",
+     "points": [
+      "Fluids replace losses",
+      "Chloride and potassium corrected",
+      "Alkalosis settles"
+     ]
+    },
+    "right": {
+     "title": "Operation",
+     "points": [
+      "Muscle split lengthwise",
+      "Mucosa kept intact",
+      "Feeds resume quickly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First born boys are affected most often in pyloric stenosis, a pattern of **male predominance**. Family history also increases risk in siblings. Macrolide antibiotics in early life are a recognised association. Erythromycin in the first two weeks of life raises risk several fold, a drug history point worth asking about.",
+   "say": "Pyloric stenosis favours first born boys and runs in families.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk factor",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Male sex",
+      "Four times commoner"
+     ],
+     [
+      "First born",
+      "Higher risk"
+     ],
+     [
+      "Family history",
+      "Sibling risk raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Projectile vomiting that is never green separates pyloric stenosis from **bilious obstruction**. Bile stained vomiting in an infant means obstruction beyond the duodenum and needs urgent surgical assessment. Colour of vomit is therefore a key history point. Green vomiting after pyloromyotomy age should redirect thinking to malrotation, where hours decide how much bowel survives.",
+   "say": "Non bilious vomiting fits pyloric stenosis, while green vomiting means urgent surgical obstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Vomiting infant assessed"
+     },
+     {
+      "id": "n1",
+      "label": "Green vomit present or absent"
+     },
+     {
+      "id": "n2",
+      "label": "Pyloric cause if non bilious"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical cause if bilious"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After successful pyloromyotomy, vomiting may persist briefly from stomach atony called **postoperative settling**. It resolves within a day or two without further surgery. Persistent vomiting beyond that needs re-evaluation for incomplete myotomy. Incomplete myotomy and mucosal perforation are the two surgical causes sought when vomiting persists beyond 48 hours.",
+   "say": "Brief vomiting after pyloromyotomy settles in days, while persistence needs re-evaluation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Settling",
+     "points": [
+      "Vomiting fades in days",
+      "Baby feeds progressively",
+      "Reassure parents"
+     ]
+    },
+    "right": {
+     "title": "Incomplete myotomy",
+     "points": [
+      "Vomiting persists",
+      "Weight falls again",
+      "Re-evaluation needed"
+     ]
+    }
+   }
+  }
+ ]
+}

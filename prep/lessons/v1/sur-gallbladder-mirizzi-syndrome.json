@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-gallbladder",
+ "subject": "surgery",
+ "title": "Mirizzi Syndrome, Porcelain Gallbladder, and Carcinoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Extrinsic compression of the common hepatic duct caused by a large gallstone impacted within Hartmann pouch or the cystic duct defines **Mirizzi syndrome**. The severe chronic localized inflammation provokes circumferential dense fibrosis and secondary obstructive jaundice. Over time, persistent pressure necrosis can erode through adjacent ductal walls, creating a cholecystobiliary or cholecystocholedochal fistula that dramatically increases surgical complexity.",
+   "say": "Mirizzi syndrome occurs when an impacted stone in the cystic duct neck compresses the common hepatic duct, risking cholecystobiliary fistula formation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-gallbladder.webp",
+    "alt": "Gross pathological specimen of gallbladder showing chronic transmural inflammation, gallstones, and invasive gallbladder adenocarcinoma.",
+    "caption": "Gallbladder malignancy: chronic gallstone inflammation driving progressive dysplasia into invasive adenocarcinoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The surgical staging of Mirizzi syndrome is categorized by the **Csendes classification** into five discrete anatomical types. Type one involves simple external mechanical compression of the common hepatic duct without fistula. Type two exhibits a cholecystobiliary fistula eroding up to one-third of the common duct circumference. Type three involves one-third to two-thirds of duct circumference, and type four demonstrates complete circumferential destruction. Type five encompasses any type accompanied by a cholecystoenteric fistula.",
+   "say": "Csendes classification categorizes Mirizzi syndrome from type one extrinsic compression up to type four complete duct destruction and type five cholecystoenteric fistula.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Csendes Type",
+     "Pathological Anatomy",
+     "Definitive Surgical Repair"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Extrinsic duct compression without fistula",
+      "Partial or total cholecystectomy"
+     ],
+     [
+      "Type II",
+      "Cholecystobiliary fistula < 33% circumference",
+      "Cholecystectomy + primary duct repair over T-tube"
+     ],
+     [
+      "Type III",
+      "Cholecystobiliary fistula 33% - 66% circumference",
+      "Cholecystectomy + flap repair or hepaticojejunostomy"
+     ],
+     [
+      "Type IV",
+      "Fistula destroying > 66% of duct wall",
+      "Roux-en-Y hepaticojejunostomy reconstruction"
+     ],
+     [
+      "Type V",
+      "Any type with cholecystoenteric fistula",
+      "Bowel fistula closure + biliary reconstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical repair of Mirizzi syndrome must be tailored precisely to the degree of common bile duct destruction. While type one lesions can be managed with cholecystectomy alone, types two through four carry extreme hazards of catastrophic iatrogenic biliary transection during laparoscopic surgery. For types three and four, complete biliary reconstruction using a **Roux-en-Y hepaticojejunostomy** is obligatory to achieve a tension-free mucosa-to-mucosa anastomotic outflow.",
+   "say": "High-grade Mirizzi fistulas demand Roux-en-Y hepaticojejunostomy reconstruction to repair extensive loss of the common bile duct wall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "type1",
+      "label": "Type I: Extrinsic Compression Only -> Cholecystectomy Alone"
+     },
+     {
+      "id": "type2",
+      "label": "Type II: <33% Fistula -> Primary Suture over T-Tube Stent"
+     },
+     {
+      "id": "type3",
+      "label": "Type III/IV: Extensive Wall Defect -> Roux-en-Y Hepaticojejunostomy"
+     },
+     {
+      "id": "type5",
+      "label": "Type V: Enteric Fistula -> Takedown, Bowel Repair & Hepaticojejunostomy"
+     }
+    ],
+    "edges": [
+     [
+      "type1",
+      "type2"
+     ],
+     [
+      "type2",
+      "type3"
+     ],
+     [
+      "type3",
+      "type5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extensive intramural calcification of the gallbladder wall secondary to chronic dystrophic calcification from long-standing gallstone disease is termed a **porcelain gallbladder**. The wall becomes remarkably hard, brittle, bluish-white, and completely non-functional. Historically reported to harbour gallbladder carcinoma in up to twenty-five percent of cases, modern cohort studies demonstrate a true cancer risk between two and five percent.",
+   "say": "Porcelain gallbladder features extensive dystrophic calcification of the muscularis or mucosa, associated with an elevated risk of gallbladder adenocarcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Mural Calcification",
+     "points": [
+      "Dense continuous broad calcified ring",
+      "Involves the entire muscularis propria",
+      "Lower risk of malignancy (< 2%)",
+      "Visualized clearly on plain abdominal X-ray"
+     ]
+    },
+    "right": {
+     "title": "Selective Mucosal Calcification",
+     "points": [
+      "Incomplete, patchy, punctate calcification",
+      "Confined to mucosal and submucosal layers",
+      "High risk of malignancy (up to 15%)",
+      "Mandates urgent surgical resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The radiological hallmark of porcelain gallbladder on plain abdominal radiographs or non-contrast computed tomography is a distinct pear-shaped, curvilinear rim of calcification in the right upper quadrant. Because selective mucosal and punctate calcification carries a substantial malignant hazard, the standard recommendation for all diagnosed patients with acceptable operative fitness remains prophylactic open or laparoscopic **total cholecystectomy**.",
+   "say": "Porcelain gallbladder appears as a curvilinear rim of calcification on CT and warrants prophylactic total cholecystectomy due to malignancy concerns.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gallbladder-disease-fig1.webp",
+    "alt": "Radiological diagram illustrating porcelain gallbladder wall calcification and pre-invasive dysplastic epithelial changes.",
+    "caption": "Porcelain gallbladder: extensive dystrophic wall calcification warranting prophylactic surgical excision. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most prevalent primary malignancy of the biliary tree is **carcinoma gallbladder**, which exhibits an overwhelming female preponderance and high prevalence in northern India, Chile, and Japan. Greater than eighty percent of cases arise directly on a background of chronic cholelithiasis, driven by decades of mechanical mucosal trauma, chronic inflammation, and bacterial degradation of bile acids into chemical carcinogens.",
+   "say": "Carcinoma of the gallbladder is the commonest biliary malignancy, strongly linked to chronic gallstones and chronic mucosal irritation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stones",
+      "label": "Chronic Cholelithiasis (>10-20 Years)"
+     },
+     {
+      "id": "dysplasia",
+      "label": "Mucosal Metaplasia -> Dysplasia -> Carcinoma In Situ"
+     },
+     {
+      "id": "invasion",
+      "label": "Invasive Adenocarcinoma: T1, T2, T3 or T4 Disease"
+     },
+     {
+      "id": "spread",
+      "label": "Direct Liver Invasion & Regional Nodal Lymphatic Seeding"
+     }
+    ],
+    "edges": [
+     [
+      "stones",
+      "dysplasia"
+     ],
+     [
+      "dysplasia",
+      "invasion"
+     ],
+     [
+      "invasion",
+      "spread"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histopathologically, over eighty-five percent of gallbladder malignancies are adenocarcinomas. The gallbladder wall lacks a distinct submucosa, possessing only a thin lamina propria adjacent to muscularis, which allows malignant cells to directly invade adjacent liver segments four and five early in the disease process. Early disease is frequently asymptomatic, discovered incidentally following routine cholecystectomy for supposedly benign **symptomatic cholelithiasis**.",
+   "say": "Gallbladder adenocarcinoma directly invades the liver early due to the lack of submucosa, often detected incidentally during routine cholecystectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "T Stage",
+     "Depth of Tumour Invasion",
+     "Standard Surgical Management"
+    ],
+    "rows": [
+     [
+      "T1a",
+      "Tumour limited to the lamina propria",
+      "Simple cholecystectomy alone (curative)"
+     ],
+     [
+      "T1b",
+      "Tumour invades the muscularis propria",
+      "Extended radical cholecystectomy recommended"
+     ],
+     [
+      "T2",
+      "Invades perimuscular connective tissue",
+      "Extended radical cholecystectomy + lymphadenectomy"
+     ],
+     [
+      "T3",
+      "Perforates serosa or directly invades liver < 2 cm",
+      "Radical cholecystectomy + wedge / bisegmentectomy"
+     ],
+     [
+      "T4",
+      "Invades main portal vein, hepatic artery, or multiple organs",
+      "Palliative therapy (unresectable)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of gallbladder cancer is dictated strictly by pathological T stage. For stage T1a tumours confined to the lamina propria with negative margins, simple cholecystectomy alone yields a five-year survival near one hundred percent. However, for stages T1b, T2, and resectable T3, curative therapy requires an **extended radical cholecystectomy**, comprising en bloc cholecystectomy, non-anatomical two-centimetre wedge resection or segments 4b/5 bisegmentectomy, and regional lymphadenectomy.",
+   "say": "Stage T1a is cured by simple cholecystectomy, while T1b and T2 require radical cholecystectomy with liver wedge excision and regional lymphadenectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple Cholecystectomy",
+     "points": [
+      "Removes only the gallbladder",
+      "Adequate oncological therapy for T1a only",
+      "Margins of cystic duct must be negative",
+      "No hepatic parenchymal resection"
+     ]
+    },
+    "right": {
+     "title": "Extended Radical Resection",
+     "points": [
+      "Obligatory for T1b, T2, and resectable T3",
+      "2 cm liver wedge or segment IVb / V resection",
+      "Portal lymphadenectomy (stations 8, 12, 13)",
+      "Significantly improves 5-year disease-free survival"
+     ]
+    }
+   }
+  }
+ ]
+}

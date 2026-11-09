@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-sensory",
+  "subject": "physiology",
+  "title": "Somatosensory Pathways, Dorsal Columns, and Sensory Cortex",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Spindle-shaped encapsulated mechanoreceptors aligned parallel to collagen fiber bundles within the deep dermis, ligaments, and joint capsules constitute the **Ruffini ending**. Because they adapt very slowly and are anchored to connective tissue, Ruffini corpuscles discharge sustained action potentials in response to directional skin stretch and joint angle displacement, contributing essentially to kinesthetic proprioception.",
+      "say": "Ruffini endings are slowly adapting encapsulated receptors that signal sustained skin stretch and joint angles.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dermal_shear",
+            "label": "Directional Mechanical Drag or Sustained Skin Stretch Strains Connective Strands"
+          },
+          {
+            "id": "collagen_pinch",
+            "label": "Anchored Collagen Fibrils Compress Free Nerve Endings Inside Capsule"
+          },
+          {
+            "id": "slow_depol",
+            "label": "Sustained Influx of Cations Generates Prolonged Low-Decay Receptor Potential"
+          },
+          {
+            "id": "proprio_code",
+            "label": "Continuous Tonic Firing Encodes Finger Position, Hand Conformation, and Grip"
+          }
+        ],
+        "edges": [
+          [
+            "dermal_shear",
+            "collagen_pinch"
+          ],
+          [
+            "collagen_pinch",
+            "slow_depol"
+          ],
+          [
+            "slow_depol",
+            "proprio_code"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ascending tactile information segregates into two anatomically distinct spinal pathways. Large myelinated A-beta afferents mediating fine touch, vibration, and conscious proprioception enter the spinal cord and ascend ipsilaterally without synaptic interruption within the **dorsal column-medial lemniscal system**, traveling in the medial fasciculus gracilis and lateral fasciculus cuneatus.",
+      "say": "Fine touch, vibration, and proprioception ascend uncrossed in the dorsal columns to the medulla oblongata.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tabes-dorsalis-fig1.webp",
+        "caption": "Selective neurosyphilitic degeneration of the spinal dorsal columns resulting in severe sensory ataxia.",
+        "alt": "Dorsal column posterior funiculus degeneration causing loss of joint position sense"
+      }
+    },
+    {
+      "tx": "Dorsal column primary axons terminate in the medulla oblongata within the nucleus gracilis and nucleus cuneatus, synapsing with second-order neurons. The axons of these second-order cells arch ventromedially as **internal arcuate fibers** that cross the medullary midline in the sensory decussation, ascending through the brainstem as the contralateral medial lemniscus toward the thalamus.",
+      "say": "Second-order dorsal column axons decussate in the medulla as internal arcuate fibers, forming the medial lemniscus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "first_order",
+            "label": "Primary Afferents Ascend Uncrossed to Medullary Gracile and Cuneate Nuclei"
+          },
+          {
+            "id": "synapse_relay",
+            "label": "Second-Order Cell Bodies Emit Axons That Sweep Ventromedially"
+          },
+          {
+            "id": "arcuate_cross",
+            "label": "Internal Arcuate Fibers Decussate Across Midline Above Motor Decussation"
+          },
+          {
+            "id": "medial_lemniscus",
+            "label": "Contralateral Medial Lemniscus Ascends Pons and Midbrain to VPL Thalamus"
+          }
+        ],
+        "edges": [
+          [
+            "first_order",
+            "synapse_relay"
+          ],
+          [
+            "synapse_relay",
+            "arcuate_cross"
+          ],
+          [
+            "arcuate_cross",
+            "medial_lemniscus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to dorsal column mechanics, nociceptive, thermal, and crude tactile primary afferents synapse immediately within the dorsal horn of the spinal cord upon entry. Second-order axons cross the anterior white commissure obliquely over one to two spinal segments to ascend in the contralateral **anterolateral system**, forming the spinothalamic and spinoreticular tracts.",
+      "say": "Pain and temperature axons cross in the anterior white commissure and ascend in the anterolateral tract.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/syringomyelia-fig1.webp",
+        "caption": "Central spinal canal cavitary expansion destroying the crossing fibers of the anterior white commissure.",
+        "alt": "Syringomyelia cavitation disrupting crossing spinothalamic axons in anterior commissure"
+      }
+    },
+    {
+      "tx": "Both the medial lemniscus and spinothalamic tract terminate somatotopically within the diencephalon, targeting the **ventral posterolateral nucleus** of the thalamus. Third-order thalamocortical projection neurons relay through the posterior limb of the internal capsule to synapse primarily within layer four of the primary somatosensory cortex located in the postcentral gyrus.",
+      "say": "Thalamic ventral posterolateral neurons receive somatosensory input and project to the primary sensory cortex.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dorsal Column-Medial Lemniscus",
+          "points": [
+            "Carries conscious proprioception, vibratory sense, and fine discriminative touch",
+            "Rapid conduction velocity (30 to 70 meters per second)",
+            "Decussates in lower medulla oblongata as internal arcuate fibers",
+            "Relays via gracile/cuneate nuclei to VPL thalamus and somatosensory cortex"
+          ]
+        },
+        "right": {
+          "title": "Anterolateral System",
+          "points": [
+            "Carries fast and slow pain, thermal sensations, itch, and tickle",
+            "Slower conduction velocity (0.5 to 30 meters per second)",
+            "Decussates at spinal segment level in anterior white commissure",
+            "Projects to VPL, intralaminar nuclei, periaqueductal gray, and reticular formation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The primary somatosensory cortex maps the contralateral body surface in an inverted topographic arrangement known as the sensory homunculus. Because cortical representation is proportional to peripheral receptor density rather than anatomical surface area, the hands, lips, and tongue occupy disproportionately vast tracts of cortical territory within **Brodmann areas 3, 1, and 2**.",
+      "say": "The primary somatosensory cortex in the postcentral gyrus maps the body with magnified hands and face regions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "area_3b",
+            "label": "Brodmann Area 3b Receives Dense Thalamic Lemniscal Input from Cutaneous Receptors"
+          },
+          {
+            "id": "area_3a",
+            "label": "Brodmann Area 3a Processes Deep Muscle Spindle and Articular Proprioceptive Input"
+          },
+          {
+            "id": "area_1_2",
+            "label": "Areas 1 and 2 Integrate Complex Textural Features and 3D Structural Geometry"
+          },
+          {
+            "id": "somatosensory_map",
+            "label": "Magnified Homunculus Allocates Vast Cortical Slices to Thumb, Lips, and Tongue"
+          }
+        ],
+        "edges": [
+          [
+            "area_3b",
+            "area_1_2"
+          ],
+          [
+            "area_3a",
+            "area_1_2"
+          ],
+          [
+            "area_1_2",
+            "somatosensory_map"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cortical processing within the somatosensory cortex enables higher-order perceptual synthesis, such as identifying a familiar three-dimensional object placed in the hand solely through tactile manipulation without visual inspection. This complex integrative capability represents **stereognosis**, which depends upon intact dorsal column conduction, primary sensory cortex reception, and posterior parietal association cortex integration.",
+      "say": "Stereognosis is the ability to recognize handheld objects by touch alone through cortical integration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cortical Discriminative Functions",
+          "points": [
+            "Stereognosis: tactile identification of coins, keys, or textured objects",
+            "Graphesthesia: recognition of numbers or letters drawn on palm",
+            "Two-point discrimination: resolving two simultaneous tactile contacts",
+            "Point localization: accurate spatial identification of cutaneous touch"
+          ]
+        },
+        "right": {
+          "title": "Parietal Lobe Lesion Deficits",
+          "points": [
+            "Astereognosis: inability to recognize objects by tactile palpation alone",
+            "Agraphesthesia: loss of dermal number and letter recognition",
+            "Extinction: failure to perceive contralateral stimulus under bilateral touch",
+            "Sensory ataxia: uncoordinated limb movement due to proprioception loss"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "To sharpen spatial contrast and pinpoint stimulus locations with microscopic precision, active sensory pathways recruit local inhibitory interneurons that suppress transmission from surrounding adjacent receptive fields. This ubiquitous neural sharpening mechanism is **lateral inhibition**, which suppresses secondary neurons peripheral to the stimulus center, enhancing perceptual borders and spatial acuity.",
+      "say": "Lateral inhibition sharpens sensory contrast by suppressing transmission from adjacent receptive fields.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "central_peak",
+            "label": "Central Sensory Receptor Activated Intensely by Direct Focal Contact"
+          },
+          {
+            "id": "relay_excitation",
+            "label": "Strong Primary Afferent Excites Direct Central Second-Order Relay Neuron"
+          },
+          {
+            "id": "inhibitory_interneuron",
+            "label": "Collateral Axon Branches Excite GABAergic Local Inhibitory Interneurons"
+          },
+          {
+            "id": "flank_suppression",
+            "label": "Adjacent Flanking Relay Neurons Suppressed, Maximizing Signal-to-Noise Ratio"
+          }
+        ],
+        "edges": [
+          [
+            "central_peak",
+            "relay_excitation"
+          ],
+          [
+            "relay_excitation",
+            "inhibitory_interneuron"
+          ],
+          [
+            "inhibitory_interneuron",
+            "flank_suppression"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

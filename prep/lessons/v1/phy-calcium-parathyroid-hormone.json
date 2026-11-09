@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phy-calcium",
+  "subject": "physiology",
+  "title": "Parathyroid Hormone, Calcitriol, and Phosphate Balance",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Serum calcium exists in three distinct physiological fractions: forty-five percent is bound to plasma proteins (predominantly albumin), ten percent is complexed with citrate and phosphate, and fifty percent circulates as **serum ionised calcium**. Only the unbound ionised calcium fraction is biologically active and tightly regulated.",
+      "say": "Only free ionised calcium is biologically active, representing fifty percent of total serum calcium.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Plasma Calcium Fraction",
+          "Percentage of Total",
+          "Diffusibility Across Capillaries",
+          "Biological Activity"
+        ],
+        "rows": [
+          [
+            "Free Ionised Calcium (Ca2+)",
+            "~50% (1.15 to 1.30 mmol/L)",
+            "Freely filterable across glomerulus",
+            "Biologically active; regulates PTH and neuromuscular excitability"
+          ],
+          [
+            "Albumin-Bound Calcium",
+            "~40% to 45%",
+            "Non-filterable macromolecular complex",
+            "Biologically inert storage reservoir; pH-sensitive"
+          ],
+          [
+            "Citrate / Phosphate Complexed",
+            "~5% to 10%",
+            "Freely filterable across glomerulus",
+            "Complexed with small circulating anions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because hydrogen ions compete with calcium for negatively charged binding sites on serum albumin, acute acid-base disturbances shift the ionised calcium fraction. In acute respiratory alkalosis, hydrogen ions dissociate from albumin, increasing negative charges that bind free calcium, precipitating acute **symptomatic hypocalcaemic tetany**.",
+      "say": "Alkalosis increases calcium binding to albumin, dropping free ionised calcium and triggering tetany and muscle cramps.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypervent",
+            "label": "Acute Hyperventilation Lowers Arterial PaCO2, Raising Blood pH (Alkalosis)"
+          },
+          {
+            "id": "proton_off",
+            "label": "Protons Dissociate from Albumin Imidazole Rings into Plasma to Buffer pH"
+          },
+          {
+            "id": "ca_bind",
+            "label": "Unmasked Negative Charges on Albumin Avidly Bind Circulating Free Ca2+"
+          },
+          {
+            "id": "tetany",
+            "label": "Ionised Calcium Plummets: Voltage-Gated Na+ Channels Excite, Eliciting Tetany"
+          }
+        ],
+        "edges": [
+          [
+            "hypervent",
+            "proton_off"
+          ],
+          [
+            "proton_off",
+            "ca_bind"
+          ],
+          [
+            "ca_bind",
+            "tetany"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chief cells of the parathyroid glands monitor extracellular ionised calcium continuously through cell-surface **calcium-sensing receptors**. Operating via Gq and Gi proteins, receptor activation by elevated extracellular calcium increases intracellular calcium and lowers cyclic AMP, which uniquely and potently inhibits parathyroid hormone secretion.",
+      "say": "Calcium-sensing receptors on chief cells detect high calcium and shut off parathyroid hormone secretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypocalcaemic State (< 1.15 mmol/L)",
+          "points": [
+            "Calcium-sensing receptor (CaSR) remains unbound and inactive",
+            "Adenylyl cyclase disinhibited; intracellular cyclic AMP climbs",
+            "Triggers robust exocytosis of pre-formed parathyroid hormone granules",
+            "Stimulates parathyroid cell proliferation over days to weeks"
+          ]
+        },
+        "right": {
+          "title": "Hypercalcaemic State (> 1.30 mmol/L)",
+          "points": [
+            "High extracellular Ca2+ binds and activates Gq/Gi-coupled CaSR",
+            "Intracellular IP3 and calcium surge; adenylyl cyclase inhibited",
+            "Directly suppresses pre-formed PTH exocytosis within seconds",
+            "Stimulates degradation of stored PTH inside chief cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Secreted by chief cells, **parathyroid hormone** is an eighty-four amino acid linear polypeptide that acts on bone and kidneys to elevate serum calcium while lowering serum phosphate. In proximal renal tubules, parathyroid hormone internalizes sodium-phosphate cotransporters, producing marked phosphaturia to prevent calcium phosphate precipitation.",
+      "say": "Parathyroid hormone raises blood calcium and lowers phosphate by causing profound renal phosphate excretion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pth_sec",
+            "label": "Parathyroid Chief Cells Secrete Active PTH in Response to Hypocalcaemia"
+          },
+          {
+            "id": "pth1r_kidney",
+            "label": "Binds Gs-Coupled PTH1R Receptors in Proximal Renal Convoluted Tubules"
+          },
+          {
+            "id": "napi2a_down",
+            "label": "Endocytic Internalization and Degradation of Apical NaPi-2a Cotransporters"
+          },
+          {
+            "id": "phosphaturia",
+            "label": "Massive Phosphaturia Eliminates Phosphate, Lowering Serum Phosphate Product"
+          }
+        ],
+        "edges": [
+          [
+            "pth_sec",
+            "pth1r_kidney"
+          ],
+          [
+            "pth1r_kidney",
+            "napi2a_down"
+          ],
+          [
+            "napi2a_down",
+            "phosphaturia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the distal convoluted tubule, parathyroid hormone stimulates active calcium reabsorption through apical TRPV5 channels and basolateral sodium-calcium exchangers. Simultaneously, parathyroid hormone transcriptionally upregulates the renal mitochondrial enzyme **one-alpha-hydroxylase**, catalyzing the final activation step of twenty-five-hydroxyvitamin D into fully active hormonal calcitriol.",
+      "say": "In the kidney, PTH reabsorbs calcium and activates the one-alpha-hydroxylase enzyme to synthesize calcitriol.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/calcium-homeostasis-pth-and-rickets-fig1.webp",
+        "alt": "Calcium homeostasis pathways and parathyroid hormone signaling",
+        "caption": "Parathyroid hormone bone and renal target actions, vitamin D activation, and rickets pathophysiology."
+      }
+    },
+    {
+      "tx": "Synthesized in the skin via ultraviolet photolysis of seven-dehydrocholesterol or ingested in the diet, cholecalciferol undergoes sequential two-step enzymatic hydroxylation. The liver performs initial twenty-five-hydroxylation via CYP2R1, followed by proximal renal tubular **one-alpha-hydroxylation of vitamin D** to generate active one-alpha-twenty-five-dihydroxycholecalciferol to stimulate calcium absorption.",
+      "say": "Vitamin D is hydroxylated first in the liver, and then in the kidney by one-alpha-hydroxylase into active calcitriol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "uv_skin",
+            "label": "7-Dehydrocholesterol in Epidermis Converted by UV-B Photolysis to Cholecalciferol"
+          },
+          {
+            "id": "liver_25",
+            "label": "Hepatic CYP2R1 Performs 25-Hydroxylation to Yield Calcidiol (25-OH-D3)"
+          },
+          {
+            "id": "renal_1a",
+            "label": "Renal Proximal Tubule CYP27B1 (1-Alpha-Hydroxylase) Stimulated by PTH"
+          },
+          {
+            "id": "calcitriol",
+            "label": "Generates Fully Active Hormone Calcitriol (1,25-(OH)2-D3) to Drive Ca2+ Uptake"
+          }
+        ],
+        "edges": [
+          [
+            "uv_skin",
+            "liver_25"
+          ],
+          [
+            "liver_25",
+            "renal_1a"
+          ],
+          [
+            "renal_1a",
+            "calcitriol"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthesized by parafollicular C cells of the thyroid gland, the thirty-two amino acid peptide **calcitonin** acts as a physiological antagonist to parathyroid hormone. Secreted in response to acute hypercalcaemia, calcitonin directly binds calcitonin receptors on mature osteoclasts, rapidly inactivating them to halt osteocytic bone resorption.",
+      "say": "Calcitonin is secreted by thyroid C cells in hypercalcaemia, directly shutting down osteoclasts to lower blood calcium.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parathyroid Hormone (PTH)",
+          "points": [
+            "Secreted by parathyroid chief cells in response to hypocalcaemia",
+            "Increases serum calcium; decreases serum phosphate (phosphaturic)",
+            "Stimulates renal 1-alpha-hydroxylase to synthesize calcitriol",
+            "Essential for life; surgical removal produces fatal tetany"
+          ]
+        },
+        "right": {
+          "title": "Calcitonin",
+          "points": [
+            "Secreted by thyroid parafollicular C cells in hypercalcaemia",
+            "Decreases serum calcium and phosphate by inhibiting osteoclasts",
+            "Physiological role in adults is minor; used pharmacologically in Paget disease",
+            "Serves as a premier tumor marker for medullary thyroid carcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Autonomous hypersecretion of parathyroid hormone by a single benign parathyroid adenoma causes **primary hyperparathyroidism**. Characterized by the classic mnemonic of painful bones, renal stones, abdominal groans, and psychiatric moans, patients exhibit hypercalcaemia, hypophosphataemia, hypercalciuria, elevated alkaline phosphatase, and osteitis fibrosa cystica.",
+      "say": "Primary hyperparathyroidism causes hypercalcaemia, hypophosphataemia, recurrent kidney stones, and osteitis fibrosa cystica.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/primary-hyperparathyroidism-fig1.webp",
+        "alt": "Primary hyperparathyroidism pathology and bone resorption",
+        "caption": "Parathyroid adenoma histology, subperiosteal bone resorption, and hypercalcemic metabolic decompensation."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

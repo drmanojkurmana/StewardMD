@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "pat-tumour-diagnosis",
+  "subject": "pathology",
+  "title": "Cytokeratin, Vimentin, Desmin, Frozen Section, and FNAC",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Intermediate filaments fingerprint cell lineage under the microscope: keratins fill epithelial cells, vimentin fills mesenchymal cells, and desmin fills muscle, so antibody panels sort carcinoma from sarcoma from lymphoma in poorly differentiated tumours. The epithelial filament family is **cytokeratin**, the first stain of the unknown tumour panel.",
+      "say": "Cytokeratin says epithelium, vimentin says mesenchyme, desmin says muscle; that trio opens every unknown tumour panel.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Filament",
+          "Lineage",
+          "Tumour implication"
+        ],
+        "rows": [
+          [
+            "Cytokeratin",
+            "Epithelial",
+            "Carcinoma"
+          ],
+          [
+            "Vimentin",
+            "Mesenchymal",
+            "Sarcoma, also melanoma and lymphoma context"
+          ],
+          [
+            "Desmin",
+            "Muscle",
+            "Rhabdomyosarcoma, leiomyosarcoma"
+          ],
+          [
+            "GFAP and neurofilament",
+            "Glial and neuronal",
+            "Gliomas, neuroblastic tumours"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Read this staining panel as three verdicts side by side. The first tumour colours strongly for cytokeratin, declaring epithelial lineage, the second takes vimentin instead and behaves as a sarcoma, while the third picks up desmin as a muscle tumour should. That first **cytokeratin stain** is usually the branch point of the whole undifferentiated tumour workup.",
+      "say": "This panel contrasts cytokeratin positive carcinoma with vimentin positive sarcoma and desmin positive muscle tumour. The cytokeratin stain is usually the first branch point in an unknown tumour workup.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m87-pat-tumour-diagnosis-cytokeratin.webp",
+        "alt": "Intermediate filament immunohistochemistry panel showing cytokeratin positive carcinoma against vimentin positive sarcoma and desmin positive muscle tumour",
+        "caption": "Intermediate filament immunohistochemistry panel showing cytokeratin positive carcinoma against vimentin positive sarcoma and desmin positive muscle tumour. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Keratin patterns refine the answer further: CK7 and CK20 combinations sort lung, breast, ovary, colorectal, and urothelial primaries into recognisable quadrants that guide the search for an unknown primary. Pathologists quote the pair as the **CK7 and CK20 profile** before adding lineage transcription factors.",
+      "say": "The CK7 and CK20 quadrant sorts most unknown primaries before a single organ specific stain is ordered.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CK7 positive, CK20 negative",
+          "points": [
+            "Lung, breast, ovary, endometrium",
+            "Add TTF-1, GATA3, PAX8 to refine",
+            "Commonest unknown primary pattern"
+          ]
+        },
+        "right": {
+          "title": "CK7 negative, CK20 positive",
+          "points": [
+            "Colorectal carcinoma classic",
+            "CDX2 and SATB2 confirm bowel origin",
+            "Merkel cell gives dot-like CK20"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Vimentin positivity with keratin negativity pushes a spindle cell tumour toward sarcoma, where desmin, myogenin, S100, CD34, and other markers then separate muscle, nerve sheath, vascular, and stromal families. Muscle differentiation declared by desmin and myogenin defines the **rhabdomyosarcoma panel** in childhood tumours.",
+      "say": "Vimentin opens the sarcoma door; desmin and myogenin then prove skeletal muscle differentiation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/plasmablastic-lymphoma-fig1.webp",
+        "alt": "Plasmablastic lymphoma pathology and immunohistochemistry",
+        "caption": "Immunohistochemistry panels assigning lineage in a poorly differentiated neoplasm."
+      }
+    },
+    {
+      "tx": "Lymphomas reject both keratin and most epithelial markers, declaring themselves with CD45 and lineage antigens, while melanoma chooses S100, SOX10, and melanocytic markers, completing the four family sort of undifferentiated tumours. The haematological gatekeeper stain is **CD45**, leukocyte common antigen.",
+      "say": "CD45 separates lymphoma from carcinoma, sarcoma, and melanoma in the undifferentiated tumour sort.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Undifferentiated malignant tumour on H and E"
+          },
+          {
+            "id": "b",
+            "label": "Cytokeratin, CD45, S100, vimentin screen"
+          },
+          {
+            "id": "c",
+            "label": "One family lights up"
+          },
+          {
+            "id": "d",
+            "label": "Lineage panel confirms exact diagnosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Frozen section trades permanence for speed: tissue frozen, cut, and stained within minutes answers operative questions such as margin clearance, sentinel node involvement, or whether tissue is diagnostic, accepting freeze artefact as the price. The intraoperative technique is the **frozen section**, with definitive reporting deferred to paraffin sections.",
+      "say": "Frozen section answers the surgeon's question in minutes; paraffin sections still deliver the definitive diagnosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Frozen section strengths",
+          "points": [
+            "Minutes to an answer in theatre",
+            "Margins and sentinel nodes assessed",
+            "Confirms diagnostic tissue obtained"
+          ]
+        },
+        "right": {
+          "title": "Frozen section limits",
+          "points": [
+            "Freeze artefact distorts detail",
+            "Fatty and calcified tissue cuts poorly",
+            "Some diagnoses must wait for paraffin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fine needle aspiration cytology draws cells through a thin needle for smears and cell blocks, diagnosing thyroid nodules, lymphadenopathy, salivary masses, and deep lesions under image guidance with minimal morbidity. Architecture is sacrificed for speed and safety in **fine needle aspiration cytology**, so some tumours still need core biopsy.",
+      "say": "FNAC trades architecture for speed and safety; when grading or lymphoma subtyping matters, take a core instead.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Technique",
+          "Material obtained",
+          "Best for"
+        ],
+        "rows": [
+          [
+            "FNAC",
+            "Cells, smears, cell block",
+            "Thyroid, nodes, salivary glands"
+          ],
+          [
+            "Core biopsy",
+            "Tissue architecture",
+            "Lymphoma, sarcoma, breast grading"
+          ],
+          [
+            "Frozen section",
+            "Rapid intraoperative sections",
+            "Margins, sentinel nodes"
+          ],
+          [
+            "Excision",
+            "Whole lesion",
+            "Melanoma, small accessible tumours"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cytology grading systems convert smears into decisions: Bethesda categories for thyroid and cervix translate microscopic impressions into repeat, surgery, or observation pathways shared across teams. Standardised vocabularies protect patients from idiosyncratic reports; the thyroid system is the **Bethesda system**. Bethesda reporting also transformed cervical cytology into a shared international language for screening programmes.",
+      "say": "Bethesda categories turn cytology words into shared decisions about repeat sampling, surgery, or observation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytology can decide",
+          "points": [
+            "Thyroid nodule triage by Bethesda",
+            "Cervical screening and triage",
+            "Effusion malignancy confirmation"
+          ]
+        },
+        "right": {
+          "title": "Cytology cannot decide alone",
+          "points": [
+            "Lymphoma architecture and grading",
+            "Invasion assessment in many organs",
+            "Follicular thyroid carcinoma diagnosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Choosing among FNAC, core, frozen, and excision is a clinical decision balancing urgency, architecture, risk, and what the answer will change, made jointly by clinician, radiologist, and pathologist. Triple assessment in breast disease models the teamwork; the organising forum is the **multidisciplinary team meeting**.",
+      "say": "Pick the biopsy that answers the management question; the multidisciplinary meeting exists to make that choice well.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer assessment, where cytology, core biopsy, and immunohistochemistry combine in triple assessment."
+      }
+    }
+  ]
+}

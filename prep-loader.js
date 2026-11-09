@@ -33,7 +33,7 @@
    boss battles, quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, streak freezes; flag smd_prep_play, optional). */
 (function (G) {
   "use strict";
-  var V = "prep131";
+  var V = "prep134";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css"];
   var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-voice.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-pyqss.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js"];
@@ -84,10 +84,12 @@
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("PrepNucleus could not load. Check your connection and try again."); } catch (e) {} }
+  // Full-screen loader with a medical fact while the files download (smd-loader.js).
+  function shown(p) { return G.SMD_LOADER ? G.SMD_LOADER.during(p) : p; }
   function real() { return G.PREP && G.PREP !== stub ? G.PREP : null; }
 
   var stub = {
-    open: function (opts) { if (!enabled()) return false; load().then(function () { var p = real(); if (p) p.open(opts); else fail(); }, fail); return true; },
+    open: function (opts) { if (!enabled()) return false; shown(load()).then(function () { var p = real(); if (p) p.open(opts); else fail(); }, fail); return true; },
     isOpen: function () { return false; },
     back: function () { return false; },
     close: function () {}

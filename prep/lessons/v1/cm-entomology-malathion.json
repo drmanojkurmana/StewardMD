@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "id": "cm-entomology-malathion",
+ "subject": "community-medicine",
+ "module": "cm-entomology",
+ "title": "Chemical Vector Control: Malathion, Pyrethrum, Temephos, and Integrated Vector Management",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Malathion pharmacology and insecticidal action",
+   "tx": "Malathion is an organophosphorus insecticide widely deployed for adult mosquito control and outdoor thermal fogging. Absorbed through the insect cuticle, it undergoes metabolic activation to malaoxon, functioning through **malathion acetylcholinesterase inhibition mechanisms** that inactivate synaptic acetylcholinesterase; the resulting massive accumulation of acetylcholine across neural synapses causes continuous uncoordinated firing, tremors, convulsions, and respiratory paralysis, with mammalian safety conferred by rapid hydrolytic destruction by liver carboxylesterases.",
+   "say": "Malathion is an organophosphate insecticide that blocks acetylcholinesterase enzymes in insects. Excess acetylcholine overstimulates insect nerves, causing tremors and death while sparing human tissues.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Cuticular absorption and bioactivation to malaoxon"
+     },
+     {
+      "id": "m2",
+      "label": "Irreversible inhibition of acetylcholinesterase"
+     },
+     {
+      "id": "m3",
+      "label": "Accumulation of acetylcholine at neural synapses"
+     },
+     {
+      "id": "m4",
+      "label": "Continuous firing, tremors, and insect paralysis"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Natural pyrethrum and knock-down sprays",
+   "tx": "Extracted from the dried flower heads of Chrysanthemum cinerariaefolium, natural pyrethrum is an oleoresin containing six active insecticidal esters known as pyrethrins and cinerins. Functioning under **natural pyrethrum rapid knockdown kinetics**, the compound penetrates the insect nervous system within seconds to cause violent excitement and instant muscular collapse; because pyrethrins are rapidly detoxified by insect enzymes allowing eventual recovery, commercial formulations add piperonyl butoxide as an enzyme synergist.",
+   "say": "Pyrethrum is a natural extract from chrysanthemum flowers that causes instant insect knockdown. Adding piperonyl butoxide blocks detoxifying enzymes, ensuring mosquitoes do not recover.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural pyrethrum properties",
+     "points": [
+      "Instant knockdown within 1 to 2 minutes",
+      "Rapidly degraded by sunlight and heat",
+      "Non-residual space spray application",
+      "Zero toxic accumulation in mammals"
+     ]
+    },
+    "right": {
+     "title": "Synthetic pyrethroids",
+     "points": [
+      "Deltamethrin, cyfluthrin, permethrin",
+      "Photostable with long residual action",
+      "Used for indoor spraying and LLINs",
+      "Maintains efficacy for several months"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Temephos as a potable water larvicide",
+   "tx": "Controlling mosquito breeding inside domestic water storage reservoirs requires an insecticide of exceptionally low mammalian toxicity, satisfied by the **temephos potable larvicidal protocol**. Marketed as Abate, this organophosphorus compound acts selectively against mosquito larvae and aquatic crustaceans at an application concentration of one milligram per litre or one part per million, destroying larval populations within twenty-four hours without imparting odor, color, or toxic hazards to drinking water supplies.",
+   "say": "Temephos is an organophosphate larvicide safe for drinking water. Added at one part per million, it kills mosquito larvae in overhead tanks without harming humans or pets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Larvicide parameter",
+     "Technical specification",
+     "Public health justification"
+    ],
+    "rows": [
+     [
+      "Chemical identity",
+      "Temephos 50 percent emulsifiable concentrate",
+      "Low mammalian oral toxicity (LD50 > 4000 mg/kg)"
+     ],
+     [
+      "Target dosage in water",
+      "1.0 milligram per litre (1 ppm)",
+      "WHO certified safe threshold for drinking water"
+     ],
+     [
+      "Target organism spectrum",
+      "Aedes, Culex, Anopheles larvae, Cyclops",
+      "Disrupts neuromuscular function in aquatic instars"
+     ],
+     [
+      "Duration of protection",
+      "Reapplication recommended every 2 to 4 weeks",
+      "Maintains active control despite domestic water withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mineral oils and mechanical surface films",
+   "tx": "Physical suppression of mosquito larvae in drains, septic tanks, and polluted stagnant pools relies on **larvicidal mineral oil surface films**, such as Malariol, diesel oil, and high-spreading monomolecular films. When sprayed over water surfaces at a rate of forty to ninety litres per hectare, the oil forms an unbroken monomolecular layer that reduces water surface tension, preventing larvae from anchoring and choking their spiracles to induce asphyxiation.",
+   "say": "Spraying mineral oils like Malariol over stagnant drains creates a thin surface film. This lowers surface tension and blocks mosquito breathing siphons, suffocating larvae quickly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Oil sprayed over contaminated stagnant water"
+     },
+     {
+      "id": "o2",
+      "label": "Rapid spread creates unbroken surface film"
+     },
+     {
+      "id": "o3",
+      "label": "Blocks larval breathing siphons and spiracles"
+     },
+     {
+      "id": "o4",
+      "label": "Larvae detach and drown from mechanical asphyxiation"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Bacterial larvicides and biocontrol",
+   "tx": "Environmental concerns surrounding synthetic chemicals spurred the development of bacterial biological larvicides comprising **Bacillus thuringiensis israelensis crystal endotoxins**, alongside Bacillus sphaericus. When ingested by feeding mosquito larvae, the delta-endotoxin protoxins are cleaved by alkaline midgut proteases into active pore-forming peptides; these insert into the larval midgut epithelial membranes, causing cellular swelling, lysis, and death within twenty-four hours while leaving fish, dragonflies, and humans entirely unharmed.",
+   "say": "Bacillus thuringiensis produces natural protein crystals that mosquito larvae eat. Alkaline gut fluids activate the crystals, destroying the insect stomach lining without harming fish or people.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacillus thuringiensis (BTI)",
+     "points": [
+      "Cleaved by alkaline gut proteases",
+      "Destroys midgut brush-border membrane",
+      "Highly effective against Aedes and Anopheles",
+      "Safe for non-target aquatic organisms"
+     ]
+    },
+    "right": {
+     "title": "Bacillus sphaericus",
+     "points": [
+      "Produces binary protein toxins",
+      "Persists in polluted organic water",
+      "Highly potent against Culex larvae in drains",
+      "Recycles in dead larval carcasses"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Biological control with larvivorous fish",
+   "tx": "Biological predation of aquatic immature vectors utilizes **larvivorous fish biological predation**, primarily Gambusia affinis, the top minnow, and Poecilia reticulata, the guppy. A single adult Gambusia can voraciously consume up to three hundred mosquito larvae per day; Gambusia thrives in clean fresh water, garden fountains, and rural dug wells, whereas Poecilia exhibits remarkable resilience in organically polluted drainage channels and septic tanks.",
+   "say": "Gambusia and guppy fish eat hundreds of mosquito larvae daily. Gambusia thrives in clean wells, while hardy guppy fish clear mosquito larvae from dirty drains and septic tanks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Larvivorous fish species",
+     "Preferred ecological niche",
+     "Predatory feeding capacity"
+    ],
+    "rows": [
+     [
+      "Gambusia affinis (Top minnow)",
+      "Clean freshwater wells, tanks, ponds",
+      "100 to 300 larvae consumed per fish per day"
+     ],
+     [
+      "Poecilia reticulata (Guppy)",
+      "Heavily polluted drains, sewage cesspools",
+      "Thrives in foul water; continuous surface feeder"
+     ],
+     [
+      "Aplocheilus panchax",
+      "Paddy fields, slow-flowing streams",
+      "Indigenous Indian surface-feeding minnow"
+     ],
+     [
+      "Danio rerio (Zebrafish)",
+      "Freshwater channels and shallow tanks",
+      "Supplements indigenous biological predation"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Space spraying versus indoor residual spraying",
+   "tx": "The strategic selection of adulticidal applications is dictated by epidemiological urgency under **adulticidal application strategy comparison**. During acute dengue or malaria epidemics, ultra-low-volume cold aerosol fogging or thermal fogging delivers space sprays of malathion or pyrethrum that contact and kill flying adults immediately to interrupt transmission; in endemic malaria zones, indoor residual spraying coats indoor wall surfaces with long-acting pyrethroids to kill resting vectors over months.",
+   "say": "Fogging is used during sudden outbreaks to kill flying adult mosquitoes immediately. Indoor wall spraying leaves a chemical layer that kills resting mosquitoes over many months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Space spraying / fogging",
+     "points": [
+      "Ultra-low-volume droplets (10 to 30 microns)",
+      "Suspends in air to hit flying mosquitoes",
+      "Immediate transmission knockdown in epidemics",
+      "Zero residual effect after dispersion"
+     ]
+    },
+    "right": {
+     "title": "Indoor residual spraying (IRS)",
+     "points": [
+      "Coarse spray (100 to 200 microns) on walls",
+      "Leaves persistent crystalline deposit",
+      "Kills resting mosquitoes for 3 to 6 months",
+      "Standard malaria control cornerstone"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Long-lasting insecticidal nets and personal defense",
+   "tx": "Personal protection against nocturnal vectors incorporates **long-lasting insecticidal net deployment**, factory-treated with deltamethrin or alpha-cypermethrin bound into polyethylene fibres. LLINs provide physical exclusion combined with chemical barrier effects, surviving at least twenty standard washings and maintaining lethal contact toxicity for three years; topical application of diethyltoluamide repellent repels biting dipterans by interfering with olfactory antennal receptors.",
+   "say": "Long-lasting insecticidal nets protect against night bites for three years, withstanding repeated washing. Diethyltoluamide skin lotion confuses mosquito sensors, preventing bites outdoors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention measure",
+     "Chemical agent utilized",
+     "Duration of protective efficacy"
+    ],
+    "rows": [
+     [
+      "LLIN bed nets",
+      "Deltamethrin / Permethrin bonded fibers",
+      "3 years or 20 standardized home washes"
+     ],
+     [
+      "Topical skin repellents",
+      "DEET (N,N-Diethyl-meta-toluamide)",
+      "4 to 8 hours depending on concentration"
+     ],
+     [
+      "Vaporizing mats / coils",
+      "Transfluthrin / Prallethrin pyrethroids",
+      "6 to 8 hours indoor ambient protection"
+     ],
+     [
+      "Insecticide treated clothing",
+      "Permethrin spray impregnation",
+      "Effective through 5 to 10 wash cycles"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Integrated vector management framework",
+   "tx": "To overcome insecticide resistance and reduce environmental contamination, national health agencies adhere to the **integrated vector management framework**. This multi-faceted strategy combines environmental management through drainage and source reduction, rational chemical applications targeting larval and adult stages, biological predation with fish and bacteria, personal barrier defenses, and active community participation to achieve cost-effective and ecologically sustainable vector suppression.",
+   "say": "Integrated vector management combines drainage, selective spraying, predatory fish, and bed nets. Working together with communities provides sustainable vector control without excessive chemicals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Environmental management: source reduction"
+     },
+     {
+      "id": "v2",
+      "label": "Biological control: Gambusia and BTI"
+     },
+     {
+      "id": "v3",
+      "label": "Chemical control: Temephos and LLINs"
+     },
+     {
+      "id": "v4",
+      "label": "Sustainable community vector suppression"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v4"
+     ],
+     [
+      "v2",
+      "v4"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

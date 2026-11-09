@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "Complement C5a Anaphylatoxin, the Membrane Attack Complex, and PAF",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "During the terminal enzymatic steps of complement cascade activation, cleavage of component C5 by C5 convertases yields two functional fragments with distinct biological properties. While the larger C5b fragment initiates assembly of the lytic membrane pore, the liberated seventy-four amino acid soluble peptide represents **complement fragment C5a**, acting as an extraordinarily potent humoral inflammatory mediator.",
+      "say": "Complement C5a is an anaphylatoxin released when C5 convertase cleaves complement component C5.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c5_convertase",
+            "label": "C5 Convertase Assembles on Target Pathogen Surface (C4b2a3b or C3bBbC3b)"
+          },
+          {
+            "id": "c5_cleavage",
+            "label": "Cleaves Alpha Chain of C5 at Conserved Arginine-Leucine Peptide Bond"
+          },
+          {
+            "id": "c5a_liberation",
+            "label": "Discharges Soluble 74-Amino-Acid C5a Anaphylatoxin into Circulation"
+          },
+          {
+            "id": "c5b_deposition",
+            "label": "Anchors Metastable C5b Hydrophobic Core to Initiate Pore Formation"
+          }
+        ],
+        "edges": [
+          [
+            "c5_convertase",
+            "c5_cleavage"
+          ],
+          [
+            "c5_cleavage",
+            "c5a_liberation"
+          ],
+          [
+            "c5_cleavage",
+            "c5b_deposition"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Operating as an anaphylatoxin twenty times more active than C3a, complement C5a binds high-affinity seven-transmembrane G-protein-coupled C5aR1 receptors on mast cells and basophils. This binding drives rapid mast cell degranulation, releasing histamine and leukotrienes to promote intense arteriolar vasodilation and postcapillary **venular permeability**.",
+      "say": "C5a binds mast cell receptors to trigger immediate histamine release and increase vascular permeability.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sepsis-fig2.webp",
+        "caption": "Severe systemic capillary hyperpermeability and shock induced by massive complement anaphylatoxin release.",
+        "alt": "Systemic capillary leak and microvascular failure in severe sepsis"
+      }
+    },
+    {
+      "tx": "Beyond its anaphylatoxic actions, C5a serves as one of the most powerful endogenous chemoattractants known in human biology. C5a gradients direct the polarized migration of neutrophils, monocytes, and eosinophils toward infectious foci, while simultaneously upregulating **beta-two integrin avidity** to lock leukocytes onto activated endothelial walls.",
+      "say": "C5a attracts neutrophils along concentration gradients while upregulating integrin adhesion on vessel walls.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "C5a Chemoattractant Functions",
+          "points": [
+            "Binds C5aR1 (CD88) coupled to Gi proteins on neutrophils and monocytes",
+            "Directs polarized actin polymerization toward source of complement activation",
+            "Upregulates high-affinity LFA-1 (CD11a/CD18) and Mac-1 (CD11b/CD18)",
+            "Stimulates release of reactive oxygen species via NADPH oxidase activation"
+          ]
+        },
+        "right": {
+          "title": "Inactivation by Carboxypeptidase N",
+          "points": [
+            "Circulating plasma carboxypeptidase N rapidly cleaves C-terminal arginine",
+            "Generates C5a-des-Arg metabolite within minutes in systemic blood",
+            "Reduces anaphylatoxic smooth muscle contractile activity by 90-95%",
+            "Retains significant chemotactic potency to maintain localized leukocyte homing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The assembly of the terminal lytic machinery begins when surface-bound C5b sequentially recruits components C6 and C7. The resulting lipophilic C5b-7 complex inserts into the outer lipid monolayer, recruiting component C8 to initiate membrane penetration, followed by polymerisation of ten to sixteen molecules of C9 into the **membrane attack complex (C5b-9)**.",
+      "say": "The membrane attack complex polymerises ten to sixteen C9 molecules to punch lytic transmembrane pores.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c5b67_insertion",
+            "label": "C5b Binds C6 and C7 to Form Lipophilic Complex Inserting into Outer Membrane"
+          },
+          {
+            "id": "c8_penetration",
+            "label": "C8 Binds and Spans Both Lipid Leaflets of the Target Microbial Bilayer"
+          },
+          {
+            "id": "c9_polymerization",
+            "label": "Recruits and Polymerizes 10-16 Molecules of C9 into Cylindrical Tube"
+          },
+          {
+            "id": "osmotic_lysis",
+            "label": "Punches 10-nm Hydrophilic Channel, Driving Rapid Water Influx and Lysis"
+          }
+        ],
+        "edges": [
+          [
+            "c5b67_insertion",
+            "c8_penetration"
+          ],
+          [
+            "c8_penetration",
+            "c9_polymerization"
+          ],
+          [
+            "c9_polymerization",
+            "osmotic_lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pores formed by the membrane attack complex measure ten nanometers in internal diameter, destroying the osmotic equilibrium of targeted cells. Water and electrolytes rush down their electrochemical gradients into the cytoplasm, causing catastrophic **osmotic cell swelling and lysis**, an essential defense mechanism against thin-walled Neisserial bacterial pathogens.",
+      "say": "Ten-nanometer MAC channels allow water to flood into target bacteria, causing osmotic burst and death.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Membrane Attack Complex Targets",
+          "points": [
+            "Thin-walled Gram-negative diplococci, especially Neisseria meningitidis",
+            "Neisseria gonorrhoeae genital mucosal infections",
+            "Enveloped lipid viruses and foreign allogeneic red blood cells",
+            "Host cells in paroxysmal nocturnal hemoglobinuria lacking CD59"
+          ]
+        },
+        "right": {
+          "title": "Host Protection by CD59 (Protectin)",
+          "points": [
+            "GPI-anchored membrane glycoprotein expressed on healthy host cells",
+            "Binds C8 and C9 directly, blocking C9 polymerisation into lytic ring",
+            "Prevents accidental bystander autologous complement cell lysis",
+            "Deficient in PNH due to somatic PIGA gene mutations in stem cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Patients harboring inherited homozygous deficiencies in terminal complement components C5, C6, C7, C8, or C9 display a highly specific clinical vulnerability. Affected individuals experience recurrent, invasive, life-threatening **Neisseria meningitidis bacteremia** and extragenital gonococcal infections, highlighting the absolute physiological requirement for MAC-mediated bacteriolysis against Neisserial outer coats.",
+      "say": "Terminal complement deficiencies cause recurrent life-threatening Neisseria meningitidis bacteremia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/meningococcal-disease-fig1.webp",
+        "alt": "Diagram and Gram stain showing purulent leptomeningitis, purpura, adrenal hemorrhage, and diplococci",
+        "caption": "Diagram and Gram stain showing purulent leptomeningitis, purpura, adrenal hemorrhage, and diplococci. Illustration: StewardMD original. [Alt: Illustration depicting clinical manifestations of Neisseria meningitidis infection including purulent leptomeningitis, cutaneous purpuric rash, Waterhouse-Friderichsen adrenal hemorrhage, and",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "A bioactive phospholipid mediator synthesized by mast cells, basophils, neutrophils, platelets, and endothelial cells through phospholipase A2 cleavage is platelet-activating factor. Operating directly via a specific G-protein-coupled receptor, **platelet-activating factor (PAF)** induces rapid platelet aggregation, marked arteriolar vasodilation, increased microvascular permeability, and severe bronchoconstriction.",
+      "say": "Platelet-activating factor is a membrane phospholipid mediator driving platelet aggregation and permeability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pla2_activation",
+            "label": "Inflammatory Stimuli Activate Phospholipase A2 on Membrane Phospholipids"
+          },
+          {
+            "id": "lyso_paf_acetyl",
+            "label": "Generates Lyso-PAF, Which Is Acetylated by Acetyltransferase into Active PAF"
+          },
+          {
+            "id": "pafr_coupling",
+            "label": "Binds Specific Seven-Transmembrane GPCR (PAFR) Coupled to Gq and Gi"
+          },
+          {
+            "id": "multitissue_burst",
+            "label": "Stimulates Platelet Release, Vasodilation, and 1000-Fold Permeability Surge"
+          }
+        ],
+        "edges": [
+          [
+            "pla2_activation",
+            "lyso_paf_acetyl"
+          ],
+          [
+            "lyso_paf_acetyl",
+            "pafr_coupling"
+          ],
+          [
+            "pafr_coupling",
+            "multitissue_burst"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At concentrations a hundred to a thousand times lower than histamine, platelet-activating factor increases postcapillary venular permeability by contracting endothelial cells. Concurrently, PAF acts directly on circulating leukocytes to boost integrin affinity, activate the **respiratory burst**, and enhance arachidonic acid synthesis in acute inflammatory cascades.",
+      "say": "PAF increases venular permeability at picomolar levels while stimulating the leukocyte respiratory burst.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Platelet-Activating Factor Potency",
+          "points": [
+            "Active at picomolar and nanomolar concentrations in tissue fluid",
+            "1,000-fold more potent than histamine in driving venular permeability",
+            "Potent inducer of immediate bronchial smooth muscle spasm in asthma",
+            "Causes systemic vasodilation and profound arterial hypotension in shock"
+          ]
+        },
+        "right": {
+          "title": "Cellular Inflammatory Actions",
+          "points": [
+            "Stimulates platelet adhesion, shape change, and dense granule release",
+            "Upregulates beta-2 integrins on neutrophils, enhancing endothelial sticking",
+            "Activates NADPH oxidase, triggering reactive oxygen respiratory burst",
+            "Stimulates eicosanoid synthesis by mobilizing cellular arachidonic acid"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

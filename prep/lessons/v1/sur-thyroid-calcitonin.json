@@ -1,0 +1,303 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Medullary Thyroid Carcinoma, Calcitonin, Amyloid, and MEN Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Deriving from neural crest-derived parafollicular C-cells rather than thyroid follicular epithelium, **medullary thyroid carcinoma** accounts for three to five percent of all thyroid cancers. Parafollicular C-cells are concentrated predominantly within the upper two-thirds of the lateral thyroid lobes, explaining the anatomical location of primary tumors. Medullary carcinoma occurs in two distinct clinical settings: seventy-five percent are sporadic, whereas twenty-five percent are hereditary familial malignancies.",
+   "say": "Medullary thyroid carcinoma arises from neural crest parafollicular C-cells located in the upper two-thirds of the thyroid lobes. A quarter of all cases are hereditary familial tumors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sporadic Medullary Carcinoma (75%)",
+     "points": [
+      "Presents in fifth to sixth decades of life",
+      "Solitary unilateral thyroid nodule",
+      "No family history of endocrinopathies",
+      "Somatic RET mutations found in over fifty percent"
+     ]
+    },
+    "right": {
+     "title": "Hereditary Medullary Carcinoma (25%)",
+     "points": [
+      "Presents in children and young adults",
+      "Multifocal and bilateral thyroid involvement",
+      "Associated with MEN 2A, MEN 2B, or FMTC",
+      "Germline RET proto-oncogene mutations in 98%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The biochemical hallmark of medullary thyroid carcinoma is the autonomous oversecretion of **serum calcitonin**, a thirty-two amino acid polypeptide hormone normally secreted by C-cells in response to hypercalcaemia. Serum calcitonin serves as an extraordinarily sensitive and specific tumor marker for initial diagnosis, assessing completeness of surgical resection, and detecting post-operative recurrence. In addition, medullary carcinomas secrete carcinoembryonic antigen (CEA), which reflects overall tumor burden and aggressive dedifferentiation.",
+   "say": "Serum calcitonin is the primary tumor marker for medullary thyroid cancer, secreted autonomously by C-cells. Carcinoembryonic antigen provides an additional marker of tumor burden.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biochemical Marker",
+     "Physiological Source",
+     "Clinical Utility in Medullary Cancer"
+    ],
+    "rows": [
+     [
+      "Serum Calcitonin",
+      "Neuroendocrine peptide secreted directly by C-cells",
+      "Gold standard marker; doubling time <6 months indicates rapid progression"
+     ],
+     [
+      "Carcinoembryonic Antigen (CEA)",
+      "Oncofetal glycoprotein expressed on tumor cell membranes",
+      "Secondary marker; rising CEA with stable calcitonin signals dedifferentiation"
+     ],
+     [
+      "Serum Calcium",
+      "Regulated by parathyroid hormone and bone resorption",
+      "Remains entirely normal despite massive calcitonin elevations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excessive systemic circulation of calcitonin, vasoactive intestinal peptide, and prostaglandins produces systemic paraneoplastic manifestations. Patients with advanced or metastatic medullary thyroid carcinoma frequently suffer from intractable watery diarrhea and episodic facial flushing. On histological examination, the classic hallmark is the presence of an **amyloid stroma**, comprising amorphous, acellular eosinophilic deposits within the tumor interstitium. Stained with Congo red, the amyloid exhibits pathognomonic apple-green birefringence under polarized light.",
+   "say": "Calcitonin oversecretion triggers paraneoplastic secretory diarrhea and flushing. Histology reveals an amyloid stroma that displays apple-green birefringence under polarized light.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ccell",
+      "label": "Neoplastic C-Cell Hypersecretion of Calcitonin"
+     },
+     {
+      "id": "procalcitonin",
+      "label": "Altered Procalcitonin Polymerizes in Interstitium"
+     },
+     {
+      "id": "amyloid",
+      "label": "Deposition of Insoluble Beta-Pleated Amyloid Fibrils"
+     },
+     {
+      "id": "congo",
+      "label": "Congo Red Staining of Tissue Sections"
+     },
+     {
+      "id": "birefringence",
+      "label": "Pathognomonic Apple-Green Birefringence Under Polarized Light"
+     }
+    ],
+    "edges": [
+     [
+      "ccell",
+      "procalcitonin"
+     ],
+     [
+      "procalcitonin",
+      "amyloid"
+     ],
+     [
+      "amyloid",
+      "congo"
+     ],
+     [
+      "congo",
+      "birefringence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "All hereditary forms of medullary thyroid carcinoma are transmitted as autosomal dominant traits caused by germline gain-of-function point mutations in the **RET proto-oncogene** on chromosome 10q11.2. The RET gene encodes a receptor tyrosine kinase composed of an extracellular ligand-binding domain, a cysteine-rich domain, and intracellular tyrosine kinase domains. Point mutations cause ligand-independent constitutive dimerization and activation, driving autonomous C-cell hyperplasia that inevitably progresses to multifocal bilateral carcinoma.",
+   "say": "Hereditary medullary carcinoma is caused by autosomal dominant mutations in the RET proto-oncogene on chromosome ten, leading to autonomous tyrosine kinase activation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Multiple Endocrine Neoplasia 2A (MEN 2A)",
+     "points": [
+      "Medullary thyroid carcinoma in one hundred percent",
+      "Phaeochromocytoma (usually bilateral) in fifty percent",
+      "Primary hyperparathyroidism (parathyroid hyperplasia) in 20%",
+      "Mutations cluster in extracellular cysteine codons (634)"
+     ]
+    },
+    "right": {
+     "title": "Multiple Endocrine Neoplasia 2B (MEN 2B)",
+     "points": [
+      "Medullary thyroid carcinoma developing in early infancy",
+      "Phaeochromocytoma in fifty percent",
+      "Mucosal neuromas of lips/tongue and intestinal ganglioneuromatosis",
+      "Marfanoid habitus; hyperparathyroidism never occurs",
+      "Classic mutation at intracellular kinase codon M918T"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Identifying the specific RET codon mutation dictates the timing of life-saving prophylactic surgery. Under American Thyroid Association guidelines, infants carrying the highest-risk codon M918T mutation associated with MEN 2B require **prophylactic total thyroidectomy** within the first year of life, often within the first months, because medullary cancer metastasizes in infancy. High-risk codon 634 mutations in MEN 2A warrant total thyroidectomy before five years of age, preventing lethal metastatic cancer.",
+   "say": "ATA guidelines dictate prophylactic thyroidectomy based on the specific RET mutation. Infants with MEN 2B require thyroidectomy in the first year of life to prevent fatal metastasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ATA Risk Level",
+     "Specific RET Codon Mutations",
+     "Syndromic Association",
+     "Prophylactic Thyroidectomy Timing"
+    ],
+    "rows": [
+     [
+      "Highest Risk (HST)",
+      "Codon M918T",
+      "MEN 2B",
+      "Within first year of life (first months)"
+     ],
+     [
+      "High Risk (H)",
+      "Codon C634, A883F",
+      "MEN 2A / FMTC",
+      "Before five years of age"
+     ],
+     [
+      "Moderate Risk (MOD)",
+      "Codons 609, 611, 618, 620, 768, 790, 804",
+      "MEN 2A / FMTC",
+      "Early childhood or when calcitonin elevates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A mandatory, inviolable surgical safety rule applies to all patients newly diagnosed with medullary thyroid carcinoma: clinicians must systematically **screen for phaeochromocytoma** prior to scheduling neck surgery. Fractionated plasma or 24-hour urinary metanephrines and normetanephrines must be measured. If a phaeochromocytoma is discovered, it must be surgically excised first via laparoscopic adrenalectomy under alpha-blockade to prevent fatal hypertensive crises, cerebrovascular hemorrhage, or cardiac arrest during thyroid manipulation.",
+   "say": "Every patient with medullary cancer must be screened for phaeochromocytoma before thyroid surgery. An adrenal tumor must always be resected first to prevent intraoperative hypertensive arrest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mtc",
+      "label": "Newly Diagnosed Medullary Thyroid Carcinoma"
+     },
+     {
+      "id": "screen",
+      "label": "Screen Plasma / Urinary Fractionated Metanephrines"
+     },
+     {
+      "id": "norm",
+      "label": "Metanephrines Normal: Proceed to Thyroidectomy"
+     },
+     {
+      "id": "elev",
+      "label": "Metanephrines Elevated: Abdominal CT / MRI"
+     },
+     {
+      "id": "adrenal",
+      "label": "Alpha-Blockade & Laparoscopic Adrenalectomy FIRST"
+     }
+    ],
+    "edges": [
+     [
+      "mtc",
+      "screen"
+     ],
+     [
+      "screen",
+      "norm"
+     ],
+     [
+      "screen",
+      "elev"
+     ],
+     [
+      "elev",
+      "adrenal"
+     ],
+     [
+      "adrenal",
+      "norm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive surgical therapy for sporadic or established medullary thyroid carcinoma mandates **total thyroidectomy with central neck dissection**. Because medullary cancer does not express the sodium-iodide symporter, it does not take up radioiodine; similarly, conventional cytotoxic chemotherapy and thyroid hormone suppression have no therapeutic role. Surgery represents the sole curative modality, requiring en bloc bilateral central compartment lymph node clearance (level six) in all cases, accompanied by selective lateral neck dissection if nodes are involved.",
+   "say": "Medullary cancer does not respond to radioiodine or thyroid suppression. Total thyroidectomy with central neck dissection is the sole curative option for regional control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Clinical Efficacy in MTC",
+     "Underlying Biological Explanation"
+    ],
+    "rows": [
+     [
+      "Total Thyroidectomy + CND",
+      "Only curative treatment",
+      "En bloc surgical excision removes primary tumor and draining nodal echelons"
+     ],
+     [
+      "Radioiodine (I-131)",
+      "Completely ineffective",
+      "Derived from C-cells lacking sodium-iodide symporters and organification"
+     ],
+     [
+      "Levothyroxine Suppression",
+      "Ineffective (replacement only)",
+      "C-cells do not possess TSH receptors and do not respond to TSH suppression"
+     ],
+     [
+      "Tyrosine Kinase Inhibitors",
+      "Effective for advanced disease",
+      "Targeted RET kinase inhibitors (selpercatinib, cabozantinib) halt progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For patients presenting with unresectable, progressive, or widely metastatic medullary thyroid carcinoma, systemic therapy has been revolutionized by targeted molecular pharmacology. Highly selective **RET kinase inhibitors**, specifically selpercatinib and pralsetinib, achieve remarkable disease control in patients harboring RET mutations, producing objective radiological response rates exceeding seventy percent. Multitargeted kinase inhibitors, including cabozantinib and vandetanib, provide valuable secondary systemic alternatives.",
+   "say": "Advanced metastatic medullary cancer is managed with selective RET inhibitors like selpercatinib and pralsetinib, achieving sustained tumor shrinkage in mutation-positive patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "metastatic",
+      "label": "Unresectable Progressive Metastatic MTC"
+     },
+     {
+      "id": "genetics",
+      "label": "Comprehensive RET Somatic Mutation Profiling"
+     },
+     {
+      "id": "tki",
+      "label": "Selective RET Inhibitor (Selpercatinib / Pralsetinib)"
+     },
+     {
+      "id": "response",
+      "label": "Dramatic Prolonged Objective Radiological Response"
+     },
+     {
+      "id": "surv",
+      "label": "Serial Calcitonin & CEA Response Monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "metastatic",
+      "genetics"
+     ],
+     [
+      "genetics",
+      "tki"
+     ],
+     [
+      "tki",
+      "response"
+     ],
+     [
+      "response",
+      "surv"
+     ]
+    ]
+   }
+  }
+ ]
+}

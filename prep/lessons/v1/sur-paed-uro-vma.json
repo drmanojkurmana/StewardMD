@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-paed-uro",
+ "subject": "surgery",
+ "title": "VMA, Hepatoblastoma and Childhood Hernia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A breakdown product of catecholamines measured in urine in neuroblastoma is **VMA**. Vanillylmandelic acid is raised in most neuroblastomas and confirms the diagnosis alongside imaging. It also helps monitor response to treatment. Homovanillic acid is measured alongside it, and over 90 percent of neuroblastomas raise one or both markers.",
+   "say": "VMA in urine is raised in most neuroblastomas and helps monitor treatment response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Tumour"
+    ],
+    "rows": [
+     [
+      "VMA urine",
+      "Neuroblastoma"
+     ],
+     [
+      "AFP blood",
+      "Hepatoblastoma"
+     ],
+     [
+      "Beta-hCG",
+      "Germ cell tumours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest malignant liver tumour of young children is **hepatoblastoma**. It presents with an abdominal mass and markedly raised alpha fetoprotein. Chemotherapy shrinks most tumours to resectable size. Alpha fetoprotein is normally very high at birth, so age corrected ranges decide whether a level is truly abnormal.",
+   "say": "Hepatoblastoma is the commonest childhood liver cancer with markedly raised alpha fetoprotein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Liver mass found"
+     },
+     {
+      "id": "n1",
+      "label": "AFP markedly raised"
+     },
+     {
+      "id": "n2",
+      "label": "Chemotherapy shrinks tumour"
+     },
+     {
+      "id": "n3",
+      "label": "Resection performed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Protrusion of bowel through a patent processus vaginalis in children forms an **inguinal hernia in children**. It is indirect by definition and commoner in premature babies and boys. A groin swelling appearing with crying is the usual story. Premature infants carry rates near 30 percent, and girls present more often with bilateral hernias than boys do.",
+   "say": "Childhood inguinal hernia passes through a patent processus and appears with crying.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/inguinal-hernia-fig1.webp",
+    "alt": "Inguinal hernia anatomy relevant to children.",
+    "caption": "Inguinal hernia anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Repair in children needs only high tying of the sac, an operation called **herniotomy**. No mesh or wall repair is required because the abdominal wall is normal. The opposite side is not routinely explored in most centres. The vas deferens and testicular vessels lie on the sac wall, and injury to them is the complication consent must name.",
+   "say": "Childhood herniotomy simply ties the sac high because the abdominal wall is normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Child herniotomy",
+     "points": [
+      "Sac tied high only",
+      "Wall normal",
+      "No mesh"
+     ]
+    },
+    "right": {
+     "title": "Adult repair",
+     "points": [
+      "Wall reinforced",
+      "Mesh commonly used",
+      "Defect present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fluid in the scrotum of a child from a narrow patent processus is a **hydrocele in children**. Most resolve by two years as the processus closes. Persisting or large ones are treated by the same herniotomy approach. A hydrocele that changes size through the day is communicating and behaves like a hernia for repair timing.",
+   "say": "Childhood hydroceles mostly resolve by two years as the processus closes naturally.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-jaboulay-procedure-for-hydrocele.webp",
+    "alt": "Hydrocele surgery approach for comparison.",
+    "caption": "Hydrocele management comparison. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Risk of bowel trapping is highest in the first year of life for childhood hernia, called **incarceration risk**. Irreducible painful groin swellings need urgent assessment. Gentle reduction under sedation succeeds in most, followed by early repair. Taxis, manual reduction under sedation fails more often after 24 hours of symptoms, and failed reduction goes straight to theatre.",
+   "say": "Incarceration risk is highest in infancy, so irreducible groin swellings need urgent assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Painful irreducible swelling"
+     },
+     {
+      "id": "n1",
+      "label": "Sedation and gentle reduction"
+     },
+     {
+      "id": "n2",
+      "label": "Early repair arranged"
+     },
+     {
+      "id": "n3",
+      "label": "Emergency surgery if fails"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Premature babies have the highest hernia rates and repair is timed around discharge, a balance of **timing in prematurity**. Anaesthetic risks of prematurity compete with incarceration risk. Most units repair before or soon after discharge home. Apnoea after anaesthesia is the risk being balanced, and caffeine plus overnight monitoring cover the smallest babies.",
+   "say": "Premature hernia repair timing balances anaesthetic risk against incarceration risk around discharge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Consideration"
+    ],
+    "rows": [
+     [
+      "Prematurity",
+      "Anaesthetic risk"
+     ],
+     [
+      "Young age",
+      "Incarceration risk"
+     ],
+     [
+      "Plan",
+      "Repair near discharge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bilateral hernias and hydroceles share the same processus origin, explaining why they **coexist commonly**. Examination of both groins is routine in every case. Ultrasound helps when examination is equivocal. A communicating hydrocele on one side raises the chance of a patent processus on the other, though routine exploration stays debated.",
+   "say": "Hernia and hydrocele share a processus origin, so both groins are always examined.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-undescended_testis.webp",
+    "alt": "Groin examination in children for hernia and testis.",
+    "caption": "Childhood groin examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Parents are taught the warning signs of trapping after diagnosis, termed **safety netting**. A hard painful groin lump with vomiting means immediate attendance. Clear safety netting prevents dangerous delay at home. Vomiting with a tender groin lump in a child known to have a hernia bypasses routine queues and needs same hour review.",
+   "say": "Safety netting teaches parents that a hard painful lump with vomiting means immediate attendance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Diagnosis explained"
+     },
+     {
+      "id": "n1",
+      "label": "Warning signs taught"
+     },
+     {
+      "id": "n2",
+      "label": "Immediate attendance advised"
+     },
+     {
+      "id": "n3",
+      "label": "Repair date planned"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

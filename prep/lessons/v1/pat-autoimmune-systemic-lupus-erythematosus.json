@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-autoimmune",
+  "subject": "pathology",
+  "title": "Systemic Lupus Erythematosus: ANA, Anti-dsDNA, Anti-Smith, and the LE Cell",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Loss of self tolerance in a genetically predisposed young woman, amplified by ultraviolet light, infections, and hormones, produces autoantibodies against nuclear antigens and immune complex injury in skin, joints, kidney, serosa, blood, and brain. This multisystem prototype of autoimmunity is **systemic lupus erythematosus**, with a striking female predominance of about nine to one.",
+      "say": "Lupus is the multisystem autoimmune prototype, affecting young women far more often than men.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-lupus-erythematosus-fig1.webp",
+        "alt": "Malar rash of systemic lupus erythematosus",
+        "caption": "Malar butterfly rash sparing the nasolabial folds, a classic cutaneous sign of systemic lupus erythematosus."
+      }
+    },
+    {
+      "tx": "Antinuclear antibody testing by immunofluorescence on HEp-2 cells is positive in nearly every patient with lupus, making it an excellent screening test whose negative result argues strongly against the disease. Its weakness is specificity, since low titres occur in healthy people and other autoimmune diseases, so the **antinuclear antibody** opens the workup rather than closing it.",
+      "say": "ANA is the sensitive screening test for lupus; a negative ANA makes lupus unlikely, but a positive one needs specific antibodies to confirm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clinical suspicion from rash, arthritis, cytopenias"
+          },
+          {
+            "id": "b",
+            "label": "ANA screening on HEp-2 cells"
+          },
+          {
+            "id": "c",
+            "label": "Specific antibodies: dsDNA, Smith, Ro, La"
+          },
+          {
+            "id": "d",
+            "label": "Complement C3 C4 and urine examination for activity"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antibodies to double stranded DNA rise and fall with disease activity and are strongly linked to proliferative lupus nephritis, so serial titres plus falling complement help predict renal flares. Examiners pair this activity marker, **anti-dsDNA antibody**, with hypocomplementemia as the classic serological signature of active lupus, especially active kidney disease.",
+      "say": "Anti-dsDNA tracks disease activity and lupus nephritis; rising titres with falling complement warn of a flare.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sle-flare-fig1.webp",
+        "alt": "Systemic lupus erythematosus flare pathophysiology",
+        "caption": "Immune complex and autoantibody mechanisms driving a systemic lupus erythematosus flare."
+      }
+    },
+    {
+      "tx": "Where anti-dsDNA gives activity, antibody against the Smith antigen, a spliceosome protein, gives near absolute diagnostic specificity although it appears in only a minority of patients and does not track flares. A positive **anti-Smith antibody** therefore clinches lupus serologically, a distinction examiners test relentlessly against the more sensitive but less specific ANA.",
+      "say": "Anti-Smith is the most specific antibody for lupus, even though it is present in only a minority of patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ANA",
+          "points": [
+            "Positive in almost all lupus patients",
+            "Best screening test, poor specificity",
+            "Negative result argues against lupus"
+          ]
+        },
+        "right": {
+          "title": "Anti-Smith and anti-dsDNA",
+          "points": [
+            "Anti-Smith: most specific for lupus",
+            "Anti-dsDNA: tracks activity and nephritis",
+            "Both support classification when present"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historical LE cell is a neutrophil that has engulfed the denatured nucleus of an injured cell opsonised by antinuclear antibody, seen in buffy coat preparations and serous fluids. Although modern laboratories replaced it with ANA testing, the **LE cell** remains a favourite examination image because it dramatises antinuclear autoimmunity in a single phagocyte.",
+      "say": "The LE cell is a neutrophil that has swallowed an opsonised nucleus; largely historical now, but still a favourite exam image.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antibody",
+          "Target",
+          "Clinical association"
+        ],
+        "rows": [
+          [
+            "ANA",
+            "Nuclear antigens, screening",
+            "Sensitive, not specific"
+          ],
+          [
+            "Anti-dsDNA",
+            "Double stranded DNA",
+            "Activity, lupus nephritis"
+          ],
+          [
+            "Anti-Smith",
+            "Spliceosome Sm antigen",
+            "Most specific for SLE"
+          ],
+          [
+            "Anti-Ro and anti-La",
+            "Ribonucleoproteins",
+            "Sjogren overlap, neonatal lupus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classification criteria reward the pattern rather than any single test: malar or discoid rash, photosensitivity, oral ulcers, nonerosive arthritis, serositis, cytopenias, renal or neurological disease, and immunological markers together classify a patient. Arthritis in lupus characteristically spares bone, and the reducible hand deformity without erosions is called **Jaccoud arthropathy**.",
+      "say": "Lupus is classified by the accumulating pattern of clinical and immunological features, not by any single blood test.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain",
+          "Lupus examples",
+          "Exam pearl"
+        ],
+        "rows": [
+          [
+            "Skin",
+            "Malar rash, discoid lesions, photosensitivity",
+            "Malar rash spares nasolabial folds"
+          ],
+          [
+            "Joints",
+            "Nonerosive arthritis, Jaccoud deformity",
+            "Deformity without erosions on X-ray"
+          ],
+          [
+            "Serosa and blood",
+            "Pleurisy, pericarditis, cytopenias",
+            "Haemolytic anaemia and low platelets"
+          ],
+          [
+            "Kidney and brain",
+            "Nephritis, seizures, psychosis",
+            "Biopsy class guides kidney treatment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immune complexes depositing along the glomerular basement membrane activate complement and produce the proliferative nephritis that determines long term survival in lupus. Full house immunofluorescence, with IgG, IgA, IgM, C3, and C1q together, is virtually diagnostic, and the proliferative classes need prompt immunosuppression to prevent kidney failure from **lupus nephritis**.",
+      "say": "Lupus nephritis decides prognosis; full house immunofluorescence on biopsy is its virtually diagnostic signature.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serological activity",
+          "points": [
+            "Rising anti-dsDNA titre",
+            "Falling C3 and C4",
+            "Active urinary sediment"
+          ]
+        },
+        "right": {
+          "title": "Renal confirmation",
+          "points": [
+            "Kidney biopsy with ISN class",
+            "Full house immunofluorescence",
+            "Activity and chronicity indices guide therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment layers antimalarials for nearly everyone, glucocorticoids for flares, and immunosuppressants such as mycophenolate or cyclophosphamide for organ threatening disease, with belimumab and newer agents for refractory cases. Hydroxychloroquine reduces flares, thrombosis, and damage accrual, making **hydroxychloroquine** the background drug examiners expect in every lupus regimen unless contraindicated.",
+      "say": "Hydroxychloroquine is background therapy for almost every lupus patient; steroids and immunosuppressants are added for organ threatening flares.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Hydroxychloroquine for all, plus sun protection"
+          },
+          {
+            "id": "b",
+            "label": "Glucocorticoid burst for active flare"
+          },
+          {
+            "id": "c",
+            "label": "Mycophenolate or cyclophosphamide for nephritis"
+          },
+          {
+            "id": "d",
+            "label": "Taper steroids, monitor dsDNA, complement, urine"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

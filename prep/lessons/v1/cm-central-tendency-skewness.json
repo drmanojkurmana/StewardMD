@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-central-tendency-skewness",
+  "subject": "community-medicine",
+  "module": "cm-central-tendency",
+  "title": "Skewness, Kurtosis, and the Normal Distribution",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Skewness: asymmetry of the tail",
+      "tx": "**Skewness** measures asymmetry: a distribution skewed right (positively) trails a long tail toward high values, dragging the mean above the median, as with income and hospital stay. Left (negative) skew trails toward low values with mean below median, as with age at death in rich countries. Pearson's coefficient quantifies it from (mean minus mode) divided by standard deviation.",
+      "say": "Right skew trails high with mean above median; left skew reverses it. Income is the classic right skewed example.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Right (positive) skew",
+          "points": ["Long tail to high values", "Mean above median above mode", "Income, hospital stay, incubation tails"]
+        },
+        "right": {
+          "title": "Left (negative) skew",
+          "points": ["Long tail to low values", "Mode above median above mean", "Age at death in developed nations"]
+        }
+      }
+    },
+    {
+      "title": "Kurtosis: peakedness and tails",
+      "tx": "**Kurtosis** describes tail weight and peak sharpness relative to the normal curve: mesokurtic is normal like, leptokurtic is sharply peaked with heavy tails (many extremes), and platykurtic is flat topped with light tails. Financial returns and some laboratory errors run leptokurtic. Examinations in community medicine test the three names and shapes far more than kurtosis formulas.",
+      "say": "Kurtosis grades the peak: lepto is sharp and heavy tailed, platy is flat, meso is normal.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Kurtosis type", "Shape"],
+        "rows": [
+          ["Leptokurtic", "Sharp peak, heavy tails, many extremes"],
+          ["Mesokurtic", "Normal bell peakedness"],
+          ["Platykurtic", "Flat top, light tails, few extremes"]
+        ]
+      }
+    },
+    {
+      "title": "The normal distribution introduced",
+      "tx": "The **normal (Gaussian) distribution** is a symmetric bell fully described by its mean and standard deviation: mean, median, and mode coincide at the centre, tails approach but never touch the axis, and fixed proportions occupy each standard deviation band. Heights, measurement errors, and many biological variables approximate it, and sampling distributions approach it by the central limit theorem even when raw data do not.",
+      "say": "The normal bell is symmetric with all averages at its centre. Mean and standard deviation alone describe it completely.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "n1", "label": "Symmetric bell, single central peak" },
+          { "id": "n2", "label": "Mean equals median equals mode" },
+          { "id": "n3", "label": "Tails endless, total area equals one" }
+        ],
+        "edges": [["n1", "n2"], ["n2", "n3"]]
+      }
+    },
+    {
+      "title": "The 68 95 99.7 rule",
+      "tx": "Memorise the **empirical rule of normal distribution**: about sixty eight percent of values lie within one standard deviation of the mean, ninety five within two (one point nine six precisely), and ninety nine point seven within three. Reference ranges in laboratory medicine (mean plus minus two SD) and outlier definitions (beyond three SD) are direct applications tested every examination cycle.",
+      "say": "Sixty eight, ninety five, ninety nine point seven: the shares within one, two, and three standard deviations.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Interval", "Share of values"],
+        "rows": [
+          ["Mean plus minus 1 SD", "68.3 percent"],
+          ["Mean plus minus 1.96 SD", "95 percent"],
+          ["Mean plus minus 2 SD", "About 95.4 percent"],
+          ["Mean plus minus 3 SD", "99.7 percent"]
+        ]
+      }
+    },
+    {
+      "title": "Reference ranges from the normal model",
+      "tx": "Clinical **reference ranges from normal distribution** conventionally span the central ninety five percent (mean plus minus one point nine six SD), so five percent of healthy people fall outside any single range by design. With twenty tests ordered, most healthy patients flag somewhere, a multiplication every clinician must internalise before chasing false alarms. Skewed analytes use percentile ranges instead.",
+      "say": "Five percent of healthy people fall outside each reference range by construction. Twenty tests guarantee false flags somewhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Symmetric analyte",
+          "points": ["Mean plus minus 1.96 SD range", "Haemoglobin style reporting", "2.5 percent flagged each tail"]
+        },
+        "right": {
+          "title": "Skewed analyte",
+          "points": ["Percentile 2.5 to 97.5 range", "Triglyceride style reporting", "Log transform may normalise"]
+        }
+      }
+    },
+    {
+      "title": "Transformations for skewed data",
+      "tx": "Right skewed data often normalise after **log transformation of skewed data**: antibody titres, triglycerides, and hospital costs become symmetric in log scale, where means become geometric means on back transformation. Square root transforms suit counts. Choosing analysis on transformed scale versus non parametric tests on raw scale is a judgement examiners probe with titre and income examples.",
+      "say": "Log the titres and the skew disappears. Analyse in log scale, report back as geometric means.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "lt1", "label": "Right skewed raw values" },
+          { "id": "lt2", "label": "Take logarithms of every value" },
+          { "id": "lt3", "label": "Symmetric logs, parametric tests apply" }
+        ],
+        "edges": [["lt1", "lt2"], ["lt2", "lt3"]]
+      }
+    },
+    {
+      "title": "Central limit theorem",
+      "tx": "The **central limit theorem** guarantees that means of repeated samples approach a normal distribution as sample size grows, whatever the parent distribution's shape (roughly from n of thirty for moderate skew). This theorem, not any property of raw data, licenses t tests and confidence intervals for means in real research. It also explains why standard errors behave so predictably across studies.",
+      "say": "Sample means turn normal as samples grow, even from skewed parents. That theorem powers most medical statistics.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Parent data", "Sample means (large n)"],
+        "rows": [
+          ["Skewed incomes", "Near normal distribution of means"],
+          ["Binary outcomes", "Proportions near normal (large n)"],
+          ["Uniform measurements", "Means rapidly near normal"],
+          ["Any shape, tiny n", "Means may still mirror parent shape"]
+        ]
+      }
+    },
+    {
+      "title": "Checking normality in practice",
+      "tx": "Before choosing parametric tests, researchers check **normality assessment of data** by eye (histogram symmetry, mean versus median closeness), by normal probability plots, and by formal tests such as Shapiro Wilk in small samples. Mild non normality with large samples rarely changes conclusions for means, while heavy skew with small samples demands transformation or non parametric methods, a triage viva examiners love.",
+      "say": "Compare mean with median and look at the histogram. Small skewed samples need transformation or non parametric tests.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proceed parametric",
+          "points": ["Histogram near symmetric", "Mean close to median", "Large sample by central limit theorem"]
+        },
+        "right": {
+          "title": "Transform or go non parametric",
+          "points": ["Long right tail, small n", "Mean far above median", "Titre or count data heavily skewed"]
+        }
+      }
+    },
+    {
+      "title": "Skewness traps in examinations",
+      "tx": "Closing traps for **skewness and kurtosis questions**: positive skew means a right tail (students invert this yearly), the mean chases the tail, a bimodal curve suggests mixed populations rather than skew, and standard deviation loses meaning as a band descriptor once symmetry dies. When a stem gives mean twenty and median twelve for hospital stay, report median with interquartile range and name right skew.",
+      "say": "Positive skew points right, and the mean follows the tail. Mean twenty with median twelve means report the median.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sk1", "label": "Spot tail direction from mean versus median" },
+          { "id": "sk2", "label": "Name skew: mean side equals tail side" },
+          { "id": "sk3", "label": "Report median with IQR for skewed data" }
+        ],
+        "edges": [["sk1", "sk2"], ["sk2", "sk3"]]
+      }
+    }
+  ]
+}

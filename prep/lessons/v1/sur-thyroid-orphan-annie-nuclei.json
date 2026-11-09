@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Papillary Carcinoma Cytology: Orphan Annie Eyes and Nuclear Hallmarks",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Unlike follicular thyroid neoplasms whose diagnosis demands histological confirmation of capsular or vascular invasion, papillary thyroid carcinoma is unique in that its definitive diagnosis is established strictly on pathognomonic nuclear features. The most celebrated cytological hallmark is the presence of **Orphan Annie eye nuclei**, also termed ground-glass or optically clear nuclei. These vesicular nuclei exhibit a distinct empty central nucleoplasm with peripheral marginated chromatin, closely resembling the pupil-less eyes of the comic character Little Orphan Annie.",
+   "say": "Papillary thyroid cancer is diagnosed by unique nuclear features rather than invasion. Orphan Annie eye nuclei feature an optically clear, empty center with chromatin pushed to the rim.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orphan Annie Nuclei",
+     "points": [
+      "Finely dispersed, optically clear, empty-appearing nucleoplasm",
+      "Chromatin is condensed and marginated against the nuclear envelope",
+      "Artifact of formal paraffin fixation (less apparent on frozen section)",
+      "Pathognomonic hallmark of papillary thyroid carcinoma"
+     ]
+    },
+    "right": {
+     "title": "Normal Follicular Nuclei",
+     "points": [
+      "Evenly distributed, coarsely granular chromatin pattern",
+      "Small, dense, hyperchromatic round nuclei",
+      "Distinct central nucleoli without optical clearing",
+      "Characteristic of benign colloid adenomas and normal thyroid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pathognomonic cytological features establish the diagnosis of papillary thyroid carcinoma even in the absence of invasive architecture. Microscopic examination demonstrates **Orphan Annie chromatin clearing**, alongside longitudinal nuclear grooves and dense concentric calcifications known as psammoma bodies. These enlarged, optically clear ground-glass nuclei result from finely dispersed chromatin marginated against the inner nuclear envelope.",
+   "say": "Orphan Annie chromatin clearing, nuclear grooves, and psammoma bodies establish the cytological diagnosis of papillary thyroid carcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-thyroid-parathyroid-gen1.webp",
+    "alt": "Thyroid micrograph showing clear nuclei, round laminated body and spread notes.",
+    "caption": "Thyroid micrograph showing clear nuclei, round laminated body and spread notes. Papillary carcinoma with Annie nuclei and psammoma body. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The distinctive optical clearing of Orphan Annie nuclei represents an artifact of formalin fixation and tissue processing. The nuclear envelope exhibits extensive micro-folds and redundancies that allow nuclear sap to wash out during paraffin embedding. Consequently, this optical clearing is prominent on formal permanent histological sections, but is largely absent on rapid intraoperative frozen sections. On frozen sections, surgeons must rely instead on **nuclear crowding and overlapping**, where enlarged pale nuclei overlap in dense syncytial clusters.",
+   "say": "Orphan Annie clearing is an artifact of formalin fixation, so it is absent on frozen sections. Intraoperative frozen sections rely instead on nuclear crowding and overlapping.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biopsy",
+      "label": "Formalin Fixation of Thyroid Specimen"
+     },
+     {
+      "id": "sap",
+      "label": "Nuclear Envelope Redundancy Causes Sap Washout"
+     },
+     {
+      "id": "chromatin",
+      "label": "Dispersion of Chromatin to Nuclear Periphery"
+     },
+     {
+      "id": "clearing",
+      "label": "Optically Clear Orphan Annie Nuclei on Paraffin"
+     },
+     {
+      "id": "frozen",
+      "label": "Absence on Frozen Section Demands Looking for Overlapping"
+     }
+    ],
+    "edges": [
+     [
+      "biopsy",
+      "sap"
+     ],
+     [
+      "sap",
+      "chromatin"
+     ],
+     [
+      "chromatin",
+      "clearing"
+     ],
+     [
+      "clearing",
+      "frozen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A second indispensable cytological criterion for papillary thyroid carcinoma is the presence of **intranuclear cytoplasmic pseudoinclusions**. These structures represent deep, round, bubble-like invaginations of eosinophilic cytoplasm into the nucleus, bounded completely by the nuclear envelope. On fine-needle aspiration cytology, pseudoinclusions appear as sharply circumscribed, round, clear spheres within the nucleus that stain identically to the surrounding cytoplasm.",
+   "say": "Intranuclear cytoplasmic pseudoinclusions are round invaginations of cytoplasm protruding into the nucleus. They appear on needle cytology as sharply delineated spheres within the nucleus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nuclear Feature",
+     "Pathophysiological Origin",
+     "Diagnostic Significance in FNAC"
+    ],
+    "rows": [
+     [
+      "Optically Clear Nuclei",
+      "Chromatin dispersion and clearing artifact of formalin fixation",
+      "Core hallmark; readily visible on permanent histological sections"
+     ],
+     [
+      "Intranuclear Pseudoinclusions",
+      "Deep, pouch-like cytoplasmic invaginations through nuclear membrane",
+      "Extremely high diagnostic specificity for papillary thyroid carcinoma"
+     ],
+     [
+      "Nuclear Grooves",
+      "Longitudinal invaginations of the redundant nuclear envelope",
+      "Imparts coffee bean appearance; highly sensitive but seen in thyroiditis"
+     ],
+     [
+      "Nuclear Overlapping",
+      "Loss of normal cellular polarity with crowded syncytial clusters",
+      "Critical finding on intraoperative frozen sections and cytology smears"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The third classical nuclear hallmark is the formation of longitudinal **nuclear grooves**, imparting a distinctive coffee-bean appearance to affected follicular cells. Nuclear grooves represent longitudinal folds or linear creases running along the major axis of the nuclear membrane. While nuclear grooves are extraordinarily sensitive for papillary thyroid carcinoma, they lack absolute specificity, occasionally surfacing in Hashimoto thyroiditis, hyalinizing trabecular tumors, and benign follicular adenomas.",
+   "say": "Nuclear grooves are longitudinal creases running down the nuclear envelope, creating a coffee-bean appearance. They are highly sensitive for papillary carcinoma on cytology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nuclear Grooves (Coffee Bean)",
+     "points": [
+      "Linear crease running along the long nuclear axis",
+      "Represents folding of redundant nuclear envelope",
+      "High sensitivity (>90%) but moderate specificity (75%)",
+      "Can occasionally occur in chronic lymphocytic thyroiditis"
+     ]
+    },
+    "right": {
+     "title": "Intranuclear Pseudoinclusions",
+     "points": [
+      "Circular, sharply demarcated cytoplasmic herniation",
+      "Contains true cytoplasmic organelles and staining properties",
+      "Moderate sensitivity (60-70%) but extreme specificity (>95%)",
+      "Virtually confirms malignancy in thyroid aspirates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because these nuclear hallmarks are diagnostic in themselves, papillary thyroid carcinoma can be categorized into numerous histological variants that share identical nuclear clearing. The classic variant exhibits predominant papillary fronds, whereas the **follicular variant of papillary carcinoma** displays a purely microfollicular growth pattern devoid of true papillae, yet retains pathognomonic Orphan Annie nuclei and pseudoinclusions, classifying it biologically as a papillary malignancy.",
+   "say": "Histological variants of papillary carcinoma share the same nuclear hallmarks. The follicular variant consists entirely of follicles without papillae, yet carries the diagnostic nuclear clearing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PTC Variant",
+     "Histological Architecture",
+     "Biological Behavior and Prognosis"
+    ],
+    "rows": [
+     [
+      "Classic Variant",
+      "Arborizing papillae with fibrovascular cores, psammoma bodies",
+      "Standard favorable prognosis with typical regional nodal spread"
+     ],
+     [
+      "Follicular Variant",
+      "Purely follicular growth pattern with PTC nuclear hallmarks",
+      "Indolent behavior when fully encapsulated; mimics adenoma"
+     ],
+     [
+      "Tall Cell Variant",
+      "Height of cells exceeds twice their width in >30% of cells",
+      "Aggressive biological behavior, high recurrence, radioiodine resistance"
+     ],
+     [
+      "Diffuse Sclerosing",
+      "Diffuse bilateral involvement with extensive squamous metaplasia",
+      "Occurs in young patients, high rate of nodal and lung metastases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In 2016, a critical reclassification removed a major subset of encapsulated follicular-pattern tumors from the cancer registry. Non-invasive follicular thyroid neoplasm with papillary-like nuclear features, abbreviated **NIFTP**, refers to fully encapsulated, non-invasive follicular tumors displaying mild papillary-like nuclear changes. To prevent overtreatment, NIFTP is officially classified as a borderline non-malignant neoplasm, requiring only conservative lobectomy without completion thyroidectomy or radioiodine ablation.",
+   "say": "NIFTP represents non-invasive, encapsulated follicular tumors with papillary-like nuclei. Reclassified as non-malignant, it is managed conservatively with lobectomy alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Encapsulated Follicular Nodule with PTC Nuclei"
+     },
+     {
+      "id": "capsule",
+      "label": "Assess Full Thickness of Fibrous Capsule"
+     },
+     {
+      "id": "criteria",
+      "label": "No Capsular Invasion, No Vascular Invasion, No Papillae"
+     },
+     {
+      "id": "reclass",
+      "label": "Diagnosed as Non-Malignant NIFTP"
+     },
+     {
+      "id": "lobectomy",
+      "label": "Treated Conservatively by Lobectomy Without I-131"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "capsule"
+     ],
+     [
+      "capsule",
+      "criteria"
+     ],
+     [
+      "criteria",
+      "reclass"
+     ],
+     [
+      "reclass",
+      "lobectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the molecular level, these distinctive cytological hallmarks are driven by specific genetic alterations activating the mitogen-activated protein kinase signaling cascade. The most prevalent alteration is the **BRAF V600E mutation**, occurring in sixty percent of classic papillary carcinomas. Point mutation of valine to glutamate at codon 600 constitutively activates the BRAF kinase. The second most frequent alteration involves RET/PTC chromosomal rearrangements, fusing the RET tyrosine kinase domain with thyroid-specific promoters.",
+   "say": "The BRAF V600E mutation activates the MAPK signaling pathway in sixty percent of classic papillary carcinomas. RET/PTC chromosomal rearrangements drive most remaining cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Molecular Alteration",
+     "Genetic Mechanism",
+     "Clinical and Pathological Correlation"
+    ],
+    "rows": [
+     [
+      "BRAF V600E Mutation",
+      "T1799A point mutation on chromosome 7q34",
+      "Classic PTC variant, higher extrathyroidal extension, nodal metastases"
+     ],
+     [
+      "RET/PTC Rearrangement",
+      "Paracentric inversion of chromosome 10 fusing RET to ELE1",
+      "Strongly associated with radiation-induced childhood papillary carcinoma"
+     ],
+     [
+      "RAS Mutations",
+      "Point mutations in NRAS, HRAS, or KRAS codons",
+      "Associated with follicular variant of PTC and encapsulated tumors"
+     ],
+     [
+      "TERT Promoter Mutation",
+      "Mutations in C228T or C250T promoter regions",
+      "Synergizes with BRAF to produce aggressive dedifferentiation and death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because fine-needle aspiration cytology readily demonstrates Orphan Annie nuclei, pseudoinclusions, and nuclear grooves in over ninety percent of aspirates, papillary thyroid carcinoma is reliably categorized as Bethesda six. This high cytological diagnostic accuracy allows the surgeon and patient to engage in definitive preoperative surgical planning, coordinating **upfront oncological resection** without necessitating interim diagnostic frozen sections.",
+   "say": "Recognizing Orphan Annie nuclei and pseudoinclusions on needle aspiration achieves ninety-nine percent accuracy, enabling upfront oncological surgical planning without frozen sections.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "aspirate",
+      "label": "Fine-Needle Aspiration Cytology of Nodule"
+     },
+     {
+      "id": "nuclear",
+      "label": "Identifies Pseudoinclusions & Orphan Annie Nuclei"
+     },
+     {
+      "id": "bethesda6",
+      "label": "Categorized Confidently as Bethesda VI Malignant"
+     },
+     {
+      "id": "plan",
+      "label": "Comprehensive Preoperative Ultrasound Staging"
+     },
+     {
+      "id": "curative",
+      "label": "Definitive Upfront Thyroidectomy & Neck Clearance"
+     }
+    ],
+    "edges": [
+     [
+      "aspirate",
+      "nuclear"
+     ],
+     [
+      "nuclear",
+      "bethesda6"
+     ],
+     [
+      "bethesda6",
+      "plan"
+     ],
+     [
+      "plan",
+      "curative"
+     ]
+    ]
+   }
+  }
+ ]
+}

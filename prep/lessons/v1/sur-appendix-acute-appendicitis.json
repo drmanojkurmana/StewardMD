@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "sur-appendix",
+ "subject": "surgery",
+ "title": "Acute Appendicitis, Clinical Signs, and Alvarado Score",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The single most common emergency general surgical abdominal condition worldwide is **acute appendicitis**. The primary initiating pathophysiological event is luminal obstruction of the appendix, triggered most commonly by lymphoid follicular hyperplasia in children and young adults, or by an impacted calcified faecolith in older individuals. Obstruction creates a closed-loop system where continuous mucosal secretion drives rapid intraluminal pressure escalation.",
+   "say": "Acute appendicitis arises from luminal obstruction by lymphoid hyperplasia or a faecolith, rapidly elevating intraluminal pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-acute-appendicitis.webp",
+    "alt": "Gross pathological specimen of acute appendicitis showing swollen, hyperaemic appendix with fibrinous exudate.",
+    "caption": "Acute appendicitis: gross specimen showing turgid, hyperaemic appendix coated in fibrinous peritoneal exudate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As intraluminal pressure exceeds venous capillary pressure, mucosal ischaemia supervenes, permitting invasion of the appendiceal wall by enteric bacteria such as Escherichia coli and Bacteroides fragilis. Pain begins characteristically as dull, poorly localized periumbilical discomfort mediated by visceral autonomic afferents carried by the tenth thoracic sympathetic dermatome. Within twelve to twenty-four hours, the inflamed serosa irritates the adjacent parietal peritoneum, shifting pain sharply to the **right iliac fossa**.",
+   "say": "Pain begins periumbilically via T10 visceral afferents, shifting within 24 hours to the right lower quadrant as parietal peritoneum becomes inflamed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "block",
+      "label": "Luminal Obstruction: Faecolith or Lymphoid Hyperplasia"
+     },
+     {
+      "id": "visceral",
+      "label": "Periumbilical Dull Pain (T10 Splanchnic Afferents)"
+     },
+     {
+      "id": "transmural",
+      "label": "Transmural Gangrene & Parietal Peritoneal Irritation"
+     },
+     {
+      "id": "somatic",
+      "label": "Sharp Somatic Pain Localized to Right Iliac Fossa"
+     }
+    ],
+    "edges": [
+     [
+      "block",
+      "visceral"
+     ],
+     [
+      "visceral",
+      "transmural"
+     ],
+     [
+      "transmural",
+      "somatic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On clinical physical examination, the point of maximum anatomical tenderness in acute appendicitis corresponds to **McBurney point**. Situated one-third of the distance along the line drawn from the right anterior superior iliac spine to the umbilicus, this landmark marks the base of the appendix where it attaches to the posteromedial wall of the caecum. Palpation over this precise point elicits sharp focal tenderness and involuntary muscle guarding.",
+   "say": "McBurney point lies one-third of the distance from the anterior superior iliac spine to the umbilicus, overlying the appendiceal base.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-appendicitis_signs.webp",
+    "alt": "Clinical illustration showing palpation technique for McBurney point, Rovsing sign, psoas sign, and obturator sign.",
+    "caption": "Eponymous clinical signs of appendicitis: eliciting McBurney point tenderness, Rovsing sign, and psoas stretch. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A valuable indirect clinical physical finding is **Rovsing sign**. Continuous deep palpation over the left iliac fossa displaces trapped colonic gas retrogradely through the descending and transverse colon into the caecum. The resulting sudden distension of the inflamed caecum and appendix provokes sharp referred pain in the right iliac fossa, providing strong confirmatory evidence of acute localized peritoneal irritation.",
+   "say": "Rovsing sign elicits referred right lower quadrant pain when pressure is applied to the left lower quadrant.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rovsing Sign",
+     "points": [
+      "Pressure applied in left lower quadrant",
+      "Shifts intraluminal gas retrogradely",
+      "Triggers referred pain in right lower quadrant",
+      "Confirms localized peritoneal inflammation"
+     ]
+    },
+    "right": {
+     "title": "Blumberg Sign (Rebound)",
+     "points": [
+      "Direct palpation in right lower quadrant",
+      "Sudden release of examining hand",
+      "Provokes sharp stabbing peritoneal pain",
+      "Indicates parietal peritonitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Specific clinical tests help identify the variable anatomical positions of the appendix. When an inflamed appendix lies in the retrocaecal position resting directly upon the iliopsoas muscle, passive hyperextension of the right hip with the patient in the left lateral position stretches the muscle and reproduces sharp abdominal pain, designated as the **psoas sign**. Conversely, internal rotation of the flexed right hip stretches the internal obturator muscle, eliciting the obturator sign in pelvic appendicitis.",
+   "say": "The psoas sign confirms a retrocaecal appendix by hip extension, whereas the obturator sign identifies a pelvic appendix upon internal rotation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Test",
+     "Manoeuvre Executed",
+     "Anatomical Appendiceal Position"
+    ],
+    "rows": [
+     [
+      "Psoas sign",
+      "Passive hyperextension of right hip",
+      "Retrocaecal appendicitis (irritates iliopsoas)"
+     ],
+     [
+      "Obturator sign",
+      "Passive internal rotation of flexed right hip",
+      "Pelvic appendicitis (irritates obturator internus)"
+     ],
+     [
+      "Baldwing sign",
+      "Pain on flexing right hip against resistance with knee straight",
+      "Retrocaecal appendicitis"
+     ],
+     [
+      "Dunphy sign",
+      "Sharp localized right iliac pain elicited by coughing",
+      "Generalized peritoneal irritation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To structure the clinical evaluation and risk-stratify patients suspected of having acute appendicitis, the ten-point **Alvarado score**, also termed the MANTRELS score, is widely utilized. It incorporates three symptoms, three physical signs, and two laboratory parameters. Migration of pain, anorexia, nausea, right lower quadrant tenderness, rebound tenderness, fever, leukocytosis, and a left shift of neutrophils are systematically scored.",
+   "say": "The Alvarado score uses symptoms, signs, and laboratory tests to stratify suspected appendicitis into low, intermediate, and high-risk groups.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-alvarado_score.webp",
+    "alt": "Clinical chart detailing the Alvarado scoring system, diagnostic point weighting, and clinical management bands.",
+    "caption": "Alvarado scoring system: ten-point clinical risk stratification guiding observation, imaging, and appendicectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In the Alvarado score, two points each are awarded for right lower quadrant tenderness and leukocytosis exceeding ten thousand, while all other parameters receive one point. A score of four or less reliably excludes acute appendicitis, allowing safe discharge. Scores of five to six require active observation or contrast **computed tomography**, whereas scores of seven or higher strongly predict appendicitis, warranting prompt surgical exploration.",
+   "say": "Alvarado scores of four or less rule out appendicitis, five to six warrant imaging, and scores of seven or higher indicate surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MANTRELS Category",
+     "Clinical Parameter",
+     "Points Awarded"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Migration of pain to RLQ",
+      "1 point"
+     ],
+     [
+      "Symptoms",
+      "Anorexia (acetone in urine)",
+      "1 point"
+     ],
+     [
+      "Symptoms",
+      "Nausea or vomiting",
+      "1 point"
+     ],
+     [
+      "Signs",
+      "Tenderness in right iliac fossa",
+      "2 points (double weight)"
+     ],
+     [
+      "Signs",
+      "Rebound tenderness (Blumberg sign)",
+      "1 point"
+     ],
+     [
+      "Signs",
+      "Elevation of temperature (> 37.3 C)",
+      "1 point"
+     ],
+     [
+      "Laboratory",
+      "Leukocytosis (> 10,000 / uL)",
+      "2 points (double weight)"
+     ],
+     [
+      "Laboratory",
+      "Shift to the left (> 75% neutrophils)",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive curative therapy for acute appendicitis is surgical **appendicectomy**, performed preferentially via a minimally invasive three-port laparoscopic approach. Laparoscopy provides superior visualization of the entire peritoneal cavity, significantly reduces surgical site infections, minimizes postoperative pain, and shortens convalescence. The appendiceal artery, running within the free edge of the mesoappendix, is divided with diathermy or clips, and the base is securely ligated flush with the caecum.",
+   "say": "Laparoscopic appendicectomy is the benchmark surgical therapy, dividing the mesoappendix and ligating the base flush with the caecum.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Clinical Diagnosis or CT Confirmation of Appendicitis"
+     },
+     {
+      "id": "ports",
+      "label": "Three-Port Laparoscopy: Umbilical, Suprapubic & Left Iliac"
+     },
+     {
+      "id": "meso",
+      "label": "Skeletonization of Mesoappendix & Clipping of Appendicular Artery"
+     },
+     {
+      "id": "base",
+      "label": "Endoloop Suture Ligation of Appendiceal Base & Extraction"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "ports"
+     ],
+     [
+      "ports",
+      "meso"
+     ],
+     [
+      "meso",
+      "base"
+     ]
+    ]
+   }
+  }
+ ]
+}

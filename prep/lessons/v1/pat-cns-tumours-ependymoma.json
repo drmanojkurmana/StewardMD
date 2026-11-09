@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-cns-tumours",
+  "subject": "pathology",
+  "title": "Ependymoma, Medulloblastoma, Meningioma Psammoma Bodies, and Schwannoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Glioma arising from the ependymal cell lining of ventricles occurs predominantly in children within the fourth ventricle, causing obstructive hydrocephalus and raised intracranial pressure. In adults, the spinal cord and filum terminale are the primary locations, with myxopapillary ependymoma predominating at the conus medullaris. That neoplasm is an **ependymoma**. Tumours in the posterior fossa frequently extend through the foramina of Luschka and Magendie, encasing cranial nerves and making surgical removal challenging.",
+      "say": "Ependymoma arises from ependymal ventricular linings, commonly filling the fourth ventricle in children and the filum terminale in adults.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cns-tumours-types-and-grading-fig1.webp",
+        "alt": "CNS tumour histology",
+        "caption": "Histopathological panels displaying ependymal perivascular pseudorosettes alongside meningioma whorled syncytial syncytia and psammoma bodies."
+      }
+    },
+    {
+      "tx": "Microscopic examination of ependymoma reveals uniform round-to-oval nuclei embedded within a finely fibrillary background. The diagnostic histological hallmark is the arrangement of tumour cells with delicate fibrillary cytoplasmic processes radiating toward a central blood vessel, producing an anuclear perivascular zone. That arrangement is **perivascular pseudorosettes**. True ependymal rosettes, in which cells form tubular lumens resembling the central canal of the spinal cord, occur less frequently but are diagnostic when identified.",
+      "say": "Perivascular pseudorosettes are anuclear fibrillary halos around central blood vessels characteristic of ependymoma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ependyma",
+            "label": "Ependymal lining cell proliferation"
+          },
+          {
+            "id": "processes",
+            "label": "Radial fibrillary cytoplasmic processes"
+          },
+          {
+            "id": "halo",
+            "label": "Anuclear perivascular fibrillary zone"
+          },
+          {
+            "id": "pseudorosette",
+            "label": "Perivascular pseudorosette formed"
+          }
+        ],
+        "edges": [
+          [
+            "ependyma",
+            "processes"
+          ],
+          [
+            "processes",
+            "halo"
+          ],
+          [
+            "halo",
+            "pseudorosette"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most prevalent embryonal neuroepithelial brain tumour of childhood is an aggressive WHO grade four cerebellar malignancy located within the vermis. It presents with truncal ataxia, morning vomiting, and rapid progression to intracranial hypertension. That malignancy is **medulloblastoma**. Because tumour cells readily seed cerebrospinal fluid pathways, early staging requires total neuraxis magnetic resonance imaging and CSF cytology to detect drop metastases to the cauda equina. Four molecular subgroups exist: WNT, SHH, Group 3, and Group 4.",
+      "say": "Medulloblastoma is a pediatric cerebellar vermis embryonal malignancy capable of cerebrospinal fluid seeding and cauda equina drop metastases.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/medulloblastoma-fig1.webp",
+        "alt": "Medulloblastoma pathology",
+        "caption": "Sagittal brain neuroimaging and microscopy displaying hyperdense midline cerebellar vermis medulloblastoma with spinal drop metastases."
+      }
+    },
+    {
+      "tx": "Histology of medulloblastoma shows sheets of densely packed, primitive small round blue cells with hyperchromatic carrot-shaped nuclei, scant cytoplasm, brisk mitoses, and apoptotic bodies. Cells cluster around central fibrillary neuropil cores devoid of a true lumen, forming classic **Homer Wright rosettes**. Tumor cells express neuronal markers such as synaptophysin and neurofilament. Molecular subgrouping shows WNT-activated tumours harbouring beta-catenin mutations carry excellent prognosis, while Group 3 tumours with MYC amplification exhibit early metastasis and poor outcomes.",
+      "say": "Homer Wright rosettes consist of small round blue cells encircling a central fibrillary core, characteristic of medulloblastoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular subgroup",
+          "Key genetic alteration",
+          "Prognostic outcome"
+        ],
+        "rows": [
+          [
+            "WNT-activated",
+            "CTNNB1 (beta-catenin) mutation",
+            "Favourable (>90% 5-year survival)"
+          ],
+          [
+            "SHH-activated",
+            "PTCH1 or SUFU mutation",
+            "Intermediate prognosis"
+          ],
+          [
+            "Group 3",
+            "MYC oncogene amplification",
+            "Poor prognosis with frequent metastases"
+          ],
+          [
+            "Group 4",
+            "Isochromosome 17q",
+            "Intermediate prognosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Arachnoid cap cells of the arachnoid villi give rise to slow-growing, benign extra-axial tumours that attach firmly to the inner surface of the dura mater. Predilection for parasagittal convexity, sphenoid ridges, and olfactory grooves causes compression of underlying brain parenchyma without direct parenchymal invasion. That tumor is a **meningioma**. Neuroimaging demonstrates uniform contrast enhancement with a dural tail sign. Because neoplastic cells express progesterone receptors, meningiomas occur twice as often in females and may enlarge during pregnancy.",
+      "say": "Meningioma is an extra-axial dural-based arachnoid cap cell tumor displaying intense contrast enhancement and a dural tail sign.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Meningioma",
+          "points": [
+            "Arachnoid cap cell origin",
+            "Dural tail sign on MRI",
+            "Whorls and psammoma bodies",
+            "Female predominance (progesterone+)"
+          ]
+        },
+        "right": {
+          "title": "Schwannoma",
+          "points": [
+            "Schwann cell origin",
+            "Cerebellopontine angle location",
+            "Antoni A and Verocay bodies",
+            "Strong diffuse S100 positivity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microscopic sections of transitional and psammomatous meningiomas display concentric whorls of syncytial cells with indistinct cell borders and intranuclear pseudoinclusions. The centres of these tight cellular whorls undergo hyalinization, dystrophic calcification, and lamellation, forming round calcified calcospherites known as **psammoma bodies**. The primary cytogenetic abnormality driving more than half of sporadic meningiomas is deletion or loss of heterozygosity on chromosome 22q, inactivating the NF2 tumor suppressor gene encoding the protein merlin.",
+      "say": "Psammoma bodies are concentric laminated calcified whorls characteristic of meningioma, often linked to chromosome 22q NF2 loss.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Variant",
+          "Histological appearance",
+          "WHO grade"
+        ],
+        "rows": [
+          [
+            "Meningothelial",
+            "Syncytial sheets with indistinct borders",
+            "Grade 1 (benign)"
+          ],
+          [
+            "Transitional",
+            "Whorled cells and psammoma bodies",
+            "Grade 1 (benign)"
+          ],
+          [
+            "Atypical",
+            ">=4 mitoses per 10 HPF or brain invasion",
+            "Grade 2 (intermediate)"
+          ],
+          [
+            "Anaplastic",
+            ">=20 mitoses per 10 HPF, sarcoma-like",
+            "Grade 3 (malignant)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Benign encapsulated peripheral nerve sheath tumours arise from neural crest-derived Schwann cells along cranial or peripheral nerves. The most frequent intracranial location is the vestibular branch of cranial nerve VIII at the cerebellopontine angle, presenting with unilateral sensorineural hearing loss, tinnitus, and vestibular instability. That tumor is a **schwannoma**. The mass compresses adjacent cranial nerves VII and V as it expands. Bilateral vestibular schwannomas are pathognomonic for neurofibromatosis type 2, resulting from germline NF2 gene mutations.",
+      "say": "Vestibular schwannoma arises at the cerebellopontine angle from Schwann cells, producing sensorineural hearing loss and tinnitus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acoustic-neuroma-fig1.webp",
+        "alt": "Vestibular schwannoma anatomy and histology",
+        "caption": "Anatomical diagram of cerebellopontine angle vestibular schwannoma alongside histology showing alternating Antoni A and Antoni B regions."
+      }
+    },
+    {
+      "tx": "Histopathology of schwannoma demonstrates a biphasic pattern composed of cellular and hypocellular components. Dense cellular **Antoni A** tissue contains compact fascicles of elongated spindle cells whose nuclei align in parallel rows, flanking acellular eosinophilic cytoplasmic processes to form **Verocay bodies**. In contrast, hypocellular Antoni B tissue consists of loose, microcystic, myxoid stroma with prominent hyalinized blood vessels prone to thrombosis and microhaemorrhage. Diffuse, intense cytoplasmic and nuclear immunoreactivity for S100 protein confirms Schwann cell identity.",
+      "say": "Antoni A regions feature palisading spindle cell nuclei and Verocay bodies, alternating with loose, hypocellular Antoni B tissue.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tissue zone",
+          "Cellular density",
+          "Key histological structure"
+        ],
+        "rows": [
+          [
+            "Antoni A",
+            "High cellular density",
+            "Nuclear palisades and Verocay bodies"
+          ],
+          [
+            "Antoni B",
+            "Low cellularity, myxoid",
+            "Microcysts and hyalinized thick vessels"
+          ],
+          [
+            "Tumour capsule",
+            "True fibrous capsule",
+            "Compressed displaced parent nerve"
+          ],
+          [
+            "Immunostain",
+            "Uniformly intense",
+            "Diffuse S100 positivity"
+          ]
+        ]
+      }
+    }
+  ]
+}

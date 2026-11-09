@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ent-ear-anatomy-cochlea",
+ "subject": "ent",
+ "module": "ent-ear-anatomy",
+ "title": "Cochlea, Organ of Corti, and Inner Ear Fluids",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The inner ear, or labyrinth, consists of an outer bony labyrinth encapsulating a delicate inner membranous labyrinth. The anterior auditory component of the bony labyrinth is the **cochlea**, a snail-shell-like conical structure that winds two and a half to two and three-quarter turns around a central conical bony pillar called the modiolus. Radiating outward from the modiolus is a spiral shelf of bone termed the osseous spiral lamina.",
+   "say": "The cochlea resembles a snail shell winding roughly two and three-quarter turns around a central bony modiolus. An osseous spiral lamina projects outward from this modiolus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sudden-sensorineural-hearing-loss-fig1.webp",
+    "alt": "Anatomical illustration showing cochlear turns, scala vestibuli, scala media, and hair cells",
+    "caption": "Spiral architecture of the human cochlea and microanatomy of the sensory organ of Corti. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The cochlear canal is partitioned longitudinally into three parallel fluid-filled compartments by two membranes. The upper scala vestibuli is separated from the middle scala media by the delicate, two-cell-thick Reissner membrane. The middle scala media, or cochlear duct, is separated from the lower scala tympani by the resilient **basilar membrane**. At the apical cochlear cupula, the scala vestibuli and scala tympani communicate through a small aperture called the helicotrema.",
+   "say": "Reissner membrane and the basilar membrane partition the cochlea into scala vestibuli, scala media, and scala tympani. At the apex, the helicotrema unites vestibuli and tympani.",
+   "vis": {
+    "kind": "table",
+    "title": "The Three Compartments of the Cochlear Duct",
+    "cols": [
+     "Compartment",
+     "Contained Fluid",
+     "Cation Profile",
+     "Electric Potential"
+    ],
+    "rows": [
+     [
+      "Scala vestibuli",
+      "Perilymph",
+      "High Sodium, low Potassium",
+      "+5 millivolts"
+     ],
+     [
+      "Scala media (duct)",
+      "Endolymph",
+      "High Potassium, low Sodium",
+      "+80 millivolts"
+     ],
+     [
+      "Scala tympani",
+      "Perilymph",
+      "High Sodium, low Potassium",
+      "Zero millivolts (reference)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fluid composition within the cochlea exhibits strict physiological compartmentalization essential for sensory transduction. Scala vestibuli and scala tympani contain perilymph, a proteinaceous fluid resembling extracellular fluid with high sodium and low potassium concentrations. In contrast, the membranous cochlear duct contains **endolymph**, which uniquely resembles intracellular fluid with a high potassium concentration of one hundred and fifty millimoles per litre and low sodium.",
+   "say": "Perilymph resembles extracellular fluid with high sodium, filling scala vestibuli and tympani. Endolymph resembles intracellular fluid with high potassium, filling scala media.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perilymph",
+     "points": [
+      "Fills scala vestibuli and scala tympani.",
+      "High sodium (140 mM) and low potassium (4 mM).",
+      "Communicates with subarachnoid CSF via cochlear aqueduct.",
+      "Maintains baseline reference potential near zero."
+     ]
+    },
+    "right": {
+     "title": "Endolymph",
+     "points": [
+      "Fills scala media and vestibular labyrinths.",
+      "High potassium (150 mM) and low sodium (2 mM).",
+      "Secreted actively by the vascular stria vascularis.",
+      "Generates strong +80 millivolt endocochlear potential."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The outer wall of the scala media is lined by a specialized, highly vascularized pseudostratified epithelium termed the **stria vascularis**. Driven by sodium-potassium ATPase and sodium-potassium-two-chloride cotransporters on marginal cells, the stria vascularis actively secretes potassium ions into the endolymph. This active ion pumping generates a resting positive endocochlear potential of plus eighty millivolts, providing the electrochemical driving battery for auditory sensory transduction.",
+   "say": "The stria vascularis lines the lateral cochlear duct, actively pumping potassium into endolymph. This creates a powerful positive eighty millivolt endocochlear potential.",
+   "vis": {
+    "kind": "flow",
+    "title": "Generation of the Endocochlear Potential",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Marginal Cell Na/K-ATPase"
+     },
+     {
+      "id": "s2",
+      "label": "Active Potassium Secretion into Scala Media"
+     },
+     {
+      "id": "s3",
+      "label": "+80 mV Endocochlear Battery Established"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resting directly upon the basilar membrane is the **organ of Corti**, the peripheral sensory transducer of hearing. It comprises sensory receptor hair cells interspaced among supporting cells such as Deiters, pillar, and Hensen cells. Overlying the sensory hair cells is the acellular gelatinous tectorial membrane, composed of collagen and glycoproteins, into which the tallest stereocilia of the outer hair cells are physically embedded.",
+   "say": "Resting on the basilar membrane, the organ of Corti carries inner and outer hair cells cushioned by supporting cells. The gelatinous tectorial membrane overlies their stereocilia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ent-ear-physiology-gen1.webp",
+    "alt": "Illustration of the organ of Corti on the basilar membrane with inner and outer hair cells beneath the tectorial membrane and an inset of bent stereocilia admitting potassium",
+    "caption": "Illustration of the organ of Corti on the basilar membrane with inner and outer hair cells beneath the tectorial membrane and an inset of bent stereocilia admitting potassium. Diagram of cochlear transduction showing stereocilia bending and potassium entry, Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Sensory hair cells are organized into two functionally and anatomically distinct populations: inner hair cells and outer hair cells. There is a single row of roughly three thousand five hundred **inner hair cells**, which act as the true sensory receptors, receiving ninety to ninety-five percent of all afferent auditory nerve fibres. They convert mechanical shear into glutamate release onto spiral ganglion dendrites.",
+   "say": "A single row of inner hair cells serves as the primary acoustic sensor, receiving ninety-five percent of afferent auditory nerve fibres to signal sound to the brain.",
+   "vis": {
+    "kind": "table",
+    "title": "Inner Versus Outer Hair Cells of the Organ of Corti",
+    "cols": [
+     "Feature",
+     "Inner Hair Cells",
+     "Outer Hair Cells"
+    ],
+    "rows": [
+     [
+      "Arrangement",
+      "Single straight row (3,500 cells)",
+      "Three to five rows (12,000 cells)"
+     ],
+     [
+      "Cell Shape",
+      "Flask or pear shaped",
+      "Elongated cylindrical test-tube shaped"
+     ],
+     [
+      "Innervation",
+      "95% afferent auditory type I fibres",
+      "Predominantly efferent olivocochlear fibres"
+     ],
+     [
+      "Primary Role",
+      "Acoustic perception transducer",
+      "Cochlear amplifier electromotility (Prestin)"
+     ],
+     [
+      "Vulnerability",
+      "Resistant to acoustic trauma",
+      "Highly sensitive to noise and aminoglycosides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, roughly twelve thousand **outer hair cells** are arranged in three to five parallel rows. Rather than acting as passive sensors, outer hair cells serve as active biological amplifiers. Powered by the transmembrane motor protein prestin, they contract and elongate in cycle with sound vibrations (electromotility), sharpening frequency tuning and amplifying low-intensity sounds by forty to fifty decibels. Their electromotility also generates measurable otoacoustic emissions.",
+   "say": "Arranged in three to five rows, outer hair cells act as active motors using prestin. Their rhythmic electromotility amplifies soft sounds and produces otoacoustic emissions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cochlear Amplification Mechanism",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Sound-Induced Stereociliary Deflection"
+     },
+     {
+      "id": "h2",
+      "label": "Prestin-Mediated Outer Hair Cell Motility"
+     },
+     {
+      "id": "h3",
+      "label": "Sharpened Peak & Otoacoustic Emission"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The basilar membrane possesses tonotopic organization along its entire length. At the cochlear base near the oval window, the membrane is narrow and stiff, vibrating maximally in response to high-frequency sounds. Toward the apical **helicotrema**, the membrane becomes five times wider and more compliant, vibrating in response to low-frequency sounds. This tonotopic spatial frequency map is faithfully maintained through the auditory pathway to the primary cortex.",
+   "say": "The basilar membrane is tonotopically tuned. Narrow and stiff at the base, it detects high frequencies; wide and flexible at the apex, it resonates with low frequencies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cochlear Base",
+     "points": [
+      "Located near the oval and round windows.",
+      "Basilar membrane is narrow (0.1 mm) and highly stiff.",
+      "Resonates maximally to high acoustic frequencies (up to 20 kHz).",
+      "First area damaged in presbycusis and ototoxicity."
+     ]
+    },
+    "right": {
+     "title": "Cochlear Apex",
+     "points": [
+      "Located at the helicotrema cupula.",
+      "Basilar membrane is wide (0.5 mm) and compliant.",
+      "Resonates maximally to low acoustic frequencies (down to 20 Hz).",
+      "Spared in early noise-induced and age-related hearing loss."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "a38ab09e-f067-4032-b5ac-9e7912c40ec5",
+  "a8515d79-d6bc-4a09-a6d9-e45ec0bd5475",
+  "3627ed15-b137-445f-bbcd-6e3513334913"
+ ]
+}

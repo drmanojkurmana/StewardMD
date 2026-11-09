@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-submandibular-tongue",
+ "subject": "anatomy",
+ "title": "Soft Palate Musculature, Tensor Veli Palatini, and Cleft Palate",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The palate forms the arched roof of the oral cavity and the floor of the nasal cavities. It is divided into an anterior bony hard palate comprising the palatine processes of maxillae and horizontal plates of palatine bones, and a posterior movable fibromuscular **soft palate** (velum palatinum) suspended from the posterior margin of the hard palate.",
+   "say": "Forming the roof of the mouth, the palate comprises an anterior bony hard palate and a posterior muscular soft palate suspended from its trailing edge.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-tonsil-relations.svg",
+    "alt": "Anatomical diagram of the oral cavity and oropharyngeal isthmus showing hard and soft palate",
+    "caption": "Anatomical configuration of the hard palate, muscular soft palate, and palatine tonsillar pillars. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The core of the soft palate is formed by the palatine aponeurosis, a thin, firm fibrous sheet attached anteriorly to the posterior border of the hard palate. Five pairs of symmetrical muscles insert into or construct the soft palate: tensor veli palatini, levator veli palatini, palatoglossus, **palatopharyngeus**, and the musculus uvulae terminating in the central conical uvula.",
+   "say": "The palatine aponeurosis anchors five pairs of muscles: tensor veli palatini, levator veli palatini, palatoglossus, palatopharyngeus, and musculus uvulae.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Palatal Muscle",
+     "Origin and Insertion",
+     "Primary Palatal Action"
+    ],
+    "rows": [
+     [
+      "Tensor veli palatini",
+      "Scaphoid fossa, spine of sphenoid, auditory tube to aponeurosis",
+      "Tenses soft palate horizontally; dilates auditory tube"
+     ],
+     [
+      "Levator veli palatini",
+      "Petrous temporal apex and auditory tube to aponeurosis",
+      "Elevates soft palate vertically against posterior pharyngeal wall"
+     ],
+     [
+      "Palatoglossus",
+      "Palatine aponeurosis to lateral border of tongue",
+      "Elevates root of tongue; narrows oropharyngeal isthmus"
+     ],
+     [
+      "Palatopharyngeus",
+      "Palatine aponeurosis to thyroid cartilage lamina",
+      "Elevates pharynx and larynx during swallowing"
+     ],
+     [
+      "Musculus uvulae",
+      "Posterior nasal spine and aponeurosis to uvular tip",
+      "Shortens and thickens the uvula to seal nasopharynx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The tensor veli palatini exhibits a remarkable mechanical pulley mechanism. Arising from the scaphoid fossa of the sphenoid and the cartilaginous auditory tube, its muscle belly descends vertically towards the pterygoid hamulus. Its tendon hooks at a right angle around the **pterygoid hamulus**, coursing horizontally into the soft palate to expand as the palatine aponeurosis.",
+   "say": "Tensor veli palatini descends vertically, hooks around the pterygoid hamulus at a right angle, and expands horizontally as the fibrous palatine aponeurosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Vertical Muscular Descent (Arises from scaphoid fossa and lateral auditory tube)"
+     },
+     {
+      "id": "t2",
+      "label": "Pterygoid Hamulus Pulley (Tendon hooks around lateral surface of hamulus)"
+     },
+     {
+      "id": "t3",
+      "label": "Horizontal Aponeurotic Expansion (Radiates medially to form structural framework of soft palate)"
+     },
+     {
+      "id": "t4",
+      "label": "Bilateral Tension (Flattens and tenses palate, permitting levator to pull against rigid shelf)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The motor innervation of the soft palate follows a strict anatomical rule: all five pairs of palatal muscles are innervated by the cranial accessory nerve via the pharyngeal plexus (CN X), with one solitary exception: the **tensor veli palatini**, which is innervated by the mandibular division of the trigeminal nerve (CN V3) via the nerve to medial pterygoid.",
+   "say": "All palatal muscles are innervated by the vagal pharyngeal plexus except tensor veli palatini, which is supplied by the mandibular nerve V3.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tensor Veli Palatini (V3)",
+     "points": [
+      "Derived from first pharyngeal arch mesoderm",
+      "Innervated by mandibular nerve (CN V3)",
+      "Nerve traverses otic ganglion without synapsing",
+      "Tenses palate horizontally; opens auditory tube"
+     ]
+    },
+    "right": {
+     "title": "All Other Palatal Muscles (X)",
+     "points": [
+      "Derived from fourth pharyngeal arch mesoderm",
+      "Innervated by vagal pharyngeal plexus (CN X)",
+      "Includes levator veli palatini and musculus uvulae",
+      "Elevate and seal soft palate against Passavant ridge"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During deglutition and phonation, the soft palate executes velopharyngeal closure to prevent food or liquids from regurgitating into the nasopharynx. The tensor veli palatini tenses the palatal shelf horizontally, while the levator veli palatini pulls the palate posterosuperiorly against the **Passavant ridge** (a horizontal muscular bar formed by the palatopharyngeus on the superior constrictor).",
+   "say": "Velopharyngeal closure seals the nasopharynx during swallowing. Levator veli palatini pulls the tensed palate against Passavant ridge on the posterior pharyngeal wall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Horizontal Tension (Tensor veli palatini tenses the palatine aponeurosis)"
+     },
+     {
+      "id": "v2",
+      "label": "Posterosuperior Elevation (Levator veli palatini elevates palate backward and upward)"
+     },
+     {
+      "id": "v3",
+      "label": "Passavant Ridge Projection (Superior constrictor and palatopharyngeus form posterior mucosal bar)"
+     },
+     {
+      "id": "v4",
+      "label": "Hermetic Nasopharyngeal Seal (Prevents nasal regurgitation and directs bolus into oropharynx)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In unilateral vagal nerve paralysis, failure of the ipsilateral levator veli palatini causes the soft palate to droop on the affected side. When the patient is asked to say 'Ah', the intact contralateral levator veli palatini pulls the soft palate and uvula towards the normal side, producing the classic physical sign of **uvular deviation** away from the lesion.",
+   "say": "In unilateral vagus lesions, the soft palate droops. When phonating, the active contralateral levator pulls the uvula away from the paralyzed side toward normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Phonation (Saying 'Ah')",
+     "points": [
+      "Bilateral levator veli palatini contract symmetrically",
+      "Soft palate elevates evenly in the midline",
+      "Uvula remains strictly centered in oropharynx",
+      "Bilateral symmetrical velopharyngeal seal achieved"
+     ]
+    },
+    "right": {
+     "title": "Unilateral Left Vagus Nerve Palsy",
+     "points": [
+      "Left palatal arch droops and fails to elevate",
+      "Normal right levator pulls unopposed across aponeurosis",
+      "Uvula deviates to the right (normal, uninjured side)",
+      "Nasal regurgitation of liquids on swallowing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Embryological development of the palate involves the fusion of the primary palate (intermaxillary segment) with bilateral secondary palatal shelves derived from the maxillary prominences. Failure of the bilateral secondary palatine processes to fuse with each other across the midline in the eighth to tenth weeks results in a congenital **cleft palate**, which may be complete or bifid uvula.",
+   "say": "Failure of the secondary palatal shelves to fuse across the midline creates a cleft palate. This permits nasal regurgitation and causes conductive hearing deficits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification of Cleft",
+     "Embryological Failure",
+     "Clinical Severity and Presentation"
+    ],
+    "rows": [
+     [
+      "Bifid uvula",
+      "Failure of final posterior fusion of musculus uvulae",
+      "Mildest form; often asymptomatic incidental finding"
+     ],
+     [
+      "Incomplete cleft palate",
+      "Failure of fusion restricted to soft palate and posterior hard palate",
+      "Hypernasal speech and chronic Eustachian tube dysfunction"
+     ],
+     [
+      "Complete bilateral cleft palate",
+      "Total failure of primary and secondary palatal processes to fuse",
+      "Direct communication between oral and nasal cavities; requires palatoplasty"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the tensor veli palatini (dilator tubae) attaches directly to the lateral cartilaginous lamina of the auditory tube, its contraction actively dilates the tubal lumen during swallowing and yawning to equalize middle ear pressure. In cleft palate infants, loss of the horizontal aponeurotic fulcrum prevents tubal dilation, causing chronic middle ear effusion, otitis media, and **conductive hearing loss**.",
+   "say": "Tensor veli palatini dilates the auditory tube during swallowing. Disrupted palatal anatomy in cleft palate impairs tubal opening, triggering chronic middle ear effusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ent-otosclerosis-fig1.webp",
+    "alt": "An audiogram illustrating conductive hearing loss due to otosclerosis, featuring a prominent air-bone gap and a specific dip in bone conduction at 2000 Hz, known as the Carhart notch",
+    "caption": "An audiogram illustrating conductive hearing loss due to otosclerosis, featuring a prominent air-bone gap and a specific dip in bone conduction at 2000 Hz, known as the Carhart notch. Audiogram showing conductive loss with characteristic Carhart notch in otosclerosis. Image: Perkins CJ, Mitchell S. Audiology Clinical Masking. [Updated 2022 Mar , CC BY 4.0, Wiki",
+    "ar": 1.3333
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

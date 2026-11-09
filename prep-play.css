@@ -35,10 +35,14 @@
 .pn-root .pv-boss-end.won .pn-big { color: var(--pn-ok); }
 .pn-root .pv-boss-end.lost .pn-big { color: var(--pn-bad); }
 
-/* Voice */
-.pn-root .pv-voicebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 4px 16px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-weight: 600; }
-.pn-root .pv-voicebar > span { display: inline-flex; align-items: center; gap: 8px; }
+/* Voice: status on its own line (heard text stays readable), controls on one row, 44px targets, 8px gaps. */
+.pn-root .pv-voicebar { display: flex; flex-direction: column; gap: 2px; padding: 6px 16px 8px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-weight: 600; }
+.pn-root .pv-vstat { display: inline-flex; align-items: center; gap: 8px; min-width: 0; overflow-wrap: anywhere; }
+.pn-root .pv-vbtns { display: flex; align-items: center; gap: 8px; }
+.pn-root .pv-vbtns .pv-vspd { margin-right: auto; font-variant-numeric: tabular-nums; }
 .pn-root .pv-voicebar .pn-link { min-height: 44px; }
+/* The one-time natural-voice download card inside Voice mode (reuses the lessons' .pn-vdl rows and track). */
+.pn-root #pvVoiceDl .pv-vdl { margin: 10px 12px 0; padding: 12px 14px; border-radius: var(--pn-r-lg); background: var(--pn-s1); border: 1px solid var(--pn-edge); }
 
 /* Focus room */
 .pn-root .pv-focus .pn-panel { display: flex; flex-direction: column; gap: 12px; }

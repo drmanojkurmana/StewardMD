@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-chronic-granulomatous",
+  "subject": "pathology",
+  "title": "Caseating and Non-Caseating Granulomas, Tuberculosis, and Sarcoidosis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Granulomas are broadly divided on histological grounds into two major diagnostic categories: necrotizing caseating granulomas and non-necrotizing non-caseating granulomas. The prototypical cause of caseating granulomatous disease is Mycobacterium tuberculosis, wherein infected centers undergo amorphous, cheesy, eosinophilic necrosis termed **caseating granulomatous inflammation**.",
+      "say": "Granulomas are classified as caseating or non-caseating based on the presence of central necrotic debris.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-and-granulomatous-inflammation-fig1.webp",
+        "caption": "Caseating granuloma: caseous necrosis with Langhans giant cells. [Credit: StewardMD]",
+        "alt": "Caseating granuloma: caseous necrosis with Langhans giant cells."
+      }
+    },
+    {
+      "tx": "In primary pulmonary tuberculosis, initial mycobacterial infection in mid-to-lower lung zones forms a localized subpleural caseating focus termed the Ghon focus. Combined with caseating hilar lymph node enlargement, this classical pairing represents the **Ghon primary complex**, which typically heals through dystrophic calcification to form a fibrocalcific Ranke complex.",
+      "say": "The Ghon primary complex pairs a subpleural caseating lung lesion with enlarged hilar lymph nodes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "droplet_inhalation",
+            "label": "Aerosolized Mycobacterium Tuberculosis Droplets Settle in Subpleural Alveoli"
+          },
+          {
+            "id": "ghon_focus",
+            "label": "Macrophage Infiltration and Th1 Immunity Form 1-to-1.5 cm Ghon Focus"
+          },
+          {
+            "id": "lymphatic_spread",
+            "label": "Organisms Drain via Lymphatics to Regional Hilar and Mediastinal Nodes"
+          },
+          {
+            "id": "ranke_calcification",
+            "label": "Ghon Complex Heals, Undergoing Fibrous Encapsulation and Calcification (Ranke)"
+          }
+        ],
+        "edges": [
+          [
+            "droplet_inhalation",
+            "ghon_focus"
+          ],
+          [
+            "ghon_focus",
+            "lymphatic_spread"
+          ],
+          [
+            "lymphatic_spread",
+            "ranke_calcification"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histological examination of tuberculous caseating granulomas reveals complete destruction of tissue architecture within the central core. Acid-fast bacilli are identified within the necrotic debris or phagocytosed inside epithelioid histiocytes using the **Ziehl-Neelsen carbolfuchsin stain**, appearing as slender, beaded, bright red rods under oil immersion.",
+      "say": "Ziehl-Neelsen staining demonstrates bright red, slender, acid-fast tuberculous bacilli within granulomas.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Caseating Granuloma Morphology",
+          "points": [
+            "Central core: completely acellular, structureless, pink granular debris",
+            "Surrounding zone: palisaded rim of transformed epithelioid macrophages",
+            "Interspersed multinucleated Langhans giant cells with peripheral nuclei",
+            "Outer mantle: CD4+ T-lymphocytes, plasma cells, and fibrous collagen cuff"
+          ]
+        },
+        "right": {
+          "title": "Non-Caseating Granuloma Morphology",
+          "points": [
+            "Solid, non-necrotic aggregates of epithelioid macrophages throughout",
+            "Absence of central acellular caseous or liquefactive necrotic debris",
+            "Cohesive, sharply demarcated, round to oval microscopic nodules",
+            "Characteristic of sarcoidosis, Crohn disease, berylliosis, and foreign bodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast to tuberculosis, sarcoidosis is a multisystem inflammatory disorder characterized by the widespread formation of non-caseating granulomas. Typically presenting with bilateral hilar lymphadenopathy and pulmonary reticular infiltrates, **sarcoid non-caseating granulomas** present as uniform, cohesive, naked granulomas with minimal peripheral lymphocytic cuffs.",
+      "say": "Sarcoidosis forms clean, non-caseating granulomas that characteristically involve hilar lymph nodes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sarcoidosis-fig1.webp",
+        "caption": "Compact non-caseating pulmonary sarcoid granulomas showing tightly packed epithelioid histiocytes.",
+        "alt": "Non-caseating sarcoid granuloma with compact epithelioid cells and multinucleated giants"
+      }
+    },
+    {
+      "tx": "Under light microscopy, the multinucleated giant cells in sarcoid granulomas frequently contain two distinctive morphological inclusions. These are **Schaumann bodies**, which are laminated concentric calcified basophilic proteinaceous concretions, and asteroid bodies, which are stellate, star-shaped eosinophilic crystalline inclusions embedded within the giant cell cytoplasm.",
+      "say": "Sarcoid giant cells often contain laminated Schaumann bodies and star-shaped asteroid bodies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Schaumann Bodies (Conchoidal Bodies)",
+          "points": [
+            "Concentric, laminated, basophilic round proteinaceous concretions",
+            "Composed of calcium salts, iron, and complex mucopolysaccharides",
+            "Located within cytoplasm of multinucleated giant cells",
+            "Present in 60-80% of sarcoidosis and berylliosis granulomas"
+          ]
+        },
+        "right": {
+          "title": "Asteroid Bodies",
+          "points": [
+            "Stellate, radiating, star-shaped, bright eosinophilic inclusions",
+            "Composed of compressed cytoskeletal vimentin and lipid bilayers",
+            "Enclosed within clear vacuoles inside giant cell cytoplasm",
+            "Characteristic of sarcoidosis, but not entirely pathognomonic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Leprosy (Hansen disease), caused by Mycobacterium leprae, exhibits a clinical and pathological spectrum dictated entirely by the host cell-mediated immune response. In patients with vigorous T-helper-one cell-mediated immunity, **tuberculoid leprosy** produces well-formed epithelioid granulomas that encircle and destroy cutaneous dermal nerves, with few acid-fast bacilli.",
+      "say": "Tuberculoid leprosy exhibits vigorous cell-mediated immunity, forming granulomas with rare bacilli.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/leprosy-fig1.webp",
+        "caption": "Cutaneous lepromatous and tuberculoid leprosy lesions displaying altered host cell-mediated responses.",
+        "alt": "Cutaneous leprosy showing hypopigmented anesthetic plaques and nerve enlargement"
+      }
+    },
+    {
+      "tx": "Conversely, patients lacking effective T-cell immunity against Mycobacterium leprae develop lepromatous leprosy. Characterized by profound cell-mediated anergy, **lepromatous leprosy histology** reveals sheets of lipid-laden foamy macrophages termed Virchow cells packed with thousands of acid-fast bacilli arranged in bundles termed globi, producing facial lion-like leonine facies.",
+      "say": "Lepromatous leprosy lacks T-cell immunity, displaying foamy Virchow cells packed with globi of bacilli.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tuberculoid Leprosy (High CMI)",
+          "points": [
+            "Robust Th1 cell-mediated immunity with positive lepromin skin test",
+            "Well-formed epithelioid granulomas with Langhans giant cells",
+            "Infiltrates and destroys peripheral dermal nerves, producing anesthesia",
+            "Paucibacillary: acid-fast bacilli are extremely rare or absent on biopsy"
+          ]
+        },
+        "right": {
+          "title": "Lepromatous Leprosy (Low CMI)",
+          "points": [
+            "Profound Th1 anergy with negative lepromin skin test; elevated Th2 cytokines",
+            "Absence of granulomas; sheets of foamy lipid-laden Virchow histiocytes",
+            "Multibacillary: packed with thousands of bacilli in parallel bundles (globi)",
+            "Produces leonine facies, loss of eyebrows, saddle nose, and testicular atrophy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In differentiating granulomatous diseases, detailed clinical history, microbiological stains, and special fungal cultures are essential. While caseous necrosis strongly favors tuberculosis, fungal histoplasmosis, or coccidioidomycosis, non-caseating granulomas warrant thorough clinical evaluation for sarcoidosis, Crohn disease, berylliosis, foreign body reactions, and **granulomatous polyangiitis**.",
+      "say": "Caseating granulomas indicate mycobacterial or fungal disease, while non-caseating indicate sarcoidosis or Crohn disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biopsy_yield",
+            "label": "Tissue Core Biopsy Demonstrates Well-Formed Epithelioid Cell Granuloma"
+          },
+          {
+            "id": "necrosis_check",
+            "label": "Examine for Central Acellular Amorphous Eosinophilic Caseous Necrosis"
+          },
+          {
+            "id": "special_stains",
+            "label": "Perform Acid-Fast (ZN/Fite) and Silver (GMS/PAS) Stains for Microbes"
+          },
+          {
+            "id": "etiologic_class",
+            "label": "Categorize as Caseating Mycobacterial/Fungal vs Non-Caseating Systemic Disease"
+          }
+        ],
+        "edges": [
+          [
+            "biopsy_yield",
+            "necrosis_check"
+          ],
+          [
+            "necrosis_check",
+            "special_stains"
+          ],
+          [
+            "special_stains",
+            "etiologic_class"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

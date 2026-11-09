@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "pat-joints-soft-tissue",
+  "subject": "pathology",
+  "title": "Pigmented Villonodular Synovitis, Liposarcoma, Synovial Sarcoma, and Soft Tissue Tumours",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Neoplastic synovial proliferation affecting the knee joint displays thick, tangle-like villous projections and brown-red nodular masses. The underlying mechanism involves a t(1;2)(p13;q37) translocation fusing the CSF1 gene to COL6A3, overproducing macrophage colony-stimulating factor that recruits reactive non-neoplastic histiocytes. That lesion is **pigmented villonodular synovitis**. Histology demonstrates polyhedral mononuclear synovial cells, multinucleated osteoclast-like giant cells, lipid-laden foamy histiocytes, and abundant hemosiderin pigment causing dramatic MRI blooming artifacts.",
+      "say": "Pigmented villonodular synovitis is a CSF1-driven neoplastic proliferation of synovium with hemosiderin-laden giant cells and villous expansion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Localised tenosynovial",
+          "Diffuse tenosynovial (PVNS)"
+        ],
+        "rows": [
+          [
+            "Primary location",
+            "Finger flexor tendon",
+            "Large joints like knee"
+          ],
+          [
+            "Gross appearance",
+            "Well-circumscribed nodule",
+            "Spongy villous red-brown mass"
+          ],
+          [
+            "Bone involvement",
+            "Cortical bone erosion",
+            "Extensive erosive arthropathy"
+          ],
+          [
+            "Local recurrence",
+            "Low recurrence risk",
+            "Frequent post-excision recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mesenchymal neoplasms of adipose tissue represent the most prevalent soft tissue tumors in adults, presenting as painless, soft, mobile subcutaneous masses. Gross inspection reveals a well-delineated, encapsulated, lobulated bright-yellow mass indistinguishable from normal mature fat. The lesion is a **lipoma**. Histologically, uniform mature adipocytes contain single large clear lipid vacuoles with peripheral flattened nuclei and zero cellular atypia. Many cases display characteristic chromosomal rearrangements involving 12q13-15 and the HMGA2 gene locus.",
+      "say": "Lipoma is a benign encapsulated neoplasm of uniform mature adipocytes with peripheral flattened nuclei and HMGA2 rearrangements.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benign lipoma",
+          "points": [
+            "Subcutaneous location",
+            "Thin fibrous capsule",
+            "Uniform mature adipocytes",
+            "Absent lipoblasts"
+          ]
+        },
+        "right": {
+          "title": "Liposarcoma",
+          "points": [
+            "Deep retroperitoneal mass",
+            "Infiltrative border",
+            "Multivacuolated lipoblasts",
+            "MDM2 gene amplification"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Malignant adipocytic neoplasms arise predominantly within deep fascial planes of the retroperitoneum and thigh, presenting as large, bulky, painless masses. The diagnostic microscopic hallmark is the lipoblast, showing multiple round lipid droplets indenting and scalloping a hyperchromatic pleomorphic nucleus. That malignancy is **liposarcoma**. Well-differentiated liposarcomas contain supernumerary ring chromosomes harbouring amplified 12q13-15 regions containing the MDM2 and CDK4 oncogenes, which inactivate p53 and retinoblastoma tumor suppressors respectively.",
+      "say": "Liposarcoma is a malignant deep adipocytic tumor defined by scalloped lipoblasts and MDM2 oncogene amplification on chromosome 12q.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/liposarcoma-fig1.webp",
+        "alt": "Liposarcoma pathology",
+        "caption": "Retroperitoneal liposarcoma cross section and microscopic view displaying pleomorphic multivacuolated lipoblasts scalloping atypical nuclei."
+      }
+    },
+    {
+      "tx": "Skeletal muscle malignancies are the commonest soft tissue sarcomas of infancy and childhood, presenting in head, neck, and genitourinary tracts. The alveolar variant carries specific t(2;13)(q35;q14) or t(1;13) translocations creating PAX3-FOXO1 or PAX7-FOXO1 fusion transcription factors. That entity is **rhabdomyosarcoma**. Microscopically, embryonal tumours show tadpole-shaped or strap-shaped rhabdomyoblasts containing cross-striations, while the sarcoma botryoides subtype exhibits an intensely cellular cambium layer beneath bladder epithelium. Strong immunoreactivity for desmin and myogenin confirms skeletal muscle origin.",
+      "say": "Rhabdomyosarcoma is a pediatric skeletal muscle sarcoma with strap cells, myogenin positivity, and characteristic FOXO1 translocations.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rhabdomyosarcoma-fig1.webp",
+        "alt": "Rhabdomyosarcoma histological variants",
+        "caption": "Histopathology and diagrams showing embryonal strap cells, botryoid cambium layer, and alveolar nests with FOXO1 translocations."
+      }
+    },
+    {
+      "tx": "Deep soft tissue sarcomas arising adjacent to large joints in young adults between fifteen and forty years old account for ten percent of soft tissue cancers. More than ninety percent carry a specific reciprocal chromosomal translocation t(X;18)(p11;q11) producing an SS18-SSX1 or SS18-SSX2 fusion oncogene. That tumour is **synovial sarcoma**. Histologically, classic biphasic tumours contain cuboidal epithelial cells forming glands alongside uniform malignant spindle cells in dense fascicles, with both components expressing cytokeratin and epithelial membrane antigen.",
+      "say": "Synovial sarcoma carries a pathognomonic t(X;18) translocation and exhibits a distinctive biphasic histology of glands and spindle cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "translocation",
+            "label": "t(X;18) translocation"
+          },
+          {
+            "id": "fusion",
+            "label": "SS18-SSX fusion protein"
+          },
+          {
+            "id": "morphology",
+            "label": "Biphasic differentiation"
+          },
+          {
+            "id": "metastasis",
+            "label": "Late pulmonary spread"
+          }
+        ],
+        "edges": [
+          [
+            "translocation",
+            "fusion"
+          ],
+          [
+            "fusion",
+            "morphology"
+          ],
+          [
+            "morphology",
+            "metastasis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapidly growing, tender subcutaneous nodules in the volar forearm or chest wall of young adults mimic malignant sarcoma due to high mitotic activity. This non-neoplastic fibroblastic lesion features an MYH9-USP6 gene fusion that activates the deubiquitinating enzyme USP6. The diagnostic condition is **nodular fasciitis**. Microscopically, plump, immature, reactive myofibroblasts are arranged randomly in loose myxoid stroma, resembling cells in tissue culture, accompanied by extravasated red blood cells, osteoclast-like giant cells, and normal non-atypical mitotic figures.",
+      "say": "Nodular fasciitis is a benign, self-limiting myofibroblastic growth driven by USP6 gene fusion that mimics sarcoma histologically.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Nodular fasciitis",
+          "Fibrosarcoma"
+        ],
+        "rows": [
+          [
+            "Clinical onset",
+            "Rapid growth over weeks",
+            "Slow progressive enlargement"
+          ],
+          [
+            "Cellular architecture",
+            "Tissue culture appearance",
+            "Herringbone fascicular pattern"
+          ],
+          [
+            "Mitotic figures",
+            "Frequent but all normal",
+            "Atypical tripolar mitoses"
+          ],
+          [
+            "Outcome",
+            "Spontaneous involution",
+            "Malignant local invasion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infiltrative fibroblastic proliferations arising within musculoaponeurotic structures of the anterior abdominal wall, shoulder, or mesentery do not metastasize but recur relentlessly after resection. That aggressive lesion is **fibromatosis**. The abdominal wall variant occurs in young parous women, whereas mesenteric desmoid tumours occur in Gardner syndrome. Somatic or germline mutations in the APC or CTNNB1 (beta-catenin) genes impair beta-catenin degradation, leading to intense nuclear accumulation of beta-catenin on immunohistochemistry that drives uncontrolled fibroblastic transcription.",
+      "say": "Desmoid fibromatosis is an infiltrative, non-metastasizing fibroblastic neoplasm driven by beta-catenin and APC mutations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Superficial fibromatosis",
+          "points": [
+            "Palmar (Dupuytren)",
+            "Penile (Peyronie)",
+            "Nodular contractures",
+            "Limited local invasion"
+          ]
+        },
+        "right": {
+          "title": "Deep desmoid fibromatosis",
+          "points": [
+            "Abdominal wall and mesentery",
+            "Infiltrates skeletal muscle",
+            "Nuclear beta-catenin positive",
+            "Aggressive local recurrence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "High-grade malignant mesenchymal neoplasms devoid of identifiable histological lineage differentiation occur predominantly in the deep proximal extremities of elderly patients. The tumour was historically classified as malignant fibrous histiocytoma and is now termed **undifferentiated pleomorphic sarcoma**. Microscopic sections display sheet-like sheets of highly atypical, bizarre, multinucleated giant cells with hyperchromatic nuclei, abnormal tripolar and multipolar mitotic figures, extensive areas of coagulative necrosis, and complete absence of specific immunohistochemical lineage markers.",
+      "say": "Undifferentiated pleomorphic sarcoma presents in elderly extremities with extreme cytologic pleomorphism, bizarre giant cells, and atypical mitoses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "UPS result",
+          "Lineage excluded"
+        ],
+        "rows": [
+          [
+            "Desmin, Myogenin",
+            "Negative",
+            "Rhabdomyosarcoma"
+          ],
+          [
+            "S100, SOX10",
+            "Negative",
+            "Malignant melanoma"
+          ],
+          [
+            "Cytokeratins",
+            "Negative",
+            "Metastatic carcinoma"
+          ],
+          [
+            "MDM2 amplification",
+            "Negative",
+            "Dedifferentiated liposarcoma"
+          ]
+        ]
+      }
+    }
+  ]
+}

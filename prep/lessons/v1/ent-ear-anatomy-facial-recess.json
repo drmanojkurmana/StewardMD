@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "id": "ent-ear-anatomy-facial-recess",
+ "subject": "ent",
+ "module": "ent-ear-anatomy",
+ "title": "Facial Recess, Sinus Tympani, and Surgical Landmarks",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The posterior wall of the middle ear cavity separates the tympanic space from the mastoid antrum and harbors critical neurovascular pathways. Lateral to the vertical mastoid segment of the facial nerve lies the **facial recess**, also termed the suprapyramidal recess. Bounded medially by the facial nerve, laterally by the chorda tympani, and superiorly by the fossa incudis, it provides the essential surgical portal for posterior tympanotomy.",
+   "say": "The facial recess sits between the mastoid facial nerve medially, chorda tympani laterally, and fossa incudis superiorly. It forms the corridor for posterior tympanotomy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-ear-gross.webp",
+    "alt": "Anatomical cross section of the temporal bone highlighting middle ear posterior wall recesses and facial nerve",
+    "caption": "Posterior tympanic wall morphology showing the facial recess and surgical landmarks for mastoid access. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgeons drill through the facial recess during cochlear implantation and intact canal wall mastoidectomies to visualize the middle ear without disturbing the external auditory canal. Through this **posterior tympanotomy** window, the surgeon gains direct line-of-sight access to the round window niche and promontory, allowing electrode array insertion directly into the scala tympani of the basal cochlear turn.",
+   "say": "Posterior tympanotomy through the facial recess provides line-of-sight access to the round window niche for cochlear implant electrode insertion while preserving the canal wall.",
+   "vis": {
+    "kind": "flow",
+    "title": "Posterior Tympanotomy Surgical Sequence",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Cortical Mastoidectomy"
+     },
+     {
+      "id": "p2",
+      "label": "Facial Recess Drilling"
+     },
+     {
+      "id": "p3",
+      "label": "Round Window Insertion"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medial to the vertical segment of the facial nerve lies a deep, hidden excavation in the posterior wall designated the **sinus tympani**, or infrapyramidal recess. Bounded superiorly by the ponticulus and inferiorly by the subiculum, it extends deeply between the labyrinthine wall and mastoid nerve course. Because it cannot be visualized directly through a posterior tympanotomy, it is the most notorious site for residual cholesteatoma.",
+   "say": "Located medial to the facial nerve, the deep sinus tympani lies between the ponticulus and subiculum. Hidden from direct view, it frequently conceals residual cholesteatoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Facial Recess",
+     "points": [
+      "Lateral to vertical mastoid segment of facial nerve.",
+      "Bounded laterally by chorda tympani and tympanic ring.",
+      "Easily accessed surgically via posterior tympanotomy.",
+      "Provides direct operative access to round window niche."
+     ]
+    },
+    "right": {
+     "title": "Sinus Tympani",
+     "points": [
+      "Medial to vertical mastoid segment of facial nerve.",
+      "Bounded by ponticulus superiorly and subiculum inferiorly.",
+      "Completely blind to direct line-of-sight viewing.",
+      "Most common middle ear site of residual hidden cholesteatoma."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The Eustachian tube connects the anterior wall of the tympanic cavity to the lateral wall of the nasopharynx, measuring thirty-six millimetres in the adult. It is divided into an anteromedial cartilaginous two-thirds measuring twenty-four millimetres and a posterolateral bony one-third measuring twelve millimetres. The junction between these two portions is the narrowest point of the entire lumen, designated the **isthmus of the tube**.",
+   "say": "Connecting the middle ear to the nasopharynx, the Eustachian tube has a cartilaginous medial two-thirds and bony lateral third, meeting at the narrow isthmus.",
+   "vis": {
+    "kind": "table",
+    "title": "Structural Subdivisions of the Eustachian Tube",
+    "cols": [
+     "Portion",
+     "Length",
+     "Wall Composition",
+     "Physiological State"
+    ],
+    "rows": [
+     [
+      "Cartilaginous (medial)",
+      "Twenty-four mm (two-thirds)",
+      "Elastic fibrocartilage hook",
+      "Closed at rest; opened by muscle"
+     ],
+     [
+      "Isthmus (junction)",
+      "One to two mm caliber",
+      "Fibrocartilaginous union",
+      "Narrowest functional choke point"
+     ],
+     [
+      "Osseous (lateral)",
+      "Twelve mm (one-third)",
+      "Petrous temporal bone",
+      "Permanently patent lumen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cartilaginous tube is normally closed at rest to protect the middle ear from nasopharyngeal secretions and vocal resonance. It is actively opened during swallowing, yawning, and sneezing primarily by the contraction of the **tensor veli palatini** muscle, historically known as the dilator tubae. The levator veli palatini and salpingopharyngeus assist indirectly in dilating the pharyngeal orifice.",
+   "say": "Closed at rest to protect the ear, the cartilaginous Eustachian tube is actively opened during swallowing and yawning by contraction of the tensor veli palatini muscle.",
+   "vis": {
+    "kind": "flow",
+    "title": "Physiological Tube Opening Cascade",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Swallowing / Yawning"
+     },
+     {
+      "id": "e2",
+      "label": "Tensor Veli Palatini Contraction"
+     },
+     {
+      "id": "e3",
+      "label": "Tubal Lumen Dilation & Pressure Equalization"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In infants and young children under seven years of age, the Eustachian tube is shorter, wider, and more horizontal than in adults, measuring only eighteen millimetres. Furthermore, the tensor veli palatini muscle is less efficient and the tubal cartilage has less elastic recoil. These anatomical peculiarities facilitate the easy reflux of infected adenoid or nasopharyngeal secretions into the middle ear, explaining the high incidence of **otitis media** in infants.",
+   "say": "In infants, the Eustachian tube is shorter, wider, and more horizontal, with weaker muscular opening. This allows infected nasopharyngeal fluids to enter the middle ear easily.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infant Eustachian Tube",
+     "points": [
+      "Eighteen millimetres length (half of adult).",
+      "Inclined at only ten degrees to horizontal.",
+      "Lumen is relatively wide and flaccid.",
+      "High risk of nasopharyngeal reflux into middle ear."
+     ]
+    },
+    "right": {
+     "title": "Adult Eustachian Tube",
+     "points": [
+      "Thirty-six millimetres length.",
+      "Inclined downward at steep forty-five degree angle.",
+      "Lumen is firmly closed by rigid elastic cartilage at rest.",
+      "Protective against retrograde bacterial contamination."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "On the outer cortex of the mastoid temporal bone, the **MacEwen triangle**, or suprameatal triangle, serves as the classic surface guide to locate the underlying mastoid antrum. It is bounded superiorly by the supramastoid crest, anteriorly by the posterosuperior margin of the bony external meatus, and posteriorly by a vertical tangent drawn to the posterior meatal wall. Drilling within this triangle leads directly into the mastoid antrum.",
+   "say": "The MacEwen suprameatal triangle guides surgeons to the mastoid antrum. It is bounded by the supramastoid crest, posterosuperior meatal margin, and a posterior vertical tangent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ent-ear-anatomy-s6.webp",
+    "alt": "Lateral temporal bone showing MacEwen suprameatal triangle borders behind the external acoustic meatus alongside a mastoidectomy view of Citelli sinodural angle",
+    "caption": "Lateral temporal bone showing MacEwen suprameatal triangle borders behind the external acoustic meatus alongside a mastoidectomy view of Citelli sinodural angle. MacEwen suprameatal triangle borders and Citelli sinodural angle in mastoid surgery.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "During mastoid surgery, operators must recognize a persistent developmental bony plate known as **Korner septum**. This petrosquamous lamina represents the unossified remnant of the embryonic suture between the petrous and squamous portions of the temporal bone. It creates an artificial false bottom during mastoidectomy, potentially misleading the surgeon into believing the antrum has been fully opened while deeper infected cells remain sealed.",
+   "say": "Korner septum is a persistent petrosquamous bony sheet. It can fool surgeons into mistaking a superficial squamous cell for the true antrum, leaving deep disease behind.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Hazard of Korner Septum",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Superficial Squamous Mastoidectomy"
+     },
+     {
+      "id": "k2",
+      "label": "Encounter Persistent Korner Septum"
+     },
+     {
+      "id": "k3",
+      "label": "Bony Excision to Expose True Deep Antrum"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "a38ab09e-f067-4032-b5ac-9e7912c40ec5",
+  "a8515d79-d6bc-4a09-a6d9-e45ec0bd5475",
+  "3627ed15-b137-445f-bbcd-6e3513334913"
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-oxalic-acid",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Oxalic Acid, Arsenic and Mees Lines",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Oxalic acid crystals imitate Epsom salt",
+   "tx": "**Oxalic acid**, acid of sugar or salt of sorrel, forms colourless transparent prismatic crystals resembling magnesium sulphate and zinc sulphate, which is exactly how accidental poisoning happens. It bleaches stains, cleans brass and leather and is used in calico printing and for illegally removing signatures. Concentrations above ten percent corrode mucous membrane; below that it is a strong irritant whose diluted solutions keep their poisonous power. Fifteen to twenty grams kill, usually within one to two hours.",
+   "say": "Crystals that look like Epsom salt, a bleached gut and death near fifteen grams identify oxalic acid poisoning.",
+   "vis": {"kind": "table", "cols": ["Feature", "Oxalic acid", "Look alike danger"], "rows": [["Crystals", "Colourless, transparent, prismatic", "Mistaken for magnesium sulphate"], ["Uses", "Bleach, brass and leather cleaning", "Household availability"], ["Corrosive level", "Above ten percent concentration", "Dilute solutions still poison"], ["Fatal dose", "15 to 20 grams", "Often within one to two hours"]]}
+  },
+  {
+   "title": "Three clinical stages of oxalic poisoning",
+   "tx": "Oxalic poisoning runs in **fulminating, acute and delayed stages**. Large concentrated doses kill in minutes with burning sour taste, throat constriction and coffee ground vomiting. Survivors of hours show hypocalcaemia: muscle irritability and tenderness, tingling fingertips, tetany or convulsions and cardiovascular collapse. Delayed cases die of uraemia over two to fourteen days as oxalate crystals necrose the renal tubules. About twenty milligrams of oxalate is excreted in urine daily in health.",
+   "say": "Minutes for the fulminating dose, hours of tetany from stolen calcium, and days of uraemia from crystal blocked kidneys.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Fulminating: minutes, shock"}, {"id": "b", "label": "Acute: tetany and tingling"}, {"id": "c", "label": "Calcium withdrawn from tissues"}, {"id": "d", "label": "Delayed: uraemia in 2 to 14 days"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Calcium is the antidote",
+   "tx": "The **antidote for oxalate poisoning is calcium in any form**, which converts soluble oxalate into insoluble calcium oxalate. Lime water, calcium lactate, calcium gluconate, calcium chloride or a chalk suspension is used for lavage, one and a half grams of chalk neutralising about one gram of oxalic acid, with ten percent calcium gluconate ten millilitres intravenously at intervals for tetany. Dialysis or exchange transfusion answers renal failure, and parathyroid extract was reserved for severe cases.",
+   "say": "Chalk in the stomach and gluconate in the vein: calcium disarms oxalate by precipitating it where it stands.",
+   "vis": {"kind": "compare", "left": {"title": "In the stomach", "points": ["Lavage with calcium lactate", "Chalk suspension neutralises", "1.5 g chalk per gram of acid", "Demulcents afterwards"]}, "right": {"title": "In the blood and kidney", "points": ["Calcium gluconate intravenously", "Corrects tetany and collapse", "Dialysis for uraemia", "Watch oxalate crystal urine"]}}
+  },
+  {
+   "title": "Postmortem oxalate findings",
+   "tx": "At autopsy, strong oxalic solution **bleaches the mouth and oesophagus white** as if scalded, corrugates the oesophagus with longitudinal erosions, and leaves the stomach reddened or almost black with gelatinous brown contents from acid haematin, perforation being very rare. The kidneys are swollen, congested and packed with oxalate crystals in necrosed proximal tubules. Barium nitrate gives a white barium oxalate precipitate soluble in hydrochloric or nitric acid, separating oxalate from sulphate.",
+   "say": "A bleached scalded looking gullet and kidneys stuffed with oxalate crystals close the diagnosis at autopsy and in the test tube.",
+   "vis": {"kind": "table", "cols": ["Site", "Oxalate finding", "Contrast"], "rows": [["Mouth and oesophagus", "Whitened, corrugated, eroded", "Perforation very rare"], ["Stomach", "Dark streaks, gelatinous brown contents", "Acid haematin colour"], ["Kidneys", "Crystals in necrosed tubules", "Cause of delayed death"], ["Chemical test", "White precipitate, acid soluble", "Sulphate stays insoluble in acid"]]}
+  },
+  {
+   "title": "Arsenic, the homicidal favourite",
+   "tx": "**Arsenic** earned its reputation as the ideal homicidal poison of the textbooks: cheap, easily obtained, colourless, odourless, tasteless, lethal in small quantity, easy to mix into food or drink, gradual in onset and simulating cholera. Its disadvantages betray it: it delays putrefaction, remains detectable in decomposed bodies, persists in bones, hair and nails for years and survives even in charred bone and ash. Suicide is rare because arsenic causes much pain.",
+   "say": "Tasteless, gradual and cholera like makes arsenic the poisoner's choice, and its persistence in hair and ash betrays him.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arsenic mixed into food"}, {"id": "b", "label": "Gradual cholera like illness"}, {"id": "c", "label": "Death attributed to disease"}, {"id": "d", "label": "Hair, nails and bone convict later"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Acute arsenic and the red velvet stomach",
+   "tx": "Acute arsenic inflames the stomach into the **red velvet stomach**: swollen oedematous red mucosa, usually in patches or generally, with submucous haemorrhages and petechiae, small ulcerations at the pyloric end and sticky mucus in which arsenic particles may be seen, congestion cresting on the rugae. The small intestine lies flaccid with large flakes of mucus, and subendocardial petechiae of the left ventricle are typical even when the stomach shows little. Fulminating doses may leave the gut almost normal.",
+   "say": "A red velvet pylorus under sticky mucus and petechiae under the heart lining are acute arsenic written inside the body.",
+   "vis": {"kind": "compare", "left": {"title": "Arsenic stomach", "points": ["Red velvet swollen mucosa", "Submucous haemorrhages", "Particles in sticky mucus", "Pyloric ulcerations"]}, "right": {"title": "Arsenic elsewhere", "points": ["Flaccid intestine, mucus flakes", "Subendocardial petechiae typical", "Fatty liver, spleen, kidneys", "Glomerular nephritis frequent"]}}
+  },
+  {
+   "title": "Chronic arsenic: raindrops, keratosis and nerves",
+   "tx": "**Chronic arsenic poisoning** paints a systemic portrait: polyneuritis with anaesthesia and paraesthesia, a finely mottled brown **raindrop pigmentation** on flexures, temples, eyelids and neck lasting many months, a fading measles like rash, hyperkeratosis of palms and soles, chronic nephritis, cardiac failure, hepatitis toward cirrhosis, marrow suppression and hair loss. It follows repeated small doses at work, in well water, in food, or given homicidally. Recovery from one large dose can also seed the chronic state.",
+   "say": "Raindrop pigment, thick palms, painful nerves and failing marrow after months of small doses spell chronic arsenic.",
+   "vis": {"kind": "table", "cols": ["System", "Chronic arsenic sign", "Clue"], "rows": [["Skin", "Raindrop pigmentation", "Flexures, temples, neck"], ["Palms and nails", "Hyperkeratosis, Mees lines", "Months of exposure"], ["Nerves", "Polyneuritis, paraesthesia", "Burning feet pattern"], ["Marrow and liver", "Suppression, cirrhosis course", "Anaemia, jaundice"]]}
+  },
+  {
+   "title": "Mees lines date the exposure",
+   "tx": "**Aldrich Mees lines** are transverse white lines across the fingernails from arsenic deposited in keratin during poisoning. Because nails grow at a steady rate, measuring the distance of the lines from the nail base estimates when exposure happened, and successive lines record intermittent poisoning. Hair analysis works the same way: arsenic appears in hair and nails within hours, normal hair holds under two parts per million, and neutron activation or atomic absorption spectroscopy measures the concentration segment by segment.",
+   "say": "White bands across the nails are a calendar: measure their distance from the base and you date the poisoning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arsenic deposits in growing nail"}, {"id": "b", "label": "White Mees line forms"}, {"id": "c", "label": "Measure distance from nail base"}, {"id": "d", "label": "Estimate date of exposure"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Testing and treating arsenic",
+   "tx": "Modern confirmation is **urinary arsenic and atomic absorption spectroscopy**; more than one hundred micrograms excreted in twenty four hours supports poisoning, while Marsh and Reinsch tests are obsolete. The chelator of choice in Reddy's regimen is BAL, with EDTA superior where available in his assessment, plus demulcents, castor oil or magnesium sulphate to limit intestinal absorption, glucose saline with bicarbonate against shock, and dialysis for renal failure. Chelation is ineffective in arsine gas poisoning.",
+   "say": "Measure urine arsenic, chelate with BAL, protect the gut and dialyse the kidneys, and abandon Marsh and Reinsch to history.",
+   "vis": {"kind": "compare", "left": {"title": "Confirm arsenic", "points": ["Urine over 100 micrograms daily", "Atomic absorption spectroscopy", "Hair and nail concentrations", "Marsh and Reinsch obsolete"]}, "right": {"title": "Treat arsenic", "points": ["BAL chelation first line", "Demulcents and purgation", "Bicarbonate glucose saline", "Dialysis in renal failure"]}}
+  }
+ ],
+ "quiz": []
+}

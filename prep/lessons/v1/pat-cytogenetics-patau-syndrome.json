@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "pat-cytogenetics",
+  "subject": "pathology",
+  "title": "Patau Syndrome, Sex Chromosome Aneuploidies, and Microdeletion Syndromes",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Meiotic nondisjunction of chromosome 13 produces a severe malformation syndrome characterized by defective midline forebrain development and organogenesis. Presenting characteristically with microcephaly, holoprosencephaly, microphthalmia, bilateral cleft lip and palate, postaxial polydactyly, and scalp cutis aplasia, this lethal autosomal disorder is **Patau syndrome**.",
+      "say": "Patau syndrome causes severe midline defects including holoprosencephaly, cleft lip, and polydactyly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "meiotic_error",
+            "label": "Maternal Meiotic Nondisjunction Yields Extra Chromosome 13"
+          },
+          {
+            "id": "midline_disruption",
+            "label": "Impaired Prechordal Mesoderm Induction Disrupts Midline Cleavage"
+          },
+          {
+            "id": "holoprosencephaly",
+            "label": "Alobar Holoprosencephaly, Hypotelorism, and Cyclopia Spectrum"
+          },
+          {
+            "id": "early_lethality",
+            "label": "Severe Congenital Heart Defects Causing Death Within First Month"
+          }
+        ],
+        "edges": [
+          [
+            "meiotic_error",
+            "midline_disruption"
+          ],
+          [
+            "midline_disruption",
+            "holoprosencephaly"
+          ],
+          [
+            "holoprosencephaly",
+            "early_lethality"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most common sex chromosome aneuploidy in males features two or more X chromosomes alongside one Y chromosome, most typically with a 47,XXY karyotype. Hypogonadism, testicular tubular atrophy, azoospermia, tall eunuchoid habitus, gynecomastia, and elevated follicle-stimulating hormone characterize **Klinefelter syndrome**.",
+      "say": "Klinefelter syndrome is a 47,XXY aneuploidy presenting with testicular atrophy, tall stature, and gynecomastia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-adrenal-hyperplasia-fig1.webp",
+        "alt": "Endocrine and genital developmental alterations in sex chromosome disorders",
+        "caption": "Endocrine and phenotypic genital alterations resulting from sex chromosome and steroid pathway defects."
+      }
+    },
+    {
+      "tx": "In Klinefelter syndrome, hyalinization and progressive fibrosis of seminiferous tubules during puberty destroys Sertoli and Leydig cell architecture. Loss of inhibin B causes feedback elevation of FSH, while Leydig cell dysfunction produces low testosterone and elevated estradiol, culminating in **hypergonadotropic hypogonadism**.",
+      "say": "Testicular fibrosis in Klinefelter syndrome drives hypergonadotropic hypogonadism with elevated FSH.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Klinefelter Syndrome (47,XXY)",
+          "points": [
+            "Male phenotype with small, firm, hyalinized fibrotic testes",
+            "Low serum testosterone with markedly elevated pituitary FSH and LH",
+            "Tall eunuchoid proportions, female hair distribution, and bilateral gynecomastia",
+            "Elevated lifetime risk of male breast carcinoma and extragonadal germ cell tumors"
+          ]
+        },
+        "right": {
+          "title": "Turner Syndrome (45,X)",
+          "points": [
+            "Female phenotype with complete absence of one X sex chromosome",
+            "Streak gonads with accelerated oocyte apoptosis causing primary amenorrhea",
+            "Short stature, webbed neck, low posterior hairline, and broad shield chest",
+            "High incidence of bicuspid aortic valve and coarctation of the aorta"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The only monosomy compatible with live human birth arises from complete or partial absence of the second sex chromosome, yielding a 45,X karyotype in over half of cases. Manifesting with streak ovaries, primary amenorrhea, short stature, and cystic hygroma, this disorder is **Turner syndrome**.",
+      "say": "Turner syndrome is a 45,X monosomy presenting with short stature, streak ovaries, and primary amenorrhea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+        "alt": "Primary amenorrhoea and streak gonads in Turner syndrome",
+        "caption": "Primary amenorrhoea, ovarian dysgenesis, and streak gonads characteristic of Turner syndrome."
+      }
+    },
+    {
+      "tx": "Cardiovascular anomalies in Turner syndrome represent the leading cause of premature mortality. Preductal coarctation of the aorta and bicuspid aortic valves occur frequently, and progressive cystic medial degeneration of the ascending aorta creates a lifelong predisposition toward **aortic dissection in Turner**.",
+      "say": "Coarctation of the aorta and bicuspid aortic valves predispose Turner patients to aortic dissection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lymphatic_hypoplasia",
+            "label": "Fetal Lymphatic Hypoplasia Causes Cystic Hygroma and Nuchal Edema"
+          },
+          {
+            "id": "aortic_coarctation",
+            "label": "Altered In Utero Hemodynamics Drives Aortic Arch Coarctation"
+          },
+          {
+            "id": "medial_necrosis",
+            "label": "Cystic Medial Necrosis Affects Ascending Aortic Wall"
+          },
+          {
+            "id": "dissection_risk",
+            "label": "High Lifetime Predisposition to Catastrophic Aortic Dissection"
+          }
+        ],
+        "edges": [
+          [
+            "lymphatic_hypoplasia",
+            "aortic_coarctation"
+          ],
+          [
+            "aortic_coarctation",
+            "medial_necrosis"
+          ],
+          [
+            "medial_necrosis",
+            "dissection_risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Contiguous submicroscopic gene deletions detectable by chromosomal microarray or fluorescent in situ hybridization produce distinct congenital malformation complexes. The most common human microdeletion involves a three-megabase loss from the long arm of chromosome 22, designated as the **22q11 deletion syndrome**.",
+      "say": "The 22q11 microdeletion deletes TBX1, causing defective third and fourth pharyngeal pouch development.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "Embryological Derangement",
+          "Key Phenotypic Features"
+        ],
+        "rows": [
+          [
+            "DiGeorge Syndrome",
+            "Defective 3rd and 4th Pharyngeal Pouches",
+            "Thymic Aplasia, Hypocalcemia, Conotruncal Heart Defects"
+          ],
+          [
+            "Velocardiofacial Syndrome",
+            "Abnormal Branchial Arch Crest Migration",
+            "Cleft Palate, Facial Dysmorphism, Cardiac Anomalies, Psychosis"
+          ],
+          [
+            "Conotruncal Anomaly Face",
+            "Neural Crest Outflow Tract Malformation",
+            "Tetralogy of Fallot, Truncus Arteriosus, Interrupted Arch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classic DiGeorge syndrome arises when the 22q11 microdeletion disrupts neural crest migration into the third and fourth pharyngeal pouches. Consequent thymic hypoplasia impairs T-cell maturation and adaptive immunity, while parathyroid aplasia causes severe neonatal hypocalcemic tetany and refractory seizures, defining the clinical triad of **DiGeorge syndrome**.",
+      "say": "DiGeorge syndrome features T-cell immunodeficiency and neonatal tetany from thymic and parathyroid aplasia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pouch_aplasia",
+            "label": "Failure of 3rd and 4th Pharyngeal Pouch Development"
+          },
+          {
+            "id": "parathyroid_absence",
+            "label": "Parathyroid Aplasia Causes Profound Hypocalcemia and Neonatal Seizures"
+          },
+          {
+            "id": "thymic_aplasia",
+            "label": "Thymic Hypoplasia Causes Severe Cell-Mediated T-Lymphocyte Deficiency"
+          },
+          {
+            "id": "conotruncal_defect",
+            "label": "Conotruncal Cardiac Malformations (Truncus Arteriosus, Tetralogy)"
+          }
+        ],
+        "edges": [
+          [
+            "pouch_aplasia",
+            "parathyroid_absence"
+          ],
+          [
+            "pouch_aplasia",
+            "thymic_aplasia"
+          ],
+          [
+            "pouch_aplasia",
+            "conotruncal_defect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Congenital heart disease in 22q11 deletion syndrome involves embryonic conotruncal septation defects. Inactivation of the TBX1 transcription factor within branchial arches leads to truncus arteriosus, interrupted aortic arch type B, and tetralogy of Fallot, clinically categorized under **conotruncal cardiac malformations**.",
+      "say": "TBX1 haploinsufficiency causes conotruncal malformations like truncus arteriosus and tetralogy of Fallot.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tbx1_haploinsufficiency",
+            "label": "TBX1 Gene Loss Within 22q11.2 Deleted Segment"
+          },
+          {
+            "id": "neural_crest_failure",
+            "label": "Failure of Cardiac Neural Crest Outflow Tract Septation"
+          },
+          {
+            "id": "conotruncal_anomalies",
+            "label": "Persistent Truncus Arteriosus and Interrupted Aortic Arch Type B"
+          }
+        ],
+        "edges": [
+          [
+            "tbx1_haploinsufficiency",
+            "neural_crest_failure"
+          ],
+          [
+            "neural_crest_failure",
+            "conotruncal_anomalies"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

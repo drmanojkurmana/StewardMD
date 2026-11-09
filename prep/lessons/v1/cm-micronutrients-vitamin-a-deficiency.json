@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-micronutrients-vitamin-a-deficiency",
+ "subject": "community-medicine",
+ "module": "cm-micronutrients",
+ "title": "Vitamin A Deficiency: Xerophthalmia Stages and National Prophylaxis",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Vitamin A physiological roles and visual cycle",
+   "tx": "The fat-soluble retinol molecule and its carotenoid precursors play essential roles in maintaining specialized epithelial cell differentiation, immune competence and dark vision through the rhodopsin visual cycle. In rods, 11-cis retinal complexes with opsin to generate light-sensitive rhodopsin; deficiency depletes rhodopsin stores, producing night blindness, while mucosal epithelial squamous metaplasia causes **xerophthalmia clinical manifestations** across the cornea and conjunctiva.",
+   "say": "Vitamin A is essential for night vision and keeping eye membranes moist. Depleted stores cause night blindness, followed by dryness, ulceration and destruction of the cornea.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+    "alt": "Clinical photographs of xerophthalmia showing Bitot spots, conjunctival xerosis and keratomalacia",
+    "caption": "Xerophthalmia: Conjunctival xerosis, foamy Bitot spot, corneal ulceration, and full-thickness keratomalacia. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "WHO xerophthalmia staging classification",
+   "tx": "The World Health Organization codifies the ocular signs of vitamin A deficiency into the **WHO xerophthalmia classification**, progressing from reversible retinal and conjunctival lesions to irreversible corneal necrosis. Night blindness is designated XN, conjunctival xerosis is X1A, Bitot spots are X1B, corneal xerosis is X2, corneal ulceration involving less than one-third of the cornea is X3A, and full-thickness keratomalacia involving more than one-third is X3B.",
+   "say": "The WHO classifies xerophthalmia from night blindness and Bitot spots up to severe corneal ulceration and keratomalacia. Prompt treatment at early stages reverses eye damage completely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Xerophthalmia stage", "Defining clinical sign", "Reversibility with treatment"],
+    "rows": [
+     ["XN", "Night blindness (nyctalopia)", "Completely reversible within 24 to 48 hours"],
+     ["X1A", "Conjunctival xerosis (dry, muddy conjunctiva)", "Completely reversible with oral therapy"],
+     ["X1B", "Bitot spots (foamy triangular plaques)", "Reversible; may leave harmless residual mark"],
+     ["X2", "Corneal xerosis (hazy, dry, lustreless cornea)", "Completely reversible before ulceration"],
+     ["X3A", "Corneal ulceration affecting < 1/3 cornea", "Leaves permanent corneal scar (XS)"],
+     ["X3B", "Keratomalacia affecting >= 1/3 cornea", "Irreversible melting leading to phthisis bulbi"]
+    ]
+   }
+  },
+  {
+   "title": "Bitot spots: triangular foamy plaques",
+   "tx": "The pathognomonic clinical hallmark of clinical ocular deficiency is **Bitot spots formation**, presenting as raised, silvery-white or pearly, triangular, foamy plaques situated predominantly on the bulbar conjunctiva near the lateral limbus in the interpalpebral fissure. Histologically, these spots represent focal squamous metaplasia of conjunctival epithelium with keratinisation and accumulations of gas-producing Corynebacterium xerosis bacilli within keratin debris.",
+   "say": "Bitot spots are silvery, foamy triangular plaques on the white of the eye near the outer iris. They represent thickened, dry dead cells and respond rapidly to vitamin A therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active Bitot spot (X1B)",
+     "points": ["Bilateral, silvery, foamy triangular plaque", "Situated in temporal interpalpebral fissure", "Disappears within weeks of high-dose vitamin A"]
+    },
+    "right": {
+     "title": "Inactive residual plaque",
+     "points": ["Persistent flat conjunctival marking", "Seen in older children after past deficiency", "Unaffected by therapeutic vitamin A doses"]
+    }
+   }
+  },
+  {
+   "title": "Keratomalacia and full-thickness corneal melting",
+   "tx": "When severe deficiency combines with acute measles, severe acute malnutrition or dehydrating diarrhoea, the cornea undergoes rapid colliquative liquefaction known as **keratomalacia corneal melting**. The cornea becomes cloudy, gelatinous, soft and necrotic, melting away within hours to days; perforation leads to iris prolapse, endophthalmitis, anterior staphyloma and shrunken phthisis bulbi, causing bilateral permanent, irreversible childhood blindness.",
+   "say": "Keratomalacia is an emergency where the eye cornea rapidly softens and melts into jelly. Measles or severe diarrhoea can destroy the eyeball within forty-eight hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Severe vitamin A depletion + measles or diarrhoea"},
+     {"id": "b", "label": "Corneal stromal liquefactive necrosis (X3B)"},
+     {"id": "c", "label": "Spontaneous perforation and iris prolapse"},
+     {"id": "d", "label": "Permanent blindness and phthisis bulbi"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "National vitamin A prophylaxis schedule",
+   "tx": "To eradicate nutritional blindness across India, the Universal Immunisation Programme administers the **national vitamin A prophylaxis schedule**, delivering nine oral doses across early childhood to total seventeen lakh international units. The first dose of one hundred thousand international units is given at nine completed months alongside measles-rubella vaccine, followed by two hundred thousand international units every six months from sixteen months to five years.",
+   "say": "Children receive nine doses of vitamin A syrup from nine months up to five years old. The first dose is one lakh units at nine months, followed by two lakh units every six months.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Child age point", "Dose number", "Volume and dosage administered"],
+    "rows": [
+     ["9 completed months", "Dose 1", "100,000 IU (1 ml spoon) with MR-1"],
+     ["16 to 18 months", "Dose 2", "200,000 IU (2 ml spoon) with DPT booster"],
+     ["24 months (2 years)", "Dose 3", "200,000 IU (2 ml spoon) oral suspension"],
+     ["30, 36, 42, 48, 54, 60 mos", "Doses 4 through 9", "200,000 IU every 6 months up to 5 years"],
+     ["Total childhood series", "Total 9 doses", "Cumulative 1,700,000 IU (17 lakh IU)"]
+    ]
+   }
+  },
+  {
+   "title": "Therapeutic treatment protocol for acute xerophthalmia",
+   "tx": "Whenever active clinical signs of xerophthalmia (X1B, X2, X3) or complicated measles appear in a child, clinical protocols mandate **therapeutic high-dose vitamin A administration** to arrest immediate corneal melting. Children aged one year or older receive two hundred thousand international units immediately on diagnosis (day zero), a second identical dose the next day (day one), and a third dose two to four weeks later.",
+   "say": "For active corneal ulcers or severe measles, give two lakh units immediately, repeat the dose the very next day, and give a third dose after two weeks to save the eye.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Treatment timing", "Child >= 1 year", "Child 6 to 11 months", "Infant < 6 months"],
+    "rows": [
+     ["Day 0 (Immediate)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"],
+     ["Day 1 (Next day)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"],
+     ["Day 14 (Two weeks later)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"]
+    ]
+   }
+  },
+  {
+   "title": "Dietary sources: preformed retinol vs provitamin beta-carotene",
+   "tx": "Dietary supply is derived from **preformed dietary retinol** found in animal lipids (liver, fish liver oil, egg yolk, butter, whole milk) and provitamin A carotenoids, predominantly beta-carotene, found in dark green leafy vegetables and orange-yellow fruits. In the human enterocyte, beta-carotene is cleaved into retinaldehyde; because absorption is lower, eight micrograms of dietary beta-carotene equals one microgram of retinol.",
+   "say": "Animal foods like liver, eggs and milk provide ready-made retinol. Plant foods like spinach, mango and carrots provide beta-carotene, which the intestine converts into vitamin A.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preformed retinol (animal foods)",
+     "points": ["Liver, fish liver oil, butter, egg yolk", "High bioavailability (~70 to 90%)", "Directly incorporated into chylomicrons"]
+    },
+    "right": {
+     "title": "Beta-carotene (plant foods)",
+     "points": ["Drumstick leaves, spinach, carrots, mango, papaya", "Requires intestinal enzymatic cleavage", "8 mcg beta-carotene = 1 mcg retinol equivalent"]
+    }
+   }
+  },
+  {
+   "title": "Extra-ocular systemic effects and infectious synergy",
+   "tx": "Beyond the eye, vitamin A deficiency exerts profound **systemic epithelial impairment**, replacing normal ciliated respiratory and gastrointestinal columnar cells with stratified squamous keratinised epithelium. This mucosal barrier loss permits bacterial adherence and invasion, multiplying mortality from severe bronchopneumonia, persistent rotaviral diarrhoea, and complicated measles, explaining why routine supplementation cuts all-cause child mortality by twenty-four percent.",
+   "say": "Vitamin A deficiency damages the lining of the lungs and gut, allowing severe diarrhoea and pneumonia to take hold. Routine vitamin A drops reduce overall child mortality by nearly a quarter.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Vitamin A depletion in mucosal tissues"},
+     {"id": "b", "label": "Squamous metaplasia and loss of goblet cells"},
+     {"id": "c", "label": "Severe bacterial invasion of lungs and gut"},
+     {"id": "d", "label": "Child mortality reduced 24% by prophylaxis"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Epidemiological criteria for public health significance",
+   "tx": "The World Health Organization establishes **xerophthalmia epidemiological thresholds** among preschool children aged six months to five years to define whether vitamin A deficiency constitutes a public health problem in a community. Criteria of public health significance are met if night blindness prevalence exceeds one percent, Bitot spots exceed zero point five percent, corneal xerosis/ulceration exceeds zero point zero one percent, or serum retinol below twenty micrograms per decilitre exceeds ten percent.",
+   "say": "A community has a vitamin A crisis if night blindness exceeds one percent, Bitot spots exceed half a percent, or over ten percent of children have low blood retinol levels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Surveillance indicator", "Public health significance threshold", "Field significance"],
+    "rows": [
+     ["Night blindness (XN) in children 2-5 yrs", "Prevalence greater than 1.0 percent", "High community retinal deficiency"],
+     ["Bitot spots (X1B) in children 6-71 mos", "Prevalence greater than 0.5 percent", "Active epithelial squamous metaplasia"],
+     ["Corneal xerosis / ulceration (X2/X3)", "Prevalence greater than 0.01 percent", "Critical emergency; imminent blindness"],
+     ["Serum retinol (< 0.70 umol/L or < 20 mcg/dl)", "Prevalence greater than 10.0 percent", "Widespread subclinical biochemical depletion"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

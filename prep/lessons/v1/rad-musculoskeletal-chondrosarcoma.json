@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-chondrosarcoma",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Chondrosarcoma, Enchondroma and Cartilage Tumour Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Rings and arcs mean cartilage",
+   "tx": "**Chondroid matrix** mineralises in rings, arcs and popcorn clumps because cartilage lobules calcify at their rims, the pattern shown across the pictured chondrosarcoma features. That matrix in a medullary lesion of a middle aged pelvis, scapula or proximal femur names the cartilage family before any grade is assigned. Endosteal scalloping deeper than two thirds of cortical thickness then pushes the read from enchondroma toward low grade chondrosarcoma.",
+   "say": "Chondroid matrix mineralises in rings, arcs and popcorn clumps because cartilage lobules calcify at their rims, the pattern in the pictured features. That matrix in a middle aged pelvis or proximal femur names the cartilage family. Deep endosteal scalloping then pushes the read toward chondrosarcoma.",
+   "vis": {"kind": "image", "src": "v1/kb/media/chondrosarcoma-fig1.webp", "alt": "Chondrosarcoma radiographic features illustration with chondroid matrix calcification.", "caption": "Chondrosarcoma radiographic features and chondroid matrix. Illustration: StewardMD."}
+  },
+  {
+   "title": "Enchondroma stays quiet",
+   "tx": "**Enchondroma** is a benign medullary cartilage rest, commonest in the small tubular bones of hands and feet, where it expands bone and fractures pathologically more often than it hurts. In long bones it keeps a narrow transition zone, shallow scalloping and no periosteal reaction or soft tissue mass. Pain in an enchondroma without fracture is the red flag that demands regrading, because cartilage tumours announce transformation through symptoms before size changes.",
+   "say": "Enchondroma is a benign cartilage rest, commonest in the small bones of hands and feet, fracturing more often than it hurts. In long bones it keeps a narrow transition zone and no soft tissue mass. Pain without fracture is the red flag demanding regrading toward chondrosarcoma.",
+   "vis": {"kind": "compare", "left": {"title": "Enchondroma pattern", "points": ["Narrow transition zone", "Scalloping under two thirds cortex", "No periosteal reaction", "Pain only with fracture"]}, "right": {"title": "Chondrosarcoma pattern", "points": ["Deep endosteal scalloping", "Cortical destruction", "Soft tissue mass", "Pain without fracture"]}}
+  },
+  {
+   "title": "Secondary transformation in exostoses",
+   "tx": "**Secondary chondrosarcoma** grows from the cartilage cap of an osteochondroma, signalled by cap thickness over 2 cm in a skeletally mature patient, new pain or growth after puberty. Hereditary multiple exostoses multiplies that risk across many lesions, so surveillance targets changing lumps rather than every stalk. MRI measures the cap in its thickest plane, and the biopsy samples the cap, not the mature stalk bone.",
+   "say": "Secondary chondrosarcoma grows from the cartilage cap of an osteochondroma, signalled by cap thickness over two centimetres in an adult or growth after puberty. Hereditary multiple exostoses multiplies that risk. MRI measures the cap, and biopsy samples the cap rather than the mature stalk.",
+   "vis": {"kind": "table", "cols": ["Cap feature", "Reassuring", "Worrying"], "rows": [["Thickness in adult", "Under 1.5 cm", "Over 2 cm"], ["Growth after puberty", "None", "Renewed growth"], ["Pain", "Bursa or friction only", "Deep, unexplained"], ["Margins", "Smooth cap", "Irregular, nodular cap"]]}
+  },
+  {
+   "title": "Ollier and Maffucci multiply rests",
+   "tx": "**Multiple enchondromatosis** in Ollier disease scatters cartilage rests down one side of the body, shortening and deforming limbs with a lifetime chondrosarcoma transformation risk far above solitary lesions. Maffucci syndrome adds soft tissue haemangiomas with phleboliths to the same bone picture and the same malignant watch. Any lesion in these syndromes that enlarges, destroys cortex or grows a soft tissue mass is biopsied as presumed transformation.",
+   "say": "Multiple enchondromatosis in Ollier disease scatters cartilage rests down one side, with transformation risk far above solitary lesions. Maffucci syndrome adds soft tissue haemangiomas to the same picture. Any lesion that enlarges or grows a soft tissue mass is biopsied as presumed transformation.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Multiple cartilage rests"}, {"id": "b", "label": "Watch for growth or pain"}, {"id": "c", "label": "Cortex destroyed or mass forms"}, {"id": "d", "label": "Biopsy as transformation"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Clear cell and dedifferentiated extremes",
+   "tx": "**Dedifferentiated chondrosarcoma** slams a high grade non cartilage sarcoma against a well differentiated cartilage tumour in one lesion, showing a lytic destructive zone beside rings and arcs calcification. Its prognosis follows the dedifferentiated half, so biopsy must sample both components or the grade is missed. Clear cell chondrosarcoma instead mimics benign epiphyseal lesions in young adults, a slow trap at the femoral head that recurs when curetted as a cyst.",
+   "say": "Dedifferentiated chondrosarcoma slams a high grade sarcoma against a cartilage tumour in one lesion, so biopsy must sample both components or the grade is missed. Clear cell type instead mimics benign epiphyseal lesions at the femoral head and recurs when curetted as a cyst.",
+   "vis": {"kind": "compare", "left": {"title": "Dedifferentiated", "points": ["Two components in one lesion", "Lytic zone beside chondroid matrix", "Prognosis from high grade half", "Sample both zones"]}, "right": {"title": "Clear cell", "points": ["Epiphyseal, femoral head", "Mimics benign lesions", "Young adults", "Recurs after curettage"]}}
+  },
+  {
+   "title": "Periosteal and surface variants",
+   "tx": "**Periosteal chondrosarcoma** grows on the bone surface under the periosteum, scalloping the cortex from outside with chondroid matrix in a surface soft tissue mass, favouring the proximal humerus and distal femur metaphyses. It must be split from periosteal osteosarcoma, which mineralises osteoid instead and strikes younger patients, and from a maturing osteochondroma whose marrow continues into the stalk. Surface anatomy plus matrix keeps those three apart.",
+   "say": "Periosteal chondrosarcoma grows on the bone surface, scalloping cortex from outside with chondroid matrix, favouring proximal humerus and distal femur. It splits from periosteal osteosarcoma by matrix and age, and from osteochondroma whose marrow continues into the stalk.",
+   "vis": {"kind": "table", "cols": ["Surface lesion", "Matrix", "Key split"], "rows": [["Periosteal chondrosarcoma", "Rings and arcs", "Older, surface scalloping"], ["Periosteal osteosarcoma", "Osteoid cloud", "Younger, sunburst possible"], ["Osteochondroma", "Bone stalk", "Marrow continuous into stalk"], ["Myositis ossificans", "Peripheral zoning", "Matures outside in"]]}
+  },
+  {
+   "title": "Grade follows the worst area",
+   "tx": "**Histological grade** in conventional chondrosarcoma runs from grade 1, now called atypical cartilaginous tumour in long bones, to grade 3 with pleomorphic hypercellular tissue, and grade drives metastatic risk more than size. Imaging mirrors grade loosely: higher grade lesions destroy cortex, grow soft tissue masses and enhance heterogeneously. Because one biopsy core can undergrade a large heterogeneous tumour, radiology and pathology grade together at the tumour board, never alone.",
+   "say": "Histological grade runs from atypical cartilaginous tumour to grade three, and grade drives metastatic risk more than size. Higher grade lesions destroy cortex and grow soft tissue masses. One core can undergrade a large tumour, so radiology and pathology grade together at the tumour board.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Image the whole lesion"}, {"id": "b", "label": "Target worst looking zones"}, {"id": "c", "label": "Core several components"}, {"id": "d", "label": "Board assigns final grade"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Surgery is the treatment backbone",
+   "tx": "**Wide excision** cures most chondrosarcomas because conventional types resist chemotherapy and radiotherapy, making margin quality the survival variable the imaging must serve. Preoperative MRI maps marrow and soft tissue extent, skip areas and joint involvement so the resection plane clears the worst component. Chest CT stages the lungs, the dominant metastatic site, and surveillance then watches the resection bed for the nodular recurrence cartilage tumours declare late.",
+   "say": "Wide excision cures most chondrosarcomas because conventional types resist chemotherapy and radiotherapy, making margin quality the survival variable. Preoperative MRI maps extent so the resection clears the worst component. Chest CT stages the lungs, and surveillance watches for late nodular recurrence.",
+   "vis": {"kind": "compare", "left": {"title": "Imaging must answer", "points": ["Marrow extent in centimetres", "Soft tissue compartment map", "Joint and vessel involvement", "Worst zone for biopsy"]}, "right": {"title": "Treatment facts", "points": ["Wide margins decide cure", "Chemotherapy largely ineffective", "Lung is first spread site", "Recurrence can be late"]}}
+  }
+ ]
+}

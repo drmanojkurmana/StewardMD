@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-chronic-granulomatous",
+  "subject": "pathology",
+  "title": "Chronic Inflammation, Macrophage Activation, and Multinucleated Giant Cells",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Inflammation of prolonged duration lasting weeks, months, or years where active tissue destruction, tissue injury, and healing attempts proceed simultaneously constitutes chronic inflammation. In stark contrast to acute inflammation dominated by neutrophils and edema, **chronic inflammation** is characterized histologically by infiltration with mononuclear cells, tissue destruction, and fibroblastic repair.",
+      "say": "Chronic inflammation features simultaneous mononuclear infiltration, tissue destruction, and fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "persistent_stimulus",
+            "label": "Persistent Infection, Autoimmune Reaction, or Insoluble Foreign Material"
+          },
+          {
+            "id": "mononuclear_recruit",
+            "label": "Continuous Influx of Circulating Monocytes and Antigen-Specific Lymphocytes"
+          },
+          {
+            "id": "tissue_destruction",
+            "label": "Macrophage Hydrolases and Reactive Oxygen Species Destroy Parenchyma"
+          },
+          {
+            "id": "fibroblast_repair",
+            "label": "Concurrent Fibroblast Ingrowth and Angiogenesis Lay down Dense Scar"
+          }
+        ],
+        "edges": [
+          [
+            "persistent_stimulus",
+            "mononuclear_recruit"
+          ],
+          [
+            "mononuclear_recruit",
+            "tissue_destruction"
+          ],
+          [
+            "tissue_destruction",
+            "fibroblast_repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The dominant cellular orchestrators of chronic inflammation are tissue macrophages, which derive from circulating blood monocytes emigrating across postcapillary venules. Once in tissue, monocytes enlarge and differentiate into **tissue macrophages**, surviving for months or years to act as professional phagocytes, antigen-presenting cells, and cytokine secretors.",
+      "say": "Circulating monocytes differentiate into long-lived tissue macrophages that orchestrate chronic inflammation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Inflammatory Infiltrate",
+          "points": [
+            "Dominated by polymorphonuclear neutrophils during first 24-48 hours",
+            "Marked microvascular permeability with rich proteinaceous exudate",
+            "Short cellular lifespan: neutrophils undergo apoptosis within 1-2 days",
+            "Resolves completely without scarring if tissue architecture is preserved"
+          ]
+        },
+        "right": {
+          "title": "Chronic Inflammatory Infiltrate",
+          "points": [
+            "Dominated by mononuclear cells: macrophages, lymphocytes, plasma cells",
+            "Extensive parenchymal tissue destruction induced by inflammatory cells",
+            "Attempts at healing by connective tissue replacement (granulation / fibrosis)",
+            "Proliferation of small blood vessels (angiogenesis) and scar formation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Under the influence of persistent immunological or non-immune stimuli, macrophages differentiate along two distinct activation pathways. In classical activation, microbial endotoxins and T-helper-one-derived interferon-gamma induce **M1 classical macrophages**, which produce microbicidal reactive oxygen species, lysosomal proteases, and pro-inflammatory cytokines IL-one, IL-six, and TNF.",
+      "say": "Interferon-gamma stimulates M1 classical macrophages to produce microbicidal reactive species and cytokines.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classically Activated Macrophages (M1)",
+          "points": [
+            "Induced by microbial products (LPS) and T-cell interferon-gamma (IFN-gamma)",
+            "Produce toxic reactive oxygen species (ROS), nitric oxide, and lysosomal enzymes",
+            "Secrete pro-inflammatory cytokines: IL-1, IL-6, IL-12, IL-23, and TNF-alpha",
+            "Specialize in microbicidal destruction, pathogen clearance, and tissue injury"
+          ]
+        },
+        "right": {
+          "title": "Alternatively Activated Macrophages (M2)",
+          "points": [
+            "Induced by T-helper-2 cytokines interleukin-4 (IL-4) and interleukin-13 (IL-13)",
+            "Produce anti-inflammatory cytokines: interleukin-10 (IL-10) and TGF-beta",
+            "Secrete angiogenic factors (VEGF) and fibrogenic factors (PDGF, FGF)",
+            "Specialize in tissue repair, resolution of inflammation, and scar fibrosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In chronic immune granulomatous inflammation driven by persistent antigens, classically activated macrophages undergo a dramatic morphological transformation. Developing abundant, pale, eosinophilic cytoplasm with indistinct cell borders and elongated slipper-shaped vesicular nuclei resembling squamous epithelial cells, they are designated **epithelioid macrophages**.",
+      "say": "Epithelioid cells are specialized transformed macrophages with pale eosinophilic cytoplasm and slipper-shaped nuclei.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tuberculous-lymphadenitis-fig1.webp",
+        "caption": "Chronic granulomatous lymphadenitis showing pale eosinophilic epithelioid histiocytes and multinucleated giant cells.",
+        "alt": "Tuberculous lymph node granuloma demonstrating epithelioid histiocyte transformation"
+      }
+    },
+    {
+      "tx": "Driven by high concentrations of interferon-gamma and interleukin-four, activated epithelioid macrophages can fuse their plasma membranes together to form multinucleated giant cells. In immune granulomas such as tuberculosis and sarcoidosis, they form **Langhans giant cells**, characterized by ten to thirty nuclei arranged in a peripheral horseshoe-shaped ring.",
+      "say": "Langhans giant cells form when epithelioid macrophages fuse, arranging nuclei in a peripheral horseshoe pattern.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "epithelioid_cluster",
+            "label": "Persistent Mycobacterial Antigens Cluster Epithelioid Macrophages"
+          },
+          {
+            "id": "ifn_stimulus",
+            "label": "CD4+ Th1 Lymphocytes Secrete High Local Levels of Interferon-Gamma"
+          },
+          {
+            "id": "membrane_fusion",
+            "label": "Macrophage Cell Membranes Fuse into Single Large Cytoplasmic Syncytium"
+          },
+          {
+            "id": "langhans_horseshoe",
+            "label": "20-30 Nuclei Form Horseshoe or Semicircle at Cell Periphery (Langhans Cell)"
+          }
+        ],
+        "edges": [
+          [
+            "epithelioid_cluster",
+            "ifn_stimulus"
+          ],
+          [
+            "ifn_stimulus",
+            "membrane_fusion"
+          ],
+          [
+            "membrane_fusion",
+            "langhans_horseshoe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In response to large, biologically inert, indigestible foreign materials such as surgical sutures, talc powder, or wood splinters, macrophages form a different morphological giant cell. In **foreign body giant cells**, dozens of nuclei are scattered haphazardly and irregularly throughout the central cytoplasm around the engulfed foreign material.",
+      "say": "Foreign body giant cells contain dozens of nuclei scattered haphazardly around engulfed foreign material.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Langhans Giant Cells",
+          "points": [
+            "Formed in immune granulomatous diseases (tuberculosis, sarcoidosis)",
+            "Nuclei arranged in an orderly horseshoe, circle, or arc at cellular periphery",
+            "Driven by CD4+ T-helper-1 lymphocyte interferon-gamma secretion",
+            "Surrounded by dense lymphocytic mantle and central necrosis"
+          ]
+        },
+        "right": {
+          "title": "Foreign Body Giant Cells",
+          "points": [
+            "Formed in response to inert non-antigenic materials (sutures, talc, silica)",
+            "Nuclei distributed haphazardly and randomly throughout entire cytoplasm",
+            "Non-immune pathogenesis: occurs in the absence of adaptive T-cell responses",
+            "Foreign material often visible in center under polarized light microscopy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A distinctive histological pattern of chronic inflammation characterized by focal collections of activated epithelioid macrophages surrounded by a collar of mononuclear leukocytes is a granuloma. This **granulomatous inflammation** represents a specialized protective cellular mechanism designed to wall off persistent, insoluble, or poorly degradable biological agents.",
+      "say": "A granuloma is a microscopic aggregate of epithelioid macrophages walled off by lymphocytes and fibroblasts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sarcoidosis-fig1.webp",
+        "caption": "Well-circumscribed non-necrotizing epithelioid cell granulomas in pulmonary sarcoidosis.",
+        "alt": "Non-caseating pulmonary sarcoid granulomas showing concentric fibrous rimming"
+      }
+    },
+    {
+      "tx": "The formation of an immune granuloma represents a classical type four delayed-type hypersensitivity reaction. Antigen-presenting dendritic cells present microbial peptides on class two major histocompatibility complex molecules to naive CD4+ T-cells, which differentiate into T-helper-one cells that secrete **interleukin-two and interferon-gamma** to maintain granuloma integrity.",
+      "say": "Immune granulomas represent type four delayed hypersensitivity orchestrated by Th1 T cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "apc_presents",
+            "label": "Macrophage Presents Insoluble Microbial Antigen on MHC Class II to T-Cell"
+          },
+          {
+            "id": "th1_priming",
+            "label": "IL-12 Induces Differentiation into CD4+ T-Helper-1 (Th1) Effector Cells"
+          },
+          {
+            "id": "ifn_gamma_drive",
+            "label": "Th1 Cells Secrete IFN-Gamma to Continuously Transform Macrophages"
+          },
+          {
+            "id": "mature_granuloma",
+            "label": "Epithelioid Macrophages, Giant Cells, and Lymphocytes Form Stable Granuloma"
+          }
+        ],
+        "edges": [
+          [
+            "apc_presents",
+            "th1_priming"
+          ],
+          [
+            "th1_priming",
+            "ifn_gamma_drive"
+          ],
+          [
+            "ifn_gamma_drive",
+            "mature_granuloma"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

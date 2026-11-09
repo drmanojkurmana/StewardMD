@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "id": "ent-oral-hypopharynx-cancer-leukoplakia",
+ "subject": "ent",
+ "module": "ent-oral-hypopharynx-cancer",
+ "title": "Oral, Oropharyngeal and Hypopharyngeal Cancers",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Leukoplakia** is a white patch on oral mucosa that cannot be scraped off or classified as another disease, and it carries premalignant potential that rises with dysplasia grade on biopsy. Homogeneous flat lesions carry lower risk than speckled, nodular or verrucous forms, while floor of mouth and ventrolateral tongue sites transform more often. Every persistent white patch beyond two weeks earns biopsy rather than repeated reassurance.",
+   "say": "A white patch that resists scraping and classification is leukoplakia with premalignant potential. Speckled or nodular forms with floor of mouth site carry higher transformation risk. Persistent patches beyond two weeks require biopsy without delay.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/oral-cancer-fig1.webp",
+    "alt": "Composite of oral cancer and premalignant lesions including ulcer, red patch and white patch presentations.",
+    "caption": "Oral cancer and premalignant presentations. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Erythroplakia** is the red counterpart, a fiery red velvety patch that transforms far more often than white lesions and frequently already harbours severe dysplasia or invasive cancer at biopsy. Speckled leukoplakia mixing red and white sits between the two in risk. Red lesions therefore bypass observation entirely in safe practice and go straight to excisional assessment, however small or painless they appear.",
+   "say": "Red velvety patches have far higher transformation risk than white lesions comparatively. Biopsy frequently finds severe dysplasia or invasive cancer already present. Red lesions require excisional assessment without observation periods.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Leukoplakia",
+     "points": [
+      "White, cannot be scraped off",
+      "Risk rises with dysplasia grade",
+      "Speckled forms higher risk",
+      "Biopsy if persistent"
+     ]
+    },
+    "right": {
+     "title": "Erythroplakia",
+     "points": [
+      "Red velvety patch",
+      "Highest transformation rate",
+      "Often cancer at first biopsy",
+      "Excise without observation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Oral submucous fibrosis** is a chronic premalignant stiffening of oral mucosa from areca nut chewing, giving burning sensation, blanched marble like mucosa, fibrous bands and progressive trismus that limits mouth opening. Vesicles and ulceration pepper early disease while advanced bands tether cheeks and soft palate. Malignant transformation over years is substantial, so habit cessation, physiotherapy for opening and surveillance biopsies of suspicious areas form lifelong care.",
+   "say": "Areca nut chewing produces stiff blanched mucosa with fibrous bands and limited opening. Burning sensation with marble appearance indicates established submucous fibrosis clinically. Habit cessation with opening exercises and surveillance provides lifelong care.",
+   "vis": {
+    "kind": "table",
+    "title": "Submucous fibrosis features",
+    "cols": [
+     "Stage feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Burning, vesicles, ulceration"
+     ],
+     [
+      "Established",
+      "Blanched mucosa, palpable bands"
+     ],
+     [
+      "Advanced",
+      "Severe trismus, tethered palate"
+     ],
+     [
+      "Long term",
+      "Malignant transformation risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Carcinoma tongue** arises most often on the lateral border and presents as non healing ulcer, indurated mass or referred ear pain with speech and swallowing difficulty as it deepens. Anterior two thirds disease drains to submandibular and jugular nodes, while base of tongue disease hides until nodes declare it. Depth of invasion now stages oral tongue cancer because deep tumours metastasise silently despite small surface size.",
+   "say": "Lateral tongue ulcers that resist healing indicate carcinoma until histology proves otherwise. Deep invasion produces nodal spread despite small surface size in many cases. Base lesions are hidden until neck nodes declare disease presence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/head-and-neck-cancer-fig1.webp",
+    "alt": "Diagram of head and neck squamous cancer common sites and warning signs including oral sites.",
+    "caption": "Head and neck cancer sites and signs. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Carcinoma buccal mucosa** dominates Indian oral cancer from tobacco and betel quid held in the gingivobuccal sulcus, presenting as ulcer, exophytic growth or verrucous lesion with trismus when buccinator and pterygoids are invaded. The sulcus is called the Indian cancer site in teaching because quid contact is longest there. Early lesions hide behind routine dental complaints, so sulcus inspection belongs to every tobacco user examination.",
+   "say": "Quid placement in the cheek sulcus explains buccal cancer dominance in Indian practice. Ulcer or growth with jaw stiffness indicates deep invasion beyond mucosa. Sulcus inspection is part of every tobacco user examination routinely.",
+   "vis": null
+  },
+  {
+   "tx": "**Carcinoma tonsil** and oropharyngeal cancer increasingly follow human papillomavirus infection in younger non smokers, presenting through a cystic upper neck node before the primary is visible. Virus positive tumours respond better to chemoradiation and carry improved prognosis compared with tobacco driven disease at the same stage. Small tonsil primaries with large nodes are therefore biopsied tonsil tissue first, not assumed lymphoma, until histology separates the pathways.",
+   "say": "Virus driven throat cancer presents through cystic neck nodes in younger patients frequently. Better treatment response gives improved prognosis compared with tobacco driven disease. Tonsil biopsy is required before lymphoma assumption in cystic nodal presentation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cystic neck node in a younger adult",
+    "nodes": [
+     {
+      "id": "node",
+      "label": "Cystic upper neck node"
+     },
+     {
+      "id": "tonsil",
+      "label": "Examine and biopsy tonsil"
+     },
+     {
+      "id": "virus",
+      "label": "Test viral status on tissue"
+     },
+     {
+      "id": "plan",
+      "label": "Chemoradiation planning"
+     }
+    ],
+    "edges": [
+     [
+      "node",
+      "tonsil"
+     ],
+     [
+      "tonsil",
+      "virus"
+     ],
+     [
+      "virus",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Postcricoid carcinoma** links to Plummer Vinson syndrome of iron deficiency, dysphagia and oesophageal webs, classically in middle aged women, and presents with progressive dysphagia, weight loss and referred ear pain. Hypopharyngeal tumours generally spread early to bilateral nodes and submucosally beyond visible margins, giving the group the worst prognosis among head and neck sites. Endoscopy under anaesthesia with mapping biopsies stages the true extent before treatment selection.",
+   "say": "Iron deficiency with webs is linked to postcricoid cancer in middle aged women classically. Hypopharyngeal spread is early, bilateral and submucosal beyond visible margins. Mapping under anaesthesia stages true extent before treatment selection.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypopharyngeal danger features",
+    "cols": [
+     "Feature",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Submucosal spread",
+      "Visible margin underestimates disease"
+     ],
+     [
+      "Bilateral nodes",
+      "Both necks need treatment"
+     ],
+     [
+      "Late presentation",
+      "Worst group prognosis"
+     ],
+     [
+      "Plummer Vinson link",
+      "Correct iron, survey upper gut"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Piriform sinus carcinoma** grows silently in the hypopharyngeal recess, so nodal metastasis or referred otalgia commonly precedes dysphagia. Pooling of saliva and food debris in the sinus on endoscopy hints at mass effect before tumour is seen directly. Vocal cord fixation signals deep invasion or cricoarytenoid involvement and shifts management toward total laryngectomy based chemoradiation decisions in multidisciplinary discussion.",
+   "say": "Recess tumours grow silently and present through nodes or referred ear pain first. Saliva pooling in the sinus indicates mass effect on endoscopic examination. Cord fixation indicates deep invasion and changes treatment selection.",
+   "vis": null
+  },
+  {
+   "tx": "The **commando operation** is the historical composite resection for advanced oral cancer: tumour excision with segmental mandibulectomy and neck dissection in continuity, reconstructed today with free flaps that restore jaw and lining. Its name survives in examinations as a marker of en bloc clearance philosophy. Modern reconstruction has converted many formerly inoperable defects into rehabilitatable ones, shifting resectability boundaries outward in fit patients.",
+   "say": "Composite resection removes tumour with jaw segment and neck nodes in continuity. Free flap reconstruction restores jaw and lining after extensive clearance surgery. Modern reconstruction extends resectability in fit patients considerably.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early oral cancer",
+     "points": [
+      "Small surface lesion",
+      "Wide local excision",
+      "Neck observed or electively treated",
+      "Function largely preserved"
+     ]
+    },
+    "right": {
+     "title": "Advanced oral cancer",
+     "points": [
+      "Deep invasion or bone involvement",
+      "Composite resection with neck dissection",
+      "Free flap reconstruction",
+      "Adjuvant radiation common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prevention and surveillance close the module. Tobacco, areca and alcohol cessation, oral visual screening of high risk users and prompt biopsy of persistent patches prevent more deaths than any surgical advance. **Field change** explains second primaries across the upper aerodigestive tract, so treated patients keep panendoscopic surveillance and habit review at every visit, with new patches biopsied as new disease rather than assumed recurrence.",
+   "say": "Habit cessation with visual screening prevents more deaths than surgical advances provide. Field change produces second primaries across the upper airway and gut. New patches in treated patients require biopsy as new disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Oral cancer prevention actions",
+    "cols": [
+     "Action",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Stop tobacco and areca",
+      "Removes main carcinogens"
+     ],
+     [
+      "Visual screening",
+      "High risk users regularly"
+     ],
+     [
+      "Biopsy persistent patches",
+      "Catches dysplasia early"
+     ],
+     [
+      "Lifelong surveillance",
+      "Detects second primaries"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Erythroplakia rule",
+   "b": "Red velvety patch has the highest transformation rate and often cancer at biopsy; excise without observation."
+  },
+  {
+   "f": "Plummer Vinson cancer link",
+   "b": "Iron deficiency, dysphagia and webs predispose to postcricoid carcinoma in middle aged women."
+  },
+  {
+   "f": "Commando operation",
+   "b": "En bloc tumour excision with segmental mandibulectomy and neck dissection for advanced oral cancer."
+  }
+ ],
+ "keys": [
+  "Persistent oral patch beyond two weeks needs biopsy",
+  "Gingivobuccal sulcus is the quid contact cancer site",
+  "Virus positive throat cancer carries better prognosis"
+ ]
+}

@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "module": "obg-maternal-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Thyroid Changes, Insulin Resistance and Hyperemesis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Oestrogen raises the carrier protein for thyroid hormones, increasing **thyroid binding globulin**. Total thyroxine rises, but free hormone and stimulating hormone stay near normal. Interpreting thyroid tests in pregnancy needs trimester specific ranges. Total T4 runs about one and a half times the non pregnant range by the second trimester.",
+   "say": "Thyroid binding globulin rises with oestrogen, so free hormone and trimester ranges guide interpretation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Pregnancy"
+    ],
+    "rows": [
+     [
+      "Total T4",
+      "Raised"
+     ],
+     [
+      "Free T4",
+      "Near normal"
+     ],
+     [
+      "TSH",
+      "Slightly lower first trimester"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Placental hormones progressively oppose insulin action, creating physiological **insulin resistance**. Maternal glucose is spared for fetal growth while fat is burned for maternal needs. Women unable to raise insulin output develop gestational diabetes. Human placental lactogen and cortisol drive this resistance, which peaks in the third trimester.",
+   "say": "Insulin resistance spares glucose for the fetus, and failure to compensate causes gestational diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Placental hormones rise"
+     },
+     {
+      "id": "n1",
+      "label": "Insulin resistance grows"
+     },
+     {
+      "id": "n2",
+      "label": "Insulin output compensates"
+     },
+     {
+      "id": "n3",
+      "label": "Failure gives diabetes"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe vomiting with dehydration, ketosis and weight loss in early pregnancy is **hyperemesis gravidarum**. It affects under three percent of pregnancies and links to high hCG states. Twin and molar pregnancies predispose strongly. Weight loss over 5 percent of body weight with ketones in urine separates hyperemesis from ordinary morning sickness.",
+   "say": "Hyperemesis gravidarum causes dehydration and ketosis with severe vomiting in early pregnancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Morning sickness",
+     "points": [
+      "Mild nausea",
+      "No dehydration",
+      "Self limited"
+     ]
+    },
+    "right": {
+     "title": "Hyperemesis",
+     "points": [
+      "Severe vomiting",
+      "Ketosis and weight loss",
+      "Needs admission"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thiamine deficiency from prolonged vomiting causing confusion, ataxia and eye movement disorder is **Wernicke encephalopathy**. It is preventable by giving thiamine before intravenous glucose in hyperemesis. Delay risks permanent memory damage. Pabrinex or oral thiamine 50 milligrams is given before any glucose containing drip, a step examiners check explicitly.",
+   "say": "Wernicke encephalopathy from thiamine deficiency is prevented by giving thiamine before glucose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Prolonged vomiting"
+     },
+     {
+      "id": "n1",
+      "label": "Thiamine depleted"
+     },
+     {
+      "id": "n2",
+      "label": "Glucose without thiamine"
+     },
+     {
+      "id": "n3",
+      "label": "Encephalopathy precipitated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrolyte disturbance in hyperemesis typically shows low potassium, chloride and sodium with **metabolic alkalosis** initially. Volume depletion drives secondary aldosterone effects worsening potassium loss. Careful replacement guided by blood tests is essential. Hypochloraemic alkalosis is the full classic picture: low chloride, low potassium and a raised bicarbonate together.",
+   "say": "Hyperemesis disturbs potassium and chloride, needing careful blood guided replacement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Electrolyte",
+     "Typical"
+    ],
+    "rows": [
+     [
+      "Potassium",
+      "Low"
+     ],
+     [
+      "Chloride",
+      "Low"
+     ],
+     [
+      "Sodium",
+      "Low or normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid stimulating hormone dips in the first trimester under hCG influence, a normal **first trimester TSH fall**. Mild biochemical hyperthyroidism at this stage usually needs no antithyroid drugs. Persistent abnormality beyond sixteen weeks needs endocrine review. A suppressed TSH with normal free T4 in the first trimester is usually observed, not treated.",
+   "say": "The first trimester TSH fall under hCG is normal and usually needs no antithyroid drugs.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hcg.webp",
+    "alt": "hCG effects including thyroid stimulation.",
+    "caption": "hCG thyroid effects. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Increased iodine clearance and fetal demand raise iodine requirements, termed **iodine demand increase**. Deficiency risks fetal brain development, especially in endemic regions. Salt iodisation programmes address this at population level. Daily iodine need rises from 150 to about 250 micrograms in pregnancy to cover fetal thyroid hormone production.",
+   "say": "Iodine demand increases in pregnancy and deficiency risks fetal brain development.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Need",
+     "Change"
+    ],
+    "rows": [
+     [
+      "Iodine intake",
+      "Increased"
+     ],
+     [
+      "Thyroid volume",
+      "Slight increase"
+     ],
+     [
+      "Hormone production",
+      "Increased"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal **glucose handling** in pregnancy follows a split pattern that screening tests are built to catch. Fasting glucose sits slightly lower than outside pregnancy because the fetus draws glucose continuously. After meals, placental hormones blunt insulin action, so peaks run higher and longer. A glucose challenge at twenty-four to twenty-eight weeks exposes women whose compensation fails, diagnosing gestational diabetes before fetal overgrowth accelerates.",
+   "say": "Glucose handling in pregnancy lowers fasting values and raises post meal peaks. Screening exploits this pattern with a glucose challenge test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m631-obg-maternal-physiology-thyroid-binding-globulin.webp",
+    "alt": "Glucose handling chart in pregnancy showing slightly lower fasting glucose but higher post meal peaks, with fetal glucose supply flowing across the placenta between meals.",
+    "caption": "Fasting values run lower while meal peaks run higher, a pattern that keeps glucose flowing to the fetus around the clock. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Fasting glucose stays slightly lower while post meal values run higher in normal **glucose handling** of pregnancy. This pattern protects fetal supply between meals. Screening exploits it with a glucose challenge at twenty four to twenty eight weeks. Fasting glucose below 5.1 millimoles per litre is the target used when gestational diabetes is later diagnosed.",
+   "say": "Glucose handling in pregnancy lowers fasting values and raises post meal peaks.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Pregnancy metabolic assessment.",
+    "caption": "Pregnancy metabolic care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Antiemetic treatment ladders start with ginger and pyridoxine combinations before stronger agents, following **stepwise antiemetics**. Ondansetron is reserved for refractory cases after counselling. Most hyperemesis settles by twenty weeks regardless. Metoclopramide and cyclizine form the next rung, and steroids are kept for women still vomiting after these fail.",
+   "say": "Stepwise antiemetics escalate from simple agents, and most hyperemesis settles by twenty weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Dietary and ginger measures"
+     },
+     {
+      "id": "n1",
+      "label": "Pyridoxine combinations"
+     },
+     {
+      "id": "n2",
+      "label": "Stronger antiemetics"
+     },
+     {
+      "id": "n3",
+      "label": "Admission if dehydrated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

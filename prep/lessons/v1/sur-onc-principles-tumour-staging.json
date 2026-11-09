@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-onc-principles",
+ "subject": "surgery",
+ "title": "Tumour Staging, Sentinel Nodes and Sarcoma Principles",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Describing cancer extent by tumour size, node spread and distant metastasis is **tumour staging**. The TNM system is used worldwide so teams communicate precisely. Stage determines treatment and prognosis more than any other factor. Clinical stage comes from examination and imaging, while pathological stage after resection can change treatment for about a third of patients.",
+   "say": "Tumour staging by the TNM system describes extent and determines treatment and prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Letter",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "T",
+      "Primary tumour extent"
+     ],
+     [
+      "N",
+      "Node involvement"
+     ],
+     [
+      "M",
+      "Distant metastasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The universal language combining those three elements is the **TNM system**. Numbers after each letter grade severity within the category. Grouping combinations gives stages one to four for most cancers. Tis means carcinoma in situ, T0 no primary found, and TX means the primary cannot be assessed.",
+   "say": "The TNM system grades tumour, nodes and metastasis to group cancers into stages one to four.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "T graded by extent"
+     },
+     {
+      "id": "n1",
+      "label": "N graded by nodes"
+     },
+     {
+      "id": "n2",
+      "label": "M graded by spread"
+     },
+     {
+      "id": "n3",
+      "label": "Overall stage grouped"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first lymph node draining a tumour, whose biopsy predicts the rest, is the **sentinel lymph node**. If it is clear, wider node clearance and its morbidity are avoided. Blue dye and tracer locate it during surgery. A negative sentinel node carries a false negative rate under 10 percent in trained hands, which is the figure quoted to patients.",
+   "say": "The sentinel node predicts nodal spread, and a clear result avoids wider clearance morbidity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+    "alt": "Anatomic diagram showing invasive ductal tumour, resection margin, and sentinel lymph node drainage",
+    "caption": "Anatomic diagram showing invasive ductal tumour, resection margin, and sentinel lymph node drainage. Illustration: StewardMD original. [Alt: Medical illustration showing breast anatomy with an invasive ductal tumour, planned excision margin, pectoralis major muscle, and lymphatic channels leading to",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Immediate microscopic examination of tissue during an operation is **frozen section**. It checks margins and diagnoses unexpected findings while the patient is asleep. Accuracy is good but slightly below permanent sections. Paraffin sections take days but show detail frozen sections miss, so a frozen result can change after final histology.",
+   "say": "Frozen section checks margins during surgery while the patient remains asleep.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Frozen section",
+     "points": [
+      "Result in minutes",
+      "Guides same operation",
+      "Slightly less accurate"
+     ]
+    },
+    "right": {
+     "title": "Permanent section",
+     "points": [
+      "Result in days",
+      "Definitive diagnosis",
+      "Most accurate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Treatment given before the main operation to shrink a tumour is **neoadjuvant therapy**. It can make inoperable tumours resectable and tests tumour sensitivity. Response also predicts prognosis usefully. Shrinkage also lets some breast and rectal cancers keep the organ, and complete clinical response may allow watch and wait in rectal cancer.",
+   "say": "Neoadjuvant therapy shrinks tumours before surgery and can make inoperable disease resectable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Name"
+    ],
+    "rows": [
+     [
+      "Before surgery",
+      "Neoadjuvant"
+     ],
+     [
+      "After surgery",
+      "Adjuvant"
+     ],
+     [
+      "Without cure intent",
+      "Palliative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment after complete tumour removal to kill microscopic residue is **adjuvant therapy**. It lowers recurrence when risk is significant. Decisions balance recurrence risk against treatment toxicity for each patient. Adjuvant treatment is offered when absolute benefit outweighs harm; a 5 percent survival gain matters at high baseline risk.",
+   "say": "Adjuvant therapy after complete removal kills microscopic residue and lowers recurrence risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tumour removed completely"
+     },
+     {
+      "id": "n1",
+      "label": "Recurrence risk estimated"
+     },
+     {
+      "id": "n2",
+      "label": "Adjuvant therapy if worthwhile"
+     },
+     {
+      "id": "n3",
+      "label": "Surveillance follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgery aimed at relieving symptoms rather than curing is **palliative surgery**. Bypassing obstruction or controlling bleeding can transform quality of life. It is chosen when benefits clearly outweigh operative burden. A gastrojejunostomy for gastric outlet block in pancreatic cancer restores eating for the months that remain, which patients value highly.",
+   "say": "Palliative surgery relieves obstruction or bleeding to transform quality of life without curing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Curative surgery",
+     "points": [
+      "Removes all disease",
+      "Long operation justified",
+      "Cure intended"
+     ]
+    },
+    "right": {
+     "title": "Palliative surgery",
+     "points": [
+      "Relieves symptoms",
+      "Burden kept low",
+      "Comfort intended"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cancers of connective tissue like fat, muscle and fibrous tissue are **soft tissue sarcomas**. The commonest adult type is liposarcoma, while rhabdomyosarcoma predominates in children. Desmoid tumours grow locally without metastasising, and retroperitoneal sarcomas present late and large, all needing wide excision planning at specialist centres with attention to hereditary syndromes and screening of families.",
+   "say": "Soft tissue sarcomas include liposarcoma and rhabdomyosarcoma and need specialist wide excision planning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cutaneous-angiosarcoma-fig1.webp",
+    "alt": "Cutaneous angiosarcoma as a soft tissue sarcoma example.",
+    "caption": "Soft tissue sarcoma example. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Population testing to find cancer before symptoms is **cancer screening**. Programmes exist for breast, cervix, bowel and lung in defined groups. Screening only helps when treatment of early disease improves outcomes. Screening brings lead time and length bias, so mortality reduction in trials, not just earlier detection, proves a programme works.",
+   "say": "Cancer screening finds disease before symptoms in defined groups where early treatment helps.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Population invited"
+     },
+     {
+      "id": "n1",
+      "label": "Test detects early disease"
+     },
+     {
+      "id": "n2",
+      "label": "Treatment offered sooner"
+     },
+     {
+      "id": "n3",
+      "label": "Outcomes improve"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

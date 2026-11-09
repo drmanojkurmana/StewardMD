@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-occ-legislation-factories-act-1948",
+  "subject": "community-medicine",
+  "module": "cm-occ-legislation",
+  "title": "Occupational Health Legislation: Factories Act, ESI, and Workers Benefits",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "What the Factories Act 1948 covers",
+      "tx": "Parliament enacted the **Factories Act 1948** to regulate health, safety, welfare, and working hours inside factories, with the last major amendment in 1987. A factory means premises where a manufacturing process runs with power and ten or more workers, or without power and twenty or more workers. State governments appoint the Chief Inspector of Factories and certifying surgeons who enforce the Act.",
+      "say": "The Factories Act of 1948 is the basic safety law for Indian factories. It applies where ten workers use power, or twenty work without power.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Provision area", "What the Act lays down"],
+        "rows": [
+          ["Health", "Cleanliness, ventilation, dust control, safe drinking water, latrines"],
+          ["Safety", "Fencing of machinery, safe lifting tackle, fire exits, pressure vessel testing"],
+          ["Welfare", "Canteen, rest room, creche where 30 or more women work"],
+          ["Hours of work", "Maximum 48 hours a week, weekly holiday, overtime at double wages"]
+        ]
+      }
+    },
+    {
+      "title": "Health provisions inside the factory",
+      "tx": "Under the **health provisions of the Factories Act**, the occupier must keep floors clean, dispose of effluents safely, maintain temperature and humidity within comfort limits, and prevent overcrowding. A room is overcrowded when each worker has less than the prescribed cubic space. Artificial humidification must use purified water, and spittoons, dustbins, and first aid boxes are compulsory in larger units.",
+      "say": "Inside the factory, the Act fixes cleanliness, ventilation, and space per worker. It also requires first aid boxes and safe disposal of dust and fumes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Employer must provide",
+          "points": ["Safe drinking water points away from urinals", "Ventilation that removes dust and fumes at source", "Lighting that avoids glare and eye strain", "One first aid box for every 150 workers"]
+        },
+        "right": {
+          "title": "Worker must observe",
+          "points": ["Use guards and protective equipment provided", "Report defective machinery to the manager", "Avoid spitting except in spittoons", "Cooperate with periodic medical examination"]
+        }
+      }
+    },
+    {
+      "title": "Hours, leave, and young workers",
+      "tx": "The Act caps adult work at nine hours a day and forty eight hours a week, with a rest interval after five hours of continuous work, which together define **regulated factory working hours**. Women cannot work between seven in the evening and six in the morning. Children below fourteen years are banned, adolescents of fifteen to eighteen need a certificate of fitness, and every worker earns one day of leave for twenty days worked.",
+      "say": "An adult may work at most nine hours a day and forty eight hours a week. Night work for women and factory work for young children are prohibited.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "h1", "label": "Maximum 9 hours work in one day" },
+          { "id": "h2", "label": "Half hour rest after 5 hours" },
+          { "id": "h3", "label": "48 hour week plus weekly holiday" }
+        ],
+        "edges": [["h1", "h2"], ["h2", "h3"]]
+      }
+    },
+    {
+      "title": "Notifiable occupational diseases",
+      "tx": "Schedule III of the Act lists **notifiable industrial diseases** such as lead poisoning, asbestosis, silicosis, occupational dermatitis, and noise induced hearing loss, which the manager and the attending doctor must report to the Chief Inspector. Certifying surgeons examine young workers, inspect dangerous processes, and investigate suspected occupational disease. Failure to notify is a punishable offence under the Act.",
+      "say": "Certain dust and chemical diseases must be reported to the factory inspector. Silicosis, lead poisoning, and asbestosis are classic notifiable diseases in India.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Exposure", "Notifiable disease"],
+        "rows": [
+          ["Free silica dust", "Silicosis"],
+          ["Asbestos fibre", "Asbestosis and mesothelioma"],
+          ["Lead fumes and dust", "Lead poisoning with anaemia and wrist drop"],
+          ["Loud machinery noise", "Noise induced hearing loss"]
+        ]
+      }
+    },
+    {
+      "title": "The ESI Act and social security",
+      "tx": "The **Employees State Insurance Act 1948** introduced contributory social insurance for workers in factories and establishments, financed by employer and employee contributions to the ESI Corporation. It covers medical care and cash benefits during sickness, maternity, disablement, and death due to employment injury. Medical care extends to the worker's family through ESI dispensaries and hospitals.",
+      "say": "The ESI Act pools contributions from workers and employers. In return, the worker gets free medical care and cash support during sickness or injury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "e1", "label": "Employer and employee pay ESI contribution" },
+          { "id": "e2", "label": "ESI Corporation pools the insurance fund" },
+          { "id": "e3", "label": "Worker receives medical care and cash benefits" }
+        ],
+        "edges": [["e1", "e2"], ["e2", "e3"]]
+      }
+    },
+    {
+      "title": "Cash benefits under ESI",
+      "tx": "Six cash and medical benefits flow from the scheme, and the **sickness benefit under ESI** pays about seventy percent of wages for up to ninety one days in two benefit periods. Extended sickness benefit continues for listed long term diseases, while enhanced sickness benefit pays full wages for sterilisation. Maternity benefit now runs up to twenty six weeks for women with the required contribution record.",
+      "say": "Sickness benefit replaces about seventy percent of wages for up to ninety one days. Maternity benefit under ESI now extends to twenty six weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Benefit", "Core entitlement"],
+        "rows": [
+          ["Sickness benefit", "About 70 percent wages, up to 91 days"],
+          ["Maternity benefit", "Full wages up to 26 weeks"],
+          ["Disablement benefit", "Pension graded by loss of earning capacity"],
+          ["Dependants benefit", "Family pension after fatal employment injury"],
+          ["Funeral expenses", "Fixed grant toward funeral costs"]
+        ]
+      }
+    },
+    {
+      "title": "Disablement and dependants benefits",
+      "tx": "When an employment injury causes permanent loss of earning capacity, the insured person receives **disablement benefit under ESI** as a lifelong pension proportionate to that loss, assessed by a medical board. If the injury proves fatal, dependants receive a monthly family pension shared among the widow, children, and dependent parents. Temporary disablement pays about ninety percent of wages until recovery.",
+      "say": "A permanently disabled worker gets a lifelong pension based on lost earning capacity. If he dies, his family receives the dependants benefit pension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Temporary disablement",
+          "points": ["Injury heals within months", "About 90 percent wages during absence", "Stops when the worker resumes duty"]
+        },
+        "right": {
+          "title": "Permanent disablement",
+          "points": ["Medical board fixes percentage loss", "Lifelong monthly pension", "Reviewed if the condition worsens"]
+        }
+      }
+    },
+    {
+      "title": "Ergonomics and fitness examinations",
+      "tx": "Fitting the job to the worker rather than forcing the worker to the job is the science of **ergonomics in occupational health**, which redesigns tools, posture, and workload to prevent fatigue and musculoskeletal injury. The pre placement examination at recruitment places each worker in a job suited to his physical capacity, while periodic medical examinations detect early dust, noise, or chemical damage in exposed groups.",
+      "say": "Ergonomics redesigns the workstation so the body is not strained. A medical examination before placement keeps an unfit worker away from a harmful job.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Examination", "Timing and purpose"],
+        "rows": [
+          ["Pre placement examination", "At recruitment, matches worker fitness to job demands"],
+          ["Periodic medical examination", "At fixed intervals for workers in hazardous processes"],
+          ["Special examination", "After suspected poisoning or a notifiable disease report"],
+          ["Return to work examination", "After long sickness absence or major injury"]
+        ]
+      }
+    },
+    {
+      "title": "Sickness absenteeism and safety codes",
+      "tx": "Days lost when a worker stays away certified sick are measured as **sickness absenteeism in industry**, a sensitive index of both worker health and factory morale. Causes span genuine illness, occupational injury, poor sanitation, and social factors such as alcohol use and long commutes. The four Occupational Safety and Health codes now subsume the Factories Act and related laws into a single modern framework.",
+      "say": "Sickness absenteeism counts certified sick days lost per worker each year. Rising rates point to poor health, poor sanitation, or poor morale in the plant.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "s1", "label": "Illness, injury, or social cause keeps worker home" },
+          { "id": "s2", "label": "Certified sickness absence recorded" },
+          { "id": "s3", "label": "Absenteeism rate guides factory health action" }
+        ],
+        "edges": [["s1", "s2"], ["s2", "s3"]]
+      }
+    }
+  ]
+}

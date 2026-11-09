@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-colon-benign",
+ "subject": "surgery",
+ "title": "Familial Adenomatous Polyposis and Polyposis Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "An autosomal dominant disorder characterized by hundreds to thousands of colorectal adenomas is designated as **familial adenomatous polyposis**. This condition results from germline mutations in the APC tumor suppressor gene situated on chromosome 5q21. Colonic adenomatous polyps emerge during the second decade of life, and without prophylactic colectomy, progression to invasive colorectal adenocarcinoma occurs in virtually one hundred percent of untreated individuals by age forty.",
+   "say": "Familial adenomatous polyposis produces thousands of colorectal adenomas through germline APC mutations, leading to inevitable malignant transformation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+    "alt": "Clinical and pathological features of familial adenomatous polyposis showing diffuse carpeted colonic adenomatous polyps.",
+    "caption": "Familial adenomatous polyposis: hundreds of adenomas carpet the large bowel mucosa due to APC mutations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Loss of normal intracellular beta-catenin degradation occurs following an inactivating **APC gene mutation**. In healthy colonic enterocytes, the adenomatous polyposis coli protein forms a destruction complex that targets cytosolic beta-catenin for phosphorylation and proteasomal degradation. Loss of function permits beta-catenin accumulation, nuclear translocation, and unregulated transcription of cellular growth genes like c-MYC and cyclin D1, driving early adenoma formation.",
+   "say": "Inactivating mutations in the APC gene lead to intracellular beta-catenin accumulation and unregulated oncogenic transcription.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "apc",
+      "label": "Germline or Somatic APC Gene Inactivation"
+     },
+     {
+      "id": "bcat",
+      "label": "Impaired Beta-Catenin Destruction Complex"
+     },
+     {
+      "id": "nuc",
+      "label": "Nuclear Translocation of Excess Beta-Catenin"
+     },
+     {
+      "id": "cmyc",
+      "label": "Unchecked Transcription of MYC & Cyclin D1"
+     }
+    ],
+    "edges": [
+     [
+      "apc",
+      "bcat"
+     ],
+     [
+      "bcat",
+      "nuc"
+     ],
+     [
+      "nuc",
+      "cmyc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A spectrum of non-colonic lesions known collectively as **extracolonic manifestations** frequently accompanies classic familial adenomatous polyposis. In Gardner syndrome variant, individuals exhibit osteomas of the mandible and skull, epidermoid cysts, desmoid tumors, and congenital hypertrophy of the retinal pigment epithelium. Turcot syndrome denotes the coexistence of familial colorectal polyposis with central nervous system tumors, characteristically medulloblastoma in APC-mutated cases.",
+   "say": "Gardner syndrome combines polyposis with osteomas and desmoids, while Turcot syndrome associates polyps with central brain neoplasms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FAP Syndrome Variant",
+     "Genetic Mutation",
+     "Extracolonic Features",
+     "Malignancy Profile"
+    ],
+    "rows": [
+     [
+      "Classic FAP",
+      "APC gene (5q21)",
+      "Duodenal adenomas, CHRPE",
+      "100% colorectal cancer risk"
+     ],
+     [
+      "Gardner syndrome",
+      "APC gene (5q21)",
+      "Mandibular osteomas, desmoids, cysts",
+      "Colorectal and duodenal cancer"
+     ],
+     [
+      "Turcot syndrome",
+      "APC or mismatch repair",
+      "CNS medulloblastoma or glioblastoma",
+      "Colorectal and primary brain tumors"
+     ],
+     [
+      "Attenuated FAP",
+      "5' or 3' ends of APC",
+      "Fewer polyps (10 to 100), later onset",
+      "Delayed colorectal cancer (age >50)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive gold standard preventive surgical operation for classic familial polyposis is **restorative proctocolectomy**. This comprehensive procedure encompasses complete excision of the colon and rectum with construction of an ileal reservoir anastomosed to the anal canal. Total mucosal clearance eliminates the risk of metachronous rectal adenocarcinoma while preserving transanal fecal evacuation, avoiding permanent end stoma creation in young patients.",
+   "say": "Restorative proctocolectomy with ileal pouch construction removes all diseased colorectal mucosa while preserving natural fecal evacuation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Confirmed FAP Diagnosis & Polyposis Burden"
+     },
+     {
+      "id": "tpc",
+      "label": "Total Proctocolectomy & Complete Rectal Mucosectomy"
+     },
+     {
+      "id": "ipaa",
+      "label": "Ileal J-Pouch Construction from Terminal Ileum"
+     },
+     {
+      "id": "anas",
+      "label": "Ileoanal Anastomosis with Temporary Loop Stoma"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "tpc"
+     ],
+     [
+      "tpc",
+      "ipaa"
+     ],
+     [
+      "ipaa",
+      "anas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An inherited hamartomatous polyposis disorder linked to germline STK11 mutations is recognized as **Peutz-Jeghers syndrome**. Patients exhibit distinctive mucocutaneous melanin hyperpigmentation, manifesting as dark brown or black lentigines around the lips, buccal mucosa, palms, and soles. The gastrointestinal polyps are true hamartomas, featuring distinctive tree-like branching of smooth muscle fibers derived from the muscularis mucosae traversing throughout the lamina propria.",
+   "say": "Peutz-Jeghers syndrome combines peri-oral melanin pigmentation with arborizing gastrointestinal hamartomas caused by STK11 mutations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Familial Adenomatous Polyposis",
+     "points": [
+      "APC tumor suppressor gene mutation",
+      "True adenomatous neoplastic polyps",
+      "Dense carpet of thousands of polyps",
+      "Hundred percent colon cancer risk"
+     ]
+    },
+    "right": {
+     "title": "Peutz-Jeghers Syndrome",
+     "points": [
+      "STK11 or LKB1 kinase mutation",
+      "Non-neoplastic hamartomatous polyps",
+      "Small bowel predominance with intussusception",
+      "Increased risk of gastrointestinal and breast cancers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The distinctive histological architecture of Peutz-Jeghers polyps is characterized by **hamartomatous polyps**. These benign overgrowths predominantly populate the jejunum and ileum, where their bulky mechanical presence frequently acts as a pathological lead point provoking acute adult intussusception or recurring intestinal obstruction. Endoscopic polypectomy or enteroscopic removal is performed to prevent emergency surgical laparotomy and extensive bowel resection.",
+   "say": "Hamartomatous small bowel polyps often act as mechanical lead points provoking intussusception or recurrent small intestinal obstruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/juvenile-polyposis-fig1.webp",
+    "alt": "Pathological features of juvenile polyposis syndrome showing cystically dilated glandular architecture and lamina propria expansion.",
+    "caption": "Hamartomatous polyp histology: cystically dilated mucin glands with expanded lamina propria. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most prevalent pediatric colorectal polyp encountered in clinical surgical practice is the benign **juvenile polyps**. These solitary hamartomas typically arise in children between two and eight years old within the rectosigmoid junction, presenting with painless bright red rectal bleeding. Microscopically, juvenile polyps demonstrate abundant expanded edematous lamina propria with dense chronic inflammatory cell infiltrates and cystically dilated mucin-filled glandular spaces.",
+   "say": "Solitary juvenile polyps are benign childhood hamartomas presenting with painless rectal bleeding and cystic glandular dilation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Painless Childhood Fresh Rectal Bleeding"
+     },
+     {
+      "id": "endo",
+      "label": "Colonoscopy Identifying Pedunculated Polyp"
+     },
+     {
+      "id": "snare",
+      "label": "Endoscopic Snare Polypectomy & Retrieval"
+     },
+     {
+      "id": "cure",
+      "label": "Histological Confirmation & Complete Cure"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "endo"
+     ],
+     [
+      "endo",
+      "snare"
+     ],
+     [
+      "snare",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A hereditary predisposition marked by five or more juvenile hamartomas throughout the colon is **juvenile polyposis syndrome**. This autosomal dominant disorder arises from germline mutations in SMAD4 or BMPR1A within the TGF-beta signaling pathway. Unlike solitary juvenile polyps, this syndrome confers a forty to fifty percent lifetime risk of gastrointestinal adenocarcinoma, demanding rigorous endoscopic surveillance starting at age twelve.",
+   "say": "Juvenile polyposis syndrome carries germline SMAD4 or BMPR1A mutations, conferring marked gastrointestinal cancer predisposition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polyposis Syndrome",
+     "Primary Gene",
+     "Polyp Histology",
+     "Typical Presentation"
+    ],
+    "rows": [
+     [
+      "FAP",
+      "APC (5q21)",
+      "Tubular or villous adenoma",
+      "Thousands of colonic polyps in teens"
+     ],
+     [
+      "Peutz-Jeghers",
+      "STK11 / LKB1 (19p13)",
+      "Hamartoma with arborizing smooth muscle",
+      "Mucocutaneous lentigines, intussusception"
+     ],
+     [
+      "Juvenile polyposis",
+      "SMAD4 or BMPR1A",
+      "Hamartoma with cystic dilated glands",
+      "Multiple childhood rectal polyps, anemia"
+     ],
+     [
+      "Cowden syndrome",
+      "PTEN (10q23)",
+      "Hamartoma with trichilemmomas",
+      "Macrocephaly, breast and thyroid cancers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Locally aggressive, non-metastasizing fibroblastic proliferations that complicate abdominal surgery in polyposis patients are **desmoid tumors**. These mesenchymal neoplasms arise within the mesentery or abdominal wall in up to fifteen percent of familial adenomatous polyposis cases. Surgical excision often provokes intense local recurrence, making medical treatment with high-dose tamoxifen, nonsteroidal anti-inflammatory agents, or tyrosine kinase inhibitors the preferred initial management.",
+   "say": "Desmoid tumors are locally aggressive mesenteric fibrous proliferations that frequently recur following surgical resection in polyposis patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Abdominal Wall Desmoids",
+     "points": [
+      "Arise within rectus abdominis muscle",
+      "Clear anatomical margins obtainable",
+      "Lower morbidity with surgical excision",
+      "Prognosis generally favorable"
+     ]
+    },
+    "right": {
+     "title": "Mesenteric Desmoid Tumors",
+     "points": [
+      "Encased within root of small bowel mesentery",
+      "Encase superior mesenteric artery branches",
+      "Excision risks extensive short bowel syndrome",
+      "First-line therapy is medical with NSAIDs and anti-estrogens"
+     ]
+    }
+   }
+  }
+ ]
+}

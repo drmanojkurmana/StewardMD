@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "obg-operative-obstetrics",
+ "subject": "obstetrics-gynaecology",
+ "title": "Caesarean Indications, Lower Segment, Classical and VBAC",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Delivery of the baby through abdominal and uterine incisions is **caesarean section**, indicated when vaginal birth endangers mother or baby. Fetal distress, placenta praevia, transverse lie and failed progress head modern indication lists. Rates above need without benefit harm future pregnancies. Group five of the Robson classification, previous caesarean, drives the total rate in most audited units.",
+   "say": "Caesarean section delivers through abdominal incisions when vaginal birth endangers either patient.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-lower-segment-caesarean-section.webp",
+    "alt": "Lower segment caesarean section.",
+    "caption": "LSCS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The transverse incision in the thin lower uterine segment is the **lower segment caesarean**. It heals strongly, bleeds less and ruptures rarely in future labour. It is the default operation in obstetric practice worldwide. Lower segment scars rupture in about 0.5 percent of later labours, against 4 to 9 percent for classical scars.",
+   "say": "Lower segment caesarean heals strongly and ruptures rarely in future labour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Segment",
+     "Properties"
+    ],
+    "rows": [
+     [
+      "Lower",
+      "Thin, strong scar, less bleeding"
+     ],
+     [
+      "Upper classical",
+      "Thick, weak scar, more bleeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vertical upper segment incision reserved for extreme prematurity, dense adhesions or transverse lie with poor lower segment is the **classical caesarean**. Its scar ruptures in four to nine percent of future pregnancies, so elective repeat delivery precedes labour. A midline skin incision is still chosen when speed or a known classical scar dictates the operation.",
+   "say": "Classical caesarean scars rupture often, so future births are elective repeats.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lower segment",
+     "points": [
+      "Future VBAC possible",
+      "Rupture about 0.5 percent"
+     ]
+    },
+    "right": {
+     "title": "Classical",
+     "points": [
+      "No future labour",
+      "Rupture 4 to 9 percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaginal birth after one previous lower segment caesarean is **VBAC**. Planned VBAC succeeds in about three quarters of women, more after any previous vaginal birth. Continuous monitoring and immediate theatre access are conditions of the attempt. Rupture risk in planned VBAC is about one in 200, the number consent discussions must state.",
+   "say": "VBAC succeeds in three quarters with monitoring and immediate theatre access.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "One lower segment scar"
+     },
+     {
+      "id": "n1",
+      "label": "Counselling on risks"
+     },
+     {
+      "id": "n2",
+      "label": "TOLAC in equipped unit"
+     },
+     {
+      "id": "n3",
+      "label": "Success about 75 percent"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The planned labour attempt after caesarean, successful or not, is **TOLAC**. Trial of labour after caesarean distinguishes the attempt from its outcome. Induction and augmentation raise rupture risk and need senior sanction before use. Oxytocin augmentation in TOLAC roughly doubles rupture risk compared with spontaneous labour.",
+   "say": "TOLAC names the attempt, with induction raising rupture risk needing senior sanction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Rupture effect"
+    ],
+    "rows": [
+     [
+      "Spontaneous labour",
+      "Baseline about 0.5 percent"
+     ],
+     [
+      "Induction prostaglandin",
+      "Higher"
+     ],
+     [
+      "Previous vaginal birth",
+      "Lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scar rupture** is the tearing of a previous caesarean scar under labour contractions, and the fetus usually signals it first. Sudden bradycardia appears as the rupture interrupts placental flow or lets the presenting part recede upward out of the pelvis. Maternal pain, fresh bleeding and loss of contractions follow. Only immediate category one caesarean, with repair or hysterectomy as findings dictate, resolves the emergency.",
+   "say": "Scar rupture heralds with fetal bradycardia and needs category one caesarean. Pain, bleeding and recession of the presenting part follow quickly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m673-obg-operative-obstetrics-caesarean-section-indications.webp",
+    "alt": "Labour uterus diagram showing a previous caesarean scar tearing open, with the presenting part receding and the fetal heart trace dropping sharply.",
+    "caption": "A rupturing scar announces itself through fetal bradycardia first, then pain, bleeding and a presenting part that floats back up. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Tearing of the caesarean scar in labour, often heralded by fetal bradycardia, is **scar rupture**. Pain, bleeding and recession of the presenting part follow quickly. Category one caesarean and repair, or hysterectomy, resolve the emergency. The presenting part rising out of the pelvis on vaginal examination is a quieter sign than maternal collapse.",
+   "say": "Scar rupture heralds with fetal bradycardia and needs category one caesarean.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "VBAC labour monitoring.",
+    "caption": "VBAC monitoring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Silent separation of scar without symptoms found incidentally at surgery is **scar dehiscence**. A window of peritoneum alone covers the fetus. Unlike rupture it needs no emergency action when found at elective surgery. It is also called a scar window, and elective delivery at 36 to 37 weeks follows a classical scar history.",
+   "say": "Scar dehiscence silently separates without symptoms, unlike rupture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dehiscence",
+     "points": [
+      "Silent window",
+      "No emergency"
+     ]
+    },
+    "right": {
+     "title": "Rupture",
+     "points": [
+      "Bradycardia, pain, bleeding",
+      "Emergency laparotomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Forceps applied only when the head is on the perineum are **outlet forceps**. Wrigley forceps serve here and for the aftercoming head and caesarean extraction. Their narrow role keeps them the commonest forceps still in use. Wrigley forceps have a short cephalic curve only, so any need for rotation excludes them.",
+   "say": "Outlet forceps apply only with the head on the perineum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-operative-obstetrics-gen1.webp",
+    "alt": "Sagittal pelvis illustration demonstrating outlet forceps application with pelvic curve aligned to birth canal.",
+    "caption": "Sagittal pelvis illustration demonstrating outlet forceps application with pelvic curve aligned to birth canal. Forceps placement with pelvic curve aligned to birth canal. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Urgency categories one to four standardise caesarean communication as **category classification**. Category one means immediate threat to life with a thirty minute decision to delivery ambition. Every unit audits performance against these shared targets. A decision to delivery interval of 30 minutes for category one is audited as a standard, not always met.",
+   "say": "Category classification standardises caesarean urgency from immediate to elective.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "One",
+      "Immediate threat to life"
+     ],
+     [
+      "Two",
+      "Compromise, not immediate"
+     ],
+     [
+      "Three",
+      "Needs early delivery"
+     ],
+     [
+      "Four",
+      "Elective, timed"
+     ]
+    ]
+   }
+  }
+ ]
+}

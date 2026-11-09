@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "ana-axilla-plexus",
+ "subject": "anatomy",
+ "title": "Axilla Boundaries, Axillary Artery and Fascial Sheath",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The axilla is a pyramidal anatomical space situated between the upper lateral chest wall and the medial aspect of the arm. It features four walls, a base, and an apex. The **apex of axilla**, or cervicoaxillary canal, opens into the root of the neck, bounded anteriorly by the clavicle, medially by the outer border of the first rib, and posteriorly by the superior scapular border.",
+   "say": "The axilla is a four-sided pyramidal compartment between the lateral chest and upper arm. Its apex, the cervicoaxillary canal, leads into the root of the neck, bounded by the clavicle anteriorly, the first rib medially, and the upper scapula posteriorly.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-axillary_nodes.webp",
+    "alt": "Axilla boundaries, muscular walls, and axillary lymph node groups",
+    "caption": "Axillary boundaries, apical apex, and topographical lymph node groups. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The broad base of the axilla is formed by skin, subcutaneous fat, and the concave dome of the **axillary fascia**, suspended between the anterior and posterior axillary folds. The anterior axillary fold is formed by the lower border of pectoralis major, while the posterior axillary fold is formed by the tendons of latissimus dorsi and teres major.",
+   "say": "The base of the axilla consists of skin and the dome of axillary fascia slung between the axillary folds. The anterior fold is formed by pectoralis major, while the posterior fold is formed by the latissimus dorsi and teres major tendons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Axillary Wall",
+     "points": [
+      "Formed by pectoralis major anteriorly",
+      "Deep subclavius and pectoralis minor",
+      "Invested by clavipectoral fascia",
+      "Forms prominent anterior axillary fold"
+     ]
+    },
+    "right": {
+     "title": "Posterior Axillary Wall",
+     "points": [
+      "Formed by subscapularis on scapula",
+      "Latissimus dorsi tendon inferolaterally",
+      "Teres major along inferior border",
+      "Forms prominent posterior axillary fold"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The medial wall of the axilla is formed by the upper four or five ribs, their intervening intercostal muscles, and the overlying **serratus anterior** muscle. The narrow lateral wall is formed by the bicipital (intertubercular) groove of the humerus, where the coracobrachialis muscle and the short head of biceps brachii reside.",
+   "say": "The medial wall is formed by the upper ribs and the serratus anterior muscle. The narrow lateral wall is formed by the bicipital groove of the humerus, occupied by coracobrachialis and the short head of biceps.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Axillary Boundary",
+     "Forming Muscles / Bones",
+     "Key Neurovascular Relationship",
+     "Surgical Landmark"
+    ],
+    "rows": [
+     [
+      "Apex (Canal)",
+      "Clavicle, 1st rib, upper scapula",
+      "Axillary artery, vein, brachial cords",
+      "Thoracic outlet compression"
+     ],
+     [
+      "Base",
+      "Axillary fascia, skin, dartos",
+      "Suspended by suspensory ligament of Gerdy",
+      "Axillary abscess incision"
+     ],
+     [
+      "Medial Wall",
+      "Ribs 1-4, serratus anterior",
+      "Long thoracic nerve of Bell",
+      "Winged scapula risk in dissection"
+     ],
+     [
+      "Lateral Wall",
+      "Bicipital groove of humerus",
+      "Biceps short head, coracobrachialis",
+      "Musculocutaneous nerve entry"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The main neurovascular bundle of the axilla is enclosed within the **axillary sheath**, a tubular downward fascial extension of the prevertebral layer of deep cervical fascia. The sheath surrounds the axillary artery and the cords of the brachial plexus, but excludes the axillary vein, allowing the vein room to distend during heightened venous return.",
+   "say": "The neurovascular bundle is wrapped within the axillary sheath, a tubular sleeve derived from prevertebral cervical fascia. It encloses the axillary artery and brachial plexus cords, but excludes the axillary vein to allow venous expansion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Axillary Sheath Compartmentalization",
+    "nodes": [
+     {
+      "id": "pre",
+      "label": "Prevertebral Deep Cervical Fascia"
+     },
+     {
+      "id": "sheath",
+      "label": "Tubular Axillary Sheath in Axilla"
+     },
+     {
+      "id": "art",
+      "label": "Encloses Axillary Artery and Plexus Cords"
+     },
+     {
+      "id": "vein",
+      "label": "Axillary Vein Lies Free Anteromedially"
+     }
+    ],
+    "edges": [
+     [
+      "pre",
+      "sheath"
+     ],
+     [
+      "sheath",
+      "art"
+     ],
+     [
+      "sheath",
+      "vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **axillary artery** represents the direct continuation of the subclavian artery at the outer border of the first rib, terminating at the lower border of teres major where it becomes the brachial artery. The pectoralis minor muscle crosses anterior to the artery, conveniently dividing it into three anatomical parts.",
+   "say": "The axillary artery continues from the subclavian artery at the outer border of the first rib, ending at the lower border of teres major as the brachial artery. Pectoralis minor crosses in front, dividing it into three parts.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-modified-radical-mastectomy.webp",
+    "alt": "Pectoralis minor dividing the axillary artery and vein in surgical dissection",
+    "caption": "Axillary vessels and pectoralis minor anatomical division. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The number of branches from each part matches its numerical designation. The first part (proximal to pectoralis minor) gives one branch: the superior thoracic artery. The second part (deep to pectoralis minor) gives two branches: the **thoracoacromial artery** (giving pectoral, acromial, clavicular, and deltoid branches) and the lateral thoracic artery.",
+   "say": "The branches from each part correspond to its number. The first part gives one branch: superior thoracic. The second part gives two: thoracoacromial and lateral thoracic arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Axillary Artery Part",
+     "Relation to Pectoralis Minor",
+     "Number of Branches",
+     "Specific Named Branches"
+    ],
+    "rows": [
+     [
+      "First Part",
+      "Proximal (lateral rib 1 to upper minor)",
+      "One branch",
+      "Superior thoracic artery"
+     ],
+     [
+      "Second Part",
+      "Posterior (deep to pectoralis minor)",
+      "Two branches",
+      "Thoracoacromial and lateral thoracic arteries"
+     ],
+     [
+      "Third Part",
+      "Distal (lower minor to teres major)",
+      "Three branches",
+      "Subscapular, anterior and posterior circumflex humeral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The third part (distal to pectoralis minor) gives three branches: the **subscapular artery**, the anterior circumflex humeral artery, and the posterior circumflex humeral artery. The subscapular artery is the largest branch, dividing into the circumflex scapular artery, which enters the triangular space to form scapular anastomoses, and the thoracodorsal artery.",
+   "say": "The third part gives three branches: subscapular, anterior circumflex humeral, and posterior circumflex humeral arteries. The subscapular is the largest, supplying the circumflex scapular and thoracodorsal arteries.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scapular Anastomosis",
+     "points": [
+      "Suprascapular (from thyrocervical trunk)",
+      "Deep branch of transverse cervical artery",
+      "Circumflex scapular (from subscapular)",
+      "Bypasses axillary block proximal to 3rd part"
+     ]
+    },
+    "right": {
+     "title": "Circumflex Humeral Vessels",
+     "points": [
+      "Anterior circumflex passes around surgical neck",
+      "Posterior circumflex traverses quadrangular space",
+      "Accompanies axillary nerve around humerus",
+      "Vulnerable to fracture of humeral surgical neck"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **axillary vein** lies anteromedial to the axillary artery throughout its course, formed at the lower border of teres major by the union of the basilic vein and the paired venae comitantes of the brachial artery. It receives tributaries corresponding to arterial branches, as well as the cephalic vein piercing the clavipectoral fascia near the apex.",
+   "say": "The axillary vein courses anteromedial to the artery, formed at the lower border of teres major by the union of the basilic vein and brachial venae comitantes. It receives the cephalic vein near the apex of the axilla.",
+   "vis": {
+    "kind": "flow",
+    "title": "Axillary Venous Drainage",
+    "nodes": [
+     {
+      "id": "bas",
+      "label": "Basilic Vein and Brachial Venae"
+     },
+     {
+      "id": "axv",
+      "label": "Axillary Vein Trunk (Anteromedial)"
+     },
+     {
+      "id": "ceph",
+      "label": "Cephalic Vein Enters Clavipectoral Fascia"
+     },
+     {
+      "id": "subc",
+      "label": "Subclavian Vein at Outer 1st Rib"
+     }
+    ],
+    "edges": [
+     [
+      "bas",
+      "axv"
+     ],
+     [
+      "ceph",
+      "axv"
+     ],
+     [
+      "axv",
+      "subc"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

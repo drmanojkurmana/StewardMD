@@ -1,0 +1,276 @@
+{
+  "v": 1,
+  "module": "phm-metabolism-excretion",
+  "subject": "pharmacology",
+  "title": "Cytochrome P450 Monooxygenases, CYP3A4 Dominance, and Microsomal Enzyme Induction",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A superfamily of membrane-bound, haem-thiolate monooxygenase enzymes located predominantly in the smooth endoplasmic reticulum of hepatocytes and intestinal enterocytes constitutes the **cytochrome P450** system. Named for their characteristic spectrophotometric absorbance peak at 450 nanometers when reduced and complexed with carbon monoxide, these enzymes catalyze the Phase I oxidative biotransformation of endogenous steroids, bile acids, and thousands of lipophilic pharmaceutical agents.",
+      "say": "Cytochrome P450 enzymes are haem-thiolate proteins in endoplasmic reticulum that oxidize lipophilic drugs and endogenous steroids.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microsomal CYP enzymes",
+          "points": [
+            "Located in smooth endoplasmic reticulum",
+            "Inducible by xenobiotics and drugs",
+            "Requires molecular O2 and NADPH",
+            "Catalyzes Phase I hydroxylations"
+          ]
+        },
+        "right": {
+          "title": "Non-microsomal enzymes",
+          "points": [
+            "Located in cytosol and mitochondria",
+            "Generally not inducible by xenobiotics",
+            "Include alcohol dehydrogenase and MAO",
+            "Catalyzes hydrolytic and conjugative reactions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The biochemical monooxygenation catalyzed by cytochrome P450 enzymes requires molecular oxygen, magnesium ions, and an electron donor system transferring reducing equivalents from **NADPH**. The membrane-associated flavoprotein NADPH-cytochrome P450 oxidoreductase transfers two electrons sequentially to the central ferric (Fe3+) haem iron. This activates molecular oxygen, inserting one oxygen atom directly into the drug substrate while reducing the second oxygen atom to water.",
+      "say": "NADPH-cytochrome P450 reductase transfers electrons to haem iron, inserting one oxygen atom into the drug while reducing one to water.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "substrate",
+            "label": "Drug substrate binds ferric (Fe3+) CYP enzyme"
+          },
+          {
+            "id": "first_e",
+            "label": "First electron transfer from NADPH reduces iron to ferrous (Fe2+)"
+          },
+          {
+            "id": "o2",
+            "label": "Molecular oxygen (O2) binds ferrous drug-enzyme complex"
+          },
+          {
+            "id": "second_e",
+            "label": "Second electron transfer creates activated iron-oxo complex"
+          },
+          {
+            "id": "product",
+            "label": "One oxygen atom hydroxylates drug; second oxygen forms H2O"
+          }
+        ],
+        "edges": [
+          [
+            "substrate",
+            "first_e"
+          ],
+          [
+            "first_e",
+            "o2"
+          ],
+          [
+            "o2",
+            "second_e"
+          ],
+          [
+            "second_e",
+            "product"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The single most abundant and versatile cytochrome P450 isoenzyme in the human body, accounting for thirty percent of total hepatic CYP content and seventy percent of intestinal CYP expression, is **CYP3A4**. Due to its broad, flexible substrate-binding pocket, CYP3A4 metabolizes more than fifty percent of all commercially available prescription drugs, including statins, calcium channel blockers, macrolide antibiotics, benzodiazepines, and immunosuppressants like cyclosporine and tacrolimus.",
+      "say": "CYP3A4 is the most abundant cytochrome P450 enzyme, metabolizing over half of all clinical prescription drugs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CYP Isoform",
+          "Hepatic CYP percentage",
+          "Prototypical drug substrates",
+          "Diagnostic probe substrate"
+        ],
+        "rows": [
+          [
+            "CYP3A4",
+            "30 percent",
+            "Midazolam, simvastatin, cyclosporine, nifedipine",
+            "Midazolam (1-hydroxylation)"
+          ],
+          [
+            "CYP2D6",
+            "2 to 4 percent",
+            "Metoprolol, codeine, tramadol, amitriptyline",
+            "Dextromethorphan (O-demethylation)"
+          ],
+          [
+            "CYP2C9",
+            "18 percent",
+            "Warfarin (S-isomer), phenytoin, losartan",
+            "Tolbutamide (4-hydroxylation)"
+          ],
+          [
+            "CYP1A2",
+            "13 percent",
+            "Theophylline, caffeine, clozapine, tizanidine",
+            "Caffeine (3-demethylation)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Distinct cytochrome P450 genes exhibit prominent inherited single-nucleotide polymorphisms that divide patient populations into poor, intermediate, extensive, and ultrarapid metabolizers. Genetic variation in **CYP2D6** alters the conversion of codeine to active morphine and dictates the metabolism of beta-blockers and tricyclic antidepressants. Ultrarapid CYP2D6 metabolizers convert codeine rapidly into lethal morphine concentrations, whereas poor metabolizers experience complete analgesia failure. Polymorphisms in CYP2C19 similarly dictate clopidogrel antiplatelet activation.",
+      "say": "Genetic polymorphisms in CYP2D6 cause poor or ultrarapid metabolism of codeine, beta-blockers, and antidepressants.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Poor metabolizers (CYP2D6)",
+          "points": [
+            "Loss-of-function mutant alleles",
+            "Zero codeine conversion to active morphine",
+            "Analgesic failure with codeine and tramadol",
+            "Exaggerated toxicity from metoprolol"
+          ]
+        },
+        "right": {
+          "title": "Ultrarapid metabolizers (CYP2D6)",
+          "points": [
+            "Gene duplication with multiple active copies",
+            "Explosive conversion of codeine to morphine",
+            "Life-threatening respiratory depression in infants",
+            "Subtherapeutic failure with standard antidepressants"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When xenobiotics bind to intracellular nuclear receptors including the Pregnane X Receptor (PXR), Constitutive Androstane Receptor (CAR), and Aryl Hydrocarbon Receptor (AhR), they trigger transcriptional upregulation known as **microsomal enzyme induction**. Nuclear translocation of ligand-receptor complexes promotes transcription of specific CYP genes, accelerating enzyme synthesis over several days to weeks. This increases hepatic metabolic capacity, accelerating the clearance of co-administered substrate drugs.",
+      "say": "Xenobiotics bind nuclear receptors like PXR and CAR to upregulate cytochrome P450 transcription and accelerate clearance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ligand",
+            "label": "Xenobiotic binds cytosolic nuclear receptor (PXR/CAR)"
+          },
+          {
+            "id": "dimer",
+            "label": "Heterodimerizes with Retinoid X Receptor (RXR)"
+          },
+          {
+            "id": "dna",
+            "label": "Binds promoter response elements in CYP3A4 gene"
+          },
+          {
+            "id": "transcription",
+            "label": "Surge in mRNA transcription and de novo CYP translation"
+          },
+          {
+            "id": "clearance",
+            "label": "Multi-fold increase in substrate hepatic clearance"
+          }
+        ],
+        "edges": [
+          [
+            "ligand",
+            "dimer"
+          ],
+          [
+            "dimer",
+            "dna"
+          ],
+          [
+            "dna",
+            "transcription"
+          ],
+          [
+            "transcription",
+            "clearance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A celebrated cohort of pharmacological agents possesses potent enzyme-inducing capabilities across multiple CYP isoforms, summarized clinically by the mnemonic CRAP GPS: Carbamazepine, Rifampicin, Alcohol (chronic), Phenytoin, Griseofulvin, Phenobarbital, and St John's wort. Exposure to **rifampicin** produces the most rapid and potent induction of hepatic CYP3A4, CYP2C9, and P-glycoprotein, reducing circulating levels of oral contraceptives, warfarin, and protease inhibitors within forty-eight hours of starting therapy.",
+      "say": "Potent inducers like rifampicin and carbamazepine accelerate hepatic metabolism of oral contraceptives and warfarin.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-carbamazepine.webp",
+        "alt": "Carbamazepine autoinduction and CYP metabolism",
+        "caption": "Carbamazepine hepatic microsomal enzyme autoinduction profile accelerating cytochrome P450 substrate clearance."
+      }
+    },
+    {
+      "tx": "Accelerated hepatic clearance induced by co-administered drugs leads to dramatic reductions in steady-state plasma concentrations, precipitating devastating therapeutic failures. Concomitant administration of rifampicin or carbamazepine with oral combined contraceptive pills accelerates estrogen and progestin metabolism, leading to breakthrough bleeding and unintended **contraceptive failure**. Similarly, epileptic patients treated with phenytoin require substantially higher maintenance doses of warfarin to achieve target therapeutic anticoagulation.",
+      "say": "Cytochrome P450 induction accelerates estrogen and warfarin metabolism, causing contraceptive failure and loss of anticoagulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Substrate drug alone",
+          "points": [
+            "Normal baseline hepatic metabolic rate",
+            "Stable steady-state plasma concentration",
+            "Maintains target therapeutic efficacy",
+            "Standard recommended clinical dosing"
+          ]
+        },
+        "right": {
+          "title": "Substrate plus CYP inducer",
+          "points": [
+            "Markedly accelerated clearance velocity",
+            "Sharp 50 to 80% collapse in serum concentration",
+            "Loss of therapeutic anticoagulation or contraception",
+            "Requires doubling or tripling of substrate dose"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A perilous clinical pitfall occurs when an enzyme-inducing drug is abruptly discontinued without downward titration of co-administered maintenance pharmaceuticals. Following cessation of the inducer, elevated enzyme levels slowly decay back to baseline over one to three weeks. If maintenance doses of drugs like warfarin or theophylline are not reduced proportionately, the slowing of hepatic metabolism produces dangerous drug accumulation and life-threatening **rebound toxicity**.",
+      "say": "Discontinuing an enzyme inducer slows hepatic clearance back to baseline, causing fatal rebound toxicity if substrate doses are not lowered.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stop",
+            "label": "Enzyme inducer (e.g. rifampicin) abruptly discontinued"
+          },
+          {
+            "id": "decay",
+            "label": "Gradual degradation of excess CYP enzymes over 2 weeks"
+          },
+          {
+            "id": "fall",
+            "label": "Hepatic metabolic clearance slows back to low baseline"
+          },
+          {
+            "id": "accumulate",
+            "label": "Substrate drug (warfarin/theophylline) accumulates in blood"
+          },
+          {
+            "id": "toxic",
+            "label": "Severe hemorrhagic crisis or refractory status epilepticus"
+          }
+        ],
+        "edges": [
+          [
+            "stop",
+            "decay"
+          ],
+          [
+            "decay",
+            "fall"
+          ],
+          [
+            "fall",
+            "accumulate"
+          ],
+          [
+            "accumulate",
+            "toxic"
+          ]
+        ]
+      }
+    }
+  ]
+}

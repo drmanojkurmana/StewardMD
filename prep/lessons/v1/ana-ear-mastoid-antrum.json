@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-ear",
+ "subject": "anatomy",
+ "title": "Mastoid Antrum, Facial Canal, and Inner Ear Labyrinth",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The mastoid antrum is an air-filled cavity situated in the petrous temporal bone behind the middle ear cavity. Present at birth in adult dimensions, the **mastoid antrum** communicates anteriorly with the epitympanic recess of the middle ear through a short aperture termed the aditus ad antrum, and posteroinferiorly with the extensive honeycomb network of mastoid air cells.",
+   "say": "Present at birth in adult size, the mastoid antrum communicates with the middle ear via the aditus ad antrum. It connects posteroinferiorly with the mastoid air cell system.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ossicle-chain.svg",
+    "alt": "Anatomical diagram showing middle ear epitympanic recess, aditus ad antrum, and mastoid air cells",
+    "caption": "Anatomical continuity connecting the middle ear cavity, aditus, and mastoid antrum. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The surgical surface landmark for the mastoid antrum is the suprameatal triangle of Macewen. Bounded by the supramastoid crest superiorly, the posterosuperior margin of the external acoustic meatus anteroinferiorly, and a vertical tangent to the posterior meatal wall, the **suprameatal triangle** overlies the mastoid antrum, which lies approximately 1.5 centimetres deep to the cortical bone in adults.",
+   "say": "The suprameatal triangle of Macewen marks the surface projection of the mastoid antrum. In adults, the antrum lies fifteen millimetres deep to this bony landmark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triangle Boundary",
+     "Anatomical Landmark",
+     "Surgical Cortical Guide"
+    ],
+    "rows": [
+     [
+      "Superior boundary",
+      "Supramastoid crest (posterior root of zygoma)",
+      "Delineates horizontal level of middle cranial fossa floor"
+     ],
+     [
+      "Anteroinferior boundary",
+      "Posterosuperior margin of external acoustic meatus",
+      "Overlies posterosuperior canal wall"
+     ],
+     [
+      "Posterior boundary",
+      "Vertical tangent touching posterior meatal margin",
+      "Drilling posterior to this line risks penetrating the sigmoid sinus"
+     ],
+     [
+      "Depth of mastoid antrum",
+      "12 to 15 mm in adults (only 2 mm in neonates)",
+      "Site of cortical entry during cortical mastoidectomy (Schwartze procedure)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traversing the medial wall of the aditus and mastoid wall of the middle ear is the facial canal, housing the facial nerve (cranial nerve VII). In its intratemporal course, the **facial nerve** passes horizontally between the lateral semicircular canal and oval window, turns downward at the second genu, and descends vertically in the posterior wall of the middle ear to exit at the stylomastoid foramen.",
+   "say": "The facial nerve runs horizontally above the oval window, turns at the second genu, and descends vertically in the posterior middle ear wall toward the stylomastoid foramen.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic tracing intratemporal course of facial nerve through middle ear and mastoid",
+    "caption": "Intratemporal course and landmarks of the facial nerve descending in the posterior tympanic wall. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the facial canal can exhibit congenital dehiscences in up to twenty percent of individuals, suppurative otitis media or cholesteatoma can erode directly onto the nerve trunk. Inflammatory edema within the rigid bony canal causes compression neuropraxia, presenting as acute lower motor neuron **facial paralysis**. Urgent surgical decompression or cortical mastoidectomy is indicated to avert permanent axonal necrosis.",
+   "say": "Bony dehiscences in the facial canal allow middle ear infections to compress the facial nerve. Lower motor neuron facial palsy demands urgent cortical mastoidectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Acute Suppurative Otitis Media (Pus accumulates under tension in middle ear cavity)"
+     },
+     {
+      "id": "o2",
+      "label": "Aditus Spread (Infection cascades posteriorly into mastoid antrum and air cells)"
+     },
+     {
+      "id": "o3",
+      "label": "Facial Canal Erosion (Inflammatory edema compresses dehiscent vertical facial nerve)"
+     },
+     {
+      "id": "o4",
+      "label": "Lower Motor Neuron Facial Palsy (Ipsilateral flaccid facial paralysis requiring emergency mastoidectomy)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The internal ear (labyrinth) is the sensory organ of hearing and balance, embedded within the dense petrous temporal bone. It consists of the bony labyrinth enclosing the **membranous labyrinth**. The bony labyrinth is bathed internally by perilymph (composition similar to extracellular fluid, rich in sodium), whereas the membranous labyrinth is filled with endolymph (rich in potassium, secreted by stria vascularis).",
+   "say": "Embedded in the petrous bone, the inner ear comprises bony and membranous labyrinths. Perilymph surrounds the membranous ducts, which are filled with potassium-rich endolymph.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bony Labyrinth (Perilymph)",
+     "points": [
+      "Consists of vestibule, 3 semicircular canals, and cochlea",
+      "Carved out of dense petrous temporal bone",
+      "Contains perilymph (high Na+, low K+, like CSF)",
+      "Communicates with subarachnoid space via cochlear aqueduct"
+     ]
+    },
+    "right": {
+     "title": "Membranous Labyrinth (Endolymph)",
+     "points": [
+      "Consists of utricle, saccule, semicircular ducts, cochlear duct",
+      "Suspended within the perilymphatic fluid space",
+      "Contains endolymph (low Na+, high K+, like intracellular fluid)",
+      "Secreted by the stria vascularis of the cochlea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The cochlea is the snail shell-shaped auditory organ of the inner ear, coiling two and three-quarter turns around a central conical bony axis termed the modiolus. The lumen is bisected into three spiral fluid channels: the **scala vestibuli** (perilymph, connected to oval window), the scala tympani (perilymph, terminating at round window), and the intervening scala media (cochlear duct, containing endolymph).",
+   "say": "The cochlea coils two and three-quarter turns around the modiolus. It divides into three spiral channels: scala vestibuli, scala tympani, and the central endolymphatic scala media.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Scala Vestibuli (Perilymph channel initiated at oval window by stapes footplate)"
+     },
+     {
+      "id": "c2",
+      "label": "Helicotrema (Narrow apical aperture connecting scala vestibuli to scala tympani at cochlear apex)"
+     },
+     {
+      "id": "c3",
+      "label": "Scala Tympani (Perilymph channel descending to terminate at round window)"
+     },
+     {
+      "id": "c4",
+      "label": "Scala Media / Cochlear Duct (Houses the spiral organ of Corti on the basilar membrane)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c1",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resting upon the basilar membrane within the scala media is the spiral organ of Corti, the neurosensory receptor organ for hearing. Acoustic pressure waves displace perilymph, oscillating the basilar membrane and shearing stereocilia of **inner hair cells** against the overlying tectorial membrane. This mechanical shearing opens potassium channels, depolarizing hair cells to fire the cochlear nerve.",
+   "say": "The organ of Corti rests on the basilar membrane. Fluid vibrations shear hair cell stereocilia against the tectorial membrane, depolarizing cells to fire auditory impulses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inner Ear Sensor",
+     "Labyrinthine Structure",
+     "Specific Mechanical Stimulus Detected"
+    ],
+    "rows": [
+     [
+      "Organ of Corti (hair cells)",
+      "Basilar membrane in cochlea",
+      "High frequencies at cochlear base; low frequencies at apex"
+     ],
+     [
+      "Macula of utricle",
+      "Floor of utricle (otolith membrane)",
+      "Horizontal linear acceleration and head tilt relative to gravity"
+     ],
+     [
+      "Macula of saccule",
+      "Medial wall of saccule",
+      "Vertical linear acceleration (gravity, elevators)"
+     ],
+     [
+      "Crista ampullaris",
+      "Ampullae of semicircular ducts",
+      "Angular rotational acceleration of the head in 3 spatial planes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vestibular apparatus comprises three semicircular canals and the otolith organs (utricle and saccule). The three semicircular canals (anterior, posterior, and lateral) are oriented mutually perpendicular in the three cardinal spatial planes. Each canal features an expanded ampulla containing a **crista ampullaris** embedded in a gelatinous cupula, which registers angular rotational movements of the head.",
+   "say": "Three orthogonal semicircular canals detect angular rotational head movements via cristae ampullares. In contrast, the utricle and saccule detect linear gravitational acceleration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Semicircular Canals (Cristae)",
+     "points": [
+      "Three orthogonal loops (lateral, superior, posterior)",
+      "Ampullary crista with sensory hair cells and cupula",
+      "Stimulated by endolymph flow during angular head rotation",
+      "Guides vestibulo-ocular reflex (VOR) stabilizing gaze"
+     ]
+    },
+    "right": {
+     "title": "Otolith Organs (Maculae)",
+     "points": [
+      "Utricle and saccule in the bony vestibule",
+      "Sensory macula embedded with calcium carbonate otoliths",
+      "Stimulated by gravity and linear acceleration forces",
+      "Dislodged otoconia cause benign paroxysmal positional vertigo"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

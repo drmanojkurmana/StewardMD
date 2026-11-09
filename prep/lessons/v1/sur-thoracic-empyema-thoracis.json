@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-thoracic",
+ "subject": "surgery",
+ "title": "Empyema Thoracis, Chest Drainage and Lung Abscess",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Pus collected in the pleural space, usually after pneumonia, is **empyema thoracis**. Fever persists despite antibiotics and the patient remains septic. Ultrasound or CT confirms the collection and guides drainage position. Pleural fluid below pH 7.2 in a parapneumonic effusion marks a complicated collection that needs a drain, not antibiotics alone.",
+   "say": "Empyema thoracis collects pus in the pleural space after pneumonia and keeps the patient septic.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp",
+    "alt": "Pleural effusion and empyema on chest imaging.",
+    "caption": "Empyema on chest imaging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Stripping the thick fibrous peel trapping the lung so it can re-expand is **decortication**. It is needed when organised empyema prevents lung expansion after drainage. Thoracoscopic approaches now achieve this in many patients. Video assisted surgery earlier, within the first week of failed drainage, shortens hospital stay compared with late open decortication.",
+   "say": "Decortication strips the fibrous peel trapping the lung so it can re-expand fully.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Empyema organises"
+     },
+     {
+      "id": "n1",
+      "label": "Peel traps lung"
+     },
+     {
+      "id": "n2",
+      "label": "Decortication performed"
+     },
+     {
+      "id": "n3",
+      "label": "Lung re-expands"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A tube placed between the ribs to drain the pleural space is an **intercostal chest drain**. It removes pus, fluid or air and lets the lung expand against the chest wall. Correct positioning within the safe triangle avoids vital structures. The safe triangle is bordered by latissimus dorsi, pectoralis major and the fifth intercostal space line, with the drain above the rib.",
+   "say": "An intercostal chest drain removes pus or air through the safe triangle to re-expand lung.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-empyema_thoracis.webp",
+    "alt": "Chronic empyema thoracis physical signs.",
+    "caption": "Empyema thoracis signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Drainage through a water filled bottle that lets air out but not in is **underwater seal drainage**. Swinging of the fluid column confirms the tube connects to the pleural space. Bubbling shows continuing air leak from the lung. Loss of swinging in a drain that should swing suggests a blocked or kinked tube, a bedside check done before any scan.",
+   "say": "Underwater seal drainage lets air escape but not return, and swinging confirms pleural connection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Observation",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Swinging",
+      "Tube in pleural space"
+     ],
+     [
+      "Bubbling",
+      "Air leak present"
+     ],
+     [
+      "No swing",
+      "Blocked or expanded lung"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A pus filled cavity within lung tissue itself is a **lung abscess**. It follows aspiration, especially in patients with poor dentition or reduced consciousness. Prolonged antibiotics cure most, with drainage reserved for failures. Klebsiella and anaerobes dominate after aspiration, and a cavity over 6 centimetres or persistent sepsis after six weeks prompts drainage.",
+   "say": "A lung abscess cavitates lung tissue after aspiration and usually cures with prolonged antibiotics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Empyema",
+     "points": [
+      "Pus in pleural space",
+      "Needs tube drainage",
+      "Outside the lung"
+     ]
+    },
+    "right": {
+     "title": "Lung abscess",
+     "points": [
+      "Pus inside lung tissue",
+      "Antibiotics first",
+      "Inside the lung"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Removal of a lung lobe for cancer or destroyed tissue is **lobectomy**. It removes the tumour with its draining nodes while preserving remaining lung. Fitness testing predicts whether the patient tolerates losing the lobe. Forced expiratory volume under two litres, or predicted postoperative values under 40 percent, push assessment toward exercise testing.",
+   "say": "Lobectomy removes a lung lobe with its nodes while preserving the remaining lung.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tumour localised to lobe"
+     },
+     {
+      "id": "n1",
+      "label": "Fitness tested"
+     },
+     {
+      "id": "n2",
+      "label": "Lobe and nodes removed"
+     },
+     {
+      "id": "n3",
+      "label": "Remaining lung expands"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cancer surgery aims for complete removal with clear margins, termed **lung cancer resection**. Lobectomy is standard for early lung cancer in fit patients. Smaller wedge removals suit frail patients with small peripheral tumours. Stage one non small cell cancer confined to the lobe carries five year survival above 70 percent after complete resection.",
+   "say": "Lung cancer resection removes tumours completely, with lobectomy standard for early disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operation",
+     "Extent"
+    ],
+    "rows": [
+     [
+      "Wedge",
+      "Small peripheral piece"
+     ],
+     [
+      "Lobectomy",
+      "One lobe"
+     ],
+     [
+      "Pneumonectomy",
+      "Whole lung"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empyema progresses through exudative, fibrinopurulent and organising stages, a sequence guiding **stage based treatment**. Early fluid drains easily, fibrin needs tube plus enzymes or thoracoscopy, and organised peel needs decortication. Matching treatment to stage avoids unnecessary major surgery. Intrapleural enzymes, tissue plasminogen activator with DNase, rescue many fibrinopurulent cases and avoid surgery in most.",
+   "say": "Empyema stages guide treatment from simple drainage to decortication for organised peel.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Exudative stage"
+     },
+     {
+      "id": "n1",
+      "label": "Fibrinopurulent stage"
+     },
+     {
+      "id": "n2",
+      "label": "Organising stage"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment escalates stepwise"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent fever a week into pneumonia treatment should trigger a search for **parapneumonic complications**. Empyema is the key diagnosis to exclude. Early drainage at this stage prevents the need for decortication later. A new air fluid level beside the heart border on the chest film often gives the diagnosis before computed tomography.",
+   "say": "Persistent fever during pneumonia treatment should trigger a search for empyema needing drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp",
+    "alt": "Empyema complicating pneumonia on imaging.",
+    "caption": "Parapneumonic empyema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

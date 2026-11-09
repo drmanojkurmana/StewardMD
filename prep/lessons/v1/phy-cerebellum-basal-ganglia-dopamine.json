@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phy-cerebellum-basal-ganglia",
+  "subject": "physiology",
+  "title": "Basal Ganglia Circuitry, Dopamine, and Movement Disorders",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Nigrostriatal dopaminergic projections arising from the substantia nigra pars compacta exert dual regulatory effects on motor execution. Released **striatal dopamine** simultaneously stimulates excitatory D1 receptors on the direct pathway to promote desired movement and inhibits Gi-coupled D2 receptors on the indirect pathway to suppress movement brake circuits.",
+      "say": "Dopamine from the substantia nigra stimulates D1 direct pathways and inhibits D2 indirect pathways.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "snc_burst",
+            "label": "Substantia Nigra Pars Compacta Releases Dopamine into Striatal Synaptic Clefts"
+          },
+          {
+            "id": "d1_stim",
+            "label": "Binds Gs/olf-Coupled D1 Receptors to Excite Direct Striatopallidal Neurons"
+          },
+          {
+            "id": "d2_inhib",
+            "label": "Binds Gi-Coupled D2 Receptors to Inhibit Indirect Striatopallidal Neurons"
+          },
+          {
+            "id": "net_facilitate",
+            "label": "Dual Action Synergistically Enhances Thalamocortical Motor Drive"
+          }
+        ],
+        "edges": [
+          [
+            "snc_burst",
+            "d1_stim"
+          ],
+          [
+            "snc_burst",
+            "d2_inhib"
+          ],
+          [
+            "d1_stim",
+            "net_facilitate"
+          ],
+          [
+            "d2_inhib",
+            "net_facilitate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Selective degeneration of neuromelanin-pigmented dopaminergic neurons in the substantia nigra pars compacta depletes striatal dopamine below a critical eighty percent threshold. The resulting clinical syndrome is **Parkinsonism**, characterized by bradykinesia, muscular rigidity, resting pill-rolling tremor, postural instability, and masked facial expression.",
+      "say": "Degeneration of substantia nigra dopaminergic neurons depletes striatal dopamine, causing Parkinsonism.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Dopaminergic Balance",
+          "points": [
+            "Substantia nigra supplies steady dopamine tone to caudate and putamen",
+            "Balanced excitation of direct pathway and inhibition of indirect loop",
+            "Motor thalamus exhibits permissive responsiveness to cortical initiation",
+            "Voluntary motor sequences execute with normal speed and fluidity"
+          ]
+        },
+        "right": {
+          "title": "Parkinsonian Dopamine Depletion",
+          "points": [
+            "Over 70-80% loss of nigrostriatal dopaminergic projection terminals",
+            "Direct pathway underactivated; indirect pathway hyperactive",
+            "Subthalamic nucleus and GPi deliver massive excessive inhibition",
+            "Severe poverty and slowness of voluntary movements (bradykinesia)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In patients with Parkinsonian hypokinetic disorders, muscle tone increases uniformly throughout both agonist and antagonist muscle groups across passive joint manipulation. Unlike velocity-dependent pyramidal spasticity, **extrapyramidal lead-pipe rigidity** offers uniform resistance throughout the entire range of passive flexion and extension, which breaks into cogwheel rigidity when accompanied by tremor.",
+      "say": "Lead-pipe rigidity gives constant resistance throughout passive joint motion, unlike pyramidal spasticity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lead-Pipe and Cogwheel Rigidity (Basal Ganglia)",
+          "points": [
+            "Equal resistance in both flexor and extensor muscle groups",
+            "Velocity-independent: resistance remains constant regardless of speed",
+            "Present throughout entire arc of passive movement without clasp-knife catch",
+            "Cogwheeling occurs when underlying tremor superimposes on rigidity"
+          ]
+        },
+        "right": {
+          "title": "Clasp-Knife Spasticity (Corticospinal / Pyramidal)",
+          "points": [
+            "Unequal resistance: predilects flexors in arms and extensors in legs",
+            "Velocity-dependent: faster passive stretch evokes stronger resistance",
+            "Initial catch of intense resistance followed by sudden collapse",
+            "Accompanied by hyperreflexia, ankle clonus, and positive Babinski sign"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A characteristic hallmark of nigrostriatal dopamine depletion is a four to six hertz low-frequency involuntary shaking prominent during physical relaxation. This **resting tremor** classically involves rhythmic opposition of the thumb and forefinger resembling pill-rolling, disappearing during purposeful voluntary reaching and during deep sleep.",
+      "say": "Resting tremor is a four to six hertz pill-rolling shaking seen at rest that diminishes with action.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/friedreich-ataxia-fig1.webp",
+        "caption": "Spinal cord and neurodegenerative pathways demonstrating progressive ataxia and motor system impairment.",
+        "alt": "Degenerative neuropathy and spinocerebellar tract loss"
+      }
+    },
+    {
+      "tx": "Autosomal dominant trinucleotide CAG repeat expansion in the huntingtin gene causes selective early degeneration of GABAergic and enkephalinergic medium spiny neurons within the caudate and putamen. The loss of indirect pathway inhibition produces **chorea**, manifested as involuntary, continuous, rapid, jerky, dance-like purposeless movements that flow unpredictably from one muscle group to another.",
+      "say": "Huntington disease destroys indirect pathway striatal neurons, causing rapid dance-like chorea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/drug-induced-chorea-fig1.webp",
+        "caption": "Chorea: basal ganglia circuitry and drug-induced chorea. [Credit: StewardMD]",
+        "alt": "Chorea: basal ganglia circuitry and drug-induced chorea."
+      }
+    },
+    {
+      "tx": "Ischemic, kernicteric, or perinatal hypoxic damage targeting the putamen and globus pallidus results in a distinctive hyperkinetic movement disorder characterized by slow, continuous, writhing involuntary movements. This condition is **athetosis**, typically affecting distal extremities such as the fingers, hands, toes, and facial musculature, producing grotesque twisting postures.",
+      "say": "Athetosis consists of slow, writhing, twisting involuntary movements of distal limbs from putamen damage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "striatal_damage",
+            "label": "Perinatal Hypoxia or Bilateral Putaminal Lesions Disrupt Striatopallidal Relays"
+          },
+          {
+            "id": "imbalanced_drive",
+            "label": "Fluctuating Co-Contraction of Opposing Agonist and Antagonist Distal Muscles"
+          },
+          {
+            "id": "writhing_wave",
+            "label": "Sinuous Writhing Movements Wave Continually Through Fingers, Hands, and Lips"
+          },
+          {
+            "id": "grotesque_posture",
+            "label": "Transitions Between Hyperextension and Flexion, Accentuated During Stress"
+          }
+        ],
+        "edges": [
+          [
+            "striatal_damage",
+            "imbalanced_drive"
+          ],
+          [
+            "imbalanced_drive",
+            "writhing_wave"
+          ],
+          [
+            "writhing_wave",
+            "grotesque_posture"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unilateral vascular occlusion of the posterior cerebral or posteromedial choroidal artery causing an acute ischemic lacunar stroke within the subthalamic nucleus of Luys produces violent motor releases. Designated **hemiballismus**, the patient experiences wild, flinging, wide-amplitude, involuntary throwing movements of the contralateral arm and leg.",
+      "say": "Hemiballismus is violent flinging of contralateral limbs caused by a subthalamic nucleus stroke.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stn_stroke",
+            "label": "Lacunar Stroke or Hemorrhage Destroys Unilateral Subthalamic Nucleus of Luys"
+          },
+          {
+            "id": "loss_excitation",
+            "label": "Abolishes Glutamatergic Drive to Ipsilateral Internal Globus Pallidus"
+          },
+          {
+            "id": "gpi_collapse",
+            "label": "Internal Globus Pallidus Fails to Provide Tonic GABAergic Thalamic Clamp"
+          },
+          {
+            "id": "violent_release",
+            "label": "Uninhibited Thalamus Drives Wild Flinging Movements of Contralateral Limbs"
+          }
+        ],
+        "edges": [
+          [
+            "stn_stroke",
+            "loss_excitation"
+          ],
+          [
+            "loss_excitation",
+            "gpi_collapse"
+          ],
+          [
+            "gpi_collapse",
+            "violent_release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Surgical management of medically refractory Parkinsonism or severe dystonia utilizes high-frequency electrical stimulation delivered to deep basal ganglia targets. Applied to the subthalamic nucleus or internal globus pallidus, **deep brain stimulation** jams pathological synchronous beta-band oscillations, restoring fluid physiological thalamocortical transmission.",
+      "say": "Deep brain stimulation jams pathological beta oscillations in the subthalamic nucleus, relieving parkinsonian symptoms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subthalamic Nucleus DBS Target",
+          "points": [
+            "Primary target for idiopathic Parkinson disease with motor fluctuations",
+            "Suppresses pathological synchronized 13-30 Hz beta oscillations",
+            "Significantly reduces required daily levodopa equivalent dosages",
+            "Substantially alleviates tremor, rigidity, and off-medication bradykinesia"
+          ]
+        },
+        "right": {
+          "title": "Internal Globus Pallidus DBS Target",
+          "points": [
+            "Primary target for generalized dystonia and severe drug-induced dyskinesia",
+            "Suppresses hyperactive GPi inhibitory volleys directly at output station",
+            "Directly abolishes peak-dose levodopa-induced choreiform dyskinesia",
+            "Preferred in patients with mild cognitive impairment or mood vulnerability"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

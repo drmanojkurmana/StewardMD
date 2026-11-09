@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sur-gallbladder",
+ "subject": "surgery",
+ "title": "Acute Cholecystitis and Tokyo Guidelines",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Persistent mechanical impaction of a gallstone within the gallbladder neck or cystic duct initiates the syndrome of **acute cholecystitis**. Unlike transient biliary colic, prolonged ductal obstruction causes luminal distension, mucosal ischaemia, and secondary chemical inflammation mediated by lysolecithin. Within forty-eight hours, secondary bacterial contamination by gut-derived organisms such as Escherichia coli and Klebsiella species supervenes.",
+   "say": "Acute cholecystitis arises from sustained cystic duct impaction, producing mucosal ischemia, chemical inflammation, and secondary bacterial infection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholecystitis-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating persistent cystic duct stone impaction, mucosal ischemia, and bacterial overgrowth in acute cholecystitis.",
+    "caption": "Acute calculous cholecystitis: cystic duct impaction driving transmural inflammation and secondary bacterial invasion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients present with continuous right upper quadrant pain lasting more than six hours, accompanied by low-grade fever, anorexia, nausea, and vomiting. Physical examination elicits exquisite focal tenderness and involuntary muscle guarding beneath the right costal margin. Pathognomonic inspiratory arrest on deep palpation of the right upper quadrant as the inflamed gallbladder touches the examiner hand is designated as **Murphy sign**.",
+   "say": "Murphy sign is the arrest of inspiration during deep right upper quadrant palpation as the tender descending gallbladder hits the examining fingers.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-cholecystitis_signs.webp",
+    "alt": "Clinical illustration showing technique of eliciting Murphy sign and areas of cutaneous hyperaesthesia in acute cholecystitis.",
+    "caption": "Eliciting Murphy sign: inspiratory arrest during deep palpation of the right hypochondrium in acute cholecystitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic sensitivity of clinical examination is enhanced during real-time ultrasound examination by eliciting a sonographic Murphy sign. A positive sonographic sign occurs when maximal focal tenderness is pinpointed precisely when the ultrasound transducer compresses the visualized gallbladder directly. Additional classic sonographic hallmarks include gallbladder wall thickening exceeding four millimetres, mural striation, and pericholecystic **fluid collections**.",
+   "say": "Ultrasound confirms acute cholecystitis by identifying maximal probe tenderness directly over the gallbladder, wall thickening over four millimetres, and pericholecystic fluid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ultrasound Finding",
+     "Pathological Basis",
+     "Diagnostic Value"
+    ],
+    "rows": [
+     [
+      "Sonographic Murphy sign",
+      "Direct peritoneal irritation over fundus",
+      "Most specific single ultrasound sign"
+     ],
+     [
+      "Wall thickening > 4 mm",
+      "Submucosal oedema and inflammation",
+      "Highly sensitive for acute transmural inflammation"
+     ],
+     [
+      "Pericholecystic fluid halo",
+      "Exudation of inflammatory fluid",
+      "Indicates severe inflammation or microperforation"
+     ],
+     [
+      "Impacted neck calculus",
+      "Mechanical cystic duct obstruction",
+      "Identifies the underlying trigger mechanism"
+     ],
+     [
+      "Gallbladder hydrops",
+      "Luminal distension > 4 cm diameter",
+      "Confirms tense closed-loop ductal occlusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Global standardization in the diagnosis and severity stratification of acute cholecystitis is provided by the international **Tokyo guidelines**. The diagnostic criteria incorporate local signs of inflammation, systemic signs of inflammation, and confirmatory imaging findings. Definite diagnosis requires at least one local sign such as Murphy sign, one systemic sign such as fever or elevated C-reactive protein, and positive sonographic confirmation.",
+   "say": "Tokyo guidelines classify the diagnosis using local inflammation signs, systemic inflammatory response, and confirmatory radiological features.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "local",
+      "label": "Local Inflammation: Murphy Sign, RUQ Mass / Pain"
+     },
+     {
+      "id": "systemic",
+      "label": "Systemic Inflammation: Fever, High CRP, Leukocytosis"
+     },
+     {
+      "id": "imaging",
+      "label": "Imaging Confirmation: Gallbladder Wall > 4 mm, Fluid"
+     },
+     {
+      "id": "diag",
+      "label": "Definite Tokyo Guidelines Diagnosis Established"
+     }
+    ],
+    "edges": [
+     [
+      "local",
+      "diag"
+     ],
+     [
+      "systemic",
+      "diag"
+     ],
+     [
+      "imaging",
+      "diag"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Tokyo guidelines categorize acute cholecystitis into three prognostic grades that guide immediate surgical therapy. Grade one mild cholecystitis features no organ dysfunction and limited inflammatory changes. Grade two moderate cholecystitis is characterized by elevated leukocytosis above eighteen thousand, a palpable tender mass, disease duration exceeding seventy-two hours, or marked local inflammation including gangrene or abscess. Grade three severe cholecystitis is defined by **organ dysfunction**.",
+   "say": "Tokyo guidelines classify disease into grade one mild, grade two moderate with marked local inflammation, and grade three severe with organ dysfunction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Grade",
+     "Defining Criteria",
+     "Primary Treatment Strategy"
+    ],
+    "rows": [
+     [
+      "Grade I (Mild)",
+      "No organ dysfunction, mild local changes",
+      "Early laparoscopic cholecystectomy"
+     ],
+     [
+      "Grade II (Moderate)",
+      "WBC >18,000, duration >72h, gangrene, phlegmon",
+      "Urgent early laparoscopic cholecystectomy"
+     ],
+     [
+      "Grade III (Severe)",
+      "Cardiovascular, neurological, renal or hepatic failure",
+      "Organ support + percutaneous cholecystostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In grade three severe acute cholecystitis, organ dysfunction can involve cardiovascular collapse requiring dopamine or norepinephrine, neurological disturbance, respiratory failure with PaO2/FiO2 ratio below three hundred, renal impairment with serum creatinine above two, hepatic coagulopathy with INR above 1.5, or thrombocytopenia below one hundred thousand. These critically ill patients cannot tolerate general anaesthesia and require immediate decompression via percutaneous **cholecystostomy**.",
+   "say": "Grade three cholecystitis involves dysfunction of cardiovascular, respiratory, renal, or coagulation systems, requiring emergency percutaneous drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Grade I / II Management",
+     "points": [
+      "Early laparoscopic cholecystectomy",
+      "Perform within 72 hours of admission",
+      "Lower overall hospital stay and costs",
+      "Direct surgical cure of stone disease"
+     ]
+    },
+    "right": {
+     "title": "Grade III Management",
+     "points": [
+      "Intensive care resuscitation",
+      "Emergency percutaneous cholecystostomy",
+      "Defer surgery until organ recovery",
+      "Avoids catastrophic operative mortality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For grade one and manageable grade two cholecystitis, the definitive treatment is early **laparoscopic cholecystectomy** performed within seventy-two hours of clinical presentation. Operating during the early oedematous phase exploits natural anatomical tissue planes before dense fibrous scar tissue matures. Extensive clinical trials prove that early cholecystectomy significantly reduces total hospital stay and avoids the substantial readmission hazard linked to conservative interval surgery.",
+   "say": "Early laparoscopic cholecystectomy within seventy-two hours of symptom onset provides superior clinical outcomes compared with delayed interval surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "admit",
+      "label": "Hospital Admission & Fluid Resuscitation"
+     },
+     {
+      "id": "antibiotic",
+      "label": "Intravenous Antibiotics (Ceftriaxone + Metronidazole)"
+     },
+     {
+      "id": "lap",
+      "label": "Early Laparoscopic Cholecystectomy (< 72 Hours)"
+     },
+     {
+      "id": "discharge",
+      "label": "Rapid Postoperative Recovery & Early Discharge"
+     }
+    ],
+    "edges": [
+     [
+      "admit",
+      "antibiotic"
+     ],
+     [
+      "antibiotic",
+      "lap"
+     ],
+     [
+      "lap",
+      "discharge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In critically unwell or elderly frail patients suffering from advanced cholecystitis with sepsis or uncorrectable organ dysfunction, ultrasound-guided transhepatic **percutaneous cholecystostomy** serves as an indispensable life-saving bridge. By placing a drainage pigtail catheter directly into the gallbladder lumen, purulent bile is evacuated, rapidly breaking the septic cycle. Following clinical stabilization, definitive elective surgery can be considered weeks later.",
+   "say": "Percutaneous cholecystostomy rapidly drains infected purulent bile under ultrasound guidance, stabilizing septic patients unfit for immediate surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Transhepatic Route",
+     "Transperitoneal Route"
+    ],
+    "rows": [
+     [
+      "Puncture Path",
+      "Traverses bare liver bed directly into gallbladder",
+      "Traverses free peritoneal cavity into fundus"
+     ],
+     [
+      "Bile Leak Hazard",
+      "Extremely low (liver parenchymal seal)",
+      "Higher risk of free biliary peritonitis"
+     ],
+     [
+      "Catheter Stability",
+      "Excellent (anchored in liver tissue)",
+      "Moderate (prone to dislodgement)"
+     ],
+     [
+      "Coagulopathy Caution",
+      "Requires normal platelets and INR",
+      "Permissible if liver capsule spared"
+     ]
+    ]
+   }
+  }
+ ]
+}

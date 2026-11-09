@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-general-anaesthetics",
+  "subject": "pharmacology",
+  "title": "Uptake and Distribution: Blood Gas Partition Coefficient, Second Gas Effect, Propofol and Thiopentone",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **blood gas partition coefficient** states how much anaesthetic blood soaks up at equilibrium relative to gas: high values (halothane 2.4) mean blood acts as a sponge, alveolar tension climbs slowly and induction dawdles; low values (desflurane 0.42, nitrous oxide 0.47) mean blood saturates quickly, alveolar tension chases the dial and induction and emergence sprint. This single number predicts speed better than potency, which MAC measures separately.",
+      "say": "Solubility is speed: sponges are slow, desflurane and nitrous oxide barely dissolve and therefore hurry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low solubility, fast agents",
+          "points": [
+            "Desflurane 0.42 and nitrous oxide 0.47",
+            "Sevoflurane 0.65 close behind",
+            "Alveolar tension tracks inspired tension rapidly",
+            "Emergence as fast as induction"
+          ]
+        },
+        "right": {
+          "title": "Higher solubility, slower agents",
+          "points": [
+            "Isoflurane 1.4, halothane 2.4",
+            "Blood and tissues sponge up agent for longer",
+            "Induction and washout both prolonged",
+            "Fat stores matter after long administrations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Alveolar tension** is pulled by three taps and drains: inspired concentration and ventilation fill it, cardiac output carrying agent away to tissues empties it. High cardiac output therefore slows induction by hauling agent off (diluting the rise), while shock accelerates inhaled induction dangerously for the same reason in reverse. Children induce faster through high ventilation relative to functional residual capacity, a physiological detail hiding inside many an examination stem.",
+      "say": "Ventilation fills the alveolus, cardiac output empties it; shock and childhood both speed induction for opposite reasons.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inspire",
+            "label": "Inspired concentration and alveolar ventilation raise FA"
+          },
+          {
+            "id": "output",
+            "label": "Cardiac output removes agent to tissues, lowering FA rise"
+          },
+          {
+            "id": "brain",
+            "label": "Brain tension follows arterial tension with a short lag"
+          },
+          {
+            "id": "depth",
+            "label": "Anaesthetic depth tracks brain tension"
+          }
+        ],
+        "edges": [
+          [
+            "inspire",
+            "brain"
+          ],
+          [
+            "output",
+            "brain"
+          ],
+          [
+            "brain",
+            "depth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High volume nitrous oxide uptake early in induction concentrates whatever volatile shares its alveoli and accelerates the volatile's own uptake, the **second gas effect**. As litres of nitrous oxide leave the alveolus for blood, the remaining gas concentrates (concentration effect) and fresh inflow rushes to replace the volume. The phenomenon is real, measurable and clinically modest, yet examinations adore it as proof that uptake physics, not magic, drives induction speed.",
+      "say": "Nitrous oxide vacates the alveolus in litres and drags its volatile partner in faster behind it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n2o",
+            "label": "70 percent nitrous oxide floods the alveolus"
+          },
+          {
+            "id": "uptake",
+            "label": "Rapid nitrous uptake concentrates remaining gases"
+          },
+          {
+            "id": "inflow",
+            "label": "Tracheal inflow surges to replace absorbed volume"
+          },
+          {
+            "id": "second",
+            "label": "Volatile alveolar tension rises faster: second gas effect"
+          }
+        ],
+        "edges": [
+          [
+            "n2o",
+            "uptake"
+          ],
+          [
+            "uptake",
+            "inflow"
+          ],
+          [
+            "inflow",
+            "second"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When nitrous oxide stops, the river reverses: nitrous pours from blood back into alveoli faster than oxygen arrives by ventilation, diluting alveolar oxygen and producing **diffusion hypoxia** (Fink effect) for the first minutes of recovery. Giving 100 percent oxygen for several minutes at discontinuation is the standing antidote. The same physics explains nitrous expanding closed air spaces during administration from the previous lesson; one diffusion gradient, two examination questions.",
+      "say": "Stopping nitrous dilutes alveolar oxygen with returning gas; oxygen for the first minutes is the antidote.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diffusion hypoxia sequence",
+          "points": [
+            "Nitrous oxide discontinued at case end",
+            "Blood nitrous floods alveoli down its gradient",
+            "Alveolar oxygen diluted despite normal ventilation",
+            "Saturation dips in the first 5 to 10 minutes"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "100 percent oxygen for several minutes on stopping",
+            "Continue monitoring into recovery",
+            "Particular care with limited respiratory reserve",
+            "Explains part of early postoperative desaturation audits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intravenous induction swaps alveolar physics for redistribution physics: a bolus of **propofol** or thiopentone reaches brain in one arm brain circulation time, peaks, then drains into muscle and fat so the patient wakes from redistribution, not elimination. Repeat doses or infusions saturate those sinks and waking waits for true clearance, the context sensitive half time concept. This is why a single thiopentone bolus wakes in minutes while its elimination half life stretches past ten hours.",
+      "say": "Bolus patients wake by redistribution, infusion patients by clearance; the sink fills and the rules change.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+        "alt": "General anaesthesia sites of action diagram for inhaled and intravenous agents",
+        "caption": "Shared sites of action for the intravenous induction agents whose redistribution pharmacokinetics this lesson describes."
+      }
+    },
+    {
+      "tx": "**Propofol**, a GABA A positive modulator formulated in lipid emulsion, owns modern induction and maintenance (total intravenous anaesthesia) and intensive care sedation: smooth onset in 30 to 40 seconds, antiemetic at subhypnotic doses, rapid clear headed emergence. Its bills are pain on injection, dose dependent vasodilatation and respiratory depression, hypertriglyceridaemia with prolonged infusion, and the rare lethal propofol infusion syndrome of acidosis, rhabdomyolysis and cardiac failure in long high dose infusions, especially in children.",
+      "say": "Propofol is smooth, antiemetic and clear headed, paid for in pressure, injection pain and a rare infusion syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Propofol virtues",
+          "points": [
+            "Induction in one arm brain circulation time",
+            "Antiemetic even at subhypnotic doses",
+            "Rapid, clear headed recovery suits day surgery",
+            "Total intravenous anaesthesia and ICU sedation roles"
+          ]
+        },
+        "right": {
+          "title": "Propofol hazards",
+          "points": [
+            "Pain on injection, vasodilatation and hypotension",
+            "Apnoea on induction, airway skills assumed",
+            "Lipid load: pancreatitis risk in prolonged infusion",
+            "Propofol infusion syndrome: rare, metabolic, lethal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Thiopentone**, the barbiturate induction veteran, shares redistribution awakening and adds its own signatures: histamine release, myocardial depression, guaranteed apnoea, tissue necrosis on extravasation and catastrophe on accidental intra arterial injection, and absolute contraindication in acute porphyrias because it induces ALA synthase and precipitates attacks. Accumulation on repeat dosing (the old rectal and infusion uses) hangs patients over for hours, which propofol's clearance profile was invented to escape.",
+      "say": "Thiopentone wakes by redistribution and accumulates by repetition; porphyria bans it outright.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bolus",
+            "label": "Thiopentone bolus reaches brain within seconds"
+          },
+          {
+            "id": "redist",
+            "label": "Redistribution to muscle and fat wakes the patient"
+          },
+          {
+            "id": "repeat",
+            "label": "Repeat doses saturate sinks: prolonged hangover"
+          },
+          {
+            "id": "porph",
+            "label": "Porphyria: ALA synthase induction precipitates crisis"
+          }
+        ],
+        "edges": [
+          [
+            "bolus",
+            "redist"
+          ],
+          [
+            "redist",
+            "repeat"
+          ],
+          [
+            "bolus",
+            "porph"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tissue solubility** writes the recovery tail of volatiles too: after hours of halothane or isoflurane, fat reservoirs release agent for a day, while desflurane's negligible solubility empties in minutes regardless of case length. Obese patients and long cases magnify the difference, which is precisely the clinical niche desflurane's manufacturers priced. Emergence planning, like induction, is partition coefficients all the way down.",
+      "say": "Long cases and large fat stores expose solubility; desflurane leaves when the dial says so.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fast washout profile",
+          "points": [
+            "Desflurane and sevoflurane: minutes to emergence",
+            "Little fat reservoir after any case length",
+            "Chosen for obesity and rapid turnover lists",
+            "Early neurological assessment after neurosurgery"
+          ]
+        },
+        "right": {
+          "title": "Slow washout profile",
+          "points": [
+            "Halothane and isoflurane linger from fat stores",
+            "Prolonged sedation after long administrations",
+            "Recovery staffing planned accordingly",
+            "Cost and environmental factors now argue against routine use"
+          ]
+        }
+      }
+    }
+  ]
+}

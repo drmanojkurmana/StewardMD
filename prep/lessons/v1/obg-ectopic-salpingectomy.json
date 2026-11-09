@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "obg-ectopic",
+ "subject": "obstetrics-gynaecology",
+ "title": "Salpingectomy, Arias-Stella, Heterotopic and Scar Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Removal of the affected fallopian tube with the ectopic pregnancy is **salpingectomy**. It is preferred when the tube is ruptured, badly damaged or the other tube is healthy. Future fertility remains good with one healthy tube. Laparoscopy is the usual route, and the tube is removed from fimbria to cornu to leave no stump for recurrence.",
+   "say": "Salpingectomy removes the affected tube and fertility stays good with one healthy tube.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-ectopic-pregnancy-surgeries.webp",
+    "alt": "Ectopic pregnancy surgical procedures.",
+    "caption": "Ectopic surgery. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Exaggerated glandular changes in the endometrium under ectopic hormonal influence form the **Arias-Stella reaction**. Pathologists see hyperchromatic, enlarged nuclei in endometrial glands. Its presence without villi supports ectopic pregnancy historically, though ultrasound now leads diagnosis. Finding villi in curettings makes ectopic unlikely, while this reaction without villi once prompted the search.",
+   "say": "The Arias-Stella reaction shows exaggerated endometrial glands under ectopic hormone influence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Site"
+    ],
+    "rows": [
+     [
+      "Arias-Stella change",
+      "Endometrium"
+     ],
+     [
+      "Decidua without villi",
+      "Curettage specimen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simultaneous intrauterine and extrauterine pregnancies together form **heterotopic pregnancy**. It is rare naturally but rises sharply with assisted conception. Seeing an intrauterine sac must never end the search for a second ectopic in these women. In IVF pregnancies the rate reaches about one in a hundred, so both sites are scanned even after an intrauterine sac is seen.",
+   "say": "Heterotopic pregnancy combines intrauterine and ectopic gestation, rising with assisted conception.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Assisted conception history"
+     },
+     {
+      "id": "n1",
+      "label": "Intrauterine sac seen"
+     },
+     {
+      "id": "n2",
+      "label": "Adnexa still examined"
+     },
+     {
+      "id": "n3",
+      "label": "Second ectopic excluded"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Implantation in the cervix below the internal os is **cervical ectopic** pregnancy. It bleeds torrentially if disturbed by curettage. Methotrexate, balloon tamponade and uterine artery embolisation preserve the uterus in stable cases. Hourglass uterus on examination, bulging laterally at the cervix, is the shape described in textbooks.",
+   "say": "Cervical ectopic bleeds torrentially if disturbed and needs uterus preserving strategies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cervical ectopic",
+     "points": [
+      "Below internal os",
+      "Massive bleed risk",
+      "Preserve uterus if stable"
+     ]
+    },
+    "right": {
+     "title": "Inevitable abortion",
+     "points": [
+      "Products through os",
+      "History of pain",
+      "Evacuation standard"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Implantation into a previous caesarean scar defect is **caesarean scar pregnancy**. The thin scar risks rupture and morbidly adherent placenta if pregnancy continues. Early diagnosis allows methotrexate or surgical options before catastrophe. An eccentric sac with a thin myometrial mantle under 5 millimetres on scan is the warning picture.",
+   "say": "Caesarean scar pregnancy implants in the scar defect and risks rupture if continuing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ectopic-pregnancy-fig1.webp",
+    "alt": "Scar and cervical ectopic locations.",
+    "caption": "Unusual ectopic sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Choosing tube removal over conservation depends on the other tube and future plans, a **fertility centred decision**. With a healthy contralateral tube, salpingectomy and salpingostomy give similar subsequent pregnancy rates. Conservation wins only when the other tube is compromised. Trial data show cumulative pregnancy rates near 60 percent within two years by either operation when the other tube is healthy.",
+   "say": "Fertility centred choice favours conservation only when the other tube is compromised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Other tube",
+     "Preferred"
+    ],
+    "rows": [
+     [
+      "Healthy",
+      "Either, salpingectomy simpler"
+     ],
+     [
+      "Damaged or absent",
+      "Salpingostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent trophoblast after conservative surgery is detected by plateauing hormone, termed **persistent ectopic**. About one in ten salpingostomies are affected. Methotrexate treats most without further surgery. One dose of methotrexate resolves most persistent cases, so weekly hCG after salpingostomy is not optional.",
+   "say": "Persistent ectopic after salpingostomy shows plateauing hormone and responds to methotrexate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Salpingostomy done"
+     },
+     {
+      "id": "n1",
+      "label": "Weekly hCG followed"
+     },
+     {
+      "id": "n2",
+      "label": "Plateau detected"
+     },
+     {
+      "id": "n3",
+      "label": "Methotrexate given"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interstitial and cornual pregnancies may need wedge resection of the uterine cornu, an operation of **cornual resection**. Medical treatment succeeds in early stable cases increasingly. Late rupture of these remains among the deadliest ectopic events. Future pregnancies after cornual resection are usually delivered by caesarean because the scar can rupture in labour.",
+   "say": "Cornual resection treats interstitial pregnancies, whose late rupture is among the deadliest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early stable",
+     "points": [
+      "Methotrexate possible",
+      "Close surveillance",
+      "Uterus preserved"
+     ]
+    },
+    "right": {
+     "title": "Ruptured",
+     "points": [
+      "Cornual resection",
+      "Major haemorrhage",
+      "Hysterectomy possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After any ectopic, future pregnancy planning includes early location scanning, termed **recurrence counselling**. Recurrence risk is about one in ten. Contraception until hormone resolution and folate optimisation complete the advice. The first scan in the next pregnancy is booked at six weeks to prove the sac sits inside the uterus.",
+   "say": "Recurrence counselling plans early location scanning in every future pregnancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Ectopic resolved"
+     },
+     {
+      "id": "n1",
+      "label": "Contraception until negative"
+     },
+     {
+      "id": "n2",
+      "label": "Folate optimised"
+     },
+     {
+      "id": "n3",
+      "label": "Early scan next pregnancy"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

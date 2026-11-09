@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "obg-gtd",
+ "subject": "obstetrics-gynaecology",
+ "title": "Invasive Mole, Choriocarcinoma and Placental Site Tumour",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Molar villi invading deeply into myometrium and vessels form an **invasive mole**. It almost always follows a molar pregnancy and rarely spreads beyond the pelvis. Chemotherapy cures it while preserving fertility in nearly all cases. It can perforate through the uterus into the broad ligament or peritoneum and bleed internally.",
+   "say": "Invasive mole grows molar villi into myometrium and cures with chemotherapy preserving fertility.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-trophoblastic-disease-and-choriocarcinoma-fig1.webp",
+    "alt": "Invasive molar histology.",
+    "caption": "Invasive mole histology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A malignant trophoblast tumour without villi, spreading early through blood, is **choriocarcinoma**. It can follow mole, miscarriage, term pregnancy or ectopic gestation. Haemorrhagic metastases to lung, vagina and brain are characteristic. Half follow a mole, a quarter a miscarriage or ectopic, and a quarter a normal term delivery.",
+   "say": "Choriocarcinoma spreads early through blood without villi to lung, vagina and brain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/choriocarcinoma-fig1.webp",
+    "alt": "Choriocarcinoma clinical pathway.",
+    "caption": "Choriocarcinoma pathway. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Round cannonball deposits in the lungs on chest imaging are **cannonball metastases**. They are the commonest metastatic presentation of choriocarcinoma. Despite their dramatic appearance, they melt away with chemotherapy remarkably. Lung deposits are counted on chest X ray for staging, not by their size on computed tomography.",
+   "say": "Cannonball metastases fill the lungs in choriocarcinoma yet melt with chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "Lung",
+      "Commonest"
+     ],
+     [
+      "Vagina",
+      "Common"
+     ],
+     [
+      "Brain and liver",
+      "Poor prognosis signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rare slow tumour of intermediate trophoblast producing mainly placental lactogen is **placental site trophoblastic tumour**. Hormone levels are low relative to tumour bulk, and chemotherapy resistance is typical. Hysterectomy is the mainstay for uterine confined disease. It arises from the placental bed, grows slowly, and may declare years after the causative pregnancy.",
+   "say": "Placental site tumour produces little hormone, resists chemotherapy, and needs hysterectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Choriocarcinoma",
+     "points": [
+      "Very high hCG",
+      "Chemo sensitive",
+      "Blood spread"
+     ]
+    },
+    "right": {
+     "title": "Placental site tumour",
+     "points": [
+      "Low hCG",
+      "Chemo resistant",
+      "Surgery mainstay"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaginal metastases are highly vascular and must never be biopsied, a rule of **no vaginal biopsy**. Biopsy can unleash uncontrollable haemorrhage. Diagnosis rests on hormone levels and imaging instead. Imaging and hCG make the diagnosis, and a vaginal deposit that bleeds is packed, never excised in haste.",
+   "say": "Vaginal metastases must never be biopsied because uncontrollable haemorrhage can follow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Vaginal nodule seen"
+     },
+     {
+      "id": "n1",
+      "label": "Biopsy avoided absolutely"
+     },
+     {
+      "id": "n2",
+      "label": "hCG and imaging used"
+     },
+     {
+      "id": "n3",
+      "label": "Chemotherapy treats"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gestational trophoblastic neoplasia is staged anatomically from uterus confined to distant spread, termed **FIGO staging**. Stage combines with the prognostic score to choose single or multi agent chemotherapy. This dual system is unique to this disease. Stage one is uterus confined, stage two extends to other genital structures, stage three reaches lung, stage four all other sites.",
+   "say": "FIGO staging plus prognostic score together choose chemotherapy intensity in this disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Extent"
+    ],
+    "rows": [
+     [
+      "One",
+      "Uterus only"
+     ],
+     [
+      "Two",
+      "Genital structures"
+     ],
+     [
+      "Three",
+      "Lungs"
+     ],
+     [
+      "Four",
+      "Brain or liver"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain metastases need intrathecal or high dose systemic methotrexate within **multi agent regimens**. Whole brain radiation is now largely avoided. Even stage four disease cures in most women treated at specialist centres. Intrathecal methotrexate is given with each EMA block in many protocols for brain disease.",
+   "say": "Brain metastases use high dose methotrexate regimens, and most stage four disease still cures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
+    "alt": "Trophoblastic disease staging imaging.",
+    "caption": "Trophoblastic staging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hysterectomy retains a role for chemo resistant uterine disease and uncontrolled bleeding, termed **salvage surgery**. It also suits older women who have completed families with uterus confined disease. Fertility sparing remains default for the young. Placental site tumours are the exception where hysterectomy cures more patients than chemotherapy does.",
+   "say": "Salvage surgery with hysterectomy treats chemo resistant uterine disease and uncontrolled bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Young, fertility wanted",
+     "points": [
+      "Chemotherapy first",
+      "Uterus preserved",
+      "Surgery last resort"
+     ]
+    },
+    "right": {
+     "title": "Family complete",
+     "points": [
+      "Hysterectomy option",
+      "Shortens chemotherapy",
+      "Uterine disease only"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cure is declared after sustained normal hormone with surveillance continuing for years, called **remission follow up**. Late relapses are rare but described, especially after high risk disease. Pregnancy after chemotherapy usually proceeds normally. Pregnancy is deferred for a year after chemotherapy ends, and later pregnancies need early scanning and hCG after delivery.",
+   "say": "Remission follow up continues for years, and pregnancy after chemotherapy usually proceeds normally.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "hCG normal sustained"
+     },
+     {
+      "id": "n1",
+      "label": "Surveillance continues yearly"
+     },
+     {
+      "id": "n2",
+      "label": "Pregnancy allowed after interval"
+     },
+     {
+      "id": "n3",
+      "label": "Normal outcomes expected"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

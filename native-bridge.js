@@ -492,6 +492,9 @@
             if (!current()) return;
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
+            // Ranked alternatives, when the caller wants them (opts.onMatches): the native side already
+            // sends up to maxResults matches; onPartial above keeps the first for existing callers.
+            if (opts.onMatches && data && data.matches && data.matches.length) { try { opts.onMatches(data.matches.map(String)); } catch (e) {} }
           });
           self._modeSub = SP.addListener("recognitionMode", function (data) {
             if (!current()) return;
@@ -516,7 +519,7 @@
             }
           });
         }
-        var startOpts = { language: opts.language || navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 };
+        var startOpts = { language: opts.language || navigator.language || "en-US", partialResults: opts.partialResults !== false, popup: false, maxResults: opts.maxResults || 5 };
         if (opts.onDevice === "prefer" || opts.onDevice === "require") startOpts.onDevice = opts.onDevice;
         self.lastSpeechMode = null;
         return SP.start(startOpts);

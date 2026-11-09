@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-committees-policies-bhore-committee",
+  "subject": "community-medicine",
+  "module": "cm-committees-policies",
+  "title": "Health Committees, National Health Policies, and Five Year Plans",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Bhore Committee 1946: the foundation",
+      "tx": "The **Bhore Committee (Health Survey and Development Committee, 1946)** blueprinted Indian health services: integration of preventive and curative care at all levels, primary health centres as the system base (long term vision of one per ten to twenty thousand population staffed generously), three months social medicine training ideas, and the famous dictum that no individual should fail to secure adequate medical care for inability to pay.",
+      "say": "Bhore in 1946 demanded integrated preventive and curative care through primary health centres. It remains the system's founding blueprint.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Bhore recommendation", "Legacy"],
+        "rows": [
+          ["Integrate prevention and cure", "PHC based system design"],
+          ["Primary health centres nationwide", "Short and long term PHC plans"],
+          ["Adequate care regardless of paying capacity", "Equity principle of public services"],
+          ["Social medicine in training", "Community medicine departments"]
+        ]
+      }
+    },
+    {
+      "title": "Mudaliar Committee 1962: consolidation",
+      "tx": "The **Mudaliar Committee (Health Survey and Planning Committee, 1962)** found Bhore's primary centres weak in quality and urged consolidation over expansion: strengthen existing PHCs and district hospitals before multiplying units, create an All India Health Service on the civil service pattern, and cap each PHC at forty thousand population with improved staffing, beds, and referral support.",
+      "say": "Mudaliar said strengthen before spreading: better PHCs and district hospitals first, plus an All India Health Service.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bhore 1946 (expansion)",
+          "points": ["Build PHC network from scratch", "Integration as founding principle", "Generous long term staffing vision"]
+        },
+        "right": {
+          "title": "Mudaliar 1962 (consolidation)",
+          "points": ["Improve quality of existing units", "PHC population capped at 40000", "All India Health Service proposed"]
+        }
+      }
+    },
+    {
+      "title": "Chadha Committee 1963: malaria vigilance",
+      "tx": "The **Chadha Committee (1963)** reorganised malaria maintenance phase work: basic health workers (one per ten thousand population) would combine malaria vigilance with family planning and vital statistics, visiting homes monthly. It planted the multipurpose worker idea that later committees harvested, and its monthly home visit rhythm still echoes in community worker schedules today.",
+      "say": "Chadha gave one worker per ten thousand malaria vigilance plus family planning on monthly home visits. Multipurpose work starts here.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ch1", "label": "Basic health worker per 10000 population" },
+          { "id": "ch2", "label": "Monthly home visits for vigilance" },
+          { "id": "ch3", "label": "Malaria plus family planning plus statistics" }
+        ],
+        "edges": [["ch1", "ch2"], ["ch2", "ch3"]]
+      }
+    },
+    {
+      "title": "Mukerji and Jungalwalla committees",
+      "tx": "The **Mukerji Committee (1965 to 1966)** separated family planning staff from malaria work after Chadha's combination overloaded both, while the Jungalwalla Committee (Committee on Integration of Health Services, 1967) attacked divided cadres: unified cadre, common seniority, equal pay for equal work, and abolition of private practice by government doctors with compensatory allowances. Integration returned as the theme, now inside the workforce.",
+      "say": "Mukerji unmixed family planning from malaria; Jungalwalla unified cadres and opposed private practice by government doctors.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Committee (year)", "Signature recommendation"],
+        "rows": [
+          ["Mukerji (1965-66)", "Separate family planning from malaria work"],
+          ["Jungalwalla (1967)", "Unified cadre, no private practice"],
+          ["Kartar Singh (1973)", "Multipurpose workers, ANM and MPW structure"],
+          ["Shrivastav (1975)", "Community health volunteers (Jan Swasthya Rakshak)"]
+        ]
+      }
+    },
+    {
+      "title": "Kartar Singh and Shrivastav committees",
+      "tx": "The **Kartar Singh Committee (1973)** converted vertical programme workers into multipurpose workers under health supervisors (the ANM and MPW architecture India still runs), while the Shrivastav Committee (Group on Medical Education and Support Manpower, 1975) proposed community health volunteers chosen by the community itself (the Jan Swasthya Rakshak, ancestor of the ASHA idea) and referral services linking village to medical college.",
+      "say": "Kartar Singh created multipurpose workers; Shrivastav imagined community chosen volunteers, the ASHA's grandfather.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kartar Singh 1973",
+          "points": ["Multipurpose workers replace vertical staff", "Health supervisors per worker group", "PHC serves 50000 with subcentres"]
+        },
+        "right": {
+          "title": "Shrivastav 1975",
+          "points": ["Community health volunteers proposed", "Referral complex to medical colleges", "Reorientation of medical education (ROME)"]
+        }
+      }
+    },
+    {
+      "title": "National Health Policy 1983 and 2002",
+      "tx": "The **National Health Policy 1983** (post Alma Ata) promised health for all by 2000 through primary health care, decentralisation, and community participation, while the 2002 policy pivoted to equity, private sector roles, and disease eradication timelines. Both set normative direction without statutory force, a limitation policy questions probe by contrasting policy (guiding statement) with legislation and five year plan allocations.",
+      "say": "The 1983 policy chased health for all through primary care. Policies guide but do not legislate; plans allocate the money.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "np1", "label": "Alma Ata 1978: primary health care" },
+          { "id": "np2", "label": "NHP 1983: health for all direction" },
+          { "id": "np3", "label": "Plans and budgets attempt delivery" }
+        ],
+        "edges": [["np1", "np2"], ["np2", "np3"]]
+      }
+    },
+    {
+      "title": "National Health Policy 2017",
+      "tx": "The **National Health Policy 2017** targets universal health coverage through publicly financed primary care: raise public health expenditure to two point five percent of GDP by 2025, strengthen health and wellness centres for comprehensive primary care, assure free drugs, diagnostics, and emergency services, cut catastrophic health spending, and use strategic purchasing from private providers where public capacity gaps persist.",
+      "say": "The 2017 policy promises two point five percent of GDP for health and comprehensive primary care at wellness centres.",
+      "vis": {
+        "kind": "table",
+        "cols": ["NHP 2017 commitment", "Target"],
+        "rows": [
+          ["Public health spending", "2.5 percent of GDP by 2025"],
+          ["Primary care", "Health and wellness centres upgraded"],
+          ["Financial protection", "Cut catastrophic out of pocket spending"],
+          ["Mortality goals", "Aligned with SDG 2030 timelines"]
+        ]
+      }
+    },
+    {
+      "title": "Five year plans and NITI Aayog",
+      "tx": "Health entered development planning through the **five year plans** (1951 onward), which allocated sector funds era by era (malaria and family planning heavy early plans, minimum needs later), until the Planning Commission gave way to NITI Aayog in 2015 with cooperative federalism, three year action agendas, and SDG monitoring. States now carry primary health financing responsibility, with Finance Commission health grants supplementing local bodies.",
+      "say": "Five year plans funded health eras; NITI Aayog replaced the Planning Commission in 2015 with federal, SDG framed planning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Planning Commission era",
+          "points": ["Five year plans allocated sector funds", "Top down plan transfers to states", "1951 to 2014, twelve plans"]
+        },
+        "right": {
+          "title": "NITI Aayog era",
+          "points": ["From 2015, cooperative federalism", "Action agendas and SDG indices", "States lead health financing"]
+        }
+      }
+    },
+    {
+      "title": "Committee chronology: the memory spine",
+      "tx": "Committees return in examinations as pure chronology, so fix the spine for **health committees of India**: Bhore 1946, Mudaliar 1962, Chadha 1963, Mukerji 1965, Jungalwalla 1967, Kartar Singh 1973, Shrivastav 1975, then the Bajaj and other education committees later. Anchor each to one signature phrase (integration, consolidation, vigilance, separation, unified cadre, multipurpose, volunteers) and the dates follow the logic.",
+      "say": "Bhore, Mudaliar, Chadha, Mukerji, Jungalwalla, Kartar Singh, Shrivastav. One signature phrase each locks the chronology.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "cc1", "label": "1946 Bhore integration, 1962 Mudaliar quality" },
+          { "id": "cc2", "label": "1963 Chadha, 1965 Mukerji, 1967 Jungalwalla" },
+          { "id": "cc3", "label": "1973 Kartar Singh, 1975 Shrivastav" }
+        ],
+        "edges": [["cc1", "cc2"], ["cc2", "cc3"]]
+      }
+    }
+  ]
+}

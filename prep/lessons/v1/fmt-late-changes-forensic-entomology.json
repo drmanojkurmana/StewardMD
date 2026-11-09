@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-late-changes-forensic-entomology",
+ "subject": "forensic-medicine",
+ "module": "fmt-late-changes",
+ "title": "Forensic Entomology, Skeletonisation and Postmortem Artefacts",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Flies find the body within minutes",
+   "tx": "House flies such as Musca domestica lay **pearly white eggs on the fresh corpse** within minutes of death, sometimes even during the agonal period. Each sitting deposits about 120 to 150 eggs, each near one millimetre long. Favoured sites are shaded natural openings and wound margins: between the lips, in the nostrils, eyelids, ears, genitalia and the ground to body interface. Once skin decay begins, eggs appear anywhere on the surface.",
+   "say": "Flies lay over a hundred tiny white eggs in shaded openings and wounds within minutes of death.",
+   "vis": {"kind": "table", "cols": ["Egg laying detail", "Finding", "Use at the scene"], "rows": [["Egg appearance", "Pearly white, about 1 mm", "Confirms fly access to the body"], ["Eggs per sitting", "About 120 to 150", "Heavy clusters mark openings"], ["First sites", "Lips, nostrils, eyelids, wounds", "Check wound margins closely"], ["Timing", "Minutes after death", "Starts the entomology clock"]]}
+  },
+  {
+   "title": "Maggots hatch and tunnel through tissue",
+   "tx": "In summer the eggs hatch in 8 to 24 hours into **maggot larvae** that crawl inside and release powerful proteolytic enzymes. They burrow under the skin, cut tunnels and sinuses, and let air and bacteria in, which hastens putrefaction. A maggot measures one to two millimetres at birth and about twelve millimetres when full grown. Unusually heavy maggot masses on one area can point to a pre-existing wound at that site.",
+   "say": "Maggots hatch within a day in summer, tunnel through tissue, and their heaviest cluster can betray a hidden wound.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Eggs hatch in 8 to 24 hours"}, {"id": "b", "label": "Tiny larvae enter openings and wounds"}, {"id": "c", "label": "Enzymes liquefy soft tissue"}, {"id": "d", "label": "Tunnels admit air and bacteria"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Pupae and the full fly life cycle",
+   "tx": "Fed larvae become dark brown barrel shaped **pupae** of about six millimetres in three to six days, and adult flies emerge from them in a further three to six days. The complete cycle from egg to adult takes five to six days in summer and eight to twenty days in winter. Finding empty pupal cases therefore sets a minimum interval that no amount of refrigeration history can shorten below the insect evidence.",
+   "say": "The egg to adult cycle needs five to six summer days, so empty pupal cases prove at least that much time.",
+   "vis": {"kind": "table", "cols": ["Stage", "Size", "Summer timing"], "rows": [["Egg", "About 1 mm", "Laid within minutes"], ["Larva or maggot", "Grows to about 12 mm", "Hatches in 8 to 24 hours"], ["Pupa", "About 6 mm, barrel shaped", "Forms in 3 to 6 days"], ["Adult fly", "Winged", "Emerges in 3 to 6 more days"]]}
+  },
+  {
+   "title": "Reading insect stages as a clock",
+   "tx": "The examiner records the oldest insect stage present, because **the oldest stage sets the minimum postmortem interval**. Eggs only means hours; large maggots without pupae means days counted from hatching; pupae push the floor higher still. Temperature drives development, so the same stage means a longer interval in winter. Body lice, incidentally, survive three to six days on a corpse and say nothing precise about timing.",
+   "say": "Date the body by its oldest insect stage and adjust for season, since cold stretches every stage out.",
+   "vis": {"kind": "compare", "left": {"title": "Shorter interval clues", "points": ["Eggs without larvae", "Small maggots under 5 mm", "No pupal cases found", "Flies still arriving"]}, "right": {"title": "Longer interval clues", "points": ["Full grown 12 mm maggots", "Dark barrel pupae present", "Empty pupal cases", "Second fly generation active"]}}
+  },
+  {
+   "title": "Washerwoman hands from immersion",
+   "tx": "Prolonged contact with water swells and bleaches the thick skin of palms and soles into **washerwoman hands**, with sodden wrinkled epidermis. After two to four days of immersion that epidermis can peel off as a cast of the hand or foot. The change proves immersion, not drowning by itself, because any body lying in water develops it. It also destroys fingerprint ridges if the cast is lost, so preserve the peeled skin.",
+   "say": "Sodden wrinkled palms prove time in water rather than drowning, and the peeled glove of skin still carries prints.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Skin soaks in water for hours"}, {"id": "b", "label": "Palms and soles wrinkle and bleach"}, {"id": "c", "label": "Epidermis peels as a cast in days"}, {"id": "d", "label": "Preserve cast for fingerprinting"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Postmortem blisters, purge and other artefacts",
+   "tx": "Gas pressure raises fluid filled **postmortem bullae** between epidermis and dermis at 18 to 24 hours, first on the dependent trunk and thighs where hypostatic oedema collects fluid. They lack the red inflamed base of antemortem burns. The same pressure drives froth from the mouth, prolapses the anus or uterus in two to three days and can even expel a fetus, events that must be recorded as artefacts, never as injuries.",
+   "say": "Putrefaction blisters have no inflamed base, and gas driven prolapse or delivery after death is artefact, not trauma.",
+   "vis": {"kind": "table", "cols": ["Artefact", "Mechanism", "Mistaken for"], "rows": [["Postmortem bullae", "Gas lifts the epidermis", "Antemortem burns"], ["Mouth and nose froth", "Gas purge under pressure", "Bleeding from injury"], ["Skin slippage", "Epidermis shears off dermis", "Scalds or abrasion"], ["Postmortem delivery", "Gas expels the fetus", "Delivery before death"]]}
+  },
+  {
+   "title": "Ant bites and animal activity as mimics",
+   "tx": "Ants erode the superficial skin at moist folds and mucocutaneous junctions, leaving **ant bite erosions** with minute irregular margins around eyelids, nostrils, mouth, ears, axillae and groins. A hand lens shows multiple crescent shaped sand like bites separated by normal skin, with no vital reaction. Rats, dogs, fish and crabs also gnaw bodies. Naming these artefacts correctly prevents a false charge built on postmortem damage alone.",
+   "say": "Crescent shaped ant erosions at moist folds lack any vital reaction, so they must not be read as assault marks.",
+   "vis": {"kind": "compare", "left": {"title": "Ant erosion clues", "points": ["Moist folds and junctions", "Crescent bites, normal skin between", "No bleeding or vital reaction", "Minute irregular margins"]}, "right": {"title": "True abrasion clues", "points": ["Any exposed contact site", "Continuous scraped surface", "Scab and vital reaction present", "Direction lines from friction"]}}
+  },
+  {
+   "title": "Skeletonisation and its timelines",
+   "tx": "When soft tissue is stripped away completely, **skeletonisation** remains, and its speed depends on heat, humidity, insects and scavengers. In a hot humid setting with heavy insect activity an exposed corpse can skeletonise within a few days, helped by flies, ants, cockroaches, rats, dogs and vultures. In water, fish and crabs do the same work. An uncoffined body buried in India is usually reduced to a skeleton within about a year.",
+   "say": "Exposed bodies can skeletonise in days under insects and scavengers, while buried uncoffined bodies take about a year.",
+   "vis": {"kind": "table", "cols": ["Setting", "Agents at work", "Rough timeline"], "rows": [["Exposed in hot climate", "Flies, ants, rats, vultures", "A few days possible"], ["Immersed in water", "Fish and crustacea", "A few days possible"], ["Shallow burial", "Soil organisms, delayed access", "Months"], ["Deep or coffined burial", "Exclusion of air and animals", "A year to decades"]]}
+  },
+  {
+   "title": "Bone decay after the soft tissue is gone",
+   "tx": "Bone itself decays slowly because most of it is inorganic, so the skeleton crumbles rather than rots away in **late skeletal change**. Neutral soil may preserve bones almost indefinitely, acidic soil can destroy them in about 25 to 100 years, and bones lying on hot ground may decay in five to ten years. Flat bones and the bones of infants and the old break down fastest, a point used when dating old burials.",
+   "say": "Bones crumble over years to a century depending on soil acidity, with flat and infant bones going first.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Soft tissue disappears"}, {"id": "b", "label": "Disarticulation runs head downwards"}, {"id": "c", "label": "Protein fraction of bone decays"}, {"id": "d", "label": "Mineral skeleton crumbles last"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,256 @@
+{
+    "v": 1,
+    "id": "rad-xray-thermionic-emission",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "X-ray Generation: Thermionic Emission and Radiation Spectra",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Thermionic Emission Process",
+            "tx": "**Thermionic electron emission** occurs when electric current passing through the tungsten filament heats it to roughly 2200 degrees Celsius. Thermal agitation gives outer metallic valence electrons sufficient kinetic energy to overcome the surface work function barrier of 4.5 electron volts. Once freed from the metallic lattice, liberated electrons hover momentarily as a concentrated electron cloud immediately adjacent to the incandescent wire.",
+            "say": "Thermionic electron emission occurs when electric current passing through the tungsten filament heats it to roughly 2200 degrees Celsius. Thermal agitation gives outer metallic valence electrons sufficient kinetic energy to overcome the surface work function barrier of 4.5 electron volts. Once freed from the metallic lattice, liberated electrons hover momentarily as a concentrated electron cloud immediately adjacent to the incandescent wire.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Filament current 3 to 6 A heats wire"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Thermal energy overcomes 4.5 eV barrier"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Electrons boil off into space charge cloud"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Space Charge Phenomenon",
+            "tx": "**Space charge saturation** represents an electrostatic equilibrium where accumulated negative charges in the cloud repel newly freed electrons back toward the filament. At low tube voltages below 40 kilovolts, this mutual repulsion restricts the tube current, creating the space-charge limited region. Increasing the tube potential accelerates these electrons toward the anode, eventually reaching saturation voltage where all emitted electrons cross the gap.",
+            "say": "Space charge saturation represents an electrostatic equilibrium where accumulated negative charges in the cloud repel newly freed electrons back toward the filament. At low tube voltages below 40 kilovolts, this mutual repulsion restricts the tube current, creating the space-charge limited region. Increasing the tube potential accelerates these electrons toward the anode, eventually reaching saturation voltage where all emitted electrons cross the gap.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Space-Charge Limited Zone",
+                    "points": [
+                        "Occurs at low tube potentials below 40 kVp",
+                        "Repulsion in electron cloud restricts current",
+                        "Tube current rises steeply with added voltage"
+                    ]
+                },
+                "right": {
+                    "title": "Saturation Voltage Zone",
+                    "points": [
+                        "Established at normal diagnostic kilovoltages",
+                        "All liberated electrons pulled across to anode",
+                        "Tube current controlled solely by filament temperature"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Bremsstrahlung Deceleration Physics",
+            "tx": "**Bremsstrahlung deceleration radiation** produces the vast majority of X-ray photons used in medical diagnostics. When high-velocity cathode electrons penetrate target tungsten atoms, they pass close to the powerfully positive nucleus. Electrostatic Coulomb forces attract and deflect the incoming electron, slowing it down. The kinetic energy lost during this abrupt deceleration is instantly radiated outward as a continuous-spectrum X-ray photon.",
+            "say": "Bremsstrahlung deceleration radiation produces the vast majority of X-ray photons used in medical diagnostics. When high-velocity cathode electrons penetrate target tungsten atoms, they pass close to the powerfully positive nucleus. Electrostatic Coulomb forces attract and deflect the incoming electron, slowing it down. The kinetic energy lost during this abrupt deceleration is instantly radiated outward as a continuous-spectrum X-ray photon.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Fast electron approaches positive nucleus"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Coulomb force bends and decelerates electron"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Lost kinetic energy emitted as X-ray photon"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Continuous Spectrum Profile",
+            "tx": "**Continuous X-ray spectrum** profiles generated by bremsstrahlung exhibit a broad distribution of photon energies. The maximum photon energy corresponds precisely to the peak tube potential applied across the electrodes, representing a rare direct collision with a target nucleus. However, most electrons undergo glancing deflections, producing an average beam energy approximately one-third to one-half of the peak kilovoltage.",
+            "say": "Continuous X-ray spectrum profiles generated by bremsstrahlung exhibit a broad distribution of photon energies. The maximum photon energy corresponds precisely to the peak tube potential applied across the electrodes, representing a rare direct collision with a target nucleus. However, most electrons undergo glancing deflections, producing an average beam energy approximately one-third to one-half of the peak kilovoltage.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Spectral Feature",
+                    "Energy Relationship",
+                    "Diagnostic Relevance"
+                ],
+                "rows": [
+                    [
+                        "Maximum Energy (E-max)",
+                        "Equals peak tube potential (kVp)",
+                        "Determined by shortest Duane-Hunt wavelength"
+                    ],
+                    [
+                        "Average Beam Energy",
+                        "Roughly one-third to one-half of kVp",
+                        "Represents effective penetrability of polyenergetic beam"
+                    ],
+                    [
+                        "Low-Energy Trough",
+                        "Under 20 kiloelectron volts",
+                        "Filtered out by inherent and added aluminium"
+                    ],
+                    [
+                        "Total Bremsstrahlung Share",
+                        "80 to 90 percent of total beam",
+                        "Forms background continuous radiographic spectrum"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Characteristic Emission Mechanism",
+            "tx": "**Characteristic X-ray emission** occurs through discrete inner-shell electron ionisation. When an incident projectile electron carries kinetic energy exceeding 69.5 kiloelectron volts, it can knock an orbital K-shell electron entirely out of a tungsten atom. An outer shell electron immediately drops down to occupy the vacant inner orbital, releasing a discrete photon with energy equal to the exact difference between the two shell binding energies.",
+            "say": "Characteristic X-ray emission occurs through discrete inner-shell electron ionisation. When an incident projectile electron carries kinetic energy exceeding 69.5 kiloelectron volts, it can knock an orbital K-shell electron entirely out of a tungsten atom. An outer shell electron immediately drops down to occupy the vacant inner orbital, releasing a discrete photon with energy equal to the exact difference between the two shell binding energies.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Incident electron ejects K-shell electron"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Outer orbital electron falls into K-shell vacancy"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Characteristic discrete energy photon emitted"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Tungsten Characteristic Lines",
+            "tx": "**K-shell characteristic lines** appear as sharp monochromatic spikes superimposed upon the continuous bremsstrahlung curve. For a tungsten target, an L-to-K orbital transition produces K-alpha photons with energies of approximately 58 to 59 kiloelectron volts. Transitions from the M-shell into the K-shell produce K-beta photons near 67 kiloelectron volts, appearing only when applied tube potential exceeds the 69.5-kilovolt K-edge threshold.",
+            "say": "K-shell characteristic lines appear as sharp monochromatic spikes superimposed upon the continuous bremsstrahlung curve. For a tungsten target, an L-to-K orbital transition produces K-alpha photons with energies of approximately 58 to 59 kiloelectron volts. Transitions from the M-shell into the K-shell produce K-beta photons near 67 kiloelectron volts, appearing only when applied tube potential exceeds the 69.5-kilovolt K-edge threshold.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Transition Line",
+                    "Orbital Origin to Destination",
+                    "Emitted Photon Energy"
+                ],
+                "rows": [
+                    [
+                        "K-alpha 1",
+                        "L3 shell to K shell",
+                        "59.3 kiloelectron volts"
+                    ],
+                    [
+                        "K-alpha 2",
+                        "L2 shell to K shell",
+                        "57.9 kiloelectron volts"
+                    ],
+                    [
+                        "K-beta 1",
+                        "M3 shell to K shell",
+                        "67.2 kiloelectron volts"
+                    ],
+                    [
+                        "K-beta 2",
+                        "N shell to K shell",
+                        "69.1 kiloelectron volts"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Kilovoltage Spectral Alterations",
+            "tx": "**Kilovoltage spectral modulation** shifts both the position and height of the emitted X-ray spectrum. Raising the peak kilovoltage increases the kinetic velocity of cathode electrons, expanding the maximum photon energy and shifting the spectral peak toward shorter, more penetrating wavelengths. Simultaneously, total photon quantity increases roughly in proportion to the square of the tube potential.",
+            "say": "Kilovoltage spectral modulation shifts both the position and height of the emitted X-ray spectrum. Raising the peak kilovoltage increases the kinetic velocity of cathode electrons, expanding the maximum photon energy and shifting the spectral peak toward shorter, more penetrating wavelengths. Simultaneously, total photon quantity increases roughly in proportion to the square of the tube potential.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Effect on Beam Quality",
+                    "points": [
+                        "Increases maximum photon energy ceiling",
+                        "Shifts spectral peak toward higher energies",
+                        "Enhances half-value layer and tissue penetration"
+                    ]
+                },
+                "right": {
+                    "title": "Effect on Beam Quantity",
+                    "points": [
+                        "Output intensity increases with kVp squared",
+                        "More electrons exceed the 69.5 keV K-edge",
+                        "Substantially amplifies characteristic peak spikes"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Production Efficiency Constraints",
+            "tx": "**X-ray production efficiency** remains remarkably low in medical diagnostic tubes, calculated as efficiency equals a constant of ten to the minus nine multiplied by target atomic number and applied voltage. In clinical ranges between 70 and 100 kilovolts, less than 1 percent of electron kinetic energy converts to diagnostic photons, while the remaining 99 percent dissipates into anode heat.",
+            "say": "X-ray production efficiency remains remarkably low in medical diagnostic tubes, calculated as efficiency equals a constant of ten to the minus nine multiplied by target atomic number and applied voltage. In clinical ranges between 70 and 100 kilovolts, less than 1 percent of electron kinetic energy converts to diagnostic photons, while the remaining 99 percent dissipates into anode heat.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Energy Outcome",
+                    "Percentage of Input Energy",
+                    "Physical Destiny"
+                ],
+                "rows": [
+                    [
+                        "Useful X-ray Photons",
+                        "Under 1 percent",
+                        "Transmitted through port to image patient anatomy"
+                    ],
+                    [
+                        "Thermal Energy",
+                        "Over 99 percent",
+                        "Transferred to anode disc and cooling oil bath"
+                    ],
+                    [
+                        "Leakage Radiation",
+                        "Trace fraction",
+                        "Absorbed by lead shielding lining tube housing"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "Chemokine Families, Endothelial Nitric Oxide, and Leukocyte Homing",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Chemokines represent a vast superfamily of small eight- to ten-kilodalton structurally homologous cytokines that function primarily as chemoattractants for specific leukocyte subsets. Possessing conserved cysteine residues that form internal disulfide bonds, **chemokines direct leukocyte trafficking** during homeostatic immune surveillance and recruit inflammatory cells to sites of injury.",
+      "say": "Chemokines are small structural proteins with conserved cysteines that direct leukocyte trafficking.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inflammatory Chemokines",
+          "points": [
+            "Induced transcriptionally by TNF, IL-1, and microbial endotoxins",
+            "Attract neutrophils, monocytes, and effector lymphocytes to injury",
+            "Examples: CXCL8 (IL-8), CCL2 (MCP-1), CCL3 (MIP-1-alpha)",
+            "Concentrated locally by binding endothelial heparan sulfate chains"
+          ]
+        },
+        "right": {
+          "title": "Homeostatic Chemokines",
+          "points": [
+            "Constitutively produced within lymphoid and non-lymphoid tissues",
+            "Regulate baseline physiological leukocyte and lymphocyte migration",
+            "Direct naive T and B lymphocytes to distinct zones in lymph nodes",
+            "Examples: CXCL12 (SDF-1) for stem cells, CCL19/CCL21 for T-cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chemokines are classified into four distinct structural families based on the arrangement of their amino-terminal cysteine residues. In the **CXC chemokine family**, the first two cysteines are separated by an intervening amino acid, exemplified by interleukin-eight (CXCL8), which specifically activates and recruits neutrophils to acute pyogenic inflammatory foci.",
+      "say": "CXC chemokines have cysteines separated by an amino acid, exemplified by neutrophil-attracting CXCL8.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "macrophage_cxcl8",
+            "label": "Tissue Macrophages Encountering Bacteria Secrete CXCL8 (Interleukin-8)"
+          },
+          {
+            "id": "endothelial_display",
+            "label": "Binds Heparan Sulfate on Luminal Endothelium, Creating Solid-Phase Gradient"
+          },
+          {
+            "id": "cxcr1_binding",
+            "label": "Rolling Neutrophils Engage CXCR1 and CXCR2 G-Protein-Coupled Receptors"
+          },
+          {
+            "id": "neutrophil_homing",
+            "label": "Activates Integrins and Directs Rapid Chemotactic Transmigration"
+          }
+        ],
+        "edges": [
+          [
+            "macrophage_cxcl8",
+            "endothelial_display"
+          ],
+          [
+            "endothelial_display",
+            "cxcr1_binding"
+          ],
+          [
+            "cxcr1_binding",
+            "neutrophil_homing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the CC chemokine family, the first two amino-terminal cysteines are directly adjacent without an intervening residue. Members including **monocyte chemoattractant protein-1 (CCL2)**, macrophage inflammatory protein-one alpha, and eotaxin (CCL11) specifically attract monocytes, eosinophils, basophils, and lymphocytes rather than neutrophils.",
+      "say": "CC chemokines have adjacent cysteines that recruit monocytes, eosinophils, and lymphocytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CXC Chemokines (Alpha Subfamily)",
+          "points": [
+            "First two cysteines separated by one amino acid (C-X-C)",
+            "Act predominantly on neutrophils (if containing ELR sequence)",
+            "Major prototype is CXCL8 (interleukin-8)",
+            "Drives rapid neutrophilic consolidation in bacterial infections"
+          ]
+        },
+        "right": {
+          "title": "CC Chemokines (Beta Subfamily)",
+          "points": [
+            "First two cysteines are directly adjacent (C-C motif)",
+            "Act on monocytes, lymphocytes, eosinophils, and basophils",
+            "Prototypes: CCL2 (MCP-1), CCL5 (RANTES), CCL11 (eotaxin)",
+            "Drives chronic mononuclear infiltration, atherosclerosis, and allergy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A soluble, highly diffusible free radical gas synthesized from L-arginine by nitric oxide synthases modulates multiple microvascular events in inflammation. Synthesized by endothelial cells, **endothelial nitric oxide (NO)** diffuses into underlying vascular smooth muscle cells, activating soluble guanylyl cyclase to elevate cyclic GMP and induce profound arteriolar relaxation.",
+      "say": "Endothelial nitric oxide elevates cyclic GMP in vascular smooth muscle, causing profound vasodilation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "enos_activation",
+            "label": "Shear Stress or Histamine Activates Endothelial Nitric Oxide Synthase (eNOS)"
+          },
+          {
+            "id": "no_diffusion",
+            "label": "Synthesizes Paracrine Gas Nitric Oxide (NO) from Substrate L-Arginine"
+          },
+          {
+            "id": "guanylyl_cyclase",
+            "label": "NO Diffuses into Vascular Smooth Muscle, Activating Soluble Guanylyl Cyclase"
+          },
+          {
+            "id": "cgmp_relaxation",
+            "label": "Elevated Cyclic GMP Activates Protein Kinase G, Inducing Vasodilation"
+          }
+        ],
+        "edges": [
+          [
+            "enos_activation",
+            "no_diffusion"
+          ],
+          [
+            "no_diffusion",
+            "guanylyl_cyclase"
+          ],
+          [
+            "guanylyl_cyclase",
+            "cgmp_relaxation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under resting baseline conditions, continuous basal endothelial nitric oxide production functions as an endogenous anti-inflammatory safeguard. By inducing vascular smooth muscle relaxation and preventing leukocyte sticking, baseline NO **inhibits leukocyte adhesion to endothelium**, suppresses platelet aggregation, and actively scavenges reactive oxygen species in resting microvessels.",
+      "say": "Baseline endothelial nitric oxide relaxes vessels and inhibits leukocyte adhesion and platelet aggregation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/atherosclerosis-hypertension-and-aneurysms-fig1.webp",
+        "caption": "Endothelial dysfunction displaying loss of protective nitric oxide signaling and accelerated atherogenesis.",
+        "alt": "Arterial endothelial dysfunction with impaired nitric oxide and accelerated plaque formation"
+      }
+    },
+    {
+      "tx": "When macrophages and endothelial cells are stimulated by microbial lipopolysaccharide and interferon-gamma, they express the inducible isoform of nitric oxide synthase. Producing copious, sustained amounts of nitric oxide, **inducible nitric oxide synthase (iNOS)** generates reactive nitrogen intermediates that combine with superoxide to form bactericidal peroxynitrite radicals.",
+      "say": "Macrophage iNOS produces copious nitric oxide that forms microbicidal peroxynitrite to kill pathogens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endothelial NOS (eNOS / NOS3)",
+          "points": [
+            "Constitutively expressed in vascular endothelial cells",
+            "Calcium-calmodulin dependent; activated transiently by shear stress",
+            "Produces low nanomolar physiological pulses of nitric oxide",
+            "Maintains basal arteriolar vasodilation and prevents thrombosis"
+          ]
+        },
+        "right": {
+          "title": "Inducible NOS (iNOS / NOS2)",
+          "points": [
+            "Transcriptionally induced by cytokines (IFN-gamma, TNF) and LPS",
+            "Calcium-independent; remains active for hours to days once expressed",
+            "Produces high micromolar cytotoxic bursts of nitric oxide",
+            "Microbicidal against intracellular pathogens; contributes to septic shock"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic release of inflammatory cytokines drives coordinated alterations in hepatic protein synthesis termed the acute-phase response. Under intense interleukin-six stimulation, hepatocytes downregulate albumin synthesis while massively upregulating essential **acute phase reactants**, including C-reactive protein, serum amyloid A, fibrinogen, haptoglobin, and hepcidin.",
+      "say": "Cytokines induce the hepatic acute-phase response, switching protein synthesis from albumin to CRP and fibrinogen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "systemic_cytokines",
+            "label": "Macrophage IL-6, IL-1, and TNF Enter the Portal and Systemic Circulation"
+          },
+          {
+            "id": "hepatocyte_reprogram",
+            "label": "Hepatocytes Reprogram Transcription via STAT3 and NF-Kappa-B"
+          },
+          {
+            "id": "positive_reactants",
+            "label": "Massive Upregulation of CRP, Serum Amyloid A, Fibrinogen, and Ferritin"
+          },
+          {
+            "id": "negative_reactants",
+            "label": "Downregulation of Albumin, Transferrin, and Transthyretin Synthesis"
+          }
+        ],
+        "edges": [
+          [
+            "systemic_cytokines",
+            "hepatocyte_reprogram"
+          ],
+          [
+            "hepatocyte_reprogram",
+            "positive_reactants"
+          ],
+          [
+            "hepatocyte_reprogram",
+            "negative_reactants"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Elevations in circulating acute-phase reactants provide vital clinical diagnostic and prognostic tools. Serum C-reactive protein monitors ongoing inflammation and treatment response, elevated fibrinogen accelerates red cell rouleaux formation to elevate the erythrocyte sedimentation rate, and serum amyloid A can deposit chronically as **secondary AA amyloidosis**.",
+      "say": "Acute-phase proteins serve as clinical inflammatory biomarkers and can deposit as AA amyloid in chronic disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amyloidosis-autoinflammatory-long-case-fig1.webp",
+        "caption": "AA amyloidosis: serum amyloid A synthesis and renal amyloid deposition. [Credit: StewardMD]",
+        "alt": "AA amyloidosis: serum amyloid A synthesis and renal amyloid deposition."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

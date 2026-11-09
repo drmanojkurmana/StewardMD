@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "sur-testis",
+ "subject": "surgery",
+ "title": "Testicular Torsion and the Acute Scrotum",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Twisting of the testis on its cord cutting off blood flow is **testicular torsion**. It strikes mostly adolescents and causes sudden severe scrotal pain with nausea. The testis lies high and horizontal, and every hour of delay lowers salvage. Scrotal pain in a boy with abdominal pain and vomiting is torsion until proved otherwise, because referred pain misleads many first assessments.",
+   "say": "Testicular torsion twists the cord, cuts blood flow, and every hour of delay lowers salvage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-acute_scrotum_torsion.webp",
+    "alt": "Acute scrotum comparison of torsion and epididymitis.",
+    "caption": "Acute scrotum: torsion compared with epididymitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Relief of pain when the testis is lifted is called the **Prehn sign**. It traditionally suggests epididymitis rather than torsion, where lifting worsens pain. The sign is unreliable, so it must never delay exploration when torsion is possible. Epididymitis pain usually builds over a day or two with urinary symptoms, while torsion pain peaks within hours.",
+   "say": "The Prehn sign suggests epididymitis when lifting relieves pain, but it must never delay exploration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Torsion suggested",
+     "points": [
+      "Lifting worsens pain",
+      "High horizontal testis",
+      "Absent cremasteric reflex"
+     ]
+    },
+    "right": {
+     "title": "Epididymitis suggested",
+     "points": [
+      "Lifting relieves pain",
+      "Gradual onset",
+      "Fever and urinary symptoms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An abnormally mobile testis that can twist freely has a **bell clapper deformity**. The covering membrane attaches high on the cord, letting the testis swing like a bell clapper. Both sides often share the abnormality, so both are fixed at surgery. Fixing both sides matters because the deformity is bilateral in roughly half of patients, and the other side can twist later.",
+   "say": "A bell clapper deformity lets the testis swing freely, and both sides are fixed at surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "High membrane attachment"
+     },
+     {
+      "id": "n1",
+      "label": "Testis swings freely"
+     },
+     {
+      "id": "n2",
+      "label": "Twisting occurs easily"
+     },
+     {
+      "id": "n3",
+      "label": "Both sides fixed surgically"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infection of the epididymis and testis causing gradual scrotal pain is **epididymo-orchitis**. It usually follows urinary or sexually transmitted infection and brings fever with urinary symptoms. Antibiotics and support treat it, though torsion must first be excluded. In men under 35 the usual cause is a sexually transmitted infection, while coliform bacteria dominate in older men.",
+   "say": "Epididymo-orchitis causes gradual pain with fever and needs antibiotics once torsion is excluded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Torsion",
+     "Epididymo-orchitis"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Minutes",
+      "Days"
+     ],
+     [
+      "Age",
+      "Adolescents",
+      "Adults commoner"
+     ],
+     [
+      "Fever",
+      "Unusual",
+      "Common"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical untwisting and fixation of the testis is called **orchidopexy**. The surgeon inspects colour after untwisting and removes the testis only if dead. The opposite testis is fixed at the same operation to prevent future torsion. A blue or black testis that does not pink up after warm packing for ten minutes is removed to prevent auto immune damage to the other side.",
+   "say": "Orchidopexy untwists and fixes the testis, and the opposite side is fixed at the same operation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Scrotum explored urgently"
+     },
+     {
+      "id": "n1",
+      "label": "Cord untwisted"
+     },
+     {
+      "id": "n2",
+      "label": "Colour reassessed"
+     },
+     {
+      "id": "n3",
+      "label": "Both testes fixed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The golden window for saving a twisted testis is roughly **six hours**. Beyond a day, most testes are lost even after untwisting. This is why suspected torsion goes straight to theatre without waiting for scans in clear cases. Salvage falls from near 100 percent under six hours to under 20 percent after 24 hours of twisting.",
+   "say": "Saving a twisted testis is likeliest within six hours, so clear cases go straight to theatre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Delay",
+     "Salvage outlook"
+    ],
+    "rows": [
+     [
+      "Under 6 hours",
+      "Excellent"
+     ],
+     [
+      "6 to 12 hours",
+      "Falling"
+     ],
+     [
+      "Over 24 hours",
+      "Usually lost"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absence of the reflex that lifts the testis when the inner thigh is stroked is the **cremasteric reflex** loss. It is commonly absent in torsion and present in epididymitis. Like all single signs, it supports but never replaces clinical judgement. The reflex is tested by stroking the upper inner thigh and watching for the testis rising on that side.",
+   "say": "Loss of the cremasteric reflex supports torsion, though no single sign replaces clinical judgement.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-scrotal_palpation.webp",
+    "alt": "Scrotal palpation technique and comparison of findings.",
+    "caption": "Scrotal palpation and reflex assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Doppler ultrasound may help only when the diagnosis is genuinely uncertain, a limited **imaging role**. Blood flow absence supports torsion, but normal flow does not exclude it. Imaging must never postpone theatre in a classic presentation. A whirlpool sign, the twisted cord seen on ultrasound, is the most direct imaging evidence when a scan is done.",
+   "say": "Doppler helps only in genuinely uncertain cases and must never postpone theatre in classic torsion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic presentation",
+     "points": [
+      "Straight to theatre",
+      "No scan delay",
+      "Highest salvage"
+     ]
+    },
+    "right": {
+     "title": "Uncertain presentation",
+     "points": [
+      "Doppler may help",
+      "Senior review",
+      "Still low threshold to explore"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Manual untwisting by hand is a temporary measure called **manual detorsion**. It can relieve pain while theatre is prepared but does not replace surgery. Fixation is still required because retwisting is common. Turning the testis outwards, like opening a book, relieves most torsions, and pain easing within minutes supports success.",
+   "say": "Manual detorsion can relieve pain temporarily, but surgical fixation is still required afterwards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Torsion diagnosed clinically"
+     },
+     {
+      "id": "n1",
+      "label": "Manual untwisting attempted"
+     },
+     {
+      "id": "n2",
+      "label": "Pain relief checked"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical fixation follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-firearm-tandem-bullet",
+ "subject": "forensic-medicine",
+ "module": "fmt-firearm",
+ "title": "Tandem Bullets, Dumdum Bullets and Blast Injuries",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Tandem bullet, two through one hole",
+   "tx": "More bullets inside the body than entrance wounds on it defines the **tandem or piggyback bullet**. A faulty weapon or old ammunition left loaded for years in heat and humidity fires weakly, and the first bullet lodges in the barrel. The next shot drives it out, carrying the stuck bullet ahead, and both enter through a single entrance wound. They may separate inside the body or before reaching the target.",
+   "say": "A stuck bullet ridden out by the next shot puts two bullets through one hole, the tandem bullet puzzle.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Weak first shot lodges in barrel"}, {"id": "b", "label": "Second shot drives it forward"}, {"id": "c", "label": "Both bullets travel together"}, {"id": "d", "label": "One entry, two bullets inside"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Why tandem wounds look long range",
+   "tx": "Because the second bullet wastes force pushing the first, its energy is directed backward against the obstruction, so **tandem discharge marks are diminished or absent**. Burning, blackening and tattooing fade, and the wound imitates long range fire even at close quarters. The examiner should therefore count bullets on the whole body X ray and compare with entrance wounds before committing to a range opinion in any shooting with an old or neglected weapon.",
+   "say": "Energy spent pushing the stuck bullet steals the close range marks, so count bullets on X ray before judging range.",
+   "vis": {"kind": "compare", "left": {"title": "Tandem wound picture", "points": ["One entrance wound only", "Two bullets on X ray", "Few or no burn marks", "Old faulty weapon history"]}, "right": {"title": "True long range picture", "points": ["One bullet accounted for", "No burn marks expected", "Distant firing position", "Sound weapon and ammunition"]}}
+  },
+  {
+   "title": "Souvenir bullets and lead poisoning",
+   "tx": "A bullet retained for years becomes a **souvenir bullet**, wrapped in a dense fibrous capsule with no fresh bleeding around it and only a small scar marking the original entry. Retained lead is not inert: synovial fluid dissolves lead well, and chronic absorption can produce lead poisoning from a bullet sitting in or near a joint. The capsule and absent haemorrhage separate an old souvenir from a fresh lodged bullet at autopsy.",
+   "say": "Old retained bullets sit in fibrous capsules without bleeding, and joint fluid dissolving their lead can poison the patient.",
+   "vis": {"kind": "table", "cols": ["Feature", "Souvenir bullet", "Fresh lodged bullet"], "rows": [["Surrounding tissue", "Dense fibrous capsule", "Fresh haemorrhage"], ["Entry site", "Small old scar", "Recent wound"], ["Bleeding", "Absent", "Present around track"], ["Risk", "Lead poisoning over years", "Infection and bleeding"]]}
+  },
+  {
+   "title": "Dumdum and frangible bullets",
+   "tx": "A **dumdum bullet** is designed to fragment extensively on striking, and frangible bullets disintegrate almost completely, often into granules that resist recovery even when X ray shows them. They do not ricochet, and matching fragments to a test bullet is difficult or impossible. If bone is penetrated the recovered pieces look eroded. Their wounding comes from many small secondary tracks radiating from the point where the bullet broke apart.",
+   "say": "Dumdum and frangible bullets shatter into granules that wound widely but leave almost nothing matchable behind.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet strikes tissue or bone"}, {"id": "b", "label": "Jacket and core break apart"}, {"id": "c", "label": "Fragments fan into tissues"}, {"id": "d", "label": "Granules resist recovery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Explosive, incendiary and tracer bullets",
+   "tx": "Special military bullets add hazards. **Incendiary and explosive bullets** carry phosphorus or an explosive charge that fires on impact, are banned, and make larger wounds with greater fragmentation. Avoid ultrasound and microwave techniques near them, wear goggles, use long handled instruments and store the removed bullet padded against impact, vibration and heat. Tracer bullets merely burn a visible trace in flight so the gunner can follow the shot.",
+   "say": "Explosive bullets demand forceps, goggles and padded storage, and must never meet ultrasound or microwave energy.",
+   "vis": {"kind": "compare", "left": {"title": "Explosive bullet handling", "points": ["Long handled instruments", "Goggles for surgeon and pathologist", "Padded container storage", "No ultrasound or microwave"]}, "right": {"title": "Tracer and plastic bullets", "points": ["Tracer burns a visible path", "Plastic baton round, 38 mm wide", "Riot control to fifty metres", "Can still fracture skull and ribs"]}}
+  },
+  {
+   "title": "Blank cartridges can kill at contact",
+   "tx": "A **blank cartridge** holds primer, ultrafast powder and wadding but no bullet, yet at close discharge its gases and wadding lacerate tissue and can kill by damaging main vessels or by pressure shock on nerves. Distant blank shots are harmless. Country made and old worn guns add another trap: they can discharge by themselves when dropped on the butt or thrown down, without any finger touching the trigger.",
+   "say": "A blank fired close can kill with gas and wad alone, and a dropped country gun can fire itself the same way.",
+   "vis": {"kind": "table", "cols": ["Situation", "Mechanism", "Outcome"], "rows": [["Blank at contact", "Gas and wad lacerate", "Death possible"], ["Blank at distance", "Gas disperses harmlessly", "No injury"], ["Dropped old gun", "Defective mechanism fires", "Accidental shooting"], ["Explosive bullet in body", "Charge may detonate", "Handle with precautions"]]}
+  },
+  {
+   "title": "Bullet embolism, the travelling bullet",
+   "tx": "A bullet entering a vessel can travel with the blood as a **bullet embolism**. Arterial emboli usually lodge in the femoral and popliteal arteries, while venous emboli, which are less frequent, enter veins of the lower limb or reach the heart. The clue is a bullet on imaging far from any plausible track, or a bullet that moves between two films. Surgical planning must therefore confirm the bullet's position immediately before operation.",
+   "say": "Bullets can embolise down arteries to leg vessels, so a bullet far from its track needs a fresh film before surgery.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet enters a vessel"}, {"id": "b", "label": "Blood flow carries it onward"}, {"id": "c", "label": "Lodges in femoral or popliteal artery"}, {"id": "d", "label": "Re image before retrieval surgery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Blast injury and blast lung",
+   "tx": "An explosion throws a concentric pressure wave at about the speed of sound, and above roughly 700 kilopascals it seriously damages the body in **blast injury**. Homogeneous tissues like liver and muscle resist, but air containing lung suffers blast lung: subpleural patchy haemorrhages, alveolar rupture, blood stained froth and later bronchopneumonia. The tympanic membrane ruptures commonly. Death can follow from systemic air embolism entering pulmonary veins through the torn lung.",
+   "say": "Blast lung tears alveoli and froths the airways, the eardrum bursts early, and air embolism can kill without surface injury.",
+   "vis": {"kind": "table", "cols": ["Blast effect", "Organ hit", "Finding"], "rows": [["Pressure wave", "Lungs", "Subpleural haemorrhage, froth"], ["Pressure wave", "Ear", "Ruptured tympanic membrane"], ["Underwater blast", "Bowel mainly", "Gut haemorrhage and rupture"], ["Solid blast", "Skeleton via structures", "Leg and spine fractures"]]}
+  },
+  {
+   "title": "The blast triad of flying missiles",
+   "tx": "Blast drives bomb fragments and nearby gravel, glass, wood and brick into skin as **flying missile injuries**: bruises, abrasions and puncture lacerations intimately mixed, mostly under one centimetre and tending to unite. That mixed triad is diagnostic of explosion. Dust driven in can tattoo the skin fairly uniformly. Falling masonry adds traumatic asphyxia, fumes add carbon monoxide in confined spaces, and X rays hunt the metal of the detonating mechanism inside tissues.",
+   "say": "Bruise, abrasion and puncture laceration mixed under a centimetre each is the fingerprint of blast driven fragments.",
+   "vis": {"kind": "compare", "left": {"title": "Blast triad on skin", "points": ["Bruises under one centimetre", "Abrasions mixed between them", "Ragged puncture lacerations", "Foreign scraps inside wounds"]}, "right": {"title": "Other blast killers", "points": ["Falling masonry crushes chest", "Carbon monoxide in closed spaces", "Burns from incendiary bombs", "Air embolism after blast lung"]}}
+  }
+ ],
+ "quiz": []
+}

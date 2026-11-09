@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-shake-test",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "The Shake Test: Detecting Freeze Damage",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Freezing: the silent vaccine killer",
+   "tx": "**Freeze damage** destroys adsorbed vaccines without changing their colour or label. Hepatitis B, pentavalent, DT, DPT, tetanus toxoid and typhoid vaccines carry aluminium adjuvant that clumps irreversibly when frozen, losing potency while looking perfectly normal. Because the vial betrays nothing, programmes need a bedside physical test after any suspected freezing episode.",
+   "say": "Frozen adsorbed vaccine looks completely normal while its adjuvant clumps and potency dies. Labels never confess freezing. That invisibility is why this test exists.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Freeze sensitive", "Freeze tolerant"],
+    "rows": [
+     ["Hepatitis B, pentavalent", "OPV, measles, BCG"],
+     ["DPT, DT, tetanus toxoid", "JE and rotavirus per label"],
+     ["Typhoid Vi, IPV check label", "Reconstituted only after mixing"],
+     ["All aluminium adsorbed", "Lyophilised before dilution"]
+    ]
+   }
+  },
+  {
+   "title": "The physics: granules that settle faster",
+   "tx": "**Adjuvant clumping** is the mechanism: freezing forces aluminium adjuvant particles into large granules that never redisperse evenly. Granules sediment faster than the fine uniform suspension of a healthy vial. The shake test simply compares sedimentation speed between a suspect vial and a deliberately frozen control vial of the same vaccine and batch.",
+   "say": "Freezing welds adjuvant into granules, and granules sink faster. Compare the suspect vial's settling against a frozen control. Faster settling means frozen before.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Never frozen vial",
+     "points": ["Fine uniform suspension", "Sediments slowly", "Smooth layer on standing", "Potency retained"]
+    },
+    "right": {
+     "title": "Freeze damaged vial",
+     "points": ["Coarse granules after shaking", "Sediments rapidly", "Granular sediment layer", "Potency lost, discard"]
+    }
+   }
+  },
+  {
+   "title": "Step one: prepare the frozen control",
+   "tx": "The **control vial** is made deliberately: take a vial of the same vaccine, same manufacturer and preferably same batch, freeze it overnight in a deep freezer until solid, then thaw it and label it clearly as the frozen control. Without this twin, sedimentation speed has no reference and the tester's judgement drifts.",
+   "say": "Freeze one twin vial overnight, thaw it, label it frozen control. Same vaccine, same maker. Without that reference beside it, the comparison means nothing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Take twin vial, same batch"},
+     {"id": "b", "label": "Freeze overnight till solid"},
+     {"id": "c", "label": "Thaw and label as control"},
+     {"id": "d", "label": "Use beside suspect vials"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Step two: shake both together",
+   "tx": "**Shaking together** means holding the suspect and control vials in one hand and shaking both vigorously for ten to fifteen seconds so each receives identical energy. They are then stood side by side on a flat surface against a light background and watched continuously. Unequal shaking is the commonest way staff fool themselves.",
+   "say": "Both vials in one hand, shaken together fifteen seconds, stood side by side and watched. Identical shaking keeps the comparison honest.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Action", "Detail"],
+    "rows": [
+     ["Grip", "Both vials in one hand"],
+     ["Shake", "Vigorous, 10 to 15 seconds"],
+     ["Stand", "Flat surface, light behind"],
+     ["Watch", "Continuous sedimentation watch"]
+    ]
+   }
+  },
+  {
+   "title": "Reading the race to the bottom",
+   "tx": "The **sedimentation comparison** gives the verdict: if the suspect vial sediments faster than the frozen control, or leaves coarse granules like it, the suspect was frozen and must be discarded. If it sediments more slowly and stays smoother, it was not frozen and may be used. Observation may need up to fifteen or twenty minutes.",
+   "say": "Faster or equal settling than the frozen control means discard. Slower and smoother means usable. Give the watch a full twenty minutes before judging.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Observation", "Verdict"],
+    "rows": [
+     ["Suspect faster than control", "Frozen, discard"],
+     ["Suspect equal to control", "Frozen, discard"],
+     ["Suspect slower, smooth", "Not frozen, use"],
+     ["Granular sediment in suspect", "Frozen, discard"]
+    ]
+   }
+  },
+  {
+   "title": "Which vaccines the test applies to",
+   "tx": "The **shake test applies** only to aluminium adsorbed freeze sensitive vaccines: hepatitis B, pentavalent, DPT, DT, Td, tetanus toxoid and similar products named in programme guidance. It tells nothing about OPV, BCG, measles or other lyophilised vaccines, which tolerate freezing before reconstitution. Applying it to the wrong product wastes good stock.",
+   "say": "Adsorbed vaccines only: hepatitis B, pentavalent, DPT, tetanus family. Lyophilised vaccines tolerate freezing, so testing them wastes stock and time.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test valid", "Test not used"],
+    "rows": [
+     ["Hepatitis B", "OPV"],
+     ["Pentavalent", "BCG"],
+     ["DPT, DT, Td", "Measles, MR"],
+     ["Tetanus toxoid", "Reconstituted vials"]
+    ]
+   }
+  },
+  {
+   "title": "Where freezing actually happens",
+   "tx": "**Freezing episodes** cluster in predictable places: vials touching the evaporator plate or ice lining wall, unconditioned ice packs straight from the deep freezer touching cartons in carriers, winter transport in cold regions, and domestic refrigerators whose freezer air blasts the vaccine shelf. Conditioning ice packs until surface ice melts and sweat appears prevents the carrier trap.",
+   "say": "Freezing hides at evaporator plates, lining walls and unconditioned ice packs. Condition packs until they sweat. Most freeze damage is a packing habit, not weather.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Hotspot", "Prevention"],
+    "rows": [
+     ["Touching ice lining", "Baskets and spacing"],
+     ["Unconditioned ice packs", "Condition until sweating"],
+     ["Domestic fridge freezer blast", "Programme ILR storage"],
+     ["Cold region transport", "Insulated packing check"]
+    ]
+   }
+  },
+  {
+   "title": "Vial monitors do not detect freezing",
+   "tx": "A **vaccine vial monitor** records cumulative heat exposure by colour change and says nothing about freezing, so a perfect monitor square can sit on a freeze killed vial. Heat and freeze are separate injuries with separate detectors: the monitor for heat, the shake test for freezing, and the temperature log to catch both early.",
+   "say": "The vial monitor watches heat only. A flawless square can crown a frozen vial. Freeze detection belongs to the shake test and the temperature log.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vial monitor",
+     "points": ["Cumulative heat exposure", "Colour darkens with heat", "Read at point of use", "Blind to freezing"]
+    },
+    "right": {
+     "title": "Shake test",
+     "points": ["Freeze damage detection", "Sedimentation comparison", "Needs frozen control vial", "Blind to heat injury"]
+    }
+   }
+  },
+  {
+   "title": "After a positive test: batch decisions",
+   "tx": "**Batch discard** follows documentation, not impulse: record the episode, temperatures and test result, quarantine remaining suspect stock, inform the district immunisation officer, and discard only the vials that fail or match the failed exposure group. Neighbouring batches stored elsewhere survive on their own evidence. Every episode ends with a storage fix, or it repeats.",
+   "say": "Document, quarantine, inform the district, discard only what failed or shared its exposure. Then fix the storage fault, or the same episode returns next month.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Suspect vials identified"},
+     {"id": "b", "label": "Shake test performed"},
+     {"id": "c", "label": "Failures quarantined, recorded"},
+     {"id": "d", "label": "Officer informed, storage fixed"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

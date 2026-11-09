@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-operative-obstetrics",
+ "subject": "obstetrics-gynaecology",
+ "title": "Wrigley and Kielland Forceps, Ventouse, Symphysiotomy and Robson",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Short lightweight forceps for outlet and lift out deliveries are **Wrigley forceps**. Their small pelvic curve suits the perineal head and caesarean extraction. They cannot rotate or deliver a head still in the mid cavity. They weigh little and are applied only when the head fills the perineum and the position is direct occipitoanterior.",
+   "say": "Wrigley forceps are short outlet forceps that cannot rotate mid cavity heads.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Forceps",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Wrigley",
+      "Outlet, lift out"
+     ],
+     [
+      "Kielland",
+      "Rotation"
+     ],
+     [
+      "Mid cavity types",
+      "Selected descent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sliding lock forceps designed to rotate the head in the midpelvis are **Kielland forceps**. In expert hands they convert deep transverse arrest to vaginal delivery. Their use has declined with caesarean safety, concentrating expertise dangerously. Their sliding lock lets the blades sit at different depths on an asynclitic head before rotation.",
+   "say": "Kielland forceps rotate midpelvic heads in expert hands, now increasingly rare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Deep transverse arrest"
+     },
+     {
+      "id": "n1",
+      "label": "Expert assessment"
+     },
+     {
+      "id": "n2",
+      "label": "Rotation then traction"
+     },
+     {
+      "id": "n3",
+      "label": "Caesarean if fails"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vacuum extraction with a cup on the fetal scalp is the **ventouse**. Metal and silicone cups suit different situations, and the chignon swelling it raises resolves in days. It needs maternal effort, fails more than forceps, but injures mothers less. A cup placed over the flexion point, three centimetres behind the anterior fontanelle line, keeps the head flexed during pulls.",
+   "say": "Ventouse vacuum extraction injures mothers less but fails more than forceps.",
+   "vis": {
+    "kind": "image",
+    "src": "tokos/media/instruments/in-29.webp",
+    "alt": "Ventouse vacuum extractor (Kiwi OmniCup) for assisted vaginal birth.",
+    "caption": "Ventouse vacuum extractor (Kiwi OmniCup) for assisted vaginal birth. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The artificial caput raised under the vacuum cup during extraction is the **chignon**. It looks alarming and crosses the scalp freely, settling within forty eight hours. Parents are warned before delivery to prevent distress at first sight. Cephalhaematoma under the cup is rarer than with forceps, but subgaleal bleeding is the neonatal danger to watch.",
+   "say": "The chignon under the vacuum cup settles within forty eight hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chignon",
+     "points": [
+      "Artificial caput",
+      "Resolves in 2 days"
+     ]
+    },
+    "right": {
+     "title": "Cephalhaematoma",
+     "points": [
+      "Under periosteum",
+      "Weeks to resolve"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Operations destroying and extracting a dead fetus to save the mother, now rare, are **destructive operations**. Craniotomy for hydrocephalus or dead obstructed fetus persists where caesarean is impossible or lethal. Their decline mirrors caesarean access. Embryotomy on a living fetus has no place in modern care; the operations described apply to a dead, obstructed fetus.",
+   "say": "Destructive operations for dead obstructed fetuses persist only where caesarean is impossible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operation",
+     "Indication"
+    ],
+    "rows": [
+     [
+      "Craniotomy",
+      "Hydrocephalus, dead fetus"
+     ],
+     [
+      "Decapitation",
+      "Neglected shoulder, dead fetus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dividing the pubic symphysis cartilage to enlarge the pelvis is **symphysiotomy**. It permanently widens the outlet for future births, unlike caesarean scars. Where transport or theatre is absent it still saves mothers from obstructed labour. It enlarges the outlet permanently by about 2 centimetres and leaves no uterine scar for the next birth.",
+   "say": "Symphysiotomy permanently widens the pelvis where caesarean access is absent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Pelvic outlet in symphysiotomy.",
+    "caption": "Pelvic outlet. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The ten group classification auditing every caesarean by obstetric category is the **Robson classification**. Nulliparous term cephalic spontaneous labour is group one, previous caesarean group five. Comparing like groups reveals true practice variation between units. Group one should sit under 10 percent in most populations, a benchmark used to judge unit performance.",
+   "say": "Robson classification audits caesareans in ten comparable obstetric groups.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Every birth grouped"
+     },
+     {
+      "id": "n1",
+      "label": "Group rates compared"
+     },
+     {
+      "id": "n2",
+      "label": "Outliers investigated"
+     },
+     {
+      "id": "n3",
+      "label": "Practice improves"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prerequisites for instrumental delivery include full dilation, engagement, known position and analgesia, summarised as **instrumental criteria**. A senior must be able to abandon and proceed to caesarean at any point. Trial in theatre suits borderline cases. The mnemonic covers full dilation, head engaged and no more than one fifth palpable abdominally before any attempt.",
+   "say": "Instrumental criteria demand full dilation, engagement, known position and caesarean backup.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proceed",
+     "points": [
+      "All criteria met",
+      "Senior present"
+     ]
+    },
+    "right": {
+     "title": "Trial in theatre",
+     "points": [
+      "Borderline findings",
+      "Double setup ready"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sequential instrument use, vacuum then forceps, multiplies neonatal injury and is discouraged as **sequential instrumentation**. One failed instrument means caesarean in most modern protocols. The exception is an expert completing an almost delivered head. A failed ventouse followed by forceps raises skull fracture and bleeding rates several fold.",
+   "say": "Sequential instrumentation multiplies injury, so one failed instrument means caesarean.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Instrumental delivery assessment.",
+    "caption": "Instrumental assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

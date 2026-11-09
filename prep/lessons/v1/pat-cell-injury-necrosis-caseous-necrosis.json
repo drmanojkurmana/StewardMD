@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-cell-injury-necrosis",
+  "subject": "pathology",
+  "title": "Caseous, Fat, and Fibrinoid Necrosis and Gangrene Patterns",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "A distinctive form of coagulative necrosis encountered most frequently in tuberculous mycobacterial infections is caseous necrosis. Grossly resembling soft, friable, yellowish-white cheese, **caseous necrosis** results from the accumulation of lipid-rich mycobacterial cell wall components mixed with partially digested necrotic cellular debris.",
+      "say": "Caseous necrosis produces friable cheese-like debris characteristic of tuberculous infections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "myco_infect",
+            "label": "Mycobacterium Tuberculosis Inoculation Drives Persistent Th1 Immune Response"
+          },
+          {
+            "id": "macrophage_fusion",
+            "label": "Interferon-Gamma Activates Macrophages into Epithelioid and Giant Cells"
+          },
+          {
+            "id": "caseous_core",
+            "label": "Central Core Undergoes Complete Amorphous Eosinophilic Granular Necrosis"
+          },
+          {
+            "id": "granuloma_rim",
+            "label": "Fibroblasts and Lymphocytic Mantle Encapsulate the Avascular Caseum"
+          }
+        ],
+        "edges": [
+          [
+            "myco_infect",
+            "macrophage_fusion"
+          ],
+          [
+            "macrophage_fusion",
+            "caseous_core"
+          ],
+          [
+            "caseous_core",
+            "granuloma_rim"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under microscopic inspection, caseous necrosis obliterates tissue architecture completely, unlike standard coagulative necrosis where cellular outlines remain visible. The necrotic focus presents as a structureless, amorphous, granular eosinophilic center surrounded by a prominent cellular collar of **epithelioid macrophages**, Langhans multinucleated giant cells, and peripheral T-lymphocytes.",
+      "say": "Microscopically, caseous necrosis is structureless granular debris encircled by Langhans giant cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Caseous Necrosis",
+          "points": [
+            "Characteristic of Mycobacterium tuberculosis and fungal histoplasmosis",
+            "Gross appearance: friable, soft, crumbly, yellowish-white curdled cheese",
+            "Microscopic: complete obliteration of tissue architecture into granular debris",
+            "Enclosed within organized granulomatous mantle of Langhans giant cells"
+          ]
+        },
+        "right": {
+          "title": "Standard Coagulative Necrosis",
+          "points": [
+            "Characteristic of ischemic infarction in heart, spleen, and kidney",
+            "Gross appearance: firm, pale, well-demarcated opaque tissue block",
+            "Microscopic: preserved tombstone cellular outlines without nuclei",
+            "Surrounded by acute inflammatory hyperemic border and neutrophils"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Focal areas of fat destruction resulting from the abnormal enzymatic release of activated lipases represent fat necrosis. In acute pancreatitis, activated pancreatic enzymes escape into the retroperitoneal space and peritoneal cavity, where **pancreatic lipase** digests triglycerides within adipocyte membranes into free fatty acids.",
+      "say": "In fat necrosis of acute pancreatitis, escaped lipases digest adipocyte triglycerides into free fatty acids.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-pancreatitis-and-pancreaticoduodenectomy-fig1.webp",
+        "caption": "Severe acute necrotizing pancreatitis illustrating peripancreatic fat necrosis and enzymatic saponification.",
+        "alt": "Acute necrotizing pancreatitis showing retroperitoneal saponification"
+      }
+    },
+    {
+      "tx": "The released free fatty acids combine rapidly with circulating ionized calcium in the peritoneal fluid, precipitating insoluble calcium salts. Termed **enzymatic saponification**, this chemical reaction produces chalky white, opaque deposits in peritoneal fat depots, accompanied by a rapid drop in serum calcium levels that serves as a clinical marker of severe pancreatitis.",
+      "say": "Enzymatic saponification binds free fatty acids with calcium, forming chalky white deposits and lowering blood calcium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lipase_leak",
+            "label": "Activated Pancreatic Lipase Escapes into Mesenteric and Omental Fat"
+          },
+          {
+            "id": "triglyceride_split",
+            "label": "Lipase Hydrolyzes Adipocyte Triglycerides into Free Fatty Acids"
+          },
+          {
+            "id": "calcium_bind",
+            "label": "Free Fatty Acids Chelate Ionized Calcium, Forming Insoluble Soaps"
+          },
+          {
+            "id": "chalky_plaques",
+            "label": "Produces Visible Chalky-White Opaque Plaques on Peritoneal Surfaces"
+          }
+        ],
+        "edges": [
+          [
+            "lipase_leak",
+            "triglyceride_split"
+          ],
+          [
+            "triglyceride_split",
+            "calcium_bind"
+          ],
+          [
+            "calcium_bind",
+            "chalky_plaques"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Traumatic fat necrosis occurs following blunt physical trauma or surgical manipulation to adipose-rich tissue beds, most commonly within the female breast. Damaged adipocytes rupture, inducing a localized foreign body histiocytic reaction with lipid-laden foamy macrophages and fibrous scar tissue that can closely mimic **breast carcinoma** on palpation and mammography.",
+      "say": "Traumatic breast fat necrosis produces foamy macrophages and scarring that mimics breast carcinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enzymatic Fat Necrosis",
+          "points": [
+            "Driven by escape of pancreatic lipases and proteases into fat",
+            "Occurs in acute pancreatitis and pancreatic trauma",
+            "Prominent calcium saponification forming chalky-white deposits",
+            "Accompanied by profound systemic hypocalcaemia and inflammation"
+          ]
+        },
+        "right": {
+          "title": "Traumatic Fat Necrosis",
+          "points": [
+            "Driven by direct physical mechanical injury or surgical disruption",
+            "Occurs commonly in subcutaneous breast adipose and buttocks",
+            "Ruptured lipid droplets incite lipid-laden foamy histiocyte reaction",
+            "Resolves with dense collagenous scar tissue and dystrophic calcification"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A specialized immune-mediated vascular pattern of tissue injury involving arterial walls is fibrinoid necrosis. Typically observed in immune-complex-mediated vasculitides and severe malignant hypertension, **fibrinoid necrosis** occurs when antigen-antibody complexes deposit in arterial walls alongside leaking fibrin, creating a bright amorphous pink eosinophilic ring.",
+      "say": "Fibrinoid necrosis deposits immune complexes and leaked fibrin as a bright pink ring in arterial walls.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/polyarteritis-nodosa-fig1.webp",
+        "caption": "Systemic necrotizing vasculitis demonstrating classic arterial wall transmural fibrinoid necrosis.",
+        "alt": "Polyarteritis nodosa showing transmural arterial inflammation and fibrinoid necrosis"
+      }
+    },
+    {
+      "tx": "The term gangrene refers to severe, extensive tissue necrosis affecting an extremity or bowel segment following loss of blood supply. In **dry gangrene**, ischemic coagulative necrosis predominates without superimposed bacterial infection, producing shriveled, blackened, mummified distal tissue separated from healthy skin by a sharp line of inflammatory demarcation.",
+      "say": "Dry gangrene is ischemic coagulative necrosis producing shriveled, blackened, mummified tissue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dry Gangrene",
+          "points": [
+            "Arises from gradual arterial occlusion (severe peripheral vascular disease)",
+            "Primary pathological process is sterile coagulative necrosis",
+            "Limb tissue appears dry, shrunken, blackened, and mummified",
+            "Demonstrates clear, distinct line of inflammatory demarcation"
+          ]
+        },
+        "right": {
+          "title": "Wet Gangrene",
+          "points": [
+            "Arises from venous occlusion or bed sores with superimposed bacterial infection",
+            "Primary process is liquefactive necrosis driven by bacterial enzymes",
+            "Tissue appears swollen, foul-smelling, cold, edematous, and dark",
+            "Lacks demarcation; rapidly progresses to life-threatening septic shock"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When ischemic tissue becomes contaminated by saprophytic and pyogenic bacteria, liquefactive necrosis superimposes upon the coagulative bed to produce wet gangrene. If contaminated specifically by anaerobic spore-forming Clostridium perfringens, the infection evolves into **gas gangrene**, where bacterial lecithinases destroy cell membranes while fermentation produces crepitant hydrogen and carbon dioxide gas.",
+      "say": "Gas gangrene occurs when Clostridium perfringens ferments tissue, producing gas and toxic shock.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trauma_soil",
+            "label": "Deep Crushing Trauma Contaminated with Anaerobic Clostridial Spores"
+          },
+          {
+            "id": "alpha_toxin",
+            "label": "Clostridium Perfringens Secretes Necrotizing Phospholipase C (Alpha-Toxin)"
+          },
+          {
+            "id": "gas_ferment",
+            "label": "Carbohydrate Fermentation Generates Insoluble Gas, Yielding Crepitus"
+          },
+          {
+            "id": "systemic_sepsis",
+            "label": "Massive Myonecrosis and Systemic Toxin Spread Precipitate Shock"
+          }
+        ],
+        "edges": [
+          [
+            "trauma_soil",
+            "alpha_toxin"
+          ],
+          [
+            "alpha_toxin",
+            "gas_ferment"
+          ],
+          [
+            "gas_ferment",
+            "systemic_sepsis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

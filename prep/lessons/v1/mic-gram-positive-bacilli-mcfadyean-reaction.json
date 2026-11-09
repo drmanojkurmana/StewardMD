@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-gram-positive-bacilli",
+  "subject": "microbiology",
+  "title": "McFadyean Reaction, Medusa Head Colonies and Bacillus cereus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **McFadyean reaction** stains anthrax blood smears with polychrome methylene blue: capsule appears as amorphous purple pink material around blue boxcar rods, demonstrating the polypeptide capsule in vivo (lost often in culture), a field test from veterinary anthrax work where carcass blood was the specimen.",
+      "say": "Purple capsule clouds around blue rods in blood: McFadyean names anthrax in the field.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reaction mechanics",
+          "points": [
+            "Aged methylene blue (polychrome) stain",
+            "Capsule: reddish purple amorphous",
+            "Bacilli: dark blue, square ended chains",
+            "Best in fresh carcass or patient blood films"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Supports anthrax in context",
+            "Capsule fades in old specimens",
+            "Cereus lacks capsule reaction",
+            "Reference PCR and culture confirm"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Medusa head colonies** of anthracis on blood agar are large, grey, rough colonies with comma shaped outgrowths like a Medusa's hair (curled projections), non haemolytic, ground glass, sticky; inverted fir tree growth in gelatin stab and penicillin susceptibility (string of pearls test) complete classical identification before referral.",
+      "say": "Rough grey Medusa heads that do not haemolyse: colonial portrait of anthracis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Colony portrait",
+          "points": [
+            "2 to 5 mm, irregular fringed edge",
+            "Non haemolytic on sheep blood",
+            "Ground glass, tenacious (stands like beaten egg white)",
+            "Medusa head projections at low magnification"
+          ]
+        },
+        "right": {
+          "title": "Classical tests",
+          "points": [
+            "String of pearls on penicillin agar",
+            "Gamma phage susceptibility reference",
+            "Non motile, penicillin susceptible",
+            "Cereus: motile, haemolytic, penicillin resistant usually"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bacillus cereus** (motile, beta haemolytic, penicillin resistant spore cousin) causes two food poisonings (next lesson details), anthrax like pneumonia in metal workers by cereus carrying anthrax plasmids (B cereus biovar anthracis borderland), eye infections after trauma, and device and wound infections, identification by the anthracis negatives above.",
+      "say": "Same genus, opposite habits: cereus moves, haemolyses and shrugs penicillin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cereus identity",
+          "points": [
+            "Large rods, spores central not swelling",
+            "Motile, beta haemolytic",
+            "Mannitol negative, lecithinase positive (egg yolk)",
+            "MYEP selective media for food counts"
+          ]
+        },
+        "right": {
+          "title": "Cereus disease",
+          "points": [
+            "Emetic and diarrhoeal food poisoning",
+            "Post traumatic endophthalmitis devastating",
+            "Catheter and wound infections",
+            "Anthrax like pneumonia rare plasmid strains"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Selective Bacillus media** (PLET and MYEP, polymyxin egg yolk mannitol bromothymol) isolate cereus group from food and environmental samples while suppressing rivals, spore counts after heat shock measure the spore load directly. Food microbiology quantifies what clinical benches only name.",
+      "say": "Heat shock counts spores, egg yolk reads lecithinase: food Bacillus work is quantitative.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Media design",
+          "points": [
+            "Polymyxin selects Bacillus group",
+            "Egg yolk lecithinase halo",
+            "Mannitol non fermentation colour",
+            "Heat shock 70 to 80 degrees selects spores"
+          ]
+        },
+        "right": {
+          "title": "Food investigation",
+          "points": [
+            "Counts above 10^5 per gram support cereus",
+            "Implicated rice and starchy dishes",
+            "Enterotoxin assays reference",
+            "Handler and holding temperatures reviewed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spore germination in food** explains cereus outbreaks: spores survive rice boiling, germinate as rice cools slowly, vegetative cells make toxin (in gut for diarrhoeal, in food for emetic cereulide), reheating fries rice but cereulide survives frying. Time and temperature, not final cooking, decide safety.",
+      "say": "Boiled rice left warm is a germination incubator; frying cannot destroy cereulide.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spore",
+            "label": "Spores survive boiling in rice"
+          },
+          {
+            "id": "warm",
+            "label": "Slow cooling germinates spores"
+          },
+          {
+            "id": "toxin",
+            "label": "Cells grow, cereulide forms in food"
+          },
+          {
+            "id": "fry",
+            "label": "Reheating kills cells, toxin persists"
+          }
+        ],
+        "edges": [
+          [
+            "spore",
+            "warm"
+          ],
+          [
+            "warm",
+            "toxin"
+          ],
+          [
+            "toxin",
+            "fry"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Other Bacillus species** (subtilis food spoilage and opportunist, licheniformis food poisoning, thuringiensis insecticide and occasional human infection) mostly contaminate cultures innocently; repeated sterile site isolation and device contexts promote them, susceptibility usually broad except cereus group beta lactam resistance. In suspected anthrax events that distinction also has forensic consequences, which is another reason isolates leave the local laboratory quickly.",
+      "say": "A single Bacillus in blood is dust; the same in three bottles is a consultation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Genus cast",
+          "points": [
+            "Subtilis: laboratory contaminant, opportunist rarely",
+            "Thuringiensis: biopesticide, rare infections",
+            "Licheniformis: food poisoning occasional",
+            "Pumilus and others environmental"
+          ]
+        },
+        "right": {
+          "title": "Significance rules",
+          "points": [
+            "Multiple sets and sterile sites",
+            "Device and prosthesis context",
+            "Immunocompromise raises weight",
+            "Speciate when invasive, susceptibility test"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anthrax versus cereus arbitration** in a modern laboratory ends at reference level: MALDI cannot reliably separate cereus group, toxin gene and plasmid PCR can, biosafety and legal stakes forbid local improvisation with suspected anthracis beyond safe referral. Notify, package, refer is an identification result too.",
+      "say": "Cereus group on MALDI plus exposure history equals referral, not local heroics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Local bench limits",
+          "points": [
+            "MALDI reports cereus group",
+            "Classical tests suggest, not certify",
+            "Blood culture rods plus exposure escalates",
+            "Stop work and notify by protocol"
+          ]
+        },
+        "right": {
+          "title": "Reference answers",
+          "points": [
+            "pXO1 and pXO2 plasmid PCR",
+            "Chromosomal markers (plcR and ba813 heritage)",
+            "Gamma phage and penicillin confirmations",
+            "Whole genome forensics in events"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**String of pearls test** (anthracis growing as swollen bead chains on low penicillin agar, cell wall injured) and penicillin susceptibility together were pre molecular arbitration, still viva favourites because they hinge on anthracis's unusual beta lactam tenderness in a resistant genus.",
+      "say": "Penicillin swells anthracis into pearls while cereus grows on: susceptibility as morphology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pearl test",
+          "points": [
+            "Low dose penicillin agar (0.05 units traditions)",
+            "Cells swell into bead chains",
+            "Cereus unaffected morphologically",
+            "Historical hours rather than days"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic echo",
+          "points": [
+            "Penicillin once anthrax therapy (susceptible natural strains)",
+            "Ciprofloxacin and doxycycline modern empiric",
+            "Engineered resistance feared, monitored",
+            "Combination therapy in systemic disease"
+          ]
+        }
+      }
+    }
+  ]
+}

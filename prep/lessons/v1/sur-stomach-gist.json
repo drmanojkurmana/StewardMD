@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Gastrointestinal Stromal Tumours (GIST), CD117 (c-kit), and Imatinib Therapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most common mesenchymal neoplasm of the human digestive tract is the **gastrointestinal stromal tumour**, universally abbreviated as GIST. These tumours arise from the interstitial cells of Cajal, the specialized pacemaker cells that regulate smooth muscle motility throughout the gastrointestinal wall. While GISTs can develop anywhere along the alimentary canal, the stomach is the predominant anatomical site, accounting for sixty percent of all cases.",
+   "say": "Gastrointestinal stromal tumours, or GISTs, are the most common mesenchymal neoplasms of the gut, arising from the pacemaker interstitial cells of Cajal, most commonly in the stomach.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sdh-deficient-gist-fig1.webp",
+    "alt": "Pathological diagram illustrating interstitial cells of Cajal within the gastric muscularis propria developing into a stromal tumour.",
+    "caption": "Gastrointestinal stromal tumour: origin from interstitial cells of Cajal within the gastric wall. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The molecular hallmark of GIST pathogenesis is an oncogenic gain-of-function mutation in the **KIT proto-oncogene**, identified in approximately eighty-five percent of tumours. KIT encodes a transmembrane receptor tyrosine kinase (CD117). Mutations, predominantly in exon 11 or exon 9, lead to constitutive, ligand-independent autophosphorylation of the intracellular kinase domain, driving unchecked cellular proliferation. An additional ten percent of GISTs harbour mutations in the PDGFRA receptor gene.",
+   "say": "Most GISTs are driven by gain-of-function mutations in the KIT proto-oncogene, producing continuous receptor tyrosine kinase signalling that drives cellular proliferation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mut",
+      "label": "Gain-of-Function Mutation in KIT (Exon 11 or 9) or PDGFRA"
+     },
+     {
+      "id": "auto",
+      "label": "Constitutive Ligand-Independent Tyrosine Kinase Activation"
+     },
+     {
+      "id": "down",
+      "label": "Continuous MAPK & PI3K-AKT Intracellular Cascades"
+     },
+     {
+      "id": "prolif",
+      "label": "Unchecked Mesenchymal Cell Division & Survival Advantage"
+     },
+     {
+      "id": "gist",
+      "label": "Development of Well-Circumscribed Submucosal Gastric GIST"
+     }
+    ],
+    "edges": [
+     [
+      "mut",
+      "auto"
+     ],
+     [
+      "auto",
+      "down"
+     ],
+     [
+      "down",
+      "prolif"
+     ],
+     [
+      "prolif",
+      "gist"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immunohistochemical evaluation is required to confirm the diagnosis of GIST. Over ninety-five percent of tumours demonstrate intense, diffuse cytoplasmic and membranous positivity for **CD117**, also known as c-kit. Tumours that are CD117-negative or equivocal are tested for DOG-1, which stands for discovered on GIST-1, an exceptionally sensitive chloride channel marker. GISTs also express CD34 in seventy percent of cases, but are characteristically negative for desmin and S100 protein.",
+   "say": "Immunohistochemistry confirms GIST through diffuse positivity for CD117 and DOG-1. The tumours are typically CD34 positive, but negative for desmin and S100.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/succinate-dehydrogenase-deficient-gist-fig1.webp",
+    "alt": "Immunohistochemical staining panel showing strong CD117 and DOG-1 membrane expression in gastrointestinal stromal tumour.",
+    "caption": "GIST immunohistochemistry: intense membranous CD117 (c-kit) and DOG-1 positivity confirming stromal origin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unlike epithelial carcinomas, GISTs do not follow a simple benign versus malignant dichotomy; rather, all GISTs possess malignant potential. The clinical risk of recurrence and metastasis is stratified using the standardized **Miettinen and Lasota criteria**, which evaluate three critical parameters: absolute tumour size, mitotic activity per fifty high-power fields, and the specific anatomical site of origin. Gastric GISTs carry a significantly better prognosis than small intestinal or rectal tumours of identical size and mitotic index.",
+   "say": "All GISTs have malignant potential. Risk of recurrence is graded by tumour size, mitotic count per fifty high-power fields, and anatomical site, with gastric tumours having the best outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Parameter",
+     "Low-Risk Category",
+     "High-Risk Category"
+    ],
+    "rows": [
+     [
+      "Tumour Size",
+      "Less than 2 to 5 cm",
+      "Exceeding 5 to 10 cm in diameter"
+     ],
+     [
+      "Mitotic Activity",
+      "Five or fewer mitoses per 50 HPF",
+      "Exceeding 5 mitoses per 50 HPF"
+     ],
+     [
+      "Anatomical Site",
+      "Gastric location (Most favourable)",
+      "Small bowel, colon, or rectum (Aggressive)"
+     ],
+     [
+      "Capsular Integrity",
+      "Intact pseudocapsule",
+      "Tumour rupture (Highest risk of peritoneal relapse)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical presentation varies widely. Many gastric GISTs are detected incidentally during cross-sectional imaging or endoscopy. Symptomatic lesions present with insidious gastrointestinal bleeding, presenting as melena or chronic iron-deficiency anemia as the overlying mucosa ulcerates. On endoscopy, a GIST appears as a smooth, rounded **submucosal bulge** with intact overlying mucosa, occasionally displaying a central crater-like ulceration resembling a volcanic summit.",
+   "say": "Gastric GISTs often present with chronic gastrointestinal bleeding or anemia. Endoscopy reveals a smooth submucosal bulge, sometimes with a central ulcer resembling a volcano.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastric GIST",
+     "points": [
+      "Submucosal intramural smooth rounded bulge",
+      "Mucosa typically intact except for central crater",
+      "Bleeds from central mucosal pressure ulcer",
+      "Firm, fleshy, well-circumscribed consistency"
+     ]
+    },
+    "right": {
+     "title": "Gastric Adenocarcinoma",
+     "points": [
+      "Mucosal-based irregular, exophytic, or ulcerated mass",
+      "Pervasive surface destruction and friability",
+      "Bleeds diffusely from necrotic cancerous tissue",
+      "Infiltrative, poorly circumscribed hard margins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive primary treatment for localized, resectable gastric GIST is complete surgical resection with clear macroscopic and microscopic margins. Because GISTs expand by pushing adjacent structures rather than infiltrating extensively, formal anatomical gastrectomy is unnecessary. A laparoscopic or open **wedge resection of the stomach** is the procedure of choice. Great care must be taken to avoid intraoperative tumour rupture, as capsular breach spills neoplastic cells throughout the peritoneal cavity.",
+   "say": "Surgical treatment requires complete resection with clear margins, typically using a laparoscopic gastric wedge resection. Intraoperative rupture must be avoided to prevent peritoneal seeding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "plan",
+      "label": "Preoperative CT & Endoscopic Ultrasound Staging"
+     },
+     {
+      "id": "lap",
+      "label": "Laparoscopic Approach with Atraumatic Specimen Handling"
+     },
+     {
+      "id": "wedge",
+      "label": "Non-Anatomical Gastric Wedge Resection with Linear Staplers"
+     },
+     {
+      "id": "margin",
+      "label": "Histopathological Confirmation of Negative Margins (R0)"
+     },
+     {
+      "id": "intact",
+      "label": "Strict Preservation of Pseudocapsule to Prevent Seeding"
+     }
+    ],
+    "edges": [
+     [
+      "plan",
+      "lap"
+     ],
+     [
+      "lap",
+      "wedge"
+     ],
+     [
+      "wedge",
+      "margin"
+     ],
+     [
+      "margin",
+      "intact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unlike gastric adenocarcinomas, GISTs virtually never metastasize to regional lymph nodes, exhibiting an incidence of nodal metastasis under one to two percent. Consequently, routine **regional lymphadenectomy is not performed** during GIST surgery. Resection focuses entirely on obtaining a clear margin and preserving pseudocapsular integrity. When metastases do occur, haematogenous dissemination travels primarily to the liver parenchyma and peritoneal surfaces, completely sparing the lungs and bones.",
+   "say": "GISTs rarely spread to lymph nodes, so routine lymph node dissection is omitted. Distant metastases spread primarily to the liver and peritoneal surfaces.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GIST Surgical Rules",
+     "points": [
+      "Non-anatomical wedge resection is sufficient",
+      "Routine regional lymphadenectomy is omitted",
+      "Nodal metastasis rate less than 2 percent",
+      "Primary metastatic sites: Liver & peritoneum"
+     ]
+    },
+    "right": {
+     "title": "Adenocarcinoma Surgical Rules",
+     "points": [
+      "Requires formal total or subtotal gastrectomy",
+      "Mandates systematic D2 regional lymphadenectomy",
+      "Nodal metastasis rate exceeds 60 percent",
+      "Primary metastatic sites: Nodal, liver, lung, bone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted molecular therapy revolutionized the management of advanced, metastatic, and high-risk GIST. The oral tyrosine kinase inhibitor **imatinib mesylate** selectively blocks the adenosine triphosphate binding pocket of the KIT and PDGFRA kinase domains, halting oncogenic signaling. Neoadjuvant imatinib is administered to shrink locally advanced, borderline resectable tumours, while adjuvant therapy for three years of imatinib significantly improves overall survival in high-risk patients following complete resection.",
+   "say": "Imatinib is an oral tyrosine kinase inhibitor that blocks KIT signalling. Three years of adjuvant imatinib significantly improves survival in high-risk patients following resection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Setting",
+     "Therapeutic Strategy",
+     "Treatment Duration & Goal"
+    ],
+    "rows": [
+     [
+      "Locally Advanced / Unresectable",
+      "Neoadjuvant imatinib 400 mg daily",
+      "6 to 12 months for maximal shrinkage prior to surgery"
+     ],
+     [
+      "High-Risk Post-Resection",
+      "Adjuvant imatinib 400 mg daily",
+      "3 full years of therapy to improve overall survival"
+     ],
+     [
+      "Metastatic Disease (Liver/Peritoneum)",
+      "Continuous palliative imatinib",
+      "Maintained until disease progression or intolerance"
+     ],
+     [
+      "Imatinib Resistance (Exon 17 / 13)",
+      "Second-line sunitinib, third-line regorafenib",
+      "Overcomes secondary ATP-pocket kinase mutations"
+     ]
+    ]
+   }
+  }
+ ]
+}

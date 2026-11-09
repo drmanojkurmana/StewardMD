@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "sur-small-bowel",
+ "subject": "surgery",
+ "title": "Short Bowel Syndrome, Typhoid, and Crohn Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A state of severe malabsorption and malnutrition resulting from extensive surgical resection of the small intestine is designated as **short bowel syndrome**. Clinically significant intestinal failure typically occurs when the remaining functional small bowel length is less than two hundred centimetres in adults. Common underlying conditions requiring massive enterectomy include acute mesenteric ischaemia, midgut volvulus, extensive Crohn disease, severe abdominal trauma, and strangulated internal hernias.",
+   "say": "Short bowel syndrome represents severe malabsorption following massive intestinal resection leaving under two hundred centimetres of functional bowel.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+    "alt": "Pathological diagram comparing transmural inflammatory changes in Crohn disease with mucosal ulcerative colitis.",
+    "caption": "Crohn disease pathology: transmural inflammation, skip lesions, and creeping fat leading to recurrent bowel resection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The physiological severity of short bowel syndrome depends on the anatomical segment resected and the presence of an intact colon and ileocaecal valve. Resection of the terminal ileum is far more debilitating than jejunal loss because the ileum possesses unique specialized transport mechanisms for absorbing vitamin B12 and reabsorbing conjugated **bile salts**. Loss of bile salts leads to colonic secretory diarrhoea and nephrolithiasis secondary to hyperoxaluria.",
+   "say": "Terminal ileal resection severely impairs bile acid and vitamin B12 absorption, resulting in diarrhea and calcium oxalate kidney stones.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jejunal Resection",
+     "points": [
+      "Loss of primary carbohydrate & protein absorption",
+      "Ileum undergoes robust compensatory adaptation",
+      "Ileal villi hypertrophy and increase absorption",
+      "Bile acid pool and B12 preserved"
+     ]
+    },
+    "right": {
+     "title": "Terminal Ileal Resection",
+     "points": [
+      "Irreversible loss of active B12 uptake",
+      "Depletion of circulating bile salt pool",
+      "Unabsorbed fatty acids bind luminal calcium",
+      "Hyperoxaluria and calcium oxalate renal calculi"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Preserving the ileocaecal valve and an intact colon is critical for long-term enteral autonomy. The colon salvages calories by fermenting unabsorbed dietary carbohydrates into absorbable short-chain fatty acids such as butyrate and acetate. Furthermore, preservation of the ileocaecal junction delays intestinal transit and prevents retrograde colonization of the small intestine by colonic bacteria, averting the development of small intestinal **bacterial overgrowth**.",
+   "say": "The colon salvages calories by converting carbohydrates into short-chain fatty acids, while the ileocaecal valve delays transit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Configuration",
+     "Residual Small Bowel Length",
+     "Dependence on TPN"
+    ],
+    "rows": [
+     [
+      "End-Jejunostomy (No Colon)",
+      "Requires > 100 cm small bowel",
+      "High risk of permanent lifelong TPN"
+     ],
+     [
+      "Jejunocolic Anastomosis",
+      "Requires > 60 cm small bowel",
+      "Colon provides 500-1000 kcal/day via SCFAs"
+     ],
+     [
+      "Jejunoileal with Intact IC Valve",
+      "Requires > 35 cm small bowel",
+      "Best prognosis; rapid enteral autonomy achieved"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Over one to two years following massive resection, the residual small bowel undergoes remarkable structural and functional intestinal adaptation. Intestinal villi lengthen, crypts deepen, and mucosal absorptive surface area expands under the trophic stimulation of enteral nutrients and gastrointestinal hormones. In patients struggling to achieve enteral independence, subcutaneous administration of **teduglutide**, a glucagon-like peptide-2 analogue, accelerates mucosal hyperplasia and significantly reduces parenteral nutrition requirements.",
+   "say": "Residual bowel adapts by lengthening villi, enhanced by teduglutide, a GLP-2 analogue that stimulates mucosal growth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Massive Small Bowel Resection (< 200 cm Remaining)"
+     },
+     {
+      "id": "diet",
+      "label": "Early Enteral Nutrition Drives Luminal Nutrient Stimulation"
+     },
+     {
+      "id": "glp2",
+      "label": "Endogenous GLP-2 or Teduglutide Therapy"
+     },
+     {
+      "id": "adapt",
+      "label": "Crypt Cell Hyperplasia & Increased Villus Absorptive Surface"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "diet"
+     ],
+     [
+      "diet",
+      "glp2"
+     ],
+     [
+      "glp2",
+      "adapt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A severe, life-threatening surgical complication of enteric fever occurring in developing nations during the second to third week of illness is **typhoid perforation**. Salmonella enterica serotype Typhi invades the lymphoid Peyer patches of the antimesenteric border of the terminal ileum. Intense hyperplastic mononuclear cell infiltration leads to focal ischaemic necrosis, creating longitudinal oval ulcers that perforate into the peritoneal cavity.",
+   "say": "Typhoid perforation develops during the second to third week of enteric fever, causing oval ulcer perforations on the antimesenteric ileum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/enteric-fever-nontyphoidal-salmonella-fig1.webp",
+    "alt": "Clinical illustration showing characteristic rose spots on trunk in typhoid fever and intestinal ulceration.",
+    "caption": "Enteric fever: systemic Salmonella bacteremia leading to lymphoid hyperplasia and terminal ileal ulceration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Typhoid perforations are typically solitary, small oval holes situated along the antimesenteric border of the terminal ileum within sixty centimetres of the ileocaecal valve. Patients present with sudden worsening of abdominal pain, high stepping fever, and signs of generalized peritonitis. Plain erect abdominal radiographs demonstrate pneumoperitoneum. Following resuscitation, surgical options comprise primary debridement and two-layer transverse closure or segmental resection with temporary **diverting loop ileostomy**.",
+   "say": "Typhoid perforations present with pneumoperitoneum and require primary transverse closure or segmental resection with an ileostomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operative Finding",
+     "Surgical Technique",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Single clean perforation (< 1 cm)",
+      "Wedge debridement + transverse 2-layer closure",
+      "Simple, preserves bowel, avoids luminal narrowing"
+     ],
+     [
+      "Multiple perforations / necrotic ileum",
+      "Segmental ileal resection + primary anastomosis",
+      "Removes multiple ulcerated Peyer patches in stable patient"
+     ],
+     [
+      "Severe fecal peritonitis / septic shock",
+      "Segmental resection + exteriorization (ileostomy)",
+      "Avoids hazardous anastomosis in septic shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with fibrostenotic Crohn disease of the small bowel, repeated extensive intestinal resections inevitably lead to short bowel syndrome. To prevent this devastating outcome, bowel-preserving surgical techniques are utilized, predominantly **Crohn stricturoplasty**. Stricturoplasty relieves intestinal obstruction by widening fibrotic strictured segments without resecting any absorptive small bowel parenchyma.",
+   "say": "Stricturoplasty widens strictured small bowel in Crohn disease without resection, preserving critical absorptive surface area.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "crohn",
+      "label": "Recurrent Fibrostenotic Strictures in Crohn Disease"
+     },
+     {
+      "id": "preserve",
+      "label": "Bowel-Sparing Strategy to Avoid Short Bowel Syndrome"
+     },
+     {
+      "id": "heineke",
+      "label": "Short Stricture (< 10 cm): Heineke-Mikulicz Stricturoplasty"
+     },
+     {
+      "id": "finney",
+      "label": "Long Stricture (10-25 cm): Finney Stricturoplasty"
+     }
+    ],
+    "edges": [
+     [
+      "crohn",
+      "preserve"
+     ],
+     [
+      "preserve",
+      "heineke"
+     ],
+     [
+      "preserve",
+      "finney"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The choice of stricturoplasty technique is dictated strictly by the length of the fibrotic segment. For short strictures measuring up to ten centimetres, a longitudinal incision is made along the antimesenteric border and sutured transversely, known as the Heineke-Mikulicz stricturoplasty. For longer strictures measuring ten to twenty-five centimetres, the bowel is folded into a U-shape and an extensive side-to-side anastomotic channel is created, termed a **Finney stricturoplasty**.",
+   "say": "Heineke-Mikulicz stricturoplasty repairs strictures under ten centimetres transversely, while Finney stricturoplasty folds longer segments into a U-shape.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heineke-Mikulicz (Short)",
+     "points": [
+      "Indicated for strictures <= 10 cm",
+      "Longitudinal antimesenteric enterotomy",
+      "Closed transversely in two layers",
+      "Preserves normal luminal transit"
+     ]
+    },
+    "right": {
+     "title": "Finney / Michelassi (Long)",
+     "points": [
+      "Indicated for strictures 10 to 25 cm (Finney)",
+      "Strictures > 25 to 50 cm (Michelassi)",
+      "U-shaped folding or side-to-side channel",
+      "Avoids extensive small bowel loss"
+     ]
+    }
+   }
+  }
+ ]
+}

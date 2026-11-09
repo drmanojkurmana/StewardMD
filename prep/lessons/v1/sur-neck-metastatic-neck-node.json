@@ -1,0 +1,333 @@
+{
+ "v": 1,
+ "module": "sur-neck",
+ "subject": "surgery",
+ "title": "Metastatic Cervical Nodes, Unknown Primary, and Ludwig Angina",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In adult patients presenting with an asymptomatic, firm, non-tender neck mass, the overriding clinical premise is Skandalakis' famous rule of eighties. Under this statistical maxim, eighty percent of non-thyroid lateral neck swellings in adults are neoplastic, eighty percent of these neoplasms are malignant, and eighty percent of these malignancies represent **metastatic cervical lymphadenopathy** from primary squamous cell carcinomas of the upper aerodigestive tract, demanding rigorous systematic mucosal search.",
+   "say": "Under the rule of eighties, eighty percent of adult lateral neck masses are neoplastic, and eighty percent of those are metastatic carcinomas from head and neck mucosal primaries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Adult Non-Thyroid Lateral Neck Mass"
+     },
+     {
+      "id": "neoplasm",
+      "label": "80% Are Neoplastic Lesions"
+     },
+     {
+      "id": "malignant",
+      "label": "80% of Neoplasms Are Malignant"
+     },
+     {
+      "id": "metastatic",
+      "label": "80% of Malignancies Are Metastatic Nodes"
+     },
+     {
+      "id": "scc",
+      "label": "Primary Focus in Upper Aerodigestive Mucosa"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "neoplasm"
+     ],
+     [
+      "neoplasm",
+      "malignant"
+     ],
+     [
+      "malignant",
+      "metastatic"
+     ],
+     [
+      "metastatic",
+      "scc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anatomical level of a metastatic cervical lymph node reliably predicts the location of the primary occult carcinoma. Level one nodes drain the lips, anterior oral cavity, and skin of the face. Level two upper deep jugular nodes receive lymph from the oropharynx, hypopharynx, larynx, and supraglottis. Conversely, isolated **Virchow node metastasis** in the left supraclavicular fossa (Troisier sign) signals advanced infraclavicular intra-abdominal or pelvic malignancy, classically gastric adenocarcinoma, transmitted via the thoracic duct.",
+   "say": "The level of a neck node points directly to the primary cancer. Level two nodes drain the oropharynx and larynx, while left supraclavicular nodes herald intra-abdominal cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nodal Level",
+     "Characteristic Primary Sites",
+     "High-Yield Clinical Associations"
+    ],
+    "rows": [
+     [
+      "Level I (Submandibular)",
+      "Oral tongue, floor of mouth, lower lip, buccal mucosa",
+      "Chewing tobacco exposure; low risk from infraclavicular organs"
+     ],
+     [
+      "Level II (Upper Jugular)",
+      "Tonsil, base of tongue, supraglottic larynx, pyriform fossa",
+      "HPV-associated oropharyngeal cancer frequently forms cystic level II nodes"
+     ],
+     [
+      "Level III & IV (Mid & Low)",
+      "Hypopharynx, subglottis, thyroid gland, cervical esophagus",
+      "Aggressive trans-glottic cancers; routine central compartment spread"
+     ],
+     [
+      "Level IV Left (Virchow)",
+      "Stomach, pancreas, ovary, testicle, lung, colon",
+      "Troisier sign: hematogenous and thoracic duct dissemination of GI tumors"
+     ],
+     [
+      "Level V (Posterior)",
+      "Nasopharynx, posterior scalp skin, thyroid carcinoma",
+      "Epstein-Barr virus-driven nasopharyngeal carcinoma (Fossa of Rosenmuller)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An enlarged, firm lymph node in the left supraclavicular fossa represents a metastatic deposit from an infraclavicular primary malignancy. This classical physical sign, known as **Troisier sign node**, signifies dissemination of gastric adenocarcinoma or other gastrointestinal cancers via the thoracic duct into the systemic venous circulation. Finding this sentinel node alters clinical staging to metastatic disease.",
+   "say": "Troisier sign node in the left supraclavicular fossa indicates metastatic spread from gastric or abdominal malignancy via the thoracic duct.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-oesophagus-gen1.webp",
+    "alt": "Left supraclavicular fossa with firm enlarged Virchow lymph node in an adult patient.",
+    "caption": "Left supraclavicular fossa with firm enlarged Virchow lymph node in adult patient Enlarged Virchow node in left supraclavicular fossa. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "When a patient presents with biopsy-proven metastatic cervical lymphadenopathy without an obvious tumor on clinical examination, the condition is classified as carcinoma of unknown primary. The primary diagnostic investigation of choice is **fine-needle aspiration cytology**. An absolute oncological rule strictly proscribes open incisional or excisional node biopsy prior to panendoscopy, because open biopsy tears fascial barriers, causes tumor seeding into soft tissues, and worsens overall regional control.",
+   "say": "Fine-needle aspiration cytology is the mandatory first step for an unknown primary. Open node biopsy is strictly forbidden because it breaches fascial planes and compromises cure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fine-Needle Aspiration Cytology",
+     "points": [
+      "Performs needle aspiration without incising deep cervical fascia",
+      "Preserves tissue architecture and boundaries of neck levels",
+      "Identifies carcinoma, melanoma, lymphoma, and HPV p16 status",
+      "Gold standard initial investigation in all neck masses"
+     ]
+    },
+    "right": {
+     "title": "Open Incisional or Excisional Biopsy",
+     "points": [
+      "Incises skin, platysma, and cervical fascial compartments",
+      "Spills malignant cells directly into surrounding muscular beds",
+      "Creates dense scarring that impedes subsequent neck dissection",
+      "Proscribed until all endoscopic evaluations are completed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The workup for an unknown primary incorporates high-resolution cross-sectional contrast imaging and positron emission tomography coupled with formal examination under anesthesia, termed panendoscopy or triple endoscopy. Panendoscopy encompasses direct laryngoscopy, bronchoscopy, and esophagoscopy. Even if mucosal surfaces appear visually normal, surgeons perform **directed diagnostic mucosal biopsies**, specifically bilaterally harvesting palatine tonsils via tonsillectomy, base of tongue mucosectomy, and sampling the nasopharyngeal fossa of Rosenmuller where microscopic occult tumors lurk.",
+   "say": "Workup of an unknown primary requires PET imaging and examination under anesthesia with directed biopsies of the palatine tonsils, tongue base, and nasopharynx.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fnac",
+      "label": "FNAC Confirms Squamous Cell Carcinoma (p16 Testing)"
+     },
+     {
+      "id": "pet",
+      "label": "Whole-Body FDG PET-CT Cross-Sectional Scan"
+     },
+     {
+      "id": "panendo",
+      "label": "Examination Under Anesthesia & Triple Endoscopy"
+     },
+     {
+      "id": "biopsy",
+      "label": "Directed Bilateral Tonsillectomy & Tongue Base Mucosectomy"
+     },
+     {
+      "id": "identify",
+      "label": "Identification of Occult Primary in Over 70% of Cases"
+     }
+    ],
+    "edges": [
+     [
+      "fnac",
+      "pet"
+     ],
+     [
+      "pet",
+      "panendo"
+     ],
+     [
+      "panendo",
+      "biopsy"
+     ],
+     [
+      "biopsy",
+      "identify"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In stark contrast to chronic neoplastic or granulomatous lymphadenopathy, acute cervical cellulitis presents with fulminant airway and septic compromise. The most lethal variant is **Ludwig angina**, an aggressive, rapidly spreading, gangrenous cellulitis involving the submandibular, sublingual, and submental fascial spaces bilaterally. Characteristically non-suppurative and devoid of true initial abscess formation, it produces a tense, woody or brawny induration of the entire submandibular region and floor of mouth.",
+   "say": "Ludwig angina is a rapidly spreading, gangrenous cellulitis affecting the submandibular, submental, and sublingual spaces bilaterally, causing board-like woody neck swelling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ludwig Angina",
+     "points": [
+      "Bilateral involvement of sublingual and submandibular spaces",
+      "Gangrenous cellulitis with woody, brawny, non-fluctuant induration",
+      "Elevates and displaces tongue backward into posterior oropharynx",
+      "Lethal risk: acute upper airway suffocation within hours"
+     ]
+    },
+    "right": {
+     "title": "Acute Peritonsillar Abscess (Quinsy)",
+     "points": [
+      "Unilateral suppurative collection between tonsil capsule and constrictor",
+      "Deviates the uvula toward the contralateral unaffected side",
+      "Produces severe trismus with hot potato muffled speech",
+      "Managed with needle aspiration or intraoral incision and drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The etiology in over eighty percent of patients with Ludwig angina is odontogenic infection originating from the mandibular second and third molars. Because the roots of these posterior molars extend beneath the attachment line of the mylohyoid muscle on the internal mandibular surface, a periapical abscess erodes through the thin lingual cortical bone directly into the submandibular space. The microbial flora is polymicrobial, predominantly consisting of oral viridans streptococci, Peptostreptococcus, Fusobacterium, and **Prevotella anaerobes**.",
+   "say": "Over eighty percent of cases arise from infected second or third lower molars, whose roots penetrate below the mylohyoid ridge, releasing mixed streptococcal and anaerobic flora.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "molar",
+      "label": "Periapical Abscess in Mandibular 2nd or 3rd Molar"
+     },
+     {
+      "id": "root",
+      "label": "Molar Roots Extend Below Mylohyoid Line"
+     },
+     {
+      "id": "cortex",
+      "label": "Erosion Through Thin Lingual Mandibular Cortex"
+     },
+     {
+      "id": "spaces",
+      "label": "Direct Spread into Submandibular & Sublingual Spaces"
+     },
+     {
+      "id": "angina",
+      "label": "Rapid Bilateral Cellulitis with Airway Displacement"
+     }
+    ],
+    "edges": [
+     [
+      "molar",
+      "root"
+     ],
+     [
+      "root",
+      "cortex"
+     ],
+     [
+      "cortex",
+      "spaces"
+     ],
+     [
+      "spaces",
+      "angina"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A patient with Ludwig angina presents with high fever, severe submandibular pain, drooling, inability to swallow secretions, trismus, and a muffled hot-potato voice. As edema expands, the sublingual space swells, pushing the tongue superiorly and backward against the posterior pharyngeal wall, producing catastrophic **upper airway obstruction**. Stridor, tachypnea, cyanosis, and the tripod position indicate impending complete asphyxiation, making immediate definitive airway securing the absolute paramount resuscitation priority.",
+   "say": "Sublingual edema forces the tongue backward against the pharynx, threatening imminent asphyxiation. Patients exhibit drooling, stridor, and a muffled voice, demanding immediate airway control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Manifestation",
+     "Pathophysiological Mechanism",
+     "Resuscitation Emergency Priority"
+    ],
+    "rows": [
+     [
+      "Massive Tongue Protrusion",
+      "Sublingual compartment edema lifting floor of mouth",
+      "Mandates immediate preparation for emergent surgical airway"
+     ],
+     [
+      "Drooling & Odynophagia",
+      "Inability to swallow pooled saliva past blocked pharynx",
+      "Suction secretions, place patient in high Fowler or forward-leaning posture"
+     ],
+     [
+      "Inspiratory Stridor",
+      "Extrinsic laryngeal and glottic compression by displaced tongue",
+      "Absolute red flag: endotracheal intubation or awake fiberoptic scope"
+     ],
+     [
+      "Woody Neck Induration",
+      "Gangrenous subcutaneous and muscular phlegmon",
+      "Prompt intravenous broad-spectrum bactericidal coverage and surgical drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of Ludwig angina is governed by three cardinal pillars: securing the airway, administering high-dose intravenous antibiotics, and performing aggressive surgical decompression. Endotracheal intubation is fraught with peril due to distorted landmarks, making **awake fiberoptic intubation** or surgical tracheostomy the safest approaches. Surgical decompression employs a wide, curved collar incision across the upper neck, dividing the platysma and mylohyoid muscles to release compartment pressure, extract the offending tooth, and place through-and-through drains.",
+   "say": "Management requires awake fiberoptic intubation or tracheostomy, high-dose intravenous antibiotics, and wide surgical decompression dividing the mylohyoid muscle to release pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "airway",
+      "label": "Awake Fiberoptic Intubation or Surgical Tracheostomy"
+     },
+     {
+      "id": "antibiotics",
+      "label": "High-Dose IV Ceftriaxone, Metronidazole & Vancomycin"
+     },
+     {
+      "id": "incision",
+      "label": "Curved Submandibular Collar Incision"
+     },
+     {
+      "id": "mylohyoid",
+      "label": "Divide Mylohyoid Muscle to Decompress Compartments"
+     },
+     {
+      "id": "drain",
+      "label": "Extraction of Offending Molars & Dependent Drain Placement"
+     }
+    ],
+    "edges": [
+     [
+      "airway",
+      "antibiotics"
+     ],
+     [
+      "antibiotics",
+      "incision"
+     ],
+     [
+      "incision",
+      "mylohyoid"
+     ],
+     [
+      "mylohyoid",
+      "drain"
+     ]
+    ]
+   }
+  }
+ ]
+}

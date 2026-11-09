@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-brainstem",
+ "subject": "anatomy",
+ "title": "Brainstem: Medullary Architecture, Pyramids, and Cranial Nuclei",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The brainstem connects the cerebral hemispheres with the spinal cord, constructed from three continuous parts from caudal to rostral: the medulla oblongata, the pons, and the midbrain. The **medulla oblongata** is conical in shape, extending from the lower border of the pons to the level of the foramen magnum, where it becomes continuous with the cervical spinal cord.",
+   "say": "Connecting cerebrum to spinal cord, the brainstem comprises medulla, pons, and midbrain. The medulla extends from the pons to the foramen magnum, housing vital regulatory centres.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.webp",
+    "alt": "Gross anatomical ventral view of human brainstem displaying medulla oblongata, pons, and cranial nerve roots",
+    "caption": "Gross ventral topography of the brainstem highlighting the medullary pyramids, olives, and cranial nerve roots. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anterior surface of the medulla is bisected by the anterior median fissure, flanked on each side by two longitudinal elevations termed the pyramids. The **medullary pyramids** are produced by the massive descending corticospinal motor tracts originating from the primary motor cortex. In the lower medulla, seventy-five to ninety percent of these corticospinal fibres decussate across the midline.",
+   "say": "Flanking the anterior median fissure, the pyramids are formed by descending corticospinal tracts. In the lower medulla, fibres decussate across the midline to enter the lateral funiculus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pyramidal-decussation.svg",
+    "alt": "Anatomical cross section of caudal medulla showing the pyramidal decussation of corticospinal tract fibres",
+    "caption": "Cross-sectional architecture of the motor decussation in the caudal closed medulla. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pyramidal decussation is the anatomical basis for contralateral cortical motor control of the body. Descending corticospinal axons cross obliquely across the anterior median fissure to enter the contralateral lateral white column of the spinal cord as the **lateral corticospinal tract**. The uncrossed ten to fifteen percent descend as the anterior corticospinal tract, which decussates at segmental levels.",
+   "say": "The pyramidal decussation explains contralateral hemispheric motor control. Crossing fibres descend as the lateral corticospinal tract to drive voluntary skeletal movement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Motor Cortex (Pyramidal neurons in precentral gyrus Brodmann area 4)"
+     },
+     {
+      "id": "m2",
+      "label": "Internal Capsule & Basis Pedunculi (Descend through posterior limb into brainstem)"
+     },
+     {
+      "id": "m3",
+      "label": "Medullary Pyramids (Form paired prominent columns on ventral medullary surface)"
+     },
+     {
+      "id": "m4",
+      "label": "Pyramidal Decussation (85% of fibres cross midline at spinomedullary junction)"
+     },
+     {
+      "id": "m5",
+      "label": "Lateral Corticospinal Tract (Synapses on lower motor neurons in anterior grey horn)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lateral to each pyramid in the upper half of the medulla lies an oval prominence termed the olive. The **medullary olive** is produced by the underlying inferior olivary nucleus, an intricate crenated ribbon of grey matter that functions as a critical motor learning relay, receiving cerebellar inputs and projecting climbing fibres to Purkinje cells of the contralateral cerebellar hemisphere.",
+   "say": "Lateral to each pyramid lies the olive, produced by the inferior olivary nucleus. It coordinates cerebellar motor learning by projecting climbing fibres to Purkinje cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medullary Pyramid",
+     "points": [
+      "Ventral longitudinal column medial to olive",
+      "Contains descending voluntary motor corticospinal tracts",
+      "Decussates at lower border of medulla",
+      "Lesion causes contralateral spastic hemiparesis"
+     ]
+    },
+    "right": {
+     "title": "Medullary Olive",
+     "points": [
+      "Oval prominence lateral to the pyramid",
+      "Produced by the crenated inferior olivary nucleus",
+      "Projects olivocerebellar climbing fibres via inferior peduncle",
+      "Essential for precision motor learning and error correction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Two longitudinal sulci flank the olive and transmit cranial nerve rootlets. In the anterolateral sulcus (pre-olivary sulcus), situated between the pyramid and the olive, emerge the rootlets of the **hypoglossal nerve** (CN XII). In the posterolateral sulcus (post-olivary sulcus), situated behind the olive, emerge from superior to inferior the rootlets of cranial nerves IX, X, and the cranial accessory.",
+   "say": "Between the pyramid and olive emerges the hypoglossal nerve. In the post-olivary groove behind the olive emerge cranial nerves nine, ten, and the accessory nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medullary Sulcus",
+     "Boundary Landmarks",
+     "Emerging Cranial Nerve Roots"
+    ],
+    "rows": [
+     [
+      "Pre-olivary sulcus (Anterolateral)",
+      "Between pyramid and olive",
+      "Hypoglossal nerve (CN XII rootlets)"
+     ],
+     [
+      "Post-olivary sulcus (Posterolateral)",
+      "Between olive and inferior cerebellar peduncle",
+      "Glossopharyngeal (IX), Vagus (X), Cranial Accessory (XI)"
+     ],
+     [
+      "Pontomedullary junction",
+      "Horizontal groove between pons and medulla",
+      "Abducens (VI medially), Facial (VII), Vestibulocochlear (VIII laterally)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On the posterior aspect of the closed lower medulla, two ascending sensory tracts create prominent elevations: the medial gracile tubercle (overlying the nucleus gracilis) and the lateral cuneate tubercle (overlying the nucleus cuneatus). Second-order sensory neurons from these nuclei arch anteriorly as internal arcuate fibres, decussating in the midline as the **sensory decussation** to form the medial lemniscus.",
+   "say": "On the posterior medulla, nucleus gracilis and cuneatus form tubercles. Their internal arcuate fibres decussate across the midline to form the sensory medial lemniscus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Fasciculus Gracilis and Cuneatus (First-order dorsal column sensory axons from spinal cord)"
+     },
+     {
+      "id": "d2",
+      "label": "Nucleus Gracilis and Cuneatus (Second-order neuron relay in closed lower medulla)"
+     },
+     {
+      "id": "d3",
+      "label": "Internal Arcuate Fibres (Sweep forward and medially around central grey matter)"
+     },
+     {
+      "id": "d4",
+      "label": "Sensory Decussation (Cross midline above motor decussation)"
+     },
+     {
+      "id": "d5",
+      "label": "Medial Lemniscus (Ascends brainstem to terminate in thalamic VPL nucleus)"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ],
+     [
+      "d4",
+      "d5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The upper half of the posterior medulla is open, forming the lower triangular floor of the fourth ventricle. In this ventricular floor, specialized paired eminences overlie critical cranial nerve nuclei: the medial hypoglossal trigone (overlying the **hypoglossal nucleus**), the intermediate vagal trigone (overlying the dorsal motor nucleus of the vagus), and the lateral vestibular area.",
+   "say": "The open medulla forms the lower floor of the fourth ventricle. The hypoglossal trigone overlies the twelfth nucleus, while the vagal trigone overlies the dorsal vagal nucleus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ventricular Floor Region",
+     "Underlying Neural Structure",
+     "Functional Modality"
+    ],
+    "rows": [
+     [
+      "Hypoglossal trigone",
+      "Hypoglossal motor nucleus (CN XII)",
+      "Somatic motor efferents driving tongue musculature"
+     ],
+     [
+      "Vagal trigone",
+      "Dorsal motor nucleus of vagus (CN X)",
+      "General visceral parasympathetic efferents to thorax and abdomen"
+     ],
+     [
+      "Vestibular area",
+      "Medial and inferior vestibular nuclei",
+      "Vestibular balance and equilibrium processing"
+     ],
+     [
+      "Area postrema",
+      "Chemoreceptor trigger zone (outside blood-brain barrier)",
+      "Emetic centre detecting circulating toxins in bloodstream"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediately rostral to the vagal trigone at the inferior angle of the fourth ventricle lies the area postrema. Functioning as the central chemoreceptor trigger zone for emesis, the **area postrema** lacks a functional blood-brain barrier. Fenestrated capillaries expose its neurons directly to circulating toxins, emetogenic chemotherapeutic drugs, and metabolites in systemic blood, rapidly triggering vomiting.",
+   "say": "At the obex lies the area postrema, the chemoreceptor trigger zone for vomiting. Lacking a blood-brain barrier, it senses circulating toxins to trigger emesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Area Postrema (Circumventricular Organ)",
+     "points": [
+      "Located at caudal margin of fourth ventricle (obex)",
+      "Lacks tight-junction blood-brain barrier",
+      "Directly samples blood-borne chemical toxins",
+      "Triggers vomiting via nucleus tractus solitarius"
+     ]
+    },
+    "right": {
+     "title": "Standard Medullary Parenchyma",
+     "points": [
+      "Strict endothelial tight junctions with astrocytic end-feet",
+      "Shielded by impermeable blood-brain barrier",
+      "Protected from fluctuating systemic toxins",
+      "Houses respiratory and vasomotor rhythm generators"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "7faee676-e4f6-4ab5-bb44-8bba9d13334d",
+  "e1b34c3a-977b-4f7e-8c0e-fc76c5f164cd",
+  "14149a0f-eeaa-4f18-8b8e-7ac64bbca53c"
+ ]
+}

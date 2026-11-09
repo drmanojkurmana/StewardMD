@@ -1,0 +1,226 @@
+{
+ "key": "ped-neuro-disorders-gowers-sign",
+ "v": 1,
+ "module": "ped-neuro-disorders",
+ "subject": "paediatrics",
+ "title": "Pediatric Neuromuscular Weakness: Gowers Sign, SMA, and GBS",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Severe weakness of the pelvic girdle and proximal quadriceps muscles forces children to adopt compensatory rising maneuvers. The pathognomonic physical sign of proximal myopathy is **Gowers sign in muscular dystrophy**, where a child rising from a prone or seated position on the floor must turn prone, push up on hands and feet into a tripod posture, and manually walk the hands up the shins and thighs to achieve an erect posture.",
+   "say": "Gowers sign is demonstrated when a child must walk their hands up their thighs to stand up from the floor. It reflects severe proximal pelvic girdle weakness in muscular dystrophy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cns-motor_tone_power.webp",
+    "alt": "Clinical sequential illustration demonstrating Gowers sign climbing maneuver and proximal myopathic motor testing.",
+    "caption": "Sequential stages of Gowers sign as an infant uses hands on thighs to overcome proximal pelvic girdle weakness. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Massive leakage of intracellular sarcoplasmic enzymes into serum provides a sensitive diagnostic screening marker for active muscular necrosis. In young boys with Duchenne muscular dystrophy, **serum creatine kinase elevation** reaches extraordinary levels, typically fifty to one hundred times above the upper reference limit (exceeding ten thousand to twenty thousand units per litre), even in preclinical asymptomatic stages and cord blood.",
+   "say": "Serum creatine kinase levels are elevated fifty to one hundred times normal in Duchenne muscular dystrophy. Massive enzyme leakage reflects continuous sarcolemmal breakdown.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Biochemical Biomarkers in DMD",
+     "points": [
+      "Serum creatine kinase (CK) >10,000 to 30,000 IU/L",
+      "Marked elevation of AST, ALT, and LDH (myopathic origin)",
+      "Liver enzymes elevated without intrinsic liver injury",
+      "Enzyme levels gradually decline as muscle bulk wastes"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Confirmation Hierarchy",
+     "points": [
+      "First-line: genetic testing via MLPA or sequencing",
+      "Confirms dystrophin gene deletions or duplications",
+      "Muscle biopsy with immunohistochemistry if genetics equivocal",
+      "Shows complete absence of dystrophin staining"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Autosomal recessive homozygous deletion of the survival motor neuron 1 gene on chromosome 5q causes spinal motor neuron degeneration. Characterized by progressive anterior horn cell apoptosis, **pediatric spinal muscular atrophy** (SMA) presents with symmetrical, predominantly proximal flaccid quadriparesis, generalized muscular hypotonia, absent deep tendon reflexes, and fasciculations of the tongue, while higher cognitive intelligence remains completely spared.",
+   "say": "Spinal muscular atrophy is an autosomal recessive disorder caused by SMN1 deletions on chromosome five. It causes anterior horn cell death, hypotonia, and tongue fasciculations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SMA Clinical Phenotype",
+     "Age of Symptom Onset",
+     "Highest Motor Milestone Attained",
+     "SMN2 Copy Number / Life Expectancy"
+    ],
+    "rows": [
+     [
+      "SMA Type 1 (Werdnig-Hoffmann)",
+      "Birth to 6 months of age",
+      "Never achieves independent sitting",
+      "1-2 copies SMN2; death <2 years without support"
+     ],
+     [
+      "SMA Type 2 (Intermediate)",
+      "7 to 18 months of age",
+      "Achieves sitting independently, never stands",
+      "3 copies SMN2; survival into adolescence"
+     ],
+     [
+      "SMA Type 3 (Kugelberg-Welander)",
+      "After 18 months of age",
+      "Achieves independent standing and walking",
+      "3-4 copies SMN2; normal adult lifespan"
+     ],
+     [
+      "Disease-modifying therapies",
+      "Nusinersen (ASO), Risdiplam (oral)",
+      "Zolgensma (AAV9 gene replacement therapy)",
+      "Transforms survival when started presymptomatically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe infantile anterior horn cell degeneration produces a classic floppy infant syndrome with distinctive respiratory mechanics. Infants with **Werdnig-Hoffmann disease SMA Type 1** present before six months with profound generalized flaccidity, frog-leg posture, feeble cry, and fine fasciculations of the tongue. Because diaphragmatic innervation is spared while intercostal muscles are paralyzed, infants exhibit prominent paradoxical bell-shaped chest respiration.",
+   "say": "Type one SMA Werdnig-Hoffmann disease features profound hypotonia, frog-leg posture, and tongue fasciculations. Sparing of the diaphragm causes paradoxical bell-shaped breathing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Signs in SMA Type 1",
+     "points": [
+      "Profuse hypotonia with frog-leg posturing",
+      "Absent deep tendon reflexes (areflexia)",
+      "Fine fibrillary fasciculations of the tongue margin",
+      "Feeble, weak cry with swallowing difficulties"
+     ]
+    },
+    "right": {
+     "title": "Paradoxical Respiration Pattern",
+     "points": [
+      "Diaphragmatic phrenic nerve function preserved",
+      "Severe intercostal muscle paralysis and atrophy",
+      "Chest caves in while abdomen bulges on inspiration",
+      "Leads to bell-shaped chest wall deformity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute post-infectious autoimmune demyelination of peripheral nerves and spinal nerve roots follows common viral or enteric infections. Characteristically triggered by Campylobacter jejuni enteritis or respiratory viral illnesses, **pediatric Guillain-Barre syndrome** (GBS) represents an acute inflammatory demyelinating polyradiculoneuropathy (AIDP). Molecular mimicry between microbial lipooligosaccharides and human nerve gangliosides triggers autoantibody-mediated complement destruction of myelin sheaths.",
+   "say": "Guillain-Barre syndrome is an acute post-infectious demyelinating polyneuropathy triggered by Campylobacter or viral infections. Molecular mimicry triggers autoimmune myelin destruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gbs-fig1.webp",
+    "alt": "Diagram illustrating autoimmune attack on peripheral nerve myelin sheath and ascending motor paralysis in Guillain-Barre syndrome.",
+    "caption": "Immunological myelin sheath destruction and ascending motor paralysis in pediatric Guillain-Barre syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Symmetrical ascending motor paralysis with complete loss of deep tendon reflexes characterizes the classic clinical progression. Children develop **ascending flaccid paralysis in GBS**, commencing symmetrically in the distal lower extremities with gait instability and ascending over days to involve the thighs, trunk, upper extremities, and cranial nerves. Generalized areflexia is an essential prerequisite diagnostic criterion.",
+   "say": "Guillain-Barre syndrome causes symmetrical ascending flaccid weakness starting in the legs, with complete loss of tendon reflexes. Autonomic instability and respiratory failure can emerge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature in GBS",
+     "Characteristic Clinical Finding",
+     "Underlying Pathophysiology",
+     "Emergency Monitoring Precaution"
+    ],
+    "rows": [
+     [
+      "Motor weakness progression",
+      "Symmetrical ascending flaccid paralysis",
+      "Motor nerve demyelination and conduction block",
+      "Monitor forced vital capacity / negative inspiratory force"
+     ],
+     [
+      "Deep tendon reflexes",
+      "Complete generalized areflexia (absent reflexes)",
+      "Damage to afferent & efferent reflex arc loops",
+      "Universal diagnostic requirement"
+     ],
+     [
+      "Autonomic instability",
+      "Labile blood pressure, tachycardia, bradycardia",
+      "Demyelination of sympathetic / parasympathetic fibers",
+      "Continuous cardiac telemetry monitoring"
+     ],
+     [
+      "Cranial nerve involvement",
+      "Bilateral lower motor facial nerve palsy (facial diplegia)",
+      "Involvement of seventh cranial nerve roots",
+      "Protect corneas with lubricating eyedrops"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lumbar puncture performed one to two weeks following symptom onset reveals pathognomonic protein-cellular dissociation. Cerebrospinal fluid analysis demonstrates **albuminocytological dissociation in GBS**, marked by a dramatic elevation of CSF protein concentration (often exceeding one hundred to two hundred milligrams per decilitre) in the presence of a completely normal CSF total leukocyte count (below ten cells per microlitre).",
+   "say": "Albuminocytological dissociation is the classic CSF hallmark of Guillain-Barre syndrome, showing high protein with normal cell counts. Protein rises after the first week.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Albuminocytological Dissociation",
+     "points": [
+      "Markedly elevated CSF protein concentration (>100 mg/dL)",
+      "Normal CSF white blood cell count (<10 cells/mcL)",
+      "Appears after the first week of motor weakness",
+      "Reflects widespread spinal nerve root inflammation"
+     ]
+    },
+    "right": {
+     "title": "Nerve Conduction Studies (NCS)",
+     "points": [
+      "Prolonged distal motor latencies",
+      "Markedly slowed motor conduction velocities",
+      "Prolonged or absent F-waves (radicular involvement)",
+      "Conduction blocks across non-entrapment sites"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immunomodulatory intervention shortens illness duration and accelerates motor recovery when initiated early during the progressive phase. The two proven first-line treatments for **pediatric GBS immunotherapy** are intravenous immunoglobulin (IVIG at two grams per kilogram administered over two to five days) and therapeutic plasma exchange (plasmapheresis). Corticosteroids are completely ineffective in Guillain-Barre syndrome and should not be administered.",
+   "say": "Intravenous immunoglobulin at two grams per kilogram or plasma exchange is the treatment of choice for Guillain-Barre syndrome. Corticosteroids have no benefit and are not indicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunotherapy Modality",
+     "Dosing Protocol / Regimen",
+     "Clinical Efficacy / Benefits",
+     "Key Clinical Considerations"
+    ],
+    "rows": [
+     [
+      "Intravenous immunoglobulin (IVIG)",
+      "2 g/kg total dose over 2 to 5 consecutive days",
+      "Accelerates walking recovery, shortens ventilatory need",
+      "Check serum IgA to avoid anaphylaxis"
+     ],
+     [
+      "Therapeutic plasma exchange",
+      "5 exchanges (50 mL/kg each) over 1 to 2 weeks",
+      "Equal efficacy to IVIG; removes autoantibodies",
+      "Requires central line access; hemodynamically demanding"
+     ],
+     [
+      "Combined IVIG + Plasma exchange",
+      "Administering both sequentially",
+      "Provides no additional benefit over either alone",
+      "Not recommended in clinical guidelines"
+     ],
+     [
+      "Respiratory failure management",
+      "Mechanical ventilation for falling vital capacity",
+      "FVC <15-20 mL/kg or severe autonomic crisis",
+      "Elective intubation before acute hypoxia occurs"
+     ]
+    ]
+   }
+  }
+ ]
+}

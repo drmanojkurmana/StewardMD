@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pelvis-perineum",
+ "subject": "anatomy",
+ "title": "Urogenital Diaphragm, Perineal Pouches, and Ischioanal Fossa",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The perineum is a diamond-shaped space below the pelvic diaphragm bounded by the pubic symphysis anteriorly, ischiopubic rami anterolaterally, ischial tuberosities laterally, sacrotuberous ligaments posterolaterally, and coccyx posteriorly. An imaginary transverse line connecting the ischial tuberosities divides the diamond into an anterior **urogenital triangle** and a posterior anal triangle.",
+   "say": "Spanning the bony pelvic outlet, the perineum is divided by a line between the ischial tuberosities into an anterior urogenital triangle and a posterior anal triangle.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-perineum-diamond.svg",
+    "alt": "Diamond-shaped diagram showing division of perineum into urogenital and anal triangles",
+    "caption": "Division of the perineum into anterior urogenital and posterior anal triangles by the intertuberous line. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The urogenital diaphragm is a triangular musculoaponeurotic partition spanning the anterior half of the pelvic outlet. It comprises the **perineal membrane** (inferior fascia of urogenital diaphragm) below, the superior fascia of urogenital diaphragm above, and an enclosed deep perineal pouch housing the deep transverse perineal muscle and sphincter urethrae.",
+   "say": "Bridging the anterior outlet, the urogenital diaphragm consists of the perineal membrane inferiorly, superior fascia above, and intervening deep perineal pouch musculature.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "Superior Fascia (Thin fascial layer below levator ani)"
+     },
+     {
+      "id": "u2",
+      "label": "Deep Perineal Pouch (Sphincter urethrae and deep transverse perineal)"
+     },
+     {
+      "id": "u3",
+      "label": "Perineal Membrane (Dense triangular fibrous sheet spanning ischiopubic rami)"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The deep perineal pouch is the closed anatomical compartment bounded inferiorly by the perineal membrane and superiorly by the superior fascia of the urogenital diaphragm. In males, the **deep pouch** encloses the membranous urethra, the sphincter urethrae, the deep transverse perinei muscles, the bulbourethral glands of Cowper, and the internal pudendal neurovascular bundle.",
+   "say": "Bound by the perineal membrane, the deep perineal pouch contains the membranous urethra, sphincter urethrae, Cowper glands in males, and pudendal vessels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Male Deep Perineal Pouch",
+     "Female Deep Perineal Pouch"
+    ],
+    "rows": [
+     [
+      "Urethral segment",
+      "Membranous urethra (surrounded by sphincter)",
+      "Urethra piercing anteriorly"
+     ],
+     [
+      "Genital passages",
+      "None (pierced only by urethra)",
+      "Vagina piercing central aspect"
+     ],
+     [
+      "Glandular structures",
+      "Bulbourethral glands of Cowper (ducts open into spongy urethra)",
+      "None (Bartholin glands lie in superficial pouch)"
+     ],
+     [
+      "Muscles",
+      "Sphincter urethrae, deep transverse perineal",
+      "Sphincter urethrovaginalis, compressor urethrae"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superficial to the perineal membrane lies the superficial perineal pouch, bounded externally by the membranous layer of superficial perineal fascia (Colles fascia). The **superficial pouch** contains the erectile root structures of the external genitalia: crura of penis or clitoris covered by ischiocavernosus, and bulb of penis or vestibular bulbs covered by bulbospongiosus.",
+   "say": "Sandwiched between Colles fascia and the perineal membrane, the superficial pouch contains the erectile roots, ischiocavernosus, and bulbospongiosus muscles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Perineal Pouch",
+     "points": [
+      "Floor: Colles fascia; Roof: Perineal membrane",
+      "Contains crura and bulb of penis (or clitoris/vestibule)",
+      "Contains ischiocavernosus, bulbospongiosus, superficial transverse perineal",
+      "Contains greater vestibular glands of Bartholin in females",
+      "Continuous anteriorly with space beneath Scarpa fascia"
+     ]
+    },
+    "right": {
+     "title": "Deep Perineal Pouch",
+     "points": [
+      "Floor: Perineal membrane; Roof: Superior fascia",
+      "Contains membranous urethra and sphincter urethrae",
+      "Contains deep transverse perineal muscle",
+      "Contains bulbourethral glands of Cowper in males",
+      "Completely closed compartment without abdominal continuity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The perineal membrane is a dense, fibrous sheet attached laterally to the ischiopubic rami and centrally to the perineal body. Its thickened anterior margin forms the transverse perineal ligament, separated from the arcuate pubic ligament by a gap through which the **deep dorsal vein** of the penis or clitoris passes directly into the prostatic or vesical venous plexus.",
+   "say": "Attached to the ischiopubic rami, the perineal membrane features a free anterior edge. The deep dorsal vein passes above this ligament into the pelvic venous plexus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Arcuate Pubic Ligament (Bridges inferior margin of symphysis)"
+     },
+     {
+      "id": "p2",
+      "label": "Subpubic Gap (Transmits deep dorsal vein and dorsal nerves)"
+     },
+     {
+      "id": "p3",
+      "label": "Transverse Perineal Ligament (Thickened anterior edge of perineal membrane)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flanking the anal canal on either side is the ischioanal fossa (formerly ischiorectal fossa), a large, wedge-shaped space filled with soft, lobulated fat. The base of the **ischioanal fossa** is formed by the perianal skin, while its apex points superiorly where the sloping levator ani meets the vertical obturator internus covered by its fascia.",
+   "say": "On either side of the anal canal lies the wedge-shaped ischioanal fossa. Filled with pliable adipose tissue, it allows rectal expansion during the passage of stool.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-rectum.svg",
+    "alt": "Coronal section of rectum and anal canal showing ischioanal fossa lateral to levator ani and sphincters",
+    "caption": "Coronal view of the pelvic diaphragm and ischioanal fossa flanking the anal sphincteric complex. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The boundaries of the ischioanal fossa reflect its clinical role in infection spread. The lateral wall is formed by the ischial tuberosity and obturator internus muscle covered by obturator fascia. The medial wall is formed by the **levator ani** and external anal sphincter. Anteriorly, an anterior recess extends forward above the urogenital diaphragm toward the pubis.",
+   "say": "Bounded laterally by obturator internus and medially by levator ani, the fossa extends forward as an anterior recess. Infection can traverse behind the anus to form a horseshoe abscess.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Boundary",
+     "Anatomical Structure",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Base (inferior)",
+      "Perianal skin and subcutaneous fat",
+      "Site of incision and drainage for ischioanal abscess"
+     ],
+     [
+      "Lateral wall",
+      "Obturator internus and obturator fascia",
+      "Carries pudendal canal (Alcock canal) with pudendal bundle"
+     ],
+     [
+      "Medial wall",
+      "Levator ani and external anal sphincter",
+      "Prone to fistula formation connecting to anal crypts"
+     ],
+     [
+      "Posterior boundary",
+      "Sacrotuberous ligament and gluteus maximus",
+      "Posterior communication forms horseshoe abscess across deep space"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the adipose tissue of the ischioanal fossa has relatively poor vascularity, bacterial inoculation from infected anal glands characteristically triggers a virulent ischioanal abscess. Because the bilateral fossae communicate with each other posteriorly through the deep postanal space behind the anococcygeal ligament, infection spreads circumferentially to form a classic **horseshoe abscess**.",
+   "say": "Avascular fat renders the fossa vulnerable to infection originating in anal crypts. Bilateral communications behind the anococcygeal ligament enable rapid formation of a horseshoe abscess.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Cryptoglandular Infection (Infected anal valve crypt penetrates sphincters)"
+     },
+     {
+      "id": "a2",
+      "label": "Ischioanal Fossa Suppuration (Pus expands easily within soft adipose matrix)"
+     },
+     {
+      "id": "a3",
+      "label": "Trans-sphincteric Extension (Crosses deep postanal space into contralateral fossa)"
+     },
+     {
+      "id": "a4",
+      "label": "Horseshoe Abscess / Complex Fistula-in-Ano (Requires bilateral counter-drainage)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "be60f913-80ac-4d2f-9b3a-ee0c2a4ea633",
+  "1fbdcb31-0f15-41bd-9102-af8b436d15f5",
+  "4ab4ea10-69e7-43e6-b10d-0c4ce2dce005"
+ ]
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-digestion-absorption",
+  "subject": "physiology",
+  "title": "Enterokinase, Trypsinogen Activation, and Lipid Absorption",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "To prevent catastrophic autodigestion of pancreatic parenchyma, the exocrine pancreas synthesizes and packages all proteolytic enzymes as inactive zymogens. Safe physiological activation occurs only upon contact with the duodenal brush border, where the transmembrane serine protease **enteropeptidase**, or enterokinase, initiates the activation cascade.",
+      "say": "Pancreatic proteases are secreted as inactive zymogens, activated only when enterokinase on duodenal microvilli cleaves trypsinogen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pancreas",
+            "label": "Pancreas Synthesizes Inactive Trypsinogen, Chymotrypsinogen, and Procarboxypeptidases"
+          },
+          {
+            "id": "enteropep",
+            "label": "Duodenal Brush Border Enteropeptidase Cleaves Hexapeptide from Trypsinogen"
+          },
+          {
+            "id": "trypsin",
+            "label": "Active Trypsin Formed: Autocatalytically Activates Remaining Trypsinogen"
+          },
+          {
+            "id": "cascade",
+            "label": "Trypsin Cleaves and Activates All Pancreatic Zymogens (Chymotrypsin, Elastase, Lipase)"
+          }
+        ],
+        "edges": [
+          [
+            "pancreas",
+            "enteropep"
+          ],
+          [
+            "enteropep",
+            "trypsin"
+          ],
+          [
+            "trypsin",
+            "cascade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Enteropeptidase recognizes a unique aspartate-aspartate-aspartate-aspartate-lysine recognition sequence, cleaving an N-terminal hexapeptide to convert inactive trypsinogen into active **trypsin**. Once generated, active trypsin autocatalytically activates remaining trypsinogen and cleaves all other pancreatic proenzymes, functioning as the master proteolytic switch of digestion.",
+      "say": "Enteropeptidase converts trypsinogen to active trypsin, which then autocatalytically activates all other pancreatic enzymes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enteropeptidase (Enterokinase)",
+          "points": [
+            "Transmembrane serine protease anchored to duodenal brush border",
+            "Synthesized in duodenal enterocytes; shed by bile acids",
+            "Exquisite specificity for Asp-Asp-Asp-Asp-Lys sequence",
+            "Congenital deficiency causes severe protein malabsorption and failure to thrive"
+          ]
+        },
+        "right": {
+          "title": "Active Trypsin",
+          "points": [
+            "Endopeptidase cleaving interior peptide bonds at Arg and Lys residues",
+            "Autocatalytic positive feedback activates further trypsinogen",
+            "Cleaves chymotrypsinogen, proelastase, procarboxypeptidase A and B",
+            "Also cleaves prophospholipase A2 and procolipase"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following luminal digestion, dietary proteins are absorbed across apical enterocyte membranes as free amino acids and small peptides. Dipeptides and tripeptides are absorbed far more rapidly than free amino acids via the apical **PepT1 oligopeptide transporter**, which couples transport to a downhill proton gradient.",
+      "say": "Small peptides enter enterocytes faster than free amino acids via PepT1 cotransporters powered by proton gradients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protein Breakdown Product",
+          "Apical Transporter",
+          "Driving Force",
+          "Intracellular Processing"
+        ],
+        "rows": [
+          [
+            "Dipeptides and Tripeptides",
+            "PepT1 (SLC15A1)",
+            "Secondary active (H+ gradient via NHE3)",
+            "Hydrolyzed to free amino acids by cytoplasmic peptidases"
+          ],
+          [
+            "Neutral Amino Acids",
+            "B0AT1 (SLC6A19)",
+            "Secondary active (Na+ gradient)",
+            "Translocated intact into portal venous blood (Hartnup disease)"
+          ],
+          [
+            "Basic Amino Acids & Cystine",
+            "b0,+ system (rBAT)",
+            "Na+-independent exchange for neutral amino acids",
+            "Translocated to portal blood (Cystinuria stone disease)"
+          ],
+          [
+            "Acidic Amino Acids",
+            "EAAT3 (SLC1A1)",
+            "Sodium- and proton-dependent uptake",
+            "Used locally for enterocyte energy metabolism"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dietary fat digestion occurs predominantly in the upper small intestine through the concerted actions of pancreatic lipase and colipase. Pancreatic lipase hydrolyzes triacylglycerols at the one and three ester positions, generating two free fatty acids and one **two-monoacylglycerol molecule** for micellar incorporation.",
+      "say": "Pancreatic lipase and colipase break dietary triglycerides into two free fatty acids and one two-monoacylglycerol.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/digestion-absorption-enzymes-bile-fig1.webp",
+        "alt": "Pancreatic lipase hydrolysis and lipid micelle assembly",
+        "caption": "Triacylglycerol hydrolysis, bile salt emulsification, and mixed lipid micelle transport."
+      }
+    },
+    {
+      "tx": "Because bile salts displace pancreatic lipase from the lipid droplet interface, active lipolysis requires the essential protein cofactor **pancreatic colipase**. Secreted as procolipase and cleaved by trypsin, colipase anchors pancreatic lipase to bile-salt-coated lipid emulsion droplets, restoring full enzymatic catalytic activity.",
+      "say": "Colipase anchors pancreatic lipase to bile-coated lipid droplets, preventing bile salts from shutting off fat digestion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lipid_emuls",
+            "label": "Gastric Milling and Biliary Bile Salts Emulsify Lipids into Fine Droplets"
+          },
+          {
+            "id": "displacement",
+            "label": "Amphipathic Bile Salts Coat Droplet, Displacing Pancreatic Lipase from Substrate"
+          },
+          {
+            "id": "colipase_act",
+            "label": "Trypsin Cleaves Procolipase to Active Colipase; Binds Droplet Surface"
+          },
+          {
+            "id": "anchor",
+            "label": "Colipase Anchors Pancreatic Lipase, Permitting Rapid Triglyceride Hydrolysis"
+          }
+        ],
+        "edges": [
+          [
+            "lipid_emuls",
+            "displacement"
+          ],
+          [
+            "displacement",
+            "colipase_act"
+          ],
+          [
+            "colipase_act",
+            "anchor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hydrolyzed lipid products are water-insoluble and cannot cross the unstirred aqueous water layer lining the intestinal mucosa without solubilization. Bile salts assemble these insoluble lipids into spherical polymolecular aggregates known as **mixed lipid micelles**, which ferry monoglycerides and fat-soluble vitamins to the microvilli.",
+      "say": "Mixed micelles carry water-insoluble fatty acids and cholesterol across the unstirred water layer to enterocytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mixed Micelle Structure",
+          "points": [
+            "Disc-shaped aggregates (4 to 7 nm diameter)",
+            "Hydrophobic interior: Fatty acids, 2-monoacylglycerols, cholesterol",
+            "Hydrophilic exterior: Amphipathic conjugated bile salts and phospholipids",
+            "Allows lipid diffusion across unstirred aqueous mucosal layer"
+          ]
+        },
+        "right": {
+          "title": "Chylomicron Structure",
+          "points": [
+            "Massive lipoprotein spheres (75 to 450 nm diameter)",
+            "Core: Re-esterified triacylglycerols and cholesteryl esters",
+            "Surface: Monolayer of phospholipids and apolipoprotein B-48",
+            "Exported via exocytosis into lacteals and systemic lymphatic ducts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "At the microvillar surface, acidic microenvironments break micelles apart, releasing lipids that diffuse passively or via protein carriers into enterocyte cytoplasm. Within the smooth endoplasmic reticulum, fatty acids and monoglycerides are re-esterified into triacylglycerols and packaged into **apolipoprotein B-48 chylomicrons**.",
+      "say": "Inside enterocytes, lipids are re-esterified into triglycerides and packaged with apolipoprotein B-48 into chylomicrons.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "uptake",
+            "label": "Lipids Diffuse Across Apical Enterocyte Membrane; Bile Salts Remain in Lumen"
+          },
+          {
+            "id": "re_ester",
+            "label": "Smooth Endoplasmic Reticulum Re-Synthesizes Triglycerides via MGAT and DGAT"
+          },
+          {
+            "id": "package",
+            "label": "Microsomal Triglyceride Transfer Protein (MTP) Packages Lipids with ApoB-48"
+          },
+          {
+            "id": "exocytose",
+            "label": "Chylomicrons Exocytosed Across Basolateral Membrane into Central Lacteals"
+          }
+        ],
+        "edges": [
+          [
+            "uptake",
+            "re_ester"
+          ],
+          [
+            "re_ester",
+            "package"
+          ],
+          [
+            "package",
+            "exocytose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because chylomicrons are too large to penetrate closed basement membranes of blood capillaries, they enter specialized lymphatic capillaries known as **central lacteals**. Chylomicrons travel via mesenteric lymph and the thoracic duct to enter the left subclavian vein, completely bypassing hepatic first-pass metabolism.",
+      "say": "Chylomicrons enter central lacteals and the thoracic duct, bypassing liver first-pass metabolism to enter the bloodstream.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+        "alt": "Intestinal mucosal architecture and lacteal lymphatic transport",
+        "caption": "Mucosal villus architecture, central lacteal lymphatic drainage, and lipid absorption disorders."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

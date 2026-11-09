@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "phy-hormone-pituitary",
+ "subject": "physiology",
+ "title": "Nuclear Receptors, Hypothalamic Hormones, and Prolactin",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Lipophilic steroid hormones, thyroid hormones, and active vitamin D metabolites readily cross lipid cell membranes to bind specific **intracellular nuclear receptors**. These ligand-activated transcription factors contain a variable N-terminal regulatory domain, a central zinc-finger DNA-binding domain, and a C-terminal ligand-binding domain to alter downstream target gene expression.",
+   "say": "Lipophilic steroids and thyroid hormones bind intracellular nuclear receptors that directly alter gene transcription.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I Nuclear Receptors (Steroids)",
+     "points": [
+      "Glucocorticoid, mineralocorticoid, androgen, progesterone receptors",
+      "Located in cytoplasm complexed with heat shock proteins (HSP90)",
+      "Ligand binding dissociates HSP; receptor homodimerizes",
+      "Translocates to nucleus to bind inverted repeat hormone response elements"
+     ]
+    },
+    "right": {
+     "title": "Type II Nuclear Receptors (Thyroid / Vitamin D)",
+     "points": [
+      "Thyroid hormone (TR), vitamin D (VDR), and retinoic acid receptors",
+      "Located constitutively bound to DNA inside the nucleus",
+      "Forms heterodimers with retinoid X receptor (RXR)",
+      "Ligand binding releases corepressors and recruits coactivators"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Upon ligand binding, transformed steroid receptor homodimers translocate into the cell nucleus, binding with high affinity to specific palindromic DNA sequences known as **hormone response elements**. Recruited histone acetyltransferases remodel chromatin architecture, initiating target gene messenger RNA transcription over hours.",
+   "say": "Steroid-receptor complexes bind palindromic hormone response elements on DNA to stimulate messenger RNA synthesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "steroid_diff",
+      "label": "Lipophilic Steroid Hormone Diffuses Passively Across Plasma Membrane"
+     },
+     {
+      "id": "hsp_drop",
+      "label": "Ligand Binds Cytosolic Receptor; Heat Shock Chaperones Dissociate"
+     },
+     {
+      "id": "homodimer",
+      "label": "Receptor Homodimerizes and Translocates Through Nuclear Pores"
+     },
+     {
+      "id": "hre_bind",
+      "label": "Binds Palindromic Hormone Response Element on DNA, Activating Transcription"
+     }
+    ],
+    "edges": [
+     [
+      "steroid_diff",
+      "hsp_drop"
+     ],
+     [
+      "hsp_drop",
+      "homodimer"
+     ],
+     [
+      "homodimer",
+      "hre_bind"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The central coordinator linking the nervous system to the endocrine system is the hypothalamus, which regulates anterior pituitary gland secretion through the specialized **hypophyseal portal system**. Parvocellular neurosecretory neurons synthesize hypophysiotropic hormones, secreting them directly into median eminence primary capillary plexuses.",
+   "say": "Hypothalamic releasing hormones travel through the hypophyseal portal system directly to anterior pituitary cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "parvo",
+      "label": "Hypothalamic Parvocellular Neurons Synthesize Releasing / Inhibiting Hormones"
+     },
+     {
+      "id": "median_emin",
+      "label": "Neurosecretion into Primary Capillary Plexus in the Median Eminence"
+     },
+     {
+      "id": "portal_veins",
+      "label": "Hypophyseal Portal Veins Transport Undiluted Hormones Down Pituitary Stalk"
+     },
+     {
+      "id": "ant_pit",
+      "label": "Secondary Capillary Plexus Bathes Anterior Pituitary Troph Cells"
+     }
+    ],
+    "edges": [
+     [
+      "parvo",
+      "median_emin"
+     ],
+     [
+      "median_emin",
+      "portal_veins"
+     ],
+     [
+      "portal_veins",
+      "ant_pit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "By avoiding dilution in the general systemic circulation, the hypophyseal portal vasculature delivers high local concentrations of hypothalamic releasing hormones directly to anterior pituitary cells. Traumatic transection of the pituitary stalk isolates the anterior pituitary, causing all hormones to decline except for **paradoxical prolactin elevation**.",
+   "say": "Severing the pituitary stalk drops all anterior pituitary hormones except prolactin, which increases sharply.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypothalamic Factor",
+     "Target Pituitary Cell",
+     "Pituitary Hormone Released",
+     "Downstream Peripheral Target"
+    ],
+    "rows": [
+     [
+      "TRH (Thyrotropin-Releasing)",
+      "Thyrotrophs",
+      "TSH (Thyroid-Stimulating Hormone)",
+      "Thyroid gland (T3 and T4 synthesis)"
+     ],
+     [
+      "GnRH (Gonadotropin-Releasing)",
+      "Gonadotrophs",
+      "FSH and LH",
+      "Gonads (gametogenesis and sex steroids)"
+     ],
+     [
+      "CRH (Corticotropin-Releasing)",
+      "Corticotrophs",
+      "ACTH (Adrenocorticotropic Hormone)",
+      "Adrenal zona fasciculata (cortisol)"
+     ],
+     [
+      "GHRH (Growth Hormone-Releasing)",
+      "Somatotrophs",
+      "GH (Growth Hormone)",
+      "Liver (IGF-1 synthesis) and tissues"
+     ],
+     [
+      "Dopamine (Prolactin-Inhibiting)",
+      "Lactotrophs",
+      "Inhibits Prolactin Secretion",
+      "Breast lobuloalveolar epithelium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unlike other anterior pituitary hormones governed primarily by hypothalamic releasing peptides, the polypeptide hormone **prolactin** is held under continuous, dominant tonic inhibition by hypothalamic dopamine. Dopamine secreted from tuberoinfundibular neurons binds lactotroph D2 receptors, suppressing intracellular cyclic AMP and prolactin exocytosis.",
+   "say": "Prolactin is under constant tonic inhibition by dopamine, which suppresses its secretion via D2 receptors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal Tonic Inhibition (Dopamine)",
+     "points": [
+      "Tuberoinfundibular dopaminergic neurons in arcuate nucleus",
+      "D2 dopamine receptors couple to Gi, lowering cyclic AMP",
+      "Suppresses baseline lactotroph proliferation and secretion",
+      "Disrupted by dopamine antagonists (antipsychotics, metoclopramide)"
+     ]
+    },
+    "right": {
+     "title": "Stimulatory Modulators",
+     "points": [
+      "Thyrotropin-releasing hormone (TRH) potently stimulates prolactin",
+      "Explains hyperprolactinaemia in primary hypothyroidism",
+      "High-dose estrogen promotes lactotroph hyperplasia during pregnancy",
+      "Suckling infant stimulus activates sensory spinothalamic reflex arcs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prolactin stimulates mammary lobuloalveolar proliferation during pregnancy and coordinates postprandial enzymatic synthesis of milk caseins, lipids, and lactose. Furthermore, high circulating prolactin levels suppress the hypothalamic pulsatile release of GnRH, serving as the primary physiological mechanism underlying **lactational amenorrhoea** in nursing mothers.",
+   "say": "Prolactin promotes breast milk synthesis and suppresses GnRH, causing lactational amenorrhoea in breastfeeding mothers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suckle",
+      "label": "Infant Suckling Nipple Stimulates Tactile Mechanoreceptors"
+     },
+     {
+      "id": "spinothal",
+      "label": "Afferents Ascend Spinal Cord to Inhibit Arcuate Dopaminergic Neurons"
+     },
+     {
+      "id": "prl_surge",
+      "label": "Disinhibition of Lactotrophs Elicits Massive Secretory Surge of Prolactin"
+     },
+     {
+      "id": "milk_synth",
+      "label": "Stimulates Mammary Alveolar Epithelium to Synthesize Milk Proteins"
+     }
+    ],
+    "edges": [
+     [
+      "suckle",
+      "spinothal"
+     ],
+     [
+      "spinothal",
+      "prl_surge"
+     ],
+     [
+      "prl_surge",
+      "milk_synth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common functioning pituitary neuroendocrine tumor is a **prolactinoma**, arising from neoplastic expansion of lactotroph cells. In premenopausal women, excessive prolactin secretion causes amenorrhoea, galactorrhoea, and infertility; in men, it presents later with erectile dysfunction, decreased libido, and bitemporal hemianopia from chiasmatic compression.",
+   "say": "Prolactinomas cause galactorrhoea and infertility in women, and visual field defects and hypogonadism in men.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prolactinoma-fig1.webp",
+    "alt": "Pituitary adenoma histopathology and prolactinoma",
+    "caption": "Lactotroph neuroendocrine adenoma, galactorrhoea-amenorrhoea syndrome, and optic chiasm compression."
+   }
+  },
+  {
+   "tx": "First-line medical therapy for prolactinomas employs long-acting **dopamine D2 agonists** like cabergoline and bromocriptine. By mimicking endogenous dopamine, these oral agents normalize circulating prolactin levels, restore gonadal fertility, and induce significant shrinkage of pituitary macroadenomas in over eighty percent of patients.",
+   "say": "Cabergoline and bromocriptine are dopamine agonists that shrink prolactinomas and restore normal fertility.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pituitary-gh-desmopressin-oxytocin-dopamine-fig1.webp",
+    "alt": "Regulatory pathway shows hypothalamus, pituitary and target organs with drug sites.",
+    "caption": "Regulatory pathway shows hypothalamus, pituitary and target organs with drug sites. Diagram outlines pituitary regulation and drug target sites. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
