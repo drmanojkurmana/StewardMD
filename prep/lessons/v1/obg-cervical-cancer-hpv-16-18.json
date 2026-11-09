@@ -1,226 +1,226 @@
 {
- "v": 1,
- "module": "obg-cervical-cancer",
- "subject": "obstetrics-gynaecology",
- "title": "HPV, CIN and Cervical Screening Foundations",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "Persistent infection with the two dominant high risk human papillomavirus types causes **cervical cancer risk**. Most infections clear spontaneously within two years in young women. Persistence, not mere exposure, is the dangerous state that screening seeks. Viral proteins disable the cell cycle guards that normally delete damaged cells.",
-   "say": "High risk HPV types cause most cervical cancers when infection persists.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/cervix-uterus-hpv-endometrial-leiomyoma-fig1.webp",
-    "alt": "HPV dysplasia of the cervix.",
-    "caption": "HPV and cervix. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The junction where columnar epithelium transforms to squamous epithelium is the **transformation zone**. Immature metaplastic cells there are uniquely vulnerable to viral transformation. Nearly all cervical cancers begin inside this narrow band. Sampling and colposcopy both fail when they miss the transformation zone, however elegant the technique.",
-   "say": "The transformation zone is where nearly all cervical cancers begin.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Zone feature",
-     "Meaning"
-    ],
-    "rows": [
-     [
-      "Metaplastic cells",
-      "Vulnerable"
-     ],
-     [
-      "Cancer origin",
-      "This band"
-     ],
-     [
-      "Sampling target",
-      "Whole zone"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Precancer graded by how much epithelium abnormal cells occupy is **cervical intraepithelial neoplasia**, or CIN. Lower grades commonly regress, especially in young women. The highest grade occupies full thickness and earns the name carcinoma in situ. Grade decides treatment urgency because progression risk climbs steeply with each step.",
-   "say": "Cervical intraepithelial neoplasia is graded by epithelial thickness involved.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Grade",
-     "Epithelium",
-     "Usual course"
-    ],
-    "rows": [
-     [
-      "Low",
-      "Lower third",
-      "Regresses"
-     ],
-     [
-      "Middle",
-      "Two thirds",
-      "Variable"
-     ],
-     [
-      "High",
-      "Full thickness",
-      "Treat"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Exfoliated cervical cells spread and stained for abnormal nuclei form the **Pap smear**. It detects precancer years before invasion, which is its entire value. A smear is a screening test, not a diagnosis, and abnormal results demand triage rather than treatment. Regular rescreening rescues women whose single smear misses disease.",
-   "say": "The Pap smear involves screening cells and requires triage after abnormal results.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Cells sampled"
-     },
-     {
-      "id": "n1",
-      "label": "Abnormal nuclei seen"
-     },
-     {
-      "id": "n2",
-      "label": "Triage test"
-     },
-     {
-      "id": "n3",
-      "label": "Colposcopy or recall"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "From infection to invasion usually takes a decade or more, giving **natural history** its screening window. Regression dominates at every early step, so most abnormal results never become cancer. Smoking, immunosuppression and parity tilt persistence upward. The long window rewards organised programmes and punishes opportunistic once-only testing.",
-   "say": "Natural history provides a long screening window because progression is slow.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Factor",
-     "Effect"
-    ],
-    "rows": [
-     [
-      "Smoking",
-      "Persistence rises"
-     ],
-     [
-      "Immunosuppression",
-      "Progression rises"
-     ],
-     [
-      "Youth",
-      "Clearance rises"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Early sexual debut, multiple partners and smoking raise exposure and persistence, listing **risk factors**. Barrier contraception reduces but never abolishes transmission through skin contact. HIV infection accelerates every step from persistence to invasion. Risk talk informs screening intensity without blaming women for a near universal infection.",
-   "say": "Risk factors involve exposure, smoking and immunosuppression raising persistence.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Exposure occurs"
-     },
-     {
-      "id": "n1",
-      "label": "Infection persists"
-     },
-     {
-      "id": "n2",
-      "label": "Precancer develops"
-     },
-     {
-      "id": "n3",
-      "label": "Invasion follows"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Virus like particle vaccines preventing HPV infection are primary prevention through **HPV vaccine**. Vaccination before sexual debut gives near complete protection against covered types. The nonavalent vaccine covers the types behind most cancers and genital warts. Vaccinated women still need screening because no vaccine covers every oncogenic type.",
-   "say": "HPV vaccine prevents infection and reduces cervical cancer before exposure.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-nonavalent-hpv-vaccine.webp",
-    "alt": "Nonavalent HPV vaccination.",
-    "caption": "HPV vaccination. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Screening targets sexually active women through midlife at regular intervals, following **screening practice**. Starting too young finds transient infections and causes harm through overtreatment. Stopping after adequate negative screening in older women is safe. Every programme balances interval against capacity, because an unscreened woman matters more than a rescreened one.",
-   "say": "Screening practice involves regular intervals through midlife for eligible women.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Programme choice",
-     "Reason"
-    ],
-    "rows": [
-     [
-      "Age floor",
-      "Avoid transient disease"
-     ],
-     [
-      "Regular interval",
-      "Rescue missed lesions"
-     ],
-     [
-      "Exit testing",
-      "Safe stopping"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Precancer treatment prevents cancer only inside organised follow up, closing the **prevention chain**. Vaccination, screening, triage, treatment and recall each protect a different link. Breaks at recall lose more women than breaks in laboratory accuracy. The chain framing turns cervical cancer into a systems disease that organisation can nearly eliminate.",
-   "say": "The prevention chain requires vaccination, screening, treatment and recall together.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-hpv-vaccine.webp",
-    "alt": "HPV vaccine prevention.",
-    "caption": "Vaccine prevention. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  }
- ]
+  "v": 1,
+  "module": "obg-cervical-cancer",
+  "subject": "obstetrics-gynaecology",
+  "title": "HPV, CIN and Cervical Screening Foundations",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Persistent infection with the two dominant high risk human papillomavirus types causes **cervical cancer risk**. Most infections clear spontaneously within two years in young women. Persistence, not mere exposure, is the dangerous state that screening seeks. Viral proteins disable the cell cycle guards that normally delete damaged cells.",
+      "say": "High risk HPV types cause most cervical cancers when infection persists.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cervix-uterus-hpv-endometrial-leiomyoma-fig1.webp",
+        "alt": "HPV dysplasia of the cervix.",
+        "caption": "Cervical transformation zone pathology illustrating persistent high-risk HPV oncogenesis driving cervical intraepithelial neoplasia. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "The junction where columnar epithelium transforms to squamous epithelium is the **transformation zone**. Immature metaplastic cells there are uniquely vulnerable to viral transformation. Nearly all cervical cancers begin inside this narrow band. Sampling and colposcopy both fail when they miss the transformation zone, however elegant the technique.",
+      "say": "The transformation zone is where nearly all cervical cancers begin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Zone feature",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "Metaplastic cells",
+            "Vulnerable"
+          ],
+          [
+            "Cancer origin",
+            "This band"
+          ],
+          [
+            "Sampling target",
+            "Whole zone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Precancer graded by how much epithelium abnormal cells occupy is **cervical intraepithelial neoplasia**, or CIN. Lower grades commonly regress, especially in young women. The highest grade occupies full thickness and earns the name carcinoma in situ. Grade decides treatment urgency because progression risk climbs steeply with each step.",
+      "say": "Cervical intraepithelial neoplasia is graded by epithelial thickness involved.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Grade",
+          "Epithelium",
+          "Usual course"
+        ],
+        "rows": [
+          [
+            "Low",
+            "Lower third",
+            "Regresses"
+          ],
+          [
+            "Middle",
+            "Two thirds",
+            "Variable"
+          ],
+          [
+            "High",
+            "Full thickness",
+            "Treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Exfoliated cervical cells spread and stained for abnormal nuclei form the **Pap smear**. It detects precancer years before invasion, which is its entire value. A smear is a screening test, not a diagnosis, and abnormal results demand triage rather than treatment. Regular rescreening rescues women whose single smear misses disease.",
+      "say": "The Pap smear involves screening cells and requires triage after abnormal results.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Cells sampled"
+          },
+          {
+            "id": "n1",
+            "label": "Abnormal nuclei seen"
+          },
+          {
+            "id": "n2",
+            "label": "Triage test"
+          },
+          {
+            "id": "n3",
+            "label": "Colposcopy or recall"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "From infection to invasion usually takes a decade or more, giving **natural history** its screening window. Regression dominates at every early step, so most abnormal results never become cancer. Smoking, immunosuppression and parity tilt persistence upward. The long window rewards organised programmes and punishes opportunistic once-only testing.",
+      "say": "Natural history provides a long screening window because progression is slow.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Factor",
+          "Effect"
+        ],
+        "rows": [
+          [
+            "Smoking",
+            "Persistence rises"
+          ],
+          [
+            "Immunosuppression",
+            "Progression rises"
+          ],
+          [
+            "Youth",
+            "Clearance rises"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Early sexual debut, multiple partners and smoking raise exposure and persistence, listing **risk factors**. Barrier contraception reduces but never abolishes transmission through skin contact. HIV infection accelerates every step from persistence to invasion. Risk talk informs screening intensity without blaming women for a near universal infection.",
+      "say": "Risk factors involve exposure, smoking and immunosuppression raising persistence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Exposure occurs"
+          },
+          {
+            "id": "n1",
+            "label": "Infection persists"
+          },
+          {
+            "id": "n2",
+            "label": "Precancer develops"
+          },
+          {
+            "id": "n3",
+            "label": "Invasion follows"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Virus like particle vaccines preventing HPV infection are primary prevention through **HPV vaccine**. Vaccination before sexual debut gives near complete protection against covered types. The nonavalent vaccine covers the types behind most cancers and genital warts. Vaccinated women still need screening because no vaccine covers every oncogenic type.",
+      "say": "HPV vaccine prevents infection and reduces cervical cancer before exposure.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-nonavalent-hpv-vaccine.webp",
+        "alt": "Nonavalent HPV vaccination.",
+        "caption": "Recombinant nonavalent HPV vaccine virus-like particle antigens targeting high-risk oncogenic and low-risk wart types. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Screening targets sexually active women through midlife at regular intervals, following **screening practice**. Starting too young finds transient infections and causes harm through overtreatment. Stopping after adequate negative screening in older women is safe. Every programme balances interval against capacity, because an unscreened woman matters more than a rescreened one.",
+      "say": "Screening practice involves regular intervals through midlife for eligible women.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Programme choice",
+          "Reason"
+        ],
+        "rows": [
+          [
+            "Age floor",
+            "Avoid transient disease"
+          ],
+          [
+            "Regular interval",
+            "Rescue missed lesions"
+          ],
+          [
+            "Exit testing",
+            "Safe stopping"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Precancer treatment prevents cancer only inside organised follow up, closing the **prevention chain**. Vaccination, screening, triage, treatment and recall each protect a different link. Breaks at recall lose more women than breaks in laboratory accuracy. The chain framing turns cervical cancer into a systems disease that organisation can nearly eliminate.",
+      "say": "The prevention chain requires vaccination, screening, treatment and recall together.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-hpv-vaccine.webp",
+        "alt": "HPV vaccine prevention.",
+        "caption": "HPV vaccination and cervical precancer treatment pathways for global cervical carcinoma elimination. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    }
+  ]
 }

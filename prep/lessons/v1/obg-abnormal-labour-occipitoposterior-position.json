@@ -1,216 +1,216 @@
 {
- "v": 1,
- "module": "obg-abnormal-labour",
- "subject": "obstetrics-gynaecology",
- "title": "Occipitoposterior Position, Breech and External Cephalic Version",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "The head entering with occiput toward the mothers back is the **occipitoposterior position**. It causes backache labour, early urge to push and slower progress. Most rotate anteriorly during descent; persistent cases deliver face to pubes or need assistance. About one in five labours starts posterior, and most rotate the long way round to anterior during descent.",
-   "say": "Occipitoposterior position causes backache labour and mostly rotates anteriorly during descent.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "OP position"
-    ],
-    "rows": [
-     [
-      "Pain",
-      "Backache dominant"
-     ],
-     [
-      "Progress",
-      "Slower"
-     ],
-     [
-      "Outcome",
-      "Most rotate anterior"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Buttocks or feet presenting instead of the head is **breech presentation**. Three percent of term pregnancies remain breech. Planned caesarean became standard after trial evidence, though skilled vaginal breech birth persists in selected cases. The Term Breech Trial cut perinatal death and serious morbidity about threefold with planned caesarean.",
-   "say": "Breech presentation affects three percent at term and usually delivers by planned caesarean.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-fetal_skull.webp",
-    "alt": "Breech and head position assessment.",
-    "caption": "Presentation assessment. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Turning a breech baby to head down by abdominal pressure from thirty six weeks is **external cephalic version**. Tocolysis, monitoring and anti-D accompany the procedure. Success averages half, higher in multiparous women. Success is about 50 to 70 percent, and a failed attempt still allows planned caesarean or induction.",
-   "say": "External cephalic version turns breech babies from thirty six weeks with tocolysis.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Breech at 36 weeks"
-     },
-     {
-      "id": "n1",
-      "label": "Version attempted with monitoring"
-     },
-     {
-      "id": "n2",
-      "label": "Half succeed"
-     },
-     {
-      "id": "n3",
-      "label": "Caesarean avoided if so"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Delivering the breech babys head with jaw flexion and suprapubic pressure is the **Mauriceau-Smellie-Veit** manoeuvre. The body rests on the operators forearm while fingers flex the head. Forceps to the aftercoming head are the alternative. Forceps cradle the head and traction follows uterine contractions only; pulling between them injures the neck.",
-   "say": "Mauriceau-Smellie-Veit delivers the aftercoming head by jaw flexion and pressure.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Mauriceau-Smellie-Veit",
-     "points": [
-      "Hands only",
-      "Flexion maintained"
-     ]
+  "v": 1,
+  "module": "obg-abnormal-labour",
+  "subject": "obstetrics-gynaecology",
+  "title": "Occipitoposterior Position, Breech and External Cephalic Version",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The head entering with occiput toward the mothers back is the **occipitoposterior position**. It causes backache labour, early urge to push and slower progress. Most rotate anteriorly during descent; persistent cases deliver face to pubes or need assistance. About one in five labours starts posterior, and most rotate the long way round to anterior during descent.",
+      "say": "Occipitoposterior position causes backache labour and mostly rotates anteriorly during descent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "OP position"
+        ],
+        "rows": [
+          [
+            "Pain",
+            "Backache dominant"
+          ],
+          [
+            "Progress",
+            "Slower"
+          ],
+          [
+            "Outcome",
+            "Most rotate anterior"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Piper forceps",
-     "points": [
-      "Instrumental control",
-      "Head guided by blades"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Frank, complete and footling describe breech types by leg posture, termed **breech varieties**. Footling breech risks cord prolapse most and excludes vaginal birth. Frank breech with extended legs is the most favourable for vaginal delivery. In footling breech the cord prolapses in about 10 to 15 percent, the figure behind excluding it from vaginal birth.",
-   "say": "Breech varieties by leg posture change cord prolapse risk and vaginal suitability.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Type",
-     "Legs"
-    ],
-    "rows": [
-     [
-      "Frank",
-      "Extended up"
-     ],
-     [
-      "Complete",
-      "Flexed"
-     ],
-     [
-      "Footling",
-      "Foot presenting, highest risk"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Back pain relief in posterior labour uses position change and water, following **posterior labour support**. Hands and knees posture encourages rotation and eases sacral pressure. Epidural rates are higher in these longer labours. Sterile water injections into the lower back skin are another drug free option some units offer for back labour.",
-   "say": "Posterior labour support uses hands and knees posture to encourage rotation.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
-    "alt": "Posterior labour support positions.",
-    "caption": "Labour support. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Manual or instrumental rotation of the posterior head at full dilation is **rotational delivery**. Kielland forceps historically, vacuum or manual rotation now, convert arrest into delivery. Caesarean at full dilation is the morbid alternative they avoid. Manual rotation followed by a straight lift out delivery avoids the rotational forceps skills many units no longer teach.",
-   "say": "Rotational delivery converts posterior arrest into vaginal birth avoiding full dilation caesarean.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Arrest at full dilation"
-     },
-     {
-      "id": "n1",
-      "label": "Rotation attempted by expert"
-     },
-     {
-      "id": "n2",
-      "label": "Vacuum or forceps applied"
-     },
-     {
-      "id": "n3",
-      "label": "Vaginal delivery completed"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Persistent occiput transverse arrest in the midpelvis is **deep transverse arrest**. It reflects android pelvic shape or deflexion. Rotation, instrumental delivery or caesarean resolve it by operator skill and findings. It typically arrests at the midpelvis with the head at the spines and moulding increasing.",
-   "say": "Deep transverse arrest reflects pelvic shape or deflexion needing rotational resolution.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
-    "alt": "Fetal skull in transverse arrest.",
-    "caption": "Transverse arrest. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Breech diagnosed first in labour needs senior assessment of type, size and pelvis, termed **undiagnosed breech protocol**. Many such labours, especially multiparous, deliver safely vaginally. Caesarean follows unfavourable features or slow progress. A footling type or a baby estimated over 3.8 kilograms usually tips the decision to caesarean.",
-   "say": "Undiagnosed breech in labour needs senior assessment, and many deliver safely vaginally.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Favourable",
-     "points": [
-      "Frank breech, average size",
-      "Progressing well",
-      "Continue vaginal"
-     ]
+    {
+      "tx": "Buttocks or feet presenting instead of the head is **breech presentation**. Three percent of term pregnancies remain breech. Planned caesarean became standard after trial evidence, though skilled vaginal breech birth persists in selected cases. The Term Breech Trial cut perinatal death and serious morbidity about threefold with planned caesarean.",
+      "say": "Breech presentation affects three percent at term and usually delivers by planned caesarean.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breech-presentation-and-malpositions-fig1.webp",
+        "alt": "Breech and head position assessment.",
+        "caption": "Common breech presentations including frank, complete, and footling presentations and delivery mechanics. [Credit: StewardMD]",
+        "ar": 1.5
+      }
     },
-    "right": {
-     "title": "Unfavourable",
-     "points": [
-      "Footling, big baby",
-      "Slow progress",
-      "Caesarean"
-     ]
+    {
+      "tx": "Turning a breech baby to head down by abdominal pressure from thirty six weeks is **external cephalic version**. Tocolysis, monitoring and anti-D accompany the procedure. Success averages half, higher in multiparous women. Success is about 50 to 70 percent, and a failed attempt still allows planned caesarean or induction.",
+      "say": "External cephalic version turns breech babies from thirty six weeks with tocolysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Breech at 36 weeks"
+          },
+          {
+            "id": "n1",
+            "label": "Version attempted with monitoring"
+          },
+          {
+            "id": "n2",
+            "label": "Half succeed"
+          },
+          {
+            "id": "n3",
+            "label": "Caesarean avoided if so"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Delivering the breech babys head with jaw flexion and suprapubic pressure is the **Mauriceau-Smellie-Veit** manoeuvre. The body rests on the operators forearm while fingers flex the head. Forceps to the aftercoming head are the alternative. Forceps cradle the head and traction follows uterine contractions only; pulling between them injures the neck.",
+      "say": "Mauriceau-Smellie-Veit delivers the aftercoming head by jaw flexion and pressure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mauriceau-Smellie-Veit",
+          "points": [
+            "Hands only",
+            "Flexion maintained"
+          ]
+        },
+        "right": {
+          "title": "Piper forceps",
+          "points": [
+            "Instrumental control",
+            "Head guided by blades"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Frank, complete and footling describe breech types by leg posture, termed **breech varieties**. Footling breech risks cord prolapse most and excludes vaginal birth. Frank breech with extended legs is the most favourable for vaginal delivery. In footling breech the cord prolapses in about 10 to 15 percent, the figure behind excluding it from vaginal birth.",
+      "say": "Breech varieties by leg posture change cord prolapse risk and vaginal suitability.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Legs"
+        ],
+        "rows": [
+          [
+            "Frank",
+            "Extended up"
+          ],
+          [
+            "Complete",
+            "Flexed"
+          ],
+          [
+            "Footling",
+            "Foot presenting, highest risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Back pain relief in posterior labour uses position change and water, following **posterior labour support**. Hands and knees posture encourages rotation and eases sacral pressure. Epidural rates are higher in these longer labours. Sterile water injections into the lower back skin are another drug free option some units offer for back labour.",
+      "say": "Posterior labour support uses hands and knees posture to encourage rotation.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+        "alt": "Posterior labour support positions.",
+        "caption": "Labour support. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Manual or instrumental rotation of the posterior head at full dilation is **rotational delivery**. Kielland forceps historically, vacuum or manual rotation now, convert arrest into delivery. Caesarean at full dilation is the morbid alternative they avoid. Manual rotation followed by a straight lift out delivery avoids the rotational forceps skills many units no longer teach.",
+      "say": "Rotational delivery converts posterior arrest into vaginal birth avoiding full dilation caesarean.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Arrest at full dilation"
+          },
+          {
+            "id": "n1",
+            "label": "Rotation attempted by expert"
+          },
+          {
+            "id": "n2",
+            "label": "Vacuum or forceps applied"
+          },
+          {
+            "id": "n3",
+            "label": "Vaginal delivery completed"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Persistent occiput transverse arrest in the midpelvis is **deep transverse arrest**. It reflects android pelvic shape or deflexion. Rotation, instrumental delivery or caesarean resolve it by operator skill and findings. It typically arrests at the midpelvis with the head at the spines and moulding increasing.",
+      "say": "Deep transverse arrest reflects pelvic shape or deflexion needing rotational resolution.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ins-forceps-types.webp",
+        "alt": "Fetal skull in transverse arrest.",
+        "caption": "Comparative obstetric forceps variants highlighting Kielland rotational forceps with sliding lock for deep transverse arrest correction. [Credit: Wikimedia Commons Contributor]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Breech diagnosed first in labour needs senior assessment of type, size and pelvis, termed **undiagnosed breech protocol**. Many such labours, especially multiparous, deliver safely vaginally. Caesarean follows unfavourable features or slow progress. A footling type or a baby estimated over 3.8 kilograms usually tips the decision to caesarean.",
+      "say": "Undiagnosed breech in labour needs senior assessment, and many deliver safely vaginally.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favourable",
+          "points": [
+            "Frank breech, average size",
+            "Progressing well",
+            "Continue vaginal"
+          ]
+        },
+        "right": {
+          "title": "Unfavourable",
+          "points": [
+            "Footling, big baby",
+            "Slow progress",
+            "Caesarean"
+          ]
+        }
+      }
     }
-   }
-  }
- ]
+  ]
 }

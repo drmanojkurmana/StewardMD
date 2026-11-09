@@ -1,232 +1,232 @@
 {
- "v": 1,
- "module": "obg-abortion",
- "subject": "obstetrics-gynaecology",
- "title": "MTP Act 2021, Mifepristone, Misoprostol and MVA",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "The Indian law governing legal termination of pregnancy, amended in twenty twenty one, is the **MTP Act 2021**. It permits termination up to twenty weeks with one doctors opinion and twenty to twenty four weeks for specified categories with two opinions. Beyond that, medical boards decide for fetal anomalies.",
-   "say": "The MTP Act 2021 permits termination to twenty weeks, and twenty four for specified categories.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Gestation",
-     "Requirement"
-    ],
-    "rows": [
-     [
-      "To 20 weeks",
-      "One opinion"
-     ],
-     [
-      "20 to 24 weeks",
-      "Two opinions, categories"
-     ],
-     [
-      "Beyond 24",
-      "Medical board, anomalies"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The antiprogestogen starting medical abortion by detaching the pregnancy is **mifepristone**. It blocks progesterone, softens the cervix and sensitises the uterus to prostaglandins. A single oral dose begins the two drug regimen. The dose is 200 milligrams orally, and pregnancy continues in under one percent when both drugs are used correctly.",
-   "say": "Mifepristone blocks progesterone to start medical abortion and sensitise the uterus.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-mifepristone.webp",
-    "alt": "Mifepristone progesterone blockade.",
-    "caption": "Mifepristone action. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The prostaglandin completing expulsion after mifepristone is **misoprostol**. Given buccally, sublingually or vaginally, it contracts the uterus and expels products. Cramping and bleeding heavier than a period are expected. Eight hundred micrograms is the usual dose; sublingual use brings faster action but more shivering and fever.",
-   "say": "Misoprostol contracts the uterus to complete expulsion after mifepristone.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Mifepristone taken"
-     },
-     {
-      "id": "n1",
-      "label": "Misoprostol after 24 to 48 hours"
-     },
-     {
-      "id": "n2",
-      "label": "Cramping and bleeding"
-     },
-     {
-      "id": "n3",
-      "label": "Expulsion completed"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Handheld syringe suction evacuation of the uterus is **manual vacuum aspiration**. It needs no electricity and suits primary care settings to twelve weeks. Tissue is inspected afterwards to confirm completeness. It works to 12 weeks without general anaesthesia, and checking the aspirate for villi rules out a missed ectopic.",
-   "say": "Manual vacuum aspiration evacuates the uterus with a handheld syringe to twelve weeks.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/contraceptives-emergency-uterotonics-abortion-fig1.webp",
-    "alt": "Abortion methods and uterotonics.",
-    "caption": "Abortion methods. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Confidentiality is absolute under the Act, a protection called **privacy provision**. The womans name and details cannot be disclosed except to authorised persons. Even the admission register is a secret document. Disclosure is allowed only to a person authorised under the Act, and breach is a punishable offence.",
-   "say": "Privacy under the MTP Act is absolute and the register itself is a secret document.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Permitted disclosure",
-     "points": [
-      "To authorised persons",
-      "Court order"
-     ]
+  "v": 1,
+  "module": "obg-abortion",
+  "subject": "obstetrics-gynaecology",
+  "title": "MTP Act 2021, Mifepristone, Misoprostol and MVA",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The Indian law governing legal termination of pregnancy, amended in twenty twenty one, is the **MTP Act 2021**. It permits termination up to twenty weeks with one doctors opinion and twenty to twenty four weeks for specified categories with two opinions. Beyond that, medical boards decide for fetal anomalies.",
+      "say": "The MTP Act 2021 permits termination to twenty weeks, and twenty four for specified categories.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Gestation",
+          "Requirement"
+        ],
+        "rows": [
+          [
+            "To 20 weeks",
+            "One opinion"
+          ],
+          [
+            "20 to 24 weeks",
+            "Two opinions, categories"
+          ],
+          [
+            "Beyond 24",
+            "Medical board, anomalies"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Prohibited",
-     "points": [
-      "Family without consent",
-      "Public records"
-     ]
+    {
+      "tx": "The antiprogestogen starting medical abortion by detaching the pregnancy is **mifepristone**. It blocks progesterone, softens the cervix and sensitises the uterus to prostaglandins. A single oral dose begins the two drug regimen. The dose is 200 milligrams orally, and pregnancy continues in under one percent when both drugs are used correctly.",
+      "say": "Mifepristone blocks progesterone to start medical abortion and sensitise the uterus.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-mifepristone.webp",
+        "alt": "Mifepristone progesterone blockade.",
+        "caption": "Mifepristone competitive progesterone receptor antagonism inducing decidual necrosis and cervical ripening. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "The prostaglandin completing expulsion after mifepristone is **misoprostol**. Given buccally, sublingually or vaginally, it contracts the uterus and expels products. Cramping and bleeding heavier than a period are expected. Eight hundred micrograms is the usual dose; sublingual use brings faster action but more shivering and fever.",
+      "say": "Misoprostol contracts the uterus to complete expulsion after mifepristone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Mifepristone taken"
+          },
+          {
+            "id": "n1",
+            "label": "Misoprostol after 24 to 48 hours"
+          },
+          {
+            "id": "n2",
+            "label": "Cramping and bleeding"
+          },
+          {
+            "id": "n3",
+            "label": "Expulsion completed"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Handheld syringe suction evacuation of the uterus is **manual vacuum aspiration**. It needs no electricity and suits primary care settings to twelve weeks. Tissue is inspected afterwards to confirm completeness. It works to 12 weeks without general anaesthesia, and checking the aspirate for villi rules out a missed ectopic.",
+      "say": "Manual vacuum aspiration evacuates the uterus with a handheld syringe to twelve weeks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/contraceptives-emergency-uterotonics-abortion-fig1.webp",
+        "alt": "Abortion methods and uterotonics.",
+        "caption": "Mechanisms of surgical uterine evacuation and medical abortifacients across the uterine cavity. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Confidentiality is absolute under the Act, a protection called **privacy provision**. The womans name and details cannot be disclosed except to authorised persons. Even the admission register is a secret document. Disclosure is allowed only to a person authorised under the Act, and breach is a punishable offence.",
+      "say": "Privacy under the MTP Act is absolute and the register itself is a secret document.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Permitted disclosure",
+          "points": [
+            "To authorised persons",
+            "Court order"
+          ]
+        },
+        "right": {
+          "title": "Prohibited",
+          "points": [
+            "Family without consent",
+            "Public records"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Categories eligible from twenty to twenty four weeks include survivors of assault, minors and fetal anomaly cases, listed as **specified categories**. Change of marital status during pregnancy also qualifies under the rules. State level rules operationalise the list. One registered practitioner opinion suffices up to 20 weeks; two are needed between 20 and 24 weeks.",
+      "say": "Specified categories to twenty four weeks include assault survivors, minors and anomalies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Category",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Assault survivors",
+            "Rape or incest"
+          ],
+          [
+            "Minors",
+            "Under 18"
+          ],
+          [
+            "Anomaly",
+            "Diagnosed fetal defect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Failure rates of medical abortion rise with gestation, reaching several percent by nine weeks, termed **method failure**. Incomplete abortion is commoner than continuing pregnancy among failures. Surgical evacuation completes management in either case. Continuing pregnancy after failed tablets means the misoprostol exposure must be discussed, because limb defects are reported.",
+      "say": "Method failure rises with gestation and surgical evacuation completes management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Medical method used"
+          },
+          {
+            "id": "n1",
+            "label": "Follow up confirms empty"
+          },
+          {
+            "id": "n2",
+            "label": "Incomplete found"
+          },
+          {
+            "id": "n3",
+            "label": "Evacuation performed"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pain management and antiemetic cover accompany medical abortion as **supportive care**. Most women manage cramps with simple analgesics and a hot water bottle. Clear written instructions reduce anxiety and unplanned visits. Non steroidal anti inflammatory drugs do not block misoprostol action and can be offered before cramps peak.",
+      "say": "Supportive care with analgesia and clear instructions accompanies medical abortion.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+        "alt": "Abortion care counselling.",
+        "caption": "Abortion care. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Contraception counselling immediately after abortion prevents repeat unintended pregnancy, called **post abortion contraception**. Ovulation returns within two to three weeks, before the first period. Long acting methods offered on the same day have the best uptake. An intrauterine device can be placed immediately after surgical abortion, when uptake and continuation run highest.",
+      "say": "Post abortion contraception matters because ovulation returns within weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Abortion completed"
+          },
+          {
+            "id": "n1",
+            "label": "Ovulation returns in weeks"
+          },
+          {
+            "id": "n2",
+            "label": "Same day method offered"
+          },
+          {
+            "id": "n3",
+            "label": "Repeat pregnancy prevented"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Categories eligible from twenty to twenty four weeks include survivors of assault, minors and fetal anomaly cases, listed as **specified categories**. Change of marital status during pregnancy also qualifies under the rules. State level rules operationalise the list. One registered practitioner opinion suffices up to 20 weeks; two are needed between 20 and 24 weeks.",
-   "say": "Specified categories to twenty four weeks include assault survivors, minors and anomalies.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Category",
-     "Example"
-    ],
-    "rows": [
-     [
-      "Assault survivors",
-      "Rape or incest"
-     ],
-     [
-      "Minors",
-      "Under 18"
-     ],
-     [
-      "Anomaly",
-      "Diagnosed fetal defect"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Failure rates of medical abortion rise with gestation, reaching several percent by nine weeks, termed **method failure**. Incomplete abortion is commoner than continuing pregnancy among failures. Surgical evacuation completes management in either case. Continuing pregnancy after failed tablets means the misoprostol exposure must be discussed, because limb defects are reported.",
-   "say": "Method failure rises with gestation and surgical evacuation completes management.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Medical method used"
-     },
-     {
-      "id": "n1",
-      "label": "Follow up confirms empty"
-     },
-     {
-      "id": "n2",
-      "label": "Incomplete found"
-     },
-     {
-      "id": "n3",
-      "label": "Evacuation performed"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Pain management and antiemetic cover accompany medical abortion as **supportive care**. Most women manage cramps with simple analgesics and a hot water bottle. Clear written instructions reduce anxiety and unplanned visits. Non steroidal anti inflammatory drugs do not block misoprostol action and can be offered before cramps peak.",
-   "say": "Supportive care with analgesia and clear instructions accompanies medical abortion.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
-    "alt": "Abortion care counselling.",
-    "caption": "Abortion care. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Contraception counselling immediately after abortion prevents repeat unintended pregnancy, called **post abortion contraception**. Ovulation returns within two to three weeks, before the first period. Long acting methods offered on the same day have the best uptake. An intrauterine device can be placed immediately after surgical abortion, when uptake and continuation run highest.",
-   "say": "Post abortion contraception matters because ovulation returns within weeks.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Abortion completed"
-     },
-     {
-      "id": "n1",
-      "label": "Ovulation returns in weeks"
-     },
-     {
-      "id": "n2",
-      "label": "Same day method offered"
-     },
-     {
-      "id": "n3",
-      "label": "Repeat pregnancy prevented"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }

@@ -1,232 +1,232 @@
 {
- "v": 1,
- "module": "obg-diagnosis-antenatal-care",
- "subject": "obstetrics-gynaecology",
- "title": "Early Pregnancy Signs: Hegar, Chadwick and Goodell",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "Softening and compressibility of the lower uterine segment on bimanual examination is the **Hegar sign**. It appears at six to eight weeks as the isthmus softens under hormonal influence. Modern practice relies on urine testing and ultrasound instead. Osiander sign, a stronger vaginal artery pulse felt at eight weeks, belongs to the same group of soft signs.",
-   "say": "The Hegar sign softens the lower uterine segment at six to eight weeks of pregnancy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Sign",
-     "Finding"
-    ],
-    "rows": [
-     [
-      "Hegar",
-      "Soft lower segment"
-     ],
-     [
-      "Chadwick",
-      "Blue vagina"
-     ],
-     [
-      "Goodell",
-      "Soft cervix"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Bluish discoloration of the vagina and cervix from increased vascularity is the **Chadwick sign**. It appears around eight to twelve weeks of pregnancy. Other causes of pelvic congestion can mimic it, so it stays suggestive rather than diagnostic. Palmer sign describes regular rhythmic contractions of the early pregnant uterus felt on bimanual examination.",
-   "say": "The Chadwick sign blues the vagina from vascularity around eight to twelve weeks.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Vascularity increases"
-     },
-     {
-      "id": "n1",
-      "label": "Vaginal walls congest"
-     },
-     {
-      "id": "n2",
-      "label": "Bluish colour appears"
-     },
-     {
-      "id": "n3",
-      "label": "Suggestive not diagnostic"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Softening of the cervix to the consistency of lips is the **Goodell sign**. The non pregnant cervix feels like the tip of the nose by comparison. It develops by about six weeks under progesterone influence. Chadwick sign was described in 1886 and fades in value once a urine test can answer the question in two minutes.",
-   "say": "The Goodell sign softens the cervix to lip consistency by about six weeks.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Pregnant cervix",
-     "points": [
-      "Soft as lips",
-      "Goodell sign",
-      "Six weeks onward"
-     ]
+  "v": 1,
+  "module": "obg-diagnosis-antenatal-care",
+  "subject": "obstetrics-gynaecology",
+  "title": "Early Pregnancy Signs: Hegar, Chadwick and Goodell",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Softening and compressibility of the lower uterine segment on bimanual examination is the **Hegar sign**. It appears at six to eight weeks as the isthmus softens under hormonal influence. Modern practice relies on urine testing and ultrasound instead. Osiander sign, a stronger vaginal artery pulse felt at eight weeks, belongs to the same group of soft signs.",
+      "say": "The Hegar sign softens the lower uterine segment at six to eight weeks of pregnancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sign",
+          "Finding"
+        ],
+        "rows": [
+          [
+            "Hegar",
+            "Soft lower segment"
+          ],
+          [
+            "Chadwick",
+            "Blue vagina"
+          ],
+          [
+            "Goodell",
+            "Soft cervix"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Non pregnant cervix",
-     "points": [
-      "Firm as nose tip",
-      "No softening",
-      "Baseline feel"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Every modern pregnancy diagnosis starts with a **urine pregnancy test** detecting hCG. It turns positive around the missed period and is highly accurate when performed correctly. Very early testing before the missed period can falsely reassure. False negatives follow very dilute urine, so a first morning sample is used when the period is only just missed.",
-   "say": "Urine pregnancy tests detect hCG and turn positive around the missed period.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-hcg.webp",
-    "alt": "hCG detection in pregnancy testing.",
-    "caption": "Pregnancy test hormone. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Quantitative blood measurement of the hormone is **beta-hCG** testing. Serial values track viability, rising by at least half in forty eight hours in most healthy early pregnancies. Ultrasound location matters more than any single value. Below the discriminatory zone of about 1500 to 2000 international units per litre, a normal sac may simply be too early to see on transvaginal scan.",
-   "say": "Beta-hCG serial values track viability, rising by half in forty eight hours when healthy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Pattern",
-     "Suggests"
-    ],
-    "rows": [
-     [
-      "Rise over 50 percent in 48h",
-      "Viable intrauterine"
-     ],
-     [
-      "Slow rise or plateau",
-      "Ectopic possible"
-     ],
-     [
-      "Fall",
-      "Failing pregnancy"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Irregular contractions of the pregnant uterus felt on examination are **Braxton Hicks** precursors in early form, while palpable intermittent painless contractions appear later. They never dilate the cervix. Confusing them with true labour is common near term. Contractions that come at irregular intervals, stay mild and ease with rest or hydration fit Braxton Hicks rather than labour.",
-   "say": "Painless Braxton Hicks contractions never dilate the cervix, unlike true labour.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Intermittent tightening"
-     },
-     {
-      "id": "n1",
-      "label": "No cervical change"
-     },
-     {
-      "id": "n2",
-      "label": "Irregular pattern"
-     },
-     {
-      "id": "n3",
-      "label": "True labour excluded"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Enlargement of the uterus asymmetric at the implantation site is the **Piskacek sign**. One cornu bulges where the embryo implanted in early weeks. It disappears as the sac grows to fill the cavity. It can be mistaken for a fibroid on palpation, and an ultrasound resolves the doubt in minutes.",
-   "say": "The Piskacek sign bulges one cornu at the implantation site in early weeks.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Sign",
-     "Site"
-    ],
-    "rows": [
-     [
-      "Piskacek",
-      "Asymmetric cornu"
-     ],
-     [
-      "Hegar",
-      "Lower segment"
-     ],
-     [
-      "Goodell",
-      "Cervix"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Definitive confirmation of intrauterine pregnancy needs ultrasound showing a **gestational sac with yolk sac**. This excludes ectopic pregnancy in most symptomatic cases. A sac without yolk or embryo at expected sizes needs interval rescan. Seeing a yolk sac inside the sac separates a true pregnancy sac from the fluid collection, a pseudosac, sometimes seen in ectopic pregnancy.",
-   "say": "Ultrasound showing sac with yolk sac confirms intrauterine pregnancy and excludes most ectopics.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
-    "alt": "Early pregnancy assessment and inspection.",
-    "caption": "Early pregnancy assessment. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Symptoms of pregnancy including amenorrhoea, nausea and breast tenderness are called **presumptive symptoms**. They prompt testing but never confirm pregnancy alone. Objective confirmation always follows with test and scan. Quickening, first fetal movements felt at 18 to 20 weeks in a first pregnancy, is the presumptive symptom patients most often quote.",
-   "say": "Presumptive symptoms prompt testing but objective confirmation always follows.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Presumptive",
-     "points": [
-      "Symptoms only",
-      "Amenorrhoea, nausea",
-      "Prompt testing"
-     ]
+    {
+      "tx": "Bluish discoloration of the vagina and cervix from increased vascularity is the **Chadwick sign**. It appears around eight to twelve weeks of pregnancy. Other causes of pelvic congestion can mimic it, so it stays suggestive rather than diagnostic. Palmer sign describes regular rhythmic contractions of the early pregnant uterus felt on bimanual examination.",
+      "say": "The Chadwick sign blues the vagina from vascularity around eight to twelve weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Vascularity increases"
+          },
+          {
+            "id": "n1",
+            "label": "Vaginal walls congest"
+          },
+          {
+            "id": "n2",
+            "label": "Bluish colour appears"
+          },
+          {
+            "id": "n3",
+            "label": "Suggestive not diagnostic"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Confirmatory",
-     "points": [
-      "Test and scan positive",
-      "Sac seen in uterus",
-      "Pregnancy confirmed"
-     ]
+    {
+      "tx": "Softening of the cervix to the consistency of lips is the **Goodell sign**. The non pregnant cervix feels like the tip of the nose by comparison. It develops by about six weeks under progesterone influence. Chadwick sign was described in 1886 and fades in value once a urine test can answer the question in two minutes.",
+      "say": "The Goodell sign softens the cervix to lip consistency by about six weeks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pregnant cervix",
+          "points": [
+            "Soft as lips",
+            "Goodell sign",
+            "Six weeks onward"
+          ]
+        },
+        "right": {
+          "title": "Non pregnant cervix",
+          "points": [
+            "Firm as nose tip",
+            "No softening",
+            "Baseline feel"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Every modern pregnancy diagnosis starts with a **urine pregnancy test** detecting hCG. It turns positive around the missed period and is highly accurate when performed correctly. Very early testing before the missed period can falsely reassure. False negatives follow very dilute urine, so a first morning sample is used when the period is only just missed.",
+      "say": "Urine pregnancy tests detect hCG and turn positive around the missed period.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-hcg.webp",
+        "alt": "hCG detection in pregnancy testing.",
+        "caption": "Human chorionic gonadotropin molecular action and syncytiotrophoblast secretion detected by urine pregnancy tests. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Quantitative blood measurement of the hormone is **beta-hCG** testing. Serial values track viability, rising by at least half in forty eight hours in most healthy early pregnancies. Ultrasound location matters more than any single value. Below the discriminatory zone of about 1500 to 2000 international units per litre, a normal sac may simply be too early to see on transvaginal scan.",
+      "say": "Beta-hCG serial values track viability, rising by half in forty eight hours when healthy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Suggests"
+        ],
+        "rows": [
+          [
+            "Rise over 50 percent in 48h",
+            "Viable intrauterine"
+          ],
+          [
+            "Slow rise or plateau",
+            "Ectopic possible"
+          ],
+          [
+            "Fall",
+            "Failing pregnancy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Irregular contractions of the pregnant uterus felt on examination are **Braxton Hicks** precursors in early form, while palpable intermittent painless contractions appear later. They never dilate the cervix. Confusing them with true labour is common near term. Contractions that come at irregular intervals, stay mild and ease with rest or hydration fit Braxton Hicks rather than labour.",
+      "say": "Painless Braxton Hicks contractions never dilate the cervix, unlike true labour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Intermittent tightening"
+          },
+          {
+            "id": "n1",
+            "label": "No cervical change"
+          },
+          {
+            "id": "n2",
+            "label": "Irregular pattern"
+          },
+          {
+            "id": "n3",
+            "label": "True labour excluded"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Enlargement of the uterus asymmetric at the implantation site is the **Piskacek sign**. One cornu bulges where the embryo implanted in early weeks. It disappears as the sac grows to fill the cavity. It can be mistaken for a fibroid on palpation, and an ultrasound resolves the doubt in minutes.",
+      "say": "The Piskacek sign bulges one cornu at the implantation site in early weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sign",
+          "Site"
+        ],
+        "rows": [
+          [
+            "Piskacek",
+            "Asymmetric cornu"
+          ],
+          [
+            "Hegar",
+            "Lower segment"
+          ],
+          [
+            "Goodell",
+            "Cervix"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive confirmation of intrauterine pregnancy needs ultrasound showing a **gestational sac with yolk sac**. This excludes ectopic pregnancy in most symptomatic cases. A sac without yolk or embryo at expected sizes needs interval rescan. Seeing a yolk sac inside the sac separates a true pregnancy sac from the fluid collection, a pseudosac, sometimes seen in ectopic pregnancy.",
+      "say": "Ultrasound showing sac with yolk sac confirms intrauterine pregnancy and excludes most ectopics.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+        "alt": "Early pregnancy assessment and inspection.",
+        "caption": "Early pregnancy assessment. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Symptoms of pregnancy including amenorrhoea, nausea and breast tenderness are called **presumptive symptoms**. They prompt testing but never confirm pregnancy alone. Objective confirmation always follows with test and scan. Quickening, first fetal movements felt at 18 to 20 weeks in a first pregnancy, is the presumptive symptom patients most often quote.",
+      "say": "Presumptive symptoms prompt testing but objective confirmation always follows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Presumptive",
+          "points": [
+            "Symptoms only",
+            "Amenorrhoea, nausea",
+            "Prompt testing"
+          ]
+        },
+        "right": {
+          "title": "Confirmatory",
+          "points": [
+            "Test and scan positive",
+            "Sac seen in uterus",
+            "Pregnancy confirmed"
+          ]
+        }
+      }
     }
-   }
-  }
- ]
+  ]
 }
