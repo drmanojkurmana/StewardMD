@@ -1,0 +1,249 @@
+{
+    "v": 1,
+    "id": "rad-xray-cathode",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "X-ray Tube: Cathode, Anode, and Tungsten Target Physics",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Cathode Filament Construction",
+            "tx": "**Cathode tungsten filament** coils serve as the primary source of electrons inside the diagnostic X-ray tube. Tungsten is selected specifically because its high atomic number of 74 and extraordinary melting point of 3422 degrees Celsius withstand high thermal stress without vaporizing. Operating in an electrical filament circuit, the tungsten wire is heated to white incandescence by currents between 3 and 6 amperes, liberating abundant free electrons.",
+            "say": "Cathode tungsten filament coils serve as the primary source of electrons inside the diagnostic X-ray tube. Tungsten is selected specifically because its high atomic number of 74 and extraordinary melting point of 3422 degrees Celsius withstand high thermal stress without vaporizing. Operating in an electrical filament circuit, the tungsten wire is heated to white incandescence by currents between 3 and 6 amperes, liberating abundant free electrons.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physical Property",
+                    "Tungsten Value",
+                    "Clinical Significance"
+                ],
+                "rows": [
+                    [
+                        "Atomic Number (Z)",
+                        "74",
+                        "High electron density and emission efficiency"
+                    ],
+                    [
+                        "Melting Point",
+                        "3422 degrees Celsius",
+                        "Prevents filament burn-out at high heat loads"
+                    ],
+                    [
+                        "Vapour Pressure",
+                        "Extremely low at 2000C",
+                        "Maintains tube vacuum without gas fouling"
+                    ],
+                    [
+                        "Tensile Strength",
+                        "High ductile strength",
+                        "Enables winding into durable thin coils"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Focusing Cup Dynamics",
+            "tx": "**Molybdenum focusing cup** structures house the filament coils within a recessed metal cavity. Because boiling electrons naturally repel one another, an unconfined electron cloud would disperse widely across the tube chamber. The cup is maintained at a negative electrical potential relative to the cathode filament, electrostatically repelling and condensing the divergent electron stream into a narrow, parallel beam directed precisely toward the anode focal track.",
+            "say": "Molybdenum focusing cup structures house the filament coils within a recessed metal cavity. Because boiling electrons naturally repel one another, an unconfined electron cloud would disperse widely across the tube chamber. The cup is maintained at a negative electrical potential relative to the cathode filament, electrostatically repelling and condensing the divergent electron stream into a narrow, parallel beam directed precisely toward the anode focal track.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Unfocused Electron Cloud",
+                    "points": [
+                        "Divergent electron stream disperses widely",
+                        "Strikes non-target areas of anode disc",
+                        "Degrades image sharpness with severe penumbra"
+                    ]
+                },
+                "right": {
+                    "title": "Focusing Cup Beam",
+                    "points": [
+                        "Electrostatic repulsion condenses electron path",
+                        "Focuses beam tightly onto target focal spot",
+                        "Maintains fine radiographic detail and contrast"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Dual Focal Spot Engineering",
+            "tx": "**Dual focus spot selection** provides clinicians with two distinct operational filaments mounted side by side. The small filament projects an effective focal spot measuring 0.6 millimetres for high-resolution imaging of thin peripheral extremities, restricted to low tube currents under 300 milliamperes. Conversely, the large filament projects a 1.2-millimetre focal spot capable of accepting heavy heat loads up to 1000 milliamperes for dense abdominal exposures.",
+            "say": "Dual focus spot selection provides clinicians with two distinct operational filaments mounted side by side. The small filament projects an effective focal spot measuring 0.6 millimetres for high-resolution imaging of thin peripheral extremities, restricted to low tube currents under 300 milliamperes. Conversely, the large filament projects a 1.2-millimetre focal spot capable of accepting heavy heat loads up to 1000 milliamperes for dense abdominal exposures.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Focal Spot Size",
+                    "Dimensions",
+                    "Maximum Tube Current",
+                    "Clinical Application"
+                ],
+                "rows": [
+                    [
+                        "Small Focal Spot",
+                        "0.6 millimetres",
+                        "100 to 300 mA",
+                        "Fine bony detail in extremities and skull"
+                    ],
+                    [
+                        "Large Focal Spot",
+                        "1.2 millimetres",
+                        "Up to 1000 mA",
+                        "Thick body parts like abdomen, pelvis, and lumbar spine"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Rotating Anode Architecture",
+            "tx": "**Rotating anode design** overcomes the severe thermal limitations of historic stationary targets. In diagnostic tubes, over 99 percent of electron kinetic energy transforms into waste heat, with less than 1 percent yielding useful X-radiation. Modern tubes employ a bevelled disc rotated by an induction motor at speeds between 3000 and 10000 revolutions per minute, spreading intense heat over a wide circular focal track.",
+            "say": "Rotating anode design overcomes the severe thermal limitations of historic stationary targets. In diagnostic tubes, over 99 percent of electron kinetic energy transforms into waste heat, with less than 1 percent yielding useful X-radiation. Modern tubes employ a bevelled disc rotated by an induction motor at speeds between 3000 and 10000 revolutions per minute, spreading intense heat over a wide circular focal track.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Stationary Anode System",
+                    "points": [
+                        "Fixed tungsten button embedded in copper",
+                        "Heat concentrates on a single static spot",
+                        "Restricted to dental and portable units"
+                    ]
+                },
+                "right": {
+                    "title": "Rotating Anode System",
+                    "points": [
+                        "Molybdenum disc rotating at 3000 to 10000 RPM",
+                        "Heat distributes over a circular focal ring",
+                        "Tolerates high tube currents for CT and radiography"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Tungsten-Rhenium Target Metallurgy",
+            "tx": "**Tungsten-rhenium focal track** alloys compose the target face bombarded by incoming electrons. Pure tungsten tends to craze and form microscopic fissures under repetitive thermal cycling from room temperature to over 1000 degrees Celsius. Adding 5 to 10 percent rhenium improves mechanical elasticity and thermal shock resistance, preventing focal track pitting and preserving consistent X-ray output over thousands of patient exposures.",
+            "say": "Tungsten-rhenium focal track alloys compose the target face bombarded by incoming electrons. Pure tungsten tends to craze and form microscopic fissures under repetitive thermal cycling from room temperature to over 1000 degrees Celsius. Adding 5 to 10 percent rhenium improves mechanical elasticity and thermal shock resistance, preventing focal track pitting and preserving consistent X-ray output over thousands of patient exposures.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Alloy Component",
+                    "Percentage",
+                    "Primary Thermal Role"
+                ],
+                "rows": [
+                    [
+                        "Tungsten Base",
+                        "90 to 95 percent",
+                        "X-ray production and heat conduction"
+                    ],
+                    [
+                        "Rhenium Additive",
+                        "5 to 10 percent",
+                        "Prevents surface pitting and cracking"
+                    ],
+                    [
+                        "Molybdenum Core",
+                        "Substrate back",
+                        "Lightweight structural support and heat storage"
+                    ],
+                    [
+                        "Graphite Layer",
+                        "Rear brazing",
+                        "Enhances thermal radiation dissipation"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Line Focus Principle",
+            "tx": "**Line focus principle** geometry resolves the conflicting demands of high thermal capacity and sharp spatial resolution. By angling the anode target between 7 and 20 degrees, the area bombarded by electrons, known as the actual focal spot, remains large to absorb heat. However, the projected effective focal spot viewed from the patient remains small, calculated as the actual spot multiplied by the sine of target angle.",
+            "say": "Line focus principle geometry resolves the conflicting demands of high thermal capacity and sharp spatial resolution. By angling the anode target between 7 and 20 degrees, the area bombarded by electrons, known as the actual focal spot, remains large to absorb heat. However, the projected effective focal spot viewed from the patient remains small, calculated as the actual spot multiplied by the sine of target angle.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Cathode electron beam bombard target"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Large actual focal spot absorbs heat"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Bevelled anode angle projects small spot"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Anode Stem and Thermal Dissipation",
+            "tx": "**Anode stem thermal isolation** protects delicate rotor bearings from destructive conduction heat. The anode disc mounts to a slender molybdenum neck whose narrow cross-section and modest thermal conductivity restrict heat flow into the copper rotor sleeve. Heat dissipation from the disc proceeds predominantly by infrared thermal radiation across the vacuum into the surrounding dielectric insulating oil, which circulates within the grounded lead tube housing.",
+            "say": "Anode stem thermal isolation protects delicate rotor bearings from destructive conduction heat. The anode disc mounts to a slender molybdenum neck whose narrow cross-section and modest thermal conductivity restrict heat flow into the copper rotor sleeve. Heat dissipation from the disc proceeds predominantly by infrared thermal radiation across the vacuum into the surrounding dielectric insulating oil, which circulates within the grounded lead tube housing.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Anode Disc Dissipation",
+                    "points": [
+                        "Reaches surface temperatures over 1000C",
+                        "Radiates infrared heat across vacuum",
+                        "Absorbed by surrounding dielectric oil bath"
+                    ]
+                },
+                "right": {
+                    "title": "Molybdenum Neck Barrier",
+                    "points": [
+                        "Slender stem restricts conductive heat transfer",
+                        "Protects steel rotor ball bearings from seizing",
+                        "Maintains smooth rotation at high RPM speeds"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Tube Housing and Leakage Shielding",
+            "tx": "**Evacuated tube envelope** housing maintains a vacuum of ten to the minus six torr, preventing projectile electrons from colliding with gas atoms and losing velocity before reaching the anode. Heavy lead sheeting encloses the housing to absorb isotropically scattered leakage radiation. Regulatory standards mandate that leakage radiation escaping through the housing must not exceed 1 milligray per hour measured at a distance of 1 metre.",
+            "say": "Evacuated tube envelope housing maintains a vacuum of ten to the minus six torr, preventing projectile electrons from colliding with gas atoms and losing velocity before reaching the anode. Heavy lead sheeting encloses the housing to absorb isotropically scattered leakage radiation. Regulatory standards mandate that leakage radiation escaping through the housing must not exceed 1 milligray per hour measured at a distance of 1 metre.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Protective Feature",
+                    "Engineering Material",
+                    "Regulatory Limit"
+                ],
+                "rows": [
+                    [
+                        "Vacuum Envelope",
+                        "Borosilicate Pyrex glass or metal",
+                        "Maintains clean electron acceleration path"
+                    ],
+                    [
+                        "Insulating Medium",
+                        "Dielectric mineral oil",
+                        "Prevents high-voltage electrical arcing"
+                    ],
+                    [
+                        "Lead Protective Sheath",
+                        "Cast lead lining (minimum 1.5 mm)",
+                        "Limits leakage to under 1 mGy per hour at 1 metre"
+                    ],
+                    [
+                        "Expansion Bellows",
+                        "Spring-loaded diaphragm",
+                        "Absorbs oil expansion and triggers thermal cutoff"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}
