@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-cell-injury-necrosis",
+  "subject": "pathology",
+  "title": "Free Radical Injury, Reperfusion Damage, and Coagulative Necrosis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Chemical species possessing a single unpaired electron in an outer orbital represent unstable and highly reactive molecules known as **free radicals**. Generated during mitochondrial respiration, ionizing radiation, or chemical metabolism, reactive oxygen species attack and degrade cellular macromolecules, including polyunsaturated membrane lipids, structural proteins, and nucleic acids.",
+      "say": "Free radicals with unpaired electrons react aggressively to damage lipids, proteins, and DNA.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ros_gen",
+            "label": "Mitochondrial Leakage or Radiation Generates Superoxide and Hydroxyl Radicals"
+          },
+          {
+            "id": "lipid_peroxid",
+            "label": "Radicals Attack Carbon-Carbon Double Bonds of Polyunsaturated Membrane Lipids"
+          },
+          {
+            "id": "peroxide_cascade",
+            "label": "Autocatalytic Chain Reaction Produces Unstable Lipid Hydroperoxides"
+          },
+          {
+            "id": "membrane_lysis",
+            "label": "Cellular and Organellar Membrane Integrity Collapses Irreversibly"
+          }
+        ],
+        "edges": [
+          [
+            "ros_gen",
+            "lipid_peroxid"
+          ],
+          [
+            "lipid_peroxid",
+            "peroxide_cascade"
+          ],
+          [
+            "peroxide_cascade",
+            "membrane_lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Restoration of blood flow to previously ischemic but viable tissues paradoxically accelerates cellular destruction. Termed **ischemia-reperfusion injury**, the sudden reoxygenation of ischemic cells triggers massive bursts of reactive oxygen species from damaged mitochondria and infiltrating activated neutrophils, amplifying tissue necrosis.",
+      "say": "Reperfusion of ischemic tissue paradoxically exacerbates necrosis through reactive oxygen bursts and inflammation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-limb-ischemia-fig1.webp",
+        "caption": "Acute arterial limb ischemia illustrating severe tissue hypoxia and vulnerability to reperfusion injury.",
+        "alt": "Arterial thromboembolism producing acute limb ischemia and reperfusion risk"
+      }
+    },
+    {
+      "tx": "Under physiological conditions, cells utilize specialized antioxidant enzymes to neutralize reactive oxygen species before toxic cascades begin. Superoxide dismutase converts superoxide anions into hydrogen peroxide, catalase decomposes hydrogen peroxide into water and oxygen within peroxisomes, and **glutathione peroxidase** detoxifies both intracellular peroxides and lipid hydroperoxides.",
+      "say": "Superoxide dismutase, catalase, and glutathione peroxidase scavenge free radicals to protect cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Superoxide Dismutase (SOD)",
+          "points": [
+            "Located in mitochondria (Mn-SOD) and cytosol (Cu/Zn-SOD)",
+            "Catalyzes dismutation of superoxide (O2-) into hydrogen peroxide",
+            "Prevents superoxide interaction with nitric oxide to form peroxynitrite",
+            "First line of antioxidant defense against respiratory chain leakage"
+          ]
+        },
+        "right": {
+          "title": "Catalase and Glutathione Peroxidase",
+          "points": [
+            "Catalase decomposes H2O2 into water and molecular oxygen in peroxisomes",
+            "Glutathione peroxidase (GPX4) utilizes reduced glutathione (GSH)",
+            "Directly reduces dangerous lipid hydroperoxides into non-toxic alcohols",
+            "Critical for preventing lipid-peroxidation-induced ferroptotic cell death"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common morphological pattern of tissue necrosis resulting from acute ischemia in solid organs is coagulative necrosis. In **coagulative necrosis**, severe intracellular acidosis denatures not only structural proteins but also endogenous hydrolytic enzymes, temporarily blocking enzymatic autolysis and preserving underlying tissue architecture for several days.",
+      "say": "In coagulative necrosis, severe acidosis denatures enzymes, preserving the ghostly cellular outline for days.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/splenic-infarction-fig1.webp",
+        "caption": "Wedge-shaped splenic infarction demonstrating pale coagulative necrosis of solid parenchymal architecture.",
+        "alt": "Wedge-shaped pale infarct of spleen exhibiting classic coagulative necrosis"
+      }
+    },
+    {
+      "tx": "Microscopic examination of coagulative necrosis reveals preserved cellular outlines lacking intracellular and nuclear detail. These characteristic eosinophilic anucleate silhouettes are termed **tombstone cells**, which persist until circulating inflammatory neutrophils and macrophages migrate into the necrotic zone to phagocytose cellular remnants.",
+      "say": "Microscopy shows tombstone cells: anucleate eosinophilic cell outlines with preserved tissue architecture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Coagulative Necrosis Architecture",
+          "points": [
+            "Characteristic of ischemic infarction in solid organs (kidney, heart, spleen)",
+            "Firm, pale, wedge-shaped gross appearance with base at organ capsule",
+            "Preservation of basic structural tissue scaffolding and framework",
+            "Eosinophilic coagulated cytoplasm with complete loss of nuclei"
+          ]
+        },
+        "right": {
+          "title": "Liquefactive Necrosis Architecture",
+          "points": [
+            "Characteristic of ischemic stroke in brain and focal bacterial abscesses",
+            "Complete rapid enzymatic dissolution and liquefaction of tissue",
+            "Transformation into viscous liquid mass containing dead leukocytes (pus)",
+            "Leaves cystic cavitary space lined by reactive glial scarring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In stark contrast to solid parenchymal organs, hypoxic death of central nervous system tissue produces complete enzymatic dissolution. Termed **liquefactive necrosis**, ischemic brain tissue undergoes rapid enzymatic digestion by powerful hydrolytic enzymes, transforming dead parenchyma into a liquid viscous fluid that resolves into a cystic cavity.",
+      "say": "Ischemic brain injury results in liquefactive necrosis, digesting dead tissue into a cystic liquid cavity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cerebral_infarct",
+            "label": "Cerebral Artery Occlusion Induces Acute Hypoxic Neuronal and Glial Death"
+          },
+          {
+            "id": "lysosome_release",
+            "label": "Microglial Lysosomes and Infiltrating Macrophages Release Hydrolytic Enzymes"
+          },
+          {
+            "id": "tissue_liquefy",
+            "label": "Brain Parenchyma Liquefies into Thick Viscous Lipid-Rich Fluid (Malacia)"
+          },
+          {
+            "id": "cyst_gliosis",
+            "label": "Microglia Clear Debris, Leaving a Fluid-Filled Cavity Surrounded by Gemistocytes"
+          }
+        ],
+        "edges": [
+          [
+            "cerebral_infarct",
+            "lysosome_release"
+          ],
+          [
+            "lysosome_release",
+            "tissue_liquefy"
+          ],
+          [
+            "tissue_liquefy",
+            "cyst_gliosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Liquefactive necrosis also characterizes focal bacterial and fungal infections where microbial toxins recruit massive numbers of inflammatory neutrophils. Dead neutrophils release abundant myeloperoxidase, proteases, and elastases that digest necrotic parenchyma, forming a creamy yellow-green semi-liquid exudate commonly known as **pus**.",
+      "say": "Bacterial abscesses produce liquefactive necrosis as dying neutrophils release enzymes that form pus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pyogenic_invade",
+            "label": "Pyogenic Bacterial Inoculation Attracts Dense Waves of Neutrophils"
+          },
+          {
+            "id": "leukocyte_lysis",
+            "label": "Dying Granulocytes Undergo Lysis, Discharging Potent Proteolytic Hydrolases"
+          },
+          {
+            "id": "suppuration",
+            "label": "Complete Liquefaction of Surrounding Tissue Scaffolding and Microbes"
+          },
+          {
+            "id": "abscess_wall",
+            "label": "Fibrous Granulation Tissue Capsule Walls off the Central Liquid Pus Cavity"
+          }
+        ],
+        "edges": [
+          [
+            "pyogenic_invade",
+            "leukocyte_lysis"
+          ],
+          [
+            "leukocyte_lysis",
+            "suppuration"
+          ],
+          [
+            "suppuration",
+            "abscess_wall"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gross inspection of coagulative infarcts reveals distinct color differences determined by the underlying vascular architecture of the affected organ. Solid organs with end-arterial circulations such as the kidney, heart, and spleen develop pale **white infarcts**, whereas loose tissues with dual or collateral blood supplies like the lung and small intestine develop red haemorrhagic infarcts.",
+      "say": "Solid organs with end arteries form white infarcts, while loose tissues with dual circulations form red infarcts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "White (Anemic) Infarcts",
+          "points": [
+            "Occurs in solid organs with end-arterial supply (heart, spleen, kidney)",
+            "Dense tissue limits extravasation of red blood cells into necrotic area",
+            "Presents as pale, sharply demarcated, wedge-shaped firm lesion",
+            "Becomes increasingly pale and yellow as inflammatory lysis proceeds"
+          ]
+        },
+        "right": {
+          "title": "Red (Hemorrhagic) Infarcts",
+          "points": [
+            "Occurs in tissues with dual or collateral supply (lung, small intestine)",
+            "Occurs in loose, spongy tissues where blood easily pools into dead spaces",
+            "Also seen following venous occlusion (testicular or ovarian torsion)",
+            "Reperfusion of necrotic beds forces blood into leaking damaged capillaries"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

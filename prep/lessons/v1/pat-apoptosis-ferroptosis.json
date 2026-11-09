@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-apoptosis",
+  "subject": "pathology",
+  "title": "Ferroptosis, Autophagic Vacuolation, and Internucleosomal DNA Cleavage",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "An iron-dependent form of regulated cell death driven by the lethal accumulation of lipid peroxides within cell membranes represents ferroptosis. Uncontrolled **ferroptotic cell death** is initiated when intracellular free ferrous iron participates in Fenton chemistry, producing hydroxyl radicals that attack polyunsaturated fatty acid residues in membrane phospholipids.",
+      "say": "Ferroptosis is an iron-dependent form of cell death driven by toxic membrane lipid peroxidation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-fatty-liver-of-pregnancy-fig1.webp",
+        "caption": "Severe microvesicular steatosis illustrating defective mitochondrial lipid metabolism and peroxidation.",
+        "alt": "Hepatic microvesicular fatty infiltration and metabolic oxidative stress"
+      }
+    },
+    {
+      "tx": "Under physiological conditions, ferroptosis is actively repressed by glutathione peroxidase four, a selenoprotein that converts toxic lipid hydroperoxides into non-toxic lipid alcohols. Inhibition of cystine-glutamate antiporter system Xc- deprives the cell of cysteine, depleting intracellular glutathione and inactivating **glutathione peroxidase 4**, triggering lethal ferroptosis.",
+      "say": "Depleting cysteine halts glutathione production, inactivating GPX4 and precipitating ferroptosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "system_xc_block",
+            "label": "Inhibition of System Xc- (e.g., Erastin) Halts Intracellular Cystine Uptake"
+          },
+          {
+            "id": "gsh_depletion",
+            "label": "Cysteine Starvation Depletes Cellular Reduced Glutathione (GSH) Pools"
+          },
+          {
+            "id": "gpx4_inactivation",
+            "label": "Glutathione Peroxidase 4 (GPX4) Loses Cofactor and Ceases Activity"
+          },
+          {
+            "id": "lipid_peroxid_flood",
+            "label": "Toxic Lipid Reactive Oxygen Species Accumulate, Destroying Membrane Lipids"
+          }
+        ],
+        "edges": [
+          [
+            "system_xc_block",
+            "gsh_depletion"
+          ],
+          [
+            "gsh_depletion",
+            "gpx4_inactivation"
+          ],
+          [
+            "gpx4_inactivation",
+            "lipid_peroxid_flood"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ultrastructural examination of ferroptotic cells reveals pathognomonic morphological alterations confined specifically to mitochondria. While the cell nucleus remains structurally normal without pyknosis or chromatin marginalization, the mitochondria display **shrunken condensed volume**, increased inner membrane density, and vanishing of mitochondrial cristae.",
+      "say": "Ferroptosis characteristically produces shrunken mitochondria with dense membranes and loss of cristae.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ferroptosis Morphology",
+          "points": [
+            "Mitochondria appear abnormally shrunken with condensed matrix",
+            "Loss and dissolution of internal mitochondrial cristae",
+            "Outer mitochondrial membrane ruptures under lipid stress",
+            "Nucleus remains structurally intact without chromatin marginalization"
+          ]
+        },
+        "right": {
+          "title": "Apoptosis Morphology",
+          "points": [
+            "Cellular shrinkage with prominent peripheral membrane blebbing",
+            "Condensation and peripheral crescentic margination of chromatin",
+            "Fragmentation into membrane-enclosed apoptotic bodies",
+            "Mitochondria exhibit outer membrane permeabilization without shrinkage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During conditions of nutrient starvation, growth factor withdrawal, or metabolic stress, cells initiate an evolutionary conserved lysosomal degradation pathway known as autophagy. Operating as an essential survival mechanism, **autophagic self-digestion** sequesters senescent organelles and misfolded protein aggregates into double-membrane vesicles for recycling into metabolic intermediates.",
+      "say": "Autophagy sequesters damaged organelles into double-membrane vesicles to recycle metabolic nutrients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/splenic-infarction-fig1.webp",
+        "caption": "Ischemic parenchymal injury demonstrating intense cellular metabolic stress before irreversible infarction.",
+        "alt": "Splenic infarction showing severe cellular metabolic starvation and necrosis"
+      }
+    },
+    {
+      "tx": "The molecular nucleation of autophagy begins with an isolated crescent-shaped membrane cistern termed the phagophore. Mediated by the Beclin-1 complex, the phagophore expands and engulfs cytoplasmic targets, sealing to form a mature **double-membrane autophagosome** that decorates its outer surface with microtubule-associated protein light chain three.",
+      "say": "The phagophore expands around cytoplasmic targets to seal into a double-membrane autophagosome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mtor_inhibit",
+            "label": "Nutrient Starvation Inhibits mTOR Complex 1, Activating ULK1 Complex"
+          },
+          {
+            "id": "phagophore_forms",
+            "label": "Beclin-1/VPS34 Generates PI3P to Nucleate Crescent-Shaped Phagophore"
+          },
+          {
+            "id": "lc3_conjugate",
+            "label": "LC3-I Cleaved and Lipidated with Phosphatidylethanolamine to Form LC3-II"
+          },
+          {
+            "id": "autophagosome_seals",
+            "label": "Membrane Encloses Cargo to Form Closed Double-Membrane Autophagosome"
+          }
+        ],
+        "edges": [
+          [
+            "mtor_inhibit",
+            "phagophore_forms"
+          ],
+          [
+            "phagophore_forms",
+            "lc3_conjugate"
+          ],
+          [
+            "lc3_conjugate",
+            "autophagosome_seals"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following closure, the autophagosome moves along microtubule tracks to fuse with a primary lysosome, forming an autophagolysosome. Inside this acidic compartment, **lysosomal acid hydrolases** degrade the sequestered contents, releasing free amino acids, fatty acids, and nucleosides back into the cytosol to fuel essential cellular energy requirements.",
+      "say": "Autophagosomes fuse with lysosomes, allowing acid hydrolases to digest contents into reusable nutrients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Macroautophagy",
+          "points": [
+            "Major form involving de novo sequestration by double-membrane autophagosomes",
+            "Engulfs entire organelles like damaged mitochondria (mitophagy)",
+            "Fuses with lysosomes to form acidic single-membrane autolysosomes",
+            "Governed by conserved autophagy-related (ATG) gene products"
+          ]
+        },
+        "right": {
+          "title": "Chaperone-Mediated Autophagy",
+          "points": [
+            "Direct translocation of individual soluble cytosolic proteins into lysosomes",
+            "Requires recognition of specific KFERQ-like pentapeptide motifs",
+            "Hsp70 chaperone binds cargo and docks at lysosomal LAMP-2A receptors",
+            "Translocates unfolded target directly across lysosomal membrane"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A definitive molecular distinction separating apoptotic cell death from random necrotic autolysis is the pattern of genomic DNA cleavage. On agarose gel electrophoresis, apoptotic DNA resolves into a sharp **internucleosomal DNA ladder** consisting of integer multiples of one hundred and eighty to two hundred base-pair fragments.",
+      "say": "Agarose gel electrophoresis shows an internucleosomal ladder in apoptosis, unlike the necrotic smear.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apoptotic DNA Laddering",
+          "points": [
+            "Driven by caspase-activated DNase (CAD) cleaving at exposed linkers",
+            "Nucleosomal histone cores protect wrapped 146 base pairs of DNA",
+            "Generates discrete ladder bands of 180, 360, 540, and 720 base pairs",
+            "Pathognomonic molecular electrophoretic hallmark of programmed apoptosis"
+          ]
+        },
+        "right": {
+          "title": "Necrotic DNA Smear",
+          "points": [
+            "Driven by uncontrolled release of non-specific lysosomal nucleases",
+            "Random, non-specific enzymatic cleavage across all genomic regions",
+            "Generates continuous distribution of random-sized DNA fragments",
+            "Appears on agarose gel electrophoresis as a diffuse continuous smear"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The internucleosomal ladder pattern arises because chromosomal DNA is wrapped around histone octamers in repeating nucleosomal units. While the one hundred and forty-six base pairs wrapped around each nucleosome are protected from enzymatic attack, the **unprotected linker DNA** between nucleosomes is accessible to caspase-activated DNase cleavage.",
+      "say": "Caspase-activated DNase selectively cleaves unprotected linker DNA between nucleosomes, generating the ladder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chromatin_structure",
+            "label": "Chromatin Packaged into Repeating Nucleosomes Wrapped with Histone Octamers"
+          },
+          {
+            "id": "linker_expose",
+            "label": "Linker DNA Segments (40-60 bp) Exposed Between Adjacent Histone Cores"
+          },
+          {
+            "id": "cad_scission",
+            "label": "Caspase-Activated DNase (CAD) Makes Double-Strand Cuts in Exposed Linkers"
+          },
+          {
+            "id": "ladder_banding",
+            "label": "Generates Regular 180-200 Base Pair Multimers Resolving on Electrophoresis"
+          }
+        ],
+        "edges": [
+          [
+            "chromatin_structure",
+            "linker_expose"
+          ],
+          [
+            "linker_expose",
+            "cad_scission"
+          ],
+          [
+            "cad_scission",
+            "ladder_banding"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

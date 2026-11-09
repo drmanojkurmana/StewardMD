@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-cell-injury-necrosis",
+  "subject": "pathology",
+  "title": "Reversible Cell Injury, Cellular Swelling, and Ultrastructural Derangements",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "When environmental stresses or metabolic insults overwhelm normal homeostatic limits, cells undergo a spectrum of morphological and functional alterations. If the injurious stimulus is mild or transient, the cell experiences **reversible cell injury**, during which functional derangements and structural abnormalities can completely normalize once the offending etiology is removed.",
+      "say": "Reversible cell injury occurs when transient stress causes changes that completely resolve once the stress ceases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypoxia_insult",
+            "label": "Acute Hypoxia or Toxin Depresses Mitochondrial Oxidative Phosphorylation"
+          },
+          {
+            "id": "atp_depletion",
+            "label": "Intracellular ATP Generation Plummets, Paralyzing Energy-Dependent Pumps"
+          },
+          {
+            "id": "ion_imbalance",
+            "label": "Intracellular Sodium and Water Accumulate while Potassium Leaks out"
+          },
+          {
+            "id": "recovery_path",
+            "label": "Oxygen Reintroduction Restores Respiration, Returning Cell to Normal Homeostasis"
+          }
+        ],
+        "edges": [
+          [
+            "hypoxia_insult",
+            "atp_depletion"
+          ],
+          [
+            "atp_depletion",
+            "ion_imbalance"
+          ],
+          [
+            "ion_imbalance",
+            "recovery_path"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The earliest and most universal morphological manifestation of almost all forms of cellular injury is generalized cell enlargement. Also designated **cloudy swelling**, this gross change produces pale, turgid organs with increased weight and rounded capsule margins due to impaired plasma membrane sodium-potassium adenosine triphosphatase pumps.",
+      "say": "Cloudy swelling is the earliest manifestation of injury, making affected organs pale, swollen, and heavy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-coronary-syndrome-long-case-fig1.webp",
+        "caption": "Acute coronary ischemia demonstrating early myocardial hypoxia before irreversible infarction supervenes.",
+        "alt": "Myocardial ischemic injury and cellular hypoperfusion"
+      }
+    },
+    {
+      "tx": "As water continues to rush into damaged cells along with sodium ions, the cytoplasm becomes distended with small clear vacuoles representing distended segments of the endoplasmic reticulum. Known microscopically as **hydropic change**, this severe form of intracellular oedema represents an advanced yet still reversible stage of cellular injury.",
+      "say": "Hydropic change occurs when water distends endoplasmic reticulum cisternae into clear cytoplasmic vacuoles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microscopic Hydropic Features",
+          "points": [
+            "Cytoplasm displays numerous clear microvacuoles of water",
+            "Endoplasmic reticulum cisternae swell, pinch off, and dilate",
+            "Nucleus remains normally centered with intact chromatin pattern",
+            "Cell boundaries expand without plasma membrane rupture"
+          ]
+        },
+        "right": {
+          "title": "Ultrastructural Alterations",
+          "points": [
+            "Mitochondrial swelling with small amorphous calcium densities",
+            "Detachment of ribosomes from rough endoplasmic reticulum",
+            "Loss and distortion of microvilli along apical membranes",
+            "Formation of surface blebs and myelin figures from membranes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Under the transmission electron microscope, cells undergoing reversible injury reveal distinct organellar defects. Ribosomes detach from the rough endoplasmic reticulum, mitochondria exhibit moderate matrix expansion, and the plasma membrane forms outpouchings termed **membrane blebs**, reflecting structural disruption of anchoring cortical actin cytoskeletal filaments.",
+      "say": "Reversible injury causes plasma membrane blebbing as actin filaments detach from the lipid bilayer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "atp_loss",
+            "label": "ATP Exhaustion Inhibits Cytoskeletal Actin Polymerization"
+          },
+          {
+            "id": "actin_detach",
+            "label": "Cortical Microfilaments Detach from Plasma Membrane Anchors"
+          },
+          {
+            "id": "bleb_formation",
+            "label": "Intracellular Hydrostatic Pressure Pushes Membrane Outward into Clear Blebs"
+          },
+          {
+            "id": "reversibility",
+            "label": "Restoration of Energy Permitted Reabsorption of Blebs Without Lysis"
+          }
+        ],
+        "edges": [
+          [
+            "atp_loss",
+            "actin_detach"
+          ],
+          [
+            "actin_detach",
+            "bleb_formation"
+          ],
+          [
+            "bleb_formation",
+            "reversibility"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mitochondrial dysfunction leads to an immediate switch from aerobic cellular respiration to anaerobic glycolysis. The subsequent accumulation of lactic acid and inorganic phosphates drops intracellular pH, inducing clumped nuclear chromatin and inactivating multiple metabolic enzymes, which further impairs **cellular energy metabolism** across damaged organelles.",
+      "say": "Anaerobic glycolysis generates lactic acid, lowering intracellular pH and clumping nuclear chromatin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-and-chronic-myocarditis-fig1.webp",
+        "caption": "Myocardial cellular degeneration showing inflammatory infiltration and early reversible hydropic swelling.",
+        "alt": "Myocardial inflammatory infiltration and hydropic cellular degeneration"
+      }
+    },
+    {
+      "tx": "When metabolic or toxic insults persist past a critical threshold, biochemical changes pass a point of no return. The transition to **irreversible injury** is characterized by the permanent inability to reverse mitochondrial dysfunction and profound structural breakdown of plasma, lysosomal, and organellar membranes.",
+      "say": "Irreversible injury is defined by persistent mitochondrial failure and widespread membrane rupture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reversible Injury Hallmarks",
+          "points": [
+            "Cellular swelling, cloudy swelling, and hydropic change",
+            "Mitochondrial swelling with preserved inner membrane potential",
+            "Ribosomal detachment and decreased protein synthesis",
+            "Nuclear chromatin clumping without structural fragmentation"
+          ]
+        },
+        "right": {
+          "title": "Irreversible Injury Hallmarks",
+          "points": [
+            "Opening of high-conductance mitochondrial permeability pores",
+            "Massive cytosolic influx of extracellular calcium ions",
+            "Severe rupture of plasma membrane with enzyme leakage into blood",
+            "Lysosomal membrane lysis and nuclear disintegration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A central hallmark of the transition to irreversible injury is the uncontrolled entry of calcium into the cytosol. Elevated intracellular calcium activates destructive endogenous enzymes, including phospholipases that degrade membrane lipids, proteases that dismantle cytoskeletal proteins, and endonucleases that fragment nuclear **chromatin DNA**.",
+      "say": "Massive cytosolic calcium influx activates phospholipases, proteases, and endonucleases that destroy the cell.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "membrane_leak",
+            "label": "Loss of Calcium Homeostasis Permits Massive Influx from ECF and ER"
+          },
+          {
+            "id": "phospholipase_on",
+            "label": "Phospholipases Activated, Accelerating Membrane Phospholipid Degradation"
+          },
+          {
+            "id": "protease_on",
+            "label": "Proteases Cleave Cytoskeletal Tubulin, Spectrin, and Actin Anchors"
+          },
+          {
+            "id": "endonuclease_on",
+            "label": "Endonucleases Fragment Chromosomal DNA, Precipitating Cell Death"
+          }
+        ],
+        "edges": [
+          [
+            "membrane_leak",
+            "phospholipase_on"
+          ],
+          [
+            "membrane_leak",
+            "protease_on"
+          ],
+          [
+            "membrane_leak",
+            "endonuclease_on"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once plasma membrane integrity is breached, intracellular proteins and enzymes leak across the permeable membrane into the extracellular fluid and systemic circulation. Measuring these released macromolecules in serum provides sensitive clinical markers of tissue necrosis, such as cardiac troponins and creatine kinase-MB in **acute myocardial infarction**.",
+      "say": "Ruptured plasma membranes leak enzymes like troponin into blood, providing diagnostic markers of infarction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sarcolemma_rupture",
+            "label": "Myocardial Sarcolemma Integrity Breaks Down Irreversibly"
+          },
+          {
+            "id": "enzyme_leakage",
+            "label": "Cardiac Troponins I and T and CK-MB Diffuse into Interstitial Fluid"
+          },
+          {
+            "id": "capillary_uptake",
+            "label": "Macromolecules Enter Cardiac Capillaries and Coronary Venous Runoff"
+          },
+          {
+            "id": "diagnostic_assay",
+            "label": "High-Sensitivity Serum Assays Detect Myocyte Death Within Hours"
+          }
+        ],
+        "edges": [
+          [
+            "sarcolemma_rupture",
+            "enzyme_leakage"
+          ],
+          [
+            "enzyme_leakage",
+            "capillary_uptake"
+          ],
+          [
+            "capillary_uptake",
+            "diagnostic_assay"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

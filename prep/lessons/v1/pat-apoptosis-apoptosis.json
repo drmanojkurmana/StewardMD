@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-apoptosis",
+  "subject": "pathology",
+  "title": "Apoptosis Mechanisms, Death Receptors, and the Extrinsic Pathway",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Unlike necrosis which represents accidental, unregulated cell lysis accompanied by intense inflammation, programmed cell death operates through an energy-dependent molecular suicide program. Designated **apoptosis**, this pathway orchestrates controlled cellular shrinkage, chromatin condensation, membrane blebbing, and fragmentation into membrane-bound apoptotic bodies without inciting tissue inflammation.",
+      "say": "Apoptosis is programmed cell death that eliminates cells quietly into apoptotic bodies without inflammation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+        "caption": "Interface hepatitis demonstrating individual hepatocyte apoptosis into condensed Councilman bodies.",
+        "alt": "Autoimmune hepatitis showing individual hepatocyte apoptotic bodies"
+      }
+    },
+    {
+      "tx": "Apoptosis plays essential homeostatic roles in both physiological and pathological contexts. During embryogenesis, apoptosis sculpts digits by eliminating interdigital webbing, maintains constant cell numbers in proliferating tissues, and deletes autoreactive T-lymphocytes during **central thymic tolerance**, while also removing virally infected and DNA-damaged cells.",
+      "say": "Apoptosis removes interdigital webbing in embryos, deletes autoreactive T cells, and culls damaged cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physiological Apoptosis Roles",
+          "points": [
+            "Programmed embryonic morphogenesis (interdigital web elimination)",
+            "Hormone-dependent tissue involution (endometrial shedding, weaning)",
+            "Cell turnover in proliferating epithelia (intestinal crypt migration)",
+            "Deletion of self-reactive lymphocytes during central negative selection"
+          ]
+        },
+        "right": {
+          "title": "Pathological Apoptosis Roles",
+          "points": [
+            "DNA damage response following ionizing radiation or chemotherapy",
+            "Cellular death induced by accumulation of misfolded ER proteins",
+            "Elimination of virus-infected cells by cytotoxic T-lymphocytes",
+            "Pathological organ atrophy following duct obstruction (pancreas, kidney)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The decision to execute apoptosis can be initiated through two distinct converging molecular arms: the intrinsic mitochondrial pathway and the extrinsic death receptor pathway. In the **intrinsic mitochondrial pathway**, intracellular stresses such as DNA damage, growth factor deprivation, or oxidative injury trigger mitochondrial outer membrane permeabilization.",
+      "say": "The intrinsic apoptotic pathway triggers mitochondrial permeabilization in response to internal stress.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "internal_stress",
+            "label": "DNA Double-Strand Breaks or Growth Factor Withdrawal Triggers Sensor Activation"
+          },
+          {
+            "id": "bh3_activation",
+            "label": "BH3-Only Proteins (BIM, PUMA, NOXA) Neutralize Anti-Apoptotic BCL-2"
+          },
+          {
+            "id": "bax_bak_pore",
+            "label": "Pro-Apoptotic BAX and BAK Oligomerize in Outer Mitochondrial Membrane"
+          },
+          {
+            "id": "cyt_c_release",
+            "label": "Cytochrome C Discharges into Cytosol to Activate Apaf-1 and Caspase-9"
+          }
+        ],
+        "edges": [
+          [
+            "internal_stress",
+            "bh3_activation"
+          ],
+          [
+            "bh3_activation",
+            "bax_bak_pore"
+          ],
+          [
+            "bax_bak_pore",
+            "cyt_c_release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, the extrinsic apoptotic pathway is triggered by extracellular ligand binding to specialized cell-surface death receptors belonging to the tumor necrosis factor receptor superfamily. In this **extrinsic death receptor pathway**, receptors such as Fas (CD95) and tumor necrosis factor receptor-one contain an intracellular eighty amino acid death domain that organizes apoptotic complexes.",
+      "say": "The extrinsic pathway uses cell surface death receptors like Fas to trigger apoptosis from outside signals.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-liver-failure-fig1.webp",
+        "caption": "Severe fulminant hepatic necrosis showing extensive cell death and cytotoxic T-cell-mediated apoptosis.",
+        "alt": "Massive acute hepatic parenchymal destruction and apoptotic hepatocyte death"
+      }
+    },
+    {
+      "tx": "A quintessential trigger of the extrinsic apoptotic pathway is the interaction between the cell-surface receptor Fas and its cognate ligand. Expressed on activated cytotoxic T-lymphocytes and natural killer cells, **Fas ligand binding** induces trimerization of Fas receptors on target cells, clustering their intracellular death domains.",
+      "say": "Fas ligand on cytotoxic T cells binds and trimerizes target Fas receptors to initiate death signaling.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ctl_presentation",
+            "label": "Cytotoxic CD8+ T-Cell Presents Membrane-Bound Fas Ligand (CD178)"
+          },
+          {
+            "id": "fas_trimer",
+            "label": "Cross-Links and Trimerizes Fas (CD95) Receptors on Target Cell Membrane"
+          },
+          {
+            "id": "fadd_recruit",
+            "label": "Clustered Death Domains Recruit Adapter Protein FADD via Homotypic Binding"
+          },
+          {
+            "id": "disc_complex",
+            "label": "Assembles Death-Inducing Signaling Complex (DISC) to Cleave Procaspase-8"
+          }
+        ],
+        "edges": [
+          [
+            "ctl_presentation",
+            "fas_trimer"
+          ],
+          [
+            "fas_trimer",
+            "fadd_recruit"
+          ],
+          [
+            "fadd_recruit",
+            "disc_complex"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clustered intracellular death domains recruit an adapter protein designated Fas-associated death domain protein. Together with procaspase-eight, this assembly forms the **death-inducing signaling complex**, which brings multiple inactive initiator procaspases into close proximity, enabling mutual autoproteolytic cleavage into active initiator caspase-eight.",
+      "say": "The death-inducing signaling complex aggregates and cleaves procaspase-8 into its active initiator form.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DISC Assembly Components",
+          "points": [
+            "Trimerized Fas (CD95) or TRAIL death receptor complexes",
+            "FADD (Fas-Associated Death Domain) bridging adapter protein",
+            "Procaspase-8 (or procaspase-10) initiator zymogens",
+            "Drives induced proximity and autocatalytic caspase activation"
+          ]
+        },
+        "right": {
+          "title": "FLIP Inhibition Mechanism",
+          "points": [
+            "Cellular FLIP (c-FLIP) binds FADD via death effector domains",
+            "Lacks enzymatic caspase catalytic activity (pseudocaspase)",
+            "Competitively blocks procaspase-8 recruitment to the DISC",
+            "Overexpressed by tumor cells and viruses to resist immune attack"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Active caspase-eight serves as the key molecular bridge connecting the extrinsic death receptor pathway directly to executioner caspases. Additionally, caspase-eight can cleave the pro-apoptotic BH3-only protein BID into **truncated BID**, which translocates to mitochondria to activate BAX and engage the intrinsic pathway, amplifying the apoptotic signal.",
+      "say": "Caspase-8 cleaves BID into truncated BID, recruiting the mitochondrial pathway to amplify apoptosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "active_casp8",
+            "label": "Active Caspase-8 Directly Cleaves Executioner Procaspases-3 and 7"
+          },
+          {
+            "id": "bid_cleavage",
+            "label": "Concurrently Cleaves Cytosolic Full-Length BID into Truncated BID (tBID)"
+          },
+          {
+            "id": "mitochondrial_cross",
+            "label": "tBID Translocates to Mitochondria to Activate BAX and BAK Oligomers"
+          },
+          {
+            "id": "dual_amplification",
+            "label": "Engages Intrinsic Pathway, Ensuring Irreversible Apoptotic Commitment"
+          }
+        ],
+        "edges": [
+          [
+            "active_casp8",
+            "bid_cleavage"
+          ],
+          [
+            "bid_cleavage",
+            "mitochondrial_cross"
+          ],
+          [
+            "mitochondrial_cross",
+            "dual_amplification"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once activated, executioner caspases cleave structural and regulatory intracellular substrates, culminating in cell disassembly into membrane-bound fragments termed apoptotic bodies. These bodies rapidly display **phosphatidylserine on outer membranes**, signaling resident tissue phagocytes to engulf them immediately, preventing leakage of intracellular contents and avoiding tissue inflammation.",
+      "say": "Apoptotic bodies expose phosphatidylserine on their surface to prompt rapid non-inflammatory phagocytosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "caspase_executes",
+            "label": "Executioner Caspase-3 Cleaves Cytoskeletal Alpha-Fodrin and Actin"
+          },
+          {
+            "id": "scramblase_flip",
+            "label": "Activates Scramblase, Flipping Phosphatidylserine to Outer Membrane Leaflet"
+          },
+          {
+            "id": "eat_me_signal",
+            "label": "Extracellular Phosphatidylserine Acts as a Universal 'Eat-Me' Flag"
+          },
+          {
+            "id": "silent_phagocytosis",
+            "label": "Macrophage Receptors Engulf Apoptotic Bodies Completely Within Minutes"
+          }
+        ],
+        "edges": [
+          [
+            "caspase_executes",
+            "scramblase_flip"
+          ],
+          [
+            "scramblase_flip",
+            "eat_me_signal"
+          ],
+          [
+            "eat_me_signal",
+            "silent_phagocytosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
