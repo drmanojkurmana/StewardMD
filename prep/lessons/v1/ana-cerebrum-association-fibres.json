@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "id": "ana-cerebrum-association-fibres",
+ "subject": "anatomy",
+ "module": "ana-cerebrum",
+ "title": "Cerebral White Matter, Internal Capsule, and Cortical Homunculus",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Subcortical cerebral white matter is organized into three major axonal fiber systems: association fibres, commissural fibres, and projection fibres. **Association fibres** interconnect distinct cortical regions within the same hemisphere. Short arcuate U-fibres loop between adjacent gyri, whereas long association bundles, such as the superior longitudinal fasciculus, arcuate fasciculus, cingulum, and uncinate fasciculus, bridge distant lobes.",
+   "say": "Cerebral white matter comprises association, commissural, and projection fibres. Association fibres connect areas within the same hemisphere, including the arcuate fasciculus and cingulum.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cerebral-territories.svg",
+    "alt": "Anatomical schematic showing vascular territories and deep cerebral white matter pathways",
+    "caption": "Subcortical white matter architecture and arterial distributions within the cerebral hemispheres. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The arcuate fasciculus represents a crucial long association tract that arches over the insular cortex to link Wernicke area with Broca area. Damage to this connecting bundle causes **conduction aphasia**, characterized by fluent spontaneous speech and intact auditory comprehension, but a striking, disproportionate inability to repeat spoken phrases verbatim.",
+   "say": "Connecting Wernicke area directly to Broca area, the arcuate fasciculus enables phrase repetition. Lesions cause conduction aphasia with preserved comprehension but severely impaired repetition.",
+   "vis": {
+    "kind": "table",
+    "title": "Major Long Association Bundles of the Cerebral Hemispheres",
+    "cols": [
+     "Fasciculus",
+     "Interconnected Lobes",
+     "Key Cortical Stations",
+     "Functional Role"
+    ],
+    "rows": [
+     [
+      "Arcuate fasciculus",
+      "Temporal to frontal",
+      "Wernicke to Broca areas",
+      "Language repetition"
+     ],
+     [
+      "Superior longitudinal",
+      "Frontal, parietal, occipital",
+      "Dorsolateral cortex",
+      "Visuospatial working memory"
+     ],
+     [
+      "Cingulum",
+      "Frontal to temporal",
+      "Cingulate to parahippocampus",
+      "Limbic emotional routing"
+     ],
+     [
+      "Uncinate fasciculus",
+      "Frontal to temporal",
+      "Orbitofrontal to anterior temporal",
+      "Memory and emotion integration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The internal capsule is a compact V-shaped band of projection fibres flanked medially by the caudate nucleus and thalamus, and laterally by the lentiform nucleus. On horizontal section, it displays an anterior limb, a central **genu**, and an elongated posterior limb. Corticobulbar fibers destined for cranial nerve nuclei traverse the genu, making genu strokes a cause of contralateral lower facial weakness.",
+   "say": "The V-shaped internal capsule carries ascending and descending projection tracts. Its genu contains corticobulbar fibres destined for cranial nerve motor nuclei.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-neuron-synapse.webp",
+    "alt": "Microscopic and axonal pathway illustration representing dense subcortical projection fibres",
+    "caption": "Projection fiber condensation within the internal capsule carrying corticospinal and thalamocortical tracts. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The extensive **posterior limb** of the internal capsule transmits the descending corticospinal motor tracts alongside ascending third-order sensory thalamocortical radiations. Motor fibres within the posterior limb are somatotopically mapped from anterior to posterior in the order of arm, trunk, and leg. Behind the posterior limb lie retrolenticular fibres carrying the optic radiation and sublenticular fibres carrying the auditory radiation.",
+   "say": "The posterior limb transmits corticospinal motor tracts and sensory radiations. Fibres are organized from anterior to posterior for arm, trunk, and leg.",
+   "vis": {
+    "kind": "table",
+    "title": "Internal Capsule Anatomy and Fiber Contents",
+    "cols": [
+     "Capsular Segment",
+     "Medial Boundary",
+     "Lateral Boundary",
+     "Principal Tracts"
+    ],
+    "rows": [
+     [
+      "Anterior limb",
+      "Head of caudate",
+      "Lentiform nucleus",
+      "Frontopontine, anterior thalamic"
+     ],
+     [
+      "Genu",
+      "Apex of thalamus",
+      "Lentiform apex",
+      "Corticobulbar fibres"
+     ],
+     [
+      "Posterior limb",
+      "Thalamus",
+      "Lentiform nucleus",
+      "Corticospinal, sensory radiation"
+     ],
+     [
+      "Retrolentiform",
+      "Posterior thalamus",
+      "Posterior lentiform",
+      "Optic radiation (visual)"
+     ],
+     [
+      "Sublentiform",
+      "Tail of caudate",
+      "Inferior lentiform",
+      "Auditory radiation (acoustic)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Both primary motor and somatosensory cortices are arranged somatotopically as an inverted human miniature known as the cortical **homunculus**. The head, face, lips, tongue, and pharynx are represented lowest down on the superolateral cerebral convexity, supplied by the middle cerebral artery. The hand and arm occupy the middle convexity, whereas the lower limb, foot, and perineum drape over the medial hemispheric surface.",
+   "say": "The cortical homunculus maps body regions upside down. The head, face, and hand occupy the lateral surface, while the leg and foot drape over the medial surface.",
+   "vis": {
+    "kind": "flow",
+    "title": "Somatotopic Organization Along the Cerebral Convexity",
+    "nodes": [
+     {
+      "id": "hm1",
+      "label": "Superolateral: Face and Tongue"
+     },
+     {
+      "id": "hm2",
+      "label": "Mid-Convexity: Hand and Arm"
+     },
+     {
+      "id": "hm3",
+      "label": "Medial Surface: Leg and Foot"
+     }
+    ],
+    "edges": [
+     [
+      "hm1",
+      "hm2"
+     ],
+     [
+      "hm2",
+      "hm3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because of this vascular somatotopy, occlusion of the middle cerebral artery causes weakness and sensory loss predominantly affecting the contralateral face and upper extremity. In contrast, occlusion of the **anterior cerebral artery** selectively affects the contralateral lower limb and foot, often accompanied by urinary incontinence due to damage to the medial paracentral lobule.",
+   "say": "Middle cerebral artery strokes paralyze the contralateral face and arm, whereas anterior cerebral artery strokes selectively cause contralateral leg weakness and urinary incontinence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Middle Cerebral Stroke",
+     "points": [
+      "Affects lateral convexity cortex.",
+      "Contralateral hemiparesis and sensory deficit maximal in face and arm.",
+      "Aphasia present in dominant hemisphere strokes."
+     ]
+    },
+    "right": {
+     "title": "Anterior Cerebral Stroke",
+     "points": [
+      "Affects medial parasagittal cortex.",
+      "Contralateral weakness and sensory loss concentrated in lower limb.",
+      "Associated with frontal abulia and urinary incontinence."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The inferior parietal lobule of the dominant hemisphere houses the angular and supramarginal gyri, which integrate multi-sensory and symbolic information. Damage to the dominant angular gyrus produces **Gerstmann syndrome**, a classic tetrad consisting of agraphia (inability to write), acalculia (inability to perform mathematical calculations), finger agnosia (inability to distinguish fingers), and right-left disorientation.",
+   "say": "Lesions of the dominant angular gyrus cause Gerstmann syndrome, presenting with agraphia, acalculia, finger agnosia, and right-left disorientation.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Components of Gerstmann Syndrome",
+    "cols": [
+     "Component Deficit",
+     "Clinical Definition",
+     "Bedside Examination"
+    ],
+    "rows": [
+     [
+      "Finger agnosia",
+      "Inability to identify individual fingers",
+      "Asking patient to name pointed digits"
+     ],
+     [
+      "Agraphia",
+      "Impaired writing ability without paralysis",
+      "Dictation of simple written sentences"
+     ],
+     [
+      "Acalculia",
+      "Impaired arithmetic calculations",
+      "Performance of serial subtraction"
+     ],
+     [
+      "Right-Left disorientation",
+      "Confusion of directional sides",
+      "Crossing midline commands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conversely, lesions involving the non-dominant parietal lobe produce severe visuospatial hemineglect and **anosognosia**, where patients completely ignore the contralateral left side of their body and external visual space. Affected individuals may fail to dress or groom the left half of their body and deny ownership of their paralyzed left limbs.",
+   "say": "Non-dominant parietal lesions cause contralateral hemineglect and anosognosia, where patients ignore the left visual space and deny weakness in paralyzed limbs.",
+   "vis": {
+    "kind": "flow",
+    "title": "Clinical Cascade of Non-Dominant Parietal Lesion",
+    "nodes": [
+     {
+      "id": "ng1",
+      "label": "Non-Dominant Parietal Stroke"
+     },
+     {
+      "id": "ng2",
+      "label": "Loss of Spatial Awareness"
+     },
+     {
+      "id": "ng3",
+      "label": "Contralateral Hemineglect"
+     }
+    ],
+    "edges": [
+     [
+      "ng1",
+      "ng2"
+     ],
+     [
+      "ng2",
+      "ng3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "d73b45d2-ef66-4141-a7d2-9295ce8c8811",
+  "d56ef1b6-1267-4df8-8a37-db8b3f23dc66",
+  "05b418ce-3a90-4d9f-a20b-b67a4aa6a442"
+ ]
+}

@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "ana-ventricles-meninges-lateral-ventricle",
+ "subject": "anatomy",
+ "module": "ana-ventricles-meninges",
+ "title": "Ventricular System, Cerebrospinal Fluid, and Meningeal Envelopes",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The brain and spinal cord are cushioned within a hollow ventricular cavity filled with cerebrospinal fluid that provides mechanical buoyancy and immunological protection. The paired **lateral ventricle** is a large C-shaped cavity embedded within each cerebral hemisphere, possessing an anterior horn in the frontal lobe, a central body in the parietal lobe, a posterior horn in the occipital lobe, and an inferior horn in the temporal lobe.",
+   "say": "Each lateral ventricle forms a large C-shaped cavity with an anterior horn in the frontal lobe, body in parietal, posterior horn in occipital, and inferior horn in temporal lobe.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-csf-flow.svg",
+    "alt": "Anatomical diagram of the cerebral ventricular system showing lateral, third, and fourth ventricles and CSF circulation",
+    "caption": "Ventricular circulation of cerebrospinal fluid from the lateral ventricles through the fourth ventricle into the subarachnoid space. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Each lateral ventricle communicates with the slit-like midline third ventricle through the paired interventricular **foramen of Monro**. The third ventricle is situated within the diencephalon, bounded laterally by the medial surfaces of the thalamus and hypothalamus. In approximately seventy percent of humans, the left and right thalami are interconnected across the third ventricle by the interthalamic adhesion.",
+   "say": "Each lateral ventricle connects to the midline third ventricle via the foramen of Monro. The third ventricle lies between the thalami and hypothalami.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anatomical Pathway of Ventricular Fluid Drainage",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Lateral Ventricles"
+     },
+     {
+      "id": "f2",
+      "label": "Interventricular Foramen of Monro"
+     },
+     {
+      "id": "f3",
+      "label": "Midline Third Ventricle"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From the third ventricle, cerebrospinal fluid flows caudally through the narrow **cerebral aqueduct** of Sylvius, traversing the core of the midbrain into the tent-shaped fourth ventricle. Because of its minute calibre, the cerebral aqueduct is the most vulnerable site for non-communicating obstructive hydrocephalus, commonly blocked by congenital aqueductal stenosis, tectal gliomas, or pineal tumors.",
+   "say": "Passing through the midbrain, the narrow cerebral aqueduct carries fluid to the fourth ventricle. Being narrow, it is the most frequent site of obstructive hydrocephalus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Communicating Hydrocephalus",
+     "points": [
+      "Impaired arachnoid granulation absorption or subarachnoid hemorrhage.",
+      "Ventricular communication channels remain patent.",
+      "Symmetrical dilation across all four ventricles."
+     ]
+    },
+    "right": {
+     "title": "Obstructive Hydrocephalus",
+     "points": [
+      "Internal physical blockage, commonly aqueductal stenosis.",
+      "Ventricular dilation occurs proximal to the obstruction.",
+      "Enlarged lateral and third ventricles with normal fourth ventricle."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The diamond-shaped fourth ventricle lies between the cerebellum posteriorly and the pons and medulla oblongata anteriorly. Cerebrospinal fluid exits this cavity into the subarachnoid space through three openings in its thin roof: two lateral apertures termed the foramina of Luschka, and a single median aperture called the **foramen of Magendie**.",
+   "say": "The fourth ventricle sits between the brainstem and cerebellum. Fluid escapes into the subarachnoid space through two lateral foramina of Luschka and one median foramen of Magendie.",
+   "vis": {
+    "kind": "table",
+    "title": "Fourth Ventricle Exit Foramina and Drainage Paths",
+    "cols": [
+     "Foramen",
+     "Position in Roof",
+     "Eponym Rule",
+     "Drainage Destination"
+    ],
+    "rows": [
+     [
+      "Foramen of Magendie",
+      "Median posterior inferior",
+      "M for Median",
+      "Cisterna magna"
+     ],
+     [
+      "Foramina of Luschka",
+      "Bilateral lateral recesses",
+      "L for Lateral",
+      "Cerebellopontine cisterns"
+     ],
+     [
+      "Central canal",
+      "Inferior angle apex",
+      "Spinal continuation",
+      "Lumbar cistern of cord"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Over eighty percent of cerebrospinal fluid is actively secreted by the vascular **choroid plexus**, present in the lateral, third, and fourth ventricles. The plexus consists of tufts of fenestrated capillaries invaginated by modified cuboidal ependymal cells linked by tight junctions that form the blood-CSF barrier. In healthy adults, roughly five hundred millilitres of cerebrospinal fluid are produced daily.",
+   "say": "Specialized choroid plexus tufts actively produce cerebrospinal fluid. Tight junctions between cuboidal ependymal cells construct the protective blood-CSF barrier.",
+   "vis": {
+    "kind": "flow",
+    "title": "Physiological Turnover of Cerebrospinal Fluid",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Choroid Plexus Secretion"
+     },
+     {
+      "id": "p2",
+      "label": "Ventricular Flow & Subarachnoid Space"
+     },
+     {
+      "id": "p3",
+      "label": "Arachnoid Villus Reabsorption"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cerebrospinal fluid re-enters the systemic venous circulation primarily through microscopic **arachnoid granulations** (Pacchionian bodies) projecting into the superior sagittal sinus and its lateral lacunae. Reabsorption operates as a passive one-way pressure-dependent hydrostatic valve when subarachnoid pressure exceeds venous pressure. Calcified granulations in elderly individuals create visible pits on the inner calvarial bone.",
+   "say": "Pacchionian arachnoid granulations filter cerebrospinal fluid into the superior sagittal sinus via one-way pressure-dependent hydrostatic valves.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-venous-sinuses.svg",
+    "alt": "Anatomical schematic showing cranial dural venous sinuses, superior sagittal sinus, and arachnoid villi",
+    "caption": "Superior sagittal sinus receiving arachnoid granulations that return CSF into venous circulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In regions where the arachnoid membrane bridges wide irregularities across the brain surface, the subarachnoid space widens into anatomical pools known as subarachnoid cisterns. The largest is the **cisterna magna** (cerebellomedullary cistern), situated between the inferior surface of the cerebellum and the dorsal medulla oblongata. Other vital spaces include the interpeduncular cistern, ambient cistern, and chiasmatic cistern.",
+   "say": "Subarachnoid cisterns represent pools formed where arachnoid bridges brain contours. The largest is the cisterna magna between cerebellum and medulla.",
+   "vis": {
+    "kind": "table",
+    "title": "Major Subarachnoid Cisterns and Contained Structures",
+    "cols": [
+     "Cistern Name",
+     "Anatomical Location",
+     "Contained Neurovascular Structures"
+    ],
+    "rows": [
+     [
+      "Cisterna magna",
+      "Between cerebellum and dorsal medulla",
+      "Vertebral arteries, PICA, cranial nerves IX-XII"
+     ],
+     [
+      "Interpeduncular cistern",
+      "Between cerebral peduncles",
+      "Circle of Willis, basilar bifurcation, CN III"
+     ],
+     [
+      "Chiasmatic cistern",
+      "Above sella turcica",
+      "Optic chiasm, pituitary stalk"
+     ],
+     [
+      "Ambient cistern",
+      "Lateral aspect of midbrain",
+      "Trochlear nerve (CN IV), posterior cerebral artery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The central nervous system is enveloped by three protective membranes termed meninges: the fibrous dura mater, delicate arachnoid mater, and intimate pia mater. The cranial dura mater possesses two layers: an outer periosteal layer and an inner meningeal layer. Infoldings of the inner layer form rigid dural partitions including the **falx cerebri** between cerebral hemispheres and the tentorium cerebelli above the cerebellum.",
+   "say": "Three meningeal coats encase the brain. The tough dura divides into periosteal and meningeal layers, forming internal partitions like the falx cerebri and tentorium cerebelli.",
+   "vis": {
+    "kind": "flow",
+    "title": "Meningeal Layers and Subdural/Epidural Spaces",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Periosteal and Meningeal Dura"
+     },
+     {
+      "id": "m2",
+      "label": "Arachnoid Mater"
+     },
+     {
+      "id": "m3",
+      "label": "Pia Mater on Brain Surface"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "98af78e1-4000-8000-98af-78e112345678",
+  "95af7428-4000-8000-95af-742812345678",
+  "96af75bb-4000-8000-96af-75bb12345678"
+ ]
+}
