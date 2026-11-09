@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "id": "ent-rhinitis-polyps-allergic-rhinitis",
+ "subject": "ent",
+ "module": "ent-rhinitis-polyps",
+ "title": "Allergic, Vasomotor and Atrophic Rhinitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Allergic rhinitis** is immunoglobulin E mediated inflammation of the nasal lining after inhaled allergens such as pollen, house dust mite and animal dander sensitise mast cells. Re-exposure cross links immunoglobulin E, releasing histamine that drives sneezing, itching, watery discharge and blockage within minutes. A later eosinophil rich phase sustains congestion for hours, so patients describe both sudden attacks and persistent stuffiness.",
+   "say": "Allergy inflames the nose when inhaled pollen or dust triggers antibody armed mast cells. Histamine release causes sneezing, itching and watery discharge within minutes of contact. Hours later, inflammatory cells sustain the congestion, which explains why patients report both sudden attacks and constant stuffiness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/allergic-rhinitis-fig1.webp",
+    "alt": "Cross section of nasal cavity showing swollen turbinates with mast cell degranulation and eosinophil recruitment in allergic rhinitis.",
+    "caption": "Swollen turbinates with mast cell degranulation in allergic rhinitis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Seasonal disease follows grass, tree or weed pollens and often brings itchy red eyes, while perennial disease follows dust mite or dander and dominates with blockage and smell loss. Examination shows pale bluish swollen turbinates with clear discharge, transverse nasal crease from repeated upward rubbing, dark allergic shiners below the eyes and mouth breathing in children. **Skin prick testing** identifies the dominant allergen when history is unclear.",
+   "say": "Pollen exposure causes itchy eyes each season, whereas dust mite exposure produces year round blockage. Examination finds pale swollen turbinates, a crease across the nose and dark shadows under the eyes. Skin testing identifies the main allergen whenever the history leaves doubt.",
+   "vis": {
+    "kind": "table",
+    "title": "Seasonal and perennial allergic rhinitis compared",
+    "cols": [
+     "Feature",
+     "Seasonal pattern",
+     "Perennial pattern"
+    ],
+    "rows": [
+     [
+      "Main triggers",
+      "Grass, tree and weed pollens",
+      "Dust mite, dander, moulds"
+     ],
+     [
+      "Dominant symptoms",
+      "Sneezing, itching, itchy eyes",
+      "Blockage, discharge, smell loss"
+     ],
+     [
+      "Course",
+      "Weeks during pollen season",
+      "Present most of the year"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line care combines allergen avoidance with a daily **intranasal corticosteroid** spray, which treats every symptom including blockage better than any single alternative. The nozzle points outward away from the septum to reduce nosebleeds, and benefit builds over one to two weeks of regular use. Oral or intranasal antihistamines add control of sneezing and itching, while saline irrigation clears mucus and improves spray contact with the lining.",
+   "say": "Daily steroid spray forms the backbone of treatment because it controls blockage as well as sneezing. Directing the nozzle outward protects the septum from bleeding during regular use. Antihistamines help itching episodes, and saline rinses wash mucus away so the spray reaches the lining.",
+   "vis": {
+    "kind": "flow",
+    "title": "Stepwise control of allergic rhinitis",
+    "nodes": [
+     {
+      "id": "av",
+      "label": "Avoid proven allergens"
+     },
+     {
+      "id": "sp",
+      "label": "Daily intranasal steroid"
+     },
+     {
+      "id": "ah",
+      "label": "Add antihistamine if needed"
+     },
+     {
+      "id": "it",
+      "label": "Immunotherapy for severe cases"
+     }
+    ],
+    "edges": [
+     [
+      "av",
+      "sp"
+     ],
+     [
+      "sp",
+      "ah"
+     ],
+     [
+      "ah",
+      "it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients with severe disease despite correct spray technique, or with one dominant proven allergen, may receive allergen **immunotherapy** by subcutaneous injection or sublingual tablet over three to five years. Immunotherapy is the only treatment that modifies the disease itself, reducing symptoms and new sensitisations after it stops. Antihistamines alone never remodel the airway, so persistent blockage on tablets alone signals the need to add or optimise intranasal steroid therapy.",
+   "say": "Severe disease with one clear allergen is suitable for desensitisation injections or tablets under the tongue. The programme needs three to five years and is the only treatment that modifies the disease itself. Tablets alone never remodel the airway, so persistent blockage needs steroid spray optimisation.",
+   "vis": {
+    "kind": "table",
+    "title": "Immunotherapy essentials",
+    "cols": [
+     "Aspect",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Route",
+      "Injection or sublingual tablet"
+     ],
+     [
+      "Duration",
+      "Three to five years"
+     ],
+     [
+      "Benefit",
+      "Disease modification after stopping"
+     ],
+     [
+      "Selection",
+      "Severe disease, one dominant allergen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vasomotor rhinitis** is non allergic, non infective rhinitis where autonomic imbalance makes the lining overreact to cold air, strong smells, smoke, alcohol or spicy food with watery discharge and blockage. No allergen drives it and skin tests stay negative, which separates it from allergy. Intranasal steroids still help many patients, an anticholinergic drying spray reduces pure watery discharge, and specialist nerve procedures remain options for stubborn disease.",
+   "say": "Some noses overreact to cold air, smoke or spicy food without any allergy driving the response. Negative skin tests separate this autonomic pattern from true allergic disease. Steroid spray still helps many patients, while a drying anticholinergic spray reduces a purely watery discharge.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allergic rhinitis",
+     "points": [
+      "Immunoglobulin E driven, allergen specific",
+      "Itching and sneezing prominent",
+      "Skin prick test positive",
+      "Immunotherapy can modify disease"
+     ]
+    },
+    "right": {
+     "title": "Vasomotor rhinitis",
+     "points": [
+      "Autonomic imbalance, no allergen",
+      "Watery discharge and blockage dominate",
+      "Skin prick test negative",
+      "Triggers include cold air and odours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prolonged topical decongestant use causes **rhinitis medicamentosa**, a rebound congestion where the lining becomes dependent on topical decongestant sprays to stay open. Patients escalate spray frequency as each dose works for a shorter time, and stopping brings severe blockage. Management stops the decongestant, substitutes intranasal steroid with saline support, and warns that congestion worsens for days before the lining recovers its own tone.",
+   "say": "Decongestant sprays used for weeks create rebound blockage that demands ever more frequent dosing. Stopping the spray forms the essential step, supported by steroid spray and saline during recovery. Patients need warning that congestion peaks for several days before the lining regains normal tone.",
+   "vis": null
+  },
+  {
+   "tx": "**Atrophic rhinitis** is chronic nasal inflammation with glandular atrophy, wide roomy cavities, thick greenish crusts and foul smell called ozena that the patient cannot perceive because smell is lost. Primary disease follows Klebsiella ozaenae infection in many cases, while secondary disease follows radical turbinate surgery, trauma or granulomatous disease. Paradoxically patients complain of blockage despite wide cavities, because atrophic mucosa senses airflow poorly.",
+   "say": "Wide nasal cavities filled with foul green crusts define this chronic atrophic condition. The patient often cannot smell the odour that others notice immediately on entering. Despite roomy airways, a blocked feeling persists because diseased mucosa senses airflow poorly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-cavity-and-paranasal-sinuses-fig1.webp",
+    "alt": "Coronal and sagittal diagrams of nasal cavity and paranasal sinuses showing cavity anatomy relevant to atrophic change and sinus disease.",
+    "caption": "Nasal cavity and sinus anatomy showing the cavities that crust and widen in atrophic rhinitis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Care of atrophic rhinitis rests on alkaline nasal douching to soften crusts, glucose in glycerine drops to inhibit proteolytic organisms, and antibiotics for infective exacerbations. Surgery narrows the abnormally wide cavity to restore humidification and airflow sensation, classically by submucosal implants or medialisation procedures. **Young operation** closes the nostril completely for a year or more so the resting mucosa recovers, with modified versions leaving a small airway opening.",
+   "say": "Alkaline douching softens crusts while glucose glycerine drops discourage the organisms that produce foul odour. Antibiotics treat infective flare ups as they arise during long term care. Operations narrow the wide cavity, and complete nostril closure lets the rested mucosa recover over time.",
+   "vis": {
+    "kind": "table",
+    "title": "Atrophic rhinitis: medical and surgical care",
+    "cols": [
+     "Measure",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Alkaline nasal douche",
+      "Softens and clears crusts"
+     ],
+     [
+      "Glucose in glycerine drops",
+      "Inhibits proteolytic bacteria"
+     ],
+     [
+      "Antibiotics",
+      "Treat infective exacerbations"
+     ],
+     [
+      "Cavity narrowing surgery",
+      "Restores humidification and airflow sense"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examination candidates separate three look alike presentations cleanly. Allergy gives pale swollen turbinates with itch and positive tests, vasomotor disease gives trigger linked watery discharge with negative tests, and atrophic disease gives wide crust filled cavities with anosmia and fetor. **Endoscopy** confirms each pattern directly, while computed tomography is reserved for sinus involvement, unilateral disease or surgical planning rather than simple rhinitis of any type.",
+   "say": "Three look alike conditions separate cleanly at examination and endoscopy in most patients. Allergy shows pale turbinates with positive tests, while autonomic disease shows trigger linked discharge with negative tests. Crust filled wide cavities with smell loss confirm the atrophic pattern without further testing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue medical care",
+     "points": [
+      "Bilateral itch and watery discharge",
+      "No eye or bleeding signs",
+      "Responds to spray therapy"
+     ]
+    },
+    "right": {
+     "title": "Refer urgently",
+     "points": [
+      "Unilateral blockage or bleeding",
+      "Orbital pain or double vision",
+      "Fails maximal therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Red flags change the pathway at once: unilateral blockage or bleeding, orbital pain or swelling, double vision, severe headache or failure of maximal medical therapy all demand imaging and specialist referral. Bilateral itchy watery disease without red flags stays on stepwise medical care with technique checks at every visit. **Biopsy** is never taken from a suspected vascular mass before imaging, because bleeding can be severe and difficult to control.",
+   "say": "One sided blockage with bleeding or any eye sign moves a patient straight to imaging and specialist care. Straightforward bilateral allergy stays on stepwise medical treatment with spray technique checked regularly. Suspected vascular swellings need scans before any biopsy because uncontrolled bleeding can follow.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue medical care",
+     "points": [
+      "Bilateral itch, sneeze and watery discharge",
+      "No bleeding, eye or nerve signs",
+      "Responds to steroid spray"
+     ]
+    },
+    "right": {
+     "title": "Refer and image urgently",
+     "points": [
+      "Unilateral blockage or epistaxis",
+      "Orbital pain, swelling or diplopia",
+      "Fails maximal medical therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Allergic rhinitis first line treatment",
+   "b": "Daily intranasal corticosteroid spray plus allergen avoidance; add antihistamine for itch and sneeze."
+  },
+  {
+   "f": "Rhinitis medicamentosa cause and cure",
+   "b": "Rebound congestion from prolonged topical decongestant use; stop the decongestant and use intranasal steroid with saline."
+  },
+  {
+   "f": "Young operation",
+   "b": "Complete nostril closure for atrophic rhinitis so rested mucosa recovers; modified version leaves a small opening."
+  }
+ ],
+ "keys": [
+  "Intranasal steroid is first line for allergic rhinitis",
+  "Immunotherapy is the only disease modifying treatment",
+  "Atrophic rhinitis: wide crusty cavities, ozena, anosmia"
+ ]
+}
