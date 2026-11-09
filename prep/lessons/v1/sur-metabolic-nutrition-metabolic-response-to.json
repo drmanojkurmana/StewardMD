@@ -1,0 +1,276 @@
+{
+ "v": 1,
+ "module": "sur-metabolic-nutrition",
+ "subject": "surgery",
+ "title": "Metabolic Response to Surgical Trauma and Clinical Nutrition",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Major surgical trauma triggers a profound neuroendocrine reaction termed the **metabolic response to trauma**, classically described by Sir David Cuthbertson. Afferent nociceptive signals and inflammatory cytokines stimulate the hypothalamic-pituitary-adrenal axis and sympathetic nervous system. The immediate teleological objective is circulating volume preservation, maintenance of essential organ perfusion, and mobilisation of energetic substrates required for tissue repair and immune defense.",
+   "say": "Surgical injury stimulates a neuroendocrine cascade termed the metabolic response to trauma. Nociceptive impulses and cytokines trigger sympathetic and endocrine outputs to defend circulating volume and mobilize energy for repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "injury",
+      "label": "Tissue trauma and nociceptive signaling"
+     },
+     {
+      "id": "cytokines",
+      "label": "Release of IL-1, IL-6, and TNF-alpha"
+     },
+     {
+      "id": "endocrine",
+      "label": "Hypothalamic-pituitary and adrenal activation"
+     },
+     {
+      "id": "response",
+      "label": "Catabolic mobilization of glucose and amino acids"
+     }
+    ],
+    "edges": [
+     [
+      "injury",
+      "cytokines"
+     ],
+     [
+      "cytokines",
+      "endocrine"
+     ],
+     [
+      "endocrine",
+      "response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The initial post-injury reaction is the **ebb phase**, representing an adaptive hypometabolic state that typically lasts twenty-four to forty-eight hours. Driven by hypovolaemia and intense sympathoadrenal output, patients demonstrate decreased total oxygen consumption, low cardiac output, peripheral vasoconstriction, hypothermia, and impaired glucose tolerance. The evolutionary purpose of this brief period is physiological conservation until adequate haemodynamic resuscitation is achieved.",
+   "say": "The ebb phase represents an early hypometabolic shock state lasting twenty-four to forty-eight hours. Patients exhibit reduced oxygen consumption, depressed cardiac output, hypothermia, and catecholamine-driven hyperglycemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ebb Phase (0-48 Hours)",
+     "points": [
+      "Hypometabolic physiological state",
+      "Decreased overall oxygen consumption",
+      "Low cardiac output and hypothermia",
+      "Conservation of circulating fluid volume"
+     ]
+    },
+    "right": {
+     "title": "Flow Phase (Days to Weeks)",
+     "points": [
+      "Hypermetabolic hyperdynamic state",
+      "Elevated oxygen consumption and cardiac output",
+      "Fever and elevated basal metabolic rate",
+      "Profound catabolism and proteolysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following successful volume restoration, the patient transitions into the hypermetabolic **flow phase**, which may persist for weeks. High circulating levels of cortisol, glucagon, and catecholamines overcome insulin action, promoting hepatic gluconeogenesis and glycogenolysis. Concurrently, intense peripheral skeletal muscle proteolysis mobilises alanine and glutamine to supply fuel for healing wounds and hepatic acute-phase protein synthesis, generating a marked negative nitrogen balance.",
+   "say": "The flow phase is a hypermetabolic catabolic state driven by cortisol and catecholamines. Muscle protein breakdown mobilises amino acids for gluconeogenesis and wound repair, creating a pronounced negative nitrogen balance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hormone / Mediator",
+     "Post-Trauma Change",
+     "Primary Metabolic Effect",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Cortisol",
+      "Markedly increased",
+      "Skeletal muscle proteolysis and lipolysis",
+      "Muscle wasting and impaired immunity"
+     ],
+     [
+      "Glucagon",
+      "Increased",
+      "Hepatic gluconeogenesis and glycogenolysis",
+      "Stress-induced hyperglycemia"
+     ],
+     [
+      "Catecholamines",
+      "Markedly increased",
+      "Hyperdynamic circulation and glycolysis",
+      "Tachycardia and metabolic demand"
+     ],
+     [
+      "Insulin",
+      "Relative resistance",
+      "Impaired peripheral glucose uptake",
+      "Refractory high blood glucose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When tissue injury or sepsis provokes dysregulated systemic inflammation, patients develop the **systemic inflammatory response syndrome**. Established diagnostic criteria require the presence of at least two of four physiological deviations: abnormal body temperature above thirty-eight or below thirty-six degrees Celsius, heart rate exceeding ninety beats per minute, respiratory rate over twenty breaths per minute, or leukocyte counts exceeding twelve thousand or below four thousand.",
+   "say": "Systemic inflammatory response syndrome reflects widespread inflammatory activation. Diagnosis requires two or more abnormalities in temperature, heart rate, respiratory rate, or circulating white blood cell counts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Diagnostic Threshold",
+     "Physiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Core Temperature",
+      "Over 38 C or under 36 C",
+      "Hypothalamic reset by pyrogenic cytokines"
+     ],
+     [
+      "Heart Rate",
+      "Over 90 beats per minute",
+      "Sympathetic overdrive and hyperdynamic state"
+     ],
+     [
+      "Respiratory Rate",
+      "Over 20 breaths/min or PaCO2 under 32",
+      "Compensatory tachypnoea or lung inflammation"
+     ],
+     [
+      "White Blood Cells",
+      "Over 12,000, under 4,000, or over 10% bands",
+      "Bone marrow recruitment or leukocyte margination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In surgical nutritional support, **enteral feeding** remains the primary modality of choice whenever a functional gastrointestinal tract is accessible. Delivering nutrients directly into the gut lumen maintains mucosal epithelial thickness, stimulates secretory immunoglobulin A production, preserves tight junction integrity, and prevents bacterial translocation across the bowel wall, yielding fewer infectious complications compared with intravenous nutrition.",
+   "say": "Enteral nutrition delivers nutrients directly into the gut, maintaining epithelial architecture and mucosal immunity. It significantly reduces infectious complications compared with intravenous parenteral feeding.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-proc-ng-tube.webp",
+    "alt": "Enteral nutrition tube placement and gastric decompression.",
+    "caption": "Enteral tube feeding preserving gastrointestinal mucosal barrier integrity. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients with gastric outlet obstruction, gastroparesis, or proximal upper gastrointestinal anastomoses require post-pyloric feeding via a **feeding jejunostomy**. Placed surgically or laparoscopically, a small-bore catheter enters the jejunum distal to the ligament of Treitz. Jejunostomy feeding bypasses upper gastrointestinal leaks and significantly reduces pulmonary aspiration risks, allowing continuous enteral delivery of isotonic peptide-based nutritional formulas.",
+   "say": "A feeding jejunostomy delivers nutrients directly into the proximal jejunum past the ligament of Treitz. This route bypasses gastric pathology and reduces aspiration risks while maintaining luminal nutrition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nasojejunal Tube",
+     "points": [
+      "Non-surgical endoscopic or bedside placement",
+      "Suitable for short to medium term support",
+      "Risk of accidental displacement or clogging",
+      "Useful for severe acute pancreatitis"
+     ]
+    },
+    "right": {
+     "title": "Feeding Jejunostomy",
+     "points": [
+      "Surgically or laparoscopically created stoma",
+      "Secure long-term post-pyloric access",
+      "Allows early feeding after major esophagectomy",
+      "Requires careful management of bowel entry site"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When the gastrointestinal tract is entirely non-functional due to high-output fistulas or severe short bowel syndrome, **total parenteral nutrition** is indicated. Formulated admixtures of hypertonic dextrose, crystalline amino acids, lipid emulsions, electrolytes, and trace minerals are infused continuously via a central venous catheter. Rigorous metabolic monitoring is mandatory to prevent central line sepsis, cholestatic liver injury, and electrolyte disturbances.",
+   "say": "Total parenteral nutrition supplies complete intravenous nutrients via a central catheter when the gut is non-functional. It carries risks of catheter-related bloodstream infections, liver dysfunction, and metabolic imbalances.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-severe-malnutrition.webp",
+    "alt": "Comprehensive inpatient protocol for severe nutritional rehabilitation.",
+    "caption": "Structured nutritional protocol and timeline for malnourished patients. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid reintroduction of carbohydrates in chronically starved or malnourished patients precipitates the **refeeding syndrome**. Glucose infusion triggers an abrupt surge in endogenous insulin secretion, which stimulates rapid cellular uptake of phosphate, potassium, and magnesium. The resulting profound hypophosphataemia impairs adenosine triphosphate generation and causes erythrocyte dysfunction, lethal cardiac arrhythmias, respiratory muscle weakness, and sudden cardiovascular collapse.",
+   "say": "Refeeding syndrome occurs when carbohydrate feeding triggers an insulin surge in starved individuals. Rapid intracellular shifts cause severe hypophosphataemia, triggering arrhythmias and acute respiratory failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "starve",
+      "label": "Prolonged starvation with depleted body minerals"
+     },
+     {
+      "id": "carbs",
+      "label": "Rapid carbohydrate administration"
+     },
+     {
+      "id": "insulin",
+      "label": "Massive endogenous insulin secretion surge"
+     },
+     {
+      "id": "shift",
+      "label": "Intracellular shift of phosphate, potassium, and magnesium"
+     },
+     {
+      "id": "arrhyth",
+      "label": "Profound hypophosphataemia, arrhythmias, and cardiac arrest"
+     }
+    ],
+    "edges": [
+     [
+      "starve",
+      "carbs"
+     ],
+     [
+      "carbs",
+      "insulin"
+     ],
+     [
+      "insulin",
+      "shift"
+     ],
+     [
+      "shift",
+      "arrhyth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern perioperative pathways incorporate **enhanced recovery after surgery** protocols to attenuate metabolic stress and accelerate functional convalescence. Key interventions include avoiding prolonged preoperative fasting, administering carbohydrate drinks two hours preoperatively, maintaining euvolaemia with goal-directed fluid therapy, utilising multimodal opioid-sparing analgesia, and enforcing immediate postoperative mobilization alongside early resumption of normal oral feeding.",
+   "say": "Enhanced recovery after surgery protocols minimize the catabolic injury response through carbohydrate loading, opioid-sparing analgesia, and early mobilization. These measures decrease complications and shorten hospital stay.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Perioperative Phase",
+     "Conventional Practice",
+     "ERAS Evidence-Based Protocol"
+    ],
+    "rows": [
+     [
+      "Preoperative",
+      "Overnight fasting from midnight",
+      "Clear fluids and carbohydrates up to 2 hours"
+     ],
+     [
+      "Intraoperative",
+      "Liberal intravenous fluid loading",
+      "Goal-directed fluid restriction to maintain euvolaemia"
+     ],
+     [
+      "Analgesia",
+      "Heavy parenteral opioid regimens",
+      "Multimodal analgesia with regional nerve blocks"
+     ],
+     [
+      "Postoperative",
+      "NPO until flatus, prolonged bed rest",
+      "Early oral nutrition and mobilization on day zero"
+     ]
+    ]
+   }
+  }
+ ]
+}

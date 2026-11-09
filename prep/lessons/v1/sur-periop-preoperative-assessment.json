@@ -1,0 +1,280 @@
+{
+ "v": 1,
+ "module": "sur-periop",
+ "subject": "surgery",
+ "title": "Preoperative Assessment, Venous Thromboembolism Prophylaxis, and Postoperative Complications",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Systematic **preoperative assessment** evaluates patient physiological reserves and risk factors before elective or emergency operations. Clinicians stratify physical status using the American Society of Anesthesiologists classification, ranging from class one for a healthy individual to class five for a moribund patient not expected to survive without surgery. Cardiopulmonary exercise tolerance, measured in metabolic equivalents, reliably predicts postoperative cardiopulmonary complications.",
+   "say": "Preoperative assessment identifies modifiable risk factors and estimates physiological reserve before surgery. The American Society of Anesthesiologists classification stratifies operative risk from healthy patients to moribund individuals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ASA Class",
+     "Patient Physical Status",
+     "Examples",
+     "Estimated Perioperative Mortality"
+    ],
+    "rows": [
+     [
+      "ASA I",
+      "Normal healthy patient",
+      "Non-smoker, no chronic health conditions",
+      "Under 0.1%"
+     ],
+     [
+      "ASA II",
+      "Mild systemic disease without limitation",
+      "Controlled hypertension, mild asthma, smoker",
+      "0.2%"
+     ],
+     [
+      "ASA III",
+      "Severe systemic disease with limitation",
+      "Stable angina, COPD, poorly controlled diabetes",
+      "1.8%"
+     ],
+     [
+      "ASA IV",
+      "Severe disease that is a constant threat to life",
+      "Recent myocardial infarction, ESRD on dialysis",
+      "7.8%"
+     ],
+     [
+      "ASA V",
+      "Moribund patient not expected to survive 24 hours",
+      "Ruptured aortic aneurysm, massive trauma",
+      "9.4%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Minimising pulmonary aspiration of gastric contents requires adherence to **preoperative fasting guidelines**, summarized by the two-four-six-eight rule. Patients may consume clear fluids containing water, fruit juice without pulp, or black tea up to two hours before anaesthetic induction. Breast milk requires four hours, light non-fatty meals or formula require six hours, while meals containing fried foods or meat demand at least eight hours of fasting.",
+   "say": "Preoperative fasting guidelines prevent pulmonary aspiration under general anaesthesia. Clear fluids are permitted up to two hours before induction, light meals require six hours, and heavy meals require eight hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h2",
+      "label": "2 Hours Pre-Op: Clear fluids (water, pulp-free juice)"
+     },
+     {
+      "id": "h4",
+      "label": "4 Hours Pre-Op: Breast milk for infants"
+     },
+     {
+      "id": "h6",
+      "label": "6 Hours Pre-Op: Light meal, toast, or infant formula"
+     },
+     {
+      "id": "h8",
+      "label": "8 Hours Pre-Op: Heavy, fatty, or meat-containing meal"
+     }
+    ],
+    "edges": [
+     [
+      "h8",
+      "h6"
+     ],
+     [
+      "h6",
+      "h4"
+     ],
+     [
+      "h4",
+      "h2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To eliminate preventable surgical errors, operating teams conduct the **surgical safety checklist** developed by the World Health Organization. The checklist consists of three critical sequential phases: Sign In before induction of anaesthesia, Time Out immediately prior to skin incision, and Sign Out before transferring the patient from the operating theater, ensuring correct patient identity, verified operative site, and complete instrument counts.",
+   "say": "The World Health Organization surgical safety checklist structures team communication across three phases: Sign In before induction, Time Out before incision, and Sign Out before leaving the theater.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Checklist Phase",
+     "Timing",
+     "Critical Safety Checks Verified"
+    ],
+    "rows": [
+     [
+      "Sign In",
+      "Before induction of anaesthesia",
+      "Patient identity, consent, site marking, pulse oximeter, airway risk"
+     ],
+     [
+      "Time Out",
+      "Immediately before skin incision",
+      "Team introductions, correct procedure confirmation, antibiotic prophylaxis"
+     ],
+     [
+      "Sign Out",
+      "Before patient leaves theater",
+      "Instrument and needle counts, specimen labelling, recovery plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative immobility, endothelial injury, and hypercoagulability mandate aggressive **deep vein thrombosis** prophylaxis. Risk stratification according to the Caprini score guides the dual use of mechanical methods, such as graduated compression stockings and intermittent pneumatic calf compression, alongside pharmacological anticoagulation using low-molecular-weight heparin or unfractionated heparin initiated preoperatively or immediately postoperatively.",
+   "say": "Deep vein thrombosis prophylaxis combines mechanical compression with low-molecular-weight heparin based on Caprini risk scoring. Preventing venous stasis in surgical patients markedly reduces pulmonary embolism risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dvt-fig1.webp",
+    "alt": "Pathophysiology of lower extremity deep vein thrombosis and Virchow triad.",
+    "caption": "Virchow triad promoting venous valvular thrombus formation in surgical patients. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dislodgement of deep venous thrombi produces life-threatening **pulmonary embolism**, typically presenting with sudden-onset pleuritic chest pain, tachypnoea, dyspnoea, and hypoxaemia. Massive emboli occluding the pulmonary trunk cause acute right ventricular strain, hypotension, and circulatory collapse. Computed tomography pulmonary angiography provides definitive diagnosis, while immediate management entails therapeutic anticoagulation, hemodynamic support, or emergency catheter-directed thrombolysis.",
+   "say": "Pulmonary embolism develops when deep venous thrombi embolize into the pulmonary arterial circulation. Sudden dyspnoea, tachypnoea, and hypoxia are hallmark signs requiring urgent computed tomography angiography.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pe-fig1.webp",
+    "alt": "Pulmonary embolism obstructing pulmonary arterial branches.",
+    "caption": "Thromboembolus lodging in pulmonary artery causing acute right heart strain. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Evaluating an elevated temperature requires systematic chronological assessment of **postoperative fever** causes, remembered as the five Ws. Wind represents atelectasis on postoperative days one to two, Water denotes urinary tract infection around day three, Wound indicates surgical site infection on days five to seven, Walking represents venous thromboembolism after day seven, and Wonder drugs denotes medication reactions.",
+   "say": "Postoperative fever follows a predictable chronological pattern remembered as the five Ws: Wind for atelectasis, Water for urinary infections, Wound for surgical site sepsis, Walking for thrombosis, and Wonder drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Postoperative Timing",
+     "Etiological Category",
+     "Most Common Cause",
+     "Diagnostic Workup"
+    ],
+    "rows": [
+     [
+      "Days 1 to 2",
+      "Wind",
+      "Pulmonary atelectasis",
+      "Chest auscultation, pulse oximetry, chest radiograph"
+     ],
+     [
+      "Day 3",
+      "Water",
+      "Urinary tract catheter infection",
+      "Urinalysis, urine microscopy and culture"
+     ],
+     [
+      "Days 5 to 7",
+      "Wound",
+      "Surgical site infection",
+      "Wound inspection, suture removal, purulent swab"
+     ],
+     [
+      "Days 7 to 10",
+      "Walking",
+      "Deep vein thrombosis or PE",
+      "Duplex ultrasonography, CT pulmonary angiogram"
+     ],
+     [
+      "Anytime",
+      "Wonder Drugs",
+      "Drug fever or blood products",
+      "Review medication chart, drug cessation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent etiology of fever within forty-eight hours of surgery is **postoperative atelectasis**. General anaesthetic agents, muscle relaxants, and pain-induced shallow breathing cause loss of functional residual capacity and collapse of dependant alveoli. Treatment centres on chest physiotherapy, early ambulation, and deep inspiration exercises utilizing incentive spirometry, avoiding unnecessary empirical broad-spectrum antibiotic therapy.",
+   "say": "Postoperative atelectasis is the primary cause of early fever following abdominal or thoracic procedures. Diaphragmatic splinting causes alveolar collapse, which responds to incentive spirometry rather than antibiotics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Postoperative Atelectasis",
+     "points": [
+      "Onset within 24 to 48 hours of surgery",
+      "Shallow breathing and decreased breath sounds",
+      "Mild low-grade fever with bronchial secretions",
+      "Responds to incentive spirometry and coughing"
+     ]
+    },
+    "right": {
+     "title": "Postoperative Pneumonia",
+     "points": [
+      "Onset typically after 48 to 72 hours",
+      "High fever, productive cough, and tachypnoea",
+      "Consolidation on chest radiography",
+      "Requires targeted antimicrobial therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Separation of abdominal aponeurotic wound margins produces **wound dehiscence**, occurring classically between postoperative days five and eight. Technical errors like placing sutures too close to cut edges or under excessive tension represent the most frequent causative factor. The classic, pathognomonic harbinger is the sudden emergence of copious, clear, salmon-pink serosanguinous fluid soaking through the overlying dressing.",
+   "say": "Wound dehiscence represents acute failure of fascial closure, typically appearing between days five and eight. A sudden gush of salmon-pink serosanguinous fluid soaking the dressing is the classic warning sign.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "closure",
+      "label": "Technical failure of abdominal wall mass closure"
+     },
+     {
+      "id": "fluid",
+      "label": "Salmon-pink serosanguinous discharge soaks dressing"
+     },
+     {
+      "id": "gap",
+      "label": "Palpable separation of fascial sheath under intact skin"
+     },
+     {
+      "id": "burst",
+      "label": "Skin breaks down leading to evisceration of bowel"
+     }
+    ],
+    "edges": [
+     [
+      "closure",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "gap"
+     ],
+     [
+      "gap",
+      "burst"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete fascial and cutaneous breakdown accompanied by external bowel exposure constitutes a **burst abdomen**, representing a surgical emergency. Immediate management requires covering exposed viscera with sterile saline-soaked gauze, instituting nasogastric decompression, administering broad-spectrum intravenous antibiotics, and preparing the patient for urgent operative re-exploration and tension-free mass closure or temporary negative pressure abdominal dressing.",
+   "say": "Burst abdomen with evisceration of bowel is an acute surgical emergency. Exposed loops must be covered with sterile saline packs while the patient is resuscitated and transferred directly to theater.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate Bedside Actions",
+     "points": [
+      "Cover exposed viscera with warm sterile saline packs",
+      "Maintain patient in calm low-Fowler position",
+      "Avoid any manual attempt to reduce bowel",
+      "Administer analgesia and intravenous fluids"
+     ]
+    },
+    "right": {
+     "title": "Operative Repair Strategy",
+     "points": [
+      "Urgent return to operating theater",
+      "Thorough peritoneal lavage with warm saline",
+      "Interrupted non-absorbable mass closure sutures",
+      "Temporary mesh or negative pressure closure if tight"
+     ]
+    }
+   }
+  }
+ ]
+}
