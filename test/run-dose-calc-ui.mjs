@@ -57,7 +57,9 @@ try {
   ok(!/—/.test(await text('#doseCalc')), 'no em dash in the calculator');
   await shot('levothyroxine');
   // Editing the weight recalculates in place and keeps focus.
+  await ev(`window.__dcW=document.getElementById('dc_weight');1`);
   await typeIn('dc_weight', '60');
+  ok(await ev(`document.getElementById('dc_weight')===window.__dcW`), 'typing keeps the same input element (iOS keyboard stays open)');
   ok(await until(`/96 mcg per day/.test(document.querySelector('#doseCalc .dc-body').innerText)`, 3000), 'weight change recalculates (60 kg -> 96 mcg)');
   ok(await ev(`document.activeElement && document.activeElement.id`) === 'dc_weight', 'focus stays in the weight field');
   // Kidney: meropenem at CrCl 20

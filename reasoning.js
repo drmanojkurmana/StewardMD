@@ -811,6 +811,8 @@
       var d0 = differential(); var top = d0.inf[0] || d0.ni[0];
       S.timeline.push({ f: LABEL[k] || k, topName: top ? top.name : null, topScore: top ? top.score : null });
     } catch (e) {}
+    var si = root && root.querySelector("#dxSearch"); if (si) si.value = "";
+    filter = "";   // recompute() re-renders the picker, which closes the list
     recompute();
   }
   // Batch add (voice / MaiK Scribe): add several confirmed finding keys, then recompute ONCE.
@@ -1994,7 +1996,7 @@
         '<div class="dx-find-wrap">' +
           '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">' + rIco("mic") + ' Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
-            '<label class="dx-field-label" for="dxSearch">Find a symptom, sign or result</label><input id="dxSearch" class="dx-search" type="text" placeholder="Search findings, e.g. fever or dysuria" autocomplete="off" role="combobox" aria-controls="dxSearchDrop" aria-expanded="false" aria-autocomplete="list">' +
+            '<label class="dx-field-label" for="dxSearch">Find a symptom, sign or result</label><div class="dx-search-field"><input id="dxSearch" class="dx-search" type="text" placeholder="Search findings, e.g. fever or dysuria" autocomplete="off" role="combobox" aria-controls="dxSearchDrop" aria-expanded="false" aria-autocomplete="list"><button id="dxSearchClear" class="dx-search-clear" type="button" aria-label="Clear search"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M6.8 6.8l6.4 6.4M13.2 6.8l-6.4 6.4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
           '</div>' +
           '<div id="dxSuggest" class="dx-suggest"></div>' +
@@ -2023,6 +2025,16 @@
     });
     var si = root.querySelector("#dxSearch");
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
+    // Leaving the box closes the list so "Added to this case" is visible; the typed text stays and reopens it on return.
+    function leaveSearch() { if (filter) { filter = ""; renderPicker(); } }
+    si.addEventListener("blur", leaveSearch);
+    si.addEventListener("focus", function () { var q = si.value.trim().toLowerCase(); if (q !== filter) { filter = q; renderPicker(); } });
+    // iOS can keep the input focused when the user taps elsewhere, so a tap outside closes the list too.
+    root.addEventListener("pointerdown", function (e) { if (filter && !e.target.closest(".dx-search-box")) { si.blur(); leaveSearch(); } });
+    root.querySelector("#dxSearchDrop").addEventListener("mousedown", function (e) { e.preventDefault(); });   // scrolling the list is not leaving
+    var sc = root.querySelector("#dxSearchClear");
+    sc.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    sc.addEventListener("click", function () { si.value = ""; filter = ""; renderPicker(); si.focus(); });
     // Desktop-Chrome fix: stop any document/global key handler from swallowing
     // the keystrokes typed into the findings search box.
     si.addEventListener("keydown", function (e) {
