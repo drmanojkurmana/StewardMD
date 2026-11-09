@@ -2851,7 +2851,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
         '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + svg("hrfHome", "hrf-tab-ic") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + svg("hrfFolder", "hrf-tab-ic") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("tile", { size: 43 }) : svg("hrfSparkle", "hrf-sparkle")) + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + '<img class="hrf-maik-mark" src="/assets/maik-mark-white.webp" width="46" height="46" alt="" draggable="false">' + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
       '</nav>' +
