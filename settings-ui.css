@@ -478,7 +478,42 @@ body.dark #sbrSettings[data-settings-ui] .settings-card .sbr-chev,body.v3-dark #
 @media (prefers-reduced-motion:reduce){#sbrSettings[data-settings-ui] *{scroll-behavior:auto}}
 /* iPad: one centred grouped column with the floating search, replacing the old category-rail grid in ipad-account.css. */
 html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body{display:block;max-width:760px;margin:0 auto}
-html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body>.settings-tools{position:fixed;top:auto;left:50%;right:auto;transform:translateX(-50%);bottom:max(14px,calc(env(safe-area-inset-bottom,0px) - 6px));width:min(calc(100% - 32px),520px);margin:0}
 html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head{padding-inline:max(16px,calc((100% - 760px)/2 + 16px))}
 /* Opening the page focuses Back for keyboards and screen readers; on touch that must not draw a box. */
 @media (hover:none){#sbrSettings[data-settings-ui] .sbr-set-back:focus{outline:none}}
+/* iPad two-pane Settings, like iPadOS: section sidebar beside one detail pane. */
+#sbrSettings .settings-sidebar{display:contents}
+#sbrSettings .settings-sidenav,#sbrSettings .settings-detail-head{display:none}
+@media (min-width:768px){
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui]{--side:clamp(290px,30vw,350px);--st-side:#e6e9f1;background:linear-gradient(90deg,var(--st-side) var(--side),var(--st-bg) var(--side))}
+  body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui]{--st-side:#1c1c1e}
+  html.smd-tablet body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui]{--st-side:#1c1c1e}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head,html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled{position:fixed;top:0;left:0;width:var(--side);box-sizing:border-box;padding:max(8px,env(safe-area-inset-top,0px)) 18px 0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head h2{display:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body{display:grid;grid-template-columns:var(--side) minmax(0,1fr);align-items:start;max-width:none;margin:0;padding:0}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body>.settings-sidebar{display:block;grid-column:1;grid-row:1/span 40;position:sticky;top:0;box-sizing:border-box;padding:calc(max(8px,env(safe-area-inset-top,0px)) + 50px) 18px 24px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-largetitle{margin:0 4px 12px;font-size:30px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-tools{position:static;transform:none;width:auto;margin:0 0 14px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-search input{height:44px;padding-left:42px;background-color:var(--st-card);background-position:12px center;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .settings-group{margin:0 0 12px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .sbr-sec{display:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .settings-card{background:transparent;overflow:visible}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .sbr-row{padding:8px 4px;border-radius:14px;background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .settings-profile{min-height:72px!important}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .settings-avatar{flex-basis:54px;width:54px;height:54px;font-size:23px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidebar .settings-profile .sbr-lbl{font-size:19px;line-height:1.2}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidenav{display:flex;flex-direction:column;gap:2px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidenav button{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 10px;border:0;border-radius:15px;background:transparent;color:var(--st-ink);font-size:17px;text-align:left}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidenav button:active{background:var(--st-press)}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-sidenav button[aria-current=page]{background:rgba(120,120,128,.22);font-weight:500}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-tile{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-tile svg{width:19px;height:19px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head,html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body>.settings-group{grid-column:2;justify-self:center;box-sizing:border-box;width:calc(100% - 64px);max-width:820px;min-width:0}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head:not([hidden]){display:block;margin:calc(max(8px,env(safe-area-inset-top,0px)) + 28px) 0 24px;padding:22px 24px;border-radius:26px;background:var(--st-card)}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head .settings-tile{width:52px;height:52px;border-radius:13px;margin-bottom:12px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head .settings-tile svg{width:32px;height:32px}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head h3{margin:0;font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-.01em;color:var(--st-ink)}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .settings-detail-head p{margin:6px 0 0;font-size:16px;line-height:1.35;color:var(--st-sub)}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui]:not([data-searching]) .sbr-set-body>.settings-group>.sbr-sec{display:none}
+  html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui][data-searching] .sbr-set-body>.settings-group:first-of-type{margin-top:calc(max(8px,env(safe-area-inset-top,0px)) + 28px)}
+}
