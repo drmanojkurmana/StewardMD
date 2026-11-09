@@ -1,0 +1,241 @@
+{
+ "v": 1,
+ "module": "med-clinical-cardiology",
+ "subject": "medicine",
+ "title": "Heart sounds, gallop rhythms and opening snaps",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Systematic cardiac auscultation identifies normal valve closures, abnormal gallop rhythms, and diastolic opening sounds. The physiological **first heart sound** marks the onset of ventricular systole and is produced by closure of the mitral and tricuspid valves. Mitral closure precedes tricuspid closure by 20 to 30 milliseconds. Loudness depends on valve leaflet mobility and the velocity of ventricular pressure rise at the moment of closure.",
+   "say": "Auscultation requires careful identification of valve closure sounds and diastolic gallops. The first heart sound signals the start of ventricular systole, caused by mitral and tricuspid closure. Mitral closure occurs slightly earlier than tricuspid closure. Leaflet mobility and rate of ventricular pressure generation determine its intensity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Heart sound",
+     "Timing in cycle",
+     "Mechanism of production"
+    ],
+    "rows": [
+     [
+      "First heart sound (S1)",
+      "Beginning of systole",
+      "Mitral and tricuspid valve closure"
+     ],
+     [
+      "Second heart sound (S2)",
+      "End of systole",
+      "Aortic and pulmonary valve closure"
+     ],
+     [
+      "Third heart sound (S3)",
+      "Early diastole",
+      "Rapid ventricular passive inflow deceleration"
+     ],
+     [
+      "Fourth heart sound (S4)",
+      "Late diastole",
+      "Atrial contraction against stiff ventricle"
+     ],
+     [
+      "Opening snap",
+      "Early diastole",
+      "Abrupt arrest of stenotic mitral opening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Auscultation of the **second heart sound** provides valuable diagnostic clues at the upper sternal border. It comprises an aortic component and a pulmonary component. During inspiration, increased venous return delays pulmonary valve closure while reduced pulmonary venous return hastens aortic closure, widening the physiological split. During expiration, the two components fuse into a single audible sound.",
+   "say": "The second heart sound provides essential information at the base of the heart. It consists of aortic and pulmonary components. During inspiration, increased right ventricular filling delays pulmonary closure, causing physiological splitting. On expiration, the two components merge into a single sound.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inspiratory splitting",
+     "points": [
+      "Increased right ventricular venous return",
+      "Delayed pulmonary valve closure",
+      "Normal physiological phenomenon"
+     ]
+    },
+    "right": {
+     "title": "Expiratory fusion",
+     "points": [
+      "Decreased pulmonary capacitance",
+      "Aortic and pulmonary sounds merge",
+      "Single sound on quiet expiration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pathological splitting patterns indicate distinct cardiopulmonary abnormalities. Persistent splitting that shows no respiratory variation characterizes **fixed splitting**, the classic auscultatory sign of an atrial septal defect. Here, reciprocal volume shifts between right and left atria balance pulmonary blood volume across respiration. In contrast, right bundle branch block produces wide physiological splitting that still widens on inspiration.",
+   "say": "Abnormal splitting patterns point to specific structural heart diseases. Fixed splitting without respiratory variation is diagnostic of atrial septal defect. Equalisation of chamber volumes throughout respiration maintains the wide interval. Right bundle branch block causes wide splitting that still responds to inspiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Splitting pattern",
+     "Inspiratory effect",
+     "Classic clinical etiology"
+    ],
+    "rows": [
+     [
+      "Physiological split",
+      "Splits on inspiration, single in expiration",
+      "Normal finding in youth"
+     ],
+     [
+      "Fixed split",
+      "Wide interval unchanged by respiration",
+      "Secundum atrial septal defect"
+     ],
+     [
+      "Wide split",
+      "Wide in expiration, wider in inspiration",
+      "Right bundle branch block, PS"
+     ],
+     [
+      "Reversed (paradoxical)",
+      "Splits in expiration, single in inspiration",
+      "Left bundle branch block, severe AS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delayed aortic valve closure shifts the aortic component behind the pulmonary component, causing **reversed splitting**. In this situation, the split is audible during expiration and paradoxically closes into a single sound during inspiration. Severe left bundle branch block, severe aortic stenosis, and hypertrophic obstructive cardiomyopathy cause this pattern by prolonging left ventricular mechanical systole.",
+   "say": "Delayed aortic closure moves the aortic component behind the pulmonary sound, producing reversed splitting. The interval widens during expiration and closes on inspiration. Left bundle branch block and severe aortic stenosis produce this pattern by prolonging left ventricular ejection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lbbb",
+      "label": "Left bundle branch block or severe AS"
+     },
+     {
+      "id": "delay",
+      "label": "Delayed LV ejection"
+     },
+     {
+      "id": "a2",
+      "label": "A2 follows P2 in expiration"
+     },
+     {
+      "id": "insp",
+      "label": "P2 delays on inspiration to meet A2"
+     },
+     {
+      "id": "single",
+      "label": "Paradoxical single sound in inspiration"
+     }
+    ],
+    "edges": [
+     [
+      "lbbb",
+      "delay"
+     ],
+     [
+      "delay",
+      "a2"
+     ],
+     [
+      "a2",
+      "insp"
+     ],
+     [
+      "insp",
+      "single"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Occurring in early diastole during the phase of rapid passive ventricular filling, the **third heart sound** sounds like a low-frequency dull thud. It results from sudden deceleration of inflow hitting a volume-overloaded, compliant ventricular chamber. While benign in children, young adults, and pregnancy, an S3 in an older adult is a dependable sign of decompensated heart failure with elevated filling pressures.",
+   "say": "The third heart sound occurs during rapid early diastolic ventricular filling. Deceleration of inflow into a dilated compliant chamber generates this dull thud. Although physiological in children and pregnant women, an S3 in older adults reliably indicates decompensated congestive heart failure.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Graphic showing cardiac sound timing across the cardiac cycle with acoustic waveform representations.",
+    "caption": "Phonocardiographic representation of heart sounds and diastolic murmurs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In late diastole, vigorous atrial contraction into a stiff, non-compliant ventricle generates a **fourth heart sound**. This presystolic gallop reflects decreased ventricular compliance and is heard in concentric left ventricular hypertrophy, long-standing systemic hypertension, hypertrophic cardiomyopathy, and acute myocardial ischaemia. Because it requires active atrial systole, an S4 can never occur in the presence of atrial fibrillation.",
+   "say": "Forceful atrial contraction into an abnormally stiff ventricle generates the fourth heart sound. This late diastolic gallop reflects decreased ventricular compliance, seen in systemic hypertension and ischaemic heart disease. Because it depends on active atrial contraction, an S4 cannot exist in atrial fibrillation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Third heart sound (S3)",
+     "points": [
+      "Early diastole during rapid filling",
+      "Volume overload state",
+      "Can be physiological in young",
+      "Persists in atrial fibrillation"
+     ]
+    },
+    "right": {
+     "title": "Fourth heart sound (S4)",
+     "points": [
+      "Late diastole presystolic gallop",
+      "Pressure overload and stiffness",
+      "Always pathological in adults",
+      "Absent in atrial fibrillation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In rheumatic mitral stenosis, opening of pliable leaflets into the left ventricle creates a high-pitched **opening snap**. Occurring shortly after the aortic second sound, its timing provides a clinical estimate of stenosis severity. Higher left atrial pressure forces the mitral valve open earlier in diastole, shortening the interval between the second sound and the opening snap. A short A2-OS interval indicates severe mitral stenosis.",
+   "say": "Sudden opening of pliable mitral leaflets in rheumatic stenosis produces a sharp opening snap. It occurs in early diastole following the aortic sound. Higher left atrial pressure forces earlier opening, shortening the interval. A narrow interval between sound and snap signifies severe mitral stenosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ms",
+      "label": "Severe mitral stenosis"
+     },
+     {
+      "id": "lap",
+      "label": "Marked left atrial hypertension"
+     },
+     {
+      "id": "early",
+      "label": "Forced early mitral leaflet opening"
+     },
+     {
+      "id": "interval",
+      "label": "Shortened A2 to OS interval"
+     }
+    ],
+    "edges": [
+     [
+      "ms",
+      "lap"
+     ],
+     [
+      "lap",
+      "early"
+     ],
+     [
+      "early",
+      "interval"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gallop sounds and diastolic clicks demand formal structural evaluation. When bedside auscultation demonstrates a gallop rhythm or opening snap, proceed with a 12-lead ECG and comprehensive **transthoracic echocardiogram**. Echocardiography precisely measures valve orifice area, assesses subvalvular thickening, and calculates transvalvular gradients to guide medical titration or catheter-based balloon mitral valvotomy.",
+   "say": "Auscultatory gallops and valve opening snaps require formal cardiac investigation. When you detect a gallop or opening snap, obtain an ECG and echocardiogram promptly. Echocardiography determines mitral valve area and transvalvular gradients, guiding medical management or referral for balloon mitral valvotomy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cvs-palpation.webp",
+    "alt": "Clinical examination photograph showing proper positioning and palpation of the precordium.",
+    "caption": "Bedside precordial examination and localization of heart sounds. [Credit: StewardMD]",
+    "ar": 1.33
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "module": "med-clinical-cardiology",
+ "subject": "medicine",
+ "title": "Ejection clicks, murmur grading and dynamic auscultation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "High-pitched systolic ejection sounds occurring immediately after the first heart sound represent an **ejection click**. They arise from the sudden doming and opening deceleration of mobile stenotic semilunar valves, or from abrupt aortic root expansion. Aortic ejection clicks are best heard at the apex and right base, showing no respiratory variation. In contrast, pulmonary ejection clicks soften during inspiration due to increased venous return.",
+   "say": "High-pitched systolic sounds occurring after the first sound represent ejection clicks. They originate from sudden opening of stenotic aortic or pulmonary valves. Aortic clicks are audible at the apex without respiratory change. Pulmonary clicks decrease in intensity during inspiration because of increased right heart volume.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aortic ejection click",
+     "points": [
+      "Heard at apex and right base",
+      "Constant intensity with respiration",
+      "Bicuspid aortic valve, root dilation"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary ejection click",
+     "points": [
+      "Heard at left upper sternal border",
+      "Decreases in inspiration",
+      "Congenital pulmonary valve stenosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In midsystole, sudden tensing of redundant chordae tendineae and billowing leaflets produces a crisp **midsystolic click**. This is the physical signature of mitral valve prolapse, often followed by a late systolic regurgitant murmur. Any bedside manoeuvre that reduces left ventricular volume, such as standing or the Valsalva strain phase, causes earlier prolapse, moving the click closer to the first heart sound.",
+   "say": "Sudden tension on prolapsing leaflets creates a crisp midsystolic click. This finding characterizes mitral valve prolapse and often precedes a late systolic murmur. Maneuvers that decrease left ventricular volume, including standing or Valsalva, trigger earlier prolapse and shift the click closer to the first sound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mvp",
+      "label": "Mitral valve prolapse"
+     },
+     {
+      "id": "stand",
+      "label": "Standing or Valsalva strain"
+     },
+     {
+      "id": "vol",
+      "label": "Decreased LV chamber volume"
+     },
+     {
+      "id": "earlier",
+      "label": "Leaflet billows earlier in systole"
+     },
+     {
+      "id": "move",
+      "label": "Click moves earlier toward S1"
+     }
+    ],
+    "edges": [
+     [
+      "mvp",
+      "stand"
+     ],
+     [
+      "stand",
+      "vol"
+     ],
+     [
+      "vol",
+      "earlier"
+     ],
+     [
+      "earlier",
+      "move"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standardized intensity assessment uses the 6-grade Levine **murmur grading** scale. Grade 1 is very faint and audible only after focused listening. Grade 2 is quiet but readily heard. Grade 3 is moderately loud without a palpable thrill. Grade 4 is loud with a palpable thrill. Grade 5 is very loud with a thrill, audible with the stethoscope rim tilted. Grade 6 is audible with the stethoscope lifted entirely off the chest.",
+   "say": "Standard clinical documentation uses the six grade Levine murmur scale. Grade one is faint and difficult to hear. Grade two is soft but readily detected. Grade three is moderately loud without a thrill. Grade four introduces a palpable thrill. Grade five and six represent very loud murmurs with thrills.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Audibility characteristic",
+     "Palpable thrill presence"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Faint, heard only with effort",
+      "Absent"
+     ],
+     [
+      "Grade 2",
+      "Quiet, heard immediately on auscultation",
+      "Absent"
+     ],
+     [
+      "Grade 3",
+      "Moderately loud",
+      "Absent"
+     ],
+     [
+      "Grade 4",
+      "Loud murmur",
+      "Present (threshold for thrill)"
+     ],
+     [
+      "Grade 5",
+      "Very loud, heard with stethoscope tilted",
+      "Present"
+     ],
+     [
+      "Grade 6",
+      "Extremely loud, heard off chest wall",
+      "Present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Respiratory variation during auscultation reliably distinguishes right-sided from left-sided cardiac murmurs. The physiological phenomenon where right-sided murmurs increase in intensity during inspiration is termed **Carvallo sign**. Deep inspiration lowers intrathoracic pressure, augmenting systemic venous return into the right ventricle and accelerating transvalvular flow. This accentuates tricuspid regurgitation and pulmonary stenosis murmurs while left-sided murmurs remain unchanged or diminish.",
+   "say": "Respiratory change during auscultation separates right from left heart murmurs. Augmentation of right-sided murmurs during inspiration is called Carvallo sign. Inspiration draws more venous blood into the right ventricle, increasing flow across the valves. Tricuspid and pulmonary murmurs become louder while left-sided murmurs soften or stay unchanged.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right-sided murmurs",
+     "points": [
+      "Increase with inspiration (Carvallo)",
+      "Tricuspid regurgitation",
+      "Pulmonary stenosis and regurgitation"
+     ]
+    },
+    "right": {
+     "title": "Left-sided murmurs",
+     "points": [
+      "No inspiratory increase",
+      "Mitral regurgitation and stenosis",
+      "Aortic stenosis and regurgitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Forced expiration against a closed glottis represents the strain phase of the **Valsalva manoeuvre**. This raises intrathoracic pressure, obstructs venous return, and reduces left ventricular end-diastolic volume. Most systolic murmurs, including aortic stenosis and mitral regurgitation, soften during strain. In striking contrast, the systolic ejection murmur of hypertrophic obstructive cardiomyopathy becomes distinctly louder as the smaller ventricular chamber worsens dynamic outflow tract obstruction.",
+   "say": "Forced expiration against a closed airway constitutes the Valsalva strain phase. Raised thoracic pressure impairs venous return, shrinking ventricular cavity size. Most cardiac murmurs diminish in intensity during strain. In contrast, the murmur of hypertrophic cardiomyopathy becomes louder as reduced chamber volume accentuates outflow obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical manoeuvre",
+     "Haemodynamic effect",
+     "HOCM murmur response"
+    ],
+    "rows": [
+     [
+      "Valsalva strain phase",
+      "Decreases venous return and LV volume",
+      "Increases intensity"
+     ],
+     [
+      "Standing from supine",
+      "Venous pooling, decreases preload",
+      "Increases intensity"
+     ],
+     [
+      "Squatting",
+      "Increases preload and afterload",
+      "Decreases intensity"
+     ],
+     [
+      "Passive leg elevation",
+      "Increases venous return to heart",
+      "Decreases intensity"
+     ],
+     [
+      "Isometric handgrip",
+      "Increases systemic vascular resistance",
+      "Decreases intensity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postural change provides another simple method of dynamic bedside testing. Moving from standing to **squatting** suddenly compresses femoral veins and increases systemic vascular resistance, increasing both cardiac preload and afterload. The expanded left ventricular cavity widens the outflow tract, softening the murmur of hypertrophic obstructive cardiomyopathy. Conversely, the murmurs of aortic regurgitation, mitral regurgitation, and ventricular septal defect become louder due to increased afterload.",
+   "say": "Moving from standing to squatting provides clear diagnostic discrimination. Squatting compresses veins and raises systemic resistance, boosting preload and afterload. The enlarged left ventricle widens the outflow tract, softening the murmur of hypertrophic cardiomyopathy. Murmurs of aortic and mitral regurgitation become louder due to increased afterload.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Anatomical diagram comparing outflow tract geometry and ventricular wall thickness.",
+    "caption": "Dynamic left ventricular outflow tract changes with altered preload. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Sustained isometric muscle contraction during handgrip exercises significantly elevates arterial pressure. This elevation in systemic afterload impedes forward left ventricular ejection, accentuating regurgitant jets. Systolic murmurs of mitral regurgitation and ventricular septal defect, as well as the diastolic murmur of **aortic regurgitation**, intensify with handgrip. Conversely, fixed aortic stenosis shows variable responses, while dynamic obstruction in hypertrophic cardiomyopathy softens.",
+   "say": "Sustained handgrip exercise elevates systemic arterial pressure. This rise in afterload impedes forward left ventricular ejection and increases regurgitant volume. Murmurs of mitral regurgitation and aortic regurgitation intensify with handgrip. In contrast, the dynamic murmur of hypertrophic cardiomyopathy diminishes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "grip",
+      "label": "Isometric handgrip"
+     },
+     {
+      "id": "after",
+      "label": "Increased systemic vascular resistance"
+     },
+     {
+      "id": "back",
+      "label": "Increased regurgitant pressure gradient"
+     },
+     {
+      "id": "loud",
+      "label": "MR, AR and VSD murmurs intensify"
+     }
+    ],
+    "edges": [
+     [
+      "grip",
+      "after"
+     ],
+     [
+      "after",
+      "back"
+     ],
+     [
+      "back",
+      "loud"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Always synthesize dynamic auscultation findings to establish an accurate provisional diagnosis. When bedside dynamic testing suggests hypertrophic obstructive cardiomyopathy, critical aortic stenosis, or severe regurgitation, order an urgent **echocardiography** study. Precise measurement of peak Doppler gradients, leaflet morphology, and chamber geometry guides definitive medical therapy, surgical valve replacement, or catheter interventions.",
+   "say": "Synthesise your dynamic auscultatory findings to build an accurate clinical diagnosis. When physical exam indicates hypertrophic cardiomyopathy or severe valvular disease, arrange echocardiography promptly. Accurate Doppler measurements of gradients and valve anatomy guide pharmacological management and surgical or transcatheter intervention.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Phonocardiogram illustrating systolic and diastolic murmurs under varying hemodynamic conditions.",
+    "caption": "Systolic and diastolic murmur waveforms in valvular disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
