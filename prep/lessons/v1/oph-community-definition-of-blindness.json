@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-community-definition-of-blindness",
+ "subject": "ophthalmology",
+ "module": "oph-community",
+ "title": "Blindness Definition, Eye Banking and Vitamin A",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Blindness** in community ophthalmology is defined by presenting vision in the better eye worse than three over sixty, with low vision covering the range below six over eighteen down to that blindness threshold. Better eye and presenting correction matter because definitions count real world function, not best possible refraction. Standard definitions therefore allow surveys and programmes to compare burden fairly.",
+   "say": "Standard definition together gives programme comparison in community eye surveys for populations screened across districts nationally. Better eye gives function basis additionally. Presenting gives real world correction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+    "alt": "Retinol deficiency ocular signs diagram showing xerophthalmia stages.",
+    "caption": "Community eye deficiency signs. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "National blindness control programmes organise cataract surgery, refraction services, school screening and eye banking under one mission aligned with the global right to sight initiative. Cataract remains the leading treatable cause targeted by surgical backlog campaigns in most districts. **Programme thinking** therefore counts operable cataract as a system queue, not individual misfortune.",
+   "say": "Programme thinking together gives blindness control in district planning for populations with untreated cataract backlog. Surgery gives leading target additionally. Queue gives system framing.",
+   "vis": {
+    "kind": "table",
+    "title": "Blindness definitions",
+    "cols": [
+     "Category",
+     "Presenting better eye"
+    ],
+    "rows": [
+     [
+      "Low vision",
+      "Below six over eighteen"
+     ],
+     [
+      "Blindness",
+      "Worse than three over sixty"
+     ],
+     [
+      "Economic blindness",
+      "Work vision lost locally defined"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eye banking** retrieves, evaluates and stores donated corneas for transplant, with a classic storage medium keeping tissue viable for a few days under refrigeration. Donation consent conversations happen with grieving families through trained requesters and eye bank coordination networks. Timely retrieval therefore converts bereavement into sight restoration for recipients.",
+   "say": "Donation coordination together gives eye banking in hospital programmes for families approached after death by trained requesters. Storage gives few days viability additionally. Retrieval gives timely conversion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Eye banking flow",
+    "nodes": [
+     {
+      "id": "consent",
+      "label": "Family consent requested"
+     },
+     {
+      "id": "retrieve",
+      "label": "Cornea retrieved promptly"
+     },
+     {
+      "id": "store",
+      "label": "Medium storage evaluation"
+     },
+     {
+      "id": "transplant",
+      "label": "Recipient graft surgery"
+     }
+    ],
+    "edges": [
+     [
+      "consent",
+      "retrieve"
+     ],
+     [
+      "retrieve",
+      "store"
+     ],
+     [
+      "store",
+      "transplant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Xerophthalmia** names the eye stages of retinol deficiency, progressing from night blindness and conjunctival dryness through Bitot spots to corneal melting and perforation in severe childhood deficiency. Corneal stages are emergencies because scarring blinds permanently within days. Night blindness history therefore triggers deficiency assessment in malnourished children urgently.",
+   "say": "Stage urgency together gives xerophthalmia action in paediatric clinics for malnourished children reporting night blindness symptoms. Bitot gives conjunctival sign additionally. Melting gives corneal emergency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+    "alt": "Retinol deficiency ocular signs diagram showing xerophthalmia stages.",
+    "caption": "Xerophthalmia stage signs. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Retinol supplementation programmes pair with measles and nutrition services because deficiency and infection worsen each other in young children cyclically. Eye signs therefore function as nutrition programme sentinels at community level. **Eye as sentinel** therefore links ophthalmic findings to child survival programmes in district reports.",
+   "say": "Sentinel linking together gives nutrition connection in community programmes for young children with deficiency eye signs. Measles gives infection pairing additionally. Supplementation gives programme route.",
+   "vis": {
+    "kind": "table",
+    "title": "Xerophthalmia stages",
+    "cols": [
+     "Stage group",
+     "Signs"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Night blindness, conjunctival dryness"
+     ],
+     [
+      "Surface",
+      "Bitot spots, corneal dryness"
+     ],
+     [
+      "Severe",
+      "Corneal melting and perforation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**School eye screening** detects refractive error and squint early through teacher led vision testing with referral pathways for glasses and treatment. Uncorrected refractive error is the commonest reversible classroom vision problem worldwide in programme data. Teacher training therefore multiplies screening capacity beyond visiting eye teams.",
+   "say": "Teacher capacity together gives school screening in community programmes for children tested in classrooms by trained teachers. Refraction gives commonest finding additionally. Referral gives glasses pathway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Camp only model",
+     "points": [
+      "Occasional visiting team",
+      "Missed children between camps"
+     ]
+    },
+    "right": {
+     "title": "Teacher led model",
+     "points": [
+      "Continuous classroom testing",
+      "Referral pathway for glasses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Low vision aids magnify, illuminate and enlarge print for people whose vision cannot improve medically, preserving reading, mobility and livelihood after treatment limits are reached. Rehabilitation referral therefore belongs in incurable disease counselling from the first visit. **Aid early** therefore replaces discharge without support in low vision care.",
+   "say": "Rehabilitation earliness together gives low vision support in eye clinics for adults with irreversible vision loss conditions. Magnification gives reading aid additionally. Livelihood gives outcome centre.",
+   "vis": {
+    "kind": "table",
+    "title": "Community programme set",
+    "cols": [
+     "Service",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Cataract campaigns",
+      "Operable blindness backlog"
+     ],
+     [
+      "School screening",
+      "Refractive error and squint"
+     ],
+     [
+      "Low vision aids",
+      "Function after treatment limits"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here: blindness counts presenting better eye vision, eye banking converts timely donation into grafts, and retinol eye stages sentinel childhood nutrition emergencies. **Count, bank, supplement** therefore closes community ophthalmology teaching in three programme verbs. District examinations therefore test definition, donation and deficiency together in one community scenario.",
+   "say": "Programme verbs together gives community anchors in examinations for students reliably in public health cases everywhere. Definition gives counting basis additionally. Sentinel gives nutrition completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Community anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Blindness",
+      "Better eye worse than three over sixty"
+     ],
+     [
+      "Eye banking",
+      "Prompt retrieval, days of storage"
+     ],
+     [
+      "Xerophthalmia",
+      "Night blindness to corneal melting"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Blindness definition",
+   "b": "Presenting better eye vision worse than three over sixty; low vision below six over eighteen."
+  },
+  {
+   "f": "Eye banking",
+   "b": "Consent, prompt retrieval, refrigerated medium storage for days, then graft."
+  },
+  {
+   "f": "Xerophthalmia",
+   "b": "Vitamin A deficiency: night blindness and Bitot spots to corneal melting emergency."
+  }
+ ],
+ "keys": [
+  "Count presenting better eye vision",
+  "Eye signs sentinel nutrition programmes",
+  "Rehabilitation starts early, not at discharge"
+ ]
+}

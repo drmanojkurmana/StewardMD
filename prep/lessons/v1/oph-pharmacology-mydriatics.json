@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-pharmacology-mydriatics",
+ "subject": "ophthalmology",
+ "module": "oph-pharmacology",
+ "title": "Mydriatics and Cycloplegics",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Mydriatics** dilate the pupil either by stimulating the iris dilator muscle or by blocking the sphincter, and sphincter blockade also paralyses accommodation as cycloplegia. Dilator only agents therefore widen the view while reading vision stays largely usable. The distinction therefore selects agents for routine fundus viewing versus refraction.",
+   "say": "Mechanism distinction together gives mydriatic selection in eye clinics for adults needing fundus viewing or refraction. Dilator gives view widening additionally. Blockade gives accommodation paralysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cataract-fig1.webp",
+    "alt": "Lens and accommodation diagram context for cycloplegia.",
+    "caption": "Accommodation and lens context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Cycloplegic refraction** uses sphincter blocking drops to reveal full hypermetropia in children, whose strong accommodation otherwise hides plus power during ordinary testing. Strabismus assessments therefore rely on cycloplegic results before prescribing glasses for young children. Drops therefore function as diagnostic instruments, not just examination aids.",
+   "say": "Diagnostic drops together gives paediatric refraction in eye clinics for children with squint needing accurate glasses. Accommodation gives hiding mechanism additionally. Hypermetropia gives revealed power.",
+   "vis": {
+    "kind": "table",
+    "title": "Mydriatic classes",
+    "cols": [
+     "Class action",
+     "Accommodation"
+    ],
+    "rows": [
+     [
+      "Dilator stimulator",
+      "Largely preserved"
+     ],
+     [
+      "Sphincter blocker",
+      "Paralysed cycloplegia"
+     ],
+     [
+      "Combination",
+      "Wide dilation for surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Duration matters practically: short acting blockers suit clinic refraction, while the longest acting blocker serves uveitis pain relief and childhood penalisation therapy over days. Families therefore need blur and light sensitivity warnings matched to agent duration. **Duration counselling** therefore prevents panic when dilation persists after long acting drops.",
+   "say": "Duration counselling together gives drop safety in paediatric clinics for families using long acting dilating therapy at home. Blur gives expected effect additionally. Sensitivity gives light warning.",
+   "vis": {
+    "kind": "flow",
+    "title": "Drop selection flow",
+    "nodes": [
+     {
+      "id": "purpose",
+      "label": "Viewing refraction or therapy"
+     },
+     {
+      "id": "class",
+      "label": "Dilator or blocker chosen"
+     },
+     {
+      "id": "duration",
+      "label": "Short or long matched"
+     },
+     {
+      "id": "warn",
+      "label": "Blur and light advice given"
+     }
+    ],
+    "edges": [
+     [
+      "purpose",
+      "class"
+     ],
+     [
+      "class",
+      "duration"
+     ],
+     [
+      "duration",
+      "warn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In uveitis, cycloplegics relieve ciliary spasm pain and prevent iris sticking to lens by keeping the pupil mobile and dilated during inflammation. This therapeutic role differs entirely from diagnostic dilation in healthy eyes. **Mobile pupil** therefore names the uveitis goal when cycloplegic therapy is prescribed.",
+   "say": "Therapeutic dilation together gives uveitis relief in eye clinics for adults with painful anterior inflammation and spasm. Pain gives spasm mechanism additionally. Sticking gives synechiae prevention.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anterior-uveitis-fig1.webp",
+    "alt": "Anterior uveitis diagram showing inflamed iris and pupil.",
+    "caption": "Uveitis pupil therapy context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dilation can precipitate angle closure in anatomically narrow angles, so angle assessment and symptom warnings accompany mydriasis in older adults with shallow chambers. Pain, haloes and nausea after dilation therefore earn same day pressure assessment. **Dilate with warning** therefore governs drops in narrow angle risk patients.",
+   "say": "Warning discipline together gives dilation safety in eye clinics for older adults with shallow anterior chambers. Haloes gives symptom clue additionally. Pressure gives same day action.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wide angle dilation",
+     "points": [
+      "Routine viewing drops",
+      "Brief blur warning"
+     ]
+    },
+    "right": {
+     "title": "Narrow angle dilation",
+     "points": [
+      "Assess angle first",
+      "Pain haloes same day review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systemic absorption through nasal drainage causes flushing, fever or agitation in small children after strong blocker drops, reduced by punctal occlusion and blotting excess during instillation. Technique therefore functions as dose control in paediatric drop use. **Press the punctum** therefore appears in children drop instructions routinely.",
+   "say": "Technique control together gives paediatric drop safety in eye clinics for small children receiving strong dilating drops. Occlusion gives absorption reduction additionally. Blotting gives excess removal.",
+   "vis": {
+    "kind": "table",
+    "title": "Drop safety set",
+    "cols": [
+     "Habit",
+     "Protects against"
+    ],
+    "rows": [
+     [
+      "Punctal occlusion",
+      "Systemic absorption in children"
+     ],
+     [
+      "Duration warning",
+      "Panic over prolonged blur"
+     ],
+     [
+      "Angle warning",
+      "Closure after dilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Topical steroid drops share clinic shelves with dilating agents and carry pressure raising and infection masking risks, so dilating reviews often audit steroid duration as medication safety practice. Combined uveitis prescriptions therefore state steroid taper and pressure check dates explicitly. **Taper plus pressure date** therefore completes therapeutic drop prescriptions safely.",
+   "say": "Prescription completeness together gives drop safety in uveitis clinics for adults receiving combined therapeutic drops over weeks. Taper gives steroid plan additionally. Date gives pressure certainty.",
+   "vis": {
+    "kind": "table",
+    "title": "Therapeutic prescription",
+    "cols": [
+     "Element",
+     "Stated"
+    ],
+    "rows": [
+     [
+      "Cycloplegic",
+      "Duration and pupil goal"
+     ],
+     [
+      "Steroid",
+      "Taper schedule written"
+     ],
+     [
+      "Review",
+      "Pressure check date booked"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here: dilators widen, blockers also paralyse accommodation, long blockers treat uveitis and reveal child hypermetropia, and narrow angles plus paediatric absorption define drop safety. **Purpose selects drop** therefore closes ocular dilation teaching. Examination answers therefore name purpose, duration and safety together in every drop scenario presented.",
+   "say": "Purpose selection together gives dilation anchors in examinations for students reliably in drop cases everywhere. Accommodation gives blocker centre additionally. Angle gives safety completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Mydriatic anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Dilator only",
+      "View widens, reading kept"
+     ],
+     [
+      "Blocker",
+      "Cycloplegia reveals child hypermetropia"
+     ],
+     [
+      "Safety",
+      "Narrow angle and child absorption"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Mydriatic split",
+   "b": "Dilator stimulators widen view; sphincter blockers add cycloplegia."
+  },
+  {
+   "f": "Cycloplegic refraction",
+   "b": "Reveals full hypermetropia in children for squint glasses prescribing."
+  },
+  {
+   "f": "Drop safety pair",
+   "b": "Warn narrow angles about closure; punctal occlusion limits child absorption."
+  }
+ ],
+ "keys": [
+  "Purpose selects the drop",
+  "Duration counselling prevents panic",
+  "Mobile pupil is the uveitis goal"
+ ]
+}
