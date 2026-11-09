@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "sur-hernia",
+ "subject": "surgery",
+ "title": "Inguinal Hernias and Surgical Repair",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most frequent variety of groin hernia encountered across all age groups is the **indirect inguinal hernia**. Arising from congenital failure of obliterative closure of the processus vaginalis, the peritoneal sac enters the deep inguinal ring lateral to the inferior epigastric vessels. The hernia traverses the inguinal canal within the coverings of the spermatic cord, frequently descending through the superficial ring into the scrotum.",
+   "say": "An indirect inguinal hernia enters the deep ring lateral to the inferior epigastric vessels through a patent processus vaginalis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/inguinal-hernia-fig1.webp",
+    "alt": "Anatomical diagram of inguinal hernia pathways contrasting indirect lateral descent with direct medial bulging.",
+    "caption": "Inguinal hernia anatomy: indirect sac emerges lateral to inferior epigastric vessels into the inguinal canal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An acquired protrusion that emerges directly forward through a weakened posterior inguinal wall is a **direct inguinal hernia**. Occurring predominantly in elderly males due to progressive collagen breakdown and chronic straining, the hernial sac pushes through the transversalis fascia medial to the inferior epigastric vessels. Direct hernias possess a broad, hemispherical neck, rarely descend into the scrotum, and carry an exceptionally low risk of strangulation.",
+   "say": "Direct inguinal hernias push forward medial to the inferior epigastric vessels through an attenuated posterior wall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indirect Inguinal Hernia",
+     "points": [
+      "Enters deep ring lateral to inferior epigastric vessels",
+      "Congenital persistence of patent processus vaginalis",
+      "Courses obliquely within coverings of spermatic cord",
+      "Frequently descends into scrotum, higher strangulation risk"
+     ]
+    },
+    "right": {
+     "title": "Direct Inguinal Hernia",
+     "points": [
+      "Protrudes through posterior wall medial to epigastric vessels",
+      "Acquired defect in transversalis fascia from aging/straining",
+      "Hemispherical bulge, stays outside spermatic cord",
+      "Rarely enters scrotum, negligible strangulation risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The anatomical zone of weakness situated in the posterior wall of the inguinal canal is **Hesselbach triangle**. The boundaries of this surgical triangle comprise the lateral margin of the rectus abdominis muscle medially, the inferior epigastric vessels superolaterally, and the inguinal ligament of Poupart inferiorly. Because the floor is formed solely by the transversalis fascia and conjoint tendon, direct inguinal hernias emerge through this space.",
+   "say": "Hesselbach triangle is bounded by the rectus muscle, inferior epigastric vessels, and inguinal ligament, forming the direct hernia floor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "med",
+      "label": "Medial Boundary: Lateral Border of Rectus Abdominis"
+     },
+     {
+      "id": "lat",
+      "label": "Superolateral Boundary: Inferior Epigastric Vessels"
+     },
+     {
+      "id": "inf",
+      "label": "Inferior Boundary: Inguinal Ligament (Poupart)"
+     },
+     {
+      "id": "floor",
+      "label": "Floor: Transversalis Fascia (Direct Hernia Site)"
+     }
+    ],
+    "edges": [
+     [
+      "med",
+      "floor"
+     ],
+     [
+      "lat",
+      "floor"
+     ],
+     [
+      "inf",
+      "floor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cardinal physical examination maneuver used to differentiate indirect from direct inguinal hernias is the **deep ring occlusion test**. With the patient supine and the hernia reduced, the clinician occludes the deep ring, located one fingerbreadth above the midpoint of the inguinal ligament midway between the anterior superior iliac spine and pubic tubercle. Upon coughing, control of the impulse confirms an indirect hernia.",
+   "say": "The deep ring occlusion test prevents indirect hernia protrusion during coughing, while direct hernias bulge medial to the finger.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-deep_ring_occlusion.webp",
+    "alt": "Clinical illustration demonstrating technique of the deep ring occlusion test during groin examination.",
+    "caption": "Deep ring occlusion test: digital pressure over the internal ring controls an indirect hernia cough impulse. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The open surgical gold standard operation for repairing adult inguinal hernias is the **Lichtenstein tension-free repair**. Unlike historic tissue repairs like Shouldice or Bassini that drew attenuated fascial edges together under high tension, Lichtenstein repair reinforces the defective inguinal floor by laying a flat sheet of synthetic prosthetic mesh across the entire posterior wall, reducing long-term hernia recurrence rates to under two percent.",
+   "say": "Lichtenstein tension-free repair reconstructs the inguinal canal floor with synthetic mesh, dramatically lowering recurrence rates.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-lichtenstein-tension-free-hernioplasty.webp",
+    "alt": "Operative surgical photograph showing placement and fixation of prosthetic mesh during open Lichtenstein hernioplasty.",
+    "caption": "Lichtenstein hernioplasty: tension-free mesh placed over the posterior wall and secured to pubic tubercle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The biomaterial routinely deployed to reconstruct the attenuated inguinal canal floor is **polypropylene prosthetic mesh**. The surgical mesh is anchored medially to the pubic tubercle, overlapping the bone by one to two centimetres to prevent medial recurrence. Inferiorly, it is sutured continuously to the shelving edge of the inguinal ligament, and its lateral slit is wrapped snugly around the cord to fashion a new deep ring.",
+   "say": "A polypropylene mesh is sutured to the pubic tubercle and inguinal ligament, creating a snug new internal ring for the cord.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-sut-polypropylene-prosthetic-mesh.webp",
+    "alt": "Photograph of knitted monofilament polypropylene prosthetic hernia mesh showing pore structure and flexibility.",
+    "caption": "Polypropylene hernia mesh: monofilament macroporous design facilitates rapid fibroblastic integration and host tissue ingrowth. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A minimally invasive laparoscopic repair technique conducted entirely within the preperitoneal plane without entering the abdominal cavity is **totally extraperitoneal repair**. Abbreviated as TEP, an optical balloon dissector develops the preperitoneal space of Bogros and space of Retzius behind the rectus muscle. Hernial sacs are reduced and a large fifteen by ten centimetre prosthetic mesh is deployed, eliminating the risks of intra-abdominal visceral injury.",
+   "say": "Totally extraperitoneal repair places preperitoneal mesh without breaching the peritoneal cavity, minimizing visceral injury risks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Repair Parameter",
+     "Open Lichtenstein",
+     "Laparoscopic TEP",
+     "Laparoscopic TAPP"
+    ],
+    "rows": [
+     [
+      "Surgical plane",
+      "Anterior open inguinal canal",
+      "Preperitoneal space of Bogros",
+      "Transabdominal into preperitoneal space"
+     ],
+     [
+      "Peritoneal violation",
+      "None",
+      "None (intact peritoneum)",
+      "Yes (peritoneum incised and closed)"
+     ],
+     [
+      "Bilateral hernia repair",
+      "Requires two separate incisions",
+      "Simultaneous repair via same 3 ports",
+      "Simultaneous repair via same 3 ports"
+     ],
+     [
+      "Postoperative recovery",
+      "Moderate wound discomfort (2 wk)",
+      "Rapid return to activity (3 to 5 days)",
+      "Rapid return to activity (3 to 5 days)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A laparoscopic groin hernia repair that accesses the preperitoneal space from within the peritoneal cavity is **transabdominal preperitoneal repair**. In TAPP, the laparoscope enters the peritoneal space to inspect bilateral groins. The parietal peritoneum above the hernia defect is incised transversely, creating wide peritoneal flaps to expose the spaces of Bogros and Retzius, covering all potential groin defects with mesh before peritoneal closure.",
+   "say": "Transabdominal preperitoneal repair approaches the groin laparoscopically from within the abdominal cavity, incising peritoneum to lay mesh.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ins",
+      "label": "Laparoscopic Peritoneal Entry & Bilateral Groin Inspection"
+     },
+     {
+      "id": "flap",
+      "label": "Transverse Peritoneal Incision Creating Wide Preperitoneal Flap"
+     },
+     {
+      "id": "red",
+      "label": "Reduction of Indirect, Direct, or Femoral Hernial Sacs"
+     },
+     {
+      "id": "mesh",
+      "label": "Deployment of Large Mesh & Meticulous Peritoneal Flap Closure"
+     }
+    ],
+    "edges": [
+     [
+      "ins",
+      "flap"
+     ],
+     [
+      "flap",
+      "red"
+     ],
+     [
+      "red",
+      "mesh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A comprehensive anatomical classification based on the size of the internal ring and integrity of the posterior wall is the **Nyhus hernia classification**. Type one denotes pediatric indirect hernias with a normal internal ring. Type two encompasses adult indirect hernias with dilated rings. Type three designates posterior wall defects including direct, large indirect, and femoral hernias, while Type four denotes recurrent hernias.",
+   "say": "The Nyhus classification categorizes groin hernias into types one through four based on ring dilation, posterior wall weakness, and recurrence.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-nyhus_hernia.webp",
+    "alt": "Diagram showing the four panels of Nyhus groin hernia types in posterior anatomical view.",
+    "caption": "Nyhus classification: posterior view showing type one to four defects of the internal ring and posterior wall. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

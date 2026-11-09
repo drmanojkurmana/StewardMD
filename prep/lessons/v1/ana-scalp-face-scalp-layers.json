@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-scalp-face",
+ "subject": "anatomy",
+ "title": "Scalp Layers, Epicranial Aponeurosis, and Loose Areolar Space",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The scalp comprises the soft tissue covering the calvaria, extending from the supraorbital margins anteriorly to the highest nuchal lines of the occipital bone posteriorly. Its anatomical structure is represented by the classic mnemonic **SCALP**, reflecting its five constituent layers: Skin, Connective tissue, Aponeurosis, Loose areolar tissue, and Pericranium.",
+   "say": "Covering the calvaria from supraorbital margins to nuchal lines, the scalp possesses five layers remembered as SCALP: Skin, Connective tissue, Aponeurosis, Loose tissue, and Pericranium.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-skull-sutures.svg",
+    "alt": "Anatomical schematic of the cranial vault bones, cranial sutures, and overlying pericranial relations",
+    "caption": "Calvarial osteology and suture lines defining the deep pericranial base of the scalp. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The first three layers of the scalp are bound together by dense fibrous septa, functioning clinically and surgically as a single composite unit designated the scalp proper. When a scalping injury occurs, the plane of mechanical cleavage consistently tears through the fourth layer (loose areolar tissue), shearing off the **scalp proper** while leaving the underlying pericranium attached to bone.",
+   "say": "Skin, dense connective tissue, and aponeurosis fuse into a single unit called the scalp proper. Scalping avulsions rip cleanly through the underlying loose areolar plane.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Skin (Thick hair-bearing epidermis with abundant sebaceous glands)"
+     },
+     {
+      "id": "s2",
+      "label": "Connective Tissue (Dense lobulated fat partitioned by rigid collagenous septa)"
+     },
+     {
+      "id": "s3",
+      "label": "Aponeurosis / Galea (Dense fibrous sheet connecting frontalis and occipitalis)"
+     },
+     {
+      "id": "s4",
+      "label": "Loose Areolar Tissue (Cleavage plane containing emissary veins)"
+     },
+     {
+      "id": "s5",
+      "label": "Pericranium (External periosteum adherent at calvarial sutures)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The dense connective tissue of the second layer houses the principal arteries, veins, and sensory nerves of the scalp. The walls of these blood vessels are intimately tethered to the tough fibrous septa. Consequently, when a scalp artery is lacerated, the transected vessel cannot retract or contract, resulting in persistent, profuse **scalp haemorrhage** that requires firm direct compression against the skull.",
+   "say": "Arteries in the second layer adhere to fibrous septa. When lacerated, they cannot retract or constrict, causing relentless haemorrhage until compressed against bone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lacerated Scalp Vessel",
+     "points": [
+      "Embedded in rigid fibrofatty septa",
+      "Tethering prevents arterial spasm and luminal retraction",
+      "Blood jets profusely from both severed ends",
+      "Arrested by firm pressure or sutures engaging galea"
+     ]
+    },
+    "right": {
+     "title": "Normal Peripheral Vessel",
+     "points": [
+      "Surrounded by compliant loose subcutaneous fat",
+      "Muscular tunica media contracts promptly on transection",
+      "Retracts beneath adventitial cuff to promote thrombosis",
+      "Spontaneous haemostasis occurs much more rapidly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The third layer is the epicranial aponeurosis (galea aponeurotica), a broad, dense fibrous tendon connecting the bilateral frontal bellies of occipitofrontalis anteriorly to the occipital bellies posteriorly. The **epicranial aponeurosis** is unyielding. Scalp wounds oriented transversely that divide the galea gape widely because of the opposing longitudinal pull of frontalis and occipitalis bellies.",
+   "say": "The epicranial aponeurosis links the frontalis and occipitalis muscles. Transverse lacerations dividing this aponeurosis gape widely due to opposing muscular traction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Transverse Galeal Division (Laceration completely severs the galea aponeurotica)"
+     },
+     {
+      "id": "g2",
+      "label": "Antagonistic Traction (Frontalis pulls anteriorly while occipitalis pulls posteriorly)"
+     },
+     {
+      "id": "g3",
+      "label": "Wide Wound Gaping (Requires full-thickness galeal closure to restore alignment)"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fourth layer, composed of loose areolar tissue, is historically known as the dangerous area of the scalp. It contains valveless emissary veins that traverse foramina in the calvaria, establishing direct communications between the extracranial veins of the scalp and the intracranial **dural venous sinuses**. Infection within this plane can track retrogradely into superior sagittal sinus thrombosis.",
+   "say": "Loose areolar tissue represents the dangerous layer of the scalp. Valveless emissary veins cross here, allowing scalp infections to track into the superior sagittal sinus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-venous-sinuses.svg",
+    "alt": "Anatomical schematic showing dural venous sinuses and their emissary venous connections through the skull",
+    "caption": "Venous connections between extracranial scalp veins and intracranial dural sinuses via emissary conduits. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extravasation of blood or purulent fluid into the loose areolar tissue can spread freely across the calvaria. Fluid is bounded posteriorly by the attachment of the epicranial aponeurosis to the highest nuchal lines and laterally by the temporal fascia. Anteriorly, however, because frontalis has no bony attachment, blood tracks into the upper eyelids, producing a clinical **black eye**.",
+   "say": "Blood in the loose areolar layer spreads freely across the dome of the skull. Lacking anterior bony insertion, fluid tracks into the eyelids to form a black eye.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Boundary of Loose Layer",
+     "Anatomical Structure",
+     "Barrier Limitation"
+    ],
+    "rows": [
+     [
+      "Anterior margin",
+      "No bony insertion (frontalis blends with orbicularis oculi)",
+      "Fluid enters upper eyelids and bridge of nose (black eye)"
+     ],
+     [
+      "Posterior margin",
+      "Highest nuchal line of occipital bone",
+      "Firm attachment prevents tracking of fluid into the neck"
+     ],
+     [
+      "Lateral margins",
+      "Zygomatic arches and superior temporal lines",
+      "Dense temporal fascia prevents fluid entry into facial cheeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fifth layer is the pericranium, the outer periosteum of the calvarial bones. It is loosely attached to the surface of the skull bones but dips into and becomes tightly adherent to the suture lines between them. A subpericranial haematoma, termed a **cephalhaematoma**, is therefore strictly confined to the surface of an individual cranial bone and cannot cross suture lines.",
+   "say": "Pericranium adheres firmly at cranial suture lines. Consequently, a neonatal cephalhaematoma remains strictly confined to the surface of a single calvarial bone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cephalhaematoma (Subpericranial)",
+     "points": [
+      "Bleeding situated beneath pericranium against calvarial bone",
+      "Strictly delimited by suture lines; cannot cross sutures",
+      "Tense swelling limited to solitary parietal bone",
+      "Resolves spontaneously over weeks with peripheral calcification"
+     ]
+    },
+    "right": {
+     "title": "Caput Succedaneum (Subcutaneous)",
+     "points": [
+      "Serosanguinous fluid in subcutaneous tissue (second layer)",
+      "Crosses suture lines without any anatomical limitation",
+      "Soft, pitting oedematous swelling present at delivery",
+      "Disappears completely within forty-eight hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sensory innervation of the scalp is distributed in ten nerves on each side (four in front of the auricle, six behind). Anterior to the ear, sensory supply derives from the trigeminal nerve: supratrochlear, supraorbital (ophthalmic V1), zygomaticotemporal (maxillary V2), and **auriculotemporal nerve** (mandibular V3). Posterior to the auricle, supply originates from cervical spinal nerves C2 and C3.",
+   "say": "Ten sensory nerves supply each half of the scalp: four from the trigeminal divisions in front of the ear, and six from cervical roots C2 and C3 behind the ear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Territory",
+     "Sensory Nerve",
+     "Origin / Division"
+    ],
+    "rows": [
+     [
+      "Forehead and vertex anteriorly",
+      "Supratrochlear and supraorbital",
+      "Ophthalmic division of trigeminal nerve (V1)"
+     ],
+     [
+      "Anterior temporal region",
+      "Zygomaticotemporal and auriculotemporal",
+      "Maxillary (V2) and Mandibular (V3) trigeminal divisions"
+     ],
+     [
+      "Behind ear and mastoid",
+      "Great auricular and lesser occipital",
+      "Cervical plexus (anterior rami C2, C3)"
+     ],
+     [
+      "Occiput and posterior vertex",
+      "Greater occipital and third occipital",
+      "Posterior primary rami of C2 and C3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

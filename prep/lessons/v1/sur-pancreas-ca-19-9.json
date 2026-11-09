@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Tumour Markers, Periampullary Cancers, and Insulinoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The pre-eminent serum glycan biomarker utilized in the management and monitoring of pancreatic ductal adenocarcinoma is **CA 19-9**. Synthesized as a sialylated Lewis blood group antigen, circulating levels rise significantly in pancreatic, biliary, and gastrointestinal malignancies. However, CA 19-9 cannot be synthesized in individuals lacking the Lewis fucosyltransferase enzyme, rendering five to ten percent of the general population non-expressors regardless of tumour burden.",
+   "say": "CA 19-9 is a serum biomarker for pancreatic cancer, but individuals lacking the Lewis blood group antigen cannot synthesize it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nonfunctioning-pancreatic-net-fig1.webp",
+    "alt": "Diagnostic schematic showing clinical correlation of serum CA 19-9 with pancreatic malignancy burden.",
+    "caption": "Biomarker surveillance: utilizing serum CA 19-9 for assessing response to chemotherapy and detecting recurrence. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serum CA 19-9 levels correlate directly with tumour stage and resectability. Baseline values exceeding one thousand units per millilitre strongly indicate occult peritoneal or hepatic micrometastases, whereas falling titers after surgery or neoadjuvant therapy herald therapeutic response. Importantly, benign biliary obstruction alone elevates CA 19-9 due to impaired biliary excretion, mandating that biomarker levels be re-evaluated only after **jaundice resolution**.",
+   "say": "Serum CA 19-9 correlates with disease stage, but levels can be falsely elevated during benign obstructive jaundice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malignant CA 19-9 Rise",
+     "points": [
+      "Markedly elevated (> 1,000 U/mL)",
+      "Persists after biliary decompression",
+      "Doubling titers signify tumour recurrence",
+      "Predicts unresectable occult metastases"
+     ]
+    },
+    "right": {
+     "title": "Benign Elevation Confounders",
+     "points": [
+      "Acute cholangitis and choledocholithiasis",
+      "Chronic pancreatitis and cirrhosis",
+      "Normalizes rapidly following biliary drainage",
+      "False negative in Lewis-negative individuals"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Malignancies arising within two centimetres of the ampulla of Vater are collectively designated as **periampullary carcinoma**. This anatomical group encompasses four distinct tumours: pancreatic head ductal adenocarcinoma, ampullary adenocarcinoma, distal common bile duct cholangiocarcinoma, and duodenal adenocarcinoma. Although all four present similarly with obstructive jaundice, their biological behavior and long-term prognosis diverge dramatically.",
+   "say": "Periampullary carcinomas encompass four distinct malignancies arising within two centimetres of the ampulla of Vater, carrying widely different prognoses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Origin",
+     "Frequency (%)",
+     "Clinical Presentation",
+     "5-Year Survival Post-Whipple"
+    ],
+    "rows": [
+     [
+      "Ampullary Carcinoma",
+      "15% - 20%",
+      "Early fluctuating jaundice, occult GI bleed",
+      "40% - 50%"
+     ],
+     [
+      "Pancreatic Head Carcinoma",
+      "60% - 70%",
+      "Late progressive painless jaundice",
+      "15% - 20%"
+     ],
+     [
+      "Distal Cholangiocarcinoma",
+      "10% - 15%",
+      "Rapid progressive deep jaundice",
+      "25% - 30%"
+     ],
+     [
+      "Duodenal Adenocarcinoma",
+      "5% - 10%",
+      "Obstruction, anaemia, occult bleeding",
+      "50% - 60%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Among periampullary neoplasms, ampullary carcinoma exhibits the most favourable prognosis following surgical resection. Because the tumour arises directly within the ampulla of Vater, microscopic ulceration and luminal occlusion trigger early fluctuating jaundice and gastrointestinal blood loss, leading to prompt clinical diagnosis while the tumour is small. Endoscopic inspection characteristically reveals an exophytic or ulcerated **periampullary mass** amenable to endoscopic biopsy.",
+   "say": "Ampullary carcinomas present early with fluctuating jaundice and anaemia, achieving superior five-year survival compared to pancreatic head tumours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ampulla",
+      "label": "Early Ductal Obstruction & Tumour Mucosal Ulceration"
+     },
+     {
+      "id": "signs",
+      "label": "Early Clinical Signs: Fluctuating Jaundice & Melena"
+     },
+     {
+      "id": "diag",
+      "label": "Duodenoscopy & Direct Endoscopic Biopsy Confirmation"
+     },
+     {
+      "id": "whipple",
+      "label": "Curative Whipple Resection with Favourable Survival (>45%)"
+     }
+    ],
+    "edges": [
+     [
+      "ampulla",
+      "signs"
+     ],
+     [
+      "signs",
+      "diag"
+     ],
+     [
+      "diag",
+      "whipple"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most prevalent functioning pancreatic neuroendocrine neoplasm is **insulinoma**. Arising from the beta cells of the islets of Langerhans, these vascular tumours hypersecrete insulin autonomously, precipitating severe recurrent fasting hypoglycaemia. Over ninety percent of insulinomas are benign, solitary, encapsulated nodules measuring less than two centimetres in diameter, distributed uniformly throughout the head, body, and tail of the pancreas.",
+   "say": "An insulinoma is a vascular neuroendocrine tumour of islet beta cells, typically small, solitary, and benign, causing fasting hypoglycaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulinoma-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating Whipple triad and biochemical criteria during supervised 72-hour fast in insulinoma.",
+    "caption": "Insulinoma: autonomous beta-cell insulin hypersecretion producing symptomatic fasting hypoglycaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The clinical diagnosis of insulinoma is historically grounded upon the classic **Whipple triad**. This diagnostic triad demands symptoms of hypoglycaemia such as confusion, diaphoresis, and tremors triggered by fasting or exertion, documented concurrent blood glucose below fifty milligrams per decilitre, and immediate relief of neuroglycopenic symptoms following glucose administration.",
+   "say": "Whipple triad defines insulinoma by hypoglycaemic symptoms during fasting, documented low blood glucose, and prompt symptom relief with glucose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Whipple Triad Feature",
+     "Physiological Basis",
+     "Diagnostic Finding"
+    ],
+    "rows": [
+     [
+      "1. Hypoglycaemic Symptoms",
+      "Neuroglycopenia & sympathoadrenal discharge",
+      "Confusion, tremors, diaphoresis, palpitations"
+     ],
+     [
+      "2. Low Plasma Glucose",
+      "Autonomous insulin suppression of gluconeogenesis",
+      "Venous blood glucose < 50 mg/dL (2.8 mmol/L)"
+     ],
+     [
+      "3. Relief with Glucose",
+      "Cerebral glucose delivery restored",
+      "Rapid cognitive and physical recovery following sugar intake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic gold standard investigation confirming endogenous hyperinsulinism is the supervised seventy-two hour **fasting test**. The test is terminated when plasma glucose drops below fifty-five milligrams per decilitre accompanied by symptoms. Laboratory confirmation requires elevated serum insulin above three micro-units per millilitre, elevated C-peptide above 0.2 nanomoles per litre, elevated proinsulin, and a negative screen for oral sulfonylurea secretagogues in the bloodstream.",
+   "say": "The 72-hour fasting test establishes insulinoma by demonstrating elevated serum insulin, C-peptide, and proinsulin during documented hypoglycaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insulinoma (Endogenous)",
+     "points": [
+      "Plasma glucose < 55 mg/dL",
+      "Inappropriately high serum insulin",
+      "Elevated serum C-peptide (> 0.2 nmol/L)",
+      "Elevated circulating proinsulin levels"
+     ]
+    },
+    "right": {
+     "title": "Factitious Exogenous Insulin",
+     "points": [
+      "Plasma glucose < 55 mg/dL",
+      "Massively elevated circulating insulin",
+      "Suppressed or undetectable C-peptide",
+      "Normal or low proinsulin levels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because insulinomas are small and hypervascular, precise preoperative anatomical localization is achieved using multiphasic computed tomography, magnetic resonance imaging, or endoscopic ultrasound. At operation, intraoperative ultrasound paired with gentle bimanual pancreatic palpation achieves a localization sensitivity near one hundred percent. Because the majority are benign and encapsulated, simple surgical **enucleation** sparing normal parenchyma represents the curative procedure of choice.",
+   "say": "Surgical enucleation cures most benign insulinomas, localized intraoperatively using ultrasound and bimanual pancreatic palpation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Biochemical Confirmation via 72-Hour Supervised Fast"
+     },
+     {
+      "id": "loc",
+      "label": "Localization with EUS and Arterial Phase Contrast Imaging"
+     },
+     {
+      "id": "intra",
+      "label": "Intraoperative Ultrasound Validates Relationship to Main Duct"
+     },
+     {
+      "id": "cure",
+      "label": "Surgical Enucleation Completely Cures Symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "loc"
+     ],
+     [
+      "loc",
+      "intra"
+     ],
+     [
+      "intra",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ]
+}

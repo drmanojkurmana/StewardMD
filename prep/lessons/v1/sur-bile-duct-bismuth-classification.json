@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-bile-duct",
+ "subject": "surgery",
+ "title": "Biliary Cysts, Bismuth Classification, and Cholangiocarcinoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Congenital disproportionate aneurysmal dilatation of the extrahepatic or intrahepatic biliary ductal tree is termed a **choledochal cyst**. Predominantly identified in female infants and young children, these anomalies stem from an abnormal pancreaticobiliary ductal junction. In this anomalous arrangement, the common bile duct joins the main pancreatic duct outside the duodenal wall beyond the protective control of the sphincter of Oddi.",
+   "say": "A choledochal cyst represents congenital dilatation of the bile ducts, frequently resulting from an anomalous junction of the pancreatic and bile ducts.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholangiocarcinoma-fig1.webp",
+    "alt": "Anatomical schematic showing anatomical classifications of choledochal cysts and locations of cholangiocarcinoma.",
+    "caption": "Biliary ductal anomalies: congenital choledochal cysts and anatomical classification of cholangiocarcinoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anomalous junction permits continuous reflux of pancreatic juice into the biliary tree, activating proenzymes that provoke chronic mural inflammation, epithelial dysplasia, and malignant transformation. Choledochal cysts are categorized into five types by the **Todani classification**. Type one, accounting for eighty to ninety percent of cases, comprises solitary fusiform or cystic dilatation of the extrahepatic common bile duct.",
+   "say": "The Todani classification divides choledochal cysts into five types, with type one representing fusiform extrahepatic dilatation in most cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Todani Type",
+     "Anatomical Description",
+     "Surgical Management"
+    ],
+    "rows": [
+     [
+      "Type I (85%)",
+      "Fusiform or saccular extrahepatic duct dilatation",
+      "Complete cyst excision + Roux-en-Y hepaticojejunostomy"
+     ],
+     [
+      "Type II (3%)",
+      "True diverticulum of the extrahepatic bile duct",
+      "Simple surgical excision of diverticulum at its neck"
+     ],
+     [
+      "Type III (4%)",
+      "Choledochocele in intraduodenal bile duct",
+      "Endoscopic sphincterotomy or transduodenal excision"
+     ],
+     [
+      "Type IV (10%)",
+      "Multiple intrahepatic and extrahepatic cysts",
+      "Extrahepatic cyst excision + hepaticojejunostomy"
+     ],
+     [
+      "Type V (Caroli)",
+      "Multiple intrahepatic cystic duct dilatations",
+      "Segmental liver resection or liver transplantation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Children classically present with the clinical triad of intermittent abdominal pain, right upper quadrant palpable mass, and jaundice, though all three features co-exist in only a minority. Because untreated cyst mucosa carries a lifetime risk of malignant transformation up to thirty percent, internal drainage alone is abandoned. The mandatory definitive surgery is total **cyst excision** accompanied by a Roux-en-Y hepaticojejunostomy.",
+   "say": "Due to a substantial risk of cancer, choledochal cysts require complete surgical cyst excision and Roux-en-Y hepaticojejunostomy reconstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "reflux",
+      "label": "Anomalous Pancreaticobiliary Junction & Enzyme Reflux"
+     },
+     {
+      "id": "cyst",
+      "label": "Progressive Ductal Dilatation (Todani Type I - V)"
+     },
+     {
+      "id": "dysplasia",
+      "label": "Chronic Mucosal Inflammation & High Dysplasia Risk"
+     },
+     {
+      "id": "surgery",
+      "label": "Complete Cyst Excision + Roux-en-Y Reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "reflux",
+      "cyst"
+     ],
+     [
+      "cyst",
+      "dysplasia"
+     ],
+     [
+      "dysplasia",
+      "surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rare variant characterized by non-obstructive saccular dilatation of intrahepatic bile ducts associated with congenital hepatic fibrosis is **Caroli disease**, designated as Todani type five. Patients develop recurrent bouts of bacterial cholangitis, intrahepatic stone formation, and portal hypertension. When intrahepatic ectasia is localized to a single hepatic lobe, anatomical hemihepatectomy is curative, whereas diffuse bilobar involvement necessitates orthotopic liver transplantation.",
+   "say": "Caroli disease involves congenital intrahepatic duct dilatation with hepatic fibrosis, managed by partial hepatectomy or liver transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caroli Disease",
+     "points": [
+      "Pure intrahepatic saccular duct ectasia",
+      "No congenital hepatic fibrosis",
+      "Recurrent cholangitis and stones",
+      "Lower incidence of portal hypertension"
+     ]
+    },
+    "right": {
+     "title": "Caroli Syndrome",
+     "points": [
+      "Intrahepatic duct ectasia combined with fibrosis",
+      "Associated with autosomal recessive polycystic kidney",
+      "Early development of portal hypertension",
+      "Marked splenomegaly and variceal bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The primary epithelial malignancy originating from the mucosal lining of the intrahepatic or extrahepatic biliary system is **cholangiocarcinoma**. Major predisposing aetiological factors encompass primary sclerosing cholangitis, choledochal cysts, chronic Clonorchis sinensis or Opisthorchis viverrini liver fluke infection, and hepatolithiasis. Greater than ninety percent of lesions are well-differentiated, mucin-producing sclerosing adenocarcinomas characterized by dense desmoplastic stroma.",
+   "say": "Cholangiocarcinoma is a sclerosing adenocarcinoma of bile duct epithelium, linked to primary sclerosing cholangitis and liver fluke infestation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ptbd-technique-stenting-fig1.webp",
+    "alt": "Fluoroscopic schematic demonstrating percutaneous transhepatic biliary drainage catheter decompressing obstructed cholangiocarcinoma.",
+    "caption": "Percutaneous transhepatic biliary drainage: palliative decompression across malignant biliary strictures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anatomically, cholangiocarcinomas are categorized into intrahepatic, perihilar, and distal varieties. Perihilar lesions located in the main hepatic duct bifurcation account for over fifty percent of all occurrences. The standardized classification mapping longitudinal ductal extension of perihilar tumours is the **Bismuth classification**, also known as the Bismuth-Corlette system. This anatomical framework guides surgical resectability by detailing confluence involvement.",
+   "say": "The Bismuth classification maps perihilar cholangiocarcinomas according to ductal involvement relative to the primary hepatic bifurcation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bismuth Type",
+     "Anatomical Involvement",
+     "Surgical Resection Plan"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Below primary confluence (common hepatic duct)",
+      "En bloc duct excision + hepaticojejunostomy"
+     ],
+     [
+      "Type II",
+      "Reaches primary confluence without sectoral spread",
+      "Bile duct excision + bilateral hepaticojejunostomy"
+     ],
+     [
+      "Type IIIa",
+      "Involves confluence and right sectoral ducts",
+      "Bile duct excision + extended right hepatectomy"
+     ],
+     [
+      "Type IIIb",
+      "Involves confluence and left sectoral ducts",
+      "Bile duct excision + extended left hepatectomy"
+     ],
+     [
+      "Type IV",
+      "Bilateral secondary sectoral duct involvement",
+      "Unresectable (palliative stenting or transplant)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical resection for Bismuth type three tumours mandates en bloc excision of the extrahepatic biliary tree, regional lymphadenectomy, and formal hemihepatectomy. Routine resection of the caudate lobe is obligatory because its independent biliary tributaries drain directly into the biliary confluence, harbouring frequent microscopic cancer extension. Portal vein involvement on the side of the retained liver remnant represents a principal contraindication to **curative resection**.",
+   "say": "Resection of perihilar cholangiocarcinoma requires hemihepatectomy and caudate lobectomy to ensure clean margins at the biliary confluence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "confluence",
+      "label": "Perihilar Tumour Invading Primary Confluence"
+     },
+     {
+      "id": "lobe",
+      "label": "Obligatory Caudate Lobectomy (Segment I Excision)"
+     },
+     {
+      "id": "hemi",
+      "label": "Extended Hemihepatectomy on Affected Sectoral Side"
+     },
+     {
+      "id": "recon",
+      "label": "Roux-en-Y Reconstruction to Healthy Ductal Remnant"
+     }
+    ],
+    "edges": [
+     [
+      "confluence",
+      "lobe"
+     ],
+     [
+      "lobe",
+      "hemi"
+     ],
+     [
+      "hemi",
+      "recon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In advanced unresectable cholangiocarcinoma, management focuses on palliative alleviation of intractable pruritus and prevention of fatal ascending cholangitis. Decompression is accomplished through endoscopic or percutaneous placement of self-expanding metallic **biliary stents**. Unilateral drainage that opacifies and drains at least fifty percent of functional liver parenchyma is sufficient to resolve clinical jaundice and improve overall quality of life.",
+   "say": "Palliative management of unresectable cholangiocarcinoma relies on metallic stent placement to relieve obstructive jaundice and prevent cholangitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plastic Biliary Stents",
+     "points": [
+      "Inexpensive and easily exchangeable",
+      "Prone to bacterial biofilm clogging",
+      "Average patency 3 to 4 months",
+      "Preferred for temporary preoperative drainage"
+     ]
+    },
+    "right": {
+     "title": "Self-Expanding Metal Stents",
+     "points": [
+      "Wide calibre (10 mm lumen)",
+      "Significantly lower occlusion rates",
+      "Average patency 9 to 12 months",
+      "Gold standard for palliative unresectable disease"
+     ]
+    }
+   }
+  }
+ ]
+}

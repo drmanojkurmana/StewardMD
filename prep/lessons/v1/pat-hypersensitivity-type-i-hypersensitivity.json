@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Immediate Hypersensitivity, IgE-Mast Cell Axis, and Systemic Anaphylaxis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Immune responses that produce tissue injury and clinical disease through excessive or inappropriate activation of host effector mechanisms are classified as hypersensitivity reactions. Rapid immune-mediated tissue reactions occurring within minutes of antigen re-exposure in sensitized individuals define **Type I hypersensitivity**.",
+      "say": "Type I hypersensitivity is an immediate IgE-mediated reaction occurring within minutes of antigen exposure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "allergen_presentation",
+            "label": "Dendritic Cells Present Inhaled or Ingested Allergen to CD4+ T-Cells"
+          },
+          {
+            "id": "th2_differentiation",
+            "label": "Interleukin-4 and Interleukin-13 Drive Naive T-Cells Toward Th2 Phenotype"
+          },
+          {
+            "id": "ige_class_switching",
+            "label": "Th2 Cytokines Direct B-Lymphocytes to Undergo IgE Class Switching"
+          },
+          {
+            "id": "mast_cell_sensitization",
+            "label": "Secreted IgE Binds High-Affinity FceRI Receptors on Tissue Mast Cells"
+          }
+        ],
+        "edges": [
+          [
+            "allergen_presentation",
+            "th2_differentiation"
+          ],
+          [
+            "th2_differentiation",
+            "ige_class_switching"
+          ],
+          [
+            "ige_class_switching",
+            "mast_cell_sensitization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sensitization begins when naive CD4+ helper T-cells encounter protein allergens and differentiate into T-helper 2 cells under interleukin-4 stimulation. Secreted IL-4 and IL-13 direct cognate B-lymphocytes to undergo heavy-chain class switching, producing high titers of allergen-specific **immunoglobulin E (IgE)** antibodies.",
+      "say": "Th2 cytokines drive B cells to switch to allergen-specific IgE antibody production.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Th2 Sensitization Phase",
+          "points": [
+            "Driven by interleukin-4 and interleukin-13 secretion from Th2 lymphocytes",
+            "B-lymphocytes undergo productive heavy-chain class switching to IgE",
+            "Circulating IgE binds tightly to FceRI receptors on tissue mast cells",
+            "Patient becomes fully sensitized without demonstrating immediate tissue symptoms"
+          ]
+        },
+        "right": {
+          "title": "Immediate Effector Phase",
+          "points": [
+            "Multivalent allergen binds and crosslinks adjacent receptor-bound IgE molecules",
+            "Intracellular tyrosine kinase phosphorylation triggers explosive degranulation",
+            "Preformed histamine release induces instantaneous vasodilation and wheal",
+            "Symptoms manifest within two to fifteen minutes following re-exposure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The cellular orchestrators of immediate hypersensitivity reside in vascularized connective tissues adjacent to blood vessels and mucosal interfaces. Expressing over one hundred thousand high-affinity FceRI receptors on their plasma membranes, tissue **mast cells** bind circulating monomeric IgE with extraordinary affinity, awaiting subsequent allergen exposure.",
+      "say": "Tissue mast cells bind IgE via high-affinity FceRI receptors, awaiting allergen re-exposure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fceri_structure",
+            "label": "Tetrameric FceRI Comprises One Alpha, One Beta, and Two Gamma Chains"
+          },
+          {
+            "id": "ige_binding",
+            "label": "IgE Fc Domain Anchors with Sub-Nanomolar Dissociation Constant"
+          },
+          {
+            "id": "primed_state",
+            "label": "Coated Mast Cells Remain Sensitized Throughout Tissue Microenvironment"
+          }
+        ],
+        "edges": [
+          [
+            "fceri_structure",
+            "ige_binding"
+          ],
+          [
+            "ige_binding",
+            "primed_state"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Upon re-encountering multivalent allergen, binding bridges adjacent receptor-bound IgE molecules. Crosslinking of high-affinity FceRI complexes activates Lyn and Syk tyrosine kinases, triggering explosive exocytosis of preformed cytoplasmic granules containing histamine, heparin, neutral proteases, and chemotactic factors during **mast cell degranulation**.",
+      "say": "IgE crosslinking triggers explosive mast cell degranulation, releasing histamine and proteases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mast Cell Mediator",
+          "Biochemical Category",
+          "Pathophysiologic Action"
+        ],
+        "rows": [
+          [
+            "Histamine",
+            "Preformed Granule Amine",
+            "Arteriolar Vasodilation, Venular Leak, Bronchospasm"
+          ],
+          [
+            "Prostaglandin D2",
+            "De Novo Lipid Arachidonate",
+            "Intense Bronchoconstriction, Mucous Hypersecretion"
+          ],
+          [
+            "Leukotrienes C4, D4, E4",
+            "De Novo 5-Lipoxygenase Lipid",
+            "Potent Sustained Bronchoconstriction, Vascular Leak"
+          ],
+          [
+            "Cytokines (TNF, IL-4, IL-5)",
+            "Synthesized Inflammatory Proteins",
+            "Recruitment of Neutrophils and Eosinophils for Late Phase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic introduction of allergens via insect stings, intravenous drugs, or food ingestion triggers widespread degranulation of intravascular basophils and perivascular mast cells throughout the body. Sudden systemic vasodilation, profound capillary leak, laryngeal edema, and acute bronchospasm define life-threatening **systemic anaphylaxis**.",
+      "say": "Systemic anaphylaxis is a life-threatening shock state caused by widespread IgE-mediated degranulation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaphylaxis-fig1.webp",
+        "alt": "Systemic anaphylaxis pathophysiology showing multiorgan shock and airway edema",
+        "caption": "Multiorgan pathophysiological cascade of systemic anaphylaxis requiring emergency adrenaline."
+      }
+    },
+    {
+      "tx": "Localized cutaneous immediate hypersensitivity reactions manifest as pruritic, erythematous, edematous plaques with central pallor. Driven by histamine-induced dermal arteriolar vasodilation and postcapillary venular hyperpermeability following allergen contact, this transient skin eruption is designated clinically as **urticaria and wheal-and-flare**, resolving within twenty-four hours.",
+      "say": "Urticaria produces pruritic wheals from localized mast cell histamine release.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/urticaria-angioedema-fig1.webp",
+        "alt": "Urticaria wheal and flare formation in cutaneous immediate hypersensitivity",
+        "caption": "Cutaneous mast cell activation generating dermal edema and the wheal-and-flare reaction."
+      }
+    },
+    {
+      "tx": "In bronchial asthma, allergen inhalation triggers an immediate phase of acute bronchospasm, mucosal edema, and mucus plugging resolving within an hour. However, six to twelve hours later, a second wave of inflammation develops without additional allergen re-exposure, representing the **late phase reaction**.",
+      "say": "The late-phase reaction develops hours later as recruited eosinophils release major basic protein.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-exac-fig2.webp",
+        "alt": "Asthma airway inflammation and eosinophil recruitment in late phase response",
+        "caption": "Eosinophil and Th2 lymphocyte recruitment driving mucosal injury during the late-phase reaction."
+      }
+    },
+    {
+      "tx": "The late phase reaction is orchestrated by recruited inflammatory leukocytes, predominantly eosinophils attracted by eotaxin and activated by interleukin-5. Degranulation of recruited eosinophils releases major basic protein, eosinophil cationic protein, and eosinophil peroxidase, causing extensive epithelial denudation during **eosinophilic airway damage**.",
+      "say": "Eosinophil granule proteins cause extensive epithelial shedding in chronic allergic asthma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "il5_secretion",
+            "label": "Th2 Cells and Mast Cells Secrete IL-5, Eotaxin, and Leukotriene B4"
+          },
+          {
+            "id": "eosinophil_homing",
+            "label": "Circulating Eosinophils Arrest on Endothelium and Infiltrate Airway Walls"
+          },
+          {
+            "id": "granule_toxins",
+            "label": "Release of Major Basic Protein and Eosinophil Cationic Protein"
+          },
+          {
+            "id": "epithelial_sloughing",
+            "label": "Extensive Desquamation of Respiratory Epithelium and Chronic Remodeling"
+          }
+        ],
+        "edges": [
+          [
+            "il5_secretion",
+            "eosinophil_homing"
+          ],
+          [
+            "eosinophil_homing",
+            "granule_toxins"
+          ],
+          [
+            "granule_toxins",
+            "epithelial_sloughing"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

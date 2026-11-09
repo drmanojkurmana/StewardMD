@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-mendelian-disorders",
+  "subject": "pathology",
+  "title": "Inherited Iron Overload, Variable Expressivity, and Incomplete Penetrance",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Disorders of systemic iron homeostasis lead to lifelong progressive iron accumulation within parenchymal tissues. Excessive duodenal iron absorption causing cytotoxic free radical damage and organ fibrosis characterizes the classical autosomal recessive disease **hereditary haemochromatosis**, predisposing to cirrhosis and hepatocellular carcinoma.",
+      "say": "Hereditary hemochromatosis is an inherited disorder causing excessive intestinal iron absorption.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alcohol-liver-disease-fig1.webp",
+        "alt": "Hepatic steatosis, inflammation, and fibrosis leading to micronodular cirrhosis",
+        "caption": "Progressive parenchymal injury, chronic inflammation, and cirrhosis resulting from metabolic overload."
+      }
+    },
+    {
+      "tx": "More than eighty percent of hereditary hemochromatosis cases stem from a specific missense substitution of tyrosine for cysteine at position 282 of the HFE protein on chromosome 6p21.3. This homozygous mutation is designated as the **C282Y HFE mutation**, which impairs association with beta-2 microglobulin.",
+      "say": "The homozygous C282Y mutation in the HFE gene is the primary cause of hereditary hemochromatosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c282y_mutation",
+            "label": "Homozygous C282Y Point Mutation in HFE Gene on 6p21.3"
+          },
+          {
+            "id": "beta2m_binding",
+            "label": "Disrupts Beta-2 Microglobulin Binding and Membrane Transport"
+          },
+          {
+            "id": "hepcidin_dysregulation",
+            "label": "Blunted Hepatic Sensing of Plasma Transferrin Saturation"
+          }
+        ],
+        "edges": [
+          [
+            "c282y_mutation",
+            "beta2m_binding"
+          ],
+          [
+            "beta2m_binding",
+            "hepcidin_dysregulation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Normally, hepatocytes secrete the peptide hormone hepcidin in response to elevated circulating iron, which binds and degrades the basolateral iron exporter ferroportin. In hereditary hemochromatosis, defective HFE signalling leads to inappropriately low hepcidin, termed functional **hepcidin deficiency**, permitting continuous iron export into portal blood.",
+      "say": "Hepcidin deficiency allows unrestrained ferroportin activity and continuous intestinal iron absorption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "low_hepcidin",
+            "label": "Impaired HFE Signalling Lowers Hepatic Hepcidin Secretion"
+          },
+          {
+            "id": "active_ferroportin",
+            "label": "Basolateral Enterocyte Ferroportin Remains Continuously Open"
+          },
+          {
+            "id": "uncontrolled_absorption",
+            "label": "Excessive Dietary Iron Absorbed Directly into Portal Blood"
+          },
+          {
+            "id": "parenchymal_overload",
+            "label": "Toxic Iron Accumulation Within Liver, Pancreas, and Heart"
+          }
+        ],
+        "edges": [
+          [
+            "low_hepcidin",
+            "active_ferroportin"
+          ],
+          [
+            "active_ferroportin",
+            "uncontrolled_absorption"
+          ],
+          [
+            "uncontrolled_absorption",
+            "parenchymal_overload"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accumulation of greater than twenty grams of parenchymal iron causes toxic Fenton reactions and lipid peroxidation. Destruction of pancreatic beta cells paired with skin dermal iron and melanin deposition produces the classical clinical presentation known as **bronze diabetes**, accompanied by micronodular cirrhosis and cardiomyopathy.",
+      "say": "Bronze diabetes describes the combination of pancreatic endocrine failure and dark skin pigmentation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+        "alt": "Micronodular cirrhosis and portal inflammation from chronic parenchymal injury",
+        "caption": "Hepatocellular injury and chronic portal fibrosis leading toward end-stage micronodular cirrhosis."
+      }
+    },
+    {
+      "tx": "On diagnostic liver biopsy, extensive golden-brown granular pigment accumulates within hepatocyte cytoplasm. Exposing histological tissue sections to acid ferrocyanide reacts with ferric iron to yield an insoluble bright blue ferri-ferrocyanide precipitate, the diagnostic **Perls Prussian blue reaction**, confirming extensive pathological hemosiderin deposition.",
+      "say": "Perls Prussian blue stain identifies ferric iron deposition within hepatocytes and bile duct cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hemosiderin (Prussian Blue Positive)",
+          "points": [
+            "Pathological aggregates of ferric iron phosphate and protein within lysosomes",
+            "Reacts with potassium ferrocyanide in acidic solution to form Turnbull blue precipitate",
+            "Directly reflects systemic iron overload states such as hemochromatosis and hemosiderosis",
+            "Initially accumulates in periportal hepatocytes before extending to bile duct epithelium"
+          ]
+        },
+        "right": {
+          "title": "Lipofuscin (Prussian Blue Negative)",
+          "points": [
+            "Wear-and-tear insoluble pigment derived from free radical peroxidation of lipids",
+            "Shows golden-brown autofluorescent granules that remain completely negative on Prussian blue",
+            "Accumulates physiologically in aging tissues, brown atrophy of the heart, and senescent liver",
+            "Harmless marker of prior cellular injury without requiring therapeutic phlebotomy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A critical principle in clinical genetics is that carrying a pathogenic genotype does not guarantee clinical disease expression. The proportion of individuals with a specific mutant genotype who exhibit phenotypic features represents genetic penetrance, with hemochromatosis demonstrating notable **incomplete penetrance**.",
+      "say": "Incomplete penetrance means some individuals with mutant genotypes never develop clinical disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic Concept",
+          "Definition",
+          "Example in Hereditary Hemochromatosis"
+        ],
+        "rows": [
+          [
+            "Incomplete Penetrance",
+            "Fraction of Genotype Carriers Displaying Any Disease",
+            "Less than 30% of C282Y Homozygous Males Develop Cirrhosis"
+          ],
+          [
+            "Variable Expressivity",
+            "Differences in Clinical Severity Among Affected Carriers",
+            "Mild Fatigue in Some Versus Severe End-Stage Cirrhosis in Others"
+          ],
+          [
+            "Sex-Linked Protection",
+            "Physiological Iron Loss Diminishing Phenotypic Severity",
+            "Menstruation and Pregnancy Protecting Pre-Menopausal Females"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Even among patients with identical C282Y homozygous mutations who manifest clinical signs, disease severity varies considerably from asymptomatic transferrin elevation to fulminant cardiac failure. This variation in phenotypic severity among individuals carrying the same genotype is termed **variable expressivity**, shaped by alcohol use and dietary iron intake.",
+      "say": "Variable expressivity describes the wide spectrum of symptom severity seen across affected patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "identical_genotype",
+            "label": "Patients Carry Identical Homozygous C282Y HFE Mutations"
+          },
+          {
+            "id": "modifying_influences",
+            "label": "Dietary Iron Intake, Alcohol Consumption, and Modifier Genes"
+          },
+          {
+            "id": "divergent_outcomes",
+            "label": "Ranges from Isolated Ferritin Elevation to Fatal Cirrhosis"
+          }
+        ],
+        "edges": [
+          [
+            "identical_genotype",
+            "modifying_influences"
+          ],
+          [
+            "modifying_influences",
+            "divergent_outcomes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical expression of hemochromatosis is shaped by environmental and physiological factors. Menstrual blood loss and pregnancy protect premenopausal women against iron accumulation, while chronic alcohol ingestion accelerates oxidative injury, illustrating the importance of **phenotypic disease modifiers** in determining the timeline of organ damage.",
+      "say": "Alcohol use and physiological blood loss modify the penetrance and severity of hemochromatosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "protective_factors",
+            "label": "Menstruation and Pregnancy Deplete Excess Iron Stores"
+          },
+          {
+            "id": "exacerbating_factors",
+            "label": "Alcohol, High Dietary Iron, and Viral Hepatitis Accelerate Fibrosis"
+          },
+          {
+            "id": "clinical_outcome",
+            "label": "Marked Delay in Female Onset Compared to Severe Male Phenotypes"
+          }
+        ],
+        "edges": [
+          [
+            "protective_factors",
+            "clinical_outcome"
+          ],
+          [
+            "exacerbating_factors",
+            "clinical_outcome"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

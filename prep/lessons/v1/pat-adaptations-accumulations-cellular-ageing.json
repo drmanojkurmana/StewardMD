@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-adaptations-accumulations",
+  "subject": "pathology",
+  "title": "Mechanisms of Cellular Ageing, Telomere Shortening, and Progeria",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The progressive functional decline and vulnerability to death accompanying chronological age arises from cumulative molecular and cellular damage. The fundamental mechanisms of **cellular ageing** encompass persistent DNA damage, replicative senescence driven by telomere shortening, defective protein homeostasis, and deregulation of nutrient-sensing anabolic signaling pathways.",
+      "say": "Cellular ageing results from accumulated DNA damage, telomere shortening, and defective protein homeostasis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/age-related-functional-decline-fig1.webp",
+        "caption": "Multisystem physiological and organellar decline accompanying chronological cellular aging.",
+        "alt": "Diagram illustrating multiorgan functional senescence and molecular aging pathways"
+      }
+    },
+    {
+      "tx": "Normal human somatic cells possess a finite replicative lifespan, dividing only fifty to seventy times in culture before permanently arresting in the G1 phase of the cell cycle. Discovered by Leonard Hayflick, this permanent cessation of mitotic division without cell death represents the **Hayflick limit**, establishing replicative senescence as a protective barrier against malignancy.",
+      "say": "The Hayflick limit restricts human somatic cells to fifty to seventy divisions before replicative senescence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "serial_passages",
+            "label": "Primary Human Somatic Fibroblasts Undergo Serial Mitotic Cell Divisions"
+          },
+          {
+            "id": "telomere_deplete",
+            "label": "Incomplete Lagging-Strand Synthesis Progressively Shortens Telomeric Ends"
+          },
+          {
+            "id": "ddr_checkpoint",
+            "label": "Critical Shortening Trigger Persistent ATM/ATR DNA Damage Response"
+          },
+          {
+            "id": "p16_p21_arrest",
+            "label": "Induction of p53, p21, and p16INK4a Locks Cell Permanently in G1 Arrest"
+          }
+        ],
+        "edges": [
+          [
+            "serial_passages",
+            "telomere_deplete"
+          ],
+          [
+            "telomere_deplete",
+            "ddr_checkpoint"
+          ],
+          [
+            "ddr_checkpoint",
+            "p16_p21_arrest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Replicative senescence is driven mechanistically by the progressive shortening of specialized nucleoprotein caps situated at the terminal ends of linear eukaryotic chromosomes. Known as **telomeres**, these repetitive hexanucleotide TTAGGG sequences prevent chromosome ends from being mistakenly recognized and repaired as double-stranded DNA breaks by non-homologous end joining.",
+      "say": "Telomeres are protective hexanucleotide repeat caps that shorten with each division due to replication limits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intact Functional Telomeres",
+          "points": [
+            "Consist of hundreds of tandem non-coding TTAGGG repeats",
+            "Single-stranded 3' overhang loops back into protective T-loop",
+            "Shielded by six-protein shelterin complex (TRF1, TRF2, POT1)",
+            "Prevents end-to-end chromosomal fusion and inappropriate repair"
+          ]
+        },
+        "right": {
+          "title": "Critically Shortened Telomeres",
+          "points": [
+            "End-replication problem progressively truncates terminal 50-100 base pairs",
+            "Shelterin complex unbinds, uncapping naked linear chromosomal DNA",
+            "Recognized by repair enzymes as double-stranded breaks (uncapped state)",
+            "Activates persistent p53/p21 checkpoint, halting cell cycle progression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because conventional DNA polymerases require RNA primers to initiate lagging strand synthesis, the extreme terminal five-prime ends of linear DNA cannot be fully replicated. Termed the **end-replication problem**, each round of cell division leaves terminal lagging strands incomplete, trimming fifty to one hundred base pairs from chromosome ends with every cycle.",
+      "say": "The end-replication problem trims telomere base pairs during lagging strand synthesis with every division.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "replication_fork",
+            "label": "Replication Fork Progresses to Extreme Linear End of Chromosome"
+          },
+          {
+            "id": "primer_removal",
+            "label": "Terminal RNA Primer Removed by Flap Endonuclease-1"
+          },
+          {
+            "id": "gap_unfilled",
+            "label": "DNA Polymerase Cannot Synthesize 5'-to-3' Without Upstream Primer"
+          },
+          {
+            "id": "telomere_attrition",
+            "label": "Chromosome Ends Shorten by 50 to 100 Base Pairs per Cycle"
+          }
+        ],
+        "edges": [
+          [
+            "replication_fork",
+            "primer_removal"
+          ],
+          [
+            "primer_removal",
+            "gap_unfilled"
+          ],
+          [
+            "gap_unfilled",
+            "telomere_attrition"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Germ cells, embryonic stem cells, and cancer cells maintain immortality by expressing a specialized ribonucleoprotein reverse transcriptase. Named **telomerase**, this enzyme contains an internal RNA template (TERC) and a catalytic reverse transcriptase subunit (TERT) that repeatedly synthesizes and adds TTAGGG repeats de novo onto telomeric ends.",
+      "say": "Telomerase uses an internal RNA template to add telomere repeats de novo, granting cellular immortality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Somatic Tissues",
+          "points": [
+            "Telomerase catalytic subunit (TERT) transcriptionally repressed",
+            "Telomeres shorten progressively with chronological age and division",
+            "Undergo Hayflick replicative senescence to block neoplastic expansion",
+            "Shortening contributes to stem cell exhaustion and tissue atrophy"
+          ]
+        },
+        "right": {
+          "title": "Malignant Neoplasms (>85-90%)",
+          "points": [
+            "Reactivate telomerase expression via TERT promoter mutations",
+            "Maintain stable telomere length indefinitely (cellular immortality)",
+            "Escape Hayflick replicative senescence and crisis catastrophe",
+            "Minority of cancers utilize Alternative Lengthening of Telomeres (ALT)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rare autosomal recessive genetic syndromes caused by defective DNA repair helicases or lamin proteins produce dramatic premature aging phenotypes. In **Hutchinson-Gilford progeria syndrome**, a de novo point mutation in the LMNA gene generates an aberrant, permanently farnesylated truncated lamin A protein designated progerin, disrupting nuclear envelope stability.",
+      "say": "Hutchinson-Gilford progeria results from mutant progerin protein that destabilizes the nuclear lamina.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lmna_mutation",
+            "label": "Silent G608G Mutation in LMNA Gene Activates Cryptic Splice Donor Site"
+          },
+          {
+            "id": "progerin_protein",
+            "label": "Deletion of 50 Amino Acids Prevents Cleavage of Hydrophobic Farnesyl Group"
+          },
+          {
+            "id": "nuclear_blebbing",
+            "label": "Permanently Farnesylated Progerin Accumulates, Distorting Nuclear Lamina"
+          },
+          {
+            "id": "accelerate_senescence",
+            "label": "Causes Severe Chromatin Blebbing, Rapid DNA Damage, and Early Senescence"
+          }
+        ],
+        "edges": [
+          [
+            "lmna_mutation",
+            "progerin_protein"
+          ],
+          [
+            "progerin_protein",
+            "nuclear_blebbing"
+          ],
+          [
+            "nuclear_blebbing",
+            "accelerate_senescence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adult-onset premature aging is exemplified by Werner syndrome, caused by loss-of-function mutations in the WRN gene on chromosome 8p. The defective WRN protein is a RecQ **DNA helicase and exonuclease**, whose loss impairs homologous recombination repair of replication fork stalls, accelerating genomic instability, cataracts, atherosclerosis, and premature death in young adulthood.",
+      "say": "Werner syndrome is adult-onset progeria caused by defective WRN DNA helicase and exonuclease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hutchinson-Gilford Progeria (Infantile)",
+          "points": [
+            "Mutations in LMNA gene encoding nuclear scaffold protein lamin A",
+            "Normal at birth; develops severe growth failure and alopecia by age 1-2",
+            "Displays bird-like facies, micrognathia, thin skin, and joint contractures",
+            "Premature death by age 13 to 15 from severe myocardial infarction"
+          ]
+        },
+        "right": {
+          "title": "Werner Syndrome (Adult Progeria)",
+          "points": [
+            "Mutations in WRN gene encoding RecQ DNA helicase/exonuclease",
+            "Normal development through childhood; growth stops in adolescence",
+            "Presents in twenties with graying, alopecia, cataracts, and scleroderma",
+            "Premature death in forties from severe atherosclerosis or soft-tissue sarcoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Evolutionarily conserved nutrient-sensing pathways modulate the rate of aging across species. Caloric restriction without malnutrition extends lifespan by suppressing insulin-like growth factor-one and mammalian target of rapamycin (mTOR) signaling while activating sirtuin NAD-dependent deacetylases and **AMP-activated protein kinase**, boosting DNA repair and autophagy.",
+      "say": "Caloric restriction slows aging by downregulating mTOR and activating sirtuins and AMPK.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/androgen-deficiency-aging-male-fig1.webp",
+        "caption": "Endocrine and metabolic axis alterations accompanying chronological somatic senescence.",
+        "alt": "Metabolic and hormonal alterations accompanying systemic physiological aging"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

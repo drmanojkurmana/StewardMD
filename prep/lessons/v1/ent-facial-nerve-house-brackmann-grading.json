@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "id": "ent-facial-nerve-house-brackmann-grading",
+ "subject": "ent",
+ "module": "ent-facial-nerve",
+ "title": "Facial Nerve Grading, Topodiagnosis, and Temporal Trauma",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The House-Brackmann facial nerve grading system is the internationally accepted standard for classifying the severity of peripheral facial nerve motor dysfunction. Grading spans six progressive categories from Grade I (completely normal motor function across all branches) to **Grade VI**, representing total, flaccid facial paralysis with zero muscle tone or voluntary movement. Systematic grading guides prognosis and surgical intervention.",
+   "say": "The House-Brackmann grading system classifies facial palsy into six grades, ranging from Grade one normal function to Grade six total flaccid paralysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/facial-nerve-disorders-fig1.webp",
+    "alt": "Clinical photographic schematic depicting facial asymmetry across House-Brackmann grading categories",
+    "caption": "House-Brackmann clinical grading scale categorizing peripheral facial paralysis severity. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "House-Brackmann Grade II represents mild dysfunction with slight weakness on close inspection, complete eye closure with minimal effort, and symmetric mouth motion at rest. Grade III denotes moderate dysfunction with obvious but not disfiguring difference, complete eye closure with effort, and noticeable asymmetric mouth movement during smiling. Grade IV represents moderately severe dysfunction with obvious disfigurement and **incomplete eye closure**.",
+   "say": "Grade two is mild weakness with easy eye closure. Grade three has obvious weakness but complete eye closure with effort. Grade four displays disfiguring weakness and incomplete eye closure.",
+   "vis": {
+    "kind": "table",
+    "title": "House-Brackmann Peripheral Facial Nerve Grading Scale",
+    "cols": [
+     "Grade Level",
+     "Gross Appearance & Tone",
+     "Forehead Motion",
+     "Eye Closure Ability",
+     "Mouth Motion"
+    ],
+    "rows": [
+     [
+      "Grade I: Normal",
+      "Normal symmetry and tone",
+      "Normal bilateral movement",
+      "Complete closure with ease",
+      "Normal symmetrical motion"
+     ],
+     [
+      "Grade II: Mild",
+      "Slight weakness on inspection",
+      "Moderate to good motion",
+      "Complete closure with minimal effort",
+      "Slight asymmetry with smiling"
+     ],
+     [
+      "Grade III: Moderate",
+      "Obvious asymmetry; not disfiguring",
+      "Slight to moderate movement",
+      "Complete closure with maximal effort",
+      "Slightly weak with maximal effort"
+     ],
+     [
+      "Grade IV: Moderately severe",
+      "Obvious disfiguring asymmetry",
+      "Zero movement of forehead",
+      "Incomplete eye closure",
+      "Asymmetrical mouth with effort"
+     ],
+     [
+      "Grade V: Severe",
+      "Barely perceptible motion",
+      "Zero movement",
+      "Incomplete eye closure",
+      "Slight movement of oral angle"
+     ],
+     [
+      "Grade VI: Total",
+      "Zero movement, loss of tone",
+      "Completely immobile",
+      "Completely immobile",
+      "Completely flaccid and immobile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Topodiagnostic testing localizes the level of a lesion along the intratemporal course of the facial nerve by assessing its specific branches. The **Schirmer test** evaluates lacrimal secretomotor function driven by the greater superficial petrosal nerve. Strips of filter paper five millimetres wide are hooked over the lateral third of the lower conjunctival sacs for five minutes. Wetting of less than five millimetres, or half of the contralateral eye, confirms a geniculate lesion.",
+   "say": "The Schirmer test evaluates lacrimal tearing from the greater superficial petrosal nerve. Wetting less than five millimetres indicates a lesion at or proximal to the geniculate ganglion.",
+   "vis": {
+    "kind": "table",
+    "title": "Topodiagnostic Battery for Intratemporal Facial Nerve Lesions",
+    "cols": [
+     "Diagnostic Test",
+     "Tested Branch & Segment",
+     "Normal Physiological Value",
+     "Significance of Failure"
+    ],
+    "rows": [
+     [
+      "Schirmer tear test",
+      "Greater petrosal nerve (Geniculate)",
+      "Wetting > 15 mm in 5 minutes",
+      "Lesion at or proximal to geniculate"
+     ],
+     [
+      "Stapedial reflex test",
+      "Nerve to stapedius (Mastoid segment)",
+      "Bilateral reflex between 70-100 dB",
+      "Lesion at or above vertical segment"
+     ],
+     [
+      "Electrogustometry",
+      "Chorda tympani (Distal mastoid)",
+      "Electrical taste threshold < 20 uA",
+      "Lesion proximal to chorda tympani"
+     ],
+     [
+      "Submandibular salivary flow",
+      "Chorda tympani (Submandibular)",
+      "Salivary volume within 25% of other",
+      "Reduced flow confirms chorda injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electroneurography (ENoG) is an objective electrophysiological assessment measuring the compound muscle action potential across facial muscles following supramaximal electrical stimulation of the facial nerve trunk at the stylomastoid foramen. Comparing peak-to-peak amplitude between the paralyzed and healthy sides calculates the percentage of degenerated axons. A degeneration exceeding **90% within fourteen days** signifies severe Wallerian degeneration and indicates surgical decompression.",
+   "say": "Electroneurography measures compound muscle action potentials. Degeneration exceeding ninety percent within fourteen days signals severe nerve injury, warranting surgical decompression.",
+   "vis": {
+    "kind": "flow",
+    "title": "Electroneurography Interpretation Sequence",
+    "nodes": [
+     {
+      "id": "en1",
+      "label": "Supramaximal Stimulation at Stylomastoid Foramen"
+     },
+     {
+      "id": "en2",
+      "label": "Record Nasolabial Compound Action Potential"
+     },
+     {
+      "id": "en3",
+      "label": "Degeneration >90% within 14 Days Prompts Decompression"
+     }
+    ],
+    "edges": [
+     [
+      "en1",
+      "en2"
+     ],
+     [
+      "en2",
+      "en3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electromyography (EMG) evaluates voluntary motor unit action potentials and denervation activity within facial muscles. Because Wallerian degeneration requires ten to twenty-one days to reach motor endplates, electromyography cannot assess acute injury in the first week. However, after three weeks, denervated muscle fibers develop spontaneous **fibrillation potentials**, whereas early reinnervation manifests as nascent polyphasic motor unit potentials that herald clinical recovery.",
+   "say": "Electromyography detects denervation after three weeks through spontaneous fibrillation potentials, while nascent polyphasic potentials signal successful nerve regeneration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fibrillation Potentials (Denervation)",
+     "points": [
+      "Appear 14 to 21 days after axonal injury.",
+      "Spontaneous, irregular biphasic micro-spikes.",
+      "Indicate complete loss of axonal nerve input.",
+      "Signify ongoing motor muscle atrophy."
+     ]
+    },
+    "right": {
+     "title": "Nascent Polyphasic Units (Reinnervation)",
+     "points": [
+      "Appear 6 to 12 weeks after injury.",
+      "Low-amplitude, complex multi-peaked potentials.",
+      "Generated by newly sprouted collateral axons.",
+      "Earliest objective sign of spontaneous clinical recovery."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Temporal bone fractures resulting from severe blunt head trauma are classified anatomically according to their relationship to the long axis of the petrous pyramid. **Longitudinal fractures** comprise seventy to eighty percent of all temporal bone fractures, caused by lateral blows to the temporoparietal skull. The fracture line runs parallel to the petrous ridge, tearing the tympanic membrane, dislocating ossicles, and causing hemotympanum with conductive hearing loss.",
+   "say": "Longitudinal fractures account for eighty percent of temporal bone injuries. They parallel the petrous ridge, tearing the eardrum and disrupting ossicles with conductive hearing loss.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic comparing longitudinal and transverse temporal bone fracture lines and facial nerve relations",
+    "caption": "Temporal bone fracture trajectories: longitudinal fractures sparing the labyrinth versus transverse fractures traversing the otic capsule. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Transverse temporal bone fractures account for ten to twenty percent of injuries, caused by severe frontal or occipital impacts. The fracture line runs perpendicular to the petrous ridge, slicing directly through the otic capsule and internal acoustic meatus. This destroys the membranous labyrinth and cochlear nerve, causing immediate profound **sensorineural hearing loss**, violent rotational vertigo, and hemotympanum behind an intact drum.",
+   "say": "Transverse fractures slice perpendicular to the petrous pyramid through the otic capsule. They destroy the inner ear, causing immediate total deafness, vertigo, and facial paralysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Longitudinal Fracture (80%)",
+     "points": [
+      "Parallel to petrous pyramid from parietal blow.",
+      "Tears tympanic membrane with canal bleeding.",
+      "Conductive hearing loss due to ossicular dislocation.",
+      "Facial palsy in only 20% (Delayed onset, good prognosis)."
+     ]
+    },
+    "right": {
+     "title": "Transverse Fracture (20%)",
+     "points": [
+      "Perpendicular to petrous ridge from occipital blow.",
+      "Tympanic membrane intact; bluish hemotympanum.",
+      "Permanent profound sensorineural deafness and vertigo.",
+      "Facial palsy in 50% (Immediate onset, poor prognosis)."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The timing of facial paralysis onset dictates clinical management. Delayed onset facial paralysis occurring two to seven days following temporal trauma indicates inflammatory perineural edema or expanding hematoma, carrying an excellent prognosis and responding completely to conservative therapy with oral corticosteroids. Conversely, **immediate complete facial paralysis** developing at the moment of trauma signifies mechanical nerve laceration or bony transection, mandating urgent surgical exploration and repair.",
+   "say": "Delayed facial palsy stems from inflammatory swelling and responds to steroids. Immediate complete paralysis indicates traumatic nerve transection, demanding urgent surgical repair.",
+   "vis": {
+    "kind": "flow",
+    "title": "Triage of Post-Traumatic Facial Nerve Paralysis",
+    "nodes": [
+     {
+      "id": "pt1",
+      "label": "Post-Traumatic Facial Paralysis Assessment"
+     },
+     {
+      "id": "pt2",
+      "label": "Delayed Onset: Oral Prednisolone & Conservative Care"
+     },
+     {
+      "id": "pt3",
+      "label": "Immediate Onset: High-Resolution CT & Urgent Surgical Exploration"
+     }
+    ],
+    "edges": [
+     [
+      "pt1",
+      "pt2"
+     ],
+     [
+      "pt1",
+      "pt3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-061",
+  "bk2-ent-062",
+  "bk2-ent-063"
+ ]
+}

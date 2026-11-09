@@ -1,0 +1,265 @@
+{
+ "v": 1,
+ "id": "ent-sinusitis-allergic-fungal-rhinosinusitis",
+ "subject": "ent",
+ "module": "ent-sinusitis",
+ "title": "Allergic Fungal Sinusitis, FESS and Caldwell-Luc Operation",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Allergic fungal rhinosinusitis** is a non invasive hypersensitivity disease where atopic patients pack their sinuses with thick peanut butter like allergic mucin full of eosinophils and fungal hyphae. Multiple sinuses expand, remodel bone and sometimes erode toward orbit or skull base by pressure rather than invasion. Nasal polyps almost always coexist, and total immunoglobulin E runs markedly high in typical cases.",
+   "say": "Thick allergic mucin packed with eosinophils fills several sinuses in atopic patients with polyps. Expansion by pressure remodels bone and is not true tissue invasion by fungus. Markedly raised total antibody levels support the pattern in typical presentations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-cavity-and-paranasal-sinuses-fig1.webp",
+    "alt": "Coronal and sagittal diagrams of nasal cavity and paranasal sinuses showing sinus anatomy, sinusitis, polyps and inverted papilloma.",
+    "caption": "Sinus anatomy showing the cavities expanded by allergic fungal disease. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Computed tomography shows heterogeneous hyperdense material within expanded sinuses, while magnetic resonance shows striking signal void in inspissated mucin that can mimic air. **Bent and Kuhn criteria** formalise diagnosis using type one hypersensitivity, polyps, characteristic imaging, allergic mucin and fungal stain without invasion. Culture alone proves little because fungal spores contaminate healthy noses routinely, so histology of mucin carries the diagnostic weight.",
+   "say": "Scanning shows dense heterogeneous material inside expanded sinuses in this hypersensitivity disease. Formal criteria combine allergy, polyps, imaging, eosinophil rich mucin and fungal stain together. Contamination makes culture unreliable, so mucin histology carries the real diagnostic weight.",
+   "vis": {
+    "kind": "table",
+    "title": "Bent and Kuhn criteria elements",
+    "cols": [
+     "Element",
+     "Requirement"
+    ],
+    "rows": [
+     [
+      "Hypersensitivity",
+      "Type one allergy shown"
+     ],
+     [
+      "Polyps",
+      "Present on examination"
+     ],
+     [
+      "Imaging",
+      "Characteristic sinus changes"
+     ],
+     [
+      "Mucin",
+      "Allergic mucin with fungus, no invasion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment pairs complete surgical clearance of allergic mucin with postoperative **oral corticosteroids** tapered over months, followed by long term topical steroids and saline irrigation. Surgery alone relapses quickly because retained mucin reseeds inflammation, while steroids alone cannot extract established mucin loads. Immunotherapy and antifungal therapy remain debated adjuncts, considered case by case in specialist care rather than routine prescriptions for every patient.",
+   "say": "Clearing every pocket of allergic mucin surgically forms only half of effective treatment. Steroid tablets tapered over months, then long term topical therapy, suppress the hypersensitivity response. Relapse follows quickly whenever mucin remains or steroid cover stops too early.",
+   "vis": {
+    "kind": "flow",
+    "title": "Allergic fungal disease: combined treatment",
+    "nodes": [
+     {
+      "id": "fess",
+      "label": "Clear all allergic mucin surgically"
+     },
+     {
+      "id": "oral",
+      "label": "Taper oral steroids over months"
+     },
+     {
+      "id": "top",
+      "label": "Long term topical steroid and saline"
+     },
+     {
+      "id": "rev",
+      "label": "Endoscopic surveillance for relapse"
+     }
+    ],
+    "edges": [
+     [
+      "fess",
+      "oral"
+     ],
+     [
+      "oral",
+      "top"
+     ],
+     [
+      "top",
+      "rev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Functional endoscopic sinus surgery** widens natural sinus openings through the nose with telescopes and powered instruments, restoring ventilation and mucociliary drainage while preserving normal lining wherever possible. The surgeon uncaps the ethmoid bulla, removes the uncinate process and enlarges the maxillary ostium under image guidance for difficult anatomy. Stripping mucosa bare is avoided because exposed bone heals with scarring and failed drainage.",
+   "say": "Surgeons perform endoscopic surgery through the nose to restore ventilation and drainage. Preserving healthy lining is important because stripped bone scars and blocks drainage again. Image guidance provides assistance whenever anatomy is distorted or revision surgery is undertaken.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sinusitis-fig1.webp",
+    "alt": "Coronal illustration showing ostiomeatal obstruction, mucosal oedema and purulent exudate in the maxillary sinus, the obstruction endoscopic surgery relieves.",
+    "caption": "Ostiomeatal obstruction that endoscopic surgery relieves. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serious complications of endoscopic surgery are uncommon but memorable: orbital haematoma or blindness from lamina papyracea breach, cerebrospinal fluid leak from skull base injury, and major bleeding from anterior ethmoidal or sphenopalatine arteries. Preoperative scan review mapping the lamina, skull base height and Onodi cells prevents most injuries. **Informed consent** names these risks explicitly before any elective sinus operation proceeds.",
+   "say": "Blindness, spinal fluid leak and major bleeding headline the serious risks of sinus surgery. Careful scan review mapping the orbit wall and skull base prevents most such injuries. Consent discussions name these risks explicitly before elective operations proceed.",
+   "vis": {
+    "kind": "table",
+    "title": "Endoscopic sinus surgery: major risks",
+    "cols": [
+     "Structure injured",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Lamina papyracea and orbit",
+      "Haematoma, diplopia, blindness"
+     ],
+     [
+      "Skull base",
+      "Cerebrospinal fluid leak, meningitis"
+     ],
+     [
+      "Ethmoidal or sphenopalatine artery",
+      "Major nasal haemorrhage"
+     ],
+     [
+      "Nasolacrimal duct",
+      "Epiphora needing further surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Caldwell-Luc operation** reaches the maxillary sinus through a sublabial incision and anterior bony window, once the standard route for clearing irreversible maxillary disease, dental foreign bodies and tumour access. Endoscopic middle meatal surgery has replaced it for routine inflammatory disease because Caldwell-Luc scars the anterior wall and risks infraorbital nerve numbness and dental pain. It survives for selected access problems that the endoscope cannot solve.",
+   "say": "An older operation entered the maxillary sinus through the gum and cheek bone window. Endoscopic surgery replaced it for routine inflammation because numbness and dental pain followed more often. Selected access problems still justify the external route in modern practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic surgery",
+     "points": [
+      "Through natural nasal openings",
+      "Preserves lining and drainage",
+      "First choice for inflammatory disease",
+      "Risks orbit and skull base"
+     ]
+    },
+    "right": {
+     "title": "Caldwell-Luc operation",
+     "points": [
+      "Sublabial anterior wall window",
+      "Wide direct sinus access",
+      "Infraorbital numbness risk",
+      "Now reserved for selected access"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pott puffy tumour** is a subperiosteal abscess of the frontal bone with overlying forehead swelling, arising when frontal sinusitis spreads through diploic veins causing frontal osteomyelitis. Despite the name it is infection, not neoplasm, and it threatens the anterior cranial fossa behind the sinus. Urgent imaging, intravenous antibiotics and combined neurosurgical drainage replace any temptation to treat forehead swelling as simple cellulitis.",
+   "say": "Forehead swelling over an infected frontal sinus signals bone infection rather than simple cellulitis. Venous spread from the sinus seeds the frontal bone and threatens the brain behind it. Emergency imaging, intravenous antibiotics and drainage follow without delay.",
+   "vis": {
+    "kind": "table",
+    "title": "Pott puffy tumour actions",
+    "cols": [
+     "Action",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Urgent CT or MRI",
+      "Map bone and brain extension"
+     ],
+     [
+      "IV antibiotics",
+      "Treat osteomyelitis source"
+     ],
+     [
+      "Drainage with neurosurgery",
+      "Protect anterior cranial fossa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative care after sinus surgery sustains the surgical result with saline irrigation, topical steroids once healing allows, and scheduled endoscopic debridement of crusts and early adhesions. Patients report smell, blockage and discharge scores so deterioration is caught numerically. **Revision surgery** is planned only after imaging shows persistent anatomical obstruction and maximal medical therapy has been documented as genuinely delivered and failed.",
+   "say": "Saline irrigation and topical steroids sustain surgical results while healing progresses over weeks. Scheduled endoscopic cleaning removes crusts and early adhesions before they obstruct drainage again. Revision waits for documented medical failure plus imaging proof of persistent obstruction.",
+   "vis": null
+  },
+  {
+   "tx": "Frontal sinus disease deserves special respect because the frontal recess drains through a narrow hourglass that scars easily after surgery or trauma. **Draf procedures** grade frontal drainage surgery from simple recess clearance to a common median opening for both frontal sinuses. Mucoceles expanding silently for years after old trauma present with eye displacement, linking this lesson directly to the orbital complications covered next.",
+   "say": "Narrow frontal drainage channels scar easily after surgery or old trauma injuries. Graded drainage procedures enlarge the recess step by step up to a shared median opening. Slowly expanding mucoceles years later displace the eye and demand imaging.",
+   "vis": {
+    "kind": "table",
+    "title": "Frontal drainage grades",
+    "cols": [
+     "Grade",
+     "Operation"
+    ],
+    "rows": [
+     [
+      "Draf one",
+      "Clear frontal recess"
+     ],
+     [
+      "Draf two",
+      "Enlarge frontal opening"
+     ],
+     [
+      "Draf three",
+      "Common median frontal opening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Candidates should anchor three contrasts firmly. Allergic fungal disease needs surgery plus sustained steroids, invasive fungal disease needs emergency debridement plus antifungals, and fungus ball needs surgery alone without antifungal drugs. Endoscopic surgery restores natural drainage, while Caldwell-Luc gives external access at higher morbidity. **Forehead swelling** with sinusitis always means Pott puffy tumour until imaging proves otherwise.",
+   "say": "Three fungal diseases need three clearly different treatment intensities in examination answers. Allergic disease combines surgery with sustained steroids, while invasive disease adds emergency antifungals. Forehead swelling with sinusitis is frontal bone infection until imaging proves otherwise.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal disease treatment intensity",
+    "cols": [
+     "Disease",
+     "Surgery",
+     "Drugs"
+    ],
+    "rows": [
+     [
+      "Fungus ball",
+      "Removal alone",
+      "No antifungal needed"
+     ],
+     [
+      "Allergic fungal",
+      "Clear all mucin",
+      "Oral then topical steroids"
+     ],
+     [
+      "Invasive fungal",
+      "Emergency debridement",
+      "Antifungals plus metabolic control"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Allergic fungal sinusitis treatment",
+   "b": "Complete surgical clearance of allergic mucin plus tapered oral steroids, then long term topical steroids and saline."
+  },
+  {
+   "f": "Caldwell-Luc operation",
+   "b": "Sublabial anterior wall approach to maxillary sinus; now reserved for selected access, replaced by endoscopic surgery for routine disease."
+  },
+  {
+   "f": "Pott puffy tumour",
+   "b": "Frontal subperiosteal abscess with osteomyelitis from frontal sinusitis; urgent imaging, IV antibiotics and drainage."
+  }
+ ],
+ "keys": [
+  "Allergic fungal disease: surgery plus sustained steroids",
+  "FESS restores natural drainage and preserves lining",
+  "Forehead swelling with sinusitis is Pott puffy tumour until disproved"
+ ]
+}

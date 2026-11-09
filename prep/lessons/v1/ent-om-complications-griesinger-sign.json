@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "ent-om-complications-griesinger-sign",
+ "subject": "ent",
+ "module": "ent-om-complications",
+ "title": "Sinus Thrombosis Signs, Brain Abscess, and Otogenic Palsy",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Extending thrombosis within the sigmoid dural sinus produces distinct clinical examination signs reflecting venous circulatory obstruction. Thrombosis extending into the mastoid emissary vein produces tender edema and cutaneous pitting over the posterior border of the mastoid process, designated **Griesinger sign**. This finding distinguishes thrombophlebitis from simple coalescent mastoiditis where edema is confined to the anterior mastoid cortex.",
+   "say": "Griesinger sign is tender edema over the posterior mastoid from thrombosis of the mastoid emissary vein, confirming extension from the sigmoid sinus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/complications-of-otitis-media-fig1.webp",
+    "alt": "Anatomical schematic showing mastoid emissary vein connecting sigmoid sinus to posterior retroauricular tissues",
+    "caption": "Thrombosis of the mastoid emissary vein producing localized retroauricular edema (Griesinger sign). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The Tobey-Ayer test, an otological modification of the Queckenstedt test, evaluates lateral sinus patency using lumbar manometry. Compressing the internal jugular vein on the healthy side produces a sharp, instantaneous rise in cerebrospinal fluid pressure on the manometer. In contrast, manual compression of the **ipsilateral internal jugular** vein on the thrombosed side produces no change or minimal sluggish rise in fluid pressure.",
+   "say": "The Tobey-Ayer test monitors spinal pressure during neck vein compression. Compressing the diseased side causes no pressure rise, confirming venous sinus occlusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compress Normal Jugular Vein",
+     "points": [
+      "Compresses the only patent venous drainage pathway.",
+      "Prompt and brisk rise in CSF manometer pressure (100 to 300 mm H2O).",
+      "Sharp drop back to baseline upon releasing compression.",
+      "Confirms functional dependence on the healthy contralateral sinus."
+     ]
+    },
+    "right": {
+     "title": "Compress Diseased Jugular Vein",
+     "points": [
+      "Compresses the already thrombosed venous channel.",
+      "Completely absent or negligible manometer rise (< 10 mm H2O).",
+      "No change observed upon releasing finger pressure.",
+      "Pathognomonic positive Tobey-Ayer test for sinus obstruction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otogenic intracranial suppuration represents a catastrophic complication of chronic cholesteatoma. Direct bone erosion through the tegmen tympani spreads infection into the middle cranial fossa, causing a **temporal lobe abscess**. Less frequently, erosion through Trautmann triangle into the posterior cranial fossa generates a cerebellar abscess, which carries higher mortality due to rapid brainstem compression and tonsillar herniation.",
+   "say": "Erosion through the tegmen causes temporal lobe brain abscess, while erosion through Trautmann triangle causes cerebellar abscess, which risks fatal brainstem compression.",
+   "vis": {
+    "kind": "table",
+    "title": "Comparison of Temporal Versus Cerebellar Brain Abscess",
+    "cols": [
+     "Feature",
+     "Temporal Lobe Abscess",
+     "Cerebellar Brain Abscess"
+    ],
+    "rows": [
+     [
+      "Bony route",
+      "Tegmen tympani or tegmen antri",
+      "Trautmann triangle / sinus plate"
+     ],
+     [
+      "Visual sign",
+      "Contralateral superior quadrantanopia",
+      "Normal visual fields"
+     ],
+     [
+      "Motor sign",
+      "Contralateral facial and arm weakness",
+      "Ipsilateral ataxia, intention tremor"
+     ],
+     [
+      "Speech sign",
+      "Nominal / sensory aphasia (Dominant)",
+      "Scanning staccato dysarthria"
+     ],
+     [
+      "Nystagmus",
+      "Absent or non-specific",
+      "Coarse horizontal/rotary to lesion side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain abscess evolves through four chronological stages: early cerebritis (days one to three), late cerebritis (days four to nine), early capsule formation (days ten to thirteen), and late capsule formation (day fourteen onwards). On contrast-enhanced computed tomography or magnetic resonance imaging, a mature abscess demonstrates a classic smooth, thin-walled, hyperdense **ring-enhancing capsule** surrounded by a prominent hypodense zone of vasogenic edema.",
+   "say": "A mature brain abscess demonstrates a thin, smooth ring-enhancing capsule on contrast imaging, enveloped by prominent hypodense cerebral edema.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ear-and-cpa-tumours-fig1.webp",
+    "alt": "Axial contrast-enhanced MRI brain showing posterior cranial fossa and middle cranial fossa anatomy",
+    "caption": "Intracranial imaging showing relationship of the temporal bone to middle and posterior cranial fossae. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Otitic meningitis is the most common intracranial complication of suppurative ear disease, presenting with high fever, severe generalized headache, photophobia, and signs of meningeal irritation including nuchal rigidity, Kernig sign, and Brudzinski sign. Lumbar puncture demonstrates markedly elevated opening pressure, cloudy **cerebrospinal fluid**, neutrophil pleocytosis, elevated protein exceeding one hundred milligrams per decilitre, and markedly depressed glucose.",
+   "say": "Otitic meningitis manifests with fever, headache, stiff neck, and photophobia. Spinal fluid shows neutrophil pleocytosis, high protein, and markedly depressed glucose.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Cerebrospinal Fluid Profile in Otitic Meningitis",
+    "cols": [
+     "CSF Parameter",
+     "Normal Physiological Value",
+     "Acute Otitic Bacterial Meningitis"
+    ],
+    "rows": [
+     [
+      "Opening pressure",
+      "70 to 180 mm H2O",
+      "Markedly elevated (> 250 mm H2O)"
+     ],
+     [
+      "Appearance",
+      "Crystal clear and colorless",
+      "Turbid, cloudy, or frankly purulent"
+     ],
+     [
+      "Cell count",
+      "< 5 mononuclear cells/mm3",
+      "Marked pleocytosis (1,000 to 10,000 neutrophils)"
+     ],
+     [
+      "Protein",
+      "15 to 45 mg/dL",
+      "Significantly elevated (100 to 500 mg/dL)"
+     ],
+     [
+      "Glucose",
+      "50 to 80 mg/dL (>60% blood level)",
+      "Markedly reduced (< 40% of simultaneous blood)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Labyrinthitis represents infectious spread into the inner ear fluid spaces, occurring in circumscribed, serous, or purulent varieties. Serous labyrinthitis is a sterile toxic irritation of the labyrinth, presenting with vertigo and irritative spontaneous nystagmus beating toward the affected ear with reversible hearing loss. In contrast, **suppurative labyrinthitis** involves actual bacterial invasion that permanently destroys sensory neuroepithelium, resulting in profound irreversible sensorineural deafness.",
+   "say": "Serous labyrinthitis is reversible toxic irritation with nystagmus beating to the diseased ear. Suppurative labyrinthitis causes permanent total deafness and severe vertigo.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serous Labyrinthitis",
+     "points": [
+      "Sterile toxic chemical labyrinthine irritation.",
+      "Irritative nystagmus beats TOWARD diseased ear.",
+      "Sensorineural hearing loss is partially reversible.",
+      "Vertigo abates rapidly with medical control."
+     ]
+    },
+    "right": {
+     "title": "Suppurative (Purulent) Labyrinthitis",
+     "points": [
+      "True bacterial colonization of inner ear spaces.",
+      "Paralytic nystagmus beats TOWARD healthy ear.",
+      "Complete, irreversible sensorineural hearing loss.",
+      "Permanent loss of vestibular caloric excitability (Dead ear)."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otogenic facial nerve paralysis exhibits fundamentally different etiologies and prognoses in acute versus chronic otitis media. In acute otitis media, palsy is caused by toxic inflammatory edema compressing the nerve within a congenital dehiscence of the fallopian canal (present in thirty percent of normal temporal bones). This variety responds completely to medical therapy with intravenous antibiotics and **systemic corticosteroids**, without requiring nerve decompression.",
+   "say": "In acute otitis, facial palsy stems from inflammatory edema through a dehiscent canal, resolving with antibiotics and steroids without requiring surgical decompression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Facial Palsy in Acute Otitis Media",
+     "points": [
+      "Caused by inflammatory edema via dehiscent canal.",
+      "Nerve sheath remains intact without bone erosion.",
+      "Excellent prognosis with near 100% recovery.",
+      "Treated medically with antibiotics, steroids, and myringotomy."
+     ]
+    },
+    "right": {
+     "title": "Facial Palsy in Chronic Cholesteatoma",
+     "points": [
+      "Caused by direct enzymatic bony canal erosion.",
+      "Mechanical compression and invasion by matrix.",
+      "Poor prognosis without prompt surgical exploration.",
+      "Mandates urgent mastoidectomy and nerve decompression."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In sharp contrast, facial paralysis developing in the setting of chronic suppurative otitis media with cholesteatoma indicates direct enzymatic osteolysis and expanding mechanical invasion of the fallopian canal. It is a surgical emergency. The patient requires immediate **canal wall down mastoidectomy** to exteriorize the cholesteatoma, fully unroof the bony fallopian canal, and decompress the nerve sheath to prevent permanent axonal degenerating fibrosis.",
+   "say": "Facial palsy in chronic cholesteatoma is a surgical emergency. Urgent mastoidectomy and surgical unroofing of the fallopian canal are mandatory to preserve nerve function.",
+   "vis": {
+    "kind": "flow",
+    "title": "Emergency Surgical Management of Otogenic Facial Palsy",
+    "nodes": [
+     {
+      "id": "fp1",
+      "label": "Acute Facial Palsy in Chronic Cholesteatoma"
+     },
+     {
+      "id": "fp2",
+      "label": "Emergency High-Resolution CT Temporal Bone"
+     },
+     {
+      "id": "fp3",
+      "label": "Canal Wall Down Mastoidectomy & Fallopian Decompression"
+     }
+    ],
+    "edges": [
+     [
+      "fp1",
+      "fp2"
+     ],
+     [
+      "fp2",
+      "fp3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-031",
+  "bk2-ent-032",
+  "bk2-ent-033"
+ ]
+}

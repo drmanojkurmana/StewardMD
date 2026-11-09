@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-adaptations-accumulations",
+  "subject": "pathology",
+  "title": "Barrett Oesophagus, Hepatic Steatosis, and Intracellular Accumulations",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Chronic exposure of the distal oesophageal mucosa to refluxed acidic gastric juice and bile acids induces protective reprogramming of basal stem cells. Known as **Barrett oesophagus**, the normal pale pink non-keratinized stratified squamous epithelium is replaced by a velvety salmon-pink columnar glandular mucosa containing intestinal-type goblet cells.",
+      "say": "Barrett oesophagus is columnar metaplasia with goblet cells induced by chronic acid reflux.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gastroesophageal-reflux-disease-fig1.webp",
+        "caption": "Endoscopic view of distal oesophageal mucosal erosions and salmon-pink Barrett tongue projections.",
+        "alt": "Gastroesophageal reflux producing distal mucosal erosion and Barrett metaplasia"
+      }
+    },
+    {
+      "tx": "Histological confirmation of Barrett oesophagus requires demonstrating specialized intestinal metaplasia containing true intestinal goblet cells. These **mucin-filled goblet cells** stain brilliantly with Alcian blue at pH two point five, producing acidic mucins that coat and protect the distal oesophageal lining against corrosive hydrochloric acid and pepsin.",
+      "say": "Specialized intestinal metaplasia with Alcian-blue-positive goblet cells confirms Barrett oesophagus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oesophagus-and-stomach-pathology-fig1.webp",
+        "caption": "Histological section showing goblet-cell-rich columnar glandular metaplasia replacing squamous epithelium.",
+        "alt": "Microscopic view of intestinal metaplasia with distinct goblet cells in Barrett oesophagus"
+      }
+    },
+    {
+      "tx": "Although columnar metaplasia shields the oesophagus from acid-peptic ulceration, it represents a pre-neoplastic condition. Over years of continued chronic inflammation, Barrett epithelium can accumulate somatic mutations in TP53 and CDKN2A, progressing through low-grade and high-grade dysplasia to frank **oesophageal adenocarcinoma**.",
+      "say": "Barrett metaplasia carries significant risk of progressing through dysplasia to adenocarcinoma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chronic_gerd",
+            "label": "Decades of Chronic Acid and Bile Reflux Provoke Columnar Metaplasia"
+          },
+          {
+            "id": "low_dysplasia",
+            "label": "Clonal Proliferation of Atypical Nuclei Confined to Basal Crypt Halves"
+          },
+          {
+            "id": "high_dysplasia",
+            "label": "Atypical Cells with Loss of Polarity Extend to Mucosal Surface"
+          },
+          {
+            "id": "adenocarcinoma",
+            "label": "Malignant Glands Infiltrate Submucosa and Muscularis Propria as Adenocarcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "chronic_gerd",
+            "low_dysplasia"
+          ],
+          [
+            "low_dysplasia",
+            "high_dysplasia"
+          ],
+          [
+            "high_dysplasia",
+            "adenocarcinoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Abnormal intracellular accumulation of neutral triglycerides within parenchymal cells constitutes steatosis or fatty change. Occurring most commonly in the liver due to its central role in fat metabolism, **hepatic steatosis** arises from metabolic derangements induced by chronic alcohol abuse, obesity, insulin resistance, or protein malnutrition.",
+      "say": "Hepatic steatosis is abnormal intracellular triglyceride accumulation in hepatocytes from metabolic stress.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alcohol-Induced Steatosis",
+          "points": [
+            "Ethanol metabolism by alcohol dehydrogenase generates excess NADH",
+            "High NADH/NAD ratio shifts metabolism toward fatty acid synthesis",
+            "Inhibits mitochondrial beta-oxidation of fatty acids",
+            "Impairs packaging and secretion of very-low-density lipoproteins (VLDL)"
+          ]
+        },
+        "right": {
+          "title": "Metabolic Dysfunction Steatosis (MASLD)",
+          "points": [
+            "Peripheral insulin resistance accelerates adipocyte lipolysis",
+            "Massive flux of non-esterified free fatty acids enters liver",
+            "De novo lipogenesis accelerates in hepatocytes under hyperinsulinemia",
+            "Drives triglyceride accumulation, lipotoxicity, and mitochondrial stress"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microscopic evaluation of fatty liver reveals two distinct morphological patterns of lipid deposition. Chronic alcoholism and obesity typically cause macrovesicular steatosis where a single large fat droplet displaces the nucleus to the cell periphery, whereas Reye syndrome, tetracycline toxicity, and acute fatty liver of pregnancy produce **microvesicular steatosis**.",
+      "say": "Macrovesicular steatosis displaces the nucleus, while microvesicular steatosis fills cells with tiny droplets.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Macrovesicular Steatosis",
+          "points": [
+            "Single massive lipid droplet displaces and flattens nucleus to periphery",
+            "Characteristic of alcohol abuse, diabetes mellitus, and chronic obesity",
+            "Generally benign and fully reversible with lifestyle modification",
+            "Grossly enlarges liver into soft, yellow, greasy organ with rounded edges"
+          ]
+        },
+        "right": {
+          "title": "Microvesicular Steatosis",
+          "points": [
+            "Multiple tiny lipid droplets pack cytoplasm without displacing nucleus",
+            "Characteristic of Reye syndrome, acute fatty liver of pregnancy, and valproate",
+            "Reflects severe acute mitochondrial beta-oxidation failure",
+            "Can rapidly culminate in fulminant hepatic failure and encephalopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In routine histological tissue processing, lipid droplets are completely dissolved by clearing organic solvents such as xylene, leaving empty clear round vacuoles in stained sections. To confirm that clear intracellular vacuoles contain true neutral lipids, pathologists perform **frozen section Oil Red O** or Sudan black B staining on unfixed wet tissue.",
+      "say": "Oil Red O and Sudan black staining on frozen sections confirm that clear vacuoles are neutral lipids.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "paraffin_prep",
+            "label": "Routine Paraffin Embedding Exposes Biopsy to Alcohol and Clearing Xylene"
+          },
+          {
+            "id": "lipid_washout",
+            "label": "Neutral Triglycerides Dissolve out Completely, Leaving Empty Clear Spaces"
+          },
+          {
+            "id": "frozen_cryostat",
+            "label": "Frozen Section Prepared Without Solvents Retains Native Lipid Droplets"
+          },
+          {
+            "id": "oil_red_stain",
+            "label": "Oil Red O Dye Dissolves into Fat, Staining Triglycerides Brilliant Orange-Red"
+          }
+        ],
+        "edges": [
+          [
+            "paraffin_prep",
+            "lipid_washout"
+          ],
+          [
+            "paraffin_prep",
+            "frozen_cryostat"
+          ],
+          [
+            "frozen_cryostat",
+            "oil_red_stain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Beyond neutral lipids, cells can accumulate abnormal quantities of other metabolic substrates. In systemic atherosclerosis, vascular smooth muscle cells and macrophages engulf oxidized low-density lipoproteins, transforming into foamy histiocytes, while abnormal intracellular protein aggregates precipitate as glassy pink amorphous **hyaline inclusions** such as Mallory-Denk bodies in alcoholic hepatitis.",
+      "say": "Excess intracellular lipid forms foamy cells in atheromas, while protein precipitates form hyaline inclusions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intracellular Lipid Accumulations",
+          "points": [
+            "Atherosclerosis: foamy macrophages laden with cholesterol in intima",
+            "Xanthomas: clusters of lipid-laden histiocytes in skin and tendons",
+            "Cholesterolosis: foamy macrophage accumulation in gallbladder lamina propria",
+            "Niemann-Pick disease: lysosomal accumulation of sphingomyelin"
+          ]
+        },
+        "right": {
+          "title": "Intracellular Protein Inclusions",
+          "points": [
+            "Mallory-Denk bodies: tangled cytokeratin intermediate filaments in hepatocytes",
+            "Russell bodies: massive immunoglobulin accumulation in plasma cell ER",
+            "Alpha-1-antitrypsin globules: misfolded mutant protein trapped in liver ER",
+            "Neurofibrillary tangles: hyperphosphorylated tau protein in Alzheimer disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Indigestible endogenous pigments also accumulate intracellularly over decades of cellular aging. Known as the wear-and-tear pigment of aging, **lipofuscin granules** consist of cross-linked lipid-protein complexes resulting from free radical peroxidation of autophagocytosed organellar membranes, imparting a brown discoloration termed brown atrophy to aging hearts and livers.",
+      "say": "Lipofuscin is a wear-and-tear pigment from lipid peroxidation that causes brown atrophy in aging organs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "membrane_turnover",
+            "label": "Decades of Free Radical Peroxidation Damage Organelle Membrane Lipids"
+          },
+          {
+            "id": "autophagy_uptake",
+            "label": "Autophagosomes Deliver Damaged Peroxidized Lipids into Lysosomes"
+          },
+          {
+            "id": "resistant_debris",
+            "label": "Cross-Linked Schiff Bases and Peroxidized Lipids Resist Lysosomal Lysis"
+          },
+          {
+            "id": "lipofuscin_perch",
+            "label": "Fine Golden-Brown Granules Accumulate Around Nucleus (Lipofuscin)"
+          }
+        ],
+        "edges": [
+          [
+            "membrane_turnover",
+            "autophagy_uptake"
+          ],
+          [
+            "autophagy_uptake",
+            "resistant_debris"
+          ],
+          [
+            "resistant_debris",
+            "lipofuscin_perch"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

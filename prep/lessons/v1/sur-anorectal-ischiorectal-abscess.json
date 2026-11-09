@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-anorectal",
+ "subject": "surgery",
+ "title": "Deep Anorectal Infections, Prolapse, and Anal Malignancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A deep purulent infection expanding within the fat-filled space between the obturator internus and anal canal is an **ischiorectal abscess**. The abundant, poorly vascularized adipose tissue of the ischioanal fossa permits rapid, unchecked bacterial multiplication. Patients present with high swinging pyrexia, chills, tachycardia, and deep-seated, throbbing pelvic pain, frequently without early visible cutaneous redness at the perineal surface.",
+   "say": "An ischiorectal abscess expands rapidly in the deep fatty ischioanal fossa, presenting with high fever and throbbing buttock pain.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-incision-and-drainage-abscess.webp",
+    "alt": "Surgical technique of wide incision and drainage of an abscess using the Hilton method with loculation breakdown.",
+    "caption": "Incision and drainage: wide deroofing and loculation breakdown required for deep ischiorectal abscesses. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tracking of purulent infection from one ischioanal fossa across the posterior midline produces a **horseshoe abscess communication**. Infection travels through the deep postanal space of Courtney located posterior to the anal canal and deep to the anococcygeal ligament. Successful surgical eradication requires deroofing the primary crypt infection in the posterior midline combined with wide bilateral counter-drainage incisions over each ischiorectal fossa.",
+   "say": "A horseshoe abscess spreads across the deep postanal space of Courtney, necessitating bilateral counter-drainage incisions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "post",
+      "label": "Posterior Midline Anal Crypt Suppuration"
+     },
+     {
+      "id": "court",
+      "label": "Spread into Deep Postanal Space of Courtney"
+     },
+     {
+      "id": "bi",
+      "label": "Bilateral Extension into Both Ischioanal Fossae"
+     },
+     {
+      "id": "drain",
+      "label": "Posterior Deroofing & Bilateral Counter-Incisions"
+     }
+    ],
+    "edges": [
+     [
+      "post",
+      "court"
+     ],
+     [
+      "court",
+      "bi"
+     ],
+     [
+      "bi",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Circumferential full-thickness intussusception and protrusion of all layers of the rectal wall through the anus is **rectal prolapse**. Known clinically as procidentia, it presents as a bulky, reddish cylindrical mass displaying concentric circular mucosal folds, distinguishing it from the radial folds seen in prolapsed haemorrhoids. It predominantly afflicts elderly multiparous females with pelvic floor attenuation, profound sphincter laxity, and deep pouch of Douglas.",
+   "say": "Complete rectal prolapse shows concentric mucosal rings, distinguishing full-thickness procidentia from prolapsed internal haemorrhoids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Rectal Prolapse (Procidentia)",
+     "points": [
+      "Full-thickness extrusion of all rectal wall layers",
+      "Characterized by concentric circular mucosal folds",
+      "Associated with severe fecal incontinence and laxity",
+      "Requires abdominal or perineal surgical repair"
+     ]
+    },
+    "right": {
+     "title": "Mucosal Prolapse / Prolapsed Haemorrhoids",
+     "points": [
+      "Only mucosal and submucosal layers protrude",
+      "Displays characteristic radial longitudinal furrows",
+      "Anal sphincter tone remains normal or increased",
+      "Treated by rubber band ligation or haemorrhoidectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive gold standard surgical correction of complete rectal prolapse in medically fit patients is **rectopexy procedures**. Utilizing a laparoscopic approach, the surgeon mobilizes the rectum down to the pelvic floor, elevates the mobilized organ out of the pelvis, and secures it to the presacral fascia and sacral promontory with permanent sutures or synthetic prosthetic mesh, restoring normal pelvic anatomy and continence.",
+   "say": "Laparoscopic rectopexy elevates and anchors the prolapsed rectum to the sacral promontory, restoring continence and anatomical alignment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Operation",
+     "Surgical Route",
+     "Target Population",
+     "Key Features"
+    ],
+    "rows": [
+     [
+      "Ventral mesh rectopexy",
+      "Laparoscopic abdominal",
+      "Fit patients with prolapse and rectocele",
+      "Mesh on anterior rectum, avoids posterior nerves"
+     ],
+     [
+      "Suture rectopexy",
+      "Laparoscopic abdominal",
+      "Young male patients, avoids mesh",
+      "Posterior fixation with non-absorbable sutures"
+     ],
+     [
+      "Delorme procedure",
+      "Transanal perineal",
+      "Elderly frail patients with comorbidities",
+      "Mucosal stripping with muscular plication"
+     ],
+     [
+      "Altemeier procedure",
+      "Perineal transanal",
+      "Frail patients with incarcerated prolapse",
+      "Perineal rectosigmoidectomy with anastomosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For elderly, frail, or debilitated individuals who cannot safely tolerate abdominal laparotomy or general anaesthesia, surgeons perform **perineal prolapse repair**. The Delorme procedure strips the redundant rectal mucosa and plicates the denuded rectal muscularis like an accordion. Alternatively, the Altemeier operation performs a perineal rectosigmoidectomy, excising the redundant prolapsed bowel transanally and fashioning a primary coloanal anastomosis with minimal physiological stress.",
+   "say": "Perineal repairs like the Delorme or Altemeier operations correct rectal prolapse transanally in frail, high-risk patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "frail",
+      "label": "Elderly Patient with Medical Comorbidities & Prolapse"
+     },
+     {
+      "id": "trans",
+      "label": "Transanal Delivery of Full-Thickness Rectum"
+     },
+     {
+      "id": "resect",
+      "label": "Perineal Resection or Mucosal Stripping & Plication"
+     },
+     {
+      "id": "cont",
+      "label": "Low-Tension Handsewn Coloanal Reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "frail",
+      "trans"
+     ],
+     [
+      "trans",
+      "resect"
+     ],
+     [
+      "resect",
+      "cont"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A squamous cell malignancy arising in the mucosal lining of the anal canal or anal margin is **anal carcinoma**. Strongly linked to persistent infection with high-risk oncogenic human papillomavirus serotypes sixteen and eighteen, this malignancy is increasingly encountered in immunocompromised patients, particularly those living with HIV. Typical clinical presentations include anal bleeding, pain, tenesmus, and a palpable indurated ulcerated mass with rolled everted edges.",
+   "say": "Anal carcinoma is a squamous cell malignancy driven by high-risk human papillomavirus, presenting with bleeding and indurated ulceration.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-perianal_inspection.webp",
+    "alt": "Perianal inspection diagram illustrating examination of indurated anal verge ulceration and clock-face orientation.",
+    "caption": "Anal examination: inspecting for suspicious indurated ulcers with everted margins characteristic of anal carcinoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The established standard primary organ-preserving curative treatment for squamous cell anal canal carcinoma is the **Nigro protocol**. Formulated in 1974, this definitive regimen combines pelvic external beam radiation therapy totaling 45 to 50 Gray with concurrent infusional 5-fluorouracil and mitomycin C. This primary chemoradiation achieves complete pathological tumor response in over eighty percent of patients, rendering permanent colostomy unnecessary in the vast majority.",
+   "say": "The Nigro chemoradiation protocol cures over eighty percent of squamous anal cancers while preserving anal sphincter function.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biop",
+      "label": "Histological Confirmation of Squamous Cell Carcinoma"
+     },
+     {
+      "id": "rad",
+      "label": "Pelvic External Beam Radiotherapy (45 to 50 Gray)"
+     },
+     {
+      "id": "chemo",
+      "label": "Concurrent Infusional 5-Fluorouracil & Mitomycin C"
+     },
+     {
+      "id": "cure",
+      "label": "Clinical Complete Response & Sphincter Preservation"
+     }
+    ],
+    "edges": [
+     [
+      "biop",
+      "rad"
+     ],
+     [
+      "rad",
+      "chemo"
+     ],
+     [
+      "chemo",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radical surgical excision of the anorectum is reserved strictly as a secondary measure known as **salvage abdominoperineal resection**. This radical operation is indicated solely for patients exhibiting persistent viable tumor at post-chemoradiation assessment at twelve to twenty-six weeks, or for those who develop biopsy-proven locoregional recurrence following an initial complete response to the Nigro protocol.",
+   "say": "Salvage abdominoperineal resection is reserved strictly for persistent or recurrent anal cancer following definitive chemoradiation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Nigro Chemoradiation",
+     "points": [
+      "First-line treatment for all non-metastatic anal cancers",
+      "Preserves native anal sphincter and fecal continence",
+      "Combines pelvic radiotherapy with 5-FU and mitomycin C",
+      "Complete clinical response achieved in > 80% of cases"
+     ]
+    },
+    "right": {
+     "title": "Salvage Abdominoperineal Resection",
+     "points": [
+      "Reserved strictly for radiation failure or relapse",
+      "Total en bloc excision of rectum and anal sphincter",
+      "Requires permanent end sigmoid colostomy",
+      "High rate of perineal wound healing complications"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distressing, intractable perianal itching arising from a diverse spectrum of local and systemic disorders is **pruritus ani**. Aetiological factors encompass fecal soiling from haemorrhoids or skin tags, pinworm Enterobius vermicularis infection in children, fungal candidiasis, contact dermatitis, and aggressive over-cleansing. Management centers on meticulous dry hygiene, wearing loose cotton underwear, eliminating perfumed soaps, and applying protective barrier creams.",
+   "say": "Pruritus ani is managed primarily by eliminating irritants, maintaining dry gentle hygiene, and treating underlying anorectal causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aetiological Category",
+     "Common Causative Factors",
+     "Diagnostic Clues",
+     "Specific Management"
+    ],
+    "rows": [
+     [
+      "Infectious",
+      "Enterobius vermicularis (pinworms)",
+      "Nocturnal perianal pruritus, positive tape test",
+      "Oral mebendazole or albendazole"
+     ],
+     [
+      "Fungal",
+      "Candida albicans dermatitis",
+      "Fiery red patch with satellite pustules",
+      "Topical clotrimazole or nystatin"
+     ],
+     [
+      "Contact dermatitis",
+      "Perfumed wipes, soaps, topical creams",
+      "Erythematous weeping allergic rash",
+      "Eliminate irritant, brief mild hydrocortisone"
+     ],
+     [
+      "Local anatomical",
+      "Haemorrhoids, skin tags, anal leakage",
+      "Mucous discharge, visible perianal tags",
+      "Treat primary condition, barrier zinc paste"
+     ]
+    ]
+   }
+  }
+ ]
+}

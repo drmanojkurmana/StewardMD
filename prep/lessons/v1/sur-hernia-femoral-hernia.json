@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-hernia",
+ "subject": "surgery",
+ "title": "Femoral Hernia and Hernial Complications",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The protrusion of a peritoneal sac and viscera through the narrow femoral ring into the femoral canal is a **femoral hernia**. Positioned below and lateral to the pubic tubercle, femoral hernias occur far more frequently in elderly, multiparous females due to their wider female pelvis and expanded femoral ring. Because the neck of the femoral canal is unyielding, nearly forty percent of femoral hernias present acutely with incarceration or strangulation.",
+   "say": "Femoral hernias emerge below the pubic tubercle into the femoral canal, carrying high risks of acute strangulation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-hernia_inspection.webp",
+    "alt": "Anatomical diagram illustrating differentiation between inguinal hernia above pubic tubercle and femoral hernia below.",
+    "caption": "Groin landmarks: femoral hernia emerges below and lateral to the pubic tubercle within the femoral triangle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The rigid anatomical borders encircling the neck of a femoral hernia are the **femoral canal boundaries**. The femoral ring is bounded anteriorly by the inguinal ligament of Poupart, posteriorly by the dense pectineal ligament of Cooper, medially by the sharp, crescentic lacunar ligament of Gimbernat, and laterally by the femoral vein within the femoral sheath. This inextensible fibrous ring promotes rapid vascular strangulation.",
+   "say": "The rigid femoral ring is bounded by the inguinal ligament, Cooper ligament, Gimbernat ligament, and the femoral vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ant",
+      "label": "Anterior Border: Inguinal Ligament of Poupart"
+     },
+     {
+      "id": "post",
+      "label": "Posterior Border: Pectineal Ligament of Cooper"
+     },
+     {
+      "id": "med",
+      "label": "Medial Border: Crescentic Lacunar Ligament of Gimbernat"
+     },
+     {
+      "id": "lat",
+      "label": "Lateral Border: Femoral Vein within Femoral Sheath"
+     }
+    ],
+    "edges": [
+     [
+      "ant",
+      "med"
+     ],
+     [
+      "med",
+      "post"
+     ],
+     [
+      "post",
+      "lat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A mechanical complication characterized by the arrest of intraluminal bowel transit without vascular compromise is an **obstructed hernia**. Entrapped intestinal loops develop mechanical luminal blockage, presenting clinically with colicky abdominal pain, recurrent vomiting, abdominal distension, and obstipation. The hernial swelling becomes tense, painful, and irreducible, but local signs of cutaneous erythema, extreme tenderness, and systemic toxic shock remain absent.",
+   "say": "An obstructed hernia blocks luminal intestinal transit without compromising mesenteric vascular supply, presenting as a tense painful lump.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstructed Incarcerated Hernia",
+     "points": [
+      "Luminal intestinal transit mechanically blocked",
+      "Mesenteric blood perfusion remains intact",
+      "Swelling is tense, tender, and irreducible",
+      "Colicky abdominal pain, vomiting, distension"
+     ]
+    },
+    "right": {
+     "title": "Strangulated Hernia",
+     "points": [
+      "Venous and arterial blood supply compromised",
+      "Rapid progression to bowel gangrene and necrosis",
+      "Constant severe pain with overlying cutaneous erythema",
+      "Surgical emergency requiring immediate resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most dangerous acute abdominal surgical emergency arising from groin herniation is a **strangulated hernia**. Constriction at the rigid hernial orifice first occludes low-pressure venous and lymphatic drainage, precipitating severe intramural edema and progressive capillary stasis. As intraluminal pressure continues to mount, arterial inflow ceases, driving rapid progression from ischemic tissue infarction to full-thickness gangrene and free perforation.",
+   "say": "A strangulated hernia arrests mesenteric blood flow, causing rapid gangrene and perforation that demands emergency surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "const",
+      "label": "Entrapment & Constriction at Rigid Hernia Neck"
+     },
+     {
+      "id": "ven",
+      "label": "Venous Outflow Obstruction & Intramural Edema"
+     },
+     {
+      "id": "art",
+      "label": "Arterial Thrombosis & Transmural Bowel Ischemia"
+     },
+     {
+      "id": "perf",
+      "label": "Full-Thickness Bowel Necrosis, Gangrene & Perforation"
+     }
+    ],
+    "edges": [
+     [
+      "const",
+      "ven"
+     ],
+     [
+      "ven",
+      "art"
+     ],
+     [
+      "art",
+      "perf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A deceptive and perilous hernia variant where only a portion of the antimesenteric bowel wall is entrapped is **Richter hernia**. Because the entire luminal circumference is not enclosed, intestinal transit continues and signs of mechanical bowel obstruction are completely absent. However, the entrapped antimesenteric patch rapidly undergoes localized ischemic gangrene and perforation, leading to unrecognized fatal peritonitis or enterocutaneous fistula.",
+   "say": "A Richter hernia pinches only the antimesenteric wall, causing gangrene and perforation without signs of bowel obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eponymous Hernia Type",
+     "Anatomical Hernia Content",
+     "Classic Anatomical Location",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Richter hernia",
+      "Part of antimesenteric bowel wall",
+      "Femoral ring or small trocar sites",
+      "Gangrene occurs without mechanical obstruction"
+     ],
+     [
+      "Littre hernia",
+      "Meckel diverticulum in sac",
+      "Inguinal, femoral, or umbilical",
+      "Diverticular inflammation, ulcer, or strangulation"
+     ],
+     [
+      "Maydl hernia",
+      "Two loops in 'W' shape in sac",
+      "Large groin hernias",
+      "Intermediate intra-abdominal loop strangulates"
+     ],
+     [
+      "Amyand hernia",
+      "Vermiform appendix in sac",
+      "Right inguinal hernia",
+      "Can develop acute acute appendicitis within sac"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rare surgical entrapment of a congenital Meckel diverticulum within a hernial sac is designated as **Littre hernia**. Named after French surgeon Alexis Littre, this condition most commonly occurs in right inguinal hernias, but can also involve femoral or umbilical defects. Patients present with painful incarcerated groin swellings that may undergo diverticular ulceration, mucosal hemorrhage, or acute gangrenous strangulation demanding diverticulectomy.",
+   "say": "A Littre hernia contains a Meckel diverticulum within the hernial sac, presenting with incarceration or diverticular inflammation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Littre Hernia",
+     "points": [
+      "Contains congenital Meckel diverticulum",
+      "True diverticulum from vitellointestinal duct",
+      "Presents with localized pain, ulceration, or bleeding",
+      "Management requires diverticulectomy and hernia repair"
+     ]
+    },
+    "right": {
+     "title": "Amyand Hernia",
+     "points": [
+      "Contains the vermiform appendix within the sac",
+      "May present as quiescent appendix or acute appendicitis",
+      "Located predominantly in right indirect inguinal hernia",
+      "Treated by appendicectomy with primary tissue repair"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A rare and treacherous anatomical configuration known as a retrograde hernia is designated as **Maydl hernia**. Two adjacent loops of small intestine occupy the hernial sac in a distinct W-shaped configuration, while the intervening loop remains inside the peritoneal cavity. While the two herniated loops in the sac appear viable, the intermediate intra-abdominal loop suffers occult mesenteric strangulation, demanding careful exploratory laparotomy.",
+   "say": "In Maydl hernia, two loops sit in the sac while the intervening intra-abdominal loop undergoes occult strangulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w",
+      "label": "Two Adjacent Bowel Loops Enter Sac in 'W' Pattern"
+     },
+     {
+      "id": "sac",
+      "label": "External Sac Loops Appear Viable & Pink on Exploration"
+     },
+     {
+      "id": "intr",
+      "label": "Intermediate Intra-Abdominal Loop Suffers Strangulation"
+     },
+     {
+      "id": "lap",
+      "label": "Mandatory Traction & Inspection of Intra-Abdominal Bowel"
+     }
+    ],
+    "edges": [
+     [
+      "w",
+      "sac"
+     ],
+     [
+      "sac",
+      "intr"
+     ],
+     [
+      "intr",
+      "lap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three primary open surgical approaches are utilized for the definitive **surgical repair of femoral hernia**. The Lockwood low infrainguinal approach operates directly over the femoral canal below the inguinal ligament. The Lotheissen transinguinal approach enters the inguinal canal, while the McEvedy high vertical approach provides superior exposure for incarcerated, strangulated bowel requiring resection. Crucially, the lacunar ligament must be incised cautiously to avoid an abnormal obturator artery.",
+   "say": "Femoral hernias are repaired via Lockwood, Lotheissen, or McEvedy approaches, watching out for an abnormal obturator artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Approach",
+     "Incision Location",
+     "Key Anatomical Exposure",
+     "Best Indication"
+    ],
+    "rows": [
+     [
+      "Lockwood (low)",
+      "Groin crease below inguinal ligament",
+      "Direct onto femoral canal from below",
+      "Small, easily reducible elective hernias"
+     ],
+     [
+      "Lotheissen (transinguinal)",
+      "Parallel to inguinal ligament",
+      "Opens inguinal canal, traverses posterior wall",
+      "Suspected combined inguinal-femoral hernia"
+     ],
+     [
+      "McEvedy (high)",
+      "Vertical or paramedian rectus incision",
+      "Extraperitoneal exposure above inguinal ligament",
+      "Strangulated hernia needing bowel resection"
+     ],
+     [
+      "Laparoscopic (TAPP/TEP)",
+      "Preperitoneal laparoscopic mesh",
+      "Covers Myopectineal orifice of Fruchaud",
+      "Elective repair, bilateral or recurrent defects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Forceful, vigorous manual reduction of an incarcerated or strangulated hernia is strictly forbidden due to **hernia reduction and taxis dangers**. Forceful taxis can rupture ischemic bowel mucosa, provoke septic peritonitis, or cause reduction en masse, wherein the hernial sac and strangulated bowel loop are forced into the preperitoneal space with the constricting neck still intact, leading to unrecognized progressive gangrene.",
+   "say": "Forceful manual reduction of strangulated hernias is dangerous because it can cause bowel perforation or reduction en masse.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-hernia_palpation.webp",
+    "alt": "Diagram demonstrating proper gentle palpation technique and hazards of forceful taxis during hernia assessment.",
+    "caption": "Hernia palpation: gentle assessment only; forceful taxis carries risks of reduction en masse and bowel perforation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

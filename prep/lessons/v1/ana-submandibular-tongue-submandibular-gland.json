@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-submandibular-tongue",
+ "subject": "anatomy",
+ "title": "Submandibular Gland, Wharton Duct, and the Lingual Nerve Loop",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The submandibular gland is a mixed salivary gland with predominantly serous acini, situated in the digastric triangle of the neck. It is folded around the free posterior border of the mylohyoid muscle like a letter U, dividing the parenchyma into a large **superficial part** lying in the neck and a small deep part lying in the floor of the oral cavity.",
+   "say": "Folded like a U around the posterior border of mylohyoid, the mixed submandibular gland features a large superficial cervical part and a small deep oral part.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-tonsil-relations.svg",
+    "alt": "Anatomical schematic showing oral floor musculature, mylohyoid muscle, and submandibular gland relations",
+    "caption": "Topographical relationship of the submandibular gland hooking around the posterior margin of mylohyoid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The superficial part of the submandibular gland fills the digastric triangle, bounded superiorly by the lower border of the mandible and inferiorly by the anterior and posterior bellies of the digastric muscle. The **facial artery** grooves the posterior border of the gland, arches over its superior surface, and curls around the inferior border of the mandible at the anterior margin of masseter.",
+   "say": "The superficial lobe fills the digastric triangle. The facial artery grooves its deep aspect, arching over the gland to enter the face at the anterior border of masseter.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "External Carotid Artery (Gives off facial artery in carotid triangle)"
+     },
+     {
+      "id": "f2",
+      "label": "Deep Glandular Groove (Artery embeds in posterior surface of submandibular gland)"
+     },
+     {
+      "id": "f3",
+      "label": "Mandibular Margin Crossing (Curves over lower border of mandible into face)"
+     },
+     {
+      "id": "f4",
+      "label": "Facial Pulse Palpation (Easily felt at anteroinferior angle of masseter muscle)"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The submandibular duct (Wharton duct) emerges from the anterior end of the deep part of the gland, measuring approximately five centimetres in length. The **Wharton duct** courses forward on the hyoglossus muscle, passing between the lingual nerve and hypoglossal nerve, to open on the summit of the sublingual papilla (caruncle) at the side of the frenulum of the tongue.",
+   "say": "Measuring five centimetres, the Wharton duct emerges from the deep lobe. It runs forward on hyoglossus to open at the sublingual papilla beside the lingual frenulum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Submandibular Duct (Wharton)",
+     "Parotid Duct (Stensen)"
+    ],
+    "rows": [
+     [
+      "Length",
+      "5.0 cm long, thin-walled",
+      "5.0 cm long, thick-walled"
+     ],
+     [
+      "Emergence",
+      "Anterior end of deep lobe on hyoglossus",
+      "Anterior border of parotid crossing masseter"
+     ],
+     [
+      "Intraoral termination",
+      "Sublingual caruncle beside frenulum linguae",
+      "Opposite upper second maxillary molar crown"
+     ],
+     [
+      "Calculus susceptibility",
+      "80% of all salivary calculi (sialolithiasis)",
+      "20% of salivary calculi (pure serous saliva)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "As the submandibular duct courses forward on the lateral surface of the hyoglossus muscle, it maintains an intimate triple anatomical relationship with the lingual nerve. The **lingual nerve** begins lateral to the duct, crosses underneath and inferior to the duct, and then ascends on its medial side to enter the substance of the tongue (triple cross or loop).",
+   "say": "The lingual nerve loops beneath the submandibular duct like a sling: starting lateral, dipping underneath, and ascending medially into the tongue.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Posterior Relation: Lingual nerve lies LATERAL to Wharton duct"
+     },
+     {
+      "id": "l2",
+      "label": "Intermediate Crossing: Lingual nerve crosses UNDERNEATH the duct"
+     },
+     {
+      "id": "l3",
+      "label": "Anterior Relation: Lingual nerve ascends MEDIAL to Wharton duct into tongue"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During surgical excision of the submandibular gland for sialolithiasis or neoplasia, traction on the submandibular duct pulls the lingual nerve downward into the surgical field. Accidental clamping or transection of the **lingual nerve** causes instantaneous loss of both general somatic sensation (pain, temperature, touch) and chorda tympani taste sensation over the ipsilateral anterior two-thirds of the tongue.",
+   "say": "Traction on the duct during gland excision pulls the lingual nerve into jeopardy. Accidental injury abolishes touch and taste over the anterior two-thirds of the tongue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical Risk to Lingual Nerve",
+     "points": [
+      "Tethered to the deep lobe via submandibular ganglion",
+      "Pulled into operative field by traction on Wharton duct",
+      "Injury causes complete numbness of anterior 2/3 of tongue",
+      "Loss of special visceral taste sensation (chorda tympani)"
+     ]
+    },
+    "right": {
+     "title": "Surgical Risk to Marginal Mandibular",
+     "points": [
+      "Courses within deep fascia over superficial gland capsule",
+      "Lies 1 to 2 cm below lower border of mandible",
+      "Protected by making skin incision 2 fingerbreadths below jaw",
+      "Injury causes drooping of the corner of the mouth (asymmetrical smile)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Eighty percent of all salivary gland calculi (sialolithiasis) develop in the submandibular gland and its duct. The predilection of **submandibular calculi** is explained by three anatomical factors: the upward anti-gravity course of Wharton duct, its longer and wider lumen, and the higher viscosity and alkaline mucinous composition of submandibular saliva, which promotes calcium precipitation.",
+   "say": "Eighty percent of salivary stones lodge in the submandibular duct. Anti-gravity upward flow and viscous, calcium-rich mucinous saliva promote stone formation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical / Physiological Factor",
+     "Submandibular Gland",
+     "Parotid Gland"
+    ],
+    "rows": [
+     [
+      "Ductal trajectory",
+      "Ascends upwards against gravity toward floor of mouth",
+      "Horizontal trajectory across masseter muscle"
+     ],
+     [
+      "Salivary composition",
+      "Viscous mucinous and serous mixture (high mucin content)",
+      "Purely watery serous secretion (low mucin content)"
+     ],
+     [
+      "Biochemical milieu",
+      "Alkaline pH with high calcium and phosphate concentration",
+      "Acidic pH with lower calcium saturation"
+     ],
+     [
+      "Radiopacity",
+      "80-90% radiopaque (visible on occlusal radiograph)",
+      "Only 20% radiopaque (mostly radiolucent)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically, a calculus obstructing the submandibular duct presents with mealtime syndrome. When the patient smells or tastes food, parasympathetic secretomotor stimulation drives rapid saliva synthesis. Because the obstructed **Wharton duct** prevents egress, intraglandular tension surges, producing painful, tender swelling in the submandibular triangle that subsides slowly two hours after eating.",
+   "say": "Submandibular duct stones cause mealtime syndrome: acute, painful swelling triggered by the anticipation of food that gradually subsides as secretion wanes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Food Ingestion / Gustatory Stimulus (Parasympathetic firing triggers copious salivary secretion)"
+     },
+     {
+      "id": "c2",
+      "label": "Calculus Impaction (Intraductal stone blocks flow at Wharton orifice or mylohyoid bend)"
+     },
+     {
+      "id": "c3",
+      "label": "Glandular Engorgement (Intracapsular hypertension stretches investing fascia)"
+     },
+     {
+      "id": "c4",
+      "label": "Mealtime Pain and Swelling (Painful bulge in digastric triangle resolving between meals)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bimanual palpation is the mandatory clinical technique for assessing the submandibular gland. The examiner places an index finger inside the floor of the mouth and the fingers of the opposite hand beneath the angle of the jaw. By compressing tissues between both hands, the **submandibular parenchyma** and intraductal stones are readily palpable, distinguishing cervical lymph nodes from salivary pathology.",
+   "say": "Bimanual palpation compresses the oral floor against external submandibular fingers. This technique reliably distinguishes intrinsic salivary masses from cervical lymph nodes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic showing the marginal mandibular nerve and cervical branches crossing the submandibular gland",
+    "caption": "Surgical relations of the marginal mandibular nerve crossing the superficial capsule of the submandibular gland. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

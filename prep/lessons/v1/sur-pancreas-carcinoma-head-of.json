@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Carcinoma of Pancreatic Head and Whipple Resection",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The vast majority of malignant neoplasms arising within the exocrine pancreas are ductal adenocarcinomas, with over seventy percent originating within the **carcinoma head of pancreas**. Characterized by aggressive local invasiveness, early perineural infiltration, and dense desmoplasia, pancreatic head tumours typically present with painless progressive obstructive jaundice, significant weight loss, anorexia, and dull unremitting epigastric back pain.",
+   "say": "Pancreatic ductal adenocarcinoma arises predominantly in the head of the pancreas, presenting with painless obstructive jaundice and weight loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pancreatic-cancer-fig1.webp",
+    "alt": "Clinical and radiological schematic showing key signs of pancreatic head carcinoma including bile duct obstruction and perineural invasion.",
+    "caption": "Carcinoma head of pancreas: localized ductal adenocarcinoma invading the distal common bile duct and mesenteric vessels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On cross-sectional imaging, tumour compression of both the distal common bile duct and the main pancreatic duct produces the pathognomonic **double duct sign**. Triple-phase contrast-enhanced computed tomography reveals an ill-defined, hypoattenuating mass during the pancreatic parenchymal phase due to sparse tumour vascularity within the abundant fibrous stroma. Evaluation focuses on vascular relationships with the superior mesenteric vein, portal vein, superior mesenteric artery, and celiac axis.",
+   "say": "Simultaneous dilatation of both the bile duct and pancreatic duct on imaging produces the characteristic double duct sign of head tumours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gallbladder-biliary-pancreatitis-pancreatic-tumours-fig1.webp",
+    "alt": "Computed tomography schematic showing double duct sign with dilated common bile duct and main pancreatic duct converging at the head mass.",
+    "caption": "Double duct sign: simultaneous dilatation of the common bile duct and main pancreatic duct secondary to a pancreatic head neoplasm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical resectability is stratified into resectable, borderline resectable, and locally advanced unresectable disease based strictly on vascular invasion. Borderline resectable tumours demonstrate superior mesenteric vein or portal vein abutment exceeding one hundred and eighty degrees or short-segment occlusion reconstructible with a venous graft, or arterial contact under one hundred and eighty degrees. Neoadjuvant systemic **FOLFIRINOX chemotherapy** is recommended to downstage borderline disease before surgical exploration.",
+   "say": "Tumours are categorized into resectable, borderline, and unresectable based on vascular involvement, with borderline cases receiving neoadjuvant chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Boundary",
+     "Resectable Criteria",
+     "Borderline Resectable Criteria",
+     "Unresectable (Locally Advanced)"
+    ],
+    "rows": [
+     [
+      "Superior Mesenteric Artery",
+      "Zero contact",
+      "Abutment <= 180 degrees",
+      "Encasement > 180 degrees"
+     ],
+     [
+      "Celiac Axis",
+      "Zero contact",
+      "Uninvolved",
+      "Encasement > 180 degrees / aorta involvement"
+     ],
+     [
+      "Superior Mesenteric Vein / PV",
+      "Zero contact / < 180 contour",
+      "Abutment > 180 or vein occlusion with graft option",
+      "Unreconstructible venous occlusion"
+     ],
+     [
+      "Common Hepatic Artery",
+      "Zero contact",
+      "Reconstructible short abutment",
+      "Encasement extending to celiac axis or bifurcation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The benchmark curative operative procedure for resectable adenocarcinoma of the pancreatic head and periampullary region is **Whipple pancreaticoduodenectomy**. Developed and refined by Allen Oldfather Whipple in the 1930s, this formidable procedure entails en bloc resection of the pancreatic head, uncinate process, C-loop of the duodenum, distal common bile duct, gallbladder, and regional lymph nodes, with or without partial distal gastrectomy.",
+   "say": "Whipple pancreaticoduodenectomy resects the pancreatic head, duodenum, distal bile duct, and regional lymph nodes to cure periampullary cancers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "explore",
+      "label": "Exploration: Rule Out Distant Peritoneal & Liver Metastases"
+     },
+     {
+      "id": "kocher",
+      "label": "Extensive Kocherisation & Mesenteric Vessel Mobilisation"
+     },
+     {
+      "id": "resect",
+      "label": "En Bloc Resection: Pancreatic Head, Duodenum & Bile Duct"
+     },
+     {
+      "id": "recon",
+      "label": "Three-Anastomosis Reconstruction (Panc, Biliary, Enteric)"
+     }
+    ],
+    "edges": [
+     [
+      "explore",
+      "kocher"
+     ],
+     [
+      "kocher",
+      "resect"
+     ],
+     [
+      "resect",
+      "recon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A modern oncologically equivalent variation is the pylorus-preserving pancreaticoduodenectomy, introduced by Traverso and Longmire. In this technique, the entire stomach and pylorus along with two centimetres of proximal duodenum are preserved intact. Preserving the pyloric sphincter prevents post-gastrectomy dumping syndrome, reduces bile reflux gastritis, and improves long-term nutritional status without compromising **oncological clearance** or survival.",
+   "say": "Pylorus-preserving pancreaticoduodenectomy preserves the stomach and pylorus, preventing dumping syndrome and post-gastrectomy complications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Whipple",
+     "points": [
+      "Resects distal 40% of stomach (antrectomy)",
+      "Removes pylorus completely",
+      "Gastrojejunostomy required",
+      "Risk of dumping and marginal ulceration"
+     ]
+    },
+    "right": {
+     "title": "Pylorus-Preserving (Traverso)",
+     "points": [
+      "Preserves stomach and intact pylorus",
+      "Duodenojejunostomy constructed",
+      "Reduces dumping syndrome and bile reflux",
+      "Transient delayed gastric emptying occurs early"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following the extirpative phase of a Whipple procedure, reconstruction of the digestive tract demands the construction of three delicate anastomoses to a single retrocolic loop of jejunum. In standard sequential order from proximal to distal, the surgeon constructs a **pancreaticojejunostomy**, followed by a hepaticojejunostomy, and terminates with an end-to-side gastrojejunostomy or duodenojejunostomy situated forty centimetres downstream.",
+   "say": "Reconstruction requires three sequential anastomoses: pancreaticojejunostomy, hepaticojejunostomy, and gastrojejunostomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pj",
+      "label": "1. Pancreaticojejunostomy (Duct-to-Mucosa or Invagination)"
+     },
+     {
+      "id": "hj",
+      "label": "2. Hepaticojejunostomy (End-to-Side Biliary Continuity)"
+     },
+     {
+      "id": "gj",
+      "label": "3. Gastrojejunostomy / Duodenojejunostomy (Enteric Transit)"
+     }
+    ],
+    "edges": [
+     [
+      "pj",
+      "hj"
+     ],
+     [
+      "hj",
+      "gj"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The single most dreaded procedural complication and chief driver of postoperative mortality following pancreaticoduodenectomy is a postoperative **pancreatic fistula**. Defined by the International Study Group on Pancreatic Surgery, a fistula is verified when amylase content in surgical drain fluid exceeds three times the upper normal serum amylase limit on or after postoperative day three. Soft pancreatic parenchymal texture and a small main duct under three millimetres dramatically heighten fistula risk.",
+   "say": "A postoperative pancreatic fistula is defined by high drain amylase after day three, occurring frequently with soft pancreatic tissue and narrow ducts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISGPS Grade",
+     "Clinical Impact",
+     "Intervention Required",
+     "Clinical Severity"
+    ],
+    "rows": [
+     [
+      "Biochemical Leak",
+      "No clinical deviation, patient asymptomatic",
+      "Drains managed conservatively or removed",
+      "Not a true clinical complication"
+     ],
+     [
+      "Grade B Fistula",
+      "Clinical infection, fever, or delayed gastric emptying",
+      "Prolonged drainage, percutaneous catheter, or antibiotics",
+      "Significant clinical complication"
+     ],
+     [
+      "Grade C Fistula",
+      "Hemodynamic instability, organ failure, or ICU admission",
+      "Urgent surgical re-exploration or ICU care",
+      "Life-threatening complication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following successful R0 resection with negative microscopic margins, all patients possessing adequate functional recovery receive adjuvant systemic chemotherapy. The international benchmark regimen is modified **FOLFIRINOX**, comprising fluorouracil, leucovorin, irinotecan, and oxaliplatin, which extends median overall survival beyond fifty-four months compared to gemcitabine alone.",
+   "say": "Adjuvant systemic chemotherapy with modified FOLFIRINOX significantly prolongs overall survival following curative pancreatic cancer resection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adjuvant Regimen",
+     "Drug Components",
+     "Median Overall Survival",
+     "Target Candidate"
+    ],
+    "rows": [
+     [
+      "Modified FOLFIRINOX",
+      "5-FU, Leucovorin, Irinotecan, Oxaliplatin",
+      "54.4 months",
+      "Excellent performance status (ECOG 0-1)"
+     ],
+     [
+      "Gemcitabine + Capecitabine",
+      "Gemcitabine IV + Oral Capecitabine",
+      "28.0 months",
+      "Good performance status, avoids irinotecan toxicity"
+     ],
+     [
+      "Gemcitabine Monotherapy",
+      "Gemcitabine IV weekly",
+      "25.5 months",
+      "Frail patients unfit for combination cytotoxic therapy"
+     ]
+    ]
+   }
+  }
+ ]
+}

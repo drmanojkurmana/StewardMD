@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "Pro-Inflammatory Cytokines: TNF, Interleukin-1, and Interleukin-6",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Cytokines are low-molecular-weight regulatory proteins secreted by activated immune cells that mediate intercellular communication in host defense. In acute inflammation, the master orchestrators of local and systemic responses are three pro-inflammatory cytokines: **tumor necrosis factor, interleukin-one, and interleukin-6**, produced predominantly by antigen-stimulated macrophages and dendritic cells.",
+      "say": "TNF, IL-1, and IL-6 are master macrophage cytokines that coordinate local and systemic acute inflammation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tlr_activation",
+            "label": "Microbial Endotoxins (LPS) Bind Toll-Like Receptor-4 on Macrophages"
+          },
+          {
+            "id": "nfkb_translocate",
+            "label": "NF-Kappa-B Translocates into Nucleus, Driving Cytokine Gene Transcription"
+          },
+          {
+            "id": "cytokine_triad",
+            "label": "Secretion of Active TNF-Alpha, Interleukin-1-Beta, and Interleukin-6"
+          },
+          {
+            "id": "multisystem_act",
+            "label": "Coordinates Endothelial Activation, Bone Marrow Mobilization, and Fever"
+          }
+        ],
+        "edges": [
+          [
+            "tlr_activation",
+            "nfkb_translocate"
+          ],
+          [
+            "nfkb_translocate",
+            "cytokine_triad"
+          ],
+          [
+            "cytokine_triad",
+            "multisystem_act"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tumor necrosis factor is synthesized as a membrane-bound homotrimer that is cleaved by the metalloproteinase TACE into a soluble active cytokine. Released **tumor necrosis factor (TNF)** binds TNFR1 receptors on vascular endothelium to induce expression of E-selectin, ICAM-1, and VCAM-1, converting the resting lining into a pro-adhesive surface.",
+      "say": "TNF induces endothelial adhesion molecules like E-selectin and ICAM-1 to capture passing leukocytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Local Actions of TNF",
+          "points": [
+            "Upregulates endothelial E-selectin, ICAM-1, and VCAM-1 adhesion molecules",
+            "Stimulates endothelial production of chemokines (CXCL8) and platelet-activating factor",
+            "Increases microvascular permeability by loosening intercellular tight junctions",
+            "Activates microbicidal respiratory burst and degranulation in neutrophils"
+          ]
+        },
+        "right": {
+          "title": "Systemic Pathological Actions",
+          "points": [
+            "Depresses myocardial contractility, lowering cardiac output in shock",
+            "Induces systemic vascular smooth muscle relaxation, causing severe hypotension",
+            "Promotes intravascular thrombosis by downregulating thrombomodulin",
+            "Causes chronic metabolic cachexia by suppressing appetite and lipoprotein lipase"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Synthesized as an inactive thirty-one kilodalton precursor, interleukin-one beta requires proteolytic processing by the intracellular caspase-one inflammasome complex before secretion. Active **interleukin-one (IL-1)** shares biological actions with TNF, stimulating endothelial adhesion molecules, promoting fibroblast proliferation, and driving systemic acute-phase responses.",
+      "say": "Interleukin-1 is activated by the inflammasome to stimulate endothelial adhesion and systemic fever.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pro_il1_synth",
+            "label": "TLR Signaling Induces Synthesis of Cytosolic Precursor Pro-IL-1-Beta"
+          },
+          {
+            "id": "inflammasome_cut",
+            "label": "Assembled NLRP3 Inflammasome Activates Caspase-1 to Cleave Pro-IL-1-Beta"
+          },
+          {
+            "id": "active_il1_release",
+            "label": "Active 17-kDa IL-1-Beta Exocytosed Across Breached Plasma Membrane"
+          },
+          {
+            "id": "il1r_signaling",
+            "label": "Binds Type I IL-1 Receptors to Fire MyD88 and NF-Kappa-B Gene Targets"
+          }
+        ],
+        "edges": [
+          [
+            "pro_il1_synth",
+            "inflammasome_cut"
+          ],
+          [
+            "inflammasome_cut",
+            "active_il1_release"
+          ],
+          [
+            "active_il1_release",
+            "il1r_signaling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Both tumor necrosis factor and interleukin-one act as potent endogenous pyrogens that reset hypothalamic thermal regulation. Entering the preoptic hypothalamic circulation, they stimulate vascular endothelial cyclooxygenase-two to synthesize **prostaglandin E2**, which shifts the hypothalamic set point upward to induce fever, chills, and peripheral vasoconstriction.",
+      "say": "TNF and IL-1 stimulate hypothalamic COX-2 to produce PGE2, elevating the thermostat to induce fever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endogenous Pyrogen Cascade",
+          "points": [
+            "TNF, IL-1-beta, and IL-6 circulate in bloodstream to brain vasculature",
+            "Interact with fenestrated capillaries of organum vasculosum (OVLT)",
+            "Induce endothelial cyclooxygenase-2 and microsomal PGE synthase-1",
+            "Prostaglandin E2 diffuses into preoptic nuclei, resetting set point to 39 C"
+          ]
+        },
+        "right": {
+          "title": "Systemic Manifestations of Pyrexia",
+          "points": [
+            "Cutaneous vasoconstriction reduces heat loss, producing subjective chills",
+            "Shivering thermogenesis increases metabolic heat production",
+            "Tachycardia: heart rate rises ~10 beats per minute per degree Celsius rise",
+            "Somnolence, malaise, and anorexia driven by central neuroinflammatory tone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "While TNF and IL-one initiate early local vascular responses, interleukin-six functions as the chief systemic cytokine driving hepatic acute-phase protein production. Synthesized by macrophages and endothelial cells under IL-one stimulation, **interleukin-6 (IL-6)** stimulates hepatocytes to mass-produce C-reactive protein, serum amyloid A, and fibrinogen.",
+      "say": "Interleukin-6 acts on the liver to stimulate the mass synthesis of acute-phase proteins like CRP.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "macrophage_il6",
+            "label": "Activated Macrophages and Endothelial Cells Secrete Interleukin-6"
+          },
+          {
+            "id": "hepatocyte_gp130",
+            "label": "Binds IL-6 Receptor Alpha and Signal-Transducing gp130 Homodimers"
+          },
+          {
+            "id": "jak_stat3_axis",
+            "label": "Activates Janus Kinase to Phosphorylate STAT3 Transcription Factor"
+          },
+          {
+            "id": "acute_phase_genes",
+            "label": "Drives Massive Hepatic Transcription of CRP, SAA, Fibrinogen, and Hepcidin"
+          }
+        ],
+        "edges": [
+          [
+            "macrophage_il6",
+            "hepatocyte_gp130"
+          ],
+          [
+            "hepatocyte_gp130",
+            "jak_stat3_axis"
+          ],
+          [
+            "jak_stat3_axis",
+            "acute_phase_genes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In severe Gram-negative or Gram-positive bacteremia, massive lipopolysaccharide endotoxin loads trigger uncontrolled systemic release of TNF and IL-one into the bloodstream. This cytokine storm precipitates **septic shock**, characterized by severe systemic peripheral vasodilation, widespread microvascular permeability, hypotension, myocardial depression, and multiorgan failure.",
+      "say": "Uncontrolled systemic surges of TNF and IL-1 precipitate septic shock with severe hypotension and heart failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/septic-shock-fig1.webp",
+        "caption": "Massive systemic bacteremic vasodilation and multiorgan failure characteristic of septic shock.",
+        "alt": "Septic shock pathophysiology showing systemic vasodilation and multiorgan hypoperfusion"
+      }
+    },
+    {
+      "tx": "During severe septic shock, massive systemic TNF and IL-one levels downregulate endothelial thrombomodulin and protein C receptors while upregulating tissue factor expression. The resulting loss of the normal anticoagulant endothelial surface triggers disseminated intravascular coagulation, causing widespread **microvascular fibrin thrombi** that consume platelets and clotting factors.",
+      "say": "TNF and IL-1 downregulate thrombomodulin, triggering disseminated intravascular coagulation in sepsis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cytokine_flood",
+            "label": "Systemic Surges of TNF and IL-1 Damage Capillary Endothelial Linings"
+          },
+          {
+            "id": "thrombomodulin_down",
+            "label": "Downregulates Endothelial Anticoagulant Thrombomodulin and Protein C"
+          },
+          {
+            "id": "tissue_factor_up",
+            "label": "Induces Endothelial and Monocyte Expression of Procoagulant Tissue Factor"
+          },
+          {
+            "id": "dic_cascade",
+            "label": "Generates Widespread Microvascular Thrombi with Consumptive Coagulopathy"
+          }
+        ],
+        "edges": [
+          [
+            "cytokine_flood",
+            "thrombomodulin_down"
+          ],
+          [
+            "cytokine_flood",
+            "tissue_factor_up"
+          ],
+          [
+            "tissue_factor_up",
+            "dic_cascade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within the pulmonary microcirculation, high concentrations of circulating TNF and interleukin-one damage alveolar capillary endothelial cells and fragile type one pneumocytes. Marked microvascular permeability produces severe non-cardiogenic pulmonary edema, forming alveolar hyaline membranes characteristic of the life-threatening **acute respiratory distress syndrome (ARDS)**.",
+      "say": "TNF-mediated alveolar capillary injury causes non-cardiogenic pulmonary edema and ARDS.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ards-fig1.webp",
+        "caption": "Diffuse alveolar damage displaying intra-alveolar proteinaceous exudate and eosinophilic hyaline membranes.",
+        "alt": "Acute respiratory distress syndrome histology showing thick pink hyaline membranes"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

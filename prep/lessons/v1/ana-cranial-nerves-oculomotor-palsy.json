@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-cranial-nerves",
+ "subject": "anatomy",
+ "title": "Cranial Nerves: Oculomotor Palsy, Trochlear, and Abducens",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The twelve pairs of cranial nerves originate from the brain and exit the skull base to innervate structures of the head, neck, and viscera. The cranial nerves governing ocular motility comprise three somatic motor nerves: the **oculomotor nerve** (CN III), the trochlear nerve (CN IV), and the abducens nerve (CN VI), whose coordinated actions align the visual axes in all diagnostic directions of gaze.",
+   "say": "Twelve cranial nerve pairs emerge from the brain. Ocular motility is coordinated by cranial nerves three, four, and six, which direct the globe in all planes of gaze.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn3-4-6-eye.webp",
+    "alt": "Clinical assessment of ocular cranial nerves III, IV, and VI examining extraocular motility in nine diagnostic fields",
+    "caption": "Diagnostic clinical evaluation of cranial nerves III, IV, and VI testing extraocular eye movements. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The oculomotor nerve arises from paired nuclei in the rostral midbrain at the level of the superior colliculus. It exits the ventromedial surface of the midbrain into the interpeduncular fossa, passing between the posterior cerebral artery above and the **superior cerebellar artery** below. Aneurysms of the posterior communicating artery characteristically compress the nerve at this site.",
+   "say": "Originating in the midbrain, the oculomotor nerve passes between the posterior cerebral and superior cerebellar arteries. A posterior communicating artery aneurysm can compress the nerve here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Midbrain Nucleus (Somatic motor nucleus and Edinger-Westphal parasympathetic nucleus at C3 superior colliculus level)"
+     },
+     {
+      "id": "o2",
+      "label": "Interpeduncular Fossa (Emerges medial to crus cerebri between PCA and SCA)"
+     },
+     {
+      "id": "o3",
+      "label": "Cavernous Sinus Lateral Wall (Courses in superior lateral wall above CN IV and V1)"
+     },
+     {
+      "id": "o4",
+      "label": "Superior Orbital Fissure (Enters orbit through tendinous ring, dividing into superior and inferior rami)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete oculomotor nerve paralysis causes profound, unmistakable physical findings. Because medial rectus, superior rectus, inferior rectus, and inferior oblique are paralysed, the unopposed lateral rectus (CN VI) and superior oblique (CN IV) pull the eyeball into a characteristic **down and out** deviation. Complete ptosis occurs due to levator palpebrae paralysis, accompanied by a widely dilated, unreactive pupil.",
+   "say": "Complete oculomotor palsy produces a down-and-out resting eye posture due to unopposed action of lateral rectus and superior oblique, accompanied by complete ptosis and pupillary dilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Oculomotor Palsy (CN III)",
+     "points": [
+      "Eye rests in 'down and out' position (external strabismus)",
+      "Complete ptosis (paralysis of levator palpebrae)",
+      "Mydriasis: Pupil widely dilated and fixed to light",
+      "Loss of accommodation for near vision"
+     ]
+    },
+    "right": {
+     "title": "Abducens Palsy (CN VI)",
+     "points": [
+      "Eye rests in adducted position (convergent strabismus)",
+      "Inability to abduct the affected eye past the midline",
+      "Horizontal uncrossed diplopia maximal on lateral gaze",
+      "Pupil size, light reflexes, and eyelids entirely normal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pupillary involvement is the critical diagnostic discriminator in oculomotor palsy. Parasympathetic pupilloconstrictor fibres travel in the superficial peripheral mantle of the oculomotor nerve, nourished by pial vessels. In compressive lesions (such as an expanding **posterior communicating artery aneurysm** or uncal herniation), the superficial pupillomotor fibres are crushed earliest, causing an acute dilated pupil.",
+   "say": "Parasympathetic pupillary fibres run superficially in the oculomotor nerve. Compressive lesions like aneurysms crush these fibres earliest, causing a classic blown pupil.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Aneurysm Compression (PCOM aneurysm exerts external pressure on superficial nerve mantle)"
+     },
+     {
+      "id": "p2",
+      "label": "Parasympathetic Fibre Crushing (Superficial Edinger-Westphal fibres fail first)"
+     },
+     {
+      "id": "p3",
+      "label": "Pupil-Involving Palsy (Fixed, widely dilated pupil; medical neurosurgical emergency)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, microvascular ischaemia (most commonly from diabetes mellitus or systemic hypertension) causes ischemic infarction of the deep central core of the nerve while sparing the peripherally perfused pial mantle. Consequently, diabetic third nerve palsy characteristically presents as a pupil-sparing **oculomotor palsy**, where extraocular eye movements and eyelids are paralysed but the pupil constricts normally.",
+   "say": "Microvascular ischemia in diabetes strikes the deep central core while sparing the peripherally vascularized mantle. This produces pupil-sparing third nerve palsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Compressive Third Nerve Palsy",
+     "Ischemic / Diabetic Third Nerve Palsy"
+    ],
+    "rows": [
+     [
+      "Pupillary status",
+      "Pupil dilated and fixed to light (pupil-involving)",
+      "Pupil normal size and constricts normally (pupil-sparing)"
+     ],
+     [
+      "Etiology",
+      "Posterior communicating artery aneurysm, uncal herniation",
+      "Diabetic microvascular infarction of central core vasa nervorum"
+     ],
+     [
+      "Emergency urgency",
+      "Life-threatening surgical emergency; requires immediate CT angiogram",
+      "Benign medical course; typically recovers spontaneously within 3 months"
+     ],
+     [
+      "Ptosis and ocular palsy",
+      "Present (complete down-and-out eye with total ptosis)",
+      "Present (down-and-out eye with total ptosis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The trochlear nerve (cranial nerve IV) is the smallest cranial nerve by axon count, innervating only the superior oblique muscle. Uniquely, its fibres cross the midline in the anterior medullary velum before emerging dorsally from the midbrain. The **trochlear nerve** wraps around the cerebral peduncle, traverses the cavernous sinus wall, and enters the orbit to depress and intort the adducted eye.",
+   "say": "The slender trochlear nerve innervates only the superior oblique. Dorsal midbrain emergence and a long subarachnoid journey render it uniquely susceptible to deceleration trauma.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Anatomical dissection of superior orbit showing course of trochlear nerve into superior oblique muscle",
+    "caption": "Surgical anatomy of the trochlear nerve entering the superomedial belly of the superior oblique. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The abducens nerve (cranial nerve VI) arises from the pontomedullary junction, innervating solely the lateral rectus muscle. It ascends the clivus, sharply bends ninety degrees over the petrous temporal ridge under Dorello canal, and enters the cavernous sinus. Because of its long intracranial ascent, the **abducens nerve** is vulnerable to traction in raised intracranial pressure, acting as a false localizing sign.",
+   "say": "Emerging at the pontomedullary junction, the abducens nerve bends over the petrous ridge in Dorello canal. Long intracranial travel makes it vulnerable to generalized intracranial hypertension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Pontomedullary Origin (Exits brainstem between pons and medullary pyramid)"
+     },
+     {
+      "id": "a2",
+      "label": "Clival Ascent and Dorello Canal (Bends 90 degrees over petrous apex into cavernous sinus)"
+     },
+     {
+      "id": "a3",
+      "label": "Intracavernous Course (Suspended freely in venous blood lateral to carotid artery)"
+     },
+     {
+      "id": "a4",
+      "label": "Traction Susceptibility (Downward brainstem displacement stretches nerve over petrous ridge)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paralysis of the abducens nerve causes failure of abduction of the ipsilateral eye. Unopposed tone of the intact medial rectus pulls the eye into convergent strabismus (esotropia). The patient experiences horizontal **diplopia** that is maximal when attempting to gaze towards the side of the lesion, which resolves when the affected eye is covered.",
+   "say": "Abducens palsy causes inward convergent strabismus due to unopposed medial rectus pull. Patients experience horizontal diplopia maximal when looking toward the affected side.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Horizontal Gaze toward Lesion",
+     "points": [
+      "Affected eye cannot cross midline into lateral gaze",
+      "Contralateral eye adducts normally",
+      "Maximal separation of visual images (horizontal diplopia)",
+      "Patient turns head toward affected side to minimize double vision"
+     ]
+    },
+    "right": {
+     "title": "Horizontal Gaze away from Lesion",
+     "points": [
+      "Affected eye adducts normally via intact CN III",
+      "Contralateral eye abducts normally via intact CN VI",
+      "Visual axes align perfectly",
+      "Diplopia completely disappears in contralateral gaze"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
+}

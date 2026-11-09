@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-female-reproductive",
+ "subject": "anatomy",
+ "title": "Vaginal Canal, Cervix, Pelvic Lymphatics, and Procidentia",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The vagina is an elastic, fibromuscular canal that extends upward and backward from the vestibule of the vulva to the cervix of the uterus. The anterior wall measures 7.5 centimetres in length, while the **posterior vaginal wall** measures approximately 9.0 centimetres because the cervix inserts into its anterior wall at an oblique angle.",
+   "say": "Ascending upwards and backwards from the vulval vestibule, the vagina has an anterior wall of 7.5 centimetres and a longer posterior wall of 9 centimetres.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-figo-vagina.webp",
+    "alt": "Anatomical staging and anatomical wall relations of the human vagina and adjacent pelvic organs",
+    "caption": "Anatomical relations of the anterior, posterior, and lateral walls of the vaginal canal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The upper blind end of the vagina forms a circular gutter surrounding the vaginal portion of the cervix, known as the vaginal fornices. These comprise anterior, posterior, and two lateral fornices. The **posterior fornix** is the deepest and is related directly through the vaginal wall to the peritoneum of the rectouterine pouch of Douglas, separated by only 1.5 centimetres of tissue.",
+   "say": "The vaginal vault forms four fornices around the protruding cervix. The deep posterior fornix lies adjacent to the peritoneal pouch of Douglas, accessible for culdocentesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaginal Fornix",
+     "Depth and Anatomy",
+     "Immediate Anatomical Relations"
+    ],
+    "rows": [
+     [
+      "Anterior fornix",
+      "Shallowest recess",
+      "Related to the base of the urinary bladder and uterovesical pouch"
+     ],
+     [
+      "Posterior fornix",
+      "Deepest recess (receptaculum seminis)",
+      "Separated from peritoneal pouch of Douglas by vaginal wall and peritoneum"
+     ],
+     [
+      "Lateral fornices (paired)",
+      "Intermediate depth",
+      "Related to the cardinal ligaments, uterine arteries, and crossing ureters"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cervix represents the lower cylindrical neck of the uterus, measuring approximately 2.5 centimetres in length. It is divided by the vaginal attachment into an upper supravaginal cervix and a lower **vaginal cervix** (portio vaginalis). The portio vaginalis projects into the upper vagina, covered by smooth, non-keratinized stratified squamous epithelium.",
+   "say": "Measuring 2.5 centimetres, the cervix divides into supravaginal and vaginal parts. The vaginal portio projects into the canal, lined by stratified squamous epithelium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ectocervix (Portio Vaginalis)",
+     "points": [
+      "Projects freely into the vaginal lumen",
+      "Covered by non-keratinised stratified squamous epithelium",
+      "Rich in glycogen; stains mahogany brown with Lugol iodine",
+      "Exhibits external os leading into endocervical canal"
+     ]
+    },
+    "right": {
+     "title": "Endocervix (Endocervical Canal)",
+     "points": [
+      "Internal fusiform conduit 2.5 cm long",
+      "Lined by single layer of tall mucin-secreting columnar cells",
+      "Features mucosal arbor vitae folds and branched tubular glands",
+      "Forms transformation zone where squamous metaplasia occurs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The squamocolumnar junction represents the abrupt histological boundary between the stratified squamous epithelium of the ectocervix and the mucin-secreting columnar epithelium of the endocervix. During reproductive life, cervical eversion exposes columnar epithelium to vaginal acidity, stimulating squamous metaplasia to create the **transformation zone**, the premier site of cervical oncogenesis.",
+   "say": "At the squamocolumnar junction, ectocervical squamous epithelium meets endocervical columnar cells. In this transformation zone, human papillomavirus drives squamous metaplasia and dysplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Eversion / Ectropion (Estrogen exposure exposes endocervical columnar epithelium to acid vagina)"
+     },
+     {
+      "id": "c2",
+      "label": "Physiological Metaplasia (Subcolumnar reserve cells differentiate into stratified squamous cells)"
+     },
+     {
+      "id": "c3",
+      "label": "Transformation Zone Established (Dynamic squamocolumnar junction vulnerable to oncogenic HPV)"
+     },
+     {
+      "id": "c4",
+      "label": "Dysplastic Progression (Cervical intraepithelial neoplasia arises within transformation zone)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pelvic lymphatic drainage of the female reproductive tract follows predictable vascular routes that dictate cancer staging and lymphadenectomy boundaries. Lymphatics from the cervix and upper vagina drain into the **internal iliac** and external iliac nodes, and subsequently to common iliac and para-aortic chains. In contrast, lymphatics from the lowest portion of the vagina and vulva drain to superficial inguinal nodes.",
+   "say": "Lymph from the cervix and upper vagina drains into internal and external iliac nodes. The lower third of the vagina and vulva drain to superficial inguinal nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ Territory",
+     "Primary Regional Lymph Nodes",
+     "Secondary Sentinel Chains"
+    ],
+    "rows": [
+     [
+      "Uterine fundus and cornua",
+      "Para-aortic nodes (via ovarian vessels) and superficial inguinal (via round ligament)",
+      "Common iliac and thoracic duct"
+     ],
+     [
+      "Uterine body and supravaginal cervix",
+      "External iliac, internal iliac, and obturator lymph nodes",
+      "Common iliac and presacral nodes"
+     ],
+     [
+      "Cervix and upper 2/3 of vagina",
+      "Paracervical, obturator, internal and external iliac nodes",
+      "Common iliac and para-aortic chains"
+     ],
+     [
+      "Lower 1/3 of vagina and vulva",
+      "Superficial inguinal lymph nodes",
+      "Deep inguinal and external iliac nodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Damage to the pelvic floor during vaginal delivery characteristically leads to pelvic organ prolapse. A defect in the anterior vaginal wall allows the urinary bladder to herniate backwards, forming a **cystocele**. Conversely, a disruption of the rectovaginal septum in the posterior vaginal wall permits the rectum to bulge forward into the vagina, creating a rectocele.",
+   "say": "Loss of anterior wall support permits bladder herniation known as a cystocele. Posterior wall weakness allows rectal protrusion, forming a symptomatic rectocele.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-anterior-colporrhaphy.webp",
+    "alt": "Surgical technique of anterior colporrhaphy showing repair of cystocele and plication of pubocervical fascia",
+    "caption": "Surgical dissection and fascial plication of anterior vaginal wall defect to correct bladder cystocele. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Uterine prolapse is graded according to the anatomical descent of the cervix relative to the vaginal introitus. First-degree prolapse is descent of the cervix within the vagina; second-degree is descent to the level of the introitus; and third-degree is protrusion of the cervix outside the introitus. Complete extrusion of the entire uterus and inverted vagina is called **procidentia**.",
+   "say": "Grading of uterine prolapse traces cervical descent: within the vagina in first-degree, to the introitus in second-degree, and complete exterior procidentia in third-degree.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "First Degree Prolapse (Cervix descends below normal level but remains within vaginal cavity)"
+     },
+     {
+      "id": "p2",
+      "label": "Second Degree Prolapse (Cervix descends to the level of the hymenal ring or introitus)"
+     },
+     {
+      "id": "p3",
+      "label": "Third Degree Prolapse (Cervix protrudes completely outside the introitus)"
+     },
+     {
+      "id": "p4",
+      "label": "Procidentia (Entire uterus extruded outside with total vaginal eversion)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Culdocentesis is the transvaginal aspiration of fluid from the rectouterine pouch of Douglas. By inserting an eighteen-gauge needle through the posterior vaginal fornix into the pouch, clinicians can sample peritoneal fluid. Aspiration of non-clotting dark blood indicates **hemoperitoneum** from a ruptured ectopic pregnancy, ruptured corpus luteum cyst, or severe splenic trauma.",
+   "say": "Culdocentesis accesses peritoneal fluid by piercing the thin posterior vaginal fornix into the pouch of Douglas. Aspirating non-clotting blood confirms hemoperitoneum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Culdocentesis Finding",
+     "points": [
+      "Yields non-clotting dark red blood (defibrinated)",
+      "Diagnostic of active hemoperitoneum",
+      "Most commonly caused by ruptured ectopic pregnancy",
+      "Prompts immediate emergency surgical exploration"
+     ]
+    },
+    "right": {
+     "title": "Clear or Serous Finding",
+     "points": [
+      "Yields clear, straw-coloured serous fluid",
+      "Excludes active free intraperitoneal haemorrhage",
+      "Purulent aspirate indicates pelvic inflammatory disease or ruptured abscess",
+      "Aspiration of clotting blood indicates venous needle entry"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "980d6ea3-515e-4e16-8121-204dc9aff794",
+  "0e93ef7d-4838-4056-ae9b-b93478a5df7c",
+  "64d97f14-cf46-4d2a-9670-bf2d0d1661da"
+ ]
+}

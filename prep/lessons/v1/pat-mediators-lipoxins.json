@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "Lipoxins, Bradykinin, and the Complement Anaphylatoxin Cascade",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Active resolution of inflammation requires endogenous biochemical counter-regulatory circuits that terminate leukocyte influx and promote tissue restoration. Generated from arachidonic acid during the resolving phase of acute inflammation, **lipoxins** function as potent anti-inflammatory and pro-resolving lipid mediators that suppress neutrophil recruitment while recruiting non-phlogistic macrophages.",
+      "say": "Lipoxins are pro-resolving lipid mediators that halt neutrophil influx and promote resolution.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "platelet_neutrophil",
+            "label": "Neutrophils and Platelets Adhere Closely in Inflamed Microvessels"
+          },
+          {
+            "id": "transcell_transfer",
+            "label": "Neutrophil 5-LOX Generates Leukotriene A4 and Donates It to Platelets"
+          },
+          {
+            "id": "platelet_12lox",
+            "label": "Platelet 12-Lipoxygenase Converts LTA4 into Lipoxins A4 and B4"
+          },
+          {
+            "id": "resolution_signal",
+            "label": "Lipoxins Inhibit Neutrophil Adhesion and Stimulate Macrophage Clearance"
+          }
+        ],
+        "edges": [
+          [
+            "platelet_neutrophil",
+            "transcell_transfer"
+          ],
+          [
+            "transcell_transfer",
+            "platelet_12lox"
+          ],
+          [
+            "platelet_12lox",
+            "resolution_signal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthesis of lipoxins requires transcellular biosynthetic cooperation between two distinct cell types. Circulating neutrophils synthesize leukotriene A4 via 5-lipoxygenase and transfer it to adherent platelets, where **platelet 12-lipoxygenase** converts the intermediate into lipoxin A4 and lipoxin B4, providing an automatic brake that shifts the local tissue milieu toward resolution.",
+      "say": "Platelet 12-lipoxygenase converts neutrophil-derived LTA4 into lipoxins, acting as a natural brake.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pro-Inflammatory Leukotrienes",
+          "points": [
+            "Synthesized early in acute inflammation via 5-lipoxygenase",
+            "Promote neutrophil chemotaxis, adhesion, and lysosomal release",
+            "Induce intense arteriolar vasoconstriction and venular leakage",
+            "Drive bronchospasm, mucus hypersecretion, and tissue damage"
+          ]
+        },
+        "right": {
+          "title": "Pro-Resolving Lipoxins",
+          "points": [
+            "Synthesized late in inflammation via transcellular 12-lipoxygenase",
+            "Inhibit neutrophil chemotaxis, rolling, and transendothelial migration",
+            "Stimulate non-inflammatory macrophage phagocytosis of apoptotic debris",
+            "Restore vascular permeability toward baseline physiological levels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Activation of the plasma kinin enzymatic cascade generates potent nonapeptide and decapeptide vasoactive mediators from circulating high-molecular-weight kininogen. The quintessential active plasma kinin is **bradykinin**, which is approximately forty times more potent than histamine in increasing microvascular permeability and inducing profound arterial and arteriolar vasodilation.",
+      "say": "Bradykinin is an inflammatory peptide forty times more potent than histamine in increasing permeability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hageman_trigger",
+            "label": "Factor XII (Hageman Factor) Activated by Negatively Charged Subendothelium"
+          },
+          {
+            "id": "kallikrein_active",
+            "label": "Factor XIIa Cleaves Plasma Prekallikrein into Active Kallikrein"
+          },
+          {
+            "id": "kininogen_cleave",
+            "label": "Kallikrein Proteolytically Cleaves High-Molecular-Weight Kininogen"
+          },
+          {
+            "id": "bradykinin_liberate",
+            "label": "Releases Vasoactive Nonapeptide Bradykinin into Systemic Plasma"
+          }
+        ],
+        "edges": [
+          [
+            "hageman_trigger",
+            "kallikrein_active"
+          ],
+          [
+            "kallikrein_active",
+            "kininogen_cleave"
+          ],
+          [
+            "kininogen_cleave",
+            "bradykinin_liberate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Beyond its marked microvascular actions, bradykinin is a potent mediator of pain in acute inflammation. By binding specific B2 G-protein-coupled receptors on peripheral sensory C-fibers, **bradykinin directly evokes pain**, acting synergistically with prostaglandin E2 to lower nociceptive thresholds and generate prolonged inflammatory hyperalgesia.",
+      "say": "Bradykinin binds B2 receptors on unmyelinated C-fibers to directly evoke acute inflammatory pain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "B2 Receptor (Constitutive)",
+          "points": [
+            "Expressed constitutively on vascular endothelium and primary sensory neurons",
+            "Activated with high affinity by intact bradykinin and kallidin",
+            "Mediates acute vasodilation, venular permeability, and sharp pain",
+            "Internalized and desensitized rapidly following agonist exposure"
+          ]
+        },
+        "right": {
+          "title": "B1 Receptor (Inducible)",
+          "points": [
+            "Transcriptionally induced by inflammatory cytokines (IL-1, TNF-alpha)",
+            "Activated with high affinity by des-Arg9-bradykinin metabolite",
+            "Mediates chronic inflammatory pain and sustained vascular leakage",
+            "Resistant to desensitization, sustaining chronic hyperalgesia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Congenital deficiency of C1 esterase inhibitor permits uncontrolled activation of the contact kallikrein-kinin system. The resulting disorder is **hereditary angioedema**, wherein massive excessive generation of bradykinin causes episodic, recurrent, non-pruritic subcutaneous and submucosal edema affecting the face, extremities, bowel, and larynx without accompanying urticaria.",
+      "say": "Hereditary angioedema lacks C1 inhibitor, driving massive bradykinin surges that cause life-threatening edema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/c1-esterase-inhibitor-deficiency-fig1.webp",
+        "caption": "Kallikrein-kinin and complement dysregulation in hereditary angioedema illustrating bradykinin-driven edema.",
+        "alt": "C1 esterase inhibitor deficiency diagram illustrating kallikrein activation and bradykinin generation"
+      }
+    },
+    {
+      "tx": "The complement system comprises over thirty circulating and membrane-bound plasma proteins that function in innate host defense. Activation of the classical, alternative, or lectin pathways converges on the proteolytic cleavage of complement component C3 by C3 convertases, splitting the central zymogen into **fragments C3a and C3b**.",
+      "say": "Complement pathways converge to cleave C3 into the anaphylatoxin C3a and the opsonin C3b.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c3_convertase",
+            "label": "C3 Convertase (C4b2a or C3bBb) Assembles on Activating Pathogen Surface"
+          },
+          {
+            "id": "cleavage_event",
+            "label": "Cleaves Central Alpha Chain of C3 at Conserved Arginine Residue"
+          },
+          {
+            "id": "c3a_anaphylatoxin",
+            "label": "Releases Small Soluble 77-Amino-Acid Peptide Fragment C3a into Plasma"
+          },
+          {
+            "id": "c3b_opsonin",
+            "label": "Deposition of Reactive C3b Thioester Directly onto Microbial Membranes"
+          }
+        ],
+        "edges": [
+          [
+            "c3_convertase",
+            "cleavage_event"
+          ],
+          [
+            "cleavage_event",
+            "c3a_anaphylatoxin"
+          ],
+          [
+            "cleavage_event",
+            "c3b_opsonin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The small, soluble cleavage fragments C3a and C5a act as potent anaphylatoxins that amplify acute inflammation. Binding of **complement fragment C3a** to high-affinity G-protein-coupled receptors on mast cells and basophils triggers immediate degranulation with histamine release, driving marked smooth muscle contraction and microvascular permeability.",
+      "say": "Complement C3a acts as an anaphylatoxin, triggering mast cell histamine release and bronchospasm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complement Anaphylatoxin C3a",
+          "points": [
+            "77-amino-acid cleavage fragment released from C3 alpha chain",
+            "Triggers mast cell degranulation and histamine release",
+            "Causes smooth muscle contraction and arteriolar vasodilation",
+            "Rapidly inactivated in circulation by carboxypeptidase N to C3a-desArg"
+          ]
+        },
+        "right": {
+          "title": "Complement Anaphylatoxin C5a",
+          "points": [
+            "74-amino-acid cleavage fragment released from C5 alpha chain",
+            "Extremely potent anaphylatoxin: 20-fold more active than C3a",
+            "Powerful chemotactic agent for neutrophils, monocytes, and eosinophils",
+            "Activates leukocyte lipoxygenase pathway and increases integrin avidity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cleavage of complement component C5 initiates assembly of the terminal membrane attack complex. Composed of non-covalently associated proteins **C5b, C6, C7, C8, and polymeric C9**, the cylindrical complex inserts directly into microbial lipid bilayers, punching ten-nanometer hydrophilic transmembrane pores that drive osmotic microbial lysis.",
+      "say": "The membrane attack complex C5b-9 punches ten-nanometer holes into microbial membranes, causing osmotic lysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergic-rhinitis-fig1.webp",
+        "caption": "Mucosal inflammation displaying vascular hyperpermeability and mediator-driven tissue edematous swelling.",
+        "alt": "Upper airway mucosal inflammation with vascular dilatation and mediator release"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

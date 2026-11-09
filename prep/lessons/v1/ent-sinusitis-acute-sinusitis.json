@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "id": "ent-sinusitis-acute-sinusitis",
+ "subject": "ent",
+ "module": "ent-sinusitis",
+ "title": "Acute and Chronic Sinusitis and Fungal Disease",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acute rhinosinusitis** is symptomatic inflammation of the nose and paranasal sinuses lasting under twelve weeks, usually viral and self limiting after a common cold. Blockage, discharge, facial pressure and smell reduction dominate, with purulent discharge and fever marking heavier disease. Most cases settle with symptomatic care alone, so antibiotics are reserved for severe, worsening or prolonged bacterial patterns rather than every congested patient.",
+   "say": "Sinus inflammation under twelve weeks is usually viral and settles without antibiotics in most patients. The symptom pattern has blockage, discharge, facial pressure and smell loss together. Antibiotics are reserved for severe or worsening bacterial cases, not routine congestion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sinusitis-fig1.webp",
+    "alt": "Coronal illustration showing ostiomeatal obstruction, mucosal oedema and purulent exudate in the maxillary sinus in acute rhinosinusitis.",
+    "caption": "Ostiomeatal obstruction with maxillary pus in acute rhinosinusitis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bacterial superinfection is suspected with three patterns: symptoms persisting beyond ten days without improvement, severe onset with high fever and purulence for three days, or double worsening after initial recovery. **Double worsening** is the classic trap where a recovering cold deteriorates again with new fever and discharge. Viral illness, by contrast, peaks around day three and then steadily improves day by day.",
+   "say": "Three patterns suggest bacterial infection rather than a simple lingering cold virus. Persistence beyond ten days, severe feverish onset, or worsening after recovery each qualify distinctly. Ordinary viral illness peaks near day three and then improves steadily each day.",
+   "vis": {
+    "kind": "table",
+    "title": "Patterns suggesting bacterial rhinosinusitis",
+    "cols": [
+     "Pattern",
+     "Description"
+    ],
+    "rows": [
+     [
+      "Persistent",
+      "Over ten days without any improvement"
+     ],
+     [
+      "Severe onset",
+      "High fever with purulence for three days"
+     ],
+     [
+      "Double worsening",
+      "New deterioration after initial recovery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic rhinosinusitis** persists beyond twelve weeks with at least two symptoms, one being blockage or discharge, supported by endoscopic or computed tomography evidence of mucosal disease. It divides into disease with polyps and disease without polyps, which differ in inflammation type and treatment response. Dental infection, immunodeficiency, ciliary dysfunction and allergy contribute in selected patients, so refractory disease earns a search for these drivers.",
+   "say": "Disease beyond twelve weeks with objective mucosal evidence is chronic rhinosinusitis by definition. Disease with polyps differs from disease without them and guides later treatment choices. Stubborn cases need a search for dental, immune or ciliary drivers behind the inflammation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chronic disease with polyps",
+     "points": [
+      "Pale polyps in middle meatus",
+      "Smell loss prominent",
+      "Often asthma linked",
+      "Type two inflammation common"
+     ]
+    },
+    "right": {
+     "title": "Chronic disease without polyps",
+     "points": [
+      "No polyps on endoscopy",
+      "Discharge and pressure dominate",
+      "Dental source more common",
+      "Mixed inflammation patterns"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **ostiomeatal complex** is the shared drainage channel where the maxillary, anterior ethmoid and frontal sinuses empty into the middle meatus, and small mucosal swelling there obstructs several sinuses at once. Restoring this channel is the anatomical goal of modern sinus surgery. Coronal computed tomography displays the complex, the uncinate process and Haller or Agger nasi cells that narrow it in individual patients.",
+   "say": "Several sinuses drain through one shared channel in the middle meatus region. Minor swelling there obstructs multiple sinuses simultaneously, producing widespread symptoms from a small lesion. Modern surgery aims precisely at reopening this channel and restoring ventilation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasal-cavity-and-paranasal-sinuses-fig1.webp",
+    "alt": "Coronal and sagittal diagrams of nasal cavity and paranasal sinuses showing sinus anatomy, drainage pathways, sinusitis and polyps.",
+    "caption": "Sinus anatomy and drainage pathways centred on the ostiomeatal complex. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Fungal sinusitis** spans distinct diseases that share fungal elements but demand opposite treatments. Fungus ball collects densely in one sinus, usually maxillary, in an immunocompetent host and needs only surgical removal. Allergic fungal disease fills sinuses with thick allergic mucin in atopic patients, while acute invasive disease destroys tissue in diabetic or immunosuppressed hosts within days and constitutes a surgical emergency.",
+   "say": "Fungal sinus diseases range from harmless collections to rapidly destructive invasive infection. A fungus ball in one sinus needs simple surgical removal in healthy hosts. Invasive disease in diabetic or suppressed patients destroys tissue within days and demands emergency care.",
+   "vis": {
+    "kind": "table",
+    "title": "Fungal sinusitis: three distinct diseases",
+    "cols": [
+     "Type",
+     "Host",
+     "Treatment core"
+    ],
+    "rows": [
+     [
+      "Fungus ball",
+      "Immunocompetent",
+      "Surgical removal alone"
+     ],
+     [
+      "Allergic fungal",
+      "Atopic",
+      "Surgery plus steroids"
+     ],
+     [
+      "Acute invasive",
+      "Diabetic or suppressed",
+      "Emergency surgery plus antifungals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mucormycosis** is the feared invasive fungal infection where broad ribbon like aseptate hyphae with right angle branching invade blood vessels, causing black necrotic eschar on the palate or turbinates, orbital swelling and cranial spread. Diabetic ketoacidosis and neutropenia create the classic setting, and nasal endoscopy with biopsy of discoloured insensitive mucosa confirms it. Survival depends on urgent surgical debridement, amphotericin therapy and correction of the metabolic defect together.",
+   "say": "Vascular invasion by broad fungal threads produces black dead tissue inside the nose and palate. Diabetic ketoacidosis creates the classic setting for this rapidly fatal infection. Survival needs urgent debridement, antifungal therapy and metabolic correction delivered together.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mucormycosis-fig1.webp",
+    "alt": "Histology comparison showing broad aseptate hyphae with right angle branching of Mucorales organisms against septate moulds.",
+    "caption": "Mucorales hyphae: broad, aseptate, right angle branching. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Imaging choice follows the question being asked. Plain radiographs have almost no role in modern sinus assessment because overlap hides the ostiomeatal region. **Computed tomography** in coronal, axial and sagittal planes is the surgical road map, while magnetic resonance imaging separates tumour from retained secretion and shows orbital or intracranial extension. Endoscopy remains the bedside test that directly shows polyps, pus and mucosal disease.",
+   "say": "Plain films rarely help because overlapping shadows hide the drainage channels completely. Computed tomography maps bony anatomy for surgery, while magnetic resonance separates tumour from trapped secretion. Endoscopy stays the bedside test that directly displays polyps, pus and lining disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Imaging roles in sinus disease",
+    "cols": [
+     "Test",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Endoscopy",
+      "Polyps, pus and lining disease"
+     ],
+     [
+      "CT scan",
+      "Bone and surgical road map"
+     ],
+     [
+      "MRI scan",
+      "Tumour versus secretion, extension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute bacterial episodes that qualify for antibiotics receive amoxicillin first in most guidelines, with broader cover for recent antibiotic exposure, severe disease or complication risk. Intranasal steroids and saline irrigation support every pattern and continue into chronic care. **Referral** follows complications, recurrence, unilateral disease or failure of maximal therapy, where endoscopy and imaging decide whether surgery offers benefit.",
+   "say": "Qualifying bacterial episodes receive first line antibiotics with broader cover for higher risk cases. Steroid spray and saline support accompany antibiotics in every treatment pattern used. Complications, recurrence or unilateral disease all trigger referral for endoscopy and imaging.",
+   "vis": {
+    "kind": "flow",
+    "title": "Acute sinusitis: deciding on antibiotics",
+    "nodes": [
+     {
+      "id": "cold",
+      "label": "Cold with sinus symptoms"
+     },
+     {
+      "id": "pat",
+      "label": "Persistent, severe or worsening pattern"
+     },
+     {
+      "id": "abx",
+      "label": "Antibiotic plus steroid and saline"
+     },
+     {
+      "id": "sup",
+      "label": "Symptomatic care and review"
+     }
+    ],
+    "edges": [
+     [
+      "cold",
+      "pat"
+     ],
+     [
+      "pat",
+      "abx"
+     ],
+     [
+      "cold",
+      "sup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Danger signs override every stepwise plan. Periorbital swelling, double vision, reduced eye movements, proptosis, severe frontal headache, forehead swelling or altered consciousness signal spread beyond the sinuses. Such patients need emergency imaging, intravenous antibiotics and joint ear nose throat, ophthalmology and neurosurgical care. **Cavernous sinus thrombosis** with bilateral eye signs and cranial nerve palsies is the most feared intracranial endpoint of sphenoid and ethmoid disease.",
+   "say": "Eye swelling, double vision or forehead swelling signals spread beyond the sinus walls. Emergency imaging and intravenous antibiotics follow with several specialties involved together. Bilateral eye involvement suggests cavernous sinus thrombosis, the most feared endpoint of sinus spread.",
+   "vis": {
+    "kind": "table",
+    "title": "Referral triggers in sinusitis",
+    "cols": [
+     "Trigger",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Orbital or forehead swelling",
+      "Emergency imaging and admission"
+     ],
+     [
+      "Unilateral disease",
+      "Image and biopsy pathway"
+     ],
+     [
+      "Failed maximal therapy",
+      "Surgical assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic disease management continues topical steroids indefinitely, treats allergy and reflux contributors, and considers long term macrolide or biologic therapy in selected phenotypes under specialist direction. Surgery enters when maximal medical therapy fails and imaging confirms operable disease. **Outcome tracking** with symptom scores and endoscopy prevents both premature surgery and endless ineffective prescriptions, keeping each escalation tied to objective persistent disease.",
+   "say": "Long term topical steroids continue indefinitely in chronic disease alongside contributor control. Surgery enters only when maximal medical therapy fails with imaging confirmation of disease. Symptom scores and endoscopic review keep each escalation tied to objective persistence.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Bacterial sinusitis patterns",
+   "b": "Persistent over ten days, severe onset with fever and purulence, or double worsening after recovery."
+  },
+  {
+   "f": "Mucormycosis histology and action",
+   "b": "Broad aseptate hyphae, right angle branching, vessel invasion; urgent debridement, amphotericin, correct ketoacidosis."
+  },
+  {
+   "f": "Ostiomeatal complex",
+   "b": "Shared drainage channel for maxillary, anterior ethmoid and frontal sinuses; restoring it is the goal of sinus surgery."
+  }
+ ],
+ "keys": [
+  "Most acute sinusitis is viral; antibiotics need a bacterial pattern",
+  "Chronic means beyond twelve weeks with objective evidence",
+  "Black nasal eschar in diabetes: invasive mucormycosis until disproved"
+ ]
+}

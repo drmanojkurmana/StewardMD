@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "id": "ent-csom-marginal-perforation",
+ "subject": "ent",
+ "module": "ent-csom",
+ "title": "Cholesteatoma, Mastoidectomy, and Tympanoplasty Types",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Squamous chronic otitis media, or atticoantral unsafe disease, is characterized by the presence of a cholesteatoma within the middle ear cleft and mastoid antrum. A cholesteatoma is a non-neoplastic, expansile keratinizing squamous epithelial cyst lined by stratified squamous epithelium (matrix) resting on a fibrous stroma (perimatrix). Its enzymatic capacity to synthesize collagenases, acid phosphatases, and osteoclast-activating cytokines produces destructive **bone resorption**.",
+   "say": "Cholesteatoma is an expansile cyst of keratinizing squamous epithelium in the temporal bone. Its enzymes and inflammatory cytokines aggressively erode surrounding bony structures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholesteatoma-fig1.webp",
+    "alt": "Gross and histological schematic of cholesteatoma matrix, perimatrix, and keratin flakes eroding bone",
+    "caption": "Cholesteatoma histology showing keratin flakes, stratified squamous matrix, and osteolytic perimatrix. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Otoscopic hallmarks of atticoantral disease include an attic perforation in the pars flaccida or a posterosuperior **marginal perforation** of the pars tensa. Unlike central perforations, a marginal perforation directly breaches the bony tympanic sulcus with destruction of the fibrous annulus. This allows external meatal squamous epithelium to migrate directly over raw bony margins into the middle ear cleft, forming a secondary acquired cholesteatoma.",
+   "say": "Attic and posterosuperior marginal perforations breach the fibrous annulus, allowing keratinizing skin from the ear canal to grow inward into the middle ear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Perforation (Pars Tensa)",
+     "points": [
+      "Surrounded by a complete rim of fibrous annulus.",
+      "Confined to mesotympanum and hypotympanum.",
+      "Does not erode adjacent bony canal wall.",
+      "Benign mucosal disease with no cholesteatoma risk."
+     ]
+    },
+    "right": {
+     "title": "Marginal Perforation (Posterosuperior)",
+     "points": [
+      "Extends directly to the bony tympanic frame.",
+      "Destroys the protective fibrocartilaginous ring.",
+      "Facilitates epithelial invasion of middle ear cleft.",
+      "Dangerous unsafe disease with active bone destruction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The ossicular chain is particularly susceptible to osteolytic erosion in atticoantral chronic otitis media. Because of its precarious blood supply delivered solely through the mucosal microvasculature, the **long process of the incus** is the most frequently eroded ossicle in seventy percent of cases, followed by the stapes crura. Ossicular necrosis disrupts sound transmission, causing conductive hearing impairment of thirty to sixty decibels.",
+   "say": "Owing to its delicate blood supply, the long process of the incus is the most frequently destroyed ossicle in cholesteatoma, creating severe conductive hearing loss.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ossicle-chain.svg",
+    "alt": "Anatomical schematic showing vulnerable vascular zones and bone erosion patterns of incus and stapes",
+    "caption": "Ossicular erosion predilection in chronic otitis: the incus long process is the most vulnerable component. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical eradication of cholesteatoma mandates mastoidectomy, classified by the handling of the posterior bony external auditory canal wall. In **canal wall down mastoidectomy**, also termed modified radical mastoidectomy, the posterior bony canal wall and bridge are drilled away. This converts the mastoid antrum, attic, and external auditory canal into a single, exteriorized, self-cleaning cavity accessible for outpatient debridement.",
+   "say": "Canal wall down mastoidectomy drills away the posterior canal wall, uniting the mastoid, attic, and ear canal into an exteriorized, accessible, self-cleaning cavity.",
+   "vis": {
+    "kind": "table",
+    "title": "Comparison of Mastoidectomy Philosophies",
+    "cols": [
+     "Feature",
+     "Canal Wall Down (Modified Radical)",
+     "Canal Wall Up (Combined Approach)"
+    ],
+    "rows": [
+     [
+      "Posterior canal wall",
+      "Completely excised and exteriorized",
+      "Preserved intact with posterior tympanotomy"
+     ],
+     [
+      "Recurrence rate",
+      "Extremely low (5% to 10%)",
+      "Higher risk of residual disease (20% to 30%)"
+     ],
+     [
+      "Follow-up requirements",
+      "Requires lifelong cavity inspection and cleaning",
+      "Normal canal anatomy; second-look surgery needed"
+     ],
+     [
+      "Water exposure",
+      "Water precautions advised for life",
+      "Normal swimming permitted once healed"
+     ],
+     [
+      "Primary indication",
+      "Extensive cholesteatoma, only hearing ear",
+      "Limited attic disease, compliant patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, canal wall up mastoidectomy (combined approach tympanoplasty) preserves the posterior bony canal wall, accessing the middle ear through a cortical mastoidectomy combined with a posterior tympanotomy through the facial recess. While this preserves normal canal anatomy and avoids cavity maintenance, it carries a twenty to thirty percent risk of **hidden recurrent cholesteatoma**, mandating routine second-look surgery or non-echo-planar diffusion-weighted magnetic resonance imaging.",
+   "say": "Canal wall up surgery preserves the canal wall, avoiding cavity problems. However, higher recurrence rates require mandatory second-look surgery or diffusion-weighted MRI.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surveillance Protocol for Canal Wall Up Surgery",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Canal Wall Up Mastoidectomy Performed"
+     },
+     {
+      "id": "w2",
+      "label": "Non-Echo-Planar Diffusion MRI at 1 Year"
+     },
+     {
+      "id": "w3",
+      "label": "Second-Look Exploration if Hyperintense Focus Seen"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tympanoplasty denotes surgical eradication of middle ear disease coupled with reconstruction of the sound-conducting hearing mechanism. In the classic Wullstein classification, **Type I tympanoplasty** represents simple closure of a tympanic membrane perforation (myringoplasty) when the ossicular chain remains completely intact and mobile. Hearing outcome is excellent, with complete closure of the air-bone gap.",
+   "say": "Wullstein classified tympanoplasty into five types. Type one is simple repair of the eardrum when the ossicular chain is fully mobile and intact.",
+   "vis": {
+    "kind": "table",
+    "title": "Wullstein Classification of Tympanoplasty",
+    "cols": [
+     "Tympanoplasty Type",
+     "Ossicular Pathology",
+     "Graft Placement Site",
+     "Expected Acoustic Gap"
+    ],
+    "rows": [
+     [
+      "Type I (Myringoplasty)",
+      "Ossicles intact and mobile",
+      "Graft onto intact malleus handle",
+      "Zero to 10 dB gap (Normal)"
+     ],
+     [
+      "Type II",
+      "Malleus head / handle eroded",
+      "Graft onto remnant incus / malleus",
+      "10 to 15 dB gap"
+     ],
+     [
+      "Type III (Myringostapediopexy)",
+      "Malleus and incus eroded",
+      "Graft directly onto intact stapes head",
+      "15 to 25 dB gap"
+     ],
+     [
+      "Type IV (Cavum minor)",
+      "Stapes arch absent, footplate mobile",
+      "Graft seals round window; footplate open",
+      "30 to 35 dB gap"
+     ],
+     [
+      "Type V (Fenestration)",
+      "Stapes footplate fixed in oval window",
+      "Fenestration of lateral semicircular canal",
+      "35 to 45 dB gap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the malleus and incus have been destroyed by cholesteatoma but the stapes suprastructure remains mobile and intact, a **Type III tympanoplasty**, or myringostapediopexy, is performed. The fascial graft is draped directly onto the capitulum (head) of the stapes, establishing acoustic transmission directly to the mobile footplate without intermediary ossicles, yielding a serviceable residual air-bone gap of fifteen to twenty-five decibels.",
+   "say": "In Type three myringostapediopexy, the graft is draped directly onto the mobile stapes head, bypassing absent malleus and incus to restore direct sound transmission.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type III Tympanoplasty",
+     "points": [
+      "Malleus and incus absent or destroyed.",
+      "Stapes suprastructure (head and crura) intact.",
+      "Graft laid directly onto stapes capitulum.",
+      "Modern alternative: Partial Ossicular Prosthesis (PORP)."
+     ]
+    },
+    "right": {
+     "title": "Type IV Tympanoplasty",
+     "points": [
+      "Stapes suprastructure eroded away.",
+      "Only mobile stapes footplate remains.",
+      "Small middle ear air cavity created to shield round window.",
+      "Modern alternative: Total Ossicular Prosthesis (TORP)."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern ossicular reconstruction employs synthetic biocompatible prostheses manufactured from titanium or hydroxyapatite. When the stapes arch is intact, a Partial Ossicular Replacement Prosthesis connects the tympanic membrane to the stapes head. When the stapes suprastructure is missing and only a mobile footplate remains, a **Total Ossicular Replacement Prosthesis** bridges the drum directly to the footplate, interposing a cartilage slice to prevent graft extrusion.",
+   "say": "Modern reconstruction uses titanium prostheses. A partial prosthesis bridges the drum to the stapes head, while a total prosthesis links the drum to the stapes footplate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Selection of Synthetic Ossicular Prosthesis",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Intraoperative Ossicular Assessment"
+     },
+     {
+      "id": "o2",
+      "label": "Stapes Head Present: Place Partial Prosthesis (PORP)"
+     },
+     {
+      "id": "o3",
+      "label": "Footplate Only: Place Total Prosthesis (TORP) on Cartilage"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o1",
+      "o3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-021",
+  "bk2-ent-022",
+  "bk2-ent-023"
+ ]
+}

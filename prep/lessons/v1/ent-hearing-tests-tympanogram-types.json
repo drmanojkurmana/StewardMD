@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "id": "ent-hearing-tests-tympanogram-types",
+ "subject": "ent",
+ "module": "ent-hearing-tests",
+ "title": "Impedance Audiometry, Stapedial Reflex, and Objective Tests",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Tympanometry is an objective physiological measure of middle ear acoustic compliance as air pressure changes within the sealed external auditory canal. A hermetic probe introduces a two hundred and twenty-six hertz probe tone while sweeping pressure from positive two hundred to negative four hundred decapascals. Compliance peaks when ear canal pressure equals middle ear pressure, classified into distinctive **tympanogram types** according to the Jerger system.",
+   "say": "Tympanometry measures middle ear compliance while sweeping canal pressure. Compliance peaks when canal pressure matches middle ear pressure, categorized by the Jerger system.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/otitis-media-with-effusion-fig1.webp",
+    "alt": "Clinical otoscopy and tympanometry schematic illustrating middle ear effusion and flat tympanogram",
+    "caption": "Impedance audiometry assessing middle ear pressure and compliance across common otological pathologies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A normal middle ear generates a Type A tympanogram, displaying a sharp compliance peak between zero point three and one point six millilitres centered around atmospheric pressure (between minus one hundred and positive fifty decapascals). In otosclerosis and malleus fixation, increased ossicular stiffness reduces peak height, creating a shallow **Type As tympanogram**. Conversely, ossicular discontinuity or a flaccid monomeric membrane produces an exaggeratedly deep Type Ad curve.",
+   "say": "A normal ear yields a Type A curve. Stapes fixation lowers compliance to produce a shallow Type As curve, while ossicular disarticulation creates a high Type Ad curve.",
+   "vis": {
+    "kind": "table",
+    "title": "Jerger Classification of Tympanograms",
+    "cols": [
+     "Tympanogram Type",
+     "Peak Compliance Height",
+     "Peak Pressure Location",
+     "Clinical Diagnosis"
+    ],
+    "rows": [
+     [
+      "Type A (Normal)",
+      "Normal (0.3 to 1.6 ml)",
+      "-100 to +50 daPa",
+      "Normal middle ear aeration"
+     ],
+     [
+      "Type As (Shallow)",
+      "Reduced (< 0.3 ml)",
+      "Normal (-100 to +50 daPa)",
+      "Otosclerosis, ossicular fixation"
+     ],
+     [
+      "Type Ad (Deep)",
+      "High / Disarticulated (> 1.6 ml)",
+      "Normal (-100 to +50 daPa)",
+      "Ossicular chain disarticulation"
+     ],
+     [
+      "Type B (Flat)",
+      "Absent (Flat curve)",
+      "No identifiable peak",
+      "Otitis media with effusion, TM perforation"
+     ],
+     [
+      "Type C (Negative)",
+      "Normal compliance height",
+      "Shifted (< -100 daPa)",
+      "Eustachian tube dysfunction, retracted drum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A flat curve with no compliance peak across pressure sweeps defines a **Type B tympanogram**. Interpretation depends entirely on the measured ear canal physical volume. A flat curve with normal volume (zero point six to one point five millilitres in adults) signifies middle ear effusion or thick glue ear. A flat curve with large volume exceeding two point five millilitres indicates a patent tympanic membrane perforation or functioning ventilation grommet.",
+   "say": "A flat Type B curve indicates middle ear effusion if canal volume is normal, but signifies a patent eardrum perforation or grommet if physical volume is enlarged.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type B with Normal Volume",
+     "points": [
+      "Canal volume between 0.6 and 1.5 ml.",
+      "Flat line without any compliance peak.",
+      "Intact drum with fluid damping middle ear cleft.",
+      "Hallmark of otitis media with effusion (glue ear)."
+     ]
+    },
+    "right": {
+     "title": "Type B with Large Volume",
+     "points": [
+      "Canal volume markedly elevated (> 2.5 ml).",
+      "Probe measures combined volume of canal and middle ear.",
+      "Signifies patent eardrum perforation.",
+      "Confirms functional patency of ventilation grommet."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The stapedial reflex, or acoustic reflex, is an involuntary bilateral middle ear muscle contraction triggered by loud sounds between seventy and one hundred decibels above hearing threshold. Acoustic input travels via cranial nerve eight to ventral cochlear nuclei, bilateral superior olivary complexes, and facial nerve nuclei (cranial nerve seven) to contract the **stapedius muscle**. Contraction stiffens the ossicular chain, protecting inner ear hair cells from acoustic trauma.",
+   "say": "Loud sounds bilateral trigger stapedius contraction via an arc linking cranial nerves eight and seven. This stiffens the ossicular chain to shield the cochlea.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bilateral Acoustic Reflex Arc",
+    "nodes": [
+     {
+      "id": "ar1",
+      "label": "Auditory Nerve (CN VIII)"
+     },
+     {
+      "id": "ar2",
+      "label": "Bilateral Superior Olivary Complexes"
+     },
+     {
+      "id": "ar3",
+      "label": "Facial Nerve (CN VII) Stapedius Contraction"
+     }
+    ],
+    "edges": [
+     [
+      "ar1",
+      "ar2"
+     ],
+     [
+      "ar2",
+      "ar3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Otoacoustic emissions are low-intensity acoustic signals generated by the active electromotility of cochlear outer hair cells that propagate retrogradely into the external ear canal. Measured using a sensitive micro-probe microphone, **otoacoustic emissions** are present in healthy ears with hearing thresholds better than thirty decibels. Because they require no active patient response, they serve as the universal gold standard for universal neonatal hearing screening.",
+   "say": "Otoacoustic emissions are sounds emitted by outer hair cells. Present with thresholds better than thirty decibels, they serve as the gold standard for newborn hearing screening.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn8-hearing.webp",
+    "alt": "Clinical newborn hearing screening showing automated OAE probe placed in infant ear canal",
+    "caption": "Automated otoacoustic emission screening for rapid objective detection of congenital sensorineural deafness. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Brainstem Evoked Response Audiometry, or auditory brainstem response, records far-field auditory potentials generated within the brainstem within ten milliseconds of acoustic click stimulation. The tracing displays seven positive vertex waves labeled I through VII. **Wave V**, arising from the inferior colliculus and lateral lemniscus, is the most robust and persistent wave, used clinically to determine objective hearing thresholds in uncooperative infants.",
+   "say": "Auditory brainstem response tracks seven waves over ten milliseconds. Wave five, arising from the lateral lemniscus and inferior colliculus, determines hearing thresholds.",
+   "vis": {
+    "kind": "table",
+    "title": "Anatomical Generators of ABR Peaks (Eponym: E-COLI)",
+    "cols": [
+     "Wave Number",
+     "Anatomical Brainstem Generator",
+     "Mnemonic Station"
+    ],
+    "rows": [
+     [
+      "Wave I",
+      "Distal auditory nerve (spiral ganglion)",
+      "E - Eighth nerve (distal)"
+     ],
+     [
+      "Wave II",
+      "Proximal auditory nerve at brainstem entry",
+      "E - Eighth nerve (proximal)"
+     ],
+     [
+      "Wave III",
+      "Cochlear nucleus (caudal pons)",
+      "C - Cochlear nucleus"
+     ],
+     [
+      "Wave IV",
+      "Superior olivary complex (pons)",
+      "O - Olivary complex"
+     ],
+     [
+      "Wave V",
+      "Lateral lemniscus to inferior colliculus",
+      "L - Lateral lemniscus / Colliculus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In retrocochlear lesions such as vestibular schwannoma, compression of the eighth cranial nerve delays neural conduction, prolonging the latency between wave I and wave V. An interaural wave five latency difference exceeding zero point two milliseconds, or an absolute **I-V interpeak latency** prolongation exceeding four millisecond limits, is an electrophysiological red flag demanding gadolinium-enhanced magnetic resonance imaging of the cerebellopontine angle.",
+   "say": "Acoustic neuromas delay nerve transmission, prolonging the wave one to five interpeak interval. An interaural wave five difference over zero point two milliseconds warrants MRI.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic Triage for Retrocochlear Pathology",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Prolonged I-V Interpeak Latency on ABR"
+     },
+     {
+      "id": "b2",
+      "label": "Asymmetric Interaural Wave V Delay"
+     },
+     {
+      "id": "b3",
+      "label": "Gadolinium-Enhanced CPA Magnetic Resonance Imaging"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Short Increment Sensitivity Index and loudness balance tests differentiate cochlear from retrocochlear sensorineural hearing loss. Patients with cochlear pathology display **auditory recruitment**, where loudness grows abnormally rapidly once threshold is exceeded due to recruitment of surrounding healthy hair cells. A high Short Increment Sensitivity Index score of seventy to one hundred percent confirms a cochlear lesion, whereas retrocochlear lesions score low.",
+   "say": "Auditory recruitment causes rapid loudness growth typical of cochlear hair cell disease. A high score on the Short Increment Sensitivity Index confirms a cochlear origin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cochlear Lesion (e.g. Meniere)",
+     "points": [
+      "Auditory recruitment is strongly positive.",
+      "High SISI score (70% to 100%).",
+      "Speech discrimination score drops smoothly with loss.",
+      "Stapedial reflex decay is negative."
+     ]
+    },
+    "right": {
+     "title": "Retrocochlear Lesion (e.g. Schwannoma)",
+     "points": [
+      "Auditory recruitment is absent.",
+      "Low SISI score (0% to 20%).",
+      "Disproportionately poor speech discrimination score.",
+      "Abnormal stapedial reflex decay positive (fatigue)."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "abfab05a-0f08-419f-ae94-582589acfa86",
+  "5f46cef1-20e2-4540-a4a6-e97d666f2b93",
+  "9e659639-b8e0-4395-879d-0d3be6c0a992"
+ ]
+}

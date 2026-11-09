@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "id": "ent-epistaxis-anterior-epistaxis",
+ "subject": "ent",
+ "module": "ent-epistaxis",
+ "title": "Epistaxis Classification, Nasal Packing, and Artery Ligation",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Epistaxis is classified topographically into anterior epistaxis and posterior epistaxis based on whether the bleeding source originates anterior or posterior to the piriform aperture. **Anterior epistaxis** accounts for over ninety percent of all cases, originating in Little area on the anteroinferior nasal septum. In contrast, posterior epistaxis accounts for roughly ten percent, originating from Woodruff plexus or the sphenopalatine artery, typically affecting elderly hypertensive patients.",
+   "say": "Epistaxis is divided into anterior epistaxis from Little area, accounting for ninety percent of cases, and posterior epistaxis from Woodruff plexus in elderly hypertensives.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/epistaxis-fig1.webp",
+    "alt": "Anatomical schematic showing anterior Little area Kiesselbach plexus and posterior Woodruff plexus",
+    "caption": "Vascular topography of epistaxis: anterior Kiesselbach plexus versus posterior Woodruff plexus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate first-aid management of active anterior epistaxis utilizes the **Trotter method**. The patient sits upright, leaning slightly forward over a basin to avoid swallowing blood, and pinches the soft cartilaginous lower half of the nose firmly between thumb and index finger for ten to fifteen minutes continuously while breathing through the mouth. Leaning forward prevents posterior blood trickling into the pharynx that triggers nausea and airway soiling.",
+   "say": "The Trotter method provides first-aid control: sit leaning forward, breathing through the mouth, while pinching the soft cartilaginous nose firmly for fifteen minutes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Trotter First-Aid Compression Protocol",
+    "nodes": [
+     {
+      "id": "tr1",
+      "label": "Sit Erect & Lean Forward Over Basin"
+     },
+     {
+      "id": "tr2",
+      "label": "Pinch Soft Lower Cartilaginous Nose for 15 Minutes"
+     },
+     {
+      "id": "tr3",
+      "label": "Mouth Breathing & Apply Cold Ice Pack to Bridge"
+     }
+    ],
+    "edges": [
+     [
+      "tr1",
+      "tr2"
+     ],
+     [
+      "tr2",
+      "tr3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When direct digital pressure fails and an active bleeding vessel is localized on anterior rhinoscopy, chemical cautery with **silver nitrate** is the treatment of choice. After topical anesthesia and vasoconstriction with four percent lidocaine and adrenaline, a silver nitrate applicator bead is applied to the perimeter of the vessel for several seconds until an opaque grey eschar forms. Cauterizing corresponding areas on both sides of the septum simultaneously is strictly avoided.",
+   "say": "Silver nitrate chemical cautery seals localized septal vessels. Never cauterize both sides of the septum at the same level simultaneously, or septal perforation will result.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unilateral Cautery (Safe)",
+     "points": [
+      "Applied to bleeding vessel and immediate rim.",
+      "Silver nitrate creates silver proteinate eschar.",
+      "Contralateral perichondrial blood supply remains intact.",
+      "Promotes rapid, safe epithelial healing."
+     ]
+    },
+    "right": {
+     "title": "Bilateral Simultaneous Cautery (Dangerous)",
+     "points": [
+      "Cautery applied to identical spots on both septal sides.",
+      "Destroys perichondrial blood supply bilaterally.",
+      "Ischemic necrosis of intervening quadrilateral cartilage.",
+      "Invariably causes permanent septal perforation."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "If bleeding is diffuse or chemical cautery fails, anterior nasal packing is indicated. The nasal cavity is packed systematically from the floor upward using ribbon gauze lubricated with liquid paraffin or bismuth iodoform paraffin paste (BIPP), or using an expandable polyvinyl acetate sponge (**Merocel**). An anterior pack is left in place for twenty-four to forty-eight hours under systemic oral antibiotic coverage to prevent toxic shock syndrome.",
+   "say": "Anterior nasal packing compresses diffuse bleeding using lubricated ribbon gauze or expandable Merocel sponges, maintained for up to forty-eight hours under antibiotic coverage.",
+   "vis": {
+    "kind": "table",
+    "title": "Comparison of Anterior Versus Posterior Nasal Packing",
+    "cols": [
+     "Feature",
+     "Anterior Nasal Pack",
+     "Posterior Nasal Pack"
+    ],
+    "rows": [
+     [
+      "Primary bleeding focus",
+      "Little area, anterior ethmoidal vessels",
+      "Woodruff plexus, sphenopalatine artery"
+     ],
+     [
+      "Packing material",
+      "Ribbon gauze or Merocel sponges",
+      "Gauze roll tied with silk tapes, or Foley catheter"
+     ],
+     [
+      "Placement technique",
+      "Folded layer by layer along nasal floor",
+      "Pulled into nasopharynx via oral catheters"
+     ],
+     [
+      "Duration of packing",
+      "24 to 48 hours maximum",
+      "48 to 72 hours maximum"
+     ],
+     [
+      "Systemic complications",
+      "Mild discomfort, vestibulitis",
+      "Hypoxia, hypercapnia, vagal bradycardia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When blood continues to pour copiously down the posterior pharynx despite adequate anterior packing, posterior nasal packing is mandatory. Traditional posterior packing employs a firm gauze roll tied with three silk ligatures drawn into the nasopharynx via rubber catheters. Alternatively, a lubricated **Foley catheter** (size 12 or 14 French) is passed into the nasopharynx; its balloon is inflated with eight to ten millilitres of sterile saline and wedged snugly against the choana.",
+   "say": "Posterior packing controls severe deep bleeding using a postnasal pack or a Foley catheter balloon inflated with ten millilitres of water and pulled snug against the choana.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nose-sinuses-gross.webp",
+    "alt": "Anatomical schematic showing Foley catheter balloon wedged in the nasopharynx against the posterior choana",
+    "caption": "Posterior balloon packing wedged against the posterior choana controlling sphenopalatine bleeding. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Posterior packing induces the nasopulmonary reflex, where foreign body pressure in the nasopharynx leads to reflex bronchoconstriction, systemic hypoxia, and hypercapnia. Elderly patients with posterior packs are at high risk for myocardial infarction and stroke, mandating intensive monitoring, supplemental oxygen, and admission. Packs must be removed within **forty-eight to seventy-two hours** to prevent necrosis of the columella, eustachian tube occlusion, and otitis media.",
+   "say": "Posterior packs trigger the nasopulmonary reflex, causing hypoxia and hypercapnia. Patients require admission, supplemental oxygen, and pack removal within seventy-two hours.",
+   "vis": {
+    "kind": "flow",
+    "title": "Physiological Hazards of Posterior Nasal Packing",
+    "nodes": [
+     {
+      "id": "pp1",
+      "label": "Nasopharyngeal Balloon Pressure"
+     },
+     {
+      "id": "pp2",
+      "label": "Nasopulmonary Reflex (Bronchoconstriction & Hypoxia)"
+     },
+     {
+      "id": "pp3",
+      "label": "Supplemental Oxygen & Cardiorespiratory Monitoring Mandatory"
+     }
+    ],
+    "edges": [
+     [
+      "pp1",
+      "pp2"
+     ],
+     [
+      "pp2",
+      "pp3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For intractable posterior epistaxis refractory to packing, endoscopic sphenopalatine artery ligation is the surgical treatment of choice. Under endovision, an incision is made in the posterior lateral nasal wall just anterior to the posterior attachment of the middle turbinate. The sphenopalatine foramen is identified, and the exiting branches of the **sphenopalatine artery** are coagulated with bipolar cautery or clipped, boasting a success rate exceeding ninety-five percent.",
+   "say": "Endoscopic sphenopalatine artery ligation is the gold standard for refractory posterior epistaxis, clipping the vessel at the sphenopalatine foramen with over ninety-five percent success.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgical and Interventional Options for Refractory Epistaxis",
+    "cols": [
+     "Intervention",
+     "Target Vessel",
+     "Surgical Approach",
+     "Success Rate"
+    ],
+    "rows": [
+     [
+      "Endoscopic ligation (ESPAL)",
+      "Sphenopalatine artery branches",
+      "Transnasal endoscopic middle meatus",
+      "> 95% cure"
+     ],
+     [
+      "Anterior ethmoidal ligation",
+      "Anterior ethmoidal artery",
+      "External Lynch fronto-ethmoid incision",
+      "90% cure"
+     ],
+     [
+      "Transantral maxillary ligation",
+      "Internal maxillary artery (3rd part)",
+      "Caldwell-Luc transantral approach",
+      "85% cure"
+     ],
+     [
+      "Endovascular embolization",
+      "Internal maxillary artery branches",
+      "Femoral catheterization (Interventional)",
+      "85% to 90%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hereditary haemorrhagic telangiectasia, or Osler-Weber-Rendu disease, is an autosomal dominant vascular dysplasia characterized by deficiency of muscular and elastic tissue in microvessels, producing fragile arteriovenous telangiectasias across mucous membranes. Patients present with severe, lifelong, recurrent epistaxis. Management employs potassium-titanyl-phosphate (KTP) laser photocoagulation, sub-mucosal bevacizumab injections, or septodermoplasty (**Saunders procedure**), replacing fragile septal mucosa with a split-thickness skin graft.",
+   "say": "Osler-Weber-Rendu disease causes fragile mucosal telangiectasias and severe recurrent epistaxis, treated with KTP laser photocoagulation or Saunders septodermoplasty.",
+   "vis": {
+    "kind": "flow",
+    "title": "Therapeutic Hierarchy for Osler-Weber-Rendu Epistaxis",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Nasal Lubricants & Oral Tranexamic Acid"
+     },
+     {
+      "id": "h2",
+      "label": "KTP Laser Photocoagulation / Bevacizumab"
+     },
+     {
+      "id": "h3",
+      "label": "Saunders Septodermoplasty (Skin Grafting)"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-101",
+  "bk2-ent-102",
+  "bk2-ent-103"
+ ]
+}

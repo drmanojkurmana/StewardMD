@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-skull-cranial-cavity",
+ "subject": "anatomy",
+ "title": "Superior Sagittal Sinus, Cavernous Sinus, and Sinus Thrombosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The dural venous sinuses are endothelial-lined, valveless venous channels situated between the outer endosteal and inner meningeal layers of the dura mater. Because they are enclosed within unyielding fibrous dural envelopes and lack **valves**, their lumina remain permanently patent and are susceptible to bidirectional blood flow governed by pressure gradients.",
+   "say": "Dural venous sinuses are valveless channels situated between endosteal and meningeal dura layers. Rigid dural walls keep them open, allowing bidirectional flow.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-venous-sinuses.svg",
+    "alt": "Anatomical schematic of intracranial dural venous sinuses showing sagittal, straight, transverse, and sigmoid sinuses",
+    "caption": "Intracranial dural venous drainage network culminating in the internal jugular veins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The superior sagittal sinus runs in the attached upper convex border of the falx cerebri, extending from the foramen caecum anteriorly to the internal occipital protuberance posteriorly. The **superior sagittal sinus** increases progressively in calibre as it receives superior cerebral veins, terminating at the confluence of sinuses (confluens sinuum), where it usually turns to become the right transverse sinus.",
+   "say": "Running along the attached upper edge of the falx cerebri, the superior sagittal sinus collects superior cerebral veins. It terminates at the confluence, usually joining the right transverse sinus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Foramen Caecum (Originates anterior to crista galli, receiving nasal emissary vein)"
+     },
+     {
+      "id": "s2",
+      "label": "Sagittal Calvarial Sulcus (Grooves midline of frontal, parietal, and occipital bones)"
+     },
+     {
+      "id": "s3",
+      "label": "Confluence of Sinuses (Dilated junction opposite internal occipital protuberance)"
+     },
+     {
+      "id": "s4",
+      "label": "Right Transverse Sinus (Predominant continuation draining into right sigmoid sinus)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flanking the superior sagittal sinus are two to three lateral lacunae (lacunae laterales) into which delicate cauliflower-like arachnoid villi project. Hypertrophied clusters of these villi form **arachnoid granulations** (Pacchionian bodies) that penetrate the dural wall to return cerebrospinal fluid directly into the venous bloodstream. With advancing age, they erode pits in the calvaria.",
+   "say": "Arachnoid granulations project into lateral lacunae alongside the sinus. These cauliflower-like villi resorb cerebrospinal fluid into the venous bloodstream.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arachnoid Granulations",
+     "points": [
+      "Microscopic villi cluster into macroscopic cauliflowers",
+      "Function as one-way pressure-dependent flap valves",
+      "Resorb approximately 500 mL of CSF daily into venous blood",
+      "Erode visible granular pits on inner calvarial table"
+     ]
+    },
+    "right": {
+     "title": "Bridging Cortical Veins",
+     "points": [
+      "Drain cerebral cortex and cross subdural space",
+      "Enter superior sagittal sinus against direction of flow",
+      "Torn by acceleration-deceleration shearing forces",
+      "Rupture produces acute or chronic subdural haematoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The cavernous sinuses are paired, trabeculated venous spaces located bilaterally on the body of the sphenoid bone on either side of the sella turcica. Each **cavernous sinus** extends from the superior orbital fissure anteriorly to the apex of the petrous temporal bone posteriorly, connected to its counterpart across the midline by anterior and posterior intercavernous sinuses.",
+   "say": "Flanking the sella turcica, paired cavernous sinuses feature intricate endothelial trabeculae. Intercavernous sinuses link them across the midline, allowing bilateral infection spread.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cavernous-sinus.svg",
+    "alt": "Coronal anatomical diagram of cavernous sinus showing internal carotid artery and cranial nerves III, IV, V1, V2, and VI",
+    "caption": "Coronal section of the cavernous sinus displaying internal carotid artery and traversing cranial nerves. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical contents of the cavernous sinus are arranged in two distinct compartments. Traversing the centre of the cavernous venous lumen, surrounded only by endothelium, is the **internal carotid artery** with its sympathetic plexus, and the abducens nerve (cranial nerve VI). The abducens nerve lies immediately inferolateral to the carotid siphon within the venous blood.",
+   "say": "The internal carotid artery and abducens nerve run directly through the venous lumen. Being surrounded by blood, the sixth nerve is earliest affected in cavernous hypertension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Location in Cavernous Sinus",
+     "Transmitted Structure",
+     "Vulnerability in Pathology"
+    ],
+    "rows": [
+     [
+      "Within the venous lumen (central)",
+      "Internal carotid artery (with sympathetic plexus)",
+      "Aneurysm rupture produces high-flow carotid-cavernous fistula"
+     ],
+     [
+      "Within the venous lumen (central)",
+      "Abducens nerve (CN VI)",
+      "Most vulnerable nerve; lateral rectus palsy causes early diplopia"
+     ],
+     [
+      "In lateral dural wall (top to bottom)",
+      "Oculomotor nerve (CN III)",
+      "Complete ophthalmoplegia, ptosis, and loss of pupillary light reflex"
+     ],
+     [
+      "In lateral dural wall (top to bottom)",
+      "Trochlear nerve (CN IV)",
+      "Paralysis of superior oblique; diplopia on downward gaze"
+     ],
+     [
+      "In lateral dural wall (top to bottom)",
+      "Ophthalmic nerve (CN V1) and Maxillary nerve (CN V2)",
+      "Sensory loss and numbness over forehead, cornea, and upper cheek"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Embedded within the lateral dural wall of the sinus from superior to inferior are four cranial nerves: oculomotor (CN III), trochlear (CN IV), ophthalmic (CN V1), and maxillary (CN V2). Notice that the **mandibular nerve** (CN V3) does not enter the cavernous sinus; it exits the middle cranial fossa immediately through the foramen ovale without contacting the sinus wall.",
+   "say": "The lateral dural wall embeds cranial nerves three, four, V1, and V2 in order. The mandibular nerve V3 does not enter the sinus, exiting directly via foramen ovale.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Superior: Oculomotor Nerve (CN III entering superior orbital fissure)"
+     },
+     {
+      "id": "c2",
+      "label": "Second: Trochlear Nerve (CN IV crossing over oculomotor)"
+     },
+     {
+      "id": "c3",
+      "label": "Third: Ophthalmic Nerve (CN V1 dividing into lacrimal, frontal, nasociliary)"
+     },
+     {
+      "id": "c4",
+      "label": "Inferior: Maxillary Nerve (CN V2 exiting forward via foramen rotundum)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the abducens nerve lies free inside the trabeculated venous lumen rather than shielded within the fibrous lateral dural wall, it is exceptionally vulnerable to compressive hypertension or inflammatory thrombosis. The earliest neurological sign of **cavernous sinus** involvement is therefore an isolated lateral rectus palsy with inability to abduct the eye.",
+   "say": "Lying unshielded within the venous channel, the abducens nerve suffers earliest. Lateral rectus palsy causing inability to abduct the eye is the hallmark presenting sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Abducens Nerve (CN VI)",
+     "points": [
+      "Lies unshielded within the venous blood lumen",
+      "Directly compressed by raised intracavernous pressure",
+      "Earliest nerve paralysed in sinus thrombosis or aneurysm",
+      "Produces inability to abduct the eye and horizontal diplopia"
+     ]
+    },
+    "right": {
+     "title": "Lateral Wall Nerves (III, IV, V1, V2)",
+     "points": [
+      "Protected within fibrous collagenous dural sheath",
+      "Involved progressively as thrombosis expands",
+      "Produces complete ptosis, dilated pupil, total ophthalmoplegia",
+      "Causes corneal anaesthesia and midface numbness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A skull base fracture lacerating the internal carotid artery within the cavernous sinus creates a high-flow direct carotid-cavernous fistula. Arterial blood under systemic pressure engorges the orbital veins, producing **pulsatile proptosis**, a loud cranial bruit audible with a stethoscope over the orbit, chemosis, and progressive visual loss from venous hypertension.",
+   "say": "Carotid rupture within the sinus creates a high-flow fistula. Patients present with pulsatile proptosis, a loud orbital bruit, chemosis, and threatened vision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Basal Skull Fracture (Tears internal carotid artery siphon inside cavernous sinus)"
+     },
+     {
+      "id": "f2",
+      "label": "Arterialization of Sinus (Systemic arterial pressure reverses flow into ophthalmic veins)"
+     },
+     {
+      "id": "f3",
+      "label": "Venous Congestion (Severe orbital chemosis, conjunctival injection, raised IOP)"
+     },
+     {
+      "id": "f4",
+      "label": "Pulsatile Proptosis and Bruit (Eyeball pulsates synchronously with radial pulse)"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Infratemporal Fossa, Maxillary Artery, and Mandibular Nerve Branches",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The infratemporal fossa is an irregularly shaped anatomical space situated below and deep to the zygomatic arch and ramus of the mandible. Its roof is formed by the infratemporal surface of the **greater wing of sphenoid** and squamous temporal; anteriorly by the posterior surface of the maxilla; medially by the lateral pterygoid plate; and laterally by the ramus of the mandible.",
+   "say": "Positioned below the zygomatic arch, the infratemporal fossa sits between the mandibular ramus and lateral pterygoid plate. It accommodates masticatory muscles, nerves, and vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-skull-sutures.svg",
+    "alt": "Osteological diagram of the lateral skull showing infratemporal fossa boundaries, pterygoid plates, and sphenoid wing",
+    "caption": "Bony architecture and cranial base boundaries of the infratemporal fossa. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The maxillary artery is the larger terminal branch of the external carotid artery, arising within the parotid substance at the level of the neck of the mandible. It courses horizontally forward through the infratemporal fossa, passing either superficial or deep to the lateral pterygoid muscle before entering the **pterygopalatine fossa** through the pterygomaxillary fissure.",
+   "say": "Arising from the external carotid, the maxillary artery traverses the infratemporal fossa across the lateral pterygoid. It enters the pterygopalatine fossa through the pterygomaxillary fissure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "First Part (Mandibular part: runs horizontal deep to neck of mandible; branches enter bony foramina)"
+     },
+     {
+      "id": "m2",
+      "label": "Second Part (Pterygoid part: runs on lateral pterygoid muscle; supplies muscles of mastication)"
+     },
+     {
+      "id": "m3",
+      "label": "Third Part (Pterygopalatine part: enters pterygomaxillary fissure to supply viscera and palate)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first (mandibular) part of the maxillary artery runs between the neck of the mandible and the sphenomandibular ligament. It gives off five branches, all of which enter bony foramina: deep auricular, anterior tympanic, middle meningeal (entering foramen spinosum), accessory meningeal (entering foramen ovale), and the **inferior alveolar artery** that enters the mandibular canal to supply teeth.",
+   "say": "The first part gives five branches that enter bony foramina, including the middle meningeal artery entering foramen spinosum and the inferior alveolar entering the mandibular canal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branch of 1st Part",
+     "Bony Aperture Traversed",
+     "Supplied Anatomical Structure"
+    ],
+    "rows": [
+     [
+      "Deep auricular artery",
+      "Cartilaginous external acoustic meatus",
+      "External acoustic meatus lining and outer tympanic membrane"
+     ],
+     [
+      "Anterior tympanic artery",
+      "Petrotympanic fissure (Glaserian fissure)",
+      "Inner surface of tympanic membrane and middle ear cavity"
+     ],
+     [
+      "Middle meningeal artery",
+      "Foramen spinosum",
+      "Dura mater and calvarial bone in temporal and parietal fossae"
+     ],
+     [
+      "Accessory meningeal artery",
+      "Foramen ovale",
+      "Trigeminal ganglion and dura of middle cranial fossa"
+     ],
+     [
+      "Inferior alveolar artery",
+      "Mandibular foramen",
+      "Mandibular dental arcade, roots of lower teeth, and chin (mental branch)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The second (pterygoid) part runs obliquely forward on or deep to the lateral pterygoid muscle. Its branches are purely muscular, supplying the four muscles of mastication and buccinator: deep temporal arteries, pterygoid branches, masseteric artery (passing through the mandibular notch), and the **buccal artery** that accompanies the buccal branch of the mandibular nerve across the cheek.",
+   "say": "The second part emits muscular branches to the muscles of mastication and buccinator: masseteric, deep temporal, pterygoid, and buccal branches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First Part Branches (Bone / Dura)",
+     "points": [
+      "Travel through bony foramina and canals",
+      "Supply middle ear, meninges, and lower dentition",
+      "Include middle meningeal and inferior alveolar",
+      "Damage causes epidural hematoma or severe dental bleeding"
+     ]
+    },
+    "right": {
+     "title": "Second Part Branches (Muscular)",
+     "points": [
+      "Travel along soft tissue planes without bony canals",
+      "Supply muscles of mastication and buccinator",
+      "Include masseteric, deep temporal, pterygoid, buccal",
+      "Engorged during sustained mastication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The third (pterygopalatine) part enters the pterygopalatine fossa, giving branches that accompany maxillary nerve divisions: posterior superior alveolar, infraorbital, greater palatine, pharyngeal, and the **sphenopalatine artery**. The sphenopalatine artery enters the sphenopalatine foramen to supply the nasal cavity, famously forming the chief source of severe posterior epistaxis.",
+   "say": "The third part enters the pterygopalatine fossa, yielding the sphenopalatine artery. Entering the nasal cavity, it constitutes the major vascular source of severe posterior epistaxis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-carotid-branches.svg",
+    "alt": "Anatomical schematic tracing the course of the maxillary artery and its branching tree",
+    "caption": "Arterial branching pattern of the maxillary artery traversing the infratemporal and pterygopalatine fossae. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mandibular nerve (cranial nerve V3) is the largest division of the trigeminal nerve and the only division containing motor fibres. Emerging through the foramen ovale into the infratemporal fossa, the main trunk promptly gives off two branches: the **nervus spinosus** (re-entering foramen spinosum to supply middle cranial fossa dura) and the nerve to medial pterygoid.",
+   "say": "The mandibular nerve V3 is the mixed sensory and motor division. Exiting foramen ovale, its undivided trunk emits the nervus spinosus and nerve to medial pterygoid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Foramen Ovale Exit (Mandibular nerve V3 enters infratemporal fossa)"
+     },
+     {
+      "id": "v2",
+      "label": "Main Trunk Branches (Nervus spinosus and nerve to medial pterygoid)"
+     },
+     {
+      "id": "v3",
+      "label": "Anterior Division (Mainly motor: masseteric, deep temporal, lateral pterygoid; sensory: buccal)"
+     },
+     {
+      "id": "v4",
+      "label": "Posterior Division (Mainly sensory: auriculotemporal, lingual, inferior alveolar; motor: mylohyoid)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v2",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anterior division of V3 is predominantly motor, supplying temporalis, masseter, and lateral pterygoid, with one sensory exception: the buccal nerve (which is purely sensory to cheek mucosa and skin). The posterior division is predominantly sensory, bifurcating into the auriculotemporal, inferior alveolar, and **lingual nerve**, which is joined in the infratemporal fossa by the chorda tympani.",
+   "say": "The anterior division is primarily motor, while the posterior division is mainly sensory. The posterior branch yields the auriculotemporal, inferior alveolar, and lingual nerves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Division",
+     "Nerve Branch",
+     "Functional Fibre Modality"
+    ],
+    "rows": [
+     [
+      "Anterior division (motor)",
+      "Masseteric, deep temporal, lateral pterygoid",
+      "Voluntary motor to muscles of mastication"
+     ],
+     [
+      "Anterior division (sensory)",
+      "Buccal nerve",
+      "Somatic sensation from skin and mucous membrane of cheek"
+     ],
+     [
+      "Posterior division (sensory)",
+      "Auriculotemporal and Lingual nerves",
+      "Somatic sensation from ear/temple and anterior two-thirds of tongue"
+     ],
+     [
+      "Posterior division (mixed)",
+      "Inferior alveolar nerve (giving nerve to mylohyoid)",
+      "Sensory to lower teeth; motor to mylohyoid and anterior belly of digastric"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The chorda tympani is a specialized branch of the facial nerve (cranial nerve VII) that exits the skull through the petrotympanic fissure. Entering the infratemporal fossa, it hitches a ride on the posterior border of the lingual nerve. The **chorda tympani** conveys preganglionic parasympathetic secretomotor fibres to the submandibular and sublingual glands, and special sensory taste fibres from the anterior two-thirds of the tongue.",
+   "say": "Exiting through the petrotympanic fissure, the chorda tympani joins the lingual nerve. It conveys taste from the anterior tongue and secretomotor fibres to submandibular glands.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chorda Tympani (CN VII)",
+     "points": [
+      "Origin: Facial nerve in temporal bone mastoid segment",
+      "Exits skull via petrotympanic (Glaserian) fissure",
+      "Special visceral afferent: Taste from anterior 2/3 of tongue",
+      "General visceral efferent: Parasympathetic to submandibular ganglion"
+     ]
+    },
+    "right": {
+     "title": "Lingual Nerve (CN V3)",
+     "points": [
+      "Origin: Posterior division of mandibular nerve",
+      "Exits skull via foramen ovale",
+      "General somatic afferent: Pain, temperature, touch from anterior 2/3 of tongue",
+      "Acts as anatomical mechanical vehicle carrying chorda tympani"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

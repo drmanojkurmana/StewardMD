@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sur-spleen",
+ "subject": "surgery",
+ "title": "Splenic Pathologies, Aneurysms, and Howell-Jolly Bodies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A common embryological remnant resulting from incomplete fusion of splenic mesenchymal buds within the dorsal mesogastrium is an **accessory spleen**, also designated as a splenunculus. Present in ten to thirty percent of the general population, accessory spleens are small, well-encapsulated nodules of normal splenic architecture. Over seventy-five percent are located in or around the splenic hilum, followed by the gastrosplenic ligament, greater omentum, and splenocolic fold.",
+   "say": "An accessory spleen represents an embryological remnant found in up to thirty percent of individuals, predominantly around the splenic hilum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/accessory-spleen-fig1.webp",
+    "alt": "Anatomical schematic showing anatomical distribution of accessory spleens around the splenic hilum, omentum, and mesentery.",
+    "caption": "Accessory spleen locations: common anatomical distribution in the splenic hilum, gastrosplenic ligament, and omentum. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recognition of an accessory spleen is of paramount importance during splenectomy performed for haematological indications such as immune thrombocytopenia or hereditary spherocytosis. Failure to identify and excise an accessory spleen permits the remnant tissue to undergo compensatory hypertrophy under the stimulus of persistent disease, resulting in late clinical relapse. Technetium-99m heat-denatured erythrocyte **scintigraphy** is the gold standard imaging modality for detecting occult ectopic splenic tissue.",
+   "say": "Failure to excise accessory spleens during surgery for haematological conditions leads to disease relapse through compensatory hypertrophy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Site",
+     "Incidence (%)",
+     "Surgical Significance during Splenectomy"
+    ],
+    "rows": [
+     [
+      "Splenic Hilum",
+      "75%",
+      "Readily identified and excised during hilar dissection"
+     ],
+     [
+      "Gastrosplenic Ligament",
+      "20%",
+      "Must be inspected when dividing short gastric vessels"
+     ],
+     [
+      "Splenocolic Ligament",
+      "5%",
+      "Inspected during left colon mobilization"
+     ],
+     [
+      "Greater Omentum & Mesentery",
+      "3%",
+      "Search required in refractory haematological relapse"
+     ],
+     [
+      "Presacral / Retroperitoneal",
+      "Rare (< 1%)",
+      "Detected via Tc-99m labeled red blood cell scintigraphy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent visceral artery aneurysm encountered in clinical practice is a **splenic artery aneurysm**, representing sixty percent of all splanchnic aneurysms. Women are affected four times more frequently than men, driven by arterial wall elastolysis induced by multiple pregnancies and portal hypertension. While small calcified aneurysms remain asymptomatic, spontaneous rupture into the lesser sac and free peritoneal cavity carries a high mortality rate exceeding twenty percent.",
+   "say": "Splenic artery aneurysms are the most common visceral artery aneurysms, carrying high rupture risks in multiparous women.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "Multiparity, Portal Hypertension, Arterial Medial Dysplasia"
+     },
+     {
+      "id": "dilat",
+      "label": "Progressive Saccular Aneurysmal Dilatation (> 2 cm)"
+     },
+     {
+      "id": "rupture",
+      "label": "Double-Rupture Phenomenon: Lesser Sac then Free Peritoneum"
+     },
+     {
+      "id": "bleed",
+      "label": "Catastrophic Hemoperitoneum & Haemorrhagic Shock"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "dilat"
+     ],
+     [
+      "dilat",
+      "rupture"
+     ],
+     [
+      "rupture",
+      "bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rupture during pregnancy carries a catastrophic maternal and fetal mortality rate exceeding seventy percent, typically occurring in the third trimester. An ominous clinical presentation is the **double rupture phenomenon**, wherein initial contained haemorrhage into the lesser sac produces transient epigastric pain, followed forty-eight hours later by free rupture through the foramen of Winslow into the peritoneal cavity with cardiovascular collapse.",
+   "say": "Rupture during pregnancy often presents with a double rupture phenomenon, causing temporary lesser sac tamponade followed by fatal hemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Asymptomatic Aneurysm < 2 cm",
+     "points": [
+      "Incidentally detected calcification",
+      "Non-pregnant individual",
+      "Low rupture rate (< 2%)",
+      "Serial imaging observation safe"
+     ]
+    },
+    "right": {
+     "title": "Intervention Mandated",
+     "points": [
+      "Any aneurysm > 2 cm in diameter",
+      "Women of childbearing age or pregnant",
+      "Documented rapid interval expansion",
+      "Transcatheter coil embolization or surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A localized suppurative cavity residing within the splenic parenchyma constitutes a **splenic abscess**. Arising predominantly from hematogenous bacterial seeding during infective endocarditis, typhoid fever, or melioidosis, or secondary to infected splenic infarcts in sickle cell disease, patients present with high fever, left upper quadrant tenderness, and leukocytosis. Computed tomography confirms a low-attenuation fluid collection, which can be managed with percutaneous catheter drainage or formal splenectomy.",
+   "say": "Splenic abscesses develop from hematogenous seeding in endocarditis or sickle cell disease, presenting with fever and left upper quadrant pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Percutaneous Catheter Drainage",
+     "Surgical Splenectomy"
+    ],
+    "rows": [
+     [
+      "Indication",
+      "Single unilocular collection with discrete wall",
+      "Multilocular abscesses, thick debris, failed drainage"
+     ],
+     [
+      "Invasiveness",
+      "Minimally invasive, local anaesthesia",
+      "Major laparotomy or laparoscopy"
+     ],
+     [
+      "Spleen Salvage",
+      "Preserves functional splenic parenchyma",
+      "Complete organ removal"
+     ],
+     [
+      "Co-Morbidities",
+      "Ideal for critically ill endocarditis patients",
+      "Preferred for concomitant ruptured organs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extreme hyperfunction of the reticuloendothelial elements of the spleen leading to accelerated peripheral blood cytopenias is designated as **hypersplenism**. Patients exhibit splenomegaly paired with peripheral anaemia, leukopenia, or thrombocytopenia despite compensatory bone marrow hyperplasia. Splenectomy is indicated when cytopenias cause symptomatic bleeding, transfusion dependence, or severe recurrent infections, leading to rapid normalization of peripheral blood counts.",
+   "say": "Hypersplenism accelerates peripheral blood cell destruction within an enlarged spleen, corrected by targeted splenectomy when cytopenias become severe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "congest",
+      "label": "Splenomegaly secondary to Portal Hypertension or Myeloid Disease"
+     },
+     {
+      "id": "trap",
+      "label": "Excessive Trapping and Destruction of Circulating Blood Cells"
+     },
+     {
+      "id": "cytopenia",
+      "label": "Peripheral Thrombocytopenia, Leukopenia, and Anaemia"
+     },
+     {
+      "id": "marrow",
+      "label": "Compensatory Bone Marrow Hyperplasia in Sternal / Iliac Aspirate"
+     }
+    ],
+    "edges": [
+     [
+      "congest",
+      "trap"
+     ],
+     [
+      "trap",
+      "cytopenia"
+     ],
+     [
+      "cytopenia",
+      "marrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital laxity or complete absence of the primary splenic suspensory ligaments, particularly the splenorenal and gastrosplenic folds, permits the spleen to migrate into the lower abdomen or pelvis as a **wandering spleen**. Suspended solely by an elongated, hypermobile vascular pedicle, the ectopic organ is vulnerable to acute torsion, presenting with severe acute abdominal pain and ischaemic infarction. Splenopexy is the procedure of choice when the organ remains viable.",
+   "say": "A wandering spleen results from lax suspensory ligaments, risking acute torsion that requires splenopexy when viable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Finding",
+     "Viable Wandering Spleen",
+     "Torsion with Splenic Infarction"
+    ],
+    "rows": [
+     [
+      "Abdominal Exam",
+      "Mobile, palpable mass in lower abdomen/pelvis",
+      "Fixed, exquisitely tender pelvic mass, peritonitis"
+     ],
+     [
+      "Doppler Ultrasound",
+      "Patent hilar arterial and venous flow",
+      "Absent splenic parenchymal and hilar blood flow"
+     ],
+     [
+      "Operative Strategy",
+      "Splenopexy (mesh pouch or retroperitoneal pocket)",
+      "Emergency detorsion and total splenectomy"
+     ],
+     [
+      "Organ Outcome",
+      "Splenic preservation achieved",
+      "Organ loss due to gangrenous necrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following surgical splenectomy or in states of functional asplenia, peripheral blood smear examination characteristically reveals pathognomonic **Howell-Jolly bodies**. These small, spherical, basophilic nuclear fragments of condensed DNA represent incomplete erythroblast nuclear extrusion that is normally pitted by the healthy splenic cords of Billroth. Additional post-splenectomy hematological hallmarks include target cells, Pappenheimer bodies, Heinz bodies, and transient thrombocytosis.",
+   "say": "Howell-Jolly bodies are basophilic nuclear remnants on blood smears that confirm surgical asplenia or functional hyposplenism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyposplenism-fig1.webp",
+    "alt": "Peripheral blood smear photograph demonstrating dark spherical Howell-Jolly bodies inside mature red blood cells in asplenia.",
+    "caption": "Howell-Jolly bodies: basophilic nuclear remnants on peripheral blood smear indicating absence of splenic pitting function. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

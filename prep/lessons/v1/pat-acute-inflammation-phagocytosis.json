@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-acute-inflammation",
+  "subject": "pathology",
+  "title": "Leukocyte Phagocytosis, Respiratory Burst, and Genetic Adhesion Defects",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Once leukocytes arrive at the focus of infection, they recognize, engulf, and degrade microbial invaders through phagocytosis. Efficient **leukocyte phagocytosis** involves three sequential steps: recognition and attachment of the target particle, engulfment by pseudopods to form a phagocytic vacuole, and destruction of the ingested microbe within the phagolysosome.",
+      "say": "Phagocytosis involves target particle recognition, pseudopod engulfment, and enzymatic degradation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "target_tag",
+            "label": "Opsonins (IgG Antibodies, Complement C3b) Coat Microbial Surface"
+          },
+          {
+            "id": "receptor_bind",
+            "label": "Leukocyte Fc-Gamma and CR1 Receptors Bind Opsonized Foreign Target"
+          },
+          {
+            "id": "pseudopod_hug",
+            "label": "Actin Polymerization Extends Pseudopodia Around Target, Sealing Phagosome"
+          },
+          {
+            "id": "lysosome_fusion",
+            "label": "Primary Lysosomes Fuse with Phagosome to Form Hydrolytic Phagolysosome"
+          }
+        ],
+        "edges": [
+          [
+            "target_tag",
+            "receptor_bind"
+          ],
+          [
+            "receptor_bind",
+            "pseudopod_hug"
+          ],
+          [
+            "pseudopod_hug",
+            "lysosome_fusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While unopsonized microbes can be recognized directly by toll-like receptors and mannose receptors, phagocytic efficiency increases hundreds-fold when microbes are coated by host serum proteins termed opsonins. The most potent **endogenous opsonins** include immunoglobulin G antibodies binding via their Fc fragments, complement fragment C3b, and circulating collectins like mannose-binding lectin.",
+      "say": "Opsonization by IgG antibodies and complement C3b enhances phagocytosis hundreds of times.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immunoglobulin G (IgG) Opsonin",
+          "points": [
+            "Antigen-binding Fab arms coat specific microbial surface epitopes",
+            "Exposed constant Fc domain binds high-affinity Fc-gamma-RI (CD64)",
+            "Cross-linking of Fc receptors activates ITAM tyrosine kinase cascades",
+            "Triggers robust actin remodeling and immediate phagocytic engulfment"
+          ]
+        },
+        "right": {
+          "title": "Complement Component C3b Opsonin",
+          "points": [
+            "Generated during classical, lectin, or alternative complement cascades",
+            "Covalently bonds to microbial cell surface carbohydrates via thioester bond",
+            "Binds complement receptor-1 (CR1, CD35) on neutrophil membranes",
+            "Promotes particle adherence and synergistic phagocytic engulfment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following target ingestion into a phagosome, the leukocyte unleashes a burst of oxygen consumption to generate lethal reactive oxygen species. Known as the **respiratory burst**, this rapid metabolic surge is catalyzed by the multi-protein enzyme complex nicotinamide adenine dinucleotide phosphate (NADPH) oxidase, which transfers electrons from NADPH to molecular oxygen.",
+      "say": "The respiratory burst uses NADPH oxidase to reduce molecular oxygen into toxic superoxide radicals.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "phagosome_closure",
+            "label": "Ingestion Signals Translocation of Cytosolic Subunits (p47, p67) to Membrane"
+          },
+          {
+            "id": "oxidase_assembly",
+            "label": "Assembles Active NADPH Oxidase Complex at Phagolysosomal Membrane"
+          },
+          {
+            "id": "superoxide_burst",
+            "label": "Transfers Electrons from NADPH to Oxygen, Generating Superoxide Anions (O2-)"
+          },
+          {
+            "id": "dismutation_step",
+            "label": "Superoxide Dismutase Spontaneously Converts Superoxide into Hydrogen Peroxide"
+          }
+        ],
+        "edges": [
+          [
+            "phagosome_closure",
+            "oxidase_assembly"
+          ],
+          [
+            "oxidase_assembly",
+            "superoxide_burst"
+          ],
+          [
+            "superoxide_burst",
+            "dismutation_step"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within the primary azurophilic granules of neutrophils, a heme-containing green enzyme converts hydrogen peroxide into hypochlorous acid in the presence of chloride ions. This powerful enzyme is **myeloperoxidase**, whose reaction product hypochlorous acid represents the active germicidal compound in household bleach, destroying bacterial proteins within milliseconds.",
+      "say": "Myeloperoxidase combines hydrogen peroxide with chloride to produce bactericidal hypochlorous acid.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MPO-H2O2-Halide Mechanism",
+          "points": [
+            "Myeloperoxidase stored abundantly in neutrophil primary azurophilic granules",
+            "Utilizes H2O2 from NADPH oxidase and physiological chloride ions (Cl-)",
+            "Generates hypochlorous acid (HOCl), a lethal oxidizing and chlorinating agent",
+            "Most potent bactericidal killing mechanism in human neutrophils"
+          ]
+        },
+        "right": {
+          "title": "Oxygen-Independent Killing",
+          "points": [
+            "Lysozyme: hydrolyzes glycopeptide bonds of bacterial peptidoglycan walls",
+            "Defensins: cationic arginine-rich peptides that punch holes in microbial membranes",
+            "Lactoferrin: chelates nutritional iron, starving microbes of essential cofactor",
+            "Major basic protein: cytotoxic eosinophilic granule protein targeting helminths"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Congenital genetic mutations affecting components of the NADPH oxidase complex abolish reactive oxygen production, producing chronic granulomatous disease. Patients with **chronic granulomatous disease** cannot generate hydrogen peroxide, leaving them vulnerable to recurrent life-threatening infections by catalase-positive bacteria and fungi such as Staphylococcus aureus and Aspergillus.",
+      "say": "Chronic granulomatous disease lacks NADPH oxidase, leading to infections by catalase-positive bacteria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergic-bronchopulmonary-aspergillosis-fig1.webp",
+        "caption": "Fungal hyphal proliferation demonstrating susceptibility to catalase-positive organisms like Aspergillus.",
+        "alt": "Pulmonary aspergillosis infection illustrating fungal invasion in impaired immunity"
+      }
+    },
+    {
+      "tx": "Catalase-positive microbes break down endogenous microbial hydrogen peroxide, denying neutrophils any substrate for myeloperoxidase-mediated hypochlorous acid synthesis. In contrast, catalase-negative bacteria like Streptococcus pneumoniae produce hydrogen peroxide that **leukocytes utilize against them**, allowing patients with chronic granulomatous disease to kill catalase-negative microbes normally.",
+      "say": "Catalase-negative streptococci produce their own hydrogen peroxide, which host MPO uses to kill them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Catalase-Positive Pathogens (Lethal in CGD)",
+          "points": [
+            "Staphylococcus aureus, Burkholderia cepacia, Serratia marcescens",
+            "Nocardia species and Aspergillus fungal species",
+            "Endogenous bacterial catalase destroys bacterial H2O2 metabolic byproduct",
+            "Host neutrophils cannot form HOCl, leading to chronic granuloma formation"
+          ]
+        },
+        "right": {
+          "title": "Catalase-Negative Pathogens (Killed in CGD)",
+          "points": [
+            "Streptococcus pneumoniae and Streptococcus pyogenes",
+            "Lack catalase; produce and excrete H2O2 into the phagolysosome",
+            "Host myeloperoxidase borrows microbial H2O2 to generate lethal HOCl",
+            "CGD patients clear streptococcal infections with normal efficiency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Autosomal recessive mutations in the ITGB2 gene encoding the common beta-two integrin subunit CD18 cause leukocyte adhesion deficiency type one. In **leukocyte adhesion deficiency type 1**, neutrophils fail to express functional LFA-one and Mac-one, rendering them incapable of firm endothelial adhesion and extravasation into inflamed tissues.",
+      "say": "Leukocyte adhesion deficiency type 1 lacks CD18 integrins, preventing neutrophil extravasation into tissues.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "itgb2_mutation",
+            "label": "Recessive Loss-of-Function Mutation in ITGB2 Gene on Chromosome 21q22"
+          },
+          {
+            "id": "cd18_deficiency",
+            "label": "Complete Failure of Beta-2 Integrin Heterodimer Assembly (CD11a/CD18)"
+          },
+          {
+            "id": "adhesion_failure",
+            "label": "Neutrophils Roll on Selectins but Cannot Achieve Stable Firm Arrest"
+          },
+          {
+            "id": "clinical_triad",
+            "label": "Presents with Delayed Umbilical Cord Separation and Absent Pus in Infections"
+          }
+        ],
+        "edges": [
+          [
+            "itgb2_mutation",
+            "cd18_deficiency"
+          ],
+          [
+            "cd18_deficiency",
+            "adhesion_failure"
+          ],
+          [
+            "adhesion_failure",
+            "clinical_triad"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because neutrophils cannot migrate across vascular walls into infected tissues, patients with leukocyte adhesion deficiency type one present with a pathognomonic clinical triad. Affected infants display **delayed separation of the umbilical cord**, recurrent necrotic soft-tissue infections devoid of pus formation despite extreme peripheral blood neutrophilic leukocytosis.",
+      "say": "LAD-1 causes delayed umbilical cord separation, extreme leukocytosis, and infections without pus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/actinomycosis-fig1.webp",
+        "caption": "Bacterial colony surrounded by dense neutrophilic infiltrates demonstrating normal pus and granulation formation.",
+        "alt": "Actinomycosis colony surrounded by dense neutrophilic suppurative reaction"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

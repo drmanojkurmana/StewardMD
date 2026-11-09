@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "module": "sur-colon-benign",
+ "subject": "surgery",
+ "title": "Ileal Pouch Reconstruction and Colonic Emergencies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The definitive restorative surgical technique following proctocolectomy for medically refractory ulcerative colitis is **ileal pouch-anal anastomosis**. A neo-rectal reservoir is fashioned from terminal ileal loops, most commonly configured into a fifteen to twenty centimetre J-shaped pouch. The pouch is brought down into the deep pelvis and anastomosed directly to the anal transition zone or dentate line, preserving physiological defecation.",
+   "say": "Ileal pouch-anal anastomosis reconstructs a pelvic reservoir from terminal ileum after proctocolectomy, maintaining natural continence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Total Proctocolectomy with Anal Sphincter Preservation"
+     },
+     {
+      "id": "conf",
+      "label": "Folding Terminal Ileum into J-Pouch Reservoir"
+     },
+     {
+      "id": "staple",
+      "label": "Linear Stapling of Anti-Mesenteric Borders"
+     },
+     {
+      "id": "anast",
+      "label": "Transanal Circular Stapled Pouch-Anal Anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "conf"
+     ],
+     [
+      "conf",
+      "staple"
+     ],
+     [
+      "staple",
+      "anast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To safeguard the pelvic anastomosis during the critical early healing period, surgeons routinely fashion a **temporary diverting loop ileostomy**. Exteriorizing a loop of distal ileum proximal to the pouch diverts the fecal stream away from the fresh staple lines. This diversion markedly reduces the clinical severity of pelvic sepsis, anastomotic leak, and pouch failure, permitting secure tissue maturation over eight to twelve weeks.",
+   "say": "A temporary loop ileostomy protects the fresh ileal pouch-anal anastomosis from fecal contamination during the healing phase.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-loop-ileostomy.webp",
+    "alt": "Surgical technique of creating a defunctioning loop ileostomy in the right iliac fossa with supporting rod.",
+    "caption": "Defunctioning loop ileostomy: exteriorizing a distal ileal loop protects distal pelvic anastomoses. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Potentially lethal non-obstructive dilatation of the diseased colon exceeding six centimetres in diameter requires urgent **toxic megacolon surgery**. This life-threatening surgical emergency complicates severe fulminant ulcerative colitis or pseudomembranous colitis. When patients exhibit persistent pyrexia, leukocytosis, tachycardia, or localized peritonitis despite intensive medical rescue therapy within 48 to 72 hours, prompt laparotomy is mandatory to prevent perforation.",
+   "say": "Toxic megacolon requires emergency surgical laparotomy when severe colonic dilatation and systemic sepsis fail medical stabilization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Toxic Megacolon Diagnostic Criteria",
+     "Surgical Indication",
+     "Therapeutic Goal"
+    ],
+    "rows": [
+     [
+      "Radiological diameter",
+      "Transverse colon > 6 cm on plain X-ray",
+      "Progressive dilatation > 24 hr",
+      "Decompress before rupture"
+     ],
+     [
+      "Systemic toxicity",
+      "Pyrexia > 38.6°C, tachycardia > 120 bpm",
+      "Refractory to IV steroids at 48 hr",
+      "Arrest septic cascade"
+     ],
+     [
+      "Laboratory markers",
+      "Leukocytosis > 10,500/uL, hypoalbuminemia",
+      "Worsening metabolic acidosis",
+      "Normalize organ perfusion"
+     ],
+     [
+      "Peritoneal signs",
+      "Rebound tenderness, guarding, rigidity",
+      "Pneumoperitoneum or frank peritonitis",
+      "Immediate laparotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The emergency surgical procedure of choice in fulminant colitis complicated by toxic megacolon is **subtotal colectomy**. The surgeon resects the friable, necrotic colon from caecum to rectosigmoid junction while intentionally preserving the rectum. An end ileostomy is matured in the right iliac fossa and the rectal stump is closed as a Hartmann pouch, minimizing pelvic dissection and avoiding catastrophic anastomotic leakage.",
+   "say": "Subtotal colectomy with end ileostomy and rectal preservation is the operation of choice for acute fulminant toxic megacolon.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lap",
+      "label": "Emergency Midline Laparotomy & Exploration"
+     },
+     {
+      "id": "subtot",
+      "label": "Subtotal Colectomy from Caecum to Rectosigmoid"
+     },
+     {
+      "id": "rect",
+      "label": "Exteriorization or Hartmann Closure of Rectal Stump"
+     },
+     {
+      "id": "ileo",
+      "label": "Construction of Right Lower Quadrant End Ileostomy"
+     }
+    ],
+    "edges": [
+     [
+      "lap",
+      "subtot"
+     ],
+     [
+      "subtot",
+      "rect"
+     ],
+     [
+      "rect",
+      "ileo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute hypoperfusion of the mesenteric microvasculature supplying the colonic wall triggers **ischaemic colitis**. This vascular compromise predominantly affects elderly patients with generalized atherosclerosis following systemic hypotension, aortic surgery, or cardiac failure. The anatomical watershed regions, specifically Griffiths point at the splenic flexure and Sudeck point at the rectosigmoid junction, represent the zones most vulnerable to low-flow mucosal ischemia.",
+   "say": "Ischaemic colitis typically strikes watershed areas like the splenic flexure during episodes of systemic low-flow perfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischaemic Colitis",
+     "points": [
+      "Low-flow non-occlusive microvascular hypoperfusion",
+      "Watershed distribution (splenic flexure)",
+      "Presents with crampy pain and bloody diarrhea",
+      "Most cases resolve with conservative support"
+     ]
+    },
+    "right": {
+     "title": "Acute Mesenteric Ischaemia",
+     "points": [
+      "Embolic or thrombotic occlusion of SMA",
+      "Involves jejunum, ileum, and right colon",
+      "Severe pain out of proportion to exam",
+      "Carries high mortality demanding immediate surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Submucosal edema and intramural hemorrhage elevating the overlying mucosa produce the pathognomonic **thumbprinting sign**. On plain abdominal radiographs or contrast enemas, rounded indentations project into the gas-filled colonic lumen, reflecting acute mucosal congestion. Early flexible sigmoidoscopy confirms pale, dusky, or ulcerated mucosa while avoiding aggressive air insufflation that could precipitate iatrogenic colonic perforation.",
+   "say": "The thumbprinting sign reflects submucosal edema and hemorrhage elevating the colonic lining in acute ischaemic colitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colonic Ischaemia Stage",
+     "Pathology",
+     "Endoscopic Finding",
+     "Management Approach"
+    ],
+    "rows": [
+     [
+      "Transient (mild)",
+      "Mucosal and submucosal edema",
+      "Pale, friable mucosa with petechiae",
+      "Intravenous hydration, antibiotics"
+     ],
+     [
+      "Stricturing (moderate)",
+      "Muscularis propria fibrosis",
+      "Tubular narrowing, chronic ulceration",
+      "Endoscopic dilation or resection"
+     ],
+     [
+      "Gangrenous (fulminant)",
+      "Transmural infarction and necrosis",
+      "Dusky black, necrotic colonic mucosa",
+      "Emergency surgical colectomy"
+     ],
+     [
+      "Chronic recurrent",
+      "Recurrent microvascular insults",
+      "Segmental mucosal atrophy, colitis",
+      "Cardiovascular risk optimization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Both early and delayed adverse events following intestinal exteriorization are classified as **stoma complications**. Early technical difficulties encompass stomal ischemia, acute mucocutaneous separation, retraction below skin level, and peristomal skin excoriation caused by corrosive effluent. Late complications include parastomal herniation, prolapse of the exteriorized bowel loop, stomal stenosis, and enterocutaneous fistulae.",
+   "say": "Stoma complications range from early ischemia and skin excoriation to late problems like herniation and stomal stenosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-loop-sigmoid-colostomy.webp",
+    "alt": "Surgical creation of a loop sigmoid colostomy through the rectus abdominis muscle with supportive rod.",
+    "caption": "Loop sigmoid colostomy: careful surgical positioning through rectus abdominis prevents stomal complications. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The single most common late mechanical complication affecting intestinal ostomies is **parastomal hernia**. Gradual fascial enlargement around the trephine opening permits intra-abdominal contents, usually omentum or small intestine, to protrude adjacent to the stoma. While asymptomatic hernias are managed with supportive belts, surgical repair using prosthetic mesh hernioplasty or stomal relocation is indicated for severe pain, obstruction, or leakage.",
+   "say": "Parastomal hernia represents the most frequent late stoma complication, resulting from progressive enlargement of the abdominal fascial aperture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conservative Management",
+     "points": [
+      "Indicated for mild reducible hernias",
+      "Custom-fitted elastic supportive stoma belt",
+      "Flexible convex ostomy appliance systems",
+      "Avoids risks of repeat laparotomy"
+     ]
+    },
+    "right": {
+     "title": "Surgical Repair",
+     "points": [
+      "Indicated for bowel obstruction or strangulation",
+      "Prosthetic mesh repair (Sugarbaker technique)",
+      "Relocation of stoma to opposite abdominal quadrant",
+      "Carries high rate of recurrent herniation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nonspecific acute inflammation of the ileal reservoir mucosa following reconstructive surgery is **pouchitis**. Occurring in up to fifty percent of patients undergoing ileal pouch-anal anastomosis for ulcerative colitis, it manifests with increased stool frequency, rectal urgency, nocturnal soiling, and lower abdominal cramping. The standard first-line medical therapy consists of a two-week course of oral ciprofloxacin combined with metronidazole.",
+   "say": "Pouchitis is the most common long-term complication after ileal pouch reconstruction, typically resolving with targeted oral antibiotics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pouchitis Category",
+     "Clinical Presentation",
+     "Pouchoscopy Findings",
+     "First-Line Therapy"
+    ],
+    "rows": [
+     [
+      "Acute pouchitis",
+      "Sudden increase in stool frequency, urgency",
+      "Erythema, mucosal edema, friability",
+      "Ciprofloxacin plus metronidazole (14 days)"
+     ],
+     [
+      "Recurrent pouchitis",
+      "Three or more episodes per year",
+      "Patchy ulceration, loss of vascular pattern",
+      "Maintenance probiotic VSL#3 or De Simone"
+     ],
+     [
+      "Chronic refractory",
+      "Symptoms persisting > 4 weeks despite therapy",
+      "Diffuse ulceration, stricture, mucosal slough",
+      "Biologics (anti-TNF, vedolizumab) or steroids"
+     ],
+     [
+      "Cuffitis",
+      "Rectal bleeding, tenesmus, rectal burning",
+      "Inflammation confined to rectal mucosal cuff",
+      "Topical mesalamine or steroid suppositories"
+     ]
+    ]
+   }
+  }
+ ]
+}

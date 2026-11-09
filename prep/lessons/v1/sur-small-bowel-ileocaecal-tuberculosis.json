@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "sur-small-bowel",
+ "subject": "surgery",
+ "title": "Abdominal Tuberculosis and Mesenteric Ischaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Extrapulmonary Mycobacterium tuberculosis infection involving the gastrointestinal tract manifests most frequently as **ileocaecal tuberculosis**. The ileocaecal region represents the predominant site of infection due to physiological stasis, rich lymphoid tissue in Peyer patches, and minimal digestive enzyme activity. Ingestion of infected sputum or unpasteurized dairy leads to transmural granulomatous inflammation, producing an ulcerative, hyperplastic, or ulcerohyperplastic presentation.",
+   "say": "Ileocaecal tuberculosis occurs predominantly in the terminal ileum and caecum due to abundant Peyer patches and physiological stasis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-abdominal_tuberculosis.webp",
+    "alt": "Clinical illustration showing signs of abdominal tuberculosis, transverse mucosal ulcers, mesenteric lymphadenopathy, and hyperplastic mass.",
+    "caption": "Abdominal tuberculosis: transverse mucosal ulcers perpendicular to bowel axis and ileocaecal hyperplastic mass. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histopathologically, tuberculous ulcers in the intestine align characteristically in a transverse orientation perpendicular to the long axis of the bowel, tracking along the circumferential path of subserosal lymphatic vessels. As these transverse ulcers heal by dense collagenous scarring, they cause concentric luminal stenosis and multiple fibrous strictures. Conversely, the hyperplastic form produces a firm, inflammatory, fixed mass in the right iliac fossa that closely mimics **carcinoma of caecum**.",
+   "say": "Tuberculous ulcers run transversely along lymphatic channels, causing concentric strictures upon healing, while hyperplastic masses mimic cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Intestinal Tuberculosis",
+     "Crohn Disease"
+    ],
+    "rows": [
+     [
+      "Ulcer Orientation",
+      "Transverse (perpendicular to long axis)",
+      "Longitudinal 'serpiginous' ulcers"
+     ],
+     [
+      "Granuloma Histology",
+      "Caseating, confluent, large (> 200 um)",
+      "Non-caseating, discrete, small (< 200 um)"
+     ],
+     [
+      "Lymph Node Involvement",
+      "Caseating necrosis with calcification",
+      "Reactive non-caseating lymphadenitis"
+     ],
+     [
+      "Acid-Fast Bacilli Stain",
+      "Positive on Ziehl-Neelsen in 30%",
+      "Negative"
+     ],
+     [
+      "Response to Anti-TB Therapy",
+      "Complete healing with 6 months ATT",
+      "No response; immunosuppression indicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On contrast radiography and computed tomography, ileocaecal tuberculosis displays distinctive eponymous signs. Symmetrical gaping and thickening of the ileocaecal valve produces the classic **Fleischner sign**, while a rigid, conical, contracted caecum drawn up out of the iliac fossa is known as the Sterling sign. The primary management is pharmacological anti-tubercular therapy for six months; surgery is reserved for mechanical complications including strictures, bowel obstruction, and perforation.",
+   "say": "Contrast imaging shows Fleischner sign with an incompetent valve and a shrunken caecum, with medical anti-tubercular therapy being frontline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ingest",
+      "label": "Ingestion of M. tuberculosis & Uptake by Peyer Patches"
+     },
+     {
+      "id": "inflam",
+      "label": "Caseating Granulomatous Transverse Ulceration"
+     },
+     {
+      "id": "cicatrix",
+      "label": "Concentric Cicatrization: Multiple Strictures & Mass"
+     },
+     {
+      "id": "att",
+      "label": "Frontline Medical Cure: 6 Months Anti-Tubercular Therapy"
+     }
+    ],
+    "edges": [
+     [
+      "ingest",
+      "inflam"
+     ],
+     [
+      "inflam",
+      "cicatrix"
+     ],
+     [
+      "cicatrix",
+      "att"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A sudden, catastrophic reduction in intestinal blood perfusion that threatens bowel viability constitutes **acute mesenteric ischaemia**. The clinical hallmark is severe, agonizing periumbilical abdominal pain out of proportion to benign physical findings on early abdominal examination. Unless recognized and revascularized within twelve hours, extensive transmural bowel infarction supervenes, resulting in a devastating mortality rate surpassing sixty percent.",
+   "say": "Acute mesenteric ischaemia presents with excruciating abdominal pain out of proportion to physical findings, risking fatal bowel gangrene.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mesenteric-ischemia-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating acute superior mesenteric artery occlusion, transmural ischemia, and ischemic mucosal sloughing.",
+    "caption": "Acute mesenteric ischaemia: occlusion of the superior mesenteric artery driving progressive bowel ischemia and gangrene. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The single most common cause of acute mesenteric ischaemia, accounting for fifty percent of episodes, is acute **superior mesenteric artery embolism**. Emboli typically originate from a cardiac source, such as atrial fibrillation, mural thrombi after myocardial infarction, or prosthetic valve vegetations. Because the superior mesenteric artery branches off the aorta at an acute anterior angle, large emboli lodge preferentially three to ten centimetres distal to its origin.",
+   "say": "Superior mesenteric artery embolism, usually from atrial fibrillation, causes half of acute mesenteric ischaemic events.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "afib",
+      "label": "Cardiac Source: Atrial Fibrillation or Mural Thrombus"
+     },
+     {
+      "id": "embol",
+      "label": "Embolus Enters Acute Angle of Superior Mesenteric Artery"
+     },
+     {
+      "id": "impact",
+      "label": "Impaction 3-10 cm Distal to SMA Origin (Middle Colic Branch)"
+     },
+     {
+      "id": "sparing",
+      "label": "Proximal Jejunum Spared via Collaterals; Distal Bowel Infarcted"
+     }
+    ],
+    "edges": [
+     [
+      "afib",
+      "embol"
+     ],
+     [
+      "embol",
+      "impact"
+     ],
+     [
+      "impact",
+      "sparing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the embolus characteristically impacts distal to the origin of the inferior pancreaticoduodenal and middle colic arteries, the very proximal jejunum is typically spared from ischemia through collateral arcade perfusion. In contrast, acute mesenteric arterial **thrombosis** develops on pre-existing severe atherosclerotic stenosis at the very takeoff of the superior mesenteric artery, precipitating extensive gangrene encompassing the entire small bowel from the ligament of Treitz to the transverse colon.",
+   "say": "Emboli lodge distally sparing proximal jejunum, whereas thrombosis occurs at the artery origin causing extensive total small bowel infarction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SMA Embolism",
+     "points": [
+      "Sudden catastrophic onset",
+      "History of atrial fibrillation / MI",
+      "Lodges 3 to 10 cm distal to SMA origin",
+      "Spares proximal jejunal loop"
+     ]
+    },
+    "right": {
+     "title": "SMA Thrombosis",
+     "points": [
+      "Preceded by chronic intestinal angina",
+      "Occurs at the arterial aortic orifice",
+      "Infarcts from ligament of Treitz to colon",
+      "Requires formal surgical bypass"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The diagnostic gold standard imaging investigation for suspected mesenteric ischaemia is biphasic contrast-enhanced computed tomography angiography. Computed tomography displays sharp arterial occlusion, absence of bowel wall enhancement, mesenteric venous gas, and pneumatosis intestinalis. Laboratory markers such as elevated serum **lactate levels** and D-dimer emerge late once irreversible transmural tissue necrosis has already occurred.",
+   "say": "CT angiography is the definitive investigation for mesenteric ischaemia, demonstrating arterial occlusion and loss of bowel wall enhancement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CT Angiography Sign",
+     "Pathological Correlation",
+     "Clinical Severity"
+    ],
+    "rows": [
+     [
+      "Abrupt arterial cut-off",
+      "Intraluminal filling defect / embolus in SMA",
+      "Confirms vascular occlusion site"
+     ],
+     [
+      "Bowel wall hypo-enhancement",
+      "Microvascular mucosal hypoperfusion",
+      "Early reversible ischaemia"
+     ],
+     [
+      "Pneumatosis intestinalis",
+      "Submucosal gas dissecting into bowel wall",
+      "Advanced transmural bowel infarction"
+     ],
+     [
+      "Portomesenteric venous gas",
+      "Gas migrating into mesenteric and portal veins",
+      "Severe gangrene and impending death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency surgical management of superior mesenteric artery embolism mandates urgent laparotomy and transverse arteriotomy to perform balloon catheter **embolectomy** using a Fogarty catheter. Once arterial inflow is restored, intestinal viability is assessed using inspection, handheld Doppler ultrasound, and intravenous fluorescein. Frank non-viable necrotic bowel is resected, and a planned mandatory second-look laparotomy is scheduled twenty-four hours later to re-evaluate questionable segments.",
+   "say": "Surgical treatment requires Fogarty catheter embolectomy, resecting non-viable bowel and scheduling a mandatory second-look laparotomy at 24 hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lap",
+      "label": "Emergency Laparotomy & SMA Exposure at Root of Mesentery"
+     },
+     {
+      "id": "fogarty",
+      "label": "Transverse Arteriotomy & Balloon Fogarty Embolectomy"
+     },
+     {
+      "id": "resect",
+      "label": "Limited Resection of Frankly Gangrenous Intestinal Segments"
+     },
+     {
+      "id": "look",
+      "label": "Mandatory Second-Look Laparotomy Scheduled at 24 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "lap",
+      "fogarty"
+     ],
+     [
+      "fogarty",
+      "resect"
+     ],
+     [
+      "resect",
+      "look"
+     ]
+    ]
+   }
+  }
+ ]
+}

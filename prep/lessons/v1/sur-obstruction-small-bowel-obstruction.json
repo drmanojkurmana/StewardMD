@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-obstruction",
+ "subject": "surgery",
+ "title": "Small Bowel Obstruction and Volvulus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Mechanical interference halting the normal aboral transit of intraluminal gastrointestinal contents is designated as **small bowel obstruction**. The classic cardinal clinical symptoms encompass colicky abdominal pain, early profuse vomiting, marked abdominal distension, and absolute constipation with failure to pass flatus or feces. In high proximal jejunal obstruction, bilious vomiting dominates early while abdominal distension remains minimal, whereas low ileal obstruction produces late feculent emesis and striking generalized distension.",
+   "say": "Small bowel obstruction presents with colicky abdominal pain, vomiting, abdominal distension, and obstipation, varying by anatomical level.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-small-bowel-obstruction.webp",
+    "alt": "Erect abdominal radiograph demonstrating multiple dilated central small bowel loops with classic step-ladder air-fluid levels.",
+    "caption": "Mechanical small bowel obstruction: central dilated loops with valvulae conniventes and air-fluid levels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The single most prevalent aetiology of mechanical small bowel obstruction in post-surgical patients across industrialized nations is postoperative **adhesive obstruction**. Peritoneal adhesions develop in over ninety percent of patients following prior abdominal surgery, predominantly pelvic, colorectal, and appendiceal operations. Fibrous bands entrap, kink, or compress loops of mobile small intestine, triggering luminal blockage without necessarily impairing mesenteric blood perfusion initially.",
+   "say": "Postoperative peritoneal adhesions cause most small bowel obstructions by kinking or entrapping mobile loops of intestine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "surg",
+      "label": "Prior Abdominal Surgery & Peritoneal Trauma"
+     },
+     {
+      "id": "fibrin",
+      "label": "Fibrin Deposition & Organization into Fibrous Adhesions"
+     },
+     {
+      "id": "kink",
+      "label": "Mechanical Kinking or Band Compression of Small Intestine"
+     },
+     {
+      "id": "sbo",
+      "label": "Luminal Small Bowel Obstruction & Proximal Dilatation"
+     }
+    ],
+    "edges": [
+     [
+      "surg",
+      "fibrin"
+     ],
+     [
+      "fibrin",
+      "kink"
+     ],
+     [
+      "kink",
+      "sbo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical emergency occurs when an entrapped intestinal loop becomes occluded at two adjacent points along its length, creating a dangerous **closed loop obstruction**. Continuing secretions from the mucosa rapidly raise intraluminal hydrostatic pressure within the isolated segment without any avenue for proximal or distal decompression. This closed loop dynamic accelerates venous congestion and arterial thrombosis, driving rapid progression to irreversible bowel necrosis.",
+   "say": "Closed loop obstruction isolates a bowel segment at two points, rapidly elevating luminal pressure and provoking tissue necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple Bowel Obstruction",
+     "points": [
+      "Single point of luminal blockage",
+      "Proximal bowel decompresses via vomiting",
+      "Mesenteric perfusion preserved early",
+      "Can trial non-operative management"
+     ]
+    },
+    "right": {
+     "title": "Closed Loop Obstruction",
+     "points": [
+      "Occlusion at two separate points",
+      "No proximal or distal escape for fluid/gas",
+      "Rapid escalation of intraluminal pressure",
+      "Demands immediate emergency surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When compromise of mesenteric venous outflow and arterial blood flow supervenes in obstructed intestine, the condition progresses to bowel **strangulation**. Patients exhibit localized tenderness, involuntary guarding, rebound tenderness, high fever, marked leukocytosis, and unexplained metabolic lactic acidosis. Strangulation carries an imminent hazard of full-thickness transmural gangrene, hollow viscus perforation, and fatal fecal peritonitis, demanding immediate emergency surgical intervention.",
+   "say": "Intestinal strangulation compromises mesenteric blood supply, presenting with localized peritonitis, fever, and lactic acidosis that mandate emergency surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "venous",
+      "label": "Increased Intraluminal Pressure Halts Venous Drainage"
+     },
+     {
+      "id": "edema",
+      "label": "Massive Bowel Wall Oedema & Microvascular Sludging"
+     },
+     {
+      "id": "arterial",
+      "label": "Arterial Inflow Compromise & Transmural Ischaemia"
+     },
+     {
+      "id": "gangrene",
+      "label": "Bowel Strangulation, Gangrene & Peritoneal Sepsis"
+     }
+    ],
+    "edges": [
+     [
+      "venous",
+      "edema"
+     ],
+     [
+      "edema",
+      "arterial"
+     ],
+     [
+      "arterial",
+      "gangrene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Erect plain abdominal radiographs in mechanical small bowel obstruction characteristically demonstrate multiple central loops containing horizontal gas-liquid interfaces arranged in a distinctive pattern termed **step-ladder air-fluid levels**. The small bowel loops are recognized by fine transverse mucosal folds traversing the entire luminal diameter, known as valvulae conniventes or plicae circulares, distinguishing them from peripheral colonic haustra.",
+   "say": "Erect abdominal radiographs reveal step-ladder air-fluid levels within central dilated small bowel loops featuring complete transverse mucosal folds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Small Bowel Obstruction",
+     "Large Bowel Obstruction"
+    ],
+    "rows": [
+     [
+      "Radiological Distribution",
+      "Centrally located abdominal loops",
+      "Peripherally located frame-like loops"
+     ],
+     [
+      "Mucosal Folds",
+      "Valvulae conniventes traverse complete width",
+      "Colonic haustra traverse only partial width"
+     ],
+     [
+      "Air-Fluid Levels",
+      "Multiple short levels ('step-ladder' pattern)",
+      "Fewer, longer, wider air-fluid levels"
+     ],
+     [
+      "Lumen Diameter Limit",
+      "Abnormal if diameter > 3 cm",
+      "Abnormal if colon > 6 cm (caecum > 9 cm)"
+     ],
+     [
+      "Vomiting Timing",
+      "Early and profuse",
+      "Late, occasionally feculent emesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent form of colonic volvulus, resulting from pathological twisting of a redundant mobile loop around its mesentery, is **sigmoid volvulus**. Predisposing factors include chronic constipation, high-fibre diets, elderly institutionalized populations, and neurological disorders. Axial torsion of the sigmoid colon causes a closed-loop large bowel obstruction accompanied by massive painless or colicky abdominal distension and absolute obstipation.",
+   "say": "Sigmoid volvulus occurs when an elongated sigmoid loop twists on its mesenteric axis, causing massive colonic distension.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-sigmoid-volvulus.webp",
+    "alt": "Plain abdominal radiograph of sigmoid volvulus showing massive ahaustral loop pointing toward the right upper quadrant (coffee bean sign).",
+    "caption": "Sigmoid volvulus on abdominal radiography: pathognomonic coffee bean sign projecting toward the right upper quadrant. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On supine plain abdominal radiographs, sigmoid volvulus produces a pathognomonic appearance famously recognized as the **coffee bean sign**, also termed the bent inner-tube sign. The massively dilated, ahaustral sigmoid loop arises out of the pelvis and arches across the midline toward the right upper quadrant. The dense central longitudinal white line represents the opposed thickened inner walls of the twisted loop.",
+   "say": "The coffee bean sign demonstrates a massively dilated ahaustral loop arising from the pelvis and pointing toward the right upper quadrant.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sigmoid Volvulus Radiography",
+     "points": [
+      "Ahaustral loop points to Right Upper Quadrant",
+      "Arises from left lower pelvic quadrant",
+      "Pathognomonic 'coffee bean' appearance",
+      "Rectum empty of air on pelvic view"
+     ]
+    },
+    "right": {
+     "title": "Caecal Volvulus Radiography",
+     "points": [
+      "Loop points toward Left Upper Quadrant / epigastrium",
+      "Preserves colonic haustral markings",
+      "Comma-shaped or kidney-shaped loop",
+      "Absence of gas in right iliac fossa"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Initial management of uncomplicated, viable sigmoid volvulus without signs of peritonitis entails prompt endoscopic decompression using rigid or flexible **sigmoidoscopy**. Under direct visualization, a soft rubber rectal flatus tube is navigated past the twisted torsion point, resulting in dramatic, explosive decompression of foul gas and liquid feces. Because recurrent volvulus occurs in over fifty percent of patients, elective resection is recommended during the same admission.",
+   "say": "Endoscopic sigmoidoscopy with a rectal tube decompresses viable sigmoid volvulus, followed by elective resection to prevent frequent recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Assess for Peritonitis, Gangrene, or Systemic Sepsis"
+     },
+     {
+      "id": "endo",
+      "label": "Sigmoidoscopy & Guided Placement of Rectal Flatus Tube"
+     },
+     {
+      "id": "decompress",
+      "label": "Explosive Decompression of Gas & Resolution of Loop"
+     },
+     {
+      "id": "resect",
+      "label": "Semi-Elective Sigmoid Resection during Same Admission"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "endo"
+     ],
+     [
+      "endo",
+      "decompress"
+     ],
+     [
+      "decompress",
+      "resect"
+     ]
+    ]
+   }
+  }
+ ]
+}

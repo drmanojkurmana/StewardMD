@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "id": "ent-snhl-inner-ear-sudden-sensorineural-hearing",
+ "subject": "ent",
+ "module": "ent-snhl-inner-ear",
+ "title": "Sudden Sensorineural Hearing Loss and Meniere Disease",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Sudden sensorineural hearing loss is defined audiologically as a sensory hearing impairment of at least thirty decibels across at least three contiguous frequencies developing within a seventy-two-hour window. Often presenting upon awakening in the morning, it is accompanied by tinnitus and aural fullness. Potential etiologies include viral cochleitis (mumps, herpes simplex), vascular occlusion of the **labyrinthine artery**, and intracochlear membrane breaks.",
+   "say": "Sudden sensorineural hearing loss is a drop of thirty decibels across three frequencies within three days. Common causes include viral cochleitis and labyrinthine artery occlusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sudden-sensorineural-hearing-loss-fig1.webp",
+    "alt": "Audiogram schematic illustrating sudden unilateral downward drop in sensorineural hearing thresholds",
+    "caption": "Sudden sensorineural hearing loss presenting as acute threshold loss across contiguous frequencies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sudden sensorineural hearing loss is a true otological emergency requiring prompt intervention. The primary evidence-based medical treatment is high-dose **systemic corticosteroids**, administered as oral prednisolone at one milligram per kilogram daily for seven to fourteen days followed by a progressive taper. In patients with medical contraindications to systemic steroids (uncontrolled diabetes or peptic ulcer), intratympanic dexamethasone injections provide effective salvage therapy.",
+   "say": "Immediate treatment with high-dose oral steroids is essential. In diabetic patients or steroid failures, intratympanic dexamethasone injections deliver high cochlear drug levels.",
+   "vis": {
+    "kind": "flow",
+    "title": "Emergency Protocol for Sudden Sensorineural Hearing Loss",
+    "nodes": [
+     {
+      "id": "ss1",
+      "label": "Sudden Drop \u226530 dB Over 3 Frequencies in <72 Hours"
+     },
+     {
+      "id": "ss2",
+      "label": "High-Dose Oral Prednisolone (1 mg/kg/day for 14 Days)"
+     },
+     {
+      "id": "ss3",
+      "label": "Intratympanic Dexamethasone Salvage + Hyperbaric Oxygen"
+     }
+    ],
+    "edges": [
+     [
+      "ss1",
+      "ss2"
+     ],
+     [
+      "ss2",
+      "ss3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Meniere disease, or endolymphatic hydrops, is an idiopathic chronic inner ear disorder characterized by pathological distension of the endolymphatic fluid compartment. Deficient resorption of endolymph by the **endolymphatic sac** and duct causes endolymphatic volume and hydrostatic pressure to expand within the scala media, saccule, and utricle. Periodic ruptures of the stretched membranous labyrinth expose perilymph to potassium-rich endolymph, precipitating acute attacks.",
+   "say": "Meniere disease is caused by endolymphatic hydrops, where impaired resorption distends the scala media and saccule. Membrane rupture triggers vertigo and hearing loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sensorineural-loss-and-inner-ear-fig1.webp",
+    "alt": "Anatomical schematic showing distension of scala media and ballooning of Reissner membrane in endolymphatic hydrops",
+    "caption": "Histopathology of endolymphatic hydrops: massive ballooning of Reissner membrane into the scala vestibuli. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The definitive clinical diagnosis of Meniere disease requires the classic symptom tetrad: recurrent spontaneous episodic true vertigo lasting between twenty minutes and twelve hours, fluctuating low-frequency sensorineural hearing loss, roaring low-pitched tinnitus, and aural fullness in the affected ear. Early in the disease, hearing recovers completely between attacks, but recurrent episodes produce progressive, permanent flat **sensorineural deafness**.",
+   "say": "Meniere disease produces a diagnostic tetrad: episodic vertigo lasting hours, fluctuating low-frequency hearing loss, roaring tinnitus, and aural fullness.",
+   "vis": {
+    "kind": "table",
+    "title": "The Diagnostic Tetrad of Meniere Disease",
+    "cols": [
+     "Tetrad Symptom",
+     "Clinical Character",
+     "Duration / Timing",
+     "Underlying Pathophysiology"
+    ],
+    "rows": [
+     [
+      "Episodic true vertigo",
+      "Severe rotatory spinning, nausea, vomiting",
+      "20 minutes to 12 hours",
+      "Membranous labyrinth micro-rupture"
+     ],
+     [
+      "Fluctuating hearing loss",
+      "Sensorineural drop in low frequencies (125-1000 Hz)",
+      "Worse during attack, recovers initially",
+      "Hydrops damping basilar membrane apex"
+     ],
+     [
+      "Roaring tinnitus",
+      "Low-pitched continuous or pulsatile roar",
+      "Intensifies prior to vertigo episode",
+      "Hair cell irritation and mechanical tension"
+     ],
+     [
+      "Aural fullness",
+      "Unilateral sensation of pressure or plug",
+      "Precedes onset of acute vertigo",
+      "Elevated hydrostatic endolymph pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The glycerol test (Klockhoff test) provides objective confirmation of endolymphatic hydrops. The fasting patient ingests oral glycerol at a dose of one point five millilitres per kilogram mixed with fruit juice. Acting as a systemic hyperosmolar agent, glycerol dehydrates the distended endolymphatic compartment. A temporary improvement of at least **10 dB** in pure-tone thresholds across two octaves confirms endolymphatic hydrops.",
+   "say": "In the glycerol test, oral glycerol dehydrates the inner ear. An improvement of ten decibels across two frequencies confirms endolymphatic hydrops.",
+   "vis": {
+    "kind": "flow",
+    "title": "Glycerol Dehydration Test Protocol",
+    "nodes": [
+     {
+      "id": "gt1",
+      "label": "Baseline Pure-Tone Audiometry & Speech Scoring"
+     },
+     {
+      "id": "gt2",
+      "label": "Oral Glycerol Ingestion (1.5 mL/kg with Water)"
+     },
+     {
+      "id": "gt3",
+      "label": "Repeat Audiogram at 2 and 3 Hours: >10 dB Gain (Positive)"
+     }
+    ],
+    "edges": [
+     [
+      "gt1",
+      "gt2"
+     ],
+     [
+      "gt2",
+      "gt3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrocochleography is a valuable diagnostic adjunct that measures electrical potentials generated during acoustic stimulation. In endolymphatic hydrops, hydrostatic pressure displacement of the basilar membrane exaggerates the direct-current summating potential. A ratio of the summating potential to the action potential exceeding **0.4** (or forty percent) provides strong electrophysiological confirmation of active hydrops.",
+   "say": "Electrocochleography measures cochlear potentials. A summating potential to action potential ratio exceeding zero point four strongly confirms endolymphatic hydrops.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Electrocochleography",
+     "points": [
+      "Summating potential (SP) is small relative to action potential.",
+      "SP/AP amplitude ratio is less than 0.30.",
+      "Symmetrical basilar membrane excursion mechanics.",
+      "Rules out significant hydrostatic endolymphatic hydrops."
+     ]
+    },
+    "right": {
+     "title": "Meniere Endolymphatic Hydrops",
+     "points": [
+      "Summating potential is markedly enlarged and widened.",
+      "SP/AP amplitude ratio exceeds 0.40 (40%).",
+      "Reflects asymmetric basilar displacement by fluid pressure.",
+      "Objective electrophysiological biomarker of hydrops."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term conservative management of Meniere disease aims to reduce endolymph production through lifestyle modifications and oral pharmacotherapy. Patients are placed on strict dietary sodium restriction (less than two grams per day) and avoidance of caffeine, nicotine, and alcohol. Pharmacotherapy combines maintenance **betahistine** (sixteen to forty-eight milligrams daily) to improve microvascular strial perfusion with oral thiazide diuretics to reduce fluid retention.",
+   "say": "Conservative management combines a low-salt diet with betahistine and thiazide diuretics to enhance inner ear blood flow and reduce endolymph volume.",
+   "vis": {
+    "kind": "table",
+    "title": "Stepwise Treatment Hierarchy for Meniere Disease",
+    "cols": [
+     "Step",
+     "Therapeutic Modality",
+     "Primary Mechanism",
+     "Clinical Indication"
+    ],
+    "rows": [
+     [
+      "Step 1",
+      "Dietary sodium restriction (<2 g/day)",
+      "Decreases fluid retention",
+      "All diagnosed patients"
+     ],
+     [
+      "Step 2",
+      "Betahistine & Thiazide diuretics",
+      "H1 agonist vasodilation & mild diuresis",
+      "Maintenance prophylactic therapy"
+     ],
+     [
+      "Step 3",
+      "Intratympanic dexamethasone",
+      "Suppresses inner ear immune inflammation",
+      "Frequent vertigo attacks"
+     ],
+     [
+      "Step 4",
+      "Chemical labyrinthectomy (Gentamicin)",
+      "Selectively ablates vestibular hair cells",
+      "Severe refractory unilateral vertigo"
+     ],
+     [
+      "Step 5",
+      "Surgical vestibular nerve section",
+      "Transects vestibular nerve preserving hearing",
+      "Refractory vertigo with intact hearing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with severe unilateral vertigo refractory to medical therapy, chemical labyrinthectomy using **intratympanic gentamicin** is highly effective. Gentamicin is selectively vestibulotoxic, destroying sensory type I hair cells in the semicircular canal cristae while sparing cochlear hearing in up to ninety percent of cases. For patients with serviceable hearing who fail chemical ablation, surgical endolymphatic sac decompression or selective vestibular neurectomy provides definitive vertigo control.",
+   "say": "Intratympanic gentamicin ablates vestibular hair cells to eliminate disabling vertigo while preserving hearing. Refractory cases may undergo vestibular nerve section.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ablative Pathways for Intractable Meniere Vertigo",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Medical Therapy Failure (Frequent Severe Vertigo)"
+     },
+     {
+      "id": "a2",
+      "label": "Low-Dose Intratympanic Gentamicin Injections"
+     },
+     {
+      "id": "a3",
+      "label": "Selective Vestibular Neurectomy or Sac Decompression"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-051",
+  "bk2-ent-052",
+  "bk2-ent-053"
+ ]
+}

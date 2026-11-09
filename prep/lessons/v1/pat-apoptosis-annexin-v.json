@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "pat-apoptosis",
+  "subject": "pathology",
+  "title": "Apoptotic Morphology, Annexin V, Necroptosis, and Pyroptosis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Under light microscopy, apoptotic cells appear as small, rounded or oval shrunken cells with intensely eosinophilic cytoplasm and dense pyknotic chromatin fragments. Also known in the liver as **Councilman bodies**, these apoptotic hepatocyte silhouettes are extruded into sinusoids during acute viral and autoimmune hepatitis without inciting adjacent necrosis.",
+      "say": "Councilman bodies are apoptotic hepatocytes with condensed eosinophilic cytoplasm seen in acute hepatitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+        "caption": "Autoimmune liver inflammation demonstrating eosinophilic rounded Councilman bodies undergoing sinusoidal extrusion.",
+        "alt": "Histological view of apoptotic Councilman bodies in inflamed liver parenchyma"
+      }
+    },
+    {
+      "tx": "During early apoptosis before plasma membrane permeability is compromised, the normal asymmetrical lipid distribution of the bilayer collapses. Phosphatidylserine flips from the inner leaflet to the outer surface, where it can be detected in flow cytometry using calcium-dependent binding of fluorescently labeled **annexin V**.",
+      "say": "Annexin V binds externalized phosphatidylserine, identifying apoptotic cells by flow cytometry.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "healthy_bilayer",
+            "label": "Healthy Cells Maintain Phosphatidylserine Exclusively in Inner Membrane Leaflet"
+          },
+          {
+            "id": "caspase_cleaves",
+            "label": "Executioner Caspases Inactivate Aminophospholipid Translocase (Flippase)"
+          },
+          {
+            "id": "ps_external",
+            "label": "Scramblase Flips Phosphatidylserine to External Surface of the Outer Leaflet"
+          },
+          {
+            "id": "annexin_binds",
+            "label": "Fluorochrome-Conjugated Annexin V Binds Externalized PS in Calcium-Dependent Assay"
+          }
+        ],
+        "edges": [
+          [
+            "healthy_bilayer",
+            "caspase_cleaves"
+          ],
+          [
+            "caspase_cleaves",
+            "ps_external"
+          ],
+          [
+            "ps_external",
+            "annexin_binds"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In flow cytometric analysis, combining annexin V with a membrane-impermeant DNA-binding fluorophore distinguishes early apoptotic cells from late necrotic cells. While early apoptotic cells stain positive for annexin V but negative for propidium iodide, membrane-compromised necrotic cells stain positive for **both annexin V and propidium iodide**.",
+      "say": "Dual staining separates early apoptotic cells from late necrotic cells that admit propidium iodide.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Apoptosis (Annexin V+ / PI-)",
+          "points": [
+            "Phosphatidylserine externalized to outer membrane leaflet",
+            "Plasma membrane remains structurally intact, excluding vital dyes",
+            "Propidium iodide cannot enter cytoplasm to stain nuclear DNA",
+            "Cells represent intact apoptotic bodies ready for phagocytic uptake"
+          ]
+        },
+        "right": {
+          "title": "Necrosis / Late Apoptosis (Annexin V+ / PI+)",
+          "points": [
+            "Phosphatidylserine exposed on external and internal membrane leaflets",
+            "Plasma membrane physically ruptured and completely permeable",
+            "Propidium iodide rapidly enters and intercalates into nuclear DNA",
+            "Reflects primary necrosis or un-engulfed secondary necrotic lysis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When death receptors are stimulated under conditions where caspase-eight is pharmacologically or virally inhibited, cells activate an alternative regulated death pathway resembling necrosis. Known as **necroptosis**, this hybrid program features programmed molecular signaling that culminates in membrane rupture and inflammation.",
+      "say": "Necroptosis is programmed necrosis triggered when caspase-8 is blocked, causing inflammatory cell lysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-liver-failure-fig1.webp",
+        "caption": "Severe acute hepatic failure displaying massive inflammatory cell lysis and necrotic parenchymal collapse.",
+        "alt": "Massive acute hepatic parenchymal necrosis and inflammatory destruction"
+      }
+    },
+    {
+      "tx": "Execution of programmed necroptosis requires the assembly of a multi-protein signaling complex termed the necrosome. Receptor-interacting serine-threonine protein kinases RIPK1 and RIPK3 undergo reciprocal cross-phosphorylation, forming a fibrous amyloid-like core that recruits and directly phosphorylates the downstream executioner pseudo-kinase **mixed lineage kinase domain-like protein**.",
+      "say": "The necrosome forms as RIPK1 and RIPK3 cross-phosphorylate to activate the pore-forming protein MLKL.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tnfr1_ligate",
+            "label": "TNF Binds TNFR1 While Caspase-8 Remains Blocked by Viral Inhibitors"
+          },
+          {
+            "id": "ripk_kinase",
+            "label": "RIPK1 and RIPK3 Dimerize and Autophosphorylate to Form the Necrosome"
+          },
+          {
+            "id": "mlkl_recruit",
+            "label": "RIPK3 Phosphorylates Mixed Lineage Kinase Domain-Like Protein (MLKL)"
+          },
+          {
+            "id": "membrane_pore",
+            "label": "Phosphorylated MLKL Oligomerizes, Inserting Directly into Plasma Membrane Pores"
+          }
+        ],
+        "edges": [
+          [
+            "tnfr1_ligate",
+            "ripk_kinase"
+          ],
+          [
+            "ripk_kinase",
+            "mlkl_recruit"
+          ],
+          [
+            "mlkl_recruit",
+            "membrane_pore"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Phosphorylated mixed lineage kinase domain-like protein undergoes a conformational change that drives its oligomerization and translocation to the plasma membrane. By binding membrane phosphatidylinositol phosphates, MLKL pores disrupt membrane integrity, driving osmotic cell swelling and release of **damage-associated molecular patterns** that trigger inflammation.",
+      "say": "MLKL pores punch holes in the plasma membrane, driving osmotic lysis and releasing inflammatory DAMPs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apoptosis Features",
+          "points": [
+            "Caspase-dependent regulated programmed cell death",
+            "Intact plasma membrane preserving intracellular contents",
+            "Forms non-inflammatory apoptotic bodies engulfed by macrophages",
+            "No release of cellular DAMPs; immunosuppressive microenvironment"
+          ]
+        },
+        "right": {
+          "title": "Necroptosis Features",
+          "points": [
+            "Caspase-independent, RIPK1/RIPK3/MLKL-dependent programmed death",
+            "Pore formation by MLKL oligomers causes osmotic membrane lysis",
+            "Massive release of intracellular DAMPs (HMGB1, ATP, IL-1-alpha)",
+            "Triggers robust innate immune inflammation and leukocyte recruitment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A specialized form of programmed cell death intricately linked to the innate immune response is pyroptosis. Triggered by intracellular microbial pathogens such as Salmonella and Shigella, assembly of the cytosolic **inflammasome complex** activates caspase-one and caspase-four, driving intense inflammatory cytokine processing.",
+      "say": "Pyroptosis is an inflammasome-driven cell death pathway that activates caspase-1 to fight infections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pathogen_invade",
+            "label": "Intracellular Flagellin or Bacterial Toxins Recognized by NOD-Like Receptors"
+          },
+          {
+            "id": "inflammasome_forms",
+            "label": "NLRP3 Associates with ASC Adapter to Assemble Multimeric Inflammasome"
+          },
+          {
+            "id": "caspase1_cuts",
+            "label": "Procaspase-1 Cleaved into Active Caspase-1 (IL-1 Converting Enzyme)"
+          },
+          {
+            "id": "cytokine_maturation",
+            "label": "Caspase-1 Cleaves Pro-IL-1-Beta and Pro-IL-18 into Active Secreted Cytokines"
+          }
+        ],
+        "edges": [
+          [
+            "pathogen_invade",
+            "inflammasome_forms"
+          ],
+          [
+            "inflammasome_forms",
+            "caspase1_cuts"
+          ],
+          [
+            "caspase1_cuts",
+            "cytokine_maturation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Active caspase-one cleaves the cytosolic pore-forming protein gasdermin D into an amino-terminal pore-forming domain. Oligomers of the **gasdermin D amino-terminal domain** insert into the plasma membrane to form large trans-membrane channels, causing cell swelling, lysis, and simultaneous release of interleukin-one beta and interleukin-eighteen.",
+      "say": "Cleaved gasdermin D forms large membrane pores that cause cell swelling and release of interleukin-1.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gasdermin_cut",
+            "label": "Active Caspase-1 Specifically Cleaves Autoinhibited Gasdermin D"
+          },
+          {
+            "id": "n_terminal_shift",
+            "label": "Liberated N-Terminal Domain Binds Inner Membrane Phospholipids"
+          },
+          {
+            "id": "pyroptotic_pore",
+            "label": "Oligomerizes into 10-15 nm Pores, Breaking Ionic Equilibrium"
+          },
+          {
+            "id": "cytokine_escape",
+            "label": "Mature IL-1-Beta and IL-18 Flood out, Igniting Intense Pyrogenic Fever"
+          }
+        ],
+        "edges": [
+          [
+            "gasdermin_cut",
+            "n_terminal_shift"
+          ],
+          [
+            "n_terminal_shift",
+            "pyroptotic_pore"
+          ],
+          [
+            "pyroptotic_pore",
+            "cytokine_escape"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

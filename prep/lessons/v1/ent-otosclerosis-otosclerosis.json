@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-otosclerosis-otosclerosis",
+ "subject": "ent",
+ "module": "ent-otosclerosis",
+ "title": "Otosclerosis Pathophysiology, Clinical Signs, and Stapedectomy",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Otosclerosis, more accurately designated otospongiosis, is a primary metabolic osteodystrophy of the human otic capsule characterized by progressive resorption of mature lamellar bone followed by deposition of cellular, highly vascular woven bone. It displays an autosomal dominant inheritance pattern with approximately forty percent incomplete clinical penetrance. The condition shows a two-to-one female preponderance and is characteristically accelerated by **pregnancy and lactation**.",
+   "say": "Otosclerosis is an autosomal dominant disease of the otic capsule where vascular woven bone replaces mature bone. It is twice as common in females and worsens during pregnancy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/otosclerosis-fig1.webp",
+    "alt": "Anatomical schematic showing stapes footplate, annular ligament, and otosclerotic focus at fissula ante fenestram",
+    "caption": "Histopathological focus of otosclerosis anchoring the anterior crus and footplate of the stapes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In over eighty percent of clinical cases, the otosclerotic focus originates at the **fissula ante fenestram**, a tiny embryonic vestigial zone of connective tissue situated immediately anterior to the oval window. As active vascular otospongiotic bone proliferates, it spreads across the annular ligament to anchor the anterior crus and footplate of the stapes, producing progressive stapes fixation and conductive hearing loss.",
+   "say": "Otosclerosis originates at the fissula ante fenestram anterior to the oval window. It invades the annular ligament to fix the stapes footplate, causing conductive hearing loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Predilection Sites of Otosclerotic Foci in Otic Capsule",
+    "cols": [
+     "Anatomical Site",
+     "Incidence Frequency",
+     "Functional Consequence",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Fissula ante fenestram",
+      "80% to 90% (Most common)",
+      "Stapes anterior crus and footplate fixation",
+      "Progressive conductive hearing loss"
+     ],
+     [
+      "Round window niche",
+      "30% to 50%",
+      "Obliteration of round window membrane",
+      "Air-bone gap, mixed hearing loss"
+     ],
+     [
+      "Basal cochlear turn",
+      "10% to 15%",
+      "Sensorineural otosclerosis (Stria injury)",
+      "High-frequency sensorineural deficit"
+     ],
+     [
+      "Internal acoustic meatus",
+      "Rare (< 5%)",
+      "Direct eighth nerve compression",
+      "Retrocochlear-like sensory loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients typically present in their second to fourth decade of life with painless, insidious, slowly progressive bilateral hearing loss, often accompanied by soft roaring tinnitus. A classic clinical symptom is **paracusis Willisii**, or paracusis of Willis, wherein patients paradoxically perceive that they hear conversation significantly better in noisy surroundings, such as moving trains or crowded markets, because speakers elevate their voice volume above the background din.",
+   "say": "Patients report progressive hearing loss and paracusis of Willis, hearing spoken words more easily in noisy environments because speakers raise their voice volume.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paracusis Willisii (Conductive Loss)",
+     "points": [
+      "Hears speech distinctly better in loud background noise.",
+      "Background noise is attenuated by middle ear conductive block.",
+      "Speaker raises voice volume above ambient noise.",
+      "Classic pathognomonic symptom of clinical otosclerosis."
+     ]
+    },
+    "right": {
+     "title": "Sensorineural Hearing Deficit",
+     "points": [
+      "Hears speech much worse in noisy environments.",
+      "Loss of auditory clarity and frequency discrimination.",
+      "Background din masks speech comprehension completely.",
+      "Characteristic of presbycusis and acoustic trauma."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Otoscopic examination in clinical otosclerosis is almost invariably completely normal, displaying an intact pearl-grey translucent tympanic membrane with a crisp cone of light. However, in approximately ten percent of patients with rapidly evolving, highly vascular otospongiosis, otoscopy demonstrates a faint reddish-pink flush over the cochlear promontory visible through the posteroinferior quadrant, termed the **Schwartze sign** (flamingo pink sign).",
+   "say": "Otoscopy is typically normal, but ten percent display the Schwartze flamingo pink sign, a reddish hue on the promontory reflecting active vascular otospongiosis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-ear-gross.webp",
+    "alt": "Anatomical schematic showing middle ear promontory, oval window, and flamingo flush vascularity",
+    "caption": "Schwartze sign displaying hyperemic flamingo-pink promontory flush in active otospongiosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pure tone audiometry in stapedial otosclerosis demonstrates a conductive hearing loss with an air-bone gap that widens progressively. Characteristically, the bone conduction curve shows an artificial dip of fifteen decibels centered sharply at two thousand hertz, universally known as the **Carhart notch**. This notch is a mechanical artifact caused by the loss of middle ear inertial ossicular resonance, resolving completely after successful stapedotomy.",
+   "say": "Pure tone audiometry shows conductive hearing loss with the Carhart notch, a mechanical fifteen-decibel dip in bone conduction at two kilohertz that resolves postoperatively.",
+   "vis": {
+    "kind": "table",
+    "title": "Acoustic Characteristics of the Carhart Notch",
+    "cols": [
+     "Frequency Tested",
+     "Bone Conduction Deficit",
+     "Biomechanical Mechanism",
+     "Postoperative Status"
+    ],
+    "rows": [
+     [
+      "500 Hz",
+      "5 decibels elevation",
+      "Minor loss of ossicular inertia",
+      "Fully normalizes"
+     ],
+     [
+      "1,000 Hz",
+      "10 decibels elevation",
+      "Moderate inertial damping",
+      "Fully normalizes"
+     ],
+     [
+      "2,000 Hz (2 kHz)",
+      "15 decibels elevation (Peak notch)",
+      "Maximum loss of middle ear resonance",
+      "Fully normalizes to true baseline"
+     ],
+     [
+      "4,000 Hz",
+      "5 decibels elevation",
+      "Minimal high-frequency damping",
+      "Fully normalizes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tuning fork examinations provide rapid bedside confirmation of otosclerosis. The Rinne test is negative with a five hundred and twelve hertz fork, signifying an air-bone gap of at least twenty decibels. The Weber test lateralizes to the more severely affected ear. In the Gelle test, increasing air pressure in the external canal with a Siegle speculum produces no change in bone conduction loudness, recorded as **Gelle negative**.",
+   "say": "Tuning forks demonstrate a negative Rinne test, Weber lateralization to the worse ear, and a negative Gelle test confirming an immobile, fixed stapes footplate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tuning Fork Battery for Otosclerosis",
+    "nodes": [
+     {
+      "id": "tf1",
+      "label": "512 Hz Rinne Negative (BC > AC)"
+     },
+     {
+      "id": "tf2",
+      "label": "Weber Lateralizes to Worse Conductive Ear"
+     },
+     {
+      "id": "tf3",
+      "label": "Gelle Negative (Immobile Stapes Footplate)"
+     }
+    ],
+    "edges": [
+     [
+      "tf1",
+      "tf2"
+     ],
+     [
+      "tf2",
+      "tf3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Historically, surgical correction involved total stapedectomy, where the entire fixed stapes suprastructure and footplate were removed and the oval window was sealed with a vein graft. Modern otological surgery favors **small-fenestra stapedotomy**, where only a tiny zero point six millimetre micro-hole is calibrated in the center of the footplate using a microdrill or laser, into which a Teflon-piston prosthesis is inserted.",
+   "say": "Small-fenestra stapedotomy has superseded total stapedectomy. A zero point six millimetre micro-perforation is created in the footplate to anchor a Teflon piston to the incus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Small-Fenestra Stapedotomy",
+     "points": [
+      "Creates 0.6 mm micro-hole in central footplate.",
+      "Preserves majority of footplate and oval window seal.",
+      "Significantly lower incidence of postoperative vertigo.",
+      "Superior high-frequency hearing preservation."
+     ]
+    },
+    "right": {
+     "title": "Total Stapedectomy (Historical)",
+     "points": [
+      "Completely removes entire stapes footplate.",
+      "Opens vestibule widely to perilymph leak.",
+      "Higher incidence of severe vestibular trauma and labyrinthitis.",
+      "Higher risk of delayed sensorineural hearing loss."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The absolute prerequisite for performing stapes surgery is an air-bone gap of at least twenty to twenty-five decibels and speech discrimination scores better than sixty percent. Surgery is performed strictly on one ear at a time, selecting the poorer hearing ear first. If surgery is contraindicated, refused, or in children, acoustic rehabilitation is successfully achieved through conventional **hearing aids**.",
+   "say": "Stapes surgery requires an air-bone gap over twenty decibels. The worse-hearing ear is operated first. Conventional hearing aids provide an effective non-surgical alternative.",
+   "vis": {
+    "kind": "flow",
+    "title": "Patient Selection Algorithm for Stapes Surgery",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Air-Bone Gap \u2265 25 dB & Good Speech Score"
+     },
+     {
+      "id": "s2",
+      "label": "Select Worse-Hearing Ear for Primary Surgery"
+     },
+     {
+      "id": "s3",
+      "label": "Perform Stapedotomy or Fit Air-Conduction Aid"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-041",
+  "bk2-ent-042",
+  "bk2-ent-043"
+ ]
+}

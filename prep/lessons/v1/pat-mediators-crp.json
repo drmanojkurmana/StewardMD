@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-mediators",
+  "subject": "pathology",
+  "title": "C-Reactive Protein, Erythrocyte Sedimentation Rate, and Procalcitonin",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The classical laboratory biomarker utilized worldwide to detect and monitor systemic inflammation is C-reactive protein. A pentameric pattern-recognition protein belonging to the pentraxin family, **C-reactive protein (CRP)** is synthesized exclusively by hepatocytes under the transcriptional drive of interleukin-six, rising up to a thousand-fold above baseline within twenty-four to forty-eight hours.",
+      "say": "C-reactive protein is a pentameric pattern recognition protein synthesized by the liver under IL-6 drive.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tissue_insult",
+            "label": "Acute Bacterial Infection or Tissue Necrosis Stimulates IL-6 Release"
+          },
+          {
+            "id": "hepatic_crp_burst",
+            "label": "Hepatocyte STAT3 Activation Drives Massive Transcription of CRP"
+          },
+          {
+            "id": "circulating_surge",
+            "label": "Plasma CRP Concentration Surges from <1 mg/L to >100-300 mg/L"
+          },
+          {
+            "id": "opsonin_action",
+            "label": "Binds Microbial Phosphocholine to Fix Complement and Promote Phagocytosis"
+          }
+        ],
+        "edges": [
+          [
+            "tissue_insult",
+            "hepatic_crp_burst"
+          ],
+          [
+            "hepatic_crp_burst",
+            "circulating_surge"
+          ],
+          [
+            "circulating_surge",
+            "opsonin_action"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Operating as an innate pattern-recognition opsonin, C-reactive protein binds specifically to phosphocholine residues exposed on microbial cell walls and damaged host cell membranes. Once bound, **CRP fixes complement component C1q**, activating the classical complement cascade to deposit C3b opsonins and promote macrophage clearance without requiring prior antibody production.",
+      "say": "CRP binds microbial phosphocholine, fixing C1q to activate complement and accelerate phagocytosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "C-Reactive Protein Kinetics",
+          "points": [
+            "Synthesized exclusively by hepatocytes under interleukin-6 stimulation",
+            "Begins rising within 4 to 6 hours; peaks sharply at 36 to 48 hours",
+            "Short plasma half-life of 19 hours; drops rapidly as inflammation resolves",
+            "Uninfluenced by red blood cell morphology, hemoglobin, or immunoglobulins"
+          ]
+        },
+        "right": {
+          "title": "Erythrocyte Sedimentation Rate Kinetics",
+          "points": [
+            "Indirect physical measurement of red blood cell aggregation (rouleaux)",
+            "Driven primarily by elevated asymmetrical fibrinogen (half-life 4 days)",
+            "Rises slowly over 24 to 48 hours; remains elevated for weeks after resolution",
+            "Significantly confounded by anemia, polycythemia, and paraproteinemias"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The erythrocyte sedimentation rate measures the distance in millimeters that anti-coagulated red blood cells settle downward in a vertical tube over one hour. Normally, negative sialic acid charges on glycophorin molecules create a **zeta potential** that repels neighboring erythrocytes, keeping them suspended in plasma.",
+      "say": "Negative sialic acid charges create a zeta potential that normally repels red blood cells from settling.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "normal_charge",
+            "label": "Erythrocyte Membranes Possess Abundant Sialic-Acid-Rich Glycophorin"
+          },
+          {
+            "id": "zeta_repulsion",
+            "label": "Negative Zeta Potential Electrostatically Repels Neighboring Red Cells"
+          },
+          {
+            "id": "slow_sediment",
+            "label": "Repelled Erythrocytes Settle Slowly in Vertical Tube (<15-20 mm/hr)"
+          },
+          {
+            "id": "baseline_esr",
+            "label": "Maintains Low Baseline Physiological Erythrocyte Sedimentation Rate"
+          }
+        ],
+        "edges": [
+          [
+            "normal_charge",
+            "zeta_repulsion"
+          ],
+          [
+            "zeta_repulsion",
+            "slow_sediment"
+          ],
+          [
+            "slow_sediment",
+            "baseline_esr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During acute and chronic inflammation, elevated concentrations of asymmetrical plasma proteins, particularly fibrinogen, immunoglobulins, and acute-phase reactants, neutralize the negative zeta potential. Red blood cells stack face-to-face like coins into cylindrical aggregates termed **rouleaux formations**, whose increased mass accelerates gravitational settling and elevates the ESR.",
+      "say": "Fibrinogen neutralizes negative charges, allowing red cells to form rouleaux stacks that settle rapidly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Factors Elevating the ESR",
+          "points": [
+            "Elevated fibrinogen in acute and chronic infections or tissue infarction",
+            "Polyclonal or monoclonal hypergammaglobulinemia (multiple myeloma)",
+            "Anemia: decreased hematocrit reduces repulsive upward plasma displacement",
+            "Advanced age and female sex physiological baseline increases"
+          ]
+        },
+        "right": {
+          "title": "Factors Lowering the ESR",
+          "points": [
+            "Abnormal red cell morphology: sickle cells and spherocytes cannot form stacks",
+            "Polycythemia vera: dense cellular packing mechanically impedes settling",
+            "Hypofibrinogenemia: congenital absence or consumptive loss in severe DIC",
+            "Extreme leukocytosis and high-dose corticosteroid anti-inflammatory therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A highly specific peptide biomarker utilized to discriminate systemic bacterial infections from viral illnesses is procalcitonin. Synthesized physiologically by thyroid C-cells as the one hundred and sixteen amino acid prohormone for calcitonin, **procalcitonin levels surge** up to thousands-fold from parenchymal tissues in response to bacterial endotoxins and interleukin-one.",
+      "say": "Procalcitonin surges from parenchymal organs in bacterial infections, differentiating them from viral illnesses.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/osteomyelitis-fig1.webp",
+        "caption": "Deep bacterial bone infection displaying dramatic elevation of inflammatory procalcitonin and CRP.",
+        "alt": "Bacterial osteomyelitis demonstrating severe inflammatory bone destruction"
+      }
+    },
+    {
+      "tx": "While bacterial lipopolysaccharide and interleukin-one trigger massive procalcitonin transcription across diverse parenchymal tissues including the liver, kidneys, and adipocytes, viral infections produce interferon-gamma. Interferon-gamma **suppresses procalcitonin synthesis**, ensuring that procalcitonin levels remain characteristically normal in isolated viral infections, directly aiding antimicrobial stewardship.",
+      "say": "Viral interferon-gamma suppresses procalcitonin synthesis, keeping levels low in viral infections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bacterial_lps",
+            "label": "Bacterial Endotoxin, IL-1-Beta, and TNF-Alpha Stimulate Ubiquitous Parenchyma"
+          },
+          {
+            "id": "calca_transcribe",
+            "label": "CALC-1 Gene Transcribed in Liver, Lung, Adipose, and Monocytes"
+          },
+          {
+            "id": "pct_surge",
+            "label": "Procalcitonin Surges Rapidly Within 2 to 4 Hours, Peaking at 12 to 24 Hours"
+          },
+          {
+            "id": "viral_contrast",
+            "label": "Viral Interferon-Gamma Specifically Represses CALC-1 Gene Transcription"
+          }
+        ],
+        "edges": [
+          [
+            "bacterial_lps",
+            "calca_transcribe"
+          ],
+          [
+            "calca_transcribe",
+            "pct_surge"
+          ],
+          [
+            "pct_surge",
+            "viral_contrast"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In clinical practice, serial procalcitonin measurements guide initiation and cessation of antibacterial therapy in lower respiratory tract infections and sepsis. A procalcitonin level below zero point one micrograms per liter makes bacterial sepsis highly unlikely, whereas levels exceeding **two micrograms per liter** indicate severe systemic bacterial infection or septic shock.",
+      "say": "Procalcitonin levels above two micrograms per liter signal severe bacterial sepsis and septic shock.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Procalcitonin Diagnostic Tiers",
+          "points": [
+            "< 0.1 ug/L: bacterial infection highly unlikely; antibiotic strongly discouraged",
+            "0.1 to 0.25 ug/L: bacterial infection unlikely; antibiotic discouraged",
+            "0.25 to 0.5 ug/L: possible bacterial infection; antibiotic recommended",
+            "> 0.5 to 2.0 ug/L: significant bacterial infection; antibiotic mandatory"
+          ]
+        },
+        "right": {
+          "title": "Severe Sepsis (> 2.0 ug/L)",
+          "points": [
+            "Indicates severe bacterial sepsis, septic shock, or invasive bacteremia",
+            "High risk of acute organ dysfunction, DIC, and hemodynamic collapse",
+            "Daily serial monitoring: 50% drop indicates effective antibiotic response",
+            "Failure to decline or rising trend indicates antibiotic resistance or failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Combining C-reactive protein, erythrocyte sedimentation rate, and procalcitonin provides comprehensive diagnostic insight into inflammatory pathophysiology. While CRP reflects immediate hepatocyte production and procalcitonin indicates bacterial invasive infection, the ESR provides **long-term disease monitoring** in systemic autoimmune disorders such as giant cell arteritis and polymyalgia rheumatica.",
+      "say": "Combining CRP, ESR, and procalcitonin optimizes diagnosis between bacterial sepsis and autoimmune disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/toxic-shock-streptococcal-fig1.webp",
+        "caption": "Severe toxic shock displaying profound elevations across all acute phase inflammatory markers.",
+        "alt": "Systemic toxic shock bacteremia demonstrating marked acute phase response"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

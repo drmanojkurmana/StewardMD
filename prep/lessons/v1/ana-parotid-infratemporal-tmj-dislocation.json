@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Temporomandibular Joint: Articular Disc, Movements, and Dislocation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The temporomandibular joint (TMJ) is a bilateral synovial joint of the bicondylar and ginglymoarthrodial variety, articulating the condylar head of the mandible with the mandibular fossa and articular tubercle of the squamous temporal bone. The articular surfaces are uniquely covered by **fibrocartilage** rather than hyaline cartilage, reflecting its membrane-bone ossification.",
+   "say": "The temporomandibular joint articulates the mandibular condyle with the temporal mandibular fossa. Uniquely, fibrocartilage rather than hyaline cartilage covers its articular surfaces.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-joint-classes.svg",
+    "alt": "Anatomical classification diagram showing bicondylar and synovial joint architecture",
+    "caption": "Synovial joint classification highlighting the fibrocartilaginous bicondylar architecture of the TMJ. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The joint cavity is completely partitioned into an upper compartment and a lower compartment by an oval fibrocartilaginous articular disc. The **articular disc** is concavoconvex on its superior surface to fit the articular tubercle and fossa, and concave on its inferior surface to cup the condyle. It is avascular and aneural in its load-bearing central zone.",
+   "say": "A biconcave fibrocartilaginous disc bisects the joint into upper and lower cavities. The disc is avascular and aneural in its central pressure-bearing zone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Anterior Extension (Fuses with joint capsule and receives tendon of lateral pterygoid)"
+     },
+     {
+      "id": "d2",
+      "label": "Intermediate Zone (Thin, avascular, aneural load-bearing zone resting on condyle)"
+     },
+     {
+      "id": "d3",
+      "label": "Posterior Band (Thick fibrocartilaginous ridge resting in mandibular fossa)"
+     },
+     {
+      "id": "d4",
+      "label": "Bilaminar Retrodiscal Pad (Highly vascular and richly innervated elastic tissue cushion)"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The two joint compartments execute distinct physiological movements during mastication. The lower meniscocondylar compartment functions as a hinge joint (ginglymus), permitting simple rotational movement around a transverse axis during the first twenty millimetres of mouth opening. The upper meniscotemporal compartment functions as a planar sliding joint (arthrodia), permitting translatory forward gliding of the **mandibular condyle**.",
+   "say": "The joint displays dual kinematics. The lower compartment permits hinge rotation for initial opening, while the upper compartment enables forward gliding translation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lower Joint Compartment",
+     "points": [
+      "Location: Between articular disc and mandibular condyle",
+      "Kinematics: Hinge movement (rotation)",
+      "Action: Initial 15 to 20 mm of mouth opening",
+      "Axis: Transverse horizontal rotational axis"
+     ]
+    },
+    "right": {
+     "title": "Upper Joint Compartment",
+     "points": [
+      "Location: Between articular disc and temporal articular fossa",
+      "Kinematics: Translatory gliding movement (arthrodia)",
+      "Action: Wide mouth opening, protrusion, and retrusion",
+      "Trajectory: Condyle and disc slide down articular eminence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During wide mouth opening (such as yawning or shouting), opening occurs in a seamless two-stage sequence. First, the lower head of lateral pterygoid rotates the condyle in the lower compartment. Next, bilateral contraction of the lateral pterygoid muscles pulls the condyle and disc forward together, gliding them onto the apex of the **articular tubercle** (eminence).",
+   "say": "Wide mouth opening proceeds in two stages: initial hinge rotation in the lower compartment, followed by forward translation of the condyle onto the articular eminence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Phase 1: Rotational Hinge (Initial 20 mm opening occurs purely in lower compartment)"
+     },
+     {
+      "id": "m2",
+      "label": "Phase 2: Translatory Slide (Lateral pterygoid pulls disc and condyle down articular eminence)"
+     },
+     {
+      "id": "m3",
+      "label": "Maximal Aperture (Interincisal distance reaches 40-50 mm at apex of eminence)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temporomandibular joint dislocation occurs almost exclusively in the anterior direction. When the mouth is opened excessively widely during a huge yawn, dental extraction, or vomiting, the mandibular condyle glides past the summit of the articular tubercle into the **infratemporal fossa**. Once displaced anterior to the eminence, the powerful masseter and temporalis go into reflexive protective spasm.",
+   "say": "Excessive opening can slip the condyle anterior to the articular tubercle into the infratemporal fossa. Spasm of masseter and temporalis locks the jaw open.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-skull-sutures.svg",
+    "alt": "Anatomical schematic showing temporal bone articular eminence and anterior displacement of mandibular condyle",
+    "caption": "Anatomical pathway of anterior condylar displacement across the articular eminence in TMJ dislocation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Reflexive spasm of the masseter, medial pterygoid, and temporalis locks the condylar head in front of the articular tubercle, preventing spontaneous reduction. The patient presents in acute distress, unable to close the gaping mouth, drooling saliva, with speech severely impaired, and exhibiting a palpable depression in the **preauricular hollow** where the condyle normally resides.",
+   "say": "The patient cannot close the mouth and drools saliva, displaying a hollow in front of the tragus. Muscle spasm holds the condyle trapped in front of the articular eminence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Anatomical Mechanism",
+     "Diagnostic Hallmark"
+    ],
+    "rows": [
+     [
+      "Open locked bite",
+      "Condyle locked in front of articular tubercle",
+      "Patient cannot approximate upper and lower incisors"
+     ],
+     [
+      "Preauricular depression",
+      "Condyle displaced forward out of mandibular fossa",
+      "Palpable empty hollow immediately anterior to tragus"
+     ],
+     [
+      "Drooling and dysarthria",
+      "Inability to seal lips with open jaw",
+      "Loss of oral saliva containment and articulatory failure"
+     ],
+     [
+      "Spasm and pain",
+      "Masseter and temporalis stretch reflex",
+      "Tense, tender rock-hard anterior masticatory muscular bellies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Closed manual reduction of an anterior TMJ dislocation requires overcoming the powerful spasm of the elevator muscles. The clinician places gauze-wrapped thumbs onto the lower molar teeth inside the mouth, with fingers grasping the mandible externally. Downward force is applied to depress the **mandibular angle**, followed by backward pressure to slip the condyle over the articular tubercle into the fossa.",
+   "say": "To reduce a dislocation, the clinician presses downward on the lower molars to overcome muscle spasm, then guides the condyle backward over the tubercle into its fossa.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Downward Traction (Clinician thumbs press down on lower molars to clear articular tubercle)"
+     },
+     {
+      "id": "r2",
+      "label": "Posterior Guidance (Mandible pushed backward once condyle drops below summit of eminence)"
+     },
+     {
+      "id": "r3",
+      "label": "Spontaneous Snap Reduction (Elevator muscle tone pulls condyle back into mandibular fossa)"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sensory innervation to the temporomandibular joint is supplied primarily by the auriculotemporal nerve, supplemented anteriorly by masseteric and posterior deep temporal nerves (all V3). Because the **auriculotemporal nerve** also innervates the tympanic membrane and external acoustic meatus, TMJ osteoarthritis or myofascial dysfunction syndrome characteristically presents with severe referred earache (otalgia).",
+   "say": "The auriculotemporal nerve supplies the TMJ as well as the external ear. Joint inflammation frequently refers dull pain to the ear canal, mimicking otitis externa.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TMJ Referred Pain (Otalgia)",
+     "points": [
+      "Mediated by auriculotemporal nerve (CN V3)",
+      "Pain radiates to ear canal, temple, and scalp",
+      "Ear canal and tympanic membrane appear pristine",
+      "Aggravated by chewing hard foods or nocturnal bruxism"
+     ]
+    },
+    "right": {
+     "title": "Primary Ear Pathology",
+     "points": [
+      "Otitis externa or acute otitis media",
+      "Tympanic membrane erythematous, bulging, or perforated",
+      "Tragal tenderness in otitis externa",
+      "Unrelated to mandibular masticatory movements"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

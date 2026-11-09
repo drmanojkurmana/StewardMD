@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Hypokalaemic Hypochloraemic Alkalosis, Paradoxical Aciduria, and Vagotomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Severe, protracted vomiting secondary to gastric outlet obstruction generates a pathognomonic systemic electrolyte and acid-base derangement termed **hypokalaemic hypochloraemic metabolic alkalosis**. Because gastric juice is uniquely rich in hydrochloric acid and potassium chloride, repeated loss of gastric secretions depletes the body of hydrogen, chloride, sodium, and potassium, initiating a cascade of complex renal compensatory shifts.",
+   "say": "Protracted vomiting in gastric outlet obstruction produces hypokalemic, hypochloremic metabolic alkalosis through massive loss of hydrochloric acid and potassium from the stomach.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+    "alt": "Pathophysiological diagram illustrating gastric parietal cell acid secretion and electrolyte losses during vomiting.",
+    "caption": "Gastric acid secretion: parietal cell loss of hydrogen and chloride driving systemic metabolic alkalosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During vomiting, parietal cells extract carbon dioxide and water to generate carbonic acid, which dissociates into hydrogen and bicarbonate ions. The hydrogen ion is actively pumped into the gastric lumen while bicarbonate is extruded into the systemic circulation. When vomited gastric acid is lost, the corresponding bicarbonate remains unneutralized in the bloodstream, producing progressive systemic metabolic alkalosis and severe **hypochloraemia**.",
+   "say": "Loss of gastric hydrochloric acid leaves unneutralized bicarbonate ions in the bloodstream, resulting in severe metabolic alkalosis and profound depletion of serum chloride.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pariet",
+      "label": "Parietal Cell H+/K+ ATPase Secretes HCl into Gastric Lumen"
+     },
+     {
+      "id": "vomit",
+      "label": "Repeated Vomiting Expels Acid Before Duodenal Neutralization"
+     },
+     {
+      "id": "bicarb",
+      "label": "Bicarbonate Ions Enter Systemic Circulation Unopposed"
+     },
+     {
+      "id": "hypo",
+      "label": "Profound Depletion of Serum Chloride and Potassium"
+     },
+     {
+      "id": "alk",
+      "label": "Generation of High-Bicarbonate Systemic Metabolic Alkalosis"
+     }
+    ],
+    "edges": [
+     [
+      "pariet",
+      "vomit"
+     ],
+     [
+      "vomit",
+      "bicarb"
+     ],
+     [
+      "bicarb",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "alk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the initial phase of metabolic alkalosis, the kidneys respond physiologically by filtering and excreting excess bicarbonate in the urine alongside sodium and potassium ions, producing an alkaline urine with a pH above seven. However, as vomiting continues unabated, severe volume depletion develops. The kidneys prioritize intravascular volume preservation over acid-base homeostasis, activating the **renin-angiotensin-aldosterone axis** to stimulate maximal sodium reabsorption.",
+   "say": "Initially, the kidneys excrete bicarbonate, producing alkaline urine. But progressive dehydration triggers aldosterone release, forcing the kidneys to preserve sodium at the expense of potassium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Renal Compensation",
+     "points": [
+      "Extracellular volume relatively preserved",
+      "Renal tubules excrete excess bicarbonate",
+      "Urinary excretion of sodium and potassium",
+      "Urinary pH is alkaline (pH > 7.0)"
+     ]
+    },
+    "right": {
+     "title": "Late Decompensated State",
+     "points": [
+      "Severe hypovolaemia and sodium depletion",
+      "Maximal aldosterone-mediated sodium uptake",
+      "Renal tubule forced to secrete H+ and K+",
+      "Urinary pH becomes acidic (Paradoxical aciduria)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the collecting tubules, sodium reabsorption requires the concurrent excretion of a positive cation, normally potassium. However, as potassium stores become critically exhausted, the renal tubular intercalated cells are forced to exchange sodium for hydrogen ions instead. The kidneys begin actively pumping hydrogen ions into the urine, resulting in the classic clinical paradox known as **paradoxical aciduria**, where acidic urine is excreted despite severe systemic metabolic alkalosis.",
+   "say": "Once potassium is depleted, the kidney exchanges sodium for hydrogen ions to maintain volume. Excreting hydrogen ions produces paradoxical aciduria despite systemic alkalosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "aldo",
+      "label": "Aldosterone Stimulates Distal Sodium Reabsorption"
+     },
+     {
+      "id": "kdep",
+      "label": "Total Body Potassium Stores Become Severely Depleted"
+     },
+     {
+      "id": "switch",
+      "label": "Intercalated Cells Switch to Excreting H+ in Place of K+"
+     },
+     {
+      "id": "acid",
+      "label": "Excretion of Acidic Urine into the Bladder"
+     },
+     {
+      "id": "paradox",
+      "label": "Paradoxical Aciduria Established Despite Blood pH > 7.55"
+     }
+    ],
+    "edges": [
+     [
+      "aldo",
+      "kdep"
+     ],
+     [
+      "kdep",
+      "switch"
+     ],
+     [
+      "switch",
+      "acid"
+     ],
+     [
+      "acid",
+      "paradox"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative resuscitation requires intravenous replacement tailored to correct the chloride deficit. The fluid of choice is **zero point nine percent normal saline** supplemented with potassium chloride. Infusing chloride provides the crucial anion needed for renal sodium reabsorption, shutting down aldosterone-mediated hydrogen wasting. Ringer lactate is strictly contraindicated in this condition because hepatic metabolism of lactate generates additional bicarbonate, exacerbating the alkalosis.",
+   "say": "Normal saline with potassium chloride is the fluid of choice, supplying chloride to break the renal cycle. Ringer lactate is avoided because lactate is metabolized to bicarbonate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intravenous Fluid",
+     "Suitability",
+     "Physiological Justification"
+    ],
+    "rows": [
+     [
+      "0.9% Normal Saline",
+      "Fluid of choice",
+      "Provides 154 mEq/L chloride to correct chloride deficit"
+     ],
+     [
+      "Potassium Chloride Supplement",
+      "Mandatory additive",
+      "Restores intracellular potassium and resolves paradoxical aciduria"
+     ],
+     [
+      "Ringer Lactate",
+      "Strictly contraindicated",
+      "Contains lactate which metabolizes into systemic bicarbonate"
+     ],
+     [
+      "5% Dextrose in Water",
+      "Unsuitable as primary fluid",
+      "Lacks electrolytes; worsens severe hyponatraemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Historically, surgical management of intractable ulcer disease focused on reducing acid secretion by performing a **truncal vagotomy**. This procedure divides the anterior and posterior vagal trunks at the esophageal hiatus, denervating both parietal cells and the pyloric sphincter. Because denervating the pylorus produces gastric atony and prevents emptying, a truncal vagotomy always mandates a concurrent drainage procedure, such as a Heincke-Mikulicz pyloroplasty or gastrojejunostomy.",
+   "say": "Truncal vagotomy divides both vagal trunks at the lower esophagus. Because it paralyzes the pylorus, it always requires a drainage procedure like a pyloroplasty or gastrojejunostomy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-stomach-gross.webp",
+    "alt": "Anatomical diagram of the stomach illustrating the anterior and posterior vagal trunks and branches of Latarjet.",
+    "caption": "Gastric vagal innervation: truncal vagotomy versus highly selective parietal cell denervation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "To avoid the complications of pyloric denervation, surgeons developed the **highly selective vagotomy**, also known as parietal cell vagotomy. This technique meticulously divides only the individual vagal nerve branches supplying the acid-secreting parietal cell mass of the fundus and body, while strictly preserving the terminal branches of the anterior and posterior nerves of Latarjet that innervate the antrum and pylorus, eliminating the need for a drainage procedure.",
+   "say": "Highly selective vagotomy divides only the nerve branches supplying the parietal cell mass, preserving the nerves of Latarjet to the pylorus so no drainage procedure is needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Truncal Vagotomy",
+     "points": [
+      "Divides main vagal trunks at esophageal hiatus",
+      "Denervates stomach, liver, biliary tree, and bowel",
+      "Abolishes pyloric relaxation and gastric emptying",
+      "Mandates drainage procedure (Pyloroplasty/GJ)"
+     ]
+    },
+    "right": {
+     "title": "Highly Selective Vagotomy",
+     "points": [
+      "Divides branches to fundus and gastric body only",
+      "Preserves nerves of Latarjet to antrum and pylorus",
+      "Maintains normal physiological gastric emptying",
+      "No drainage procedure required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In modern surgical practice, the availability of powerful proton pump inhibitors and eradication of Helicobacter pylori have made elective vagotomy virtually obsolete. Surgery for peptic ulcer disease is now largely restricted to emergency management of perforation, refractory bleeding, or mechanical **fibrotic pyloric stenosis**. In benign gastric outlet obstruction, endoscopic balloon dilatation is attempted first, followed by laparoscopic gastrojejunostomy if endoscopic therapy fails.",
+   "say": "Modern acid suppression has made elective vagotomy rare. Peptic ulcer surgery is now reserved for emergencies like perforation, refractory bleeding, or fibrotic pyloric stenosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Scenario",
+     "Preferred Modern Intervention",
+     "Historical Operation"
+    ],
+    "rows": [
+     [
+      "Fibrotic Pyloric Stenosis",
+      "Endoscopic balloon dilation or laparoscopic GJ",
+      "Truncal vagotomy + gastrojejunostomy"
+     ],
+     [
+      "Perforated Peptic Ulcer",
+      "Graham patch omentopexy + H. pylori therapy",
+      "Truncal vagotomy + pyloroplasty + patch"
+     ],
+     [
+      "Bleeding Duodenal Ulcer",
+      "Endoscopic clip/coagulation or transfixion",
+      "Truncal vagotomy + pyloroplasty + suture ligation"
+     ],
+     [
+      "Refractory Peptic Ulcer",
+      "High-dose PPI + H. pylori eradication",
+      "Highly selective parietal cell vagotomy"
+     ]
+    ]
+   }
+  }
+ ]
+}

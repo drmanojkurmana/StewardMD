@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "id": "ent-snhl-inner-ear-presbycusis",
+ "subject": "ent",
+ "module": "ent-snhl-inner-ear",
+ "title": "Presbycusis, Noise-Induced Loss, and Aminoglycoside Ototoxicity",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Presbycusis is the progressive, bilateral, symmetrical sensorineural hearing loss associated with aging, representing the most prevalent sensory deficit in the elderly population. It characteristically affects high acoustic frequencies first, impairing speech clarity and consonant perception in background noise. The condition arises from cumulative physiological degeneration across multiple inner ear structures, classified into four classical histopathological types according to **Schuknecht classification**.",
+   "say": "Presbycusis is age-related symmetrical sensorineural hearing loss affecting high frequencies. Schuknecht classified it into sensory, neural, strial, and cochlear conductive forms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sensorineural-loss-and-inner-ear-fig1.webp",
+    "alt": "Audiogram schematic illustrating high-frequency downsloping sensorineural hearing loss curves in presbycusis",
+    "caption": "Audiological curves demonstrating downsloping high-frequency sensorineural deafness in presbycusis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Schuknecht sensory presbycusis results from outer hair cell loss at the basal cochlear turn, producing a steep high-frequency downsloping audiogram. Neural presbycusis is caused by loss of spiral ganglion neurons, marked by a severe decline in speech discrimination score disproportionate to pure-tone thresholds (phonemic regression). **Strial presbycusis**, caused by atrophy of the stria vascularis, generates a flat pure-tone audiogram with excellent speech discrimination.",
+   "say": "Sensory presbycusis causes steep high-frequency loss. Neural presbycusis causes disproportionately poor speech comprehension. Strial presbycusis produces a flat loss with good speech clarity.",
+   "vis": {
+    "kind": "table",
+    "title": "Schuknecht Histopathological Types of Presbycusis",
+    "cols": [
+     "Type",
+     "Primary Histopathological Lesion",
+     "Audiogram Shape",
+     "Speech Discrimination Score"
+    ],
+    "rows": [
+     [
+      "Sensory presbycusis",
+      "Outer hair cell loss at basal cochlea",
+      "Steep downsloping high-frequency drop",
+      "Commensurate with pure tone loss"
+     ],
+     [
+      "Neural presbycusis",
+      "Spiral ganglion neuron loss (>50%)",
+      "Slowly sloping high-frequency loss",
+      "Severe phonemic regression (Disproportionate drop)"
+     ],
+     [
+      "Strial (Metabolic)",
+      "Atrophy of stria vascularis",
+      "Flat, horizontal pure-tone curve",
+      "Excellent speech discrimination"
+     ],
+     [
+      "Cochlear conductive",
+      "Stiffening of basilar membrane",
+      "Linear, uniform downward slope",
+      "Gradually declining with threshold"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic occupational exposure to loud acoustic noise exceeding eighty-five decibels over prolonged periods induces noise-induced hearing loss. High acoustic sound pressure damages outer hair cell stereocilia through mechanical sheer trauma, metabolic mitochondrial exhaustion, and reactive oxygen species generation. The pathognomonic audiological hallmark of noise-induced damage is a sharp, symmetrical sensory notch centered sharply at **4000 Hz** (4 kHz notch).",
+   "say": "Chronic noise above eighty-five decibels damages outer hair cells. It produces a pathognomonic audiometric dip centered sharply at four kilohertz, known as the acoustic notch.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sudden-sensorineural-hearing-loss-fig1.webp",
+    "alt": "Histological schematic showing acoustic trauma shearing outer hair cell stereocilia in the organ of Corti",
+    "caption": "Acoustic trauma destroying outer hair cell stereocilia in the basal turn of the cochlea. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The four kilohertz notch occurs because the natural resonant frequency of the external auditory meatus and concha is approximately three thousand hertz. Sounds around three kilohertz are amplified maximally by the ear canal, causing the peak travelling wave deflection of the basilar membrane to strike roughly one-half octave higher, precisely at the **four kilohertz cochlear region**. Over time with continued noise exposure, the notch deepens and broadens.",
+   "say": "Ear canal acoustic resonance around three kilohertz concentrates physical sound energy onto the basilar membrane one-half octave higher, creating the four kilohertz dip.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biophysical Origin of the 4 kHz Acoustic Notch",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "External Meatus Resonance Amplifies 3 kHz Sound"
+     },
+     {
+      "id": "n2",
+      "label": "Basilar Wave Peak Deflects 0.5 Octaves Basally"
+     },
+     {
+      "id": "n3",
+      "label": "Targeted Outer Hair Cell Shear at 4 kHz"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aminoglycoside antibiotics are potent bactericidal agents that exhibit notorious, irreversible ototoxicity. Uptake occurs through endocytosis and mechanotransducer channels into sensory hair cells, where aminoglycosides form complex iron chelates that generate cytotoxic reactive oxygen species. Within the class, **gentamicin and streptomycin** are predominantly vestibulotoxic, whereas amikacin, kanamycin, and neomycin are predominantly cochleotoxic.",
+   "say": "Aminoglycosides generate toxic reactive oxygen species in hair cells. Gentamicin and streptomycin are primarily vestibulotoxic, while amikacin and neomycin are cochleotoxic.",
+   "vis": {
+    "kind": "table",
+    "title": "Organ Predilection of Aminoglycoside Ototoxicity",
+    "cols": [
+     "Aminoglycoside Drug",
+     "Primary Toxicity Target",
+     "Clinical Presentation",
+     "Audiological / Vestibular Finding"
+    ],
+    "rows": [
+     [
+      "Gentamicin",
+      "Vestibulotoxic (Type I hair cells)",
+      "Oscillopsia, ataxia, unsteadiness",
+      "Bilateral canal paresis on caloric testing"
+     ],
+     [
+      "Streptomycin",
+      "Vestibulotoxic (Crista ampullaris)",
+      "Gait instability without vertigo",
+      "Reduced vestibulo-ocular reflex gain"
+     ],
+     [
+      "Amikacin",
+      "Cochleotoxic (Outer hair cells)",
+      "Tinnitus, high-frequency hearing loss",
+      "Ultra-high-frequency audiogram drop"
+     ],
+     [
+      "Neomycin",
+      "Extremely cochleotoxic (All hair cells)",
+      "Severe, rapid, irreversible deafness",
+      "Profound sensorineural deafness"
+     ],
+     [
+      "Tobramycin",
+      "Equally vestibulotoxic and cochleotoxic",
+      "Mixed dysequilibrium and hearing loss",
+      "Combined vestibular and cochlear loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loop diuretics such as furosemide, bumetanide, and ethacrynic acid produce ototoxicity by blocking the sodium-potassium-two-chloride cotransporter in the stria vascularis. This causes intracellular edema of marginal cells, precipitously collapsing the **endocochlear potential** from plus eighty millivolts to zero. Although diuretic ototoxicity is usually rapidly reversible upon drug cessation, co-administration with aminoglycosides synergistically produces permanent total deafness.",
+   "say": "Loop diuretics disrupt ion cotransporters in the stria vascularis, collapsing the endocochlear potential. Combined use with aminoglycosides triggers permanent total deafness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Loop Diuretic Ototoxicity (Furosemide)",
+     "points": [
+      "Targets stria vascularis marginal cells.",
+      "Inhibits Na+/K+/2Cl- cotransporter.",
+      "Collapses +80 mV endocochlear battery.",
+      "Generally reversible upon stopping infusion."
+     ]
+    },
+    "right": {
+     "title": "Platinum Chemotherapy (Cisplatin)",
+     "points": [
+      "Directly causes apoptosis of outer hair cells.",
+      "Generates massive reactive oxygen species.",
+      "Permanent, irreversible high-frequency loss.",
+      "Begins in basal cochlea; dose-dependent."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Monitoring for ototoxicity requires baseline and serial audiometry extending into ultra-high frequencies (nine to twenty kilohertz), because drug-induced hair cell apoptosis always begins at the high-frequency cochlear base before affecting speech frequencies. High-frequency **otoacoustic emissions** decline before pure-tone thresholds shift, providing an objective early warning system that allows oncologists and nephrologists to modify dosing regimens.",
+   "say": "Ototoxicity starts at the high-frequency cochlear base. Ultra-high frequency audiometry and otoacoustic emissions detect early hair cell injury before speech frequencies suffer.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ototoxicity Early Surveillance Protocol",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Baseline Extended High-Frequency Audiometry (>9 kHz)"
+     },
+     {
+      "id": "o2",
+      "label": "Serial Distortion Product OAE Monitoring"
+     },
+     {
+      "id": "o3",
+      "label": "Early Outer Hair Cell Failure Identified Before Speech Loss"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of irreversible sensorineural hearing loss centers on auditory rehabilitation. Patients with bilateral moderate-to-severe presbycusis or noise-induced hearing loss benefit substantially from digital **hearing aids**, which incorporate directional microphones, acoustic feedback suppression, and dynamic range compression. In patients with profound bilateral deafness who derive no benefit from conventional amplification, cochlear implantation is indicated.",
+   "say": "Digital hearing aids amplify sound and enhance speech comprehension for presbycusis. When bilateral loss is profound, cochlear implants stimulate auditory nerve fibres directly.",
+   "vis": {
+    "kind": "table",
+    "title": "Rehabilitation Options for Sensorineural Hearing Loss",
+    "cols": [
+     "Severity Category",
+     "Average Hearing Loss",
+     "Recommended Intervention",
+     "Primary Functional Benefit"
+    ],
+    "rows": [
+     [
+      "Mild to moderate",
+      "26 to 55 decibels",
+      "Digital air-conduction hearing aid",
+      "Speech comprehension in quiet and noise"
+     ],
+     [
+      "Moderately severe",
+      "56 to 70 decibels",
+      "High-power behind-the-ear hearing aid",
+      "Restores conversational speech volume"
+     ],
+     [
+      "Severe to profound",
+      "71 to 90+ decibels",
+      "Bilateral cochlear implantation",
+      "Direct electrical stimulation of spiral ganglion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-051",
+  "bk2-ent-052",
+  "bk2-ent-053"
+ ]
+}

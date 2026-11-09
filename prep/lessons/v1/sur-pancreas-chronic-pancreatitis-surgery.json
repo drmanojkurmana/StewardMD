@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Chronic Pancreatitis and Decompressive Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Irreversible fibro-inflammatory destruction of pancreatic parenchyma culminating in progressive exocrine and endocrine insufficiency characterizes **chronic pancreatitis**. In adult populations, chronic alcohol abuse represents the predisposing aetiological factor in over seventy percent of cases, alongside idiopathic, hereditary, and autoimmune pancreatitis. Patients suffer from intractable, disabling epigastric pain that characteristically bores through to the back, driving narcotics dependence and severe malnourishment.",
+   "say": "Chronic pancreatitis involves irreversible parenchymal fibrosis and ductal damage, presenting with disabling epigastric pain boring through to the back.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-pancreatitis-fig1.webp",
+    "alt": "Gross and microscopic pathological diagram of chronic pancreatitis showing parenchymal fibrosis, ductal dilatation, and intraductal calculi.",
+    "caption": "Chronic pancreatitis: severe parenchymal fibrosis, calcified stones, and chain-of-lakes ductal dilatation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The principal goal of operative management in chronic pancreatitis is durable relief of intractable pain that has proven refractory to conservative medical and endoscopic therapy. Secondary indications for surgery include biliary obstruction from fibrous common duct encasement, duodenal stenosis, persistent symptomatic pseudocysts, or clinical inability to exclude pancreatic adenocarcinoma. Ductal morphology dictates the selection between decompressive, resective, or **hybrid procedures**.",
+   "say": "Surgery for chronic pancreatitis aims to relieve intractable pain and resolve biliary or duodenal compression when medical therapies fail.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Category",
+     "Ductal & Parenchymal Morphology",
+     "Representative Procedure"
+    ],
+    "rows": [
+     [
+      "Decompressive (Drainage)",
+      "Dilated main duct (> 6-7 mm), normal head",
+      "Partington-Rochelle / Puestow procedure"
+     ],
+     [
+      "Hybrid (Resection + Drainage)",
+      "Inflammatory head mass with dilated duct",
+      "Frey procedure or Beger procedure"
+     ],
+     [
+      "Resective Only",
+      "Severe disease confined to head or tail",
+      "Whipple (head) or Distal Pancreatectomy (tail)"
+     ],
+     [
+      "Denervation Only",
+      "Small-duct disease without dilatation (< 4 mm)",
+      "Thoracoscopic splanchnicectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When cross-sectional imaging reveals a markedly dilated main pancreatic duct exceeding six to seven millimetres with alternating strictures and calculi, termed chain-of-lakes, longitudinal surgical drainage is indicated. The benchmark historical operation is the **Puestow procedure**, formally modified by Partington and Rochelle. The main pancreatic duct is filleted open longitudinally from the neck to within one centimetre of the tail, calculi are cleared, and a Roux-en-Y jejuno-pancreatic anastomosis is constructed.",
+   "say": "The Puestow procedure fillets open the dilated pancreatic duct longitudinally and anastomoses it to a Roux-en-Y jejunal loop.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pancreas-divisum-fig1.webp",
+    "alt": "Anatomical schematic showing longitudinal filleting of the main pancreatic duct and Roux-en-Y side-to-side pancreaticojejunostomy.",
+    "caption": "Longitudinal pancreaticojejunostomy: wide drainage of the dilated main pancreatic duct using a Roux-en-Y jejunal loop. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The modern Partington-Rochelle modification of the Puestow operation simplifies the technique by omitting splenectomy and distal pancreatectomy. By opening the duct along its anterior surface and creating an extensive side-to-side anastomosis, ductal hypertension is permanently relieved. However, long-term pain relief fails in over thirty percent of patients if an underlying inflammatory fibrotic mass residing in the **pancreatic head** is neglected.",
+   "say": "The Partington-Rochelle modification avoids splenectomy, but pain can recur if an inflammatory head mass is left unaddressed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Puestow",
+     "points": [
+      "Requires splenectomy",
+      "Resection of pancreatic tail",
+      "Invaginates tail into jejunal loop",
+      "Higher operative morbidity"
+     ]
+    },
+    "right": {
+     "title": "Partington-Rochelle",
+     "points": [
+      "Preserves spleen and pancreatic tail",
+      "Pure longitudinal anterior ductotomy",
+      "Side-to-side Roux pancreaticojejunostomy",
+      "Current international standard for large ducts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To simultaneously decompress the dilated duct and excise the pacemaker of pain located within the pancreatic head, Charles Frey pioneered the **Frey procedure**. This ingenious hybrid technique combines longitudinal ductal unroofing with local core excision of the head of the pancreas. The anterior shell of the pancreatic head is cored out, preserving a thin rim of tissue along the duodenal curve and uncinate process.",
+   "say": "The Frey procedure cores out the fibrotic pancreatic head while unroofing the dilated duct, combining resection with longitudinal drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Inflammatory Head Mass with Dilated Pancreatic Duct"
+     },
+     {
+      "id": "core",
+      "label": "Local Coring Resection of Pancreatic Head Parenchyma"
+     },
+     {
+      "id": "fillet",
+      "label": "Longitudinal Anterior Unroofing of Main Pancreatic Duct"
+     },
+     {
+      "id": "anast",
+      "label": "Single Wide Side-to-Side Roux-en-Y Pancreaticojejunostomy"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "core"
+     ],
+     [
+      "core",
+      "fillet"
+     ],
+     [
+      "fillet",
+      "anast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A related duodenum-preserving resection of the pancreatic head is the Beger procedure. In the Beger operation, the pancreatic neck is formally transected over the portal vein and superior mesenteric vein, and the head of the pancreas is subcompletely excised, leaving only a small rim of tissue along the duodenum. Because it requires vascular dissection over the **portal vein**, the Beger procedure carries higher technical complexity than the Frey operation.",
+   "say": "The Beger procedure transects the pancreatic neck over mesenteric vessels to perform subtotal head excision while preserving the duodenum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Frey Procedure",
+     "Beger Procedure",
+     "Whipple Procedure"
+    ],
+    "rows": [
+     [
+      "Duodenum Preservation",
+      "Preserved intact",
+      "Preserved intact",
+      "Completely resected"
+     ],
+     [
+      "Transection over Portal Vein",
+      "No (avoids dissection over veins)",
+      "Yes (divides neck over portal vein)",
+      "Yes (divides neck over portal vein)"
+     ],
+     [
+      "Biliary Anastomosis",
+      "Rarely needed (unroofs bile duct)",
+      "Not required",
+      "Mandatory choledochojejunostomy"
+     ],
+     [
+      "Long-term Pain Relief",
+      "80% to 85%",
+      "80% to 85%",
+      "75% to 85%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with severe disease confined strictly to the pancreatic head where high suspicion of occult malignancy exists, classic or pylorus-preserving pancreaticoduodenectomy remains the definitive intervention. Conversely, when chronic inflammation, stones, and strictures are limited entirely to the body and tail with a normal pancreatic head, spleen-preserving distal pancreatectomy provides complete symptom resolution while minimizing the risk of post-splenectomy **systemic sepsis**.",
+   "say": "Suspected cancer in the head warrants a Whipple procedure, whereas isolated tail disease is managed with distal pancreatectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suspected Head Malignancy",
+     "points": [
+      "Whipple pancreaticoduodenectomy",
+      "Excision of head, duodenum, and bile duct",
+      "Provides formal oncological margins",
+      "High procedural complexity and reconstruction"
+     ]
+    },
+    "right": {
+     "title": "Isolated Distal Disease",
+     "points": [
+      "Distal pancreatectomy",
+      "Spleen preservation whenever feasible",
+      "No gastrointestinal anastomosis required",
+      "Low risk of postoperative pancreatic fistula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management of small-duct disease where the main pancreatic duct measures under three millimetres presents a major clinical challenge, as decompressive drainage is impossible. For these patients without an inflammatory head mass, bilateral thoracoscopic **splanchnicectomy** or computed tomography-guided celiac plexus neurolysis can interrupt visceral pain pathways. Splanchnicectomy achieves significant short-to-medium term pain reduction without accelerating parenchymal exocrine or endocrine loss.",
+   "say": "Small-duct chronic pancreatitis unsuitable for drainage is managed by thoracoscopic splanchnicectomy or celiac plexus neurolysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neuromodulation Modality",
+     "Anatomical Target",
+     "Duration of Benefit",
+     "Key Side Effect"
+    ],
+    "rows": [
+     [
+      "Celiac Plexus Block",
+      "Percutaneous celiac ganglion injection (steroid/alcohol)",
+      "3 to 6 months",
+      "Transient diarrhoea, postural hypotension"
+     ],
+     [
+      "Thoracoscopic Splanchnicectomy",
+      "Bilateral greater and lesser splanchnic nerves (T5-T11)",
+      "1 to 3 years",
+      "Intercostal neuralgia, pneumothorax"
+     ],
+     [
+      "Total Pancreatectomy + IAT",
+      "Total organ excision with islet autotransplantation",
+      "Permanent pain relief",
+      "Brittle diabetes if islet graft fails"
+     ]
+    ]
+   }
+  }
+ ]
+}
