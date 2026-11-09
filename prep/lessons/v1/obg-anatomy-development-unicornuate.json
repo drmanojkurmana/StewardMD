@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "obg-anatomy-development",
+ "subject": "obstetrics-gynaecology",
+ "title": "Unicornuate Uterus, Didelphys and MRKH",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A single developed Mullerian duct forming one uterine horn is a **unicornuate uterus**. The other side may host a rudimentary horn, communicating or not. Ipsilateral renal agenesis accompanies it frequently on the undeveloped side. Four subtypes grade whether a horn exists and whether it contains a working cavity.",
+   "say": "Unicornuate uterus develops from one duct, often with ipsilateral renal agenesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Horns",
+      "One developed"
+     ],
+     [
+      "Other side",
+      "Rudimentary or absent"
+     ],
+     [
+      "Kidney",
+      "Agenesis same side often"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete duplication of uterus and cervix from total non fusion is **uterus didelphys**. A longitudinal vaginal septum accompanies it in most cases. Obstructed hemivagina with ipsilateral renal anomaly forms a recognised syndrome. Removing an obstructing longitudinal septum in didelphys relieves dyspareunia and is a minor vaginal operation.",
+   "say": "Uterus didelphys duplicates uterus and cervix from total non fusion.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Didelphys assessment.",
+    "caption": "Didelphys assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Congenital absence of uterus and upper vagina with normal ovaries and karyotype is **MRKH syndrome**. Mayer Rokitansky Kuster Hauser patients present with primary amenorrhoea and normal secondary sexual characters. Renal and skeletal anomalies accompany in a third. Renal anomalies affect about a third, spinal anomalies about a tenth, in MRKH series.",
+   "say": "MRKH syndrome absents uterus with normal ovaries and secondary sexual characters.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-fig1.webp",
+    "alt": "MRKH syndrome overview.",
+    "caption": "MRKH overview. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A functioning rudimentary horn risks ectopic implantation and rupture, so **horn excision** is advised when endometrium is present. Non functioning horns without cavity may be observed. MRI maps the anatomy before decisions. MRI distinguishes a cavitated horn from a solid one, and only the cavitated kind must come out.",
+   "say": "Functioning rudimentary horns are excised because pregnancy in them ruptures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "MRI maps anatomy"
+     },
+     {
+      "id": "n1",
+      "label": "Functioning horn found"
+     },
+     {
+      "id": "n2",
+      "label": "Excision advised"
+     },
+     {
+      "id": "n3",
+      "label": "Rupture prevented"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy in a unicornuate uterus risks preterm birth and malpresentation through **reduced cavity capacity**. Growth surveillance and cervical length monitoring individualise care. Many nevertheless reach term uneventfully. Preterm birth rates near 20 percent justify serial growth scans from 28 weeks.",
+   "say": "Unicornuate pregnancy risks preterm birth through reduced cavity capacity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unicornuate",
+     "points": [
+      "Preterm risk raised",
+      "Malpresentation common"
+     ]
+    },
+    "right": {
+     "title": "Didelphys",
+     "points": [
+      "Each horn smaller",
+      "Obstruction risk if septum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaginal creation by dilation first line in MRKH is **Frank dilation** therapy. Graded dilators used daily create a functional vagina in most motivated patients. Surgery with grafts or bowel segments is second line. Dilators are used for twenty to thirty minutes daily, and most women reach a functional length in three to six months.",
+   "say": "Frank dilation creates a vagina first line in MRKH with graded dilators.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-syndrome-fig1.webp",
+    "alt": "MRKH pelvic anatomy.",
+    "caption": "MRKH anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Psychological support is central in MRKH because diagnosis at puberty strikes identity and fertility, termed **psychosensitive care**. Surrogacy and adoption discussions come later, at the patients pace. Peer support groups help many. Support organisations run by affected women are often more useful than a single clinic conversation.",
+   "say": "Psychosensitive care supports MRKH patients because diagnosis strikes identity and fertility.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Need",
+     "Provision"
+    ],
+    "rows": [
+     [
+      "At diagnosis",
+      "Gentle explanation, support"
+     ],
+     [
+      "Adolescence",
+      "Vaginal dilation choice"
+     ],
+     [
+      "Adulthood",
+      "Surrogacy, adoption options"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Associated renal anomalies in MRKH include agenesis, ectopia and horseshoe kidney under **MURCS associations**. Skeletal, cardiac and auditory anomalies cluster in the extended syndrome. One screening pass covers all systems. MURCS adds Mullerian, renal, cervicothoracic and somite anomalies into one association label.",
+   "say": "MURCS associations screen renal, skeletal, cardiac and auditory systems in MRKH.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "MRKH diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "Renal scan done"
+     },
+     {
+      "id": "n2",
+      "label": "Spine and heart checked"
+     },
+     {
+      "id": "n3",
+      "label": "Hearing assessed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fertility in unicornuate and didelphys is usually preserved, while MRKH needs uterine surrogacy, summarised as **fertility outlook**. Uterine transplantation has produced births experimentally. Counselling stays honest about what is routine versus experimental. Uterus transplantation remains trial based with live births reported, and grafts are removed after family completion.",
+   "say": "Fertility outlook preserves natural conception in fusion defects but not MRKH.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fundal_height.webp",
+    "alt": "Anomaly fertility counselling.",
+    "caption": "Fertility counselling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
