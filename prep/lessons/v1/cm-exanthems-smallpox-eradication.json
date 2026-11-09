@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-exanthems-smallpox-eradication",
+ "subject": "community-medicine",
+ "module": "cm-exanthems",
+ "title": "Smallpox Eradication: How a Disease Was Ended",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The last natural case",
+   "tx": "**Smallpox** last occurred naturally in Somalia in 1977, and the World Health Assembly formally declared global eradication in 1980, making variola the first human disease deliberately ended. India reported its last case in 1975 and was declared free in 1977. Every eradication lesson since, polio included, is measured against this campaign.",
+   "say": "Last natural case Somalia 1977, declaration 1980, India free by 1977. Polio and every later campaign still borrow this campaign's yardstick.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Milestone", "Year"],
+    "rows": [
+     ["India last case", "1975"],
+     ["World last natural case", "1977, Somalia"],
+     ["Global declaration", "1980"],
+     ["Disease", "Variola major and minor"]
+    ]
+   }
+  },
+  {
+   "title": "Why smallpox could be eradicated",
+   "tx": "**Eradication feasibility** rested on biology: humans were the only reservoir, with no animal host and no healthy carriers; every infection declared itself in a visible rash; one stable serotype meant one vaccine worked everywhere; and the vaccine left a scar proving coverage. Diseases missing any of these features resist eradication today.",
+   "say": "Only humans carried it, every case showed a rash, one vaccine fitted all, and scars audited coverage. Miss one feature and eradication stalls, as later campaigns learned.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Eradication value"],
+    "rows": [
+     ["Human only reservoir", "No animal refuge"],
+     ["No subclinical spread", "Cases findable by rash"],
+     ["Single serotype", "One vaccine globally"],
+     ["Visible vaccination scar", "Coverage auditable"]
+    ]
+   }
+  },
+  {
+   "title": "Surveillance containment beat mass vaccination",
+   "tx": "The **surveillance and containment** strategy replaced blanket mass vaccination in the final phase: find every case through active house to house searches and rumour registers, isolate the patient, and ring vaccinate contacts and surrounding households. Chasing transmission chains proved faster and cheaper than vaccinating whole populations repeatedly, and became the campaign's decisive lesson.",
+   "say": "Find cases, isolate them, ring vaccinate around them. Chasing chains beat blanket rounds in the endgame. Search and containment became the transferable lesson.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case found by search or rumour"},
+     {"id": "b", "label": "Patient isolated"},
+     {"id": "c", "label": "Contacts and locality ring vaccinated"},
+     {"id": "d", "label": "Search repeated till chain ends"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The bifurcated needle and freeze dried vaccine",
+   "tx": "The **bifurcated needle** held a tiny vaccine dose between its two prongs and scratched it into the arm with multiple punctures, cutting vaccine use to a quarter and letting minimally trained workers vaccinate reliably. Heat stable freeze dried vaccine survived tropical field conditions without a perfect cold chain, removing the logistics excuse.",
+   "say": "A two pronged needle quartered the dose and simplified training, while freeze dried vaccine tolerated tropical heat. Tools removed the excuses that stalled earlier rounds.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Tool", "Advantage"],
+    "rows": [
+     ["Bifurcated needle", "Quarter dose, simple technique"],
+     ["Freeze dried vaccine", "Heat stable in field"],
+     ["Scar check", "Take verified by inspection"],
+     ["Jet injector earlier", "Fast but maintenance heavy"]
+    ]
+   }
+  },
+  {
+   "title": "Smallpox versus chickenpox at the bedside",
+   "tx": "**Lesion distribution** separates the two pox illnesses examiners love: smallpox lesions are centrifugal, denser on face and limbs, all at the same stage, deep and slow to evolve, in a toxic febrile patient; chickenpox is centripetal, trunk heavy, lesions at mixed stages, superficial and rapid, in a mildly ill patient.",
+   "say": "Smallpox: centrifugal, single stage, deep, toxic patient. Chickenpox: centripetal, mixed stages, superficial, mild. Distribution and staging settle the classic comparison.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smallpox",
+     "points": ["Centrifugal distribution", "Lesions same stage", "Deep, slow evolution", "Severe prodrome, toxic"]
+    },
+    "right": {
+     "title": "Chickenpox",
+     "points": ["Centripetal distribution", "Lesions mixed stages", "Superficial dew drop vesicles", "Mild illness overall"]
+    }
+   }
+  },
+  {
+   "title": "Rumour registers and reward systems",
+   "tx": "A **rumour register** at every health facility logged every reported suspected case, each investigated and closed with a written verdict, while cash rewards for confirmed reports turned the public into searchers. Zero reporting was treated as a surveillance failure signal, not good news, because silent systems were exactly where chains survived undetected.",
+   "say": "Every rumour logged, investigated and closed in writing, with rewards for true reports. Silence was audited as failure. Zero reports never meant zero disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Device", "Purpose"],
+    "rows": [
+     ["Rumour register", "Capture community reports"],
+     ["Cash reward", "Incentivise true reporting"],
+     ["House searches", "Find unreported cases"],
+     ["Nil report audit", "Detect silent facilities"]
+    ]
+   }
+  },
+  {
+   "title": "Certification: proving a negative",
+   "tx": "**Certification of eradication** demanded independent commissions visiting countries, auditing surveillance sensitivity, searching for hidden cases and reviewing records before accepting freedom. The global commission signed off only after two years beyond the last case with surveillance strong enough to have found cases had they existed. Proving absence required more evidence than finding presence ever had.",
+   "say": "Independent commissions audited whether surveillance could have found cases, not merely that none were reported. Proving a negative took two silent, well watched years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Last indigenous case"},
+     {"id": "b", "label": "Intensive surveillance years"},
+     {"id": "c", "label": "Independent commission audit"},
+     {"id": "d", "label": "Certification of freedom"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "What remains: stocks and preparedness",
+   "tx": "**Variola stocks** officially survive only at two high security laboratories, in the United States and Russia, under international inspection, while vaccine stockpiles and response plans guard against accidental or deliberate release. Routine vaccination ended after eradication, so population immunity wanes yearly, which is precisely why preparedness planning continues.",
+   "say": "Official virus survives in two inspected laboratories only. Routine vaccination stopped, immunity wanes, and stockpiles plus response plans carry the remaining risk.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Remnant", "Safeguard"],
+    "rows": [
+     ["Two official virus stocks", "International inspection"],
+     ["Vaccine stockpiles", "Emergency ring response"],
+     ["Waning population immunity", "Preparedness planning"],
+     ["Synthetic biology risk", "Screening and governance"]
+    ]
+   }
+  },
+  {
+   "title": "Lessons carried into polio and beyond",
+   "tx": "The **eradication playbook** written here still runs: acute flaccid paralysis surveillance mirrors rash searches, polio containment mirrors ring vaccination, and certification commissions mirror the smallpox sign off. Its warnings also persist: campaigns fail on invisible infection, animal reservoirs and public fatigue, none of which smallpox ever had to face at scale.",
+   "say": "Polio inherited the searches, the rings and the certification audits. Smallpox never faced hidden spread or animal reservoirs. Know which lessons transfer and which luck does not.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Smallpox device", "Later echo"],
+    "rows": [
+     ["Rash surveillance", "AFP surveillance in polio"],
+     ["Ring vaccination", "Outbreak response immunisation"],
+     ["Rumour register", "Community event reporting"],
+     ["Certification commission", "Polio certification process"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
