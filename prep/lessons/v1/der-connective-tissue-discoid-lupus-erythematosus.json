@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "id": "der-connective-tissue-discoid-lupus-erythematosus",
+ "subject": "dermatology",
+ "module": "der-connective-tissue",
+ "title": "Cutaneous Lupus Erythematosus and Dermatomyositis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Discoid lupus erythematosus** presents as discrete, disk-shaped, indurated erythematous plaques favoring the sun-exposed face, scalp, and ears. Lesions exhibit adherent foliar scaling, follicular plugging termed the carpet tack sign, central porcelain atrophic scarring, peripheral hyperpigmented borders, and permanent scarring alopecia.",
+   "say": "Discoid lupus forms well-demarcated scarred plaques on the face, ears, and scalp. Peeling the adherent scale reveals carpet tack keratotic plugs projecting from hair follicles.",
+   "vis": {
+    "kind": "flow",
+    "title": "Carpet Tack Sign Mechanism",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Follicular infundibulum develops dense hyperkeratosis"
+     },
+     {
+      "id": "n2",
+      "label": "Keratotic plug firmly anchors into dilated follicular ostium"
+     },
+     {
+      "id": "n3",
+      "label": "Peeled scale pulls out spiny projections resembling carpet tacks"
+     },
+     {
+      "id": "n4",
+      "label": "Follicle destruction terminates in cicatricial scarring alopecia"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic progression risk** in patients presenting with purely cutaneous discoid lupus erythematosus remains between five and ten percent. Patients with widespread lesions below the neck, prominent nail fold telangiectasias, cytopenias, high antinuclear antibody titers, or elevated anti-double-stranded DNA carry the highest transformation risk.",
+   "say": "About five to ten percent of individuals with discoid lesions eventually progress to systemic lupus. Generalized plaques and positive autoantibodies indicate higher risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Localized Discoid Lupus",
+     "points": [
+      "Lesions confined above the neck",
+      "ANA usually negative or low titer",
+      "Systemic transition risk under 5%",
+      "Excellent response to topicals"
+     ]
+    },
+    "right": {
+     "title": "Generalized Discoid Lupus",
+     "points": [
+      "Lesions extend to trunk and limbs",
+      "Positive ANA, cytopenias possible",
+      "Higher 15-20% systemic SLE risk",
+      "Mandates systemic antimalarials"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Subacute cutaneous lupus** erythematosus presents as non-scarring, highly photosensitive annular polycyclic plaques or papulosquamous psoriaform eruptions concentrated across the shoulders, upper chest, and extensor arms. Over eighty percent of affected individuals carry circulating anti-Ro/SSA autoantibodies and express human leukocyte antigen DR3.",
+   "say": "Subacute cutaneous lupus erupts as non-scarring annular or scaly plaques on sun-exposed trunk and shoulders. Strong association exists with circulating anti-Ro/SSA autoantibodies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/subacute-cutaneous-lupus-fig1.webp",
+    "alt": "Subacute cutaneous lupus erythematosus annular plaques.",
+    "caption": "Subacute cutaneous lupus erythematosus demonstrating photosensitive annular polycyclic lesions.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Malar butterfly rash** represents the acute cutaneous manifestation of systemic lupus erythematosus, presenting as bright erythema and edema spanning the bilateral cheeks and nasal bridge. Characteristically, the rash strictly spares the nasolabial folds, differentiating it from the confluent facial flushing of rosacea or seborrhoeic dermatitis.",
+   "say": "The acute malar rash covers the cheeks and nasal bridge while strictly sparing the nasolabial folds. This sparing pattern separates lupus erythema from rosacea.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/systemic-lupus-erythematosus-fig1.webp",
+    "alt": "Malar butterfly rash with nasolabial fold sparing.",
+    "caption": "Systemic lupus erythematosus showing classic butterfly facial rash sparing nasolabial folds.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Gottron papules** represent pathognomonic cutaneous lesions of dermatomyositis, presenting as violaceous, flat-topped lichenoid papules and plaques situated symmetrically over the dorsal aspect of the interphalangeal and metacarpophalangeal joints. In contrast, cutaneous lupus erythematosus characteristically affects the interjoint spaces, sparing the articular knuckles.",
+   "say": "Gottron papules are pathognomonic violaceous plaques resting directly over knuckle joints. Cutaneous lupus spares the knuckles and affects the skin between joints.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dermatomyositis-fig1.webp",
+    "alt": "Gottron papules over metacarpophalangeal joints.",
+    "caption": "Dermatomyositis showing violaceous Gottron papules positioned directly over knuckle joints.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Heliotrope rash** provides another pathognomonic sign of dermatomyositis, characterized by a violaceous or purplish dusky erythema accompanied by periorbital edema predominantly involving the upper eyelids. Additional distinctive features include the shawl sign across the upper back, the V-sign over the anterior chest, and hyperkeratotic mechanic hands.",
+   "say": "Heliotrope rash creates violaceous swelling around the upper eyelids. Other hallmarks include shawl erythema on the back, anterior chest V-sign, and cracked mechanic hands.",
+   "vis": {
+    "kind": "table",
+    "title": "Dermatomyositis Cutaneous Hallmarks",
+    "cols": [
+     "Physical Sign",
+     "Anatomic Location",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Gottron papules",
+      "Dorsal MCP and IP joints",
+      "Pathognomonic lichenoid papules"
+     ],
+     [
+      "Heliotrope rash",
+      "Periorbital upper eyelids",
+      "Pathognomonic violaceous edema"
+     ],
+     [
+      "Shawl sign",
+      "Upper back and shoulders",
+      "Confluent photosensitive erythema"
+     ],
+     [
+      "Mechanic hands",
+      "Lateral and palmar digits",
+      "Hyperkeratotic fissuring, anti-synthetase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sclerodactyly** manifests in systemic sclerosis as shiny, tightly bound, thickened skin of the fingers that causes fixed flexion contractures, loss of normal skin folds, and tapered tapering termed claw hand deformity. Microvascular Raynaud phenomenon precedes skin tightening, accompanied by painful digital pitting scars and pulp atrophy.",
+   "say": "Sclerodactyly produces rigid, tightened skin over the fingers, restricting flexion and causing flexion deformities. Preceding Raynaud attacks cause painful digital pitting ulcers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limited Cutaneous SSc (CREST)",
+     "points": [
+      "Skin tightening distal to elbows/knees",
+      "Calcinosis and Telangiectasias",
+      "Pulmonary arterial hypertension risk",
+      "Anticentromere antibody positive"
+     ]
+    },
+    "right": {
+     "title": "Diffuse Cutaneous SSc",
+     "points": [
+      "Skin thickening proximal to elbows",
+      "Rapid visceral organ involvement",
+      "Early pulmonary fibrosis and renal crisis",
+      "Anti-Scl-70 (topoisomerase I) positive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CREST syndrome** delineates the classic acronym for limited cutaneous systemic sclerosis: Calcinosis cutis, Raynaud phenomenon, Esophageal dysmotility, Sclerodactyly, and Telangiectasia. The condition exhibits a strong serologic correlation with anticentromere antibodies, contrasting with diffuse systemic sclerosis where anti-Scl-70 antibodies herald early interstitial lung disease.",
+   "say": "The CREST pentad comprises calcinosis, Raynaud, esophageal dysmotility, sclerodactyly, and telangiectasia. Serology characteristically reveals anticentromere antibodies.",
+   "vis": {
+    "kind": "flow",
+    "title": "CREST Clinical Components",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Calcinosis cutis: Painful insoluble calcium deposits in dermis"
+     },
+     {
+      "id": "n2",
+      "label": "Raynaud phenomenon: Triphasic digital vasospasm upon cold exposure"
+     },
+     {
+      "id": "n3",
+      "label": "Esophageal dysmotility: Lower esophageal sphincter fibrosis and reflux"
+     },
+     {
+      "id": "n4",
+      "label": "Sclerodactyly & Telangiectasia: Tightened fingers and mat-like telangiectasias"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

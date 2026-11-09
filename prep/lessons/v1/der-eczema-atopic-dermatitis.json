@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "der-eczema-atopic-dermatitis",
+ "subject": "dermatology",
+ "module": "der-eczema",
+ "title": "Atopic Dermatitis and Eczemas",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hanifin and Rajka criteria** establish the formal clinical diagnosis of atopic dermatitis. Diagnosis requires meeting at least three major criteria: intense pruritus, typical morphology and age-specific distribution, chronic or relapsing dermatitis, and a personal or family history of atopic respiratory or allergic disease.",
+   "say": "Diagnosis relies on Hanifin and Rajka criteria, requiring persistent itching, characteristic age-related rash distribution, relapsing chronicity, and an atopic family or personal background.",
+   "vis": {
+    "kind": "table",
+    "title": "Hanifin and Rajka Major Criteria",
+    "cols": [
+     "Criterion",
+     "Clinical Presentation",
+     "Evaluation Requirement"
+    ],
+    "rows": [
+     [
+      "Pruritus",
+      "Intense itching, excoriations",
+      "Mandatory primary symptom"
+     ],
+     [
+      "Morphology & distribution",
+      "Facial/extensor in infants, flexural later",
+      "Age-dependent pattern match"
+     ],
+     [
+      "Chronicity",
+      "Relapsing-remitting course",
+      "Symptoms persisting over months"
+     ],
+     [
+      "Atopic background",
+      "Asthma, allergic rhinitis, eczema",
+      "Personal or first-degree family history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Filaggrin gene mutations** represent the strongest genetic predisposing factor for severe atopic dermatitis. Loss-of-function FLG mutations impair profilaggrin processing, disrupting stratum corneum hydration and cell cohesion. This compromised barrier facilitates transepidermal water loss and permits environmental allergen penetration, driving T-helper 2 polarized inflammation.",
+   "say": "Mutations in the filaggrin gene breach the skin barrier by depleting epidermal natural moisturizing factors. Allergens and microbes penetrate easily, triggering vigorous T-helper 2 immune responses.",
+   "vis": {
+    "kind": "flow",
+    "title": "Atopic Skin Barrier Breakdown",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Filaggrin deficiency in stratum corneum"
+     },
+     {
+      "id": "n2",
+      "label": "Elevated transepidermal water loss and microfissuring"
+     },
+     {
+      "id": "n3",
+      "label": "Exogenous allergen and bacterial penetration"
+     },
+     {
+      "id": "n4",
+      "label": "Th2 cytokine cascade with IL-4 and IL-13 amplification"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dennie-Morgan infraorbital folds** provide a reliable minor physical sign of atopic diathesis, visible as accentuated double skin creases beneath the lower eyelids. Other hallmark minor features include pityriasis alba hypopigmented facial patches, hyperlinear palms, keratosis pilaris, anterior subcapsular cataracts, and elevated serum IgE.",
+   "say": "Dennie-Morgan folds appear as double folds beneath the lower eyelid margins. Accompanying minor clues include pityriasis alba, hyperlinear palms, and elevated serum IgE levels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Minor Cutaneous Signs",
+     "points": [
+      "Dennie-Morgan infraorbital fold",
+      "Pityriasis alba on cheeks",
+      "Keratosis pilaris on outer arms",
+      "Exaggerated palmar creases"
+     ]
+    },
+    "right": {
+     "title": "Systemic Correlations",
+     "points": [
+      "Elevated total serum IgE",
+      "Peripheral blood eosinophilia",
+      "Immediate cutaneous reactivity",
+      "Recurrent skin infections"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Flexural eczema** predominates during childhood and adulthood, concentrating in the antecubital fossae, popliteal spaces, volar wrists, and posterior neck. Chronic vigorous rubbing produces lichenification, characterised by leathery skin thickening with accentuated markings. Conversely, infantile eczema preferentially targets the facial cheeks and extensor extremities.",
+   "say": "Older children and adults localize eczema to the flexures of elbows and knees, where rubbing causes marked lichenification. In infants, weeping crusts erupt on the cheeks and extensors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-actinic-dermatitis-fig1.webp",
+    "alt": "Chronic lichenified eczematous plaques with prominent skin creases.",
+    "caption": "Chronic eczematous dermatitis demonstrating epidermal thickening and pronounced skin creases.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Eczema herpeticum** represents a dermatologic emergency caused by superimposed herpes simplex virus infection across barrier-damaged atopic skin, historically termed Kaposi varicelliform eruption. Patients present with abrupt high fever and painful crops of umbilicated, punched-out erosions that rapidly disseminate, requiring urgent intravenous aciclovir.",
+   "say": "Eczema herpeticum is a dangerous viral superinfection over atopic skin. Disseminated umbilicated vesicles and punched-out erosions mandate immediate systemic aciclovir therapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Eczema Herpeticum Management Sequence",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Barrier-depleted skin exposed to herpes simplex virus"
+     },
+     {
+      "id": "n2",
+      "label": "Rapid outbreak of uniform umbilicated vesicles"
+     },
+     {
+      "id": "n3",
+      "label": "Punched-out erosions with high systemic fever"
+     },
+     {
+      "id": "n4",
+      "label": "Immediate intravenous aciclovir to avert visceral spread"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tacrolimus ointment** functions as a potent topical calcineurin inhibitor ideal for maintenance therapy and sensitive zones such as the face, eyelids, and intertriginous folds. By inhibiting calcineurin-mediated NFAT dephosphorylation, it suppresses interleukin-2 transcription without causing corticosteroid-induced cutaneous atrophy, telangiectasia, or ocular hypertension.",
+   "say": "Topical calcineurin inhibitors like tacrolimus suppress T-cell activation without causing dermal thinning or striae. They serve as valuable steroid-sparing agents for the face and eyelids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Topical Corticosteroids",
+     "points": [
+      "Rapid anti-inflammatory action",
+      "Risk of dermal atrophy and striae",
+      "Glaucoma risk around eyelids",
+      "Tachyphylaxis with prolonged use"
+     ]
+    },
+    "right": {
+     "title": "Calcineurin Inhibitors",
+     "points": [
+      "Tacrolimus and pimecrolimus",
+      "No dermal collagen thinning",
+      "Safe for facial and flexural skin",
+      "Transient local application burning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Allergic contact dermatitis** operates through a type IV delayed-type hypersensitivity reaction mediated by sensitized memory T cells, in contrast to irritant contact dermatitis which stems from direct chemical toxicity. Patch testing applied to the back and read at 48 and 96 hours identifies causative hapten antigens.",
+   "say": "Allergic contact dermatitis requires prior immune sensitization through a delayed-type hypersensitivity reaction. Diagnostic epicutaneous patch testing confirms specific culprit haptens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/photoallergic-dermatitis-fig1.webp",
+    "alt": "Contact dermatitis showing spongiotic intraepidermal vesicles.",
+    "caption": "Allergic contact dermatitis showing epidermal spongiosis, vesicle formation, and dermal infiltrate.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pompholyx** presents as intensely pruritic, deep-seated, tapioca-like vesicles on the lateral margins of the fingers, palms, and soles. The vesicles rarely rupture spontaneously but resolve with painful desquamation. Recurrent outbreaks correlate with emotional stress, hyperhidrosis, nickel contact allergy, and warm humid weather.",
+   "say": "Pompholyx produces stubborn, intensely itchy vesicles buried deep in the skin of the palms, soles, and sides of fingers. Attacks are aggravated by heat, sweat, and emotional distress.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pompholyx Vesicular Cycle",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Deep spongiotic vesicles form within volar epidermis"
+     },
+     {
+      "id": "n2",
+      "label": "Tapioca-like firm bumps emerge along digit borders"
+     },
+     {
+      "id": "n3",
+      "label": "Vesicles coalesce and desiccate without spontaneous rupture"
+     },
+     {
+      "id": "n4",
+      "label": "Collarette desquamation leaves tender raw fissures"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

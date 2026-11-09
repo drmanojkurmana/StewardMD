@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "der-urticaria-vasculitis-acute-urticaria",
+ "subject": "dermatology",
+ "module": "der-urticaria-vasculitis",
+ "title": "Urticaria and Cutaneous Vasculitis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Evanescent wheals** represent the clinical hallmark of urticaria, consisting of edematous erythematous papules or plaques with central pallor and surrounding flare. Each individual wheal characteristically lasts less than twenty-four hours before resolving completely, leaving pristine normal skin without residual pigmentation or scaling.",
+   "say": "Individual urticarial wheals are transient, characteristically disappearing within twenty-four hours without leaving marks. Intense pruritus accompanied by localized dermal swelling defines the presentation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-urticaria-fig1.webp",
+    "alt": "Acute urticaria histopathology showing dermal edema and mast cell degranulation.",
+    "caption": "Acute urticaria demonstrating superficial dermal edema with mast cell degranulation.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Mast cell degranulation** releases preformed histamine and newly synthesized leukotrienes and prostaglandins into the superficial dermis. Binding of histamine to endothelial H1 receptors causes rapid post-capillary venule dilation and increased vascular permeability, producing localized dermal edema and sensory C-fiber activation responsible for itching.",
+   "say": "Degranulating mast cells release histamine and inflammatory mediators. Dermal vascular permeability rises abruptly, causing transudation into the tissue and sensory nerve stimulation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Wheal Formation Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Allergen cross-links IgE on dermal mast cell surface"
+     },
+     {
+      "id": "n2",
+      "label": "Rapid exocytosis of histamine and leukotrienes"
+     },
+     {
+      "id": "n3",
+      "label": "Post-capillary endothelial gap junction dilation"
+     },
+     {
+      "id": "n4",
+      "label": "Localized plasma extravasation forming the palpable wheal"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic urticaria** is defined chronologically as recurrent wheals, angioedema, or both occurring almost daily for at least six weeks. While acute urticaria under six weeks often stems from viral infections, medications, or food allergies, chronic spontaneous urticaria is primarily autoimmune, mediated by IgG autoantibodies targeting IgE or Fc-epsilon-RI.",
+   "say": "Duration beyond six weeks establishes the diagnosis of chronic urticaria. While acute forms follow infections or drugs, chronic disease frequently involves autoimmune autoantibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Urticaria",
+     "points": [
+      "Duration under 6 weeks",
+      "Viral infections, drugs, foods",
+      "Frequently self-limiting",
+      "Standard antihistamines suffice"
+     ]
+    },
+    "right": {
+     "title": "Chronic Urticaria",
+     "points": [
+      "Duration exceeding 6 weeks",
+      "Autoimmune anti-Fc-epsilon-RI",
+      "Daily or intermittent wheals",
+      "May require step-up omalizumab"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Symptomatic dermatographism** constitutes the most prevalent physical urticaria, where linear, pruritic wheals develop within minutes after light stroking or scratching of the skin. Cholinergic urticaria represents another distinct physical subtype triggered by sweating, exercise, or hot showers, producing tiny punctate wheals.",
+   "say": "Symptomatic dermatographism yields linear wheals along scratch marks within minutes. Cholinergic urticaria erupts as tiny punctate wheals provoked by sweat, exertion, or heat.",
+   "vis": {
+    "kind": "table",
+    "title": "Physical Urticaria Varieties",
+    "cols": [
+     "Subtype",
+     "Physical Trigger",
+     "Lesion Morphology"
+    ],
+    "rows": [
+     [
+      "Symptomatic dermatographism",
+      "Firm linear shearing or scratching",
+      "Linear wheal with surrounding flare"
+     ],
+     [
+      "Cholinergic urticaria",
+      "Elevated core body temperature, sweat",
+      "Tiny 1 to 3 mm punctate papular wheals"
+     ],
+     [
+      "Cold urticaria",
+      "Contact with cold objects or water",
+      "Rapid swelling, systemic hypotension risk"
+     ],
+     [
+      "Delayed pressure urticaria",
+      "Sustained pressure from straps or belts",
+      "Deep painful swelling hours later"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Second-generation H1 antihistamines** administered orally represent the cornerstone first-line treatment for all forms of urticaria, chosen for their non-sedating profile and minimal anticholinergic adverse effects. When standard daily doses fail to achieve symptom control, international guidelines recommend up-titrating the dose up to four-fold before starting omalizumab.",
+   "say": "Non-sedating second-generation H1 antihistamines form the initial treatment. If symptoms persist, guidelines endorse escalating the daily dose up to four-fold standard strength.",
+   "vis": {
+    "kind": "flow",
+    "title": "Urticaria Stepped Pharmacotherapy",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Second-generation H1 antihistamine at standard licensed dose"
+     },
+     {
+      "id": "n2",
+      "label": "Escalate antihistamine up to 4-fold standard dose if uncontrolled"
+     },
+     {
+      "id": "n3",
+      "label": "Add omalizumab anti-IgE biologic for refractory chronic wheals"
+     },
+     {
+      "id": "n4",
+      "label": "Consider oral cyclosporine for severe biologic-refractory disease"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urticarial vasculitis** differs critically from benign urticaria because individual wheal-like lesions persist longer than twenty-four to forty-eight hours, cause burning or tenderness rather than pure itching, and resolve leaving residual purpura or post-inflammatory hyperpigmentation due to true erythrocyte extravasation into the surrounding dermis.",
+   "say": "Urticarial vasculitis lesions endure beyond twenty-four hours, cause burning rather than itching, and heal leaving purpuric staining due to true vessel wall damage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urticarial-vasculitis-fig1.webp",
+    "alt": "Urticarial vasculitis showing persistent wheals with purpura.",
+    "caption": "Urticarial vasculitis with persistent tender plaques, erythrocyte extravasation, and purpura.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Henoch-Schonlein purpura** represents an immune-complex small-vessel leukocytoclastic vasculitis driven by vascular IgA1 deposition. It classically affects children following an upper respiratory infection, presenting with the clinical tetrad of non-thrombocytopenic palpable purpura, polyarthralgia, colicky abdominal pain with intestinal bleeding, and glomerulonephritis.",
+   "say": "Henoch-Schonlein purpura is an IgA-mediated vasculitis presenting with dependent palpable purpura, arthritis, colicky abdominal pain, and potential renal involvement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+    "alt": "Henoch-Schonlein purpura palpable purpura distribution and vasculitis histology.",
+    "caption": "Henoch-Schonlein purpura showing dependent lower-limb palpable purpura and leukocytoclastic vasculitis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Leukocytoclastic vasculitis** on skin biopsy reveals post-capillary venular transmural neutrophilic infiltration, endothelial cell swelling, fibrinoid necrosis of vessel walls, and karyorrhexis with fragmented neutrophilic nuclei termed nuclear dust. Red blood cells escape into the surrounding dermis, manifesting clinically as non-blanching palpable purpura.",
+   "say": "Biopsy of early palpable purpura demonstrates post-capillary venule fibrinoid necrosis, neutrophilic nuclear dust, and erythrocyte extravasation confirming leukocytoclastic vasculitis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vascular Damage Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Circulating immune complexes deposit in post-capillary venules"
+     },
+     {
+      "id": "n2",
+      "label": "Complement activation attracts circulating neutrophils"
+     },
+     {
+      "id": "n3",
+      "label": "Neutrophil elastase causes vessel wall fibrinoid necrosis"
+     },
+     {
+      "id": "n4",
+      "label": "RBC extravasation creates non-blanching palpable purpura"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

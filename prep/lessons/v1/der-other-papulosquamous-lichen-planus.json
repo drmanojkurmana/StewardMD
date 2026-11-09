@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "der-other-papulosquamous-lichen-planus",
+ "subject": "dermatology",
+ "module": "der-other-papulosquamous",
+ "title": "Lichen Planus and Papulosquamous Disorders",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Classic lichen planus** manifests as the memorable six Ps: pruritic, planar, polygonal, purple, papules, and plaques. Lesions consist of flat-topped violaceous shiny papules with a subtle network of white lacy lines on their surface known as Wickham striae, best visualised after applying a drop of mineral oil.",
+   "say": "The classic morphology features flat-topped, polygonal, violaceous papules that cause intense pruritus. Delicate white streaks called Wickham striae are visible across the surface under magnification.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lichen-planus-fig1.webp",
+    "alt": "Lichen planus violaceous papules and interface dermatitis histology.",
+    "caption": "Lichen planus polygonal papules showing Wickham striae and dense interface dermatitis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Koebner phenomenon** commonly occurs in active lichen planus, where linear configurations of new violaceous papules appear along lines of mechanical scratching or superficial trauma. Predilection sites include the flexor aspects of the wrists, forearms, lumbar back, anterior lower legs, and the glans penis in males.",
+   "say": "Scratching or friction prompts new isomorphic papules in a linear pattern, confirming the Koebner phenomenon. Lesions favour the volar wrists, ankles, lumbar spine, and genitalia.",
+   "vis": {
+    "kind": "table",
+    "title": "Anatomic Distribution of Lichen Planus",
+    "cols": [
+     "Body Region",
+     "Characteristic Manifestation",
+     "Clinical Caveat"
+    ],
+    "rows": [
+     [
+      "Volar wrists",
+      "Polygonal violaceous papules",
+      "Symmetric, intensely itchy"
+     ],
+     [
+      "Lumbar spine",
+      "Aggregated purple plaques",
+      "Subject to frictional Koebnerization"
+     ],
+     [
+      "Pretibial shins",
+      "Hypertrophic verrucous plaques",
+      "Extremely resistant to therapy"
+     ],
+     [
+      "Glans penis",
+      "Annular violaceous rings",
+      "May mimic erythroplasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral lichen planus** affects the buccal mucosa in over half of all patients, presenting as reticular asymptomatic white lace-like patterns. Less commonly, erosive oral disease produces painful ulcerations and desquamative gingivitis, carrying a small documented long-term risk of malignant transformation into oral squamous cell carcinoma.",
+   "say": "Reticular oral involvement creates asymptomatic white streaks over the buccal mucosa. Chronic erosive mucosal disease is painful and requires surveillance due to long-term squamous carcinoma risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reticular Oral Form",
+     "points": [
+      "Bilateral buccal lace patterns",
+      "Typically painless",
+      "Minimal mucosal breakdown",
+      "Excellent benign prognosis"
+     ]
+    },
+    "right": {
+     "title": "Erosive Oral Form",
+     "points": [
+      "Painful shallow ulcerations",
+      "Desquamative gingivitis",
+      "Difficulty chewing spicy food",
+      "Small malignancy risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Civatte bodies** represent apoptotic, necrotic basal keratinocytes shed into the lower epidermis and papillary dermis on histopathology. Tissue biopsy reveals dense, band-like lymphocytic infiltration hugging the dermoepidermal junction, liquefactive degeneration of the basal layer, irregular saw-toothed epidermal hyperplasia, and prominent wedge-shaped hypergranulosis.",
+   "say": "Histology demonstrates a band-like lymphocytic infiltrate obscuring the dermoepidermal junction. Basal cell necrosis generates eosinophilic Civatte colloid bodies alongside saw-toothed rete ridges.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lichen Planus Interface Dermatitis",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Cytotoxic T-lymphocytes target basal keratinocytes"
+     },
+     {
+      "id": "n2",
+      "label": "Liquefactive basal layer degeneration ensues"
+     },
+     {
+      "id": "n3",
+      "label": "Apoptotic keratinocytes condense into Civatte bodies"
+     },
+     {
+      "id": "n4",
+      "label": "Band-like infiltrate produces saw-toothed epidermal remodeling"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dorsal pterygium** forms when the proximal nail fold adheres pathologically to the nail bed, resulting in longitudinal splitting and permanent loss of the nail plate. Twenty-nail dystrophy and thinning with longitudinal ridging can also develop, while scalp lichen planopilaris causes progressive cicatricial alopecia.",
+   "say": "Severe nail involvement produces dorsal pterygium, where the proximal fold fuses to the nail bed with plate destruction. Follicular lichen planopilaris causes irreversible scarring hair loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lichen-planopilaris-fig1.webp",
+    "alt": "Lichen planopilaris follicular scalp histology.",
+    "caption": "Lichen planopilaris with follicular plugging, peripilar casts, and perifollicular fibrosis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pityriasis rosea** represents an acute, benign, self-limited papulosquamous eruption primarily affecting young adults, likely triggered by human herpesvirus 6 or 7 reactivation. An initial solitary salmon-pink oval plaque called the herald patch precedes widespread smaller oval lesions aligned along skin cleavage lines.",
+   "say": "Pityriasis rosea begins with a single larger herald patch on the trunk. Days later, secondary eruptive plaques align along relaxed skin cleavage lines without systemic compromise.",
+   "vis": {
+    "kind": "table",
+    "title": "Pityriasis Rosea Diagnostic Profile",
+    "cols": [
+     "Feature",
+     "Clinical Description",
+     "Diagnostic Distinction"
+    ],
+    "rows": [
+     [
+      "Initial lesion",
+      "Herald patch 2 to 5 cm wide",
+      "Often misdiagnosed as tinea corporis"
+     ],
+     [
+      "Secondary rash",
+      "Collarette of thin marginal scale",
+      "Inward-facing trailing scale border"
+     ],
+     [
+      "Orientation",
+      "Fir tree pattern along Langer lines",
+      "Follows rib cage obliquely on back"
+     ],
+     [
+      "Natural history",
+      "Spontaneous resolution in 6 to 8 weeks",
+      "Self-limiting, reassurance only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Christmas tree pattern** describes the classic distribution of secondary pityriasis rosea plaques across the thoracic trunk and back. Each oval lesion features a delicate, inward-facing collarette of scale along its margin. The condition resolves spontaneously within six to eight weeks without scarring.",
+   "say": "The trunk eruption follows Langer cleavage lines obliquely, resembling the branches of a Christmas tree. Individual plaques exhibit an inward-facing collarette of fine trailing scale.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pityriasis Rosea Clinical Course",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Herald patch appears on trunk or proximal thigh"
+     },
+     {
+      "id": "n2",
+      "label": "Subclinical viral reactivation interval of 7 to 14 days"
+     },
+     {
+      "id": "n3",
+      "label": "Eruptive oval plaques disperse in Christmas tree layout"
+     },
+     {
+      "id": "n4",
+      "label": "Spontaneous complete desquamation by week eight"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Islands of normal skin** constitute the striking diagnostic clue in pityriasis rubra pilaris, an uncommon chronic papulosquamous disorder. Red-orange follicular hyperkeratotic papules coalesce into extensive erythroderma that spares distinct round patches of uninvolved pale skin, accompanied by thickened waxy orange palmoplantar keratoderma.",
+   "say": "Pityriasis rubra pilaris features widespread reddish-orange plaques containing discrete islands of unaffected normal skin. Severe waxy hyperkeratosis of the palms and soles is typical.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pityriasis Rubra Pilaris",
+     "points": [
+      "Orange-red erythroderma",
+      "Islands of normal skin spared",
+      "Follicular spiny papules on fingers",
+      "Waxy orange keratoderma"
+     ]
+    },
+    "right": {
+     "title": "Psoriatic Erythroderma",
+     "points": [
+      "Deep salmon-red confluent erythema",
+      "No normal spared skin islands",
+      "Coarse silvery sheet scaling",
+      "Frequent systemic temperature loss"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
