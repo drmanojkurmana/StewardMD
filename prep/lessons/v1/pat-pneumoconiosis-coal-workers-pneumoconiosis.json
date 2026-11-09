@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-pneumoconiosis",
+  "subject": "pathology",
+  "title": "Coal Workers Pneumoconiosis, Caplan Syndrome, Silicosis, Asbestosis, and Pleural Plaques",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Coal workers pneumoconiosis dusts miners' lungs with coal macules around respiratory bronchioles that may coalesce into progressive massive fibrosis, upper lobe masses crippling breathing after decades underground. The dust disease is **coal workers pneumoconiosis (black lung)**. Simple disease shows coal macules only one to five millimetres across, and miners with macules alone usually keep near normal lung function.",
+      "say": "Coal macules coalescing into massive upper lobe fibrosis cripple miners decades after the dust.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coal-workers-pneumoconiosis-fig1.webp",
+        "alt": "Severe coal workers pneumoconiosis",
+        "caption": "Severe coal workers pneumoconiosis with progressive massive fibrosis."
+      }
+    },
+    {
+      "tx": "Caplan syndrome crowns rheumatoid arthritis in coal and silica exposed lungs with sudden crops of large necrobiotic nodules, cavitating at pleural surfaces, separating from ordinary progressive fibrosis by tempo and serology. The rheumatoid dust alliance is **Caplan syndrome (rheumatoid pneumoconiosis)**. Caplan nodules erupt quickly over a few weeks, unlike the slow coalescence that builds ordinary progressive massive fibrosis masses.",
+      "say": "Rheumatoid arthritis plus dust plus sudden large lung nodules equals Caplan syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Simple coal pneumoconiosis",
+          "points": [
+            "Macules and small nodules",
+            "Mild or no functional loss",
+            "Exposure history decisive"
+          ]
+        },
+        "right": {
+          "title": "Progressive massive fibrosis",
+          "points": [
+            "Coalescent upper lobe masses",
+            "Severe breathlessness, cor pulmonale",
+            "Caplan nodules if rheumatoid joins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Silicosis scars lungs of stone cutters, sandblasters, and miners with concentric hyalinised silicotic nodules favouring upper lobes and hilar nodes whose rims calcify into eggshell patterns. Tuberculosis stalks its scarred tissue: **silicosis with eggshell nodal calcification**. Polarised light reveals weakly birefringent silica particles inside those nodules, confirming retained dust within the scar tissue itself.",
+      "say": "Upper lobe silicotic nodules plus eggshell node calcification, and always hunt tuberculosis within.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/silicosis-fig1.webp",
+        "alt": "Silicosis pulmonary pathology",
+        "caption": "Silicosis pulmonary pathology with hyalinised nodules and fibrotic progression."
+      }
+    },
+    {
+      "tx": "Silica cripples macrophage lysosomes, so inhaled tubercle bacilli find defenceless hosts, making silicotuberculosis a mandatory exclusion at every review with sputum microbiology. That deadly partnership is **silicotuberculosis surveillance in silicosis**. Epidemiological cohorts place tuberculosis risk in established silicosis at roughly three times the rate seen without silica damage.",
+      "say": "Silica disarms the very macrophages tuberculosis needs killed; sputum testing belongs at every silicosis review.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dust",
+          "Pattern",
+          "Signature association"
+        ],
+        "rows": [
+          [
+            "Coal",
+            "Macules, massive fibrosis",
+            "Caplan nodules with rheumatoid"
+          ],
+          [
+            "Silica",
+            "Hyalinised nodules, eggshell nodes",
+            "Tuberculosis, autoimmune diseases"
+          ],
+          [
+            "Asbestos",
+            "Lower lobe fibrosis, plaques",
+            "Mesothelioma, lung cancer"
+          ],
+          [
+            "Beryllium",
+            "Granulomas mimicking sarcoid",
+            "Beryllium lymphocyte test"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Asbestosis fibroses lower lobes and parietal pleura after asbestos exposure, its ferruginous bodies, asbestos cores coated in iron protein beads, proving exposure in tissue and lavage. The beaded fibre is the **ferruginous (asbestos) body**. Uncoated fibres stay invisible on routine stains, so ferruginous body counts always underestimate the true retained fibre burden.",
+      "say": "Ferruginous bodies prove asbestos reached the lung; lower lobe fibrosis plus plaques completes asbestosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Asbestos fibres inhaled decades earlier"
+          },
+          {
+            "id": "b",
+            "label": "Fibres persist, macrophages coat them"
+          },
+          {
+            "id": "c",
+            "label": "Lower lobe fibrosis and pleural change"
+          },
+          {
+            "id": "d",
+            "label": "Ferruginous bodies document exposure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pleural plaques, discrete hyaline collagen patches on parietal pleura and diaphragm, calcify visibly as exposure receipts usually without symptoms, while diffuse thickening and rounded atelectasis carry functional cost. The benign receipt is **asbestos pleural plaque disease**. Plaques favour the posterolateral chest wall and diaphragmatic domes, characteristically sparing costophrenic angles and lung apices.",
+      "say": "Calcified pleural plaques receipt asbestos exposure; most harm nobody, unlike diffuse pleural thickening.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pleural plaques",
+          "points": [
+            "Discrete, often calcified patches",
+            "No symptoms usually",
+            "Exposure marker only"
+          ]
+        },
+        "right": {
+          "title": "Diffuse pleural thickening",
+          "points": [
+            "Continuous pleural fibrosis",
+            "Restrictive breathlessness",
+            "Follows effusion or heavy exposure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Exposure histories spanning first jobs, military service, shipyards, sandblasting, and home renovation make pneumoconiosis diagnoses that scans alone only suggest, with latency stretching decades. That detective work is **occupational exposure history in dust lung disease**. Latency between first exposure and radiographic disease commonly spans 20 to 30 years for chronic silicosis and asbestosis alike.",
+      "say": "Ask about the first job, not the last; pneumoconiosis latency outlives employers and memories.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Question",
+          "Uncovers",
+          "Disease"
+        ],
+        "rows": [
+          [
+            "Sandblasting, stone cutting",
+            "Free silica clouds",
+            "Accelerated silicosis"
+          ],
+          [
+            "Shipyards, insulation removal",
+            "Asbestos fibres",
+            "Asbestosis, mesothelioma risk"
+          ],
+          [
+            "Coal mining years",
+            "Coal dust load",
+            "Coal workers pneumoconiosis"
+          ],
+          [
+            "Aircraft alloys, ceramics",
+            "Beryllium exposure",
+            "Chronic beryllium disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "No drug reverses established pneumoconiosis, so prevention by dust suppression, respirators, exposure limits, surveillance, smoking cessation, and compensation justice carries the entire therapeutic weight. That primacy defines **pneumoconiosis prevention over treatment**. Wet drilling and local exhaust ventilation cut respirable dust far more reliably than respirators worn inconsistently underground ever will.",
+      "say": "Dust diseases are prevented at the source or never cured; respirators and suppression are their only medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Dust measured and suppressed at source"
+          },
+          {
+            "id": "b",
+            "label": "Respirators fitted and enforced"
+          },
+          {
+            "id": "c",
+            "label": "Health surveillance images and spirometry"
+          },
+          {
+            "id": "d",
+            "label": "Removal from exposure, compensation support"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
