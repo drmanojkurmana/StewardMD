@@ -1,0 +1,266 @@
+{
+ "v": 1,
+ "id": "psy-dementia-pseudodementia",
+ "subject": "psychiatry",
+ "module": "psy-dementia",
+ "title": "Reversible Dementias, Neurodegenerative Conditions, and Cholinesterase Inhibitors",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Pseudodementia**, or depressive cognitive impairment, represents reversible cognitive deficits secondary to severe major depression in elderly patients. Clinically distinguished from true dementia, patients frequently answer bedside questions with abrupt 'I do not know' statements, show acute onset, and demonstrate full cognitive recovery following antidepressant therapy.",
+   "say": "Pseudodementia is cognitive impairment caused by severe depression. Patients answer 'I do not know' and recover fully with antidepressant treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Depressive Pseudodementia",
+     "points": [
+      "Abrupt, rapid onset of cognitive complaints",
+      "Answers 'I do not know' without trying",
+      "Exaggerates and emphasizes memory deficits",
+      "Delayed recall improves with structured cueing"
+     ]
+    },
+    "right": {
+     "title": "True Alzheimer Dementia",
+     "points": [
+      "Insidious onset with progressive worsening",
+      "Attempts questions, producing near-miss errors",
+      "Conceals and minimizes cognitive failures",
+      "Delayed recall shows zero improvement with cueing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Normal pressure hydrocephalus**, abbreviated NPH, is a potentially reversible dementia syndrome caused by impaired cerebrospinal fluid absorption at the arachnoid granulations. It is characterized by Hakim's classic clinical triad: gait apraxia ('magnetic gait'), urinary urge incontinence, and insidious cognitive dementia.",
+   "say": "Normal pressure hydrocephalus features the classic triad of magnetic gait apraxia, urinary incontinence, and dementia, reversible with shunting.",
+   "vis": {
+    "kind": "table",
+    "title": "Hakim Triad Clinical Progression",
+    "cols": [
+     "Triad Component",
+     "Clinical Manifestation",
+     "Shunt Responsiveness"
+    ],
+    "rows": [
+     [
+      "Gait apraxia (Magnetic gait)",
+      "Broad-based, shuffling, feet glued to floor",
+      "First symptom to appear; highest recovery rate after shunt"
+     ],
+     [
+      "Urinary incontinence",
+      "Urge incontinence progressing to lack of concern",
+      "Second symptom to emerge; moderate recovery rate"
+     ],
+     [
+      "Cognitive dementia",
+      "Subcortical slowing, apathy, executive deficits",
+      "Last symptom to emerge; lowest recovery rate after shunt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnostic tap test in NPH** involves the removal of 30 to 50 milliliters of cerebrospinal fluid via lumbar puncture, demonstrating normal opening pressure. A dramatic objective improvement in walking velocity, stride length, and balance within hours following the tap test confirms the diagnosis and predicts successful ventriculoperitoneal shunt placement.",
+   "say": "A diagnostic lumbar tap removing forty milliliters of CSF with normal opening pressure restores gait speed, predicting ventriculoperitoneal shunt success.",
+   "vis": {
+    "kind": "flow",
+    "title": "NPH Diagnostic & Shunt Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Brain MRI: ventriculomegaly out of proportion to sulcal enlargement"
+     },
+     {
+      "id": "n2",
+      "label": "Conduct baseline quantitative timed 10-meter walking test"
+     },
+     {
+      "id": "n3",
+      "label": "Perform large-volume lumbar puncture (30 to 50 mL CSF removed)"
+     },
+     {
+      "id": "n4",
+      "label": "Repeat walking test: >20% speed improvement justifies surgical VP shunt"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Creutzfeldt-Jakob disease** is a rapidly fatal transmissible spongiform encephalopathy caused by prions, characterized by conversion of normal cellular prion protein PrPC into abnormal beta-sheet rich PrPSc. Patients present with rapidly progressive dementia, multifocal myoclonus triggered by loud sounds, ataxia, and terminal akinetic mutism.",
+   "say": "Creutzfeldt-Jakob disease causes rapid dementia and startle myoclonus driven by infectious prions, leading to death within twelve months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Features",
+     "points": [
+      "Rapidly progressive dementia over weeks to months",
+      "Prominent startle-induced myoclonic jerks",
+      "Cerebellar ataxia and visual cortical blindness",
+      "Death typically within one year of onset"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Tests",
+     "points": [
+      "EEG: periodic synchronous triphasic sharp waves",
+      "CSF: elevated 14-3-3 protein & positive RT-QuIC",
+      "MRI: cortical ribboning & basal ganglia hyperintensity",
+      "Brain biopsy: diffuse spongiform vacuolation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnostic findings in Creutzfeldt-Jakob disease** on electroencephalography reveal characteristic periodic synchronous biphasic or triphasic sharp wave complexes occurring at 1 to 2 Hertz against a slow background. Brain MRI shows cortical ribboning on diffusion-weighted imaging, while cerebrospinal fluid analysis confirms positive 14-3-3 protein.",
+   "say": "Diagnostic workup in CJD reveals periodic sharp wave complexes on EEG, cortical ribboning on brain MRI, and positive 14-3-3 protein in CSF.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Hallmarks of CJD",
+    "cols": [
+     "Investigation",
+     "Pathognomonic Finding",
+     "Sensitivity & Specificity"
+    ],
+    "rows": [
+     [
+      "Electroencephalogram (EEG)",
+      "Periodic synchronous triphasic sharp waves (1 Hz)",
+      "Sensitivity 65%; specificity 90%"
+     ],
+     [
+      "Diffusion-weighted MRI",
+      "Cortical ribboning & hockey-stick sign in pulvinar",
+      "Sensitivity >90%; earliest radiological sign"
+     ],
+     [
+      "CSF RT-QuIC assay",
+      "Direct real-time prion protein seed amplification",
+      "Sensitivity 92%; specificity 100%"
+     ],
+     [
+      "CSF 14-3-3 protein",
+      "Non-specific marker of rapid neuronal destruction",
+      "High sensitivity, moderate specificity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cholinesterase inhibitors in Alzheimer disease** include donepezil, rivastigmine, and galantamine, indicated for mild to moderate dementia to compensate for basal forebrain cholinergic deficit. Donepezil is a once-daily selective acetylcholinesterase inhibitor; rivastigmine provides dual inhibition of acetylcholinesterase and butyrylcholinesterase, formulated as a transdermal patch.",
+   "say": "Cholinesterase inhibitors like donepezil and rivastigmine enhance cholinergic transmission in Alzheimer disease, improving cognition and daily function.",
+   "vis": {
+    "kind": "table",
+    "title": "Cholinesterase Inhibitor Formulations",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Formulation",
+     "Key Side Effect"
+    ],
+    "rows": [
+     [
+      "Donepezil",
+      "Selective acetylcholinesterase block",
+      "Oral once daily at bedtime",
+      "Nausea, insomnia, bradycardia"
+     ],
+     [
+      "Rivastigmine",
+      "Dual AChE and BuChE inhibition",
+      "Daily transdermal patch",
+      "Minimal GI side effects via patch route"
+     ],
+     [
+      "Galantamine",
+      "AChE block & nicotinic allosteric",
+      "Oral twice daily (or extended)",
+      "Gastrointestinal cramps, weight loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Memantine** is an uncompetitive, low-affinity N-methyl-D-aspartate (NMDA) receptor antagonist indicated for moderate to severe Alzheimer disease, either as monotherapy or combined with donepezil. By blocking pathologically sustained, low-level glutamate excitotoxicity without interfering with normal physiological neurotransmission, memantine preserves surviving cortical neurons.",
+   "say": "Memantine blocks pathological NMDA glutamate excitotoxicity, protecting surviving neurons in moderate to severe Alzheimer disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Memantine Mechanism",
+     "points": [
+      "Uncompetitive low-affinity NMDA receptor block",
+      "Suppresses chronic glutamate excitotoxicity",
+      "Preserves normal physiological synaptic pulses",
+      "Approved for moderate to severe dementia"
+     ]
+    },
+    "right": {
+     "title": "Combination Synergy",
+     "points": [
+      "Combined with donepezil in advanced stages",
+      "Enhances cholinergic tone while dampening glutamate",
+      "Slows institutionalization and functional decline",
+      "Well tolerated with low incidence of dizziness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mini-Mental State Examination**, abbreviated MMSE, is a standardized 30-point bedside screening instrument assessing orientation, immediate registration, attention and calculation, delayed recall, language, and visuospatial construction. A score below 24 indicates clinically significant cognitive impairment, while scores below 10 reflect severe cognitive dementia.",
+   "say": "The MMSE scores cognitive function from zero to thirty. Scores below twenty-four confirm cognitive impairment, while scores below ten indicate severe dementia.",
+   "vis": {
+    "kind": "table",
+    "title": "MMSE Cognitive Domains & Scoring",
+    "cols": [
+     "Domain Tested",
+     "Points Available",
+     "Bedside Task Evaluated"
+    ],
+    "rows": [
+     [
+      "Orientation",
+      "10 points",
+      "Year, season, date, day, month; country, state, city, hospital, floor"
+     ],
+     [
+      "Registration",
+      "3 points",
+      "Name three common objects; patient repeats immediately"
+     ],
+     [
+      "Attention & calculation",
+      "5 points",
+      "Serial sevens subtraction or spell 'WORLD' backwards"
+     ],
+     [
+      "Delayed recall",
+      "3 points",
+      "Recall the three registered objects after 5 minutes"
+     ],
+     [
+      "Language & praxis",
+      "9 points",
+      "Naming, repetition, 3-stage command, reading, writing, copy pentagons"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
