@@ -2993,6 +2993,8 @@
         // Catch a snap-back settle (PREP_MOTION) the same way: freeze where it is painted.
         try {
           var ans = sh.getAnimations ? sh.getAnimations() : [];
+          // Only the WAAPI settle: CSS entrance animations/transitions must keep running untouched.
+          ans = ans.filter(function (an) { return !(an.animationName || an.transitionProperty); });
           if (ans.length) {
             var y0 = paintedY(sh);
             ans.forEach(function (an) { try { if (an.commitStyles) an.commitStyles(); } catch (x) {} try { an.cancel(); } catch (x) {} });

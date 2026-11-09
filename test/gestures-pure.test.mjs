@@ -163,6 +163,18 @@ test("prep sheet: the dismiss flight is only caught on the sheet, and cancel nev
   assert.ok(src.includes("resumeHeld(h)"), "a tap on a caught sheet resumes the original settle");
 });
 
+test("prep sheet: snap-back catch leaves CSS entrance animations and transitions running", () => {
+  const src = fs.readFileSync(new URL("../prep.js", import.meta.url), "utf8");
+  const i = src.indexOf("Catch a snap-back settle");
+  assert.ok(i >= 0, "snap-back catch exists");
+  const block = src.slice(i, src.indexOf("g = { sh: sh", i));
+  assert.ok(block.includes("animationName"), "CSS animations (pn-pop/pn-up entrance) are excluded from the catch");
+  assert.ok(block.includes("transitionProperty"), "CSS transitions are excluded from the catch");
+  assert.ok(/\.filter\(/.test(block), "getAnimations() list is filtered before commitStyles/cancel");
+  assert.ok(block.indexOf("animationName") < block.indexOf("commitStyles"), "filter runs before any animation is frozen");
+  assert.ok(block.includes("commitStyles") && block.includes("cancel()"), "WAAPI settle is still caught and frozen");
+});
+
 test("hit targets: visuals stay small, touch areas grow invisibly", () => {
   const az = fs.readFileSync(new URL("../az-scrubber.js", import.meta.url), "utf8");
   assert.ok(az.includes("width:22px;touch-action:none"), "az strip visible width back to 22px");
