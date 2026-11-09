@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phy-digestion-absorption",
+  "subject": "physiology",
+  "title": "Carbohydrate Digestion, Brush Border Enzymes, and SGLT1",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Dietary carbohydrates account for approximately fifty percent of daily caloric intake, consumed primarily as plant starch (amylose and amylopectin), disaccharides (sucrose and lactose), and non-absorbable plant cellulose. Complete assimilation requires enzymatic breakdown of polysaccharides into **monosaccharide end products**, because only single hexose sugars can cross enterocyte membranes.",
+      "say": "Dietary carbohydrates must be broken down into monosaccharides like glucose, galactose, and fructose before absorption.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dietary Carbohydrate",
+          "Polymer Structure",
+          "Hydrolytic Enzymes",
+          "Absorbable Monosaccharide Products"
+        ],
+        "rows": [
+          [
+            "Starch (Amylose / Amylopectin)",
+            "Alpha-1,4 and alpha-1,6 glucose polymers",
+            "Salivary and pancreatic alpha-amylase",
+            "Maltose, maltotriose, and alpha-limit dextrins"
+          ],
+          [
+            "Sucrose (Table Sugar)",
+            "Disaccharide (Glucose + Fructose)",
+            "Brush border sucrase",
+            "1 Glucose + 1 Fructose"
+          ],
+          [
+            "Lactose (Milk Sugar)",
+            "Disaccharide (Galactose + Glucose)",
+            "Brush border lactase",
+            "1 Galactose + 1 Glucose"
+          ],
+          [
+            "Cellulose (Dietary Fiber)",
+            "Beta-1,4 glucose polymer",
+            "None (humans lack cellulase)",
+            "Zero (adds non-digestible fecal bulk)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Initial luminal starch hydrolysis is catalyzed by salivary and pancreatic **alpha-amylase enzymes**, which cleave internal alpha-one-four glycosidic bonds. Amylase cannot cleave terminal bonds or branching alpha-one-six linkages, yielding oligosaccharides, maltose, maltotriose, and branched alpha-limit dextrins rather than free monomeric glucose.",
+      "say": "Alpha-amylase cleaves internal alpha-one-four bonds, generating maltose and dextrins but zero free glucose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "starch",
+            "label": "Dietary Amylose (Linear) and Amylopectin (Branched Alpha-Glucans)"
+          },
+          {
+            "id": "amylase",
+            "label": "Salivary and Pancreatic Alpha-Amylase Cleaves Internal Alpha-1,4 Bonds"
+          },
+          {
+            "id": "products",
+            "label": "Generates Maltose (Disaccharide), Maltotriose, and Alpha-Limit Dextrins"
+          },
+          {
+            "id": "brush_border",
+            "label": "Requires Microvillar Brush Border Oligosaccharidases for Terminal Hydrolysis"
+          }
+        ],
+        "edges": [
+          [
+            "starch",
+            "amylase"
+          ],
+          [
+            "amylase",
+            "products"
+          ],
+          [
+            "products",
+            "brush_border"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Terminal carbohydrate hydrolysis occurs directly at the enterocyte microvillar membrane, catalyzed by integral **brush border disaccharidases**. The sucrase-isomaltase complex hydrolyzes sucrose, maltose, and branched alpha-limit dextrins, while the maltase-glucoamylase enzyme cleaves sequential terminal glucose residues, producing free absorbable D-glucose and D-fructose.",
+      "say": "Brush border disaccharidases like sucrase and isomaltase perform terminal hydrolysis into absorbable monosaccharides.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sucrase-Isomaltase Complex",
+          "points": [
+            "Synthesized as single polypeptide cleaved by luminal trypsin",
+            "Isomaltase subunit cleaves alpha-1,6 branch bonds of limit dextrins",
+            "Sucrase subunit splits sucrose into glucose and fructose",
+            "Accounts for 80% of total mucosal maltase activity"
+          ]
+        },
+        "right": {
+          "title": "Lactase-Phlorizin Hydrolase",
+          "points": [
+            "Expressed at microvillar tip of mid-villous enterocytes",
+            "Splits lactose into glucose and galactose",
+            "Rate-limiting brush border enzyme for total carbohydrate digestion",
+            "Downregulated post-weaning in most adult human populations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Active transport of glucose and galactose across the apical enterocyte brush border is performed by the high-affinity **sodium-glucose cotransporter 1**, universally abbreviated as SGLT1. Operating via secondary active transport, SGLT1 couples the downhill entry of two sodium ions to transport one hexose molecule uphill against its chemical gradient.",
+      "say": "SGLT1 actively pumps glucose and galactose into enterocytes using the energy of two cotransported sodium ions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "baso_pump",
+            "label": "Basolateral Na+/K+-ATPase Creates Inward Sodium Concentration Gradient"
+          },
+          {
+            "id": "sglt1_sym",
+            "label": "Apical SGLT1 Transports 2 Na+ Ions Along with 1 Glucose or Galactose Molecule"
+          },
+          {
+            "id": "water_drag",
+            "label": "Solute Accumulation Drives Transcellular and Paracellular Osmotic Water Drag"
+          },
+          {
+            "id": "glut2_exit",
+            "label": "Accumulated Intracellular Hexoses Exit into Portal Blood via Basolateral GLUT2"
+          }
+        ],
+        "edges": [
+          [
+            "baso_pump",
+            "sglt1_sym"
+          ],
+          [
+            "sglt1_sym",
+            "water_drag"
+          ],
+          [
+            "sglt1_sym",
+            "glut2_exit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because SGLT1 requires concurrent sodium transport, oral rehydration solutions containing balanced glucose and sodium exploit this carrier to treat cholera and secretory diarrhea. Even when cholera toxin maximally stimulates intestinal chloride secretion, **SGLT1-mediated reabsorption** remains fully intact, pulling sodium and water osmotically into the bloodstream.",
+      "say": "Oral rehydration therapy leverages intact SGLT1 cotransport to reabsorb salt and water during severe secretory diarrhea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glucose-galactose-malabsorption-fig1.webp",
+        "alt": "Glucose-galactose malabsorption and enterocyte SGLT1 transport",
+        "caption": "Apical SGLT1 carrier kinetics, osmotic diarrhea mechanisms, and hexose transport failure."
+      }
+    },
+    {
+      "tx": "In contrast to glucose, dietary fructose absorption is completely sodium-independent, mediated across the apical membrane by the facilitated diffusion transporter **GLUT5**. Fructose transport operates down its concentration gradient at a slower velocity than active SGLT1 transport, making excessive unabsorbed dietary fructose a common cause of osmotic flatulence.",
+      "say": "Fructose enters enterocytes by facilitated diffusion via GLUT5, which is sodium-independent and easily overwhelmed.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Monosaccharide",
+          "Apical Transporter",
+          "Energetic Driving Force",
+          "Basolateral Exit Carrier"
+        ],
+        "rows": [
+          [
+            "D-Glucose",
+            "SGLT1 (High Affinity)",
+            "Secondary active (2 Na+ gradient)",
+            "GLUT2 (Facilitated diffusion)"
+          ],
+          [
+            "D-Galactose",
+            "SGLT1 (High Affinity)",
+            "Secondary active (2 Na+ gradient)",
+            "GLUT2 (Facilitated diffusion)"
+          ],
+          [
+            "D-Fructose",
+            "GLUT5 (Specific)",
+            "Facilitated diffusion down gradient",
+            "GLUT2 (Facilitated diffusion)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "All three absorbed monosaccharides accumulate within the enterocyte cytoplasm before exiting across the basolateral membrane into mesenteric capillaries via facilitated diffusion carrier **GLUT2**. This low-affinity, high-capacity hexose uniporter delivers absorbed carbohydrates directly into the portal vein for hepatic first-pass metabolism.",
+      "say": "Glucose, galactose, and fructose all exit the basolateral membrane into the portal vein through the GLUT2 transporter.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apical Entry Phase",
+          "points": [
+            "SGLT1 mediates active uptake of glucose and galactose",
+            "GLUT5 mediates facilitated entry of fructose",
+            "SGLT1 concentrates hexoses against intracellular gradients",
+            "Strictly stereospecific for D-isomers only"
+          ]
+        },
+        "right": {
+          "title": "Basolateral Exit Phase",
+          "points": [
+            "GLUT2 uniporter transports all three hexoses into blood",
+            "Facilitated diffusion driven by high intracellular hexose concentration",
+            "High capacity (Vmax) accommodates massive postprandial glucose surges",
+            "Can transiently insert into apical membrane during very high carbohydrate meals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Protein digestion begins in the stomach with gastric pepsins, which cleave peptide bonds adjacent to aromatic amino acids. Gastric pepsins function optimally at pH one point five to two point five, but are instantaneously and irreversibly inactivated as **alkaline duodenal chyme** neutralizes luminal contents above pH seven.",
+      "say": "Gastric pepsin begins protein breakdown in acid, but is permanently inactivated by neutral duodenal bicarbonate.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/digestion-absorption-enzymes-bile-fig1.webp",
+        "alt": "Enzymatic protein digestion and brush border absorption",
+        "caption": "Endopeptidase cascades, enterokinase activation, and oligopeptide cotransport in intestinal enterocytes."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
