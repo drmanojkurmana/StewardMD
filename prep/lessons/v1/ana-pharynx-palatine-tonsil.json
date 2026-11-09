@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pharynx",
+ "subject": "anatomy",
+ "title": "Palatine Tonsil, Tonsillar Bed, Quinsy, and Zenker Diverticulum",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The palatine tonsils are two prominent almond-shaped lymphoid masses situated bilaterally in the lateral wall of the oropharynx. Each **palatine tonsil** is nestled within the tonsillar sinus (tonsillar fossa), bounded anteriorly by the palatoglossal arch (anterior pillar) and posteriorly by the palatopharyngeal arch (posterior pillar).",
+   "say": "The palatine tonsils reside in the lateral oropharynx between the palatoglossal arch anteriorly and the palatopharyngeal arch posteriorly, forming part of Waldeyer ring.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-tonsil-relations.svg",
+    "alt": "Anatomical diagram of the palatine tonsil showing tonsillar crypts, pillars, and tonsillar bed relations",
+    "caption": "Anatomical relationships of the palatine tonsil within the tonsillar bed and surrounding muscular pillars. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The palatine tonsils form the lateral components of Waldeyer lymphoid ring, a protective annular defensive ring of mucosal lymphoid tissue guarding the respiratory and alimentary entrances. **Waldeyer ring** is constituted by the pharyngeal tonsil (adenoids) superiorly, the tubal tonsils dorsolaterally, the palatine tonsils laterally, and the lingual tonsil inferiorly on the posterior third of the tongue.",
+   "say": "Waldeyer ring guards the pharyngeal gateway. It is formed by the adenoids superiorly, tubal tonsils laterally, palatine tonsils intermediately, and the lingual tonsil inferiorly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Superior: Pharyngeal Tonsil (Adenoids in nasopharyngeal roof)"
+     },
+     {
+      "id": "w2",
+      "label": "Dorsolateral: Tubal Tonsils (Mucosa around Eustachian tube orifices)"
+     },
+     {
+      "id": "w3",
+      "label": "Lateral: Palatine Tonsils (Bilateral masses in tonsillar sinuses)"
+     },
+     {
+      "id": "w4",
+      "label": "Inferior: Lingual Tonsil (Lymphoid follicles on posterior third of tongue)"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The medial free surface of the palatine tonsil is covered by non-keratinised stratified squamous epithelium, deeply pitted by twelve to fifteen tonsillar crypts. The largest crypt near the upper pole is designated the **crypta magna** (intratonsillar cleft), representing the embryonic remnant of the second pharyngeal pouch. Food debris and bacterial casts characteristically collect within these crypts.",
+   "say": "Twelve to fifteen tonsillar crypts invaginate the medial surface. The largest, crypta magna near the upper pole, represents the embryonic second pharyngeal pouch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medial Surface of Tonsil",
+     "points": [
+      "Projects freely into the oropharyngeal lumen",
+      "Covered by stratified squamous non-keratinised epithelium",
+      "Invaginated by 12 to 15 branching tonsillar crypts",
+      "Crypta magna houses cellular debris and tonsilloliths"
+     ]
+    },
+    "right": {
+     "title": "Lateral Surface of Tonsil",
+     "points": [
+      "Invested by a distinct dense fibrous hemicapsule",
+      "Separated from pharyngeal wall by loose areolar cleft",
+      "Peritonsillar space permits surgical dissection (tonsillectomy)",
+      "Crossed by paratonsillar vein and tonsillar artery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The tonsillar bed forms the deep lateral relation of the tonsil, constructed primarily by the superior constrictor muscle and the hyoglossus. Covering the outer surface of the tonsil is a distinct fibrous **hemicapsule**, separated from the superior constrictor by loose areolar tissue (the peritonsillar space). This loose cleft provides the standard cleavage plane during surgical tonsillectomy.",
+   "say": "The tonsillar bed consists of the superior constrictor muscle. A loose areolar peritonsillar space separates the tonsil capsule from the bed, guiding dissection in tonsillectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Palatine Tonsil Parenchyma (Lymphoid follicles with germinal centres)"
+     },
+     {
+      "id": "b2",
+      "label": "Fibrous Hemicapsule (Dense specialized layer covering lateral surface)"
+     },
+     {
+      "id": "b3",
+      "label": "Peritonsillar Space (Loose areolar cleavage plane containing paratonsillar vein)"
+     },
+     {
+      "id": "b4",
+      "label": "Tonsillar Bed (Superior constrictor muscle and pharyngobasilar fascia)"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The blood supply to the palatine tonsil is exceptionally abundant, derived from five arterial branches. The chief arterial feeder is the tonsillar branch of the **facial artery**, which enters the lower pole of the gland. Additional contributions derive from the ascending palatine (facial), ascending pharyngeal (ECA), dorsal lingual (lingual), and greater palatine (maxillary) arteries.",
+   "say": "Five arteries feed the tonsil, led by the tonsillar branch of the facial artery at the lower pole. Dorsal lingual, ascending pharyngeal, and palatine branches also contribute.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial Source",
+     "Parent Vessel",
+     "Point of Glandular Entry"
+    ],
+    "rows": [
+     [
+      "Tonsillar artery (chief supply)",
+      "Facial artery",
+      "Pierces superior constrictor to enter inferior pole"
+     ],
+     [
+      "Ascending palatine artery",
+      "Facial artery",
+      "Enters upper pole of tonsil alongside levator palati"
+     ],
+     [
+      "Dorsal lingual branches",
+      "Lingual artery",
+      "Supplies anterior lower border and lingual tonsil"
+     ],
+     [
+      "Ascending pharyngeal artery",
+      "External carotid artery",
+      "Ascends on pharyngeal wall to enter posterolateral surface"
+     ],
+     [
+      "Greater palatine artery",
+      "Maxillary artery (via descending palatine)",
+      "Descends through palatine canal to supply superior pole"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A severe acute complication of tonsillitis is the development of a peritonsillar abscess (quinsy). Pus breaks through the tonsillar capsule into the loose areolar peritonsillar space. The expanding **quinsy** displaces the palatine tonsil medially and downward, pushes the oedematous uvula across the midline to the opposite side, and causes excruciating sore throat, severe trismus, and a hot-potato voice.",
+   "say": "A peritonsillar abscess develops when infection escapes the capsule into the peritonsillar space. The tonsil is displaced medially, the uvula deviates, and trismus develops.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Severe Acute Tonsillitis",
+     "points": [
+      "Bilateral follicular or membranous exudates",
+      "Tonsils enlarged but symmetrically positioned",
+      "Uvula remains centered in the midline",
+      "Trismus is absent or minimal"
+     ]
+    },
+    "right": {
+     "title": "Peritonsillar Abscess (Quinsy)",
+     "points": [
+      "Unilateral fluctuant bulging above tonsillar pole",
+      "Tonsil displaced medially and downward",
+      "Uvula pushed across to contralateral side",
+      "Severe trismus due to pterygoid muscle irritation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During tonsillectomy, secondary haemorrhage most commonly arises from the paratonsillar vein (external palatine vein). Descending from the soft palate across the loose peritonsillar space, the **paratonsillar vein** is severed during capsular dissection. Venous bleeding can be copious and demands careful bipolar diathermy or suturing of the tonsillar pillars.",
+   "say": "The paratonsillar vein traverses the loose peritonsillar cleft. Severed during capsular dissection, it represents the most frequent culprit behind post-tonsillectomy haemorrhage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Soft Palate Venous Plexus (Descends across loose peritonsillar space)"
+     },
+     {
+      "id": "v2",
+      "label": "Paratonsillar Vein (Crosses lateral surface of tonsillar hemicapsule)"
+     },
+     {
+      "id": "v3",
+      "label": "Pharyngeal Venous Plexus (Pierces superior constrictor to drain into IJV)"
+     },
+     {
+      "id": "v4",
+      "label": "Operative Bleeding (Traction during dissection tears vein in the bed)"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v2",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the junction of the laryngopharynx and oesophagus, the inferior constrictor muscle is divided into an upper oblique thyropharyngeus and a lower horizontal cricopharyngeus. Between these two muscular parts lies a potential triangular weakness designated **Killian dehiscence**. Elevated intraluminal pressure causes the mucosal lining to herniate posteriorly through this gap, forming a Zenker diverticulum.",
+   "say": "Killian dehiscence is a potential triangular weak spot between the thyropharyngeus and cricopharyngeus muscles. Mucosal herniation through this gap produces a Zenker diverticulum.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-killian.svg",
+    "alt": "Anatomical schematic showing the posterior wall of the pharynx, Killian dehiscence, and Zenker diverticulum",
+    "caption": "Posterior view of the pharyngo-oesophageal junction highlighting Killian dehiscence and diverticular herniation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}
