@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiplatelets-fibrinolytics",
+  "subject": "pharmacology",
+  "title": "Antiplatelet Agents: Low Dose Aspirin and the P2Y12 Inhibitors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Low dose aspirin** irreversibly acetylates platelet cyclo oxygenase 1 (COX 1), silencing thromboxane A2 synthesis for the platelet's entire 8 to 10 day lifespan because the anucleate platelet cannot manufacture replacement enzyme. Doses of 75 to 100 mg saturate this effect; higher doses add gastrointestinal toxicity without antiplatelet gain and may even hinder prostacyclin. One missed day matters little, one stopped week restores a full cohort of competent platelets.",
+      "say": "Aspirin disables platelet COX for the platelet's lifetime; low dose saturates it, so more is only more ulcer.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-aspirin.webp",
+        "alt": "Aspirin acetylating COX1 and blocking thromboxane production in platelets",
+        "caption": "Aspirin acetylating platelet COX1 to block thromboxane A2 for the platelet lifespan. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "The P2Y12 receptor transduces ADP (adenosine diphosphate) amplification of platelet activation, and its blockers divide by chemistry: thienopyridines clopidogrel, prasugrel and the retired ticlopidine bind irreversibly after hepatic activation, while **ticagrelor** binds reversibly and directly without activation. Clopidogrel's dependence on CYP2C19 makes genetic poor metabolisers and proton pump inhibitor interactions clinically real, one reason alternatives overtook it in acute coronary syndromes.",
+      "say": "Thienopyridines need liver activation and bind for good; ticagrelor arrives active and lets go.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiplatelets-dapt-fibrinolytics-txa-fig1.webp",
+        "alt": "Antiplatelet and fibrinolytic target mechanisms diagram showing P2Y12 and COX targets",
+        "caption": "Antiplatelet targets: COX1 for aspirin and the P2Y12 ADP receptor for clopidogrel, prasugrel and ticagrelor."
+      }
+    },
+    {
+      "tx": "**Clopidogrel** 75 mg daily, loaded at 300 to 600 mg when speed matters, remains the workhorse for stents, stroke and peripheral disease where cost and familiarity govern. Its slow, variable onset (hours, genotype dependent) is its weakness in primary intervention. **Ticlopidine**, its ancestor, was abandoned for neutropenia, aplastic anaemia and thrombotic thrombocytopenic purpura demanding blood count surveillance, a toxicity trilogy examinations still attach to its name.",
+      "say": "Clopidogrel is the affordable default with variable speed; ticlopidine died of marrow and platelet count toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clopidogrel",
+          "points": [
+            "Prodrug, CYP2C19 activation, irreversible binding",
+            "Load 300 to 600 mg, maintain 75 mg daily",
+            "Poor metabolisers get less protection",
+            "Backbone of dual therapy where cost governs"
+          ]
+        },
+        "right": {
+          "title": "Ticlopidine (historical)",
+          "points": [
+            "First thienopyridine, now largely abandoned",
+            "Neutropenia and aplastic anaemia",
+            "Thrombotic thrombocytopenic purpura reported",
+            "Required regular blood count monitoring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "More efficiently activated than clopidogrel, **prasugrel** delivers faster, stronger and more consistent P2Y12 blockade and fewer ischaemic events after coronary intervention, paid for with more major bleeding. It is contraindicated after stroke or transient ischaemic attack, generally avoided past 75 years, and dose reduced under 60 kg. Its licence begins in the catheter laboratory with known anatomy, never as blind pre treatment before angiography.",
+      "say": "Prasugrel is stronger and bleeds more; prior stroke bans it, and it starts after the angiogram speaks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prasugrel strengths",
+          "points": [
+            "Efficient activation, consistent platelet inhibition",
+            "Fewer stent thromboses and ischaemic events post PCI",
+            "Load 60 mg in the lab, 10 mg daily maintenance",
+            "Onset within 30 minutes to 2 hours"
+          ]
+        },
+        "right": {
+          "title": "Prasugrel exclusions",
+          "points": [
+            "Prior stroke or TIA: contraindicated",
+            "Age 75 plus: generally avoided",
+            "Weight under 60 kg: 5 mg maintenance",
+            "Likely surgical anatomy: withhold until known"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ticagrelor** 90 mg twice daily needs no activation, inhibits reversibly so platelet function recovers within days of stopping, and beat clopidogrel on mortality outcomes in PLATO across acute coronary syndromes. Its adenosine reuptake inhibition explains the signature dyspnoea in about one in seven patients and ventricular pauses that usually settle, while twice daily adherence and strong CYP3A4 interactions police its use. Aspirin co dose is capped at 100 mg because higher doses blunted its trial benefit.",
+      "say": "Ticagrelor is fast, reversible and mortal enemy of clopidogrel in trials; breathlessness and twice daily dosing are its tolls.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "load",
+            "label": "Ticagrelor 180 mg load in acute coronary syndrome"
+          },
+          {
+            "id": "maint",
+            "label": "90 mg twice daily with aspirin 75 to 100 mg"
+          },
+          {
+            "id": "dysp",
+            "label": "Dyspnoea in about 1 in 7: reassure or switch if intolerable"
+          },
+          {
+            "id": "offset",
+            "label": "Stopping recovers platelet function in 3 to 5 days"
+          }
+        ],
+        "edges": [
+          [
+            "load",
+            "maint"
+          ],
+          [
+            "maint",
+            "dysp"
+          ],
+          [
+            "maint",
+            "offset"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dual antiplatelet therapy** pairs aspirin with a P2Y12 inhibitor after stents and acute coronary syndromes, its duration a dial between stent thrombosis and bleeding set by stent type, syndrome and bleeding risk, commonly 6 to 12 months then single therapy lifelong. Premature cessation for procedures or bleeding is the leading preventable cause of stent thrombosis, a usually fatal event, so surgeons, dentists and endoscopists plan around the cardiology clock, not against it.",
+      "say": "Dual therapy duration is a negotiated dial; stopping early for convenience is how stents thrombose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Extending dual therapy favours",
+          "points": [
+            "Acute coronary syndrome presentation",
+            "Complex or multiple stents, bifurcation work",
+            "Prior stent thrombosis or diabetes",
+            "Low bleeding risk constitution"
+          ]
+        },
+        "right": {
+          "title": "Shortening dual therapy favours",
+          "points": [
+            "High bleeding risk scores or prior major bleeding",
+            "Urgent non cardiac surgery pending",
+            "Oral anticoagulation also required (triple therapy minimised)",
+            "Stable disease with modern drug eluting stents"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Phosphodiesterase inhibition raises platelet cyclic AMP by a third route: **dipyridamole**, combined with aspirin in extended release form, prevents stroke after cerebral ischaemia where its vasodilator headache is the toll, and serves in pharmacological stress testing from the steal lesson. Its antiplatelet effect alone is weak; its partnerships and its adenosine reuptake blockade define it. Cilostazol, abciximab and the remaining agents take the next lesson.",
+      "say": "Dipyridamole is a supporting actor: stroke prevention with aspirin, stress tests by steal, headache throughout.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dipy",
+            "label": "Dipyridamole blocks adenosine reuptake and PDE"
+          },
+          {
+            "id": "camp",
+            "label": "Platelet cyclic AMP rises, activation dampens"
+          },
+          {
+            "id": "stroke",
+            "label": "With aspirin: secondary stroke prevention"
+          },
+          {
+            "id": "stress",
+            "label": "Alone intravenously: pharmacological stress testing"
+          }
+        ],
+        "edges": [
+          [
+            "dipy",
+            "camp"
+          ],
+          [
+            "camp",
+            "stroke"
+          ],
+          [
+            "dipy",
+            "stress"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Aspirin resistance** headlines exceed their evidence: true pharmacological failure is uncommon, while non adherence, NSAID competition at COX1 (ibuprofen taken first blocks aspirin's access) and enteric coating malabsorption explain most apparent cases. The practical responses are adherence conversations, NSAID timing separation, and switching the P2Y12 partner rather than escalating aspirin dose. Platelet function testing guides selected stent cases, not routine practice.",
+      "say": "Most aspirin resistance is adherence or ibuprofen queue jumping; fix the cause, not the dose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apparent resistance causes",
+          "points": [
+            "Non adherence, the commonest by far",
+            "Ibuprofen occupying COX1 before aspirin",
+            "Enteric coating undissolved at high gastric pH",
+            "Increased platelet turnover in diabetes and inflammation"
+          ]
+        },
+        "right": {
+          "title": "Sensible responses",
+          "points": [
+            "Ask and counsel before testing",
+            "Separate ibuprofen dosing from aspirin by hours",
+            "Use non enteric aspirin where absorption is doubted",
+            "Optimise the P2Y12 partner and risk factors"
+          ]
+        }
+      }
+    }
+  ]
+}
