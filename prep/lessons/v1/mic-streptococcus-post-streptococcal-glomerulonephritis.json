@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-streptococcus",
+  "subject": "microbiology",
+  "title": "Post-Streptococcal Glomerulonephritis and Streptococcus agalactiae",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Post streptococcal glomerulonephritis** follows nephritogenic pyogenes strains after throat (one to two weeks) or skin (impetigo, three to six weeks) infection: planted streptococcal antigens (SpeB and NAPlr debated) trigger complement alternative activation, subepithelial humps, low C3, smoky urine, oedema and hypertension in school children, mostly resolving, C3 normalising by six to eight weeks.",
+      "say": "Smoky urine, low C3, recent impetigo: PSGN timing separates throat from skin by weeks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PSGN portrait",
+          "points": [
+            "Age 3 to 12 classic, boys leaning",
+            "Periorbital oedema, hypertension, oliguria",
+            "Cola urine, red cell casts",
+            "Low C3 (C4 usually normal)"
+          ]
+        },
+        "right": {
+          "title": "PSGN evidence",
+          "points": [
+            "Anti DNase B best serology (skin source)",
+            "ASO after throat source",
+            "Throat or skin cultures often cleared",
+            "Biopsy humps when course atypical"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nephritogenicity** is strain property (M types 12 throat, 49 skin classics) plus host complement terrain, which is why only some pyogenes infections injure kidneys and family clusters occur in outbreaks. Antibiotic treatment of the index infection does not reliably prevent PSGN (unlike rheumatic fever), changing counselling honestly.",
+      "say": "Treating the throat prevents rheumatic fever; kidney protection is promised less honestly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Strain and host",
+          "points": [
+            "Nephritogenic emm types tracked",
+            "Planted antigen and in situ complex theories",
+            "Alternative complement activation dominant",
+            "Epidemic and sporadic forms"
+          ]
+        },
+        "right": {
+          "title": "Course expectations",
+          "points": [
+            "Children recover renal function overwhelmingly",
+            "C3 recovers by 8 weeks (persistent low: other diagnosis)",
+            "Adults and diabetics heavier prognosis",
+            "Epidemic control treats cases and contacts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Streptococcus agalactiae** (group B streptococcus, GBS) is beta or non haemolytic, CAMP positive, hippurate hydrolysing, colonising vagina and gut of a fifth to a third of women, causing neonatal early onset sepsis and meningitis (prevention by intrapartum prophylaxis), late onset disease, and invasive disease in pregnancy, diabetes and old age.",
+      "say": "A colonised birth canal plus no prophylaxis equals neonatal sepsis arithmetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GBS identity",
+          "points": [
+            "Lancefield group B carbohydrate",
+            "Beta haemolysis variable, some non haemolytic",
+            "CAMP and hippurate positive",
+            "Capsular types Ia to IX (III meningitis leaning)"
+          ]
+        },
+        "right": {
+          "title": "GBS disease",
+          "points": [
+            "Early onset neonatal (vertical, first week)",
+            "Late onset (to 3 months, meningitis)",
+            "Chorioamnionitis and postpartum sepsis",
+            "Elderly and diabetic invasive disease rising"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Intrapartum prophylaxis** prevents early onset GBS: universal rectovaginal screening at 36 to 37 weeks (or risk based strategies in some countries), penicillin (ampicillin, cefazolin or vancomycin or clindamycin by allergy and resistance) at least four hours before delivery, newborn observation pathways, late onset untouched by this intervention.",
+      "say": "Four hours of penicillin before delivery rewires neonatal sepsis rates nationally.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "screen", "label": "Rectovaginal culture 36 to 37 weeks" },
+          { "id": "labour", "label": "Positive or risk: intrapartum penicillin" },
+          { "id": "four", "label": "Four hours before delivery optimal" },
+          { "id": "baby", "label": "Newborn observation or evaluation by algorithm" }
+        ],
+        "edges": [["screen", "labour"], ["labour", "four"], ["four", "baby"]]
+      }
+    },
+    {
+      "tx": "**GBS culture craft** uses selective enrichment (Lim broth, chromogenic media) because rectovaginal flora buries scanty GBS, susceptibility includes clindamycin testing for penicillin allergic mothers (resistance rising), and intrapartum NAAT substitutes where culture timing failed. Screening quality is an enrichment lesson wearing obstetric clothes.",
+      "say": "Enrich first or miss colonisation; the broth decides the prophylaxis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Culture method",
+          "points": [
+            "Rectovaginal swab, selective enrichment broth",
+            "Chromogenic agar speeds reads",
+            "Direct plating insensitive alone",
+            "NAAT intrapartum where validated"
+          ]
+        },
+        "right": {
+          "title": "Allergy pathways",
+          "points": [
+            "Low anaphylaxis risk: cefazolin",
+            "High risk: clindamycin if susceptible and D tested",
+            "Otherwise vancomycin",
+            "Document indication and timing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PSGN versus rheumatic fever** after pyogenes is the classic fork: different strains, latencies, immune mechanisms (complex complement versus mimicry), organs (kidney versus heart joints brain), recurrence rules (PSGN rarely recurs, rheumatic fever scars by recurrence) and prophylaxis (secondary penicillin for rheumatic only). One infection, two sequela schools.",
+      "say": "Kidney once or heart by recurrence: sequela counselling diverges completely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PSGN school",
+          "points": [
+            "Throat 1 to 2 weeks, skin 3 to 6",
+            "Low C3, humps, planted antigens",
+            "Secondary prophylaxis not indicated",
+            "Recurrence uncommon"
+          ]
+        },
+        "right": {
+          "title": "Rheumatic school",
+          "points": [
+            "Throat only, 2 to 3 weeks",
+            "Mimicry: valve and joint inflammation",
+            "Benzathine prophylaxis years",
+            "Each recurrence scars valves further"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**GBS vaccine horizon** (capsular conjugate in maternal trials) aims to protect neonates through transferred IgG (the antibody module's placenta logic), potentially retiring screening complexity, while serotype replacement watched from pneumococcal experience counsels humility. Prevention history here is unfinished science.",
+      "say": "Vaccinate the mother, arm the newborn through placenta: GBS prevention's next chapter.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vaccine promise",
+          "points": [
+            "Maternal immunisation, transplacental IgG",
+            "Covers early and late onset potentially",
+            "Multivalent capsular conjugates in trials",
+            "Antibiotic exposure in labour reduced"
+          ]
+        },
+        "right": {
+          "title": "Vaccine cautions",
+          "points": [
+            "Serotype replacement surveillance",
+            "Adult invasive disease untouched",
+            "Licensure correlates (IgG thresholds) debated",
+            "Screening continues until evidence lands"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neonatal sepsis evaluation** closes the loop: early onset presentations (respiratory distress, poor feeding, temperature instability) within 72 hours demand cultures and empiric ampicillin plus gentamicin (GBS and E coli covered), lumbar puncture by condition, calculators refining observation for well term infants of treated mothers in some systems.",
+      "say": "A sick newborn gets cultures and ampicillin plus gentamicin before arguments about probabilities.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early onset workup",
+          "points": [
+            "Blood culture before antibiotics",
+            "LP when stable and indicated",
+            "Ampicillin plus gentamicin empiric",
+            "GBS, E coli K1, Listeria the core threats"
+          ]
+        },
+        "right": {
+          "title": "Observation pathways",
+          "points": [
+            "Serial examination for equivocal infants",
+            "Sepsis calculators (gestation, GBS, rupture, maternal fever)",
+            "Cultures still precede antibiotics when treating",
+            "48 hour review anchors discharge"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-streptococcus",
+  "subject": "microbiology",
+  "title": "Bacitracin Sensitivity, PYR and Group A Streptococcal Identification",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **bacitracin sensitivity test** places a 0.04 unit bacitracin disc on beta haemolytic colonies: any inhibition zone presumptively identifies group A pyogenes (its wall synthesis unusually bacitracin tender), while groups C and G usually resist. Modern benches confirm with PYR or latex grouping because a minority of non A strains share sensitivity.",
+      "say": "A bacitracin zone on beta haemolytic colonies whispers group A; PYR confirms the whisper.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bacitracin bench",
+          "points": [
+            "Taxo A disc 0.04 units",
+            "Any zone: presumptive group A",
+            "Resistant beta haemolytic: group B, C, G thinking",
+            "Heavy inoculum standardises zones"
+          ]
+        },
+        "right": {
+          "title": "Confirmation pair",
+          "points": [
+            "PYR positive: pyogenes (and enterococcus)",
+            "Latex group A antigen definitive",
+            "MALDI species level modern",
+            "Bacitracin never sole evidence in invasive isolates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**M protein typing** (emm sequencing of the hypervariable M protein gene) tracks pyogenes epidemiology: rheumatogenic and nephritogenic emm traditions, invasive clones (M1T1 global), vaccine candidate coverage by type distribution. Bench grouping says A; emm says which A is circulating through schools and wards.",
+      "say": "Group names the tribe, emm names the travelling clan within it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "emm epidemiology",
+          "points": [
+            "Over 200 emm types",
+            "M1 and M12 invasive and pharyngitis classics",
+            "Type distributions vary by region and income",
+            "Surveillance catches outbreak clones"
+          ]
+        },
+        "right": {
+          "title": "Vaccine arithmetic",
+          "points": [
+            "Multivalent M vaccines cover common emm types",
+            "Conserved C repeat region candidates",
+            "Non M antigens (SpyCEP, SLO) researched",
+            "Rheumatic heart burden drives urgency in endemic regions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Streptococcal superantigens** from the pyogenes cupboard (SpeA, SpeC and kin, several prophage borne) crosslink MHC and TCR as the antigens module described, producing scarlet fever in toxin naive and toxic shock in invasive disease. Phage mobility explains why toxin repertoires differ between emm clones of one species.",
+      "say": "Scarlet fever is a phage toxin meeting a non immune child, not a different streptococcus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Scarlet fever portrait",
+          "points": [
+            "Sandpaper rash, flushed cheeks, circumoral pallor",
+            "Strawberry tongue, Pastia lines in folds",
+            "Desquamation in convalescence",
+            "Antitoxin antibody protects against rash, not infection"
+          ]
+        },
+        "right": {
+          "title": "Toxin genetics",
+          "points": [
+            "SpeA and C on prophages",
+            "Streptococcal superantigen (SSA) chromosomal variants",
+            "SMEZ family diversity",
+            "Toxin profile shapes outbreak phenotype"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spreading factors** dissolve the neighbourhood for pyogenes: hyaluronidase digests ground substance, streptokinase activates plasminogen dissolving clots, DNases liquefy pus (improving spread, thinning abscesses historically treated with streptokinase streptodornase), and C5a peptidase trims neutrophil summons at the surface.",
+      "say": "Dissolve matrix, clot and pus while muting neutrophil calls: spreading is engineered.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spreading enzymes",
+          "points": [
+            "Hyaluronidase: ground substance",
+            "Streptokinase: plasminogen to plasmin",
+            "DNases A to D: pus viscosity and NETs",
+            "NADase and other exotoxins supporting"
+          ]
+        },
+        "right": {
+          "title": "Defence trimming",
+          "points": [
+            "C5a peptidase cleaves neutrophil attractant",
+            "SpyCEP cleaves IL 8",
+            "M protein and capsule antiphagocytic",
+            "NET degradation by DNase escapes traps"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Throat culture technique** decides pharyngitis answers: swab tonsils and posterior pharynx avoiding tongue, plate on sheep blood agar (selective plates in some laboratories), stab for subsurface haemolysis, incubate and read beta colonies at 24 and 48 hours, group latex from suspicious colonies. Poor swabs grow viridans and call it negative.",
+      "say": "Swab the tonsils, stab the agar, read twice: throat culture is technique before result.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "swab", "label": "Tonsillar and posterior pharyngeal swab" },
+          { "id": "plate", "label": "Blood agar streaked and stabbed" },
+          { "id": "read", "label": "Beta colonies at 24 and 48 hours" },
+          { "id": "group", "label": "Bacitracin, PYR or latex grouping" }
+        ],
+        "edges": [["swab", "plate"], ["plate", "read"], ["read", "group"]]
+      }
+    },
+    {
+      "tx": "**Rapid antigen limitations** in children justify culture back up traditions: sensitivity 70 to 90 percent against culture (specificity excellent), negative molecular assays may not need backup where validated, and adults' lower rheumatic risk relaxes backup rules in many guidelines. Geography and rheumatic fever incidence set how strict a programme should be.",
+      "say": "Negative rapid test in a child earns a culture where rheumatic fever still walks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "RADT profile",
+          "points": [
+            "Specificity 95 percent plus",
+            "Sensitivity operator and spectrum dependent",
+            "Positive needs no culture confirmation",
+            "Carrier detection flaw shared with culture"
+          ]
+        },
+        "right": {
+          "title": "Backup logic",
+          "points": [
+            "Children and adolescents: culture negatives (US tradition)",
+            "Adults: backup usually unnecessary",
+            "NAAT negatives: backup by validation",
+            "Endemic rheumatic regions lower testing thresholds"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Invasive group A disease** (necrotising fasciitis, myositis, toxic shock, bacteraemia) demands surgery plus antibiotics: urgent debridement, penicillin plus clindamycin (toxin suppression from the staph lessons), IVIG consideration in toxic shock, intensive support, and public health assessment of contacts in defined clusters. Bench identity becomes a surgical clock.",
+      "say": "Pain out of proportion plus group A means theatre first; antibiotics escort surgery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Necrotising portrait",
+          "points": [
+            "Severe pain, oedema beyond erythema, bullae late",
+            "Hypotension and organ failure in toxic shock",
+            "Varicella and NSAID debates as risk contexts",
+            "Imaging must not delay exploration when suspicion high"
+          ]
+        },
+        "right": {
+          "title": "Response stack",
+          "points": [
+            "Immediate surgical consultation and debridement",
+            "Penicillin G plus clindamycin",
+            "IVIG in streptococcal toxic shock considered",
+            "Household contact advice by jurisdiction protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bacitracin as drug** footnote completes the disc biography (novobiocin lesson pattern): topical bacitracin ointments survive, systemic use died of nephrotoxicity in the 1940s, its target (bactoprenol recycling in wall synthesis) explains pyogenes tenderness. Many bench discs are wall drugs bacteria met first in patients.",
+      "say": "Bacitracin blocks wall lipid recycling; too nephrotoxic to swallow, perfect to test with.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bacitracin facts",
+          "points": [
+            "From Bacillus subtilis (Tracy strain)",
+            "Blocks bactoprenol dephosphorylation",
+            "Topical combinations (neomycin, polymyxin)",
+            "Allergic contact dermatitis recognised"
+          ]
+        },
+        "right": {
+          "title": "Disc family reunion",
+          "points": [
+            "Novobiocin sorts CoNS",
+            "Optochin sorts pneumococcus (next lessons)",
+            "Bacitracin sorts group A",
+            "Each disc is a former or niche drug"
+          ]
+        }
+      }
+    }
+  ]
+}
