@@ -1,238 +1,238 @@
 {
-  "v": 1,
-  "module": "phy-concentration",
-  "subject": "physiology",
-  "title": "The Countercurrent Multiplier, Vasa Recta, and Urea Recycling",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "Concentration of urine within mammalian kidneys depends upon establishing a hypertonic osmotic gradient extending from the renal cortex to the inner medullary papilla. The specialized apparatus responsible for generating this corticomedullary gradient is the **countercurrent multiplier system**, operating within the hairpin loops of Henle of juxtamedullary nephrons.",
-      "say": "The countercurrent multiplier in juxtamedullary loops of Henle builds a hypertonic gradient from cortex to inner medulla.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Cortical Nephrons (~85%)",
-          "points": [
-            "Glomeruli in outer renal cortex",
-            "Short loops of Henle dipping only to outer medulla",
-            "Peritubular capillary network surrounds tubules",
-            "Primary role in bulk solute reabsorption and excretion"
-          ]
-        },
-        "right": {
-          "title": "Juxtamedullary Nephrons (~15%)",
-          "points": [
-            "Glomeruli near corticomedullary junction",
-            "Extremely long loops dipping deep into inner papilla",
-            "Surrounded by specialized hairpin vasa recta capillaries",
-            "Essential engine for countercurrent multiplier gradient"
-          ]
-        }
-      }
+ "v": 1,
+ "module": "phy-concentration",
+ "subject": "physiology",
+ "title": "The Countercurrent Multiplier, Vasa Recta, and Urea Recycling",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Concentration of urine within mammalian kidneys depends upon establishing a hypertonic osmotic gradient extending from the renal cortex to the inner medullary papilla. The specialized apparatus responsible for generating this corticomedullary gradient is the **countercurrent multiplier system**, operating within the hairpin loops of Henle of juxtamedullary nephrons.",
+   "say": "The countercurrent multiplier in juxtamedullary loops of Henle builds a hypertonic gradient from cortex to inner medulla.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cortical Nephrons (~85%)",
+     "points": [
+      "Glomeruli in outer renal cortex",
+      "Short loops of Henle dipping only to outer medulla",
+      "Peritubular capillary network surrounds tubules",
+      "Primary role in bulk solute reabsorption and excretion"
+     ]
     },
-    {
-      "tx": "Generation of the medullary gradient relies on a localized active transport step termed the **single effect**. In the thick ascending limb, apical NKCC2 cotransporters pump sodium chloride into the surrounding medullary interstitium, creating a maximum local osmotic gradient of two hundred milliosmoles per kilogram between tubular fluid and interstitium at any horizontal level.",
-      "say": "The single effect generates a two hundred milliosmole gradient at each level, multiplied along the length of the loop.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "active_pump",
-            "label": "Thick Ascending Limb Pumps NaCl into Interstitium via NKCC2"
-          },
-          {
-            "id": "interstit",
-            "label": "Medullary Interstitium Osmolality Rises by 200 mOsm/kg Above Fluid"
-          },
-          {
-            "id": "water_draw",
-            "label": "Water Drawn Osmotically Out of Adjacent Descending Limb via AQP1"
-          },
-          {
-            "id": "multiply",
-            "label": "Countercurrent Flow Multiplies Gradient to 1200 mOsm/kg at Hairpin Turn"
-          }
-        ],
-        "edges": [
-          [
-            "active_pump",
-            "interstit"
-          ],
-          [
-            "interstit",
-            "water_draw"
-          ],
-          [
-            "water_draw",
-            "multiply"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Because fluid flows in opposite directions through parallel descending and ascending limbs, repetitive cycles of the single effect are multiplied along the length of the loop. Consequently, tubular fluid and medullary interstitium reach twelve hundred milliosmoles per kilogram at the papillary tip, establishing the **corticomedullary osmotic gradient**.",
-      "say": "Opposing flows multiply the single effect into a vertical gradient reaching twelve hundred milliosmoles at the papillary tip.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Nephron Anatomical Level",
-          "Interstitium Osmolality",
-          "Descending Limb Fluid",
-          "Ascending Limb Fluid"
-        ],
-        "rows": [
-          [
-            "Corticomedullary Junction",
-            "300 mOsm/kg",
-            "300 mOsm/kg",
-            "100 mOsm/kg (diluting segment)"
-          ],
-          [
-            "Outer Medulla",
-            "600 mOsm/kg",
-            "600 mOsm/kg",
-            "400 mOsm/kg"
-          ],
-          [
-            "Inner Medulla",
-            "900 mOsm/kg",
-            "900 mOsm/kg",
-            "700 mOsm/kg"
-          ],
-          [
-            "Papillary Tip (Hairpin Turn)",
-            "1200 mOsm/kg",
-            "1200 mOsm/kg",
-            "1000 mOsm/kg (impermeable to water)"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Crucially, the hypertonic medullary gradient would be rapidly washed away if standard high-velocity blood flow traversed the renal medulla. Instead, medullary perfusion is supplied by specialized looped capillary hairpins known as the **vasa recta countercurrent exchanger**, which preserve interstitial hypertonicity through entirely passive physical exchange.",
-      "say": "Vasa recta capillaries act as countercurrent exchangers, preserving the hypertonic medullary gradient with sluggish blood flow.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "desc_vr",
-            "label": "Descending Vasa Recta: Enters Hypertonic Medulla; Solutes Enter, Water Exits"
-          },
-          {
-            "id": "cap_tip",
-            "label": "Capillary Hairpin Turn at Papilla: Blood Reaches High Osmolality (~1200 mOsm)"
-          },
-          {
-            "id": "asc_vr",
-            "label": "Ascending Vasa Recta: Ascends Toward Cortex; Solutes Exit, Water Re-Enters"
-          },
-          {
-            "id": "preserve",
-            "label": "Passive Exchange Traps Solutes in Medulla and Carries Away Reabsorbed Water"
-          }
-        ],
-        "edges": [
-          [
-            "desc_vr",
-            "cap_tip"
-          ],
-          [
-            "cap_tip",
-            "asc_vr"
-          ],
-          [
-            "asc_vr",
-            "preserve"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Nearly fifty percent of the total hypertonicity of the inner renal medulla is contributed not by sodium chloride, but by **medullary urea recycling**. In the presence of antidiuretic hormone, water is withdrawn from cortical and outer medullary collecting ducts, concentrating urea within the tubular lumen to exceptionally high levels.",
-      "say": "Urea recycling provides half of the inner medullary hypertonicity, concentrated by antidiuretic hormone.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Inner Medullary Collecting Duct (IMCD)",
-          "points": [
-            "Expresses ADH-activated urea transporters UT-A1 and UT-A3",
-            "Facilitated diffusion delivers concentrated urea into interstitium",
-            "Establishes ~600 mOsm/kg of the total 1200 mOsm/kg papillary gradient",
-            "Directly stimulated by vasopressin V2 receptor signaling"
-          ]
-        },
-        "right": {
-          "title": "Thin Loop of Henle Entry",
-          "points": [
-            "Expresses urea transporter UT-A2 in thin descending limb",
-            "Urea diffuses back from interstitium into tubular fluid",
-            "Carried back through loop of Henle and distal nephron",
-            "Maintains continuous recycling loop that traps urea in medulla"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Under severe protein malnutrition or low-protein diets, whole-body urea production collapses, diminishing the interstitial urea pool and slashing maximum urinary concentrating capacity. This specific physiological defect explains the marked hyposthenuria and prominent polyuria observed in severe clinical **kwashiorkor and malnutrition**.",
-      "say": "Low-protein diets reduce urea production, weakening the medullary gradient and causing impaired urine concentration.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/medullary-cystic-kidney-disease-fig1.webp",
-        "alt": "Medullary interstitial architecture and corticomedullary gradient disruption",
-        "caption": "Medullary interstitial anatomy, countercurrent architecture disruption, and tubular concentration failure."
-      }
-    },
-    {
-      "tx": "The ultimate effector regulating water reabsorption along the collecting duct is **aquaporin-2 channel trafficking**. Antidiuretic hormone binds basolateral V2 G-protein coupled receptors, elevating intracellular cyclic adenosine monophosphate and triggering protein kinase A-mediated exocytosis of subapical storage vesicles containing homotetrameric aquaporin-2 water channels.",
-      "say": "Antidiuretic hormone stimulates cyclic AMP to insert aquaporin-2 water channels into the collecting duct membrane.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "v2_bind",
-            "label": "Circulating Vasopressin Binds Basolateral V2 Receptors on Principal Cells"
-          },
-          {
-            "id": "camp_pka",
-            "label": "Gs Activation Stimulates Adenylyl Cyclase -> cAMP Rises -> Activates PKA"
-          },
-          {
-            "id": "exo_aqp2",
-            "label": "PKA Phosphorylates Serine-256 on Aquaporin-2 Storage Vesicles"
-          },
-          {
-            "id": "insert",
-            "label": "Exocytic Insertion of AQP2 Channels into Apical Plasma Membrane"
-          }
-        ],
-        "edges": [
-          [
-            "v2_bind",
-            "camp_pka"
-          ],
-          [
-            "camp_pka",
-            "exo_aqp2"
-          ],
-          [
-            "exo_aqp2",
-            "insert"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Basolateral exit of reabsorbed water into the hypertonic medullary interstitium occurs constitutively through aquaporin-3 and aquaporin-4 channels. Pharmacological blockade of V2 receptors with **vaptan aquaretic agents** prevents aquaporin-2 insertion, inducing pure solute-free water diuresis to treat euvolaemic and hypervolaemic hyponatraemia effectively.",
-      "say": "Vaptans block V2 receptors, preventing aquaporin-2 insertion and promoting water diuresis to correct hyponatremia.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/diuretics-antidiuretics-fig1.webp",
-        "alt": "Aquaretics and antidiuretic hormone receptor pharmacology",
-        "caption": "Vasopressin V2 receptor antagonism, aquaporin trafficking inhibition, and water diuresis mechanisms."
-      }
+    "right": {
+     "title": "Juxtamedullary Nephrons (~15%)",
+     "points": [
+      "Glomeruli near corticomedullary junction",
+      "Extremely long loops dipping deep into inner papilla",
+      "Surrounded by specialized hairpin vasa recta capillaries",
+      "Essential engine for countercurrent multiplier gradient"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI",
-  "src": []
+   }
+  },
+  {
+   "tx": "Generation of the medullary gradient relies on a localized active transport step termed the **single effect**. In the thick ascending limb, apical NKCC2 cotransporters pump sodium chloride into the surrounding medullary interstitium, creating a maximum local osmotic gradient of two hundred milliosmoles per kilogram between tubular fluid and interstitium at any horizontal level.",
+   "say": "The single effect generates a two hundred milliosmole gradient at each level, multiplied along the length of the loop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "active_pump",
+      "label": "Thick Ascending Limb Pumps NaCl into Interstitium via NKCC2"
+     },
+     {
+      "id": "interstit",
+      "label": "Medullary Interstitium Osmolality Rises by 200 mOsm/kg Above Fluid"
+     },
+     {
+      "id": "water_draw",
+      "label": "Water Drawn Osmotically Out of Adjacent Descending Limb via AQP1"
+     },
+     {
+      "id": "multiply",
+      "label": "Countercurrent Flow Multiplies Gradient to 1200 mOsm/kg at Hairpin Turn"
+     }
+    ],
+    "edges": [
+     [
+      "active_pump",
+      "interstit"
+     ],
+     [
+      "interstit",
+      "water_draw"
+     ],
+     [
+      "water_draw",
+      "multiply"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because fluid flows in opposite directions through parallel descending and ascending limbs, repetitive cycles of the single effect are multiplied along the length of the loop. Consequently, tubular fluid and medullary interstitium reach twelve hundred milliosmoles per kilogram at the papillary tip, establishing the **corticomedullary osmotic gradient**.",
+   "say": "Opposing flows multiply the single effect into a vertical gradient reaching twelve hundred milliosmoles at the papillary tip.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nephron Anatomical Level",
+     "Interstitium Osmolality",
+     "Descending Limb Fluid",
+     "Ascending Limb Fluid"
+    ],
+    "rows": [
+     [
+      "Corticomedullary Junction",
+      "300 mOsm/kg",
+      "300 mOsm/kg",
+      "100 mOsm/kg (diluting segment)"
+     ],
+     [
+      "Outer Medulla",
+      "600 mOsm/kg",
+      "600 mOsm/kg",
+      "400 mOsm/kg"
+     ],
+     [
+      "Inner Medulla",
+      "900 mOsm/kg",
+      "900 mOsm/kg",
+      "700 mOsm/kg"
+     ],
+     [
+      "Papillary Tip (Hairpin Turn)",
+      "1200 mOsm/kg",
+      "1200 mOsm/kg",
+      "1000 mOsm/kg (impermeable to water)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crucially, the hypertonic medullary gradient would be rapidly washed away if standard high-velocity blood flow traversed the renal medulla. Instead, medullary perfusion is supplied by specialized looped capillary hairpins known as the **vasa recta countercurrent exchanger**, which preserve interstitial hypertonicity through entirely passive physical exchange.",
+   "say": "Vasa recta capillaries act as countercurrent exchangers, preserving the hypertonic medullary gradient with sluggish blood flow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "desc_vr",
+      "label": "Descending Vasa Recta: Enters Hypertonic Medulla; Solutes Enter, Water Exits"
+     },
+     {
+      "id": "cap_tip",
+      "label": "Capillary Hairpin Turn at Papilla: Blood Reaches High Osmolality (~1200 mOsm)"
+     },
+     {
+      "id": "asc_vr",
+      "label": "Ascending Vasa Recta: Ascends Toward Cortex; Solutes Exit, Water Re-Enters"
+     },
+     {
+      "id": "preserve",
+      "label": "Passive Exchange Traps Solutes in Medulla and Carries Away Reabsorbed Water"
+     }
+    ],
+    "edges": [
+     [
+      "desc_vr",
+      "cap_tip"
+     ],
+     [
+      "cap_tip",
+      "asc_vr"
+     ],
+     [
+      "asc_vr",
+      "preserve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nearly fifty percent of the total hypertonicity of the inner renal medulla is contributed not by sodium chloride, but by **medullary urea recycling**. In the presence of antidiuretic hormone, water is withdrawn from cortical and outer medullary collecting ducts, concentrating urea within the tubular lumen to exceptionally high levels.",
+   "say": "Urea recycling provides half of the inner medullary hypertonicity, concentrated by antidiuretic hormone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inner Medullary Collecting Duct (IMCD)",
+     "points": [
+      "Expresses ADH-activated urea transporters UT-A1 and UT-A3",
+      "Facilitated diffusion delivers concentrated urea into interstitium",
+      "Establishes ~600 mOsm/kg of the total 1200 mOsm/kg papillary gradient",
+      "Directly stimulated by vasopressin V2 receptor signaling"
+     ]
+    },
+    "right": {
+     "title": "Thin Loop of Henle Entry",
+     "points": [
+      "Expresses urea transporter UT-A2 in thin descending limb",
+      "Urea diffuses back from interstitium into tubular fluid",
+      "Carried back through loop of Henle and distal nephron",
+      "Maintains continuous recycling loop that traps urea in medulla"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Under severe protein malnutrition or low-protein diets, whole-body urea production collapses, diminishing the interstitial urea pool and slashing maximum urinary concentrating capacity. This specific physiological defect explains the marked hyposthenuria and prominent polyuria observed in severe clinical **kwashiorkor and malnutrition**.",
+   "say": "Low-protein diets reduce urea production, weakening the medullary gradient and causing impaired urine concentration.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-kwashiorkor-marasmus.webp",
+    "alt": "Medullary interstitial architecture and corticomedullary gradient disruption",
+    "caption": "Severe acute malnutrition compared: kwashiorkor with pitting oedema, distended abdomen and dermatosis beside marasmus with severe muscle wasting. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The ultimate effector regulating water reabsorption along the collecting duct is **aquaporin-2 channel trafficking**. Antidiuretic hormone binds basolateral V2 G-protein coupled receptors, elevating intracellular cyclic adenosine monophosphate and triggering protein kinase A-mediated exocytosis of subapical storage vesicles containing homotetrameric aquaporin-2 water channels.",
+   "say": "Antidiuretic hormone stimulates cyclic AMP to insert aquaporin-2 water channels into the collecting duct membrane.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v2_bind",
+      "label": "Circulating Vasopressin Binds Basolateral V2 Receptors on Principal Cells"
+     },
+     {
+      "id": "camp_pka",
+      "label": "Gs Activation Stimulates Adenylyl Cyclase -> cAMP Rises -> Activates PKA"
+     },
+     {
+      "id": "exo_aqp2",
+      "label": "PKA Phosphorylates Serine-256 on Aquaporin-2 Storage Vesicles"
+     },
+     {
+      "id": "insert",
+      "label": "Exocytic Insertion of AQP2 Channels into Apical Plasma Membrane"
+     }
+    ],
+    "edges": [
+     [
+      "v2_bind",
+      "camp_pka"
+     ],
+     [
+      "camp_pka",
+      "exo_aqp2"
+     ],
+     [
+      "exo_aqp2",
+      "insert"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Basolateral exit of reabsorbed water into the hypertonic medullary interstitium occurs constitutively through aquaporin-3 and aquaporin-4 channels. Pharmacological blockade of V2 receptors with **vaptan aquaretic agents** prevents aquaporin-2 insertion, inducing pure solute-free water diuresis to treat euvolaemic and hypervolaemic hyponatraemia effectively.",
+   "say": "Vaptans block V2 receptors, preventing aquaporin-2 insertion and promoting water diuresis to correct hyponatremia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diuretics-antidiuretics-fig1.webp",
+    "alt": "Aquaretics and antidiuretic hormone receptor pharmacology",
+    "caption": "Vasopressin V2 receptor antagonism, aquaporin trafficking inhibition, and water diuresis mechanisms."
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
 }
