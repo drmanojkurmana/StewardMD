@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-cns-infections",
+ "subject": "medicine",
+ "title": "Subacute CNS Infections: Tuberculous, Cryptococcal, and Viral Encephalitis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Bactericidal antibiotics cause explosive bacterial cell lysis, releasing endotoxins, teichoic acid, and peptidoglycans into the subarachnoid space that dramatically worsen subarachnoid inflammation and cerebral oedema. In suspected pneumococcal meningitis, administering **adjunctive dexamethasone** (ten milligrams intravenously) prior to or simultaneously with the first dose of antibiotics significantly reduces severe hearing loss, neurological sequelae, and overall mortality.",
+   "say": "Bactericidal antibiotics cause explosive bacterial lysis, releasing cell wall fragments that worsen subarachnoid inflammation and cerebral edema. In pneumococcal meningitis, administering adjunctive dexamethasone prior to or with the first antibiotic dose reduces hearing loss and overall mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "abx",
+      "label": "Bactericidal Antibiotic Lysis"
+     },
+     {
+      "id": "cytok",
+      "label": "Burst of Subarachnoid TNF & IL-1"
+     },
+     {
+      "id": "dex",
+      "label": "Pre-treatment Dexamethasone Halts Neuro-inflammation"
+     }
+    ],
+    "edges": [
+     [
+      "abx",
+      "cytok"
+     ],
+     [
+      "cytok",
+      "dex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dangerous chronic granulomatous CNS infection in high-burden regions is **tuberculous meningitis**. Arising from rupture of a subependymal or submeningeal caseating tuberculoma (Rich focus) into the subarachnoid space, it produces thick gelatinous exudate concentrated across the basal cisterns, leading to progressive basal cranial neuropathies (cranial nerves III, VI, and VII), hydrocephalus, and obliterative endarteritis causing strokes.",
+   "say": "The most dangerous chronic CNS infection in high-burden regions is tuberculous meningitis. Arising from rupture of a caseating Rich focus into the subarachnoid space, it produces thick gelatinous basal exudates, causing cranial neuropathies, hydrocephalus, and obliterative endarteritis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-and-recurrent-meningitis-fig1.webp",
+    "alt": "Basal meningeal exudates, cranial nerve entrapment, and vasculitis in chronic meningitis.",
+    "caption": "Thick gelatinous basal cistern exudate and obliterative vasculitis in TB meningitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cerebrospinal fluid in tuberculous meningitis displays a clear or xanthochromic appearance with a characteristic delicate cobweb or pellicle clot forming upon standing. Analysis demonstrates moderate lymphocytic pleocytosis (one-hundred to five-hundred cells per microlitre), markedly elevated protein (frequently two-hundred to five-hundred milligrams per decilitre), and profound hypoglycorrhachia, confirmed via GeneXpert MTB/RIF or mycobacterial culture on **Lowenstein-Jensen** media.",
+   "say": "Cerebrospinal fluid in tuberculous meningitis displays a characteristic spider-web clot forming upon standing. Analysis demonstrates moderate lymphocytic pleocytosis, markedly elevated protein, and low glucose, confirmed via GeneXpert MTB/RIF assay or mycobacterial culture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Test",
+     "Expected Tuberculous Meningitis Result",
+     "Clinical Utility and Sensitivity"
+    ],
+    "rows": [
+     [
+      "Gross CSF Appearance",
+      "Clear or xanthochromic; forms cobweb pellicle clot",
+      "Spontaneous fibrin clot formation on standing"
+     ],
+     [
+      "CSF Cytochemistry",
+      "Lymphocytic pleocytosis; protein > 200 mg/dL; low glucose",
+      "Classic chronic meningitis profile"
+     ],
+     [
+      "Acid-Fast Bacilli (AFB) Smear",
+      "Positive in 30% to 50% on serial large-volume taps",
+      "Low sensitivity; requires examining centrifuged sediment"
+     ],
+     [
+      "GeneXpert MTB/RIF",
+      "Detects M. tuberculosis DNA and Rifampicin resistance",
+      "Rapid 2-hour automated nucleic acid amplification assay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The leading fungal infection of the central nervous system in immunocompromised patients, particularly those with advanced HIV infection and CD4 counts under one-hundred cells per microlitre, is **cryptococcal meningitis**. Inhalation of Cryptococcus neoformans basidiospores disseminates haematogenously to the meninges, presenting subacutely with headache, low-grade fevers, vomiting, and minimal meningism.",
+   "say": "The leading fungal infection of the central nervous system in immunocompromised patients with advanced HIV is cryptococcal meningitis. Inhalation of Cryptococcus neoformans basidiospores disseminates to the meninges, presenting subacutely with headache, low-grade fever, and elevated opening pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cns-infections-meningitis-encephalitis-long-case-fig1.webp",
+    "alt": "Pathology and diagnostic microscopy of infectious meningitis and encephalitis.",
+    "caption": "Encapsulated yeasts, basal exudate, and brain parenchymal necrosis in CNS infections. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnosis of cryptococcal meningitis relies on demonstrating the encapsulated yeast in cerebrospinal fluid. The historic India ink preparation demonstrates round budding yeast cells surrounded by a prominent clear halo corresponding to the polysaccharide capsule, while the **cryptococcal antigen** lateral flow assay exhibits over ninety-eight percent sensitivity and specificity in both serum and CSF.",
+   "say": "Diagnosis of cryptococcal meningitis relies on demonstrating the encapsulated yeast in spinal fluid. India ink shows round budding yeast cells surrounded by a clear halo representing the polysaccharide capsule, while the cryptococcal antigen assay exhibits over ninety-eight percent diagnostic accuracy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "India Ink Stain",
+     "points": [
+      "Negative staining technique",
+      "Clear halo surrounding budding yeast",
+      "Sensitivity 50% to 80% (operator dependent)",
+      "Rapid bedside screening method"
+     ]
+    },
+    "right": {
+     "title": "Cryptococcal Antigen (CrAg)",
+     "points": [
+      "Lateral flow immunochromatographic assay",
+      "Detects glucuronoxylomannan capsular antigen",
+      "Sensitivity and specificity > 98%",
+      "Gold standard diagnostic test in serum and CSF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Induction therapy for cryptococcal meningitis requires a two-week regimen combining intravenous liposomal **amphotericin B** and oral flucytosine, followed by high-dose oral fluconazole consolidation. Because capsular polysaccharide aggregates plug arachnoid villi, extremely elevated opening pressures exceeding twenty-five centimetres of water are common, mandating therapeutic serial daily lumbar punctures until opening pressure normalizes.",
+   "say": "Induction therapy for cryptococcal meningitis requires a two-week regimen combining intravenous liposomal amphotericin B and oral flucytosine, followed by fluconazole consolidation. Severely elevated intracranial pressure is common, mandating therapeutic serial daily lumbar punctures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ind",
+      "label": "Induction: Liposomal Amphotericin B + Flucytosine (2 wk)"
+     },
+     {
+      "id": "icp",
+      "label": "Serial Lumbar Punctures (Keep ICP < 20 cm H2O)"
+     },
+     {
+      "id": "cons",
+      "label": "Consolidation: Oral Fluconazole 400-800 mg (8 wk)"
+     }
+    ],
+    "edges": [
+     [
+      "ind",
+      "icp"
+     ],
+     [
+      "icp",
+      "cons"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common identifiable cause of fatal sporadic viral encephalitis in immunocompetent individuals is **herpes simplex encephalitis** (HSE), caused by herpes simplex virus type 1 (HSV-1). Patients present acutely with fever, headache, altered consciousness, focal seizures, behavioural disinhibition, and prominent olfactory hallucinations or aphasia, reflecting intense necrotising inflammation.",
+   "say": "The most common identifiable cause of sporadic viral encephalitis in immunocompetent individuals is herpes simplex encephalitis, caused by HSV-1. Patients present with fever, headache, focal seizures, behavioural changes, and aphasia, reflecting necrotising parenchymal inflammation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Herpes Simplex Encephalitis (HSE)",
+     "Acute Bacterial Meningitis"
+    ],
+    "rows": [
+     [
+      "Parenchymal Brain Involvement",
+      "Severe encephalitis with focal necrosis, seizures, aphasia",
+      "Predominantly meningeal inflammation; encephalopathy late"
+     ],
+     [
+      "CSF Pleocytosis",
+      "Lymphocytic (10 to 500 / uL) with RBCs present",
+      "Neutrophilic (> 1,000 / uL; > 80% PMNs)"
+     ],
+     [
+      "CSF Glucose Concentration",
+      "Normal in over 90% of cases",
+      "Profoundly low (< 0.4 CSF/serum ratio)"
+     ],
+     [
+      "Definitive Diagnostic Test",
+      "CSF HSV-1 PCR (Sensitivity > 95%)",
+      "CSF Gram stain, bacterial culture, BioFire PCR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Herpes simplex encephalitis exhibits a striking, pathognomonic anatomical predilection for the limbic cortex, selectively destroying the inferior and medial temporal lobe and orbital frontal cortex, visible on MRI as asymmetric hyperintensities on T2/FLAIR sequences. Immediate empiric intravenous **acyclovir** (ten milligrams per kilogram every eight hours for fourteen to twenty-one days) must be administered without delay.",
+   "say": "Herpes simplex encephalitis exhibits a pathognomonic predilection for the medial temporal lobe and orbital frontal cortex, seen on MRI as asymmetric hyperintensities on FLAIR sequences. Immediate empiric intravenous acyclovir must be administered without waiting for PCR results.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "temp",
+      "label": "HSV-1 Retrograde Transport to Temporal Lobe"
+     },
+     {
+      "id": "nec",
+      "label": "Asymmetric Necrotising Encephalitis & Seizures"
+     },
+     {
+      "id": "acyc",
+      "label": "Immediate IV Acyclovir (10 mg/kg q8h) Halts Mortality"
+     }
+    ],
+    "edges": [
+     [
+      "temp",
+      "nec"
+     ],
+     [
+      "nec",
+      "acyc"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 140"
+}
