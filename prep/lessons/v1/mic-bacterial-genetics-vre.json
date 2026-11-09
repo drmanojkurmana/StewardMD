@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-bacterial-genetics",
+  "subject": "microbiology",
+  "title": "Bacterial Genetics III: VRE, Molecular Diagnostics and Susceptibility Testing",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**VRE** (vancomycin resistant enterococci) rewires peptidoglycan precursors from D Ala D Ala to D Ala D Lac (vanA, vanB operons on transposons and plasmids), collapsing vancomycin binding a thousand fold, mostly in Enterococcus faecium, answering with linezolid and daptomycin (dose and syndrome dependent). Vancomycin's glycopeptide target from the pharmacology lessons is literally rebuilt by the resistance operon.",
+      "say": "VRE changes the wall's last two amino acids and vancomycin loses its grip.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "van operons",
+          "points": [
+            "vanA: high level, inducible, transferable",
+            "vanB: variable level, teicoplanin often susceptible",
+            "vanC: intrinsic low level in E gallinarum group",
+            "D Ala D Lac reduces binding about 1000 fold"
+          ]
+        },
+        "right": {
+          "title": "VRE practice",
+          "points": [
+            "Rectal screening in high risk units",
+            "Contact precautions and environment cleaning",
+            "Linezolid and daptomycin therapy by syndrome",
+            "VRSA borrowed vanA (rare, reportable)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PCR** (polymerase chain reaction) amplifies target DNA through denaturation, primer annealing and extension cycles into detectable millions, real time formats quantifying as they go (Ct values), multiplex panels naming respiratory, meningitis, gastrointestinal and bloodstream pathogens in hours. Its sensitivity creates the colonisation versus infection questions that clinical correlation must answer.",
+      "say": "Thirty cycles make a billion copies; the clinician still decides if copies mean disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PCR mechanics",
+          "points": [
+            "Primers define the target uniquely",
+            "Taq polymerase thermostable extension",
+            "Real time fluorescence: Ct inversely grades quantity",
+            "Reverse transcription first for RNA viruses"
+          ]
+        },
+        "right": {
+          "title": "PCR cautions",
+          "points": [
+            "Detects dead organisms and colonisers",
+            "Inhibitors in stool and blood cause false negatives",
+            "Contamination control (separated workflows)",
+            "Negative never overrides strong clinical syndromes alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**DNA probes and sequencing** extend identification beyond culture: hybridisation probes from colonies (historical), MALDI's protein cousin already met, 16S rRNA sequencing naming uncultured or fastidious bacteria from tissue, and whole genome sequencing arbitrating outbreaks and resistance genes in reference laboratories. Each method trades speed, cost and resolution against the culture it increasingly accompanies rather than replaces.",
+      "say": "Sequence the universal gene when culture stays silent; genome the outbreak when typing blurs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Identification ladder",
+          "points": [
+            "Probes and antigen tests: minutes",
+            "MALDI TOF: minutes from colonies",
+            "16S sequencing: days, uncultured organisms",
+            "Whole genome: outbreaks and resistance prediction"
+          ]
+        },
+        "right": {
+          "title": "Syndromic panels",
+          "points": [
+            "Meningitis encephalitis film arrays",
+            "Blood culture identification panels after flag",
+            "Resistance genes: mecA, vanA, carbapenemases",
+            "Positive panel still needs phenotypic susceptibility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antimicrobial susceptibility testing** converts a name into a prescription: disc diffusion (Kirby Bauer) grading zones against breakpoints, dilution MICs in broth or agar, gradient strips marrying the two, reported as susceptible, intermediate (susceptible increased exposure in modern EUCAST language) or resistant by CLSI and EUCAST standards recalibrated as pharmacology evolves.",
+      "say": "A zone diameter is a prescription in disguise, translated by breakpoint committees.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kirby Bauer",
+          "points": [
+            "Mueller Hinton agar, 0.5 McFarland lawn",
+            "Zone diameters versus breakpoints",
+            "Quality control strains weekly",
+            "Fast, cheap, robust for routine drugs"
+          ]
+        },
+        "right": {
+          "title": "MIC methods",
+          "points": [
+            "Broth microdilution reference",
+            "Gradient strip (Etest) single drug precision",
+            "Automated platforms same day",
+            "MIC guides vancomycin, aminoglycoside and salvage dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **MIC** (minimum inhibitory concentration, lowest drug level stopping visible growth) and MBC (bactericidal, killing 99.9 percent) frame dosing philosophy: time above MIC for beta lactams, peak and AUC ratios for aminoglycosides and fluoroquinolones from the pharmacology lessons. Breakpoints fuse MIC distributions, pharmacokinetics and outcomes, which is why the same MIC can be susceptible for one site and resistant for meningitis.",
+      "say": "MIC is a number; breakpoint is that number judged by site, dose and outcome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reading MICs",
+          "points": [
+            "Lower is more susceptible, scale is doubling",
+            "Report with breakpoint interpretation",
+            "ECOFF separates wild type from acquired resistance",
+            "Cidal versus static by MBC ratio niches"
+          ]
+        },
+        "right": {
+          "title": "Site corrections",
+          "points": [
+            "Meningitis breakpoints stricter (CSF penetration)",
+            "Urinary only agents reported for urine isolates",
+            "Inducible clindamycin (D test) reported resistant",
+            "Expert rules suppress misleading susceptible results"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phenotypic resistance confirmations** remain molecular testing's referees: D test for inducible clindamycin resistance in staphylococci, ESBL clavulanate synergy, carbapenemase inhibitor and hydrolysis tests, methicillin cefoxitin screening, and vancomycin screening agars for VRE. A resistance gene found without expression, or expressed without the gene panel's target, both occur often enough to keep phenotypes employed.",
+      "say": "Genes predict, phenotypes confess; report both when they disagree, phenotype leads therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phenotypic classics",
+          "points": [
+            "D zone test flattens toward clindamycin",
+            "Cefoxitin disc for mecA expression",
+            "Clavulanate synergy for ESBL",
+            "mCIM for carbapenemase production"
+          ]
+        },
+        "right": {
+          "title": "Discordance handling",
+          "points": [
+            "Gene positive, phenotype susceptible: expert review",
+            "Phenotype resistant, panel negative: novel mechanism hunt",
+            "Reference laboratory arbitration",
+            "Infection control acts on either signal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antibiogram and cumulative susceptibility** reporting turns thousands of isolate results into empirical therapy policy (first isolate per patient, annual, unit specific where numbers allow), the stewardship committee's map from which empirical guidelines in this curriculum's pharmacology lessons are drawn. Genetics gave mechanisms; antibiograms give local probabilities.",
+      "say": "Prescribe empirically from your own hospital's map, not another continent's textbook table.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "isolates", "label": "First isolates per patient aggregated" },
+          { "id": "percent", "label": "Percent susceptible by organism and unit" },
+          { "id": "guideline", "label": "Empirical guidelines written from the map" },
+          { "id": "review", "label": "Outcomes and resistance trends reviewed yearly" }
+        ],
+        "edges": [["isolates", "percent"], ["percent", "guideline"], ["guideline", "review"]]
+      }
+    },
+    {
+      "tx": "**Molecular window discipline** closes the genetics module: nucleic acid tests still need viable organism recovery for susceptibility in most bacterial disease, contamination and colonisation literacy in interpreting panels, and retention of isolates for typing when outbreaks declare later. Culture is slower and remains the only method that hands you the organism itself.",
+      "say": "Keep the isolate; tomorrow's outbreak question needs the organism, not its Ct value.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Molecular wins",
+          "points": [
+            "Uncultivable and fastidious pathogens",
+            "Hours versus days for syndromes",
+            "Resistance gene rapid triage",
+            "Viral loads guiding therapy"
+          ]
+        },
+        "right": {
+          "title": "Culture keeps",
+          "points": [
+            "Full susceptibility phenotypes",
+            "Isolates for typing and storage",
+            "Unexpected organisms outside panels",
+            "Fungal and mycobacterial growth niches"
+          ]
+        }
+      }
+    }
+  ]
+}

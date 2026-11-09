@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-bacterial-genetics",
+  "subject": "microbiology",
+  "title": "Bacterial Genetics II: R Factors, Beta-Lactamases, ESBL, Carbapenemases and mecA",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **R factor** (resistance transfer factor) proved in 1959 Japan that multiple drug resistance crosses between Shigella and E coli patients as one transferable unit: a resistance transfer factor (conjugation machinery) plus resistance determinants, foreshadowing every multi resistance plasmid since. Its discovery converted antibiotic resistance from mutation watching to epidemic tracing.",
+      "say": "Resistance travels as a unit between species; R factors announced the plasmid epidemic era.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "R factor anatomy",
+          "points": [
+            "RTF: transfer machinery",
+            "R determinants: stacked resistance genes",
+            "Transfers whole, converts recipient",
+            "Selection by any one cargo drug maintains all"
+          ]
+        },
+        "right": {
+          "title": "Modern descendants",
+          "points": [
+            "IncF and other epidemic plasmids",
+            "Co selection by metals and biocides",
+            "Plasmid typing in outbreak sequencing",
+            "Curing and incompatibility as research tools"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mutation** remains resistance's other engine: spontaneous chromosomal changes (about 1 in 10 million per gene per generation) selected by exposure (streptomycin ribosomal mutations, fluoroquinolone gyrase steps, rifampicin rpoB single step to high level resistance, hence tuberculosis never rifampicin alone). Mutator strains and stress induced mutagenesis accelerate the supply under therapy.",
+      "say": "One rifampicin tablet can select its own resistance; mutation frequency writes combination rules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mutational resistance",
+          "points": [
+            "Single step high level: rifampicin, streptomycin",
+            "Stepwise: fluoroquinolone gyrA then parC",
+            "Target modification and porin loss",
+            "Vertical inheritance only"
+          ]
+        },
+        "right": {
+          "title": "Acquired resistance contrast",
+          "points": [
+            "Horizontal: plasmids and transposons",
+            "Enzymatic destruction and bypass",
+            "Crosses species boundaries",
+            "Often multi drug in one event"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Beta-lactamases** hydrolyse the beta lactam ring across Ambler classes: A (penicillinases, ESBLs, KPC), B (metallo enzymes NDM, VIM, IMP needing zinc, spared by aztreonam but usually co resistant), C (AmpC cephalosporinases), D (OXA types including carbapenemases). Inhibitors (clavulanate, avibactam, vaborbactam, relebactam) rescue partners class selectively, avibactam covering KPC and OXA48 but not metallo enzymes.",
+      "say": "Name the Ambler class and the inhibitor answer follows; metallo enzymes defeat all current inhibitors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Class map",
+          "points": [
+            "A: TEM, SHV, CTX M ESBLs; KPC carbapenemase",
+            "B: NDM, VIM, IMP metallo (zinc)",
+            "C: AmpC inducible or derepressed",
+            "D: OXA 48 like carbapenemases"
+          ]
+        },
+        "right": {
+          "title": "Inhibitor coverage",
+          "points": [
+            "Clavulanate and tazobactam: class A penicillinases, ESBL variable",
+            "Avibactam: A, C, OXA48; not B",
+            "Vaborbactam and relebactam: KPC focus",
+            "Aztreonam stable to B, destroyed by co produced A and C (avibactam partner)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**ESBLs** (extended spectrum beta lactamases, CTX M family dominant globally, gut colonising E coli and Klebsiella) hydrolyse penicillins, third generation cephalosporins and aztreonam, are inhibited by clavulanate (the confirmatory test), and spare carbapenems and cephamycins. Community urinary sepsis increasingly arrives ESBL armed, rewiring empirical choices from the pharmacology lessons.",
+      "say": "CTX M in the gut is why community sepsis prescriptions changed worldwide.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ESBL portrait",
+          "points": [
+            "CTX M dominant over TEM and SHV mutants",
+            "Third generation cephalosporin resistance",
+            "Clavulanate synergy confirms phenotypically",
+            "Co resistances: fluoroquinolones, aminoglycosides common"
+          ]
+        },
+        "right": {
+          "title": "ESBL consequences",
+          "points": [
+            "Carbapenem use driven upward historically",
+            "Piperacillin tazobactam debated in bloodstream infection",
+            "Colonisation screening in outbreaks",
+            "Travel and antibiotic exposure risk factors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Carbapenemases** close the beta lactam era locally wherever they spread: KPC (class A, avibactam covered), NDM and other metallo enzymes (class B, no inhibitor cover, first characterised from New Delhi in 2008 as **NDM-1**), and OXA48 like (class D, weak but elusive), detected by phenotypic (mCIM, Carba NP heritage) and molecular tests, treated by ceftazidime avibactam, meropenem vaborbactam, cefiderocol and aztreonam combinations by class.",
+      "say": "Carbapenemase class is the prescription: KPC, NDM and OXA take three different exits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Detection",
+          "points": [
+            "Carbapenem MIC and disc screening",
+            "mCIM and inhibitor based phenotypic tests",
+            "Lateral flow immunochromatography by enzyme",
+            "PCR panels from colonies and rectal swabs"
+          ]
+        },
+        "right": {
+          "title": "Therapy by class",
+          "points": [
+            "KPC: avibactam or vaborbactam combinations",
+            "NDM: aztreonam plus ceftazidime avibactam, cefiderocol",
+            "OXA48: ceftazidime avibactam",
+            "Colistin salvage heritage with toxicity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**mecA** encodes PBP2a, the low affinity transpeptidase that makes Staphylococcus aureus methicillin resistant (MRSA) by building wall while beta lactams sit on native PBPs, carried on SCCmec chromosomal cassettes, detected by cefoxitin screening and mecA or PBP2a tests, with mecC a rarer cousin. Vancomycin, daptomycin and ceftaroline (the PBP2a binding cephalosporin) answer it from the pharmacology side.",
+      "say": "mecA swaps the wall builder for one beta lactams cannot bind; cefoxitin reports it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "mecA mechanics",
+          "points": [
+            "PBP2a low affinity for beta lactams",
+            "SCCmec types grade community versus hospital strains",
+            "Cefoxitin disc as surrogate marker",
+            "Heteroresistance expression regulated"
+          ]
+        },
+        "right": {
+          "title": "MRSA consequences",
+          "points": [
+            "All beta lactams except ceftaroline class unreliable",
+            "PVL strains and community skin sepsis",
+            "Screening and decolonisation in defined settings",
+            "VISA and VRSA are separate further steps"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**AmpC** beta lactamases (chromosomal inducible in Enterobacter, Citrobacter freundii, Serratia and kin, the SPACE group) derepress under therapy into cephalosporin resistance mid course, so initially susceptible Enterobacter bacteraemia treated with ceftriaxone can relapse resistant; cefepime and carbapenems sidestep. Plasmid AmpC (CMY) exports the problem to E coli.",
+      "say": "Enterobacter can learn cephalosporin resistance during the course meant to cure it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AmpC behaviour",
+          "points": [
+            "Induced by beta lactam exposure",
+            "Stable derepression mutants selected",
+            "Third generation cephalosporins unreliable in deep infection",
+            "Clavulanate induces rather than inhibits"
+          ]
+        },
+        "right": {
+          "title": "AmpC answers",
+          "points": [
+            "Cefepime generally stable",
+            "Carbapenems for severe disease",
+            "Avoid ceftriaxone in high inoculum Enterobacter",
+            "Laboratory comments guide prescribers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Resistance stewardship genetics** closes by linking mechanism to the earlier pharmacology: every empirical prescription should ask which of enzyme, target change, porin loss or efflux the local antibiogram implies, because each has a different successor drug and a different infection control urgency. Carbapenemase producers trigger isolation; mutational resistance mostly triggers a prescription change.",
+      "say": "Enzyme, target, porin or pump: mechanism chooses the next drug and the isolation sign.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanism to action",
+          "points": [
+            "Enzyme: inhibitor combinations by class",
+            "Target change: class switch (MRSA, VRE)",
+            "Porin loss: carbapenem MIC creep",
+            "Efflux: multi class low level patterns"
+          ]
+        },
+        "right": {
+          "title": "Control urgency",
+          "points": [
+            "Carbapenemase: contact precautions and screening",
+            "MRSA and VRE: isolation by policy",
+            "ESBL: standard plus local rules",
+            "Sequencing resolves plasmid versus clone outbreaks"
+          ]
+        }
+      }
+    }
+  ]
+}
