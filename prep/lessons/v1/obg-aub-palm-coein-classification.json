@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-aub",
+ "subject": "obstetrics-gynaecology",
+ "title": "PALM COEIN Classification of Abnormal Uterine Bleeding",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The FIGO system dividing abnormal bleeding into structural and non structural causes is the **PALM COEIN classification**. Polyp, adenomyosis, leiomyoma and malignancy form PALM, seen on imaging or histology. Coagulopathy, ovulatory, endometrial, iatrogenic and not classified form COEIN. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "PALM COEIN divides abnormal bleeding into structural PALM and functional COEIN causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PALM structural",
+     "COEIN functional"
+    ],
+    "rows": [
+     [
+      "Polyp, adenomyosis",
+      "Coagulopathy, ovulatory"
+     ],
+     [
+      "Leiomyoma, malignancy",
+      "Endometrial, iatrogenic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign endometrial outgrowths causing intermenstrual bleeding are **polyps** in PALM terms. Saline sonography or hysteroscopy finds them best. Polypectomy treats and provides histology in one procedure. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Polyps cause intermenstrual bleeding and polypectomy treats with histology.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Polyp assessment in AUB.",
+    "caption": "Polyp assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endometrial tissue within the myometrium causing heavy painful periods is **adenomyosis** in the PALM list. Globular tender uterus and myometrial cysts on imaging suggest it. It often coexists with fibroids and endometriosis. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Adenomyosis invades myometrium causing heavy painful periods with a globular uterus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Heavy painful periods"
+     },
+     {
+      "id": "n1",
+      "label": "Globular tender uterus"
+     },
+     {
+      "id": "n2",
+      "label": "Imaging cysts in muscle"
+     },
+     {
+      "id": "n3",
+      "label": "Adenomyosis diagnosed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibroids subclassify by FIGO location from submucosal to subserosal in **leiomyoma** staging. Types zero to two project into the cavity and bleed most. Location, not size alone, predicts symptoms and surgery. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Leiomyoma FIGO types zero to two project into the cavity and bleed most.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-vaginosis-fig1.webp",
+    "alt": "AUB investigation context.",
+    "caption": "AUB context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Coagulopathy as a COEIN cause is screened by structured bleeding history, termed **coagulopathy screening**. Heavy bleeding since menarche, postpartum and dental bleeding cluster in von Willebrand disease. Positive screens earn haematology referral. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Coagulopathy screening by bleeding history catches von Willebrand disease in AUB.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive screen",
+     "points": [
+      "Bleeding since menarche",
+      "Dental and postpartum bleeds"
+     ]
+    },
+    "right": {
+     "title": "Negative screen",
+     "points": [
+      "Acquired pattern",
+      "Local causes likelier"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ovulatory dysfunction from PCOS, thyroid and perimenopause fills the **ovulatory category**. Bleeding is irregular in timing and volume. Treating the endocrine cause or protecting endometrium resolves most. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Ovulatory dysfunction bleeds irregularly from PCOS, thyroid or perimenopause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern"
+    ],
+    "rows": [
+     [
+      "PCOS",
+      "Infrequent then heavy"
+     ],
+     [
+      "Thyroid",
+      "Heavy or absent"
+     ],
+     [
+      "Perimenopause",
+      "Erratic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary disorders of endometrial haemostasis with regular ovulatory cycles form the **endometrial category**. It is a diagnosis of exclusion after structural and systemic causes clear. Tranexamic acid and NSAIDs target its mechanisms. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Endometrial category AUB is exclusion diagnosed with regular ovulatory cycles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Regular cycles, heavy loss"
+     },
+     {
+      "id": "n1",
+      "label": "Structure normal"
+     },
+     {
+      "id": "n2",
+      "label": "Systemic causes excluded"
+     },
+     {
+      "id": "n3",
+      "label": "Endometrial category assigned"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hormones, coils and anticoagulants causing bleeding are the **iatrogenic category**. Breakthrough bleeding on contraception dominates it. Reviewing the drug chart is the first investigation here. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Iatrogenic bleeding from hormones and anticoagulants starts with the drug chart.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-combined-pill.webp",
+    "alt": "Contraceptive breakthrough bleeding context.",
+    "caption": "Iatrogenic bleeding. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Every AUB workup still begins with pregnancy exclusion and haemoglobin, the **universal first steps**. Classification follows, never precedes, stabilising heavy acute bleeding. Acute AUB protocols run resuscitation and classification in parallel. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Universal first steps exclude pregnancy and check haemoglobin before classification.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute heavy",
+     "points": [
+      "Resuscitate first",
+      "Classify parallel"
+     ]
+    },
+    "right": {
+     "title": "Chronic stable",
+     "points": [
+      "Classify first",
+      "Targeted treatment"
+     ]
+    }
+   }
+  }
+ ]
+}

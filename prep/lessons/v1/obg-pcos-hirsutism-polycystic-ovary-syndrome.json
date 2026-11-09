@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "obg-pcos-hirsutism",
+ "subject": "obstetrics-gynaecology",
+ "title": "Polycystic Ovary Syndrome and Hirsutism",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The commonest endocrine disorder of reproductive women combining irregular ovulation, androgen excess and polycystic ovaries is **polycystic ovary syndrome**. Two of three Rotterdam criteria diagnose it after excluding mimics. Metabolic risk accompanies it lifelong. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Polycystic ovary syndrome combines irregular ovulation, androgen excess and polycystic ovaries.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/polycystic-ovary-syndrome-fig1.webp",
+    "alt": "PCOS key features.",
+    "caption": "PCOS features. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Male pattern terminal hair growth in women driven by androgens is **hirsutism**. The Ferriman Gallwey score grades nine body areas semi quantitatively. Slow progression suggests PCOS; rapid virilisation demands tumour exclusion. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Hirsutism grades by Ferriman Gallwey score, and rapid virilisation demands tumour exclusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hirsutism-fig1.webp",
+    "alt": "Hirsutism endocrine pathways.",
+    "caption": "Hirsutism pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Two of irregular cycles, hyperandrogenism and polycystic morphology form the **Rotterdam criteria**. Phenotypes range from full classic to ovulatory PCOS. Adolescents need stricter criteria because normal puberty mimics morphology. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Rotterdam criteria need two of three features, with adolescents judged more strictly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Definition"
+    ],
+    "rows": [
+     [
+      "Ovulatory dysfunction",
+      "Cycles over 35 days"
+     ],
+     [
+      "Hyperandrogenism",
+      "Clinical or biochemical"
+     ],
+     [
+      "Morphology",
+      "20 plus follicles or volume"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Insulin resistance driving ovarian androgen production sits at the centre as the **metabolic core**. Compensatory hyperinsulinaemia also lowers sex hormone binding globulin, raising free testosterone. Weight loss of five percent restores ovulation in many. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The metabolic core of insulin resistance drives ovarian androgen production in PCOS.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Insulin resistance"
+     },
+     {
+      "id": "n1",
+      "label": "Hyperinsulinaemia"
+     },
+     {
+      "id": "n2",
+      "label": "Ovarian androgens rise"
+     },
+     {
+      "id": "n3",
+      "label": "Ovulation falters"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long term risks include type two diabetes, endometrial cancer and cardiovascular disease, grouped as **lifelong surveillance**. Glucose tolerance testing every one to three years and endometrial protection are core care. Pregnancy adds gestational diabetes and pre-eclampsia risk. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Lifelong surveillance tests glucose regularly and protects the endometrium in PCOS.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pcos-hirsutism-rotterdam-metabolic-induction-fig1.webp",
+    "alt": "PCOS Rotterdam and management.",
+    "caption": "PCOS management. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dark velvety skin thickening in flexures marking severe insulin resistance is **acanthosis nigricans**. It flags the metabolic phenotype on simple inspection. Its presence intensifies diabetes screening urgency. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Acanthosis nigricans flags severe insulin resistance and intensifies diabetes screening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "With acanthosis",
+     "points": [
+      "Severe insulin resistance",
+      "Screen diabetes urgently"
+     ]
+    },
+    "right": {
+     "title": "Without",
+     "points": [
+      "Milder metabolic risk",
+      "Routine screening"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Androgen secreting tumours and late onset congenital adrenal hyperplasia are the critical **PCOS mimics**. Testosterone over twice normal or rapid onset triggers imaging and 17 hydroxyprogesterone. Cushing syndrome completes the exclusion set. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "PCOS mimics including tumours and adrenal hyperplasia are excluded before diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mimic",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Adrenal hyperplasia",
+      "17 hydroxyprogesterone"
+     ],
+     [
+      "Tumour",
+      "Testosterone level, imaging"
+     ],
+     [
+      "Cushing",
+      "Cortisol screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line treatment for cycle control and skin symptoms is the combined pill as **cycle and skin therapy**. Antiandrogenic progestogens help hirsutism most. Six months minimum judges hair response because follicles cycle slowly. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Cycle and skin therapy uses the combined pill for six months minimum for hair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pill started"
+     },
+     {
+      "id": "n1",
+      "label": "Cycles regulate"
+     },
+     {
+      "id": "n2",
+      "label": "Androgens fall"
+     },
+     {
+      "id": "n3",
+      "label": "Hair assessed at 6 months"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cosmetic hair removal plus pharmacotherapy outperform either alone, following **combined hirsutism care**. Laser suits dark hair on light skin best. Eflornithine cream slows facial growth as adjunct. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Combined hirsutism care pairs cosmetic removal with pharmacotherapy for best results.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-clomifene-citrate.webp",
+    "alt": "Ovulation induction in PCOS care.",
+    "caption": "PCOS fertility care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

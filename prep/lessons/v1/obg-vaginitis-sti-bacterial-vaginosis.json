@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "obg-vaginitis-sti",
+ "subject": "obstetrics-gynaecology",
+ "title": "Bacterial Vaginosis and Vaginal Discharge",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Displacement of lactobacilli by anaerobic overgrowth causing thin fishy discharge is **bacterial vaginosis**. Vaginal pH rises above four point five and clue cells coat with bacteria. It is not sexually transmitted but associates with activity. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Bacterial vaginosis replaces lactobacilli with anaerobes causing fishy discharge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-vaginosis-fig1.webp",
+    "alt": "Vaginal wet mount clue cells.",
+    "caption": "Clue cells. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Epithelial cells studded with bacteria obscuring their borders on microscopy are **clue cells**. They are the most reliable single Amsel criterion. Whiff test with potassium hydroxide releases the fishy amine smell. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Clue cells studded with bacteria are the most reliable bacterial vaginosis sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amsel criterion",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Discharge",
+      "Thin, homogeneous"
+     ],
+     [
+      "pH",
+      "Over 4.5"
+     ],
+     [
+      "Whiff test",
+      "Fishy with KOH"
+     ],
+     [
+      "Clue cells",
+      "Over 20 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three of four Amsel features diagnose bacterial vaginosis clinically as the **Amsel criteria**. Gram stain Nugent scoring is the laboratory gold standard. Point of care diagnosis suffices for most treatment decisions. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Amsel criteria diagnose bacterial vaginosis with three of four features.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Discharge examined"
+     },
+     {
+      "id": "n1",
+      "label": "pH tested"
+     },
+     {
+      "id": "n2",
+      "label": "Whiff and microscopy"
+     },
+     {
+      "id": "n3",
+      "label": "Three of four diagnoses"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metronidazole or clindamycin, oral or vaginal, treats bacterial vaginosis as **standard therapy**. Partner treatment was long dismissed, though recent trials revisit male partner therapy for recurrence. Recurrence within a year approaches half. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Standard therapy uses metronidazole, with recurrence approaching half within a year.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pelvic-inflammatory-disease-and-vaginitis-fig1.webp",
+    "alt": "Clue cells in vaginitis.",
+    "caption": "Vaginitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In pregnancy bacterial vaginosis associates with preterm birth and late miscarriage, termed **pregnancy association**. Screening asymptomatic women remains debated, but symptomatic women are treated. Oral clindamycin is preferred when treating in pregnancy by some guidelines. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Pregnancy association links bacterial vaginosis to preterm birth and late miscarriage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Symptomatic",
+     "points": [
+      "Treat always"
+     ]
+    },
+    "right": {
+     "title": "Asymptomatic screen",
+     "points": [
+      "Debated",
+      "Risk based"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing infective from physiological discharge starts with itch, odour and colour patterns, termed **discharge differentiation**. Candida itches white, trichomonas froths green, vaginosis smells fishy. Mixed infections are common, so microscopy earns its keep. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Discharge differentiation separates candida itch, trichomonas froth and vaginosis odour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Candida",
+      "Itch, white curds"
+     ],
+     [
+      "Trichomonas",
+      "Frothy green, strawberry cervix"
+     ],
+     [
+      "BV",
+      "Fishy, thin grey"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent bacterial vaginosis uses suppressive twice weekly vaginal metronidazole after induction, called **suppressive regimens**. Biofilm on vaginal walls explains why single courses fail. Boric acid adjuncts appear in specialist protocols. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Suppressive regimens maintain control in recurrent bacterial vaginosis against biofilm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Induction course"
+     },
+     {
+      "id": "n1",
+      "label": "Twice weekly suppression"
+     },
+     {
+      "id": "n2",
+      "label": "Months of control"
+     },
+     {
+      "id": "n3",
+      "label": "Review triggers"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Douching disrupts lactobacilli and doubles vaginosis risk, counselled against as **douching harm**. The vagina is self cleaning and scented products only injure it. This single behaviour change prevents many recurrences. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Douching harm doubles vaginosis risk by disrupting lactobacilli.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Vaginitis counselling.",
+    "caption": "Vaginitis counselling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Aerobic vaginitis with inflammation and parabasal cells is the inflammatory cousin, termed **aerobic vaginitis**. Unlike bacterial vaginosis it burns and inflames, needing different treatment including steroids sometimes. Microscopy separates the two. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Aerobic vaginitis inflames unlike bacterial vaginosis and needs different treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacterial vaginosis",
+     "points": [
+      "No inflammation",
+      "Clue cells"
+     ]
+    },
+    "right": {
+     "title": "Aerobic vaginitis",
+     "points": [
+      "Inflamed, parabasal cells",
+      "Burning"
+     ]
+    }
+   }
+  }
+ ]
+}

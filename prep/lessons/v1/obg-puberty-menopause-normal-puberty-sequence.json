@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "module": "obg-puberty-menopause",
+ "subject": "obstetrics-gynaecology",
+ "title": "Normal Puberty Sequence and Precocious Puberty",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Breast budding, growth acceleration, pubic hair and finally menarche follow in the **normal puberty sequence**. Thelarche starts between eight and thirteen years normally. Menarche arrives about two years after thelarche, after peak height velocity. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Normal puberty sequences thelarche, growth, hair and menarche over years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Typical age"
+    ],
+    "rows": [
+     [
+      "Thelarche",
+      "8 to 13"
+     ],
+     [
+      "Peak growth",
+      "Before menarche"
+     ],
+     [
+      "Menarche",
+      "About 12 to 13"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary sexual characters before eight years in girls define **precocious puberty**. Central causes from early axis activation dominate, and most are idiopathic in girls. Brain imaging still follows, especially under six years. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Precocious puberty before eight years is usually central and idiopathic in girls.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Signs before 8 years"
+     },
+     {
+      "id": "n1",
+      "label": "Bone age advanced"
+     },
+     {
+      "id": "n2",
+      "label": "Axis tests classify"
+     },
+     {
+      "id": "n3",
+      "label": "MRI by age and neurology"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "GnRH analogues pause central precocious puberty to preserve height and delay menses, termed **puberty blockade**. Monthly or quarterly depots suppress the axis reversibly. Treatment stops at an age appropriate for puberty to resume. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Puberty blockade with GnRH analogues pauses central precocity reversibly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Puberty axis hormones.",
+    "caption": "Puberty hormones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "No breast development by thirteen or no menarche by fifteen with growth failure defines **delayed puberty**. Constitutional delay with family history is commonest. Turner, Kallmann and chronic disease fill the pathological list. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Delayed puberty beyond thirteen without thelarche is often constitutional delay.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Constitutional",
+     "points": [
+      "Family history",
+      "Growth delayed equally",
+      "Reassure and watch"
+     ]
+    },
+    "right": {
+     "title": "Pathological",
+     "points": [
+      "Short or ill",
+      "Investigate fully"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Isolated breast development without other progression in a young girl is **premature thelarche**. It usually regresses and needs only observation with growth charting. Progression or growth acceleration converts it to true precocity workup. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Premature thelarche isolates breast development and usually regresses with observation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Isolated thelarche",
+      "Observe"
+     ],
+     [
+      "Plus growth acceleration",
+      "Full workup"
+     ],
+     [
+      "Plus pubic hair rapidly",
+      "Androgen workup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tanner staging grades breast and pubic hair from one to five as the **Tanner scale**. It standardises puberty documentation across clinicians. Photographs never substitute for examination based staging. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Tanner scale grades puberty stages one to five for standard documentation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Puberty staging assessment.",
+    "caption": "Puberty staging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bone age from hand radiograph predicts remaining growth in puberty disorders, termed **bone age assessment**. Advanced bone age in precocity quantifies height already spent. It guides blockade decisions objectively. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Bone age assessment quantifies height spent in precocious puberty.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hand film taken"
+     },
+     {
+      "id": "n1",
+      "label": "Bone age read"
+     },
+     {
+      "id": "n2",
+      "label": "Height prediction made"
+     },
+     {
+      "id": "n3",
+      "label": "Blockade decided"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peripheral precocity from ovarian cysts, tumours or exogenous hormones is GnRH independent, called **peripheral precocity**. Gonadotropins stay suppressed while oestrogen runs high. Treating the source, not the axis, cures it. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Peripheral precocity is GnRH independent and treating the source cures it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central",
+     "points": [
+      "Axis driven",
+      "GnRH analogue works"
+     ]
+    },
+    "right": {
+     "title": "Peripheral",
+     "points": [
+      "Source driven",
+      "Remove or stop source"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "McCune Albright syndrome pairs peripheral precocity with cafe au lait spots and bone dysplasia, a classic **syndrome triad**. Activating GNAS mutations mosaic through tissues. Aromatase inhibitors control its ovarian autonomy. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "McCune Albright triad pairs precocity with cafe au lait spots and bone dysplasia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menopause-and-hormone-replacement-therapy-fig1.webp",
+    "alt": "Puberty and menopause endocrinology.",
+    "caption": "Endocrinology span. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

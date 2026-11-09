@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-puberty-menopause",
+ "subject": "obstetrics-gynaecology",
+ "title": "Perimenopause, Menopause and Hormone Therapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The transition years of irregular cycles and fluctuating hormones before the final period form the **perimenopause**. Vasomotor symptoms often start here while cycles continue. Contraception is still needed until menopause is confirmed. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Perimenopause brings irregular cycles and vasomotor symptoms before the final period.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menopause-and-hormone-replacement-therapy-fig1.webp",
+    "alt": "Menopause systemic manifestations.",
+    "caption": "Menopause manifestations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Twelve months without periods after forty five, diagnosed retrospectively, is the **menopause**. Average age is fifty one in most populations. Earlier menopause between forty and forty five earns bone and heart protection review. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Menopause is twelve period free months, averaging fifty one years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Term"
+    ],
+    "rows": [
+     [
+      "Under 40",
+      "Premature insufficiency"
+     ],
+     [
+      "40 to 45",
+      "Early menopause"
+     ],
+     [
+      "Around 51",
+      "Average"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hot flushes and night sweats from thermoregulatory narrowing are **vasomotor symptoms**. They average seven years and disrupt sleep profoundly. Hormone therapy remains their most effective treatment by far. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Vasomotor symptoms average seven years and hormone therapy treats them best.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Flushes disrupt sleep"
+     },
+     {
+      "id": "n1",
+      "label": "Hormone therapy assessed"
+     },
+     {
+      "id": "n2",
+      "label": "Lowest effective dose"
+     },
+     {
+      "id": "n3",
+      "label": "Reviewed annually"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vaginal dryness, dyspareunia and urinary urgency from oestrogen loss form the **genitourinary syndrome** of menopause. Unlike flushes it progresses without treatment. Low dose vaginal oestrogen is safe long term for most. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Genitourinary syndrome progresses without treatment and vaginal oestrogen is safe long term.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menopause-and-postmenopausal-hormone-thera-fig1.webp",
+    "alt": "Hormone changes in menopause.",
+    "caption": "Hormone changes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Systemic hormone therapy needs a progestogen added whenever the uterus is present, the **uterine protection rule**. Unopposed oestrogen causes hyperplasia and cancer. Hysterectomised women take oestrogen alone. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Uterine protection adds progestogen to oestrogen whenever a uterus is present.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uterus present",
+     "points": [
+      "Oestrogen plus progestogen"
+     ]
+    },
+    "right": {
+     "title": "Hysterectomised",
+     "points": [
+      "Oestrogen alone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transdermal oestrogen avoids first pass liver effects and clot risk of oral therapy, termed **route selection**. Obese and thrombosis prone women are steered transdermal. Micronised progesterone is the gentlest partner for breast and clot profiles. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Route selection steers clot prone women to transdermal oestrogen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Clot risk"
+    ],
+    "rows": [
+     [
+      "Oral oestrogen",
+      "Increased"
+     ],
+     [
+      "Transdermal",
+      "Neutral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Starting hormone therapy under sixty or within ten years of menopause gives the favourable **timing window**. Benefit risk is best here for symptoms and bone. Starting later raises cardiovascular and dementia concerns from trial data. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "The timing window under sixty favours hormone therapy benefit over risk.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tibolone.webp",
+    "alt": "Tibolone tissue selective therapy.",
+    "caption": "Tibolone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non hormonal options including some antidepressants and gabapentin serve women who cannot take hormones, grouped as **non hormonal therapy**. Effects are smaller than hormones but real. Bone specific drugs replace hormones when osteoporosis is the only issue. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Non hormonal therapy serves women who cannot take hormones with smaller effects.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hormones unsuitable"
+     },
+     {
+      "id": "n1",
+      "label": "Antidepressant class tried"
+     },
+     {
+      "id": "n2",
+      "label": "Flushes reduce partially"
+     },
+     {
+      "id": "n3",
+      "label": "Bone drugs if needed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding on hormone therapy beyond the settling months needs endometrial assessment, following the **bleeding on HRT rule**. Unscheduled bleeding after six months or after amenorrhoea earns a pipelle. Most causes are benign but cancer hides among them. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Bleeding on HRT beyond settling months earns endometrial assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First 3 to 6 months",
+     "points": [
+      "Settling spotting common",
+      "Observe"
+     ]
+    },
+    "right": {
+     "title": "Beyond, or after gap",
+     "points": [
+      "Pipelle indicated",
+      "Exclude cancer"
+     ]
+    }
+   }
+  }
+ ]
+}

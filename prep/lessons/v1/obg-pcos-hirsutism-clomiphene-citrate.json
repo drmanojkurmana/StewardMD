@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "module": "obg-pcos-hirsutism",
+ "subject": "obstetrics-gynaecology",
+ "title": "Clomiphene, Letrozole and Ovulation Induction in PCOS",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The selective oestrogen receptor modulator tricking the pituitary into more FSH is **clomiphene citrate**. Given days two to six, it induces ovulation in about eighty percent. Twins follow in five to ten percent of conceptions. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Clomiphene citrate induces ovulation in eighty percent by tricking the pituitary.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-clomifene-citrate.webp",
+    "alt": "Clomifene citrate ovulation induction.",
+    "caption": "Clomifene. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The aromatase inhibitor now first line for PCOS ovulation induction is **letrozole**. Live birth rates exceed clomiphene in the landmark trials, with fewer twins. Five days from day three is the usual course. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Letrozole is now first line for PCOS induction with higher live births than clomiphene.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Letrozole",
+     "points": [
+      "Higher live birth",
+      "Fewer twins",
+      "First line"
+     ]
+    },
+    "right": {
+     "title": "Clomiphene",
+     "points": [
+      "Older standard",
+      "More twins",
+      "Anti oestrogen effects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ultrasound tracking of follicle growth prevents multiple pregnancy and hyperstimulation in **induction monitoring**. Cycles without a dominant follicle by day twenty are abandoned. hCG triggers time intercourse or insemination. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Induction monitoring tracks follicles to prevent multiples and hyperstimulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Day",
+     "Action"
+    ],
+    "rows": [
+     [
+      "3 to 7",
+      "Tablets taken"
+     ],
+     [
+      "12 onward",
+      "Follicle scans"
+     ],
+     [
+      "Trigger",
+      "hCG when mature"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resistance to clomiphene in about fifteen percent defines **clomiphene resistance**. Gonadotropin injections or ovarian drilling follow in the pathway. Metformin addition rescues some resistant cases. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Clomiphene resistance in fifteen percent moves to gonadotropins or drilling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Three to six cycles fail"
+     },
+     {
+      "id": "n1",
+      "label": "Resistance declared"
+     },
+     {
+      "id": "n2",
+      "label": "Gonadotropins or drilling"
+     },
+     {
+      "id": "n3",
+      "label": "Specialist care"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laparoscopic diathermy to the ovaries inducing spontaneous ovulation is **ovarian drilling**. Four punctures per ovary balance effect against adhesion and reserve damage. It suits clomiphene resistance where injections are impractical. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Ovarian drilling induces spontaneous ovulation in clomiphene resistance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/polycystic-ovary-syndrome-fig1.webp",
+    "alt": "PCOS ovarian drilling context.",
+    "caption": "Drilling context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Low dose gonadotropin step up protocols ovulate one follicle safely in PCOS, termed **chronic low dose**. Starting at thirty seven point five to seventy five units and inching up avoids hyperstimulation. Cancellation criteria are agreed before starting. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Chronic low dose gonadotropins inch up to ovulate one follicle safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "Start",
+      "37.5 to 75 units"
+     ],
+     [
+      "Increment",
+      "Small, weekly"
+     ],
+     [
+      "Aim",
+      "Single follicle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ovarian hyperstimulation in PCOS induction is milder than IVF but still guarded by **OHSS vigilance**. Ascites and haemoconcentration define severe disease in any setting. Trigger withholding prevents most cases. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "OHSS vigilance withholds triggers to prevent hyperstimulation in induction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pcos-hirsutism-rotterdam-metabolic-induction-fig1.webp",
+    "alt": "Induction safety in PCOS.",
+    "caption": "Induction safety. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Time to pregnancy counselling sets expectations of three to six induction cycles, termed **cycle planning**. Cumulative conception reaches sixty to seventy percent in responsive couples. Earlier IVF discussion suits older women. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Cycle planning expects three to six induction cycles with cumulative success near seventy percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cycles planned"
+     },
+     {
+      "id": "n1",
+      "label": "Response reviewed"
+     },
+     {
+      "id": "n2",
+      "label": "Six cycles maximum tablets"
+     },
+     {
+      "id": "n3",
+      "label": "IVF discussed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Male and tubal factors are excluded before induction because ovulation alone cannot overcome them, following **couple first rule**. Semen analysis and tubal patency precede or accompany the first cycles. This prevents wasted years. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Couple first rule excludes male and tubal factors before induction cycles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ovulatory cause only",
+     "points": [
+      "Induction works"
+     ]
+    },
+    "right": {
+     "title": "Plus tubal blockage",
+     "points": [
+      "Induction futile",
+      "IVF needed"
+     ]
+    }
+   }
+  }
+ ]
+}

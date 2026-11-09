@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-amenorrhoea",
+ "subject": "obstetrics-gynaecology",
+ "title": "Sheehan Syndrome and Hypothalamic Amenorrhoea",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Pituitary infarction after severe postpartum haemorrhage and shock is **Sheehan syndrome**. The physiologically enlarged gland outstrips its portal blood supply during hypotension. Failure to lactate is characteristically the first sign noticed. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Sheehan syndrome infarcts the pituitary after haemorrhage, failing lactation first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Order lost",
+     "Hormone"
+    ],
+    "rows": [
+     [
+      "First often",
+      "Prolactin, growth hormone"
+     ],
+     [
+      "Later",
+      "Gonadotropins"
+     ],
+     [
+      "Last",
+      "TSH, ACTH variable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inability to breastfeed after a haemorrhagic delivery is the sentinel **failure to lactate**. Agalactia from prolactin loss precedes amenorrhoea by months. Any such history earns pituitary function testing. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Failure to lactate after haemorrhage is the sentinel sign earning pituitary testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe haemorrhage"
+     },
+     {
+      "id": "n1",
+      "label": "No lactation"
+     },
+     {
+      "id": "n2",
+      "label": "Amenorrhoea follows"
+     },
+     {
+      "id": "n3",
+      "label": "Pituitary tests confirm"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empty or partially empty sella on MRI years later confirms the **empty sella** endpoint. The infarcted gland shrinks away from its fossa. Imaging follows biochemical hypopituitarism, never precedes it usefully. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Empty sella on MRI confirms Sheehan syndrome years after the infarction.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Sheehan syndrome follow up.",
+    "caption": "Sheehan follow up. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Replacement follows the rule of cortisol before thyroxine, termed **replacement sequence**. Starting levothyroxine first accelerates cortisol clearance and can precipitate adrenal crisis. Hydrocortisone education and emergency cards accompany it. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Replacement sequence gives cortisol before thyroxine to avoid adrenal crisis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Correct order",
+     "points": [
+      "Hydrocortisone first",
+      "Then levothyroxine"
+     ]
+    },
+    "right": {
+     "title": "Dangerous order",
+     "points": [
+      "Thyroxine first",
+      "Adrenal crisis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Functional suppression of GnRH by low weight, exercise or stress is **hypothalamic amenorrhoea**. Gonadotropins sit low with low oestrogen despite a normal pituitary. Bone density falls silently while periods are absent. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Hypothalamic amenorrhoea suppresses GnRH from low weight, exercise or stress.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Low weight",
+      "BMI under 18.5"
+     ],
+     [
+      "Exercise",
+      "Athlete, dancer"
+     ],
+     [
+      "Stress",
+      "Exams, illness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The energy availability hormone leptin gates hypothalamic function, explaining the **leptin gate**. Fat mass below a threshold silences kisspeptin and GnRH pulses. Weight restoration, not hormones, is the true treatment. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The leptin gate silences GnRH below a fat threshold, and weight restoration treats it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Hypothalamic amenorrhoea context.",
+    "caption": "Amenorrhoea context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bone protection in hypoestrogenic young women uses oestrogen replacement until natural menopause age, termed **bone protection replacement**. The combined pill is commonly used though bone specific regimens exist. Calcium, vitamin D and weight bearing exercise add support. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Bone protection replacement gives oestrogen until natural menopause age in young women.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hypoestrogenism confirmed"
+     },
+     {
+      "id": "n1",
+      "label": "Oestrogen replaced"
+     },
+     {
+      "id": "n2",
+      "label": "DEXA monitored"
+     },
+     {
+      "id": "n3",
+      "label": "Weight restored"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sheehan presentations can be acute with hyponatraemia and hypoglycaemia in the puerperium, an **acute presentation** variant. It mimics other postpartum collapses. Sodium and glucose with pituitary failure after haemorrhage should trigger the thought. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Acute Sheehan presentation mimics postpartum collapse with low sodium and glucose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute",
+     "points": [
+      "Days after haemorrhage",
+      "Low sodium and glucose"
+     ]
+    },
+    "right": {
+     "title": "Chronic",
+     "points": [
+      "Years later",
+      "Fatigue, amenorrhoea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fertility with gonadotropin therapy is possible in Sheehan syndrome because ovaries are intact, termed **fertility restoration**. Ovulation induction replaces the missing pituitary signals. Pregnancies thereafter need endocrine co care. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fertility restoration uses gonadotropins in Sheehan syndrome because ovaries remain intact.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-fig1.webp",
+    "alt": "Amenorrhoea fertility pathways.",
+    "caption": "Fertility pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

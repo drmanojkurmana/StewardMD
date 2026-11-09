@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-aub",
+ "subject": "obstetrics-gynaecology",
+ "title": "Endometrial Sampling and AUB Management",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Office sampling of endometrium with a thin suction catheter is **endometrial sampling** by pipelle. It detects hyperplasia and cancer with high sensitivity in postmenopausal bleeding. Blind sampling can miss focal lesions like polyps. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Endometrial sampling by pipelle detects cancer sensitively but can miss polyps.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Age"
+    ],
+    "rows": [
+     [
+      "Postmenopausal bleeding",
+      "Any"
+     ],
+     [
+      "Persistent AUB",
+      "Over 45, or younger with risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent intermenstrual bleeding with a negative pipelle still needs cavity inspection because of the **focal lesion caveat**. Hysteroscopy sees what blind sampling misses. This sequence prevents delayed polyp and focal cancer diagnosis. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Focal lesion caveat sends persistent bleeding to hysteroscopy despite negative pipelle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pipelle negative"
+     },
+     {
+      "id": "n1",
+      "label": "Bleeding persists"
+     },
+     {
+      "id": "n2",
+      "label": "Hysteroscopy inspects"
+     },
+     {
+      "id": "n3",
+      "label": "Polyp found and removed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thickened endometrium over four to five millimetres in postmenopausal bleeding triggers sampling, the **thickness threshold**. Below it, cancer risk is under one percent and sampling can wait. Thresholds never override persistent bleeding. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Thickness threshold at four to five millimetres triggers postmenopausal sampling.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Endometrial thickness assessment.",
+    "caption": "Thickness assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non atypical hyperplasia carries under five percent cancer risk and reverses with progestogen, termed **hyperplasia without atypia**. Atypical hyperplasia, now endometrial intraepithelial neoplasia, carries thirty percent concurrent cancer and needs hysterectomy usually. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Hyperplasia without atypia reverses with progestogen, while atypical disease needs hysterectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Without atypia",
+     "points": [
+      "Progestogen reverses",
+      "Sample to confirm"
+     ]
+    },
+    "right": {
+     "title": "With atypia EIN",
+     "points": [
+      "30 percent concurrent cancer",
+      "Hysterectomy usual"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The levonorgestrel intrauterine system is first line treatment for heavy menstrual bleeding, termed **LNG IUS first line**. It outperforms oral medicines and rivals ablation in trials. Five years of treatment also protect the endometrium. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "LNG IUS is first line for heavy menstrual bleeding outperforming oral medicines.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-progesterone-only-pill.webp",
+    "alt": "Progestogen therapy for AUB.",
+    "caption": "Progestogen therapy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tranexamic acid taken only during menstruation cuts loss by forty percent as **antifibrinolytic therapy**. It suits women avoiding hormones. Thrombosis history is checked before prescribing. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Antifibrinolytic tranexamic acid during menstruation cuts loss by forty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Reduction"
+    ],
+    "rows": [
+     [
+      "Tranexamic acid",
+      "About 40 percent"
+     ],
+     [
+      "NSAIDs",
+      "About 25 percent"
+     ],
+     [
+      "LNG IUS",
+      "Over 80 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endometrial ablation destroys the lining for women whose families are complete, termed **ablation**. Second generation balloon and radiofrequency devices need no hysteroscopy skills. Hysterectomy remains definitive when lesser methods fail or pathology demands. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Ablation destroys the lining when families are complete, with hysterectomy definitive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Medical therapy failed"
+     },
+     {
+      "id": "n1",
+      "label": "Family complete"
+     },
+     {
+      "id": "n2",
+      "label": "Ablation offered"
+     },
+     {
+      "id": "n3",
+      "label": "Hysterectomy last resort"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute AUB with haemodynamic instability follows intravenous oestrogen or high dose progestogen protocols as **acute AUB management**. Balloon tamponade of the cavity buys time rarely. Dilatation and curettage is diagnostic more than therapeutic here. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Acute AUB management stabilises with hormones and resuscitation in parallel.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pelvic-inflammatory-disease-and-vaginitis-fig1.webp",
+    "alt": "AUB acute care context.",
+    "caption": "Acute AUB care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Iron deficiency accompanies most chronic AUB and is corrected alongside bleeding control, termed **anaemia co management**. Ferritin guides oral versus intravenous iron. Ignoring it leaves women symptomatic despite controlled bleeding. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Anaemia co management corrects iron alongside bleeding control in chronic AUB.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral iron",
+     "points": [
+      "Mild deficiency",
+      "Weeks to correct"
+     ]
+    },
+    "right": {
+     "title": "IV iron",
+     "points": [
+      "Severe or intolerant",
+      "Rapid correction"
+     ]
+    }
+   }
+  }
+ ]
+}

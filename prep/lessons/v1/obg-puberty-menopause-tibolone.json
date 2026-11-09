@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "obg-puberty-menopause",
+ "subject": "obstetrics-gynaecology",
+ "title": "Tibolone, Premature Ovarian Insufficiency and Menopause Care",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The synthetic steroid with oestrogenic, progestogenic and weak androgenic actions by tissue is **tibolone**. It treats flushes and protects bone without needing a separate progestogen. Stroke risk in older women limits it to under sixty starters mainly. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Tibolone acts tissue selectively for flushes and bone without separate progestogen.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tibolone.webp",
+    "alt": "Tibolone tissue selective action.",
+    "caption": "Tibolone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Loss of ovarian function before forty with high FSH and low oestrogen is **premature ovarian insufficiency**. Unlike menopause it can fluctuate, with occasional ovulation. Causes include Turner mosaics, FMR1 premutation, autoimmunity and chemotherapy. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Premature ovarian insufficiency before forty fluctuates unlike menopause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Genetic",
+      "Turner mosaic, FMR1"
+     ],
+     [
+      "Autoimmune",
+      "Adrenal antibodies"
+     ],
+     [
+      "Iatrogenic",
+      "Chemotherapy, surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hormone replacement to at least fifty one is non negotiable in POI for bone and heart, termed **replacement to natural age**. This is physiological replacement, not the elective HRT of older women. Withholding it causes measurable harm. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Replacement to natural age is non negotiable in POI for bone and heart.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "POI diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "Replacement started"
+     },
+     {
+      "id": "n2",
+      "label": "Continue to 51"
+     },
+     {
+      "id": "n3",
+      "label": "Bone monitored"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spontaneous pregnancy still occurs in five to ten percent of POI, so contraception is discussed honestly as **fertility unpredictability**. Donor egg IVF is the reliable fertility route. Sister screening follows FMR1 and Turner findings. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Fertility unpredictability in POI still allows five to ten percent spontaneous pregnancy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Ovarian insufficiency hormones.",
+    "caption": "Insufficiency hormones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical menopause after bilateral oophorectomy is abrupt and severe, termed **surgical menopause**. Symptoms start within days, not years. Replacement starts immediately in young women unless cancer forbids it. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Surgical menopause is abrupt, needing immediate replacement in young women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural",
+     "points": [
+      "Gradual years",
+      "Symptoms evolve"
+     ]
+    },
+    "right": {
+     "title": "Surgical",
+     "points": [
+      "Abrupt days",
+      "Replacement immediate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Raloxifene and other selective oestrogen receptor modulators protect bone and breast but worsen flushes, classed as **SERM tradeoffs**. They suit women whose problem is bone alone after menopause. Tamoxifen in premenopausal breast cancer shows the classs uterine risks. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "SERM tradeoffs protect bone and breast but worsen flushes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Helps",
+     "Harms"
+    ],
+    "rows": [
+     [
+      "Raloxifene",
+      "Bone, breast risk",
+      "Flushes, clots"
+     ],
+     [
+      "Tamoxifen",
+      "Breast cancer",
+      "Uterus, clots"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calcium, vitamin D, weight bearing exercise and fall prevention form the non drug **bone health bundle**. It accompanies every menopause plan regardless of hormones. DEXA targets treatment intensity objectively. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Bone health bundles calcium, exercise and falls prevention with DEXA targeting.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menopause-and-hormone-replacement-therapy-fig1.webp",
+    "alt": "Bone protection in menopause.",
+    "caption": "Bone protection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mood, cognition and sleep disturbance rank among the commonest menopause complaints, grouped as **neuropsychiatric symptoms**. Hormones help mood mainly through sleep and flush relief. Depression meeting criteria earns its own treatment regardless. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Neuropsychiatric symptoms in menopause earn independent treatment when criteria are met.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Sleep broken by flushes"
+     },
+     {
+      "id": "n1",
+      "label": "Mood and cognition suffer"
+     },
+     {
+      "id": "n2",
+      "label": "Flush treatment helps"
+     },
+     {
+      "id": "n3",
+      "label": "Depression treated directly"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Annual HRT review weighs continuing symptoms, blood pressure, breast screening and clot history, termed **annual review discipline**. There is no arbitrary five year stop rule in modern guidance. Duration is individualised while benefit persists. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Annual review discipline individualises HRT duration without arbitrary stop rules.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benefit persists",
+     "points": [
+      "Continue lowest dose",
+      "Review yearly"
+     ]
+    },
+    "right": {
+     "title": "Benefit gone",
+     "points": [
+      "Trial of stopping",
+      "Non hormonal backup"
+     ]
+    }
+   }
+  }
+ ]
+}
