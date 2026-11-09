@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "ent-neck-spaces-retropharyngeal-abscess",
+ "subject": "ent",
+ "module": "ent-neck-spaces",
+ "title": "Deep Neck Space Infections",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Retropharyngeal abscess** collects pus between the pharyngeal constrictors and prevertebral fascia, most often in young children after upper respiratory infection seeds retropharyngeal nodes. Fever, neck stiffness, drooling, muffled cry and a posterior pharyngeal bulge form the picture, with airway obstruction as the immediate threat. Lateral neck imaging shows widened prevertebral soft tissue, and contrast computed tomography confirms collection size and airway narrowing.",
+   "say": "Pus behind the pharynx in young children gives fever with neck stiffness and drooling. A posterior bulge with muffled cry indicates collection behind the airway. Contrast scanning confirms size and shows airway narrowing clearly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pharyngeal-spaces-and-waldeyer-ring-fig1.webp",
+    "alt": "Throat diagram with constrictor muscles, deep fascial spaces and tonsil ring highlighted.",
+    "caption": "Pharyngeal spaces behind the airway. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Chronic retropharyngeal abscess** is a different disease, usually tuberculous, arising from cervical spine caries that discharges cold pus behind the pharynx in an older child or adult. It lacks acute toxicity, shows vertebral destruction on imaging and bulges in the midline more often than acute abscess. Drainage without antituberculous therapy and spine care fails, so microbiology including mycobacterial studies is taken before or during any surgical drainage.",
+   "say": "Tuberculous cold abscess behind the pharynx follows spinal caries without acute toxicity. Vertebral destruction on imaging separates chronic disease from acute suppuration clearly. Antituberculous therapy with spine care provides the definitive treatment backbone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute retropharyngeal abscess",
+     "points": [
+      "Young child, febrile and toxic",
+      "After respiratory infection",
+      "Airway threat dominates",
+      "Urgent drainage plus antibiotics"
+     ]
+    },
+    "right": {
+     "title": "Chronic tuberculous abscess",
+     "points": [
+      "Older patient, afebrile course",
+      "Cervical spine caries source",
+      "Midline bulge, vertebral destruction",
+      "Antituberculous therapy central"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pott spine** of the cervical region underlies the chronic abscess, with paradiscal vertebral body destruction, disc narrowing, gibbus deformity and risk of cord compression from epidural extension. Neurological examination is therefore part of every chronic neck abscess assessment, not an optional extra. Magnetic resonance imaging maps cord threat and vertebral collapse together, guiding whether stabilisation joins medical therapy in the treatment plan.",
+   "say": "Cervical spinal tuberculosis involves vertebral bodies and threatens the cord by epidural extension. Neurological examination is therefore essential in every chronic neck abscess assessment. Resonance imaging maps cord threat and guides stabilisation decisions.",
+   "vis": {
+    "kind": "table",
+    "title": "Chronic abscess workup",
+    "cols": [
+     "Element",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Spine imaging",
+      "Vertebral destruction and cord threat"
+     ],
+     [
+      "Microbiology",
+      "Mycobacterial studies included"
+     ],
+     [
+      "Therapy",
+      "Antituberculous backbone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Parapharyngeal abscess** fills the lateral pharyngeal space from tonsil, dental or salivary sources and presents with trismus, medial tonsil displacement, lateral neck swelling and toxicity. The space contains the carotid sheath posteriorly, so spread risks jugular thrombosis, carotid erosion and cranial nerve deficits. Contrast imaging defines the collection and vessel relations before drainage, which is usually external for lateral disease and transoral only for selected medial collections.",
+   "say": "Lateral space infection gives jaw spasm with medial tonsil displacement and neck swelling. The carotid sheath lies posteriorly and spread risks vessel and nerve injury. Imaging defines vessel relations before drainage route selection.",
+   "vis": {
+    "kind": "table",
+    "title": "Deep neck spaces and signatures",
+    "cols": [
+     "Space",
+     "Signature presentation"
+    ],
+    "rows": [
+     [
+      "Retropharyngeal",
+      "Posterior bulge, airway threat in child"
+     ],
+     [
+      "Parapharyngeal",
+      "Trismus, tonsil pushed medially"
+     ],
+     [
+      "Submandibular",
+      "Floor of mouth swelling, tongue raised"
+     ],
+     [
+      "Danger space",
+      "Descent to posterior mediastinum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ludwig angina** is rapidly spreading cellulitis of the submandibular, sublingual and submental spaces, usually odontogenic, that raises the floor of mouth and pushes the tongue upward and backward toward airway obstruction. Woody hard swelling, drooling and stridor mark advanced disease, and the neck feels brawny rather than fluctuant because infection spreads through tissue planes. Securing the airway, often by awake tracheostomy, precedes antibiotics and surgical decompression in priority.",
+   "say": "Rapid cellulitis of the floor spaces raises the tongue and threatens the airway. Woody hard swelling with drooling indicates advanced odontogenic spread. Airway security is first in priority before antibiotics and decompression.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ludwig angina priorities",
+    "nodes": [
+     {
+      "id": "air",
+      "label": "Secure airway, awake if needed"
+     },
+     {
+      "id": "abx",
+      "label": "Broad intravenous antibiotics"
+     },
+     {
+      "id": "dent",
+      "label": "Remove dental source"
+     },
+     {
+      "id": "dec",
+      "label": "Decompress spaces surgically"
+     }
+    ],
+    "edges": [
+     [
+      "air",
+      "abx"
+     ],
+     [
+      "abx",
+      "dent"
+     ],
+     [
+      "dent",
+      "dec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The submandibular space anatomy explains Ludwig spread: infection from lower molar roots passes below or above the mylohyoid line depending on root length, filling sublingual or submandibular compartments first. Communication around the posterior mylohyoid border then unites both spaces. **Odontogenic infection** dominates adult deep neck sepsis overall, so dental examination and imaging belong to the workup of every unexplained neck collection, however good the tonsils look.",
+   "say": "Molar root position relative to muscle attachment decides which floor space fills first. Communication behind the muscle then unites both spaces in established infection. Dental sources dominate adult neck sepsis and need routine exclusion.",
+   "vis": null
+  },
+  {
+   "tx": "The **danger space** between alar and prevertebral fascia offers infection a frictionless highway from skull base to posterior mediastinum and diaphragm, which is why retropharyngeal sepsis can present with chest signs. Descending necrotising mediastinitis carries high mortality and needs neck plus chest drainage with thoracic surgeons. Chest pain, breathlessness or widened mediastinum after neck infection therefore triggers whole chest imaging without debate.",
+   "say": "A fascial highway gives infection a frictionless route from skull base to posterior chest without barrier. Descending chest infection has high mortality and needs combined neck and chest drainage. Chest symptoms after neck infection require whole chest imaging immediately.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pharyngeal-spaces-and-waldeyer-ring-fig1.webp",
+    "alt": "Throat diagram with constrictor muscles and deep fascial spaces including the retropharyngeal plane.",
+    "caption": "Fascial planes conducting infection downward. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Trismus** across deep neck infections signals pterygoid or masseter irritation and predicts difficult intubation, so anaesthetic planning assumes a compromised airway until proved otherwise. Fibreoptic or awake techniques, senior anaesthetic presence and tracheostomy standby form the safe pattern. Forcing laryngoscopy through spasm risks complete obstruction in a patient who was ventilating adequately moments before, a sequence examiners expect candidates to avoid explicitly.",
+   "say": "Jaw spasm predicts difficult intubation and needs awake airway planning with senior help. Tracheostomy standby provides backup when fibreoptic attempts fail unexpectedly. Forced laryngoscopy risks complete obstruction and needs explicit avoidance.",
+   "vis": {
+    "kind": "table",
+    "title": "Airway planning in deep neck infection",
+    "cols": [
+     "Risk feature",
+     "Planning response"
+    ],
+    "rows": [
+     [
+      "Trismus",
+      "Awake fibreoptic technique"
+     ],
+     [
+      "Floor of mouth raised",
+      "Consider awake tracheostomy"
+     ],
+     [
+      "Stridor present",
+      "Senior anaesthetist, theatre setting"
+     ],
+     [
+      "Descending spread",
+      "Thoracic team availability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **carotid sheath** contents, carotid artery, internal jugular vein and vagus nerve, are the structures deep neck infection must never reach untreated. Lemierre type thrombophlebitis, carotid blowout and vagal dysfunction mark sheath invasion with grave prognosis. New Horner syndrome, cranial nerve deficits or sentinel bleeding in a neck abscess patient therefore escalates care to vascular imaging and theatre immediately.",
+   "say": "Artery, vein and vagus nerve inside the sheath need protection from spreading infection. Venous thrombosis with arterial erosion indicates sheath invasion with grave prognosis. Nerve deficits or sentinel bleeding require vascular imaging and theatre.",
+   "vis": null
+  },
+  {
+   "tx": "Source control closes every deep neck pathway: drain the collection, extract the tooth, remove the tonsil focus and sample pus for aerobic, anaerobic and mycobacterial studies. Antibiotics cover streptococci, staphylococci and anaerobes initially, then narrow with cultures. **Daily airway review** continues until swelling recedes, because delayed oedema after drainage still obstructs and discharge timing follows the airway, not the calendar.",
+   "say": "Drainage with source removal and full microbiology provides definitive control of deep infection. Initial cover includes anaerobes and narrows with culture results afterwards. Daily airway review continues until swelling recedes safely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical therapy alone",
+     "points": [
+      "Small cellulitis without collection",
+      "Airway wide and stable",
+      "Improving within a day",
+      "Close observation available"
+     ]
+    },
+    "right": {
+     "title": "Drain surgically",
+     "points": [
+      "Imaging proven collection",
+      "Airway narrowing or trismus",
+      "Toxicity or deterioration",
+      "Descending or sheath spread"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Ludwig angina essentials",
+   "b": "Odontogenic cellulitis of submandibular spaces raising tongue and floor of mouth; secure airway first, then antibiotics, dental source removal and decompression."
+  },
+  {
+   "f": "Danger space",
+   "b": "Plane between alar and prevertebral fascia from skull base to posterior mediastinum; route for descending mediastinitis."
+  },
+  {
+   "f": "Chronic retropharyngeal abscess",
+   "b": "Tuberculous, from cervical Pott spine; antituberculous therapy and spine care, not drainage alone."
+  }
+ ],
+ "keys": [
+  "Airway security outranks drainage in deep neck infection",
+  "Trismus predicts difficult intubation",
+  "Chest signs after neck infection mean descending spread until disproved"
+ ]
+}
