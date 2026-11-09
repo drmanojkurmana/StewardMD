@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "id": "cm-hiv-sti-hiv",
+ "subject": "community-medicine",
+ "module": "cm-hiv-sti",
+ "title": "HIV and STI Control: NACO Strategies, Syndromic Kits and Testing",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "HIV transmission and natural history",
+   "tx": "The retrovirus causing **human immunodeficiency virus infection** specifically targets CD4 positive T helper lymphocytes and macrophages via its gp120 surface envelope glycoprotein, integrating proviral DNA into host chromosomes. Spread predominantly through unprotected heterosexual contact in India, as well as via infected blood products, contaminated needles and vertical mother-to-child transmission, unchecked viral replication drives progressive immune depletion leading to opportunistic infections.",
+   "say": "HIV binds to CD4 T cells and integrates into host DNA. Unchecked viral replication slowly depletes the immune system, leading to life-threatening opportunistic infections and AIDS.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-aids-fig1.webp",
+    "alt": "Chart showing HIV viral load and CD4 T-cell count progression across acute, latent and symptomatic stages",
+    "caption": "HIV progression: Plasma viral load spikes and CD4 T-cell decline from acute infection to clinical AIDS. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "The diagnostic window period and testing strategy",
+   "tx": "Following initial viral exposure, patients enter the **serological window period**, spanning roughly two to twelve weeks, during which high viral replication occurs despite negative enzyme-linked immunosorbent antibody assays. Modern fourth-generation screening tests combine p24 antigen detection with antibody assays to narrow this window; national guidelines mandate three distinct rapid tests using different antigens or principles before delivering a positive HIV diagnosis.",
+   "say": "During the first two to twelve weeks after exposure, antibody tests can remain negative despite high viral replication. Confirming a diagnosis requires three different rapid test kits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Initial exposure and acute viraemia"},
+     {"id": "b", "label": "2 to 12 week window period"},
+     {"id": "c", "label": "p24 antigen detection at 2 to 3 weeks"},
+     {"id": "d", "label": "Three sequential reactive rapid tests"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "National AIDS Control Organisation and ICTC services",
+   "tx": "India coordinates its national response through the **National AIDS Control Organisation**, operating under successive phases of the National AIDS Control Programme. NACO establishes Integrated Counselling and Testing Centres across district hospitals and community health centres to provide confidential pre-test counselling, informed consent, voluntary blood testing, and post-test counselling, seamlessly linking all newly identified positive individuals directly to antiretroviral treatment centres.",
+   "say": "The National AIDS Control Organisation runs confidential testing and counselling centres across the country. Patients receive informed consent, testing, and direct linkage to free treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Service center", "Key programmatic function", "Target population served"],
+    "rows": [
+     ["ICTC", "Integrated counselling and voluntary rapid testing", "General community and referred suspects"],
+     ["PPTCT", "Prevention of parent-to-child transmission", "All pregnant women attending antenatal clinics"],
+     ["ART Centre", "Free lifetime antiretroviral dispensing and monitoring", "All confirmed HIV-positive individuals"],
+     ["Suraksha Clinic", "Free syndromic STI management and counselling", "High-risk groups and symptomatic patients"]
+    ]
+   }
+  },
+  {
+   "title": "Antiretroviral therapy and viral load suppression",
+   "tx": "Under the universal test and treat policy, every individual diagnosed with HIV is immediately initiated on **antiretroviral therapy initiation** regardless of CD4 cell count or clinical staging. The standard first-line adult fixed-dose regimen pairs dolutegravir with tenofovir and lamivudine (TLD), achieving rapid plasma viral load suppression below one thousand copies per millilitre, restoring host immune competence and preventing secondary sexual transmission.",
+   "say": "Under the test and treat policy, everyone diagnosed with HIV starts medicine immediately. The standard daily tablet combines dolutegravir, tenofovir and lamivudine, driving viral load to zero.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-aids-fig2.webp",
+    "alt": "Diagram illustrating sites of antiretroviral drug action including reverse transcriptase, integrase and protease inhibitors",
+    "caption": "HIV life cycle and drug targets: Reverse transcriptase inhibitors, integrase inhibitors and protease blockers. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Prevention of parent-to-child transmission",
+   "tx": "Eliminating vertical paediatric infection relies on the **PPTCT national guidelines**, which screen every pregnant woman during her first antenatal visit. An HIV-positive mother is immediately initiated on lifelong triple-drug antiretroviral therapy throughout pregnancy, delivery and breastfeeding, while her newborn receives daily oral nevirapine prophylaxis for six to twelve weeks, with early infant diagnosis performed by dried blood spot PCR at six weeks.",
+   "say": "Every pregnant woman is tested for HIV at her first clinic visit. Starting lifelong therapy in the mother and giving protective syrup to the newborn prevents transmission to the baby.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Universal antenatal HIV screening"},
+     {"id": "b", "label": "Immediate maternal triple-drug ART"},
+     {"id": "c", "label": "Oral nevirapine syrup for newborn for 6 weeks"},
+     {"id": "d", "label": "Dried blood spot DNA-PCR testing at 6 weeks"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Global 95-95-95 elimination targets",
+   "tx": "To end the AIDS epidemic by 2030, national strategic plans adopt the UNAIDS **fast-track elimination targets**, aiming for ninety-five percent of all people living with HIV to know their status, ninety-five percent of those diagnosed to receive sustained antiretroviral therapy, and ninety-five percent of people on treatment to achieve durable viral suppression, embodying the proven principle that undetectable viral load equals untransmittable virus.",
+   "say": "The global goal is for ninety-five percent of infected people to know their status, ninety-five percent to be on treatment, and ninety-five percent to achieve undetectable viral loads.",
+   "vis": {
+    "kind": "table",
+    "cols": ["95-95-95 Target", "Core objective", "Operational strategy"],
+    "rows": [
+     ["First 95%", "Diagnose 95% of all people living with HIV", "Expanded community testing and self-testing kits"],
+     ["Second 95%", "Initiate 95% of diagnosed cases on ART", "Universal test and treat without CD4 thresholds"],
+     ["Third 95%", "Achieve viral suppression in 95% on ART", "Adherence counseling and viral load monitoring"]
+    ]
+   }
+  },
+  {
+   "title": "Targeted interventions for high-risk groups",
+   "tx": "Because the epidemic in India is concentrated in specific subpopulations, NACO implements focused **targeted intervention projects** managed by non-governmental organisations. These projects serve female sex workers, men who have sex with men, transgender persons, and people who inject drugs, providing free condom distribution, clean needle-syringe exchanges, opioid substitution therapy with buprenorphine, and routine screening for sexually transmitted infections.",
+   "say": "Targeted projects serve sex workers, men who have sex with men and people who inject drugs. Interventions provide free condoms, needle exchanges, opioid substitution and routine health checks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Mapping high-risk community networks"},
+     {"id": "b", "label": "Peer-led education and condom distribution"},
+     {"id": "c", "label": "Needle exchange and opioid substitution"},
+     {"id": "d", "label": "Quarterly STI screening at Suraksha clinics"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Syndromic management and STI kit colour coding",
+   "tx": "At designated public Suraksha clinics, clinicians deploy the standardized **syndromic management protocol** for sexually transmitted infections, diagnosing clinical syndromes and dispensing pre-packaged colour-coded drug kits at the initial visit without awaiting laboratory culture. For example, Kit 1 (grey) treats urethral discharge, Kit 2 (green) treats vaginitis, and Kits 5, 6 and 7 treat genital ulcer diseases using fixed oral antimicrobial combinations.",
+   "say": "Suraksha clinics treat sexually transmitted infections using colour-coded medicine kits based on symptoms. Pre-packaged kits treat urethral discharge, vaginal discharge and ulcers on the very first visit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Kit Colour", "Syndrome treated", "Medicines contained in blister pack"],
+    "rows": [
+     ["Kit 1 (Grey)", "Urethral / Cervical discharge", "Azithromycin 1 g oral + Cefixime 400 mg oral"],
+     ["Kit 2 (Green)", "Vaginitis / Trichomoniasis", "Secnidazole 2 g oral + Fluconazole 150 mg oral"],
+     ["Kit 5 (Red)", "Genital ulcer (herpetic)", "Acyclovir 400 mg three times daily for 7 days"],
+     ["Kit 6 (Yellow)", "Genital ulcer (syphilis + chancroid)", "Benzathine penicillin 2.4 MU IM + Azithromycin 1 g"],
+     ["Kit 7 (Black)", "Genital ulcer (penicillin-allergic)", "Doxycycline 100 mg twice daily + Azithromycin 1 g"]
+    ]
+   }
+  },
+  {
+   "title": "Syphilis screening and blood safety mandates",
+   "tx": "To prevent congenital syphilis and transfusion transmission, public health centres perform **antenatal syphilis screening** using non-treponemal tests like the Venereal Disease Research Laboratory (VDRL) or rapid plasma reagin assay, treating reactive mothers with benzathine penicillin G. Concurrently, national blood safety regulations mandate voluntary non-remunerated donation and universal testing of every blood unit for HIV, hepatitis B, hepatitis C, syphilis and malaria.",
+   "say": "All pregnant mothers are screened for syphilis with a VDRL blood test and treated with penicillin. Every donated blood unit is tested for HIV, hepatitis, syphilis and malaria before use.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Syphilis control in pregnancy",
+     "points": ["Universal VDRL / RPR screening", "Single IM benzathine penicillin 2.4 MU", "Prevents stillbirth and congenital syphilis"]
+    },
+    "right": {
+     "title": "Blood transfusion safety",
+     "points": ["100% voluntary non-remunerated donors", "Mandatory screening for 5 blood pathogens", "Strict licensing of blood bank centres"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
