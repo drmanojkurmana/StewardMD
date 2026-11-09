@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Orientia tsutsugamushi, Eschar and Weil-Felix Testing",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Orientia tsutsugamushi** differs from Rickettsia by lacking classic lipopolysaccharide and peptidoglycan architecture, yet it likewise lives intracellularly and injures endothelium. It has multiple antigenic strains, limiting cross protection. Humans acquire it through chigger bites while working or travelling through scrub vegetation. Rodents are important hosts for mites, but the mite itself can maintain the organism transovarially.",
+      "say": "Orientia is the mite borne endothelial pathogen behind scrub typhus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rickettsial-diseases-fig1.webp",
+        "alt": "Rickettsial disease clues with eschars and vector associated rash",
+        "caption": "Eschar and rash patterns help separate scrub typhus from other febrile illnesses."
+      }
+    },
+    {
+      "tx": "An **eschar** begins as a papule at the chigger bite, ulcerates and forms a dark crust with an erythematous halo. It may be hidden in the groin, axilla, inframammary fold, waistline or genital area, so a complete skin examination matters in undifferentiated fever. The eschar is both a diagnostic clue and the highest-yield specimen site for PCR before antibiotics sterilise the lesion.",
+      "say": "Search hidden folds for an eschar; absence after a quick glance does not exclude scrub typhus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where to search",
+          "points": [
+            "Groin and perineum",
+            "Axilla and under breasts",
+            "Waistband and neck",
+            "Behind ears and within hairline"
+          ]
+        },
+        "right": {
+          "title": "Sample value",
+          "points": [
+            "Eschar swab or crust for PCR",
+            "Higher yield than blood early",
+            "Can remain positive after blood PCR falls",
+            "Document site before cleaning aggressively"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Weil Felix test** detects cross reactive antibodies that agglutinate certain Proteus strains. OXK reactivity is associated with scrub typhus, OX19 with typhus group rickettsiae, and OX2 mainly with spotted fever group patterns. It is inexpensive but has poor sensitivity and specificity, cross reacts with Proteus urinary infection and other conditions, and should not be treated as a rule out test.",
+      "say": "Weil Felix patterns are historical clues, not precise proof of a rickettsial species.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical patterns",
+          "points": [
+            "OXK predominant in scrub typhus",
+            "OX19 predominant in epidemic and murine typhus",
+            "OX2 often accompanies spotted fever",
+            "Patterns overlap and vary by timing"
+          ]
+        },
+        "right": {
+          "title": "Limitations",
+          "points": [
+            "False negative early in illness",
+            "False positive with Proteus infection",
+            "Single titre interpretation depends on local background",
+            "Modern IgM ELISA, IFA and PCR perform better"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Scrub typhus can progress to **pneumonitis, meningoencephalitis, hepatitis, acute kidney injury, myocarditis and multiorgan dysfunction**. Thrombocytopenia and transaminitis support systemic endothelial disease but are not specific. Severe presentations need organ support plus a rickettsial active antibiotic. Geographic overlap with leptospirosis, dengue, malaria and typhoid means empirical doxycycline decisions often occur within a broader tropical fever protocol.",
+      "say": "Scrub typhus can be multiorgan disease, not merely a fever with an eschar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Potential complications",
+          "points": [
+            "Interstitial pneumonitis and ARDS",
+            "Aseptic meningitis or encephalitis",
+            "Acute kidney injury",
+            "Shock and disseminated intravascular coagulation"
+          ]
+        },
+        "right": {
+          "title": "Clinical overlap",
+          "points": [
+            "Dengue shares thrombocytopenia and rash",
+            "Leptospirosis adds jaundice and renal injury",
+            "Malaria requires smear or antigen exclusion",
+            "Typhoid has sustained fever and abdominal features"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Doxycycline responsiveness** is supportive but not diagnostic proof because many tropical infections fluctuate and doxycycline also treats leptospirosis and some other bacterial diseases. Azithromycin is an option in pregnancy and in regions or studies with doxycycline reduced response. Rifampicin has been used in selected areas. Persistent fever after forty eight to seventy two hours should trigger a search for complications or a different diagnosis.",
+      "say": "Improvement on doxycycline supports the plan but never proves scrub typhus alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Therapy options",
+          "points": [
+            "Doxycycline is usual first choice",
+            "Azithromycin useful in pregnancy",
+            "Severe disease may require ICU support",
+            "Treat promptly without waiting for paired serology"
+          ]
+        },
+        "right": {
+          "title": "Reassess when",
+          "points": [
+            "Fever persists beyond expected window",
+            "New focal signs emerge",
+            "Laboratory evidence points to another cause",
+            "Abscess, malaria or bacterial sepsis is suspected"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prevention focuses on **avoiding chigger bites** and reducing exposure in mite habitats: protective clothing, repellents, clearing vegetation around camps where feasible, and not sitting or sleeping directly on grass in endemic areas. There is no licensed vaccine. Rodent control without mite control can worsen or fail to interrupt transmission because trombiculid mites maintain Orientia across generations.",
+      "say": "For scrub typhus prevention, the mite is the target, not rodents alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "habitat",
+            "label": "Scrub and grass exposure"
+          },
+          {
+            "id": "barrier",
+            "label": "Clothing and repellent"
+          },
+          {
+            "id": "inspect",
+            "label": "Skin inspection after exposure"
+          },
+          {
+            "id": "early",
+            "label": "Early evaluation for fever or eschar"
+          }
+        ],
+        "edges": [
+          [
+            "habitat",
+            "barrier"
+          ],
+          [
+            "barrier",
+            "inspect"
+          ],
+          [
+            "inspect",
+            "early"
+          ]
+        ]
+      }
+    }
+  ]
+}
