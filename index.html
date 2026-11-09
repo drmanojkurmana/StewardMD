@@ -2351,7 +2351,7 @@ window.openExternal = function (u) {
 <!-- Dynamic Island in-app notifications (window.SMD_dynNotify); toast.js and native-push.js route
      through it. Kill switch: localStorage smd_dyn_notify=0. -->
 <script src="/dynamic-notify.js?v=dyn3-unzoom1" defer></script>
-<script src="/toast.js?v=gold363-rm1-pf13-op1-dyn1" defer></script>
+<script src="/toast.js?v=gold363-rm1-pf13-op1-dyn1-gest1" defer></script>
 <script src="/capture-guard.js?v=cg2" defer></script>
 <script src="/native-auth.js?v=gold363" defer></script>
 <!-- OTA update client (window.SMD_OTA) — Phase 2. Native-only; wires the dormant "Software
@@ -2537,21 +2537,21 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/search.css?v=us2-ipad1">
 <script src="/search.js?v=us2-nodash1-kbproto2-kits1-alltools1-neo1-pf1-adultref1-mkai1-mkw1-krd1-problem1" defer></script>
 <script src="/asp-region.js?v=gold363-abg7-r4" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1-energy1-pip1-tokos2-pf14-prep1-nrk1-krd1" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1-energy1-pip1-tokos2-pf14-prep1-nrk1-krd1-gest2" defer></script>
 <!-- Premium motion layer (iOS-like). Each is generic, additive and has its own kill switch
      (localStorage smd_sheet_drag / smd_sheet_depth / smd_view_tx / smd_large_title / smd_pull_refresh /
      smd_picker_haptics / smd_skeletons / smd_peek / smd_live_activity = "0"). smd-spring.js first (shared
      physics); long-press-preview.js before view-transitions.js so a long-press's lifting finger is
      swallowed before a transition could take the click. -->
-<script src="/smd-spring.js?v=pm1" defer></script>
-<script src="/sheet-drag.js?v=pm1" defer></script>
+<script src="/smd-spring.js?v=pm1-gest2" defer></script>
+<script src="/sheet-drag.js?v=pm1-gest2" defer></script>
 <script src="/ipad-native.js?v=ipn1" defer></script>
-<script src="/long-press-preview.js?v=pm1" defer></script>
+<script src="/long-press-preview.js?v=pm1-gest1" defer></script>
 <script src="/view-transitions.js?v=pm2" defer></script>
 <script src="/smd-motion.js?v=sm2" defer></script>
 <script src="/page-motion.js?v=pgm4" defer></script>
 <script src="/large-title.js?v=pm1" defer></script>
-<script src="/pull-refresh.js?v=pm2" defer></script>
+<script src="/pull-refresh.js?v=pm2-gest2" defer></script>
 <script src="/picker-haptics.js?v=pm1" defer></script>
 <script src="/skeletons.js?v=pm1" defer></script>
 <script src="/live-activities.js?v=pm1" defer></script>
@@ -2560,9 +2560,9 @@ window.openExternal = function (u) {
      smd_blur_up / smd_launch_morph / smd_sound_module = "0". sound.js is OFF until enabled in Settings (smd_sound=1). -->
 <script src="/sound.js?v=pm3" defer></script>
 <script src="/undo.js?v=pm2" defer></script>
-<script src="/swipe-actions.js?v=pm2" defer></script>
+<script src="/swipe-actions.js?v=pm2-gest2" defer></script>
 <script src="/tab-bar.js?v=pm4" defer></script>
-<script src="/az-scrubber.js?v=pm2-ipad1-fold1" defer></script>
+<script src="/az-scrubber.js?v=pm2-ipad1-fold1-gest2" defer></script>
 <script src="/keyboard-aware.js?v=pm2" defer></script>
 <script src="/blur-up.js?v=pm2" defer></script>
 <script src="/launch-morph.js?v=pm2" defer></script>
@@ -3324,7 +3324,7 @@ window.openExternal = function (u) {
 <script src="/tokos-loader.js?v=tok12" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
-<script src="/prep-loader.js?v=prep127" defer></script>
+<script src="/prep-loader.js?v=prep130" defer></script>
 <!-- Anaesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk11" defer></script>
 <!-- Kardia (Echo + ECG learning): only the loader at boot; the engine and Kardia files load on first open (kardia-loader.js).
