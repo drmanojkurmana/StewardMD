@@ -6451,11 +6451,11 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | need-m1041-sur-arterial-thoracic-outlet-syndrome.webp (R2) | Gangrene care. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1042-sur-arterial-thoracic-outlet-syndrome.webp (R2) | Neuropathic pain. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1043-sur-burns-silver-sulfadiazine.webp (R2) | Early excision. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m1044-sur-colon-benign-diverticular-disease.webp (R2) | Colonic adenocarcinoma ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1044-sur-colon-benign-diverticular-disease.webp (R2) | Colonic adenocarcinoma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1046-sur-colorectal-cancer-amsterdam-criteria.webp (R2) | Anterior resection. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1048-sur-gallbladder-cholelithiasis.webp (R2) | Ultrasound. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1049-sur-lymphatic-primary-lymphoedema.webp (R2) | Filarial lymphoedema. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m1051-sur-mis-laparoscopy.webp (R2) | Pneumoperitoneum ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1051-sur-mis-laparoscopy.webp (R2) | Pneumoperitoneum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1052-sur-oesophagus-boerhaave-syndrome.webp (R2) | Savary-Gilliard wire-guided dilators. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1053-sur-oesophagus-carcinoma-oesophagus.webp (R2) | Carcinoma of the esophagus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1054-sur-paed-gi-rectal-suction-biopsy.webp (R2) | Rectal suction biopsy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
@@ -6464,7 +6464,7 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | need-m1059-sur-small-bowel-meckel-diverticulum.webp (R2) | Intussusception. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1060-sur-small-bowel-small-bowel-tumours.webp (R2) | Small bowel tumours. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1061-sur-testis-epididymal-cyst.webp (R2) | Seminoma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m1064-sur-uro-congenital-horseshoe-kidney.webp (R2) | Pelviureteric junction obstruction (surgery / ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1064-sur-uro-congenital-horseshoe-kidney.webp (R2) | Pelviureteric junction obstruction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1065-sur-urolithiasis-rirs.webp (R2) | Tamsulosin. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m1066-pat-oral-salivary-adenoid-cystic-carcinoma.webp (R2) | Chest CT or radiograph showing multiple indolent pulmonary metastases from adenoid cystic carcinoma appearing years after primary treatment. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-s81-pgt-caustic-ingestion-foreign-body.webp (R2) | Labelled barium esophagogram or high-resolution manometry panel showing a dilated oesophagus with smooth bird-beak taper and failed lower sphincter relaxation in achalasia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
@@ -6532,20 +6532,20 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | need-m888-pat-acute-inflammation-phagocytosis.webp (R2) | Delayed separation of the umbilical cord in leukocyte adhesion deficiency. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m894-pat-mediators-c5a.webp (R2) | Venular permeability. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m899-ana-abdominal-wall-linea-alba.webp (R2) | Linea alba. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m900-ana-duodenum-pancreas-biliary-duodenal-parts.webp (R2) | Four distinct parts ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m901-ana-heart-pericardial-sinuses.webp (R2) | Serous pericardium ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m902-ana-joints-cartilage-fibrous-joints.webp (R2) | Gomphosis ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m903-ana-liver-portal-falciform-ligament.webp (R2) | Falciform ligament (surgery / x). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m904-ana-liver-portal-falciform-ligament.webp (R2) | Tenth intercostal space ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m900-ana-duodenum-pancreas-biliary-duodenal-parts.webp (R2) | Four distinct parts. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m901-ana-heart-pericardial-sinuses.webp (R2) | Serous pericardium. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m902-ana-joints-cartilage-fibrous-joints.webp (R2) | Gomphosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m903-ana-liver-portal-falciform-ligament.webp (R2) | Falciform ligament. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m904-ana-liver-portal-falciform-ligament.webp (R2) | Tenth intercostal space. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m905-ana-orbit-central-retinal-artery.webp (R2) | Ophthalmic artery. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m907-ana-thigh-hamstrings.webp (R2) | Profunda femoris artery. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m909-der-pigmentary-vitiligo.webp (R2) | Narrowband ultraviolet B. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m910-ent-ear-tumours-glomus-tympanicum.webp (R2) | Glomus tympanicum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m912-ent-rhinitis-polyps-allergic-rhinitis.webp (R2) | Atrophic rhinitis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m914-ent-septum-external-nose-septal-haematoma.webp (R2) | Saddle nose deformity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m915-ent-sinonasal-tumours-inverted-papilloma.webp (R2) | Rhinosporidiosis ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m915-ent-sinonasal-tumours-inverted-papilloma.webp (R2) | Rhinosporidiosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m918-obg-abnormal-labour-face-presentation.webp (R2) | Timely caesarean access. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m921-obg-aph-placenta-praevia.webp (R2) | Praevia accreta link. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m922-obg-cervical-cancer-bethesda-system.webp (R2) | Programme principle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m925-obg-cervical-cancer-vili.webp (R2) | VILI for cervical s). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
-| need-m927-obg-contraception-ulipristal.webp (R2) | Ulipristal acetate ). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m927-obg-contraception-ulipristal.webp (R2) | Ulipristal acetate. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
