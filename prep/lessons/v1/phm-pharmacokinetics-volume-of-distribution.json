@@ -1,0 +1,260 @@
+{
+  "v": 1,
+  "module": "phm-pharmacokinetics",
+  "subject": "pharmacology",
+  "title": "Volume of Distribution, Plasma Protein Binding, and Blood-Brain Barrier Penetration",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The hypothetical liquid volume into which an administered dose of drug must dissolve to achieve a concentration equal to that observed in blood plasma is the **apparent volume of distribution**. Calculated as the total amount of drug in the body divided by the measured plasma drug concentration, this parameter does not correspond to a real physiological anatomical space. It reflects the relative propensity of a drug to remain in the vascular compartment versus sequestering into peripheral tissues.",
+      "say": "Apparent volume of distribution represents the hypothetical fluid volume needed to contain the body dose at measured plasma concentration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low volume of distribution (<5 L)",
+          "points": [
+            "Confined predominantly to vascular plasma",
+            "Large molecules or extensive albumin binding",
+            "Examples include heparin and warfarin",
+            "Readily dialyzable during toxic overdose"
+          ]
+        },
+        "right": {
+          "title": "High volume of distribution (>42 L)",
+          "points": [
+            "Distributes widely into extravascular tissues",
+            "High lipid solubility or avid tissue binding",
+            "Examples include chloroquine and digoxin",
+            "Not removable by conventional hemodialysis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Highly water-soluble, large molecules or drugs extensively bound to circulating albumin remain confined within the plasma volume of roughly three liters, manifesting a **low volume of distribution**. In contrast, highly lipid-soluble drugs like chloroquine exhibit an enormous volume of distribution exceeding thirteen thousand liters due to massive avid sequestration in skeletal muscle, liver, and retinal melanin granules. Chloroquine cannot be removed effectively from the body by hemodialysis during acute overdose.",
+      "say": "Lipid-soluble drugs like chloroquine accumulate massively in tissues, generating distribution volumes exceeding ten thousand liters beyond hemodialysis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmaceutical",
+          "Apparent Vd (L/kg)",
+          "Primary anatomical sequestration site",
+          "Hemodialysis clearance utility"
+        ],
+        "rows": [
+          [
+            "Warfarin",
+            "0.15 L/kg (~10 L)",
+            "Vascular plasma albumin compartment",
+            "Ineffective due to high protein binding"
+          ],
+          [
+            "Gentamicin",
+            "0.25 L/kg (~18 L)",
+            "Extracellular fluid compartment",
+            "Highly effective for acute drug clearance"
+          ],
+          [
+            "Digoxin",
+            "7.0 L/kg (~500 L)",
+            "Cardiac and skeletal muscle tissue",
+            "Completely ineffective due to high tissue binding"
+          ],
+          [
+            "Chloroquine",
+            "200 L/kg (~14,000 L)",
+            "Liver, muscle, and melanin granules",
+            "Completely ineffective in acute poisoning"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following systemic absorption, pharmaceutical molecules in the bloodstream establish a reversible thermodynamic equilibrium between free unbound molecules and those undergoing **plasma protein binding**. Acidic drugs like warfarin, phenylbutazone, and phenytoin bind avidly to circulating human serum albumin. Conversely, basic drugs including lidocaine, propranolol, and quinidine bind predominantly to alpha-1 acid glycoprotein, an acute-phase reactant protein whose plasma concentration surges dramatically during systemic inflammation, myocardial infarction, and trauma.",
+      "say": "Acidic drugs bind serum albumin while basic drugs bind alpha-one acid glycoprotein, which surges during systemic inflammation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Albumin binding",
+          "points": [
+            "Primary binder for acidic pharmaceuticals",
+            "High capacity, moderate affinity binding",
+            "Binds warfarin, NSAIDs, sulfonamides, phenytoin",
+            "Declines in cirrhosis and nephrotic syndrome"
+          ]
+        },
+        "right": {
+          "title": "Alpha-1 acid glycoprotein binding",
+          "points": [
+            "Primary binder for basic pharmaceuticals",
+            "Low capacity, high affinity binding",
+            "Binds lidocaine, propranolol, quinidine",
+            "Surges during acute inflammatory stress"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Only the unbound, dissolved drug molecules dissolved freely in plasma water are capable of crossing vascular capillary endothelia, interacting with cellular pharmacological receptors, undergoing hepatic biotransformation, and undergoing glomerular filtration, representing the **free drug fraction**. When two highly protein-bound drugs are co-administered, displacement of a narrow-index agent like warfarin by sulfonamides transiently doubles the free active concentration, triggering catastrophic hemorrhagic complications before compensatory elimination re-establishes a new equilibrium.",
+      "say": "Only free unbound drug molecules cross membranes to exert therapeutic actions, undergo metabolism, and filter through renal glomeruli.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-gentamicin.webp",
+        "alt": "Gentamicin clinical pharmacokinetics",
+        "caption": "Gentamicin pharmacokinetic profile demonstrating distribution confined primarily to extracellular body water with rapid renal glomerular clearance."
+      }
+    },
+    {
+      "tx": "Central nervous system capillary endothelia possess continuous intercellular zonula occludens tight junctions devoid of fenestrations, fully enveloped by pericytes and astrocytic end-feet, constructing the **blood-brain barrier**. Entry of drugs into the cerebral parenchyma is restricted to small, highly lipid-soluble non-ionized molecules like thiopental, diazepam, and nicotine. Hydrophilic molecules and ionized organic acids are excluded or rapidly expelled back into the systemic circulation by luminal P-glycoprotein efflux transporters.",
+      "say": "Non-fenestrated capillary tight junctions and astrocytic end-feet form the blood-brain barrier, restricting hydrophilic drug penetration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lumen",
+            "label": "Brain capillary blood lumen"
+          },
+          {
+            "id": "tight",
+            "label": "Endothelial zonula occludens tight junctions"
+          },
+          {
+            "id": "efflux",
+            "label": "Luminal P-glycoprotein active efflux pump"
+          },
+          {
+            "id": "glia",
+            "label": "Perivascular astrocytic foot processes"
+          },
+          {
+            "id": "parenchyma",
+            "label": "Neural interstitial parenchyma"
+          }
+        ],
+        "edges": [
+          [
+            "lumen",
+            "tight"
+          ],
+          [
+            "lumen",
+            "efflux"
+          ],
+          [
+            "tight",
+            "glia"
+          ],
+          [
+            "glia",
+            "parenchyma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under normal physiological conditions, third-generation cephalosporins and penicillin G exhibit minimal penetration into cerebrospinal fluid due to low lipid solubility. However, during acute bacterial meningitis, extensive leukocyte infiltration and inflammatory cytokine release disrupt capillary tight junctions, creating marked **meningeal permeability**. This pathological breakdown allows therapeutic bactericidal concentrations of intravenous ceftriaxone and ampicillin to enter the subarachnoid space and eradicate replicating meningeal pathogens.",
+      "say": "Bacterial meningitis disrupts capillary tight junctions, enhancing meningeal permeability and permitting therapeutic ceftriaxone penetration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intact healthy meninges",
+          "points": [
+            "Strict endothelial tight junctions intact",
+            "Penicillin and ceftriaxone penetration <2%",
+            "Active organic acid efflux from CSF",
+            "Hydrophilic antibiotics excluded"
+          ]
+        },
+        "right": {
+          "title": "Inflamed meninges (meningitis)",
+          "points": [
+            "Cytokines loosen endothelial junctions",
+            "CSF drug penetration surges to 10-20%",
+            "Efflux transporter activity suppressed",
+            "Achieves bactericidal CSF antibiotic levels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fetal capillary beds within the syncytiotrophoblast are separated from maternal intervillous maternal blood by a biological interface facilitating **placental transfer**. Lipid-soluble non-ionized drugs cross the placenta rapidly by simple passive diffusion, exposing the developing embryo to potential teratogenesis and fetal toxicity. Thalidomide administered during the first trimester causes severe phocomelia limb reduction defects, whereas heparin, an enormous highly charged polyanion, cannot cross the placental barrier and remains the anticoagulant of choice in pregnancy.",
+      "say": "Lipid-soluble molecules cross the placenta to reach the fetus, whereas large polar polyanions like heparin remain safely excluded.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic agent",
+          "Placental penetration capacity",
+          "Adverse fetal outcome / Teratogenesis",
+          "Safer clinical alternative"
+        ],
+        "rows": [
+          [
+            "Warfarin",
+            "Rapid transfer across syncytiotrophoblast",
+            "Fetal warfarin syndrome and chondrodysplasia",
+            "Low molecular weight heparin"
+          ],
+          [
+            "ACE inhibitors",
+            "Readily permeates placental barrier",
+            "Renal dysgenesis, oligohydramnios, skull hypoplasia",
+            "Labetalol or methyldopa"
+          ],
+          [
+            "Phenytoin",
+            "Rapid passive diffusion",
+            "Fetal hydantoin syndrome and cleft palate",
+            "Levetiracetam or lamotrigine"
+          ],
+          [
+            "Heparin",
+            "Zero transfer (large charged polyanion)",
+            "Completely safe for embryo and fetus",
+            "Primary anticoagulant in pregnancy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The primary clinical utility of the volume of distribution lies in determining the precise priming dose required to achieve an immediate therapeutic plasma target concentration, known as the **loading dose**. The mathematical formula dictates that loading dose equals the apparent volume of distribution multiplied by the desired steady-state plasma concentration, divided by fractional bioavailability. Because clearance plays no role in this initial calculation, patients with renal failure require the identical full loading dose as healthy individuals.",
+      "say": "Loading dose depends solely on volume of distribution and target concentration, requiring full initial doses even in renal failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "target",
+            "label": "Establish target plasma concentration (Css)"
+          },
+          {
+            "id": "multiply",
+            "label": "Multiply by apparent volume of distribution (Vd)"
+          },
+          {
+            "id": "bioavail",
+            "label": "Divide by fractional bioavailability (F)"
+          },
+          {
+            "id": "administer",
+            "label": "Administer full calculated initial loading dose"
+          }
+        ],
+        "edges": [
+          [
+            "target",
+            "multiply"
+          ],
+          [
+            "multiply",
+            "bioavail"
+          ],
+          [
+            "bioavail",
+            "administer"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "id": "psy-antipsychotics-typical-antipsychotics",
+ "subject": "psychiatry",
+ "module": "psy-antipsychotics",
+ "title": "First-Generation Typical Antipsychotics and Clozapine Agranulocytosis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**First-generation typical antipsychotics** operate pharmacologically as high-affinity competitive antagonists at dopamine D2 receptors, particularly within the mesolimbic and nigrostriatal pathways. Antipsychotic efficacy requires occupying at least 65 percent of striatal D2 receptors, while D2 occupancy exceeding 78 percent dramatically triggers extrapyramidal motor side effects.",
+   "say": "Typical antipsychotics block D2 receptors. Efficacy requires sixty-five percent receptor occupancy, while exceeding seventy-eight percent triggers motor side effects.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotic-drugs-psych-fig1.webp",
+    "alt": "First-generation typical antipsychotics versus second-generation atypical multi-receptor binding profiles",
+    "caption": "First-generation typical antipsychotics versus second-generation atypical multi-receptor binding profiles.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**High-potency versus low-potency typicals** divide first-generation agents based on their milligram potency and off-target receptor binding. High-potency agents like haloperidol and fluphenazine bind D2 receptors avidly, producing frequent extrapyramidal symptoms with minimal sedation; low-potency agents like chlorpromazine produce severe sedation and hypotension.",
+   "say": "High-potency typicals like haloperidol cause frequent motor side effects with low sedation. Low-potency agents like chlorpromazine cause severe sedation and hypotension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-Potency Agents (Haloperidol)",
+     "points": [
+      "High D2 receptor affinity (dose 2-20 mg/day)",
+      "Frequent acute dystonias, parkinsonism, akathisia",
+      "Minimal sedation and anticholinergic effects",
+      "Minimal orthostatic alpha-1 hypotension"
+     ]
+    },
+    "right": {
+     "title": "Low-Potency Agents (Chlorpromazine)",
+     "points": [
+      "Low D2 receptor affinity (dose 200-800 mg/day)",
+      "Severe sedation via histamine H1 blockade",
+      "Severe postural hypotension via alpha-1 blockade",
+      "Anticholinergic dry mouth and constipation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chlorpromazine adverse effect spectrum** includes unique organ-specific toxicities resulting from chronic high-dose accumulation in tissue. Long-term treatment induces golden-brown granular deposits in the anterior lens and corneal endothelium, phototoxic dermatitis, and permanent slate-grey or bluish skin discoloration in sun-exposed cutaneous areas.",
+   "say": "Chlorpromazine can cause corneal and lens deposits, sun-induced phototoxic dermatitis, and slate-gray skin pigmentation.",
+   "vis": {
+    "kind": "table",
+    "title": "Unique Low-Potency Complications",
+    "cols": [
+     "Drug",
+     "Unique Toxic Manifestation",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Chlorpromazine",
+      "Corneal and lens granular opacities",
+      "Periodic ophthalmological slit-lamp examination"
+     ],
+     [
+      "Chlorpromazine",
+      "Slate-grey bluish cutaneous pigmentation",
+      "Avoid sunlight exposure; switch to atypical agent"
+     ],
+     [
+      "Thioridazine",
+      "Retinitis pigmentosa (retinal deposits)",
+      "Strict dose ceiling (<800 mg/day) to prevent blindness"
+     ],
+     [
+      "Thioridazine",
+      "Severe QTc prolongation and torsades",
+      "Withdrawn due to fatal ventricular arrhythmias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Atypical antipsychotics pharmacology** is defined by potent antagonism at serotonin 5-HT2A receptors combined with weaker or transient dopamine D2 receptor blockade. 5-HT2A antagonism disinhibits dopamine release in the striatum and prefrontal cortex, significantly reducing extrapyramidal motor symptoms while alleviating primary negative and cognitive schizophrenic deficits.",
+   "say": "Atypical antipsychotics combine 5-HT2A and D2 antagonism, which elevates cortical dopamine to alleviate negative symptoms while preventing motor side effects.",
+   "vis": {
+    "kind": "flow",
+    "title": "Serotonin-Dopamine Antagonism (SDA)",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Atypical agent blocks 5-HT2A receptors on cortical dopamine neurons"
+     },
+     {
+      "id": "n2",
+      "label": "Disinhibition releases dopamine into striatum and frontal cortex"
+     },
+     {
+      "id": "n3",
+      "label": "Striatal dopamine competes with drug, maintaining D2 occupancy <78%"
+     },
+     {
+      "id": "n4",
+      "label": "Negative symptoms improve while extrapyramidal motor side effects are avoided"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clozapine as the prototypic atypical** demonstrates high affinity for D4, 5-HT2A, alpha-1, and muscarinic receptors, but negligible affinity for striatal D2 receptors, never inducing tardive dyskinesia or hyperprolactinaemia. Clozapine is reserved strictly for treatment-resistant schizophrenia and reducing suicide in psychosis.",
+   "say": "Clozapine targets D4 and 5-HT2A receptors with minimal D2 affinity. It is the gold standard for treatment resistance, carrying no tardive dyskinesia risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Clozapine Pharmacological Hierarchy",
+    "cols": [
+     "Receptor Target",
+     "Binding Affinity",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Dopamine D4",
+      "Very high affinity",
+      "Potent antipsychotic efficacy in refractory schizophrenia"
+     ],
+     [
+      "Serotonin 5-HT2A",
+      "High affinity",
+      "Suppresses motor EPS; improves mood and cognition"
+     ],
+     [
+      "Dopamine D2",
+      "Very low affinity (<60% occupancy)",
+      "Zero extrapyramidal symptoms; zero prolactin elevation"
+     ],
+     [
+      "Muscarinic M1/M3/M4",
+      "Agonist at M4, antagonist M1/M3",
+      "Nocturnal sialorrhoea paired with severe constipation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clozapine-induced agranulocytosis** represents a severe, idiosyncratic immunological reaction occurring in 0.8 percent of treated patients, characterized by an absolute neutrophil count dropping below 500 per microliter. Peak incidence occurs within the initial 18 weeks of starting therapy, mandating strict regulatory haematological registries.",
+   "say": "Clozapine causes agranulocytosis in under one percent of patients, peaking in the first eighteen weeks and requiring mandatory blood surveillance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+    "alt": "Clozapine receptor binding affinities, agranulocytosis monitoring, and adverse effect profile",
+    "caption": "Clozapine receptor binding affinities, agranulocytosis monitoring, and adverse effect profile.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Haematological surveillance protocol for clozapine** establishes mandatory baseline absolute neutrophil counts (ANC >=1500/mcL in general populations, >=1000/mcL in benign ethnic neutropenia). Monitoring requires weekly blood draws for the first 18 weeks, fortnightly blood draws from weeks 19 to 52, and monthly tests thereafter.",
+   "say": "Blood surveillance for clozapine requires weekly neutrophil counts for eighteen weeks, fortnightly until one year, and monthly thereafter.",
+   "vis": {
+    "kind": "table",
+    "title": "Clozapine ANC Action Protocol",
+    "cols": [
+     "Absolute Neutrophil Count",
+     "Haematological Tier",
+     "Action Mandate"
+    ],
+    "rows": [
+     [
+      ">= 1500 /mcL",
+      "Green zone (Normal)",
+      "Continue standard dispensing and monitoring protocol"
+     ],
+     [
+      "1000 to 1499 /mcL",
+      "Amber zone (Mild)",
+      "Continue clozapine; test blood counts 3 times weekly"
+     ],
+     [
+      "500 to 999 /mcL",
+      "Red zone (Moderate)",
+      "Stop clozapine immediately; daily haematology monitoring"
+     ],
+     [
+      "< 500 /mcL",
+      "Agranulocytosis",
+      "Permanently discontinue clozapine; admit to protective isolation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Medical management of clozapine agranulocytosis** mandates immediate, permanent cessation of clozapine, protective reverse barrier nursing isolation, and daily absolute neutrophil count monitoring. Granulocyte colony-stimulating factor (G-CSF / filgrastim) is administered subcutaneously to stimulate bone marrow myeloid progenitor recovery until neutrophils normalize.",
+   "say": "Managing agranulocytosis demands immediate permanent drug cessation, protective isolation, and filgrastim injections until neutrophil counts recover.",
+   "vis": {
+    "kind": "flow",
+    "title": "Agranulocytosis Management Pathway",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Detect ANC < 500 /mcL or febrile sore throat in clozapine patient"
+     },
+     {
+      "id": "n2",
+      "label": "Discontinue clozapine permanently; never re-challenge"
+     },
+     {
+      "id": "n3",
+      "label": "Admit to isolated protective room; initiate broad-spectrum IV antibiotics"
+     },
+     {
+      "id": "n4",
+      "label": "Administer G-CSF (filgrastim) daily until ANC exceeds 1500 /mcL"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
