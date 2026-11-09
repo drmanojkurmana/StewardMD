@@ -138,7 +138,7 @@
     p = { row: row, acts: acts, x: e.clientX, y: e.clientY };
     p.t1 = setTimeout(function () {   // the sink: tells the finger something will happen
       if (!p || reduced()) return;
-      p.row.style.transition = "transform " + (HOLD_MS - 150) + "ms cubic-bezier(.4,0,.2,1)"; p.row.style.transform = "scale(.97)";
+      p.row.style.transition = "transform " + (HOLD_MS - 150) + "ms linear"; p.row.style.transform = "scale(.97)";
     }, 150);
     p.t2 = setTimeout(function () {
       if (!p) return;
