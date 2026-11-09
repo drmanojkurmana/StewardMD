@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-obstructive-restrictive",
+  "subject": "pathology",
+  "title": "Emphysema: Centriacinar and Panacinar Patterns, Alpha-1 Antitrypsin, and Chronic Bronchitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Emphysema destroys alveolar walls and elastic recoil without obvious fibrosis, enlarging airspaces permanently until the lung cannot empty, trapping air behind prematurely collapsing airways on expiration. Protease excess over antiprotease protection drives the destruction: **emphysema as protease-antiprotease imbalance**. Diffusing capacity falls as alveolar capillary surface disappears, distinguishing emphysema from chronic bronchitis where it stays better preserved.",
+      "say": "Emphysema is permanent airspace enlargement from wall destruction; recoil lost, air trapped, breathlessness follows.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Smoke recruits neutrophils and macrophages"
+          },
+          {
+            "id": "b",
+            "label": "Elastases overwhelm antiprotease defence"
+          },
+          {
+            "id": "c",
+            "label": "Alveolar walls and capillaries destroyed"
+          },
+          {
+            "id": "d",
+            "label": "Recoil lost, air trapping, hyperinflation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Centriacinar emphysema attacks respiratory bronchioles at lobule centres of upper lobes in smokers, sparing distal alveoli initially, while panacinar disease erases whole acini uniformly in lower lobes. Distribution separates them: **centriacinar versus panacinar emphysema patterns**. Paraseptal emphysema, the third recognised pattern, lines pleura and fissures and predisposes younger patients to spontaneous pneumothorax.",
+      "say": "Smokers destroy lobule centres up top; alpha-1 deficiency erases whole acini down below.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Centriacinar",
+          "points": [
+            "Respiratory bronchioles, upper lobes",
+            "Smoking related, commonest",
+            "Distal alveoli spared early"
+          ]
+        },
+        "right": {
+          "title": "Panacinar",
+          "points": [
+            "Whole acinus, lower lobes",
+            "Alpha-1 antitrypsin deficiency",
+            "Uniform airspace enlargement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Alpha-1 antitrypsin normally shields lung elastin from neutrophil elastase, and its severe Z allele deficiency leaves young lungs defenceless while misfolded protein simultaneously injures hepatocytes into cirrhosis. One protein, two organs: **alpha-1 antitrypsin deficiency, lung and liver disease**. The PiZZ genotype carries the highest risk, and augmentation therapy uses pooled human alpha-1 protein in carefully selected PiZZ patients.",
+      "say": "Alpha-1 deficiency destroys young lungs for lack of protection and livers from trapped misfolded protein.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alpha1-antitrypsin-lung-disease-fig1.webp",
+        "alt": "Alpha-1 antitrypsin deficiency emphysema patterns",
+        "caption": "Alpha-1 antitrypsin deficiency emphysema patterns with panacinar lower lobe destruction."
+      }
+    },
+    {
+      "tx": "Serum protein electrophoresis betrays alpha-1 deficiency through a shrunken alpha-1 globulin peak, prompting level and Pi genotype testing in early emphysema, family disease, or unexplained cirrhosis. The missing peak performs **alpha-1 antitrypsin screening on electrophoresis**. Testing suits anyone whose emphysema begins before age 45 years, shows basal predominance, or arrives alongside unexplained liver disease.",
+      "say": "A missing alpha-1 peak on electrophoresis should trigger level and genotype testing in young emphysema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-phase-proteins-and-serum-electrophoresis-fig1.webp",
+        "alt": "Serum electrophoresis patterns and pathology",
+        "caption": "Serum electrophoresis patterns, where a reduced alpha-1 band betrays antitrypsin deficiency."
+      }
+    },
+    {
+      "tx": "Chronic bronchitis is defined clinically, productive cough for three months in two successive years, produced by goblet cell hyperplasia and submucosal gland hypertrophy flooding airways with mucus. Its bedside definition needs no scanner: **chronic bronchitis, clinical definition**. The Reid index compares gland layer thickness with total bronchial wall thickness, and values above 0.5 mark submucosal gland hypertrophy.",
+      "say": "Three months of productive cough in two successive years defines chronic bronchitis clinically.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chronic bronchitis dominant",
+          "points": [
+            "Productive cough definition met",
+            "Blue bloater: cyanosis, oedema tendency",
+            "Airway mucus and infection episodes"
+          ]
+        },
+        "right": {
+          "title": "Emphysema dominant",
+          "points": [
+            "Breathlessness out of proportion",
+            "Pink puffer: thin, pursed lips",
+            "Hyperinflation, quiet chest"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pink puffers stay pink by hyperventilating through destroyed lungs, thin and barrel chested, while blue bloaters hypoventilate behind mucus, becoming cyanosed, carbon dioxide retaining, and right heart strained. Those poles remain **emphysema and bronchitis clinical phenotypes**. Cor pulmonale announces itself through raised jugular pressure, hepatic congestion, and ankle oedema once pulmonary pressures climb high enough.",
+      "say": "Pink and puffing versus blue and bloated: physiology paints the two COPD poles at the bedside.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Emphysema dominant",
+          "Bronchitis dominant"
+        ],
+        "rows": [
+          [
+            "Dyspnoea",
+            "Severe, pursed lip breathing",
+            "Moderate, cough dominant"
+          ],
+          [
+            "Colour and gases",
+            "Pink, near normal gases until late",
+            "Cyanosis, CO2 retention earlier"
+          ],
+          [
+            "Build and chest",
+            "Thin, barrel chest, quiet sounds",
+            "Oedema tendency, rhonchi"
+          ],
+          [
+            "Cor pulmonale",
+            "Late",
+            "Earlier and commoner"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Smoking cessation is the only intervention proven to slow emphysema's forced expiratory decline toward normal ageing, making every consultation a cessation intervention beside inhalers and rehabilitation. That primacy defines **smoking cessation in obstructive lung disease**. Sustained quitting also cuts exacerbation frequency and lung cancer risk, benefits no inhaler regimen has matched in trials.",
+      "say": "Only quitting smoking bends the emphysema decline curve; inhalers ease symptoms beside that fact.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Smoking status asked at every visit"
+          },
+          {
+            "id": "b",
+            "label": "Pharmacotherapy plus behavioural support"
+          },
+          {
+            "id": "c",
+            "label": "Spirometry stages obstruction"
+          },
+          {
+            "id": "d",
+            "label": "Inhalers, rehabilitation, vaccines layered"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bullae, giant emphysematous spaces, can rupture into pneumothorax or compress salvageable lung enough for surgical or bronchoscopic volume reduction in selected upper lobe disease. Selection governs **lung volume reduction in severe emphysema**. Patients whose forced expiratory volume and diffusing capacity both sit at or below 20 percent predicted face prohibitive operative risk.",
+      "say": "Giant bullae and upper lobe disease select the few who gain from volume reduction procedures.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Problem",
+          "Assessment",
+          "Option"
+        ],
+        "rows": [
+          [
+            "Giant bulla with compression",
+            "CT distribution, lung function",
+            "Bullectomy considered"
+          ],
+          [
+            "Upper lobe emphysema, low exercise",
+            "Rehabilitation performance",
+            "Volume reduction evaluation"
+          ],
+          [
+            "Recurrent pneumothorax",
+            "Imaging, smoking status",
+            "Pleural procedures, cessation"
+          ],
+          [
+            "Alpha-1 severe deficiency",
+            "Genotype PiZZ confirmed",
+            "Augmentation therapy selected centres"
+          ]
+        ]
+      }
+    }
+  ]
+}
