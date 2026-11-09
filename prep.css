@@ -942,6 +942,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
    an opaque plate (::before) as wide as the column plus the body's 16px gutters, so it never adds sideways scroll and a hairline top border, so no text ever shows under or around the button, and
    the last explanation line scrolls clear of it (the 14px gap above the row, plus its own padding). */
 .pn-root .pn-run:has(> .pn-qw > .pn-fb + .pn-navrow) { padding-bottom: 0; }
+.pn-root .pn-qw > .pn-fb + .pn-navrow > .pa-ask { display: none; }   /* the bar's Ask MaiK is for iPad landscape; elsewhere it stays in the explanation */
 .pn-root .pn-qw > .pn-fb + .pn-navrow { position: sticky; bottom: 0; z-index: 2; margin-top: 2px; padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)); }
 .pn-root .pn-qw > .pn-fb button { scroll-margin-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }   /* a focused chip clears the sticky row */
 .pn-root .pn-qw > .pn-fb + .pn-navrow::before { content: ""; position: absolute; inset: 0 -16px; z-index: -1; pointer-events: none; background: var(--pn-bg); border-top: 1px solid var(--pn-line); }
@@ -1151,6 +1152,12 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-cap > .pn-wrap > .pn-chip { min-height: 44px; height: auto; padding: 6px 10px; white-space: normal; text-align: center; justify-content: center; line-height: 1.25; border-color: transparent; border-radius: 10px; background: transparent; box-shadow: none; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-cap > .pn-wrap > .pn-chip.on { background: var(--pn-card); color: var(--pn-text); box-shadow: var(--pn-elev); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { margin-bottom: 0; }   /* the footer row ends flush with the scroller */
+  /* Answered (owner 2026-11-09): question and options on the left, the explanation fills the right, buttons in a full-width bar. */
+  .pn-root .pn-run:not(.pn-battle) .pn-qw:has(> .pn-fb) > :is(.pn-opts, .ky-cap) { float: left; clear: left; width: calc(var(--pn-ql) - 14px); margin-left: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw:has(> .pn-fb) > .pn-q { position: static; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { clear: both; margin-left: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow > .pa-ask { display: inline-flex; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb > .pa-ask { display: none; }
 }
 
 /* Landscape iPad lesson: an image step puts the figure beside the text, sized to stay above the bar. Tables, flows and
