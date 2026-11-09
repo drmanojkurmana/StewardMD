@@ -1,0 +1,219 @@
+{
+  "v": 1,
+  "module": "phy-acid-base",
+  "subject": "physiology",
+  "title": "Metabolic Alkalosis, Respiratory Disorders, and the Anion Gap",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Elevation of arterial plasma bicarbonate above twenty-six milliequivalents per litre accompanied by an arterial pH exceeding seven point four five defines clinical **metabolic alkalosis**. It arises from excessive hydrogen ion loss (vomiting, nasogastric suction), exogenous alkali administration, or profound volume contraction with secondary hyperaldosteronism.",
+      "say": "Metabolic alkalosis is defined by elevated bicarbonate and arterial pH, caused by vomiting, alkali ingestion, or volume depletion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Saline-Responsive Alkalosis",
+          "points": [
+            "Urinary chloride concentration < 20 mEq/L",
+            "Caused by vomiting, gastric suction, or remote diuretic use",
+            "Maintained by extracellular volume depletion and secondary aldosteronism",
+            "Promptly corrects with intravenous isotonic sodium chloride"
+          ]
+        },
+        "right": {
+          "title": "Saline-Resistant Alkalosis",
+          "points": [
+            "Urinary chloride concentration > 20 mEq/L",
+            "Caused by primary hyperaldosteronism (Conn), Cushing, or Bartter/Gitelman",
+            "Normal or expanded extracellular volume with hypertension",
+            "Refractory to saline infusion; requires mineralocorticoid blockade"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Respiratory compensation for metabolic alkalosis involves hypoventilation to retain carbon dioxide. According to clinical compensation rules, for every one milliequivalent per litre rise in plasma bicarbonate, arterial carbon dioxide tension rises by approximately zero point seven millimetres of mercury, defined by **expected respiratory compensation**.",
+      "say": "Respiratory compensation for metabolic alkalosis raises carbon dioxide by zero point seven millimetres of mercury per unit of bicarbonate.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary Disorder",
+          "Primary Disturbance",
+          "Compensatory Response",
+          "Expected Compensation Formula"
+        ],
+        "rows": [
+          [
+            "Metabolic Acidosis",
+            "Decreased [HCO3-]",
+            "Hyperventilation (low PaCO2)",
+            "PaCO2 = 1.5 × [HCO3-] + 8 ± 2 (Winter formula)"
+          ],
+          [
+            "Metabolic Alkalosis",
+            "Elevated [HCO3-]",
+            "Hypoventilation (high PaCO2)",
+            "Δ PaCO2 = 0.7 × Δ [HCO3-] (limited by hypoxia)"
+          ],
+          [
+            "Acute Respiratory Acidosis",
+            "Elevated PaCO2",
+            "Cellular buffering",
+            "Δ [HCO3-] = 1 mEq/L per 10 mmHg rise in PaCO2"
+          ],
+          [
+            "Chronic Respiratory Acidosis",
+            "Elevated PaCO2",
+            "Renal retention",
+            "Δ [HCO3-] = 3.5 mEq/L per 10 mmHg rise in PaCO2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alveolar hypoventilation caused by central nervous system depression, chronic obstructive pulmonary disease, or neuromuscular chest wall paralysis produces acute or chronic **respiratory acidosis**. Rising carbon dioxide drives carbonic acid formation, lowering arterial pH; renal compensation reabsorbs bicarbonate and excretes ammonium over several days.",
+      "say": "Alveolar hypoventilation produces respiratory acidosis, where high carbon dioxide lowers pH until renal bicarbonate retention compensates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypovent",
+            "label": "Alveolar Hypoventilation (Opioids, Severe COPD, Kyphoscoliosis)"
+          },
+          {
+            "id": "paco2_rise",
+            "label": "Arterial Carbon Dioxide Rises (PaCO2 > 45 mmHg), Forming Carbonic Acid"
+          },
+          {
+            "id": "ph_drop",
+            "label": "Acute Unbuffered Drop in Arterial pH (Acute Respiratory Acidosis)"
+          },
+          {
+            "id": "renal_comp",
+            "label": "Renal Tubules Excrete H+ and Retain HCO3- over 48 to 72 Hours (Chronic Compensation)"
+          }
+        ],
+        "edges": [
+          [
+            "hypovent",
+            "paco2_rise"
+          ],
+          [
+            "paco2_rise",
+            "ph_drop"
+          ],
+          [
+            "ph_drop",
+            "renal_comp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, alveolar hyperventilation triggered by severe anxiety, early salicylate intoxication, or high-altitude hypoxaemia expels carbon dioxide rapidly, producing systemic **respiratory alkalosis**. In physiological response, kidneys downregulate proximal bicarbonate reabsorption and type B intercalated cells secrete bicarbonate into urine, gradually restoring the twenty-to-one ratio.",
+      "say": "Hyperventilation drives carbon dioxide down to cause respiratory alkalosis, corrected by renal bicarbonate excretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Respiratory Alkalosis",
+          "points": [
+            "Immediate onset from anxiety hyperventilation or panic attack",
+            "PaCO2 drops below 35 mmHg; pH rises rapidly above 7.45",
+            "Cellular buffers release H+; [HCO3-] falls by 2 mEq/L per 10 mmHg drop in PaCO2",
+            "Produces ionized hypocalcaemia causing carpopedal spasm"
+          ]
+        },
+        "right": {
+          "title": "Chronic Respiratory Alkalosis",
+          "points": [
+            "Sustained exposure to high-altitude hypobaric hypoxia",
+            "Renal compensation excretes bicarbonate over 2 to 3 days",
+            "[HCO3-] falls by 4 to 5 mEq/L per 10 mmHg drop in PaCO2",
+            "Normalizes arterial pH despite persistently low carbon dioxide"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In evaluating metabolic acidosis, calculating the difference between unmeasured serum anions and unmeasured cations defines the **serum anion gap**. Calculated as serum sodium minus the sum of serum chloride and bicarbonate, the normal reference value ranges between eight and twelve milliequivalents per litre.",
+      "say": "The serum anion gap subtracts chloride and bicarbonate from sodium, normally measuring eight to twelve milliequivalents per litre.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serum Anion Gap (AG)",
+          "points": [
+            "Formula: AG = [Na+] - ([Cl-] + [HCO3-])",
+            "Normal reference range: 8 to 12 mEq/L",
+            "Unmeasured anions exceed unmeasured cations",
+            "Major contributor is polyanionic serum albumin (~2.5 mEq/L per g/dL)"
+          ]
+        },
+        "right": {
+          "title": "Albumin Correction",
+          "points": [
+            "Hypoalbuminaemia falsely lowers baseline anion gap",
+            "Correction formula: Adjusted AG = Measured AG + 2.5 × (4.0 - Albumin)",
+            "Prevents missing occult ketoacidosis or lactic acidosis in ICU",
+            "Critical diagnostic adjustment in cirrhosis and nephrotic syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Elevation of the anion gap above twelve milliequivalents per litre indicates accumulation of unmeasured organic acids, establishing a **high anion gap metabolic acidosis**. Classic causes are remembered by the mnemonic GOLDMARK: glycols, oxoproline, L-lactate, D-lactate, methanol, aspirin, renal failure, and ketoacidosis.",
+      "say": "A high anion gap acidosis indicates accumulation of unmeasured organic acids, such as lactate, ketones, or toxic alcohols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiological Category",
+          "Accumulating Unmeasured Anion",
+          "Representative Clinical Scenarios"
+        ],
+        "rows": [
+          [
+            "Diabetic Ketoacidosis",
+            "Beta-hydroxybutyrate and acetoacetate",
+            "Absolute insulin deficiency, infection, missed doses"
+          ],
+          [
+            "Lactic Acidosis (Type A)",
+            "L-lactate from anaerobic glycolysis",
+            "Circulatory shock, cardiac arrest, severe sepsis"
+          ],
+          [
+            "Toxic Alcohol Ingestion",
+            "Formic acid (methanol) / Glycolate (ethylene glycol)",
+            "Ingestion of windshield wiper fluid or antifreeze"
+          ],
+          [
+            "End-Stage Uraemia",
+            "Sulfates, phosphates, and organic acids",
+            "Advanced chronic kidney disease (GFR < 15 mL/min)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When metabolic acidosis occurs without unmeasured anions, bicarbonate loss is reciprocally balanced by increased serum chloride retention, generating a **normal anion gap metabolic acidosis**. Common clinical etiologies include severe secretory diarrhea (loss of intestinal bicarbonate) and renal tubular acidosis, both exhibiting hyperchloremia.",
+      "say": "Normal anion gap acidosis involves hyperchloremia, seen when bicarbonate is lost through diarrhea or renal tubular acidosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
+        "alt": "Anion gap differential and acid-base disturbances",
+        "caption": "High anion gap versus normal anion gap hyperchloremic acidosis classification."
+      }
+    },
+    {
+      "tx": "The quantity of strong acid or base required to titrate whole blood back to pH seven point four zero at a carbon dioxide tension of forty millimetres of mercury is the **standard base excess**. Negative base excess indicates metabolic acidosis with buffer depletion, whereas positive base excess confirms primary metabolic alkalosis.",
+      "say": "Standard base excess quantifies buffer surplus or deficit, providing a clear clinical measure of metabolic derangements.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gitelman-syndrome-fig1.webp",
+        "alt": "Tubular electrolyte wasting and metabolic alkalosis",
+        "caption": "Metabolic alkalosis pathophysiology, chloride wasting, and base excess expansion in tubular syndromes."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

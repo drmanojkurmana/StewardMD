@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-motility",
+  "subject": "physiology",
+  "title": "Deglutition, Lower Oesophageal Sphincter, and Gastric Emptying",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Swallowing, or deglutition, is a complex neuromuscular reflex coordinated by the brainstem deglutition centre within the medulla oblongata. It is divided chronologically into three phases: the voluntary oral phase, the involuntary **pharyngeal phase of swallowing**, and the involuntary oesophageal phase.",
+      "say": "Deglutition is coordinated by the medullary swallowing centre, progressing through oral, pharyngeal, and oesophageal phases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oral",
+            "label": "Voluntary Oral Phase: Tongue Pushes Food Bolus Posteriorly into Oropharynx"
+          },
+          {
+            "id": "pharyng",
+            "label": "Involuntary Pharyngeal Phase: Soft Palate Elevates, Epiglottis Closes Larynx"
+          },
+          {
+            "id": "ues",
+            "label": "Upper Oesophageal Sphincter (Cricopharyngeus) Relaxes; Bolus Enters Oesophagus"
+          },
+          {
+            "id": "oesoph",
+            "label": "Involuntary Oesophageal Phase: Primary Peristaltic Wave Propels Bolus to Stomach"
+          }
+        ],
+        "edges": [
+          [
+            "oral",
+            "pharyng"
+          ],
+          [
+            "pharyng",
+            "ues"
+          ],
+          [
+            "ues",
+            "oesoph"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During the pharyngeal phase, respiration is momentarily arrested for one to two seconds by inhibitory reflexes in the medullary respiratory center, known as deglutition apnoea. Simultaneously, the soft palate elevates to close the posterior nares, the vocal cords adduct, and the larynx moves upward under the epiglottis, preventing **pulmonary food aspiration**.",
+      "say": "During swallowing, respiration stops and the larynx closes upward under the epiglottis to protect airways from aspiration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pharyngeal Protection Mechanisms",
+          "points": [
+            "Elevation of soft palate seals off nasopharynx",
+            "True and false vocal cords close tightly",
+            "Larynx pulled upward and forward by suprahyoid muscles",
+            "Epiglottis swings downward over laryngeal inlet"
+          ]
+        },
+        "right": {
+          "title": "Neuromuscular Coordination",
+          "points": [
+            "Sensory afferents via trigeminal, glossopharyngeal, vagus nerves",
+            "Medullary swallowing center in nucleus tractus solitarius",
+            "Deglutition apnoea halts respiratory ramp firing",
+            "Cricopharyngeus muscle relaxes to open upper sphincter"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Food propulsion through the thoracic oesophagus is driven by primary peristalsis, a continuous aborally moving contraction wave traveling at two to four centimetres per second. If a large or sticky food bolus lodges within the lumen, local distension triggers enteric sensory afferents, eliciting **secondary peristalsis**.",
+      "say": "Primary peristalsis sweeps swallowed food down the oesophagus, while secondary peristalsis clears any remaining lodged bolus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Peristalsis",
+          "points": [
+            "Triggered by swallowing act in pharynx",
+            "Coordinated centrally by vagal swallowing center",
+            "Takes 8 to 10 seconds to traverse entire oesophagus",
+            "Persists even if bolus is purely liquid or negligible"
+          ]
+        },
+        "right": {
+          "title": "Secondary Peristalsis",
+          "points": [
+            "Triggered locally by retained food or acid reflux distension",
+            "Mediated through local enteric nerve plexuses and vagovagal arcs",
+            "Repeats continuously until oesophageal lumen is fully cleared",
+            "Essential protective clearance mechanism in acid reflux"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The distal boundary between the oesophagus and stomach is maintained by the **lower oesophageal sphincter**, a three-centimetre specialized zone of tonically contracted circular smooth muscle. Baseline tone generates resting pressures between fifteen and thirty millimetres of mercury, preventing caustic retrograde reflux of gastric contents.",
+      "say": "The lower oesophageal sphincter maintains resting pressure of fifteen to thirty millimetres of mercury to prevent gastric reflux.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regulatory Factor",
+          "Effect on Lower Oesophageal Sphincter Tone",
+          "Clinical Example"
+        ],
+        "rows": [
+          [
+            "Gastrin and Motilin",
+            "Increases Sphincter Tone",
+            "Prevents reflux during active digestion"
+          ],
+          [
+            "Acetylcholine (Parasympathetic)",
+            "Increases Sphincter Tone",
+            "Muscarinic cholinergic agonism"
+          ],
+          [
+            "Nitric Oxide (NO) and VIP",
+            "Decreases Tone (Relaxes)",
+            "Physiological receptive relaxation during swallowing"
+          ],
+          [
+            "Progesterone and Estrogen",
+            "Decreases Tone (Relaxes)",
+            "Heartburn and reflux of pregnancy"
+          ],
+          [
+            "Chocolate, Caffeine, Nicotine",
+            "Decreases Tone (Relaxes)",
+            "Aggravates gastro-oesophageal reflux disease (GERD)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autoimmune destruction of inhibitory nitric oxide-producing and VIP-producing ganglion cells in the myenteric plexus causes **esophageal achalasia**. Lacking receptive relaxation, the lower oesophageal sphincter fails to open during swallowing, leading to massive proximal oesophageal dilation, progressive dysphagia for solids and liquids, and regurgitation.",
+      "say": "Achalasia results from loss of myenteric inhibitory neurons, preventing the lower sphincter from relaxing during swallowing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/achalasia-fig1.webp",
+        "alt": "Oesophageal achalasia manometry and radiologic bird-beak sign",
+        "caption": "Aperistalsis of oesophageal body, failure of lower sphincter relaxation, and bird-beak tapering in achalasia."
+      }
+    },
+    {
+      "tx": "Upon arrival of a food bolus, the proximal stomach undergoes **adaptive gastric relaxation**, expanding its internal volume from fifty millilitres up to fifteen hundred millilitres with virtually no elevation in intragastric pressure. This vagally mediated reflex is abolished by bilateral surgical vagotomy.",
+      "say": "Adaptive gastric relaxation allows the stomach to hold over a litre of food without increasing internal pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bolus_entry",
+            "label": "Swallowed Food Bolus Distends Oesophagus and Gastric Cardia"
+          },
+          {
+            "id": "vagus_arc",
+            "label": "Vagovagal Reflex Arc Projects to Brainstem Nucleus Tractus Solitarius"
+          },
+          {
+            "id": "no_vip",
+            "label": "Vagal Postganglionic Inhibitory Neurons Release Nitric Oxide and VIP"
+          },
+          {
+            "id": "fundus_relax",
+            "label": "Gastric Fundus and Body Receptively Relax to Accommodate up to 1.5 Litres"
+          }
+        ],
+        "edges": [
+          [
+            "bolus_entry",
+            "vagus_arc"
+          ],
+          [
+            "vagus_arc",
+            "no_vip"
+          ],
+          [
+            "no_vip",
+            "fundus_relax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mechanical breakdown and sieving of gastric contents is regulated by **antral retropulsion**. Vigorous peristaltic waves sweep toward the closed pyloric sphincter, crushing solid particles against the terminal antrum and retropelling them backward until chyme is liquefied to particles smaller than two millimetres.",
+      "say": "Antral retropulsion crushes solid food against the closed pyloric sphincter until it is reduced to particles under two millimetres.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gastric Emptying of Liquids",
+          "points": [
+            "Governed by proximal stomach tonic contractions",
+            "Follows rapid exponential emptying kinetics",
+            "Isotonic saline empties faster than nutrient-dense broths",
+            "Rapidly enters duodenum within 30 to 60 minutes"
+          ]
+        },
+        "right": {
+          "title": "Gastric Emptying of Solids",
+          "points": [
+            "Requires mechanical antral milling and retropulsion",
+            "Follows linear zero-order emptying kinetics after lag phase",
+            "Only particles < 2 mm pass through pyloric sphincter",
+            "Lipids and acidic chyme potently delay emptying via CCK and secretin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During the interdigestive fasting state, the stomach and small intestine clear indigestible debris via the **migrating motor complex**. Mediated by cyclical surges of the duodenal hormone motilin every ninety minutes, these intense peristaltic housekeeping waves sweep through the gastrointestinal tract, preventing small intestinal bacterial overgrowth.",
+      "say": "The migrating motor complex acts as a periodic fasting housekeeping wave, clearing debris to prevent bacterial overgrowth.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diseases-of-esophagus-fig2.webp",
+        "alt": "Gastrointestinal motility patterns and mucosal integrity",
+        "caption": "Gastric emptying kinetics, interdigestive motor complexes, and mucosal clearance dynamics."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
