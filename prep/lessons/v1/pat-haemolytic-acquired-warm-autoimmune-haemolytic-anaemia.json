@@ -1,194 +1,170 @@
 {
-  "v": 1,
-  "module": "pat-haemolytic-acquired",
-  "subject": "pathology",
-  "title": "Warm and Cold Autoimmune Haemolysis, PNH, Microangiopathy, and Newborn Haemolytic Disease",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Warm autoimmune haemolytic anaemia coats red cells with IgG at body temperature, splenic macrophages strip membrane into spherocytes, and the direct antiglobulin test glows positive for IgG with or without complement. Steroids are first line therapy for **warm autoimmune haemolytic anaemia**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Warm IgG, spherocytes, positive Coombs: steroids first for warm autoimmune haemolytic anaemia.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/warm-autoimmune-hemolytic-anemia-fig1.webp",
-        "alt": "Warm autoimmune hemolytic anemia pathophysiology",
-        "caption": "Warm autoimmune haemolytic anaemia pathophysiology with IgG coating and splenic destruction."
-      }
+ "v": 1,
+ "id": "pat-haemolytic-acquired-warm-autoimmune-haemolytic-anaemia",
+ "subject": "pathology",
+ "module": "pat-haemolytic-acquired",
+ "title": "Warm Autoimmune Haemolytic Anaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **warm autoimmune haemolytic anaemia** is the most common form of immune-mediated hemolytic disease, accounting for seventy to eighty percent of all autoimmune haemolytic anaemias. It is mediated by warm-reactive IgG autoantibodies, with optimal binding affinity at normal core body temperature (thirty-seven degrees Celsius). These autoantibodies are characteristically directed against pan-antigenic determinants of the Rh blood group complex.",
+   "say": "Warm autoimmune haemolytic anaemia accounts for three-quarters of all immune haemolytic anaemias. It is caused by IgG autoantibodies that bind optimally at core body temperature of thirty-seven degrees. These antibodies usually target Rh blood group antigens on the red cell surface, triggering rapid immune destruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/warm-autoimmune-hemolytic-anemia-fig1.webp",
+    "alt": "Diagram illustrating IgG autoantibody opsonization of erythrocytes and partial phagocytosis by splenic macrophages.",
+    "caption": "IgG opsonization and partial splenic macrophage phagocytosis producing microspherocytes.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central mechanism of erythrocyte clearance is extravascular **splenic macrophage phagocytosis**. Red cells opsonized with IgG pass through the splenic cords of Billroth. Splenic red pulp macrophages recognize the Fc portions of bound IgG via Fc-gamma receptors and phagocytose portions of the erythrocyte membrane. The red cell seals without losing intracellular volume, forcing it to assume a rigid, spherical shape.",
+   "say": "Red cells coated with IgG travel into the red pulp of the spleen. Splenic macrophages latch onto the IgG tail using Fc receptors and take bites out of the cell membrane. The damaged cell seals itself up without losing volume, progressively morphing from a flexible biconcave disc into a rigid microspherocyte.",
+   "vis": {
+    "kind": "table",
+    "title": "Warm versus Cold Autoimmune Haemolytic Anaemia",
+    "cols": [
+     "Feature",
+     "Warm AIHA",
+     "Cold Agglutinin Disease"
+    ],
+    "rows": [
+     [
+      "Primary antibody class",
+      "IgG (subclasses IgG1 and IgG3)",
+      "IgM (pentameric)"
+     ],
+     [
+      "Thermal optimum",
+      "37 degrees Celsius",
+      "0 to 4 degrees Celsius"
+     ],
+     [
+      "Primary site of haemolysis",
+      "Extravascular in spleen",
+      "Intravascular (complement) and liver (Kupffer cells)"
+     ],
+     [
+      "Antigenic target",
+      "Rh blood group protein complex",
+      "I / i carbohydrate antigens"
+     ],
+     [
+      "First-line therapy",
+      "Systemic corticosteroids (prednisone)",
+      "Avoid cold; Rituximab (steroids ineffective)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The peripheral blood smear demonstrates prominent **microspherocytes** accompanied by polychromasia reflecting robust compensatory reticulocytosis. Microspherocytes appear as small, intensely stained, hyperchromic spherical erythrocytes lacking central pallor. Unlike hereditary spherocytosis where spherocytes are uniform, warm autoimmune hemolytic anemia displays spherocytes of varying sizes intermixed with polychromatophilic reticulocytes and nucleated red blood cells.",
+   "say": "On the blood film, look for microspherocytes and polychromasia. Microspherocytes are small, dense, dark pink spheres without any central pallor. Unlike the uniform spherocytes in genetic disease, autoimmune spherocytes vary widely in size and sit alongside large bluish-grey reticulocytes and nucleated red cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warm AIHA Smear Findings",
+     "points": [
+      "Prominent microspherocytes lacking central pallor",
+      "Marked polychromasia (reticulocytosis >5-10%)",
+      "Nucleated red blood cells under severe stress",
+      "Elevated MCHC (>36 g/dL) due to dehydration"
+     ]
     },
-    {
-      "tx": "Cold agglutinin disease uses IgM that binds red cells in cool peripheries, fixes complement, then detaches centrally leaving C3d coated cells for hepatic destruction and acrocyanosis in winter. Thermal amplitude decides symptoms in **cold agglutinin disease**, often clonal in older adults. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Cold IgM agglutinates in fingers and fixes complement; warmth avoidance and rituximab anchor treatment.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Warm AIHA",
-          "points": [
-            "IgG at 37 degrees, spherocytes",
-            "Splenic extravascular haemolysis",
-            "DAT: IgG positive"
-          ]
-        },
-        "right": {
-          "title": "Cold agglutinin disease",
-          "points": [
-            "IgM in cold, complement centrally",
-            "Hepatic destruction, acrocyanosis",
-            "DAT: C3d positive only"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The direct Coombs test washes patient red cells and adds antihuman globulin to reveal antibody or complement already bound in vivo, while the indirect test hunts antibody in serum against reagent cells. The direct antiglobulin test, DAT, is the **direct Coombs test**.",
-      "say": "Direct Coombs finds antibody already on the patient's cells; indirect finds it waiting in serum.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Test",
-          "Sample",
-          "Question answered"
-        ],
-        "rows": [
-          [
-            "Direct antiglobulin (DAT)",
-            "Patient red cells",
-            "Is antibody or complement bound in vivo?"
-          ],
-          [
-            "Indirect antiglobulin (IAT)",
-            "Patient serum",
-            "Is free allo or autoantibody present?"
-          ],
-          [
-            "Eluate study",
-            "Antibody stripped from cells",
-            "Which specificity coats the cells?"
-          ],
-          [
-            "Cold agglutinin titre",
-            "Serum at 4 degrees",
-            "How strong and wide is cold activity?"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Paroxysmal cold haemoglobinuria follows childhood viral illness with a biphasic Donath-Landsteiner IgG that binds in cold and haemolyses intravascularly on rewarming, dark urine included. The biphasic haemolysin is the **Donath-Landsteiner antibody**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Donath-Landsteiner antibody binds cold and bursts cells warm: post-viral dark urine in a child.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Cold exposure: IgG binds P antigen"
-          },
-          {
-            "id": "b",
-            "label": "Complement sequence begins silently"
-          },
-          {
-            "id": "c",
-            "label": "Rewarming completes membrane attack"
-          },
-          {
-            "id": "d",
-            "label": "Intravascular haemolysis, dark urine"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Paroxysmal nocturnal haemoglobinuria clones lose the GPI anchor for CD55 and CD59, leaving red cells naked before complement, causing night haemoglobinuria, thrombosis in odd veins, and marrow failure. Flow cytometry for missing anchors diagnoses **paroxysmal nocturnal haemoglobinuria (PNH)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Missing CD55 and CD59 anchors define PNH; eculizumab blocks the complement that destroys its cells.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/pnh-fig1.webp",
-        "alt": "PNH haemolysis and eculizumab action",
-        "caption": "PNH haemolysis from lost complement regulators and eculizumab blockade of terminal complement."
-      }
-    },
-    {
-      "tx": "CD55 decays complement convertases and CD59 blocks the membrane attack complex, so their shared GPI anchor failure explains why complement, not antibody, is the executioner in PNH. The anchor is **glycosylphosphatidylinositol (GPI)**, lost through PIGA mutation in the clone. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "One PIGA mutation removes the GPI anchor, both CD55 and CD59 vanish, and complement attacks unopposed.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "PNH clone present",
-          "points": [
-            "GPI anchor proteins absent on flow",
-            "Haemolysis, thrombosis, cytopenias",
-            "Complement blockade transformative"
-          ]
-        },
-        "right": {
-          "title": "Immune haemolysis",
-          "points": [
-            "Antibody coating drives destruction",
-            "DAT positive",
-            "Steroids and rituximab feature"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Microangiopathic haemolysis shears red cells on fibrin strands in thrombotic thrombocytopenic purpura, haemolytic uraemic syndrome, DIC, and malignant hypertension, littering film with schistocytes while platelets fall. The sheared fragment is the **schistocyte**, and its presence is a haematological emergency flag. That is why this detail earns its place in every examination and ward round.",
-      "say": "Schistocytes plus low platelets is an emergency: think TTP first and do not wait for the full pentad.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/microangiopathic-haemolytic-anaemia-fig1.webp",
-        "alt": "Microangiopathic haemolytic anaemia peripheral blood smear",
-        "caption": "Microangiopathic haemolysis smear with schistocytes from fibrin strand shearing."
-      }
-    },
-    {
-      "tx": "Haemolytic disease of the newborn pits maternal IgG, classically anti-D, against fetal red cells, causing anaemia, hydrops, and kernicterus risk, prevented by antenatal and postnatal anti-D prophylaxis. The prevented catastrophe is **haemolytic disease of the fetus and newborn**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Anti-D prophylaxis turned a killing disease rare; maternal IgG crossing the placenta remains its mechanism.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Disease",
-          "Antibody or defect",
-          "DAT and clue"
-        ],
-        "rows": [
-          [
-            "Warm AIHA",
-            "IgG autoantibody",
-            "DAT IgG positive, spherocytes"
-          ],
-          [
-            "Cold agglutinin",
-            "IgM, complement",
-            "DAT C3d, cold symptoms"
-          ],
-          [
-            "PNH",
-            "GPI anchor loss",
-            "DAT negative, flow cytometry"
-          ],
-          [
-            "Newborn disease",
-            "Maternal anti-D IgG",
-            "DAT positive newborn, hydrops risk"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Biochemical Haemolysis Markers",
+     "points": [
+      "Elevated unconjugated (indirect) bilirubin",
+      "Severely depressed or absent haptoglobin",
+      "Markedly elevated lactate dehydrogenase (LDH)",
+      "Normal or slightly increased urinary urobilinogen"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The diagnostic cornerstone is the **direct antiglobulin test**, historically designated the Coombs test. The patient washed red blood cells are incubated with antihuman globulin (Coombs reagent containing antibodies to human IgG and complement C3d). In warm autoimmune hemolytic anemia, addition of the reagent cross-links surface-bound IgG autoantibodies, producing macroscopic agglutination. A positive direct test confirms immune-mediated opsonization in vivo.",
+   "say": "The direct Coombs test is the gold standard investigation. The laboratory takes the patient washed red blood cells and mixes them with antihuman globulin. If the red cells are coated with IgG autoantibodies in the bloodstream, the Coombs reagent bridges them together, causing visible clumping.",
+   "vis": {
+    "kind": "table",
+    "title": "Direct Antiglobulin Test (DAT) Patterns",
+    "cols": [
+     "DAT Reaction Pattern",
+     "Bound Surface Molecule",
+     "Associated Disease State",
+     "Haemolysis Site"
+    ],
+    "rows": [
+     [
+      "IgG alone (60 to 70%)",
+      "Warm-reactive IgG antibodies",
+      "Idiopathic warm AIHA, SLE, drugs",
+      "Splenic extravascular"
+     ],
+     [
+      "IgG plus C3d (20 to 30%)",
+      "IgG with complement fixation",
+      "Severe warm AIHA, secondary lymphoma",
+      "Spleen and liver"
+     ],
+     [
+      "C3d alone (under 10%)",
+      "Complement C3d without IgG",
+      "Cold agglutinin disease, paroxysmal cold",
+      "Hepatic Kupffer clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line medical therapy mandates high-dose **corticosteroid therapy** with oral prednisone (one to one point five milligrams per kilogram daily). Corticosteroids downregulate Fc-gamma receptor expression on splenic macrophages, suppressing erythrocyte clearance within twenty-four to seventy-two hours, while gradually tapering autoantibody synthesis. In refractory cases, the anti-CD20 monoclonal antibody rituximab eradicates pathogenic B-lymphocyte clones, while splenectomy removes the primary filtration bed.",
+   "say": "Treat warm AIHA with high-dose oral prednisone. Steroids rapidly downregulate Fc receptors on splenic macrophages, halting red cell destruction within one to three days, while slowing down antibody production. If steroids fail, rituximab wipes out the responsible B cell clones, or splenectomy removes the filter where destruction occurs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line Prednisone",
+     "points": [
+      "Dose: 1 to 1.5 mg/kg/day orally",
+      "Rapid response within 1 to 3 weeks (>80%)",
+      "Downregulates splenic macrophage Fc receptors",
+      "Requires slow taper over 6 to 12 months"
+     ]
+    },
+    "right": {
+     "title": "Second-Line Modalities",
+     "points": [
+      "Rituximab: anti-CD20 targeted B-cell depletion",
+      "Splenectomy: removes primary site of destruction",
+      "Immunosuppressants: azathioprine or cyclosporine",
+      "Folic acid supplementation (1 to 5 mg daily)"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which immunoglobulin class and thermal optimum characterize the autoantibodies in warm autoimmune haemolytic anaemia?",
+   "options": [
+    "IgG with optimal reactivity at 37 degrees Celsius",
+    "IgM with optimal reactivity at 0 to 4 degrees Celsius",
+    "IgA with optimal reactivity at 20 degrees Celsius",
+    "IgE with optimal reactivity at 42 degrees Celsius"
+   ],
+   "correct": 0,
+   "explain": "Warm AIHA is mediated by IgG autoantibodies (optimally active at 37 degrees Celsius) directed against Rh complex antigens, causing splenic extravascular haemolysis."
+  },
+  {
+   "q": "What is the primary cellular mechanism by which microspherocytes are generated in warm AIHA?",
+   "options": [
+    "Partial phagocytosis of IgG-coated membrane by splenic macrophages",
+    "Complement membrane attack complex (C5b-9) osmotic lysis",
+    "Spontaneous loss of spectrin dimers through renal filtration",
+    "Oxidative cross-linking of haemoglobin to the band 3 anion exchanger"
+   ],
+   "correct": 0,
+   "explain": "Splenic macrophages recognize the Fc portion of IgG on red blood cells and phagocytose portions of the membrane; the red cell reseals with decreased surface area, forming a microspherocyte."
+  }
+ ]
 }

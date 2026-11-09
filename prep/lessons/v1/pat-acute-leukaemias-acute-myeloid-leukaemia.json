@@ -1,223 +1,176 @@
 {
-  "v": 1,
-  "module": "pat-acute-leukaemias",
-  "subject": "pathology",
-  "title": "Acute Myeloid Leukaemia, Auer Rods, and Acute Promyelocytic Leukaemia",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Acute myeloid leukaemia floods marrow and blood with myeloblasts that crowd out normal production, producing anaemia, infection, and bleeding within weeks, with twenty percent blasts the traditional diagnostic threshold. The blast defined emergency is **acute myeloid leukaemia (AML)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "AML is marrow failure by blast occupation: anaemia, infection, and bleeding arrive together within weeks.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/acute-leukemia-fig1.webp",
-        "alt": "Acute myeloid leukaemia pathophysiology",
-        "caption": "Acute myeloid leukaemia pathophysiology with blast expansion and marrow failure."
-      }
+ "v": 1,
+ "id": "pat-acute-leukaemias-acute-myeloid-leukaemia",
+ "subject": "pathology",
+ "module": "pat-acute-leukaemias",
+ "title": "Acute Myeloid Leukaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "An **acute myeloid leukaemia** represents a clonal hematopoietic stem cell malignancy characterized by blocked myeloid differentiation and uncontrolled proliferation. Accumulating immature myeloid precursors progressively replace normal bone marrow elements, causing severe pancytopenia. Diagnostic criteria established by the World Health Organization mandate a minimum threshold of twenty percent myeloid blast cells in the peripheral blood or bone marrow aspirate.",
+   "say": "Acute myeloid leukaemia is a malignant stem cell disorder where differentiation freezes at an immature blast stage. Clonal blasts crowd out the bone marrow, triggering severe anaemia, infection, and bleeding. The World Health Organization defines AML by finding at least twenty percent myeloid blasts in the blood or bone marrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear showing large myeloblast with fine chromatin and prominent Auer rod.",
+    "caption": "Myeloblast with delicate chromatin, prominent nucleoli, and pathognomonic Auer rod.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic morphological finding is the presence of **Auer rods** within blast cytoplasm. These needle-shaped, pink-red crystalline structures represent fused, aggregated primary azurophilic granules containing abundant myeloperoxidase and lysosomal enzymes. Their identification conclusively establishes myeloid lineage, ruling out acute lymphoblastic leukaemia. Multiple stacked Auer rods, termed faggot cells, are characteristic of acute promyelocytic leukaemia.",
+   "say": "Auer rods are the defining microscopic hallmark of myeloid blasts. These red crystalline needles form from fused azurophilic granules packed with myeloperoxidase. Finding even a single Auer rod proves the leukaemia is myeloid and rules out ALL. Stacks of numerous Auer rods, called faggot cells, are classic in acute promyelocytic leukaemia.",
+   "vis": {
+    "kind": "table",
+    "title": "Myeloid versus Lymphoid Blast Differentiation",
+    "cols": [
+     "Feature",
+     "Myeloblast (AML)",
+     "Lymphoblast (ALL)"
+    ],
+    "rows": [
+     [
+      "Cell size and cytoplasm",
+      "Large (15 to 20 um) with moderate cytoplasm",
+      "Small to medium with scant cytoplasm"
+     ],
+     [
+      "Nuclear chromatin",
+      "Delicate, fine, lace-like dispersed chromatin",
+      "Coarse, clumped, dense chromatin pattern"
+     ],
+     [
+      "Nucleoli",
+      "2 to 5 prominent distinct nucleoli",
+      "1 to 2 indistinct or small nucleoli"
+     ],
+     [
+      "Auer rods",
+      "Present in 30 to 50 percent; pathognomonic",
+      "Strictly absent"
+     ],
+     [
+      "Myeloperoxidase (MPO)",
+      "Positive in >= 3 percent of blasts",
+      "Consistently negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cytochemical confirmation relies on **myeloperoxidase staining**, which produces dark brown-black cytoplasmic granulation in at least three percent of blasts. Sudan Black B parallels myeloperoxidase by staining intracellular lipids within granulocytic granules. Nonspecific esterase (alpha-naphthyl acetate esterase) staining displays intense cytoplasmic positivity in monocytic leukaemia subtypes, which is completely inhibited by the addition of sodium fluoride.",
+   "say": "Cytochemistry confirms myeloid identity. Myeloperoxidase staining reacts with primary granules, producing black deposits in myeloid blasts. Sudan Black B gives identical positive staining. For acute monocytic leukaemia, nonspecific esterase turns the cytoplasm bright red, and this reaction is completely blocked by adding sodium fluoride.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Granulocytic Markers",
+     "points": [
+      "Myeloperoxidase strongly positive",
+      "Sudan Black B stains granule lipids",
+      "Chloroacetate esterase positive",
+      "CD13, CD33, and CD117 positive"
+     ]
     },
-    {
-      "tx": "Pink needle bundles inside blast cytoplasm, crystallised azurophilic granules, are pathognomonic of myeloid blasts and abundant in promyelocytic leukaemia, instantly separating AML from lymphoblastic disease on a good film. The crystal bundle is the **Auer rod**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "One Auer rod settles myeloid lineage; bundles of them shout promyelocytic leukaemia.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
-        "alt": "Myeloblast with Auer rods",
-        "caption": "Myeloblast with Auer rods, the crystalline signature of acute myeloid leukaemia."
-      }
-    },
-    {
-      "tx": "Myeloperoxidase cytochemistry stains myeloblast granules while lymphoblasts stay negative or show block PAS, a bench separation now refined by flow cytometry immunophenotyping for lineage and genetics. The classic cytochemical stain is **myeloperoxidase (MPO)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Myeloperoxidase positivity marks myeloid blasts; flow cytometry now delivers lineage and genetics together.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "AML blasts",
-          "points": [
-            "Auer rods may be present",
-            "Myeloperoxidase positive",
-            "Flow: CD13, CD33, MPO"
-          ]
-        },
-        "right": {
-          "title": "ALL blasts",
-          "points": [
-            "No Auer rods, scant cytoplasm",
-            "Myeloperoxidase negative",
-            "Flow: TdT, B or T lineage markers"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Acute promyelocytic leukaemia arrests maturation at promyelocytes packed with granules and Auer bundles, releasing procoagulants that cause disseminated intravascular coagulation and lethal early bleeding. Its translocation creates PML-RARA; the emergency subtype is **acute promyelocytic leukaemia (APL)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "APL bleeds by DIC before chemotherapy starts; suspect it on granules and coagulopathy and act the same day.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "t(15;17) creates PML-RARA fusion"
-          },
-          {
-            "id": "b",
-            "label": "Promyelocytes arrest and accumulate"
-          },
-          {
-            "id": "c",
-            "label": "Granules trigger DIC and bleeding"
-          },
-          {
-            "id": "d",
-            "label": "ATRA forces differentiation, arsenic degrades fusion"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The t(15;17) PML-RARA fusion blocks differentiation until all-trans retinoic acid releases the block and arsenic trioxide degrades the fusion, converting the most lethal acute leukaemia into the most curable. That targeted miracle is **ATRA and arsenic therapy for APL**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "ATRA plus arsenic turned APL from the deadliest to the most curable acute leukaemia; start ATRA on suspicion.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Entity",
-          "Genetics",
-          "Treatment pearl"
-        ],
-        "rows": [
-          [
-            "APL",
-            "t(15;17) PML-RARA",
-            "ATRA on suspicion, do not wait"
-          ],
-          [
-            "AML, favourable",
-            "t(8;21), inv(16)",
-            "Chemotherapy sensitive"
-          ],
-          [
-            "AML, adverse",
-            "Complex karyotype, TP53",
-            "Transplant evaluation early"
-          ],
-          [
-            "ALL",
-            "Hyperdiploidy, ETV6-RUNX1 children",
-            "Protocol chemotherapy, CNS prophylaxis"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Risk in AML is now genetic: favourable core binding factor changes, intermediate normal karyotypes with mutations such as NPM1 and FLT3, and adverse complex or TP53 disease steer chemotherapy, targeted drugs, and transplant. The steering system is **cytogenetic and molecular AML risk stratification**.",
-      "say": "Genetics, not age alone, now assigns AML risk and decides who earns a transplant in first remission.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Favourable risk",
-          "points": [
-            "t(8;21), inv(16), APL",
-            "Chemotherapy based cure likely",
-            "Transplant reserved for relapse"
-          ]
-        },
-        "right": {
-          "title": "Adverse risk",
-          "points": [
-            "Complex karyotype, TP53 mutation",
-            "Relapse despite chemotherapy",
-            "Early allogeneic transplant sought"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Leucostasis in hyperleucocytosis above one hundred thousand blasts sludges lung and brain microcirculation with dyspnoea and confusion, demanding cytoreduction urgency, while tumour lysis threatens kidneys after chemotherapy. The sludging emergency is **leucostasis (symptomatic hyperleucocytosis)**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Blasts above one hundred thousand with breathlessness or confusion mean leucostasis; cytoreduce urgently.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Emergency",
-          "Mechanism",
-          "First moves"
-        ],
-        "rows": [
-          [
-            "Leucostasis",
-            "Blast sludging in lung and brain",
-            "Hydroxycarbamide, leukapheresis selected"
-          ],
-          [
-            "DIC of APL",
-            "Promyelocyte procoagulants",
-            "ATRA, fibrinogen and platelet support"
-          ],
-          [
-            "Tumour lysis",
-            "Cell breakdown after therapy",
-            "Hydration, rasburicase, electrolytes"
-          ],
-          [
-            "Febrile neutropenia",
-            "No neutrophil defence",
-            "Cultures, broad spectrum antibiotics fast"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Measurable residual disease by flow or molecular monitoring after remission predicts relapse months before blood counts move, converting follow up into pre-emptive strategy and transplant timing. That surveillance concept is **measurable residual disease (MRD) monitoring**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "MRD surveillance hears relapse whispering months before the blood count shouts; transplant timing follows it.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Remission achieved morphologically"
-          },
-          {
-            "id": "b",
-            "label": "MRD measured by flow or PCR"
-          },
-          {
-            "id": "c",
-            "label": "Rising MRD warns of relapse"
-          },
-          {
-            "id": "d",
-            "label": "Pre-emptive therapy or transplant planned"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Monocytic Markers",
+     "points": [
+      "Nonspecific esterase (NSE) positive",
+      "Fluoride inhibition of NSE staining",
+      "CD14 and CD64 positive by flow cytometry",
+      "Associated with gingival hyperplasia"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "In acute promyelocytic leukaemia (APL), the defining cytogenetic abnormality is the **PML-RARA translocation** t(15;17)(q22;q12). This reciprocal translocation fuses the PML gene on chromosome 15 to the retinoic acid receptor alpha gene on chromosome 17. The resulting chimeric oncoprotein blocks promyelocytic differentiation. These patients present with catastrophic disseminated intravascular coagulation caused by the release of procoagulant granule contents.",
+   "say": "Acute promyelocytic leukaemia carries the balanced translocation t(15;17), fusing PML on chromosome fifteen with RARA on chromosome seventeen. This chimeric protein arrests promyelocyte maturation. Patients frequently present with explosive disseminated intravascular coagulation from procoagulant granule release, making APL an urgent medical emergency.",
+   "vis": {
+    "kind": "table",
+    "title": "Recurrent Cytogenetic Subtypes of AML",
+    "cols": [
+     "Cytogenetic Abnormality",
+     "Fusion Genes Involved",
+     "FAB Category",
+     "Prognostic Category"
+    ],
+    "rows": [
+     [
+      "t(15;17)(q22;q12)",
+      "PML-RARA fusion",
+      "APL (AML M3)",
+      "Favourable with targeted ATRA and ATO"
+     ],
+     [
+      "t(8;21)(q22;q22)",
+      "RUNX1-RUNX1T1 (AML1-ETO)",
+      "AML with maturation (M2)",
+      "Favourable; high complete remission rate"
+     ],
+     [
+      "inv(16)(p13.1q22)",
+      "CBFB-MYH11 fusion",
+      "Acute myelomonocytic (M4eo)",
+      "Favourable; abnormal marrow eosinophils"
+     ],
+     [
+      "11q23 abnormalities",
+      "KMT2A (MLL) gene rearrangements",
+      "Acute monoblastic (M5)",
+      "Adverse; associated with prior topoisomerase II inhibitors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted induction therapy for acute promyelocytic leukaemia pairs **all-trans retinoic acid** with arsenic trioxide, producing durable cures without conventional cytotoxic chemotherapy. Pharmacological concentrations of retinoic acid overcome the chimeric block, forcing malignant promyelocytes to differentiate into mature, short-lived neutrophils. Differentiation syndrome, characterized by fever, respiratory distress, and pulmonary infiltrates, is treated promptly with intravenous dexamethasone.",
+   "say": "Treat acute promyelocytic leukaemia with all-trans retinoic acid and arsenic trioxide. ATRA forces malignant promyelocytes to complete differentiation into mature neutrophils, curing over ninety percent of patients. Watch for differentiation syndrome, where expanding neutrophils flood the lungs with cytokines; treat it immediately with intravenous dexamethasone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ATRA Mechanism",
+     "points": [
+      "Forces terminal myeloid maturation",
+      "Degrades PML-RARA fusion oncoprotein",
+      "Resolves coagulopathy within 48 to 72 hours",
+      "Curative without cytotoxic chemotherapy"
+     ]
+    },
+    "right": {
+     "title": "Differentiation Syndrome",
+     "points": [
+      "Unexplained fever and weight gain",
+      "Pulmonary infiltrates and pleuropericardial effusions",
+      "Episodic hypotension and acute renal failure",
+      "Immediate therapy with intravenous dexamethasone"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which morphological structure in blast cytoplasm conclusively confirms myeloid rather than lymphoid leukaemia?",
+   "options": [
+    "Auer rod",
+    "Dohle body",
+    "Russell body",
+    "Birbeck granule"
+   ],
+   "correct": 0,
+   "explain": "Auer rods are needle-shaped crystalline inclusions of fused azurophilic granules containing myeloperoxidase, pathognomonic of myeloblasts in AML."
+  },
+  {
+   "q": "What reciprocal chromosomal translocation defines acute promyelocytic leukaemia (AML M3)?",
+   "options": [
+    "t(15;17)(q22;q12)",
+    "t(8;21)(q22;q22)",
+    "t(9;22)(q34;q11)",
+    "t(11;14)(q13;q32)"
+   ],
+   "correct": 0,
+   "explain": "The t(15;17)(q22;q12) translocation fuses PML on chromosome 15 with RARA on chromosome 17, creating the chimeric oncoprotein responsive to ATRA."
+  }
+ ]
 }

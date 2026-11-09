@@ -1,202 +1,200 @@
 {
-  "v": 1,
-  "module": "pat-benign-wbc-lymph-node",
-  "subject": "pathology",
-  "title": "Leukocytosis, Leukaemoid Reaction, LAP Score, and Reactive Lymph Nodes",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Leukocytosis is a sign, not a diagnosis: neutrophilia answers bacterial infection, steroids, stress, and necrosis, while lymphocytosis answers viruses and eosinophilia answers parasites, allergy, and drugs. Reading the differential before the total is the discipline of **leukocytosis interpretation**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Never react to the white count alone; the differential tells you which army has mobilised and why.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Pattern",
-          "Classic drivers",
-          "Pearl"
-        ],
-        "rows": [
-          [
-            "Neutrophilia",
-            "Bacterial infection, steroids, infarction",
-            "Left shift and toxic granulation"
-          ],
-          [
-            "Lymphocytosis",
-            "Viral infection, pertussis, CLL context",
-            "Atypical forms suggest virus"
-          ],
-          [
-            "Eosinophilia",
-            "Parasites, allergy, drugs, hypereosinophilic states",
-            "Ask travel, worms, new medicines"
-          ],
-          [
-            "Monocytosis",
-            "Chronic infection, recovery, inflammation",
-            "Persistent needs marrow review"
-          ]
-        ]
-      }
+ "v": 1,
+ "id": "pat-benign-wbc-lymph-node-leukocytosis",
+ "subject": "pathology",
+ "module": "pat-benign-wbc-lymph-node",
+ "title": "Leukocytosis and Reactive Changes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A reactive **leukocytosis** is defined as an increase in total circulating white blood cell count above eleven thousand per microliter. It represents a coordinated immunological response to infectious, inflammatory, or tissue-destructive insults. The differential leukocyte count identifies the specific lineage involved, categorizing the elevation into neutrophilia, lymphocytosis, monocytosis, eosinophilia, or basophilia based on cytokine signalling.",
+   "say": "Leukocytosis means a total white blood cell count exceeding eleven thousand per microliter. It reflects the bone marrow response to infection, inflammation, or tissue damage. Breaking down the differential count into neutrophils, lymphocytes, monocytes, or eosinophils points straight to the underlying cause.",
+   "vis": {
+    "kind": "table",
+    "title": "Patterns and Etiologies of Reactive Leukocytosis",
+    "cols": [
+     "Lineage Elevation",
+     "Defining Absolute Count",
+     "Primary Mediating Cytokines",
+     "Classic Clinical Etiologies"
+    ],
+    "rows": [
+     [
+      "Neutrophilia",
+      "> 7,000 / uL",
+      "G-CSF, IL-1, TNF-alpha",
+      "Acute bacterial infection, tissue infarction, burns"
+     ],
+     [
+      "Lymphocytosis",
+      "> 4,000 / uL",
+      "IL-2, IL-7, viral antigens",
+      "Viral infections (EBV, CMV), pertussis, toxoplasmosis"
+     ],
+     [
+      "Eosinophilia",
+      "> 500 / uL",
+      "IL-5, eotaxin, IL-3",
+      "Allergies, asthma, invasive parasites, drug reactions"
+     ],
+     [
+      "Monocytosis",
+      "> 1,000 / uL",
+      "M-CSF, GM-CSF",
+      "Chronic infections (TB, bacterial endocarditis), IBD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Under acute inflammatory stress, toxic changes emerge in circulating polymorphonuclear neutrophils. The bone marrow accelerates granulopoiesis, discharging band forms and metamyelocytes into blood, creating a **left shift**. Neutrophils display coarse, blue-purple azurophilic primary granules termed toxic granulation, pale blue cytoplasmic inclusions of rough endoplasmic reticulum known as Dohle bodies, and cytoplasmic vacuoles reflecting active bacterial phagocytosis.",
+   "say": "Severe infection induces a left shift, releasing immature band cells and metamyelocytes. Inside the neutrophils, look for three classic toxic changes: coarse dark purple toxic granules, pale sky-blue patches of rough endoplasmic reticulum called Dohle bodies, and clear vacuoles from active phagocytosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Toxic Cytoplasmic Changes",
+     "points": [
+      "Toxic granulation: coarse primary azurophilic granules",
+      "Dohle bodies: light blue rough endoplasmic reticulum",
+      "Cytoplasmic vacuolation: active phagocytosis",
+      "Left shift: band forms exceeding 10 percent"
+     ]
     },
-    {
-      "tx": "Neutrophilia with left shift, toxic granulation, and Dohle bodies shows marrow releasing young cells under cytokine pressure, the picture of acute bacterial infection or severe inflammation. The release pattern is a **left shift with toxic changes**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Toxic granulation and Dohle bodies mean the marrow is fighting hard; look for the bacterial source.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Reactive neutrophilia",
-          "points": [
-            "Left shift, toxic granulation",
-            "Cause clinically apparent",
-            "Resolves with the illness"
-          ]
-        },
-        "right": {
-          "title": "Concerning neutrophilia",
-          "points": [
-            "Blasts or dysplasia present",
-            "Basophilia, splenomegaly",
-            "Persists without cause: marrow workup"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "When reactive white counts climb into leukaemia ranges above fifty thousand with mature cells and an obvious septic driver, the mimic is called a leukaemoid reaction, and separating it from chronic myeloid leukaemia decides management. The mimic is the **leukaemoid reaction**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Leukaemoid reactions mimic leukaemia counts with mature cells and a septic story; CML is the separation that matters.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
-        "alt": "Chronic myeloid leukaemia pathogenesis",
-        "caption": "Chronic myeloid leukaemia, the neoplasm a leukaemoid reaction must be separated from."
-      }
-    },
-    {
-      "tx": "Leucocyte alkaline phosphatase inside neutrophils soars in leukaemoid reactions and pregnancy but collapses in chronic myeloid leukaemia, giving a cheap historical separator now largely replaced by BCR-ABL testing. The enzyme score is the **LAP score (leucocyte alkaline phosphatase)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "High LAP means reaction, low LAP meant CML; today BCR-ABL testing gives the definitive answer.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Leukaemoid reaction",
-          "points": [
-            "LAP score high",
-            "BCR-ABL absent",
-            "Toxic granulation prominent"
-          ]
-        },
-        "right": {
-          "title": "Chronic myeloid leukaemia",
-          "points": [
-            "LAP score low",
-            "BCR-ABL present, basophilia",
-            "Full myeloid spectrum, splenomegaly"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Infectious mononucleosis floods blood with atypical lymphocytes, Downey cells, that are actually reactive cytotoxic T cells hunting EBV infected B cells, accompanied by pharyngitis, nodes, spleen, and atypical hepatitis. The impressive atypical cell is a **reactive (Downey) atypical lymphocyte**, not a blast.",
-      "say": "Downey atypical lymphocytes are reactive T cells, not leukaemia; glandular fever is their classic stage.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Infectious mononucleosis",
-          "Acute leukaemia"
-        ],
-        "rows": [
-          [
-            "Dominant cell",
-            "Atypical reactive lymphocytes",
-            "Blasts"
-          ],
-          [
-            "Symptoms",
-            "Pharyngitis, nodes, splenomegaly",
-            "Marrow failure, bleeding, fever"
-          ],
-          [
-            "Tests",
-            "Heterophile antibody, EBV serology",
-            "Flow cytometry, marrow"
-          ],
-          [
-            "Course",
-            "Self limited weeks",
-            "Progressive without therapy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Reactive lymphadenitis enlarges nodes through follicular hyperplasia with tingible body macrophages, paracortical expansion, or sinus histiocytosis, patterns that preserve architecture unlike lymphoma effacement. Preserved architecture with polymorphous cells defines **reactive lymph node hyperplasia**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Reactive nodes keep their architecture and mixed cell populations; effacement by monotony warns of lymphoma.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Reactive hyperplasia",
-          "points": [
-            "Architecture preserved, follicles active",
-            "Polymorphous cell mix",
-            "Tender, recent infection context"
-          ]
-        },
-        "right": {
-          "title": "Lymphoma pattern",
-          "points": [
-            "Architecture effaced, monomorphic",
-            "Painless progressive enlargement",
-            "Excision biopsy with immunophenotyping"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Kikuchi disease necrotises cervical node areas in young women with fever, mimicking lymphoma and tuberculosis microscopically, then resolves spontaneously over weeks, while Rosai-Dorfman disease fills sinuses with huge histiocytes eating lymphocytes. The self limited necrotising entity is **Kikuchi disease (histiocytic necrotising lymphadenitis)**.",
-      "say": "Kikuchi disease mimics lymphoma under the microscope yet resolves alone; Rosai-Dorfman shows emperipolesis instead.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Entity",
-          "Signature histology",
-          "Course"
-        ],
-        "rows": [
-          [
-            "Kikuchi disease",
-            "Necrosis, karyorrhexis, no neutrophils",
-            "Self limited, young women"
-          ],
-          [
-            "Rosai-Dorfman",
-            "Sinus histiocytes, emperipolesis",
-            "Massive painless nodes, indolent"
-          ],
-          [
-            "Cat scratch disease",
-            "Stellate granulomas, Bartonella",
-            "After cat contact, regional nodes"
-          ],
-          [
-            "Toxoplasma lymphadenitis",
-            "Follicular hyperplasia, monocytoid B cells",
-            "Posterior cervical, self limited"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Agranulocytosis, neutrophils below five hundred from drugs such as antithyroids, clozapine, chemotherapy, or marrow failure, converts mouth ulcers and fever into a neutropenic sepsis emergency needing immediate broad spectrum antibiotics. The emergency threshold state is **agranulocytosis with febrile neutropenia**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Fever with neutrophils under five hundred is an emergency: cultures, broad spectrum antibiotics within the hour.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/acute-leukemia-fig1.webp",
-        "alt": "Acute myeloid leukaemia pathophysiology",
-        "caption": "Acute leukaemia pathophysiology, the marrow failure state reactive counts must be distinguished from."
-      }
+    "right": {
+     "title": "Normal Neutrophil Morphology",
+     "points": [
+      "Finely distributed pink-tan secondary granules",
+      "Clear, uniform pink cytoplasm without vacuoles",
+      "Three to four distinct nuclear lobes",
+      "Band forms constitute under 5 percent"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "A critical diagnostic challenge is differentiating a benign **leukaemoid reaction** from chronic myeloid leukaemia (CML). A leukaemoid reaction represents an exaggerated reactive response where total leukocyte counts exceed fifty thousand per microliter with abundant immature myeloid precursors. Unlike CML, the leukaemoid state is triggered by severe sepsis or carcinoma, displays prominent toxic granulation, and lacks circulating basophilia.",
+   "say": "A leukaemoid reaction is an extreme reactive leukocytosis exceeding fifty thousand cells per microliter mimicking leukaemia. Differentiating it from chronic myeloid leukaemia is vital. Leukaemoid reactions occur in severe sepsis, show toxic granules, and lack basophilia, whereas CML is a clonal malignancy with abundant basophils and splenomegaly.",
+   "vis": {
+    "kind": "table",
+    "title": "Leukaemoid Reaction versus Chronic Myeloid Leukaemia",
+    "cols": [
+     "Diagnostic Feature",
+     "Leukaemoid Reaction",
+     "Chronic Myeloid Leukaemia (CML)"
+    ],
+    "rows": [
+     [
+      "Underlying etiology",
+      "Severe sepsis, burns, advanced malignancy",
+      "Neoplastic BCR-ABL1 tyrosine kinase fusion"
+     ],
+     [
+      "Splenomegaly",
+      "Absent or mild",
+      "Massive splenomegaly (>10 cm below margin)"
+     ],
+     [
+      "Basophils and eosinophils",
+      "Normal absolute counts",
+      "Characteristically elevated (basophilia)"
+     ],
+     [
+      "Leukocyte Alkaline Phosphatase",
+      "Markedly elevated (LAP score > 100)",
+      "Characteristically low or zero (LAP < 20)"
+     ],
+     [
+      "Cytogenetics / PCR",
+      "Absence of t(9;22)",
+      "Presence of Philadelphia chromosome t(9;22)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The biochemical discriminator is the **leukocyte alkaline phosphatase** (LAP) score, evaluated by cytochemical staining of peripheral neutrophils. Normal LAP scores range from twenty to one hundred. In reactive leukaemoid states, active inflammatory cytokines stimulate abundant alkaline phosphatase synthesis, driving the LAP score well above one hundred. In contrast, neoplastic granulocytes in chronic myeloid leukaemia are enzymatically deficient, yielding a low or zero score.",
+   "say": "The leukocyte alkaline phosphatase score cleanly separates the two. Neutrophils are scored for alkaline phosphatase enzyme activity. In a benign leukaemoid reaction, toxic neutrophils are packed with enzyme, driving the LAP score over one hundred. In CML, neoplastic granulocytes lack the enzyme, dropping the LAP score under twenty.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High LAP Score (>100)",
+     "points": [
+      "Benign reactive leukaemoid reactions",
+      "Polycythaemia vera (MPN exception)",
+      "Third trimester pregnancy",
+      "Systemic glucocorticoid therapy"
+     ]
+    },
+    "right": {
+     "title": "Low LAP Score (<20)",
+     "points": [
+      "Chronic myeloid leukaemia (CML)",
+      "Paroxysmal nocturnal haemoglobinuria (PNH)",
+      "Myelodysplastic syndromes",
+      "Congenital hypophosphatasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reactive viral infections, notably Epstein-Barr virus infectious mononucleosis, elicit striking **atypical lymphocytosis** rather than neutrophilia. CD8-positive cytotoxic T cells become activated against EBV-infected B cells, transforming into Downey cells. These atypical lymphocytes are enlarged with copious, pliable pale-blue cytoplasm that indents and conforms around adjacent red blood cells, exhibiting deep blue basophilia along their scalloped borders.",
+   "say": "Viral infections like infectious mononucleosis produce atypical lymphocytosis. Activated CD8 cytotoxic T cells, known as Downey cells, expand in response to EBV-infected B cells. These large lymphocytes have flowing pale blue cytoplasm that scallops and indents around neighbouring red blood cells.",
+   "vis": {
+    "kind": "table",
+    "title": "Atypical Lymphocytes (Downey Cells)",
+    "cols": [
+     "Feature",
+     "Downey Atypical Lymphocyte",
+     "Malignant Blast"
+    ],
+    "rows": [
+     [
+      "Cell lineage",
+      "Reactive CD8+ cytotoxic T lymphocytes",
+      "Clonal blast precursors (B, T, or myeloid)"
+     ],
+     [
+      "Cytoplasmic border",
+      "Scalloped, conforming around erythrocytes",
+      "Rigid, non-conforming round cell margin"
+     ],
+     [
+      "Nuclear chromatin",
+      "Variable, coarse mature chromatin",
+      "Fine, delicate, open blast chromatin"
+     ],
+     [
+      "Paul-Bunnell test",
+      "Positive heterophile antibodies (Monospot)",
+      "Negative heterophile antibodies"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which laboratory finding distinguishes a benign leukaemoid reaction from chronic myeloid leukaemia?",
+   "options": [
+    "Markedly elevated leukocyte alkaline phosphatase (LAP) score > 100",
+    "Presence of the Philadelphia chromosome t(9;22)",
+    "Absolute basophilia exceeding 2,000 / uL",
+    "Complete absence of toxic granulation in neutrophils"
+   ],
+   "correct": 0,
+   "explain": "A high LAP score (>100) indicates mature, reactive neutrophils in a leukaemoid reaction, whereas CML granulocytes are enzymatically deficient, yielding a low LAP score (<20)."
+  },
+  {
+   "q": "What morphological feature characterizes the atypical lymphocytes (Downey cells) in infectious mononucleosis?",
+   "options": [
+    "Abundant pliable cytoplasm that scallops around adjacent red blood cells",
+    "Multiple Auer rods stacked in the cytoplasm",
+    "Hypersegmented nuclei containing six or more nuclear lobes",
+    "Deeply clefted buttock cell nuclear cleavages"
+   ],
+   "correct": 0,
+   "explain": "Atypical lymphocytes in EBV mononucleosis are large activated CD8+ T cells with copious, soft cytoplasm that indents and conforms around neighbouring erythrocytes."
+  }
+ ]
 }

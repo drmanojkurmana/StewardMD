@@ -1,223 +1,165 @@
 {
-  "v": 1,
-  "module": "pat-haemoglobinopathies",
-  "subject": "pathology",
-  "title": "Sickle Cell Anaemia: HbS, Sickling, and Autosplenectomy",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "A single beta chain substitution, glutamate to valine at position six, lets deoxygenated haemoglobin polymerise into rigid sickles that obstruct microcirculation and haemolyse early. That one amino acid exchange creates **sickle cell anaemia (HbS)** disease when homozygous. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Glutamate to valine at beta six: one substitution, a lifetime of sickling, occlusion, and haemolysis.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
-        "alt": "Blood smear sickle cell anaemia",
-        "caption": "Blood smear in sickle cell anaemia showing sickled red cells and target cells."
-      }
+ "v": 1,
+ "id": "pat-haemoglobinopathies-sickle-cell-anaemia",
+ "subject": "pathology",
+ "module": "pat-haemoglobinopathies",
+ "title": "Sickle Cell Anaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **sickle cell anaemia** represents the prototypic hereditary hemoglobinopathy, transmitted as an autosomal recessive disorder caused by a single point mutation in the beta-globin gene on chromosome 11p15. The mutation involves a single adenine-to-thymine (GAG to GTG) base transversion at codon six, resulting in the substitution of non-polar valine for negatively charged glutamic acid, producing abnormal hemoglobin S.",
+   "say": "Sickle cell anaemia is an autosomal recessive disorder caused by a single point mutation on chromosome eleven. A single base swap at codon six replaces hydrophilic glutamic acid with hydrophobic valine, creating haemoglobin S. This subtle chemical change fundamentally alters how haemoglobin behaves when oxygen levels drop.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
+    "alt": "Peripheral blood smear displaying sickle-shaped drepanocytes and target cells in sickle cell disease.",
+    "caption": "Irreversible sickle cells (drepanocytes) and target cells on peripheral blood smear.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central molecular pathomechanism is the **polymerization of deoxygenated HbS**. Upon deoxygenation, the exposed hydrophobic valine residues create a sticky patch on the beta-globin chain that binds complementary docking sites on adjacent tetramers. HbS molecules aggregate into long, insoluble helical filaments termed tactoids. These rigid polymers distort the flexible biconcave erythrocyte into an elongated, rigid crescent shape.",
+   "say": "When deoxygenated, the mutant valine acts like a sticky patch, locking adjacent hemoglobin S molecules together into long, rigid crystal rods called tactoids. These insoluble polymers distort the red blood cell from a pliable disc into a stiff, pointed crescent sickle cell.",
+   "vis": {
+    "kind": "table",
+    "title": "Molecular and Biophysical Dynamics",
+    "cols": [
+     "Physical Factor",
+     "Impact on HbS Polymerization",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Deoxygenation",
+      "Exposes hydrophobic valine docking patch",
+      "Triggers immediate tactoid polymer assembly"
+     ],
+     [
+      "Acidosis (low pH)",
+      "Decreases oxygen affinity (Bohr effect)",
+      "Shifts HbS into deoxygenated polymer state"
+     ],
+     [
+      "Dehydration (MCHC)",
+      "Elevates intracellular HbS concentration",
+      "Exponentially accelerates polymer delay time"
+     ],
+     [
+      "Haemoglobin F (HbF)",
+      "Sterically inhibits polymer cross-linking",
+      "Protects infants during first 6 months of life"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Repeated cycles of sickling and unsickling inflict severe cumulative damage on the erythrocyte membrane skeleton. Calcium influx activates Gardos channels, expelling potassium and water, transforming cells into dehydrated, dense, **irreversibly sickled cells**. These rigid drepanocytes are incapable of deforming through narrow splenic sinusoidal slits, triggering chronic extravascular hemolysis by splenic macrophages, shortening red cell lifespan to ten to twenty days.",
+   "say": "With each round of sickling, the red cell membrane is battered. Intracellular calcium rushes in, driving out potassium and water. The cell becomes a dense, dehydrated, irreversibly sickled cell. These rigid cells cannot squeeze through splenic sinusoids and are demolished by macrophages, slashing red cell lifespan from one hundred twenty days down to just two weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reversible Sickle Cells",
+     "points": [
+      "Morphology normalizes upon reoxygenation",
+      "Intact intracellular cation balance",
+      "Flexible membrane deformability preserved",
+      "Able to traverse splenic sinusoids"
+     ]
     },
-    {
-      "tx": "Polymerisation needs deoxygenation, acidosis, dehydration, cold, and infection as accomplices, while fetal haemoglobin and alpha thalassaemia trait dilute HbS and protect, explaining wide severity variation between patients. The polymerisation trigger state is **deoxygenated HbS polymerisation**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Oxygen protects and dehydration betrays: sickling follows deoxygenation, acidosis, cold, and infection.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Deoxygenation, acidosis, dehydration"
-          },
-          {
-            "id": "b",
-            "label": "HbS polymerises into stiff fibres"
-          },
-          {
-            "id": "c",
-            "label": "Red cell sickles and stiffens"
-          },
-          {
-            "id": "d",
-            "label": "Vaso-occlusion plus early haemolysis"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The sickling test deoxygenates blood with metabisulfite to force sickling on a slide, screening cheaply but failing to separate trait from disease, which electrophoresis and HPLC accomplish by quantifying fractions. Screening and confirmation divide between **sickling test and HPLC quantification**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "The sickling test screens, HPLC decides; a positive sickle test cannot tell trait from disease.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Sickling (solubility) test",
-          "points": [
-            "Cheap, rapid screen",
-            "Positive in trait and disease",
-            "False negatives in severe anaemia, infancy"
-          ]
-        },
-        "right": {
-          "title": "HPLC or electrophoresis",
-          "points": [
-            "Quantifies HbS, HbA, HbF, HbA2",
-            "Separates trait, disease, compound states",
-            "Confirms newborn screening results"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Repeated splenic infarction in childhood scars the spleen into a shrunken fibrotic remnant, removing its filtering function while the child still needs it against encapsulated bacteria. This self inflicted splenectomy is **autosplenectomy**, usually complete by five years of age. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "The spleen infarcts itself away by age five in sickle cell disease; vaccinate as for a splenectomised child.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/hyposplenism-fig1.webp",
-        "alt": "Hyposplenism film Howell-Jolly bodies",
-        "caption": "Hyposplenism blood film with Howell-Jolly bodies, the marker of lost splenic function."
-      }
-    },
-    {
-      "tx": "Howell-Jolly bodies, nuclear remnants a working spleen would have pitted out, appear on film as splenic function fails, alongside target cells and irreversibly sickled forms. Their presence is a free functional assay: **Howell-Jolly bodies of hyposplenism**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Howell-Jolly bodies on the film are the spleen's resignation letter; read them as lost splenic function.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Film finding",
-          "Meaning",
-          "Action"
-        ],
-        "rows": [
-          [
-            "Sickled cells",
-            "Active sickling burden",
-            "Assess crisis and hydration"
-          ],
-          [
-            "Howell-Jolly bodies",
-            "Functional hyposplenism",
-            "Vaccination, penicillin strategy"
-          ],
-          [
-            "Target cells",
-            "Membrane excess states",
-            "Seen in HbC, liver disease, thalassaemia"
-          ],
-          [
-            "Reticulocytosis",
-            "Compensated haemolysis",
-            "Baseline for crisis comparison"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Newborn screening catches disease before the first sequestration or pneumococcal sepsis, letting penicillin prophylaxis, pneumococcal and meningococcal vaccination, and parent education prevent early deaths. Early diagnosis through **newborn haemoglobinopathy screening** transformed childhood survival. That is why this detail earns its place in every examination and ward round.",
-      "say": "Newborn screening plus penicillin and vaccines is why children with sickle disease now survive childhood.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Before screening era",
-          "points": [
-            "Presentation by sepsis or sequestration",
-            "High under five mortality",
-            "Diagnosis after first catastrophe"
-          ]
-        },
-        "right": {
-          "title": "With screening",
-          "points": [
-            "Diagnosis in first weeks of life",
-            "Penicillin and vaccines from infancy",
-            "Parents taught splenic palpation, fever action"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Chronic haemolysis drives its own complications: pigment gallstones, leg ulcers, priapism, avascular necrosis of femoral heads, and proliferative retinopathy accumulate beside the acute crises. Annual surveillance hunts them early; the burden is **chronic sickle vasculopathy**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Between crises, haemolysis and vasculopathy quietly injure hips, eyes, kidneys, and lungs; surveillance hunts them yearly.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "System",
-          "Chronic complication",
-          "Surveillance"
-        ],
-        "rows": [
-          [
-            "Brain",
-            "Silent infarcts, stroke",
-            "Transcranial Doppler in childhood"
-          ],
-          [
-            "Kidney",
-            "Hyposthenuria, papillary necrosis, CKD",
-            "Urine albumin, blood pressure"
-          ],
-          [
-            "Eye and bone",
-            "Retinopathy, avascular necrosis",
-            "Retinal screening, hip imaging"
-          ],
-          [
-            "Lung",
-            "Pulmonary hypertension",
-            "Echo when symptomatic"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Hydroxycarbamide raises fetal haemoglobin, diluting HbS polymerisation and cutting crises, acute chest, and mortality, yet remains underused from exaggerated fertility and malignancy fears. Offering it to every eligible patient is **hydroxycarbamide (hydroxyurea) disease modification**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "Hydroxycarbamide raises HbF and saves lives in sickle disease; offer it rather than reserving it for the worst cases.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Hydroxycarbamide increases HbF production"
-          },
-          {
-            "id": "b",
-            "label": "HbF dilutes intracellular HbS"
-          },
-          {
-            "id": "c",
-            "label": "Polymerisation and crises fall"
-          },
-          {
-            "id": "d",
-            "label": "Survival improves with adherence"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Irreversible Sickle Cells",
+     "points": [
+      "Remain crescent-shaped despite full oxygenation",
+      "Dehydrated with high MCHC and low potassium",
+      "Rigid membrane damages endothelial cells",
+      "Destroyed rapidly in splenic red pulp"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Repeated microvascular infarctions within the splenic red pulp lead inexorably to **autosplenectomy** by early childhood. Successive episodes of sickling, thrombosis, and ischemic necrosis replace splenic lymphoid tissue with dense fibrous scar tissue and calcified iron-calcium deposits known as Gandy-Gamna bodies. Functional asplenia leaves patients immunologically vulnerable to overwhelming encapsulated bacterial infections, particularly Streptococcus pneumoniae and Salmonella osteomyelitis.",
+   "say": "Repeated sickle blockages in the spleen cause progressive infarction. By childhood, the spleen shrivels into a tiny calcified fibrous knob, a process called autosplenectomy. Without a functioning spleen, patients lose antibody protection against encapsulated bacteria, placing them at immense risk of fatal pneumococcal sepsis and Salmonella bone infections.",
+   "vis": {
+    "kind": "table",
+    "title": "Splenic Pathology in Sickle Cell Disease",
+    "cols": [
+     "Patient Age",
+     "Splenic Gross Pathology",
+     "Microscopic Finding",
+     "Clinical Vulnerability"
+    ],
+    "rows": [
+     [
+      "Infancy (<1 year)",
+      "Splenomegaly with red pulp congestion",
+      "Massive trapping of sickled erythrocytes",
+      "Acute splenic sequestration crisis"
+     ],
+     [
+      "Children (2 to 5 yrs)",
+      "Progressive infarction with scarring",
+      "Gandy-Gamna siderocalcific nodules",
+      "Loss of IgM memory B cell opsonization"
+     ],
+     [
+      "Adolescents / adults",
+      "Autosplenectomy (tiny calcified nubbin)",
+      "Total fibrotic obliteration of red pulp",
+      "Howell-Jolly bodies on peripheral blood smear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis requires alkaline and acidic **haemoglobin electrophoresis** or high-performance liquid chromatography. In homozygous sickle cell disease (HbSS), hemoglobin S accounts for eighty-five to ninety-five percent of total hemoglobin, hemoglobin F comprises five to fifteen percent, and normal adult hemoglobin A is completely absent. In benign heterozygous sickle cell trait (HbAS), hemoglobin A predominates at sixty percent, protecting against severe sickling.",
+   "say": "Confirm the diagnosis with hemoglobin electrophoresis or HPLC. In homozygous sickle cell disease, hemoglobin S dominates at eighty-five to ninety-five percent, with elevated fetal hemoglobin, and hemoglobin A is completely absent. In benign sickle cell trait, normal hemoglobin A makes up sixty percent, preventing sickling except under extreme hypoxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sickle Cell Disease (HbSS)",
+     "points": [
+      "HbS: 85 to 95 percent of total hemoglobin",
+      "HbF: 5 to 15 percent (protective)",
+      "HbA: 0 percent (completely absent)",
+      "Severe hemolytic anaemia and crises"
+     ]
+    },
+    "right": {
+     "title": "Sickle Cell Trait (HbAS)",
+     "points": [
+      "HbA: 55 to 60 percent (dominant)",
+      "HbS: 35 to 40 percent of total hemoglobin",
+      "HbA2 and HbF: normal levels",
+      "Asymptomatic; confers malaria resistance"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What specific amino acid substitution causes the formation of hemoglobin S?",
+   "options": [
+    "Valine replaces glutamic acid at codon 6 of the beta-globin chain",
+    "Lysine replaces glutamic acid at codon 6 of the beta-globin chain",
+    "Glutamic acid replaces valine at codon 26 of the alpha-globin chain",
+    "Arginine replaces histidine at codon 146 of the beta-globin chain"
+   ],
+   "correct": 0,
+   "explain": "A point mutation (GAG to GTG) at codon 6 of the beta-globin gene substitutes non-polar valine for negatively charged glutamic acid, creating HbS."
+  },
+  {
+   "q": "What peripheral blood smear finding indicates functional asplenia following autosplenectomy in sickle cell anaemia?",
+   "options": [
+    "Howell-Jolly bodies",
+    "Heinz bodies",
+    "Auer rods",
+    "Cabot rings in all monocytes"
+   ],
+   "correct": 0,
+   "explain": "Howell-Jolly bodies (nuclear DNA remnants normally pitted out by the spleen) persist in circulating red cells following autosplenectomy."
+  }
+ ]
 }

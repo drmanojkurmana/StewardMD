@@ -1,207 +1,170 @@
 {
-  "v": 1,
-  "module": "pat-haemoglobinopathies",
-  "subject": "pathology",
-  "title": "Target Cells, Hair-on-End Skull, Alpha Thalassaemia, HbH, and Hb Barts",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Target cells carry excess membrane relative to haemoglobin, the bullseye centre forming where haemoglobin pools, and they appear in thalassaemias, haemoglobin C disease, liver disease, and after splenectomy. The bullseye cell is the **target cell (codocyte)**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Target cells mean membrane excess: thalassaemia, haemoglobin C, liver disease, or no spleen.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Target cells prominent",
-          "points": [
-            "Thalassaemias, HbC disease",
-            "Liver disease, splenectomy",
-            "Membrane lipid excess physiology"
-          ]
-        },
-        "right": {
-          "title": "Do not confuse with",
-          "points": [
-            "Spherocytes: membrane lost, opposite problem",
-            "Stomatocytes: mouth shaped pallor",
-            "Acanthocytes: spiked, liver and abetalipoproteinaemia"
-          ]
-        }
-      }
+ "v": 1,
+ "id": "pat-haemoglobinopathies-target-cells",
+ "subject": "pathology",
+ "module": "pat-haemoglobinopathies",
+ "title": "Target Cells (Codocytes)",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **target cell**, designated scientifically as a codocyte or Mexican hat cell, represents an abnormal erythrocyte characterized by a central rounded area of hemoglobin surrounded by a clear concentric halo and an outer hemoglobinized rim. The pathognomonic biophysical defect responsible for target cell formation is an increased surface-area-to-volume ratio of the red blood cell.",
+   "say": "Target cells, or codocytes, look like miniature archery targets or Mexican hats on blood films. They feature a central bullseye of pink hemoglobin, surrounded by a clear ring, enclosed by an outer pink rim. This distinctive look occurs whenever the red blood cell has an increased surface area relative to its internal volume.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
+    "alt": "Peripheral blood smear displaying target cells and sickle cells under high power magnification.",
+    "caption": "Target cells displaying central hemoglobin disc and outer peripheral rim on blood smear.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An increased surface-to-volume ratio arises through two distinct physiological mechanisms: **absolute membrane excess** or decreased intracellular hemoglobin content. Absolute membrane expansion occurs when excess cholesterol and phospholipids incorporate into the lipid bilayer, as seen in obstructive liver disease. Conversely, decreased cytoplasmic volume occurs when defective globin chain or heme synthesis produces underfilled, microcytic hypochromic cells.",
+   "say": "Target cells form through two main pathways: too much membrane or too little hemoglobin. In obstructive jaundice, excess cholesterol piles into the outer cell membrane, making it floppy. In thalassaemias and severe iron deficiency, the cell lacks hemoglobin, so the normal membrane droops like a deflated balloon.",
+   "vis": {
+    "kind": "table",
+    "title": "Mechanisms and Clinical Associations",
+    "cols": [
+     "Mechanism",
+     "Biochemical Pathway",
+     "Clinical Conditions",
+     "Associated Blood Smear Features"
+    ],
+    "rows": [
+     [
+      "Membrane lipid excess",
+      "LCAT enzyme inhibition; cholesterol load",
+      "Obstructive jaundice, cholestatic liver disease",
+      "Macrocytic target cells, stomatocytes"
+     ],
+     [
+      "Deficient haemoglobin",
+      "Impaired globin or iron synthesis",
+      "Beta-thalassaemia, alpha-thalassaemia, IDA",
+      "Microcytic hypochromic, teardrop cells"
+     ],
+     [
+      "Abnormal haemoglobin",
+      "Precipitation of mutant Hb polymers",
+      "Haemoglobin C disease (HbCC), HbSC, HbE",
+      "HbC crystals, microspherocytes"
+     ],
+     [
+      "Absence of splenic pitting",
+      "Loss of splenic macrophage conditioning",
+      "Post-splenectomy, autosplenectomy",
+      "Howell-Jolly bodies, acanthocytes, Pappenheimers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severe hemoglobinopathies, **haemoglobin C disease** produces the highest percentage of target cells, often exceeding forty to fifty percent of all circulating erythrocytes. Hemoglobin C results from a point mutation at codon six substituting lysine for glutamic acid. The mutant hemoglobin has low aqueous solubility, precipitating into dense rod-shaped or hexagonal intraerythrocytic crystals that force residual hemoglobin into a central bullseye target.",
+   "say": "Hemoglobin C disease produces more target cells than almost any other condition, often over forty percent of the smear. A point mutation substitutes lysine for glutamic acid. Hemoglobin C crystallizes easily into hexagonal, rod-shaped crystals inside the cell, leaving behind classic, rigid target cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemoglobin C Disease (HbCC)",
+     "points": [
+      "Lysine substituted at codon 6 of beta chain",
+      "Target cells exceed 40 to 50 percent",
+      "Intraerythrocytic hexagonal crystals",
+      "Mild chronic extravascular haemolysis"
+     ]
     },
-    {
-      "tx": "Marrow expansion in severe thalassaemia thickens the skull diplo\u00eb into perpendicular trabeculae likened to hair standing on end, with frontal bossing and maxillary overgrowth producing the classic facies. The radiological sign is the **hair-on-end skull** appearance. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "Hair-on-end skull is marrow expansion written in bone; effective transfusion prevents the facies developing.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Site",
-          "Expansion effect",
-          "Disease clue"
-        ],
-        "rows": [
-          [
-            "Skull",
-            "Hair-on-end diplo\u00eb",
-            "Thalassaemia major, severe haemolysis"
-          ],
-          [
-            "Face",
-            "Frontal bossing, maxillary hypertrophy",
-            "Chipmunk facies of thalassaemia"
-          ],
-          [
-            "Long bones",
-            "Thin cortices, Erlenmeyer flask shapes",
-            "Marrow hyperplasia states"
-          ],
-          [
-            "Spleen and liver",
-            "Extramedullary haematopoiesis masses",
-            "Myelofibrosis, thalassaemia intermedia"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Alpha thalassaemia deletes alpha genes one by one from the four available: one deletion silent, two trait, three leaves beta tetramers called HbH with chronic haemolysis, and four is lethal in utero. Gene counting predicts phenotype in **alpha thalassaemia**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Count the deleted alpha genes: one silent, two trait, three HbH disease, four hydrops fetalis.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/alpha-thalassemia-fig1.webp",
-        "alt": "Alpha thalassaemia hematology and hemoglobin pattern",
-        "caption": "Alpha thalassaemia gene deletions and their haemoglobin patterns from silent carrier to hydrops."
-      }
-    },
-    {
-      "tx": "HbH, a tetramer of beta chains, is unstable, precipitates with brilliant cresyl blue as golf ball inclusions, oxidises membranes, and haemolyses moderately with splenomegaly. The beta tetramer disease is **HbH disease** of three gene deletion alpha thalassaemia. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "HbH inclusions look like golf balls under cresyl blue; three deleted alpha genes produce chronic haemolysis.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "HbH disease (3 deletions)",
-          "points": [
-            "Beta4 tetramers, inclusions",
-            "Moderate haemolysis, splenomegaly",
-            "Avoid oxidants, folate support"
-          ]
-        },
-        "right": {
-          "title": "Hb Barts hydrops (4 deletions)",
-          "points": [
-            "Gamma4 tetramers cannot release oxygen",
-            "Severe fetal anaemia, hydrops",
-            "Intrauterine transfusion or lethal"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Hb Barts, gamma chain tetramers of the fetus, binds oxygen so avidly it never releases it to tissues, so four gene deletion fetuses drown in hydrops from high output failure and profound anaemia. The lethal fetal haemoglobin is **Hb Barts (gamma4)**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Hb Barts never lets go of oxygen; four alpha deletions therefore kill the fetus by tissue suffocation.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Four alpha genes deleted"
-          },
-          {
-            "id": "b",
-            "label": "Gamma chains form Hb Barts tetramers"
-          },
-          {
-            "id": "c",
-            "label": "Oxygen bound but never released"
-          },
-          {
-            "id": "d",
-            "label": "Hydrops fetalis and fetal death"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Newborn alpha trait shows Hb Barts in cord blood percentages that betray gene number, while adults show only microcytosis with normal HbA2, separating alpha trait from beta trait at the bench. Cord blood Barts percentage performs **alpha thalassaemia newborn grading**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Normal HbA2 with microcytosis separates alpha trait from beta trait; cord blood Barts grades the newborn.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Alpha genes deleted",
-          "Name",
-          "Hb pattern"
-        ],
-        "rows": [
-          [
-            "One",
-            "Silent carrier",
-            "Normal film, normal fractions"
-          ],
-          [
-            "Two",
-            "Alpha trait",
-            "Microcytosis, normal HbA2, Barts at birth"
-          ],
-          [
-            "Three",
-            "HbH disease",
-            "HbH inclusions, haemolysis"
-          ],
-          [
-            "Four",
-            "Hb Barts hydrops",
-            "Gamma4, lethal without intervention"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Couple screening prevents thalassaemia major births: both partners microcytic triggers fraction analysis and DNA studies, with prenatal or preimplantation diagnosis offered when both carry severe traits. The public health programme is **thalassaemia couple screening**. Remembering it prevents the commonest errors made with this presentation entirely.",
-      "say": "Screen couples, not just patients: two carriers together earn DNA studies and prenatal choices.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
-        "alt": "Blood smear sickle cell anaemia",
-        "caption": "Haemoglobinopathy blood film patterns guiding couple screening and diagnosis."
-      }
-    },
-    {
-      "tx": "Intermedia phenotypes punish rigid labels: alpha trait coinherited with sickle disease softens sickling, while beta thalassaemia intermedia patients may transfuse only in pregnancy, infection, or growth failure. Genotype plus clinical course together assign **thalassaemia intermedia management**. The clinical payoff comes from applying it early, before complications accumulate further.",
-      "say": "Coinheritance rewrites severity; manage the patient in front of you, not the textbook label.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Modifiers that soften",
-          "points": [
-            "Alpha trait with sickle disease",
-            "High HbF persistence genes",
-            "Milder beta plus mutations"
-          ]
-        },
-        "right": {
-          "title": "Modifiers that worsen",
-          "points": [
-            "Extra alpha genes with beta trait",
-            "Iron loading, splenectomy risks",
-            "Coinherited G6PD deficiency"
-          ]
-        }
-      }
+    "right": {
+     "title": "Thalassaemia Major / Minor",
+     "points": [
+      "Imbalanced globin chain synthesis",
+      "Target cells combined with microcytosis",
+      "Marked basophilic stippling",
+      "Severe hypochromia with low MCV (<70 fL)"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "In liver disease, target cell genesis is driven by **lecithin-cholesterol acyltransferase** (LCAT) deficiency. Biliary obstruction elevates circulating unesterified cholesterol and bile salts, which inhibit LCAT activity. Excess free cholesterol and phosphatidylcholine transfer directly from plasma lipoproteins into the erythrocyte outer leaflet. The surface area expands by up to twenty percent without any change in cell volume, buckling the central membrane.",
+   "say": "In obstructive liver disease, bile stasis shuts down the enzyme LCAT. Unesterified free cholesterol in plasma transfers directly into the red cell outer membrane, expanding its surface area by twenty percent. The floppy excess membrane folds into the center, creating macrocytic target cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver Disease Target Cells",
+     "points": [
+      "LCAT enzyme inhibition by biliary obstruction",
+      "Direct lipid transfer expands outer membrane",
+      "Cells are macrocytic or normocytic (high MCV)",
+      "Normal intracellular haemoglobin concentration"
+     ]
+    },
+    "right": {
+     "title": "Thalassaemic Target Cells",
+     "points": [
+      "Normal membrane lipid composition",
+      "Severe intracellular haemoglobin deficit",
+      "Cells are strikingly microcytic (low MCV)",
+      "Prominent hypochromia with low MCH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The critical diagnostic pitfall is confusing target cells with **stomatocytes or artefacts**. True target cells display symmetric concentric rings across the entire smear, whereas drying artefacts exhibit irregular off-center puddles. Splenectomy universally increases target cells because the spleen normally conditions erythrocytes, plucking out redundant lipid. Target cells possess increased osmotic resistance, shifting the osmotic fragility curve to the left.",
+   "say": "Be careful not to confuse real target cells with drying artefacts. True target cells show crisp concentric rings throughout the film. Remember that target cells have excess membrane, making them unusually resistant to bursting in hypotonic water, which shifts the osmotic fragility curve to the left, the exact opposite of spherocytes.",
+   "vis": {
+    "kind": "table",
+    "title": "Osmotic Fragility Comparison",
+    "cols": [
+     "Erythrocyte Morphology",
+     "Surface-to-Volume Ratio",
+     "Osmotic Fragility Behavior",
+     "Diagnostic Conditions"
+    ],
+    "rows": [
+     [
+      "Target cells (Codocytes)",
+      "Increased surface-to-volume",
+      "Decreased fragility (resistant to lysis)",
+      "Thalassaemia, liver disease, splenectomy"
+     ],
+     [
+      "Spherocytes",
+      "Decreased surface-to-volume",
+      "Increased fragility (lyse readily)",
+      "Hereditary spherocytosis, warm AIHA"
+     ],
+     [
+      "Normal biconcave disc",
+      "Normal physiological ratio",
+      "Normal standard sigmoidal curve",
+      "Healthy individuals"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the primary biophysical abnormality responsible for target cell (codocyte) formation?",
+   "options": [
+    "Increased surface-area-to-volume ratio",
+    "Decreased surface-area-to-volume ratio",
+    "Complete absence of spectrin-actin cross-linking",
+    "Enzymatic deficiency of pyruvate kinase"
+   ],
+   "correct": 0,
+   "explain": "Target cells form due to an increased surface-area-to-volume ratio, caused either by absolute membrane lipid excess or by decreased intracellular hemoglobin content."
+  },
+  {
+   "q": "How does the presence of target cells affect the red blood cell osmotic fragility curve?",
+   "options": [
+    "Shifts the curve to the left, indicating increased resistance to osmotic lysis",
+    "Shifts the curve to the right, indicating premature lysis in hypotonic saline",
+    "Has zero effect on osmotic fragility parameters",
+    "Causes immediate instantaneous lysis in isotonic saline"
+   ],
+   "correct": 0,
+   "explain": "Because target cells have redundant surface membrane, they can take up more water before their membrane stretches to the lytic threshold, shifting the curve to the left (decreased fragility)."
+  }
+ ]
 }

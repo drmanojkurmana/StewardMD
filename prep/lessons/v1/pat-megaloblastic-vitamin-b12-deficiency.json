@@ -1,228 +1,176 @@
 {
-  "v": 1,
-  "module": "pat-megaloblastic",
-  "subject": "pathology",
-  "title": "Vitamin B12 Deficiency, Folate Deficiency, and Pernicious Anaemia",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "When DNA synthesis stalls for want of vitamin B12 or folate, cytoplasm matures faster than nucleus, producing large fragile red cell precursors that die in marrow and macrocytes in blood. Hypersegmented neutrophils announce the process on film; the shared morphology is **megaloblastic anaemia**.",
-      "say": "B12 or folate lack stalls DNA synthesis and creates megaloblastic blood: macrocytes plus hypersegmented neutrophils.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/megaloblastic-and-macrocytic-anaemias-fig1.webp",
-        "alt": "Megaloblastic anaemia cytological features",
-        "caption": "Megaloblastic anaemia cytology with macro-ovalocytes and hypersegmented neutrophils."
-      }
+ "v": 1,
+ "id": "pat-megaloblastic-vitamin-b12-deficiency",
+ "subject": "pathology",
+ "module": "pat-megaloblastic",
+ "title": "Vitamin B12 Deficiency",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **vitamin B12 deficiency** results from impaired intake, absorption, or transport of cobalamin, an organometallic micronutrient synthesized exclusively by microorganisms. Humans depend on dietary animal products such as meat, dairy, and eggs. Because the liver stores two to five milligrams of cobalamin and daily physiological turnover is only one to two micrograms, dietary deficiency takes three to five years of strict veganism to manifest.",
+   "say": "Vitamin B12, or cobalamin, is synthesized only by bacteria, so humans must obtain it from meat, dairy, and eggs. The human liver holds a massive reserve of two to five milligrams against a tiny daily requirement of one to two micrograms. That is why it takes three to five years of strict veganism to deplete body stores.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/b12-deficiency-fig1.webp",
+    "alt": "Diagram illustrating gastric intrinsic factor absorption in terminal ileum and spinal cord demyelination.",
+    "caption": "Gastric intrinsic factor pathway and spinal cord demyelination in vitamin B12 deficiency.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physiological absorption requires complex **gastric intrinsic factor** transport. In the acidic stomach, pepsin releases dietary cobalamin to bind salivary haptocorrin. In the duodenum, pancreatic proteases degrade haptocorrin, allowing B12 to bind intrinsic factor, a glycoprotein secreted by gastric parietal cells. The B12-intrinsic factor complex travels to the terminal ileum, binding to specialized cubam surface receptors for calcium-dependent endocytosis.",
+   "say": "Absorption is a relay race. In the stomach, B12 binds salivary haptocorrin. In the duodenum, pancreatic enzymes strip haptocorrin away, handing B12 over to intrinsic factor secreted by gastric parietal cells. This B12-intrinsic factor complex travels down to the terminal ileum, where it binds cubam receptors for absorption.",
+   "vis": {
+    "kind": "table",
+    "title": "Gastrointestinal Absorption Milestones",
+    "cols": [
+     "Anatomical Station",
+     "Biochemical Event",
+     "Key Molecular Chaperone",
+     "Pathological Disruption"
+    ],
+    "rows": [
+     [
+      "Stomach (Fundus)",
+      "Acid and pepsin liberate B12; parietal cells secrete IF",
+      "Haptocorrin and Intrinsic Factor",
+      "Atrophic gastritis, gastrectomy, proton pump inhibitors"
+     ],
+     [
+      "Duodenum",
+      "Pancreatic proteases cleave haptocorrin-B12",
+      "Trypsin and chymotrypsin",
+      "Chronic pancreatitis, pancreatic insufficiency"
+     ],
+     [
+      "Terminal ileum",
+      "Receptor-mediated endocytosis of IF-B12 complex",
+      "Cubam receptor (cubilin / amnionless)",
+      "Crohn disease, ileal resection, tapeworm (D. latum)"
+     ],
+     [
+      "Portal circulation",
+      "Transcellular transfer into bloodstream",
+      "Transcobalamin II (TC-II)",
+      "Congenital transcobalamin II deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common etiology of severe deficiency is **pernicious anaemia**, an autoimmune disorder characterized by immune destruction of gastric parietal cells and chronic atrophic gastritis. Circulating autoantibodies target gastric parietal cells (anti-parietal cell antibodies, ninety percent sensitive) and intrinsic factor (anti-IF antibodies, ninety-five percent specific). Achlorhydria and elevated serum gastrin levels develop, with an increased risk of gastric adenocarcinoma.",
+   "say": "Pernicious anaemia is the leading cause of severe B12 deficiency. Autoimmune T cells destroy gastric parietal cells, causing atrophic gastritis and loss of intrinsic factor. Anti-parietal cell antibodies are ninety percent sensitive, while anti-intrinsic factor antibodies are ninety-five percent specific. The chronic gastritis also carries an elevated lifetime risk of gastric cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-Parietal Cell Antibodies",
+     "points": [
+      "Target gastric H+/K+ ATPase pump",
+      "Present in >90% of pernicious anaemia",
+      "High diagnostic sensitivity, lower specificity",
+      "Found in other autoimmune endocrinopathies"
+     ]
     },
-    {
-      "tx": "Vitamin B12 absorption is a relay: gastric acid frees it from food, intrinsic factor from parietal cells carries it, and ileal receptors absorb the complex, so gastrectomy, ileal disease, and vegan diets each break a different leg. The carrier protein is **intrinsic factor**.",
-      "say": "Acid frees B12, intrinsic factor carries it, and the ileum absorbs it; each step is a separate cause of deficiency.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Acid and pepsin free B12 from food"
-          },
-          {
-            "id": "b",
-            "label": "Intrinsic factor binds B12 in duodenum"
-          },
-          {
-            "id": "c",
-            "label": "Ileal receptors absorb the complex"
-          },
-          {
-            "id": "d",
-            "label": "Transcobalamin delivers B12 to marrow"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Autoimmune destruction of gastric parietal cells removes both acid and intrinsic factor, producing achlorhydria, high gastrin, and B12 malabsorption with associated thyroid and vitiligo autoimmunity. Antibodies against intrinsic factor are highly specific; the disease is **pernicious anaemia**. This point is tested repeatedly because it changes everyday bedside decisions.",
-      "say": "Pernicious anaemia is autoimmune gastritis destroying parietal cells; intrinsic factor antibodies make the diagnosis specific.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/pernicious-anemia-fig1.webp",
-        "alt": "Pernicious anaemia gastric pathology",
-        "caption": "Pernicious anaemia gastric pathology with parietal cell loss and intestinal metaplasia."
-      }
-    },
-    {
-      "tx": "The historical Schilling test traced radiolabelled B12 excretion with and without intrinsic factor to localise malabsorption, and although assays replaced it, its logic still teaches how to think about absorption failure. That staged absorption logic is the **Schilling test principle**. Examiners return to it because it separates careful clinicians from guesswork.",
-      "say": "The Schilling test is historical, but its with and without intrinsic factor logic still teaches absorption thinking.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Modern first tests",
-          "points": [
-            "Serum B12 and folate levels",
-            "Methylmalonic acid and homocysteine",
-            "Intrinsic factor and parietal cell antibodies"
-          ]
-        },
-        "right": {
-          "title": "Schilling era logic",
-          "points": [
-            "Labelled B12 excretion measured",
-            "Correction by intrinsic factor localised defect",
-            "Replaced by antibody and metabolite assays"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Neutrophils with six or more nuclear lobes, or more than five percent with five lobes, are the earliest and most sensitive film sign, appearing before anaemia and persisting days into treatment. The sign is the **hypersegmented neutrophil**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
-      "say": "Hypersegmented neutrophils appear before the anaemia does; count the lobes on every macrocytic film.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "B12 deficiency",
-          "Folate deficiency"
-        ],
-        "rows": [
-          [
-            "Neurology",
-            "Subacute combined degeneration, neuropathy",
-            "Absent"
-          ],
-          [
-            "Homocysteine",
-            "Raised",
-            "Raised"
-          ],
-          [
-            "Methylmalonic acid",
-            "Raised",
-            "Normal"
-          ],
-          [
-            "Onset speed",
-            "Years of stores, slow",
-            "Months of stores, faster"
-          ],
-          [
-            "Pregnancy concern",
-            "Less central",
-            "Neural tube defect prevention"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Folate deficiency arrives faster because stores last months, not years: poor diet, alcohol, pregnancy demand, haemolysis, and antifolate drugs such as methotrexate and trimethoprim dominate its causes. Neural tube prevention made periconception folate public health; the vitamin is **folate (vitamin B9)**. Students should anchor this fact before moving to rarer causes and exceptions.",
-      "say": "Folate stores last months, B12 stores last years; that clock separates their histories at the bedside.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Folate deficiency causes",
-          "points": [
-            "Poor diet, alcohol excess",
-            "Pregnancy and haemolysis demand",
-            "Methotrexate, trimethoprim blockade"
-          ]
-        },
-        "right": {
-          "title": "B12 deficiency causes",
-          "points": [
-            "Pernicious anaemia, gastrectomy",
-            "Ileal Crohn disease or resection",
-            "Strict vegan diet, metformin"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Never give folate alone to an undifferentiated megaloblastic patient, because the blood may improve while B12 neurology worsens silently toward irreversible cord damage. Check B12 first or treat both; that safety rule is **folate masking of B12 deficiency**. In practice this distinction decides the next test, treatment, or referral made.",
-      "say": "Folate alone can fix the blood while the cord rots; always secure B12 status first.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Megaloblastic anaemia confirmed"
-          },
-          {
-            "id": "b",
-            "label": "Measure B12, folate, metabolites"
-          },
-          {
-            "id": "c",
-            "label": "Replace B12 first or both together"
-          },
-          {
-            "id": "d",
-            "label": "Watch potassium and reticulocyte surge"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Treatment matches cause: intramuscular hydroxocobalamin reloads B12 regardless of absorption, high dose oral therapy works by passive diffusion, and folate repletion follows B12 security with reticulocytosis within a week. Lifelong replacement follows pernicious anaemia; the principle is **cause-matched vitamin replacement**. That is why this detail earns its place in every examination and ward round.",
-      "say": "Inject B12 when absorption is broken, refill folate after B12 is safe, and expect reticulocytes within a week.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Scenario",
-          "Replacement route",
-          "Monitoring"
-        ],
-        "rows": [
-          [
-            "Pernicious anaemia",
-            "Intramuscular hydroxocobalamin lifelong",
-            "Blood count, neurology review"
-          ],
-          [
-            "Dietary B12 lack",
-            "High dose oral cobalamin",
-            "Levels and diet review"
-          ],
-          [
-            "Folate deficiency",
-            "Oral folic acid after B12 secured",
-            "Haemoglobin response"
-          ],
-          [
-            "Pregnancy prevention",
-            "Periconception folic acid",
-            "Public health supplementation"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Anti-Intrinsic Factor Antibodies",
+     "points": [
+      "Block B12 binding or ileal cubam receptor",
+      "Present in 50 to 70% of pernicious anaemia",
+      "Virtually 100 percent diagnostic specificity",
+      "Definitive confirmation of pernicious anaemia"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Cobalamin serves as an essential cofactor for two vital intracellular enzymes: methionine synthase and **methylmalonyl-CoA mutase**. Methionine synthase utilizes methyl-cobalamin to convert homocysteine into methionine; its deficiency traps folate as N5-methyl-THF (the folate trap). Methylmalonyl-CoA mutase uses adenosyl-cobalamin to isomerize methylmalonyl-CoA into succinyl-CoA. In B12 deficiency, methylmalonic acid and homocysteine both accumulate in serum, whereas folate deficiency elevates homocysteine alone.",
+   "say": "B12 runs two vital enzymes. Methionine synthase turns homocysteine into methionine. Methylmalonyl-CoA mutase turns methylmalonyl-CoA into succinyl-CoA. In B12 deficiency, both homocysteine and methylmalonic acid build up in blood. In folate deficiency, only homocysteine is elevated while methylmalonic acid remains completely normal, cleanly separating the two.",
+   "vis": {
+    "kind": "table",
+    "title": "Biochemical Differentiation: B12 versus Folate",
+    "cols": [
+     "Laboratory Marker",
+     "Vitamin B12 Deficiency",
+     "Folate Deficiency",
+     "Physiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Serum Methylmalonic Acid (MMA)",
+      "Markedly elevated",
+      "Completely normal",
+      "Specific marker of methylmalonyl-CoA mutase failure"
+     ],
+     [
+      "Serum Total Homocysteine",
+      "Markedly elevated",
+      "Markedly elevated",
+      "Shared methionine synthase cofactor failure"
+     ],
+     [
+      "Serum Cobalamin",
+      "Low (<200 pg/mL)",
+      "Normal",
+      "Direct measure of circulating cobalamin"
+     ],
+     [
+      "Red Blood Cell Folate",
+      "Normal or decreased",
+      "Markedly decreased",
+      "Best indicator of long-term tissue folate stores"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unlike folate deficiency, cobalamin depletion inflicts irreversible neurological injury presenting as **subacute combined degeneration** of the spinal cord. Defective methylation impairs myelin sheath maintenance, causing symmetrical demyelination of the posterior dorsal columns (loss of vibration and position sense with sensory ataxia) and lateral corticospinal tracts (spastic paraparesis). Administering folic acid alone without B12 corrects the anaemia but tragically accelerates irreversible paraplegia.",
+   "say": "B12 deficiency destroys myelin, causing subacute combined degeneration of the spinal cord. Demyelination strikes the posterior columns, wiping out vibration and proprioception, and the lateral corticospinal tracts, causing spastic leg weakness. Never treat megaloblastic anaemia with folate alone without ruling out B12 deficiency, because folate cures the anaemia while letting spinal cord damage march to irreversible paralysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subacute Combined Degeneration",
+     "points": [
+      "Posterior column: loss of position and vibration",
+      "Lateral corticospinal: spastic paraparesis and Babinski",
+      "Peripheral neuropathy: symmetrical glove-and-stocking",
+      "Cerebral: dementia, paranoia (megaloblastic madness)"
+     ]
+    },
+    "right": {
+     "title": "Folate Trap Pitfall",
+     "points": [
+      "Folate supplementation bypasses thymidine block",
+      "Hematological parameters fully normalize",
+      "Spinal cord demyelination progresses unchecked",
+      "Always measure B12 before administering high-dose folate"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which metabolic assay cleanly differentiates vitamin B12 deficiency from folate deficiency?",
+   "options": [
+    "Serum methylmalonic acid (elevated in B12 deficiency, normal in folate deficiency)",
+    "Serum total homocysteine (elevated in B12 deficiency, absent in folate deficiency)",
+    "Red blood cell mean corpuscular volume (elevated only in B12 deficiency)",
+    "Serum lactate dehydrogenase (elevated only in folate deficiency)"
+   ],
+   "correct": 0,
+   "explain": "Serum methylmalonic acid is elevated in B12 deficiency due to methylmalonyl-CoA mutase failure, but remains completely normal in folate deficiency, whereas homocysteine is elevated in both."
+  },
+  {
+   "q": "Why is administering high-dose folic acid alone contraindicated in an undiagnosed megaloblastic anaemia?",
+   "options": [
+    "It corrects the haematological anaemia while allowing neurological demyelination to worsen irreversibly",
+    "It precipitates acute fatal intravascular hemolysis within 24 hours",
+    "It induces acute hyperkalemia and cardiac conduction block",
+    "It accelerates conversion of latent leukaemia into acute blast crisis"
+   ],
+   "correct": 0,
+   "explain": "Folate overcomes the thymidylate synthase block to resolve the macrocytic anaemia, but fails to prevent or reverse the demyelinating spinal cord damage of subacute combined degeneration."
+  }
+ ]
 }
