@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "FIGO Staging and Radical Treatment of Cervical Cancer",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Cancer confined to the cervix through spread to distant organs is ranked by **FIGO staging for cervical cancer**. Modern staging admits imaging and nodal findings alongside examination. Stage decides surgery against chemoradiation more than any other single fact. Accurate staging therefore precedes treatment promises in every new case.",
+   "say": "FIGO staging for cervical cancer ranks spread and decides treatment route.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Cervical cancer local spread.",
+    "caption": "Staging anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Early cancers confined to the cervix contrast with parametrial and pelvic wall disease, dividing **stage groups**. Tumour size within early stage separates simple from radical surgery. Nodal spread upgrades prognosis and treatment regardless of cervical size. Vaginal and bladder involvement each move the case toward combined modality care.",
+   "say": "Stage groups separate confined disease from parametrial and nodal spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Extent",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Cervix only",
+      "Surgery possible"
+     ],
+     [
+      "Parametrium",
+      "Chemoradiation"
+     ],
+     [
+      "Nodes or distant",
+      "Systemic thinking"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radical hysterectomy removing parametria and upper vagina with nodes is the **Wertheim operation**. It suits early cancers too large for simple hysterectomy but still confined. Nerve sparing technique protects bladder function that classic radical surgery sacrificed. Ovarian conservation is usual in young women with squamous tumours.",
+   "say": "The Wertheim operation involves radical hysterectomy for confined early cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Early cancer staged"
+     },
+     {
+      "id": "n1",
+      "label": "Radical hysterectomy"
+     },
+     {
+      "id": "n2",
+      "label": "Nodes assessed"
+     },
+     {
+      "id": "n3",
+      "label": "Adjuvant judged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiation with concurrent platinum chemotherapy for bulky or parametrial disease is **concurrent chemoradiation**. Chemotherapy sensitises tumour to radiation rather than acting alone. It equals surgery for several stages while preserving anatomy. Late bladder and bowel effects are counselled before the first fraction, not after.",
+   "say": "Concurrent chemoradiation involves radiation sensitised by platinum chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Role"
+    ],
+    "rows": [
+     [
+      "External radiation",
+      "Pelvis and nodes"
+     ],
+     [
+      "Chemotherapy",
+      "Sensitiser"
+     ],
+     [
+      "Brachytherapy",
+      "Cervical boost"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fertility sparing removal of the cervix for tiny early cancers is **radical trachelectomy**. Strict size and histology limits keep it oncologically safe. Cerclage at the same operation supports later pregnancy. It exists because Wertheim hysterectomy in a young woman trades cure against a family she has not started.",
+   "say": "Radical trachelectomy preserves fertility for strictly selected early cancers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trachelectomy",
+     "points": [
+      "Fertility kept",
+      "Tiny tumours only",
+      "Cerclage placed"
+     ]
+    },
+    "right": {
+     "title": "Radical hysterectomy",
+     "points": [
+      "Fertility ended",
+      "Wider eligibility",
+      "Standard radical cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bleeding, discharge and pelvic pain dominate presentation while screening failures explain delay, reviewing **cancer presentation**. Advanced disease obstructs ureters silently until renal failure announces it. Leg swelling signals nodal or venous involvement deep in the pelvis. Every symptom here represents a screening opportunity missed years earlier.",
+   "say": "Cancer presentation involves bleeding and pain after missed screening chances.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Bleeding",
+      "Friable tumour"
+     ],
+     [
+      "Renal failure",
+      "Ureter blocked"
+     ],
+     [
+      "Leg swelling",
+      "Nodes or veins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Palliation controls bleeding, pain and fistula distress when cure is impossible, defining **palliative priorities**. Palliative radiation stops bleeding efficiently in most women. Fistula care with skin protection and odour control restores dignity measurably. Honest prognosis talk lets women order their remaining time around family priorities.",
+   "say": "Palliative priorities involve controlling bleeding, pain and fistula distress.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Symptom burden listed"
+     },
+     {
+      "id": "n1",
+      "label": "Palliative radiation"
+     },
+     {
+      "id": "n2",
+      "label": "Fistula and pain care"
+     },
+     {
+      "id": "n3",
+      "label": "Family centred review"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stage, nodes and tumour volume predict outcome more than treatment brand, stating **prognostic factors**. Early screen detected cancers cure in the great majority. Nodal disease halves expectations and extends treatment fields. Prognosis talk uses ranges honestly, because individual courses regularly defy group averages.",
+   "say": "Prognostic factors involve stage, nodes and tumour volume predicting outcome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Early stage",
+      "Best outlook"
+     ],
+     [
+      "Positive nodes",
+      "Worse outlook"
+     ],
+     [
+      "Large volume",
+      "Worse outlook"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surveillance after treatment watches for recurrence at vault and nodes, following **follow up care**. Most recurrences declare within the first years with bleeding or pain. Routine imaging of well women adds little beyond examination and history. Survivors also need radiation late effect review of bladder, bowel and bone.",
+   "say": "Follow up care involves watching for recurrence and late radiation effects.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Patterns of cervical cancer spread.",
+    "caption": "Spread patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

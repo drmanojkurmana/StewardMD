@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-prolapse-urogynaecology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Ring Pessary, Stress Incontinence and Vesicovaginal Fistula",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A silicone ring supporting the uterus and walls inside the vagina is the **ring pessary**. It suits women unfit for or declining surgery and those awaiting operation. Correct size holds without pain, discharge or expulsion on coughing and walking. Neglected pessaries ulcerate and fistulate, so review dates are part of the prescription.",
+   "say": "A ring pessary supports prolapse for women who decline or await surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ins-pessary.webp",
+    "alt": "Ring and Gellhorn pessaries.",
+    "caption": "Pessary types. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fitting tests standing, walking and voiding before the woman leaves, following **pessary fitting** practice. Too small expels, too large erodes, and both failures declare themselves early. Oestrogen cream protects atrophic walls under the ring. Self removal and reinsertion empower women who can manage it and reduce clinic burden.",
+   "say": "Pessary fitting involves testing standing, walking and voiding before discharge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Size error",
+     "Result"
+    ],
+    "rows": [
+     [
+      "Too small",
+      "Expulsion"
+     ],
+     [
+      "Too large",
+      "Erosion, pain"
+     ],
+     [
+      "Correct",
+      "Holds silently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Leakage of urine on coughing from urethral hypermobility without detrusor contraction is **stress urinary incontinence**. Childbirth injury lets the urethra descend away from abdominal pressure transmission. Leakage is instant with the cough and stops with it. Pelvic floor training cures mild disease and remains first line everywhere.",
+   "say": "Stress urinary incontinence involves urethral hypermobility and instant cough leakage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/stress-urinary-incontinence-fig1.webp",
+    "alt": "Stress incontinence anatomy and ladder.",
+    "caption": "Stress incontinence. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A synthetic tape under the mid urethra acting as a backboard is the **midurethral sling**, commonly TVT. It supports only during pressure spikes, so voiding stays normal at rest. Bladder perforation at insertion is found by cystoscopy in theatre. It transformed stress incontinence surgery into a day case procedure.",
+   "say": "A midurethral sling supports the urethra only during pressure spikes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tape placed"
+     },
+     {
+      "id": "n1",
+      "label": "Cystoscopy checks bladder"
+     },
+     {
+      "id": "n2",
+      "label": "Voiding trial"
+     },
+     {
+      "id": "n3",
+      "label": "Day case home"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Elevating the bladder neck with sutures to the pelvic sidewall is **Burch colposuspension**. It was the gold standard before slings and still suits women having other open surgery. Voiding difficulty and new prolapse are its known costs. Comparing sling and Burch teaches minimally invasive access against native tissue durability.",
+   "say": "Burch colposuspension elevates the bladder neck with native tissue sutures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sling (TVT)",
+     "points": [
+      "Day case",
+      "Synthetic tape",
+      "Bladder perforation risk"
+     ]
+    },
+    "right": {
+     "title": "Burch",
+     "points": [
+      "Open or laparoscopic",
+      "Native tissue",
+      "Voiding difficulty risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An abnormal channel between bladder and vagina leaking urine continuously is a **vesicovaginal fistula**. In wealthy settings surgery and radiation cause most; obstructed labour causes most globally. Continuous painless leakage day and night separates fistula from stress leakage. Every fistula story carries social devastation that repair alone must also heal.",
+   "say": "A vesicovaginal fistula causes continuous painless urinary leakage after injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Setting"
+    ],
+    "rows": [
+     [
+      "Obstructed labour",
+      "Low resource"
+     ],
+     [
+      "Pelvic surgery",
+      "High resource"
+     ],
+     [
+      "Radiation",
+      "Late, difficult"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Methylene blue dye in the bladder staining a vaginal swab confirms the channel, the **dye test**. Three swabs localise bladder against ureteric fistula by which swab wets. Cystoscopy maps the fistula against ureteric orifices before repair. Small fresh postoperative fistulas occasionally close with catheter drainage alone.",
+   "say": "The dye test confirms a vesicovaginal fistula and localises its opening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Dye fills bladder"
+     },
+     {
+      "id": "n1",
+      "label": "Swabs placed"
+     },
+     {
+      "id": "n2",
+      "label": "Stained swab localises"
+     },
+     {
+      "id": "n3",
+      "label": "Repair planned"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Repair succeeds on wide mobilisation, tension free layers and vascular tissue, the **fistula repair principles**. Operating on inflamed, infected tissue guarantees breakdown, so timing waits for health. Interposition grafts separate suture lines in recurrent or radiated fields. First repair offers the best chance, which argues for referral over heroic local attempts.",
+   "say": "Fistula repair principles require tension free vascular layers at first attempt.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Principle",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Wide mobilisation",
+      "No tension"
+     ],
+     [
+      "Healthy timing",
+      "No breakdown"
+     ],
+     [
+      "Layer separation",
+      "No recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continence surgery and prolapse repair interact because prolapse can mask leakage, teaching **combined counselling**. Reducing prolapse at assessment unmasks stress leakage that surgery must anticipate. Some women choose combined procedures; others stage them deliberately. Honest sequencing talk prevents the shock of new leakage after successful prolapse repair.",
+   "say": "Combined counselling explains that prolapse reduction can unmask stress leakage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/stress-urinary-incontinence-fig1.webp",
+    "alt": "Incontinence treatment ladder.",
+    "caption": "Incontinence ladder. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

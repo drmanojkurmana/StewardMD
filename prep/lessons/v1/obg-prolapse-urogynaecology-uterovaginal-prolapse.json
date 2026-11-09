@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-prolapse-urogynaecology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Uterovaginal Prolapse, POP-Q and Compartment Defects",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Descent of the uterus and vaginal walls through the introitus from failed pelvic supports is **uterovaginal prolapse**. Levator injury, ligament stretching and raised abdominal pressure combine over years. A vaginal bulge worse on standing and easing on lying is the classic story. Childbirth trauma starts the process that menopause and ageing later reveal.",
+   "say": "Uterovaginal prolapse involves descent from failed pelvic supports after childbirth injury.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-prolapse_popq.webp",
+    "alt": "POP-Q prolapse assessment.",
+    "caption": "Prolapse examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The nine point grid measuring prolapse against the hymen is the **POP-Q system**. Points above the hymen score negative and points beyond it score positive. The leading edge decides the stage that clinics quote. POP-Q replaced vague degrees because it lets different examiners record the same prolapse in identical language.",
+   "say": "The POP-Q system measures prolapse points against the hymen for staging.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-obg-popq_system.webp",
+    "alt": "POP-Q nine point grid.",
+    "caption": "POP-Q grid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anterior wall descent carrying the bladder is a cystocele, posterior descent carrying rectum a rectocele, naming **compartment defects**. Vault enterocele herniates small bowel through the pouch of Douglas between them. Each compartment fails separately, so repair must map all three. Missing an enterocele at hysterectomy invites vault prolapse years later.",
+   "say": "Compartment defects involve cystocele, rectocele and enterocele failing separately.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defect",
+     "Contents"
+    ],
+    "rows": [
+     [
+      "Cystocele",
+      "Bladder"
+     ],
+     [
+      "Rectocele",
+      "Rectum"
+     ],
+     [
+      "Enterocele",
+      "Small bowel"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete eversion of the vagina with the uterus outside the body is **procidentia**. Friction ulcerates the exposed cervix and keratinises the vaginal skin. Urinary retention and ureteric kinking threaten the kidneys behind neglected procidentia. It marks end stage support failure, usually in elderly women who delayed seeking care.",
+   "say": "Procidentia is complete eversion that threatens urinary drainage in elderly women.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Supports fail"
+     },
+     {
+      "id": "n1",
+      "label": "Uterus descends"
+     },
+     {
+      "id": "n2",
+      "label": "Vagina everts"
+     },
+     {
+      "id": "n3",
+      "label": "Procidentia forms"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bulge symptoms dominate early disease while ulceration and retention dominate late disease, grading **prolapse symptoms**. Stress incontinence may paradoxically improve as severe prolapse kinks the urethra shut. Splinting the posterior wall to defecate signals rectocele more than uterus. Symptom severity, not anatomy alone, decides who needs treatment at all.",
+   "say": "Prolapse symptoms range from bulge to retention and decide who needs treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage feel",
+     "Typical complaint"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "Bulge on standing"
+     ],
+     [
+      "Moderate",
+      "Manual reduction"
+     ],
+     [
+      "Severe",
+      "Retention, ulcer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Staging by the leading edge relative to the hymen standardises **prolapse staging**. Descent within the vagina, to the hymen, beyond it and complete eversion form the ascending scale. The hymen is the fixed landmark because it never moves with the prolapse. Stage guides pessary sizing, surgical planning and honest comparison of results.",
+   "say": "Prolapse staging uses the hymen as the fixed landmark for descent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Leading edge",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Inside vagina",
+      "Early"
+     ],
+     [
+      "At hymen",
+      "Moderate"
+     ],
+     [
+      "Fully everted",
+      "Procidentia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pessaries and pelvic floor training precede surgery for mild disease, while repair follows failure or preference, framing **prolapse treatment choice**. Surgery divides into vaginal, abdominal and obliterative routes by fitness and sexual activity. No operation cures the tissue weakness itself, so recurrence counselling is mandatory. Weight, constipation and chronic cough keep loading every repair afterwards.",
+   "say": "Prolapse treatment choice involves pessaries first and surgery after failure or preference.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conservative",
+     "points": [
+      "Pessary",
+      "Floor training",
+      "Mild disease"
+     ]
+    },
+    "right": {
+     "title": "Surgical",
+     "points": [
+      "Vaginal repair",
+      "Sacrocolpopexy",
+      "Failed conservative care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Removal of the prolapsed uterus through the vagina with wall repair is **vaginal hysterectomy** for prolapse. It avoids abdominal incisions and suits elderly women with comorbidity. Vault suspension at the same operation prevents trading uterine prolapse for vault prolapse. Tissue quality decides durability more than suture material ever does.",
+   "say": "Vaginal hysterectomy removes the prolapsed uterus and repairs the vaginal walls.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-vaginal-hysterectomy.webp",
+    "alt": "Vaginal hysterectomy for prolapse.",
+    "caption": "Vaginal hysterectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recurrence after repair reflects tissue failure more than technique failure, shaping **prolapse counselling**. Roughly a third of women need further treatment over a lifetime of follow up. New bulge with different symptoms may be a different compartment, not the same repair failing. Lifelong load reduction protects repairs better than any mesh debate.",
+   "say": "Prolapse counselling explains that recurrence reflects tissue failure over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Repair completed"
+     },
+     {
+      "id": "n1",
+      "label": "Loads continue"
+     },
+     {
+      "id": "n2",
+      "label": "Tissues stretch again"
+     },
+     {
+      "id": "n3",
+      "label": "Review and replan"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

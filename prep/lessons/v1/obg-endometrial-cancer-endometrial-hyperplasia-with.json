@@ -1,0 +1,184 @@
+{
+ "key": "obg-endometrial-cancer-endometrial-hyperplasia-with",
+ "v": 1,
+ "module": "obg-endometrial-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Endometrial Hyperplasia with Atypia and Type 1 Malignancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Proliferation of endometrial glands with nuclear pleomorphism and loss of cellular polarity defines **atypical endometrial hyperplasia**. Also termed endometrial intraepithelial neoplasia, this lesion carries a forty percent risk of concurrent invasive adenocarcinoma on definitive hysterectomy. Management in postmenopausal women or those completing childbearing is total hysterectomy with bilateral salpingo-oophorectomy.",
+   "say": "Atypical endometrial hyperplasia carries a high risk of concurrent adenocarcinoma and warrants surgical extirpation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathology",
+     "Concurrent Cancer Risk",
+     "First Line Management"
+    ],
+    "rows": [
+     [
+      "Hyperplasia without atypia",
+      "Less than 5 percent",
+      "Progestin therapy"
+     ],
+     [
+      "Atypical hyperplasia (EIN)",
+      "Up to 40 percent",
+      "Total hysterectomy with BSO"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic stimulation by estrogen lacking cyclical secretory conversion creates **unopposed estrogen excess**. In the absence of luteal progesterone, persistent glandular mitoses accumulate genetic mutations that drive malignant transformation. Common clinical settings include anovulatory cycles, early menarche, late menopause, nulliparity, and functional estrogen-secreting granulosa cell ovarian neoplasms.",
+   "say": "Unopposed estrogen excess promotes unbridled glandular proliferation without the protective differentiating effect of progesterone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Estrogenic Stimulation",
+     "points": [
+      "Unchecked glandular mitoses",
+      "Anovulation and nulliparity",
+      "Aromatase conversion in obesity"
+     ]
+    },
+    "right": {
+     "title": "Progestogenic Protection",
+     "points": [
+      "Halts epithelial cell division",
+      "Secretory differentiation",
+      "Synchronous cyclical shedding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Peripheral conversion of circulating androstenedione to estrone by adipocyte aromatase links **severe obesity** to uterine neoplasia. Women with a body mass index above thirty-five experience a fourfold increase in disease incidence. Elevated bioavailable estrogen combines with hyperinsulinemia and insulin-like growth factor one to hyperstimulate the endometrial basalis layer.",
+   "say": "Adipocyte aromatase converts adrenal androgens into estrone, multiplying endometrial cancer risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrine Factor",
+     "Mechanism",
+     "Uterine Consequence"
+    ],
+    "rows": [
+     [
+      "Adipose aromatase",
+      "Androstenedione to estrone",
+      "Continuous estrogenic drive"
+     ],
+     [
+      "Hyperinsulinemia",
+      "Suppresses SHBG synthesis",
+      "Higher free circulating estradiol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The selective estrogen receptor modulator **tamoxifen therapy** exerts antagonistic effects in mammary tissue while acting as a partial agonist on the postmenopausal endometrium. Women on adjuvant tamoxifen require immediate histological evaluation whenever abnormal uterine spotting develops. Prophylactic routine endometrial biopsy in asymptomatic tamoxifen users is not routinely recommended.",
+   "say": "Tamoxifen acts as an estrogen agonist on the uterus despite its antagonistic blockade in breast tissue.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tamoxifen.webp",
+    "alt": "Tamoxifen pharmacology diagram.",
+    "caption": "Tamoxifen estrogen receptor modulation across tissue targets. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Germline mutations in DNA mismatch repair proteins characterize **Lynch syndrome**, an autosomal dominant disorder also known as hereditary nonpolyposis colorectal cancer. Affected female carriers face a lifetime risk of endometrial adenocarcinoma approaching sixty percent, often equaling or exceeding their risk of colorectal malignancy. Prophylactic hysterectomy is recommended upon completing childbearing.",
+   "say": "Lynch syndrome carriers carry up to sixty percent lifetime risk for endometrial adenocarcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mismatch Repair Genes",
+     "points": [
+      "MLH1 and MSH2 mutations",
+      "MSH6 and PMS2 defects",
+      "Microsatellite instability"
+     ]
+    },
+    "right": {
+     "title": "Clinical Surveillance",
+     "points": [
+      "Annual endometrial biopsy from age 35",
+      "Colonoscopy every 1 to 2 years",
+      "Prophylactic surgery at 40 years"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The classic estrogen-dependent uterine malignancy is **endometrioid carcinoma**, accounting for more than eighty percent of newly diagnosed primary uterine cancers. It originates in the setting of glandular hyperplasia, displays glandular architecture resembling normal endometrium, and frequently harbors PTEN phosphatase mutations alongside microsatellite instability and beta-catenin activation.",
+   "say": "Endometrioid carcinoma constitutes the predominant histological subtype and reflects estrogen-driven progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Endometrioid Carcinoma",
+     "Non-Endometrioid"
+    ],
+    "rows": [
+     [
+      "Estrogen dependence",
+      "Strongly positive",
+      "Estrogen independent"
+     ],
+     [
+      "Key mutation",
+      "PTEN loss, PIK3CA",
+      "p53 mutation in over 90 percent"
+     ],
+     [
+      "Background tissue",
+      "Atypical hyperplasia",
+      "Atrophic endometrium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dualistic clinicopathological classification categorizes primary uterine epithelial malignancies into **type 1 and type 2** endometrial carcinomas. Type one lesions develop in perimenopausal women with obesity and excess estrogen, featuring low grade histology and favourable prognosis. Type two tumors occur in older postmenopausal women, displaying high grade histology and p53 mutations.",
+   "say": "Type one tumors are estrogen-linked and low grade while type two tumors are aggressive and estrogen-independent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Hormonal State",
+     "Histology",
+     "Prognosis"
+    ],
+    "rows": [
+     [
+      "Type 1",
+      "Estrogen excess",
+      "Endometrioid G1 to G2",
+      "Favourable"
+     ],
+     [
+      "Type 2",
+      "Atrophic, no estrogen",
+      "Serous, clear cell",
+      "Poor, early metastasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standard staging for uterine malignancy utilizes comprehensive **FIGO surgical staging**, requiring total hysterectomy, bilateral salpingo-oophorectomy, peritoneal washings, and selective pelvic with para-aortic lymphadenectomy. Stage one is strictly confined to the uterine corpus. Stage two exhibits cervical stromal invasion without extrauterine extension, guiding adjuvant external beam pelvic radiation.",
+   "say": "Endometrial cancer is staged surgically through laparotomy or laparoscopy with lymph node evaluation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-figo-endometrium.webp",
+    "alt": "FIGO staging diagram for endometrial carcinoma.",
+    "caption": "FIGO surgical stages of endometrial carcinoma from stage I to IV. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

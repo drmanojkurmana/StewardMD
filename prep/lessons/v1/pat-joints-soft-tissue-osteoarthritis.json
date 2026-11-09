@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "pat-joints-soft-tissue",
+  "subject": "pathology",
+  "title": "Osteoarthritis, Rheumatoid Arthritis, Pannus, Gout, and Ankylosing Spondylitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Degenerative joint disease causes progressive articular cartilage erosion, chondrocyte cloning, and loss of proteoglycans. When full-thickness cartilage sloughs off, the exposed underlying bone becomes smooth and burnished like ivory in a process called eburnation. Microfractures permit synovial fluid entry, creating subchondral fibrous cysts. The disease is **osteoarthritis**. Marginal reactive osteophytes form at joint edges, and bony outgrowths at distal interphalangeal joints produce prominent Heberden nodes.",
+      "say": "Osteoarthritis erodes articular cartilage down to subchondral bone, producing ivory-like eburnation, subchondral cysts, and Heberden nodes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/osteoarthritis-fig1.webp",
+        "alt": "Osteoarthritis pathology",
+        "caption": "Diagram and clinical photographs displaying joint space narrowing, subchondral sclerosis, and Heberden nodes in osteoarthritis."
+      }
+    },
+    {
+      "tx": "Chronic systemic autoimmune synovitis involves CD4 positive helper T cells, interleukin-17, and tumor necrosis factor stimulating synovial fibroblasts and osteoclasts. Susceptibility correlates strongly with HLA-DR4 alleles. B cells produce anti-cyclic citrullinated peptide antibodies and rheumatoid factor, an IgM antibody against the Fc region of IgG. That condition is **rheumatoid arthritis**. In contrast to osteoarthritis, the resulting symmetric polyarthritis classically affects metacarpophalangeal and proximal interphalangeal joints while sparing distal interphalangeal joints.",
+      "say": "Rheumatoid arthritis is an HLA-DR4 linked autoimmune synovitis driven by anti-CCP antibodies and rheumatoid factor that spares distal interphalangeal joints.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Osteoarthritis",
+          "Rheumatoid arthritis"
+        ],
+        "rows": [
+          [
+            "Primary target",
+            "Articular cartilage",
+            "Synovial membrane"
+          ],
+          [
+            "Joint symmetry",
+            "Asymmetric weight-bearing",
+            "Symmetric polyarticular"
+          ],
+          [
+            "Hand joints",
+            "DIP and PIP nodes",
+            "MCP and PIP joints"
+          ],
+          [
+            "Serology",
+            "Negative markers",
+            "Anti-CCP and RF positive"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic synovial inflammation leads to marked villous hyperplasia, lining cell multilayering, and dense subsynovial lymphoplasmacytic infiltration with lymphoid follicles. The resulting vascular fibrocollagenous tissue mass grows over the articular surface as an aggressive **pannus**. Osteoclasts beneath the pannus release matrix metalloproteinases, degrading articular cartilage and eroding subchondral bone. Progressive bridging across the joint space results in fibrous ankylosis, which later ossifies into complete bony ankylosis.",
+      "say": "Synovial pannus is a hyperplastic fibrovascular and inflammatory mass that erodes cartilage and causes fibrous and bony joint ankylosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "synovitis",
+            "label": "Synovial inflammation"
+          },
+          {
+            "id": "pannus",
+            "label": "Invasive pannus"
+          },
+          {
+            "id": "erosion",
+            "label": "Cartilage erosion"
+          },
+          {
+            "id": "ankylosis",
+            "label": "Bony ankylosis"
+          }
+        ],
+        "edges": [
+          [
+            "synovitis",
+            "pannus"
+          ],
+          [
+            "pannus",
+            "erosion"
+          ],
+          [
+            "erosion",
+            "ankylosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Subcutaneous fibrous masses develop in approximately twenty-five percent of seropositive rheumatoid arthritis patients, located along pressure points like the olecranon. Microscopically, these lesions feature a central geographic zone of acellular fibrinoid necrosis rimmed by an exquisite palisade of CD68 positive epithelioid macrophages. The classic finding is **rheumatoid nodules**. Surrounding granulation tissue and fibrous capsules mature into painless, firm, mobile lumps that correlate with severe erosive systemic disease.",
+      "say": "Rheumatoid nodules present with central geographic fibrinoid necrosis bordered by palisading epithelioid macrophages on pressure points.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rheumatoid nodule",
+          "points": [
+            "Central fibrinoid necrosis",
+            "Palisading epithelioid macrophages",
+            "High-titer RF association",
+            "Extensor pressure surfaces"
+          ]
+        },
+        "right": {
+          "title": "Gout tophus",
+          "points": [
+            "Urate crystal core",
+            "Foreign body giant cells",
+            "Hyperuricaemia association",
+            "Cartilage and ear helix"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sustained hyperuricaemia above six point eight milligrams per decilitre exceeds the saturation threshold for urate solubility in physiological fluids. Peripheral precipitation occurs preferentially in cool extremities like the first metatarsophalangeal joint, known as podagra. Synovial crystal deposition triggers acute **gout**. Phagocytosis of crystals by neutrophils stimulates the intracellular NLRP3 inflammasome, triggering caspase-1 cleavage and massive secretion of active interleukin-1-beta, generating intense, excruciating joint pain and erythema.",
+      "say": "Gout results from hyperuricaemic crystal deposition in cooler joints where neutrophil phagocytosis activates the NLRP3 inflammasome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Clinical presentation",
+          "Key feature"
+        ],
+        "rows": [
+          [
+            "Asymptomatic",
+            "Elevated serum urate",
+            "No joint symptoms"
+          ],
+          [
+            "Acute arthritis",
+            "Sudden nocturnal podagra",
+            "Neutrophil-rich effusion"
+          ],
+          [
+            "Intercritical",
+            "Symptom-free interval",
+            "Subclinical crystal deposits"
+          ],
+          [
+            "Chronic tophaceous",
+            "Permanent joint destruction",
+            "Tophi in cartilage and bone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aspirated synovial fluid examined under compensated polarizing microscopy identifies thin, needle-shaped crystals within neutrophil cytoplasm. These crystals show strong negative birefringence, glowing bright yellow when oriented parallel to the slow axis of the red compensator plate. That substance is **monosodium urate crystals**. Longstanding disease produces nodular tophi composed of large crystal aggregates surrounded by foreign body multinucleated giant cells and a dense reactive fibrovascular rim.",
+      "say": "Monosodium urate crystals are needle-shaped and negatively birefringent under polarized light, appearing bright yellow when aligned parallel to the compensator axis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/crystal-arthritis-fig1.webp",
+        "alt": "Crystal arthropathy polarizing microscopy",
+        "caption": "Polarizing microscopy comparison distinguishing needle-shaped negatively birefringent urate crystals from rhomboid positively birefringent pyrophosphate crystals."
+      }
+    },
+    {
+      "tx": "Deposition of calcium pyrophosphate crystals into fibrocartilage and hyaline cartilage produces chondrocalcinosis, most frequently targeting the knee, wrist, and symphysis pubis. Crystal shedding into the joint space elicits recurrent acute synovitis termed **pseudogout**. Compensated polarized light microscopy reveals short, rhomboid or rod-shaped crystals exhibiting weak positive birefringence, glowing blue when aligned parallel to the slow axis. The underlying cartilage displays basophilic, granular crystalline deposits.",
+      "say": "Pseudogout features weakly positive birefringent rhomboid crystals of calcium pyrophosphate causing chondrocalcinosis in articular cartilage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urate crystals (Gout)",
+          "points": [
+            "Needle-shaped morphology",
+            "Strong negative birefringence",
+            "Yellow parallel to axis",
+            "First MTP joint predilection"
+          ]
+        },
+        "right": {
+          "title": "Pyrophosphate (Pseudogout)",
+          "points": [
+            "Rhomboid shape",
+            "Weak positive birefringence",
+            "Blue parallel to axis",
+            "Knee cartilage predilection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Seronegative spondyloarthropathies lack rheumatoid factor and share an intimate genetic relationship with HLA-B27. Chronic enthesitis at ligament insertions into bone initiates fibrocartilage metaplasia followed by progressive ossification. The prototype disease is **ankylosing spondylitis**. Bilateral symmetric sacroiliitis progresses upward along the spine, with marginal syndesmophytes fusing adjacent vertebral bodies into a rigid bamboo spine. Extraskeletal manifestations include acute anterior uveitis and ascending aortitis with aortic root dilation.",
+      "say": "Ankylosing spondylitis is an HLA-B27 associated enthesitis producing sacroiliitis, ascending syndesmophytes, and rigid spinal fusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "System",
+          "Pathology",
+          "Clinical sign"
+        ],
+        "rows": [
+          [
+            "Axial skeleton",
+            "Bilateral sacroiliitis",
+            "Morning back stiffness"
+          ],
+          [
+            "Vertebral column",
+            "Marginal syndesmophytes",
+            "Bamboo spine rigidity"
+          ],
+          [
+            "Ocular",
+            "Anterior uveitis",
+            "Photophobia and eye pain"
+          ],
+          [
+            "Cardiovascular",
+            "Aortitis and root dilation",
+            "Aortic valve regurgitation"
+          ]
+        ]
+      }
+    }
+  ]
+}

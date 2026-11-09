@@ -1,0 +1,236 @@
+{
+  "v": 1,
+  "module": "pat-cns-tumours",
+  "subject": "pathology",
+  "title": "Glioblastoma, Astrocytoma, Rosenthal Fibres, and Oligodendroglioma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The most aggressive and common primary brain malignancy in adults is a WHO grade four diffuse astrocytic neoplasm located in cerebral hemispheres. Grossly, the mass displays a variegated cut surface with yellow geographic necrosis, red areas of haemorrhage, and soft cystic zones, frequently infiltrating across the corpus callosum. That tumor is **glioblastoma**. Histological criteria require marked cellular pleomorphism, frequent mitoses, microvascular endothelial proliferation forming glomeruloid tufts, and geographic necrosis, with tumor cells staining intensely positive for glial fibrillary acidic protein.",
+      "say": "Glioblastoma is a WHO grade four astrocytoma displaying variegated necrosis, vascular glomeruloid tufts, and corpus callosum infiltration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glioblastoma-fig1.webp",
+        "alt": "Glioblastoma neuroimaging",
+        "caption": "Contrast MRI demonstrating large infiltrative butterfly glioblastoma with thick irregular ring enhancement and central necrotic core."
+      }
+    },
+    {
+      "tx": "Microscopic examination of glioblastoma reveals a pathognomonic architectural arrangement where crowded, elongated tumour cell nuclei pack tightly in serpentine rows along the margins of central ischemic necrosis. That distinctive appearance is **pseudopalisading necrosis**. The phenomenon occurs when focal microvascular thrombosis induces acute intratumoural hypoxia, prompting vital malignant glioma cells to migrate actively away from the hypoxic core toward more vascular peripheral stroma, leaving a central acellular necrotic zone.",
+      "say": "Pseudopalisading necrosis in glioblastoma represents active glioma cell migration away from thrombosed, hypoxic central tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thrombosis",
+            "label": "Microvascular thrombosis"
+          },
+          {
+            "id": "hypoxia",
+            "label": "Severe intratumoural hypoxia"
+          },
+          {
+            "id": "migration",
+            "label": "Active tumour cell migration"
+          },
+          {
+            "id": "pseudopalisade",
+            "label": "Pseudopalisading margins around necrosis"
+          }
+        ],
+        "edges": [
+          [
+            "thrombosis",
+            "hypoxia"
+          ],
+          [
+            "hypoxia",
+            "migration"
+          ],
+          [
+            "migration",
+            "pseudopalisade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diffuse astrocytic gliomas are classified molecularly according to mutational status of isocitrate dehydrogenase genes. Primary glioblastomas in elderly patients are IDH-wildtype and pursue an aggressive clinical course, driven by EGFR amplification, PTEN loss, and TERT promoter mutations. Secondary glioblastomas develop in younger individuals from lower-grade astrocytomas harbouring an **IDH mutation**, most frequently IDH1 R132H. This mutation produces the oncometabolite 2-hydroxyglutarate and confers significantly prolonged overall survival compared to wild-type tumours.",
+      "say": "IDH1 mutations distinguish secondary glioblastomas from primary wild-type tumours and confer significantly better patient prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Primary glioblastoma",
+          "Secondary glioblastoma"
+        ],
+        "rows": [
+          [
+            "Patient age",
+            "Older adults (>55 years)",
+            "Younger adults (<45 years)"
+          ],
+          [
+            "Precursor lesion",
+            "Arises de novo rapidly",
+            "Progresses from lower-grade astrocytoma"
+          ],
+          [
+            "IDH1/IDH2 status",
+            "IDH-wildtype",
+            "IDH-mutant"
+          ],
+          [
+            "Associated mutations",
+            "EGFR amplification, PTEN loss",
+            "TP53 and ATRX mutations"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infiltrative astrocytic neoplasms without necrosis or microvascular proliferation span lower grades of malignancy. WHO grade two lesions show mild hypercellularity and nuclear atypia without mitoses, while WHO grade three anaplastic tumours display high cellularity and brisk mitotic figures. That lineage is diffuse **astrocytoma**. Because tumor cells infiltrate widely through normal brain parenchyma without a discrete capsule, complete surgical resection is impossible. Immunohistochemistry reveals strong positivity for GFAP and loss of nuclear ATRX expression in IDH-mutant cases.",
+      "say": "Diffuse astrocytomas infiltrate widely through brain parenchyma without clear margins, advancing from grade two to anaplastic grade three.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Grade 2 diffuse astrocytoma",
+          "points": [
+            "Mild hypercellularity",
+            "Moderate nuclear atypia",
+            "Absent mitotic figures",
+            "Zero necrosis or vascular hyperplasia"
+          ]
+        },
+        "right": {
+          "title": "Grade 3 anaplastic astrocytoma",
+          "points": [
+            "Marked hypercellularity",
+            "Distinct nuclear pleomorphism",
+            "Brisk mitotic activity",
+            "Absent necrosis and vascular hyperplasia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most common pediatric brain neoplasm is a well-circumscribed, slow-growing WHO grade one tumour arising predominantly within the cerebellum. Neuroimaging characteristically demonstrates a large posterior fossa cyst with an intensely enhancing mural nodule. That benign lesion is **pilocytic astrocytoma**. Molecular pathogenesis involves constitutive activation of the MAPK pathway, most commonly through a KIAA1549-BRAF gene tandem duplication fusion or neurofibromatosis type 1 alterations. Surgical excision of the mural nodule is typically curative.",
+      "say": "Pilocytic astrocytoma is a benign WHO grade one cerebellar tumour of childhood presenting as a cyst with an enhancing mural nodule.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sur-brain-tumours-fig1.webp",
+        "alt": "Brain tumour neuroimaging and pathology",
+        "caption": "Brain tumor neuroimaging and operative resection overview showing glioblastoma versus circumscribed pediatric cerebellar astrocytoma."
+      }
+    },
+    {
+      "tx": "Microscopic sections of pilocytic astrocytoma display a biphasic pattern combining dense cellular areas of hair-like bipolar astrocytic cells with loose microcystic regions containing microcysts. The dense fibrillary areas contain thick, elongated, intensely eosinophilic, corkscrew-shaped structures termed **Rosenthal fibres**. These structures represent chronic degenerative products of intermediate filaments and contain ubiquitin and alpha-B-crystallin. Eosinophilic granular bodies and hyalinized thick-walled blood vessels are commonly present, while mitoses and necrosis are absent.",
+      "say": "Rosenthal fibres are thick, eosinophilic corkscrew inclusions found within the dense fibrillary areas of pilocytic astrocytoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Pilocytic astrocytoma",
+          "Medulloblastoma"
+        ],
+        "rows": [
+          [
+            "WHO grade",
+            "Grade 1 (benign)",
+            "Grade 4 (highly malignant)"
+          ],
+          [
+            "Cerebellar site",
+            "Cerebellar hemisphere",
+            "Cerebellar vermis"
+          ],
+          [
+            "Neuroimaging",
+            "Cyst with mural nodule",
+            "Solid hyperdense mass"
+          ],
+          [
+            "Diagnostic histology",
+            "Rosenthal fibres and biphasic glia",
+            "Small round blue cells and rosettes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Slow-growing glial neoplasm of young and middle-aged adults arises predominantly within the white matter of the cerebral cortex, especially the frontal and temporal lobes. Patients typically present with longstanding seizures, and computed tomography scans reveal prominent intratumoural calcification. That entity is an **oligodendroglioma**. Histologically, uniform cells with round, central nuclei are surrounded by an abundant delicate network of thin-walled, branching capillaries that resembles chicken-wire vasculature.",
+      "say": "Oligodendroglioma is a slow-growing frontal lobe tumour in adults presenting with seizures, calcification, and chicken-wire capillaries.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "frontal",
+            "label": "Cortical white matter mass"
+          },
+          {
+            "id": "calcification",
+            "label": "Intratumoural calcification"
+          },
+          {
+            "id": "friedegg",
+            "label": "Fried egg uniform cells"
+          },
+          {
+            "id": "codeletion",
+            "label": "1p/19q codeletion confirmed"
+          }
+        ],
+        "edges": [
+          [
+            "frontal",
+            "calcification"
+          ],
+          [
+            "calcification",
+            "friedegg"
+          ],
+          [
+            "friedegg",
+            "codeletion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Delayed formalin fixation produces an artifactual clear halo around uniform spherical nuclei, creating a classic **fried egg** cytological appearance in oligodendroglioma. The definitive molecular hallmark required for integrated diagnosis is concurrent whole-arm **1p19q codeletion** alongside an IDH mutation. This unbalanced translocation results from a centromeric fusion derivative t(1;19)(q10;p10). Its presence confirms oligodendroglioma lineage and predicts remarkable sensitivity to procarbazine, lomustine, and vincristine chemotherapy, correlating with substantially superior long-term survival.",
+      "say": "Oligodendroglioma features fried-egg clear halos and concurrent 1p and 19q whole-arm codeletion conferring chemosensitivity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Astrocytoma (IDH-mutant)",
+          "Oligodendroglioma"
+        ],
+        "rows": [
+          [
+            "Cytology",
+            "Elongated fibrillary nuclei",
+            "Uniform fried-egg round cells"
+          ],
+          [
+            "1p/19q status",
+            "Intact non-deleted alleles",
+            "Complete 1p/19q co-deletion"
+          ],
+          [
+            "ATRX expression",
+            "Loss of nuclear ATRX",
+            "Retained intact nuclear ATRX"
+          ],
+          [
+            "Chemosensitivity",
+            "Moderate therapeutic response",
+            "Marked chemosensitivity to PCV"
+          ]
+        ]
+      }
+    }
+  ]
+}

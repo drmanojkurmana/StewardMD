@@ -1,0 +1,208 @@
+{
+ "key": "obg-contraception-ulipristal",
+ "v": 1,
+ "module": "obg-contraception",
+ "subject": "obstetrics-gynaecology",
+ "title": "Selective Progesterone Receptor Modulators and Ulipristal Acetate",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The second-generation selective progesterone receptor modulator **ulipristal acetate** is administered as a single oral dose of thirty milligrams for emergency postcoital contraception. Licensed for use up to one hundred and twenty hours, or five days, after unprotected intercourse, it delivers significantly higher efficacy than levonorgestrel across the entire five-day postcoital window.",
+   "say": "Ulipristal acetate 30 milligrams provides emergency contraception for up to five days after intercourse.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-emergency-contraception.webp",
+    "alt": "Emergency oral contraception formulations.",
+    "caption": "Emergency oral contraceptive formulations including selective progesterone receptor modulators. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "By exerting mixed tissue-specific partial antagonist and agonist activity on progesterone receptors, ulipristal achieves **follicular rupture inhibition**. Crucially, ulipristal can delay follicular rupture even after the luteinizing hormone surge has already commenced, maintaining its inhibitory potency right up to the immediate pre-ovulatory LH peak, where levonorgestrel completely fails.",
+   "say": "Ulipristal delays follicular rupture even after the LH surge has started, unlike levonorgestrel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase of LH Surge",
+     "Levonorgestrel Efficacy",
+     "Ulipristal Acetate Efficacy"
+    ],
+    "rows": [
+     [
+      "Pre-surge (LH basal)",
+      "Effective in delaying ovulation",
+      "Effective in delaying ovulation"
+     ],
+     [
+      "Surge onset (LH rising)",
+      "Ineffective, ovulation occurs",
+      "Effective, arrests follicular rupture"
+     ],
+     [
+      "Surge peak (LH maximum)",
+      "Ineffective",
+      "Ineffective, rupture imminent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Comparative randomized clinical trials demonstrate that ulipristal acetate provides **superior clinical pregnancy prevention** compared to levonorgestrel. Ulipristal cuts the risk of unintended pregnancy by more than half compared to levonorgestrel when taken within twenty-four hours, and maintains this consistent level of protection throughout the full one hundred and twenty-hour interval.",
+   "say": "Ulipristal halves the risk of pregnancy compared to levonorgestrel and maintains efficacy to day five.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Comparative Efficacy",
+     "points": [
+      "Pregnancy rate approx 1.3 percent",
+      "Halves failure rate of levonorgestrel",
+      "Consistent efficacy from day 1 to day 5"
+     ]
+    },
+    "right": {
+     "title": "Levonorgestrel Decline",
+     "points": [
+      "Pregnancy rate approx 2.2 percent",
+      "Efficacy declines sharply after 72 hours",
+      "Fails once LH level begins to rise"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unlike levonorgestrel, ulipristal preserves its clinical efficacy in **women with elevated BMI**. In women with a body mass index between twenty-five and thirty-five kilograms per meter squared, ulipristal maintains consistent contraceptive protection, making it the preferred oral emergency option in overweight and obese patients when a copper IUD is declined.",
+   "say": "Ulipristal maintains contraceptive efficacy in women with elevated BMI up to thirty-five.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Weight Category",
+     "Levonorgestrel Performance",
+     "Ulipristal Acetate Performance"
+    ],
+    "rows": [
+     [
+      "BMI under 25 kg/m²",
+      "High efficacy",
+      "High efficacy"
+     ],
+     [
+      "BMI 25 to 35 kg/m²",
+      "Significant decline in pregnancy prevention",
+      "Maintained clinical effectiveness"
+     ],
+     [
+      "BMI over 35 kg/m²",
+      "Marked reduction in efficacy",
+      "Recommend emergency copper IUD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because ulipristal binds progesterone receptors with high affinity, a major **competitive drug interaction** occurs with hormonal contraceptives. Immediately starting progestin-containing pills, patches, rings, or injections can displace ulipristal from progesterone receptors, blunting its emergency contraceptive efficacy while the exogenous progestin simultaneously fails to provide rapid contraceptive protection.",
+   "say": "Starting hormonal contraceptives immediately blunts ulipristal efficacy through receptor competition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pharmacodynamic Conflict",
+     "points": [
+      "Exogenous progestin displaces ulipristal",
+      "Accelerates resumption of follicular rupture",
+      "Reduces emergency contraceptive efficacy"
+     ]
+    },
+    "right": {
+     "title": "Reciprocal Impairment",
+     "points": [
+      "Ulipristal blocks progestin receptors",
+      "New hormonal contraceptive fails to work",
+      "Leaves patient vulnerable to conception"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To prevent competitive receptor displacement, clinical guidelines mandate a **five-day hormonal contraceptive delay**. Women must wait exactly five days after ingesting ulipristal acetate before initiating or resuming any progestogen-containing contraceptive method. During these five days, and for seven to fourteen days after starting the method, barrier contraception must be used.",
+   "say": "Wait five days after taking ulipristal before starting hormonal contraception, using condoms in the interim.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timeline Post-Ulipristal",
+     "Permitted Contraceptive Action",
+     "Barrier Backup Requirement"
+    ],
+    "rows": [
+     [
+      "Days 1 to 5",
+      "Do not start hormonal contraceptives",
+      "Use condoms for all intercourse"
+     ],
+     [
+      "Day 6",
+      "Initiate or resume hormonal contraceptive",
+      "Continue condoms as routine quick-start backup"
+     ],
+     [
+      "Days 6 to 12",
+      "Hormonal method establishing efficacy",
+      "Condoms required for 7 days (14 days for Qlaira)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because ulipristal is excreted into human breast milk, **temporary breastfeeding interruption** is advised following administration. Lactating mothers are instructed to express and discard their breast milk for one week following ingestion of thirty milligrams of ulipristal acetate. In contrast, levonorgestrel emergency pills permit immediate continuation of breastfeeding without interruption.",
+   "say": "Breastfeeding should be paused and milk discarded for one week after taking ulipristal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ulipristal in Lactation",
+     "points": [
+      "Excreted into breast milk",
+      "Pumping and discarding milk for 7 days",
+      "Protects infant from active metabolites"
+     ]
+    },
+    "right": {
+     "title": "Levonorgestrel in Lactation",
+     "points": [
+      "Minimal excretion into breast milk",
+      "No interruption of breastfeeding needed",
+      "Preferred oral emergency method for nursing mothers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The primary side effects of ulipristal acetate include mild headache, nausea, abdominal discomfort, and a **transient menstrual cycle delay**. By shifting the pre-ovulatory luteinizing hormone surge, ulipristal alters luteal timing, causing the subsequent menstrual period to arrive an average of two days earlier or later than expected. Pregnancy testing is mandatory if menses are delayed beyond seven days.",
+   "say": "Ulipristal may delay the next menses by several days, requiring a pregnancy test if over a week late.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Event",
+     "Expected Manifestation",
+     "Management Action"
+    ],
+    "rows": [
+     [
+      "Subsequent menses",
+      "Arrives within 7 days of expected date",
+      "Routine observation"
+     ],
+     [
+      "Menses delayed over 7 days",
+      "Possible pregnancy or prolonged anovulation",
+      "Mandatory urine pregnancy test"
+     ],
+     [
+      "Severe lower abdominal pain",
+      "Exclude ectopic gestation",
+      "Urgent pelvic ultrasonography"
+     ]
+    ]
+   }
+  }
+ ]
+}

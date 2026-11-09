@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Brachytherapy and HPV Vaccination",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Radiation delivered from applicators inside the uterus and vagina is **brachytherapy**. Distance concentrates dose on the cervix while sparing distant organs. No external beam schedule can substitute its cervical dose intensity. Omitting brachytherapy measurably lowers cure, so it is treatment backbone rather than optional boost.",
+   "say": "Brachytherapy involves internal radiation concentrated on the cervix itself.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Cervical cancer treatment anatomy.",
+    "caption": "Treatment anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tandem and ovoid applicators place sources around the cervix, describing **applicator geometry**. Imaging after placement plans dose around bladder, rectum and bowel individually. Anaesthesia and careful insertion protect against perforation of the uterus. Geometry decides toxicity as much as dose prescription does.",
+   "say": "Applicator geometry involves tandem and ovoid placement around the cervix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Position"
+    ],
+    "rows": [
+     [
+      "Tandem",
+      "Inside uterus"
+     ],
+     [
+      "Ovoids",
+      "Vaginal fornices"
+     ],
+     [
+      "Imaging",
+      "Dose planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "External beam treats pelvis and nodes first, then brachytherapy boosts the cervix, sequencing **combined radiation**. Overall treatment time matters because prolongation lets tumour regrow between fractions. Chemotherapy runs with the external phase as sensitiser. Scheduling is therefore oncology, not administration, and delays need clinical reasons.",
+   "say": "Combined radiation involves external beam first and brachytherapy boost after.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "External beam pelvis"
+     },
+     {
+      "id": "n1",
+      "label": "Chemotherapy sensitises"
+     },
+     {
+      "id": "n2",
+      "label": "Brachytherapy boost"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment completes on time"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bladder, rectum and bowel dose limits shape every plan, defining **radiation toxicity** control. Late fistula and stricture arise months to years after apparent recovery. Smoking worsens healing and late damage in irradiated tissue. Survivorship care therefore includes bowel, bladder and bone review long after cancer review relaxes.",
+   "say": "Radiation toxicity involves late bladder, bowel and bone damage control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Late risk"
+    ],
+    "rows": [
+     [
+      "Bladder",
+      "Fistula, bleeding"
+     ],
+     [
+      "Rectum",
+      "Stricture, bleeding"
+     ],
+     [
+      "Bone",
+      "Fracture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary prevention by vaccination complements secondary prevention by screening, framing **prevention levels**. Vaccines prevent infection; screening finds its consequences early. Neither replaces the other within any living cohort. Programmes teaching them as rivals misunderstand that they protect different decades of the same women.",
+   "say": "Prevention levels involve vaccination first and screening second together.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaccination",
+     "points": [
+      "Prevents infection",
+      "Before exposure best",
+      "No treatment effect"
+     ]
+    },
+    "right": {
+     "title": "Screening",
+     "points": [
+      "Finds precancer",
+      "Adult women",
+      "Needs treatment link"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaccines covering the highest risk types prevent most cervical cancers, the **vaccine valency** idea. Bivalent products target the two dominant cancer types; nonavalent adds wart and further cancer types. Cross protection adds partial cover beyond named types. Valency debates matter less than delivering any vaccine before exposure.",
+   "say": "Vaccine valency involves covering the highest risk HPV types first.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-nonavalent-hpv-vaccine.webp",
+    "alt": "Nonavalent HPV vaccine.",
+    "caption": "HPV vaccine. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fewer doses protect young adolescents than older recipients, guiding **vaccine schedules**. School based delivery reaches girls before exposure more reliably than clinic offers. Catch up vaccination still helps many young women with prior exposure to some types. Boys vaccination protects partners and prevents wart and other HPV cancers.",
+   "say": "Vaccine schedules involve fewer doses for young adolescents than adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Young adolescents",
+      "School delivery"
+     ],
+     [
+      "Older youth",
+      "Catch up"
+     ],
+     [
+      "Boys",
+      "Partner and self protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening continues after vaccination because covered types are not all types, stating **post vaccine screening**. Intervals may lengthen as vaccinated cohorts age into programmes. Registries linking vaccine and screening records make that evolution safe. Women vaccinated after treatment still need surveillance for residual and new disease.",
+   "say": "Post vaccine screening continues because vaccines miss some HPV types.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Vaccination recorded"
+     },
+     {
+      "id": "n1",
+      "label": "Screening continues"
+     },
+     {
+      "id": "n2",
+      "label": "Intervals evolve"
+     },
+     {
+      "id": "n3",
+      "label": "Registry links records"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Elimination needs vaccination, screening and treatment coverage together, closing with **elimination strategy**. Each pillar compensates where another is weak in a given country. Modelling guides targets, but delivery systems decide reality. Cervical cancer is the rare cancer a generation can choose to make uncommon.",
+   "say": "Elimination strategy requires vaccination, screening and treatment coverage together.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hpv-vaccine.webp",
+    "alt": "HPV vaccination programme.",
+    "caption": "Vaccination programme. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

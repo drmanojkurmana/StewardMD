@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "id": "psy-psychology-theories-piaget-cognitive-stages",
+ "subject": "psychiatry",
+ "module": "psy-psychology-theories",
+ "title": "Cognitive Development and Learning Theories",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Jean Piaget cognitive developmental theory** posits that children actively construct mental models of the world through sequential, qualitatively distinct stages driven by assimilation and accommodation. Four universal developmental stages unfold chronologically: sensorimotor stage, preoperational stage, concrete operational stage, and formal operational stage.",
+   "say": "Piaget described cognitive development as a sequence of four stages. Children adapt mental schemas through assimilating new information and accommodating existing models.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/behavioral-variant-ftd-fig1.webp",
+    "alt": "Frontotemporal cognitive networks and behavioral developmental domains.",
+    "caption": "Frontotemporal and executive networks supporting cognitive development and reasoning.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Sensorimotor stage** spans from birth to two years of age, where infants learn through direct sensory experiences and motor manipulation of objects. The landmark cognitive achievement is object permanence, the realization that objects continue to exist even when concealed from view, typically consolidated around eight to nine months.",
+   "say": "The sensorimotor stage runs through the first two years. Its crowning milestone is object permanence, realizing things exist even when hidden from direct sight.",
+   "vis": {
+    "kind": "flow",
+    "title": "Object Permanence Consolidation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Early infant tracks visible toys but ignores covered items"
+     },
+     {
+      "id": "n2",
+      "label": "Developing memory traces permit mental object representations"
+     },
+     {
+      "id": "n3",
+      "label": "Active searching begins when object is concealed under cloth"
+     },
+     {
+      "id": "n4",
+      "label": "Permanent mental representation established around nine months"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Preoperational stage** extends from two to seven years, marked by symbolic play and rapid language acquisition but limited by egocentrism, animism, and lack of conservation. Egocentrism prevents the child from adopting another person's visual or mental perspective, tested famously via Piaget three mountains task.",
+   "say": "The preoperational stage features symbolic play and rich language, but children remain egocentric and cannot yet grasp the physical conservation of volume.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preoperational Thought (2 to 7 yr)",
+     "points": [
+      "Egocentric perspective, cannot see others' view",
+      "Animism: inanimate objects have feelings",
+      "Centration: focuses on single visible feature",
+      "Lacks physical conservation of liquid volume"
+     ]
+    },
+    "right": {
+     "title": "Concrete Operational (7 to 11 yr)",
+     "points": [
+      "Understands diverse viewpoints and perspectives",
+      "Appreciates physical conservation and reversibility",
+      "Decentration: considers multiple dimensions",
+      "Logical reasoning applied to tangible objects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Concrete operational stage** between seven and eleven years achieves conservation, the understanding that physical properties such as liquid volume, mass, and number remain unchanged despite transformations in spatial appearance. Children master mental reversibility, hierarchical classification, and seriation, though logical reasoning remains anchored to tangible objects.",
+   "say": "Concrete operational children grasp conservation, realizing water volume stays identical when poured into taller glasses. Logic is robust for concrete physical objects.",
+   "vis": {
+    "kind": "flow",
+    "title": "Conservation Mastery",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Equal water volumes shown in two identical wide beakers"
+     },
+     {
+      "id": "n2",
+      "label": "Liquid poured into tall thin cylinder before child's eyes"
+     },
+     {
+      "id": "n3",
+      "label": "Preoperational child claims tall glass has more water"
+     },
+     {
+      "id": "n4",
+      "label": "Concrete operational child correctly affirms volume equivalence"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Formal operational stage** emerges from twelve years of age onward into adulthood, bringing the cognitive capacity for abstract thought, hypothetical deductive reasoning, and systematic propositional testing. Adolescents can conceptualize contrary-to-fact possibilities, systematically evaluate philosophical principles, and formulate future life trajectories through logical problem-solving.",
+   "say": "Formal operations bring abstract thinking and hypothesis testing. Adolescents can reason about hypothetical possibilities without needing physical props.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Concrete Operations",
+     "points": [
+      "Logical operations applied to concrete items",
+      "Struggles with abstract hypothetical dilemmas",
+      "Solves problems by trial-and-error manipulation",
+      "Bound to immediately observable realities"
+     ]
+    },
+    "right": {
+     "title": "Formal Operations",
+     "points": [
+      "Deductive reasoning and hypothesis testing",
+      "Contemplates abstract, philosophical ideas",
+      "Solves problems by systematic variable isolation",
+      "Envisions idealistic future scenarios"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Classical conditioning** demonstrated by Ivan Pavlov describes associative learning where a biologically potent unconditioned stimulus is paired repeatedly with an initially neutral conditioned stimulus. Eventually, the conditioned stimulus alone reliably evokes a conditioned reflex response, providing the theoretical basis for behavioral systematic desensitization.",
+   "say": "Pavlovian classical conditioning links an unconditioned stimulus with a neutral cue. Over time, the cue alone elicits the conditioned autonomic response.",
+   "vis": {
+    "kind": "flow",
+    "title": "Classical Conditioning Paradigm",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Food (unconditioned stimulus) elicits salivation (unconditioned response)"
+     },
+     {
+      "id": "n2",
+      "label": "Bell (neutral stimulus) paired repeatedly with food presentation"
+     },
+     {
+      "id": "n3",
+      "label": "Associative synaptic plasticity links auditory and gustatory paths"
+     },
+     {
+      "id": "n4",
+      "label": "Bell (conditioned stimulus) alone triggers salivation (conditioned response)"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Operant conditioning** formulated by B.F. Skinner asserts that voluntary behaviors are shaped, strengthened, or extinguished through environmental consequences. Positive reinforcement rewards desirable actions with pleasurable stimuli, negative reinforcement strengthens behavior by removing an aversive stimulus, whereas punishment aims to extinguish unwanted behaviors.",
+   "say": "Skinnerian operant conditioning shapes actions through consequences. Reinforcement increases behavior, while punishment suppresses unwanted conduct.",
+   "vis": {
+    "kind": "table",
+    "title": "Operant Conditioning Contingencies",
+    "cols": [
+     "Contingency",
+     "Environmental Action",
+     "Effect on Behavior"
+    ],
+    "rows": [
+     [
+      "Positive reinforcement",
+      "Deliver pleasant stimulus after response",
+      "Strengthens and increases behavior"
+     ],
+     [
+      "Negative reinforcement",
+      "Remove aversive stimulus after response",
+      "Strengthens and increases behavior"
+     ],
+     [
+      "Positive punishment",
+      "Deliver unpleasant stimulus after response",
+      "Weakens and suppresses behavior"
+     ],
+     [
+      "Negative punishment",
+      "Remove pleasant stimulus after response",
+      "Weakens and suppresses behavior"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Learned helplessness** discovered by Martin Seligman demonstrates that animals or humans exposed to inescapable, uncontrollable aversive stressors eventually stop attempting to escape even when opportunities become available. This passive surrender provides an established behavioral model for clinical depression, characterized by motivational deficits and cognitive despair.",
+   "say": "Learned helplessness occurs when inescapable stress leads to passive resignation. It provides an influential animal model for clinical depressive despair.",
+   "vis": {
+    "kind": "flow",
+    "title": "Learned Helplessness Pathway",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Exposure to repeated inescapable, uncontrollable shock or stress"
+     },
+     {
+      "id": "n2",
+      "label": "Cognitive realization that personal actions cannot avert trauma"
+     },
+     {
+      "id": "n3",
+      "label": "Passivity, motivational deficits, and emotional resignation ensue"
+     },
+     {
+      "id": "n4",
+      "label": "Animal fails to escape later even when barriers are removed"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

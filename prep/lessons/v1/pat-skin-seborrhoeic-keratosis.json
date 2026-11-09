@@ -1,0 +1,251 @@
+{
+  "v": 1,
+  "module": "pat-skin",
+  "subject": "pathology",
+  "title": "Seborrhoeic Keratosis, Melanoma, Breslow Thickness, and Dysplastic Naevus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Extremely common benign epidermal tumour of older adults arises on the trunk, head, and neck as round, coin-like, exophytic plaques ranging from millimeters to several centimeters in diameter. Lesions exhibit a velvety to granular, verrucous surface with uniform tan to dark-brown pigmentation, appearing as if pasted or stuck on the skin. The lesion is **seborrhoeic keratosis**. Somatic activating mutations in FGFR3 (fibroblast growth factor receptor three) and PIK3CA drive benign clonal proliferation of mature keratinocytes without malignant potential.",
+      "say": "Seborrhoeic keratosis is a benign pigmented exophytic plaque appearing stuck on the skin, driven by FGFR3 and PIK3CA mutations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Seborrhoeic keratosis",
+          "Melanoma"
+        ],
+        "rows": [
+          [
+            "Gross appearance",
+            "Waxy stuck-on coin plaque",
+            "Asymmetrical pigmented macule"
+          ],
+          [
+            "Etiology",
+            "FGFR3/PIK3CA mutation",
+            "UV damage and CDKN2A/BRAF loss"
+          ],
+          [
+            "Cell of origin",
+            "Squamoid and basaloid cells",
+            "Malignant transformed melanocyte"
+          ],
+          [
+            "Malignant course",
+            "Strictly benign, no invasion",
+            "Lethal metastatic potential"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic examination of seborrhoeic keratosis displays marked exophytic hyperkeratosis, acanthosis, and papillomatosis. Small, uniform basaloid cells intermingle with mature squamous cells. Circular cross-sections of invaginated keratinaceous debris within the expanded epidermis produce characteristic **horn cysts** and pseudohorn cysts. Sudden eruptive appearance of hundreds of itchy seborrhoeic keratoses constitutes the sign of Leser-Trelat, an alarming paraneoplastic phenomenon triggered by transforming growth factor-alpha secreted by underlying gastric or colonic adenocarcinomas.",
+      "say": "Horn cysts are intraepidermal keratin collections in seborrhoeic keratosis; their explosive eruption heralds internal malignancy in Leser-Trelat sign.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adenocarcinoma",
+            "label": "Visceral gastric adenocarcinoma"
+          },
+          {
+            "id": "tgf",
+            "label": "Systemic TGF-alpha secretion"
+          },
+          {
+            "id": "stimulation",
+            "label": "EGFR stimulation of keratinocytes"
+          },
+          {
+            "id": "eruption",
+            "label": "Explosive seborrhoeic keratoses (Leser-Trelat)"
+          }
+        ],
+        "edges": [
+          [
+            "adenocarcinoma",
+            "tgf"
+          ],
+          [
+            "tgf",
+            "stimulation"
+          ],
+          [
+            "stimulation",
+            "eruption"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Atypical melanocytic naevi measuring greater than five millimeters in diameter present with irregular, notched borders, pebbled surfaces, and variegated pigment patterns ranging from pink to dark brown. These markers of increased melanoma risk are termed **dysplastic naevus**. Microscopically, compound lesions exhibit bridging of melanocytic nests between adjacent elongated rete ridges, a shoulder phenomenon where junctional nests extend beyond the dermal component, and cytologic atypia with enlarged hyperchromatic nuclei, often linked to germline CDKN2A mutations.",
+      "say": "Dysplastic naevus is an atypical melanocytic lesion exhibiting architectural bridging and shoulder extension, indicating increased melanoma risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common acquired naevus",
+          "points": [
+            "Size under 5 mm",
+            "Uniform pigmentation",
+            "Symmetric smooth borders",
+            "Nests mature with dermal depth"
+          ]
+        },
+        "right": {
+          "title": "Dysplastic naevus",
+          "points": [
+            "Size frequently >5 mm",
+            "Variegated colour and notches",
+            "Bridging of adjacent rete nests",
+            "Shoulder phenomenon present"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Highly lethal cutaneous neoplasm arising from epidermal melanocytes is strongly linked to intermittent intense ultraviolet sunlight exposure and severe sunburns in childhood. Clinical identification relies on the classic ABCDE criteria: Asymmetry, Border irregularity, Colour variegation, Diameter exceeding six millimeters, and Evolution over time. That cancer is malignant **melanoma**. Tumours initial progress through a radial growth phase with horizontal intraepidermal spreading before entering a vertical growth phase, where invasive nodular cell clusters penetrate downward into the dermis.",
+      "say": "Malignant melanoma is recognized by ABCDE clinical criteria and transitions from horizontal radial growth to invasive vertical growth.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-melanoma-cdkn2a-fig1.webp",
+        "alt": "Melanocytic naevi and melanoma risk",
+        "caption": "Clinical photograph of back displaying numerous dysplastic and melanocytic naevi predisposing to malignant cutaneous melanoma."
+      }
+    },
+    {
+      "tx": "The single most accurate histological determinant of metastatic potential and overall patient survival in primary cutaneous melanoma is measured using a calibrated ocular micrometer. It determines vertical distance from the top of the epidermal granular layer (or base of an ulcer) to the deepest invading tumour cell. That critical measurement is **Breslow thickness**. Melanomas under zero point eight millimeters have an excellent ten-year survival exceeding ninety-five percent, whereas thicknesses greater than four millimeters carry high risk of distant hematogenous metastases.",
+      "say": "Breslow thickness measures vertical tumor depth from the granular layer to the deepest melanoma cell, dictating staging and survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Breslow depth",
+          "T Category",
+          "Sentinel node biopsy"
+        ],
+        "rows": [
+          [
+            "<0.8 mm without ulceration",
+            "T1a",
+            "Not routinely indicated"
+          ],
+          [
+            "0.8 to 1.0 mm (or ulcerated)",
+            "T1b",
+            "Recommended for consideration"
+          ],
+          [
+            ">1.0 to 2.0 mm",
+            "T2",
+            "Routinely recommended"
+          ],
+          [
+            ">4.0 mm",
+            "T4",
+            "Routinely recommended; high recurrence risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Historical microstaging system defines melanoma invasion by anatomical skin compartments rather than absolute vertical micrometer depth. Level I designates melanoma in situ confined entirely above an intact basement membrane. Level II invades the papillary dermis without filling it. Level III fills and expands the papillary dermis up to the reticular border, Level IV invades the thick reticular dermis, and Level V extends into subcutaneous fat. These stages are known as **Clark levels**. While largely replaced by Breslow thickness, Clark levels remain informative for thin T1 melanomas.",
+      "say": "Clark levels stage melanoma invasion across five anatomical cutaneous layers from the epidermis down to subcutaneous adipose tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Clark I: In situ intraepidermal"
+          },
+          {
+            "id": "l2",
+            "label": "Clark II: Papillary dermis invasion"
+          },
+          {
+            "id": "l3",
+            "label": "Clark III: Fills papillary dermis"
+          },
+          {
+            "id": "l4",
+            "label": "Clark IV: Reticular dermis invasion"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ],
+          [
+            "l3",
+            "l4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most frequent clinicopathological variant accounting for seventy percent of cutaneous melanomas is distinguished by prolonged horizontal growth before dermal invasion. Characteristic histological sections demonstrate prominent pagetoid scatter of large, atypical, atypical melanocytes through all suprabasal epidermal layers, resembling buckshot. That subtype is **superficial spreading melanoma**. Other major variants include nodular melanoma (early vertical growth), lentigo maligna melanoma on sun-damaged elderly faces, and acral lentiginous melanoma on palms, soles, and subungual nail beds, which occurs independent of ultraviolet radiation.",
+      "say": "Superficial spreading melanoma is the commonest subtype, characterized by prominent upward pagetoid scatter of atypical melanocytes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Anatomical site",
+          "Key histological hallmark"
+        ],
+        "rows": [
+          [
+            "Superficial spreading",
+            "Trunk and limbs",
+            "Upward pagetoid buckshot scatter"
+          ],
+          [
+            "Nodular",
+            "Any sun-exposed site",
+            "Immediate vertical growth, no radial phase"
+          ],
+          [
+            "Lentigo maligna",
+            "Elderly sun-damaged face",
+            "Linear continuous basal atypical proliferation"
+          ],
+          [
+            "Acral lentiginous",
+            "Palms, soles, subungual",
+            "Mucosal and acral site, UV-independent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immunohistochemical confirmation of melanoma relies on a panel of sensitive and specific markers to exclude carcinoma and sarcoma in poorly differentiated metastases. Nearly all melanomas exhibit strong, diffuse nuclear and cytoplasmic positivity for neural crest-derived **S100** protein. More specific lineage markers include HMB-45, melan-A (MART-1), and nuclear SOX10. Genetically, approximately fifty percent of cutaneous melanomas carry activating BRAF V600E mutations, conferring clinical responsiveness to combined BRAF and MEK targeted kinase inhibitor therapy.",
+      "say": "S100 is a highly sensitive screening marker for melanoma, complemented by specific melan-A and SOX10 antibodies and BRAF testing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "S100 and SOX10",
+          "points": [
+            "Neural crest origin markers",
+            ">95% sensitivity for melanoma",
+            "Stains desmoplastic melanoma",
+            "Nuclear and cytoplasmic positivity"
+          ]
+        },
+        "right": {
+          "title": "HMB-45 and Melan-A",
+          "points": [
+            "Melanosome-associated antigens",
+            "High diagnostic specificity",
+            "Negative in desmoplastic variant",
+            "Cytoplasmic granular staining"
+          ]
+        }
+      }
+    }
+  ]
+}

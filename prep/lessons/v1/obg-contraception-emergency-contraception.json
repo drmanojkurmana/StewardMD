@@ -1,0 +1,190 @@
+{
+ "key": "obg-contraception-emergency-contraception",
+ "v": 1,
+ "module": "obg-contraception",
+ "subject": "obstetrics-gynaecology",
+ "title": "Emergency Contraceptive Methods and Levonorgestrel",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Coitus-dependent postcoital prevention of unplanned pregnancy is termed **emergency contraception**. Indicated following unprotected sexual intercourse, condom breakage, missed oral contraceptive pills, or sexual assault, emergency methods must be accessed as early as possible. Available modalities include oral levonorgestrel, oral ulipristal acetate, and insertion of a copper intrauterine device.",
+   "say": "Emergency contraception prevents pregnancy after unprotected intercourse and should be used promptly.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-emergency-contraception.webp",
+    "alt": "Emergency contraception options and blister formulations.",
+    "caption": "Emergency contraception modalities including oral progestins and modulators. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most widely accessible oral formulation is the **single-dose levonorgestrel regimen**, containing 1.5 milligrams of levonorgestrel taken as a single oral tablet. Alternatively, two doses of 0.75 milligrams may be taken twelve hours apart. Levonorgestrel is licensed for use up to seventy-two hours following unprotected intercourse, preventing eighty-five percent of expected pregnancies.",
+   "say": "Oral levonorgestrel 1.5 milligrams is taken within seventy-two hours of unprotected intercourse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Levonorgestrel 1.5 mg",
+     "Ulipristal Acetate 30 mg"
+    ],
+    "rows": [
+     [
+      "Approved timeframe",
+      "Up to 72 hours (moderate efficacy to 120 h)",
+      "Up to 120 hours (5 days)"
+     ],
+     [
+      "Mechanism",
+      "Blocks pre-ovulatory LH surge",
+      "Delays follicular rupture even after LH rise"
+     ],
+     [
+      "BMI impact",
+      "Decreased efficacy if BMI over 26 to 30",
+      "Maintains efficacy up to BMI of 35"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary pharmacological mechanism of levonorgestrel is **ovulation delay**. Administered prior to the onset of the luteinizing hormone surge, it suppresses the LH peak, delaying follicular rupture and ovum release by at least five days, until ascending spermatozoa lose viability. Crucially, levonorgestrel is completely ineffective once the luteinizing hormone surge has begun.",
+   "say": "Levonorgestrel delays ovulation by blocking the LH surge, but fails once the surge is underway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pre-Surge Administration",
+     "points": [
+      "Blocks pituitary LH wave",
+      "Follicular rupture delayed by 5 days",
+      "Spermatozoa lose viability in genital tract"
+     ]
+    },
+    "right": {
+     "title": "Post-Surge Ineffectiveness",
+     "points": [
+      "Cannot stop ongoing LH surge",
+      "Does not prevent ovum release once triggered",
+      "Does not disrupt established implantation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical pharmacological studies confirm that levonorgestrel **does not act as an abortifacient**. It has no effect on an already implanted embryo, does not terminate an established intrauterine pregnancy, and causes no teratogenic harm if inadvertently taken during early gestation. It does not alter endometrial receptivity or interrupt blastocyst attachment once implantation begins.",
+   "say": "Emergency levonorgestrel prevents conception, does not disrupt pregnancy, and is not an abortifacient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraceptive Action",
+     "points": [
+      "Arrests gamete release before fertilisation",
+      "Prevents union of sperm and oocyte",
+      "Zero abortifacient mechanism"
+     ]
+    },
+    "right": {
+     "title": "Established Pregnancy Safety",
+     "points": [
+      "No increase in miscarriage rate",
+      "No teratogenic structural malformations",
+      "Does not interrupt intrauterine development"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oral levonorgestrel exhibits reduced efficacy in **obese and overweight women** with a body mass index exceeding twenty-six to thirty kilograms per meter squared. Increased volume of distribution and enhanced hepatic clearance lower circulating serum drug concentrations. For women with obesity, clinicians recommend doubling the levonorgestrel dose to three milligrams or providing a copper intrauterine device.",
+   "say": "Levonorgestrel efficacy declines with obesity, warranting a doubled dose or a copper IUD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Body Mass Index (BMI)",
+     "Levonorgestrel Efficacy",
+     "Preferred Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Under 25 kg/m²",
+      "Optimal pregnancy prevention (over 85%)",
+      "Standard 1.5 mg single tablet"
+     ],
+     [
+      "26 to 30 kg/m²",
+      "Moderate decline in efficacy",
+      "Ulipristal 30 mg or double LNG (3.0 mg)"
+     ],
+     [
+      "Over 30 kg/m²",
+      "Significant reduction in oral efficacy",
+      "Emergency Copper T 380A insertion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute most effective emergency contraceptive method is **emergency copper IUD insertion**. When placed within five days of unprotected intercourse or within five days of the earliest estimated day of ovulation, the Copper T 380A achieves an efficacy exceeding 99.9 percent, with a failure rate under one per one thousand insertions.",
+   "say": "The copper IUD is the most effective emergency contraceptive, with a failure rate under 0.1 percent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-copper-iucd.webp",
+    "alt": "Copper intrauterine device for emergency postcoital placement.",
+    "caption": "Copper T 380A intrauterine device placed postcoitally for emergency contraception. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mechanism of the emergency copper IUD combines spermicidal toxicity with **fertilisation and implantation disruption**. High local concentrations of copper ions are toxic to spermatozoa and unfertilised ova. If fertilisation has already occurred, the acute foreign-body inflammatory reaction within the endometrium prevents blastocyst attachment, providing superior efficacy compared to oral pills.",
+   "say": "Copper IUDs destroy gametes and prevent blastocyst implantation if fertilization has already occurred.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pre-Fertilisation Effect",
+     "points": [
+      "Immediate spermicidal copper ion release",
+      "Immobilizes sperm in uterine cavity",
+      "Inhibits acrosome reaction"
+     ]
+    },
+    "right": {
+     "title": "Post-Fertilisation Effect",
+     "points": [
+      "Inflammatory blastocyst toxicity",
+      "Alters endometrial pinopode receptivity",
+      "Prevents blastocyst adherence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following emergency contraception, immediate provision of **ongoing maintenance contraception** is essential to prevent future unintended pregnancies. After taking levonorgestrel, regular combined or progestogen-only pills can be initiated immediately, using barrier backup for seven days. However, when taking ulipristal acetate, hormonal contraceptives must be delayed for five days.",
+   "say": "Ongoing contraception should start immediately after levonorgestrel, but must wait five days after ulipristal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emergency Agent Taken",
+     "Ongoing Contraceptive Initiation",
+     "Barrier Backup Requirement"
+    ],
+    "rows": [
+     [
+      "Levonorgestrel 1.5 mg",
+      "Start regular pill on the same day",
+      "Barrier backup for 7 days"
+     ],
+     [
+      "Ulipristal acetate 30 mg",
+      "Wait 5 days before starting hormonal pill",
+      "Barrier backup for 14 days total"
+     ],
+     [
+      "Copper T 380A inserted",
+      "Retain device as ongoing method",
+      "No additional barrier backup required"
+     ]
+    ]
+   }
+  }
+ ]
+}

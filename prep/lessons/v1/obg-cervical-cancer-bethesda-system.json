@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Bethesda Reporting and Visual Inspection with Acetic Acid",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The standardised vocabulary reporting cervical cytology results is the **Bethesda system**. It first judges specimen adequacy before naming any abnormality. Categories run from negative through low and high grade change to cancer. Uniform language lets clinics audit results and lets women carry one report between services without reinterpretation.",
+   "say": "The Bethesda system provides standard language for cervical cytology reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Negative",
+      "No abnormal cells"
+     ],
+     [
+      "Low grade",
+      "Mild change"
+     ],
+     [
+      "High grade",
+      "Severe change"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Atypical cells of uncertain meaning and low grade change usually reflect transient infection, grouping **minor cytology**. Most minor results resolve without treatment under surveillance. High grade cytology, by contrast, predicts true precancer often enough to demand colposcopy. The Bethesda split between minor and major change drives every triage algorithm.",
+   "say": "Minor cytology usually reflects transient infection and needs surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Minor result"
+     },
+     {
+      "id": "n1",
+      "label": "HPV triage"
+     },
+     {
+      "id": "n2",
+      "label": "Positive to colposcopy"
+     },
+     {
+      "id": "n3",
+      "label": "Negative to recall"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painting the cervix with dilute vinegar turning precancer white is **VIA screening**. Abnormal cells with dense nuclei blanch sharply against pink healthy tissue. The result is instant, which allows treatment at the same visit. VIA trades laboratory precision for reach in settings without cytology services.",
+   "say": "VIA turns precancer white and gives an instant screening result.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-via_screening.webp",
+    "alt": "VIA cervical screening.",
+    "caption": "VIA screening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treating an eligible positive screen without waiting for histology is **screen and treat**. It collapses diagnosis and cure into one visit before women are lost to distance and cost. Eligible lesions are fully visible and occupy a limited part of the cervix. Suspicion of invasion excludes ablation and demands biopsy and referral instead.",
+   "say": "Screen and treat involves curing eligible lesions at the first visit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eligible",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Fully visible lesion",
+      "Ablate"
+     ],
+     [
+      "Limited extent",
+      "Ablate"
+     ],
+     [
+      "Suspected invasion",
+      "Biopsy, refer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Human papillomavirus testing sorting minor cytology into referral or recall is **HPV triage**. A negative test returns a woman to routine screening with confidence. A positive test earns colposcopy even when cytology looks bland. Triage prevents both colposcopy overload and missed precancer hiding behind minor reports.",
+   "say": "HPV triage involves sorting minor cytology into colposcopy or routine recall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Minor cytology"
+     },
+     {
+      "id": "n1",
+      "label": "HPV test done"
+     },
+     {
+      "id": "n2",
+      "label": "Positive referred"
+     },
+     {
+      "id": "n3",
+      "label": "Negative recalled"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An unsatisfactory smear lacks adequate transformation zone cells, defining **specimen adequacy**. It is a sampling failure, not a reassuring result, and earns repeat testing. Atrophy in postmenopausal women commonly starves smears of cells. Oestrogen pretreatment before repeating rescues many inadequate postmenopausal samples.",
+   "say": "Specimen adequacy requires transformation zone cells for a valid smear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Report",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Satisfactory",
+      "Zone sampled",
+      "Routine"
+     ],
+     [
+      "Unsatisfactory",
+      "Zone missed",
+      "Repeat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Detecting viral DNA directly from a cervical sample is **HPV DNA testing**. Its sensitivity exceeds cytology, so negative results protect for longer intervals. Self collected vaginal samples perform respectably and reach women avoiding speculum examination. Primary HPV screening reorganises programmes around the virus rather than the cell.",
+   "say": "HPV DNA testing detects viral DNA with high sensitivity for screening.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-obg-hpv_dna_screening.webp",
+    "alt": "HPV DNA sampling and triage.",
+    "caption": "HPV DNA screening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cytology, VIA and HPV testing fail in different ways, comparing **screening tests**. Cytology needs laboratories and repeat visits; VIA needs trained eyes at the chairside; HPV testing needs platforms but forgives sampling. Programmes choose by infrastructure, not by abstract accuracy league tables. Hybrid programmes use HPV testing where possible and VIA where necessary.",
+   "say": "Screening tests differ in infrastructure needs and failure modes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "VIA",
+     "points": [
+      "Instant result",
+      "No laboratory",
+      "Operator dependent"
+     ]
+    },
+    "right": {
+     "title": "HPV DNA",
+     "points": [
+      "Highest sensitivity",
+      "Longer protection",
+      "Needs platform"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Coverage of the never screened matters more than test elegance, stating the **programme principle**. Registries, invitations and recall convert isolated tests into protection. Auditing cancers after negative screens finds the leaks worth fixing. A modest test delivered to everyone prevents more cancer than a perfect test delivered to few.",
+   "say": "The programme principle values coverage of never screened women most.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Cervical cancer spread patterns.",
+    "caption": "Cervical cancer. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
