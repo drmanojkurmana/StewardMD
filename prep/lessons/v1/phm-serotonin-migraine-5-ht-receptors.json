@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phm-serotonin-migraine",
+  "subject": "pharmacology",
+  "title": "Serotonin Receptors, Triptans, Ergot Alkaloids, and Migraine Therapeutics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Seven distinct structural families (5-HT1 through 5-HT7) of serotonin receptors modulate cardiovascular tone, enteric peristalsis, and neurotransmission, designated as **5-HT receptors**. All are G protein-coupled receptors except the 5-HT3 subtype, which is an excitatory ligand-gated non-selective cation channel targeted by antiemetics like ondansetron. Subtypes 5-HT1B and 5-HT1D mediate cranial vasoconstriction and block neuropeptide release from trigeminal nerves, whereas 5-HT2A mediates vascular smooth muscle contraction and platelet aggregation, and 5-HT1A receptors regulate central anxiety.",
+      "say": "Serotonin receptors span seven families, all G protein-coupled except the ionotropic 5-HT3 channel.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Receptor subtype",
+          "Signaling transducer",
+          "Primary anatomical distribution",
+          "Therapeutic drug target"
+        ],
+        "rows": [
+          [
+            "5-HT1B / 5-HT1D",
+            "Gi protein (cAMP decrease)",
+            "Cranial blood vessels and trigeminal nerve endings",
+            "Triptans (sumatriptan, rizatriptan)"
+          ],
+          [
+            "5-HT2A",
+            "Gq protein (IP3 / DAG increase)",
+            "Platelets, vascular smooth muscle, cerebral cortex",
+            "Cyproheptadine, atypical antipsychotics"
+          ],
+          [
+            "5-HT3",
+            "Ligand-gated Na+ / K+ channel",
+            "Chemoreceptor trigger zone and vagal afferents",
+            "Ondansetron, granisetron"
+          ],
+          [
+            "5-HT4",
+            "Gs protein (cAMP increase)",
+            "Gastrointestinal myenteric plexus cholinergic neurons",
+            "Prucalopride, metoclopramide prokinetics"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The prototypical selective 5-HT1B/1D receptor agonist developed specifically for acute abortive therapy of moderate to severe migraine is **sumatriptan**. Available as subcutaneous injection, oral tablets, and nasal spray, sumatriptan stimulates vascular 5-HT1B receptors to constrict painfully dilated cranial and dural arteries, while activating presynaptic 5-HT1D receptors to arrest the release of calcitonin gene-related peptide and substance P. Because it can provoke coronary artery vasospasm, sumatriptan is strictly contraindicated in coronary artery disease, previous myocardial infarction, peripheral vascular disease, and uncontrolled hypertension.",
+      "say": "Sumatriptan constricts dural vessels and blocks trigeminal neuropeptides, but is contraindicated in ischemic heart disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trig",
+            "label": "Trigeminovascular activation and neurogenic meningeal inflammation"
+          },
+          {
+            "id": "suma",
+            "label": "Sumatriptan binds 5-HT1B and 5-HT1D receptors"
+          },
+          {
+            "id": "vessel",
+            "label": "5-HT1B activation: Selective intracranial and dural vasoconstriction"
+          },
+          {
+            "id": "nerve",
+            "label": "5-HT1D activation: Inhibition of CGRP and substance P exocytosis"
+          }
+        ],
+        "edges": [
+          [
+            "trig",
+            "suma"
+          ],
+          [
+            "suma",
+            "vessel"
+          ],
+          [
+            "suma",
+            "nerve"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A second-generation triptan distinguished by superior oral bioavailability exceeding forty percent and rapid clinical onset within thirty minutes is **rizatriptan**. Formulated as conventional tablets and orally disintegrating wafers, rizatriptan achieves higher peak plasma concentrations and faster headache relief than oral sumatriptan. Because rizatriptan is metabolized primarily by monoamine oxidase-A, concurrent administration with propranolol inhibits its clearance, markedly elevating rizatriptan plasma levels. Consequently, patients taking propranolol must receive a reduced rizatriptan dose of 5 mg rather than the standard 10 mg dose.",
+      "say": "Rizatriptan provides fast-acting oral migraine relief, requiring dose reduction when co-prescribed with propranolol.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rizatriptan (Second-Generation)",
+          "points": [
+            "Oral bioavailability 40% to 45%",
+            "Rapid onset of clinical relief (under 30 minutes)",
+            "Metabolized predominantly by oxidative MAO-A",
+            "Propranolol elevates levels: dose capped at 5 mg"
+          ]
+        },
+        "right": {
+          "title": "Sumatriptan (First-Generation)",
+          "points": [
+            "Low oral bioavailability (approximately 14%)",
+            "Standard onset of oral relief (60 to 90 minutes)",
+            "Multiple formulations: subcutaneous, nasal, oral",
+            "No direct pharmacokinetic interaction with propranolol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A historic non-selective ergot alkaloid acting as a complex partial agonist at 5-HT1, 5-HT2, alpha-adrenergic, and dopamine receptors is **ergotamine**. Administered orally or sublingually with caffeine to enhance intestinal absorption, ergotamine induces sustained constriction of cerebral and peripheral arterial beds. Frequent use triggers severe medication-overuse headaches and dangerous ergotism, characterized by profound peripheral vasoconstriction, intense burning paresthesias, ischemic cyanosis, digital gangrene, and intestinal infarction. Concomitant use with CYP3A4 inhibitors like clarithromycin or ketoconazole is strictly contraindicated due to vasospastic toxicity.",
+      "say": "Ergotamine induces prolonged vasoconstriction for acute migraine, but overuse risks digital gangrene and ergotism.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/migraine-fig1.webp",
+        "alt": "Cortical spreading depression and trigeminovascular activation in migraine",
+        "caption": "Neurovascular mechanisms in migraine demonstrating cortical spreading depression, trigeminovascular activation, and CGRP-mediated neurogenic vasodilation."
+      }
+    },
+    {
+      "tx": "A fully human monoclonal antibody targeting the calcitonin gene-related peptide receptor for monthly subcutaneous migraine prophylaxis is **erenumab**. By selectively binding to and blocking the canonical CGRP receptor complex, erenumab prevents CGRP-mediated neurogenic inflammation and intracranial arterial vasodilation without inducing direct vascular smooth muscle constriction. Because it does not cause coronary or systemic arterial spasm, erenumab offers a safe prophylactic option for migraineurs with cardiovascular contraindications. Clinical trials show sustained reductions in monthly migraine days, with constipation being the most frequent adverse reaction.",
+      "say": "Erenumab blocks the CGRP receptor to prevent migraine without causing coronary or peripheral vasoconstriction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Migraine preventive class",
+          "Representative therapeutic drug",
+          "Pharmacologic mechanism",
+          "Prominent clinical adverse effect"
+        ],
+        "rows": [
+          [
+            "CGRP receptor monoclonal antibody",
+            "Erenumab",
+            "Selective canonical CGRP receptor antagonist",
+            "Constipation and injection site reactions"
+          ],
+          [
+            "Antiepileptic neuromodulator",
+            "Topiramate",
+            "GABA enhancement and AMPA/kainate block",
+            "Paresthesias, weight loss, and cognitive slowing"
+          ],
+          [
+            "Calcium channel blocker",
+            "Flunarizine",
+            "T-type and L-type Ca2+ channel blockade",
+            "Sedation, weight gain, and secondary parkinsonism"
+          ],
+          [
+            "Beta-adrenergic blocker",
+            "Propranolol",
+            "Non-selective beta-1 and beta-2 antagonism",
+            "Fatigue, bronchospasm, and resting bradycardia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A selective high-affinity 5-HT1F receptor agonist devoid of vascular constrictor activity approved for acute migraine termination is **lasmiditan**. Unlike sumatriptan, which binds 5-HT1B receptors to cause arterial vasoconstriction, lasmiditan acts exclusively on 5-HT1F receptors located on peripheral and central trigeminal sensory neurons. It hyperpolarizes trigeminal nerve endings and inhibits pain signal transmission into the brainstem without altering coronary or cerebral vessel diameter. Consequently, lasmiditan can be safely administered to patients with coronary artery disease, previous stroke, or uncontrolled systemic hypertension.",
+      "say": "Lasmiditan terminates acute migraine through selective 5-HT1F agonism without provoking arterial vasoconstriction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lasmiditan (5-HT1F Agonist / Ditan)",
+          "points": [
+            "Pure selective 5-HT1F receptor agonist",
+            "Zero vasoconstrictor action on coronary arteries",
+            "Safe in ischemic heart disease and prior stroke",
+            "CNS sedation: driving prohibited for 8 hours"
+          ]
+        },
+        "right": {
+          "title": "Triptans (5-HT1B/1D Agonists)",
+          "points": [
+            "Potent agonist at 5-HT1B and 5-HT1D receptors",
+            "Produces marked coronary and cerebral vasoconstriction",
+            "Strictly contraindicated in vascular disease",
+            "Lower incidence of central nervous system sedation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A life-threatening hypermetabolic crisis provoked by excessive central and peripheral serotonergic stimulation at 5-HT2A and 5-HT1A receptors is **serotonin syndrome**. Typically precipitated by combining serotonergic medications, such as SSRIs with MAOIs, tramadol, or triptans, it presents with the classic triad of neuromuscular hyperactivity, autonomic instability, and altered sensorium. Spontaneous or inducible ocular and ankle clonus represents the most diagnostic clinical hallmark. In severe cases with hyperthermia exceeding 41 degrees Celsius, management requires neuromuscular paralysis with non-depolarizing blockers, active external cooling, and the specific 5-HT2A antagonist cyproheptadine.",
+      "say": "Serotonin syndrome is a toxic state characterized by neuromuscular clonus, autonomic storm, and hyperthermia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical diagnostic feature",
+          "Serotonin syndrome (Hunter criteria)",
+          "Neuroleptic malignant syndrome (NMS)"
+        ],
+        "rows": [
+          [
+            "Precipitating drug class",
+            "SSRIs, SNRIs, MAOIs, triptans, tramadol",
+            "Dopamine D2 antagonists (haloperidol, fluphenazine)"
+          ],
+          [
+            "Neuromuscular manifestation",
+            "Hyperkinesia: spontaneous clonus, hyperreflexia",
+            "Hypokinesia: lead-pipe muscle rigidity"
+          ],
+          [
+            "Speed of onset and resolution",
+            "Rapid onset (<24 hours) and fast resolution",
+            "Insidious onset over days; slow resolution"
+          ],
+          [
+            "Specific pharmacologic antidote",
+            "Cyproheptadine (5-HT2A receptor antagonist)",
+            "Dantrolene (RYR1 blocker) and bromocriptine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A neuroendocrine neoplasm syndrome characterized by massive paroxysmal secretion of serotonin, bradykinin, prostaglandins, and substance P is **carcinoid syndrome**. Originating most commonly from midgut neuroendocrine tumors of the ileum that have metastasized to the liver, tumor secretagogues bypass hepatic monoamine oxidase degradation, flooding the systemic circulation. Patients suffer episodic cutaneous flushing of the face and upper chest, explosive secretory diarrhea, bronchospastic wheezing, and progressive right-sided cardiac endocardial fibrosis causing tricuspid regurgitation. First-line medical therapy utilizes long-acting somatostatin analogues like octreotide.",
+      "say": "Carcinoid syndrome produces episodic cutaneous flushing, secretory diarrhea, and right heart fibrosis from excess serotonin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/carcinoid-syndrome-fig1.webp",
+        "alt": "Clinical manifestations of systemic carcinoid syndrome",
+        "caption": "Classic clinical features of carcinoid syndrome including cutaneous flushing, secretory diarrhea, bronchospasm, and right-sided endocardial fibrosis."
+      }
+    }
+  ]
+}
