@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "phy-regional-circulation",
+ "subject": "physiology",
+ "title": "Coronary, Cerebral, and Cutaneous Regional Circulations",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The vascular bed supplying the myocardium possesses unique hemodynamic features. Accounting for five percent of cardiac output (two hundred and fifty millilitres per minute), **coronary blood flow** is governed strictly by local myocardial oxygen demand, extracting seventy to eighty percent of arterial oxygen even at rest, leaving little venous oxygen reserve.",
+   "say": "Coronary flow receives five percent of cardiac output and extracts eighty percent of arterial oxygen at rest, relying on vasodilation to meet metabolic demand.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-coronary-syndrome-long-case-fig1.webp",
+    "alt": "Coronary circulation anatomy and ischemic myocardial perfusion.",
+    "caption": "Coronary arterial perfusion and metabolic autoregulation of myocardial blood flow. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In the left ventricle, coronary perfusion is profoundly modulated by mechanical contraction. During ventricular systole, intramyocardial tissue pressure exceeds intraventricular cavitary pressure, producing extravascular **systolic compression** that compresses subendocardial vessels and halts forward flow. Consequently, eighty percent of left coronary blood flow occurs during diastole, when the myocyte relaxes.",
+   "say": "Systolic contraction compresses intramyocardial vessels, so eighty percent of left coronary blood flow occurs during ventricular diastole.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sys",
+      "label": "Ventricular Systole Generates High Intramyocardial Pressure (> 120 mmHg)"
+     },
+     {
+      "id": "comp",
+      "label": "Subendocardial Coronary Arterioles Squeezed Shut (Flow Drops to Near Zero)"
+     },
+     {
+      "id": "dia",
+      "label": "Ventricular Diastole: Myocyte Relaxes and Intramyocardial Pressure Plummets"
+     },
+     {
+      "id": "perf",
+      "label": "Aortic Diastolic Pressure Drives 80% of Left Coronary Flow into Subendocardium"
+     }
+    ],
+    "edges": [
+     [
+      "sys",
+      "comp"
+     ],
+     [
+      "comp",
+      "dia"
+     ],
+     [
+      "dia",
+      "perf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because left ventricular subendocardial vessels experience the highest compressive forces during systole, the **subendocardium** is exceptionally vulnerable to myocardial ischaemia. Severe tachycardia shortens diastolic filling duration proportionately more than systolic duration, compromising subendocardial perfusion and precipitating angina in patients with coronary atherosclerosis.",
+   "say": "Subendocardial tissue is most vulnerable to ischaemia because of systolic compression. Tachycardia shortens diastole, compromising coronary perfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subendocardial Layer",
+     "points": [
+      "Experiences highest intramyocardial compressive forces",
+      "Flow ceases completely during peak ventricular systole",
+      "First region to suffer ischemic necrosis in infarction",
+      "High vulnerability during severe tachycardia or hypotension"
+     ]
+    },
+    "right": {
+     "title": "Subepicardial Layer",
+     "points": [
+      "Experiences minimal intramyocardial compressive forces",
+      "Sustains forward coronary blood flow throughout systole",
+      "Better collateral vascular reserve",
+      "Relatively spared in non-transmural subendocardial ischemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The brain receives fifteen percent of resting cardiac output (seven hundred and fifty millilitres per minute) and accounts for twenty percent of resting oxygen consumption. **Cerebral blood flow** is tightly regulated by local metabolic factors: arterial carbon dioxide tension (PaCO2) is the most potent physiological regulator, where hypercapnia induces marked cerebral arteriolar vasodilation.",
+   "say": "Cerebral blood flow receives fifteen percent of cardiac output, tightly regulated by arterial carbon dioxide tension, where hypercapnia causes marked vasodilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regulatory Factor",
+     "Physiological Alteration",
+     "Effect on Cerebral Blood Flow (CBF)"
+    ],
+    "rows": [
+     [
+      "Arterial pCO2 (PaCO2)",
+      "Increases from 40 to 80 mmHg",
+      "Linear two-fold increase in CBF via local acidosis"
+     ],
+     [
+      "Arterial pCO2 (PaCO2)",
+      "Hyperventilation (PaCO2 < 25 mmHg)",
+      "Potent cerebral vasoconstriction (lowers ICP)"
+     ],
+     [
+      "Arterial pO2 (PaO2)",
+      "Severe hypoxaemia (PaO2 < 50 mmHg)",
+      "Dramatically increases CBF to preserve oxygen delivery"
+     ],
+     [
+      "Perfusion Pressure (MAP)",
+      "Within 60 to 160 mmHg",
+      "Constant stable flow via myogenic autoregulation"
+     ],
+     [
+      "Local Brain Metabolism",
+      "Focal functional neuronal activity",
+      "Regional hyperaemia via glutamate, NO, and adenosine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical intracranial mechanics are defined by the **Monro-Kellie doctrine**. Because the adult cranium is a rigid, non-expansile bony vault, the sum of intracranial volumes (brain parenchyma at eighty percent, blood at ten percent, and cerebrospinal fluid at ten percent) remains strictly constant. Any expansion of one component mandates compensatory reduction in another to prevent catastrophic intracranial hypertension.",
+   "say": "The Monro-Kellie doctrine states that within the rigid cranium, the sum of brain, blood, and CSF volumes is fixed. Any space-occupying lesion displaces CSF and venous blood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Space-Occupying Mass Lesion or Brain Oedema Expands Volume"
+     },
+     {
+      "id": "csf",
+      "label": "Initial Compensation: Displacement of CSF into Spinal Subarachnoid Space"
+     },
+     {
+      "id": "ven",
+      "label": "Secondary Compensation: Compression and Squeezing of Cerebral Veins"
+     },
+     {
+      "id": "hernia",
+      "label": "Exhaustion of Buffers: Intracranial Pressure Surges Causing Herniation"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "csf"
+     ],
+     [
+      "csf",
+      "ven"
+     ],
+     [
+      "ven",
+      "hernia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cutaneous circulation serves thermoregulation rather than local metabolic nutrition. Skin blood flow varies from one millilitre per hundred grams per minute in extreme cold to one hundred and fifty millilitres during heat stress, governed by specialized arteriovenous anastomoses in apical skin (fingertips, ears, nose) under control of sympathetic **vasoconstrictor tone**.",
+   "say": "Cutaneous blood flow serves thermoregulation through arteriovenous anastomoses in fingertips and ears, regulated by sympathetic vasoconstrictor tone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acrocyanosis-fig1.webp",
+    "alt": "Cutaneous microcirculation and arteriovenous anastomoses.",
+    "caption": "Cutaneous arteriovenous shunts and microvascular thermoregulatory blood flow. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Firm mechanical stroking of the skin with a pointed object elicits the classic **triple response of Lewis**, mediated by microvascular responses to local histamine release. The reaction features three sequential phases: a red line appearing within seconds from local capillary dilation, an irregular surrounding flare from axon reflex arteriolar dilation, and an elevated wheal from increased permeability.",
+   "say": "The Lewis triple response to firm skin stroking consists of a red line from capillary dilation, an arteriolar flare from axon reflexes, and a wheal from oedema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase of Triple Response",
+     "Timing of Onset",
+     "Physiological Mechanism",
+     "Physical Appearance"
+    ],
+    "rows": [
+     [
+      "Red Line",
+      "3 to 15 seconds",
+      "Direct mechanical stimulation dilates capillaries",
+      "Sharp red streak along the line of stroke"
+     ],
+     [
+      "Arterial Flare",
+      "15 to 30 seconds",
+      "Axon reflex releases substance P & CGRP from sensory nerves",
+      "Irregular, spreading mottled erythematous zone"
+     ],
+     [
+      "Wheal",
+      "1 to 3 minutes",
+      "Histamine increases postcapillary endothelial permeability",
+      "Localized circumscribed elevated oedema plaque"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vascular flare phase of the triple response represents an **axon reflex**. Sensory nociceptive nerve impulses travel antidromically down collateral axonal branches of the same primary sensory neuron, releasing calcitonin gene-related peptide and substance P directly onto adjacent cutaneous arterioles without requiring central spinal cord integration.",
+   "say": "The arterial flare is caused by an axon reflex, where impulses travel antidromically down sensory branches to release vasodilators directly onto arterioles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stim",
+      "label": "Mechanical Cutaneous Stroking Activates Nociceptive C-Fibre Receptor"
+     },
+     {
+      "id": "anti",
+      "label": "Action Potential Conducts Antidromically into Collateral Axon Branches"
+     },
+     {
+      "id": "pep",
+      "label": "Local Exocytosis of Calcitonin Gene-Related Peptide (CGRP) and Substance P"
+     },
+     {
+      "id": "vaso",
+      "label": "Direct Arteriolar Vasodilation Produces Spreading Cutaneous Flare"
+     }
+    ],
+    "edges": [
+     [
+      "stim",
+      "anti"
+     ],
+     [
+      "anti",
+      "pep"
+     ],
+     [
+      "pep",
+      "vaso"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

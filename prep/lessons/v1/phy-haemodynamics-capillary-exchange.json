@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "phy-haemodynamics",
+ "subject": "physiology",
+ "title": "Capillary Exchange, Lymphatics, and Critical Closing Pressure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The exchange of respiratory gases, metabolic nutrients, fluid, and waste products between circulating blood and parenchymal tissue cells occurs across the microvascular endothelium in **capillary exchange**. Composed of a single layer of endothelial cells resting on a basal lamina with a total surface area exceeding one thousand square metres, capillaries ensure all cells sit within fifty micrometres of a vessel.",
+   "say": "Capillary exchange transfers gases, nutrients, and fluids across a single layer of endothelial cells, ensuring every cell lies near a perfused vessel.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sodium-water-balance-and-osmolality-fig1.webp",
+    "alt": "Capillary endothelial exchange and microvascular filtration.",
+    "caption": "Microvascular capillary solute exchange and Starling filtration dynamics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Capillaries are classified into three anatomical structural tiers based on endothelial wall continuity. **Continuous capillaries**, found in skeletal muscle, brain, skin, and lungs, possess uninterrupted endothelial linings with tight occludens junctions. In the brain, specialized tight junctions and astrocytic end-feet assemble the impenetrable blood-brain barrier, barring polar macromolecules.",
+   "say": "Continuous capillaries feature intact endothelial linings with tight junctions, forming the selective blood-brain barrier in the central nervous system.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Capillary Structural Tier",
+     "Endothelial Pores / Openings",
+     "Basal Lamina",
+     "Representative Anatomical Organs"
+    ],
+    "rows": [
+     [
+      "Continuous Capillaries",
+      "Tight junctions; narrow 6 nm clefts",
+      "Complete, continuous",
+      "Brain (BBB), skeletal muscle, lungs, skin"
+     ],
+     [
+      "Fenestrated Capillaries",
+      "Round 60 to 80 nm fenestrations",
+      "Complete, continuous",
+      "Renal glomeruli, intestinal mucosa, endocrine"
+     ],
+     [
+      "Discontinuous (Sinusoids)",
+      "Large gaps (up to 1 um wide)",
+      "Incomplete or completely absent",
+      "Liver, spleen, red bone marrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In organs requiring high-volume fluid filtration or rapid absorption, **fenestrated capillaries** are present. Their endothelial cytoplasm is pierced by circular fenestrations sixty to eighty nanometres wide, covered by thin diaphragms. Found in renal glomeruli, intestinal villi, and choroid plexus, fenestrations permit rapid water and small solute flux while excluding circulating cells and proteins.",
+   "say": "Fenestrated capillaries contain pores spanned by thin diaphragms, facilitating rapid fluid flux in renal glomeruli and intestinal villi.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fenestrated Capillaries",
+     "points": [
+      "Endothelial cells pierced by 60 to 80 nm pores",
+      "Intact, continuous underlying basal lamina",
+      "Permits high fluid and small peptide filtration",
+      "Locations: Renal glomeruli, endocrine glands, choroid plexus"
+     ]
+    },
+    "right": {
+     "title": "Discontinuous Sinusoids",
+     "points": [
+      "Massive intercellular gaps and open fenestrations",
+      "Incomplete, patchy, or absent basal lamina",
+      "Allows free passage of whole plasma proteins and cells",
+      "Locations: Hepatic lobules, splenic red pulp, bone marrow"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exchange of lipid-soluble gases occurs by simple transcellular diffusion, while water and small water-soluble solutes traverse intercellular clefts and fenestrations in bulk flow. Solvent drag accompanies this fluid flux, where water flowing down transcapillary hydrostatic gradients drags small dissolved solutes like glucose and electrolytes through endothelial clefts into the **interstitial space**.",
+   "say": "Lipid-soluble gases cross cells by diffusion, while water and electrolytes filter through intercellular clefts via bulk flow and solvent drag.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hydro",
+      "label": "Capillary Hydrostatic Pressure Exceeds Interstitial Pressure"
+     },
+     {
+      "id": "bulk",
+      "label": "Bulk Flow of Water Driven Through Intercellular Endothelial Clefts"
+     },
+     {
+      "id": "drag",
+      "label": "Solvent Drag Carries Dissolved Electrolytes and Glucose into Interstitium"
+     },
+     {
+      "id": "onc",
+      "label": "Plasma Albumin Oncotic Pressure Limits Excessive Net Volume Loss"
+     }
+    ],
+    "edges": [
+     [
+      "hydro",
+      "bulk"
+     ],
+     [
+      "bulk",
+      "drag"
+     ],
+     [
+      "drag",
+      "onc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Net capillary filtration delivers two to four litres of fluid into tissue spaces daily that is not reabsorbed by venules. The **lymphatic system** reclaims this excess fluid, along with leaked extravasated plasma proteins that cannot re-enter capillaries directly, returning them to the venous circulation via the thoracic duct and right lymphatic duct.",
+   "say": "The lymphatic system reclaims two to four litres of net capillary filtrate daily, returning fluid and extravasated proteins to the bloodstream.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "filt",
+      "label": "Daily Net Capillary Filtration Excess of 2 to 4 Litres Enters Tissue"
+     },
+     {
+      "id": "term",
+      "label": "Terminal Lymphatic Endothelial Flap Valves Open to Admit Fluid and Proteins"
+     },
+     {
+      "id": "pump",
+      "label": "Intrinsic Lymphangion Smooth Muscle and Skeletal Pumps Propel Lymph"
+     },
+     {
+      "id": "duct",
+      "label": "Thoracic Duct Empties into Left Subclavian-Jugular Venous Junction"
+     }
+    ],
+    "edges": [
+     [
+      "filt",
+      "term"
+     ],
+     [
+      "term",
+      "pump"
+     ],
+     [
+      "pump",
+      "duct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Terminal lymphatic capillaries possess specialized overlapping endothelial edges anchored to surrounding interstitial collagen by elastic fibrils. When interstitial fluid expands, tissue swelling pulls anchoring filaments taut, opening microscopic **flap valves** that admit fluid, large protein molecules, bacteria, and particulate debris into the lymphatic lumen without allowing retrograde back-leak.",
+   "say": "Terminal lymphatics have overlapping endothelial flaps anchored to collagen. Interstitial swelling pulls these flaps open to drain fluid and proteins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Terminal Lymphatic Capillaries",
+     "points": [
+      "Blind-ended microscopic initial vessels",
+      "Overlapping endothelial edges form one-way flap valves",
+      "Absence of continuous tight junctions or continuous pericytes",
+      "Anchoring filaments prevent vessel collapse during tissue oedema"
+     ]
+    },
+    "right": {
+     "title": "Collecting Lymphatic Vessels",
+     "points": [
+      "Possess bicuspid semilunar valves preventing backward flow",
+      "Wall contains smooth muscle layers (functional lymphangions)",
+      "Contract rhythmically to pump lymph against gravity",
+      "Filtered through encapsulated lymph node basins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Impairment of lymphatic clearance leads to accumulation of protein-rich fluid in tissue spaces designated **lymphoedema**. Destruction or surgical excision of regional axillary lymph nodes following breast cancer surgery, or chronic filarial infection by Wuchereria bancrofti, blocks lymphatic drainage, causing brawny non-pitting subcutaneous swelling, chronic fibroblast proliferation, and cutaneous peau d'orange induration.",
+   "say": "Lymphoedema results from obstructed lymphatic drainage after surgery or filariasis, causing protein-rich non-pitting swelling and tissue fibrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-oedema.webp",
+    "alt": "Clinical lymphoedema and progressive soft tissue swelling.",
+    "caption": "Impaired lymphatic clearance leading to chronic subcutaneous induration and lymphoedema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The volume of blood returned to the right atrium per minute represents the **venous return**, which must exactly equal cardiac output in the steady state. Governed by the pressure gradient between mean systemic filling pressure (seven millimetres of mercury) and right atrial pressure (zero millimetres), venous return is augmented by the muscular pump and respiratory pump.",
+   "say": "Venous return equals cardiac output, driven by the gradient between mean systemic filling pressure and right atrial pressure, enhanced by skeletal muscle pumping.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pump Mechanism",
+     "Anatomical Substrate",
+     "Physiological Action"
+    ],
+    "rows": [
+     [
+      "Skeletal Muscle Pump",
+      "Deep leg veins with bicuspid valves",
+      "Muscular contraction compresses veins, propelling blood upward"
+     ],
+     [
+      "Thoracoabdominal Pump",
+      "Diaphragmatic descent in inspiration",
+      "Lowers intrathoracic pressure and raises abdominal pressure"
+     ],
+     [
+      "Sympathetic Venoconstriction",
+      "Splanchnic and cutaneous veins",
+      "Decreases venous capacitance, raising mean systemic filling pressure"
+     ],
+     [
+      "Cardiac Suction Effect",
+      "Downward systolic descent of AV ring",
+      "Expands atria, lowering right atrial pressure below zero"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
