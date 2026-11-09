@@ -55,7 +55,7 @@
   var CUEW = { option: 1, answer: 1, letter: 1, choice: 1 };
   var SKIP_AFTER_CUE = { is: 1, its: 1, s: 1, would: 1, be: 1, number: 1 };
   var PHRASE_LEAD = { i: 1, ill: 1, ll: 1, im: 1, think: 1, thinks: 1, go: 1, going: 1, with: 1, definitely: 1, my: 1, would: 1, be: 1, it: 1, its: 1, s: 1, is: 1, choose: 1, pick: 1, say: 1, want: 1, the: 1, probably: 1, maybe: 1, just: 1, answer: 1 };
-  var PARTIAL_MS = 500;
+  var PARTIAL_MS = 500, SETTLE_MS = 1200;
   function words(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean); }
   // Joined cue forms ("optionb") become two tokens; brackets and stops already became spaces in words().
   function voiceTokens(text) {
@@ -88,22 +88,45 @@
   }
   // Most of an option's own words (3+ letters): the best option over 60%, and only a clear winner. A recogniser
   // may split a drug name ("met forming"), so adjacent spoken words may join, and words of 5+ letters tolerate a
-  // small edit distance. A tie between options is no answer.
-  function matchOptions(w, options) {
-    var best = -1, bs = 0, ss = 0;
+  // small edit distance. A tie between options is no answer. Exact words win first: near-identical medical
+  // words (hypo/hyperkalemia, ileum/ilium) are within fuzzy distance of each other, so a fuzzy tie must never
+  // erase an exact clear winner. Fuzzy is tried only when exact matching has no clear winner, and a fuzzy
+  // result must still have a clear winner.
+  function optionScores(w, options, fuzzy) {
+    var scores = [];
     (options || []).forEach(function (o, k) {
-      var ow = words(o).filter(function (x) { return x.length >= 3; }); if (!ow.length) return;
+      var ow = words(o).filter(function (x) { return x.length >= 3; }); if (!ow.length) { scores[k] = 0; return; }
       var hit = 0;
       ow.forEach(function (x) {
         if (w.indexOf(x) >= 0) { hit++; return; }
-        if (x.length < 5) return;
-        var cap = x.length >= 8 ? 2 : 1, i;
+        var i;
+        for (i = 0; i + 1 < w.length; i++) if (x === w[i] + w[i + 1]) { hit++; return; }
+        if (!fuzzy || x.length < 5) return;
+        var cap = x.length >= 8 ? 2 : 1;
         for (i = 0; i < w.length; i++) { if (lev(x, w[i], cap) <= cap || (i + 1 < w.length && lev(x, w[i] + w[i + 1], cap) <= cap)) { hit++; return; } }
       });
-      var sc = hit / ow.length;
-      if (sc > bs) { ss = bs; bs = sc; best = k; } else if (sc > ss) ss = sc;
+      scores[k] = hit / ow.length;
     });
+    return scores;
+  }
+  function clearWinner(scores) {
+    var best = -1, bs = 0, ss = 0;
+    scores.forEach(function (sc, k) { if (sc > bs) { ss = bs; bs = sc; best = k; } else if (sc > ss) ss = sc; });
     return bs >= 0.6 && bs > ss ? best : null;
+  }
+  function matchOptionsExact(w, options) { return clearWinner(optionScores(w, options, false)); }
+  function matchOptions(w, options) {
+    var ex = matchOptionsExact(w, options);
+    return ex != null ? ex : clearWinner(optionScores(w, options, true));
+  }
+  // A word in LET_RISKY_CUE that got its letter only from that risky table (not a bare b-f letter, not a safe
+  // homophone): it is an ordinary English word too, so after a cue it counts only when nothing but a closing
+  // phrase ("is correct", "is right") follows it.
+  function riskyCueWord(t) { return LET_RISKY_CUE[t] != null && LET_SAFE[t] == null && !/^[b-f]$/.test(t); }
+  function closingOnly(rest) {
+    if (!rest.length) return true;
+    if (rest.length === 1) return rest[0] === "correct" || rest[0] === "right";
+    return rest.length === 2 && rest[0] === "is" && (rest[1] === "correct" || rest[1] === "right");
   }
   function parseVoice(text, options) {
     var n = (options || []).length || 4, w = voiceTokens(text);
@@ -111,15 +134,27 @@
     // A correction replaces everything before it: "B no wait C" is C. A trailing "wait" alone is no answer.
     var wi = w.lastIndexOf("wait");
     if (wi >= 0) return wi === w.length - 1 ? null : parseVoice(w.slice(wi + 1).join(" "), options);
-    // A negation never guesses an answer: "not A", "not metformin".
-    if (w.indexOf("not") >= 0) return null;
     var c = stripPlease(w);
     if (!c.length) return null;
+    // A negation never guesses an answer: "not A", "not metformin". The one exception is an option whose own
+    // words contain "not" ("Not indicated") matched exactly: that option wins, the negation is its name.
+    if (c.indexOf("not") >= 0) {
+      var nk = matchOptionsExact(c, options);
+      return nk != null && words((options || [])[nk]).indexOf("not") >= 0 ? { k: nk } : null;
+    }
     // A strong cue, then the letter or number (filler between them is skipped: "answer is dee", "option number two").
     for (var i = 0; i < c.length; i++) {
       if (!CUEW[c[i]]) continue;
       var j = i + 1; while (j < c.length && SKIP_AFTER_CUE[c[j]]) j++;
-      if (j < c.length) { var ck = letterOrNum(c[j], "cue"); if (ck != null && ck < n) return { k: ck }; }
+      if (j >= c.length) {
+        // Skipping ran out of words ("option be"): the last skipped word is the candidate.
+        if (j > i + 1) { var ek = letterOrNum(c[c.length - 1], "cue"); if (ek != null && ek < n) return { k: ek }; }
+        break;
+      }
+      // A risky word after a cue followed by more than a closing phrase is not a letter ("answer is the
+      // liver" is the option Liver): fall through to the option's own words. Safe letters keep counting here.
+      if (riskyCueWord(c[j]) && !closingOnly(c.slice(j + 1))) break;
+      var ck = letterOrNum(c[j], "cue"); if (ck != null && ck < n) return { k: ck };
       break;
     }
     // The whole utterance is one letter (risky words count here), or one letter said twice ("A A", "B B").
@@ -156,16 +191,30 @@
     if (c.length <= 3 && CUEW[c[0]]) {
       var j = 1; while (j < c.length && SKIP_AFTER_CUE[c[j]]) j++;
       if (j === c.length - 1) { var ck = letterOf(c[j], "cue"); return ck != null && ck < n ? ck : null; }
+      // Skipping ran out of words ("option be"): the last skipped word is the candidate.
+      if (j >= c.length && c.length > 1) { var ek = letterOf(c[c.length - 1], "cue"); return ek != null && ek < n ? ek : null; }
     }
     return null;
   }
-  /* A partial result may commit only a standalone letter that stayed the same for PARTIAL_MS: "a beta blocker"
-     starts with "a" and must not lock in A. Pure timeline: seen = { k, at } | null, now in ms. */
+  // The fast settle set: a true letter or a safe homophone as the whole utterance ("a", "bee", "dee", "B B").
+  function fastLetter(text, options) {
+    var n = (options || []).length || 4, c = stripPlease(voiceTokens(text));
+    if (!c.length || c.length > 2 || (c.length === 2 && c[0] !== c[1])) return false;
+    var t = c[0], k = /^[a-f]$/.test(t) ? t.charCodeAt(0) - 97 : (LET_SAFE[t] != null ? LET_SAFE[t] : null);
+    return k != null && k < n;
+  }
+  /* A partial result commits only when the whole transcript has stayed unchanged: a bare letter or safe
+     homophone for PARTIAL_MS, anything else that parses (a phrase, option words, a command, a risky word as
+     the whole utterance) for SETTLE_MS. iOS sends no final on silence, so this settle is what answers there.
+     The vote compares the whole normalised text, not only the parsed k: "a" followed by "a beta blocker"
+     restarts the clock even though both parse to A, and a transcript that stops parsing clears the vote.
+     Pure timeline: seen = { k, text, at, ms } | null, now in ms. */
   function partialVote(seen, text, options, now) {
-    var k = standaloneLetter(text, options);
-    if (k == null) return { seen: null, commit: null };
-    if (!seen || seen.k !== k) return { seen: { k: k, at: now }, commit: null };
-    return now - seen.at >= PARTIAL_MS ? { seen: seen, commit: { k: k } } : { seen: seen, commit: null };
+    var p = parseVoice(text, options);
+    if (!p) return { seen: null, commit: null };
+    var norm = voiceTokens(text).join(" "), ms = fastLetter(text, options) ? PARTIAL_MS : SETTLE_MS;
+    if (!seen || seen.text !== norm) return { seen: { k: p.k != null ? p.k : null, text: norm, at: now, ms: ms }, commit: null };
+    return now - seen.at >= (seen.ms || ms) ? { seen: seen, commit: p } : { seen: seen, commit: null };
   }
   // Ranked recogniser alternatives: the first that gives a letter wins; else the first that parses at all.
   function pickAlternative(list, options) {
@@ -249,7 +298,7 @@
       persona: persona(s.hr), spot: spot, bosses: bosses, focus: (s.fxm && s.fxm[month]) || 0 };
   }
 
-  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
+  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, SETTLE_MS: SETTLE_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
     bossPick: bossPick, livesLeft: livesLeft, firstSentence: firstSentence, feedCards: feedCards, persona: persona, wrapped: wrapped, ym: ym, FREEZE_MAX: FREEZE_MAX, FREEZE_EXTRA: FREEZE_EXTRA, BOSS_N: BOSS_N, BOSS_LIVES: BOSS_LIVES };
   if (NODE) { module.exports = PURE; return; }
 
@@ -574,13 +623,16 @@
     if (t) t.textContent = pc + "%";
   }
   // One sentence on the system voice (the lessons' bestVoice choice); done runs on end, on error or on watchdog.
-  function systemSay(part, done) {
+  // alive, when given, is checked again right before speaking: sysVoiceIx resolves async, and a session
+  // stopped meanwhile must never start a sentence.
+  function systemSay(part, done, alive) {
     var settled = false, wd = G.setTimeout(fin, sayWatchdogMs(part) + 4000);
     function fin() { if (settled) return; settled = true; G.clearTimeout(wd); done(); }
     try {
       var T = tts();
-      if (T) { sysVoiceIx(T).then(function (vi) { var o = { text: part, lang: "en-IN", rate: 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
+      if (T) { sysVoiceIx(T).then(function (vi) { if (alive && !alive()) { fin(); return; } var o = { text: part, lang: "en-IN", rate: 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
       if (G.speechSynthesis && G.SpeechSynthesisUtterance) {
+        if (alive && !alive()) { fin(); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoicePick();
         u.lang = "en-IN"; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
         u.onend = fin; u.onerror = fin;
@@ -606,7 +658,7 @@
       if (idx >= chunks.length) { fin(); return; }
       var part = chunks[idx++], settled = false, routed = false;
       function after() { if (settled) return; settled = true; G.setTimeout(next, idx >= chunks.length ? 0 : 120); }
-      function sys() { if (routed) return; routed = true; systemSay(part, after); }
+      function sys() { if (routed) return; routed = true; systemSay(part, after, function () { return P.voice === V && tok === V.tok; }); }
       var PV = phonon();
       if (!V.usePhonon || !PV || !(PV.usable && PV.usable())) { sys(); return; }
       try { if (V.afterMic) { V.afterMic = false; PV.unlock(); } } catch (e) {}   // the mic session may have quieted <audio>; re-prime it
@@ -624,28 +676,36 @@
     var V = P.voice; if (!V) return;
     var got = false, fin = function (t) { if (got) return; got = true; stopListen(V); V.afterMic = true; if (P.voice === V) done(String(t || "")); };
     function hint(t) { var el = H.root().querySelector("#pvVoiceT"); if (el && t) el.textContent = "Listening… \u201C" + String(t).slice(0, 60) + "\u201D"; }
-    // A partial commits only a standalone letter held unchanged for PARTIAL_MS (partialVote); anything else waits.
-    function partial(t, alts) {
+    // A partial commits only from its top-ranked text, never from a lower-ranked alternative, and only once
+    // the whole transcript has settled (partialVote). The V.pt timer fires the commit with no further
+    // partial arriving, which is the only answer path on iPhone, where silence sends no final.
+    function partial(t) {
       if (got || !t) return;
       V.heard = t; V.heardAt = Date.now(); hint(t);
-      var text = alts && alts.length ? pickAlternative(alts, V.opts) : t;
-      if (alts && alts.length) V.alts = alts;
-      var vote = partialVote(V.seen, text, V.opts, Date.now());
+      var vote = partialVote(V.seen, t, V.opts, Date.now());
       V.seen = vote.seen;
       G.clearTimeout(V.pt);
-      if (vote.commit) { fin(text); return; }
-      if (vote.seen) V.pt = G.setTimeout(function () {
+      if (vote.commit) { fin(t); return; }
+      if (vote.seen) armSettle((vote.seen.ms || PARTIAL_MS) + 30);
+    }
+    function armSettle(ms) {
+      G.clearTimeout(V.pt);
+      V.pt = G.setTimeout(function () {
         if (got || P.voice !== V) return;
-        var v2 = partialVote(V.seen, pickAlternative(V.alts && V.alts.length ? V.alts : [V.heard], V.opts), V.opts, Date.now());
-        V.seen = v2.seen; if (v2.commit) fin(V.heard);
-      }, PARTIAL_MS + 30);
+        var v2 = partialVote(V.seen, V.heard, V.opts, Date.now());
+        V.seen = v2.seen;
+        if (v2.commit) { fin(V.heard); return; }
+        if (v2.seen) armSettle(Math.max(10, (v2.seen.at + (v2.seen.ms || PARTIAL_MS)) - Date.now()));
+      }, ms);
     }
     try {
       if (nativeListen()) {
         V.stopL = G.SMD_NATIVE.transcribe({ language: "en-IN", onDevice: "prefer",
           onPartial: function (t) { partial(t); },
-          onMatches: function (ms) { if (ms && ms.length) partial(String(ms[0]), ms); },
-          onFinal: function (t) { fin(V.alts && V.alts.length ? pickAlternative([t].concat(V.alts), V.opts) : t); },
+          onMatches: function (ms) { if (ms && ms.length) partial(String(ms[0])); },
+          // Only this final event's own text: alternatives from an earlier partial are stale and once
+          // resurrected the wrong answer ("a kidney problem I think" + a stale "a" recorded A).
+          onFinal: function (t) { fin(t); },
           onError: function () { fin(""); } });
       } else {
         var SR = G.SpeechRecognition || G.webkitSpeechRecognition, rec = new SR();
@@ -653,7 +713,7 @@
         rec.onresult = function (e) {
           var res = e.results[e.results.length - 1], alts = [];
           for (var i = 0; i < res.length; i++) alts.push(res[i].transcript);
-          if (res.isFinal === false) partial(alts[0], alts); else fin(pickAlternative(alts, V.opts));
+          if (res.isFinal === false) partial(alts[0]); else fin(pickAlternative(alts, V.opts));
         };
         rec.onerror = function () { fin(""); }; rec.onend = function () { fin(V.heard || ""); };
         V.stopL = function () { try { rec.stop(); } catch (e) {} };
@@ -706,7 +766,7 @@
     function doListen() {
       if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
       say("Listening… " + choicePrompt(it.o.length));
-      V.heard = ""; V.alts = null; V.seen = null; V.extended = false;
+      V.heard = ""; V.seen = null; V.extended = false;
       V.gt = G.setTimeout(function () {
         if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
         listen(function (t) {
@@ -751,6 +811,8 @@
     var V = P.voice; V.tok++;
     stopListen(V);
     hush();
+    // Nothing resumes while hidden, so do not leave a stale "Listening…" behind: the tap path is live.
+    try { var el = H && H.root && H.root().querySelector("#pvVoiceT"); if (el) el.textContent = "Tap your answer"; } catch (e) {}
   });
 
   /* ---------- focus room ---------- */
