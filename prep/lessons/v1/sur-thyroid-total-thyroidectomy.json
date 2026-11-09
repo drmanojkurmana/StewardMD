@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Total Thyroidectomy, Retrosternal Goitre, and Anaplastic Carcinoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The definitive surgical eradication of all macroscopic thyroid parenchyma is designated a **total thyroidectomy**. Standard surgical indications encompass high-risk differentiated thyroid carcinomas, medullary thyroid cancer, bilateral compressive multinodular goitres, and medically refractory Graves disease. Total resection eliminates the risk of recurrent disease in the contralateral lobe, provides optimal preparation for post-operative radioactive iodine ablation, and allows uncompromised monitoring with serum thyroglobulin.",
+   "say": "Total thyroidectomy is the complete removal of all thyroid tissue for malignancies, toxic goiters, and compressive nodules, enabling post-operative radioiodine therapy and thyroglobulin surveillance.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-subtotal-and-total-thyroidectomy.webp",
+    "alt": "Operative field photograph of a total thyroidectomy through a transverse cervical collar incision.",
+    "caption": "Total thyroidectomy operative field: Kocher collar incision, retraction of strap muscles, and capsular dissection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Executing a safe total thyroidectomy requires strict adherence to capsular dissection technique. Through a transverse collar incision, the surgeon creates subplatysmal flaps and separates the strap muscles in the midline linea alba cervicalis. Mobilization of each thyroid lobe proceeds strictly in the **subcapsular dissection plane**, ligating tertiary branches of the inferior thyroid artery directly upon the thyroid capsule to protect parathyroid gland vascularity and recurrent laryngeal nerves.",
+   "say": "Subcapsular dissection directly on the thyroid capsule is essential. Ligation of terminal artery branches preserves the delicate vascular supply to the parathyroid glands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "incision",
+      "label": "Kocher Transverse Collar Skin Incision"
+     },
+     {
+      "id": "flaps",
+      "label": "Raise Subplatysmal Skin Flaps Superiorly & Inferiorly"
+     },
+     {
+      "id": "strap",
+      "label": "Divide Midline Linea Alba & Retract Strap Muscles"
+     },
+     {
+      "id": "middle",
+      "label": "Ligate & Divide Middle Thyroid Vein"
+     },
+     {
+      "id": "capsular",
+      "label": "Strict Subcapsular Dissection Preserving Parathyroids"
+     }
+    ],
+    "edges": [
+     [
+      "incision",
+      "flaps"
+     ],
+     [
+      "flaps",
+      "strap"
+     ],
+     [
+      "strap",
+      "middle"
+     ],
+     [
+      "middle",
+      "capsular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A common clinical scenario is the management of a **retrosternal goitre**, defined when more than fifty percent of the thyroid mass resides below the plane of the thoracic inlet. Most retrosternal goitres represent secondary downward migration of an enlarged cervical thyroid lobe into the anterior mediastinum, driven by negative intrathoracic pressure and gravity. Compression of the trachea, esophagus, and great veins produces progressive dyspnea, choking on lying supine, and dysphagia.",
+   "say": "Retrosternal goiters migrate downward into the mediastinum due to gravity and intrathoracic negative pressure, causing airway compression and difficulty swallowing.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-multinodular-goitre-thyroid.webp",
+    "alt": "Gross pathology photograph of a massive multinodular retrosternal goitre specimen.",
+    "caption": "Multinodular goitre specimen: expansive nodular enlargement with cystic degeneration predisposing to retrosternal descent. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On physical examination, thoracic inlet crowding can be demonstrated by eliciting **Pemberton sign**. The patient is instructed to elevate both arms alongside the head until they touch the ears, holding the posture for one minute. In patients with massive retrosternal extension, the maneuver forces the thyroid into the thoracic inlet, compressing the internal jugular veins and producing facial plethora, cyanosis, distended neck veins, and progressive inspiratory stridor.",
+   "say": "Pemberton sign is positive when elevating both arms above the head triggers facial congestion and stridor within a minute, demonstrating thoracic inlet crowding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Pemberton Sign",
+     "points": [
+      "Patient raises both arms vertically touching the ears",
+      "Goitre wedges snugly into rigid thoracic inlet ring",
+      "Compacts internal jugular veins and superior vena cava",
+      "Produces facial plethora, cyanosis, and inspiratory stridor",
+      "Clear indication for prompt surgical decompression"
+     ]
+    },
+    "right": {
+     "title": "Standard Cervical Goitre",
+     "points": [
+      "Enlargement remains confined entirely within cervical fascia",
+      "Thoracic inlet remains widely patent on arm elevation",
+      "No venous engorgement or cyanosis occurs on testing",
+      "Evaluated electively without thoracic vascular compromise"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A vital surgical tenet dictates that over ninety-eight percent of all retrosternal goitres can be safely excised through a standard **cervical collar incision**, completely avoiding a sternotomy. Because secondary retrosternal goitres derive their arterial blood supply from cervical branches (superior and inferior thyroid arteries), ligating these cervical pedicles devascularizes the intrathoracic mass. Gentle digital traction and finger dissection in the loose mediastinal tissue deliver the goitre upward into the neck.",
+   "say": "Over ninety-eight percent of retrosternal goiters can be removed through a neck incision alone, because their blood supply originates from cervical arteries in the neck.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Approach",
+     "Frequency of Use",
+     "Clinical Indications and Rationale"
+    ],
+    "rows": [
+     [
+      "Standard Cervical Incision",
+      "Greater than ninety-eight percent of cases",
+      "Sufficient for virtually all secondary goitres with cervical arterial pedicles"
+     ],
+     [
+      "Full or Partial Sternotomy",
+      "Less than two percent of cases",
+      "Reserved for true ectopic primary mediastinal goitres or invasive thyroid cancer"
+     ],
+     [
+      "Thoracotomy",
+      "Extremely rare (<0.5%)",
+      "Indicated for posterior mediastinal goitres slipping behind the aortic arch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most catastrophic and lethal primary neoplasm of the thyroid gland is **anaplastic thyroid carcinoma**, accounting for one to two percent of all thyroid cancers yet responsible for over half of all thyroid cancer deaths. It occurs characteristically in elderly individuals over sixty-five years of age, often arising within a preexisting longstanding goitre. It presents as an explosive, rapidly expanding, rock-hard anterior neck mass causing agonizing local pain, stridor, dysphagia, and recurrent laryngeal nerve palsy.",
+   "say": "Anaplastic thyroid carcinoma is a devastating malignancy in the elderly, causing an explosive, rock-hard neck mass with rapid airway obstruction and vocal paralysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anaplastic Carcinoma (ATC)",
+     "points": [
+      "Occurs in elderly patients (median age seventy years)",
+      "Explosive growth with local invasion within weeks",
+      "Invariably stage IV at initial diagnosis by definition",
+      "Extremely poor median survival of three to six months"
+     ]
+    },
+    "right": {
+     "title": "Differentiated Thyroid Cancer (PTC / FTC)",
+     "points": [
+      "Occurs in young to middle-aged adults",
+      "Slow, indolent growth over months or years",
+      "Staged according to age, tumor size, and nodal status",
+      "Outstanding overall twenty-year survival exceeding ninety percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Under the American Joint Committee on Cancer staging system, all anaplastic thyroid carcinomas are classified as stage four at the time of initial presentation, reflecting their dismal biological behavior. Genetic analysis reveals near-universal loss of the p53 tumor suppressor protein, frequently combined with TERT promoter and **BRAF V600E mutations**. Distant hematogenous metastases, particularly to the lungs, bone, and brain, are present in over fifty percent of patients at diagnosis.",
+   "say": "All anaplastic carcinomas are classified as stage four at diagnosis. Near-universal p53 inactivation and BRAF mutations drive aggressive invasion, with half having distant metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AJCC Stage",
+     "Extent of Anaplastic Carcinoma",
+     "Treatment Intent and Prognosis"
+    ],
+    "rows": [
+     [
+      "Stage IVA",
+      "Tumor strictly confined to the thyroid gland without extrathyroidal invasion",
+      "Aggressive surgical resection followed by chemoradiotherapy"
+     ],
+     [
+      "Stage IVB",
+      "Gross extrathyroidal extension invading trachea, larynx, esophagus, or vessels",
+      "Neoadjuvant targeted therapy (dabrafenib + trametinib) or palliative radiation"
+     ],
+     [
+      "Stage IVC",
+      "Distant metastases to lungs, brain, or bone",
+      "Palliative symptom control, targeted molecular therapy, and hospice care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment for anaplastic thyroid carcinoma is primarily palliative, aimed at preserving the airway and controlling pain. Radical extensive surgery that fails to achieve microscopic clearance is strongly discouraged. When airway asphyxiation looms, surgeons perform an emergency **palliative isthmusectomy** or tracheostomy to secure the trachea. In patients harboring BRAF V600E mutations, neoadjuvant therapy combining dabrafenib and trametinib can induce rapid tumor regression, occasionally converting inoperable tumors into resectable lesions.",
+   "say": "Treatment focuses on airway preservation with palliative isthmusectomy or tracheostomy. In BRAF-mutated tumors, targeted therapy with dabrafenib and trametinib can achieve rapid regression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "present",
+      "label": "Rapidly Expanding Rock-Hard Thyroid Mass"
+     },
+     {
+      "id": "airway",
+      "label": "Assess Airway Compromise & Vocal Cord Mobility"
+     },
+     {
+      "id": "mutation",
+      "label": "Rapid Molecular Testing for BRAF V600E Mutation"
+     },
+     {
+      "id": "targeted",
+      "label": "Dabrafenib + Trametinib for BRAF Mutated Tumors"
+     },
+     {
+      "id": "palliative",
+      "label": "Palliative Isthmusectomy / Tracheostomy for Stridor"
+     }
+    ],
+    "edges": [
+     [
+      "present",
+      "airway"
+     ],
+     [
+      "airway",
+      "mutation"
+     ],
+     [
+      "mutation",
+      "targeted"
+     ],
+     [
+      "airway",
+      "palliative"
+     ]
+    ]
+   }
+  }
+ ]
+}

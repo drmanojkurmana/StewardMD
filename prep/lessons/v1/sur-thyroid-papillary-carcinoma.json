@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Papillary Thyroid Carcinoma, Psammoma Bodies, and Nodal Spread",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Representing over eighty-five percent of all primary thyroid cancers, **papillary thyroid carcinoma** is the most common endocrine malignancy. It exhibits a marked female preponderance of three to one and typically manifests between thirty and fifty years of age. A classic, proven etiological risk factor is childhood exposure to ionizing radiation, as observed historically following therapeutic head and neck irradiation and the Chernobyl nuclear reactor disaster.",
+   "say": "Papillary thyroid carcinoma is the most common thyroid cancer, seen predominantly in young women. Previous exposure to ionizing radiation during childhood is a well-established risk factor.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-cancer-fig1.webp",
+    "alt": "Medical illustration demonstrating papillary thyroid carcinoma, regional lymphatic spread, and histopathology.",
+    "caption": "Papillary thyroid carcinoma: primary nodular tumor, lymphatic permeation, and regional cervical lymphadenopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Macroscopically, papillary thyroid carcinoma presents as a solitary, firm, unencapsulated white-tan nodule within the thyroid gland, often displaying tiny central microcalcifications. A hallmark pathological feature is **intrathyroidal multifocality**, occurring in twenty to thirty percent of patients. Multifocality arises from extensive intrathyroidal lymphatic permeation through rich capsular lymphatic networks rather than independent polyclonal origins, supporting total thyroidectomy in patients with high-risk or bilateral disease.",
+   "say": "Papillary carcinoma is frequently multifocal, spreading across both thyroid lobes via intrathyroidal lymphatic channels. This multicentricity justifies total thyroidectomy in high-risk patients.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-papillary-carcinoma-thyroid.webp",
+    "alt": "Gross pathology specimen showing sectioned papillary carcinoma of the thyroid gland.",
+    "caption": "Papillary carcinoma gross specimen: unencapsulated firm invasive nodule arising within the thyroid parenchyma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On light microscopy, the tumor displays branching, complex papillary fronds with central fibrovascular cores lined by single or multiple layers of crowded cuboidal epithelial cells. A classic histopathological hallmark is the presence of **psammoma bodies**, found in roughly fifty percent of papillary carcinomas. Derived from the Greek word psammos meaning sand, psammoma bodies are concentric, laminated basophilic calcospherites formed by dystrophic calcification and infarction of the tips of necrotic papillae.",
+   "say": "Psammoma bodies are concentric, laminated calcifications formed by infarcted papillary tips. Found in half of papillary thyroid cancers, they represent an indispensable diagnostic hallmark.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psammoma Bodies (True Calcospherites)",
+     "points": [
+      "Concentric, laminated round calcifications",
+      "Formed by infarction of dead papillary tips",
+      "Virtually pathognomonic of papillary thyroid carcinoma",
+      "Also seen in ovarian serous cystadenocarcinoma and meningioma"
+     ]
+    },
+    "right": {
+     "title": "Colloid Calcifications (Pseudopsammoma)",
+     "points": [
+      "Dense, amorphous, non-laminated coarse clumps",
+      "Formed by inspissation of concentrated colloid",
+      "Commonly seen in benign multinodular goitres",
+      "Lacks organized concentric concentric rings on microscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The presence of psammoma bodies in cervical lymph nodes or extrathyroidal soft tissues is pathognomonic of metastatic papillary carcinoma, even when a primary thyroid tumor is impalpable. The biological behavior of papillary thyroid carcinoma is governed overwhelmingly by **regional lymphatic dissemination**. Unlike follicular carcinoma which spreads hematogenously, papillary carcinoma metastasizes preferentially through lymphatics, with occult micrometastases present in thirty to sixty percent of patients at initial diagnosis.",
+   "say": "Papillary carcinoma spreads predominantly through lymphatic channels into regional neck lymph nodes. Up to sixty percent of patients harbor nodal micrometastases at initial presentation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tumor",
+      "label": "Primary Papillary Thyroid Carcinoma"
+     },
+     {
+      "id": "lymph",
+      "label": "Permeation of Capsular Lymphatics"
+     },
+     {
+      "id": "central",
+      "label": "Level VI Central Compartment Nodes (Pretracheal)"
+     },
+     {
+      "id": "lateral",
+      "label": "Levels II, III, IV Lateral Cervical Chains"
+     },
+     {
+      "id": "mediastinal",
+      "label": "Level VII Superior Mediastinal Extension"
+     }
+    ],
+    "edges": [
+     [
+      "tumor",
+      "lymph"
+     ],
+     [
+      "lymph",
+      "central"
+     ],
+     [
+      "central",
+      "lateral"
+     ],
+     [
+      "central",
+      "mediastinal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary nodal station involved by papillary carcinoma is the **central compartment lymph nodes**, designated level six. Level six is bounded superiorly by the hyoid bone, inferiorly by the suprasternal notch, and laterally by the carotid sheaths, enclosing pretracheal, paratracheal, and prelaryngeal (Delphian) nodes. Lymphatic metastases from the central compartment subsequently progress laterally into level three mid-jugular and level four lower jugular nodal chains.",
+   "say": "The central compartment, or level six, is the first nodal basin involved, including Delphian and paratracheal nodes. From here, metastases track into lateral cervical chains.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nodal Basin",
+     "Anatomical Boundaries",
+     "Surgical Approach in PTC"
+    ],
+    "rows": [
+     [
+      "Delphian Node",
+      "Prelaryngeal node directly above the thyroid isthmus",
+      "Biopsy of enlarged Delphian node confirms occult aggressive PTC"
+     ],
+     [
+      "Level VI Central Basin",
+      "Between carotid sheaths from hyoid to sternal notch",
+      "Routinely cleared in therapeutic or high-risk central neck dissection"
+     ],
+     [
+      "Lateral Neck (II - IV)",
+      "Deep jugular chains along internal jugular vein",
+      "Cleared via selective neck dissection when metastatic nodes are proven"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with clinically node-positive central neck disease, a formal **therapeutic central neck dissection** is executed concurrently with total thyroidectomy. The procedure meticulously resects all lymphatic and fibrofatty tissue between both carotid arteries from the hyoid down to the innominate vein, while preserving the parathyroid glands and recurrent laryngeal nerves. Prophylactic lateral neck dissection is contraindicated; lateral neck clearance (levels two through five) is performed strictly when metastases are confirmed.",
+   "say": "Therapeutic central neck dissection clears level six nodes while safeguarding parathyroids and recurrent laryngeal nerves. Lateral neck dissection is performed only for biopsy-proven metastases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "staging",
+      "label": "Preoperative Ultrasound of Central & Lateral Neck"
+     },
+     {
+      "id": "node_pos",
+      "label": "Confirmed Central Node Metastasis (cN1a)"
+     },
+     {
+      "id": "total",
+      "label": "Total Thyroidectomy Performed"
+     },
+     {
+      "id": "cnd",
+      "label": "Bilateral Level VI Central Neck Dissection"
+     },
+     {
+      "id": "sparing",
+      "label": "Parathyroid Preservation & RLN Identification"
+     }
+    ],
+    "edges": [
+     [
+      "staging",
+      "node_pos"
+     ],
+     [
+      "node_pos",
+      "total"
+     ],
+     [
+      "total",
+      "cnd"
+     ],
+     [
+      "cnd",
+      "sparing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term prognosis in papillary thyroid cancer is exceptionally favorable, with overall twenty-year survival exceeding ninety to ninety-five percent. Risk stratification relies on validated scoring algorithms, including the European MACIS system, which computes risk based on distant **metastasis at presentation**, patient age, completeness of surgical excision, extrathyroidal invasion, and primary tumor size. The American Joint Committee on Cancer eighth edition designates fifty-five years as the critical prognostic age threshold.",
+   "say": "Papillary carcinoma carries an outstanding twenty-year survival exceeding ninety percent. Prognostic models like MACIS evaluate age over fifty-five, tumor size, extrathyroidal spread, and distant metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MACIS Component",
+     "Clinical Variable",
+     "Prognostic Scoring Weight"
+    ],
+    "rows": [
+     [
+      "M (Metastasis)",
+      "Presence of distant hematogenous metastases (lungs/bone)",
+      "Adds 3.0 points to total MACIS risk score"
+     ],
+     [
+      "A (Age)",
+      "Patient age at diagnosis (continuous variable)",
+      "Adds 0.31 points if age <40; 0.08 x age if age >=40"
+     ],
+     [
+      "C (Completeness)",
+      "Incomplete surgical macroscopic resection (R2 margin)",
+      "Adds 1.0 point to total MACIS risk score"
+     ],
+     [
+      "I (Invasion)",
+      "Gross extrathyroidal tumor invasion into strap muscles/trachea",
+      "Adds 1.0 point to total MACIS risk score"
+     ],
+     [
+      "S (Size)",
+      "Maximum primary tumor diameter in centimetres",
+      "Adds 0.3 x tumor diameter in centimetres"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following total thyroidectomy in patients categorized as intermediate or high risk, post-operative **radioiodine ablation** using iodine-131 is administered. Radioiodine destroys residual microscopic thyroid tissue in the thyroid bed and targets occult distant metastases. Post-ablation surveillance utilizes serum thyroglobulin as an exceptionally sensitive tumor marker; in an athyreotic patient after successful ablation, detectable or rising thyroglobulin indicates disease recurrence.",
+   "say": "High-risk patients receive postoperative iodine-131 radioiodine ablation. Serum thyroglobulin then serves as a precise tumor marker, where rising levels detect cancer recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "surgery",
+      "label": "Complete Total Thyroidectomy"
+     },
+     {
+      "id": "tsh",
+      "label": "Elevate TSH (rhTSH or Thyroid Hormone Withdrawal)"
+     },
+     {
+      "id": "i131",
+      "label": "Administer Therapeutic I-131 Radioiodine"
+     },
+     {
+      "id": "ablate",
+      "label": "Destruction of Residual Thyroid Bed Tissue"
+     },
+     {
+      "id": "tg",
+      "label": "Surveillance with Serum Thyroglobulin & Neck Ultrasound"
+     }
+    ],
+    "edges": [
+     [
+      "surgery",
+      "tsh"
+     ],
+     [
+      "tsh",
+      "i131"
+     ],
+     [
+      "i131",
+      "ablate"
+     ],
+     [
+      "ablate",
+      "tg"
+     ]
+    ]
+   }
+  }
+ ]
+}
