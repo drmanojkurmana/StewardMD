@@ -657,6 +657,13 @@
     return T.getSupportedVoices().then(function (r) { sysIx = bestVoiceOf(r && r.voices); return sysIx; }, function () { sysIx = -1; return -1; });
   }
   function webVoicePick() { try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoiceOf(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; } }
+  // The lessons' speed helpers and saved rate (store lsp.r): one speed for lessons and Voice mode.
+  function speedsOf() { var P = lessonPure(); return (P && P.SPEEDS) || [0.75, 1, 1.25, 1.5]; }
+  function nextSpeedOf(r) { var P = lessonPure(); if (P && P.nextSpeed) return P.nextSpeed(r); var ss = speedsOf(), i = ss.indexOf(r); return ss[(i + 1) % ss.length]; }
+  function speedLabelOf(r) { var P = lessonPure(); if (P && P.speedLabel) return P.speedLabel(r); return String(r).replace(/^0\./, ".") + "x"; }
+  function voiceRate() { try { var s = store(); return (s && s.lsp && +s.lsp.r) || 1; } catch (e) { return 1; } }
+  function setVoiceRate(r) { try { var s = store(); if (!s.lsp) s.lsp = { r: 1, au: 0 }; s.lsp.r = r; H.save(); } catch (e) {} }
+  function sayStatus(t) { var el = H && H.root && H.root().querySelector("#pvVoiceT"); if (el) el.textContent = t; }
   function hush() {
     try { var V = phonon(); if (V && V.stop) V.stop(); } catch (e) {}
     try { var T = tts(); if (T && T.stop) T.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
@@ -697,16 +704,16 @@
   // One sentence on the system voice (the lessons' bestVoice choice); done runs on end, on error or on watchdog.
   // alive, when given, is checked again right before speaking: sysVoiceIx resolves async, and a session
   // stopped meanwhile must never start a sentence.
-  function systemSay(part, done, alive) {
-    var settled = false, wd = G.setTimeout(fin, sayWatchdogMs(part) + 4000);
+  function systemSay(part, done, alive, rate) {
+    var settled = false, wd = G.setTimeout(fin, sayWatchdogMs(part, rate) + 4000);
     function fin() { if (settled) return; settled = true; G.clearTimeout(wd); done(); }
     try {
       var T = tts();
-      if (T) { sysVoiceIx(T).then(function (vi) { if (alive && !alive()) { fin(); return; } var o = { text: part, lang: "en-IN", rate: 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
+      if (T) { sysVoiceIx(T).then(function (vi) { if (alive && !alive()) { fin(); return; } var o = { text: part, lang: "en-IN", rate: rate || 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
       if (G.speechSynthesis && G.SpeechSynthesisUtterance) {
         if (alive && !alive()) { fin(); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoicePick();
-        u.lang = "en-IN"; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
+        u.lang = "en-IN"; u.rate = rate || 1; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
         u.onend = fin; u.onerror = fin;
         G.speechSynthesis.speak(u); return;
       }
@@ -716,9 +723,11 @@
   /* Speak a text (or a list of segments, so "Option B." stays with its option) a chunk at a time through Phonon,
      the next chunk rendered ahead; a chunk Phonon fails on, or one that overruns its watchdog, is read by the
      system voice and reading carries on. done fires only while this speak is still the session's current one. */
-  function speak(text, done) {
+  function speak(text, done, block) {
     var V = P.voice; if (!V) return;
-    var tok = ++V.tok, fin = function () { if (P.voice === V && tok === V.tok) done(); };
+    var tok = ++V.tok, rate = voiceRate();
+    V.speakingBlock = block || null;
+    var fin = function () { if (P.voice === V && tok === V.tok) { V.speakingBlock = null; done(); } };
     hush();
     var segs = Object.prototype.toString.call(text) === "[object Array]" ? text : [text], chunks = [];
     segs.forEach(function (s) { sayChunksOf(s).forEach(function (c) { chunks.push(c); }); });
@@ -730,23 +739,23 @@
       if (idx >= chunks.length) { fin(); return; }
       var part = chunks[idx++], settled = false, routed = false;
       function after() { if (settled) return; settled = true; G.setTimeout(next, idx >= chunks.length ? 0 : 120); }
-      function sys() { if (routed) return; routed = true; systemSay(part, after, function () { return P.voice === V && tok === V.tok; }); }
+      function sys() { if (routed) return; routed = true; systemSay(part, after, function () { return P.voice === V && tok === V.tok; }, rate); }
       var PV = phonon();
       if (!V.usePhonon || !PV || !(PV.usable && PV.usable())) { sys(); return; }
       try { if (V.afterMic) { V.afterMic = false; PV.unlock(); } } catch (e) {}   // the mic session may have quieted <audio>; re-prime it
-      try { if (chunks[idx]) PV.prefetch(chunks[idx]); } catch (e) {}
-      var wd = G.setTimeout(function () { try { PV.stop(); } catch (e) {} sys(); }, sayWatchdogMs(part));
+      try { if (chunks[idx]) PV.prefetch(chunks[idx], rate); } catch (e) {}
+      var wd = G.setTimeout(function () { try { PV.stop(); } catch (e) {} sys(); }, sayWatchdogMs(part, rate));
       function ok() { if (routed) return; routed = true; G.clearTimeout(wd); after(); }
       function bad() { G.clearTimeout(wd); sys(); }
-      try { PV.say(part, 1).then(ok, bad); } catch (e) { bad(); }
+      try { PV.say(part, rate).then(ok, bad); } catch (e) { bad(); }
     }
     if (V.usePhonon == null && V.readyP) V.readyP.then(function (ok) { if (P.voice !== V || tok !== V.tok) return; if (V.usePhonon == null) V.usePhonon = !!ok; next(); });
     else next();
   }
-  function stopListen(V) { G.clearTimeout(V.lt); G.clearTimeout(V.gt); G.clearTimeout(V.pt); if (V.stopL) { try { V.stopL(); } catch (e) {} V.stopL = null; } }
+  function stopListen(V) { V.listening = false; G.clearTimeout(V.lt); G.clearTimeout(V.gt); G.clearTimeout(V.pt); if (V.stopL) { try { V.stopL(); } catch (e) {} V.stopL = null; } }
   function listen(done) {
     var V = P.voice; if (!V) return;
-    var got = false, fin = function (t) { if (got) return; got = true; stopListen(V); V.afterMic = true; if (P.voice === V) done(String(t || "")); };
+    var got = false, fin = function (t, err) { if (got) return; got = true; V.listening = false; stopListen(V); V.afterMic = true; if (P.voice === V) done(String(t || ""), err || ""); };
     function hint(t) { var el = H.root().querySelector("#pvVoiceT"); if (el && t) el.textContent = "Listening… \u201C" + String(t).slice(0, 60) + "\u201D"; }
     // A partial commits only from its top-ranked text, never from a lower-ranked alternative, and only once
     // the whole transcript has settled (partialVote). The V.pt timer fires the commit with no further
@@ -770,15 +779,18 @@
         if (v2.seen) armSettle(Math.max(10, (v2.seen.at + (v2.seen.ms || PARTIAL_MS)) - Date.now()));
       }, ms);
     }
+    V.listening = true;
     try {
       if (nativeListen()) {
-        V.stopL = G.SMD_NATIVE.transcribe({ language: "en-IN", onDevice: "prefer",
+        V.stopL = G.SMD_NATIVE.transcribe({ language: "en-IN", onDevice: "prefer", partialResults: true, maxResults: 5,
           onPartial: function (t) { partial(t); },
           onMatches: function (ms) { if (ms && ms.length) partial(String(ms[0])); },
           // Only this final event's own text: alternatives from an earlier partial are stale and once
           // resurrected the wrong answer ("a kidney problem I think" + a stale "a" recorded A).
           onFinal: function (t) { fin(t); },
-          onError: function () { fin(""); } });
+          // A recogniser error (permission, busy mic, no on-device en-IN) is not a heard-nothing miss:
+          // it must not burn a miss or speak over a broken mic; the caller waits for a tap or Repeat.
+          onError: function () { fin("", "error"); } });
       } else {
         var SR = G.SpeechRecognition || G.webkitSpeechRecognition, rec = new SR();
         rec.lang = "en-IN"; rec.interimResults = true; rec.maxAlternatives = 3;
@@ -787,11 +799,11 @@
           for (var i = 0; i < res.length; i++) alts.push(res[i].transcript);
           if (res.isFinal === false) partial(alts[0]); else fin(pickAlternative(alts, V.opts));
         };
-        rec.onerror = function () { fin(""); }; rec.onend = function () { fin(V.heard || ""); };
+        rec.onerror = function () { fin(V.heard || ""); }; rec.onend = function () { fin(V.heard || ""); };
         V.stopL = function () { try { rec.stop(); } catch (e) {} };
         rec.start();
       }
-    } catch (e) { return fin(""); }
+    } catch (e) { return fin("", "error"); }
     // About 10 s to think; a word still arriving at the limit buys a little more rather than being cut off.
     V.lt = G.setTimeout(function check() {
       if (got) return;
@@ -806,7 +818,7 @@
     if (!canSpeak()) return H.toast("Voice mode needs speech on this phone.");
     if (!proOk()) return;
     if (P.voice) stopVoice();
-    var V = P.voice = { tok: 0, step: {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null };
+    var V = P.voice = { tok: 0, step: {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null, listening: false, speakingBlock: null };
     V.readyP = prepareVoice(V);
     H.loadingScreen("Voice mode", "Picking 10 questions…");
     draw(3, "voice" + Date.now()).then(function (items) {
@@ -817,70 +829,167 @@
       if (!V.listen) H.toast("Listening is not available here: tap your answer after each question.");
     }, function () { if (P.voice !== V) return; stopVoice(); H.toast("Voice mode needs a connection the first time."); H.rerender(); });
   }
+  // Full clear (leaving or finishing): no voice bar on any later screen or run.
   function stopVoice() {
-    var V = P.voice; if (!V) return;
+    var V = P.voice; P.voiceOff = null; if (!V) return;
     P.voice = null;
-    stopListen(V);
+    V.tok++; stopListen(V);
     hush();
     try { var PV = phonon(); if (PV && PV.release) PV.release(); } catch (e) {}   // as the lessons do on leaving
   }
-  function voiceStep(r) {
+  // The Stop voice button / spoken "stop": the session ends (and release()s, like leaving), but the bar
+  // stays for the rest of this run as "Voice off" with Start voice, across re-renders.
+  function userStopVoice() {
     var V = P.voice; if (!V) return;
+    P.voiceOff = { r: V.r || (H && H.run_ ? H.run_() : null), step: V.step || {} };
+    P.voice = null;
+    V.tok++; stopListen(V);
+    hush();
+    try { var PV = phonon(); if (PV && PV.release) PV.release(); } catch (e) {}
+    paintVoiceBar();
+  }
+  // Start voice after stopping: the same run and questions, answers kept. unlock() runs synchronously
+  // in the tap; a saved voice loads again quietly through prepareVoice (no download card when saved).
+  function resumeVoice() {
+    var PV0 = phonon();
+    if (PV0 && PV0.available && PV0.available()) { try { PV0.unlock(); } catch (e) {} }
+    var off = P.voiceOff; if (!off || !off.r) return;
+    var r = off.r;
+    if ((H.run_ && H.run_()) !== r || r.done) { P.voiceOff = null; return; }
+    if (!canSpeak()) return H.toast("Voice mode needs speech on this phone.");
+    var V = P.voice = { tok: 0, step: off.step || {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null, r: r, listening: false, speakingBlock: null };
+    P.voiceOff = null;
+    V.readyP = prepareVoice(V);
+    paintVoiceBar();
+    var st = V.step[r.i] || (V.step[r.i] = { asked: false, told: false });
+    if (r.ans[r.i] < 0) st.asked = false;   // an unanswered question is read again; an answered one tells its feedback
+    voiceStep(r);
+  }
+  // Repeat: stop speech and mic, clear the miss count, then re-read (the question, or the feedback after
+  // answering, which advances as usual). Also the way back from "Tap your answer" after backgrounding.
+  function repeatVoice() {
+    var PV0 = phonon();
+    if (PV0 && PV0.available && PV0.available()) { try { PV0.unlock(); } catch (e) {} }
+    var V = P.voice; if (!V || !V.r) return;
+    var r = V.r, i = r.i; if (r.done) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    V.muted = false;
+    V.lgen = (V.lgen || 0) + 1;   // a final still owed by the stopped recogniser must not answer now
+    V.tok++; stopListen(V); hush();
+    st.miss = 0;
+    if (r.ans[i] < 0) st.asked = false; else st.told = false;
+    voiceStep(r);
+  }
+  // The speed button: lessons' next step, same saved rate. Only saves while listening; during reading it
+  // restarts the current block at the new speed (tok + hush, so nothing overlaps or goes stale).
+  function cycleVoiceSpeed() {
+    setVoiceRate(nextSpeedOf(voiceRate()));
+    paintVoiceBar();
+    var V = P.voice; if (!V || V.listening) return;
+    if (V.speakingBlock === "ask" || V.speakingBlock === "fb") {
+      var r = V.r, block = V.speakingBlock; if (!r) return;
+      V.tok++; stopListen(V); hush();
+      if (block === "ask") speakAsk(r, r.i); else speakFb(r, r.i);
+    }
+  }
+  // Spoken slower/faster: one clamped step, a brief status only (no spoken sentence), then listen again.
+  function spokenSpeed(cmd, r, i) {
+    var ss = speedsOf(), ix = ss.indexOf(voiceRate()); if (ix < 0) ix = ss.indexOf(1);
+    var n = cmd === "slower" ? Math.max(0, ix - 1) : Math.min(ss.length - 1, ix + 1);
+    setVoiceRate(ss[n]);
+    paintVoiceBar();
+    sayStatus((cmd === "slower" ? "Slower \u00B7 " : "Faster \u00B7 ") + speedLabelOf(ss[n]));
+    var V = P.voice; if (!V) return;
+    G.clearTimeout(V.gt);
+    V.gt = G.setTimeout(function () { doListen(r, i); }, 900);
+  }
+  function paintVoiceBar() {
+    var root = H && H.root && H.root(), chip = root && root.querySelector("#pvVoice"); if (!chip) return;
+    var prev = chip.querySelector("#pvVoiceT"), keep = prev ? prev.textContent : "", off = !P.voice, rate = voiceRate();
+    chip.innerHTML = '<span class="pv-vstat">' + ic(IC.voice, 18) + ' <span id="pvVoiceT">' + esc(keep || (off ? "Voice off" : "Voice mode")) + '</span></span>' +
+      '<span class="pv-vbtns"><button type="button" class="pn-link pv-vspd" data-act="v-voicespeed" aria-label="Reading speed ' + rate + ' times, change">' + esc(speedLabelOf(rate)) + '</button>' +
+      (off ? '<button type="button" class="pn-link" data-act="v-voicestart">Start voice</button>' : '<button type="button" class="pn-link" data-act="v-voicerepeat">Repeat</button><button type="button" class="pn-link" data-act="v-voicestop">Stop voice</button>') + '</span>';
+  }
+  function ensureVoiceBar() {
+    var bar = H.root().querySelector(".pn-bar");
+    if (bar && !H.root().querySelector("#pvVoice")) bar.insertAdjacentHTML("afterend", '<div class="pv-voicebar" id="pvVoice" role="status"></div><div id="pvVoiceDl"></div>');
+    paintVoiceBar();
+    voiceDlPaint();
+  }
+  function speakAsk(r, i) {
+    var V = P.voice, it = r.items[i]; if (!V || !it) return;
+    V.opts = it.o;
+    sayStatus("Reading the question");
+    speak([it.q + "."].concat(it.o.map(function (o, k) { return "Option " + L[k] + ". " + o + "."; })), function () {
+      if (P.voice !== V || V.r !== r || r.i !== i) return;
+      if (!V.listen || r.ans[i] >= 0) return sayStatus("Tap your answer");
+      doListen(r, i);
+    }, "ask");
+  }
+  function speakFb(r, i) {
+    var V = P.voice, it = r.items[i]; if (!V || !it) return;
+    stopListen(V);
+    var ok = r.ans[i] === it.a, why = firstSentence(it.exp || (it.x && it.x.key), 240);
+    sayStatus(ok ? "Right" : "The answer is " + L[it.a]);
+    speak([(ok ? "Right. " : "Not quite. The answer is " + L[it.a] + ", " + it.o[it.a] + ". "), why], function () {
+      if (P.voice !== V || V.r !== r || r.i !== i) return;
+      var nx = H.root().querySelector("[data-act=next]"); if (nx) nx.click();
+    }, "fb");
+  }
+  // The mic opens only once playback has fully ended, with a short gap so the voice's own tail is not heard.
+  function doListen(r, i) {
+    var V = P.voice; if (!V || V.muted) return;
+    var it = r.items[i]; if (!it) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    if (V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+    sayStatus(listenText(it.o.length));
+    V.heard = ""; V.seen = null; V.extended = false;
+    var gen = (V.lgen = (V.lgen || 0) + 1);
+    V.gt = G.setTimeout(function () {
+      if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+      listen(function (t, err) {
+        if (P.voice !== V || V.muted || V.lgen !== gen || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+        if (err) return sayStatus("Tap your answer");
+        var p = parseVoice(t, it.o);
+        if (p && p.cmd === "stop") return userStopVoice();
+        if (p && p.cmd === "repeat") { st.miss = 0; st.asked = false; return voiceStep(r); }
+        if (p && p.cmd === "skip") { var nx = H.root().querySelector("[data-act=next]"); r.ans[i] = -2; return nx ? nx.click() : H.finish(); }
+        if (p && (p.cmd === "slower" || p.cmd === "faster")) return spokenSpeed(p.cmd, r, i);
+        if (!p) {
+          // Two misses on a question: stop asking and wait for a tap (no endless "sorry" loop). A first
+          // miss shows what was heard and repeats the short prompt; "repeat" re-reads the whole question.
+          // The heard text is only ever shown here: never logged or sent anywhere.
+          st.miss = (st.miss || 0) + 1;
+          if (st.miss >= 2) return sayStatus("Tap your answer");
+          sayStatus(missHeard(t, it.o.length));
+          return speak(missSay(it.o.length), function () { doListen(r, i); });
+        }
+        var b = H.root().querySelector('.pn-opt[data-k="' + p.k + '"]'); if (b) b.click();
+      });
+    }, 250);
+  }
+  function voiceStep(r) {
+    if (!P.voice) {
+      // Stopped earlier in this run: the "Voice off" bar survives re-renders of this run only.
+      var off = P.voiceOff;
+      if (off && r && off.r === r && !r.done) ensureVoiceBar();
+      else if (off) P.voiceOff = null;
+      return;
+    }
+    var V = P.voice;
     if (!V.r) V.r = r;   // the first paint happens inside H.run, before startVoice can note the run
     if (V.r !== r) return;
     if (r.done) return stopVoice();
-    var i = r.i, it = r.items[i], st = V.step[i] || (V.step[i] = { asked: false, told: false });
-    var bar = H.root().querySelector(".pn-bar"), chip = H.root().querySelector("#pvVoice");
-    if (bar && !chip) bar.insertAdjacentHTML("afterend", '<div class="pv-voicebar" id="pvVoice" role="status"><span>' + ic(IC.voice, 18) + ' <span id="pvVoiceT">Voice mode</span></span><button type="button" class="pn-link" data-act="v-voicestop">Stop voice</button></div><div id="pvVoiceDl"></div>');
-    voiceDlPaint();
-    var say = function (t) { var el = H.root().querySelector("#pvVoiceT"); if (el) el.textContent = t; };
-    // The mic opens only once playback has fully ended, with a short gap so the voice's own tail is not heard.
-    function doListen() {
-      if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-      say("Listening… " + choicePrompt(it.o.length));
-      V.heard = ""; V.seen = null; V.extended = false;
-      V.gt = G.setTimeout(function () {
-        if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-        listen(function (t) {
-          if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-          var p = parseVoice(t, it.o);
-          if (p && p.cmd === "stop") { stopVoice(); var c = H.root().querySelector("#pvVoice"); if (c) c.remove(); var d = H.root().querySelector("#pvVoiceDl"); if (d) d.remove(); return; }
-          if (p && p.cmd === "repeat") { st.asked = false; return voiceStep(r); }
-          if (p && p.cmd === "skip") { var nx = H.root().querySelector("[data-act=next]"); r.ans[i] = -2; return nx ? nx.click() : H.finish(); }
-          if (!p) {
-            // Two misses on a question: stop asking and wait for a tap (no endless "sorry" loop). A first miss
-            // only repeats the short prompt and listens again; "repeat" is what re-reads the whole question.
-            st.miss = (st.miss || 0) + 1;
-            if (st.miss >= 2) return say("Tap your answer");
-            say("Did not catch that. Say it again");
-            return speak("Sorry, " + choicePrompt(it.o.length) + ".", function () { doListen(); });
-          }
-          var b = H.root().querySelector('.pn-opt[data-k="' + p.k + '"]'); if (b) b.click();
-        });
-      }, 250);
-    }
-    if (r.ans[i] < 0 && !st.asked) {
-      st.asked = true; V.opts = it.o;
-      say("Reading the question");
-      speak([it.q + "."].concat(it.o.map(function (o, k) { return "Option " + L[k] + ". " + o + "."; })), function () {
-        if (!V.listen || r.ans[i] >= 0) return say("Tap your answer");
-        doListen();
-      });
-    } else if (r.ans[i] >= 0 && !st.told) {
-      st.told = true;
-      stopListen(V);
-      var ok = r.ans[i] === it.a, why = firstSentence(it.exp || (it.x && it.x.key), 240);
-      say(ok ? "Right" : "The answer is " + L[it.a]);
-      speak([(ok ? "Right. " : "Not quite. The answer is " + L[it.a] + ", " + it.o[it.a] + ". "), why], function () {
-        if (P.voice !== V || r.i !== i) return;
-        var nx = H.root().querySelector("[data-act=next]"); if (nx) nx.click();
-      });
-    }
+    ensureVoiceBar();
+    var i = r.i, it = r.items[i]; if (!it) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    if (r.ans[i] < 0 && !st.asked) { st.asked = true; speakAsk(r, i); }
+    else if (r.ans[i] >= 0 && !st.told) { st.told = true; speakFb(r, i); }
   }
   // Backgrounding must never leave audio or the mic running, nor fire a stale callback afterwards.
   if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () {
     if (G.document.visibilityState !== "hidden" || !P.voice) return;
-    var V = P.voice; V.tok++;
+    var V = P.voice; V.tok++; V.muted = true; V.listening = false; V.speakingBlock = null;
     stopListen(V);
     hush();
     // Nothing resumes while hidden, so do not leave a stale "Listening…" behind: the tap path is live.
@@ -1064,7 +1173,10 @@
     if (a === "v-bossgo") { if (H.stackTop() !== renderBossList) { var stk = H.stack(); while (stk.length > 1 && stk[stk.length - 1] !== renderBossList) stk.pop(); } return startBoss(v); }
     if (a === "v-quick") return quick();
     if (a === "v-voice") return startVoice();
-    if (a === "v-voicestop") { stopVoice(); var c = H.root().querySelector("#pvVoice"); if (c) c.remove(); return; }
+    if (a === "v-voicestop") return userStopVoice();
+    if (a === "v-voicestart") return resumeVoice();
+    if (a === "v-voicerepeat") return repeatVoice();
+    if (a === "v-voicespeed") return cycleVoiceSpeed();
     if (a === "v-focus") { P.focusN = null; return H.push(renderFocus); }
     if (a === "v-fstart") return startFocus(Number(v) || 25);
     if (a === "v-fend") return endFocus(false);
