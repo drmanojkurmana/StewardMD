@@ -1,0 +1,304 @@
+{
+ "v": 1,
+ "module": "sur-oral",
+ "subject": "surgery",
+ "title": "Oral Premalignant Lesions: Leukoplakia, Erythroplakia, and Oral Fibrosis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The World Health Organization defines **oral leukoplakia** as a predominantly white patch or plaque of the oral mucosa that cannot be wiped away and cannot be characterized clinically or pathologically as any other diagnosable disease. It is a diagnosis of exclusion primarily driven by chronic mucosal irritation from tobacco smoke, chewed smokeless tobacco, and alcohol abuse. Biopsy is mandatory to exclude invasive carcinoma and grade mucosal epithelial dysplasia.",
+   "say": "Oral leukoplakia is a persistent white patch on the oral mucosa that cannot be scraped off or attributed to another disease. It is strongly linked to tobacco use and requires biopsy to grade dysplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Subtype",
+     "Macroscopic Appearance",
+     "Malignant Transformation Risk"
+    ],
+    "rows": [
+     [
+      "Homogeneous Leukoplakia",
+      "Uniform thin flat white plaque with shallow surface fissures",
+      "Low risk of malignancy ranging from one to five percent"
+     ],
+     [
+      "Speckled (Erythroleukoplakia)",
+      "Mixed white and red mucosal plaques with irregular borders",
+      "High risk of malignant transformation between twenty and thirty percent"
+     ],
+     [
+      "Nodular Leukoplakia",
+      "Raised firm granular or nodular white excrescences",
+      "Elevated malignant potential requiring multiple targeted incisional biopsies"
+     ],
+     [
+      "Proliferative Verrucous",
+      "Widespread progressive multifocal exophytic hyperkeratosis",
+      "Extremely high malignant progression approaching seventy percent over time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "While leukoplakia presents as a white lesion, **oral erythroplakia** manifests as a fiery red, velvety plaque with well-defined margins that cannot be attributed to trauma or infection. Erythroplakia carries the highest malignant transformation potential of all oral mucosal disorders. Microscopic evaluation reveals severe epithelial dysplasia, carcinoma in situ, or invasive squamous cell carcinoma in more than eighty to ninety percent of all biopsied specimens, demanding prompt full-thickness excision.",
+   "say": "Oral erythroplakia appears as a bright red velvety patch and carries the highest risk of malignant transformation. Over eighty percent of cases harbor severe dysplasia or invasive cancer on histological evaluation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral Leukoplakia",
+     "points": [
+      "Predominantly hyperkeratotic white mucosal plaque",
+      "Epithelial hyperplasia with variable hyperkeratosis",
+      "Overall malignant transformation rate is five percent",
+      "Incisional biopsy at most indurated or irregular sector"
+     ]
+    },
+    "right": {
+     "title": "Oral Erythroplakia",
+     "points": [
+      "Fiery red velvety patch with distinct margins",
+      "Epithelial atrophy with superficial dilated capillaries",
+      "Malignant transformation rate exceeds eighty percent",
+      "Requires immediate wide surgical excision with margins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the Indian subcontinent, habitual chewing of betel quid and areca nut induces **oral submucous fibrosis**, a chronic progressive scarring disease of the oral cavity. Areca alkaloids, particularly arecoline, stimulate mucosal fibroblasts to produce excessive collagen while upregulating lysyl oxidase and downregulating endogenous collagenase. Patients develop severe burning sensation in the mouth when eating spicy food, widespread mucosal blanching, loss of elasticity, and progressive trismus that severely restricts mouth opening.",
+   "say": "Chewing areca nut drives oral submucous fibrosis, causing excessive collagen deposition and progressive trismus. Patients experience intense burning pain with spicy foods, mucosal blanching, and severe limitation of mouth opening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "areca",
+      "label": "Habitual Chewing of Areca Nut"
+     },
+     {
+      "id": "alkaloid",
+      "label": "Arecoline Stimulates Fibroblasts"
+     },
+     {
+      "id": "collagen",
+      "label": "Excess Collagen & Upregulated Lysyl Oxidase"
+     },
+     {
+      "id": "fibrosis",
+      "label": "Submucosal Dense Fibrous Bands"
+     },
+     {
+      "id": "trismus",
+      "label": "Progressive Trismus & Blanched Mucosa"
+     }
+    ],
+    "edges": [
+     [
+      "areca",
+      "alkaloid"
+     ],
+     [
+      "alkaloid",
+      "collagen"
+     ],
+     [
+      "collagen",
+      "fibrosis"
+     ],
+     [
+      "fibrosis",
+      "trismus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examination of a patient with advanced oral submucous fibrosis reveals dense, rigid fibrous bands running vertically through both buccal cheeks, surrounding the lips, and immobilizing the soft palate. The uvula often appears shrunken, pale, and bud-like. Because oral submucous fibrosis is a premalignant condition with a lifetime malignant transformation risk of three to eight percent, patients require lifelong surveillance, cessation of betel chewing, and **intralesional steroid injections** combined with hyaluronidase to alleviate severe trismus.",
+   "say": "Dense fibrous bands in the cheeks and palate restrict oral movement and shrink the uvula. Carrying up to an eight percent risk of malignancy, treatment involves habit cessation and intralesional steroid injections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage of Trismus",
+     "Inter-Incisal Mouth Opening",
+     "Therapeutic Management Strategy"
+    ],
+    "rows": [
+     [
+      "Group I (Early)",
+      "Greater than thirty-five millimetres",
+      "Strict betel quid cessation, nutritional antioxidants, and jaw opening exercises"
+     ],
+     [
+      "Group II (Moderate)",
+      "Twenty-five to thirty-five millimetres",
+      "Biweekly intralesional triamcinolone and hyaluronidase injections with physiotherapy"
+     ],
+     [
+      "Group III (Severe)",
+      "Fifteen to twenty-five millimetres",
+      "Intralesional placental extract, pentoxifylline tablets, aggressive stretch therapy"
+     ],
+     [
+      "Group IV (Advanced)",
+      "Less than fifteen millimetres",
+      "Surgical band excision, bilateral coronoidectomy, and buccal fat pad graft closure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant transformation of high-risk mucosal lesions leads directly to **carcinoma of the tongue**, the most frequent intraoral squamous cell carcinoma. Over eighty-five percent arise on the lateral border of the oral tongue, within the anterior two-thirds anterior to the circumvallate papillae. Lesions typically present as a painless, indurated ulcer with rolled, everted margins or an infiltrating exophytic mass. Early perineural invasion along the lingual nerve causes referred otalgia to the ipsilateral ear.",
+   "say": "Squamous cell carcinoma of the tongue develops predominantly along the lateral border of the anterior two-thirds. It presents as an indurated, non-healing ulcer with referred ear pain mediated by the lingual nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral Tongue Carcinoma",
+     "points": [
+      "Anterior two-thirds anterior to circumvallate papillae",
+      "Somatic sensory innervation via lingual nerve (V3)",
+      "Strongly linked to tobacco and alcohol exposure",
+      "Lymphatic drainage to submandibular and upper deep cervical nodes"
+     ]
+    },
+    "right": {
+     "title": "Base of Tongue Carcinoma",
+     "points": [
+      "Posterior one-third belonging to oropharynx",
+      "Sensory innervation via glossopharyngeal nerve (CN IX)",
+      "Strongly associated with high-risk human papillomavirus (HPV)",
+      "Frequent early bilateral deep cervical lymph node metastases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Accurate staging of oral tongue malignancies requires precise histopathological assessment of the depth of invasion. Under the modern eighth edition American Joint Committee on Cancer system, every five millimetres of **depth of invasion** upstages the primary tumor category. For example, a superficial ulcer measuring one point five centimetres across but invading six millimetres into the intrinsic tongue musculature is classified as T2 rather than T1, reflecting its high risk of occult cervical lymphatic metastasis.",
+   "say": "Staging oral tongue cancer incorporates the depth of invasion measured in millimeters. An invasion depth exceeding five millimeters increases the tumor stage, correlating directly with occult cervical lymph node spread.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biopsy",
+      "label": "Full-Thickness Punch Biopsy"
+     },
+     {
+      "id": "surface",
+      "label": "Measure Surface Tumor Diameter"
+     },
+     {
+      "id": "doi",
+      "label": "Measure Histological Depth of Invasion"
+     },
+     {
+      "id": "stage",
+      "label": "T1 (<=5mm DOI), T2 (5-10mm), T3 (>10mm)"
+     },
+     {
+      "id": "neck",
+      "label": "Indication for Elective Neck Dissection if DOI > 4mm"
+     }
+    ],
+    "edges": [
+     [
+      "biopsy",
+      "surface"
+     ],
+     [
+      "surface",
+      "doi"
+     ],
+     [
+      "doi",
+      "stage"
+     ],
+     [
+      "stage",
+      "neck"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the intrinsic musculature of the tongue permits early submucosal tumor tracking across midline fascial planes, lesions of the ventral tongue and tip possess a high propensity for bilateral lymphatic metastasis. Primary lymphatic drainage from the oral tongue flows directly into level one submandibular lymph nodes and level two upper deep jugular nodes. Management of clinically node-negative necks with invasion greater than three to four millimetres mandates an **elective neck dissection** of levels one through three.",
+   "say": "Tongue cancers readily cross tissue planes, draining into levels one, two, and three cervical lymph nodes. Tumors invading beyond four millimeters warrant an elective supraomohyoid neck dissection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cervical Node Level",
+     "Anatomical Boundaries",
+     "Clinical Significance in Tongue Cancer"
+    ],
+    "rows": [
+     [
+      "Level IA (Submental)",
+      "Between anterior bellies of digastric above hyoid bone",
+      "First echelon for cancer of anterior floor of mouth and tongue tip"
+     ],
+     [
+      "Level IB (Submandibular)",
+      "Submandibular triangle between digastric and mandible",
+      "Primary echelon drainage for lateral border oral tongue carcinoma"
+     ],
+     [
+      "Level IIA (Upper Jugular)",
+      "Skull base to hyoid, anterior to spinal accessory nerve",
+      "Most common site of regional lymph node metastasis in oral tongue SCC"
+     ],
+     [
+      "Level III (Mid Jugular)",
+      "Hyoid bone superiorly to cricoid cartilage inferiorly",
+      "Routine component of supraomohyoid selective neck dissection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive surgical therapy for oral tongue carcinoma entails a **wide local glossectomy** achieving at least one to one point five centimetres of three-dimensional clear surgical margins around all palpable induration. Depending on tumor volume, procedures range from partial glossectomy to hemiglossectomy or total glossectomy. Surgical defects of hemiglossectomy are reconstructed with vascularized radial forearm free flaps or anterolateral thigh flaps to restore tongue mobility, swallowing, and speech articulation.",
+   "say": "Surgical treatment requires wide glossectomy with one to one point five centimeters of clear surgical margins. Microvascular free flaps restore tongue volume and mobility to preserve speech and swallowing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "margin",
+      "label": "Excision with 1.5 cm 3D Margins"
+     },
+     {
+      "id": "frozen",
+      "label": "Intraoperative Frozen Section Clearance"
+     },
+     {
+      "id": "resect",
+      "label": "Hemiglossectomy Specimen Oriented"
+     },
+     {
+      "id": "flap",
+      "label": "Radial Forearm or Anterolateral Thigh Flap"
+     },
+     {
+      "id": "rehab",
+      "label": "Speech and Deglutition Rehabilitation"
+     }
+    ],
+    "edges": [
+     [
+      "margin",
+      "frozen"
+     ],
+     [
+      "frozen",
+      "resect"
+     ],
+     [
+      "resect",
+      "flap"
+     ],
+     [
+      "flap",
+      "rehab"
+     ]
+    ]
+   }
+  }
+ ]
+}

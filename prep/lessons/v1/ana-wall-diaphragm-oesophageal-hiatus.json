@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-wall-diaphragm",
+ "subject": "anatomy",
+ "title": "Diaphragmatic Hiatuses, Phrenic Nerve, and Ventilatory Biomechanics",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **oesophageal hiatus** is an elliptical aperture situated at the level of the tenth thoracic vertebra (T10), formed entirely by a muscular sling derived from the right crus of the diaphragm. Transmitted through this opening are the oesophagus, anterior and posterior vagal trunks, oesophageal branches of the left gastric vessels, and lymphatic channels.",
+   "say": "The oesophageal hiatus is an elliptical opening at T10, formed by a muscular sling of the right crus. It transmits the oesophagus, anterior and posterior vagal trunks, left gastric vessels, and lymphatics.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-diaphragm-openings.svg",
+    "alt": "Diagrammatic view of the abdominal surface of the diaphragm showing the muscular right crus encircling the oesophagus",
+    "caption": "Muscular right crus forming a sphincter-like sling around the oesophageal hiatus at T10. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contraction of the right crus during inspiration exerts a pinchcock action on the distal oesophagus, functioning as a physiological **anti-reflux mechanism**. Laxity of the phreno-oesophageal membrane or widening of this muscular aperture allows the gastro-oesophageal junction and stomach to herniate into the posterior mediastinum as a sliding hiatus hernia.",
+   "say": "Inspiratory contraction of the right crus compresses the distal oesophagus, serving as a physiological anti-reflux pinchcock. Weakness of this hiatus permits the stomach to slide upward into the posterior mediastinum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sliding Hiatus Hernia (95%)",
+     "points": [
+      "Cardia and GE junction slide into thorax",
+      "Loss of acute angle of His",
+      "Severe gastro-oesophageal acid reflux",
+      "Exacerbated by lying flat or bending"
+     ]
+    },
+    "right": {
+     "title": "Rolling / Paraoesophageal Hernia",
+     "points": [
+      "GE junction remains anchored in abdomen",
+      "Gastric fundus rolls alongside oesophagus",
+      "Reflux is uncommon; risk of strangulation",
+      "Requires elective surgical gastropexy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **aortic hiatus** is the lowest and most posterior of the primary diaphragmatic openings, situated at the level of the twelfth thoracic vertebra (T12) behind the median arcuate ligament. Transmitted structures comprise the descending thoracic aorta, the thoracic duct, and the azygos vein.",
+   "say": "The aortic hiatus is the lowest opening at T12, located behind the median arcuate ligament. Transmitted structures are the aorta, thoracic duct, and azygos vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure in Aortic Hiatus",
+     "Position in Opening",
+     "Embryological Derivation",
+     "Mechanical Protection"
+    ],
+    "rows": [
+     [
+      "Abdominal Aorta",
+      "Central, anterior to T12 body",
+      "Fused dorsal aortae",
+      "Median arcuate ligament shields vessel from compression"
+     ],
+     [
+      "Thoracic Duct",
+      "Between aorta and azygos vein",
+      "Right thoracic duct trunk",
+      "Transports chyle upward without respiratory obstruction"
+     ],
+     [
+      "Azygos Vein",
+      "Right margin of hiatus",
+      "Right subcardinal/supracardinal",
+      "Collateral channel uncompressed during diaphragm contraction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the aortic hiatus is an osteo-aponeurotic opening formed by the vertebral column and the fibrous median arcuate ligament rather than muscular fibres, diaphragmatic contraction during forceful respiration does not constrict the aorta, ensuring unhindered **aortic blood flow** to abdominal viscera throughout the respiratory cycle.",
+   "say": "Because the aortic hiatus is formed by fibrous and bony margins rather than muscle, diaphragmatic contraction does not pinch the aorta, guaranteeing continuous visceral perfusion during breathing.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hemodynamics of Aortic Hiatus Architecture",
+    "nodes": [
+     {
+      "id": "insp",
+      "label": "Vigorous Inspiration and Diaphragmatic Muscular Contraction"
+     },
+     {
+      "id": "rigid",
+      "label": "Median Arcuate Ligament Maintains Inelastic Aperture"
+     },
+     {
+      "id": "aorta",
+      "label": "Zero Compression of Descending Abdominal Aorta"
+     },
+     {
+      "id": "flow",
+      "label": "Continuous Constant Arterial Inflow to Visceral Beds"
+     }
+    ],
+    "edges": [
+     [
+      "insp",
+      "rigid"
+     ],
+     [
+      "rigid",
+      "aorta"
+     ],
+     [
+      "aorta",
+      "flow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Motor innervation to the entire diaphragm is supplied solely by the **phrenic nerve**, arising from cervical spinal roots C3, C4, and C5 (C3, 4, 5 keep the diaphragm alive). Descending vertically across scalenus anterior into the thorax, each phrenic nerve enters the diaphragm, supplying motor fibres to its ipsilateral hemidiaphragm.",
+   "say": "Motor supply to the diaphragm comes exclusively from the phrenic nerve, carrying cervical roots C3 through C5. Descending over scalenus anterior, each phrenic nerve innervates its own half of the diaphragm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Phrenic Nerve",
+     "points": [
+      "Shorter, more vertical mediastinal course",
+      "Descends along SVC, right atrium, and IVC",
+      "Pierces central tendon at T8 with IVC",
+      "Supplies right hemidiaphragmatic dome"
+     ]
+    },
+    "right": {
+     "title": "Left Phrenic Nerve",
+     "points": [
+      "Longer course curving over left ventricle",
+      "Crosses aortic arch and left pulmonary hilum",
+      "Pierces muscular dome lateral to apex",
+      "Supplies left hemidiaphragmatic dome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unilateral phrenic nerve injury causes paralysis of the ipsilateral hemidiaphragm. On chest radiography or fluoroscopic sniff testing, the paralysed hemidiaphragm exhibits **paradoxical elevation**: forced inspiration creates negative pleural pressure that sucks the flaccid diaphragm upward into the thorax while the normal contralateral hemidiaphragm descends normally.",
+   "say": "Unilateral phrenic nerve transection paralyses the ipsilateral dome. Under fluoroscopy, forced inspiration sucks the flaccid hemidiaphragm paradoxically upward into the chest while the normal side descends.",
+   "vis": {
+    "kind": "flow",
+    "title": "Paradoxical Motion in Hemidiaphragmatic Paralysis",
+    "nodes": [
+     {
+      "id": "lesion",
+      "label": "Phrenic Nerve Avulsion or Surgical Transection"
+     },
+     {
+      "id": "flaccid",
+      "label": "Flaccid Paralysis of Ipsilateral Muscular Dome"
+     },
+     {
+      "id": "sniff",
+      "label": "Sniff Test: Negative Intrathoracic Pressure Generated"
+     },
+     {
+      "id": "ascent",
+      "label": "Paralysed Dome Ascends Paradoxically into Chest"
+     }
+    ],
+    "edges": [
+     [
+      "lesion",
+      "flaccid"
+     ],
+     [
+      "flaccid",
+      "sniff"
+     ],
+     [
+      "sniff",
+      "ascent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventilatory biomechanics combine diaphragmatic excursion with two distinct thoracic rib motions: the **pump-handle movement** and bucket-handle movement. Pump-handle movement occurs predominantly at ribs two through six, rotating about a transverse axis through the costovertebral joints to increase the anteroposterior diameter of the thorax.",
+   "say": "Breathing combines diaphragmatic descent with two rib motions: pump-handle and bucket-handle movements. In the upper ribs, pump-handle rotation elevates the sternum to expand anteroposterior diameter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chest Wall Movement",
+     "Primary Ribs Involved",
+     "Axis of Rotation",
+     "Dimension Expanded"
+    ],
+    "rows": [
+     [
+      "Pump-handle Movement",
+      "Ribs 2 through 6 (upper ribs)",
+      "Transverse axis through costovertebral joints",
+      "Increases anteroposterior thoracic diameter"
+     ],
+     [
+      "Bucket-handle Movement",
+      "Ribs 7 through 10 (lower ribs)",
+      "Anteroposterior axis (spine to sternum)",
+      "Increases transverse (lateral) thoracic diameter"
+     ],
+     [
+      "Diaphragmatic Descent",
+      "Central tendon and crural fibers",
+      "Vertical descent of dome by 1.5 to 7 cm",
+      "Increases vertical thoracic dimension (75% of VT)"
+     ],
+     [
+      "Caliper Movement",
+      "Ribs 11 and 12 (floating ribs)",
+      "Vertical axis through single facet",
+      "Slight lateral expansion; anchors quadratus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Erect plain chest radiography readily visualizes the contour of the diaphragmatic domes. Perforation of an abdominal hollow viscus, such as a peptic ulcer, releases intraluminal gas that ascends beneath the diaphragm, presenting pathognomonically as a thin sickle-shaped radiolucent crescent of **pneumoperitoneum** beneath the right hemidiaphragm.",
+   "say": "Erect chest radiography clearly outlines the diaphragmatic domes. Perforated peptic ulcers leak free gas that collects beneath the diaphragm, producing a pathognomonic crescent of pneumoperitoneum under the right dome.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pneumoperitoneum-gas-under-diaphragm.webp",
+    "alt": "Erect chest radiograph displaying crescentic free air under the right dome of the diaphragm",
+    "caption": "Subdiaphragmatic crescent of free gas confirming gastrointestinal perforation on erect chest radiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "2e171e43-c4d5-46d7-9d5d-fd7266d333d5",
+  "3338dc39-bad8-4491-aa60-f33f160a6363",
+  "89911ff4-3237-4297-a225-1b09787b7f42"
+ ]
+}

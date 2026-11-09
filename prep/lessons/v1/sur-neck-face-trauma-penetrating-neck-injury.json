@@ -1,0 +1,270 @@
+{
+ "v": 1,
+ "module": "sur-neck-face-trauma",
+ "subject": "surgery",
+ "title": "Penetrating Neck Trauma, Anatomical Zones, and Vascular Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Penetrating trauma to the cervical region presents unique surgical challenges because the neck contains vital vascular, aerodigestive, and neurological structures within a compact space. In surgical practice, a penetrating cervical wound is defined by violation of the **platysma muscle**. Located within the superficial cervical fascia, the platysma serves as the decisive anatomical barrier; wounds that do not penetrate the platysma are treated as simple superficial soft tissue injuries.",
+   "say": "A penetrating neck injury is defined as a wound that breaches the platysma muscle. If the platysma remains intact, deep cervical neurovascular and aerodigestive structures are safely protected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Neck Injury",
+     "points": [
+      "Platysma muscle remains completely intact",
+      "Deep cervical fascial spaces untouched",
+      "Zero risk of occult vital structure injury",
+      "Managed with simple wound cleansing and suture"
+     ]
+    },
+    "right": {
+     "title": "Penetrating Neck Injury",
+     "points": [
+      "Definite breach of the platysma muscle",
+      "Threatens carotid, aerodigestive, and nerve trunks",
+      "Mandates formal surgical triage protocol",
+      "Requires emergency surgery or CT angiography"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Any penetrating wound demonstrating breach of the platysma mandates systematic surgical evaluation. Wounds should never be probed, cannulated, or explored locally in the emergency department because dislodging a temporary haemostatic clot can precipitate catastrophic, uncontrollable arterial haemorrhage. The initial priority centers on establishing a definitive airway, as expanding cervical haematomas or laryngeal fractures can cause rapid complete airway occlusion. Intubation should be achieved using video laryngoscopy or flexible **fiberoptic intubation**.",
+   "say": "Never probe penetrating neck wounds in the emergency department, as dislodging a clot can cause massive haemorrhage. Securing a definitive airway before expanding haematomas compress the trachea is vital.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wound",
+      "label": "Penetrating Neck Wound Identified"
+     },
+     {
+      "id": "no_probe",
+      "label": "Do NOT Probe or Explore Wound Locally"
+     },
+     {
+      "id": "airway",
+      "label": "Assess Airway & Secure via Fiberoptic / Video Intubation"
+     },
+     {
+      "id": "triage",
+      "label": "Examine for Hard vs Soft Signs of Injury"
+     }
+    ],
+    "edges": [
+     [
+      "wound",
+      "no_probe"
+     ],
+     [
+      "no_probe",
+      "airway"
+     ],
+     [
+      "airway",
+      "triage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical anatomy divides the neck into three distinct horizontal zones, known as the Monson classification. Zone One encompasses the base of the neck, extending from the sternal notch and clavicles superiorly to the inferior margin of the cricoid cartilage. It houses the aortic arch, proximal carotid and vertebral arteries, subclavian vessels, trachea, and lung apices. Surgical access to **Zone One** is challenging, frequently requiring median sternotomy or clavicular resection for adequate vascular control.",
+   "say": "Zone one extends from the clavicles to the cricoid cartilage. Containing the great thoracic vessels and lung apices, surgical access is difficult and often requires a median sternotomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cervical Zone",
+     "Anatomical Boundaries",
+     "Contained Vital Structures",
+     "Surgical Exposure Route"
+    ],
+    "rows": [
+     [
+      "Zone I (Base of Neck)",
+      "Sternal notch and clavicles to cricoid cartilage",
+      "Aortic arch, subclavian vessels, proximal carotids, trachea",
+      "Median sternotomy, high anterolateral thoracotomy, clavicular resection"
+     ],
+     [
+      "Zone II (Mid-Neck)",
+      "Cricoid cartilage to angle of the mandible",
+      "Common carotid bifurcation, internal jugular vein, larynx",
+      "Standard anterior sternocleidomastoid collar incision"
+     ],
+     [
+      "Zone III (Upper Neck)",
+      "Angle of mandible superiorly to base of skull",
+      "Distal internal carotid, vertebral artery, cranial nerves IX-XII",
+      "Mandibular subluxation, digastric division, or endovascular stenting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extending from the inferior margin of the cricoid cartilage superiorly to the angle of the mandible, Zone Two represents the mid-cervical region. Accounting for over sixty percent of all penetrating neck injuries, this zone contains the common carotid artery bifurcation, internal and external carotid arteries, internal jugular veins, pharynx, larynx, and cranial nerves. Fortunately, **Zone Two** is the most surgically accessible region, readily exposed through an incision placed along the anterior border of the sternocleidomastoid muscle.",
+   "say": "Zone two spans the cricoid cartilage to the angle of the mandible and contains the carotid vessels. It is the most frequently injured zone and is easily exposed along the sternocleidomastoid muscle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "boundary",
+      "label": "Zone II: Cricoid Cartilage to Angle of Mandible"
+     },
+     {
+      "id": "structures",
+      "label": "Contains Carotid Bifurcation & Internal Jugular"
+     },
+     {
+      "id": "incision",
+      "label": "Incision Along Anterior Border of Sternocleidomastoid"
+     },
+     {
+      "id": "exposure",
+      "label": "Rapid Operative Vascular Exposure and Repair"
+     }
+    ],
+    "edges": [
+     [
+      "boundary",
+      "structures"
+     ],
+     [
+      "structures",
+      "incision"
+     ],
+     [
+      "incision",
+      "exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Zone Three encompasses the upper neck, bounded inferiorly by the angle of the mandible and superiorly by the base of the skull. This confined cranial base territory contains the distal internal carotid artery, the ascending vertebral artery, the facial nerve branches, and the glossopharyngeal, vagus, and hypoglossal nerves. Surgical exposure of **Zone Three** is restricted by the ramus of the mandible and temporal bone, frequently requiring mandibular subluxation or osteotomy, or management with endovascular stenting.",
+   "say": "Zone three extends from the angle of the mandible to the skull base. Bounded by bone, surgical exposure is very difficult, making angiographic stenting or embolization the preferred approach.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Zone II Characteristics",
+     "points": [
+      "Most common zone of injury (60% to 75%)",
+      "Readily accessible surgical anatomy",
+      "Direct open vascular repair feasible",
+      "Anterior sternocleidomastoid approach"
+     ]
+    },
+    "right": {
+     "title": "Zone III Characteristics",
+     "points": [
+      "High base of skull location",
+      "Restricted access behind mandibular ramus",
+      "Open vascular control exceptionally difficult",
+      "High reliance on endovascular stenting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Contemporary triage protocols categorize clinical examination findings into hard signs and soft signs of vascular or aerodigestive injury. Demonstrating **hard signs of vascular injury** mandates immediate, emergency operative exploration without diagnostic imaging delay. Cardinal hard vascular signs include active, pulsatile arterial external haemorrhage, an expanding or pulsatile neck haematoma, a palpable thrill or audible bruit over the vessels, absent or diminished carotid pulses, and acute focal neurological deficit consistent with cerebral ischaemia.",
+   "say": "Hard signs of vascular injury include active pulsatile bleeding, expanding haematomas, palpable thrills, and focal neurological deficits. Their presence mandates immediate emergency surgical exploration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Clinical Physical Findings",
+     "Mandatory Clinical Action"
+    ],
+    "rows": [
+     [
+      "Hard Signs of Vascular Injury",
+      "Pulsatile bleeding, expanding haematoma, thrill, bruit, pulse deficit",
+      "Immediate transfer to operating room for emergency exploration"
+     ],
+     [
+      "Hard Signs of Aerodigestive Injury",
+      "Air bubbling from wound, massive subcutaneous emphysema, severe stridor",
+      "Immediate operative exploration and formal aerodigestive repair"
+     ],
+     [
+      "Soft Signs of Vascular Injury",
+      "Non-expanding haematoma, venous oozing, hypotension responsive to fluid",
+      "Urgent contrast-enhanced computed tomography angiography (CTA)"
+     ],
+     [
+      "Soft Signs of Aerodigestive Injury",
+      "Haemoptysis, minor haematemesis, dysphagia, hoarseness, localized pain",
+      "CTA neck followed by flexible or rigid endoscopy and esophagogram"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Similarly, hard signs of aerodigestive disruption dictate immediate operative intervention. Critical indicators include continuous bubbling of air through the cutaneous wound, massive subcutaneous surgical emphysema spreading across the neck and chest, severe respiratory distress with inspiratory stridor, and massive haemoptysis or haematemesis. In the operating suite, surgical repair incorporates meticulous debridement, two-layer mucosal closure, and interposition of a viable **muscle flap** to separate repaired digestive and vascular structures.",
+   "say": "Air bubbling from the neck wound or massive subcutaneous emphysema confirms aerodigestive disruption. Immediate surgical repair requires closing the mucosa and interposing muscle between vessels and viscera.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "air_sign",
+      "label": "Air Bubbling from Wound or Stridor"
+     },
+     {
+      "id": "theater",
+      "label": "Immediate Transfer to Operating Theater"
+     },
+     {
+      "id": "explore",
+      "label": "Identify Tracheal or Oesophageal Laceration"
+     },
+     {
+      "id": "repair",
+      "label": "Two-Layer Mucosal Closure & Sternocleidomastoid Flap"
+     }
+    ],
+    "edges": [
+     [
+      "air_sign",
+      "theater"
+     ],
+     [
+      "theater",
+      "explore"
+     ],
+     [
+      "explore",
+      "repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hemodynamically stable patients lacking hard signs of injury, historical mandatory neck exploration has been replaced by selective conservative management. The definitive diagnostic investigation of choice is contrast-enhanced **computed tomography angiography** of the neck. High-resolution computed tomography angiography achieves over ninety-eight percent sensitivity for identifying arterial pseudoaneurysms, intimal flaps, and active extravasation, while detecting occult cervical spine fractures and subtle retropharyngeal aerodigestive haematomas.",
+   "say": "Stable patients without hard signs are managed with selective non-operative evaluation. Contrast-enhanced CT angiography detects arterial tears and aerodigestive injuries with high diagnostic accuracy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mandatory Exploration (Historical)",
+     "points": [
+      "Mandatory surgery for all platysma breaches",
+      "High negative exploration rate (up to 50%)",
+      "Unnecessary surgical morbidity and scars",
+      "Largely replaced in modern trauma centers"
+     ]
+    },
+    "right": {
+     "title": "Selective Management (Modern)",
+     "points": [
+      "Surgery reserved for hard signs",
+      "Contrast CT angiography for stable patients",
+      "Low negative surgical exploration rate",
+      "Supported by flexible endoscopic imaging"
+     ]
+    }
+   }
+  }
+ ]
+}

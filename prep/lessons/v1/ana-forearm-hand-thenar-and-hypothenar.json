@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-forearm-hand",
+ "subject": "anatomy",
+ "title": "Hand Muscular Compartments and Palmar Aponeurosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The human hand features twenty intrinsic muscles arranged into thenar, hypothenar, lumbrical, interosseous, and adductor compartments. The fleshy muscular prominence at the base of the thumb is the thenar eminence, containing three muscles innervated by the recurrent motor branch of the median nerve: abductor pollicis brevis, **opponens pollicis**, and flexor pollicis brevis.",
+   "say": "The human hand contains twenty intrinsic muscles divided into thenar, hypothenar, lumbrical, and interosseous groups. The thenar eminence at the thumb base houses three muscles supplied by the median nerve recurrent branch: abductor brevis, opponens pollicis, and flexor brevis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-allens-test.svg",
+    "alt": "Thenar and hypothenar compartments, palmar arches, and intrinsic nerves",
+    "caption": "Intrinsic muscular compartments and vascular arches of the palm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **recurrent motor branch of median nerve** exits the carpal tunnel and hooks sharply around the distal border of the flexor retinaculum, running exceptionally superficial beneath only skin and palmar fascia. Termed the million-dollar nerve because superficial lacerations paralyze thumb opposition, it demands meticulous protection during surgical carpal tunnel release.",
+   "say": "The recurrent motor branch of the median nerve exits the carpal tunnel and loops around the lower retinaculum, lying immediately beneath the skin. Known as the million-dollar nerve because injury destroys thumb opposition, it requires careful surgical protection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thenar Muscles (Median Nerve)",
+     "points": [
+      "Abductor pollicis brevis (palmar abduction)",
+      "Flexor pollicis brevis (superficial head)",
+      "Opponens pollicis (thumb rotation opposition)",
+      "Supplied by recurrent motor branch (C8-T1)"
+     ]
+    },
+    "right": {
+     "title": "Adductor Pollicis (Ulnar Nerve)",
+     "points": [
+      "Transverse and oblique heads in palm",
+      "Supplied by deep branch of ulnar nerve",
+      "Adducts thumb against index finger",
+      "Tested by Froment sign for ulnar palsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **opponens pollicis** inserts along the entire lateral margin of the first metacarpal shaft, pulling the thumb across the palm and rotating it axially so its pulp contacts the pulps of the other four fingers, conferring unique human manipulative dexterity. The adductor pollicis is not a thenar muscle, lying deep and innervated by the deep ulnar nerve.",
+   "say": "Opponens pollicis inserts along the first metacarpal shaft, rotating the thumb across the palm to contact opposing fingertips. In contrast, adductor pollicis lies deep in the palm and is supplied by the deep branch of the ulnar nerve.",
+   "vis": {
+    "kind": "flow",
+    "title": "Opposition Biomechanical Components",
+    "nodes": [
+     {
+      "id": "abd",
+      "label": "1. Abduction at 1st CMC Joint (APB)"
+     },
+     {
+      "id": "flex",
+      "label": "2. Flexion across Palm (FPB)"
+     },
+     {
+      "id": "med",
+      "label": "3. Medial Axial Rotation (Opponens Pollicis)"
+     },
+     {
+      "id": "pad",
+      "label": "4. Precision Pad-to-Pad Pinch Grip"
+     }
+    ],
+    "edges": [
+     [
+      "abd",
+      "flex"
+     ],
+     [
+      "flex",
+      "med"
+     ],
+     [
+      "med",
+      "pad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The muscular mound along the medial border of the hand is the hypothenar eminence, containing three muscles supplied by the deep branch of the ulnar nerve: abductor digiti minimi, **flexor digiti minimi brevis**, and opponens digiti minimi. A small subcutaneous muscle, palmaris brevis, overlies them, corrugating skin to improve palmar grip.",
+   "say": "The medial border of the hand forms the hypothenar eminence, containing three muscles supplied by the deep branch of the ulnar nerve: abductor, flexor, and opponens digiti minimi. Palmaris brevis corrugates the skin to enhance grip firmness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypothenar Muscle",
+     "Proximal Origin",
+     "Distal Insertion",
+     "Primary Action"
+    ],
+    "rows": [
+     [
+      "Abductor Digiti Minimi",
+      "Pisiform bone and flexor carpi ulnaris",
+      "Medial base of proximal phalanx of 5th digit",
+      "Abducts little finger"
+     ],
+     [
+      "Flexor Digiti Minimi",
+      "Hook of hamate and retinaculum",
+      "Base of proximal phalanx of 5th digit",
+      "Flexes little finger at MCP"
+     ],
+     [
+      "Opponens Digiti Minimi",
+      "Hook of hamate and retinaculum",
+      "Medial margin of 5th metacarpal shaft",
+      "Deepens hollow of palm"
+     ],
+     [
+      "Palmaris Brevis",
+      "Flexor retinaculum, palmar aponeurosis",
+      "Dermis of skin on medial palm",
+      "Wrinkles skin for cup grip"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The central hollow of the palm is reinforced by the thick, triangular **palmar aponeurosis**, anchored proximally to the flexor retinaculum and tendon of palmaris longus. Distally, it expands into four digital slips that divide to insert into fibrous digital sheaths, superficial transverse ligaments, and proximal phalanges.",
+   "say": "The central palm is reinforced by the thick triangular palmar aponeurosis, anchored to the flexor retinaculum and palmaris longus tendon. Distally it divides into four digital bands that merge with the fibrous finger sheaths.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pronation.svg",
+    "alt": "Palmar fascial spaces, flexor tendons, and lumbrical anatomy",
+    "caption": "Palmar fascial relationships and digital tendon mechanisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Progressive, painless fibromatosis of the palmar aponeurosis constitutes **Dupuytren contracture**, characterized by nodular myofibroblastic proliferation and thickening of the digital pretendinous bands. It most frequently affects the ring and little fingers, drawing them into progressive fixed flexion deformities at the metacarpophalangeal and proximal interphalangeal joints.",
+   "say": "Progressive fibromatosis of the palmar aponeurosis creates Dupuytren contracture, marked by nodular thickening of fascial bands. It most commonly strikes the ring and little fingers, pulling them into fixed flexion deformities at the MCP and PIP joints.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dupuytren Contracture",
+     "points": [
+      "Nodular fibrosis of palmar aponeurosis",
+      "Affects MCP and PIP joints primarily",
+      "Spares distal interphalangeal (DIP) joint",
+      "Associated with alcoholism, diabetes, genetics"
+     ]
+    },
+    "right": {
+     "title": "Trigger Finger (Stenosing)",
+     "points": [
+      "Nodule on flexor tendon catches at A1 pulley",
+      "Painful clicking upon extending the finger",
+      "Involves fibrous flexor tendon sheath",
+      "Treated with steroid injection or pulley release"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dupuytren contracture shows strong associations with male gender over fifty, European descent, diabetes mellitus, chronic alcoholism, and antiepileptic therapy. The distal interphalangeal (DIP) joint is characteristically spared from flexion because digital bands do not cross the distal joint. Early contracture is evaluated by the **Hueston tabletop test**.",
+   "say": "Dupuytren contracture is common in men over fifty, linked to genetics, diabetes, and alcohol use. The distal DIP joint is spared because fascial bands do not cross it. An inability to place the palm flat on a table constitutes a positive Hueston tabletop test.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dupuytren Contracture Staging",
+    "nodes": [
+     {
+      "id": "nod",
+      "label": "Painless Subcutaneous Palmar Nodule"
+     },
+     {
+      "id": "cord",
+      "label": "Thick Pretendinous Longitudinal Cord"
+     },
+     {
+      "id": "flex",
+      "label": "Fixed MCP and PIP Joint Flexion"
+     },
+     {
+      "id": "fasc",
+      "label": "Collagenase Injection or Fasciectomy"
+     }
+    ],
+    "edges": [
+     [
+      "nod",
+      "cord"
+     ],
+     [
+      "cord",
+      "flex"
+     ],
+     [
+      "flex",
+      "fasc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management is indicated when metacarpophalangeal flexion contracture reaches thirty degrees or any degree of proximal interphalangeal contracture develops, treated by enzymatic fasciotomy with **Clostridium histolyticum collagenase** or open partial palmar fasciectomy to excise diseased fibrotic cords while preserving digital neurovascular bundles.",
+   "say": "Surgical release is warranted when MCP contracture reaches thirty degrees or any PIP flexion develops, treated by collagenase enzyme injection or open palmar fasciectomy to resect diseased cords while safeguarding digital nerves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention Option",
+     "Indication Threshold",
+     "Surgical Technique",
+     "Primary Risk / Complication"
+    ],
+    "rows": [
+     [
+      "Needle Aponeurotomy",
+      "Elderly patient, focal pretendinous cord",
+      "Percutaneous transection with needle bevel",
+      "Digital nerve laceration, high recurrence"
+     ],
+     [
+      "Collagenase Injection",
+      "Palpable cord causing flexion contracture",
+      "Enzymatic digestion followed by manipulation",
+      "Skin tears, tendon rupture, ecchymosis"
+     ],
+     [
+      "Limited Fasciectomy",
+      "Progressive contracture, younger patient",
+      "Open excision of diseased aponeurotic slips",
+      "Hematoma, digital nerve injury, stiffness"
+     ],
+     [
+      "Dermofasciectomy",
+      "Recurrent disease, skin involvement",
+      "Excision of cord and skin with skin graft",
+      "Prolonged healing, donor site morbidity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

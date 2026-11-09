@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "phy-bp-regulation",
+ "subject": "physiology",
+ "title": "Bezold-Jarisch Reflex, Cushing Reflex, and Vasomotor Center",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In addition to classical baroreflexes, specialized cardiopulmonary receptors mediate profound depressor reflexes. The **Bezold-Jarisch reflex** is an inhibitory reflex triggered by chemical or mechanical stimulation of unmyelinated non-encapsulated C-fibre sensory endings located in the inferoposterior wall of the left ventricle, producing profound bradycardia, hypotension, and apnoea.",
+   "say": "The Bezold-Jarisch reflex is triggered by chemical or mechanical stimulation of left ventricular C-fibres, causing profound bradycardia and hypotension.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-coronary-syndrome-long-case-fig1.webp",
+    "alt": "Inferior myocardial infarction triggering Bezold-Jarisch reflex.",
+    "caption": "Ischemic stimulation of inferoposterior ventricular C-fibres in the Bezold-Jarisch reflex. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classical pharmacological trigger of the Bezold-Jarisch reflex is intravenous administration of plant Veratrum alkaloids, nicotine, or serotonin. Clinically, the reflex is triggered during acute **inferior myocardial infarction**, where ischaemia and reperfusion metabolites in the territory of the right coronary artery stimulate ventricular vagal afferents, causing sudden bradycardia, vasodilation, and syncope.",
+   "say": "Acute inferior myocardial infarction stimulates ventricular vagal afferents, triggering the Bezold-Jarisch reflex with severe bradycardia and hypotension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inf",
+      "label": "Inferoposterior Left Ventricular Ischaemia (Right Coronary Artery)"
+     },
+     {
+      "id": "c",
+      "label": "Metabolites & Mechanical Distortion Stimulate Ventricular C-Fibres"
+     },
+     {
+      "id": "vagus",
+      "label": "Non-Myelinated Vagal Afferents Project into Medullary Solitary Tract"
+     },
+     {
+      "id": "triad",
+      "label": "Severe Parasympathetic Bradycardia, Systemic Vasodilation, and Apnoea"
+     }
+    ],
+    "edges": [
+     [
+      "inf",
+      "c"
+     ],
+     [
+      "c",
+      "vagus"
+     ],
+     [
+      "vagus",
+      "triad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A life-threatening neurogenic response to acutely elevated intracranial pressure is the classic **Cushing reflex**. Formulated by neurosurgeon Harvey Cushing, expanding space-occupying lesions or cerebral oedema force intracranial pressure above mean arterial pressure, directly compressing intracranial microvessels and causing profound local cerebral ischaemia within medullary cardiovascular centres.",
+   "say": "The Cushing reflex is triggered when high intracranial pressure compresses cerebral vessels, producing medullary ischaemia, hypertension, and bradycardia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "icp",
+      "label": "Severe Elevation of Intracranial Pressure (ICP > MAP)"
+     },
+     {
+      "id": "isch",
+      "label": "Microvascular Compression Produces Profound Medullary Ischaemia"
+     },
+     {
+      "id": "symp",
+      "label": "Massive Sympathetic Discharge via Vasomotor Center Drives Blood Pressure Up"
+     },
+     {
+      "id": "triad",
+      "label": "Cushing Triad: Severe Hypertension, Reflex Bradycardia, Irregular Breathing"
+     }
+    ],
+    "edges": [
+     [
+      "icp",
+      "isch"
+     ],
+     [
+      "isch",
+      "symp"
+     ],
+     [
+      "symp",
+      "triad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medullary ischaemia triggers the CNS ischemic response, the most potent activator of sympathetic outflow known, producing a massive surge in arterial blood pressure. High systemic pressure distends carotid baroreceptors, triggering secondary reflex bradycardia via the vagus nerve. Together with irregular Cheyne-Stokes respirations from brainstem compression, this establishes the classic **Cushing triad**.",
+   "say": "The Cushing triad consists of severe hypertension, reflex bradycardia, and irregular respirations, signaling imminent brainstem herniation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cushing Triad Component",
+     "Pathophysiological Mechanism",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Severe Systemic Hypertension",
+      "Massive sympathetic vasomotor discharge overcoming ICP",
+      "Maintains minimum cerebral perfusion pressure (CPP = MAP - ICP)"
+     ],
+     [
+      "Marked Reflex Bradycardia",
+      "Baroreceptor activation from extreme hypertensive surge",
+      "Vagal parasympathetic SA nodal deceleration"
+     ],
+     [
+      "Irregular Respiratory Patterns",
+      "Brainstem compression and distortion of respiratory groups",
+      "Impending uncal or tonsillar brainstem herniation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Central autonomic regulation of systemic vascular resistance and cardiac contractility resides within the brainstem **vasomotor center**, located in the reticular formation of the medulla and lower pons. The rostral ventrolateral medulla contains tonically active C1 adrenergic neurons that project down the intermediolateral horn of the spinal cord, establishing continuous sympathetic vasoconstrictor tone.",
+   "say": "The medullary vasomotor center maintains baseline vascular tone. Neurons in the rostral ventrolateral medulla fire continuously to support blood pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rostral Ventrolateral Medulla (RVLM)",
+     "points": [
+      "Primary pressor area of the brainstem",
+      "Tonically active sympathetic output to intermediolateral horn",
+      "Releases noradrenaline causing arteriolar vasoconstriction",
+      "Inhibited by GABA from caudal ventrolateral medulla"
+     ]
+    },
+    "right": {
+     "title": "Caudal Ventrolateral Medulla (CVLM)",
+     "points": [
+      "Primary depressor relay area of the brainstem",
+      "Receives excitatory glutamatergic drive from NTS",
+      "Sends inhibitory GABAergic projections to RVLM",
+      "Shuts down sympathetic output during hypertensive surges"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term humoral regulation of arterial blood pressure is orchestrated by the **renin-angiotensin-aldosterone** system (RAAS). Juxtaglomerular granular cells in the renal afferent arteriole synthesize and store renin, releasing it in response to renal hypoperfusion, reduced sodium chloride delivery to the macula densa, or beta-1 adrenergic sympathetic stimulation.",
+   "say": "The renin-angiotensin system governs long-term pressure. Renal hypoperfusion releases renin, which cleaves angiotensinogen to initiate the cascade.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+    "alt": "Renin-angiotensin-aldosterone hormonal axis and pharmacological blockers.",
+    "caption": "Renin-angiotensin-aldosterone axis regulating extracellular volume and vascular resistance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Renin cleaves circulating hepatic angiotensinogen into inactive decapeptide angiotensin I. Vascular endothelial **angiotensin-converting enzyme** (ACE), concentrated in the pulmonary circulation, cleaves two amino acids to yield the potent octapeptide angiotensin II. Angiotensin II triggers intense systemic arteriolar vasoconstriction, stimulates central thirst, and releases aldosterone.",
+   "say": "Angiotensin-converting enzyme in the pulmonary circulation generates angiotensin II, which constricts arterioles and stimulates aldosterone secretion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ren",
+      "label": "Juxtaglomerular Renin Cleaves Circulating Angiotensinogen"
+     },
+     {
+      "id": "ang1",
+      "label": "Forms Decapeptide Angiotensin I"
+     },
+     {
+      "id": "ace",
+      "label": "Pulmonary Endothelial ACE Cleaves Angiotensin I to Angiotensin II"
+     },
+     {
+      "id": "act",
+      "label": "Vasoconstriction, Sympathetic Stimulation, Thirst, and Aldosterone Secretion"
+     }
+    ],
+    "edges": [
+     [
+      "ren",
+      "ang1"
+     ],
+     [
+      "ang1",
+      "ace"
+     ],
+     [
+      "ace",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Angiotensin II stimulates the adrenal cortex zona glomerulosa to secrete **aldosterone**. Aldosterone binds cytoplasmic mineralocorticoid receptors in collecting duct principal cells, upregulating epithelial sodium channels (ENaC) and basolateral Na-K ATPase pumps to stimulate sodium reabsorption and potassium excretion, expanding extracellular volume to permanently restore blood pressure.",
+   "say": "Aldosterone stimulates principal cells in collecting ducts to reabsorb sodium and water, expanding extracellular fluid volume and restoring blood pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Organ",
+     "Angiotensin II Receptor (AT1) Action",
+     "Physiological Blood Pressure Benefit"
+    ],
+    "rows": [
+     [
+      "Systemic Arterioles",
+      "Direct vascular smooth muscle contraction (Gq-IP3)",
+      "Rapidly elevates total peripheral resistance"
+     ],
+     [
+      "Adrenal Zona Glomerulosa",
+      "Stimulates aldosterone synthase and secretion",
+      "Promotes distal tubular sodium and fluid retention"
+     ],
+     [
+      "Hypothalamic Centers",
+      "Stimulates dipsogenic thirst and ADH release",
+      "Increases fluid intake and renal water reclamation"
+     ],
+     [
+      "Renal Tubules (PCT)",
+      "Direct stimulation of apical NHE3 antiporters",
+      "Increases proximal sodium and bicarbonate reabsorption"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

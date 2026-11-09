@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-haemodynamics",
+ "subject": "physiology",
+ "title": "Vascular Compliance, Capacitance Vessels, and Arterial Pressures",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The distensibility of blood vessels in response to internal pressure changes is quantified as **vascular compliance**. Compliance represents the change in internal volume divided by the change in distending transmural pressure. Because systemic veins possess thin, highly distensible walls, venous compliance is twenty-four times greater than systemic arterial compliance.",
+   "say": "Vascular compliance measures volume change per unit pressure change. Systemic veins are twenty-four times more compliant than systemic arteries.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Systemic Venous Bed (Capacitance)",
+     "points": [
+      "Thin, highly distensible fibromuscular walls",
+      "Compliance 24-fold higher than arterial system",
+      "Accommodates 65 percent of total blood volume",
+      "Small pressure changes mobilize large volume reserves"
+     ]
+    },
+    "right": {
+     "title": "Systemic Arterial Bed (Resistance/Conduit)",
+     "points": [
+      "Thick walls with abundant elastin and vascular smooth muscle",
+      "Low compliance and high resistance to stretching",
+      "Accommodates only 15 percent of total blood volume",
+      "Converts pulsatile systolic flow into continuous peripheral flow"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because of their immense compliance, systemic venules and large veins act as the primary **capacitance vessels** of the circulation, storing approximately two-thirds of total circulating blood volume at low pressures between zero and ten millimetres of mercury. Sympathetic venoconstriction displaces this reservoir toward the heart, increasing central venous pressure and cardiac preload.",
+   "say": "Veins act as capacitance vessels holding two-thirds of circulating blood. Sympathetic venoconstriction mobilises this pool to increase cardiac preload.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Venous capacitance reservoir and central venous pressure.",
+    "caption": "Venous capacitance vessels and blood volume redistribution during shock states. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The elastic properties of the proximal aorta and large arteries serve the vital **Windkessel effect**. During ventricular systole, compliant elastic walls distend, storing half of the ejected stroke volume and dampening peak systolic pressure. During diastole, elastic recoil of the aortic wall propels stored blood forward through peripheral beds, sustaining continuous capillary perfusion.",
+   "say": "The aortic Windkessel effect stores half the stroke volume in systole, then recoils in diastole to sustain continuous peripheral perfusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sys",
+      "label": "Systolic Ejection Distends Elastic Lamellae of Proximal Aorta"
+     },
+     {
+      "id": "store",
+      "label": "Aorta Stores 50% of Stroke Volume and Dampens Systolic Pressure Peak"
+     },
+     {
+      "id": "dia",
+      "label": "Diastolic Closure of Aortic Valve Traps Elastic Potential Energy"
+     },
+     {
+      "id": "recoil",
+      "label": "Elastic Wall Recoil Drives Continuous Forward Capillary Flow in Diastole"
+     }
+    ],
+    "edges": [
+     [
+      "sys",
+      "store"
+     ],
+     [
+      "store",
+      "dia"
+     ],
+     [
+      "dia",
+      "recoil"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The difference between systolic arterial pressure and diastolic arterial pressure is the **pulse pressure**, normally measuring forty millimetres of mercury in a young adult. Pulse pressure is determined primarily by stroke volume and arterial compliance: increasing stroke volume or decreasing arterial compliance widens pulse pressure, as seen in isolated systolic hypertension of aging.",
+   "say": "Pulse pressure is systolic minus diastolic pressure, normally forty millimetres of mercury, widened by large stroke volumes or stiff arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant Factor",
+     "Effect on Arterial Pulse Pressure",
+     "Clinical Prototype"
+    ],
+    "rows": [
+     [
+      "Increased Stroke Volume",
+      "Widens pulse pressure significantly",
+      "Exercise, aortic regurgitation, thyrotoxicosis"
+     ],
+     [
+      "Decreased Arterial Compliance",
+      "Widens pulse pressure significantly",
+      "Arteriosclerosis of aging, Mönckeberg sclerosis"
+     ],
+     [
+      "Decreased Stroke Volume",
+      "Narrows pulse pressure significantly",
+      "Severe hypovolaemic shock, cardiogenic shock"
+     ],
+     [
+      "Increased Systemic Resistance",
+      "Elevates diastolic pressure, narrowing PP",
+      "Acute essential hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The average effective arterial pressure driving blood flow across systemic capillary beds across the entire cardiac cycle is the **mean arterial pressure** (MAP). Because diastole occupies two-thirds of the resting cardiac cycle duration, mean arterial pressure equals diastolic pressure plus one-third of pulse pressure, normally measuring ninety to ninety-five millimetres of mercury.",
+   "say": "Mean arterial pressure drives tissue perfusion, calculated as diastolic pressure plus one-third of pulse pressure, normally 90 to 95 millimetres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sys",
+      "label": "Systolic Arterial Pressure: 120 mmHg (Occupies 1/3 of Cardiac Cycle)"
+     },
+     {
+      "id": "dia",
+      "label": "Diastolic Arterial Pressure: 80 mmHg (Occupies 2/3 of Cardiac Cycle)"
+     },
+     {
+      "id": "diff",
+      "label": "Pulse Pressure = 120 - 80 = 40 mmHg"
+     },
+     {
+      "id": "map",
+      "label": "Mean Arterial Pressure = Diastolic + (1/3 x Pulse Pressure) = 93.3 mmHg"
+     }
+    ],
+    "edges": [
+     [
+      "sys",
+      "diff"
+     ],
+     [
+      "dia",
+      "diff"
+     ],
+     [
+      "diff",
+      "map"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-invasive measurement of arterial blood pressure with an inflatable arm cuff relies upon acoustic auscultation of **Korotkoff sounds**. Inflating the cuff above systolic pressure completely occludes the brachial artery. As pressure deflates, high-velocity jetting blood produces initial tapping sounds (Phase 1, systolic pressure), which soften and muffle before disappearing completely (Phase 5, diastolic pressure).",
+   "say": "Blood pressure is measured via Korotkoff sounds: Phase 1 tapping marks systolic pressure, and Phase 5 disappearance marks diastolic pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-gen-blood-pressure.webp",
+    "alt": "Auscultation of Korotkoff sounds and blood pressure measurement.",
+    "caption": "Sphygmomanometric determination of systolic and diastolic blood pressure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As the arterial pressure wave travels peripherally from the central aorta to the radial or dorsalis pedis arteries, its waveform undergoes profound morphological distortion. Peripheral reflection of pressure waves from high-resistance arteriolar branching points causes **systolic amplification**, where peripheral systolic pressure is higher and diastolic pressure is lower, while mean arterial pressure falls slightly.",
+   "say": "As pressure waves travel peripherally, reflected waves cause systolic amplification, raising peripheral systolic pressure while mean pressure declines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Aortic Pressure Wave",
+     "points": [
+      "Systolic pressure lower (~110 mmHg)",
+      "Diastolic pressure higher (~80 mmHg)",
+      "Narrower pulse pressure (~30 mmHg)",
+      "Prominent dicrotic notch from aortic valve closure"
+     ]
+    },
+    "right": {
+     "title": "Peripheral Radial Pressure Wave",
+     "points": [
+      "Systolic pressure higher (~125 mmHg) via wave reflection",
+      "Diastolic pressure lower (~75 mmHg)",
+      "Wider pulse pressure (~50 mmHg)",
+      "Dicrotic notch delayed and smoothed on descending limb"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Age-dependent stiffening of elastic arteries from fragmentation of elastin lamellae and replacement by collagen causes **isolated systolic hypertension**. Loss of Windkessel compliance reduces systolic dampening, driving systolic pressure above one hundred and forty while diastolic pressure remains normal or low, dramatically escalating left ventricular afterload and stroke risk in elderly populations.",
+   "say": "Loss of elastic compliance with aging causes isolated systolic hypertension, where systolic pressure spikes while diastolic pressure remains low.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial Parameter",
+     "Young Healthy Adult",
+     "Elderly Arteriosclerotic Patient"
+    ],
+    "rows": [
+     [
+      "Aortic Elastic Compliance",
+      "High (abundant distensible elastin)",
+      "Low (stiff collagenous replacement)"
+     ],
+     [
+      "Systolic Blood Pressure",
+      "110 to 120 mmHg",
+      "150 to 170 mmHg (spikes steeply)"
+     ],
+     [
+      "Diastolic Blood Pressure",
+      "70 to 80 mmHg",
+      "65 to 75 mmHg (normal or low)"
+     ],
+     [
+      "Arterial Pulse Pressure",
+      "40 mmHg (normal)",
+      "80 to 95 mmHg (profoundly widened)"
+     ],
+     [
+      "Pulse Wave Velocity (PWV)",
+      "4 to 6 metres per second",
+      "10 to 14 metres per second (very fast)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

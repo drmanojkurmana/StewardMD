@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-nerve-injuries",
+ "subject": "anatomy",
+ "title": "Carpal Tunnel Syndrome, Anterior Interosseous, and Axillary Neuropathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The carpal tunnel is an inelastic fibro-osseous passageway formed by the anterior concavity of the carpal bones roofed by the dense transverse carpal ligament. Ten anatomical structures traverse this tight space: the median nerve and nine flexor tendons, comprising four FDS, four FDP, and one **flexor pollicis longus** tendon.",
+   "say": "The carpal tunnel is an unyielding passageway between the carpal arch and the transverse carpal ligament. Ten structures pass through it: the median nerve and nine flexor tendons, consisting of four FDS, four FDP, and flexor pollicis longus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure in Carpal Tunnel",
+     "Compartment or Arrangement",
+     "Innervation Source",
+     "Functional Role"
+    ],
+    "rows": [
+     [
+      "Median Nerve",
+      "Most superficial, beneath retinaculum",
+      "Lateral and medial cords (C5-T1)",
+      "Motor to thenar, sensory to digits 1-3.5"
+     ],
+     [
+      "FDS Tendons (4)",
+      "Middle layer: digits 3-4 superficial to 2-5",
+      "Median nerve main trunk",
+      "Flexes proximal interphalangeal joints"
+     ],
+     [
+      "FDP Tendons (4)",
+      "Deepest layer, side-by-side arrangement",
+      "Dual: median (2-3) and ulnar (4-5)",
+      "Flexes distal interphalangeal joints"
+     ],
+     [
+      "FPL Tendon (1)",
+      "Deep radial side, isolated synovial sheath",
+      "Anterior interosseous nerve",
+      "Flexes thumb interphalangeal joint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Increased intracarpal pressure compresses the median nerve, provoking **carpal tunnel syndrome**. Patients report nocturnal paresthesias and burning pain in the thumb, index, middle, and lateral half of the ring finger. Phalen wrist flexion test and Tinel percussion sign over the flexor retinaculum reproduce these symptoms.",
+   "say": "Elevated tunnel pressure compresses the median nerve, causing carpal tunnel syndrome. Patients describe nocturnal numbness and tingling in the radial three and a half digits, elicited by Phalen wrist flexion and Tinel tapping.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Carpal Tunnel Syndrome",
+    "nodes": [
+     {
+      "id": "synov",
+      "label": "Tenosynovial Hypertrophy or Fluid Retention"
+     },
+     {
+      "id": "press",
+      "label": "Intracarpal Pressure Rises above 30 mmHg"
+     },
+     {
+      "id": "cap",
+      "label": "Capillary Conduction Block and Epineural Edema"
+     },
+     {
+      "id": "pain",
+      "label": "Nocturnal Acroparesthesias and Thenar Weakness"
+     }
+    ],
+    "edges": [
+     [
+      "synov",
+      "press"
+     ],
+     [
+      "press",
+      "cap"
+     ],
+     [
+      "cap",
+      "pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crucially, sensation over the central palm is completely spared in carpal tunnel syndrome. The **palmar cutaneous branch** of the median nerve arises approximately three centimeters proximal to the wrist crease, traveling superficial to the flexor retinaculum into the skin of the thenar eminence and palm, escaping compression.",
+   "say": "Central palmar sensation is preserved in carpal tunnel syndrome. The palmar cutaneous branch branches three centimeters proximal to the flexor retinaculum and passes superficial to it, completely evading intracarpal entrapment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Digital Cutaneous Branches",
+     "points": [
+      "Pass deep through carpal tunnel",
+      "Supply palmar aspects of digits 1, 2, 3, and half of 4",
+      "Supply dorsal nail beds of digits 1 to 3",
+      "Severely numb in carpal tunnel syndrome"
+     ]
+    },
+    "right": {
+     "title": "Palmar Cutaneous Branch",
+     "points": [
+      "Arises 3 cm proximal to flexor retinaculum",
+      "Passes superficial to flexor retinaculum",
+      "Supplies thenar eminence and base of palm",
+      "Fully spared in carpal tunnel syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **anterior interosseous nerve** (AIN) is a pure motor branch arising from the median nerve in the upper forearm. Descending on the anterior surface of the interosseous membrane between FDP and FPL, it innervates three deep forearm muscles: flexor pollicis longus, the lateral half of flexor digitorum profundus, and pronator quadratus.",
+   "say": "The anterior interosseous nerve is a pure motor branch arising from the median nerve below the pronator teres. It travels along the interosseous membrane to supply flexor pollicis longus, lateral flexor digitorum profundus, and pronator quadratus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anterior-interosseous-syndrome-fig1.webp",
+    "alt": "Anterior interosseous nerve anatomy, course, and impaired pinch sign",
+    "caption": "Anatomy of the anterior interosseous nerve and clinical presentation of Kiloh-Nevin syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anterior interosseous nerve syndrome (Kiloh-Nevin syndrome) causes isolated paralysis of FPL and the index FDP without any cutaneous sensory loss. When attempting an **OK sign** by opposing thumb and index fingertips, distal phalangeal flexion fails, resulting in a flat pulp-to-pulp contact rather than a circular tip-to-tip pinch.",
+   "say": "Anterior interosseous syndrome impairs flexor pollicis longus and index profundus flexion without causing sensory loss. When forming an OK sign, inability to flex the distal phalanges yields a flat pulp-to-pulp pinch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal OK Sign",
+     "points": [
+      "Flexor pollicis longus flexes thumb IP joint",
+      "Lateral FDP flexes index DIP joint",
+      "Tips of thumb and index form a round circle",
+      "Sharp tip-to-tip opposed contact"
+     ]
+    },
+    "right": {
+     "title": "AIN Palsy Pinch Sign",
+     "points": [
+      "Thumb IP joint remains extended",
+      "Index DIP joint remains extended",
+      "Pulp-to-pulp flat contact (Kiloh-Nevin sign)",
+      "Zero cutaneous sensory deficit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The axillary nerve originates from the posterior cord of the brachial plexus (C5, C6). Exiting the axilla through the quadrangular space alongside the posterior circumflex humeral artery, it winds closely around the **surgical neck of the humerus**, dividing into anterior and posterior branches beneath the deltoid muscle.",
+   "say": "Arising from the posterior cord, the axillary nerve carries fibers C5 and C6. It exits the axilla through the quadrangular space with the posterior circumflex humeral artery and winds around the surgical neck of the humerus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Quadrangular Space Boundary",
+     "Anatomical Structure",
+     "Clinical Relevance",
+     "Border Relationship"
+    ],
+    "rows": [
+     [
+      "Superior Border",
+      "Subscapularis and Teres Minor",
+      "Rotator cuff lower margin",
+      "Forms upper boundary"
+     ],
+     [
+      "Inferior Border",
+      "Teres Major tendon",
+      "Upper margin of tendon",
+      "Forms lower boundary"
+     ],
+     [
+      "Medial Border",
+      "Long Head of Triceps Brachii",
+      "Separates triangular space",
+      "Forms medial boundary"
+     ],
+     [
+      "Lateral Border",
+      "Surgical Neck of Humerus",
+      "Common site of fracture",
+      "Forms lateral boundary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fractures of the surgical neck of the humerus and anterior glenohumeral dislocations frequently injure the axillary nerve. This results in flaccid paralysis and rapid wasting of the deltoid muscle and teres minor, severely impairing arm abduction from fifteen to ninety degrees and flattening the normal rounded **shoulder contour**.",
+   "say": "Surgical neck humeral fractures and anterior shoulder dislocations frequently damage the axillary nerve. This leads to deltoid paralysis, loss of arm abduction from fifteen to ninety degrees, and flattening of the rounded shoulder contour.",
+   "vis": {
+    "kind": "flow",
+    "title": "Consequences of Axillary Nerve Injury",
+    "nodes": [
+     {
+      "id": "frac",
+      "label": "Surgical Neck Humerus Fracture or Anterior Dislocation"
+     },
+     {
+      "id": "cont",
+      "label": "Axillary Nerve Traction or Compression in Quadrangular Space"
+     },
+     {
+      "id": "deltoid",
+      "label": "Deltoid Paralysis: Loss of 15 to 90 Degree Abduction"
+     },
+     {
+      "id": "atrophy",
+      "label": "Loss of Rounded Shoulder Contour and Bony Prominence"
+     }
+    ],
+    "edges": [
+     [
+      "frac",
+      "cont"
+     ],
+     [
+      "cont",
+      "deltoid"
+     ],
+     [
+      "deltoid",
+      "atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sensory evaluation for axillary nerve integrity focuses on the upper lateral cutaneous nerve of the arm, a branch of the posterior division. This nerve supplies an oval cutaneous patch over the lower half of the deltoid, famously designated the **regimental badge area**. Paresthesia or numbness here confirms axillary neuropathy.",
+   "say": "Sensory testing for axillary nerve damage examines the regimental badge area over the lower deltoid. Supplied by the upper lateral cutaneous nerve of the arm, numbness in this oval patch confirms axillary nerve injury.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-seddon_sunderland.webp",
+    "alt": "Seddon and Sunderland classifications of peripheral nerve injury",
+    "caption": "Histopathological grading of peripheral nerve trauma from neurapraxia to neurotmesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "3f42d365-4000-8000-3f42-d36512345678",
+  "3c42ceac-4000-8000-3c42-ceac12345678",
+  "3d42d03f-4000-8000-3d42-d03f12345678"
+ ]
+}

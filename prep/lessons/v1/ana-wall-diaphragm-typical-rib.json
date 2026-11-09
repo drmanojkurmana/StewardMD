@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-wall-diaphragm",
+ "subject": "anatomy",
+ "title": "Thoracic Cage: Rib Anatomy, Sternal Angle, and Intercostal Spaces",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The thoracic wall is composed of twelve thoracic vertebrae, twelve pairs of ribs, costal cartilages, and the sternum. Ribs three through nine represent **typical ribs**, each possessing a head with two articular demifacets, a distinct neck, a tubercle articulating with the transverse process, and a curved shaft bearing a subcostal groove.",
+   "say": "The thoracic cage is built from twelve vertebrae, twelve pairs of ribs, costal cartilages, and the sternum. Ribs three through nine are typical ribs, featuring a head with two demifacets, neck, tubercle, and a shaft with a costal groove.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-chest-technique.webp",
+    "alt": "Frontal chest radiograph demonstrating thoracic cage ribs, clavicles, and vertebrae",
+    "caption": "Radiographic anatomy of typical ribs, costal margins, and thoracic vertebral articulations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The head of a typical rib articulates with two adjacent vertebral bodies: the superior demifacet articulates with the vertebra above, and the larger inferior demifacet articulates with the numerically corresponding vertebra. The crest of the rib head is anchored to the **intervertebral disc** by the intra-articular ligament.",
+   "say": "The head of a typical rib articulates with two vertebral bodies: its inferior facet joins its own vertebra, while the superior facet articulates with the vertebra above. The crest attaches to the intervertebral disc.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rib Component",
+     "Articular Partner",
+     "Joint Classification",
+     "Mechanical Movement"
+    ],
+    "rows": [
+     [
+      "Inferior Costal Demifacet",
+      "Upper demifacet of own vertebra",
+      "Synovial plane costovertebral",
+      "Gliding during inspiration"
+     ],
+     [
+      "Superior Costal Demifacet",
+      "Lower demifacet of vertebra above",
+      "Synovial plane costovertebral",
+      "Gliding during inspiration"
+     ],
+     [
+      "Costal Tubercle (Articular)",
+      "Transverse costal facet",
+      "Synovial costotransverse",
+      "Pump-handle and bucket-handle rotation"
+     ],
+     [
+      "Anterior Costal Extremity",
+      "Costal cartilage",
+      "Primary cartilaginous synchondrosis",
+      "Elastic compliance during chest expansion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, the **first rib** is an atypical rib: it is the shortest, broadest, flattest, and most sharply curved of all ribs. Positioned entirely horizontally, its superior surface features the scalene tubercle for insertion of scalenus anterior, bounded anteriorly by the groove for the subclavian vein and posteriorly by the groove for the subclavian artery.",
+   "say": "The first rib is atypical: short, wide, flat, and curved horizontally. Its upper surface features the scalene tubercle for scalenus anterior, bounded by grooves for the subclavian vein in front and subclavian artery behind.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First Rib (Atypical)",
+     "points": [
+      "Shortest, widest, most sharply curved rib",
+      "Oriented horizontally: superior and inferior surfaces",
+      "Scalene tubercle separates subclavian vein and artery",
+      "Single circular facet on head for T1 vertebra"
+     ]
+    },
+    "right": {
+     "title": "Typical Rib (Ribs 3 to 9)",
+     "points": [
+      "Long curved shaft with distinct twist (angle)",
+      "Oriented vertically: lateral and medial surfaces",
+      "Costal groove on inner surface protects neurovascular bundle",
+      "Dual demifacets on head articulate with two vertebrae"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The manubriosternal junction forms a prominent transverse ridge known as the **sternal angle** (angle of Louis), located approximately five centimetres below the suprasternal notch. As a fundamental surface landmark, it marks the articulation of the second costal cartilage, allowing clinical rib counting to proceed downward reliably.",
+   "say": "The manubriosternal junction forms the sternal angle of Louis, five centimeters below the suprasternal notch. It marks the second costal cartilage, providing the essential surface landmark for counting ribs.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anatomical Plane of Sternal Angle (T4/T5)",
+    "nodes": [
+     {
+      "id": "sternum",
+      "label": "Surface Landmark: Manubriosternal Joint and Second Rib"
+     },
+     {
+      "id": "trachea",
+      "label": "Bifurcation of Trachea into Main Bronchi (Carina)"
+     },
+     {
+      "id": "aorta",
+      "label": "Arch of Aorta Begins and Ends; Azygos Vein Arches"
+     },
+     {
+      "id": "mediastinum",
+      "label": "Boundary Separating Superior and Inferior Mediastinum"
+     }
+    ],
+    "edges": [
+     [
+      "sternum",
+      "trachea"
+     ],
+     [
+      "trachea",
+      "aorta"
+     ],
+     [
+      "aorta",
+      "mediastinum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each intercostal space contains three muscular layers: the external intercostal (fibres running downward and medially: hands in pockets), internal intercostal (fibres running downward and laterally), and innermost intercostal muscles. The **external intercostals** elevate the ribs during inspiration, while internal intercostals depress them during forced expiration.",
+   "say": "Each intercostal space has three muscle layers: external, internal, and innermost intercostals. External intercostal fibers run downward and forward to elevate ribs during inspiration, while internal intercostals assist forced expiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle Layer",
+     "Fibre Direction",
+     "Anterior / Posterior Limit",
+     "Primary Action"
+    ],
+    "rows": [
+     [
+      "External Intercostal",
+      "Downward and forward (inferomedially)",
+      "Replaced anteriorly by anterior intercostal membrane",
+      "Elevates ribs during inspiration"
+     ],
+     [
+      "Internal Intercostal",
+      "Downward and backward (inferolaterally)",
+      "Replaced posteriorly by posterior intercostal membrane",
+      "Depresses ribs during forced expiration"
+     ],
+     [
+      "Innermost Intercostal",
+      "Same as internal intercostal",
+      "Separated from internal by neurovascular plane",
+      "Stabilizes intercostal space during respiration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **intercostal neurovascular bundle** courses in the costal groove along the inferior border of each rib, situated between the internal intercostal and innermost intercostal layers. From superior to inferior, structures are arranged as VAN: intercostal Vein, intercostal Artery, and intercostal Nerve.",
+   "say": "The intercostal neurovascular bundle runs in the costal groove at the lower rib margin between internal and innermost intercostals. From superior to inferior, structures follow the VAN rule: vein, artery, nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Costal Groove Arrangement (VAN)",
+     "points": [
+      "Vein: most superior, deepest in groove",
+      "Artery: intermediate, gives collateral branch",
+      "Nerve: most inferior, most exposed to trauma",
+      "Sheltered under overhang of inferior rib margin"
+     ]
+    },
+    "right": {
+     "title": "Collateral Bundle Arrangement (NAV)",
+     "points": [
+      "Arises near rib angle, runs along superior margin of rib below",
+      "Inverted order from above down: Nerve, Artery, Vein",
+      "Significantly smaller caliber than main bundle",
+      "Avoided by inserting needles over the upper rib border"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To avoid lacerating the major intercostal neurovascular bundle during thoracocentesis or pleural tap, the needle must always be inserted immediately above the **upper border of the lower rib**. Inserting the needle along the inferior rib border directly punctures the intercostal artery, causing massive hemothorax.",
+   "say": "To prevent damaging the neurovascular bundle during a pleural tap, needles are inserted directly over the upper border of the lower rib. Piercing the lower rib border risks puncturing the intercostal artery, causing severe hemothorax.",
+   "vis": {
+    "kind": "flow",
+    "title": "Safe Thoracocentesis Needle Insertion",
+    "nodes": [
+     {
+      "id": "rib",
+      "label": "Identify Selected Intercostal Space and Lower Rib Border"
+     },
+     {
+      "id": "walk",
+      "label": "Walk Needle Carefully Over Superior Margin of Lower Rib"
+     },
+     {
+      "id": "clear",
+      "label": "Safely Clears Major VAN Bundle in Overhanging Costal Groove"
+     },
+     {
+      "id": "pleura",
+      "label": "Punctures Parietal Pleura to Aspirate Fluid or Air"
+     }
+    ],
+    "edges": [
+     [
+      "rib",
+      "walk"
+     ],
+     [
+      "walk",
+      "clear"
+     ],
+     [
+      "clear",
+      "pleura"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe blunt chest trauma causing fractures of three or more consecutive ribs in two or more places produces a free-floating segment termed **flail chest**. The detached thoracic wall segment exhibits paradoxical respiration: sinking inward during inspiration due to negative intrathoracic pressure, and expanding outward during expiration, severely impairing alveolar ventilation.",
+   "say": "Blunt chest trauma fracturing three or more adjacent ribs in two places produces flail chest. The detached wall exhibits paradoxical respiration, sinking inward during inspiration and bulging outward during expiration.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-flail-chest-surgical-emphysema.webp",
+    "alt": "Chest radiograph showing segmental rib fractures with flail chest and subcutaneous surgical emphysema",
+    "caption": "Segmental multiple rib fractures demonstrating flail chest pathophysiology and surgical emphysema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "2e171e43-c4d5-46d7-9d5d-fd7266d333d5",
+  "3338dc39-bad8-4491-aa60-f33f160a6363",
+  "89911ff4-3237-4297-a225-1b09787b7f42"
+ ]
+}

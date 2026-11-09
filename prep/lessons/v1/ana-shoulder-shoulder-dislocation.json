@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-shoulder",
+ "subject": "anatomy",
+ "title": "Shoulder Dislocation Mechanisms and Associated Lesions",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The glenohumeral joint is the most frequently dislocated major joint in the human body, accounting for over fifty percent of all dislocations. An **anterior shoulder dislocation** accounts for ninety-five percent of cases, typically produced by excessive abduction, external rotation, and extension of the arm, driving the humeral head anteriorly through the weak inferior capsule.",
+   "say": "The glenohumeral joint is the most commonly dislocated large joint. Anterior dislocation represents ninety-five percent of cases, caused by forced abduction, external rotation, and extension that levers the humeral head forward through the weak inferior capsule.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-articular-layers.svg",
+    "alt": "Glenohumeral joint capsule, labrum, and anterior dislocation mechanism",
+    "caption": "Glenohumeral joint capsular architecture and anterior dislocation planes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In anterior dislocation, the dislodged humeral head slips inferior to the glenoid before settling into the subcoracoid position beneath the coracoid process. Clinically, the normal rounded shoulder contour is flattened, the acromion projects prominently, and the patient supports the slightly abducted arm with the uninjured hand, unable to touch the opposite shoulder (**Dugas sign**).",
+   "say": "In anterior dislocation, the humeral head comes to rest in the subcoracoid position. The normal rounded shoulder contour is lost, the acromion projects sharply, and the patient holds the arm slightly abducted, unable to place the hand on the opposite shoulder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Dislocation (95%)",
+     "points": [
+      "Mechanism: Abduction, external rotation, extension",
+      "Humeral head settles in subcoracoid position",
+      "Shoulder contour flattened; prominent acromion",
+      "High risk of axillary nerve stretch injury"
+     ]
+    },
+    "right": {
+     "title": "Posterior Dislocation (2-4%)",
+     "points": [
+      "Mechanism: Internal rotation with adduction",
+      "Triggered by epileptic seizures or electrocution",
+      "Arm locked rigidly in internal rotation",
+      "Light bulb sign on AP radiograph"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "As the humeral head shears over the anterior rim of the glenoid cavity, it detaches the fibrocartilaginous glenoid labrum and inferior glenohumeral ligament complex, producing an anterior **Bankart lesion**. If accompanied by a fracture of the anterior bony glenoid rim, it is termed a bony Bankart lesion, which drastically increases the risk of chronic recurrent dislocations.",
+   "say": "As the humeral head shears across the glenoid rim, it tears the anterior fibrocartilaginous labrum, creating a Bankart lesion. When an avulsion fracture of the bony glenoid rim occurs alongside it, it is a bony Bankart, which predisposes to recurrent instability.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bankart and Hill-Sachs Pathogenesis",
+    "nodes": [
+     {
+      "id": "lever",
+      "label": "Abduction and External Rotation Force"
+     },
+     {
+      "id": "shear",
+      "label": "Humeral Head Levered over Anterior Glenoid"
+     },
+     {
+      "id": "bank",
+      "label": "Bankart: Anterior Labral Detachment"
+     },
+     {
+      "id": "hill",
+      "label": "Hill-Sachs: Posterolateral Humeral Impaction Fracture"
+     }
+    ],
+    "edges": [
+     [
+      "lever",
+      "shear"
+     ],
+     [
+      "shear",
+      "bank"
+     ],
+     [
+      "shear",
+      "hill"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simultaneously, the hard cortical rim of the anterior glenoid impacts against the soft posterolateral aspect of the dislocating humeral head, creating a wedge-shaped compression fracture designated a **Hill-Sachs lesion**. When the arm subsequently abducts and externally rotates, this defect can engage over the glenoid edge, causing sudden joint reluxation.",
+   "say": "Simultaneously, the dense glenoid rim dents the soft posterolateral humeral head, causing an impaction fracture termed a Hill-Sachs lesion. During arm abduction and rotation, this notch can catch on the glenoid rim, precipitating recurrent instability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological Lesion",
+     "Anatomical Tissue Injured",
+     "Diagnostic Modality",
+     "Biomechanical Implication"
+    ],
+    "rows": [
+     [
+      "Bankart Lesion",
+      "Anteroinferior glenoid labrum tear",
+      "MR arthrogram, Stryker notch view",
+      "Loss of anterior buttress, recurrent dislocation"
+     ],
+     [
+      "Bony Bankart",
+      "Fracture of anteroinferior glenoid rim",
+      "CT shoulder 3D reconstruction",
+      "Critical bone loss requiring Latarjet procedure"
+     ],
+     [
+      "Hill-Sachs Lesion",
+      "Posterolateral humeral head impaction",
+      "AP internal rotation radiograph",
+      "Engaging lesion requiring Remplissage procedure"
+     ],
+     [
+      "SLAP Tear",
+      "Superior labrum from anterior to posterior",
+      "MR arthrogram, shoulder arthroscopy",
+      "Disrupts long head of biceps tendon origin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The axillary nerve winds around the humeral surgical neck immediately below the inferior joint capsule, making it the most frequently injured nerve in anterior shoulder dislocation, damaged in ten percent of cases. Clinicians must test sensation over the **regimental badge area** before and after joint reduction to document axillary nerve integrity.",
+   "say": "Because the axillary nerve wraps immediately beneath the inferior capsule, it is injured in ten percent of anterior dislocations. Clinicians must test sensation over the regimental badge area before and after reduction to verify nerve status.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adhesive-capsulitis-fig1.webp",
+    "alt": "Axillary nerve winding beneath the inferior capsule into the quadrangular space",
+    "caption": "Axillary nerve proximity to the inferior glenohumeral capsule. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A **posterior shoulder dislocation** accounts for two to four percent of cases, typically triggered by violent internal rotation and adduction forces during epileptic tonic-clonic seizures or high-voltage electrical shock. Because the arm is locked in internal rotation, the diagnosis is missed in up to fifty percent of emergency evaluations on standard AP films.",
+   "say": "Posterior shoulder dislocation occurs in two to four percent of cases, characteristically triggered by violent muscle contractions during seizures or electric shocks. Because the arm is locked in internal rotation, it is frequently missed on standard radiographs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Posterior Dislocation Radiology",
+     "points": [
+      "AP view shows symmetrical light bulb sign",
+      "Absence of normal overlapping elliptical shadow",
+      "Internal rotation view is impossible to obtain",
+      "Axillary or scapular Y-view confirms posterior displacement"
+     ]
+    },
+    "right": {
+     "title": "Associated Pathological Lesions",
+     "points": [
+      "Reverse Bankart: Posterior labral detachment",
+      "Reverse Hill-Sachs (McLaughlin): Anteromedial notch",
+      "Trough sign from anterior head impaction",
+      "Subscapularis avulsion from lesser tubercle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The rarest presentation is an **inferior shoulder dislocation** (luxatio erecta), accounting for under one percent of cases. Caused by severe hyperabduction forces that lever the humeral neck against the acromion, the humeral head is driven inferiorly through the capsule, locking the arm fixed overhead in full abduction with the hand resting on the head.",
+   "say": "The rarest presentation is inferior dislocation, or luxatio erecta. Severe hyperabduction levers the humeral head down through the capsule, locking the arm fixed pointing directly overhead with the hand resting on the head.",
+   "vis": {
+    "kind": "flow",
+    "title": "Luxatio Erecta Clinical Presentation",
+    "nodes": [
+     {
+      "id": "hyper",
+      "label": "Forced Extreme Hyperabduction Stress"
+     },
+     {
+      "id": "lever",
+      "label": "Humeral Neck Levers Against Acromion"
+     },
+     {
+      "id": "inf",
+      "label": "Humeral Head Pierces Inferior Capsule"
+     },
+     {
+      "id": "lock",
+      "label": "Arm Locked Vertically Overhead (High Axillary Risk)"
+     }
+    ],
+    "edges": [
+     [
+      "hyper",
+      "lever"
+     ],
+     [
+      "lever",
+      "inf"
+     ],
+     [
+      "inf",
+      "lock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Luxatio erecta carries an alarming sixty percent incidence of axillary nerve and brachial plexus neuropraxia, as well as a thirty percent risk of **axillary artery injury** requiring urgent vascular exploration. Gentle traction-countertraction along the line of the elevated arm under conscious sedation achieves closed reduction, followed by neurovascular reassessment.",
+   "say": "Luxatio erecta carries a high risk of axillary nerve and brachial plexus injury, along with axillary artery compromise. Gentle traction along the line of the abducted limb reduces the joint, followed by neurovascular monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dislocation Type",
+     "Relative Frequency",
+     "Characteristic Posture",
+     "Chief Neurovascular Threat"
+    ],
+    "rows": [
+     [
+      "Anterior (Subcoracoid)",
+      "95 percent of cases",
+      "Slight abduction, external rotation",
+      "Axillary nerve neuropraxia (badge anesthesia)"
+     ],
+     [
+      "Posterior",
+      "2 to 4 percent",
+      "Locked in internal rotation and adduction",
+      "Missed diagnosis, chronic subluxation"
+     ],
+     [
+      "Inferior (Luxatio Erecta)",
+      "Under 1 percent",
+      "Arm locked vertically straight overhead",
+      "Axillary artery rupture, brachial plexus palsy"
+     ],
+     [
+      "Recurrent Anterior",
+      "Common in young athletes",
+      "Apprehension sign positive in abduction",
+      "Bankart and Hill-Sachs engaging defect"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pleura-lungs",
+ "subject": "anatomy",
+ "title": "Tracheobronchial Tree, Bronchial Circulation, and Inhalation Dynamics",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The respiratory tree receives an essential dual vascular supply fulfilling distinct physiological duties: the high-volume low-pressure pulmonary circulation dedicated to alveolar gas exchange, and the systemic **bronchial arteries** dedicated to high-pressure nutritional perfusion of the lung parenchyma, tracheobronchial walls, pulmonary vascular adventitia, and visceral pleura.",
+   "say": "The lungs possess a dual circulation: the pulmonary vessels for alveolar gas exchange, and the bronchial arteries for nourishing the airways, vessel walls, and visceral pleura.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-lung-circulations.svg",
+    "alt": "Diagrammatic comparison of pulmonary gas exchange circulation and high-pressure bronchial systemic circulation",
+    "caption": "Dual vascular architecture contrasting low-pressure pulmonary and systemic bronchial circulations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The origin of the bronchial arteries differs symmetrically: the left side receives two bronchial arteries directly from the anterior aspect of the descending thoracic aorta, whereas the right side typically receives a single **right bronchial artery** originating from the third posterior intercostal artery or upper left bronchial artery.",
+   "say": "Bronchial artery origins are asymmetric: the left lung receives two arteries directly from the descending thoracic aorta, while the right lung receives one artery usually arising from the third posterior intercostal artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bronchial Vessel",
+     "Number of Vessels",
+     "Parent Arterial Source",
+     "Drainage Destination"
+    ],
+    "rows": [
+     [
+      "Left Bronchial Arteries",
+      "Two (superior and inferior)",
+      "Descending thoracic aorta",
+      "Azygos system and pulmonary veins"
+     ],
+     [
+      "Right Bronchial Artery",
+      "One solitary artery",
+      "Third posterior intercostal artery",
+      "Azygos vein directly"
+     ],
+     [
+      "Bronchial Veins",
+      "Two small principal veins",
+      "Deep peribronchial venules",
+      "Right into azygos; left into hemiazygos"
+     ],
+     [
+      "Physiological Shunt",
+      "Bronchial venous capillaries",
+      "Direct drain into pulmonary veins",
+      "Creates normal 1-2% physiological right-to-left shunt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In chronic cavitary pulmonary tuberculosis, aspergilloma, or advanced bronchiectasis, chronically inflamed bronchial arteries become markedly hypertrophied, tortuous, and fragile under systemic arterial pressures. Spontaneous rupture of these high-pressure vessels into bronchial lumina produces life-threatening massive **hemoptysis**, requiring emergency transcatheter bronchial artery embolization to arrest endobronchial exsanguination.",
+   "say": "In tuberculosis or bronchiectasis, bronchial arteries hypertrophy under systemic pressure. Rupture into the airways causes massive hemoptysis, managed by urgent transcatheter bronchial artery embolization.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis and Management of Massive Hemoptysis",
+    "nodes": [
+     {
+      "id": "inflam",
+      "label": "Chronic Endobronchial Infection and Angiogenesis"
+     },
+     {
+      "id": "hyper",
+      "label": "Bronchial Arteries Hypertrophy Under High Systemic Pressure"
+     },
+     {
+      "id": "rupture",
+      "label": "Vascular Erosion Produces Massive Airway Hemorrhage"
+     },
+     {
+      "id": "embol",
+      "label": "Superselective Bronchial Artery Catheter Embolization"
+     }
+    ],
+    "edges": [
+     [
+      "inflam",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "rupture"
+     ],
+     [
+      "rupture",
+      "embol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The trachea bifurcates into primary bronchi at the level of the sternal angle (T4/T5), marked internally by the cartilaginous keel termed the carina. The **right main bronchus** is wider, shorter (2.5 cm long), and courses more vertically (at an angle of twenty-five degrees) than the left main bronchus.",
+   "say": "The trachea divides at the carina into primary bronchi. The right main bronchus is wider, shorter, and courses more vertically than the left main bronchus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-trachea-bronchi-gross.webp",
+    "alt": "Gross anatomy of trachea, carina, right main bronchus, and left main bronchus",
+    "caption": "Tracheobronchial bifurcation illustrating the wider, more vertical orientation of the right main bronchus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the right main bronchus is wider and more in direct line with the tracheal lumen, **foreign body aspiration** in toddlers occurs predominantly into the right bronchial tree. In a supine patient, the aspirated object characteristically lodges in the superior (apical) bronchopulmonary segment of the right lower lobe, which projects directly posterior.",
+   "say": "Because the right bronchus is wider and steeper, aspirated foreign bodies enter the right lung far more often. In a supine patient, objects lodge in the apical segment of the right lower lobe, which opens straight backward.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Main Bronchus",
+     "points": [
+      "Wider caliber (14 mm diameter)",
+      "Shorter length (approx 2.5 cm long)",
+      "More vertical course (25 degrees from vertical)",
+      "Common destination of aspirated foreign objects"
+     ]
+    },
+    "right": {
+     "title": "Left Main Bronchus",
+     "points": [
+      "Narrower caliber (11 mm diameter)",
+      "Longer length (approx 5 cm long)",
+      "More horizontal course (45 degrees from vertical)",
+      "Rare site of initial foreign body lodgment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lymphatic drainage of lung parenchyma follows deep peribronchial lymphatics to the bronchopulmonary (hilar) lymph nodes, which drain sequentially into the superior and inferior **tracheobronchial lymph nodes** around the carina. Enlargement of subcarinal nodes from metastatic bronchogenic carcinoma splays the carina, widening its normal acute bifurcation angle.",
+   "say": "Pulmonary lymph flows to hilar nodes, then ascends to tracheobronchial nodes around the carina. Metastatic subcarinal lymphadenopathy splays the carina, widening its bifurcation angle on bronchoscopy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pulmonary Lymphatic Drainage Pathway",
+    "nodes": [
+     {
+      "id": "deep",
+      "label": "Peribronchial and Subpleural Lymphatic Capillaries"
+     },
+     {
+      "id": "hilar",
+      "label": "Bronchopulmonary (Hilar) Lymph Nodes"
+     },
+     {
+      "id": "carinal",
+      "label": "Tracheobronchial (Subcarinal) Nodes (Widens Carina)"
+     },
+     {
+      "id": "paratracheal",
+      "label": "Paratracheal Chains into Bronchomediastinal Trunks"
+     }
+    ],
+    "edges": [
+     [
+      "deep",
+      "hilar"
+     ],
+     [
+      "hilar",
+      "carinal"
+     ],
+     [
+      "carinal",
+      "paratracheal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The inferior border of the lung root extends downward from the hilum toward the diaphragm as a bilaminar fold of mediastinal pleura designated the **pulmonary ligament**. This pleural sleeve provides vital dead space to accommodate expansion of pulmonary veins during times of increased cardiac output during vigorous exertion.",
+   "say": "Below the hilum, mediastinal pleura descends toward the diaphragm as the pulmonary ligament. This fold provides anatomical dead space that accommodates pulmonary venous distension during exertion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hilum Contents (Above)",
+     "points": [
+      "Principal bronchi with cartilage rings",
+      "Pulmonary arteries and superior veins",
+      "Bronchial neurovascular pedicles",
+      "Enclosed tightly by visceral pleura"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary Ligament (Below)",
+     "points": [
+      "Double vertical pleural fold devoid of cartilage",
+      "Contains loose areolar tissue and lymphatics",
+      "Dead space allows inferior vein dilatation",
+      "Divided during surgical lower lobectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Parasympathetic innervation of the tracheobronchial tree is derived from the **vagus nerve**, mediating bronchoconstriction, pulmonary vasodilation, and secretomotor stimulation to mucous glands. Sympathetic fibers from T2-T5 thoracic ganglia mediate bronchodilation and vasoconstriction, providing the pharmacological rationale for beta-2 agonist bronchodilators in asthma.",
+   "say": "The vagus nerve supplies parasympathetic fibers causing bronchoconstriction and mucus secretion. Sympathetic fibers produce bronchodilation, underpinning the action of beta-2 agonists in asthma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Autonomic System",
+     "Nerve Pathway",
+     "Receptor Mechanism",
+     "Physiological Airway Effect"
+    ],
+    "rows": [
+     [
+      "Parasympathetic",
+      "Vagus nerve (CN X)",
+      "Muscarinic M3 acetylcholine receptors",
+      "Bronchoconstriction and active mucus secretion"
+     ],
+     [
+      "Sympathetic",
+      "T2-T5 sympathetic chain",
+      "Beta-2 adrenergic receptors",
+      "Bronchodilation and pulmonary vasoconstriction"
+     ],
+     [
+      "NANC System",
+      "Non-adrenergic, non-cholinergic",
+      "Vasoactive intestinal peptide / Nitric oxide",
+      "Inhibitory bronchodilation and mucosal modulation"
+     ],
+     [
+      "Sensory Afferents",
+      "Vagal C-fibers and stretch receptors",
+      "Hering-Breuer reflex and irritant cough",
+      "Prevents lung overinflation; induces bronchospasm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "c6103ea5-ded4-4eb1-8b5c-82156109cd93",
+  "820b4f70-5c97-4c1c-b64f-5536ef224248",
+  "cb20e12b-9f00-4376-9901-ac3864b973f1"
+ ]
+}

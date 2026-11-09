@@ -1,0 +1,251 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-leg-ankle",
+ "subject": "anatomy",
+ "title": "Soleus Muscle (Peripheral Heart), Ankle Ligaments, and Tarsal Tunnel",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Within the deep substance of the soleus muscle lie extensive valved sinusoidal venous plexuses. Intermittent rhythmic contraction of soleus during walking compresses these intramuscular sinuses, forcefully pumping venous blood upward against gravity into the popliteal vein, earning the soleus its physiological title as the **peripheral heart** of the circulation.",
+   "say": "Large venous sinuses reside within the soleus muscle. Rhythmic contraction during walking squeezes these sinuses, propelling blood toward the heart and earning soleus the title of the peripheral heart.",
+   "vis": {
+    "kind": "flow",
+    "title": "Soleal Venous Pump Mechanism",
+    "nodes": [
+     {
+      "id": "sinus",
+      "label": "Soleal Venous Sinusoids Fill during Muscular Relaxation"
+     },
+     {
+      "id": "contract",
+      "label": "Rhythmic Walking Contraction Compresses Sinuses"
+     },
+     {
+      "id": "valves",
+      "label": "Competent Venous Valves Direct Blood Cephalad"
+     },
+     {
+      "id": "prevent",
+      "label": "Prevents Dependent Venous Stasis and Deep Vein Thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "sinus",
+      "contract"
+     ],
+     [
+      "contract",
+      "valves"
+     ],
+     [
+      "valves",
+      "prevent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The talocrural articulation (ankle joint) is a synovial hinge joint formed between the deep mortise of the distal tibia and fibula and the trochlea of the talus. It permits only **plantarflexion and dorsiflexion**, with greater bony stability in full dorsiflexion because the anterior part of the talar trochlea is wider than the posterior part.",
+   "say": "The ankle joint is a synovial hinge joint formed by the tibial-fibular mortise and the talar trochlea. It allows only dorsiflexion and plantarflexion, achieving maximal stability in dorsiflexion because the talus is wider anteriorly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dorsiflexed Ankle Position",
+     "points": [
+      "Wide anterior talar trochlea wedges into mortise",
+      "Tibiofibular syndesmosis tightens",
+      "Close-packed, highly stable configuration",
+      "Resistant to inversion or eversion sprain"
+     ]
+    },
+    "right": {
+     "title": "Plantarflexed Ankle Position",
+     "points": [
+      "Narrow posterior talus sits in wider mortise",
+      "Permits small degree of accessory wobble",
+      "Loose-packed, vulnerable configuration",
+      "Common position for inversion ligament tears"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Medially, the ankle joint is anchored by the massive **deltoid ligament**, a fan-shaped ligament consisting of superficial and deep components attached to the medial malleolus. The superficial layer spans to the navicular, calcaneus (sustentaculum tali), and talus, while the deep layer attaches directly to the medial non-articular talar body.",
+   "say": "Medially, the ankle joint is reinforced by the deltoid ligament attached to the medial malleolus. Its superficial fibers attach to the navicular, sustentaculum tali, and talus, while deep fibers bind to the medial talus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Deltoid Ligament Part",
+     "Malleolar Origin",
+     "Distal Insertion",
+     "Primary Restraint"
+    ],
+    "rows": [
+     [
+      "Tibionavicular Band",
+      "Anterior border of medial malleolus",
+      "Tuberosity of navicular bone",
+      "Resists foot eversion; supports spring ligament"
+     ],
+     [
+      "Tibiocalcaneal Band",
+      "Apex of medial malleolus",
+      "Sustentaculum tali of calcaneus",
+      "Resists valgus tilting of the calcaneus"
+     ],
+     [
+      "Posterior Tibiotalar",
+      "Posterior border medial malleolus",
+      "Medial tubercle of talus",
+      "Resists posterior displacement during plantarflexion"
+     ],
+     [
+      "Deep Anterior Tibiotalar",
+      "Deep tip of medial malleolus",
+      "Medial surface of talus body",
+      "Strongest component; prevents lateral talar shift"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the deltoid ligament is exceedingly strong, severe eversion violence usually avulses the medial malleolus rather than tearing the ligament. Conversely, lateral ligament injury from hyperinversion is the most common musculoskeletal injury, specifically rupturing the **anterior talofibular ligament** (ATFL), followed by the calcaneofibular ligament in severe sprains.",
+   "say": "Because the deltoid ligament is exceptionally tough, severe eversion fractures the medial malleolus instead of tearing the ligament. In contrast, sudden inversion sprains most commonly tear the anterior talofibular ligament.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-leg-nerve-injuries.svg",
+    "alt": "Lateral ligament complex of ankle joint showing ATFL, CFL, and PTFL",
+    "caption": "Lateral ligament complex of the ankle highlighting the vulnerability of the anterior talofibular ligament. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rigid unyielding fascial envelopes make the leg the most frequent site of acute **compartment syndrome**. Traumatic tibial shaft fractures elevate intracompartmental tissue pressure above thirty millimetres of mercury, collapsing capillaries and inducing irreversible muscle necrosis within six hours unless emergency fasciotomy unroofs all four leg compartments.",
+   "say": "Rigid fascial walls make the leg the prime site for acute compartment syndrome. Tibial fractures can raise tissue pressure above capillary perfusion thresholds, causing muscle necrosis unless emergency decompressive fasciotomy is performed.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cascade of Acute Leg Compartment Syndrome",
+    "nodes": [
+     {
+      "id": "trauma",
+      "label": "Tibial Fracture or Crush Trauma Causes Intracompartmental Bleeding"
+     },
+     {
+      "id": "press",
+      "label": "Tissue Pressure Exceeds Capillary Perfusion Pressure (30 mmHg)"
+     },
+     {
+      "id": "ischemia",
+      "label": "Severe Pain Out of Proportion and Pain on Passive Stretch"
+     },
+     {
+      "id": "fasciotomy",
+      "label": "Emergency Two-incision, Four-compartment Leg Fasciotomy"
+     }
+    ],
+    "edges": [
+     [
+      "trauma",
+      "press"
+     ],
+     [
+      "press",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "fasciotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Behind and below the medial malleolus lies the **tarsal tunnel**, roofed by the flexor retinaculum extending from the medial malleolus to the calcaneus. Four structures pass through this tunnel from anterior to posterior (Tom, Dick And Very Nervous Harry): Tibialis posterior, flexor Digitorum longus, posterior tibial Artery and Vein, tibial Nerve, and flexor Hallucis longus.",
+   "say": "The tarsal tunnel lies behind the medial malleolus under the flexor retinaculum. Transmitted structures follow the classic mnemonic: tibialis posterior, flexor digitorum longus, posterior tibial vessels, tibial nerve, and flexor hallucis longus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mnemonic Token",
+     "Anatomical Structure",
+     "Position in Tunnel",
+     "Clinical Vulnerability"
+    ],
+    "rows": [
+     [
+      "Tom",
+      "Tibialis posterior tendon",
+      "Most anterior, in malleolar groove",
+      "Tendon sheath tenosynovitis"
+     ],
+     [
+      "Dick",
+      "Flexor digitorum longus tendon",
+      "Immediately posterior to tibialis posterior",
+      "Glides in distinct synovial sheath"
+     ],
+     [
+      "And",
+      "Posterior tibial Artery and Veins",
+      "Central neurovascular plane",
+      "Palpation site for posterior tibial pulse"
+     ],
+     [
+      "Nervous",
+      "Tibial Nerve",
+      "Splits into medial and lateral plantar",
+      "Compressed in tarsal tunnel syndrome"
+     ],
+     [
+      "Harry",
+      "Flexor hallucis longus tendon",
+      "Deepest and most posterior",
+      "Grooves posterior surface of talus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compression of the tibial nerve within the tarsal tunnel causes tarsal tunnel syndrome, characterized by burning pain, paresthesias, and numbness across the sole and plantar surfaces of the toes. Symptoms are worsened by prolonged standing, and percussion behind the medial malleolus produces a diagnostic **Tinel sign** radiating into the plantar foot.",
+   "say": "Entrapment of the tibial nerve inside the tarsal tunnel produces tarsal tunnel syndrome. Patients experience burning sole pain and numbness that worsen with walking, elicited by Tinel percussion behind the medial malleolus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tarsal Tunnel Syndrome",
+     "points": [
+      "Entrapment behind medial malleolus",
+      "Tibial nerve trunk compressed",
+      "Numbness and burning over entire sole",
+      "Tinel sign behind medial malleolus"
+     ]
+    },
+    "right": {
+     "title": "Morton Neuroma",
+     "points": [
+      "Perineural fibrosis of interdigital nerve",
+      "Typically between 3rd and 4th metatarsals",
+      "Focal lancinating forefoot pain",
+      "Mulder click between metatarsal heads"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Terminal bifurcation of the tibial nerve within the tarsal tunnel gives rise to the medial and lateral plantar nerves, accompanied by the medial and lateral plantar arteries. These structures pass deep to the abductor hallucis muscle to enter the four muscular layers of the **plantar aspect** of the foot, orchestrating foot propulsion.",
+   "say": "Inside the tarsal tunnel, the tibial nerve splits into medial and lateral plantar nerves. Passing under abductor hallucis, they enter the four muscle layers of the sole to control intrinsic foot biomechanics.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sole-nerves.svg",
+    "alt": "Course and division of medial and lateral plantar nerves across the four layers of the sole",
+    "caption": "Bifurcation of the tibial nerve into medial and lateral plantar nerves within the sole. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "76e7bdf5-3051-466c-942a-3c4d80cd3987",
+  "79fed6d1-9ab9-45a0-b7d7-64dd4a46d41c",
+  "20833593-4fdf-4f2c-b1d7-05528ac9c8f6"
+ ]
+}

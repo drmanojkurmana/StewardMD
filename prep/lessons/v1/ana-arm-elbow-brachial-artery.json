@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-arm-elbow",
+ "subject": "anatomy",
+ "title": "Cubital Fossa Topography and Elbow Ligamentous Anatomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **cubital fossa** is a triangular subfascial depression situated on the anterior aspect of the elbow joint. It is bounded superiorly by an imaginary horizontal line connecting the medial and lateral epicondyles of the humerus, medially by the pronator teres muscle, and laterally by the medial border of the brachioradialis muscle.",
+   "say": "The cubital fossa is a triangular depression in front of the elbow. It is bounded superiorly by a line joining the humeral epicondyles, medially by pronator teres, and laterally by the medial border of brachioradialis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cubital-fossa.svg",
+    "alt": "Cubital fossa boundaries, median nerve, brachial artery, and biceps tendon",
+    "caption": "Cubital fossa topographical boundaries and contents from medial to lateral. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The roof of the cubital fossa is formed by skin, superficial fascia containing the **median cubital vein**, the medial and lateral cutaneous nerves of the forearm, and the deep investing antebrachial fascia reinforced by the bicipital aponeurosis. The median cubital vein shunts blood from the cephalic to the basilic vein and is the premier site for venepuncture.",
+   "say": "The roof of the cubital fossa comprises skin, superficial fascia housing the median cubital vein, cutaneous nerves, and deep fascia reinforced by the bicipital aponeurosis. The median cubital vein is the primary site for intravenous blood draws.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cubital-layers.svg",
+    "alt": "Superficial veins of cubital fossa: cephalic, basilic, and median cubital",
+    "caption": "Superficial cubital veins and the protective bicipital aponeurosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The floor of the cubital fossa is formed by two deep muscles: the brachialis muscle proximally and the **supinator** muscle distally wrapping around the proximal radius. The floor supports the contents of the fossa and separates them from the capsule of the elbow joint.",
+   "say": "The floor of the cubital fossa is formed by two muscles: brachialis in the upper portion and supinator in the lower portion. This floor cushions the deep contents against the anterior elbow joint capsule.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Roof Structures (Superficial)",
+     "points": [
+      "Skin and subcutaneous adipose layer",
+      "Median cubital vein (venepuncture site)",
+      "Medial and lateral antebrachial cutaneous nerves",
+      "Bicipital aponeurosis (protects artery)"
+     ]
+    },
+    "right": {
+     "title": "Floor Structures (Deep)",
+     "points": [
+      "Brachialis muscle (proximal floor)",
+      "Supinator muscle (distal floor)",
+      "Anterior capsule of the humeroulnar joint",
+      "Annular ligament of the proximal radius"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The contents of the cubital fossa arranged from medial to lateral are recalled by the classic mnemonic MBBR: the **median nerve**, the brachial artery and its bifurcation into radial and ulnar arteries, the tendon of biceps brachii, and the radial nerve deep beneath the brachioradialis margin.",
+   "say": "From medial to lateral, the cubital fossa contents follow the mnemonic MBBR: median nerve, brachial artery and its bifurcation, biceps brachii tendon, and the radial nerve tucked under brachioradialis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cubital Fossa Contents (Medial to Lateral)",
+    "nodes": [
+     {
+      "id": "med",
+      "label": "Medial: Median Nerve (C5-T1)"
+     },
+     {
+      "id": "art",
+      "label": "Intermediate: Brachial Artery Bifurcation"
+     },
+     {
+      "id": "bic",
+      "label": "Tendon: Biceps Brachii Tendon"
+     },
+     {
+      "id": "rad",
+      "label": "Lateral: Radial Nerve (in Deep Groove)"
+     }
+    ],
+    "edges": [
+     [
+      "med",
+      "art"
+     ],
+     [
+      "art",
+      "bic"
+     ],
+     [
+      "bic",
+      "rad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **brachial artery** bisects the cubital fossa, bifurcating opposite the neck of the radius into the radial and ulnar arteries. The bicipital aponeurosis passes superficial to the brachial artery, protecting it during emergency venepuncture of the median cubital vein, which lies directly over it in the subcutaneous tissue.",
+   "say": "The brachial artery bisects the fossa, dividing at the radial neck into radial and ulnar arteries. The bicipital aponeurosis covers the artery, shielding it from accidental puncture during blood draws from the median cubital vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brachial Artery Relationships",
+     "points": [
+      "Bifurcates opposite the radial neck",
+      "Lies medial to the biceps tendon",
+      "Crossed obliquely by bicipital aponeurosis",
+      "Palpated for blood pressure auscultation"
+     ]
+    },
+    "right": {
+     "title": "Median Nerve Relationships",
+     "points": [
+      "Lies medial to the brachial artery",
+      "Exits fossa between pronator teres heads",
+      "Supplies all superficial flexors except FCU",
+      "Accompanied by deep venae comitantes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the anatomical position with fully extended elbow and supinated forearm, the long axis of the forearm diverges laterally from the long axis of the arm by ten to fifteen degrees in men and twenty degrees in women, known as the **carrying angle**. This lateral deviation clears the hips during walking.",
+   "say": "With extended elbow and supinated forearm, the forearm angles laterally from the arm by ten to fifteen degrees in men and twenty degrees in women, known as the carrying angle. This alignment clears the swinging forearm past the hips during walking.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Carrying Angle State",
+     "Typical Angle Magnitude",
+     "Underlying Mechanism",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Normal Male",
+      "10 to 15 degrees lateral",
+      "Oblique medial trochlear lip flange",
+      "Clears pelvis during bipedal gait"
+     ],
+     [
+      "Normal Female",
+      "15 to 20 degrees lateral",
+      "Broader female pelvic width adaptation",
+      "Increased physiological valgus"
+     ],
+     [
+      "Cubitus Valgus",
+      "Angle exceeds 20 degrees",
+      "Nonunion of lateral condyle fracture",
+      "Delayed tardy ulnar nerve palsy"
+     ],
+     [
+      "Cubitus Varus",
+      "Gunstock deformity (medial tilt)",
+      "Malunited supracondylar fracture",
+      "Cosmetic deformity; stable function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malunion of a paediatric supracondylar fracture causes medial deviation of the forearm, termed cubitus varus or gunstock deformity. Conversely, an exaggerated carrying angle exceeding twenty degrees constitutes **cubitus valgus**, which stretches the ulnar nerve behind the medial epicondyle, producing tardy ulnar nerve palsy years after childhood injury.",
+   "say": "Malunion of a supracondylar fracture leads to cubitus varus, or gunstock deformity. Conversely, an exaggerated carrying angle over twenty degrees is cubitus valgus, which stretches the ulnar nerve behind the medial epicondyle to cause delayed ulnar palsy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tardy Ulnar Palsy Cascade",
+    "nodes": [
+     {
+      "id": "frac",
+      "label": "Childhood Lateral Condyle Fracture"
+     },
+     {
+      "id": "valg",
+      "label": "Progressive Cubitus Valgus Deformity"
+     },
+     {
+      "id": "tens",
+      "label": "Chronic Ulnar Nerve Friction at Epicondyle"
+     },
+     {
+      "id": "palsy",
+      "label": "Tardy Ulnar Neuropathy in Adulthood"
+     }
+    ],
+    "edges": [
+     [
+      "frac",
+      "valg"
+     ],
+     [
+      "valg",
+      "tens"
+     ],
+     [
+      "tens",
+      "palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The head of the radius is encircled by the fibro-osseous **annular ligament**, which lines with articular cartilage to cup the radial head against the radial notch of the ulna. In toddlers aged one to four, sudden longitudinal traction pulling on an extended, pronated hand causes subluxation of the radial head out of the annular ligament, known as nursemaid elbow.",
+   "say": "The radial head is collared by the annular ligament, keeping it seated against the ulna. In toddlers, sudden upward traction on a pronated arm slips the immature radial head out from beneath the ligament, producing nursemaid elbow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Elbow Stabilization",
+     "Anatomical Ligament",
+     "Attachments",
+     "Clinical Pathology"
+    ],
+    "rows": [
+     [
+      "Radial Head Collar",
+      "Annular ligament",
+      "Anterior and posterior ulnar radial notch",
+      "Nursemaid elbow subluxation"
+     ],
+     [
+      "Medial Stability",
+      "Ulnar collateral ligament",
+      "Medial epicondyle to coronoid/olecranon",
+      "Tommy John injury in baseball pitchers"
+     ],
+     [
+      "Lateral Stability",
+      "Radial collateral ligament",
+      "Lateral epicondyle to annular ligament",
+      "Varus stress instability in elbow dislocation"
+     ],
+     [
+      "Interosseous Binding",
+      "Quadrate ligament",
+      "Neck of radius to inferior radial notch",
+      "Reinforces proximal radioulnar joint"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

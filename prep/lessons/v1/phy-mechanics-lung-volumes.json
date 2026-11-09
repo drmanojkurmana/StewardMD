@@ -1,0 +1,221 @@
+{
+  "v": 1,
+  "module": "phy-mechanics",
+  "subject": "physiology",
+  "title": "Lung Volumes, Functional Residual Capacity, and Vital Capacity",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Pulmonary ventilation relies on dynamic changes in four primary lung volumes that do not overlap. The volume of air inspired or expired during an effortless normal quiet respiratory cycle is designated the **tidal volume**. In an average healthy adult, normal resting tidal volume measures approximately five hundred millilitres.",
+      "say": "Tidal volume represents the air moved in or out of the lungs during quiet breathing, averaging five hundred millilitres in healthy adults.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tidal Volume Components",
+          "points": [
+            "Total volume ~500 mL (~7 mL/kg body weight)",
+            "Alveolar ventilation portion: ~350 mL reaches gas exchange zones",
+            "Anatomical dead space portion: ~150 mL fills conducting airways"
+          ]
+        },
+        "right": {
+          "title": "Physiological Regulation",
+          "points": [
+            "Driven rhythmically by dorsal respiratory group ramp signals",
+            "Controlled via phrenic nerve activation of diaphragm",
+            "Expands significantly during strenuous physical exercise"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Beyond normal quiet tidal breathing, significant additional gas volumes can be mobilized by forced muscular effort. The maximum volume of air that can be inhaled at the end of a normal quiet inspiration is defined as the **inspiratory reserve volume**. This reserve averages roughly three thousand millilitres in young adult males.",
+      "say": "Inspiratory reserve volume is the maximal extra air that can be inhaled above normal tidal peak, averaging three litres.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Spirometry volumes and drug action",
+        "caption": "Pulmonary volume measurements and ventilatory mechanics in airflow dynamics."
+      }
+    },
+    {
+      "tx": "Conversely, the maximum additional volume of air that can be forcefully exhaled at the end of a tidal expiration is the **expiratory reserve volume**. Even after the most strenuous, complete exhalation, the lungs never fully collapse because a critical volume of trapped intra-alveolar gas, known as residual volume, remains inside the thoracic cavity.",
+      "say": "Expiratory reserve volume is the maximum air expelled after quiet expiration, while residual volume remains trapped inside alveoli.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expiratory Reserve Volume (ERV)",
+          "points": [
+            "Approximately 1100 to 1200 mL in healthy adults",
+            "Mobilized by active contraction of abdominal and internal intercostal muscles",
+            "Can be directly measured by water spirometry"
+          ]
+        },
+        "right": {
+          "title": "Residual Volume (RV)",
+          "points": [
+            "Approximately 1200 mL in healthy young adults",
+            "Prevents complete alveolar atelectasis at end-expiration",
+            "Cannot be measured by simple spirometry alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because air remains trapped within alveoli and non-collapsible conducting airways, the **residual volume** cannot be measured using simple water or dry rolling-seal spirometry. Measuring residual volume requires indirect techniques such as helium dilution, nitrogen washout, or whole-body plethysmography, which quantifies compressible thoracic gas volume.",
+      "say": "Residual volume cannot be measured by simple spirometry. It requires whole-body plethysmography, helium dilution, or nitrogen washout.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spiro",
+            "label": "Simple Spirometry: Measures Dynamic Gas Displacements (VT, IRV, ERV, VC)"
+          },
+          {
+            "id": "rv_lim",
+            "label": "Limitation: Cannot Evacuate or Measure Residual Gas Trapped in Lungs"
+          },
+          {
+            "id": "pleth",
+            "label": "Plethysmography / Helium Dilution: Quantifies Total Thoracic Gas and RV"
+          }
+        ],
+        "edges": [
+          [
+            "spiro",
+            "rv_lim"
+          ],
+          [
+            "rv_lim",
+            "pleth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Combinations of two or more static volumes constitute physiological lung capacities. The volume of gas remaining in the lungs at the end of a normal passive tidal expiration is the **functional residual capacity**. It represents the sum of the expiratory reserve volume and the residual volume, averaging twenty-four hundred millilitres.",
+      "say": "Functional residual capacity is the equilibrium volume of air resting in the lungs after passive quiet expiration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Capacity Parameter",
+          "Volume Formula",
+          "Average Value",
+          "Clinical Importance"
+        ],
+        "rows": [
+          [
+            "Functional Residual Capacity",
+            "FRC = ERV + RV",
+            "~2400 mL",
+            "Resting oxygen buffer preventing blood gas oscillations"
+          ],
+          [
+            "Inspiratory Capacity",
+            "IC = VT + IRV",
+            "~3500 mL",
+            "Maximal gas volume inhaled after quiet expiration"
+          ],
+          [
+            "Vital Capacity",
+            "VC = VT + IRV + ERV",
+            "~4600 mL",
+            "Maximum usable ventilatory stroke volume"
+          ],
+          [
+            "Total Lung Capacity",
+            "TLC = VC + RV",
+            "~5800 mL",
+            "Total anatomical lung volume at maximal inflation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At functional residual capacity, the inward elastic recoil of the pulmonary parenchyma precisely balances the outward springing elastic recoil of the thoracic wall, making intrapleural pressure negative. Pathophysiological conditions such as pulmonary emphysema increase compliance and elevate FRC, whereas restrictive disorders and severe obesity significantly reduce resting **FRC equilibrium**.",
+      "say": "At resting FRC equilibrium, outward chest wall recoil balances inward lung recoil. Emphysema elevates FRC, whereas obesity and fibrosis reduce it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "Effect on FRC",
+          "Primary Underlying Mechanism"
+        ],
+        "rows": [
+          [
+            "Pulmonary Emphysema",
+            "Significantly Elevated",
+            "Loss of elastic recoil tissue allows chest wall outward expansion"
+          ],
+          [
+            "Supine Body Position",
+            "Decreased by 500 to 800 mL",
+            "Cephalad displacement of diaphragm by abdominal viscera"
+          ],
+          [
+            "General Anaesthesia",
+            "Decreased by 15 to 20 percent",
+            "Reduced respiratory muscle tone and chest wall geometry collapse"
+          ],
+          [
+            "Morbid Obesity",
+            "Severely Decreased",
+            "Excessive mechanical load compressing chest wall and diaphragm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The maximal volume of air that can be expired following a maximal inspiratory effort is designated the **vital capacity**. Vital capacity equals the sum of tidal volume, inspiratory reserve volume, and expiratory reserve volume, measuring approximately four thousand six hundred millilitres in healthy young adults.",
+      "say": "Vital capacity is the largest possible volume exhaled after maximal inhalation, combining tidal and both reserve volumes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-obstructive-pulmonary-disease-fig1.webp",
+        "alt": "Spirometric volume subdivisions",
+        "caption": "Spirometric volume subdivisions including vital capacity and inspiratory reserve in clinical assessment."
+      }
+    },
+    {
+      "tx": "Adding the residual volume to the vital capacity yields the **total lung capacity**, the greatest total volume to which the lungs can expand with the greatest inspiratory effort. When total lung capacity falls below eighty percent of predicted values, a restrictive ventilatory defect is definitively diagnosed in pulmonary function testing.",
+      "say": "Total lung capacity is the entire gas volume held in fully inflated lungs. Restrictive ventilatory defects decrease this value below eighty percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tlc",
+            "label": "Total Lung Capacity (TLC = VC + RV ~ 5800 mL)"
+          },
+          {
+            "id": "norm",
+            "label": "Normal Range: 80% to 120% of Predicted Population Values"
+          },
+          {
+            "id": "restrict",
+            "label": "Restrictive Defect: TLC < 80% with Preserved or High FEV1/FVC Ratio"
+          },
+          {
+            "id": "obstruct",
+            "label": "Obstructive Defect: Normal or High TLC with Prominent Air Trapping (High RV)"
+          }
+        ],
+        "edges": [
+          [
+            "tlc",
+            "norm"
+          ],
+          [
+            "norm",
+            "restrict"
+          ],
+          [
+            "norm",
+            "obstruct"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

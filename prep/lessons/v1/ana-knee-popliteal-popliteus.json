@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-knee-popliteal",
+ "subject": "anatomy",
+ "title": "Popliteus Muscle, Unhappy Triad, Knee Bursae, and Drawer Testing",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **popliteus** muscle is a flat triangular muscle lying in the deep floor of the popliteal fossa. Uniquely, it arises intracapsularly from a pit on the lateral surface of the lateral femoral condyle, passes beneath the fibular collateral ligament, and emerges through the joint capsule to insert into the triangular area of the posterior tibia.",
+   "say": "The popliteus is a triangular muscle on the deep floor of the popliteal fossa. Originating intracapsularly from the lateral femoral condyle, its tendon passes beneath the lateral collateral ligament to insert onto the posterior tibia.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-knee-bursae.svg",
+    "alt": "Deep posterior knee anatomy illustrating popliteus origin, bursa, and capsular reflections",
+    "caption": "Deep anatomy of the posterior knee joint showing the intracapsular course of the popliteus tendon. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Referred to as the key to unlock the knee joint, the popliteus initiates flexion from the fully extended locked posture. When standing with the foot planted, popliteus contracts to **laterally rotate the femur** on the tibia, releasing the taut cruciate and collateral ligaments so that the hamstring muscles can proceed with knee flexion.",
+   "say": "Regarded as the key that unlocks the knee, the popliteus initiates flexion from complete extension. On a planted foot, it contracts to laterally rotate the femur on the tibia, relaxing the locked ligaments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Closed Kinetic Chain (Planted Foot)",
+     "points": [
+      "Tibia is fixed against the floor",
+      "Popliteus laterally rotates the femur on tibia",
+      "Unlocks tightened cruciate and collateral ties",
+      "Permits subsequent hamstring flexion"
+     ]
+    },
+    "right": {
+     "title": "Open Kinetic Chain (Free Foot)",
+     "points": [
+      "Femur is stabilized by body weight",
+      "Popliteus medially rotates the free tibia",
+      "Initial movement before swinging limb flexes",
+      "Also protects lateral meniscus by retracting it"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A severe lateral blow to a flexed, weight-bearing knee with the foot planted produces the catastrophic **unhappy triad** of O'Donoghue. Excessive valgus strain coupled with external femoral rotation sequentially tears three vital structures: the tibial collateral ligament (MCL), the anterior cruciate ligament (ACL), and the medial meniscus.",
+   "say": "A violent lateral blow to a flexed knee produces the unhappy triad of O'Donoghue. Severe valgus stress combined with external rotation tears the medial collateral ligament, anterior cruciate ligament, and medial meniscus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of Unhappy Triad of O'Donoghue",
+    "nodes": [
+     {
+      "id": "blow",
+      "label": "Lateral Impact Forces Severe Valgus and External Rotation"
+     },
+     {
+      "id": "mcl",
+      "label": "Rupture of Tibial Collateral Ligament (MCL)"
+     },
+     {
+      "id": "acl",
+      "label": "Secondary Rupture of Anterior Cruciate Ligament (ACL)"
+     },
+     {
+      "id": "menisc",
+      "label": "Tear of Medial Meniscus Anchored to Torn MCL"
+     }
+    ],
+    "edges": [
+     [
+      "blow",
+      "mcl"
+     ],
+     [
+      "mcl",
+      "acl"
+     ],
+     [
+      "acl",
+      "menisc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anterior and posterior stability of the knee are assessed by the **drawer test**. With the knee flexed to ninety degrees and the patient's foot stabilized, the examiner pulls the proximal tibia anteriorly: anterior displacement greater than six millimetres indicates an ACL rupture, while posterior subluxation on pushing backward confirms PCL deficiency.",
+   "say": "Anterior and posterior knee stability is evaluated using the drawer test. With the knee flexed to ninety degrees, excessive anterior translation indicates an ACL tear, while posterior sag reveals a PCL rupture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Drawer Test",
+     "points": [
+      "Knee flexed 90 degrees, foot anchored",
+      "Examiner draws tibia forward",
+      "Normal translation: less than 5 mm",
+      "Pathologic forward glide confirms ACL tear"
+     ]
+    },
+    "right": {
+     "title": "Posterior Drawer Test",
+     "points": [
+      "Knee flexed 90 degrees, foot anchored",
+      "Examiner pushes tibia backward",
+      "Loss of tibial step-off (posterior sag)",
+      "Pathologic backward glide confirms PCL tear"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic friction or trauma over the anterior aspect of the knee provokes distinctive bursitis syndromes. Inflammation of the subcutaneous bursa situated between the skin and the lower half of the patella is known as **prepatellar bursitis** (housemaid's knee), resulting from prolonged kneeling with the torso leaning forward.",
+   "say": "Repetitive anterior knee trauma provokes distinctive bursitis syndromes. Swelling of the bursa between skin and the patella produces prepatellar bursitis, classically termed housemaid's knee.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Knee Bursa",
+     "Anatomical Location",
+     "Clinical Syndrome",
+     "Occupational Predisposition"
+    ],
+    "rows": [
+     [
+      "Prepatellar Bursa",
+      "Between patella and overlying skin",
+      "Prepatellar bursitis (housemaid's knee)",
+      "Flooring installers, carpet layers"
+     ],
+     [
+      "Subcutaneous Infrapatellar",
+      "Between tibial tuberosity and skin",
+      "Infrapatellar bursitis (clergyman's knee)",
+      "Upright kneeling during prayer"
+     ],
+     [
+      "Deep Infrapatellar",
+      "Between patellar tendon and tibia",
+      "Deep infrapatellar bursitis",
+      "Jumping athletes, overuse tendon friction"
+     ],
+     [
+      "Semimembranosus Bursa",
+      "Between semimembranosus and gastrocnemius",
+      "Baker cyst (popliteal cyst)",
+      "Degenerative osteoarthritis, meniscal tear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fluid distension of the bursa interposed between the semimembranosus tendon and the medial head of gastrocnemius is termed a **Baker cyst** (popliteal cyst). Communicating directly with the knee synovial cavity, increased synovial fluid production from rheumatoid arthritis or chronic meniscal tears forces fluid into the cyst through a valve-like slit.",
+   "say": "A Baker cyst develops when the bursa between the semimembranosus and medial gastrocnemius becomes distended. Because it connects to the joint space, arthritis or meniscal tears force excess fluid into the mass.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Baker (Popliteal) Cyst",
+    "nodes": [
+     {
+      "id": "arth",
+      "label": "Intra-articular Pathology (Meniscal Tear or Osteoarthritis)"
+     },
+     {
+      "id": "eff",
+      "label": "Excess Synovial Fluid Elevates Intra-articular Pressure"
+     },
+     {
+      "id": "valve",
+      "label": "One-way Slit Valve Channels Fluid into Semimembranosus Bursa"
+     },
+     {
+      "id": "mass",
+      "label": "Tense Popliteal Mass and Pseudothrombophlebitis Risk"
+     }
+    ],
+    "edges": [
+     [
+      "arth",
+      "eff"
+     ],
+     [
+      "eff",
+      "valve"
+     ],
+     [
+      "valve",
+      "mass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Perfusion around the knee joint is sustained by the **genicular anastomosis**, an intricate collateral network surrounding the patella and femoral condyles. This anastomosis is formed by nine arteries: five genicular branches of the popliteal artery, descending genicular from the femoral, descending branch of lateral circumflex femoral, and anterior and posterior recurrent branches of the anterior tibial artery.",
+   "say": "Blood flow around the knee is safeguarded by the genicular anastomosis. Formed by nine arteries, it links popliteal genicular branches with femoral and tibial recurrent vessels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anastomotic Group",
+     "Source Artery",
+     "Parent Vessel",
+     "Area of Condylar Perfusion"
+    ],
+    "rows": [
+     [
+      "Superior Medial Genicular",
+      "Popliteal artery",
+      "Popliteal system",
+      "Upper medial femoral condyle"
+     ],
+     [
+      "Superior Lateral Genicular",
+      "Popliteal artery",
+      "Popliteal system",
+      "Upper lateral femoral condyle"
+     ],
+     [
+      "Inferior Medial Genicular",
+      "Popliteal artery",
+      "Popliteal system",
+      "Lower medial tibial condyle"
+     ],
+     [
+      "Inferior Lateral Genicular",
+      "Popliteal artery",
+      "Popliteal system",
+      "Lower lateral tibial condyle"
+     ],
+     [
+      "Middle Genicular",
+      "Popliteal artery",
+      "Popliteal system",
+      "Pierces capsule to supply cruciates"
+     ],
+     [
+      "Descending Genicular",
+      "Femoral artery",
+      "Superficial femoral",
+      "Medial patellar network"
+     ],
+     [
+      "Anterior Tibial Recurrent",
+      "Anterior tibial artery",
+      "Popliteal outflow",
+      "Lateral infrapatellar anastomosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ruputure of a Baker cyst allows synovial fluid to extravasate downwards into the calf tissues, provoking acute calf erythema, induration, and tenderness that mimics deep vein thrombosis. Clinically designated **pseudothrombophlebitis**, urgent compression ultrasonography differentiates ruptured popliteal cyst from occlusive calf venous thrombosis, sparing the patient unnecessary anticoagulant therapy.",
+   "say": "Rupture of a Baker cyst causes synovial fluid to track down into the calf, mimicking deep vein thrombosis. Termed pseudothrombophlebitis, duplex ultrasound distinguishes the fluid collection from venous thrombosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acl-injury-fig1.webp",
+    "alt": "Clinical knee joint anatomy demonstrating meniscal and popliteal pathology",
+    "caption": "Diagnostic imaging of knee joint pathology showing synovial effusion and popliteal structures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "65a1636f-6fa8-490d-8515-0e9bbb8fb361",
+  "d4ab1825-8c1f-4ee0-bf47-a2f61a08c81a",
+  "e99772a0-b8be-4111-ac0e-3f2d788b93dc"
+ ]
+}

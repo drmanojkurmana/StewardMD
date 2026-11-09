@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-regional-circulation",
+ "subject": "physiology",
+ "title": "Splanchnic Circulation, Circulatory Shock, and Exercise",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The abdominal viscera receive twenty-five percent of resting cardiac output (approximately one point four litres per minute) via the celiac, superior mesenteric, and inferior mesenteric arteries, forming the **splanchnic circulation**. Venous drainage from the stomach, intestines, pancreas, and spleen converges into the portal vein, delivering nutrients directly to the liver before entering systemic circulation.",
+   "say": "The splanchnic circulation receives a quarter of resting cardiac output, draining through the portal vein into the liver before reaching the heart.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cirrhosis-and-its-complications-fig2.webp",
+    "alt": "Splanchnic circulation and portal venous hemodynamics.",
+    "caption": "Splanchnic vascular bed and portal venous capacitance reservoirs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Splanchnic blood flow surges dramatically following food ingestion, a phenomenon termed **postprandial hyperaemia**. Blood flow doubles within thirty minutes of a meal and remains elevated for hours, driven by local metabolic metabolites, cholecystokinin, secretin, neurotensin, and kinins, diverting blood from skeletal muscle and skin into digestive mucosa.",
+   "say": "Following food intake, postprandial hyperaemia doubles splanchnic blood flow, driven by digestive hormones and local metabolites to absorb nutrients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "food",
+      "label": "Nutrient Ingestion and Chyme Entry into Duodenum"
+     },
+     {
+      "id": "pep",
+      "label": "Local Secretion of Cholecystokinin, Secretin, Gastrin, and VIP"
+     },
+     {
+      "id": "vaso",
+      "label": "Direct Vasodilation of Mesenteric Mucosal Arterioles"
+     },
+     {
+      "id": "flow",
+      "label": "Splanchnic Perfusion Surges up to Two-Fold for Active Absorption"
+     }
+    ],
+    "edges": [
+     [
+      "food",
+      "pep"
+     ],
+     [
+      "pep",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "flow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute severe intravascular volume loss produces **haemorrhagic shock**, characterized by inadequate tissue perfusion and cellular lactic acidosis. Loss of twenty percent of blood volume reduces mean systemic filling pressure and preload. Baroreceptor unloading unleashes a maximal sympathetic discharge, inducing intense splanchnic, renal, and cutaneous vasoconstriction to preserve blood flow to the brain and heart.",
+   "say": "Haemorrhagic shock reduces venous return and cardiac output, unleashing massive sympathetic vasoconstriction to preserve perfusion to the brain and heart.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Hemodynamic pathophysiology of haemorrhagic shock and compensation.",
+    "caption": "Compensatory neuroendocrine and vascular responses during haemorrhagic shock. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Compensatory physiological mechanisms operate in three temporal phases. Rapid neural compensation via baroreceptors and chemoreceptors increases heart rate and peripheral resistance within seconds. Intermediate humoral compensation mobilises renin, angiotensin II, vasopressin, and adrenaline, while delayed **fluid shift** reclaims interstitial fluid into capillaries via autotransfusion.",
+   "say": "Shock compensation progresses from immediate baroreflex vasoconstriction to hormonal activation, followed by autotransfusion of interstitial fluid into capillaries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Compensation Phase",
+     "Temporal Window",
+     "Primary Mechanism",
+     "Physiological Consequence"
+    ],
+    "rows": [
+     [
+      "Immediate Neural",
+      "Seconds to minutes",
+      "Baroreceptor unloading & sympathetic discharge",
+      "Tachycardia, intense arteriolar and venoconstriction"
+     ],
+     [
+      "Intermediate Humoral",
+      "Minutes to hours",
+      "Renin-angiotensin, ADH, and catecholamines",
+      "Sustained vasoconstriction and renal sodium retention"
+     ],
+     [
+      "Delayed Capillary Shift",
+      "1 to 24 hours",
+      "Starling shift (fall in Pc causes autotransfusion)",
+      "Up to 1 litre of interstitial fluid reabsorbed into plasma"
+     ],
+     [
+      "Long-Term Volume",
+      "Days to weeks",
+      "Erythropoietin surge & hepatic albumin synthesis",
+      "Complete restoration of red cell mass and plasma volume"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During vigorous dynamic physical exercise, the cardiovascular system undergoes dramatic hemodynamic redistribution. Cardiac output increases up to five-fold (from five to twenty-five litres per minute) through concurrent elevations in heart rate and stroke volume. Blood flow to **active skeletal muscle** surges twenty-fold, driven by local metabolic vasodilation that overrides systemic sympathetic vasoconstriction.",
+   "say": "During exercise, cardiac output surges up to five-fold, diverting eighty-five percent of blood flow to active skeletal muscle through metabolic vasodilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Resting Hemodynamics",
+     "points": [
+      "Cardiac output 5.0 litres per minute",
+      "Skeletal muscle receives 20% of cardiac output (1.0 L/min)",
+      "Splanchnic bed receives 25% (1.25 L/min)",
+      "Renal circulation receives 20% (1.0 L/min)"
+     ]
+    },
+    "right": {
+     "title": "Heavy Exercise Hemodynamics",
+     "points": [
+      "Cardiac output surges up to 25 litres per minute",
+      "Skeletal muscle receives 85% of output (20 to 22 L/min)",
+      "Splanchnic bed squeezed to 3% (0.75 L/min)",
+      "Renal blood flow restricted to 3% (0.75 L/min)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exercise alters arterial pressures in a characteristic divergent pattern. Intense muscular vasodilation reduces total systemic vascular resistance. However, massive stroke volume ejection widens pulse pressure, elevating **systolic blood pressure** up to two hundred millimetres of mercury while diastolic pressure remains unchanged or falls slightly due to low peripheral resistance.",
+   "say": "During exercise, systolic pressure rises with large stroke volumes while diastolic pressure remains flat or falls due to muscular vasodilation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ex",
+      "label": "Dynamic Muscle Exercise Accelerates Heart Rate and Stroke Volume"
+     },
+     {
+      "id": "sys",
+      "label": "Large Stroke Volume Ejection Elevates Systolic BP (up to 200 mmHg)"
+     },
+     {
+      "id": "vaso",
+      "label": "Profound Metabolic Vasodilation in Skeletal Muscle Reduces Total SVR"
+     },
+     {
+      "id": "dia",
+      "label": "Diastolic Blood Pressure Remains Constant or Decreases Slightly"
+     }
+    ],
+    "edges": [
+     [
+      "ex",
+      "sys"
+     ],
+     [
+      "ex",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "dia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upon assuming an upright standing posture, gravity pools five hundred millilitres of blood into compliant lower extremity veins. This abrupt reduction in central venous volume triggers transient **postural hypotension**. Normal baroreceptor reflexes immediately induce reflex tachycardia and splanchnic vasoconstriction to restore pressure within seconds; reflex failure produces orthostatic syncope.",
+   "say": "Standing pools 500 mL of blood in leg veins, transiently dropping venous return. Baroreceptors fire reflex vasoconstriction to prevent orthostatic syncope.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Orthostatic Response",
+     "points": [
+      "Venous pooling in lower limbs decreases preload",
+      "Immediate baroreceptor unloading within 5 seconds",
+      "Heart rate rises by 10 to 20 beats per minute",
+      "Diastolic pressure rises slightly; systolic drops < 10 mmHg"
+     ]
+    },
+    "right": {
+     "title": "Orthostatic Hypotension (Autonomic Failure)",
+     "points": [
+      "Defective baroreceptor reflex or severe hypovolaemia",
+      "Systolic drop > 20 mmHg or diastolic drop > 10 mmHg",
+      "Failure of compensatory tachycardia and vasoconstriction",
+      "Cerebral hypoperfusion produces lightheadedness and syncope"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The commonest cause of fainting in healthy individuals is **vasovagal syncope**, also known as neurocardiogenic syncope. Triggered by emotional distress, prolonged standing, or heat, unexpected paradoxical ventricular mechanoreceptor activation unleashes a surge of vagal outflow combined with sudden withdrawal of sympathetic tone, causing severe bradycardia, profound vasodilation, and cerebral hypoperfusion.",
+   "say": "Vasovagal syncope occurs when emotional triggers elicit paradoxical vagal excitation and sympathetic withdrawal, causing bradycardia, vasodilation, and fainting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Vasovagal Syncope",
+     "Orthostatic Syncope",
+     "Cardiogenic Syncope"
+    ],
+    "rows": [
+     [
+      "Primary Trigger",
+      "Emotional stress, fear, prolonged warm standing",
+      "Sudden assumption of upright posture",
+      "Cardiac arrhythmias, severe aortic stenosis"
+     ],
+     [
+      "Autonomic Pattern",
+      "Excess vagal discharge + sympathetic withdrawal",
+      "Blunted sympathetic response to postural pooling",
+      "Primary mechanical or electrical pump arrest"
+     ],
+     [
+      "Prodromal Symptoms",
+      "Nausea, diaphoresis, pallor, yawn, tunnel vision",
+      "Immediate lightheadedness upon standing",
+      "Sudden collapse with zero warning aura"
+     ],
+     [
+      "Heart Rate at Syncope",
+      "Marked bradycardia (or asystole)",
+      "Variable (tachycardic or flat)",
+      "Extreme bradycardia, tachycardia, or absent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
